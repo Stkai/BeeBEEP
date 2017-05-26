@@ -61,6 +61,7 @@
 #include "GuiVCard.h"
 #include "GuiWizard.h"
 #include "GuiWorkgroups.h"
+#include "IconManager.h"
 #include "PluginManager.h"
 #include "Protocol.h"
 #include "SaveChatList.h"
@@ -77,7 +78,7 @@ GuiMain::GuiMain( QWidget *parent )
  : QMainWindow( parent ), m_floatingChats()
 {
   setObjectName( "GuiMainWindow" );
-  setWindowIcon( QIcon( ":/images/beebeep.png" ) );
+  setWindowIcon( IconManager::instance().icon( "beebeep.png" ) );
   mp_core = new Core( this );
 
   // Create a status bar before the actions and the menu
@@ -602,37 +603,37 @@ void GuiMain::showLicense()
 
 void GuiMain::createActions()
 {
-  mp_actBroadcast = new QAction( QIcon( ":/images/broadcast.png" ), tr( "Search users" ), this );
+  mp_actBroadcast = new QAction( IconManager::instance().icon( "broadcast.png" ), tr( "Search users" ), this );
   connect( mp_actBroadcast, SIGNAL( triggered() ), this, SLOT( sendBroadcastMessage() ) );
 
-  mp_actConfigureNetwork = new QAction( QIcon( ":/images/network.png"), tr( "Configure network..."), this );
+  mp_actConfigureNetwork = new QAction( IconManager::instance().icon( "network.png"), tr( "Configure network..."), this );
   connect( mp_actConfigureNetwork, SIGNAL( triggered() ), this, SLOT( searchUsers() ) );
 
-  mp_actQuit = new QAction( QIcon( ":/images/quit.png" ), tr( "Quit" ), this );
+  mp_actQuit = new QAction( IconManager::instance().icon( "quit.png" ), tr( "Quit" ), this );
   mp_actQuit->setShortcuts( QKeySequence::Quit );
   mp_actQuit->setMenuRole( QAction::QuitRole );
   connect( mp_actQuit, SIGNAL( triggered() ), this, SLOT( forceShutdown() ) );
 
-  mp_actVCard = new QAction( QIcon( ":/images/profile-edit.png"), tr( "Edit your profile..." ), this );
+  mp_actVCard = new QAction( IconManager::instance().icon( "profile-edit.png"), tr( "Edit your profile..." ), this );
   connect( mp_actVCard, SIGNAL( triggered() ), this, SLOT( changeVCard() ) );
 
-  mp_actAbout = new QAction( QIcon( ":/images/beebeep.png" ), tr( "About %1..." ).arg( Settings::instance().programName() ), this );
+  mp_actAbout = new QAction( IconManager::instance().icon( "beebeep.png" ), tr( "About %1..." ).arg( Settings::instance().programName() ), this );
   mp_actAbout->setMenuRole( QAction::AboutRole );
   connect( mp_actAbout, SIGNAL( triggered() ), this, SLOT( showAbout() ) );
 
-  mp_actCreateGroupChat = new QAction( QIcon( ":/images/group-create.png" ), tr( "Create new group chat" ), this );
+  mp_actCreateGroupChat = new QAction( IconManager::instance().icon( "group-create.png" ), tr( "Create new group chat" ), this );
   connect( mp_actCreateGroupChat, SIGNAL( triggered() ), this, SLOT( createGroupChat() ) );
 
-  mp_actViewNewMessage = new QAction( QIcon( ":/images/beebeep-message.png" ), tr( "Show new message" ), this );
+  mp_actViewNewMessage = new QAction( IconManager::instance().icon( "beebeep-message.png" ), tr( "Show new message" ), this );
   connect( mp_actViewNewMessage, SIGNAL( triggered() ), this, SLOT( showNextChat() ) );
 
-  mp_actViewFileSharing = new QAction( QIcon( ":/images/file-sharing.png" ), tr( "Show file sharing window" ), this );
+  mp_actViewFileSharing = new QAction( IconManager::instance().icon( "file-sharing.png" ), tr( "Show file sharing window" ), this );
   connect( mp_actViewFileSharing, SIGNAL( triggered() ), this, SLOT( showFileSharingWindow() ) );
 
-  mp_actViewLog = new QAction( QIcon( ":/images/log.png" ), tr( "Show the %1 log" ).arg( Settings::instance().programName() ), this );
+  mp_actViewLog = new QAction( IconManager::instance().icon( "log.png" ), tr( "Show the %1 log" ).arg( Settings::instance().programName() ), this );
   connect( mp_actViewLog, SIGNAL( triggered() ), this, SLOT( showLogWindow() ) );
 
-  mp_actViewScreenShot = new QAction( QIcon( ":/images/screenshot.png" ), tr( "Make a screenshot" ), this );
+  mp_actViewScreenShot = new QAction( IconManager::instance().icon( "screenshot.png" ), tr( "Make a screenshot" ), this );
   connect( mp_actViewScreenShot, SIGNAL( triggered() ), this, SLOT( showScreenShotWindow() ) );
 }
 
@@ -640,13 +641,13 @@ void GuiMain::createMenus()
 {
   /* Plugins Menu */
   mp_menuPlugins = new QMenu( tr( "Plugins" ) + QString( "..." ), this );
-  mp_menuPlugins->setIcon( QIcon( ":/images/plugin.png" ) );
+  mp_menuPlugins->setIcon( IconManager::instance().icon( "plugin.png" ) );
 
   /* Main Menu */
   mp_menuMain = new QMenu( tr( "Main" ), this );
   if( Settings::instance().resourceFolder() != Settings::instance().dataFolder() )
-    mp_menuMain->addAction( QIcon( ":/images/resource-folder.png" ), tr( "Open your resource folder" ), this, SLOT( openResourceFolder() ) );
-  mp_menuMain->addAction( QIcon( ":/images/data-folder.png" ), tr( "Open your data folder" ), this, SLOT( openDataFolder() ) );
+    mp_menuMain->addAction( IconManager::instance().icon( "resource-folder.png" ), tr( "Open your resource folder" ), this, SLOT( openResourceFolder() ) );
+  mp_menuMain->addAction( IconManager::instance().icon( "data-folder.png" ), tr( "Open your data folder" ), this, SLOT( openDataFolder() ) );
   mp_menuMain->addSeparator();
   mp_menuMain->addAction( mp_actViewLog );
   mp_menuMain->addSeparator();
@@ -660,10 +661,10 @@ void GuiMain::createMenus()
 
   /* System Menu */
   mp_menuSettings = new QMenu( tr( "Settings" ), this );
-  //mp_menuSettings->setIcon( QIcon( ":/images/settings.png" ) );
+  //mp_menuSettings->setIcon( IconManager::instance().icon( "settings.png" ) );
 
   mp_menuStartupSettings = new QMenu( tr( "On start" ), this );
-  mp_menuStartupSettings->setIcon( QIcon( ":/images/settings-start.png" ) );
+  mp_menuStartupSettings->setIcon( IconManager::instance().icon( "settings-start.png" ) );
   mp_menuSettings->addMenu( mp_menuStartupSettings );
   act = mp_menuStartupSettings->addAction( tr( "Prompts for change user" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -691,7 +692,7 @@ void GuiMain::createMenus()
   act->setData( 43 );
 
   mp_menuCloseSettings = new QMenu( tr( "On close" ), this );
-  mp_menuCloseSettings->setIcon( QIcon( ":/images/settings-close.png" ) );
+  mp_menuCloseSettings->setIcon( IconManager::instance().icon( "settings-close.png" ) );
   mp_menuSettings->addMenu( mp_menuCloseSettings );
   act = mp_menuCloseSettings->addAction( tr( "Prompt on quit when connected" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -707,7 +708,7 @@ void GuiMain::createMenus()
   act->setData( 29 );
 
   mp_menuNetworkStatus = new QMenu( tr( "Network" ), this );
-  mp_menuNetworkStatus->setIcon( QIcon( ":/images/network.png" ) );
+  mp_menuNetworkStatus->setIcon( IconManager::instance().icon( "network.png" ) );
   mp_menuSettings->addMenu( mp_menuNetworkStatus );
   mp_menuNetworkStatus->addAction( mp_actConfigureNetwork );
   mp_menuNetworkStatus->addSeparator();
@@ -720,11 +721,11 @@ void GuiMain::createMenus()
 #endif
 
   mp_menuUsersSettings = new QMenu( tr( "Users" ), this );
-  mp_menuUsersSettings->setIcon( QIcon( ":/images/user-list.png" ) );
+  mp_menuUsersSettings->setIcon( IconManager::instance().icon( "user-list.png" ) );
   mp_menuSettings->addMenu( mp_menuUsersSettings );
 
   QMenu* menu_recognize_users = mp_menuUsersSettings->addMenu( tr( "Recognize users" ) + QString( "..." ) );
-  menu_recognize_users->setIcon( QIcon( ":/images/user-list.png" ) );
+  menu_recognize_users->setIcon( IconManager::instance().icon( "user-list.png" ) );
   mp_actGroupRecognizeUsers = new QActionGroup( this );
   mp_actGroupRecognizeUsers->setExclusive( true );
   act = menu_recognize_users->addAction( tr( "By nickname" ) + QString( " (%1)" ).arg( tr( "default" ) ) );
@@ -745,8 +746,8 @@ void GuiMain::createMenus()
   menu_recognize_users->addSeparator();
   connect( mp_actGroupRecognizeUsers, SIGNAL( triggered( QAction* ) ), this, SLOT( settingsChanged( QAction* ) ) );
   mp_menuUsersSettings->addSeparator();
-  mp_actAddUsers = mp_menuUsersSettings->addAction( QIcon( ":/images/user-add.png" ), tr( "Add users" ) + QString( "..." ), this, SLOT( showAddUser() ) );
-  mp_menuUsersSettings->addAction( QIcon( ":/images/workgroup.png" ), tr( "Workgroups" ) + QString( "..." ), this, SLOT( showWorkgroups() ) );
+  mp_actAddUsers = mp_menuUsersSettings->addAction( IconManager::instance().icon( "user-add.png" ), tr( "Add users" ) + QString( "..." ), this, SLOT( showAddUser() ) );
+  mp_menuUsersSettings->addAction( IconManager::instance().icon( "workgroup.png" ), tr( "Workgroups" ) + QString( "..." ), this, SLOT( showWorkgroups() ) );
   mp_menuUsersSettings->addSeparator();
   act = mp_menuUsersSettings->addAction( tr( "Save users" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -763,7 +764,7 @@ void GuiMain::createMenus()
   act->setData( 20 );
 
   mp_menuChatSettings = new QMenu( tr( "Chat" ), this );
-  mp_menuChatSettings->setIcon( QIcon( ":/images/chat.png" ) );
+  mp_menuChatSettings->setIcon( IconManager::instance().icon( "chat.png" ) );
   mp_menuSettings->addMenu( mp_menuChatSettings );
   act = mp_menuChatSettings->addAction( tr( "Save messages" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -782,12 +783,18 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().chatClearAllReadMessages() );
   act->setData( 47 );
+  act = mp_menuChatSettings->addAction( tr( "Use font emoticons" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().useNativeEmoticons() );
+  act->setData( 31 );
   mp_menuChatSettings->addSeparator();
-  mp_menuChatSettings->addAction( QIcon( ":/images/dictionary.png" ), tr( "Dictionary" ) + QString( "..." ), this, SLOT( selectDictionatyPath() ) );
-  mp_menuChatSettings->addAction( QIcon( ":/images/refused-chat.png" ), tr( "Blocked chats" ) + QString( "..." ), this, SLOT( showRefusedChats() ) );
+  mp_actSelectEmoticonSourcePath = mp_menuChatSettings->addAction( IconManager::instance().icon( "emoticon.png" ), tr( "Select emoticon theme" ) + QString( "..." ), this, SLOT( selectEmoticonSourcePath() ) );
+  mp_actSelectEmoticonSourcePath->setEnabled( !Settings::instance().useNativeEmoticons() );
+  mp_menuChatSettings->addAction( IconManager::instance().icon( "dictionary.png" ), tr( "Dictionary" ) + QString( "..." ), this, SLOT( selectDictionatyPath() ) );
+  mp_menuChatSettings->addAction( IconManager::instance().icon( "refused-chat.png" ), tr( "Blocked chats" ) + QString( "..." ), this, SLOT( showRefusedChats() ) );
 
   mp_menuFileTransferSettings = new QMenu( tr( "File transfer" ), this );
-  mp_menuFileTransferSettings->setIcon( QIcon( ":/images/file-transfer.png" ) );
+  mp_menuFileTransferSettings->setIcon( IconManager::instance().icon( "file-transfer.png" ) );
   mp_menuFileTransferSettings->setDisabled( Settings::instance().disableFileTransfer() );
   mp_menuSettings->addMenu( mp_menuFileTransferSettings );
   act = mp_menuFileTransferSettings->addAction( tr( "Enable file transfer" ), this, SLOT( settingsChanged() ) );
@@ -802,7 +809,7 @@ void GuiMain::createMenus()
 
   mp_menuFileTransferSettings->addSeparator();
   mp_menuExistingFile = mp_menuFileTransferSettings->addMenu( tr( "If a file already exists" ) + QString( "..." ) );
-  mp_menuExistingFile->setIcon( QIcon( ":/images/file-add.png" ) );
+  mp_menuExistingFile->setIcon( IconManager::instance().icon( "file-add.png" ) );
   mp_actGroupExistingFile = new QActionGroup( this );
   mp_actGroupExistingFile->setExclusive( true );
   mp_actOverwriteExistingFile = mp_menuExistingFile->addAction( tr( "Overwrite" ) );
@@ -823,10 +830,10 @@ void GuiMain::createMenus()
   mp_actConfirmDownload->setChecked( Settings::instance().confirmOnDownloadFile() );
   mp_actConfirmDownload->setData( 30 );
   mp_menuFileTransferSettings->addSeparator();
-  mp_actSelectDownloadFolder = mp_menuFileTransferSettings->addAction( QIcon( ":/images/download-folder.png" ), tr( "Download folder..."), this, SLOT( selectDownloadDirectory() ) );
+  mp_actSelectDownloadFolder = mp_menuFileTransferSettings->addAction( IconManager::instance().icon( "download-folder.png" ), tr( "Download folder..."), this, SLOT( selectDownloadDirectory() ) );
 
   mp_menuSoundSettings = new QMenu( tr( "Sound" ), this );
-  mp_menuSoundSettings->setIcon( QIcon( ":/images/bell.png" ) );
+  mp_menuSoundSettings->setIcon( IconManager::instance().icon( "bell.png" ) );
   mp_menuSettings->addMenu( mp_menuSoundSettings );
   mp_actBeepOnNewMessage = mp_menuSoundSettings->addAction( tr( "Enable BEEP alert" ), this, SLOT( settingsChanged() ) );
   mp_actBeepOnNewMessage->setCheckable( true );
@@ -837,11 +844,11 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().playBuzzSound() );
   act->setData( 56 );
   mp_menuSoundSettings->addSeparator();
-  mp_menuSoundSettings->addAction( QIcon( ":/images/file-beep.png" ), tr( "Select beep file..." ), this, SLOT( selectBeepFile() ) );
-  mp_menuSoundSettings->addAction( QIcon( ":/images/play.png" ), tr( "Play beep" ), this, SLOT( testBeepFile() ) );
+  mp_menuSoundSettings->addAction( IconManager::instance().icon( "file-beep.png" ), tr( "Select beep file..." ), this, SLOT( selectBeepFile() ) );
+  mp_menuSoundSettings->addAction( IconManager::instance().icon( "play.png" ), tr( "Play beep" ), this, SLOT( testBeepFile() ) );
 
   mp_menuTrayIconSettings = new QMenu( tr( "System tray icon" ), this );
-  mp_menuTrayIconSettings->setIcon( QIcon( ":/images/settings-tray-icon.png" ) );
+  mp_menuTrayIconSettings->setIcon( IconManager::instance().icon( "settings-tray-icon.png" ) );
   mp_menuSettings->addMenu( mp_menuTrayIconSettings );
   act = mp_menuTrayIconSettings->addAction( tr( "Enable tray icon notifications" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -861,8 +868,9 @@ void GuiMain::createMenus()
   act->setData( 48 );
 
   mp_menuSettings->addSeparator();
-  mp_menuSettings->addAction( QIcon( ":/images/shortcut.png" ), tr( "Shortcuts" ) + QString( "..." ), this, SLOT( editShortcuts() ) );
-  mp_menuSettings->addAction( QIcon( ":/images/language.png" ), tr( "Select language") + QString( "..." ), this, SLOT( selectLanguage() ) );
+  mp_menuSettings->addAction( IconManager::instance().icon( "shortcut.png" ), tr( "Shortcuts" ) + QString( "..." ), this, SLOT( editShortcuts() ) );
+  mp_menuSettings->addAction( IconManager::instance().icon( "language.png" ), tr( "Select language" ) + QString( "..." ), this, SLOT( selectLanguage() ) );
+  mp_menuSettings->addAction( IconManager::instance().icon( "theme.png" ), tr( "Select icon theme" ) + QString( "..." ), this, SLOT( selectIconSourcePath() ) );
   mp_menuSettings->addSeparator();
 
   act = mp_menuSettings->addAction( tr( "Always stay on top" ), this, SLOT( settingsChanged() ) );
@@ -881,7 +889,7 @@ void GuiMain::createMenus()
 #endif
 
   mp_menuSettings->addSeparator();
-  mp_actSaveWindowGeometry = mp_menuSettings->addAction( QIcon( ":/images/save-window.png" ), tr( "Save window's geometry" ), this, SLOT( saveGeometryAndState() ) );
+  mp_actSaveWindowGeometry = mp_menuSettings->addAction( IconManager::instance().icon( "save-window.png" ), tr( "Save window's geometry" ), this, SLOT( saveGeometryAndState() ) );
   mp_actSaveWindowGeometry->setDisabled( Settings::instance().resetGeometryAtStartup() );
 
   /* User List Menu */
@@ -964,7 +972,7 @@ void GuiMain::createMenus()
 
   /* Status Menu */
   mp_menuStatus = new QMenu( tr( "Status" ), this );
-  mp_menuStatus->setIcon( QIcon( ":/images/user-status.png" ) );
+  mp_menuStatus->setIcon( IconManager::instance().icon( "user-status.png" ) );
   for( int i = User::Online; i < User::NumStatus; i++ )
   {
     act = mp_menuStatus->addAction( QIcon( Bee::menuUserStatusIconFileName( i ) ), Bee::userStatusToString( i ), this, SLOT( statusSelected() ) );
@@ -974,10 +982,10 @@ void GuiMain::createMenus()
   mp_menuStatus->addSeparator();
   mp_menuUserStatusList = new QMenu( tr( "Recently used" ), this );
   act = mp_menuStatus->addMenu( mp_menuUserStatusList );
-  act->setIcon( QIcon( ":/images/recent.png" ) );
+  act->setIcon( IconManager::instance().icon( "recent.png" ) );
   loadUserStatusRecentlyUsed();
-  act = mp_menuStatus->addAction( QIcon( ":/images/user-status.png" ), tr( "Change your status description..." ), this, SLOT( changeStatusDescription() ) );
-  act = mp_menuStatus->addAction( QIcon( ":/images/clear.png" ), tr( "Clear all status descriptions" ), this, SLOT( clearRecentlyUsedUserStatus() ) );
+  act = mp_menuStatus->addAction( IconManager::instance().icon( "user-status.png" ), tr( "Change your status description..." ), this, SLOT( changeStatusDescription() ) );
+  act = mp_menuStatus->addAction( IconManager::instance().icon( "clear.png" ), tr( "Clear all status descriptions" ), this, SLOT( clearRecentlyUsedUserStatus() ) );
   mp_menuStatus->addSeparator();
   act = mp_menuStatus->addAction( QIcon( Bee::menuUserStatusIconFileName( User::Offline ) ), Bee::userStatusToString( User::Offline ), this, SLOT( statusSelected() ) );
   act->setData( User::Offline );
@@ -987,38 +995,38 @@ void GuiMain::createMenus()
 
   /* Help Menu */
   mp_menuInfo = new QMenu( tr("?" ), this );
-  mp_menuInfo->addAction( QIcon( ":/images/tip.png" ), tr( "Tip of the day" ), this, SLOT( showTipOfTheDay() ) );
-  mp_menuInfo->addAction( QIcon( ":/images/fact.png" ), tr( "Fact of the day" ), this, SLOT( showFactOfTheDay() ) );
+  mp_menuInfo->addAction( IconManager::instance().icon( "tip.png" ), tr( "Tip of the day" ), this, SLOT( showTipOfTheDay() ) );
+  mp_menuInfo->addAction( IconManager::instance().icon( "fact.png" ), tr( "Fact of the day" ), this, SLOT( showFactOfTheDay() ) );
   mp_menuInfo->addSeparator();
   mp_menuInfo->addAction( mp_actAbout );
-  mp_menuInfo->addAction( QIcon( ":/images/license.png" ), tr( "Show %1's license..." ).arg( Settings::instance().programName() ), this, SLOT( showLicense() ) );
-  act = mp_menuInfo->addAction( QIcon( ":/images/qt.png" ), tr( "Qt Library..." ), qApp, SLOT( aboutQt() ) );
+  mp_menuInfo->addAction( IconManager::instance().icon( "license.png" ), tr( "Show %1's license..." ).arg( Settings::instance().programName() ), this, SLOT( showLicense() ) );
+  act = mp_menuInfo->addAction( IconManager::instance().icon( "qt.png" ), tr( "Qt Library..." ), qApp, SLOT( aboutQt() ) );
   act->setMenuRole( QAction::AboutQtRole );
   mp_menuInfo->addSeparator();
-  mp_menuInfo->addAction( QIcon( ":/images/beebeep.png" ), tr( "Open %1 official website..." ).arg( Settings::instance().programName() ), this, SLOT( openWebSite() ) );
-  mp_menuInfo->addAction( QIcon( ":/images/update.png" ), tr( "Check for new version..." ), this, SLOT( checkNewVersion() ) );
-  mp_menuInfo->addAction( QIcon( ":/images/plugin.png" ), tr( "Download plugins..." ), this, SLOT( openDownloadPluginPage() ) );
-  mp_menuInfo->addAction( QIcon( ":/images/info.png" ), tr( "Help online..." ), this, SLOT( openHelpPage() ) );
+  mp_menuInfo->addAction( IconManager::instance().icon( "beebeep.png" ), tr( "Open %1 official website..." ).arg( Settings::instance().programName() ), this, SLOT( openWebSite() ) );
+  mp_menuInfo->addAction( IconManager::instance().icon( "update.png" ), tr( "Check for new version..." ), this, SLOT( checkNewVersion() ) );
+  mp_menuInfo->addAction( IconManager::instance().icon( "plugin.png" ), tr( "Download plugins..." ), this, SLOT( openDownloadPluginPage() ) );
+  mp_menuInfo->addAction( IconManager::instance().icon( "info.png" ), tr( "Help online..." ), this, SLOT( openHelpPage() ) );
   mp_menuInfo->addSeparator();
-  mp_menuInfo->addAction( QIcon( ":/images/thumbup.png" ), tr( "Like %1 on Facebook" ).arg( Settings::instance().programName() ), this, SLOT( openFacebookPage() ) );
+  mp_menuInfo->addAction( IconManager::instance().icon( "thumbup.png" ), tr( "Like %1 on Facebook" ).arg( Settings::instance().programName() ), this, SLOT( openFacebookPage() ) );
 #ifdef BEEBEEP_DEBUG
   act = mp_menuInfo->addAction( tr( "Add +1 user to anonymous usage statistics" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().postUsageStatistics() );
   act->setData( 44 );
 #endif
-  mp_menuInfo->addAction( QIcon( ":/images/donate.png" ), tr( "Donate for %1" ).arg( Settings::instance().programName() ), this, SLOT( openDonationPage() ) );
+  mp_menuInfo->addAction( IconManager::instance().icon( "donate.png" ), tr( "Donate for %1" ).arg( Settings::instance().programName() ), this, SLOT( openDonationPage() ) );
 
   /* Tray icon menu */
   mp_menuTrayIcon = new QMenu( this );
-  act = mp_menuTrayIcon->addAction( QIcon( ":/images/beebeep.png" ), tr( "Show" ), this, SLOT( showUp() ) );
+  act = mp_menuTrayIcon->addAction( IconManager::instance().icon( "beebeep.png" ), tr( "Show" ), this, SLOT( showUp() ) );
   mp_menuTrayIcon->setDefaultAction( act );
   mp_menuTrayIcon->addSeparator();
   mp_menuTrayIcon->addAction( mp_menuStatus->menuAction() );
   mp_menuTrayIcon->addSeparator();
   mp_menuTrayIcon->addAction( mp_actViewNewMessage );
   mp_menuTrayIcon->addSeparator();
-  mp_menuTrayIcon->addAction( QIcon( ":/images/quit.png" ), tr( "Quit" ), this, SLOT( forceShutdown() ) );
+  mp_menuTrayIcon->addAction( IconManager::instance().icon( "quit.png" ), tr( "Quit" ), this, SLOT( forceShutdown() ) );
 
   mp_trayIcon->setContextMenu( mp_menuTrayIcon );
 }
@@ -1033,7 +1041,7 @@ void GuiMain::createToolAndMenuBars()
   label_version->setAlignment( Qt::AlignHCenter | Qt::AlignVCenter );
   QString label_version_text = QString( "&nbsp;&nbsp;<b>%1</b> %2&nbsp;" )
                                 .arg( Settings::instance().version( false, false ) )
-                                .arg( Bee::iconToHtml( Settings::instance().operatingSystemIconPath(), "*", 12, 12 ) );
+                                .arg( IconManager::instance().toHtml( Settings::instance().operatingSystemIconPath(), "*", 12, 12 ) );
   label_version->setText( label_version_text );
   label_version->setToolTip( QString( "BeeBEEP %1 %2" ).arg( Settings::instance().version( true, true ), Settings::instance().operatingSystem( true ) ) );
   menuBar()->setCornerWidget( label_version );
@@ -1054,27 +1062,27 @@ void GuiMain::createMainWidgets()
 
   mp_home = new GuiHome( this );
   connect( mp_home, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
-  tab_index = mp_tabMain->addTab( mp_home, QIcon( ":/images/activities.png" ), "" );
+  tab_index = mp_tabMain->addTab( mp_home, IconManager::instance().icon( "activities.png" ), "" );
   mp_tabMain->setTabToolTip( tab_index, tr( "Activities" ) );
   mp_home->setToolTip( QString( "%1\n(%2)" ).arg( mp_tabMain->tabToolTip( tab_index ), tooltip_right_button ) );
 
   mp_userList = new GuiUserList( this );
-  tab_index = mp_tabMain->addTab( mp_userList, QIcon( ":/images/user-list.png" ), "" );
+  tab_index = mp_tabMain->addTab( mp_userList, IconManager::instance().icon( "user-list.png" ), "" );
   mp_tabMain->setTabToolTip( tab_index, tr( "Users" ) );
   mp_userList->setToolTip( QString( "%1\n(%2)" ).arg( mp_tabMain->tabToolTip( tab_index ), tooltip_right_button ) );
 
   mp_chatList = new GuiChatList( this );
-  tab_index = mp_tabMain->addTab( mp_chatList, QIcon( ":/images/chat-list.png" ), "" );
+  tab_index = mp_tabMain->addTab( mp_chatList, IconManager::instance().icon( "chat-list.png" ), "" );
   mp_tabMain->setTabToolTip( tab_index, tr( "Chats" ) );
   mp_chatList->setToolTip( QString( "%1\n(%2)" ).arg( mp_tabMain->tabToolTip( tab_index ), tooltip_right_button ) );
 
   mp_groupList = new GuiGroupList( this );
-  tab_index = mp_tabMain->addTab( mp_groupList, QIcon( ":/images/group.png" ), "" );
+  tab_index = mp_tabMain->addTab( mp_groupList, IconManager::instance().icon( "group.png" ), "" );
   mp_tabMain->setTabToolTip( tab_index, tr( "Groups" ) );
   mp_groupList->setToolTip( QString( "%1\n(%2)" ).arg( mp_tabMain->tabToolTip( tab_index ), tooltip_right_button ) );
 
   mp_savedChatList = new GuiSavedChatList( this );
-  tab_index = mp_tabMain->addTab( mp_savedChatList, QIcon( ":/images/saved-chat-list.png" ), "" );
+  tab_index = mp_tabMain->addTab( mp_savedChatList, IconManager::instance().icon( "saved-chat-list.png" ), "" );
   mp_tabMain->setTabToolTip( tab_index, tr( "Chat histories" ) );
   mp_savedChatList->setToolTip( QString( "%1\n(%2)" ).arg( mp_tabMain->tabToolTip( tab_index ), tooltip_right_button ) );
 
@@ -1085,7 +1093,7 @@ void GuiMain::createMainWidgets()
   mp_dockFileTransfers->setAllowedAreas( Qt::AllDockWidgetAreas );
   addDockWidget( Qt::BottomDockWidgetArea, mp_dockFileTransfers );
   mp_actViewFileTransfer = mp_dockFileTransfers->toggleViewAction();
-  mp_actViewFileTransfer->setIcon( QIcon( ":/images/file-transfer.png" ) );
+  mp_actViewFileTransfer->setIcon( IconManager::instance().icon( "file-transfer.png" ) );
   mp_actViewFileTransfer->setText( tr( "Show the file transfer panel" ) );
   mp_actViewFileTransfer->setData( 99 );
 }
@@ -1291,6 +1299,7 @@ void GuiMain::settingsChanged( QAction* act )
     break;
   case 31:
     Settings::instance().setUseNativeEmoticons( act->isChecked() );
+    mp_actSelectEmoticonSourcePath->setEnabled( !act->isChecked() );
     updateEmoticons();
     refresh_chat = true;
   case 32:
@@ -2052,7 +2061,7 @@ void GuiMain::showVCard( VNumber user_id )
 void GuiMain::updadePluginMenu()
 {
   mp_menuPlugins->clear();
-  QAction* act = mp_menuPlugins->addAction( QIcon( ":/images/plugin.png" ), tr( "Plugin Manager..." ), this, SLOT( showPluginManager() ) );
+  QAction* act = mp_menuPlugins->addAction( IconManager::instance().icon( "plugin.png" ), tr( "Plugin Manager..." ), this, SLOT( showPluginManager() ) );
 
   QString help_data_ts = tr( "is a plugin developed by" );
   QString help_data_format = QString( "<p>%1 <b>%2</b> %3 <b>%4</b>.<br /><i>%5</i></p><br />" );
@@ -2074,7 +2083,7 @@ void GuiMain::updadePluginMenu()
   if( copymastro_available )
   {
     qDebug() << "CopyMastro is found:" << qPrintable( copy_mastro_path );
-    act = mp_menuPlugins->addAction( QIcon( ":/images/CopyMastro.png" ), "CopyMastro", this, SLOT( startExternalApplicationFromActionData() ) );
+    act = mp_menuPlugins->addAction( IconManager::instance().icon( "CopyMastro.png" ), "CopyMastro", this, SLOT( startExternalApplicationFromActionData() ) );
     act->setToolTip( tr( "Start the new application to copy file and folders by Marco Mastroddi" ) );
     act->setData( copy_mastro_path );
   }
@@ -2088,7 +2097,7 @@ void GuiMain::updadePluginMenu()
       act = mp_menuPlugins->addAction( text_marker->name(), this, SLOT( showPluginHelp() ) );
 
       act->setData( help_data_format
-                  .arg( Bee::iconToHtml( (text_marker->icon().isNull() ? ":/images/plugin.png" : text_marker->iconFileName()), "*P*" ),
+                  .arg( IconManager::instance().toHtml( (text_marker->icon().isNull() ? "images/plugin.png" : text_marker->iconFileName()), "*P*" ),
                         text_marker->name(), help_data_ts, text_marker->author(), text_marker->help() ) );
       act->setIcon( text_marker->icon() );
       act->setEnabled( text_marker->isEnabled() );
@@ -2794,13 +2803,6 @@ void GuiMain::showChatSettingsMenu()
   act->setChecked( Settings::instance().showEmoticons() );
   act->setData( 10 );
 
-  act = mp_menuChat->addAction( tr( "Use font emoticons" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().useNativeEmoticons() );
-  act->setData( 31 );
-
-  mp_menuChat->addSeparator();
-
   act = mp_menuChat->addAction( tr( "Use HTML tags" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().chatUseHtmlTags() );
@@ -2814,7 +2816,7 @@ void GuiMain::showChatSettingsMenu()
   mp_menuChat->addSeparator();
 
   act = mp_menuChat->addAction( tr( "Restore default font" ), this, SLOT( settingsChanged() ) );
-  act->setIcon( QIcon( ":/images/font.png" ) );
+  act->setIcon( IconManager::instance().icon( "font.png" ) );
   act->setData( 23 );
 
   mp_menuChat->exec( QCursor::pos() );
@@ -2832,10 +2834,10 @@ void GuiMain::showDefaultServerPortInMenu()
 
   if( mp_core->isConnected() )
   {
-    mp_menuNetworkStatus->setIcon( QIcon( ":/images/network-connected.png" ) );
-    mp_actHostAddress->setIcon( QIcon( ":/images/connect.png" ) );
-    mp_actPortBroadcast->setIcon( QIcon( ":/images/broadcast.png" ) );
-    mp_actPortListener->setIcon( QIcon( ":/images/default-chat-online.png" ) );
+    mp_menuNetworkStatus->setIcon( IconManager::instance().icon( "network-connected.png" ) );
+    mp_actHostAddress->setIcon( IconManager::instance().icon( "connect.png" ) );
+    mp_actPortBroadcast->setIcon( IconManager::instance().icon( "broadcast.png" ) );
+    mp_actPortListener->setIcon( IconManager::instance().icon( "default-chat-online.png" ) );
 
     host_address = Settings::instance().localUser().networkAddress().hostAddress().toString();
     broadcast_port = QString::number( Settings::instance().defaultBroadcastPort() );
@@ -2843,7 +2845,7 @@ void GuiMain::showDefaultServerPortInMenu()
     if( Settings::instance().enableFileTransfer() )
     {
       file_transfer_port = QString::number( mp_core->fileTransferPort() );
-      mp_actPortFileTransfer->setIcon( QIcon( ":/images/network-scan.png" ) );
+      mp_actPortFileTransfer->setIcon( IconManager::instance().icon( "network-scan.png" ) );
     }
     else
     {
@@ -2855,13 +2857,13 @@ void GuiMain::showDefaultServerPortInMenu()
     if( mp_core->dnsMulticastingIsActive() )
     {
       multicast_dns = tr( "active" );
-      mp_actMulticastDns->setIcon( QIcon( ":/images/mdns.png" ) );
+      mp_actMulticastDns->setIcon( IconManager::instance().icon( "mdns.png" ) );
     }
 #endif
   }
   else
   {
-    mp_menuNetworkStatus->setIcon( QIcon( ":/images/network-disconnected.png" ) );
+    mp_menuNetworkStatus->setIcon( IconManager::instance().icon( "network-disconnected.png" ) );
     mp_actHostAddress->setIcon( QIcon() );
     mp_actPortBroadcast->setIcon( QIcon() );
     mp_actPortListener->setIcon( QIcon() );
@@ -3303,7 +3305,7 @@ void GuiMain::onTickEvent( int ticks )
 
   if( mp_actViewNewMessage->isEnabled() )
   {
-    QIcon new_message_blinking_icon( ":/images/beebeep-message.png" );
+    QIcon new_message_blinking_icon = IconManager::instance().icon( "beebeep-message.png" );
     mp_actViewNewMessage->setIcon( ticks % 2 == 0 ? new_message_blinking_icon : Bee::convertToGrayScale( new_message_blinking_icon.pixmap( Settings::instance().mainBarIconSize() ) ) );
   }
 
@@ -3314,7 +3316,7 @@ void GuiMain::onTickEvent( int ticks )
   mp_fileSharing->onTickEvent( ticks );
 
   if( mp_core->hasFileTransferInProgress() )
-    mp_actViewFileTransfer->setIcon( ticks % 2 == 0 ? QIcon( ":/images/file-transfer-progress.png" ) : QIcon( ":/images/file-transfer.png" ) );
+    mp_actViewFileTransfer->setIcon( ticks % 2 == 0 ? IconManager::instance().icon( "file-transfer-progress.png" ) : IconManager::instance().icon( "file-transfer.png" ) );
 
   if( ticks % 2 == 0 && mp_actViewNewMessage->isEnabled() )
   {
@@ -3584,9 +3586,88 @@ void GuiMain::showRefusedChats()
     showMessage( tr( "%1 blocked chats" ).arg( Settings::instance().refusedChats().size() ), 5000 );
 }
 
+void GuiMain::selectIconSourcePath()
+{
+  int ret_code = 1;
+  if( Settings::instance().iconSourcePath().isEmpty() )
+  {
+    ret_code = QMessageBox::information( this, Settings::instance().programName(),
+                                         tr( "You are using the default icons." ),
+                                         tr( "Select the icon folder" ), tr( "Cancel" ), QString::null, 1, 1 );
+  }
+  else
+  {
+    ret_code = QMessageBox::information( this, Settings::instance().programName(),
+                                         tr( "You are using custom icons in folder %1." ).arg( Settings::instance().iconSourcePath() ),
+                                         tr( "Select the icon folder" ), tr( "Cancel" ), tr( "Restore default icons" ), 1, 1 );
+  }
+
+  if( ret_code == 1 )
+    return;
+
+  QString icon_source_path = "";
+  if( ret_code == 0 )
+  {
+    icon_source_path = QFileDialog::getExistingDirectory( this, tr( "Select the icon folder" ),
+                                                                Settings::instance().iconSourcePath().isEmpty() ? Settings::instance().resourceFolder() : Settings::instance().iconSourcePath() );
+    if( icon_source_path.isEmpty() )
+      return;
+
+    icon_source_path = Bee::convertToNativeFolderSeparator( icon_source_path );
+  }
+
+  if( icon_source_path != Settings::instance().iconSourcePath() )
+  {
+    showRestartApplicationAlertMessage();
+    Settings::instance().setIconSourcePath( icon_source_path );
+  }
+}
+
+void GuiMain::selectEmoticonSourcePath()
+{
+  int ret_code = 1;
+  if( Settings::instance().emoticonSourcePath().isEmpty() )
+  {
+    ret_code = QMessageBox::information( this, Settings::instance().programName(),
+                                         tr( "You are using the default emoticons." ),
+                                         tr( "Select the emoticon folder" ), tr( "Cancel" ), QString::null, 1, 1 );
+  }
+  else
+  {
+    ret_code = QMessageBox::information( this, Settings::instance().programName(),
+                                         tr( "You are using custom emoticons in folder %1." ).arg( Settings::instance().emoticonSourcePath() ),
+                                         tr( "Select the emoticon folder" ), tr( "Cancel" ), tr( "Restore default emoticons" ), 1, 1 );
+  }
+
+  if( ret_code == 1 )
+    return;
+
+  QString emoticon_source_path = "";
+  if( ret_code == 0 )
+  {
+    emoticon_source_path = QFileDialog::getExistingDirectory( this, tr( "Select the emoticon folder" ),
+                                                                  Settings::instance().emoticonSourcePath().isEmpty() ? Settings::instance().resourceFolder() : Settings::instance().emoticonSourcePath() );
+    if( emoticon_source_path.isEmpty() )
+      return;
+
+    emoticon_source_path = Bee::convertToNativeFolderSeparator( emoticon_source_path );
+  }
+
+  if( emoticon_source_path != Settings::instance().emoticonSourcePath() )
+  {
+    Settings::instance().setEmoticonSourcePath( emoticon_source_path );
+    updateEmoticons();
+  }
+}
+
 void GuiMain::showRestartConnectionAlertMessage()
 {
   QMessageBox::information( this, Settings::instance().programName(), tr( "You have to restart your connection to apply changes." ), tr( "Ok" ) );
+}
+
+void GuiMain::showRestartApplicationAlertMessage()
+{
+  QMessageBox::information( this, Settings::instance().programName(), tr( "You must restart %1 to apply these changes." ).arg( Settings::instance().programName() ), tr( "Ok" ) );
 }
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP

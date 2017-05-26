@@ -17,6 +17,7 @@ BeeBEEP 4.0.0
 - Message are now sent with UTC timestamp and converted to local time when received
 - Fixed save of the dictionary selected
 - Hunspell library updated to version 1.6.1
+- Added option to select custom icons and emoticons
 
 BeeBEEP 3.0.9
 - The emoticon icon is now showed in detached chat (bug fixed)

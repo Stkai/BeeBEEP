@@ -24,6 +24,7 @@
 #include "BeeUtils.h"
 #include "GuiShareBoxFileInfoList.h"
 #include "FileShare.h"
+#include "IconManager.h"
 #include "User.h"
 
 
@@ -168,7 +169,7 @@ void GuiShareBoxFileInfoList::performDrag()
   mime_data->setText( sl_path.join( "\n" ) );
   drag->setMimeData( mime_data );
 
-  QPixmap pix = QIcon( ":/images/sharebox.png" ).pixmap( 24 );
+  QPixmap pix = IconManager::instance().icon( "sharebox.png" ).pixmap( 24 );
   QPainter painter( &pix );
   painter.setPen( Qt::red );
   QFont f = QApplication::font();

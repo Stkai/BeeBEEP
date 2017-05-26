@@ -25,6 +25,7 @@
 #include "BeeUtils.h"
 #include "FileInfo.h"
 #include "GuiIconProvider.h"
+#include "IconManager.h"
 
 
 GuiFileInfoItem::GuiFileInfoItem( QTreeWidget *parent )
@@ -64,7 +65,7 @@ void GuiFileInfoItem::initUser( VNumber user_id, const QString& user_name )
 {
   m_type = ObjectUser;
   m_userId = user_id;
-  setIcon( ColumnFile, QIcon( ":/images/user.png" ) );
+  setIcon( ColumnFile, IconManager::instance().icon( "user.png" ) );
   setText( ColumnFile, user_name );
   setText( ColumnSize, "" );
   setText( ColumnStatus, "" );
@@ -75,7 +76,7 @@ void GuiFileInfoItem::initFolder( VNumber user_id, const QString& folder_name, c
   m_type = ObjectFolder;
   m_userId = user_id;
   m_folder = folder_path;
-  setIcon( ColumnFile, QIcon( ":/images/folder.png" ) );
+  setIcon( ColumnFile, IconManager::instance().icon( "folder.png" ) );
   setText( ColumnFile, folder_name );
   setText( ColumnSize, "" );
   setText( ColumnStatus, "" );

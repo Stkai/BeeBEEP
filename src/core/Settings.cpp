@@ -154,6 +154,9 @@ Settings::Settings()
 
   m_enableFileTransfer = true;
   m_enableFileSharing = false;
+
+  m_iconSourcePath = "";
+  m_emoticonSourcePath = "";
 }
 
 void Settings::createApplicationUuid()
@@ -555,22 +558,22 @@ QString Settings::operatingSystem( bool use_long_name  ) const
 
 QString Settings::operatingSystemIconPath() const
 {
-  QString os_icon_path = "Unknown OS";
+  QString os_icon_path = "beebeep.png";
 
 #ifdef Q_OS_WIN
-  os_icon_path = ":/images/windows.png";
+  os_icon_path = "windows.png";
 #endif
 #ifdef Q_OS_LINUX
-  os_icon_path = ":/images/linux.png";
+  os_icon_path = "linux.png";
 #endif
 #ifdef Q_OS_MAC
-  os_icon_path = ":/images/macosx.png";
+  os_icon_path = "macosx.png";
 #endif
 #ifdef Q_OS_OS2
-  os_icon_path = ":/images/os2.png";
+  os_icon_path = "os2.png";
 #endif
 #ifdef BEEBEEP_FOR_RASPBERRY_PI
-  os_icon_path = ":/images/raspberry-pi.png";
+  os_icon_path = "raspberry-pi.png";
 #endif
   return os_icon_path;
 }
@@ -986,6 +989,8 @@ void Settings::load()
   m_playBuzzSound = sets->value( "PlayBuzzSound", true ).toBool();
   bool open_chat_in_new_window = sets->value( "AlwaysOpenNewFloatingChat", !m_showChatsInOneWindow ).toBool();
   m_showChatsInOneWindow = sets->value( "ShowChatsInOneWindow", !open_chat_in_new_window ).toBool();
+  m_iconSourcePath = sets->value( "IconSourcePath", m_iconSourcePath ).toString();
+  m_emoticonSourcePath = sets->value( "EmoticonSourcePath", m_emoticonSourcePath ).toString();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -1274,6 +1279,8 @@ void Settings::save()
   sets->setValue( "ShowChatTextInModeRTL", m_showTextInModeRTL );
   sets->setValue( "PlayBuzzSound", m_playBuzzSound );
   sets->setValue( "ShowChatsInOneWindow", m_showChatsInOneWindow );
+  sets->setValue( "IconSourcePath", m_iconSourcePath );
+  sets->setValue( "EmoticonSourcePath", m_emoticonSourcePath );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );

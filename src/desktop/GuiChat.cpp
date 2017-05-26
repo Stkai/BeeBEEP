@@ -28,6 +28,7 @@
 #include "FileDialog.h"
 #include "GuiChat.h"
 #include "GuiChatMessage.h"
+#include "IconManager.h"
 #include "Protocol.h"
 #include "Settings.h"
 #include "ShortcutManager.h"
@@ -100,27 +101,29 @@ GuiChat::GuiChat( QWidget *parent )
   mp_scViewEmoticons->setContext( Qt::WindowShortcut );
   connect( mp_scViewEmoticons, SIGNAL( activated() ), this, SIGNAL( toggleVisibilityEmoticonsPanelRequest() ) );
 
-  mp_actSelectBackgroundColor = new QAction( QIcon( ":/images/background-color.png" ), tr( "Change background color" ), this );
+  mp_actSelectBackgroundColor = new QAction( IconManager::instance().icon( "background-color.png" ), tr( "Change background color" ), this );
   connect( mp_actSelectBackgroundColor, SIGNAL( triggered() ), this, SLOT( selectBackgroundColor() ) );
 
-  mp_actSaveAs = new QAction( QIcon( ":/images/save-as.png" ), tr( "Save chat" ), this );
+  mp_actSaveAs = new QAction( IconManager::instance().icon( "save-as.png" ), tr( "Save chat" ), this );
   connect( mp_actSaveAs, SIGNAL( triggered() ), this, SLOT( saveChat() ) );
 
-  mp_actPrint = new QAction( QIcon( ":/images/printer.png" ), tr( "Print..." ), this );
+  mp_actPrint = new QAction( IconManager::instance().icon( "printer.png" ), tr( "Print..." ), this );
   mp_actPrint->setShortcut( QKeySequence::Print );
   connect( mp_actPrint, SIGNAL( triggered() ), this, SLOT( printChat() ) );
 
-  mp_actClear = new QAction( QIcon( ":/images/clear.png" ), tr( "Clear messages" ), this );
+  mp_actClear = new QAction( IconManager::instance().icon( "clear.png" ), tr( "Clear messages" ), this );
   connect( mp_actClear, SIGNAL( triggered() ), this, SLOT( clearChat() ) );
 
-  mp_actFindTextInChat = new QAction( QIcon( ":/images/search.png" ), tr( "Find text in chat" ), this );
+  mp_actFindTextInChat = new QAction( IconManager::instance().icon( "search.png" ), tr( "Find text in chat" ), this );
   connect( mp_actFindTextInChat, SIGNAL( triggered() ), this, SLOT( showFindTextInChatDialog() ) );
 
-  mp_actRestoreDefaultFont = new QAction( QIcon( ":/images/font.png" ), tr( "Restore the default font" ), this );
+  mp_actRestoreDefaultFont = new QAction( IconManager::instance().icon( "font.png" ), tr( "Restore the default font" ), this );
   connect( mp_actRestoreDefaultFont, SIGNAL( triggered() ), this, SLOT( resetChatFontToDefault() ) );
 
   setChatFont( Settings::instance().chatFont() );
   setChatFontColor( Settings::instance().chatFontColor() );
+
+  mp_pbSend->setIcon( IconManager::instance().icon( "send.png" ) );
 
   connect( mp_teChat, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( customContextMenu( const QPoint& ) ) );
   connect( mp_teChat, SIGNAL( anchorClicked( const QUrl& ) ), this, SLOT( checkAnchorClicked( const QUrl&  ) ) );
@@ -133,20 +136,20 @@ GuiChat::GuiChat( QWidget *parent )
 
 void GuiChat::setupToolBar( QToolBar* chat_bar )
 {
-  chat_bar->addAction( QIcon( ":/images/font.png" ), tr( "Change font style" ), this, SLOT( selectFont() ) );
-  chat_bar->addAction( QIcon( ":/images/font-color.png" ), tr( "Change font color" ), this, SLOT( selectFontColor() ) );
-  chat_bar->addAction( QIcon( ":/images/filter.png" ), tr( "Filter message" ), this, SLOT( showChatMessageFilterMenu() ) );
-  chat_bar->addAction( QIcon( ":/images/settings.png" ), tr( "Chat settings" ), this, SIGNAL( showChatMenuRequest() ) );
-  mp_actSpellChecker = chat_bar->addAction( QIcon( ":/images/spellchecker.png" ), tr( "Spell checking" ), this, SLOT( onSpellCheckerActionClicked() ) );
+  chat_bar->addAction( IconManager::instance().icon( "font.png" ), tr( "Change font style" ), this, SLOT( selectFont() ) );
+  chat_bar->addAction( IconManager::instance().icon( "font-color.png" ), tr( "Change font color" ), this, SLOT( selectFontColor() ) );
+  chat_bar->addAction( IconManager::instance().icon( "filter.png" ), tr( "Filter message" ), this, SLOT( showChatMessageFilterMenu() ) );
+  chat_bar->addAction( IconManager::instance().icon( "settings.png" ), tr( "Chat settings" ), this, SIGNAL( showChatMenuRequest() ) );
+  mp_actSpellChecker = chat_bar->addAction( IconManager::instance().icon( "spellchecker.png" ), tr( "Spell checking" ), this, SLOT( onSpellCheckerActionClicked() ) );
   mp_actSpellChecker->setCheckable( true );
-  mp_actCompleter = chat_bar->addAction( QIcon( ":/images/dictionary.png" ), tr( "Word completer" ), this, SLOT( onCompleterActionClicked() ) );
+  mp_actCompleter = chat_bar->addAction( IconManager::instance().icon( "dictionary.png" ), tr( "Word completer" ), this, SLOT( onCompleterActionClicked() ) );
   mp_actCompleter->setCheckable( true );
-  mp_actUseReturnToSendMessage = chat_bar->addAction( QIcon( ":/images/key-return.png" ), tr( "Use Return key to send message" ), this, SLOT( onUseReturnToSendMessageClicked() ) );
+  mp_actUseReturnToSendMessage = chat_bar->addAction( IconManager::instance().icon( "key-return.png" ), tr( "Use Return key to send message" ), this, SLOT( onUseReturnToSendMessageClicked() ) );
   mp_actUseReturnToSendMessage->setCheckable( true );
   updateActionsOnFocusChanged();
   chat_bar->addSeparator();
-  mp_actSendFile = chat_bar->addAction( QIcon( ":/images/send-file.png" ), tr( "Send file" ), this, SLOT( sendFile() ) );
-  mp_actSendFolder = chat_bar->addAction( QIcon( ":/images/send-folder.png" ), tr( "Send folder" ), this, SLOT( sendFolder() ) );
+  mp_actSendFile = chat_bar->addAction( IconManager::instance().icon( "send-file.png" ), tr( "Send file" ), this, SLOT( sendFile() ) );
+  mp_actSendFolder = chat_bar->addAction( IconManager::instance().icon( "send-folder.png" ), tr( "Send folder" ), this, SLOT( sendFolder() ) );
   chat_bar->addSeparator();
   chat_bar->addAction( mp_actSaveAs );
   chat_bar->addAction( mp_actPrint );
@@ -250,11 +253,11 @@ void GuiChat::customContextMenu( const QPoint& )
   }
   mp_menuContext->addAction( mp_actFindTextInChat );
   mp_menuContext->addSeparator();
-  mp_menuContext->addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), mp_teChat, SLOT( selectAll() ), QKeySequence::SelectAll );
+  mp_menuContext->addAction( IconManager::instance().icon( "select-all.png" ), tr( "Select All" ), mp_teChat, SLOT( selectAll() ), QKeySequence::SelectAll );
   mp_menuContext->addSeparator();
-  QAction* act = mp_menuContext->addAction( QIcon( ":/images/copy.png" ), tr( "Copy to clipboard" ), mp_teChat, SLOT( copy() ), QKeySequence::Copy );
+  QAction* act = mp_menuContext->addAction( IconManager::instance().icon( "copy.png" ), tr( "Copy to clipboard" ), mp_teChat, SLOT( copy() ), QKeySequence::Copy );
   act->setEnabled( !mp_teChat->textCursor().selectedText().isEmpty() );
-  act = mp_menuContext->addAction( QIcon( ":/images/network.png" ), tr( "Open selected text as url" ), this, SLOT( openSelectedTextAsUrl() ) );
+  act = mp_menuContext->addAction( IconManager::instance().icon( "network.png" ), tr( "Open selected text as url" ), this, SLOT( openSelectedTextAsUrl() ) );
   act->setEnabled( !mp_teChat->textCursor().selectedText().isEmpty() );
   mp_menuContext->addSeparator();
   mp_menuContext->addAction( mp_actClear );

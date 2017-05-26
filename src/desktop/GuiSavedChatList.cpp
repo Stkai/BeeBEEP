@@ -25,6 +25,7 @@
 #include "GuiChatItem.h"
 #include "GuiConfig.h"
 #include "GuiSavedChatList.h"
+#include "IconManager.h"
 #include "Settings.h"
 
 
@@ -37,9 +38,9 @@ GuiSavedChatList::GuiSavedChatList( QWidget* parent )
   mp_twSavedChatList->setColumnCount( 1 );
   mp_twSavedChatList->setRootIsDecorated( false );
   mp_twSavedChatList->setSortingEnabled( true );
-  QString w_stylesheet = "background: white url(:/images/saved-chat-list.png);"
+  QString w_stylesheet = QString( "background: white url(%1);"
                         "background-repeat: no-repeat;"
-                        "background-position: bottom center;";
+                        "background-position: bottom center;" ).arg( IconManager::instance().iconPath( "saved-chat-list.png" ) );
   mp_twSavedChatList->setStyleSheet( w_stylesheet );
 
   mp_twSavedChatList->setContextMenuPolicy( Qt::CustomContextMenu );
@@ -56,6 +57,8 @@ GuiSavedChatList::GuiSavedChatList( QWidget* parent )
 #endif
 
   mp_menuContext = new QMenu( parent );
+
+  mp_pbClearFilter->setIcon( IconManager::instance().icon( "clear.png" ) );
 
   connect( mp_twSavedChatList, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showSavedChatMenu( const QPoint& ) ) );
   connect( mp_twSavedChatList, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( savedChatClicked( QTreeWidgetItem*, int ) ), Qt::QueuedConnection );
@@ -86,19 +89,19 @@ void GuiSavedChatList::showSavedChatMenu( const QPoint& p )
 
   if( !item )
   {
-    mp_menuContext->addAction( QIcon( ":/images/info.png" ), tr( "Please select an item" ) );
+    mp_menuContext->addAction( IconManager::instance().icon( "info.png" ), tr( "Please select an item" ) );
   }
   else
   {
     GuiSavedChatItem* saved_chat_item = (GuiSavedChatItem*)item;
     m_savedChatSelected = saved_chat_item->chatName();
-    QAction* act = mp_menuContext->addAction( QIcon( ":/images/saved-chat.png" ), tr( "Show" ), this, SLOT( showSavedChatSelected() ) );
+    QAction* act = mp_menuContext->addAction( IconManager::instance().icon( "saved-chat.png" ), tr( "Show" ), this, SLOT( showSavedChatSelected() ) );
     mp_menuContext->setDefaultAction( act );
     mp_menuContext->addSeparator();
-    act = mp_menuContext->addAction( QIcon( ":/images/update.png" ), tr( "Link to chat" ), this, SLOT( linkSavedChatSelected() ) );
+    act = mp_menuContext->addAction( IconManager::instance().icon( "update.png" ), tr( "Link to chat" ), this, SLOT( linkSavedChatSelected() ) );
     act->setEnabled( ChatManager::instance().constChatList().size() > 1 );
     mp_menuContext->addSeparator();
-    mp_menuContext->addAction( QIcon( ":/images/remove-saved-chat.png" ), tr( "Delete" ), this, SLOT( removeSavedChatSelected() ) );
+    mp_menuContext->addAction( IconManager::instance().icon( "remove-saved-chat.png" ), tr( "Delete" ), this, SLOT( removeSavedChatSelected() ) );
     m_blockShowChatRequest = true;
     mp_twSavedChatList->clearSelection();
   }
@@ -152,7 +155,7 @@ void GuiSavedChatList::updateSavedChats()
 
     item = new GuiSavedChatItem( mp_twSavedChatList );
     item->setChatName( it.key() );
-    item->setIcon( 0, QIcon( ":/images/saved-chat.png" ) );
+    item->setIcon( 0, IconManager::instance().icon( "saved-chat.png" ) );
     QFont f = this->font();
     f.setItalic( true );
     f.setBold( saved_chat_is_default );

@@ -23,6 +23,7 @@
 
 #include "BeeUtils.h"
 #include "GuiNetwork.h"
+#include "IconManager.h"
 #include "NetworkManager.h"
 #include "PluginManager.h"
 #include "Settings.h"
@@ -34,7 +35,7 @@ GuiNetwork::GuiNetwork( QWidget* parent )
   setupUi( this );
   setObjectName( "GuiNetworkDialog" );
   setWindowTitle( tr( "Network" ) + QString( " - %1" ).arg( Settings::instance().programName() ));
-  setWindowIcon( QIcon( ":/images/network.png" ) );
+  setWindowIcon( IconManager::instance().icon( "network.png" ) );
   Bee::removeContextHelpButton( this );
 
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( checkAndSearch() ) );

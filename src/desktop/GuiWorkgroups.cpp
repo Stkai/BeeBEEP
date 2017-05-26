@@ -24,6 +24,7 @@
 #include "BeeUtils.h"
 #include "Config.h"
 #include "GuiWorkgroups.h"
+#include "IconManager.h"
 #include "Settings.h"
 
 
@@ -32,7 +33,7 @@ GuiWorkgroups::GuiWorkgroups( QWidget *parent )
 {
   setupUi( this );
   setWindowTitle( tr( "Workgroups" ) + QString( " - %1" ).arg( Settings::instance().programName() ) );
-  setWindowIcon( QIcon( ":/images/workgroup.png" ) );
+  setWindowIcon( IconManager::instance().icon( "workgroup.png" ) );
   Bee::removeContextHelpButton( this );
 
   mp_twWorkgroups->setColumnCount( 1 );
@@ -46,9 +47,11 @@ GuiWorkgroups::GuiWorkgroups( QWidget *parent )
   mp_twWorkgroups->setSelectionMode( QAbstractItemView::MultiSelection );
 
   mp_menuContext = new QMenu( this );
-  mp_menuContext->addAction( QIcon( ":/images/delete.png" ), tr( "Remove workgroup" ), this, SLOT( removeWorkgroup() ) );
+  mp_menuContext->addAction( IconManager::instance().icon( "delete.png" ), tr( "Remove workgroup" ), this, SLOT( removeWorkgroup() ) );
   mp_menuContext->addSeparator();
-  mp_menuContext->addAction( QIcon( ":/images/clear.png" ), tr( "Clear all" ), this, SLOT( removeAllWorkgroups() ) );
+  mp_menuContext->addAction( IconManager::instance().icon( "clear.png" ), tr( "Clear all" ), this, SLOT( removeAllWorkgroups() ) );
+
+  mp_pbAdd->setIcon( IconManager::instance().icon( "add.png" ) );
 
   connect( mp_pbAdd, SIGNAL( clicked() ), this, SLOT( addWorkgroup() ) );
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( saveWorkgroups() ) );
@@ -64,7 +67,7 @@ void GuiWorkgroups::updateWorkgroupList()
   {
     QTreeWidgetItem* item = new QTreeWidgetItem( mp_twWorkgroups );
     item->setText( 0, s_workgroup );
-    item->setIcon( 0, QIcon( ":/images/workgroup.png" ));
+    item->setIcon( 0, IconManager::instance().icon( "workgroup.png" ));
   }
 }
 

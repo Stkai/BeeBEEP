@@ -23,6 +23,7 @@
 
 #include "Avatar.h"
 #include "BeeUtils.h"
+#include "IconManager.h"
 
 
 Avatar::Avatar()
@@ -150,5 +151,5 @@ QPixmap Avatar::create( const QString& user_name, const QString& user_color, con
   if( av.create() )
     return av.pixmap();
   else
-    return QIcon( ":/images/beebeep.png" ).pixmap( icon_size );
+    return IconManager::instance().icon( "beebeep.png" ).pixmap( icon_size );
 }

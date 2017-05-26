@@ -176,6 +176,8 @@ private slots:
   void showRefusedChats();
   void updateLocalStatusMessage();
   void onStatusBarMessageChanged( const QString& );
+  void selectIconSourcePath();
+  void selectEmoticonSourcePath();
 
 protected:
   void keyPressEvent( QKeyEvent* );
@@ -220,6 +222,7 @@ private:
   void updateTabTitles();
   QString tabToolTip( int );
   void showRestartConnectionAlertMessage();
+  void showRestartApplicationAlertMessage();
 
 private:
   QTabWidget* mp_tabMain;
@@ -281,6 +284,7 @@ private:
   QAction* mp_actAskToDoOnExistingFile;
   QAction* mp_actBeepOnNewMessage;
   QActionGroup* mp_actGroupRecognizeUsers;
+  QAction* mp_actSelectEmoticonSourcePath;
 
   QMenu* mp_menuNetworkStatus;
   QAction* mp_actHostAddress;

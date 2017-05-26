@@ -23,6 +23,7 @@
 
 #include "BeeUtils.h"
 #include "GuiAddUser.h"
+#include "IconManager.h"
 #include "NetworkManager.h"
 #include "Protocol.h"
 #include "Settings.h"
@@ -33,7 +34,7 @@ GuiAddUser::GuiAddUser( QWidget *parent )
 {
   setupUi( this );
   setWindowTitle( tr( "Add users" ) + QString( " - %1" ).arg( Settings::instance().programName() ) );
-  setWindowIcon( QIcon( ":/images/user-add.png" ) );
+  setWindowIcon( IconManager::instance().icon( "user-add.png" ) );
   Bee::removeContextHelpButton( this );
 
   QString s_txt1 = QString( "<b>%1</b>&nbsp;&nbsp;&nbsp;%2: <b>%3</b>&nbsp;&nbsp;&nbsp;%4: <b>%5</b>&nbsp;&nbsp;&nbsp;%6: %7" )
@@ -58,9 +59,11 @@ GuiAddUser::GuiAddUser( QWidget *parent )
   mp_twUsers->setColumnWidth( 0, 180 );
 
   mp_menuContext = new QMenu( this );
-  mp_menuContext->addAction( QIcon( ":/images/delete.png" ), tr( "Remove user path" ), this, SLOT( removeUserPath() ) );
+  mp_menuContext->addAction( IconManager::instance().icon( "delete.png" ), tr( "Remove user path" ), this, SLOT( removeUserPath() ) );
   mp_menuContext->addSeparator();
-  mp_menuContext->addAction( QIcon( ":/images/clear.png" ), tr( "Clear all" ), this, SLOT( removeAllUsers() ) );
+  mp_menuContext->addAction( IconManager::instance().icon( "clear.png" ), tr( "Clear all" ), this, SLOT( removeAllUsers() ) );
+
+  mp_pbAdd->setIcon( IconManager::instance().icon( "user-add.png" ) );
 
   connect( mp_pbAdd, SIGNAL( clicked() ), this, SLOT( addUser() ) );
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( saveUsers() ) );
@@ -174,7 +177,7 @@ void GuiAddUser::addNetworkAddressToList( const NetworkAddress& na )
 {
   QTreeWidgetItem* item = new QTreeWidgetItem( mp_twUsers );
   item->setText( 0, na.toString() );
-  item->setIcon( 0, QIcon( ":/images/user.png" ));
+  item->setIcon( 0, IconManager::instance().icon( "user.png" ));
   item->setText( 1, na.info() );
 }
 

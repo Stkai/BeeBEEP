@@ -24,6 +24,7 @@
 #include "ChatManager.h"
 #include "GuiUserList.h"
 #include "GuiConfig.h"
+#include "IconManager.h"
 #include "Settings.h"
 #include "UserManager.h"
 
@@ -41,9 +42,9 @@ GuiUserList::GuiUserList( QWidget* parent )
   mp_twUsers->setRootIsDecorated( false );
   mp_twUsers->setSortingEnabled( true );
   mp_twUsers->setColumnCount( 1 );
-  QString w_stylesheet = "background: white url(:/images/user-list.png);"
+  QString w_stylesheet = QString( "background: white url(%1);"
                         "background-repeat: no-repeat;"
-                        "background-position: bottom center;";
+                        "background-position: bottom center;" ).arg( IconManager::instance().iconPath( "user-list.png" ) );
   mp_twUsers->setStyleSheet( w_stylesheet );
   mp_twUsers->setMouseTracking( true );
   mp_twUsers->setHeaderHidden( true );
@@ -54,6 +55,9 @@ GuiUserList::GuiUserList( QWidget* parent )
   mp_leFilter->setPlaceholderText( tr( "Search user" ) );
 #endif
   resetList();
+
+  mp_pbSettings->setIcon( IconManager::instance().icon( "settings.png" ) );
+  mp_pbClearFilter->setIcon( IconManager::instance().icon( "clear.png" ) );
 
   connect( mp_twUsers, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showUserMenu( const QPoint& ) ) );
   connect( mp_twUsers, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( userItemClicked( QTreeWidgetItem*, int ) ), Qt::QueuedConnection );

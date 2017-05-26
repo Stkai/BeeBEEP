@@ -24,6 +24,7 @@
 #include "BeeUtils.h"
 #include "ChatManager.h"
 #include "GuiRefusedChat.h"
+#include "IconManager.h"
 #include "Settings.h"
 
 
@@ -32,7 +33,7 @@ GuiRefusedChat::GuiRefusedChat( QWidget *parent )
 {
   setupUi( this );
   setWindowTitle( tr( "Blocked chats" ) + QString( " - %1" ).arg( Settings::instance().programName() ) );
-  setWindowIcon( QIcon( ":/images/refused-chat.png" ) );
+  setWindowIcon( IconManager::instance().icon( "refused-chat.png" ) );
   Bee::removeContextHelpButton( this );
 
   mp_twRefusedChats->setColumnCount( 2 );
@@ -55,9 +56,9 @@ GuiRefusedChat::GuiRefusedChat( QWidget *parent )
 #endif
 
   mp_menuContext = new QMenu( this );
-  mp_menuContext->addAction( QIcon( ":/images/delete.png" ), tr( "Remove blocked chat" ), this, SLOT( removeRefusedChat() ) );
+  mp_menuContext->addAction( IconManager::instance().icon( "delete.png" ), tr( "Remove blocked chat" ), this, SLOT( removeRefusedChat() ) );
   mp_menuContext->addSeparator();
-  mp_menuContext->addAction( QIcon( ":/images/clear.png" ), tr( "Clear all" ), this, SLOT( removeAllRefusedChats() ) );
+  mp_menuContext->addAction( IconManager::instance().icon( "clear.png" ), tr( "Clear all" ), this, SLOT( removeAllRefusedChats() ) );
 
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( saveAndClose() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
@@ -72,7 +73,7 @@ void GuiRefusedChat::loadRefusedChatsInList()
   {
     QTreeWidgetItem* item = new QTreeWidgetItem( mp_twRefusedChats );
     item->setText( 0, cr.name() );
-    item->setIcon( 0, QIcon( ":/images/refused-chat.png" ));
+    item->setIcon( 0, IconManager::instance().icon( "refused-chat.png" ));
     item->setText( 1, cr.privateId() );
   }
 }

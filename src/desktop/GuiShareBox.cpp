@@ -25,6 +25,7 @@
 #include "GuiIconProvider.h"
 #include "GuiShareBox.h"
 #include "GuiShareBoxFileInfoList.h"
+#include "IconManager.h"
 #include "Settings.h"
 #include "FileDialog.h"
 #include "UserManager.h"
@@ -65,6 +66,13 @@ GuiShareBox::GuiShareBox( QWidget *parent )
   mp_pbMyOpenFolder->setToolTip( tr( "Show current folder" ) );
   mp_pbOutUpdate->setToolTip( tr( "Update ShareBox" ) );
   mp_pbOutCreateFolder->setToolTip( tr( "Create folder in ShareBox" ) );
+
+  mp_pbSelectMyBox->setIcon( IconManager::instance().icon( "sharebox.png" ) );
+  mp_pbMyUpdate->setIcon( IconManager::instance().icon( "update.png" ) );
+  mp_pbOutUpdate->setIcon( IconManager::instance().icon( "update.png" ) );
+  mp_pbMyCreateFolder->setIcon( IconManager::instance().icon( "folder-add.png" ) );
+  mp_pbOutCreateFolder->setIcon( IconManager::instance().icon( "folder-add.png" ) );
+  mp_pbMyOpenFolder->setIcon( IconManager::instance().icon( "folder.png" ) );
 
   connect( mp_comboUsers, SIGNAL( currentIndexChanged( int ) ), this, SLOT( onShareBoxSelected( int ) ) );
   connect( mp_pbSelectMyBox, SIGNAL( clicked() ), this, SLOT( selectMyShareBoxFolder() ) );

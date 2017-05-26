@@ -4,47 +4,47 @@
 <context>
     <name>ChatMessage</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="309"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="310"/>
         <source>Header</source>
         <translation>Fejléc</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="310"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="311"/>
         <source>System</source>
         <translation>Rendszer</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="311"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="312"/>
         <source>Chat</source>
         <translation>Chat</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="312"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="313"/>
         <source>Connection</source>
         <translation>Kapcsolat</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="313"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="314"/>
         <source>User Information</source>
         <translation>Felhasználó információ</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="314"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="315"/>
         <source>File Transfer</source>
         <translation>File átvitel</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="315"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="316"/>
         <source>History</source>
         <translation>Történet</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="316"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="317"/>
         <source>Other</source>
         <translation>Egyéb</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="317"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="318"/>
         <source>Image Preview</source>
         <translation type="unfinished"></translation>
     </message>
@@ -52,97 +52,97 @@
 <context>
     <name>Core</name>
     <message>
-        <location filename="../src/core/Core.cpp" line="148"/>
+        <location filename="../src/core/Core.cpp" line="149"/>
         <source>%1 Unable to connect to %2 Network. Please check your firewall settings.</source>
         <translation>%1 Nem sikerült csatlakozni a%2 hálózathoz. Kérjük, ellenőrizze a tűzfal beállításait.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="168"/>
+        <location filename="../src/core/Core.cpp" line="169"/>
         <source>%1 Unable to broadcast to %2 Network. Please check your firewall settings.</source>
         <translation>%1 Nem sikerült közvetíteni %2 hálózaton. Kérjük, ellenőrizze a tűzfal beállításait.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="181"/>
+        <location filename="../src/core/Core.cpp" line="182"/>
         <source>%1 You are connected to %2 Network.</source>
         <translation>%1 Csatlakozva %2 Hálózathoz.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="300"/>
+        <location filename="../src/core/Core.cpp" line="301"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1 Ön lecsatlakozott a %2 hálózatról.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="242"/>
+        <location filename="../src/core/Core.cpp" line="243"/>
         <source>%1 Zero Configuration started with service name: %2</source>
         <translation>%1 Zero konfiguráció elindult a %2 nevü szolgáltatással</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="94"/>
+        <location filename="../src/core/Core.cpp" line="95"/>
         <source>%1 User %2 cannot save settings in path: %3</source>
         <translation>%1 felhasználó %2 nem lehet menteni a beállításokat az útvonalon: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="110"/>
+        <location filename="../src/core/Core.cpp" line="111"/>
         <source>%1 User %2 cannot save chat messages in path: %3</source>
         <translation>%1 felhasználó %2 nem lehet menteni a chat üzeneteket az útvonalon: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="136"/>
+        <location filename="../src/core/Core.cpp" line="137"/>
         <source>Connecting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="192"/>
+        <location filename="../src/core/Core.cpp" line="193"/>
         <source>%1 You have selected to join only in these workgroups: %2</source>
         <translation>%1 Kiválasztottad, hogy csak ezek a munkacsoportok csatlakozzanak: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="257"/>
+        <location filename="../src/core/Core.cpp" line="258"/>
         <source>%1 Zero Configuration service closed.</source>
         <translation>%1 Zero konfiguráció szolgáltatás zárva.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="310"/>
+        <location filename="../src/core/Core.cpp" line="311"/>
         <source>Disconnected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="328"/>
+        <location filename="../src/core/Core.cpp" line="329"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
         <translation>%1 Zero Configuration keresi a hálózati szolgáltatást: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="335"/>
+        <location filename="../src/core/Core.cpp" line="336"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation>%1 Zero Configuration nem lehet böngészni hálózati szolgáltatást:%2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="354"/>
+        <location filename="../src/core/Core.cpp" line="355"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1 közvetítés a %2 Hálózat...</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="356"/>
+        <location filename="../src/core/Core.cpp" line="357"/>
         <source>Searching users</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="481"/>
+        <location filename="../src/core/Core.cpp" line="482"/>
         <source>New version is available</source>
         <translation>Új verzió elérhető</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="482"/>
+        <location filename="../src/core/Core.cpp" line="483"/>
         <source>Click here to download</source>
         <translation>Kattintson ide a letöltéshez</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="544"/>
+        <location filename="../src/core/Core.cpp" line="545"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="68"/>
+        <location filename="../src/core/CoreChat.cpp" line="69"/>
         <location filename="../src/core/CoreUser.cpp" line="97"/>
         <source>Happy Birthday to you!</source>
         <translation>Boldog születésnapot!</translation>
@@ -153,294 +153,294 @@
         <translation>Boldog születésnapot %1!</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="51"/>
+        <location filename="../src/core/CoreChat.cpp" line="52"/>
         <source>Happy birthday to Marco Mastroddi: %1 years old today! Cheers!!!</source>
         <translation>Boldog születésnapot kíván Marco Mastroddi: %1 éves ma! Egészségére!!!</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="62"/>
+        <location filename="../src/core/CoreChat.cpp" line="63"/>
         <source>Happy New Year!</source>
         <translation>Boldog új évet!</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="179"/>
-        <location filename="../src/core/CoreChat.cpp" line="642"/>
-        <location filename="../src/core/CoreChat.cpp" line="654"/>
+        <location filename="../src/core/CoreChat.cpp" line="180"/>
+        <location filename="../src/core/CoreChat.cpp" line="643"/>
+        <location filename="../src/core/CoreChat.cpp" line="655"/>
         <source>%1 Chat with %2.</source>
         <translation>%1 Beszélgetés %2-vel.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="637"/>
+        <location filename="../src/core/CoreChat.cpp" line="638"/>
         <source>Chat with all connected users</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="642"/>
+        <location filename="../src/core/CoreChat.cpp" line="643"/>
         <source>Unknown %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="266"/>
+        <location filename="../src/core/CoreChat.cpp" line="267"/>
         <source>Unable to send the message: you are not connected.</source>
         <translation>Nem sikerült elküldeni az üzenetet: nem csatlakozik.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="108"/>
+        <location filename="../src/core/CoreChat.cpp" line="109"/>
         <source>%1 You have created group chat %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="115"/>
+        <location filename="../src/core/CoreChat.cpp" line="116"/>
         <source>%1 %2 has added you to the group chat %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="152"/>
+        <location filename="../src/core/CoreChat.cpp" line="153"/>
         <source>%1 You have changed the group name from %2 to %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="154"/>
+        <location filename="../src/core/CoreChat.cpp" line="155"/>
         <source>%1 %2 has changed the group name from %3 to %4.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="175"/>
+        <location filename="../src/core/CoreChat.cpp" line="176"/>
         <source>%1 You have added members: %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="177"/>
+        <location filename="../src/core/CoreChat.cpp" line="178"/>
         <source>%1 %2 has added members: %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="214"/>
+        <location filename="../src/core/CoreChat.cpp" line="215"/>
         <source>%1 %2 has left the group chat %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="234"/>
+        <location filename="../src/core/CoreChat.cpp" line="235"/>
         <source>%1 %2 is added to saved chats.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="272"/>
+        <location filename="../src/core/CoreChat.cpp" line="273"/>
         <source>Unable to send the message: this chat is disabled.</source>
         <translation>Nem sikerült elküldeni az üzenetet: a csevegés le van tiltva.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="306"/>
+        <location filename="../src/core/CoreChat.cpp" line="307"/>
         <source>Unable to send the message to %1.</source>
         <translation>Nem sikerült elküldeni az üzenetet %1-nak.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="334"/>
+        <location filename="../src/core/CoreChat.cpp" line="335"/>
         <source>The message will be delivered to %1.</source>
         <translation>Az üzenet továbbítódik a %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="339"/>
+        <location filename="../src/core/CoreChat.cpp" line="340"/>
         <source>Nobody has received the message.</source>
         <translation>Senki nem kapta meg az üzenetet.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="458"/>
+        <location filename="../src/core/CoreChat.cpp" line="459"/>
         <source>%1 saved chats are added to history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="514"/>
+        <location filename="../src/core/CoreChat.cpp" line="515"/>
         <source>Offline messages sent to %2.</source>
         <translation>Kapcsolat nékül üzenetek küldése %2 -nak.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="595"/>
+        <location filename="../src/core/CoreChat.cpp" line="596"/>
         <source>%1 You have buzzed %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="411"/>
+        <location filename="../src/core/CoreChat.cpp" line="412"/>
         <source>%1 %2 cannot be informed that you have left the group.</source>
         <translation>%1 %2 nem lehet tájékoztatni, hogy már elhagytad a csoportot.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="391"/>
+        <location filename="../src/core/Core.cpp" line="392"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1 Hálózati interfész %2 nem elérhető.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="53"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="54"/>
         <source>%1 Unable to start file transfer server: bind address/port failed.</source>
         <translation>%1 Nem sikerült elindítani a fájlátvitel szervert: kötelező cím/port nem sikerült.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="90"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="91"/>
         <source>%1 Unable to download %2 from %3: user is offline.</source>
         <translation>%1 Nem sikerült letölteni a%2-t a%3-ból: felhasználó nem csatlakozik.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="106"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="107"/>
         <source>%1 Unable to download %2 from %3: folder %4 cannot be created.</source>
         <translation>%1 Nem sikerült letölteni a %2 a %3-ból: mappa%4 nem lehet létrehozni.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="118"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="119"/>
         <source>%1 Downloading %2 from %3.</source>
         <translation>%1 letöltése %2 a %3-től.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="139"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="140"/>
         <source>from</source>
         <translation>ból</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="139"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="140"/>
         <source>to</source>
         <translation>nak</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="181"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="182"/>
         <source>Open</source>
         <translation>Megnyitás</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="246"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="247"/>
         <source>%1 Unable to send %2 to %3: user is offline.</source>
         <translation>%1 Nem sikerült elküldeni %2 -t a %3-nak: felhasználó nem kapcsolódik.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="223"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="224"/>
         <source>%1 Unable to send %2. File transfer is disabled.</source>
         <translation>%1 Nem sikerült elküldeni:%2. Fájlátvitel le van tiltva.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="138"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="139"/>
         <source>Upload</source>
         <translation>Feltöltés</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="138"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="139"/>
         <source>Download</source>
         <translation>Letöltés</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="186"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="187"/>
         <source>folder</source>
         <translation>mappa</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="255"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="256"/>
         <source>%1 %2: file not found.</source>
         <translation>%1 %2: a fájl nem található.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="269"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="270"/>
         <source>%1 %2 is a folder. You can share it.</source>
         <translation>%1 %2 egy mappát. Meg tudod osztani.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="294"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="295"/>
         <source>%1 Unable to send %2: %3 is not connected.</source>
         <translation>%1 Nem sikerült elküldeni%2: %3 nincs csatlakoztatva.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="288"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="289"/>
         <source>%1 You send %2 to %3.</source>
         <translation>%1 Elküldöd %2-t %3-nek.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="320"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="321"/>
         <source>%1 You have refused to download %2 from %3.</source>
         <translation>%1 Visszautasítottad a letöltést %2 %3-tól.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="348"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="349"/>
         <source>%1 You have refused to download folder %2 from %3.</source>
         <translation>%1 Visszautasítottad amappa letöltést %2 %3-tól.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="456"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="457"/>
         <source>%1 is added to file sharing (%2)</source>
         <translation>%1 hozzáadva a fájlmegosztáshoz (%2)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="450"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="451"/>
         <source>%1 is added to file sharing with only %2 of %3 files (%4 limit reached)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="458"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="459"/>
         <source>%1 is added to file sharing with %2 files, %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="489"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="490"/>
         <source>All paths are removed from file sharing</source>
         <translation>Minden elérési út eltávolítása a fájlmegosztásból</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="510"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="511"/>
         <source>%1 is removed from file sharing</source>
         <translation>%1 kivesszük a fájlmegosztásból</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="512"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="513"/>
         <source>%1 is removed from file sharing with %2 files</source>
         <translation>%1 eltávolítjuk a fájlmegosztásból %2 fájlt</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="577"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="578"/>
         <source>%1 You are about to send %2 to %3. Checking folder...</source>
         <translation>%1 Ön körülbelöl köldött %2 a %3-nak. Mappa ellenőrzése...</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="615"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="616"/>
         <source>%1 Unable to send folder %2</source>
         <translation>%1 Nem sikerült elküldeni a mappát %2</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="620"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="621"/>
         <source>the folder is empty.</source>
         <translation>A mappa üres.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="627"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="628"/>
         <source>file transfer is not working.</source>
         <translation>fájlátvitel nem működik.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="635"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="636"/>
         <source>%1 is not connected.</source>
         <translation>%1 nem csatlakozik.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="649"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="650"/>
         <source>internal error.</source>
         <translation>belső hiba.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="654"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="655"/>
         <source>%1 You send folder %2 to %3.</source>
         <translation>%1 Elküldöd a mappát %2-t %3-nek.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="162"/>
+        <location filename="../src/core/CoreParser.cpp" line="163"/>
         <source>%1 %2 has refused to download %3.</source>
         <translation>%1 %2 nem volt hajlandó letölteni %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="185"/>
+        <location filename="../src/core/CoreParser.cpp" line="186"/>
         <source>%1 %2 is sending to you the file: %3.</source>
         <translation>%1 %2 küldi neked a fájlt: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="377"/>
+        <location filename="../src/core/CoreParser.cpp" line="378"/>
         <source>%1 has removed shared files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="379"/>
+        <location filename="../src/core/CoreParser.cpp" line="380"/>
         <source>%1 has shared %2 files</source>
         <translation type="unfinished">
 
@@ -474,22 +474,22 @@
 %1 megosztott %2 fájlok</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="548"/>
+        <location filename="../src/core/CoreParser.cpp" line="549"/>
         <source>%1 %2 is buzzing you.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="409"/>
+        <location filename="../src/core/CoreParser.cpp" line="410"/>
         <source>%1 %2 has refused to download folder %3.</source>
         <translation>%1 %2 nem volt hajlandó letölteni mappát %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="419"/>
+        <location filename="../src/core/CoreParser.cpp" line="420"/>
         <source>unknown folder</source>
         <translation>ismeretlen mappa</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="428"/>
+        <location filename="../src/core/CoreParser.cpp" line="429"/>
         <source>%1 %2 is sending to you the folder: %3.</source>
         <translation>%1 %2 küldi neked a mappát: %3.</translation>
     </message>
@@ -552,37 +552,37 @@
 <context>
     <name>File</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="291"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="292"/>
         <source>Audio</source>
         <translation>Hang</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="292"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="293"/>
         <source>Video</source>
         <translation>Videó</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="293"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="294"/>
         <source>Image</source>
         <translation>Kép</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="294"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="295"/>
         <source>Document</source>
         <translation>Dokumentum</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="295"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="296"/>
         <source>Other</source>
         <translation>Egyéb</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="296"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="297"/>
         <source>Executable</source>
         <translation>Futtatható</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="297"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="298"/>
         <source>MacOSX</source>
         <translation>MacOSX</translation>
     </message>
@@ -654,72 +654,72 @@
 <context>
     <name>GuiAddUser</name>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="40"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="41"/>
         <source>Your parameters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="41"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="42"/>
         <source>IP Address</source>
         <translation type="unfinished">IP cím</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="42"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="43"/>
         <source>Port</source>
         <translation type="unfinished">Port</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="43"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="44"/>
         <source>Subnet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="51"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="52"/>
         <source>Comment</source>
         <translation>Megjegyzés</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="51"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="52"/>
         <source>Address</source>
         <translation>Cím</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="117"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="120"/>
         <source>Please insert a valid IP Address.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="127"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="130"/>
         <source>Please insert a valid Port or use the default one %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="157"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="160"/>
         <source>These IP Address and Port are already in list.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="214"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="217"/>
         <source>Please select an item in the list.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="61"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="62"/>
         <source>Remove user path</source>
         <translation>felhasználó útvonal eltávolítása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="35"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="36"/>
         <source>Add users</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="63"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="64"/>
         <source>Clear all</source>
         <translation>Az összes törlése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="239"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="242"/>
         <source>auto added</source>
         <translation>automatikusan hozzáadva</translation>
     </message>
@@ -833,241 +833,241 @@
 <context>
     <name>GuiChat</name>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="136"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="139"/>
         <source>Change font style</source>
         <translation>Betűtípus stílus változtatása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="137"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="140"/>
         <source>Change font color</source>
         <translation>Betűszín módosítása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="103"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="104"/>
         <source>Change background color</source>
         <translation>Háttérszín módosítása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="138"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="141"/>
         <source>Filter message</source>
         <translation>Üzenetek szűrése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="139"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="142"/>
         <source>Chat settings</source>
         <translation>Chat beállítások</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="140"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="143"/>
         <source>Spell checking</source>
         <translation>helyesírás-ellenőrzés</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="142"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="145"/>
         <source>Word completer</source>
         <translation>Szó kiegészítő</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="144"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="147"/>
         <source>Use Return key to send message</source>
         <translation>Használd a Return gombot az üzenet küldéshez</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="116"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="956"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="117"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="959"/>
         <source>Find text in chat</source>
         <translation>Szöveg keresése a beszélgetésben</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="148"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="151"/>
         <source>Send file</source>
         <translation>Fájl küldése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="149"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="152"/>
         <source>Send folder</source>
         <translation>Mappa küldése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="106"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="107"/>
         <source>Save chat</source>
         <translation>Chat mentése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="109"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="110"/>
         <source>Print...</source>
         <translation>Nyomtatás...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="257"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="260"/>
         <source>Open selected text as url</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="739"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="742"/>
         <source>Do you want to send %1 %2 to the members of this chat?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="854"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="857"/>
         <source>Spell checking is enabled</source>
         <translation>Helyesírás-ellenőrző engedélyezve</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="861"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="885"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="864"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="888"/>
         <source>There is not a valid dictionary</source>
         <translation>Érvénytelen szótár</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="878"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="881"/>
         <source>Word completer is enabled</source>
         <translation>Szó kiegészítő engedélyezve</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="880"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="883"/>
         <source>Word completer is disabled</source>
         <translation>Szó kiegészítő tiltása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="994"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="997"/>
         <source>%1 not found in chat.</source>
         <translation>%1 nem található a chaten.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="856"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="859"/>
         <source>Spell checking is disabled</source>
         <translation>helyesírás-ellenőrzés tiltva</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="113"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="114"/>
         <source>Clear messages</source>
         <translation>Üzenetek törlése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="196"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="199"/>
         <source>You are not connected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="204"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="207"/>
         <source>Send messages is disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="210"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="213"/>
         <source>Chat with all users is disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="216"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="219"/>
         <source>Private chat is disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="225"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="228"/>
         <source>You have left this chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="255"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="258"/>
         <source>Copy to clipboard</source>
         <translation>Másolja a vágólapra</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="253"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="256"/>
         <source>Select All</source>
         <translation>Mindet kiválaszt</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="287"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="290"/>
         <source>Show only messages in default chat</source>
         <translation>Csak az üzenetnetek mutasd az alapértelmezet chatben</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="330"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="333"/>
         <source>Last message %1</source>
         <translation>Utolsó üzenet %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="233"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="236"/>
         <source>Write a message to all connected user</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="119"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="120"/>
         <source>Restore the default font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="235"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="238"/>
         <source>Write a message to %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="447"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="450"/>
         <source>only the last %1 messages are shown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="631"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="634"/>
         <source>Please select a file to save the messages of the chat.</source>
         <translation>Válassz ki egy fájlt az üzenetek mentéséhez.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="645"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="648"/>
         <source>%1: save completed.</source>
         <translation>%1: mentés befejeződött.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="645"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="648"/>
         <source>Ok</source>
         <translation>Rendben</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="691"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="694"/>
         <source>Unable to save temporary file: %1</source>
         <translation>Nem lehet menteni az ideiglenes fájlt: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="740"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="743"/>
         <source>file</source>
         <translation>fájl</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="740"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="743"/>
         <source>files</source>
         <translation>fájlok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="741"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1015"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="744"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1018"/>
         <source>Yes</source>
         <translation>Igen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="741"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1015"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="744"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1018"/>
         <source>No</source>
         <translation>Nem</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="754"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="757"/>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
         <translation>Qt könyvtár az operációs rendszer nem támogatja a fogd és vidd fájlokat. Ki kell választani újra a fájlt a küldéshez.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="838"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="841"/>
         <source>Use key Return to send message</source>
         <translation>Használd az Enetr gombot az üzenet küldéshez</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="840"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="843"/>
         <source>Use key Return to make a carriage return</source>
         <translation>Használd az Enter gombot a kocsi visszához</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1015"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1018"/>
         <source>Do you want to restore the default font?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1075,37 +1075,37 @@
 <context>
     <name>GuiChatList</name>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="54"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="55"/>
         <source>Search chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="159"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="162"/>
         <source>Create new group chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="170"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="173"/>
         <source>Show</source>
         <translation>Mutasd</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="173"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="176"/>
         <source>Clear</source>
         <translation>Törlés</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="174"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="177"/>
         <source>Clear all chat messages</source>
         <translation>Összes Chat üzenet törlése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="179"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="182"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="154"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="157"/>
         <source>Please wait for two or more users</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1156,32 +1156,32 @@
         <translation>Mégsem</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateGroup.cpp" line="39"/>
+        <location filename="../src/desktop/GuiCreateGroup.cpp" line="40"/>
         <source>Users</source>
         <translation>Felhasználók</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateGroup.cpp" line="62"/>
+        <location filename="../src/desktop/GuiCreateGroup.cpp" line="65"/>
         <source>Edit group chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateGroup.cpp" line="68"/>
+        <location filename="../src/desktop/GuiCreateGroup.cpp" line="71"/>
         <source>Create new group chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateGroup.cpp" line="109"/>
+        <location filename="../src/desktop/GuiCreateGroup.cpp" line="112"/>
         <source>Please select two or more member for the group.</source>
         <translation>Válaszz kettő vagy több tagot a csoportból.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateGroup.cpp" line="117"/>
+        <location filename="../src/desktop/GuiCreateGroup.cpp" line="120"/>
         <source>Please insert a group name.</source>
         <translation>Add meg a csoport nevét.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateGroup.cpp" line="126"/>
+        <location filename="../src/desktop/GuiCreateGroup.cpp" line="129"/>
         <source>%1 already exists as group name or chat name.
 Please select a different name.</source>
         <translation>%1 Már létezik a csoport neve, vagy chat-név.
@@ -1191,38 +1191,38 @@ Kérjük, válassz egy másik nevet.</translation>
 <context>
     <name>GuiEditVCard</name>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="37"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="38"/>
         <source>Edit your profile</source>
         <translation>Profil szerkesztése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="104"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="109"/>
         <source>%1 - Select your profile photo</source>
         <translation>%1 - Válassza ki a profilképét</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="105"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="110"/>
         <source>Images</source>
         <translation>Képek</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="117"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="122"/>
         <source>Unable to load image %1.</source>
         <translation>Nem sikerült betölteni a képet %1.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="117"/>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="148"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="122"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="153"/>
         <source>Ok</source>
         <translation>Rendben</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="157"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="162"/>
         <source>Please insert your nickname.</source>
         <translation>Kérem adja meg a becenevét.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="165"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="170"/>
         <source>The nickname &apos;%1&apos; is already in use by the user %2.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1230,32 +1230,32 @@ Kérjük, válassz egy másik nevet.</translation>
 <context>
     <name>GuiEmoticons</name>
     <message>
-        <location filename="../src/desktop/GuiEmoticons.cpp" line="48"/>
+        <location filename="../src/desktop/GuiEmoticons.cpp" line="49"/>
         <source>Recent</source>
         <translation>A legutóbbi</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEmoticons.cpp" line="50"/>
+        <location filename="../src/desktop/GuiEmoticons.cpp" line="51"/>
         <source>Smiley</source>
         <translation>Smiley</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEmoticons.cpp" line="52"/>
+        <location filename="../src/desktop/GuiEmoticons.cpp" line="53"/>
         <source>Objects</source>
         <translation>Tárgyak</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEmoticons.cpp" line="54"/>
+        <location filename="../src/desktop/GuiEmoticons.cpp" line="55"/>
         <source>Nature</source>
         <translation>Jelleg</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEmoticons.cpp" line="56"/>
+        <location filename="../src/desktop/GuiEmoticons.cpp" line="57"/>
         <source>Places</source>
         <translation>Helyek</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEmoticons.cpp" line="58"/>
+        <location filename="../src/desktop/GuiEmoticons.cpp" line="59"/>
         <source>Symbols</source>
         <translation>Jelek</translation>
     </message>
@@ -1281,28 +1281,28 @@ Kérjük, válassz egy másik nevet.</translation>
 <context>
     <name>GuiFileSharing</name>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="43"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="44"/>
         <source>File Sharing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="52"/>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="138"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="53"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="139"/>
         <source>Show the view tool bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="144"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="145"/>
         <source>Show my shared files</source>
         <translation type="unfinished">Megosztások ablak mutatása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="145"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="146"/>
         <source>Show the network shared files</source>
         <translation type="unfinished">Hálózati megosztások ablak mutatása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="263"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="264"/>
         <source>%1 has shared %2 files</source>
         <translation type="unfinished">
 
@@ -1336,17 +1336,17 @@ Kérjük, válassz egy másik nevet.</translation>
 %1 megosztott %2 fájlok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="155"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="156"/>
         <source>Show the bar of local file sharing</source>
         <translation type="unfinished">Mutasd a helyi fájlmegosztás sávot</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="146"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="147"/>
         <source>Show the ShareBox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="168"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="169"/>
         <source>Show the bar of network file sharing</source>
         <translation type="unfinished">Mutasd a hálózati fájlmegosztás sávot</translation>
     </message>
@@ -1354,57 +1354,57 @@ Kérjük, válassz egy másik nevet.</translation>
 <context>
     <name>GuiFloatingChat</name>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="47"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="48"/>
         <source>Show group menu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="50"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="51"/>
         <source>Show the bar of members</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="58"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="59"/>
         <source>Show the bar of chat</source>
         <translation>Mutasd az elválasztót a csevegésben</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="68"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="69"/>
         <source>Preset messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="78"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="79"/>
         <source>Show the preset messages panel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="81"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="82"/>
         <source>Save window&apos;s geometry</source>
         <translation type="unfinished">Ablak elrendezés mentése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="84"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="85"/>
         <source>Emoticons</source>
         <translation>Hangulatjelek</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="94"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="95"/>
         <source>Show the emoticon panel</source>
         <translation>Mutasd a hangulatjel panelt</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="191"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="192"/>
         <source>%1 has not read last messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="379"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="380"/>
         <source>The window geometry and state are saved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="143"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="144"/>
         <source>Chat with all connected users</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1412,37 +1412,37 @@ Kérjük, válassz egy másik nevet.</translation>
 <context>
     <name>GuiGroupList</name>
     <message>
-        <location filename="../src/desktop/GuiGroupList.cpp" line="52"/>
+        <location filename="../src/desktop/GuiGroupList.cpp" line="54"/>
         <source>Search group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiGroupList.cpp" line="62"/>
+        <location filename="../src/desktop/GuiGroupList.cpp" line="64"/>
         <source>Create new group chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiGroupList.cpp" line="65"/>
+        <location filename="../src/desktop/GuiGroupList.cpp" line="67"/>
         <source>Edit group chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiGroupList.cpp" line="68"/>
+        <location filename="../src/desktop/GuiGroupList.cpp" line="70"/>
         <source>Open chat</source>
         <translation>Csevegés indítása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiGroupList.cpp" line="71"/>
+        <location filename="../src/desktop/GuiGroupList.cpp" line="73"/>
         <source>Enable notifications</source>
         <translation>Értesítések engedélyezése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiGroupList.cpp" line="74"/>
+        <location filename="../src/desktop/GuiGroupList.cpp" line="76"/>
         <source>Disable notifications</source>
         <translation>Értesítések tiltása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiGroupList.cpp" line="176"/>
+        <location filename="../src/desktop/GuiGroupList.cpp" line="180"/>
         <source>Please wait for two or more users</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1450,27 +1450,27 @@ Kérjük, válassz egy másik nevet.</translation>
 <context>
     <name>GuiHome</name>
     <message>
-        <location filename="../src/desktop/GuiHome.cpp" line="92"/>
+        <location filename="../src/desktop/GuiHome.cpp" line="93"/>
         <source>Copy to clipboard</source>
         <translation>Másolja a vágólapra</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiHome.cpp" line="90"/>
+        <location filename="../src/desktop/GuiHome.cpp" line="91"/>
         <source>Select All</source>
         <translation>Mindet kiválaszt</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiHome.cpp" line="88"/>
+        <location filename="../src/desktop/GuiHome.cpp" line="89"/>
         <source>Change background color</source>
         <translation type="unfinished">Háttérszín módosítása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiHome.cpp" line="95"/>
+        <location filename="../src/desktop/GuiHome.cpp" line="96"/>
         <source>Print...</source>
         <translation>Nyomtatás...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiHome.cpp" line="102"/>
+        <location filename="../src/desktop/GuiHome.cpp" line="103"/>
         <source>Show the timestamp</source>
         <translation>Mutasd az időbélyeget</translation>
     </message>
@@ -1486,37 +1486,37 @@ Kérjük, válassz egy másik nevet.</translation>
 <context>
     <name>GuiLanguage</name>
     <message>
-        <location filename="../src/desktop/GuiLanguage.cpp" line="35"/>
+        <location filename="../src/desktop/GuiLanguage.cpp" line="36"/>
         <source>Select language</source>
         <translation>Nyelv választása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLanguage.cpp" line="40"/>
+        <location filename="../src/desktop/GuiLanguage.cpp" line="41"/>
         <source>Language</source>
         <translation>Nyelv</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLanguage.cpp" line="40"/>
+        <location filename="../src/desktop/GuiLanguage.cpp" line="41"/>
         <source>File</source>
         <translation>Fájl</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLanguage.cpp" line="52"/>
+        <location filename="../src/desktop/GuiLanguage.cpp" line="53"/>
         <source>For the latest language translations please visit the %1</source>
         <translation>A legújabb fordítások keresse fel a %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLanguage.cpp" line="53"/>
+        <location filename="../src/desktop/GuiLanguage.cpp" line="54"/>
         <source>official website</source>
         <translation>hivatalos honlap</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLanguage.cpp" line="96"/>
+        <location filename="../src/desktop/GuiLanguage.cpp" line="98"/>
         <source>Select a language folder</source>
         <translation>Válasszon nyelvi fájlt tartalmazó mappát</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLanguage.cpp" line="123"/>
+        <location filename="../src/desktop/GuiLanguage.cpp" line="125"/>
         <source>Language &apos;%1&apos;&apos; not found.</source>
         <translation>Nyelv &apos;%1&apos;&apos; nem található.</translation>
     </message>
@@ -1567,114 +1567,114 @@ Kérjük, válassz egy másik nevet.</translation>
 <context>
     <name>GuiLog</name>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="74"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="75"/>
         <source>Save log as</source>
         <translation>Naplózás mentése másként</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="91"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="92"/>
         <source>Search</source>
         <translation>Keresés</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="97"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="98"/>
         <source>keyword</source>
         <translation>kulcsszó</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="103"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="104"/>
         <source>Find</source>
         <translation>Talál</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="108"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="109"/>
         <source>Case sensitive</source>
         <translation>Kis-nagybetű érzékeny</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="113"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="114"/>
         <source>Whole word</source>
         <translation>Egész szót</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="78"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="79"/>
         <source>Log to file</source>
         <translation>Naplózás fájlba</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="293"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="294"/>
         <source>Select All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="295"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="296"/>
         <source>Copy to clipboard</source>
         <translation type="unfinished">Másolja a vágólapra</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="298"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="299"/>
         <source>Block scrolling</source>
         <translation>Görgetés blokkolása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="134"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="135"/>
         <source>Please select a file to save the log.</source>
         <translation>Válasszon ki egy fájlt a napló mentéséhez.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="35"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="36"/>
         <source>Log</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="52"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="53"/>
         <source>Show log file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="55"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="56"/>
         <source>Show the log tool bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="64"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="65"/>
         <source>Log menu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="143"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="144"/>
         <source>Unable to save log in the file: %1</source>
         <translation>Nem lehet menteni a naplót a fájlba: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="143"/>
-        <location filename="../src/desktop/GuiLog.cpp" line="170"/>
-        <location filename="../src/desktop/GuiLog.cpp" line="217"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="144"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="171"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="218"/>
         <source>Ok</source>
         <translation>Rendben</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="169"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="170"/>
         <source>%1: save log completed.</source>
         <translation>%1: naplómentése befejeződött.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="170"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="171"/>
         <source>Open file</source>
         <translation>Fájl megnyitása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="170"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="171"/>
         <source>Open folder</source>
         <translation>Mappa megnyitása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="217"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="218"/>
         <source>%1 not found</source>
         <translation>%1 nem található</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="313"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="314"/>
         <source>%1: log not found.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1682,1141 +1682,1201 @@ Kérjük, válassz egy másik nevet.</translation>
 <context>
     <name>GuiMain</name>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="96"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="97"/>
         <source>Show the main tool bar</source>
         <translation>Fő eszköztár mutatása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2825"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2826"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2827"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2828"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2829"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2830"/>
         <source>offline</source>
         <translation>Kapcsolaton kívül</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="343"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="367"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="384"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1787"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1860"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1867"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1931"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2257"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2292"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2429"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2642"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2665"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2693"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2964"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3120"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="344"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="368"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="385"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1796"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1869"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1876"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1940"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2266"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2301"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2438"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2651"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2674"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2702"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2966"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3122"/>
         <source>Yes</source>
         <translation>Igen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="343"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="367"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="384"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1787"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1860"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1867"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1931"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2257"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2292"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2429"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2642"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2665"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2693"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2964"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3120"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="344"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="368"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="385"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1796"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1869"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1876"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1940"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2266"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2301"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2438"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2651"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2674"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2702"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2966"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3122"/>
         <source>No</source>
         <translation>Nem</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="362"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="363"/>
         <source>&lt;b&gt;Settings can not be saved&lt;/b&gt;. Path:</source>
         <translation>&lt;b&gt;A beállítások nem menthetők&lt;/b&gt;. Útvonal:</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="364"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="381"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="365"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="382"/>
         <source>&lt;b&gt;is not writable&lt;/b&gt; by user:</source>
         <translation>&lt;b&gt;nem írható&lt;/b&gt; felhasználó:</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="366"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="383"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="367"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="384"/>
         <source>Do you want to close anyway?</source>
         <translation>Biztos be szeretné zárni?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="448"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="449"/>
         <source>No new message available</source>
         <translation>Nincs új üzenet</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="578"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="579"/>
         <source>Secure Lan Messenger</source>
         <translation>Biztonságos Lan Messenger</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="579"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="580"/>
         <source>Version</source>
         <translation>Változat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="581"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="582"/>
         <source>for</source>
         <translation>mert</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="583"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="584"/>
         <source>developed by</source>
         <translation>fejlesztette</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="592"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="593"/>
         <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br /&gt;it under the terms of the GNU General Public License as published&lt;br /&gt;by the Free Software Foundation, either version 3 of the License&lt;br /&gt;or (at your option) any later version.&lt;br /&gt;&lt;br /&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br /&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br /&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br /&gt;See the GNU General Public License for more details.</source>
         <translation>BeeBEEP egy szabad szoftver: terjeszthető és / vagy módosítható&lt;br /&gt;a GNU General Public License alatt&lt;br /&gt;a Free Software Foundation, vagy 3-as verzióját a licenc&lt;br /&gt;vagy (tetszőleges) későbbi változata szerint.&lt;br /&gt;&lt;br /&gt;BeeBEEP abban a reményben terjesztjük, hogy hasznos lesz,&lt;br /&gt;de GARANCIA NÉLKÜL; anélkül, hogy a vélelmezett garancia&lt;br /&gt;A KÖZREADÁSRA vagy ADOTT CÉLRA.&lt;br /&gt;Lásd a GNU General Public License-et további részletekért.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="826"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="833"/>
         <source>Download folder...</source>
         <translation>Letöltés mappa ...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="840"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="847"/>
         <source>Select beep file...</source>
         <translation>Hangjezlés fájl választása ...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="841"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="848"/>
         <source>Play beep</source>
         <translation>Hangjelzés lejátszása </translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="781"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="782"/>
         <source>Clear all read messages on closing window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="662"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="663"/>
         <source>Settings</source>
         <translation>Beállítások</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="804"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="811"/>
         <source>If a file already exists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="926"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="934"/>
         <source>Show only the online users</source>
         <translation>Csak a bejelentkezett felhasználók megjelenítése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="811"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="818"/>
         <source>Generate automatic filename</source>
         <translation>Automatikus fájlnév generálása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="793"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="800"/>
         <source>Enable file transfer</source>
         <translation>File átvitel engedéjezése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2692"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2701"/>
         <source>Do you want to leave the chat with %1?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2698"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2707"/>
         <source>Unable to leave the chat with %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2804"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2806"/>
         <source>Use HTML tags</source>
         <translation>A címkék használata</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2809"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2811"/>
         <source>Use clickable links</source>
         <translation>Kattintható hivatkozások használata</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2774"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2783"/>
         <source>Show messages grouped by user</source>
         <translation>Üzenetek megjelenítése felhasználóként csoportosítva</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="768"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="769"/>
         <source>Save messages</source>
         <translation>Üzenetek mentése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="966"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="974"/>
         <source>Status</source>
         <translation>Állapot</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="642"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="643"/>
         <source>Plugins</source>
         <translation>Beépülők</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="990"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="998"/>
         <source>Tip of the day</source>
         <translation>A nap tippje</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="991"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="999"/>
         <source>Fact of the day</source>
         <translation>A nap igazsága</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="994"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1002"/>
         <source>Show %1&apos;s license...</source>
         <translation>%1 felhasználási feltételek...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="998"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1006"/>
         <source>Open %1 official website...</source>
         <translation>Hivatalos %1 honlap megnyitása...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="999"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1007"/>
         <source>Check for new version...</source>
         <translation>Újab verzió keresése...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1000"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1008"/>
         <source>Download plugins...</source>
         <translation>Kiegészítők letöltése...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1001"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1009"/>
         <source>Help online...</source>
         <translation>Online segítség...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="722"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1063"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="723"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1071"/>
         <source>Users</source>
         <translation>Felhasználók</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="611"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1021"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="612"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1029"/>
         <source>Quit</source>
         <translation>Kilépés</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="616"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="617"/>
         <source>Edit your profile...</source>
         <translation>Profil szerkesztése...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="619"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="620"/>
         <source>About %1...</source>
         <translation>%1-ről...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="646"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="647"/>
         <source>Main</source>
         <translation>Főmenű</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="931"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="939"/>
         <source>Show the user&apos;s picture</source>
         <translation>Mutasd a felhasználó képét</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="659"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="765"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="660"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="766"/>
         <source>Chat</source>
         <translation>Beszélgetés</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="868"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="876"/>
         <source>Always stay on top</source>
         <translation>Mindig maradjon a felül</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2769"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2778"/>
         <source>Show the timestamp</source>
         <translation>Mutasd az időbélyeget</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1420"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1429"/>
         <source>Show only last %1 messages</source>
         <translation>Csak az utolsó %1 üzenetek</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="821"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="828"/>
         <source>Prompt before downloading file</source>
         <translation>Kérdés fájl letöltés előtt</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="888"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="896"/>
         <source>Options</source>
         <translation>Beállitások</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="936"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="944"/>
         <source>Show the user&apos;s vCard on right click</source>
         <translation>Mutasd a felhasználó névegyét ( jobb klikk a névre)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="379"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="380"/>
         <source>&lt;b&gt;Chat messages can not be saved&lt;/b&gt;. Path:</source>
         <translation>&lt;b&gt;Csevegő üzeneteket nem lehet menteni &lt;/b&gt;. Útvonal:</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="648"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="649"/>
         <source>Open your resource folder</source>
         <translation>Nyissa meg a forrás mappát</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="649"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="650"/>
         <source>Open your data folder</source>
         <translation>Progmam mappa megnyitása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2757"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2766"/>
         <source>Use RTL mode to show text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="872"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="880"/>
         <source>Use native file dialogs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="814"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="821"/>
         <source>Ask me</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="835"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="842"/>
         <source>Enable Buzz sound</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="890"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="898"/>
         <source>Sort users in ascending order</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="895"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="903"/>
         <source>Sorting mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="899"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="907"/>
         <source>Default mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="905"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="913"/>
         <source>By user name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="911"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="919"/>
         <source>By user status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="917"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="925"/>
         <source>By unread messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="941"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="949"/>
         <source>Show status color in background</source>
         <translation>Mutasd az állapot színét a háttérben</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="953"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="961"/>
         <source>Change size of the user&apos;s picture</source>
         <translation>A felhasználó kép méretének változtatása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="975"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="983"/>
         <source>Recently used</source>
         <translation>Legutóbb használt</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="979"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="987"/>
         <source>Change your status description...</source>
         <translation>Állapot módosítása...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="980"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="988"/>
         <source>Clear all status descriptions</source>
         <translation>Törölje az összes állapot leírásait</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="626"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="627"/>
         <source>Show new message</source>
         <translation>Mutasd az új üzenetet</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="989"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="997"/>
         <source>?</source>
         <translation>Súgó</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="995"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1003"/>
         <source>Qt Library...</source>
         <translation>Qt könyvtár...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1003"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1011"/>
         <source>Like %1 on Facebook</source>
         <translation>Lájkold a %1-t a Facebook-on</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2607"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2626"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2616"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2635"/>
         <source>%1 removed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2660"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2669"/>
         <source>Do you want to clear messages with %1?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2764"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2773"/>
         <source>Show the chat in compact view mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2963"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2965"/>
         <source>Do you want to delete user %1?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3119"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3121"/>
         <source>Do you want to clear all saved status descriptions?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3427"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3429"/>
         <source>New file from %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3446"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3448"/>
         <source>%1 is buzzing you!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1010"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1018"/>
         <source>Donate for %1</source>
         <translation>Támogasd a %1-t</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1014"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1022"/>
         <source>Show</source>
         <translation>Mutasd</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="700"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="701"/>
         <source>Close button minimize to tray icon</source>
         <translation>Bezárás gomb minimalizálja ikonként a tálcára</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="704"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="705"/>
         <source>Escape key minimize to tray icon</source>
         <translation>Esc gomb minimalizálja ikonként a tálcára</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="850"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="857"/>
         <source>Show only message notifications</source>
         <translation>Csak az értesítések megjelenítése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="854"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="861"/>
         <source>Show chat message preview</source>
         <translation>Mutasd a chat üzenet előnézetét</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1073"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1081"/>
         <source>Groups</source>
         <translation>Csoportok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1068"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1076"/>
         <source>Chats</source>
         <translation>Beszélgetések</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1081"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1089"/>
         <source>File Transfers</source>
         <translation>File átvitel</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="290"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="291"/>
         <source>connected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="797"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="804"/>
         <source>Enable file sharing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="749"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="750"/>
         <source>Workgroups</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="342"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="343"/>
         <source>Do you want to quit %1?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="605"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="606"/>
         <source>Search users</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="608"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="609"/>
         <source>Configure network...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="668"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="669"/>
         <source>Prompts for change user</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="787"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="794"/>
         <source>Blocked chats</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="864"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="871"/>
         <source>Shortcuts</source>
         <translation type="unfinished">Parancsikon</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="865"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="872"/>
         <source>Select language</source>
         <translation type="unfinished">Nyelv választása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="786"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="793"/>
         <source>Dictionary</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="726"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="727"/>
         <source>Recognize users</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="735"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="736"/>
         <source>By account name and domain name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="740"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="741"/>
         <source>By account name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="730"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="731"/>
         <source>default</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="730"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="731"/>
         <source>By nickname</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="755"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="756"/>
         <source>Save groups</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="846"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="853"/>
         <source>Enable tray icon notifications</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="858"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="865"/>
         <source>Show file notifications</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="877"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="873"/>
+        <source>Select icon theme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="791"/>
+        <source>Select emoticon theme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="885"/>
         <source>Start %1 automatically</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1053"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1061"/>
         <source>Right click to open menu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1205"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1213"/>
         <source>Please save the network password in the next dialog.</source>
         <translation>Őrizze meg a hálózati jelszót a következő párbeszédablakban.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1227"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1235"/>
         <source>How many minutes of idle %1 can wait before changing status to away?</source>
         <translation>Hány perc üresjárat %1 kell,hogy  megváltoztassa a gépnél állapotot?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1271"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1279"/>
         <source>Please select the maximum number of messages to be showed</source>
         <translation>Kérjük, válassza ki a maximálisan megjelenítendő üzenetek számát</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1511"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1520"/>
         <source>New message arrived</source>
         <translation>Új üzenet érkezik</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1582"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1591"/>
         <source>%1 is writing...</source>
         <translation>%1 írása ...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1593"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1602"/>
         <source>Do you want to disconnect from %1 network?</source>
         <translation>Szeretne lecsatlakozni %1 hálózatból?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1626"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1635"/>
         <source>You are %1%2</source>
         <translation>Ön %1%2</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1638"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1647"/>
         <source>Please insert the new status description</source>
         <translation>Kérjük, irja be az új állapot leírását</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1688"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1697"/>
         <source>%1 - Select a file</source>
         <translation>%1 - Válassz ki egy fájlt</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1688"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1697"/>
         <source>or more</source>
         <translation>vagy több</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1707"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1716"/>
         <source>File transfer is not enabled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1713"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1722"/>
         <source>You are not connected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1730"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1739"/>
         <source>There is no user connected.</source>
         <translation>Nincs felhasználói csatlakoztatva.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1736"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1745"/>
         <source>Please select the user to whom you would like to send a file.</source>
         <translation>Kérjük válassza ki a felhasználót, akinek szeretne küldeni egy fájlt.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1745"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1754"/>
         <source>User not found.</source>
         <translation>Felhasználó nem található.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1767"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1916"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1776"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1925"/>
         <source>File transfer is disabled. You cannot download %1.</source>
         <translation>Fájlátvitel le van tiltva. Nem lehet letölteni %1.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1787"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1931"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1796"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1940"/>
         <source>Yes, and don&apos;t ask anymore</source>
         <translation>Igen, és nem kérnek többé</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1819"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1828"/>
         <source>%1 already exists. Please select a new filename.</source>
         <translation>Már létezik %1. Kérjük, válasszon egy új fájlnevet.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1858"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1867"/>
         <source>You cannot download all these files at once. Do you want to download the first %1 files of the list?</source>
         <translation>Nem lehet letölteni az ezeket a fájlokat egyszerre. Szeretné letölteni az első %1 fájl a listán?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1866"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1875"/>
         <source>Downloading %1 files is a hard duty. Maybe you have to wait a lot of minutes. Do yo want to continue?</source>
         <translation>A %1 fájl nagyméretű,a letöltése sokáig tarthat. Akarod folytatni?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1930"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1939"/>
         <source>Do you want to download folder %1 (%2 files) from %3?</source>
         <translation>Szeretné letölteni ezt a mappát %1 (%2 fájlok) %3-tól?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1971"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1980"/>
         <source>%1 - Select the download folder</source>
         <translation>%1 - Válassza ki a letöltés mappát</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2055"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2064"/>
         <source>Plugin Manager...</source>
         <translation> Beépülő modul kezelő...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2256"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2265"/>
         <source>Do you want to open the file %1?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2306"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2315"/>
         <source>Sound module is not working</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2343"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2352"/>
         <source>There is a chat with the same members: %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2571"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2580"/>
         <source>Your status description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3589"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3595"/>
+        <source>You are using the default icons.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="3601"/>
+        <source>You are using custom icons in folder %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="3602"/>
+        <source>Restore default icons</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="3596"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3602"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3611"/>
+        <source>Select the icon folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="3632"/>
+        <source>You are using the default emoticons.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="3633"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3639"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3648"/>
+        <source>Select the emoticon folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="3638"/>
+        <source>You are using custom emoticons in folder %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="3639"/>
+        <source>Restore default emoticons</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="3665"/>
         <source>You have to restart your connection to apply changes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="623"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2345"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="624"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2354"/>
         <source>Create new group chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3074"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3076"/>
         <source>at lunch</source>
         <translation>ebédel</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3083"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3085"/>
         <source>in a meeting</source>
         <translation>egy találkozón</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3261"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3263"/>
         <source>Select your dictionary path</source>
         <translation>Válassza ki a szótár elérési útvonalát</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3269"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3271"/>
         <source>Dictionary selected: %1</source>
         <translation>Szótár kiválasztva: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3271"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3273"/>
         <source>Unable to set dictionary: %1</source>
         <translation>Nem lehet beállítani a szótárt: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3393"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3395"/>
         <source>Window geometry and state saved</source>
         <translation>Ablak elrendezés és elhelyezés mentve</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3584"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3586"/>
         <source>%1 blocked chats</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="632"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="633"/>
         <source>Show the %1 log</source>
         <translation type="unfinished">%1 napló ablak mutatása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="635"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="636"/>
         <source>Make a screenshot</source>
         <translation type="unfinished">Képernyőképek ablak mutatása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1005"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1013"/>
         <source>Add +1 user to anonymous usage statistics</source>
         <translation>+1 felhasználó hozzáadása a névtelen felhasználói statisztikához</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="709"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="710"/>
         <source>Network</source>
         <translation>Hálózat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2057"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2066"/>
         <source>is a plugin developed by</source>
         <translation>van egy plugin fejlesztette</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1102"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2263"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2486"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1110"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2272"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2495"/>
         <source>Unable to open %1</source>
         <translation>Nem sikerült megnyitni %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="773"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="774"/>
         <source>Open chats in a single window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="696"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="697"/>
         <source>Prompt on quit when connected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="946"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="954"/>
         <source>Show the status description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="884"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="892"/>
         <source>Save window&apos;s geometry</source>
         <translation type="unfinished">Ablak elrendezés mentése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="672"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="673"/>
         <source>Prompts for network password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="676"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="677"/>
         <source>Show minimized</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="680"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="681"/>
         <source>Show only on system tray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="684"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="685"/>
         <source>Reset window geometry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="688"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="689"/>
         <source>Check for new version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="751"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="752"/>
         <source>Save users</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="281"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="282"/>
         <source>news</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="748"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="749"/>
         <source>Add users</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="777"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="778"/>
         <source>Raise chat window on new message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="760"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="761"/>
         <source>Set your status to away automatically</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="789"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="796"/>
         <source>File transfer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="828"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="835"/>
         <source>Sound</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="831"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="838"/>
         <source>Enable BEEP alert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="843"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="850"/>
         <source>System tray icon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1058"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1066"/>
         <source>Activities</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1102"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2263"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2486"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3589"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1110"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2272"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2495"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3665"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3670"/>
         <source>Ok</source>
         <translation>Rendben</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1491"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1503"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1500"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1512"/>
         <source>to all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1493"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1505"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1502"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1514"/>
         <source>to</source>
         <translation type="unfinished">nak</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1495"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1507"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1504"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1516"/>
         <source>to you</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1501"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1510"/>
         <source>New message from</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1884"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1893"/>
         <source>Downloading %1 files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2078"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2087"/>
         <source>Start the new application to copy file and folders by Marco Mastroddi</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2281"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2290"/>
         <source>Sound files (*.wav)</source>
         <translation>Hangfájlok (* .wav)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2292"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2301"/>
         <source>Sound is not enabled on a new message. Do you want to enable it?</source>
         <translation>Hang nincs engedélyezve új üzenet érkezésekor. Szeretné bekapcsolni?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2311"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2320"/>
         <source>Sound file not found</source>
         <translation>Hang fájl nem található</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2302"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2311"/>
         <source>The default BEEP will be used</source>
         <translation>Az alapértelmezett sípolás használva</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2382"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2391"/>
         <source>Now %1 will start on windows boot.</source>
         <translation>Most %1 betöltődik a Windows indításakor.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2384"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2391"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2393"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2400"/>
         <source>Unable to add this key in the registry: permission denied.</source>
         <translation>Nem sikerült hozzáadni ezt a kulcsot a registry-ben: nem megfelelő jogosultság.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2389"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2398"/>
         <source>%1 will not start on windows boot.</source>
         <translation>%1 nem indul el Windows bootolásakor.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2429"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2438"/>
         <source>Do you want to delete this saved chat?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2453"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2462"/>
         <source>Please select a chat you would like to link the saved text.</source>
         <translation>
 Válasszon ki egy beszélgetést, ha szeretné linkelni az elmentett szöveget.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2462"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2471"/>
         <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br /&gt;What do you want to do with the selected saved text?</source>
         <translation>A kiválasztott &apos;%1&apos;beszélgetés szövege  már el van mentve.&lt;br /&gt;Mit szeretne tenni a kiválasztott mentendő szöveggel?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="808"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2464"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="815"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2473"/>
         <source>Overwrite</source>
         <translation>Átír</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="629"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="630"/>
         <source>Show file sharing window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="665"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="666"/>
         <source>On start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="693"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="694"/>
         <source>On close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1078"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1086"/>
         <source>Chat histories</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2397"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2406"/>
         <source>Starting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2464"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2473"/>
         <source>Add in the head</source>
         <translation>Add hozzá a fejben</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2641"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2650"/>
         <source>All the members of this chat are not online. The changes may not be permanent. Do you wish to continue?</source>
         <translation>A csevegés minden tagja nem elérhető. A változások nem tartósak. Kívánja folytatni?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2785"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2794"/>
         <source>Show your name instead of &apos;You&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2792"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2801"/>
         <source>Show emoticons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2797"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="786"/>
         <source>Use font emoticons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2816"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2818"/>
         <source>Restore default font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2830"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2832"/>
         <source>inactive</source>
         <translation>tétlen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2850"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2852"/>
         <source>disabled</source>
         <translation>Letiltva</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2857"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2859"/>
         <source>active</source>
         <translation>aktív</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2930"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2932"/>
         <source>%1 is online</source>
         <translation>%1 elérhető</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2932"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2934"/>
         <source>%1 is offline</source>
         <translation>%1 nem elérhető</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2944"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2946"/>
         <source>Please select the new size of the user picture</source>
         <translation>Kérjük, válassza ki a felhasználó kép új méretét</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1905"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2345"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2464"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1914"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2354"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2473"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3596"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3602"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3633"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3639"/>
         <source>Cancel</source>
         <translation>Mégsem</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1089"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1097"/>
         <source>Show the file transfer panel</source>
         <translation>Fájl átvitel panel mutatása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1786"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1795"/>
         <source>Do you want to download %1 (%2) from %3?</source>
         <translation>Szeretné letölteni %1 (%2) %3?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1899"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1908"/>
         <source>File is not available for download.</source>
         <translation>A fájl nem tölthető le.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1901"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1910"/>
         <source>%1 is not connected.</source>
         <translation>%1 nem csatlakozik.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1902"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1911"/>
         <source>Please reload the list of shared files.</source>
         <translation>Töltse be újra a megosztott fájlok listáját.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1905"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1914"/>
         <source>Reload file list</source>
         <translation>Fájl lista újratöltése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2656"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2665"/>
         <source>Chat with %1 is empty.</source>
         <translation>Csevegj %1-vel üres.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2663"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2691"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2672"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2700"/>
         <source>Yes and delete history</source>
         <translation>Igen, és törölje előzményeket</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2725"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2734"/>
         <source>Default language is restored.</source>
         <translation>Alapértelmezett nyelv visszaállítva.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2727"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2736"/>
         <source>New language &apos;%1&apos; is selected.</source>
         <translation>Új nyelv &apos;%1&apos; kiválasztva.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2730"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2739"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3670"/>
         <source>You must restart %1 to apply these changes.</source>
         <translation>Újra kell indítani %1 hogy,alkalmazni lehessen ezeket a módosításokat.</translation>
     </message>
@@ -2824,32 +2884,32 @@ Válasszon ki egy beszélgetést, ha szeretné linkelni az elmentett szöveget.<
 <context>
     <name>GuiMessageEdit</name>
     <message>
-        <location filename="../src/desktop/GuiMessageEdit.cpp" line="369"/>
+        <location filename="../src/desktop/GuiMessageEdit.cpp" line="370"/>
         <source>Undo</source>
         <translation>Visszavonás</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMessageEdit.cpp" line="371"/>
+        <location filename="../src/desktop/GuiMessageEdit.cpp" line="372"/>
         <source>Redo</source>
         <translation>Újra</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMessageEdit.cpp" line="374"/>
+        <location filename="../src/desktop/GuiMessageEdit.cpp" line="375"/>
         <source>Cut</source>
         <translation>Kivág</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMessageEdit.cpp" line="375"/>
+        <location filename="../src/desktop/GuiMessageEdit.cpp" line="376"/>
         <source>Copy</source>
         <translation>Beilleszt</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMessageEdit.cpp" line="377"/>
+        <location filename="../src/desktop/GuiMessageEdit.cpp" line="378"/>
         <source>Paste</source>
         <translation>Másol</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMessageEdit.cpp" line="380"/>
+        <location filename="../src/desktop/GuiMessageEdit.cpp" line="381"/>
         <source>Select All</source>
         <translation>Mindent kiválaszt</translation>
     </message>
@@ -2857,34 +2917,34 @@ Válasszon ki egy beszélgetést, ha szeretné linkelni az elmentett szöveget.<
 <context>
     <name>GuiNetwork</name>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="36"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="37"/>
         <source>Network</source>
         <translation type="unfinished">Hálózat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="55"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="56"/>
         <source>Unknown address</source>
         <translation type="unfinished">Ismeretlen cím</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="63"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="64"/>
         <source>File is empty</source>
         <translation type="unfinished">Fájl üres</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="105"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="106"/>
         <source>Warning</source>
         <translation type="unfinished">Figyelem</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="106"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="107"/>
         <source>You have inserted an invalid host address:
 %1 is removed from the list.</source>
         <translation type="unfinished">Behelyezett egy érvénytelen gazdacímet:
 %1 eltávolítva a listáról.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="106"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="107"/>
         <source>Ok</source>
         <translation type="unfinished">Rendben</translation>
     </message>
@@ -2985,62 +3045,62 @@ Válasszon ki egy beszélgetést, ha szeretné linkelni az elmentett szöveget.<
         <translation>Bezárás</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPluginManager.cpp" line="36"/>
+        <location filename="../src/desktop/GuiPluginManager.cpp" line="37"/>
         <source>Plugin Manager - %1</source>
         <translation> Beépülő modul kezelő - %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPluginManager.cpp" line="43"/>
+        <location filename="../src/desktop/GuiPluginManager.cpp" line="44"/>
         <source>Plugin</source>
         <translation>Beépülő modul</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPluginManager.cpp" line="43"/>
+        <location filename="../src/desktop/GuiPluginManager.cpp" line="44"/>
         <source>Version</source>
         <translation>Változat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPluginManager.cpp" line="43"/>
+        <location filename="../src/desktop/GuiPluginManager.cpp" line="44"/>
         <source>Author</source>
         <translation>Szerző</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPluginManager.cpp" line="98"/>
+        <location filename="../src/desktop/GuiPluginManager.cpp" line="101"/>
         <source>Disable %1</source>
         <translation>Letiltja %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPluginManager.cpp" line="98"/>
+        <location filename="../src/desktop/GuiPluginManager.cpp" line="101"/>
         <source>Enable %1</source>
         <translation>Engedélyezve %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPluginManager.cpp" line="109"/>
+        <location filename="../src/desktop/GuiPluginManager.cpp" line="112"/>
         <source>%1 is enabled</source>
         <translation>%1 engedélyezve</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPluginManager.cpp" line="109"/>
+        <location filename="../src/desktop/GuiPluginManager.cpp" line="112"/>
         <source>%1 is disabled</source>
         <translation>%1 le van tiltva</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPluginManager.cpp" line="131"/>
+        <location filename="../src/desktop/GuiPluginManager.cpp" line="134"/>
         <source>Please select a plugin in the list.</source>
         <translation>Kérjük, válasszon egy kiegészítőt a listán.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPluginManager.cpp" line="154"/>
+        <location filename="../src/desktop/GuiPluginManager.cpp" line="157"/>
         <source>Text Markers</source>
         <translation>Szövegjelölők</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPluginManager.cpp" line="175"/>
+        <location filename="../src/desktop/GuiPluginManager.cpp" line="178"/>
         <source>%1 - Select the plugin folder</source>
         <translation>%1 - Válassza ki a bővítmény mappát</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPluginManager.cpp" line="191"/>
+        <location filename="../src/desktop/GuiPluginManager.cpp" line="194"/>
         <source>Folder %1 not found.</source>
         <translation>Mappa %1 nem található.</translation>
     </message>
@@ -3048,59 +3108,59 @@ Válasszon ki egy beszélgetést, ha szeretné linkelni az elmentett szöveget.<
 <context>
     <name>GuiPresetMessageList</name>
     <message>
-        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="44"/>
+        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="45"/>
         <source>New</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="45"/>
+        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="46"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="46"/>
+        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="47"/>
         <source>Rename</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="47"/>
+        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="48"/>
         <source>Delete</source>
         <translation type="unfinished">Törlés</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="49"/>
+        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="50"/>
         <source>Right click on panel to create a new preset message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="141"/>
-        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="145"/>
+        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="142"/>
+        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="146"/>
         <source>Please insert your new preset message.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="161"/>
-        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="165"/>
+        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="162"/>
+        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="166"/>
         <source>Edit your preset message.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="180"/>
+        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="181"/>
         <source>Edit the name of your preset message.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="194"/>
+        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="195"/>
         <source>Do you want to delete this preset?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="195"/>
+        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="196"/>
         <source>Yes</source>
         <translation type="unfinished">Igen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="195"/>
+        <location filename="../src/desktop/GuiPresetMessageList.cpp" line="196"/>
         <source>No</source>
         <translation type="unfinished">Nem</translation>
     </message>
@@ -3108,32 +3168,32 @@ Válasszon ki egy beszélgetést, ha szeretné linkelni az elmentett szöveget.<
 <context>
     <name>GuiRefusedChat</name>
     <message>
-        <location filename="../src/desktop/GuiRefusedChat.cpp" line="34"/>
+        <location filename="../src/desktop/GuiRefusedChat.cpp" line="35"/>
         <source>Blocked chats</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiRefusedChat.cpp" line="40"/>
+        <location filename="../src/desktop/GuiRefusedChat.cpp" line="41"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiRefusedChat.cpp" line="40"/>
+        <location filename="../src/desktop/GuiRefusedChat.cpp" line="41"/>
         <source>Blocked chat ID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiRefusedChat.cpp" line="58"/>
+        <location filename="../src/desktop/GuiRefusedChat.cpp" line="59"/>
         <source>Remove blocked chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiRefusedChat.cpp" line="60"/>
+        <location filename="../src/desktop/GuiRefusedChat.cpp" line="61"/>
         <source>Clear all</source>
         <translation type="unfinished">Az összes törlése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiRefusedChat.cpp" line="120"/>
+        <location filename="../src/desktop/GuiRefusedChat.cpp" line="121"/>
         <source>Please select an item in the list.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3159,43 +3219,43 @@ Válasszon ki egy beszélgetést, ha szeretné linkelni az elmentett szöveget.<
 <context>
     <name>GuiSavedChat</name>
     <message>
-        <location filename="../src/desktop/GuiSavedChat.cpp" line="64"/>
+        <location filename="../src/desktop/GuiSavedChat.cpp" line="65"/>
         <source>Empty</source>
         <translation>Üres</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiSavedChat.cpp" line="83"/>
-        <location filename="../src/desktop/GuiSavedChat.cpp" line="158"/>
+        <location filename="../src/desktop/GuiSavedChat.cpp" line="84"/>
+        <location filename="../src/desktop/GuiSavedChat.cpp" line="159"/>
         <source>Find text in chat</source>
         <translation type="unfinished">Szöveg keresése a beszélgetésben</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiSavedChat.cpp" line="88"/>
+        <location filename="../src/desktop/GuiSavedChat.cpp" line="89"/>
         <source>Copy to clipboard</source>
         <translation type="unfinished">Másolja a vágólapra</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiSavedChat.cpp" line="90"/>
+        <location filename="../src/desktop/GuiSavedChat.cpp" line="91"/>
         <source>Select All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiSavedChat.cpp" line="94"/>
+        <location filename="../src/desktop/GuiSavedChat.cpp" line="95"/>
         <source>Open selected text as url</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiSavedChat.cpp" line="97"/>
+        <location filename="../src/desktop/GuiSavedChat.cpp" line="98"/>
         <source>Print...</source>
         <translation type="unfinished">Nyomtatás...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiSavedChat.cpp" line="103"/>
+        <location filename="../src/desktop/GuiSavedChat.cpp" line="104"/>
         <source>Delete</source>
         <translation type="unfinished">Törlés</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiSavedChat.cpp" line="196"/>
+        <location filename="../src/desktop/GuiSavedChat.cpp" line="197"/>
         <source>%1 not found in chat.</source>
         <translation type="unfinished">%1 nem található a chaten.</translation>
     </message>
@@ -3203,32 +3263,32 @@ Válasszon ki egy beszélgetést, ha szeretné linkelni az elmentett szöveget.<
 <context>
     <name>GuiSavedChatList</name>
     <message>
-        <location filename="../src/desktop/GuiSavedChatList.cpp" line="55"/>
+        <location filename="../src/desktop/GuiSavedChatList.cpp" line="56"/>
         <source>Search saved chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiSavedChatList.cpp" line="89"/>
+        <location filename="../src/desktop/GuiSavedChatList.cpp" line="92"/>
         <source>Please select an item</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiSavedChatList.cpp" line="95"/>
+        <location filename="../src/desktop/GuiSavedChatList.cpp" line="98"/>
         <source>Show</source>
         <translation>Mutasd</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiSavedChatList.cpp" line="98"/>
+        <location filename="../src/desktop/GuiSavedChatList.cpp" line="101"/>
         <source>Link to chat</source>
         <translation>Hivatkozás a beszélgetéshez</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiSavedChatList.cpp" line="101"/>
+        <location filename="../src/desktop/GuiSavedChatList.cpp" line="104"/>
         <source>Delete</source>
         <translation>Törlés</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiSavedChatList.cpp" line="161"/>
+        <location filename="../src/desktop/GuiSavedChatList.cpp" line="164"/>
         <source>Click to view saved chat with %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3236,97 +3296,97 @@ Válasszon ki egy beszélgetést, ha szeretné linkelni az elmentett szöveget.<
 <context>
     <name>GuiScreenShot</name>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="34"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="35"/>
         <source>Make a Screenshot</source>
         <translation>Képernyőkép készítése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="43"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="44"/>
         <source>Show the bar of screenshot plugin</source>
         <translation type="unfinished">Mutasd a képernyőkép bővítmény sávot</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="58"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="59"/>
         <source>Delay</source>
         <translation>Késleltetés</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="59"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="60"/>
         <source>Delay screenshot for selected seconds</source>
         <translation>Képernyőkép rögzítés a beállított idő múlva</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="67"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="68"/>
         <source>s</source>
         <translation>s</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="75"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="76"/>
         <source>Hide this window</source>
         <translation>Ablak elrejtése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="76"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="77"/>
         <source>Hide this window before capture screenshot</source>
         <translation>Ablak elrejtése képernyőkép készítése előtt</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="87"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="88"/>
         <source>Enable high dpi</source>
         <translation>Engedélyezi a nagy felbontást</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="88"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="89"/>
         <source>Enable high dpi support to manage, for example, Apple Retina display</source>
         <translation>Lehetővé teszik a nagy felbontás támogatás kezelésére, például az Apple Retina kijelző</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="94"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="95"/>
         <source>Capture screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="95"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="96"/>
         <source>Send screenshot to a user</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="96"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="97"/>
         <source>Save screenshot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="97"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="98"/>
         <source>Delete screenshot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="122"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="123"/>
         <source>No screenshot available</source>
         <translation>Nincs elérhető képernyőkép</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="194"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="195"/>
         <source>/beesshot-%1.</source>
         <translation>/beesshot-%1.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="197"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="198"/>
         <source>Save As</source>
         <translation>Mentés másként</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="199"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="200"/>
         <source>%1 Files (*.%2)</source>
         <translation>%1 fájokl (*.%2)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="214"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="215"/>
         <source>/beesshottmp-%1.</source>
         <translation>/beesshottmp-%1.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="221"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="222"/>
         <source>Unable to save temporary file: %1</source>
         <translation>Nem lehet menteni az ideiglenes fájlt: %1</translation>
     </message>
@@ -3334,78 +3394,78 @@ Válasszon ki egy beszélgetést, ha szeretné linkelni az elmentett szöveget.<
 <context>
     <name>GuiShareBox</name>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="54"/>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="330"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="55"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="338"/>
         <source>ShareBox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="63"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="64"/>
         <source>Update your ShareBox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="64"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="65"/>
         <source>Create folder in your ShareBox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="65"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="66"/>
         <source>Show current folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="66"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="67"/>
         <source>Update ShareBox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="67"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="68"/>
         <source>Create folder in ShareBox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="113"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="121"/>
         <source>ShareBox path does not exist. Please select a valid folder.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="153"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="161"/>
         <source>Your ShareBox is disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="183"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="191"/>
         <source>ShareBox is not available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="281"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="289"/>
         <source>%1 - Select the ShareBox folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="320"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="328"/>
         <source>%1: access denied.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="330"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="338"/>
         <source>%1 &lt;b&gt;%2&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="330"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="338"/>
         <source>is unavailable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="452"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="460"/>
         <source>Please insert the new folder name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="458"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="466"/>
         <source>%1 already exists.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3413,17 +3473,17 @@ Válasszon ki egy beszélgetést, ha szeretné linkelni az elmentett szöveget.<
 <context>
     <name>GuiShareBoxFileInfoList</name>
     <message>
-        <location filename="../src/desktop/GuiShareBoxFileInfoList.cpp" line="40"/>
+        <location filename="../src/desktop/GuiShareBoxFileInfoList.cpp" line="41"/>
         <source>Shared folders and files</source>
         <translation type="unfinished">Megosztott mappák és fájlok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBoxFileInfoList.cpp" line="40"/>
+        <location filename="../src/desktop/GuiShareBoxFileInfoList.cpp" line="41"/>
         <source>Size</source>
         <translation type="unfinished">Méret</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBoxFileInfoList.cpp" line="40"/>
+        <location filename="../src/desktop/GuiShareBoxFileInfoList.cpp" line="41"/>
         <source>Last modified</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3454,139 +3514,139 @@ Válasszon ki egy beszélgetést, ha szeretné linkelni az elmentett szöveget.<
 <context>
     <name>GuiShareLocal</name>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="37"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="38"/>
         <source>Share your folders or files</source>
         <translation>Mappák vagy fájlok megosztása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="38"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="39"/>
         <source>max &lt;b&gt;%1&lt;/b&gt; files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="38"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="39"/>
         <source>disabled</source>
         <translation type="unfinished">Letiltva</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="47"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="48"/>
         <source>File</source>
         <translation>Fájl</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="47"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="48"/>
         <source>Size</source>
         <translation>Méret</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="47"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="48"/>
         <source>Path</source>
         <translation>Útvonal</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="76"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="77"/>
         <source>Share a file</source>
         <translation>Egy fájl megosztása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="77"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="78"/>
         <source>Add a file to your local share</source>
         <translation>Fájl hozzáadása a helyi megosztáshoz</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="79"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="80"/>
         <source>Share a folder</source>
         <translation>Egy mappa megosztása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="80"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="81"/>
         <source>Add a folder to your local share</source>
         <translation>Mappa hozzáadása a helyi megosztáshoz</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="82"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="83"/>
         <source>Update shares</source>
         <translation>Megosztások frissítése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="83"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="84"/>
         <source>Update shared folders and files</source>
         <translation>Megosztott mappák és fájlok frissítése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="85"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="86"/>
         <source>Remove shared path</source>
         <translation>Megosztott útvonal eltávolítása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="86"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="87"/>
         <source>Remove shared path from the list</source>
         <translation>Megosztott útvonal eltávolítása a listából</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="88"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="89"/>
         <source>Clear all shares</source>
         <translation>Törölje az összes megosztát</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="89"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="90"/>
         <source>Clear all shared paths from the list</source>
         <translation>Törölje az összes megosztott elérési utat a listából</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="98"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="99"/>
         <source>Shared files</source>
         <translation>Megosztott fájlok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="100"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="101"/>
         <source>File transfer is disabled</source>
         <translation>A fájlátvitel le van tiltva</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="118"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="119"/>
         <source>Select a file to share</source>
         <translation>Válassza ki a megosztani kívánt fájlt</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="131"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="132"/>
         <source>Select a folder to share</source>
         <translation>Válassza ki a megosztani kívánt mappát</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="149"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="150"/>
         <source>Please select a shared path.</source>
         <translation>Kérjük, válasszon ki egy megosztott útvonalat.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="156"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="157"/>
         <source>Do you want to remove this path:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="158"/>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="172"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="159"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="173"/>
         <source>Yes</source>
         <translation>Igen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="158"/>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="172"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="159"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="173"/>
         <source>No</source>
         <translation>Nem</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="171"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="172"/>
         <source>Do you want to remove all shared paths?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="222"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="223"/>
         <source>%1 is already shared.</source>
         <translation>%1 már meg van osztva.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareLocal.cpp" line="263"/>
+        <location filename="../src/desktop/GuiShareLocal.cpp" line="264"/>
         <source>File transfer is disabled. Open the option menu to enable it.</source>
         <translation>Fájlátvitel le van tiltva. Nyissa meg a beállítás menüt, hogy engedélyezze.</translation>
     </message>
@@ -3607,152 +3667,152 @@ Válasszon ki egy beszélgetést, ha szeretné linkelni az elmentett szöveget.<
 <context>
     <name>GuiShareNetwork</name>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="102"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="103"/>
         <source>User</source>
         <translation>Felhasználó</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="55"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="56"/>
         <source>Scan network</source>
         <translation>Hálózat pásztázása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="56"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="57"/>
         <source>Search shared files in your network</source>
         <translation>Megosztott fájlok keresése a hálózaton</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="59"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="60"/>
         <source>Reload list</source>
         <translation>Lista újratöltése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="60"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="61"/>
         <source>Clear and reload list</source>
         <translation>Lista törlése és újratöltése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="78"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="79"/>
         <source>Search</source>
         <translation>Keresés</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="87"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="88"/>
         <source>File Type</source>
         <translation>Fájltípus</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="93"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="94"/>
         <source>All Files</source>
         <translation>Minden fájl</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="64"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="65"/>
         <source>Download</source>
         <translation>Letöltés</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="39"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="40"/>
         <source>Files and folders shared in your network</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="65"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="66"/>
         <source>Download single or multiple files simultaneously</source>
         <translation>Letöltés egy vagy több fájlt egyszerre</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="72"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="73"/>
         <source>Filter</source>
         <translation>Szűrő</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="120"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="121"/>
         <source>All Users</source>
         <translation>Minden felhasználó</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="146"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="147"/>
         <source>%1 is searching shared files in your network</source>
         <translation>%1 megosztott fájlok keresése a hálózaton</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="252"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="253"/>
         <source>Double click to download %1</source>
         <translation>Dupla kattintással letölteni %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="224"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="225"/>
         <source>%1 has shared %2 files (%3)</source>
         <translation>%1 megosztott fájlok %2 (%3)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="473"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="474"/>
         <source>Downloading</source>
         <translation type="unfinished">Letöltve</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="473"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="474"/>
         <source>Uploading</source>
         <translation type="unfinished">Feltöltés</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="493"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="494"/>
         <source>Double click to open %1</source>
         <translation>Dupla kattintással nyissa %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="494"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="495"/>
         <source>Transfer completed</source>
         <translation>Átvitel befejeződött</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="337"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="338"/>
         <source>%1 files are shown in list (%2 are available in your network)</source>
         <translation>%1 fájl látható listán (%2 elérhetőek a hálózaton)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="40"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="41"/>
         <source>Right click to open menu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="339"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="340"/>
         <source>%1 files shared in your network</source>
         <translation>%1 fájl megosztva a hálózaton</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="385"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="386"/>
         <source>You cannot download more than %1 files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="389"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="390"/>
         <source>Download single file</source>
         <translation>Egy fájl letöltése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="389"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="390"/>
         <source>Download %1 selected files</source>
         <translation>Letöltés %1 kijelölt fájlokat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="393"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="394"/>
         <source>Clear selection</source>
         <translation>Választás törlése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="403"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="404"/>
         <source>Expand all items</source>
         <translation>Az összes kibontása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="404"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="405"/>
         <source>Collapse all items</source>
         <translation>Az összes összecsukása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="415"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="416"/>
         <source>Please select one or more files to download.</source>
         <translation>Kérjük válasszon ki egy vagy több fájlt a letöltéshez.</translation>
     </message>
@@ -3768,32 +3828,32 @@ Válasszon ki egy beszélgetést, ha szeretné linkelni az elmentett szöveget.<
 <context>
     <name>GuiShortcut</name>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="34"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="35"/>
         <source>Shortcuts</source>
         <translation>Parancsikon</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="39"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="40"/>
         <source>Key</source>
         <translation>Kulcs</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="39"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="40"/>
         <source>Action</source>
         <translation>Cselekvés</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="116"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="117"/>
         <source>Insert shorcut for the action: %1</source>
         <translation>Parancsikon beszúrása:%1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="129"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="130"/>
         <source>You cannot use the comma for your shortcut.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="129"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="130"/>
         <source>Ok</source>
         <translation type="unfinished">Rendben</translation>
     </message>
@@ -3834,62 +3894,62 @@ Válasszon ki egy beszélgetést, ha szeretné linkelni az elmentett szöveget.<
 <context>
     <name>GuiTransferFile</name>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="36"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="37"/>
         <source>File</source>
         <translation>Fájl</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="36"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="37"/>
         <source>User</source>
         <translation>Felhasználó</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="36"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="37"/>
         <source>Status</source>
         <translation>Állapot</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="121"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="122"/>
         <source>Completed</source>
         <translation>Befejezve</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="127"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="128"/>
         <source>Cancel Transfer</source>
         <translation>Az átvitel megszakítása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="133"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="134"/>
         <source>Not Completed</source>
         <translation>Nincs kész</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="166"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="167"/>
         <source>Transfer completed</source>
         <translation>Átvitel befejeződött</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="167"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="168"/>
         <source>Ok</source>
         <translation type="unfinished">Rendben</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="172"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="173"/>
         <source>Downloading</source>
         <translation>Letöltve</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="172"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="173"/>
         <source>Uploading</source>
         <translation>Feltöltés</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="205"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="206"/>
         <source>Do you want to cancel the transfer of %1?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="236"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="237"/>
         <source>Remove all transfers</source>
         <translation>Ősszes átvitel eltávolítása</translation>
     </message>
@@ -3897,7 +3957,7 @@ Válasszon ki egy beszélgetést, ha szeretné linkelni az elmentett szöveget.<
 <context>
     <name>GuiUserList</name>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="54"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="55"/>
         <source>Search user</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3905,57 +3965,57 @@ Válasszon ki egy beszélgetést, ha szeretné linkelni az elmentett szöveget.<
 <context>
     <name>GuiVCard</name>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="62"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="70"/>
         <source>is</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="70"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="78"/>
         <source>Birthday: %1</source>
         <translation>Születésnap: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="72"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="80"/>
         <source>Happy Birthday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="96"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="104"/>
         <source>old %1</source>
         <translation>régi %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="98"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="106"/>
         <source>new %1</source>
         <translation>Új %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="132"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="140"/>
         <source>Remove from favorites</source>
         <translation>Eltávolítás a kedvencek közül</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="137"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="145"/>
         <source>Add to favorites</source>
         <translation>Add hozzá a kedvencekhez</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="154"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="162"/>
         <source>You cannot remove an user who is connected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="159"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="167"/>
         <source>You cannot remove an user who is in group chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="164"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="172"/>
         <source>Remove this user</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="120"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="128"/>
         <source>Open chat</source>
         <translation>Csevegés indítása</translation>
     </message>
@@ -4099,17 +4159,17 @@ Válasszon ki egy beszélgetést, ha szeretné linkelni az elmentett szöveget.<
 <context>
     <name>GuiWizard</name>
     <message>
-        <location filename="../src/desktop/GuiWizard.cpp" line="36"/>
+        <location filename="../src/desktop/GuiWizard.cpp" line="38"/>
         <source>Welcome to &lt;b&gt;%1 Network&lt;/b&gt;.</source>
         <translation>Üdvözöljük &lt;b&gt;%1 Hálózat&lt;/b&gt;.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWizard.cpp" line="44"/>
+        <location filename="../src/desktop/GuiWizard.cpp" line="46"/>
         <source>Your system account is</source>
         <translation>A te  rendszerfiókod</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWizard.cpp" line="61"/>
+        <location filename="../src/desktop/GuiWizard.cpp" line="63"/>
         <source>Your nickname can not be empty.</source>
         <translation>A beceneved nem lehet üres.</translation>
     </message>
@@ -4140,33 +4200,33 @@ Válasszon ki egy beszélgetést, ha szeretné linkelni az elmentett szöveget.<
 <context>
     <name>GuiWorkgroups</name>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="34"/>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="40"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="35"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="41"/>
         <source>Workgroups</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="49"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="50"/>
         <source>Remove workgroup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="98"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="101"/>
         <source>Please insert a workgroup.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="105"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="108"/>
         <source>This workgroup is already in list.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="51"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="52"/>
         <source>Clear all</source>
         <translation type="unfinished">Az összes törlése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="131"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="134"/>
         <source>Please select an item in the list.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4220,18 +4280,18 @@ Válasszon ki egy beszélgetést, ha szeretné linkelni az elmentett szöveget.<
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/desktop/GuiChatItem.cpp" line="59"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2653"/>
+        <location filename="../src/desktop/GuiChatItem.cpp" line="60"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2662"/>
         <source>All Lan Users</source>
         <translation>Minden LAN felhasználó</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatItem.cpp" line="71"/>
+        <location filename="../src/desktop/GuiChatItem.cpp" line="72"/>
         <source>Open chat with all local users</source>
         <translation>Beszélgetés kezdeményezése minden helyi felhasználóval</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatItem.cpp" line="97"/>
+        <location filename="../src/desktop/GuiChatItem.cpp" line="98"/>
         <source>Open chat with %1</source>
         <translation>Beszélgetés kezdeményezése %1 -vel</translation>
     </message>
@@ -4246,42 +4306,42 @@ Válasszon ki egy beszélgetést, ha szeretné linkelni az elmentett szöveget.<
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserItem.cpp" line="122"/>
+        <location filename="../src/desktop/GuiUserItem.cpp" line="123"/>
         <source>read only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserItem.cpp" line="144"/>
+        <location filename="../src/desktop/GuiUserItem.cpp" line="145"/>
         <source>Click to open chat with all local users</source>
         <translation>Ide kattintva  minden helyi felhasználóval beszélgethet</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="691"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="692"/>
         <source>%1 is %2</source>
         <translation>%1 %2</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="691"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="692"/>
         <source>You are %1</source>
         <translation type="unfinished">Ön %1</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="694"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="695"/>
         <source>last update</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="745"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="746"/>
         <source>and</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserItem.cpp" line="149"/>
+        <location filename="../src/desktop/GuiUserItem.cpp" line="150"/>
         <source>Click to send a private message</source>
         <translation>Kattintson, hogy küldjön egy privát üzenetet</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiGroupItem.cpp" line="67"/>
+        <location filename="../src/desktop/GuiGroupItem.cpp" line="68"/>
         <source>Click to send message to group: %1</source>
         <translation>Kattintson, hogy küldjön üzenetet %1 csoportnak</translation>
     </message>
@@ -4608,27 +4668,27 @@ Válasszon ki egy beszélgetést, ha szeretné linkelni az elmentett szöveget.<
 <context>
     <name>User</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="72"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="73"/>
         <source>offline</source>
         <translation>Nem elérhető</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="73"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="74"/>
         <source>available</source>
         <translation>Elérhető</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="74"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="75"/>
         <source>busy</source>
         <translation>Foglalt</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="75"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="76"/>
         <source>away</source>
         <translation>Nincs a gépnél</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="76"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="77"/>
         <source>status error</source>
         <translation>Állapothiba</translation>
     </message>

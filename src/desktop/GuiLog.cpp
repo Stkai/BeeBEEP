@@ -24,6 +24,7 @@
 #include "BeeUtils.h"
 #include "FileDialog.h"
 #include "GuiLog.h"
+#include "IconManager.h"
 #include "Log.h"
 #include "Settings.h"
 
@@ -33,7 +34,7 @@ GuiLog::GuiLog( QWidget* parent )
 {
   setObjectName( "GuiLog" );
   setWindowTitle( QString( "%1 - %2" ).arg( tr( "Log" ), Settings::instance().programName() ) );
-  setWindowIcon( QIcon( ":/images/log.png" ) );
+  setWindowIcon( IconManager::instance().icon( "log.png" ) );
 
   mp_teLog = new QPlainTextEdit( this );
   mp_teLog->setUndoRedoEnabled( false );
@@ -49,7 +50,7 @@ GuiLog::GuiLog( QWidget* parent )
 
   setCentralWidget( mp_teLog );
 
-  mp_actOpenLogFilePath = new QAction( QIcon( ":/images/log.png" ), tr( "Show log file" ), this );
+  mp_actOpenLogFilePath = new QAction( IconManager::instance().icon( "log.png" ), tr( "Show log file" ), this );
   connect( mp_actOpenLogFilePath, SIGNAL( triggered() ), this, SLOT( openLogFilePath() ) );
 
   mp_barLog = new QToolBar( tr( "Show the log tool bar" ), this );
@@ -71,7 +72,7 @@ GuiLog::GuiLog( QWidget* parent )
 void GuiLog::setupToolBar( QToolBar* bar )
 {
   /* save as button */
-  bar->addAction( QIcon( ":/images/save-as.png" ), tr( "Save log as" ), this, SLOT( saveLogAs() ) );
+  bar->addAction( IconManager::instance().icon( "save-as.png" ), tr( "Save log as" ), this, SLOT( saveLogAs() ) );
   bar->addSeparator();
   mp_cbLogToFile = new QCheckBox( bar );
   mp_cbLogToFile->setObjectName( "GuiCheckBoxLogToFileInLog" );
@@ -100,7 +101,7 @@ void GuiLog::setupToolBar( QToolBar* bar )
   connect( mp_leFilter, SIGNAL( returnPressed() ), this, SLOT( findTextInLog() ) );
 
   /* search button */
-  bar->addAction( QIcon( ":/images/search.png" ), tr( "Find" ), this, SLOT( findTextInLog() ) );
+  bar->addAction( IconManager::instance().icon( "search.png" ), tr( "Find" ), this, SLOT( findTextInLog() ) );
 
   /* flags */
   mp_cbCaseSensitive = new QCheckBox( bar );
@@ -290,9 +291,9 @@ void GuiLog::logToFile( bool yes )
 void GuiLog::openLogMenu( const QPoint& )
 {
   mp_logMenu->clear();
-  mp_logMenu->addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), mp_teLog, SLOT( selectAll() ), QKeySequence::SelectAll );
+  mp_logMenu->addAction( IconManager::instance().icon( "select-all.png" ), tr( "Select All" ), mp_teLog, SLOT( selectAll() ), QKeySequence::SelectAll );
   mp_logMenu->addSeparator();
-  QAction* act = mp_logMenu->addAction( QIcon( ":/images/copy.png" ), tr( "Copy to clipboard" ), mp_teLog, SLOT( copy() ), QKeySequence::Copy );
+  QAction* act = mp_logMenu->addAction( IconManager::instance().icon( "copy.png" ), tr( "Copy to clipboard" ), mp_teLog, SLOT( copy() ), QKeySequence::Copy );
   act->setEnabled( !mp_teLog->textCursor().selectedText().isEmpty() );
   mp_logMenu->addSeparator();
   act = mp_logMenu->addAction( tr( "Block scrolling" ), this, SLOT( toggleBlockScrolling() ) );

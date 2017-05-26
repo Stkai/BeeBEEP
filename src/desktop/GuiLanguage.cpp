@@ -24,6 +24,7 @@
 #include "BeeUtils.h"
 #include "GuiLanguage.h"
 #include "FileDialog.h"
+#include "IconManager.h"
 #include "Settings.h"
 
 
@@ -33,7 +34,7 @@ GuiLanguage::GuiLanguage( QWidget *parent )
   setupUi( this );
   setObjectName( "GuiLanguage" );
   setWindowTitle( tr( "Select language" ) + QString( " - %1" ).arg( Settings::instance().programName() ) );
-  setWindowIcon( QIcon( ":/images/language.png" ) );
+  setWindowIcon( IconManager::instance().icon( "language.png" ) );
   Bee::removeContextHelpButton( this );
 
   QStringList labels;
@@ -54,6 +55,7 @@ GuiLanguage::GuiLanguage( QWidget *parent )
 
   mp_labelLanguageSite->setText( s_site );
 
+  mp_pbSelectFolder->setIcon( IconManager::instance().icon( "folder.png" ) );
 
   connect( mp_pbSelect, SIGNAL( clicked() ), this, SLOT( selectLanguage() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );

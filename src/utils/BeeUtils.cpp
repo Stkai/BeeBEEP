@@ -24,6 +24,7 @@
 #include "Avatar.h"
 #include "BeeUtils.h"
 #include "ChatMessage.h"
+#include "IconManager.h"
 #include "PluginManager.h"
 #include "User.h"
 #if QT_VERSION < 0x050000
@@ -42,13 +43,13 @@ QString Bee::userStatusIconFileName( int user_status )
   switch( user_status )
   {
   case User::Offline:
-    return QString( ":/images/user-offline.png" );
+    return IconManager::instance().iconPath( "user-offline.png" );
   case User::Away:
-    return QString( ":/images/user-away.png" );
+    return IconManager::instance().iconPath( "user-away.png" );
   case User::Busy:
-    return QString( ":/images/user-busy.png" );
+    return IconManager::instance().iconPath( "user-busy.png" );
   default:
-    return QString( ":/images/user-online.png" );
+    return IconManager::instance().iconPath( "user-online.png" );
   }
 }
 
@@ -57,13 +58,13 @@ QString Bee::menuUserStatusIconFileName( int user_status )
   switch( user_status )
   {
   case User::Offline:
-    return QString( ":/images/menu-user-offline.png" );
+    return IconManager::instance().iconPath( "menu-user-offline.png" );
   case User::Away:
-    return QString( ":/images/menu-user-away.png" );
+    return IconManager::instance().iconPath( "menu-user-away.png" );
   case User::Busy:
-    return QString( ":/images/menu-user-busy.png" );
+    return IconManager::instance().iconPath( "menu-user-busy.png" );
   default:
-    return QString( ":/images/menu-user-online.png" );
+    return IconManager::instance().iconPath( "menu-user-online.png" );
   }
 }
 

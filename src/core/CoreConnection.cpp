@@ -22,12 +22,12 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "Avatar.h"
-#include "BeeUtils.h"
 #include "ChatManager.h"
 #include "ColorManager.h"
 #include "Connection.h"
 #include "Core.h"
 #include "FileShare.h"
+#include "IconManager.h"
 #include "NetworkManager.h"
 #include "Protocol.h"
 #include "Settings.h"
@@ -233,12 +233,12 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
         if( user_found.accountName() == u.accountName() )
         {
           sAlertMsg = tr( "%1 Connection closed to user %2 because it uses your account name: %3." )
-                        .arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ), u.path(), u.accountName() );
+                        .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), u.path(), u.accountName() );
         }
         else
         {
           sAlertMsg = tr( "%1 Connection closed to user %2 because it uses your nickname: %3." )
-                        .arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ), u.path(), u.name() );
+                        .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), u.path(), u.name() );
         }
 
         dispatchSystemMessage( ID_DEFAULT_CHAT, user_found.id(), sAlertMsg, DispatchToDefaultAndPrivateChat, ChatMessage::Connection );
@@ -256,12 +256,12 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
         if( user_found.accountName() == u.accountName() )
         {
           sAlertMsg = tr( "%1 Connection closed to user %2 because it uses same account name of the already connected user %3: %4." )
-                        .arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ), u.path(), user_found.path(), u.accountName() );
+                        .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), u.path(), user_found.path(), u.accountName() );
         }
         else
         {
           sAlertMsg = tr( "%1 Connection closed to user %2 because it uses same nickname of the already connected user %3: %4." )
-                        .arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ), u.path(), user_found.path(), u.name() );
+                        .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), u.path(), user_found.path(), u.name() );
         }
       }
 

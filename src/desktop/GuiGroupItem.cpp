@@ -25,6 +25,7 @@
 #include "ChatManager.h"
 #include "GuiGroupItem.h"
 #include "Group.h"
+#include "IconManager.h"
 #include "Settings.h"
 #include "UserManager.h"
 
@@ -93,7 +94,7 @@ bool GuiGroupItem::updateChat( const Chat& c )
   if( c.id() != itemId() )
     return false;
 
-  setIcon( 0, QIcon( ":/images/group.png" ) );
+  setIcon( 0, IconManager::instance().icon( "group.png" ) );
   setGroupName( c.name(), c.unreadMessages() );
 
   QList<QTreeWidgetItem*> group_children = takeChildren();

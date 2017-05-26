@@ -24,6 +24,7 @@
 #include "GuiChatList.h"
 #include "GuiConfig.h"
 #include "ChatManager.h"
+#include "IconManager.h"
 #include "Settings.h"
 #include "UserManager.h"
 
@@ -41,9 +42,9 @@ GuiChatList::GuiChatList( QWidget* parent )
   mp_twChatList->setContextMenuPolicy( Qt::CustomContextMenu );
   mp_twChatList->setMouseTracking( true );
   mp_twChatList->setHeaderHidden( true );
-  QString w_stylesheet = "background: white url(:/images/chat-list.png);"
+  QString w_stylesheet = QString( "background: white url(%1);"
                         "background-repeat: no-repeat;"
-                        "background-position: bottom center;";
+                        "background-position: bottom center;" ).arg( IconManager::instance().iconPath( "chat-list.png" ) );
   mp_twChatList->setStyleSheet( w_stylesheet );
 
   m_chatSelected = ID_INVALID;
@@ -55,6 +56,8 @@ GuiChatList::GuiChatList( QWidget* parent )
 #endif
 
   mp_menuContext = new QMenu( parent );
+
+  mp_pbClearFilter->setIcon( IconManager::instance().icon( "clear.png" ) );
 
   connect( mp_twChatList, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showChatMenu( const QPoint& ) ) );
   connect( mp_twChatList, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( chatClicked( QTreeWidgetItem*, int ) ), Qt::QueuedConnection );
@@ -151,12 +154,12 @@ void GuiChatList::showChatMenu( const QPoint& p )
     bool create_chat_is_enabled = true;
     if( UserManager::instance().userList().toList().size() < 2 )
     {
-      mp_menuContext->addAction( QIcon( ":/images/info.png" ), tr( "Please wait for two or more users" ) );
+      mp_menuContext->addAction( IconManager::instance().icon( "info.png" ), tr( "Please wait for two or more users" ) );
       create_chat_is_enabled = false;
       mp_menuContext->addSeparator();
     }
 
-    act = mp_menuContext->addAction( QIcon( ":/images/group-create.png" ), tr( "Create new group chat" ), this, SIGNAL( createNewChatRequest() ) );
+    act = mp_menuContext->addAction( IconManager::instance().icon( "group-create.png" ), tr( "Create new group chat" ), this, SIGNAL( createNewChatRequest() ) );
     act->setEnabled( create_chat_is_enabled );
   }
   else
@@ -167,16 +170,16 @@ void GuiChatList::showChatMenu( const QPoint& p )
     if( !c.isValid() )
       return;
 
-    act = mp_menuContext->addAction( QIcon( ":/images/chat.png" ), tr( "Show" ), this, SLOT( openChatSelected() ) );
+    act = mp_menuContext->addAction( IconManager::instance().icon( "chat.png" ), tr( "Show" ), this, SLOT( openChatSelected() ) );
     mp_menuContext->setDefaultAction( act );
     mp_menuContext->addSeparator();
-    act = mp_menuContext->addAction( QIcon( ":/images/clear.png" ), tr( "Clear" ), this, SLOT( clearChatSelected() ) );
+    act = mp_menuContext->addAction( IconManager::instance().icon( "clear.png" ), tr( "Clear" ), this, SLOT( clearChatSelected() ) );
     act->setToolTip( tr( "Clear all chat messages" ) );
     act->setDisabled( ChatManager::instance().isChatEmpty( c, true ) );
     if( c.isGroup() )
     {
       mp_menuContext->addSeparator();
-      mp_menuContext->addAction( QIcon( ":/images/group-edit.png" ), tr( "Edit" ), this, SLOT( editChatSelected() ) );
+      mp_menuContext->addAction( IconManager::instance().icon( "group-edit.png" ), tr( "Edit" ), this, SLOT( editChatSelected() ) );
     }
     m_blockShowChatRequest = true;
     mp_twChatList->clearSelection();

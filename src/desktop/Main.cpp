@@ -32,6 +32,7 @@
 #include "GuiMain.h"
 #include "HistoryManager.h"
 #include "Hive.h"
+#include "IconManager.h"
 #include "Log.h"
 #include "MessageManager.h"
 #include "NetworkManager.h"
@@ -148,6 +149,9 @@ int main( int argc, char *argv[] )
   /* Init Chat Manager */
   (void)ChatManager::instance();
 
+  /* Init Icon Manager */
+  IconManager::instance().setSourcePath( Settings::instance().iconSourcePath() );
+
   /* Init Emoticon Manager */
   EmoticonManager::instance().loadRecentEmoticons( Settings::instance().recentEmoticons(), Settings::instance().emoticonInRecentMenu() );
 
@@ -237,6 +241,8 @@ int main( int argc, char *argv[] )
   PluginManager::close();
   Hive::close();
   NetworkManager::close();
+  EmoticonManager::close();
+  IconManager::close();
   ColorManager::close();
   AudioManager::close();
   ShortcutManager::close();

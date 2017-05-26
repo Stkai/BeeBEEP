@@ -24,6 +24,7 @@
 #include "BeeUtils.h"
 #include "FileInfo.h"
 #include "GuiIconProvider.h"
+#include "IconManager.h"
 
 
 GuiIconProvider* GuiIconProvider::mp_instance = NULL;
@@ -49,19 +50,19 @@ QIcon GuiIconProvider::iconFromFileType( int file_type )
   switch( file_type )
   {
   case Bee::FileAudio:
-    return QIcon( ":/images/file-audio.png" );
+    return IconManager::instance().icon( "file-audio.png" );
   case Bee::FileVideo:
-    return QIcon( ":/images/file-video.png" );
+    return IconManager::instance().icon( "file-video.png" );
   case Bee::FileImage:
-    return QIcon( ":/images/file-image.png" );
+    return IconManager::instance().icon( "file-image.png" );
   case Bee::FileDocument:
-    return QIcon( ":/images/file-document.png" );
+    return IconManager::instance().icon( "file-document.png" );
   case Bee::FileExe:
-    return QIcon( ":/images/file-exe.png" );
+    return IconManager::instance().icon( "file-exe.png" );
   case Bee::FileBundle:
-    return QIcon( ":/images/file-bundle.png" );
+    return IconManager::instance().icon( "file-bundle.png" );
   default:
-    return QIcon( ":/images/file-other.png" );
+    return IconManager::instance().icon( "file-other.png" );
   };
 }
 

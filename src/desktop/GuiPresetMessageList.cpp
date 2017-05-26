@@ -23,6 +23,7 @@
 
 #include "GuiConfig.h"
 #include "GuiPresetMessageList.h"
+#include "IconManager.h"
 #include "Settings.h"
 
 
@@ -41,10 +42,10 @@ GuiPresetMessageList::GuiPresetMessageList( QWidget* parent )
   setSelectionMode( QAbstractItemView::SingleSelection );
   setAlternatingRowColors( true );
 
-  mp_actNew = new QAction( QIcon( ":/images/preset-message.png" ), tr( "New" ), this );
-  mp_actEdit = new QAction( QIcon( ":/images/preset-message-edit.png" ), tr( "Edit" ), this );
-  mp_actRename = new QAction( QIcon( ":/images/preset-message-edit.png" ), tr( "Rename" ), this );
-  mp_actRemove = new QAction( QIcon( ":/images/preset-message-remove.png" ), tr( "Delete" ), this );
+  mp_actNew = new QAction( IconManager::instance().icon( "preset-message.png" ), tr( "New" ), this );
+  mp_actEdit = new QAction( IconManager::instance().icon( "preset-message-edit.png" ), tr( "Edit" ), this );
+  mp_actRename = new QAction( IconManager::instance().icon( "preset-message-edit.png" ), tr( "Rename" ), this );
+  mp_actRemove = new QAction( IconManager::instance().icon( "preset-message-remove.png" ), tr( "Delete" ), this );
 
   setToolTip( tr( "Right click on panel to create a new preset message" ) );
 

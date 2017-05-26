@@ -23,6 +23,7 @@
 
 #include "BeeUtils.h"
 #include "GuiWizard.h"
+#include "IconManager.h"
 #include "Settings.h"
 
 
@@ -33,6 +34,7 @@ GuiWizard::GuiWizard( QWidget *parent )
   setWindowTitle( Settings::instance().programName() );
   Bee::removeContextHelpButton( this );
 
+  mp_lPix->setPixmap( IconManager::instance().icon( "beebeep.png" ).pixmap( QSize( 128, 128 ) ) );
   mp_lWelcome->setText( tr( "Welcome to <b>%1 Network</b>." ).arg( Settings::instance().programName() ) );
   m_userName = "";
   connect( mp_pbChangeUser, SIGNAL( clicked() ), this, SLOT( saveSettings() ) );

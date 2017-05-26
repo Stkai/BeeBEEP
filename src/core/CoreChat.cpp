@@ -27,6 +27,7 @@
 #include "ChatManager.h"
 #include "Connection.h"
 #include "Core.h"
+#include "IconManager.h"
 #include "MessageManager.h"
 #include "Protocol.h"
 #include "PluginManager.h"
@@ -47,8 +48,8 @@ void Core::createDefaultChat()
   if( QDate::currentDate().month() == 4 && QDate::currentDate().day() == 6 )
   {
     int my_age = QDate::currentDate().year() - 1975;
-    sHtmlMsg = QString( "%1 <b>%2</b>" ).arg( Bee::iconToHtml( ":/images/birthday.png", "*!*" ),
-                                                 tr( "Happy birthday to Marco Mastroddi: %1 years old today! Cheers!!!" ).arg( my_age ) );
+    sHtmlMsg = QString( "%1 <b>%2</b>" ).arg( IconManager::instance().toHtml( "birthday.png", "*!*" ),
+                                              tr( "Happy birthday to Marco Mastroddi: %1 years old today! Cheers!!!" ).arg( my_age ) );
     c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Other ) );
   }
 
@@ -58,14 +59,14 @@ void Core::createDefaultChat()
     if( Settings::instance().useNativeEmoticons() )
       new_year_icons = QString( "%1&nbsp;&nbsp;%2&nbsp;&nbsp;%3" ).arg( QString::fromUtf8( "🎆" ), QString::fromUtf8( "🎆" ), QString::fromUtf8( "🎆" ) );
     else
-      new_year_icons = QString( "%1&nbsp;&nbsp;%2&nbsp;&nbsp;%3" ).arg( Bee::iconToHtml( ":/emojis/objects/1f386.png", "*!*" ), Bee::iconToHtml( ":/emojis/objects/1f386.png", "*!*" ), Bee::iconToHtml( ":/emojis/objects/1f386.png", "*!*" ) );
+      new_year_icons = QString( "%1&nbsp;&nbsp;%2&nbsp;&nbsp;%3" ).arg( IconManager::instance().toHtml( ":/emojis/objects/1f386.png", "*!*" ), IconManager::instance().toHtml( ":/emojis/objects/1f386.png", "*!*" ), IconManager::instance().toHtml( ":/emojis/objects/1f386.png", "*!*" ) );
     sHtmlMsg = QString( "%1&nbsp;&nbsp;&nbsp;<font color=red><b>%2</b></font>&nbsp;&nbsp;&nbsp;%3" ).arg( new_year_icons, tr( "Happy New Year!" ), new_year_icons );
     c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Other ) );
   }
 
   if( Settings::instance().localUser().isBirthDay() )
   {
-    sHtmlMsg = QString( "%1 <b>%2</b>" ).arg( Bee::iconToHtml( ":/images/birthday.png", "*!*" ), tr( "Happy Birthday to you!" ) );
+    sHtmlMsg = QString( "%1 <b>%2</b>" ).arg( IconManager::instance().toHtml( "birthday.png", "*!*" ), tr( "Happy Birthday to you!" ) );
     c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Other ) );
   }
 
@@ -105,14 +106,14 @@ Chat Core::createGroupChat( const User& u, const Group& g, bool broadcast_messag
 
   if( g.privateId().isEmpty() ) // to prevent creation message on load from settings
   {
-    sHtmlMsg = tr( "%1 You have created group chat %2." ).arg( Bee::iconToHtml( ":/images/group-create.png", "*G*" ), QString( "<b>%1</b>" ).arg( c.name() ) );
+    sHtmlMsg = tr( "%1 You have created group chat %2." ).arg( IconManager::instance().toHtml( "group-create.png", "*G*" ), QString( "<b>%1</b>" ).arg( c.name() ) );
     c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
     c.setLastModified();
   }
 
   if( !u.isLocal() )
   {
-    sHtmlMsg = tr( "%1 %2 has added you to the group chat %3." ).arg( Bee::iconToHtml( ":/images/group-add.png", "*G*" ), u.name(), QString( "<b>%1</b>" ).arg( c.name() ) );
+    sHtmlMsg = tr( "%1 %2 has added you to the group chat %3." ).arg( IconManager::instance().toHtml( "group-add.png", "*G*" ), u.name(), QString( "<b>%1</b>" ).arg( c.name() ) );
     c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
   }
 
@@ -149,9 +150,9 @@ bool Core::changeGroupChat( const User& u, const Group& g )
   if( c.name() != g.name() )
   {
     if( u.isLocal() )
-      sHtmlMsg = tr( "%1 You have changed the group name from %2 to %3." ).arg( Bee::iconToHtml( ":/images/group.png", "*G*" ), c.name(), QString( "<b>%1</b>" ).arg( g.name() ) );
+      sHtmlMsg = tr( "%1 You have changed the group name from %2 to %3." ).arg( IconManager::instance().toHtml( "group.png", "*G*" ), c.name(), QString( "<b>%1</b>" ).arg( g.name() ) );
     else
-      sHtmlMsg = tr( "%1 %2 has changed the group name from %3 to %4." ).arg( Bee::iconToHtml( ":/images/group.png", "*G*" ), u.name(), c.name(), QString( "<b>%1</b>" ).arg( g.name() ) );
+      sHtmlMsg = tr( "%1 %2 has changed the group name from %3 to %4." ).arg( IconManager::instance().toHtml( "group.png", "*G*" ), u.name(), c.name(), QString( "<b>%1</b>" ).arg( g.name() ) );
     c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
     chat_changed = true;
     if( ChatManager::instance().chatHasSavedText( c.name() ) )
@@ -172,11 +173,11 @@ bool Core::changeGroupChat( const User& u, const Group& g )
   if( user_added_string_list.size() > 0 )
   {
     if( u.isLocal() )
-      sHtmlMsg = tr( "%1 You have added members: %2." ).arg( Bee::iconToHtml( ":/images/group-add.png", "*G*" ), Bee::stringListToTextString( user_added_string_list ) );
+      sHtmlMsg = tr( "%1 You have added members: %2." ).arg( IconManager::instance().toHtml( "group-add.png", "*G*" ), Bee::stringListToTextString( user_added_string_list ) );
     else
-      sHtmlMsg = tr( "%1 %2 has added members: %3." ).arg( Bee::iconToHtml( ":/images/group-add.png", "*G*" ), u.name(), Bee::stringListToTextString( user_added_string_list ) );
+      sHtmlMsg = tr( "%1 %2 has added members: %3." ).arg( IconManager::instance().toHtml( "group-add.png", "*G*" ), u.name(), Bee::stringListToTextString( user_added_string_list ) );
     c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
-    sHtmlMsg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/group.png", "*G*" ), Bee::stringListToTextString( user_string_list ) );
+    sHtmlMsg = tr( "%1 Chat with %2." ).arg( IconManager::instance().toHtml( "group.png", "*G*" ), Bee::stringListToTextString( user_string_list ) );
     c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Header ) );
     chat_changed = true;
   }
@@ -211,7 +212,7 @@ bool Core::removeUserFromGroupChat( const User& u, const QString& chat_private_i
   if( u.isLocal() )
     return removeChat( c.id(), true );
 
-  QString sHtmlMsg = tr( "%1 %2 has left the group chat %3." ).arg( Bee::iconToHtml( ":/images/group-remove.png", "*G*" ), u.name(), QString( "<b>%1</b>" ).arg( c.name() ) );
+  QString sHtmlMsg = tr( "%1 %2 has left the group chat %3." ).arg( IconManager::instance().toHtml( "group-remove.png", "*G*" ), u.name(), QString( "<b>%1</b>" ).arg( c.name() ) );
   c.removeUser( u.id() );
   c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToChat, ChatMessage::System );
@@ -232,7 +233,7 @@ bool Core::removeChat( VNumber chat_id, bool save_chat_messages )
   {
     ChatManager::instance().setChatToSavedChats( c );
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "%1 %2 is added to saved chats." )
-                                                      .arg( Bee::iconToHtml( ":/images/saved-chat.png", "*H*" ), QString( "<b>%1</b>" ).arg( c.name() ) ),
+                                                      .arg( IconManager::instance().toHtml( "saved-chat.png", "*H*" ), QString( "<b>%1</b>" ).arg( c.name() ) ),
                            DispatchToChat, ChatMessage::System );
   }
 
@@ -366,14 +367,14 @@ void Core::sendWritingMessage( VNumber chat_id )
 
 void Core::showFactOfTheDay()
 {
-  QString fact_of_the_day = QString( "%1 %2" ).arg( Bee::iconToHtml( ":/images/fact.png", "*T*" ),
+  QString fact_of_the_day = QString( "%1 %2" ).arg( IconManager::instance().toHtml( "fact.png", "*T*" ),
                                                    qApp->translate( "Tips", BeeBeepFacts[ Random::number( 0, (BeeBeepFactsSize-1) ) ] ) );
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, fact_of_the_day, DispatchToChat, ChatMessage::System );
 }
 
 void Core::showTipOfTheDay()
 {
-  QString tip_of_the_day = QString( "%1 %2" ).arg( Bee::iconToHtml( ":/images/tip.png", "*T*" ),
+  QString tip_of_the_day = QString( "%1 %2" ).arg( IconManager::instance().toHtml( "tip.png", "*T*" ),
                                                    qApp->translate( "Tips", BeeBeepTips[ Random::number( 0, (BeeBeepTipsSize-1) ) ] ) );
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tip_of_the_day, DispatchToChat, ChatMessage::System );
 }
@@ -409,7 +410,7 @@ void Core::sendRefuseMessageToGroupChat( const Chat& group_chat )
 
     if( !sendMessageToLocalNetwork( u, group_refuse_message ) )
       dispatchSystemMessage( group_chat.id(), ID_LOCAL_USER, tr( "%1 %2 cannot be informed that you have left the group." )
-                             .arg( Bee::iconToHtml( ":/images/group-remove.png", "*G*" ) ).arg( u.name() ),
+                             .arg( IconManager::instance().toHtml( "group-remove.png", "*G*" ) ).arg( u.name() ),
                              DispatchToChat, ChatMessage::System );
   }
 }
@@ -459,7 +460,7 @@ void Core::addListToSavedChats()
 
   if( bscl->savedChats().size() > 1 )
   {
-    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( Bee::iconToHtml( ":/images/saved-chat.png", "*H*" ), loading_status ),
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( IconManager::instance().toHtml( "saved-chat.png", "*H*" ), loading_status ),
                            DispatchToChat, ChatMessage::System );
   }
 
@@ -592,7 +593,7 @@ void Core::sendBuzzToUser( VNumber user_id )
 
   if( sendMessageToLocalNetwork( u, Protocol::instance().buzzMessage() ) )
   {
-    QString sys_msg = tr( "%1 You have buzzed %2." ).arg( Bee::iconToHtml( ":/images/bell.png", "*Z*" ), u.name() );
+    QString sys_msg = tr( "%1 You have buzzed %2." ).arg( IconManager::instance().toHtml( "bell.png", "*Z*" ), u.name() );
     Chat c = ChatManager::instance().privateChatForUser( u.id() );
     if( !c.isValid() )
       c = ChatManager::instance().defaultChat();
@@ -632,14 +633,14 @@ void Core::addChatHeader( Chat* p_chat )
   {
     QString hv_msg = QByteArray::fromBase64( "QmVlQkVFUCB2ZXJzaW9uICZjb3B5OyBNYXJjbyBNYXN0cm9kZGk=" );
     hv_msg.replace( "version", Settings::instance().version( false, false ) );
-    header_msg = QString( "%1 <b>%2</b>." ).arg( Bee::iconToHtml( ":/images/beebeep.png", "***" ), hv_msg );
+    header_msg = QString( "%1 <b>%2</b>." ).arg( IconManager::instance().toHtml( "beebeep.png", "***" ), hv_msg );
     p_chat->addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( header_msg ), ChatMessage::System ) );
-    header_msg = QString( "%1 %2." ).arg( Bee::iconToHtml( ":/images/chat-small.png", "*C*" ), tr( "Chat with all connected users" ) );
+    header_msg = QString( "%1 %2." ).arg( IconManager::instance().toHtml( "chat-small.png", "*C*" ), tr( "Chat with all connected users" ) );
   }
   else if( p_chat->isPrivate() )
   {
     User u = UserManager::instance().findUser( p_chat->privateUserId() );
-    header_msg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/chat-small.png", "*C*" ), u.name().isEmpty() ? tr( "Unknown %1" ).arg( p_chat->privateUserId() ) : u.name() );
+    header_msg = tr( "%1 Chat with %2." ).arg( IconManager::instance().toHtml( "chat-small.png", "*C*" ), u.name().isEmpty() ? tr( "Unknown %1" ).arg( p_chat->privateUserId() ) : u.name() );
   }
   else
   {
@@ -651,7 +652,7 @@ void Core::addChatHeader( Chat* p_chat )
         user_string_list.append( u.name() );
     }
 
-    header_msg = tr( "%1 Chat with %2." ).arg( Bee::iconToHtml( ":/images/group.png", "*G*" ), Bee::stringListToTextString( user_string_list ) );
+    header_msg = tr( "%1 Chat with %2." ).arg( IconManager::instance().toHtml( "group.png", "*G*" ), Bee::stringListToTextString( user_string_list ) );
   }
 
   p_chat->addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( header_msg ), ChatMessage::Header ) );

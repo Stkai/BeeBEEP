@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "GuiSystemTray.h"
+#include "IconManager.h"
 #include "Settings.h"
 
 
@@ -63,7 +64,7 @@ void GuiSystemTray::setDefaultIcon()
 {
   if( m_iconStatus != GuiSystemTray::Default )
   {
-    setIcon( QIcon( ":/images/beebeep.png" ) );
+    setIcon( IconManager::instance().icon( "beebeep.png" ) );
     m_iconStatus = GuiSystemTray::Default;
   }
 }
@@ -72,7 +73,7 @@ void GuiSystemTray::setMessageIcon()
 {
   if( m_iconStatus != GuiSystemTray::Message )
   {
-    setIcon( QIcon( ":/images/beebeep-message.png" ) );
+    setIcon( IconManager::instance().icon( "beebeep-message.png" ) );
     m_iconStatus = GuiSystemTray::Message;
   }
 }
@@ -95,8 +96,8 @@ void GuiSystemTray::onTickEvent( int ticks )
   if( m_iconStatus == GuiSystemTray::Message )
   {
     if( ticks % 2 == 0 )
-      setIcon( QIcon( ":/images/beebeep.png" ) );
+      setIcon( IconManager::instance().icon( "beebeep.png" ) );
     else
-      setIcon( QIcon( ":/images/beebeep-message.png" ) );
+      setIcon( IconManager::instance().icon( "beebeep-message.png" ) );
   }
 }

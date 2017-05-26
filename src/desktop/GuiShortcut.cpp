@@ -23,6 +23,7 @@
 
 #include "BeeUtils.h"
 #include "GuiShortcut.h"
+#include "IconManager.h"
 #include "Settings.h"
 #include "ShortcutManager.h"
 
@@ -32,7 +33,7 @@ GuiShortcut::GuiShortcut( QWidget *parent )
 {
   setupUi( this );
   setWindowTitle( tr( "Shortcuts" ) + QString( " - %1" ).arg( Settings::instance().programName() ) );
-  setWindowIcon( QIcon( ":/images/shortcut.png" ) );
+  setWindowIcon( IconManager::instance().icon( "shortcut.png" ) );
   Bee::removeContextHelpButton( this );
 
   QStringList labels;

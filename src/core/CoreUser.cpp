@@ -21,10 +21,10 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "BeeUtils.h"
 #include "ChatManager.h"
 #include "Connection.h"
 #include "Core.h"
+#include "IconManager.h"
 #include "Protocol.h"
 #include "Settings.h"
 #include "UserManager.h"
@@ -77,7 +77,7 @@ void Core::setLocalUserStatusDescription( int user_status, const QString& new_st
 
 void Core::showUserNameChanged( const User& u, const QString& old_user_name )
 {
-  QString sHtmlMsg = Bee::iconToHtml( ":/images/profile.png", "*N*" ) + QString( " " );
+  QString sHtmlMsg = IconManager::instance().toHtml( "profile.png", "*N*" ) + QString( " " );
 
   if( u.isLocal() )
     sHtmlMsg += tr( "You have changed your nickname from %1 to %2." ).arg( old_user_name, u.name() );
@@ -93,14 +93,14 @@ void Core::showUserVCardChanged( const User& u )
 
   if( u.isBirthDay() )
   {
-    sHtmlMsg = QString( "%1 <b>%2</b>" ).arg( Bee::iconToHtml( ":/images/birthday.png", "*!*" ),
+    sHtmlMsg = QString( "%1 <b>%2</b>" ).arg( IconManager::instance().toHtml( "birthday.png", "*!*" ),
                                         (u.isLocal() ? tr( "Happy Birthday to you!" ) : tr( "Happy Birthday to %1!" ).arg( u.name() ) ) );
     dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::UserInfo );
   }
 
   if( !u.vCard().info().isEmpty() )
   {
-    sHtmlMsg = QString( "%1 %2" ).arg( Bee::iconToHtml( ":/images/info.png", "*I*" ),
+    sHtmlMsg = QString( "%1 %2" ).arg( IconManager::instance().toHtml( "info.png", "*I*" ),
                                     (u.isLocal() ? tr( "You share this information" ) : tr( "%1 shares this information" ).arg( u.name() )) );
     sHtmlMsg += QString( ": <b>%1</b>" ).arg( u.vCard().info() );
     if( u.isLocal() )
@@ -311,13 +311,13 @@ void Core::toggleUserFavorite( VNumber user_id )
   if( u.isFavorite() )
   {
     u.setIsFavorite( false );
-    favorite_icon = Bee::iconToHtml( ":/images/star-bn.png", "*V*" );
+    favorite_icon = IconManager::instance().toHtml( "star-bn.png", "*V*" );
     favorite_txt = tr( "is removed from favorites" );
   }
   else
   {
     u.setIsFavorite( true );
-    favorite_icon = Bee::iconToHtml( ":/images/star.png", "*V*" );
+    favorite_icon = IconManager::instance().toHtml( "star.png", "*V*" );
     favorite_txt = tr( "is added to favorites" );
   }
 

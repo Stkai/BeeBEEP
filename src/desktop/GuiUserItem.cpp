@@ -21,12 +21,13 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "Avatar.h"
 #include "GuiChatItem.h"
 #include "GuiUserItem.h"
-#include "Settings.h"
+#include "IconManager.h"
 #include "PluginManager.h"
+#include "Settings.h"
 #include "UserManager.h"
-#include "Avatar.h"
 
 
 GuiUserItem::GuiUserItem( QTreeWidget* parent )
@@ -196,7 +197,7 @@ void GuiUserItem::onTickEvent( int ticks )
   if( unreadMessages() > 0 )
   {
     if( ticks % 2 == 0 )
-      setIcon( 0, QIcon( ":/images/beebeep-message.png" ) );
+      setIcon( 0, IconManager::instance().icon( "beebeep-message.png" ) );
     else
       setIcon( 0, m_defaultIcon );
   }

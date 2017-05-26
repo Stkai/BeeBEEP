@@ -24,6 +24,7 @@
 #include "BeeUtils.h"
 #include "ChatManager.h"
 #include "GuiCreateGroup.h"
+#include "IconManager.h"
 #include "Settings.h"
 #include "UserManager.h"
 
@@ -43,6 +44,8 @@ GuiCreateGroup::GuiCreateGroup( QWidget *parent )
   mp_twUsers->setAlternatingRowColors( true );
   mp_twUsers->setRootIsDecorated( false );
   mp_twUsers->setSelectionMode( QAbstractItemView::MultiSelection );
+
+  mp_pbLeave->setIcon( IconManager::instance().icon( "group-remove" ) );
 
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( checkAndClose() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );

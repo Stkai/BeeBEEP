@@ -2171,6 +2171,46 @@ Inserisci un nome differente.</translation>
         <source>Your status description</source>
         <translation>La descrizione dello tuo stato</translation>
     </message>
+    <message>
+        <source>Select the icon folder</source>
+        <translation>Seleziona la cartella con le icone</translation>
+    </message>
+    <message>
+        <source>Select icon theme</source>
+        <translation>Seleziona il tema delle icone</translation>
+    </message>
+    <message>
+        <source>You are using the default icons.</source>
+        <translation>Stai usando le icone predefinite.</translation>
+    </message>
+    <message>
+        <source>You are using custom icons in folder %1.</source>
+        <translation>Stai usando le icone nella cartella %1.</translation>
+    </message>
+    <message>
+        <source>Restore default icons</source>
+        <translation>Ripristina le icone predefinite</translation>
+    </message>
+    <message>
+        <source>Select emoticon theme</source>
+        <translation>Seleziona il tema delle faccine</translation>
+    </message>
+    <message>
+        <source>You are using the default emoticons.</source>
+        <translation>Stai usando le faccine predefinite.</translation>
+    </message>
+    <message>
+        <source>Select the emoticon folder</source>
+        <translation>Seleziona la cartella con le faccine</translation>
+    </message>
+    <message>
+        <source>You are using custom emoticons in folder %1.</source>
+        <translation>Stai usando le faccine nella cartella %1.</translation>
+    </message>
+    <message>
+        <source>Restore default emoticons</source>
+        <translation>Ripristina le faccine predefinite</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

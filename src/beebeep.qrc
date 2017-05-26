@@ -152,5 +152,6 @@
         <file>images/group-list.png</file>
         <file>images/refused-chat.png</file>
         <file>images/group-create.png</file>
+        <file>images/theme.png</file>
     </qresource>
 </RCC>

@@ -25,6 +25,7 @@
 #include "BeeUtils.h"
 #include "FileDialog.h"
 #include "GuiEditVCard.h"
+#include "IconManager.h"
 #include "Settings.h"
 #include "UserManager.h"
 
@@ -35,8 +36,12 @@ GuiEditVCard::GuiEditVCard( QWidget *parent )
   setupUi( this );
   setObjectName( "GuiEditVCard" );
   setWindowTitle( tr( "Edit your profile" ) + QString( " - %1" ).arg( Settings::instance().programName() ) );
-  setWindowIcon( QIcon( ":/images/profile-edit.png" ) );
+  setWindowIcon( IconManager::instance().icon( "profile-edit.png" ) );
   Bee::removeContextHelpButton( this );
+
+  mp_pbChangePhoto->setIcon( IconManager::instance().icon( "add.png" ) );
+  mp_pbRemovePhoto->setIcon( IconManager::instance().icon( "delete.png" ) );
+  mp_pbColor->setIcon( IconManager::instance().icon( "font-color.png" ) );
 
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( checkData() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );

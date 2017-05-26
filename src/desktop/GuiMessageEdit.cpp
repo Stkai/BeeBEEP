@@ -24,6 +24,7 @@
 #include "BeeUtils.h"
 #include "GuiMessageEdit.h"
 #include "HistoryManager.h"
+#include "IconManager.h"
 #include "Settings.h"
 #ifdef BEEBEEP_USE_HUNSPELL
   #include "SpellChecker.h"
@@ -366,18 +367,18 @@ void GuiMessageEdit::contextMenuEvent( QContextMenuEvent *event )
   mp_menuContext->clear();
 
   QAction* act;
-  act = mp_menuContext->addAction( QIcon( ":/images/undo.png" ), tr( "Undo" ), this, SLOT( undo() ), QKeySequence::Undo );
+  act = mp_menuContext->addAction( IconManager::instance().icon( "undo.png" ), tr( "Undo" ), this, SLOT( undo() ), QKeySequence::Undo );
   act->setEnabled( m_undoAvailable );
-  act = mp_menuContext->addAction( QIcon( ":/images/redo.png" ), tr( "Redo" ), this, SLOT( redo() ), QKeySequence::Redo );
+  act = mp_menuContext->addAction( IconManager::instance().icon( "redo.png" ), tr( "Redo" ), this, SLOT( redo() ), QKeySequence::Redo );
   act->setEnabled( m_redoAvailable );
   mp_menuContext->addSeparator();
-  mp_menuContext->addAction( QIcon( ":/images/cut.png" ), tr( "Cut" ), this, SLOT( cut() ), QKeySequence::Cut );
-  act = mp_menuContext->addAction( QIcon( ":/images/copy.png" ), tr( "Copy" ), this, SLOT( copy() ), QKeySequence::Copy );
+  mp_menuContext->addAction( IconManager::instance().icon( "cut.png" ), tr( "Cut" ), this, SLOT( cut() ), QKeySequence::Cut );
+  act = mp_menuContext->addAction( IconManager::instance().icon( "copy.png" ), tr( "Copy" ), this, SLOT( copy() ), QKeySequence::Copy );
   act->setEnabled( !textCursor().selectedText().isEmpty() );
-  act = mp_menuContext->addAction( QIcon( ":/images/paste.png" ), tr( "Paste" ), this, SLOT( paste() ), QKeySequence::Paste );
+  act = mp_menuContext->addAction( IconManager::instance().icon( "paste.png" ), tr( "Paste" ), this, SLOT( paste() ), QKeySequence::Paste );
   act->setEnabled( canPaste() );
   mp_menuContext->addSeparator();
-  mp_menuContext->addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), this, SLOT( selectAll() ), QKeySequence::SelectAll );
+  mp_menuContext->addAction( IconManager::instance().icon( "select-all.png" ), tr( "Select All" ), this, SLOT( selectAll() ), QKeySequence::SelectAll );
   mp_menuContext->addSeparator();
   if( !m_actionsToContextMenu.isEmpty() )
   {

@@ -26,6 +26,7 @@
 #include "GuiChatMessage.h"
 #include "ChatManager.h"
 #include "ChatMessage.h"
+#include "IconManager.h"
 #include "Settings.h"
 #include "ShortcutManager.h"
 
@@ -85,14 +86,14 @@ void GuiHome::checkAnchorClicked( const QUrl& url )
 void GuiHome::customContextMenu( const QPoint& )
 {
   mp_menuContext->clear();
-  mp_menuContext->addAction( QIcon( ":/images/background-color.png" ), tr( "Change background color" ) + QString("..."), this, SLOT( selectBackgroundColor() ) );
+  mp_menuContext->addAction( IconManager::instance().icon( "background-color.png" ), tr( "Change background color" ) + QString("..."), this, SLOT( selectBackgroundColor() ) );
   mp_menuContext->addSeparator();
-  mp_menuContext->addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), mp_teSystem, SLOT( selectAll() ), QKeySequence::SelectAll );
+  mp_menuContext->addAction( IconManager::instance().icon( "select-all.png" ), tr( "Select All" ), mp_teSystem, SLOT( selectAll() ), QKeySequence::SelectAll );
   mp_menuContext->addSeparator();
-  QAction* act = mp_menuContext->addAction( QIcon( ":/images/copy.png" ), tr( "Copy to clipboard" ), mp_teSystem, SLOT( copy() ), QKeySequence::Copy );
+  QAction* act = mp_menuContext->addAction( IconManager::instance().icon( "copy.png" ), tr( "Copy to clipboard" ), mp_teSystem, SLOT( copy() ), QKeySequence::Copy );
   act->setEnabled( !mp_teSystem->textCursor().selectedText().isEmpty() );
   mp_menuContext->addSeparator();
-  act = mp_menuContext->addAction( QIcon( ":/images/printer.png" ), tr( "Print..." ), this, SLOT( printActivities() ) );
+  act = mp_menuContext->addAction( IconManager::instance().icon( "printer.png" ), tr( "Print..." ), this, SLOT( printActivities() ) );
   QKeySequence ks = ShortcutManager::instance().shortcut( ShortcutManager::Print );
   if( !ks.isEmpty() && Settings::instance().useShortcuts() )
     act->setShortcut( ks );

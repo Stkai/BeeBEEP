@@ -27,6 +27,7 @@
 #include "Core.h"
 #include "Broadcaster.h"
 #include "FileShare.h"
+#include "IconManager.h"
 #include "SaveChatList.h"
 #include "Settings.h"
 #include "NetworkManager.h"
@@ -91,7 +92,7 @@ bool Core::checkSavingPaths()
   {
     qWarning() << "User" << Settings::instance().localUser().accountName() << "cannot save settings in path:" << qPrintable( Bee::convertToNativeFolderSeparator( sets->fileName() ) );
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
-                           tr( "%1 User %2 cannot save settings in path: %3" ).arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ) )
+                           tr( "%1 User %2 cannot save settings in path: %3" ).arg( IconManager::instance().toHtml( "warning.png", "*E*" ) )
                                                                               .arg( Settings::instance().localUser().accountName() )
                                                                               .arg( Bee::convertToNativeFolderSeparator( sets->fileName() ) ),
                            DispatchToChat, ChatMessage::System );
@@ -107,7 +108,7 @@ bool Core::checkSavingPaths()
     {
       qWarning() << "User" << Settings::instance().localUser().accountName() << "cannot save chat messages in path:" << qPrintable( Settings::instance().savedChatsFilePath() );
       dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
-                             tr( "%1 User %2 cannot save chat messages in path: %3" ).arg( Bee::iconToHtml( ":/images/warning.png", "*E*" ) )
+                             tr( "%1 User %2 cannot save chat messages in path: %3" ).arg( IconManager::instance().toHtml( "warning.png", "*E*" ) )
                                                                                 .arg( Settings::instance().localUser().accountName() )
                                                                                 .arg( Settings::instance().savedChatsFilePath() ),
                              DispatchToChat, ChatMessage::System );
@@ -146,7 +147,7 @@ bool Core::start()
       {
         dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                              tr( "%1 Unable to connect to %2 Network. Please check your firewall settings." )
-                               .arg( Bee::iconToHtml( ":/images/network-disconnected.png", "*E*" ),
+                               .arg( IconManager::instance().toHtml( "network-disconnected.png", "*E*" ),
                                      Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
         qWarning() << "Unable to bind a valid listener port";
         return false;
@@ -166,7 +167,7 @@ bool Core::start()
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                            tr( "%1 Unable to broadcast to %2 Network. Please check your firewall settings." )
-                             .arg( Bee::iconToHtml( ":/images/network-disconnected.png", "*E*" ),
+                             .arg( IconManager::instance().toHtml( "network-disconnected.png", "*E*" ),
                                    Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
     mp_listener->close();
     return false;
@@ -179,7 +180,7 @@ bool Core::start()
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                          tr( "%1 You are connected to %2 Network." )
-                         .arg( Bee::iconToHtml( ":/images/network-connected.png", "*C*" ),
+                         .arg( IconManager::instance().toHtml( "network-connected.png", "*C*" ),
                                Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
 
 #ifdef BEEBEEP_USE_MULTICAST_DNS
@@ -190,7 +191,7 @@ bool Core::start()
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                            tr( "%1 You have selected to join only in these workgroups: %2" )
-                           .arg( Bee::iconToHtml( ":/images/workgroup.png", "*C*" ) ).arg( Bee::stringListToTextString( Settings::instance().workgroups() ) ),
+                           .arg( IconManager::instance().toHtml( "workgroup.png", "*C*" ) ).arg( Bee::stringListToTextString( Settings::instance().workgroups() ) ),
                            DispatchToChat, ChatMessage::Connection );
     qDebug() << "Protocol accepts connections only from these workgroups:" << qPrintable( Settings::instance().workgroups().join( ", " ) );
   }
@@ -240,7 +241,7 @@ void Core::startDnsMulticasting()
     {
       dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                              tr( "%1 Zero Configuration started with service name: %2" )
-                               .arg( Bee::iconToHtml( ":/images/mdns.png", "*C*" ), Settings::instance().dnsRecord() ),
+                               .arg( IconManager::instance().toHtml( "mdns.png", "*C*" ), Settings::instance().dnsRecord() ),
                              DispatchToChat, ChatMessage::Connection );
     }
   }
@@ -255,7 +256,7 @@ void Core::stopDnsMulticasting()
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                              tr( "%1 Zero Configuration service closed." )
-                               .arg( Bee::iconToHtml( ":/images/mdns.png", "*C*" ) ),
+                               .arg( IconManager::instance().toHtml( "mdns.png", "*C*" ) ),
                              DispatchToChat, ChatMessage::Connection );
   }
 }
@@ -298,7 +299,7 @@ void Core::stop()
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                          tr( "%1 You are disconnected from %2 Network.")
-                           .arg( Bee::iconToHtml( ":/images/network-disconnected.png", "*D*" ),
+                           .arg( IconManager::instance().toHtml( "network-disconnected.png", "*D*" ),
                            Settings::instance().programName() ), DispatchToChat,
                            ChatMessage::Connection );
 
@@ -326,14 +327,14 @@ void Core::sendMulticastingMessage()
     {
       dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                                tr( "%1 Zero Configuration is browsing network for service: %2" )
-                                 .arg( Bee::iconToHtml( ":/images/mdns.png", "*C*" ), Settings::instance().dnsRecord() ),
+                                 .arg( IconManager::instance().toHtml( "mdns.png", "*C*" ), Settings::instance().dnsRecord() ),
                                DispatchToChat, ChatMessage::Connection );
     }
     else
     {
       dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                                tr( "%1 Zero Configuration cannot browse network for service: %2" )
-                                 .arg( Bee::iconToHtml( ":/images/mdns.png", "*C*" ), Settings::instance().dnsRecord() ),
+                                 .arg( IconManager::instance().toHtml( "mdns.png", "*C*" ), Settings::instance().dnsRecord() ),
                                DispatchToChat, ChatMessage::Connection );
     }
   }
@@ -351,7 +352,7 @@ void Core::sendBroadcastMessage()
     return;
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
-                         tr( "%1 Broadcasting to the %2 Network..." ).arg( Bee::iconToHtml( ":/images/broadcast.png", "*B*" ),
+                         tr( "%1 Broadcasting to the %2 Network..." ).arg( IconManager::instance().toHtml( "broadcast.png", "*B*" ),
                                                                            Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
   showMessage( tr( "Searching users" ), 3000 );
   QMetaObject::invokeMethod( mp_broadcaster, "sendBroadcast", Qt::QueuedConnection );
@@ -389,7 +390,7 @@ void Core::checkNetworkInterface()
       qWarning() << "Network interface is gone down";
       dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                              tr( "%1 Network interface %2 is gone down.")
-                               .arg( Bee::iconToHtml( ":/images/network-disconnected.png", "*D*" ),
+                               .arg( IconManager::instance().toHtml( "network-disconnected.png", "*D*" ),
                                NetworkManager::instance().localInterfaceHardwareAddress() ), DispatchToChat,
                                ChatMessage::Connection );
       emit networkInterfaceIsDown();
@@ -477,7 +478,7 @@ void Core::onUpdaterJobCompleted()
 
   qDebug() << "Latest version on website is" << qPrintable( latest_version ) << "(update is recommended)";
 
-  QString html_msg = QString( "%1 <b>%2</b>. <a href=""%3"">%4</a>." ).arg( Bee::iconToHtml( ":/images/update.png", "*!*" ),
+  QString html_msg = QString( "%1 <b>%2</b>. <a href=""%3"">%4</a>." ).arg( IconManager::instance().toHtml( "update.png", "*!*" ),
                                                            tr( "New version is available" ), download_url,
                                                            tr( "Click here to download" ) );
 
@@ -540,7 +541,7 @@ void Core::onTickEvent( int ticks )
 
   if( Protocol::instance().currentId() >= Protocol::instance().maxId() )
   {
-    QString html_msg = QString( "%1 <b>%2</b>." ).arg( Bee::iconToHtml( ":/images/warning.png", "*!*" ),
+    QString html_msg = QString( "%1 <b>%2</b>." ).arg( IconManager::instance().toHtml( "warning.png", "*!*" ),
                                                        tr( "Max ID is reached. Please close and restart the application." ) );
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, html_msg, DispatchToChat, ChatMessage::System );
   }

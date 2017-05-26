@@ -24,6 +24,7 @@
 #include "EmoticonManager.h"
 #include "GuiConfig.h"
 #include "GuiEmoticons.h"
+#include "IconManager.h"
 #include "Settings.h"
 
 
@@ -65,7 +66,7 @@ void GuiEmoticons::initEmoticons( int current_index )
 
 int GuiEmoticons::addEmoticonTab( GuiEmoticonWidget* emoticon_widget, Emoticon::Group emoticon_group, const QString& group_name )
 {
-  QIcon group_icon = emoticon_group != Emoticon::Unknown ? Emoticon::groupIcon( emoticon_group ) : QIcon( ":/images/recent.png");
+  QIcon group_icon = emoticon_group != Emoticon::Unknown ? Emoticon::groupIcon( emoticon_group ) : IconManager::instance().icon( "recent.png");
   emoticon_widget->setObjectName( emoticon_widget->objectName() + group_name );
   emoticon_widget->setEmoticonGroup( emoticon_group );
 

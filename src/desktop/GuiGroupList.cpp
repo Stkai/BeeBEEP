@@ -24,6 +24,7 @@
 #include "GuiConfig.h"
 #include "GuiGroupList.h"
 #include "ChatManager.h"
+#include "IconManager.h"
 #include "Settings.h"
 #include "UserManager.h"
 
@@ -37,9 +38,10 @@ GuiGroupList::GuiGroupList( QWidget* parent )
   mp_twGroupList->setColumnCount( 1 );
   mp_twGroupList->setRootIsDecorated( true );
   mp_twGroupList->setSortingEnabled( true );
-  QString w_stylesheet = "background: white url(:/images/group-list.png);"
+  QString w_stylesheet = QString( "background: white url(%1);"
                         "background-repeat: no-repeat;"
-                        "background-position: bottom center;";
+                        "background-position: bottom center;" ).arg( IconManager::instance().iconPath( "group-list.png" ) );
+
   mp_twGroupList->setStyleSheet( w_stylesheet );
 
   mp_twGroupList->setContextMenuPolicy( Qt::CustomContextMenu );
@@ -59,20 +61,22 @@ GuiGroupList::GuiGroupList( QWidget* parent )
   m_blockShowChatRequest = false;
   m_filter = "";
 
-  mp_actCreateGroup = new QAction( QIcon( ":/images/group-add.png" ), tr( "Create new group chat" ), this );
+  mp_actCreateGroup = new QAction( IconManager::instance().icon( "group-add.png" ), tr( "Create new group chat" ), this );
   connect( mp_actCreateGroup, SIGNAL( triggered() ), this, SIGNAL( createGroupRequest() ) );
 
-  mp_actEditGroup = new QAction( QIcon( ":/images/group-edit.png" ), tr( "Edit group chat" ), this );
+  mp_actEditGroup = new QAction( IconManager::instance().icon( "group-edit.png" ), tr( "Edit group chat" ), this );
   connect( mp_actEditGroup, SIGNAL( triggered() ), this, SLOT( editGroupSelected() ) );
 
-  mp_actOpenChat = new QAction( QIcon( ":/images/chat.png" ), tr( "Open chat" ), this );
+  mp_actOpenChat = new QAction( IconManager::instance().icon( "chat.png" ), tr( "Open chat" ), this );
   connect( mp_actOpenChat, SIGNAL( triggered() ), this, SLOT( openGroupChatSelected() ) );
 
-  mp_actEnableGroupNotification = new QAction( QIcon( ":/images/notification-disabled.png" ), tr( "Enable notifications" ), this );
+  mp_actEnableGroupNotification = new QAction( IconManager::instance().icon( "notification-disabled.png" ), tr( "Enable notifications" ), this );
   connect( mp_actEnableGroupNotification, SIGNAL( triggered() ), this, SLOT( enableGroupNotification() ) );
 
-  mp_actDisableGroupNotification = new QAction( QIcon( ":/images/notification-enabled.png" ), tr( "Disable notifications" ), this );
+  mp_actDisableGroupNotification = new QAction( IconManager::instance().icon( "notification-enabled.png" ), tr( "Disable notifications" ), this );
   connect( mp_actDisableGroupNotification, SIGNAL( triggered() ), this, SLOT( disableGroupNotification() ) );
+
+  mp_pbClearFilter->setIcon( IconManager::instance().icon( "clear.png" ) );
 
   connect( mp_twGroupList, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showGroupMenu( const QPoint& ) ) );
   connect( mp_twGroupList, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemClicked( QTreeWidgetItem*, int ) ), Qt::QueuedConnection );
@@ -173,7 +177,7 @@ void GuiGroupList::showGroupMenu( const QPoint& p )
   {
     if( UserManager::instance().userList().toList().size() < 2 )
     {
-      mp_contextMenu->addAction( QIcon( ":/images/info.png" ), tr( "Please wait for two or more users" ) );
+      mp_contextMenu->addAction( IconManager::instance().icon( "info.png" ), tr( "Please wait for two or more users" ) );
       mp_contextMenu->addSeparator();
     }
 

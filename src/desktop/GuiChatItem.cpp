@@ -24,6 +24,7 @@
 #include "GuiChatItem.h"
 #include "Chat.h"
 #include "ChatManager.h"
+#include "IconManager.h"
 #include "Settings.h"
 #include "UserManager.h"
 
@@ -70,7 +71,7 @@ bool GuiChatItem::updateItem( const Chat& c )
     chat_name = defaultChatName();
     tool_tip = QObject::tr( "Open chat with all local users" );
     setData( 0, ChatName, " " );
-    m_defaultIcon = QIcon( ":/images/default-chat-online.png" );
+    m_defaultIcon = IconManager::instance().icon( "default-chat-online.png" );
   }
   else
   {
@@ -89,7 +90,7 @@ bool GuiChatItem::updateItem( const Chat& c )
     if( c.isGroup() )
     {
       chat_name = c.name();
-      m_defaultIcon = QIcon( ":/images/group.png" );
+      m_defaultIcon = IconManager::instance().icon( "group.png" );
     }
     else
       chat_name = sl.isEmpty() ? c.name() : sl.first();
@@ -109,7 +110,7 @@ bool GuiChatItem::updateItem( const Chat& c )
   setData( 0, ChatUnreadMessages, c.unreadMessages() );
   setData( 0, ChatMessages, c.messages().size() + ChatManager::instance().savedChatSize( c.name() ) );
   if( m_defaultIcon.isNull() )
-    m_defaultIcon = QIcon( ":/images/chat.png" );
+    m_defaultIcon = IconManager::instance().icon( "chat.png" );
   if( !chatHasOnlineUsers( c ) )
     m_defaultIcon = Bee::convertToGrayScale( m_defaultIcon.pixmap( Settings::instance().avatarIconSize() ) );
   setIcon( 0, m_defaultIcon );
@@ -123,7 +124,7 @@ void GuiChatItem::onTickEvent( int ticks )
   if( unreadMessages() > 0 )
   {
     if( ticks % 2 == 0 )
-      setIcon( 0, QIcon( ":/images/beebeep-message.png" ) );
+      setIcon( 0, IconManager::instance().icon( "beebeep-message.png" ) );
     else
       setIcon( 0, m_defaultIcon );
   }

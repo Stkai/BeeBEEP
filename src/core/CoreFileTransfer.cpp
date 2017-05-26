@@ -30,6 +30,7 @@
 #include "Core.h"
 #include "FileShare.h"
 #include "FileTransferPeer.h"
+#include "IconManager.h"
 #include "Protocol.h"
 #include "Settings.h"
 #ifdef BEEBEEP_USE_SHAREDESKTOP
@@ -48,7 +49,7 @@ bool Core::startFileTransferServer()
 
   if( !mp_fileTransfer->startListener() )
   {
-    QString icon_html = Bee::iconToHtml( ":/images/upload.png", "*F*" );
+    QString icon_html = IconManager::instance().toHtml( "upload.png", "*F*" );
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                            tr( "%1 Unable to start file transfer server: bind address/port failed." ).arg( icon_html ),
                            DispatchToChat, ChatMessage::FileTransfer );
@@ -86,7 +87,7 @@ bool Core::downloadFile( VNumber user_id, const FileInfo& fi, bool show_message 
   {
     if( show_message )
     {
-      icon_html = Bee::iconToHtml( ":/images/red-ball.png", "*F*" );
+      icon_html = IconManager::instance().toHtml( "red-ball.png", "*F*" );
       dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to download %2 from %3: user is offline." ).arg( icon_html, fi.name(), u.name() ),
                              chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
     }
@@ -102,7 +103,7 @@ bool Core::downloadFile( VNumber user_id, const FileInfo& fi, bool show_message 
     {
       if( show_message )
       {
-        icon_html = Bee::iconToHtml( ":/images/red-ball.png", "*F*" );
+        icon_html = IconManager::instance().toHtml( "red-ball.png", "*F*" );
         dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to download %2 from %3: folder %4 cannot be created." )
                                .arg( icon_html, fi.name(), u.name(), folder_path.absolutePath() ),
                                chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
@@ -114,7 +115,7 @@ bool Core::downloadFile( VNumber user_id, const FileInfo& fi, bool show_message 
 
   if( show_message )
   {
-    icon_html = Bee::iconToHtml( ":/images/download.png", "*F*" );
+    icon_html = IconManager::instance().toHtml( "download.png", "*F*" );
     dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 Downloading %2 from %3." )
                          .arg( icon_html, fi.name(), u.name() ),
                          chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
@@ -134,7 +135,7 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
     return;
   }
 
-  QString icon_html = Bee::iconToHtml( fi.isDownload() ? ":/images/download.png" : ":/images/upload.png", "*F*" );
+  QString icon_html = IconManager::instance().toHtml( fi.isDownload() ? "download.png" : "upload.png", "*F*" );
   QString action_txt = fi.isDownload() ? tr( "Download" ) : tr( "Upload" );
   QString sys_msg = QString( "%1 %2 %3 %4 %5: %6." ).arg( icon_html, action_txt, fi.name(), fi.isDownload() ? tr( "from") : tr( "to" ), u.name(), msg );
   QString sys_msg_img_preview = "";
@@ -216,7 +217,7 @@ void Core::checkFileTransferProgress( VNumber peer_id, VNumber user_id, const Fi
 
 bool Core::sendFile( VNumber user_id, const QString& file_path, const QString& share_folder, bool to_share_box, VNumber chat_id )
 {
-  QString icon_html = Bee::iconToHtml( ":/images/red-ball.png", "*F*" );
+  QString icon_html = IconManager::instance().toHtml( "red-ball.png", "*F*" );
 
   if( !Settings::instance().enableFileTransfer() )
   {
@@ -280,7 +281,7 @@ bool Core::sendFile( VNumber user_id, const QString& file_path, const QString& s
   Connection* c = connection( u.id() );
   if( c )
   {
-    icon_html = Bee::iconToHtml( ":/images/upload.png", "*F*" );
+    icon_html = IconManager::instance().toHtml( "upload.png", "*F*" );
     Message m = Protocol::instance().fileInfoToMessage( fi );
     if( c->sendMessage( m ) )
     {
@@ -318,7 +319,7 @@ void Core::refuseToDownloadFile( VNumber user_id, const FileInfo& fi )
 
   Chat chat_to_show_message = ChatManager::instance().findChatByPrivateId( fi.chatPrivateId(), false, user_id );
   dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 You have refused to download %2 from %3." )
-                         .arg( Bee::iconToHtml( ":/images/download.png", "*F*" ), fi.name(), u.name() ),
+                         .arg( IconManager::instance().toHtml( "download.png", "*F*" ), fi.name(), u.name() ),
                          chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
 
   Message m = Protocol::instance().fileInfoRefusedToMessage( fi );
@@ -346,7 +347,7 @@ void Core::refuseToDownloadFolder( VNumber user_id, const QString& folder_name, 
 
   Chat chat_to_show_message = ChatManager::instance().findChatByPrivateId( chat_private_id, false, user_id );
   dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 You have refused to download folder %2 from %3." )
-                         .arg( Bee::iconToHtml( ":/images/download.png", "*F*" ), folder_name, u.name() ),
+                         .arg( IconManager::instance().toHtml( "download.png", "*F*" ), folder_name, u.name() ),
                          chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
 
   Message m = Protocol::instance().folderRefusedToMessage( folder_name, chat_private_id );
@@ -460,7 +461,7 @@ void Core::addListToLocalShare()
                      .arg( bfsl->shareList().size() )
                      .arg( Bee::bytesToString( bfsl->shareSize() ) );
 
-  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( Bee::iconToHtml( ":/images/upload.png", "*F*" ), share_status ),
+  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( IconManager::instance().toHtml( "upload.png", "*F*" ), share_status ),
                          DispatchToChat, ChatMessage::FileTransfer );
 
   BeeApplication* bee_app = (BeeApplication*)qApp;
@@ -488,7 +489,7 @@ void Core::removeAllPathsFromShare()
 
   QString share_status = tr( "All paths are removed from file sharing" );
 
-  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( Bee::iconToHtml( ":/images/upload.png", "*F*" ), share_status ),
+  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( IconManager::instance().toHtml( "upload.png", "*F*" ), share_status ),
                          DispatchToChat, ChatMessage::FileTransfer );
 
   createLocalShareMessage();
@@ -511,7 +512,7 @@ void Core::removePathFromShare( const QString& share_path )
   else
     share_status = tr( "%1 is removed from file sharing with %2 files" ).arg( share_path ).arg( num_files );
 
-  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( Bee::iconToHtml( ":/images/upload.png", "*F*" ), share_status ),
+  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( IconManager::instance().toHtml( "upload.png", "*F*" ), share_status ),
                          DispatchToChat, ChatMessage::FileTransfer );
 
   if( num_files > 0 )
@@ -570,7 +571,7 @@ void Core::buildLocalShareList()
 
 bool Core::sendFolder( const User& u, const QFileInfo& file_info, const QString& chat_private_id )
 {
-  QString icon_html = Bee::iconToHtml( ":/images/upload.png", "*F*" );
+  QString icon_html = IconManager::instance().toHtml( "upload.png", "*F*" );
 
   Chat chat_to_show_message = ChatManager::instance().findChatByPrivateId( chat_private_id, false, u.id() );
 
@@ -612,7 +613,7 @@ void Core::addFolderToFileTransfer()
 
   Chat chat_to_show_message = ChatManager::instance().findChatByPrivateId( bfsl->chatPrivateId(), false, bfsl->userId() );
   User u = UserManager::instance().findUser( bfsl->userId() );
-  QString sys_header = tr( "%1 Unable to send folder %2" ).arg( Bee::iconToHtml( ":/images/red-ball.png", "*F*" ) )
+  QString sys_header = tr( "%1 Unable to send folder %2" ).arg( IconManager::instance().toHtml( "red-ball.png", "*F*" ) )
                                                           .arg( folder_name ) + QString( ": " );
 
   if( file_info_list.isEmpty() )
@@ -641,7 +642,7 @@ void Core::addFolderToFileTransfer()
 
   mp_fileTransfer->addFileInfoList( file_info_list );
 
-  QString icon_html = Bee::iconToHtml( ":/images/upload.png", "*F*" );
+  QString icon_html = IconManager::instance().toHtml( "upload.png", "*F*" );
   Message m = Protocol::instance().createFolderMessage( folder_name, file_info_list, mp_fileTransfer->serverPort() );
 
   if( !m.isValid() )

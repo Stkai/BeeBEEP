@@ -25,6 +25,7 @@
 #include "ChatManager.h"
 #include "GuiChatItem.h"
 #include "GuiSavedChat.h"
+#include "IconManager.h"
 #include "Settings.h"
 #include "ShortcutManager.h"
 
@@ -80,27 +81,27 @@ void GuiSavedChat::customContextMenu( const QPoint& )
 {
   mp_menuContext->clear();
 
-  QAction* act = mp_menuContext->addAction( QIcon( ":/images/search.png" ), tr( "Find text in chat" ), this, SLOT( showFindTextInChatDialog() ) );
+  QAction* act = mp_menuContext->addAction( IconManager::instance().icon( "search.png" ), tr( "Find text in chat" ), this, SLOT( showFindTextInChatDialog() ) );
   QKeySequence ks = ShortcutManager::instance().shortcut( ShortcutManager::FindTextInChat );
   if( !ks.isEmpty() && Settings::instance().useShortcuts() )
     act->setShortcut( ks );
   mp_menuContext->addSeparator();
-  mp_menuContext->addAction( QIcon( ":/images/paste.png" ), tr( "Copy to clipboard" ), mp_teSavedChat, SLOT( copy() ), QKeySequence::Copy );
+  mp_menuContext->addAction( IconManager::instance().icon( "paste.png" ), tr( "Copy to clipboard" ), mp_teSavedChat, SLOT( copy() ), QKeySequence::Copy );
   mp_menuContext->addSeparator();
-  mp_menuContext->addAction( QIcon( ":/images/select-all.png" ), tr( "Select All" ), mp_teSavedChat, SLOT( selectAll() ), QKeySequence::SelectAll );
+  mp_menuContext->addAction( IconManager::instance().icon( "select-all.png" ), tr( "Select All" ), mp_teSavedChat, SLOT( selectAll() ), QKeySequence::SelectAll );
   mp_menuContext->addSeparator();
   if( !mp_teSavedChat->textCursor().selectedText().isEmpty() )
   {
-    mp_menuContext->addAction( QIcon( ":/images/network.png" ), tr( "Open selected text as url" ), this, SLOT( openSelectedTextAsUrl() ) );
+    mp_menuContext->addAction( IconManager::instance().icon( "network.png" ), tr( "Open selected text as url" ), this, SLOT( openSelectedTextAsUrl() ) );
     mp_menuContext->addSeparator();
   }
-  act = mp_menuContext->addAction( QIcon( ":/images/printer.png" ), tr( "Print..." ), this, SLOT( printChat() ) );
+  act = mp_menuContext->addAction( IconManager::instance().icon( "printer.png" ), tr( "Print..." ), this, SLOT( printChat() ) );
   ks = ShortcutManager::instance().shortcut( ShortcutManager::Print );
   if( !ks.isEmpty() && Settings::instance().useShortcuts() )
     act->setShortcut( ks );
 
   mp_menuContext->addSeparator();
-  mp_menuContext->addAction( QIcon( ":/images/remove-saved-chat.png" ), tr( "Delete" ), this, SLOT( deleteSavedChat() ) );
+  mp_menuContext->addAction( IconManager::instance().icon( "remove-saved-chat.png" ), tr( "Delete" ), this, SLOT( deleteSavedChat() ) );
 
   mp_menuContext->exec( QCursor::pos() );
 }

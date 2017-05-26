@@ -25,6 +25,7 @@
 #include "GuiShareLocal.h"
 #include "FileDialog.h"
 #include "FileShare.h"
+#include "IconManager.h"
 #include "Settings.h"
 
 
@@ -73,19 +74,19 @@ void GuiShareLocal::setupToolBar( QToolBar* bar )
   bar->addWidget( mp_labelShareStats );
   bar->addSeparator();
 
-  mp_actAddFile = bar->addAction( QIcon( ":/images/file-add.png" ), tr( "Share a file" ), this, SLOT( addFilePath() ) );
+  mp_actAddFile = bar->addAction( IconManager::instance().icon( "file-add.png" ), tr( "Share a file" ), this, SLOT( addFilePath() ) );
   mp_actAddFile->setStatusTip( tr( "Add a file to your local share" ) );
 
-  mp_actAddFolder = bar->addAction( QIcon( ":/images/folder-add.png" ), tr( "Share a folder" ), this, SLOT( addFolderPath() ) );
+  mp_actAddFolder = bar->addAction( IconManager::instance().icon( "folder-add.png" ), tr( "Share a folder" ), this, SLOT( addFolderPath() ) );
   mp_actAddFolder->setStatusTip( tr( "Add a folder to your local share" ) );
 
-  mp_actUpdate = bar->addAction( QIcon( ":/images/update.png" ), tr( "Update shares" ), this, SLOT( updateList() ) );
+  mp_actUpdate = bar->addAction( IconManager::instance().icon( "update.png" ), tr( "Update shares" ), this, SLOT( updateList() ) );
   mp_actUpdate->setStatusTip( tr( "Update shared folders and files" ) );
 
-  mp_actRemove = bar->addAction( QIcon( ":/images/delete.png" ), tr( "Remove shared path" ), this, SLOT( removePath() ) );
+  mp_actRemove = bar->addAction( IconManager::instance().icon( "delete.png" ), tr( "Remove shared path" ), this, SLOT( removePath() ) );
   mp_actRemove->setStatusTip( tr( "Remove shared path from the list" ) );
 
-  mp_actClear = bar->addAction( QIcon( ":/images/clear.png" ), tr( "Clear all shares" ), this, SLOT( clearAllPaths() ) );
+  mp_actClear = bar->addAction( IconManager::instance().icon( "clear.png" ), tr( "Clear all shares" ), this, SLOT( clearAllPaths() ) );
   mp_actClear->setStatusTip( tr( "Clear all shared paths from the list" ) );
 
   showStats( 0, 0 );

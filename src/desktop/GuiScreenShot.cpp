@@ -24,6 +24,7 @@
 #include "GuiScreenShot.h"
 #include "BeeUtils.h"
 #include "FileDialog.h"
+#include "IconManager.h"
 #include "Settings.h"
 
 
@@ -32,7 +33,7 @@ GuiScreenShot::GuiScreenShot( QWidget* parent )
 {
   setObjectName( "GuiScreenShot" );
   setWindowTitle( QString( "%1 - %2" ).arg( tr( "Make a Screenshot" ), Settings::instance().programName() ) );
-  setWindowIcon( QIcon( ":/images/screenshot.png" ) );
+  setWindowIcon( IconManager::instance().icon( "screenshot.png" ) );
 
   mp_labelScreenShot = new QLabel( this );
   mp_labelScreenShot->setScaledContents( true );
@@ -91,10 +92,10 @@ void GuiScreenShot::setupToolBar( QToolBar* bar )
 
   bar->addSeparator();
 
-  mp_actShot = bar->addAction( QIcon( ":/images/screenshot.png" ), tr( "Capture screen" ), this, SLOT( doScreenShot() ) );
-  mp_actSend = bar->addAction( QIcon( ":/images/send.png" ), tr( "Send screenshot to a user" ), this, SLOT( doSend() ) );
-  mp_actSave = bar->addAction( QIcon( ":/images/save-as.png" ), tr( "Save screenshot" ), this, SLOT( doSave() ) );
-  mp_actDelete = bar->addAction( QIcon( ":/images/delete.png" ), tr( "Delete screenshot" ), this, SLOT( doDelete() ) );
+  mp_actShot = bar->addAction( IconManager::instance().icon( "screenshot.png" ), tr( "Capture screen" ), this, SLOT( doScreenShot() ) );
+  mp_actSend = bar->addAction( IconManager::instance().icon( "send.png" ), tr( "Send screenshot to a user" ), this, SLOT( doSend() ) );
+  mp_actSave = bar->addAction( IconManager::instance().icon( "save-as.png" ), tr( "Save screenshot" ), this, SLOT( doSave() ) );
+  mp_actDelete = bar->addAction( IconManager::instance().icon( "delete.png" ), tr( "Delete screenshot" ), this, SLOT( doDelete() ) );
 
   updateScreenShot();
 }

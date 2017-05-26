@@ -54,6 +54,7 @@ public:
 
   static QString groupFolder( int );
   static QIcon groupIcon( int );
+  static QString sourceFolder();
 
 private:
   QString m_textToMatch;
@@ -73,7 +74,7 @@ inline void Emoticon::setGroup( int new_value ) { m_group = new_value; }
 inline int Emoticon::group() const { return m_group; }
 inline bool Emoticon::isInGroup() const { return m_group > Emoticon::Text && m_group < Emoticon::NumGroups; }
 inline int Emoticon::sortOrder() const { return m_sortOrder; }
-inline QString Emoticon::fileName() const { return QString( ":/%1/%2.png" ).arg( groupFolder( m_group ) ).arg( m_name ); }
+inline QString Emoticon::fileName() const { return QString( "%1/%2.png" ).arg( groupFolder( m_group ) ).arg( m_name ); }
 inline QString Emoticon::toHtml( int icon_size ) const { return QString( "<img src=\"%1\"%2 />").arg( fileName() ).arg( QString( " height=\"%1\"" ).arg( icon_size ) ); }
 inline QIcon Emoticon::icon() const { return QIcon( fileName() ); }
 

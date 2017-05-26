@@ -31,6 +31,7 @@
 #include "GuiShareLocal.h"
 #include "GuiShareNetwork.h"
 #include "GuiFileSharing.h"
+#include "IconManager.h"
 #include "Settings.h"
 #include "UserManager.h"
 
@@ -39,7 +40,7 @@ GuiFileSharing::GuiFileSharing( Core* main_core, QWidget *parent )
  : QMainWindow( parent ), mp_core( main_core )
 {
   setObjectName( "GuiFileSharing" );
-  setWindowIcon( QIcon( ":/images/file-sharing.png" ) );
+  setWindowIcon( IconManager::instance().icon( "file-sharing.png" ) );
   setWindowTitle( QString( "%1 - %2" ).arg( tr( "File Sharing" ), Settings::instance().programName() ) );
 
   // Create a status bar before the actions and the menu
@@ -141,9 +142,9 @@ void GuiFileSharing::createActions()
 
 void GuiFileSharing::createToolbars()
 {
-  mp_actViewShareLocal = mp_barView->addAction( QIcon( ":/images/upload.png" ), tr( "Show my shared files" ), this, SLOT( raiseLocalShareView() ) );
-  mp_actViewShareNetwork = mp_barView->addAction( QIcon( ":/images/download.png" ), tr( "Show the network shared files" ), this, SLOT( raiseNetworkShareView() ) );
-  mp_actViewShareBox = mp_barView->addAction( QIcon( ":/images/sharebox.png" ), tr( "Show the ShareBox" ), this, SLOT( raiseShareBoxView() ) );
+  mp_actViewShareLocal = mp_barView->addAction( IconManager::instance().icon( "upload.png" ), tr( "Show my shared files" ), this, SLOT( raiseLocalShareView() ) );
+  mp_actViewShareNetwork = mp_barView->addAction( IconManager::instance().icon( "download.png" ), tr( "Show the network shared files" ), this, SLOT( raiseNetworkShareView() ) );
+  mp_actViewShareBox = mp_barView->addAction( IconManager::instance().icon( "sharebox.png" ), tr( "Show the ShareBox" ), this, SLOT( raiseShareBoxView() ) );
   addToolBarBreak( Qt::RightToolBarArea );
 }
 

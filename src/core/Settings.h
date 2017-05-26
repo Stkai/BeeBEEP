@@ -428,6 +428,11 @@ public:
   inline void setRefusedChats( const QStringList& );
   inline const QStringList& refusedChats() const;
 
+  inline void setIconSourcePath( const QString& );
+  inline const QString& iconSourcePath() const;
+  inline void setEmoticonSourcePath( const QString& );
+  inline const QString& emoticonSourcePath() const;
+
   QString simpleEncrypt( const QString& );
   QString simpleDecrypt( const QString& );
 
@@ -664,6 +669,9 @@ private:
 
   QMap<QString,QVariant> m_presetMessages;
   QStringList m_refusedChats;
+
+  QString m_iconSourcePath;
+  QString m_emoticonSourcePath;
 
 };
 
@@ -942,5 +950,9 @@ inline void Settings::setHomeBackgroundColor( const QString& new_value ) { m_hom
 inline const QString& Settings::homeBackgroundColor() const { return m_homeBackgroundColor; }
 inline void Settings::setRefusedChats( const QStringList& new_value ) { m_refusedChats = new_value; }
 inline const QStringList& Settings::refusedChats() const { return m_refusedChats; }
+inline void Settings::setIconSourcePath( const QString& new_value ) { m_iconSourcePath = new_value; }
+inline const QString& Settings::iconSourcePath() const { return m_iconSourcePath; }
+inline void Settings::setEmoticonSourcePath( const QString& new_value ) { m_emoticonSourcePath = new_value; }
+inline const QString& Settings::emoticonSourcePath() const { return m_emoticonSourcePath; }
 
 #endif // BEEBEEP_SETTINGS_H

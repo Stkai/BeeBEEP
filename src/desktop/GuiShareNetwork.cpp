@@ -26,6 +26,7 @@
 #include "GuiFileInfoList.h"
 #include "GuiShareNetwork.h"
 #include "FileShare.h"
+#include "IconManager.h"
 #include "Settings.h"
 #include "UserManager.h"
 
@@ -52,16 +53,16 @@ void GuiShareNetwork::setupToolBar( QToolBar* bar )
   QLabel *label;
 
   /* scan button */
-  mp_actScan = bar->addAction( QIcon( ":/images/network-scan.png" ), tr( "Scan network" ), this, SLOT( scanNetwork() ) );
+  mp_actScan = bar->addAction( IconManager::instance().icon( "network-scan.png" ), tr( "Scan network" ), this, SLOT( scanNetwork() ) );
   mp_actScan->setStatusTip( tr( "Search shared files in your network" ) );
 
   /* Reload button */
-  mp_actReload = bar->addAction( QIcon( ":/images/update.png" ), tr( "Reload list" ), this, SLOT( reloadList() ) );
+  mp_actReload = bar->addAction( IconManager::instance().icon( "update.png" ), tr( "Reload list" ), this, SLOT( reloadList() ) );
   mp_actReload->setStatusTip( tr( "Clear and reload list" ) );
   mp_actReload->setEnabled( false );
 
   /* Download button */
-  mp_actDownload = bar->addAction( QIcon( ":/images/download.png" ), tr( "Download" ), this, SLOT( downloadSelected() ) );
+  mp_actDownload = bar->addAction( IconManager::instance().icon( "download.png" ), tr( "Download" ), this, SLOT( downloadSelected() ) );
   mp_actDownload->setStatusTip( tr( "Download single or multiple files simultaneously" ) );
   mp_actDownload->setEnabled( false );
 
@@ -90,7 +91,7 @@ void GuiShareNetwork::setupToolBar( QToolBar* bar )
   mp_comboFileType->setObjectName( "GuiComboBoxFilterFileType" );
   for( int i = Bee::FileAudio; i < Bee::NumFileType; i++ )
     mp_comboFileType->insertItem( i, GuiIconProvider::instance().iconFromFileType( i ), Bee::fileTypeToString( (Bee::FileType)i ), i );
-  mp_comboFileType->insertItem( Bee::NumFileType, QIcon( ":/images/star.png" ), tr( "All Files" ), Bee::NumFileType );
+  mp_comboFileType->insertItem( Bee::NumFileType, IconManager::instance().icon( "star.png" ), tr( "All Files" ), Bee::NumFileType );
   mp_comboFileType->setCurrentIndex( Bee::NumFileType );
   bar->addWidget( mp_comboFileType );
   connect( mp_comboFileType, SIGNAL( currentIndexChanged( int ) ), this, SLOT( applyFilter() ), Qt::QueuedConnection );
@@ -378,7 +379,7 @@ void GuiShareNetwork::openDownloadMenu( const QPoint& p )
 
   if( selected_items )
   {
-    QAction* act = mp_menuContext->addAction( QIcon( ":/images/download.png" ), "", this, SLOT( downloadSelected() ) );
+    QAction* act = mp_menuContext->addAction( IconManager::instance().icon( "download.png" ), "", this, SLOT( downloadSelected() ) );
     QString action_text;
     if( selected_items >= Settings::instance().maxQueuedDownloads() )
     {
@@ -390,7 +391,7 @@ void GuiShareNetwork::openDownloadMenu( const QPoint& p )
     act->setText( action_text );
 
     mp_menuContext->addSeparator();
-    mp_menuContext->addAction( QIcon( ":/images/clear.png" ), tr( "Clear selection" ), &m_fileInfoList, SLOT( clearTreeSelection() ) );
+    mp_menuContext->addAction( IconManager::instance().icon( "clear.png" ), tr( "Clear selection" ), &m_fileInfoList, SLOT( clearTreeSelection() ) );
 
   }
   else
@@ -400,8 +401,8 @@ void GuiShareNetwork::openDownloadMenu( const QPoint& p )
   }
 
   mp_menuContext->addSeparator();
-  mp_menuContext->addAction( QIcon( ":/images/add.png" ), tr( "Expand all items" ), mp_twShares, SLOT( expandAll() ) );
-  mp_menuContext->addAction( QIcon( ":/images/remove.png" ), tr( "Collapse all items" ), mp_twShares, SLOT( collapseAll() ) );
+  mp_menuContext->addAction( IconManager::instance().icon( "add.png" ), tr( "Expand all items" ), mp_twShares, SLOT( expandAll() ) );
+  mp_menuContext->addAction( IconManager::instance().icon( "remove.png" ), tr( "Collapse all items" ), mp_twShares, SLOT( collapseAll() ) );
   mp_menuContext->exec( QCursor::pos() );
 }
 

@@ -21,13 +21,14 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "BeeUtils.h"
-#include "GuiVCard.h"
-#include "PluginManager.h"
 #include "Avatar.h"
+#include "BeeUtils.h"
+#include "ChatManager.h"
+#include "GuiVCard.h"
+#include "IconManager.h"
+#include "PluginManager.h"
 #include "Settings.h"
 #include "UserManager.h"
-#include "ChatManager.h"
 
 
 GuiVCard::GuiVCard( QWidget *parent )
@@ -38,6 +39,13 @@ GuiVCard::GuiVCard( QWidget *parent )
 
   setWindowFlags( Qt::Popup );
   setAttribute( Qt::WA_DeleteOnClose, true );
+
+  mp_pbChat->setIcon( IconManager::instance().icon( "chat.png" ) );
+  mp_pbFile->setIcon( IconManager::instance().icon( "send-file.png" ) );
+  mp_pbColor->setIcon( IconManager::instance().icon( "font-color.png" ) );
+  mp_pbFavorite->setIcon( IconManager::instance().icon( "star.png" ) );
+  mp_pbRemove->setIcon( IconManager::instance().icon( "delete.png" ) );
+  mp_pbBuzz->setIcon( IconManager::instance().icon( "bell.png" ) );
 
   connect( mp_pbChat, SIGNAL( clicked() ), this, SLOT( showPrivateChat() ) );
   connect( mp_pbFile, SIGNAL( clicked() ), this, SLOT( sendFile() ) );
@@ -128,12 +136,12 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
       mp_pbFavorite->show();
       if( u.isFavorite() )
       {
-        mp_pbFavorite->setIcon( QIcon( ":/images/star.png" ) );
+        mp_pbFavorite->setIcon( IconManager::instance().icon( "star.png" ) );
         mp_pbFavorite->setToolTip( tr( "Remove from favorites" ) );
       }
       else
       {
-        mp_pbFavorite->setIcon( QIcon( ":/images/star-bn.png" ) );
+        mp_pbFavorite->setIcon( IconManager::instance().icon( "star-bn.png" ) );
         mp_pbFavorite->setToolTip( tr( "Add to favorites" ) );
       }
     }

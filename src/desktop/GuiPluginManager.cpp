@@ -24,6 +24,7 @@
 #include "BeeUtils.h"
 #include "FileDialog.h"
 #include "GuiPluginManager.h"
+#include "IconManager.h"
 #include "PluginManager.h"
 #include "Settings.h"
 
@@ -34,7 +35,7 @@ GuiPluginManager::GuiPluginManager( QWidget *parent )
   setupUi( this );
   setObjectName( "GuiPluginManager" );
   setWindowTitle( tr( "Plugin Manager - %1" ).arg( Settings::instance().programName() ) );
-  setWindowIcon( QIcon( ":/images/plugin.png" ) );
+  setWindowIcon( IconManager::instance().icon( "plugin.png" ) );
   Bee::removeContextHelpButton( this );
 
   m_changed = false;
@@ -63,7 +64,9 @@ GuiPluginManager::GuiPluginManager( QWidget *parent )
 #endif
 
   mp_leFolder->setText( Settings::instance().pluginPath() );
+  mp_pbLoad->setIcon( IconManager::instance().icon( "update.png" ) );
   mp_pbLoad->setEnabled( false );
+  mp_pbFolder->setIcon( IconManager::instance().icon( "folder.png" ) );
 
   connect( mp_twPlugins, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( pluginSelected( QTreeWidgetItem*, int ) ) );
   connect( mp_twPlugins, SIGNAL( customContextMenuRequested ( const QPoint& ) ), this, SLOT( showContextMenu( const QPoint& ) ) );
@@ -94,7 +97,7 @@ void GuiPluginManager::showContextMenu( QTreeWidgetItem* item, const QPoint& pos
     return;
 
   bool enable = isPluginEnabled( item );
-  QIcon menu_icon = enable ? QIcon( ":/images/red-ball.png" ) : QIcon( ":/images/green-ball.png" );
+  QIcon menu_icon = enable ? IconManager::instance().icon( "red-ball.png" ) : IconManager::instance().icon( "green-ball.png" );
   QString menu_text = enable ? tr( "Disable %1" ).arg( item->text( 1 ) ) : tr( "Enable %1" ).arg( item->text( 1 ) );
 
   QMenu custom_context_menu;
@@ -105,7 +108,7 @@ void GuiPluginManager::showContextMenu( QTreeWidgetItem* item, const QPoint& pos
 void GuiPluginManager::updateItem( QTreeWidgetItem* item )
 {
   bool enable = isPluginEnabled( item );
-  item->setIcon( 1, (enable ? QIcon( ":/images/green-ball.png" ) : QIcon( ":/images/red-ball.png" ) ) );
+  item->setIcon( 1, (enable ? IconManager::instance().icon( "green-ball.png" ) : IconManager::instance().icon( "red-ball.png" ) ) );
   item->setToolTip( 1, (enable ? tr( "%1 is enabled" ).arg( item->text( 1 ) ) : tr( "%1 is disabled" ).arg( item->text( 1 ) ) ) );
 }
 
@@ -158,7 +161,7 @@ void GuiPluginManager::updatePlugins()
     {
       item = new QTreeWidgetItem( text_marker_root_item );
       setPluginEnabled( item, text_marker->isEnabled() );
-      item->setIcon( 2, text_marker->icon().isNull() ? QIcon( ":/images/plugin.png" ) : text_marker->icon() );
+      item->setIcon( 2, text_marker->icon().isNull() ? IconManager::instance().icon( "plugin.png" ) : text_marker->icon() );
       item->setText( 2, text_marker->name() );
       item->setText( 3, text_marker->version() );
       item->setText( 4, text_marker->author() );

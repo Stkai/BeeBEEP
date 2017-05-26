@@ -24,6 +24,7 @@
 #include "GuiShareBoxFileInfoItem.h"
 #include "BeeUtils.h"
 #include "GuiIconProvider.h"
+#include "IconManager.h"
 
 
 GuiShareBoxFileInfoItem::GuiShareBoxFileInfoItem( QTreeWidget *parent )
@@ -57,7 +58,7 @@ void GuiShareBoxFileInfoItem::setFileInfo( const FileInfo& fi )
   m_fileInfo = fi;
   if( fi.isFolder() )
   {
-    setIcon( ColumnFile, QIcon( ":/images/folder.png" ) );
+    setIcon( ColumnFile, IconManager::instance().icon( "folder.png" ) );
     setText( ColumnFile, m_fileInfo.name() );
     setText( ColumnSize, "" );
     setText( ColumnLastModified, "" );

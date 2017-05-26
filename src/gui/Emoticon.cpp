@@ -22,6 +22,8 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "Emoticon.h"
+#include "IconManager.h"
+#include "Settings.h"
 
 
 Emoticon::Emoticon()
@@ -51,24 +53,29 @@ Emoticon& Emoticon::operator=( const Emoticon& e )
   return *this;
 }
 
+QString Emoticon::sourceFolder()
+{
+  return Settings::instance().emoticonSourcePath().isEmpty() ? QLatin1String( ":/emojis" ) : Settings::instance().emoticonSourcePath();
+}
+
 QString Emoticon::groupFolder( int group_id )
 {
   switch( group_id )
   {
   case Text:
-    return QLatin1String( "emojis/people" );
+    return QString( "%1/%2" ).arg( sourceFolder() ).arg( QLatin1String( "people" ) );
   case People:
-    return QLatin1String( "emojis/people" );
+    return QString( "%1/%2" ).arg( sourceFolder() ).arg( QLatin1String( "people" ) );
   case Objects:
-    return QLatin1String( "emojis/objects" );
+    return QString( "%1/%2" ).arg( sourceFolder() ).arg( QLatin1String( "objects" ) );
   case Nature:
-    return QLatin1String( "emojis/nature" );
+    return QString( "%1/%2" ).arg( sourceFolder() ).arg( QLatin1String( "nature" ) );
   case Places:
-    return QLatin1String( "emojis/places" );
+    return QString( "%1/%2" ).arg( sourceFolder() ).arg( QLatin1String( "places" ) );
   case Symbols:
-    return QLatin1String( "emojis/symbols" );
+    return QString( "%1/%2" ).arg( sourceFolder() ).arg( QLatin1String( "symbols" ) );
   default:
-    return QLatin1String( "emoticons" );
+    return QLatin1String( ":/emoticons" );
   }
 }
 
@@ -87,6 +94,6 @@ QIcon Emoticon::groupIcon( int group_id )
   case Symbols:
     return QIcon( ":/emojis/symbols/1f523.png" );
   default:
-    return QIcon( ":/images/emoticon.png" );
+    return IconManager::instance().icon( "emoticon.png" );
   }
 }

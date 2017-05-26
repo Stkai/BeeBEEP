@@ -24,6 +24,7 @@
 #include "BeeUtils.h"
 #include "GuiTransferFile.h"
 #include "FileInfo.h"
+#include "IconManager.h"
 #include "Settings.h"
 #include "User.h"
 
@@ -81,7 +82,7 @@ void GuiTransferFile::setProgress( VNumber peer_id, const User& u, const FileInf
   {
     item = new QTreeWidgetItem( this );
     item->setFirstColumnSpanned( false );
-    item->setIcon( ColumnFile, fi.isDownload() ? QIcon( ":/images/download.png" ) : QIcon( ":/images/upload.png" ) );
+    item->setIcon( ColumnFile, fi.isDownload() ? IconManager::instance().icon( "download.png" ) : IconManager::instance().icon( "upload.png" ) );
     item->setText( ColumnFile, fi.name() );
     item->setData( ColumnFile, PeerId, peer_id );
     item->setData( ColumnFile, FileId, fi.id() );
@@ -89,7 +90,7 @@ void GuiTransferFile::setProgress( VNumber peer_id, const User& u, const FileInf
     item->setData( ColumnFile, TransferInProgress, true );
     item->setData( ColumnFile, TransferCompleted, false );
     item->setText( ColumnUser, u.name() );
-    item->setIcon( ColumnCancel, QIcon( ":/images/delete.png") );
+    item->setIcon( ColumnCancel, IconManager::instance().icon( "delete.png") );
     item->setText( ColumnSort, QString( "C0%1").arg( peer_id ) );
     sortItems( ColumnSort, Qt::DescendingOrder );
   }
@@ -117,19 +118,19 @@ void GuiTransferFile::showIcon( QTreeWidgetItem* item )
     sort_string.remove( 0, 1 );
   if( item->data( ColumnFile, TransferCompleted ).toBool() )
   {
-    icon = QIcon( ":/images/green-ball.png" );
+    icon = IconManager::instance().icon( "green-ball.png" );
     status_tip = tr( "Completed" );
     sort_string.prepend( 'A' );
   }
   else if( item->data( ColumnFile, TransferInProgress ).toBool() )
   {
-    icon = QIcon( ":/images/delete.png" );
+    icon = IconManager::instance().icon( "delete.png" );
     status_tip = tr( "Cancel Transfer" );
     sort_string.prepend( 'C' );
   }
   else
   {
-    icon = QIcon( ":/images/red-ball.png" );
+    icon = IconManager::instance().icon( "red-ball.png" );
     status_tip = tr( "Not Completed" );
     sort_string.prepend( 'B' );
   }
@@ -205,7 +206,7 @@ void GuiTransferFile::checkItemClicked( QTreeWidgetItem* item, int col )
     if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you want to cancel the transfer of %1?" ).arg( item->text( ColumnFile ) ),
                            QMessageBox::Yes | QMessageBox::No, QMessageBox::No ) == QMessageBox::Yes )
     {
-      item->setIcon( ColumnCancel, QIcon( ":/images/red-ball.png") );
+      item->setIcon( ColumnCancel, IconManager::instance().icon( "red-ball.png") );
       VNumber peer_id = Bee::qVariantToVNumber( item->data( ColumnFile, PeerId ) );
       item->setData( ColumnFile, TransferInProgress, false );
       emit transferCancelled( peer_id );
@@ -233,7 +234,7 @@ void GuiTransferFile::openMenu( const QPoint& )
   {
     if( !mp_menuContext->actions().isEmpty() )
       mp_menuContext->addSeparator();
-    mp_menuContext->addAction( QIcon( ":/images/remove.png" ), tr( "Remove all transfers" ), this, SLOT( removeAllCompleted() ) );
+    mp_menuContext->addAction( IconManager::instance().icon( "remove.png" ), tr( "Remove all transfers" ), this, SLOT( removeAllCompleted() ) );
   }
 
   mp_menuContext->exec( QCursor::pos() );
