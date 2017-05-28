@@ -51,6 +51,7 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
   m_isInIdle = false;
   mp_localServer = 0;
   m_tickCounter = 0;
+  m_isInSleepMode = false;
 
   mp_jobThread = new QThread();
   m_jobsInProgress = 0;
@@ -65,6 +66,8 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
   if( !testAttribute( Qt::AA_UseHighDpiPixmaps ) )
     setAttribute( Qt::AA_UseHighDpiPixmaps, true );
 #endif
+
+  addSleepWatcher();
 
   connect( &m_timer, SIGNAL( timeout() ), this, SLOT( checkTick() ) );
 
@@ -103,6 +106,22 @@ void BeeApplication::init()
   mp_jobThread->start();
   mp_jobThread->setPriority( QThread::LowPriority );
   m_timer.start();
+}
+
+void BeeApplication::forceSleep()
+{
+  if( m_isInSleepMode )
+    return;
+  qDebug() << "System goes to sleep...";
+  m_isInSleepMode = true;
+  emit disconnectionRequest();
+}
+
+void BeeApplication::wakeFromSleep()
+{
+  qDebug() << "System wakes up from sleep...";
+  m_isInSleepMode = false;
+  emit connectionRequest();
 }
 
 void BeeApplication::setIdleTimeout( int new_value )

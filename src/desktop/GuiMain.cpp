@@ -449,14 +449,6 @@ void GuiMain::showNextChat()
     showMessage( tr( "No new message available" ), 5000 );
 }
 
-void GuiMain::startStopCore()
-{
-  if( mp_core->isConnected() )
-    stopCore();
-  else
-    startCore();
-}
-
 void GuiMain::forceShutdown()
 {
   qDebug() << "Shutdown...";
@@ -465,7 +457,6 @@ void GuiMain::forceShutdown()
     mp_core->stop();
   close();
 }
-
 
 void GuiMain::startCore()
 {
@@ -2835,7 +2826,7 @@ void GuiMain::showDefaultServerPortInMenu()
   if( mp_core->isConnected() )
   {
     mp_menuNetworkStatus->setIcon( IconManager::instance().icon( "network-connected.png" ) );
-    mp_actHostAddress->setIcon( IconManager::instance().icon( "connect.png" ) );
+    mp_actHostAddress->setIcon( IconManager::instance().icon( "network.png" ) );
     mp_actPortBroadcast->setIcon( IconManager::instance().icon( "broadcast.png" ) );
     mp_actPortListener->setIcon( IconManager::instance().icon( "default-chat-online.png" ) );
 
@@ -3377,7 +3368,7 @@ void GuiMain::updateEmoticons()
     return;
 
   foreach( GuiFloatingChat* fl_chat, m_floatingChats )
-    fl_chat->updateEmoticon();
+    fl_chat->updateEmoticons();
 }
 
 void GuiMain::updateNewMessageAction()

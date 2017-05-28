@@ -60,7 +60,8 @@ public:
 public slots:
   void loadSession();
   void checkWindowFlagsAndShow();
-  void startStopCore();
+  void startCore();
+  void stopCore();
   void forceShutdown();
   void hideToTrayIcon();
   void setInIdle();
@@ -72,8 +73,6 @@ public slots:
   void saveSession( QSessionManager& );
 
 private slots:
-  void startCore();
-  void stopCore();
   void showAbout();
   void showLicense();
   void onUserChanged( const User& );

@@ -53,12 +53,18 @@ public:
 
   static void quitAfterSignal( int );
 
+  void forceSleep();
+  inline bool isInSleepMode() const;
+  void wakeFromSleep();
+
 signals:
   void enteringInIdle();
   void exitingFromIdle();
   void showUp();
   void tickEvent( int );
   void shutdownRequest();
+  void disconnectionRequest();
+  void connectionRequest();
 
 public slots:
   void checkIdle();
@@ -71,6 +77,7 @@ protected:
   int idleTimeFromMac();
   bool isScreenSaverRunning();
   QString localServerName() const;
+  void addSleepWatcher();
 
 protected slots:
   void checkTick();
@@ -94,10 +101,12 @@ private:
 #endif
 
   int m_tickCounter;
+  bool m_isInSleepMode;
 
 };
 
 // Inline Functions
 inline int BeeApplication::idleTimeout() const { return m_idleTimeout; }
+inline bool BeeApplication::isInSleepMode() const { return m_isInSleepMode; }
 
 #endif // BEEBEEP_APPLICATION_H

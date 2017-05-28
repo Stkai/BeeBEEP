@@ -47,10 +47,11 @@ public:
   void setChatReadByUser( const Chat&, const User& );
   void showChatMessage( const Chat&, const ChatMessage& );
 
+  void updateEmoticons();
+
   inline void setSaveGeometryDisabled( bool );
 
 public slots:
-  void updateEmoticon();
   void showUp();
   void raiseOnTop();
 

@@ -61,7 +61,7 @@ void GuiEmoticons::initEmoticons( int current_index )
   if( current_index >= 0 && current_index < count() )
     setCurrentIndex( current_index );
   else
-    setCurrentIndex( Settings::instance().recentEmoticons().size() == Settings::instance().emoticonInRecentMenu() ? m_recentTabIndex : smiley_index );
+    setCurrentIndex( Settings::instance().recentEmoticons().size() >= Settings::instance().emoticonInRecentMenu() ? m_recentTabIndex : smiley_index );
 }
 
 int GuiEmoticons::addEmoticonTab( GuiEmoticonWidget* emoticon_widget, Emoticon::Group emoticon_group, const QString& group_name )

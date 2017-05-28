@@ -367,10 +367,7 @@ bool Core::removeOfflineUser( VNumber user_id )
 {
   User u = UserManager::instance().findUser( user_id );
   if( !u.isValid() )
-  {
-    qWarning() << "User" << user_id << "is already removed from list";
     return true;
-  }
 
   if( isUserConnected( u.id() ) )
   {

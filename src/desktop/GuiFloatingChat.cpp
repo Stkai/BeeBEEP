@@ -85,7 +85,7 @@ GuiFloatingChat::GuiFloatingChat( Core* p_core, QWidget *parent )
   mp_dockEmoticons = new QDockWidget( tr( "Emoticons" ), this );
   mp_dockEmoticons->setObjectName( "GuiDockEmoticons" );
   mp_emoticonsWidget = new GuiEmoticons( this );
-  updateEmoticon();
+  updateEmoticons();
   connect( mp_emoticonsWidget, SIGNAL( emoticonSelected( const Emoticon& ) ), mp_chat, SLOT( addEmoticon( const Emoticon& ) ) );
   mp_dockEmoticons->setWidget( mp_emoticonsWidget );
   mp_dockEmoticons->setAllowedAreas( Qt::AllDockWidgetAreas );
@@ -403,7 +403,7 @@ void GuiFloatingChat::setMainIcon( bool with_message )
     setWindowIcon( m_mainWindowIcon );
 }
 
-void GuiFloatingChat::updateEmoticon()
+void GuiFloatingChat::updateEmoticons()
 {
   QMetaObject::invokeMethod( mp_emoticonsWidget, "updateEmoticons", Qt::QueuedConnection );
 }

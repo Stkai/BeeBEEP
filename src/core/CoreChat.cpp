@@ -210,14 +210,19 @@ bool Core::removeUserFromGroupChat( const User& u, const QString& chat_private_i
     return false;
 
   if( u.isLocal() )
+  {
     return removeChat( c.id(), true );
-
-  QString sHtmlMsg = tr( "%1 %2 has left the group chat %3." ).arg( IconManager::instance().toHtml( "group-remove.png", "*G*" ), u.name(), QString( "<b>%1</b>" ).arg( c.name() ) );
-  c.removeUser( u.id() );
-  c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
-  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToChat, ChatMessage::System );
-  emit chatChanged( c );
-  return true;
+  }
+  else
+  {
+    QString sHtmlMsg = tr( "%1 %2 has left the group chat %3." ).arg( IconManager::instance().toHtml( "group-remove.png", "*G*" ), u.name(), QString( "<b>%1</b>" ).arg( c.name() ) );
+    c.removeUser( u.id() );
+    c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
+    ChatManager::instance().setChat( c );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToChat, ChatMessage::System );
+    emit chatChanged( c );
+    return true;
+  }
 }
 
 bool Core::removeChat( VNumber chat_id, bool save_chat_messages )
