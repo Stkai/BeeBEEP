@@ -41,7 +41,7 @@ void Core::createDefaultChat()
 {
   qDebug() << "Creating default chat";
   Chat c = Protocol::instance().createDefaultChat();
-  qDebug() << "Default chat private id:" << c.privateId();
+  qDebug() << "Default chat private id:" << qPrintable( c.privateId() );
   addChatHeader( &c );
   QString sHtmlMsg;
 
@@ -234,9 +234,8 @@ bool Core::removeChat( VNumber chat_id, bool save_chat_messages )
   if( c.isDefault() )
     return false;
 
-  if( save_chat_messages )
+  if( save_chat_messages && ChatManager::instance().setChatToSavedChats( c ) )
   {
-    ChatManager::instance().setChatToSavedChats( c );
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "%1 %2 is added to saved chats." )
                                                       .arg( IconManager::instance().toHtml( "saved-chat.png", "*H*" ), QString( "<b>%1</b>" ).arg( c.name() ) ),
                            DispatchToChat, ChatMessage::System );
@@ -254,15 +253,52 @@ bool Core::removeChat( VNumber chat_id, bool save_chat_messages )
   emit chatRemoved( c );
   if( c.isGroup() )
   {
-    qDebug() << "Group chat removed:" << c.name();
+    qDebug() << "Group chat removed:" << qPrintable( c.name() );
     Settings::instance().setNotificationEnabledForGroup( c.privateId(), false ); // reset notification in settings
     sendRefuseMessageToGroupChat( c );
     ChatManager::instance().addToRefusedChat( ChatRecord( c.name(), c.privateId() ) );
   }
   else
-    qDebug() << "Private chat removed:" << c.name();
+    qDebug() << "Private chat removed:" << qPrintable( c.name() );
 
   return true;
+}
+
+int Core::archiveAllChats()
+{
+  QList<Chat> chat_list = ChatManager::instance().constChatList();
+  if( chat_list.isEmpty() )
+    return 0;
+
+  int chat_count = 0;
+
+  foreach( Chat c, chat_list )
+  {
+    if( c.isDefault() )
+      continue;
+    else
+      chat_count++;
+
+    if( ChatManager::instance().setChatToSavedChats( c ) )
+    {
+      dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "%1 Chat with %2 is archived." )
+                                                               .arg( IconManager::instance().toHtml( "saved-chat.png", "*H*" ), QString( "<b>%1</b>" ).arg( c.name() ) ),
+                             DispatchToChat, ChatMessage::System );
+      qDebug() << "Chat archived:" << c.name();
+    }
+
+    if( c.isGroup() )
+    {
+      ChatManager::instance().removeChat( c );
+      emit chatRemoved( c );
+    }
+    else
+    {
+      if( !c.isEmpty() )
+        clearMessagesInChat( c.id(), false );
+    }
+  }
+  return chat_count;
 }
 
 int Core::sendChatMessage( VNumber chat_id, const QString& msg )

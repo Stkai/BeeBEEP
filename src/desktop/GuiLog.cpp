@@ -74,16 +74,6 @@ void GuiLog::setupToolBar( QToolBar* bar )
   /* save as button */
   bar->addAction( IconManager::instance().icon( "save-as.png" ), tr( "Save log as" ), this, SLOT( saveLogAs() ) );
   bar->addSeparator();
-  mp_cbLogToFile = new QCheckBox( bar );
-  mp_cbLogToFile->setObjectName( "GuiCheckBoxLogToFileInLog" );
-  mp_cbLogToFile->setText( tr( "Log to file" ) );
-  mp_cbLogToFile->setChecked( Settings::instance().logToFile() );
-  mp_cbLogToFile->setToolTip( Settings::instance().logFilePath() );
-  connect( mp_cbLogToFile, SIGNAL( clicked( bool ) ), this, SLOT( logToFile( bool ) ) );
-  bar->addWidget( mp_cbLogToFile );
-  bar->addAction( mp_actOpenLogFilePath );
-  mp_actOpenLogFilePath->setEnabled( Settings::instance().logToFile() );
-  bar->addSeparator();
 
   /* filter by keywords */
   QLabel* label = new QLabel( bar );
@@ -93,7 +83,6 @@ void GuiLog::setupToolBar( QToolBar* bar )
   bar->addWidget( label );
   mp_leFilter = new QLineEdit( bar );
   mp_leFilter->setObjectName( "GuiLineEditFilterLog" );
-  mp_leFilter->setMaximumWidth( 140 );
 #if QT_VERSION >= 0x040700
   mp_leFilter->setPlaceholderText( tr( "keyword" ) );
 #endif
@@ -113,6 +102,17 @@ void GuiLog::setupToolBar( QToolBar* bar )
   mp_cbWholeWordOnly->setObjectName( "GuiCheckBoxFindWholeWordOnlyInLog" );
   mp_cbWholeWordOnly->setText( tr( "Whole word" ) );
   bar->addWidget( mp_cbWholeWordOnly );
+
+  bar->addSeparator();
+  mp_cbLogToFile = new QCheckBox( bar );
+  mp_cbLogToFile->setObjectName( "GuiCheckBoxLogToFileInLog" );
+  mp_cbLogToFile->setText( tr( "Log to file" ) );
+  mp_cbLogToFile->setChecked( Settings::instance().logToFile() );
+  mp_cbLogToFile->setToolTip( Settings::instance().logFilePath() );
+  connect( mp_cbLogToFile, SIGNAL( clicked( bool ) ), this, SLOT( logToFile( bool ) ) );
+  bar->addWidget( mp_cbLogToFile );
+  bar->addAction( mp_actOpenLogFilePath );
+  mp_actOpenLogFilePath->setEnabled( Settings::instance().logToFile() );
 }
 
 void GuiLog::showUp()
@@ -215,7 +215,7 @@ void GuiLog::findTextInLog()
     mp_teLog->moveCursor( QTextCursor::Start );
     if( !mp_teLog->find( txt ) )
     {
-      QMessageBox::information( this, Settings::instance().programName(), tr( "%1 not found" ).arg( txt ) + QString( "." ), tr( "Ok" ) );
+      QMessageBox::information( this, Settings::instance().programName(), tr( "%1 not found" ).arg( QString( "\"%1\"" ).arg( txt ) ) + QString( "." ), tr( "Ok" ) );
       return;
     }
   }

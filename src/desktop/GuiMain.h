@@ -256,6 +256,7 @@ private:
   QMenu* mp_menuSoundSettings;
   QMenu* mp_menuTrayIconSettings;
   QMenu* mp_menuExistingFile;
+  QMenu* mp_menuConnectionSettings;
 
   QToolBar* mp_barMain;
 

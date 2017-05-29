@@ -478,7 +478,7 @@ User Protocol::recognizeUser( const User& u, int user_recognition_method ) const
 
 User Protocol::recognizeUser( const UserRecord& ur, int user_recognition_method ) const
 {
-  User user_tmp( ur );
+  User user_tmp( ID_INVALID, ur );
   return recognizeUser( user_tmp, user_recognition_method );
 }
 
@@ -585,17 +585,17 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
 
 User Protocol::createTemporaryUser( const UserRecord& ur )
 {
-  User u( ur );
-  u.setId( newId() );
-  if( ur.name().isEmpty() )
-    u.setName( QString( "Bee%1" ).arg( u.id() ) );
+  User u( newId(), ur );
   if( !ur.networkAddressIsValid() )
     u.setNetworkAddress( NetworkAddress( QHostAddress::LocalHost, DEFAULT_LISTENER_PORT ) );
   if( ur.account().isEmpty() )
-    u.setAccountName( u.name() );
+    u.setAccountName( u.name().toLower() );
   if( ur.hash().isEmpty() )
     u.setHash( newMd5Id() );
   u.setStatus( User::Offline );
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Temporary user" << u.id() << qPrintable( u.path() ) << "created with account" << qPrintable( u.accountName() ) << "and hash" << qPrintable( u.hash() );
+#endif
   return u;
 }
 

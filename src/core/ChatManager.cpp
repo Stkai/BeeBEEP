@@ -320,12 +320,13 @@ bool ChatManager::isChatRefused( const QString& chat_private_id ) const
     return false;
 }
 
-void ChatManager::setChatToSavedChats( const Chat& c )
+bool ChatManager::setChatToSavedChats( const Chat& c )
 {
   QString saved_chat_text = GuiChatMessage::chatToHtml( c, true, true, true );
   if( saved_chat_text.isEmpty() )
-    return;
+    return false;
   if( chatHasSavedText( c.name() ) )
     saved_chat_text.prepend( chatSavedText( c.name() ) );
   m_history.insert( c.name(), saved_chat_text );
+  return true;
 }

@@ -284,7 +284,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
   else
     qDebug() << "New user is connected from" << qPrintable( u.path() );
 
-  if( !ColorManager::instance().isValidColor( u.color() ) )
+  if( !ColorManager::instance().isValidColor( u.color() ) || u.color() == QString( "#000000" ) )
     u.setColor( ColorManager::instance().unselectedQString() );
   u.setProtocolVersion( c->protoVersion() );
   UserManager::instance().setUser( u );

@@ -65,12 +65,7 @@ void GuiWizard::saveSettings()
     return;
   }
 
-  if( user_name != Settings::instance().localUser().name() )
-  {
-    m_userName = user_name;
-    accept();
-  }
-  else
-    reject();
+  m_userName = user_name;
+  accept();
 }
 

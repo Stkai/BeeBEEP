@@ -42,7 +42,7 @@ public:
   QString operatingSystem( bool use_long_name ) const;
   QString operatingSystemIconPath() const;
   QString accountNameFromSystemEnvinroment() const;
-  void createLocalUser();
+  void createLocalUser( const QString& user_name );
   QString createLocalUserHash();
   void setResourceFolder();
   bool setDataFolder();

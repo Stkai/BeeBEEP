@@ -22,34 +22,24 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "BeeApplication.h"
-#ifdef Q_OS_MAC
-  #include <ApplicationServices/ApplicationServices.h>
-  #include <ctype.h>
-  #include <stdlib.h>
-  #include <stdio.h>
-  #include <mach/mach_port.h>
-  #include <mach/mach_interface.h>
-  #include <mach/mach_init.h>
-  #include <IOKit/pwr_mgt/IOPMLib.h>
-  #include <IOKit/IOMessage.h>
+#include <ApplicationServices/ApplicationServices.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <mach/mach_port.h>
+#include <mach/mach_interface.h>
+#include <mach/mach_init.h>
+#include <IOKit/pwr_mgt/IOPMLib.h>
+#include <IOKit/IOMessage.h>
 
-  io_connect_t  mac_io_root_port; // a reference to the Root Power Domain IOService
-#endif
-
+io_connect_t  mac_io_root_port; // a reference to the Root Power Domain IOService
 
 int BeeApplication::idleTimeFromMac()
 {
-  int idle_time = -1;
-
-#ifdef Q_OS_MAC
   CFTimeInterval macx_idle_secs = CGEventSourceSecondsSinceLastEventType( kCGEventSourceStateHIDSystemState, kCGAnyInputEventType );
-  idle_time = static_cast<int>( qMax( 0.0, macx_idle_secs ) );
-#endif
-
+  int idle_time = static_cast<int>( qMax( 0.0, macx_idle_secs ) );
   return idle_time;
 }
-
-#ifdef Q_OS_MAC
 
 void BeeMacSleepCallBack( void * ref_con, io_service_t io_srv, natural_t message_type, void* message_argument )
 {
@@ -107,12 +97,8 @@ void BeeMacSleepCallBack( void * ref_con, io_service_t io_srv, natural_t message
   }
 }
 
-#endif
-
-
 void BeeApplication::addSleepWatcher()
 {
-#ifdef Q_OS_MAC
   // notification port allocated by IORegisterForSystemPower
   static IONotificationPortRef  notify_port_ref;
   // notifier object, used to deregister later
@@ -130,5 +116,4 @@ void BeeApplication::addSleepWatcher()
 
   // add the notification port to the application runloop
   CFRunLoopAddSource( CFRunLoopGetCurrent(), IONotificationPortGetRunLoopSource( notify_port_ref ), kCFRunLoopCommonModes );
-#endif
 }

@@ -351,3 +351,8 @@ void BeeApplication::checkTick()
   else
     emit tickEvent( m_tickCounter );
 }
+
+#if !defined( Q_OS_WIN ) && !defined( Q_OS_MAC )
+void BeeApplication::addSleepWatcher()
+{}
+#endif

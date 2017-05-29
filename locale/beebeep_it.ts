@@ -414,6 +414,10 @@
         <source>%1 Connection closed to user %2 because it uses same nickname of the already connected user %3: %4.</source>
         <translation>%1 Connessione chiusa all&apos;utente %2 perché sta usando lo stesso soprannome dell&apos;utente connesso %3: %4.</translation>
     </message>
+    <message>
+        <source>%1 Chat with %2 is archived.</source>
+        <translation>%1 La conversazione con %2 è stata archiviata.</translation>
+    </message>
 </context>
 <context>
     <name>File</name>
@@ -1453,7 +1457,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Please save the network password in the next dialog.</source>
-        <translation>Inserisci e memorizza la password di rete nella prossima finestra.</translation>
+        <translation type="obsolete">Inserisci e memorizza la password di rete nella prossima finestra.</translation>
     </message>
     <message>
         <source>Show the %1 log</source>
@@ -1969,7 +1973,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Prompts for network password</source>
-        <translation>Chiedi la password di rete</translation>
+        <translation type="obsolete">Chiedi la password di rete</translation>
     </message>
     <message>
         <source>Show minimized</source>
@@ -2061,7 +2065,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Prompts for change user</source>
-        <translation>Chiedi il cambio di utente</translation>
+        <translation type="obsolete">Chiedi il cambio di utente</translation>
     </message>
     <message>
         <source>There is a chat with the same members: %1.</source>
@@ -2210,6 +2214,26 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Restore default emoticons</source>
         <translation>Ripristina le faccine predefinite</translation>
+    </message>
+    <message>
+        <source>Your name is not changed. Do you want to continue?</source>
+        <translation>Il tuo nome non è cambiato. Vuoi continuare ugualmente?</translation>
+    </message>
+    <message>
+        <source>On connection</source>
+        <translation>Alla connessione</translation>
+    </message>
+    <message>
+        <source>Prompts to change user</source>
+        <translation>Chiedi il cambio di utente</translation>
+    </message>
+    <message>
+        <source>Prompts to ask network password</source>
+        <translation>Chiedi la password di rete</translation>
+    </message>
+    <message>
+        <source>Please save the network password in the next dialog if you want to use password without prompt.</source>
+        <translation>Memorizza la password di rete nella prossima finestra se vuoi continuare ad usarla senza che ti venga richiesta ogni volta.</translation>
     </message>
 </context>
 <context>

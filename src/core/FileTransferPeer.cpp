@@ -187,7 +187,10 @@ void FileTransferPeer::checkUserAuthentication( const QByteArray& auth_byte_arra
   }
 
   User user_to_check = Protocol::instance().createUser( m, m_socket.peerAddress() );
-  User user_connected = user_to_check.isValid() ? UserManager::instance().findUserByPath( user_to_check.path() ) : User();
+  User user_connected;
+  if( user_to_check.isValid() )
+    user_connected = Protocol::instance().recognizeUser( user_to_check, Settings::instance().userRecognitionMethod() );
+
   if( !user_connected.isValid() )
   {
     qWarning() << qPrintable( user_to_check.path() ) << "is not authorized for file transfer" << id();

@@ -206,26 +206,32 @@ QString Settings::accountNameFromSystemEnvinroment() const
   return m_useHostnameForDefaultUsername ? host_name.simplified() : account_name.simplified();
 }
 
-void Settings::createLocalUser()
+void Settings::createLocalUser( const QString& user_name )
 {
-  QString sName = accountNameFromSystemEnvinroment();
-  if( sName.isEmpty() )
+  m_localUser = User( ID_LOCAL_USER );
+
+  QString account_name = accountNameFromSystemEnvinroment();
+  if( account_name.isEmpty() )
   {
     qWarning() << "USERNAME and USER variabile not found in system environment";
-    sName = QString( "Bee%1" ).arg( QTime::currentTime().toString( "hmszzz" ) );
+    account_name = QString( "Bee %1" ).arg( QTime::currentTime().toString( "zzzsmh" ) );
   }
-  m_localUser.setAccountName( sName.toLower() );
-  if( m_localUser.name().isEmpty() )
-    m_localUser.setName( sName );
+  m_localUser.setAccountName( account_name.toLower() );
+  if( user_name.isEmpty() )
+    m_localUser.setName( account_name );
+  else
+    m_localUser.setName( user_name );
+
   m_localUser.setQtVersion( qtMajorVersion() );
   m_localUser.setProtocolVersion( protoVersion() );
   m_localUser.setDomainName( QHostInfo::localDomainName() );
+  m_localUser.setHash( Settings::instance().createLocalUserHash() );
+
   qDebug() << "User name:" << qPrintable( m_localUser.name() );
   qDebug() << "System account:" << qPrintable( m_localUser.accountName() );
   qDebug() << "Local domain name:" << qPrintable( m_localUser.domainName() );
   qDebug() << "Local host name:" << qPrintable( QHostInfo::localHostName() );
-  if( m_localUser.hash().isEmpty() )
-    m_localUser.setHash( Settings::instance().createLocalUserHash() );
+  qDebug() << "Local user hash:" << qPrintable( m_localUser.hash() );
 }
 
 QString Settings::createLocalUserHash()
@@ -842,10 +848,9 @@ void Settings::load()
     int user_recognition_method = sets->value( "RecognitionMethod", m_userRecognitionMethod ).toInt();
     setUserRecognitionMethod( user_recognition_method );
   }
-  m_localUser.setHash( sets->value( "LocalHash", "" ).toString() );
-  m_localUser.setName( sets->value( "LocalName", "" ).toString() ); // For Backward compatibility, if empty the name is set after
-  m_localUser.setColor( sets->value( "LocalColor", "#000000" ).toString() );
-  m_localUser.setStatus( sets->value( "LocalLastStatus", m_localUser.status() ).toInt() );
+  m_localUser.setHash( sets->value( "LocalHash", m_localUser.hash() ).toString() );
+  m_localUser.setName( sets->value( "LocalName", m_localUser.name() ).toString() );
+  m_localUser.setColor( sets->value( "LocalColor", m_localUser.color() ).toString() );
   m_localUser.setStatusDescription( sets->value( "LocalLastStatusDescription", m_localUser.statusDescription() ).toString() );
   m_autoUserAway = sets->value( "AutoAwayStatus", true ).toBool();
   m_userAwayTimeout = qMax( sets->value( "UserAwayTimeout", 10 ).toInt(), 1 ); // minutes
@@ -885,18 +890,18 @@ void Settings::load()
 
   sets->beginGroup( "VCard" );
   VCard vc;
-  vc.setNickName( sets->value( "NickName", m_localUser.name() ).toString() );
-  vc.setFirstName( sets->value( "FirstName", "" ).toString() );
-  vc.setLastName( sets->value( "LastName", "" ).toString() );
-  QDate dt = sets->value( "Birthday", QDate() ).toDate();
+  vc.setNickName( sets->value( "NickName",  m_localUser.vCard().nickName() ).toString() );
+  vc.setFirstName( sets->value( "FirstName", m_localUser.vCard().firstName() ).toString() );
+  vc.setLastName( sets->value( "LastName", m_localUser.vCard().lastName() ).toString() );
+  QDate dt = sets->value( "Birthday", m_localUser.vCard().birthday() ).toDate();
   if( dt.isValid() )
     vc.setBirthday( dt );
-  vc.setEmail( sets->value( "Email", "" ).toString() );
-  QPixmap pix = sets->value( "Photo", QPixmap() ).value<QPixmap>();
+  vc.setEmail( sets->value( "Email", m_localUser.vCard().email() ).toString() );
+  QPixmap pix = sets->value( "Photo", m_localUser.vCard().photo() ).value<QPixmap>();
   if( !pix.isNull() )
     vc.setPhoto( pix );
-  vc.setPhoneNumber( sets->value( "Phone", "" ).toString() );
-  vc.setInfo( sets->value( "Info", "" ).toString() );
+  vc.setPhoneNumber( sets->value( "Phone", m_localUser.vCard().phoneNumber() ).toString() );
+  vc.setInfo( sets->value( "Info", m_localUser.vCard().info() ).toString() );
   m_localUser.setVCard( vc );
   sets->endGroup();
 
@@ -1168,7 +1173,6 @@ void Settings::save()
     sets->setValue( "RecognitionMethod", m_userRecognitionMethod );
   sets->setValue( "LocalHash", m_localUser.hash() );
   sets->setValue( "LocalColor", m_localUser.color() );
-  sets->setValue( "LocalLastStatus", (int)(m_localUser.status() == User::Offline ? User::Online : m_localUser.status()) );
   sets->setValue( "LocalLastStatusDescription", m_localUser.statusDescription() );
   sets->setValue( "AutoAwayStatus", m_autoUserAway );
   sets->setValue( "UserAwayTimeout", m_userAwayTimeout ); // minutes

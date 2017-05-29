@@ -13,11 +13,12 @@ BeeBEEP 4.0.0
 - Removed game plugin interface
 - Added Workgroups interface in Settings/Users menu
 - Users can be also recognized by their hash
-- Change local user option added in Settings/OnStart menu
+- Change local user option added in Settings/OnConnection menu
 - Message are now sent with UTC timestamp and converted to local time when received
 - Fixed save of the dictionary selected
 - Hunspell library updated to version 1.6.1
 - Added option to select custom icons and emoticons
+- Automatic disconnection on system in sleep mode and connection on system wake up (only for windows and macosx)
 
 BeeBEEP 3.0.9
 - The emoticon icon is now showed in detached chat (bug fixed)

@@ -125,14 +125,16 @@ bool Core::changeLocalUser( const QString& user_name )
     return false;
   }
 
-  User u = Settings::instance().localUser();
-  QString old_user_name = u.name();
-  u.setName( user_name );
-  u.setHash( Settings::instance().createLocalUserHash() );
-  Settings::instance().setLocalUser( u );
+  QString old_user_name = Settings::instance().localUser().name();
+  if( old_user_name.toLower() == user_name.toLower() )
+    return false;
+
+  archiveAllChats();
+
+  Settings::instance().createLocalUser( user_name );
   Settings::instance().save();
-  showUserNameChanged( u, old_user_name );
-  emit userChanged( u );
+  showUserNameChanged( Settings::instance().localUser(), old_user_name );
+  emit userChanged( Settings::instance().localUser() );
   return true;
 }
 

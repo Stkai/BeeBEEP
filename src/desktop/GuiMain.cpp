@@ -505,6 +505,8 @@ bool GuiMain::promptConnectionPassword()
   if( gap.exec() == QDialog::Rejected )
     return false;
   mp_actPromptPassword->setChecked( Settings::instance().askPasswordAtStartup() );
+  if( mp_core->isConnected() )
+    showRestartConnectionAlertMessage();
   return true;
 }
 
@@ -528,6 +530,7 @@ void GuiMain::initGuiItems()
   updateStatusIcon();
   updateNewMessageAction();
   checkViewActions();
+  updateWindowTitle();
 }
 
 void GuiMain::checkViewActions()
@@ -657,14 +660,6 @@ void GuiMain::createMenus()
   mp_menuStartupSettings = new QMenu( tr( "On start" ), this );
   mp_menuStartupSettings->setIcon( IconManager::instance().icon( "settings-start.png" ) );
   mp_menuSettings->addMenu( mp_menuStartupSettings );
-  act = mp_menuStartupSettings->addAction( tr( "Prompts for change user" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().askChangeUserAtStartup() );
-  act->setData( 45 );
-  mp_actPromptPassword = mp_menuStartupSettings->addAction( tr( "Prompts for network password" ), this, SLOT( settingsChanged() ) );
-  mp_actPromptPassword->setCheckable( true );
-  mp_actPromptPassword->setChecked( Settings::instance().askPasswordAtStartup() );
-  mp_actPromptPassword->setData( 17 );
   act = mp_menuStartupSettings->addAction( tr( "Show minimized" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().showMinimizedAtStartup() );
@@ -697,6 +692,18 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().keyEscapeMinimizeInTray() );
   act->setData( 29 );
+
+  mp_menuConnectionSettings = new QMenu( tr( "On connection" ), this );
+  mp_menuConnectionSettings->setIcon( IconManager::instance().icon( "connection.png" ) );
+  mp_menuSettings->addMenu( mp_menuConnectionSettings );
+  act = mp_menuConnectionSettings->addAction( tr( "Prompts to change user" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().askChangeUserAtStartup() );
+  act->setData( 45 );
+  mp_actPromptPassword = mp_menuConnectionSettings->addAction( tr( "Prompts to ask network password" ), this, SLOT( settingsChanged() ) );
+  mp_actPromptPassword->setCheckable( true );
+  mp_actPromptPassword->setChecked( Settings::instance().askPasswordAtStartup() );
+  mp_actPromptPassword->setData( 17 );
 
   mp_menuNetworkStatus = new QMenu( tr( "Network" ), this );
   mp_menuNetworkStatus->setIcon( IconManager::instance().icon( "network.png" ) );
@@ -820,6 +827,10 @@ void GuiMain::createMenus()
   mp_actConfirmDownload->setCheckable( true );
   mp_actConfirmDownload->setChecked( Settings::instance().confirmOnDownloadFile() );
   mp_actConfirmDownload->setData( 30 );
+  act = mp_menuFileTransferSettings->addAction( tr( "Use native file dialogs" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().useNativeDialogs() );
+  act->setData( 4 );
   mp_menuFileTransferSettings->addSeparator();
   mp_actSelectDownloadFolder = mp_menuFileTransferSettings->addAction( IconManager::instance().icon( "download-folder.png" ), tr( "Download folder..."), this, SLOT( selectDownloadDirectory() ) );
 
@@ -868,10 +879,6 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().stayOnTop() );
   act->setData( 14 );
-  act = mp_menuSettings->addAction( tr( "Use native file dialogs" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().useNativeDialogs() );
-  act->setData( 4 );
 #ifdef Q_OS_WIN
   act = mp_menuSettings->addAction( tr( "Start %1 automatically" ).arg( Settings::instance().programName() ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -1201,7 +1208,7 @@ void GuiMain::settingsChanged( QAction* act )
         Settings::instance().setAskPasswordAtStartup( false );
         if( Settings::instance().askPassword() )
         {
-          QMessageBox::information( this, Settings::instance().programName(), tr( "Please save the network password in the next dialog." ) );
+          QMessageBox::information( this, Settings::instance().programName(), tr( "Please save the network password in the next dialog if you want to use password without prompt." ) );
           promptConnectionPassword();
           return;
         }
@@ -2125,7 +2132,18 @@ bool GuiMain::showWizard()
   gw.show();
   gw.setFixedSize( gw.size() );
   if( gw.exec() == QDialog::Accepted )
-    return mp_core->changeLocalUser( gw.userName() );
+  {
+    if( !mp_core->changeLocalUser( gw.userName() ) )
+    {
+      if( QMessageBox::question( this, Settings::instance().programName(), tr( "Your name is not changed. Do you want to continue?" ),
+                                 tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 1 )
+      {
+        return false;
+      }
+    }
+
+    return true;
+  }
   else
     return false;
 }
@@ -3410,17 +3428,26 @@ void GuiMain::onFileTransferMessage( VNumber peer_id, const User& u, const FileI
 void GuiMain::onFileTransferCompleted( VNumber peer_id, const User& u, const FileInfo& fi )
 {
   Q_UNUSED( peer_id );
-  if( fi.isDownload() && Settings::instance().showFileTransferCompletedOnTray() )
+  if( !fi.isDownload() )
+    return;
+
+  Chat c = ChatManager::instance().findChatByPrivateId( fi.chatPrivateId(), false, u.id() );
+  if( !c.isValid() )
   {
-    Chat c = ChatManager::instance().privateChatForUser( u.id() );
-    if( c.isValid() )
-    {
-      mp_userList->updateChat( c );
-      mp_chatList->updateChat( c );
-      mp_trayIcon->showNewFileArrived( c.id(), tr( "New file from %1" ).arg( u.name() ), false );
-    }
-    updateNewMessageAction();
+    qWarning() << "Unable to find chat by private id" << qPrintable( fi.chatPrivateId() ) << "for user" << qPrintable( u.name() ) << "in onFileTransferCompleted(...)";
+    return;
   }
+
+  if( Settings::instance().showFileTransferCompletedOnTray() )
+    mp_trayIcon->showNewFileArrived( c.id(), tr( "New file from %1" ).arg( u.name() ), false );
+
+  GuiFloatingChat* fl_chat = floatingChat( c.id() );
+  if( fl_chat && fl_chat->isActiveWindow() )
+    return;
+
+  mp_userList->updateChat( c );
+  mp_chatList->updateChat( c );
+  updateNewMessageAction();
 }
 
 void GuiMain::sendBuzzToUser( VNumber user_id )

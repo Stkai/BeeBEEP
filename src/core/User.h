@@ -35,7 +35,7 @@ public:
   User();
   User( const User& );
   explicit User( VNumber );
-  explicit User( const UserRecord& );
+  explicit User( VNumber, const UserRecord& );
 
   User& operator=( const User& );
   inline bool operator==( const User& ) const;

@@ -213,7 +213,7 @@ bool Core::start()
   showUserVCardChanged( Settings::instance().localUser() );
   emit userChanged( Settings::instance().localUser() );
 
-  qDebug() << "Local user path:" << Settings::instance().localUser().path();
+  qDebug() << "Local user current path:" << qPrintable( Settings::instance().localUser().path() );
 
   checkSavingPaths();
 

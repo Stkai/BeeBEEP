@@ -38,17 +38,22 @@ User::User( VNumber new_id )
    m_domainName( "" ), m_version( "" ), m_hash( "" ), m_isFavorite( false ), m_qtVersion( "0" ),
    m_protocolVersion( 0 ), m_statusChangedIn()
 {
-  setName( QString( "Bee%1" ).arg( QString::number( new_id ) ) );
+  setName( QString( "Bee %1" ).arg( QString::number( new_id ) ) );
 }
 
-User::User( const UserRecord& ur )
- : m_id( ID_INVALID ), m_vCard(), m_networkAddress( ur.networkAddress() ), m_status( User::Offline ),
+User::User( VNumber new_id, const UserRecord& ur )
+ : m_id( new_id ), m_vCard(), m_networkAddress( ur.networkAddress() ), m_status( User::Offline ),
    m_statusDescription( "" ), m_color( ur.color() ), m_accountName( ur.account() ),
    m_domainName( ur.domainName() ), m_version( "" ), m_hash( ur.hash() ), m_isFavorite( ur.isFavorite() ),
    m_qtVersion( "0" ), m_protocolVersion( 0 ), m_statusChangedIn()
 {
   if( !ur.name().isEmpty() )
     setName( ur.name() );
+  else if( !ur.account().isEmpty() )
+    setName( ur.account() );
+  else
+    setName( QString( "Bee %1" ).arg( QString::number( new_id ) ) );
+
 }
 
 User::User( const User& u )

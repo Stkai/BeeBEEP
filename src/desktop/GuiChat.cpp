@@ -379,7 +379,7 @@ QString GuiChat::chatMessageToText( const ChatMessage& cm )
       return "";
     }
     s = GuiChatMessage::formatMessage( u, cm, m_lastMessageUserId, Settings::instance().chatShowMessageTimestamp(), false, false,
-                                       Settings::instance().showMessagesGroupByUser(), Settings::instance().chatUseYourNameInsteadOfYou(), Settings::instance().chatCompact() );
+                                       Settings::instance().showMessagesGroupByUser(), m_chatId == ID_DEFAULT_CHAT ? true : Settings::instance().chatUseYourNameInsteadOfYou(), Settings::instance().chatCompact() );
   }
   else
     s = GuiChatMessage::formatSystemMessage( cm, m_lastMessageUserId, Settings::instance().chatShowMessageTimestamp(), false );

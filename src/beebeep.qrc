@@ -153,5 +153,6 @@
         <file>images/refused-chat.png</file>
         <file>images/group-create.png</file>
         <file>images/theme.png</file>
+        <file>images/connection.png</file>
     </qresource>
 </RCC>

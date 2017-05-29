@@ -238,6 +238,7 @@ protected:
   void sendLocalUserHasReadChatMessage( const Chat& );
   void addChatHeader( Chat* );
   bool removeUserFromGroupChat( const User&, const QString& chat_private_id );
+  int archiveAllChats();
 
   /* CoreDispatcher */
   enum DispatchType { DispatchToAll, DispatchToAllChatsWithUser, DispatchToChat, DispatchToDefaultAndPrivateChat };

@@ -67,3 +67,4 @@ void VCard::setPhoto( const QPixmap& new_value )
   else
     m_photoHash = "";
 }
+

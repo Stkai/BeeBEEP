@@ -48,7 +48,6 @@ HEADERS += desktop/BeeApplication.h \
 
 
 SOURCES +=  desktop/BeeApplication.cpp \
-  desktop/BeeApplication_mac.cpp \
   desktop/GuiAddUser.cpp \
   desktop/GuiAskPassword.cpp \
   desktop/GuiChat.cpp \
@@ -93,6 +92,8 @@ SOURCES +=  desktop/BeeApplication.cpp \
   desktop/GuiWorkgroups.cpp \
   desktop/Main.cpp
 
+win32: SOURCES += desktop/BeeApplication_win.cpp
+macx: SOURCES += desktop/BeeApplication_mac.cpp
 
 FORMS += desktop/GuiAddUser.ui \
   desktop/GuiAskPassword.ui \

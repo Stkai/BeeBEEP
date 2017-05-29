@@ -100,8 +100,8 @@ int main( int argc, char *argv[] )
   Settings::instance().loadRcFile();
   Settings::instance().setDataFolder();
   qDebug() << "Settings path:" << qPrintable( Settings::instance().currentSettingsFilePath() );
+  Settings::instance().createLocalUser( "" );
   Settings::instance().load();
-  Settings::instance().createLocalUser();
   Settings::instance().createApplicationUuid();
   Log::instance().setMaxLogLines( Settings::instance().maxLogLines() );
   qDebug() << "Log has set max lines to:" << (int)Settings::instance().maxLogLines();

@@ -57,6 +57,10 @@ public:
   inline bool isInSleepMode() const;
   void wakeFromSleep();
 
+#ifdef Q_OS_WIN
+  bool winEventFilter( MSG*, long* );
+#endif
+
 signals:
   void enteringInIdle();
   void exitingFromIdle();
@@ -74,7 +78,9 @@ protected:
   bool notify( QObject* receiver, QEvent* event );
 
   int idleTimeFromSystem();
+#ifdef Q_OS_MAC
   int idleTimeFromMac();
+#endif
   bool isScreenSaverRunning();
   QString localServerName() const;
   void addSleepWatcher();
