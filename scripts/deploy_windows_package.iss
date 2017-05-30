@@ -40,8 +40,8 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: "E:\SOURCES\beebeep-4.0.0-install\beebeep.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\SOURCES\beebeep-4.0.0-install\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "E:\SOURCES\beebeep-4.0.0\beebeep.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\SOURCES\beebeep-4.0.0\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

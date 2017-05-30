@@ -155,13 +155,11 @@ bool SpellChecker::isGoodWord( const QString& word )
 {
   if( mp_hunspell )
   {
-#ifdef BEEBEEP_DEBUG
     int spell_code = mp_hunspell->spell( std::string( mp_codec->fromUnicode( word ).constData() ) );
+#ifdef BEEBEEP_DEBUG
     qDebug() << "Spell check if" << word << "is good:" << spell_code;
-    return spell_code != 0;
-#else
-    return mp_hunspell->spell( mp_codec->fromUnicode( word ).constData() ) != 0;
 #endif
+   return spell_code != 0;
   }
   else
     return true;
