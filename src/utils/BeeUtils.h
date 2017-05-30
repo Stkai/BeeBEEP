@@ -65,6 +65,7 @@ namespace Bee
   QBrush defaultHighlightBrush();
   QBrush userStatusBackgroundBrush( int );
   QPixmap convertToGrayScale( const QPixmap& );
+  QPixmap convertToGrayScale( const QIcon&, int pixmap_size );
   QChar naviveFolderSeparator();
   QString convertToNativeFolderSeparator( const QString& );
   QString folderCdUp( const QString& );

@@ -710,12 +710,12 @@ void GuiMain::createMenus()
   mp_menuSettings->addMenu( mp_menuNetworkStatus );
   mp_menuNetworkStatus->addAction( mp_actConfigureNetwork );
   mp_menuNetworkStatus->addSeparator();
-  mp_actHostAddress = mp_menuNetworkStatus->addAction( QString( "ip" ) );
-  mp_actPortBroadcast = mp_menuNetworkStatus->addAction( QString( "udp1" ) );
-  mp_actPortListener = mp_menuNetworkStatus->addAction( QString( "tcp1" ) );
-  mp_actPortFileTransfer = mp_menuNetworkStatus->addAction( QString( "tcp2" ) );
+  mp_actHostAddress = mp_menuNetworkStatus->addAction( IconManager::instance().icon( "network.png" ), QString( "ip" ) );
+  mp_actPortBroadcast = mp_menuNetworkStatus->addAction( IconManager::instance().icon( "broadcast.png" ), QString( "udp1" ) );
+  mp_actPortListener = mp_menuNetworkStatus->addAction( IconManager::instance().icon( "default-chat-online.png" ), QString( "tcp1" ) );
+  mp_actPortFileTransfer = mp_menuNetworkStatus->addAction( IconManager::instance().icon( "network-scan.png" ), QString( "tcp2" ) );
 #ifdef BEEBEEP_USE_MULTICAST_DNS
-  mp_actMulticastDns = mp_menuNetworkStatus->addAction( QString( "mdns" ) );
+  mp_actMulticastDns = mp_menuNetworkStatus->addAction( IconManager::instance().icon( "mdns.png" ), QString( "mdns" ) );
 #endif
 
   mp_menuUsersSettings = new QMenu( tr( "Users" ), this );
@@ -993,8 +993,7 @@ void GuiMain::createMenus()
 
   /* Help Menu */
   mp_menuInfo = new QMenu( tr("?" ), this );
-  mp_menuInfo->addAction( IconManager::instance().icon( "tip.png" ), tr( "Tip of the day" ), this, SLOT( showTipOfTheDay() ) );
-  mp_menuInfo->addAction( IconManager::instance().icon( "fact.png" ), tr( "Fact of the day" ), this, SLOT( showFactOfTheDay() ) );
+  mp_menuInfo->addAction( IconManager::instance().icon( "donate.png" ), tr( "Donate for %1" ).arg( Settings::instance().programName() ) + QString( "..." ), this, SLOT( openDonationPage() ) );
   mp_menuInfo->addSeparator();
   mp_menuInfo->addAction( mp_actAbout );
   mp_menuInfo->addAction( IconManager::instance().icon( "license.png" ), tr( "Show %1's license..." ).arg( Settings::instance().programName() ), this, SLOT( showLicense() ) );
@@ -1006,6 +1005,9 @@ void GuiMain::createMenus()
   mp_menuInfo->addAction( IconManager::instance().icon( "plugin.png" ), tr( "Download plugins..." ), this, SLOT( openDownloadPluginPage() ) );
   mp_menuInfo->addAction( IconManager::instance().icon( "info.png" ), tr( "Help online..." ), this, SLOT( openHelpPage() ) );
   mp_menuInfo->addSeparator();
+  mp_menuInfo->addAction( IconManager::instance().icon( "tip.png" ), tr( "Tip of the day" ), this, SLOT( showTipOfTheDay() ) );
+  mp_menuInfo->addAction( IconManager::instance().icon( "fact.png" ), tr( "Fact of the day" ), this, SLOT( showFactOfTheDay() ) );
+  mp_menuInfo->addSeparator();
   mp_menuInfo->addAction( IconManager::instance().icon( "thumbup.png" ), tr( "Like %1 on Facebook" ).arg( Settings::instance().programName() ), this, SLOT( openFacebookPage() ) );
 #ifdef BEEBEEP_DEBUG
   act = mp_menuInfo->addAction( tr( "Add +1 user to anonymous usage statistics" ), this, SLOT( settingsChanged() ) );
@@ -1013,7 +1015,6 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().postUsageStatistics() );
   act->setData( 44 );
 #endif
-  mp_menuInfo->addAction( IconManager::instance().icon( "donate.png" ), tr( "Donate for %1" ).arg( Settings::instance().programName() ), this, SLOT( openDonationPage() ) );
 
   /* Tray icon menu */
   mp_menuTrayIcon = new QMenu( this );
@@ -1570,6 +1571,12 @@ void GuiMain::searchUsers()
 
   if( gn.exec() != QDialog::Accepted )
     return;
+
+  if( gn.restartConnection() )
+  {
+    showRestartConnectionAlertMessage();
+    return;
+  }
 
   if( !mp_core->isConnected() )
     return;
@@ -2844,41 +2851,46 @@ void GuiMain::showDefaultServerPortInMenu()
   if( mp_core->isConnected() )
   {
     mp_menuNetworkStatus->setIcon( IconManager::instance().icon( "network-connected.png" ) );
-    mp_actHostAddress->setIcon( IconManager::instance().icon( "network.png" ) );
-    mp_actPortBroadcast->setIcon( IconManager::instance().icon( "broadcast.png" ) );
-    mp_actPortListener->setIcon( IconManager::instance().icon( "default-chat-online.png" ) );
+    mp_actHostAddress->setIcon( IconManager::instance().icon( "network-connected.png" ) );
+    mp_actHostAddress->setEnabled( true );
+    mp_actPortBroadcast->setEnabled( true );
+    mp_actPortListener->setEnabled( true );
 
     host_address = Settings::instance().localUser().networkAddress().hostAddress().toString();
     broadcast_port = QString::number( Settings::instance().defaultBroadcastPort() );
     listener_port = QString::number( Settings::instance().localUser().networkAddress().hostPort() );
+
     if( Settings::instance().enableFileTransfer() )
     {
       file_transfer_port = QString::number( mp_core->fileTransferPort() );
-      mp_actPortFileTransfer->setIcon( IconManager::instance().icon( "network-scan.png" ) );
+      mp_actPortFileTransfer->setEnabled( true );
     }
     else
     {
       file_transfer_port = tr( "disabled" );
-      mp_actPortFileTransfer->setIcon( QIcon() );
+      mp_actPortFileTransfer->setEnabled( false );
     }
 
 #ifdef BEEBEEP_USE_MULTICAST_DNS
     if( mp_core->dnsMulticastingIsActive() )
     {
       multicast_dns = tr( "active" );
-      mp_actMulticastDns->setIcon( IconManager::instance().icon( "mdns.png" ) );
+      mp_actMulticastDns->setEnabled( true );
     }
+    else
+      mp_actMulticastDns->setEnabled( false );
 #endif
   }
   else
   {
     mp_menuNetworkStatus->setIcon( IconManager::instance().icon( "network-disconnected.png" ) );
-    mp_actHostAddress->setIcon( QIcon() );
-    mp_actPortBroadcast->setIcon( QIcon() );
-    mp_actPortListener->setIcon( QIcon() );
-    mp_actPortFileTransfer->setIcon( QIcon() );
+    mp_actHostAddress->setIcon( IconManager::instance().icon( "network-disconnected.png" ) );
+    mp_actHostAddress->setEnabled( false );
+    mp_actPortBroadcast->setEnabled( false );
+    mp_actPortListener->setEnabled( false );
+    mp_actPortFileTransfer->setEnabled( false );
 #ifdef BEEBEEP_USE_MULTICAST_DNS
-    mp_actMulticastDns->setIcon( QIcon() );
+    mp_actMulticastDns->setEnabled( false );
 #endif
   }
 

@@ -36,10 +36,17 @@ public:
   GuiNetwork( QWidget* parent = 0 );
 
   void loadSettings();
+  inline bool restartConnection() const;
 
 protected slots:
   void checkAndSearch();
 
+private:
+  bool m_restartConnection;
+
 };
+
+// Inline Functions
+inline bool GuiNetwork::restartConnection() const { return m_restartConnection; }
 
 #endif // BEEBEEP_GUINETWORK_H

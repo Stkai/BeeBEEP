@@ -142,7 +142,7 @@ bool NetworkManager::searchLocalHostAddress()
   if( !Settings::instance().localSubnetForced().isEmpty() )
   {
     qDebug() << "Checking local subnet forced:" << qPrintable( Settings::instance().localSubnetForced() );
-    if( forceLocalSubnet( Settings::instance().localSubnetForced() ) )
+    if( forceLocalSubnet( Settings::instance().localSubnetForced().trimmed() ) )
       return true;
   }
 
@@ -234,27 +234,24 @@ bool NetworkManager::forceLocalSubnet( const QString& local_subnet_forced )
   {
     if( network_entry.isIPv4Address() )
     {
-      if( isHostAddressInBroadcastSubnet( network_entry.hostAddress(), local_subnet_forced ) )
+      if( network_entry.broadcast().toString() == local_subnet_forced )
       {
-        qDebug() << "IPv4 host address" << qPrintable( network_entry.hostAddress().toString() ) << "is in forced subnet:" << local_subnet_forced;
+        qDebug() << "IPv4 host address" << qPrintable( network_entry.hostAddress().toString() ) << "is in forced subnet:" << qPrintable( local_subnet_forced );
         setLocalHostAddress( network_entry );
         return true;
       }
-      else
-        return false;
     }
-
-    if( network_entry.isIPv6Address()  )
+    else if( network_entry.isIPv6Address()  )
     {
       if( network_entry.hostAddress().scopeId() == local_subnet_forced )
       {
-        qDebug() << "IPv6 host address" << qPrintable( network_entry.hostAddress().toString() ) << "is in forced scope id:" << local_subnet_forced;
+        qDebug() << "IPv6 host address" << qPrintable( network_entry.hostAddress().toString() ) << "is in forced scope id:" << qPrintable( local_subnet_forced );
         setLocalHostAddress( network_entry );
         return true;
       }
-      else
-        return false;
     }
+    else
+      qWarning() << "Skip invalid network entry for host address" << qPrintable( network_entry.hostAddress().toString() );
   }
 
   return false;

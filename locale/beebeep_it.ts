@@ -418,6 +418,14 @@
         <source>%1 Chat with %2 is archived.</source>
         <translation>%1 La conversazione con %2 è stata archiviata.</translation>
     </message>
+    <message>
+        <source>%1 Unable to connect to %2 Network. Please check your network adapters.</source>
+        <translation>%1 Impossibile connttersi nella rete %2. Controlla le tu schede di rete se sono attive.</translation>
+    </message>
+    <message>
+        <source>Network adapter not found</source>
+        <translation>Scheda di rete non trovata</translation>
+    </message>
 </context>
 <context>
     <name>File</name>
@@ -1456,10 +1464,6 @@ Inserisci un nome differente.</translation>
         <translation>%1 non sarà più avviato automaticamente alla partenza di Windows.</translation>
     </message>
     <message>
-        <source>Please save the network password in the next dialog.</source>
-        <translation type="obsolete">Inserisci e memorizza la password di rete nella prossima finestra.</translation>
-    </message>
-    <message>
         <source>Show the %1 log</source>
         <translation>Mostra il log di %1</translation>
     </message>
@@ -1972,10 +1976,6 @@ Inserisci un nome differente.</translation>
         <translation>Avvio in corso</translation>
     </message>
     <message>
-        <source>Prompts for network password</source>
-        <translation type="obsolete">Chiedi la password di rete</translation>
-    </message>
-    <message>
         <source>Show minimized</source>
         <translation>Mostra minimizzato</translation>
     </message>
@@ -2062,10 +2062,6 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Dictionary</source>
         <translation>Dizionario</translation>
-    </message>
-    <message>
-        <source>Prompts for change user</source>
-        <translation type="obsolete">Chiedi il cambio di utente</translation>
     </message>
     <message>
         <source>There is a chat with the same members: %1.</source>
@@ -2291,6 +2287,14 @@ Inserisci un nome differente.</translation>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
+    <message>
+        <source>none</source>
+        <translation>nessuna</translation>
+    </message>
+    <message>
+        <source>selected by system</source>
+        <translation>selezionata dal sistema</translation>
+    </message>
 </context>
 <context>
     <name>GuiNetworkWidget</name>
@@ -2349,6 +2353,14 @@ Inserisci un nome differente.</translation>
     <message>
         <source>(search users here by default)</source>
         <translation>(cerca utenti automaticamente in questa)</translation>
+    </message>
+    <message>
+        <source>Preferred subnet</source>
+        <translation>Sottorete preferita</translation>
+    </message>
+    <message>
+        <source>Prevent multiple connections from single host address</source>
+        <translation>Non permettere connessioni multiple da un singolo indirizzo IP</translation>
     </message>
 </context>
 <context>

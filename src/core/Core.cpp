@@ -134,6 +134,17 @@ bool Core::start()
   else
     qDebug() << "Starting" << Settings::instance().programName() << "core";
 
+  if( !NetworkManager::instance().searchLocalHostAddress() )
+  {
+    qWarning() << "Unable to find a valid network adapter active to start connection";
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
+                             tr( "%1 Unable to connect to %2 Network. Please check your network adapters." )
+                               .arg( IconManager::instance().toHtml( "network-disconnected.png", "*E*" ),
+                                     Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
+    showMessage( tr( "Network adapter not found" ), 5000 );
+    return false;
+  }
+
   showMessage( tr( "Connecting" ), 2000 );
 
   if( !mp_listener->listen( Settings::instance().hostAddressToListen(), Settings::instance().defaultListenerPort() ) )
@@ -156,7 +167,6 @@ bool Core::start()
   }
 
   qDebug() << "Listener binds" << qPrintable( mp_listener->serverAddress().toString() ) << mp_listener->serverPort();
-  NetworkManager::instance().searchLocalHostAddress();
   Settings::instance().setLocalUserHost( NetworkManager::instance().localHostAddress(), mp_listener->serverPort() );
 
 #ifdef BEEBEEP_DEBUG

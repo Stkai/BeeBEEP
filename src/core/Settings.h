@@ -296,6 +296,7 @@ public:
   inline const QStringList& broadcastAddressesInSettings() const;
   int setBroadcastAddressesInSettings( const QStringList& );
   inline const QHostAddress& localHostAddressForced() const;
+  inline void setLocalSubnetForced( const QString& );
   inline const QString& localSubnetForced() const;
   inline bool broadcastOnlyToHostsIni() const;
   bool addSubnetToBroadcastAddress( const QHostAddress& );
@@ -788,6 +789,7 @@ inline void Settings::setShowChatToolbar( bool new_value ) { m_showChatToolbar =
 inline const QStringList& Settings::broadcastAddressesInFileHosts() const { return m_broadcastAddressesInFileHosts; }
 inline const QStringList& Settings::broadcastAddressesInSettings() const { return m_broadcastAddressesInSettings; }
 inline const QHostAddress& Settings::localHostAddressForced() const { return m_localHostAddressForced; }
+inline void Settings::setLocalSubnetForced( const QString& new_value ) { m_localSubnetForced = new_value; }
 inline const QString& Settings::localSubnetForced() const { return m_localSubnetForced; }
 inline bool Settings::broadcastOnlyToHostsIni() const { return m_broadcastOnlyToHostsIni; }
 inline bool Settings::useMulticastDns() const { return m_useMulticastDns; }

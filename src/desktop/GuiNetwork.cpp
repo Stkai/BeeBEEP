@@ -38,6 +38,8 @@ GuiNetwork::GuiNetwork( QWidget* parent )
   setWindowIcon( IconManager::instance().icon( "network.png" ) );
   Bee::removeContextHelpButton( this );
 
+  m_restartConnection = false;
+
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( checkAndSearch() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
 }
@@ -85,6 +87,27 @@ void GuiNetwork::loadSettings()
 
   mp_sbMaxUsersToContact->setValue( Settings::instance().maxUsersToConnectInATick() );
 
+  mp_cbPreventMultipleConnectionsFromSingleHostAddress->setChecked( Settings::instance().preventMultipleConnectionsFromSingleHostAddress() );
+
+  mp_comboPreferredSubnet->clear();
+
+  if( !Settings::instance().localSubnetForced().isEmpty() )
+    mp_comboPreferredSubnet->addItem( Settings::instance().localSubnetForced(), Settings::instance().localSubnetForced() );
+  mp_comboPreferredSubnet->addItem( tr( "none" ), "" );
+  QString s_tmp;
+  foreach( QHostAddress ha, NetworkManager::instance().localBroadcastAddresses() )
+  {
+    s_tmp = ha.toString();
+    if( s_tmp != Settings::instance().localSubnetForced() )
+    {
+      if( mp_leSubnet->text() == s_tmp )
+        mp_comboPreferredSubnet->addItem( s_tmp + QString( " (%1)" ).arg( tr( "selected by system" ) ), s_tmp );
+      else
+        mp_comboPreferredSubnet->addItem( s_tmp, s_tmp );
+    }
+  }
+
+  m_restartConnection = false;
   mp_teAddressesInSettings->setFocus();
 }
 
@@ -127,6 +150,13 @@ void GuiNetwork::checkAndSearch()
     Settings::instance().setTickIntervalBroadcasting( 0 );
 
   Settings::instance().setMaxUsersToConnectInATick( mp_sbMaxUsersToContact->value() );
+  Settings::instance().SetPreventMultipleConnectionsFromSingleHostAddress( mp_cbPreventMultipleConnectionsFromSingleHostAddress->isChecked() );
 
+  QString s_preferred_subnet = mp_comboPreferredSubnet->itemData( mp_comboPreferredSubnet->currentIndex() ).toString();
+  if( s_preferred_subnet != Settings::instance().localSubnetForced() )
+  {
+    Settings::instance().setLocalSubnetForced( s_preferred_subnet );
+    m_restartConnection = true;
+  }
   accept();
 }
