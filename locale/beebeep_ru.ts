@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="ru" sourcelanguage="en">
+<TS version="2.1" language="ru" sourcelanguage="en">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -3897,47 +3897,47 @@ Please select a different name.</source>
         <translation>Статус</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="122"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="123"/>
         <source>Completed</source>
         <translation>Завершено</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="128"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="129"/>
         <source>Cancel Transfer</source>
         <translation>Отменить передачу</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="134"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="135"/>
         <source>Not Completed</source>
         <translation>Не завершено</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="167"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="168"/>
         <source>Transfer completed</source>
         <translation>Передача завершена</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="168"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="169"/>
         <source>Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="173"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="174"/>
         <source>Downloading</source>
         <translation>Загрузка</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="173"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="174"/>
         <source>Uploading</source>
         <translation>Отправление</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="206"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="207"/>
         <source>Do you want to cancel the transfer of %1?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="237"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="65"/>
         <source>Remove all transfers</source>
         <translation>Убрать все передачи</translation>
     </message>

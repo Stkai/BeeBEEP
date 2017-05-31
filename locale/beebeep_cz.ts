@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="cs_CZ">
+<TS version="2.1" language="cs_CZ">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -89,12 +89,12 @@
     <message>
         <location filename="../src/core/Core.cpp" line="141"/>
         <source>%1 Unable to connect to %2 Network. Please check your network adapters.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Nelze se připojit k %2 síti. Zkontrolujte prosím váš síťový adaptér.</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="144"/>
         <source>Network adapter not found</source>
-        <translation type="unfinished"></translation>
+        <translation>Síťový adaptér nebyl nalezen</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="148"/>
@@ -237,7 +237,7 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="284"/>
         <source>%1 Chat with %2 is archived.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Chat s %2 je archivován.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="314"/>
@@ -2054,27 +2054,27 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="875"/>
         <source>Select icon theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte motiv ikon</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="789"/>
         <source>Select emoticon theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte motiv smajlíků</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="696"/>
         <source>On connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Po připojení</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="699"/>
         <source>Prompts to change user</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyzvat ke změně uživatele</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="703"/>
         <source>Prompts to ask network password</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyzvat k zadání síťového hesla</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="883"/>
@@ -2196,7 +2196,7 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2145"/>
         <source>Your name is not changed. Do you want to continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vaše jméno nebylo změněno. Chcete pokračovat?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2281"/>
@@ -2216,46 +2216,46 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3625"/>
         <source>You are using the default icons.</source>
-        <translation type="unfinished"></translation>
+        <translation>Používáte výchozí ikony.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3631"/>
         <source>You are using custom icons in folder %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Používáte vlastní ikony ze složky %1.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3632"/>
         <source>Restore default icons</source>
-        <translation type="unfinished"></translation>
+        <translation>Obnovit výchozi ikony</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3626"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3632"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3641"/>
         <source>Select the icon folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat složku s ikonami</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3662"/>
         <source>You are using the default emoticons.</source>
-        <translation type="unfinished"></translation>
+        <translation>Používáte výchozí smajlíky.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3663"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3669"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3678"/>
         <source>Select the emoticon folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat složku se smajlíky</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3668"/>
         <source>You are using custom emoticons in folder %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Používáte vlastní smajlíky ze složky %1.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3669"/>
         <source>Restore default emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>Obnovit výchozi smajlíky</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3695"/>
@@ -2707,7 +2707,7 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1212"/>
         <source>Please save the network password in the next dialog if you want to use password without prompt.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokud nechcete být příště vyzvání k zadání síťového hesla,na následujícím okně si ho uložte.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2834"/>
@@ -2902,12 +2902,12 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="96"/>
         <source>none</source>
-        <translation type="unfinished"></translation>
+        <translation>žádný</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="104"/>
         <source>selected by system</source>
-        <translation type="unfinished"></translation>
+        <translation>vybráno systémem</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="129"/>
@@ -2972,7 +2972,7 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="382"/>
         <source>Prevent multiple connections from single host address</source>
-        <translation type="unfinished"></translation>
+        <translation>Zabránit vícenásobnému připojení z jedné adresy</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="389"/>
@@ -2997,7 +2997,7 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="67"/>
         <source>Preferred subnet</source>
-        <translation type="unfinished"></translation>
+        <translation>Preferovaná podsíť</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="141"/>
@@ -3897,47 +3897,47 @@ Vyberte prosím jiné jméno.</translation>
         <translation>Stav</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="122"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="123"/>
         <source>Completed</source>
         <translation>Kompletní</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="128"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="129"/>
         <source>Cancel Transfer</source>
         <translation>Zrušit přenos</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="134"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="135"/>
         <source>Not Completed</source>
         <translation>Nekompletní</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="167"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="168"/>
         <source>Transfer completed</source>
         <translation>Přenos kompletní</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="168"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="169"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="173"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="174"/>
         <source>Downloading</source>
         <translation>Stahování</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="173"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="174"/>
         <source>Uploading</source>
         <translation>Nahrávání</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="206"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="207"/>
         <source>Do you want to cancel the transfer of %1?</source>
         <translation>Chcete přerušit přenos %1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="237"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="65"/>
         <source>Remove all transfers</source>
         <translation>Odstranit všechny přenosy</translation>
     </message>
