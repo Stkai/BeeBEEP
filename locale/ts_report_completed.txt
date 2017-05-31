@@ -8,7 +8,7 @@
      beebeep_hu.ts :   60%    362/(884-0)
      beebeep_it.ts :  100%    0/(884-0)
      beebeep_nb.ts :   68%    291/(884-0)
-     beebeep_nl.ts :   79%    186/(884-0)
+     beebeep_nl.ts :   95%    52/(884-0)
      beebeep_pl.ts :   73%    245/(884-0)
      beebeep_pt.ts :   56%    389/(884-0)
      beebeep_rs.ts :   54%    409/(884-0)

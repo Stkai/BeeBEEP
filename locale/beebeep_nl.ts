@@ -46,7 +46,7 @@
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="318"/>
         <source>Image Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Voorbeeld afbeelding</translation>
     </message>
 </context>
 <context>
@@ -89,17 +89,17 @@
     <message>
         <location filename="../src/core/Core.cpp" line="141"/>
         <source>%1 Unable to connect to %2 Network. Please check your network adapters.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Kan niet verbinden met %2 netwerk. Controleer uw netwerk adapters.</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="144"/>
         <source>Network adapter not found</source>
-        <translation type="unfinished"></translation>
+        <translation>Netwerk adapter niet gevonden</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="148"/>
         <source>Connecting</source>
-        <translation type="unfinished">Verbinden</translation>
+        <translation>Verbinden</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="203"/>
@@ -114,7 +114,7 @@
     <message>
         <location filename="../src/core/Core.cpp" line="321"/>
         <source>Disconnected</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbinding verbroken</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="339"/>
@@ -134,7 +134,7 @@
     <message>
         <location filename="../src/core/Core.cpp" line="367"/>
         <source>Searching users</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoek gebruikers</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="492"/>
@@ -197,12 +197,12 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="109"/>
         <source>%1 You have created group chat %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Je hebt groep chat %2 gemaakt.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="116"/>
         <source>%1 %2 has added you to the group chat %3.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 heeft je toegevoegd aan %3 groep chat.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="153"/>
@@ -452,7 +452,7 @@
     <message>
         <location filename="../src/core/CoreParser.cpp" line="378"/>
         <source>%1 has removed shared files</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 heeft de gedeelde bestanden verwijderd</translation>
     </message>
     <message>
         <location filename="../src/core/CoreParser.cpp" line="380"/>
@@ -647,7 +647,7 @@
     <message>
         <location filename="../src/desktop/GuiAddUser.cpp" line="41"/>
         <source>Your parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>Je parameters</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAddUser.cpp" line="42"/>
@@ -730,12 +730,12 @@
     <message>
         <location filename="../src/desktop/GuiAddUser.ui" line="129"/>
         <source>Split Subnet in IP Addresses to add all users in that range</source>
-        <translation type="unfinished"></translation>
+        <translation>Verdeel subnet in IP adressen om alle gebruikers  in die range toe tevoegen</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAddUser.ui" line="148"/>
         <source>Add an &lt;b&gt;IP Address&lt;/b&gt; and &lt;b&gt;Port&lt;/b&gt; of the user you want to connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg een &lt;b&gt; IP adres&lt;/b&gt; toe en &lt;b&gt;Poort&lt;/b&gt; van de gebruiker waarmee je verbonden wilt worden</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAddUser.ui" line="185"/>
@@ -1068,7 +1068,7 @@
     <message>
         <location filename="../src/desktop/GuiChatList.cpp" line="162"/>
         <source>Create new group chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak een nieuwe chatgroep aan</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatList.cpp" line="173"/>
@@ -1088,12 +1088,12 @@
     <message>
         <location filename="../src/desktop/GuiChatList.cpp" line="182"/>
         <source>Edit</source>
-        <translation type="unfinished">Bewerken</translation>
+        <translation>Bewerk</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatList.cpp" line="157"/>
         <source>Please wait for two or more users</source>
-        <translation type="unfinished"></translation>
+        <translation>Wacht op twee of meerdere gebruikers</translation>
     </message>
 </context>
 <context>
@@ -1119,17 +1119,17 @@
     <message>
         <location filename="../src/desktop/GuiCreateGroup.ui" line="59"/>
         <source>Leave this group</source>
-        <translation type="unfinished"></translation>
+        <translation>Verlaat deze groep</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateGroup.ui" line="94"/>
         <source>Group chat name</source>
-        <translation type="unfinished"></translation>
+        <translation>Chatnaam van groep</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateGroup.ui" line="107"/>
         <source>Members</source>
-        <translation type="unfinished"></translation>
+        <translation>Leden</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateGroup.ui" line="40"/>
@@ -1149,12 +1149,12 @@
     <message>
         <location filename="../src/desktop/GuiCreateGroup.cpp" line="65"/>
         <source>Edit group chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewerk groepchat</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateGroup.cpp" line="71"/>
         <source>Create new group chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak een nieuwe chatgroep aan</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateGroup.cpp" line="112"/>
@@ -1300,7 +1300,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="147"/>
         <source>Show the ShareBox</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon de sharebox</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="169"/>
@@ -1313,7 +1313,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="48"/>
         <source>Show group menu</source>
-        <translation type="unfinished">Toon groep menu</translation>
+        <translation>Toon groep menu</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="51"/>
@@ -1371,17 +1371,17 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiGroupList.cpp" line="54"/>
         <source>Search group</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoek groep</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiGroupList.cpp" line="64"/>
         <source>Create new group chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak een nieuwe chatgroep aan</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiGroupList.cpp" line="67"/>
         <source>Edit group chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewerk groepchat</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiGroupList.cpp" line="70"/>
@@ -1401,7 +1401,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiGroupList.cpp" line="180"/>
         <source>Please wait for two or more users</source>
-        <translation type="unfinished"></translation>
+        <translation>Wacht op twee of meerdere gebruikers</translation>
     </message>
 </context>
 <context>
@@ -1886,12 +1886,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2717"/>
         <source>Do you want to leave the chat with %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wil je de chat verlaten met %1?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2723"/>
         <source>Unable to leave the chat with %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan de chat met %1 niet verlaten.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2834"/>
@@ -2205,7 +2205,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="603"/>
         <source>Configure network...</source>
-        <translation type="unfinished"></translation>
+        <translation>Instellingen netwerk...</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="747"/>
@@ -2215,27 +2215,27 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="343"/>
         <source>Do you want to quit %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wil je %1 verlaten?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="600"/>
         <source>Search users</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoek gebruikers</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="748"/>
         <source>Workgroups</source>
-        <translation type="unfinished"></translation>
+        <translation>Werkgroepen</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="792"/>
         <source>Blocked chats</source>
-        <translation type="unfinished"></translation>
+        <translation>Geblokkeerde chats</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="802"/>
         <source>Enable file sharing</source>
-        <translation type="unfinished"></translation>
+        <translation>Zet delen van bestanden aan</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="873"/>
@@ -2255,77 +2255,77 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="725"/>
         <source>Recognize users</source>
-        <translation type="unfinished"></translation>
+        <translation>Herken gebruikers</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="734"/>
         <source>By account name and domain name</source>
-        <translation type="unfinished"></translation>
+        <translation>Door account naam en domein naam</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="739"/>
         <source>By account name</source>
-        <translation type="unfinished"></translation>
+        <translation>Door account naam</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="729"/>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="729"/>
         <source>By nickname</source>
-        <translation type="unfinished"></translation>
+        <translation>Door bijnaam</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="754"/>
         <source>Save groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Groepen opslaan</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="855"/>
         <source>Enable tray icon notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Notificaties inschakelen voor systeemvak icon</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="867"/>
         <source>Show file notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon bestandsmeldingen</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="875"/>
         <source>Select icon theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer pictogram thema</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="789"/>
         <source>Select emoticon theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer emoticons thema</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="696"/>
         <source>On connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbinding</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="699"/>
         <source>Prompts to change user</source>
-        <translation type="unfinished"></translation>
+        <translation>Verzoek om van gebruiker te veranderen</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="703"/>
         <source>Prompts to ask network password</source>
-        <translation type="unfinished"></translation>
+        <translation>Verzoek voor het netwerkwachtwoord</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="883"/>
         <source>Start %1 automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Start %1 automatisch</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1060"/>
         <source>Right click to open menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik rechts om menu te openen</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1088"/>
@@ -2427,103 +2427,103 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2145"/>
         <source>Your name is not changed. Do you want to continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Je naam is niet veranderd. Wil je doorgaan?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2281"/>
         <source>Do you want to open the file %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wil je het betand %1 openen?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2596"/>
         <source>Your status description</source>
-        <translation type="unfinished"></translation>
+        <translation>Je statusbeschrijving</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3625"/>
         <source>You are using the default icons.</source>
-        <translation type="unfinished"></translation>
+        <translation>Je gebruikt standaard pictograms.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3631"/>
         <source>You are using custom icons in folder %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>U gebruikt aangepaste pictogrammen in de map %1.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3632"/>
         <source>Restore default icons</source>
-        <translation type="unfinished"></translation>
+        <translation>Herstel standaard pictogrammen</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3626"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3632"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3641"/>
         <source>Select the icon folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer de pictogrammen map</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3662"/>
         <source>You are using the default emoticons.</source>
-        <translation type="unfinished"></translation>
+        <translation>Je gebruikt standaard emoticons.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3663"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3669"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3678"/>
         <source>Select the emoticon folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer de emoticon map</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3668"/>
         <source>You are using custom emoticons in folder %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>U gebruikt aangepaste emoticons in de map %1.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3669"/>
         <source>Restore default emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>Herstel standaard emoticons</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3695"/>
         <source>You have to restart your connection to apply changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Je moet verbinding herstarten om wijzigingen door te voeren.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="618"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2370"/>
         <source>Create new group chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak een nieuwe chatgroep aan</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2454"/>
         <source>Do you want to delete this saved chat?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wil je deze opgeslagen chat verwijderen?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2632"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2651"/>
         <source>%1 removed</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 verwijderd</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2685"/>
         <source>Do you want to clear messages with %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wil je berichten van %1 wissen?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2986"/>
         <source>Do you want to delete user %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wil je gebruiker %1 verwijderen?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3142"/>
         <source>Do you want to clear all saved status descriptions?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wil je alle statusbeschrijvingen wissen?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3616"/>
         <source>%1 blocked chats</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Geblokkeerde chats</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="627"/>
@@ -2756,7 +2756,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1212"/>
         <source>Please save the network password in the next dialog if you want to use password without prompt.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sla netwerk paswoord op in het volgende venster als je paswoord wilt gebruiken zonder elke keer te vragen.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1499"/>
@@ -2809,12 +2809,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2331"/>
         <source>Sound module is not working</source>
-        <translation>Geluidsmodule werkt niet.</translation>
+        <translation>Geluidsmodule werkt niet</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2368"/>
         <source>There is a chat with the same members: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Er is een chat met dezelfde leden:%1.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2422"/>
@@ -2887,44 +2887,44 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="37"/>
         <source>Network</source>
-        <translation type="unfinished">Netwerk</translation>
+        <translation>Netwerk</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="58"/>
         <source>Unknown address</source>
-        <translation type="unfinished">Onbekend adres</translation>
+        <translation>Onbekend adres</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="66"/>
         <source>File is empty</source>
-        <translation type="unfinished">Bestand is leeg</translation>
+        <translation>Bestand is leeg</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="96"/>
         <source>none</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="104"/>
         <source>selected by system</source>
-        <translation type="unfinished"></translation>
+        <translation>geselecteerd door systeem</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="129"/>
         <source>Warning</source>
-        <translation type="unfinished">Opgepast</translation>
+        <translation>Opgepast</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="130"/>
         <source>You have inserted an invalid host address:
 %1 is removed from the list.</source>
-        <translation type="unfinished">U hebt een ongeldig host adres ingegeven:
+        <translation>U hebt een ongeldig host adres ingegeven:
 %1 is uit de lijst verwijderd.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="130"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
@@ -2932,82 +2932,82 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="405"/>
         <source>* (read only section)</source>
-        <translation type="unfinished">* (alleen lezen sectie)</translation>
+        <translation>* (alleen lezen sectie)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="425"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="432"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuleer</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="344"/>
         <source>Addresses in beehosts.ini *</source>
-        <translation type="unfinished">Adressen in beehosts.ini *</translation>
+        <translation>Adressen in beehosts.ini *</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="357"/>
         <source>Enter the IP addresses or subnet of your local area network separated by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</source>
-        <translation type="unfinished">Geef de ip adressen of het subnet van uw lokaal netwerk in gescheiden door comma&apos;s (vb: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
+        <translation>Geef de ip adressen of het subnet van uw lokaal netwerk in gescheiden door comma&apos;s (vb: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="185"/>
         <source>Enable broadcast interval</source>
-        <translation type="unfinished">Zet interval aan</translation>
+        <translation>Zet interval aan</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="220"/>
         <source>Max users to contact every second</source>
-        <translation type="unfinished">Max aantal gebruikers om contact te maken</translation>
+        <translation>Max aantal gebruikers om contact te maken</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="227"/>
         <source>seconds (0=disabled, 0=default)</source>
-        <translation type="unfinished">seconden (0=uit, 10=standaard) </translation>
+        <translation>seconden (0=uit, 10=standaard) </translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="382"/>
         <source>Prevent multiple connections from single host address</source>
-        <translation type="unfinished"></translation>
+        <translation>Voorkom meerdere verbindingen van 1 host adres</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="389"/>
         <source>Enable Zero Configuration Networking</source>
-        <translation type="unfinished">Nul configuratie netwerken inschakelen</translation>
+        <translation>Nul configuratie netwerken inschakelen</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="22"/>
         <source>UDP Port in beebeep.rc *</source>
-        <translation type="unfinished">UDP Poort in beebeep.rc *</translation>
+        <translation>UDP Poort in beebeep.rc *</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="35"/>
         <source>Local subnet address *</source>
-        <translation type="unfinished">Lokaal subnet adres *</translation>
+        <translation>Lokaal subnet adres *</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="54"/>
         <source>Multicast group in beebeep.rc *</source>
-        <translation type="unfinished">Multicast groep in beebeep.rc *</translation>
+        <translation>Multicast groep in beebeep.rc *</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="67"/>
         <source>Preferred subnet</source>
-        <translation type="unfinished"></translation>
+        <translation>Voorkeur subnet</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="141"/>
         <source>(the same for all clients)</source>
-        <translation type="unfinished">(zelfde voor alle cliënten)</translation>
+        <translation>(zelfde voor alle cliënten)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="151"/>
         <source>(search users here by default)</source>
-        <translation type="unfinished">(zoek alle gebruikers standaard hier)</translation>
+        <translation>(zoek alle gebruikers standaard hier)</translation>
     </message>
 </context>
 <context>
@@ -3140,7 +3140,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="195"/>
         <source>Do you want to delete this preset?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wil je deze voorinstelling verwijderen?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="196"/>
@@ -3158,32 +3158,32 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiRefusedChat.cpp" line="35"/>
         <source>Blocked chats</source>
-        <translation type="unfinished"></translation>
+        <translation>Geblokkeerde chats</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiRefusedChat.cpp" line="41"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiRefusedChat.cpp" line="41"/>
         <source>Blocked chat ID</source>
-        <translation type="unfinished"></translation>
+        <translation>Geblokkeerde chat ID</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiRefusedChat.cpp" line="59"/>
         <source>Remove blocked chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder geblokkeerde chat</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiRefusedChat.cpp" line="61"/>
         <source>Clear all</source>
-        <translation type="unfinished">Alles wissen</translation>
+        <translation>Alles wissen</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiRefusedChat.cpp" line="121"/>
         <source>Please select an item in the list.</source>
-        <translation type="unfinished">Selecteer aub een uit de lijst.</translation>
+        <translation>Selecteer aub een item uit de lijst.</translation>
     </message>
 </context>
 <context>
@@ -3191,17 +3191,17 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiRefusedChat.ui" line="17"/>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Venster</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiRefusedChat.ui" line="38"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiRefusedChat.ui" line="45"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuleer</translation>
     </message>
 </context>
 <context>
@@ -3253,12 +3253,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiSavedChatList.cpp" line="56"/>
         <source>Search saved chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoek opgeslagen chat</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChatList.cpp" line="92"/>
         <source>Please select an item</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer aub een item</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChatList.cpp" line="98"/>
@@ -3278,7 +3278,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiSavedChatList.cpp" line="164"/>
         <source>Click to view saved chat with %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik om opgeslagen chat te bekijken met %1</translation>
     </message>
 </context>
 <context>
@@ -3395,12 +3395,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="65"/>
         <source>Create folder in your ShareBox</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak map aan in je sharebox</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="66"/>
         <source>Show current folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon huidige map</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="67"/>
@@ -3410,7 +3410,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="68"/>
         <source>Create folder in ShareBox</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak map aan in sharebox</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="121"/>
@@ -3435,7 +3435,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="328"/>
         <source>%1: access denied.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: geen toegang.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="338"/>
@@ -3450,12 +3450,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="460"/>
         <source>Please insert the new folder name</source>
-        <translation type="unfinished"></translation>
+        <translation>Geef aub een nieuwe mapnaam</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="466"/>
         <source>%1 already exists.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 bestaat al.</translation>
     </message>
 </context>
 <context>
@@ -3609,7 +3609,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiShareLocal.cpp" line="157"/>
         <source>Do you want to remove this path:</source>
-        <translation type="unfinished"></translation>
+        <translation>Wil je deze pad verwijderen:</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareLocal.cpp" line="159"/>
@@ -3626,7 +3626,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiShareLocal.cpp" line="172"/>
         <source>Do you want to remove all shared paths?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wil je alle gedeelde paden verwijderen?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareLocal.cpp" line="223"/>
@@ -3762,7 +3762,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiShareNetwork.cpp" line="41"/>
         <source>Right click to open menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik rechts om menu te openen</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareNetwork.cpp" line="340"/>
@@ -3838,12 +3838,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiShortcut.cpp" line="130"/>
         <source>You cannot use the comma for your shortcut.</source>
-        <translation type="unfinished"></translation>
+        <translation>Je kan geen komma gebruiken voor een sneltoets.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShortcut.cpp" line="130"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
@@ -3934,7 +3934,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiTransferFile.cpp" line="207"/>
         <source>Do you want to cancel the transfer of %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wil je de overdracht van %1 annuleren of?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiTransferFile.cpp" line="65"/>
@@ -3955,7 +3955,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="70"/>
         <source>is</source>
-        <translation type="unfinished"></translation>
+        <translation>is</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="78"/>
@@ -3990,17 +3990,17 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="162"/>
         <source>You cannot remove an user who is connected</source>
-        <translation type="unfinished"></translation>
+        <translation>Je kan geen gebruiker verwijderen als hij online is</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="167"/>
         <source>You cannot remove an user who is in group chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Je kan geen gebruiker verwijderen als hij in een groepschat zit</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="172"/>
         <source>Remove this user</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder deze gebruiker</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="128"/>
@@ -4172,12 +4172,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiWizard.ui" line="36"/>
         <source>Change user</source>
-        <translation type="unfinished"></translation>
+        <translation>Verander gebruiker</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWizard.ui" line="46"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuleer</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWizard.ui" line="86"/>
@@ -4191,12 +4191,12 @@ Gebruik aub een andere naam.</translation>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="35"/>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="41"/>
         <source>Workgroups</source>
-        <translation type="unfinished"></translation>
+        <translation>Werkgroepen</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="50"/>
         <source>Remove workgroup</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder werkgroep</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="52"/>
@@ -4206,17 +4206,17 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="101"/>
         <source>Please insert a workgroup.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geef aub uw werkgroep in.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="108"/>
         <source>This workgroup is already in list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deze werkgroep staat al in de lijst.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="134"/>
         <source>Please select an item in the list.</source>
-        <translation type="unfinished">Selecteer aub een uit de lijst.</translation>
+        <translation>Selecteer aub een uit de lijst.</translation>
     </message>
 </context>
 <context>
@@ -4224,12 +4224,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.ui" line="17"/>
         <source>Workgroups</source>
-        <translation type="unfinished"></translation>
+        <translation>Werkgroepen</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.ui" line="23"/>
         <source>Enter the name of workgroup you want to add </source>
-        <translation type="unfinished"></translation>
+        <translation>Vul naam in van werkgroep die je wilt toevoegen </translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.ui" line="57"/>
@@ -4244,7 +4244,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.ui" line="93"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuleren</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.ui" line="102"/>
@@ -4291,7 +4291,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="62"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Onbekend</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserItem.cpp" line="123"/>
