@@ -33,7 +33,7 @@ Connection::Connection( QObject *parent )
 {
   setSocketOption( QAbstractSocket::KeepAliveOption, 1 );
   connect( this, SIGNAL( dataReceived( const QByteArray& ) ), this, SLOT( parseData( const QByteArray& ) ) );
-  connect( this, SIGNAL( tickEvent( int ) ), this, SLOT( onTickEvent( int ) ) );
+  connect( this, SIGNAL( pingRequest() ), this, SLOT( sendPing() ) );
 }
 
 bool Connection::sendMessage( const Message& m )
@@ -132,10 +132,4 @@ void Connection::sendPong()
 #endif
   if( !sendData( Protocol::instance().pongMessage() ) )
     qWarning() << "Unable to send PONG to" << qPrintable( networkAddress().toString() );
-}
-
-void Connection::onTickEvent( int ticks )
-{
-  if( ticks % PING_INTERVAL_TICK == 0 )
-    sendPing();
 }

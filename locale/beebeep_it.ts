@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -2271,16 +2271,16 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>File is empty</source>
-        <translation>Il file è vuoto</translation>
+        <translation type="obsolete">Il file è vuoto</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation>Attenzione</translation>
+        <translation type="obsolete">Attenzione</translation>
     </message>
     <message>
         <source>You have inserted an invalid host address:
 %1 is removed from the list.</source>
-        <translation>Hai inserito un indirizzo IP non valido:
+        <translation type="obsolete">Hai inserito un indirizzo IP non valido:
 %1 verrà rimosso dalla lista.</translation>
     </message>
     <message>
@@ -2294,6 +2294,18 @@ Inserisci un nome differente.</translation>
     <message>
         <source>selected by system</source>
         <translation>selezionata dal sistema</translation>
+    </message>
+    <message>
+        <source>File HOSTS not found.</source>
+        <translation>Il file HOSTS non è stato trovato.</translation>
+    </message>
+    <message>
+        <source>seconds</source>
+        <translation>secondi</translation>
+    </message>
+    <message>
+        <source>users</source>
+        <translation>utenti</translation>
     </message>
 </context>
 <context>
@@ -2312,15 +2324,15 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Addresses in beehosts.ini *</source>
-        <translation>Indirizzi IP in beehosts.ini *</translation>
+        <translation type="obsolete">Indirizzi IP in beehosts.ini *</translation>
     </message>
     <message>
         <source>Enter the IP addresses or subnet of your local area network separated by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</source>
-        <translation>Inserisci gli indirizzi IP o altre sottoreti della tua area separati dalla virgola (per esempio: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
+        <translation type="obsolete">Inserisci gli indirizzi IP o altre sottoreti della tua area separati dalla virgola (per esempio: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
     </message>
     <message>
         <source>Enable broadcast interval</source>
-        <translation>Abilita la ricerca automatica ogni </translation>
+        <translation type="obsolete">Abilita la ricerca automatica ogni </translation>
     </message>
     <message>
         <source>Max users to contact every second</source>
@@ -2328,7 +2340,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>seconds (0=disabled, 0=default)</source>
-        <translation>secondi (0=disabilitata, 0=predefinita)</translation>
+        <translation type="obsolete">secondi (0=disabilitata, 0=predefinita)</translation>
     </message>
     <message>
         <source>Enable Zero Configuration Networking</source>
@@ -2361,6 +2373,22 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Prevent multiple connections from single host address</source>
         <translation>Non permettere connessioni multiple da un singolo indirizzo IP</translation>
+    </message>
+    <message>
+        <source>Broadcast interval seconds</source>
+        <translation type="obsolete">Ricerca automatica utenti ogni</translation>
+    </message>
+    <message>
+        <source>Show file HOSTS...</source>
+        <translation>Mostra il file HOSTS...</translation>
+    </message>
+    <message>
+        <source>Search users every</source>
+        <translation>Cerca gli utenti ogni</translation>
+    </message>
+    <message>
+        <source>Use fixed interval to search users</source>
+        <translation>Usa un intervallo fisso di tempo per cercare gli utenti</translation>
     </message>
 </context>
 <context>

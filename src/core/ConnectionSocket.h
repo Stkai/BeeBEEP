@@ -57,22 +57,21 @@ public:
   int activityIdle() const; // ms idle
   inline const NetworkAddress& networkAddress() const;
 
+  void onTickEvent( int );
+
 signals:
   void dataReceived( const QByteArray& );
   void authenticationRequested( const QByteArray& );
   void abortRequest();
-  void tickEvent( int );
+  void pingRequest();
 
 protected slots:
   void readBlock();
   void sendQuestionHello();
   void checkConnectionTimeout( int );
-  void timerEvent( QTimerEvent* );
   void onBytesWritten( qint64 );
 
 protected:
-  bool startTimerTick();
-  void stopTimerTick();
   void sendAnswerHello();
   void checkHelloMessage( const QByteArray& );
   QByteArray serializeData( const QByteArray& );
@@ -92,7 +91,7 @@ private:
   NetworkAddress m_networkAddress;
 
   QDateTime m_latestActivityDateTime;
-  int m_timerTickId;
+  bool m_checkConnectionTimeout;
   int m_tickCounter;
   bool m_isAborted;
 

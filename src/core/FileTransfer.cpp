@@ -399,3 +399,9 @@ void FileTransfer::startNewDownload()
 
   setupPeer( download_peer, 0 );
 }
+
+void FileTransfer::onTickEvent( int ticks )
+{
+  foreach( FileTransferPeer* transfer_peer, m_peers )
+    transfer_peer->onTickEvent( ticks );
+}

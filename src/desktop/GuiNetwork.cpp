@@ -39,9 +39,12 @@ GuiNetwork::GuiNetwork( QWidget* parent )
   Bee::removeContextHelpButton( this );
 
   m_restartConnection = false;
+  mp_sbBroadcastInterval->setSuffix( QString( " %1" ).arg( tr( "seconds" ) ) );
+  mp_sbMaxUsersToContact->setSuffix( QString( " %1" ).arg( tr( "users" ) ) );
 
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( checkAndSearch() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
+  connect( mp_pbShowFileHosts, SIGNAL( clicked() ), this, SLOT( showFileHosts() ) );
 }
 
 void GuiNetwork::loadSettings()
@@ -59,18 +62,7 @@ void GuiNetwork::loadSettings()
   else
     mp_leSubnet->setText( base_host_addresses.toString() );
 
-  QStringList sl_tmp = Settings::instance().broadcastAddressesInFileHosts();
-  if( sl_tmp.size() > 0 )
-    mp_teAddressesInHosts->setPlainText( sl_tmp.join( ", " ) );
-  else
-    mp_teAddressesInHosts->setPlainText( tr( "File is empty" ) );
-
-  sl_tmp = Settings::instance().broadcastAddressesInSettings();
-  sl_tmp.removeDuplicates();
-  if( sl_tmp.size() > 0 )
-    mp_teAddressesInSettings->setPlainText( sl_tmp.join( ", " ) );
-  else
-    mp_teAddressesInSettings->setPlainText( "" );
+  mp_pbShowFileHosts->setDisabled( Settings::instance().broadcastAddressesInFileHosts().isEmpty() );
 
   mp_cbEnableMDns->setChecked( Settings::instance().useMulticastDns() );
 
@@ -108,40 +100,10 @@ void GuiNetwork::loadSettings()
   }
 
   m_restartConnection = false;
-  mp_teAddressesInSettings->setFocus();
 }
 
 void GuiNetwork::checkAndSearch()
 {
-  QString string_tmp = mp_teAddressesInSettings->toPlainText().simplified();
-  QStringList sl_tmp;
-  if( string_tmp.size() > 0 )
-    sl_tmp = string_tmp.split( ",", QString::SkipEmptyParts );
-
-  if( !sl_tmp.isEmpty() )
-  {
-    QStringList sl_addresses;
-    foreach( QString s, sl_tmp )
-    {
-      QHostAddress host_address( s.simplified() );
-      if( host_address.isNull() )
-      {
-        QMessageBox::warning( this, QString( "%1 - %2" ).arg( Settings::instance().programName() ).arg( tr( "Warning" ) ),
-                              tr( "You have inserted an invalid host address:\n%1 is removed from the list." ).arg( s.simplified() ), tr( "Ok" ) );
-        sl_tmp.removeOne( s );
-        mp_teAddressesInSettings->setPlainText( sl_tmp.join( ", " ) );
-        mp_teAddressesInSettings->setFocus();
-        return;
-      }
-      else
-        sl_addresses.append( s.trimmed() );
-    }
-
-    Settings::instance().setBroadcastAddressesInSettings( sl_addresses );
-  }
-  else
-    Settings::instance().setBroadcastAddressesInSettings( QStringList() );
-
   Settings::instance().setUseMulticastDns( mp_cbEnableMDns->isChecked() );
 
   if( mp_cbBroadcastInterval->isChecked() )
@@ -159,4 +121,14 @@ void GuiNetwork::checkAndSearch()
     m_restartConnection = true;
   }
   accept();
+}
+
+void GuiNetwork::showFileHosts()
+{
+  QString hosts_file_path = Settings::instance().defaultHostsFilePath( true );
+  if( !QFile::exists( hosts_file_path ) )
+    hosts_file_path = Settings::instance().defaultHostsFilePath( false );
+
+  if( !Bee::showFileInGraphicalShell( hosts_file_path ) )
+    QMessageBox::information( this, Settings::instance().programName(), QString( "%1\n%2" ).arg( hosts_file_path ).arg( tr( "File HOSTS not found." ) ), tr( "Ok" ) );
 }

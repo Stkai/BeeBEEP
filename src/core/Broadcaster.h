@@ -41,6 +41,8 @@ public:
   inline void setNewBroadcastRequested( bool );
   inline void setAddOfflineUsersInNetworkAddresses( bool );
 
+  void updateUsersAddedManually();
+
 public slots:
   void sendBroadcast();
 

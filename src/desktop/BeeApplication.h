@@ -25,6 +25,7 @@
 #define BEEBEEP_APPLICATION_H
 
 #include "Config.h"
+class TickManager;
 
 #ifdef Q_OS_LINUX
 struct xcb_connection_t;
@@ -86,7 +87,7 @@ protected:
   void addSleepWatcher();
 
 protected slots:
-  void checkTick();
+  void checkTicks( int );
   void setIdle();
   void removeIdle();
   void slotConnectionEstablished();
@@ -94,7 +95,6 @@ protected slots:
 private:
   int m_idleTimeout;
   QDateTime m_lastEventDateTime;
-  QTimer m_timer;
   bool m_isInIdle;
   QThread* mp_jobThread;
   QLocalServer* mp_localServer;
@@ -106,8 +106,9 @@ private:
   bool m_xcbConnectHasError;
 #endif
 
-  int m_tickCounter;
   bool m_isInSleepMode;
+
+  TickManager* mp_tickManager;
 
 };
 

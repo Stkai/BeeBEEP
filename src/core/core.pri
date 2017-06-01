@@ -18,6 +18,7 @@ HEADERS += core/Broadcaster.h \
   core/FileShare.h \
   core/FileTransfer.h \
   core/FileTransferPeer.h \
+  core/FirewallManager.h \
   core/Group.h \
   core/HistoryManager.h \
   core/HistoryMessage.h \
@@ -37,6 +38,7 @@ HEADERS += core/Broadcaster.h \
   core/Rijndael.h \
   core/SaveChatList.h \
   core/Settings.h \
+  core/TickManager.h \
   core/User.h \
   core/UserList.h \
   core/UserManager.h \
@@ -69,6 +71,7 @@ SOURCES +=  core/Broadcaster.cpp \
   core/FileTransferDownload.cpp \
   core/FileTransferPeer.cpp \
   core/FileTransferUpload.cpp \
+  core/FirewallManager.cpp \
   core/Group.cpp \
   core/HistoryManager.cpp \
   core/HistoryMessage.cpp \
@@ -86,6 +89,7 @@ SOURCES +=  core/Broadcaster.cpp \
   core/Rijndael.cpp \
   core/SaveChatList.cpp \
   core/Settings.cpp \
+  core/TickManager.cpp \
   core/User.cpp \
   core/UserList.cpp \
   core/UserManager.cpp \
@@ -93,3 +97,4 @@ SOURCES +=  core/Broadcaster.cpp \
   core/UserStatusRecord.cpp \
   core/VCard.cpp
 
+win32: SOURCES += core/FirewallManager_win.cpp

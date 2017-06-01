@@ -21,33 +21,34 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_GUINETWORK_H
-#define BEEBEEP_GUINETWORK_H
+#ifndef BEEBEEP_TICKMANAGER_H
+#define BEEBEEP_TICKMANAGER_H
 
 #include "Config.h"
-#include "ui_GuiNetwork.h"
 
 
-class GuiNetwork : public QDialog, private Ui::GuiNetworkWidget
+class TickManager : public QObject
 {
   Q_OBJECT
 
 public:
-  GuiNetwork( QWidget* parent = 0 );
+  explicit TickManager( QObject* parent = 0 );
 
-  void loadSettings();
-  inline bool restartConnection() const;
+signals:
+  void tickEvent( int );
+
+public slots:
+  void startTicks();
+  void stopTicks();
 
 protected slots:
-  void checkAndSearch();
-  void showFileHosts();
+  void onTimerTimeout();
 
 private:
-  bool m_restartConnection;
+  QTimer* mp_timer;
+  int m_ticks;
+  mutable QMutex m_mutex;
 
 };
 
-// Inline Functions
-inline bool GuiNetwork::restartConnection() const { return m_restartConnection; }
-
-#endif // BEEBEEP_GUINETWORK_H
+#endif // BEEBEEP_TICKMANAGER_H

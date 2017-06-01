@@ -2771,7 +2771,10 @@ void GuiMain::showAddUser()
   if( gad.exec() == QDialog::Accepted )
   {
     if( !Settings::instance().networkAddressList().isEmpty() )
+    {
+      mp_core->updateUsersAddedManually();
       QMetaObject::invokeMethod( this, "sendBroadcastMessage", Qt::QueuedConnection );
+    }
   }
 }
 
@@ -3333,7 +3336,6 @@ void GuiMain::onTickEvent( int ticks )
   mp_trayIcon->onTickEvent( ticks );
   mp_chatList->onTickEvent( ticks );
   mp_userList->onTickEvent( ticks );
-  mp_core->onTickEvent( ticks );
   mp_fileSharing->onTickEvent( ticks );
 
   if( mp_core->hasFileTransferInProgress() )
@@ -3346,6 +3348,8 @@ void GuiMain::onTickEvent( int ticks )
     if( !fl_chat )
       QApplication::alert( this, 1000 );
   }
+
+  mp_core->onTickEvent( ticks );
 }
 
 void GuiMain::onChatReadByUser( const Chat& c, const User& u )

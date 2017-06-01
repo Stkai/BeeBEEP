@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "BeeApplication.h"
+#include "TickManager.h"
 #include <csignal>
 #ifdef Q_OS_WIN
   #include <windows.h>
@@ -46,15 +47,13 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
   setQuitOnLastWindowClosed( false );
 
   m_idleTimeout = 0;
-  m_timer.setObjectName( "BeeMainTimer" );
-  m_timer.setInterval( TICK_INTERVAL );
   m_isInIdle = false;
   mp_localServer = 0;
-  m_tickCounter = 0;
   m_isInSleepMode = false;
 
   mp_jobThread = new QThread();
   m_jobsInProgress = 0;
+  mp_tickManager = 0;
 
 #ifdef Q_OS_LINUX
   m_xcbConnectHasError = true;
@@ -69,12 +68,9 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
 
   addSleepWatcher();
 
-  connect( &m_timer, SIGNAL( timeout() ), this, SLOT( checkTick() ) );
-
   signal( SIGINT, &quitAfterSignal );
   signal( SIGTERM, &quitAfterSignal );
   signal( SIGABRT, &quitAfterSignal );
-
 }
 
 BeeApplication::~BeeApplication()
@@ -105,7 +101,10 @@ void BeeApplication::init()
   qDebug() << "Starting background thread and tick timer";
   mp_jobThread->start();
   mp_jobThread->setPriority( QThread::LowPriority );
-  m_timer.start();
+  mp_tickManager = new TickManager;
+  connect( mp_tickManager, SIGNAL( tickEvent( int ) ), this, SLOT( checkTicks( int ) ) );
+  addJob( mp_tickManager );
+  QMetaObject::invokeMethod( mp_tickManager, "startTicks", Qt::QueuedConnection );
 }
 
 void BeeApplication::forceSleep()
@@ -185,8 +184,13 @@ void BeeApplication::checkIdle()
 
 void BeeApplication::cleanUp()
 {
-  if( m_timer.isActive() )
-    m_timer.stop();
+  if( mp_tickManager )
+  {
+    QMetaObject::invokeMethod( mp_tickManager, "stopTicks", Qt::QueuedConnection );
+    removeJob( mp_tickManager );
+    mp_tickManager->deleteLater();
+    mp_tickManager = 0;
+  }
 
 #if defined( Q_OS_LINUX ) && !defined( Q_OS_ANDROID )
   if( m_idleTimeout > 0 )
@@ -336,20 +340,17 @@ void BeeApplication::removeJob( QObject* obj )
   qDebug() << qPrintable( obj->objectName() ) << "removed from job thread." << m_jobsInProgress << "jobs in progress";
 }
 
-void BeeApplication::checkTick()
+void BeeApplication::checkTicks( int ticks )
 {
-  m_tickCounter++;
-
-  if( m_tickCounter > 31536000 )
+  if( ticks > 31536000 )
   {
     // 1 year is passed ... it is time to close!
     qWarning() << "A year in uptime is passed. It is time to close and restart";
-    m_timer.stop();
     QMetaObject::invokeMethod( this, "forceShutdown", Qt::QueuedConnection );
     return;
   }
   else
-    emit tickEvent( m_tickCounter );
+    emit tickEvent( ticks );
 }
 
 #if !defined( Q_OS_WIN ) && !defined( Q_OS_MAC )

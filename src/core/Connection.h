@@ -46,7 +46,6 @@ protected slots:
   void parseData( const QByteArray& );
   void sendPing();
   void sendPong();
-  void onTickEvent( int );
 
 };
 

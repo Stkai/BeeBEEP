@@ -662,34 +662,6 @@ QHostAddress Settings::hostAddressToListen()
 #endif
 }
 
-bool Settings::addBroadcastAddressInSettings( const QString& host_address )
-{
-  if( m_broadcastAddressesInFileHosts.contains( host_address ) )
-    return false;
-
-  if( m_broadcastAddressesInSettings.contains( host_address ) )
-    return false;
-
-  m_broadcastAddressesInSettings.append( host_address );
-  return true;
-}
-
-int Settings::setBroadcastAddressesInSettings( const QStringList& address_list )
-{
-  int num_addresses = 0;
-  m_broadcastAddressesInSettings.clear();
-  if( address_list.isEmpty() )
-    return num_addresses;
-
-  foreach( QString sa, address_list )
-  {
-    if( addBroadcastAddressInSettings( sa ) )
-      num_addresses++;
-  }
-
-  return num_addresses;
-}
-
 void Settings::setLocalUserHost( const QHostAddress& host_address, int host_port )
 {
   if( host_address.isNull() || host_address.toString() == QString( "0.0.0.0" ) )
@@ -1030,9 +1002,6 @@ void Settings::load()
   sets->endGroup();
 
   sets->beginGroup( "Network");
-  m_broadcastAddressesInSettings = sets->value( "BroadcastAddresses", QStringList() ).toStringList();
-  if( !m_broadcastAddressesInSettings.isEmpty() )
-    m_broadcastAddressesInSettings.removeDuplicates();
   QString local_host_address = sets->value( "LocalHostAddressForced", "" ).toString();
   if( !local_host_address.isEmpty() )
     m_localHostAddressForced = QHostAddress( local_host_address );
@@ -1313,7 +1282,6 @@ void Settings::save()
   sets->setValue( "UseMulticastDns", m_useMulticastDns );
 #endif
   sets->setValue( "PreventMultipleConnectionsFromSingleHostAddress", m_preventMultipleConnectionsFromSingleHostAddress );
-  sets->setValue( "BroadcastAddresses", m_broadcastAddressesInSettings );
   if( !m_localHostAddressForced.isNull() )
     sets->setValue( "LocalHostAddressForced", m_localHostAddressForced.toString() );
   else
@@ -1631,14 +1599,6 @@ QString Settings::defaultGroupsFilePath( bool use_resource_folder ) const
 {
   QString root_folder = use_resource_folder ? resourceFolder() : dataFolder();
   return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( root_folder ).arg( QLatin1String( "beegroups.ini" ) ) );
-}
-
-bool Settings::addSubnetToBroadcastAddress( const QHostAddress& ext_subnet )
-{
-  if( ext_subnet.isNull() )
-    return false;
-  else
-    return addBroadcastAddressInSettings( ext_subnet.toString() );
 }
 
 QString Settings::simpleEncrypt( const QString& text_to_encrypt )

@@ -60,6 +60,8 @@ public:
   void startUpload( const FileInfo& );
   void cancelTransfer();
 
+  void onTickEvent( int );
+
 signals:
   void message( VNumber peer_id, VNumber user_id, const FileInfo&, const QString& );
   void progress( VNumber peer_id, VNumber user_id, const FileInfo&, FileSizeType );
@@ -74,7 +76,6 @@ protected slots:
   void socketError( QAbstractSocket::SocketError );
   void checkTransferData( const QByteArray& );
   void connectionTimeout();
-  void onTickEvent( int );
   void checkUserAuthentication( const QByteArray& );
 
 protected:

@@ -32,7 +32,7 @@
 ConnectionSocket::ConnectionSocket( QObject* parent )
   : QTcpSocket( parent ), m_blockSize( 0 ), m_isHelloSent( false ), m_userId( ID_INVALID ), m_protoVersion( 1 ),
     m_cipherKey( "" ), m_publicKey1( "" ), m_publicKey2( "" ), m_networkAddress(), m_latestActivityDateTime(),
-    m_timerTickId( 0 ), m_tickCounter( 0 ), m_isAborted( false ), m_datastreamVersion( 0 )
+    m_checkConnectionTimeout( false ), m_tickCounter( 0 ), m_isAborted( false ), m_datastreamVersion( 0 )
 {
   if( Settings::instance().useLowDelayOptionOnSocket() )
     setSocketOption( QAbstractSocket::LowDelayOption, 1 );
@@ -49,47 +49,27 @@ void ConnectionSocket::initSocket( qintptr socket_descriptor )
   setSocketDescriptor( socket_descriptor );
   m_networkAddress.setHostAddress( peerAddress() );
   m_networkAddress.setHostPort( peerPort() );
-  if( !startTimerTick() )
-    qWarning() << "Unable to start event timer for connection:" << qPrintable( m_networkAddress.toString() );
+  m_tickCounter = 0;
+  m_checkConnectionTimeout = false;
 }
 
 void ConnectionSocket::connectToNetworkAddress( const NetworkAddress& network_address )
 {
   m_isAborted = false;
   m_networkAddress = network_address;
-  if( !startTimerTick() )
-    qWarning() << "Unable to start event timer for connection:" << qPrintable( m_networkAddress.toString() );
-  connectToHost( network_address.hostAddress(), network_address.hostPort() );
-}
-
-bool ConnectionSocket::startTimerTick()
-{
-  stopTimerTick();
-  m_timerTickId = startTimer( TICK_INTERVAL );
   m_tickCounter = 0;
-  return m_timerTickId != 0;
-}
-
-void ConnectionSocket::stopTimerTick()
-{
-  if( m_timerTickId != 0 )
-  {
-    killTimer( m_timerTickId );
-    m_timerTickId = 0;
-    m_tickCounter = 0;
-  }
+  m_checkConnectionTimeout = true;
+  connectToHost( network_address.hostAddress(), network_address.hostPort() );
 }
 
 void ConnectionSocket::abortConnection()
 {
   m_isAborted = true;
-  stopTimerTick();
   abort();
 }
 
 void ConnectionSocket::closeConnection()
 {
-  stopTimerTick();
   if( isOpen() )
   {
     flushAll();
@@ -130,6 +110,9 @@ bool ConnectionSocket::createCipherKey( const QString& public_key )
 
 void ConnectionSocket::readBlock()
 {
+  if( m_isAborted )
+    return;
+
   m_latestActivityDateTime = QDateTime::currentDateTime();
   qint64 bytes_available = bytesAvailable();
 
@@ -177,7 +160,7 @@ void ConnectionSocket::readBlock()
       }
       DATA_BLOCK_SIZE_32 block_size_32;
       data_stream >> block_size_32;
-      m_blockSize = block_size_32 - sizeof(DATA_BLOCK_SIZE_32); // bytearray serialize format must be 32byte
+      m_blockSize = block_size_32 - sizeof(DATA_BLOCK_SIZE_32); // bytearray serialize format must be 32 bytes
     }
     else
     {
@@ -190,7 +173,7 @@ void ConnectionSocket::readBlock()
       }
       DATA_BLOCK_SIZE_16 block_size_16;
       data_stream >> block_size_16;
-      m_blockSize = block_size_16 - sizeof(DATA_BLOCK_SIZE_32); // bytearray serialize format must be 32byte
+      m_blockSize = block_size_16 - sizeof(DATA_BLOCK_SIZE_32); // bytearray serialize format must be 32 bytes (not 16!!!)
     }
   }
 
@@ -227,9 +210,6 @@ void ConnectionSocket::readBlock()
     checkHelloMessage( decrypted_byte_array );
   else
     emit dataReceived( decrypted_byte_array );
-
-  if( !m_isAborted && bytesAvailable() )
-    QMetaObject::invokeMethod( this, "readBlock", Qt::QueuedConnection );
 }
 
 void ConnectionSocket::flushAll()
@@ -326,6 +306,7 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
 
 void ConnectionSocket::sendQuestionHello()
 {
+  m_checkConnectionTimeout = false;
   m_publicKey1 = Protocol::instance().newMd5Id();
 #ifdef BEEBEEP_DEBUG
   qDebug() << "ConnectionSocket is sending pkey1 with shared-key:" << qPrintable( cipherKey() );
@@ -454,10 +435,12 @@ int ConnectionSocket::fileTransferBufferSize() const
 
 void ConnectionSocket::checkConnectionTimeout( int ticks )
 {
+  if( !m_checkConnectionTimeout )
+    return;
+
   if( ticks < Settings::instance().tickIntervalConnectionTimeout() )
     return;
 
-  stopTimerTick();
   qDebug() << "Connection timeout for" << qPrintable( m_networkAddress.toString() ) << ":" << ticks << "ticks";
   disconnectFromHost();
   emit disconnected();
@@ -483,13 +466,10 @@ int ConnectionSocket::activityIdle() const
     return 2147483647;
 }
 
-void ConnectionSocket::timerEvent( QTimerEvent* timer_event )
+void ConnectionSocket::onTickEvent( int  )
 {
-  if( timer_event->timerId() != m_timerTickId )
-  {
-    QTcpSocket::timerEvent( timer_event );
+  if( m_isAborted )
     return;
-  }
 
   m_tickCounter++;
 
@@ -497,6 +477,11 @@ void ConnectionSocket::timerEvent( QTimerEvent* timer_event )
   {
     checkConnectionTimeout( m_tickCounter );
     return;
+  }
+  else
+  {
+    if( m_tickCounter % PING_INTERVAL_TICK == 0 )
+      emit pingRequest();
   }
 
   if( m_tickCounter > 31536000 )
@@ -507,14 +492,11 @@ void ConnectionSocket::timerEvent( QTimerEvent* timer_event )
     return;
   }
 
-  if( activityIdle() >= TICK_INTERVAL && bytesAvailable() )
+  if( bytesAvailable() )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << (int)bytesAvailable() << "bytes available in tick interval and read socket is forced for" << qPrintable( m_networkAddress.toString() );
+    qDebug() << qPrintable( m_networkAddress.toString() ) << "has" << bytesAvailable() << "bytes available: read forced";
 #endif
-    QMetaObject::invokeMethod( this, "readBlock", Qt::QueuedConnection );
-    return;
+    readBlock();
   }
-
-  emit tickEvent( m_tickCounter );
 }

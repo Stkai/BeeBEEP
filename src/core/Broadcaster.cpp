@@ -246,6 +246,21 @@ void Broadcaster::readBroadcastDatagram()
     qDebug() << "Broadcaster read" << num_datagram_read << "datagrams";
 }
 
+void Broadcaster::updateUsersAddedManually()
+{
+  if( !Settings::instance().networkAddressList().isEmpty() )
+  {
+    foreach( QString s_network_address, Settings::instance().networkAddressList() )
+    {
+      NetworkAddress na = Protocol::instance().loadNetworkAddress( s_network_address );
+      if( na.isHostAddressValid() && na.isHostPortValid() )
+        addNetworkAddress( na, false );
+      else
+        qWarning() << "Broadcaster has found error in network address saved in file settings:" << qPrintable( s_network_address );
+    }
+  }
+}
+
 void Broadcaster::updateAddresses()
 {
 #ifdef BEEBEEP_DEBUG
@@ -295,31 +310,7 @@ void Broadcaster::updateAddresses()
     }
   }
 
-  foreach( QString s_address, Settings::instance().broadcastAddressesInSettings() )
-  {
-    NetworkAddress na = NetworkAddress::fromString( s_address );
-    if( na.isHostAddressValid() )
-    {
-#ifdef BEEBEEP_DEBUG
-      qDebug() << "Network address saved in file settings added:" << na.toString();
-#endif
-      addNetworkAddress( na, true );
-    }
-    else
-      qWarning() << "Broadcaster has found error in broadcast address saved in file settings:" << qPrintable( s_address );
-  }
-
-  if( !Settings::instance().networkAddressList().isEmpty() )
-  {
-    foreach( QString s_network_address, Settings::instance().networkAddressList() )
-    {
-      NetworkAddress na = Protocol::instance().loadNetworkAddress( s_network_address );
-      if( na.isHostAddressValid() && na.isHostPortValid() )
-        addNetworkAddress( na, false );
-      else
-        qWarning() << "Broadcaster has found error in network address saved in file settings:" << qPrintable( s_network_address );
-    }
-  }
+  updateUsersAddedManually();
 
   if( m_addOfflineUsersInNetworkAddresses )
   {

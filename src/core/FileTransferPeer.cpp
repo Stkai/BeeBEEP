@@ -41,7 +41,6 @@ FileTransferPeer::FileTransferPeer( QObject *parent )
   connect( &m_socket, SIGNAL( error( QAbstractSocket::SocketError ) ), this, SLOT( socketError( QAbstractSocket::SocketError ) ) );
   connect( &m_socket, SIGNAL( authenticationRequested( const QByteArray& ) ), this, SLOT( checkUserAuthentication( const QByteArray& ) ) );
   connect( &m_socket, SIGNAL( dataReceived( const QByteArray& ) ), this, SLOT( checkTransferData( const QByteArray& ) ) );
-  connect( &m_socket, SIGNAL( tickEvent( int ) ), this, SLOT( onTickEvent( int ) ) );
 }
 
 void FileTransferPeer::cancelTransfer()

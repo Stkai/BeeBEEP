@@ -356,6 +356,12 @@ void Core::sendMulticastingMessage()
 #endif
 }
 
+void Core::updateUsersAddedManually()
+{
+  qDebug() << "Updating users added manually to broadcaster:" << Settings::instance().networkAddressList().size();
+  mp_broadcaster->updateUsersAddedManually();
+}
+
 void Core::sendBroadcastMessage()
 {
   if( !isConnected() )
@@ -544,6 +550,12 @@ void Core::onTickEvent( int ticks )
 
     if( (ticks % AUTO_BROADCAST_CHECK_TICK == 0) && m_connections.isEmpty() )
       mp_broadcaster->setNewBroadcastRequested( true );
+
+    foreach( Connection* c, m_connections )
+      c->onTickEvent( ticks );
+
+    if( mp_fileTransfer->isActive() )
+      mp_fileTransfer->onTickEvent( ticks );
   }
 
   if( Bee::isTimeToCheck( ticks, Settings::instance().tickIntervalCheckNetwork() ) )

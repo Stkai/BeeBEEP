@@ -71,18 +71,40 @@ void Core::checkNetworkAddress( const NetworkAddress& na )
   newPeerFound( na.hostAddress(), na.hostPort() );
 }
 
+Connection* Core::createConnection()
+{
+  Connection *c = new Connection( this );
+  m_connections.append( c );
+  return c;
+}
+
 void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )
 {
   if( !isConnected() )
     return;
 
+  if( sender_ip.isLoopback() && sender_port == mp_listener->serverPort() )
+    return;
+
+  if( Settings::instance().preventMultipleConnectionsFromSingleHostAddress() )
+  {
+    if( hasConnection( sender_ip, -1 ) )
+    {
+      qWarning() << qPrintable( sender_ip.toString() ) << "is already connected and blocked by prevent multiple connections";
+      return;
+    }
+  }
+
   NetworkAddress na( sender_ip, sender_port );
   if( isUserConnected( na ) )
+  {
+    qWarning() << qPrintable( sender_ip.toString() ) << "is already connected user and blocked";
     return;
+  }
 
   qDebug() << "Connecting to new peer" << qPrintable( sender_ip.toString() ) << sender_port;
 
-  Connection *c = new Connection( this );
+  Connection *c = createConnection();
   setupNewConnection( c );
   c->connectToNetworkAddress( NetworkAddress( sender_ip, sender_port ) );
 }
@@ -93,9 +115,8 @@ void Core::checkNewConnection( qintptr socket_descriptor )
   // It comes from Listener. If I want to prevent multiple users from single
   // ip, I can pass -1 to peer_port and check only host address
 
-  Connection *c = new Connection( this );
+  Connection *c = createConnection();
   c->initSocket( socket_descriptor );
-
   qDebug() << "New connection from" << qPrintable( c->networkAddress().toString() );
 
   if( Settings::instance().preventMultipleConnectionsFromSingleHostAddress() )
@@ -129,7 +150,6 @@ void Core::addConnectionReadyForUse( Connection* c )
   qDebug() << "Connection from" << qPrintable( c->networkAddress().toString() ) << "is ready for use";
 #endif
   connect( c, SIGNAL( newMessage( VNumber, const Message& ) ), this, SLOT( parseMessage( VNumber, const Message& ) ) );
-  m_connections.append( c );
 }
 
 void Core::setConnectionError( QAbstractSocket::SocketError se )
@@ -155,7 +175,8 @@ void Core::setConnectionClosed()
 
 void Core::closeConnection( Connection *c )
 {
-  m_connections.removeOne( c );
+  if( !m_connections.removeOne( c ) )
+    return;
 
   if( c->userId() != ID_INVALID )
   {
@@ -180,9 +201,14 @@ void Core::closeConnection( Connection *c )
       qWarning() << "User" << c->userId() << "not found while closing connection";
   }
 
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Deleting connection" << qPrintable( c->networkAddress().toString() );
+#endif
   c->disconnect();
   c->abortConnection();
   // do not delete later connection... socket notifier in qabstractsocket.cpp can crash
+  // 4.0.1 fixme... I want to test it...
+  c->deleteLater();
 }
 
 void Core::checkUserAuthentication( const QByteArray& auth_byte_array )

@@ -59,6 +59,8 @@ public:
 
   bool checkSavingPaths();
 
+  void updateUsersAddedManually();
+
   /* CoreUser */
   bool changeLocalUser( const QString& );
   inline int connectedUsers() const;
@@ -205,6 +207,7 @@ protected:
   void addConnectionReadyForUse( Connection* );
   void checkOfflineMessagesForUser( const User& );
   void setupNewConnection( Connection* );
+  Connection* createConnection();
 
   /* CoreParser */
   void parseUserMessage( const User&, const Message& );

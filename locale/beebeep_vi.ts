@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="vi_VN">
+<TS version="2.0" language="vi_VN">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -127,27 +127,27 @@
         <translation>%1 Zero Configuration không thể duyệt mạng cho dịch vụ: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="365"/>
+        <location filename="../src/core/Core.cpp" line="371"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1 Đang phát sóng (broadcasting) đến mạng %2...</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="367"/>
+        <location filename="../src/core/Core.cpp" line="373"/>
         <source>Searching users</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="492"/>
+        <location filename="../src/core/Core.cpp" line="498"/>
         <source>New version is available</source>
         <translation>Phiên bản mới có sẵn</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="493"/>
+        <location filename="../src/core/Core.cpp" line="499"/>
         <source>Click here to download</source>
         <translation>Nhấn vào đây để tải</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="555"/>
+        <location filename="../src/core/Core.cpp" line="564"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>ID đã đạt tối đa. Hãy đóng và khởi động lại ứng dụng.</translation>
     </message>
@@ -280,7 +280,7 @@
         <translation>%1 %2 không thể được thông báo rằng bạn đã rời nhóm.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="402"/>
+        <location filename="../src/core/Core.cpp" line="408"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1 Network interface %2 is gone down.</translation>
     </message>
@@ -510,27 +510,27 @@
         <translation>được thêm vào mục yêu thích</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="235"/>
+        <location filename="../src/core/CoreConnection.cpp" line="250"/>
         <source>%1 Connection closed to user %2 because it uses your account name: %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="240"/>
+        <location filename="../src/core/CoreConnection.cpp" line="255"/>
         <source>%1 Connection closed to user %2 because it uses your nickname: %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="258"/>
+        <location filename="../src/core/CoreConnection.cpp" line="273"/>
         <source>%1 Connection closed to user %2 because it uses same account name of the already connected user %3: %4.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="263"/>
+        <location filename="../src/core/CoreConnection.cpp" line="278"/>
         <source>%1 Connection closed to user %2 because it uses same nickname of the already connected user %3: %4.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="317"/>
+        <location filename="../src/core/CoreConnection.cpp" line="332"/>
         <source>%1 users connected</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1356,7 +1356,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="380"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="378"/>
         <source>The window geometry and state are saved</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1644,10 +1644,10 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation>Hiện thanh công cụ chính</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2843"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2844"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2845"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2846"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2847"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2848"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2849"/>
         <source>offline</source>
         <translation>không trực tuyến</translation>
     </message>
@@ -1666,8 +1666,8 @@ Vui lòng chọn một tên khác nhau.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="2667"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2690"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2718"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2987"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3143"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2990"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3146"/>
         <source>Yes</source>
         <translation>Có</translation>
     </message>
@@ -1686,8 +1686,8 @@ Vui lòng chọn một tên khác nhau.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="2667"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2690"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2718"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2987"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3143"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2990"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3146"/>
         <source>No</source>
         <translation>Không</translation>
     </message>
@@ -1784,17 +1784,17 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation>Bật chuyển tập tin</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2822"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2825"/>
         <source>Use HTML tags</source>
         <translation>Sử dụng thẻ HTML</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2827"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2830"/>
         <source>Use clickable links</source>
         <translation>Sử dụng link có thể nhấn</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2799"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2802"/>
         <source>Show messages grouped by user</source>
         <translation>Hiện các tin nhắn được nhóm bời người dùng</translation>
     </message>
@@ -1892,7 +1892,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation>Luôn ở bên trên</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2794"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2797"/>
         <source>Show the timestamp</source>
         <translation>Hiện giờ</translation>
     </message>
@@ -1937,7 +1937,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2782"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2785"/>
         <source>Use RTL mode to show text</source>
         <translation>Sử dụng chế độ RTL để hiển thị văn bản</translation>
     </message>
@@ -2087,27 +2087,27 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2789"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2792"/>
         <source>Show the chat in compact view mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2986"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2989"/>
         <source>Do you want to delete user %1?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3142"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3145"/>
         <source>Do you want to clear all saved status descriptions?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3454"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3458"/>
         <source>New file from %1</source>
         <translation>Tập tin mới từ %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3478"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3482"/>
         <source>%1 is buzzing you!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2384,51 +2384,51 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3625"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3629"/>
         <source>You are using the default icons.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3631"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3635"/>
         <source>You are using custom icons in folder %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3632"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3636"/>
         <source>Restore default icons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3626"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3632"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3641"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3630"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3636"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3645"/>
         <source>Select the icon folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3662"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3666"/>
         <source>You are using the default emoticons.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3663"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3669"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3678"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3667"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3673"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3682"/>
         <source>Select the emoticon folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3668"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3672"/>
         <source>You are using custom emoticons in folder %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3669"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3673"/>
         <source>Restore default emoticons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3695"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3699"/>
         <source>You have to restart your connection to apply changes.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2439,37 +2439,37 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3097"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3100"/>
         <source>at lunch</source>
         <translation>lúc ăn tối</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3106"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3109"/>
         <source>in a meeting</source>
         <translation>trong cuộc họp</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3284"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3287"/>
         <source>Select your dictionary path</source>
         <translation>Chọn đường dẫn từ điển</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3292"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3295"/>
         <source>Dictionary selected: %1</source>
         <translation>Từ điển được chọn: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3294"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3297"/>
         <source>Unable to set dictionary: %1</source>
         <translation>Không thể thiết lập từ điển: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3416"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3420"/>
         <source>Window geometry and state saved</source>
         <translation>Vị trí cửa sổ và trạng thái đã được lưu</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3616"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3620"/>
         <source>%1 blocked chats</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2594,8 +2594,8 @@ Vui lòng chọn một tên khác nhau.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="1109"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2288"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2511"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3695"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3700"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3699"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3704"/>
         <source>Ok</source>
         <translation>Đồng ý</translation>
     </message>
@@ -2725,12 +2725,12 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation>Tất cả các thành viên của cuộc trò chuyện này là không trực tuyến. Những thay đổi có thể không được cố định. Bạn có muốn tiếp tục?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2810"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2813"/>
         <source>Show your name instead of &apos;You&apos;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2817"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2820"/>
         <source>Show emoticons</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2740,37 +2740,37 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2834"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2837"/>
         <source>Restore default font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2848"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2851"/>
         <source>inactive</source>
         <translation>không hoạt động</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2870"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2873"/>
         <source>disabled</source>
         <translation>bị tắt</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2877"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2880"/>
         <source>active</source>
         <translation>hoạt động</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2953"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2956"/>
         <source>%1 is online</source>
         <translation>%1 trực tuyến</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2955"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2958"/>
         <source>%1 is offline</source>
         <translation>%1 không trực tuyến</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2967"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2970"/>
         <source>Please select the new size of the user picture</source>
         <translation>Vui lòng chọn kích thước mới cho ảnh đại diện</translation>
     </message>
@@ -2778,10 +2778,10 @@ Vui lòng chọn một tên khác nhau.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="1919"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2370"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2489"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3626"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3632"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3663"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3669"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3630"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3636"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3667"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3673"/>
         <source>Cancel</source>
         <translation>Hủy bỏ</translation>
     </message>
@@ -2844,7 +2844,7 @@ Vui lòng chọn một tên khác nhau.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2755"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3700"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3704"/>
         <source>You must restart %1 to apply these changes.</source>
         <translation>Bạn phải khởi động lại %1 để áp dụng các thay đổi.</translation>
     </message>
@@ -2890,39 +2890,51 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="unfinished">Mạng</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="58"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="42"/>
+        <source>seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="43"/>
+        <source>users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="61"/>
         <source>Unknown address</source>
         <translation type="unfinished">Địa chỉ không xác định</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="66"/>
-        <source>File is empty</source>
-        <translation type="unfinished">Tập tin rỗng</translation>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="133"/>
+        <source>File HOSTS not found.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="96"/>
+        <source>File is empty</source>
+        <translation type="obsolete">Tập tin rỗng</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="88"/>
         <source>none</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="104"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="96"/>
         <source>selected by system</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="129"/>
         <source>Warning</source>
-        <translation type="unfinished">Cảnh báo</translation>
+        <translation type="obsolete">Cảnh báo</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="130"/>
         <source>You have inserted an invalid host address:
 %1 is removed from the list.</source>
-        <translation type="unfinished">Bạn đã thêm vào một địa chỉ máy không hợp lệ:
+        <translation type="obsolete">Bạn đã thêm vào một địa chỉ máy không hợp lệ:
 %1 được xóa khỏi danh sách.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="130"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="133"/>
         <source>Ok</source>
         <translation type="unfinished">Đồng ý</translation>
     </message>
@@ -2930,82 +2942,93 @@ Vui lòng chọn một tên khác nhau.</translation>
 <context>
     <name>GuiNetworkWidget</name>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="405"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="276"/>
+        <source>Use fixed interval to search users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiNetwork.ui" line="318"/>
         <source>* (read only section)</source>
         <translation type="unfinished">* (phần chỉ đọc)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="425"/>
-        <source>Ok</source>
-        <translation type="unfinished">Đồng ý</translation>
-    </message>
-    <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="432"/>
-        <source>Cancel</source>
-        <translation type="unfinished">Hủy bỏ</translation>
-    </message>
-    <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="344"/>
-        <source>Addresses in beehosts.ini *</source>
-        <translation type="unfinished">Những địa chỉ trong beehosts.ini *</translation>
-    </message>
-    <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="357"/>
-        <source>Enter the IP addresses or subnet of your local area network separated by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</source>
-        <translation type="unfinished">Nhập địa chỉ IP hoặc mạng con trong mạng LAN cách nhau bởi dấu phẩy (ví dụ: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
-    </message>
-    <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="185"/>
-        <source>Enable broadcast interval</source>
-        <translation type="unfinished">Bật thời gian gửi broadcast</translation>
-    </message>
-    <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="220"/>
-        <source>Max users to contact every second</source>
-        <translation type="unfinished">Người dùng tối đa để liên hệ trong mỗi giây</translation>
-    </message>
-    <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="227"/>
-        <source>seconds (0=disabled, 0=default)</source>
-        <translation type="unfinished">giây (0=tắt, 0=mặc định)</translation>
-    </message>
-    <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="382"/>
-        <source>Prevent multiple connections from single host address</source>
+        <location filename="../src/desktop/GuiNetwork.ui" line="369"/>
+        <source>Show file HOSTS...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="389"/>
+        <source>Ok</source>
+        <translation type="unfinished">Đồng ý</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiNetwork.ui" line="396"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Hủy bỏ</translation>
+    </message>
+    <message>
+        <source>Addresses in beehosts.ini *</source>
+        <translation type="obsolete">Những địa chỉ trong beehosts.ini *</translation>
+    </message>
+    <message>
+        <source>Enter the IP addresses or subnet of your local area network separated by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</source>
+        <translation type="obsolete">Nhập địa chỉ IP hoặc mạng con trong mạng LAN cách nhau bởi dấu phẩy (ví dụ: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
+    </message>
+    <message>
+        <source>Enable broadcast interval</source>
+        <translation type="obsolete">Bật thời gian gửi broadcast</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiNetwork.ui" line="283"/>
+        <source>Max users to contact every second</source>
+        <translation type="unfinished">Người dùng tối đa để liên hệ trong mỗi giây</translation>
+    </message>
+    <message>
+        <source>seconds (0=disabled, 0=default)</source>
+        <translation type="obsolete">giây (0=tắt, 0=mặc định)</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiNetwork.ui" line="20"/>
+        <source>Prevent multiple connections from single host address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiNetwork.ui" line="340"/>
         <source>Enable Zero Configuration Networking</source>
         <translation type="unfinished">Bật Zero Configuration Networking</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="22"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="58"/>
         <source>UDP Port in beebeep.rc *</source>
         <translation type="unfinished">Cổng UDP trong beebeep.rc *</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="35"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="164"/>
         <source>Local subnet address *</source>
         <translation type="unfinished">Địa chỉ mạng con cục bộ *</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="54"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="135"/>
         <source>Multicast group in beebeep.rc *</source>
         <translation type="unfinished">Nhóm Multicast trong beebeep.rc *</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="67"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="177"/>
+        <source>Search users every</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiNetwork.ui" line="238"/>
         <source>Preferred subnet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="141"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="154"/>
         <source>(the same for all clients)</source>
         <translation type="unfinished">(tương tự cho các máy trạm)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="151"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="103"/>
         <source>(search users here by default)</source>
         <translation type="unfinished">(mặc định tìm người dùng ở đây)</translation>
     </message>

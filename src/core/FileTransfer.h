@@ -55,6 +55,8 @@ public:
 
   FileTransferPeer* peer( VNumber ) const;
 
+  void onTickEvent( int );
+
 signals:
   void message( VNumber peer_id, VNumber user_id, const FileInfo&, const QString& );
   void progress( VNumber peer_id, VNumber user_id, const FileInfo&, FileSizeType );

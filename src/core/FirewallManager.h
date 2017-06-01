@@ -21,33 +21,40 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_GUINETWORK_H
-#define BEEBEEP_GUINETWORK_H
+#ifndef BEEBEEP_FIREWALLMANAGER_H
+#define BEEBEEP_FIREWALLMANAGER_H
 
 #include "Config.h"
-#include "ui_GuiNetwork.h"
 
 
-class GuiNetwork : public QDialog, private Ui::GuiNetworkWidget
+class FirewallManager
 {
-  Q_OBJECT
+// Singleton Object
+  static FirewallManager* mp_instance;
 
 public:
-  GuiNetwork( QWidget* parent = 0 );
 
-  void loadSettings();
-  inline bool restartConnection() const;
 
-protected slots:
-  void checkAndSearch();
-  void showFileHosts();
+  static FirewallManager& instance()
+  {
+    if( !mp_instance )
+      mp_instance = new FirewallManager();
+    return *mp_instance;
+  }
 
-private:
-  bool m_restartConnection;
+  static void close()
+  {
+    if( mp_instance )
+    {
+      delete mp_instance;
+      mp_instance = NULL;
+    }
+  }
+
+protected:
+  FirewallManager();
+
 
 };
 
-// Inline Functions
-inline bool GuiNetwork::restartConnection() const { return m_restartConnection; }
-
-#endif // BEEBEEP_GUINETWORK_H
+#endif // BEEBEEP_FIREWALLMANAGER_H

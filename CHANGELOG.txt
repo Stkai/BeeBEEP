@@ -1,5 +1,9 @@
 BEEBEEP (Secure Lan Messanger) - CHANGELOG - (c) Marco Mastroddi
 
+BeeBEEP 4.0.1
+- Removed debug message on focus changed
+- Simplified GUI of "Configure network..." option
+
 BeeBEEP 4.0.0
 - Changed all the main user interface
 - All the main options are now grouped in the Settings menu

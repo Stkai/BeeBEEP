@@ -364,8 +364,6 @@ void GuiFloatingChat::onApplicationFocusChanged( QWidget* old, QWidget* now )
       m_chatIsVisible = false;
     }
   }
-
-  qDebug() << "Focus changed";
 }
 
 void GuiFloatingChat::saveGeometryAndState()
