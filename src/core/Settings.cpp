@@ -824,7 +824,7 @@ void Settings::load()
   m_localUser.setName( sets->value( "LocalName", m_localUser.name() ).toString() );
   m_localUser.setColor( sets->value( "LocalColor", m_localUser.color() ).toString() );
   m_localUser.setStatusDescription( sets->value( "LocalLastStatusDescription", m_localUser.statusDescription() ).toString() );
-  m_autoUserAway = sets->value( "AutoAwayStatus", true ).toBool();
+  m_autoUserAway = sets->value( "AutoAwayStatus", false ).toBool();
   m_userAwayTimeout = qMax( sets->value( "UserAwayTimeout", 10 ).toInt(), 1 ); // minutes
   if( m_useEasyConnection )
   {

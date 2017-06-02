@@ -29,7 +29,7 @@ UserManager* UserManager::mp_instance = NULL;
 
 
 UserManager::UserManager()
-  : m_users()
+  : m_users(), m_newConnectedUserIdList()
 {
 }
 
@@ -188,4 +188,13 @@ User UserManager::findUserByNetworkAddress( const NetworkAddress& na ) const
     }
   }
   return User();
+}
+
+void UserManager::addNewConnectedUserId( VNumber user_id )
+{
+  if( user_id > ID_LOCAL_USER )
+  {
+    if( !m_newConnectedUserIdList.contains( user_id ) )
+      m_newConnectedUserIdList.append( user_id );
+  }
 }

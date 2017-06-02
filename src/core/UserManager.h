@@ -44,6 +44,12 @@ public:
   User findUserByNickname( const QString& ) const;
   User findUserByNetworkAddress( const NetworkAddress& ) const;
 
+  void addNewConnectedUserId( VNumber );
+  bool removeNewConnectedUserId( VNumber );
+  inline void clearNewConnectedUserIdList();
+  UserList newConnectedUserList() const;
+  inline bool hasNewConnectedUsers() const;
+
   static UserManager& instance()
   {
     if( !mp_instance )
@@ -65,6 +71,7 @@ protected:
 
 private:
   UserList m_users;
+  QList<VNumber> m_newConnectedUserIdList;
 
 };
 
@@ -73,5 +80,9 @@ private:
 inline User UserManager::findUser( VNumber user_id ) const { return m_users.find( user_id ); }
 inline bool UserManager::removeUser( const User& u ) { return u.isLocal() ? false : m_users.remove( u ); }
 inline const UserList& UserManager::userList() const { return m_users; }
+inline bool UserManager::removeNewConnectedUserId( VNumber user_id ) { return m_newConnectedUserIdList.removeOne( user_id ); }
+inline void UserManager::clearNewConnectedUserIdList() { m_newConnectedUserIdList.clear(); }
+inline UserList UserManager::newConnectedUserList() const { return m_users.fromUsersId( m_newConnectedUserIdList ); }
+inline bool UserManager::hasNewConnectedUsers() const { return m_newConnectedUserIdList.size() > 0; }
 
 #endif // BEEBEEP_USERMANAGER_H

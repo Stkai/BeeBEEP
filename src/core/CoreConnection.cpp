@@ -358,10 +358,5 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
     }
   }
 
-  if( user_found.isValid() )
-    checkGroupChatAfterUserReconnect( u );
-
-  checkOfflineMessagesForUser( u );
-  if( Settings::instance().useHive() && u.protocolVersion() >= HIVE_PROTO_VERSION )
-    sendLocalConnectedUsersTo( u );
+  UserManager::instance().addNewConnectedUserId( u.id() );
 }

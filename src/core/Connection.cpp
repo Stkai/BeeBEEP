@@ -48,6 +48,10 @@ bool Connection::sendMessage( const Message& m )
   if( message_data.size() > 524288 )
     qWarning() << "Outgoing message to" << qPrintable( networkAddress().toString() ) << "is VERY VERY BIG:" << message_data.size() << "bytes";
 
+#ifdef BEEBEEP_DEBUG
+  if( !isReadyForUse() )
+    qDebug() << qPrintable( networkAddress().toString() ) << "is sending this message:" << message_data;
+#endif
   return sendData( message_data );
 }
 

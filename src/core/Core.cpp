@@ -146,6 +146,7 @@ bool Core::start()
   }
 
   showMessage( tr( "Connecting" ), 2000 );
+  UserManager::instance().clearNewConnectedUserIdList();
 
   if( !mp_listener->listen( Settings::instance().hostAddressToListen(), Settings::instance().defaultListenerPort() ) )
   {
@@ -281,6 +282,7 @@ bool Core::dnsMulticastingIsActive() const
 void Core::stop()
 {
   qDebug() << "Stopping network core...";
+  UserManager::instance().clearNewConnectedUserIdList();
   mp_broadcaster->stopBroadcasting();
 
 #ifdef BEEBEEP_USE_MULTICAST_DNS
@@ -543,6 +545,27 @@ void Core::onTickEvent( int ticks )
 {
   if( isConnected() )
   {
+    if( UserManager::instance().hasNewConnectedUsers() )
+    {
+      QList<User> new_connected_users = UserManager::instance().newConnectedUserList().toList();
+      int user_count = 0;
+      foreach( User u, new_connected_users )
+      {
+        user_count++;
+        if( user_count > qMax( 5, Settings::instance().maxUsersToConnectInATick() ) )
+          break;
+
+        int group_chats = checkGroupChatAfterUserReconnect( u );
+        int offline_messages = checkOfflineMessagesForUser( u );
+        if( Settings::instance().useHive() && u.protocolVersion() >= HIVE_PROTO_VERSION )
+          sendLocalConnectedUsersTo( u );
+        UserManager::instance().removeNewConnectedUserId( u.id() );
+
+        if( group_chats > 0 || offline_messages > 0 )
+          qDebug() << "You have sent to" << qPrintable( u.name() ) << group_chats << "group chats and" << offline_messages << "offline messages";
+      }
+    }
+
     mp_broadcaster->onTickEvent( ticks );
 
     if( Settings::instance().tickIntervalBroadcasting() > 0 && (ticks % Settings::instance().tickIntervalBroadcasting() == 0) )

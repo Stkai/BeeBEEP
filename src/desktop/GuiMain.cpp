@@ -1047,9 +1047,9 @@ void GuiMain::createToolAndMenuBars()
 
   mp_barMain->addAction( mp_menuStatus->menuAction() );
   mp_barMain->addAction( mp_actVCard );
+  mp_barMain->addAction( mp_actViewNewMessage );
   mp_barMain->addAction( mp_actBroadcast );
   mp_barMain->addAction( mp_actCreateGroupChat );
-  mp_barMain->addAction( mp_actViewNewMessage );
   mp_barMain->addAction( mp_actViewFileTransfer );
   mp_barMain->addAction( mp_actViewFileSharing );
 }
@@ -3327,10 +3327,12 @@ void GuiMain::onTickEvent( int ticks )
       QMetaObject::invokeMethod( bee_app, "checkIdle", Qt::QueuedConnection );
   }
 
+  int chat_tab_index = mp_tabMain->indexOf( mp_chatList );
   if( mp_actViewNewMessage->isEnabled() )
   {
     QIcon new_message_blinking_icon = IconManager::instance().icon( "beebeep-message.png" );
     mp_actViewNewMessage->setIcon( ticks % 2 == 0 ? new_message_blinking_icon : Bee::convertToGrayScale( new_message_blinking_icon.pixmap( Settings::instance().mainBarIconSize() ) ) );
+    mp_tabMain->setTabIcon( chat_tab_index, ticks % 2 == 0 ? new_message_blinking_icon : IconManager::instance().icon( "chat-list.png" ) );
   }
 
   mp_trayIcon->onTickEvent( ticks );
@@ -3347,6 +3349,7 @@ void GuiMain::onTickEvent( int ticks )
     GuiFloatingChat* fl_chat = floatingChat( c.id() );
     if( !fl_chat )
       QApplication::alert( this, 1000 );
+    showMessage( tr( "You have new message" ), 1000 );
   }
 
   mp_core->onTickEvent( ticks );
@@ -3408,6 +3411,17 @@ void GuiMain::updateEmoticons()
 void GuiMain::updateNewMessageAction()
 {
   mp_actViewNewMessage->setEnabled( ChatManager::instance().hasUnreadMessages() );
+  int chat_tab_index = mp_tabMain->indexOf( mp_chatList );
+  if( mp_actViewNewMessage->isEnabled() )
+  {
+    mp_actViewNewMessage->setStatusTip( tr( "You have new message" ) );
+    mp_tabMain->setTabIcon( chat_tab_index, IconManager::instance().icon( "beebeep-message.png" ) );
+  }
+  else
+  {
+    mp_actViewNewMessage->setStatusTip( "" );
+    mp_tabMain->setTabIcon( chat_tab_index, IconManager::instance().icon( "chat-list.png" ) );
+  }
 }
 
 void GuiMain::saveGeometryAndState()

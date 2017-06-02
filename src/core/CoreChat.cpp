@@ -83,17 +83,19 @@ void Core::createPrivateChat( const User& u )
   emit chatChanged( c );
 }
 
-void Core::checkGroupChatAfterUserReconnect( const User& u )
+int Core::checkGroupChatAfterUserReconnect( const User& u )
 {
   QList<Chat> chat_list = ChatManager::instance().groupChatsWithUser( u.id() );
   if( chat_list.isEmpty() )
-    return;
+    return 0;
 
   foreach( Chat c, chat_list )
   {
     UserList ul = UserManager::instance().userList().fromUsersId( c.usersId() );
     sendGroupChatRequestMessage( c, ul );
   }
+
+  return chat_list.size();
 }
 
 Chat Core::createGroupChat( const User& u, const Group& g, bool broadcast_message )
@@ -532,15 +534,15 @@ bool Core::clearMessagesInChat( VNumber chat_id, bool clear_history )
   return true;
 }
 
-void Core::checkOfflineMessagesForUser( const User& u )
+int Core::checkOfflineMessagesForUser( const User& u )
 {
   QList<MessageRecord> message_list = MessageManager::instance().takeMessagesToSend( u.id() );
   if( message_list.isEmpty() )
-    return;
+    return 0;
 
   Connection* c = connection( u.id() );
   if( !c )
-    return;
+    return 0;
 
   QList<VNumber> chat_list;
   qDebug() << message_list.size() << "offline messages sent to" << u.path();
@@ -555,6 +557,8 @@ void Core::checkOfflineMessagesForUser( const User& u )
   {
     dispatchSystemMessage( ci, u.id(), tr( "Offline messages sent to %2." ).arg( u.name() ), DispatchToChat, ChatMessage::Other );
   }
+
+  return message_list.size();
 }
 
 bool Core::readAllMessagesInChat( VNumber chat_id )

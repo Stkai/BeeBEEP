@@ -207,7 +207,12 @@ void ConnectionSocket::readBlock()
 #endif
 
   if( m_userId == ID_INVALID )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << qPrintable( m_networkAddress.toString() ) << "has received this message:" << decrypted_byte_array;
+#endif
     checkHelloMessage( decrypted_byte_array );
+  }
   else
     emit dataReceived( decrypted_byte_array );
 }

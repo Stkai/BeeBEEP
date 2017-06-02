@@ -205,7 +205,7 @@ protected:
   bool hasConnection( const QHostAddress&, int ) const;
   void closeConnection( Connection* );
   void addConnectionReadyForUse( Connection* );
-  void checkOfflineMessagesForUser( const User& );
+  int checkOfflineMessagesForUser( const User& );
   void setupNewConnection( Connection* );
   Connection* createConnection();
 
@@ -237,7 +237,7 @@ protected:
   bool sendMessageToLocalNetwork( const User& to_user, const Message& );
   void sendGroupChatRequestMessage( const Chat&, const UserList& );
   void sendRefuseMessageToGroupChat( const Chat& );
-  void checkGroupChatAfterUserReconnect( const User& );
+  int checkGroupChatAfterUserReconnect( const User& );
   void sendLocalUserHasReadChatMessage( const Chat& );
   void addChatHeader( Chat* );
   bool removeUserFromGroupChat( const User&, const QString& chat_private_id );
