@@ -45,6 +45,7 @@ GuiNetwork::GuiNetwork( QWidget* parent )
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( checkAndSearch() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
   connect( mp_pbShowFileHosts, SIGNAL( clicked() ), this, SLOT( showFileHosts() ) );
+  connect( mp_cbBroadcastInterval, SIGNAL( clicked() ), this, SLOT( enableSearchUsersInterval() ) );
 }
 
 void GuiNetwork::loadSettings()
@@ -99,6 +100,9 @@ void GuiNetwork::loadSettings()
     }
   }
 
+  mp_cbUseHive->setChecked( Settings::instance().useHive() );
+  enableSearchUsersInterval();
+
   m_restartConnection = false;
 }
 
@@ -112,8 +116,8 @@ void GuiNetwork::checkAndSearch()
     Settings::instance().setTickIntervalBroadcasting( 0 );
 
   Settings::instance().setMaxUsersToConnectInATick( mp_sbMaxUsersToContact->value() );
-  Settings::instance().SetPreventMultipleConnectionsFromSingleHostAddress( mp_cbPreventMultipleConnectionsFromSingleHostAddress->isChecked() );
-
+  Settings::instance().setPreventMultipleConnectionsFromSingleHostAddress( mp_cbPreventMultipleConnectionsFromSingleHostAddress->isChecked() );
+  Settings::instance().setUseHive( mp_cbUseHive->isChecked() );
   QString s_preferred_subnet = mp_comboPreferredSubnet->itemData( mp_comboPreferredSubnet->currentIndex() ).toString();
   if( s_preferred_subnet != Settings::instance().localSubnetForced() )
   {
@@ -131,4 +135,10 @@ void GuiNetwork::showFileHosts()
 
   if( !Bee::showFileInGraphicalShell( hosts_file_path ) )
     QMessageBox::information( this, Settings::instance().programName(), QString( "%1\n%2" ).arg( hosts_file_path ).arg( tr( "File HOSTS not found." ) ), tr( "Ok" ) );
+}
+
+void GuiNetwork::enableSearchUsersInterval()
+{
+  mp_sbBroadcastInterval->setEnabled( mp_cbBroadcastInterval->isChecked() );
+  mp_lBroadcastInterval->setEnabled( mp_cbBroadcastInterval->isChecked() );
 }

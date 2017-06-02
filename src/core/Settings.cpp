@@ -1014,6 +1014,7 @@ void Settings::load()
 #endif
   m_maxUsersToConnectInATick = sets->value( "MaxUsersToConnectInATick", m_maxUsersToConnectInATick ).toInt();
   m_preventMultipleConnectionsFromSingleHostAddress = sets->value( "PreventMultipleConnectionsFromSingleHostAddress", m_preventMultipleConnectionsFromSingleHostAddress ).toBool();
+  m_useHive = sets->value( "UseHiveProtocol", m_useHive ).toBool();
   sets->endGroup();
   loadBroadcastAddressesFromFileHosts();
 
@@ -1291,6 +1292,7 @@ void Settings::save()
   sets->setValue( "AcceptConnectionsOnlyFromWorkgroups", m_acceptConnectionsOnlyFromWorkgroups );
   sets->setValue( "Workgroups", m_workgroups );
   sets->setValue( "MaxUsersToConnectInATick", m_maxUsersToConnectInATick );
+  sets->setValue( "UseHiveProtocol", m_useHive );
   sets->endGroup();
   sets->beginGroup( "FileShare" );
   sets->setValue( "EnableFileTransfer", m_enableFileTransfer );

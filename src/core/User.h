@@ -39,6 +39,7 @@ public:
 
   User& operator=( const User& );
   inline bool operator==( const User& ) const;
+  inline bool operator!=( const User& ) const;
   bool operator<( const User& ) const;
 
   inline bool isValid() const;
@@ -104,6 +105,7 @@ private:
 
 // Inline Functions
 inline bool User::operator==( const User& u ) const { return m_id == u.m_id; }
+inline bool User::operator!=( const User& u ) const { return m_id != u.m_id; }
 inline bool User::isValid() const { return m_id != ID_INVALID; }
 inline bool User::isLocal() const { return m_id == ID_LOCAL_USER; }
 inline bool User::isStatusConnected() const { return m_status > User::Offline && m_status < User::NumStatus; }

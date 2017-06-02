@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -2231,6 +2231,10 @@ Inserisci un nome differente.</translation>
         <source>Please save the network password in the next dialog if you want to use password without prompt.</source>
         <translation>Memorizza la password di rete nella prossima finestra se vuoi continuare ad usarla senza che ti venga richiesta ogni volta.</translation>
     </message>
+    <message>
+        <source>You have new message</source>
+        <translation>Hai un nuovo messaggio</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -2389,6 +2393,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Use fixed interval to search users</source>
         <translation>Usa un intervallo fisso di tempo per cercare gli utenti</translation>
+    </message>
+    <message>
+        <source>Use hive protocol to contact offline users</source>
+        <translation>Usa il protocollo alveare per contattare gli utenti non in linea</translation>
     </message>
 </context>
 <context>

@@ -92,7 +92,7 @@ int Core::checkGroupChatAfterUserReconnect( const User& u )
   foreach( Chat c, chat_list )
   {
     UserList ul = UserManager::instance().userList().fromUsersId( c.usersId() );
-    sendGroupChatRequestMessage( c, ul );
+    sendGroupChatRequestMessage( c, ul, u );
   }
 
   return chat_list.size();
@@ -128,7 +128,7 @@ Chat Core::createGroupChat( const User& u, const Group& g, bool broadcast_messag
   if( broadcast_message && isConnected() )
   {
     UserList ul = UserManager::instance().userList().fromUsersId( c.usersId() );
-    sendGroupChatRequestMessage( c, ul );
+    sendGroupChatRequestMessage( c, ul, User() );
   }
 
   return c;
@@ -193,7 +193,7 @@ bool Core::changeGroupChat( const User& u, const Group& g )
     emit chatChanged( c );
 
     if( u.isLocal() && isConnected() )
-      sendGroupChatRequestMessage( c, group_new_members );
+      sendGroupChatRequestMessage( c, group_new_members, User() );
   }
 
 #ifdef BEEBEEP_DEBUG
@@ -422,19 +422,25 @@ void Core::showTipOfTheDay()
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tip_of_the_day, DispatchToChat, ChatMessage::System );
 }
 
-void Core::sendGroupChatRequestMessage( const Chat& group_chat, const UserList& user_list )
+void Core::sendGroupChatRequestMessage( const Chat& group_chat, const UserList& user_list, const User& to_user )
 {
   Message group_message;
-
   foreach( User u, user_list.toList() )
   {
     if( u.isLocal() )
+      continue;
+
+    if( to_user.isValid() && u != to_user )
       continue;
 
     if( u.protocolVersion() < NEW_GROUP_PROTO_VERSION )
       group_message = Protocol::instance().groupChatRequestMessage_obsolete( group_chat, u );
     else
       group_message = Protocol::instance().groupChatRequestMessage( group_chat, u );
+
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Send group chat request message from" << qPrintable( group_chat.name() ) << "to" << qPrintable( u.name() );
+#endif
 
     if( !group_message.text().isEmpty() )
       sendMessageToLocalNetwork( u, group_message );

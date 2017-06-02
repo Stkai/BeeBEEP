@@ -41,6 +41,7 @@ public:
 protected slots:
   void checkAndSearch();
   void showFileHosts();
+  void enableSearchUsersInterval();
 
 private:
   bool m_restartConnection;

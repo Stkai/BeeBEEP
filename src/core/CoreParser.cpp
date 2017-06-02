@@ -474,7 +474,8 @@ void Core::parseHiveMessage( const User& u, const Message& m )
 #endif
     foreach( UserRecord ur, user_record_list )
     {
-      if( !UserManager::instance().findUserByNetworkAddress( ur.networkAddress() ).isValid() )
+      User user_found = UserManager::instance().findUserByNetworkAddress( ur.networkAddress() );
+      if( !user_found.isValid() || !user_found.isStatusConnected() )
       {
         if( Hive::instance().addNetworkAddress( ur.networkAddress() ) )
         {

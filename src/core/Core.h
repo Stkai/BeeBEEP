@@ -235,7 +235,7 @@ protected:
   /* CoreChat */
   void createDefaultChat();
   bool sendMessageToLocalNetwork( const User& to_user, const Message& );
-  void sendGroupChatRequestMessage( const Chat&, const UserList& );
+  void sendGroupChatRequestMessage( const Chat&, const UserList&, const User& );
   void sendRefuseMessageToGroupChat( const Chat& );
   int checkGroupChatAfterUserReconnect( const User& );
   void sendLocalUserHasReadChatMessage( const Chat& );

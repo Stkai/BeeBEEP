@@ -99,6 +99,7 @@ public:
   QString gaEventVersion() const;
   QString copyMastroWebSite() const;
 
+  inline void setUseHive( bool );
   inline bool useHive() const;
 
   inline bool disablePrivateChats() const;
@@ -297,7 +298,7 @@ public:
   inline void setLocalSubnetForced( const QString& );
   inline const QString& localSubnetForced() const;
   inline bool broadcastOnlyToHostsIni() const;
-  inline void SetPreventMultipleConnectionsFromSingleHostAddress( bool );
+  inline void setPreventMultipleConnectionsFromSingleHostAddress( bool );
   inline bool preventMultipleConnectionsFromSingleHostAddress();
   inline const QString& preferredSubnets() const;
 
@@ -683,6 +684,7 @@ inline int Settings::userRecognitionMethod() const { return m_userRecognitionMet
 inline bool Settings::userRecognitionUsesDefaultMethod() const { return m_userRecognitionMethod == RecognizeByDefaultMethod; }
 inline bool Settings::chatWithAllUsersIsEnabled() const { return m_useChatWithAllUsers; }
 inline bool Settings::allowMultipleInstances() const { return m_allowMultipleInstances; }
+inline void Settings::setUseHive( bool new_value ) { m_useHive = new_value; }
 inline bool Settings::useHive() const { return m_useHive; }
 inline int Settings::defaultBroadcastPort() const { return m_defaultBroadcastPort; }
 inline int Settings::defaultListenerPort() const { return m_defaultListenerPort; }
@@ -860,7 +862,7 @@ inline void Settings::setPromptOnCloseEvent( bool new_value ) { m_promptOnCloseE
 inline bool Settings::promptOnCloseEvent() const { return m_promptOnCloseEvent; }
 inline void Settings::setIsFacebookPageLinkClicked( bool new_value ) { m_isFacebookPageLinkClicked = new_value; }
 inline bool Settings::isFacebookPageLinkClicked() const { return m_isFacebookPageLinkClicked; }
-inline void Settings::SetPreventMultipleConnectionsFromSingleHostAddress( bool new_value ) { m_preventMultipleConnectionsFromSingleHostAddress = new_value; }
+inline void Settings::setPreventMultipleConnectionsFromSingleHostAddress( bool new_value ) { m_preventMultipleConnectionsFromSingleHostAddress = new_value; }
 inline bool Settings::preventMultipleConnectionsFromSingleHostAddress() { return m_preventMultipleConnectionsFromSingleHostAddress; }
 inline void Settings::setFloatingChatGeometry( const QByteArray& new_value ) { m_floatingChatGeometry = new_value; }
 inline void Settings::setFloatingChatState( const QByteArray& new_value ) { m_floatingChatState = new_value; }
