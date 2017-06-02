@@ -83,8 +83,13 @@ void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )
   if( !isConnected() )
     return;
 
+#if QT_VERSION >= 0x050000
   if( sender_ip.isLoopback() && sender_port == mp_listener->serverPort() )
     return;
+#else
+  if( sender_ip == QHostAddress( "127.0.0.1" ) && sender_port == mp_listener->serverPort() )
+    return;
+#endif
 
   if( Settings::instance().preventMultipleConnectionsFromSingleHostAddress() )
   {
