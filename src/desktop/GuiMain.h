@@ -48,6 +48,9 @@ class GuiSystemTray;
 class GuiTransferFile;
 class GuiUserList;
 class User;
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  class GuiShareDesktop;
+#endif
 
 
 class GuiMain : public QMainWindow

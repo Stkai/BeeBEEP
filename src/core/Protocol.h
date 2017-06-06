@@ -126,9 +126,11 @@ public:
   QString folderNameFromShareBoxMessage( const Message& ) const;
   QList<FileInfo> messageToShareBoxFileList( const Message&, const QHostAddress& ) const;
 
+#ifdef BEEBEEP_USE_SHAREDESKTOP
   Message refuseToViewDesktopShared() const;
   Message shareDesktopDataToMessage( const QByteArray& ) const;
   QPixmap pixmapFromShareDesktopMessage( const Message& ) const;
+#endif
 
   inline VNumber currentId() const;
   inline VNumber maxId() const;

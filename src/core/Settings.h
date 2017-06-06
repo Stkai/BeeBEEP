@@ -432,6 +432,10 @@ public:
   inline void setEmoticonSourcePath( const QString& );
   inline const QString& emoticonSourcePath() const;
 
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  const char* shareDesktopImageType() const;
+#endif
+
   QString simpleEncrypt( const QString& );
   QString simpleDecrypt( const QString& );
 

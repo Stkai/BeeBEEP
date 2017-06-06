@@ -21,11 +21,12 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "Settings.h"
 #include "ShareDesktopJob.h"
 
 
 ShareDesktopJob::ShareDesktopJob( QObject *parent )
-  : QObject( parent ), m_timer(), m_mutex(), m_lastImageHash( "" )
+  : QObject( parent ), m_timer(), m_lastImageHash( "" )
 {
   setObjectName( "ShareDesktopJob" );
   m_timer.setInterval( 2000 );
@@ -38,16 +39,14 @@ void ShareDesktopJob::startJob()
 #ifdef BEEBEEP_DEBUG
   qDebug() << qPrintable( objectName() ) << "is starting its job";
 #endif
-  //QMutexLocker ml( &m_mutex );
   if( isRunning() )
   {
     qWarning() << qPrintable( objectName() ) << "is already running";
     return;
   }
+
   m_lastImageHash = "";
-  m_timer.start();
-  if( !m_timer.isActive() )
-    qWarning() << qPrintable( objectName() ) << "is unable to start its internal timer";
+  QMetaObject::invokeMethod( &m_timer, "start", Qt::QueuedConnection );
 }
 
 void ShareDesktopJob::stopJob()
@@ -55,33 +54,25 @@ void ShareDesktopJob::stopJob()
 #ifdef BEEBEEP_DEBUG
   qDebug() << qPrintable( objectName() ) << "is stopping its job";
 #endif
-  //QMutexLocker ml( &m_mutex );
-  m_timer.stop();
+  QMetaObject::invokeMethod( &m_timer, "stop", Qt::QueuedConnection );
   emit jobCompleted();
 }
 
-bool ShareDesktopJob::isRunning()
+bool ShareDesktopJob::isRunning() const
 {
-  //QMutexLocker ml( &m_mutex );
   return m_timer.isActive();
-}
-
-void ShareDesktopJob::setLastImageHash( const QByteArray& new_value )
-{
-  //QMutexLocker ml( &m_mutex );
-  m_lastImageHash = new_value;
 }
 
 void ShareDesktopJob::makeScreenshot()
 {
-   if( !isRunning() )
-   {
-     qDebug() << qPrintable( objectName() ) << "is not running... screen capture aborted";
-     return;
-   }
+  if( !isRunning() )
+  {
+    qDebug() << qPrintable( objectName() ) << "is not running... screen capture aborted";
+    return;
+  }
 
 #ifdef BEEBEEP_DEBUG
-   qDebug() << qPrintable( objectName() ) << "is making a screen capture";
+  qDebug() << qPrintable( objectName() ) << "is making a screen capture";
 #endif
 
   QPixmap screen_shot;
@@ -107,15 +98,19 @@ void ShareDesktopJob::makeScreenshot()
   QByteArray pix_bytes;
   QBuffer buffer( &pix_bytes );
   buffer.open( QIODevice::WriteOnly );
-  screen_shot.save( &buffer, "PNG" ); // writes pixmap into bytes in PNG format
+  screen_shot.save( &buffer, Settings::instance().shareDesktopImageType() );
 
   screen_shot = QPixmap();
   QByteArray pix_hash = QCryptographicHash::hash( pix_bytes, QCryptographicHash::Sha1 );
 
+  static int counter = 0;
   if( pix_hash != m_lastImageHash )
   {
-    setLastImageHash( pix_hash );
+    m_lastImageHash = pix_hash;
     emit imageAvailable( pix_bytes );
+    counter++;
+    if( counter > 5 )
+      stopJob();
   }
 
 }

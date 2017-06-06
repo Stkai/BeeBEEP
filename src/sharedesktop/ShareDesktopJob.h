@@ -34,8 +34,6 @@ class ShareDesktopJob : public QObject
 public:
   explicit ShareDesktopJob( QObject* parent = 0 );
 
-  bool isRunning();
-
 signals:
   void imageAvailable( const QByteArray& );
   void jobCompleted();
@@ -44,17 +42,17 @@ public slots:
   void startJob();
   void stopJob();
 
-//protected slots:
+protected slots:
   void makeScreenshot();
 
 protected:
-  void setLastImageHash( const QByteArray& );
+  bool isRunning() const;
 
 private:
   QTimer m_timer;
-  QMutex m_mutex;
   QByteArray m_lastImageHash;
 
 };
+
 
 #endif // BEEBEEP_SHAREDESKTOPJOB_H

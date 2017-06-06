@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="cs_CZ">
+<TS version="2.0" language="cs_CZ">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -285,157 +285,157 @@
         <translation>%1Síťové rozhraní %2 spadlo.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="54"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="51"/>
         <source>%1 Unable to start file transfer server: bind address/port failed.</source>
         <translation>%1 Nelze spustit server přenosu souborů: bind adresa/port selhal.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="91"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="88"/>
         <source>%1 Unable to download %2 from %3: user is offline.</source>
         <translation>%1 Nelze stáhnout %2 od %3: uživatel je odpojen.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="107"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="104"/>
         <source>%1 Unable to download %2 from %3: folder %4 cannot be created.</source>
         <translation>%1 Nelze stáhnout %2 od %3: složku %4 nelze vytvořit.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="119"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="116"/>
         <source>%1 Downloading %2 from %3.</source>
         <translation>%1 Stahování %2 od %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="140"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="137"/>
         <source>from</source>
         <translation>od</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="140"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="137"/>
         <source>to</source>
         <translation>uživateli</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="182"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="179"/>
         <source>Open</source>
         <translation>Otevřít</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="247"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="244"/>
         <source>%1 Unable to send %2 to %3: user is offline.</source>
         <translation>%1 Nelze odeslat %2 uživateli  %3: uživatel je odpojen.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="224"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="221"/>
         <source>%1 Unable to send %2. File transfer is disabled.</source>
         <translation>%1 Nelze odeslat %2. Přenos souborů je zakázán.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="139"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="136"/>
         <source>Download</source>
         <translation>Stáhnout</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="139"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="136"/>
         <source>Upload</source>
         <translation>Odesláno</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="187"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="184"/>
         <source>folder</source>
         <translation>složku</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="256"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="253"/>
         <source>%1 %2: file not found.</source>
         <translation>%1 %2: soubor nenalezen.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="270"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="267"/>
         <source>%1 %2 is a folder. You can share it.</source>
         <translation>%1 %2 je složka. Můžete ji sdílet.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="295"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="292"/>
         <source>%1 Unable to send %2: %3 is not connected.</source>
         <translation>%1 Nelze odeslat %2: %3 není připojen.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="289"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="286"/>
         <source>%1 You send %2 to %3.</source>
         <translation>%1 Odeslal jste  %2 uživateli  %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="321"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="318"/>
         <source>%1 You have refused to download %2 from %3.</source>
         <translation>%1 jste odmítl stáhnout %2 od %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="349"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="346"/>
         <source>%1 You have refused to download folder %2 from %3.</source>
         <translation>%1 jste odmítl stáhnout složku %2 od %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="457"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="454"/>
         <source>%1 is added to file sharing (%2)</source>
         <translation>%1 je přidán ke sdílení (%2)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="451"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="448"/>
         <source>%1 is added to file sharing with only %2 of %3 files (%4 limit reached)</source>
         <translation>%1 je přidán ke sdílení souborů pouze s %2 ze %3 souborů (dosáhl limit %4)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="459"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="456"/>
         <source>%1 is added to file sharing with %2 files, %3</source>
         <translation>%1 je přidán ke sdílení souoborů s %2 soubory, %3</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="490"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="487"/>
         <source>All paths are removed from file sharing</source>
         <translation>Všechny cesty jsou odstraněny ze sdílení</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="511"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="508"/>
         <source>%1 is removed from file sharing</source>
         <translation>%1 se odstraní ze sdílení</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="513"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="510"/>
         <source>%1 is removed from file sharing with %2 files</source>
         <translation>%1 je odebrán ze sdílení s %2 soubory</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="578"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="575"/>
         <source>%1 You are about to send %2 to %3. Checking folder...</source>
         <translation>%1 Chystáte se odeslat %2 k uživateli  %3. Kontroluji složku...</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="616"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="613"/>
         <source>%1 Unable to send folder %2</source>
         <translation>%1 Nelze odeslat složku %2</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="621"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="618"/>
         <source>the folder is empty.</source>
         <translation>Složka je prázdná.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="628"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="625"/>
         <source>file transfer is not working.</source>
         <translation>přenos souborů nefunguje.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="636"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="633"/>
         <source>%1 is not connected.</source>
         <translation>%1 není připojen.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="650"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="647"/>
         <source>internal error.</source>
         <translation>interní chyba.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="655"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="652"/>
         <source>%1 You send folder %2 to %3.</source>
         <translation>%1 poslal jste složku %2 k %3.</translation>
     </message>
@@ -2948,32 +2948,32 @@ Vyberte prosím jiné jméno.</translation>
 <context>
     <name>GuiNetworkWidget</name>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="366"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="357"/>
         <source>Use fixed interval to search users</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="338"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="291"/>
         <source>* (read only section)</source>
         <translation>* (část pouze pro čtení)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="373"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="364"/>
         <source>Use hive protocol to contact offline users</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="389"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="422"/>
         <source>Show file HOSTS...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="409"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="442"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="416"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="449"/>
         <source>Cancel</source>
         <translation>Zrušit</translation>
     </message>
@@ -2990,7 +2990,7 @@ Vyberte prosím jiné jméno.</translation>
         <translation type="obsolete">Povolit interval prohledávání</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="303"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="256"/>
         <source>Max users to contact every second</source>
         <translation>Maximální počet uživatelů kontaktovaných každou vteřinu</translation>
     </message>
@@ -2999,47 +2999,47 @@ Vyberte prosím jiné jméno.</translation>
         <translation type="obsolete">s (0=zakázáno, 10=výchozí) {0=?} {0=?}</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="46"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="371"/>
         <source>Prevent multiple connections from single host address</source>
         <translation>Zabránit vícenásobnému připojení z jedné adresy</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="53"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="378"/>
         <source>Enable Zero Configuration Networking</source>
         <translation>Povolit Zero Configuration sítě</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="91"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="44"/>
         <source>UDP Port in beebeep.rc *</source>
         <translation>UDP Port v beebeep.rc *</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="197"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="150"/>
         <source>Local subnet address *</source>
         <translation>Adresa místní podsítě *</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="168"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="121"/>
         <source>Multicast group in beebeep.rc *</source>
         <translation>Multicast skupina v beebeep.rc *</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="210"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="163"/>
         <source>Search users every</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="271"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="224"/>
         <source>Preferred subnet</source>
         <translation>Preferovaná podsíť</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="187"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="140"/>
         <source>(the same for all clients)</source>
         <translation>(stejné pro všechny klienty)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="136"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="89"/>
         <source>(search users here by default)</source>
         <translation>(ve výchozím nastavení zde hledat uživatele)</translation>
     </message>
@@ -3531,6 +3531,14 @@ Vyberte prosím jiné jméno.</translation>
         <location filename="../src/desktop/GuiShareBox.ui" line="473"/>
         <source>Select box</source>
         <translation>Vybrat schránku</translation>
+    </message>
+</context>
+<context>
+    <name>GuiShareDesktop</name>
+    <message>
+        <location filename="../src/sharedesktop/GuiShareDesktop.cpp" line="49"/>
+        <source>Desktop</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

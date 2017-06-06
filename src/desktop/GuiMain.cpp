@@ -3721,7 +3721,6 @@ void GuiMain::showRestartApplicationAlertMessage()
 #ifdef BEEBEEP_USE_SHAREDESKTOP
 void GuiMain::onShareDesktopImageAvailable( const User& u, const QPixmap& pix )
 {
-
   foreach( GuiShareDesktop* gsd, m_desktops )
   {
     if( gsd->ownerId() == u.id() )
@@ -3736,6 +3735,7 @@ void GuiMain::onShareDesktopImageAvailable( const User& u, const QPixmap& pix )
   new_gui->setOwner( u );
   new_gui->setGeometry( 30, 30, 800, 600 );
   new_gui->show();
+  new_gui->showMinimized();
   new_gui->updatePixmap( pix );
 
   m_desktops.append( new_gui );

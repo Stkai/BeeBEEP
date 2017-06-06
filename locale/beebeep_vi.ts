@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="vi_VN">
+<TS version="2.0" language="vi_VN">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -285,157 +285,157 @@
         <translation>%1 Network interface %2 is gone down.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="54"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="51"/>
         <source>%1 Unable to start file transfer server: bind address/port failed.</source>
         <translation>%1 Không thể khởi động máy chủ truyền tập tin: địa chỉ đã gắn/cổng bị lỗi.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="91"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="88"/>
         <source>%1 Unable to download %2 from %3: user is offline.</source>
         <translation>%1 Không thể tải %2 từ %3: người dùng không trực tuyến.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="107"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="104"/>
         <source>%1 Unable to download %2 from %3: folder %4 cannot be created.</source>
         <translation>%1 Không thể tải %2 từ %3: thư mục %4 không thể tạo ra.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="119"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="116"/>
         <source>%1 Downloading %2 from %3.</source>
         <translation>%1 Đang tải %2 từ %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="140"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="137"/>
         <source>from</source>
         <translation>từ</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="140"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="137"/>
         <source>to</source>
         <translation>đến</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="182"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="179"/>
         <source>Open</source>
         <translation>Mở</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="247"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="244"/>
         <source>%1 Unable to send %2 to %3: user is offline.</source>
         <translation>%1 Không thể gửi %2 đến %3: người dùng không trực tuyến.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="224"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="221"/>
         <source>%1 Unable to send %2. File transfer is disabled.</source>
         <translation>%1 Không thể gửi %2. Chuyển tập tin bị tắt.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="139"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="136"/>
         <source>Upload</source>
         <translation>Tải lên</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="139"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="136"/>
         <source>Download</source>
         <translation>Tải xuống</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="187"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="184"/>
         <source>folder</source>
         <translation>thư mục</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="256"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="253"/>
         <source>%1 %2: file not found.</source>
         <translation>%1 %2: không tìm thấy.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="270"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="267"/>
         <source>%1 %2 is a folder. You can share it.</source>
         <translation>%1 %2 là thư mục. Bạn có thể chia sẻ nó.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="295"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="292"/>
         <source>%1 Unable to send %2: %3 is not connected.</source>
         <translation>%1 Không thể gửi đến %2: %3 không kết nối.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="289"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="286"/>
         <source>%1 You send %2 to %3.</source>
         <translation>%1 Bạn gửi %2 đến %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="321"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="318"/>
         <source>%1 You have refused to download %2 from %3.</source>
         <translation>%1 Bạn đã từ chối tải %2 từ %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="349"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="346"/>
         <source>%1 You have refused to download folder %2 from %3.</source>
         <translation>%1 Bạn đã từ chối tải thư mục %2 từ %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="457"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="454"/>
         <source>%1 is added to file sharing (%2)</source>
         <translation>%1 được thêm vào để chia sẻ tập tin (%2)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="451"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="448"/>
         <source>%1 is added to file sharing with only %2 of %3 files (%4 limit reached)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="459"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="456"/>
         <source>%1 is added to file sharing with %2 files, %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="490"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="487"/>
         <source>All paths are removed from file sharing</source>
         <translation>Tất cả đường dẫn đã được xóa khỏi chia sẻ tập tin</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="511"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="508"/>
         <source>%1 is removed from file sharing</source>
         <translation>%1 được loại bỏ khỏi chia sẻ tập tin</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="513"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="510"/>
         <source>%1 is removed from file sharing with %2 files</source>
         <translation>%1 được loại bỏ khỏi chia sẻ tập tin với các tập tin %2</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="578"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="575"/>
         <source>%1 You are about to send %2 to %3. Checking folder...</source>
         <translation>%1 Bạn đang gửi %2 đến %3. Kiểm tra thư mục...</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="616"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="613"/>
         <source>%1 Unable to send folder %2</source>
         <translation>%1 Không thể gửi thư mục %2</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="621"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="618"/>
         <source>the folder is empty.</source>
         <translation>thư mục rỗng.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="628"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="625"/>
         <source>file transfer is not working.</source>
         <translation>chuyển tập tin không hoạt động.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="636"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="633"/>
         <source>%1 is not connected.</source>
         <translation>%1 không kết nối.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="650"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="647"/>
         <source>internal error.</source>
         <translation>lỗi bên trong.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="655"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="652"/>
         <source>%1 You send folder %2 to %3.</source>
         <translation>%1 Bạn gửi thư mục %2 đến %3.</translation>
     </message>
@@ -2948,32 +2948,32 @@ Vui lòng chọn một tên khác nhau.</translation>
 <context>
     <name>GuiNetworkWidget</name>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="366"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="357"/>
         <source>Use fixed interval to search users</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="338"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="291"/>
         <source>* (read only section)</source>
         <translation type="unfinished">* (phần chỉ đọc)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="373"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="364"/>
         <source>Use hive protocol to contact offline users</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="389"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="422"/>
         <source>Show file HOSTS...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="409"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="442"/>
         <source>Ok</source>
         <translation type="unfinished">Đồng ý</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="416"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="449"/>
         <source>Cancel</source>
         <translation type="unfinished">Hủy bỏ</translation>
     </message>
@@ -2990,7 +2990,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Bật thời gian gửi broadcast</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="303"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="256"/>
         <source>Max users to contact every second</source>
         <translation type="unfinished">Người dùng tối đa để liên hệ trong mỗi giây</translation>
     </message>
@@ -2999,47 +2999,47 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">giây (0=tắt, 0=mặc định)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="46"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="371"/>
         <source>Prevent multiple connections from single host address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="53"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="378"/>
         <source>Enable Zero Configuration Networking</source>
         <translation type="unfinished">Bật Zero Configuration Networking</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="91"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="44"/>
         <source>UDP Port in beebeep.rc *</source>
         <translation type="unfinished">Cổng UDP trong beebeep.rc *</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="197"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="150"/>
         <source>Local subnet address *</source>
         <translation type="unfinished">Địa chỉ mạng con cục bộ *</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="168"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="121"/>
         <source>Multicast group in beebeep.rc *</source>
         <translation type="unfinished">Nhóm Multicast trong beebeep.rc *</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="210"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="163"/>
         <source>Search users every</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="271"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="224"/>
         <source>Preferred subnet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="187"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="140"/>
         <source>(the same for all clients)</source>
         <translation type="unfinished">(tương tự cho các máy trạm)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="136"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="89"/>
         <source>(search users here by default)</source>
         <translation type="unfinished">(mặc định tìm người dùng ở đây)</translation>
     </message>
@@ -3531,6 +3531,14 @@ Vui lòng chọn một tên khác nhau.</translation>
         <location filename="../src/desktop/GuiShareBox.ui" line="473"/>
         <source>Select box</source>
         <translation>Chọn hộp</translation>
+    </message>
+</context>
+<context>
+    <name>GuiShareDesktop</name>
+    <message>
+        <location filename="../src/sharedesktop/GuiShareDesktop.cpp" line="49"/>
+        <source>Desktop</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

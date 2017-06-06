@@ -48,10 +48,9 @@ void ShareDesktop::start()
   addUser( ID_LOCAL_USER );
 #endif
 
-  //BeeApplication* bee_app = (BeeApplication*)qApp;
-  //bee_app->addJob( mp_job );
+  BeeApplication* bee_app = (BeeApplication*)qApp;
+  bee_app->addJob( mp_job );
   QMetaObject::invokeMethod( mp_job, "startJob", Qt::QueuedConnection );
-
 }
 
 void ShareDesktop::stop()

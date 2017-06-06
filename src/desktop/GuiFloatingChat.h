@@ -46,7 +46,6 @@ public:
   void updateActions( bool is_connected, int connected_users );
   void setChatReadByUser( const Chat&, const User& );
   void showChatMessage( const Chat&, const ChatMessage& );
-
   void updateEmoticons();
 
   inline void setSaveGeometryDisabled( bool );

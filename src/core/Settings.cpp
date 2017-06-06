@@ -620,6 +620,13 @@ QString Settings::gaEventVersion() const
   return QString( BEEBEEP_GA_EVENT_VERSION );
 }
 
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  const char* Settings::shareDesktopImageType() const
+  {
+    return BEEBEEP_SHARE_DESKTOP_IMAGE_TYPE;
+  }
+#endif
+
 QByteArray Settings::hash( const QString& string_to_hash ) const
 {
   QByteArray hash_pre = string_to_hash.toUtf8() + m_password;

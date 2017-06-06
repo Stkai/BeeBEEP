@@ -25,10 +25,11 @@
 #define BEEBEEP_GUISHAREDESKTOP_H
 
 #include "Config.h"
+#include "ui_GuiShareDesktop.h"
 class User;
 
 
-class GuiShareDesktop : public QMainWindow
+class GuiShareDesktop : public QWidget, private Ui::GuiShareDesktopWidget
 {
   Q_OBJECT
 
@@ -48,11 +49,10 @@ signals:
 
 protected:
   void closeEvent( QCloseEvent* );
-  void toggleStaysOnTop();
 
 private:
   VNumber m_ownerId;
-  QLabel* mp_lDesktop;
+  QPixmap m_lastImage;
 
 };
 

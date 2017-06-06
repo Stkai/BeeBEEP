@@ -1485,30 +1485,32 @@ QList<FileInfo> Protocol::messageToShareBoxFileList( const Message& m, const QHo
   return file_info_list;
 }
 
-Message Protocol::refuseToViewDesktopShared() const
-{
-  Message m( Message::ShareDesktop, ID_SHAREDESKTOP_MESSAGE, "" );
-  m.setData( "" );
-  m.addFlag( Message::Request );
-  m.addFlag( Message::Refused );
-  return m;
-}
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  Message Protocol::refuseToViewDesktopShared() const
+  {
+    Message m( Message::ShareDesktop, ID_SHAREDESKTOP_MESSAGE, "" );
+    m.setData( "" );
+    m.addFlag( Message::Request );
+    m.addFlag( Message::Refused );
+    return m;
+  }
 
-Message Protocol::shareDesktopDataToMessage( const QByteArray& pix_data ) const
-{
-  Message m( Message::ShareDesktop, ID_SHAREDESKTOP_MESSAGE, pix_data.toBase64() );
-  m.setData( "" );
-  m.addFlag( Message::Private );
-  return m;
-}
+  Message Protocol::shareDesktopDataToMessage( const QByteArray& pix_data ) const
+  {
+    Message m( Message::ShareDesktop, ID_SHAREDESKTOP_MESSAGE, pix_data.toBase64() );
+    m.setData( "" );
+    m.addFlag( Message::Private );
+    return m;
+  }
 
-QPixmap Protocol::pixmapFromShareDesktopMessage( const Message& m ) const
-{
-  QPixmap pix;
-  QByteArray pix_data = QByteArray::fromBase64( m.text().toLatin1() );
-  pix.loadFromData( pix_data, "PNG" );
-  return pix;
-}
+  QPixmap Protocol::pixmapFromShareDesktopMessage( const Message& m ) const
+  {
+    QPixmap pix;
+    QByteArray pix_data = QByteArray::fromBase64( m.text().toLatin1() );
+    pix.loadFromData( pix_data, Settings::instance().shareDesktopImageType() );
+    return pix;
+  }
+#endif
 
 ChatMessageData Protocol::dataFromChatMessage( const Message& m )
 {

@@ -33,9 +33,6 @@
 #include "IconManager.h"
 #include "Protocol.h"
 #include "Settings.h"
-#ifdef BEEBEEP_USE_SHAREDESKTOP
-  #include "ShareDesktop.h"
-#endif
 #include "UserManager.h"
 
 
@@ -800,69 +797,3 @@ void Core::onFileTransferCompleted( VNumber peer_id, VNumber user_id, const File
   else
     emit fileTransferCompleted( peer_id, u, fi );
 }
-
-#ifdef BEEBEEP_USE_SHAREDESKTOP
-void Core::addUserToDesktopShare( VNumber user_id )
-{
-  mp_shareDesktop->addUser( user_id );
-}
-
-void Core::removeUserToDesktopShare( VNumber user_id )
-{
-  mp_shareDesktop->removeUser( user_id );
-  if( mp_shareDesktop->users().isEmpty() )
-    QMetaObject::invokeMethod( this, "stopShareDesktop", Qt::QueuedConnection );
-}
-
-void Core::startShareDesktop()
-{
-  mp_shareDesktop->start();
-}
-
-void Core::stopShareDesktop()
-{
-  mp_shareDesktop->stop();
-}
-
-void Core::refuseDesktopShareFromUser( VNumber user_id )
-{
-  Connection* c = connection( user_id );
-  if( c && c->isConnected() )
-  {
-    Message m = Protocol::instance().refuseToViewDesktopShared();
-    c->sendMessage( m );
-  }
-}
-
-void Core::onShareDesktopDataReady( const QByteArray& pix_data )
-{
-  const QList<VNumber>& user_id_list = mp_shareDesktop->users();
-  if( user_id_list.isEmpty() )
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Core received image data from desktop share but no user is present in list";
-#endif
-    return;
-  }
-
-  Message m = Protocol::instance().shareDesktopDataToMessage( pix_data );
-  Connection* c;
-  foreach( VNumber user_id, user_id_list )
-  {
-    if( user_id == ID_LOCAL_USER )
-    {
-#ifdef BEEBEEP_DEBUG
-      qDebug() << "Core sends own image desktop share data to local user";
-#endif
-      QPixmap pix = Protocol::instance().pixmapFromShareDesktopMessage( m );
-      emit shareDesktopImageAvailable( Settings::instance().localUser(), pix );
-    }
-    else
-    {
-      c = connection( user_id );
-      if( c && c->isConnected() )
-        c->sendMessage( m );
-    }
-  }
-}
-#endif  // BEEBEEP_USE_SHAREDESKTOP

@@ -23,22 +23,13 @@
 
 #include "GuiShareDesktop.h"
 #include "User.h"
-#ifdef Q_OS_WIN
-  #include <windows.h>
-#endif
-
 
 GuiShareDesktop::GuiShareDesktop( QWidget *parent )
- : QMainWindow( parent )
+ : QWidget( parent ), m_ownerId( ID_INVALID ), m_lastImage()
 {
   setObjectName( "GuiShareDesktop" );
+  setupUi( this );
   setWindowIcon( QIcon( ":/images/beebeep.png" ) );
-
-  mp_lDesktop = new QLabel( this );
-  mp_lDesktop->setScaledContents( true );
-
-  setCentralWidget( mp_lDesktop );
-
 }
 
 void GuiShareDesktop::setOwner( const User& u )
@@ -49,7 +40,8 @@ void GuiShareDesktop::setOwner( const User& u )
 
 void GuiShareDesktop::updatePixmap( const QPixmap& pix )
 {
-  mp_lDesktop->setPixmap( pix.scaled( 800, 600 ) );
+  mp_lView->setPixmap( pix.scaled( width()-40, height()-40, Qt::IgnoreAspectRatio ) );
+  m_lastImage = pix;
 }
 
 void GuiShareDesktop::onUserChanged( const User& u )
@@ -60,27 +52,7 @@ void GuiShareDesktop::onUserChanged( const User& u )
 
 void GuiShareDesktop::closeEvent( QCloseEvent* e )
 {
-  QMainWindow::closeEvent( e );
+  QWidget::closeEvent( e );
   emit shareDesktopClosed( m_ownerId );
   e->accept();
-}
-
-void GuiShareDesktop::toggleStaysOnTop()
-{
-    /*
-#ifdef Q_OS_WIN
-  if( Settings::instance().stayOnTop() )
-    SetWindowPos( (HWND)winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
-  else
-    SetWindowPos( (HWND)winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
-#else
-  Qt::WindowFlags w_flags = this->windowFlags();
-  if( Settings::instance().stayOnTop() )
-    w_flags |= Qt::WindowStaysOnTopHint;
-  else
-    w_flags &= ~Qt::WindowStaysOnTopHint;
-  setWindowFlags( w_flags );
-#endif
-  show();
-  */
 }

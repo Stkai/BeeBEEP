@@ -53,7 +53,7 @@ include(gui/gui.pri)
 include(desktop/desktop.pri)
 include(override/override.pri)
 include(utils/utils.pri)
-#include(sharedesktop/sharedesktop.pri)
+include(sharedesktop/sharedesktop.pri)
 
 HEADERS += Interfaces.h Tips.h
 
