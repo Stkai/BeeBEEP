@@ -196,6 +196,9 @@ void GuiMain::setupChatConnections( GuiChat* gui_chat )
   connect( gui_chat, SIGNAL( editGroupRequest( VNumber ) ), this, SLOT( editGroupChat( VNumber ) ) );
   connect( gui_chat, SIGNAL( chatToClear( VNumber ) ), this, SLOT( clearChat( VNumber ) ) );
   connect( gui_chat, SIGNAL( showChatMenuRequest() ), this, SLOT( showChatSettingsMenu() ) );
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  connect( gui_chat, SIGNAL( shareDesktopToChatRequest( VNumber, bool ) ), this, SLOT( onShareDesktopRequestFromChat( VNumber, bool ) ) );
+#endif
 }
 
 void GuiMain::checkWindowFlagsAndShow()
@@ -2420,10 +2423,10 @@ void GuiMain::checkAutoStartOnBoot( bool add_service )
 void GuiMain::loadSession()
 {
   showMessage( tr( "Starting" ), 3000 );
-  QTimer::singleShot( 200, mp_core, SLOT( buildSavedChatList() ) );
   mp_tabMain->setCurrentWidget( mp_home );
   mp_home->loadSystemMessages();
-  mp_groupList->updateGroups();
+  QTimer::singleShot( 100, mp_core, SLOT( buildSavedChatList() ) );
+  QTimer::singleShot( 3000, this, SLOT( startCore() ) );
 }
 
 void GuiMain::showSavedChatSelected( const QString& chat_name )
@@ -3755,4 +3758,28 @@ void GuiMain::onShareDesktopCloseEvent( VNumber user_id )
     }
   }
 }
+
+void GuiMain::onShareDesktopRequestFromChat( VNumber chat_id, bool enable_desktop_sharing )
+{
+  if( chat_id == ID_DEFAULT_CHAT )
+    return;
+
+  if( mp_core->chatIsInDesktopShare( chat_id ) == enable_desktop_sharing )
+    return;
+
+  Chat c = ChatManager::instance().chat( chat_id );
+  if( enable_desktop_sharing )
+  {
+    if( QMessageBox::question( activeWindow(), Settings::instance().programName(),
+                               tr( "Do you really want to share your desktop with %1?" ).arg( c.name() ),
+                               tr( "Yes" ), tr( "No" ), QString::null, 0, 1 ) == 1 )
+      return;
+    mp_core->addChatToDesktopShare( chat_id );
+  }
+  else
+  {
+    mp_core->removeChatFromDesktopShare( chat_id );
+  }
+}
+
 #endif

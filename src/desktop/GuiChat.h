@@ -64,6 +64,9 @@ signals:
   void saveStateAndGeometryRequest();
   void toggleVisibilityEmoticonsPanelRequest();
   void toggleVisibilityPresetMessagesPanelRequest();
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  void shareDesktopToChatRequest( VNumber, bool );
+#endif
 
 public slots:
   void addEmoticon( const Emoticon& );
@@ -107,6 +110,9 @@ private slots:
   void findNextTextInChat();
   void openSelectedTextAsUrl();
   void resetChatFontToDefault();
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  void shareDesktopToChat();
+#endif
 
 protected:
   void findTextInChat( const QString& );
@@ -129,6 +135,9 @@ private:
   QAction* mp_actSendFolder;
   QAction* mp_actSaveAs;
   QAction* mp_actRestoreDefaultFont;
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  QAction* mp_actShareDesktop;
+#endif
 
   QSplitter* mp_splitter;
 

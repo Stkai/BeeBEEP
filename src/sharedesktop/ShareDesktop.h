@@ -39,11 +39,12 @@ public:
   void stop();
   inline bool isActive() const;
 
-  inline const QList<VNumber>& users() const;
+  inline const QList<VNumber>& chatIdList() const;
 
-  void addUser( VNumber );
-  inline void removeUser( VNumber );
-  inline void clearUsers();
+  bool addChat( VNumber );
+  inline bool hasChat( VNumber ) const;
+  inline bool removeChat( VNumber );
+  inline void clearChats();
 
 signals:
   void shareDesktopDataReady( const QByteArray& );
@@ -53,15 +54,16 @@ protected slots:
   void onImageDataAvailable( const QByteArray& );
 
 private:
-  QList<VNumber> m_users;
+  QList<VNumber> m_chatIdList;
   ShareDesktopJob* mp_job;
 
 };
 
 // Inline Functions
 inline bool ShareDesktop::isActive() const { return mp_job; }
-inline const QList<VNumber>& ShareDesktop::users() const { return m_users; }
-inline void ShareDesktop::removeUser( VNumber user_id ) { m_users.removeOne( user_id ); }
-inline void ShareDesktop::clearUsers() { m_users.clear(); }
+inline bool ShareDesktop::hasChat( VNumber chat_id ) const { return m_chatIdList.contains( chat_id ); }
+inline const QList<VNumber>& ShareDesktop::chatIdList() const { return m_chatIdList; }
+inline bool ShareDesktop::removeChat( VNumber chat_id ) { return m_chatIdList.removeOne( chat_id ); }
+inline void ShareDesktop::clearChats() { m_chatIdList.clear(); }
 
 #endif // BEEBEEP_SHAREDESKTOP_H

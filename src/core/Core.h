@@ -100,9 +100,10 @@ public:
   void downloadFromShareBox( VNumber from_user_id, const FileInfo&, const QString& to_path );
   void uploadToShareBox( VNumber to_user_id, const FileInfo&, const QString& to_path );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-  void addUserToDesktopShare( VNumber );
-  void removeUserToDesktopShare( VNumber );
-  void refuseDesktopShareFromUser( VNumber );
+  void addChatToDesktopShare( VNumber );
+  void removeChatFromDesktopShare( VNumber );
+  void refuseDesktopShare( const User&, const Chat& );
+  bool chatIsInDesktopShare( VNumber ) const;
 #endif
 
 public slots:

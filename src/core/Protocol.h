@@ -67,8 +67,8 @@ public:
   FileInfo fileInfo( const QFileInfo&, const QString& share_folder, bool to_share_box, const QString& chat_private_id );
   QString fileInfoHash( const QFileInfo& ) const;
   QString fileInfoHashTmp( VNumber, const QString&, FileSizeType ) const;
-  ChatMessageData dataFromChatMessage( const Message& );
-  QString chatMessageDataToString( const ChatMessageData& );
+  ChatMessageData dataFromChatMessage( const Message& ) const;
+  QString chatMessageDataToString( const ChatMessageData& ) const;
   int protoVersion( const Message& ) const;
   int datastreamVersion( const Message& ) const;
   QString publicKey( const Message& ) const;
@@ -127,8 +127,8 @@ public:
   QList<FileInfo> messageToShareBoxFileList( const Message&, const QHostAddress& ) const;
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-  Message refuseToViewDesktopShared() const;
-  Message shareDesktopDataToMessage( const QByteArray& ) const;
+  Message refuseToViewDesktopShared( const ChatMessageData& ) const;
+  Message shareDesktopDataToMessage( const Chat&, const QByteArray& ) const;
   QPixmap pixmapFromShareDesktopMessage( const Message& ) const;
 #endif
 

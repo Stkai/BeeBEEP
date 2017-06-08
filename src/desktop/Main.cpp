@@ -188,6 +188,8 @@ int main( int argc, char *argv[] )
   /* Init BeeApp */
   bee_app.init();
   bee_app.setAttribute( Qt::AA_DontUseNativeMenuBar );
+  if( Settings::instance().autoUserAway() )
+    bee_app.setIdleTimeout( Settings::instance().userAwayTimeout() );
 
   if( !QSystemTrayIcon::isSystemTrayAvailable() )
     qWarning() << "System tray icon is not available in this OS";
@@ -204,15 +206,7 @@ int main( int argc, char *argv[] )
   QObject::connect( &bee_app, SIGNAL( connectionRequest() ), &mw, SLOT( startCore() ) );
 
   QMetaObject::invokeMethod( &mw, "checkWindowFlagsAndShow", Qt::QueuedConnection );
-
   mw.loadSession();
-
-  /* Starting connection to BeeBEEP Network */
-  QTimer::singleShot( 3000, &mw, SLOT( startCore() ) );
-
-  if( Settings::instance().autoUserAway() )
-    bee_app.setIdleTimeout( Settings::instance().userAwayTimeout() );
-
   /* Event Loop */
   int iRet = bee_app.exec();
   qDebug() << "Exit from the main event loop with code:" << iRet;

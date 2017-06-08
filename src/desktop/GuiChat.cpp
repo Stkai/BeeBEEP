@@ -125,6 +125,12 @@ GuiChat::GuiChat( QWidget *parent )
 
   mp_pbSend->setIcon( IconManager::instance().icon( "send.png" ) );
 
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  mp_actShareDesktop = new QAction( IconManager::instance().icon( "desktop-share.png" ), tr( "Share your desktop" ), this );
+  mp_actShareDesktop->setCheckable( true );
+  connect( mp_actShareDesktop, SIGNAL( triggered() ), this, SLOT( shareDesktopToChat() ) );
+#endif
+
   connect( mp_teChat, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( customContextMenu( const QPoint& ) ) );
   connect( mp_teChat, SIGNAL( anchorClicked( const QUrl& ) ), this, SLOT( checkAnchorClicked( const QUrl&  ) ) );
   connect( mp_teMessage, SIGNAL( returnPressed() ), this, SLOT( sendMessage() ) );
@@ -153,6 +159,10 @@ void GuiChat::setupToolBar( QToolBar* chat_bar )
   chat_bar->addSeparator();
   chat_bar->addAction( mp_actSaveAs );
   chat_bar->addAction( mp_actPrint );
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  chat_bar->addSeparator();
+  chat_bar->addAction( mp_actShareDesktop );
+#endif
 
   mp_teMessage->addActionToContextMenu( mp_actSendFile );
   mp_teMessage->addActionToContextMenu( mp_actSendFolder );
@@ -239,6 +249,10 @@ void GuiChat::updateActions( const Chat& c, bool is_connected, int connected_use
   }
   else
     mp_teMessage->setPlaceholderText( mp_teMessage->toolTip() );
+#endif
+
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  mp_actShareDesktop->setEnabled( m_chatId != ID_DEFAULT_CHAT && local_user_is_member && is_connected && can_send_files );
 #endif
 }
 
@@ -1019,4 +1033,9 @@ void GuiChat::resetChatFontToDefault()
     return;
   Settings::instance().setChatFont( QApplication::font() );
   setChatFont( Settings::instance().chatFont() );
+}
+
+void GuiChat::shareDesktopToChat()
+{
+  emit shareDesktopToChatRequest( m_chatId, mp_actShareDesktop->isChecked() );
 }

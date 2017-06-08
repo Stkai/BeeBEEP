@@ -159,6 +159,7 @@ private slots:
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   void onShareDesktopImageAvailable( const User&, const QPixmap& );
   void onShareDesktopCloseEvent( VNumber );
+  void onShareDesktopRequestFromChat( VNumber, bool );
 #endif
   void startExternalApplicationFromActionData();
   void onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType );

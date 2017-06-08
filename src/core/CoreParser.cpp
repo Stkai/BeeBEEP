@@ -560,7 +560,9 @@ void Core::parseBuzzMessage( const User& u, const Message& )
 #ifdef BEEBEEP_USE_SHAREDESKTOP
 void Core::parseDesktopShareMessage( const User& u, const Message& m )
 {
-  if( m.hasFlag( Message::Request ) && m.hasFlag( Message::Refused ) )
+  ChatMessageData cmd = Protocol::instance().dataFromChatMessage( m );
+
+  if( m.hasFlag( Message::Refused ) )
   {
     qDebug() << "User" << qPrintable( u.path() ) << "has refused to view your shared desktop";
     return;

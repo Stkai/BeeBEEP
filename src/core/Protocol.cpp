@@ -1486,20 +1486,24 @@ QList<FileInfo> Protocol::messageToShareBoxFileList( const Message& m, const QHo
 }
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-  Message Protocol::refuseToViewDesktopShared() const
+  Message Protocol::refuseToViewDesktopShared( const ChatMessageData& cmd ) const
   {
     Message m( Message::ShareDesktop, ID_SHAREDESKTOP_MESSAGE, "" );
-    m.setData( "" );
-    m.addFlag( Message::Request );
+    m.setData( chatMessageDataToString( cmd ) );
     m.addFlag( Message::Refused );
     return m;
   }
 
-  Message Protocol::shareDesktopDataToMessage( const QByteArray& pix_data ) const
+  Message Protocol::shareDesktopDataToMessage( const Chat& c, const QByteArray& pix_data ) const
   {
+    ChatMessageData cmd;
+    cmd.setGroupId( c.privateId() );
+    cmd.setGroupName( c.name() );
+    cmd.setGroupLastModified( c.lastModified() );
     Message m( Message::ShareDesktop, ID_SHAREDESKTOP_MESSAGE, pix_data.toBase64() );
-    m.setData( "" );
-    m.addFlag( Message::Private );
+    m.setData( chatMessageDataToString( cmd ) );
+    if( c.isPrivate() )
+      m.addFlag( Message::Private );
     return m;
   }
 
@@ -1512,10 +1516,10 @@ QList<FileInfo> Protocol::messageToShareBoxFileList( const Message& m, const QHo
   }
 #endif
 
-ChatMessageData Protocol::dataFromChatMessage( const Message& m )
+ChatMessageData Protocol::dataFromChatMessage( const Message& m ) const
 {
   ChatMessageData cmd;
-  if( m.data().size() <= 0 )
+  if( m.data().isEmpty() )
     return cmd;
   QStringList sl = m.data().split( DATA_FIELD_SEPARATOR );
   if( sl.isEmpty() )
@@ -1526,7 +1530,7 @@ ChatMessageData Protocol::dataFromChatMessage( const Message& m )
     QColor c( sl.first() );
     if( !c.isValid() )
     {
-      qWarning() << "Invalid text color in Chat Message Data:" << m.data();
+      qWarning() << "Invalid text color in Chat Message Data:" << qPrintable( m.data() );
       cmd.setTextColor( QColor( Qt::black ) );
     }
     else
@@ -1554,7 +1558,7 @@ ChatMessageData Protocol::dataFromChatMessage( const Message& m )
   return cmd;
 }
 
-QString Protocol::chatMessageDataToString( const ChatMessageData& cmd )
+QString Protocol::chatMessageDataToString( const ChatMessageData& cmd ) const
 {
   QStringList sl;
   sl << (cmd.textColor().isValid() ? cmd.textColor().name() : "");

@@ -154,5 +154,6 @@
         <file>images/group-create.png</file>
         <file>images/theme.png</file>
         <file>images/connection.png</file>
+        <file>images/desktop-share.png</file>
     </qresource>
 </RCC>

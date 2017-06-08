@@ -27,7 +27,7 @@
 
 
 ShareDesktop::ShareDesktop( QObject *parent )
-  : QObject( parent ), m_users(), mp_job( 0 )
+  : QObject( parent ), m_chatIdList(), mp_job( 0 )
 {
   setObjectName( "ShareDesktop" );
 }
@@ -44,10 +44,6 @@ void ShareDesktop::start()
   connect( mp_job, SIGNAL( jobCompleted() ), this, SLOT( onJobCompleted() ), Qt::QueuedConnection );
   connect( mp_job, SIGNAL( imageAvailable( const QByteArray& ) ), this, SLOT( onImageDataAvailable( const QByteArray& ) ), Qt::QueuedConnection );
 
-#ifdef BEEBEEP_DEBUG
-  addUser( ID_LOCAL_USER );
-#endif
-
   BeeApplication* bee_app = (BeeApplication*)qApp;
   bee_app->addJob( mp_job );
   QMetaObject::invokeMethod( mp_job, "startJob", Qt::QueuedConnection );
@@ -59,10 +55,12 @@ void ShareDesktop::stop()
     QMetaObject::invokeMethod( mp_job, "stopJob", Qt::QueuedConnection );
 }
 
-void ShareDesktop::addUser( VNumber user_id )
+bool ShareDesktop::addChat( VNumber chat_id )
 {
-  if( !m_users.contains( user_id ) )
-    m_users.append( user_id );
+  if( m_chatIdList.contains( chat_id ) )
+    return false;
+  m_chatIdList.append( chat_id );
+  return true;
 }
 
 void ShareDesktop::onJobCompleted()
