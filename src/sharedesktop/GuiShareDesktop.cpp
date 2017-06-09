@@ -25,16 +25,16 @@
 #include "User.h"
 
 GuiShareDesktop::GuiShareDesktop( QWidget *parent )
- : QWidget( parent ), m_ownerId( ID_INVALID ), m_lastImage()
+ : QWidget( parent ), m_userId( ID_INVALID ), m_chatId( ID_INVALID ), m_lastImage()
 {
   setObjectName( "GuiShareDesktop" );
   setupUi( this );
   setWindowIcon( QIcon( ":/images/beebeep.png" ) );
 }
 
-void GuiShareDesktop::setOwner( const User& u )
+void GuiShareDesktop::setUser( const User& u )
 {
-  m_ownerId = u.id();
+  m_userId = u.id();
   onUserChanged( u );
 }
 
@@ -53,6 +53,6 @@ void GuiShareDesktop::onUserChanged( const User& u )
 void GuiShareDesktop::closeEvent( QCloseEvent* e )
 {
   QWidget::closeEvent( e );
-  emit shareDesktopClosed( m_ownerId );
+  emit shareDesktopClosed( m_userId, m_chatId );
   e->accept();
 }

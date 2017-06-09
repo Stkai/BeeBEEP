@@ -36,8 +36,10 @@ class GuiShareDesktop : public QWidget, private Ui::GuiShareDesktopWidget
 public:
   GuiShareDesktop( QWidget* parent = 0 );
 
-  void setOwner( const User& );
-  inline VNumber ownerId() const;
+  void setUser( const User& );
+  inline VNumber userId() const;
+  inline void setChatId( VNumber );
+  inline VNumber chatId() const;
 
   void updatePixmap( const QPixmap& );
 
@@ -45,20 +47,22 @@ public slots:
   void onUserChanged( const User& );
 
 signals:
-  void shareDesktopClosed( VNumber );
+  void shareDesktopClosed( VNumber user_id, VNumber chat_id );
 
 protected:
   void closeEvent( QCloseEvent* );
 
 private:
-  VNumber m_ownerId;
+  VNumber m_userId;
+  VNumber m_chatId;
   QPixmap m_lastImage;
 
 };
 
 
 // Inline Functions
-inline VNumber GuiShareDesktop::ownerId() const { return m_ownerId; }
-
+inline VNumber GuiShareDesktop::userId() const { return m_userId; }
+inline void GuiShareDesktop::setChatId( VNumber new_value ) { m_chatId = new_value; }
+inline VNumber GuiShareDesktop::chatId() const { return m_chatId; }
 
 #endif // BEEBEEP_GUISHAREDESKTOP_H

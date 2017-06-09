@@ -64,7 +64,8 @@ public:
   inline const QList<VNumber>& unreadMessageUsersId() const;
   inline void setReadMessagesByUser( VNumber );
   inline bool userHasReadMessages( VNumber ) const;
-  inline void setLastModified();
+  inline void setLastModifiedToNow();
+  inline void setLastModified( const QDateTime& );
   inline const QDateTime& lastModified() const;
 
   bool isEmpty() const;
@@ -108,7 +109,8 @@ inline void Chat::readAllMessages() { m_unreadMessages = 0; }
 inline const QList<ChatMessage> Chat::messages() const { return m_messages; }
 inline void Chat::setReadMessagesByUser( VNumber user_id ) { m_unreadMessageUsersId.removeOne( user_id ); }
 inline bool Chat::userHasReadMessages( VNumber user_id ) const { return !m_unreadMessageUsersId.contains( user_id ); }
-inline void Chat::setLastModified() { m_group.setLastModified( QDateTime::currentDateTimeUtc() ); }
+inline void Chat::setLastModified( const QDateTime& new_value ) { m_group.setLastModified( new_value ); }
+inline void Chat::setLastModifiedToNow() { m_group.setLastModified( QDateTime::currentDateTimeUtc() ); }
 inline const QDateTime& Chat::lastModified() const { return m_group.lastModified(); }
 
 #endif // BEEBEEP_CHAT_H

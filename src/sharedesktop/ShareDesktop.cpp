@@ -22,23 +22,27 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "BeeApplication.h"
+#include "Chat.h"
 #include "ShareDesktop.h"
 #include "ShareDesktopJob.h"
 
 
 ShareDesktop::ShareDesktop( QObject *parent )
-  : QObject( parent ), m_chatIdList(), mp_job( 0 )
+  : QObject( parent ), m_chatId( ID_INVALID ), m_userIdList(), mp_job( 0 )
 {
   setObjectName( "ShareDesktop" );
 }
 
-void ShareDesktop::start()
+bool ShareDesktop::start( const Chat& c )
 {
   if( mp_job )
   {
     qWarning() << "ShareDesktop is already running. Restart is aborted";
-    return;
+    return false;
   }
+
+  if( !setChat( c ) )
+    return false;
 
   mp_job = new ShareDesktopJob;
   connect( mp_job, SIGNAL( jobCompleted() ), this, SLOT( onJobCompleted() ), Qt::QueuedConnection );
@@ -51,15 +55,40 @@ void ShareDesktop::start()
 
 void ShareDesktop::stop()
 {
+  if( m_chatId != ID_INVALID )
+  {
+    m_userIdList.clear();
+    m_chatId = ID_INVALID;
+  }
+
   if( mp_job )
     QMetaObject::invokeMethod( mp_job, "stopJob", Qt::QueuedConnection );
 }
 
-bool ShareDesktop::addChat( VNumber chat_id )
+bool ShareDesktop::setChat( const Chat& c )
 {
-  if( m_chatIdList.contains( chat_id ) )
+  if( m_chatId != ID_INVALID )
     return false;
-  m_chatIdList.append( chat_id );
+
+  if( !c.isValid() )
+    return false;
+
+  m_chatId = c.id();
+  if( !m_userIdList.isEmpty() )
+    m_userIdList.clear();
+
+  foreach( VNumber user_id, c.usersId() )
+    addUserId( user_id );
+
+  return !m_userIdList.isEmpty();
+}
+
+bool ShareDesktop::addUserId( VNumber user_id )
+{
+  if( user_id == ID_INVALID || user_id == ID_LOCAL_USER || m_userIdList.contains( user_id ) )
+    return false;
+
+  m_userIdList.append( user_id );
   return true;
 }
 
@@ -81,7 +110,6 @@ void ShareDesktop::onJobCompleted()
 #ifdef BEEBEEP_DEBUG
   qDebug() << qPrintable( objectName() ) << "has completed its job";
 #endif
-
 }
 
 void ShareDesktop::onImageDataAvailable( const QByteArray& pix_data )

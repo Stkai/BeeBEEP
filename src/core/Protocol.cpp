@@ -911,7 +911,12 @@ Group Protocol::loadGroup( const QString& group_data_saved )
   g.setUsers( member_list.toUsersId() );
 
   if( !sl.isEmpty() )
+  {
     g.setLastModified( QDateTime::fromString( sl.takeFirst(), Qt::ISODate ) );
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Group chat" << qPrintable( g.name() ) << "has last modified field" << qPrintable( g.lastModified().toString( Qt::ISODate ) );
+#endif
+  }
 
   g.setChatType( Group::GroupChat );
   return g;
@@ -1486,24 +1491,39 @@ QList<FileInfo> Protocol::messageToShareBoxFileList( const Message& m, const QHo
 }
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-  Message Protocol::refuseToViewDesktopShared( const ChatMessageData& cmd ) const
+  Message Protocol::refuseToViewDesktopShared( const Chat& c ) const
   {
     Message m( Message::ShareDesktop, ID_SHAREDESKTOP_MESSAGE, "" );
-    m.setData( chatMessageDataToString( cmd ) );
+    if( c.isGroup() )
+    {
+      ChatMessageData cmd;
+      cmd.setGroupName( c.name() );
+      cmd.setGroupLastModified( c.lastModified() );
+      cmd.setGroupId( c.privateId() );
+      m.setData( chatMessageDataToString( cmd ) );
+      m.addFlag( Message::GroupChat );
+    }
+    else
+      m.addFlag( Message::Private );
     m.addFlag( Message::Refused );
     return m;
   }
 
   Message Protocol::shareDesktopDataToMessage( const Chat& c, const QByteArray& pix_data ) const
   {
-    ChatMessageData cmd;
-    cmd.setGroupId( c.privateId() );
-    cmd.setGroupName( c.name() );
-    cmd.setGroupLastModified( c.lastModified() );
     Message m( Message::ShareDesktop, ID_SHAREDESKTOP_MESSAGE, pix_data.toBase64() );
-    m.setData( chatMessageDataToString( cmd ) );
-    if( c.isPrivate() )
+    if( c.isGroup() )
+    {
+      ChatMessageData cmd;
+      cmd.setGroupName( c.name() );
+      cmd.setGroupLastModified( c.lastModified() );
+      cmd.setGroupId( c.privateId() );
+      m.setData( chatMessageDataToString( cmd ) );
+      m.addFlag( Message::GroupChat );
+    }
+    else
       m.addFlag( Message::Private );
+
     return m;
   }
 

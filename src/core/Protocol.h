@@ -127,7 +127,7 @@ public:
   QList<FileInfo> messageToShareBoxFileList( const Message&, const QHostAddress& ) const;
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-  Message refuseToViewDesktopShared( const ChatMessageData& ) const;
+  Message refuseToViewDesktopShared( const Chat& ) const;
   Message shareDesktopDataToMessage( const Chat&, const QByteArray& ) const;
   QPixmap pixmapFromShareDesktopMessage( const Message& ) const;
 #endif

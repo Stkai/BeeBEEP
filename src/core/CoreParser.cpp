@@ -82,7 +82,7 @@ void Core::parseMessage( const User& u, const Message& m )
     break;
   case Message::ShareDesktop:
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-    parseDesktopShareMessage( u, m );
+    parseShareDesktopMessage( u, m );
 #endif
     break;
   default:
@@ -233,11 +233,35 @@ void Core::parseGroupMessage( const User& u, const Message& m )
     Chat group_chat = ChatManager::instance().findChatByPrivateId( cmd.groupId(), true, ID_INVALID );
     if( group_chat.isValid() )
     {
-      if( cmd.groupLastModified().isValid() && cmd.groupLastModified() <= group_chat.lastModified() )
+      if( cmd.groupLastModified().isValid() && group_chat.lastModified().isValid() )
       {
-        qDebug() << "Group chat request for" << qPrintable( cmd.groupName() ) << "from" << qPrintable( u.name() ) << "is skipped because it is old:" << qPrintable( cmd.groupLastModified().toString( Qt::ISODate ) );
-        return;
+        if( cmd.groupLastModified() <= group_chat.lastModified() )
+        {
+          qDebug() << "Group chat request for" << qPrintable( cmd.groupName() ) << "from" << qPrintable( u.name() ) << "is skipped because it is old:" << qPrintable( cmd.groupLastModified().toString( Qt::ISODate ) );
+          return;
+        }
+#ifdef BEEBEEP_DEBUG
+        else
+          qDebug() << "Group chat request from" << qPrintable( u.path() ) << "is newer" << qPrintable( cmd.groupLastModified().toString( Qt::ISODate ) )
+                   << "than your" << qPrintable( group_chat.lastModified().toString( Qt::ISODate ) ) ;
+#endif
       }
+      else if( !cmd.groupLastModified().isValid() )
+      {
+        if( group_chat.lastModified().isValid() )
+        {
+          qDebug() << "Group chat request for" << qPrintable( cmd.groupName() ) << "from" << qPrintable( u.name() ) << "is skipped because it has not last modified date";
+          return;
+        }
+#ifdef BEEBEEP_DEBUG
+        else
+          qDebug() << "Group chat request from" << qPrintable( u.path() ) << "has not last modified date as your chat";
+#endif
+      }
+#ifdef BEEBEEP_DEBUG
+      else
+        qDebug() << "Group chat request from" << qPrintable( u.path() ) << "has last modified date" << qPrintable( cmd.groupLastModified().toString( Qt::ISODate ) );
+#endif
 
       if( !group_chat.usersId().contains( ID_LOCAL_USER ) )
       {
@@ -330,7 +354,7 @@ void Core::parseGroupMessage( const User& u, const Message& m )
     if( group_chat.isValid() )
     {
 #ifdef BEEBEEP_DEBUG
-      qDebug() << "Group chat request for" << qPrintable( cmd.groupName() ) << "from" << qPrintable( u.name() ) << "is accepted to make changes";
+      qDebug() << "Group chat request for" << qPrintable( cmd.groupName() ) << "from" << qPrintable( u.name() ) << "is accepted";
 #endif
       Group g = group_chat.group();
       g.setName( cmd.groupName() );
@@ -558,20 +582,25 @@ void Core::parseBuzzMessage( const User& u, const Message& )
 }
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-void Core::parseDesktopShareMessage( const User& u, const Message& m )
+void Core::parseShareDesktopMessage( const User& u, const Message& m )
 {
   ChatMessageData cmd = Protocol::instance().dataFromChatMessage( m );
+  Chat c;
+  if( m.hasFlag( Message::Private ) )
+    c = ChatManager::instance().privateChatForUser( u.id() );
+  else
+    c = ChatManager::instance().findChatByPrivateId( cmd.groupId(), true, u.id() );
 
   if( m.hasFlag( Message::Refused ) )
   {
     qDebug() << "User" << qPrintable( u.path() ) << "has refused to view your shared desktop";
-    return;
+    refuseToViewShareDesktop( c.id(), u.id(), ID_LOCAL_USER );
   }
-  else if( m.hasFlag( Message::Private ) )
+  else if( m.hasFlag( Message::Private ) || m.hasFlag( Message::GroupChat ))
   {
     QPixmap pix = Protocol::instance().pixmapFromShareDesktopMessage( m );
     if( !pix.isNull() )
-      emit shareDesktopImageAvailable( u, pix );
+      emit shareDesktopImageAvailable( u, c, pix );
   }
   else
   {

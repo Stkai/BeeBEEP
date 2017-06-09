@@ -222,8 +222,13 @@ void Core::loadUsersAndGroups()
           }
         }
 
+#ifdef BEEBEEP_DEBUG
+        if( g.lastModified().isValid() )
+          qDebug() << "Loag group chat" << qPrintable( g.name() ) << "with last modified date" << qPrintable( g.lastModified().toString( Qt::ISODate ) );
+#endif
         if( !ChatManager::instance().findChatByPrivateId( g.privateId(), true, ID_INVALID ).isValid() )
           createGroupChat( Settings::instance().localUser(), g, false );
+
       }
     }
   }
@@ -262,7 +267,10 @@ void Core::saveUsersAndGroups()
     foreach( User u, UserManager::instance().userList().toList() )
     {
       if( !u.isLocal() )
+      {
+        qDebug() << "Saving user" << qPrintable( u.name() );
         save_data.append( Protocol::instance().saveUser( u ) );
+      }
     }
   }
 
@@ -277,7 +285,16 @@ void Core::saveUsersAndGroups()
     foreach( Chat c, ChatManager::instance().constChatList() )
     {
       if( c.isGroup() )
+      {
+        if( c.lastModified().isNull() )
+        {
+          c.setLastModifiedToNow();
+          qDebug() << "Saving chat" << qPrintable( c.name() ) << "with last modified set to now";
+        }
+        else
+          qDebug() << "Saving chat" << qPrintable( c.name() );
         save_data.append( Protocol::instance().saveGroup( c.group() ) );
+      }
     }
   }
 
@@ -292,6 +309,7 @@ void Core::saveUsersAndGroups()
     foreach( ChatRecord cr, ChatManager::instance().refusedChats() )
     {
       save_data.append( Protocol::instance().saveChatRecord( cr ) );
+      qDebug() << "Saving blocked chat" << qPrintable( cr.name() );
     }
   }
 

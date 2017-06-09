@@ -28,105 +28,98 @@
 #include "Protocol.h"
 #include "ShareDesktop.h"
 #include "Settings.h"
+#include "UserManager.h"
 
 
-void Core::addChatToDesktopShare( VNumber chat_id )
+bool Core::startShareDesktop( VNumber chat_id )
 {
-  if( !mp_shareDesktop->addChat( chat_id ) )
-    return;
   Chat c = ChatManager::instance().chat( chat_id );
-  QString sHtmlMsg = tr( "%1 You start to share desktop with %2." ).arg( IconManager::instance().toHtml( "desktop-share.png", "*G*" ), c.name() );
-  dispatchSystemMessage( chat_id, ID_LOCAL_USER, sHtmlMsg, DispatchToChat, ChatMessage::System );
-  qDebug() << "Start to share desktop with" << qPrintable( c.name() );
-}
-
-void Core::removeChatFromDesktopShare( VNumber chat_id )
-{
-  if( !mp_shareDesktop->removeChat( chat_id ) )
-    return;
-
-  Chat c = ChatManager::instance().chat( chat_id );
-  QString sHtmlMsg = tr( "%1 You stop to share desktop with %2." ).arg( IconManager::instance().toHtml( "desktop-share.png", "*G*" ), c.name() );
-  dispatchSystemMessage( chat_id, ID_LOCAL_USER, sHtmlMsg, DispatchToChat, ChatMessage::System );
-  qDebug() << "Stop to share desktop with" << qPrintable( c.name() );
-
-  if( mp_shareDesktop->chatIdList().isEmpty() )
-    QMetaObject::invokeMethod( this, "stopShareDesktop", Qt::QueuedConnection );
-}
-
-bool Core::chatIsInDesktopShare( VNumber chat_id ) const
-{
-  return mp_shareDesktop->hasChat( chat_id );
-}
-
-void Core::startShareDesktop()
-{
-  mp_shareDesktop->start();
+  if( mp_shareDesktop->start( c ) )
+  {
+    QString sHtmlMsg = tr( "%1 You start to share desktop with %2." ).arg( IconManager::instance().toHtml( "desktop-share.png", "*G*" ), c.name() );
+    dispatchSystemMessage( c.id(), ID_LOCAL_USER, sHtmlMsg, DispatchToChat, ChatMessage::System );
+    qDebug() << "Start to share desktop with" << qPrintable( c.name() );
+    return true;
+  }
+  else
+    return false;
 }
 
 void Core::stopShareDesktop()
 {
+  if( !mp_shareDesktop->isActive() )
+    return;
+
+  if( mp_shareDesktop->hasChat() )
+  {
+    Chat c = ChatManager::instance().chat( mp_shareDesktop->chatId() );
+    QString sHtmlMsg = tr( "%1 You stop to share desktop with %2." ).arg( IconManager::instance().toHtml( "desktop-share-refused.png", "*G*" ), c.name() );
+    dispatchSystemMessage( c.id(), ID_LOCAL_USER, sHtmlMsg, DispatchToChat, ChatMessage::System );
+    qDebug() << "Stop to share desktop with" << qPrintable( c.name() );
+  }
+
   mp_shareDesktop->stop();
 }
 
-void Core::refuseDesktopShare( const User& u, const Chat& c )
+void Core::refuseToViewShareDesktop( VNumber chat_id, VNumber from_user_id, VNumber to_user_id )
 {
-  /*
-  Connection* c = connection( user_id );
-  if( c && c->isConnected() )
+  Chat c = ChatManager::instance().chat( chat_id );
+  User to_user = UserManager::instance().findUser( to_user_id );
+  User from_user = UserManager::instance().findUser( from_user_id );
+  if( !c.isValid() || !to_user.isValid() || !from_user.isValid() )
   {
-    Message m = Protocol::instance().refuseToViewDesktopShared( cmd );
-    c->sendMessage( m );
-  }*/
+    qWarning() << "Invalid to user" << to_user_id << "or from user" << from_user_id << "or chat" << chat_id << "found in Core::refuseToViewShareDesktop(...)";
+    return;
+  }
+
+  QString sHtmlMsg;
+  if( from_user.isLocal() )
+  {
+    Message m = Protocol::instance().refuseToViewDesktopShared( c );
+    sendMessageToLocalNetwork( to_user, m );
+    sHtmlMsg = tr( "%1 You have refused to view shared desktop from %2." ).arg( IconManager::instance().toHtml( "desktop-share-refused.png", "*G*" ), to_user.name() );
+    qDebug() << "You have refused to view desktop shared by" << qPrintable( to_user.name() );
+  }
+  else
+  {
+    sHtmlMsg = tr( "%1 %2 has refused to view your shared desktop." ).arg( IconManager::instance().toHtml( "desktop-share-refused.png", "*G*" ), from_user.name() );
+    qDebug() << qPrintable( to_user.name() ) << "has refused to view your shared desktop";
+  }
+
+  dispatchSystemMessage( chat_id, from_user.id(), sHtmlMsg, DispatchToChat, ChatMessage::System );
+}
+
+bool Core::shareDesktopIsActive( VNumber chat_id ) const
+{
+  if( chat_id == ID_INVALID )
+    return mp_shareDesktop->isActive();
+  else
+    return mp_shareDesktop->isActive() && mp_shareDesktop->chatId() == chat_id;
 }
 
 void Core::onShareDesktopDataReady( const QByteArray& pix_data )
 {
-  const QList<VNumber>& chat_id_list = mp_shareDesktop->chatIdList();
-  if( chat_id_list.isEmpty() )
+  if( !mp_shareDesktop->isActive() )
+    return;
+
+  if( mp_shareDesktop->userIdList().isEmpty() )
+    return;
+
+  if( !mp_shareDesktop->hasChat() )
+    return;
+
+  Chat c_tmp = ChatManager::instance().chat( mp_shareDesktop->chatId() );
+  if( !c_tmp.isValid() )
   {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Core received image data from desktop share but no chat is present in list";
-#endif
+    stopShareDesktop();
     return;
   }
 
-  QList<VNumber> contacted_user_id_list;
-  foreach( VNumber chat_id, chat_id_list )
+  Message m = Protocol::instance().shareDesktopDataToMessage( c_tmp, pix_data );
+  foreach( VNumber user_id, mp_shareDesktop->userIdList() )
   {
-    if( chat_id == ID_DEFAULT_CHAT )
-      continue;
-
-    Chat c_tmp = ChatManager::instance().chat( chat_id );
-    if( !c_tmp.isValid() )
-    {
-      removeChatFromDesktopShare( chat_id );
-      continue;
-    }
-
-    Message m = Protocol::instance().shareDesktopDataToMessage( c_tmp, pix_data );
-
-    foreach( VNumber user_id, c_tmp.usersId() )
-    {
-      if( user_id == ID_LOCAL_USER )
-        continue;
-
-      if( !contacted_user_id_list.contains( user_id ) )
-      {
-        contacted_user_id_list.append( user_id );
-        Connection* c = connection( user_id );
-        if( c && c->isConnected() )
-          c->sendMessage( m );
-      }
-    }
-  }
-
-  if( contacted_user_id_list.isEmpty() )
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Core received image data from desktop share but no user is present in list";
-#endif
-    mp_shareDesktop->clearChats();
-    return;
+    Connection* c = connection( user_id );
+    if( c && c->isConnected() )
+      c->sendMessage( m );
   }
 }

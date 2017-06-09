@@ -110,7 +110,7 @@ Chat Core::createGroupChat( const User& u, const Group& g, bool broadcast_messag
   {
     sHtmlMsg = tr( "%1 You have created group chat %2." ).arg( IconManager::instance().toHtml( "group-create.png", "*G*" ), QString( "<b>%1</b>" ).arg( c.name() ) );
     c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
-    c.setLastModified();
+    c.setLastModifiedToNow();
   }
 
   if( !u.isLocal() )
@@ -186,9 +186,14 @@ bool Core::changeGroupChat( const User& u, const Group& g )
 
   if( chat_changed )
   {
-    qDebug() << "Changing group chat" << qPrintable( c.name() ) << "by user" << qPrintable( u.name() );
-    if( u.isLocal() )
-      c.setLastModified();
+    qDebug() << "Changing group chat" << qPrintable( c.name() ) << "by user" << qPrintable( u.path() );
+    if( !u.isLocal() )
+    {
+      if( g.lastModified().isValid() )
+        c.setLastModified( g.lastModified() );
+    }
+    else
+      c.setLastModifiedToNow();
     ChatManager::instance().setChat( c );
     emit chatChanged( c );
 

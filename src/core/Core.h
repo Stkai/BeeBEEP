@@ -99,11 +99,13 @@ public:
   void sendShareBoxRequest( VNumber, const QString&, bool create_folder );
   void downloadFromShareBox( VNumber from_user_id, const FileInfo&, const QString& to_path );
   void uploadToShareBox( VNumber to_user_id, const FileInfo&, const QString& to_path );
+
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-  void addChatToDesktopShare( VNumber );
-  void removeChatFromDesktopShare( VNumber );
-  void refuseDesktopShare( const User&, const Chat& );
-  bool chatIsInDesktopShare( VNumber ) const;
+  /* CoreShareDesktop */
+  bool startShareDesktop( VNumber chat_id );
+  void stopShareDesktop();
+  void refuseToViewShareDesktop( VNumber chat_id, VNumber from_user_id, VNumber to_user_id );
+  bool shareDesktopIsActive( VNumber ) const;
 #endif
 
 public slots:
@@ -127,10 +129,6 @@ public slots:
   void sendFileShareRequestToAll();
   void cancelFileTransfer( VNumber );
   void removeAllPathsFromShare();
-#ifdef BEEBEEP_USE_SHAREDESKTOP
-  void startShareDesktop();
-  void stopShareDesktop();
-#endif
 
 signals:
   void userChanged( const User& );
@@ -158,7 +156,7 @@ signals:
   void localUserIsBuzzedBy( const User& );
   void newSystemStatusMessage( const QString&, int );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-  void shareDesktopImageAvailable( const User&, const QPixmap& );
+  void shareDesktopImageAvailable( const User&, const Chat&, const QPixmap& );
 #endif
 
 protected slots:
@@ -222,7 +220,7 @@ protected:
   void parseShareBoxMessage( const User&, const Message& );
   void parseBuzzMessage( const User&, const Message& );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-  void parseDesktopShareMessage( const User&, const Message& );
+  void parseShareDesktopMessage( const User&, const Message& );
 #endif
 
   /* CoreUser */

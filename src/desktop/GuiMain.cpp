@@ -136,7 +136,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( newSystemStatusMessage( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-  connect( mp_core, SIGNAL( shareDesktopImageAvailable( const User&, const QPixmap& ) ), this, SLOT( onShareDesktopImageAvailable( const User&, const QPixmap& ) ) );
+  connect( mp_core, SIGNAL( shareDesktopImageAvailable( const User&, const Chat&, const QPixmap& ) ), this, SLOT( onShareDesktopImageAvailable( const User&, const Chat&, const QPixmap& ) ) );
 #endif
 
   connect( mp_fileTransfer, SIGNAL( transferCancelled( VNumber ) ), mp_core, SLOT( cancelFileTransfer( VNumber ) ) );
@@ -3722,11 +3722,11 @@ void GuiMain::showRestartApplicationAlertMessage()
 }
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-void GuiMain::onShareDesktopImageAvailable( const User& u, const QPixmap& pix )
+void GuiMain::onShareDesktopImageAvailable( const User& u, const Chat& c, const QPixmap& pix )
 {
   foreach( GuiShareDesktop* gsd, m_desktops )
   {
-    if( gsd->ownerId() == u.id() )
+    if( gsd->userId() == u.id() )
     {
       gsd->updatePixmap( pix );
       return;
@@ -3734,8 +3734,9 @@ void GuiMain::onShareDesktopImageAvailable( const User& u, const QPixmap& pix )
   }
 
   GuiShareDesktop* new_gui = new GuiShareDesktop;
-  connect( new_gui, SIGNAL( shareDesktopClosed( VNumber ) ), this, SLOT( onShareDesktopCloseEvent( VNumber ) ) );
-  new_gui->setOwner( u );
+  connect( new_gui, SIGNAL( shareDesktopClosed( VNumber, VNumber ) ), this, SLOT( onShareDesktopCloseEvent( VNumber, VNumber ) ) );
+  new_gui->setUser( u );
+  new_gui->setChatId( c.id() );
   new_gui->setGeometry( 30, 30, 800, 600 );
   new_gui->show();
   new_gui->showMinimized();
@@ -3744,12 +3745,14 @@ void GuiMain::onShareDesktopImageAvailable( const User& u, const QPixmap& pix )
   m_desktops.append( new_gui );
 }
 
-void GuiMain::onShareDesktopCloseEvent( VNumber user_id )
+void GuiMain::onShareDesktopCloseEvent( VNumber user_id, VNumber chat_id )
 {
+  mp_core->refuseToViewShareDesktop( chat_id, ID_LOCAL_USER, user_id );
+
   QList<GuiShareDesktop*>::iterator it = m_desktops.begin();
   while( it != m_desktops.end() )
   {
-    if( (*it)->ownerId() == user_id )
+    if( (*it)->userId() == user_id )
     {
       (*it)->disconnect();
       (*it)->deleteLater();
@@ -3764,7 +3767,7 @@ void GuiMain::onShareDesktopRequestFromChat( VNumber chat_id, bool enable_deskto
   if( chat_id == ID_DEFAULT_CHAT )
     return;
 
-  if( mp_core->chatIsInDesktopShare( chat_id ) == enable_desktop_sharing )
+  if( mp_core->shareDesktopIsActive( ID_INVALID ) == enable_desktop_sharing )
     return;
 
   Chat c = ChatManager::instance().chat( chat_id );
@@ -3774,12 +3777,12 @@ void GuiMain::onShareDesktopRequestFromChat( VNumber chat_id, bool enable_deskto
                                tr( "Do you really want to share your desktop with %1?" ).arg( c.name() ),
                                tr( "Yes" ), tr( "No" ), QString::null, 0, 1 ) == 1 )
       return;
-    mp_core->addChatToDesktopShare( chat_id );
+
+    if( !mp_core->startShareDesktop( chat_id ) )
+    {}
   }
   else
-  {
-    mp_core->removeChatFromDesktopShare( chat_id );
-  }
+    mp_core->stopShareDesktop();
 }
 
 #endif

@@ -103,14 +103,9 @@ void ShareDesktopJob::makeScreenshot()
   screen_shot = QPixmap();
   QByteArray pix_hash = QCryptographicHash::hash( pix_bytes, QCryptographicHash::Sha1 );
 
-  static int counter = 0;
   if( pix_hash != m_lastImageHash )
   {
     m_lastImageHash = pix_hash;
     emit imageAvailable( pix_bytes );
-    counter++;
-    if( counter > 5 )
-      stopJob();
   }
-
 }
