@@ -155,5 +155,6 @@
         <file>images/theme.png</file>
         <file>images/connection.png</file>
         <file>images/desktop-share.png</file>
+        <file>images/desktop-share-refused.png</file>
     </qresource>
 </RCC>
