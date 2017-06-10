@@ -51,6 +51,7 @@ bool ShareDesktop::start( const Chat& c )
   BeeApplication* bee_app = (BeeApplication*)qApp;
   bee_app->addJob( mp_job );
   QMetaObject::invokeMethod( mp_job, "startJob", Qt::QueuedConnection );
+  return true;
 }
 
 void ShareDesktop::stop()

@@ -189,7 +189,7 @@ void GuiFloatingChat::updateChatMember( const Chat& c, const User& u )
   act_user->setIcon( Bee::avatarForUser( u, QSize( avatar_size, avatar_size ), Settings::instance().showUserPhoto() ) );
   QString user_tooltip = Bee::toolTipForUser( u, true );
   if( !u.isLocal() && u.protocolVersion() >= 63 && !c.userHasReadMessages( u.id() ) )
-    user_tooltip += tr( "%1 has not read last messages" ).arg( u.name() );
+    user_tooltip += QString( "\n%1" ).arg( tr( "%1 has not read last messages" ).arg( u.name() ) );
 
   act_user->setToolTip( user_tooltip.trimmed() );
   act_user->setEnabled( u.isStatusConnected() );

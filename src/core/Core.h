@@ -72,6 +72,7 @@ public:
   void toggleUserFavorite( VNumber );
   bool removeOfflineUser( VNumber );
   void changeUserColor( VNumber, const QString& );
+  void removeOldUsers();
 
   /* CoreChat */
   void createPrivateChat( const User& );

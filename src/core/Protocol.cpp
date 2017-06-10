@@ -593,6 +593,7 @@ User Protocol::createTemporaryUser( const UserRecord& ur )
   if( ur.hash().isEmpty() )
     u.setHash( newMd5Id() );
   u.setStatus( User::Offline );
+  u.setIsFavorite( ur.isFavorite() );
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Temporary user" << u.id() << qPrintable( u.path() ) << "created with account" << qPrintable( u.accountName() ) << "and hash" << qPrintable( u.hash() );
 #endif
@@ -616,6 +617,7 @@ QString Protocol::saveUserRecord( const UserRecord& ur, bool add_extras ) const
     sl << ur.color();
     sl << ur.hash();
     sl << ur.domainName();
+    sl << ur.lastConnection().toString( Qt::ISODate );
   }
   return sl.join( DATA_FIELD_SEPARATOR );
 }
@@ -686,6 +688,12 @@ UserRecord Protocol::loadUserRecord( const QString& s ) const
     qDebug() << "User" << qPrintable( ur.name() ) << "has domain name saved:" << qPrintable( ur.domainName() );
   }
 
+  if( !sl.isEmpty() )
+  {
+    ur.setLastConnection( QDateTime::fromString( sl.takeFirst(), Qt::ISODate ) );
+    qDebug() << "User" << qPrintable( ur.name() ) << "has last connection date saved:" << qPrintable( ur.lastConnection().toString( Qt::ISODate ) );
+  }
+
   return ur;
 }
 
@@ -699,6 +707,10 @@ QString Protocol::saveUser( const User& u ) const
   ur.setColor( u.color() );
   ur.setHash( u.hash() );
   ur.setDomainName( u.domainName() );
+  if( u.lastConnection().isValid() )
+    ur.setLastConnection( u.lastConnection() );
+  else
+    ur.setLastConnection( QDateTime::currentDateTime() );
   return saveUserRecord( ur, true );
 }
 
@@ -709,7 +721,8 @@ User Protocol::loadUser( const QString& s )
     return User();
 
   User u = createTemporaryUser( ur );
-  u.setIsFavorite( ur.isFavorite() );
+  if( !u.lastConnection().isValid() )
+    u.setLastConnection( QDateTime::currentDateTime() );
   if( ColorManager::instance().isValidColor( ur.color() ) )
     ColorManager::instance().setColorSelected( ur.color() );
   return u;

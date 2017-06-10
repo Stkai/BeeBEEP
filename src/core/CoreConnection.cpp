@@ -190,6 +190,7 @@ void Core::closeConnection( Connection *c )
     {
       qDebug() << "User" << qPrintable( u.path() ) << "goes offline";
       u.setStatus( User::Offline );
+      u.setLastConnection( QDateTime::currentDateTime() );
       UserManager::instance().setUser( u );
 
       emit userChanged( u );
@@ -318,6 +319,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
   if( !ColorManager::instance().isValidColor( u.color() ) || u.color() == QString( "#000000" ) )
     u.setColor( ColorManager::instance().unselectedQString() );
   u.setProtocolVersion( c->protoVersion() );
+  u.setLastConnection( QDateTime::currentDateTime() );
   UserManager::instance().setUser( u );
 
 #ifdef BEEBEEP_DEBUG

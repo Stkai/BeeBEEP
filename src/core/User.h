@@ -75,6 +75,8 @@ public:
   inline int protocolVersion() const;
   inline void setStatusChangedIn( const QDateTime& );
   inline const QDateTime& statusChangedIn() const;
+  inline void setLastConnection( const QDateTime& );
+  inline const QDateTime& lastConnection() const;
 
   inline QString path() const;
   inline QString accountPath() const;
@@ -99,6 +101,7 @@ private:
   QString m_qtVersion;
   int m_protocolVersion;
   QDateTime m_statusChangedIn;
+  QDateTime m_lastConnection;
 
 };
 
@@ -139,6 +142,8 @@ inline void User::setProtocolVersion( int new_value ) { m_protocolVersion = new_
 inline int User::protocolVersion() const { return m_protocolVersion; }
 inline void User::setStatusChangedIn( const QDateTime& new_value ) { m_statusChangedIn = new_value; }
 inline const QDateTime& User::statusChangedIn() const { return m_statusChangedIn; }
+inline void User::setLastConnection( const QDateTime& new_value ) { m_lastConnection = new_value; }
+inline const QDateTime& User::lastConnection() const { return m_lastConnection; }
 inline QString User::path() const { return QString( "%1@%2" ).arg( name().toLower(), m_networkAddress.toString() ); }
 inline QString User::accountPath() const { return m_domainName.isEmpty() ? m_accountName : QString( "%1@%2" ).arg( m_accountName, m_domainName ); }
 

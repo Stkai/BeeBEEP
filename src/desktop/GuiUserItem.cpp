@@ -147,7 +147,7 @@ bool GuiUserItem::updateUser( const User& u )
   else
   {
     tool_tip = Bee::toolTipForUser( u, false );
-    tool_tip += QString( "(%1)" ).arg( QObject::tr( "Click to send a private message" ) );
+    tool_tip += QString( "\n<%1>" ).arg( QObject::tr( "Click to send a private message" ) );
     user_priority = u.isFavorite() ? 100 : 10000;
     user_priority += u.isStatusConnected() ? (1000*u.status()) : 10000000;
   }

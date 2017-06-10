@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -426,6 +426,22 @@
         <source>Network adapter not found</source>
         <translation>Scheda di rete non trovata</translation>
     </message>
+    <message>
+        <source>%1 You start to share desktop with %2.</source>
+        <translation>%1 Hai iniziato a condividere il tuo desktop con %2.</translation>
+    </message>
+    <message>
+        <source>%1 You stop to share desktop with %2.</source>
+        <translation>%1 Hai terminato di condividere il tuo desktop con %2.</translation>
+    </message>
+    <message>
+        <source>%1 You have refused to view shared desktop from %2.</source>
+        <translation>%1 Hai rifiutato di vedere il desktop condiviso da %2.</translation>
+    </message>
+    <message>
+        <source>%1 %2 has refused to view your shared desktop.</source>
+        <translation>%1 %2 ha rifiutato di vedere il tuo desktop condiviso.</translation>
+    </message>
 </context>
 <context>
     <name>File</name>
@@ -843,6 +859,10 @@
     <message>
         <source>Do you want to restore the default font?</source>
         <translation>Vuoi ripristinare il carattere predefinito?</translation>
+    </message>
+    <message>
+        <source>Share your desktop</source>
+        <translation>Condivi il tuo desktop</translation>
     </message>
 </context>
 <context>
@@ -2235,6 +2255,10 @@ Inserisci un nome differente.</translation>
         <source>You have new message</source>
         <translation>Hai un nuovo messaggio</translation>
     </message>
+    <message>
+        <source>Do you really want to share your desktop with %1?</source>
+        <translation>Vuoi condividere il tuo desktop con %1?</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -2797,7 +2821,7 @@ Inserisci un nome differente.</translation>
     <name>GuiShareDesktop</name>
     <message>
         <source>Desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Desktop</translation>
     </message>
 </context>
 <context>
@@ -3529,6 +3553,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Unknown</source>
         <translation>Sconosciuto</translation>
+    </message>
+    <message>
+        <source>last connection</source>
+        <translation>ultima connessione</translation>
     </message>
 </context>
 <context>

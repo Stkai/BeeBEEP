@@ -52,6 +52,8 @@ public:
   inline const QString& hash() const;
   inline void setDomainName( const QString& );
   inline const QString& domainName() const;
+  inline void setLastConnection( const QDateTime& );
+  inline const QDateTime& lastConnection() const;
 
 private:
   QString m_name;
@@ -61,6 +63,7 @@ private:
   QString m_color;
   QString m_hash;
   QString m_domainName;
+  QDateTime m_lastConnection;
 
 };
 
@@ -81,5 +84,7 @@ inline void UserRecord::setHash( const QString& new_value ) { m_hash = new_value
 inline const QString& UserRecord::hash() const { return m_hash; }
 inline void UserRecord::setDomainName( const QString& new_value ) { m_domainName = new_value; }
 inline const QString& UserRecord::domainName() const { return m_domainName; }
+inline void UserRecord::setLastConnection( const QDateTime& new_value ) { m_lastConnection = new_value; }
+inline const QDateTime& UserRecord::lastConnection() const { return m_lastConnection; }
 
 #endif // BEEBEEP_USERRECORD_H

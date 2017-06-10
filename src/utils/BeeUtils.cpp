@@ -696,10 +696,10 @@ QString Bee::toolTipForUser( const User& u, bool only_status )
 {
   QString tool_tip = u.isLocal() ? QObject::tr( "You are %1" ).arg( Bee::userStatusToString( u.status() ) ) : QObject::tr( "%1 is %2" ).arg( u.name(), Bee::userStatusToString( u.status() ) );
 
-  if( u.statusChangedIn().isValid() )
-    tool_tip += QString( " (%1 %2)" ).arg( QObject::tr( "last update" ) ).arg( u.statusChangedIn().date() == QDate::currentDate() ? u.statusChangedIn().time().toString( Qt::SystemLocaleShortDate ) : u.statusChangedIn().toString( Qt::SystemLocaleShortDate ) );
+  if( only_status )
+    return tool_tip;
 
-  if( !only_status && u.isStatusConnected() )
+  if( u.isStatusConnected() )
   {
     if( u.statusDescription().isEmpty() )
       tool_tip += QString( "\n" );
@@ -712,9 +712,14 @@ QString Bee::toolTipForUser( const User& u, bool only_status )
       tool_tip += u.vCard().info();
       tool_tip += QString( "\n~~~\n" );
     }
+
+    if( u.statusChangedIn().isValid() )
+      tool_tip += QString( "(%1 %2)" ).arg( QObject::tr( "last update" ) ).arg( u.statusChangedIn().date() == QDate::currentDate() ? u.statusChangedIn().time().toString( Qt::SystemLocaleShortDate ) : u.statusChangedIn().toString( Qt::SystemLocaleShortDate ) );
   }
   else
-    tool_tip += QString( "\n" );
+  {
+    tool_tip += QString( " (%1 %2)" ).arg( QObject::tr( "last connection" ) ).arg( u.lastConnection().date() == QDate::currentDate() ? u.lastConnection().time().toString( Qt::SystemLocaleShortDate ) : u.statusChangedIn().toString( Qt::SystemLocaleShortDate ) );
+  }
 
   return tool_tip;
 }

@@ -157,6 +157,8 @@ Settings::Settings()
 
   m_iconSourcePath = "";
   m_emoticonSourcePath = "";
+
+  m_maxDaysOfUserInactivity = 31;
 }
 
 void Settings::createApplicationUuid()
@@ -865,6 +867,7 @@ void Settings::load()
   m_maxUserStatusDescriptionInList = sets->value( "MaxStatusDescriptionInList", m_maxUserStatusDescriptionInList ).toInt();
   m_presetMessages = sets->value( "PresetMessages", QMap<QString,QVariant>() ).toMap();
   m_refusedChats = sets->value( "RefusedChats", QStringList() ).toStringList();
+  m_maxDaysOfUserInactivity = sets->value( "MaxDaysOfUserInactivity", m_maxDaysOfUserInactivity ).toInt();
   sets->endGroup();
 
   sets->beginGroup( "VCard" );
@@ -1189,6 +1192,7 @@ void Settings::save()
   sets->setValue( "MaxStatusDescriptionInList", m_maxUserStatusDescriptionInList );
   sets->setValue( "PresetMessages", m_presetMessages );
   sets->setValue( "RefusedChats", m_refusedChats );
+  sets->setValue( "MaxDaysOfUserInactivity", m_maxDaysOfUserInactivity );
   sets->endGroup();
 
   sets->beginGroup( "VCard" );

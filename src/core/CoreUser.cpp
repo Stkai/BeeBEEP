@@ -488,3 +488,22 @@ void Core::changeUserColor( VNumber user_id, const QString& user_color )
     sendMessageToAllConnectedUsers( Protocol::instance().localVCardMessage() );
   emit userChanged( u );
 }
+
+void Core::removeOldUsers()
+{
+  QDateTime dt_today = QDateTime::currentDateTime();
+  UserList ul_users = UserManager::instance().userList();
+  int inactivity_days = 0;
+  foreach( User u, ul_users.toList() )
+  {
+    if( !u.isLocal() && u.lastConnection().isValid() )
+    {
+      inactivity_days = u.lastConnection().daysTo( dt_today );
+      if( inactivity_days > Settings::instance().maxDaysOfUserInactivity() )
+      {
+        qDebug() << "Removing user" << qPrintable( u.name() ) << "due to inactivity of" << inactivity_days << "days";
+        removeOfflineUser( u.id() );
+      }
+    }
+  }
+}
