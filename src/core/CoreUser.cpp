@@ -245,6 +245,9 @@ void Core::loadUsersAndGroups()
   }
   */
 
+  if( Settings::instance().removeInactiveUsers() )
+    removeInactiveUsers();
+
   if( !Settings::instance().refusedChats().isEmpty() )
   {
     ChatRecord cr;
@@ -383,12 +386,8 @@ bool Core::areUsersConnected( const QList<VNumber>& users_id ) const
   return true;
 }
 
-bool Core::removeOfflineUser( VNumber user_id )
+bool Core::userCanBeRemoved( const User& u )
 {
-  User u = UserManager::instance().findUser( user_id );
-  if( !u.isValid() )
-    return true;
-
   if( isUserConnected( u.id() ) )
   {
     qWarning() << "User" << qPrintable( u.name() ) << "is connected and cannot be removed from list";
@@ -400,6 +399,18 @@ bool Core::removeOfflineUser( VNumber user_id )
     qWarning() << "User" << qPrintable( u.name() ) << "is in a group chat and cannot be removed from list";
     return false;
   }
+
+  return true;
+}
+
+bool Core::removeOfflineUser( VNumber user_id )
+{
+  User u = UserManager::instance().findUser( user_id );
+  if( !u.isValid() )
+    return true;
+
+  if( !userCanBeRemoved( u ) )
+    return false;
 
   if( UserManager::instance().removeUser( u ) )
   {
@@ -489,7 +500,7 @@ void Core::changeUserColor( VNumber user_id, const QString& user_color )
   emit userChanged( u );
 }
 
-void Core::removeOldUsers()
+void Core::removeInactiveUsers()
 {
   QDateTime dt_today = QDateTime::currentDateTime();
   UserList ul_users = UserManager::instance().userList();

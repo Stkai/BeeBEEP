@@ -216,6 +216,7 @@ private:
   GuiFloatingChat* floatingChat( VNumber ) const;
   QWidget* activeWindow() const;
   void setChatMessagesToShowInAction( QAction* );
+  void setMaxInactivityDaysInAction( QAction* );
   void loadUserStatusRecentlyUsed();
   void setUserStatusSelected( int );
   void initShortcuts();
@@ -289,6 +290,7 @@ private:
   QAction* mp_actBeepOnNewMessage;
   QActionGroup* mp_actGroupRecognizeUsers;
   QAction* mp_actSelectEmoticonSourcePath;
+  QAction* mp_actRemoveInactiveUsers;
 
   QMenu* mp_menuNetworkStatus;
   QAction* mp_actHostAddress;

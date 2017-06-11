@@ -718,7 +718,8 @@ QString Bee::toolTipForUser( const User& u, bool only_status )
   }
   else
   {
-    tool_tip += QString( " (%1 %2)" ).arg( QObject::tr( "last connection" ) ).arg( u.lastConnection().date() == QDate::currentDate() ? u.lastConnection().time().toString( Qt::SystemLocaleShortDate ) : u.statusChangedIn().toString( Qt::SystemLocaleShortDate ) );
+    if( u.lastConnection().isValid() )
+      tool_tip += QString( " (%1 %2)" ).arg( QObject::tr( "last connection" ) ).arg( u.lastConnection().date() == QDate::currentDate() ? u.lastConnection().time().toString( Qt::SystemLocaleShortDate ) : u.lastConnection().toString( Qt::SystemLocaleShortDate ) );
   }
 
   return tool_tip;

@@ -72,7 +72,7 @@ public:
   void toggleUserFavorite( VNumber );
   bool removeOfflineUser( VNumber );
   void changeUserColor( VNumber, const QString& );
-  void removeOldUsers();
+  bool userCanBeRemoved( const User& );
 
   /* CoreChat */
   void createPrivateChat( const User& );
@@ -231,6 +231,7 @@ protected:
   void addGroup( const Group& );
   void sendLocalConnectedUsersTo( const User& );
   bool isUserConnected( const NetworkAddress& ) const; // to prevent multiple connections in Core::newPeerFound(...)
+  void removeInactiveUsers();
 
   /* CoreChat */
   void createDefaultChat();

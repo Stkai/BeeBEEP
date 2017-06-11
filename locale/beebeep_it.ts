@@ -2259,6 +2259,14 @@ Inserisci un nome differente.</translation>
         <source>Do you really want to share your desktop with %1?</source>
         <translation>Vuoi condividere il tuo desktop con %1?</translation>
     </message>
+    <message>
+        <source>Please select the number of inactive days before user is removed</source>
+        <translation>Seleziona il numero di giorni di inattività di un utente prima di cancellarlo</translation>
+    </message>
+    <message>
+        <source>Remove users after %1 days of inactivity</source>
+        <translation>Cancella gli utenti dopo %1 giorni di inattività</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

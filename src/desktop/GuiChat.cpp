@@ -153,14 +153,11 @@ void GuiChat::setupToolBar( QToolBar* chat_bar )
   mp_actUseReturnToSendMessage = chat_bar->addAction( IconManager::instance().icon( "key-return.png" ), tr( "Use Return key to send message" ), this, SLOT( onUseReturnToSendMessageClicked() ) );
   mp_actUseReturnToSendMessage->setCheckable( true );
   updateActionsOnFocusChanged();
-  chat_bar->addSeparator();
   mp_actSendFile = chat_bar->addAction( IconManager::instance().icon( "send-file.png" ), tr( "Send file" ), this, SLOT( sendFile() ) );
   mp_actSendFolder = chat_bar->addAction( IconManager::instance().icon( "send-folder.png" ), tr( "Send folder" ), this, SLOT( sendFolder() ) );
-  chat_bar->addSeparator();
   chat_bar->addAction( mp_actSaveAs );
   chat_bar->addAction( mp_actPrint );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-  chat_bar->addSeparator();
   chat_bar->addAction( mp_actShareDesktop );
 #endif
 

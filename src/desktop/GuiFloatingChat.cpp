@@ -78,7 +78,6 @@ GuiFloatingChat::GuiFloatingChat( Core* p_core, QWidget *parent )
   actViewPresetMessageList->setIcon( IconManager::instance().icon( "preset-message.png" ) );
   actViewPresetMessageList->setToolTip( tr( "Show the preset messages panel" ) );
   mp_barChat->insertAction( mp_barChat->actions().first(), actViewPresetMessageList );
-  mp_barChat->addSeparator();
   mp_actSaveWindowGeometry = mp_barChat->addAction( IconManager::instance().icon( "save-window.png" ), tr( "Save window's geometry" ), this, SLOT( saveGeometryAndState() ) );
   mp_dockPresetMessageList->hide();
 

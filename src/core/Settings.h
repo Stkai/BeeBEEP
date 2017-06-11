@@ -365,6 +365,8 @@ public:
   inline int maxUserStatusDescriptionInList() const;
   inline void setMaxDaysOfUserInactivity( int );
   inline int maxDaysOfUserInactivity() const;
+  inline void setRemoveInactiveUsers( bool );
+  inline bool removeInactiveUsers() const;
 
   inline void setSaveUserList( bool );
   inline bool saveUserList() const;
@@ -637,6 +639,7 @@ private:
   QStringList m_userStatusList;
   int m_maxUserStatusDescriptionInList;
   int m_maxDaysOfUserInactivity;
+  bool m_removeInactiveUsers;
 
   bool m_saveUserList;
   QStringList m_userList;
@@ -884,6 +887,8 @@ inline const QStringList& Settings::workgroups() const { return m_workgroups; }
 inline int Settings::maxUserStatusDescriptionInList() const { return m_maxUserStatusDescriptionInList; }
 inline void Settings::setMaxDaysOfUserInactivity( int new_value ) { m_maxDaysOfUserInactivity = new_value; }
 inline int Settings::maxDaysOfUserInactivity() const { return m_maxDaysOfUserInactivity; }
+inline void Settings::setRemoveInactiveUsers( bool new_value ) { m_removeInactiveUsers = new_value; }
+inline bool Settings::removeInactiveUsers() const { return m_removeInactiveUsers; }
 inline void Settings::setShowUserStatusBackgroundColor( bool new_value ) { m_showUserStatusBackgroundColor = new_value; }
 inline bool Settings::showUserStatusBackgroundColor() const { return m_showUserStatusBackgroundColor; }
 inline void Settings::setShowUserStatusDescription( bool new_value ) { m_showUserStatusDescription = new_value; }

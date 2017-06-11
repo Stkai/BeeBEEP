@@ -868,6 +868,7 @@ void Settings::load()
   m_presetMessages = sets->value( "PresetMessages", QMap<QString,QVariant>() ).toMap();
   m_refusedChats = sets->value( "RefusedChats", QStringList() ).toStringList();
   m_maxDaysOfUserInactivity = sets->value( "MaxDaysOfUserInactivity", m_maxDaysOfUserInactivity ).toInt();
+  m_removeInactiveUsers = sets->value( "RemoveInactiveUsers", true ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "VCard" );
@@ -1193,6 +1194,7 @@ void Settings::save()
   sets->setValue( "PresetMessages", m_presetMessages );
   sets->setValue( "RefusedChats", m_refusedChats );
   sets->setValue( "MaxDaysOfUserInactivity", m_maxDaysOfUserInactivity );
+  sets->setValue( "RemoveInactiveUsers", m_removeInactiveUsers );
   sets->endGroup();
 
   sets->beginGroup( "VCard" );

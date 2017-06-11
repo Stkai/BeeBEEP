@@ -763,6 +763,11 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().autoUserAway() );
   act->setData( 20 );
+  mp_actRemoveInactiveUsers = mp_menuUsersSettings->addAction( "", this, SLOT( settingsChanged() ) );
+  mp_actRemoveInactiveUsers->setCheckable( true );
+  mp_actRemoveInactiveUsers->setChecked( Settings::instance().removeInactiveUsers() );
+  mp_actRemoveInactiveUsers->setData( 33 );
+  setMaxInactivityDaysInAction( mp_actRemoveInactiveUsers );
 
   mp_menuChatSettings = new QMenu( tr( "Chat" ), this );
   mp_menuChatSettings->setIcon( IconManager::instance().icon( "chat.png" ) );
@@ -1306,9 +1311,28 @@ void GuiMain::settingsChanged( QAction* act )
     refresh_chat = true;
   case 32:
     Settings::instance().setSaveUserList( act->isChecked() );
+    mp_actRemoveInactiveUsers->setEnabled( act->isChecked() );
     break;
   case 33:
-    // free
+    {
+      Settings::instance().setRemoveInactiveUsers( act->isChecked() );
+      if( act->isChecked() )
+      {
+#if QT_VERSION >= 0x050000
+        int num_days = QInputDialog::getInt( qApp->activeWindow(), Settings::instance().programName(),
+#else
+        int num_days = QInputDialog::getInteger( qApp->activeWindow(), Settings::instance().programName(),
+#endif
+                                                     tr( "Please select the number of inactive days before user is removed" ),
+                                                     Settings::instance().maxDaysOfUserInactivity(),
+                                                     2, 365, 5, &ok );
+        if( ok )
+        {
+          Settings::instance().setMaxDaysOfUserInactivity( num_days );
+          setMaxInactivityDaysInAction( act );
+        }
+      }
+    }
     break;
   case 34:
     Settings::instance().setBeepOnNewMessageArrived( act->isChecked() );
@@ -1429,6 +1453,12 @@ void GuiMain::settingsChanged( QAction* act )
 void GuiMain::setChatMessagesToShowInAction( QAction* act )
 {
   act->setText( tr( "Show only last %1 messages" ).arg( Settings::instance().chatMessagesToShow() ) );
+}
+
+void GuiMain::setMaxInactivityDaysInAction( QAction* act )
+{
+  act->setText( tr( "Remove users after %1 days of inactivity" ).arg( Settings::instance().maxDaysOfUserInactivity() ) );
+  act->setEnabled( Settings::instance().saveUserList() );
 }
 
 void GuiMain::sendMessage( VNumber chat_id, const QString& msg )

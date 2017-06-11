@@ -108,6 +108,8 @@ MaxStatusDescriptionInList=[integer]
 PresetMessages=[StringList] [3.0.9]
 RefusedChats=[StringList] [4.0.0]
 RecognitionMethod=[integer] see "UserRecognitionMethod" in beebeep.rc for more informations [4.0.0]
+RemoveInactiveUsers=[true/false] remove users inactive after some days (default=true) [4.0.1]
+MaxDaysOfUserInactivity=[integer] number of days before removing users (default=31) [4.0.1]
 
 [VCard]
 NickName= your nickname
@@ -183,7 +185,7 @@ PlayBuzzSound=[true/false] if true a user can send you a buzz alert (default=tru
 ShowChatsInOneWindow=[true/false] if true BeeBEEP opens chats in a single window (default=false) [4.0.0]
 IconSourcePath=[string] folder path for custom icons (default=empty string) [4.0.0]
 EmoticonSourcePath=[string] folder path for custom emoticons (default=empty string) [4.0.0]
-  
+
 [Tools]
 LogToFile=[true/false] enable file logging
 MaxLogLines=[integer] max lines to show in log [4.0.0]
