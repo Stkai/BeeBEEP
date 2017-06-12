@@ -302,6 +302,10 @@ void Core::stop()
     closeConnection( c );
 
   m_connections.clear();
+  checkSavingPaths();
+  saveUsersAndGroups();
+  saveChatMessages();
+  Settings::instance().save();
 
   if( Settings::instance().localUser().isStatusConnected() )
   {
@@ -315,10 +319,6 @@ void Core::stop()
                            Settings::instance().programName() ), DispatchToChat,
                            ChatMessage::Connection );
 
-  checkSavingPaths();
-  saveUsersAndGroups();
-  saveChatMessages();
-  Settings::instance().save();
   qDebug() << "Network core stopped";
   showMessage( tr( "Disconnected" ), 5000 );
 }

@@ -25,11 +25,17 @@
 #include "User.h"
 
 GuiShareDesktop::GuiShareDesktop( QWidget *parent )
- : QWidget( parent ), m_userId( ID_INVALID ), m_chatId( ID_INVALID ), m_lastImage()
+ : QMainWindow( parent ), m_userId( ID_INVALID ), m_chatId( ID_INVALID )
 {
   setObjectName( "GuiShareDesktop" );
-  setupUi( this );
   setWindowIcon( QIcon( ":/images/beebeep.png" ) );
+  mp_scrollArea = new QScrollArea( this );
+  mp_scrollArea->setBackgroundRole( QPalette::Dark );
+  setCentralWidget( mp_scrollArea );
+  mp_lView = new QLabel( this );
+  mp_scrollArea->setWidget( mp_lView );
+  mp_scrollArea->setWidgetResizable( false );
+  m_lastUpdate = QDateTime::currentDateTime();
 }
 
 void GuiShareDesktop::setUser( const User& u )
@@ -40,14 +46,17 @@ void GuiShareDesktop::setUser( const User& u )
 
 void GuiShareDesktop::updatePixmap( const QPixmap& pix )
 {
-  mp_lView->setPixmap( pix.scaled( width()-40, height()-40, Qt::IgnoreAspectRatio ) );
-  m_lastImage = pix;
+  mp_lView->setPixmap( pix );
+  m_lastUpdate = QDateTime::currentDateTime();
 }
 
 void GuiShareDesktop::onUserChanged( const User& u )
 {
   QString s_title = QString( "%1 - %2" ).arg( u.name(), tr( "Desktop" ) );
   setWindowTitle( s_title );
+
+  if( !u.isStatusConnected() )
+    close();
 }
 
 void GuiShareDesktop::closeEvent( QCloseEvent* e )

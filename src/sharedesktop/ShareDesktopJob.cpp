@@ -46,7 +46,7 @@ void ShareDesktopJob::startJob()
   }
 
   m_lastImageHash = "";
-  QMetaObject::invokeMethod( &m_timer, "start", Qt::QueuedConnection );
+  m_timer.start();
 }
 
 void ShareDesktopJob::stopJob()
@@ -54,7 +54,7 @@ void ShareDesktopJob::stopJob()
 #ifdef BEEBEEP_DEBUG
   qDebug() << qPrintable( objectName() ) << "is stopping its job";
 #endif
-  QMetaObject::invokeMethod( &m_timer, "stop", Qt::QueuedConnection );
+  m_timer.stop();
   emit jobCompleted();
 }
 

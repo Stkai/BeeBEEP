@@ -21,21 +21,28 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "BeeApplication.h"
 #include "Chat.h"
 #include "ShareDesktop.h"
 #include "ShareDesktopJob.h"
 
 
 ShareDesktop::ShareDesktop( QObject *parent )
-  : QObject( parent ), m_chatId( ID_INVALID ), m_userIdList(), mp_job( 0 )
+  : QObject( parent ), m_chatId( ID_INVALID ), m_userIdList()
 {
   setObjectName( "ShareDesktop" );
+  mp_job = new ShareDesktopJob( this ); // Same GUI thread because Pixmaps
+  connect( mp_job, SIGNAL( jobCompleted() ), this, SLOT( onJobCompleted() ), Qt::QueuedConnection );
+  connect( mp_job, SIGNAL( imageAvailable( const QByteArray& ) ), this, SLOT( onImageDataAvailable( const QByteArray& ) ), Qt::QueuedConnection );
+}
+
+bool ShareDesktop::isActive() const
+{
+  return mp_job->isRunning();
 }
 
 bool ShareDesktop::start( const Chat& c )
 {
-  if( mp_job )
+  if( isActive() )
   {
     qWarning() << "ShareDesktop is already running. Restart is aborted";
     return false;
@@ -44,26 +51,16 @@ bool ShareDesktop::start( const Chat& c )
   if( !setChat( c ) )
     return false;
 
-  mp_job = new ShareDesktopJob;
-  connect( mp_job, SIGNAL( jobCompleted() ), this, SLOT( onJobCompleted() ), Qt::QueuedConnection );
-  connect( mp_job, SIGNAL( imageAvailable( const QByteArray& ) ), this, SLOT( onImageDataAvailable( const QByteArray& ) ), Qt::QueuedConnection );
-
-  BeeApplication* bee_app = (BeeApplication*)qApp;
-  bee_app->addJob( mp_job );
   QMetaObject::invokeMethod( mp_job, "startJob", Qt::QueuedConnection );
   return true;
 }
 
 void ShareDesktop::stop()
 {
-  if( m_chatId != ID_INVALID )
-  {
-    m_userIdList.clear();
-    m_chatId = ID_INVALID;
-  }
+  if( !isActive() )
+    return;
 
-  if( mp_job )
-    QMetaObject::invokeMethod( mp_job, "stopJob", Qt::QueuedConnection );
+  mp_job->stopJob();
 }
 
 bool ShareDesktop::setChat( const Chat& c )
@@ -95,22 +92,11 @@ bool ShareDesktop::addUserId( VNumber user_id )
 
 void ShareDesktop::onJobCompleted()
 {
-  ShareDesktopJob *sdj = qobject_cast<ShareDesktopJob*>( sender() );
-  if( !sdj )
-  {
-    qWarning() << "ShareDesktop received a signal from invalid ShareDesktopJob instance";
-    return;
-  }
-
-  BeeApplication* bee_app = (BeeApplication*)qApp;
-  bee_app->removeJob( sdj );
-
-  sdj->disconnect();
-  sdj->deleteLater();
-  mp_job = 0;
 #ifdef BEEBEEP_DEBUG
   qDebug() << qPrintable( objectName() ) << "has completed its job";
 #endif
+  m_userIdList.clear();
+  m_chatId = ID_INVALID;
 }
 
 void ShareDesktop::onImageDataAvailable( const QByteArray& pix_data )
@@ -118,6 +104,5 @@ void ShareDesktop::onImageDataAvailable( const QByteArray& pix_data )
 #ifdef BEEBEEP_DEBUG
   qDebug() << qPrintable( objectName() ) << "has image data available";
 #endif
-
   emit shareDesktopDataReady( pix_data );
 }

@@ -38,7 +38,7 @@ public:
 
   bool start( const Chat& );
   void stop();
-  inline bool isActive() const;
+  bool isActive() const;
 
   inline bool hasChat() const;
   inline VNumber chatId() const;
@@ -65,7 +65,6 @@ private:
 };
 
 // Inline Functions
-inline bool ShareDesktop::isActive() const { return mp_job; }
 inline bool ShareDesktop::hasChat() const { return m_chatId != ID_INVALID; }
 inline VNumber ShareDesktop::chatId() const { return m_chatId; }
 inline bool ShareDesktop::removeUserId( VNumber user_id ) { return m_userIdList.removeOne( user_id ); }

@@ -34,6 +34,8 @@ class ShareDesktopJob : public QObject
 public:
   explicit ShareDesktopJob( QObject* parent = 0 );
 
+  bool isRunning() const;
+
 signals:
   void imageAvailable( const QByteArray& );
   void jobCompleted();
@@ -44,9 +46,6 @@ public slots:
 
 protected slots:
   void makeScreenshot();
-
-protected:
-  bool isRunning() const;
 
 private:
   QTimer m_timer;

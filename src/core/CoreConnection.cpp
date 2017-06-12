@@ -32,6 +32,9 @@
 #include "Protocol.h"
 #include "Settings.h"
 #include "UserManager.h"
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  #include "ShareDesktop.h"
+#endif
 
 
 Connection* Core::connection( VNumber user_id ) const
@@ -200,8 +203,13 @@ void Core::closeConnection( Connection *c )
       if( default_chat.removeUser( u.id() ) )
         ChatManager::instance().setChat( default_chat );
 
-      FileShare::instance().removeFromNetwork( c->userId() );
+      FileShare::instance().removeFromNetwork( u.id() );
       emit fileShareAvailable( u );
+
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+      if( mp_shareDesktop->isActive() )
+        mp_shareDesktop->removeUserId( u.id() );
+#endif
     }
     else
       qWarning() << "User" << c->userId() << "not found while closing connection";

@@ -25,11 +25,10 @@
 #define BEEBEEP_GUISHAREDESKTOP_H
 
 #include "Config.h"
-#include "ui_GuiShareDesktop.h"
 class User;
 
 
-class GuiShareDesktop : public QWidget, private Ui::GuiShareDesktopWidget
+class GuiShareDesktop : public QMainWindow
 {
   Q_OBJECT
 
@@ -55,7 +54,9 @@ protected:
 private:
   VNumber m_userId;
   VNumber m_chatId;
-  QPixmap m_lastImage;
+  QScrollArea* mp_scrollArea;
+  QLabel* mp_lView;
+  QDateTime m_lastUpdate;
 
 };
 

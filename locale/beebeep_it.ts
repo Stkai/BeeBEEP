@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -440,7 +440,11 @@
     </message>
     <message>
         <source>%1 %2 has refused to view your shared desktop.</source>
-        <translation>%1 %2 ha rifiutato di vedere il tuo desktop condiviso.</translation>
+        <translation type="obsolete">%1 %2 ha rifiutato di vedere il tuo desktop condiviso.</translation>
+    </message>
+    <message>
+        <source>%1 %2 has closed the view of your shared desktop.</source>
+        <translation>%1 %2 ha chiuso la finestra con il tuo desktop condiviso.</translation>
     </message>
 </context>
 <context>
@@ -3296,6 +3300,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Other informations</source>
         <translation>Altre informazioni</translation>
+    </message>
+    <message>
+        <source>yyyy/MM/dd</source>
+        <translation>dd/MM/yyyy</translation>
     </message>
 </context>
 <context>

@@ -62,6 +62,7 @@ protected slots:
   void filterText( const QString& );
   void clearFilter();
   void showMenuSettings();
+  void onItemEntered( QTreeWidgetItem*, int );
 
 private:
   GuiUserItem* itemFromUserId( VNumber );

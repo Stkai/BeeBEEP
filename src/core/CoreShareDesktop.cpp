@@ -63,6 +63,8 @@ void Core::stopShareDesktop()
 
 void Core::refuseToViewShareDesktop( VNumber chat_id, VNumber from_user_id, VNumber to_user_id )
 {
+  mp_shareDesktop->removeUserId( from_user_id );
+
   Chat c = ChatManager::instance().chat( chat_id );
   User to_user = UserManager::instance().findUser( to_user_id );
   User from_user = UserManager::instance().findUser( from_user_id );
@@ -82,8 +84,8 @@ void Core::refuseToViewShareDesktop( VNumber chat_id, VNumber from_user_id, VNum
   }
   else
   {
-    sHtmlMsg = tr( "%1 %2 has refused to view your shared desktop." ).arg( IconManager::instance().toHtml( "desktop-share-refused.png", "*G*" ), from_user.name() );
-    qDebug() << qPrintable( to_user.name() ) << "has refused to view your shared desktop";
+    sHtmlMsg = tr( "%1 %2 has closed the view of your shared desktop." ).arg( IconManager::instance().toHtml( "desktop-share-refused.png", "*G*" ), from_user.name() );
+    qDebug() << qPrintable( from_user.name() ) << "has closed the view your shared desktop";
   }
 
   dispatchSystemMessage( chat_id, from_user.id(), sHtmlMsg, DispatchToChat, ChatMessage::System );
@@ -102,11 +104,11 @@ void Core::onShareDesktopDataReady( const QByteArray& pix_data )
   if( !mp_shareDesktop->isActive() )
     return;
 
-  if( mp_shareDesktop->userIdList().isEmpty() )
+  if( mp_shareDesktop->userIdList().isEmpty() || !mp_shareDesktop->hasChat() )
+  {
+    stopShareDesktop();
     return;
-
-  if( !mp_shareDesktop->hasChat() )
-    return;
+  }
 
   Chat c_tmp = ChatManager::instance().chat( mp_shareDesktop->chatId() );
   if( !c_tmp.isValid() )

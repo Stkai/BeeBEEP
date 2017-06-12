@@ -2658,6 +2658,10 @@ void GuiMain::onUserChanged( const User& u )
       mp_tabMain->setCurrentWidget( mp_userList );
     }
   }
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  foreach( GuiShareDesktop* gsd, m_desktops )
+    gsd->onUserChanged( u );
+#endif
 }
 
 void GuiMain::onUserRemoved( const User& u )

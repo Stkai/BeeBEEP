@@ -106,7 +106,7 @@ public:
   bool startShareDesktop( VNumber chat_id );
   void stopShareDesktop();
   void refuseToViewShareDesktop( VNumber chat_id, VNumber from_user_id, VNumber to_user_id );
-  bool shareDesktopIsActive( VNumber ) const;
+  bool shareDesktopIsActive( VNumber chat_id ) const;
 #endif
 
 public slots:

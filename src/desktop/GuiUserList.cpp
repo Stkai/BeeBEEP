@@ -61,6 +61,7 @@ GuiUserList::GuiUserList( QWidget* parent )
 
   connect( mp_twUsers, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showUserMenu( const QPoint& ) ) );
   connect( mp_twUsers, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( userItemClicked( QTreeWidgetItem*, int ) ), Qt::QueuedConnection );
+  connect( mp_twUsers, SIGNAL( itemEntered( QTreeWidgetItem*, int ) ), this, SLOT( onItemEntered( QTreeWidgetItem*, int ) ) );
   connect( mp_leFilter, SIGNAL( textChanged( const QString& ) ), this, SLOT( filterText( const QString& ) ) );
   connect( mp_pbClearFilter, SIGNAL( clicked() ), this, SLOT( clearFilter() ) );
   connect( mp_pbSettings, SIGNAL( clicked() ), this, SLOT( showMenuSettings() ) );
@@ -283,4 +284,13 @@ void GuiUserList::updateChat( const Chat& c )
   setUnreadMessages( c.id(), c.unreadMessages() );
   int chat_messages = c.chatMessages() + ChatManager::instance().savedChatSize( c.name() );
   setMessages( c.id(), chat_messages );
+}
+
+void GuiUserList::onItemEntered( QTreeWidgetItem* item, int )
+{
+  if( item )
+  {
+    if( !isActiveWindow() )
+      QToolTip::showText( QCursor::pos(), item->toolTip( 0 ) );
+  }
 }
