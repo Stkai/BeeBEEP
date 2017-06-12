@@ -136,7 +136,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_core, SIGNAL( newSystemStatusMessage( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-  connect( mp_core, SIGNAL( shareDesktopImageAvailable( const User&, const Chat&, const QPixmap& ) ), this, SLOT( onShareDesktopImageAvailable( const User&, const Chat&, const QPixmap& ) ) );
+  connect( mp_core, SIGNAL( shareDesktopImageAvailable( const User&, const QPixmap& ) ), this, SLOT( onShareDesktopImageAvailable( const User&, const QPixmap& ) ) );
 #endif
 
   connect( mp_fileTransfer, SIGNAL( transferCancelled( VNumber ) ), mp_core, SLOT( cancelFileTransfer( VNumber ) ) );
@@ -3389,6 +3389,10 @@ void GuiMain::onTickEvent( int ticks )
     showMessage( tr( "You have new message" ), 1000 );
   }
 
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  foreach( GuiShareDesktop* gsd, m_desktops )
+    gsd->onTickEvent( ticks );
+#endif
   mp_core->onTickEvent( ticks );
 }
 
@@ -3756,38 +3760,45 @@ void GuiMain::showRestartApplicationAlertMessage()
 }
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-void GuiMain::onShareDesktopImageAvailable( const User& u, const Chat& c, const QPixmap& pix )
+void GuiMain::onShareDesktopImageAvailable( const User& u, const QPixmap& pix )
 {
   foreach( GuiShareDesktop* gsd, m_desktops )
   {
     if( gsd->userId() == u.id() )
     {
-      gsd->updatePixmap( pix );
+      if( gsd->isVisible() )
+        gsd->updatePixmap( pix );
       return;
     }
   }
 
   GuiShareDesktop* new_gui = new GuiShareDesktop;
-  connect( new_gui, SIGNAL( shareDesktopClosed( VNumber, VNumber ) ), this, SLOT( onShareDesktopCloseEvent( VNumber, VNumber ) ) );
+  connect( new_gui, SIGNAL( shareDesktopClosed( VNumber ) ), this, SLOT( onShareDesktopCloseEvent( VNumber ) ) );
+  connect( new_gui, SIGNAL( shareDesktopDeleteRequest( VNumber ) ), this, SLOT( onShareDesktopDeleteRequest( VNumber ) ) );
   new_gui->setUser( u );
-  new_gui->setChatId( c.id() );
-  new_gui->setGeometry( 30, 30, 800, 600 );
+  new_gui->setGeometry( 40, 40, qMin( pix.width()+12, qMax( 640, qApp->desktop()->availableGeometry().width()-20 ) ),
+                                qMin( pix.height()+12, qMax( 480, qApp->desktop()->availableGeometry().height()-20 ) ) );
+  new_gui->setPixmapSize( pix.size() );
   new_gui->show();
-  new_gui->showMinimized();
   new_gui->updatePixmap( pix );
-
   m_desktops.append( new_gui );
 }
 
-void GuiMain::onShareDesktopCloseEvent( VNumber user_id, VNumber chat_id )
+void GuiMain::onShareDesktopCloseEvent( VNumber user_id )
 {
-  mp_core->refuseToViewShareDesktop( chat_id, ID_LOCAL_USER, user_id );
+  mp_core->refuseToViewShareDesktop( ID_LOCAL_USER, user_id );
+}
 
+void GuiMain::onShareDesktopDeleteRequest( VNumber user_id )
+{
   QList<GuiShareDesktop*>::iterator it = m_desktops.begin();
   while( it != m_desktops.end() )
   {
     if( (*it)->userId() == user_id )
     {
+#ifdef BEEBEEP_DEBUG
+      qDebug() << "Delete GuiShareDesktop for user" << user_id;
+#endif
       (*it)->disconnect();
       (*it)->deleteLater();
       m_desktops.erase( it );
@@ -3805,6 +3816,12 @@ void GuiMain::onShareDesktopRequestFromChat( VNumber chat_id, bool enable_deskto
     return;
 
   Chat c = ChatManager::instance().chat( chat_id );
+  if( !c.isValid() )
+  {
+    qWarning() << "Invalid chat" << chat_id << "found in GuiMain::onShareDesktopRequestFromChat(...)";
+    return;
+  }
+
   if( enable_desktop_sharing )
   {
     if( QMessageBox::question( activeWindow(), Settings::instance().programName(),
@@ -3812,11 +3829,24 @@ void GuiMain::onShareDesktopRequestFromChat( VNumber chat_id, bool enable_deskto
                                tr( "Yes" ), tr( "No" ), QString::null, 0, 1 ) == 1 )
       return;
 
-    if( !mp_core->startShareDesktop( chat_id ) )
-    {}
+    foreach( VNumber user_id, c.usersId() )
+    {
+      if( user_id != ID_LOCAL_USER )
+        mp_core->startShareDesktop( user_id );
+    }
   }
   else
-    mp_core->stopShareDesktop();
+  {
+    foreach( VNumber user_id, c.usersId() )
+    {
+      if( user_id != ID_LOCAL_USER )
+        mp_core->stopShareDesktop( user_id );
+    }
+  }
+
+  GuiFloatingChat* fl_chat = floatingChat( chat_id );
+  if( fl_chat )
+    fl_chat->updateActions( mp_core->isConnected(), mp_core->connectedUsers() );
 }
 
 #endif

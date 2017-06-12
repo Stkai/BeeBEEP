@@ -37,33 +37,34 @@ public:
 
   void setUser( const User& );
   inline VNumber userId() const;
-  inline void setChatId( VNumber );
-  inline VNumber chatId() const;
 
+  void setPixmapSize( const QSize& );
   void updatePixmap( const QPixmap& );
+
+  void onTickEvent( int );
 
 public slots:
   void onUserChanged( const User& );
 
 signals:
-  void shareDesktopClosed( VNumber user_id, VNumber chat_id );
+  void shareDesktopClosed( VNumber user_id );
+  void shareDesktopDeleteRequest( VNumber user_id );
 
 protected:
   void closeEvent( QCloseEvent* );
 
 private:
   VNumber m_userId;
-  VNumber m_chatId;
   QScrollArea* mp_scrollArea;
   QLabel* mp_lView;
   QDateTime m_lastUpdate;
+  QSize m_pixSize;
+  bool m_toDelete;
 
 };
 
 
 // Inline Functions
 inline VNumber GuiShareDesktop::userId() const { return m_userId; }
-inline void GuiShareDesktop::setChatId( VNumber new_value ) { m_chatId = new_value; }
-inline VNumber GuiShareDesktop::chatId() const { return m_chatId; }
 
 #endif // BEEBEEP_GUISHAREDESKTOP_H

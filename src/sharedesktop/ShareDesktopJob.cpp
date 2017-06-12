@@ -26,7 +26,7 @@
 
 
 ShareDesktopJob::ShareDesktopJob( QObject *parent )
-  : QObject( parent ), m_timer(), m_lastImageHash( "" )
+  : QObject( parent ), m_timer(), m_lastImageHash( "" ), m_delay( 0 )
 {
   setObjectName( "ShareDesktopJob" );
   m_timer.setInterval( 2000 );
@@ -46,6 +46,7 @@ void ShareDesktopJob::startJob()
   }
 
   m_lastImageHash = "";
+  m_delay = 0;
   m_timer.start();
 }
 
@@ -103,9 +104,12 @@ void ShareDesktopJob::makeScreenshot()
   screen_shot = QPixmap();
   QByteArray pix_hash = QCryptographicHash::hash( pix_bytes, QCryptographicHash::Sha1 );
 
-  if( pix_hash != m_lastImageHash )
+  if( pix_hash != m_lastImageHash || m_delay > 10 )
   {
     m_lastImageHash = pix_hash;
+    m_delay = 0;
     emit imageAvailable( pix_bytes );
   }
+  else
+    m_delay++;
 }

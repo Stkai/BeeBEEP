@@ -36,12 +36,9 @@ class ShareDesktop : public QObject
 public:
   explicit ShareDesktop( QObject* parent = 0 );
 
-  bool start( const Chat& );
+  bool start();
   void stop();
   bool isActive() const;
-
-  inline bool hasChat() const;
-  inline VNumber chatId() const;
 
   bool addUserId( VNumber );
   inline bool removeUserId( VNumber );
@@ -54,19 +51,13 @@ protected slots:
   void onJobCompleted();
   void onImageDataAvailable( const QByteArray& );
 
-protected:
-  bool setChat( const Chat& );
-
 private:
-  VNumber m_chatId;
   QList<VNumber> m_userIdList;
   ShareDesktopJob* mp_job;
 
 };
 
 // Inline Functions
-inline bool ShareDesktop::hasChat() const { return m_chatId != ID_INVALID; }
-inline VNumber ShareDesktop::chatId() const { return m_chatId; }
 inline bool ShareDesktop::removeUserId( VNumber user_id ) { return m_userIdList.removeOne( user_id ); }
 inline const QList<VNumber>& ShareDesktop::userIdList() const { return m_userIdList; }
 

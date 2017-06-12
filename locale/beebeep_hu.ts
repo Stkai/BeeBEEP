@@ -564,22 +564,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreShareDesktop.cpp" line="39"/>
+        <location filename="../src/core/CoreShareDesktop.cpp" line="45"/>
         <source>%1 You start to share desktop with %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreShareDesktop.cpp" line="56"/>
+        <location filename="../src/core/CoreShareDesktop.cpp" line="64"/>
         <source>%1 You stop to share desktop with %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreShareDesktop.cpp" line="82"/>
-        <source>%1 You have refused to view shared desktop from %2.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/core/CoreShareDesktop.cpp" line="87"/>
+        <location filename="../src/core/CoreShareDesktop.cpp" line="105"/>
         <source>%1 %2 has closed the view of your shared desktop.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1751,7 +1746,7 @@ Kérjük, válassz egy másik nevet.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="2755"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3027"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3183"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3812"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3817"/>
         <source>Yes</source>
         <translation>Igen</translation>
     </message>
@@ -1772,7 +1767,7 @@ Kérjük, válassz egy másik nevet.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="2755"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3027"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3183"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3812"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3817"/>
         <source>No</source>
         <translation>Nem</translation>
     </message>
@@ -2496,7 +2491,7 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3811"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3816"/>
         <source>Do you really want to share your desktop with %1?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3637,8 +3632,8 @@ Válasszon ki egy beszélgetést, ha szeretné linkelni az elmentett szöveget.<
 <context>
     <name>GuiShareDesktop</name>
     <message>
-        <location filename="../src/sharedesktop/GuiShareDesktop.cpp" line="55"/>
-        <source>Desktop</source>
+        <location filename="../src/sharedesktop/GuiShareDesktop.cpp" line="64"/>
+        <source>Shared desktop</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4180,7 +4175,7 @@ Válasszon ki egy beszélgetést, ha szeretné linkelni az elmentett szöveget.<
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="148"/>
-        <source>yyyy/MM/dd</source>
+        <source>dd/MM/yyyy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

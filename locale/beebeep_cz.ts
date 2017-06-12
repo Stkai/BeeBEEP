@@ -535,22 +535,17 @@
         <translation>%1 uživatelů připojeno</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreShareDesktop.cpp" line="39"/>
+        <location filename="../src/core/CoreShareDesktop.cpp" line="45"/>
         <source>%1 You start to share desktop with %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreShareDesktop.cpp" line="56"/>
+        <location filename="../src/core/CoreShareDesktop.cpp" line="64"/>
         <source>%1 You stop to share desktop with %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreShareDesktop.cpp" line="82"/>
-        <source>%1 You have refused to view shared desktop from %2.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/core/CoreShareDesktop.cpp" line="87"/>
+        <location filename="../src/core/CoreShareDesktop.cpp" line="105"/>
         <source>%1 %2 has closed the view of your shared desktop.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1693,7 +1688,7 @@ Vyberte prosím jiné jméno.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="2755"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3027"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3183"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3812"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3817"/>
         <source>Yes</source>
         <translation>Ano</translation>
     </message>
@@ -1714,7 +1709,7 @@ Vyberte prosím jiné jméno.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="2755"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3027"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3183"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3812"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3817"/>
         <source>No</source>
         <translation>Ne</translation>
     </message>
@@ -2272,7 +2267,7 @@ Vyberte prosím jiné jméno.</translation>
         <translation>Obnovit výchozi ikony</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3811"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3816"/>
         <source>Do you really want to share your desktop with %1?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3578,8 +3573,8 @@ Vyberte prosím jiné jméno.</translation>
 <context>
     <name>GuiShareDesktop</name>
     <message>
-        <location filename="../src/sharedesktop/GuiShareDesktop.cpp" line="55"/>
-        <source>Desktop</source>
+        <location filename="../src/sharedesktop/GuiShareDesktop.cpp" line="64"/>
+        <source>Shared desktop</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4120,9 +4115,13 @@ Vyberte prosím jiné jméno.</translation>
         <translation>Narozeniny</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="148"/>
         <source>yyyy/MM/dd</source>
-        <translation>dd/MM/yyyy</translation>
+        <translation type="obsolete">dd/MM/yyyy</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="148"/>
+        <source>dd/MM/yyyy</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="171"/>

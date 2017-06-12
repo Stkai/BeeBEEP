@@ -208,7 +208,7 @@ void Core::closeConnection( Connection *c )
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
       if( mp_shareDesktop->isActive() )
-        mp_shareDesktop->removeUserId( u.id() );
+        stopShareDesktop( u.id() );
 #endif
     }
     else

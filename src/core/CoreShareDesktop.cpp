@@ -31,72 +31,86 @@
 #include "UserManager.h"
 
 
-bool Core::startShareDesktop( VNumber chat_id )
+bool Core::startShareDesktop( VNumber user_id )
 {
-  Chat c = ChatManager::instance().chat( chat_id );
-  if( mp_shareDesktop->start( c ) )
+  User u = UserManager::instance().findUser( user_id );
+  if( !u.isValid() )
   {
-    QString sHtmlMsg = tr( "%1 You start to share desktop with %2." ).arg( IconManager::instance().toHtml( "desktop-share.png", "*G*" ), c.name() );
-    dispatchSystemMessage( c.id(), ID_LOCAL_USER, sHtmlMsg, DispatchToChat, ChatMessage::System );
-    qDebug() << "Start to share desktop with" << qPrintable( c.name() );
-    return true;
-  }
-  else
+    qWarning() << "Invalid user" << user_id << "found in Core::startShareDesktop(...)";
     return false;
+  }
+
+  if( !mp_shareDesktop->addUserId( user_id ) )
+    return false;
+
+  QString sHtmlMsg = tr( "%1 You start to share desktop with %2." ).arg( IconManager::instance().toHtml( "desktop-share.png", "*G*" ), u.name() );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, user_id, sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::System );
+  qDebug() << "Start to share desktop with" << qPrintable( u.path() );
+  return mp_shareDesktop->start() ;
 }
 
-void Core::stopShareDesktop()
+void Core::stopShareDesktop( VNumber user_id )
 {
   if( !mp_shareDesktop->isActive() )
     return;
 
-  if( mp_shareDesktop->hasChat() )
+  mp_shareDesktop->removeUserId( user_id );
+  User u = UserManager::instance().findUser( user_id );
+  if( u.isValid() )
   {
-    Chat c = ChatManager::instance().chat( mp_shareDesktop->chatId() );
-    QString sHtmlMsg = tr( "%1 You stop to share desktop with %2." ).arg( IconManager::instance().toHtml( "desktop-share-refused.png", "*G*" ), c.name() );
-    dispatchSystemMessage( c.id(), ID_LOCAL_USER, sHtmlMsg, DispatchToChat, ChatMessage::System );
-    qDebug() << "Stop to share desktop with" << qPrintable( c.name() );
+    QString sHtmlMsg = tr( "%1 You stop to share desktop with %2." ).arg( IconManager::instance().toHtml( "desktop-share-refused.png", "*G*" ), u.name() );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::System );
   }
-
-  mp_shareDesktop->stop();
 }
 
-void Core::refuseToViewShareDesktop( VNumber chat_id, VNumber from_user_id, VNumber to_user_id )
+void Core::stopShareDesktop()
 {
-  mp_shareDesktop->removeUserId( from_user_id );
+  foreach( VNumber user_id, mp_shareDesktop->userIdList() )
+    stopShareDesktop( user_id );
+  if( mp_shareDesktop->isActive() )
+    mp_shareDesktop->stop();
+}
 
-  Chat c = ChatManager::instance().chat( chat_id );
-  User to_user = UserManager::instance().findUser( to_user_id );
+void Core::refuseToViewShareDesktop( VNumber from_user_id, VNumber to_user_id )
+{
+  if( !mp_shareDesktop->isActive() )
+    return;
+
   User from_user = UserManager::instance().findUser( from_user_id );
-  if( !c.isValid() || !to_user.isValid() || !from_user.isValid() )
+  if( !from_user.isValid() )
   {
-    qWarning() << "Invalid to user" << to_user_id << "or from user" << from_user_id << "or chat" << chat_id << "found in Core::refuseToViewShareDesktop(...)";
+    qWarning() << "Invalid from user" << from_user_id << "found in Core::refuseToViewShareDesktop(...)";
     return;
   }
 
-  QString sHtmlMsg;
+  User to_user = UserManager::instance().findUser( to_user_id );
+  if( !to_user.isValid() )
+  {
+    qWarning() << "Invalid from user" << to_user_id << "found in Core::refuseToViewShareDesktop(...)";
+    return;
+  }
+
   if( from_user.isLocal() )
   {
-    Message m = Protocol::instance().refuseToViewDesktopShared( c );
+    qDebug() << "You have closed the view of the desktop shared by" << qPrintable( to_user.path() );
+    Message m = Protocol::instance().refuseToViewDesktopShared();
     sendMessageToLocalNetwork( to_user, m );
-    sHtmlMsg = tr( "%1 You have refused to view shared desktop from %2." ).arg( IconManager::instance().toHtml( "desktop-share-refused.png", "*G*" ), to_user.name() );
-    qDebug() << "You have refused to view desktop shared by" << qPrintable( to_user.name() );
   }
   else
   {
-    sHtmlMsg = tr( "%1 %2 has closed the view of your shared desktop." ).arg( IconManager::instance().toHtml( "desktop-share-refused.png", "*G*" ), from_user.name() );
-    qDebug() << qPrintable( from_user.name() ) << "has closed the view your shared desktop";
+    qDebug() << qPrintable( from_user.path() ) << "has closed the view of your shared desktop";
+    QString sHtmlMsg = tr( "%1 %2 has closed the view of your shared desktop." ).arg( IconManager::instance().toHtml( "desktop-share-refused.png", "*G*" ), from_user.name() );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, from_user.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::System );
+    stopShareDesktop( from_user_id );
   }
-
-  dispatchSystemMessage( chat_id, from_user.id(), sHtmlMsg, DispatchToChat, ChatMessage::System );
 }
 
-bool Core::shareDesktopIsActive( VNumber chat_id ) const
+bool Core::shareDesktopIsActive( VNumber user_id ) const
 {
-  if( chat_id == ID_INVALID )
-    return mp_shareDesktop->isActive();
+  if( user_id == ID_INVALID )
+    return mp_shareDesktop->isActive() && mp_shareDesktop->userIdList().size() > 0;
   else
-    return mp_shareDesktop->isActive() && mp_shareDesktop->chatId() == chat_id;
+    return mp_shareDesktop->isActive() && mp_shareDesktop->userIdList().contains( user_id );
 }
 
 void Core::onShareDesktopDataReady( const QByteArray& pix_data )
@@ -104,20 +118,13 @@ void Core::onShareDesktopDataReady( const QByteArray& pix_data )
   if( !mp_shareDesktop->isActive() )
     return;
 
-  if( mp_shareDesktop->userIdList().isEmpty() || !mp_shareDesktop->hasChat() )
+  if( mp_shareDesktop->userIdList().isEmpty() )
   {
     stopShareDesktop();
     return;
   }
 
-  Chat c_tmp = ChatManager::instance().chat( mp_shareDesktop->chatId() );
-  if( !c_tmp.isValid() )
-  {
-    stopShareDesktop();
-    return;
-  }
-
-  Message m = Protocol::instance().shareDesktopDataToMessage( c_tmp, pix_data );
+  Message m = Protocol::instance().shareDesktopDataToMessage( pix_data );
   foreach( VNumber user_id, mp_shareDesktop->userIdList() )
   {
     Connection* c = connection( user_id );

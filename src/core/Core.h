@@ -103,10 +103,11 @@ public:
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   /* CoreShareDesktop */
-  bool startShareDesktop( VNumber chat_id );
+  bool startShareDesktop( VNumber user_id );
+  void stopShareDesktop( VNumber user_id );
   void stopShareDesktop();
-  void refuseToViewShareDesktop( VNumber chat_id, VNumber from_user_id, VNumber to_user_id );
-  bool shareDesktopIsActive( VNumber chat_id ) const;
+  void refuseToViewShareDesktop( VNumber from_user_id, VNumber to_user_id );
+  bool shareDesktopIsActive( VNumber user_id ) const;
 #endif
 
 public slots:
@@ -157,7 +158,7 @@ signals:
   void localUserIsBuzzedBy( const User& );
   void newSystemStatusMessage( const QString&, int );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-  void shareDesktopImageAvailable( const User&, const Chat&, const QPixmap& );
+  void shareDesktopImageAvailable( const User&, const QPixmap& );
 #endif
 
 protected slots:

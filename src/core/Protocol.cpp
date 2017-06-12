@@ -1504,39 +1504,17 @@ QList<FileInfo> Protocol::messageToShareBoxFileList( const Message& m, const QHo
 }
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-  Message Protocol::refuseToViewDesktopShared( const Chat& c ) const
+  Message Protocol::refuseToViewDesktopShared() const
   {
     Message m( Message::ShareDesktop, ID_SHAREDESKTOP_MESSAGE, "" );
-    if( c.isGroup() )
-    {
-      ChatMessageData cmd;
-      cmd.setGroupName( c.name() );
-      cmd.setGroupLastModified( c.lastModified() );
-      cmd.setGroupId( c.privateId() );
-      m.setData( chatMessageDataToString( cmd ) );
-      m.addFlag( Message::GroupChat );
-    }
-    else
-      m.addFlag( Message::Private );
     m.addFlag( Message::Refused );
     return m;
   }
 
-  Message Protocol::shareDesktopDataToMessage( const Chat& c, const QByteArray& pix_data ) const
+  Message Protocol::shareDesktopDataToMessage( const QByteArray& pix_data ) const
   {
     Message m( Message::ShareDesktop, ID_SHAREDESKTOP_MESSAGE, pix_data.toBase64() );
-    if( c.isGroup() )
-    {
-      ChatMessageData cmd;
-      cmd.setGroupName( c.name() );
-      cmd.setGroupLastModified( c.lastModified() );
-      cmd.setGroupId( c.privateId() );
-      m.setData( chatMessageDataToString( cmd ) );
-      m.addFlag( Message::GroupChat );
-    }
-    else
-      m.addFlag( Message::Private );
-
+    m.addFlag( Message::Private );
     return m;
   }
 

@@ -584,23 +584,15 @@ void Core::parseBuzzMessage( const User& u, const Message& )
 #ifdef BEEBEEP_USE_SHAREDESKTOP
 void Core::parseShareDesktopMessage( const User& u, const Message& m )
 {
-  ChatMessageData cmd = Protocol::instance().dataFromChatMessage( m );
-  Chat c;
-  if( m.hasFlag( Message::Private ) )
-    c = ChatManager::instance().privateChatForUser( u.id() );
-  else
-    c = ChatManager::instance().findChatByPrivateId( cmd.groupId(), true, u.id() );
-
   if( m.hasFlag( Message::Refused ) )
   {
-    qDebug() << "User" << qPrintable( u.path() ) << "has refused to view your shared desktop";
-    refuseToViewShareDesktop( c.id(), u.id(), ID_LOCAL_USER );
+    refuseToViewShareDesktop( u.id(), ID_LOCAL_USER );
   }
   else if( m.hasFlag( Message::Private ) || m.hasFlag( Message::GroupChat ))
   {
     QPixmap pix = Protocol::instance().pixmapFromShareDesktopMessage( m );
     if( !pix.isNull() )
-      emit shareDesktopImageAvailable( u, c, pix );
+      emit shareDesktopImageAvailable( u, pix );
   }
   else
   {

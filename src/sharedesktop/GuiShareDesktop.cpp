@@ -25,23 +25,33 @@
 #include "User.h"
 
 GuiShareDesktop::GuiShareDesktop( QWidget *parent )
- : QMainWindow( parent ), m_userId( ID_INVALID ), m_chatId( ID_INVALID )
+ : QMainWindow( parent ), m_userId( ID_INVALID )
 {
   setObjectName( "GuiShareDesktop" );
   setWindowIcon( QIcon( ":/images/beebeep.png" ) );
+
   mp_scrollArea = new QScrollArea( this );
   mp_scrollArea->setBackgroundRole( QPalette::Dark );
-  setCentralWidget( mp_scrollArea );
-  mp_lView = new QLabel( this );
-  mp_scrollArea->setWidget( mp_lView );
+  mp_scrollArea->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
   mp_scrollArea->setWidgetResizable( false );
+  mp_lView = new QLabel( this );
+  mp_lView->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
+  setPixmapSize( QSize( 400, 300 ) );
+  mp_scrollArea->setWidget( mp_lView );
+  setCentralWidget( mp_scrollArea );
   m_lastUpdate = QDateTime::currentDateTime();
+  m_toDelete = false;
 }
 
 void GuiShareDesktop::setUser( const User& u )
 {
   m_userId = u.id();
   onUserChanged( u );
+}
+
+void GuiShareDesktop::setPixmapSize( const QSize& pix_size )
+{
+  mp_lView->setMinimumSize( pix_size );
 }
 
 void GuiShareDesktop::updatePixmap( const QPixmap& pix )
@@ -52,7 +62,7 @@ void GuiShareDesktop::updatePixmap( const QPixmap& pix )
 
 void GuiShareDesktop::onUserChanged( const User& u )
 {
-  QString s_title = QString( "%1 - %2" ).arg( u.name(), tr( "Desktop" ) );
+  QString s_title = QString( "%1 - %2" ).arg( u.name(), tr( "Shared desktop" ) );
   setWindowTitle( s_title );
 
   if( !u.isStatusConnected() )
@@ -62,6 +72,18 @@ void GuiShareDesktop::onUserChanged( const User& u )
 void GuiShareDesktop::closeEvent( QCloseEvent* e )
 {
   QWidget::closeEvent( e );
-  emit shareDesktopClosed( m_userId, m_chatId );
+  emit shareDesktopClosed( m_userId );
   e->accept();
+}
+
+void GuiShareDesktop::onTickEvent( int )
+{
+  if( m_toDelete )
+    return;
+
+  if( m_lastUpdate.secsTo( QDateTime::currentDateTime() ) > 30 )
+  {
+    m_toDelete = true;
+    emit shareDesktopDeleteRequest( m_userId );
+  }
 }

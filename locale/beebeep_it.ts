@@ -436,7 +436,7 @@
     </message>
     <message>
         <source>%1 You have refused to view shared desktop from %2.</source>
-        <translation>%1 Hai rifiutato di vedere il desktop condiviso da %2.</translation>
+        <translation type="obsolete">%1 Hai rifiutato di vedere il desktop condiviso da %2.</translation>
     </message>
     <message>
         <source>%1 %2 has refused to view your shared desktop.</source>
@@ -2833,7 +2833,15 @@ Inserisci un nome differente.</translation>
     <name>GuiShareDesktop</name>
     <message>
         <source>Desktop</source>
-        <translation>Desktop</translation>
+        <translation type="obsolete">Desktop</translation>
+    </message>
+    <message>
+        <source>Shared Desktop</source>
+        <translation type="obsolete">Desktop condiviso</translation>
+    </message>
+    <message>
+        <source>Shared desktop</source>
+        <translation>Desktop condiviso</translation>
     </message>
 </context>
 <context>
@@ -3303,7 +3311,11 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>yyyy/MM/dd</source>
-        <translation>dd/MM/yyyy</translation>
+        <translation type="obsolete">dd/MM/yyyy</translation>
+    </message>
+    <message>
+        <source>dd/MM/yyyy</source>
+        <translation></translation>
     </message>
 </context>
 <context>

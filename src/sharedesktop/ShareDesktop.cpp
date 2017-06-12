@@ -27,7 +27,7 @@
 
 
 ShareDesktop::ShareDesktop( QObject *parent )
-  : QObject( parent ), m_chatId( ID_INVALID ), m_userIdList()
+  : QObject( parent ), m_userIdList()
 {
   setObjectName( "ShareDesktop" );
   mp_job = new ShareDesktopJob( this ); // Same GUI thread because Pixmaps
@@ -40,16 +40,19 @@ bool ShareDesktop::isActive() const
   return mp_job->isRunning();
 }
 
-bool ShareDesktop::start( const Chat& c )
+bool ShareDesktop::start()
 {
   if( isActive() )
   {
-    qWarning() << "ShareDesktop is already running. Restart is aborted";
+    qWarning() << "ShareDesktop is already running. Starting operation aborted";
     return false;
   }
 
-  if( !setChat( c ) )
+  if( m_userIdList.isEmpty() )
+  {
+    qWarning() << "ShareDesktop is started with empty users. Starting operation aborted";
     return false;
+  }
 
   QMetaObject::invokeMethod( mp_job, "startJob", Qt::QueuedConnection );
   return true;
@@ -63,27 +66,12 @@ void ShareDesktop::stop()
   mp_job->stopJob();
 }
 
-bool ShareDesktop::setChat( const Chat& c )
-{
-  if( m_chatId != ID_INVALID )
-    return false;
-
-  if( !c.isValid() )
-    return false;
-
-  m_chatId = c.id();
-  if( !m_userIdList.isEmpty() )
-    m_userIdList.clear();
-
-  foreach( VNumber user_id, c.usersId() )
-    addUserId( user_id );
-
-  return !m_userIdList.isEmpty();
-}
-
 bool ShareDesktop::addUserId( VNumber user_id )
 {
-  if( user_id == ID_INVALID || user_id == ID_LOCAL_USER || m_userIdList.contains( user_id ) )
+  if( user_id == ID_INVALID || user_id == ID_LOCAL_USER )
+    return false;
+
+  if( m_userIdList.contains( user_id ) )
     return false;
 
   m_userIdList.append( user_id );
@@ -96,7 +84,6 @@ void ShareDesktop::onJobCompleted()
   qDebug() << qPrintable( objectName() ) << "has completed its job";
 #endif
   m_userIdList.clear();
-  m_chatId = ID_INVALID;
 }
 
 void ShareDesktop::onImageDataAvailable( const QByteArray& pix_data )
