@@ -3786,6 +3786,9 @@ void GuiMain::onShareDesktopImageAvailable( const User& u, const QPixmap& pix )
 
 void GuiMain::onShareDesktopCloseEvent( VNumber user_id )
 {
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "You close the desktop shared viewer for user" << user_id;
+#endif
   mp_core->refuseToViewShareDesktop( ID_LOCAL_USER, user_id );
 }
 

@@ -73,8 +73,11 @@ void Core::stopShareDesktop()
 
 void Core::refuseToViewShareDesktop( VNumber from_user_id, VNumber to_user_id )
 {
-  if( !mp_shareDesktop->isActive() )
-    return;
+  if( from_user_id != ID_LOCAL_USER )
+  {
+    if( !mp_shareDesktop->isActive() )
+      return;
+  }
 
   User from_user = UserManager::instance().findUser( from_user_id );
   if( !from_user.isValid() )

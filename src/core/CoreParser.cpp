@@ -588,7 +588,7 @@ void Core::parseShareDesktopMessage( const User& u, const Message& m )
   {
     refuseToViewShareDesktop( u.id(), ID_LOCAL_USER );
   }
-  else if( m.hasFlag( Message::Private ) || m.hasFlag( Message::GroupChat ))
+  else if( m.hasFlag( Message::Private ) )
   {
     QPixmap pix = Protocol::instance().pixmapFromShareDesktopMessage( m );
     if( !pix.isNull() )

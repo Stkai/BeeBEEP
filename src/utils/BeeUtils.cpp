@@ -714,12 +714,12 @@ QString Bee::toolTipForUser( const User& u, bool only_status )
     }
 
     if( u.statusChangedIn().isValid() )
-      tool_tip += QString( "(%1 %2)" ).arg( QObject::tr( "last update" ) ).arg( u.statusChangedIn().date() == QDate::currentDate() ? u.statusChangedIn().time().toString( Qt::SystemLocaleShortDate ) : u.statusChangedIn().toString( Qt::SystemLocaleShortDate ) );
+      tool_tip += QString( "(%1 %2)" ).arg( QObject::tr( "last update" ) ).arg( Bee::dateTimeToString( u.statusChangedIn() ) );
   }
   else
   {
     if( u.lastConnection().isValid() )
-      tool_tip += QString( " (%1 %2)" ).arg( QObject::tr( "last connection" ) ).arg( u.lastConnection().date() == QDate::currentDate() ? u.lastConnection().time().toString( Qt::SystemLocaleShortDate ) : u.lastConnection().toString( Qt::SystemLocaleShortDate ) );
+      tool_tip += QString( " (%1 %2)" ).arg( QObject::tr( "last connection" ) ).arg( Bee::dateTimeToString( u.lastConnection() ) );
   }
 
   return tool_tip;
@@ -814,4 +814,9 @@ bool Bee::areStringListEqual( const QStringList& sl1, const QStringList& sl2, Qt
       return false;
   }
   return true;
+}
+
+QString Bee::dateTimeToString( const QDateTime& dt )
+{
+  return dt.date() == QDate::currentDate() ? dt.time().toString( Qt::SystemLocaleShortDate ) : dt.toString( Qt::SystemLocaleShortDate );
 }

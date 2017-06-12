@@ -72,10 +72,6 @@ void ShareDesktopJob::makeScreenshot()
     return;
   }
 
-#ifdef BEEBEEP_DEBUG
-  qDebug() << qPrintable( objectName() ) << "is making a screen capture";
-#endif
-
   QPixmap screen_shot;
   qreal device_pixel_ratio;
 

@@ -81,6 +81,7 @@ namespace Bee
   void showUp( QWidget* );
   void raiseOnTop( QWidget* );
   bool areStringListEqual( const QStringList&, const QStringList&, Qt::CaseSensitivity cs = Qt::CaseInsensitive );
+  QString dateTimeToString( const QDateTime& );
 }
 
 

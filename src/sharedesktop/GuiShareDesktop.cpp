@@ -21,8 +21,10 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeUtils.h"
 #include "GuiShareDesktop.h"
 #include "User.h"
+
 
 GuiShareDesktop::GuiShareDesktop( QWidget *parent )
  : QMainWindow( parent ), m_userId( ID_INVALID )
@@ -58,6 +60,7 @@ void GuiShareDesktop::updatePixmap( const QPixmap& pix )
 {
   mp_lView->setPixmap( pix );
   m_lastUpdate = QDateTime::currentDateTime();
+  mp_lView->setToolTip( QString( "%1 %2" ).arg( tr( "last update" ) ).arg( Bee::dateTimeToString( m_lastUpdate ) ) );
 }
 
 void GuiShareDesktop::onUserChanged( const User& u )
