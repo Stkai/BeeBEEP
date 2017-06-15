@@ -46,7 +46,10 @@ bool Core::startShareDesktop( VNumber user_id )
   QString sHtmlMsg = tr( "%1 You start to share desktop with %2." ).arg( IconManager::instance().toHtml( "desktop-share.png", "*G*" ), u.name() );
   dispatchSystemMessage( ID_DEFAULT_CHAT, user_id, sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::System );
   qDebug() << "Start to share desktop with" << qPrintable( u.path() );
-  return mp_shareDesktop->start() ;
+  if( !mp_shareDesktop->isActive() )
+    mp_shareDesktop->start();
+  emit shareDesktopUpdate( u );
+  return true;
 }
 
 void Core::stopShareDesktop( VNumber user_id )
@@ -54,12 +57,19 @@ void Core::stopShareDesktop( VNumber user_id )
   if( !mp_shareDesktop->isActive() )
     return;
 
+  if( !mp_shareDesktop->userIdList().contains( user_id ) )
+    return;
+
   mp_shareDesktop->removeUserId( user_id );
+  if( !mp_shareDesktop->hasUsers() )
+    mp_shareDesktop->stop();
+
   User u = UserManager::instance().findUser( user_id );
   if( u.isValid() )
   {
     QString sHtmlMsg = tr( "%1 You stop to share desktop with %2." ).arg( IconManager::instance().toHtml( "desktop-share-refused.png", "*G*" ), u.name() );
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::System );
+    emit shareDesktopUpdate( u );
   }
 }
 
@@ -67,8 +77,6 @@ void Core::stopShareDesktop()
 {
   foreach( VNumber user_id, mp_shareDesktop->userIdList() )
     stopShareDesktop( user_id );
-  if( mp_shareDesktop->isActive() )
-    mp_shareDesktop->stop();
 }
 
 void Core::refuseToViewShareDesktop( VNumber from_user_id, VNumber to_user_id )

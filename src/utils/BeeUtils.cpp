@@ -423,9 +423,9 @@ QBrush Bee::userStatusBackgroundBrush( int user_status )
     return defaultBackgroundBrush();
 }
 
-QPixmap Bee::convertToGrayScale( const QIcon& icon_to_convert, int pixmap_size )
+QPixmap Bee::convertToGrayScale( const QIcon& icon_to_convert, const QSize& pixmap_size )
 {
-  return convertToGrayScale( icon_to_convert.pixmap( pixmap_size, pixmap_size ) );
+  return convertToGrayScale( icon_to_convert.pixmap( pixmap_size ) );
 }
 
 QPixmap Bee::convertToGrayScale( const QPixmap& pix )

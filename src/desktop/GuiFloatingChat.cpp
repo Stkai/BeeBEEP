@@ -453,3 +453,8 @@ void GuiFloatingChat::showGroupMenu()
 {
   mp_chat->editChatMembers();
 }
+
+void GuiFloatingChat::onTickEvent( int ticks )
+{
+  mp_chat->onTickEvent( ticks );
+}

@@ -136,6 +136,7 @@ GuiMain::GuiMain( QWidget *parent )
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   connect( beeCore, SIGNAL( shareDesktopImageAvailable( const User&, const QPixmap& ) ), this, SLOT( onShareDesktopImageAvailable( const User&, const QPixmap& ) ) );
+  connect( beeCore, SIGNAL( shareDesktopUpdate( const User& ) ), this, SLOT( onShareDesktopUpdate( const User& ) ) );
 #endif
 
   connect( mp_fileTransfer, SIGNAL( transferCancelled( VNumber ) ), beeCore, SLOT( cancelFileTransfer( VNumber ) ) );
@@ -3379,7 +3380,7 @@ void GuiMain::onTickEvent( int ticks )
   if( mp_actViewNewMessage->isEnabled() )
   {
     QIcon new_message_blinking_icon = IconManager::instance().icon( "beebeep-message.png" );
-    mp_actViewNewMessage->setIcon( ticks % 2 == 0 ? new_message_blinking_icon : Bee::convertToGrayScale( new_message_blinking_icon.pixmap( Settings::instance().mainBarIconSize() ) ) );
+    mp_actViewNewMessage->setIcon( ticks % 2 == 0 ? new_message_blinking_icon : Bee::convertToGrayScale( new_message_blinking_icon, Settings::instance().mainBarIconSize() ) );
     mp_tabMain->setTabIcon( chat_tab_index, ticks % 2 == 0 ? new_message_blinking_icon : IconManager::instance().icon( "chat-list.png" ) );
   }
 
@@ -3399,6 +3400,9 @@ void GuiMain::onTickEvent( int ticks )
       QApplication::alert( this, 1000 );
     showMessage( tr( "You have new message" ), 1000 );
   }
+
+  foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+    fl_chat->onTickEvent( ticks );
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   foreach( GuiShareDesktop* gsd, m_desktops )
@@ -3856,6 +3860,19 @@ void GuiMain::onShareDesktopRequestFromChat( VNumber chat_id, bool enable_deskto
       if( user_id != ID_LOCAL_USER )
         beeCore->stopShareDesktop( user_id );
     }
+  }
+}
+
+void GuiMain::onShareDesktopUpdate( const User& u )
+{
+  bool core_is_connected = beeCore->isConnected();
+  int connected_users = beeCore->connectedUsers();
+  QList<Chat> chat_list = ChatManager::instance().chatsWithUser( u.id() );
+  foreach( Chat c, chat_list )
+  {
+    GuiFloatingChat* fl_chat = floatingChat( c.id() );
+    if( fl_chat )
+      fl_chat->guiChat()->updateActions( c, core_is_connected, connected_users );
   }
 }
 

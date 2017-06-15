@@ -144,7 +144,9 @@ bool Core::changeGroupChat( const User& u, const Group& g )
   }
 
   UserList group_new_members = UserManager::instance().userList().fromUsersId( g.usersId() );
+  UserList group_old_members = UserManager::instance().userList().fromUsersId( c.usersId() );
   QStringList user_added_string_list;
+  QStringList user_removed_string_list;
   QStringList user_string_list;
   QString sHtmlMsg;
   bool chat_changed = false;
@@ -160,6 +162,28 @@ bool Core::changeGroupChat( const User& u, const Group& g )
     if( ChatManager::instance().chatHasSavedText( c.name() ) )
       ChatManager::instance().updateChatSavedText( c.name(), g.name(), false );
     c.setName( g.name() );
+  }
+
+  foreach( User old_user, group_old_members.toList() )
+  {
+    if( !old_user.isLocal() )
+    {
+      if( !group_new_members.has( old_user.id() ) )
+      {
+        user_removed_string_list << old_user.name();
+        c.removeUser( old_user.id() );
+      }
+    }
+  }
+
+  if( user_removed_string_list.size() > 0 )
+  {
+    if( u.isLocal() )
+      sHtmlMsg = tr( "%1 You have removed members: %2." ).arg( IconManager::instance().toHtml( "group-remove.png", "*G*" ), Bee::stringListToTextString( user_removed_string_list ) );
+    else
+      sHtmlMsg = tr( "%1 %2 has removed members: %3." ).arg( IconManager::instance().toHtml( "group-remove.png", "*G*" ), u.name(), Bee::stringListToTextString( user_removed_string_list ) );
+    c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
+    chat_changed = true;
   }
 
   foreach( User u, group_new_members.toList() )
@@ -179,9 +203,13 @@ bool Core::changeGroupChat( const User& u, const Group& g )
     else
       sHtmlMsg = tr( "%1 %2 has added members: %3." ).arg( IconManager::instance().toHtml( "group-add.png", "*G*" ), u.name(), Bee::stringListToTextString( user_added_string_list ) );
     c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
+    chat_changed = true;
+  }
+
+  if( user_removed_string_list.size() > 0 || user_added_string_list.size() > 0 )
+  {
     sHtmlMsg = tr( "%1 Chat with %2." ).arg( IconManager::instance().toHtml( "group.png", "*G*" ), Bee::stringListToTextString( user_string_list ) );
     c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Header ) );
-    chat_changed = true;
   }
 
   if( chat_changed )
@@ -218,12 +246,14 @@ bool Core::removeUserFromGroupChat( const User& u, const QString& chat_private_i
 
   if( u.isLocal() )
   {
+    qDebug() << "Removing local user from group chat" << qPrintable( c.name() );
     return removeChat( c.id(), true );
   }
   else
   {
     QString sHtmlMsg = tr( "%1 %2 has left the group chat %3." ).arg( IconManager::instance().toHtml( "group-remove.png", "*G*" ), u.name(), QString( "<b>%1</b>" ).arg( c.name() ) );
     c.removeUser( u.id() );
+    c.setLastModifiedToNow();
     c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
     ChatManager::instance().setChat( c );
     dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToChat, ChatMessage::System );

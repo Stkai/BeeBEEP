@@ -48,6 +48,8 @@ public:
   void updateEmoticons();
   inline void setChatToolbarVisible( bool );
 
+  void onTickEvent( int );
+
   inline void setSaveGeometryDisabled( bool );
 
 public slots:

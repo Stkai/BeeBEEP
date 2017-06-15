@@ -54,7 +54,7 @@ bool ShareDesktop::start()
     return false;
   }
 
-  QMetaObject::invokeMethod( mp_job, "startJob", Qt::QueuedConnection );
+  mp_job->startJob();
   return true;
 }
 

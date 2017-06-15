@@ -42,6 +42,7 @@ public:
 
   bool addUserId( VNumber );
   inline bool removeUserId( VNumber );
+  inline bool hasUsers() const;
   inline const QList<VNumber>& userIdList() const;
 
 signals:
@@ -59,6 +60,7 @@ private:
 
 // Inline Functions
 inline bool ShareDesktop::removeUserId( VNumber user_id ) { return m_userIdList.removeOne( user_id ); }
+inline bool ShareDesktop::hasUsers() const { return !m_userIdList.isEmpty(); }
 inline const QList<VNumber>& ShareDesktop::userIdList() const { return m_userIdList; }
 
 #endif // BEEBEEP_SHAREDESKTOP_H

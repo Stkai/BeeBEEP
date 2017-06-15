@@ -163,6 +163,7 @@ signals:
   void newSystemStatusMessage( const QString&, int );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   void shareDesktopImageAvailable( const User&, const QPixmap& );
+  void shareDesktopUpdate( const User& );
 #endif
 
 protected slots:

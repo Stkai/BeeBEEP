@@ -52,6 +52,8 @@ public:
   inline QSplitter* chatSplitter() const;
   void editChatMembers();
 
+  void onTickEvent( int );
+
 signals:
   void newMessage( VNumber, const QString& );
   void writing( VNumber );

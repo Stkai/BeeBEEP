@@ -112,7 +112,7 @@ bool GuiChatItem::updateItem( const Chat& c )
   if( m_defaultIcon.isNull() )
     m_defaultIcon = IconManager::instance().icon( "chat.png" );
   if( !chatHasOnlineUsers( c ) )
-    m_defaultIcon = Bee::convertToGrayScale( m_defaultIcon.pixmap( Settings::instance().avatarIconSize() ) );
+    m_defaultIcon = Bee::convertToGrayScale( m_defaultIcon, Settings::instance().avatarIconSize() );
   setIcon( 0, m_defaultIcon );
   onTickEvent( 2 );
 
