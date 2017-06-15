@@ -62,11 +62,11 @@ void AudioManager::playBeep()
     if( QFile::exists( Settings::instance().beepFilePath() ) && isAudioDeviceAvailable() )
     {
 #ifdef BEEBEEP_USE_PHONON4
-      qDebug() << "AudioManager create PHONON sound object from" << Settings::instance().beepFilePath();
-      Phonon::MediaSource media_source( Settings::instance().beepFilePath() );
+      qDebug() << "AudioManager create PHONON sound object from" << qPrintable( Settings::instance().beepFilePath() );
+      Phonon::MediaSource media_source( QUrl::fromLocalFile( Settings::instance().beepFilePath() ) );
       mp_sound = Phonon::createPlayer( Phonon::MusicCategory, media_source );
 #else
-      qDebug() << "AudioManager create sound object from" << Settings::instance().beepFilePath();
+      qDebug() << "AudioManager create sound object from" << qPrintable( Settings::instance().beepFilePath() );
       mp_sound = new QSound( Settings::instance().beepFilePath() );
 #endif
     }
