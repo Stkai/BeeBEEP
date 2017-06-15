@@ -30,7 +30,6 @@
 #ifdef BEEBEEP_USE_QXT
  #include "qxtglobalshortcut.h"
 #endif
-class Core;
 class Chat;
 class ChatMessage;
 class Group;
@@ -238,7 +237,6 @@ private:
   GuiGroupList* mp_groupList;
   GuiScreenShot* mp_screenShot;
   GuiLog* mp_log;
-  Core *mp_core;
   QList<GuiFloatingChat*> m_floatingChats;
   GuiFileSharing* mp_fileSharing;
   GuiHome* mp_home;

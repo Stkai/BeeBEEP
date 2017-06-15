@@ -79,7 +79,6 @@ GuiMain::GuiMain( QWidget *parent )
 {
   setObjectName( "GuiMainWindow" );
   setWindowIcon( IconManager::instance().icon( "beebeep.png" ) );
-  mp_core = new Core( this );
 
   // Create a status bar before the actions and the menu
   (void) statusBar();
@@ -115,31 +114,31 @@ GuiMain::GuiMain( QWidget *parent )
 
   connect( mp_tabMain, SIGNAL( currentChanged( int ) ), this, SLOT( onMainTabChanged( int ) ) );
 
-  connect( mp_core, SIGNAL( newChatMessage( const Chat&, const ChatMessage& ) ), this, SLOT( onNewChatMessage( const Chat&, const ChatMessage& ) ) );
-  connect( mp_core, SIGNAL( fileDownloadRequest( const User&, const FileInfo& ) ), this, SLOT( downloadFile( const User&, const FileInfo& ) ) );
-  connect( mp_core, SIGNAL( folderDownloadRequest( const User&, const QString&, const QList<FileInfo>& ) ), this, SLOT( downloadFolder( const User&, const QString&, const QList<FileInfo>& ) ) );
-  connect( mp_core, SIGNAL( userChanged( const User& ) ), this, SLOT( onUserChanged( const User& ) ) );
-  connect( mp_core, SIGNAL( userRemoved( const User& ) ), this, SLOT( onUserRemoved( const User& ) ) );
-  connect( mp_core, SIGNAL( userIsWriting( const User&, VNumber ) ), this, SLOT( showWritingUser( const User&, VNumber ) ) );
-  connect( mp_core, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ), this, SLOT( onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ) );
-  connect( mp_core, SIGNAL( fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& ) ), this, SLOT( onFileTransferMessage( VNumber, const User&, const FileInfo&, const QString& ) ) );
-  connect( mp_core, SIGNAL( fileTransferCompleted( VNumber, const User&, const FileInfo& ) ), this, SLOT( onFileTransferCompleted( VNumber, const User&, const FileInfo& ) ) );
-  connect( mp_core, SIGNAL( fileShareAvailable( const User& ) ), this, SLOT( showSharesForUser( const User& ) ) );
-  connect( mp_core, SIGNAL( chatChanged( const Chat& ) ), this, SLOT( onChatChanged( const Chat& ) ) );
-  connect( mp_core, SIGNAL( chatRemoved( const Chat& ) ), this, SLOT( onChatRemoved( const Chat& ) ) );
-  connect( mp_core, SIGNAL( savedChatListAvailable() ), this, SLOT( loadSavedChatsCompleted() ) );
-  connect( mp_core, SIGNAL( userConnectionStatusChanged( const User& ) ), this, SLOT( showConnectionStatusChanged( const User& ) ) );
-  connect( mp_core, SIGNAL( networkInterfaceIsDown() ), this, SLOT( onNetworkInterfaceDown() ) );
-  connect( mp_core, SIGNAL( networkInterfaceIsUp() ), this, SLOT( onNetworkInterfaceUp() ) );
-  connect( mp_core, SIGNAL( chatReadByUser( const Chat&, const User& ) ), this, SLOT( onChatReadByUser( const Chat&, const User& ) ) );
-  connect( mp_core, SIGNAL( localUserIsBuzzedBy( const User& ) ), this, SLOT( showBuzzFromUser( const User& ) ) );
-  connect( mp_core, SIGNAL( newSystemStatusMessage( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
+  connect( beeCore, SIGNAL( newChatMessage( const Chat&, const ChatMessage& ) ), this, SLOT( onNewChatMessage( const Chat&, const ChatMessage& ) ) );
+  connect( beeCore, SIGNAL( fileDownloadRequest( const User&, const FileInfo& ) ), this, SLOT( downloadFile( const User&, const FileInfo& ) ) );
+  connect( beeCore, SIGNAL( folderDownloadRequest( const User&, const QString&, const QList<FileInfo>& ) ), this, SLOT( downloadFolder( const User&, const QString&, const QList<FileInfo>& ) ) );
+  connect( beeCore, SIGNAL( userChanged( const User& ) ), this, SLOT( onUserChanged( const User& ) ) );
+  connect( beeCore, SIGNAL( userRemoved( const User& ) ), this, SLOT( onUserRemoved( const User& ) ) );
+  connect( beeCore, SIGNAL( userIsWriting( const User&, VNumber ) ), this, SLOT( showWritingUser( const User&, VNumber ) ) );
+  connect( beeCore, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ), this, SLOT( onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ) );
+  connect( beeCore, SIGNAL( fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& ) ), this, SLOT( onFileTransferMessage( VNumber, const User&, const FileInfo&, const QString& ) ) );
+  connect( beeCore, SIGNAL( fileTransferCompleted( VNumber, const User&, const FileInfo& ) ), this, SLOT( onFileTransferCompleted( VNumber, const User&, const FileInfo& ) ) );
+  connect( beeCore, SIGNAL( fileShareAvailable( const User& ) ), this, SLOT( showSharesForUser( const User& ) ) );
+  connect( beeCore, SIGNAL( chatChanged( const Chat& ) ), this, SLOT( onChatChanged( const Chat& ) ) );
+  connect( beeCore, SIGNAL( chatRemoved( const Chat& ) ), this, SLOT( onChatRemoved( const Chat& ) ) );
+  connect( beeCore, SIGNAL( savedChatListAvailable() ), this, SLOT( loadSavedChatsCompleted() ) );
+  connect( beeCore, SIGNAL( userConnectionStatusChanged( const User& ) ), this, SLOT( showConnectionStatusChanged( const User& ) ) );
+  connect( beeCore, SIGNAL( networkInterfaceIsDown() ), this, SLOT( onNetworkInterfaceDown() ) );
+  connect( beeCore, SIGNAL( networkInterfaceIsUp() ), this, SLOT( onNetworkInterfaceUp() ) );
+  connect( beeCore, SIGNAL( chatReadByUser( const Chat&, const User& ) ), this, SLOT( onChatReadByUser( const Chat&, const User& ) ) );
+  connect( beeCore, SIGNAL( localUserIsBuzzedBy( const User& ) ), this, SLOT( showBuzzFromUser( const User& ) ) );
+  connect( beeCore, SIGNAL( newSystemStatusMessage( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-  connect( mp_core, SIGNAL( shareDesktopImageAvailable( const User&, const QPixmap& ) ), this, SLOT( onShareDesktopImageAvailable( const User&, const QPixmap& ) ) );
+  connect( beeCore, SIGNAL( shareDesktopImageAvailable( const User&, const QPixmap& ) ), this, SLOT( onShareDesktopImageAvailable( const User&, const QPixmap& ) ) );
 #endif
 
-  connect( mp_fileTransfer, SIGNAL( transferCancelled( VNumber ) ), mp_core, SLOT( cancelFileTransfer( VNumber ) ) );
+  connect( mp_fileTransfer, SIGNAL( transferCancelled( VNumber ) ), beeCore, SLOT( cancelFileTransfer( VNumber ) ) );
   connect( mp_fileTransfer, SIGNAL( openFileCompleted( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
 
   connect( mp_userList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
@@ -189,7 +188,7 @@ void GuiMain::initShortcuts()
 void GuiMain::setupChatConnections( GuiChat* gui_chat )
 {
   connect( gui_chat, SIGNAL( newMessage( VNumber, const QString& ) ), this, SLOT( sendMessage( VNumber, const QString& ) ) );
-  connect( gui_chat, SIGNAL( writing( VNumber ) ), mp_core, SLOT( sendWritingMessage( VNumber ) ) );
+  connect( gui_chat, SIGNAL( writing( VNumber ) ), beeCore, SLOT( sendWritingMessage( VNumber ) ) );
   connect( gui_chat, SIGNAL( nextChat() ), this, SLOT( showNextChat() ) );
   connect( gui_chat, SIGNAL( openUrl( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
   connect( gui_chat, SIGNAL( sendFileFromChatRequest( VNumber, const QString& ) ), this, SLOT( sendFileFromChat( VNumber, const QString& ) ) );
@@ -287,7 +286,7 @@ void GuiMain::updateTabTitles()
     mp_tabMain->setTabToolTip( tab_index, RemoveMenuStringFromTooltip( mp_home->toolTip() ) );
 
   tab_index = mp_tabMain->indexOf( mp_userList );
-  current_value = mp_core->connectedUsers();
+  current_value = beeCore->connectedUsers();
   int other_value = UserManager::instance().userList().size();
   mp_tabMain->setTabText( tab_index, current_value > 0 ? QString::number( current_value ) : (other_value > 0 ? QString::number( other_value ) : "" ) );
   if( current_value > 0 )
@@ -330,7 +329,7 @@ void GuiMain::changeEvent( QEvent* e )
 
 void GuiMain::closeEvent( QCloseEvent* e )
 {
-  if( mp_core->isConnected() )
+  if( beeCore->isConnected() )
   {
     if( !m_forceShutdown )
     {
@@ -352,7 +351,7 @@ void GuiMain::closeEvent( QCloseEvent* e )
       }
     }
 
-    mp_core->stop();
+    beeCore->stop();
   }
 
   QSettings* sets = Settings::instance().objectSettings();
@@ -456,8 +455,8 @@ void GuiMain::forceShutdown()
 {
   qDebug() << "Shutdown...";
   m_forceShutdown = true;
-  if( mp_core->isConnected() )
-    mp_core->stop();
+  if( beeCore->isConnected() )
+    beeCore->stop();
   close();
 }
 
@@ -465,7 +464,7 @@ void GuiMain::startCore()
 {
   m_autoConnectOnInterfaceUp = false;
 
-  if( mp_core->isConnected() )
+  if( beeCore->isConnected() )
     return;
 
   if( Settings::instance().firstTime() )
@@ -494,7 +493,7 @@ void GuiMain::startCore()
   }
 
   m_coreIsConnecting = true;
-  mp_core->start();
+  beeCore->start();
   initGuiItems();
 }
 
@@ -508,7 +507,7 @@ bool GuiMain::promptConnectionPassword()
   if( gap.exec() == QDialog::Rejected )
     return false;
   mp_actPromptPassword->setChecked( Settings::instance().askPasswordAtStartup() );
-  if( mp_core->isConnected() )
+  if( beeCore->isConnected() )
     showRestartConnectionAlertMessage();
   return true;
 }
@@ -517,13 +516,17 @@ void GuiMain::stopCore()
 {
   if( mp_tabMain->currentWidget() != mp_home )
     mp_tabMain->setCurrentWidget( mp_home );
-  mp_core->stop();
+  beeCore->stop();
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  foreach( GuiShareDesktop* gsd, m_desktops )
+    gsd->close();
+#endif
   initGuiItems();
 }
 
 void GuiMain::initGuiItems()
 {
-  bool enable = mp_core->isConnected();
+  bool enable = beeCore->isConnected();
 
   mp_actBroadcast->setEnabled( enable );
   mp_userList->updateUsers();
@@ -538,8 +541,8 @@ void GuiMain::initGuiItems()
 
 void GuiMain::checkViewActions()
 {
-  bool is_connected = mp_core->isConnected();
-  int connected_users = mp_core->connectedUsers();
+  bool is_connected = beeCore->isConnected();
+  int connected_users = beeCore->connectedUsers();
 
   mp_actCreateGroupChat->setEnabled( UserManager::instance().userList().size() > 1 );
   mp_actViewFileSharing->setEnabled( Settings::instance().enableFileTransfer() && Settings::instance().enableFileSharing() );
@@ -793,6 +796,10 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().useNativeEmoticons() );
   act->setData( 31 );
+  act = mp_menuChatSettings->addAction( tr( "Show chat toolbar" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showChatToolbar() );
+  act->setData( 42 );
   mp_menuChatSettings->addSeparator();
   mp_actSelectEmoticonSourcePath = mp_menuChatSettings->addAction( IconManager::instance().icon( "emoticon.png" ), tr( "Select emoticon theme" ) + QString( "..." ), this, SLOT( selectEmoticonSourcePath() ) );
   mp_actSelectEmoticonSourcePath->setEnabled( !Settings::instance().useNativeEmoticons() );
@@ -1362,7 +1369,11 @@ void GuiMain::settingsChanged( QAction* act )
     refresh_chat = true;
     break;
   case 42:
-    // free
+    {
+      Settings::instance().setShowChatToolbar( act->isChecked() );
+      foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+        fl_chat->setChatToolbarVisible( Settings::instance().showChatToolbar() );
+    }
     break;
   case 43:
     Settings::instance().setCheckNewVersionAtStartup( act->isChecked() );
@@ -1464,10 +1475,10 @@ void GuiMain::setMaxInactivityDaysInAction( QAction* act )
 void GuiMain::sendMessage( VNumber chat_id, const QString& msg )
 {
 #ifdef BEEBEEP_DEBUG
-  int num_messages = mp_core->sendChatMessage( chat_id, msg );
+  int num_messages = beeCore->sendChatMessage( chat_id, msg );
   qDebug() << num_messages << "messages sent";
 #else
-  mp_core->sendChatMessage( chat_id, msg );
+  beeCore->sendChatMessage( chat_id, msg );
 #endif
   mp_chatList->updateChat( ChatManager::instance().chat( chat_id ) ); // to sort the chats
 }
@@ -1611,14 +1622,14 @@ void GuiMain::searchUsers()
     return;
   }
 
-  if( !mp_core->isConnected() )
+  if( !beeCore->isConnected() )
     return;
 
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   if( Settings::instance().useMulticastDns() )
-    mp_core->startDnsMulticasting();
+    beeCore->startDnsMulticasting();
   else
-    mp_core->stopDnsMulticasting();
+    beeCore->stopDnsMulticasting();
 #endif
 
   QMetaObject::invokeMethod( this, "sendBroadcastMessage", Qt::QueuedConnection );
@@ -1634,7 +1645,7 @@ void GuiMain::showWritingUser( const User& u, VNumber chat_id )
 
 void GuiMain::setUserStatusSelected( int user_status )
 {
-  if( user_status == User::Offline && mp_core->isConnected() )
+  if( user_status == User::Offline && beeCore->isConnected() )
   {
     if( !Settings::instance().promptOnCloseEvent() || QMessageBox::question( this, Settings::instance().programName(),
                                tr( "Do you want to disconnect from %1 network?" ).arg( Settings::instance().programName() ),
@@ -1643,9 +1654,9 @@ void GuiMain::setUserStatusSelected( int user_status )
     return;
   }
 
-  mp_core->setLocalUserStatus( user_status );
+  beeCore->setLocalUserStatus( user_status );
 
-  if( !mp_core->isConnected() )
+  if( !beeCore->isConnected() )
     startCore();
   else
     updateStatusIcon();
@@ -1664,7 +1675,7 @@ void GuiMain::statusSelected()
 void GuiMain::updateStatusIcon()
 {
   int status_type;
-  if( !mp_core->isConnected() )
+  if( !beeCore->isConnected() )
     status_type = User::Offline;
   else
     status_type = Settings::instance().localUser().status();
@@ -1685,7 +1696,7 @@ void GuiMain::changeStatusDescription()
                            tr( "Please insert the new status description" ), QLineEdit::Normal, Settings::instance().localUser().statusDescription(), &ok );
   if( !ok || status_description.isNull() )
     return;
-  mp_core->setLocalUserStatusDescription( Settings::instance().localUser().status(), status_description, true );
+  beeCore->setLocalUserStatusDescription( Settings::instance().localUser().status(), status_description, true );
   loadUserStatusRecentlyUsed();
   updateStatusIcon();
   updateLocalStatusMessage();
@@ -1755,7 +1766,7 @@ bool GuiMain::sendFile( const User& u, const QString& file_path, VNumber chat_id
     return false;
   }
 
-  if( !mp_core->isConnected() )
+  if( !beeCore->isConnected() )
   {
     QMessageBox::information( activeWindow(), Settings::instance().programName(), tr( "You are not connected." ) );
     return false;
@@ -1799,7 +1810,7 @@ bool GuiMain::sendFile( const User& u, const QString& file_path, VNumber chat_id
   else
     user_selected = u;
 
-  return mp_core->sendFile( user_selected.id(), file_path, "", false, chat_id );
+  return beeCore->sendFile( user_selected.id(), file_path, "", false, chat_id );
 }
 
 void GuiMain::sendFile( const QString& file_path )
@@ -1875,7 +1886,7 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi, const QStrin
     file_info.setName( qfile_info.fileName() );
     file_info.setPath( qfile_info.absoluteFilePath() );
     file_info.setSuffix( qfile_info.suffix() );
-    return mp_core->downloadFile( u.id(), file_info, make_questions );
+    return beeCore->downloadFile( u.id(), file_info, make_questions );
   }
   else
   {
@@ -1887,7 +1898,7 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi, const QStrin
 void GuiMain::downloadFile( const User& u, const FileInfo& fi )
 {
   if( !askToDownloadFile( u, fi, Settings::instance().downloadDirectory(), true ) )
-    mp_core->refuseToDownloadFile( u.id(), fi );
+    beeCore->refuseToDownloadFile( u.id(), fi );
 }
 
 void GuiMain::downloadSharedFiles( const QList<SharedFileInfo>& share_file_info_list )
@@ -2008,7 +2019,7 @@ void GuiMain::downloadFolder( const User& u, const QString& folder_name, const Q
   else
   {
     qDebug() << "You refuse to download folder" << folder_name << "from" << u.path();
-    mp_core->refuseToDownloadFolder( u.id(), folder_name, file_info_list.first().chatPrivateId() );
+    beeCore->refuseToDownloadFolder( u.id(), folder_name, file_info_list.first().chatPrivateId() );
   }
 }
 
@@ -2027,13 +2038,13 @@ void GuiMain::selectDownloadDirectory()
 void GuiMain::showTipOfTheDay()
 {
   mp_tabMain->setCurrentWidget( mp_home );
-  mp_core->showTipOfTheDay();
+  beeCore->showTipOfTheDay();
 }
 
 void GuiMain::showFactOfTheDay()
 {
   mp_tabMain->setCurrentWidget( mp_home );
-  mp_core->showFactOfTheDay();
+  beeCore->showFactOfTheDay();
 }
 
 void GuiMain::showChat( VNumber chat_id )
@@ -2063,7 +2074,7 @@ void GuiMain::changeVCard()
   gvc.setSizeGripEnabled( true );
   gvc.show();
   if( gvc.exec() == QDialog::Accepted )
-    mp_core->setLocalUserVCard( gvc.userColor(), gvc.vCard() );
+    beeCore->setLocalUserVCard( gvc.userColor(), gvc.vCard() );
 }
 
 void GuiMain::showLocalUserVCard()
@@ -2084,7 +2095,7 @@ void GuiMain::showVCard( VNumber user_id )
   connect( gvc, SIGNAL( toggleFavorite( VNumber ) ), this, SLOT( toggleUserFavorite( VNumber ) ) );
   connect( gvc, SIGNAL( removeUser( VNumber ) ), this, SLOT( removeUserFromList( VNumber ) ) );
   connect( gvc, SIGNAL( buzzUser( VNumber ) ), this, SLOT( sendBuzzToUser( VNumber ) ) );
-  gvc->setVCard( u, ChatManager::instance().privateChatForUser( u.id() ).id(), mp_core->isConnected() );
+  gvc->setVCard( u, ChatManager::instance().privateChatForUser( u.id() ).id(), beeCore->isConnected() );
 
   QPoint cursor_pos = QCursor::pos();
   QRect screen_rect = qApp->desktop()->availableGeometry( cursor_pos );
@@ -2173,7 +2184,7 @@ bool GuiMain::showWizard()
   gw.setFixedSize( gw.size() );
   if( gw.exec() == QDialog::Accepted )
   {
-    if( !mp_core->changeLocalUser( gw.userName() ) )
+    if( !beeCore->changeLocalUser( gw.userName() ) )
     {
       if( QMessageBox::question( this, Settings::instance().programName(), tr( "Your name is not changed. Do you want to continue?" ),
                                  tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 1 )
@@ -2265,12 +2276,12 @@ void GuiMain::trayMessageClicked()
 
 void GuiMain::addToShare( const QString& share_path )
 {
-  mp_core->addPathToShare( share_path );
+  beeCore->addPathToShare( share_path );
 }
 
 void GuiMain::removeFromShare( const QString& share_path )
 {
-  mp_core->removePathFromShare( share_path );
+  beeCore->removePathFromShare( share_path );
 }
 
 void GuiMain::openUrl( const QUrl& file_url )
@@ -2406,7 +2417,7 @@ void GuiMain::createGroupChat()
     }
   }
 
-  c = mp_core->createGroupChat( Settings::instance().localUser(), g, true );
+  c = beeCore->createGroupChat( Settings::instance().localUser(), g, true );
   if( c.isValid() )
     showChat( c.id() );
 }
@@ -2428,7 +2439,7 @@ void GuiMain::editGroupChat( VNumber chat_id )
     if( gcg.leaveGroup() )
       removeChat( chat_id );
     else
-      mp_core->changeGroupChat( Settings::instance().localUser(), gcg.group() );
+      beeCore->changeGroupChat( Settings::instance().localUser(), gcg.group() );
   }
 }
 
@@ -2455,7 +2466,7 @@ void GuiMain::loadSession()
   showMessage( tr( "Starting" ), 3000 );
   mp_tabMain->setCurrentWidget( mp_home );
   mp_home->loadSystemMessages();
-  QTimer::singleShot( 100, mp_core, SLOT( buildSavedChatList() ) );
+  QTimer::singleShot( 100, beeCore, SLOT( buildSavedChatList() ) );
   QTimer::singleShot( 3000, this, SLOT( startCore() ) );
 }
 
@@ -2496,7 +2507,7 @@ void GuiMain::removeSavedChat( const QString& chat_name )
       break;
     }
   }
-  mp_core->removeSavedChat( chat_name );
+  beeCore->removeSavedChat( chat_name );
   mp_savedChatList->updateSavedChats();
   updateTabTitles();
 }
@@ -2532,7 +2543,7 @@ void GuiMain::linkSavedChat( const QString& chat_name )
 
   }
 
-  mp_core->linkSavedChat( chat_name, chat_name_selected, add_to_existing_saved_text );
+  beeCore->linkSavedChat( chat_name, chat_name_selected, add_to_existing_saved_text );
 }
 
 bool GuiMain::openWebUrl( const QString& web_url )
@@ -2582,7 +2593,7 @@ void GuiMain::openFacebookPage()
 
 void GuiMain::setInIdle()
 {
-  if( !mp_core->isConnected() )
+  if( !beeCore->isConnected() )
     return;
 
   if( !Settings::instance().autoUserAway() )
@@ -2592,13 +2603,13 @@ void GuiMain::setInIdle()
     return;
 
   m_lastUserStatus = Settings::instance().localUser().status();
-  mp_core->setLocalUserStatus( User::Away );
+  beeCore->setLocalUserStatus( User::Away );
   updateStatusIcon();
 }
 
 void GuiMain::exitFromIdle()
 {
-  if( !mp_core->isConnected() )
+  if( !beeCore->isConnected() )
     return;
 
   if( !Settings::instance().autoUserAway() )
@@ -2607,7 +2618,7 @@ void GuiMain::exitFromIdle()
   if( Settings::instance().localUser().status() != User::Away )
     return;
 
-  mp_core->setLocalUserStatus( m_lastUserStatus );
+  beeCore->setLocalUserStatus( m_lastUserStatus );
   updateStatusIcon();
 }
 
@@ -2635,7 +2646,7 @@ void GuiMain::changeUserColor( VNumber user_id, const QString& user_color )
 {
   QColor c = QColorDialog::getColor( QColor( user_color ), qApp->activeWindow() );
   if( c.isValid() )
-    mp_core->changeUserColor( user_id, c.name() );
+    beeCore->changeUserColor( user_id, c.name() );
 }
 
 void GuiMain::onUserChanged( const User& u )
@@ -2697,7 +2708,7 @@ void GuiMain::onChatRemoved( const Chat& c )
 
 bool GuiMain::checkAllChatMembersAreConnected( const QList<VNumber>& users_id )
 {
-  if( !mp_core->areUsersConnected( users_id ) )
+  if( !beeCore->areUsersConnected( users_id ) )
   {
     if( QMessageBox::question( activeWindow(), Settings::instance().programName(),
                                tr( "All the members of this chat are not online. The changes may not be permanent. Do you wish to continue?" ),
@@ -2727,10 +2738,10 @@ void GuiMain::clearChat( VNumber chat_id )
   switch( QMessageBox::information( activeWindow(), Settings::instance().programName(), question_txt, tr( "Yes" ), tr( "No" ), button_2_text, 1, 1 ) )
   {
   case 0:
-    mp_core->clearMessagesInChat( chat_id, false );
+    beeCore->clearMessagesInChat( chat_id, false );
     break;
   case 2:
-    mp_core->clearMessagesInChat( chat_id, true );
+    beeCore->clearMessagesInChat( chat_id, true );
     break;
   default:
     return;
@@ -2756,7 +2767,7 @@ void GuiMain::removeChat( VNumber chat_id )
   if( answer_id == 1 )
     return;
 
-  if( !mp_core->removeChat( chat_id, answer_id == 0 ) )
+  if( !beeCore->removeChat( chat_id, answer_id == 0 ) )
     QMessageBox::warning( activeWindow(), Settings::instance().programName(), tr( "Unable to leave the chat with %1." ).arg( c.name() ) );
 }
 
@@ -2809,7 +2820,7 @@ void GuiMain::showAddUser()
   {
     if( !Settings::instance().networkAddressList().isEmpty() )
     {
-      mp_core->updateUsersAddedManually();
+      beeCore->updateUsersAddedManually();
       QMetaObject::invokeMethod( this, "sendBroadcastMessage", Qt::QueuedConnection );
     }
   }
@@ -2888,7 +2899,7 @@ void GuiMain::showDefaultServerPortInMenu()
   QString multicast_dns = tr( "inactive" );
 #endif
 
-  if( mp_core->isConnected() )
+  if( beeCore->isConnected() )
   {
     mp_menuNetworkStatus->setIcon( IconManager::instance().icon( "network-connected.png" ) );
     mp_actHostAddress->setIcon( IconManager::instance().icon( "network-connected.png" ) );
@@ -2902,7 +2913,7 @@ void GuiMain::showDefaultServerPortInMenu()
 
     if( Settings::instance().enableFileTransfer() )
     {
-      file_transfer_port = QString::number( mp_core->fileTransferPort() );
+      file_transfer_port = QString::number( beeCore->fileTransferPort() );
       mp_actPortFileTransfer->setEnabled( true );
     }
     else
@@ -2912,7 +2923,7 @@ void GuiMain::showDefaultServerPortInMenu()
     }
 
 #ifdef BEEBEEP_USE_MULTICAST_DNS
-    if( mp_core->dnsMulticastingIsActive() )
+    if( beeCore->dnsMulticastingIsActive() )
     {
       multicast_dns = tr( "active" );
       mp_actMulticastDns->setEnabled( true );
@@ -2946,8 +2957,8 @@ void GuiMain::showDefaultServerPortInMenu()
 void GuiMain::sendBroadcastMessage()
 {
   mp_actBroadcast->setDisabled( true );
-  mp_core->sendBroadcastMessage();
-  mp_core->sendMulticastingMessage();
+  beeCore->sendBroadcastMessage();
+  beeCore->sendMulticastingMessage();
   QTimer::singleShot( 3 * 61 * 1000, this, SLOT( enableBroadcastAction() ) );
 }
 
@@ -2968,7 +2979,7 @@ void GuiMain::checkUserSelected( VNumber user_id )
   Chat c = ChatManager::instance().privateChatForUser( user_id );
   if( !c.isValid() )
   {
-    mp_core->createPrivateChat( u );
+    beeCore->createPrivateChat( u );
     c = ChatManager::instance().privateChatForUser( user_id );
     if( !c.isValid() )
     {
@@ -2982,7 +2993,7 @@ void GuiMain::checkUserSelected( VNumber user_id )
 
 void GuiMain::showConnectionStatusChanged( const User& u )
 {
-  if( !mp_core->isConnected() )
+  if( !beeCore->isConnected() )
     return;
 
   if( Settings::instance().showOnlyMessageNotificationOnTray() )
@@ -3018,7 +3029,7 @@ void GuiMain::changeAvatarSizeInList()
 
 void GuiMain::toggleUserFavorite( VNumber user_id )
 {
-  mp_core->toggleUserFavorite( user_id );
+  beeCore->toggleUserFavorite( user_id );
 }
 
 void GuiMain::removeUserFromList( VNumber user_id )
@@ -3026,7 +3037,7 @@ void GuiMain::removeUserFromList( VNumber user_id )
   QString question_txt = tr( "Do you want to delete user %1?" ).arg( UserManager::instance().findUser( user_id ).name() );
   if( QMessageBox::question( activeWindow(), Settings::instance().programName(), question_txt, tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
     return;
-  mp_core->removeOfflineUser( user_id );
+  beeCore->removeOfflineUser( user_id );
 }
 
 void GuiMain::openResourceFolder()
@@ -3080,7 +3091,7 @@ GuiFloatingChat* GuiMain::createFloatingChat( const Chat& c )
 
   if( !fl_chat )
   {
-    fl_chat = new GuiFloatingChat( mp_core );
+    fl_chat = new GuiFloatingChat;
     setupChatConnections( fl_chat->guiChat() );
     connect( fl_chat, SIGNAL( chatIsAboutToClose( VNumber ) ), this, SLOT( removeFloatingChatFromList( VNumber ) ) );
     connect( fl_chat, SIGNAL( readAllMessages( VNumber ) ), this, SLOT( readAllMessagesInChat( VNumber ) ) );
@@ -3170,7 +3181,7 @@ void GuiMain::recentlyUsedUserStatusSelected()
   UserStatusRecord usr = Protocol::instance().loadUserStatusRecord( act->data().toString() );
   if( usr.isValid() )
   {
-    mp_core->setLocalUserStatusDescription( usr.status(), usr.statusDescription(), false );
+    beeCore->setLocalUserStatusDescription( usr.status(), usr.statusDescription(), false );
     setUserStatusSelected( usr.status() );
     loadUserStatusRecentlyUsed();
   }
@@ -3341,7 +3352,7 @@ void GuiMain::selectDictionatyPath()
 
 void GuiMain::onNetworkInterfaceDown()
 {
-  if( mp_core->isConnected() )
+  if( beeCore->isConnected() )
   {
     //raiseHomeView();
     m_autoConnectOnInterfaceUp = true;
@@ -3351,7 +3362,7 @@ void GuiMain::onNetworkInterfaceDown()
 
 void GuiMain::onNetworkInterfaceUp()
 {
-  if( m_autoConnectOnInterfaceUp && !mp_core->isConnected() )
+  if( m_autoConnectOnInterfaceUp && !beeCore->isConnected() )
     QTimer::singleShot( 5000, this, SLOT( startCore() ) );
 }
 
@@ -3377,7 +3388,7 @@ void GuiMain::onTickEvent( int ticks )
   mp_userList->onTickEvent( ticks );
   mp_fileSharing->onTickEvent( ticks );
 
-  if( mp_core->hasFileTransferInProgress() )
+  if( beeCore->hasFileTransferInProgress() )
     mp_actViewFileTransfer->setIcon( ticks % 2 == 0 ? IconManager::instance().icon( "file-transfer-progress.png" ) : IconManager::instance().icon( "file-transfer.png" ) );
 
   if( ticks % 2 == 0 && mp_actViewNewMessage->isEnabled() )
@@ -3393,7 +3404,7 @@ void GuiMain::onTickEvent( int ticks )
   foreach( GuiShareDesktop* gsd, m_desktops )
     gsd->onTickEvent( ticks );
 #endif
-  mp_core->onTickEvent( ticks );
+  beeCore->onTickEvent( ticks );
 }
 
 void GuiMain::onChatReadByUser( const Chat& c, const User& u )
@@ -3405,7 +3416,7 @@ void GuiMain::onChatReadByUser( const Chat& c, const User& u )
 
 void GuiMain::readAllMessagesInChat( VNumber chat_id )
 {
-  if( mp_core->readAllMessagesInChat( chat_id ) )
+  if( beeCore->readAllMessagesInChat( chat_id ) )
   {
     Chat c = ChatManager::instance().chat( chat_id );
 #ifdef BEEBEEP_DEBUG
@@ -3523,8 +3534,8 @@ void GuiMain::onFileTransferCompleted( VNumber peer_id, const User& u, const Fil
 
 void GuiMain::sendBuzzToUser( VNumber user_id )
 {
-  if( mp_core->isConnected() )
-    mp_core->sendBuzzToUser( user_id );
+  if( beeCore->isConnected() )
+    beeCore->sendBuzzToUser( user_id );
 }
 
 void GuiMain::showBuzzFromUser( const User& u )
@@ -3544,7 +3555,7 @@ void GuiMain::showFileSharingWindow()
 
   if( !mp_fileSharing )
   {
-    mp_fileSharing = new GuiFileSharing( mp_core, 0 );
+    mp_fileSharing = new GuiFileSharing( 0 );
     mp_fileSharing->setAttribute( Qt::WA_DeleteOnClose, true );
     Bee::setWindowStaysOnTop( mp_fileSharing, Settings::instance().stayOnTop() );
     mp_fileSharing->resize( qMin( (QApplication::desktop()->availableGeometry().width()-20), 760 ), 460 );
@@ -3554,7 +3565,7 @@ void GuiMain::showFileSharingWindow()
     connect( mp_fileSharing, SIGNAL( sendFileRequest( const QString& ) ), this, SLOT( sendFile( const QString& ) ) );
     connect( mp_fileSharing, SIGNAL( downloadSharedFileRequest( VNumber, VNumber ) ), this, SLOT( downloadSharedFile( VNumber, VNumber ) ) );
     connect( mp_fileSharing, SIGNAL( downloadSharedFilesRequest( const QList<SharedFileInfo>& ) ), this, SLOT( downloadSharedFiles( QList<SharedFileInfo> ) ) );
-    connect( mp_core, SIGNAL( userChanged( const User& ) ), mp_fileSharing, SLOT( onUserChanged( const User& ) ) );
+    connect( beeCore, SIGNAL( userChanged( const User& ) ), mp_fileSharing, SLOT( onUserChanged( const User& ) ) );
   }
 
   mp_fileSharing->showUp();
@@ -3628,11 +3639,11 @@ void GuiMain::setFileTransferEnabled( bool enable )
  {
    Settings::instance().setEnableFileSharing( false );
    Settings::instance().setUseShareBox( false );
-   mp_core->stopFileTransferServer();
-   QMetaObject::invokeMethod( mp_core, "buildLocalShareList", Qt::QueuedConnection );
+   beeCore->stopFileTransferServer();
+   QMetaObject::invokeMethod( beeCore, "buildLocalShareList", Qt::QueuedConnection );
  }
  else
-   mp_core->startFileTransferServer();
+   beeCore->startFileTransferServer();
 
  checkViewActions();
 }
@@ -3643,7 +3654,7 @@ void GuiMain::setFileSharingEnabled( bool enable )
     return;
 
   Settings::instance().setEnableFileSharing( enable );
-  QMetaObject::invokeMethod( mp_core, "buildLocalShareList", Qt::QueuedConnection );
+  QMetaObject::invokeMethod( beeCore, "buildLocalShareList", Qt::QueuedConnection );
   checkViewActions();
 }
 
@@ -3789,7 +3800,7 @@ void GuiMain::onShareDesktopCloseEvent( VNumber user_id )
 #ifdef BEEBEEP_DEBUG
   qDebug() << "You close the desktop shared viewer for user" << user_id;
 #endif
-  mp_core->refuseToViewShareDesktop( ID_LOCAL_USER, user_id );
+  beeCore->refuseToViewShareDesktop( ID_LOCAL_USER, user_id );
 }
 
 void GuiMain::onShareDesktopDeleteRequest( VNumber user_id )
@@ -3815,7 +3826,7 @@ void GuiMain::onShareDesktopRequestFromChat( VNumber chat_id, bool enable_deskto
   if( chat_id == ID_DEFAULT_CHAT )
     return;
 
-  if( mp_core->shareDesktopIsActive( ID_INVALID ) == enable_desktop_sharing )
+  if( beeCore->shareDesktopIsActive( ID_INVALID ) == enable_desktop_sharing )
     return;
 
   Chat c = ChatManager::instance().chat( chat_id );
@@ -3835,7 +3846,7 @@ void GuiMain::onShareDesktopRequestFromChat( VNumber chat_id, bool enable_deskto
     foreach( VNumber user_id, c.usersId() )
     {
       if( user_id != ID_LOCAL_USER )
-        mp_core->startShareDesktop( user_id );
+        beeCore->startShareDesktop( user_id );
     }
   }
   else
@@ -3843,13 +3854,9 @@ void GuiMain::onShareDesktopRequestFromChat( VNumber chat_id, bool enable_deskto
     foreach( VNumber user_id, c.usersId() )
     {
       if( user_id != ID_LOCAL_USER )
-        mp_core->stopShareDesktop( user_id );
+        beeCore->stopShareDesktop( user_id );
     }
   }
-
-  GuiFloatingChat* fl_chat = floatingChat( chat_id );
-  if( fl_chat )
-    fl_chat->updateActions( mp_core->isConnected(), mp_core->connectedUsers() );
 }
 
 #endif

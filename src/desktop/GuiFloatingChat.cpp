@@ -37,8 +37,8 @@
 #endif
 
 
-GuiFloatingChat::GuiFloatingChat( Core* p_core, QWidget *parent )
- : QMainWindow( parent ), mp_core( p_core )
+GuiFloatingChat::GuiFloatingChat( QWidget *parent )
+ : QMainWindow( parent )
 {
   setObjectName( "GuiFloatingChat" );
   m_mainWindowIcon = IconManager::instance().icon( "chat.png" );
@@ -56,7 +56,7 @@ GuiFloatingChat::GuiFloatingChat( Core* p_core, QWidget *parent )
   mp_barMembers->setFloatable( false );
   mp_barMembers->toggleViewAction()->setVisible( false );
 
-  mp_barChat = new QToolBar( tr( "Show the bar of chat" ), this );
+  mp_barChat = new QToolBar( tr( "Show chat toolbar" ), this );
   addToolBar( Qt::BottomToolBarArea, mp_barChat );
   mp_barChat->setObjectName( "GuiFloatingChatToolBar" );
   mp_barChat->setIconSize( Settings::instance().mainBarIconSize() );
@@ -225,7 +225,7 @@ bool GuiFloatingChat::setChat( const Chat& c )
     updateChatTitle( c );
     updateChatMembers( c );
     mp_chat->updateShortcuts();
-    mp_chat->updateActions( c, mp_core->isConnected(), mp_core->connectedUsers() );
+    mp_chat->updateActions( c, beeCore->isConnected(), beeCore->connectedUsers() );
     return true;
   }
   else
@@ -384,7 +384,10 @@ void GuiFloatingChat::keyPressEvent( QKeyEvent* e )
 {
   if( e->key() == Qt::Key_Escape )
   {
-    QMetaObject::invokeMethod( this, "showMinimized", Qt::QueuedConnection );
+    if( Settings::instance().keyEscapeMinimizeInTray() )
+      QMetaObject::invokeMethod( this, "close", Qt::QueuedConnection );
+    else
+      QMetaObject::invokeMethod( this, "showMinimized", Qt::QueuedConnection );
     e->accept();
     return;
   }

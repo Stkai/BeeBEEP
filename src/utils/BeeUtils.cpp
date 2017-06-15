@@ -769,11 +769,11 @@ void Bee::removeContextHelpButton( QWidget* w )
 
 void Bee::showUp( QWidget* w )
 {
-  if( w->isMinimized() )
-    w->showNormal();
-
   if( !w->isVisible() )
     w->show();
+
+  if( w->isMinimized() )
+    w->showNormal();
 
   w->raise();
 }

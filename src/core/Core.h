@@ -38,6 +38,7 @@ class MDnsManager;
 class ShareDesktop;
 #endif
 
+#define beeCore Core::instance()
 
 class Core : public QObject
 {
@@ -45,7 +46,10 @@ class Core : public QObject
 
 public:
   explicit Core( QObject* parent = 0 );
+  virtual ~Core();
+  static Core* instance() { return mp_instance; }
 
+  void loadUsersAndGroups();
   bool isConnected() const;
   bool start();
   void stop();
@@ -166,7 +170,6 @@ protected slots:
   void onPostUsageStatisticsJobCompleted();
 
   /* CoreUser */
-  void loadUsersAndGroups();
   void saveUsersAndGroups();
 
   /* CoreConnection */
@@ -262,6 +265,7 @@ protected:
   void buildShareBoxFileList( const User&, const QString&, bool create_folder );
 
 private:
+  static Core* mp_instance;
   QList<Connection*> m_connections;
   Listener* mp_listener;
   Broadcaster* mp_broadcaster;

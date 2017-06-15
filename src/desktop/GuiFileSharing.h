@@ -26,7 +26,6 @@
 
 #include "Config.h"
 #include "GuiShareNetwork.h"
-class Core;
 class FileInfo;
 class GuiLog;
 class GuiShareBox;
@@ -39,7 +38,7 @@ class GuiFileSharing : public QMainWindow
   Q_OBJECT
 
 public:
-  GuiFileSharing( Core*, QWidget* parent = 0 );
+  GuiFileSharing( QWidget* parent = 0 );
 
   void checkViewActions();
   void updateLocalFileList();
@@ -79,7 +78,6 @@ private:
   void initGuiItems();
 
 private:
-  Core* mp_core;
   QStackedWidget* mp_stackedWidget;
   GuiShareLocal* mp_shareLocal;
   GuiShareNetwork* mp_shareNetwork;

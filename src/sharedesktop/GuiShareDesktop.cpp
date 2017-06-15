@@ -84,7 +84,7 @@ void GuiShareDesktop::onTickEvent( int )
   if( m_toDelete )
     return;
 
-  if( m_lastUpdate.secsTo( QDateTime::currentDateTime() ) > 30 )
+  if( m_lastUpdate.secsTo( QDateTime::currentDateTime() ) > 10 )
   {
     m_toDelete = true;
     emit shareDesktopDeleteRequest( m_userId );

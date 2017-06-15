@@ -36,8 +36,8 @@
 #include "UserManager.h"
 
 
-GuiFileSharing::GuiFileSharing( Core* main_core, QWidget *parent )
- : QMainWindow( parent ), mp_core( main_core )
+GuiFileSharing::GuiFileSharing( QWidget *parent )
+ : QMainWindow( parent )
 {
   setObjectName( "GuiFileSharing" );
   setWindowIcon( IconManager::instance().icon( "file-sharing.png" ) );
@@ -59,21 +59,21 @@ GuiFileSharing::GuiFileSharing( Core* main_core, QWidget *parent )
   createActions();
   createToolbars();
 
-  connect( mp_core, SIGNAL( localShareListAvailable() ), mp_shareLocal, SLOT( updateFileSharedList() ) );
-  connect( mp_core, SIGNAL( shareBoxAvailable( const User&, const QString&, const QList<FileInfo>& ) ), mp_shareBox, SLOT( updateBox( const User&, const QString&, const QList<FileInfo>& ) ) );
-  connect( mp_core, SIGNAL( shareBoxUnavailable( const User&, const QString& ) ), mp_shareBox, SLOT( onShareFolderUnavailable( const User&, const QString& ) ) );
-  connect( mp_core, SIGNAL( shareBoxDownloadCompleted( VNumber, const FileInfo& ) ), mp_shareBox, SLOT( onFileDownloadCompleted( VNumber, const FileInfo& ) ) );
-  connect( mp_core, SIGNAL( shareBoxUploadCompleted( VNumber, const FileInfo& ) ), mp_shareBox, SLOT( onFileUploadCompleted( VNumber, const FileInfo& ) ) );
-  connect( mp_core, SIGNAL( fileTransferCompleted( VNumber, const User&, const FileInfo& ) ), mp_shareNetwork, SLOT( onFileTransferCompleted( VNumber, const User&, const FileInfo& ) ) );
-  connect( mp_core, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ), mp_shareNetwork, SLOT( onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ) );
+  connect( beeCore, SIGNAL( localShareListAvailable() ), mp_shareLocal, SLOT( updateFileSharedList() ) );
+  connect( beeCore, SIGNAL( shareBoxAvailable( const User&, const QString&, const QList<FileInfo>& ) ), mp_shareBox, SLOT( updateBox( const User&, const QString&, const QList<FileInfo>& ) ) );
+  connect( beeCore, SIGNAL( shareBoxUnavailable( const User&, const QString& ) ), mp_shareBox, SLOT( onShareFolderUnavailable( const User&, const QString& ) ) );
+  connect( beeCore, SIGNAL( shareBoxDownloadCompleted( VNumber, const FileInfo& ) ), mp_shareBox, SLOT( onFileDownloadCompleted( VNumber, const FileInfo& ) ) );
+  connect( beeCore, SIGNAL( shareBoxUploadCompleted( VNumber, const FileInfo& ) ), mp_shareBox, SLOT( onFileUploadCompleted( VNumber, const FileInfo& ) ) );
+  connect( beeCore, SIGNAL( fileTransferCompleted( VNumber, const User&, const FileInfo& ) ), mp_shareNetwork, SLOT( onFileTransferCompleted( VNumber, const User&, const FileInfo& ) ) );
+  connect( beeCore, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ), mp_shareNetwork, SLOT( onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ) );
 
   connect( mp_shareLocal, SIGNAL( sharePathAdded( const QString& ) ), this, SLOT( addToShare( const QString& ) ) );
   connect( mp_shareLocal, SIGNAL( sharePathRemoved( const QString& ) ), this, SLOT( removeFromShare( const QString& ) ) );
   connect( mp_shareLocal, SIGNAL( openUrlRequest( const QUrl& ) ), this, SIGNAL( openUrlRequest( const QUrl& ) ) );
-  connect( mp_shareLocal, SIGNAL( updateListRequest() ), mp_core, SLOT( buildLocalShareList() ) );
-  connect( mp_shareLocal, SIGNAL( removeAllPathsRequest() ), mp_core, SLOT( removeAllPathsFromShare() ) );
+  connect( mp_shareLocal, SIGNAL( updateListRequest() ), beeCore, SLOT( buildLocalShareList() ) );
+  connect( mp_shareLocal, SIGNAL( removeAllPathsRequest() ), beeCore, SLOT( removeAllPathsFromShare() ) );
 
-  connect( mp_shareNetwork, SIGNAL( fileShareListRequested() ), mp_core, SLOT( sendFileShareRequestToAll() ) );
+  connect( mp_shareNetwork, SIGNAL( fileShareListRequested() ), beeCore, SLOT( sendFileShareRequestToAll() ) );
   connect( mp_shareNetwork, SIGNAL( downloadSharedFile( VNumber, VNumber ) ), this, SIGNAL( downloadSharedFileRequest( VNumber, VNumber ) ) );
   connect( mp_shareNetwork, SIGNAL( downloadSharedFiles( const QList<SharedFileInfo>& ) ), this, SIGNAL( downloadSharedFilesRequest( const QList<SharedFileInfo>& ) ) );
   connect( mp_shareNetwork, SIGNAL( openFileCompleted( const QUrl& ) ), this, SIGNAL( openUrlRequest( const QUrl& ) ) );
@@ -115,8 +115,8 @@ void GuiFileSharing::checkViewActions()
   if( !isEnabled() )
     return;
 
-  bool is_connected = mp_core->isConnected();
-  int connected_users = mp_core->connectedUsers();
+  bool is_connected = beeCore->isConnected();
+  int connected_users = beeCore->connectedUsers();
 
   mp_actViewShareLocal->setEnabled( mp_stackedWidget->currentWidget() != mp_shareLocal );
   mp_actViewShareNetwork->setEnabled( mp_stackedWidget->currentWidget() != mp_shareNetwork && is_connected && connected_users > 0 );
@@ -191,12 +191,12 @@ void GuiFileSharing::onUserChanged( const User& u )
 
 void GuiFileSharing::addToShare( const QString& share_path )
 {
-  mp_core->addPathToShare( share_path );
+  beeCore->addPathToShare( share_path );
 }
 
 void GuiFileSharing::removeFromShare( const QString& share_path )
 {
-  mp_core->removePathFromShare( share_path );
+  beeCore->removePathFromShare( share_path );
 }
 
 void GuiFileSharing::raiseView( QWidget* w )
@@ -235,17 +235,17 @@ void GuiFileSharing::onTickEvent( int )
 
 void GuiFileSharing::onShareBoxRequest( VNumber user_id, const QString& share_box_path, bool create_folder )
 {
-  mp_core->sendShareBoxRequest( user_id, share_box_path, create_folder );
+  beeCore->sendShareBoxRequest( user_id, share_box_path, create_folder );
 }
 
 void GuiFileSharing::onShareBoxDownloadRequest( VNumber user_id, const FileInfo& fi, const QString& to_path )
 {
-  mp_core->downloadFromShareBox( user_id, fi, to_path );
+  beeCore->downloadFromShareBox( user_id, fi, to_path );
 }
 
 void GuiFileSharing::onShareBoxUploadRequest( VNumber user_id, const FileInfo& fi, const QString& to_path )
 {
-  mp_core->uploadToShareBox( user_id, fi, to_path );
+  beeCore->uploadToShareBox( user_id, fi, to_path );
 }
 
 void GuiFileSharing::updateLocalFileList()

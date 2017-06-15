@@ -25,6 +25,7 @@
 #include "BeeApplication.h"
 #include "ChatManager.h"
 #include "ColorManager.h"
+#include "Core.h"
 #include "EmoticonManager.h"
 #include "FileShare.h"
 #include "GuiConfig.h"
@@ -190,6 +191,9 @@ int main( int argc, char *argv[] )
   bee_app.setAttribute( Qt::AA_DontUseNativeMenuBar );
   if( Settings::instance().autoUserAway() )
     bee_app.setIdleTimeout( Settings::instance().userAwayTimeout() );
+
+  Core bee_core;
+  bee_core.loadUsersAndGroups();
 
   if( !QSystemTrayIcon::isSystemTrayAvailable() )
     qWarning() << "System tray icon is not available in this OS";

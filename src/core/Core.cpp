@@ -42,10 +42,13 @@
   #include "ShareDesktop.h"
 #endif
 
+Core *Core::mp_instance = 0;
+
 
 Core::Core( QObject* parent )
  : QObject( parent ), m_connections()
 {
+  mp_instance = this;
   qDebug() << "Core created";
   mp_listener = new Listener( this );
   qDebug() << "Listener created";
@@ -57,7 +60,6 @@ Core::Core( QObject* parent )
   m_shareListToBuild = 0;
 
   createDefaultChat();
-  loadUsersAndGroups();
 
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   mp_mDns = new MDnsManager( this );
@@ -79,6 +81,12 @@ Core::Core( QObject* parent )
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   connect( mp_shareDesktop, SIGNAL( shareDesktopDataReady( const QByteArray& ) ), this, SLOT( onShareDesktopDataReady( const QByteArray& ) ) );
 #endif
+}
+
+Core::~Core()
+{
+  if( mp_instance )
+    mp_instance = 0;
 }
 
 bool Core::checkSavingPaths()

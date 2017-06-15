@@ -100,7 +100,7 @@ void ShareDesktopJob::makeScreenshot()
   screen_shot = QPixmap();
   QByteArray pix_hash = QCryptographicHash::hash( pix_bytes, QCryptographicHash::Sha1 );
 
-  if( pix_hash != m_lastImageHash || m_delay > 10 )
+  if( pix_hash != m_lastImageHash || m_delay > 3 )
   {
     m_lastImageHash = pix_hash;
     m_delay = 0;

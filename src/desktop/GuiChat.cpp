@@ -25,6 +25,7 @@
 #include "BeeUtils.h"
 #include "ChatManager.h"
 #include "ChatMessage.h"
+#include "Core.h"
 #include "FileDialog.h"
 #include "GuiChat.h"
 #include "GuiChatMessage.h"
@@ -180,17 +181,22 @@ void GuiChat::updateActions( const Chat& c, bool is_connected, int connected_use
   bool local_user_is_member = c.hasUser( Settings::instance().localUser().id() );
   bool chat_is_empty = c.isEmpty();
   bool can_send_files = false;
+  bool desktop_is_shared = false;
+  UserList chat_members;
+  QStringList share_desktop_users;
   if( connected_users > 0 )
   {
-    UserList chat_members = UserManager::instance().userList().fromUsersId( c.usersId() );
+    chat_members = UserManager::instance().userList().fromUsersId( c.usersId() );
     foreach( User u, chat_members.toList() )
     {
       if( u.isLocal() )
         continue;
       if( u.isStatusConnected() )
-      {
         can_send_files = true;
-        break;
+      if( beeCore->shareDesktopIsActive( u.id() ) )
+      {
+        desktop_is_shared = true;
+        share_desktop_users.append( u.name() );
       }
     }
   }
@@ -250,6 +256,12 @@ void GuiChat::updateActions( const Chat& c, bool is_connected, int connected_use
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   mp_actShareDesktop->setEnabled( m_chatId != ID_DEFAULT_CHAT && local_user_is_member && is_connected && can_send_files );
+  mp_actShareDesktop->setChecked( desktop_is_shared );
+
+  if( mp_actShareDesktop->isChecked() )
+    mp_actShareDesktop->setToolTip( tr( "Your desktop is shared with %1" ).arg( Bee::stringListToTextString( share_desktop_users ) ) );
+  else
+    mp_actShareDesktop->setToolTip( tr( "Share your desktop" ) );
 #endif
 }
 

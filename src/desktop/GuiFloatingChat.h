@@ -25,7 +25,6 @@
 #define BEEBEEP_GUIFLOATINGCHAT_H
 
 #include "GuiChat.h"
-class Core;
 class GuiEmoticons;
 class GuiPresetMessageList;
 
@@ -34,7 +33,7 @@ class GuiFloatingChat : public QMainWindow
   Q_OBJECT
 
 public:
-  GuiFloatingChat( Core*, QWidget* parent = 0 );
+  GuiFloatingChat( QWidget* parent = 0 );
 
   bool setChat( const Chat& );
   inline GuiChat* guiChat() const;
@@ -47,6 +46,7 @@ public:
   void setChatReadByUser( const Chat&, const User& );
   void showChatMessage( const Chat&, const ChatMessage& );
   void updateEmoticons();
+  inline void setChatToolbarVisible( bool );
 
   inline void setSaveGeometryDisabled( bool );
 
@@ -75,7 +75,6 @@ private slots:
   void showGroupMenu();
 
 private:
-  Core* mp_core;
   GuiChat* mp_chat;
   QToolBar* mp_barChat;
   QToolBar* mp_barMembers;
@@ -96,6 +95,7 @@ private:
 // Inline Functions
 inline GuiChat* GuiFloatingChat::guiChat() const { return mp_chat; }
 inline bool GuiFloatingChat::chatIsVisible() const { return m_chatIsVisible; }
+inline void GuiFloatingChat::setChatToolbarVisible( bool new_value ) { mp_barChat->setVisible( new_value ); }
 inline void GuiFloatingChat::setSaveGeometryDisabled( bool new_value ) { mp_actSaveWindowGeometry->setDisabled( new_value ); }
 
 #endif // BEEBEEP_GUIFLOATINGCHAT_H

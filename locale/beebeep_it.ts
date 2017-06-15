@@ -868,6 +868,10 @@
         <source>Share your desktop</source>
         <translation>Condivi il tuo desktop</translation>
     </message>
+    <message>
+        <source>Your desktop is shared with %1</source>
+        <translation>Il tuo desktop è condiviso con %1</translation>
+    </message>
 </context>
 <context>
     <name>GuiChatList</name>
@@ -1076,7 +1080,7 @@ Inserisci un nome differente.</translation>
     <name>GuiFloatingChat</name>
     <message>
         <source>Show the bar of chat</source>
-        <translation>Mostra la barra delle conversazioni</translation>
+        <translation type="obsolete">Mostra la barra delle conversazioni</translation>
     </message>
     <message>
         <source>Emoticons</source>
@@ -1117,6 +1121,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Show group menu</source>
         <translation>Mostra il menu del gruppo</translation>
+    </message>
+    <message>
+        <source>Show chat toolbar</source>
+        <translation>Mostra la barra delle conversazioni</translation>
     </message>
 </context>
 <context>
@@ -2271,6 +2279,10 @@ Inserisci un nome differente.</translation>
         <source>Remove users after %1 days of inactivity</source>
         <translation>Cancella gli utenti dopo %1 giorni di inattività</translation>
     </message>
+    <message>
+        <source>Show chat toolbar</source>
+        <translation>Mostra la barra delle conversazioni</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -2842,6 +2854,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Shared desktop</source>
         <translation>Desktop condiviso</translation>
+    </message>
+    <message>
+        <source>last update</source>
+        <translation>ultimo aggiornamento</translation>
     </message>
 </context>
 <context>

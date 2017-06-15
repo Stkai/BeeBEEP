@@ -241,6 +241,7 @@ public:
   inline bool sortUsersAscending() const;
   inline void setShowChatsInOneWindow( bool );
   inline bool showChatsInOneWindow() const;
+  inline void setShowChatToolbar();
 
   inline bool usePreviewFileDialog() const;
   inline void setPreviewFileDialogGeometry( const QByteArray& );
