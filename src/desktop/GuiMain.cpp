@@ -3077,6 +3077,10 @@ void GuiMain::removeFloatingChatFromList( VNumber chat_id )
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Floating chat" << chat_id << "closed and deleted";
 #endif
+
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  onShareDesktopRequestFromChat( chat_id, false );
+#endif
 }
 
 GuiFloatingChat* GuiMain::createFloatingChat( const Chat& c )

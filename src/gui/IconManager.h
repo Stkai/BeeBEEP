@@ -34,12 +34,13 @@ class IconManager
 
 public:
   inline QIcon icon( const QString& icon_name ) const;
-  inline QString iconPath( const QString& icon_name ) const;
+  QString iconPath( const QString& icon_name ) const;
   inline const QString& defaultSourcePath() const;
   inline const QString& currentSourcePath() const;
   inline void setSourcePath( const QString& );
   inline const QString& sourcePath() const;
   inline QString toHtml( const QString& icon_name, const QString& icon_alt, int icon_width = 0, int icon_height = 0 );
+  inline bool hasDefaultIcons() const;
 
   static IconManager& instance()
   {
@@ -60,6 +61,8 @@ public:
 protected:
   IconManager();
   inline QString iconPath( const QString& source_path, const QString& icon_name ) const;
+  inline QString defaulIconPath( const QString& icon_name ) const;
+  inline QString customIconPath( const QString& icon_name ) const;
 
 private:
   QString m_defaultSourcePath;
@@ -69,11 +72,13 @@ private:
 
 // Inline Functions
 inline QIcon IconManager::icon( const QString& icon_name ) const { return QIcon( iconPath( icon_name ) ); }
-inline QString IconManager::iconPath( const QString& icon_name ) const { return QString( "%1/%2" ).arg( currentSourcePath(), icon_name ); }
+inline QString IconManager::defaulIconPath( const QString& icon_name ) const { return QString( "%1/%2" ).arg( m_defaultSourcePath, icon_name ); }
+inline QString IconManager::customIconPath( const QString& icon_name ) const { return QString( "%1/%2" ).arg( m_sourcePath, icon_name ); }
 inline const QString& IconManager::defaultSourcePath() const { return m_defaultSourcePath; }
-inline const QString& IconManager::currentSourcePath() const { return m_sourcePath.isEmpty() ? m_defaultSourcePath : m_sourcePath; }
+inline const QString& IconManager::currentSourcePath() const { return hasDefaultIcons() ? m_defaultSourcePath : m_sourcePath; }
 inline void IconManager::setSourcePath( const QString& new_value ) { m_sourcePath = new_value; }
 inline const QString& IconManager::sourcePath() const { return m_sourcePath; }
 inline QString IconManager::toHtml( const QString& icon_name, const QString& icon_alt, int icon_width, int icon_height ) { return QString( "<img src='%1' width=%2 height=%3 border=0 alt=' %4 ' />" ).arg( iconPath( icon_name ) ).arg( icon_width > 0 ? icon_width : 16 ).arg( icon_height > 0 ? icon_height : 16 ).arg( icon_alt ); }
+inline bool IconManager::hasDefaultIcons() const { return m_sourcePath.isEmpty(); }
 
 #endif // BEEBEEP_ICONMANAGER_H

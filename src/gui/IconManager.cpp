@@ -31,3 +31,16 @@ IconManager::IconManager()
  : m_defaultSourcePath( ":/images/" ), m_sourcePath( "" )
 {
 }
+
+QString IconManager::iconPath( const QString& icon_name ) const
+{
+  if( hasDefaultIcons() )
+    return defaulIconPath( icon_name );
+
+  QString custom_icon_path = customIconPath( icon_name );
+  if( QFile::exists( custom_icon_path ) )
+    return custom_icon_path;
+  else
+    return defaulIconPath( icon_name );
+}
+
