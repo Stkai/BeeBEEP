@@ -3785,8 +3785,15 @@ void GuiMain::onShareDesktopImageAvailable( const User& u, const QPixmap& pix )
   {
     if( gsd->userId() == u.id() )
     {
-      if( gsd->isVisible() )
-        gsd->updatePixmap( pix );
+      if( pix.isNull() )
+      {
+        gsd->close();
+      }
+      else
+      {
+        if( gsd->isVisible() )
+          gsd->updatePixmap( pix );
+      }
       return;
     }
   }
@@ -3795,8 +3802,8 @@ void GuiMain::onShareDesktopImageAvailable( const User& u, const QPixmap& pix )
   connect( new_gui, SIGNAL( shareDesktopClosed( VNumber ) ), this, SLOT( onShareDesktopCloseEvent( VNumber ) ) );
   connect( new_gui, SIGNAL( shareDesktopDeleteRequest( VNumber ) ), this, SLOT( onShareDesktopDeleteRequest( VNumber ) ) );
   new_gui->setUser( u );
-  new_gui->setGeometry( 40, 40, qMin( pix.width()+12, qMax( 640, qApp->desktop()->availableGeometry().width()-20 ) ),
-                                qMin( pix.height()+12, qMax( 480, qApp->desktop()->availableGeometry().height()-20 ) ) );
+  new_gui->setGeometry( 10, 40, qMin( pix.width()+12, qMax( 640, qApp->desktop()->availableGeometry().width()-100 ) ),
+                                qMin( pix.height()+12, qMax( 480, qApp->desktop()->availableGeometry().height()-100 ) ) );
   new_gui->setPixmapSize( pix.size() );
   new_gui->show();
   new_gui->updatePixmap( pix );

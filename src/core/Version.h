@@ -46,12 +46,13 @@ const char* BEEBEEP_GA_URL = "http://www.google-analytics.com/collect"; // aHR0c
 const char* BEEBEEP_GA_EVENT_VERSION = "1";
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   const char* BEEBEEP_SHARE_DESKTOP_IMAGE_TYPE = "JPG";
+  const int BEEBEEP_SHARE_DESKTOP_CAPTURE_DELAY_MS = 2100;
 #endif
 const char* HUNSPELL_VERSION = "1.6.1";
 const char* BEEBEEP_VERSION = "4.0.1";
 const int BEEBEEP_PROTO_VERSION = 70;
 const int BEEBEEP_SETTINGS_VERSION = 9;
-const int BEEBEEP_BUILD = 926;
+const int BEEBEEP_BUILD = 927;
 
 #endif // BEEBEEP_VERSION_H
 

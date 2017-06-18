@@ -591,8 +591,9 @@ void Core::parseShareDesktopMessage( const User& u, const Message& m )
   else if( m.hasFlag( Message::Private ) )
   {
     QPixmap pix = Protocol::instance().pixmapFromShareDesktopMessage( m );
-    if( !pix.isNull() )
-      emit shareDesktopImageAvailable( u, pix );
+    if( pix.isNull() )
+      qDebug() << qPrintable( u.path() ) << "has finished to share desktop with you";
+    emit shareDesktopImageAvailable( u, pix );
   }
   else
   {

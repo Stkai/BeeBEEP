@@ -627,6 +627,11 @@ QString Settings::gaEventVersion() const
   {
     return BEEBEEP_SHARE_DESKTOP_IMAGE_TYPE;
   }
+
+  int Settings::shareDesktopCaptureDelay() const
+  {
+    return BEEBEEP_SHARE_DESKTOP_CAPTURE_DELAY_MS;
+  }
 #endif
 
 QByteArray Settings::hash( const QString& string_to_hash ) const

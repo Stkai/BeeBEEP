@@ -439,6 +439,7 @@ public:
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   const char* shareDesktopImageType() const;
+  int shareDesktopCaptureDelay() const;
 #endif
 
   QString simpleEncrypt( const QString& );

@@ -50,7 +50,7 @@ protected slots:
 private:
   QTimer m_timer;
   QByteArray m_lastImageHash;
-  int m_delay;
+  int m_delayCounter;
 
 };
 

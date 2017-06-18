@@ -26,10 +26,10 @@
 
 
 ShareDesktopJob::ShareDesktopJob( QObject *parent )
-  : QObject( parent ), m_timer(), m_lastImageHash( "" ), m_delay( 0 )
+  : QObject( parent ), m_timer(), m_lastImageHash( "" ), m_delayCounter( 0 )
 {
   setObjectName( "ShareDesktopJob" );
-  m_timer.setInterval( 2000 );
+  m_timer.setInterval( Settings::instance().shareDesktopCaptureDelay() );
   m_timer.setSingleShot( false );
   connect( &m_timer, SIGNAL( timeout() ), this, SLOT( makeScreenshot() ), Qt::QueuedConnection );
 }
@@ -46,7 +46,7 @@ void ShareDesktopJob::startJob()
   }
 
   m_lastImageHash = "";
-  m_delay = 0;
+  m_delayCounter = 0;
   m_timer.start();
 }
 
@@ -92,20 +92,26 @@ void ShareDesktopJob::makeScreenshot()
                                      QApplication::desktop()->height() * device_pixel_ratio );
 #endif
 
+  if( device_pixel_ratio > 1.0 )
+    screen_shot = screen_shot.scaled( QApplication::desktop()->width(), QApplication::desktop()->height(), Qt::KeepAspectRatio );
+
   QByteArray pix_bytes;
   QBuffer buffer( &pix_bytes );
   buffer.open( QIODevice::WriteOnly );
   screen_shot.save( &buffer, Settings::instance().shareDesktopImageType() );
-
   screen_shot = QPixmap();
+
   QByteArray pix_hash = QCryptographicHash::hash( pix_bytes, QCryptographicHash::Sha1 );
 
-  if( pix_hash != m_lastImageHash || m_delay > 3 )
+  if( pix_hash != m_lastImageHash || m_delayCounter > 3 )
   {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "New share desktop image available with" << buffer.size() << "bytes";
+#endif
     m_lastImageHash = pix_hash;
-    m_delay = 0;
+    m_delayCounter = 0;
     emit imageAvailable( pix_bytes );
   }
   else
-    m_delay++;
+    m_delayCounter++;
 }
