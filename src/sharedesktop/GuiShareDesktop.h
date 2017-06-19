@@ -55,11 +55,13 @@ protected:
 
 private:
   VNumber m_userId;
+  QPixmap m_lastPixmap;
   QScrollArea* mp_scrollArea;
   QLabel* mp_lView;
   QDateTime m_lastUpdate;
   QSize m_pixSize;
   bool m_toDelete;
+
 
 };
 

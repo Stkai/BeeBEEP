@@ -181,9 +181,11 @@ void GuiChat::updateActions( const Chat& c, bool is_connected, int connected_use
   bool local_user_is_member = c.hasUser( Settings::instance().localUser().id() );
   bool chat_is_empty = c.isEmpty();
   bool can_send_files = false;
-  bool desktop_is_shared = false;
   UserList chat_members;
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  bool desktop_is_shared = false;
   QStringList share_desktop_users;
+#endif
   if( connected_users > 0 )
   {
     chat_members = UserManager::instance().userList().fromUsersId( c.usersId() );
@@ -1054,9 +1056,9 @@ void GuiChat::shareDesktopToChat()
 }
 #endif
 
+#ifdef BEEBEEP_USE_SHAREDESKTOP
 void GuiChat::onTickEvent( int ticks )
 {
-#ifdef BEEBEEP_USE_SHAREDESKTOP
   if( mp_actShareDesktop->isChecked() )
   {
     if( ticks % 2 == 0 )
@@ -1064,5 +1066,8 @@ void GuiChat::onTickEvent( int ticks )
     else
       mp_actShareDesktop->setIcon( Bee::convertToGrayScale( IconManager::instance().icon( "desktop-share.png" ), Settings::instance().mainBarIconSize() ) );
   }
-#endif
 }
+#else
+void GuiChat::onTickEvent( int )
+{}
+#endif

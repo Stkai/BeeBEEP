@@ -968,7 +968,7 @@ void Settings::load()
   m_promptOnCloseEvent = sets->value( "PromptOnCloseEvent", m_promptOnCloseEvent ).toBool();
   m_isFacebookPageLinkClicked = sets->value( "FacebookPageLinkClicked", false ).toBool();
   m_showUserStatusBackgroundColor = sets->value( "ShowUserStatusBackgroundColor", false ).toBool();
-  m_showUserStatusDescription = sets->value( "ShowUserStatusDescription", false ).toBool();
+  m_showUserStatusDescription = sets->value( "ShowUserStatusDescription", true ).toBool();
   m_shortcuts = sets->value( "Shortcuts", QStringList() ).toStringList();
   m_useShortcuts = sets->value( "UseShortcuts", false ).toBool();
   m_useNativeDialogs = sets->value( "UseNativeFileDialogs", m_useNativeDialogs ).toBool();

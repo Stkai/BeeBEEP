@@ -27,7 +27,7 @@
 
 
 GuiShareDesktop::GuiShareDesktop( QWidget *parent )
- : QMainWindow( parent ), m_userId( ID_INVALID )
+ : QMainWindow( parent ), m_userId( ID_INVALID ), m_lastPixmap()
 {
   setObjectName( "GuiShareDesktop" );
   setWindowIcon( QIcon( ":/images/beebeep.png" ) );
@@ -43,6 +43,7 @@ GuiShareDesktop::GuiShareDesktop( QWidget *parent )
   setCentralWidget( mp_scrollArea );
   m_lastUpdate = QDateTime::currentDateTime();
   m_toDelete = false;
+
 }
 
 void GuiShareDesktop::setUser( const User& u )
@@ -58,8 +59,20 @@ void GuiShareDesktop::setPixmapSize( const QSize& pix_size )
 
 void GuiShareDesktop::updatePixmap( const QPixmap& pix )
 {
-  mp_lView->setPixmap( pix );
   m_lastUpdate = QDateTime::currentDateTime();
+  m_lastPixmap = pix;
+  if( isMaximized() || isFullScreen() )
+  {
+    if( pix.height() > mp_lView->height() )
+      mp_lView->setPixmap( pix.scaledToHeight( mp_lView->height() ) );
+    else if( pix.width() > mp_lView->width() )
+      mp_lView->setPixmap( pix.scaledToWidth( mp_lView->width() ) );
+    else
+      mp_lView->setPixmap( pix );
+  }
+  else
+    mp_lView->setPixmap( pix );
+  mp_lView->setPixmap( pix );
   mp_lView->setToolTip( QString( "%1 %2" ).arg( tr( "last update" ) ).arg( Bee::dateTimeToString( m_lastUpdate ) ) );
 }
 
