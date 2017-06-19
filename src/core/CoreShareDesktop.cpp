@@ -33,6 +33,9 @@
 
 bool Core::startShareDesktop( VNumber user_id )
 {
+  if( !Settings::instance().enableShareDesktop() )
+    return false;
+
   User u = UserManager::instance().findUser( user_id );
   if( !u.isValid() )
   {
@@ -69,7 +72,7 @@ void Core::stopShareDesktop( VNumber user_id )
   {
     QString sHtmlMsg = tr( "%1 You stop to share desktop with %2." ).arg( IconManager::instance().toHtml( "desktop-share-refused.png", "*G*" ), u.name() );
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::System );
-    sendMessageToLocalNetwork( u, Protocol::instance().shareDesktopDataToMessage( "" ) );
+    sendMessageToLocalNetwork( u, Protocol::instance().shareDesktopImageDataToMessage( "" ) ); // Empty image stops desktop sharing
     emit shareDesktopUpdate( u );
   }
 }
@@ -104,7 +107,7 @@ void Core::refuseToViewShareDesktop( VNumber from_user_id, VNumber to_user_id )
 
   if( from_user.isLocal() )
   {
-    qDebug() << "You have closed the view of the desktop shared by" << qPrintable( to_user.path() );
+    qDebug() << "You have finished to view the desktop shared by" << qPrintable( to_user.path() );
     Message m = Protocol::instance().refuseToViewDesktopShared();
     sendMessageToLocalNetwork( to_user, m );
   }
@@ -125,7 +128,7 @@ bool Core::shareDesktopIsActive( VNumber user_id ) const
     return mp_shareDesktop->isActive() && mp_shareDesktop->userIdList().contains( user_id );
 }
 
-void Core::onShareDesktopDataReady( const QByteArray& pix_data )
+void Core::onShareDesktopImageDataReady( const QByteArray& img_data )
 {
   if( !mp_shareDesktop->isActive() )
     return;
@@ -136,7 +139,7 @@ void Core::onShareDesktopDataReady( const QByteArray& pix_data )
     return;
   }
 
-  Message m = Protocol::instance().shareDesktopDataToMessage( pix_data );
+  Message m = Protocol::instance().shareDesktopImageDataToMessage( img_data );
   foreach( VNumber user_id, mp_shareDesktop->userIdList() )
   {
     Connection* c = connection( user_id );

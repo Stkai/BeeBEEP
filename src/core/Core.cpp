@@ -79,7 +79,7 @@ Core::Core( QObject* parent )
   connect( mp_fileTransfer, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ), this, SLOT( checkFileTransferMessage( VNumber, VNumber, const FileInfo&, const QString& ) ) );
   connect( mp_fileTransfer, SIGNAL( completed( VNumber, VNumber, const FileInfo& ) ), this, SLOT( onFileTransferCompleted( VNumber, VNumber, const FileInfo& ) ) );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-  connect( mp_shareDesktop, SIGNAL( shareDesktopDataReady( const QByteArray& ) ), this, SLOT( onShareDesktopDataReady( const QByteArray& ) ) );
+  connect( mp_shareDesktop, SIGNAL( shareDesktopImageDataReady( const QByteArray& ) ), this, SLOT( onShareDesktopImageDataReady( const QByteArray& ) ) );
 #endif
 }
 

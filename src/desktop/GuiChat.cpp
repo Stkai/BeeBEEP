@@ -129,6 +129,7 @@ GuiChat::GuiChat( QWidget *parent )
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   mp_actShareDesktop = new QAction( IconManager::instance().icon( "desktop-share.png" ), tr( "Share your desktop" ), this );
   mp_actShareDesktop->setCheckable( true );
+  mp_actShareDesktop->setEnabled( Settings::instance().enableShareDesktop() );
   connect( mp_actShareDesktop, SIGNAL( triggered() ), this, SLOT( shareDesktopToChat() ) );
 #endif
 
@@ -196,10 +197,13 @@ void GuiChat::updateActions( const Chat& c, bool is_connected, int connected_use
       if( u.isStatusConnected() )
         can_send_files = true;
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-      if( beeCore->shareDesktopIsActive( u.id() ) )
+      if( Settings::instance().enableShareDesktop() )
       {
-        desktop_is_shared = true;
-        share_desktop_users.append( u.name() );
+        if( beeCore->shareDesktopIsActive( u.id() ) )
+        {
+          desktop_is_shared = true;
+          share_desktop_users.append( u.name() );
+        }
       }
 #endif
     }
@@ -259,8 +263,11 @@ void GuiChat::updateActions( const Chat& c, bool is_connected, int connected_use
 #endif
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-  mp_actShareDesktop->setEnabled( m_chatId != ID_DEFAULT_CHAT && local_user_is_member && is_connected && can_send_files );
-  mp_actShareDesktop->setChecked( desktop_is_shared );
+  mp_actShareDesktop->setEnabled( Settings::instance().enableShareDesktop() && m_chatId != ID_DEFAULT_CHAT && local_user_is_member && is_connected && can_send_files );
+  if( Settings::instance().enableShareDesktop() )
+    mp_actShareDesktop->setChecked( desktop_is_shared );
+  else
+    mp_actShareDesktop->setChecked( false );
 
   if( mp_actShareDesktop->isChecked() )
     mp_actShareDesktop->setToolTip( tr( "Your desktop is shared with %1" ).arg( Bee::stringListToTextString( share_desktop_users ) ) );

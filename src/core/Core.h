@@ -194,7 +194,7 @@ protected slots:
   void sendShareBoxList();
   void onFileTransferCompleted( VNumber, VNumber, const FileInfo& );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-  void onShareDesktopDataReady( const QByteArray& );
+  void onShareDesktopImageDataReady( const QByteArray& );
 #endif
   /* CoreChat */
   void addListToSavedChats();

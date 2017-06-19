@@ -4,6 +4,7 @@ BeeBEEP 4.0.1
 - Removed debug message on focus changed
 - Simplified GUI of "Configure network..." option
 - Hive protocol can be used to contact user who remains offline
+- Desktop Sharing (beta)
 
 BeeBEEP 4.0.0
 - Changed all the main user interface

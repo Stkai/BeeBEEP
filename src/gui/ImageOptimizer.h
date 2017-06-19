@@ -33,15 +33,11 @@ class ImageOptimizer
   static ImageOptimizer* mp_instance;
 
 public:
-  inline void setImageType( const QByteArray& );
-  inline void setUseCompression( bool );
-  inline void setCompressionLevel( int );
-
   QImage diffImage( const QImage& old_image, const QImage& new_image ) const;
   QImage mergeImage( const QImage& old_image, const QImage& new_image ) const;
 
-  QByteArray saveImage( const QImage& ) const;
-  QImage loadImage( const QByteArray& ) const;
+  QByteArray saveImage( const QImage&, const char* image_type = "PNG", bool use_compression = true, int compression_level = -1 ) const;
+  QImage loadImage( const QByteArray&, const char* image_type = "PNG", bool use_compression = true ) const;
 
 
   static ImageOptimizer& instance()
@@ -63,16 +59,6 @@ public:
 protected:
   ImageOptimizer();
 
-private:
-  QByteArray m_imageType;
-  bool m_useCompression;
-  int m_compressioneLevel;
-
 };
-
-// Inline Functions
-inline void ImageOptimizer::setImageType( const QByteArray& new_value ) { m_imageType = new_value; }
-inline void ImageOptimizer::setUseCompression( bool new_value ) { m_useCompression = new_value; }
-inline void ImageOptimizer::setCompressionLevel( int new_value ) { m_compressioneLevel = new_value; }
 
 #endif // BEEBEEP_IMAGEOPTIMIZER_H

@@ -37,7 +37,7 @@ public:
   bool isRunning() const;
 
 signals:
-  void imageAvailable( const QByteArray& );
+  void imageDataAvailable( const QByteArray& );
   void jobCompleted();
 
 public slots:
@@ -50,6 +50,7 @@ protected slots:
 private:
   QTimer m_timer;
   QImage m_lastImage;
+  bool m_stop;
 
 };
 

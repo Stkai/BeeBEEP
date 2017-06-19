@@ -28,7 +28,6 @@ ImageOptimizer* ImageOptimizer::mp_instance = NULL;
 
 
 ImageOptimizer::ImageOptimizer()
- : m_imageType( "PNG" ), m_useCompression( true ), m_compressioneLevel( -1 )
 {
 }
 
@@ -87,24 +86,24 @@ QImage ImageOptimizer::mergeImage( const QImage& old_image, const QImage& new_im
   return merged_img;
 }
 
-QByteArray ImageOptimizer::saveImage( const QImage& img ) const
+QByteArray ImageOptimizer::saveImage( const QImage& img, const char* image_type, bool use_compression, int compression_level ) const
 {
   QByteArray diff_img_bytes;
   QBuffer buffer( &diff_img_bytes );
   buffer.open( QIODevice::WriteOnly );
-  img.save( &buffer, m_imageType.constData() );
-  if( m_useCompression )
-    return qCompress( diff_img_bytes, m_compressioneLevel );
+  img.save( &buffer, image_type );
+  if( use_compression )
+    return qCompress( diff_img_bytes, compression_level ).toBase64();
   else
-    return diff_img_bytes;
+    return diff_img_bytes.toBase64();
 }
 
-QImage ImageOptimizer::loadImage( const QByteArray& img_byte_array ) const
+QImage ImageOptimizer::loadImage( const QByteArray& img_byte_array, const char* image_type, bool use_compression ) const
 {
-  QByteArray diff_img_bytes = m_useCompression ? qUncompress( img_byte_array ) : img_byte_array;
+  QByteArray diff_img_bytes = use_compression ? qUncompress( QByteArray::fromBase64( img_byte_array ) ) : QByteArray::fromBase64( img_byte_array );
   QBuffer buffer( &diff_img_bytes );
   buffer.open( QIODevice::ReadOnly );
   QImage img;
-  img.load( &buffer, m_imageType.constData() );
+  img.load( &buffer, image_type );
   return img;
 }

@@ -885,6 +885,24 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().showFileTransferCompletedOnTray() );
   act->setData( 48 );
 
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  QMenu* menu_share_desktop = new QMenu( tr( "Desktop sharing" ), this );
+  menu_share_desktop->setIcon( IconManager::instance().icon( "desktop-share.png" ) );
+  mp_menuSettings->addMenu( menu_share_desktop );
+  act = menu_share_desktop->addAction( tr( "Enable desktop sharing" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().enableShareDesktop() );
+  act->setData( 60 );
+  menu_share_desktop->addSeparator();
+  act = menu_share_desktop->addAction( IconManager::instance().icon( "timer.png" ), tr( "Select screen capture interval" ) + QString( "..." ), this, SLOT( settingsChanged() ) );
+  act->setData( 61 );
+  menu_share_desktop->addSeparator();
+  act = menu_share_desktop->addAction( tr( "Fit image to screen" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().shareDesktopFitToScreen() );
+  act->setData( 62 );
+#endif
+
   mp_menuSettings->addSeparator();
   mp_menuSettings->addAction( IconManager::instance().icon( "shortcut.png" ), tr( "Shortcuts" ) + QString( "..." ), this, SLOT( editShortcuts() ) );
   mp_menuSettings->addAction( IconManager::instance().icon( "language.png" ), tr( "Select language" ) + QString( "..." ), this, SLOT( selectLanguage() ) );
@@ -1436,6 +1454,30 @@ void GuiMain::settingsChanged( QAction* act )
     showRestartConnectionAlertMessage();
     Settings::instance().setUserRecognitionMethod( Settings::RecognizeByNickname );
     break;
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  case 60:
+    {
+      Settings::instance().setEnableShareDesktop( act->isChecked() );
+      if( !act->isChecked() )
+      {
+        if( beeCore->shareDesktopIsActive( ID_INVALID ) )
+          beeCore->stopShareDesktop();
+      }
+    }
+    break;
+  case 61:
+    {
+      bool interval_ok = false;
+      int capture_delay = QInputDialog::getInt( this, Settings::instance().programName(), act->text() + QString( " (ms)" ),
+                                                Settings::instance().shareDesktopCaptureDelay(), 100, 10000, 100, &interval_ok );
+      if( ok )
+        Settings::instance().setShareDesktopCaptureDelay( capture_delay );
+    }
+    break;
+  case 62:
+    Settings::instance().setShareDesktopFitToScreen( act->isChecked() );
+    break;
+#endif
   case 99:
     break;
   default:
@@ -3781,6 +3823,18 @@ void GuiMain::showRestartApplicationAlertMessage()
 #ifdef BEEBEEP_USE_SHAREDESKTOP
 void GuiMain::onShareDesktopImageAvailable( const User& u, const QImage& img )
 {
+  int desktop_h = qApp->desktop()->availableGeometry().height();
+  int desktop_w = qApp->desktop()->availableGeometry().width();
+  QImage fit_img;
+  if( Settings::instance().shareDesktopFitToScreen() && (img.width() > desktop_w || img.height() > desktop_h) )
+  {
+    if( desktop_h <= desktop_w )
+      fit_img = img.scaledToHeight( desktop_h - 20 );
+    else
+      fit_img = img.scaledToWidth( desktop_w - 20 );
+  }
+  else
+    fit_img = img;
 
   foreach( GuiShareDesktop* gsd, m_desktops )
   {
@@ -3789,7 +3843,7 @@ void GuiMain::onShareDesktopImageAvailable( const User& u, const QImage& img )
       if( img.isNull() )
         gsd->close();
       else
-        gsd->updateImage( img );
+        gsd->updateImage( fit_img );
       return;
     }
   }
@@ -3798,12 +3852,12 @@ void GuiMain::onShareDesktopImageAvailable( const User& u, const QImage& img )
   connect( new_gui, SIGNAL( shareDesktopClosed( VNumber ) ), this, SLOT( onShareDesktopCloseEvent( VNumber ) ) );
   connect( new_gui, SIGNAL( shareDesktopDeleteRequest( VNumber ) ), this, SLOT( onShareDesktopDeleteRequest( VNumber ) ) );
   new_gui->setUser( u );
-  new_gui->setGeometry( 10, 40, qMin( img.width()+12, qMax( 640, qApp->desktop()->availableGeometry().width()-100 ) ),
-                                qMin( img.height()+12, qMax( 480, qApp->desktop()->availableGeometry().height()-100 ) ) );
-  new_gui->setImageSize( img.size() );
+  new_gui->setGeometry( 10, 40, qMin( fit_img.width()+12, qMax( 640, desktop_w-100 ) ),
+                                qMin( fit_img.height()+12, qMax( 480, desktop_h-100 ) ) );
+  new_gui->setImageSize( fit_img.size() );
   new_gui->show();
-  new_gui->setMaximumSize( img.width()+12, img.height()+12 );
-  new_gui->updateImage( img );
+  new_gui->setMaximumSize( fit_img.width()+12, fit_img.height()+12 );
+  new_gui->updateImage( fit_img );
   m_desktops.append( new_gui );
 }
 

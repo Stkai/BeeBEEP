@@ -590,10 +590,18 @@ void Core::parseShareDesktopMessage( const User& u, const Message& m )
   }
   else if( m.hasFlag( Message::Private ) )
   {
-    QImage img = Protocol::instance().imageFromShareDesktopMessage( m );
-    if( img.isNull() )
-      qDebug() << qPrintable( u.path() ) << "has finished to share desktop with you";
-    emit shareDesktopImageAvailable( u, img );
+    if( Settings::instance().enableShareDesktop() )
+    {
+      QImage img = Protocol::instance().imageFromShareDesktopMessage( m );
+      if( img.isNull() )
+        qDebug() << qPrintable( u.path() ) << "has finished to share desktop with you";
+      emit shareDesktopImageAvailable( u, img );
+    }
+    else
+    {
+      refuseToViewShareDesktop( ID_LOCAL_USER, u.id() );
+      qDebug() << "You have refused to view the shared desktop because the option is disabled";
+    }
   }
   else
   {

@@ -437,9 +437,12 @@ public:
   inline void setEmoticonSourcePath( const QString& );
   inline const QString& emoticonSourcePath() const;
 
-#ifdef BEEBEEP_USE_SHAREDESKTOP
-  int shareDesktopCaptureDelay() const;
-#endif
+  inline void setEnableShareDesktop( bool );
+  inline bool enableShareDesktop() const;
+  inline void setShareDesktopCaptureDelay( int );
+  inline int shareDesktopCaptureDelay() const;
+  inline void setShareDesktopFitToScreen( bool );
+  inline bool shareDesktopFitToScreen() const;
 
   QString simpleEncrypt( const QString& );
   QString simpleDecrypt( const QString& );
@@ -680,6 +683,10 @@ private:
 
   QString m_iconSourcePath;
   QString m_emoticonSourcePath;
+
+  bool m_enableShareDesktop;
+  int m_shareDesktopCaptureDelay;
+  bool m_shareDesktopFitToScreen;
 
 };
 
@@ -967,5 +974,11 @@ inline void Settings::setIconSourcePath( const QString& new_value ) { m_iconSour
 inline const QString& Settings::iconSourcePath() const { return m_iconSourcePath; }
 inline void Settings::setEmoticonSourcePath( const QString& new_value ) { m_emoticonSourcePath = new_value; }
 inline const QString& Settings::emoticonSourcePath() const { return m_emoticonSourcePath; }
+inline void Settings::setEnableShareDesktop( bool new_value ) { m_enableShareDesktop = new_value; }
+inline bool Settings::enableShareDesktop() const { return m_enableShareDesktop; }
+inline void Settings::setShareDesktopCaptureDelay( int new_value ) { m_shareDesktopCaptureDelay = new_value; }
+inline int Settings::shareDesktopCaptureDelay() const { return m_shareDesktopCaptureDelay; }
+inline void Settings::setShareDesktopFitToScreen( bool new_value ) { m_shareDesktopFitToScreen = new_value; }
+inline bool Settings::shareDesktopFitToScreen() const { return m_shareDesktopFitToScreen; }
 
 #endif // BEEBEEP_SETTINGS_H

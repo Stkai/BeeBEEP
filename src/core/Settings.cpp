@@ -159,6 +159,8 @@ Settings::Settings()
   m_emoticonSourcePath = "";
 
   m_maxDaysOfUserInactivity = 31;
+
+  m_shareDesktopCaptureDelay = 2100;
 }
 
 void Settings::createApplicationUuid()
@@ -622,13 +624,6 @@ QString Settings::gaEventVersion() const
   return QString( BEEBEEP_GA_EVENT_VERSION );
 }
 
-#ifdef BEEBEEP_USE_SHAREDESKTOP
-  int Settings::shareDesktopCaptureDelay() const
-  {
-    return BEEBEEP_SHARE_DESKTOP_CAPTURE_DELAY_MS;
-  }
-#endif
-
 QByteArray Settings::hash( const QString& string_to_hash ) const
 {
   QByteArray hash_pre = string_to_hash.toUtf8() + m_password;
@@ -1079,6 +1074,13 @@ void Settings::load()
   m_groupList = sets->value( "List", QStringList() ).toStringList();
   sets->endGroup();
 
+  sets->beginGroup( "ShareDesktop" );
+  m_enableShareDesktop = sets->value( "Enable", true ).toBool();
+  m_shareDesktopCaptureDelay = qMin( 100, sets->value( "CaptureScreenInterval(ms)", m_shareDesktopCaptureDelay ).toInt() );
+  m_shareDesktopFitToScreen = sets->value( "FitToScreen", false ).toBool();
+  sets->endGroup();
+
+
   sets->beginGroup( "Plugin" );
   QStringList key_list = sets->value( "List", QStringList() ).toStringList();
   if( !key_list.isEmpty() )
@@ -1330,6 +1332,12 @@ void Settings::save()
     sets->setValue( "Silenced", m_groupSilenced );
     sets->setValue( "List", m_groupList );
   }
+  sets->endGroup();
+
+  sets->beginGroup( "ShareDesktop" );
+  sets->setValue( "Enable", m_enableShareDesktop );
+  sets->setValue( "CaptureScreenInterval(ms)", m_shareDesktopCaptureDelay );
+  sets->setValue( "FitToScreen", m_shareDesktopFitToScreen );
   sets->endGroup();
 
   if( !m_pluginSettings.isEmpty() )

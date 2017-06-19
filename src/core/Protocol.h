@@ -128,7 +128,7 @@ public:
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   Message refuseToViewDesktopShared() const;
-  Message shareDesktopDataToMessage( const QByteArray& ) const;
+  Message shareDesktopImageDataToMessage( const QByteArray& ) const;
   QImage imageFromShareDesktopMessage( const Message& ) const;
 #endif
 

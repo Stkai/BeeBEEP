@@ -21,23 +21,24 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeApplication.h"
 #include "Chat.h"
 #include "ShareDesktop.h"
 #include "ShareDesktopJob.h"
 
 
 ShareDesktop::ShareDesktop( QObject *parent )
-  : QObject( parent ), m_userIdList()
+  : QObject( parent ), m_userIdList(), mp_job( 0 )
 {
   setObjectName( "ShareDesktop" );
-  mp_job = new ShareDesktopJob( this ); // Same GUI thread because Pixmaps
-  connect( mp_job, SIGNAL( jobCompleted() ), this, SLOT( onJobCompleted() ), Qt::QueuedConnection );
-  connect( mp_job, SIGNAL( imageAvailable( const QByteArray& ) ), this, SLOT( onImageDataAvailable( const QByteArray& ) ), Qt::QueuedConnection );
 }
 
 bool ShareDesktop::isActive() const
 {
-  return mp_job->isRunning();
+  if( mp_job )
+    return true;
+  else
+    return false;
 }
 
 bool ShareDesktop::start()
@@ -54,7 +55,12 @@ bool ShareDesktop::start()
     return false;
   }
 
-  mp_job->startJob();
+  mp_job = new ShareDesktopJob;
+  connect( mp_job, SIGNAL( jobCompleted() ), this, SLOT( onJobCompleted() ), Qt::QueuedConnection );
+  connect( mp_job, SIGNAL( imageDataAvailable( const QByteArray& ) ), this, SLOT( onImageDataAvailable( const QByteArray& ) ), Qt::QueuedConnection );
+  BeeApplication* bee_app = (BeeApplication*)qApp;
+  bee_app->addJob( mp_job );
+  QMetaObject::invokeMethod( mp_job, "startJob", Qt::QueuedConnection );
   return true;
 }
 
@@ -62,8 +68,7 @@ void ShareDesktop::stop()
 {
   if( !isActive() )
     return;
-
-  mp_job->stopJob();
+  QMetaObject::invokeMethod( mp_job, "stopJob", Qt::QueuedConnection );
 }
 
 bool ShareDesktop::addUserId( VNumber user_id )
@@ -84,12 +89,16 @@ void ShareDesktop::onJobCompleted()
   qDebug() << qPrintable( objectName() ) << "has completed its job";
 #endif
   m_userIdList.clear();
+  BeeApplication* bee_app = (BeeApplication*)qApp;
+  bee_app->removeJob( mp_job );
+  mp_job->deleteLater();
+  mp_job = 0;
 }
 
-void ShareDesktop::onImageDataAvailable( const QByteArray& pix_data )
+void ShareDesktop::onImageDataAvailable( const QByteArray& img_data )
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << qPrintable( objectName() ) << "has image data available";
+  qDebug() << qPrintable( objectName() ) << "has image data available" << img_data.size();
 #endif
-  emit shareDesktopDataReady( pix_data );
+  emit shareDesktopImageDataReady( img_data );
 }

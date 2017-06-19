@@ -1512,17 +1512,35 @@ QList<FileInfo> Protocol::messageToShareBoxFileList( const Message& m, const QHo
     return m;
   }
 
-  Message Protocol::shareDesktopDataToMessage( const QByteArray& pix_data ) const
+  Message Protocol::shareDesktopImageDataToMessage( const QByteArray& img_data ) const
   {
-    Message m( Message::ShareDesktop, ID_SHAREDESKTOP_MESSAGE, pix_data.toBase64() );
+    Message m( Message::ShareDesktop, ID_SHAREDESKTOP_MESSAGE, QString::fromLatin1( img_data ) );
     m.addFlag( Message::Private );
+    /* We don't need to send default value
+    QStringList sl_data;
+    sl_data << QString( "png" );
+    sl_data << QString( "*" );
+    m.setData( sl_data.join( DATA_FIELD_SEPARATOR ) );
+    */
     return m;
   }
 
   QImage Protocol::imageFromShareDesktopMessage( const Message& m ) const
   {
-    QByteArray pix_data = QByteArray::fromBase64( m.text().toLatin1() );
-    return ImageOptimizer::instance().loadImage( pix_data );
+    if( m.text().isEmpty() )
+      return QImage();
+    QString img_type( "png" );
+    bool use_compression = true;
+    if( !m.data().isEmpty() )
+    {
+      QStringList sl_data = m.data().split( DATA_FIELD_SEPARATOR, QString::KeepEmptyParts );
+      if( !sl_data.isEmpty() )
+        img_type = sl_data.takeFirst();
+      if( !sl_data.isEmpty() )
+        use_compression = sl_data.takeFirst().isEmpty() ? false : true;
+    }
+
+    return ImageOptimizer::instance().loadImage( m.text().toLatin1(), img_type.toLatin1().constData(), use_compression );
   }
 #endif
 

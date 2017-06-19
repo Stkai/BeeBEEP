@@ -46,7 +46,7 @@ public:
   inline const QList<VNumber>& userIdList() const;
 
 signals:
-  void shareDesktopDataReady( const QByteArray& );
+  void shareDesktopImageDataReady( const QByteArray& );
 
 protected slots:
   void onJobCompleted();

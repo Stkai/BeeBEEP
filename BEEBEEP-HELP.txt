@@ -235,3 +235,8 @@ FileTransferConfirmTimeout=30000
 FileTransferBufferSize=65456
 ConfirmOnDownloadFile=[true/false] if it is true always prompt before downloading a file
 ShareList=(do not edit manually)
+
+[ShareDesktop]
+Enable=[true/false] enable file desktop sharing (default=true) [4.0.1]
+CaptureScreenInterval(ms)=[integer] interval in ms of capture screen (default=2100) [4.0.1]
+FitToScreen=[true/false] fit desktop image from remote user in your screen (default=false) [4.0.1]

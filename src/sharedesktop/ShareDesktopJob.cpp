@@ -27,7 +27,7 @@
 
 
 ShareDesktopJob::ShareDesktopJob( QObject *parent )
-  : QObject( parent ), m_timer(), m_lastImage()
+  : QObject( parent ), m_timer(), m_lastImage(), m_stop( false )
 {
   setObjectName( "ShareDesktopJob" );
   m_timer.setInterval( Settings::instance().shareDesktopCaptureDelay() );
@@ -45,9 +45,9 @@ void ShareDesktopJob::startJob()
     qWarning() << qPrintable( objectName() ) << "is already running";
     return;
   }
-
+  m_stop = false;
   m_lastImage = QImage();
-  m_timer.start();
+  QMetaObject::invokeMethod( &m_timer, "start", Qt::QueuedConnection );
 }
 
 void ShareDesktopJob::stopJob()
@@ -55,20 +55,26 @@ void ShareDesktopJob::stopJob()
 #ifdef BEEBEEP_DEBUG
   qDebug() << qPrintable( objectName() ) << "is stopping its job";
 #endif
-  m_timer.stop();
+  m_stop = true;
+  QMetaObject::invokeMethod( &m_timer, "stop", Qt::QueuedConnection );
   emit jobCompleted();
 }
 
 bool ShareDesktopJob::isRunning() const
 {
-  return m_timer.isActive();
+  if( !m_stop )
+    return m_timer.isActive();
+  else
+    return false;
 }
 
 void ShareDesktopJob::makeScreenshot()
 {
   if( !isRunning() )
   {
+#ifdef BEEBEEP_DEBUG
     qDebug() << qPrintable( objectName() ) << "is not running... screen capture aborted";
+#endif
     return;
   }
 
@@ -99,11 +105,7 @@ void ShareDesktopJob::makeScreenshot()
   screen_shot = QPixmap();
 
   QImage diff_image = ImageOptimizer::instance().diffImage( m_lastImage, new_image );
-  QByteArray diff_array = ImageOptimizer::instance().saveImage( diff_image );
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "New share desktop image available with" << diff_array.size() << "bytes";
-#endif
-
   m_lastImage = new_image;
-  emit imageAvailable( diff_array );
+  QByteArray diff_image_data = ImageOptimizer::instance().saveImage( diff_image, "png", true );
+  emit imageDataAvailable( diff_image_data );
 }

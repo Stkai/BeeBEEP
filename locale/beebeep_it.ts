@@ -446,6 +446,14 @@
         <source>%1 %2 has closed the view of your shared desktop.</source>
         <translation>%1 %2 ha chiuso la finestra con il tuo desktop condiviso.</translation>
     </message>
+    <message>
+        <source>%1 You have removed members: %2.</source>
+        <translation>%1 Hai rimosso i seguenti membri: %2.</translation>
+    </message>
+    <message>
+        <source>%1 %2 has removed members: %3.</source>
+        <translation>%1 %2 ha rimosso i seguenti membri: %3.</translation>
+    </message>
 </context>
 <context>
     <name>File</name>
@@ -2282,6 +2290,26 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Show chat toolbar</source>
         <translation>Mostra la barra delle conversazioni</translation>
+    </message>
+    <message>
+        <source>Desktop sharing</source>
+        <translation>Condivisione desktop</translation>
+    </message>
+    <message>
+        <source>Enable desktop sharing</source>
+        <translation>Abilita la condivisione del desktop</translation>
+    </message>
+    <message>
+        <source>Select screen capture interval</source>
+        <translation>Seleziona l&apos;intervallo di cattura dello schermo</translation>
+    </message>
+    <message>
+        <source>Fit image to screen</source>
+        <translation>Adatta l&apos;immagine al tuo schermo</translation>
+    </message>
+    <message>
+        <source>Select the interval in ms of screen capture</source>
+        <translation>Seleziona l&apos;intervallo in ms di cattura dello schermo</translation>
     </message>
 </context>
 <context>
