@@ -24,6 +24,7 @@
 #include "BeeUtils.h"
 #include "ColorManager.h"
 #include "EmoticonManager.h"
+#include "ImageOptimizer.h"
 #include "PluginManager.h"
 #include "Protocol.h"
 #include "Random.h"
@@ -1518,12 +1519,10 @@ QList<FileInfo> Protocol::messageToShareBoxFileList( const Message& m, const QHo
     return m;
   }
 
-  QPixmap Protocol::pixmapFromShareDesktopMessage( const Message& m ) const
+  QImage Protocol::imageFromShareDesktopMessage( const Message& m ) const
   {
-    QPixmap pix;
     QByteArray pix_data = QByteArray::fromBase64( m.text().toLatin1() );
-    pix.loadFromData( pix_data, Settings::instance().shareDesktopImageType() );
-    return pix;
+    return ImageOptimizer::instance().loadImage( pix_data );
   }
 #endif
 

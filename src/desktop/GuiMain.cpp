@@ -135,7 +135,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( beeCore, SIGNAL( newSystemStatusMessage( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-  connect( beeCore, SIGNAL( shareDesktopImageAvailable( const User&, const QPixmap& ) ), this, SLOT( onShareDesktopImageAvailable( const User&, const QPixmap& ) ) );
+  connect( beeCore, SIGNAL( shareDesktopImageAvailable( const User&, const QImage& ) ), this, SLOT( onShareDesktopImageAvailable( const User&, const QImage& ) ) );
   connect( beeCore, SIGNAL( shareDesktopUpdate( const User& ) ), this, SLOT( onShareDesktopUpdate( const User& ) ) );
 #endif
 
@@ -3779,21 +3779,17 @@ void GuiMain::showRestartApplicationAlertMessage()
 }
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-void GuiMain::onShareDesktopImageAvailable( const User& u, const QPixmap& pix )
+void GuiMain::onShareDesktopImageAvailable( const User& u, const QImage& img )
 {
+
   foreach( GuiShareDesktop* gsd, m_desktops )
   {
     if( gsd->userId() == u.id() )
     {
-      if( pix.isNull() )
-      {
+      if( img.isNull() )
         gsd->close();
-      }
       else
-      {
-        if( gsd->isVisible() )
-          gsd->updatePixmap( pix );
-      }
+        gsd->updateImage( img );
       return;
     }
   }
@@ -3802,11 +3798,12 @@ void GuiMain::onShareDesktopImageAvailable( const User& u, const QPixmap& pix )
   connect( new_gui, SIGNAL( shareDesktopClosed( VNumber ) ), this, SLOT( onShareDesktopCloseEvent( VNumber ) ) );
   connect( new_gui, SIGNAL( shareDesktopDeleteRequest( VNumber ) ), this, SLOT( onShareDesktopDeleteRequest( VNumber ) ) );
   new_gui->setUser( u );
-  new_gui->setGeometry( 10, 40, qMin( pix.width()+12, qMax( 640, qApp->desktop()->availableGeometry().width()-100 ) ),
-                                qMin( pix.height()+12, qMax( 480, qApp->desktop()->availableGeometry().height()-100 ) ) );
-  new_gui->setPixmapSize( pix.size() );
+  new_gui->setGeometry( 10, 40, qMin( img.width()+12, qMax( 640, qApp->desktop()->availableGeometry().width()-100 ) ),
+                                qMin( img.height()+12, qMax( 480, qApp->desktop()->availableGeometry().height()-100 ) ) );
+  new_gui->setImageSize( img.size() );
   new_gui->show();
-  new_gui->updatePixmap( pix );
+  new_gui->setMaximumSize( img.width()+12, img.height()+12 );
+  new_gui->updateImage( img );
   m_desktops.append( new_gui );
 }
 

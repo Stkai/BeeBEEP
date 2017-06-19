@@ -23,11 +23,12 @@
 
 #include "BeeUtils.h"
 #include "GuiShareDesktop.h"
+#include "ImageOptimizer.h"
 #include "User.h"
 
 
 GuiShareDesktop::GuiShareDesktop( QWidget *parent )
- : QMainWindow( parent ), m_userId( ID_INVALID ), m_lastPixmap()
+ : QMainWindow( parent ), m_userId( ID_INVALID ), m_lastImage()
 {
   setObjectName( "GuiShareDesktop" );
   setWindowIcon( QIcon( ":/images/beebeep.png" ) );
@@ -38,12 +39,11 @@ GuiShareDesktop::GuiShareDesktop( QWidget *parent )
   mp_scrollArea->setWidgetResizable( false );
   mp_lView = new QLabel( this );
   mp_lView->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
-  setPixmapSize( QSize( 400, 300 ) );
+  setImageSize( QSize( 400, 300 ) );
   mp_scrollArea->setWidget( mp_lView );
   setCentralWidget( mp_scrollArea );
   m_lastUpdate = QDateTime::currentDateTime();
   m_toDelete = false;
-
 }
 
 void GuiShareDesktop::setUser( const User& u )
@@ -52,27 +52,16 @@ void GuiShareDesktop::setUser( const User& u )
   onUserChanged( u );
 }
 
-void GuiShareDesktop::setPixmapSize( const QSize& pix_size )
+void GuiShareDesktop::setImageSize( const QSize& pix_size )
 {
   mp_lView->setMinimumSize( pix_size );
 }
 
-void GuiShareDesktop::updatePixmap( const QPixmap& pix )
+void GuiShareDesktop::updateImage( const QImage& img )
 {
   m_lastUpdate = QDateTime::currentDateTime();
-  m_lastPixmap = pix;
-  if( isMaximized() || isFullScreen() )
-  {
-    if( pix.height() > mp_lView->height() )
-      mp_lView->setPixmap( pix.scaledToHeight( mp_lView->height() ) );
-    else if( pix.width() > mp_lView->width() )
-      mp_lView->setPixmap( pix.scaledToWidth( mp_lView->width() ) );
-    else
-      mp_lView->setPixmap( pix );
-  }
-  else
-    mp_lView->setPixmap( pix );
-  mp_lView->setPixmap( pix );
+  m_lastImage = ImageOptimizer::instance().mergeImage( m_lastImage, img );
+  mp_lView->setPixmap( QPixmap::fromImage( m_lastImage ) );
   mp_lView->setToolTip( QString( "%1 %2" ).arg( tr( "last update" ) ).arg( Bee::dateTimeToString( m_lastUpdate ) ) );
 }
 
@@ -97,7 +86,7 @@ void GuiShareDesktop::onTickEvent( int )
   if( m_toDelete )
     return;
 
-  if( m_lastUpdate.secsTo( QDateTime::currentDateTime() ) > 13 )
+  if( m_lastUpdate.secsTo( QDateTime::currentDateTime() ) > 15 )
   {
     m_toDelete = true;
     emit shareDesktopDeleteRequest( m_userId );

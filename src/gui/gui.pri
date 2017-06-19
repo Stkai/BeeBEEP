@@ -7,6 +7,7 @@ HEADERS +=  gui/AudioManager.h \
   gui/Emoticon.h \
   gui/EmoticonManager.h \
   gui/IconManager.h \
+  gui/ImageOptimizer.h \
   gui/ShortcutManager.h
 
 
@@ -17,4 +18,5 @@ SOURCES +=  gui/AudioManager.cpp \
   gui/Emoticon.cpp \
   gui/EmoticonManager.cpp \
   gui/IconManager.cpp \
+  gui/ImageOptimizer.cpp \
   gui/ShortcutManager.cpp

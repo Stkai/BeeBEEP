@@ -38,8 +38,8 @@ public:
   void setUser( const User& );
   inline VNumber userId() const;
 
-  void setPixmapSize( const QSize& );
-  void updatePixmap( const QPixmap& );
+  void setImageSize( const QSize& );
+  void updateImage( const QImage& );
 
   void onTickEvent( int );
 
@@ -55,13 +55,11 @@ protected:
 
 private:
   VNumber m_userId;
-  QPixmap m_lastPixmap;
+  QImage m_lastImage;
   QScrollArea* mp_scrollArea;
   QLabel* mp_lView;
   QDateTime m_lastUpdate;
-  QSize m_pixSize;
   bool m_toDelete;
-
 
 };
 

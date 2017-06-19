@@ -45,14 +45,13 @@ const char* BEEBEEP_GA_TRACKING_ID = "UA-57878696-1";  // VUEtNTc4Nzg2OTYtMQ==
 const char* BEEBEEP_GA_URL = "http://www.google-analytics.com/collect"; // aHR0cDovL3d3dy5nb29nbGUtYW5hbHl0aWNzLmNvbS9jb2xsZWN0
 const char* BEEBEEP_GA_EVENT_VERSION = "1";
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-  const char* BEEBEEP_SHARE_DESKTOP_IMAGE_TYPE = "JPG";
-  const int BEEBEEP_SHARE_DESKTOP_CAPTURE_DELAY_MS = 2100;
+  const int BEEBEEP_SHARE_DESKTOP_CAPTURE_DELAY_MS = 1700;
 #endif
 const char* HUNSPELL_VERSION = "1.6.1";
 const char* BEEBEEP_VERSION = "4.0.1";
 const int BEEBEEP_PROTO_VERSION = 70;
 const int BEEBEEP_SETTINGS_VERSION = 9;
-const int BEEBEEP_BUILD = 928;
+const int BEEBEEP_BUILD = 929;
 
 #endif // BEEBEEP_VERSION_H
 

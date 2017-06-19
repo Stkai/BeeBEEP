@@ -156,7 +156,7 @@ private slots:
   void saveGeometryAndState();
   void onChangeSettingOnExistingFile( QAction* );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-  void onShareDesktopImageAvailable( const User&, const QPixmap& );
+  void onShareDesktopImageAvailable( const User&, const QImage& );
   void onShareDesktopCloseEvent( VNumber );
   void onShareDesktopDeleteRequest( VNumber );
   void onShareDesktopRequestFromChat( VNumber, bool );

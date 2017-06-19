@@ -21,12 +21,13 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "ImageOptimizer.h"
 #include "Settings.h"
 #include "ShareDesktopJob.h"
 
 
 ShareDesktopJob::ShareDesktopJob( QObject *parent )
-  : QObject( parent ), m_timer(), m_lastImageHash( "" ), m_delayCounter( 0 )
+  : QObject( parent ), m_timer(), m_lastImage()
 {
   setObjectName( "ShareDesktopJob" );
   m_timer.setInterval( Settings::instance().shareDesktopCaptureDelay() );
@@ -45,8 +46,7 @@ void ShareDesktopJob::startJob()
     return;
   }
 
-  m_lastImageHash = "";
-  m_delayCounter = 0;
+  m_lastImage = QImage();
   m_timer.start();
 }
 
@@ -95,23 +95,15 @@ void ShareDesktopJob::makeScreenshot()
   if( device_pixel_ratio > 1.0 )
     screen_shot = screen_shot.scaled( QApplication::desktop()->width(), QApplication::desktop()->height(), Qt::KeepAspectRatio );
 
-  QByteArray pix_bytes;
-  QBuffer buffer( &pix_bytes );
-  buffer.open( QIODevice::WriteOnly );
-  screen_shot.save( &buffer, Settings::instance().shareDesktopImageType() );
+  QImage new_image = screen_shot.toImage();
   screen_shot = QPixmap();
 
-  QByteArray pix_hash = QCryptographicHash::hash( pix_bytes, QCryptographicHash::Sha1 );
-
-  if( pix_hash != m_lastImageHash || m_delayCounter > 3 )
-  {
+  QImage diff_image = ImageOptimizer::instance().diffImage( m_lastImage, new_image );
+  QByteArray diff_array = ImageOptimizer::instance().saveImage( diff_image );
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "New share desktop image available with" << buffer.size() << "bytes";
+  qDebug() << "New share desktop image available with" << diff_array.size() << "bytes";
 #endif
-    m_lastImageHash = pix_hash;
-    m_delayCounter = 0;
-    emit imageAvailable( pix_bytes );
-  }
-  else
-    m_delayCounter++;
+
+  m_lastImage = new_image;
+  emit imageAvailable( diff_array );
 }

@@ -438,7 +438,6 @@ public:
   inline const QString& emoticonSourcePath() const;
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-  const char* shareDesktopImageType() const;
   int shareDesktopCaptureDelay() const;
 #endif
 

@@ -623,11 +623,6 @@ QString Settings::gaEventVersion() const
 }
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-  const char* Settings::shareDesktopImageType() const
-  {
-    return BEEBEEP_SHARE_DESKTOP_IMAGE_TYPE;
-  }
-
   int Settings::shareDesktopCaptureDelay() const
   {
     return BEEBEEP_SHARE_DESKTOP_CAPTURE_DELAY_MS;
