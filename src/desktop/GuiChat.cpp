@@ -270,9 +270,14 @@ void GuiChat::updateActions( const Chat& c, bool is_connected, int connected_use
     mp_actShareDesktop->setChecked( false );
 
   if( mp_actShareDesktop->isChecked() )
+  {
     mp_actShareDesktop->setToolTip( tr( "Your desktop is shared with %1" ).arg( Bee::stringListToTextString( share_desktop_users ) ) );
+  }
   else
+  {
     mp_actShareDesktop->setToolTip( tr( "Share your desktop" ) );
+    mp_actShareDesktop->setIcon( IconManager::instance().icon( "desktop-share.png" ) );
+  }
 #endif
 }
 
@@ -1058,12 +1063,9 @@ void GuiChat::resetChatFontToDefault()
 #ifdef BEEBEEP_USE_SHAREDESKTOP
 void GuiChat::shareDesktopToChat()
 {
-  mp_actShareDesktop->setIcon( IconManager::instance().icon( "desktop-share.png" ) );
   emit shareDesktopToChatRequest( m_chatId, mp_actShareDesktop->isChecked() );
 }
-#endif
 
-#ifdef BEEBEEP_USE_SHAREDESKTOP
 void GuiChat::onTickEvent( int ticks )
 {
   if( mp_actShareDesktop->isChecked() )
@@ -1071,7 +1073,7 @@ void GuiChat::onTickEvent( int ticks )
     if( ticks % 2 == 0 )
       mp_actShareDesktop->setIcon( IconManager::instance().icon( "desktop-share.png" ) );
     else
-      mp_actShareDesktop->setIcon( Bee::convertToGrayScale( IconManager::instance().icon( "desktop-share.png" ), Settings::instance().mainBarIconSize() ) );
+      mp_actShareDesktop->setIcon( IconManager::instance().icon( "desktop-share-alternate.png" ) );
   }
 }
 #else

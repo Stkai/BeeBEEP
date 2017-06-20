@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -913,6 +913,17 @@
     </message>
 </context>
 <context>
+    <name>GuiChatListWidget</name>
+    <message>
+        <source>Insert keywords</source>
+        <translation>Inserisci parole chiave</translation>
+    </message>
+    <message>
+        <source>Clear keywords</source>
+        <translation>Cancella le parole chiave</translation>
+    </message>
+</context>
+<context>
     <name>GuiChatWidget</name>
     <message>
         <source>Chat</source>
@@ -1164,6 +1175,17 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Search group</source>
         <translation>Cerca un gruppo</translation>
+    </message>
+</context>
+<context>
+    <name>GuiGroupListWidget</name>
+    <message>
+        <source>Insert keywords</source>
+        <translation>Inserisci parole chiave</translation>
+    </message>
+    <message>
+        <source>Clear keywords</source>
+        <translation>Cancella le parole chiave</translation>
     </message>
 </context>
 <context>
@@ -2309,7 +2331,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Select the interval in ms of screen capture</source>
-        <translation>Seleziona l&apos;intervallo in ms di cattura dello schermo</translation>
+        <translation type="vanished">Seleziona l&apos;intervallo in ms di cattura dello schermo</translation>
     </message>
 </context>
 <context>
@@ -2691,6 +2713,17 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Click to view saved chat with %1</source>
         <translation>Click per vedere la conversazione salvata con %1</translation>
+    </message>
+</context>
+<context>
+    <name>GuiSavedChatListWidget</name>
+    <message>
+        <source>Insert keywords</source>
+        <translation>Inserisci parole chiave</translation>
+    </message>
+    <message>
+        <source>Clear keywords</source>
+        <translation>Cancella le parole chiave</translation>
     </message>
 </context>
 <context>
@@ -3253,6 +3286,21 @@ Inserisci un nome differente.</translation>
     </message>
 </context>
 <context>
+    <name>GuiUserListWidget</name>
+    <message>
+        <source>View options</source>
+        <translation>Opzioni di visualizzazione</translation>
+    </message>
+    <message>
+        <source>Insert keywords</source>
+        <translation>Inserisci parole chiave</translation>
+    </message>
+    <message>
+        <source>Clear keywords</source>
+        <translation>Cancella le parole chiave</translation>
+    </message>
+</context>
+<context>
     <name>GuiVCard</name>
     <message>
         <source>Birthday: %1</source>
@@ -3351,7 +3399,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Other informations</source>
-        <translation>Altre informazioni</translation>
+        <translation type="vanished">Altre informazioni</translation>
     </message>
     <message>
         <source>yyyy/MM/dd</source>
@@ -3360,6 +3408,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>dd/MM/yyyy</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Informations to display to other users</source>
+        <translation>Informazioni da mostrare agli altri utenti</translation>
     </message>
 </context>
 <context>

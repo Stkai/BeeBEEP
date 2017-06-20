@@ -337,7 +337,7 @@
    <item row="3" column="1" colspan="3">
     <widget class="QGroupBox" name="mp_gbInfo">
      <property name="title">
-      <string>Other informations</string>
+      <string>Informations to display to other users</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

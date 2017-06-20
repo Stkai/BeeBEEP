@@ -59,7 +59,11 @@
       <number>2</number>
      </property>
      <item>
-      <widget class="QLineEdit" name="mp_leFilter"/>
+      <widget class="QLineEdit" name="mp_leFilter">
+       <property name="toolTip">
+        <string>Insert keywords</string>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QPushButton" name="mp_pbClearFilter">
@@ -74,6 +78,9 @@
          <width>26</width>
          <height>26</height>
         </size>
+       </property>
+       <property name="toolTip">
+        <string>Clear keywords</string>
        </property>
        <property name="icon">
         <iconset resource="../beebeep.qrc">

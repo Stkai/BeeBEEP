@@ -38,9 +38,10 @@ GuiGroupList::GuiGroupList( QWidget* parent )
   mp_twGroupList->setColumnCount( 1 );
   mp_twGroupList->setRootIsDecorated( true );
   mp_twGroupList->setSortingEnabled( true );
-  QString w_stylesheet = QString( "background: white url(%1);"
+  mp_twGroupList->setObjectName( "GuiCustomList" );
+  QString w_stylesheet = QString( "#GuiCustomList { background: white url(%1);"
                         "background-repeat: no-repeat;"
-                        "background-position: bottom center;" ).arg( IconManager::instance().iconPath( "group-list.png" ) );
+                        "background-position: bottom center; }" ).arg( IconManager::instance().iconPath( "group-list.png" ) );
 
   mp_twGroupList->setStyleSheet( w_stylesheet );
 

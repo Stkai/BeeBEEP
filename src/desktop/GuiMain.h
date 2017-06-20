@@ -291,6 +291,7 @@ private:
   QActionGroup* mp_actGroupRecognizeUsers;
   QAction* mp_actSelectEmoticonSourcePath;
   QAction* mp_actRemoveInactiveUsers;
+  QAction* mp_actChangeStatusDescription;
 
   QMenu* mp_menuNetworkStatus;
   QAction* mp_actHostAddress;

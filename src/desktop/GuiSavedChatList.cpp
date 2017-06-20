@@ -38,9 +38,10 @@ GuiSavedChatList::GuiSavedChatList( QWidget* parent )
   mp_twSavedChatList->setColumnCount( 1 );
   mp_twSavedChatList->setRootIsDecorated( false );
   mp_twSavedChatList->setSortingEnabled( true );
-  QString w_stylesheet = QString( "background: white url(%1);"
+  mp_twSavedChatList->setObjectName( "GuiCustomList" );
+  QString w_stylesheet = QString( "#GuiCustomList { background: white url(%1);"
                         "background-repeat: no-repeat;"
-                        "background-position: bottom center;" ).arg( IconManager::instance().iconPath( "saved-chat-list.png" ) );
+                        "background-position: bottom center; }" ).arg( IconManager::instance().iconPath( "saved-chat-list.png" ) );
   mp_twSavedChatList->setStyleSheet( w_stylesheet );
 
   mp_twSavedChatList->setContextMenuPolicy( Qt::CustomContextMenu );

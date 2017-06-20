@@ -42,9 +42,10 @@ GuiChatList::GuiChatList( QWidget* parent )
   mp_twChatList->setContextMenuPolicy( Qt::CustomContextMenu );
   mp_twChatList->setMouseTracking( true );
   mp_twChatList->setHeaderHidden( true );
-  QString w_stylesheet = QString( "background: white url(%1);"
+  mp_twChatList->setObjectName( "GuiCustomList" );
+  QString w_stylesheet = QString( "#GuiCustomList { background: white url(%1);"
                         "background-repeat: no-repeat;"
-                        "background-position: bottom center;" ).arg( IconManager::instance().iconPath( "chat-list.png" ) );
+                        "background-position: bottom center; }" ).arg( IconManager::instance().iconPath( "chat-list.png" ) );
   mp_twChatList->setStyleSheet( w_stylesheet );
 
   m_chatSelected = ID_INVALID;

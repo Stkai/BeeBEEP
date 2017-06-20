@@ -991,16 +991,7 @@ void GuiMain::createMenus()
   mp_menuUserList->addSeparator();
 
   mp_menuUserList->addAction( tr( "Change size of the user's picture" ), this, SLOT( changeAvatarSizeInList() ) );
-
   mp_userList->setMenuSettings( mp_menuUserList );
-
-  /* Context Menu for user list view */
-  QMenu* context_menu_users = new QMenu( "Menu", this );
-  context_menu_users->addAction( mp_actVCard );
-  context_menu_users->addSeparator();
-  context_menu_users->addAction( mp_actConfigureNetwork );
-  context_menu_users->addAction( mp_actAddUsers );
-  mp_userList->setContextMenuUsers( context_menu_users );
 
   /* Status Menu */
   mp_menuStatus = new QMenu( tr( "Status" ), this );
@@ -1016,14 +1007,23 @@ void GuiMain::createMenus()
   act = mp_menuStatus->addMenu( mp_menuUserStatusList );
   act->setIcon( IconManager::instance().icon( "recent.png" ) );
   loadUserStatusRecentlyUsed();
-  act = mp_menuStatus->addAction( IconManager::instance().icon( "user-status.png" ), tr( "Change your status description..." ), this, SLOT( changeStatusDescription() ) );
-  act = mp_menuStatus->addAction( IconManager::instance().icon( "clear.png" ), tr( "Clear all status descriptions" ), this, SLOT( clearRecentlyUsedUserStatus() ) );
+  mp_actChangeStatusDescription = mp_menuStatus->addAction( IconManager::instance().icon( "user-status.png" ), tr( "Change your status description..." ), this, SLOT( changeStatusDescription() ) );
+  mp_menuStatus->addAction( IconManager::instance().icon( "clear.png" ), tr( "Clear all status descriptions" ), this, SLOT( clearRecentlyUsedUserStatus() ) );
   mp_menuStatus->addSeparator();
   act = mp_menuStatus->addAction( QIcon( Bee::menuUserStatusIconFileName( User::Offline ) ), Bee::userStatusToString( User::Offline ), this, SLOT( statusSelected() ) );
   act->setData( User::Offline );
   act->setIconVisibleInMenu( true );
   act = mp_menuStatus->menuAction();
   connect( act, SIGNAL( triggered() ), this, SLOT( showLocalUserVCard() ) );
+
+  /* Context Menu for user list view */
+  QMenu* context_menu_users = new QMenu( "Menu", this );
+  context_menu_users->addAction( mp_actVCard );
+  context_menu_users->addAction( mp_actChangeStatusDescription );
+  context_menu_users->addSeparator();
+  context_menu_users->addAction( mp_actConfigureNetwork );
+  context_menu_users->addAction( mp_actAddUsers );
+  mp_userList->setContextMenuUsers( context_menu_users );
 
   /* Help Menu */
   mp_menuInfo = new QMenu( tr("?" ), this );

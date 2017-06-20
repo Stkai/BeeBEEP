@@ -42,9 +42,10 @@ GuiUserList::GuiUserList( QWidget* parent )
   mp_twUsers->setRootIsDecorated( false );
   mp_twUsers->setSortingEnabled( true );
   mp_twUsers->setColumnCount( 1 );
-  QString w_stylesheet = QString( "background: white url(%1);"
+  mp_twUsers->setObjectName( "GuiCustomList" );
+  QString w_stylesheet = QString( "#GuiCustomList { background: white url(%1);"
                         "background-repeat: no-repeat;"
-                        "background-position: bottom center;" ).arg( IconManager::instance().iconPath( "user-list.png" ) );
+                        "background-position: bottom center; }" ).arg( IconManager::instance().iconPath( "user-list.png" ) );
   mp_twUsers->setStyleSheet( w_stylesheet );
   mp_twUsers->setMouseTracking( true );
   mp_twUsers->setHeaderHidden( true );

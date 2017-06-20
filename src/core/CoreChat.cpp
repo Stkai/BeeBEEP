@@ -388,6 +388,9 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
       else
         messages_sent += 1;
     }
+
+    if( messages_sent == 0 )
+      dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "Nobody has received the message." ), DispatchToChat, ChatMessage::Other );
   }
   else
   {
@@ -413,9 +416,6 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
       dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "The message will be delivered to %1." ).arg( Bee::stringListToTextString( offline_users ) ),
                              DispatchToChat, ChatMessage::Other );
   }
-
-  if( chat_id == ID_DEFAULT_CHAT && messages_sent == 0 )
-    dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "Nobody has received the message." ), DispatchToChat, ChatMessage::Other );
 
   return messages_sent;
 }

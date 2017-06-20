@@ -157,5 +157,6 @@
         <file>images/desktop-share.png</file>
         <file>images/desktop-share-refused.png</file>
         <file>images/timer.png</file>
+        <file>images/desktop-share-alternate.png</file>
     </qresource>
 </RCC>
