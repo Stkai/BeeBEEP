@@ -43,10 +43,19 @@ bool Core::startShareDesktop( VNumber user_id )
     return false;
   }
 
+  QString sHtmlMsg;
+  if( u.protocolVersion() < SHARE_DESKTOP_PROTO_VERSION )
+  {
+    sHtmlMsg = tr( "%1 You cannot share desktop with %2." ).arg( IconManager::instance().toHtml( "desktop-share-refused.png", "*G*" ), u.name() );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, user_id, sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::System );
+    qDebug() << "You cannot share desktop with" << qPrintable( u.path() ) << "with old protocol" << u.protocolVersion();
+    return false;
+  }
+
   if( !mp_shareDesktop->addUserId( user_id ) )
     return false;
 
-  QString sHtmlMsg = tr( "%1 You start to share desktop with %2." ).arg( IconManager::instance().toHtml( "desktop-share.png", "*G*" ), u.name() );
+  sHtmlMsg = tr( "%1 You start to share desktop with %2." ).arg( IconManager::instance().toHtml( "desktop-share.png", "*G*" ), u.name() );
   dispatchSystemMessage( ID_DEFAULT_CHAT, user_id, sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::System );
   qDebug() << "Start to share desktop with" << qPrintable( u.path() );
   if( !mp_shareDesktop->isActive() )

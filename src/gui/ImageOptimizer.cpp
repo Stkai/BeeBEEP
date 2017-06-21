@@ -111,7 +111,7 @@ QByteArray ImageOptimizer::saveImage( const QImage& img, const char* image_type,
 #endif
   if( use_compression )
   {
-    diff_img_bytes = qCompress( diff_img_bytes, compression_level ).toBase64();
+    diff_img_bytes = qCompress( diff_img_bytes, compression_level );
 #ifdef BEEBEEP_DEBUG
     qDebug() << "ImageOptimizer saves image (compressed) with size" << diff_img_bytes.size();
 #endif
@@ -124,7 +124,7 @@ QImage ImageOptimizer::loadImage( const QByteArray& img_byte_array, const char* 
   QImage img;
   if( img_byte_array.isEmpty() )
     return img;
-  QByteArray diff_img_bytes = use_compression ? qUncompress( QByteArray::fromBase64( img_byte_array ) ) : QByteArray::fromBase64( img_byte_array );
+  QByteArray diff_img_bytes = use_compression ? qUncompress( img_byte_array ) :  img_byte_array;
   QBuffer buffer( &diff_img_bytes );
   buffer.open( QIODevice::ReadOnly );
   img.load( &buffer, image_type );
