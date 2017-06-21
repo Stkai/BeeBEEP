@@ -1512,20 +1512,22 @@ QList<FileInfo> Protocol::messageToShareBoxFileList( const Message& m, const QHo
     return m;
   }
 
-  Message Protocol::shareDesktopImageDataToMessage( const QByteArray& img_data ) const
+  Message Protocol::shareDesktopImageDataToMessage( const QByteArray& img_data, const QString& image_type, bool use_compression, QRgb diff_color ) const
   {
     Message m( Message::ShareDesktop, ID_SHAREDESKTOP_MESSAGE, QString::fromLatin1( img_data ) );
     m.addFlag( Message::Private );
-    /* We don't need to send default value
     QStringList sl_data;
-    sl_data << QString( "png" );
-    sl_data << QString( "*" );
+    sl_data << image_type;
+    if( use_compression )
+      sl_data << QString( "*" );
+    else
+      sl_data << QString( "" );
+    sl_data << QString::number( diff_color );
     m.setData( sl_data.join( DATA_FIELD_SEPARATOR ) );
-    */
     return m;
   }
 
-  QImage Protocol::imageFromShareDesktopMessage( const Message& m ) const
+  QImage Protocol::imageFromShareDesktopMessage( const Message& m, QRgb* p_diff_color ) const
   {
     if( m.text().isEmpty() )
       return QImage();
@@ -1538,6 +1540,17 @@ QList<FileInfo> Protocol::messageToShareBoxFileList( const Message& m, const QHo
         img_type = sl_data.takeFirst();
       if( !sl_data.isEmpty() )
         use_compression = sl_data.takeFirst().isEmpty() ? false : true;
+      if( !sl_data.isEmpty() )
+      {
+        if( p_diff_color )
+        {
+          bool ok = false;
+          QRgb diff_color = sl_data.takeFirst().toUInt( &ok );
+          if( !ok )
+            diff_color = qRgba( 0, 0, 0, 0 );
+          *p_diff_color = diff_color;
+        }
+      }
     }
 
     return ImageOptimizer::instance().loadImage( m.text().toLatin1(), img_type.toLatin1().constData(), use_compression );

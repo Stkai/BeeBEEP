@@ -128,8 +128,8 @@ public:
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   Message refuseToViewDesktopShared() const;
-  Message shareDesktopImageDataToMessage( const QByteArray& ) const;
-  QImage imageFromShareDesktopMessage( const Message& ) const;
+  Message shareDesktopImageDataToMessage( const QByteArray&, const QString& image_type, bool use_compression, QRgb diff_color ) const;
+  QImage imageFromShareDesktopMessage( const Message&, QRgb* p_diff_color ) const;
 #endif
 
   inline VNumber currentId() const;

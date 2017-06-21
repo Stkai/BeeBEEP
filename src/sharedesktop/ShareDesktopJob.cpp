@@ -22,90 +22,32 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "ImageOptimizer.h"
-#include "Settings.h"
 #include "ShareDesktopJob.h"
 
 
 ShareDesktopJob::ShareDesktopJob( QObject *parent )
-  : QObject( parent ), m_timer(), m_lastImage(), m_stop( false )
+  : QObject( parent ), m_lastImage()
 {
   setObjectName( "ShareDesktopJob" );
-  m_timer.setInterval( Settings::instance().shareDesktopCaptureDelay() );
-  m_timer.setSingleShot( false );
-  connect( &m_timer, SIGNAL( timeout() ), this, SLOT( makeScreenshot() ), Qt::QueuedConnection );
 }
 
-void ShareDesktopJob::startJob()
+void ShareDesktopJob::processNewImage( const QImage& new_image )
 {
-#ifdef BEEBEEP_DEBUG
-  qDebug() << qPrintable( objectName() ) << "is starting its job";
-#endif
-  if( isRunning() )
+  QByteArray diff_image_data = "";
+  QRgb diff_color = qRgba( 0, 0, 0, 0 ); // transparent color
+  QString image_type = "png";
+  int image_quality = 100;
+  bool use_compression = true;
+  int compression_level = 9;
+
+  if( !new_image.isNull() )
   {
-    qWarning() << qPrintable( objectName() ) << "is already running";
-    return;
+    QImage diff_image = ImageOptimizer::instance().diffImage( m_lastImage, new_image, diff_color );
+    diff_image_data = ImageOptimizer::instance().saveImage( diff_image, image_type.toLatin1().constData(), image_quality, use_compression, compression_level );
+    m_lastImage = new_image;
   }
-  m_stop = false;
-  m_lastImage = QImage();
-  QMetaObject::invokeMethod( &m_timer, "start", Qt::QueuedConnection );
-}
-
-void ShareDesktopJob::stopJob()
-{
-#ifdef BEEBEEP_DEBUG
-  qDebug() << qPrintable( objectName() ) << "is stopping its job";
-#endif
-  m_stop = true;
-  QMetaObject::invokeMethod( &m_timer, "stop", Qt::QueuedConnection );
-  emit jobCompleted();
-}
-
-bool ShareDesktopJob::isRunning() const
-{
-  if( !m_stop )
-    return m_timer.isActive();
   else
-    return false;
-}
+    qWarning() << "Share desktop has found an invalid screen image";
 
-void ShareDesktopJob::makeScreenshot()
-{
-  if( !isRunning() )
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << qPrintable( objectName() ) << "is not running... screen capture aborted";
-#endif
-    return;
-  }
-
-  QPixmap screen_shot;
-  qreal device_pixel_ratio;
-
-#if QT_VERSION >= 0x050000
-  device_pixel_ratio = qApp->devicePixelRatio();
-#else
-  device_pixel_ratio = 1.0;
-#endif
-
-#if QT_VERSION >= 0x050000
-  QScreen* primary_screen = QApplication::primaryScreen();
-  if( primary_screen )
-    screen_shot = primary_screen->grabWindow( 0 );
-  screen_shot.setDevicePixelRatio( device_pixel_ratio );
-#else
-  screen_shot = QPixmap::grabWindow( QApplication::desktop()->winId(), 0, 0,
-                                     QApplication::desktop()->width() * device_pixel_ratio,
-                                     QApplication::desktop()->height() * device_pixel_ratio );
-#endif
-
-  if( device_pixel_ratio > 1.0 )
-    screen_shot = screen_shot.scaled( QApplication::desktop()->width(), QApplication::desktop()->height(), Qt::KeepAspectRatio );
-
-  QImage new_image = screen_shot.toImage();
-  screen_shot = QPixmap();
-
-  QImage diff_image = ImageOptimizer::instance().diffImage( m_lastImage, new_image );
-  m_lastImage = new_image;
-  QByteArray diff_image_data = ImageOptimizer::instance().saveImage( diff_image, "png", true );
-  emit imageDataAvailable( diff_image_data );
+  emit imageDataAvailable( diff_image_data, "png", use_compression, diff_color );
 }

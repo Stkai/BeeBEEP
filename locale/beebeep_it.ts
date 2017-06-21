@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -2331,7 +2331,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Select the interval in ms of screen capture</source>
-        <translation type="vanished">Seleziona l&apos;intervallo in ms di cattura dello schermo</translation>
+        <translation type="obsolete">Seleziona l&apos;intervallo in ms di cattura dello schermo</translation>
     </message>
 </context>
 <context>
@@ -3399,7 +3399,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Other informations</source>
-        <translation type="vanished">Altre informazioni</translation>
+        <translation type="obsolete">Altre informazioni</translation>
     </message>
     <message>
         <source>yyyy/MM/dd</source>

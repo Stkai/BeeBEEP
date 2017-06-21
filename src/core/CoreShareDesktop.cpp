@@ -72,7 +72,7 @@ void Core::stopShareDesktop( VNumber user_id )
   {
     QString sHtmlMsg = tr( "%1 You stop to share desktop with %2." ).arg( IconManager::instance().toHtml( "desktop-share-refused.png", "*G*" ), u.name() );
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::System );
-    sendMessageToLocalNetwork( u, Protocol::instance().shareDesktopImageDataToMessage( "" ) ); // Empty image stops desktop sharing
+    sendMessageToLocalNetwork( u, Protocol::instance().shareDesktopImageDataToMessage( "", "png", false, 0 ) ); // Empty image stops desktop sharing
     emit shareDesktopUpdate( u );
   }
 }
@@ -128,7 +128,7 @@ bool Core::shareDesktopIsActive( VNumber user_id ) const
     return mp_shareDesktop->isActive() && mp_shareDesktop->userIdList().contains( user_id );
 }
 
-void Core::onShareDesktopImageDataReady( const QByteArray& img_data )
+void Core::onShareDesktopImageAvailable( const QByteArray& img_data, const QString& image_type, bool use_compression, QRgb diff_color )
 {
   if( !mp_shareDesktop->isActive() )
     return;
@@ -139,7 +139,7 @@ void Core::onShareDesktopImageDataReady( const QByteArray& img_data )
     return;
   }
 
-  Message m = Protocol::instance().shareDesktopImageDataToMessage( img_data );
+  Message m = Protocol::instance().shareDesktopImageDataToMessage( img_data, image_type, use_compression, diff_color );
   foreach( VNumber user_id, mp_shareDesktop->userIdList() )
   {
     Connection* c = connection( user_id );

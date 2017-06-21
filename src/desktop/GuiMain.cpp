@@ -135,7 +135,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( beeCore, SIGNAL( newSystemStatusMessage( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-  connect( beeCore, SIGNAL( shareDesktopImageAvailable( const User&, const QImage& ) ), this, SLOT( onShareDesktopImageAvailable( const User&, const QImage& ) ) );
+  connect( beeCore, SIGNAL( shareDesktopImageAvailable( const User&, const QImage&, QRgb ) ), this, SLOT( onShareDesktopImageAvailable( const User&, const QImage&, QRgb ) ) );
   connect( beeCore, SIGNAL( shareDesktopUpdate( const User& ) ), this, SLOT( onShareDesktopUpdate( const User& ) ) );
 #endif
 
@@ -1467,9 +1467,8 @@ void GuiMain::settingsChanged( QAction* act )
     break;
   case 61:
     {
-      bool interval_ok = false;
       int capture_delay = QInputDialog::getInt( this, Settings::instance().programName(), act->text() + QString( " (ms)" ),
-                                                Settings::instance().shareDesktopCaptureDelay(), 100, 10000, 100, &interval_ok );
+                                                Settings::instance().shareDesktopCaptureDelay(), 1000, 5000, 100, &ok );
       if( ok )
         Settings::instance().setShareDesktopCaptureDelay( capture_delay );
     }
@@ -3821,7 +3820,7 @@ void GuiMain::showRestartApplicationAlertMessage()
 }
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-void GuiMain::onShareDesktopImageAvailable( const User& u, const QImage& img )
+void GuiMain::onShareDesktopImageAvailable( const User& u, const QImage& img, QRgb diff_color )
 {
   int desktop_h = qApp->desktop()->availableGeometry().height();
   int desktop_w = qApp->desktop()->availableGeometry().width();
@@ -3843,7 +3842,7 @@ void GuiMain::onShareDesktopImageAvailable( const User& u, const QImage& img )
       if( img.isNull() )
         gsd->close();
       else
-        gsd->updateImage( fit_img );
+        gsd->updateImage( fit_img, diff_color );
       return;
     }
   }
@@ -3857,7 +3856,7 @@ void GuiMain::onShareDesktopImageAvailable( const User& u, const QImage& img )
   new_gui->setImageSize( fit_img.size() );
   new_gui->show();
   new_gui->setMaximumSize( fit_img.width()+12, fit_img.height()+12 );
-  new_gui->updateImage( fit_img );
+  new_gui->updateImage( fit_img, diff_color );
   m_desktops.append( new_gui );
 }
 

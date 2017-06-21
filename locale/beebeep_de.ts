@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE" sourcelanguage="en">
+<TS version="2.0" language="de_DE" sourcelanguage="en">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -440,11 +440,11 @@
     </message>
     <message>
         <source>%1 You have removed members: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Du hast folgende Mitglieder entfernt: %2.</translation>
     </message>
     <message>
         <source>%1 %2 has removed members: %3.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 hat folgende Mitglieder entfernt: %3.</translation>
     </message>
 </context>
 <context>
@@ -908,11 +908,11 @@
     <name>GuiChatListWidget</name>
     <message>
         <source>Insert keywords</source>
-        <translation type="unfinished"></translation>
+        <translation>Schlüsselwörter hinzufügen</translation>
     </message>
     <message>
         <source>Clear keywords</source>
-        <translation type="unfinished"></translation>
+        <translation>Schlüsselwörter entfernen</translation>
     </message>
 </context>
 <context>
@@ -1169,11 +1169,11 @@ Bitte wähle einen anderen Namen aus.</translation>
     <name>GuiGroupListWidget</name>
     <message>
         <source>Insert keywords</source>
-        <translation type="unfinished"></translation>
+        <translation>Schlüsselwörter hinzufügen</translation>
     </message>
     <message>
         <source>Clear keywords</source>
-        <translation type="unfinished"></translation>
+        <translation>Schlüsselwörter entfernen</translation>
     </message>
 </context>
 <context>
@@ -2303,19 +2303,19 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Desktop sharing</source>
-        <translation type="unfinished"></translation>
+        <translation>Desktopfreigabe</translation>
     </message>
     <message>
         <source>Enable desktop sharing</source>
-        <translation type="unfinished"></translation>
+        <translation>Desktopfreigabe aktivieren</translation>
     </message>
     <message>
         <source>Select screen capture interval</source>
-        <translation type="unfinished"></translation>
+        <translation>Intervall für Screenshoterstellung festlegen</translation>
     </message>
     <message>
         <source>Fit image to screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Bild an Bildschirmgröße anpassen</translation>
     </message>
 </context>
 <context>
@@ -2669,11 +2669,11 @@ Bitte wähle einen anderen Namen aus.</translation>
     <name>GuiSavedChatListWidget</name>
     <message>
         <source>Insert keywords</source>
-        <translation type="unfinished"></translation>
+        <translation>Schlüsselwörter hinzufügen</translation>
     </message>
     <message>
         <source>Clear keywords</source>
-        <translation type="unfinished"></translation>
+        <translation>Schlüsselwörter entfernen</translation>
     </message>
 </context>
 <context>
@@ -3231,15 +3231,15 @@ Bitte wähle einen anderen Namen aus.</translation>
     <name>GuiUserListWidget</name>
     <message>
         <source>View options</source>
-        <translation type="unfinished"></translation>
+        <translation>Optionen anzeigen</translation>
     </message>
     <message>
         <source>Insert keywords</source>
-        <translation type="unfinished"></translation>
+        <translation>Schlüsselwörter hinzufügen</translation>
     </message>
     <message>
         <source>Clear keywords</source>
-        <translation type="unfinished"></translation>
+        <translation>Schlüsselwörter entfernen</translation>
     </message>
 </context>
 <context>
@@ -3297,7 +3297,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Other informations</source>
-        <translation type="vanished">Sonstige Informationen</translation>
+        <translation type="obsolete">Sonstige Informationen</translation>
     </message>
     <message>
         <source>Email</source>
@@ -3349,7 +3349,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Informations to display to other users</source>
-        <translation type="unfinished"></translation>
+        <translation>Informationen, die anderen Benutzern angezeigt werden sollen</translation>
     </message>
 </context>
 <context>

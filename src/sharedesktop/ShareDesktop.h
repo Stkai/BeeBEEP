@@ -38,7 +38,7 @@ public:
 
   bool start();
   void stop();
-  bool isActive() const;
+  inline bool isActive() const;
 
   bool addUserId( VNumber );
   inline bool removeUserId( VNumber );
@@ -46,14 +46,16 @@ public:
   inline const QList<VNumber>& userIdList() const;
 
 signals:
-  void shareDesktopImageDataReady( const QByteArray& );
+  void imageDataAvailable( const QByteArray&, const QString& image_type, bool use_compression, QRgb diff_color );
+  void imageAvailable( const QImage& );
 
 protected slots:
-  void onJobCompleted();
-  void onImageDataAvailable( const QByteArray& );
+  void onImageDataAvailable( const QByteArray&, const QString& image_type, bool use_compression, unsigned int diff_color );
+  void makeScreenshot();
 
 private:
   QList<VNumber> m_userIdList;
+  QTimer m_timer;
   ShareDesktopJob* mp_job;
 
 };
@@ -62,5 +64,6 @@ private:
 inline bool ShareDesktop::removeUserId( VNumber user_id ) { return m_userIdList.removeOne( user_id ); }
 inline bool ShareDesktop::hasUsers() const { return !m_userIdList.isEmpty(); }
 inline const QList<VNumber>& ShareDesktop::userIdList() const { return m_userIdList; }
+inline bool ShareDesktop::isActive() const { return m_timer.isActive(); }
 
 #endif // BEEBEEP_SHAREDESKTOP_H

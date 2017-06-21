@@ -592,10 +592,11 @@ void Core::parseShareDesktopMessage( const User& u, const Message& m )
   {
     if( Settings::instance().enableShareDesktop() )
     {
-      QImage img = Protocol::instance().imageFromShareDesktopMessage( m );
+      QRgb diff_color;
+      QImage img = Protocol::instance().imageFromShareDesktopMessage( m, &diff_color );
       if( img.isNull() )
         qDebug() << qPrintable( u.path() ) << "has finished to share desktop with you";
-      emit shareDesktopImageAvailable( u, img );
+      emit shareDesktopImageAvailable( u, img, diff_color );
     }
     else
     {

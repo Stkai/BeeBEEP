@@ -34,23 +34,14 @@ class ShareDesktopJob : public QObject
 public:
   explicit ShareDesktopJob( QObject* parent = 0 );
 
-  bool isRunning() const;
-
 signals:
-  void imageDataAvailable( const QByteArray& );
-  void jobCompleted();
+  void imageDataAvailable( const QByteArray&, const QString& image_type, bool use_compression, unsigned int diff_color );
 
 public slots:
-  void startJob();
-  void stopJob();
-
-protected slots:
-  void makeScreenshot();
+  void processNewImage(  const QImage& );
 
 private:
-  QTimer m_timer;
   QImage m_lastImage;
-  bool m_stop;
 
 };
 

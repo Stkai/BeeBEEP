@@ -162,7 +162,7 @@ signals:
   void localUserIsBuzzedBy( const User& );
   void newSystemStatusMessage( const QString&, int );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-  void shareDesktopImageAvailable( const User&, const QImage& );
+  void shareDesktopImageAvailable( const User&, const QImage&, QRgb );
   void shareDesktopUpdate( const User& );
 #endif
 
@@ -194,7 +194,7 @@ protected slots:
   void sendShareBoxList();
   void onFileTransferCompleted( VNumber, VNumber, const FileInfo& );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-  void onShareDesktopImageDataReady( const QByteArray& );
+  void onShareDesktopImageAvailable( const QByteArray&, const QString&, bool, QRgb );
 #endif
   /* CoreChat */
   void addListToSavedChats();

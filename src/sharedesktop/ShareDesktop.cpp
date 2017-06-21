@@ -23,22 +23,18 @@
 
 #include "BeeApplication.h"
 #include "Chat.h"
+#include "Settings.h"
 #include "ShareDesktop.h"
 #include "ShareDesktopJob.h"
 
 
 ShareDesktop::ShareDesktop( QObject *parent )
-  : QObject( parent ), m_userIdList(), mp_job( 0 )
+  : QObject( parent ), m_userIdList(), m_timer(), mp_job( 0 )
 {
   setObjectName( "ShareDesktop" );
-}
-
-bool ShareDesktop::isActive() const
-{
-  if( mp_job )
-    return true;
-  else
-    return false;
+  m_timer.setObjectName( "ShareDesktopTimer" );
+  m_timer.setSingleShot( false );
+  connect( &m_timer, SIGNAL( timeout() ), this, SLOT( makeScreenshot() ), Qt::QueuedConnection );
 }
 
 bool ShareDesktop::start()
@@ -55,12 +51,16 @@ bool ShareDesktop::start()
     return false;
   }
 
-  mp_job = new ShareDesktopJob;
-  connect( mp_job, SIGNAL( jobCompleted() ), this, SLOT( onJobCompleted() ), Qt::QueuedConnection );
-  connect( mp_job, SIGNAL( imageDataAvailable( const QByteArray& ) ), this, SLOT( onImageDataAvailable( const QByteArray& ) ), Qt::QueuedConnection );
-  BeeApplication* bee_app = (BeeApplication*)qApp;
-  bee_app->addJob( mp_job );
-  QMetaObject::invokeMethod( mp_job, "startJob", Qt::QueuedConnection );
+  if( !mp_job )
+  {
+    mp_job = new ShareDesktopJob;
+    connect( this, SIGNAL( imageAvailable( const QImage& ) ), mp_job, SLOT( processNewImage( const QImage& ) ), Qt::QueuedConnection );
+    connect( mp_job, SIGNAL( imageDataAvailable( const QByteArray&, const QString&, bool, unsigned int ) ), this, SLOT( onImageDataAvailable( const QByteArray&, const QString&, bool, unsigned int ) ), Qt::QueuedConnection );
+    BeeApplication* bee_app = (BeeApplication*)qApp;
+    bee_app->addJob( mp_job );
+  }
+
+  m_timer.start( Settings::instance().shareDesktopCaptureDelay() );
   return true;
 }
 
@@ -68,7 +68,15 @@ void ShareDesktop::stop()
 {
   if( !isActive() )
     return;
-  QMetaObject::invokeMethod( mp_job, "stopJob", Qt::QueuedConnection );
+  m_timer.stop();
+  m_userIdList.clear();
+  BeeApplication* bee_app = (BeeApplication*)qApp;
+  bee_app->removeJob( mp_job );
+  mp_job->deleteLater();
+  mp_job = 0;
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "ShareDesktop is stopped";
+#endif
 }
 
 bool ShareDesktop::addUserId( VNumber user_id )
@@ -83,22 +91,44 @@ bool ShareDesktop::addUserId( VNumber user_id )
   return true;
 }
 
-void ShareDesktop::onJobCompleted()
+void ShareDesktop::onImageDataAvailable( const QByteArray& img_data, const QString& image_type, bool use_compression, unsigned int diff_color )
 {
+  if( !isActive() )
+    return;
 #ifdef BEEBEEP_DEBUG
-  qDebug() << qPrintable( objectName() ) << "has completed its job";
+  qDebug() << "ShareDesktop has image data available with size" << img_data.size() << "and diff color" << diff_color;
 #endif
-  m_userIdList.clear();
-  BeeApplication* bee_app = (BeeApplication*)qApp;
-  bee_app->removeJob( mp_job );
-  mp_job->deleteLater();
-  mp_job = 0;
+  emit imageDataAvailable( img_data, image_type, use_compression, diff_color );
 }
 
-void ShareDesktop::onImageDataAvailable( const QByteArray& img_data )
+void ShareDesktop::makeScreenshot()
 {
-#ifdef BEEBEEP_DEBUG
-  qDebug() << qPrintable( objectName() ) << "has image data available" << img_data.size();
+  if( !isActive() )
+    return;
+
+  QPixmap screen_shot;
+  qreal device_pixel_ratio;
+
+#if QT_VERSION >= 0x050000
+  device_pixel_ratio = qApp->devicePixelRatio();
+#else
+  device_pixel_ratio = 1.0;
 #endif
-  emit shareDesktopImageDataReady( img_data );
+
+#if QT_VERSION >= 0x050000
+  QScreen* primary_screen = QApplication::primaryScreen();
+  if( primary_screen )
+    screen_shot = primary_screen->grabWindow( 0 );
+  screen_shot.setDevicePixelRatio( device_pixel_ratio );
+#else
+  screen_shot = QPixmap::grabWindow( QApplication::desktop()->winId(), 0, 0,
+                                     QApplication::desktop()->width() * device_pixel_ratio,
+                                     QApplication::desktop()->height() * device_pixel_ratio );
+#endif
+
+  if( device_pixel_ratio > 1.0 )
+    screen_shot = screen_shot.scaled( QApplication::desktop()->width(), QApplication::desktop()->height(), Qt::KeepAspectRatio );
+
+  emit imageAvailable( screen_shot.toImage() );
+  screen_shot = QPixmap();
 }

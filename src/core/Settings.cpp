@@ -1076,7 +1076,7 @@ void Settings::load()
 
   sets->beginGroup( "ShareDesktop" );
   m_enableShareDesktop = sets->value( "Enable", true ).toBool();
-  m_shareDesktopCaptureDelay = qMin( 100, sets->value( "CaptureScreenInterval(ms)", m_shareDesktopCaptureDelay ).toInt() );
+  m_shareDesktopCaptureDelay = qMax( 1000, sets->value( "CaptureScreenInterval(ms)", m_shareDesktopCaptureDelay ).toInt() );
   m_shareDesktopFitToScreen = sets->value( "FitToScreen", false ).toBool();
   sets->endGroup();
 

@@ -31,7 +31,7 @@ ImageOptimizer::ImageOptimizer()
 {
 }
 
-QImage ImageOptimizer::diffImage( const QImage& old_image, const QImage& new_image ) const
+QImage ImageOptimizer::diffImage( const QImage& old_image, const QImage& new_image, QRgb diff_color ) const
 {
   if( old_image.isNull() )
     return new_image;
@@ -40,24 +40,32 @@ QImage ImageOptimizer::diffImage( const QImage& old_image, const QImage& new_ima
   int img_max_h = qMin( old_image.height(), new_image.height() );
 
   QImage diff_img( QSize( img_max_w, img_max_h ), QImage::Format_ARGB32 );
+  diff_img.fill( diff_color );
   QRgb c_rgb;
+  bool image_is_changed = false;
 
   for( int y = 0; y < img_max_h; y++ )
   {
     for( int x = 0; x < img_max_w; x++ )
     {
       c_rgb = new_image.pixel( x, y );
-      if( c_rgb == old_image.pixel( x, y ) )
-        diff_img.setPixel( x, y, qRgba( 0, 0, 0, 0 ) ); // transparent color;
-      else
+      if( c_rgb != old_image.pixel( x, y ) )
+      {
         diff_img.setPixel( x, y, c_rgb );
+        if( !image_is_changed )
+          image_is_changed = true;
+      }
     }
   }
 
+  if( !image_is_changed )
+  {
+
+  }
   return diff_img;
 }
 
-QImage ImageOptimizer::mergeImage( const QImage& old_image, const QImage& new_image ) const
+QImage ImageOptimizer::mergeImage( const QImage& old_image, const QImage& new_image, QRgb diff_color ) const
 {
   if( old_image.isNull() )
     return new_image;
@@ -76,7 +84,7 @@ QImage ImageOptimizer::mergeImage( const QImage& old_image, const QImage& new_im
     for( int x = 0; x < img_max_w; x++ )
     {
       c_rgb = new_image.pixel( x, y );
-      if( c_rgb != qRgba( 0, 0, 0, 0 ) )
+      if( c_rgb != diff_color )
         merged_img.setPixel( x, y, c_rgb );
       else
         merged_img.setPixel( x, y, old_image.pixel( x, y ) );
@@ -86,24 +94,39 @@ QImage ImageOptimizer::mergeImage( const QImage& old_image, const QImage& new_im
   return merged_img;
 }
 
-QByteArray ImageOptimizer::saveImage( const QImage& img, const char* image_type, bool use_compression, int compression_level ) const
+QByteArray ImageOptimizer::saveImage( const QImage& img, const char* image_type, int image_quality, bool use_compression, int compression_level ) const
 {
+  if( img.isNull() )
+  {
+    qWarning() << "Invalid image found in ImageOptimizer::saveImage(...)";
+    return "";
+  }
+
   QByteArray diff_img_bytes;
   QBuffer buffer( &diff_img_bytes );
   buffer.open( QIODevice::WriteOnly );
-  img.save( &buffer, image_type );
+  img.save( &buffer, image_type, image_quality );
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "ImageOptimizer saves image (uncompressed) with size" << diff_img_bytes.size();
+#endif
   if( use_compression )
-    return qCompress( diff_img_bytes, compression_level ).toBase64();
-  else
-    return diff_img_bytes.toBase64();
+  {
+    diff_img_bytes = qCompress( diff_img_bytes, compression_level ).toBase64();
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "ImageOptimizer saves image (compressed) with size" << diff_img_bytes.size();
+#endif
+  }
+  return diff_img_bytes;
 }
 
 QImage ImageOptimizer::loadImage( const QByteArray& img_byte_array, const char* image_type, bool use_compression ) const
 {
+  QImage img;
+  if( img_byte_array.isEmpty() )
+    return img;
   QByteArray diff_img_bytes = use_compression ? qUncompress( QByteArray::fromBase64( img_byte_array ) ) : QByteArray::fromBase64( img_byte_array );
   QBuffer buffer( &diff_img_bytes );
   buffer.open( QIODevice::ReadOnly );
-  QImage img;
   img.load( &buffer, image_type );
   return img;
 }

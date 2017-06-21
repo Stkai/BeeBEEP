@@ -33,11 +33,11 @@ class ImageOptimizer
   static ImageOptimizer* mp_instance;
 
 public:
-  QImage diffImage( const QImage& old_image, const QImage& new_image ) const;
-  QImage mergeImage( const QImage& old_image, const QImage& new_image ) const;
+  QImage diffImage( const QImage& old_image, const QImage& new_image, QRgb diff_color = qRgba( 0, 0, 0, 0 ) ) const;
+  QImage mergeImage( const QImage& old_image, const QImage& new_image, QRgb diff_color = qRgba( 0, 0, 0, 0 ) ) const;
 
-  QByteArray saveImage( const QImage&, const char* image_type = "PNG", bool use_compression = true, int compression_level = -1 ) const;
-  QImage loadImage( const QByteArray&, const char* image_type = "PNG", bool use_compression = true ) const;
+  QByteArray saveImage( const QImage&, const char* image_type = "png", int image_quality = -1, bool use_compression = true, int compression_level = -1 ) const;
+  QImage loadImage( const QByteArray&, const char* image_type = "png", bool use_compression = true ) const;
 
 
   static ImageOptimizer& instance()
