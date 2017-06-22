@@ -39,7 +39,7 @@ public:
   QByteArray saveImage( const QImage&, const QString& image_type = "png", int image_quality = -1, bool use_compression = true, int compression_level = -1 ) const;
   QImage loadImage( const QByteArray&, const QString& image_type = "png", bool use_compression = true ) const;
 
-  QImage applyMedianCutAlgorithm( const QImage& ) const; // too slow: 32s for a single image
+  //QImage applyMedianCutAlgorithm( const QImage& ) const; // too slow: 32s for a single image
 
   bool imageTypeHasTransparentColor( const QString& ) const;
   inline const QStringList& imageTypes() const;

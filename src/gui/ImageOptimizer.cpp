@@ -25,38 +25,6 @@
 
 ImageOptimizer* ImageOptimizer::mp_instance = NULL;
 
-/* Inline useful functions for Image Quantization */
-static inline int pixel_distance( QRgb p1, QRgb p2 )
-{
-  int r1 = qRed( p1 );
-  int g1 = qGreen( p1 );
-  int b1 = qBlue( p1 );
-  int a1 = qAlpha( p1 );
-
-  int r2 = qRed( p2 );
-  int g2 = qGreen( p2 );
-  int b2 = qBlue( p2 );
-  int a2 = qAlpha( p2 );
-
-  return qAbs( r1 - r2 ) + qAbs( g1 - g2 ) + qAbs( b1 - b2 ) + qAbs( a1 - a2 );
-}
-
-static inline int closest_match( QRgb pixel, const QVector<QRgb> &clut )
-{
-  int idx = 0;
-  int current_distance = 2147483647; // INT_MAX (signed)
-  for( int i = 0; i < clut.size(); i++ )
-  {
-    int dist = pixel_distance( pixel, clut.at( i ) );
-    if( dist < current_distance )
-    {
-      current_distance = dist;
-      idx = i;
-    }
-  }
-  return idx;
-}
-/**********************************************/
 
 ImageOptimizer::ImageOptimizer()
  : m_imageTypes()
@@ -170,6 +138,39 @@ QImage ImageOptimizer::loadImage( const QByteArray& img_byte_array, const QStrin
   return img;
 }
 
+#if 0
+/* Inline useful functions for Image Quantization */
+static inline int pixel_distance( QRgb p1, QRgb p2 )
+{
+  int r1 = qRed( p1 );
+  int g1 = qGreen( p1 );
+  int b1 = qBlue( p1 );
+  int a1 = qAlpha( p1 );
+
+  int r2 = qRed( p2 );
+  int g2 = qGreen( p2 );
+  int b2 = qBlue( p2 );
+  int a2 = qAlpha( p2 );
+
+  return qAbs( r1 - r2 ) + qAbs( g1 - g2 ) + qAbs( b1 - b2 ) + qAbs( a1 - a2 );
+}
+
+static inline int closest_match( QRgb pixel, const QVector<QRgb> &clut )
+{
+  int idx = 0;
+  int current_distance = 2147483647; // INT_MAX (signed)
+  for( int i = 0; i < clut.size(); i++ )
+  {
+    int dist = pixel_distance( pixel, clut.at( i ) );
+    if( dist < current_distance )
+    {
+      current_distance = dist;
+      idx = i;
+    }
+  }
+  return idx;
+}
+/**********************************************/
 QImage ImageOptimizer::applyMedianCutAlgorithm( const QImage& img ) const
 {
 #ifdef BEEBEEP_DEBUG
@@ -270,3 +271,4 @@ QImage ImageOptimizer::applyMedianCutAlgorithm( const QImage& img ) const
 #endif
   return new_img;
 }
+#endif
