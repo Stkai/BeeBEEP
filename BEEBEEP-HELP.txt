@@ -240,3 +240,5 @@ ShareList=(do not edit manually)
 Enable=[true/false] enable file desktop sharing (default=true) [4.0.1]
 CaptureScreenInterval(ms)=[integer] interval in ms of capture screen (default=2100) [4.0.1]
 FitToScreen=[true/false] fit desktop image from remote user in your screen (default=false) [4.0.1]
+ImageType=[string] is better to use jpg or png (default=jpg) [4.0.1]
+ImageQuality=[integer] image quality of jpg format, in case of png use 100 (default=60) [4.0.1]

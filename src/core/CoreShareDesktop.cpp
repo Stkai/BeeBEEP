@@ -149,6 +149,9 @@ void Core::onShareDesktopImageAvailable( const QByteArray& img_data, const QStri
   }
 
   Message m = Protocol::instance().shareDesktopImageDataToMessage( img_data, image_type, use_compression, diff_color );
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Share desktop send message with size" << m.text().size();
+#endif
   foreach( VNumber user_id, mp_shareDesktop->userIdList() )
   {
     Connection* c = connection( user_id );

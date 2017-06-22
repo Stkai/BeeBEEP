@@ -1078,6 +1078,8 @@ void Settings::load()
   m_enableShareDesktop = sets->value( "Enable", true ).toBool();
   m_shareDesktopCaptureDelay = qMax( 1000, sets->value( "CaptureScreenInterval(ms)", m_shareDesktopCaptureDelay ).toInt() );
   m_shareDesktopFitToScreen = sets->value( "FitToScreen", false ).toBool();
+  m_shareDesktopImageType = sets->value( "ImageType", "jpg" ).toString();
+  m_shareDesktopImageQuality = sets->value( "ImageQuality", 60 ).toInt();
   sets->endGroup();
 
 
@@ -1338,6 +1340,8 @@ void Settings::save()
   sets->setValue( "Enable", m_enableShareDesktop );
   sets->setValue( "CaptureScreenInterval(ms)", m_shareDesktopCaptureDelay );
   sets->setValue( "FitToScreen", m_shareDesktopFitToScreen );
+  sets->setValue( "ImageType", m_shareDesktopImageType );
+  sets->setValue( "ImageQuality", m_shareDesktopImageQuality );
   sets->endGroup();
 
   if( !m_pluginSettings.isEmpty() )

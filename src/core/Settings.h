@@ -443,6 +443,10 @@ public:
   inline int shareDesktopCaptureDelay() const;
   inline void setShareDesktopFitToScreen( bool );
   inline bool shareDesktopFitToScreen() const;
+  inline void setShareDesktopImageType( const QString& );
+  inline const QString& shareDesktopImageType() const;
+  inline void setShareDesktopImageQuality( int );
+  inline int shareDesktopImageQuality() const;
 
   QString simpleEncrypt( const QString& );
   QString simpleDecrypt( const QString& );
@@ -687,6 +691,8 @@ private:
   bool m_enableShareDesktop;
   int m_shareDesktopCaptureDelay;
   bool m_shareDesktopFitToScreen;
+  QString m_shareDesktopImageType;
+  int m_shareDesktopImageQuality;
 
 };
 
@@ -980,5 +986,9 @@ inline void Settings::setShareDesktopCaptureDelay( int new_value ) { m_shareDesk
 inline int Settings::shareDesktopCaptureDelay() const { return m_shareDesktopCaptureDelay; }
 inline void Settings::setShareDesktopFitToScreen( bool new_value ) { m_shareDesktopFitToScreen = new_value; }
 inline bool Settings::shareDesktopFitToScreen() const { return m_shareDesktopFitToScreen; }
+inline void Settings::setShareDesktopImageType( const QString& new_value ) { m_shareDesktopImageType = new_value; }
+inline const QString& Settings::shareDesktopImageType() const { return m_shareDesktopImageType; }
+inline void Settings::setShareDesktopImageQuality( int new_value ) { m_shareDesktopImageQuality = new_value; }
+inline int Settings::shareDesktopImageQuality() const { return m_shareDesktopImageQuality; }
 
 #endif // BEEBEEP_SETTINGS_H

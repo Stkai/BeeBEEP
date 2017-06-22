@@ -454,6 +454,10 @@
         <source>%1 %2 has removed members: %3.</source>
         <translation>%1 %2 ha rimosso i seguenti membri: %3.</translation>
     </message>
+    <message>
+        <source>%1 You cannot share desktop with %2.</source>
+        <translation>%1 Non puoi condividere il tuo desktop con %2.</translation>
+    </message>
 </context>
 <context>
     <name>File</name>
@@ -2332,6 +2336,26 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Select the interval in ms of screen capture</source>
         <translation type="obsolete">Seleziona l&apos;intervallo in ms di cattura dello schermo</translation>
+    </message>
+    <message>
+        <source>Select image type</source>
+        <translation>Seleziona il tipo di immagine</translation>
+    </message>
+    <message>
+        <source>Select image quality</source>
+        <translation>Seleziona la qualità dell&apos;immagine</translation>
+    </message>
+    <message>
+        <source>jpg default</source>
+        <translation>jpg predefinito</translation>
+    </message>
+    <message>
+        <source>-1 default, 10 low, 100 high</source>
+        <translation type="obsolete">-1 predefinita, 10 bassa, 60 media, 100 alta</translation>
+    </message>
+    <message>
+        <source>-1 default, 10 low, 60 medium, 100 high</source>
+        <translation>-1 predefinita, 10 bassa, 60 media, 100 alta</translation>
     </message>
 </context>
 <context>

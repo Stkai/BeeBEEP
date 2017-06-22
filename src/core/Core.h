@@ -162,7 +162,7 @@ signals:
   void localUserIsBuzzedBy( const User& );
   void newSystemStatusMessage( const QString&, int );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-  void shareDesktopImageAvailable( const User&, const QImage&, QRgb );
+  void shareDesktopImageAvailable( const User&, const QImage&, const QString&, QRgb );
   void shareDesktopUpdate( const User& );
 #endif
 

@@ -446,6 +446,10 @@
         <source>%1 %2 has removed members: %3.</source>
         <translation>%1 %2 hat folgende Mitglieder entfernt: %3.</translation>
     </message>
+    <message>
+        <source>%1 You cannot share desktop with %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>File</name>
@@ -2316,6 +2320,22 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>Fit image to screen</source>
         <translation>Bild an Bildschirmgröße anpassen</translation>
+    </message>
+    <message>
+        <source>Select image type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select image quality</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>jpg default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>-1 default, 10 low, 60 medium, 100 high</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

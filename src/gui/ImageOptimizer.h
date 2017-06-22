@@ -36,9 +36,13 @@ public:
   QImage diffImage( const QImage& old_image, const QImage& new_image, QRgb diff_color = qRgba( 0, 0, 0, 0 ) ) const;
   QImage mergeImage( const QImage& old_image, const QImage& new_image, QRgb diff_color = qRgba( 0, 0, 0, 0 ) ) const;
 
-  QByteArray saveImage( const QImage&, const char* image_type = "png", int image_quality = -1, bool use_compression = true, int compression_level = -1 ) const;
-  QImage loadImage( const QByteArray&, const char* image_type = "png", bool use_compression = true ) const;
+  QByteArray saveImage( const QImage&, const QString& image_type = "png", int image_quality = -1, bool use_compression = true, int compression_level = -1 ) const;
+  QImage loadImage( const QByteArray&, const QString& image_type = "png", bool use_compression = true ) const;
 
+  QImage applyMedianCutAlgorithm( const QImage& ) const; // too slow: 32s for a single image
+
+  bool imageTypeHasTransparentColor( const QString& ) const;
+  inline const QStringList& imageTypes() const;
 
   static ImageOptimizer& instance()
   {
@@ -59,6 +63,13 @@ public:
 protected:
   ImageOptimizer();
 
+private:
+  QStringList m_imageTypes;
+
 };
+
+
+// Inline Functions
+inline const QStringList& ImageOptimizer::imageTypes() const { return m_imageTypes; }
 
 #endif // BEEBEEP_IMAGEOPTIMIZER_H

@@ -34,6 +34,9 @@
 #include "HistoryManager.h"
 #include "Hive.h"
 #include "IconManager.h"
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  #include "ImageOptimizer.h"
+#endif
 #include "Log.h"
 #include "MessageManager.h"
 #include "NetworkManager.h"
@@ -44,8 +47,9 @@
 #include "Settings.h"
 #include "ShortcutManager.h"
 #ifdef BEEBEEP_USE_HUNSPELL
-#include "SpellChecker.h"
+  #include "SpellChecker.h"
 #endif
+
 
 bool SetTranslator( QTranslator* translator, QString language_folder, QString lang )
 {
@@ -66,6 +70,7 @@ bool SetTranslator( QTranslator* translator, QString language_folder, QString la
   qApp->installTranslator( translator );
   return true;
 }
+
 
 int main( int argc, char *argv[] )
 {
@@ -165,6 +170,10 @@ int main( int argc, char *argv[] )
   /* Init Icon Provider */
   (void)GuiIconProvider::instance();
 
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  (void)ImageOptimizer::instance();
+#endif
+
   /* Init Audio Manager */
   if( AudioManager::instance().isAudioDeviceAvailable() )
     qDebug() << "Sound manager is enabled";
@@ -244,6 +253,9 @@ int main( int argc, char *argv[] )
   EmoticonManager::close();
   IconManager::close();
   ColorManager::close();
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  ImageOptimizer::close();
+#endif
   AudioManager::close();
   ShortcutManager::close();
 #ifdef BEEBEEP_USE_HUNSPELL

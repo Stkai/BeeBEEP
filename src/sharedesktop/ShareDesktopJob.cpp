@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "ImageOptimizer.h"
+#include "Settings.h"
 #include "ShareDesktopJob.h"
 
 
@@ -33,21 +34,29 @@ ShareDesktopJob::ShareDesktopJob( QObject *parent )
 
 void ShareDesktopJob::processNewImage( const QImage& new_image )
 {
-  QByteArray diff_image_data = "";
+  QByteArray image_data = "";
   QRgb diff_color = qRgba( 0, 0, 0, 0 ); // transparent color
-  QString image_type = "png";
-  int image_quality = 100;
+  QString image_type = Settings::instance().shareDesktopImageType();
+  int image_quality = Settings::instance().shareDesktopImageQuality();
   bool use_compression = true;
   int compression_level = 9;
 
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Processing new share desktop image with type" << qPrintable( image_type ) << "and quality" << image_quality;
+#endif
   if( !new_image.isNull() )
   {
-    QImage diff_image = ImageOptimizer::instance().diffImage( m_lastImage, new_image, diff_color );
-    diff_image_data = ImageOptimizer::instance().saveImage( diff_image, image_type.toLatin1().constData(), image_quality, use_compression, compression_level );
-    m_lastImage = new_image;
+    if( ImageOptimizer::instance().imageTypeHasTransparentColor( image_type ) )
+    {
+      QImage diff_image = ImageOptimizer::instance().diffImage( m_lastImage, new_image, diff_color );
+      image_data = ImageOptimizer::instance().saveImage( diff_image, image_type, image_quality, use_compression, compression_level );
+      m_lastImage = new_image;
+    }
+    else
+      image_data = ImageOptimizer::instance().saveImage( new_image, image_type, image_quality, use_compression, compression_level );
   }
   else
     qWarning() << "Share desktop has found an invalid screen image";
 
-  emit imageDataAvailable( diff_image_data, "png", use_compression, diff_color );
+  emit imageDataAvailable( image_data, image_type, use_compression, diff_color );
 }

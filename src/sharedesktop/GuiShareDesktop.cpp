@@ -57,10 +57,13 @@ void GuiShareDesktop::setImageSize( const QSize& pix_size )
   mp_lView->setMinimumSize( pix_size );
 }
 
-void GuiShareDesktop::updateImage( const QImage& img, QRgb diff_color )
+void GuiShareDesktop::updateImage( const QImage& img, const QString& image_type, QRgb diff_color )
 {
   m_lastUpdate = QDateTime::currentDateTime();
-  m_lastImage = ImageOptimizer::instance().mergeImage( m_lastImage, img, diff_color );
+  if( ImageOptimizer::instance().imageTypeHasTransparentColor( image_type ) )
+    m_lastImage = ImageOptimizer::instance().mergeImage( m_lastImage, img, diff_color );
+  else
+    m_lastImage = img;
   mp_lView->setPixmap( QPixmap::fromImage( m_lastImage ) );
   mp_lView->setToolTip( QString( "%1 %2" ).arg( tr( "last update" ) ).arg( Bee::dateTimeToString( m_lastUpdate ) ) );
 }

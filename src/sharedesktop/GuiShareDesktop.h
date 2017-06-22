@@ -39,7 +39,7 @@ public:
   inline VNumber userId() const;
 
   void setImageSize( const QSize& );
-  void updateImage( const QImage&, QRgb diff_color );
+  void updateImage( const QImage&, const QString& image_type, QRgb diff_color );
 
   void onTickEvent( int );
 

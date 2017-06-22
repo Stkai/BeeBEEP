@@ -1514,46 +1514,59 @@ QList<FileInfo> Protocol::messageToShareBoxFileList( const Message& m, const QHo
 
   Message Protocol::shareDesktopImageDataToMessage( const QByteArray& img_data, const QString& image_type, bool use_compression, QRgb diff_color ) const
   {
-    Message m( Message::ShareDesktop, ID_SHAREDESKTOP_MESSAGE, QString::fromLatin1( img_data ) );
+    Message m( Message::ShareDesktop, ID_SHAREDESKTOP_MESSAGE, QString::fromLatin1( img_data.toBase64() ) );
     m.addFlag( Message::Private );
     QStringList sl_data;
     sl_data << image_type;
     if( use_compression )
-      sl_data << QString( "*" );
+      sl_data << QString( "9" );
     else
       sl_data << QString( "" );
     sl_data << QString::number( diff_color );
+    sl_data << QLatin1String( "base64" );
     m.setData( sl_data.join( DATA_FIELD_SEPARATOR ) );
     return m;
   }
 
-  QImage Protocol::imageFromShareDesktopMessage( const Message& m, QRgb* p_diff_color ) const
+  QImage Protocol::imageFromShareDesktopMessage( const Message& m, QString* p_image_type, QRgb* p_diff_color ) const
   {
     if( m.text().isEmpty() )
+    {
+#ifdef BEEBEEP_DEBUG
+      qDebug() << "Share desktop message is arrived with empty image";
+#endif
       return QImage();
-    QString img_type( "png" );
+    }
+
+    QString img_type = Settings::instance().shareDesktopImageType();
+    QRgb diff_color = qRgba( 0, 0, 0, 0 );
     bool use_compression = true;
+    QString image_codec = "base64";
     if( !m.data().isEmpty() )
     {
       QStringList sl_data = m.data().split( DATA_FIELD_SEPARATOR, QString::KeepEmptyParts );
-      if( !sl_data.isEmpty() )
-        img_type = sl_data.takeFirst();
-      if( !sl_data.isEmpty() )
-        use_compression = sl_data.takeFirst().isEmpty() ? false : true;
-      if( !sl_data.isEmpty() )
+      if( sl_data.size() >= 4 )
       {
-        if( p_diff_color )
-        {
-          bool ok = false;
-          QRgb diff_color = sl_data.takeFirst().toUInt( &ok );
-          if( !ok )
-            diff_color = qRgba( 0, 0, 0, 0 );
-          *p_diff_color = diff_color;
-        }
+        img_type = sl_data.takeFirst();
+        use_compression = sl_data.takeFirst().isEmpty() ? false : true;
+        bool ok = false;
+        unsigned int diff_color_tmp = sl_data.takeFirst().toUInt( &ok );
+        if( ok )
+          diff_color = diff_color_tmp;
+        image_codec = sl_data.takeFirst();
       }
+      else
+        qWarning() << "Invalid image data found in share desktop message (default values used)";
     }
+    else
+      qWarning() << "Empty image data found in share desktop message (default values used)";
 
-    return ImageOptimizer::instance().loadImage( m.text().toLatin1(), img_type.toLatin1().constData(), use_compression );
+    if( p_image_type )
+      *p_image_type = img_type;
+    if( p_diff_color )
+      *p_diff_color = diff_color;
+    QByteArray image_data = image_codec == "base64" ? QByteArray::fromBase64( m.text().toLatin1() ) : m.text().toLatin1();
+    return ImageOptimizer::instance().loadImage( image_data, img_type, use_compression );
   }
 #endif
 
