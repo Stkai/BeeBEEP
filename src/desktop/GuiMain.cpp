@@ -684,6 +684,9 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().checkNewVersionAtStartup() );
   act->setData( 43 );
+  mp_menuStartupSettings->addSeparator();
+  act = mp_menuStartupSettings->addAction( IconManager::instance().icon( "timer.png" ), tr( "Delay first connection" ) + QString( "..." ), this, SLOT( settingsChanged() ) );
+  act->setData( 65 );
 
   mp_menuCloseSettings = new QMenu( tr( "On close" ), this );
   mp_menuCloseSettings->setIcon( IconManager::instance().icon( "settings-close.png" ) );
@@ -1107,22 +1110,22 @@ void GuiMain::createMainWidgets()
   mp_userList = new GuiUserList( this );
   tab_index = mp_tabMain->addTab( mp_userList, IconManager::instance().icon( "user-list.png" ), "" );
   mp_tabMain->setTabToolTip( tab_index, tr( "Users" ) );
-  mp_userList->setToolTip( QString( "%1\n(%2)" ).arg( mp_tabMain->tabToolTip( tab_index ), tooltip_right_button ) );
+  mp_userList->setMainToolTip( QString( "%1\n(%2)" ).arg( mp_tabMain->tabToolTip( tab_index ), tooltip_right_button ) );
 
   mp_chatList = new GuiChatList( this );
   tab_index = mp_tabMain->addTab( mp_chatList, IconManager::instance().icon( "chat-list.png" ), "" );
   mp_tabMain->setTabToolTip( tab_index, tr( "Chats" ) );
-  mp_chatList->setToolTip( QString( "%1\n(%2)" ).arg( mp_tabMain->tabToolTip( tab_index ), tooltip_right_button ) );
+  mp_chatList->setMainToolTip( QString( "%1\n(%2)" ).arg( mp_tabMain->tabToolTip( tab_index ), tooltip_right_button ) );
 
   mp_groupList = new GuiGroupList( this );
   tab_index = mp_tabMain->addTab( mp_groupList, IconManager::instance().icon( "group.png" ), "" );
   mp_tabMain->setTabToolTip( tab_index, tr( "Groups" ) );
-  mp_groupList->setToolTip( QString( "%1\n(%2)" ).arg( mp_tabMain->tabToolTip( tab_index ), tooltip_right_button ) );
+  mp_groupList->setMainToolTip( QString( "%1\n(%2)" ).arg( mp_tabMain->tabToolTip( tab_index ), tooltip_right_button ) );
 
   mp_savedChatList = new GuiSavedChatList( this );
   tab_index = mp_tabMain->addTab( mp_savedChatList, IconManager::instance().icon( "saved-chat-list.png" ), "" );
   mp_tabMain->setTabToolTip( tab_index, tr( "Chat histories" ) );
-  mp_savedChatList->setToolTip( QString( "%1\n(%2)" ).arg( mp_tabMain->tabToolTip( tab_index ), tooltip_right_button ) );
+  mp_savedChatList->setMainToolTip( QString( "%1\n(%2)" ).arg( mp_tabMain->tabToolTip( tab_index ), tooltip_right_button ) );
 
   mp_dockFileTransfers = new QDockWidget( tr( "File Transfers" ), this );
   mp_dockFileTransfers->setObjectName( "GuiFileTransferDock" );
@@ -1502,6 +1505,15 @@ void GuiMain::settingsChanged( QAction* act )
     Settings::instance().setShareDesktopFitToScreen( act->isChecked() );
     break;
 #endif
+  case 65:
+    {
+      int delay_connection = QInputDialog::getInt( this, Settings::instance().programName(),
+                                              act->text() + QString( "\n(%1)" ).arg( tr( "milliseconds, 5000 default" ) ),
+                                              Settings::instance().delayConnectionAtStartup(), 3000, 60000, 1000, &ok );
+      if( ok )
+        Settings::instance().setDelayConnectionAtStartup( delay_connection );
+    }
+    break;
   case 99:
     break;
   default:
@@ -2535,7 +2547,9 @@ void GuiMain::loadSession()
   mp_tabMain->setCurrentWidget( mp_home );
   mp_home->loadSystemMessages();
   QTimer::singleShot( 100, beeCore, SLOT( buildSavedChatList() ) );
-  QTimer::singleShot( 3000, this, SLOT( startCore() ) );
+  QTimer::singleShot( Settings::instance().delayConnectionAtStartup(), this, SLOT( startCore() ) );
+  if( Settings::instance().delayConnectionAtStartup() > 5000 )
+    qDebug() << "Delay first connection for" << Settings::instance().delayConnectionAtStartup() << "ms";
 }
 
 void GuiMain::showSavedChatSelected( const QString& chat_name )
@@ -3425,20 +3439,13 @@ void GuiMain::selectDictionatyPath()
 void GuiMain::onNetworkInterfaceDown()
 {
   if( beeCore->isConnected() )
-  {
-    QTimer::singleShot( 0, this, SLOT( stopCore() ) );
-  }
+    QMetaObject::invokeMethod( this, "stopCore", Qt::QueuedConnection );
 }
 
 void GuiMain::onNetworkInterfaceUp()
 {
-  if( !beeCore->isConnected() )
-  {
-    if( m_autoConnectOnInterfaceUp )
-    {
-      QTimer::singleShot( 2000, this, SLOT( startCore() ) );
-    }
-  }
+  if( m_autoConnectOnInterfaceUp )
+    QMetaObject::invokeMethod( this, "startCore", Qt::QueuedConnection );
 }
 
 void GuiMain::onTickEvent( int ticks )
@@ -3851,8 +3858,8 @@ void GuiMain::showRestartApplicationAlertMessage()
 #ifdef BEEBEEP_USE_SHAREDESKTOP
 void GuiMain::onShareDesktopImageAvailable( const User& u, const QImage& img, const QString& image_type, QRgb diff_color )
 {
-  int desktop_h = qApp->desktop()->availableGeometry().height() - 50;
-  int desktop_w = qApp->desktop()->availableGeometry().width() - 80;
+  int desktop_h = qApp->desktop()->availableGeometry().height() - 18;
+  int desktop_w = qApp->desktop()->availableGeometry().width() - 32;
   QImage fit_img;
   if( Settings::instance().shareDesktopFitToScreen() && (img.width() > desktop_w || img.height() > desktop_h) )
   {
@@ -3886,8 +3893,8 @@ void GuiMain::onShareDesktopImageAvailable( const User& u, const QImage& img, co
   connect( new_gui, SIGNAL( shareDesktopClosed( VNumber ) ), this, SLOT( onShareDesktopCloseEvent( VNumber ) ) );
   connect( new_gui, SIGNAL( shareDesktopDeleteRequest( VNumber ) ), this, SLOT( onShareDesktopDeleteRequest( VNumber ) ) );
   new_gui->setUser( u );
-  new_gui->setGeometry( 10, 40, qMin( fit_img.width()+12, qMax( 640, desktop_w-100 ) ),
-                                qMin( fit_img.height()+12, qMax( 480, desktop_h-100 ) ) );
+  new_gui->setGeometry( 0, 0, qMin( fit_img.width()+12, qMax( 640, desktop_w ) ),
+                              qMin( fit_img.height()+12, qMax( 480, desktop_h ) ) );
   new_gui->setImageSize( fit_img.size() );
   new_gui->show();
   new_gui->setMaximumSize( fit_img.width()+12, fit_img.height()+12 );

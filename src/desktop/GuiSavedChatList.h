@@ -35,6 +35,8 @@ class GuiSavedChatList : public QWidget, private Ui::GuiSavedChatListWidget
 public:
   GuiSavedChatList( QWidget* parent  );
 
+  inline void setMainToolTip( const QString& );
+
 signals:
   void savedChatSelected( const QString& );
   void savedChatRemoved( const QString& );
@@ -60,5 +62,8 @@ private:
 
 };
 
+
+// Inline Functions
+inline void GuiSavedChatList::setMainToolTip( const QString& new_value ) { mp_twSavedChatList->setToolTip( new_value ); }
 
 #endif // BEEBEEP_GUISAVEDCHATLIST_H

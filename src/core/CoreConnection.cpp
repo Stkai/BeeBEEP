@@ -106,7 +106,11 @@ void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )
   NetworkAddress na( sender_ip, sender_port );
   if( isUserConnected( na ) )
   {
-    qWarning() << qPrintable( sender_ip.toString() ) << "is already connected user and blocked";
+    User u = UserManager::instance().findUserByNetworkAddress( na );
+    if( u.isValid() )
+      qDebug() << "Skip new peer" << qPrintable( sender_ip.toString() ) << "from connected user" << qPrintable( u.name() );
+    else
+      qWarning() << qPrintable( sender_ip.toString() ) << "is already connected (but user is not authorized yet)";
     return;
   }
 

@@ -184,7 +184,7 @@ void ConnectionSocket::readBlock()
   if( bytes_available < m_blockSize )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "ConnectionSocket from" << qPrintable( m_networkAddress.toString() ) << "has only" << bytes_available << "bytes... wait for more" << m_blockSize;
+    qDebug() << "ConnectionSocket from" << qPrintable( m_networkAddress.toString() ) << "has" << bytes_available << "and wait for" << (m_blockSize-bytes_available) << "more bytes, total" << m_blockSize;
 #endif
     return;
   }
@@ -497,11 +497,15 @@ void ConnectionSocket::onTickEvent( int  )
     return;
   }
 
-  if( bytesAvailable() )
+  if( m_blockSize > 0 && bytesAvailable() >= m_blockSize )
   {
+    qint64 bytes_available = bytesAvailable();
+    if( bytes_available >= m_blockSize )
+    {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << qPrintable( m_networkAddress.toString() ) << "has" << bytesAvailable() << "bytes available: read forced";
+      qDebug() << qPrintable( m_networkAddress.toString() ) << "has" << bytes_available << "bytes available: read forced";
 #endif
-    readBlock();
+      readBlock();
+    }
   }
 }

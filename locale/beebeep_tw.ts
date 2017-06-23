@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="zh_TW">
+<TS version="2.1" language="zh_TW">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -48,14 +48,6 @@
     </message>
     <message>
         <source>%1 User %2 cannot save chat messages in path: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%1 Unable to connect to %2 Network. Please check your network adapters.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Network adapter not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -448,6 +440,14 @@
     </message>
     <message>
         <source>is added to favorites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Network adapter offline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 Unable to connect to %2 Network. Please check if your network adapter is connected.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2335,6 +2335,14 @@ Please select a different name.</source>
     </message>
     <message>
         <source>jpg for photo, png for presentation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delay first connection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>milliseconds, 5000 default</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

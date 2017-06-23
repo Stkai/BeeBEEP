@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -420,11 +420,11 @@
     </message>
     <message>
         <source>%1 Unable to connect to %2 Network. Please check your network adapters.</source>
-        <translation>%1 Impossibile connttersi nella rete %2. Controlla le tu schede di rete se sono attive.</translation>
+        <translation type="vanished">%1 Impossibile connettersi nella rete %2. Controlla se la tua scheda di rete è attiva.</translation>
     </message>
     <message>
         <source>Network adapter not found</source>
-        <translation>Scheda di rete non trovata</translation>
+        <translation type="vanished">Scheda di rete non trovata</translation>
     </message>
     <message>
         <source>%1 You start to share desktop with %2.</source>
@@ -457,6 +457,14 @@
     <message>
         <source>%1 You cannot share desktop with %2.</source>
         <translation>%1 Non puoi condividere il tuo desktop con %2.</translation>
+    </message>
+    <message>
+        <source>Network adapter offline</source>
+        <translation>Scheda di rete disconnessa</translation>
+    </message>
+    <message>
+        <source>%1 Unable to connect to %2 Network. Please check if your network adapter is connected.</source>
+        <translation>%1 Impossibile raggiungere la rete %2. Controlla se la tua scheda di rete è connessa.</translation>
     </message>
 </context>
 <context>
@@ -2360,6 +2368,14 @@ Inserisci un nome differente.</translation>
     <message>
         <source>jpg for photo, png for presentation</source>
         <translation>jpg per immagini, png per presentazioni</translation>
+    </message>
+    <message>
+        <source>Delay first connection</source>
+        <translation>Ritarda la prima connessione</translation>
+    </message>
+    <message>
+        <source>milliseconds, 5000 default</source>
+        <translation>millisecondi, 5000 predefinito</translation>
     </message>
 </context>
 <context>

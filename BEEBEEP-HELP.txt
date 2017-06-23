@@ -108,8 +108,8 @@ MaxStatusDescriptionInList=[integer]
 PresetMessages=[StringList] [3.0.9]
 RefusedChats=[StringList] [4.0.0]
 RecognitionMethod=[integer] see "UserRecognitionMethod" in beebeep.rc for more informations [4.0.0]
-RemoveInactiveUsers=[true/false] remove users inactive after some days (default=true) [4.0.1]
-MaxDaysOfUserInactivity=[integer] number of days before removing users (default=31) [4.0.1]
+RemoveInactiveUsers=[true/false] remove users inactive after some days (default=true) [4.2.0]
+MaxDaysOfUserInactivity=[integer] number of days before removing users (default=31) [4.2.0]
 
 [VCard]
 NickName= your nickname
@@ -207,6 +207,7 @@ WritingTimeout=3000
 SystemTrayMessageTimeout=2000
 ConnectionTimeout=5000
 UseLowDelayOptionOnSocket=[true/false] Try to optimize the socket for low latency. For a QTcpSocket this would set the TCP_NODELAY option and disable Nagle's algorithm (default=false) [3.0.5]
+DelayConnectionAtStartup(ms)=[integer] sometimes BeeBEEP starts before the network so you can delay connection (default=3000) [4.2.0]
 
 [Network]
 BroadcastAddresses=(do not edit manually)
@@ -237,8 +238,8 @@ ConfirmOnDownloadFile=[true/false] if it is true always prompt before downloadin
 ShareList=(do not edit manually)
 
 [ShareDesktop]
-Enable=[true/false] enable file desktop sharing (default=true) [4.0.1]
-CaptureScreenInterval(ms)=[integer] interval in ms of capture screen (default=2100) [4.0.1]
-FitToScreen=[true/false] fit desktop image from remote user in your screen (default=false) [4.0.1]
-ImageType=[string] is better to use jpg or png (default=jpg) [4.0.1]
-ImageQuality=[integer] image quality of jpg format, in case of png use 100 (default=60) [4.0.1]
+Enable=[true/false] enable file desktop sharing (default=true) [4.2.0]
+CaptureScreenInterval(ms)=[integer] interval in ms of capture screen (default=2100) [4.2.0]
+FitToScreen=[true/false] fit desktop image from remote user in your screen (default=false) [4.2.0]
+ImageType=[string] is better to use jpg or png (default=jpg) [4.2.0]
+ImageQuality=[integer] image quality of jpg format, in case of png use 100 (default=60) [4.2.0]

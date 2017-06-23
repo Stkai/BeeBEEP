@@ -448,6 +448,9 @@ public:
   inline void setShareDesktopImageQuality( int );
   inline int shareDesktopImageQuality() const;
 
+  inline void setDelayConnectionAtStartup( int );
+  inline int delayConnectionAtStartup() const;
+
   QString simpleEncrypt( const QString& );
   QString simpleDecrypt( const QString& );
 
@@ -693,6 +696,8 @@ private:
   bool m_shareDesktopFitToScreen;
   QString m_shareDesktopImageType;
   int m_shareDesktopImageQuality;
+
+  int m_delayConnectionAtStartup;
 
 };
 
@@ -990,5 +995,7 @@ inline void Settings::setShareDesktopImageType( const QString& new_value ) { m_s
 inline const QString& Settings::shareDesktopImageType() const { return m_shareDesktopImageType; }
 inline void Settings::setShareDesktopImageQuality( int new_value ) { m_shareDesktopImageQuality = new_value; }
 inline int Settings::shareDesktopImageQuality() const { return m_shareDesktopImageQuality; }
+inline void Settings::setDelayConnectionAtStartup( int new_value ) { m_delayConnectionAtStartup = new_value; }
+inline int Settings::delayConnectionAtStartup() const { return m_delayConnectionAtStartup; }
 
 #endif // BEEBEEP_SETTINGS_H

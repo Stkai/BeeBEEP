@@ -161,6 +161,8 @@ Settings::Settings()
   m_maxDaysOfUserInactivity = 31;
 
   m_shareDesktopCaptureDelay = 2100;
+
+  m_delayConnectionAtStartup = 5000;
 }
 
 void Settings::createApplicationUuid()
@@ -1005,6 +1007,7 @@ void Settings::load()
   if( m_settingsVersion < 6 && m_tickIntervalConnectionTimeout < 16 )
     m_tickIntervalConnectionTimeout = 16;
   m_useLowDelayOptionOnSocket = sets->value( "UseLowDelayOptionOnSocket", false ).toBool();
+  m_delayConnectionAtStartup = qMax( 3000, sets->value( "DelayConnectionAtStartup(ms)", m_delayConnectionAtStartup ).toInt() );
   sets->endGroup();
 
   sets->beginGroup( "Network");
@@ -1294,6 +1297,7 @@ void Settings::save()
   sets->setValue( "TickIntervalConnectionTimeout", m_tickIntervalConnectionTimeout );
   sets->setValue( "UseLowDelayOptionOnSocket", m_useLowDelayOptionOnSocket );
   sets->setValue( "TickIntervalBroadcasting", m_tickIntervalBroadcasting );
+  sets->setValue( "DelayConnectionAtStartup(ms)", m_delayConnectionAtStartup );
   sets->endGroup();
   sets->beginGroup( "Network");
 #ifdef BEEBEEP_USE_MULTICAST_DNS

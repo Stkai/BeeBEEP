@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE" sourcelanguage="en">
+<TS version="2.1" language="de_DE" sourcelanguage="en">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -172,7 +172,7 @@
     </message>
     <message>
         <source>Network adapter not found</source>
-        <translation>Netzwerkadapter nicht gefunden</translation>
+        <translation type="vanished">Netzwerkadapter nicht gefunden</translation>
     </message>
     <message>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
@@ -368,7 +368,7 @@
     </message>
     <message>
         <source>%1 Unable to connect to %2 Network. Please check your network adapters.</source>
-        <translation>%1 Es kann keine Verbindung zum Netzwerk %2 hergestellt werden. Überprüfe bitte deinen Netzwerkadapter.</translation>
+        <translation type="vanished">%1 Es kann keine Verbindung zum Netzwerk %2 hergestellt werden. Überprüfe bitte deinen Netzwerkadapter.</translation>
     </message>
     <message>
         <source>%1 saved chats are added to history</source>
@@ -448,6 +448,14 @@
     </message>
     <message>
         <source>%1 You cannot share desktop with %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Network adapter offline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 Unable to connect to %2 Network. Please check if your network adapter is connected.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2335,6 +2343,14 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>jpg for photo, png for presentation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delay first connection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>milliseconds, 5000 default</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

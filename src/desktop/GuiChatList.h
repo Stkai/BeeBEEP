@@ -35,6 +35,8 @@ class GuiChatList : public QWidget, private Ui::GuiChatListWidget
 public:
   GuiChatList( QWidget* parent );
 
+  inline void setMainToolTip( const QString& );
+
   void updateChats();
 
 signals:
@@ -68,5 +70,8 @@ private:
 
 };
 
+
+// Inline Functions
+inline void GuiChatList::setMainToolTip( const QString& new_value ) { mp_twChatList->setToolTip( new_value ); }
 
 #endif // BEEBEEP_GUICHATLIST_H

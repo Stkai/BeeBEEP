@@ -35,6 +35,8 @@ class GuiGroupList : public QWidget, private Ui::GuiGroupListWidget
 public:
   GuiGroupList( QWidget* parent );
 
+  inline void setMainToolTip( const QString& );
+
   void updateGroups();
   void updateUser( const User& );
   void updateChat( const Chat& );
@@ -74,5 +76,8 @@ private:
 
 };
 
+
+// Inline Functions
+inline void GuiGroupList::setMainToolTip( const QString& new_value ) { mp_twGroupList->setToolTip( new_value ); }
 
 #endif // BEEBEEP_GUIGROUPLIST_H
