@@ -142,6 +142,9 @@ bool Core::start()
   else
     qDebug() << "Starting" << Settings::instance().programName() << "core";
 
+  if( Settings::instance().localUser().isStatusConnected() )
+    Settings::instance().setLocalUserStatus( User::Offline );
+
   if( !NetworkManager::instance().searchLocalHostAddress() )
   {
     qWarning() << "Unable to find a valid network adapter active to start connection";
@@ -409,7 +412,12 @@ void Core::checkNetworkInterface()
     }
   }
 
-  if( !NetworkManager::instance().isMainInterfaceUp() )
+  if( NetworkManager::instance().isMainInterfaceUp() )
+  {
+    if( !isConnected() )
+      emit networkInterfaceIsUp();
+  }
+  else
   {
     if( isConnected() )
     {
@@ -422,22 +430,19 @@ void Core::checkNetworkInterface()
       emit networkInterfaceIsDown();
       return;
     }
-
-    if( NetworkManager::instance().isMainInterfaceUnavailable() )
+    else
     {
+      if( NetworkManager::instance().isMainInterfaceUnavailable() )
+      {
 #ifdef BEEBEEP_DEBUG
-      qDebug() << "Main network interface is not available. Searching...";
+         qDebug() << "Main network interface is not available. Searching...";
 #endif
-      if( NetworkManager::instance().searchLocalHostAddress() )
-        QMetaObject::invokeMethod( this, "checkNetworkInterface", Qt::QueuedConnection );
-      else
-        qWarning() << "Network iterface not found. Please check your connection";
+        if( NetworkManager::instance().searchLocalHostAddress() )
+          QMetaObject::invokeMethod( this, "checkNetworkInterface", Qt::QueuedConnection );
+        else
+          qWarning() << "Network iterface not found. Please check your connection";
+      }
     }
-  }
-  else
-  {
-    if( !isConnected() )
-      emit networkInterfaceIsUp();
   }
 }
 

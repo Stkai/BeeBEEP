@@ -103,7 +103,7 @@ GuiMain::GuiMain( QWidget *parent )
 
   m_lastUserStatus = User::Online;
   m_forceShutdown = false;
-  m_autoConnectOnInterfaceUp = false;
+  m_autoConnectOnInterfaceUp = true;
   m_prevActivatedState = true;
   m_coreIsConnecting = false;
 
@@ -464,8 +464,6 @@ void GuiMain::forceShutdown()
 
 void GuiMain::startCore()
 {
-  m_autoConnectOnInterfaceUp = false;
-
   if( beeCore->isConnected() )
     return;
 
@@ -495,7 +493,9 @@ void GuiMain::startCore()
   }
 
   m_coreIsConnecting = true;
-  beeCore->start();
+  m_autoConnectOnInterfaceUp = true;
+  if( !beeCore->start() )
+     QMetaObject::invokeMethod( beeCore, "checkNetworkInterface", Qt::QueuedConnection );
   initGuiItems();
 }
 
@@ -1473,7 +1473,7 @@ void GuiMain::settingsChanged( QAction* act )
   case 61:
     {
       int capture_delay = QInputDialog::getInt( this, Settings::instance().programName(), act->text() + QString( " (ms)" ),
-                                                Settings::instance().shareDesktopCaptureDelay(), 1000, 5000, 100, &ok );
+                                                Settings::instance().shareDesktopCaptureDelay(), 2000, 8000, 300, &ok );
       if( ok )
         Settings::instance().setShareDesktopCaptureDelay( capture_delay );
     }
@@ -1481,7 +1481,7 @@ void GuiMain::settingsChanged( QAction* act )
   case 62:
     {
       QString image_type = QInputDialog::getItem( this, Settings::instance().programName(),
-                                                  act->text() + QString( " (%1)" ).arg( tr( "jpg default" ) ),
+                                                  act->text() + QString( "\n(%1)" ).arg( tr( "jpg for photo, png for presentation" ) ),
                                                   ImageOptimizer::instance().imageTypes(),
                                                   qMax( 0, ImageOptimizer::instance().imageTypes().indexOf( Settings::instance().shareDesktopImageType() ) ),
                                                   false, &ok );
@@ -1736,6 +1736,7 @@ void GuiMain::statusSelected()
     return;
 
   int user_status = act->data().toInt();
+  m_autoConnectOnInterfaceUp = user_status != User::Offline;
   setUserStatusSelected( user_status );
 }
 
@@ -3031,7 +3032,7 @@ void GuiMain::sendBroadcastMessage()
 
 void GuiMain::enableBroadcastAction()
 {
-  mp_actBroadcast->setEnabled( true );
+  mp_actBroadcast->setEnabled( beeCore->isConnected() );
 }
 
 void GuiMain::checkUserSelected( VNumber user_id )
@@ -3425,16 +3426,19 @@ void GuiMain::onNetworkInterfaceDown()
 {
   if( beeCore->isConnected() )
   {
-    //raiseHomeView();
-    m_autoConnectOnInterfaceUp = true;
-    QTimer::singleShot( 1000, this, SLOT( stopCore() ) );
+    QTimer::singleShot( 0, this, SLOT( stopCore() ) );
   }
 }
 
 void GuiMain::onNetworkInterfaceUp()
 {
-  if( m_autoConnectOnInterfaceUp && !beeCore->isConnected() )
-    QTimer::singleShot( 5000, this, SLOT( startCore() ) );
+  if( !beeCore->isConnected() )
+  {
+    if( m_autoConnectOnInterfaceUp )
+    {
+      QTimer::singleShot( 2000, this, SLOT( startCore() ) );
+    }
+  }
 }
 
 void GuiMain::onTickEvent( int ticks )
@@ -3847,15 +3851,18 @@ void GuiMain::showRestartApplicationAlertMessage()
 #ifdef BEEBEEP_USE_SHAREDESKTOP
 void GuiMain::onShareDesktopImageAvailable( const User& u, const QImage& img, const QString& image_type, QRgb diff_color )
 {
-  int desktop_h = qApp->desktop()->availableGeometry().height();
-  int desktop_w = qApp->desktop()->availableGeometry().width();
+  int desktop_h = qApp->desktop()->availableGeometry().height() - 50;
+  int desktop_w = qApp->desktop()->availableGeometry().width() - 80;
   QImage fit_img;
   if( Settings::instance().shareDesktopFitToScreen() && (img.width() > desktop_w || img.height() > desktop_h) )
   {
-    if( desktop_h <= desktop_w )
-      fit_img = img.scaledToHeight( desktop_h - 40 );
+    if( img.width() > desktop_w )
+      fit_img = img.scaledToWidth( desktop_w );
     else
-      fit_img = img.scaledToWidth( desktop_w - 20 );
+      fit_img = img;
+
+    if( fit_img.height() > desktop_h )
+      fit_img = fit_img.scaledToHeight( desktop_h );
   }
   else
     fit_img = img;

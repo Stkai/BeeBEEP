@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE" sourcelanguage="en">
+<TS version="2.0" language="de_DE" sourcelanguage="en">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -2330,11 +2330,11 @@ Bitte wähle einen anderen Namen aus.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>jpg default</source>
+        <source>-1 default, 10 low, 60 medium, 100 high</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>-1 default, 10 low, 60 medium, 100 high</source>
+        <source>jpg for photo, png for presentation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

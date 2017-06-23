@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -2347,7 +2347,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>jpg default</source>
-        <translation>jpg predefinito</translation>
+        <translation type="obsolete">jpg predefinito</translation>
     </message>
     <message>
         <source>-1 default, 10 low, 100 high</source>
@@ -2356,6 +2356,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>-1 default, 10 low, 60 medium, 100 high</source>
         <translation>-1 predefinita, 10 bassa, 60 media, 100 alta</translation>
+    </message>
+    <message>
+        <source>jpg for photo, png for presentation</source>
+        <translation>jpg per immagini, png per presentazioni</translation>
     </message>
 </context>
 <context>

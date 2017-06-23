@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="zh_TW">
+<TS version="2.0" language="zh_TW">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -2226,10 +2226,6 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>jpg default</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>-1 default, 10 low, 60 medium, 100 high</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2335,6 +2331,10 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Do you really want to share your desktop with %1?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>jpg for photo, png for presentation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3319,7 +3319,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Other informations</source>
-        <translation type="vanished">其他資訊</translation>
+        <translation type="obsolete">其他資訊</translation>
     </message>
     <message>
         <source>Email</source>
