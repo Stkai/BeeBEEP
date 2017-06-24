@@ -182,23 +182,23 @@
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="211"/>
-        <location filename="../src/core/CoreChat.cpp" line="729"/>
-        <location filename="../src/core/CoreChat.cpp" line="741"/>
+        <location filename="../src/core/CoreChat.cpp" line="740"/>
+        <location filename="../src/core/CoreChat.cpp" line="752"/>
         <source>%1 Chat with %2.</source>
         <translation>%1 Chat met %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="724"/>
+        <location filename="../src/core/CoreChat.cpp" line="735"/>
         <source>Chat with all connected users</source>
         <translation>Chat met alle aangesloten gebruikers</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="729"/>
+        <location filename="../src/core/CoreChat.cpp" line="740"/>
         <source>Unknown %1</source>
         <translation>Onbekend %1</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="345"/>
+        <location filename="../src/core/CoreChat.cpp" line="356"/>
         <source>Unable to send the message: you are not connected.</source>
         <translation>Kan bericht niet verzenden: u bent niet verbonden.</translation>
     </message>
@@ -243,57 +243,57 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="254"/>
+        <location filename="../src/core/CoreChat.cpp" line="265"/>
         <source>%1 %2 has left the group chat %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="276"/>
+        <location filename="../src/core/CoreChat.cpp" line="287"/>
         <source>%1 %2 is added to saved chats.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="321"/>
+        <location filename="../src/core/CoreChat.cpp" line="332"/>
         <source>%1 Chat with %2 is archived.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="351"/>
+        <location filename="../src/core/CoreChat.cpp" line="362"/>
         <source>Unable to send the message: this chat is disabled.</source>
         <translation>Kan bericht niet verzenden: de chat is uitgeschakeld.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="385"/>
+        <location filename="../src/core/CoreChat.cpp" line="396"/>
         <source>Unable to send the message to %1.</source>
         <translation>Kan bericht niet versturen naar %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="416"/>
+        <location filename="../src/core/CoreChat.cpp" line="427"/>
         <source>The message will be delivered to %1.</source>
         <translation>Dit bericht wordt verstuurd naar %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="393"/>
+        <location filename="../src/core/CoreChat.cpp" line="404"/>
         <source>Nobody has received the message.</source>
         <translation>Niemand heeft het bericht ontvangen.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="543"/>
+        <location filename="../src/core/CoreChat.cpp" line="554"/>
         <source>%1 saved chats are added to history</source>
         <translation>%1 opgeslagen chats zijn aan geschiedenis toegevoegd</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="599"/>
+        <location filename="../src/core/CoreChat.cpp" line="610"/>
         <source>Offline messages sent to %2.</source>
         <translation>Offline bericht verzonden naar%2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="682"/>
+        <location filename="../src/core/CoreChat.cpp" line="693"/>
         <source>%1 You have buzzed %2.</source>
         <translation>%1 Je bent gebuzzed %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="496"/>
+        <location filename="../src/core/CoreChat.cpp" line="507"/>
         <source>%1 %2 cannot be informed that you have left the group.</source>
         <translation>%1 %2 kan niet verwittigd worden dat u de groep verlaten heeft.</translation>
     </message>
@@ -1603,57 +1603,57 @@ Gebruik aub een andere naam.</translation>
 <context>
     <name>GuiLog</name>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="75"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="76"/>
         <source>Save log as</source>
         <translation>Log opslaan als</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="82"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="83"/>
         <source>Search</source>
         <translation>Zoek</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="87"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="88"/>
         <source>keyword</source>
         <translation>Sleutelwoord</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="93"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="94"/>
         <source>Find</source>
         <translation>Vind</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="98"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="99"/>
         <source>Case sensitive</source>
         <translation>Hoofdlettergevoelig</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="103"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="104"/>
         <source>Whole word</source>
         <translation>Gehele woord</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="109"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="110"/>
         <source>Log to file</source>
         <translation>Log naar bestand</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="294"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="295"/>
         <source>Select All</source>
         <translation>Alles selecteren</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="296"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="297"/>
         <source>Copy to clipboard</source>
         <translation>Naar klembord kopiëren</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="299"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="300"/>
         <source>Block scrolling</source>
         <translation>Blokscrollen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="135"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="136"/>
         <source>Please select a file to save the log.</source>
         <translation>Selecteer een bestand om log op te slaan.</translation>
     </message>
@@ -1663,54 +1663,59 @@ Gebruik aub een andere naam.</translation>
         <translation>Log</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="53"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="44"/>
+        <source>Right click to open menu</source>
+        <translation type="unfinished">Klik rechts om menu te openen</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiLog.cpp" line="54"/>
         <source>Show log file</source>
         <translation>Toon logbestand</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="56"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="57"/>
         <source>Show the log tool bar</source>
         <translation>Toon de hoofdmenubalk log</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="65"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="66"/>
         <source>Log menu</source>
         <translation>Log menu</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="144"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="145"/>
         <source>Unable to save log in the file: %1</source>
         <translation>Kan logbestand:%1 niet opslaan</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="144"/>
-        <location filename="../src/desktop/GuiLog.cpp" line="171"/>
-        <location filename="../src/desktop/GuiLog.cpp" line="218"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="145"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="172"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="219"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="170"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="171"/>
         <source>%1: save log completed.</source>
         <translation>%1: Opslaan log voltooid.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="171"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="172"/>
         <source>Open file</source>
         <translation>Open bestand</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="171"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="172"/>
         <source>Open folder</source>
         <translation>Open map</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="218"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="219"/>
         <source>%1 not found</source>
         <translation>%1 niet gevonden</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="314"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="315"/>
         <source>%1: log not found.</source>
         <translation>%1: Log niet gevonden.</translation>
     </message>

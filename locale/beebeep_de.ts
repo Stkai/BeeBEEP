@@ -1374,6 +1374,10 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Block scrolling</source>
         <translation>Blockweises Blättern</translation>
     </message>
+    <message>
+        <source>Right click to open menu</source>
+        <translation type="unfinished">Menü per Rechtsklick öffnen</translation>
+    </message>
 </context>
 <context>
     <name>GuiMain</name>

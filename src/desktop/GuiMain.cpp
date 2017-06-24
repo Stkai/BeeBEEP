@@ -3916,9 +3916,6 @@ void GuiMain::onShareDesktopImageAvailable( const User& u, const QImage& img, co
   new_gui->setMaximumSize( fit_img.width()+12, fit_img.height()+12 );
   new_gui->updateImage( fit_img, image_type, diff_color );
   new_gui->show();
-  new_gui->move( 0, 0 );
-  new_gui->resize( qMin( new_gui->width(), qMax( 640, desktop_w ) ),
-                   qMin( new_gui->height(), qMax( 480, desktop_h ) ) );
   m_desktops.append( new_gui );
 }
 

@@ -1366,6 +1366,10 @@ Please select a different name.</source>
         <source>Block scrolling</source>
         <translation>阻擋捲動</translation>
     </message>
+    <message>
+        <source>Right click to open menu</source>
+        <translation type="unfinished">滑鼠右擊開啟選單</translation>
+    </message>
 </context>
 <context>
     <name>GuiMain</name>

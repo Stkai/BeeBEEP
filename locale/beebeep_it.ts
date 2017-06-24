@@ -1386,6 +1386,10 @@ Inserisci un nome differente.</translation>
         <source>%1: log not found.</source>
         <translation>%1: il log non è stato trovato.</translation>
     </message>
+    <message>
+        <source>Right click to open menu</source>
+        <translation>Pulsante destro per aprire il menu</translation>
+    </message>
 </context>
 <context>
     <name>GuiMain</name>
