@@ -462,6 +462,23 @@ void GuiMain::forceShutdown()
   close();
 }
 
+void GuiMain::onWakeUpRequest()
+{
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Main window wakes up from sleep";
+#endif
+  m_autoConnectOnInterfaceUp = true;
+  //startCore(); // wait for network interface
+}
+
+void GuiMain::onSleepRequest()
+{
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Main window goes to sleep";
+#endif
+  stopCore();
+}
+
 void GuiMain::startCore()
 {
   if( beeCore->isConnected() )
@@ -3861,7 +3878,7 @@ void GuiMain::onShareDesktopImageAvailable( const User& u, const QImage& img, co
   int desktop_h = qApp->desktop()->availableGeometry().height() - 18;
   int desktop_w = qApp->desktop()->availableGeometry().width() - 32;
   QImage fit_img;
-  if( Settings::instance().shareDesktopFitToScreen() && (img.width() > desktop_w || img.height() > desktop_h) )
+  if( Settings::instance().shareDesktopFitToScreen() )
   {
     if( img.width() > desktop_w )
       fit_img = img.scaledToWidth( desktop_w );
@@ -3886,19 +3903,20 @@ void GuiMain::onShareDesktopImageAvailable( const User& u, const QImage& img, co
     }
   }
 
-  if( img.isNull() )
+  if( fit_img.isNull() )
     return;
 
   GuiShareDesktop* new_gui = new GuiShareDesktop;
   connect( new_gui, SIGNAL( shareDesktopClosed( VNumber ) ), this, SLOT( onShareDesktopCloseEvent( VNumber ) ) );
   connect( new_gui, SIGNAL( shareDesktopDeleteRequest( VNumber ) ), this, SLOT( onShareDesktopDeleteRequest( VNumber ) ) );
   new_gui->setUser( u );
-  new_gui->setGeometry( 0, 0, qMin( fit_img.width()+12, qMax( 640, desktop_w ) ),
-                              qMin( fit_img.height()+12, qMax( 480, desktop_h ) ) );
   new_gui->setImageSize( fit_img.size() );
-  new_gui->show();
-  new_gui->setMaximumSize( fit_img.width()+12, fit_img.height()+12 );
+  //new_gui->setMaximumSize( fit_img.width(), fit_img.height() );
   new_gui->updateImage( fit_img, image_type, diff_color );
+  new_gui->show();
+  new_gui->move( 0, 0 );
+  new_gui->resize( qMin( new_gui->width(), qMax( 640, desktop_w ) ),
+                   qMin( new_gui->height(), qMax( 480, desktop_h ) ) );
   m_desktops.append( new_gui );
 }
 
