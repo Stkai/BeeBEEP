@@ -3910,8 +3910,10 @@ void GuiMain::onShareDesktopImageAvailable( const User& u, const QImage& img, co
   connect( new_gui, SIGNAL( shareDesktopClosed( VNumber ) ), this, SLOT( onShareDesktopCloseEvent( VNumber ) ) );
   connect( new_gui, SIGNAL( shareDesktopDeleteRequest( VNumber ) ), this, SLOT( onShareDesktopDeleteRequest( VNumber ) ) );
   new_gui->setUser( u );
+  new_gui->setGeometry( 0, 0, qMin( fit_img.width()+12, qMax( 640, desktop_w ) ),
+                              qMin( fit_img.height()+12, qMax( 480, desktop_h ) ) );
   new_gui->setImageSize( fit_img.size() );
-  //new_gui->setMaximumSize( fit_img.width(), fit_img.height() );
+  new_gui->setMaximumSize( fit_img.width()+12, fit_img.height()+12 );
   new_gui->updateImage( fit_img, image_type, diff_color );
   new_gui->show();
   new_gui->move( 0, 0 );
