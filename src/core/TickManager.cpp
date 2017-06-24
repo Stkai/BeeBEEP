@@ -30,10 +30,19 @@ TickManager::TickManager( QObject *parent )
   setObjectName( "TickManager" );
 }
 
+bool TickManager::isActive() const
+{
+  QMutexLocker mutex_locker( &m_mutex );
+  if( mp_timer && mp_timer->isActive() )
+    return true;
+  else
+    return false;
+}
+
 void TickManager::startTicks()
 {
   QMutexLocker mutex_locker( &m_mutex );
-  m_ticks = 0;
+  m_ticks = 2;
   if( mp_timer )
     return;
 

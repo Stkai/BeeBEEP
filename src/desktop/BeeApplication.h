@@ -68,8 +68,8 @@ signals:
   void showUp();
   void tickEvent( int );
   void shutdownRequest();
-  void disconnectionRequest();
-  void connectionRequest();
+  void sleepRequest();
+  void wakeUpRequest();
 
 public slots:
   void checkIdle();

@@ -215,8 +215,8 @@ int main( int argc, char *argv[] )
   QObject::connect( &bee_app, SIGNAL( tickEvent( int ) ), &mw, SLOT( onTickEvent( int ) ) );
   QObject::connect( &bee_app, SIGNAL( commitDataRequest( QSessionManager& ) ), &mw, SLOT( saveSession( QSessionManager& ) ), Qt::DirectConnection );
   QObject::connect( &bee_app, SIGNAL( shutdownRequest() ), &mw, SLOT( forceShutdown() ), Qt::DirectConnection );
-  QObject::connect( &bee_app, SIGNAL( disconnectionRequest() ), &mw, SLOT( stopCore() ) );
-  QObject::connect( &bee_app, SIGNAL( connectionRequest() ), &mw, SLOT( startCore() ) );
+  QObject::connect( &bee_app, SIGNAL( sleepRequest() ), &mw, SLOT( onSleepRequest() ) );
+  QObject::connect( &bee_app, SIGNAL( wakeUpRequest() ), &mw, SLOT( onWakeUpRequest() ) );
 
   QMetaObject::invokeMethod( &mw, "checkWindowFlagsAndShow", Qt::QueuedConnection );
   mw.loadSession();

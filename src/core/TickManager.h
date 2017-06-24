@@ -34,6 +34,8 @@ class TickManager : public QObject
 public:
   explicit TickManager( QObject* parent = 0 );
 
+  bool isActive() const;
+
 signals:
   void tickEvent( int );
 

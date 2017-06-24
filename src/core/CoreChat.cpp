@@ -228,6 +228,17 @@ bool Core::changeGroupChat( const User& u, const Group& g )
     if( u.isLocal() && isConnected() )
       sendGroupChatRequestMessage( c, group_new_members, User() );
   }
+  else
+  {
+    if( g.lastModified().isValid() )
+    {
+      if( c.lastModified().isNull() || g.lastModified() > c.lastModified() )
+      {
+        c.setLastModified( g.lastModified() );
+        ChatManager::instance().setChat( c );
+      }
+    }
+  }
 
 #ifdef BEEBEEP_DEBUG
   if( !chat_changed )

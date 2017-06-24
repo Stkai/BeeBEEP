@@ -41,6 +41,7 @@ GuiLog::GuiLog( QWidget* parent )
   mp_teLog->setReadOnly( true );
   mp_teLog->setContextMenuPolicy( Qt::CustomContextMenu );
   mp_teLog->setPlainText( QString( " \n" ) );
+  mp_teLog->setToolTip( tr( "Right click to open menu" ) );
 
   QPalette p = mp_teLog->palette();
   p.setColor( QPalette::Highlight, Qt::yellow );

@@ -113,14 +113,18 @@ void BeeApplication::forceSleep()
     return;
   qDebug() << "System goes to sleep...";
   m_isInSleepMode = true;
-  emit disconnectionRequest();
+  emit sleepRequest();
+  if( mp_tickManager->isActive() )
+    QMetaObject::invokeMethod( mp_tickManager, "stopTicks", Qt::QueuedConnection );
 }
 
 void BeeApplication::wakeFromSleep()
 {
   qDebug() << "System wakes up from sleep...";
   m_isInSleepMode = false;
-  emit connectionRequest();
+  emit wakeUpRequest();
+  if( !mp_tickManager->isActive() )
+    QMetaObject::invokeMethod( mp_tickManager, "startTicks", Qt::QueuedConnection );
 }
 
 void BeeApplication::setIdleTimeout( int new_value )

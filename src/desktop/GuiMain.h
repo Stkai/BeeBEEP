@@ -73,6 +73,8 @@ public slots:
   void raiseOnTop();
   void onTickEvent( int );
   void saveSession( QSessionManager& );
+  void onWakeUpRequest();
+  void onSleepRequest();
 
 private slots:
   void showAbout();
