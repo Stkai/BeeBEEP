@@ -199,6 +199,7 @@ void GuiMain::setupChatConnections( GuiChat* gui_chat )
   connect( gui_chat, SIGNAL( showChatMenuRequest() ), this, SLOT( showChatSettingsMenu() ) );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   connect( gui_chat, SIGNAL( shareDesktopToChatRequest( VNumber, bool ) ), this, SLOT( onShareDesktopRequestFromChat( VNumber, bool ) ) );
+  connect( gui_chat, SIGNAL( screenshotToChatRequest( VNumber ) ), this, SLOT( sendScreenshotToChat( VNumber ) ) );
 #endif
 }
 
@@ -801,6 +802,10 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().chatAutoSave() );
   act->setData( 18 );
+  act = mp_menuChatSettings->addAction( tr( "Send offline messages also to chat with all users" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().sendOfflineMessagesToDefaultChat() );
+  act->setData( 66 );
   mp_menuChatSettings->addSeparator();
   act = mp_menuChatSettings->addAction( tr( "Open chats in a single window" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -1530,6 +1535,9 @@ void GuiMain::settingsChanged( QAction* act )
       if( ok )
         Settings::instance().setDelayConnectionAtStartup( delay_connection );
     }
+    break;
+  case 66:
+    Settings::instance().setSendOfflineMessagesToDefaultChat( act->isChecked() );
     break;
   case 99:
     break;
@@ -2822,7 +2830,7 @@ void GuiMain::clearChat( VNumber chat_id )
   Chat c = ChatManager::instance().chat( chat_id );
   if( !c.isValid() )
     return;
-  QString chat_name = c.isDefault() ? QObject::tr( "All Lan Users" ).toLower() : c.name();
+  QString chat_name = c.isDefault() ? QObject::tr( "All users" ).toLower() : c.name();
   if( c.isEmpty() && !ChatManager::instance().chatHasSavedText( c.name() ) )
   {
     QMessageBox::information( activeWindow(), Settings::instance().programName(), tr( "Chat with %1 is empty." ).arg( chat_name ) );
@@ -3994,6 +4002,14 @@ void GuiMain::onShareDesktopUpdate( const User& u )
     if( fl_chat )
       fl_chat->guiChat()->updateActions( c, core_is_connected, connected_users );
   }
+}
+
+void GuiMain::sendScreenshotToChat( VNumber chat_id )
+{
+  QMetaObject::invokeMethod( beeCore, "sendScreenshotToChat", Qt::QueuedConnection, Q_ARG(VNumber, chat_id) );
+  GuiFloatingChat* fl_chat = floatingChat( chat_id );
+  if( fl_chat )
+    QTimer::singleShot( 500, fl_chat, SLOT( showNormal() ) );
 }
 
 #endif

@@ -131,6 +131,8 @@ GuiChat::GuiChat( QWidget *parent )
   mp_actShareDesktop->setCheckable( true );
   mp_actShareDesktop->setEnabled( Settings::instance().enableShareDesktop() );
   connect( mp_actShareDesktop, SIGNAL( triggered() ), this, SLOT( shareDesktopToChat() ) );
+  mp_actScreenshot = new QAction( IconManager::instance().icon( "screenshot.png" ), tr( "Send a screenshot" ), this );
+  connect( mp_actScreenshot, SIGNAL( triggered() ), this, SLOT( sendScreenshotToChat() ) );
 #endif
 
   connect( mp_teChat, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( customContextMenu( const QPoint& ) ) );
@@ -160,6 +162,7 @@ void GuiChat::setupToolBar( QToolBar* chat_bar )
   chat_bar->addAction( mp_actSaveAs );
   chat_bar->addAction( mp_actPrint );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
+  chat_bar->addAction( mp_actScreenshot );
   chat_bar->addAction( mp_actShareDesktop );
 #endif
 
@@ -254,7 +257,7 @@ void GuiChat::updateActions( const Chat& c, bool is_connected, int connected_use
   if( mp_teMessage->isEnabled() )
   {
     if( c.isDefault() )
-      mp_teMessage->setPlaceholderText( tr( "Write a message to all connected user" ) );
+      mp_teMessage->setPlaceholderText( tr( "Write a message to all user" ) );
     else
       mp_teMessage->setPlaceholderText( tr( "Write a message to %1" ).arg( c.name() ) );
   }
@@ -271,13 +274,15 @@ void GuiChat::updateActions( const Chat& c, bool is_connected, int connected_use
 
   if( mp_actShareDesktop->isChecked() )
   {
-    mp_actShareDesktop->setToolTip( tr( "Your desktop is shared with %1" ).arg( Bee::stringListToTextString( share_desktop_users ) ) );
+    mp_actShareDesktop->setToolTip( tr( "Your desktop is shared with %1" ).arg( Bee::stringListToTextString( share_desktop_users, 5, tr( "and %1 other users" ) ) ) );
   }
   else
   {
     mp_actShareDesktop->setToolTip( tr( "Share your desktop" ) );
     mp_actShareDesktop->setIcon( IconManager::instance().icon( "desktop-share.png" ) );
   }
+
+  mp_actScreenshot->setEnabled(  m_chatId != ID_DEFAULT_CHAT && local_user_is_member && is_connected && can_send_files );
 #endif
 }
 
@@ -1064,6 +1069,25 @@ void GuiChat::resetChatFontToDefault()
 void GuiChat::shareDesktopToChat()
 {
   emit shareDesktopToChatRequest( m_chatId, mp_actShareDesktop->isChecked() );
+}
+
+void GuiChat::sendScreenshotToChat()
+{
+  mp_actScreenshot->setEnabled( false );
+  emit hideRequest();
+  QTimer::singleShot( 500, this, SLOT( sendScreenshotToChat_Private() ) );
+}
+
+void GuiChat::sendScreenshotToChat_Private()
+{
+  // To avoid chat window captured
+  QTimer::singleShot( 3000, this, SLOT( enableScreenshotAction() ) );
+  emit screenshotToChatRequest( m_chatId );
+}
+
+void GuiChat::enableScreenshotAction()
+{
+  mp_actScreenshot->setEnabled( beeCore->isConnected() );
 }
 
 void GuiChat::onTickEvent( int ticks )

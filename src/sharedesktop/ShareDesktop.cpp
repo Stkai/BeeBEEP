@@ -35,7 +35,7 @@ ShareDesktop::ShareDesktop( QObject *parent )
   setObjectName( "ShareDesktop" );
   m_timer.setObjectName( "ShareDesktopTimer" );
   m_timer.setSingleShot( false );
-  connect( &m_timer, SIGNAL( timeout() ), this, SLOT( makeScreenshot() ), Qt::QueuedConnection );
+  connect( &m_timer, SIGNAL( timeout() ), this, SLOT( onScreenshotTimeout() ), Qt::QueuedConnection );
 }
 
 bool ShareDesktop::removeUserId( VNumber user_id )
@@ -57,9 +57,6 @@ void ShareDesktop::requestImageFromUser( VNumber user_id )
 
   if( !m_userIdReadList.contains( user_id ) )
     m_userIdReadList.append( user_id );
-
-  if( !m_lastImageData.isEmpty() )
-    emit imageDataAvailable( user_id, m_lastImageData );
 }
 
 void ShareDesktop::resetUserReadImage( VNumber user_id )
@@ -139,11 +136,8 @@ void ShareDesktop::onImageDataAvailable( const QByteArray& img_data, const QStri
   emit imageDataAvailable( m_lastImageData );
 }
 
-void ShareDesktop::makeScreenshot()
+QPixmap ShareDesktop::makeScreenshot()
 {
-  if( !isActive() )
-    return;
-
   QPixmap screen_shot;
   qreal device_pixel_ratio;
 
@@ -167,6 +161,15 @@ void ShareDesktop::makeScreenshot()
   if( device_pixel_ratio > 1.0 )
     screen_shot = screen_shot.scaled( QApplication::desktop()->width(), QApplication::desktop()->height(), Qt::KeepAspectRatio );
 
+  return screen_shot;
+}
+
+void ShareDesktop::onScreenshotTimeout()
+{
+  if( !isActive() )
+    return;
+
+  QPixmap screen_shot = makeScreenshot();
   emit imageAvailable( screen_shot.toImage() );
   screen_shot = QPixmap();
 }

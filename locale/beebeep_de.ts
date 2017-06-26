@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE" sourcelanguage="en">
+<TS version="2.0" language="de_DE" sourcelanguage="en">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -68,7 +68,7 @@
     </message>
     <message>
         <source>Chat with all connected users</source>
-        <translation>Mit allen verbundenen Benutzern chatten</translation>
+        <translation type="obsolete">Mit allen verbundenen Benutzern chatten</translation>
     </message>
     <message>
         <source>%1 Unable to send %2. File transfer is disabled.</source>
@@ -172,7 +172,7 @@
     </message>
     <message>
         <source>Network adapter not found</source>
-        <translation type="vanished">Netzwerkadapter nicht gefunden</translation>
+        <translation type="obsolete">Netzwerkadapter nicht gefunden</translation>
     </message>
     <message>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
@@ -284,7 +284,7 @@
     </message>
     <message>
         <source>Nobody has received the message.</source>
-        <translation>Niemand hat diese Nachricht empfangen.</translation>
+        <translation type="unfinished">Niemand hat diese Nachricht empfangen.</translation>
     </message>
     <message>
         <source>%1 is removed from file sharing</source>
@@ -304,7 +304,7 @@
     </message>
     <message>
         <source>Unable to send the message to %1.</source>
-        <translation>Die Nachricht konnte nicht an %1 gesendet werden.</translation>
+        <translation type="unfinished">Die Nachricht konnte nicht an %1 gesendet werden.</translation>
     </message>
     <message>
         <source>%1 You have selected to join only in these workgroups: %2</source>
@@ -368,7 +368,7 @@
     </message>
     <message>
         <source>%1 Unable to connect to %2 Network. Please check your network adapters.</source>
-        <translation type="vanished">%1 Es kann keine Verbindung zum Netzwerk %2 hergestellt werden. Überprüfe bitte deinen Netzwerkadapter.</translation>
+        <translation type="obsolete">%1 Es kann keine Verbindung zum Netzwerk %2 hergestellt werden. Überprüfe bitte deinen Netzwerkadapter.</translation>
     </message>
     <message>
         <source>%1 saved chats are added to history</source>
@@ -456,6 +456,18 @@
     </message>
     <message>
         <source>%1 Unable to connect to %2 Network. Please check if your network adapter is connected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chat with all users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>/beesshottmp-%1.</source>
+        <translation type="obsolete">/beesshottmp-%1.</translation>
+    </message>
+    <message>
+        <source>and %1 other users</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -790,7 +802,7 @@
     </message>
     <message>
         <source>Write a message to all connected user</source>
-        <translation>Nachricht an alle verbundenen Benutzer senden</translation>
+        <translation type="obsolete">Nachricht an alle verbundenen Benutzer senden</translation>
     </message>
     <message>
         <source>Copy to clipboard</source>
@@ -883,6 +895,18 @@
     <message>
         <source>Open selected text as url</source>
         <translation>Ausgewählten Text als URL im Browser öffnen</translation>
+    </message>
+    <message>
+        <source>Send a screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Write a message to all user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>and %1 other users</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1107,7 +1131,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Chat with all connected users</source>
-        <translation>Mit allen verbundenen Benutzern chatten</translation>
+        <translation type="obsolete">Mit allen verbundenen Benutzern chatten</translation>
     </message>
     <message>
         <source>%1 has not read last messages</source>
@@ -1144,6 +1168,10 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>Show chat toolbar</source>
         <translation>Chat-Symbolleiste anzeigen</translation>
+    </message>
+    <message>
+        <source>Chat with all users</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2357,6 +2385,10 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>milliseconds, 5000 default</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Send offline messages also to chat with all users</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -3141,11 +3173,15 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>All Users</source>
-        <translation>Alle Benutzer</translation>
+        <translation type="obsolete">Alle Benutzer</translation>
     </message>
     <message>
         <source>%1 files shared in your network</source>
         <translation>%1 Dateien in deinem Netzwerk freigegeben</translation>
+    </message>
+    <message>
+        <source>All users</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3622,7 +3658,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>All Lan Users</source>
-        <translation>Alle LAN-Benutzer</translation>
+        <translation type="obsolete">Alle LAN-Benutzer</translation>
     </message>
     <message>
         <source>Find text in chat</source>
@@ -3634,7 +3670,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Open chat with all local users</source>
-        <translation>Chat mit allen lokalen Benutzern beginnen</translation>
+        <translation type="obsolete">Chat mit allen lokalen Benutzern beginnen</translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -3659,6 +3695,18 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>Find next text in chat</source>
         <translation>Nächsten Text in Chat suchen</translation>
+    </message>
+    <message>
+        <source>All users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open chat with all users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Users</source>
+        <translation type="obsolete">Alle Benutzer</translation>
     </message>
 </context>
 <context>

@@ -6,6 +6,8 @@ BeeBEEP 4.2.0
 - Hive protocol can be used to contact user who remains offline
 - Desktop Sharing (beta)
 - Added delay on first connection option
+- Send screenshot from chat
+- Option to send offline messages also in chat with all user
 
 BeeBEEP 4.0.0
 - Changed all the main user interface

@@ -451,6 +451,9 @@ public:
   inline void setDelayConnectionAtStartup( int );
   inline int delayConnectionAtStartup() const;
 
+  inline void setSendOfflineMessagesToDefaultChat( bool );
+  inline bool sendOfflineMessagesToDefaultChat() const;
+
   QString simpleEncrypt( const QString& );
   QString simpleDecrypt( const QString& );
 
@@ -698,6 +701,8 @@ private:
   int m_shareDesktopImageQuality;
 
   int m_delayConnectionAtStartup;
+
+  bool m_sendOfflineMessagesToDefaultChat;
 
 };
 
@@ -997,5 +1002,7 @@ inline void Settings::setShareDesktopImageQuality( int new_value ) { m_shareDesk
 inline int Settings::shareDesktopImageQuality() const { return m_shareDesktopImageQuality; }
 inline void Settings::setDelayConnectionAtStartup( int new_value ) { m_delayConnectionAtStartup = new_value; }
 inline int Settings::delayConnectionAtStartup() const { return m_delayConnectionAtStartup; }
+inline void Settings::setSendOfflineMessagesToDefaultChat( bool new_value ) { m_sendOfflineMessagesToDefaultChat = new_value; }
+inline bool Settings::sendOfflineMessagesToDefaultChat() const { return m_sendOfflineMessagesToDefaultChat; }
 
 #endif // BEEBEEP_SETTINGS_H

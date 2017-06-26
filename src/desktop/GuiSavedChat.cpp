@@ -37,6 +37,7 @@ GuiSavedChat::GuiSavedChat( QWidget* parent )
   setObjectName( "GuiSavedChat" );
   Bee::removeContextHelpButton( this );
   setWindowFlags( windowFlags() | Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint );
+  setWindowIcon( IconManager::instance().icon( "saved-chat.png" ) );
 
   mp_menuContext = new QMenu( this );
 
@@ -54,7 +55,6 @@ GuiSavedChat::GuiSavedChat( QWidget* parent )
 
   mp_teSavedChat->setContextMenuPolicy( Qt::CustomContextMenu );
   connect( mp_teSavedChat, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( customContextMenu( const QPoint& ) ) );
-
 }
 
 void GuiSavedChat::showSavedChat( const QString& chat_name )
@@ -71,10 +71,8 @@ void GuiSavedChat::showSavedChat( const QString& chat_name )
   QScrollBar *bar = mp_teSavedChat->verticalScrollBar();
   bar->setValue( bar->maximum() );
 
-  if( chat_name == Settings::instance().defaultChatName() )
-    setWindowTitle( GuiChatItem::defaultChatName() );
-  else
-    setWindowTitle( chat_name );
+  QString window_chat_title = chat_name == Settings::instance().defaultChatName() ? GuiChatItem::defaultChatName().toUpper() : chat_name;
+  setWindowTitle( window_chat_title );
 }
 
 void GuiSavedChat::customContextMenu( const QPoint& )

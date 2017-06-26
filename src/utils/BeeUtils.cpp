@@ -208,7 +208,7 @@ QString Bee::uniqueFilePath( const QString& file_path, bool add_date_time )
     }
   }
 
-  return fi.absoluteFilePath();
+  return QDir::toNativeSeparators( fi.absoluteFilePath() );
 }
 
 QString Bee::suffixFromFile( const QString& file_path )
@@ -742,21 +742,41 @@ void Bee::setWindowStaysOnTop( QWidget* w, bool enable )
     QMetaObject::invokeMethod( w, "show", Qt::QueuedConnection );
 }
 
-QString Bee::stringListToTextString( const QStringList& sl )
+QString Bee::stringListToTextString( const QStringList& sl, int max_items, const QString& max_items_text )
 {
   if( sl.isEmpty() )
     return "";
   if( sl.size() == 1 )
     return sl.first();
+  if( sl.size() == 2 )
+    return sl.join( QString( " %1 " ).arg( QObject::tr( "and" ) ) );
 
-  QStringList sl_to_join = sl;
-  QString last_string = sl_to_join.takeLast();
-  QString s_joined = sl_to_join.join( ", " );
-  if( !last_string.isEmpty() )
+  QStringList sl_to_join;
+  if( max_items < 1 )
+    max_items = sl.size();
+  int num_items = 0;
+
+  foreach( QString s, sl )
   {
-    s_joined.append( QString( " %1 " ).arg( QObject::tr( "and" ) ) );
-    s_joined.append( last_string );
+    if( num_items >= max_items )
+      break;
+    num_items++;
+    sl_to_join << s;
   }
+
+  QString s_joined = sl_to_join.join( ", " );
+  int diff_items = sl.size() - sl_to_join.size();
+  if( diff_items == 1 )
+  {
+    if( !sl.last().isEmpty() )
+    {
+      s_joined.append( QString( " %1 " ).arg( QObject::tr( "and" ) ) );
+      s_joined.append( sl.last() );
+    }
+  }
+  else
+   s_joined.append( QString( " %1" ).arg( max_items_text.arg( diff_items ) ) );
+
   return s_joined;
 }
 

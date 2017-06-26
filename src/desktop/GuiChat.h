@@ -66,8 +66,10 @@ signals:
   void saveStateAndGeometryRequest();
   void toggleVisibilityEmoticonsPanelRequest();
   void toggleVisibilityPresetMessagesPanelRequest();
+  void hideRequest();
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   void shareDesktopToChatRequest( VNumber, bool );
+  void screenshotToChatRequest( VNumber );
 #endif
 
 public slots:
@@ -114,6 +116,9 @@ private slots:
   void resetChatFontToDefault();
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   void shareDesktopToChat();
+  void sendScreenshotToChat();
+  void sendScreenshotToChat_Private();
+  void enableScreenshotAction();
 #endif
 
 protected:
@@ -139,6 +144,7 @@ private:
   QAction* mp_actRestoreDefaultFont;
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   QAction* mp_actShareDesktop;
+  QAction* mp_actScreenshot;
 #endif
 
   QSplitter* mp_splitter;

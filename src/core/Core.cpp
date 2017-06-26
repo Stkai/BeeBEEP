@@ -50,6 +50,9 @@ Core::Core( QObject* parent )
 {
   mp_instance = this;
   qDebug() << "Core created";
+
+  qRegisterMetaType<VNumber>( "VNumber" );
+
   mp_listener = new Listener( this );
   qDebug() << "Listener created";
   mp_broadcaster = new Broadcaster( this );
@@ -214,7 +217,7 @@ bool Core::start()
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                            tr( "%1 You have selected to join only in these workgroups: %2" )
-                           .arg( IconManager::instance().toHtml( "workgroup.png", "*C*" ) ).arg( Bee::stringListToTextString( Settings::instance().workgroups() ) ),
+                           .arg( IconManager::instance().toHtml( "workgroup.png", "*C*" ) ).arg( Bee::stringListToTextString( Settings::instance().workgroups(), -1, "" ) ),
                            DispatchToChat, ChatMessage::Connection );
     qDebug() << "Protocol accepts connections only from these workgroups:" << qPrintable( Settings::instance().workgroups().join( ", " ) );
   }

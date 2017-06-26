@@ -137,6 +137,11 @@ public slots:
   void cancelFileTransfer( VNumber );
   void removeAllPathsFromShare();
 
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  /* CoreShareDesktop */
+  bool sendScreenshotToChat( VNumber chat_id );
+#endif
+
 signals:
   void userChanged( const User& );
   void userIsWriting( const User&, VNumber );

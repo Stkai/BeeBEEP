@@ -118,7 +118,7 @@ void GuiShareNetwork::resetComboUsers()
   if( mp_comboUsers->count() > 0 )
     mp_comboUsers->clear();
 
-  mp_comboUsers->insertItem( 0, tr( "All Users" ), 0 );
+  mp_comboUsers->insertItem( 0, tr( "All users" ), 0 );
   mp_comboUsers->setCurrentIndex( 0 );
   mp_comboUsers->setEnabled( false );
   mp_comboUsers->blockSignals( false );

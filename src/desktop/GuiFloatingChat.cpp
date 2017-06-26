@@ -103,6 +103,7 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
 
   connect( mp_chat, SIGNAL( toggleVisibilityEmoticonsPanelRequest() ), this, SLOT( toggleVisibilityEmoticonPanel() ) );
   connect( mp_chat, SIGNAL( toggleVisibilityPresetMessagesPanelRequest() ), this, SLOT( toggleVisibilityPresetMessagesPanel() ) );
+  connect( mp_chat, SIGNAL( hideRequest() ), this, SLOT( showMinimized() ) );
   connect( qApp, SIGNAL( focusChanged( QWidget*, QWidget* ) ), this, SLOT( onApplicationFocusChanged( QWidget*, QWidget* ) ) );
 }
 
@@ -140,7 +141,7 @@ void GuiFloatingChat::updateChatTitle( const Chat& c )
   }
   else if( c.isDefault() )
   {
-    window_title = tr( "Chat with all connected users" );
+    window_title = tr( "Chat with all users" );
     m_mainWindowIcon = IconManager::instance().icon( "default-chat-online.png" );
   }
   else if( c.isGroup() )

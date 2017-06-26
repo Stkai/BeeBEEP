@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="zh_TW">
+<TS version="2.0" language="zh_TW">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -187,14 +187,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to send the message to %1.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nobody has received the message.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>The message will be delivered to %1.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -212,10 +204,6 @@
     </message>
     <message>
         <source>%1 You have buzzed %2.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Chat with all connected users</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -448,6 +436,22 @@
     </message>
     <message>
         <source>%1 Unable to connect to %2 Network. Please check if your network adapter is connected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chat with all users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to send the message to %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nobody has received the message.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>and %1 other users</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -754,7 +758,7 @@
     </message>
     <message>
         <source>Write a message to all connected user</source>
-        <translation>撰寫訊息給所有已連線用戶</translation>
+        <translation type="obsolete">撰寫訊息給所有已連線用戶</translation>
     </message>
     <message>
         <source>Copy to clipboard</source>
@@ -874,6 +878,18 @@
     </message>
     <message>
         <source>Use key Return to make a carriage return</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send a screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Write a message to all user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>and %1 other users</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1125,15 +1141,15 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Chat with all connected users</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>%1 has not read last messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The window geometry and state are saved</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chat with all users</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2349,6 +2365,10 @@ Please select a different name.</source>
         <source>milliseconds, 5000 default</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Send offline messages also to chat with all users</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -3074,10 +3094,6 @@ Please select a different name.</source>
         <translation type="unfinished">用戶</translation>
     </message>
     <message>
-        <source>All Users</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>%1 is searching shared files in your network</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3140,6 +3156,10 @@ Please select a different name.</source>
     <message>
         <source>Transfer completed</source>
         <translation type="unfinished">傳輸完成</translation>
+    </message>
+    <message>
+        <source>All users</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3543,14 +3563,6 @@ Please select a different name.</source>
 <context>
     <name>QObject</name>
     <message>
-        <source>All Lan Users</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open chat with all local users</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Open chat with %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3652,6 +3664,14 @@ Please select a different name.</source>
     </message>
     <message>
         <source>and</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open chat with all users</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

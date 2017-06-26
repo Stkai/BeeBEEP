@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -336,7 +336,7 @@
     </message>
     <message>
         <source>Chat with all connected users</source>
-        <translation>Parla con tutti gli utenti connessi</translation>
+        <translation type="obsolete">Parla con tutti gli utenti connessi</translation>
     </message>
     <message>
         <source>%1 saved chats are added to history</source>
@@ -420,11 +420,11 @@
     </message>
     <message>
         <source>%1 Unable to connect to %2 Network. Please check your network adapters.</source>
-        <translation type="vanished">%1 Impossibile connettersi nella rete %2. Controlla se la tua scheda di rete è attiva.</translation>
+        <translation type="obsolete">%1 Impossibile connettersi nella rete %2. Controlla se la tua scheda di rete è attiva.</translation>
     </message>
     <message>
         <source>Network adapter not found</source>
-        <translation type="vanished">Scheda di rete non trovata</translation>
+        <translation type="obsolete">Scheda di rete non trovata</translation>
     </message>
     <message>
         <source>%1 You start to share desktop with %2.</source>
@@ -465,6 +465,14 @@
     <message>
         <source>%1 Unable to connect to %2 Network. Please check if your network adapter is connected.</source>
         <translation>%1 Impossibile raggiungere la rete %2. Controlla se la tua scheda di rete è connessa.</translation>
+    </message>
+    <message>
+        <source>Chat with all users</source>
+        <translation>Parla con tutti gli utenti</translation>
+    </message>
+    <message>
+        <source>and %1 other users</source>
+        <translation>e altri %1 utenti</translation>
     </message>
 </context>
 <context>
@@ -862,7 +870,7 @@
     </message>
     <message>
         <source>Write a message to all connected user</source>
-        <translation>Scrivi un messaggio a tutti gli utenti connessi</translation>
+        <translation type="obsolete">Scrivi un messaggio a tutti gli utenti connessi</translation>
     </message>
     <message>
         <source>Write a message to %1</source>
@@ -891,6 +899,18 @@
     <message>
         <source>Your desktop is shared with %1</source>
         <translation>Il tuo desktop è condiviso con %1</translation>
+    </message>
+    <message>
+        <source>Send a screenshot</source>
+        <translation>Invia una foto dello schermo</translation>
+    </message>
+    <message>
+        <source>Write a message to all user</source>
+        <translation>Scrivi un messaggio a tutti gli utenti</translation>
+    </message>
+    <message>
+        <source>and %1 other users</source>
+        <translation>e altri %1 utenti</translation>
     </message>
 </context>
 <context>
@@ -1131,7 +1151,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Chat with all connected users</source>
-        <translation>Parla con tutti gli utenti connessi</translation>
+        <translation type="obsolete">Parla con tutti gli utenti connessi</translation>
     </message>
     <message>
         <source>The window geometry and state are saved</source>
@@ -1156,6 +1176,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Show chat toolbar</source>
         <translation>Mostra la barra delle conversazioni</translation>
+    </message>
+    <message>
+        <source>Chat with all users</source>
+        <translation>Parla con tutti gli utenti</translation>
     </message>
 </context>
 <context>
@@ -2381,6 +2405,10 @@ Inserisci un nome differente.</translation>
         <source>milliseconds, 5000 default</source>
         <translation>millisecondi, 5000 predefinito</translation>
     </message>
+    <message>
+        <source>Send offline messages also to chat with all users</source>
+        <translation>Invia i messaggi offline anche nella conversazione con tutti</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -3103,7 +3131,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>All Users</source>
-        <translation>Tutti</translation>
+        <translation type="obsolete">Tutti</translation>
     </message>
     <message>
         <source>Scan network</source>
@@ -3212,6 +3240,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Right click to open menu</source>
         <translation>Pulsante destro per aprire il menu</translation>
+    </message>
+    <message>
+        <source>All users</source>
+        <translation>Tutti</translation>
     </message>
 </context>
 <context>
@@ -3628,7 +3660,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Open chat with all local users</source>
-        <translation>Apri la conversazione con tutti gli utenti locali</translation>
+        <translation type="obsolete">Apri la conversazione con tutti gli utenti locali</translation>
     </message>
     <message>
         <source>You</source>
@@ -3636,7 +3668,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>All Lan Users</source>
-        <translation>Utenti Locali</translation>
+        <translation type="obsolete">Utenti Locali</translation>
     </message>
     <message>
         <source>Click to send message to group: %1</source>
@@ -3729,6 +3761,18 @@ Inserisci un nome differente.</translation>
     <message>
         <source>last connection</source>
         <translation>ultima connessione</translation>
+    </message>
+    <message>
+        <source>All users</source>
+        <translation>Tutti</translation>
+    </message>
+    <message>
+        <source>Open chat with all users</source>
+        <translation>Apri la conversazione con tutti gli utenti</translation>
+    </message>
+    <message>
+        <source>All Users</source>
+        <translation type="obsolete">Tutti</translation>
     </message>
 </context>
 <context>

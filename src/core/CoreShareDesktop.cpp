@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeUtils.h"
 #include "ChatManager.h"
 #include "Connection.h"
 #include "Core.h"
@@ -158,14 +159,16 @@ void Core::onShareDesktopImageAvailable( const ShareDesktopData& sdd )
   {
     if( mp_shareDesktop->hasUserReadImage( user_id ) )
     {
-#ifdef BEEBEEP_DEBUG
-      qDebug() << "Share desktop send image" << qPrintable( sdd.imageType() ) << "message with size" << m.text().size() << "to user" << user_id;
-#endif
       Connection* c = connection( user_id );
       if( c && c->isConnected() )
       {
         if( c->sendMessage( m ) )
+        {
+#ifdef BEEBEEP_DEBUG
+          qDebug() << "Share desktop send image" << qPrintable( sdd.imageType() ) << "message with size" << m.text().size() << "to user" << user_id;
+#endif
           mp_shareDesktop->resetUserReadImage( user_id );
+        }
       }
     }
   }
@@ -185,14 +188,16 @@ void Core::onShareDesktopImageAvailable( VNumber user_id, const ShareDesktopData
   Message m = Protocol::instance().shareDesktopImageDataToMessage( sdd );
   if( mp_shareDesktop->hasUserReadImage( user_id ) )
   {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Share desktop send image" << qPrintable( sdd.imageType() ) << "message with size" << m.text().size() << "to user" << user_id;
-#endif
     Connection* c = connection( user_id );
     if( c && c->isConnected() )
     {
       if( c->sendMessage( m ) )
+      {
+#ifdef BEEBEEP_DEBUG
+        qDebug() << "Share desktop send image" << qPrintable( sdd.imageType() ) << "message with size" << m.text().size() << "to user" << user_id;
+#endif
         mp_shareDesktop->resetUserReadImage( user_id );
+      }
     }
   }
 }
@@ -208,6 +213,9 @@ void Core::parseShareDesktopMessage( const User& u, const Message& m )
   }
   else if( m.hasFlag( Message::Request ) )
   {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << qPrintable( u.path() ) << "has request new desktop share image";
+#endif
     mp_shareDesktop->requestImageFromUser( u.id() );
   }
   else if( m.hasFlag( Message::Private ) )
@@ -232,4 +240,43 @@ void Core::parseShareDesktopMessage( const User& u, const Message& m )
   {
     qWarning() << "Invalid flag found in desktop share message from user" << qPrintable( u.path() );
   }
+}
+
+bool Core::sendScreenshotToChat( VNumber chat_id )
+{
+  Chat c = ChatManager::instance().chat( chat_id );
+  if( !c.isValid() )
+  {
+    qWarning() << "Invalid chat" << chat_id << "found in Core::sendScreenshotToChat(...)";
+    return false;
+  }
+
+  QPixmap screen_pix = ShareDesktop::makeScreenshot();
+  if( screen_pix.isNull() )
+  {
+    qWarning() << "Invalid pixmap captured from desktop in Core::sendScreenshotToChat(...)";
+    return false;
+  }
+
+  QString screenshot_format = Settings::instance().shareDesktopImageType();
+  QString screenshot_initial_path = Settings::instance().dataFolder() +
+                                    QString( "/beesshottmp-%1." ).arg( Bee::dateTimeStringSuffix( QDateTime::currentDateTime() ) )
+                                    + screenshot_format;
+  QString file_path = Bee::uniqueFilePath( screenshot_initial_path, false );
+
+  if( !screen_pix.save( file_path, screenshot_format.toLatin1() ) )
+  {
+    qWarning() << "Unable to save temporary screenshot in file" << qPrintable( file_path );
+    return false;
+  }
+
+  Settings::instance().addTemporaryFilePath( file_path );
+
+  foreach( VNumber user_id, c.usersId() )
+  {
+    if( user_id != ID_LOCAL_USER)
+      sendFile( user_id, file_path, "", false, chat_id );
+  }
+
+  return true;
 }

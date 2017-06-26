@@ -49,6 +49,8 @@ public:
   inline bool hasUserReadImage( VNumber ) const;
   void requestImageFromUser( VNumber );
 
+  static QPixmap makeScreenshot();
+
 signals:
   void imageDataAvailable( VNumber, const ShareDesktopData& );
   void imageDataAvailable( const ShareDesktopData& );
@@ -56,7 +58,7 @@ signals:
 
 protected slots:
   void onImageDataAvailable( const QByteArray&, const QString& image_type, bool use_compression, unsigned int diff_color );
-  void makeScreenshot();
+  void onScreenshotTimeout();
 
 private:
   QList<VNumber> m_userIdList;

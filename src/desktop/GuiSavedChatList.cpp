@@ -160,7 +160,7 @@ void GuiSavedChatList::updateSavedChats()
     QFont f = this->font();
     f.setItalic( true );
     f.setBold( saved_chat_is_default );
-    item->setText( 0, saved_chat_name );
+    item->setText( 0, saved_chat_is_default ? saved_chat_name.toUpper() : saved_chat_name );
     item->setFont( 0, f );
     item->setToolTip( 0, tr( "Click to view saved chat with %1" ).arg( saved_chat_name ) );
     ++it;

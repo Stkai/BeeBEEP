@@ -163,6 +163,7 @@ private slots:
   void onShareDesktopDeleteRequest( VNumber );
   void onShareDesktopRequestFromChat( VNumber, bool );
   void onShareDesktopUpdate( const User& );
+  void sendScreenshotToChat( VNumber );
 #endif
   void startExternalApplicationFromActionData();
   void onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType );

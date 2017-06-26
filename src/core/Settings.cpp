@@ -1008,6 +1008,7 @@ void Settings::load()
     m_tickIntervalConnectionTimeout = 16;
   m_useLowDelayOptionOnSocket = sets->value( "UseLowDelayOptionOnSocket", false ).toBool();
   m_delayConnectionAtStartup = qMax( 3000, sets->value( "DelayConnectionAtStartup(ms)", m_delayConnectionAtStartup ).toInt() );
+  m_sendOfflineMessagesToDefaultChat = sets->value( "SendOfflineMessagesToDefaultChat", false ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Network");
@@ -1084,7 +1085,6 @@ void Settings::load()
   m_shareDesktopImageType = sets->value( "ImageType", "jpg" ).toString();
   m_shareDesktopImageQuality = sets->value( "ImageQuality", 20 ).toInt();
   sets->endGroup();
-
 
   sets->beginGroup( "Plugin" );
   QStringList key_list = sets->value( "List", QStringList() ).toStringList();
@@ -1298,6 +1298,7 @@ void Settings::save()
   sets->setValue( "UseLowDelayOptionOnSocket", m_useLowDelayOptionOnSocket );
   sets->setValue( "TickIntervalBroadcasting", m_tickIntervalBroadcasting );
   sets->setValue( "DelayConnectionAtStartup(ms)", m_delayConnectionAtStartup );
+  sets->setValue( "SendOfflineMessagesToDefaultChat", m_sendOfflineMessagesToDefaultChat );
   sets->endGroup();
   sets->beginGroup( "Network");
 #ifdef BEEBEEP_USE_MULTICAST_DNS

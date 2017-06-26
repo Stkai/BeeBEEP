@@ -156,6 +156,7 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
         {
           if( img.height() > img_preview_height )
           {
+            // PNG for transparency (always)
             QString img_file_name = QString( "beeimgtmp-%1-%2.png" ).arg( Bee::dateTimeStringSuffix( QDateTime::currentDateTime() ) ).arg( fi.id() );
             QString img_file_path = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().dataFolder() ).arg( img_file_name ) );
             QImage img_scaled = img.scaledToHeight( Settings::instance().imagePreviewHeight(), Qt::SmoothTransformation );
