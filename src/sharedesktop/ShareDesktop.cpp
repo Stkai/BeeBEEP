@@ -38,10 +38,28 @@ ShareDesktop::ShareDesktop( QObject *parent )
   connect( &m_timer, SIGNAL( timeout() ), this, SLOT( makeScreenshot() ), Qt::QueuedConnection );
 }
 
-void ShareDesktop::setUserReadImage( VNumber user_id )
+bool ShareDesktop::removeUserId( VNumber user_id )
 {
+  resetUserReadImage( user_id );
+  return m_userIdList.removeOne( user_id );
+}
+
+void ShareDesktop::requestImageFromUser( VNumber user_id )
+{
+  if( !isActive() )
+    return;
+
+  if( user_id == ID_INVALID || user_id == ID_LOCAL_USER )
+    return;
+
+  if( !m_userIdList.contains( user_id ) )
+    return;
+
   if( !m_userIdReadList.contains( user_id ) )
     m_userIdReadList.append( user_id );
+
+  if( !m_lastImageData.isEmpty() )
+    emit imageDataAvailable( user_id, m_lastImageData );
 }
 
 void ShareDesktop::resetUserReadImage( VNumber user_id )

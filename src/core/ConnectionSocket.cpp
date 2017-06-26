@@ -300,6 +300,7 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
 #ifdef CONNECTION_SOCKET_IO_DEBUG
     qDebug() << "ConnectionSocket sends" << data_serialized.size() << "bytes to" << qPrintable( m_networkAddress.toString() );
 #endif
+    flush();
     return true;
   }
   else

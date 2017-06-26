@@ -154,19 +154,45 @@ void Core::onShareDesktopImageAvailable( const ShareDesktopData& sdd )
   }
 
   Message m = Protocol::instance().shareDesktopImageDataToMessage( sdd );
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Share desktop send image" << qPrintable( sdd.imageType() ) << "message with size" << m.text().size();
-#endif
   foreach( VNumber user_id, mp_shareDesktop->userIdList() )
   {
     if( mp_shareDesktop->hasUserReadImage( user_id ) )
     {
+#ifdef BEEBEEP_DEBUG
+      qDebug() << "Share desktop send image" << qPrintable( sdd.imageType() ) << "message with size" << m.text().size() << "to user" << user_id;
+#endif
       Connection* c = connection( user_id );
       if( c && c->isConnected() )
       {
         if( c->sendMessage( m ) )
           mp_shareDesktop->resetUserReadImage( user_id );
       }
+    }
+  }
+}
+
+void Core::onShareDesktopImageAvailable( VNumber user_id, const ShareDesktopData& sdd )
+{
+  if( !mp_shareDesktop->isActive() )
+    return;
+
+  if( mp_shareDesktop->userIdList().isEmpty() )
+  {
+    stopShareDesktop();
+    return;
+  }
+
+  Message m = Protocol::instance().shareDesktopImageDataToMessage( sdd );
+  if( mp_shareDesktop->hasUserReadImage( user_id ) )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Share desktop send image" << qPrintable( sdd.imageType() ) << "message with size" << m.text().size() << "to user" << user_id;
+#endif
+    Connection* c = connection( user_id );
+    if( c && c->isConnected() )
+    {
+      if( c->sendMessage( m ) )
+        mp_shareDesktop->resetUserReadImage( user_id );
     }
   }
 }
@@ -182,7 +208,7 @@ void Core::parseShareDesktopMessage( const User& u, const Message& m )
   }
   else if( m.hasFlag( Message::Request ) )
   {
-    mp_shareDesktop->setUserReadImage( u.id() );
+    mp_shareDesktop->requestImageFromUser( u.id() );
   }
   else if( m.hasFlag( Message::Private ) )
   {
@@ -192,8 +218,9 @@ void Core::parseShareDesktopMessage( const User& u, const Message& m )
       QImage img = ImageOptimizer::instance().loadImage( sdd.imageData(), sdd.imageType(), sdd.isCompressed() );
       if( img.isNull() )
         qDebug() << qPrintable( u.path() ) << "has sent a NULL image and has finished to share desktop with you";
+      else
+        sendMessageToLocalNetwork( u, Protocol::instance().readImageFromDesktopShared() );
       emit shareDesktopImageAvailable( u, img, sdd.imageType(), sdd.diffColor() );
-      sendMessageToLocalNetwork( u, Protocol::instance().readImageFromDesktopShared() );
     }
     else
     {

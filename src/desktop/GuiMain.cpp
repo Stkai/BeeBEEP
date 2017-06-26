@@ -3875,7 +3875,7 @@ void GuiMain::showRestartApplicationAlertMessage()
 #ifdef BEEBEEP_USE_SHAREDESKTOP
 void GuiMain::onShareDesktopImageAvailable( const User& u, const QImage& img, const QString& image_type, QRgb diff_color )
 {
-  int desktop_h = qApp->desktop()->availableGeometry().height() - 45;
+  int desktop_h = qApp->desktop()->availableGeometry().height() - 50;
   int desktop_w = qApp->desktop()->availableGeometry().width() - 80;
   QImage fit_img;
   if( Settings::instance().shareDesktopFitToScreen() )
@@ -3910,10 +3910,10 @@ void GuiMain::onShareDesktopImageAvailable( const User& u, const QImage& img, co
   connect( new_gui, SIGNAL( shareDesktopClosed( VNumber ) ), this, SLOT( onShareDesktopCloseEvent( VNumber ) ) );
   connect( new_gui, SIGNAL( shareDesktopDeleteRequest( VNumber ) ), this, SLOT( onShareDesktopDeleteRequest( VNumber ) ) );
   new_gui->setUser( u );
-  new_gui->setGeometry( 10, 40, qMin( fit_img.width()+20, qMax( 640, desktop_w ) ),
+  new_gui->setGeometry( 10, 40, qMin( fit_img.width()+32, qMax( 640, desktop_w ) ),
                               qMin( fit_img.height()+20, qMax( 480, desktop_h ) ) );
   new_gui->setImageSize( fit_img.size() );
-  new_gui->setMaximumSize( fit_img.width()+20, fit_img.height()+20 );
+  new_gui->setMaximumSize( fit_img.width()+32, fit_img.height()+20 );
   new_gui->updateImage( fit_img, image_type, diff_color );
   new_gui->show();
   m_desktops.append( new_gui );

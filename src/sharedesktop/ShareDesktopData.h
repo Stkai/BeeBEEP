@@ -35,6 +35,7 @@ public:
   ShareDesktopData( const ShareDesktopData& );
   ShareDesktopData& operator=( const ShareDesktopData& );
 
+  inline bool isEmpty() const;
   inline void setImageData( const QByteArray& );
   inline const QByteArray& imageData() const;
   inline void setImageType( const QString& );
@@ -54,6 +55,7 @@ private:
 
 
 // Inline functions
+inline bool ShareDesktopData::isEmpty() const { return m_imageData.isEmpty(); }
 inline void ShareDesktopData::setImageData( const QByteArray& new_value ) { m_imageData = new_value; }
 inline const QByteArray& ShareDesktopData::imageData() const { return m_imageData; }
 inline void ShareDesktopData::setImageType( const QString& new_value ) { m_imageType = new_value; }
