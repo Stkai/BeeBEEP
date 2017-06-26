@@ -36,6 +36,7 @@ class MDnsManager;
 #endif
 #ifdef BEEBEEP_USE_SHAREDESKTOP
 class ShareDesktop;
+class ShareDesktopData;
 #endif
 
 #define beeCore Core::instance()
@@ -194,7 +195,7 @@ protected slots:
   void sendShareBoxList();
   void onFileTransferCompleted( VNumber, VNumber, const FileInfo& );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-  void onShareDesktopImageAvailable( const QByteArray&, const QString&, bool, QRgb );
+  void onShareDesktopImageAvailable( const ShareDesktopData& );
 #endif
   /* CoreChat */
   void addListToSavedChats();

@@ -25,6 +25,7 @@
 #include "Connection.h"
 #include "Core.h"
 #include "IconManager.h"
+#include "ImageOptimizer.h"
 #include "Protocol.h"
 #include "ShareDesktop.h"
 #include "Settings.h"
@@ -49,11 +50,15 @@ bool Core::startShareDesktop( VNumber user_id )
     sHtmlMsg = tr( "%1 You cannot share desktop with %2." ).arg( IconManager::instance().toHtml( "desktop-share-refused.png", "*G*" ), u.name() );
     dispatchSystemMessage( ID_DEFAULT_CHAT, user_id, sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::System );
     qDebug() << "You cannot share desktop with" << qPrintable( u.path() ) << "with old protocol" << u.protocolVersion();
+    emit shareDesktopUpdate( u );
     return false;
   }
 
   if( !mp_shareDesktop->addUserId( user_id ) )
+  {
+    emit shareDesktopUpdate( u );
     return false;
+  }
 
   sHtmlMsg = tr( "%1 You start to share desktop with %2." ).arg( IconManager::instance().toHtml( "desktop-share.png", "*G*" ), u.name() );
   dispatchSystemMessage( ID_DEFAULT_CHAT, user_id, sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::System );
@@ -81,7 +86,7 @@ void Core::stopShareDesktop( VNumber user_id )
   {
     QString sHtmlMsg = tr( "%1 You stop to share desktop with %2." ).arg( IconManager::instance().toHtml( "desktop-share-refused.png", "*G*" ), u.name() );
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::System );
-    sendMessageToLocalNetwork( u, Protocol::instance().shareDesktopImageDataToMessage( "", "png", false, 0 ) ); // Empty image stops desktop sharing
+    sendMessageToLocalNetwork( u, Protocol::instance().shareDesktopImageDataToMessage( ShareDesktopData( "", "png", false, 0 ) ) ); // Empty image stops desktop sharing
     emit shareDesktopUpdate( u );
   }
 }
@@ -137,7 +142,7 @@ bool Core::shareDesktopIsActive( VNumber user_id ) const
     return mp_shareDesktop->isActive() && mp_shareDesktop->userIdList().contains( user_id );
 }
 
-void Core::onShareDesktopImageAvailable( const QByteArray& img_data, const QString& image_type, bool use_compression, QRgb diff_color )
+void Core::onShareDesktopImageAvailable( const ShareDesktopData& sdd )
 {
   if( !mp_shareDesktop->isActive() )
     return;
@@ -148,14 +153,56 @@ void Core::onShareDesktopImageAvailable( const QByteArray& img_data, const QStri
     return;
   }
 
-  Message m = Protocol::instance().shareDesktopImageDataToMessage( img_data, image_type, use_compression, diff_color );
+  Message m = Protocol::instance().shareDesktopImageDataToMessage( sdd );
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Share desktop send image" << qPrintable( image_type ) << "message with size" << m.text().size();
+  qDebug() << "Share desktop send image" << qPrintable( sdd.imageType() ) << "message with size" << m.text().size();
 #endif
   foreach( VNumber user_id, mp_shareDesktop->userIdList() )
   {
-    Connection* c = connection( user_id );
-    if( c && c->isConnected() )
-      c->sendMessage( m );
+    if( mp_shareDesktop->hasUserReadImage( user_id ) )
+    {
+      Connection* c = connection( user_id );
+      if( c && c->isConnected() )
+      {
+        if( c->sendMessage( m ) )
+          mp_shareDesktop->resetUserReadImage( user_id );
+      }
+    }
+  }
+}
+
+void Core::parseShareDesktopMessage( const User& u, const Message& m )
+{
+  if( m.hasFlag( Message::Refused ) )
+  {
+ #ifdef BEEBEEP_DEBUG
+    qDebug() << qPrintable( u.path() ) << "refuse your share desktop message";
+ #endif
+    refuseToViewShareDesktop( u.id(), ID_LOCAL_USER );
+  }
+  else if( m.hasFlag( Message::Request ) )
+  {
+    mp_shareDesktop->setUserReadImage( u.id() );
+  }
+  else if( m.hasFlag( Message::Private ) )
+  {
+    if( Settings::instance().enableShareDesktop() )
+    {
+      ShareDesktopData sdd = Protocol::instance().imageDataFromShareDesktopMessage( m );
+      QImage img = ImageOptimizer::instance().loadImage( sdd.imageData(), sdd.imageType(), sdd.isCompressed() );
+      if( img.isNull() )
+        qDebug() << qPrintable( u.path() ) << "has sent a NULL image and has finished to share desktop with you";
+      emit shareDesktopImageAvailable( u, img, sdd.imageType(), sdd.diffColor() );
+      sendMessageToLocalNetwork( u, Protocol::instance().readImageFromDesktopShared() );
+    }
+    else
+    {
+      refuseToViewShareDesktop( ID_LOCAL_USER, u.id() );
+      qDebug() << "You have refused to view the shared desktop because the option is disabled";
+    }
+  }
+  else
+  {
+    qWarning() << "Invalid flag found in desktop share message from user" << qPrintable( u.path() );
   }
 }

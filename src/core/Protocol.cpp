@@ -24,7 +24,6 @@
 #include "BeeUtils.h"
 #include "ColorManager.h"
 #include "EmoticonManager.h"
-#include "ImageOptimizer.h"
 #include "PluginManager.h"
 #include "Protocol.h"
 #include "Random.h"
@@ -1512,30 +1511,39 @@ QList<FileInfo> Protocol::messageToShareBoxFileList( const Message& m, const QHo
     return m;
   }
 
-  Message Protocol::shareDesktopImageDataToMessage( const QByteArray& img_data, const QString& image_type, bool use_compression, QRgb diff_color ) const
+  Message Protocol::readImageFromDesktopShared() const
   {
-    Message m( Message::ShareDesktop, ID_SHAREDESKTOP_MESSAGE, QString::fromLatin1( img_data.toBase64() ) );
+    Message m( Message::ShareDesktop, ID_SHAREDESKTOP_MESSAGE, "" );
+    m.addFlag( Message::Request );
+    return m;
+  }
+
+
+  Message Protocol::shareDesktopImageDataToMessage( const ShareDesktopData& sdd ) const
+  {
+    Message m( Message::ShareDesktop, ID_SHAREDESKTOP_MESSAGE, QString::fromLatin1( sdd.imageData().toBase64() ) );
     m.addFlag( Message::Private );
     QStringList sl_data;
-    sl_data << image_type;
-    if( use_compression )
+    sl_data << sdd.imageType();
+    if( sdd.isCompressed() )
       sl_data << QString( "9" );
     else
       sl_data << QString( "" );
-    sl_data << QString::number( diff_color );
+    sl_data << QString::number( sdd.diffColor() );
     sl_data << QLatin1String( "base64" );
     m.setData( sl_data.join( DATA_FIELD_SEPARATOR ) );
     return m;
   }
 
-  QImage Protocol::imageFromShareDesktopMessage( const Message& m, QString* p_image_type, QRgb* p_diff_color ) const
+  ShareDesktopData Protocol::imageDataFromShareDesktopMessage( const Message& m ) const
   {
+    ShareDesktopData sdd;
     if( m.text().isEmpty() )
     {
 #ifdef BEEBEEP_DEBUG
       qDebug() << "Share desktop message is arrived with empty image";
 #endif
-      return QImage();
+      return sdd;
     }
 
     QString img_type = Settings::instance().shareDesktopImageType();
@@ -1561,12 +1569,11 @@ QList<FileInfo> Protocol::messageToShareBoxFileList( const Message& m, const QHo
     else
       qWarning() << "Empty image data found in share desktop message (default values used)";
 
-    if( p_image_type )
-      *p_image_type = img_type;
-    if( p_diff_color )
-      *p_diff_color = diff_color;
-    QByteArray image_data = image_codec == "base64" ? QByteArray::fromBase64( m.text().toLatin1() ) : m.text().toLatin1();
-    return ImageOptimizer::instance().loadImage( image_data, img_type, use_compression );
+    sdd.setImageType( img_type );
+    sdd.setDiffColor( diff_color );
+    sdd.setIsCompressed( use_compression );
+    sdd.setImageData( image_codec == "base64" ? QByteArray::fromBase64( m.text().toLatin1() ) : m.text().toLatin1() );
+    return sdd;
   }
 #endif
 

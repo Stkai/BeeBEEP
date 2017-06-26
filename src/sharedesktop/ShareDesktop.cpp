@@ -29,12 +29,24 @@
 
 
 ShareDesktop::ShareDesktop( QObject *parent )
-  : QObject( parent ), m_userIdList(), m_timer(), mp_job( 0 )
+  : QObject( parent ), m_userIdList(), m_timer(), mp_job( 0 ),
+    m_lastImageData(), m_userIdReadList()
 {
   setObjectName( "ShareDesktop" );
   m_timer.setObjectName( "ShareDesktopTimer" );
   m_timer.setSingleShot( false );
   connect( &m_timer, SIGNAL( timeout() ), this, SLOT( makeScreenshot() ), Qt::QueuedConnection );
+}
+
+void ShareDesktop::setUserReadImage( VNumber user_id )
+{
+  if( !m_userIdReadList.contains( user_id ) )
+    m_userIdReadList.append( user_id );
+}
+
+void ShareDesktop::resetUserReadImage( VNumber user_id )
+{
+  m_userIdReadList.removeOne( user_id );
 }
 
 bool ShareDesktop::start()
@@ -50,6 +62,8 @@ bool ShareDesktop::start()
     qWarning() << "ShareDesktop is started with empty users. Starting operation aborted";
     return false;
   }
+
+  m_lastImageData = ShareDesktopData();
 
   if( !mp_job )
   {
@@ -69,6 +83,7 @@ void ShareDesktop::stop()
   if( !isActive() )
     return;
   m_timer.stop();
+  m_lastImageData = ShareDesktopData();
   m_userIdList.clear();
   BeeApplication* bee_app = (BeeApplication*)qApp;
   bee_app->removeJob( mp_job );
@@ -88,6 +103,7 @@ bool ShareDesktop::addUserId( VNumber user_id )
     return false;
 
   m_userIdList.append( user_id );
+  m_userIdReadList.append( user_id );
   return true;
 }
 
@@ -98,7 +114,11 @@ void ShareDesktop::onImageDataAvailable( const QByteArray& img_data, const QStri
 #ifdef BEEBEEP_DEBUG
   qDebug() << "ShareDesktop has image data available with size" << img_data.size() << "and diff color" << diff_color;
 #endif
-  emit imageDataAvailable( img_data, image_type, use_compression, diff_color );
+  m_lastImageData.setImageData( img_data );
+  m_lastImageData.setImageType( image_type );
+  m_lastImageData.setIsCompressed( use_compression );
+  m_lastImageData.setDiffColor( diff_color );
+  emit imageDataAvailable( m_lastImageData );
 }
 
 void ShareDesktop::makeScreenshot()

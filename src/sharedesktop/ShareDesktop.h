@@ -24,7 +24,7 @@
 #ifndef BEEBEEP_SHAREDESKTOP_H
 #define BEEBEEP_SHAREDESKTOP_H
 
-#include "Config.h"
+#include "ShareDesktopData.h"
 class Chat;
 class ShareDesktopJob;
 
@@ -44,9 +44,13 @@ public:
   inline bool removeUserId( VNumber );
   inline bool hasUsers() const;
   inline const QList<VNumber>& userIdList() const;
+  inline const ShareDesktopData& lastImageData() const;
+  void setUserReadImage( VNumber );
+  void resetUserReadImage( VNumber );
+  inline bool hasUserReadImage( VNumber ) const;
 
 signals:
-  void imageDataAvailable( const QByteArray&, const QString& image_type, bool use_compression, QRgb diff_color );
+  void imageDataAvailable( const ShareDesktopData& );
   void imageAvailable( const QImage& );
 
 protected slots:
@@ -57,6 +61,8 @@ private:
   QList<VNumber> m_userIdList;
   QTimer m_timer;
   ShareDesktopJob* mp_job;
+  ShareDesktopData m_lastImageData;
+  QList<VNumber> m_userIdReadList;
 
 };
 
@@ -65,5 +71,7 @@ inline bool ShareDesktop::removeUserId( VNumber user_id ) { return m_userIdList.
 inline bool ShareDesktop::hasUsers() const { return !m_userIdList.isEmpty(); }
 inline const QList<VNumber>& ShareDesktop::userIdList() const { return m_userIdList; }
 inline bool ShareDesktop::isActive() const { return m_timer.isActive(); }
+inline const ShareDesktopData& ShareDesktop::lastImageData() const { return m_lastImageData; }
+inline bool ShareDesktop::hasUserReadImage( VNumber user_id ) const { return m_userIdReadList.contains( user_id ); }
 
 #endif // BEEBEEP_SHAREDESKTOP_H

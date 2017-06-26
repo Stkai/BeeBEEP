@@ -81,7 +81,7 @@ const int HIVE_PROTO_VERSION = 64;
 const int NEW_GROUP_PROTO_VERSION = 67;
 const int UTC_TIMESTAMP_PROTO_VERSION = 68;
 #ifdef BEEBEEP_USE_SHAREDESKTOP
-  const int SHARE_DESKTOP_PROTO_VERSION = 71;
+  const int SHARE_DESKTOP_PROTO_VERSION = 72;
 #endif
 // Tick interval in ms
 const int TICK_INTERVAL = 1000;

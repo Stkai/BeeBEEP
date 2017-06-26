@@ -33,6 +33,9 @@
 #include "User.h"
 #include "UserRecord.h"
 #include "UserStatusRecord.h"
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  #include "ShareDesktopData.h"
+#endif
 
 
 class Protocol
@@ -128,8 +131,9 @@ public:
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   Message refuseToViewDesktopShared() const;
-  Message shareDesktopImageDataToMessage( const QByteArray&, const QString& image_type, bool use_compression, QRgb diff_color ) const;
-  QImage imageFromShareDesktopMessage( const Message&, QString* p_image_type, QRgb* p_diff_color ) const;
+  Message readImageFromDesktopShared() const;
+  Message shareDesktopImageDataToMessage( const ShareDesktopData& ) const;
+  ShareDesktopData imageDataFromShareDesktopMessage( const Message& ) const;
 #endif
 
   inline VNumber currentId() const;

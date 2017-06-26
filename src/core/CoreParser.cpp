@@ -580,37 +580,3 @@ void Core::parseBuzzMessage( const User& u, const Message& )
   dispatchSystemMessage( c.id(), u.id(), sys_msg, DispatchToChat, ChatMessage::Other );
   emit localUserIsBuzzedBy( u );
 }
-
-#ifdef BEEBEEP_USE_SHAREDESKTOP
-void Core::parseShareDesktopMessage( const User& u, const Message& m )
-{
-  if( m.hasFlag( Message::Refused ) )
-  {
- #ifdef BEEBEEP_DEBUG
-    qDebug() << qPrintable( u.path() ) << "refuse your share desktop message";
- #endif
-    refuseToViewShareDesktop( u.id(), ID_LOCAL_USER );
-  }
-  else if( m.hasFlag( Message::Private ) )
-  {
-    if( Settings::instance().enableShareDesktop() )
-    {
-      QRgb diff_color;
-      QString image_type;
-      QImage img = Protocol::instance().imageFromShareDesktopMessage( m, &image_type, &diff_color );
-      if( img.isNull() )
-        qDebug() << qPrintable( u.path() ) << "has sent a NULL image and has finished to share desktop with you";
-      emit shareDesktopImageAvailable( u, img, image_type, diff_color );
-    }
-    else
-    {
-      refuseToViewShareDesktop( ID_LOCAL_USER, u.id() );
-      qDebug() << "You have refused to view the shared desktop because the option is disabled";
-    }
-  }
-  else
-  {
-    qWarning() << "Invalid flag found in desktop share message from user" << qPrintable( u.path() );
-  }
-}
-#endif
