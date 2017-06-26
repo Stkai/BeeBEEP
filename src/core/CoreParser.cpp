@@ -586,6 +586,9 @@ void Core::parseShareDesktopMessage( const User& u, const Message& m )
 {
   if( m.hasFlag( Message::Refused ) )
   {
+ #ifdef BEEBEEP_DEBUG
+    qDebug() << qPrintable( u.path() ) << "refuse your share desktop message";
+ #endif
     refuseToViewShareDesktop( u.id(), ID_LOCAL_USER );
   }
   else if( m.hasFlag( Message::Private ) )

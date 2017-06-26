@@ -1082,7 +1082,7 @@ void Settings::load()
   m_shareDesktopCaptureDelay = qMax( 2000, sets->value( "CaptureScreenInterval(ms)", m_shareDesktopCaptureDelay ).toInt() );
   m_shareDesktopFitToScreen = sets->value( "FitToScreen", false ).toBool();
   m_shareDesktopImageType = sets->value( "ImageType", "jpg" ).toString();
-  m_shareDesktopImageQuality = sets->value( "ImageQuality", 60 ).toInt();
+  m_shareDesktopImageQuality = sets->value( "ImageQuality", 20 ).toInt();
   sets->endGroup();
 
 

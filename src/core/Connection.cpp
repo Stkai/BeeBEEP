@@ -39,12 +39,6 @@ Connection::Connection( QObject *parent )
 bool Connection::sendMessage( const Message& m )
 {
   QByteArray message_data = Protocol::instance().fromMessage( m, protoVersion() );
-  if( message_data.isEmpty() )
-  {
-    qWarning() << "Connection has received an invalid message to send";
-    return false;
-  }
-
   if( message_data.size() > 524288 )
     qWarning() << "Outgoing message to" << qPrintable( networkAddress().toString() ) << "is VERY VERY BIG:" << message_data.size() << "bytes";
 
@@ -52,7 +46,14 @@ bool Connection::sendMessage( const Message& m )
   if( !isReadyForUse() )
     qDebug() << qPrintable( networkAddress().toString() ) << "is sending this message:" << message_data;
 #endif
-  return sendData( message_data );
+
+  if( !sendData( message_data ) )
+  {
+    qWarning() << "Unable to send message type" << m.type() << "and size" << m.text().size() << "to user" << userId();
+    return false;
+  }
+  else
+    return true;
 }
 
 void Connection::parseData( const QByteArray& message_data )

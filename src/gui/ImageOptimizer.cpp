@@ -29,7 +29,7 @@ ImageOptimizer* ImageOptimizer::mp_instance = NULL;
 ImageOptimizer::ImageOptimizer()
  : m_imageTypes()
 {
-   m_imageTypes << QString( "jpg" ) << QString( "png" ) << QString( "tiff" );
+   m_imageTypes << QString( "jpg" ) << QString( "png" );
 }
 
 bool ImageOptimizer::imageTypeHasTransparentColor( const QString& image_type ) const
@@ -113,13 +113,13 @@ QByteArray ImageOptimizer::saveImage( const QImage& img, const QString& image_ty
   buffer.open( QIODevice::WriteOnly );
   img.save( &buffer, image_type.toLatin1().constData(), image_quality );
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "ImageOptimizer saves image (uncompressed) with size" << diff_img_bytes.size();
+  qDebug() << "ImageOptimizer saves image" << qPrintable( image_type ) << "(uncompressed) with size" << diff_img_bytes.size();
 #endif
   if( use_compression )
   {
     diff_img_bytes = qCompress( diff_img_bytes, compression_level );
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "ImageOptimizer saves image (compressed) with size" << diff_img_bytes.size();
+    qDebug() << "ImageOptimizer compress image"<< qPrintable( image_type ) << "to size" << diff_img_bytes.size();
 #endif
   }
   return diff_img_bytes;
