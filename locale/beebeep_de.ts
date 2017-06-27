@@ -208,7 +208,7 @@
     </message>
     <message>
         <source>%1 Connection closed to user %2 because it uses same account name of the already connected user %3: %4.</source>
-        <translation>%1 Verbindung zum Benutzer %2 zurückgesetzt, da er den Kontonamen des bereits verbundenen Benutzers %3 verwendet: %4.</translation>
+        <translation type="unfinished">%1 Verbindung zum Benutzer %2 zurückgesetzt, da er den Kontonamen des bereits verbundenen Benutzers %3 verwendet: %4.</translation>
     </message>
     <message>
         <source>%1 %2 has left the group chat %3.</source>
@@ -332,7 +332,7 @@
     </message>
     <message>
         <source>%1 Connection closed to user %2 because it uses your account name: %3.</source>
-        <translation>%1 Verbindung zum Benutzer %2 zurückgesetzt, da er deinen Kontonamen verwendet: %3.</translation>
+        <translation type="unfinished">%1 Verbindung zum Benutzer %2 zurückgesetzt, da er deinen Kontonamen verwendet: %3.</translation>
     </message>
     <message>
         <source>%1 You are disconnected from %2 Network.</source>
@@ -1246,12 +1246,20 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Show the timestamp</source>
         <translation>Zeitstempel anzeigen</translation>
     </message>
+    <message>
+        <source>Click here for latest news</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiHomeWidget</name>
     <message>
         <source>Form</source>
-        <translation>Formular</translation>
+        <translation type="obsolete">Formular</translation>
+    </message>
+    <message>
+        <source>News</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

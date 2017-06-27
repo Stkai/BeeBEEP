@@ -143,6 +143,8 @@ public slots:
 #endif
 
 signals:
+  void connected();
+  void disconnected();
   void userChanged( const User& );
   void userIsWriting( const User&, VNumber );
   void userRemoved( const User& );
@@ -167,6 +169,7 @@ signals:
   void shareBoxUploadCompleted( VNumber, const FileInfo& );
   void localUserIsBuzzedBy( const User& );
   void newSystemStatusMessage( const QString&, int );
+  void newsAvailable( const QString& );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   void shareDesktopImageAvailable( const User&, const QImage&, const QString&, QRgb );
   void shareDesktopUpdate( const User& );

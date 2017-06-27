@@ -530,6 +530,11 @@ QString Settings::updaterWebSite() const
   return officialWebSite() + QString( BEEBEEP_UPDATER_WEBSITE );
 }
 
+QString Settings::newsWebSite() const
+{
+  return officialWebSite() + QString( BEEBEEP_NEWS_WEBSITE );
+}
+
 QString Settings::copyMastroWebSite() const
 {
   return QString( COPYMASTRO_WEBSITE );

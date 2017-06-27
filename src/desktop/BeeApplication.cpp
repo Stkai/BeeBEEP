@@ -35,11 +35,14 @@
   // package libx11-xcb-dev
 #endif
 
+BeeApplication *BeeApplication::mp_instance = 0;
+
 
 BeeApplication::BeeApplication( int& argc, char** argv  )
   : QApplication( argc, argv )
 {
   setObjectName( "BeeApplication" );
+  mp_instance = this;
 
   // when beebeep starts closed to tray last window is "ask password".
   // After auth "ask password" is closed and then the app quit
@@ -80,6 +83,9 @@ BeeApplication::~BeeApplication()
     mp_localServer->close();
     delete mp_localServer;
   }
+
+  if( mp_instance )
+    mp_instance = 0;
 }
 
 void BeeApplication::forceShutdown()

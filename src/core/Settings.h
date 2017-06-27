@@ -88,6 +88,7 @@ public:
   QString donationWebSite() const;
   QString helpWebSite() const;
   QString languageWebSite() const;
+  QString newsWebSite() const;
   QString httpUserAgent() const;
   QString facebookPage() const;
   QString updaterWebSite() const;

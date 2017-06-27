@@ -32,6 +32,7 @@ struct xcb_connection_t;
 struct xcb_screen_t;
 #endif
 
+#define beeApp BeeApplication::instance()
 
 class BeeApplication : public QApplication
 {
@@ -40,6 +41,8 @@ class BeeApplication : public QApplication
 public:
   BeeApplication( int& argc, char** argv );
   ~BeeApplication();
+
+  static BeeApplication* instance() { return mp_instance; }
 
   bool otherInstanceExists();
   void preventMultipleInstances();
@@ -93,6 +96,8 @@ protected slots:
   void slotConnectionEstablished();
 
 private:
+  static BeeApplication* mp_instance;
+
   int m_idleTimeout;
   QDateTime m_lastEventDateTime;
   bool m_isInIdle;

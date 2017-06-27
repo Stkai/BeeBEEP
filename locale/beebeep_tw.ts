@@ -211,15 +211,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>%1 Connection closed to user %2 because it uses your account name: %3.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>%1 Connection closed to user %2 because it uses your nickname: %3.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%1 Connection closed to user %2 because it uses same account name of the already connected user %3: %4.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -452,6 +444,14 @@
     </message>
     <message>
         <source>and %1 other users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 Connection closed to user %2 because it uses your account name: %3.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 Connection closed to user %2 because it uses same account name of the already connected user %3: %4.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1225,12 +1225,20 @@ Please select a different name.</source>
         <source>Show the timestamp</source>
         <translation type="unfinished">顯示時間旗標</translation>
     </message>
+    <message>
+        <source>Click here for latest news</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiHomeWidget</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">從</translation>
+        <translation type="obsolete">從</translation>
+    </message>
+    <message>
+        <source>News</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

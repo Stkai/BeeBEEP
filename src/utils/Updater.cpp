@@ -27,7 +27,7 @@
 
 
 Updater::Updater( QObject *parent )
- : QObject( parent ), m_versionAvailable( "" ), m_downloadUrl( "" )
+ : QObject( parent ), m_versionAvailable( "" ), m_downloadUrl( "" ), m_news( "" )
 {
   setObjectName( "Updater" );
 }
@@ -36,6 +36,7 @@ void Updater::checkForNewVersion()
 {
   m_versionAvailable = "";
   m_downloadUrl = "";
+  m_news = "";
   QUrl url( Settings::instance().updaterWebSite() );
 
   HttpDownloader* http_downloader = new HttpDownloader( this );
@@ -67,6 +68,9 @@ void Updater::onDownloadCompleted( const QString& file_path )
     sets.beginGroup( Settings::instance().operatingSystem( false ) );
     m_versionAvailable = sets.value( "CurrentVersion", "" ).toString();
     m_downloadUrl = sets.value( "DownloadUrl", "" ).toString();
+    sets.endGroup();
+    sets.beginGroup( "Info" );
+    m_news = sets.value( "News", "" ).toString();
     sets.endGroup();
   }
 

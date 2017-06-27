@@ -45,6 +45,8 @@ GuiHome::GuiHome( QWidget* parent )
   mp_teSystem->setOpenExternalLinks( false );
   mp_teSystem->setOpenLinks( false );
 
+  mp_lNews->setOpenExternalLinks( true );
+
   mp_menuContext = new QMenu( this );
 
   connect( mp_teSystem, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( customContextMenu( const QPoint& ) ) );
@@ -118,7 +120,29 @@ int GuiHome::loadSystemMessages()
     if( addSystemMessage( cm ) )
       num_sys_msg++;
   }
+  QTimer::singleShot( 0, this, SLOT( resetNews() ) );
   return num_sys_msg;
+}
+
+void GuiHome::resetNews()
+{
+  setNews( "" );
+}
+
+void GuiHome::setNews( const QString& news )
+{
+  if( news.isEmpty() )
+  {
+    mp_lNews->setText( QString( "<a style='text-decoration: none;' href='%1'><b>%2</b></a>" )
+                         .arg( Settings::instance().newsWebSite() )
+                         .arg( Bee::beeColorsToHtmlText( "B  e  e  B  E  E  P" ) ) );
+    mp_lNews->setToolTip( tr( "Click here for latest news" ) );
+  }
+  else
+  {
+    mp_lNews->setText( news );
+    mp_lNews->setToolTip( "" );
+  }
 }
 
 void GuiHome::reloadMessages()

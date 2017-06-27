@@ -77,6 +77,8 @@ public slots:
   void onSleepRequest();
 
 private slots:
+  void onCoreConnected();
+  void onCoreDisconnected();
   void showAbout();
   void showLicense();
   void onUserChanged( const User& );
@@ -185,6 +187,7 @@ private slots:
   void onStatusBarMessageChanged( const QString& );
   void selectIconSourcePath();
   void selectEmoticonSourcePath();
+  void onNewsAvailable( const QString& );
 
 protected:
   void keyPressEvent( QKeyEvent* );

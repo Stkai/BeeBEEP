@@ -103,7 +103,7 @@ GuiMain::GuiMain( QWidget *parent )
 
   m_lastUserStatus = User::Online;
   m_forceShutdown = false;
-  m_autoConnectOnInterfaceUp = true;
+  m_autoConnectOnInterfaceUp = false;
   m_prevActivatedState = true;
   m_coreIsConnecting = false;
 
@@ -115,6 +115,8 @@ GuiMain::GuiMain( QWidget *parent )
 
   connect( mp_tabMain, SIGNAL( currentChanged( int ) ), this, SLOT( onMainTabChanged( int ) ) );
 
+  connect( beeCore, SIGNAL( connected() ), this, SLOT( onCoreConnected() ) );
+  connect( beeCore, SIGNAL( disconnected() ), this, SLOT( onCoreDisconnected() ) );
   connect( beeCore, SIGNAL( newChatMessage( const Chat&, const ChatMessage& ) ), this, SLOT( onNewChatMessage( const Chat&, const ChatMessage& ) ) );
   connect( beeCore, SIGNAL( fileDownloadRequest( const User&, const FileInfo& ) ), this, SLOT( downloadFile( const User&, const FileInfo& ) ) );
   connect( beeCore, SIGNAL( folderDownloadRequest( const User&, const QString&, const QList<FileInfo>& ) ), this, SLOT( downloadFolder( const User&, const QString&, const QList<FileInfo>& ) ) );
@@ -134,7 +136,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( beeCore, SIGNAL( chatReadByUser( const Chat&, const User& ) ), this, SLOT( onChatReadByUser( const Chat&, const User& ) ) );
   connect( beeCore, SIGNAL( localUserIsBuzzedBy( const User& ) ), this, SLOT( showBuzzFromUser( const User& ) ) );
   connect( beeCore, SIGNAL( newSystemStatusMessage( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
-
+  connect( beeCore, SIGNAL( newsAvailable( const QString& ) ), this, SLOT( onNewsAvailable( const QString& ) ) );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   connect( beeCore, SIGNAL( shareDesktopImageAvailable( const User&, const QImage&, const QString&, QRgb ) ), this, SLOT( onShareDesktopImageAvailable( const User&, const QImage&, const QString&, QRgb ) ) );
   connect( beeCore, SIGNAL( shareDesktopUpdate( const User& ) ), this, SLOT( onShareDesktopUpdate( const User& ) ) );
@@ -468,8 +470,7 @@ void GuiMain::onWakeUpRequest()
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Main window wakes up from sleep";
 #endif
-  m_autoConnectOnInterfaceUp = true;
-  //startCore(); // wait for network interface
+  initGuiItems();
 }
 
 void GuiMain::onSleepRequest()
@@ -477,44 +478,60 @@ void GuiMain::onSleepRequest()
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Main window goes to sleep";
 #endif
-  stopCore();
+  if( beeCore->isConnected() )
+  {
+    m_autoConnectOnInterfaceUp = true;
+    stopCore();
+  }
+}
+
+void GuiMain::onCoreConnected()
+{
+  initGuiItems();
+}
+
+void GuiMain::onCoreDisconnected()
+{
+  if( m_coreIsConnecting )
+    m_coreIsConnecting = false;
+  initGuiItems();
 }
 
 void GuiMain::startCore()
 {
-  if( beeCore->isConnected() )
+  if( beeCore->isConnected() || m_coreIsConnecting )
     return;
+
+  mp_home->setNews( "" );
+  m_coreIsConnecting = true;
+
+  if( Settings::instance().askChangeUserAtStartup() )
+  {
+    if( !showWizard() )
+    {
+      m_coreIsConnecting = false;
+      return;
+    }
+  }
 
   if( Settings::instance().firstTime() )
   {
     Settings::instance().setFirstTime( false );
-    if( Settings::instance().askChangeUserAtStartup() )
-    {
-      if( !showWizard() )
-        return;
-      Settings::instance().setAskChangeUserAtStartup( false );
-    }
-  }
-  else
-  {
-    if( Settings::instance().askChangeUserAtStartup() )
-    {
-      if( !showWizard() )
-        return;
-    }
+    Settings::instance().setAskChangeUserAtStartup( false );
   }
 
   if( Settings::instance().askPassword() )
   {
     if( !promptConnectionPassword() )
+    {
+      m_coreIsConnecting = false;
       return;
+    }
   }
 
-  m_coreIsConnecting = true;
   m_autoConnectOnInterfaceUp = true;
   if( !beeCore->start() )
-     QMetaObject::invokeMethod( beeCore, "checkNetworkInterface", Qt::QueuedConnection );
-  initGuiItems();
+    QMetaObject::invokeMethod( beeCore, "checkNetworkInterface", Qt::QueuedConnection );
 }
 
 bool GuiMain::promptConnectionPassword()
@@ -536,19 +553,15 @@ void GuiMain::stopCore()
 {
   if( mp_tabMain->currentWidget() != mp_home )
     mp_tabMain->setCurrentWidget( mp_home );
-  beeCore->stop();
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   foreach( GuiShareDesktop* gsd, m_desktops )
     gsd->close();
 #endif
-  initGuiItems();
+  beeCore->stop();
 }
 
 void GuiMain::initGuiItems()
 {
-  bool enable = beeCore->isConnected();
-
-  mp_actBroadcast->setEnabled( enable );
   mp_userList->updateUsers();
   mp_chatList->updateChats();
   mp_groupList->updateGroups();
@@ -556,7 +569,6 @@ void GuiMain::initGuiItems()
   updateStatusIcon();
   updateNewMessageAction();
   checkViewActions();
-  updateWindowTitle();
 }
 
 void GuiMain::checkViewActions()
@@ -564,6 +576,7 @@ void GuiMain::checkViewActions()
   bool is_connected = beeCore->isConnected();
   int connected_users = beeCore->connectedUsers();
 
+  mp_actBroadcast->setEnabled( is_connected );
   mp_actCreateGroupChat->setEnabled( UserManager::instance().userList().size() > 1 );
   mp_actViewFileSharing->setEnabled( Settings::instance().enableFileTransfer() && Settings::instance().enableFileSharing() );
   mp_actEnableFileSharing->setEnabled( Settings::instance().enableFileTransfer() && !Settings::instance().disableFileSharing() );
@@ -1127,7 +1140,7 @@ void GuiMain::createMainWidgets()
   connect( mp_home, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
   tab_index = mp_tabMain->addTab( mp_home, IconManager::instance().icon( "activities.png" ), "" );
   mp_tabMain->setTabToolTip( tab_index, tr( "Activities" ) );
-  mp_home->setToolTip( QString( "%1\n(%2)" ).arg( mp_tabMain->tabToolTip( tab_index ), tooltip_right_button ) );
+  mp_home->setMainToolTip( QString( "%1\n(%2)" ).arg( mp_tabMain->tabToolTip( tab_index ), tooltip_right_button ) );
 
   mp_userList = new GuiUserList( this );
   tab_index = mp_tabMain->addTab( mp_userList, IconManager::instance().icon( "user-list.png" ), "" );
@@ -1773,7 +1786,6 @@ void GuiMain::statusSelected()
     return;
 
   int user_status = act->data().toInt();
-  m_autoConnectOnInterfaceUp = user_status != User::Offline;
   setUserStatusSelected( user_status );
 }
 
@@ -2297,7 +2309,6 @@ bool GuiMain::showWizard()
         return false;
       }
     }
-
     return true;
   }
   else
@@ -2572,6 +2583,7 @@ void GuiMain::loadSession()
   mp_tabMain->setCurrentWidget( mp_home );
   mp_home->loadSystemMessages();
   QTimer::singleShot( 100, beeCore, SLOT( buildSavedChatList() ) );
+
   QTimer::singleShot( Settings::instance().delayConnectionAtStartup(), this, SLOT( startCore() ) );
   if( Settings::instance().delayConnectionAtStartup() > 5000 )
     qDebug() << "Delay first connection for" << Settings::instance().delayConnectionAtStartup() << "ms";
@@ -3295,6 +3307,7 @@ void GuiMain::recentlyUsedUserStatusSelected()
     beeCore->setLocalUserStatusDescription( usr.status(), usr.statusDescription(), false );
     setUserStatusSelected( usr.status() );
     loadUserStatusRecentlyUsed();
+    updateLocalStatusMessage();
   }
 }
 
@@ -3464,7 +3477,12 @@ void GuiMain::selectDictionatyPath()
 void GuiMain::onNetworkInterfaceDown()
 {
   if( beeCore->isConnected() )
+  {
+    m_autoConnectOnInterfaceUp = true;
     QMetaObject::invokeMethod( this, "stopCore", Qt::QueuedConnection );
+  }
+  else
+    m_autoConnectOnInterfaceUp = false;
 }
 
 void GuiMain::onNetworkInterfaceUp()
@@ -3475,13 +3493,6 @@ void GuiMain::onNetworkInterfaceUp()
 
 void GuiMain::onTickEvent( int ticks )
 {
-  if( Bee::isTimeToCheck( ticks, Settings::instance().tickIntervalCheckIdle() ) )
-  {
-    BeeApplication* bee_app = (BeeApplication*)qApp;
-    if( bee_app->idleTimeout() > 0 )
-      QMetaObject::invokeMethod( bee_app, "checkIdle", Qt::QueuedConnection );
-  }
-
   int chat_tab_index = mp_tabMain->indexOf( mp_chatList );
   if( mp_actViewNewMessage->isEnabled() )
   {
@@ -3514,7 +3525,17 @@ void GuiMain::onTickEvent( int ticks )
   foreach( GuiShareDesktop* gsd, m_desktops )
     gsd->onTickEvent( ticks );
 #endif
-  beeCore->onTickEvent( ticks );
+
+  if( !m_coreIsConnecting )
+  {
+    if( Bee::isTimeToCheck( ticks, Settings::instance().tickIntervalCheckIdle() ) )
+    {
+      if( beeApp->idleTimeout() > 0 )
+        QMetaObject::invokeMethod( beeApp, "checkIdle", Qt::QueuedConnection );
+    }
+
+    beeCore->onTickEvent( ticks );
+  }
 }
 
 void GuiMain::onChatReadByUser( const Chat& c, const User& u )
@@ -3878,6 +3899,14 @@ void GuiMain::showRestartConnectionAlertMessage()
 void GuiMain::showRestartApplicationAlertMessage()
 {
   QMessageBox::information( this, Settings::instance().programName(), tr( "You must restart %1 to apply these changes." ).arg( Settings::instance().programName() ), tr( "Ok" ) );
+}
+
+void GuiMain::onNewsAvailable( const QString& news )
+{
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "News from the website available:" << qPrintable( news );
+#endif
+  mp_home->setNews( news );
 }
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP

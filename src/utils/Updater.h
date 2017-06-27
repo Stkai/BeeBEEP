@@ -35,6 +35,7 @@ public:
 
   inline const QString& versionAvailable() const;
   inline const QString& downloadUrl() const;
+  inline const QString& news() const;
 
 signals:
   void newVersionAvailable( const QString& );
@@ -49,11 +50,13 @@ protected slots:
 private:
   QString m_versionAvailable;
   QString m_downloadUrl;
+  QString m_news;
 
 };
 
 // Inline Functions
-const QString& Updater::versionAvailable() const { return m_versionAvailable; }
+inline const QString& Updater::versionAvailable() const { return m_versionAvailable; }
 inline const QString& Updater::downloadUrl() const { return m_downloadUrl; }
+inline const QString& Updater::news() const { return m_news; }
 
 #endif // BEEBEEP_UPDATER_H

@@ -36,8 +36,12 @@ class GuiHome : public QWidget, private Ui::GuiHomeWidget
 public:
   explicit GuiHome( QWidget *parent = 0 );
 
+  inline void setMainToolTip( const QString& );
+
   bool addSystemMessage( const ChatMessage& );
   int loadSystemMessages();
+
+  void setNews( const QString& );
 
 signals:
   void openUrlRequest( const QUrl& );
@@ -49,6 +53,7 @@ protected slots:
   void reloadMessages();
   void printActivities();
   void selectBackgroundColor();
+  void resetNews();
 
 private:
   void setBackgroundColor( const QString& );
@@ -59,5 +64,8 @@ private:
 
 };
 
+
+// Inline Functions
+inline void GuiHome::setMainToolTip( const QString& new_value ) { mp_teSystem->setToolTip( new_value ); }
 
 #endif // BEEBEEP_GUIHOME_H

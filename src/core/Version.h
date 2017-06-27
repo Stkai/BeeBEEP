@@ -38,6 +38,7 @@ const char* BEEBEEP_DOWNLOAD_WEBSITE = "/download.php";
 const char* BEEBEEP_DONATE_WEBSITE = "/donate.php";
 const char* BEEBEEP_HELP_WEBSITE = "/help.php";
 const char* BEEBEEP_LANGUAGE_WEBSITE = "/language.php";
+const char* BEEBEEP_NEWS_WEBSITE = "/news.php";
 const char* BEEBEEP_CHECK_VERSION_WEBSITE = "/checkversion.php";
 const char* BEEBEEP_PAGE_ON_FACEBOOK = "https://www.facebook.com/beebeeplanmessenger";
 const char* BEEBEEP_UPDATER_WEBSITE = "/update/beeupdater.txt";
@@ -48,7 +49,7 @@ const char* HUNSPELL_VERSION = "1.6.1";
 const char* BEEBEEP_VERSION = "4.2.0";
 const int BEEBEEP_PROTO_VERSION = 72;
 const int BEEBEEP_SETTINGS_VERSION = 9;
-const int BEEBEEP_BUILD = 948;
+const int BEEBEEP_BUILD = 949;
 
 #endif // BEEBEEP_VERSION_H
 

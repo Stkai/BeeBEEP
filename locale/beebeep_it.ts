@@ -1254,12 +1254,16 @@ Inserisci un nome differente.</translation>
         <source>Change background color</source>
         <translation>Cambia il colore di sfondo</translation>
     </message>
+    <message>
+        <source>Click here for latest news</source>
+        <translation>Premi qui per le ultime notizie</translation>
+    </message>
 </context>
 <context>
     <name>GuiHomeWidget</name>
     <message>
-        <source>Form</source>
-        <translation></translation>
+        <source>News</source>
+        <translation>Notizie</translation>
     </message>
 </context>
 <context>

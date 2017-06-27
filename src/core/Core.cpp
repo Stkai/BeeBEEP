@@ -49,6 +49,7 @@ Core::Core( QObject* parent )
  : QObject( parent ), m_connections()
 {
   mp_instance = this;
+  setObjectName( "BeeCore" );
   qDebug() << "Core created";
 
   qRegisterMetaType<VNumber>( "VNumber" );
@@ -249,6 +250,8 @@ bool Core::start()
   if( Settings::instance().canPostUsageStatistics() )
     QTimer::singleShot( 7000, this, SLOT( postUsageStatistics() ) );
 
+  emit connected();
+
   return true;
 }
 
@@ -336,8 +339,8 @@ void Core::stop()
 
   qDebug() << "Network core stopped";
   showMessage( tr( "Disconnected" ), 5000 );
+  emit disconnected();
 }
-
 
 void Core::sendMulticastingMessage()
 {
@@ -496,8 +499,12 @@ void Core::onUpdaterJobCompleted()
 
   QString latest_version = updater->versionAvailable();
   QString download_url = updater->downloadUrl().isEmpty() ? Settings::instance().downloadWebSite() : updater->downloadUrl();
+  QString news = updater->news();
 
   updater->deleteLater();
+
+  if( !news.isEmpty() )
+    emit newsAvailable( news );
 
   if( latest_version.isEmpty() )
     return;
