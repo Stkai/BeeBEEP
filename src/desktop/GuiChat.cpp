@@ -1073,9 +1073,14 @@ void GuiChat::shareDesktopToChat()
 
 void GuiChat::sendScreenshotToChat()
 {
+  int answer_id = QMessageBox::question( this, Settings::instance().programName(), tr( "Do you want to send a screenshot?" ), tr( "Yes and hide this chat" ), tr( "Yes" ), tr( "No" ), 0, 2 );
+  if( answer_id == 2 )
+    return;
+
   mp_actScreenshot->setEnabled( false );
-  emit hideRequest();
-  QTimer::singleShot( 500, this, SLOT( sendScreenshotToChat_Private() ) );
+  if( answer_id == 0 )
+    emit hideRequest();
+  QTimer::singleShot( 200, this, SLOT( sendScreenshotToChat_Private() ) );
 }
 
 void GuiChat::sendScreenshotToChat_Private()

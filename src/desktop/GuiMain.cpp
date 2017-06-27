@@ -4008,8 +4008,8 @@ void GuiMain::sendScreenshotToChat( VNumber chat_id )
 {
   QMetaObject::invokeMethod( beeCore, "sendScreenshotToChat", Qt::QueuedConnection, Q_ARG(VNumber, chat_id) );
   GuiFloatingChat* fl_chat = floatingChat( chat_id );
-  if( fl_chat )
-    QTimer::singleShot( 500, fl_chat, SLOT( showNormal() ) );
+  if( fl_chat && fl_chat->isMinimized() )
+    QTimer::singleShot( 200, fl_chat, SLOT( showNormal() ) );
 }
 
 #endif

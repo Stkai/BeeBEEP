@@ -912,6 +912,14 @@
         <source>and %1 other users</source>
         <translation>e altri %1 utenti</translation>
     </message>
+    <message>
+        <source>Do you want to send a screenshot?</source>
+        <translation>Vuoi inviare una foto del tuo schermo?</translation>
+    </message>
+    <message>
+        <source>Yes and hide this chat</source>
+        <translation>Si e nascondi questa conversazione</translation>
+    </message>
 </context>
 <context>
     <name>GuiChatList</name>

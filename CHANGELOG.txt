@@ -1,12 +1,11 @@
 BEEBEEP (Secure Lan Messanger) - CHANGELOG - (c) Marco Mastroddi
 
 BeeBEEP 4.2.0
-- Removed debug message on focus changed
+- Desktop Sharing (beta)
+- Send screenshot from chat
 - Simplified GUI of "Configure network..." option
 - Hive protocol can be used to contact user who remains offline
-- Desktop Sharing (beta)
 - Added delay on first connection option
-- Send screenshot from chat
 - Option to send offline messages also in chat with all user
 
 BeeBEEP 4.0.0

@@ -908,6 +908,14 @@
         <source>and %1 other users</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Do you want to send a screenshot?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes and hide this chat</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiChatList</name>

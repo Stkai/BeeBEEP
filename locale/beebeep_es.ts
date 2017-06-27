@@ -1088,12 +1088,14 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="788"/>
         <location filename="../src/desktop/GuiChat.cpp" line="1062"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1076"/>
         <source>Yes</source>
         <translation>Si</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="788"/>
         <location filename="../src/desktop/GuiChat.cpp" line="1062"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1076"/>
         <source>No</source>
         <translation>No</translation>
     </message>
@@ -1115,6 +1117,16 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="1062"/>
         <source>Do you want to restore the default font?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiChat.cpp" line="1076"/>
+        <source>Do you want to send a screenshot?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiChat.cpp" line="1076"/>
+        <source>Yes and hide this chat</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
