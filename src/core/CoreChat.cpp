@@ -748,7 +748,6 @@ void Core::addChatHeader( Chat* p_chat )
       if( !u.isLocal() )
         user_string_list.append( u.name() );
     }
-
     header_msg = tr( "%1 Chat with %2." ).arg( IconManager::instance().toHtml( "group.png", "*G*" ), Bee::stringListToTextString( user_string_list, -1, "" ) );
   }
 

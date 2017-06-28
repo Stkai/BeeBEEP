@@ -217,10 +217,11 @@ int main( int argc, char *argv[] )
   QObject::connect( &bee_app, SIGNAL( shutdownRequest() ), &mw, SLOT( forceShutdown() ), Qt::DirectConnection );
   QObject::connect( &bee_app, SIGNAL( sleepRequest() ), &mw, SLOT( onSleepRequest() ) );
   QObject::connect( &bee_app, SIGNAL( wakeUpRequest() ), &mw, SLOT( onWakeUpRequest() ) );
-
   QMetaObject::invokeMethod( &mw, "checkWindowFlagsAndShow", Qt::QueuedConnection );
+  qDebug() << "Loading saved session";
   mw.loadSession();
   /* Event Loop */
+  qDebug() << "Enter in the main event loop";
   int iRet = bee_app.exec();
   qDebug() << "Exit from the main event loop with code:" << iRet;
 

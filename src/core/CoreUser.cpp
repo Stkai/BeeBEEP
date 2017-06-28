@@ -228,7 +228,6 @@ void Core::loadUsersAndGroups()
 #endif
         if( !ChatManager::instance().findChatByPrivateId( g.privateId(), true, ID_INVALID ).isValid() )
           createGroupChat( Settings::instance().localUser(), g, false );
-
       }
     }
   }

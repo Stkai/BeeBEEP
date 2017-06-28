@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="fr_FR">
+<TS version="2.1" language="fr_FR">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -175,7 +175,7 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="211"/>
         <location filename="../src/core/CoreChat.cpp" line="740"/>
-        <location filename="../src/core/CoreChat.cpp" line="752"/>
+        <location filename="../src/core/CoreChat.cpp" line="751"/>
         <source>%1 Chat with %2.</source>
         <translation>%1 Chat avec %2.</translation>
     </message>
@@ -515,12 +515,12 @@
         <translation>%1 partage cette information</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="338"/>
+        <location filename="../src/core/CoreUser.cpp" line="337"/>
         <source>is removed from favorites</source>
         <translation>est retiré de vos favoris</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="344"/>
+        <location filename="../src/core/CoreUser.cpp" line="343"/>
         <source>is added to favorites</source>
         <translation>a été ajouté à vos favoris</translation>
     </message>
@@ -1532,11 +1532,6 @@ Please select a different name.</source>
         <source>Show the timestamp</source>
         <translation>Afficher l&apos;horodatage</translation>
     </message>
-    <message>
-        <location filename="../src/desktop/GuiHome.cpp" line="139"/>
-        <source>Click here for latest news</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>GuiHomeWidget</name>
@@ -1545,7 +1540,7 @@ Please select a different name.</source>
         <translation type="obsolete">Formulaire</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiHome.ui" line="61"/>
+        <location filename="../src/desktop/GuiHome.ui" line="62"/>
         <source>News</source>
         <translation type="unfinished"></translation>
     </message>

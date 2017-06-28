@@ -136,13 +136,9 @@ void GuiHome::setNews( const QString& news )
     mp_lNews->setText( QString( "<a style='text-decoration: none;' href='%1'><b>%2</b></a>" )
                          .arg( Settings::instance().newsWebSite() )
                          .arg( Bee::beeColorsToHtmlText( "B  e  e  B  E  E  P" ) ) );
-    mp_lNews->setToolTip( tr( "Click here for latest news" ) );
   }
   else
-  {
     mp_lNews->setText( news );
-    mp_lNews->setToolTip( "" );
-  }
 }
 
 void GuiHome::reloadMessages()

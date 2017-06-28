@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="zh_TW">
+<TS version="2.1" language="zh_TW">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -1224,10 +1224,6 @@ Please select a different name.</source>
     <message>
         <source>Show the timestamp</source>
         <translation type="unfinished">顯示時間旗標</translation>
-    </message>
-    <message>
-        <source>Click here for latest news</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
