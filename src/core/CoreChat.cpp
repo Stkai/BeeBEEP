@@ -179,9 +179,9 @@ bool Core::changeGroupChat( const User& u, const Group& g )
   if( user_removed_string_list.size() > 0 )
   {
     if( u.isLocal() )
-      sHtmlMsg = tr( "%1 You have removed members: %2." ).arg( IconManager::instance().toHtml( "group-remove.png", "*G*" ), Bee::stringListToTextString( user_removed_string_list, -1, "" ) );
+      sHtmlMsg = tr( "%1 You have removed members: %2." ).arg( IconManager::instance().toHtml( "group-remove.png", "*G*" ), Bee::stringListToTextString( user_removed_string_list ) );
     else
-      sHtmlMsg = tr( "%1 %2 has removed members: %3." ).arg( IconManager::instance().toHtml( "group-remove.png", "*G*" ), u.name(), Bee::stringListToTextString( user_removed_string_list, -1, "" ) );
+      sHtmlMsg = tr( "%1 %2 has removed members: %3." ).arg( IconManager::instance().toHtml( "group-remove.png", "*G*" ), u.name(), Bee::stringListToTextString( user_removed_string_list ) );
     c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
     chat_changed = true;
   }
@@ -199,16 +199,16 @@ bool Core::changeGroupChat( const User& u, const Group& g )
   if( user_added_string_list.size() > 0 )
   {
     if( u.isLocal() )
-      sHtmlMsg = tr( "%1 You have added members: %2." ).arg( IconManager::instance().toHtml( "group-add.png", "*G*" ), Bee::stringListToTextString( user_added_string_list, -1, "" ) );
+      sHtmlMsg = tr( "%1 You have added members: %2." ).arg( IconManager::instance().toHtml( "group-add.png", "*G*" ), Bee::stringListToTextString( user_added_string_list ) );
     else
-      sHtmlMsg = tr( "%1 %2 has added members: %3." ).arg( IconManager::instance().toHtml( "group-add.png", "*G*" ), u.name(), Bee::stringListToTextString( user_added_string_list, -1, "" ) );
+      sHtmlMsg = tr( "%1 %2 has added members: %3." ).arg( IconManager::instance().toHtml( "group-add.png", "*G*" ), u.name(), Bee::stringListToTextString( user_added_string_list ) );
     c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
     chat_changed = true;
   }
 
   if( user_removed_string_list.size() > 0 || user_added_string_list.size() > 0 )
   {
-    sHtmlMsg = tr( "%1 Chat with %2." ).arg( IconManager::instance().toHtml( "group.png", "*G*" ), Bee::stringListToTextString( user_string_list, -1, "" ) );
+    sHtmlMsg = tr( "%1 Chat with %2." ).arg( IconManager::instance().toHtml( "group.png", "*G*" ), Bee::stringListToTextString( user_string_list ) );
     c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Header ) );
   }
 
@@ -424,7 +424,7 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
     }
 
     if( !offline_users.isEmpty() )
-      dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "The message will be delivered to %1." ).arg( Bee::stringListToTextString( offline_users, 3, tr( "and %1 other users" ) ) ),
+      dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "The message will be delivered to %1." ).arg( Bee::stringListToTextString( offline_users, 3 ) ),
                              DispatchToChat, ChatMessage::Other );
   }
 
@@ -748,7 +748,7 @@ void Core::addChatHeader( Chat* p_chat )
       if( !u.isLocal() )
         user_string_list.append( u.name() );
     }
-    header_msg = tr( "%1 Chat with %2." ).arg( IconManager::instance().toHtml( "group.png", "*G*" ), Bee::stringListToTextString( user_string_list, -1, "" ) );
+    header_msg = tr( "%1 Chat with %2." ).arg( IconManager::instance().toHtml( "group.png", "*G*" ), Bee::stringListToTextString( user_string_list ) );
   }
 
   p_chat->addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( header_msg ), ChatMessage::Header ) );

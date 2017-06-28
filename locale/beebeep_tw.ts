@@ -3686,6 +3686,10 @@ Please select a different name.</source>
         <source>Open chat with all users</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>and %1 others</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RainbowTextMarker</name>

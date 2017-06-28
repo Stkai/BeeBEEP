@@ -3786,6 +3786,10 @@ Inserisci un nome differente.</translation>
         <source>All Users</source>
         <translation type="obsolete">Tutti</translation>
     </message>
+    <message>
+        <source>and %1 others</source>
+        <translation>e altri %1</translation>
+    </message>
 </context>
 <context>
     <name>RainbowTextMarker</name>

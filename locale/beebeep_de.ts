@@ -3720,6 +3720,10 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>All Users</source>
         <translation type="obsolete">Alle Benutzer</translation>
     </message>
+    <message>
+        <source>and %1 others</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RainbowTextMarker</name>

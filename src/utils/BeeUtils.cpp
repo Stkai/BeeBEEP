@@ -742,7 +742,7 @@ void Bee::setWindowStaysOnTop( QWidget* w, bool enable )
     QMetaObject::invokeMethod( w, "show", Qt::QueuedConnection );
 }
 
-QString Bee::stringListToTextString( const QStringList& sl, int max_items, const QString& max_items_text )
+QString Bee::stringListToTextString( const QStringList& sl, int max_items )
 {
   if( sl.isEmpty() )
     return "";
@@ -752,7 +752,7 @@ QString Bee::stringListToTextString( const QStringList& sl, int max_items, const
     return sl.join( QString( " %1 " ).arg( QObject::tr( "and" ) ) );
 
   QStringList sl_to_join;
-  if( max_items < 1 || max_items_text.isEmpty() )
+  if( max_items < 1 || max_items > (sl.size()-1))
     max_items = sl.size()-1;
   int num_items = 0;
 
@@ -775,7 +775,7 @@ QString Bee::stringListToTextString( const QStringList& sl, int max_items, const
     }
   }
   else
-    s_joined.append( QString( " %1" ).arg( max_items_text.arg( diff_items ) ) );
+    s_joined.append( QString( " %1" ).arg( QObject::tr( "and %1 others" ).arg( diff_items ) ) );
 
   return s_joined;
 }

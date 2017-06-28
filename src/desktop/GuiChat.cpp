@@ -274,7 +274,7 @@ void GuiChat::updateActions( const Chat& c, bool is_connected, int connected_use
 
   if( mp_actShareDesktop->isChecked() )
   {
-    mp_actShareDesktop->setToolTip( tr( "Your desktop is shared with %1" ).arg( Bee::stringListToTextString( share_desktop_users, 5, tr( "and %1 other users" ) ) ) );
+    mp_actShareDesktop->setToolTip( tr( "Your desktop is shared with %1" ).arg( Bee::stringListToTextString( share_desktop_users, 5 ) ) );
   }
   else
   {

@@ -224,8 +224,6 @@ void Core::closeConnection( Connection *c )
 #endif
   c->disconnect();
   c->abortConnection();
-  // do not delete later connection... socket notifier in qabstractsocket.cpp can crash
-  // 4.0.1 fixme... I want to test it...
   c->deleteLater();
 }
 
