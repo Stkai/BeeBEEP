@@ -56,9 +56,6 @@ protected slots:
   void resetNews();
 
 private:
-  void setBackgroundColor( const QString& );
-
-private:
   QString m_prev_sys_mess;
   QMenu* mp_menuContext;
 

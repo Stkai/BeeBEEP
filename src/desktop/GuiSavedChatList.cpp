@@ -41,7 +41,8 @@ GuiSavedChatList::GuiSavedChatList( QWidget* parent )
   mp_twSavedChatList->setObjectName( "GuiCustomList" );
   QString w_stylesheet = QString( "#GuiCustomList { background: white url(%1);"
                         "background-repeat: no-repeat;"
-                        "background-position: bottom center; }" ).arg( IconManager::instance().iconPath( "saved-chat-list.png" ) );
+                        "background-position: bottom center;"
+                        "color: black; }" ).arg( IconManager::instance().iconPath( "saved-chat-list.png" ) );
   mp_twSavedChatList->setStyleSheet( w_stylesheet );
 
   mp_twSavedChatList->setContextMenuPolicy( Qt::CustomContextMenu );

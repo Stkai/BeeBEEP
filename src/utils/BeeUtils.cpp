@@ -848,3 +848,15 @@ QString Bee::beeColorsToHtmlText( const QString& txt )
     bee_txt.append( QString( "<font color=%1>%2</font>" ).arg( (i % 2 == 0) ? "#000000" : "#dede00" ).arg( txt.at( i ) ) );
   return bee_txt;
 }
+
+void Bee::setBackgroundColor( QWidget* w, const QColor& c )
+{
+  QPalette pal = w->palette();
+  pal.setBrush( QPalette::Base, QBrush( c ) );
+  w->setPalette( pal );
+}
+
+QColor Bee::selectColor( QWidget* w, const QColor& default_color )
+{
+  return QColorDialog::getColor( default_color, w );
+}

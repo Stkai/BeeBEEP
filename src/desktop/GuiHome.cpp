@@ -113,7 +113,7 @@ int GuiHome::loadSystemMessages()
 {
   int num_sys_msg = 0;
   mp_teSystem->clear();
-  setBackgroundColor( Settings::instance().homeBackgroundColor() );
+  Bee::setBackgroundColor( mp_teSystem, QColor( Settings::instance().homeBackgroundColor() ) );
   Chat c = ChatManager::instance().defaultChat();
   foreach( ChatMessage cm, c.messages() )
   {
@@ -177,19 +177,12 @@ void GuiHome::printActivities()
   dlg->deleteLater();
 }
 
-void GuiHome::setBackgroundColor( const QString& color_name )
-{
-  QPalette pal = mp_teSystem->palette();
-  pal.setBrush( QPalette::Base, QBrush( QColor( color_name ) ) );
-  mp_teSystem->setPalette( pal );
-}
-
 void GuiHome::selectBackgroundColor()
 {
-  QColor c = QColorDialog::getColor( QColor( Settings::instance().homeBackgroundColor() ), this );
+  QColor c = Bee::selectColor( this, Settings::instance().homeBackgroundColor() );
   if( c.isValid() )
   {
     Settings::instance().setHomeBackgroundColor( c.name() );
-    setBackgroundColor( c.name() );
+    Bee::setBackgroundColor( mp_teSystem, c );
   }
 }

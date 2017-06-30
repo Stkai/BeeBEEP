@@ -45,7 +45,8 @@ GuiChatList::GuiChatList( QWidget* parent )
   mp_twChatList->setObjectName( "GuiCustomList" );
   QString w_stylesheet = QString( "#GuiCustomList { background: white url(%1);"
                         "background-repeat: no-repeat;"
-                        "background-position: bottom center; }" ).arg( IconManager::instance().iconPath( "chat-list.png" ) );
+                        "background-position: bottom center;"
+                        "color: black; }" ).arg( IconManager::instance().iconPath( "chat-list.png" ) );
   mp_twChatList->setStyleSheet( w_stylesheet );
 
   m_chatSelected = ID_INVALID;

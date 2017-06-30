@@ -77,12 +77,13 @@ namespace Bee
   void setWindowStaysOnTop( QWidget*, bool );
   QString stringListToTextString( const QStringList&, int max_items = -1 );
   void removeContextHelpButton( QWidget* );
+  QColor selectColor( QWidget*, const QColor& default_color );
+  void setBackgroundColor( QWidget*, const QColor& );
   inline bool isTimeToCheck( int ticks, int tick_for_check );
   void showUp( QWidget* );
   void raiseOnTop( QWidget* );
   bool areStringListEqual( const QStringList&, const QStringList&, Qt::CaseSensitivity cs = Qt::CaseInsensitive );
   QString dateTimeToString( const QDateTime& );
-
   QString beeColorsToHtmlText( const QString& );
 }
 
