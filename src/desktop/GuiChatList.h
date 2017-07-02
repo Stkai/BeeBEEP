@@ -58,9 +58,11 @@ protected slots:
   void editChatSelected();
   void filterText( const QString& );
   void clearFilter();
+  void selectBackgroundColor();
 
 protected:
   GuiChatItem* itemFromChatId( VNumber );
+  void updateBackground();
 
 private:
   QMenu* mp_menuContext;

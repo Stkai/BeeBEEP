@@ -43,13 +43,9 @@ GuiUserList::GuiUserList( QWidget* parent )
   mp_twUsers->setSortingEnabled( true );
   mp_twUsers->setColumnCount( 1 );
   mp_twUsers->setObjectName( "GuiCustomList" );
-  QString w_stylesheet = QString( "#GuiCustomList { background: white url(%1);"
-                        "background-repeat: no-repeat;"
-                        "background-position: bottom center;"
-                        "color: black; }" ).arg( IconManager::instance().iconPath( "user-list.png" ) );
-  mp_twUsers->setStyleSheet( w_stylesheet );
   mp_twUsers->setMouseTracking( true );
   mp_twUsers->setHeaderHidden( true );
+  updateBackground();
 
   m_filter = "";
   m_blockShowChatRequest = false;
@@ -295,4 +291,38 @@ void GuiUserList::onItemEntered( QTreeWidgetItem* item, int )
     if( !isActiveWindow() )
       QToolTip::showText( QCursor::pos(), item->toolTip( 0 ) );
   }
+}
+
+void GuiUserList::setContextMenuUsers( QMenu* new_value )
+{
+  mp_menuUsers = new_value;
+  mp_menuUsers->addSeparator();
+  mp_menuUsers->addAction( IconManager::instance().icon( "background-color.png" ), tr( "Change background color" ) + QString("..."), this, SLOT( selectBackgroundColor() ) );
+}
+
+void GuiUserList::setMenuSettings( QMenu* new_value )
+{
+  mp_menuSettings = new_value;
+  mp_menuSettings->addSeparator();
+  mp_menuSettings->addAction( IconManager::instance().icon( "background-color.png" ), tr( "Change background color" ) + QString("..."), this, SLOT( selectBackgroundColor() ) );
+}
+
+void GuiUserList::selectBackgroundColor()
+{
+  QColor c = Bee::selectColor( this, Settings::instance().userListBackgroundColor() );
+  if( c.isValid() )
+  {
+    Settings::instance().setUserListBackgroundColor( c.name() );
+    updateBackground();
+  }
+}
+
+void GuiUserList::updateBackground()
+{
+  QString w_stylesheet = QString( "#GuiCustomList { background: %1 url(%2);"
+                           "background-repeat: no-repeat;"
+                           "background-position: bottom center;"
+                           "color: black; }" ).arg( Settings::instance().userListBackgroundColor(),
+                                                    IconManager::instance().iconPath( "user-list.png" ) );
+  mp_twUsers->setStyleSheet( w_stylesheet );
 }

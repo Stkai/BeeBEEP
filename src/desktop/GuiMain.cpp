@@ -1767,7 +1767,10 @@ void GuiMain::setUserStatusSelected( int user_status )
     if( !Settings::instance().promptOnCloseEvent() || QMessageBox::question( this, Settings::instance().programName(),
                                tr( "Do you want to disconnect from %1 network?" ).arg( Settings::instance().programName() ),
                                QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes )
+    {
+      m_autoConnectOnInterfaceUp = false;
       stopCore();
+    }
     return;
   }
 

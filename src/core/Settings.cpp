@@ -150,6 +150,10 @@ Settings::Settings()
   m_showChatsInOneWindow = true;
   m_homeBackgroundColor = "#f5f5f5";
   m_defaultChatBackgroundColor = "#f5f5f5";
+  m_userListBackgroundColor = "#ffffff";
+  m_chatListBackgroundColor = "#ffffff";
+  m_groupListBackgroundColor = "#ffffff";
+  m_savedChatListBackgroundColor = "#ffffff";
   m_maxLogLines = 5000;
 
   m_enableFileTransfer = true;
@@ -971,6 +975,10 @@ void Settings::load()
   m_useNativeDialogs = sets->value( "UseNativeFileDialogs", m_useNativeDialogs ).toBool();
   m_homeShowMessageTimestamp = sets->value( "ShowActivitiesTimestamp", false ).toBool();
   m_homeBackgroundColor = sets->value( "HomeBackgroundColor", m_homeBackgroundColor ).toString();
+  m_userListBackgroundColor = sets->value( "UserListBackgroundColor", m_userListBackgroundColor ).toString();
+  m_chatListBackgroundColor = sets->value( "ChatListBackgroundColor", m_chatListBackgroundColor ).toString();
+  m_groupListBackgroundColor = sets->value( "GroupListBackgroundColor", m_groupListBackgroundColor ).toString();
+  m_savedChatListBackgroundColor = sets->value( "SavedChatListBackgroundColor", m_savedChatListBackgroundColor ).toString();
   m_usePreviewFileDialog = sets->value( "UsePreviewFileDialog", m_usePreviewFileDialog ).toBool();
   m_previewFileDialogImageSize = qMax( 100, (int)sets->value( "PreviewFileDialogImageSize", m_previewFileDialogImageSize ).toInt() );
   m_userSortingMode = qMax( 0, (int)sets->value( "UserSortingMode", 0 ).toInt() );
@@ -1271,6 +1279,10 @@ void Settings::save()
   sets->setValue( "UseNativeFileDialogs", m_useNativeDialogs );
   sets->setValue( "ShowActivitiesTimestamp", m_homeShowMessageTimestamp );
   sets->setValue( "HomeBackgroundColor", m_homeBackgroundColor );
+  sets->setValue( "UserListBackgroundColor", m_userListBackgroundColor );
+  sets->setValue( "ChatListBackgroundColor", m_chatListBackgroundColor );
+  sets->setValue( "GroupListBackgroundColor", m_groupListBackgroundColor );
+  sets->setValue( "SavedChatListBackgroundColor", m_savedChatListBackgroundColor );
   sets->setValue( "UsePreviewFileDialog", m_usePreviewFileDialog );
   sets->setValue( "PreviewFileDialogGeometry", m_previewFileDialogGeometry );
   sets->setValue( "PreviewFileDialogImageSize", m_previewFileDialogImageSize );

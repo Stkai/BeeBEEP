@@ -44,8 +44,8 @@ public:
   void updateUsers();
   void updateChat( const Chat& );
 
-  inline void setMenuSettings( QMenu* );
-  inline void setContextMenuUsers( QMenu* );
+  void setMenuSettings( QMenu* );
+  void setContextMenuUsers( QMenu* );
   inline void setMainToolTip( const QString& );
 
   void onTickEvent( int );
@@ -64,18 +64,19 @@ protected slots:
   void clearFilter();
   void showMenuSettings();
   void onItemEntered( QTreeWidgetItem*, int );
+  void selectBackgroundColor();
 
-private:
+protected:
   GuiUserItem* itemFromUserId( VNumber );
   GuiUserItem* itemFromChatId( VNumber );
   void sortUsers();
   void resetList();
+  void updateBackground();
 
+private:
   QString m_filter;
-
   QMenu* mp_menuSettings;
   QMenu* mp_menuUsers;
-
   bool m_blockShowChatRequest;
   bool m_showOnlyChatMembers;
 
@@ -83,8 +84,6 @@ private:
 
 
 // Inline Functions
-inline void GuiUserList::setMenuSettings( QMenu* new_value ) { mp_menuSettings = new_value; }
-inline void GuiUserList::setContextMenuUsers( QMenu* new_value ) { mp_menuUsers = new_value; }
 inline void GuiUserList::setMainToolTip( const QString& new_value ) { mp_twUsers->setToolTip( new_value ); }
 
 #endif // BEEBEEP_GUIUSERLIST_H

@@ -176,6 +176,14 @@ public:
   inline void setHomeShowMessageTimestamp( bool );
   inline void setHomeBackgroundColor( const QString& );
   inline const QString& homeBackgroundColor() const;
+  inline void setUserListBackgroundColor( const QString& );
+  inline const QString& userListBackgroundColor() const;
+  inline void setChatListBackgroundColor( const QString& );
+  inline const QString& chatListBackgroundColor() const;
+  inline void setGroupListBackgroundColor( const QString& );
+  inline const QString& groupListBackgroundColor() const;
+  inline void setSavedChatListBackgroundColor( const QString& );
+  inline const QString& savedChatListBackgroundColor() const;
   inline void setChatUseHtmlTags( bool );
   inline bool chatUseHtmlTags() const;
   inline void setChatUseClickableLinks( bool );
@@ -681,6 +689,10 @@ private:
 
   bool m_homeShowMessageTimestamp;
   QString m_homeBackgroundColor;
+  QString m_userListBackgroundColor;
+  QString m_chatListBackgroundColor;
+  QString m_groupListBackgroundColor;
+  QString m_savedChatListBackgroundColor;
 
   QString m_applicationUuid;
   QDate m_applicationUuidCreationDate;
@@ -985,6 +997,14 @@ inline void Settings::setShowChatsInOneWindow( bool new_value ) { m_showChatsInO
 inline bool Settings::showChatsInOneWindow() const { return m_showChatsInOneWindow; }
 inline void Settings::setHomeBackgroundColor( const QString& new_value ) { m_homeBackgroundColor = new_value; }
 inline const QString& Settings::homeBackgroundColor() const { return m_homeBackgroundColor; }
+inline void Settings::setUserListBackgroundColor( const QString& new_value ) { m_userListBackgroundColor = new_value; }
+inline const QString& Settings::userListBackgroundColor() const { return m_userListBackgroundColor; }
+inline void Settings::setChatListBackgroundColor( const QString& new_value ) { m_chatListBackgroundColor = new_value; }
+inline const QString& Settings::chatListBackgroundColor() const { return m_chatListBackgroundColor; }
+inline void Settings::setGroupListBackgroundColor( const QString& new_value ) { m_groupListBackgroundColor = new_value; }
+inline const QString& Settings::groupListBackgroundColor() const { return m_groupListBackgroundColor; }
+inline void Settings::setSavedChatListBackgroundColor( const QString& new_value ) { m_savedChatListBackgroundColor = new_value; }
+inline const QString& Settings::savedChatListBackgroundColor() const { return m_savedChatListBackgroundColor; }
 inline void Settings::setRefusedChats( const QStringList& new_value ) { m_refusedChats = new_value; }
 inline const QStringList& Settings::refusedChats() const { return m_refusedChats; }
 inline void Settings::setIconSourcePath( const QString& new_value ) { m_iconSourcePath = new_value; }

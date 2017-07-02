@@ -39,18 +39,12 @@ GuiGroupList::GuiGroupList( QWidget* parent )
   mp_twGroupList->setRootIsDecorated( true );
   mp_twGroupList->setSortingEnabled( true );
   mp_twGroupList->setObjectName( "GuiCustomList" );
-  QString w_stylesheet = QString( "#GuiCustomList { background: white url(%1);"
-                        "background-repeat: no-repeat;"
-                        "background-position: bottom center;"
-                        "color: black; }" ).arg( IconManager::instance().iconPath( "group-list.png" ) );
-
-  mp_twGroupList->setStyleSheet( w_stylesheet );
-
   mp_twGroupList->setContextMenuPolicy( Qt::CustomContextMenu );
   mp_twGroupList->setMouseTracking( true );
   mp_twGroupList->setSortingEnabled( true );
   mp_twGroupList->setIconSize( Settings::instance().avatarIconSize() );
   mp_twGroupList->setHeaderHidden( true );
+  updateBackground();
 
 #if QT_VERSION >= 0x040700
   mp_leFilter->setPlaceholderText( tr( "Search group" ) );
@@ -185,6 +179,8 @@ void GuiGroupList::showGroupMenu( const QPoint& p )
 
     mp_contextMenu->addAction( mp_actCreateGroup );
     mp_actCreateGroup->setEnabled( UserManager::instance().userList().toList().size() > 1 );
+    mp_contextMenu->addSeparator();
+    mp_contextMenu->addAction( IconManager::instance().icon( "background-color.png" ), tr( "Change background color" ) + QString("..."), this, SLOT( selectBackgroundColor() ) );
     mp_contextMenu->exec( QCursor::pos() );
     return;
   }
@@ -206,6 +202,9 @@ void GuiGroupList::showGroupMenu( const QPoint& p )
       mp_contextMenu->addAction( mp_actEnableGroupNotification );
     else
       mp_contextMenu->addAction( mp_actDisableGroupNotification );
+
+    mp_contextMenu->addSeparator();
+    mp_contextMenu->addAction( IconManager::instance().icon( "background-color.png" ), tr( "Change background color" ) + QString("..."), this, SLOT( selectBackgroundColor() ) );
     mp_contextMenu->exec( QCursor::pos() );
   }
   else
@@ -282,3 +281,24 @@ void GuiGroupList::clearFilter()
   mp_leFilter->setText( "" );
   mp_leFilter->setFocus();
 }
+
+void GuiGroupList::selectBackgroundColor()
+{
+  QColor c = Bee::selectColor( this, Settings::instance().groupListBackgroundColor() );
+  if( c.isValid() )
+  {
+    Settings::instance().setGroupListBackgroundColor( c.name() );
+    updateBackground();
+  }
+}
+
+void GuiGroupList::updateBackground()
+{
+  QString w_stylesheet = QString( "#GuiCustomList { background: %1 url(%2);"
+                          "background-repeat: no-repeat;"
+                          "background-position: bottom center;"
+                          "color: black; }" ).arg( Settings::instance().groupListBackgroundColor(),
+                                                   IconManager::instance().iconPath( "group-list.png" ) );
+  mp_twGroupList->setStyleSheet( w_stylesheet );
+}
+

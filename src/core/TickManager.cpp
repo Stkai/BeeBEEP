@@ -30,6 +30,12 @@ TickManager::TickManager( QObject *parent )
   setObjectName( "TickManager" );
 }
 
+TickManager::~TickManager()
+{
+  if( isActive() )
+    stopTicks();
+}
+
 bool TickManager::isActive() const
 {
   QMutexLocker mutex_locker( &m_mutex );
@@ -49,7 +55,7 @@ void TickManager::startTicks()
 #ifdef BEEBEEP_DEBUG
   qDebug() << "TickManager started:" << m_ticks << "ticks";
 #endif
-  mp_timer = new QTimer( this );
+  mp_timer = new QTimer;
   mp_timer->setInterval( TICK_INTERVAL );
   connect( mp_timer, SIGNAL( timeout() ), this, SLOT( onTimerTimeout() ) );
   mp_timer->start();

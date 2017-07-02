@@ -274,7 +274,7 @@ void GuiFloatingChat::checkWindowFlagsAndShow()
   if( !Settings::instance().floatingChatGeometry().isEmpty() )
     restoreGeometry( Settings::instance().floatingChatGeometry() );
   else
-    resize( 640, 420 );
+    resize( 600, 400 );
 
   QSplitter* chat_splitter = mp_chat->chatSplitter();
   if( Settings::instance().floatingChatSplitterState().isEmpty() )

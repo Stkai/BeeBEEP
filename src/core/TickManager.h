@@ -33,6 +33,7 @@ class TickManager : public QObject
 
 public:
   explicit TickManager( QObject* parent = 0 );
+  ~TickManager();
 
   bool isActive() const;
 

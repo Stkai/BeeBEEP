@@ -56,10 +56,13 @@ protected slots:
   void disableGroupNotification();
   void filterText( const QString& );
   void clearFilter();
+  void selectBackgroundColor();
+
+protected:
+  GuiGroupItem* itemFromId( VNumber );
+  void updateBackground();
 
 private:
-  GuiGroupItem* itemFromId( VNumber );
-
   QAction* mp_actCreateGroup;
   QAction* mp_actEditGroup;
   QAction* mp_actOpenChat;

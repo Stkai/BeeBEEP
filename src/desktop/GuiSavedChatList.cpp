@@ -39,16 +39,11 @@ GuiSavedChatList::GuiSavedChatList( QWidget* parent )
   mp_twSavedChatList->setRootIsDecorated( false );
   mp_twSavedChatList->setSortingEnabled( true );
   mp_twSavedChatList->setObjectName( "GuiCustomList" );
-  QString w_stylesheet = QString( "#GuiCustomList { background: white url(%1);"
-                        "background-repeat: no-repeat;"
-                        "background-position: bottom center;"
-                        "color: black; }" ).arg( IconManager::instance().iconPath( "saved-chat-list.png" ) );
-  mp_twSavedChatList->setStyleSheet( w_stylesheet );
-
   mp_twSavedChatList->setContextMenuPolicy( Qt::CustomContextMenu );
   mp_twSavedChatList->setMouseTracking( true );
   mp_twSavedChatList->setIconSize( Settings::instance().avatarIconSize() );
   mp_twSavedChatList->setHeaderHidden( true );
+  updateBackground();
 
   m_savedChatSelected = "";
   m_blockShowChatRequest = false;
@@ -108,6 +103,8 @@ void GuiSavedChatList::showSavedChatMenu( const QPoint& p )
     mp_twSavedChatList->clearSelection();
   }
 
+  mp_menuContext->addSeparator();
+  mp_menuContext->addAction( IconManager::instance().icon( "background-color.png" ), tr( "Change background color" ) + QString("..."), this, SLOT( selectBackgroundColor() ) );
   mp_menuContext->exec( QCursor::pos() );
 }
 
@@ -184,4 +181,24 @@ void GuiSavedChatList::clearFilter()
 {
   mp_leFilter->setText( "" );
   mp_leFilter->setFocus();
+}
+
+void GuiSavedChatList::selectBackgroundColor()
+{
+  QColor c = Bee::selectColor( this, Settings::instance().savedChatListBackgroundColor() );
+  if( c.isValid() )
+  {
+    Settings::instance().setSavedChatListBackgroundColor( c.name() );
+    updateBackground();
+  }
+}
+
+void GuiSavedChatList::updateBackground()
+{
+  QString w_stylesheet = QString( "#GuiCustomList { background: %1 url(%2);"
+                           "background-repeat: no-repeat;"
+                           "background-position: bottom center;"
+                           "color: black; }" ).arg( Settings::instance().savedChatListBackgroundColor(),
+                                                    IconManager::instance().iconPath( "saved-chat-list.png" ) );
+  mp_twSavedChatList->setStyleSheet( w_stylesheet );
 }

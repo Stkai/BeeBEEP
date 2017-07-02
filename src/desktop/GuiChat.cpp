@@ -159,12 +159,11 @@ void GuiChat::setupToolBar( QToolBar* chat_bar )
   updateActionsOnFocusChanged();
   mp_actSendFile = chat_bar->addAction( IconManager::instance().icon( "send-file.png" ), tr( "Send file" ), this, SLOT( sendFile() ) );
   mp_actSendFolder = chat_bar->addAction( IconManager::instance().icon( "send-folder.png" ), tr( "Send folder" ), this, SLOT( sendFolder() ) );
-  chat_bar->addAction( mp_actSaveAs );
-  chat_bar->addAction( mp_actPrint );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   chat_bar->addAction( mp_actScreenshot );
   chat_bar->addAction( mp_actShareDesktop );
 #endif
+  chat_bar->addAction( mp_actSaveAs );
 
   mp_teMessage->addActionToContextMenu( mp_actSendFile );
   mp_teMessage->addActionToContextMenu( mp_actSendFolder );
@@ -306,8 +305,7 @@ void GuiChat::customContextMenu( const QPoint& )
   mp_menuContext->addSeparator();
   mp_menuContext->addAction( mp_actClear );
   mp_menuContext->addSeparator();
-  mp_menuContext->addAction( mp_actSendFile );
-  mp_menuContext->addAction( mp_actSendFolder );
+  mp_menuContext->addAction( mp_actPrint );
   mp_menuContext->addSeparator();
   mp_menuContext->addAction( mp_actRestoreDefaultFont );
   mp_menuContext->exec( QCursor::pos() );

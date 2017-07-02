@@ -53,6 +53,10 @@ protected slots:
   void linkSavedChatSelected();
   void filterText( const QString& );
   void clearFilter();
+  void selectBackgroundColor();
+
+protected:
+  void updateBackground();
 
 private:
   QString m_savedChatSelected;

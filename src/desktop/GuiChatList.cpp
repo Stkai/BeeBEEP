@@ -43,11 +43,7 @@ GuiChatList::GuiChatList( QWidget* parent )
   mp_twChatList->setMouseTracking( true );
   mp_twChatList->setHeaderHidden( true );
   mp_twChatList->setObjectName( "GuiCustomList" );
-  QString w_stylesheet = QString( "#GuiCustomList { background: white url(%1);"
-                        "background-repeat: no-repeat;"
-                        "background-position: bottom center;"
-                        "color: black; }" ).arg( IconManager::instance().iconPath( "chat-list.png" ) );
-  mp_twChatList->setStyleSheet( w_stylesheet );
+  updateBackground();
 
   m_chatSelected = ID_INVALID;
   m_blockShowChatRequest = false;
@@ -187,6 +183,9 @@ void GuiChatList::showChatMenu( const QPoint& p )
     mp_twChatList->clearSelection();
   }
 
+  mp_menuContext->addSeparator();
+  mp_menuContext->addAction( IconManager::instance().icon( "background-color.png" ), tr( "Change background color" ) + QString("..."), this, SLOT( selectBackgroundColor() ) );
+
   mp_menuContext->exec( QCursor::pos() );
 }
 
@@ -231,4 +230,24 @@ void GuiChatList::clearFilter()
 {
   mp_leFilter->setText( "" );
   mp_leFilter->setFocus();
+}
+
+void GuiChatList::selectBackgroundColor()
+{
+  QColor c = Bee::selectColor( this, Settings::instance().chatListBackgroundColor() );
+  if( c.isValid() )
+  {
+    Settings::instance().setChatListBackgroundColor( c.name() );
+    updateBackground();
+  }
+}
+
+void GuiChatList::updateBackground()
+{
+  QString w_stylesheet = QString( "#GuiCustomList { background: %1 url(%2);"
+                           "background-repeat: no-repeat;"
+                           "background-position: bottom center;"
+                           "color: black; }" ).arg( Settings::instance().chatListBackgroundColor(),
+                                                    IconManager::instance().iconPath( "chat-list.png" ) );
+  mp_twChatList->setStyleSheet( w_stylesheet );
 }

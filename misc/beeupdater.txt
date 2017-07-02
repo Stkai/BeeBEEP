@@ -11,4 +11,4 @@ CurrentVersion=4.2.0
 CurrentVersion=4.2.0
 
 [Info]
-News="<a style='text-decoration: none;' href='www.marcomastroddi.com'><b><font color=#dede00>Give a look to Marco Mastroddi new website!</font></a></b><br /><i>Get Lucky!</i><br /><b>Go Wild!</b>"
+News="<a style='text-decoration: none;' href='http://www.marcomastroddi.com'><b><font color=#dede00>Give a look to Marco Mastroddi new website!</font></a></b><br /><i>Get Lucky!</i><br /><b>Go Wild!</b>"
