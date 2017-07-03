@@ -54,8 +54,10 @@ protected slots:
   void openMyBox();
   void updateMyBox();
   void updateOutBox();
+  void updateOutBoxToBaseFolder();
   void enableMyUpdateButton();
   void enableOutUpdateButton();
+  void enableUpdateButton();
 
   void onMyItemDoubleClicked( QTreeWidgetItem*, int );
   void onOutItemDoubleClicked( QTreeWidgetItem*, int );

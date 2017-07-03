@@ -140,6 +140,9 @@
     </item>
     <item row="2" column="0" colspan="5">
      <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="spacing">
+       <number>12</number>
+      </property>
       <item>
        <spacer name="horizontalSpacer">
         <property name="orientation">
@@ -155,11 +158,58 @@
       </item>
       <item>
        <widget class="QCheckBox" name="mp_cbEnableMyBox">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>26</height>
+         </size>
+        </property>
         <property name="layoutDirection">
          <enum>Qt::LeftToRight</enum>
         </property>
         <property name="text">
          <string>Enable my ShareBox</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="mp_pbSelectMyBox">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>26</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>26</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Select your folder</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../beebeep.qrc">
+          <normaloff>:/images/sharebox.png</normaloff>:/images/sharebox.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -177,47 +227,6 @@
        </spacer>
       </item>
      </layout>
-    </item>
-    <item row="0" column="0">
-     <widget class="QPushButton" name="mp_pbSelectMyBox">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>26</width>
-        <height>26</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>26</width>
-        <height>26</height>
-       </size>
-      </property>
-      <property name="toolTip">
-       <string>Select your folder</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="icon">
-       <iconset resource="../beebeep.qrc">
-        <normaloff>:/images/sharebox.png</normaloff>:/images/sharebox.png</iconset>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>24</width>
-        <height>26</height>
-       </size>
-      </property>
-      <property name="flat">
-       <bool>true</bool>
-      </property>
-     </widget>
     </item>
     <item row="1" column="0" colspan="6">
      <widget class="GuiShareBoxFileInfoList" name="mp_myBox">
@@ -455,6 +464,9 @@
     </item>
     <item row="2" column="0" colspan="3">
      <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <property name="spacing">
+       <number>12</number>
+      </property>
       <item>
        <widget class="QLabel" name="mp_lUsers">
         <property name="sizePolicy">
@@ -466,11 +478,11 @@
         <property name="minimumSize">
          <size>
           <width>60</width>
-          <height>0</height>
+          <height>26</height>
          </size>
         </property>
         <property name="text">
-         <string>Select box</string>
+         <string>Select user</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -484,6 +496,50 @@
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>26</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="mp_pbUpdate">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>26</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>26</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../beebeep.qrc">
+          <normaloff>:/images/update.png</normaloff>:/images/update.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>24</width>
+          <height>26</height>
+         </size>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -551,16 +607,17 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>mp_pbSelectMyBox</tabstop>
   <tabstop>mp_pbMyUpdate</tabstop>
   <tabstop>mp_pbMyOpenFolder</tabstop>
   <tabstop>mp_pbMyCreateFolder</tabstop>
   <tabstop>mp_myBox</tabstop>
   <tabstop>mp_cbEnableMyBox</tabstop>
+  <tabstop>mp_pbSelectMyBox</tabstop>
   <tabstop>mp_pbOutUpdate</tabstop>
   <tabstop>mp_pbOutCreateFolder</tabstop>
   <tabstop>mp_outBox</tabstop>
   <tabstop>mp_comboUsers</tabstop>
+  <tabstop>mp_pbUpdate</tabstop>
  </tabstops>
  <resources>
   <include location="../beebeep.qrc"/>

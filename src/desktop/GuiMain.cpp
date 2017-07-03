@@ -2567,7 +2567,14 @@ void GuiMain::checkAutoStartOnBoot( bool add_service )
   if( add_service )
   {
     if( Settings::instance().addStartOnSystemBoot() )
-      QMessageBox::information( this, Settings::instance().programName(), tr( "Now %1 will start on windows boot." ).arg( Settings::instance().programName() ) );
+    {
+      QString alert_message = tr( "Now %1 will start on windows boot." ).arg( Settings::instance().programName() );
+#ifdef Q_OS_WIN
+      if( QSysInfo::windowsVersion() >= QSysInfo::WV_WINDOWS8_1 )
+        alert_message += QString( "\n%1" ).arg( "Note: you have to disable the alert window for unsigned software." );
+#endif
+      QMessageBox::information( this, Settings::instance().programName(), alert_message );
+    }
     else
       QMessageBox::warning( this, Settings::instance().programName(), tr( "Unable to add this key in the registry: permission denied." ) );
   }
@@ -3773,6 +3780,7 @@ void GuiMain::setFileTransferEnabled( bool enable )
  {
    Settings::instance().setEnableFileSharing( false );
    Settings::instance().setUseShareBox( false );
+   mp_actEnableFileSharing->setChecked( false );
    beeCore->stopFileTransferServer();
    QMetaObject::invokeMethod( beeCore, "buildLocalShareList", Qt::QueuedConnection );
  }
@@ -3790,6 +3798,11 @@ void GuiMain::setFileSharingEnabled( bool enable )
   Settings::instance().setEnableFileSharing( enable );
   QMetaObject::invokeMethod( beeCore, "buildLocalShareList", Qt::QueuedConnection );
   checkViewActions();
+  if( !enable )
+  {
+    if( mp_fileSharing )
+      mp_fileSharing->close();
+  }
 }
 
 void GuiMain::showWorkgroups()

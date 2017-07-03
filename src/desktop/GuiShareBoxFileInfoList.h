@@ -58,7 +58,7 @@ protected:
   void dragEnterEvent( QDragEnterEvent* );
   void dragMoveEvent( QDragMoveEvent* );
   void dropEvent( QDropEvent* );
-  void performDrag();
+  bool performDrag();
 
 private:
   QPoint m_dragStartPoint;

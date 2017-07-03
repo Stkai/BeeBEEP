@@ -65,11 +65,13 @@ GuiShareBox::GuiShareBox( QWidget *parent )
   mp_pbMyCreateFolder->setToolTip( tr( "Create folder in your ShareBox" ) );
   mp_pbMyOpenFolder->setToolTip( tr( "Show current folder" ) );
   mp_pbOutUpdate->setToolTip( tr( "Update ShareBox" ) );
+  mp_pbUpdate->setToolTip( tr( "Update ShareBox" ) );
   mp_pbOutCreateFolder->setToolTip( tr( "Create folder in ShareBox" ) );
 
   mp_pbSelectMyBox->setIcon( IconManager::instance().icon( "sharebox.png" ) );
   mp_pbMyUpdate->setIcon( IconManager::instance().icon( "update.png" ) );
   mp_pbOutUpdate->setIcon( IconManager::instance().icon( "update.png" ) );
+  mp_pbUpdate->setIcon( IconManager::instance().icon( "update.png" ) );
   mp_pbMyCreateFolder->setIcon( IconManager::instance().icon( "folder-add.png" ) );
   mp_pbOutCreateFolder->setIcon( IconManager::instance().icon( "folder-add.png" ) );
   mp_pbMyOpenFolder->setIcon( IconManager::instance().icon( "folder.png" ) );
@@ -79,6 +81,7 @@ GuiShareBox::GuiShareBox( QWidget *parent )
   connect( mp_cbEnableMyBox, SIGNAL( toggled( bool ) ), this, SLOT( onEnableMyShareBoxClicked() ) );
   connect( mp_pbMyUpdate, SIGNAL( clicked() ), this, SLOT( updateMyBox() ) );
   connect( mp_pbOutUpdate, SIGNAL( clicked() ), this, SLOT( updateOutBox() ) );
+  connect( mp_pbUpdate, SIGNAL( clicked() ), this, SLOT( updateOutBoxToBaseFolder() ) );
   connect( mp_myBox, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( onMyItemDoubleClicked( QTreeWidgetItem*, int ) ) );
   connect( mp_outBox, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( onOutItemDoubleClicked( QTreeWidgetItem*, int ) ) );
   connect( mp_myBox, SIGNAL( dropEventRequest( const QString& ) ), this, SLOT( dropInMyBox( const QString& ) ) );
@@ -99,6 +102,7 @@ void GuiShareBox::updateShareBoxes()
       mp_comboUsers->addItem( u.name(), u.id() );
   }
 
+  mp_pbUpdate->setEnabled( mp_comboUsers->count() > 0 );
   updateMyBox();
   updateOutBox();
 }
@@ -131,13 +135,19 @@ void GuiShareBox::onEnableMyShareBoxClicked()
 void GuiShareBox::enableMyUpdateButton()
 {
   if( !mp_pbMyUpdate->isEnabled() )
-    mp_pbMyUpdate->setEnabled( true );
+    mp_pbMyUpdate->setEnabled( mp_cbEnableMyBox->isChecked() );
 }
 
 void GuiShareBox::enableOutUpdateButton()
 {
   if( !mp_pbOutUpdate->isEnabled() )
-    mp_pbOutUpdate->setEnabled( true );
+    mp_pbOutUpdate->setEnabled( mp_cbEnableMyBox->isChecked() );
+}
+
+void GuiShareBox::enableUpdateButton()
+{
+  if( !mp_pbUpdate->isEnabled() )
+    mp_pbUpdate->setEnabled( mp_comboUsers->count() > 0 );
 }
 
 void GuiShareBox::updateMyBox()
@@ -193,7 +203,7 @@ void GuiShareBox::updateOutBox()
   }
 }
 
-void GuiShareBox::updateBox( const User& u, const QString& folder_path, const QList<FileInfo>&  file_info_list )
+void GuiShareBox::updateBox( const User& u, const QString& folder_path, const QList<FileInfo>& file_info_list )
 {
   if( u.isLocal() )
   {
@@ -207,7 +217,7 @@ void GuiShareBox::updateBox( const User& u, const QString& folder_path, const QL
   }
 }
 
-void GuiShareBox::updateMyBox( const QString& folder_path, const QList<FileInfo>&  file_info_list )
+void GuiShareBox::updateMyBox( const QString& folder_path, const QList<FileInfo>& file_info_list )
 {
   m_myCurrentFolder = folder_path;
   mp_myBox->setFileInfoList( file_info_list );
@@ -411,6 +421,7 @@ void GuiShareBox::updateUser( const User& u )
   }
 
   mp_comboUsers->setEnabled( mp_comboUsers->count() > 0 );
+  mp_pbUpdate->setEnabled( mp_comboUsers->isEnabled() );
 }
 
 void GuiShareBox::onFileUploadCompleted( VNumber user_id, const FileInfo& fi )
@@ -490,4 +501,15 @@ void GuiShareBox::openMyBox()
     return;
   }
   emit openUrlRequest( QUrl::fromLocalFile( folder_path ) );
+}
+
+void GuiShareBox::updateOutBoxToBaseFolder()
+{
+  mp_pbUpdate->setEnabled( false );
+  if( mp_comboUsers->count() > 0 )
+  {
+    m_userId = ID_INVALID;
+    QTimer::singleShot( 10000, this, SLOT( enableUpdateButton() ) );
+    onShareBoxSelected( mp_comboUsers->currentIndex() );
+  }
 }

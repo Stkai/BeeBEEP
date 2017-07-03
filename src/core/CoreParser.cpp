@@ -519,34 +519,25 @@ void Core::parseShareBoxMessage( const User& u, const Message& m )
 {
   QString folder_name = Protocol::instance().folderNameFromShareBoxMessage( m );
 
+#ifdef BEEBEEP_DEBUG
   if( !Settings::instance().enableFileTransfer() )
-  {
-#ifdef BEEBEEP_DEBUG
     qDebug() << "Skips share box message arrived from" << qPrintable( u.path() ) << "(file transfer disabled)";
-#endif
-    sendMessageToLocalNetwork( u, Protocol::instance().refuseToShareBoxPath( folder_name, m.hasFlag( Message::Create ) ) );
-    return;
-  }
-
-  if( !Settings::instance().enableFileSharing() )
-  {
-#ifdef BEEBEEP_DEBUG
+  else if( !Settings::instance().enableFileSharing() )
     qDebug() << "Skips share box message arrived from" << qPrintable( u.path() ) << "(file sharing disabled)";
-#endif
-    sendMessageToLocalNetwork( u, Protocol::instance().refuseToShareBoxPath( folder_name, m.hasFlag( Message::Create ) ) );
-    return;
-  }
-
-  if( !Settings::instance().useShareBox() )
-  {
-#ifdef BEEBEEP_DEBUG
+  else if( !Settings::instance().useShareBox() )
     qDebug() << "Skips share box message arrived from" << qPrintable( u.path() ) << "(share box disabled)";
+  else
+    qDebug() << "Parsing share box message from" << qPrintable( u.path() ) << "for folder:" << qPrintable( folder_name );
 #endif
-    sendMessageToLocalNetwork( u, Protocol::instance().refuseToShareBoxPath( folder_name, m.hasFlag( Message::Create ) ) );
-    return;
-  }
 
-  if( m.hasFlag( Message::List ) )
+  bool sharebox_is_active = Settings::instance().enableFileTransfer() && Settings::instance().enableFileSharing() && Settings::instance().useShareBox();
+
+  if( !sharebox_is_active )
+  {
+    if( !m.hasFlag( Message::Refused ) )
+      sendMessageToLocalNetwork( u, Protocol::instance().refuseToShareBoxPath( folder_name, m.hasFlag( Message::Create ) ) );
+  }
+  else if( m.hasFlag( Message::List ) )
   {
     QList<FileInfo> file_info_list = Protocol::instance().messageToShareBoxFileList( m, u.networkAddress().hostAddress() );
     emit shareBoxAvailable( u, folder_name, file_info_list );

@@ -144,16 +144,22 @@ void GuiShareBoxFileInfoList::mouseMoveEvent( QMouseEvent* event )
   {
     int distance = (event->pos() - m_dragStartPoint).manhattanLength();
     if( distance >= QApplication::startDragDistance() )
-      performDrag();
+    {
+      if( !performDrag() )
+      {
+        event->accept();
+        return;
+      }
+    }
   }
   QTreeWidget::mouseMoveEvent( event );
 }
 
-void GuiShareBoxFileInfoList::performDrag()
+bool GuiShareBoxFileInfoList::performDrag()
 {
   QList<FileInfo> selected_list = selectedFileInfoList();
   if( selected_list.isEmpty() )
-    return;
+    return false;
 
   QStringList sl_path;
   foreach( FileInfo fi, selected_list )
@@ -180,6 +186,8 @@ void GuiShareBoxFileInfoList::performDrag()
 
   if( drag->exec( Qt::CopyAction ) == Qt::CopyAction )
     drag->deleteLater();
+
+  return true;
 }
 
 void GuiShareBoxFileInfoList::dragEnterEvent( QDragEnterEvent* event )
