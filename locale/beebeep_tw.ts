@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="zh_TW">
+<TS version="2.0" language="zh_TW">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -440,10 +440,6 @@
     </message>
     <message>
         <source>Nobody has received the message.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>and %1 other users</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -889,10 +885,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>and %1 other users</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Do you want to send a screenshot?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -930,6 +922,10 @@
     <message>
         <source>Edit</source>
         <translation type="unfinished">編輯</translation>
+    </message>
+    <message>
+        <source>Change background color</source>
+        <translation type="unfinished">變更背景色</translation>
     </message>
 </context>
 <context>
@@ -1190,6 +1186,10 @@ Please select a different name.</source>
     <message>
         <source>Please wait for two or more users</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change background color</source>
+        <translation type="unfinished">變更背景色</translation>
     </message>
 </context>
 <context>
@@ -2730,6 +2730,10 @@ Please select a different name.</source>
         <source>Click to view saved chat with %1</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Change background color</source>
+        <translation type="unfinished">變更背景色</translation>
+    </message>
 </context>
 <context>
     <name>GuiSavedChatListWidget</name>
@@ -2911,11 +2915,15 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Select box</source>
-        <translation>選擇盒子</translation>
+        <translation type="obsolete">選擇盒子</translation>
     </message>
     <message>
         <source>Enable my ShareBox</source>
         <translation>開啟我的分享盒</translation>
+    </message>
+    <message>
+        <source>Select user</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3291,6 +3299,10 @@ Please select a different name.</source>
     <message>
         <source>Search user</source>
         <translation>搜尋用戶</translation>
+    </message>
+    <message>
+        <source>Change background color</source>
+        <translation type="unfinished">變更背景色</translation>
     </message>
 </context>
 <context>

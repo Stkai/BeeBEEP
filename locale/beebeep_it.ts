@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -472,7 +472,7 @@
     </message>
     <message>
         <source>and %1 other users</source>
-        <translation>e altri %1 utenti</translation>
+        <translation type="obsolete">e altri %1 utenti</translation>
     </message>
 </context>
 <context>
@@ -910,7 +910,7 @@
     </message>
     <message>
         <source>and %1 other users</source>
-        <translation>e altri %1 utenti</translation>
+        <translation type="obsolete">e altri %1 utenti</translation>
     </message>
     <message>
         <source>Do you want to send a screenshot?</source>
@@ -950,6 +950,10 @@
     <message>
         <source>Create new group chat</source>
         <translation>Crea un nuovo gruppo</translation>
+    </message>
+    <message>
+        <source>Change background color</source>
+        <translation>Cambia il colore di sfondo</translation>
     </message>
 </context>
 <context>
@@ -1220,6 +1224,10 @@ Inserisci un nome differente.</translation>
         <source>Search group</source>
         <translation>Cerca un gruppo</translation>
     </message>
+    <message>
+        <source>Change background color</source>
+        <translation>Cambia il colore di sfondo</translation>
+    </message>
 </context>
 <context>
     <name>GuiGroupListWidget</name>
@@ -1256,7 +1264,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Click here for latest news</source>
-        <translation type="vanished">Premi qui per le ultime notizie</translation>
+        <translation type="obsolete">Premi qui per le ultime notizie</translation>
     </message>
 </context>
 <context>
@@ -2802,6 +2810,10 @@ Inserisci un nome differente.</translation>
         <source>Click to view saved chat with %1</source>
         <translation>Click per vedere la conversazione salvata con %1</translation>
     </message>
+    <message>
+        <source>Change background color</source>
+        <translation>Cambia il colore di sfondo</translation>
+    </message>
 </context>
 <context>
     <name>GuiSavedChatListWidget</name>
@@ -2987,7 +2999,11 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Select box</source>
-        <translation>Seleziona una ShareBox</translation>
+        <translation type="obsolete">Seleziona una ShareBox</translation>
+    </message>
+    <message>
+        <source>Select user</source>
+        <translation>Seleziona un utente</translation>
     </message>
 </context>
 <context>
@@ -3375,6 +3391,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Search user</source>
         <translation>Cerca un utente</translation>
+    </message>
+    <message>
+        <source>Change background color</source>
+        <translation>Cambia il colore di sfondo</translation>
     </message>
 </context>
 <context>

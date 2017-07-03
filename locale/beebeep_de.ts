@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE" sourcelanguage="en">
+<TS version="2.0" language="de_DE" sourcelanguage="en">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -466,10 +466,6 @@
         <source>/beesshottmp-%1.</source>
         <translation type="obsolete">/beesshottmp-%1.</translation>
     </message>
-    <message>
-        <source>and %1 other users</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>File</name>
@@ -905,10 +901,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>and %1 other users</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Do you want to send a screenshot?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -946,6 +938,10 @@
     <message>
         <source>Create new group chat</source>
         <translation>Neuen Gruppenchat erstellen</translation>
+    </message>
+    <message>
+        <source>Change background color</source>
+        <translation type="unfinished">Hintergrundfarbe ändern</translation>
     </message>
 </context>
 <context>
@@ -1211,6 +1207,10 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>Search group</source>
         <translation>Gruppe suchen</translation>
+    </message>
+    <message>
+        <source>Change background color</source>
+        <translation type="unfinished">Hintergrundfarbe ändern</translation>
     </message>
 </context>
 <context>
@@ -2748,6 +2748,10 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Please select an item</source>
         <translation>Wähle bitte ein Element aus</translation>
     </message>
+    <message>
+        <source>Change background color</source>
+        <translation type="unfinished">Hintergrundfarbe ändern</translation>
+    </message>
 </context>
 <context>
     <name>GuiSavedChatListWidget</name>
@@ -2929,11 +2933,15 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Select box</source>
-        <translation>ShareBox auswählen</translation>
+        <translation type="obsolete">ShareBox auswählen</translation>
     </message>
     <message>
         <source>Enable my ShareBox</source>
         <translation>Eigene ShareBox aktivieren</translation>
+    </message>
+    <message>
+        <source>Select user</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3313,6 +3321,10 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>Search user</source>
         <translation>Benutzer suchen</translation>
+    </message>
+    <message>
+        <source>Change background color</source>
+        <translation type="unfinished">Hintergrundfarbe ändern</translation>
     </message>
 </context>
 <context>
