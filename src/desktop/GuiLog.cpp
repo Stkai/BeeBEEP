@@ -250,18 +250,22 @@ void GuiLog::refreshLog()
 
   if( !plain_text.isEmpty() )
   {
+    bool block_scrolling = false;
+    QScrollBar *bar = mp_teLog->verticalScrollBar();
+    if( bar )
+    {
+      if( bar->isSliderDown() || bar->maximum() != bar->value() )
+        block_scrolling = true;
+    }
+
     QTextCursor cursor( mp_teLog->textCursor() );
     cursor.movePosition( QTextCursor::End );
     cursor.insertText( plain_text );
 
-    if( !m_blockScrolling )
+    if( !block_scrolling )
     {
-      QScrollBar *bar = mp_teLog->verticalScrollBar();
       if( bar )
-      {
-        if( !bar->isSliderDown() )
-          bar->setValue( bar->maximum() );
-      }
+        bar->setValue( bar->maximum() );
       else
         mp_teLog->ensureCursorVisible();
     }
@@ -296,17 +300,8 @@ void GuiLog::openLogMenu( const QPoint& )
   mp_logMenu->addSeparator();
   QAction* act = mp_logMenu->addAction( IconManager::instance().icon( "copy.png" ), tr( "Copy to clipboard" ), mp_teLog, SLOT( copy() ), QKeySequence::Copy );
   act->setEnabled( !mp_teLog->textCursor().selectedText().isEmpty() );
-  mp_logMenu->addSeparator();
-  act = mp_logMenu->addAction( tr( "Block scrolling" ), this, SLOT( toggleBlockScrolling() ) );
-  act->setCheckable( true );
-  act->setChecked( m_blockScrolling );
 
   mp_logMenu->exec( QCursor::pos() );
-}
-
-void GuiLog::toggleBlockScrolling()
-{
-  m_blockScrolling = !m_blockScrolling;
 }
 
 void GuiLog::openLogFilePath()

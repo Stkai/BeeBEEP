@@ -372,3 +372,18 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
 
   UserManager::instance().addNewConnectedUserId( u.id() );
 }
+
+int Core::connectedUsers() const
+{
+  int connected_users = 0;
+  if( m_connections.isEmpty() )
+    return connected_users;
+
+  foreach( Connection* c, m_connections )
+  {
+    if( c->isConnected() && c->isReadyForUse() )
+      connected_users++;
+  }
+
+  return connected_users;
+}

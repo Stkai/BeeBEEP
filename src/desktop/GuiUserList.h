@@ -47,6 +47,7 @@ public:
   void setMenuSettings( QMenu* );
   void setContextMenuUsers( QMenu* );
   inline void setMainToolTip( const QString& );
+  inline QString mainToolTip() const;
 
   void onTickEvent( int );
 
@@ -85,5 +86,6 @@ private:
 
 // Inline Functions
 inline void GuiUserList::setMainToolTip( const QString& new_value ) { mp_twUsers->setToolTip( new_value ); }
+inline QString GuiUserList::mainToolTip() const { return mp_twUsers->toolTip(); }
 
 #endif // BEEBEEP_GUIUSERLIST_H

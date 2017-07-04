@@ -1400,7 +1400,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Block scrolling</source>
-        <translation>Blocca scorrimento</translation>
+        <translation type="obsolete">Blocca scorrimento</translation>
     </message>
     <message>
         <source>Log</source>

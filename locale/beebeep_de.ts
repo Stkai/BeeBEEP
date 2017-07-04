@@ -1412,7 +1412,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Block scrolling</source>
-        <translation>Blockweises Blättern</translation>
+        <translation type="obsolete">Blockweises Blättern</translation>
     </message>
     <message>
         <source>Right click to open menu</source>

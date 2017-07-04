@@ -37,6 +37,7 @@ public:
   explicit GuiHome( QWidget *parent = 0 );
 
   inline void setMainToolTip( const QString& );
+  inline QString mainToolTip() const;
 
   bool addSystemMessage( const ChatMessage& );
   int loadSystemMessages();
@@ -64,5 +65,6 @@ private:
 
 // Inline Functions
 inline void GuiHome::setMainToolTip( const QString& new_value ) { mp_teSystem->setToolTip( new_value ); }
+inline QString GuiHome::mainToolTip() const { return mp_teSystem->toolTip(); }
 
 #endif // BEEBEEP_GUIHOME_H

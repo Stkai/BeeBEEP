@@ -1678,19 +1678,18 @@ Please select a different name.</source>
         <translation>Журналировать в файл</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="295"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="299"/>
         <source>Select All</source>
         <translation>Выбрать все</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="297"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="301"/>
         <source>Copy to clipboard</source>
         <translation>Копировать в буфер обмена</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="300"/>
         <source>Block scrolling</source>
-        <translation>Блокировать прокрутку</translation>
+        <translation type="obsolete">Блокировать прокрутку</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="136"/>
@@ -1755,7 +1754,7 @@ Please select a different name.</source>
         <translation>%1 не найден</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="315"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="310"/>
         <source>%1: log not found.</source>
         <translation>%1: журнал не найден.</translation>
     </message>

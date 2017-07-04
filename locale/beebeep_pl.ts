@@ -1674,19 +1674,18 @@ Proszę wybrać inną nazwę.</translation>
         <translation>Zapisz log w pliku</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="295"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="299"/>
         <source>Select All</source>
         <translation type="unfinished">Zaznacz wszystko</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="297"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="301"/>
         <source>Copy to clipboard</source>
         <translation type="unfinished">Kopiuj do schowka</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="300"/>
         <source>Block scrolling</source>
-        <translation>Przewijanie blokowe</translation>
+        <translation type="obsolete">Przewijanie blokowe</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="136"/>
@@ -1751,7 +1750,7 @@ Proszę wybrać inną nazwę.</translation>
         <translation>Nie znaleziono %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="315"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="310"/>
         <source>%1: log not found.</source>
         <translation type="unfinished"></translation>
     </message>

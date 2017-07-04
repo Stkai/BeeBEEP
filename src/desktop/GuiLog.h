@@ -44,7 +44,6 @@ protected slots:
   void saveLogAs();
   void logToFile( bool );
   void openLogMenu( const QPoint& );
-  void toggleBlockScrolling();
   void openLogFilePath();
 
 protected:
@@ -62,8 +61,6 @@ private:
   QToolBar* mp_barLog;
   QMenu* mp_logMenu;
   QAction* mp_actOpenLogFilePath;
-
-  bool m_blockScrolling;
 
 };
 

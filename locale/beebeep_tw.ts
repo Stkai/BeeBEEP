@@ -1392,7 +1392,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Block scrolling</source>
-        <translation>阻擋捲動</translation>
+        <translation type="obsolete">阻擋捲動</translation>
     </message>
     <message>
         <source>Right click to open menu</source>

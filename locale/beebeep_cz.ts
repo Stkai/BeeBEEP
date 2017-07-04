@@ -1686,19 +1686,18 @@ Vyberte prosím jiné jméno.</translation>
         <translation>Celá slova</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="295"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="299"/>
         <source>Select All</source>
         <translation>Vybrat vše</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="297"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="301"/>
         <source>Copy to clipboard</source>
         <translation>Kopírovat do schránky</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="300"/>
         <source>Block scrolling</source>
-        <translation>Skákat po odstavcích</translation>
+        <translation type="obsolete">Skákat po odstavcích</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="136"/>
@@ -1763,7 +1762,7 @@ Vyberte prosím jiné jméno.</translation>
         <translation>%1 nenalezen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="315"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="310"/>
         <source>%1: log not found.</source>
         <translation>%1: protokol nebyl nalezen.</translation>
     </message>

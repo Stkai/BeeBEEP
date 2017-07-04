@@ -106,6 +106,7 @@ GuiMain::GuiMain( QWidget *parent )
   m_autoConnectOnInterfaceUp = false;
   m_prevActivatedState = true;
   m_coreIsConnecting = false;
+  m_changeTabToUserListOnFirstConnected = false;
 
   createActions();
   createMainWidgets();
@@ -286,18 +287,18 @@ void GuiMain::updateTabTitles()
   int current_value = m_unreadActivities;
   mp_tabMain->setTabText( tab_index, current_value > 0 ? QString::number( current_value ) : "" );
   if( current_value > 0 )
-    mp_tabMain->setTabToolTip( tab_index, QString( "%1: %2 %3" ).arg( RemoveMenuStringFromTooltip( mp_home->toolTip() ) ).arg( current_value ).arg( tr( "news" ) ) );
+    mp_tabMain->setTabToolTip( tab_index, QString( "%1: %2 %3" ).arg( RemoveMenuStringFromTooltip( mp_home->mainToolTip() ) ).arg( current_value ).arg( tr( "news" ) ) );
   else
-    mp_tabMain->setTabToolTip( tab_index, RemoveMenuStringFromTooltip( mp_home->toolTip() ) );
+    mp_tabMain->setTabToolTip( tab_index, RemoveMenuStringFromTooltip( mp_home->mainToolTip() ) );
 
   tab_index = mp_tabMain->indexOf( mp_userList );
   current_value = beeCore->connectedUsers();
   int other_value = UserManager::instance().userList().size();
   mp_tabMain->setTabText( tab_index, current_value > 0 ? QString::number( current_value ) : (other_value > 0 ? QString::number( other_value ) : "" ) );
   if( current_value > 0 )
-    mp_tabMain->setTabToolTip( tab_index, QString( "%1: %2 %3" ).arg( RemoveMenuStringFromTooltip( mp_userList->toolTip() ) ).arg( current_value ).arg( tr( "connected" ) ) );
+    mp_tabMain->setTabToolTip( tab_index, QString( "%1: %2 %3" ).arg( RemoveMenuStringFromTooltip( mp_userList->mainToolTip() ) ).arg( current_value ).arg( tr( "connected" ) ) );
   else
-    mp_tabMain->setTabToolTip( tab_index, RemoveMenuStringFromTooltip( mp_userList->toolTip() ) );
+    mp_tabMain->setTabToolTip( tab_index, RemoveMenuStringFromTooltip( mp_userList->mainToolTip() ) );
 
   tab_index = mp_tabMain->indexOf( mp_chatList );
   current_value = ChatManager::instance().countNotEmptyChats( false );
@@ -487,6 +488,7 @@ void GuiMain::onSleepRequest()
 
 void GuiMain::onCoreConnected()
 {
+  m_coreIsConnecting = false;
   initGuiItems();
 }
 
@@ -529,6 +531,7 @@ void GuiMain::startCore()
     }
   }
 
+  m_changeTabToUserListOnFirstConnected = true;
   m_autoConnectOnInterfaceUp = true;
   if( !beeCore->start() )
     QMetaObject::invokeMethod( beeCore, "checkNetworkInterface", Qt::QueuedConnection );
@@ -2792,9 +2795,9 @@ void GuiMain::onUserChanged( const User& u )
   }
   else
   {
-    if( m_coreIsConnecting && u.isStatusConnected() && mp_tabMain->currentWidget() == mp_home )
+    if( m_changeTabToUserListOnFirstConnected && u.isStatusConnected() && mp_tabMain->currentWidget() == mp_home )
     {
-      m_coreIsConnecting = false;
+      m_changeTabToUserListOnFirstConnected = false;
       mp_tabMain->setCurrentWidget( mp_userList );
     }
   }
@@ -3088,7 +3091,7 @@ void GuiMain::sendBroadcastMessage()
   mp_actBroadcast->setDisabled( true );
   beeCore->sendBroadcastMessage();
   beeCore->sendMulticastingMessage();
-  QTimer::singleShot( 3 * 61 * 1000, this, SLOT( enableBroadcastAction() ) );
+  QTimer::singleShot( 61 * 1000, this, SLOT( enableBroadcastAction() ) );
 }
 
 void GuiMain::enableBroadcastAction()
@@ -3766,8 +3769,8 @@ void GuiMain::onMainTabChanged( int tab_index )
     updateTabTitles();
   }
 
-  if( m_coreIsConnecting )
-    m_coreIsConnecting = false;
+  if( m_changeTabToUserListOnFirstConnected )
+    m_changeTabToUserListOnFirstConnected = false;
 }
 
 void GuiMain::setFileTransferEnabled( bool enable )

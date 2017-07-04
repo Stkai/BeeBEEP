@@ -326,6 +326,7 @@ private:
   bool m_prevActivatedState;
   int m_unreadActivities;
   bool m_coreIsConnecting;
+  bool m_changeTabToUserListOnFirstConnected;
 
 };
 

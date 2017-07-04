@@ -156,6 +156,9 @@ bool Broadcaster::contactNetworkAddress( const NetworkAddress& na )
 
 void Broadcaster::checkLoopbackDatagram()
 {
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Check" << m_networkAddressesWaitingForLoopback.size() << "loopback datagram";
+#endif
   QList< QPair<NetworkAddress,QDateTime> >::iterator it = m_networkAddressesWaitingForLoopback.begin();
   while( it != m_networkAddressesWaitingForLoopback.end() )
   {
@@ -248,6 +251,9 @@ void Broadcaster::readBroadcastDatagram()
 
 void Broadcaster::updateUsersAddedManually()
 {
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Broadcaster has found" << Settings::instance().networkAddressList().size() << "network address added by user";
+#endif
   if( !Settings::instance().networkAddressList().isEmpty() )
   {
     foreach( QString s_network_address, Settings::instance().networkAddressList() )
@@ -367,10 +373,20 @@ void Broadcaster::onTickEvent( int )
   }
 
   if( m_broadcastSocket.state() != QAbstractSocket::BoundState )
+  {
+#ifdef BEEBEEP_DEBUG
+    qWarning() << "Broadcaster has not the socket in BoundState and cannot contact other addresses";
+#endif
     return;
+  }
 
   if( !NetworkManager::instance().isMainInterfaceUp() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qWarning() << "Broadcaster cannot contact other addresses because main network interface is down";
+#endif
     return;
+  }
 
   contactNetworkAddresses();
 }
@@ -387,4 +403,7 @@ void Broadcaster::contactNetworkAddresses()
     if( contacted_users >= Settings::instance().maxUsersToConnectInATick() )
       break;
   }
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Broadcaster has contacted" << contacted_users << "network addresses";
+#endif
 }

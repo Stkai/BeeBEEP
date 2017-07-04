@@ -1666,19 +1666,18 @@ Välj ett annat namn.</translation>
         <translation>Logga till fil</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="295"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="299"/>
         <source>Select All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="297"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="301"/>
         <source>Copy to clipboard</source>
         <translation type="unfinished">Kopiera till Urklipp</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="300"/>
         <source>Block scrolling</source>
-        <translation>Blockera skrollning</translation>
+        <translation type="obsolete">Blockera skrollning</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="136"/>
@@ -1743,7 +1742,7 @@ Välj ett annat namn.</translation>
         <translation>%1 kunde inte hittas</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="315"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="310"/>
         <source>%1: log not found.</source>
         <translation type="unfinished"></translation>
     </message>

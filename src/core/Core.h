@@ -68,7 +68,7 @@ public:
 
   /* CoreUser */
   bool changeLocalUser( const QString& );
-  inline int connectedUsers() const;
+  int connectedUsers() const;
   bool isUserConnected( VNumber ) const;
   bool areUsersConnected( const QList<VNumber>& ) const;
   void setLocalUserStatus( int );
@@ -292,7 +292,6 @@ private:
 };
 
 // Inline Functions
-inline int Core::connectedUsers() const { return m_connections.size(); }
 inline bool Core::hasFileTransferInProgress() const { return isConnected() && mp_fileTransfer->hasActivePeers(); }
 
 #endif // BEEBEEP_CLIENT_H

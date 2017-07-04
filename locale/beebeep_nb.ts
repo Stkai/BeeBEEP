@@ -1666,19 +1666,18 @@ Velg et annet navn.</translation>
         <translation>Logg til fil</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="295"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="299"/>
         <source>Select All</source>
         <translation type="unfinished">Velg alt</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="297"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="301"/>
         <source>Copy to clipboard</source>
         <translation type="unfinished">Kopier til utklippstavle</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="300"/>
         <source>Block scrolling</source>
-        <translation>Hindre scrolling</translation>
+        <translation type="obsolete">Hindre scrolling</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="136"/>
@@ -1743,7 +1742,7 @@ Velg et annet navn.</translation>
         <translation>%1 ikke funnet</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="315"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="310"/>
         <source>%1: log not found.</source>
         <translation type="unfinished"></translation>
     </message>

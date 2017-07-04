@@ -185,12 +185,12 @@ void GuiShareBox::updateOutBox()
 #endif
   if( user_id > ID_INVALID )
   {
-    mp_outBox->setEnabled( true );
+    mp_outBox->setEnabled( false );
     if( user_id != m_userId )
       emit shareBoxRequest( user_id, "", false );
     else
       emit shareBoxRequest( user_id, m_outCurrentFolder, false );
-    mp_pbOutCreateFolder->setEnabled( true );
+    mp_pbOutCreateFolder->setEnabled( false );
     QTimer::singleShot( 10000, this, SLOT( enableOutUpdateButton() ) );
   }
   else
@@ -228,7 +228,7 @@ void GuiShareBox::updateMyBox( const QString& folder_path, const QList<FileInfo>
   mp_lMyBox->setText( Bee::convertToNativeFolderSeparator( s_title ) );
 }
 
-void GuiShareBox::updateOutBox( const User& u, const QString& folder_path, const QList<FileInfo>&  file_info_list )
+void GuiShareBox::updateOutBox( const User& u, const QString& folder_path, const QList<FileInfo>& file_info_list )
 {
   m_userId = u.id();
   m_outCurrentFolder = folder_path;
@@ -246,6 +246,7 @@ void GuiShareBox::updateOutBox( const User& u, const QString& folder_path, const
 
   mp_comboUsers->setEnabled( mp_comboUsers->count() > 0 );
   mp_comboUsers->blockSignals( false );
+  mp_pbOutCreateFolder->setEnabled( true );
 }
 
 void GuiShareBox::onMyItemDoubleClicked( QTreeWidgetItem* item, int )

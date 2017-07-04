@@ -1658,19 +1658,18 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation>Nhật ký thành tập tin</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="295"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="299"/>
         <source>Select All</source>
         <translation type="unfinished">Chọn tất cả</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="297"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="301"/>
         <source>Copy to clipboard</source>
         <translation type="unfinished">Sao chép vào clipboard</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="300"/>
         <source>Block scrolling</source>
-        <translation>Khóa cuộn</translation>
+        <translation type="obsolete">Khóa cuộn</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="136"/>
@@ -1735,7 +1734,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation>không tìm thấy %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLog.cpp" line="315"/>
+        <location filename="../src/desktop/GuiLog.cpp" line="310"/>
         <source>%1: log not found.</source>
         <translation type="unfinished"></translation>
     </message>
