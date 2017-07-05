@@ -39,7 +39,7 @@ void FileTransferPeer::checkUploadData( const QByteArray& byte_array )
     break;
   default:
     // discard data
-    qWarning() << name() << "discards data:" << byte_array;
+    qWarning() << qPrintable( name() ) << "discards data:" << byte_array;
   }
 }
 
@@ -48,7 +48,7 @@ void FileTransferPeer::checkUploadRequest( const QByteArray& byte_array )
   Message m = Protocol::instance().toMessage( byte_array, m_socket.protoVersion() );
   if( !m.isValid() )
   {
-    qWarning() << name() << "receives an invalid file request:" << byte_array;
+    qWarning() << qPrintable( name() ) << "receives an invalid file request:" << byte_array;
     cancelTransfer();
     return;
   }
@@ -56,12 +56,12 @@ void FileTransferPeer::checkUploadRequest( const QByteArray& byte_array )
   FileInfo file_info = Protocol::instance().fileInfoFromMessage( m );
   if( !file_info.isValid() )
   {
-    qWarning() << name() << "receives an invalid file info:" << byte_array;
+    qWarning() << qPrintable( name() ) << "receives an invalid file info:" << byte_array;
     cancelTransfer();
     return;
   }
 
-  qDebug() << name() << "receives a file request:" << file_info.id() << file_info.password();
+  qDebug() << qPrintable( name() ) << "receives a file request:" << file_info.id() << file_info.password();
   emit fileUploadRequest( file_info );
 }
 
@@ -69,10 +69,10 @@ void FileTransferPeer::startUpload( const FileInfo& fi )
 {
   setTransferType( FileInfo::Upload );
   setFileInfo( FileInfo::Upload, fi );
-  qDebug() << name() << "starts uploading" << qPrintable( Bee::convertToNativeFolderSeparator( fi.path() ) );
+  qDebug() << qPrintable( name() ) << "starts uploading" << qPrintable( Bee::convertToNativeFolderSeparator( fi.path() ) );
   if( m_socket.protoVersion() < FILE_TRANSFER_2_PROTO_VERSION )
   {
-    qWarning() << name() << "using an old file upload protocol version" << m_socket.protoVersion();
+    qWarning() << qPrintable( name() ) << "using an old file upload protocol version" << m_socket.protoVersion();
     m_state = FileTransferPeer::Transferring;
     sendUploadData();
   }
@@ -86,7 +86,7 @@ void FileTransferPeer::startUpload( const FileInfo& fi )
 void FileTransferPeer::sendFileHeader()
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << name() << "sends File Size Header for" << m_fileInfo.path();
+  qDebug() << qPrintable( name() ) << "sends File Size Header for" << m_fileInfo.path();
 #endif
   m_bytesTransferred = 0;
   m_state = FileTransferPeer::Transferring;
@@ -110,7 +110,7 @@ void FileTransferPeer::checkUploading( const QByteArray& byte_array )
   if( byte_array.simplified().toInt() == m_bytesTransferred )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << name() << "receives corfirmation for" << m_bytesTransferred << "bytes";
+    qDebug() << qPrintable( name() ) << "receives corfirmation for" << m_bytesTransferred << "bytes";
 #endif
     m_totalBytesTransferred += m_bytesTransferred;
 
@@ -131,7 +131,7 @@ void FileTransferPeer::sendUploadData()
 {
   if( m_state != FileTransferPeer::Transferring )
   {
-    qWarning() << name() << "tries to send data, but it was in state" << m_state << "... skipped";
+    qWarning() << qPrintable( name() ) << "tries to send data, but it was in state" << m_state << "... skipped";
     return;
   }
 

@@ -160,5 +160,6 @@
         <file>images/desktop-share-alternate.png</file>
         <file>images/image-type.png</file>
         <file>images/image-quality.png</file>
+        <file>images/back.png</file>
     </qresource>
 </RCC>

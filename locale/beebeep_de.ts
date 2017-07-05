@@ -2875,7 +2875,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Your ShareBox is disabled</source>
-        <translation>Eigene ShareBox ist deaktiviert</translation>
+        <translation type="obsolete">Eigene ShareBox ist deaktiviert</translation>
     </message>
     <message>
         <source>Update your ShareBox</source>
@@ -2895,7 +2895,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>ShareBox is not available</source>
-        <translation>ShareBox ist nicht verfügbar</translation>
+        <translation type="obsolete">ShareBox ist nicht verfügbar</translation>
     </message>
     <message>
         <source>ShareBox</source>
@@ -2904,6 +2904,18 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>Create folder in your ShareBox</source>
         <translation>Ordner in eigener ShareBox erstellen</translation>
+    </message>
+    <message>
+        <source>Back to parent folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please wait</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please wait for path %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

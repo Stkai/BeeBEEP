@@ -2925,11 +2925,11 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Your ShareBox is disabled</source>
-        <translation>La tua ShareBox è disabilitata</translation>
+        <translation type="obsolete">La tua ShareBox è disabilitata</translation>
     </message>
     <message>
         <source>ShareBox is not available</source>
-        <translation>La ShareBox non è disponibile</translation>
+        <translation type="obsolete">La ShareBox non è disponibile</translation>
     </message>
     <message>
         <source>%1 - Select the ShareBox folder</source>
@@ -2966,6 +2966,18 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Create folder in ShareBox</source>
         <translation>Crea una cartella nello ShareBox</translation>
+    </message>
+    <message>
+        <source>Back to parent folder</source>
+        <translation>Vai alla cartella precedente</translation>
+    </message>
+    <message>
+        <source>Please wait</source>
+        <translation>Attendere prego</translation>
+    </message>
+    <message>
+        <source>Please wait for path %1</source>
+        <translation>Attendere per %1</translation>
     </message>
 </context>
 <context>

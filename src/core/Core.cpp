@@ -147,6 +147,7 @@ bool Core::start()
   else
     qDebug() << "Starting" << Settings::instance().programName() << "core";
 
+  int previous_local_user_status = Settings::instance().localUser().status();
   if( Settings::instance().localUser().isStatusConnected() )
     Settings::instance().setLocalUserStatus( User::Offline );
 
@@ -235,7 +236,12 @@ bool Core::start()
   }
 
   if( !Settings::instance().localUser().isStatusConnected() )
-    Settings::instance().setLocalUserStatus( User::Online );
+  {
+    if( previous_local_user_status < User::Online || previous_local_user_status >= User::NumStatus )
+      Settings::instance().setLocalUserStatus( User::Online );
+    else
+      Settings::instance().setLocalUserStatus( (User::Status)previous_local_user_status );
+  }
 
   showUserVCardChanged( Settings::instance().localUser() );
   emit userChanged( Settings::instance().localUser() );

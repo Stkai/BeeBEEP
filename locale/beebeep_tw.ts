@@ -2857,7 +2857,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Your ShareBox is disabled</source>
-        <translation>你的分享盒已停用</translation>
+        <translation type="obsolete">你的分享盒已停用</translation>
     </message>
     <message>
         <source>Update your ShareBox</source>
@@ -2877,7 +2877,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>ShareBox is not available</source>
-        <translation>分享盒不可用</translation>
+        <translation type="obsolete">分享盒不可用</translation>
     </message>
     <message>
         <source>ShareBox</source>
@@ -2886,6 +2886,18 @@ Please select a different name.</source>
     <message>
         <source>Create folder in your ShareBox</source>
         <translation>於你的分享盒建立目錄</translation>
+    </message>
+    <message>
+        <source>Back to parent folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please wait</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please wait for path %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

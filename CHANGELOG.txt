@@ -7,6 +7,7 @@ BeeBEEP 4.2.0
 - Hive protocol can be used to contact user who remains offline
 - Added delay on first connection option
 - Option to send offline messages also in chat with all user
+- ShareBox is improved with remote folder creation
 
 BeeBEEP 4.0.0
 - Changed all the main user interface

@@ -152,7 +152,7 @@ void Core::parseFileMessage( const User& u, const Message& m )
   FileInfo fi = Protocol::instance().fileInfoFromMessage( m );
   if( !fi.isValid() )
   {
-    qWarning() << "Invalid FileInfo received from user" << u.id() << ": [" << m.data() << "]:" << m.text();
+    qWarning() << "Invalid FileInfo received from user" << u.id() << ": [" << qPrintable( m.data() ) << "]:" << qPrintable( m.text() );
     return;
   }
 
@@ -196,7 +196,12 @@ void Core::parseFileMessage( const User& u, const Message& m )
     else
       to_path = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().shareBoxPath() )
                                                                        .arg( fi.name() ) );
-    qDebug() << "ShareBox downloads from user" << u.path() << "the file" << fi.name() << "in path" << to_path;
+
+    QFileInfo file_info( to_path );
+    if( file_info.exists() && file_info.isDir() )
+      to_path = Bee::uniqueFilePath( to_path, false );
+
+    qDebug() << "ShareBox downloads from user" << qPrintable( u.path() ) << "the file" << qPrintable( fi.name() ) << "in path" << qPrintable( to_path );
     fi.setPath( to_path );
 
     mp_fileTransfer->downloadFile( fi );

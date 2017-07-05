@@ -1765,24 +1765,33 @@ void GuiMain::showWritingUser( const User& u, VNumber chat_id )
 
 void GuiMain::setUserStatusSelected( int user_status )
 {
-  if( user_status == User::Offline && beeCore->isConnected() )
+  if( user_status == User::Offline )
   {
-    if( !Settings::instance().promptOnCloseEvent() || QMessageBox::question( this, Settings::instance().programName(),
-                               tr( "Do you want to disconnect from %1 network?" ).arg( Settings::instance().programName() ),
-                               QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes )
+    if( beeCore->isConnected() )
     {
-      m_autoConnectOnInterfaceUp = false;
-      stopCore();
+      if( !Settings::instance().promptOnCloseEvent() || QMessageBox::question( this, Settings::instance().programName(),
+                                   tr( "Do you want to disconnect from %1 network?" ).arg( Settings::instance().programName() ),
+                                   tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 0 )
+      {
+        m_autoConnectOnInterfaceUp = false;
+        stopCore();
+        return;
+      }
     }
-    return;
-  }
-
-  beeCore->setLocalUserStatus( user_status );
-
-  if( !beeCore->isConnected() )
-    startCore();
-  else
     updateStatusIcon();
+  }
+  else
+  {
+    if( beeCore->isConnected() )
+    {
+      beeCore->setLocalUserStatus( user_status );
+    }
+    else
+    {
+      Settings::instance().setLocalUserStatus( (User::Status)user_status );
+      startCore();
+    }
+  }
 }
 
 void GuiMain::statusSelected()

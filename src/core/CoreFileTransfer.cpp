@@ -660,7 +660,11 @@ void Core::addFolderToFileTransfer()
 
 void Core::sendShareBoxRequest( VNumber user_id, const QString& folder_name, bool create_folder )
 {
-  if( user_id != ID_LOCAL_USER )
+  if( user_id == ID_INVALID )
+  {
+    qWarning() << "Invalid user id found in Core::sendShareBoxRequest(...)";
+  }
+  else if( user_id != ID_LOCAL_USER )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << "ShareBox sends request to user" << user_id << "for folder" << qPrintable( folder_name );
@@ -675,7 +679,12 @@ void Core::sendShareBoxRequest( VNumber user_id, const QString& folder_name, boo
     emit shareBoxUnavailable( u, folder_name );
   }
   else
-    buildShareBoxFileList( Settings::instance().localUser(), folder_name, create_folder );
+  {
+    if( Settings::instance().useShareBox() && !Settings::instance().shareBoxPath().isEmpty() )
+      buildShareBoxFileList( Settings::instance().localUser(), folder_name, create_folder );
+    else
+      emit shareBoxUnavailable( Settings::instance().localUser(), folder_name );
+  }
 }
 
 void Core::buildShareBoxFileList( const User& u, const QString& folder_name, bool create_folder )

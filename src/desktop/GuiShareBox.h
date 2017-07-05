@@ -54,10 +54,7 @@ protected slots:
   void openMyBox();
   void updateMyBox();
   void updateOutBox();
-  void updateOutBoxToBaseFolder();
-  void enableMyUpdateButton();
-  void enableOutUpdateButton();
-  void enableUpdateButton();
+  void backToParentFolder();
 
   void onMyItemDoubleClicked( QTreeWidgetItem*, int );
   void onOutItemDoubleClicked( QTreeWidgetItem*, int );
@@ -77,6 +74,18 @@ protected:
   void updateOutBox( const User&, const QString&, const QList<FileInfo>& );
   bool isValidNewFolderName( QTreeWidget*, const QString& );
 
+  void disableBox( VNumber );
+  void enableBox( VNumber );
+  void makeShareBoxRequest( VNumber, const QString&, bool );
+  void setCurrentFolder( VNumber, const QString& );
+
+  void setUsers();
+  inline const QString& currentFolder( VNumber ) const;
+  inline GuiShareBoxFileInfoList* fileInfoList( VNumber ) const;
+  inline QLabel* currentFolderLabel( VNumber ) const;
+  VNumber selectedUserId() const;
+  void updateCurrentFolderLabel( VNumber );
+
 private:
   QAction* mp_actUpdate;
   QAction* mp_actDownload;
@@ -89,5 +98,11 @@ private:
   QSplitter* mp_splitter;
 
 };
+
+
+// Inline Functions
+inline const QString& GuiShareBox::currentFolder( VNumber user_id ) const { return user_id == ID_LOCAL_USER ? m_myCurrentFolder : m_outCurrentFolder; }
+inline GuiShareBoxFileInfoList* GuiShareBox::fileInfoList( VNumber user_id ) const { return user_id == ID_LOCAL_USER ? mp_myBox : mp_outBox; }
+inline QLabel* GuiShareBox::currentFolderLabel( VNumber user_id ) const { return user_id == ID_LOCAL_USER ? mp_lMyBox : mp_lOutBox; }
 
 #endif // BEEBEEP_GUISHAREBOX_H
