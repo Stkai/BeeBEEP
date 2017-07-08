@@ -65,6 +65,10 @@ private slots:
   void onShareBoxRequest( VNumber, const QString&, bool );
   void onShareBoxDownloadRequest( VNumber, const FileInfo&, const QString& );
   void onShareBoxUploadRequest( VNumber, const FileInfo&, const QString& );
+  void updateShareBox( const User&, const QString&, const QList<FileInfo>& );
+  void onShareFolderUnavailable( const User&, const QString& );
+  void onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType );
+  void onFileTransferCompleted( VNumber, const User&, const FileInfo& );
 
 protected:
   void keyPressEvent( QKeyEvent* );

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -1137,6 +1137,30 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Show the ShareBox</source>
         <translation>Mostra le ShareBox</translation>
+    </message>
+    <message>
+        <source>downloading</source>
+        <translation>scaricati</translation>
+    </message>
+    <message>
+        <source>uploading</source>
+        <translation>inviati</translation>
+    </message>
+    <message>
+        <source>download completed</source>
+        <translation>scaricamento completato</translation>
+    </message>
+    <message>
+        <source>upload completed</source>
+        <translation>invio completato</translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation>Pronto</translation>
+    </message>
+    <message>
+        <source>%1 is not available</source>
+        <translation>%1 non è disponibile</translation>
     </message>
 </context>
 <context>
@@ -2978,6 +3002,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Please wait for path %1</source>
         <translation>Attendere per %1</translation>
+    </message>
+    <message>
+        <source>Disabled</source>
+        <translation>Disabilitato</translation>
     </message>
 </context>
 <context>

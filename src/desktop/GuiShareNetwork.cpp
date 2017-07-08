@@ -466,7 +466,7 @@ void GuiShareNetwork::onFileTransferProgress( VNumber /* unused_peer_id */, cons
   if( fi.size() == 0 )
   {
 #ifdef BEEBEEP_DEBUG
-    qWarning() << "GuiShareNetwork::onFileTransferProgress try to show progress divided by 0:" << fi.path();
+    qWarning() << "GuiShareNetwork::onFileTransferProgress try to show progress divided by 0:" << qPrintable( fi.path() );
 #endif
     return;
   }

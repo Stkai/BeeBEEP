@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="zh_TW">
+<TS version="2.1" language="zh_TW">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -1107,6 +1107,30 @@ Please select a different name.</source>
     </message>
     <message>
         <source>%1 has shared %2 files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>downloading</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>uploading</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>download completed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>upload completed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 is not available</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2897,6 +2921,10 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Please wait for path %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disabled</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -120,8 +120,7 @@ void GuiShareBox::onEnableMyShareBoxClicked()
   else
   {
     Settings::instance().save();
-    QTimer::singleShot( 100, this, SLOT( updateMyBox() ) );
-    QTimer::singleShot( 200, this, SLOT( updateOutBox() ) );
+    QTimer::singleShot( 100, this, SLOT( updateShareBoxes() ) );
   }
 }
 
@@ -433,17 +432,23 @@ void GuiShareBox::makeShareBoxRequest( VNumber user_id, const QString& folder_pa
   if( user_id == ID_INVALID )
     return;
   setCurrentFolder( user_id, folder_path );
-  GuiShareBoxFileInfoList* pfil = fileInfoList( user_id );
-  if( folder_path.isEmpty() )
-    pfil->setToolTip( tr( "Please wait" ) );
-  else
-    pfil->setToolTip( tr( "Please wait for path %1" ).arg( folder_path ) );
-
   QLabel* current_folder_label = currentFolderLabel( user_id );
-  current_folder_label->setText( QString( "<b>%1...</b>" ).arg( tr( "Please wait" ) ) );
-  current_folder_label->setToolTip( pfil->toolTip() );
 
-  emit shareBoxRequest( user_id, folder_path, create_folder );
+  if( Settings::instance().useShareBox() )
+  {
+    GuiShareBoxFileInfoList* pfil = fileInfoList( user_id );
+    if( folder_path.isEmpty() )
+      pfil->setToolTip( tr( "Please wait" ) );
+    else
+      pfil->setToolTip( tr( "Please wait for path %1" ).arg( folder_path ) );
+
+    current_folder_label->setText( QString( "<b>%1...</b>" ).arg( tr( "Please wait" ) ) );
+    current_folder_label->setToolTip( pfil->toolTip() );
+
+    emit shareBoxRequest( user_id, folder_path, create_folder );
+  }
+  else
+    current_folder_label->setText( QString( "<b>%1</b>" ).arg( tr( "Disabled" ) ) );
 }
 
 void GuiShareBox::updateUser( const User& u )

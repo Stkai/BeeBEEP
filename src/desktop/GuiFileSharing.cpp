@@ -60,12 +60,12 @@ GuiFileSharing::GuiFileSharing( QWidget *parent )
   createToolbars();
 
   connect( beeCore, SIGNAL( localShareListAvailable() ), mp_shareLocal, SLOT( updateFileSharedList() ) );
-  connect( beeCore, SIGNAL( shareBoxAvailable( const User&, const QString&, const QList<FileInfo>& ) ), mp_shareBox, SLOT( updateBox( const User&, const QString&, const QList<FileInfo>& ) ) );
-  connect( beeCore, SIGNAL( shareBoxUnavailable( const User&, const QString& ) ), mp_shareBox, SLOT( onShareFolderUnavailable( const User&, const QString& ) ) );
+  connect( beeCore, SIGNAL( shareBoxAvailable( const User&, const QString&, const QList<FileInfo>& ) ), this, SLOT( updateShareBox( const User&, const QString&, const QList<FileInfo>& ) ) );
+  connect( beeCore, SIGNAL( shareBoxUnavailable( const User&, const QString& ) ), this, SLOT( onShareFolderUnavailable( const User&, const QString& ) ) );
   connect( beeCore, SIGNAL( shareBoxDownloadCompleted( VNumber, const FileInfo& ) ), mp_shareBox, SLOT( onFileDownloadCompleted( VNumber, const FileInfo& ) ) );
   connect( beeCore, SIGNAL( shareBoxUploadCompleted( VNumber, const FileInfo& ) ), mp_shareBox, SLOT( onFileUploadCompleted( VNumber, const FileInfo& ) ) );
-  connect( beeCore, SIGNAL( fileTransferCompleted( VNumber, const User&, const FileInfo& ) ), mp_shareNetwork, SLOT( onFileTransferCompleted( VNumber, const User&, const FileInfo& ) ) );
-  connect( beeCore, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ), mp_shareNetwork, SLOT( onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ) );
+  connect( beeCore, SIGNAL( fileTransferCompleted( VNumber, const User&, const FileInfo& ) ), this, SLOT( onFileTransferCompleted( VNumber, const User&, const FileInfo& ) ) );
+  connect( beeCore, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ), this, SLOT( onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ) );
 
   connect( mp_shareLocal, SIGNAL( sharePathAdded( const QString& ) ), this, SLOT( addToShare( const QString& ) ) );
   connect( mp_shareLocal, SIGNAL( sharePathRemoved( const QString& ) ), this, SLOT( removeFromShare( const QString& ) ) );
@@ -241,11 +241,25 @@ void GuiFileSharing::onShareBoxRequest( VNumber user_id, const QString& share_bo
 void GuiFileSharing::onShareBoxDownloadRequest( VNumber user_id, const FileInfo& fi, const QString& to_path )
 {
   beeCore->downloadFromShareBox( user_id, fi, to_path );
+  statusBar()->showMessage( QString( "%1: %2..." ).arg( fi.name(), tr( "downloading" ) ), 30000 );
 }
 
 void GuiFileSharing::onShareBoxUploadRequest( VNumber user_id, const FileInfo& fi, const QString& to_path )
 {
   beeCore->uploadToShareBox( user_id, fi, to_path );
+  statusBar()->showMessage( QString( "%1: %2..." ).arg( fi.name(), tr( "uploading" ) ), 30000 );
+}
+
+void GuiFileSharing::updateShareBox( const User& u, const QString& folder_path, const QList<FileInfo>& file_list )
+{
+  mp_shareBox->updateBox( u, folder_path, file_list );
+  statusBar()->showMessage( tr( "Ready" ), 3000 );
+}
+
+void GuiFileSharing::onShareFolderUnavailable( const User& u, const QString& folder_path )
+{
+  mp_shareBox->onShareFolderUnavailable( u, folder_path );
+  statusBar()->showMessage( tr( "%1 is not available" ).arg( folder_path ), 5000 );
 }
 
 void GuiFileSharing::updateLocalFileList()
@@ -263,4 +277,43 @@ void GuiFileSharing::showUserFileList( const User& u )
   mp_shareNetwork->showSharesForUser( u );
   QString share_message = tr( "%1 has shared %2 files" ).arg( u.name() ).arg( FileShare::instance().fileSharedFromUser( u.id() ).size() );
   statusBar()->showMessage( share_message, 5000 );
+}
+
+void GuiFileSharing::onFileTransferProgress( VNumber peer_id, const User& u, const FileInfo& fi, FileSizeType bytes )
+{
+  if( fi.size() == 0 )
+  {
+  #ifdef BEEBEEP_DEBUG
+    qWarning() << "GuiFileSharing::onFileTransferProgress try to show progress divided by 0:" << qPrintable( fi.path() );
+  #endif
+    return;
+  }
+
+  mp_shareNetwork->onFileTransferProgress( peer_id, u, fi, bytes );
+
+  QString file_transfer_progress;
+  int msg_timeout = 0;
+
+  if( bytes < fi.size() )
+  {
+
+    file_transfer_progress = QString( "%1: %2 %3 of %4 (%5%)" )
+                                       .arg( fi.name(), fi.isDownload() ? tr( "downloading" ) : tr( "uploading" ),
+                                          Bee::bytesToString( bytes ), Bee::bytesToString( fi.size() ),
+                                          QString::number( static_cast<FileSizeType>( (bytes * 100) / fi.size())) );
+    msg_timeout = 1000;
+  }
+  else
+  {
+    file_transfer_progress = QString( "%1: %2" ).arg( fi.name(),
+                               fi.isDownload() ? tr( "download completed" ) : tr( "upload completed" ) );
+    msg_timeout = 2000;
+  }
+
+  statusBar()->showMessage( file_transfer_progress, msg_timeout );
+}
+
+void GuiFileSharing::onFileTransferCompleted( VNumber peer_id, const User& u, const FileInfo& file_info )
+{
+  mp_shareNetwork->onFileTransferCompleted( peer_id, u, file_info );
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="vi_VN">
+<TS version="2.1" language="vi_VN">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -1364,9 +1364,41 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="unfinished">Hiện các tập tin chia sẻ trên mạng</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="264"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="256"/>
+        <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="262"/>
+        <source>%1 is not available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="278"/>
         <source>%1 has shared %2 files</source>
         <translation type="unfinished">%1 đã chia sẻ %2 tập tin</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="244"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="301"/>
+        <source>downloading</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="250"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="301"/>
+        <source>uploading</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="309"/>
+        <source>download completed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="309"/>
+        <source>upload completed</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="156"/>
@@ -3617,7 +3649,7 @@ Vui lòng chọn một tên khác nhau.</translation>
     <name>GuiShareBox</name>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="55"/>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="421"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="420"/>
         <source>ShareBox</source>
         <translation>Hộp chia sẻ (ShareBox)</translation>
     </message>
@@ -3665,43 +3697,48 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="obsolete">Hộp chia sẻ (ShareBox) không có giá trị</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="131"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="130"/>
         <source>%1 - Select the ShareBox folder</source>
         <translation>%1 - Chọn thư mục hộp chia sẻ (ShareBox)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="411"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="410"/>
         <source>%1: access denied.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="421"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="420"/>
         <source>%1 &lt;b&gt;%2&lt;/b&gt;</source>
         <translation>%1 &lt;b&gt;%2&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="421"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="420"/>
         <source>is unavailable</source>
         <translation>không có sẵn</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="438"/>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="443"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="441"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="445"/>
         <source>Please wait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="440"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="443"/>
         <source>Please wait for path %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="563"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="451"/>
+        <source>Disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="568"/>
         <source>Please insert the new folder name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="569"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="574"/>
         <source>%1 already exists.</source>
         <translation type="unfinished"></translation>
     </message>

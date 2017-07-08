@@ -35,7 +35,7 @@ class GuiShareBox : public QWidget, private Ui::GuiShareBoxWidget
 
 public:
   explicit GuiShareBox( QWidget *parent = 0 );
-  void updateShareBoxes();
+
   void updateUser( const User& );
 
 signals:
@@ -45,6 +45,7 @@ signals:
   void shareBoxUploadRequest( VNumber, const FileInfo&, const QString& );
 
 public slots:
+  void updateShareBoxes();
   void updateBox( const User&, const QString&, const QList<FileInfo>& );
   void onShareFolderUnavailable(  const User&, const QString& );
   void onFileDownloadCompleted( VNumber, const FileInfo& );
@@ -55,17 +56,14 @@ protected slots:
   void updateMyBox();
   void updateOutBox();
   void backToParentFolder();
-
   void onMyItemDoubleClicked( QTreeWidgetItem*, int );
   void onOutItemDoubleClicked( QTreeWidgetItem*, int );
   void onEnableMyShareBoxClicked();
   void onShareBoxSelected( int );
-
   void selectMyShareBoxFolder();
   void createFolderInMyBox();
   void createFolderInOutBox();
   void createFolderInBox( VNumber );
-
   void dropInMyBox( const QString& );
   void dropInOutBox( const QString& );
 
@@ -73,12 +71,10 @@ protected:
   void updateMyBox( const QString&, const QList<FileInfo>& );
   void updateOutBox( const User&, const QString&, const QList<FileInfo>& );
   bool isValidNewFolderName( QTreeWidget*, const QString& );
-
   void disableBox( VNumber );
   void enableBox( VNumber );
   void makeShareBoxRequest( VNumber, const QString&, bool );
   void setCurrentFolder( VNumber, const QString& );
-
   void setUsers();
   inline const QString& currentFolder( VNumber ) const;
   inline GuiShareBoxFileInfoList* fileInfoList( VNumber ) const;
@@ -90,11 +86,9 @@ private:
   QAction* mp_actUpdate;
   QAction* mp_actDownload;
   QAction* mp_actUpload;
-
   VNumber m_userId;
   QString m_myCurrentFolder;
   QString m_outCurrentFolder;
-
   QSplitter* mp_splitter;
 
 };

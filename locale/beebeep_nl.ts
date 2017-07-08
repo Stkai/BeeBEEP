@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="nl_BE" sourcelanguage="en_US">
+<TS version="2.1" language="nl_BE" sourcelanguage="en_US">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -1384,9 +1384,41 @@ Gebruik aub een andere naam.</translation>
         <translation>Toon de bestanden die gedeeld worden op het netwerk</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="264"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="256"/>
+        <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="262"/>
+        <source>%1 is not available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="278"/>
         <source>%1 has shared %2 files</source>
         <translation>%1 heeft %2 bestanden gedeeld</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="244"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="301"/>
+        <source>downloading</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="250"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="301"/>
+        <source>uploading</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="309"/>
+        <source>download completed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="309"/>
+        <source>upload completed</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="156"/>
@@ -3645,7 +3677,7 @@ Gebruik aub een andere naam.</translation>
     <name>GuiShareBox</name>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="55"/>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="421"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="420"/>
         <source>ShareBox</source>
         <translation>Deelbox</translation>
     </message>
@@ -3693,43 +3725,48 @@ Gebruik aub een andere naam.</translation>
         <translation type="obsolete">Deelbox is niet beschikbaar</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="131"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="130"/>
         <source>%1 - Select the ShareBox folder</source>
         <translation>%1 - Selecteer de Deelbox map</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="411"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="410"/>
         <source>%1: access denied.</source>
         <translation>%1: geen toegang.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="421"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="420"/>
         <source>%1 &lt;b&gt;%2&lt;/b&gt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="421"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="420"/>
         <source>is unavailable</source>
         <translation>is niet beschikbaar</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="438"/>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="443"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="441"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="445"/>
         <source>Please wait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="440"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="443"/>
         <source>Please wait for path %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="563"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="451"/>
+        <source>Disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="568"/>
         <source>Please insert the new folder name</source>
         <translation>Geef aub een nieuwe mapnaam</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="569"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="574"/>
         <source>%1 already exists.</source>
         <translation>%1 bestaat al.</translation>
     </message>
