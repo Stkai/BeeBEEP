@@ -68,9 +68,8 @@ void FileTransfer::stopListener()
 
     foreach( FileTransferPeer* transfer_peer, m_peers )
       transfer_peer->cancelTransfer();
-
-    // in case of re-connection user can download the files
-    // m_files.clear();
+    m_peers.clear();
+    m_files.clear();
   }
   else
     qDebug() << "File Transfer server is not active";

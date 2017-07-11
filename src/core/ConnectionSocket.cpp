@@ -454,6 +454,9 @@ void ConnectionSocket::checkConnectionTimeout( int ticks )
 
 int ConnectionSocket::activityIdle() const
 {
+  if( m_isAborted )
+    return 0;
+
   if( !m_latestActivityDateTime.isValid() )
     return 0;
 

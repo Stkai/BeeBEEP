@@ -47,10 +47,11 @@ void FileTransferPeer::cancelTransfer()
 {
   if( m_state == FileTransferPeer::Cancelled )
     return;
+  if( m_state != FileTransferPeer::Completed )
+    m_state = FileTransferPeer::Cancelled;
   qDebug() << qPrintable( name() ) << "cancels the transfer";
   if( m_socket.isOpen() )
     m_socket.abortConnection();
-  m_state = FileTransferPeer::Cancelled;
   closeAll();
   if( m_fileInfo.isValid() && userId() != ID_INVALID )
     emit message( id(), userId(), m_fileInfo, tr( "Transfer cancelled" ) );
