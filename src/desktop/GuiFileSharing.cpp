@@ -106,6 +106,7 @@ void GuiFileSharing::initGuiItems()
 {
   raiseLocalShareView();
   checkViewActions();
+  QTimer::singleShot( 0, mp_shareBox, SLOT( updateShareBoxes() ) );
 }
 
 void GuiFileSharing::checkViewActions()
@@ -220,7 +221,6 @@ void GuiFileSharing::raiseNetworkShareView()
 void GuiFileSharing::raiseShareBoxView()
 {
   raiseView( mp_shareBox );
-  mp_shareBox->updateShareBoxes();
 }
 
 void GuiFileSharing::showUp()
@@ -253,7 +253,6 @@ void GuiFileSharing::onShareBoxUploadRequest( VNumber user_id, const FileInfo& f
 void GuiFileSharing::updateShareBox( const User& u, const QString& folder_path, const QList<FileInfo>& file_list )
 {
   mp_shareBox->updateBox( u, folder_path, file_list );
-  statusBar()->showMessage( tr( "Ready" ), 3000 );
 }
 
 void GuiFileSharing::onShareFolderUnavailable( const User& u, const QString& folder_path )
@@ -307,7 +306,7 @@ void GuiFileSharing::onFileTransferProgress( VNumber peer_id, const User& u, con
   {
     file_transfer_progress = QString( "%1: %2" ).arg( fi.name(),
                                fi.isDownload() ? tr( "download completed" ) : tr( "upload completed" ) );
-    msg_timeout = 2000;
+    msg_timeout = 3000;
   }
 
   statusBar()->showMessage( file_transfer_progress, msg_timeout );

@@ -179,9 +179,9 @@ bool Log::dumpLogToFile()
   if( m_logList.empty() )
     return false;
 
-  foreach( QString log_line, m_logList )
+  foreach( std::string log_line, m_logList )
   {
-    m_logStream << log_line;
+    m_logStream << QString::fromStdString( log_line );
     m_logStream << endl;
   }
 
@@ -222,7 +222,7 @@ void Log::add( QtMsgType mt, const QString& log_txt, const QString& log_note )
 
   if( m_logList.size() > m_maxLogLines )
     m_logList.pop_front();
-  m_logList.push_back( log_line );
+  m_logList.push_back( log_line.toStdString() );
 }
 
 #if QT_VERSION >= 0x050000

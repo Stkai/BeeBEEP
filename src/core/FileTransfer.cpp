@@ -27,6 +27,7 @@
 #include "Random.h"
 #include "Settings.h"
 #include "Protocol.h"
+#include "UserManager.h"
 
 
 FileTransfer::FileTransfer( QObject *parent )
@@ -62,13 +63,14 @@ void FileTransfer::stopListener()
 {
   if( isListening() )
   {
+    close();
+    qDebug() << "File Transfer server closed";
+
     foreach( FileTransferPeer* transfer_peer, m_peers )
       transfer_peer->cancelTransfer();
 
-    m_files.clear();
-
-    qDebug() << "File Transfer server closed";
-    close();
+    // in case of re-connection user can download the files
+    // m_files.clear();
   }
   else
     qDebug() << "File Transfer server is not active";
@@ -88,6 +90,22 @@ void FileTransfer::resetServerFiles()
     (*it).setHostPort( serverPort() );
     ++it;
   }
+}
+
+void FileTransfer::removeFilesToUser( VNumber user_id )
+{
+  int peer_counter = 0;
+  foreach( FileTransferPeer* transfer_peer, m_peers )
+  {
+    if( transfer_peer->isDownload() && transfer_peer->remoteUserId() == user_id )
+    {
+      transfer_peer->cancelTransfer();
+      peer_counter++;
+    }
+  }
+
+  if( peer_counter > 0 )
+    qDebug() << peer_counter << "file transfer peers removed for user" << user_id;
 }
 
 FileInfo FileTransfer::fileInfo( VNumber file_id ) const
@@ -295,12 +313,13 @@ void FileTransfer::checkUploadRequest( const FileInfo& file_info_to_check )
   upload_peer->startUpload( file_info );
 }
 
-void FileTransfer::downloadFile( const FileInfo& fi )
+void FileTransfer::downloadFile( VNumber from_user_id, const FileInfo& fi )
 {
   FileTransferPeer *download_peer = new FileTransferPeer( this );
   download_peer->setTransferType( FileInfo::Download );
   download_peer->setId( Protocol::instance().newId() );
   download_peer->setFileInfo( FileInfo::Download, fi );
+  download_peer->setRemoteUserId( from_user_id );
   download_peer->setInQueue();
   m_peers.append( download_peer );
 #ifdef BEEBEEP_DEBUG
@@ -379,7 +398,14 @@ FileTransferPeer* FileTransfer::nextDownloadInQueue() const
   foreach( FileTransferPeer* transfer_peer, m_peers )
   {
     if( transfer_peer->isDownload() && transfer_peer->isInQueue() )
-      return transfer_peer;
+    {
+      if( transfer_peer->remoteUserId() != ID_INVALID )
+      {
+        User remote_user = UserManager::instance().findUser( transfer_peer->remoteUserId() );
+        if( remote_user.isValid() && remote_user.isStatusConnected() )
+          return transfer_peer;
+      }
+    }
   }
   return 0;
 }
@@ -402,6 +428,9 @@ void FileTransfer::startNewDownload()
 
 void FileTransfer::onTickEvent( int ticks )
 {
+  if( !isListening() )
+    return;
+
   foreach( FileTransferPeer* transfer_peer, m_peers )
     transfer_peer->onTickEvent( ticks );
 }

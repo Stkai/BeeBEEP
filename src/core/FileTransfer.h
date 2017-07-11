@@ -48,8 +48,10 @@ public:
   void addFileInfoList( const QList<FileInfo>& );
   void removeFile( const QFileInfo& );
 
-  void downloadFile( const FileInfo& );
+  void downloadFile( VNumber from_user_id, const FileInfo& );
   bool cancelTransfer( VNumber peer_id );
+
+  void removeFilesToUser( VNumber user_id );
 
   inline void clearFiles();
 

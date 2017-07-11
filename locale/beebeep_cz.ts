@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="cs_CZ">
+<TS version="2.0" language="cs_CZ">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -145,17 +145,17 @@
         <translation>Hledání uživatelů</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="529"/>
+        <location filename="../src/core/Core.cpp" line="527"/>
         <source>New version is available</source>
         <translation>Je dostupná nová verze</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="530"/>
+        <location filename="../src/core/Core.cpp" line="528"/>
         <source>Click here to download</source>
         <translation>Zde klepnout pro stažení</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="619"/>
+        <location filename="../src/core/Core.cpp" line="615"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>Je dosaženo maximální ID. Prosím, zavřete a restartujte aplikaci.</translation>
     </message>
@@ -432,32 +432,37 @@
         <translation>%1 Chystáte se odeslat %2 k uživateli  %3. Kontroluji složku...</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="614"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="616"/>
         <source>%1 Unable to send folder %2</source>
         <translation>%1 Nelze odeslat složku %2</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="619"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="621"/>
+        <source>invalid user #%1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="628"/>
         <source>the folder is empty.</source>
         <translation>Složka je prázdná.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="626"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="635"/>
         <source>file transfer is not working.</source>
         <translation>přenos souborů nefunguje.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="634"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="643"/>
         <source>%1 is not connected.</source>
         <translation>%1 není připojen.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="648"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="657"/>
         <source>internal error.</source>
         <translation>interní chyba.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="653"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="662"/>
         <source>%1 You send folder %2 to %3.</source>
         <translation>%1 poslal jste složku %2 k %3.</translation>
     </message>
@@ -532,27 +537,27 @@
         <translation>přidán do oblíbených</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="277"/>
+        <location filename="../src/core/CoreConnection.cpp" line="280"/>
         <source>%1 Connection closed to user %2 because it uses your account name: %3.</source>
         <translation type="unfinished">%1 uživateli bylo ukončeno připojení %2 protože používá název účtu: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="282"/>
+        <location filename="../src/core/CoreConnection.cpp" line="285"/>
         <source>%1 Connection closed to user %2 because it uses your nickname: %3.</source>
         <translation>%1 uživateli bylo ukončeno připojení %2 protože používá přezdívku: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="300"/>
+        <location filename="../src/core/CoreConnection.cpp" line="303"/>
         <source>%1 Connection closed to user %2 because it uses same account name of the already connected user %3: %4.</source>
         <translation type="unfinished">%1 uživateli bylo ukončeno připojení %2 protože používá stejný název účtu již připojeného uživatele %3: %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="305"/>
+        <location filename="../src/core/CoreConnection.cpp" line="308"/>
         <source>%1 Connection closed to user %2 because it uses same nickname of the already connected user %3: %4.</source>
         <translation>%1 uživateli bylo ukončeno připojení %2 protože používá stejnou přezdívku již připojeného uživatele %3: %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="360"/>
+        <location filename="../src/core/CoreConnection.cpp" line="363"/>
         <source>%1 users connected</source>
         <translation>%1 uživatelů připojeno</translation>
     </message>
@@ -643,22 +648,22 @@
         <translation>%1 bajtů staženo ale velikost souboru je pouze %2 bajtů</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="53"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="56"/>
         <source>Transfer cancelled</source>
         <translation>Přenos ukončen</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="132"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="135"/>
         <source>Transfer completed in %1</source>
         <translation>Přenos dokončen za  %1</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="213"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="218"/>
         <source>Connection timeout</source>
         <translation>Čas spojení vypršel</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="221"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="226"/>
         <source>Transfer timeout</source>
         <translation>Časový limit souboru</translation>
     </message>
@@ -1369,69 +1374,64 @@ Vyberte prosím jiné jméno.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="53"/>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="139"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="140"/>
         <source>Show the view tool bar</source>
         <translation>Zobrazit panel nástrojů zobrazení</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="145"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="146"/>
         <source>Show my shared files</source>
         <translation>Zobrazit moje sdílené soubory</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="146"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="147"/>
         <source>Show the network shared files</source>
         <translation>Zobrazit sdílené soubory v síti</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="256"/>
-        <source>Ready</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="262"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="261"/>
         <source>%1 is not available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="278"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="277"/>
         <source>%1 has shared %2 files</source>
         <translation>Uživatel %1 nasdílel %2 souborů</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="244"/>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="301"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="300"/>
         <source>downloading</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="250"/>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="301"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="300"/>
         <source>uploading</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="309"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="308"/>
         <source>download completed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="309"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="308"/>
         <source>upload completed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="156"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="157"/>
         <source>Show the bar of local file sharing</source>
         <translation>Zobrazit lištu místního sdílení souborů</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="147"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="148"/>
         <source>Show the ShareBox</source>
         <translation>Zobrazit sdílenou schránku</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="169"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="170"/>
         <source>Show the bar of network file sharing</source>
         <translation>Zobrazit lištu sdílených souborů v síti</translation>
     </message>
@@ -2304,7 +2304,7 @@ Vyberte prosím jiné jméno.</translation>
         <translation>Přenos souborů</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1314"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1313"/>
         <source>How many minutes of idle %1 can wait before changing status to away?</source>
         <translation>Kolik minut nečinnosti %1 má program čekat, než se přepne do stavu Nepřítomný?</translation>
     </message>
@@ -3677,7 +3677,7 @@ Vyberte prosím jiné jméno.</translation>
     <name>GuiShareBox</name>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="55"/>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="420"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="421"/>
         <source>ShareBox</source>
         <translation>Sdílená schránka</translation>
     </message>
@@ -3730,43 +3730,43 @@ Vyberte prosím jiné jméno.</translation>
         <translation>%1 - Vybrat složku sdílené schránky</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="410"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="411"/>
         <source>%1: access denied.</source>
         <translation>%1: přístup odepřen.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="420"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="421"/>
         <source>%1 &lt;b&gt;%2&lt;/b&gt;</source>
         <translation>%1 &lt;b&gt;%2&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="420"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="421"/>
         <source>is unavailable</source>
         <translation>je nedostupná</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="441"/>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="445"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="442"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="446"/>
         <source>Please wait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="443"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="444"/>
         <source>Please wait for path %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="451"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="452"/>
         <source>Disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="568"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="569"/>
         <source>Please insert the new folder name</source>
         <translation>Vložte nový název složky</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="574"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="575"/>
         <source>%1 already exists.</source>
         <translation>%1 již existuje.</translation>
     </message>
@@ -4266,7 +4266,12 @@ Vyberte prosím jiné jméno.</translation>
         <translation>Nahrávání</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="207"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="174"/>
+        <source>Waiting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="218"/>
         <source>Do you want to cancel the transfer of %1?</source>
         <translation>Chcete přerušit přenos %1?</translation>
     </message>

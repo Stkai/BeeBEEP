@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -473,6 +473,10 @@
     <message>
         <source>and %1 other users</source>
         <translation type="obsolete">e altri %1 utenti</translation>
+    </message>
+    <message>
+        <source>invalid user #%1.</source>
+        <translation>utente non valido #%1.</translation>
     </message>
 </context>
 <context>
@@ -1156,7 +1160,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation>Pronto</translation>
+        <translation type="obsolete">Pronto</translation>
     </message>
     <message>
         <source>%1 is not available</source>
@@ -3424,6 +3428,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Do you want to cancel the transfer of %1?</source>
         <translation>Vuoi interrompere il trasferimento di %1?</translation>
+    </message>
+    <message>
+        <source>Waiting</source>
+        <translation>In attesa</translation>
     </message>
 </context>
 <context>

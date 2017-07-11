@@ -171,10 +171,21 @@ void GuiTransferFile::showProgress( QTreeWidgetItem* item, const FileInfo& fi, F
   }
 
   QString file_transfer_progress_perc = QString::number( static_cast<FileSizeType>( (bytes * 100) / fi.size()));
-  QString file_transfer_progress = QString( "%1 %2 of %3" ).arg( fi.isDownload() ? tr( "Downloading" ) : tr( "Uploading" ),
+  QString file_transfer_progress = bytes == 0 ? tr( "Waiting" ) : QString( "%1 %2 of %3" ).arg( fi.isDownload() ? tr( "Downloading" ) : tr( "Uploading" ),
                                       Bee::bytesToString( bytes ), Bee::bytesToString( fi.size() ) );
+
   item->setText( ColumnProgress, file_transfer_progress );
-  item->setText( ColumnReport, file_transfer_progress_perc );
+  if( bytes == 0 )
+  {
+    item->setIcon( ColumnReport, IconManager::instance().icon( "timer.png" ) );
+    item->setText( ColumnReport, "" );
+  }
+  else
+  {
+    if( !item->icon( ColumnReport ).isNull() )
+      item->setIcon( ColumnReport, QIcon() );
+    item->setText( ColumnReport, file_transfer_progress_perc );
+  }
 }
 
 void GuiTransferFile::setMessage( VNumber peer_id, const User& u, const FileInfo& fi, const QString& msg )

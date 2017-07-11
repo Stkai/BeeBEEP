@@ -204,7 +204,7 @@ void Core::parseFileMessage( const User& u, const Message& m )
     qDebug() << "ShareBox downloads from user" << qPrintable( u.path() ) << "the file" << qPrintable( fi.name() ) << "in path" << qPrintable( to_path );
     fi.setPath( to_path );
 
-    mp_fileTransfer->downloadFile( fi );
+    mp_fileTransfer->downloadFile( u.id(), fi );
   }
   else
     emit fileDownloadRequest( u, fi );

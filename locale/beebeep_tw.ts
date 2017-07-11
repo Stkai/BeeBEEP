@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="zh_TW">
+<TS version="2.0" language="zh_TW">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -448,6 +448,10 @@
     </message>
     <message>
         <source>%1 Connection closed to user %2 because it uses same account name of the already connected user %3: %4.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>invalid user #%1.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1123,10 +1127,6 @@ Please select a different name.</source>
     </message>
     <message>
         <source>upload completed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ready</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3332,6 +3332,10 @@ Please select a different name.</source>
     <message>
         <source>Transfer completed</source>
         <translation>傳輸完成</translation>
+    </message>
+    <message>
+        <source>Waiting</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

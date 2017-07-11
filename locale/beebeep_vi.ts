@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="vi_VN">
+<TS version="2.0" language="vi_VN">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -137,17 +137,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="529"/>
+        <location filename="../src/core/Core.cpp" line="527"/>
         <source>New version is available</source>
         <translation>Phiên bản mới có sẵn</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="530"/>
+        <location filename="../src/core/Core.cpp" line="528"/>
         <source>Click here to download</source>
         <translation>Nhấn vào đây để tải</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="619"/>
+        <location filename="../src/core/Core.cpp" line="615"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>ID đã đạt tối đa. Hãy đóng và khởi động lại ứng dụng.</translation>
     </message>
@@ -420,32 +420,37 @@
         <translation>%1 Bạn đang gửi %2 đến %3. Kiểm tra thư mục...</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="614"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="616"/>
         <source>%1 Unable to send folder %2</source>
         <translation>%1 Không thể gửi thư mục %2</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="619"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="621"/>
+        <source>invalid user #%1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="628"/>
         <source>the folder is empty.</source>
         <translation>thư mục rỗng.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="626"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="635"/>
         <source>file transfer is not working.</source>
         <translation>chuyển tập tin không hoạt động.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="634"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="643"/>
         <source>%1 is not connected.</source>
         <translation>%1 không kết nối.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="648"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="657"/>
         <source>internal error.</source>
         <translation>lỗi bên trong.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="653"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="662"/>
         <source>%1 You send folder %2 to %3.</source>
         <translation>%1 Bạn gửi thư mục %2 đến %3.</translation>
     </message>
@@ -520,27 +525,27 @@
         <translation>được thêm vào mục yêu thích</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="282"/>
+        <location filename="../src/core/CoreConnection.cpp" line="285"/>
         <source>%1 Connection closed to user %2 because it uses your nickname: %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="277"/>
+        <location filename="../src/core/CoreConnection.cpp" line="280"/>
         <source>%1 Connection closed to user %2 because it uses your account name: %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="300"/>
+        <location filename="../src/core/CoreConnection.cpp" line="303"/>
         <source>%1 Connection closed to user %2 because it uses same account name of the already connected user %3: %4.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="305"/>
+        <location filename="../src/core/CoreConnection.cpp" line="308"/>
         <source>%1 Connection closed to user %2 because it uses same nickname of the already connected user %3: %4.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="360"/>
+        <location filename="../src/core/CoreConnection.cpp" line="363"/>
         <source>%1 users connected</source>
         <translation type="unfinished"></translation>
     </message>
@@ -627,22 +632,22 @@
         <translation>%1 byte đã tải về nhưng kích thước tập tin là chỉ %2 byte</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="53"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="56"/>
         <source>Transfer cancelled</source>
         <translation>Đã hủy chuyển</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="132"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="135"/>
         <source>Transfer completed in %1</source>
         <translation>Chuyển hoàn thành %1</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="213"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="218"/>
         <source>Connection timeout</source>
         <translation>Thời gian chờ kết nối</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="221"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="226"/>
         <source>Transfer timeout</source>
         <translation>Thời gian chờ chuyển tập tin</translation>
     </message>
@@ -1349,69 +1354,64 @@ Vui lòng chọn một tên khác nhau.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="53"/>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="139"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="140"/>
         <source>Show the view tool bar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="145"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="146"/>
         <source>Show my shared files</source>
         <translation type="unfinished">Hiện các tập tin chia sẻ của tôi</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="146"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="147"/>
         <source>Show the network shared files</source>
         <translation type="unfinished">Hiện các tập tin chia sẻ trên mạng</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="256"/>
-        <source>Ready</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="262"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="261"/>
         <source>%1 is not available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="278"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="277"/>
         <source>%1 has shared %2 files</source>
         <translation type="unfinished">%1 đã chia sẻ %2 tập tin</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="244"/>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="301"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="300"/>
         <source>downloading</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="250"/>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="301"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="300"/>
         <source>uploading</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="309"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="308"/>
         <source>download completed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="309"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="308"/>
         <source>upload completed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="156"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="157"/>
         <source>Show the bar of local file sharing</source>
         <translation type="unfinished">Hiện thanh chia sẻ tập tin nội bộ</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="147"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="148"/>
         <source>Show the ShareBox</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="169"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="170"/>
         <source>Show the bar of network file sharing</source>
         <translation type="unfinished">Hiện thanh chia sẻ tập tin trên mạng</translation>
     </message>
@@ -2431,7 +2431,7 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1314"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1313"/>
         <source>How many minutes of idle %1 can wait before changing status to away?</source>
         <translation>Bao nhiêu phút nhàn rỗi %1 có thể chờ đợi trước khi thay đổi trạng thái đang ở xa?</translation>
     </message>
@@ -3649,7 +3649,7 @@ Vui lòng chọn một tên khác nhau.</translation>
     <name>GuiShareBox</name>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="55"/>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="420"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="421"/>
         <source>ShareBox</source>
         <translation>Hộp chia sẻ (ShareBox)</translation>
     </message>
@@ -3702,43 +3702,43 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation>%1 - Chọn thư mục hộp chia sẻ (ShareBox)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="410"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="411"/>
         <source>%1: access denied.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="420"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="421"/>
         <source>%1 &lt;b&gt;%2&lt;/b&gt;</source>
         <translation>%1 &lt;b&gt;%2&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="420"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="421"/>
         <source>is unavailable</source>
         <translation>không có sẵn</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="441"/>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="445"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="442"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="446"/>
         <source>Please wait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="443"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="444"/>
         <source>Please wait for path %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="451"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="452"/>
         <source>Disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="568"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="569"/>
         <source>Please insert the new folder name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="574"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="575"/>
         <source>%1 already exists.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4238,7 +4238,12 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation>Đang tải lên</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="207"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="174"/>
+        <source>Waiting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="218"/>
         <source>Do you want to cancel the transfer of %1?</source>
         <translation type="unfinished"></translation>
     </message>

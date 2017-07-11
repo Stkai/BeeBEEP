@@ -44,6 +44,8 @@ public:
   inline void removeFromQueue();
 
   inline void setTransferType( FileInfo::TransferType );
+  inline void setRemoteUserId( VNumber );
+  inline VNumber remoteUserId() const;
   inline bool isDownload() const;
   inline void setId( VNumber );
   inline VNumber id() const;
@@ -110,6 +112,7 @@ protected:
   ConnectionSocket m_socket;
   QTime m_time;
   int m_socketDescriptor;
+  VNumber m_remoteUserId;
 
 };
 
@@ -129,5 +132,7 @@ inline VNumber FileTransferPeer::userId() const { return m_socket.userId(); }
 inline QHostAddress FileTransferPeer::peerAddress() const { return m_socket.peerAddress(); }
 inline bool FileTransferPeer::isActive() const { return m_state == FileTransferPeer::Starting || m_state == FileTransferPeer::Request || m_socket.isConnected(); }
 inline bool FileTransferPeer::isTransferCompleted() const { return m_state == FileTransferPeer::Completed; }
+inline void FileTransferPeer::setRemoteUserId( VNumber new_value ) { m_remoteUserId = new_value; }
+inline VNumber FileTransferPeer::remoteUserId() const { return userId() != ID_INVALID ? userId() : m_remoteUserId; }
 
 #endif // BEEBEEP_FILETRANSFERSERVERPEER_H

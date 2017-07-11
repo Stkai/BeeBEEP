@@ -240,9 +240,9 @@ void GuiLog::stopCheckingLog()
 void GuiLog::refreshLog()
 {
   QString plain_text = "";
-  foreach( QString log_line, Log::instance().toList() )
+  foreach( std::string log_line, Log::instance().toList() )
   {
-    plain_text += log_line;
+    plain_text += QString::fromStdString( log_line );
     plain_text += QLatin1String( "\n" );
   }
 

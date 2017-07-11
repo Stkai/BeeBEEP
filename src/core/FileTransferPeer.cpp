@@ -30,9 +30,9 @@
 
 FileTransferPeer::FileTransferPeer( QObject *parent )
   : QObject( parent ), m_transferType( FileInfo::Upload ), m_id( ID_INVALID ),
-    m_fileInfo( 0, FileInfo::Upload ), m_file(), m_state( FileTransferPeer::Unknown ),
+    m_fileInfo( ID_INVALID, FileInfo::Upload ), m_file(), m_state( FileTransferPeer::Unknown ),
     m_bytesTransferred( 0 ), m_totalBytesTransferred( 0 ), m_socket( parent ),
-    m_time( QTime::currentTime() ), m_socketDescriptor( 0 )
+    m_time( QTime::currentTime() ), m_socketDescriptor( 0 ), m_remoteUserId( ID_INVALID )
 {
   setObjectName( "FileTransferPeer" );
 #ifdef BEEBEEP_DEBUG
@@ -45,12 +45,15 @@ FileTransferPeer::FileTransferPeer( QObject *parent )
 
 void FileTransferPeer::cancelTransfer()
 {
+  if( m_state == FileTransferPeer::Cancelled )
+    return;
   qDebug() << qPrintable( name() ) << "cancels the transfer";
   if( m_socket.isOpen() )
     m_socket.abortConnection();
   m_state = FileTransferPeer::Cancelled;
   closeAll();
-  emit message( id(), userId(), m_fileInfo, tr( "Transfer cancelled" ) );
+  if( m_fileInfo.isValid() && userId() != ID_INVALID )
+    emit message( id(), userId(), m_fileInfo, tr( "Transfer cancelled" ) );
   deleteLater();
 }
 
@@ -203,6 +206,8 @@ void FileTransferPeer::checkUserAuthentication( const QByteArray& auth_byte_arra
 void FileTransferPeer::setUserAuthorized( VNumber user_id )
 {
   m_socket.setUserId( user_id );
+  if( m_remoteUserId == ID_INVALID )
+    m_remoteUserId = user_id;
   if( isDownload() )
     sendDownloadRequest();
 }

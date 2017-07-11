@@ -41,7 +41,7 @@ void BuildFileShareList::setFolderPath( const QString& path_to_share )
   m_folderName = dir_shared.dirName();
   m_folderPath = Bee::convertToNativeFolderSeparator( dir_shared.absolutePath() );
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Building file share list" << m_folderName << "with path" << qPrintable( m_folderPath );
+  qDebug() << "Building file share list" << m_folderName << "with path" << qPrintable( m_folderPath ) << "for user" << m_userId;
 #endif
 }
 

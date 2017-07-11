@@ -506,7 +506,9 @@ void Core::removeInactiveUsers()
   int inactivity_days = 0;
   foreach( User u, ul_users.toList() )
   {
-    if( !u.isLocal() && u.lastConnection().isValid() )
+    if( u.isLocal() )
+      continue;
+    if( u.lastConnection().isValid() )
     {
       inactivity_days = u.lastConnection().daysTo( dt_today );
       if( inactivity_days > Settings::instance().maxDaysOfUserInactivity() )
@@ -514,6 +516,11 @@ void Core::removeInactiveUsers()
         qDebug() << "Removing user" << qPrintable( u.name() ) << "due to inactivity of" << inactivity_days << "days";
         removeOfflineUser( u.id() );
       }
+    }
+    else
+    {
+      u.setLastConnection( dt_today );
+      UserManager::instance().setUser( u );
     }
   }
 }

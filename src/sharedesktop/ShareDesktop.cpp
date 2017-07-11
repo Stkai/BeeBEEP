@@ -85,8 +85,8 @@ bool ShareDesktop::start()
     mp_job = new ShareDesktopJob;
     connect( this, SIGNAL( imageAvailable( const QImage& ) ), mp_job, SLOT( processNewImage( const QImage& ) ), Qt::QueuedConnection );
     connect( mp_job, SIGNAL( imageDataAvailable( const QByteArray&, const QString&, bool, unsigned int ) ), this, SLOT( onImageDataAvailable( const QByteArray&, const QString&, bool, unsigned int ) ), Qt::QueuedConnection );
-    BeeApplication* bee_app = (BeeApplication*)qApp;
-    bee_app->addJob( mp_job );
+    if( beeApp )
+      beeApp->addJob( mp_job );
   }
 
   m_timer.start( Settings::instance().shareDesktopCaptureDelay() );
@@ -100,8 +100,8 @@ void ShareDesktop::stop()
   m_timer.stop();
   m_lastImageData = ShareDesktopData();
   m_userIdList.clear();
-  BeeApplication* bee_app = (BeeApplication*)qApp;
-  bee_app->removeJob( mp_job );
+  if( beeApp )
+    beeApp->removeJob( mp_job );
   mp_job->deleteLater();
   mp_job = 0;
 #ifdef BEEBEEP_DEBUG

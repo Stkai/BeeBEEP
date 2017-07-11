@@ -396,6 +396,7 @@ void GuiShareBox::onShareBoxSelected( int )
   {
     setCurrentFolder( current_user_id, "" );
     disableBox( current_user_id );
+    updateCurrentFolderLabel( current_user_id );
   }
 }
 

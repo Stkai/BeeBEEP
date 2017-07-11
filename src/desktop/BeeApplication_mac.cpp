@@ -74,8 +74,8 @@ void BeeMacSleepCallBack( void * ref_con, io_service_t io_srv, natural_t message
     */
     {
       IOAllowPowerChange( mac_io_root_port, (long)message_argument );
-      BeeApplication* bee_app = (BeeApplication*)qApp;
-      bee_app->forceSleep();
+      if( beeApp )
+        beeApp->forceSleep();
     }
     break;
 
@@ -86,8 +86,8 @@ void BeeMacSleepCallBack( void * ref_con, io_service_t io_srv, natural_t message
   case kIOMessageSystemHasPoweredOn:
      //System has finished waking up...
      {
-       BeeApplication* bee_app = (BeeApplication*)qApp;
-       bee_app->wakeFromSleep();
+       if( beeApp )
+         beeApp->wakeFromSleep();
      }
      break;
 

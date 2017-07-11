@@ -210,6 +210,9 @@ void Core::closeConnection( Connection *c )
       FileShare::instance().removeFromNetwork( u.id() );
       emit fileShareAvailable( u );
 
+      if( isConnected() )
+        mp_fileTransfer->removeFilesToUser( u.id() );
+
 #ifdef BEEBEEP_USE_SHAREDESKTOP
       if( mp_shareDesktop->isActive() )
         stopShareDesktop( u.id() );

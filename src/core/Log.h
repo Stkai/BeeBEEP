@@ -64,7 +64,7 @@ public:
 
   void add( QtMsgType, const QString& log_txt, const QString& log_note );
   inline void clear();
-  inline const std::list<QString>& toList() const;
+  inline const std::list<std::string>& toList() const;
 
   bool isLoggingToFile() const;
 
@@ -99,8 +99,8 @@ private:
 
   QFile m_logFile;
   QTextStream m_logStream;
-  std::list<QString> m_logList;
-  std::list<QString>::size_type m_maxLogLines;
+  std::list<std::string> m_logList;
+  std::list<std::string>::size_type m_maxLogLines;
 
 };
 
@@ -108,7 +108,7 @@ private:
 // Inline Functions
 inline void Log::setMaxLogLines( int new_value ) { m_maxLogLines = new_value; }
 inline void Log::clear() { m_logList.clear(); }
-inline const std::list<QString>& Log::toList() const { return m_logList; }
+inline const std::list<std::string>& Log::toList() const { return m_logList; }
 
 
 #endif // BEEBEEP_LOG_H

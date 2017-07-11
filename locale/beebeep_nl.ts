@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="nl_BE" sourcelanguage="en_US">
+<TS version="2.0" language="nl_BE" sourcelanguage="en_US">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -145,17 +145,17 @@
         <translation>Zoek gebruikers</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="529"/>
+        <location filename="../src/core/Core.cpp" line="527"/>
         <source>New version is available</source>
         <translation>Nieuwe versie beschikbaar</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="530"/>
+        <location filename="../src/core/Core.cpp" line="528"/>
         <source>Click here to download</source>
         <translation>Klik hier om te downloaden</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="619"/>
+        <location filename="../src/core/Core.cpp" line="615"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>Max-ID is bereikt. Sluit en herstart Beebeep AUB.</translation>
     </message>
@@ -432,32 +432,37 @@
         <translation>%1 Je staat op het punt om %2 te zenden naar %3. Controleer map...</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="614"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="616"/>
         <source>%1 Unable to send folder %2</source>
         <translation>%1 Kan niet verzenden naar map %2</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="619"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="621"/>
+        <source>invalid user #%1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="628"/>
         <source>the folder is empty.</source>
         <translation>de map is leeg.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="626"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="635"/>
         <source>file transfer is not working.</source>
         <translation>Bestandsoverdracht werkt niet.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="634"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="643"/>
         <source>%1 is not connected.</source>
         <translation>%1 is niet verbonden.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="648"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="657"/>
         <source>internal error.</source>
         <translation>interne fout.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="653"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="662"/>
         <source>%1 You send folder %2 to %3.</source>
         <translation>%1 Je zend map %2 naar %3.</translation>
     </message>
@@ -532,27 +537,27 @@
         <translation>is toegevoegd aan favorieten</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="282"/>
+        <location filename="../src/core/CoreConnection.cpp" line="285"/>
         <source>%1 Connection closed to user %2 because it uses your nickname: %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="277"/>
+        <location filename="../src/core/CoreConnection.cpp" line="280"/>
         <source>%1 Connection closed to user %2 because it uses your account name: %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="300"/>
+        <location filename="../src/core/CoreConnection.cpp" line="303"/>
         <source>%1 Connection closed to user %2 because it uses same account name of the already connected user %3: %4.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="305"/>
+        <location filename="../src/core/CoreConnection.cpp" line="308"/>
         <source>%1 Connection closed to user %2 because it uses same nickname of the already connected user %3: %4.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="360"/>
+        <location filename="../src/core/CoreConnection.cpp" line="363"/>
         <source>%1 users connected</source>
         <translation type="unfinished"></translation>
     </message>
@@ -643,22 +648,22 @@
         <translation>%1 bytes gedownload maar grootte van het bestand is maar %2 bytes</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="53"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="56"/>
         <source>Transfer cancelled</source>
         <translation>Overdracht annuleren</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="132"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="135"/>
         <source>Transfer completed in %1</source>
         <translation>Overdracht voltooid in %1</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="213"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="218"/>
         <source>Connection timeout</source>
         <translation>Kon niet tijdig verbinden</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="221"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="226"/>
         <source>Transfer timeout</source>
         <translation>Overdrachts timeout</translation>
     </message>
@@ -1369,69 +1374,64 @@ Gebruik aub een andere naam.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="53"/>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="139"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="140"/>
         <source>Show the view tool bar</source>
         <translation>Toon de werkbalk</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="145"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="146"/>
         <source>Show my shared files</source>
         <translation>Toon de gedeelde bestanden</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="146"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="147"/>
         <source>Show the network shared files</source>
         <translation>Toon de bestanden die gedeeld worden op het netwerk</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="256"/>
-        <source>Ready</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="262"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="261"/>
         <source>%1 is not available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="278"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="277"/>
         <source>%1 has shared %2 files</source>
         <translation>%1 heeft %2 bestanden gedeeld</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="244"/>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="301"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="300"/>
         <source>downloading</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="250"/>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="301"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="300"/>
         <source>uploading</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="309"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="308"/>
         <source>download completed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="309"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="308"/>
         <source>upload completed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="156"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="157"/>
         <source>Show the bar of local file sharing</source>
         <translation>Toon de werkbalk voor lokale bestandsdeling</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="147"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="148"/>
         <source>Show the ShareBox</source>
         <translation>Toon de sharebox</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="169"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="170"/>
         <source>Show the bar of network file sharing</source>
         <translation>Toon de werkbalk voor bestandsdeling op het netwerk</translation>
     </message>
@@ -2545,7 +2545,7 @@ Gebruik aub een andere naam.</translation>
         <translation>Bestandsoverdrachten</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1314"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1313"/>
         <source>How many minutes of idle %1 can wait before changing status to away?</source>
         <translation>Hoeveel minuten moet %1 wachten voor de status in &apos;weg&apos; wordt gewijzigd?</translation>
     </message>
@@ -3677,7 +3677,7 @@ Gebruik aub een andere naam.</translation>
     <name>GuiShareBox</name>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="55"/>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="420"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="421"/>
         <source>ShareBox</source>
         <translation>Deelbox</translation>
     </message>
@@ -3730,43 +3730,43 @@ Gebruik aub een andere naam.</translation>
         <translation>%1 - Selecteer de Deelbox map</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="410"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="411"/>
         <source>%1: access denied.</source>
         <translation>%1: geen toegang.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="420"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="421"/>
         <source>%1 &lt;b&gt;%2&lt;/b&gt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="420"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="421"/>
         <source>is unavailable</source>
         <translation>is niet beschikbaar</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="441"/>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="445"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="442"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="446"/>
         <source>Please wait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="443"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="444"/>
         <source>Please wait for path %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="451"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="452"/>
         <source>Disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="568"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="569"/>
         <source>Please insert the new folder name</source>
         <translation>Geef aub een nieuwe mapnaam</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="574"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="575"/>
         <source>%1 already exists.</source>
         <translation>%1 bestaat al.</translation>
     </message>
@@ -4266,7 +4266,12 @@ Gebruik aub een andere naam.</translation>
         <translation>Aan het uploaden</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="207"/>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="174"/>
+        <source>Waiting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="218"/>
         <source>Do you want to cancel the transfer of %1?</source>
         <translation>Wil je de overdracht van %1 annuleren of?</translation>
     </message>

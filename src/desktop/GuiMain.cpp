@@ -1309,14 +1309,14 @@ void GuiMain::settingsChanged( QAction* act )
       Settings::instance().setAutoUserAway( act->isChecked() );
       if( act->isChecked() )
       {
-        BeeApplication* bee_app = (BeeApplication*)qApp;
         int away_timeout = QInputDialog::getInt( this, Settings::instance().programName(),
                               tr( "How many minutes of idle %1 can wait before changing status to away?" ).arg( Settings::instance().programName() ),
                               Settings::instance().userAwayTimeout(), 1, 30, 1, &ok );
         if( ok && away_timeout > 0 )
           Settings::instance().setUserAwayTimeout( away_timeout );
 
-        bee_app->setIdleTimeout( Settings::instance().userAwayTimeout() );
+        if( beeApp )
+          beeApp->setIdleTimeout( Settings::instance().userAwayTimeout() );
       }
     }
     break;

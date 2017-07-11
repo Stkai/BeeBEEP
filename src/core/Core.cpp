@@ -484,9 +484,8 @@ void Core::checkNewVersion()
   qDebug() << "Checking for new version...";
   Updater* updater = new Updater;
   connect( updater, SIGNAL( jobCompleted() ), this, SLOT( onUpdaterJobCompleted() ) );
-  BeeApplication* bee_app = qobject_cast<BeeApplication*>qApp;
-  if( bee_app )
-    bee_app->addJob( updater );
+  if( beeApp )
+    beeApp->addJob( updater );
   QMetaObject::invokeMethod( updater, "checkForNewVersion", Qt::QueuedConnection );
 }
 
@@ -499,9 +498,8 @@ void Core::onUpdaterJobCompleted()
     return;
   }
 
-  BeeApplication* bee_app = qobject_cast<BeeApplication*>qApp;
-  if( bee_app )
-    bee_app->removeJob( updater );
+  if( beeApp )
+    beeApp->removeJob( updater );
 
   QString latest_version = updater->versionAvailable();
   QString download_url = updater->downloadUrl().isEmpty() ? Settings::instance().downloadWebSite() : updater->downloadUrl();
@@ -542,9 +540,8 @@ void Core::postUsageStatistics()
   qDebug() << qPrintable( ga->objectName() ) << "created";
 #endif
   connect( ga, SIGNAL( jobFinished() ), this, SLOT( onPostUsageStatisticsJobCompleted() ) );
-  BeeApplication* bee_app = qobject_cast<BeeApplication*>qApp;
-  if( bee_app )
-    bee_app->addJob( ga );
+  if( beeApp )
+    beeApp->addJob( ga );
   QMetaObject::invokeMethod( ga, "doPost", Qt::QueuedConnection );
 }
 
@@ -563,9 +560,8 @@ void Core::onPostUsageStatisticsJobCompleted()
   qDebug() << qPrintable( ga->objectName() ) << "will be cleared";
 #endif
 
-  BeeApplication* bee_app = qobject_cast<BeeApplication*>qApp;
-  if( bee_app )
-    bee_app->removeJob( ga );
+  if( beeApp )
+    beeApp->removeJob( ga );
 
   ga->deleteLater();
 }

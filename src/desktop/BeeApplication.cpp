@@ -98,8 +98,8 @@ void BeeApplication::forceShutdown()
 void BeeApplication::quitAfterSignal( int sig )
 {
   qWarning() << "Signal" << sig << "received by system";
-  BeeApplication* bee_app = (BeeApplication*)qApp;
-  bee_app->forceShutdown();
+  if( beeApp )
+    beeApp->forceShutdown();
 }
 
 void BeeApplication::init()

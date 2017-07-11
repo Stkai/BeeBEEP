@@ -119,7 +119,7 @@ bool Core::downloadFile( VNumber user_id, const FileInfo& fi, bool show_message 
   }
 
   qDebug() << "Downloading file" << qPrintable( fi.path() ) << "from user" << qPrintable( u.path() );
-  mp_fileTransfer->downloadFile( fi );
+  mp_fileTransfer->downloadFile( u.id(), fi );
   return true;
 }
 
@@ -405,8 +405,8 @@ void Core::addPathToShare( const QString& share_path )
     BuildFileShareList *bfsl = new BuildFileShareList;
     bfsl->setFolderPath( Bee::convertToNativeFolderSeparator( share_path ) );
     connect( bfsl, SIGNAL( listCompleted() ), this, SLOT( addListToLocalShare() ) );
-    BeeApplication* bee_app = (BeeApplication*)qApp;
-    bee_app->addJob( bfsl );
+    if( beeApp )
+      beeApp->addJob( bfsl );
     QMetaObject::invokeMethod( bfsl, "buildList", Qt::QueuedConnection );
   }
   else
@@ -462,8 +462,8 @@ void Core::addListToLocalShare()
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( IconManager::instance().toHtml( "upload.png", "*F*" ), share_status ),
                          DispatchToChat, ChatMessage::FileTransfer );
 
-  BeeApplication* bee_app = (BeeApplication*)qApp;
-  bee_app->removeJob( bfsl );
+  if( beeApp )
+    beeApp->removeJob( bfsl );
 
   if( m_shareListToBuild == 0 )
   {
@@ -582,8 +582,8 @@ bool Core::sendFolder( const User& u, const QFileInfo& file_info, const QString&
   bfsl->setUserId( u.id() );
   bfsl->setChatPrivateId( chat_private_id );
   connect( bfsl, SIGNAL( listCompleted() ), this, SLOT( addFolderToFileTransfer() ) );
-  BeeApplication* bee_app = (BeeApplication*)qApp;
-  bee_app->addJob( bfsl );
+  if( beeApp )
+    beeApp->addJob( bfsl );
   QMetaObject::invokeMethod( bfsl, "buildList", Qt::QueuedConnection );
   return true;
 }
@@ -597,10 +597,12 @@ void Core::addFolderToFileTransfer()
     return;
   }
 
-  BeeApplication* bee_app = (BeeApplication*)qApp;
-  bee_app->removeJob( bfsl );
+  if( beeApp )
+    beeApp->removeJob( bfsl );
   QString folder_name = bfsl->folderName();
   QList<FileInfo> file_info_list = bfsl->shareList();
+  VNumber user_id = bfsl->userId();
+  QString chat_private_id = bfsl->chatPrivateId();
   bfsl->deleteLater();
 
   if( folder_name.isEmpty() )
@@ -609,10 +611,17 @@ void Core::addFolderToFileTransfer()
     return;
   }
 
-  Chat chat_to_show_message = ChatManager::instance().findChatByPrivateId( bfsl->chatPrivateId(), false, bfsl->userId() );
-  User u = UserManager::instance().findUser( bfsl->userId() );
+  Chat chat_to_show_message = ChatManager::instance().findChatByPrivateId( chat_private_id, false, user_id );
+  User u = UserManager::instance().findUser( user_id );
   QString sys_header = tr( "%1 Unable to send folder %2" ).arg( IconManager::instance().toHtml( "red-ball.png", "*F*" ) )
                                                           .arg( folder_name ) + QString( ": " );
+
+  if( !u.isValid() )
+  {
+    dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, ID_LOCAL_USER, sys_header + tr( "invalid user #%1." ).arg( user_id ),
+                           chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+    return;
+  }
 
   if( file_info_list.isEmpty() )
   {
@@ -712,8 +721,8 @@ void Core::buildShareBoxFileList( const User& u, const QString& folder_name, boo
   BuildFileList *bfl = new BuildFileList;
   bfl->init( folder_name, folder_path, u.id() );
   connect( bfl, SIGNAL( listCompleted() ), this, SLOT( sendShareBoxList() ) );
-  BeeApplication* bee_app = (BeeApplication*)qApp;
-  bee_app->addJob( bfl );
+  if( beeApp )
+    beeApp->addJob( bfl );
   QMetaObject::invokeMethod( bfl, "buildList", Qt::QueuedConnection );
 }
 
@@ -726,8 +735,8 @@ void Core::sendShareBoxList()
     return;
   }
 
-  BeeApplication* bee_app = (BeeApplication*)qApp;
-  bee_app->removeJob( bfl );
+  if( beeApp )
+    beeApp->removeJob( bfl );
   QString folder_name = bfl->folderName();
   VNumber to_user_id = bfl->toUserId();
   bool error_found = bfl->errorFound();
@@ -773,7 +782,7 @@ void Core::downloadFromShareBox( VNumber from_user_id, const FileInfo& fi, const
 
   FileInfo download_file_info = fi;
   download_file_info.setPath( to_path );
-  mp_fileTransfer->downloadFile( download_file_info );
+  mp_fileTransfer->downloadFile( from_user_id, download_file_info );
 }
 
 void Core::uploadToShareBox( VNumber to_user_id, const FileInfo& fi, const QString& to_path )

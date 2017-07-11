@@ -53,8 +53,8 @@ public:
       MSG* event_message = static_cast<MSG*>( event_msg );
       if( event_message )
       {
-        BeeApplication* bee_app = (BeeApplication*)qApp;
-        return bee_app->winEventFilter( event_message, event_result );
+        if( beeApp )
+          return beeApp->winEventFilter( event_message, event_result );
       }
     }
     return false;
