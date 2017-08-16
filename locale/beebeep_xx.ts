@@ -325,7 +325,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="180"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="181"/>
         <source>Open</source>
         <translation type="unfinished"></translation>
     </message>
@@ -632,22 +632,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="56"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="57"/>
         <source>Transfer cancelled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="135"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="136"/>
         <source>Transfer completed in %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="218"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="220"/>
         <source>Connection timeout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="226"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="228"/>
         <source>Transfer timeout</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4165,11 +4165,6 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiTransferFile.cpp" line="168"/>
         <source>Transfer completed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="169"/>
-        <source>Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

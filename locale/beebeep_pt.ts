@@ -325,7 +325,7 @@
         <translation>Para</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="180"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="181"/>
         <source>Open</source>
         <translation>Abrir</translation>
     </message>
@@ -636,22 +636,22 @@
         <translation>%1 bytes baixados mas o tamnho do arquivo é de apenas %2 bytes</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="56"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="57"/>
         <source>Transfer cancelled</source>
         <translation>Transferência Cancelada</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="135"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="136"/>
         <source>Transfer completed in %1</source>
         <translation>Transferência Completada em %1</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="218"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="220"/>
         <source>Connection timeout</source>
         <translation>Tempode Conexão esgotado</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="226"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="228"/>
         <source>Transfer timeout</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4211,9 +4211,8 @@ Selecione um nome diferente.</translation>
         <translation>Trasnferência Completa</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="169"/>
         <source>Ok</source>
-        <translation type="unfinished">OK</translation>
+        <translation type="obsolete">OK</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiTransferFile.cpp" line="174"/>

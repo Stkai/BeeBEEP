@@ -337,7 +337,7 @@
         <translation>uživateli</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="180"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="181"/>
         <source>Open</source>
         <translation>Otevřít</translation>
     </message>
@@ -648,22 +648,22 @@
         <translation>%1 bajtů staženo ale velikost souboru je pouze %2 bajtů</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="56"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="57"/>
         <source>Transfer cancelled</source>
         <translation>Přenos ukončen</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="135"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="136"/>
         <source>Transfer completed in %1</source>
         <translation>Přenos dokončen za  %1</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="218"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="220"/>
         <source>Connection timeout</source>
         <translation>Čas spojení vypršel</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="226"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="228"/>
         <source>Transfer timeout</source>
         <translation>Časový limit souboru</translation>
     </message>
@@ -4251,9 +4251,8 @@ Vyberte prosím jiné jméno.</translation>
         <translation>Přenos kompletní</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="169"/>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation type="obsolete">Ok</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiTransferFile.cpp" line="174"/>

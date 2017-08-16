@@ -3287,7 +3287,7 @@ Please select a different name.</source>
     <name>GuiTransferFile</name>
     <message>
         <source>Ok</source>
-        <translation>確定</translation>
+        <translation type="obsolete">確定</translation>
     </message>
     <message>
         <source>File</source>

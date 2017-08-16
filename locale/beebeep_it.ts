@@ -3423,7 +3423,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation type="obsolete">Ok</translation>
     </message>
     <message>
         <source>Do you want to cancel the transfer of %1?</source>

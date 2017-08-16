@@ -325,7 +325,7 @@
         <translation>nak</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="180"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="181"/>
         <source>Open</source>
         <translation>Megnyitás</translation>
     </message>
@@ -665,22 +665,22 @@
         <translation>%1 bájt letöltve, de a fájl mérete csak %2 bájt</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="56"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="57"/>
         <source>Transfer cancelled</source>
         <translation>Az átvitel megszakítva</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="135"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="136"/>
         <source>Transfer completed in %1</source>
         <translation>Átvitel befejeződött %1</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="218"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="220"/>
         <source>Connection timeout</source>
         <translation>Csatlakozás időtúllépése</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="226"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="228"/>
         <source>Transfer timeout</source>
         <translation>Átvitel időtúllépése</translation>
     </message>
@@ -4278,9 +4278,8 @@ Válasszon ki egy beszélgetést, ha szeretné linkelni az elmentett szöveget.<
         <translation>Átvitel befejeződött</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="169"/>
         <source>Ok</source>
-        <translation type="unfinished">Rendben</translation>
+        <translation type="obsolete">Rendben</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiTransferFile.cpp" line="174"/>

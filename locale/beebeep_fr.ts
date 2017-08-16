@@ -325,7 +325,7 @@
         <translation>à</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="180"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="181"/>
         <source>Open</source>
         <translation>Ouvrir</translation>
     </message>
@@ -636,22 +636,22 @@
         <translation>%1 octets téléchargés mais le fichier ne fait que %2 octets</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="56"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="57"/>
         <source>Transfer cancelled</source>
         <translation>Transfert annulé</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="135"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="136"/>
         <source>Transfer completed in %1</source>
         <translation>Transfert effectué en %1</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="218"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="220"/>
         <source>Connection timeout</source>
         <translation>Connexion : délais dépassé</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="226"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="228"/>
         <source>Transfer timeout</source>
         <translation></translation>
     </message>
@@ -4214,9 +4214,8 @@ Please select a different name.</source>
         <translation>Transfert réussi</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="169"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation type="obsolete">Ok</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiTransferFile.cpp" line="174"/>

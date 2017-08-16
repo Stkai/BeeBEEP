@@ -3309,7 +3309,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     <name>GuiTransferFile</name>
     <message>
         <source>Ok</source>
-        <translation>OK</translation>
+        <translation type="obsolete">OK</translation>
     </message>
     <message>
         <source>File</source>

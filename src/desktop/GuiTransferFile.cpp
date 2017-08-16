@@ -45,20 +45,20 @@ GuiTransferFile::GuiTransferFile( QWidget *parent )
   QHeaderView* hv = header();
 #if QT_VERSION >= 0x050000
   hv->setSectionResizeMode( ColumnCancel, QHeaderView::Fixed );
-  hv->setSectionResizeMode( ColumnReport, QHeaderView::Fixed );
+  hv->setSectionResizeMode( ColumnReport, QHeaderView::ResizeToContents );
   hv->setSectionResizeMode( ColumnFile, QHeaderView::ResizeToContents );
   hv->setSectionResizeMode( ColumnUser, QHeaderView::ResizeToContents );
   hv->setSectionResizeMode( ColumnProgress, QHeaderView::Stretch );
 #else
   hv->setResizeMode( ColumnCancel, QHeaderView::Fixed );
-  hv->setResizeMode( ColumnReport, QHeaderView::Fixed );
+  hv->setResizeMode( ColumnReport, QHeaderView::ResizeToContents );
   hv->setResizeMode( ColumnFile, QHeaderView::ResizeToContents );
   hv->setResizeMode( ColumnUser, QHeaderView::ResizeToContents );
   hv->setResizeMode( ColumnProgress, QHeaderView::Stretch );
 #endif
 
-  setColumnWidth( ColumnCancel, 24 );
-  setColumnWidth( ColumnReport, 24 );
+  setColumnWidth( ColumnCancel, 32 );
+  setColumnWidth( ColumnReport, 48 );
   hv->hide();
 
   mp_menuContext = new QMenu( this );
@@ -166,7 +166,7 @@ void GuiTransferFile::showProgress( QTreeWidgetItem* item, const FileInfo& fi, F
   if( item->data( ColumnFile, TransferCompleted ).toBool() )
   {
     item->setText( ColumnProgress, tr( "Transfer completed" ) );
-    item->setText( ColumnReport, tr( "Ok" ) );
+    item->setText( ColumnReport, QString( "100" ) );
     return;
   }
 
