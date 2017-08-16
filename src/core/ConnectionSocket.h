@@ -66,7 +66,7 @@ signals:
   void pingRequest();
 
 protected slots:
-  void readBlock();
+  qint64 readBlock();
   void sendQuestionHello();
   void checkConnectionTimeout( int );
   void onBytesWritten( qint64 );

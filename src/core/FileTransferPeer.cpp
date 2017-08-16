@@ -150,7 +150,8 @@ void FileTransferPeer::setError( const QString& str_err )
   m_state = FileTransferPeer::Error;
   qWarning() << qPrintable( name() ) << "found an error when transfer file" << qPrintable( Bee::convertToNativeFolderSeparator( m_fileInfo.name() ) ) << ":" << str_err;
   closeAll();
-  emit message( id(), userId(), m_fileInfo, str_err );
+  if( remoteUserId() != ID_INVALID && m_fileInfo.isValid() )
+    emit message( id(), userId(), m_fileInfo, str_err );
   deleteLater();
 }
 

@@ -108,10 +108,10 @@ bool ConnectionSocket::createCipherKey( const QString& public_key )
   return true;
 }
 
-void ConnectionSocket::readBlock()
+qint64 ConnectionSocket::readBlock()
 {
   if( m_isAborted )
-    return;
+    return 0;
 
   m_latestActivityDateTime = QDateTime::currentDateTime();
   qint64 bytes_available = bytesAvailable();
@@ -121,7 +121,7 @@ void ConnectionSocket::readBlock()
 #ifdef BEEBEEP_DEBUG
     qDebug() << "ConnectionSocket from" << qPrintable( m_networkAddress.toString() ) << "is empty... wait for more bytes";
 #endif
-    return;
+    return 0;
   }
 
   // QByteArray
@@ -156,7 +156,7 @@ void ConnectionSocket::readBlock()
 #ifdef BEEBEEP_DEBUG
         qDebug() << "ConnectionSocket from" << qPrintable( m_networkAddress.toString() ) << "has only" << bytes_available << "bytes... wait for more";
 #endif
-        return;
+        return 0;
       }
       DATA_BLOCK_SIZE_32 block_size_32;
       data_stream >> block_size_32;
@@ -169,7 +169,7 @@ void ConnectionSocket::readBlock()
 #ifdef BEEBEEP_DEBUG
         qDebug() << "ConnectionSocket from" << qPrintable( m_networkAddress.toString() ) << "has only" << bytes_available << "bytes... wait for more";
 #endif
-        return;
+        return 0;
       }
       DATA_BLOCK_SIZE_16 block_size_16;
       data_stream >> block_size_16;
@@ -186,7 +186,7 @@ void ConnectionSocket::readBlock()
 #ifdef BEEBEEP_DEBUG
     qDebug() << "ConnectionSocket from" << qPrintable( m_networkAddress.toString() ) << "has" << bytes_available << "and wait for" << (m_blockSize-bytes_available) << "more bytes, total" << m_blockSize;
 #endif
-    return;
+    return 0;
   }
 
   QByteArray byte_array_read;
@@ -215,6 +215,8 @@ void ConnectionSocket::readBlock()
   }
   else
     emit dataReceived( decrypted_byte_array );
+
+  return byte_array_read.size();
 }
 
 void ConnectionSocket::flushAll()
@@ -487,11 +489,6 @@ void ConnectionSocket::onTickEvent( int  )
     checkConnectionTimeout( m_tickCounter );
     return;
   }
-  else
-  {
-    if( m_tickCounter % PING_INTERVAL_TICK == 0 )
-      emit pingRequest();
-  }
 
   if( m_tickCounter > 31536000 )
   {
@@ -501,15 +498,19 @@ void ConnectionSocket::onTickEvent( int  )
     return;
   }
 
-  if( m_blockSize > 0 && bytesAvailable() >= m_blockSize )
+  qint64 bytes_available = bytesAvailable();
+  if( bytes_available > 0 )
   {
-    qint64 bytes_available = bytesAvailable();
-    if( bytes_available >= m_blockSize )
+    if( m_blockSize == 0 || bytes_available >= m_blockSize )
     {
 #ifdef BEEBEEP_DEBUG
-      qDebug() << qPrintable( m_networkAddress.toString() ) << "has" << bytes_available << "bytes available: read forced";
+      qDebug() << qPrintable( m_networkAddress.toString() ) << "has" << (int)bytesAvailable() << "bytes available: read forced";
 #endif
-      readBlock();
+      if( readBlock() > 0 )
+        return;
     }
   }
+
+  if( m_tickCounter % PING_INTERVAL_TICK == 0 )
+    emit pingRequest();
 }

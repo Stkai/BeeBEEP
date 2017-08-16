@@ -116,7 +116,6 @@ void Connection::sendPing()
 #if defined( CONNECTION_PING_PONG_DEBUG )
     qDebug() << "Ping is not sent because connection" << qPrintable( networkAddress().toString() ) << "has activity idle too short:" << activity_idle << "<" << PING_INTERVAL_IDLE;
 #endif
-    flush();
     return;
   }
 
