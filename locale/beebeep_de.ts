@@ -2425,6 +2425,10 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Send offline messages also to chat with all users</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Show username&apos;s color</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

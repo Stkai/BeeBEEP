@@ -251,6 +251,9 @@ public:
   inline void setShowChatsInOneWindow( bool );
   inline bool showChatsInOneWindow() const;
   inline void setShowChatToolbar();
+  inline void setChatUseColoredUserNames( bool );
+  inline bool chatUseColoredUserNames() const;
+  inline const QString& chatDefaultUserNameColor() const;
 
   inline bool usePreviewFileDialog() const;
   inline void setPreviewFileDialogGeometry( const QByteArray& );
@@ -590,6 +593,8 @@ private:
   bool m_showTextInModeRTL;
   bool m_playBuzzSound;
   bool m_showChatsInOneWindow;
+  bool m_chatUseColoredUserNames;
+  QString m_chatDefaultUserNameColor;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -1025,5 +1030,8 @@ inline void Settings::setDelayConnectionAtStartup( int new_value ) { m_delayConn
 inline int Settings::delayConnectionAtStartup() const { return m_delayConnectionAtStartup; }
 inline void Settings::setSendOfflineMessagesToDefaultChat( bool new_value ) { m_sendOfflineMessagesToDefaultChat = new_value; }
 inline bool Settings::sendOfflineMessagesToDefaultChat() const { return m_sendOfflineMessagesToDefaultChat; }
+inline void Settings::setChatUseColoredUserNames( bool new_value ) { m_chatUseColoredUserNames = new_value; }
+inline bool Settings::chatUseColoredUserNames() const { return m_chatUseColoredUserNames; }
+inline const QString& Settings::chatDefaultUserNameColor() const { return m_chatDefaultUserNameColor; }
 
 #endif // BEEBEEP_SETTINGS_H

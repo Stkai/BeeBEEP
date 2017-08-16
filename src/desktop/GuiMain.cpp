@@ -1555,6 +1555,10 @@ void GuiMain::settingsChanged( QAction* act )
   case 66:
     Settings::instance().setSendOfflineMessagesToDefaultChat( act->isChecked() );
     break;
+  case 67:
+    Settings::instance().setChatUseColoredUserNames( act->isChecked() );
+    refresh_chat = true;
+    break;
   case 99:
     break;
   default:
@@ -3003,6 +3007,11 @@ void GuiMain::showChatSettingsMenu()
   act->setCheckable( true );
   act->setChecked( Settings::instance().chatUseYourNameInsteadOfYou() );
   act->setData( 41 );
+
+  act = mp_menuChat->addAction( tr( "Show username's color" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatUseColoredUserNames() );
+  act->setData( 67 );
 
   mp_menuChat->addSeparator();
 

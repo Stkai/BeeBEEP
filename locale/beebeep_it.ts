@@ -2457,6 +2457,18 @@ Inserisci un nome differente.</translation>
         <source>Send offline messages also to chat with all users</source>
         <translation>Invia i messaggi offline anche nella conversazione con tutti</translation>
     </message>
+    <message>
+        <source>Show colored names</source>
+        <translation type="obsolete">Mostra nomi degli utenti a colori</translation>
+    </message>
+    <message>
+        <source>Show colors in the name of the user</source>
+        <translation type="obsolete">Mostra il colore nel nome degli utenti</translation>
+    </message>
+    <message>
+        <source>Show username&apos;s color</source>
+        <translation>Mostra il nome degli utenti a colori</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

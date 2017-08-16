@@ -61,7 +61,7 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
   QString html_date_time_stamp = date_time_stamp.isEmpty() ? date_time_stamp : QString( "<font color=#808080>(%1)</font>" ).arg( date_time_stamp );
   QString user_name = append_message_to_previous ? QString( "" ) : (u.isLocal() && !use_your_name) ? QObject::tr( "You" ) : (u.isValid() ? u.name() : QObject::tr( "Unknown" ));
   QString html_user_name = user_name.isEmpty() ? user_name : QString( "<font color=%1><b>%2</b></font>%3%4" )
-                                                               .arg( u.color() )
+                                                               .arg( Settings::instance().chatUseColoredUserNames() ? u.color() : Settings::instance().chatDefaultUserNameColor() )
                                                                .arg( user_name )
                                                                .arg( Settings::instance().showTextInModeRTL() ? QString( "" ) : QString( ":" ) )
                                                                .arg( (use_chat_compact && !Settings::instance().showTextInModeRTL()) ? QString( " " ) : QLatin1String( "<br />" ) );

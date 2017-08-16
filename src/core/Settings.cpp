@@ -167,6 +167,8 @@ Settings::Settings()
   m_shareDesktopCaptureDelay = 2100;
 
   m_delayConnectionAtStartup = 5000;
+
+  m_chatDefaultUserNameColor = "#000";
 }
 
 void Settings::createApplicationUuid()
@@ -827,6 +829,8 @@ void Settings::load()
   m_useReturnToSendMessage = sets->value( "UseKeyReturnToSendMessage", m_useReturnToSendMessage ).toBool();
   m_chatUseYourNameInsteadOfYou = sets->value( "UseYourNameInsteadOfYou", false ).toBool();
   m_chatClearAllReadMessages = sets->value( "ClearAllReadMessages", false ).toBool();
+  m_chatUseColoredUserNames = sets->value( "UseColoredUserNames", true ).toBool();
+  m_chatDefaultUserNameColor = sets->value( "DefaultUserNameColor", "#000" ).toString();
   sets->endGroup();
 
   sets->beginGroup( "User" );
@@ -1169,6 +1173,8 @@ void Settings::save()
   sets->setValue( "UseKeyReturnToSendMessage", m_useReturnToSendMessage );
   sets->setValue( "UseYourNameInsteadOfYou", m_chatUseYourNameInsteadOfYou );
   sets->setValue( "ClearAllReadMessages", m_chatClearAllReadMessages );
+  sets->setValue( "UseColoredUserNames", m_chatUseColoredUserNames );
+  sets->setValue( "DefaultUserNameColor", m_chatDefaultUserNameColor );
   sets->endGroup();
   sets->beginGroup( "User" );
   if( m_userRecognitionMethod != RecognizeByDefaultMethod )

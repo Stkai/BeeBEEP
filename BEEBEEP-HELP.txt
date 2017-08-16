@@ -91,7 +91,9 @@ MessageFilter= filter messages in chat window by its type (do not edit here)
 UseKeyReturnToSendMessage=[true/false] enable key Return as shortcut to send a chat message
 UseYourNameInsteadOfYou=[true/false] your name is showed before messages instead of "you" (default=false) [3.0.6]
 ClearAllReadMessages=[true/false] clear all messages when you close chat window (default=false) [3.0.7]
-
+UseColoredUserNames=[true/false] colored user names are showed in chat (default=true) [4.2.0]
+DefaultUserNameColor=[string] default HTML color for user names (default=#000) [4.2.0]
+  
 [User]
 LocalColor= your nickname color in chat
 LocalLastStatus= your status (0 = Offline, 1 = Online, 2 = Busy, 3 = Away) [obsolete in 4.0.0]
