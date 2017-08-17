@@ -68,13 +68,14 @@ GuiChat::GuiChat( QWidget *parent )
 #ifdef BEEBEEP_USE_HUNSPELL
   mp_teMessage->setCompleter( SpellChecker::instance().completer() );
 #endif
+  mp_teMessage->setObjectName( "GuiMessageEdit" );
+  mp_teMessage->setStyleSheet( QString( "#GuiMessageEdit { background-color: #fff; }" ) );
 
   mp_teChat->setObjectName( "GuiChatViewer" );
   m_defaultChatPalette = mp_teChat->palette();
   m_defaultChatPalette.setColor( QPalette::Highlight, Qt::yellow );
   m_defaultChatPalette.setColor( QPalette::HighlightedText, Qt::black );
   mp_teChat->setPalette( m_defaultChatPalette );
-
   mp_teChat->setFocusPolicy( Qt::ClickFocus );
   mp_teChat->setReadOnly( true );
   mp_teChat->setUndoRedoEnabled( false );
@@ -82,6 +83,7 @@ GuiChat::GuiChat( QWidget *parent )
   mp_teChat->setOpenExternalLinks( false );
   mp_teChat->setOpenLinks( false );
   mp_teChat->setAcceptRichText( false );
+  mp_teChat->setStyleSheet( QString( "#GuiChatViewer { background-color: #fff; }" ) );
 
   m_chatId = ID_DEFAULT_CHAT;
   m_lastMessageUserId = ID_SYSTEM_MESSAGE;
