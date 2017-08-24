@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE" sourcelanguage="en">
+<TS version="2.1" language="de_DE" sourcelanguage="en">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -208,7 +208,7 @@
     </message>
     <message>
         <source>%1 Connection closed to user %2 because it uses same account name of the already connected user %3: %4.</source>
-        <translation type="unfinished">%1 Verbindung zum Benutzer %2 zurückgesetzt, da er den Kontonamen des bereits verbundenen Benutzers %3 verwendet: %4.</translation>
+        <translation>%1 Verbindung zum Benutzer %2 zurückgesetzt, da er den Kontonamen des bereits verbundenen Benutzers %3 verwendet: %4.</translation>
     </message>
     <message>
         <source>%1 %2 has left the group chat %3.</source>
@@ -284,7 +284,7 @@
     </message>
     <message>
         <source>Nobody has received the message.</source>
-        <translation type="unfinished">Niemand hat diese Nachricht empfangen.</translation>
+        <translation>Niemand hat diese Nachricht empfangen.</translation>
     </message>
     <message>
         <source>%1 is removed from file sharing</source>
@@ -304,7 +304,7 @@
     </message>
     <message>
         <source>Unable to send the message to %1.</source>
-        <translation type="unfinished">Die Nachricht konnte nicht an %1 gesendet werden.</translation>
+        <translation>Die Nachricht konnte nicht an %1 gesendet werden.</translation>
     </message>
     <message>
         <source>%1 You have selected to join only in these workgroups: %2</source>
@@ -332,7 +332,7 @@
     </message>
     <message>
         <source>%1 Connection closed to user %2 because it uses your account name: %3.</source>
-        <translation type="unfinished">%1 Verbindung zum Benutzer %2 zurückgesetzt, da er deinen Kontonamen verwendet: %3.</translation>
+        <translation>%1 Verbindung zum Benutzer %2 zurückgesetzt, da er deinen Kontonamen verwendet: %3.</translation>
     </message>
     <message>
         <source>%1 You are disconnected from %2 Network.</source>
@@ -384,7 +384,7 @@
     </message>
     <message>
         <source>%1 has changed the nickname in %2.</source>
-        <translation>%1 hat seinen Spitznamen in %2 geändert.</translation>
+        <translation>%1 hat den Spitznamen in %2 geändert.</translation>
     </message>
     <message>
         <source>%1 %2: file not found.</source>
@@ -448,19 +448,19 @@
     </message>
     <message>
         <source>%1 You cannot share desktop with %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Du kannst deinen Desktop nicht mit %2 teilen.</translation>
     </message>
     <message>
         <source>Network adapter offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Netzwerkadapter offline</translation>
     </message>
     <message>
         <source>%1 Unable to connect to %2 Network. Please check if your network adapter is connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Es kann keine Verbindung zum Netzwerk %2 hergestellt werden. Prüfe bitte, ob dein Netzwerkadapter verbunden ist.</translation>
     </message>
     <message>
         <source>Chat with all users</source>
-        <translation type="unfinished"></translation>
+        <translation>Chat mit allen Benutzern starten</translation>
     </message>
     <message>
         <source>/beesshottmp-%1.</source>
@@ -468,7 +468,7 @@
     </message>
     <message>
         <source>invalid user #%1.</source>
-        <translation type="unfinished"></translation>
+        <translation>ungültiger Benutzer #%1.</translation>
     </message>
 </context>
 <context>
@@ -644,7 +644,7 @@
     </message>
     <message>
         <source>Split Subnet in IP Addresses to add all users in that range</source>
-        <translation>Subnetz in IP-Adressen herunterbrechen, um alle Benutzer dieses Bereichs hinzuzufügen</translation>
+        <translation>Alle IP-Adressen im Subnetz abfragen, um alle Benutzer dieses Bereichs hinzuzufügen</translation>
     </message>
     <message>
         <source>Comment</source>
@@ -898,19 +898,19 @@
     </message>
     <message>
         <source>Send a screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Screenshot senden</translation>
     </message>
     <message>
         <source>Write a message to all user</source>
-        <translation type="unfinished"></translation>
+        <translation>Nachricht an alle Benutzer schreiben</translation>
     </message>
     <message>
         <source>Do you want to send a screenshot?</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchtest du einen Screenshot senden?</translation>
     </message>
     <message>
         <source>Yes and hide this chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja, und diesen Chat ausblenden</translation>
     </message>
 </context>
 <context>
@@ -945,7 +945,7 @@
     </message>
     <message>
         <source>Change background color</source>
-        <translation type="unfinished">Hintergrundfarbe ändern</translation>
+        <translation>Hintergrundfarbe ändern</translation>
     </message>
 </context>
 <context>
@@ -1132,23 +1132,23 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>downloading</source>
-        <translation type="unfinished"></translation>
+        <translation>Herunterladen von</translation>
     </message>
     <message>
         <source>uploading</source>
-        <translation type="unfinished"></translation>
+        <translation>Hochladen von</translation>
     </message>
     <message>
         <source>download completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Download abgeschlossen</translation>
     </message>
     <message>
         <source>upload completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Upload abgeschlossen</translation>
     </message>
     <message>
         <source>%1 is not available</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ist nicht verfügbar</translation>
     </message>
 </context>
 <context>
@@ -1199,7 +1199,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Chat with all users</source>
-        <translation type="unfinished"></translation>
+        <translation>Chat mit allen Benutzern starten</translation>
     </message>
 </context>
 <context>
@@ -1234,7 +1234,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Change background color</source>
-        <translation type="unfinished">Hintergrundfarbe ändern</translation>
+        <translation>Hintergrundfarbe ändern</translation>
     </message>
 </context>
 <context>
@@ -1279,7 +1279,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>News</source>
-        <translation type="unfinished"></translation>
+        <translation>Neuigkeiten</translation>
     </message>
 </context>
 <context>
@@ -1440,7 +1440,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Right click to open menu</source>
-        <translation type="unfinished">Menü per Rechtsklick öffnen</translation>
+        <translation>Menü per Rechtsklick öffnen</translation>
     </message>
 </context>
 <context>
@@ -1775,7 +1775,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Prompt before downloading file</source>
-        <translation>Vor Herunterladen nachfragen</translation>
+        <translation>Vor dem Herunterladen nachfragen</translation>
     </message>
     <message>
         <source>Network</source>
@@ -2295,7 +2295,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Open chats in a single window</source>
-        <translation>Chats in Einzelfenster öffnen</translation>
+        <translation>Alle Chats in einem Fenster öffnen</translation>
     </message>
     <message>
         <source>Please reload the list of shared files.</source>
@@ -2399,35 +2399,35 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Select image type</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilddateiformat auswählen</translation>
     </message>
     <message>
         <source>Select image quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildqualität auswählen</translation>
     </message>
     <message>
         <source>-1 default, 10 low, 60 medium, 100 high</source>
-        <translation type="unfinished"></translation>
+        <translation>-1 Standard, 10 gering, 60 mittel, 100 hoch</translation>
     </message>
     <message>
         <source>jpg for photo, png for presentation</source>
-        <translation type="unfinished"></translation>
+        <translation>JPG für Fotos, PNG für Präsentationen</translation>
     </message>
     <message>
         <source>Delay first connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Erstverbindung mit Verzögerung</translation>
     </message>
     <message>
         <source>milliseconds, 5000 default</source>
-        <translation type="unfinished"></translation>
+        <translation>Millisekunden; Standardwert: 5000</translation>
     </message>
     <message>
         <source>Send offline messages also to chat with all users</source>
-        <translation type="unfinished"></translation>
+        <translation>Offline-Nachrichten auch an Chats mit allen Benutzern senden</translation>
     </message>
     <message>
         <source>Show username&apos;s color</source>
-        <translation type="unfinished"></translation>
+        <translation>Farbe des Benutzernamens anzeigen</translation>
     </message>
 </context>
 <context>
@@ -2778,7 +2778,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Change background color</source>
-        <translation type="unfinished">Hintergrundfarbe ändern</translation>
+        <translation>Hintergrundfarbe ändern</translation>
     </message>
 </context>
 <context>
@@ -2935,19 +2935,19 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Back to parent folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Zurück zu übergeordnetem Verzeichnis</translation>
     </message>
     <message>
         <source>Please wait</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte warten</translation>
     </message>
     <message>
         <source>Please wait for path %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte auf den Pfad %1 warten</translation>
     </message>
     <message>
         <source>Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Deaktiviert</translation>
     </message>
 </context>
 <context>
@@ -2985,7 +2985,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Select user</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzer auswählen</translation>
     </message>
 </context>
 <context>
@@ -3245,7 +3245,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>All users</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Benutzer</translation>
     </message>
 </context>
 <context>
@@ -3361,7 +3361,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Waiting</source>
-        <translation type="unfinished"></translation>
+        <translation>Warten</translation>
     </message>
 </context>
 <context>
@@ -3372,7 +3372,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Change background color</source>
-        <translation type="unfinished">Hintergrundfarbe ändern</translation>
+        <translation>Hintergrundfarbe ändern</translation>
     </message>
 </context>
 <context>
@@ -3770,11 +3770,11 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>All users</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Benutzer</translation>
     </message>
     <message>
         <source>Open chat with all users</source>
-        <translation type="unfinished"></translation>
+        <translation>Chat mit allen lokalen Benutzern beginnen</translation>
     </message>
     <message>
         <source>All Users</source>
@@ -3782,7 +3782,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>and %1 others</source>
-        <translation type="unfinished"></translation>
+        <translation>und %1 weitere</translation>
     </message>
 </context>
 <context>
