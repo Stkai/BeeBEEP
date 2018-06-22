@@ -61,10 +61,7 @@ RESOURCES += beebeep.qrc emojis.qrc
 
 win32: RC_FILE = beebeep.rc
 macx: ICON = beebeep.icns
-
-win32|macx|unix:!android: equals(QT_MAJOR_VERSION, 4): lessThan(QT_MINOR_VERSION, 7) {
-    message( MDns disabled due the old Qt version )
-  } else { include(mdns/mdns.pri) }
+macx: include(mdns/mdns.pri)
 
 message( Libs: $$LIBS )
 message( Defines: $$DEFINES )

@@ -43,6 +43,7 @@ Settings::Settings()
   m_defaultListenerPort = DEFAULT_LISTENER_PORT;
   m_defaultFileTransferPort = DEFAULT_FILE_TRANSFER_PORT;
   m_resetGeometryAtStartup = false;
+  m_saveGeometryOnExit = false;
   m_saveDataInDocumentsFolder = false;
 
   // In windows native dialogs are application modal and the connection goes in timeout...
@@ -617,11 +618,6 @@ QString Settings::dnsRecord() const
   return QString( BEEBEEP_DNS_RECORD );
 }
 
-QString Settings::facebookPage() const
-{
-  return QString( BEEBEEP_PAGE_ON_FACEBOOK );
-}
-
 QString Settings::gaTrackingId() const
 {
   return QString( BEEBEEP_GA_TRACKING_ID );
@@ -924,6 +920,8 @@ void Settings::load()
     m_previewFileDialogGeometry = sets->value( "PreviewFileDialogGeometry", "" ).toByteArray();
   }
 
+  m_saveGeometryOnExit = sets->value( "SaveGeometryOnExit", m_saveGeometryOnExit ).toBool();
+
   m_language = sets->value( "Language", QLocale::system().name() ).toString();
   if( m_language.size() > 2 )
     m_language.resize( 2 );
@@ -971,7 +969,6 @@ void Settings::load()
   m_useNativeEmoticons = sets->value( "UseNativeEmoticons", m_useNativeEmoticons ).toBool();
   m_showMinimizedAtStartup = sets->value( "ShowMinimizedAtStartup", m_startMinimized ).toBool();
   m_promptOnCloseEvent = sets->value( "PromptOnCloseEvent", m_promptOnCloseEvent ).toBool();
-  m_isFacebookPageLinkClicked = sets->value( "FacebookPageLinkClicked", false ).toBool();
   m_showUserStatusBackgroundColor = sets->value( "ShowUserStatusBackgroundColor", false ).toBool();
   m_showUserStatusDescription = sets->value( "ShowUserStatusDescription", true ).toBool();
   m_shortcuts = sets->value( "Shortcuts", QStringList() ).toStringList();
@@ -1267,6 +1264,7 @@ void Settings::save()
   sets->setValue( "ShowUserPhoto", m_showUserPhoto );
   sets->setValue( "ShowVCardOnRightClick", m_showVCardOnRightClick );
   sets->setValue( "ResetWindowGeometryAtStartup", m_resetGeometryAtStartup );
+  sets->setValue( "SaveGeometryOnExit", m_saveGeometryOnExit );
   sets->setValue( "ShowEmoticonMenu", m_showEmoticonMenu );
   sets->setValue( "ShowPresetMessages", m_showPresetMessages );
   sets->setValue( "EmoticonSizeInEdit", m_emoticonSizeInEdit );
@@ -1277,7 +1275,6 @@ void Settings::save()
   sets->setValue( "UseNativeEmoticons", m_useNativeEmoticons );
   sets->setValue( "ShowMinimizedAtStartup", m_showMinimizedAtStartup );
   sets->setValue( "PromptOnCloseEvent", m_promptOnCloseEvent );
-  sets->setValue( "FacebookPageLinkClicked", m_isFacebookPageLinkClicked );
   sets->setValue( "ShowUserStatusBackgroundColor", m_showUserStatusBackgroundColor );
   sets->setValue( "ShowUserStatusDescription", m_showUserStatusDescription );
   sets->setValue( "Shortcuts", m_shortcuts );

@@ -129,7 +129,6 @@ private slots:
   void openDownloadPluginPage();
   void openDonationPage();
   void openHelpPage();
-  void openFacebookPage();
   void clearChat( VNumber );
   void removeChat( VNumber );
   void showSharesForUser( const User& );

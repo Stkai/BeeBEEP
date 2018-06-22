@@ -90,11 +90,8 @@ public:
   QString languageWebSite() const;
   QString newsWebSite() const;
   QString httpUserAgent() const;
-  QString facebookPage() const;
   QString updaterWebSite() const;
   QString downloadWebSite() const;
-  inline void setIsFacebookPageLinkClicked( bool );
-  inline bool isFacebookPageLinkClicked() const;
   QString gaTrackingId() const;
   QString gaUrl() const;
   QString gaEventVersion() const;
@@ -254,6 +251,8 @@ public:
   inline void setChatUseColoredUserNames( bool );
   inline bool chatUseColoredUserNames() const;
   inline const QString& chatDefaultUserNameColor() const;
+  inline void setSaveGeometryOnExit( bool );
+  inline bool saveGeometryOnExit() const;
 
   inline bool usePreviewFileDialog() const;
   inline void setPreviewFileDialogGeometry( const QByteArray& );
@@ -673,10 +672,9 @@ private:
   QStringList m_userList;
 
   bool m_resetGeometryAtStartup;
+  bool m_saveGeometryOnExit;
   bool m_showMinimizedAtStartup;
   bool m_promptOnCloseEvent;
-
-  bool m_isFacebookPageLinkClicked;
 
   bool m_acceptConnectionsOnlyFromWorkgroups;
   QStringList m_workgroups;
@@ -892,6 +890,8 @@ inline void Settings::setSaveUserList( bool new_value ) { m_saveUserList = new_v
 inline bool Settings::saveUserList() const { return m_saveUserList; }
 inline void Settings::setUserList( const QStringList& new_value ) { m_userList = new_value; }
 inline const QStringList& Settings::userList() const { return m_userList; }
+inline void Settings::setSaveGeometryOnExit( bool new_value ) { m_saveGeometryOnExit = new_value; }
+inline bool Settings::saveGeometryOnExit() const { return m_saveGeometryOnExit; }
 inline void Settings::setResetGeometryAtStartup( bool new_value ) { m_resetGeometryAtStartup = new_value; }
 inline bool Settings::resetGeometryAtStartup() const { return m_resetGeometryAtStartup; }
 inline void Settings::setShowMinimizedAtStartup( bool new_value ) { m_showMinimizedAtStartup = new_value; }
@@ -912,8 +912,6 @@ inline bool Settings::useNativeEmoticons() const { return m_useNativeEmoticons; 
 inline int Settings::imagePreviewHeight() const { return m_imagePreviewHeight; }
 inline void Settings::setPromptOnCloseEvent( bool new_value ) { m_promptOnCloseEvent = new_value; }
 inline bool Settings::promptOnCloseEvent() const { return m_promptOnCloseEvent; }
-inline void Settings::setIsFacebookPageLinkClicked( bool new_value ) { m_isFacebookPageLinkClicked = new_value; }
-inline bool Settings::isFacebookPageLinkClicked() const { return m_isFacebookPageLinkClicked; }
 inline void Settings::setPreventMultipleConnectionsFromSingleHostAddress( bool new_value ) { m_preventMultipleConnectionsFromSingleHostAddress = new_value; }
 inline bool Settings::preventMultipleConnectionsFromSingleHostAddress() { return m_preventMultipleConnectionsFromSingleHostAddress; }
 inline void Settings::setFloatingChatGeometry( const QByteArray& new_value ) { m_floatingChatGeometry = new_value; }

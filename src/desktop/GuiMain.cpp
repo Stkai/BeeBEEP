@@ -142,7 +142,6 @@ GuiMain::GuiMain( QWidget *parent )
   connect( beeCore, SIGNAL( shareDesktopImageAvailable( const User&, const QImage&, const QString&, QRgb ) ), this, SLOT( onShareDesktopImageAvailable( const User&, const QImage&, const QString&, QRgb ) ) );
   connect( beeCore, SIGNAL( shareDesktopUpdate( const User& ) ), this, SLOT( onShareDesktopUpdate( const User& ) ) );
 #endif
-
   connect( mp_fileTransfer, SIGNAL( transferCancelled( VNumber ) ), beeCore, SLOT( cancelFileTransfer( VNumber ) ) );
   connect( mp_fileTransfer, SIGNAL( openFileCompleted( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
 
@@ -360,8 +359,12 @@ void GuiMain::closeEvent( QCloseEvent* e )
     beeCore->stop();
   }
 
+  if( Settings::instance().saveGeometryOnExit() )
+    saveGeometryAndState();
+
   QSettings* sets = Settings::instance().objectSettings();
   sets->deleteLater();
+
 
   if( !m_forceShutdown )
   {
@@ -737,6 +740,10 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().keyEscapeMinimizeInTray() );
   act->setData( 29 );
+  act = mp_menuCloseSettings->addAction( tr( "Save window's geometry" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().saveGeometryOnExit() );
+  act->setData( 68 );
 
   mp_menuConnectionSettings = new QMenu( tr( "On connection" ), this );
   mp_menuConnectionSettings->setIcon( IconManager::instance().icon( "connection.png" ) );
@@ -1087,9 +1094,9 @@ void GuiMain::createMenus()
   mp_menuInfo->addSeparator();
   mp_menuInfo->addAction( IconManager::instance().icon( "tip.png" ), tr( "Tip of the day" ), this, SLOT( showTipOfTheDay() ) );
   mp_menuInfo->addAction( IconManager::instance().icon( "fact.png" ), tr( "Fact of the day" ), this, SLOT( showFactOfTheDay() ) );
-  mp_menuInfo->addSeparator();
-  mp_menuInfo->addAction( IconManager::instance().icon( "thumbup.png" ), tr( "Like %1 on Facebook" ).arg( Settings::instance().programName() ), this, SLOT( openFacebookPage() ) );
+
 #ifdef BEEBEEP_DEBUG
+  mp_menuInfo->addSeparator();
   act = mp_menuInfo->addAction( tr( "Add +1 user to anonymous usage statistics" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().postUsageStatistics() );
@@ -1558,6 +1565,9 @@ void GuiMain::settingsChanged( QAction* act )
   case 67:
     Settings::instance().setChatUseColoredUserNames( act->isChecked() );
     refresh_chat = true;
+    break;
+  case 68:
+    Settings::instance().setSaveGeometryOnExit( act->isChecked() );
     break;
   case 99:
     break;
@@ -2470,12 +2480,7 @@ void GuiMain::openUrl( const QUrl& file_url )
   {
     QString url_txt = file_url.toString();
     qDebug() << "Open url:" << url_txt;
-    if( QDesktopServices::openUrl( file_url ) )
-    {
-      if( url_txt == Settings::instance().facebookPage() )
-        Settings::instance().setIsFacebookPageLinkClicked( true );
-    }
-    else
+    if( !QDesktopServices::openUrl( file_url ) )
       qWarning() << "Unable to open link url:" << url_txt;
   }
 }
@@ -2728,12 +2733,6 @@ void GuiMain::openDonationPage()
 void GuiMain::openHelpPage()
 {
   openWebUrl( Settings::instance().helpWebSite() );
-}
-
-void GuiMain::openFacebookPage()
-{
-  if( openWebUrl( Settings::instance().facebookPage() ) )
-    Settings::instance().setIsFacebookPageLinkClicked( true );
 }
 
 void GuiMain::setInIdle()
