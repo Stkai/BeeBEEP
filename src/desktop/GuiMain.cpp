@@ -2256,7 +2256,8 @@ void GuiMain::showVCard( VNumber user_id )
 void GuiMain::updadePluginMenu()
 {
   mp_menuPlugins->clear();
-  QAction* act = mp_menuPlugins->addAction( IconManager::instance().icon( "plugin.png" ), tr( "Plugin Manager..." ), this, SLOT( showPluginManager() ) );
+  QAction* act;
+  mp_menuPlugins->addAction( IconManager::instance().icon( "plugin.png" ), tr( "Plugin Manager..." ), this, SLOT( showPluginManager() ) );
 
   QString help_data_ts = tr( "is a plugin developed by" );
   QString help_data_format = QString( "<p>%1 <b>%2</b> %3 <b>%4</b>.<br /><i>%5</i></p><br />" );

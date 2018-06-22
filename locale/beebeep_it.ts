@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -1903,7 +1903,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Like %1 on Facebook</source>
-        <translation>Dai un mi piace a %1 su Facebook</translation>
+        <translation type="obsolete">Dai un mi piace a %1 su Facebook</translation>
     </message>
     <message>
         <source>Donate for %1</source>

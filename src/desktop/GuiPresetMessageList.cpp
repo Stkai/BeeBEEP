@@ -157,6 +157,8 @@ void GuiPresetMessageList::onNew()
 
 void GuiPresetMessageList::onEdit( QTreeWidgetItem* item )
 {
+  if( !item )
+    return;
 #if QT_VERSION >= 0x050200
   QString edit_preset = QInputDialog::getMultiLineText( this, Settings::instance().programName(),
                                                         tr( "Edit your preset message." ),
@@ -177,6 +179,8 @@ void GuiPresetMessageList::onEdit( QTreeWidgetItem* item )
 
 void GuiPresetMessageList::onRename( QTreeWidgetItem* item )
 {
+  if( !item )
+    return;
   QString edit_preset_key = QInputDialog::getText( this, Settings::instance().programName(),
                                                           tr( "Edit the name of your preset message." ), QLineEdit::Normal,
                                                           item->data( 0, Qt::UserRole+1 ).toString() );
@@ -192,6 +196,8 @@ void GuiPresetMessageList::onRename( QTreeWidgetItem* item )
 
 void GuiPresetMessageList::onRemove( QTreeWidgetItem* item )
 {
+  if( !item )
+    return;
   if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you want to delete this preset?" ),
                              tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
     return;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="zh_TW">
+<TS version="2.0" language="zh_TW">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -1863,7 +1863,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Like %1 on Facebook</source>
-        <translation>於 Facebook 點讚給 %1</translation>
+        <translation type="obsolete">於 Facebook 點讚給 %1</translation>
     </message>
     <message>
         <source>Add in the head</source>
