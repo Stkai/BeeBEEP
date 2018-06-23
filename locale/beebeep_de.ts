@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE" sourcelanguage="en">
+<TS version="2.1" language="de_DE" sourcelanguage="en">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -469,6 +469,10 @@
     <message>
         <source>invalid user #%1.</source>
         <translation>ungültiger Benutzer #%1.</translation>
+    </message>
+    <message>
+        <source>%1 %2 uses old encryption level.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

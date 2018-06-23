@@ -234,9 +234,11 @@ void SpellChecker::addToUserDictionary( const QString& word )
 
 void SpellChecker::updateCompleter( const QString& word_to_complete )
 {
-  QStringList sl;
   m_completerPrefix = word_to_complete;
+  if( !mp_hunspell )
+    return;
 
+  QStringList sl;
   if( !word_to_complete.isEmpty() )
     sl = suggest( word_to_complete );
 

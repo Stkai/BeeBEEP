@@ -362,6 +362,12 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
   emit userConnectionStatusChanged( u );
   showMessage( tr( "%1 users connected" ).arg( connectedUsers() ), 3000 );
 
+  if( c->protoVersion() < SECURE_LEVEL_3_PROTO_VERSION )
+  {
+    QString sAlertMsg = tr( "%1 %2 uses old encryption level." ).arg( IconManager::instance().toHtml( "warning.png", "*E*" ), u.path() );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sAlertMsg, DispatchToDefaultAndPrivateChat, ChatMessage::Connection );
+  }
+
   if( !Settings::instance().localUser().vCard().hasOnlyNickName() )
   {
     if( c->protoVersion() > 1 )
