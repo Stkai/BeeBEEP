@@ -101,6 +101,10 @@ int main( int argc, char *argv[] )
   qDebug() << "Starting BeeBEEP" << qPrintable( Settings::instance().version( false, true ) )
            << "for" << qPrintable( Settings::instance().operatingSystem( true ) )
            << "and Qt" << QT_VERSION_STR;
+#if QT_VERSION >= 0x050600
+  if( bee_app.testAttribute( Qt::AA_EnableHighDpiScaling ) )
+    qDebug( "High DPI scaling enabled" );
+#endif
   qDebug() << "Applicaction folder:" << qPrintable( QDir::toNativeSeparators( bee_app.applicationDirPath() ) );
   Settings::instance().setResourceFolder();
   Settings::instance().loadRcFile();

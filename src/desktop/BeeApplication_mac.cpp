@@ -21,8 +21,8 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifdef Q_OS_MAC
 #include "BeeApplication.h"
+#ifdef Q_OS_MAC
 #include <ApplicationServices/ApplicationServices.h>
 #include <ctype.h>
 #include <stdlib.h>
@@ -118,4 +118,5 @@ void BeeApplication::addSleepWatcher()
   // add the notification port to the application runloop
   CFRunLoopAddSource( CFRunLoopGetCurrent(), IONotificationPortGetRunLoopSource( notify_port_ref ), kCFRunLoopCommonModes );
 }
-#endif // Q_OS_MAC
+#endif
+
