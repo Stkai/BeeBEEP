@@ -200,7 +200,7 @@ qint64 ConnectionSocket::readBlock()
 
   m_blockSize = 0;
 
-  QByteArray decrypted_byte_array = Protocol::instance().decryptByteArray( byte_array_read, cipherKey() );
+  QByteArray decrypted_byte_array = Protocol::instance().decryptByteArray( byte_array_read, cipherKey(), m_protoVersion );
 
 #if defined( CONNECTION_SOCKET_IO_DEBUG_VERBOSE )
   qDebug() << "ConnectionSocket read from" << qPrintable( m_networkAddress.toString() ) << "the byte array:" << decrypted_byte_array;
@@ -293,7 +293,7 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
 #if defined( CONNECTION_SOCKET_IO_DEBUG_VERBOSE )
   qDebug() << "ConnectionSocket is sending to" << qPrintable( m_networkAddress.toString() ) << "the following data:" << byte_array;
 #endif
-  QByteArray byte_array_to_send = Protocol::instance().encryptByteArray( byte_array, cipherKey() );
+  QByteArray byte_array_to_send = Protocol::instance().encryptByteArray( byte_array, cipherKey(), m_protoVersion );
 
   QByteArray data_serialized = serializeData( byte_array_to_send );
 
@@ -425,8 +425,12 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
         return;
       }
       else
-        qDebug() << "Encryption level 2 is activated with" << qPrintable( m_networkAddress.toString() );
-
+      {
+        if( m_protoVersion < SECURE_LEVEL_3_PROTO_VERSION )
+          qWarning() << "Old encryption level 2 is activated with" << qPrintable( m_networkAddress.toString() );
+        else
+          qDebug() << "Encryption level 3 is activated with" << qPrintable( m_networkAddress.toString() );
+      }
     }
     else
       qWarning() << "Remote host" << qPrintable( m_networkAddress.toString() ) << "has not shared a public key for encryption";

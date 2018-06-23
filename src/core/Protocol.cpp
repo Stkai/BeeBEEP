@@ -1905,7 +1905,7 @@ QList<QByteArray> Protocol::splitByteArray( const QByteArray& byte_array, int nu
   return array_list;
 }
 
-QByteArray Protocol::encryptByteArray( const QByteArray& text_to_encrypt, const QByteArray& cipher_key ) const
+QByteArray Protocol::encryptByteArray( const QByteArray& text_to_encrypt, const QByteArray& cipher_key, int proto_version ) const
 {
   unsigned long rk[ RKLENGTH(ENCRYPTION_KEYBITS) ];
   unsigned char key[ KEYLENGTH(ENCRYPTION_KEYBITS) ];
@@ -1921,9 +1921,16 @@ QByteArray Protocol::encryptByteArray( const QByteArray& text_to_encrypt, const 
     return text_to_encrypt;
   }
 
-  for( i = 0; i < sizeof( key ); i++ )
+  if( proto_version < SECURE_LEVEL_3_PROTO_VERSION )
   {
-    key[ i ] = (unsigned int)cipher_key.size() < i ? static_cast<unsigned char>( cipher_key.at( i ) ) : 0;
+    // What the hell...
+    for( i = 0; i < sizeof( key ); i++ )
+      key[ i ] = (unsigned int)cipher_key.size() < i ? static_cast<unsigned char>( cipher_key.at( i ) ) : 0;
+  }
+  else
+  {
+    for( i = 0; i < sizeof( key ); i++ )
+      key[ i ] = i < (unsigned int)cipher_key.size() ? static_cast<unsigned char>( cipher_key.at( i ) ) : 0;
   }
 
   nrounds = rijndaelSetupEncrypt( rk, key, ENCRYPTION_KEYBITS );
@@ -1961,7 +1968,7 @@ QByteArray Protocol::encryptByteArray( const QByteArray& text_to_encrypt, const 
   return encrypted_byte_array;
 }
 
-QByteArray Protocol::decryptByteArray( const QByteArray& text_to_decrypt, const QByteArray& cipher_key ) const
+QByteArray Protocol::decryptByteArray( const QByteArray& text_to_decrypt, const QByteArray& cipher_key, int proto_version ) const
 {
   unsigned long rk[RKLENGTH(ENCRYPTION_KEYBITS)];
   unsigned char key[KEYLENGTH(ENCRYPTION_KEYBITS)];
@@ -1977,9 +1984,16 @@ QByteArray Protocol::decryptByteArray( const QByteArray& text_to_decrypt, const 
     return text_to_decrypt;
   }
 
-  for( i = 0; i < sizeof( key ); i++ )
+  if( proto_version < SECURE_LEVEL_3_PROTO_VERSION )
   {
-    key[ i ] = (unsigned int)cipher_key.size() < i ? static_cast<unsigned char>( cipher_key.at( i ) ) : 0;
+    // What the hell...
+    for( i = 0; i < sizeof( key ); i++ )
+      key[ i ] = (unsigned int)cipher_key.size() < i ? static_cast<unsigned char>( cipher_key.at( i ) ) : 0;
+  }
+  else
+  {
+    for( i = 0; i < sizeof( key ); i++ )
+      key[ i ] = i < (unsigned int)cipher_key.size() ? static_cast<unsigned char>( cipher_key.at( i ) ) : 0;
   }
 
   nrounds = rijndaelSetupDecrypt( rk, key, ENCRYPTION_KEYBITS );

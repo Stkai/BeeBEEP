@@ -147,8 +147,8 @@ public:
   QString saveChatRecord( const ChatRecord& ) const;
   ChatRecord loadChatRecord( const QString& ) const;
 
-  QByteArray encryptByteArray( const QByteArray& text_to_encrypt, const QByteArray& cipher_key ) const;
-  QByteArray decryptByteArray( const QByteArray& text_to_decrypt, const QByteArray& cipher_key ) const;
+  QByteArray encryptByteArray( const QByteArray& text_to_encrypt, const QByteArray& cipher_key, int proto_version ) const;
+  QByteArray decryptByteArray( const QByteArray& text_to_decrypt, const QByteArray& cipher_key, int proto_version ) const;
 
   static Protocol& instance()
   {
