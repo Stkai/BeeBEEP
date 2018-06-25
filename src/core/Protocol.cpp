@@ -1870,9 +1870,16 @@ QString Protocol::formatHtmlText( const QString& text )
 QByteArray Protocol::createCipherKey( const QString& public_key_1, const QString& public_key_2 ) const
 {
   QString public_key = public_key_1 + public_key_2;
-  QCryptographicHash ch( QCryptographicHash::Sha1 );
+  QCryptographicHash ch( QCryptographicHash::Sha256 );
   ch.addData( public_key.toUtf8() );
-  return ch.result().toHex();
+  QByteArray key_result = ch.result();
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Key size:" << key_result.size();
+  qDebug() << "RAW:" << qPrintable( key_result );
+  qDebug() << "BASE64:" << key_result.toBase64();
+  qDebug() << "HEX:" << key_result.toHex() << key_result.toHex().size();
+ #endif
+  return key_result;
 }
 
 QList<QByteArray> Protocol::splitByteArray( const QByteArray& byte_array, int num_chars ) const
