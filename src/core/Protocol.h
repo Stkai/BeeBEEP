@@ -75,7 +75,7 @@ public:
   int protoVersion( const Message& ) const;
   int datastreamVersion( const Message& ) const;
   QString publicKey( const Message& ) const;
-  QByteArray createCipherKey( const QString&, const QString& ) const;
+  QByteArray createCipherKey( const QString&, const QString&, int ) const;
   QByteArray bytesArrivedConfirmation( int ) const;
   Message createFolderMessage( const QString&, const QList<FileInfo>&, int server_port );
   QList<FileInfo> messageFolderToInfoList( const Message&, const QHostAddress&, QString* pFolderName = 0 ) const;

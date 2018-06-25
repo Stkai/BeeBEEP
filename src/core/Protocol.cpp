@@ -1662,7 +1662,7 @@ QString Protocol::fileInfoHash( const QFileInfo& file_info ) const
   sl << file_info.fileName();
   sl << QString::number( file_info.size() );
   sl << file_info.lastModified().toString( "dd.MM.yyyy-hh:mm:ss" );
-  return Settings::instance().simpleHash( sl.join( "-" ) );
+  return Settings::instance().simpleHash( sl.join( Random::d100() ) );
 }
 
 QString Protocol::fileInfoHashTmp( VNumber file_info_id, const QString& file_info_name, FileSizeType file_info_size ) const
@@ -1671,7 +1671,7 @@ QString Protocol::fileInfoHashTmp( VNumber file_info_id, const QString& file_inf
   sl << QString::number( file_info_id );
   sl << file_info_name;
   sl << QString::number( file_info_size );
-  return Settings::instance().simpleHash( sl.join( "-" ) );
+  return Settings::instance().simpleHash( sl.join( Random::d100() ) );
 }
 
 QString Protocol::newMd5Id()
@@ -1684,7 +1684,7 @@ QString Protocol::newMd5Id()
   sl << QString::number( Random::d100() );
   sl << QDateTime::currentDateTime().toString( "dd.MM.yyyy-hh:mm:ss.zzz" );
   sl << QString::number( Random::d100() );
-  return Settings::instance().simpleHash( sl.join( "=" ) );
+  return Settings::instance().simpleHash( sl.join( Random::d100() ) );
 }
 
 QByteArray Protocol::bytesArrivedConfirmation( int num_bytes ) const
@@ -1867,19 +1867,17 @@ QString Protocol::formatHtmlText( const QString& text )
 }
 
 /* Encryption */
-QByteArray Protocol::createCipherKey( const QString& public_key_1, const QString& public_key_2 ) const
+QByteArray Protocol::createCipherKey( const QString& public_key_1, const QString& public_key_2, int data_stream_version ) const
 {
   QString public_key = public_key_1 + public_key_2;
-  QCryptographicHash ch( QCryptographicHash::Sha256 );
+#if QT_VERSION < 0x050000
+  Q_UNUSED( data_stream_version );
+  QCryptographicHash ch( QCryptographicHash::Sha1 );
+#else
+  QCryptographicHash ch( data_stream_version < 13 ? QCryptographicHash::Sha1 : QCryptographicHash::Sha3_256 );
+#endif
   ch.addData( public_key.toUtf8() );
-  QByteArray key_result = ch.result();
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Key size:" << key_result.size();
-  qDebug() << "RAW:" << qPrintable( key_result );
-  qDebug() << "BASE64:" << key_result.toBase64();
-  qDebug() << "HEX:" << key_result.toHex() << key_result.toHex().size();
- #endif
-  return key_result;
+  return ch.result().toHex();
 }
 
 QList<QByteArray> Protocol::splitByteArray( const QByteArray& byte_array, int num_chars ) const
@@ -2036,151 +2034,3 @@ QByteArray Protocol::decryptByteArray( const QByteArray& text_to_decrypt, const 
 
   return decrypted_byte_array;
 }
-
-/*
-
-User Protocol::createTemporaryUser( const QString& user_path, const QString& account_name, const QString& user_hash )
-{
-  QString user_name = User::nameFromPath( user_path );
-  if( user_name == user_path )
-    return User();
-
-  QHostAddress user_address;
-  int user_port = 0;
-
-  QString host_port = user_path;
-  host_port.remove( 0, user_name.size() + 1 ); // remove name and @
-  bool ok = false;
-  QStringList sl = host_port.split( ":" );
-  if( sl.size() > 2 ) // ipv6 address
-  {
-    user_port = sl.last().toInt( &ok );
-    if( !ok )
-      return User();
-    sl.removeLast();
-    user_address = QHostAddress( sl.join( ":" ) );
-  }
-  else if( sl.size() == 2 )
-  {
-    user_address = QHostAddress( sl.first() );
-    user_port = sl.last().toInt( &ok );
-    if( !ok )
-      return User();
-  }
-  else
-    return User();
-
-  return createTemporaryUser( user_name, account_name, user_hash, NetworkAddress( user_address, user_port ) );
-}
-
-User Protocol::loadUserFromPath( const QString& user_path, bool use_account_name )
-{
-  NetworkAddress default_network_address( QHostAddress::LocalHost, Settings::instance().defaultListenerPort() );
-  User user_found = UserManager::instance().findUserByPath( user_path );
-  if( !user_found.isValid() )
-  {
-    QString host_and_port = User::hostAddressAndPortFromPath( user_path );
-    NetworkAddress na = NetworkAddress::fromString( host_and_port.isEmpty() ? user_path : host_and_port );
-    if( na.isHostAddressValid() )
-    {
-      if( !na.isHostPortValid() )
-        na.setHostPort( Settings::instance().defaultListenerPort() );
-      user_found = UserManager::instance().findUserByHostAddressAndPort( na.hostAddress(), na.hostPort() );
-      if( !user_found.isValid() )
-      {
-        user_found = createTemporaryUser( UserRecord( "", "", "", na ) );
-        if( user_found.isValid() )
-          UserManager::instance().setUser( user_found );
-      }
-    }
-    else
-    {
-      if( use_account_name )
-      {
-        user_found = UserManager::instance().findUserByAccountName( user_path );
-        if( !user_found.isValid() )
-        {
-          user_found = createTemporaryUser( UserRecord( user_path, user_path, "", default_network_address ) );
-          if( user_found.isValid() )
-            UserManager::instance().setUser( user_found );
-        }
-      }
-      else
-      {
-        user_found = UserManager::instance().findUserByNickname( user_path );
-        if( !user_found.isValid() )
-        {
-          user_found = createTemporaryUser(UserRecord( user_path, "", "", default_network_address ) );
-          if( user_found.isValid() )
-            UserManager::instance().setUser( user_found );
-        }
-      }
-    }
-  }
-  return user_found;
-}
-
-QList<Group> Protocol::loadGroupsFromFile()
-{
-  QList<Group> group_list;
-
-  QFileInfo groups_file_info( Settings::instance().defaultGroupsFilePath( true ) );
-  QString groups_file_path = Bee::convertToNativeFolderSeparator( groups_file_info.absoluteFilePath() );
-  if( !groups_file_info.exists() || !groups_file_info.isReadable() )
-  {
-    groups_file_info = QFileInfo( Settings::instance().defaultGroupsFilePath( false ) );
-    groups_file_path = Bee::convertToNativeFolderSeparator( groups_file_info.absoluteFilePath() );
-
-    if( !groups_file_info.exists() || !groups_file_info.isReadable() )
-      return group_list;
-  }
-
-  QSettings* sets = new QSettings( groups_file_path, QSettings::IniFormat );
-  sets->beginGroup( "Groups" );
-  bool use_account_name = sets->value( "UseAccountName", false ).toBool();
-  sets->endGroup();
-
-  QStringList sl_groups = sets->childGroups();
-  if( !sl_groups.isEmpty() )
-  {
-    foreach( QString s_group, sl_groups )
-    {
-      Group g;
-      QString key_groups = QString( "%1/%2" ).arg( s_group ).arg( "Members" );
-      QString group_data = sets->value( key_groups, QString( "" ) ).toString();
-      if( !group_data.isEmpty() )
-      {
-        QStringList sl_members = group_data.split( QLatin1String( "," ), QString::SkipEmptyParts );
-        if( !sl_members.isEmpty() )
-        {
-          foreach( QString s_member, sl_members )
-          {
-            User u = loadUserFromPath( s_member, use_account_name );
-            if( u.isValid() )
-              g.addUser( u.id() );
-            else
-              qWarning() << "Unable to load user" << qPrintable( s_member ) << "for group" << qPrintable( s_group );
-          }
-        }
-      }
-
-      if( g.hasUser( ID_LOCAL_USER ) )
-      {
-        g.setName( s_group );
-        g.setId( newId() );
-        g.setPrivateId( Settings::instance().simpleHash( s_group ) );
-        group_list.append( g );
-      }
-    }
-  }
-  else
-    qWarning() << "File" << qPrintable( groups_file_path ) << "is empty (no group found)";
-
-  sets->deleteLater();
-
-  if( !group_list.isEmpty() )
-    qDebug() << "File" << qPrintable( groups_file_path ) << "contains" << group_list.size() << "groups";
-
-  return group_list;
-}
-*/

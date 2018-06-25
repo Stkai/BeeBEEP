@@ -102,7 +102,7 @@ bool ConnectionSocket::createCipherKey( const QString& public_key )
   if( m_publicKey1.isEmpty() || m_publicKey2.isEmpty() )
     return false;
 
-  m_cipherKey = Protocol::instance().createCipherKey( m_publicKey1, m_publicKey2 );
+  m_cipherKey = Protocol::instance().createCipherKey( m_publicKey1, m_publicKey2, m_datastreamVersion );
   m_publicKey1 = "";
   m_publicKey2 = "";
   return true;
