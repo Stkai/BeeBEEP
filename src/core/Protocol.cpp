@@ -39,6 +39,7 @@ const QChar DATA_FIELD_SEPARATOR = QChar::LineSeparator; // 0x2028
 Protocol::Protocol()
   : m_id( ID_START ), m_fileShareListMessage( Message::Share, ID_SHARE_MESSAGE, "" )
 {
+  m_id += Random::d100();
   QDataStream ds;
   m_datastreamMaxVersion = ds.version();
   qDebug() << "Protocol has detected latest datastream version:" << m_datastreamMaxVersion;

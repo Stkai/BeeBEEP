@@ -209,7 +209,7 @@ qint64 ConnectionSocket::readBlock()
   if( m_userId == ID_INVALID )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << qPrintable( m_networkAddress.toString() ) << "has received this message:" << decrypted_byte_array;
+    qDebug() << "HELLO received from" << qPrintable( m_networkAddress.toString() );
 #endif
     checkHelloMessage( decrypted_byte_array );
   }
@@ -316,8 +316,8 @@ void ConnectionSocket::sendQuestionHello()
 {
   m_checkConnectionTimeout = false;
   m_publicKey1 = Protocol::instance().newMd5Id();
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "ConnectionSocket is sending pkey1 with shared-key:" << qPrintable( cipherKey() );
+#ifdef CONNECTION_SOCKET_IO_DEBUG
+  qDebug() << "ConnectionSocket is sending pkey1 with shared-key:" << qPrintable( m_publicKey1 );
 #endif
   if( sendData( Protocol::instance().helloMessage( m_publicKey1 ) ) )
   {
@@ -336,8 +336,8 @@ void ConnectionSocket::sendQuestionHello()
 void ConnectionSocket::sendAnswerHello()
 {
   m_publicKey2 = Protocol::instance().newMd5Id();
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "ConnectionSocket is sending pkey2 with shared-key:" << qPrintable( cipherKey() );
+#ifdef CONNECTION_SOCKET_IO_DEBUG
+  qDebug() << "ConnectionSocket is sending pkey2 with shared-key:" << qPrintable( m_publicKey2 );
 #endif
   if( sendData( Protocol::instance().helloMessage( m_publicKey2 ) ) )
   {
