@@ -156,11 +156,12 @@ void Core::setupNewConnection( Connection *c )
   connect( c, SIGNAL( authenticationRequested( const QByteArray& ) ), this, SLOT( checkUserAuthentication( const QByteArray& ) ) );
 }
 
-void Core::addConnectionReadyForUse( Connection* c )
+void Core::addConnectionReadyForUse( Connection* c, const User& u )
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Connection from" << qPrintable( c->networkAddress().toString() ) << "is ready for use";
+  qDebug() << "Connection from" << qPrintable( c->networkAddress().toString() ) << "is ready for use by" << qPrintable( u.path() );
 #endif
+  c->setReadyForUse( u.id() );
   connect( c, SIGNAL( newMessage( VNumber, const Message& ) ), this, SLOT( parseMessage( VNumber, const Message& ) ) );
 }
 
@@ -262,7 +263,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
     return;
   }
   else
-    qDebug() << qPrintable( u.path() ) << "has completed the authentication";
+    qDebug() << qPrintable( u.path() ) << "has completed the authentication from peer" << qPrintable( c->networkAddress().toString() );
 
   User user_found = Protocol::instance().recognizeUser( u, Settings::instance().userRecognitionMethod() );
   bool user_path_changed = false;
@@ -319,15 +320,13 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
 
     if( user_path_changed )
       qDebug() << "On connection old user found" << qPrintable( user_found.path() ) << "and associated to" << qPrintable( u.path() );
-    else
-      qDebug() << "User" << qPrintable( u.path() ) << "reconnected";
 
     u.setId( user_found.id() );
     u.setIsFavorite( user_found.isFavorite() );
     u.setColor( user_found.color() );
   }
   else
-    qDebug() << "New user is connected from" << qPrintable( u.path() );
+    qDebug() << "New user connected:" << qPrintable( u.path() );
 
   if( !ColorManager::instance().isValidColor( u.color() ) || u.color() == QString( "#000000" ) )
     u.setColor( ColorManager::instance().unselectedQString() );
@@ -355,8 +354,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
   else
     createPrivateChat( u );
 
-  c->setReadyForUse( u.id() );
-  addConnectionReadyForUse( c );
+  addConnectionReadyForUse( c, u );
 
   emit userChanged( u );
   emit userConnectionStatusChanged( u );

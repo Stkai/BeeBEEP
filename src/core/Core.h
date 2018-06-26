@@ -219,7 +219,7 @@ protected:
   Connection* connection( VNumber ) const;
   bool hasConnection( const QHostAddress&, int ) const;
   void closeConnection( Connection* );
-  void addConnectionReadyForUse( Connection* );
+  void addConnectionReadyForUse( Connection*, const User& );
   int checkOfflineMessagesForUser( const User& );
   void setupNewConnection( Connection* );
   Connection* createConnection();

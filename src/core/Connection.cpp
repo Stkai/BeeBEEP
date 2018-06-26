@@ -89,7 +89,6 @@ void Connection::parseData( const QByteArray& message_data )
 
 void Connection::setReadyForUse( VNumber user_id )
 {
-  qDebug() << "Connection is ready for use by the user" << user_id;
   setUserId( user_id );
 }
 

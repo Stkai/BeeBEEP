@@ -450,14 +450,14 @@ User Protocol::recognizeUser( const User& u, int user_recognition_method ) const
   if( user_recognition_method == Settings::RecognizeByAccountAndDomain )
   {
     user_found = UserManager::instance().findUserByAccountNameAndDomainName( u.accountName(), u.domainName() );
-    if( user_found.isValid() )
-      qDebug() << "User found in list with account path" << qPrintable( u.accountPath() );
+    if( !user_found.isValid() )
+      qDebug() << "User not found in list with account path" << qPrintable( u.accountPath() );
   }
   else if( user_recognition_method == Settings::RecognizeByAccount )
   {
     user_found = UserManager::instance().findUserByAccountName( u.accountName() );
-    if( user_found.isValid() )
-      qDebug() << "User found in list with account name" << qPrintable( u.accountName() );
+    if( !user_found.isValid() )
+      qDebug() << "User not found in list with account name" << qPrintable( u.accountName() );
   }
   else if( user_recognition_method == Settings::RecognizeByNickname )
   {
@@ -465,11 +465,9 @@ User Protocol::recognizeUser( const User& u, int user_recognition_method ) const
     if( !user_found.isValid() )
     {
       user_found = UserManager::instance().findUserByHash( u.hash() );
-      if( user_found.isValid() )
-        qDebug() << "User found in list with hash" << qPrintable( u.hash() );
+      if( !user_found.isValid() )
+        qDebug() << "User not found in list with nickname" << qPrintable( u.name() ) << "and hash" << qPrintable( u.hash() );
     }
-    else
-      qDebug() << "User found in list with nickname" << qPrintable( u.name() ) << "and hash" << qPrintable( u.hash() );
   }
   else
     qWarning() << "Invalid user recognition method found" << user_recognition_method;
