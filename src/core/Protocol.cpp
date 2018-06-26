@@ -1985,7 +1985,9 @@ QByteArray Protocol::encryptByteArray( const QByteArray& text_to_encrypt, const 
   else
   {
     hexToUnsignedChar( cipher_key, key, KEYLENGTH(ENCRYPTION_KEYBITS) );
-    //for( i = 0; i < sizeof( key ); i++ )
+    for( i = 0; i < sizeof( key ); i++ )
+      fprintf( stderr, "%02X", key[i] );
+    fprintf( stderr, "\n" );
       //key[ i ] = i < (unsigned int)cipher_key.size() ? static_cast<unsigned char>( cipher_key.at( i ) ) : 0;
   }
 
@@ -2048,8 +2050,9 @@ QByteArray Protocol::decryptByteArray( const QByteArray& text_to_decrypt, const 
   }
   else
   {
-    for( i = 0; i < sizeof( key ); i++ )
-      key[ i ] = i < (unsigned int)cipher_key.size() ? static_cast<unsigned char>( cipher_key.at( i ) ) : 0;
+    hexToUnsignedChar( cipher_key, key, KEYLENGTH(ENCRYPTION_KEYBITS) );
+    //for( i = 0; i < sizeof( key ); i++ )
+      //key[ i ] = i < (unsigned int)cipher_key.size() ? static_cast<unsigned char>( cipher_key.at( i ) ) : 0;
   }
 
   nrounds = rijndaelSetupDecrypt( rk, key, ENCRYPTION_KEYBITS );
