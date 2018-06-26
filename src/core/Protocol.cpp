@@ -1911,6 +1911,55 @@ QList<QByteArray> Protocol::splitByteArray( const QByteArray& byte_array, int nu
   return array_list;
 }
 
+void Protocol::hexToUnsignedChar(  const QByteArray& hex_byte_array, unsigned char* out_string, unsigned int len_out_string ) const
+{
+  // Thanks to Christophe David
+  const char* hex_string = hex_byte_array.data();
+  unsigned int i = 0;
+  unsigned int j = 0;
+  bool msb = true;
+  while( j < len_out_string )
+  {
+    if( hex_string[i] >= '0' && hex_string[i] <='9' )
+    {
+      if( msb )
+      {
+        out_string[j] = int(hex_string[i++] - '0')*16;
+        msb = false;
+      }
+      else
+      {
+        out_string[j++] |= int(hex_string[i++] - '0');
+        msb = true;
+      }
+    }
+    else if( toupper(hex_string[i]) >= 'A' && toupper(hex_string[i]) <= 'F' )
+    {
+      if( msb )
+      {
+        out_string[j] = (int(toupper(hex_string[i++]) - 'A') + 10) * 16;
+        msb = false;
+      }
+      else
+      {
+        out_string[j++] |= (int(toupper(hex_string[i++]) - 'A')+10);
+        msb = true;
+      }
+    }
+    else
+    {
+      // whatever it is and aspecially a '\x00'
+      if( i < strlen( hex_string ) )
+        i++;
+
+      if( msb ) // lsb can not be decoded, we keep it to 0 else we fill data with 0
+        out_string[j++] = 0;
+      else
+        msb = true;
+    }
+  }
+}
+
 QByteArray Protocol::encryptByteArray( const QByteArray& text_to_encrypt, const QByteArray& cipher_key, int proto_version ) const
 {
   unsigned long rk[ RKLENGTH(ENCRYPTION_KEYBITS) ];
@@ -1935,8 +1984,9 @@ QByteArray Protocol::encryptByteArray( const QByteArray& text_to_encrypt, const 
   }
   else
   {
-    for( i = 0; i < sizeof( key ); i++ )
-      key[ i ] = i < (unsigned int)cipher_key.size() ? static_cast<unsigned char>( cipher_key.at( i ) ) : 0;
+    hexToUnsignedChar( cipher_key, key, KEYLENGTH(ENCRYPTION_KEYBITS) );
+    //for( i = 0; i < sizeof( key ); i++ )
+      //key[ i ] = i < (unsigned int)cipher_key.size() ? static_cast<unsigned char>( cipher_key.at( i ) ) : 0;
   }
 
   nrounds = rijndaelSetupEncrypt( rk, key, ENCRYPTION_KEYBITS );

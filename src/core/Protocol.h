@@ -175,6 +175,7 @@ protected:
   QPixmap stringToPixmap( const QString& ) const;
 
   QList<QByteArray> splitByteArray( const QByteArray&, int ) const;
+  void hexToUnsignedChar( const QByteArray&, unsigned char* out_string, unsigned int len_out_string ) const;
 
 private:
   VNumber m_id;
