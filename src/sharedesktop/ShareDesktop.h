@@ -44,7 +44,6 @@ public:
   bool removeUserId( VNumber );
   inline bool hasUsers() const;
   inline const QList<VNumber>& userIdList() const;
-  inline const ShareDesktopData& lastImageData() const;
   void resetUserReadImage( VNumber );
   inline bool hasUserReadImage( VNumber ) const;
   void requestImageFromUser( VNumber );
@@ -52,7 +51,6 @@ public:
   static QPixmap makeScreenshot();
 
 signals:
-  void imageDataAvailable( VNumber, const ShareDesktopData& );
   void imageDataAvailable( const ShareDesktopData& );
   void imageAvailable( const QImage& );
 
@@ -73,7 +71,6 @@ private:
 inline bool ShareDesktop::hasUsers() const { return !m_userIdList.isEmpty(); }
 inline const QList<VNumber>& ShareDesktop::userIdList() const { return m_userIdList; }
 inline bool ShareDesktop::isActive() const { return m_timer.isActive(); }
-inline const ShareDesktopData& ShareDesktop::lastImageData() const { return m_lastImageData; }
 inline bool ShareDesktop::hasUserReadImage( VNumber user_id ) const { return m_userIdReadList.contains( user_id ); }
 
 #endif // BEEBEEP_SHAREDESKTOP_H

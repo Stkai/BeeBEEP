@@ -204,7 +204,6 @@ protected slots:
   void onFileTransferCompleted( VNumber, VNumber, const FileInfo& );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   void onShareDesktopImageAvailable( const ShareDesktopData& );
-  void onShareDesktopImageAvailable( VNumber, const ShareDesktopData& );
 #endif
   /* CoreChat */
   void addListToSavedChats();

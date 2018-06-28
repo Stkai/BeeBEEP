@@ -174,34 +174,6 @@ void Core::onShareDesktopImageAvailable( const ShareDesktopData& sdd )
   }
 }
 
-void Core::onShareDesktopImageAvailable( VNumber user_id, const ShareDesktopData& sdd )
-{
-  if( !mp_shareDesktop->isActive() )
-    return;
-
-  if( mp_shareDesktop->userIdList().isEmpty() )
-  {
-    stopShareDesktop();
-    return;
-  }
-
-  Message m = Protocol::instance().shareDesktopImageDataToMessage( sdd );
-  if( mp_shareDesktop->hasUserReadImage( user_id ) )
-  {
-    Connection* c = connection( user_id );
-    if( c && c->isConnected() )
-    {
-      if( c->sendMessage( m ) )
-      {
-#ifdef BEEBEEP_DEBUG
-        qDebug() << "Share desktop send image" << qPrintable( sdd.imageType() ) << "message with size" << m.text().size() << "to user" << user_id;
-#endif
-        mp_shareDesktop->resetUserReadImage( user_id );
-      }
-    }
-  }
-}
-
 void Core::parseShareDesktopMessage( const User& u, const Message& m )
 {
   if( m.hasFlag( Message::Refused ) )

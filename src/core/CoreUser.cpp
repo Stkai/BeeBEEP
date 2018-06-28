@@ -150,19 +150,19 @@ bool Core::setLocalUserVCard( const QString& user_color, const VCard& vc )
   if( color_changed )
   {
     u.setColor( user_color );
-    qDebug() << "Local user color is changed to" << qPrintable( user_color );
+    qDebug() << "Your user color is changed to" << qPrintable( user_color );
   }
 
   if( nickname_changed )
   {
     old_user_nickname = u.vCard().nickName();
-    qDebug() << "Local user nickname is changed from" << qPrintable( old_user_nickname ) << "to" << qPrintable( vc.nickName() );
+    qDebug() << "Your nickname is changed from" << qPrintable( old_user_nickname ) << "to" << qPrintable( vc.nickName() );
   }
 
   if( vc_changed )
   {
     u.setVCard( vc );
-    qDebug() << "Local user vCard is changed";
+    qDebug() << "Your profile is changed";
   }
 
   if( !color_changed && !vc_changed )

@@ -1521,7 +1521,7 @@ void GuiMain::settingsChanged( QAction* act )
   case 61:
     {
       int capture_delay = QInputDialog::getInt( this, Settings::instance().programName(), act->text() + QString( " (ms)" ),
-                                                Settings::instance().shareDesktopCaptureDelay(), 2000, 8000, 300, &ok );
+                                                Settings::instance().shareDesktopCaptureDelay(), 1100, 8000, 300, &ok );
       if( ok )
         Settings::instance().setShareDesktopCaptureDelay( capture_delay );
     }
