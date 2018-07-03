@@ -244,7 +244,9 @@ void Settings::createLocalUser( const QString& user_name )
   qDebug() << "System account:" << qPrintable( m_localUser.accountName() );
   qDebug() << "Local domain name:" << qPrintable( m_localUser.domainName() );
   qDebug() << "Local host name:" << qPrintable( QHostInfo::localHostName() );
+#ifdef BEEBEEP_DEBUG
   qDebug() << "Local user hash:" << qPrintable( m_localUser.hash() );
+#endif
 }
 
 QString Settings::createLocalUserHash()
@@ -253,7 +255,9 @@ QString Settings::createLocalUserHash()
                                                    .arg( m_localUser.domainName() ).arg( version( true, true ) )
                                                    .arg( QDateTime::currentDateTime().toString( "dd.MM.yyyy-hh:mm:ss.zzz" ) );
   QString local_user_hash = simpleHash( hash_parameters );
+#ifdef BEEBEEP_DEBUG
   qDebug() << "Local user HASH created:" << qPrintable( local_user_hash );
+#endif
   return local_user_hash;
 }
 

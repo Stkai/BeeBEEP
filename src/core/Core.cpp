@@ -50,17 +50,12 @@ Core::Core( QObject* parent )
 {
   mp_instance = this;
   setObjectName( "BeeCore" );
-  qDebug() << "Core created";
-
   qRegisterMetaType<VNumber>( "VNumber" );
 
   mp_listener = new Listener( this );
-  qDebug() << "Listener created";
   mp_broadcaster = new Broadcaster( this );
   mp_broadcaster->setAddOfflineUsersInNetworkAddresses( false );
-  qDebug() << "Broadcaster created";
   mp_fileTransfer = new FileTransfer( this );
-  qDebug() << "FileTransfer created";
   m_shareListToBuild = 0;
 
   createDefaultChat();
@@ -73,7 +68,6 @@ Core::Core( QObject* parent )
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   mp_shareDesktop = new ShareDesktop( this );
-  qDebug() << "ShareDesktop created";
 #endif
 
   connect( mp_broadcaster, SIGNAL( newPeerFound( const QHostAddress&, int ) ), this, SLOT( newPeerFound( const QHostAddress&, int ) ) );
