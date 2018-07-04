@@ -89,4 +89,6 @@ void Updater::onDownloadCompleted( const QString& file_path )
     qWarning() << "Unable to remove file" << file_path << "now so it is added to temporaty files";
     Settings::instance().addTemporaryFilePath( file_path );
   }
+
+  http_downloader->cleanUp();
 }

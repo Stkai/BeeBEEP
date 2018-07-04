@@ -38,6 +38,7 @@ public:
   inline void addUrl( const QUrl& );
   inline const QStringList& downloadedFilePaths() const;
   inline void setOverwriteExistingFiles( bool );
+  void cleanUp();
 
 public slots:
   void startDownload();

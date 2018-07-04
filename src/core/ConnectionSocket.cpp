@@ -59,6 +59,8 @@ void ConnectionSocket::connectToNetworkAddress( const NetworkAddress& network_ad
   m_networkAddress = network_address;
   m_tickCounter = 0;
   m_checkConnectionTimeout = true;
+  if( Settings::instance().disableSystemProxyForLocalConnections() )
+    setProxy( QNetworkProxy::NoProxy );
   connectToHost( network_address.hostAddress(), network_address.hostPort() );
 }
 

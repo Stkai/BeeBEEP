@@ -75,6 +75,7 @@ Settings::Settings()
   m_dataFolderInRC = "";
   m_addAccountNameToDataFolder = false;
   m_preferredSubnets = "";
+  m_disableSystemProxyForLocalConnections = false;
   m_useIPv6 = false;
   m_useHive = true;
   m_checkNewVersionAtStartup = true;
@@ -1043,6 +1044,7 @@ void Settings::load()
   m_maxUsersToConnectInATick = sets->value( "MaxUsersToConnectInATick", m_maxUsersToConnectInATick ).toInt();
   m_preventMultipleConnectionsFromSingleHostAddress = sets->value( "PreventMultipleConnectionsFromSingleHostAddress", m_preventMultipleConnectionsFromSingleHostAddress ).toBool();
   m_useHive = sets->value( "UseHiveProtocol", m_useHive ).toBool();
+  m_disableSystemProxyForLocalConnections = sets->value( "DisableSystemProxyForLocalConnections", m_disableSystemProxyForLocalConnections ).toBool();
   sets->endGroup();
   loadBroadcastAddressesFromFileHosts();
 
@@ -1339,6 +1341,7 @@ void Settings::save()
   sets->setValue( "Workgroups", m_workgroups );
   sets->setValue( "MaxUsersToConnectInATick", m_maxUsersToConnectInATick );
   sets->setValue( "UseHiveProtocol", m_useHive );
+  sets->setValue( "DisableSystemProxyForLocalConnections", m_disableSystemProxyForLocalConnections );
   sets->endGroup();
   sets->beginGroup( "FileShare" );
   sets->setValue( "EnableFileTransfer", m_enableFileTransfer );

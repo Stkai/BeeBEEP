@@ -313,6 +313,8 @@ public:
   inline void setPreventMultipleConnectionsFromSingleHostAddress( bool );
   inline bool preventMultipleConnectionsFromSingleHostAddress();
   inline const QString& preferredSubnets() const;
+  inline void setDisableSystemProxyForLocalConnections( bool );
+  inline bool disableSystemProxyForLocalConnections() const;
 
   inline bool keyEscapeMinimizeInTray() const;
   inline void setKeyEscapeMinimizeInTray( bool );
@@ -510,6 +512,7 @@ private:
   QString m_dataFolderInRC;
   bool m_addAccountNameToDataFolder;
   QString m_preferredSubnets;
+  bool m_disableSystemProxyForLocalConnections;
   bool m_useIPv6;
   QHostAddress m_multicastGroupAddress;
   bool m_useChatWithAllUsers;
@@ -939,6 +942,8 @@ inline void Settings::setUseShortcuts( bool new_value ) { m_useShortcuts = new_v
 inline bool Settings::useShortcuts() const { return m_useShortcuts; }
 inline int Settings::tickIntervalConnectionTimeout() const { return m_tickIntervalConnectionTimeout; }
 inline const QString& Settings::preferredSubnets() const { return m_preferredSubnets; }
+inline void Settings::setDisableSystemProxyForLocalConnections( bool new_value ) { m_disableSystemProxyForLocalConnections = new_value; }
+inline bool Settings::disableSystemProxyForLocalConnections() const { return m_disableSystemProxyForLocalConnections; }
 inline bool Settings::useIPv6() const { return m_useIPv6; }
 inline const QHostAddress& Settings::multicastGroupAddress() const { return m_multicastGroupAddress; }
 inline void Settings::setUseReturnToSendMessage( bool new_value ) { m_useReturnToSendMessage = new_value; }

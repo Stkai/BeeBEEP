@@ -34,6 +34,11 @@ HttpDownloader::HttpDownloader( QObject* parent )
   connect( mp_manager, SIGNAL( finished( QNetworkReply* ) ), this, SLOT( onReplyFinished( QNetworkReply* ) ) );
 }
 
+void HttpDownloader::cleanUp()
+{
+  mp_manager->setProxy( QNetworkProxy::NoProxy );
+}
+
 QString HttpDownloader::fileNameFromUrl( const QUrl& url )
 {
   QString url_path = url.path();

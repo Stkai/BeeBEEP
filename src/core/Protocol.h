@@ -106,11 +106,6 @@ public:
   QString saveGroup( const Group& ) const;
   Group loadGroup( const QString& );
 
-  /* Fixme
-  QList<Group> loadGroupsFromFile();
-  User loadUserFromPath( const QString&, bool use_account_name );
-  */
-
   QString saveUser( const User& ) const;
   User loadUser( const QString& );
   QString saveUserRecord( const UserRecord&, bool add_extras ) const;

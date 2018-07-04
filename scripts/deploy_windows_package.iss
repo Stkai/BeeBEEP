@@ -7,15 +7,15 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{85A0D6B6-2163-425F-92E7-E0BC4CEDCE9A}
 AppName=BeeBEEP
-AppVersion=5.0.0
-;AppVerName=BeeBEEP 5.0.0
+AppVersion=5.0.1
+;AppVerName=BeeBEEP 5.0.1
 AppPublisher=Marco Mastroddi Software
 AppPublisherURL=http://www.beebeep.net/
 AppSupportURL=http://www.beebeep.net/
 AppUpdatesURL=http://www.beebeep.net/
 DefaultDirName={pf}\BeeBEEP
 DisableProgramGroupPage=yes
-OutputBaseFilename=beebeep-setup-5.0.0
+OutputBaseFilename=beebeep-setup-5.0.1
 SetupIconFile=E:\SOURCES\beebeep-code\src\beebeep.ico
 Compression=lzma
 SolidCompression=yes
@@ -40,8 +40,8 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: "E:\SOURCES\beebeep-5.0.0\beebeep.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\SOURCES\beebeep-5.0.0\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "E:\SOURCES\beebeep-5.0.1\beebeep.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\SOURCES\beebeep-5.0.1\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
