@@ -62,7 +62,7 @@ Core::Core( QObject* parent )
 
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   mp_mDns = new MDnsManager( this );
-  connect( mp_mDns, SIGNAL( serviceRegistered() ), this, SLOT( sendMulticastingMessage() ) );
+  connect( mp_mDns, SIGNAL( serviceRegistered() ), this, SLOT( onMulticastDnsServiceRegistered() ) );
   connect( mp_mDns, SIGNAL( networkAddressFound( const NetworkAddress& ) ), this, SLOT( checkNetworkAddress( const NetworkAddress& ) ) );
 #endif
 
@@ -222,6 +222,9 @@ bool Core::start()
   else
     qWarning() << "File transfer is disabled";
 
+  if( Settings::instance().disableSystemProxyForConnections() )
+    qDebug() << "System proxy is disabled for connections";
+
   if( Settings::instance().showTipsOfTheDay() )
   {
     showTipOfTheDay();
@@ -294,6 +297,12 @@ bool Core::dnsMulticastingIsActive() const
   return mp_mDns->isActive();
 }
 
+void Core::onMulticastDnsServiceRegistered()
+{
+  emit multicastDnsChanged();
+  if( dnsMulticastingIsActive() )
+    sendMulticastingMessage();
+}
 #endif
 
 void Core::stop()

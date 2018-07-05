@@ -2433,6 +2433,14 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Show username&apos;s color</source>
         <translation>Farbe des Benutzernamens anzeigen</translation>
     </message>
+    <message>
+        <source>Connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disconnect</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -2561,6 +2569,10 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>(search users here by default)</source>
         <translation>(Benutzer hier standardmäßig suchen)</translation>
+    </message>
+    <message>
+        <source>Disable system proxy for connections</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

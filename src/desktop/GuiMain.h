@@ -75,6 +75,7 @@ public slots:
   void saveSession( QSessionManager& );
   void onWakeUpRequest();
   void onSleepRequest();
+  void disconnectFromNetwork();
 
 private slots:
   void onCoreConnected();
@@ -187,6 +188,7 @@ private slots:
   void selectIconSourcePath();
   void selectEmoticonSourcePath();
   void onNewsAvailable( const QString& );
+  void showDefaultServerPortInMenu();
 
 protected:
   void keyPressEvent( QKeyEvent* );
@@ -218,7 +220,6 @@ private:
   bool openWebUrl( const QString& );
   QStringList checkFilePath( const QString& );
   bool isAudioDeviceAvailable() const;
-  void showDefaultServerPortInMenu();
   GuiFloatingChat* floatingChat( VNumber ) const;
   QWidget* activeWindow() const;
   void setChatMessagesToShowInAction( QAction* );
@@ -270,6 +271,8 @@ private:
 
   QToolBar* mp_barMain;
 
+  QAction* mp_actConnect;
+  QAction* mp_actDisconnect;
   QAction* mp_actConfigureNetwork;
   QAction* mp_actBroadcast;
   QAction* mp_actQuit;

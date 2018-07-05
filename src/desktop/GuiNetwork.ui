@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>620</width>
-    <height>460</height>
+    <height>464</height>
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout_3">
@@ -379,6 +379,13 @@
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="QCheckBox" name="mp_cbDisableProxy">
+          <property name="text">
+           <string>Disable system proxy for connections</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item row="3" column="2">
@@ -463,6 +470,7 @@
   <tabstop>mp_cbUseHive</tabstop>
   <tabstop>mp_cbPreventMultipleConnectionsFromSingleHostAddress</tabstop>
   <tabstop>mp_cbEnableMDns</tabstop>
+  <tabstop>mp_cbDisableProxy</tabstop>
   <tabstop>mp_pbShowFileHosts</tabstop>
   <tabstop>mp_pbOk</tabstop>
   <tabstop>mp_pbCancel</tabstop>

@@ -103,6 +103,8 @@ void GuiNetwork::loadSettings()
   mp_cbUseHive->setChecked( Settings::instance().useHive() );
   enableSearchUsersInterval();
 
+  mp_cbDisableProxy->setChecked( Settings::instance().disableSystemProxyForConnections() );
+
   m_restartConnection = false;
 }
 
@@ -124,6 +126,7 @@ void GuiNetwork::checkAndSearch()
     Settings::instance().setLocalSubnetForced( s_preferred_subnet );
     m_restartConnection = true;
   }
+  Settings::instance().setDisableSystemProxyForConnections( mp_cbDisableProxy->isChecked() );
   accept();
 }
 

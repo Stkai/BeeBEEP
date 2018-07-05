@@ -142,6 +142,9 @@ GuiMain::GuiMain( QWidget *parent )
   connect( beeCore, SIGNAL( shareDesktopImageAvailable( const User&, const QImage&, const QString&, QRgb ) ), this, SLOT( onShareDesktopImageAvailable( const User&, const QImage&, const QString&, QRgb ) ) );
   connect( beeCore, SIGNAL( shareDesktopUpdate( const User& ) ), this, SLOT( onShareDesktopUpdate( const User& ) ) );
 #endif
+#ifdef BEEBEEP_USE_MULTICAST_DNS
+  connect( beeCore, SIGNAL( multicastDnsChanged() ), this, SLOT( showDefaultServerPortInMenu() ) );
+#endif
   connect( mp_fileTransfer, SIGNAL( transferCancelled( VNumber ) ), beeCore, SLOT( cancelFileTransfer( VNumber ) ) );
   connect( mp_fileTransfer, SIGNAL( openFileCompleted( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
 
@@ -555,6 +558,12 @@ bool GuiMain::promptConnectionPassword()
   return true;
 }
 
+void GuiMain::disconnectFromNetwork()
+{
+  m_autoConnectOnInterfaceUp = false;
+  stopCore();
+}
+
 void GuiMain::stopCore()
 {
   if( mp_tabMain->currentWidget() != mp_home )
@@ -582,6 +591,8 @@ void GuiMain::checkViewActions()
   bool is_connected = beeCore->isConnected();
   int connected_users = beeCore->connectedUsers();
 
+  mp_actConnect->setEnabled( !m_coreIsConnecting && !is_connected );
+  mp_actDisconnect->setEnabled( is_connected );
   mp_actBroadcast->setEnabled( is_connected );
   mp_actCreateGroupChat->setEnabled( UserManager::instance().userList().size() > 1 );
   mp_actViewFileSharing->setEnabled( Settings::instance().enableFileTransfer() && Settings::instance().enableFileSharing() );
@@ -642,6 +653,12 @@ void GuiMain::showLicense()
 
 void GuiMain::createActions()
 {
+  mp_actConnect = new QAction( IconManager::instance().icon( "connection.png" ), tr( "Connect" ), this );
+  connect( mp_actConnect, SIGNAL( triggered() ), this, SLOT( startCore() ) );
+
+  mp_actDisconnect = new QAction( IconManager::instance().icon( "disconnection.png" ), tr( "Disconnect" ), this );
+  connect( mp_actDisconnect, SIGNAL( triggered() ), this, SLOT( disconnectFromNetwork() ) );
+
   mp_actBroadcast = new QAction( IconManager::instance().icon( "broadcast.png" ), tr( "Search users" ), this );
   connect( mp_actBroadcast, SIGNAL( triggered() ), this, SLOT( sendBroadcastMessage() ) );
 
@@ -684,6 +701,9 @@ void GuiMain::createMenus()
 
   /* Main Menu */
   mp_menuMain = new QMenu( tr( "Main" ), this );
+  mp_menuMain->addAction( mp_actConnect );
+  mp_menuMain->addAction( mp_actDisconnect );
+  mp_menuMain->addSeparator();
   if( Settings::instance().resourceFolder() != Settings::instance().dataFolder() )
     mp_menuMain->addAction( IconManager::instance().icon( "resource-folder.png" ), tr( "Open your resource folder" ), this, SLOT( openResourceFolder() ) );
   mp_menuMain->addAction( IconManager::instance().icon( "data-folder.png" ), tr( "Open your data folder" ), this, SLOT( openDataFolder() ) );
@@ -1787,8 +1807,7 @@ void GuiMain::setUserStatusSelected( int user_status )
                                    tr( "Do you want to disconnect from %1 network?" ).arg( Settings::instance().programName() ),
                                    tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 0 )
       {
-        m_autoConnectOnInterfaceUp = false;
-        stopCore();
+        disconnectFromNetwork();
         return;
       }
     }
@@ -3075,6 +3094,7 @@ void GuiMain::showDefaultServerPortInMenu()
 #ifdef BEEBEEP_USE_MULTICAST_DNS
     if( beeCore->dnsMulticastingIsActive() )
     {
+
       multicast_dns = tr( "active" );
       mp_actMulticastDns->setEnabled( true );
     }

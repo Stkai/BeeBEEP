@@ -2413,6 +2413,14 @@ Please select a different name.</source>
         <source>Show username&apos;s color</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disconnect</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -2540,6 +2548,10 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Use hive protocol to contact offline users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable system proxy for connections</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

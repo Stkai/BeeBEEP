@@ -174,10 +174,16 @@ signals:
   void shareDesktopImageAvailable( const User&, const QImage&, const QString&, QRgb );
   void shareDesktopUpdate( const User& );
 #endif
+#ifdef BEEBEEP_USE_MULTICAST_DNS
+  void multicastDnsChanged();
+#endif
 
 protected slots:
   void onUpdaterJobCompleted();
   void onPostUsageStatisticsJobCompleted();
+#ifdef BEEBEEP_USE_MULTICAST_DNS
+  void onMulticastDnsServiceRegistered();
+#endif
 
   /* CoreUser */
   void saveUsersAndGroups();

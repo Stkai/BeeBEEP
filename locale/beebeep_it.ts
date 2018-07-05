@@ -2473,6 +2473,14 @@ Inserisci un nome differente.</translation>
         <source>Show username&apos;s color</source>
         <translation>Mostra il nome degli utenti a colori</translation>
     </message>
+    <message>
+        <source>Connect</source>
+        <translation>Connetti</translation>
+    </message>
+    <message>
+        <source>Disconnect</source>
+        <translation>Disconnetti</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -2635,6 +2643,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Use hive protocol to contact offline users</source>
         <translation>Usa il protocollo alveare per contattare gli utenti non in linea</translation>
+    </message>
+    <message>
+        <source>Disable system proxy for connections</source>
+        <translation>Disabilita il proxy di sistema per le connessioni</translation>
     </message>
 </context>
 <context>

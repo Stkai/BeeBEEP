@@ -227,7 +227,6 @@ int main( int argc, char *argv[] )
   /* Event Loop */
   qDebug() << "Enter in the main event loop";
   int iRet = bee_app.exec();
-  qDebug() << "Exit from the main event loop with code:" << iRet;
 
   /* Check Icon Provider */
   qDebug() << "IconProvider has load in cache" << GuiIconProvider::instance().cacheSize() << "icons";
@@ -266,7 +265,7 @@ int main( int argc, char *argv[] )
 #ifdef BEEBEEP_USE_HUNSPELL
   SpellChecker::close();
 #endif
-  qDebug() << "Done";
+  qDebug() << "Exit with code:" << iRet;
   Log::instance().closeFileStream();
   Log::instance().close();
   Settings::close();

@@ -161,5 +161,6 @@
         <file>images/image-type.png</file>
         <file>images/image-quality.png</file>
         <file>images/back.png</file>
+        <file>images/disconnection.png</file>
     </qresource>
 </RCC>
