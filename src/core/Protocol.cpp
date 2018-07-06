@@ -678,7 +678,9 @@ UserRecord Protocol::loadUserRecord( const QString& s ) const
   if( !sl.isEmpty() )
   {
     ur.setHash( sl.takeFirst() );
+ #ifdef BEEBEEP_DEBUG
     qDebug() << "User" << qPrintable( ur.name() ) << "has hash saved:" << qPrintable( ur.hash() );
+ #endif
   }
 
   if( !sl.isEmpty() )

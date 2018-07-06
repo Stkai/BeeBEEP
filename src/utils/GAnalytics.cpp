@@ -37,17 +37,14 @@ GAnalytics::GAnalytics( QObject* parent )
 void GAnalytics::doPost()
 {
   QUrl ga_url = QUrl( Settings::instance().gaUrl() );
-  QList<QNetworkProxy> proxy_list = QNetworkProxyFactory::systemProxyForQuery( QNetworkProxyQuery( ga_url ) );
-  if( !proxy_list.isEmpty() )
+  QNetworkProxyQuery npq = QNetworkProxyQuery( ga_url );
+  QNetworkProxy np = Settings::instance().systemNetworkProxy( npq );
+  if( np.type() != QNetworkProxy::NoProxy )
   {
-    QNetworkProxy np = proxy_list.takeFirst();
-    if( np.type() != QNetworkProxy::NoProxy )
-    {
 #ifdef BEEBEEP_DEBUG
-      qDebug() << qPrintable( objectName() ) << "uses network proxy" << qPrintable( np.hostName() ) << ":" << np.port();
+    qDebug() << qPrintable( objectName() ) << "uses network proxy" << qPrintable( np.hostName() ) << ":" << np.port();
 #endif
-      mp_manager->setProxy( np );
-    }
+    mp_manager->setProxy( np );
   }
 
   QNetworkRequest req( ga_url );

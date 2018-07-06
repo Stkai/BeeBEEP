@@ -68,7 +68,7 @@ inline bool NetworkAddress::operator==( const NetworkAddress& na ) const { retur
 inline bool NetworkAddress::isHostAddressValid() const { return !m_hostAddress.isNull(); }
 inline bool NetworkAddress::isHostPortValid() const { return m_hostPort > 0; }
 inline bool NetworkAddress::isIPv4Address() const { return m_hostAddress.protocol() == QAbstractSocket::IPv4Protocol; }
-inline bool NetworkAddress::isIPv6Address() const { return m_hostAddress.protocol() == QAbstractSocket::IPv6Protocol;; }
+inline bool NetworkAddress::isIPv6Address() const { return m_hostAddress.protocol() == QAbstractSocket::IPv6Protocol; }
 #if QT_VERSION >= 0x050000
   inline bool NetworkAddress::isLoopback() const { return m_hostAddress.isLoopback(); }
 #else

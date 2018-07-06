@@ -67,16 +67,12 @@ void HttpDownloader::startDownload()
 void HttpDownloader::doDownload( const QUrl& url )
 {
   qDebug() << qPrintable( objectName() ) << "gets url:" << qPrintable( url.toString() );
-
-  QList<QNetworkProxy> proxy_list = QNetworkProxyFactory::systemProxyForQuery( QNetworkProxyQuery( url ) );
-  if( !proxy_list.isEmpty() )
+  QNetworkProxyQuery npq = QNetworkProxyQuery( QUrl( url ) );
+  QNetworkProxy np = Settings::instance().systemNetworkProxy( npq );
+  if( np.type() != QNetworkProxy::NoProxy )
   {
-    QNetworkProxy np = proxy_list.takeFirst();
-    if( np.type() != QNetworkProxy::NoProxy )
-    {
-      qDebug() << qPrintable( objectName() ) << "uses network proxy" << qPrintable( np.hostName() ) << ":" << np.port();
-      mp_manager->setProxy( np );
-    }
+    qDebug() << qPrintable( objectName() ) << "uses network proxy" << qPrintable( np.hostName() ) << ":" << np.port();
+    mp_manager->setProxy( np );
   }
 
   QNetworkRequest request;

@@ -36,6 +36,8 @@ ConnectionSocket::ConnectionSocket( QObject* parent )
 {
   if( Settings::instance().useLowDelayOptionOnSocket() )
     setSocketOption( QAbstractSocket::LowDelayOption, 1 );
+  if( Settings::instance().disableSystemProxyForConnections() )
+    setProxy( QNetworkProxy::NoProxy );
   m_pingByteArraySize = Protocol::instance().pingMessage().size() + 10;
 
   connect( this, SIGNAL( connected() ), this, SLOT( sendQuestionHello() ) );
@@ -59,8 +61,6 @@ void ConnectionSocket::connectToNetworkAddress( const NetworkAddress& network_ad
   m_networkAddress = network_address;
   m_tickCounter = 0;
   m_checkConnectionTimeout = true;
-  if( Settings::instance().disableSystemProxyForConnections() )
-    setProxy( QNetworkProxy::NoProxy );
   connectToHost( network_address.hostAddress(), network_address.hostPort() );
 }
 
@@ -89,20 +89,30 @@ bool ConnectionSocket::createCipherKey( const QString& public_key )
 {
   if( m_publicKey1.isEmpty() )
   {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Encryption handshake key 1";
+#endif
     m_publicKey1 = public_key;
   }
   else if( m_publicKey2.isEmpty() )
   {
     m_publicKey2 = public_key;
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Encryption handshake key 2";
+#endif
   }
   else
   {
-    qWarning() << "Encryption handshake error. Too many public key arrived from" << qPrintable( m_networkAddress.toString() );;
+    qWarning() << "Encryption handshake error. Too many public key arrived from" << qPrintable( m_networkAddress.toString() );
     return false;
   }
 
   if( m_publicKey1.isEmpty() || m_publicKey2.isEmpty() )
     return false;
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Encryption handshake completed with" << qPrintable( m_networkAddress.toString() );
+#endif
 
   m_cipherKey = Protocol::instance().createCipherKey( m_publicKey1, m_publicKey2, m_datastreamVersion );
   m_publicKey1 = "";

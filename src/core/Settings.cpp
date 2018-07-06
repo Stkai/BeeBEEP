@@ -27,6 +27,7 @@
 #include "Settings.h"
 #include "Version.h"
 
+
 Settings* Settings::mp_instance = NULL;
 
 Settings::Settings()
@@ -196,6 +197,15 @@ void Settings::createApplicationUuid()
     else
       qDebug() << "Continue to use application uuid" << qPrintable( m_applicationUuid ) << "created in date" << qPrintable( m_applicationUuidCreationDate.toString( "yyyy-MM-dd" ) );
   }
+}
+
+QNetworkProxy Settings::systemNetworkProxy( const QNetworkProxyQuery& npq ) const
+{
+  QList<QNetworkProxy> proxy_list = QNetworkProxyFactory::systemProxyForQuery( npq );
+  if( proxy_list.isEmpty() )
+    return QNetworkProxy( QNetworkProxy::NoProxy );
+  else
+    return proxy_list.first();
 }
 
 void Settings::setChatFont( const QFont& new_value )

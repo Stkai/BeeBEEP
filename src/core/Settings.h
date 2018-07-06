@@ -467,6 +467,8 @@ public:
   inline void setSendOfflineMessagesToDefaultChat( bool );
   inline bool sendOfflineMessagesToDefaultChat() const;
 
+  QNetworkProxy systemNetworkProxy( const QNetworkProxyQuery& ) const;
+
   QString simpleEncrypt( const QString& );
   QString simpleDecrypt( const QString& );
 
