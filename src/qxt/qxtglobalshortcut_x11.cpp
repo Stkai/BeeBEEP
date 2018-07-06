@@ -30,16 +30,8 @@
 *****************************************************************************/
 
 #include <QVector>
-#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
-// in ubuntu 14.04 this include works
-#   include <QX11Info>
-// In other distro maybe you have to use the line below instead the above one
-//#   include <QtX11Extras/QX11Info>
-#else
-#   include <QApplication>
-#   include <qpa/qplatformnativeinterface.h>
-#   include <xcb/xcb.h>
-#endif
+#include <QX11Info>
+#include <xcb/xcb.h>
 #include <X11/Xlib.h>
 
 
@@ -95,14 +87,7 @@ class QxtX11Data {
 public:
     QxtX11Data()
     {
-#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
         m_display = QX11Info::display();
-#else
-        QPlatformNativeInterface *native = qApp->platformNativeInterface();
-        void *display = native->nativeResourceForScreen(QByteArray("display"),
-                                                        QGuiApplication::primaryScreen());
-        m_display = reinterpret_cast<Display *>(display);
-#endif
     }
 
     bool isValid()
