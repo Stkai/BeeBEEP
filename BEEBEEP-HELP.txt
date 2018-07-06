@@ -229,7 +229,7 @@ AcceptConnectionsOnlyFromWorkgroups=[true/false] accepts connection only from me
 Workgroups = workgroups saved (do not edit manually)
 UseMulticastDns=[true/false] if enabled BeeBEEP use Zero Configuration Networking (it overwrites RC option) (default=true in macosx, default=false in others os)
 AutoSearchUsersWhenListIsEmpty=[true/false] if enabled BeeBEEP search for users when there aren't users connected (default=true) [3.0.5] [obsolete 3.0.8+]
-DisableSystemProxyForLocalConnections=[true/false] if enabled BeeBEEP disable the proxy for local connections (default=false) [5.0.1]
+DisableSystemProxyForConnections=[true/false] if enabled BeeBEEP disable the proxy for local connections (default=false) [5.0.1]
 
 [FileShare]
 FileTransferIsEnabled=[true/false] enable file transfer/sharing/box (default=true) [3.0.6] [obsolete in 4.0.0]
