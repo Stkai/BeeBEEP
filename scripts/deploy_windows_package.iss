@@ -16,12 +16,12 @@ AppUpdatesURL=http://www.beebeep.net/
 DefaultDirName={pf}\BeeBEEP
 DisableProgramGroupPage=yes
 OutputBaseFilename=beebeep-setup-5.0.2
-SetupIconFile=E:\SOURCES\beebeep-code\src\beebeep.ico
+SetupIconFile=..\src\beebeep.ico
 Compression=lzma
 SolidCompression=yes
 AppCopyright=Copyright (C) Marco Mastroddi
-OutputDir=E:\SOURCES\beebeep-code\scripts
-LicenseFile=E:\SOURCES\beebeep-code\misc\license.txt
+OutputDir=.
+LicenseFile=..\misc\license.txt
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -40,8 +40,8 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: "E:\SOURCES\beebeep-5.0.2\beebeep.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\SOURCES\beebeep-5.0.2\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\..\beebeep-5.0.2\beebeep.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\beebeep-5.0.2\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
