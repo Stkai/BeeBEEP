@@ -912,7 +912,7 @@ void Settings::load()
   sets->beginGroup( "Gui" );
   m_resetGeometryAtStartup = sets->value( "ResetWindowGeometryAtStartup", m_resetGeometryAtStartup ).toBool();
 
-  if( m_resetGeometryAtStartup ||  m_settingsVersion < 8 || !qt_is_compatible )
+  if( m_resetGeometryAtStartup || !qt_is_compatible )
   {
     m_guiGeometry = "";
     m_guiState = "";
@@ -1142,8 +1142,10 @@ QString Settings::qtMajorVersion() const
   QStringList sl_version = qt_version.split( "." );
   if( sl_version.isEmpty() )
     return QString( "0" );
-  else
+  else if( sl_version.size() < 2 )
     return sl_version.at( 0 );
+  else
+    return QString( "%1.%2" ).arg( sl_version.at( 0 ) ).arg( sl_version.at( 1 ) );
 }
 
 void Settings::save()
