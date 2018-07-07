@@ -912,7 +912,7 @@ void Settings::load()
   sets->beginGroup( "Gui" );
   m_resetGeometryAtStartup = sets->value( "ResetWindowGeometryAtStartup", m_resetGeometryAtStartup ).toBool();
 
-  if( m_resetGeometryAtStartup || !qt_is_compatible )
+  if( m_resetGeometryAtStartup || m_settingsVersion < 9 || !qt_is_compatible )
   {
     m_guiGeometry = "";
     m_guiState = "";
