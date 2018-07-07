@@ -492,6 +492,7 @@ protected:
   Settings();
 
   QString qtMajorVersion() const;
+  QString qtMajorMinorVersion() const;
 
   void loadBroadcastAddressesFromFileHosts();
   QHostAddress subnetFromHostAddress( const QHostAddress& ) const;

@@ -812,10 +812,10 @@ void Settings::load()
   m_settingsCreationDate = sets->value( "BeeBang", QDate() ).toDate();
   if( m_settingsCreationDate.isNull() )
     m_settingsCreationDate = QDate::currentDate();
-  QString qt_version_in_settings = sets->value( "Qt", qtMajorVersion() ).toString();
+  QString qt_version_in_settings = sets->value( "Qt", qtMajorMinorVersion() ).toString();
   sets->endGroup();
 
-  bool qt_is_compatible = qt_version_in_settings == qtMajorVersion();
+  bool qt_is_compatible = qt_version_in_settings == qtMajorMinorVersion();
 
   sets->beginGroup( "Chat" );
   m_chatFont.fromString( sets->value( "Font", QApplication::font().toString() ).toString() );
@@ -1142,6 +1142,16 @@ QString Settings::qtMajorVersion() const
   QStringList sl_version = qt_version.split( "." );
   if( sl_version.isEmpty() )
     return QString( "0" );
+  else
+    return sl_version.at( 0 );
+}
+
+QString Settings::qtMajorMinorVersion() const
+{
+  QString qt_version( qVersion() );
+  QStringList sl_version = qt_version.split( "." );
+  if( sl_version.isEmpty() )
+    return QString( "0" );
   else if( sl_version.size() < 2 )
     return sl_version.at( 0 );
   else
@@ -1166,7 +1176,7 @@ void Settings::save()
   sets->setValue( "Settings", BEEBEEP_SETTINGS_VERSION );
   sets->setValue( "DataStream", (int)dataStreamVersion( false ) );
   sets->setValue( "BeeBang", m_settingsCreationDate );
-  sets->setValue( "Qt", qtMajorVersion() );
+  sets->setValue( "Qt", qtMajorMinorVersion() );
   sets->endGroup();
   sets->beginGroup( "Chat" );
   sets->setValue( "Font", m_chatFont.toString() );
