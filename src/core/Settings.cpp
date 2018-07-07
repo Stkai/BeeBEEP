@@ -963,7 +963,7 @@ void Settings::load()
   m_loadOnTrayAtStartup = sets->value( "LoadOnTrayAtStartup", false ).toBool();
   m_showNotificationOnTray = sets->value( "ShowNotificationOnTray", true ).toBool();
   m_showOnlyMessageNotificationOnTray = sets->value( "ShowOnlyMessageNotificationOnTray", true ).toBool();
-  m_trayMessageTimeout = qMax( sets->value( "ShowNotificationOnTrayTimeout", 5000 ).toInt(), 1000 );
+  m_trayMessageTimeout = qMax( sets->value( "ShowNotificationOnTrayTimeout", 10000 ).toInt(), 1000 );
   m_showChatMessageOnTray = sets->value( "ShowChatMessageOnTray", false ).toBool();
   m_textSizeInChatMessagePreviewOnTray = sets->value( "TextSizeInChatMessagePreviewOnTray", 40 ).toInt();
   m_showFileTransferCompletedOnTray = sets->value( "ShowFileTransferCompletedOnTray", true ).toBool();

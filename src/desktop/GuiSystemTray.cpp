@@ -85,9 +85,13 @@ void GuiSystemTray::showMessageInTray( const QString& msg, bool long_time )
     int min_time = 1000;
     int show_time = qMax( min_time, Settings::instance().trayMessageTimeout() );
     if( long_time )
-      show_time = qMax( 5000, show_time * 2 );
+      show_time = qMax( 10000, show_time * 4 );
 
+ #if QT_VERSION >= 0x050900
+    showMessage( msg, Settings::instance().programName(), IconManager::instance().icon( "beebeep-message.png" ), show_time );
+ #else
     showMessage( msg, Settings::instance().programName(), QSystemTrayIcon::Information, show_time );
+ #endif
   }
 }
 
