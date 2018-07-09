@@ -1,5 +1,8 @@
 BEEBEEP (Secure Lan Messanger) - CHANGELOG - (c) Marco Mastroddi
 
+BeeBEEP 5.2.0
+- Added "Create message" to send one time message to many
+
 BeeBEEP 5.0.2
 - Fixed compatibility of window geometry and state with previous version
 - Fixed minor bug in save settings

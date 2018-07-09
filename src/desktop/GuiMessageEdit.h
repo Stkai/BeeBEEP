@@ -48,6 +48,7 @@ public:
   void setCompleter( QCompleter* );
 
   inline void addActionToContextMenu( QAction* );
+  inline void setForceCRonEnterClicked( bool );
 
 signals:
   void returnPressed();
@@ -94,9 +95,12 @@ private:
   QList<QAction*> m_actionsToContextMenu;
   QMenu* mp_menuContext;
 
+  bool m_forceCRonEnterClicked;
+
 };
 
 // Inline Functions
 inline void GuiMessageEdit::addActionToContextMenu( QAction* act ) { m_actionsToContextMenu.append( act ); }
+inline void GuiMessageEdit::setForceCRonEnterClicked( bool new_value ) { m_forceCRonEnterClicked = new_value; }
 
 #endif // BEEBEEP_GUIMESSAGEEDIT_H

@@ -162,5 +162,6 @@
         <file>images/image-quality.png</file>
         <file>images/back.png</file>
         <file>images/disconnection.png</file>
+        <file>images/message-to-many.png</file>
     </qresource>
 </RCC>

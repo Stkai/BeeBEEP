@@ -189,6 +189,7 @@ private slots:
   void selectEmoticonSourcePath();
   void onNewsAvailable( const QString& );
   void showDefaultServerPortInMenu();
+  void createMessage();
 
 protected:
   void keyPressEvent( QKeyEvent* );
@@ -300,6 +301,7 @@ private:
   QAction* mp_actSelectEmoticonSourcePath;
   QAction* mp_actRemoveInactiveUsers;
   QAction* mp_actChangeStatusDescription;
+  QAction* mp_actCreateMessage;
 
   QMenu* mp_menuNetworkStatus;
   QAction* mp_actHostAddress;

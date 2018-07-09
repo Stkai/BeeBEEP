@@ -34,7 +34,7 @@ GuiNetwork::GuiNetwork( QWidget* parent )
 {
   setupUi( this );
   setObjectName( "GuiNetworkDialog" );
-  setWindowTitle( tr( "Network" ) + QString( " - %1" ).arg( Settings::instance().programName() ));
+  setWindowTitle( tr( "Network" ) + QString( " - %1" ).arg( Settings::instance().programName() ) );
   setWindowIcon( IconManager::instance().icon( "network.png" ) );
   Bee::removeContextHelpButton( this );
 

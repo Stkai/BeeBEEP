@@ -33,6 +33,7 @@
 #include "GuiChat.h"
 #include "GuiChatList.h"
 #include "GuiCreateGroup.h"
+#include "GuiCreateMessage.h"
 #include "GuiConfig.h"
 #include "GuiEditVCard.h"
 #include "GuiFileSharing.h"
@@ -691,6 +692,9 @@ void GuiMain::createActions()
 
   mp_actViewScreenShot = new QAction( IconManager::instance().icon( "screenshot.png" ), tr( "Make a screenshot" ), this );
   connect( mp_actViewScreenShot, SIGNAL( triggered() ), this, SLOT( showScreenShotWindow() ) );
+
+  mp_actCreateMessage = new QAction( IconManager::instance().icon( "message-to-many.png" ), tr( "Create a message" ), this );
+  connect( mp_actCreateMessage, SIGNAL( triggered() ), this, SLOT( createMessage() ) );
 }
 
 void GuiMain::createMenus()
@@ -1156,6 +1160,7 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actVCard );
   mp_barMain->addAction( mp_actViewNewMessage );
   mp_barMain->addAction( mp_actBroadcast );
+  mp_barMain->addAction( mp_actCreateMessage );
   mp_barMain->addAction( mp_actCreateGroupChat );
   mp_barMain->addAction( mp_actViewFileTransfer );
   mp_barMain->addAction( mp_actViewFileSharing );
@@ -3966,6 +3971,18 @@ void GuiMain::onNewsAvailable( const QString& news )
   mp_home->setNews( news );
 }
 
+void GuiMain::createMessage()
+{
+  GuiCreateMessage gcm;
+  gcm.setModal( true );
+  gcm.setSizeGripEnabled( true );
+  gcm.show();
+  if( gcm.exec() == QDialog::Accepted )
+  {
+    qDebug() << "Send message to many users:" << gcm.message();
+  }
+}
+
 #ifdef BEEBEEP_USE_SHAREDESKTOP
 void GuiMain::onShareDesktopImageAvailable( const User& u, const QImage& img, const QString& image_type, QRgb diff_color )
 {
@@ -4005,7 +4022,7 @@ void GuiMain::onShareDesktopImageAvailable( const User& u, const QImage& img, co
   connect( new_gui, SIGNAL( shareDesktopDeleteRequest( VNumber ) ), this, SLOT( onShareDesktopDeleteRequest( VNumber ) ) );
   new_gui->setUser( u );
   new_gui->setGeometry( 10, 40, qMin( fit_img.width()+32, qMax( 640, desktop_w ) ),
-                              qMin( fit_img.height()+20, qMax( 480, desktop_h ) ) );
+                        qMin( fit_img.height()+20, qMax( 480, desktop_h ) ) );
   new_gui->setImageSize( fit_img.size() );
   new_gui->setMaximumSize( fit_img.width()+32, fit_img.height()+20 );
   new_gui->updateImage( fit_img, image_type, diff_color );
@@ -4097,5 +4114,4 @@ void GuiMain::sendScreenshotToChat( VNumber chat_id )
   if( fl_chat && fl_chat->isMinimized() )
     QTimer::singleShot( 200, fl_chat, SLOT( showNormal() ) );
 }
-
 #endif

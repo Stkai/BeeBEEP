@@ -42,6 +42,7 @@ GuiMessageEdit::GuiMessageEdit( QWidget* parent )
   m_redoAvailable = false;
   m_currentMessage = "";
   m_messageChanged = true;
+  m_forceCRonEnterClicked = false;
 
 #ifdef BEEBEEP_USE_HUNSPELL
   mp_scHighlighter = new SpellCheckerHighlighter( this->document() );
@@ -287,7 +288,7 @@ void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
 
   if( e->key() == Qt::Key_Return || e->key() == Qt::Key_Enter )
   {
-    if( !Settings::instance().useReturnToSendMessage() || mods & Qt::ControlModifier || mods & Qt::ShiftModifier )
+    if( m_forceCRonEnterClicked || !Settings::instance().useReturnToSendMessage() || mods & Qt::ControlModifier || mods & Qt::ShiftModifier )
     {
       insertPlainText( "\n" );
     }
