@@ -595,6 +595,7 @@ void GuiMain::checkViewActions()
   mp_actConnect->setEnabled( !m_coreIsConnecting && !is_connected );
   mp_actDisconnect->setEnabled( is_connected );
   mp_actBroadcast->setEnabled( is_connected );
+  mp_actCreateMessage->setEnabled( is_connected );
   mp_actCreateGroupChat->setEnabled( UserManager::instance().userList().size() > 1 );
   mp_actViewFileSharing->setEnabled( Settings::instance().enableFileTransfer() && Settings::instance().enableFileSharing() );
   mp_actEnableFileSharing->setEnabled( Settings::instance().enableFileTransfer() && !Settings::instance().disableFileSharing() );
@@ -1607,6 +1608,7 @@ void GuiMain::settingsChanged( QAction* act )
   {
     QApplication::setOverrideCursor( Qt::WaitCursor );
     QApplication::processEvents();
+    mp_chatList->updateChats();
     foreach( GuiFloatingChat* fl_chat, m_floatingChats )
     {
       Chat c = ChatManager::instance().chat( fl_chat->guiChat()->chatId() );
@@ -3979,7 +3981,12 @@ void GuiMain::createMessage()
   gcm.show();
   if( gcm.exec() == QDialog::Accepted )
   {
-    qDebug() << "Send message to many users:" << gcm.message();
+    if( !gcm.toChatIdList().isEmpty() )
+    {
+      foreach( VNumber chat_id, gcm.toChatIdList() )
+        sendMessage( chat_id, gcm.message() );
+      updateTabTitles();
+    }
   }
 }
 

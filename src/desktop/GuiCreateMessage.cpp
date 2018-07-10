@@ -24,7 +24,9 @@
 #include "IconManager.h"
 #include "ChatManager.h"
 #include "GuiCreateMessage.h"
+#include "GuiChatItem.h"
 #include "GuiChatMessage.h"
+#include "GuiSelectItems.h"
 #include "Settings.h"
 #include "UserManager.h"
 
@@ -42,6 +44,7 @@ GuiCreateMessage::GuiCreateMessage( QWidget *parent )
   mp_teMessage->setObjectName( "GuiCreateMessageEdit" );
   mp_teMessage->setStyleSheet( QString( "#GuiCreateMessageEdit { background-color: #fff; color: #000 }" ) );
   mp_teMessage->setForceCRonEnterClicked( true );
+  mp_teMessage->setForceNoWritingAlert( true );
   mp_teMessage->setFocus();
 
   mp_teTo->setObjectName( "GuiCreateMessageRecipients" );
@@ -51,20 +54,62 @@ GuiCreateMessage::GuiCreateMessage( QWidget *parent )
   updateRecipients();
 
   connect( mp_pbSend, SIGNAL( clicked() ), this, SLOT( sendMessage() ) );
+  connect( mp_pbEditUsers, SIGNAL( clicked() ), this, SLOT( editRecipients() ) );
 
 }
 
 void GuiCreateMessage::updateRecipients()
 {
+  QStringList s_recipients;
   if( !m_toChatIdList.isEmpty() )
   {
     foreach( VNumber chat_id, m_toChatIdList )
-    {
-
-    }
+      s_recipients <<  QString( "< %1 >" ).arg( ChatManager::instance().chatName( chat_id ) );
   }
   else
-    mp_teTo->setPlainText( QString( "< %1 >" ).arg( tr( "Nobody" ) ) );
+    s_recipients << QString( "< %1 >" ).arg( tr( "Nobody" ) );
+  mp_teTo->setPlainText( s_recipients.join( ", " ) );
+}
+
+void GuiCreateMessage::editRecipients()
+{
+  GuiSelectItems gsi( this );
+  gsi.setWindowTitle( tr( "Add recipients" ) + QString( " - %1" ).arg( Settings::instance().programName() ) );
+  gsi.setWindowIcon( IconManager::instance().icon( "group-add.png" ) );
+
+  QTreeWidget* tw = gsi.treeWidget();
+  tw->setIconSize( Settings::instance().avatarIconSize() );
+  GuiChatItem* item;
+
+  foreach( Chat c, ChatManager::instance().constChatList() )
+  {
+    if( !c.isValid() )
+      continue;
+
+    if( c.isDefault() )
+      continue;
+
+    item = new GuiChatItem( tw );
+    item->setChatId( c.id() );
+    item->updateItem( c );
+  }
+
+  gsi.show();
+  if( gsi.exec() == QDialog::Accepted )
+  {
+    m_toChatIdList.clear();
+    QList<QTreeWidgetItem*> selected_items = tw->selectedItems();
+    if( !selected_items.isEmpty() )
+    {
+      foreach( QTreeWidgetItem* item , selected_items )
+      {
+        GuiChatItem* c_item = (GuiChatItem*)item;
+        if( c_item )
+          m_toChatIdList.append( c_item->chatId() );
+      }
+    }
+    updateRecipients();
+  }
 }
 
 void GuiCreateMessage::sendMessage()
@@ -72,6 +117,7 @@ void GuiCreateMessage::sendMessage()
   if( m_toChatIdList.isEmpty() )
   {
     QMessageBox::information( this, Settings::instance().programName(), tr( "Please select at least one recipient for your message." ) );
+    editRecipients();
     return;
   }
 

@@ -32,6 +32,11 @@
 GuiChatItem::GuiChatItem( QTreeWidget* parent )
  : QTreeWidgetItem( parent )
 {
+  setData( 0, ChatId, 0 );
+  setData( 0, ChatName, "" );
+  setData( 0, ChatIsGroup, false );
+  setData( 0, ChatUnreadMessages, 0 );
+  setData( 0, ChatMessages, 0 );
 }
 
 bool GuiChatItem::operator<( const QTreeWidgetItem& item ) const

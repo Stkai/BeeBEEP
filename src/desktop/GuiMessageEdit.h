@@ -49,6 +49,7 @@ public:
 
   inline void addActionToContextMenu( QAction* );
   inline void setForceCRonEnterClicked( bool );
+  inline void setForceNoWritingAlert( bool );
 
 signals:
   void returnPressed();
@@ -96,11 +97,13 @@ private:
   QMenu* mp_menuContext;
 
   bool m_forceCRonEnterClicked;
+  bool m_forceNoWritingAlert;
 
 };
 
 // Inline Functions
 inline void GuiMessageEdit::addActionToContextMenu( QAction* act ) { m_actionsToContextMenu.append( act ); }
 inline void GuiMessageEdit::setForceCRonEnterClicked( bool new_value ) { m_forceCRonEnterClicked = new_value; }
+inline void GuiMessageEdit::setForceNoWritingAlert( bool new_value ) { m_forceNoWritingAlert = new_value; }
 
 #endif // BEEBEEP_GUIMESSAGEEDIT_H

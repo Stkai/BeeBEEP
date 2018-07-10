@@ -39,6 +39,7 @@ public:
 
 protected slots:
   void sendMessage();
+  void editRecipients();
 
 protected:
   void updateRecipients();

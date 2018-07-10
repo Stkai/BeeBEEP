@@ -43,6 +43,7 @@ GuiMessageEdit::GuiMessageEdit( QWidget* parent )
   m_currentMessage = "";
   m_messageChanged = true;
   m_forceCRonEnterClicked = false;
+  m_forceNoWritingAlert = false;
 
 #ifdef BEEBEEP_USE_HUNSPELL
   mp_scHighlighter = new SpellCheckerHighlighter( this->document() );
@@ -339,9 +340,10 @@ void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
     }
   }
 
-  if( !mp_timer->isActive() )
+  if( !m_forceNoWritingAlert )
   {
-    mp_timer->start( Settings::instance().writingTimeout() );
+    if( !mp_timer->isActive() )
+      mp_timer->start( Settings::instance().writingTimeout() );
   }
 }
 
@@ -417,7 +419,7 @@ void GuiMessageEdit::rehighlightMessage()
 #endif
 }
 
-void GuiMessageEdit::setCompleter(QCompleter *completer)
+void GuiMessageEdit::setCompleter( QCompleter* completer )
 {
   if( mp_completer )
     QObject::disconnect( mp_completer, 0, this, 0 );

@@ -43,6 +43,7 @@ public:
   inline void setIsGroup( bool );
   inline bool isGroup() const;
   inline int unreadMessages() const;
+  QString chatName() const;
 
   bool updateItem( const Chat& );
 
@@ -64,5 +65,6 @@ inline VNumber GuiChatItem::chatId() const { return Bee::qVariantToVNumber( data
 inline void GuiChatItem::setIsGroup( bool new_value ) { setData( 0, ChatIsGroup, new_value ); }
 inline bool GuiChatItem::isGroup() const { return data( 0, ChatIsGroup ).toBool(); }
 inline int GuiChatItem::unreadMessages() const { return data( 0, ChatUnreadMessages ).toInt(); }
+inline QString GuiChatItem::chatName() const { return data( 0, ChatName ).toString(); }
 
 #endif // BEEBEEP_GUICHATITEM_H

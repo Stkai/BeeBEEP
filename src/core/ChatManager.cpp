@@ -240,7 +240,6 @@ void ChatManager::addSavedChats( const QMap<QString, QString>& saved_chats )
 QStringList ChatManager::chatNamesToStringList( bool add_default_chat ) const
 {
   QStringList sl;
-
   foreach( Chat c, m_chats )
   {
     if( c.isDefault() && !add_default_chat )
@@ -248,6 +247,16 @@ QStringList ChatManager::chatNamesToStringList( bool add_default_chat ) const
     sl << c.name();
   }
   return sl;
+}
+
+QString ChatManager::chatName( VNumber chat_id ) const
+{
+  foreach( Chat c, m_chats )
+  {
+    if( c.id() == chat_id )
+      return c.name();
+  }
+  return QString( "" );
 }
 
 Chat ChatManager::findGroupChatByUsers( const QList<VNumber>& user_list ) const

@@ -46,6 +46,7 @@ public:
   void setChat( const Chat& );
   inline const QList<Chat>& constChatList() const;
   QStringList chatNamesToStringList( bool add_default_chat ) const;
+  QString chatName( VNumber ) const;
   inline bool removeChat( const Chat& );
 
   bool isChatEmpty( const Chat&, bool check_also_history ) const;
