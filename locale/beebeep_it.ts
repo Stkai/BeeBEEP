@@ -1043,46 +1043,46 @@ Inserisci un nome differente.</translation>
     <name>GuiCreateMessage</name>
     <message>
         <source>Create message</source>
-        <translation type="unfinished"></translation>
+        <translation>Crea messaggio</translation>
     </message>
     <message>
         <source>Nobody</source>
-        <translation type="unfinished"></translation>
+        <translation>Nessuno</translation>
     </message>
     <message>
         <source>Add recipients</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiungi destinatari</translation>
     </message>
     <message>
         <source>Please select at least one recipient for your message.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci almeno un destinatario per il tuo messaggio.</translation>
     </message>
     <message>
         <source>You cannot send an empty message.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non puoi inviare un messaggio vuoto.</translation>
     </message>
 </context>
 <context>
     <name>GuiCreateMessageWidget</name>
     <message>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>A</translation>
     </message>
     <message>
         <source>Add recipients</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiungi destinatari</translation>
     </message>
     <message>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Messaggio</translation>
     </message>
     <message>
         <source>Click to send message</source>
-        <translation type="unfinished"></translation>
+        <translation>Click per inviare un messaggio</translation>
     </message>
     <message>
         <source>Open chat after sending message</source>
-        <translation type="unfinished"></translation>
+        <translation>Apri la conversazione dopo l&apos;invio del messaggio</translation>
     </message>
 </context>
 <context>
@@ -2529,7 +2529,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Create a message</source>
-        <translation type="unfinished"></translation>
+        <translation>Crea un messaggio</translation>
     </message>
 </context>
 <context>
@@ -3015,15 +3015,15 @@ Inserisci un nome differente.</translation>
     <name>GuiSelectItemsWidget</name>
     <message>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Annulla</translation>
+        <translation>Annulla</translation>
     </message>
     <message>
         <source>Clear selection</source>
-        <translation type="unfinished">Deseleziona tutto</translation>
+        <translation>Deseleziona tutto</translation>
     </message>
 </context>
 <context>
