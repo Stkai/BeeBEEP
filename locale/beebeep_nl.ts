@@ -564,7 +564,7 @@
     <message>
         <location filename="../src/core/CoreConnection.cpp" line="365"/>
         <source>%1 %2 uses old encryption level.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 gebruikt een oude encryptie level.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreShareDesktop.cpp" line="51"/>
@@ -1285,27 +1285,27 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.cpp" line="40"/>
         <source>Create message</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak bericht</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.cpp" line="75"/>
         <source>Nobody</source>
-        <translation type="unfinished"></translation>
+        <translation>Niemand</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.cpp" line="82"/>
         <source>Add recipients</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg ontvangers toe</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.cpp" line="124"/>
         <source>Please select at least one recipient for your message.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer in ieder geval 1 ontvanger voor je bericht.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.cpp" line="131"/>
         <source>You cannot send an empty message.</source>
-        <translation type="unfinished"></translation>
+        <translation>Je kan geen leeg bericht verzenden.</translation>
     </message>
 </context>
 <context>
@@ -1313,27 +1313,27 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="108"/>
         <source>Open chat after sending message</source>
-        <translation type="unfinished"></translation>
+        <translation>Open chat nadat bericht is verzonden</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="118"/>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>Naar</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="143"/>
         <source>Add recipients</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg ontvangers toe</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="23"/>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Bericht</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="75"/>
         <source>Click to send message</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik om bericht te verzenden</translation>
     </message>
 </context>
 <context>
@@ -2533,17 +2533,17 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="658"/>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbind</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="661"/>
         <source>Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbreek verbinding</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="697"/>
         <source>Create a message</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak een bericht</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="750"/>
@@ -3288,7 +3288,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="385"/>
         <source>Disable system proxy for connections</source>
-        <translation type="unfinished"></translation>
+        <translation>Zet systeem proxy voor verbindingen uit</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="429"/>
@@ -3764,17 +3764,17 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/gui/GuiSelectItems.ui" line="23"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <location filename="../src/gui/GuiSelectItems.ui" line="30"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuleer</translation>
     </message>
     <message>
         <location filename="../src/gui/GuiSelectItems.ui" line="50"/>
         <source>Clear selection</source>
-        <translation type="unfinished">Selectie wissen</translation>
+        <translation>Selectie wissen</translation>
     </message>
 </context>
 <context>
