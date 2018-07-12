@@ -11,7 +11,6 @@ SOURCES +=  qxt/qxtglobalshortcut.cpp
 
 macx: SOURCES += qxt/qxtglobalshortcut_mac.cpp
 macx: LIBS += -framework Carbon
-QT += widgets multimedia printsupport
 unix:!macx:!android: greaterThan(QT_MAJOR_VERSION, 4): {
   QT += x11extras
 }
