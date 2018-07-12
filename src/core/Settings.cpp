@@ -172,6 +172,7 @@ Settings::Settings()
   m_delayConnectionAtStartup = 5000;
 
   m_chatDefaultUserNameColor = "#000";
+  m_maxChatsToOpenAfterSendingMessage = 6;
 }
 
 void Settings::createApplicationUuid()
@@ -1005,6 +1006,7 @@ void Settings::load()
   m_showChatsInOneWindow = sets->value( "ShowChatsInOneWindow", !open_chat_in_new_window ).toBool();
   m_iconSourcePath = sets->value( "IconSourcePath", m_iconSourcePath ).toString();
   m_emoticonSourcePath = sets->value( "EmoticonSourcePath", m_emoticonSourcePath ).toString();
+  m_maxChatsToOpenAfterSendingMessage = sets->value( "MaxChatsToOpenAfterSendingMessage", m_maxChatsToOpenAfterSendingMessage ).toInt();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -1324,6 +1326,7 @@ void Settings::save()
   sets->setValue( "ShowChatsInOneWindow", m_showChatsInOneWindow );
   sets->setValue( "IconSourcePath", m_iconSourcePath );
   sets->setValue( "EmoticonSourcePath", m_emoticonSourcePath );
+  sets->setValue( "MaxChatsToOpenAfterSendingMessage", m_maxChatsToOpenAfterSendingMessage );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );

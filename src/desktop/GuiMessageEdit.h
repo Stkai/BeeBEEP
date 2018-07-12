@@ -43,6 +43,7 @@ public:
 
   QString message();
   void clearMessage();
+  void addMessageToHistory();
 
   void rehighlightMessage();
   void setCompleter( QCompleter* );
@@ -61,7 +62,6 @@ protected:
   void keyPressEvent( QKeyEvent* );
   void dropEvent( QDropEvent* );
   void contextMenuEvent( QContextMenuEvent* );
-  void addMessageToHistory();
   bool nextMessageFromHistory();
   bool prevMessageFromHistory();
   inline int historySize() const;

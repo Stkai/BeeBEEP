@@ -1068,6 +1068,10 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Click to send message</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Open chat after sending message</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiEditVCard</name>

@@ -51,6 +51,11 @@ GuiCreateMessage::GuiCreateMessage( QWidget *parent )
   mp_teTo->setFocusPolicy( Qt::NoFocus );
   mp_teTo->setStyleSheet( QString( "#GuiCreateMessageRecipients { background-color: #999; color: #fff }" ) );
 
+  if( Settings::instance().maxChatsToOpenAfterSendingMessage() > 0 )
+    mp_cbOpenChat->setChecked( true );
+  else
+    mp_cbOpenChat->setEnabled( false );
+
   updateRecipients();
 
   connect( mp_pbSend, SIGNAL( clicked() ), this, SLOT( sendMessage() ) );
@@ -127,6 +132,8 @@ void GuiCreateMessage::sendMessage()
     mp_teMessage->setFocus();
     return;
   }
+
+  mp_teMessage->addMessageToHistory();
 
   QDialog::accept();
 }

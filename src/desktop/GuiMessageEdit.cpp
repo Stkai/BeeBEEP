@@ -295,13 +295,10 @@ void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
     }
     else
     {
-      mp_timer->stop();
-
+      if( mp_timer->isActive() )
+        mp_timer->stop();
       if( !message().isEmpty() )
-      {
-        addMessageToHistory();
         emit returnPressed();
-      }
     }
 
     e->accept();

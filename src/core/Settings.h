@@ -253,6 +253,7 @@ public:
   inline const QString& chatDefaultUserNameColor() const;
   inline void setSaveGeometryOnExit( bool );
   inline bool saveGeometryOnExit() const;
+  inline int maxChatsToOpenAfterSendingMessage() const;
 
   inline bool usePreviewFileDialog() const;
   inline void setPreviewFileDialogGeometry( const QByteArray& );
@@ -600,6 +601,7 @@ private:
   bool m_showChatsInOneWindow;
   bool m_chatUseColoredUserNames;
   QString m_chatDefaultUserNameColor;
+  int m_maxChatsToOpenAfterSendingMessage;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -1039,5 +1041,6 @@ inline bool Settings::sendOfflineMessagesToDefaultChat() const { return m_sendOf
 inline void Settings::setChatUseColoredUserNames( bool new_value ) { m_chatUseColoredUserNames = new_value; }
 inline bool Settings::chatUseColoredUserNames() const { return m_chatUseColoredUserNames; }
 inline const QString& Settings::chatDefaultUserNameColor() const { return m_chatDefaultUserNameColor; }
+inline int Settings::maxChatsToOpenAfterSendingMessage() const { return m_maxChatsToOpenAfterSendingMessage; }
 
 #endif // BEEBEEP_SETTINGS_H

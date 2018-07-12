@@ -392,6 +392,7 @@ void GuiChat::sendMessage()
   QString msg = mp_teMessage->message();
   if( msg.isEmpty() )
     return;
+  mp_teMessage->addMessageToHistory();
   emit newMessage( m_chatId, msg );
   mp_teMessage->clearMessage();
   ensureFocusInChat();

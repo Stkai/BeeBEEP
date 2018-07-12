@@ -3983,8 +3983,17 @@ void GuiMain::createMessage()
   {
     if( !gcm.toChatIdList().isEmpty() )
     {
+      int max_chat_to_open = 6;
+      int num_chat_opened = 0;
       foreach( VNumber chat_id, gcm.toChatIdList() )
+      {
         sendMessage( chat_id, gcm.message() );
+        if( gcm.openChat() && num_chat_opened < max_chat_to_open )
+        {
+          showChat( chat_id );
+          num_chat_opened++;
+        }
+      }
       updateTabTitles();
     }
   }
