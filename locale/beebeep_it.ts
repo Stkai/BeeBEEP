@@ -1040,6 +1040,48 @@ Inserisci un nome differente.</translation>
     </message>
 </context>
 <context>
+    <name>GuiCreateMessage</name>
+    <message>
+        <source>Create message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nobody</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add recipients</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select at least one recipient for your message.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You cannot send an empty message.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GuiCreateMessageWidget</name>
+    <message>
+        <source>To</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add recipients</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click to send message</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>GuiEditVCard</name>
     <message>
         <source>%1 - Select your profile photo</source>
@@ -2481,6 +2523,10 @@ Inserisci un nome differente.</translation>
         <source>Disconnect</source>
         <translation>Disconnetti</translation>
     </message>
+    <message>
+        <source>Create a message</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -2959,6 +3005,21 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Delete screenshot</source>
         <translation>Cancella l&apos;immagine</translation>
+    </message>
+</context>
+<context>
+    <name>GuiSelectItemsWidget</name>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished">Ok</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Annulla</translation>
+    </message>
+    <message>
+        <source>Clear selection</source>
+        <translation type="unfinished">Deseleziona tutto</translation>
     </message>
 </context>
 <context>

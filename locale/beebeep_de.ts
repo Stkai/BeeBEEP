@@ -1028,6 +1028,48 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
 </context>
 <context>
+    <name>GuiCreateMessage</name>
+    <message>
+        <source>Create message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nobody</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add recipients</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select at least one recipient for your message.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You cannot send an empty message.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GuiCreateMessageWidget</name>
+    <message>
+        <source>To</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add recipients</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click to send message</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>GuiEditVCard</name>
     <message>
         <source>Ok</source>
@@ -2441,6 +2483,10 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Disconnect</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Create a message</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -2885,6 +2931,21 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>Capture screen</source>
         <translation>Screenshot erstellen</translation>
+    </message>
+</context>
+<context>
+    <name>GuiSelectItemsWidget</name>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished">OK</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Abbrechen</translation>
+    </message>
+    <message>
+        <source>Clear selection</source>
+        <translation type="unfinished">Auswahl aufheben</translation>
     </message>
 </context>
 <context>
