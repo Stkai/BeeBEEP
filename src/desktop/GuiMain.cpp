@@ -1574,7 +1574,11 @@ void GuiMain::settingsChanged( QAction* act )
     }
     break;
   case 64:
-    Settings::instance().setShareDesktopFitToScreen( act->isChecked() );
+    {
+      Settings::instance().setShareDesktopFitToScreen( act->isChecked() );
+      foreach( GuiShareDesktop* gsd, m_desktops )
+        gsd->resetLastImage();
+    }
     break;
 #endif
   case 65:

@@ -38,6 +38,7 @@ GuiShareDesktop::GuiShareDesktop( QWidget *parent )
   mp_scrollArea->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
   mp_scrollArea->setWidgetResizable( false );
   mp_lView = new QLabel( this );
+  mp_lView->setScaledContents( false );
   mp_lView->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
   setImageSize( QSize( 400, 300 ) );
   mp_scrollArea->setWidget( mp_lView );

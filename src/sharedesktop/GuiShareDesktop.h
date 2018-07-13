@@ -40,6 +40,7 @@ public:
 
   void setImageSize( const QSize& );
   void updateImage( const QImage&, const QString& image_type, QRgb diff_color );
+  inline void resetLastImage();
 
   void onTickEvent( int );
 
@@ -66,5 +67,6 @@ private:
 
 // Inline Functions
 inline VNumber GuiShareDesktop::userId() const { return m_userId; }
+inline void GuiShareDesktop::resetLastImage() { m_lastImage = QImage(); }
 
 #endif // BEEBEEP_GUISHAREDESKTOP_H
