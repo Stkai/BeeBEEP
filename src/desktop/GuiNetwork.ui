@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>620</width>
-    <height>464</height>
+    <height>460</height>
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout_3">
@@ -51,48 +51,6 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="2">
-         <spacer name="horizontalSpacer_7">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="2" column="2">
-         <spacer name="horizontalSpacer_6">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="1" column="2">
-         <widget class="QLabel" name="mp_lHelpSubnet">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string>(search users here by default)</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
         <item row="1" column="1">
          <widget class="QLineEdit" name="mp_leSubnet">
           <property name="sizePolicy">
@@ -115,7 +73,7 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="0">
+        <item row="3" column="0">
          <widget class="QLabel" name="mp_lMulticastGroup">
           <property name="text">
            <string>Multicast group in beebeep.rc *</string>
@@ -128,7 +86,36 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="2">
+        <item row="4" column="3">
+         <spacer name="horizontalSpacer_7">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="1" column="3">
+         <widget class="QLabel" name="mp_lHelpSubnet">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>(search users here by default)</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3">
          <widget class="QLabel" name="mp_lHelpUdp">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -144,20 +131,7 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="mp_lBase">
-          <property name="text">
-           <string>Local subnet address *</string>
-          </property>
-          <property name="textFormat">
-           <enum>Qt::PlainText</enum>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0">
+        <item row="5" column="0">
          <widget class="QLabel" name="mp_lBroadcastInterval">
           <property name="text">
            <string>Search users every</string>
@@ -167,7 +141,7 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="1">
+        <item row="5" column="1">
          <widget class="QSpinBox" name="mp_sbBroadcastInterval">
           <property name="minimumSize">
            <size>
@@ -195,7 +169,20 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="1">
+        <item row="1" column="0">
+         <widget class="QLabel" name="mp_lBase">
+          <property name="text">
+           <string>Local subnet address *</string>
+          </property>
+          <property name="textFormat">
+           <enum>Qt::PlainText</enum>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
          <widget class="QComboBox" name="mp_comboPreferredSubnet">
           <property name="minimumSize">
            <size>
@@ -205,7 +192,7 @@
           </property>
          </widget>
         </item>
-        <item row="5" column="2">
+        <item row="6" column="3">
          <spacer name="horizontalSpacer">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -218,7 +205,7 @@
           </property>
          </spacer>
         </item>
-        <item row="3" column="0">
+        <item row="4" column="0">
          <widget class="QLabel" name="mp_lPreferredSubnet">
           <property name="text">
            <string>Preferred subnet</string>
@@ -228,7 +215,7 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="1">
+        <item row="3" column="1">
          <widget class="QLineEdit" name="mp_leMulticastGroup">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -250,7 +237,7 @@
           </property>
          </widget>
         </item>
-        <item row="5" column="0">
+        <item row="6" column="0">
          <widget class="QLabel" name="mp_lMaxUsersToContact">
           <property name="text">
            <string>Max users to contact every second</string>
@@ -260,7 +247,7 @@
           </property>
          </widget>
         </item>
-        <item row="5" column="1">
+        <item row="6" column="1">
          <widget class="QSpinBox" name="mp_sbMaxUsersToContact">
           <property name="minimumSize">
            <size>
@@ -285,14 +272,7 @@
           </property>
          </widget>
         </item>
-        <item row="6" column="1">
-         <widget class="QLabel" name="mp_lRO">
-          <property name="text">
-           <string>* (read only section)</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="2">
+        <item row="5" column="3">
          <spacer name="horizontalSpacer_3">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -304,6 +284,23 @@
            </size>
           </property>
          </spacer>
+        </item>
+        <item row="7" column="1">
+         <widget class="QLabel" name="mp_lRO">
+          <property name="text">
+           <string>* (read only section)</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="3">
+         <widget class="QLabel" name="mp_lHelpMulticastGroup">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -345,6 +342,13 @@
         <property name="spacing">
          <number>12</number>
         </property>
+        <item>
+         <widget class="QCheckBox" name="mp_cbUseDefaultMulticastGroupAddress">
+          <property name="text">
+           <string>Use default multicast group address</string>
+          </property>
+         </widget>
+        </item>
         <item>
          <widget class="QCheckBox" name="mp_cbBroadcastInterval">
           <property name="sizePolicy">
@@ -466,6 +470,7 @@
   <tabstop>mp_comboPreferredSubnet</tabstop>
   <tabstop>mp_sbBroadcastInterval</tabstop>
   <tabstop>mp_sbMaxUsersToContact</tabstop>
+  <tabstop>mp_cbUseDefaultMulticastGroupAddress</tabstop>
   <tabstop>mp_cbBroadcastInterval</tabstop>
   <tabstop>mp_cbUseHive</tabstop>
   <tabstop>mp_cbPreventMultipleConnectionsFromSingleHostAddress</tabstop>

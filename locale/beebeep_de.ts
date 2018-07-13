@@ -2491,6 +2491,10 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Create a message</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>none</source>
+        <translation type="unfinished">keine</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -2552,6 +2556,10 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>File HOSTS not found.</source>
         <translation>Datei-HOSTS wurden nicht gefunden.</translation>
+    </message>
+    <message>
+        <source>default</source>
+        <translation type="unfinished">Standard</translation>
     </message>
 </context>
 <context>
@@ -2622,6 +2630,10 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Disable system proxy for connections</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use default multicast group address</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

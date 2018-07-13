@@ -31,7 +31,7 @@
 
 Broadcaster::Broadcaster( QObject *parent )
   : QObject( parent ), m_broadcastSocket(), m_networkAddresses(), m_newBroadcastRequested( false ),
-    m_networkAddressesWaitingForLoopback(), m_addOfflineUsersInNetworkAddresses( false )
+    m_networkAddressesWaitingForLoopback(), m_addOfflineUsersInNetworkAddresses( false ), m_multicastGroupAddress()
 {
   connect( &m_broadcastSocket, SIGNAL( readyRead() ), this, SLOT( readBroadcastDatagram() ) );
 }
@@ -45,12 +45,13 @@ bool Broadcaster::startBroadcastServer()
   }
 
 #if QT_VERSION >= 0x040800
-  if( !Settings::instance().multicastGroupAddress().isNull() )
+  m_multicastGroupAddress = Settings::instance().useDefaultMulticastGroupAddress() ? Settings::instance().defaultMulticastGroupAddress() : Settings::instance().multicastGroupAddress();
+  if( !m_multicastGroupAddress.isNull() )
   {
-    if( m_broadcastSocket.joinMulticastGroup( Settings::instance().multicastGroupAddress() ) )
-      qDebug() << "Join to the multicast group" << qPrintable( Settings::instance().multicastGroupAddress().toString() );
+    if( m_broadcastSocket.joinMulticastGroup( m_multicastGroupAddress ) )
+      qDebug() << "Join to the multicast group" << qPrintable( m_multicastGroupAddress.toString() );
     else
-      qWarning() << "Unable to join to the multicast group" << qPrintable( Settings::instance().multicastGroupAddress().toString() );
+      qWarning() << "Unable to join to the multicast group" << qPrintable( m_multicastGroupAddress.toString() );
   }
 #endif
 
@@ -67,12 +68,12 @@ bool Broadcaster::startBroadcastServer()
 void Broadcaster::stopBroadcasting()
 {
 #if QT_VERSION >= 0x040800
-  if( !Settings::instance().multicastGroupAddress().isNull() )
+  if( !m_multicastGroupAddress.isNull() )
   {
-    if( m_broadcastSocket.leaveMulticastGroup( Settings::instance().multicastGroupAddress() ) )
-      qDebug() << "Leave from the multicast group" << qPrintable( Settings::instance().multicastGroupAddress().toString() );
+    if( m_broadcastSocket.leaveMulticastGroup( m_multicastGroupAddress ) )
+      qDebug() << "Leave from the multicast group" << qPrintable( m_multicastGroupAddress.toString() );
     else
-      qWarning() << "Unable to leave from the multicast group" << qPrintable( Settings::instance().multicastGroupAddress().toString() );
+      qWarning() << "Unable to leave from the multicast group" << qPrintable( m_multicastGroupAddress.toString() );
   }
 #endif
 

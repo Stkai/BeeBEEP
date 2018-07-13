@@ -2471,6 +2471,10 @@ Please select a different name.</source>
         <source>Create a message</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>none</source>
+        <translation type="unfinished">無</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -2532,6 +2536,10 @@ Please select a different name.</source>
     <message>
         <source>File HOSTS not found.</source>
         <translation>檔案主機找不到.</translation>
+    </message>
+    <message>
+        <source>default</source>
+        <translation type="unfinished">預設</translation>
     </message>
 </context>
 <context>
@@ -2602,6 +2610,10 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Disable system proxy for connections</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use default multicast group address</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

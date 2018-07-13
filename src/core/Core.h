@@ -62,6 +62,8 @@ public:
   int fileTransferPort() const;
   inline bool hasFileTransferInProgress() const;
 
+  QHostAddress multicastGroupAddress() const;
+
   bool checkSavingPaths();
 
   void updateUsersAddedManually();

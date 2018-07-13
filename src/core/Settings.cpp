@@ -43,6 +43,7 @@ Settings::Settings()
   m_defaultBroadcastPort = DEFAULT_BROADCAST_PORT;
   m_defaultListenerPort = DEFAULT_LISTENER_PORT;
   m_defaultFileTransferPort = DEFAULT_FILE_TRANSFER_PORT;
+  m_defaultMulticastGroupAddress = QHostAddress( "239.255.64.75" ); // default group address for BeeBEEP
   m_resetGeometryAtStartup = false;
   m_saveGeometryOnExit = false;
   m_saveDataInDocumentsFolder = false;
@@ -77,6 +78,7 @@ Settings::Settings()
   m_addAccountNameToDataFolder = false;
   m_preferredSubnets = "";
   m_disableSystemProxyForConnections = true;
+  m_useDefaultMulticastGroupAddress = true;
   m_useIPv6 = false;
   m_useHive = true;
   m_checkNewVersionAtStartup = true;
@@ -1057,6 +1059,7 @@ void Settings::load()
   m_preventMultipleConnectionsFromSingleHostAddress = sets->value( "PreventMultipleConnectionsFromSingleHostAddress", m_preventMultipleConnectionsFromSingleHostAddress ).toBool();
   m_useHive = sets->value( "UseHiveProtocol", m_useHive ).toBool();
   m_disableSystemProxyForConnections = sets->value( "DisableSystemProxyForConnections", m_disableSystemProxyForConnections ).toBool();
+  m_useDefaultMulticastGroupAddress = sets->value( "UseDefaultMulticastGroupAddress", m_useDefaultMulticastGroupAddress ).toBool();
   sets->endGroup();
   loadBroadcastAddressesFromFileHosts();
 
@@ -1367,6 +1370,8 @@ void Settings::save()
   sets->setValue( "MaxUsersToConnectInATick", m_maxUsersToConnectInATick );
   sets->setValue( "UseHiveProtocol", m_useHive );
   sets->setValue( "DisableSystemProxyForConnections", m_disableSystemProxyForConnections );
+  sets->setValue( "UseDefaultMulticastGroupAddress", m_useDefaultMulticastGroupAddress );
+
   sets->endGroup();
   sets->beginGroup( "FileShare" );
   sets->setValue( "EnableFileTransfer", m_enableFileTransfer );

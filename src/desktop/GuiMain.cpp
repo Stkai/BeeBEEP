@@ -789,6 +789,7 @@ void GuiMain::createMenus()
   mp_menuNetworkStatus->addSeparator();
   mp_actHostAddress = mp_menuNetworkStatus->addAction( IconManager::instance().icon( "network.png" ), QString( "ip" ) );
   mp_actPortBroadcast = mp_menuNetworkStatus->addAction( IconManager::instance().icon( "broadcast.png" ), QString( "udp1" ) );
+  mp_actMulticastGroupAddress = mp_menuNetworkStatus->addAction( IconManager::instance().icon( "multicast-group.png" ), QString( "multicast" ) );
   mp_actPortListener = mp_menuNetworkStatus->addAction( IconManager::instance().icon( "default-chat-online.png" ), QString( "tcp1" ) );
   mp_actPortFileTransfer = mp_menuNetworkStatus->addAction( IconManager::instance().icon( "network-scan.png" ), QString( "tcp2" ) );
 #ifdef BEEBEEP_USE_MULTICAST_DNS
@@ -3074,6 +3075,7 @@ void GuiMain::showDefaultServerPortInMenu()
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   QString multicast_dns = tr( "inactive" );
 #endif
+  QString multicast_group = tr( "none" );
 
   if( beeCore->isConnected() )
   {
@@ -3086,6 +3088,11 @@ void GuiMain::showDefaultServerPortInMenu()
     host_address = Settings::instance().localUser().networkAddress().hostAddress().toString();
     broadcast_port = QString::number( Settings::instance().defaultBroadcastPort() );
     listener_port = QString::number( Settings::instance().localUser().networkAddress().hostPort() );
+
+    QHostAddress multicast_host_address = beeCore->multicastGroupAddress();
+    mp_actMulticastGroupAddress->setEnabled( !multicast_host_address.isNull() );
+    if( !multicast_host_address.isNull() )
+      multicast_group = multicast_host_address.toString();
 
     if( Settings::instance().enableFileTransfer() )
     {
@@ -3115,6 +3122,7 @@ void GuiMain::showDefaultServerPortInMenu()
     mp_actHostAddress->setIcon( IconManager::instance().icon( "network-disconnected.png" ) );
     mp_actHostAddress->setEnabled( false );
     mp_actPortBroadcast->setEnabled( false );
+    mp_actMulticastGroupAddress->setEnabled( false );
     mp_actPortListener->setEnabled( false );
     mp_actPortFileTransfer->setEnabled( false );
 #ifdef BEEBEEP_USE_MULTICAST_DNS
@@ -3124,6 +3132,7 @@ void GuiMain::showDefaultServerPortInMenu()
 
   mp_actHostAddress->setText( QString( "ip: %1" ).arg( host_address ) );
   mp_actPortBroadcast->setText( QString( "udp: %1" ).arg( broadcast_port ) );
+  mp_actMulticastGroupAddress->setText( QString( "multicast: %1" ).arg( multicast_group ) );
   mp_actPortListener->setText( QString( "tcp1: %1" ).arg( listener_port ) );
   mp_actPortFileTransfer->setText( QString( "tcp2: %1" ).arg( file_transfer_port ) );
 #ifdef BEEBEEP_USE_MULTICAST_DNS

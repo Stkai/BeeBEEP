@@ -87,6 +87,11 @@ Core::~Core()
     mp_instance = 0;
 }
 
+QHostAddress Core::multicastGroupAddress() const
+{
+  return isConnected() ? mp_broadcaster->multicastGroupAddress() : QHostAddress();
+}
+
 bool Core::checkSavingPaths()
 {
   bool settings_can_be_saved = true;

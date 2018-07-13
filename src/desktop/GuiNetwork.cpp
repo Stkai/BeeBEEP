@@ -41,6 +41,7 @@ GuiNetwork::GuiNetwork( QWidget* parent )
   m_restartConnection = false;
   mp_sbBroadcastInterval->setSuffix( QString( " %1" ).arg( tr( "seconds" ) ) );
   mp_sbMaxUsersToContact->setSuffix( QString( " %1" ).arg( tr( "users" ) ) );
+  mp_cbUseDefaultMulticastGroupAddress->setText( mp_cbUseDefaultMulticastGroupAddress->text() + QString( " (%1)" ).arg( Settings::instance().defaultMulticastGroupAddress().toString() ) );
 
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( checkAndSearch() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
@@ -56,6 +57,7 @@ void GuiNetwork::loadSettings()
     mp_leMulticastGroup->setText( Settings::instance().multicastGroupAddress().toString() );
   else
     mp_leMulticastGroup->setText( "" );
+  mp_lHelpMulticastGroup->setText( QString( "(%1: %2)" ).arg( tr( "default" ) ).arg( Settings::instance().defaultMulticastGroupAddress().toString() ) );
 
   QHostAddress base_host_addresses = NetworkManager::instance().localBroadcastAddress();
   if( base_host_addresses.isNull() )
@@ -104,6 +106,7 @@ void GuiNetwork::loadSettings()
   enableSearchUsersInterval();
 
   mp_cbDisableProxy->setChecked( Settings::instance().disableSystemProxyForConnections() );
+  mp_cbUseDefaultMulticastGroupAddress->setChecked( Settings::instance().useDefaultMulticastGroupAddress() );
 
   m_restartConnection = false;
 }
@@ -127,6 +130,11 @@ void GuiNetwork::checkAndSearch()
     m_restartConnection = true;
   }
   Settings::instance().setDisableSystemProxyForConnections( mp_cbDisableProxy->isChecked() );
+  bool prev_multi_group = Settings::instance().useDefaultMulticastGroupAddress();
+  Settings::instance().setUseDefaultMulticastGroupAddress( mp_cbUseDefaultMulticastGroupAddress->isChecked() );
+  if( prev_multi_group != Settings::instance().useDefaultMulticastGroupAddress() )
+    m_restartConnection = true;
+
   accept();
 }
 

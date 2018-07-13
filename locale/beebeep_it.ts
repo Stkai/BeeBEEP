@@ -2531,6 +2531,10 @@ Inserisci un nome differente.</translation>
         <source>Create a message</source>
         <translation>Crea un messaggio</translation>
     </message>
+    <message>
+        <source>none</source>
+        <translation>nessuno</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -2606,6 +2610,14 @@ Inserisci un nome differente.</translation>
     <message>
         <source>users</source>
         <translation>utenti</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="obsolete">Predefinito</translation>
+    </message>
+    <message>
+        <source>default</source>
+        <translation>predefinito</translation>
     </message>
 </context>
 <context>
@@ -2697,6 +2709,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Disable system proxy for connections</source>
         <translation>Disabilita il proxy di sistema per le connessioni</translation>
+    </message>
+    <message>
+        <source>Use default multicast group address</source>
+        <translation>Usa il gruppo predefinito per il multicast</translation>
     </message>
 </context>
 <context>

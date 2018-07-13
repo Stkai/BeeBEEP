@@ -119,6 +119,7 @@ public:
   inline bool useIPv6() const;
   QHostAddress hostAddressToListen();
   inline const QHostAddress& multicastGroupAddress() const;
+  inline const QHostAddress& defaultMulticastGroupAddress() const;
   inline int defaultBroadcastPort() const;
   inline int defaultListenerPort() const;
   inline int defaultFileTransferPort() const;
@@ -316,6 +317,8 @@ public:
   inline const QString& preferredSubnets() const;
   inline void setDisableSystemProxyForConnections( bool );
   inline bool disableSystemProxyForConnections() const;
+  inline void setUseDefaultMulticastGroupAddress( bool );
+  inline bool useDefaultMulticastGroupAddress() const;
 
   inline bool keyEscapeMinimizeInTray() const;
   inline void setKeyEscapeMinimizeInTray( bool );
@@ -516,9 +519,10 @@ private:
   QString m_dataFolderInRC;
   bool m_addAccountNameToDataFolder;
   QString m_preferredSubnets;
-  bool m_disableSystemProxyForConnections;
+
   bool m_useIPv6;
   QHostAddress m_multicastGroupAddress;
+  QHostAddress m_defaultMulticastGroupAddress;
   bool m_useChatWithAllUsers;
   bool m_useHive;
   bool m_enableSaveData;
@@ -550,6 +554,9 @@ private:
   int m_tickIntervalCheckNetwork;
   int m_maxUsersToConnectInATick;
   int m_tickIntervalBroadcasting;
+
+  bool m_disableSystemProxyForConnections;
+  bool m_useDefaultMulticastGroupAddress;
 
   QDateTime m_lastSave;
   QString m_logPath;
@@ -949,8 +956,11 @@ inline int Settings::tickIntervalConnectionTimeout() const { return m_tickInterv
 inline const QString& Settings::preferredSubnets() const { return m_preferredSubnets; }
 inline void Settings::setDisableSystemProxyForConnections( bool new_value ) { m_disableSystemProxyForConnections = new_value; }
 inline bool Settings::disableSystemProxyForConnections() const { return m_disableSystemProxyForConnections; }
+inline void Settings::setUseDefaultMulticastGroupAddress( bool new_value ) { m_useDefaultMulticastGroupAddress = new_value; }
+inline bool Settings::useDefaultMulticastGroupAddress() const { return m_useDefaultMulticastGroupAddress; }
 inline bool Settings::useIPv6() const { return m_useIPv6; }
 inline const QHostAddress& Settings::multicastGroupAddress() const { return m_multicastGroupAddress; }
+inline const QHostAddress& Settings::defaultMulticastGroupAddress() const { return m_defaultMulticastGroupAddress; }
 inline void Settings::setUseReturnToSendMessage( bool new_value ) { m_useReturnToSendMessage = new_value; }
 inline bool Settings::useReturnToSendMessage() const { return m_useReturnToSendMessage; }
 inline void Settings::setUseSpellChecker( bool new_value ) { m_useSpellChecker = new_value; }

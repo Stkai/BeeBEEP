@@ -311,6 +311,7 @@ private:
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   QAction* mp_actMulticastDns;
 #endif
+  QAction* mp_actMulticastGroupAddress;
 
   QDockWidget* mp_dockFileTransfers;
 
