@@ -21,41 +21,45 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_GUICREATEMESSAGE_H
-#define BEEBEEP_GUICREATEMESSAGE_H
+#ifndef BEEBEEP_SCREENSHOT_H
+#define BEEBEEP_SCREENSHOT_H
 
 #include "Config.h"
-#include "ui_GuiCreateMessage.h"
 
 
-class GuiCreateMessage : public QDialog, private Ui::GuiCreateMessageWidget
+class Screenshot : public QObject
 {
   Q_OBJECT
 
 public:
-  GuiCreateMessage( QWidget* parent = 0 );
+  Screenshot( QObject* parent = 0 );
 
-  inline QString message();
-  inline const QList<VNumber>& toChatIdList() const;
-  inline bool openChat() const;
+  inline void reset();
+  inline bool isValid() const;
 
-protected slots:
-  void sendMessage();
-  void editRecipients();
+  inline const QPixmap& toPixmap() const;
+  inline QImage toImage() const;
+
+  bool grabWidget( QWidget* );
+  bool grabScreen( QWidget* );
+
+  bool save( const QString& file_name, const char* img_format = 0, int img_quality = -1 );
+
+public slots:
+  void grabPrimaryScreen();
 
 protected:
-  void updateRecipients();
+  void checkPixelRatio();
 
 private:
-  QList<VNumber> m_toChatIdList;
-
+  QPixmap m_pixmap;
 
 };
 
-
 // Inline Functions
-inline QString GuiCreateMessage::message() { return mp_teMessage->message(); }
-inline const QList<VNumber>& GuiCreateMessage::toChatIdList() const { return m_toChatIdList; }
-inline bool GuiCreateMessage::openChat() const { return mp_cbOpenChat->isEnabled() && mp_cbOpenChat->isChecked(); }
+inline void Screenshot::reset() { m_pixmap = QPixmap(); }
+inline bool Screenshot::isValid() const { return !m_pixmap.isNull(); }
+inline const QPixmap& Screenshot::toPixmap() const { return m_pixmap; }
+inline QImage Screenshot::toImage() const { return m_pixmap.toImage(); }
 
-#endif // BEEBEEP_GUICREATEMESSAGE_H
+#endif // BEEBEEP_SCREENSHOT_H

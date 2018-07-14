@@ -23,6 +23,7 @@
 
 #include "BeeApplication.h"
 #include "Chat.h"
+#include "Screenshot.h"
 #include "Settings.h"
 #include "ShareDesktop.h"
 #include "ShareDesktopJob.h"
@@ -136,40 +137,16 @@ void ShareDesktop::onImageDataAvailable( const QByteArray& img_data, const QStri
   emit imageDataAvailable( m_lastImageData );
 }
 
-QPixmap ShareDesktop::makeScreenshot()
-{
-  QPixmap screen_shot;
-  qreal device_pixel_ratio;
-
-#if QT_VERSION >= 0x050000
-  device_pixel_ratio = qApp->devicePixelRatio();
-#else
-  device_pixel_ratio = 1.0;
-#endif
-
-#if QT_VERSION >= 0x050000
-  QScreen* primary_screen = QApplication::primaryScreen();
-  if( primary_screen )
-    screen_shot = primary_screen->grabWindow( 0 );
-  screen_shot.setDevicePixelRatio( device_pixel_ratio );
-#else
-  screen_shot = QPixmap::grabWindow( QApplication::desktop()->winId(), 0, 0,
-                                     QApplication::desktop()->width() * device_pixel_ratio,
-                                     QApplication::desktop()->height() * device_pixel_ratio );
-#endif
-
-  if( device_pixel_ratio > 1.0 )
-    screen_shot = screen_shot.scaled( QApplication::desktop()->width(), QApplication::desktop()->height(), Qt::KeepAspectRatio );
-
-  return screen_shot;
-}
-
 void ShareDesktop::onScreenshotTimeout()
 {
   if( !isActive() )
     return;
 
-  QPixmap screen_shot = makeScreenshot();
-  emit imageAvailable( screen_shot.toImage() );
-  screen_shot = QPixmap();
+  Screenshot screen_shot;
+  screen_shot.grabPrimaryScreen();
+  if( screen_shot.isValid() )
+  {
+    emit imageAvailable( screen_shot.toImage() );
+    screen_shot.reset();
+  }
 }

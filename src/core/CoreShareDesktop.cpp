@@ -28,6 +28,7 @@
 #include "IconManager.h"
 #include "ImageOptimizer.h"
 #include "Protocol.h"
+#include "Screenshot.h"
 #include "ShareDesktop.h"
 #include "Settings.h"
 #include "UserManager.h"
@@ -223,8 +224,10 @@ bool Core::sendScreenshotToChat( VNumber chat_id )
     return false;
   }
 
-  QPixmap screen_pix = ShareDesktop::makeScreenshot();
-  if( screen_pix.isNull() )
+  Screenshot screen_shot;
+  screen_shot.grabPrimaryScreen();
+
+  if( !screen_shot.isValid() )
   {
     qWarning() << "Invalid pixmap captured from desktop in Core::sendScreenshotToChat(...)";
     return false;
@@ -236,13 +239,14 @@ bool Core::sendScreenshotToChat( VNumber chat_id )
                                     + screenshot_format;
   QString file_path = Bee::uniqueFilePath( screenshot_initial_path, false );
 
-  if( !screen_pix.save( file_path, screenshot_format.toLatin1() ) )
+  if( !screen_shot.save( file_path, screenshot_format.toLatin1() ) )
   {
     qWarning() << "Unable to save temporary screenshot in file" << qPrintable( file_path );
     return false;
   }
 
   Settings::instance().addTemporaryFilePath( file_path );
+  screen_shot.reset();
 
   foreach( VNumber user_id, c.usersId() )
   {

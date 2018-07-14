@@ -48,8 +48,6 @@ public:
   inline bool hasUserReadImage( VNumber ) const;
   void requestImageFromUser( VNumber );
 
-  static QPixmap makeScreenshot();
-
 signals:
   void imageDataAvailable( const ShareDesktopData& );
   void imageAvailable( const QImage& );

@@ -9,7 +9,9 @@ HEADERS += gui/AudioManager.h \
   gui/IconManager.h \
   gui/ImageOptimizer.h \
   gui/GuiSelectItems.h \
+  gui/Screenshot.h \
   gui/ShortcutManager.h
+
 
 SOURCES += gui/AudioManager.cpp \
   gui/Avatar.cpp \
@@ -20,6 +22,8 @@ SOURCES += gui/AudioManager.cpp \
   gui/IconManager.cpp \
   gui/ImageOptimizer.cpp \
   gui/GuiSelectItems.cpp \
+  gui/Screenshot.cpp \
   gui/ShortcutManager.cpp
+
 
 FORMS += gui/GuiSelectItems.ui

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="zh_TW">
+<TS version="2.1" language="zh_TW">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -1693,7 +1693,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Download folder...</source>
-        <translation>下載目錄...</translation>
+        <translation type="vanished">下載目錄...</translation>
     </message>
     <message>
         <source>Secure Lan Messenger</source>
@@ -2474,6 +2474,14 @@ Please select a different name.</source>
     <message>
         <source>none</source>
         <translation type="unfinished">無</translation>
+    </message>
+    <message>
+        <source>Open your download folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select download folder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

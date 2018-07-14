@@ -583,8 +583,8 @@ QString Settings::operatingSystem( bool use_long_name  ) const
   os_name_short = "Linux";
 #endif
 #ifdef Q_OS_MAC
-  os_name_long = "MacOS X";
-  os_name_short = "MacOSX";
+  os_name_long = "MacOSX";
+  os_name_short = "OSX";
 #endif
 #ifdef Q_OS_OS2
   os_name_long = "OS/2";

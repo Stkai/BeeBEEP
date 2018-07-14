@@ -146,6 +146,7 @@ private slots:
   void removeUserFromList( VNumber );
   void openDataFolder();
   void openResourceFolder();
+  void openDownloadFolder();
   void readAllMessagesInChat( VNumber );
   void recentlyUsedUserStatusSelected();
   void clearRecentlyUsedUserStatus();

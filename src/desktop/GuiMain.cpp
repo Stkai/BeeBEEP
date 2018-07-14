@@ -712,6 +712,8 @@ void GuiMain::createMenus()
   if( Settings::instance().resourceFolder() != Settings::instance().dataFolder() )
     mp_menuMain->addAction( IconManager::instance().icon( "resource-folder.png" ), tr( "Open your resource folder" ), this, SLOT( openResourceFolder() ) );
   mp_menuMain->addAction( IconManager::instance().icon( "data-folder.png" ), tr( "Open your data folder" ), this, SLOT( openDataFolder() ) );
+  mp_menuMain->addAction( IconManager::instance().icon( "download-folder.png" ), tr( "Open your download folder" ), this, SLOT( openDownloadFolder() ) );
+
   mp_menuMain->addSeparator();
   mp_menuMain->addAction( mp_actViewLog );
   mp_menuMain->addSeparator();
@@ -923,7 +925,7 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().useNativeDialogs() );
   act->setData( 4 );
   mp_menuFileTransferSettings->addSeparator();
-  mp_actSelectDownloadFolder = mp_menuFileTransferSettings->addAction( IconManager::instance().icon( "download-folder.png" ), tr( "Download folder..."), this, SLOT( selectDownloadDirectory() ) );
+  mp_actSelectDownloadFolder = mp_menuFileTransferSettings->addAction( IconManager::instance().icon( "download-folder.png" ), tr( "Select download folder" ) + QString( "..." ), this, SLOT( selectDownloadDirectory() ) );
 
   mp_menuSoundSettings = new QMenu( tr( "Sound" ), this );
   mp_menuSoundSettings->setIcon( IconManager::instance().icon( "bell.png" ) );
@@ -3232,14 +3234,20 @@ void GuiMain::removeUserFromList( VNumber user_id )
 
 void GuiMain::openResourceFolder()
 {
-  QUrl data_folder_url = QUrl::fromLocalFile( Settings::instance().resourceFolder() );
-  openUrl( data_folder_url );
+  QUrl folder_url = QUrl::fromLocalFile( Settings::instance().resourceFolder() );
+  openUrl( folder_url );
 }
 
 void GuiMain::openDataFolder()
 {
-  QUrl data_folder_url = QUrl::fromLocalFile( Settings::instance().dataFolder() );
-  openUrl( data_folder_url );
+  QUrl folder_url = QUrl::fromLocalFile( Settings::instance().dataFolder() );
+  openUrl( folder_url );
+}
+
+void GuiMain::openDownloadFolder()
+{
+  QUrl folder_url = QUrl::fromLocalFile( Settings::instance().downloadDirectory() );
+  openUrl( folder_url );
 }
 
 GuiFloatingChat* GuiMain::floatingChat( VNumber chat_id ) const

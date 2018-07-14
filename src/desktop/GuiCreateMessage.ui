@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>320</height>
+    <width>455</width>
+    <height>341</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -22,13 +22,22 @@
      <property name="title">
       <string>Message</string>
      </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
      <property name="flat">
       <bool>true</bool>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>6</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>6</number>
+      </property>
       <item row="0" column="0" rowspan="3">
        <widget class="GuiMessageEdit" name="mp_teMessage">
         <property name="sizePolicy">
@@ -51,7 +60,14 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
+      <item row="3" column="0">
+       <widget class="QCheckBox" name="mp_cbOpenChat">
+        <property name="text">
+         <string>Open chat after sending message</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
        <widget class="QPushButton" name="mp_pbSend">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -61,14 +77,14 @@
         </property>
         <property name="minimumSize">
          <size>
-          <width>34</width>
-          <height>34</height>
+          <width>42</width>
+          <height>42</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>50</width>
-          <height>50</height>
+          <width>42</width>
+          <height>42</height>
          </size>
         </property>
         <property name="toolTip">
@@ -89,7 +105,7 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
+      <item row="0" column="1" rowspan="2">
        <spacer name="verticalSpacer_2">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -102,13 +118,6 @@
         </property>
        </spacer>
       </item>
-      <item row="3" column="0">
-       <widget class="QCheckBox" name="mp_cbOpenChat">
-        <property name="text">
-         <string>Open chat after sending message</string>
-        </property>
-       </widget>
-      </item>
      </layout>
     </widget>
    </item>
@@ -117,13 +126,22 @@
      <property name="title">
       <string>To</string>
      </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
      <property name="flat">
       <bool>true</bool>
      </property>
      <layout class="QGridLayout" name="gridLayout">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>6</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>6</number>
+      </property>
       <item row="1" column="1">
        <spacer name="verticalSpacer">
         <property name="orientation">
@@ -139,6 +157,24 @@
       </item>
       <item row="0" column="1">
        <widget class="QPushButton" name="mp_pbEditUsers">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>42</width>
+          <height>42</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>42</width>
+          <height>42</height>
+         </size>
+        </property>
         <property name="toolTip">
          <string>Add recipients</string>
         </property>
@@ -190,7 +226,6 @@
   <tabstop>mp_pbEditUsers</tabstop>
   <tabstop>mp_teTo</tabstop>
   <tabstop>mp_cbOpenChat</tabstop>
-  <tabstop>mp_pbSend</tabstop>
  </tabstops>
  <resources>
   <include location="../beebeep.qrc"/>
