@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GuiShareDesktopWidget</class>
+ <widget class="QMainWindow" name="GuiShareDesktopWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>365</width>
+    <height>311</height>
+   </rect>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+   <number>0</number>
+   </property>
+   <property name="topMargin">
+   <number>0</number>
+   </property>
+   <property name="rightMargin">
+   <number>0</number>
+   </property>
+   <property name="bottomMargin">
+   <number>0</number>
+   </property>
+    <item row="0" column="0">
+     <widget class="QScrollArea" name="mp_scrollArea">
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <property name="lineWidth">
+       <number>1</number>
+      </property>
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>347</width>
+         <height>273</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_2">
+	   <property name="leftMargin">
+       <number>0</number>
+       </property>
+       <property name="topMargin">
+       <number>0</number>
+       </property>
+       <property name="rightMargin">
+       <number>0</number>
+       </property>
+       <property name="bottomMargin">
+       <number>0</number>
+       </property>
+        <item row="0" column="0">
+         <widget class="QLabel" name="mp_lView">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="textFormat">
+           <enum>Qt::PlainText</enum>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="textInteractionFlags">
+           <set>Qt::NoTextInteraction</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
