@@ -1,94 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>GuiShareDesktopWidget</class>
- <widget class="QWidget" name="GuiShareDesktopWidget">
+ <widget class="QMainWindow" name="GuiShareDesktopWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>176</width>
-    <height>194</height>
+    <width>365</width>
+    <height>311</height>
    </rect>
   </property>
-  <property name="minimumSize">
-   <size>
-    <width>120</width>
-    <height>0</height>
-   </size>
-  </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="1">
-    <spacer name="verticalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>15</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="1" column="0">
-    <spacer name="horizontalSpacer">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>6</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="1" column="1">
-    <widget class="QLabel" name="mp_lView">
-     <property name="pixmap">
-      <pixmap resource="../beebeep.qrc">:/images/beebeep.png</pixmap>
-     </property>
-     <property name="scaledContents">
-      <bool>true</bool>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-     <property name="textInteractionFlags">
-      <set>Qt::NoTextInteraction</set>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="2">
-    <spacer name="horizontalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>6</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="2" column="1">
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>15</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-  </layout>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+   <number>0</number>
+   </property>
+   <property name="topMargin">
+   <number>0</number>
+   </property>
+   <property name="rightMargin">
+   <number>0</number>
+   </property>
+   <property name="bottomMargin">
+   <number>0</number>
+   </property>
+    <item row="0" column="0">
+     <widget class="QScrollArea" name="mp_scrollArea">
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <property name="lineWidth">
+       <number>1</number>
+      </property>
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>347</width>
+         <height>273</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_2">
+	   <property name="leftMargin">
+       <number>0</number>
+       </property>
+       <property name="topMargin">
+       <number>0</number>
+       </property>
+       <property name="rightMargin">
+       <number>0</number>
+       </property>
+       <property name="bottomMargin">
+       <number>0</number>
+       </property>
+        <item row="0" column="0">
+         <widget class="QLabel" name="mp_lView">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="textFormat">
+           <enum>Qt::PlainText</enum>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="textInteractionFlags">
+           <set>Qt::NoTextInteraction</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources>
-  <include location="../beebeep.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

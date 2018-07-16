@@ -4023,22 +4023,6 @@ void GuiMain::createMessage()
 #ifdef BEEBEEP_USE_SHAREDESKTOP
 void GuiMain::onShareDesktopImageAvailable( const User& u, const QImage& img, const QString& image_type, QRgb diff_color )
 {
-  int desktop_h = qApp->desktop()->availableGeometry().height() - 50;
-  int desktop_w = qApp->desktop()->availableGeometry().width() - 80;
-  QImage fit_img;
-  if( Settings::instance().shareDesktopFitToScreen() )
-  {
-    if( img.width() > desktop_w )
-      fit_img = img.scaledToWidth( desktop_w );
-    else
-      fit_img = img;
-
-    if( fit_img.height() > desktop_h )
-      fit_img = fit_img.scaledToHeight( desktop_h );
-  }
-  else
-    fit_img = img;
-
   foreach( GuiShareDesktop* gsd, m_desktops )
   {
     if( gsd->userId() == u.id() )
@@ -4046,24 +4030,30 @@ void GuiMain::onShareDesktopImageAvailable( const User& u, const QImage& img, co
       if( img.isNull() )
         gsd->close();
       else
-        gsd->updateImage( fit_img, image_type, diff_color );
+        gsd->updateImage( img, image_type, diff_color );
       return;
     }
   }
 
-  if( fit_img.isNull() )
+  if( img.isNull() )
     return;
+
+  int desktop_h = qApp->desktop()->availableGeometry().height() - 50;
+  int desktop_w = qApp->desktop()->availableGeometry().width() - 80;
+  int frame_w = frameGeometry().width() - geometry().width();
+  int frame_h = frameGeometry().height() - geometry().height();
+  int max_img_w = img.width()+ frame_w;
+  int max_img_h = img.height()+ frame_h;
 
   GuiShareDesktop* new_gui = new GuiShareDesktop;
   connect( new_gui, SIGNAL( shareDesktopClosed( VNumber ) ), this, SLOT( onShareDesktopCloseEvent( VNumber ) ) );
   connect( new_gui, SIGNAL( shareDesktopDeleteRequest( VNumber ) ), this, SLOT( onShareDesktopDeleteRequest( VNumber ) ) );
   new_gui->setUser( u );
-  new_gui->setGeometry( 10, 40, qMin( fit_img.width()+32, qMax( 640, desktop_w ) ),
-                        qMin( fit_img.height()+20, qMax( 480, desktop_h ) ) );
-  new_gui->setImageSize( fit_img.size() );
-  new_gui->setMaximumSize( fit_img.width()+32, fit_img.height()+20 );
-  new_gui->updateImage( fit_img, image_type, diff_color );
+  new_gui->setGeometry( 10, 40, qMin( max_img_w, qMax( 640, desktop_w ) ), qMin( max_img_h, qMax( 480, desktop_h ) ) );
+  new_gui->setMaximumSize( max_img_w, max_img_h );
   new_gui->show();
+  new_gui->updateImage( img, image_type, diff_color );
+
   m_desktops.append( new_gui );
 }
 

@@ -24,25 +24,17 @@
 #include "BeeUtils.h"
 #include "GuiShareDesktop.h"
 #include "ImageOptimizer.h"
+#include "Settings.h"
 #include "User.h"
 
 
 GuiShareDesktop::GuiShareDesktop( QWidget *parent )
  : QMainWindow( parent ), m_userId( ID_INVALID ), m_lastImage()
 {
+  setupUi( this );
   setObjectName( "GuiShareDesktop" );
   setWindowIcon( QIcon( ":/images/beebeep.png" ) );
 
-  mp_scrollArea = new QScrollArea( this );
-  mp_scrollArea->setBackgroundRole( QPalette::Dark );
-  mp_scrollArea->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
-  mp_scrollArea->setWidgetResizable( false );
-  mp_lView = new QLabel( this );
-  mp_lView->setScaledContents( false );
-  mp_lView->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
-  setImageSize( QSize( 400, 300 ) );
-  mp_scrollArea->setWidget( mp_lView );
-  setCentralWidget( mp_scrollArea );
   m_lastUpdate = QDateTime::currentDateTime();
   m_toDelete = false;
 }
@@ -53,11 +45,6 @@ void GuiShareDesktop::setUser( const User& u )
   onUserChanged( u );
 }
 
-void GuiShareDesktop::setImageSize( const QSize& pix_size )
-{
-  mp_lView->setMinimumSize( pix_size );
-}
-
 void GuiShareDesktop::updateImage( const QImage& img, const QString& image_type, QRgb diff_color )
 {
   m_lastUpdate = QDateTime::currentDateTime();
@@ -65,8 +52,27 @@ void GuiShareDesktop::updateImage( const QImage& img, const QString& image_type,
     m_lastImage = ImageOptimizer::instance().mergeImage( m_lastImage, img, diff_color );
   else
     m_lastImage = img;
-  mp_lView->setPixmap( QPixmap::fromImage( m_lastImage ) );
-  mp_lView->setToolTip( QString( "%1 %2" ).arg( tr( "last update" ) ).arg( Bee::dateTimeToString( m_lastUpdate ) ) );
+
+  QPixmap pix;
+  if( Settings::instance().shareDesktopFitToScreen() )
+  {
+    QRect available_geometry = geometry();
+    QImage fit_img;
+    if( img.width() > available_geometry.width() )
+      fit_img = m_lastImage.scaledToWidth( available_geometry.width() );
+    else
+      fit_img = m_lastImage;
+
+    if( fit_img.height() > available_geometry.height() )
+      fit_img = fit_img.scaledToHeight( available_geometry.height() );
+
+    pix = QPixmap::fromImage( fit_img );
+  }
+  else
+    pix = QPixmap::fromImage( m_lastImage );
+
+  mp_lView->setPixmap( pix );
+  statusBar()->showMessage( QString( "%1: %2 %3" ).arg( tr( "Shared desktop" ) ).arg( tr( "last update" ) ).arg( Bee::dateTimeToString( m_lastUpdate ) ) );
 }
 
 void GuiShareDesktop::onUserChanged( const User& u )

@@ -1419,7 +1419,7 @@ int AffixMgr::defcpd_check(hentry*** words,
           int wend = (defcpdtable[i][pp + 1] == '?') ? wp : wnum;
           ok2 = 1;
           pp += 2;
-          btinfo[bt].btpp = pp;
+          btinfo[bt].btpp = (signed short)pp;
           btinfo[bt].btwp = wp;
           while (wp <= wend) {
             if (!(*words)[wp]->alen ||

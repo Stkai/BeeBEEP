@@ -25,10 +25,11 @@
 #define BEEBEEP_GUISHAREDESKTOP_H
 
 #include "Config.h"
+#include "ui_GuiShareDesktop.h"
 class User;
 
 
-class GuiShareDesktop : public QMainWindow
+class GuiShareDesktop : public QMainWindow, private Ui::GuiShareDesktopWidget
 {
   Q_OBJECT
 
@@ -38,7 +39,6 @@ public:
   void setUser( const User& );
   inline VNumber userId() const;
 
-  void setImageSize( const QSize& );
   void updateImage( const QImage&, const QString& image_type, QRgb diff_color );
   inline void resetLastImage();
 
@@ -57,8 +57,6 @@ protected:
 private:
   VNumber m_userId;
   QImage m_lastImage;
-  QScrollArea* mp_scrollArea;
-  QLabel* mp_lView;
   QDateTime m_lastUpdate;
   bool m_toDelete;
 
