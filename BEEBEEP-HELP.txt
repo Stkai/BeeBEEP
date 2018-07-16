@@ -192,6 +192,7 @@ UserListBackgroundColor=[string] html background color (default=#ffffff) [4.2.0]
 ChatListBackgroundColor=[string] html background color (default=#ffffff) [4.2.0]
 GroupListBackgroundColor=[string] html background color (default=#ffffff) [4.2.0]
 SavedChatListBackgroundColor=[string] html background color (default=#ffffff) [4.2.0]
+ShowUsersOnConnection=[true/false] if true the user list is showed on connection [5.1.4]
 
 [Tools]
 LogToFile=[true/false] enable file logging

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE" sourcelanguage="en">
+<TS version="2.0" language="de_DE" sourcelanguage="en">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -1741,7 +1741,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Download folder...</source>
-        <translation type="vanished">Ordner wird heruntergeladen...</translation>
+        <translation type="obsolete">Ordner wird heruntergeladen...</translation>
     </message>
     <message>
         <source>Secure Lan Messenger</source>
@@ -2501,6 +2501,10 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Select download folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show always the user list</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

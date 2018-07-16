@@ -4,6 +4,7 @@ BeeBEEP 5.2.0
 - Added "Create message" window to send one time message to many
 - Added default multicast group address 239.255.64.75
 - Added option "Use default multicast group address"
+- Added option "Show users on connection"
 
 BeeBEEP 5.0.2
 - Fixed compatibility of window geometry and state with previous version

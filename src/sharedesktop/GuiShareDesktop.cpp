@@ -72,7 +72,10 @@ void GuiShareDesktop::updateImage( const QImage& img, const QString& image_type,
     pix = QPixmap::fromImage( m_lastImage );
 
   mp_lView->setPixmap( pix );
-  statusBar()->showMessage( QString( "%1: %2 %3" ).arg( tr( "Shared desktop" ) ).arg( tr( "last update" ) ).arg( Bee::dateTimeToString( m_lastUpdate ) ) );
+  statusBar()->showMessage( QString( "%1: %2 %3 (%4) [%5x%6]" ).arg( tr( "Shared desktop" ) ).arg( tr( "last update" ) )
+                            .arg( Bee::dateTimeToString( m_lastUpdate ) ).arg( m_lastUpdate.toString( "ss::zzz" ) )
+                            .arg( pix.width() ).arg( pix.height() ) );
+  pix = QPixmap();
 }
 
 void GuiShareDesktop::onUserChanged( const User& u )

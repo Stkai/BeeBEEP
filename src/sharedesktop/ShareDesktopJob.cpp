@@ -27,7 +27,7 @@
 
 
 ShareDesktopJob::ShareDesktopJob( QObject *parent )
-  : QObject( parent ), m_lastImage(), m_imageCounter( 0 )
+  : QObject( parent ), m_lastImage()
 {
   setObjectName( "ShareDesktopJob" );
 }
@@ -46,15 +46,11 @@ void ShareDesktopJob::processNewImage( const QImage& new_image )
 #endif
   if( !new_image.isNull() )
   {
-    m_imageCounter++;
     if( ImageOptimizer::instance().imageTypeHasTransparentColor( image_type ) )
     {
       QImage diff_image = ImageOptimizer::instance().diffImage( m_lastImage, new_image, diff_color );
       image_data = ImageOptimizer::instance().saveImage( diff_image, image_type, image_quality, use_compression, compression_level );
-      if( m_imageCounter % 10 == 0 )
-        m_lastImage = QImage();
-      else
-        m_lastImage = new_image;
+      m_lastImage = new_image;
     }
     else
       image_data = ImageOptimizer::instance().saveImage( new_image, image_type, image_quality, use_compression, compression_level );

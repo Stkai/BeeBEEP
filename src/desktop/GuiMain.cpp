@@ -538,9 +538,18 @@ void GuiMain::startCore()
     }
   }
 
-  m_changeTabToUserListOnFirstConnected = true;
-  m_autoConnectOnInterfaceUp = true;
-  if( !beeCore->start() )
+  if( beeCore->start() )
+  {
+    m_autoConnectOnInterfaceUp = true;
+    if( Settings::instance().showUsersOnConnection() )
+    {
+      mp_tabMain->setCurrentWidget( mp_userList );
+      m_changeTabToUserListOnFirstConnected = false;
+    }
+    else
+      m_changeTabToUserListOnFirstConnected = true;
+  }
+  else
     QMetaObject::invokeMethod( beeCore, "checkNetworkInterface", Qt::QueuedConnection );
 }
 
@@ -783,6 +792,11 @@ void GuiMain::createMenus()
   mp_actPromptPassword->setCheckable( true );
   mp_actPromptPassword->setChecked( Settings::instance().askPasswordAtStartup() );
   mp_actPromptPassword->setData( 17 );
+  mp_menuConnectionSettings->addSeparator();
+  act = mp_menuConnectionSettings->addAction( tr( "Show always the user list" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showUsersOnConnection() );
+  act->setData( 69 );
 
   mp_menuNetworkStatus = new QMenu( tr( "Network" ), this );
   mp_menuNetworkStatus->setIcon( IconManager::instance().icon( "network.png" ) );
@@ -1601,6 +1615,9 @@ void GuiMain::settingsChanged( QAction* act )
     break;
   case 68:
     Settings::instance().setSaveGeometryOnExit( act->isChecked() );
+    break;
+  case 69:
+    Settings::instance().setShowUsersOnConnection( act->isChecked() );
     break;
   case 99:
     break;

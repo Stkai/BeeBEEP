@@ -47,8 +47,7 @@ QImage ImageOptimizer::diffImage( const QImage& old_image, const QImage& new_ima
 
   QImage diff_img( QSize( img_max_w, img_max_h ), QImage::Format_ARGB32 );
   diff_img.fill( diff_color );
-  QRgb c_rgb;
-  bool image_is_changed = false;
+  register QRgb c_rgb;
 
   for( int y = 0; y < img_max_h; y++ )
   {
@@ -56,17 +55,8 @@ QImage ImageOptimizer::diffImage( const QImage& old_image, const QImage& new_ima
     {
       c_rgb = new_image.pixel( x, y );
       if( c_rgb != old_image.pixel( x, y ) )
-      {
         diff_img.setPixel( x, y, c_rgb );
-        if( !image_is_changed )
-          image_is_changed = true;
-      }
     }
-  }
-
-  if( !image_is_changed )
-  {
-
   }
   return diff_img;
 }
@@ -83,7 +73,7 @@ QImage ImageOptimizer::mergeImage( const QImage& old_image, const QImage& new_im
   int img_max_h = qMin( old_image.height(), new_image.height() );
 
   QImage merged_img( QSize( img_max_w, img_max_h ), QImage::Format_ARGB32 );
-  QRgb c_rgb;
+  register QRgb c_rgb;
 
   for( int y = 0; y < img_max_h; y++ )
   {

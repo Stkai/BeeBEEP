@@ -175,6 +175,7 @@ Settings::Settings()
 
   m_chatDefaultUserNameColor = "#000";
   m_maxChatsToOpenAfterSendingMessage = 6;
+  m_showUsersOnConnection = false;
 }
 
 void Settings::createApplicationUuid()
@@ -1009,6 +1010,7 @@ void Settings::load()
   m_iconSourcePath = sets->value( "IconSourcePath", m_iconSourcePath ).toString();
   m_emoticonSourcePath = sets->value( "EmoticonSourcePath", m_emoticonSourcePath ).toString();
   m_maxChatsToOpenAfterSendingMessage = sets->value( "MaxChatsToOpenAfterSendingMessage", m_maxChatsToOpenAfterSendingMessage ).toInt();
+  m_showUsersOnConnection = sets->value( "ShowUsersOnConnection", m_showUsersOnConnection ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -1330,6 +1332,7 @@ void Settings::save()
   sets->setValue( "IconSourcePath", m_iconSourcePath );
   sets->setValue( "EmoticonSourcePath", m_emoticonSourcePath );
   sets->setValue( "MaxChatsToOpenAfterSendingMessage", m_maxChatsToOpenAfterSendingMessage );
+  sets->setValue( "ShowUsersOnConnection", m_showUsersOnConnection );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );

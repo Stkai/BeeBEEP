@@ -42,7 +42,6 @@ public slots:
 
 private:
   QImage m_lastImage;
-  int m_imageCounter;
 
 };
 

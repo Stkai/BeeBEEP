@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -1529,7 +1529,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Download folder...</source>
-        <translation type="vanished">Cartella file scaricati...</translation>
+        <translation type="obsolete">Cartella file scaricati...</translation>
     </message>
     <message>
         <source>Generate automatic filename</source>
@@ -2546,6 +2546,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Select download folder</source>
         <translation>Seleziona la cartella dove salvare i file scaricati</translation>
+    </message>
+    <message>
+        <source>Show always the user list</source>
+        <translation>Mostra sempre la lista degli utenti</translation>
     </message>
 </context>
 <context>
