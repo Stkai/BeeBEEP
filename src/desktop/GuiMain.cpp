@@ -876,7 +876,7 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().showChatsInOneWindow() );
   act->setData( 7 );
-  act = mp_menuChatSettings->addAction( tr( "Raise chat window on new message" ), this, SLOT( settingsChanged() ) );
+  act = mp_menuChatSettings->addAction( tr( "Raise previously opened chat on new message" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().raiseOnNewMessageArrived() );
   act->setData( 15 );

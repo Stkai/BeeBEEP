@@ -36,6 +36,8 @@ class GuiEmoticons : public QTabWidget
 public:
   explicit GuiEmoticons( QWidget *parent = 0 );
 
+  void deleteAllTabs();
+
 signals:
   void emoticonSelected( const Emoticon& );
 

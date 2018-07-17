@@ -168,14 +168,11 @@ void GuiEmoticons::loadEmoticons( int current_index )
   QApplication::restoreOverrideCursor();
 }
 
-void GuiEmoticons::updateEmoticons()
+void GuiEmoticons::deleteAllTabs()
 {
-  int current_index = -1;
-
   if( count() > 0 )
   {
     QWidget* w;
-    current_index = currentIndex();
     for( int i = 0; i < count(); i++ )
     {
       w = widget( i );
@@ -183,6 +180,15 @@ void GuiEmoticons::updateEmoticons()
     }
     clear();
   }
+}
+
+void GuiEmoticons::updateEmoticons()
+{
+  int current_index = -1;
+  if( count() > 0 )
+    current_index = currentIndex();
+
+  deleteAllTabs();
 
   initEmoticons( current_index );
 }

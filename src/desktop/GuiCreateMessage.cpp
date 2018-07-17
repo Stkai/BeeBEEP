@@ -56,11 +56,36 @@ GuiCreateMessage::GuiCreateMessage( QWidget *parent )
   else
     mp_cbOpenChat->setEnabled( false );
 
+  mp_pbEmoticons->setDisabled( Settings::instance().useOnlyTextEmoticons() );
+
   updateRecipients();
+  updateEmoticons();
 
   connect( mp_pbSend, SIGNAL( clicked() ), this, SLOT( sendMessage() ) );
   connect( mp_pbEditUsers, SIGNAL( clicked() ), this, SLOT( editRecipients() ) );
+  connect( mp_twEmoticons, SIGNAL( emoticonSelected( const Emoticon& ) ), this, SLOT( addEmoticon( const Emoticon& ) ) );
+  connect( mp_pbEmoticons, SIGNAL( clicked() ), this, SLOT( toggleEmoticons() ) );
 
+}
+
+void GuiCreateMessage::updateEmoticons()
+{
+  QMetaObject::invokeMethod( mp_twEmoticons, "updateEmoticons", Qt::QueuedConnection );
+  QMetaObject::invokeMethod( this, "toggleEmoticons", Qt::QueuedConnection );
+}
+
+void GuiCreateMessage::addEmoticon( const Emoticon& e )
+{
+  mp_teMessage->addEmoticon( e );
+  mp_teMessage->setFocus();
+}
+
+void GuiCreateMessage::toggleEmoticons()
+{
+  if( mp_pbEmoticons->isEnabled() && mp_pbEmoticons->isChecked() )
+    mp_twEmoticons->show();
+  else
+    mp_twEmoticons->hide();
 }
 
 void GuiCreateMessage::updateRecipients()

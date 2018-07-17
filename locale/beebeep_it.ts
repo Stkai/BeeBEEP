@@ -2197,7 +2197,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Raise chat window on new message</source>
-        <translation>Porta in primo piano la conversazione all&apos;arrivo di un nuovo messaggio</translation>
+        <translation type="obsolete">Porta in primo piano la conversazione all&apos;arrivo di un nuovo messaggio</translation>
     </message>
     <message>
         <source>Set your status to away automatically</source>
@@ -2554,6 +2554,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Show the user list at once</source>
         <translation>Mostra subito la lista degli utenti</translation>
+    </message>
+    <message>
+        <source>Raise previously opened chat on new message</source>
+        <translation>All&apos;arrivo di un nuovo messaggio porta in primo piano la conversazione già aperta</translation>
     </message>
 </context>
 <context>

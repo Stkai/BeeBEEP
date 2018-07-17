@@ -1271,22 +1271,22 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="75"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="100"/>
         <source>Nobody</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="82"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="107"/>
         <source>Add recipients</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="124"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="149"/>
         <source>Please select at least one recipient for your message.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="131"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="156"/>
         <source>You cannot send an empty message.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1294,17 +1294,17 @@ Kérjük, válassz egy másik nevet.</translation>
 <context>
     <name>GuiCreateMessageWidget</name>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.ui" line="66"/>
+        <location filename="../src/desktop/GuiCreateMessage.ui" line="57"/>
         <source>Open chat after sending message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.ui" line="127"/>
+        <location filename="../src/desktop/GuiCreateMessage.ui" line="129"/>
         <source>To</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.ui" line="179"/>
+        <location filename="../src/desktop/GuiCreateMessage.ui" line="169"/>
         <source>Add recipients</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1314,7 +1314,7 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.ui" line="91"/>
+        <location filename="../src/desktop/GuiCreateMessage.ui" line="64"/>
         <source>Click to send message</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2386,9 +2386,8 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation>Felhasználó hozzáadása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="879"/>
         <source>Raise chat window on new message</source>
-        <translation>Növelje a csevegési ablakot új üzenet érketésekor</translation>
+        <translation type="obsolete">Növelje a csevegési ablakot új üzenet érketésekor</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="853"/>
@@ -2554,6 +2553,11 @@ Kérjük, válassz egy másik nevet.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="870"/>
         <source>Send offline messages also to chat with all users</source>
         <translation>Küldés offline üzenetet is, hogy minden felhasználóval csevegjen</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="879"/>
+        <source>Raise previously opened chat on new message</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="891"/>

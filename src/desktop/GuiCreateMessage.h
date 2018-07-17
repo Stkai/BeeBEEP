@@ -26,6 +26,7 @@
 
 #include "Config.h"
 #include "ui_GuiCreateMessage.h"
+class Emoticon;
 
 
 class GuiCreateMessage : public QDialog, private Ui::GuiCreateMessageWidget
@@ -42,8 +43,11 @@ public:
 protected slots:
   void sendMessage();
   void editRecipients();
+  void addEmoticon( const Emoticon& );
+  void toggleEmoticons();
 
 protected:
+  void updateEmoticons();
   void updateRecipients();
 
 private:

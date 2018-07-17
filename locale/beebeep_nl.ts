@@ -1288,22 +1288,22 @@ Gebruik aub een andere naam.</translation>
         <translation>Maak bericht</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="75"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="100"/>
         <source>Nobody</source>
         <translation>Niemand</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="82"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="107"/>
         <source>Add recipients</source>
         <translation>Voeg ontvangers toe</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="124"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="149"/>
         <source>Please select at least one recipient for your message.</source>
         <translation>Selecteer in ieder geval 1 ontvanger voor je bericht.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="131"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="156"/>
         <source>You cannot send an empty message.</source>
         <translation>Je kan geen leeg bericht verzenden.</translation>
     </message>
@@ -1311,17 +1311,17 @@ Gebruik aub een andere naam.</translation>
 <context>
     <name>GuiCreateMessageWidget</name>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.ui" line="66"/>
+        <location filename="../src/desktop/GuiCreateMessage.ui" line="57"/>
         <source>Open chat after sending message</source>
         <translation>Open chat nadat bericht is verzonden</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.ui" line="127"/>
+        <location filename="../src/desktop/GuiCreateMessage.ui" line="129"/>
         <source>To</source>
         <translation>Naar</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.ui" line="179"/>
+        <location filename="../src/desktop/GuiCreateMessage.ui" line="169"/>
         <source>Add recipients</source>
         <translation>Voeg ontvangers toe</translation>
     </message>
@@ -1331,7 +1331,7 @@ Gebruik aub een andere naam.</translation>
         <translation>Bericht</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.ui" line="91"/>
+        <location filename="../src/desktop/GuiCreateMessage.ui" line="64"/>
         <source>Click to send message</source>
         <translation>Klik om bericht te verzenden</translation>
     </message>
@@ -2585,6 +2585,11 @@ Gebruik aub een andere naam.</translation>
         <translation>Zend offline bericht, ook om te chatten met alle gebruikers</translation>
     </message>
     <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="879"/>
+        <source>Raise previously opened chat on new message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="891"/>
         <source>Show chat toolbar</source>
         <translation>Toon chatbalk</translation>
@@ -2941,9 +2946,8 @@ Gebruik aub een andere naam.</translation>
         <translation>Sla gebruikers op</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="879"/>
         <source>Raise chat window on new message</source>
-        <translation>Toon chatvenster bij nieuw bericht</translation>
+        <translation type="obsolete">Toon chatvenster bij nieuw bericht</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="853"/>

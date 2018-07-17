@@ -1649,7 +1649,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Raise chat window on new message</source>
-        <translation>Chatfenster bei neuer Nachricht in den Vordergrund</translation>
+        <translation type="obsolete">Chatfenster bei neuer Nachricht in den Vordergrund</translation>
     </message>
     <message>
         <source>%1 is not connected.</source>
@@ -2505,6 +2505,10 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Show the user list at once</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Raise previously opened chat on new message</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

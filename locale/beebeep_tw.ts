@@ -1613,7 +1613,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Raise chat window on new message</source>
-        <translation>閃出聊天室窗於新訊息</translation>
+        <translation type="obsolete">閃出聊天室窗於新訊息</translation>
     </message>
     <message>
         <source>%1 is not connected.</source>
@@ -2485,6 +2485,10 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Show the user list at once</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Raise previously opened chat on new message</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
