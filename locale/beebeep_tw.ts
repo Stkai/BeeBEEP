@@ -2484,7 +2484,7 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show always the user list</source>
+        <source>Show the user list at once</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

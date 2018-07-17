@@ -2549,7 +2549,11 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show always the user list</source>
-        <translation>Mostra sempre la lista degli utenti</translation>
+        <translation type="obsolete">Mostra sempre la lista degli utenti</translation>
+    </message>
+    <message>
+        <source>Show the user list at once</source>
+        <translation>Mostra subito la lista degli utenti</translation>
     </message>
 </context>
 <context>

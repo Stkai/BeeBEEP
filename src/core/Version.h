@@ -45,10 +45,10 @@ const char* BEEBEEP_GA_TRACKING_ID = "UA-57878696-1";  // VUEtNTc4Nzg2OTYtMQ==
 const char* BEEBEEP_GA_URL = "http://www.google-analytics.com/collect"; // aHR0cDovL3d3dy5nb29nbGUtYW5hbHl0aWNzLmNvbS9jb2xsZWN0
 const char* BEEBEEP_GA_EVENT_VERSION = "1";
 const char* HUNSPELL_VERSION = "1.6.1";
-const char* BEEBEEP_VERSION = "5.1.5";
+const char* BEEBEEP_VERSION = "5.1.6";
 const int BEEBEEP_PROTO_VERSION = 73;
 const int BEEBEEP_SETTINGS_VERSION = 10;
-const int BEEBEEP_BUILD = 1007;
+const int BEEBEEP_BUILD = 1011;
 
 #endif // BEEBEEP_VERSION_H
 

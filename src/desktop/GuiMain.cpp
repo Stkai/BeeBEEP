@@ -793,7 +793,7 @@ void GuiMain::createMenus()
   mp_actPromptPassword->setChecked( Settings::instance().askPasswordAtStartup() );
   mp_actPromptPassword->setData( 17 );
   mp_menuConnectionSettings->addSeparator();
-  act = mp_menuConnectionSettings->addAction( tr( "Show always the user list" ), this, SLOT( settingsChanged() ) );
+  act = mp_menuConnectionSettings->addAction( tr( "Show the user list at once" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().showUsersOnConnection() );
   act->setData( 69 );
