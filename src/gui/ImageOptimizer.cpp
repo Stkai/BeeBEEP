@@ -47,8 +47,7 @@ QImage ImageOptimizer::diffImage( const QImage& old_image, const QImage& new_ima
 
   QImage diff_img( QSize( img_max_w, img_max_h ), QImage::Format_ARGB32 );
   diff_img.fill( diff_color );
-  register QRgb c_rgb;
-
+  QRgb c_rgb;
   for( int y = 0; y < img_max_h; y++ )
   {
     for( int x = 0; x < img_max_w; x++ )
@@ -73,7 +72,7 @@ QImage ImageOptimizer::mergeImage( const QImage& old_image, const QImage& new_im
   int img_max_h = qMin( old_image.height(), new_image.height() );
 
   QImage merged_img( QSize( img_max_w, img_max_h ), QImage::Format_ARGB32 );
-  register QRgb c_rgb;
+  QRgb c_rgb;
 
   for( int y = 0; y < img_max_h; y++ )
   {

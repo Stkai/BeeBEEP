@@ -48,7 +48,7 @@ const char* HUNSPELL_VERSION = "1.6.1";
 const char* BEEBEEP_VERSION = "5.1.6";
 const int BEEBEEP_PROTO_VERSION = 73;
 const int BEEBEEP_SETTINGS_VERSION = 10;
-const int BEEBEEP_BUILD = 1012;
+const int BEEBEEP_BUILD = 1013;
 
 #endif // BEEBEEP_VERSION_H
 
