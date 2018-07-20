@@ -870,7 +870,7 @@ void Settings::load()
   {
     m_useDefaultPassword = sets->value( "UseDefaultPassword", true ).toBool();
     m_askChangeUserAtStartup = sets->value( "AskChangeUserAtStartup", m_firstTime ).toBool();
-    m_askPasswordAtStartup = sets->value( "AskPasswordAtStartup", m_firstTime  ).toBool();
+    m_askPasswordAtStartup = sets->value( "AskPasswordAtStartup", false ).toBool();
   }
 
   m_savePassword = sets->value( "SavePassword", false ).toBool();
