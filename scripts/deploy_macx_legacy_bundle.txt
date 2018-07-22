@@ -106,8 +106,9 @@ printf "MacOS X deploy and create DMG file ... "
 $MACDEPLOY_APP $BUNDLE_FOLDER -dmg
 echo "Done"
 
-printf "Renaming DMG with version ${BEEBEEP_VERSION} ... "
-mv BeeBEEP.dmg beebeep-${BEEBEEP_VERSION}-qt563.dmg
+printf "Zipping BeeBEEP.app with version ${BEEBEEP_VERSION} ... "
+zip -d  beebeep-${BEEBEEP_VERSION}-qt563.zip $BUNDLE_FOLDER
 echo "Done"
+
 
 echo "BeeBEEP to Bundle - Process completed."
