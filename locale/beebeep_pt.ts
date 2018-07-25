@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="pt_BR">
+<TS version="2.0" language="pt_BR">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -1948,7 +1948,7 @@ Selecione um nome diferente.</translation>
     </message>
     <message>
         <source>Download folder...</source>
-        <translation type="vanished">Baixar Pasta...</translation>
+        <translation type="obsolete">Baixar Pasta...</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="956"/>
@@ -2446,7 +2446,7 @@ Selecione um nome diferente.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="724"/>
         <source>Open your download folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Abra sua pasta de download</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="761"/>
@@ -2471,7 +2471,7 @@ Selecione um nome diferente.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="796"/>
         <source>Show the user list at once</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar a lista de usuários de uma só vez</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="870"/>
@@ -2481,7 +2481,7 @@ Selecione um nome diferente.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="879"/>
         <source>Raise previously opened chat on new message</source>
-        <translation type="unfinished"></translation>
+        <translation>Levantar o bate-papo aberto anteriormente em nova mensagem</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="891"/>
@@ -2491,7 +2491,7 @@ Selecione um nome diferente.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="942"/>
         <source>Select download folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecione a pasta de download</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="980"/>
@@ -3010,7 +3010,7 @@ Selecione um nome diferente.</translation>
     </message>
     <message>
         <source>Raise chat window on new message</source>
-        <translation type="vanished">Mostrar a janela do CHAT em uma nova mensagem</translation>
+        <translation type="obsolete">Mostrar a janela do CHAT em uma nova mensagem</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="853"/>
@@ -3291,7 +3291,7 @@ Selecione um nome diferente.</translation>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="348"/>
         <source>Use default multicast group address</source>
-        <translation type="unfinished"></translation>
+        <translation>Use o endereço do grupo de multicast padrão</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="368"/>
