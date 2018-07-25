@@ -552,7 +552,7 @@
     <message>
         <location filename="../src/core/CoreConnection.cpp" line="365"/>
         <source>%1 %2 uses old encryption level.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 utilise l&apos;ancien niveau de cryptage.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreShareDesktop.cpp" line="52"/>
@@ -1268,27 +1268,27 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.cpp" line="40"/>
         <source>Create message</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer un message</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.cpp" line="100"/>
         <source>Nobody</source>
-        <translation type="unfinished"></translation>
+        <translation>Personne</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.cpp" line="107"/>
         <source>Add recipients</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter un destinataire</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.cpp" line="149"/>
         <source>Please select at least one recipient for your message.</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez sélectionner au moins un destinataire pour votre message</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.cpp" line="156"/>
         <source>You cannot send an empty message.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous ne pouvez pas envoyer un message vide.</translation>
     </message>
 </context>
 <context>
@@ -1296,27 +1296,27 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="57"/>
         <source>Open chat after sending message</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir la discussion après l&apos;envoi du message</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="129"/>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>À</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="169"/>
         <source>Add recipients</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter des destinataires</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="23"/>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Message</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="64"/>
         <source>Click to send message</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer pour envoyer le message</translation>
     </message>
 </context>
 <context>
@@ -2269,22 +2269,22 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="667"/>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Connexion</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="670"/>
         <source>Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Déconnexion</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="706"/>
         <source>Create a message</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer un message</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="724"/>
         <source>Open your download folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir votre dossier des téléchargements</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="761"/>
@@ -2314,7 +2314,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="879"/>
         <source>Raise previously opened chat on new message</source>
-        <translation type="unfinished"></translation>
+        <translation>Faire surgir la discussion ouverte précédemment à l&apos;arrivée d&apos;un message</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="891"/>
@@ -2511,7 +2511,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3097"/>
         <source>none</source>
-        <translation type="unfinished">aucun</translation>
+        <translation>aucun</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3610"/>
@@ -3018,12 +3018,13 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="796"/>
         <source>Show the user list at once</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>At once ?</translatorcomment>
+        <translation>Afficher la liste des utilisateurs immédiatement</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="942"/>
         <source>Select download folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner le dossier des téléchargements</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1342"/>
@@ -3233,7 +3234,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="60"/>
         <source>default</source>
-        <translation type="unfinished">défaut</translation>
+        <translation>défaut</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="64"/>
@@ -3290,7 +3291,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="348"/>
         <source>Use default multicast group address</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser l&apos;adresse de groupe de multidiffusion par défaut</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="368"/>
@@ -3301,7 +3302,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="389"/>
         <source>Disable system proxy for connections</source>
-        <translation type="unfinished"></translation>
+        <translation>Désactiver le proxy du système pour les connexions</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="433"/>
@@ -3773,17 +3774,17 @@ Please select a different name.</source>
     <message>
         <location filename="../src/gui/GuiSelectItems.ui" line="23"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../src/gui/GuiSelectItems.ui" line="30"/>
         <source>Cancel</source>
-        <translation type="unfinished">Annuler</translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <location filename="../src/gui/GuiSelectItems.ui" line="50"/>
         <source>Clear selection</source>
-        <translation type="unfinished">Effacer la sélection</translation>
+        <translation>Effacer la sélection</translation>
     </message>
 </context>
 <context>
