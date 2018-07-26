@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="pl_PL">
+<TS version="2.1" language="pl_PL">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -322,7 +322,7 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="137"/>
         <source>to</source>
-        <translation>do </translation>
+        <translation>do</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="181"/>
@@ -2520,7 +2520,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="724"/>
         <source>Open your download folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Otwórz folder pobierania</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="761"/>
@@ -2550,7 +2550,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="879"/>
         <source>Raise previously opened chat on new message</source>
-        <translation type="unfinished"></translation>
+        <translation>Przywróc poprzednio otwarty czat przy nowej wiadomości</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="891"/>
@@ -2790,7 +2790,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3097"/>
         <source>none</source>
-        <translation type="unfinished">żaden</translation>
+        <translation>żaden</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3610"/>
@@ -3081,12 +3081,12 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="796"/>
         <source>Show the user list at once</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż jednocześnie listę użytkowników</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="942"/>
         <source>Select download folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybierz folder pobierania</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1226"/>
@@ -3229,7 +3229,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="60"/>
         <source>default</source>
-        <translation type="unfinished">domyślnie</translation>
+        <translation>domyślnie</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="99"/>
@@ -3257,7 +3257,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="348"/>
         <source>Use default multicast group address</source>
-        <translation type="unfinished"></translation>
+        <translation>Użyj domyślnego grupowego adresu multicast</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="368"/>
@@ -3317,7 +3317,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="137"/>
         <source>Search users every</source>
-        <translation>Szukaj użytkowników co </translation>
+        <translation>Szukaj użytkowników co</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="211"/>
@@ -4659,7 +4659,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.ui" line="23"/>
         <source>Enter the name of workgroup you want to add </source>
-        <translation>Wprowadź nazwę grupy roboczej, którą chcesz dodać</translation>
+        <translation>Wprowadź nazwę grupy roboczej, którą chcesz dodać </translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.ui" line="93"/>
