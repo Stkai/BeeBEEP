@@ -65,7 +65,7 @@ bool Broadcaster::startBroadcastServer()
     m_networkAddressesWaitingForLoopback.clear();
   m_newBroadcastRequested = false;
   m_addOfflineUsersInNetworkAddresses = false;
-
+  updateAddresses();
   return true;
 }
 
@@ -368,9 +368,9 @@ void Broadcaster::updateAddresses()
   foreach( NetworkAddress na, m_networkAddresses )
     sl << na.toString();
   qDebug() << "Broadcaster is contacting the followings addresses:" << qPrintable( sl.join( ", " ) );
-#else
-  qDebug() << "Broadcaster will contact" << m_networkAddresses.size() << "network addresses";
 #endif
+  qDebug() << "Broadcaster will contact" << m_networkAddresses.size() << "network addresses";
+
 }
 
 void Broadcaster::onTickEvent( int )
@@ -422,7 +422,5 @@ void Broadcaster::contactNetworkAddresses()
     if( contacted_users >= Settings::instance().maxUsersToConnectInATick() )
       break;
   }
-#ifdef BEEBEEP_DEBUG
   qDebug() << "Broadcaster has contacted" << contacted_users << "network addresses";
-#endif
 }

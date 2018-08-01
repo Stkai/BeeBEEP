@@ -1,7 +1,8 @@
 BEEBEEP (Secure Lan Messanger) - CHANGELOG - (c) Marco Mastroddi
 
 BeeBEEP 5.2.1
-- Prevent "user collision" and "connection closed bug"
+- Prevent "user collision" from same IP address
+- Fixed "slow connection bug" at startup
 
 
 BeeBEEP 5.2.0

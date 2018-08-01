@@ -102,6 +102,14 @@ void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )
       return;
     }
   }
+  else
+  {
+    if( hasConnection( sender_ip, sender_port ) )
+    {
+      qDebug() << qPrintable( sender_ip.toString() ) << ":" << sender_port << "is already connected (or connecting)";
+      return;
+    }
+  }
 
   NetworkAddress na( sender_ip, sender_port );
   if( isUserConnected( na ) )
@@ -123,22 +131,9 @@ void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )
 
 void Core::checkNewConnection( qintptr socket_descriptor )
 {
-  // Has connection never return true because peer port is always different.
-  // It comes from Listener. If I want to prevent multiple users from single
-  // ip, I can pass -1 to peer_port and check only host address
-
   Connection *c = createConnection();
   c->initSocket( socket_descriptor );
   qDebug() << "New connection from" << qPrintable( c->networkAddress().toString() );
-
-  // We check preventMultipleConnectionsFromSingleHostAddress only in new peer found because only there we have peer port
-  if( hasConnection( c->peerAddress(), -1 ) )
-  {
-    qWarning() << qPrintable( c->networkAddress().toString() ) << "is already connected (from Listener)";
-    closeConnection( c );
-    return;
-  }
-
   setupNewConnection( c );
 }
 
