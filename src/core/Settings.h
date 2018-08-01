@@ -200,6 +200,8 @@ public:
   inline void setStayOnTop( bool );
   inline bool raiseOnNewMessageArrived() const;
   inline void setRaiseOnNewMessageArrived( bool );
+  inline bool alwaysOpenChatOnNewMessageArrived() const;
+  inline void setAlwaysOpenChatOnNewMessageArrived( bool );
   inline bool showChatToolbar() const;
   inline void setShowChatToolbar( bool );
   inline bool showOnlyMessagesInDefaultChat() const;
@@ -584,6 +586,7 @@ private:
   bool m_showEmoticons;
   bool m_showMessagesGroupByUser;
   bool m_stayOnTop;
+  bool m_alwaysOpenChatOnNewMessageArrived;
   bool m_raiseOnNewMessageArrived;
   bool m_showUserPhoto;
   bool m_showTipsOfTheDay;
@@ -845,6 +848,8 @@ inline bool Settings::stayOnTop() const { return m_stayOnTop; }
 inline void Settings::setStayOnTop( bool new_value ) { m_stayOnTop = new_value; }
 inline bool Settings::raiseOnNewMessageArrived() const { return m_raiseOnNewMessageArrived; }
 inline void Settings::setRaiseOnNewMessageArrived( bool new_value ) { m_raiseOnNewMessageArrived = new_value; }
+inline bool Settings::alwaysOpenChatOnNewMessageArrived() const { return m_alwaysOpenChatOnNewMessageArrived; }
+inline void Settings::setAlwaysOpenChatOnNewMessageArrived( bool new_value ) { m_alwaysOpenChatOnNewMessageArrived = new_value; }
 inline bool Settings::automaticFileName() const { return m_automaticFileName; }
 inline void Settings::setAutomaticFileName( bool new_value ) { m_automaticFileName = new_value; }
 inline bool Settings::overwriteExistingFiles() const { return m_overwriteExistingFiles; }

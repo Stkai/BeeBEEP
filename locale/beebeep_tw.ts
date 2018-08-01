@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="zh_TW">
+<TS version="2.0" language="zh_TW">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -2489,6 +2489,10 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Raise previously opened chat on new message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Always open chat on new message</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

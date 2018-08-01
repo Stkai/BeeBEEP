@@ -876,6 +876,10 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().showChatsInOneWindow() );
   act->setData( 7 );
+  act = mp_menuChatSettings->addAction( tr( "Always open chat on new message" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().alwaysOpenChatOnNewMessageArrived() );
+  act->setData( 70 );
   act = mp_menuChatSettings->addAction( tr( "Raise previously opened chat on new message" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().raiseOnNewMessageArrived() );
@@ -1615,6 +1619,9 @@ void GuiMain::settingsChanged( QAction* act )
   case 69:
     Settings::instance().setShowUsersOnConnection( act->isChecked() );
     break;
+  case 70:
+    Settings::instance().setAlwaysOpenChatOnNewMessageArrived( act->isChecked() );
+    break;
   case 99:
     break;
   default:
@@ -1761,6 +1768,9 @@ void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
   }
 
   GuiFloatingChat* fl_chat = floatingChat( c.id() );
+  if( !fl_chat && Settings::instance().alwaysOpenChatOnNewMessageArrived() )
+    fl_chat = createFloatingChat( c );
+
   if( fl_chat )
     fl_chat->showChatMessage( c, cm );
 

@@ -1,9 +1,9 @@
 BEEBEEP (Secure Lan Messanger) - CHANGELOG - (c) Marco Mastroddi
 
-BeeBEEP 5.2.1
+BeeBEEP 5.4.0
 - Prevent "user collision" from same IP address
 - Fixed "slow connection bug" at startup
-
+- Added option "Always open chat on new message"
 
 BeeBEEP 5.2.0
 - Added "Create message" window to send one time message to many

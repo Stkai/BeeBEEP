@@ -963,6 +963,7 @@ void Settings::load()
   m_minimizeInTray = sets->value( "MinimizeInTray", true ).toBool();
   m_stayOnTop = sets->value( "StayOnTop", false ).toBool();
   m_raiseOnNewMessageArrived = sets->value( "RaiseOnNewMessageArrived", false ).toBool();
+  m_alwaysOpenChatOnNewMessageArrived = sets->value( "AlwaysOpenChatOnNewMessageArrived", false ).toBool();
   m_beepFilePath = checkFilePath( Bee::convertToNativeFolderSeparator( sets->value( "BeepFilePath", defaultBeepFilePath( true ) ).toString() ), defaultBeepFilePath( true ) );
   m_loadOnTrayAtStartup = sets->value( "LoadOnTrayAtStartup", false ).toBool();
   m_showNotificationOnTray = sets->value( "ShowNotificationOnTray", true ).toBool();
@@ -1284,6 +1285,7 @@ void Settings::save()
   sets->setValue( "StayOnTop", m_stayOnTop );
   sets->setValue( "BeepFilePath", m_beepFilePath );
   sets->setValue( "RaiseOnNewMessageArrived", m_raiseOnNewMessageArrived );
+  sets->setValue( "AlwaysOpenChatOnNewMessageArrived", m_alwaysOpenChatOnNewMessageArrived );
   sets->setValue( "LoadOnTrayAtStartup", m_loadOnTrayAtStartup );
   sets->setValue( "ShowNotificationOnTray", m_showNotificationOnTray );
   sets->setValue( "ShowOnlyMessageNotificationOnTray", m_showOnlyMessageNotificationOnTray );

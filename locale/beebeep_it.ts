@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -2558,6 +2558,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Raise previously opened chat on new message</source>
         <translation>All&apos;arrivo di un nuovo messaggio porta in primo piano la conversazione già aperta</translation>
+    </message>
+    <message>
+        <source>Always open chat on new message</source>
+        <translation>Apri sempre la conversazione all&apos;arrivo di un nuovo messaggio</translation>
     </message>
 </context>
 <context>
