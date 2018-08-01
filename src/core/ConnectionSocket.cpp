@@ -67,6 +67,7 @@ void ConnectionSocket::connectToNetworkAddress( const NetworkAddress& network_ad
 void ConnectionSocket::abortConnection()
 {
   m_isAborted = true;
+  m_userId = ID_INVALID;
   abort();
 }
 
@@ -77,6 +78,7 @@ void ConnectionSocket::closeConnection()
     flushAll();
     close();
   }
+  m_userId = ID_INVALID;
   m_isAborted = true;
 }
 

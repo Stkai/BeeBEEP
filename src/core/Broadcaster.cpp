@@ -30,25 +30,29 @@
 
 
 Broadcaster::Broadcaster( QObject *parent )
-  : QObject( parent ), m_broadcastSocket(), m_networkAddresses(), m_newBroadcastRequested( false ),
-    m_networkAddressesWaitingForLoopback(), m_addOfflineUsersInNetworkAddresses( false ), m_multicastGroupAddress()
+  : QObject( parent ), m_networkAddresses(), m_newBroadcastRequested( false ),
+    m_networkAddressesWaitingForLoopback(), m_addOfflineUsersInNetworkAddresses( false ),
+    m_multicastGroupAddress()
 {
-  connect( &m_broadcastSocket, SIGNAL( readyRead() ), this, SLOT( readBroadcastDatagram() ) );
+  mp_receiverSocket = new QUdpSocket( this );
+  mp_senderSocket = new QUdpSocket( this );
 }
 
 bool Broadcaster::startBroadcastServer()
 {
-  if( !m_broadcastSocket.bind( Settings::instance().hostAddressToListen(), Settings::instance().defaultBroadcastPort(), QUdpSocket::ShareAddress | QUdpSocket::ReuseAddressHint ) )
+  if( !mp_receiverSocket->bind( Settings::instance().hostAddressToListen(), Settings::instance().defaultBroadcastPort() ) )
   {
     qWarning() << "Broadcaster cannot bind the broadcast port" << Settings::instance().defaultBroadcastPort();
     return false;
   }
 
+  connect( mp_receiverSocket, SIGNAL( readyRead() ), this, SLOT( readBroadcastDatagram() ) );
+
 #if QT_VERSION >= 0x040800
   m_multicastGroupAddress = Settings::instance().useDefaultMulticastGroupAddress() ? Settings::instance().defaultMulticastGroupAddress() : Settings::instance().multicastGroupAddress();
   if( !m_multicastGroupAddress.isNull() )
   {
-    if( m_broadcastSocket.joinMulticastGroup( m_multicastGroupAddress ) )
+    if( mp_receiverSocket->joinMulticastGroup( m_multicastGroupAddress ) )
       qDebug() << "Join to the multicast group" << qPrintable( m_multicastGroupAddress.toString() );
     else
       qWarning() << "Unable to join to the multicast group" << qPrintable( m_multicastGroupAddress.toString() );
@@ -67,15 +71,21 @@ bool Broadcaster::startBroadcastServer()
 
 void Broadcaster::stopBroadcasting()
 {
-#if QT_VERSION >= 0x040800
-  if( !m_multicastGroupAddress.isNull() )
+  disconnect( mp_receiverSocket, SIGNAL( readyRead() ), this, SLOT( readBroadcastDatagram() ) );
+
+  if( mp_receiverSocket->state() == QAbstractSocket::BoundState )
   {
-    if( m_broadcastSocket.leaveMulticastGroup( m_multicastGroupAddress ) )
-      qDebug() << "Leave from the multicast group" << qPrintable( m_multicastGroupAddress.toString() );
-    else
-      qWarning() << "Unable to leave from the multicast group" << qPrintable( m_multicastGroupAddress.toString() );
-  }
+#if QT_VERSION >= 0x040800
+    if( !m_multicastGroupAddress.isNull() )
+    {
+      if( mp_receiverSocket->leaveMulticastGroup( m_multicastGroupAddress ) )
+        qDebug() << "Leave from the multicast group" << qPrintable( m_multicastGroupAddress.toString() );
+      else
+        qWarning() << "Unable to leave from the multicast group" << qPrintable( m_multicastGroupAddress.toString() );
+    }
 #endif
+    mp_receiverSocket->close();
+  }
 
   qDebug() << "Broadcaster stops broadcasting";
 
@@ -83,14 +93,13 @@ void Broadcaster::stopBroadcasting()
     m_networkAddresses.clear();
   if( !m_networkAddressesWaitingForLoopback.isEmpty() )
     m_networkAddressesWaitingForLoopback.clear();
-  m_broadcastSocket.close();
   m_newBroadcastRequested = false;
   m_addOfflineUsersInNetworkAddresses = false;
 }
 
 void Broadcaster::sendBroadcast()
 {
-  if( m_broadcastSocket.state() != QAbstractSocket::BoundState )
+  if( mp_senderSocket->state() != QAbstractSocket::BoundState )
   {
 #ifdef BEEBEEP_DEBUG
     qWarning() << "Unable to send broadcast with a closed socket";
@@ -139,19 +148,25 @@ bool Broadcaster::contactNetworkAddress( const NetworkAddress& na )
   if( na.isHostPortValid() )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "Broadcaster sends to core this network address:" << qPrintable( na.toString() );
+    qDebug() << "Broadcaster skips this network address" << qPrintable( na.toString() ) << "and sends it to the CORE";
 #endif
     emit newPeerFound( na.hostAddress(), na.hostPort() );
     return true;
   }
   else
   {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Broadcaster sends datagram this network address:" << qPrintable( na.hostAddress().toString() ) << Settings::instance().defaultBroadcastPort();
-#endif
     QByteArray broadcast_data = Protocol::instance().broadcastMessage( na.hostAddress() );
     m_networkAddressesWaitingForLoopback.append( QPair<NetworkAddress,QDateTime>( na, QDateTime::currentDateTime() ) );
-    return m_broadcastSocket.writeDatagram( broadcast_data, na.hostAddress(), Settings::instance().defaultBroadcastPort() ) > 0;
+    if( mp_senderSocket->writeDatagram( broadcast_data, na.hostAddress(), Settings::instance().defaultBroadcastPort() ) > 0 )
+    {
+      qDebug() << "Broadcaster sends datagram to" << qPrintable( na.hostAddress().toString() ) << Settings::instance().defaultBroadcastPort();
+      return true;
+    }
+    else
+    {
+      qWarning() << "Unable to send datagram to" << qPrintable( na.hostAddress().toString() ) << Settings::instance().defaultBroadcastPort();
+      return false;
+    }
   }
 }
 
@@ -197,15 +212,18 @@ void Broadcaster::removeHostAddressFromWaitingList( const QHostAddress& host_add
 void Broadcaster::readBroadcastDatagram()
 {
   int num_datagram_read = 0;
-  while( m_broadcastSocket.hasPendingDatagrams() && num_datagram_read < MAX_NUM_OF_LOOP_IN_CONNECTON_SOCKECT )
+  while( mp_receiverSocket->hasPendingDatagrams() && num_datagram_read < MAX_NUM_OF_LOOP_IN_CONNECTON_SOCKECT )
   {
     num_datagram_read++;
     QHostAddress sender_ip;
     quint16 sender_port;
     QByteArray datagram;
-    datagram.resize( m_broadcastSocket.pendingDatagramSize() );
-    if( m_broadcastSocket.readDatagram( datagram.data(), datagram.size(), &sender_ip, &sender_port ) == -1 )
+    datagram.resize( mp_receiverSocket->pendingDatagramSize() );
+    if( mp_receiverSocket->readDatagram( datagram.data(), datagram.size(), &sender_ip, &sender_port ) == -1 )
+    {
+      qWarning() << "Broadcasting has found and error reading datagram" << num_datagram_read;
       continue;
+    }
     if( datagram.size() <= Protocol::instance().messageMinimumSize() )
     {
       qWarning() << "Broadcaster has received an invalid data size:" << datagram;
@@ -373,10 +391,10 @@ void Broadcaster::onTickEvent( int )
     return;
   }
 
-  if( m_broadcastSocket.state() != QAbstractSocket::BoundState )
+  if( mp_receiverSocket->state() != QAbstractSocket::BoundState )
   {
 #ifdef BEEBEEP_DEBUG
-    qWarning() << "Broadcaster has not the socket in BoundState and cannot contact other addresses";
+    qWarning() << "Broadcaster has not the receiver socket in BoundState";
 #endif
     return;
   }

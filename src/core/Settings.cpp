@@ -129,7 +129,7 @@ Settings::Settings()
 #endif
   m_lastSave = QDateTime::currentDateTime();
 
-  m_preventMultipleConnectionsFromSingleHostAddress = false;
+  m_preventMultipleConnectionsFromSingleHostAddress = true;
   m_acceptConnectionsOnlyFromWorkgroups = false;
   m_maxUserStatusDescriptionInList = 10;
 

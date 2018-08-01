@@ -1,5 +1,9 @@
 BEEBEEP (Secure Lan Messanger) - CHANGELOG - (c) Marco Mastroddi
 
+BeeBEEP 5.2.1
+- Prevent "user collision" and "connection closed bug"
+
+
 BeeBEEP 5.2.0
 - Added "Create message" window to send one time message to many
 - Added default multicast group address 239.255.64.75

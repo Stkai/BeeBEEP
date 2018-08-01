@@ -342,6 +342,12 @@ bool Core::isUserConnected( VNumber user_id ) const
   // Is not equal to User::isStatusConnected because status is passed in hello message
   // before the authentication. Use this function in authentication and in Core.
   // Use User::isStatusConnected only in GUI
+  if( user_id == ID_INVALID )
+  {
+    qWarning() << "Invalid ID found in Core::isUserConnected(...)";
+    return isConnected();
+  }
+
   if( user_id != ID_LOCAL_USER )
   {
     Connection* c = connection( user_id );
@@ -356,6 +362,12 @@ bool Core::isUserConnected( VNumber user_id ) const
 
 bool Core::isUserConnected( const NetworkAddress& na ) const
 {
+  foreach( Connection* c, m_connections )
+  {
+    if( c->networkAddress() == na && (c->isConnecting() || c->isConnected()) )
+      return true;
+  }
+
   User u = UserManager::instance().findUserByNetworkAddress( na );
   if( u.isValid() )
     return isUserConnected( u.id() );

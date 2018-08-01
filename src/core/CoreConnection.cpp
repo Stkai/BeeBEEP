@@ -131,14 +131,12 @@ void Core::checkNewConnection( qintptr socket_descriptor )
   c->initSocket( socket_descriptor );
   qDebug() << "New connection from" << qPrintable( c->networkAddress().toString() );
 
-  if( Settings::instance().preventMultipleConnectionsFromSingleHostAddress() )
+  // We check preventMultipleConnectionsFromSingleHostAddress only in new peer found because only there we have peer port
+  if( hasConnection( c->peerAddress(), -1 ) )
   {
-    if( hasConnection( c->peerAddress(), -1 ) )
-    {
-      qWarning() << qPrintable( c->networkAddress().toString() ) << "is already connected and blocked by prevent multiple connections";
-      closeConnection( c );
-      return;
-    }
+    qWarning() << qPrintable( c->networkAddress().toString() ) << "is already connected (from Listener)";
+    closeConnection( c );
+    return;
   }
 
   setupNewConnection( c );
@@ -200,6 +198,7 @@ void Core::closeConnection( Connection *c )
       u.setStatus( User::Offline );
       u.setLastConnection( QDateTime::currentDateTime() );
       UserManager::instance().setUser( u );
+      UserManager::instance().removeNewConnectedUserId( u.id() );
 
       emit userChanged( u );
       emit userConnectionStatusChanged( u );
@@ -313,7 +312,6 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
 
       dispatchSystemMessage( ID_DEFAULT_CHAT, user_found.id(), sAlertMsg, DispatchToDefaultAndPrivateChat, ChatMessage::Connection );
       qDebug() << "User with account" << qPrintable( u.accountName() ) << "and path" << qPrintable( u.path() ) << "is already connected with account name" << user_found.accountName() << "path" << user_found.path();
-      c->setUserId( ID_INVALID );
       closeConnection( c );
       return;
     }

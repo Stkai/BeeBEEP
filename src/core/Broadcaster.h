@@ -65,7 +65,8 @@ protected:
   void removeHostAddressFromWaitingList( const QHostAddress& );
 
 private:
-  QUdpSocket m_broadcastSocket;
+  QUdpSocket* mp_receiverSocket;
+  QUdpSocket* mp_senderSocket;
   QList<NetworkAddress> m_networkAddresses;
   bool m_newBroadcastRequested;
   QList< QPair<NetworkAddress, QDateTime> > m_networkAddressesWaitingForLoopback;
