@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE" sourcelanguage="en">
+<TS version="2.1" language="de_DE" sourcelanguage="en">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -472,6 +472,26 @@
     </message>
     <message>
         <source>%1 %2 uses old encryption level.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 %2 will be informed of your changes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 This kind of change can be temporary if the user exists and does not leave the group spontaneously.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 %2 wants to remove you from the group chat %3. If you agree please leave the group.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 You have left group chat %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You are not a member of group %1. Your messages will be not shown.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2513,6 +2533,14 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Always open chat on new message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You are not allowed create groups. The option has been disabled by your system administrator.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You are not allowed modify groups. The option has been disabled by your system administrator.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

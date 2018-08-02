@@ -4,6 +4,10 @@ BeeBEEP 5.4.0
 - Prevent "user collision" from same IP address
 - Fixed "slow connection bug" at startup
 - Added option "Always open chat on new message"
+- Added option to remove members from group
+- Added option "AllowAddMembersToGroup" in beebeep.rc
+- Added option "AllowRemoveMembersFromGroup" in beebeep.rc
+- Fixed some GUI bugs
 
 BeeBEEP 5.2.0
 - Added "Create message" window to send one time message to many

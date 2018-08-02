@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -481,6 +481,26 @@
     <message>
         <source>%1 %2 uses old encryption level.</source>
         <translation>%1 %2 usa un vecchio livello di crittografia.</translation>
+    </message>
+    <message>
+        <source>%1 %2 will be informed of your changes.</source>
+        <translation>%1 %2 sarà informato dei tuoi cambiamenti.</translation>
+    </message>
+    <message>
+        <source>%1 This kind of change can be temporary if the user exists and does not leave the group spontaneously.</source>
+        <translation>%1 Questo tipo di cambiamento potrebbe essere temporaneo. Se l&apos;utente esiste ancora deve lasciare il gruppo spontaneamente.</translation>
+    </message>
+    <message>
+        <source>%1 %2 wants to remove you from the group chat %3. If you agree please leave the group.</source>
+        <translation>%1 %2 vuole rimuoverti dalla conversazione %3. Se sei d&apos;accordo lascia il gruppo.</translation>
+    </message>
+    <message>
+        <source>%1 You have left group chat %2.</source>
+        <translation>%1 Hai lasciato il gruppo %2.</translation>
+    </message>
+    <message>
+        <source>You are not a member of group %1. Your messages will be not shown.</source>
+        <translation>Non sei membro del gruppo %1. I tuoi messaggi non saranno mostrati.</translation>
     </message>
 </context>
 <context>
@@ -2562,6 +2582,14 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Always open chat on new message</source>
         <translation>Apri sempre la conversazione all&apos;arrivo di un nuovo messaggio</translation>
+    </message>
+    <message>
+        <source>You are not allowed create groups. The option has been disabled by your system administrator.</source>
+        <translation>Non sei abilitato a creare i gruppi. L&apos;opzione è stata disabilitata dal tuo amministratore di sistema.</translation>
+    </message>
+    <message>
+        <source>You are not allowed modify groups. The option has been disabled by your system administrator.</source>
+        <translation>Non sei abilitato a modificare i gruppi. L&apos;opzione è stata disabilitata dal tuo amministratore di sistema.</translation>
     </message>
 </context>
 <context>

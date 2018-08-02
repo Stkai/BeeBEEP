@@ -174,7 +174,7 @@ bool Core::changeGroupChat( const User& u, const Group& g )
       {
         if( u.isLocal() )
         {
-          sHtmlMsg = tr( "%1 %2 will be informed of you changes." ).arg( IconManager::instance().toHtml( "group-remove.png", "*G*" ) ).arg( old_user.name() );
+          sHtmlMsg = tr( "%1 %2 will be informed of your changes." ).arg( IconManager::instance().toHtml( "group-remove.png", "*G*" ) ).arg( old_user.name() );
           c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
           chat_changed = true;
           sendMessageToLocalNetwork( old_user, group_remove_user_message );
