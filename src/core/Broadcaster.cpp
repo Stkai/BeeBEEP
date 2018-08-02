@@ -40,7 +40,8 @@ Broadcaster::Broadcaster( QObject *parent )
 
 bool Broadcaster::startBroadcastServer()
 {
-  if( !mp_receiverSocket->bind( Settings::instance().hostAddressToListen(), Settings::instance().defaultBroadcastPort() ) )
+  if( !mp_receiverSocket->bind( Settings::instance().hostAddressToListen(), Settings::instance().defaultBroadcastPort(),
+                                QUdpSocket::ShareAddress | QUdpSocket::ReuseAddressHint ) )
   {
     qWarning() << "Broadcaster cannot bind the broadcast port" << Settings::instance().defaultBroadcastPort();
     return false;

@@ -102,6 +102,8 @@ Settings::Settings()
   m_useOnlyTextEmoticons = false;
   m_disablePrivateChats = false;
   m_userRecognitionMethod = RecognizeByDefaultMethod;
+  m_canAddMembersToGroup = true;
+  m_canRemoveMembersFromGroup = true;
   /* Default RC end */
 
   m_emoticonSizeInEdit = 18;
@@ -323,6 +325,8 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "UseOnlyTextEmoticons", m_useOnlyTextEmoticons );
     sets->setValue( "DisablePrivateChats", m_disablePrivateChats );
     sets->setValue( "UserRecognitionMethod", m_userRecognitionMethod );
+    sets->setValue( "AllowAddMembersToGroup", m_canAddMembersToGroup );
+    sets->setValue( "AllowRemoveMembersFromGroup", m_canRemoveMembersFromGroup );
     sets->endGroup();
     sets->sync();
     qDebug() << "RC default configuration file created in" << qPrintable( Bee::convertToNativeFolderSeparator( sets->fileName() ) );
@@ -404,6 +408,10 @@ void Settings::loadRcFile()
   m_disablePrivateChats = sets->value( "DisablePrivateChats", m_disablePrivateChats ).toBool();
   int user_recognition_method = sets->value( "UserRecognitionMethod", -1 ).toInt();
   setUserRecognitionMethod( (user_recognition_method < 0 && trust_system_account) ? RecognizeByAccount : user_recognition_method );
+
+  m_canAddMembersToGroup = sets->value( "AllowAddMembersToGroup", m_canAddMembersToGroup ).toBool();
+  m_canRemoveMembersFromGroup = sets->value( "AllowRemoveMembersFromGroup", m_canRemoveMembersFromGroup ).toBool();
+
   sets->endGroup();
   QStringList key_list = sets->allKeys();
   foreach( QString key, key_list )

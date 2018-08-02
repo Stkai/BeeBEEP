@@ -195,10 +195,7 @@ void GuiSavedChatList::selectBackgroundColor()
 
 void GuiSavedChatList::updateBackground()
 {
-  QString w_stylesheet = QString( "#GuiCustomList { background: %1 url(%2);"
-                           "background-repeat: no-repeat;"
-                           "background-position: bottom center;"
-                           "color: black; }" ).arg( Settings::instance().savedChatListBackgroundColor(),
+  QString w_stylesheet = QString( BEE_GUICUSTOMLIST_STYLESHEET ).arg( Settings::instance().savedChatListBackgroundColor(),
                                                     IconManager::instance().iconPath( "saved-chat-list.png" ) );
   mp_twSavedChatList->setStyleSheet( w_stylesheet );
 }

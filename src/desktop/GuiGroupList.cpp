@@ -294,10 +294,7 @@ void GuiGroupList::selectBackgroundColor()
 
 void GuiGroupList::updateBackground()
 {
-  QString w_stylesheet = QString( "#GuiCustomList { background: %1 url(%2);"
-                          "background-repeat: no-repeat;"
-                          "background-position: bottom center;"
-                          "color: black; }" ).arg( Settings::instance().groupListBackgroundColor(),
+  QString w_stylesheet = QString( BEE_GUICUSTOMLIST_STYLESHEET ).arg( Settings::instance().groupListBackgroundColor(),
                                                    IconManager::instance().iconPath( "group-list.png" ) );
   mp_twGroupList->setStyleSheet( w_stylesheet );
 }

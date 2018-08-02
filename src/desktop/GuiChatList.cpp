@@ -244,10 +244,7 @@ void GuiChatList::selectBackgroundColor()
 
 void GuiChatList::updateBackground()
 {
-  QString w_stylesheet = QString( "#GuiCustomList { background: %1 url(%2);"
-                           "background-repeat: no-repeat;"
-                           "background-position: bottom center;"
-                           "color: black; }" ).arg( Settings::instance().chatListBackgroundColor(),
+  QString w_stylesheet = QString( BEE_GUICUSTOMLIST_STYLESHEET ).arg( Settings::instance().chatListBackgroundColor(),
                                                     IconManager::instance().iconPath( "chat-list.png" ) );
   mp_twChatList->setStyleSheet( w_stylesheet );
 }

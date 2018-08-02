@@ -35,7 +35,7 @@ class GuiRefusedChat : public QDialog, private Ui::GuiRefusedChatDialog
 public:
   explicit GuiRefusedChat( QWidget *parent = 0 );
 
-  void loadRefusedChats();
+  int loadRefusedChats();
 
   inline const QList<ChatRecord>& refusedChats() const;
 

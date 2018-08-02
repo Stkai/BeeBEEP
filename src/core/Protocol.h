@@ -60,6 +60,7 @@ public:
   Message chatReadMessage( const Chat& );
   Message groupChatRequestMessage_obsolete( const Chat&, const User& to_user );
   Message groupChatRequestMessage( const Chat&, const User& to_user );
+  Message groupChatRemoveUserMessage( const Chat& );
   Message groupChatRefuseMessage( const Chat& );
   Message groupChatRefuseMessage( const ChatMessageData& );
   QStringList userPathsFromGroupRequestMessage_obsolete( const Message& ) const;

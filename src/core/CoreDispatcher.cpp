@@ -59,6 +59,13 @@ void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
   {
     qWarning() << "User" << from_user_id << "is not present in the chat" << c.id() << c.name() << "... drop message:";
     qWarning() << m.text();
+    if( c.isGroup() )
+    {
+      QString alert_msg = tr( "You are not a member of group %1. Your messages will be not shown." ).arg( c.name() );
+      Chat user_private_chat = ChatManager::instance().privateChatForUser( from_user_id );
+      if( user_private_chat.isValid() )
+        sendChatMessage( user_private_chat.id(), alert_msg );
+    }
     return;
   }
 

@@ -78,13 +78,14 @@ void GuiRefusedChat::loadRefusedChatsInList()
   }
 }
 
-void GuiRefusedChat::loadRefusedChats()
+int GuiRefusedChat::loadRefusedChats()
 {
   if( !m_refusedChats.isEmpty() )
     m_refusedChats.clear();
 
   m_refusedChats = ChatManager::instance().refusedChats();
   loadRefusedChatsInList();
+  return m_refusedChats.size();
 }
 
 void GuiRefusedChat::saveAndClose()

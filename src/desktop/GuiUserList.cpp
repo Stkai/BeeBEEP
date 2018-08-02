@@ -319,10 +319,7 @@ void GuiUserList::selectBackgroundColor()
 
 void GuiUserList::updateBackground()
 {
-  QString w_stylesheet = QString( "#GuiCustomList { background: %1 url(%2);"
-                           "background-repeat: no-repeat;"
-                           "background-position: bottom center;"
-                           "color: black; }" ).arg( Settings::instance().userListBackgroundColor(),
+  QString w_stylesheet = QString( BEE_GUICUSTOMLIST_STYLESHEET ).arg( Settings::instance().userListBackgroundColor(),
                                                     IconManager::instance().iconPath( "user-list.png" ) );
   mp_twUsers->setStyleSheet( w_stylesheet );
 }

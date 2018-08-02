@@ -107,6 +107,9 @@ public:
   inline bool disableSendMessage() const;
   inline bool useEasyConnection() const;
 
+  inline bool canAddMembersToGroup() const;
+  inline bool canRemoveMembersFromGroup() const;
+
   QString dnsRecord() const;
   inline bool useMulticastDns() const;
   inline void setUseMulticastDns( bool );
@@ -540,6 +543,9 @@ private:
   bool m_disablePrivateChats;
   bool m_disableFileSharing;
   int m_userRecognitionMethod;
+
+  bool m_canAddMembersToGroup;
+  bool m_canRemoveMembersFromGroup;
 
   // Ini
   bool m_firstTime;
@@ -1062,5 +1068,7 @@ inline const QString& Settings::chatDefaultUserNameColor() const { return m_chat
 inline int Settings::maxChatsToOpenAfterSendingMessage() const { return m_maxChatsToOpenAfterSendingMessage; }
 inline void Settings::setShowUsersOnConnection( bool new_value ) { m_showUsersOnConnection = new_value; }
 inline bool Settings::showUsersOnConnection() const { return m_showUsersOnConnection; }
+inline bool Settings::canAddMembersToGroup() const { return m_canAddMembersToGroup; }
+inline bool Settings::canRemoveMembersFromGroup() const { return m_canRemoveMembersFromGroup; }
 
-#endif // BEEBEEP_SETTINGS_H
+#endif // BEEBEEP_SETTINGS_

@@ -900,6 +900,7 @@ void GuiMain::createMenus()
   mp_actSelectEmoticonSourcePath = mp_menuChatSettings->addAction( IconManager::instance().icon( "emoticon.png" ), tr( "Select emoticon theme" ) + QString( "..." ), this, SLOT( selectEmoticonSourcePath() ) );
   mp_actSelectEmoticonSourcePath->setEnabled( !Settings::instance().useNativeEmoticons() );
   mp_menuChatSettings->addAction( IconManager::instance().icon( "dictionary.png" ), tr( "Dictionary" ) + QString( "..." ), this, SLOT( selectDictionatyPath() ) );
+  mp_menuChatSettings->addSeparator();
   mp_menuChatSettings->addAction( IconManager::instance().icon( "refused-chat.png" ), tr( "Blocked chats" ) + QString( "..." ), this, SLOT( showRefusedChats() ) );
 
   mp_menuFileTransferSettings = new QMenu( tr( "File transfer" ), this );
@@ -2589,6 +2590,13 @@ void GuiMain::playBeep()
 
 void GuiMain::createGroupChat()
 {
+  if( !Settings::instance().canAddMembersToGroup() )
+  {
+    QMessageBox::information( this, Settings::instance().programName(),
+                              tr( "You are not allowed create groups. The option has been disabled by your system administrator." ), tr( "Ok" ) );
+    return;
+  }
+
   GuiCreateGroup gcg;
   gcg.loadData();
   gcg.setModal( true );
@@ -2624,6 +2632,13 @@ void GuiMain::editGroupChat( VNumber chat_id )
   Chat c = ChatManager::instance().chat( chat_id );
   if( !c.isValid() )
     return;
+
+  if( !Settings::instance().canAddMembersToGroup() && !Settings::instance().canRemoveMembersFromGroup() )
+  {
+    QMessageBox::information( this, Settings::instance().programName(),
+                              tr( "You are not allowed modify groups. The option has been disabled by your system administrator." ), tr( "Ok" ) );
+    return;
+  }
 
   GuiCreateGroup gcg( activeWindow() );
   gcg.init( c.group() );
@@ -3917,12 +3932,16 @@ void GuiMain::showWorkgroups()
 void GuiMain::showRefusedChats()
 {
   GuiRefusedChat grc;
-  grc.loadRefusedChats();
+  int previous_refused_chats = grc.loadRefusedChats();
   grc.setModal( true );
   grc.setSizeGripEnabled( true );
   grc.show();
   if( grc.exec() == QDialog::Accepted )
+  {
     showMessage( tr( "%1 blocked chats" ).arg( Settings::instance().refusedChats().size() ), 5000 );
+    if( previous_refused_chats != ChatManager::instance().refusedChats().size() )
+      showRestartConnectionAlertMessage();
+  }
 }
 
 void GuiMain::selectIconSourcePath()

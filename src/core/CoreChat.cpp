@@ -164,12 +164,22 @@ bool Core::changeGroupChat( const User& u, const Group& g )
     c.setName( g.name() );
   }
 
+  Message group_remove_user_message = Protocol::instance().groupChatRemoveUserMessage( c );
+
   foreach( User old_user, group_old_members.toList() )
   {
     if( !old_user.isLocal() )
     {
       if( !group_new_members.has( old_user.id() ) )
       {
+        if( u.isLocal() )
+        {
+          sHtmlMsg = tr( "%1 %2 will be informed of you changes." ).arg( IconManager::instance().toHtml( "group-remove.png", "*G*" ) ).arg( old_user.name() );
+          c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
+          chat_changed = true;
+          sendMessageToLocalNetwork( old_user, group_remove_user_message );
+        }
+
         user_removed_string_list << old_user.name();
         c.removeUser( old_user.id() );
       }
@@ -182,6 +192,9 @@ bool Core::changeGroupChat( const User& u, const Group& g )
       sHtmlMsg = tr( "%1 You have removed members: %2." ).arg( IconManager::instance().toHtml( "group-remove.png", "*G*" ), Bee::stringListToTextString( user_removed_string_list ) );
     else
       sHtmlMsg = tr( "%1 %2 has removed members: %3." ).arg( IconManager::instance().toHtml( "group-remove.png", "*G*" ), u.name(), Bee::stringListToTextString( user_removed_string_list ) );
+    c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
+
+    sHtmlMsg = tr( "%1 This kind of change can be temporary if the user exists and does not leave the group spontaneously." ).arg( IconManager::instance().toHtml( "group-remove.png", "*G*" ) );
     c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
     chat_changed = true;
   }
@@ -273,6 +286,24 @@ bool Core::removeUserFromGroupChat( const User& u, const QString& chat_private_i
   }
 }
 
+bool Core::removeLocalUserFromGroupChatByOther( const User& other_user, const QString& chat_private_id )
+{
+  if( other_user.isLocal() )
+    return false;
+
+  Chat c = ChatManager::instance().findChatByPrivateId( chat_private_id, true, ID_INVALID );
+  if( !c.isValid() )
+    return false;
+  if( !c.isGroup() )
+    return false;
+  QString sHtmlMsg = tr( "%1 %2 wants to remove you from the group chat %3. If you agree please leave the group." ).arg( IconManager::instance().toHtml( "group-remove.png", "*G*" ), other_user.name(), QString( "<b>%1</b>" ).arg( c.name() ) );
+  c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
+  ChatManager::instance().setChat( c );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, other_user.id(), sHtmlMsg, DispatchToChat, ChatMessage::System );
+  emit chatChanged( c );
+  return true;
+}
+
 bool Core::removeChat( VNumber chat_id, bool save_chat_messages )
 {
   Chat c = ChatManager::instance().chat( chat_id );
@@ -301,13 +332,16 @@ bool Core::removeChat( VNumber chat_id, bool save_chat_messages )
   emit chatRemoved( c );
   if( c.isGroup() )
   {
-    qDebug() << "Group chat removed:" << qPrintable( c.name() );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "%1 You have left group chat %2." )
+                           .arg( IconManager::instance().toHtml( "group-remove.png", "*G*" ) ).arg( QString( "<b>%1</b>" ).arg( c.name() ) ),
+                           DispatchToChat, ChatMessage::System );
+    qDebug() << "You have left group chat" << qPrintable( c.name() );
     Settings::instance().setNotificationEnabledForGroup( c.privateId(), false ); // reset notification in settings
     sendRefuseMessageToGroupChat( c );
     ChatManager::instance().addToRefusedChat( ChatRecord( c.name(), c.privateId() ) );
   }
   else
-    qDebug() << "Private chat removed:" << qPrintable( c.name() );
+    qDebug() << "You have left private chat with" << qPrintable( c.name() );
 
   return true;
 }

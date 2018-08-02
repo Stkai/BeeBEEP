@@ -88,13 +88,14 @@ void GuiCreateGroup::loadData()
     if( m_group.hasUser( u.id() ) )
     {
       item->setCheckState( 0, Qt::Checked );
-      item->setDisabled( true );
+      item->setDisabled( !Settings::instance().canRemoveMembersFromGroup() );
     }
     else
+    {
       item->setCheckState( 0, Qt::Unchecked );
+      item->setDisabled( !Settings::instance().canAddMembersToGroup() );
+    }
   }
-
-
 }
 
 void GuiCreateGroup::checkAndClose()

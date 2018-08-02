@@ -981,6 +981,18 @@ Message Protocol::groupChatRequestMessage( const Chat& c, const User& to_user )
   return m;
 }
 
+Message Protocol::groupChatRemoveUserMessage( const Chat& c )
+{
+  Message m( Message::Group, newId(), "" );
+  m.addFlag( Message::Delete );
+  ChatMessageData cmd;
+  cmd.setGroupId( c.privateId() );
+  cmd.setGroupName( c.name() );
+  cmd.setGroupLastModified( c.lastModified() );
+  m.setData( chatMessageDataToString( cmd ) );
+  return m;
+}
+
 QList<UserRecord> Protocol::userRecordsFromGroupRequestMessage( const Message& m ) const
 {
   QList<UserRecord> user_records;

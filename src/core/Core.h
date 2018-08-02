@@ -264,6 +264,7 @@ protected:
   void sendLocalUserHasReadChatMessage( const Chat& );
   void addChatHeader( Chat* );
   bool removeUserFromGroupChat( const User&, const QString& chat_private_id );
+  bool removeLocalUserFromGroupChatByOther( const User& other_user, const QString& chat_private_id );
   int archiveAllChats();
 
   /* CoreDispatcher */

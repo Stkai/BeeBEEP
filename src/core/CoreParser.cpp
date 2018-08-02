@@ -390,6 +390,10 @@ void Core::parseGroupMessage( const User& u, const Message& m )
   {
     removeUserFromGroupChat( u, cmd.groupId() );
   }
+  else if( m.hasFlag( Message::Delete ) )
+  {
+    removeLocalUserFromGroupChatByOther( u, cmd.groupId() );
+  }
   else
     qWarning() << "Invalid flag found in group message from" << qPrintable( u.path() );
 }

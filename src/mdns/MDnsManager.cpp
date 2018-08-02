@@ -25,6 +25,7 @@
 #include "MDnsBrowser.h"
 #include "MDnsRegister.h"
 #include "MDnsResolver.h"
+#include "Settings.h"
 
 
 MDnsManager::MDnsManager( QObject* parent )
@@ -134,6 +135,14 @@ void MDnsManager::addNetworkAddress( const NetworkAddress& na )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << qPrintable( objectName() ) << "is not active and skips the user found in" << qPrintable( na.toString() );
+#endif
+    return;
+  }
+
+  if( na.isIPv6Address() && !Settings::instance().useIPv6() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << qPrintable( objectName() ) << "skips user record with IPV6 address" << qPrintable( na.toString() );
 #endif
     return;
   }

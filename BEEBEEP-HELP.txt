@@ -53,6 +53,8 @@ UserRecognitionMethod=[integer] 0: RecognizeByDefaultMethod      (default=0) [4.
                                 1: RecognizeByAccountAndDomain
                                 2: RecognizeByAccount
                                 3: RecognizeByNickname
+AllowAddMembersToGroup=[true/false] allow current user to create and add members to group (default=true) [5.4.0]
+AllowRemoveMembersFromGroup=[true/false] allow current user to remove members to group (default=true) [5.4.0]
 
 [Groups]
 TrustNickname=[true/false] if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect (default=true) [1.0.0] [obsolete in 4.0.0]

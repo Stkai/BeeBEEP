@@ -11,3 +11,5 @@ Signature=
 UseOnlyTextEmoticons=false
 DisablePrivateChats=false
 UserRecognitionMethod=0
+AllowAddMembersToGroup=true
+AllowRemoveMembersFromGroup=true
