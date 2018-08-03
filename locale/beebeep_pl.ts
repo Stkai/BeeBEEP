@@ -195,7 +195,7 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="177"/>
         <source>%1 %2 will be informed of your changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 zostanie poinformowany o Twoich zmianach.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="192"/>
@@ -210,7 +210,7 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="197"/>
         <source>%1 This kind of change can be temporary if the user exists and does not leave the group spontaneously.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Taka zmiana może być tymczasowa, jeśli użytkownik istnieje i sam nie opuści grupy.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="215"/>
@@ -237,7 +237,7 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="299"/>
         <source>%1 %2 wants to remove you from the group chat %3. If you agree please leave the group.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 chce usunąć Cię z czatu grupowego %3. Jeśli się zgadzasz opuść grupę.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="318"/>
@@ -247,7 +247,7 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="335"/>
         <source>%1 You have left group chat %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Opuściłeś czat grupowy %2.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="366"/>
@@ -597,7 +597,7 @@
     <message>
         <location filename="../src/core/CoreDispatcher.cpp" line="64"/>
         <source>You are not a member of group %1. Your messages will be not shown.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie jesteś członkiem grupy %1. Twoje wiadomości nie zostaną wyświetlone.</translation>
     </message>
 </context>
 <context>
@@ -1557,41 +1557,41 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="379"/>
         <source>Qt libraries have a bug on saving the window&apos;s state.</source>
-        <translation type="unfinished"></translation>
+        <translation>Biblioteki Qt działają niepoprawnie przy zachowywaniu stanu okna.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="380"/>
         <source>If you have layout problem please save only geometry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jeśli masz problem z układem, zapisz tylko wymiary.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="381"/>
         <source>Save all</source>
-        <translation type="unfinished"></translation>
+        <translation>Zachowaj wszystko</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="381"/>
         <source>Save only geometry</source>
-        <translation type="unfinished"></translation>
+        <translation>Zachowaj tylko wymiary</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="381"/>
         <source>Cancel</source>
-        <translation type="unfinished">Anuluj</translation>
+        <translation>Anuluj</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="399"/>
         <source>Window geometry saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Wymiary okna zachowane</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="401"/>
         <source>Window geometry and state saved</source>
-        <translation type="unfinished">Wymiary i stan okno zachowane</translation>
+        <translation>Wymiary i stan okna zachowane</translation>
     </message>
     <message>
         <source>The window geometry and state are saved</source>
-        <translation type="vanished">Stan i wymiary okna zachowane</translation>
+        <translation>Stan i wymiary okna zachowane</translation>
     </message>
 </context>
 <context>
@@ -2376,12 +2376,12 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3739"/>
         <source>Qt libraries have a bug on saving the window&apos;s state.</source>
-        <translation type="unfinished"></translation>
+        <translation>Biblioteki Qt działają niepoprawnie przy zachowywaniu stanu okna.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3740"/>
         <source>If you have layout problem please save only geometry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jeśli masz problem z układem, zapisz tylko wymiary.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3842"/>
@@ -2621,7 +2621,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="872"/>
         <source>Always open chat on new message</source>
-        <translation type="unfinished"></translation>
+        <translation>Zawsze otwieraj czat przy nowej wiadomości</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="876"/>
@@ -2671,7 +2671,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1019"/>
         <source>Reset geometry of all windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Zresetuj wymiary wszystkich okien</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1189"/>
@@ -2856,7 +2856,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2591"/>
         <source>You are not allowed create groups. The option has been disabled by your system administrator.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie możesz tworzyć grup. Taka możliwość została zablokowana przez administratora systemu.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2612"/>
@@ -2866,7 +2866,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2634"/>
         <source>You are not allowed modify groups. The option has been disabled by your system administrator.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie możesz modyfikować grup. Taka możliwość została zablokowana przez administratora systemu.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2851"/>
@@ -2892,27 +2892,27 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3741"/>
         <source>Save all</source>
-        <translation type="unfinished"></translation>
+        <translation>Zachowaj wszystko</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3741"/>
         <source>Save only geometry</source>
-        <translation type="unfinished"></translation>
+        <translation>Zachowaj tylko wymiary</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3757"/>
         <source>Window geometry saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Wymiary okna zachowane</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3795"/>
         <source>Do you really want to reset window&apos;s geometry?</source>
-        <translation type="unfinished"></translation>
+        <translation>Czy naprawdę chcesz zresetować wymiary okna?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3804"/>
         <source>Geometry of all windows has been reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Wymiary wszystkich okien zostały zresetowane</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4023"/>

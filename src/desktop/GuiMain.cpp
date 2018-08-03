@@ -912,7 +912,6 @@ void GuiMain::createMenus()
 
   mp_menuFileTransferSettings->addSeparator();
   mp_menuExistingFile = mp_menuFileTransferSettings->addMenu( tr( "If a file already exists" ) + QString( "..." ) );
-  mp_menuExistingFile->setIcon( IconManager::instance().icon( "file-add.png" ) );
   mp_actGroupExistingFile = new QActionGroup( this );
   mp_actGroupExistingFile->setExclusive( true );
   mp_actOverwriteExistingFile = mp_menuExistingFile->addAction( tr( "Overwrite" ) );
