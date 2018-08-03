@@ -164,5 +164,6 @@
         <file>images/disconnection.png</file>
         <file>images/message-to-many.png</file>
         <file>images/multicast-group.png</file>
+        <file>images/reset-window.png</file>
     </qresource>
 </RCC>

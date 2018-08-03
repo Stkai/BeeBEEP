@@ -79,7 +79,6 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
   actViewPresetMessageList->setToolTip( tr( "Show the preset messages panel" ) );
   mp_barChat->insertAction( mp_barChat->actions().first(), actViewPresetMessageList );
   mp_actSaveWindowGeometry = mp_barChat->addAction( IconManager::instance().icon( "save-window.png" ), tr( "Save window's geometry" ), this, SLOT( saveGeometryAndState() ) );
-  mp_dockPresetMessageList->hide();
 
   mp_dockEmoticons = new QDockWidget( tr( "Emoticons" ), this );
   mp_dockEmoticons->setObjectName( "GuiDockEmoticons" );
@@ -94,7 +93,6 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
   mp_actViewEmoticons->setText( tr( "Show the emoticon panel" ) );
   mp_actViewEmoticons->setVisible( !Settings::instance().useOnlyTextEmoticons() );
   mp_barChat->insertAction( mp_barChat->actions().first(), mp_actViewEmoticons );
-  mp_dockEmoticons->hide();
 
   setCentralWidget( mp_chat );
   statusBar();
@@ -265,16 +263,18 @@ void GuiFloatingChat::checkWindowFlagsAndShow()
   Bee::setWindowStaysOnTop( this, Settings::instance().stayOnTop() );
   setAttribute( Qt::WA_ShowWithoutActivating );
 
-  if( !isVisible() )
-    show();
-
-  if( !Settings::instance().floatingChatState().isEmpty() )
-    restoreState( Settings::instance().floatingChatState() );
-
-  if( !Settings::instance().floatingChatGeometry().isEmpty() )
-    restoreGeometry( Settings::instance().floatingChatGeometry() );
-  else
+  if( Settings::instance().floatingChatGeometry().isEmpty() )
     resize( 600, 400 );
+  else
+    restoreGeometry( Settings::instance().floatingChatGeometry() );
+
+  if( Settings::instance().floatingChatState().isEmpty() )
+  {
+    mp_dockEmoticons->hide();
+    mp_dockPresetMessageList->hide();
+  }
+  else
+    restoreState( Settings::instance().floatingChatState() );
 
   QSplitter* chat_splitter = mp_chat->chatSplitter();
   if( Settings::instance().floatingChatSplitterState().isEmpty() )
@@ -287,6 +287,9 @@ void GuiFloatingChat::checkWindowFlagsAndShow()
   }
   else
     chat_splitter->restoreState( Settings::instance().floatingChatSplitterState() );
+
+  if( !isVisible() )
+    show();
 
   mp_chat->ensureLastMessageVisible();
 }
@@ -370,12 +373,32 @@ void GuiFloatingChat::saveGeometryAndState()
 {
   if( isVisible() )
   {
+    QByteArray ba_state = saveState();
+#if QT_VERSION == 0x050906
+    int ret_code = QMessageBox::warning( this, Settings::instance().programName(),
+                                         tr( "Qt libraries have a bug on saving the window's state. "
+                                         "If you have layout problem please reset geometry in the settings menu." ),
+                                         tr( "Save all" ), tr( "Save only geometry" ), tr( "Cancel" ), 1, 2 );
+    switch( ret_code )
+    {
+    case 0:
+      break;
+    case 1:
+      ba_state = QByteArray();
+      break;
+    default:
+      return;
+    }
+#endif
     Settings::instance().setFloatingChatGeometry( saveGeometry() );
-    Settings::instance().setFloatingChatState( saveState() );
+    Settings::instance().setFloatingChatState( ba_state );
     QSplitter* chat_splitter = mp_chat->chatSplitter();
     Settings::instance().setFloatingChatSplitterState( chat_splitter->saveState() );
     Settings::instance().save();
-    statusBar()->showMessage( tr( "The window geometry and state are saved" ), 5000 );
+    if( ba_state.isEmpty() )
+      statusBar()->showMessage( tr( "Window geometry saved" ), 5000 );
+    else
+      statusBar()->showMessage( tr( "Window geometry and state saved" ), 5000 );
   }
   else
     qWarning() << "Unable to save floating chat geometry and state (window is not visible)";

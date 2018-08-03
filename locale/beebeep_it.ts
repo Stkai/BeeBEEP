@@ -1265,7 +1265,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>The window geometry and state are saved</source>
-        <translation>Le dimensioni e lo stato della finestra sono stati salvati</translation>
+        <translation type="vanished">Le dimensioni e lo stato della finestra sono stati salvati</translation>
     </message>
     <message>
         <source>Show the bar of members</source>
@@ -1290,6 +1290,30 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Chat with all users</source>
         <translation>Parla con tutti gli utenti</translation>
+    </message>
+    <message>
+        <source>Qt libraries have a bug on saving the window&apos;s state. If you have layout problem please reset geometry in the settings menu.</source>
+        <translation>Le librerie Qt hanno un bug nel salvare lo stato della finestra. Se hai problemi di layout ripristina la geometria nel menu delle impostazioni.</translation>
+    </message>
+    <message>
+        <source>Save all</source>
+        <translation>Salva tutto</translation>
+    </message>
+    <message>
+        <source>Save only geometry</source>
+        <translation>Salva solo le dimensioni</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Annulla</translation>
+    </message>
+    <message>
+        <source>Window geometry saved</source>
+        <translation>Le dimensioni della finestra sono state salvate</translation>
+    </message>
+    <message>
+        <source>Window geometry and state saved</source>
+        <translation>Le dimensioni e lo stato della finestra sono stati salvati</translation>
     </message>
 </context>
 <context>
@@ -2590,6 +2614,34 @@ Inserisci un nome differente.</translation>
     <message>
         <source>You are not allowed modify groups. The option has been disabled by your system administrator.</source>
         <translation>Non sei abilitato a modificare i gruppi. L&apos;opzione è stata disabilitata dal tuo amministratore di sistema.</translation>
+    </message>
+    <message>
+        <source>Reset geometry of all windows</source>
+        <translation>Ripristina le dimensioni iniziali di tutte le finestre</translation>
+    </message>
+    <message>
+        <source>Do you really want to reset window&apos;s geometry?</source>
+        <translation>Vuoi ripristinare le dimensioni iniziali di tutte le finestre?</translation>
+    </message>
+    <message>
+        <source>Geometry of all windows has been reset</source>
+        <translation>Le dimensioni iniziali di tutte le finestre sono state ripristinate</translation>
+    </message>
+    <message>
+        <source>Qt libraries have a bug on saving the window&apos;s state. If you have layout problem please reset geometry in the settings menu.</source>
+        <translation>Le librerie Qt hanno un bug nel salvare lo stato della finestra. Se hai problemi di layout ripristina la geometria nel menu delle impostazioni.</translation>
+    </message>
+    <message>
+        <source>Save all</source>
+        <translation>Salva tutto</translation>
+    </message>
+    <message>
+        <source>Save only geometry</source>
+        <translation>Salva solo le dimensioni</translation>
+    </message>
+    <message>
+        <source>Window geometry saved</source>
+        <translation>Le dimensioni della finestra sono state salvate</translation>
     </message>
 </context>
 <context>

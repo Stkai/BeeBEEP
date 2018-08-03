@@ -232,25 +232,9 @@ void GuiMain::checkWindowFlagsAndShow()
     show();
 
   if( Settings::instance().resetGeometryAtStartup() || Settings::instance().guiGeometry().isEmpty() )
-  {
-    resize( qMax( width(), 280 ), qMin( 520, qMax( QApplication::desktop()->availableGeometry().height() - 120, 460 ) ) );
-
-#ifdef Q_OS_WIN
-    move( QApplication::desktop()->availableGeometry().width() - frameGeometry().width(),
-          QApplication::desktop()->availableGeometry().height() - frameGeometry().height() );
-#elif defined BEEBEEP_FOR_RASPBERRY_PI
-    move( QApplication::desktop()->availableGeometry().width() - frameGeometry().width(), 40 );
-#else
-    move( QApplication::desktop()->availableGeometry().width() - frameGeometry().width(), 0 );
-#endif
-    mp_dockFileTransfers->setVisible( false );
-  }
+    resetGeometryAndState();
   else
-  {
-    if( !Settings::instance().guiState().isEmpty() )
-      restoreState( Settings::instance().guiState() );
-    restoreGeometry( Settings::instance().guiGeometry() );
-  }
+    restoreGeometryAndState();
 
   checkViewActions();
 
@@ -364,8 +348,17 @@ void GuiMain::closeEvent( QCloseEvent* e )
   }
 
   if( Settings::instance().saveGeometryOnExit() )
+#if QT_VERSION == 0x050906
+  {
+    if( isVisible() )
+    {
+      Settings::instance().setGuiGeometry( saveGeometry() );
+      Settings::instance().save();
+    }
+  }
+#else
     saveGeometryAndState();
-
+#endif
   QSettings* sets = Settings::instance().objectSettings();
   sets->deleteLater();
 
@@ -1021,8 +1014,9 @@ void GuiMain::createMenus()
 #endif
 
   mp_menuSettings->addSeparator();
-  mp_actSaveWindowGeometry = mp_menuSettings->addAction( IconManager::instance().icon( "save-window.png" ), tr( "Save window's geometry" ), this, SLOT( saveGeometryAndState() ) );
+  mp_actSaveWindowGeometry = mp_menuSettings->addAction( IconManager::instance().icon( "save-window.png" ), tr( "Save window's geometry" ), this, SLOT( askSaveGeometryAndState() ) );
   mp_actSaveWindowGeometry->setDisabled( Settings::instance().resetGeometryAtStartup() );
+  mp_menuSettings->addAction( IconManager::instance().icon( "reset-window.png" ), tr( "Reset geometry of all windows" ), this, SLOT( askResetGeometryAndState() ) );
 
   /* User List Menu */
   mp_menuUserList = new QMenu( tr( "Options" ), this );
@@ -1230,6 +1224,7 @@ void GuiMain::createMainWidgets()
   mp_actViewFileTransfer->setIcon( IconManager::instance().icon( "file-transfer.png" ) );
   mp_actViewFileTransfer->setText( tr( "Show the file transfer panel" ) );
   mp_actViewFileTransfer->setData( 99 );
+  mp_dockFileTransfers->hide();
 }
 
 void GuiMain::startExternalApplicationFromActionData()
@@ -3731,7 +3726,82 @@ void GuiMain::saveGeometryAndState()
     Settings::instance().setGuiGeometry( saveGeometry() );
     Settings::instance().setGuiState( saveState() );
     Settings::instance().save();
-    showMessage( tr( "Window geometry and state saved" ), 3000 );
+  }
+}
+
+void GuiMain::askSaveGeometryAndState()
+{
+  if( isVisible() )
+  {
+    QByteArray ba_state = saveState();
+#if QT_VERSION == 0x050906
+    int ret_code = QMessageBox::warning( this, Settings::instance().programName(),
+                                         tr( "Qt libraries have a bug on saving the window's state. "
+                                         "If you have layout problem please reset geometry in the settings menu." ),
+                                         tr( "Save all" ), tr( "Save only geometry" ), tr( "Cancel" ), 1, 2 );
+    switch( ret_code )
+    {
+    case 0:
+      break;
+    case 1:
+      ba_state = QByteArray();
+      break;
+    default:
+      return;
+    }
+ #endif
+    Settings::instance().setGuiGeometry( saveGeometry() );
+    Settings::instance().setGuiState( ba_state );
+    Settings::instance().save();
+    if( ba_state.isEmpty() )
+      showMessage( tr( "Window geometry saved" ), 3000 );
+    else
+      showMessage( tr( "Window geometry and state saved" ), 3000 );
+  }
+}
+
+void GuiMain::restoreGeometryAndState()
+{
+  restoreGeometry( Settings::instance().guiGeometry() );
+  if( !Settings::instance().guiState().isEmpty() )
+    restoreState( Settings::instance().guiState() );
+}
+
+void GuiMain::resetGeometryAndState()
+{
+  if( mp_dockFileTransfers->isVisible() )
+    mp_dockFileTransfers->hide();
+  resize( qMax( width(), 280 ), qMin( 520, qMax( QApplication::desktop()->availableGeometry().height() - 120, 460 ) ) );
+
+#ifdef Q_OS_WIN
+  move( QApplication::desktop()->availableGeometry().width() - frameGeometry().width(),
+        QApplication::desktop()->availableGeometry().height() - frameGeometry().height() );
+#elif defined BEEBEEP_FOR_RASPBERRY_PI
+  move( QApplication::desktop()->availableGeometry().width() - frameGeometry().width(), 40 );
+#elif defined Q_OS_MAC
+  move( QApplication::desktop()->availableGeometry().width() - frameGeometry().width() - 20, 0 );
+#else
+  move( QApplication::desktop()->availableGeometry().width() - frameGeometry().width(), 0 );
+#endif
+
+  if( !Settings::instance().guiGeometry().isEmpty() )
+    Settings::instance().setGuiGeometry( QByteArray() );
+  if( !Settings::instance().guiState().isEmpty() )
+    Settings::instance().setGuiState( QByteArray() );
+}
+
+void GuiMain::askResetGeometryAndState()
+{
+  if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to reset window's geometry?" ), tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 0 )
+  {
+    resetGeometryAndState();
+    if( !Settings::instance().floatingChatGeometry().isEmpty() )
+      Settings::instance().setFloatingChatGeometry( QByteArray() );
+    if( !Settings::instance().floatingChatState().isEmpty() )
+      Settings::instance().setFloatingChatState( QByteArray() );
+    if( !Settings::instance().floatingChatSplitterState().isEmpty() )
+      Settings::instance().setFloatingChatSplitterState( QByteArray() );
+    showMessage( tr( "Geometry of all windows has been reset" ), 3000 );
   }
 }
 

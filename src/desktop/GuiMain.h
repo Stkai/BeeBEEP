@@ -158,7 +158,8 @@ private slots:
   void onNetworkInterfaceDown();
   void onNetworkInterfaceUp();
   void onChatReadByUser( const Chat&, const User& );
-  void saveGeometryAndState();
+  void askSaveGeometryAndState();
+  void askResetGeometryAndState();
   void onChangeSettingOnExistingFile( QAction* );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   void onShareDesktopImageAvailable( const User&, const QImage&, const QString&, QRgb );
@@ -202,6 +203,9 @@ protected:
   GuiFloatingChat* createFloatingChat( const Chat& );
   void setFileTransferEnabled( bool );
   void setFileSharingEnabled( bool );
+  void saveGeometryAndState();
+  void restoreGeometryAndState();
+  void resetGeometryAndState();
 
 private:
   void setupChatConnections( GuiChat* );

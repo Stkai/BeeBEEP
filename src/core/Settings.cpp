@@ -934,6 +934,7 @@ void Settings::load()
     m_mainBarIconSize = QSize( 24, 24 );
     m_avatarIconSize = QSize( 28, 28 );
     m_previewFileDialogGeometry = "";
+    qDebug() << "The geometry has been reset at startup";
   }
   else
   {
@@ -946,6 +947,16 @@ void Settings::load()
     m_avatarIconSize = sets->value( "AvatarIconSize", QSize( 28, 28 ) ).toSize();
     m_previewFileDialogGeometry = sets->value( "PreviewFileDialogGeometry", "" ).toByteArray();
   }
+
+#if QT_VERSION == 0x050906
+  if( m_settingsVersion < 11 )
+  {
+    // Bug in restore state for QDockWidgets
+    // https://bugreports.qt.io/browse/QTBUG-68939
+    m_guiState = "";
+    m_floatingChatState = "";
+  }
+#endif
 
   m_saveGeometryOnExit = sets->value( "SaveGeometryOnExit", m_saveGeometryOnExit ).toBool();
 

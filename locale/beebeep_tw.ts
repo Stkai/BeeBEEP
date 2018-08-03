@@ -1243,11 +1243,31 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The window geometry and state are saved</source>
+        <source>Chat with all users</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Chat with all users</source>
+        <source>Qt libraries have a bug on saving the window&apos;s state. If you have layout problem please reset geometry in the settings menu.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save only geometry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">取消</translation>
+    </message>
+    <message>
+        <source>Window geometry saved</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Window geometry and state saved</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2521,6 +2541,34 @@ Please select a different name.</source>
     </message>
     <message>
         <source>You are not allowed modify groups. The option has been disabled by your system administrator.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reset geometry of all windows</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to reset window&apos;s geometry?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Geometry of all windows has been reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Qt libraries have a bug on saving the window&apos;s state. If you have layout problem please reset geometry in the settings menu.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save only geometry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Window geometry saved</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
