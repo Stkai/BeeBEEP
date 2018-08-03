@@ -40,8 +40,13 @@ Protocol::Protocol()
   : m_id( ID_START ), m_fileShareListMessage( Message::Share, ID_SHARE_MESSAGE, "" )
 {
   m_id += Random::d100();
+#if QT_VERSION == 0x050603
+  // Fixed a protocol bug in OsX Legacy version
+  m_datastreamMaxVersion = 12;
+#else
   QDataStream ds;
   m_datastreamMaxVersion = ds.version();
+#endif
   qDebug() << "Protocol has detected latest datastream version:" << m_datastreamMaxVersion;
 }
 

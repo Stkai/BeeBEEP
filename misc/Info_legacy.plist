@@ -21,7 +21,7 @@
   <key>CFBundleSignature</key>
   <string>bbip</string>
   <key>LSMinimumSystemVersion</key>
-  <string>10.10.0</string>
+  <string>10.8.0</string>
   <key>NSHumanReadableCopyright</key>
   <string>Copyright © Marco Mastroddi, All Rights Reserved</string>
   <key>CFBundleShortVersionString</key>
