@@ -1247,10 +1247,6 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Qt libraries have a bug on saving the window&apos;s state. If you have layout problem please reset geometry in the settings menu.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save all</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1268,6 +1264,14 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Window geometry and state saved</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Qt libraries have a bug on saving the window&apos;s state.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you have layout problem please save only geometry.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2556,10 +2560,6 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Qt libraries have a bug on saving the window&apos;s state. If you have layout problem please reset geometry in the settings menu.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save all</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2569,6 +2569,14 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Window geometry saved</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Qt libraries have a bug on saving the window&apos;s state.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you have layout problem please save only geometry.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

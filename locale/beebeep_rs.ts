@@ -1562,32 +1562,37 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="381"/>
-        <source>Qt libraries have a bug on saving the window&apos;s state. If you have layout problem please reset geometry in the settings menu.</source>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="379"/>
+        <source>Qt libraries have a bug on saving the window&apos;s state.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="383"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="380"/>
+        <source>If you have layout problem please save only geometry.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="381"/>
         <source>Save all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="383"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="381"/>
         <source>Save only geometry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="383"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="381"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="401"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="399"/>
         <source>Window geometry saved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="403"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="401"/>
         <source>Window geometry and state saved</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2754,11 +2759,6 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3739"/>
-        <source>Qt libraries have a bug on saving the window&apos;s state. If you have layout problem please reset geometry in the settings menu.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3741"/>
         <source>Save all</source>
         <translation type="unfinished"></translation>
@@ -2866,6 +2866,16 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3581"/>
         <source>Unable to set dictionary: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="3739"/>
+        <source>Qt libraries have a bug on saving the window&apos;s state.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="3740"/>
+        <source>If you have layout problem please save only geometry.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

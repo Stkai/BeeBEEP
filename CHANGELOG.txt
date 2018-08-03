@@ -1,13 +1,16 @@
 BEEBEEP (Secure Lan Messanger) - CHANGELOG - (c) Marco Mastroddi
 
 BeeBEEP 5.4.0
+- Patched Qt 5.9.6: window state are not restored (save only geometry option added)
 - Prevent "user collision" from same IP address
 - Fixed "slow connection bug" at startup
 - Added option "Always open chat on new message"
 - Added option to remove members from group
 - Added option "AllowAddMembersToGroup" in beebeep.rc
 - Added option "AllowRemoveMembersFromGroup" in beebeep.rc
+- Added option "Reset geometry of all windows"
 - Fixed some GUI bugs
+- On new message the BeeBEEP main icon also blinks
 
 BeeBEEP 5.2.0
 - Added "Create message" window to send one time message to many

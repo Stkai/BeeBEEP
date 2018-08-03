@@ -1558,32 +1558,37 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation>%1 nem olvasta az utolsó üzeneteket</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="381"/>
-        <source>Qt libraries have a bug on saving the window&apos;s state. If you have layout problem please reset geometry in the settings menu.</source>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="379"/>
+        <source>Qt libraries have a bug on saving the window&apos;s state.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="383"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="380"/>
+        <source>If you have layout problem please save only geometry.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="381"/>
         <source>Save all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="383"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="381"/>
         <source>Save only geometry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="383"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="381"/>
         <source>Cancel</source>
         <translation type="unfinished">Mégsem</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="401"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="399"/>
         <source>Window geometry saved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="403"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="401"/>
         <source>Window geometry and state saved</source>
         <translation type="unfinished">Ablak elrendezés és elhelyezés mentve</translation>
     </message>
@@ -2376,6 +2381,16 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation>Szeretné törölni az összes mentett állapotfelmérést?</translation>
     </message>
     <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="3739"/>
+        <source>Qt libraries have a bug on saving the window&apos;s state.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="3740"/>
+        <source>If you have layout problem please save only geometry.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3842"/>
         <source>New file from %1</source>
         <translation>Új fájl a (z) %1 -től</translation>
@@ -2880,11 +2895,6 @@ Kérjük, válassz egy másik nevet.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="3712"/>
         <source>You have new message</source>
         <translation>Új üzeneted van</translation>
-    </message>
-    <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3739"/>
-        <source>Qt libraries have a bug on saving the window&apos;s state. If you have layout problem please reset geometry in the settings menu.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3741"/>

@@ -1272,10 +1272,6 @@ Bitte wähle einen anderen Namen aus.</translation>
         <translation>Chat mit allen Benutzern starten</translation>
     </message>
     <message>
-        <source>Qt libraries have a bug on saving the window&apos;s state. If you have layout problem please reset geometry in the settings menu.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save all</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1294,6 +1290,14 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>Window geometry and state saved</source>
         <translation type="unfinished">Fenstermaße und -zustand gespeichert</translation>
+    </message>
+    <message>
+        <source>Qt libraries have a bug on saving the window&apos;s state.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you have layout problem please save only geometry.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2580,10 +2584,6 @@ Bitte wähle einen anderen Namen aus.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Qt libraries have a bug on saving the window&apos;s state. If you have layout problem please reset geometry in the settings menu.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save all</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2593,6 +2593,14 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Window geometry saved</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Qt libraries have a bug on saving the window&apos;s state.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you have layout problem please save only geometry.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -1293,7 +1293,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Qt libraries have a bug on saving the window&apos;s state. If you have layout problem please reset geometry in the settings menu.</source>
-        <translation>Le librerie Qt hanno un bug nel salvare lo stato della finestra. Se hai problemi di layout ripristina la geometria nel menu delle impostazioni.</translation>
+        <translation type="vanished">Le librerie Qt hanno un bug nel salvare lo stato della finestra. Se hai problemi di layout ripristina la geometria nel menu delle impostazioni.</translation>
     </message>
     <message>
         <source>Save all</source>
@@ -1314,6 +1314,14 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Window geometry and state saved</source>
         <translation>Le dimensioni e lo stato della finestra sono stati salvati</translation>
+    </message>
+    <message>
+        <source>Qt libraries have a bug on saving the window&apos;s state.</source>
+        <translation>Le librerie Qt hanno un bug nel salvare lo stato della finestra.</translation>
+    </message>
+    <message>
+        <source>If you have layout problem please save only geometry.</source>
+        <translation>Se hai problemi di layout salva solo le dimensioni.</translation>
     </message>
 </context>
 <context>
@@ -2629,7 +2637,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Qt libraries have a bug on saving the window&apos;s state. If you have layout problem please reset geometry in the settings menu.</source>
-        <translation>Le librerie Qt hanno un bug nel salvare lo stato della finestra. Se hai problemi di layout ripristina la geometria nel menu delle impostazioni.</translation>
+        <translation type="vanished">Le librerie Qt hanno un bug nel salvare lo stato della finestra. Se hai problemi di layout ripristina la geometria nel menu delle impostazioni.</translation>
     </message>
     <message>
         <source>Save all</source>
@@ -2642,6 +2650,14 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Window geometry saved</source>
         <translation>Le dimensioni della finestra sono state salvate</translation>
+    </message>
+    <message>
+        <source>Qt libraries have a bug on saving the window&apos;s state.</source>
+        <translation>Le librerie Qt hanno un bug nel salvare lo stato della finestra.</translation>
+    </message>
+    <message>
+        <source>If you have layout problem please save only geometry.</source>
+        <translation>Se hai problemi di layout salva solo le dimensioni.</translation>
     </message>
 </context>
 <context>

@@ -154,7 +154,7 @@ Settings::Settings()
   m_previewFileDialogImageSize = 200;
   m_maxUsersToConnectInATick = 25;
   m_showTextInModeRTL = false;
-  m_showChatsInOneWindow = true;
+  m_showChatsInOneWindow = false;
   m_homeBackgroundColor = "#f5f5f5";
   m_defaultChatBackgroundColor = "#f5f5f5";
   m_userListBackgroundColor = "#ffffff";

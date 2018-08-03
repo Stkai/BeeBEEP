@@ -3611,6 +3611,7 @@ void GuiMain::onTickEvent( int ticks )
     QIcon new_message_blinking_icon = IconManager::instance().icon( "beebeep-message.png" );
     mp_actViewNewMessage->setIcon( ticks % 2 == 0 ? new_message_blinking_icon : Bee::convertToGrayScale( new_message_blinking_icon, Settings::instance().mainBarIconSize() ) );
     mp_tabMain->setTabIcon( chat_tab_index, ticks % 2 == 0 ? new_message_blinking_icon : IconManager::instance().icon( "chat-list.png" ) );
+    setWindowIcon( ticks % 2 == 0 ? new_message_blinking_icon : IconManager::instance().icon( "beebeep.png" )  );
   }
 
   mp_trayIcon->onTickEvent( ticks );
@@ -3711,11 +3712,13 @@ void GuiMain::updateNewMessageAction()
   {
     mp_actViewNewMessage->setStatusTip( tr( "You have new message" ) );
     mp_tabMain->setTabIcon( chat_tab_index, IconManager::instance().icon( "beebeep-message.png" ) );
+    setWindowIcon( IconManager::instance().icon( "beebeep-message.png" ) );
   }
   else
   {
     mp_actViewNewMessage->setStatusTip( "" );
     mp_tabMain->setTabIcon( chat_tab_index, IconManager::instance().icon( "chat-list.png" ) );
+    setWindowIcon( IconManager::instance().icon( "beebeep.png" )  );
   }
 }
 
@@ -3735,10 +3738,11 @@ void GuiMain::askSaveGeometryAndState()
   {
     QByteArray ba_state = saveState();
 #if QT_VERSION == 0x050906
+    int default_button = mp_dockFileTransfers->isVisible() ? 0 : 1;
     int ret_code = QMessageBox::warning( this, Settings::instance().programName(),
-                                         tr( "Qt libraries have a bug on saving the window's state. "
-                                         "If you have layout problem please reset geometry in the settings menu." ),
-                                         tr( "Save all" ), tr( "Save only geometry" ), tr( "Cancel" ), 1, 2 );
+                                         tr( "Qt libraries have a bug on saving the window's state." ) + QString( " " ) +
+                                         tr( "If you have layout problem please save only geometry." ),
+                                         tr( "Save all" ), tr( "Save only geometry" ), tr( "Cancel" ), default_button, 2 );
     switch( ret_code )
     {
     case 0:

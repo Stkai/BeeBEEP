@@ -375,10 +375,11 @@ void GuiFloatingChat::saveGeometryAndState()
   {
     QByteArray ba_state = saveState();
 #if QT_VERSION == 0x050906
+    int default_button = mp_dockEmoticons->isVisible() || mp_dockPresetMessageList->isVisible() ? 0 : 1;
     int ret_code = QMessageBox::warning( this, Settings::instance().programName(),
-                                         tr( "Qt libraries have a bug on saving the window's state. "
-                                         "If you have layout problem please reset geometry in the settings menu." ),
-                                         tr( "Save all" ), tr( "Save only geometry" ), tr( "Cancel" ), 1, 2 );
+                                         tr( "Qt libraries have a bug on saving the window's state." ) + QString( " " ) +
+                                         tr( "If you have layout problem please save only geometry." ),
+                                         tr( "Save all" ), tr( "Save only geometry" ), tr( "Cancel" ), default_button, 2 );
     switch( ret_code )
     {
     case 0:
