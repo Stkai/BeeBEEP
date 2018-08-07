@@ -1,5 +1,8 @@
 BEEBEEP (Secure Lan Messanger) - CHANGELOG - (c) Marco Mastroddi
 
+BeeBEEP 5.4.1
+- Fixed bug: "Transfer completed" message is not showed in chat
+
 BeeBEEP 5.4.0
 - Patched Qt 5.9.6: window state are not restored (save only geometry option added)
 - Prevent "user collision" from same IP address

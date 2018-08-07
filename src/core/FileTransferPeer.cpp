@@ -53,8 +53,8 @@ void FileTransferPeer::cancelTransfer()
   if( m_socket.isOpen() )
     m_socket.abortConnection();
   closeAll();
-  if( m_fileInfo.isValid() && userId() != ID_INVALID )
-    emit message( id(), userId(), m_fileInfo, tr( "Transfer cancelled" ) );
+  if( m_fileInfo.isValid() && remoteUserId() != ID_INVALID )
+    emit message( id(), remoteUserId(), m_fileInfo, tr( "Transfer cancelled" ) );
   deleteLater();
 }
 
@@ -128,13 +128,13 @@ void FileTransferPeer::startConnection()
 
 void FileTransferPeer::setTransferCompleted()
 {
-  qDebug() << qPrintable( name() ) << "has completed the transfer of file" << qPrintable( Bee::convertToNativeFolderSeparator( m_fileInfo.name() ) );
+  qDebug() << qPrintable( name() ) << "has completed the transfer of file" << qPrintable( Bee::convertToNativeFolderSeparator( m_fileInfo.name() ) ) << "with user id" << remoteUserId();
   m_state = FileTransferPeer::Completed;
   closeAll();
   if( isDownload() && m_fileInfo.lastModified().isValid() )
     Bee::setLastModifiedToFile( m_fileInfo.path(), m_fileInfo.lastModified() );
-  emit message( id(), userId(), m_fileInfo, tr( "Transfer completed in %1" ).arg( Bee::elapsedTimeToString( m_time.elapsed() ) ) );
-  emit completed( id(), userId(), m_fileInfo );
+  emit message( id(), remoteUserId(), m_fileInfo, tr( "Transfer completed in %1" ).arg( Bee::elapsedTimeToString( m_time.elapsed() ) ) );
+  emit completed( id(), remoteUserId(), m_fileInfo );
   deleteLater();
 }
 
@@ -151,14 +151,14 @@ void FileTransferPeer::setError( const QString& str_err )
   qWarning() << qPrintable( name() ) << "found an error when transfer file" << qPrintable( Bee::convertToNativeFolderSeparator( m_fileInfo.name() ) ) << ":" << str_err;
   closeAll();
   if( remoteUserId() != ID_INVALID && m_fileInfo.isValid() )
-    emit message( id(), userId(), m_fileInfo, str_err );
+    emit message( id(), remoteUserId(), m_fileInfo, str_err );
   deleteLater();
 }
 
 void FileTransferPeer::showProgress()
 {
   if( m_totalBytesTransferred > 0 )
-    emit progress( id(), userId(), m_fileInfo, m_totalBytesTransferred );
+    emit progress( id(), remoteUserId(), m_fileInfo, m_totalBytesTransferred );
 }
 
 void FileTransferPeer::checkTransferData( const QByteArray& byte_array )
@@ -210,6 +210,8 @@ void FileTransferPeer::setUserAuthorized( VNumber user_id )
   m_socket.setUserId( user_id );
   if( m_remoteUserId == ID_INVALID )
     m_remoteUserId = user_id;
+  if( user_id != m_remoteUserId )
+    qWarning() << qPrintable( name() ) << "was for user id" << m_remoteUserId << "but it is authorized also user id" << user_id;
   if( isDownload() )
     sendDownloadRequest();
 }

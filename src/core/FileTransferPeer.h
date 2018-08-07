@@ -49,7 +49,6 @@ public:
   inline bool isDownload() const;
   inline void setId( VNumber );
   inline VNumber id() const;
-  inline VNumber userId() const;
   inline void setConnectionDescriptor( int ); // if descriptor = 0 socket tries to connect to remote host (client side)
   void setFileInfo( FileInfo::TransferType, const FileInfo& );
   inline const FileInfo& fileInfo() const;
@@ -128,11 +127,10 @@ inline bool FileTransferPeer::isDownload() const { return m_transferType == File
 inline void FileTransferPeer::setId( VNumber new_value ) { m_id = new_value; }
 inline VNumber FileTransferPeer::id() const { return m_id; }
 inline const FileInfo& FileTransferPeer::fileInfo() const { return m_fileInfo; }
-inline VNumber FileTransferPeer::userId() const { return m_socket.userId(); }
 inline QHostAddress FileTransferPeer::peerAddress() const { return m_socket.peerAddress(); }
 inline bool FileTransferPeer::isActive() const { return m_state == FileTransferPeer::Starting || m_state == FileTransferPeer::Request || m_socket.isConnected(); }
 inline bool FileTransferPeer::isTransferCompleted() const { return m_state == FileTransferPeer::Completed; }
 inline void FileTransferPeer::setRemoteUserId( VNumber new_value ) { m_remoteUserId = new_value; }
-inline VNumber FileTransferPeer::remoteUserId() const { return userId() != ID_INVALID ? userId() : m_remoteUserId; }
+inline VNumber FileTransferPeer::remoteUserId() const { return m_socket.userId() != ID_INVALID ? m_socket.userId() : m_remoteUserId; }
 
 #endif // BEEBEEP_FILETRANSFERSERVERPEER_H
