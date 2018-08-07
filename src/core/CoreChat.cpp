@@ -232,7 +232,7 @@ bool Core::changeGroupChat( const User& u, const Group& g )
     else
       c.setLastModifiedToNow();
     ChatManager::instance().setChat( c );
-    qDebug() << "Group chat" << qPrintable( c.name() ) << "changed by" << qPrintable( u.name() ) << "at" << qPrintable( c.lastModified().toString( Qt::ISODate ) ) ;
+    qDebug() << "Group chat" << qPrintable( c.name() ) << "changed by" << qPrintable( u.name() ) << "with timestamp" << qPrintable( c.lastModified().toString( Qt::ISODate ) ) ;
     emit chatChanged( c );
 
     if( u.isLocal() && isConnected() )

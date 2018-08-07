@@ -242,7 +242,7 @@ void Core::parseGroupMessage( const User& u, const Message& m )
       {
         if( cmd.groupLastModified() <= group_chat.lastModified() )
         {
-          qDebug() << "Group chat request for" << qPrintable( cmd.groupName() ) << "from" << qPrintable( u.name() ) << "is skipped because it is old:" << qPrintable( cmd.groupLastModified().toString( Qt::ISODate ) );
+          qDebug() << "Group chat request for" << qPrintable( cmd.groupName() ) << "from" << qPrintable( u.name() ) << "is skipped because it has old timestamp:" << qPrintable( cmd.groupLastModified().toString( Qt::ISODate ) );
           return;
         }
 #ifdef BEEBEEP_DEBUG
@@ -356,7 +356,7 @@ void Core::parseGroupMessage( const User& u, const Message& m )
 
     if( group_chat.isValid() )
     {
-      qDebug() << "Group chat request for" << qPrintable( cmd.groupName() ) << "from" << qPrintable( u.name() ) << "is accepted";
+      qDebug() << "Group chat request for" << qPrintable( cmd.groupName() ) << "from" << qPrintable( u.name() ) << "is accepted with timestamp" << qPrintable( cmd.groupLastModified().toString( Qt::ISODate ) );
       Group g = group_chat.group();
       g.setName( cmd.groupName() );
       g.setUsers( ul.toUsersId() );
