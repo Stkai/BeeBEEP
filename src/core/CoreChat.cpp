@@ -145,6 +145,7 @@ bool Core::changeGroupChat( const User& u, const Group& g )
 
   UserList group_new_members = UserManager::instance().userList().fromUsersId( g.usersId() );
   UserList group_old_members = UserManager::instance().userList().fromUsersId( c.usersId() );
+  UserList group_removed_members;
   QStringList user_added_string_list;
   QStringList user_removed_string_list;
   QStringList user_string_list;
@@ -164,8 +165,6 @@ bool Core::changeGroupChat( const User& u, const Group& g )
     c.setName( g.name() );
   }
 
-  Message group_remove_user_message = Protocol::instance().groupChatRemoveUserMessage( c );
-
   foreach( User old_user, group_old_members.toList() )
   {
     if( !old_user.isLocal() )
@@ -176,12 +175,12 @@ bool Core::changeGroupChat( const User& u, const Group& g )
         {
           sHtmlMsg = tr( "%1 %2 will be informed of your changes." ).arg( IconManager::instance().toHtml( "group-remove.png", "*G*" ) ).arg( old_user.name() );
           c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
-          chat_changed = true;
-          sendMessageToLocalNetwork( old_user, group_remove_user_message );
+          group_removed_members.set( old_user );
         }
 
         user_removed_string_list << old_user.name();
         c.removeUser( old_user.id() );
+        chat_changed = true;
       }
     }
   }
@@ -239,7 +238,12 @@ bool Core::changeGroupChat( const User& u, const Group& g )
     emit chatChanged( c );
 
     if( u.isLocal() && isConnected() )
+    {
+      Message group_remove_user_message = Protocol::instance().groupChatRemoveUserMessage( c );
       sendGroupChatRequestMessage( c, group_new_members, User() );
+      foreach( User removed_member, group_removed_members.toList() )
+        sendMessageToLocalNetwork( removed_member, group_remove_user_message );
+    }
   }
   else
   {

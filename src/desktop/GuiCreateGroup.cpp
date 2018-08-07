@@ -108,9 +108,9 @@ void GuiCreateGroup::checkAndClose()
     ++it;
   }
 
-  if( item_list.size() < 2 )
+  if( item_list.isEmpty() )
   {
-    QMessageBox::information( this, Settings::instance().programName(), tr( "Please select two or more member for the group." ) );
+    QMessageBox::information( this, Settings::instance().programName(), tr( "Please select at least one member for the group." ) );
     return;
   }
 
