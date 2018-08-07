@@ -97,6 +97,8 @@ public:
   QString gaEventVersion() const;
   QString copyMastroWebSite() const;
 
+  QString guiCustomListStyleSheet( const QString& background_color, const QString& background_image_path ) const;
+
   inline void setUseHive( bool );
   inline bool useHive() const;
 

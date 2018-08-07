@@ -24,21 +24,11 @@
 #ifndef BEEBEEP_GUICONFIG_H
 #define BEEBEEP_GUICONFIG_H
 
-namespace {
-
 const int BEE_MAIN_WINDOW_BASE_SIZE_WIDTH = 940;
 const int BEE_MAIN_WINDOW_BASE_SIZE_HEIGHT = 600;
 const int BEE_DOCK_WIDGET_SIZE_HINT_WIDTH = 200;
 const int BEE_DOCK_WIDGET_SIZE_HINT_HEIGHT = 300;
 const int BEE_DOCK_WIDGET_SIZE_HINT_HEIGHT_SMALL = 60;
 
-const char* BEE_GUICUSTOMLIST_STYLESHEET = "#GuiCustomList { background: %1 url(%2);"
-                                           "background-repeat: no-repeat;"
-                                           "background-position: bottom center;"
-                                           "background-attachment: fixed;"
-                                           "padding-bottom: 32px;"
-                                           "color: black; }";
-
-}
 
 #endif // BEEBEEP_GUICONFIG_H

@@ -294,8 +294,8 @@ void GuiGroupList::selectBackgroundColor()
 
 void GuiGroupList::updateBackground()
 {
-  QString w_stylesheet = QString( BEE_GUICUSTOMLIST_STYLESHEET ).arg( Settings::instance().groupListBackgroundColor(),
-                                                   IconManager::instance().iconPath( "group-list.png" ) );
+  QString w_stylesheet = Settings::instance().guiCustomListStyleSheet( Settings::instance().groupListBackgroundColor(),
+                                                                  IconManager::instance().iconPath( "group-list.png" ) );
   mp_twGroupList->setStyleSheet( w_stylesheet );
 }
 

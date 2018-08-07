@@ -244,7 +244,7 @@ void GuiChatList::selectBackgroundColor()
 
 void GuiChatList::updateBackground()
 {
-  QString w_stylesheet = QString( BEE_GUICUSTOMLIST_STYLESHEET ).arg( Settings::instance().chatListBackgroundColor(),
-                                                    IconManager::instance().iconPath( "chat-list.png" ) );
+  QString w_stylesheet = Settings::instance().guiCustomListStyleSheet( Settings::instance().chatListBackgroundColor(),
+                                                                    IconManager::instance().iconPath( "chat-list.png" ) );
   mp_twChatList->setStyleSheet( w_stylesheet );
 }
