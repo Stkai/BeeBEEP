@@ -1018,7 +1018,7 @@
     </message>
     <message>
         <source>Please select two or more member for the group.</source>
-        <translation>Wähle bitte mindestens ein Mitglied für die Gruppe aus.</translation>
+        <translation type="obsolete">Wähle bitte mindestens ein Mitglied für die Gruppe aus.</translation>
     </message>
     <message>
         <source>%1 already exists as group name or chat name.
@@ -1045,6 +1045,10 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>Please insert a group name.</source>
         <translation>Trage bitte einen Gruppennamen ein.</translation>
+    </message>
+    <message>
+        <source>Please select at least one member for the group.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

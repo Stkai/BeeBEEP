@@ -1017,16 +1017,16 @@
         <translation type="unfinished">建立新聊天群組</translation>
     </message>
     <message>
-        <source>Please select two or more member for the group.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Please insert a group name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>%1 already exists as group name or chat name.
 Please select a different name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select at least one member for the group.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

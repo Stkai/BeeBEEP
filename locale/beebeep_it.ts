@@ -1026,7 +1026,7 @@
     </message>
     <message>
         <source>Please select two or more member for the group.</source>
-        <translation>Seleziona due o più membri per il gruppo.</translation>
+        <translation type="obsolete">Seleziona due o più membri per il gruppo.</translation>
     </message>
     <message>
         <source>Please insert a group name.</source>
@@ -1057,6 +1057,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Create new group chat</source>
         <translation>Crea un nuovo gruppo</translation>
+    </message>
+    <message>
+        <source>Please select at least one member for the group.</source>
+        <translation>Selezione almeno un membro per questo gruppo.</translation>
     </message>
 </context>
 <context>
