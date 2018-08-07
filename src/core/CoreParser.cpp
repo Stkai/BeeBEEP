@@ -358,9 +358,7 @@ void Core::parseGroupMessage( const User& u, const Message& m )
 
     if( group_chat.isValid() )
     {
-#ifdef BEEBEEP_DEBUG
       qDebug() << "Group chat request for" << qPrintable( cmd.groupName() ) << "from" << qPrintable( u.name() ) << "is accepted";
-#endif
       Group g = group_chat.group();
       g.setName( cmd.groupName() );
       g.setUsers( ul.toUsersId() );

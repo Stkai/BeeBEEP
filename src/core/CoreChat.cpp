@@ -180,7 +180,6 @@ bool Core::changeGroupChat( const User& u, const Group& g )
 
         user_removed_string_list << old_user.name();
         c.removeUser( old_user.id() );
-        chat_changed = true;
       }
     }
   }
@@ -195,7 +194,6 @@ bool Core::changeGroupChat( const User& u, const Group& g )
 
     sHtmlMsg = tr( "%1 This kind of change can be temporary if the user exists and does not leave the group spontaneously." ).arg( IconManager::instance().toHtml( "group-remove.png", "*G*" ) );
     c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
-    chat_changed = true;
   }
 
   foreach( User u, group_new_members.toList() )
@@ -215,18 +213,17 @@ bool Core::changeGroupChat( const User& u, const Group& g )
     else
       sHtmlMsg = tr( "%1 %2 has added members: %3." ).arg( IconManager::instance().toHtml( "group-add.png", "*G*" ), u.name(), Bee::stringListToTextString( user_added_string_list ) );
     c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
-    chat_changed = true;
   }
 
   if( user_removed_string_list.size() > 0 || user_added_string_list.size() > 0 )
   {
+    chat_changed = true;
     sHtmlMsg = tr( "%1 Chat with %2." ).arg( IconManager::instance().toHtml( "group.png", "*G*" ), Bee::stringListToTextString( user_string_list ) );
     c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Header ) );
   }
 
   if( chat_changed )
   {
-    qDebug() << "Changing group chat" << qPrintable( c.name() ) << "by user" << qPrintable( u.path() );
     if( !u.isLocal() )
     {
       if( g.lastModified().isValid() )
@@ -235,12 +232,13 @@ bool Core::changeGroupChat( const User& u, const Group& g )
     else
       c.setLastModifiedToNow();
     ChatManager::instance().setChat( c );
+    qDebug() << "Group chat" << qPrintable( c.name() ) << "changed by" << qPrintable( u.name() ) << "at" << qPrintable( c.lastModified().toString( Qt::ISODate ) ) ;
     emit chatChanged( c );
 
     if( u.isLocal() && isConnected() )
     {
-      Message group_remove_user_message = Protocol::instance().groupChatRemoveUserMessage( c );
       sendGroupChatRequestMessage( c, group_new_members, User() );
+      Message group_remove_user_message = Protocol::instance().groupChatRemoveUserMessage( c );
       foreach( User removed_member, group_removed_members.toList() )
         sendMessageToLocalNetwork( removed_member, group_remove_user_message );
     }
