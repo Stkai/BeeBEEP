@@ -178,8 +178,8 @@ bool Core::changeGroupChat( const User& u, const Group& g )
           group_removed_members.set( old_user );
         }
 
-        user_removed_string_list << old_user.name();
-        c.removeUser( old_user.id() );
+        if( c.removeUser( old_user.id() ) )
+          user_removed_string_list << old_user.name();
       }
     }
   }
@@ -524,8 +524,7 @@ void Core::sendGroupChatRequestMessage( const Chat& group_chat, const UserList& 
     qDebug() << "Send group chat request message from" << qPrintable( group_chat.name() ) << "to" << qPrintable( u.name() );
 #endif
 
-    if( !group_message.text().isEmpty() )
-      sendMessageToLocalNetwork( u, group_message );
+    sendMessageToLocalNetwork( u, group_message );
   }
 }
 

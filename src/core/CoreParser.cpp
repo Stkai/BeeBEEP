@@ -329,31 +329,29 @@ void Core::parseGroupMessage( const User& u, const Message& m )
     else
     {
       QList<UserRecord> user_records = Protocol::instance().userRecordsFromGroupRequestMessage( m );
-      if( user_records.isEmpty() )
+      if( !user_records.isEmpty() )
       {
-        qWarning() << "Group chat request for" << qPrintable( cmd.groupName() ) << "from" << qPrintable( u.name() ) << "has not user records";
-        return;
+        qDebug() << "Group chat request for" << qPrintable( cmd.groupName() ) << "from" << qPrintable( u.name() ) << "has" << user_records.size() << "members";
+        foreach( UserRecord ur, user_records )
+        {
+          User group_member = Protocol::instance().recognizeUser( ur, Settings::instance().userRecognitionMethod() );
+          if( group_member.isLocal() )
+            continue;
+
+          if( !group_member.isValid() )
+          {
+            group_member = Protocol::instance().createTemporaryUser( ur );
+            UserManager::instance().setUser( group_member );
+            qDebug() << "Temporary user" << group_member.id() << qPrintable( group_member.name() ) << "is created after request of" << qPrintable( u.name() ) << "for group" << qPrintable( cmd.groupName() );
+            createPrivateChat( group_member );
+            emit userChanged( group_member );
+          }
+
+          ul.set( group_member );
+        }
       }
       else
-        qDebug() << "Group chat request for" << qPrintable( cmd.groupName() ) << "from" << qPrintable( u.name() ) << "has" << user_records.size() << "members";
-
-      foreach( UserRecord ur, user_records )
-      {
-        User group_member = Protocol::instance().recognizeUser( ur, Settings::instance().userRecognitionMethod() );
-        if( group_member.isLocal() )
-          continue;
-
-        if( !group_member.isValid() )
-        {
-          group_member = Protocol::instance().createTemporaryUser( ur );
-          UserManager::instance().setUser( group_member );
-          qDebug() << "Temporary user" << group_member.id() << qPrintable( group_member.name() ) << "is created after request of" << qPrintable( u.name() ) << "for group" << qPrintable( cmd.groupName() );
-          createPrivateChat( group_member );
-          emit userChanged( group_member );
-        }
-
-        ul.set( group_member );
-      }
+        qDebug() << "Group chat request for" << qPrintable( cmd.groupName() ) << "from" << qPrintable( u.name() ) << "makes this group private";
     }
 
     if( group_chat.isValid() )
@@ -368,7 +366,7 @@ void Core::parseGroupMessage( const User& u, const Message& m )
     }
     else
     {
-      if( ul.toList().size() > 2 )
+      if( ul.toList().size() > 1 )
       {
         Group g;
         g.setName( cmd.groupName() );
@@ -381,7 +379,7 @@ void Core::parseGroupMessage( const User& u, const Message& m )
         createGroupChat( u, g, false );
       }
       else
-        qWarning() << "Unable to create group chat" << qPrintable( cmd.groupName() ) << "from user" << qPrintable( u.name() ) << "because members are minus than 3";
+        qWarning() << "Unable to create group chat" << qPrintable( cmd.groupName() ) << "from user" << qPrintable( u.name() ) << "because members are minus than 2";
     }
   }
   else if( m.hasFlag( Message::Refused ) )

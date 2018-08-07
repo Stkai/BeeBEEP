@@ -5,7 +5,7 @@ BeeBEEP 5.4.1
 - File sharing window now save its geometry on close
 - Create message window now save its geometry on close
 - Added option "Enable maximize button"
-- Groups can be created also with just one member
+- Groups can be created also with just one member (and you)
 
 BeeBEEP 5.4.0
 - Patched Qt 5.9.6: window state are not restored (save only geometry option added)
