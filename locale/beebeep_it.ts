@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -1265,7 +1265,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>The window geometry and state are saved</source>
-        <translation type="vanished">Le dimensioni e lo stato della finestra sono stati salvati</translation>
+        <translation type="obsolete">Le dimensioni e lo stato della finestra sono stati salvati</translation>
     </message>
     <message>
         <source>Show the bar of members</source>
@@ -1293,7 +1293,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Qt libraries have a bug on saving the window&apos;s state. If you have layout problem please reset geometry in the settings menu.</source>
-        <translation type="vanished">Le librerie Qt hanno un bug nel salvare lo stato della finestra. Se hai problemi di layout ripristina la geometria nel menu delle impostazioni.</translation>
+        <translation type="obsolete">Le librerie Qt hanno un bug nel salvare lo stato della finestra. Se hai problemi di layout ripristina la geometria nel menu delle impostazioni.</translation>
     </message>
     <message>
         <source>Save all</source>
@@ -2637,7 +2637,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Qt libraries have a bug on saving the window&apos;s state. If you have layout problem please reset geometry in the settings menu.</source>
-        <translation type="vanished">Le librerie Qt hanno un bug nel salvare lo stato della finestra. Se hai problemi di layout ripristina la geometria nel menu delle impostazioni.</translation>
+        <translation type="obsolete">Le librerie Qt hanno un bug nel salvare lo stato della finestra. Se hai problemi di layout ripristina la geometria nel menu delle impostazioni.</translation>
     </message>
     <message>
         <source>Save all</source>
