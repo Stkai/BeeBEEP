@@ -253,6 +253,8 @@ void GuiFloatingChat::updateUser( const User& u )
 
 void GuiFloatingChat::closeEvent( QCloseEvent* e )
 {
+  if( Settings::instance().floatingChatState().isEmpty() )
+    Settings::instance().setShowEmoticonMenu( mp_dockEmoticons->isVisible() );
   QMainWindow::closeEvent( e );
   emit chatIsAboutToClose( mp_chat->chatId() );
   e->accept();
@@ -270,7 +272,7 @@ void GuiFloatingChat::checkWindowFlagsAndShow()
 
   if( Settings::instance().floatingChatState().isEmpty() )
   {
-    mp_dockEmoticons->hide();
+    mp_dockEmoticons->setVisible( Settings::instance().showEmoticonMenu() );
     mp_dockPresetMessageList->hide();
   }
   else
@@ -395,6 +397,7 @@ void GuiFloatingChat::saveGeometryAndState()
     Settings::instance().setFloatingChatState( ba_state );
     QSplitter* chat_splitter = mp_chat->chatSplitter();
     Settings::instance().setFloatingChatSplitterState( chat_splitter->saveState() );
+    Settings::instance().setShowEmoticonMenu( mp_dockEmoticons->isVisible() );
     Settings::instance().save();
     if( ba_state.isEmpty() )
       statusBar()->showMessage( tr( "Window geometry saved" ), 5000 );

@@ -226,7 +226,9 @@ void GuiMain::checkWindowFlagsAndShow()
     mp_tabMain->setCurrentWidget( mp_home );
 
   Bee::setWindowStaysOnTop( this, Settings::instance().stayOnTop() );
-  setWindowFlags( windowFlags() & ~Qt::WindowMaximizeButtonHint );
+
+  if( !Settings::instance().enableMaximizeButton() )
+    setWindowFlags( windowFlags() & ~Qt::WindowMaximizeButtonHint );
 
   if( !isVisible() )
     show();
@@ -1001,6 +1003,10 @@ void GuiMain::createMenus()
   mp_menuSettings->addAction( IconManager::instance().icon( "theme.png" ), tr( "Select icon theme" ) + QString( "..." ), this, SLOT( selectIconSourcePath() ) );
   mp_menuSettings->addSeparator();
 
+  act = mp_menuSettings->addAction( tr( "Enable maximize button" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().enableMaximizeButton() );
+  act->setData( 28 );
   act = mp_menuSettings->addAction( tr( "Always stay on top" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().stayOnTop() );
@@ -1417,7 +1423,15 @@ void GuiMain::settingsChanged( QAction* act )
     }
     break;
   case 28:
-    Settings::instance().setShowEmoticonMenu( act->isChecked() );
+    {
+      Settings::instance().setEnableMaximizeButton( act->isChecked() );
+      if( Settings::instance().enableMaximizeButton() )
+        setWindowFlags( windowFlags() | Qt::WindowMaximizeButtonHint );
+      else
+        setWindowFlags( windowFlags() & ~Qt::WindowMaximizeButtonHint );
+      if( !isVisible() )
+        show();
+    }
     break;
   case 29:
     Settings::instance().setKeyEscapeMinimizeInTray( act->isChecked() );
@@ -3804,6 +3818,12 @@ void GuiMain::askResetGeometryAndState()
       Settings::instance().setFloatingChatState( QByteArray() );
     if( !Settings::instance().floatingChatSplitterState().isEmpty() )
       Settings::instance().setFloatingChatSplitterState( QByteArray() );
+    if( !Settings::instance().createMessageGeometry().isEmpty() )
+      Settings::instance().setCreateMessageGeometry( QByteArray() );
+    if( !Settings::instance().fileSharingGeometry().isEmpty() )
+      Settings::instance().setFileSharingGeometry( QByteArray() );
+    Settings::instance().setShowEmoticonMenu( false );
+    Settings::instance().save();
     showMessage( tr( "Geometry of all windows has been reset" ), 3000 );
   }
 }

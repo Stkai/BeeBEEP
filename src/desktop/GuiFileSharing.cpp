@@ -85,6 +85,8 @@ GuiFileSharing::GuiFileSharing( QWidget *parent )
   connect( mp_shareBox, SIGNAL( shareBoxUploadRequest( VNumber, const FileInfo&, const QString& ) ), this, SLOT( onShareBoxUploadRequest( VNumber, const FileInfo&, const QString& ) ) );
 
   initGuiItems();
+  if( !Settings::instance().fileSharingGeometry().isEmpty() )
+    restoreGeometry( Settings::instance().fileSharingGeometry() );
 }
 
 void GuiFileSharing::keyPressEvent( QKeyEvent* e )
@@ -100,6 +102,17 @@ void GuiFileSharing::keyPressEvent( QKeyEvent* e )
   }
 
   QMainWindow::keyPressEvent( e );
+}
+
+void GuiFileSharing::closeEvent( QCloseEvent* e )
+{
+  if( isVisible() )
+  {
+    Settings::instance().setFileSharingGeometry( saveGeometry() );
+    Settings::instance().save();
+  }
+
+  QMainWindow::closeEvent( e );
 }
 
 void GuiFileSharing::initGuiItems()

@@ -71,6 +71,7 @@ private slots:
   void onFileTransferCompleted( VNumber, const User&, const FileInfo& );
 
 protected:
+  void closeEvent( QCloseEvent* );
   void keyPressEvent( QKeyEvent* );
   void raiseView( QWidget* );
 

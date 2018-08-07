@@ -59,13 +59,31 @@ GuiCreateMessage::GuiCreateMessage( QWidget *parent )
   mp_pbEmoticons->setDisabled( Settings::instance().useOnlyTextEmoticons() );
 
   updateRecipients();
-  updateEmoticons();
+  if( mp_pbEmoticons->isEnabled() )
+  {
+    mp_pbEmoticons->setChecked( Settings::instance().showEmoticonMenu() );
+    updateEmoticons();
+  }
+
+  if( !Settings::instance().createMessageGeometry().isEmpty() )
+    restoreGeometry( Settings::instance().createMessageGeometry() );
 
   connect( mp_pbSend, SIGNAL( clicked() ), this, SLOT( sendMessage() ) );
   connect( mp_pbEditUsers, SIGNAL( clicked() ), this, SLOT( editRecipients() ) );
   connect( mp_twEmoticons, SIGNAL( emoticonSelected( const Emoticon& ) ), this, SLOT( addEmoticon( const Emoticon& ) ) );
   connect( mp_pbEmoticons, SIGNAL( clicked() ), this, SLOT( toggleEmoticons() ) );
 
+}
+
+void GuiCreateMessage::closeEvent( QCloseEvent* ev )
+{
+  if( isVisible() )
+  {
+    Settings::instance().setShowEmoticonMenu( mp_twEmoticons->isVisible() );
+    Settings::instance().setCreateMessageGeometry( saveGeometry() );
+    Settings::instance().save();
+  }
+  QDialog::closeEvent( ev );
 }
 
 void GuiCreateMessage::updateEmoticons()

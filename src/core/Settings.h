@@ -239,6 +239,10 @@ public:
   inline const QByteArray& floatingChatGeometry() const;
   inline const QByteArray& floatingChatState() const;
   inline const QByteArray& floatingChatSplitterState() const;
+  inline void setCreateMessageGeometry( const QByteArray& );
+  inline const QByteArray& createMessageGeometry() const;
+  inline void setFileSharingGeometry( const QByteArray& );
+  inline const QByteArray& fileSharingGeometry() const;
   inline void setShowUserStatusBackgroundColor( bool );
   inline bool showUserStatusBackgroundColor() const;
   inline void setShowUserStatusDescription( bool );
@@ -264,6 +268,8 @@ public:
   inline int maxChatsToOpenAfterSendingMessage() const;
   inline void setShowUsersOnConnection( bool );
   inline bool showUsersOnConnection() const;
+  inline void setEnableMaximizeButton( bool );
+  inline bool enableMaximizeButton() const;
 
   inline bool usePreviewFileDialog() const;
   inline void setPreviewFileDialogGeometry( const QByteArray& );
@@ -623,6 +629,7 @@ private:
   QString m_chatDefaultUserNameColor;
   int m_maxChatsToOpenAfterSendingMessage;
   bool m_showUsersOnConnection;
+  bool m_enableMaximizeButton;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -641,6 +648,9 @@ private:
   QByteArray m_floatingChatGeometry;
   QByteArray m_floatingChatState;
   QByteArray m_floatingChatSplitterState;
+
+  QByteArray m_createMessageGeometry;
+  QByteArray m_fileSharingGeometry;
 
   QString m_passwordBeforeHash;
   QByteArray m_password;
@@ -951,6 +961,10 @@ inline void Settings::setFloatingChatSplitterState( const QByteArray& new_value 
 inline const QByteArray& Settings::floatingChatGeometry() const { return m_floatingChatGeometry; }
 inline const QByteArray& Settings::floatingChatState() const { return m_floatingChatState; }
 inline const QByteArray& Settings::floatingChatSplitterState() const { return m_floatingChatSplitterState; }
+inline void Settings::setCreateMessageGeometry( const QByteArray& new_value ) { m_createMessageGeometry = new_value; }
+inline const QByteArray& Settings::createMessageGeometry() const { return m_createMessageGeometry; }
+inline void Settings::setFileSharingGeometry( const QByteArray& new_value ) { m_fileSharingGeometry = new_value; }
+inline const QByteArray& Settings::fileSharingGeometry() const { return m_fileSharingGeometry; }
 inline void Settings::setAcceptConnectionsOnlyFromWorkgroups( bool new_value ) { m_acceptConnectionsOnlyFromWorkgroups = new_value; }
 inline bool Settings::acceptConnectionsOnlyFromWorkgroups() const { return m_acceptConnectionsOnlyFromWorkgroups; }
 inline void Settings::setWorkgroups( const QStringList& new_value ) { m_workgroups = new_value; }
@@ -1072,5 +1086,7 @@ inline void Settings::setShowUsersOnConnection( bool new_value ) { m_showUsersOn
 inline bool Settings::showUsersOnConnection() const { return m_showUsersOnConnection; }
 inline bool Settings::canAddMembersToGroup() const { return m_canAddMembersToGroup; }
 inline bool Settings::canRemoveMembersFromGroup() const { return m_canRemoveMembersFromGroup; }
+inline void Settings::setEnableMaximizeButton( bool new_value ) { m_enableMaximizeButton = new_value; }
+inline bool Settings::enableMaximizeButton() const { return m_enableMaximizeButton; }
 
 #endif // BEEBEEP_SETTINGS_

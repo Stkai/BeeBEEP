@@ -2,6 +2,9 @@ BEEBEEP (Secure Lan Messanger) - CHANGELOG - (c) Marco Mastroddi
 
 BeeBEEP 5.4.1
 - Fixed bug: "Transfer completed" message is not showed in chat
+- File sharing window now save its geometry on close
+- Create message window now save its geometry on close
+- Added option "Enable maximize button"
 
 BeeBEEP 5.4.0
 - Patched Qt 5.9.6: window state are not restored (save only geometry option added)

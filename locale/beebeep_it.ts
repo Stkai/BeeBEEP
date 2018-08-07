@@ -2659,6 +2659,10 @@ Inserisci un nome differente.</translation>
         <source>If you have layout problem please save only geometry.</source>
         <translation>Se hai problemi di layout salva solo le dimensioni.</translation>
     </message>
+    <message>
+        <source>Enable maximize button</source>
+        <translation>Abilita il pulsante massimizza</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

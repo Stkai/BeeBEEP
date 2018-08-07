@@ -934,6 +934,8 @@ void Settings::load()
     m_mainBarIconSize = QSize( 24, 24 );
     m_avatarIconSize = QSize( 28, 28 );
     m_previewFileDialogGeometry = "";
+    m_createMessageGeometry = "";
+    m_fileSharingGeometry = "";
     qDebug() << "The geometry has been reset at startup";
   }
   else
@@ -946,6 +948,8 @@ void Settings::load()
     m_mainBarIconSize = sets->value( "MainBarIconSize", QSize( 24, 24 ) ).toSize();
     m_avatarIconSize = sets->value( "AvatarIconSize", QSize( 28, 28 ) ).toSize();
     m_previewFileDialogGeometry = sets->value( "PreviewFileDialogGeometry", "" ).toByteArray();
+    m_createMessageGeometry = sets->value( "CreateMessageGeometry", "" ).toByteArray();
+    m_fileSharingGeometry = sets->value( "FileSharingGeometry", "" ).toByteArray();
   }
 
 #if QT_VERSION == 0x050906
@@ -1031,6 +1035,7 @@ void Settings::load()
   m_emoticonSourcePath = sets->value( "EmoticonSourcePath", m_emoticonSourcePath ).toString();
   m_maxChatsToOpenAfterSendingMessage = sets->value( "MaxChatsToOpenAfterSendingMessage", m_maxChatsToOpenAfterSendingMessage ).toInt();
   m_showUsersOnConnection = sets->value( "ShowUsersOnConnection", m_showUsersOnConnection ).toBool();
+  m_enableMaximizeButton = sets->value( "EnableMaximizeButton", false ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -1291,6 +1296,8 @@ void Settings::save()
   sets->setValue( "FloatingChatGeometry", m_floatingChatGeometry );
   sets->setValue( "FloatingChatState", m_floatingChatState );
   sets->setValue( "FloatingChatSplitterState", m_floatingChatSplitterState );
+  sets->setValue( "CreateMessageGeometry", m_createMessageGeometry );
+  sets->setValue( "FileSharingGeometry", m_fileSharingGeometry );
   sets->setValue( "MainBarIconSize", m_mainBarIconSize );
   sets->setValue( "AvatarIconSize", m_avatarIconSize );
   sets->setValue( "Language", m_language );
@@ -1354,6 +1361,7 @@ void Settings::save()
   sets->setValue( "EmoticonSourcePath", m_emoticonSourcePath );
   sets->setValue( "MaxChatsToOpenAfterSendingMessage", m_maxChatsToOpenAfterSendingMessage );
   sets->setValue( "ShowUsersOnConnection", m_showUsersOnConnection );
+  sets->setValue( "EnableMaximizeButton", m_enableMaximizeButton );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );

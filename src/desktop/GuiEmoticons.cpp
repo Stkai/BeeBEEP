@@ -191,6 +191,7 @@ void GuiEmoticons::updateEmoticons()
   deleteAllTabs();
 
   initEmoticons( current_index );
+  emit emoticonsUpdated();
 }
 
 void GuiEmoticons::setEmoticonToButton( const Emoticon& e, QPushButton* pb )

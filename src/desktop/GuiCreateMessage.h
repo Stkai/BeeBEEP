@@ -47,6 +47,7 @@ protected slots:
   void toggleEmoticons();
 
 protected:
+  void closeEvent( QCloseEvent* );
   void updateEmoticons();
   void updateRecipients();
 

@@ -40,6 +40,7 @@ public:
 
 signals:
   void emoticonSelected( const Emoticon& );
+  void emoticonsUpdated();
 
 public slots:
   void updateEmoticons();

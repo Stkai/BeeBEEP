@@ -2579,6 +2579,10 @@ Please select a different name.</source>
         <source>If you have layout problem please save only geometry.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Enable maximize button</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
