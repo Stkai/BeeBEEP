@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE" sourcelanguage="en">
+<TS version="2.1" language="de_DE" sourcelanguage="en">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -492,6 +492,18 @@
     </message>
     <message>
         <source>You are not a member of group %1. Your messages will be not shown.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>domain</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 Connection closed to user %2 because it uses your hash code.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 Connection closed to user %2 because it uses same hash code of the already connected user %3: %4.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="fr_FR">
+<TS version="2.1" language="fr_FR">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -545,32 +545,50 @@
         <translation>a été ajouté à vos favoris</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="280"/>
+        <location filename="../src/core/CoreConnection.cpp" line="288"/>
         <source>%1 Connection closed to user %2 because it uses your nickname: %3.</source>
         <translation>%1 Connexion vers l&apos;utilisateur %2 fermée car elle utilise votre pseudo : %3.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreConnection.cpp" line="275"/>
+        <location filename="../src/core/CoreConnection.cpp" line="281"/>
         <source>%1 Connection closed to user %2 because it uses your account name: %3.</source>
         <translation>%1 Connexion vers l&apos;utilisateur %2 fermée car elle utilise votre nom de compte : %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="298"/>
+        <location filename="../src/core/CoreConnection.cpp" line="277"/>
+        <location filename="../src/core/CoreConnection.cpp" line="313"/>
+        <source>domain</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreConnection.cpp" line="293"/>
+        <source>%1 Connection closed to user %2 because it uses your hash code.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreConnection.cpp" line="311"/>
+        <location filename="../src/core/CoreConnection.cpp" line="317"/>
         <source>%1 Connection closed to user %2 because it uses same account name of the already connected user %3: %4.</source>
         <translation>%1 Connexion vers l&apos;utilisateur %2 fermée car elle utilise le même nom de compte de l&apos;utilisateur déjà connecté %3: %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="303"/>
+        <location filename="../src/core/CoreConnection.cpp" line="324"/>
         <source>%1 Connection closed to user %2 because it uses same nickname of the already connected user %3: %4.</source>
         <translation>%1 Connexion vers l&apos;utilisateur %2 fermée car elle utilise le même pseudo de l&apos;utilisateur déjà connecté %3: %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="354"/>
+        <location filename="../src/core/CoreConnection.cpp" line="330"/>
+        <source>%1 Connection closed to user %2 because it uses same hash code of the already connected user %3: %4.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreConnection.cpp" line="383"/>
         <source>%1 users connected</source>
         <translation>%1 utilisateurs connectés</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="358"/>
+        <location filename="../src/core/CoreConnection.cpp" line="387"/>
         <source>%1 %2 uses old encryption level.</source>
         <translation>%1 %2 utilise l&apos;ancien niveau de cryptage.</translation>
     </message>

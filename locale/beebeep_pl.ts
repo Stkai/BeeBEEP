@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="pl_PL">
+<TS version="2.1" language="pl_PL">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -545,32 +545,50 @@
         <translation>został dodany do ulubionych</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="280"/>
+        <location filename="../src/core/CoreConnection.cpp" line="288"/>
         <source>%1 Connection closed to user %2 because it uses your nickname: %3.</source>
         <translation>%1 Połączenie do użytkownika %2 zamknięte, ponieważ używa Twojego nicka: %3.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreConnection.cpp" line="275"/>
+        <location filename="../src/core/CoreConnection.cpp" line="281"/>
         <source>%1 Connection closed to user %2 because it uses your account name: %3.</source>
         <translation>%1 Połączenie do użytkownika %2 zamknięte, ponieważ używa Twojej nazwy konta: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="298"/>
+        <location filename="../src/core/CoreConnection.cpp" line="277"/>
+        <location filename="../src/core/CoreConnection.cpp" line="313"/>
+        <source>domain</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreConnection.cpp" line="293"/>
+        <source>%1 Connection closed to user %2 because it uses your hash code.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreConnection.cpp" line="311"/>
+        <location filename="../src/core/CoreConnection.cpp" line="317"/>
         <source>%1 Connection closed to user %2 because it uses same account name of the already connected user %3: %4.</source>
         <translation>%1 Połączenie do użytkownika %2 zamknięte, ponieważ używa takiej samej nazwy konta jak już połączony użytkownik %3: %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="303"/>
+        <location filename="../src/core/CoreConnection.cpp" line="324"/>
         <source>%1 Connection closed to user %2 because it uses same nickname of the already connected user %3: %4.</source>
         <translation>%1 Połączenie do użytkownika %2 zamknięte, ponieważ używa takiego samego nicka jak już połączony użytkownik %3: %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="354"/>
+        <location filename="../src/core/CoreConnection.cpp" line="330"/>
+        <source>%1 Connection closed to user %2 because it uses same hash code of the already connected user %3: %4.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreConnection.cpp" line="383"/>
         <source>%1 users connected</source>
         <translation>%1 połączonych użytkowników</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="358"/>
+        <location filename="../src/core/CoreConnection.cpp" line="387"/>
         <source>%1 %2 uses old encryption level.</source>
         <translation>%1 %2 używa starego poziomu szyfrowania.</translation>
     </message>

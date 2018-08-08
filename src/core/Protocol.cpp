@@ -40,7 +40,7 @@ Protocol::Protocol()
   : m_id( ID_START ), m_fileShareListMessage( Message::Share, ID_SHARE_MESSAGE, "" )
 {
   m_id += Random::d100();
-#if QT_VERSION == 0x050603
+#if QT_VERSION == 0x050603 && defined Q_OS_MAC
   // Fixed a protocol bug in OsX Legacy version
   m_datastreamMaxVersion = 12;
 #else

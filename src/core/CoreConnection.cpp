@@ -270,21 +270,36 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
     {
       if( user_path_changed )
       {
-        if( user_found.accountName() == u.accountName() )
+        if( Settings::instance().userRecognitionMethod() == Settings::RecognizeByAccountAndDomain )
         {
           sAlertMsg = tr( "%1 Connection closed to user %2 because it uses your account name: %3." )
-                        .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), u.path(), u.accountName() );
+                          .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), u.path(), u.accountPath() );
+          sAlertMsg += QString( " (%1)" ).arg( tr( "domain" ) );
+        }
+        else if( Settings::instance().userRecognitionMethod() == Settings::RecognizeByAccount )
+        {
+          sAlertMsg = tr( "%1 Connection closed to user %2 because it uses your account name: %3." )
+                          .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), u.path(), u.accountName() );
         }
         else
         {
-          sAlertMsg = tr( "%1 Connection closed to user %2 because it uses your nickname: %3." )
-                        .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), u.path(), u.name() );
+          if( u.name() == user_found.name() )
+          {
+            sAlertMsg = tr( "%1 Connection closed to user %2 because it uses your nickname: %3." )
+                          .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), u.path(), u.name() );
+          }
+          else
+          {
+            sAlertMsg = tr( "%1 Connection closed to user %2 because it uses your hash code." )
+                          .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), u.path() );
+          }
         }
-
         dispatchSystemMessage( ID_DEFAULT_CHAT, user_found.id(), sAlertMsg, DispatchToDefaultAndPrivateChat, ChatMessage::Connection );
+        qWarning() << "User with account" << qPrintable( u.accountPath() ) << "and path" << qPrintable( u.path() ) << "is recognized to be Local";
       }
+      else
+        qDebug() << "User with account" << qPrintable( u.accountPath() ) << "and path" << qPrintable( u.path() ) << "is recognized to be Local";
 
-      qWarning() << "User with account" << qPrintable( u.accountName() ) << "and path" << qPrintable( u.path() ) << "is recognized to be Local";
       closeConnection( c );
       return;
     }
@@ -293,20 +308,39 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
     {
       if( user_path_changed )
       {
-        if( user_found.accountName() == u.accountName() )
+        if( Settings::instance().userRecognitionMethod() == Settings::RecognizeByAccountAndDomain )
+        {
+          sAlertMsg = tr( "%1 Connection closed to user %2 because it uses same account name of the already connected user %3: %4." )
+                        .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), u.path(), user_found.path(), u.accountPath() );
+          sAlertMsg += QString( " (%1)" ).arg( tr( "domain" ) );
+          qDebug() << "User" << qPrintable( u.path() ) << "is already connected with account (domain)" << qPrintable( user_found.accountPath() );
+        }
+        else if( Settings::instance().userRecognitionMethod() == Settings::RecognizeByAccount )
         {
           sAlertMsg = tr( "%1 Connection closed to user %2 because it uses same account name of the already connected user %3: %4." )
                         .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), u.path(), user_found.path(), u.accountName() );
+          qDebug() << "User" << qPrintable( u.path() ) << "is already connected with account" << qPrintable( user_found.accountName() );
         }
         else
         {
-          sAlertMsg = tr( "%1 Connection closed to user %2 because it uses same nickname of the already connected user %3: %4." )
-                        .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), u.path(), user_found.path(), u.name() );
+          if( u.name() == user_found.name() )
+          {
+            sAlertMsg = tr( "%1 Connection closed to user %2 because it uses same nickname of the already connected user %3: %4." )
+                          .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), u.path(), user_found.path(), u.name() );
+            qDebug() << "User" << qPrintable( u.path() ) << "is already connected with the same nickname of" << qPrintable( user_found.path() );
+          }
+          else
+          {
+            sAlertMsg = tr( "%1 Connection closed to user %2 because it uses same hash code of the already connected user %3: %4." )
+                          .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), u.path(), user_found.path(), u.name() );
+            qDebug() << "User" << qPrintable( u.path() ) << "is already connected with the same hash code of" << qPrintable( user_found.path() );
+          }
         }
+        dispatchSystemMessage( ID_DEFAULT_CHAT, user_found.id(), sAlertMsg, DispatchToDefaultAndPrivateChat, ChatMessage::Connection );
       }
+      else
+        qDebug() << "User" << qPrintable( u.path() ) << "is already online with another connection:" << qPrintable( user_found.path() );
 
-      dispatchSystemMessage( ID_DEFAULT_CHAT, user_found.id(), sAlertMsg, DispatchToDefaultAndPrivateChat, ChatMessage::Connection );
-      qDebug() << "User with account" << qPrintable( u.accountName() ) << "and path" << qPrintable( u.path() ) << "is already connected with account name" << user_found.accountName() << "path" << user_found.path();
       closeConnection( c );
       return;
     }
