@@ -983,7 +983,11 @@ void Settings::load()
   m_pluginPath = checkFolderPath( Bee::convertToNativeFolderSeparator( sets->value( "PluginPath", defaultPluginFolderPath( true ) ).toString() ), defaultPluginFolderPath( true ) );
   m_languagePath = checkFolderPath( Bee::convertToNativeFolderSeparator( sets->value( "LanguagePath", resourceFolder() ).toString() ), resourceFolder() );
   m_keyEscapeMinimizeInTray = sets->value( "KeyEscapeMinimizeInTray", false ).toBool();
+#ifdef Q_OS_MAC
+  m_minimizeInTray = false;
+#else
   m_minimizeInTray = sets->value( "MinimizeInTray", true ).toBool();
+#endif
   m_stayOnTop = sets->value( "StayOnTop", false ).toBool();
   m_raiseOnNewMessageArrived = sets->value( "RaiseOnNewMessageArrived", false ).toBool();
   m_alwaysOpenChatOnNewMessageArrived = sets->value( "AlwaysOpenChatOnNewMessageArrived", false ).toBool();

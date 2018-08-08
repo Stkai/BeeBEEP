@@ -3803,11 +3803,15 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Change user</source>
-        <translation>Benutzer ändern</translation>
+        <translation type="vanished">Benutzer ändern</translation>
     </message>
     <message>
         <source>Welcome</source>
         <translation>Willkommen</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished">OK</translation>
     </message>
 </context>
 <context>

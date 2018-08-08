@@ -3909,11 +3909,15 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Change user</source>
-        <translation>Cambia utente</translation>
+        <translation type="vanished">Cambia utente</translation>
     </message>
     <message>
         <source>Cancel</source>
         <translation>Annulla</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>

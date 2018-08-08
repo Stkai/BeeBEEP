@@ -767,6 +767,10 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().minimizeInTray() );
   act->setData( 11 );
+#ifdef Q_OS_MAC
+  // Close button on MacOSX must quit the app
+  act->setDisabled( true );
+#endif
   act = mp_menuCloseSettings->addAction( tr( "Escape key minimize to tray icon" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().keyEscapeMinimizeInTray() );

@@ -3773,11 +3773,15 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Change user</source>
-        <translation>變更用戶</translation>
+        <translation type="vanished">變更用戶</translation>
     </message>
     <message>
         <source>Welcome</source>
         <translation>歡迎</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
