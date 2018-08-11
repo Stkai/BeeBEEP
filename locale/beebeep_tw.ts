@@ -39,6 +39,10 @@
         <source>Image Preview</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Autoresponder</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Core</name>
@@ -3987,6 +3991,13 @@ Please select a different name.</source>
     </message>
     <message>
         <source>If you want to format your message with words in regular and bold font write a [text to format] .</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Settings</name>
+    <message>
+        <source>Autoresponder</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

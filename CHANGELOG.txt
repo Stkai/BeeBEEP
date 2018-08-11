@@ -3,6 +3,8 @@ BEEBEEP (Secure Lan Messanger) - CHANGELOG - (c) Marco Mastroddi
 BeeBEEP 5.4.2
 - Removed option "On close minimize on tray" for MacOSX
 - Added more debug messages on user recognition
+- Added "Autoresponder" when user send messages in group where he is not member
+- Fixed bug: duplicate first message on chat window
 
 BeeBEEP 5.4.1
 - Fixed bug: "Transfer completed" message is not showed in chat

@@ -60,6 +60,11 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
   QString date_time_stamp = datetimestampToString( cm, show_timestamp, show_datestamp );
   QString html_date_time_stamp = date_time_stamp.isEmpty() ? date_time_stamp : QString( "<font color=#808080>(%1)</font>" ).arg( date_time_stamp );
   QString user_name = append_message_to_previous ? QString( "" ) : (u.isLocal() && !use_your_name) ? QObject::tr( "You" ) : (u.isValid() ? u.name() : QObject::tr( "Unknown" ));
+  if( cm.isFromAutoresponder() )
+  {
+    append_message_to_previous = false;
+    user_name = QString( "%1 from %2" ).arg( Settings::instance().autoresponderName(), user_name );
+  }
   QString html_user_name = user_name.isEmpty() ? user_name : QString( "<font color=%1><b>%2</b></font>%3%4" )
                                                                .arg( Settings::instance().chatUseColoredUserNames() ? u.color() : Settings::instance().chatDefaultUserNameColor() )
                                                                .arg( user_name )
@@ -161,6 +166,7 @@ bool GuiChatMessage::messageCanBeShowedInDefaultChat( const ChatMessage& cm )
   case ChatMessage::History:
   case ChatMessage::Other:
   case ChatMessage::ImagePreview:
+  case ChatMessage::Autoresponder:
     return true;
   default:
     return false;

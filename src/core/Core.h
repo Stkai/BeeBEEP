@@ -266,6 +266,7 @@ protected:
   bool removeUserFromGroupChat( const User&, const QString& chat_private_id );
   bool removeLocalUserFromGroupChatByOther( const User& other_user, const QString& chat_private_id );
   int archiveAllChats();
+  bool sendChatAutoResponderMessageToUser( const Chat&, const QString& msg, VNumber user_id );
 
   /* CoreDispatcher */
   enum DispatchType { DispatchToAll, DispatchToAllChatsWithUser, DispatchToChat, DispatchToDefaultAndPrivateChat };

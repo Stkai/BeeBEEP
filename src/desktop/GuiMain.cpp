@@ -1686,14 +1686,6 @@ void GuiMain::sendMessage( VNumber chat_id, const QString& msg )
 
 void GuiMain::showAlertForMessage( const Chat& c, const ChatMessage& cm )
 {
-  if( c.isValid() && c.isGroup() && Settings::instance().isNotificationDisabledForGroup( c.privateId() ) )
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Notifications disabled for group:" << c.privateId() << c.name();
-#endif
-    return;
-  }
-
   if( Settings::instance().beepOnNewMessageArrived() )
     playBeep();
 
@@ -1771,6 +1763,12 @@ void GuiMain::showAlertForMessage( const Chat& c, const ChatMessage& cm )
 
 void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
 {
+  if( !c.isValid() )
+  {
+    qWarning() << "Invalid chat" << c.name() << "found in GuiMain::onNewChatMessage(...)";
+    return;
+  }
+
   if( c.isDefault() )
   {
     if( mp_home->addSystemMessage( cm ) && mp_tabMain->currentWidget() != mp_home )
@@ -1780,14 +1778,24 @@ void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
     }
   }
 
-  GuiFloatingChat* fl_chat = floatingChat( c.id() );
-  if( !fl_chat && Settings::instance().alwaysOpenChatOnNewMessageArrived() )
-    fl_chat = createFloatingChat( c );
+  bool floating_chat_created = false;
+  bool alert_can_be_showed = !c.isDefault() && cm.alertCanBeSent();
+  if( alert_can_be_showed && c.isGroup() && Settings::instance().isNotificationDisabledForGroup( c.privateId() ) )
+    alert_can_be_showed = false;
 
-  if( fl_chat )
+  GuiFloatingChat* fl_chat = floatingChat( c.id() );
+
+  if( !fl_chat && Settings::instance().alwaysOpenChatOnNewMessageArrived() && alert_can_be_showed )
+  {
+    fl_chat = createFloatingChat( c );
+    floating_chat_created = true;
+    // skip show now message because it is already showed
+  }
+
+  if( fl_chat && !floating_chat_created )
     fl_chat->showChatMessage( c, cm );
 
-  if( cm.isFromSystem() || cm.isFromLocalUser() )
+  if( !cm.alertCanBeSent() ) // use this instead of alert_can_be_showed because it takes care also of groups
     return;
 
   bool chat_is_visible = fl_chat && fl_chat->isActiveWindow();
@@ -1800,7 +1808,8 @@ void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
   }
   else
   {
-    showAlertForMessage( c, cm );
+    if( alert_can_be_showed )
+      showAlertForMessage( c, cm );
     mp_groupList->updateChat( c ); // for unread messages
     mp_userList->updateChat( c ); // to sort users
     mp_chatList->updateChat( c ); // to sort chats

@@ -1768,3 +1768,8 @@ QString Settings::guiCustomListStyleSheet( const QString& background_color, cons
                    "padding-bottom: 32px;"
                    "color: black; }" ).arg( background_color ).arg( background_image_path );
 }
+
+QString Settings::autoresponderName() const
+{
+  return QT_TRANSLATE_NOOP( "Settings", "Autoresponder" );
+}

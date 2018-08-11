@@ -57,14 +57,12 @@ void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
 
   if( !c.usersId().contains( from_user_id ) )
   {
-    qWarning() << "User" << from_user_id << "is not present in the chat" << c.id() << c.name() << "... drop message:";
-    qWarning() << m.text();
+    qWarning() << "User" << from_user_id << "is not present in the chat" << c.id() << c.name() << "... autoresponder message sent";
+    qWarning() << "Drop message:" << m.text();
     if( c.isGroup() )
     {
       QString alert_msg = tr( "You are not a member of group %1. Your messages will be not shown." ).arg( c.name() );
-      Chat user_private_chat = ChatManager::instance().privateChatForUser( from_user_id );
-      if( user_private_chat.isValid() )
-        sendChatMessage( user_private_chat.id(), alert_msg );
+      sendChatAutoResponderMessageToUser( c, alert_msg, from_user_id );
     }
     return;
   }
@@ -79,13 +77,16 @@ void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Message dispatched to chat" << c.id();
 #endif
-  ChatMessage cm( from_user_id, m, ChatMessage::Chat );
+  ChatMessage cm( from_user_id, m, m.hasFlag( Message::Auto ) ? ChatMessage::Autoresponder : ChatMessage::Chat );
   c.addMessage( cm );
-  c.addUnreadMessage();
-  c.setLastMessageTimestamp( m.timestamp() );
+  if( cm.alertCanBeSent() )
+  {
+    c.addUnreadMessage();
+    c.setLastMessageTimestamp( m.timestamp() );
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Chat" << c.id() << "has" << c.unreadMessages() << "unread messages";
+    qDebug() << "Chat" << c.id() << "has" << c.unreadMessages() << "unread messages";
 #endif
+  }
   ChatManager::instance().setChat( c );
   emit newChatMessage( c, cm );
 }

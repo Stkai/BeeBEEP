@@ -37,6 +37,7 @@
 #include "UserManager.h"
 
 
+
 void Core::createDefaultChat()
 {
   qDebug() << "Creating default chat";
@@ -465,6 +466,36 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
   }
 
   return messages_sent;
+}
+
+bool Core::sendChatAutoResponderMessageToUser( const Chat& c, const QString& msg, VNumber user_id )
+{
+  if( !isConnected() )
+    return false;
+
+  User u = UserManager::instance().findUser( user_id );
+  if( !u.isValid() )
+  {
+    qWarning() << "Invalid user" << user_id << "found in Core::sendChatAutoResponderMessageToUser(...)";
+    return false;
+  }
+
+  if( u.isLocal() )
+  {
+    qWarning() << "You have tried to send autoresponder message to yourself:" << qPrintable( msg );
+    return false;
+  }
+
+  QString msg_to_send;
+
+  if( u.protocolVersion() < AUTORESPONDER_MESSAGE_PROTO_VERSION )
+    msg_to_send = QString( "<%1> %2" ).arg( Settings::instance().autoresponderName(), msg );
+  else
+    msg_to_send = msg;
+
+  Message m = Protocol::instance().chatMessage( c, msg_to_send );
+  m.addFlag( Message::Auto );
+  return sendMessageToLocalNetwork( u, m );
 }
 
 void Core::sendWritingMessage( VNumber chat_id )

@@ -39,6 +39,10 @@
         <source>Image Preview</source>
         <translation>Anteprima immagini</translation>
     </message>
+    <message>
+        <source>Autoresponder</source>
+        <translation>Risposta automatica</translation>
+    </message>
 </context>
 <context>
     <name>Core</name>
@@ -3971,7 +3975,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Enter the name of workgroup you want to add </source>
-        <translation>Inserisci il nome del gruppo di lavoro</translation>
+        <translation>Inserisci il nome del gruppo di lavoro </translation>
     </message>
 </context>
 <context>
@@ -4013,7 +4017,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Click to open chat with all local users</source>
-        <translation>Click per aprire una conversazione con tutti gli utenti connessi </translation>
+        <translation>Click per aprire una conversazione con tutti gli utenti connessi</translation>
     </message>
     <message>
         <source>Click to send a private message</source>
@@ -4136,6 +4140,13 @@ Inserisci un nome differente.</translation>
     <message>
         <source>If you want to format your message with words in regular and bold font write a [text to format] .</source>
         <translation>Se vuoi formattare il tuo messaggio con parole normali e in grassetto scrivi [testo da formattare] .</translation>
+    </message>
+</context>
+<context>
+    <name>Settings</name>
+    <message>
+        <source>Autoresponder</source>
+        <translation>Risposta automatica</translation>
     </message>
 </context>
 <context>

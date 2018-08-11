@@ -31,7 +31,7 @@ class Message;
 class ChatMessage
 {
 public:
-  enum Type { Header, System, Chat, Connection, UserInfo, FileTransfer, History, Other, ImagePreview, NumTypes };
+  enum Type { Header, System, Chat, Connection, UserInfo, FileTransfer, History, Other, ImagePreview, Autoresponder, NumTypes };
 
   ChatMessage();
   ChatMessage( const ChatMessage& );
@@ -44,6 +44,8 @@ public:
   inline bool isValid() const;
   inline bool isFromSystem() const;
   inline bool isFromLocalUser() const;
+  inline bool isFromAutoresponder() const;
+  inline bool alertCanBeSent() const;
 
   inline VNumber userId() const;
   inline const QString& message() const;
@@ -68,6 +70,8 @@ private:
 inline bool ChatMessage::isValid() const { return m_userId != ID_INVALID; }
 inline bool ChatMessage::isFromSystem() const { return m_userId == ID_SYSTEM_MESSAGE; }
 inline bool ChatMessage::isFromLocalUser() const { return m_userId == ID_LOCAL_USER; }
+inline bool ChatMessage::isFromAutoresponder() const { return m_type == ChatMessage::Autoresponder; }
+inline bool ChatMessage::alertCanBeSent() const { return !isFromLocalUser() && !isFromSystem(); }
 inline VNumber ChatMessage::userId() const { return m_userId; }
 inline const QString& ChatMessage::message() const { return m_message; }
 inline const QDateTime& ChatMessage::timestamp() const { return m_timestamp; }

@@ -49,6 +49,7 @@ public:
   inline void clearNewConnectedUserIdList();
   UserList newConnectedUserList() const;
   inline bool hasNewConnectedUsers() const;
+  QString autoresponderName() const;
 
   static UserManager& instance()
   {
