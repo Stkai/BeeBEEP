@@ -1289,6 +1289,7 @@ void GuiMain::settingsChanged( QAction* act )
     Settings::instance().setShowOnlyOnlineUsers( act->isChecked() );
     refresh_users = true;
     refresh_chat = true;
+    break;
   case 7:
     {
       Settings::instance().setShowChatsInOneWindow( act->isChecked() );
@@ -1448,6 +1449,7 @@ void GuiMain::settingsChanged( QAction* act )
     mp_actSelectEmoticonSourcePath->setEnabled( !act->isChecked() );
     updateEmoticons();
     refresh_chat = true;
+    break;
   case 32:
     Settings::instance().setSaveUserList( act->isChecked() );
     mp_actRemoveInactiveUsers->setEnabled( act->isChecked() );
