@@ -24,6 +24,7 @@
 #include "BeeUtils.h"
 #include "ChatMessage.h"
 #include "NetworkAddress.h"
+#include "Random.h"
 #include "Settings.h"
 #include "Version.h"
 
@@ -268,9 +269,12 @@ void Settings::createLocalUser( const QString& user_name )
 
 QString Settings::createLocalUserHash()
 {
-  QString hash_parameters = QString( "%1%2%3%4%5" ).arg( m_localUser.accountName() ).arg( m_localUser.name() )
-                                                   .arg( m_localUser.domainName() ).arg( version( true, true ) )
-                                                   .arg( QDateTime::currentDateTime().toString( "dd.MM.yyyy-hh:mm:ss.zzz" ) );
+  QString hash_parameters = QString( "%1%2%3%4%5%6%7" )
+                              .arg( QString::number( Random::number( 6475, 36475 ) ) )
+                              .arg( m_localUser.accountName() ).arg( m_localUser.name() )
+                              .arg( QString::number( Random::number( 6475, 36475 ) ) )
+                              .arg( m_localUser.domainName() ).arg( version( true, true ) )
+                              .arg( QDateTime::currentDateTime().toString( "dd.MM.yyyy-hh:mm:ss.zzz" ) );
   QString local_user_hash = simpleHash( hash_parameters );
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Local user HASH created:" << qPrintable( local_user_hash );
