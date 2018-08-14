@@ -1,5 +1,10 @@
 BEEBEEP (Secure Lan Messanger) - CHANGELOG - (c) Marco Mastroddi
 
+BeeBEEP 5.4.3
+- If option "Always open chat on new message" is enabled and "Raise previously opened 
+  chat on new message" is disabled, the window is now opened minimized to show icon
+  blinking on taskbar.
+
 BeeBEEP 5.4.2
 - Removed option "On close minimize on tray" for MacOSX
 - Added more debug messages on user recognition

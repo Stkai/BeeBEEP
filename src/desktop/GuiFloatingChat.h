@@ -37,7 +37,7 @@ public:
 
   bool setChat( const Chat& );
   inline GuiChat* guiChat() const;
-  void checkWindowFlagsAndShow();
+  void setWindowFlagsAndGeometry();
   inline bool chatIsVisible() const;
   void setMainIcon( bool with_message );
   void updateUser( const User& );

@@ -96,7 +96,7 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
 
   setCentralWidget( mp_chat );
   statusBar();
-  m_chatIsVisible = true;
+  m_chatIsVisible = false;
   m_prevActivatedState = false;
 
   connect( mp_chat, SIGNAL( toggleVisibilityEmoticonsPanelRequest() ), this, SLOT( toggleVisibilityEmoticonPanel() ) );
@@ -260,13 +260,17 @@ void GuiFloatingChat::closeEvent( QCloseEvent* e )
   e->accept();
 }
 
-void GuiFloatingChat::checkWindowFlagsAndShow()
+void GuiFloatingChat::setWindowFlagsAndGeometry()
 {
   Bee::setWindowStaysOnTop( this, Settings::instance().stayOnTop() );
   setAttribute( Qt::WA_ShowWithoutActivating );
 
   if( Settings::instance().floatingChatGeometry().isEmpty() )
+  {
     resize( 600, 400 );
+    if( !QApplication::activeWindow() )
+      move( QApplication::desktop()->availableGeometry().width() - frameGeometry().width() - 30, 40 );
+  }
   else
     restoreGeometry( Settings::instance().floatingChatGeometry() );
 
@@ -289,11 +293,6 @@ void GuiFloatingChat::checkWindowFlagsAndShow()
   }
   else
     chat_splitter->restoreState( Settings::instance().floatingChatSplitterState() );
-
-  if( !isVisible() )
-    show();
-
-  mp_chat->ensureLastMessageVisible();
 }
 
 void GuiFloatingChat::showUp()

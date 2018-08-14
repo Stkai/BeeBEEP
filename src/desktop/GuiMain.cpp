@@ -1790,8 +1790,9 @@ void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
   if( !fl_chat && Settings::instance().alwaysOpenChatOnNewMessageArrived() && alert_can_be_showed )
   {
     fl_chat = createFloatingChat( c );
-    floating_chat_created = true;
-    // skip show now message because it is already showed
+    fl_chat->show();
+    if( !Settings::instance().raiseOnNewMessageArrived() )
+      fl_chat->showMinimized();
   }
 
   if( fl_chat && !floating_chat_created )
@@ -2286,9 +2287,9 @@ void GuiMain::showChat( VNumber chat_id )
   if( !fl_chat )
     return;
 
-  if( !fl_chat->chatIsVisible() )
-    fl_chat->showUp();
-
+  fl_chat->show();
+  fl_chat->showUp();
+  QApplication::setActiveWindow( fl_chat );
   fl_chat->setFocusInChat();
 }
 
@@ -3347,8 +3348,6 @@ GuiFloatingChat* GuiMain::createFloatingChat( const Chat& c )
   if( fl_chat )
     return fl_chat;
 
-  bool window_is_created = false;
-
   if( Settings::instance().showChatsInOneWindow() && !m_floatingChats.isEmpty() )
     fl_chat = m_floatingChats.first();
 
@@ -3360,7 +3359,7 @@ GuiFloatingChat* GuiMain::createFloatingChat( const Chat& c )
     connect( fl_chat, SIGNAL( readAllMessages( VNumber ) ), this, SLOT( readAllMessagesInChat( VNumber ) ) );
     connect( fl_chat, SIGNAL( showVCardRequest( VNumber ) ), this, SLOT( showVCard( VNumber ) ) );
     m_floatingChats.append( fl_chat );
-    window_is_created = true;
+    fl_chat->setWindowFlagsAndGeometry();
     fl_chat->setSaveGeometryDisabled( Settings::instance().resetGeometryAtStartup() );
   }
 
@@ -3370,14 +3369,6 @@ GuiFloatingChat* GuiMain::createFloatingChat( const Chat& c )
     fl_chat->deleteLater();
     return 0;
   }
-
-  if( window_is_created )
-  {
-    fl_chat->checkWindowFlagsAndShow();
-    QApplication::setActiveWindow( fl_chat );
-  }
-  else
-    fl_chat->showUp();
 
   return fl_chat;
 }
