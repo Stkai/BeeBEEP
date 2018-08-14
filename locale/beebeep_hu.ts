@@ -1379,38 +1379,38 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation>Profil szerkesztése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="78"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="86"/>
         <source>Disabled by system administrator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="113"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="121"/>
         <source>%1 - Select your profile photo</source>
         <translation>%1 - Válassza ki a profilképét</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="114"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="122"/>
         <source>Images</source>
         <translation>Képek</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="126"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="134"/>
         <source>Unable to load image %1.</source>
         <translation>Nem sikerült betölteni a képet %1.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="126"/>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="157"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="134"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="165"/>
         <source>Ok</source>
         <translation>Rendben</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="166"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="174"/>
         <source>Please insert your nickname.</source>
         <translation>Kérem adja meg a becenevét.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="174"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="182"/>
         <source>The nickname &apos;%1&apos; is already in use by the user %2.</source>
         <translation>A becenév &apos;%1&apos;a felhasználó már használja %2.</translation>
     </message>
@@ -4599,62 +4599,62 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation>Becenév</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="92"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="55"/>
         <source>First name</source>
         <translation>Vezeténév</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="109"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="72"/>
         <source>Last name</source>
         <translation>Keresztnév</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="126"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="89"/>
         <source>Birthday</source>
         <translation>Születésnap</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="148"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="111"/>
         <source>dd/MM/yyyy</source>
         <translation>dd/MM/yyyy</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="171"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="134"/>
         <source>Email</source>
         <translation>Email</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="188"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="151"/>
         <source>Phone</source>
         <translation>Telefon</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="256"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="219"/>
         <source>Add or change photo</source>
         <translation>Fotó hozzáadása vagy módosítása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="285"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="248"/>
         <source>Remove photo</source>
         <translation>Távolítsuk el a fényképet</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="317"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="280"/>
         <source>Change your nickname color</source>
         <translation>Megváltoztatja a becenév színét</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="343"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="306"/>
         <source>Informations to display to other users</source>
         <translation>Információk megjelenítése más felhasználók számára</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="513"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="476"/>
         <source>Ok</source>
         <translation>Rendben</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="523"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="486"/>
         <source>Cancel</source>
         <translation>Mégsem</translation>
     </message>
@@ -4740,7 +4740,12 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation>A te  rendszerfiókod</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWizard.cpp" line="64"/>
+        <location filename="../src/desktop/GuiWizard.cpp" line="67"/>
+        <source>Disabled by system administrator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiWizard.cpp" line="77"/>
         <source>Your nickname can not be empty.</source>
         <translation>A beceneved nem lehet üres.</translation>
     </message>

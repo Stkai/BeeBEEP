@@ -1380,38 +1380,38 @@ Selecione um nome diferente.</translation>
         <translation>Edite seu Perfil</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="78"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="86"/>
         <source>Disabled by system administrator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="113"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="121"/>
         <source>%1 - Select your profile photo</source>
         <translation>%1 - Selecione uma foto para o seu Perfil</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="114"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="122"/>
         <source>Images</source>
         <translation>Imagens</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="126"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="134"/>
         <source>Unable to load image %1.</source>
         <translation>Impossível carregar Imagem %1.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="126"/>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="157"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="134"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="165"/>
         <source>Ok</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="166"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="174"/>
         <source>Please insert your nickname.</source>
         <translation>Insira o seu Apelido.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="174"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="182"/>
         <source>The nickname &apos;%1&apos; is already in use by the user %2.</source>
         <translation>O apelido &apos;%1&apos; já está sendo usado pelo usuário%2.</translation>
     </message>
@@ -4637,17 +4637,17 @@ Selecione um nome diferente.</translation>
         <translation>Apelido</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="92"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="55"/>
         <source>First name</source>
         <translation>Primeiro Nome</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="109"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="72"/>
         <source>Last name</source>
         <translation>Ultimo Nome</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="126"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="89"/>
         <source>Birthday</source>
         <translation>Aniversário</translation>
     </message>
@@ -4656,37 +4656,37 @@ Selecione um nome diferente.</translation>
         <translation type="obsolete">dd/MM/yyyy</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="148"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="111"/>
         <source>dd/MM/yyyy</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="171"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="134"/>
         <source>Email</source>
         <translation>Email</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="188"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="151"/>
         <source>Phone</source>
         <translation>Fone</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="256"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="219"/>
         <source>Add or change photo</source>
         <translation>Adicionar ou alterar foto</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="285"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="248"/>
         <source>Remove photo</source>
         <translation>Remover Foto</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="317"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="280"/>
         <source>Change your nickname color</source>
         <translation>Trocar cor de texto do apelido</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="343"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="306"/>
         <source>Informations to display to other users</source>
         <translation>Informações para exibir para outros usuários</translation>
     </message>
@@ -4695,12 +4695,12 @@ Selecione um nome diferente.</translation>
         <translation type="obsolete">Otras informações</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="513"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="476"/>
         <source>Ok</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="523"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="486"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
@@ -4786,7 +4786,12 @@ Selecione um nome diferente.</translation>
         <translation>Sua Conta é</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWizard.cpp" line="64"/>
+        <location filename="../src/desktop/GuiWizard.cpp" line="67"/>
+        <source>Disabled by system administrator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiWizard.cpp" line="77"/>
         <source>Your nickname can not be empty.</source>
         <translation>O Apelido não pode estar vazio.</translation>
     </message>

@@ -3908,6 +3908,10 @@ Inserisci un nome differente.</translation>
         <source>Your system account is</source>
         <translation>Il tuo account di sistema è</translation>
     </message>
+    <message>
+        <source>Disabled by system administrator</source>
+        <translation>Disabilitato dall&apos;amministratore di sistema</translation>
+    </message>
 </context>
 <context>
     <name>GuiWizardDialog</name>

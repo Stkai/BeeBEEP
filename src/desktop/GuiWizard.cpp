@@ -44,16 +44,29 @@ GuiWizard::GuiWizard( QWidget *parent )
 void GuiWizard::loadSettings()
 {
   mp_lAccount->setText( QString( "%1: %2" ).arg( tr( "Your system account is" ) ).arg( Settings::instance().localUser().accountName() ) );
-  if( Settings::instance().localUser().name() == Settings::instance().localUser().accountName() && Settings::instance().allowEditNickname() )
+
+  if( Settings::instance().allowEditNickname() )
   {
-    QString display_name = Settings::instance().localUser().name();
-    display_name.replace( QChar( '.' ), QChar( ' ' ) );
-    display_name.replace( QChar( '_' ), QChar( ' ' ) );
-    mp_leName->setText( Bee::capitalizeFirstLetter( display_name, true ) );
+    mp_leName->setEnabled( true );
+    mp_leName->setReadOnly( false );
+    mp_leName->setToolTip( "" );
+    if( Settings::instance().localUser().name() == Settings::instance().localUser().accountName() )
+    {
+      QString display_name = Settings::instance().localUser().name();
+      display_name.replace( QChar( '.' ), QChar( ' ' ) );
+      display_name.replace( QChar( '_' ), QChar( ' ' ) );
+      mp_leName->setText( Bee::capitalizeFirstLetter( display_name, true ) );
+    }
+    else
+      mp_leName->setText( Settings::instance().localUser().name() );
   }
   else
+  {
+    mp_leName->setEnabled( false );
+    mp_leName->setReadOnly( true );
+    mp_leName->setToolTip( tr( "Disabled by system administrator" ) );
     mp_leName->setText( Settings::instance().localUser().name() );
-  mp_leName->setEnabled( Settings::instance().allowEditNickname() );
+  }
 }
 
 void GuiWizard::saveSettings()

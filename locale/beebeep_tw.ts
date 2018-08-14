@@ -3768,6 +3768,10 @@ Please select a different name.</source>
         <source>Welcome to &lt;b&gt;%1 Network&lt;/b&gt;.</source>
         <translation>歡迎來到 &lt;b&gt;%1 網路&lt;/b&gt;.</translation>
     </message>
+    <message>
+        <source>Disabled by system administrator</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiWizardDialog</name>

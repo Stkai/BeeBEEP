@@ -3798,6 +3798,10 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Welcome to &lt;b&gt;%1 Network&lt;/b&gt;.</source>
         <translation>Willkommen im &lt;b&gt;Netzwerk %1&lt;/b&gt;.</translation>
     </message>
+    <message>
+        <source>Disabled by system administrator</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiWizardDialog</name>
