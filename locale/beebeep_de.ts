@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE" sourcelanguage="en">
+<TS version="2.0" language="de_DE" sourcelanguage="en">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -1142,6 +1142,10 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>Please insert your nickname.</source>
         <translation>Trage bitte einen Spitznamen ein.</translation>
+    </message>
+    <message>
+        <source>Disabled by system administrator</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3807,7 +3811,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Change user</source>
-        <translation type="vanished">Benutzer ändern</translation>
+        <translation type="obsolete">Benutzer ändern</translation>
     </message>
     <message>
         <source>Welcome</source>

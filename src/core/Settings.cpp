@@ -105,6 +105,7 @@ Settings::Settings()
   m_userRecognitionMethod = RecognizeByDefaultMethod;
   m_canAddMembersToGroup = true;
   m_canRemoveMembersFromGroup = true;
+  m_allowEditNickname = true;
   /* Default RC end */
 
   m_emoticonSizeInEdit = 18;
@@ -331,6 +332,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "UserRecognitionMethod", m_userRecognitionMethod );
     sets->setValue( "AllowAddMembersToGroup", m_canAddMembersToGroup );
     sets->setValue( "AllowRemoveMembersFromGroup", m_canRemoveMembersFromGroup );
+    sets->setValue( "AllowEditNickname", m_allowEditNickname );
     sets->endGroup();
     sets->sync();
     qDebug() << "RC default configuration file created in" << qPrintable( Bee::convertToNativeFolderSeparator( sets->fileName() ) );
@@ -411,11 +413,11 @@ void Settings::loadRcFile()
   m_useOnlyTextEmoticons = sets->value( "UseOnlyTextEmoticons", m_useOnlyTextEmoticons ).toBool();
   m_disablePrivateChats = sets->value( "DisablePrivateChats", m_disablePrivateChats ).toBool();
   int user_recognition_method = sets->value( "UserRecognitionMethod", -1 ).toInt();
-  setUserRecognitionMethod( (user_recognition_method < 0 && trust_system_account) ? RecognizeByAccount : user_recognition_method );
+  setUserRecognitionMethod( (user_recognition_method < 0 ? (trust_system_account ? RecognizeByAccount : m_userRecognitionMethod) : user_recognition_method) );
 
   m_canAddMembersToGroup = sets->value( "AllowAddMembersToGroup", m_canAddMembersToGroup ).toBool();
   m_canRemoveMembersFromGroup = sets->value( "AllowRemoveMembersFromGroup", m_canRemoveMembersFromGroup ).toBool();
-
+  m_allowEditNickname = sets->value( "AllowEditNickname", m_allowEditNickname ).toBool();
   sets->endGroup();
   QStringList key_list = sets->allKeys();
   foreach( QString key, key_list )
@@ -1150,7 +1152,7 @@ void Settings::load()
 
   sets->beginGroup( "ShareDesktop" );
   m_enableShareDesktop = sets->value( "Enable", true ).toBool();
-  m_shareDesktopCaptureDelay = qMax( 1000, sets->value( "CaptureScreenInterval(ms)", m_shareDesktopCaptureDelay ).toInt() );
+  m_shareDesktopCaptureDelay = qMax( 1000, sets->value( "CaptureScreenInterval", m_shareDesktopCaptureDelay ).toInt() );
   m_shareDesktopFitToScreen = sets->value( "FitToScreen", false ).toBool();
   m_shareDesktopImageType = sets->value( "ImageType", "png" ).toString();
   m_shareDesktopImageQuality = sets->value( "ImageQuality", 20 ).toInt();
@@ -1171,6 +1173,16 @@ void Settings::load()
     }
   }
   sets->endGroup();
+
+  if( !m_allowEditNickname && userRecognitionMethod() != Settings::RecognizeByNickname )
+  {
+    if( m_localUser.name() != m_localUser.accountName() )
+    {
+      qWarning() << "AllowEditNickname is disabled but nickname changed to" << qPrintable( m_localUser.name() );
+      qDebug() << "Restoring system account name:" << qPrintable( m_localUser.accountName() );
+      m_localUser.setName( m_localUser.accountName() );
+    }
+  }
 
   m_lastSave = QDateTime::currentDateTime();
   sets->deleteLater();
@@ -1440,7 +1452,7 @@ void Settings::save()
 
   sets->beginGroup( "ShareDesktop" );
   sets->setValue( "Enable", m_enableShareDesktop );
-  sets->setValue( "CaptureScreenInterval(ms)", m_shareDesktopCaptureDelay );
+  sets->setValue( "CaptureScreenInterval", m_shareDesktopCaptureDelay );
   sets->setValue( "FitToScreen", m_shareDesktopFitToScreen );
   sets->setValue( "ImageType", m_shareDesktopImageType );
   sets->setValue( "ImageQuality", m_shareDesktopImageQuality );

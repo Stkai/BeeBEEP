@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -1154,6 +1154,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>The nickname &apos;%1&apos; is already in use by the user %2.</source>
         <translation>Il soprannome %1 è usato già dall&apos;utente %2.</translation>
+    </message>
+    <message>
+        <source>Disabled by system administrator</source>
+        <translation>Disabilitato dall&apos;amministratore di sistema</translation>
     </message>
 </context>
 <context>
@@ -3763,6 +3767,10 @@ Inserisci un nome differente.</translation>
         <source>is</source>
         <translation>è</translation>
     </message>
+    <message>
+        <source>Disabled by system administrator</source>
+        <translation type="obsolete">Disabilitato dall&apos;amministratore di sistema</translation>
+    </message>
 </context>
 <context>
     <name>GuiVCardDialog</name>
@@ -3913,7 +3921,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Change user</source>
-        <translation type="vanished">Cambia utente</translation>
+        <translation type="obsolete">Cambia utente</translation>
     </message>
     <message>
         <source>Cancel</source>

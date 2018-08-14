@@ -276,6 +276,8 @@ public:
   inline const QByteArray& previewFileDialogGeometry();
   inline int previewFileDialogImageSize() const;
 
+  inline bool allowEditNickname() const;
+
   QByteArray hash( const QString& ) const;
   QString currentHash() const;
   QString simpleHash( const QString& ) const;
@@ -556,6 +558,7 @@ private:
 
   bool m_canAddMembersToGroup;
   bool m_canRemoveMembersFromGroup;
+  bool m_allowEditNickname;
 
   // Ini
   bool m_firstTime;
@@ -1090,5 +1093,6 @@ inline bool Settings::canAddMembersToGroup() const { return m_canAddMembersToGro
 inline bool Settings::canRemoveMembersFromGroup() const { return m_canRemoveMembersFromGroup; }
 inline void Settings::setEnableMaximizeButton( bool new_value ) { m_enableMaximizeButton = new_value; }
 inline bool Settings::enableMaximizeButton() const { return m_enableMaximizeButton; }
+inline bool Settings::allowEditNickname() const { return m_allowEditNickname; }
 
 #endif // BEEBEEP_SETTINGS_

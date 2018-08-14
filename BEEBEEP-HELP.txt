@@ -18,12 +18,12 @@
 /***************************/
 
 [BeeBEEP]
-EnableSaveData =[true/false] if disabled BeeBEEP doesn't save data at exit. It is useful if you want to share a computer with same user account and change nickname everytime (default=true) [3.0.4]
+EnableSaveData=[true/false] if disabled BeeBEEP doesn't save data at exit. It is useful if you want to share a computer with same user account and change nickname everytime (default=true) [3.0.4]
 UseConfigurationFileIni=[true/false] the program will read and save setting in a beebeep.ini if it is set to true otherwise the settings are saved in OS registry (default=true) [1.0.0]
 BroadcastOnlyToHostsIni=[true/false] if true BeeBEEP will search other users only in the IP addresses or Subnet listed in file beehost.ini (default=false) [1.0.0]
-BroadcastPort= is the UDP port used by BeeBEEP to contact other client in the local area network (default 36475)
-DefaultListenerPort= is the TCP port used by BeeBEEP to send chat message to the connected users (default 6475) [1.0.0]
-DefaultFileTransferPort= is the TCP port used by BeeBEEP to send file to the connected users (default 6476) [1.0.0]
+BroadcastPort=[integer] is the UDP port used by BeeBEEP to contact other client in the local area network (default 36475)
+DefaultListenerPort=[integer] is the TCP port used by BeeBEEP to send chat message to the connected users (default 6475) [1.0.0]
+DefaultFileTransferPort=[integer] is the TCP port used by BeeBEEP to send file to the connected users (default 6476) [1.0.0]
 SaveDataInDocumentsFolder=[true/false] force BeeBEEP to save all data (settings and history) in USER/Documents/beebeep-data (in windows %userprofile%\Documents\beebeep-data) (default=false) [1.0.3]
 SaveDataInUserApplicationFolder=[true/false] force BeeBEEP to save all data (settings and history) in USER_APP_DATA/beebeep-data (in windows %appdata%\beebeep-data) (default=false) [1.0.3]
 AllowMultipleInstances=[true/false] enable the option to launch multiple instance of BeeBEEP (default=false) [1.0.0]
@@ -55,6 +55,7 @@ UserRecognitionMethod=[integer] 0: RecognizeByDefaultMethod      (default=0) [4.
                                 3: RecognizeByNickname
 AllowAddMembersToGroup=[true/false] allow current user to create and add members to group (default=true) [5.4.0]
 AllowRemoveMembersFromGroup=[true/false] allow current user to remove members to group (default=true) [5.4.0]
+AllowEditNickname=[true/false] allow current user to edit his/her nickname. It is useful disabled with option UserRecognitionMethod=2 or UserRecognitionMethod=1 (default=true) [5.4.3]
 
 [Groups]
 TrustNickname=[true/false] if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect (default=true) [1.0.0] [obsolete in 4.0.0]
@@ -253,7 +254,7 @@ ShareList=(do not edit manually)
 
 [ShareDesktop]
 Enable=[true/false] enable file desktop sharing (default=true) [4.2.0]
-CaptureScreenInterval(ms)=[integer] interval in ms of capture screen (default=2100) [4.2.0]
+CaptureScreenInterval=[integer] interval in ms of capture screen (default=2100) [4.2.0]
 FitToScreen=[true/false] fit desktop image from remote user in your screen (default=false) [4.2.0]
 ImageType=[string] is better to use jpg or png (default=jpg) [4.2.0]
 ImageQuality=[integer] image quality of jpg format, in case of png use 100 (default=60) [4.2.0]

@@ -44,7 +44,7 @@ GuiWizard::GuiWizard( QWidget *parent )
 void GuiWizard::loadSettings()
 {
   mp_lAccount->setText( QString( "%1: %2" ).arg( tr( "Your system account is" ) ).arg( Settings::instance().localUser().accountName() ) );
-  if( Settings::instance().localUser().name() == Settings::instance().localUser().accountName() )
+  if( Settings::instance().localUser().name() == Settings::instance().localUser().accountName() && Settings::instance().allowEditNickname() )
   {
     QString display_name = Settings::instance().localUser().name();
     display_name.replace( QChar( '.' ), QChar( ' ' ) );
@@ -53,6 +53,7 @@ void GuiWizard::loadSettings()
   }
   else
     mp_leName->setText( Settings::instance().localUser().name() );
+  mp_leName->setEnabled( Settings::instance().allowEditNickname() );
 }
 
 void GuiWizard::saveSettings()

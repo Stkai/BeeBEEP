@@ -73,6 +73,10 @@ void GuiEditVCard::setUser( const User& u )
 void GuiEditVCard::loadVCard()
 {
   mp_leNickname->setText( m_vCard.nickName() );
+  mp_leNickname->setEnabled( Settings::instance().allowEditNickname() );
+  if( !mp_leNickname->isEnabled() )
+    mp_leNickname->setToolTip( tr( "Disabled by system administrator" ) );
+
   mp_leFirstName->setText( m_vCard.firstName() );
   mp_leLastName->setText( m_vCard.lastName() );
 
