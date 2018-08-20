@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="sv">
+<TS version="2.1" language="sv">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -4817,12 +4817,12 @@ Välj ett annat namn.</translation>
         <translation type="unfinished">OK</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWizard.ui" line="46"/>
+        <location filename="../src/desktop/GuiWizard.ui" line="49"/>
         <source>Cancel</source>
         <translation type="unfinished">Avbryt</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWizard.ui" line="86"/>
+        <location filename="../src/desktop/GuiWizard.ui" line="92"/>
         <source>Welcome</source>
         <translation>Välkommen</translation>
     </message>

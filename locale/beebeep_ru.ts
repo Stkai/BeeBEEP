@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="ru">
+<TS version="2.1" language="ru">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -51,7 +51,7 @@
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="319"/>
         <source>Autoresponder</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоответ</translation>
     </message>
 </context>
 <context>
@@ -200,7 +200,7 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="177"/>
         <source>%1 %2 will be informed of your changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 будут проинформированы о ваших изменениях.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="191"/>
@@ -215,7 +215,7 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="196"/>
         <source>%1 This kind of change can be temporary if the user exists and does not leave the group spontaneously.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Такое изменение может быть временным, если пользователь существует и не покидает группу спонтанно.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="213"/>
@@ -242,7 +242,7 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="302"/>
         <source>%1 %2 wants to remove you from the group chat %3. If you agree please leave the group.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 хотят удалить вас из группового чата %3. Если вы согласны, пожалуйста, покиньте группу.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="321"/>
@@ -252,7 +252,7 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="338"/>
         <source>%1 You have left group chat %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Вы покинули групповой чат %2.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="369"/>
@@ -564,12 +564,12 @@
         <location filename="../src/core/CoreConnection.cpp" line="277"/>
         <location filename="../src/core/CoreConnection.cpp" line="315"/>
         <source>domain</source>
-        <translation type="unfinished"></translation>
+        <translation>домен</translation>
     </message>
     <message>
         <location filename="../src/core/CoreConnection.cpp" line="293"/>
         <source>%1 Connection closed to user %2 because it uses your hash code.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Соединение закрыто пользователем %2 так как он спользует ваш хэш-код.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreConnection.cpp" line="313"/>
@@ -585,7 +585,7 @@
     <message>
         <location filename="../src/core/CoreConnection.cpp" line="334"/>
         <source>%1 Connection closed to user %2 because it uses same hash code of the already connected user %3: %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Соединение закрыто пользователем %2, так как он спользует тот же хэш-код, что и уже подключенный пользователь%3: %4.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreConnection.cpp" line="388"/>
@@ -595,7 +595,7 @@
     <message>
         <location filename="../src/core/CoreConnection.cpp" line="392"/>
         <source>%1 %2 uses old encryption level.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 используют устаревший уровень шифрования.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreShareDesktop.cpp" line="52"/>
@@ -620,7 +620,7 @@
     <message>
         <location filename="../src/core/CoreDispatcher.cpp" line="64"/>
         <source>You are not a member of group %1. Your messages will be not shown.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы не член группы %1. Ваши сообщения не будут показаны.</translation>
     </message>
 </context>
 <context>
@@ -1293,7 +1293,7 @@
     <message>
         <location filename="../src/desktop/GuiCreateGroup.cpp" line="113"/>
         <source>Please select at least one member for the group.</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите хотя бы одного члена для группы.</translation>
     </message>
     <message>
         <source>Please select two or more member for the group.</source>
@@ -1317,27 +1317,27 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.cpp" line="40"/>
         <source>Create message</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать сообщение</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.cpp" line="118"/>
         <source>Nobody</source>
-        <translation type="unfinished"></translation>
+        <translation>Никто</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.cpp" line="125"/>
         <source>Add recipients</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить получателей</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.cpp" line="167"/>
         <source>Please select at least one recipient for your message.</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите хотябы одного получателя сообщения.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.cpp" line="174"/>
         <source>You cannot send an empty message.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы не можете отправить пустое сообщение.</translation>
     </message>
 </context>
 <context>
@@ -1345,27 +1345,27 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="160"/>
         <source>Open chat after sending message</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть чат после отправки сообщения</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="42"/>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>Кому</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="81"/>
         <source>Add recipients</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить получателей</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="139"/>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Сообщение</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="258"/>
         <source>Click to send message</source>
-        <translation type="unfinished"></translation>
+        <translation>Щёлкните, чтобы отправить сообщение</translation>
     </message>
 </context>
 <context>
@@ -1378,7 +1378,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="86"/>
         <source>Disabled by system administrator</source>
-        <translation type="unfinished"></translation>
+        <translation>Отключено системным администратором</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="121"/>
@@ -1589,37 +1589,37 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="381"/>
         <source>Qt libraries have a bug on saving the window&apos;s state.</source>
-        <translation type="unfinished"></translation>
+        <translation>Библиотеки Qt имеют ошибку при сохранении состояния окна.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="382"/>
         <source>If you have layout problem please save only geometry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Если у вас есть проблемы с компоновкой, сохраните только геометрию.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="383"/>
         <source>Save all</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить всё</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="383"/>
         <source>Save only geometry</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить только геометрию</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="383"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="402"/>
         <source>Window geometry saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Геометрия окна сохранена</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="404"/>
         <source>Window geometry and state saved</source>
-        <translation type="unfinished">Геометрия окна и состояние сохранены</translation>
+        <translation>Геометрия окна и состояние сохранены</translation>
     </message>
     <message>
         <source>The window geometry and state are saved</source>
@@ -2412,12 +2412,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3762"/>
         <source>Qt libraries have a bug on saving the window&apos;s state.</source>
-        <translation type="unfinished"></translation>
+        <translation>Библиотеки Qt имеют ошибку при сохранении состояния окна.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3763"/>
         <source>If you have layout problem please save only geometry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Если у вас есть проблемы с компоновкой, сохраните только геометрию.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3871"/>
@@ -2612,22 +2612,22 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="662"/>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Подключиться</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="665"/>
         <source>Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Отключиться</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="701"/>
         <source>Create a message</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать сообщение</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="719"/>
         <source>Open your download folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть вашу папку загрузки</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="756"/>
@@ -2657,12 +2657,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="878"/>
         <source>Always open chat on new message</source>
-        <translation type="unfinished"></translation>
+        <translation>Всегда открывать окно чата при новом сообщении</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="882"/>
         <source>Raise previously opened chat on new message</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать ранее открытое окно чата при новом сообщении</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="894"/>
@@ -2702,7 +2702,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1010"/>
         <source>Enable maximize button</source>
-        <translation type="unfinished"></translation>
+        <translation>Включить кнопку Развернуть</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1019"/>
@@ -2712,7 +2712,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1028"/>
         <source>Reset geometry of all windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Сбросить геометрию всех окон</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1198"/>
@@ -2897,7 +2897,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2620"/>
         <source>You are not allowed create groups. The option has been disabled by your system administrator.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы не можете создавать группы. Эта опция отключена системным администратором.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2641"/>
@@ -2907,7 +2907,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2663"/>
         <source>You are not allowed modify groups. The option has been disabled by your system administrator.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы не можете изменять группы. Эта опция отключена системным администратором.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2880"/>
@@ -2922,7 +2922,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3146"/>
         <source>none</source>
-        <translation type="unfinished">не определена</translation>
+        <translation>не определена</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3650"/>
@@ -2933,27 +2933,27 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3764"/>
         <source>Save all</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить всё</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3764"/>
         <source>Save only geometry</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить только геометрию</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3780"/>
         <source>Window geometry saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Геометрия окна сохранена</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3818"/>
         <source>Do you really want to reset window&apos;s geometry?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы действительно хотите сбросить геометрию окна?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3833"/>
         <source>Geometry of all windows has been reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Геометрия всех окон сброшена</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4052"/>
@@ -3241,12 +3241,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="795"/>
         <source>Show the user list at once</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать список пользователей сразу</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="945"/>
         <source>Select download folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите папку загрузки</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1234"/>
@@ -3389,7 +3389,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="60"/>
         <source>default</source>
-        <translation type="unfinished">по-умолчанию</translation>
+        <translation>по-умолчанию</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="99"/>
@@ -3417,7 +3417,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="348"/>
         <source>Use default multicast group address</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать мультикаст адрес группы по умолчанию</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="368"/>
@@ -3427,7 +3427,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="389"/>
         <source>Disable system proxy for connections</source>
-        <translation type="unfinished"></translation>
+        <translation>Отключить системный прокси для подключений</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="433"/>
@@ -3887,17 +3887,17 @@ Please select a different name.</source>
     <message>
         <location filename="../src/gui/GuiSelectItems.ui" line="23"/>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <location filename="../src/gui/GuiSelectItems.ui" line="30"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <location filename="../src/gui/GuiSelectItems.ui" line="50"/>
         <source>Clear selection</source>
-        <translation type="unfinished">Отменить выбор</translation>
+        <translation>Отменить выбор</translation>
     </message>
 </context>
 <context>
@@ -4095,7 +4095,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiShareLocal.cpp" line="81"/>
         <source>Add a folder to your local share</source>
-        <translation>Добавить папку в ваш локальный общий доступ </translation>
+        <translation>Добавить папку в ваш локальный общий доступ</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareLocal.cpp" line="83"/>
@@ -4734,7 +4734,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiWizard.cpp" line="67"/>
         <source>Disabled by system administrator</source>
-        <translation type="unfinished"></translation>
+        <translation>Отключено системным администратором</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWizard.cpp" line="77"/>
@@ -4756,15 +4756,15 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiWizard.ui" line="36"/>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWizard.ui" line="46"/>
+        <location filename="../src/desktop/GuiWizard.ui" line="49"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWizard.ui" line="86"/>
+        <location filename="../src/desktop/GuiWizard.ui" line="92"/>
         <source>Welcome</source>
         <translation>Добро пожаловать</translation>
     </message>
@@ -4828,7 +4828,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.ui" line="23"/>
         <source>Enter the name of workgroup you want to add </source>
-        <translation>Введите имя рабочей группы, которую вы хотите добавить</translation>
+        <translation>Введите имя рабочей группы, которую вы хотите добавить </translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.ui" line="93"/>
@@ -5030,7 +5030,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/core/Settings.cpp" line="1790"/>
         <source>Autoresponder</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоответ</translation>
     </message>
 </context>
 <context>

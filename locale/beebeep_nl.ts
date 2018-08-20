@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="nl_BE" sourcelanguage="en_US">
+<TS version="2.1" language="nl_BE" sourcelanguage="en_US">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -51,7 +51,7 @@
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="319"/>
         <source>Autoresponder</source>
-        <translation type="unfinished"></translation>
+        <translation>Autobeantwoorder</translation>
     </message>
 </context>
 <context>
@@ -576,12 +576,12 @@
         <location filename="../src/core/CoreConnection.cpp" line="277"/>
         <location filename="../src/core/CoreConnection.cpp" line="315"/>
         <source>domain</source>
-        <translation type="unfinished"></translation>
+        <translation>domein</translation>
     </message>
     <message>
         <location filename="../src/core/CoreConnection.cpp" line="293"/>
         <source>%1 Connection closed to user %2 because it uses your hash code.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Verbinding gesloten naar gebruiker %2 omdat hij je hash-code gebruikt.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreConnection.cpp" line="313"/>
@@ -597,7 +597,7 @@
     <message>
         <location filename="../src/core/CoreConnection.cpp" line="334"/>
         <source>%1 Connection closed to user %2 because it uses same hash code of the already connected user %3: %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Verbinding gesloten naar gebruiker %2 omdat hij dezelfde hash-code gebruikt als de al verbonden gebruiker %3:%4.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreConnection.cpp" line="388"/>
@@ -1313,7 +1313,7 @@
     <message>
         <location filename="../src/desktop/GuiCreateGroup.cpp" line="113"/>
         <source>Please select at least one member for the group.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer ten minste één lid voor de groep.</translation>
     </message>
     <message>
         <source>Please select two or more member for the group.</source>
@@ -1403,7 +1403,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="86"/>
         <source>Disabled by system administrator</source>
-        <translation type="unfinished"></translation>
+        <translation>Uitgeschakeld door systeembeheerder</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="122"/>
@@ -2735,7 +2735,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1010"/>
         <source>Enable maximize button</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximaliseren-knop inschakelen</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1019"/>
@@ -4828,7 +4828,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiWizard.cpp" line="67"/>
         <source>Disabled by system administrator</source>
-        <translation type="unfinished"></translation>
+        <translation>Uitgeschakeld door systeembeheerder</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWizard.cpp" line="77"/>
@@ -4850,15 +4850,15 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiWizard.ui" line="36"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWizard.ui" line="46"/>
+        <location filename="../src/desktop/GuiWizard.ui" line="49"/>
         <source>Cancel</source>
         <translation>Annuleer</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWizard.ui" line="86"/>
+        <location filename="../src/desktop/GuiWizard.ui" line="92"/>
         <source>Welcome</source>
         <translation>Welkom</translation>
     </message>
@@ -5136,7 +5136,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/core/Settings.cpp" line="1790"/>
         <source>Autoresponder</source>
-        <translation type="unfinished"></translation>
+        <translation>Autobeantwoorder</translation>
     </message>
 </context>
 <context>

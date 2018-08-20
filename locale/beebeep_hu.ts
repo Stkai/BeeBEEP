@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="hu_HU">
+<TS version="2.1" language="hu_HU">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -4767,12 +4767,12 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWizard.ui" line="46"/>
+        <location filename="../src/desktop/GuiWizard.ui" line="49"/>
         <source>Cancel</source>
         <translation>Mégsem</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWizard.ui" line="86"/>
+        <location filename="../src/desktop/GuiWizard.ui" line="92"/>
         <source>Welcome</source>
         <translation>Üdvözöljük</translation>
     </message>

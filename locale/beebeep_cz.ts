@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="cs_CZ">
+<TS version="2.1" language="cs_CZ">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -4853,12 +4853,12 @@ Vyberte prosím jiné jméno.</translation>
         <translation type="unfinished">Ok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWizard.ui" line="46"/>
+        <location filename="../src/desktop/GuiWizard.ui" line="49"/>
         <source>Cancel</source>
         <translation>Zrušit</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWizard.ui" line="86"/>
+        <location filename="../src/desktop/GuiWizard.ui" line="92"/>
         <source>Welcome</source>
         <translation>Vítejte</translation>
     </message>

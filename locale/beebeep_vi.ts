@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="vi_VN">
+<TS version="2.1" language="vi_VN">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -4809,12 +4809,12 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="unfinished">Đồng ý</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWizard.ui" line="46"/>
+        <location filename="../src/desktop/GuiWizard.ui" line="49"/>
         <source>Cancel</source>
         <translation type="unfinished">Hủy bỏ</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWizard.ui" line="86"/>
+        <location filename="../src/desktop/GuiWizard.ui" line="92"/>
         <source>Welcome</source>
         <translation>Hoan nghênh</translation>
     </message>
