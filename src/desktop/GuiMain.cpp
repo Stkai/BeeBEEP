@@ -599,7 +599,7 @@ void GuiMain::checkViewActions()
   mp_actConnect->setEnabled( !m_coreIsConnecting && !is_connected );
   mp_actDisconnect->setEnabled( is_connected );
   mp_actBroadcast->setEnabled( is_connected );
-  mp_actCreateMessage->setEnabled( is_connected );
+  mp_actCreateMessage->setEnabled( is_connected && !Settings::instance().disableCreateMessage() );
   mp_actCreateGroupChat->setEnabled( UserManager::instance().userList().size() > 1 );
   mp_actViewFileSharing->setEnabled( Settings::instance().enableFileTransfer() && Settings::instance().enableFileSharing() );
   mp_actEnableFileSharing->setEnabled( Settings::instance().enableFileTransfer() && !Settings::instance().disableFileSharing() );
@@ -700,6 +700,8 @@ void GuiMain::createActions()
 
   mp_actCreateMessage = new QAction( IconManager::instance().icon( "message-to-many.png" ), tr( "Create a message" ), this );
   connect( mp_actCreateMessage, SIGNAL( triggered() ), this, SLOT( createMessage() ) );
+  if( Settings::instance().disableCreateMessage() )
+    mp_actCreateMessage->setToolTip( tr( "The option has been disabled by your system administrator.") );
 }
 
 void GuiMain::createMenus()

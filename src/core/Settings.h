@@ -111,6 +111,7 @@ public:
 
   inline bool canAddMembersToGroup() const;
   inline bool canRemoveMembersFromGroup() const;
+  inline bool disableCreateMessage() const;
 
   QString dnsRecord() const;
   inline bool useMulticastDns() const;
@@ -559,6 +560,7 @@ private:
   bool m_canAddMembersToGroup;
   bool m_canRemoveMembersFromGroup;
   bool m_allowEditNickname;
+  bool m_disableCreateMessage;
 
   // Ini
   bool m_firstTime;
@@ -1091,6 +1093,7 @@ inline void Settings::setShowUsersOnConnection( bool new_value ) { m_showUsersOn
 inline bool Settings::showUsersOnConnection() const { return m_showUsersOnConnection; }
 inline bool Settings::canAddMembersToGroup() const { return m_canAddMembersToGroup; }
 inline bool Settings::canRemoveMembersFromGroup() const { return m_canRemoveMembersFromGroup; }
+inline bool Settings::disableCreateMessage() const { return m_disableCreateMessage; }
 inline void Settings::setEnableMaximizeButton( bool new_value ) { m_enableMaximizeButton = new_value; }
 inline bool Settings::enableMaximizeButton() const { return m_enableMaximizeButton; }
 inline bool Settings::allowEditNickname() const { return m_allowEditNickname; }

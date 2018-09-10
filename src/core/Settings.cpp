@@ -106,6 +106,7 @@ Settings::Settings()
   m_canAddMembersToGroup = true;
   m_canRemoveMembersFromGroup = true;
   m_allowEditNickname = true;
+  m_disableCreateMessage = false;
   /* Default RC end */
 
   m_emoticonSizeInEdit = 18;
@@ -333,6 +334,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "AllowAddMembersToGroup", m_canAddMembersToGroup );
     sets->setValue( "AllowRemoveMembersFromGroup", m_canRemoveMembersFromGroup );
     sets->setValue( "AllowEditNickname", m_allowEditNickname );
+    sets->setValue( "DisableCreateMessage", m_disableCreateMessage );
     sets->endGroup();
     sets->sync();
     qDebug() << "RC default configuration file created in" << qPrintable( Bee::convertToNativeFolderSeparator( sets->fileName() ) );
@@ -418,6 +420,7 @@ void Settings::loadRcFile()
   m_canAddMembersToGroup = sets->value( "AllowAddMembersToGroup", m_canAddMembersToGroup ).toBool();
   m_canRemoveMembersFromGroup = sets->value( "AllowRemoveMembersFromGroup", m_canRemoveMembersFromGroup ).toBool();
   m_allowEditNickname = sets->value( "AllowEditNickname", m_allowEditNickname ).toBool();
+  m_disableCreateMessage = sets->value( "DisableCreateMessage", m_disableCreateMessage ).toBool();
   sets->endGroup();
   QStringList key_list = sets->allKeys();
   foreach( QString key, key_list )

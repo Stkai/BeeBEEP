@@ -6,6 +6,7 @@ BeeBEEP 5.4.3
   blinking on taskbar.
 - Added "AllowEditNickname" option in beebeep.rc
 - Fixed a bug on saving option "Recognize user by"
+- Added "DisableCreateMessage" option in beebeep.rc
 
 BeeBEEP 5.4.2
 - Removed option "On close minimize on tray" for MacOSX
