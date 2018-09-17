@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -2686,6 +2686,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Enable maximize button</source>
         <translation>Abilita il pulsante massimizza</translation>
+    </message>
+    <message>
+        <source>The option has been disabled by your system administrator.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
