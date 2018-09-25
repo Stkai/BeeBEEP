@@ -1792,6 +1792,7 @@ void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
   if( !fl_chat && Settings::instance().alwaysOpenChatOnNewMessageArrived() && alert_can_be_showed )
   {
     fl_chat = createFloatingChat( c );
+    floating_chat_created = true;
     fl_chat->show();
     if( !Settings::instance().raiseOnNewMessageArrived() )
       fl_chat->showMinimized();
