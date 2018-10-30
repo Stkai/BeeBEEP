@@ -97,6 +97,8 @@ UseYourNameInsteadOfYou=[true/false] your name is showed before messages instead
 ClearAllReadMessages=[true/false] clear all messages when you close chat window (default=false) [3.0.7]
 UseColoredUserNames=[true/false] colored user names are showed in chat (default=true) [4.2.0]
 DefaultUserNameColor=[string] default HTML color for user names (default=#000) [4.2.0]
+ActiveWindowOpacityLevel=[integer] percentage of opacity in the active chat window (default=100) [5.4.3]
+InactiveWindowOpacityLevel=[integer] percentage of opacity in the inactive chat window (default=85) [5.4.3]
   
 [User]
 LocalColor= your nickname color in chat

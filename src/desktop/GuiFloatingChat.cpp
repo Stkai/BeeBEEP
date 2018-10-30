@@ -33,7 +33,7 @@
 #include "ShortcutManager.h"
 #include "UserManager.h"
 #ifdef Q_OS_WIN
-  #include <windows.h>
+  #include <Windows.h>
 #endif
 
 
@@ -165,7 +165,7 @@ void GuiFloatingChat::updateChatMember( const Chat& c, const User& u )
   if( u.isLocal() )
     return;
 
-  QAction* act_user = 0;
+  QAction* act_user = Q_NULLPTR;
   QList<QAction*> member_actions = mp_barMembers->actions();
   foreach( QAction* act, member_actions )
   {
@@ -323,26 +323,28 @@ void GuiFloatingChat::setFocusInChat()
 
 void GuiFloatingChat::onApplicationFocusChanged( QWidget* old, QWidget* now )
 {
-  if( old == 0 && isAncestorOf( now )  )
+  if( old == Q_NULLPTR && isAncestorOf( now )  )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Floating chat" << mp_chat->chatId() << "has grab focus";
 #endif
     m_chatIsVisible = true;
     m_prevActivatedState = true;
+    setWindowOpacity( Settings::instance().chatActiveWindowOpacityLevel() / 100.0 );
     mp_chat->updateActionsOnFocusChanged();
     emit readAllMessages( mp_chat->chatId() );
     mp_chat->ensureFocusInChat();
     return;
   }
 
-  if( isAncestorOf( old ) && now == 0 )
+  if( isAncestorOf( old ) && now == Q_NULLPTR )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Floating chat" << mp_chat->chatId() << "has lost focus";
 #endif
     m_chatIsVisible = false;
     m_prevActivatedState = false;
+    setWindowOpacity( Settings::instance().chatInactiveWindowOpacityLevel() / 100.0 );
     return;
   }
 
@@ -356,6 +358,7 @@ void GuiFloatingChat::onApplicationFocusChanged( QWidget* old, QWidget* now )
       qDebug() << "Floating chat" << mp_chat->chatId() << "has grab focus (active)";
 #endif
       m_chatIsVisible = true;
+      setWindowOpacity( Settings::instance().chatActiveWindowOpacityLevel() / 100.0 );
       mp_chat->updateActionsOnFocusChanged();
       emit readAllMessages( mp_chat->chatId() );
       mp_chat->ensureFocusInChat();
@@ -366,6 +369,7 @@ void GuiFloatingChat::onApplicationFocusChanged( QWidget* old, QWidget* now )
       qDebug() << "Floating chat" << mp_chat->chatId() << "has lost focus (inactive)";
 #endif
       m_chatIsVisible = false;
+      setWindowOpacity( Settings::instance().chatInactiveWindowOpacityLevel() / 100.0 );
     }
   }
 }

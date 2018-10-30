@@ -230,6 +230,7 @@ private:
   QWidget* activeWindow() const;
   void setChatMessagesToShowInAction( QAction* );
   void setMaxInactivityDaysInAction( QAction* );
+  void setChatInactiveWindowOpacityLevelInAction( QAction* );
   void loadUserStatusRecentlyUsed();
   void setUserStatusSelected( int );
   void initShortcuts();

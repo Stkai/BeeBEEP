@@ -29,7 +29,7 @@
 #include "Version.h"
 
 
-Settings* Settings::mp_instance = NULL;
+Settings* Settings::mp_instance = Q_NULLPTR;
 
 Settings::Settings()
  : m_localUser( ID_LOCAL_USER )
@@ -144,7 +144,7 @@ Settings::Settings()
   m_tickIntervalCheckNetwork = 5;
   m_tickIntervalBroadcasting = 0;
 
-  m_chatMessageFilter = QBitArray( (int)ChatMessage::NumTypes );
+  m_chatMessageFilter = QBitArray( static_cast<int>(ChatMessage::NumTypes) );
   for( int i = 0; i < ChatMessage::NumTypes; i++ )
     m_chatMessageFilter.setBit( i, false );
 
@@ -181,6 +181,9 @@ Settings::Settings()
   m_chatDefaultUserNameColor = "#000";
   m_maxChatsToOpenAfterSendingMessage = 6;
   m_showUsersOnConnection = false;
+
+  m_chatActiveWindowOpacityLevel = 100;
+  m_chatInactiveWindowOpacityLevel = chatInactiveWindowDefaultOpacityLevel();
 }
 
 void Settings::createApplicationUuid()
@@ -193,7 +196,7 @@ void Settings::createApplicationUuid()
   }
   else
   {
-    int uuid_days_life = m_applicationUuidCreationDate.daysTo( QDate::currentDate() );
+    qint64 uuid_days_life = m_applicationUuidCreationDate.daysTo( QDate::currentDate() );
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Application uuid is created" << uuid_days_life << "days ago";
 #endif
@@ -829,7 +832,7 @@ void Settings::load()
   m_firstTime = sets->allKeys().isEmpty();
   sets->beginGroup( "Version" );
   m_settingsVersion = sets->value( "Settings", BEEBEEP_SETTINGS_VERSION ).toInt();
-  m_dataStreamVersion = sets->value( "DataStream", (int)DATASTREAM_VERSION_1 ).toInt();
+  m_dataStreamVersion = sets->value( "DataStream", static_cast<int>(DATASTREAM_VERSION_1) ).toInt();
   m_settingsCreationDate = sets->value( "BeeBang", QDate() ).toDate();
   if( m_settingsCreationDate.isNull() )
     m_settingsCreationDate = QDate::currentDate();
@@ -852,8 +855,8 @@ void Settings::load()
   m_showEmoticons = sets->value( "ShowEmoticons", true ).toBool();
   m_showMessagesGroupByUser = sets->value( "ShowMessagesGroupByUsers", true ).toBool();
   m_chatMessageFilter = sets->value( "MessageFilter", m_chatMessageFilter ).toBitArray();
-  if( m_chatMessageFilter.size() < (int)ChatMessage::NumTypes )
-    m_chatMessageFilter.resize( (int)ChatMessage::NumTypes );
+  if( m_chatMessageFilter.size() < static_cast<int>(ChatMessage::NumTypes) )
+    m_chatMessageFilter.resize( static_cast<int>(ChatMessage::NumTypes) );
   m_showOnlyMessagesInDefaultChat = sets->value( "ShowOnlyMessagesInDefaultChat", true ).toBool();
   m_chatMessagesToShow = sets->value( "ChatMessagesToShow", 80 ).toInt();
   m_chatMaxMessagesToShow = sets->value( "ChatMaxMessagesToShow", false ).toBool();
@@ -863,6 +866,8 @@ void Settings::load()
   m_chatClearAllReadMessages = sets->value( "ClearAllReadMessages", false ).toBool();
   m_chatUseColoredUserNames = sets->value( "UseColoredUserNames", true ).toBool();
   m_chatDefaultUserNameColor = sets->value( "DefaultUserNameColor", "#000" ).toString();
+  m_chatActiveWindowOpacityLevel = qMax( 10, qMin( 100, sets->value( "ActiveWindowOpacityLevel", m_chatActiveWindowOpacityLevel ).toInt() ) );
+  m_chatInactiveWindowOpacityLevel = qMax( 10, qMin( 100, sets->value( "InactiveWindowOpacityLevel", m_chatInactiveWindowOpacityLevel ).toInt() ) );
   sets->endGroup();
 
   sets->beginGroup( "User" );
@@ -1017,8 +1022,8 @@ void Settings::load()
   m_showVCardOnRightClick = sets->value( "ShowVCardOnRightClick", true ).toBool();
   m_showEmoticonMenu = sets->value( "ShowEmoticonMenu", false ).toBool();
   m_showPresetMessages = sets->value( "ShowPresetMessages", false ).toBool();
-  m_emoticonSizeInEdit = qMax( 12, (int)sets->value( "EmoticonSizeInEdit", m_emoticonSizeInEdit ).toInt() );
-  m_emoticonSizeInChat = qMax( 12, (int)sets->value( "EmoticonSizeInChat", m_emoticonSizeInChat ).toInt() );
+  m_emoticonSizeInEdit = qMax( 12, sets->value( "EmoticonSizeInEdit", m_emoticonSizeInEdit ).toInt() );
+  m_emoticonSizeInChat = qMax( 12, sets->value( "EmoticonSizeInChat", m_emoticonSizeInChat ).toInt() );
   m_emoticonSizeInMenu = sets->value( "EmoticonSizeInMenu", m_emoticonSizeInMenu ).toInt();
   m_emoticonInRecentMenu = sets->value( "EmoticonsInRecentMenu", m_emoticonInRecentMenu ).toInt();
   m_recentEmoticons = sets->value( "RecentEmoticons", QStringList() ).toStringList();
@@ -1037,8 +1042,8 @@ void Settings::load()
   m_groupListBackgroundColor = sets->value( "GroupListBackgroundColor", m_groupListBackgroundColor ).toString();
   m_savedChatListBackgroundColor = sets->value( "SavedChatListBackgroundColor", m_savedChatListBackgroundColor ).toString();
   m_usePreviewFileDialog = sets->value( "UsePreviewFileDialog", m_usePreviewFileDialog ).toBool();
-  m_previewFileDialogImageSize = qMax( 100, (int)sets->value( "PreviewFileDialogImageSize", m_previewFileDialogImageSize ).toInt() );
-  m_userSortingMode = qMax( 0, (int)sets->value( "UserSortingMode", 0 ).toInt() );
+  m_previewFileDialogImageSize = qMax( 100, sets->value( "PreviewFileDialogImageSize", m_previewFileDialogImageSize ).toInt() );
+  m_userSortingMode = qMax( 0, sets->value( "UserSortingMode", 0 ).toInt() );
   m_sortUsersAscending = sets->value( "SortUsersAscending", true ).toBool();
   m_showTextInModeRTL = sets->value( "ShowChatTextInModeRTL", m_showTextInModeRTL ).toBool();
   m_playBuzzSound = sets->value( "PlayBuzzSound", true ).toBool();
@@ -1229,7 +1234,7 @@ void Settings::save()
   sets->setValue( "Program", version( false, true ) );
   sets->setValue( "Proto", protoVersion() );
   sets->setValue( "Settings", BEEBEEP_SETTINGS_VERSION );
-  sets->setValue( "DataStream", (int)dataStreamVersion( false ) );
+  sets->setValue( "DataStream", dataStreamVersion( false ) );
   sets->setValue( "BeeBang", m_settingsCreationDate );
   sets->setValue( "Qt", qtMajorMinorVersion() );
   sets->endGroup();
@@ -1255,6 +1260,8 @@ void Settings::save()
   sets->setValue( "ClearAllReadMessages", m_chatClearAllReadMessages );
   sets->setValue( "UseColoredUserNames", m_chatUseColoredUserNames );
   sets->setValue( "DefaultUserNameColor", m_chatDefaultUserNameColor );
+  sets->setValue( "ActiveWindowOpacityLevel", m_chatActiveWindowOpacityLevel  );
+  sets->setValue( "InactiveWindowOpacityLevel", m_chatInactiveWindowOpacityLevel );
   sets->endGroup();
   sets->beginGroup( "User" );
   if( m_userRecognitionMethod != RecognizeByDefaultMethod )

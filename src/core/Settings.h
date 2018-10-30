@@ -271,6 +271,10 @@ public:
   inline bool showUsersOnConnection() const;
   inline void setEnableMaximizeButton( bool );
   inline bool enableMaximizeButton() const;
+  inline int chatActiveWindowOpacityLevel() const;
+  inline void setChatInactiveWindowOpacityLevel( int );
+  inline int chatInactiveWindowOpacityLevel() const;
+  inline int chatInactiveWindowDefaultOpacityLevel() const;
 
   inline bool usePreviewFileDialog() const;
   inline void setPreviewFileDialogGeometry( const QByteArray& );
@@ -508,7 +512,7 @@ public:
     if( mp_instance )
     {
       delete mp_instance;
-      mp_instance = NULL;
+      mp_instance = Q_NULLPTR;
     }
   }
 
@@ -637,6 +641,8 @@ private:
   int m_maxChatsToOpenAfterSendingMessage;
   bool m_showUsersOnConnection;
   bool m_enableMaximizeButton;
+  int m_chatActiveWindowOpacityLevel;
+  int m_chatInactiveWindowOpacityLevel;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -1097,5 +1103,9 @@ inline bool Settings::disableCreateMessage() const { return m_disableCreateMessa
 inline void Settings::setEnableMaximizeButton( bool new_value ) { m_enableMaximizeButton = new_value; }
 inline bool Settings::enableMaximizeButton() const { return m_enableMaximizeButton; }
 inline bool Settings::allowEditNickname() const { return m_allowEditNickname; }
+inline int Settings::chatActiveWindowOpacityLevel() const { return m_chatActiveWindowOpacityLevel; }
+inline void Settings::setChatInactiveWindowOpacityLevel( int new_value ) { m_chatInactiveWindowOpacityLevel = new_value; }
+inline int Settings::chatInactiveWindowOpacityLevel() const { return m_chatInactiveWindowOpacityLevel; }
+inline int Settings::chatInactiveWindowDefaultOpacityLevel() const { return 85; }
 
 #endif // BEEBEEP_SETTINGS_

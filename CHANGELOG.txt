@@ -7,6 +7,7 @@ BeeBEEP 5.4.3
 - Added "AllowEditNickname" option in beebeep.rc
 - Fixed a bug on saving option "Recognize user by"
 - Added "DisableCreateMessage" option in beebeep.rc
+- Added "ActiveWindowOpacityLevel" and "InactiveWindowOpacityLevel" option for chat window
 
 BeeBEEP 5.4.2
 - Removed option "On close minimize on tray" for MacOSX

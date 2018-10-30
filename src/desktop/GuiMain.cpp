@@ -72,7 +72,7 @@
 #include "SpellChecker.h"
 #include "UserManager.h"
 #ifdef Q_OS_WIN
-  #include <windows.h>
+  #include <Windows.h>
 #endif
 
 
@@ -90,9 +90,9 @@ GuiMain::GuiMain( QWidget *parent )
   mp_tabMain->setTabPosition( QTabWidget::South );
   setCentralWidget( mp_tabMain );
 
-  mp_fileSharing = 0;
-  mp_screenShot = 0;
-  mp_log = 0;
+  mp_fileSharing = Q_NULLPTR;
+  mp_screenShot = Q_NULLPTR;
+  mp_log = Q_NULLPTR;
   m_unreadActivities = 0;
 
   mp_barMain = addToolBar( tr( "Show the main tool bar" ) );
@@ -897,6 +897,11 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().showChatToolbar() );
   act->setData( 42 );
+  act = mp_menuChatSettings->addAction( "", this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setData( 71 );
+  setChatInactiveWindowOpacityLevelInAction( act );
+
   mp_menuChatSettings->addSeparator();
   mp_actSelectEmoticonSourcePath = mp_menuChatSettings->addAction( IconManager::instance().icon( "emoticon.png" ), tr( "Select emoticon theme" ) + QString( "..." ), this, SLOT( selectEmoticonSourcePath() ) );
   mp_actSelectEmoticonSourcePath->setEnabled( !Settings::instance().useNativeEmoticons() );
@@ -1639,6 +1644,26 @@ void GuiMain::settingsChanged( QAction* act )
   case 70:
     Settings::instance().setAlwaysOpenChatOnNewMessageArrived( act->isChecked() );
     break;
+  case 71:
+    {
+      if( act->isChecked() )
+      {
+#if QT_VERSION >= 0x050000
+        int opacity_level = QInputDialog::getInt( qApp->activeWindow(), Settings::instance().programName(),
+#else
+        int opacity_level = QInputDialog::getInteger( qApp->activeWindow(), Settings::instance().programName(),
+#endif
+                                                   tr( "Please select the opacity percentage of inactive chat window (default: %1%%" ).arg( Settings::instance().chatInactiveWindowDefaultOpacityLevel() ),
+                                                   Settings::instance().chatInactiveWindowOpacityLevel(),
+                                                   10, 100, 5, &ok );
+        if( ok )
+        {
+          Settings::instance().setChatInactiveWindowOpacityLevel( opacity_level );
+          setChatInactiveWindowOpacityLevelInAction( act );
+        }
+      }
+    }
+    break;
   case 99:
     break;
   default:
@@ -1675,6 +1700,12 @@ void GuiMain::setMaxInactivityDaysInAction( QAction* act )
 {
   act->setText( tr( "Remove users after %1 days of inactivity" ).arg( Settings::instance().maxDaysOfUserInactivity() ) );
   act->setEnabled( Settings::instance().saveUserList() );
+}
+
+void GuiMain::setChatInactiveWindowOpacityLevelInAction( QAction* act )
+{
+  act->setChecked( Settings::instance().chatInactiveWindowOpacityLevel() < 100 );
+  act->setText( tr( "Show inactive chat window with %1%% opacity" ).arg( Settings::instance().chatInactiveWindowOpacityLevel() ) );
 }
 
 void GuiMain::sendMessage( VNumber chat_id, const QString& msg )
@@ -1886,7 +1917,7 @@ void GuiMain::setUserStatusSelected( int user_status )
     }
     else
     {
-      Settings::instance().setLocalUserStatus( (User::Status)user_status );
+      Settings::instance().setLocalUserStatus( static_cast<User::Status>(user_status) );
       startCore();
     }
   }
@@ -3322,7 +3353,7 @@ GuiFloatingChat* GuiMain::floatingChat( VNumber chat_id ) const
     if( fl_chat->guiChat()->chatId() == chat_id )
       return fl_chat;
   }
-  return 0;
+  return Q_NULLPTR;
 }
 
 void GuiMain::removeFloatingChatFromList( VNumber chat_id )
@@ -3370,7 +3401,7 @@ GuiFloatingChat* GuiMain::createFloatingChat( const Chat& c )
   {
     qWarning() << "Unable to create floating window for not existing chat" << c.id() << c.name();
     fl_chat->deleteLater();
-    return 0;
+    return Q_NULLPTR;
   }
 
   return fl_chat;
@@ -3905,7 +3936,7 @@ void GuiMain::showFileSharingWindow()
 
   if( !mp_fileSharing )
   {
-    mp_fileSharing = new GuiFileSharing( 0 );
+    mp_fileSharing = new GuiFileSharing( Q_NULLPTR );
     mp_fileSharing->setAttribute( Qt::WA_DeleteOnClose, true );
     Bee::setWindowStaysOnTop( mp_fileSharing, Settings::instance().stayOnTop() );
     mp_fileSharing->resize( qMin( (QApplication::desktop()->availableGeometry().width()-20), 760 ), 460 );
@@ -3924,7 +3955,7 @@ void GuiMain::showFileSharingWindow()
 void GuiMain::onFileSharingWindowClosed()
 {
   if( mp_fileSharing )
-    mp_fileSharing = 0;
+    mp_fileSharing = Q_NULLPTR;
 }
 
 void GuiMain::showScreenShotWindow()
@@ -3945,7 +3976,7 @@ void GuiMain::showScreenShotWindow()
 void GuiMain::onScreenShotWindowClosed()
 {
   if( mp_screenShot )
-    mp_screenShot = 0;
+    mp_screenShot = Q_NULLPTR;
 }
 
 void GuiMain::showLogWindow()
@@ -3964,7 +3995,7 @@ void GuiMain::showLogWindow()
 void GuiMain::onLogWindowClosed()
 {
   if( mp_log )
-    mp_log = 0;
+    mp_log = Q_NULLPTR;
 }
 
 void GuiMain::onMainTabChanged( int tab_index )
