@@ -32,7 +32,7 @@ class SaveChatList : public QObject
   Q_OBJECT
 
 public:
-  explicit SaveChatList( QObject* parent = 0 );
+  explicit SaveChatList( QObject* parent = Q_NULLPTR );
 
   static bool canBeSaved();
 

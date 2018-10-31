@@ -33,7 +33,7 @@ class GuiAskPassword : public QDialog, private Ui::GuiAskPassword
   Q_OBJECT
 
 public:
-  GuiAskPassword( QWidget* parent = 0 );
+  GuiAskPassword( QWidget* parent = Q_NULLPTR );
 
   void loadData();
 

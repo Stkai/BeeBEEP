@@ -35,7 +35,7 @@ class GuiShareNetwork : public QWidget, private Ui::GuiShareNetworkWidget
   Q_OBJECT
 
 public:
-  explicit GuiShareNetwork( QWidget *parent = 0 );
+  explicit GuiShareNetwork( QWidget *parent = Q_NULLPTR );
   void setupToolBar( QToolBar* );
   void initShares();
   void showSharesForUser( const User& );

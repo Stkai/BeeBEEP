@@ -33,7 +33,7 @@ class GuiWizard : public QDialog, private Ui::GuiWizardDialog
   Q_OBJECT
 
 public:
-  GuiWizard( QWidget* parent = 0 );
+  GuiWizard( QWidget* parent = Q_NULLPTR );
   void loadSettings();
 
   inline const QString& userName() const;

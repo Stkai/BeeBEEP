@@ -32,7 +32,7 @@ class MDnsRegister : public MDnsObject
   Q_OBJECT
 
 public:
-  MDnsRegister( QObject *parent = 0 );
+  MDnsRegister( QObject *parent = Q_NULLPTR );
 
   bool registerService( const MDnsRecord&, int );
   void unregisterService();

@@ -36,7 +36,7 @@ class GuiChat : public QWidget, private Ui::GuiChatWidget
   Q_OBJECT
 
 public:
-  GuiChat( QWidget* parent = 0 );
+  GuiChat( QWidget* parent = Q_NULLPTR );
 
   void setupToolBar( QToolBar* chat_bar );
   void updateActions( const Chat&, bool is_connected, int connected_users );
@@ -51,6 +51,8 @@ public:
 
   inline QSplitter* chatSplitter() const;
   void editChatMembers();
+
+  void updateChatColors();
 
   void onTickEvent( int );
 
@@ -83,7 +85,6 @@ protected:
   bool messageCanBeShowed( const ChatMessage& );
   bool historyCanBeShowed();
   void setChatFontColor( const QString& );
-  void setChatBackgroundColor( const QString& );
   void dragEnterEvent( QDragEnterEvent* );
   void dropEvent( QDropEvent* );
   void updateSpellCheckerToolTip();

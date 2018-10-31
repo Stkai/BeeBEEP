@@ -32,7 +32,7 @@ class GuiLanguage : public QDialog, private Ui::GuiLanguageDialog
   Q_OBJECT
 
 public:
-  explicit GuiLanguage( QWidget *parent = 0 );
+  explicit GuiLanguage( QWidget *parent = Q_NULLPTR );
 
   void loadLanguages();
   inline const QString& languageSelected() const;

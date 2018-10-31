@@ -33,7 +33,7 @@ class GuiFloatingChat : public QMainWindow
   Q_OBJECT
 
 public:
-  GuiFloatingChat( QWidget* parent = 0 );
+  GuiFloatingChat( QWidget* parent = Q_NULLPTR );
 
   bool setChat( const Chat& );
   inline GuiChat* guiChat() const;

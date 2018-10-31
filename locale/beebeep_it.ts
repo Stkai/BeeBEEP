@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -2689,6 +2689,26 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>The option has been disabled by your system administrator.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select chat background color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select chat default text color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select chat system text color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select the opacity percentage of inactive chat window (default: %1%)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show inactive chat window with %1% opacity</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -33,7 +33,7 @@ class HttpDownloader: public QObject
   Q_OBJECT
 
 public:
-  explicit HttpDownloader( QObject* parent = 0 );
+  explicit HttpDownloader( QObject* parent = Q_NULLPTR );
 
   inline void addUrl( const QUrl& );
   inline const QStringList& downloadedFilePaths() const;

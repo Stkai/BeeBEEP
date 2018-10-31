@@ -35,7 +35,7 @@ class FileTransferPeer : public QObject
 public:
   enum TransferState { Unknown, Queue, Starting, Request, FileHeader, Transferring, Completed, Error, Cancelled };
 
-  explicit FileTransferPeer( QObject *parent = 0 );
+  explicit FileTransferPeer( QObject *parent = Q_NULLPTR );
 
   inline QString name() const;
 

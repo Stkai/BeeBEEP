@@ -32,7 +32,7 @@ class BuildSavedChatList : public QObject
   Q_OBJECT
 
 public:
-  explicit BuildSavedChatList( QObject* parent = 0 );
+  explicit BuildSavedChatList( QObject* parent = Q_NULLPTR );
 
   inline const QMap<QString, QString> savedChats() const;
   inline int elapsedTime() const;

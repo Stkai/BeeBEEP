@@ -33,7 +33,7 @@ class BuildFileList : public QObject
   Q_OBJECT
 
 public:
-  explicit BuildFileList( QObject* parent = 0 );
+  explicit BuildFileList( QObject* parent = Q_NULLPTR );
 
   void init( const QString& folder_name, const QString folder_path, VNumber );
 

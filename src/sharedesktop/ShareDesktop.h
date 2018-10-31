@@ -34,7 +34,7 @@ class ShareDesktop : public QObject
   Q_OBJECT
 
 public:
-  explicit ShareDesktop( QObject* parent = 0 );
+  explicit ShareDesktop( QObject* parent = Q_NULLPTR );
 
   bool start();
   void stop();

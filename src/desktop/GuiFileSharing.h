@@ -38,7 +38,7 @@ class GuiFileSharing : public QMainWindow
   Q_OBJECT
 
 public:
-  GuiFileSharing( QWidget* parent = 0 );
+  GuiFileSharing( QWidget* parent = Q_NULLPTR );
 
   void checkViewActions();
   void updateLocalFileList();

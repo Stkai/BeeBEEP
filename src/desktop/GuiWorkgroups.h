@@ -32,7 +32,7 @@ class GuiWorkgroups : public QDialog, private Ui::GuiWorkgroupsDialog
   Q_OBJECT
 
 public:
-  explicit GuiWorkgroups( QWidget *parent = 0 );
+  explicit GuiWorkgroups( QWidget *parent = Q_NULLPTR );
 
   void loadWorkgroups();
 

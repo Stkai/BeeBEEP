@@ -31,7 +31,7 @@ class PreviewFileDialog : public QFileDialog
   Q_OBJECT
 
 public:
-  explicit PreviewFileDialog( QWidget* parent = 0,
+  explicit PreviewFileDialog( QWidget* parent = Q_NULLPTR,
                               const QString& caption = QString(),
                               const QString& directory = QString(),
                               const QString& filter = QString() );

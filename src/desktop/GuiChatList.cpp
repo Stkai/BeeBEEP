@@ -78,12 +78,12 @@ GuiChatItem* GuiChatList::itemFromChatId( VNumber chat_id )
   QTreeWidgetItemIterator it( mp_twChatList );
   while( *it )
   {
-    item = (GuiChatItem*)(*it);
+    item = dynamic_cast<GuiChatItem*>( *it );
     if( item->chatId() == chat_id )
       return item;
     ++it;
   }
-  return 0;
+  return Q_NULLPTR;
 }
 
 void GuiChatList::updateChat( const Chat& c )
@@ -137,7 +137,7 @@ void GuiChatList::chatClicked( QTreeWidgetItem* item, int )
   }
 
   mp_twChatList->clearSelection();
-  GuiChatItem* user_item = (GuiChatItem*)item;
+  GuiChatItem* user_item = dynamic_cast<GuiChatItem*>( item );
   emit chatSelected( user_item->chatId() );
 }
 
@@ -162,7 +162,7 @@ void GuiChatList::showChatMenu( const QPoint& p )
   }
   else
   {
-    GuiChatItem* chat_item = (GuiChatItem*)item;
+    GuiChatItem* chat_item = dynamic_cast<GuiChatItem*>( item );
     m_chatSelected = chat_item->chatId();
     Chat c = ChatManager::instance().chat( m_chatSelected );
     if( !c.isValid() )
@@ -210,7 +210,7 @@ void GuiChatList::onTickEvent( int ticks )
   QTreeWidgetItemIterator it( mp_twChatList );
   while( *it )
   {
-    item = (GuiChatItem*)(*it);
+    item = dynamic_cast<GuiChatItem*>( *it );
     item->onTickEvent( ticks );
     ++it;
   }

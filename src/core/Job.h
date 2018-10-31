@@ -31,7 +31,7 @@ class Job : public QObject, public QRunnable
 {
   Q_OBJECT
 public:
-  Job( QObject* parent = 0 ) : QObject( parent ), QRunnable() {}
+  Job( QObject* parent = Q_NULLPTR ) : QObject( parent ), QRunnable() {}
 
   virtual void run() = 0;
 

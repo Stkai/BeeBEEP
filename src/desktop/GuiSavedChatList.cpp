@@ -74,7 +74,7 @@ void GuiSavedChatList::savedChatClicked( QTreeWidgetItem* item, int )
     return;
   }
 
-  GuiSavedChatItem* saved_chat_item = (GuiSavedChatItem*)item;
+  GuiSavedChatItem* saved_chat_item = dynamic_cast<GuiSavedChatItem*>( item );
   m_savedChatSelected = saved_chat_item->chatName();
   showSavedChatSelected();
 }
@@ -90,7 +90,7 @@ void GuiSavedChatList::showSavedChatMenu( const QPoint& p )
   }
   else
   {
-    GuiSavedChatItem* saved_chat_item = (GuiSavedChatItem*)item;
+    GuiSavedChatItem* saved_chat_item = dynamic_cast<GuiSavedChatItem*>( item );
     m_savedChatSelected = saved_chat_item->chatName();
     QAction* act = mp_menuContext->addAction( IconManager::instance().icon( "saved-chat.png" ), tr( "Show" ), this, SLOT( showSavedChatSelected() ) );
     mp_menuContext->setDefaultAction( act );

@@ -34,7 +34,7 @@ class GuiShareBox : public QWidget, private Ui::GuiShareBoxWidget
   Q_OBJECT
 
 public:
-  explicit GuiShareBox( QWidget *parent = 0 );
+  explicit GuiShareBox( QWidget *parent = Q_NULLPTR );
 
   void updateUser( const User& );
 

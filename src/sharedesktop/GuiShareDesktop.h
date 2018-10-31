@@ -34,7 +34,7 @@ class GuiShareDesktop : public QMainWindow, private Ui::GuiShareDesktopWidget
   Q_OBJECT
 
 public:
-  GuiShareDesktop( QWidget* parent = 0 );
+  GuiShareDesktop( QWidget* parent = Q_NULLPTR );
 
   void setUser( const User& );
   inline VNumber userId() const;

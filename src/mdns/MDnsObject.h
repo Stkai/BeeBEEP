@@ -35,7 +35,7 @@ class MDnsObject : public QObject
   Q_OBJECT
 
 public:
-  MDnsObject( QObject* parent = 0 );
+  MDnsObject( QObject* parent = Q_NULLPTR );
   ~MDnsObject();
 
   inline const MDnsRecord& record() const;

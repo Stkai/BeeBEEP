@@ -33,7 +33,7 @@ class ConnectionSocket : public QTcpSocket
   Q_OBJECT
 
 public:
-  explicit ConnectionSocket( QObject* parent = 0 );
+  explicit ConnectionSocket( QObject* parent = Q_NULLPTR );
 
   void connectToNetworkAddress( const NetworkAddress& );
   void initSocket( qintptr );

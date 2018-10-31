@@ -44,8 +44,8 @@ class QxtGlobalShortcut : public QObject
     Q_PROPERTY(QKeySequence shortcut READ shortcut WRITE setShortcut)
 
 public:
-    explicit QxtGlobalShortcut(QObject* parent = 0);
-    explicit QxtGlobalShortcut(const QKeySequence& shortcut, QObject* parent = 0);
+    explicit QxtGlobalShortcut(QObject* parent = Q_NULLPTR);
+    explicit QxtGlobalShortcut(const QKeySequence& shortcut, QObject* parent = Q_NULLPTR);
     virtual ~QxtGlobalShortcut();
 
     QKeySequence shortcut() const;

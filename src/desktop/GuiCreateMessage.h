@@ -34,7 +34,7 @@ class GuiCreateMessage : public QDialog, private Ui::GuiCreateMessageWidget
   Q_OBJECT
 
 public:
-  GuiCreateMessage( QWidget* parent = 0 );
+  GuiCreateMessage( QWidget* parent = Q_NULLPTR );
 
   inline QString message();
   inline const QList<VNumber>& toChatIdList() const;

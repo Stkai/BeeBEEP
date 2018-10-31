@@ -901,7 +901,13 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setData( 71 );
   setChatInactiveWindowOpacityLevelInAction( act );
-
+  mp_menuChatSettings->addSeparator();
+  act = mp_menuChatSettings->addAction( IconManager::instance().icon( "background-color.png" ), tr( "Select chat background color" ), this, SLOT( settingsChanged() ) );
+  act->setData( 72 );
+  act = mp_menuChatSettings->addAction( IconManager::instance().icon( "font-color.png" ), tr( "Select chat default text color" ), this, SLOT( settingsChanged() ) );
+  act->setData( 73 );
+  act = mp_menuChatSettings->addAction( IconManager::instance().icon( "log.png" ), tr( "Select chat system text color" ), this, SLOT( settingsChanged() ) );
+  act->setData( 74 );
   mp_menuChatSettings->addSeparator();
   mp_actSelectEmoticonSourcePath = mp_menuChatSettings->addAction( IconManager::instance().icon( "emoticon.png" ), tr( "Select emoticon theme" ) + QString( "..." ), this, SLOT( selectEmoticonSourcePath() ) );
   mp_actSelectEmoticonSourcePath->setEnabled( !Settings::instance().useNativeEmoticons() );
@@ -1646,22 +1652,54 @@ void GuiMain::settingsChanged( QAction* act )
     break;
   case 71:
     {
-      if( act->isChecked() )
-      {
-#if QT_VERSION >= 0x050000
-        int opacity_level = QInputDialog::getInt( qApp->activeWindow(), Settings::instance().programName(),
+ #if QT_VERSION >= 0x050000
+      int opacity_level = QInputDialog::getInt( qApp->activeWindow(), Settings::instance().programName(),
 #else
-        int opacity_level = QInputDialog::getInteger( qApp->activeWindow(), Settings::instance().programName(),
+      int opacity_level = QInputDialog::getInteger( qApp->activeWindow(), Settings::instance().programName(),
 #endif
-                                                   tr( "Please select the opacity percentage of inactive chat window (default: %1%%" ).arg( Settings::instance().chatInactiveWindowDefaultOpacityLevel() ),
-                                                   Settings::instance().chatInactiveWindowOpacityLevel(),
-                                                   10, 100, 5, &ok );
-        if( ok )
+                                                 tr( "Please select the opacity percentage of inactive chat window (default: %1%)" ).arg( Settings::instance().chatInactiveWindowDefaultOpacityLevel() ),
+                                                 Settings::instance().chatInactiveWindowOpacityLevel(),
+                                                 10, 100, 5, &ok );
+      if( ok )
+      {
+        Settings::instance().setChatInactiveWindowOpacityLevel( opacity_level );
+        setChatInactiveWindowOpacityLevelInAction( act );
+      }
+    }
+    break;
+  case 72:
+    {
+      QColor c = QColorDialog::getColor( QColor( Settings::instance().chatBackgroundColor() ), this );
+      if( c.isValid() )
+      {
+        Settings::instance().setChatBackgroundColor( c.name() );
+        foreach( GuiFloatingChat* fl_chat, m_floatingChats )
         {
-          Settings::instance().setChatInactiveWindowOpacityLevel( opacity_level );
-          setChatInactiveWindowOpacityLevelInAction( act );
+          if( fl_chat->guiChat()->chatId() != ID_DEFAULT_CHAT )
+            fl_chat->guiChat()->updateChatColors();
         }
       }
+    }
+    break;
+  case 73:
+    {
+      QColor c = QColorDialog::getColor( QColor( Settings::instance().chatDefaultTextColor() ), this );
+      if( c.isValid() )
+      {
+        Settings::instance().setChatDefaultTextColor( c.name() );
+        foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+        {
+          if( fl_chat->guiChat()->chatId() != ID_DEFAULT_CHAT )
+            fl_chat->guiChat()->updateChatColors();
+        }
+      }
+    }
+    break;
+  case 74:
+    {
+      QColor c = QColorDialog::getColor( QColor( Settings::instance().chatSystemTextColor() ), this );
+      if( c.isValid() )
+        Settings::instance().setChatSystemTextColor( c.name() );
     }
     break;
   case 99:
@@ -1705,7 +1743,7 @@ void GuiMain::setMaxInactivityDaysInAction( QAction* act )
 void GuiMain::setChatInactiveWindowOpacityLevelInAction( QAction* act )
 {
   act->setChecked( Settings::instance().chatInactiveWindowOpacityLevel() < 100 );
-  act->setText( tr( "Show inactive chat window with %1%% opacity" ).arg( Settings::instance().chatInactiveWindowOpacityLevel() ) );
+  act->setText( tr( "Show inactive chat window with %1% opacity" ).arg( Settings::instance().chatInactiveWindowOpacityLevel() ) );
 }
 
 void GuiMain::sendMessage( VNumber chat_id, const QString& msg )
@@ -3407,13 +3445,13 @@ GuiFloatingChat* GuiMain::createFloatingChat( const Chat& c )
   return fl_chat;
 }
 
-QWidget* GuiMain::activeWindow() const
+QWidget* GuiMain::activeWindow()
 {
   QWidget* active_window = QApplication::activeWindow();
   if( active_window )
     return active_window;
   else
-    return (QWidget*)this;
+    return qobject_cast<QWidget*>( this );
 }
 
 void GuiMain::loadUserStatusRecentlyUsed()

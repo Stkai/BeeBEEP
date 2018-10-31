@@ -49,16 +49,17 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
                                        bool show_message_group_by_user, bool use_your_name, bool use_chat_compact )
 {
   QString text_formatted = cm.message();
-  if( cm.textColor().isValid() )
+  QString text_color = (cm.textColor().isValid() && cm.textColor() != QColor( 0, 0, 0 )) ? cm.textColor().name() : "";
+  if( !text_color.isEmpty() )
   {
-    text_formatted.prepend( QString( "<font color=%1>" ).arg( cm.textColor().name() ) );
+    text_formatted.prepend( QString( "<font color=%1>" ).arg( text_color ) );
     text_formatted.append( QLatin1String( "</font>" ) );
   }
 
   bool append_message_to_previous = show_message_group_by_user && last_user_id == u.id();
 
   QString date_time_stamp = datetimestampToString( cm, show_timestamp, show_datestamp );
-  QString html_date_time_stamp = date_time_stamp.isEmpty() ? date_time_stamp : QString( "<font color=#808080>(%1)</font>" ).arg( date_time_stamp );
+  QString html_date_time_stamp = date_time_stamp.isEmpty() ? date_time_stamp : QString( "<font color=%1>(%2)</font>" ).arg( Settings::instance().chatSystemTextColor() ).arg( date_time_stamp );
   QString user_name = append_message_to_previous ? QString( "" ) : (u.isLocal() && !use_your_name) ? QObject::tr( "You" ) : (u.isValid() ? u.name() : QObject::tr( "Unknown" ));
   if( cm.isFromAutoresponder() )
   {
@@ -103,7 +104,8 @@ QString GuiChatMessage::formatSystemMessage( const ChatMessage& cm, VNumber last
 
   QString date_time_stamp = cm.type() != ChatMessage::ImagePreview ? datetimestampToString( cm, show_timestamp, show_datestamp ) : QString( "" );
 
-  QString html_message = QString( "<font color=#808080>%1%2</font><br />" )
+  QString html_message = QString( "<font color=%1>%2%3</font><br />" )
+                           .arg( Settings::instance().chatSystemTextColor() )
                            .arg( date_time_stamp.isEmpty() ? date_time_stamp : QString( "(%1) " ).arg( date_time_stamp ) )
                            .arg( cm.message() );
 

@@ -111,7 +111,7 @@ void GuiGroupList::updateUser( const User& u )
   QTreeWidgetItemIterator it( mp_twGroupList );
   while( *it )
   {
-    item = (GuiGroupItem*)(*it);
+    item = dynamic_cast<GuiGroupItem*>( *it );
     if( item->itemId() == u.id() )
       item->updateUser( u );
     ++it;
@@ -140,12 +140,12 @@ GuiGroupItem* GuiGroupList::itemFromId( VNumber item_id )
   QTreeWidgetItemIterator it( mp_twGroupList );
   while( *it )
   {
-    item = (GuiGroupItem*)(*it);
+    item = dynamic_cast<GuiGroupItem*>( *it );
     if( item->itemId() == item_id )
       return item;
     ++it;
   }
-  return 0;
+  return Q_NULLPTR;
 }
 
 void GuiGroupList::checkItemClicked( QTreeWidgetItem* item, int )
@@ -159,7 +159,7 @@ void GuiGroupList::checkItemClicked( QTreeWidgetItem* item, int )
     return;
   }
 
-  GuiGroupItem* group_item = (GuiGroupItem*)item;
+  GuiGroupItem* group_item = dynamic_cast<GuiGroupItem*>( item );
   if( group_item->isGroup() )
     emit openChatForGroupRequest( group_item->itemId() );
 }
@@ -187,7 +187,7 @@ void GuiGroupList::showGroupMenu( const QPoint& p )
 
   m_blockShowChatRequest = true;
 
-  GuiGroupItem* group_item = (GuiGroupItem*)item;
+  GuiGroupItem* group_item = dynamic_cast<GuiGroupItem*>( item );
 
   if( group_item->isGroup() )
   {

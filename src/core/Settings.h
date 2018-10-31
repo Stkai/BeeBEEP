@@ -172,6 +172,12 @@ public:
   void setChatFont( const QFont& );
   inline void setDefaultChatBackgroundColor( const QString& );
   inline const QString& defaultChatBackgroundColor() const;
+  inline void setChatBackgroundColor( const QString& );
+  inline const QString& chatBackgroundColor() const;
+  inline void setChatDefaultTextColor( const QString& );
+  inline const QString& chatDefaultTextColor() const;
+  inline void setChatSystemTextColor( const QString& );
+  inline const QString& chatSystemTextColor() const;
   inline bool chatCompact() const;
   inline void setChatCompact( bool );
   inline bool chatShowMessageTimestamp() const;
@@ -601,6 +607,9 @@ private:
   QString m_chatFontColor;
   QFont m_chatFont;
   QString m_defaultChatBackgroundColor;
+  QString m_chatBackgroundColor;
+  QString m_chatDefaultTextColor;
+  QString m_chatSystemTextColor;
   bool m_chatCompact;
   bool m_chatShowMessageTimestamp;
   bool m_chatShowMessageDatestamp;
@@ -1107,5 +1116,12 @@ inline int Settings::chatActiveWindowOpacityLevel() const { return m_chatActiveW
 inline void Settings::setChatInactiveWindowOpacityLevel( int new_value ) { m_chatInactiveWindowOpacityLevel = new_value; }
 inline int Settings::chatInactiveWindowOpacityLevel() const { return m_chatInactiveWindowOpacityLevel; }
 inline int Settings::chatInactiveWindowDefaultOpacityLevel() const { return 85; }
+inline void Settings::setChatBackgroundColor( const QString& new_value ) { m_chatBackgroundColor = new_value; }
+inline const QString& Settings::chatBackgroundColor() const { return m_chatBackgroundColor; }
+inline void Settings::setChatDefaultTextColor( const QString& new_value ) { m_chatDefaultTextColor = new_value; }
+inline const QString& Settings::chatDefaultTextColor() const { return m_chatDefaultTextColor; }
+inline void Settings::setChatSystemTextColor( const QString& new_value ) { m_chatSystemTextColor = new_value; }
+inline const QString& Settings::chatSystemTextColor() const { return m_chatSystemTextColor; }
+
 
 #endif // BEEBEEP_SETTINGS_

@@ -33,7 +33,7 @@ class GuiSavedChat : public QDialog, private Ui::GuiSavedChatDialog
   Q_OBJECT
 
 public:
-  explicit GuiSavedChat( QWidget *parent = 0 );
+  explicit GuiSavedChat( QWidget *parent = Q_NULLPTR );
   inline const QString& savedChatName() const;
   void updateShortcuts();
 

@@ -33,7 +33,7 @@ class GuiRefusedChat : public QDialog, private Ui::GuiRefusedChatDialog
   Q_OBJECT
 
 public:
-  explicit GuiRefusedChat( QWidget *parent = 0 );
+  explicit GuiRefusedChat( QWidget *parent = Q_NULLPTR );
 
   int loadRefusedChats();
 

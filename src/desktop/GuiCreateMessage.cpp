@@ -42,7 +42,7 @@ GuiCreateMessage::GuiCreateMessage( QWidget *parent )
   mp_teMessage->setFocusPolicy( Qt::StrongFocus );
   mp_teMessage->setAcceptRichText( false );
   mp_teMessage->setObjectName( "GuiCreateMessageEdit" );
-  mp_teMessage->setStyleSheet( QString( "#GuiCreateMessageEdit { background-color: #fff; color: #000 }" ) );
+  mp_teMessage->setStyleSheet( QString( "#GuiCreateMessageEdit { background-color: %1; color: %2 }" ).arg( Settings::instance().chatBackgroundColor() ).arg( Settings::instance().chatDefaultTextColor() ) );
   mp_teMessage->setForceCRonEnterClicked( true );
   mp_teMessage->setForceNoWritingAlert( true );
   mp_teMessage->setFocus();

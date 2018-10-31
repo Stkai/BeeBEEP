@@ -32,7 +32,7 @@ class GuiLog : public QMainWindow
   Q_OBJECT
 
 public:
-  explicit GuiLog( QWidget *parent = 0 );
+  explicit GuiLog( QWidget *parent = Q_NULLPTR );
 
   void showUp();
   void startCheckingLog();

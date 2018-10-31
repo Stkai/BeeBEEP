@@ -35,8 +35,8 @@ GuiUserList::GuiUserList( QWidget* parent )
   setObjectName( "GuiUserList" );
   setupUi( this );
 
-  mp_menuSettings = 0;
-  mp_menuUsers = 0;
+  mp_menuSettings = Q_NULLPTR;
+  mp_menuUsers = Q_NULLPTR;
 
   mp_twUsers->setContextMenuPolicy( Qt::CustomContextMenu );
   mp_twUsers->setRootIsDecorated( false );
@@ -102,12 +102,12 @@ GuiUserItem* GuiUserList::itemFromUserId( VNumber user_id )
   QTreeWidgetItemIterator it( mp_twUsers );
   while( *it )
   {
-    item = (GuiUserItem*)(*it);
+    item = dynamic_cast<GuiUserItem*>( *it );
     if( item->userId() == user_id )
       return item;
     ++it;
   }
-  return 0;
+  return Q_NULLPTR;
 }
 
 GuiUserItem* GuiUserList::itemFromChatId( VNumber chat_id )
@@ -116,12 +116,12 @@ GuiUserItem* GuiUserList::itemFromChatId( VNumber chat_id )
   QTreeWidgetItemIterator it( mp_twUsers );
   while( *it )
   {
-    item = (GuiUserItem*)(*it);
+    item = dynamic_cast<GuiUserItem*>( *it );
     if( item->chatId() == chat_id )
       return item;
     ++it;
   }
-  return 0;
+  return Q_NULLPTR;
 }
 
 void GuiUserList::setUnreadMessages( VNumber private_chat_id, int n )
@@ -193,7 +193,7 @@ void GuiUserList::removeUser( const User& u )
     QTreeWidgetItem* root_item = mp_twUsers->invisibleRootItem();
     if( root_item )
     {
-      root_item->removeChild( (QTreeWidgetItem*)item );
+      root_item->removeChild( dynamic_cast<QTreeWidgetItem*>( item ) );
       delete item;
     }
   }
@@ -209,7 +209,7 @@ void GuiUserList::showUserMenu( const QPoint& p )
     return;
   }
 
-  GuiUserItem* user_item = (GuiUserItem*)item;
+  GuiUserItem* user_item = dynamic_cast<GuiUserItem*>( item );
   if( user_item->chatId() == ID_DEFAULT_CHAT )
   {
     emit chatSelected( ID_DEFAULT_CHAT );
@@ -235,7 +235,7 @@ void GuiUserList::userItemClicked( QTreeWidgetItem* item, int )
     return;
   }
 
-  GuiUserItem* user_item = (GuiUserItem*)item;
+  GuiUserItem* user_item = dynamic_cast<GuiUserItem*>( item );
   if( user_item->chatId() != ID_INVALID )
     emit chatSelected( user_item->chatId() );
   else
@@ -271,7 +271,7 @@ void GuiUserList::onTickEvent( int ticks )
   QTreeWidgetItemIterator it( mp_twUsers );
   while( *it )
   {
-    item = (GuiUserItem*)(*it);
+    item = dynamic_cast<GuiUserItem*>( *it );
     item->onTickEvent( ticks );
     ++it;
   }

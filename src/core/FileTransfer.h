@@ -36,7 +36,7 @@ class FileTransfer : public QTcpServer
   Q_OBJECT
 
 public:
-  explicit FileTransfer( QObject *parent = 0 );
+  explicit FileTransfer( QObject *parent = Q_NULLPTR );
 
   bool startListener();
   void stopListener();

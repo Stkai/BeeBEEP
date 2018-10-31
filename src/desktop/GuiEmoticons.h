@@ -34,7 +34,7 @@ class GuiEmoticons : public QTabWidget
   Q_OBJECT
 
 public:
-  explicit GuiEmoticons( QWidget *parent = 0 );
+  explicit GuiEmoticons( QWidget *parent = Q_NULLPTR );
 
   void deleteAllTabs();
 
@@ -66,7 +66,7 @@ private:
 class GuiEmoticonWidget : public QWidget
 {
 public:
-  explicit GuiEmoticonWidget( QWidget *parent = 0 );
+  explicit GuiEmoticonWidget( QWidget *parent = Q_NULLPTR );
 
   inline void setEmoticonSize( int );
   inline QSize emoticonSize() const;

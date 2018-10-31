@@ -57,7 +57,7 @@ class GuiMain : public QMainWindow
   Q_OBJECT
 
 public:
-  GuiMain( QWidget* parent = 0 );
+  GuiMain( QWidget* parent = Q_NULLPTR );
 
 public slots:
   void loadSession();
@@ -227,7 +227,7 @@ private:
   QStringList checkFilePath( const QString& );
   bool isAudioDeviceAvailable() const;
   GuiFloatingChat* floatingChat( VNumber ) const;
-  QWidget* activeWindow() const;
+  QWidget* activeWindow();
   void setChatMessagesToShowInAction( QAction* );
   void setMaxInactivityDaysInAction( QAction* );
   void setChatInactiveWindowOpacityLevelInAction( QAction* );

@@ -32,7 +32,7 @@ class GAnalytics: public QObject
   Q_OBJECT
 
 public:
-  explicit GAnalytics( QObject* parent = 0 );
+  explicit GAnalytics( QObject* parent = Q_NULLPTR );
 
 public slots:
   void doPost();

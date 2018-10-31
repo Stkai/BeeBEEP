@@ -33,7 +33,7 @@ class GuiNetwork : public QDialog, private Ui::GuiNetworkWidget
   Q_OBJECT
 
 public:
-  GuiNetwork( QWidget* parent = 0 );
+  GuiNetwork( QWidget* parent = Q_NULLPTR );
 
   void loadSettings();
   inline bool restartConnection() const;

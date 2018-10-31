@@ -33,7 +33,7 @@ class BuildFileShareList : public QObject
   Q_OBJECT
 
 public:
-  explicit BuildFileShareList( QObject* parent = 0 );
+  explicit BuildFileShareList( QObject* parent = Q_NULLPTR );
 
   void setFolderPath( const QString& );
 

@@ -36,7 +36,7 @@ class MDnsManager : public QObject
   Q_OBJECT
 
 public:
-  MDnsManager( QObject* parent = 0 );
+  MDnsManager( QObject* parent = Q_NULLPTR );
 
   inline const QList<NetworkAddress>& networkAddresses() const;
 

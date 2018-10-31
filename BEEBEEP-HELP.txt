@@ -77,7 +77,7 @@ BeeBang= installation date or BeeBEEP first launch date
 [Chat]
 Font= font used in chat
 FontColor= font color used in chat
-DefaultChatBackgroundColor= background color in default chat window
+DefaultChatBackgroundColor=[string] background color in default chat window
 CompactMessage= messages are displayed without a blank line from each other
 AddNewLineAfterMessage=[true/false] add a blank line after a message displayed [obsolete in 4.0.0]
 ShowMessageTimestamp=[true/false] show message timestamp in the chat
@@ -99,6 +99,9 @@ UseColoredUserNames=[true/false] colored user names are showed in chat (default=
 DefaultUserNameColor=[string] default HTML color for user names (default=#000) [4.2.0]
 ActiveWindowOpacityLevel=[integer] percentage of opacity in the active chat window (default=100) [5.4.3]
 InactiveWindowOpacityLevel=[integer] percentage of opacity in the inactive chat window (default=85) [5.4.3]
+BackgroundColor=[string] background color of the chat window (default=#fff) [5.4.3]
+DefaultTextColor=[string] default text color of the chat window (default=#fff) [5.4.3]
+SystemTextColor=[string] system text color of the chat window (default=#fff) [5.4.3]
   
 [User]
 LocalColor= your nickname color in chat

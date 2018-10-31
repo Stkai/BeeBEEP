@@ -69,7 +69,6 @@ GuiChat::GuiChat( QWidget *parent )
   mp_teMessage->setCompleter( SpellChecker::instance().completer() );
 #endif
   mp_teMessage->setObjectName( "GuiMessageEdit" );
-  mp_teMessage->setStyleSheet( QString( "#GuiMessageEdit { background-color: #fff; }" ) );
 
   mp_teChat->setObjectName( "GuiChatViewer" );
   m_defaultChatPalette = mp_teChat->palette();
@@ -83,7 +82,6 @@ GuiChat::GuiChat( QWidget *parent )
   mp_teChat->setOpenExternalLinks( false );
   mp_teChat->setOpenLinks( false );
   mp_teChat->setAcceptRichText( false );
-  mp_teChat->setStyleSheet( QString( "#GuiChatViewer { background-color: #fff; }" ) );
 
   m_chatId = ID_DEFAULT_CHAT;
   m_lastMessageUserId = ID_SYSTEM_MESSAGE;
@@ -316,14 +314,14 @@ void GuiChat::customContextMenu( const QPoint& )
 bool GuiChat::messageCanBeShowed( const ChatMessage& cm )
 {
   if( m_chatId == ID_DEFAULT_CHAT && Settings::instance().showOnlyMessagesInDefaultChat() )
-    return GuiChatMessage::messageCanBeShowedInDefaultChat( cm ) && !Settings::instance().chatMessageFilter().testBit( (int)cm.type() );
+    return GuiChatMessage::messageCanBeShowedInDefaultChat( cm ) && !Settings::instance().chatMessageFilter().testBit( static_cast<int>( cm.type() ) );
   else
-    return !Settings::instance().chatMessageFilter().testBit( (int)cm.type() );
+    return !Settings::instance().chatMessageFilter().testBit( static_cast<int>( cm.type() ) );
 }
 
 bool GuiChat::historyCanBeShowed()
 {
-  return !Settings::instance().chatMessageFilter().testBit( (int)ChatMessage::History );
+  return !Settings::instance().chatMessageFilter().testBit( static_cast<int>( ChatMessage::History ) );
 }
 
 void GuiChat::showChatMessageFilterMenu()
@@ -334,7 +332,7 @@ void GuiChat::showChatMessageFilterMenu()
   act = mp_menuFilters->addAction( tr( "Show only messages in default chat" ), this, SLOT( changeChatMessageFilter() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().showOnlyMessagesInDefaultChat() );
-  act->setData( (int)ChatMessage::NumTypes );
+  act->setData( static_cast<int>( ChatMessage::NumTypes ) );
   mp_menuFilters->addSeparator();
 
   for( int i = ChatMessage::System; i < ChatMessage::NumTypes; i++ )
@@ -354,7 +352,7 @@ void GuiChat::changeChatMessageFilter()
   if( !act )
     return;
 
-  if( act->data().toInt() == (int)ChatMessage::NumTypes )
+  if( act->data().toInt() == static_cast<int>( ChatMessage::NumTypes ) )
   {
     Settings::instance().setShowOnlyMessagesInDefaultChat( act->isChecked() );
     if( m_chatId != ID_DEFAULT_CHAT )
@@ -453,16 +451,8 @@ bool GuiChat::setChat( const Chat& c )
 
   m_chatId = c.id();
 
-  if( c.isDefault() )
-  {
-    setChatBackgroundColor( Settings::instance().defaultChatBackgroundColor() );
-    mp_actSelectBackgroundColor->setEnabled( true );
-  }
-  else
-  {
-    mp_teChat->setPalette( m_defaultChatPalette );
-    mp_actSelectBackgroundColor->setEnabled( false );
-  }
+  updateChatColors();
+  mp_actSelectBackgroundColor->setEnabled( c.isDefault() );
 
   QString html_text = "";
 
@@ -492,7 +482,7 @@ bool GuiChat::setChat( const Chat& c )
     {
       if( !max_lines_message_written )
       {
-        html_text += QString( "&nbsp;&nbsp;&nbsp;<font color=gray><i>... %1 ...</i></font><br />" ).arg( tr( "only the last %1 messages are shown" ).arg( Settings::instance().chatMessagesToShow() ) );
+        html_text += QString( "&nbsp;&nbsp;&nbsp;<font color=%1><i>... %2 ...</i></font><br />" ).arg( Settings::instance().chatSystemTextColor() ).arg( tr( "only the last %1 messages are shown" ).arg( Settings::instance().chatMessagesToShow() ) );
         max_lines_message_written = true;
       }
       continue;
@@ -634,11 +624,12 @@ void GuiChat::setChatFontColor( const QString& color_name )
   mp_teMessage->setTextColor( QColor( color_name ) );
 }
 
-void GuiChat::setChatBackgroundColor( const QString& color_name )
+void GuiChat::updateChatColors()
 {
-  QPalette pal = m_defaultChatPalette;
-  pal.setBrush( QPalette::Base, QBrush( QColor( color_name ) ) );
-  mp_teChat->setPalette( pal );
+  QString background_color = m_chatId == ID_DEFAULT_CHAT ? Settings::instance().defaultChatBackgroundColor() : Settings::instance().chatBackgroundColor();
+  QString text_color = Settings::instance().chatDefaultTextColor();
+  mp_teMessage->setStyleSheet( QString( "#GuiMessageEdit { background-color: %1; color: %2; }" ).arg( background_color ).arg( text_color ) );
+  mp_teChat->setStyleSheet( QString( "#GuiChatViewer { background-color: %1; color: %2; }" ).arg( background_color ).arg( text_color ) );
 }
 
 void GuiChat::selectFontColor()
@@ -657,7 +648,7 @@ void GuiChat::selectBackgroundColor()
   if( c.isValid() )
   {
     Settings::instance().setDefaultChatBackgroundColor( c.name() );
-    setChatBackgroundColor( c.name() );
+    updateChatColors();
   }
 }
 
@@ -1019,7 +1010,7 @@ void GuiChat::findTextInChat( const QString& txt )
   if( txt.isEmpty() )
     return;
 
-  QTextDocument::FindFlags find_flags = 0;
+  QTextDocument::FindFlags find_flags;
   bool search_from_start = false;
   if( txt != m_lastTextFound )
   {

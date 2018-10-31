@@ -32,7 +32,7 @@ class MDnsBrowser : public MDnsObject
   Q_OBJECT
 
 public:
-  MDnsBrowser( QObject *parent = 0 );
+  MDnsBrowser( QObject *parent = Q_NULLPTR );
 
   bool browseForService( const QString& );
   void stop();

@@ -34,7 +34,7 @@ class GuiSystemTray : public QSystemTrayIcon
 public:
   enum IconStatus { Default, Message };
 
-  explicit GuiSystemTray( QObject *parent = 0 );
+  explicit GuiSystemTray( QObject *parent = Q_NULLPTR );
 
   void showNewFileArrived( VNumber, const QString&, bool );
   void showNewMessageArrived( VNumber, const QString&, bool );

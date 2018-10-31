@@ -32,7 +32,7 @@ class GuiPresetMessageList : public QTreeWidget
   Q_OBJECT
 
 public:
-  GuiPresetMessageList( QWidget* parent = 0 );
+  GuiPresetMessageList( QWidget* parent = Q_NULLPTR );
 
   virtual QSize sizeHint() const;
   void loadFromSettings();

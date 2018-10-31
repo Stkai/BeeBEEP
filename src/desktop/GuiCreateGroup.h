@@ -33,7 +33,7 @@ class GuiCreateGroup : public QDialog, private Ui::GuiCreateGroup
   Q_OBJECT
 
 public:
-  explicit GuiCreateGroup( QWidget *parent = 0 );
+  explicit GuiCreateGroup( QWidget *parent = Q_NULLPTR );
 
   void init( const Group& );
   void loadData();

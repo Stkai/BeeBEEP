@@ -34,7 +34,7 @@ class GuiVCard : public QWidget, private Ui::GuiVCardWidget
   Q_OBJECT
 
 public:
-  GuiVCard( QWidget* parent = 0 );
+  GuiVCard( QWidget* parent = Q_NULLPTR );
 
   void setVCard( const User&, VNumber chat_id, bool );
 

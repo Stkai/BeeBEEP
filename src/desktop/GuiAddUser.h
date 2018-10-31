@@ -33,7 +33,7 @@ class GuiAddUser : public QDialog, private Ui::GuiAddUserDialog
   Q_OBJECT
 
 public:
-  explicit GuiAddUser( QWidget *parent = 0 );
+  explicit GuiAddUser( QWidget *parent = Q_NULLPTR );
 
   void loadUsers();
 

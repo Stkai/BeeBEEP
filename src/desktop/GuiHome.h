@@ -34,7 +34,7 @@ class GuiHome : public QWidget, private Ui::GuiHomeWidget
   Q_OBJECT
 
 public:
-  explicit GuiHome( QWidget *parent = 0 );
+  explicit GuiHome( QWidget *parent = Q_NULLPTR );
 
   inline void setMainToolTip( const QString& );
   inline QString mainToolTip() const;

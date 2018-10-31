@@ -34,7 +34,7 @@ class GuiShareLocal : public QWidget, private Ui::GuiShareLocalWidget
   Q_OBJECT
 
 public:
-  explicit GuiShareLocal( QWidget *parent = 0 );
+  explicit GuiShareLocal( QWidget *parent = Q_NULLPTR );
 
   void setupToolBar( QToolBar* );
 

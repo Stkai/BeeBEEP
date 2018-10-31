@@ -33,7 +33,7 @@ class Connection : public ConnectionSocket
   Q_OBJECT
 
 public:
-  explicit Connection( QObject *parent = 0 );
+  explicit Connection( QObject *parent = Q_NULLPTR );
 
   bool sendMessage( const Message& );
   void setReadyForUse( VNumber );

@@ -46,7 +46,7 @@ class Core : public QObject
   Q_OBJECT
 
 public:
-  explicit Core( QObject* parent = 0 );
+  explicit Core( QObject* parent = Q_NULLPTR );
   virtual ~Core();
   static Core* instance() { return mp_instance; }
 

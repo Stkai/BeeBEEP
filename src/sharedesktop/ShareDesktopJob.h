@@ -32,7 +32,7 @@ class ShareDesktopJob : public QObject
   Q_OBJECT
 
 public:
-  explicit ShareDesktopJob( QObject* parent = 0 );
+  explicit ShareDesktopJob( QObject* parent = Q_NULLPTR );
 
 signals:
   void imageDataAvailable( const QByteArray&, const QString& image_type, bool use_compression, unsigned int diff_color );

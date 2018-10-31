@@ -32,7 +32,7 @@ class GuiShortcut : public QDialog, private Ui::GuiShortcutDialog
   Q_OBJECT
 
 public:
-  explicit GuiShortcut( QWidget *parent = 0 );
+  explicit GuiShortcut( QWidget *parent = Q_NULLPTR );
   void loadShortcuts();
 
 private slots:

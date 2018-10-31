@@ -33,7 +33,7 @@ class GuiEditVCard : public QDialog, private Ui::GuiVCardDialog
   Q_OBJECT
 
 public:
-  GuiEditVCard( QWidget* parent = 0 );
+  GuiEditVCard( QWidget* parent = Q_NULLPTR );
 
   void setUser( const User& );
 

@@ -35,7 +35,7 @@ class GuiUserList : public QWidget, private Ui::GuiUserListWidget
   Q_OBJECT
 
 public:
-  GuiUserList( QWidget* parent = 0 );
+  GuiUserList( QWidget* parent = Q_NULLPTR );
 
   void setUser( const User&, bool );
   void removeUser( const User& );

@@ -33,7 +33,7 @@ class GuiPluginManager : public QDialog, private Ui::GuiPluginManager
   Q_OBJECT
 
 public:
-  explicit GuiPluginManager( QWidget *parent = 0 );
+  explicit GuiPluginManager( QWidget *parent = Q_NULLPTR );
 
   void updatePlugins();
   inline bool isChanged() const;

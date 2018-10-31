@@ -39,7 +39,7 @@ public:
   enum ColumnType { ColumnCancel, ColumnReport, ColumnFile, ColumnUser, ColumnProgress, ColumnSort };
   enum FileDataType { PeerId = Qt::UserRole+2, FileId, FilePath, TransferInProgress, TransferCompleted };
 
-  GuiTransferFile( QWidget* parent = 0 );
+  GuiTransferFile( QWidget* parent = Q_NULLPTR );
 
 public slots:
   void setProgress( VNumber, const User&, const FileInfo&, FileSizeType );

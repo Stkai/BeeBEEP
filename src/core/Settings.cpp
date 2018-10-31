@@ -178,12 +178,15 @@ Settings::Settings()
 
   m_delayConnectionAtStartup = 5000;
 
-  m_chatDefaultUserNameColor = "#000";
+  m_chatDefaultUserNameColor = "#000000";
   m_maxChatsToOpenAfterSendingMessage = 6;
   m_showUsersOnConnection = false;
 
   m_chatActiveWindowOpacityLevel = 100;
   m_chatInactiveWindowOpacityLevel = chatInactiveWindowDefaultOpacityLevel();
+  m_chatBackgroundColor = "#ffffff";
+  m_chatDefaultTextColor = "#555555";
+  m_chatSystemTextColor = "#808080";
 }
 
 void Settings::createApplicationUuid()
@@ -868,6 +871,9 @@ void Settings::load()
   m_chatDefaultUserNameColor = sets->value( "DefaultUserNameColor", "#000" ).toString();
   m_chatActiveWindowOpacityLevel = qMax( 10, qMin( 100, sets->value( "ActiveWindowOpacityLevel", m_chatActiveWindowOpacityLevel ).toInt() ) );
   m_chatInactiveWindowOpacityLevel = qMax( 10, qMin( 100, sets->value( "InactiveWindowOpacityLevel", m_chatInactiveWindowOpacityLevel ).toInt() ) );
+  m_chatBackgroundColor = sets->value( "BackgroundColor", m_defaultChatBackgroundColor ).toString();
+  m_chatDefaultTextColor = sets->value( "DefaultTextColor", m_chatDefaultTextColor ).toString();
+  m_chatSystemTextColor = sets->value( "SystemTextColor", m_chatSystemTextColor ).toString();
   sets->endGroup();
 
   sets->beginGroup( "User" );
@@ -1262,6 +1268,9 @@ void Settings::save()
   sets->setValue( "DefaultUserNameColor", m_chatDefaultUserNameColor );
   sets->setValue( "ActiveWindowOpacityLevel", m_chatActiveWindowOpacityLevel  );
   sets->setValue( "InactiveWindowOpacityLevel", m_chatInactiveWindowOpacityLevel );
+  sets->setValue( "BackgroundColor", m_defaultChatBackgroundColor );
+  sets->setValue( "DefaultTextColor", m_chatDefaultTextColor );
+  sets->setValue( "SystemTextColor", m_chatSystemTextColor );
   sets->endGroup();
   sets->beginGroup( "User" );
   if( m_userRecognitionMethod != RecognizeByDefaultMethod )

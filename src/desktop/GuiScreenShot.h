@@ -32,7 +32,7 @@ class GuiScreenShot : public QMainWindow
   Q_OBJECT
 
 public:
-  explicit GuiScreenShot( QWidget *parent = 0 );
+  explicit GuiScreenShot( QWidget *parent = Q_NULLPTR );
 
   inline const QPixmap& screenShot() const;
   void showUp();
