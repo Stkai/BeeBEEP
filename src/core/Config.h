@@ -34,6 +34,7 @@
   #include <QtPrintSupport>
 #else
   typedef int qintptr;
+  #define Q_NULLPTR NULL
 #endif
 
 #ifdef __arm__

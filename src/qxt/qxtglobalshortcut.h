@@ -30,7 +30,7 @@
 *****************************************************************************/
 
 #define QXTGLOBALSHORTCUT_H
-
+#include "Config.h"
 #include "qxtglobal.h"
 #include <QObject>
 #include <QKeySequence>
