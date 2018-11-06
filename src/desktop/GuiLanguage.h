@@ -24,6 +24,7 @@
 #ifndef BEEBEEP_GUILANGUAGE_H
 #define BEEBEEP_GUILANGUAGE_H
 
+#include "Config.h"
 #include "ui_GuiLanguage.h"
 
 

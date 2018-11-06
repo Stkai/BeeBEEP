@@ -24,6 +24,7 @@
 #ifndef BEEBEEP_GUIWORKGROUPS_H
 #define BEEBEEP_GUIWORKGROUPS_H
 
+#include "Config.h"
 #include "ui_GuiWorkgroups.h"
 
 

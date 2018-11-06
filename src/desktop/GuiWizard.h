@@ -24,8 +24,8 @@
 #ifndef BEEBEEP_GUIWIZARD_H
 #define BEEBEEP_GUIWIZARD_H
 
+#include "Config.h"
 #include "ui_GuiWizard.h"
-
 
 
 class GuiWizard : public QDialog, private Ui::GuiWizardDialog

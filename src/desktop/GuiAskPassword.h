@@ -24,8 +24,8 @@
 #ifndef BEEBEEP_GUIASKPASSWORD_H
 #define BEEBEEP_GUIASKPASSWORD_H
 
+#include "Config.h"
 #include "ui_GuiAskPassword.h"
-#include <QButtonGroup>
 
 
 class GuiAskPassword : public QDialog, private Ui::GuiAskPassword

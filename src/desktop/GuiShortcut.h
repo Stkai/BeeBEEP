@@ -24,6 +24,7 @@
 #ifndef BEEBEEP_GUISHORTCUT_H
 #define BEEBEEP_GUISHORTCUT_H
 
+#include "Config.h"
 #include "ui_GuiShortcut.h"
 
 
