@@ -8,3 +8,4 @@ SUBDIRS += src plugins
 CONFIG += ordered
 
 TRANSLATIONS = $$BEEBEEP_TRANSLATIONS
+

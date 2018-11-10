@@ -13,3 +13,7 @@ DisablePrivateChats=false
 UserRecognitionMethod=0
 AllowAddMembersToGroup=true
 AllowRemoveMembersFromGroup=true
+SaveDataInUserApplicationFolder=true
+AllowMultipleInstances=true
+PreventMultipleConnectionsFromSingleHostAddress=false
+
