@@ -22,13 +22,14 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "AudioManager.h"
+#include "BeeUtils.h"
 #include "Settings.h"
 
 
-AudioManager* AudioManager::mp_instance = NULL;
+AudioManager* AudioManager::mp_instance = Q_NULLPTR;
 
 AudioManager::AudioManager()
-  : mp_sound( 0 )
+  : mp_sound( Q_NULLPTR )
 {
 }
 
@@ -51,7 +52,7 @@ void AudioManager::clearBeep()
   {
     qDebug() << "AudioManager clear sound object";
     mp_sound->deleteLater();
-    mp_sound = 0;
+    mp_sound = Q_NULLPTR;
   }
 }
 
@@ -59,16 +60,26 @@ void AudioManager::playBeep()
 {
   if( !mp_sound )
   {
-    if( QFile::exists( Settings::instance().beepFilePath() ) && isAudioDeviceAvailable() )
+    if( isAudioDeviceAvailable() )
     {
+      QString beep_file_path = Settings::instance().beepFilePath();
+      if( !QFile::exists( beep_file_path ) )
+      {
+        qDebug() << "AudioManager did not find BEEP file" << qPrintable( beep_file_path );
+        beep_file_path = Bee::convertToNativeFolderSeparator( Settings::instance().defaultBeepFilePath( true ) );
+      }
+
+      if( QFile::exists( beep_file_path ) )
+      {
 #ifdef BEEBEEP_USE_PHONON4
-      qDebug() << "AudioManager create PHONON sound object from" << qPrintable( Settings::instance().beepFilePath() );
-      Phonon::MediaSource media_source( QUrl::fromLocalFile( Settings::instance().beepFilePath() ) );
-      mp_sound = Phonon::createPlayer( Phonon::MusicCategory, media_source );
+        qDebug() << "AudioManager create PHONON sound object from" << qPrintable( beep_file_path );
+        Phonon::MediaSource media_source( QUrl::fromLocalFile( beep_file_path ) );
+        mp_sound = Phonon::createPlayer( Phonon::MusicCategory, media_source );
 #else
-      qDebug() << "AudioManager create sound object from" << qPrintable( Settings::instance().beepFilePath() );
-      mp_sound = new QSound( Settings::instance().beepFilePath() );
+        qDebug() << "AudioManager create sound object from" << qPrintable( beep_file_path );
+        mp_sound = new QSound( beep_file_path );
 #endif
+      }
     }
   }
 

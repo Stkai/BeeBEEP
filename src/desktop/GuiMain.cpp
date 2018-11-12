@@ -872,6 +872,10 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().sendOfflineMessagesToDefaultChat() );
   act->setData( 66 );
+  act = mp_menuChatSettings->addAction( tr( "Enable notifications also for chat with all users" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().enableDefaultChatNotifications() );
+  act->setData( 75 );
   mp_menuChatSettings->addSeparator();
   act = mp_menuChatSettings->addAction( tr( "Open chats in a single window" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -1702,6 +1706,9 @@ void GuiMain::settingsChanged( QAction* act )
         Settings::instance().setChatSystemTextColor( c.name() );
     }
     break;
+  case 75:
+    Settings::instance().setEnableDefaultChatNotifications( act->isChecked() );
+    break;
   case 99:
     break;
   default:
@@ -1852,7 +1859,7 @@ void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
   }
 
   bool floating_chat_created = false;
-  bool alert_can_be_showed = !c.isDefault() && cm.alertCanBeSent();
+  bool alert_can_be_showed = (c.isDefault() ? Settings::instance().enableDefaultChatNotifications() : false) && cm.alertCanBeSent();
   if( alert_can_be_showed && c.isGroup() && Settings::instance().isNotificationDisabledForGroup( c.privateId() ) )
     alert_can_be_showed = false;
 

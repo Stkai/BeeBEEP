@@ -102,7 +102,8 @@ InactiveWindowOpacityLevel=[integer] percentage of opacity in the inactive chat 
 BackgroundColor=[string] background color of the chat window (default=#fff) [5.4.3]
 DefaultTextColor=[string] default text color of the chat window (default=#fff) [5.4.3]
 SystemTextColor=[string] system text color of the chat window (default=#fff) [5.4.3]
-  
+EnableDefaultChatNotifications=[true/false] enable notifications for chat will all (default=true) [5.4.3]
+
 [User]
 LocalColor= your nickname color in chat
 LocalLastStatus= your status (0 = Offline, 1 = Online, 2 = Busy, 3 = Away) [obsolete in 4.0.0]

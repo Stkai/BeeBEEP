@@ -281,6 +281,8 @@ public:
   inline void setChatInactiveWindowOpacityLevel( int );
   inline int chatInactiveWindowOpacityLevel() const;
   inline int chatInactiveWindowDefaultOpacityLevel() const;
+  inline void setEnableDefaultChatNotifications( bool );
+  inline bool enableDefaultChatNotifications() const;
 
   inline bool usePreviewFileDialog() const;
   inline void setPreviewFileDialogGeometry( const QByteArray& );
@@ -652,6 +654,7 @@ private:
   bool m_enableMaximizeButton;
   int m_chatActiveWindowOpacityLevel;
   int m_chatInactiveWindowOpacityLevel;
+  bool m_enableDefaultChatNotifications;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -1122,6 +1125,8 @@ inline void Settings::setChatDefaultTextColor( const QString& new_value ) { m_ch
 inline const QString& Settings::chatDefaultTextColor() const { return m_chatDefaultTextColor; }
 inline void Settings::setChatSystemTextColor( const QString& new_value ) { m_chatSystemTextColor = new_value; }
 inline const QString& Settings::chatSystemTextColor() const { return m_chatSystemTextColor; }
+inline void Settings::setEnableDefaultChatNotifications( bool new_value ) { m_enableDefaultChatNotifications = new_value; }
+inline bool Settings::enableDefaultChatNotifications() const { return m_enableDefaultChatNotifications; }
 
 
 #endif // BEEBEEP_SETTINGS_

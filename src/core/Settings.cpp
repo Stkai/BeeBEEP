@@ -165,6 +165,7 @@ Settings::Settings()
   m_groupListBackgroundColor = "#ffffff";
   m_savedChatListBackgroundColor = "#ffffff";
   m_maxLogLines = 5000;
+  m_enableDefaultChatNotifications = true;
 
   m_enableFileTransfer = true;
   m_enableFileSharing = false;
@@ -874,6 +875,7 @@ void Settings::load()
   m_chatBackgroundColor = sets->value( "BackgroundColor", m_defaultChatBackgroundColor ).toString();
   m_chatDefaultTextColor = sets->value( "DefaultTextColor", m_chatDefaultTextColor ).toString();
   m_chatSystemTextColor = sets->value( "SystemTextColor", m_chatSystemTextColor ).toString();
+  m_enableDefaultChatNotifications = sets->value( "EnableDefaultChatNotifications", m_enableDefaultChatNotifications ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "User" );
@@ -1271,6 +1273,7 @@ void Settings::save()
   sets->setValue( "BackgroundColor", m_defaultChatBackgroundColor );
   sets->setValue( "DefaultTextColor", m_chatDefaultTextColor );
   sets->setValue( "SystemTextColor", m_chatSystemTextColor );
+  sets->setValue( "EnableDefaultChatNotifications", m_enableDefaultChatNotifications );
   sets->endGroup();
   sets->beginGroup( "User" );
   if( m_userRecognitionMethod != RecognizeByDefaultMethod )

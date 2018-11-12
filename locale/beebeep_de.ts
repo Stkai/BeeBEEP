@@ -2655,6 +2655,10 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Show inactive chat window with %1% opacity</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Enable notifications also for chat with all users</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

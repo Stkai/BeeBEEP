@@ -9,6 +9,7 @@ BeeBEEP 5.4.3
 - Added "DisableCreateMessage" option in beebeep.rc
 - Added "ActiveWindowOpacityLevel" and "InactiveWindowOpacityLevel" option for chat window
 - Added "BackgroundColor", "DefaultTextColor" and "SystemTextColor" option for chat window
+- Added "EnableDefaultChatNotifications" option
 
 BeeBEEP 5.4.2
 - Removed option "On close minimize on tray" for MacOSX

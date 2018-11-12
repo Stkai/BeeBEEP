@@ -2689,27 +2689,35 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>The option has been disabled by your system administrator.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;opzione è stata disabilitata dal tuo amministratore di sistema.</translation>
     </message>
     <message>
         <source>Select chat background color</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona il colore dello sfondo</translation>
     </message>
     <message>
         <source>Select chat default text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona il colore del testo</translation>
     </message>
     <message>
         <source>Select chat system text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona il colore dei messaggi di sistema</translation>
     </message>
     <message>
         <source>Please select the opacity percentage of inactive chat window (default: %1%)</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci la percentuale di trasparenza delle finestre non attive (predefinita: %1%)</translation>
     </message>
     <message>
         <source>Show inactive chat window with %1% opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra le finestre inattive con una trasparenza del %1%</translation>
+    </message>
+    <message>
+        <source>Enable notifications also for chat with all users </source>
+        <translation type="obsolete">Abilita le notifiche anche nella conversazione con tutti</translation>
+    </message>
+    <message>
+        <source>Enable notifications also for chat with all users</source>
+        <translation>Abilita le notifiche anche nella conversazione con tutti</translation>
     </message>
 </context>
 <context>
