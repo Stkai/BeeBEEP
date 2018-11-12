@@ -438,7 +438,7 @@ QPixmap Bee::convertToGrayScale( const QPixmap& pix )
   int pixels = img.width() * img.height();
   if( pixels*(int)sizeof(QRgb) <= img.byteCount() )
   {
-    QRgb *data = (QRgb *)img.bits();
+    QRgb *data = (QRgb*)img.bits();
     for (int i = 0; i < pixels; i++)
     {
       int val = qGray(data[i]);
@@ -472,7 +472,7 @@ QString Bee::convertToNativeFolderSeparator( const QString& raw_path )
 #endif
   QChar to_char = QDir::separator();
 
-  for( int i = 0; i < (int)path_converted.length(); i++ )
+  for( int i = 0; i < path_converted.length(); i++ )
   {
     if( path_converted[ i ] == from_char )
       path_converted[ i ] = to_char;
@@ -720,10 +720,45 @@ QString Bee::toolTipForUser( const User& u, bool only_status )
   else
   {
     if( u.lastConnection().isValid() )
-      tool_tip += QString( " (%1 %2)" ).arg( QObject::tr( "last connection" ) ).arg( Bee::dateTimeToString( u.lastConnection() ) );
+      tool_tip += QString( "\n(%1 %2)" ).arg( QObject::tr( "last connection" ) ).arg( Bee::dateTimeToString( u.lastConnection() ) );
+  }
+
+  if( !u.vCard().birthday().isNull() )
+  {
+    QString text = userBirthdayToText( u );
+    if( !text.isEmpty() )
+      tool_tip +=  QString( "\n* %1 *" ).arg( text );
   }
 
   return tool_tip;
+}
+
+QString Bee::userBirthdayToText( const User& u )
+{
+  QString birthday_text;
+  if( !u.isLocal() )
+  {
+    int days_to = u.daysToBirthDay();
+    if( days_to == 0 )
+      birthday_text = QObject::tr( "Today is %1's birthday" ).arg( u.name() );
+    else if( days_to == 1 )
+      birthday_text =  QObject::tr( "Tomorrow is %1's birthday" ).arg( u.name() );
+    else if( days_to > 1 && days_to < 10 )
+      birthday_text= QObject::tr( "%1's birthday is in %2 days" ).arg( u.name() ).arg( days_to );
+    else if( days_to == -1 )
+      birthday_text = QObject::tr( "Yesterday was %1's birthday" ).arg( u.name() );
+    else
+      birthday_text = "";
+  }
+  else
+  {
+    if( u.isBirthDay() )
+      birthday_text = QObject::tr( "Happy Birthday to you!" );
+    else
+      birthday_text = "";
+  }
+
+  return birthday_text;
 }
 
 void Bee::setWindowStaysOnTop( QWidget* w, bool enable )

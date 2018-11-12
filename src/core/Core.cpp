@@ -42,7 +42,7 @@
   #include "ShareDesktop.h"
 #endif
 
-Core *Core::mp_instance = 0;
+Core *Core::mp_instance = Q_NULLPTR;
 
 
 Core::Core( QObject* parent )
@@ -84,7 +84,7 @@ Core::Core( QObject* parent )
 Core::~Core()
 {
   if( mp_instance )
-    mp_instance = 0;
+    mp_instance = Q_NULLPTR;
 }
 
 QHostAddress Core::multicastGroupAddress() const
@@ -163,11 +163,11 @@ bool Core::start()
   showMessage( tr( "Connecting" ), 2000 );
   UserManager::instance().clearNewConnectedUserIdList();
 
-  if( !mp_listener->listen( Settings::instance().hostAddressToListen(), Settings::instance().defaultListenerPort() ) )
+  if( !mp_listener->listen( Settings::instance().hostAddressToListen(), static_cast<quint16>(Settings::instance().defaultListenerPort()) ) )
   {
     qWarning() << "Unable to bind default listener port" << Settings::instance().defaultListenerPort();
 
-    if( !mp_listener->listen( Settings::instance().hostAddressToListen(), Settings::instance().localUser().networkAddress().hostPort() ) )
+    if( !mp_listener->listen( Settings::instance().hostAddressToListen(), static_cast<quint16>(Settings::instance().localUser().networkAddress().hostPort()) ) )
     {
       qDebug() << "Unable to bind last used listener port" << Settings::instance().localUser().networkAddress().hostPort();
       if( !mp_listener->listen( Settings::instance().hostAddressToListen() ) )
@@ -241,10 +241,10 @@ bool Core::start()
     if( previous_local_user_status < User::Online || previous_local_user_status >= User::NumStatus )
       Settings::instance().setLocalUserStatus( User::Online );
     else
-      Settings::instance().setLocalUserStatus( (User::Status)previous_local_user_status );
+      Settings::instance().setLocalUserStatus( static_cast<User::Status>(previous_local_user_status) );
   }
 
-  showUserVCardChanged( Settings::instance().localUser() );
+  showUserVCardChanged( Settings::instance().localUser(), VCard() );
   emit userChanged( Settings::instance().localUser() );
 
   qDebug() << "Local user current path:" << qPrintable( Settings::instance().localUser().path() );

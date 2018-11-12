@@ -39,6 +39,7 @@ namespace Bee
   QString userStatusIconFileName( int );
   QString menuUserStatusIconFileName( int );
   QString userStatusToString( int );
+  QString userBirthdayToText( const User& );
   inline VNumber qVariantToVNumber( const QVariant& );
   QString bytesToString( FileSizeType, int precision = -1 );
   QString elapsedTimeToString( int msec );
@@ -85,13 +86,14 @@ namespace Bee
   bool areStringListEqual( const QStringList&, const QStringList&, Qt::CaseSensitivity cs = Qt::CaseInsensitive );
   QString dateTimeToString( const QDateTime& );
   QString beeColorsToHtmlText( const QString& );
+
 }
 
 
 // Inline Functions
 inline QIcon Bee::userStatusIcon( int user_status ) { return QIcon( userStatusIconFileName( user_status ) ); }
 inline VNumber Bee::qVariantToVNumber( const QVariant& v ) { return v.toULongLong(); }
-inline int Bee::toLittleEndianFromBig( int big_endian_int ) { return (int) (0 | ((big_endian_int & 0x00ff) << 8) | ((big_endian_int & 0xff00) >> 8)); }
+inline int Bee::toLittleEndianFromBig( int big_endian_int ) { return static_cast<int>(0 | ((big_endian_int & 0x00ff) << 8) | ((big_endian_int & 0xff00) >> 8)); }
 inline bool Bee::isTimeToCheck( int ticks, int tick_for_check ) { return ticks % tick_for_check == 0; }
 
 #endif // BEEBEEP_GUIUTILS_H

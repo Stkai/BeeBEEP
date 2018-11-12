@@ -54,6 +54,8 @@ public:
   inline const QString& domainName() const;
   inline void setLastConnection( const QDateTime& );
   inline const QDateTime& lastConnection() const;
+  inline void setBirthday( const QDate& );
+  inline const QDate& birthday() const;
 
 private:
   QString m_name;
@@ -64,6 +66,7 @@ private:
   QString m_hash;
   QString m_domainName;
   QDateTime m_lastConnection;
+  QDate m_birthday;
 
 };
 
@@ -86,5 +89,7 @@ inline void UserRecord::setDomainName( const QString& new_value ) { m_domainName
 inline const QString& UserRecord::domainName() const { return m_domainName; }
 inline void UserRecord::setLastConnection( const QDateTime& new_value ) { m_lastConnection = new_value; }
 inline const QDateTime& UserRecord::lastConnection() const { return m_lastConnection; }
+inline void UserRecord::setBirthday( const QDate& new_value ) { m_birthday = new_value; }
+inline const QDate& UserRecord::birthday() const { return m_birthday; }
 
 #endif // BEEBEEP_USERRECORD_H

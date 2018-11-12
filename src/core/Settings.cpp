@@ -872,7 +872,7 @@ void Settings::load()
   m_chatDefaultUserNameColor = sets->value( "DefaultUserNameColor", "#000" ).toString();
   m_chatActiveWindowOpacityLevel = qMax( 10, qMin( 100, sets->value( "ActiveWindowOpacityLevel", m_chatActiveWindowOpacityLevel ).toInt() ) );
   m_chatInactiveWindowOpacityLevel = qMax( 10, qMin( 100, sets->value( "InactiveWindowOpacityLevel", m_chatInactiveWindowOpacityLevel ).toInt() ) );
-  m_chatBackgroundColor = sets->value( "BackgroundColor", m_defaultChatBackgroundColor ).toString();
+  m_chatBackgroundColor = sets->value( "BackgroundColor", m_chatBackgroundColor ).toString();
   m_chatDefaultTextColor = sets->value( "DefaultTextColor", m_chatDefaultTextColor ).toString();
   m_chatSystemTextColor = sets->value( "SystemTextColor", m_chatSystemTextColor ).toString();
   m_enableDefaultChatNotifications = sets->value( "EnableDefaultChatNotifications", m_enableDefaultChatNotifications ).toBool();
@@ -1270,7 +1270,7 @@ void Settings::save()
   sets->setValue( "DefaultUserNameColor", m_chatDefaultUserNameColor );
   sets->setValue( "ActiveWindowOpacityLevel", m_chatActiveWindowOpacityLevel  );
   sets->setValue( "InactiveWindowOpacityLevel", m_chatInactiveWindowOpacityLevel );
-  sets->setValue( "BackgroundColor", m_defaultChatBackgroundColor );
+  sets->setValue( "BackgroundColor", m_chatBackgroundColor );
   sets->setValue( "DefaultTextColor", m_chatDefaultTextColor );
   sets->setValue( "SystemTextColor", m_chatSystemTextColor );
   sets->setValue( "EnableDefaultChatNotifications", m_enableDefaultChatNotifications );

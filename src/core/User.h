@@ -82,6 +82,7 @@ public:
   inline QString accountPath() const;
 
   bool isBirthDay() const;
+  int daysToBirthDay() const;
 
   static QString nameFromPath( const QString& );
   static QString hostAddressAndPortFromPath( const QString& );

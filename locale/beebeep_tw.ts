@@ -407,10 +407,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Happy Birthday to %1!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>You share this information</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1124,6 +1120,18 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Disabled by system administrator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Be careful, by changing the hash code you may no longer be a member of some groups and you will have to get invited again. Do you really want to regenerate your hash code?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished">是</translation>
+    </message>
+    <message>
+        <source>No</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3726,6 +3734,10 @@ Please select a different name.</source>
         <source>Informations to display to other users</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Regenerate your hash code...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiVCardWidget</name>
@@ -4005,6 +4017,26 @@ Please select a different name.</source>
     </message>
     <message>
         <source>and %1 others</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Today is %1&apos;s birthday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tomorrow is %1&apos;s birthday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1&apos;s birthday is in %2 days</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yesterday was %1&apos;s birthday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Happy Birthday to you!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

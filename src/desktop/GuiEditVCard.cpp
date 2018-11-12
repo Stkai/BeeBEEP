@@ -31,7 +31,7 @@
 
 
 GuiEditVCard::GuiEditVCard( QWidget *parent )
-  : QDialog( parent ), m_vCard()
+  : QDialog( parent ), m_vCard(), m_userColor( "#000000" ), m_regenerateUserHash( false )
 {
   setupUi( this );
   setObjectName( "GuiEditVCard" );
@@ -43,11 +43,12 @@ GuiEditVCard::GuiEditVCard( QWidget *parent )
   mp_pbRemovePhoto->setIcon( IconManager::instance().icon( "delete.png" ) );
   mp_pbColor->setIcon( IconManager::instance().icon( "font-color.png" ) );
 
-  connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( checkData() ) );
+  connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( onOkClicked() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
   connect( mp_pbChangePhoto, SIGNAL( clicked() ), this, SLOT( changePhoto() ) );
   connect( mp_pbRemovePhoto, SIGNAL( clicked() ), this, SLOT( removePhoto() ) );
   connect( mp_pbColor, SIGNAL( clicked() ), this, SLOT( changeUserColor() ) );
+  connect( mp_pbRegenerateHash, SIGNAL( clicked() ), this, SLOT( regenerateHash() ) );
 }
 
 void GuiEditVCard::setUserColor( const QString& new_value )
@@ -59,7 +60,7 @@ void GuiEditVCard::setUserColor( const QString& new_value )
   mp_leNickname->setPalette( palette );
   palette.setColor( QPalette::Foreground, c );
   mp_lNickname->setPalette( palette );
-  if( m_vCard.photo().isNull() && mp_leNickname->text().trimmed() > 0 )
+  if( m_vCard.photo().isNull() && mp_leNickname->text().trimmed().size() > 0 )
     mp_lPhoto->setPixmap( Avatar::create( mp_leNickname->text(), m_userColor, QSize( 96, 96 ) ) );
 }
 
@@ -67,6 +68,7 @@ void GuiEditVCard::setUser( const User& u )
 {
   m_vCard = u.vCard();
   setUserColor( u.color() );
+  m_regenerateUserHash = false;
   loadVCard();
 }
 
@@ -169,10 +171,10 @@ bool GuiEditVCard::checkLineEdit( QLineEdit* ple, const QString& msg )
   return true;
 }
 
-void GuiEditVCard::checkData()
+bool GuiEditVCard::checkData()
 {
   if( !checkLineEdit( mp_leNickname, tr( "Please insert your nickname." ) ) )
-    return;
+    return false;
 
   QString user_nickname = mp_leNickname->text().simplified();
   User u = UserManager::instance().findUserByNickname( user_nickname );
@@ -182,10 +184,15 @@ void GuiEditVCard::checkData()
                           tr( "The nickname '%1' is already in use by the user %2." )
                             .arg( user_nickname ).arg( u.path() ) );
     mp_leNickname->setFocus();
-    return;
+    return false;
   }
 
-  m_vCard.setNickName( user_nickname );
+  return true;
+}
+
+void GuiEditVCard::saveVCard()
+{
+  m_vCard.setNickName( mp_leNickname->text().simplified() );
   m_vCard.setFirstName( mp_leFirstName->text().simplified() );
   m_vCard.setLastName( mp_leLastName->text().simplified() );
   if( mp_deBirthday->date() != QDate( 1900, 1, 1 ) )
@@ -195,6 +202,27 @@ void GuiEditVCard::checkData()
   m_vCard.setEmail( mp_leEmail->text().simplified() );
   m_vCard.setPhoneNumber( mp_lePhone->text().simplified() );
   m_vCard.setInfo( mp_teInfo->toPlainText().trimmed() );
+}
 
+void GuiEditVCard::onOkClicked()
+{
+  if( !checkData() )
+    return;
+  saveVCard();
   accept();
+}
+
+void GuiEditVCard::regenerateHash()
+{
+  if( !checkData() )
+    return;
+
+  if( QMessageBox::question( this, Settings::instance().programName(),
+                 tr( "Be careful, by changing the hash code you may no longer be a member of some groups and you will have to get invited again. Do you really want to regenerate your hash code?" ),
+                 tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 0 )
+  {
+    m_regenerateUserHash = true;
+    saveVCard();
+    accept();
+  }
 }

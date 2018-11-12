@@ -31,7 +31,7 @@
 #include "Settings.h"
 #include "UserManager.h"
 
-Protocol* Protocol::mp_instance = NULL;
+Protocol* Protocol::mp_instance = Q_NULLPTR;
 const QChar PROTOCOL_FIELD_SEPARATOR = QChar::ParagraphSeparator;  // 0x2029
 const QChar DATA_FIELD_SEPARATOR = QChar::LineSeparator; // 0x2028
 
@@ -39,7 +39,7 @@ const QChar DATA_FIELD_SEPARATOR = QChar::LineSeparator; // 0x2028
 Protocol::Protocol()
   : m_id( ID_START ), m_fileShareListMessage( Message::Share, ID_SHARE_MESSAGE, "" )
 {
-  m_id += Random::d100();
+  m_id += static_cast<VNumber>(Random::d100());
 #if QT_VERSION == 0x050603 && defined Q_OS_MAC
   // Fixed a protocol bug in OsX Legacy version
   m_datastreamMaxVersion = 12;
@@ -253,7 +253,8 @@ QHostAddress Protocol::hostAddressFromBroadcastMessage( const Message& m ) const
 
 int Protocol::protoVersion( const Message& m ) const
 {
-  return m.id() <= ID_HELLO_MESSAGE ? 1 : m.id();
+  int proto_version = static_cast<int>( m.id() <= ID_HELLO_MESSAGE ? 1 : m.id() );
+  return proto_version;
 }
 
 QString Protocol::publicKey( const Message& m ) const
@@ -301,7 +302,7 @@ QByteArray Protocol::helloMessage( const QString& public_key ) const
   else
     data_list << QString( "" );
   data_list << Settings::instance().localUser().domainName();
-  Message m( Message::Hello, Settings::instance().protoVersion(), data_list.join( DATA_FIELD_SEPARATOR ) );
+  Message m( Message::Hello, static_cast<VNumber>(Settings::instance().protoVersion()), data_list.join( DATA_FIELD_SEPARATOR ) );
   m.setData( Settings::instance().currentHash() );
   return fromMessage( m, 1 );
 }
@@ -598,6 +599,12 @@ User Protocol::createTemporaryUser( const UserRecord& ur )
     u.setHash( newMd5Id() );
   u.setStatus( User::Offline );
   u.setIsFavorite( ur.isFavorite() );
+  if( ur.birthday().isValid() )
+  {
+    VCard vc = u.vCard();
+    vc.setBirthday( ur.birthday() );
+    u.setVCard( vc );
+  }
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Temporary user" << u.id() << qPrintable( u.path() ) << "created with account" << qPrintable( u.accountName() ) << "and hash" << qPrintable( u.hash() );
 #endif
@@ -622,6 +629,7 @@ QString Protocol::saveUserRecord( const UserRecord& ur, bool add_extras ) const
     sl << ur.hash();
     sl << ur.domainName();
     sl << ur.lastConnection().toString( Qt::ISODate );
+    sl << ur.birthday().toString( Qt::ISODate );
   }
   return sl.join( DATA_FIELD_SEPARATOR );
 }
@@ -700,6 +708,12 @@ UserRecord Protocol::loadUserRecord( const QString& s ) const
     qDebug() << "User" << qPrintable( ur.name() ) << "has last connection date saved:" << qPrintable( ur.lastConnection().toString( Qt::ISODate ) );
   }
 
+  if( !sl.isEmpty() )
+  {
+    ur.setBirthday( QDate::fromString( sl.takeFirst(), Qt::ISODate ) );
+    qDebug() << "User" << qPrintable( ur.name() ) << "has birthday saved:" << qPrintable( ur.birthday().toString( Qt::ISODate ) );
+  }
+
   return ur;
 }
 
@@ -717,6 +731,7 @@ QString Protocol::saveUser( const User& u ) const
     ur.setLastConnection( u.lastConnection() );
   else
     ur.setLastConnection( QDateTime::currentDateTime() );
+  ur.setBirthday( u.vCard().birthday() );
   return saveUserRecord( ur, true );
 }
 
@@ -830,7 +845,7 @@ Chat Protocol::createPrivateChat( const User& u )
 Chat Protocol::createChat( const Group& g, Group::ChatType chat_type )
 {
   Group g_to_check = g;
-  if( g_to_check.chatType() != (int)chat_type )
+  if( g_to_check.chatType() != chat_type )
     g_to_check.setChatType( chat_type );
   if( !g_to_check.isValid() )
     g_to_check.setId( newId() );
@@ -1148,7 +1163,7 @@ FileInfo Protocol::fileInfo( const QFileInfo& fi, const QString& share_folder, b
   if( fi.isFile() )
   {
     file_info.setSuffix( fi.suffix() );
-    file_info.setSize( fi.size() );
+    file_info.setSize( static_cast<FileSizeType>( fi.size() ) );
   }
   else
     file_info.setIsFolder( true );
@@ -1996,8 +2011,8 @@ QByteArray Protocol::encryptByteArray( const QByteArray& text_to_encrypt, const 
   if( proto_version < SECURE_LEVEL_3_PROTO_VERSION )
   {
     // What the hell...
-    for( i = 0; i < sizeof( key ); i++ )
-      key[ i ] = (unsigned int)cipher_key.size() < i ? static_cast<unsigned char>( cipher_key.at( i ) ) : 0;
+    for( unsigned int i = 0; i < sizeof( key ); i++ )
+      key[ i ] = static_cast<unsigned int>(cipher_key.size()) < i ? static_cast<unsigned char>( cipher_key.at( static_cast<int>(i) ) ) : 0;
   }
   else
   {
@@ -2058,8 +2073,8 @@ QByteArray Protocol::decryptByteArray( const QByteArray& text_to_decrypt, const 
   if( proto_version < SECURE_LEVEL_3_PROTO_VERSION )
   {
     // What the hell...
-    for( i = 0; i < sizeof( key ); i++ )
-      key[ i ] = (unsigned int)cipher_key.size() < i ? static_cast<unsigned char>( cipher_key.at( i ) ) : 0;
+    for( unsigned int i = 0; i < sizeof( key ); i++ )
+      key[ i ] = static_cast<unsigned int>(cipher_key.size()) < i ? static_cast<unsigned char>( cipher_key.at( static_cast<int>(i) ) ) : 0;
   }
   else
   {

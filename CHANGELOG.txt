@@ -10,6 +10,8 @@ BeeBEEP 5.4.3
 - Added "ActiveWindowOpacityLevel" and "InactiveWindowOpacityLevel" option for chat window
 - Added "BackgroundColor", "DefaultTextColor" and "SystemTextColor" option for chat window
 - Added "EnableDefaultChatNotifications" option
+- Added "Regenerate HASH code" button in Edit Profile window (to easily avoid "same HASH errors")
+- Added notification a few days before user's birthday event (birthday is now saved with user data)
 
 BeeBEEP 5.4.2
 - Removed option "On close minimize on tray" for MacOSX

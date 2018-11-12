@@ -2380,7 +2380,14 @@ void GuiMain::changeVCard()
   gvc.setSizeGripEnabled( true );
   gvc.show();
   if( gvc.exec() == QDialog::Accepted )
+  {
     beeCore->setLocalUserVCard( gvc.userColor(), gvc.vCard() );
+    if( gvc.regenerateUserHash() )
+    {
+      beeCore->regenerateLocalUserHash();
+      QMessageBox::information( this, Settings::instance().programName(), tr( "You must restart %1 to apply these changes." ).arg( Settings::instance().programName() ) );
+    }
+  }
 }
 
 void GuiMain::showLocalUserVCard()

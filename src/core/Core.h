@@ -80,6 +80,7 @@ public:
   bool removeOfflineUser( VNumber );
   void changeUserColor( VNumber, const QString& );
   bool userCanBeRemoved( const User& );
+  void regenerateLocalUserHash();
 
   /* CoreChat */
   void createPrivateChat( const User& );
@@ -248,7 +249,7 @@ protected:
 
   /* CoreUser */
   void showUserNameChanged( const User&, const QString& old_user_name );
-  void showUserVCardChanged( const User& );
+  void showUserVCardChanged( const User&, const VCard& old_vcard );
   void sendLocalUserStatus();
   void addGroup( const Group& );
   void sendLocalConnectedUsersTo( const User& );

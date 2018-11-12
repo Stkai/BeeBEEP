@@ -124,7 +124,7 @@
     </message>
     <message>
         <source>Happy Birthday to %1!</source>
-        <translation>Buon Compleanno a %1!</translation>
+        <translation type="obsolete">Buon Compleanno a %1!</translation>
     </message>
     <message>
         <source>%1 Broadcasting to the %2 Network...</source>
@@ -512,7 +512,7 @@
     </message>
     <message>
         <source>%1 Connection closed to user %2 because it uses your hash code.</source>
-        <translation>%1 Connessione chiusa all&apos;utente %2 perché sta usando il tuo stesso codice hash.</translation>
+        <translation>%1 Connessione chiusa all&apos;utente %2 perché sta usando il tuo stesso codice.</translation>
     </message>
     <message>
         <source>%1 Connection closed to user %2 because it uses same hash code of the already connected user %3: %4.</source>
@@ -1158,6 +1158,18 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Disabled by system administrator</source>
         <translation>Disabilitato dall&apos;amministratore di sistema</translation>
+    </message>
+    <message>
+        <source>Be careful, by changing the hash code you may no longer be a member of some groups and you will have to get invited again. Do you really want to regenerate your hash code?</source>
+        <translation>Attenzione, cambiando il codice utente potresti non essere più membro di qualche gruppo e dovrai essere invitato di nuovo. Vuoi ugualmente rigenerare il tuo codice utente?</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation>Sì</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation>No</translation>
     </message>
 </context>
 <context>
@@ -3870,6 +3882,10 @@ Inserisci un nome differente.</translation>
         <source>Informations to display to other users</source>
         <translation>Informazioni da mostrare agli altri utenti</translation>
     </message>
+    <message>
+        <source>Regenerate your hash code...</source>
+        <translation>Rigenera il tuo codice utente...</translation>
+    </message>
 </context>
 <context>
     <name>GuiVCardWidget</name>
@@ -4162,6 +4178,42 @@ Inserisci un nome differente.</translation>
     <message>
         <source>and %1 others</source>
         <translation>e altri %1</translation>
+    </message>
+    <message>
+        <source>Today is the birthday</source>
+        <translation type="obsolete">Oggi è il suo compleanno</translation>
+    </message>
+    <message>
+        <source>Tomorrow is the birthday</source>
+        <translation type="obsolete">Domani è il suo compleanno</translation>
+    </message>
+    <message>
+        <source>The birthday is in %1 days</source>
+        <translation type="obsolete">Il suo compleanno sarà tra %1 giorni</translation>
+    </message>
+    <message>
+        <source>Yesterday was the birthday</source>
+        <translation type="obsolete">Ieri era il suo compleanno</translation>
+    </message>
+    <message>
+        <source>Today is %1&apos;s birthday</source>
+        <translation>Oggi è il compleanno di %1</translation>
+    </message>
+    <message>
+        <source>Tomorrow is %1&apos;s birthday</source>
+        <translation>Domani è il compleanno di %1</translation>
+    </message>
+    <message>
+        <source>%1&apos;s birthday is in %2 days</source>
+        <translation>Il compleanno di %1 sarà tra %2 giorni</translation>
+    </message>
+    <message>
+        <source>Yesterday was %1&apos;s birthday</source>
+        <translation>Ieri era il compleanno di %1</translation>
+    </message>
+    <message>
+        <source>Happy Birthday to you!</source>
+        <translation>Buon Compleanno!</translation>
     </message>
 </context>
 <context>

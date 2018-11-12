@@ -136,7 +136,7 @@ void Core::parseUserMessage( const User& u, const Message& m )
           showUserNameChanged( user_with_new_vcard, u.name() );
         }
         if( vcard_changed && !only_user_name_changed )
-          showUserVCardChanged( user_with_new_vcard );
+          showUserVCardChanged( user_with_new_vcard, u.vCard() );
         emit userChanged( user_with_new_vcard );
       }
     }

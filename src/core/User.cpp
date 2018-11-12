@@ -134,8 +134,16 @@ bool User::isBirthDay() const
 {
   if( m_vCard.birthday().isNull() )
     return false;
+  else
+    return daysToBirthDay() == 0;
+}
 
+int User::daysToBirthDay() const
+{
+  if( m_vCard.birthday().isNull() )
+    return -999;
   QDate d_today = QDate::currentDate();
-  return m_vCard.birthday().day() == d_today.day() && m_vCard.birthday().month() == d_today.month();
+  QDate next_birthday = QDate( d_today.year(), m_vCard.birthday().month(), m_vCard.birthday().day() );
+  return static_cast<int>(d_today.daysTo( next_birthday ));
 }
 
