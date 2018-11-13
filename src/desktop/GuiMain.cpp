@@ -1187,6 +1187,8 @@ void GuiMain::createMenus()
 void GuiMain::createToolAndMenuBars()
 {
   menuBar()->addMenu( mp_menuMain );
+  if( Settings::instance().disableMenuSettings() )
+    mp_menuSettings->setDisabled( true );
   menuBar()->addMenu( mp_menuSettings );
   menuBar()->addMenu( mp_menuInfo );
   QLabel *label_version = new QLabel( this );
@@ -1709,6 +1711,10 @@ void GuiMain::settingsChanged( QAction* act )
   case 75:
     Settings::instance().setEnableDefaultChatNotifications( act->isChecked() );
     break;
+  case 76:
+    Settings::instance().setUseMessageTimestampWithAP( act->isChecked() );
+    refresh_chat = true;
+    break;
   case 99:
     break;
   default:
@@ -1872,6 +1878,7 @@ void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
     fl_chat = createFloatingChat( c );
     floating_chat_created = true;
     fl_chat->show();
+    fl_chat->guiChat()->ensureLastMessageVisible();
     if( !Settings::instance().raiseOnNewMessageArrived() && !cm.isImportant() )
       fl_chat->showMinimized();
   }
@@ -1879,7 +1886,7 @@ void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
   if( fl_chat && !floating_chat_created )
     fl_chat->showChatMessage( c, cm );
 
-  if( !cm.alertCanBeSent() ) // use this instead of alert_can_be_showed because it takes care also of groups
+    if( !cm.alertCanBeSent() ) // use this instead of alert_can_be_showed because it takes care also of groups
     return;
 
   bool chat_is_visible = fl_chat && fl_chat->isActiveWindow();
@@ -3174,6 +3181,11 @@ void GuiMain::showChatSettingsMenu()
   act->setCheckable( true );
   act->setChecked( Settings::instance().chatShowMessageTimestamp() );
   act->setData( 3 );
+
+  act = mp_menuChat->addAction( tr( "Show the time with the AM/PM notation" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().useMessageTimestampWithAP() );
+  act->setData( 76 );
 
   act = mp_menuChat->addAction( tr( "Show messages grouped by user" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );

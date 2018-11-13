@@ -63,7 +63,7 @@ void ChatMessage::fromMessage( const Message& m )
     m_message = m.text();
   else
     m_message = Protocol::instance().formatHtmlText( m.text() );
-
+  m_timestamp = m.timestamp();
   ChatMessageData cm_data = Protocol::instance().dataFromChatMessage( m );
   if( cm_data.textColor().isValid() )
     m_textColor = cm_data.textColor();

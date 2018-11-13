@@ -24,7 +24,6 @@
 #include "GuiChatMessage.h"
 #include "ChatMessage.h"
 #include "EmoticonManager.h"
-#include "IconManager.h"
 #include "Settings.h"
 #include "Protocol.h"
 #include "Settings.h"
@@ -33,16 +32,23 @@
 
 static QString textImportantPrefix()
 {
-  QString text_important_prefix = QString( "%1 " );
-  QString emoticon_text = QString::fromUtf8( "❗" );
-  if( !Settings::instance().useNativeEmoticons() )
+  if( Settings::instance().useOnlyTextEmoticons() )
   {
-    Emoticon e = EmoticonManager::instance().emoticon( emoticon_text );
-    int emoticon_size = 14;
-    return text_important_prefix.arg( e.toHtml( emoticon_size ) );
+    return QString( "<font color=red><b>!!!</b></font> " );
   }
   else
-    return text_important_prefix.arg( emoticon_text );
+  {
+    QString text_important_prefix = QString( "%1 " );
+    QString emoticon_text = QString::fromUtf8( "❗" );
+    if( !Settings::instance().useNativeEmoticons() )
+    {
+      Emoticon e = EmoticonManager::instance().emoticon( emoticon_text );
+      int emoticon_size = 14;
+      return text_important_prefix.arg( e.toHtml( emoticon_size ) );
+    }
+    else
+      return text_important_prefix.arg( emoticon_text );
+  }
 }
 
 static QString textImportantSuffix()
@@ -61,10 +67,13 @@ QString GuiChatMessage::datetimestampToString( const ChatMessage& cm, bool show_
   {
     if( !date_time_stamp_format.isEmpty() )
       date_time_stamp_format += QString( " " );
-    date_time_stamp_format += QString( "hh:mm:ss" );
+    if( Settings::instance().useMessageTimestampWithAP() )
+      date_time_stamp_format += QString( "h:m:s ap" );
+    else
+      date_time_stamp_format += QString( "hh:mm:ss" );
   }
 
-  return date_time_stamp_format.isEmpty() ? date_time_stamp_format : cm.timestamp().toString( date_time_stamp_format );
+  return date_time_stamp_format.isEmpty() ? date_time_stamp_format : (Settings::instance().useMessageTimestampWithAP() ? QLocale("en_US").toString( cm.timestamp(), date_time_stamp_format ) : cm.timestamp().toString( date_time_stamp_format ));
 }
 
 QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNumber last_user_id, bool show_timestamp, bool show_datestamp, bool skip_system_message,
@@ -78,7 +87,7 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
     text_formatted.append( QLatin1String( "</font>" ) );
   }
 
-  bool append_message_to_previous = show_message_group_by_user && last_user_id == u.id();
+  bool append_message_to_previous = show_message_group_by_user && last_user_id == u.id() && !cm.isImportant();
 
   QString date_time_stamp = datetimestampToString( cm, show_timestamp, show_datestamp );
   QString html_date_time_stamp = date_time_stamp.isEmpty() ? date_time_stamp : QString( "<font color=%1>(%2)</font>" ).arg( Settings::instance().chatSystemTextColor() ).arg( date_time_stamp );
@@ -93,9 +102,7 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
                                                                .arg( user_name )
                                                                .arg( Settings::instance().showTextInModeRTL() ? QString( "" ) : QString( ":" ) )
                                                                .arg( (use_chat_compact && !Settings::instance().showTextInModeRTL()) ? QString( " " ) : QLatin1String( "<br>" ) );
-
   QString html_message;
-
   if( Settings::instance().showTextInModeRTL() )
     html_message = QString( "%1 %2 %3" ).arg( html_user_name ).arg( html_date_time_stamp ).arg( text_formatted );
   else if( use_chat_compact )

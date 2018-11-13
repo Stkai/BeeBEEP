@@ -48,6 +48,7 @@ Settings::Settings()
   m_resetGeometryAtStartup = false;
   m_saveGeometryOnExit = false;
   m_saveDataInDocumentsFolder = false;
+  m_disableMenuSettings = false;
 
   // In windows native dialogs are application modal and the connection goes in timeout...
   // In MacOSX instead it seems to work... I have changed the connection timeout...
@@ -188,6 +189,8 @@ Settings::Settings()
   m_chatBackgroundColor = "#ffffff";
   m_chatDefaultTextColor = "#555555";
   m_chatSystemTextColor = "#808080";
+
+  m_useMessageTimestampWithAP = false;
 }
 
 void Settings::createApplicationUuid()
@@ -342,6 +345,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "AllowRemoveMembersFromGroup", m_canRemoveMembersFromGroup );
     sets->setValue( "AllowEditNickname", m_allowEditNickname );
     sets->setValue( "DisableCreateMessage", m_disableCreateMessage );
+    sets->setValue( "DisableMenuSettings", m_disableMenuSettings );
     sets->endGroup();
     sets->sync();
     qDebug() << "RC default configuration file created in" << qPrintable( Bee::convertToNativeFolderSeparator( sets->fileName() ) );
@@ -428,6 +432,7 @@ void Settings::loadRcFile()
   m_canRemoveMembersFromGroup = sets->value( "AllowRemoveMembersFromGroup", m_canRemoveMembersFromGroup ).toBool();
   m_allowEditNickname = sets->value( "AllowEditNickname", m_allowEditNickname ).toBool();
   m_disableCreateMessage = sets->value( "DisableCreateMessage", m_disableCreateMessage ).toBool();
+  m_disableMenuSettings = sets->value( "DisableMenuSettings", m_disableMenuSettings ).toBool();
   sets->endGroup();
   QStringList key_list = sets->allKeys();
   foreach( QString key, key_list )
@@ -876,6 +881,7 @@ void Settings::load()
   m_chatDefaultTextColor = sets->value( "DefaultTextColor", m_chatDefaultTextColor ).toString();
   m_chatSystemTextColor = sets->value( "SystemTextColor", m_chatSystemTextColor ).toString();
   m_enableDefaultChatNotifications = sets->value( "EnableDefaultChatNotifications", m_enableDefaultChatNotifications ).toBool();
+  m_useMessageTimestampWithAP = sets->value( "UseMessageTimestampWithAP", m_useMessageTimestampWithAP ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "User" );
@@ -1274,6 +1280,7 @@ void Settings::save()
   sets->setValue( "DefaultTextColor", m_chatDefaultTextColor );
   sets->setValue( "SystemTextColor", m_chatSystemTextColor );
   sets->setValue( "EnableDefaultChatNotifications", m_enableDefaultChatNotifications );
+  sets->setValue( "UseMessageTimestampWithAP", m_useMessageTimestampWithAP );
   sets->endGroup();
   sets->beginGroup( "User" );
   if( m_userRecognitionMethod != RecognizeByDefaultMethod )

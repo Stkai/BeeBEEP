@@ -2643,6 +2643,10 @@ Please select a different name.</source>
         <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br&gt;What do you want to do with the selected saved text?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Show the time with the AM/PM notation</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

@@ -113,6 +113,8 @@ public:
   inline bool canRemoveMembersFromGroup() const;
   inline bool disableCreateMessage() const;
 
+  inline bool disableMenuSettings() const;
+
   QString dnsRecord() const;
   inline bool useMulticastDns() const;
   inline void setUseMulticastDns( bool );
@@ -465,6 +467,9 @@ public:
   inline void setPlayBuzzSound( bool );
   inline bool playBuzzSound() const;
 
+  inline void setUseMessageTimestampWithAP( bool );
+  inline bool useMessageTimestampWithAP() const;
+
   void loadRcFile();
   void clearNativeSettings();
   void load();
@@ -573,6 +578,7 @@ private:
   bool m_canRemoveMembersFromGroup;
   bool m_allowEditNickname;
   bool m_disableCreateMessage;
+  bool m_disableMenuSettings;
 
   // Ini
   bool m_firstTime;
@@ -783,6 +789,7 @@ private:
   int m_delayConnectionAtStartup;
 
   bool m_sendOfflineMessagesToDefaultChat;
+  bool m_useMessageTimestampWithAP;
 
 };
 
@@ -1127,6 +1134,8 @@ inline void Settings::setChatSystemTextColor( const QString& new_value ) { m_cha
 inline const QString& Settings::chatSystemTextColor() const { return m_chatSystemTextColor; }
 inline void Settings::setEnableDefaultChatNotifications( bool new_value ) { m_enableDefaultChatNotifications = new_value; }
 inline bool Settings::enableDefaultChatNotifications() const { return m_enableDefaultChatNotifications; }
-
+inline bool Settings::disableMenuSettings() const { return m_disableMenuSettings; }
+inline void Settings::setUseMessageTimestampWithAP( bool new_value ) { m_useMessageTimestampWithAP = new_value; }
+inline bool Settings::useMessageTimestampWithAP() const { return m_useMessageTimestampWithAP; }
 
 #endif // BEEBEEP_SETTINGS_

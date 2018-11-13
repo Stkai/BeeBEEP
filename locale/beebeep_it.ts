@@ -2739,6 +2739,10 @@ Inserisci un nome differente.</translation>
         <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br&gt;What do you want to do with the selected saved text?</source>
         <translation>La conversazione &apos;%1&apos; selezionata ha già una storia salvata. &lt;br&gt;Cosa vuoi fare con la storia selezionata?</translation>
     </message>
+    <message>
+        <source>Show the time with the AM/PM notation</source>
+        <translation>Mostra l&apos;orario con la notazione AM/PM</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
