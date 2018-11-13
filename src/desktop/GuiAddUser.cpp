@@ -45,7 +45,7 @@ GuiAddUser::GuiAddUser( QWidget *parent )
 
   QString s_txt2 = mp_lHelp->text();
 
-  QString s_header = QString( "%1<br /><br />%2." ).arg( s_txt1 ).arg( s_txt2 );
+  QString s_header = QString( "%1<br><br>%2." ).arg( s_txt1 ).arg( s_txt2 );
   mp_lHelp->setText( s_header );
   mp_twUsers->setColumnCount( 2 );
   QStringList labels;

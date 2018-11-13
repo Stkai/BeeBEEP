@@ -386,7 +386,7 @@ int Core::archiveAllChats()
   return chat_count;
 }
 
-int Core::sendChatMessage( VNumber chat_id, const QString& msg )
+int Core::sendChatMessage( VNumber chat_id, const QString& msg, bool is_important )
 {
   if( !isConnected() )
   {
@@ -419,6 +419,8 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg )
   PluginManager::instance().parseText( &msg_to_send, true );
 
   Message m = Protocol::instance().chatMessage( c, msg_to_send );
+  if( is_important )
+    m.setImportant();
 
   int messages_sent = 0;
 

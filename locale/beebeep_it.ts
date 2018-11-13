@@ -1124,6 +1124,10 @@ Inserisci un nome differente.</translation>
         <source>Open chat after sending message</source>
         <translation>Apri la conversazione dopo l&apos;invio del messaggio</translation>
     </message>
+    <message>
+        <source>Marks the message as important</source>
+        <translation>Contrassegna il messaggio come importante</translation>
+    </message>
 </context>
 <context>
     <name>GuiEditVCard</name>
@@ -1785,7 +1789,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br /&gt;What do you want to do with the selected saved text?</source>
-        <translation>La conversazione &apos;%1&apos; selezionata ha già una storia salvata. &lt;br /&gt;Cosa vuoi fare con la storia selezionata?</translation>
+        <translation type="obsolete">La conversazione &apos;%1&apos; selezionata ha già una storia salvata. &lt;br /&gt;Cosa vuoi fare con la storia selezionata?</translation>
     </message>
     <message>
         <source>Overwrite</source>
@@ -1878,10 +1882,6 @@ Inserisci un nome differente.</translation>
     <message>
         <source>You must restart %1 to apply these changes.</source>
         <translation>Devi chiudere e riaprire %1 per applicare i cambiamenti.</translation>
-    </message>
-    <message>
-        <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br /&gt;it under the terms of the GNU General Public License as published&lt;br /&gt;by the Free Software Foundation, either version 3 of the License&lt;br /&gt;or (at your option) any later version.&lt;br /&gt;&lt;br /&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br /&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br /&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br /&gt;See the GNU General Public License for more details.</source>
-        <translation></translation>
     </message>
     <message>
         <source>Sound file not found</source>
@@ -2730,6 +2730,14 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Enable notifications also for chat with all users</source>
         <translation>Abilita le notifiche anche nella conversazione con tutti</translation>
+    </message>
+    <message>
+        <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it under the terms of the GNU General Public License as published&lt;br&gt;by the Free Software Foundation, either version 3 of the License&lt;br&gt;or (at your option) any later version.&lt;br&gt;&lt;br&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br&gt;See the GNU General Public License for more details.</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br&gt;What do you want to do with the selected saved text?</source>
+        <translation>La conversazione &apos;%1&apos; selezionata ha già una storia salvata. &lt;br&gt;Cosa vuoi fare con la storia selezionata?</translation>
     </message>
 </context>
 <context>
@@ -3655,6 +3663,18 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Ok</source>
         <translation>Ok</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>Tipo</translation>
+    </message>
+    <message>
+        <source>Global</source>
+        <translation>Globale</translation>
+    </message>
+    <message>
+        <source>Local</source>
+        <translation>Locale</translation>
     </message>
 </context>
 <context>

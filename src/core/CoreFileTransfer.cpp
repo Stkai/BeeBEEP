@@ -170,8 +170,8 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
           else
             img_preview_height = img.height();
 
-          // I have to add <br /> to center the image on the first display (maybe Qt bug)
-          sys_msg_img_preview = QString( "<br /><div align=center><a href=\"%1\"><img src=\"%2\" height=\"%3\" /></a></div>" )
+          // I have to add <br> to center the image on the first display (maybe Qt bug)
+          sys_msg_img_preview = QString( "<br><div align=center><a href=\"%1\"><img src=\"%2\" height=\"%3\" /></a></div>" )
                   .arg( file_url.toString(), QUrl::fromLocalFile( img_preview_path ).toString() ).arg( img_preview_height );
         }
         else

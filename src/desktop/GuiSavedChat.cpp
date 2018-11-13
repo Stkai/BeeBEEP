@@ -62,9 +62,9 @@ void GuiSavedChat::showSavedChat( const QString& chat_name )
   m_savedChatName = chat_name;
   QString html_text = "";
   if( !ChatManager::instance().chatHasSavedText( chat_name ) )
-    html_text += QString( "<br />*** %1 ***<br />" ).arg( tr( "Empty" ) );
+    html_text += QString( "<br>*** %1 ***<br>" ).arg( tr( "Empty" ) );
   else
-    html_text += QString( "%1<br /><br /><br />" ).arg( ChatManager::instance().chatSavedText( chat_name ) );
+    html_text += QString( "%1<br><br><br>" ).arg( ChatManager::instance().chatSavedText( chat_name ) );
 
   mp_teSavedChat->setText( html_text );
 

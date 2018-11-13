@@ -84,7 +84,7 @@ public:
 
   /* CoreChat */
   void createPrivateChat( const User& );
-  int sendChatMessage( VNumber chat_id, const QString& ); // return the number of message sent (one for every user in chat)
+  int sendChatMessage( VNumber chat_id, const QString&, bool is_important ); // return the number of message sent (one for every user in chat)
   void showTipOfTheDay();
   void showFactOfTheDay();
   Chat createGroupChat( const User&, const Group&, bool broadcast_message );

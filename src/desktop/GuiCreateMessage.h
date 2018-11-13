@@ -39,6 +39,7 @@ public:
   inline QString message();
   inline const QList<VNumber>& toChatIdList() const;
   inline bool openChat() const;
+  inline bool messageIsImportant() const;
 
 protected slots:
   void sendMessage();
@@ -54,7 +55,6 @@ protected:
 private:
   QList<VNumber> m_toChatIdList;
 
-
 };
 
 
@@ -62,5 +62,6 @@ private:
 inline QString GuiCreateMessage::message() { return mp_teMessage->message(); }
 inline const QList<VNumber>& GuiCreateMessage::toChatIdList() const { return m_toChatIdList; }
 inline bool GuiCreateMessage::openChat() const { return mp_cbOpenChat->isEnabled() && mp_cbOpenChat->isChecked(); }
+inline bool GuiCreateMessage::messageIsImportant() const { return mp_cbFlagAsAlert->isEnabled() && mp_cbFlagAsAlert->isChecked(); }
 
 #endif // BEEBEEP_GUICREATEMESSAGE_H

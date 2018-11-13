@@ -23,7 +23,7 @@
 
 #include "ShortcutManager.h"
 
-ShortcutManager* ShortcutManager::mp_instance = NULL;
+ShortcutManager* ShortcutManager::mp_instance = Q_NULLPTR;
 
 
 ShortcutManager::ShortcutManager()

@@ -1838,7 +1838,7 @@ QString Protocol::formatHtmlText( const QString& text )
     else if( text.at( i ) == QLatin1Char( '\n' ) )
     {
       // space added to match url after a \n
-      text_formatted += QLatin1String( "<br /> " );
+      text_formatted += QLatin1String( "<br> " );
     }
     else if( text.at( i ) == QLatin1Char( '<' ) )
     {

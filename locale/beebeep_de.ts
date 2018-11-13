@@ -1112,6 +1112,10 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Open chat after sending message</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Marks the message as important</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiEditVCard</name>
@@ -2325,7 +2329,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br /&gt;What do you want to do with the selected saved text?</source>
-        <translation>Der ausgewählte Chat &quot;%1&quot; verfügt bereits über einen gespeicherten Text. &lt;br /&gt;Was soll mit dem ausgewählten gespeicherten Text geschehen?</translation>
+        <translation type="obsolete">Der ausgewählte Chat &quot;%1&quot; verfügt bereits über einen gespeicherten Text. &lt;br /&gt;Was soll mit dem ausgewählten gespeicherten Text geschehen?</translation>
     </message>
     <message>
         <source>No new message available</source>
@@ -2493,7 +2497,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br /&gt;it under the terms of the GNU General Public License as published&lt;br /&gt;by the Free Software Foundation, either version 3 of the License&lt;br /&gt;or (at your option) any later version.&lt;br /&gt;&lt;br /&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br /&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br /&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br /&gt;See the GNU General Public License for more details.</source>
-        <translation>BeeBEEP ist freie Software. Du kannst sie gemäß&lt;br /&gt;den Bedingungen der GNU General Public License&lt;br /&gt;laut Veröffentlichung der Free Software Foundation&lt;br /&gt;Lizenzauflage 3 oder (optional) einer neueren Auflage verbreiten und/oder verändern.&lt;br /&gt;&lt;br /&gt;BeeBEEP wird mit dem Ziel bereitgestellt, einen Nutzen zu bringen,&lt;br /&gt;aber UNTER AUSSCHLUSS JEGLICHER GEWÄHRLEISTUNG,&lt;br /&gt;selbst der stillschweigenden Gewährleistung auf MARKTGÄNGIGKEIT oder&lt;br /&gt;EIGNUNG FÜR EINEN BESTIMMTEN ZWECK&lt;br /&gt; Weitere Details kannst du der GNU General Public License entnehmen.</translation>
+        <translation type="obsolete">BeeBEEP ist freie Software. Du kannst sie gemäß&lt;br /&gt;den Bedingungen der GNU General Public License&lt;br /&gt;laut Veröffentlichung der Free Software Foundation&lt;br /&gt;Lizenzauflage 3 oder (optional) einer neueren Auflage verbreiten und/oder verändern.&lt;br /&gt;&lt;br /&gt;BeeBEEP wird mit dem Ziel bereitgestellt, einen Nutzen zu bringen,&lt;br /&gt;aber UNTER AUSSCHLUSS JEGLICHER GEWÄHRLEISTUNG,&lt;br /&gt;selbst der stillschweigenden Gewährleistung auf MARKTGÄNGIGKEIT oder&lt;br /&gt;EIGNUNG FÜR EINEN BESTIMMTEN ZWECK&lt;br /&gt; Weitere Details kannst du der GNU General Public License entnehmen.</translation>
     </message>
     <message>
         <source>Please save the network password in the next dialog if you want to use password without prompt.</source>
@@ -2669,6 +2673,14 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Enable notifications also for chat with all users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it under the terms of the GNU General Public License as published&lt;br&gt;by the Free Software Foundation, either version 3 of the License&lt;br&gt;or (at your option) any later version.&lt;br&gt;&lt;br&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br&gt;See the GNU General Public License for more details.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br&gt;What do you want to do with the selected saved text?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3549,6 +3561,18 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>You cannot use the comma for your shortcut.</source>
         <translation>Das Komma darf nicht für einen Kurzbefehl verwendet werden.</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Global</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Local</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

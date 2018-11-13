@@ -24,7 +24,7 @@
 #include "IconManager.h"
 
 
-IconManager* IconManager::mp_instance = NULL;
+IconManager* IconManager::mp_instance = Q_NULLPTR;
 
 
 IconManager::IconManager()

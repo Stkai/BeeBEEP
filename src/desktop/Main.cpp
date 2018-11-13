@@ -114,7 +114,7 @@ int main( int argc, char *argv[] )
   Settings::instance().load();
   Settings::instance().createApplicationUuid();
   Log::instance().setMaxLogLines( Settings::instance().maxLogLines() );
-  qDebug() << "Log has set max lines to:" << (int)Settings::instance().maxLogLines();
+  qDebug() << "Log has set max lines to:" << Settings::instance().maxLogLines();
 #ifdef BEEBEEP_DEBUG
   QFont chat_font = Settings::instance().chatFont();
   qDebug() << "Font selected for chat:" << chat_font.toString();

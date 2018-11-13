@@ -151,7 +151,7 @@ void GuiCreateMessage::editRecipients()
     {
       foreach( QTreeWidgetItem* item , selected_items )
       {
-        GuiChatItem* c_item = (GuiChatItem*)item;
+        GuiChatItem* c_item = reinterpret_cast<GuiChatItem*>(item);
         if( c_item )
           m_toChatIdList.append( c_item->chatId() );
       }

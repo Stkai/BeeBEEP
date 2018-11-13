@@ -128,14 +128,14 @@ void SaveChatList::saveChats( QDataStream* stream )
       continue;
     }
 
-    chat_lines = html_text.split( "<br />", QString::SkipEmptyParts );
+    chat_lines = html_text.split( "<br>", QString::SkipEmptyParts );
     if( chat_lines.size() > Settings::instance().chatMaxLineSaved() )
     {
       qWarning() << "Chat exceeds line size limit with" << chat_lines.size();
       while( chat_lines.size() > Settings::instance().chatMaxLineSaved() )
         chat_lines.removeFirst();
-      html_text = chat_lines.join( "<br />" );
-      html_text.append( "<br />" ); // SkipEmptyParts remove the last one too
+      html_text = chat_lines.join( "<br>" );
+      html_text.append( "<br>" ); // SkipEmptyParts remove the last one too
     }
 
     chat_text_encrypted = Settings::instance().simpleEncrypt( html_text );

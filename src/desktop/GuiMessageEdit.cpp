@@ -143,7 +143,7 @@ void GuiMessageEdit::addText( const QString& txt )
 
   QString html_txt = txt;
   html_txt.replace( QLatin1String( " " ), QLatin1String( "&nbsp;" ) );
-  html_txt.replace( QLatin1String( "\n" ), QLatin1String( "<br />" ) );
+  html_txt.replace( QLatin1String( "\n" ), QLatin1String( "<br>" ) );
 
   if( Settings::instance().showTextInModeRTL() )
   {

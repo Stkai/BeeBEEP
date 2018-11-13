@@ -25,7 +25,7 @@
 #include "TickManager.h"
 #include <csignal>
 #ifdef Q_OS_WIN
-  #include <windows.h>
+  #include <Windows.h>
 #endif
 #if defined( Q_OS_LINUX ) && !defined( Q_OS_ANDROID )
   // for check user inactivity time
@@ -35,7 +35,7 @@
   // package libx11-xcb-dev
 #endif
 
-BeeApplication *BeeApplication::mp_instance = 0;
+BeeApplication *BeeApplication::mp_instance = Q_NULLPTR;
 
 
 BeeApplication::BeeApplication( int& argc, char** argv  )
@@ -51,12 +51,12 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
 
   m_idleTimeout = 0;
   m_isInIdle = false;
-  mp_localServer = 0;
+  mp_localServer = Q_NULLPTR;
   m_isInSleepMode = false;
 
   mp_jobThread = new QThread();
   m_jobsInProgress = 0;
-  mp_tickManager = 0;
+  mp_tickManager = Q_NULLPTR;
 
 #ifdef Q_OS_LINUX
   m_xcbConnectHasError = true;
@@ -83,7 +83,7 @@ BeeApplication::~BeeApplication()
   }
 
   if( mp_instance )
-    mp_instance = 0;
+    mp_instance = Q_NULLPTR;
 }
 
 void BeeApplication::forceShutdown()
@@ -197,7 +197,7 @@ void BeeApplication::cleanUp()
     QMetaObject::invokeMethod( mp_tickManager, "stopTicks", Qt::QueuedConnection );
     removeJob( mp_tickManager );
     mp_tickManager->deleteLater();
-    mp_tickManager = 0;
+    mp_tickManager = Q_NULLPTR;
   }
 
 #if defined( Q_OS_LINUX ) && !defined( Q_OS_ANDROID )
@@ -228,7 +228,7 @@ bool BeeApplication::isScreenSaverRunning()
 #ifdef Q_OS_WIN
   BOOL is_running = FALSE;
   SystemParametersInfo( SPI_GETSCREENSAVERRUNNING, 0, &is_running, 0 );
-  screen_saver_is_running = (bool)is_running;
+  screen_saver_is_running = static_cast<bool>(is_running);
 #endif
 
 #if defined( Q_OS_LINUX ) && !defined( Q_OS_ANDROID )
@@ -259,7 +259,7 @@ int BeeApplication::idleTimeFromSystem()
   idle_info.cbSize = sizeof( LASTINPUTINFO );
   if( ::GetLastInputInfo( &idle_info ) )
   {
-    idle_time = ::GetTickCount() - idle_info.dwTime;
+    idle_time = static_cast<int>(::GetTickCount() - idle_info.dwTime);
     idle_time = qMax( 0, idle_time / 1000 );
   }
 #endif
@@ -286,8 +286,9 @@ int BeeApplication::idleTimeFromSystem()
 
   if( idle_time < 0 )
   {
-    quint64 unsigned_idle_time = m_lastEventDateTime.secsTo( QDateTime::currentDateTime() );
-    idle_time = static_cast<int>( qMax( (quint64)0, unsigned_idle_time ) );
+    qint64 unsigned_idle_time = m_lastEventDateTime.secsTo( QDateTime::currentDateTime() );
+    qint64 unsigned_idle_time_min = 0;
+    idle_time = static_cast<int>( qMax( unsigned_idle_time_min, unsigned_idle_time ) );
   }
 
   return idle_time;

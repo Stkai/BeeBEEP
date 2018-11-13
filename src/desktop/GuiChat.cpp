@@ -467,7 +467,7 @@ bool GuiChat::setChat( const Chat& c )
       html_text += ChatManager::instance().chatSavedText( c.name() );
 
     if( !html_text.isEmpty() )
-      html_text += QLatin1String( "<br />" );
+      html_text += QLatin1String( "<br>" );
   }
 
   int num_lines = c.messages().size();
@@ -482,7 +482,7 @@ bool GuiChat::setChat( const Chat& c )
     {
       if( !max_lines_message_written )
       {
-        html_text += QString( "&nbsp;&nbsp;&nbsp;<font color=%1><i>... %2 ...</i></font><br />" ).arg( Settings::instance().chatSystemTextColor() ).arg( tr( "only the last %1 messages are shown" ).arg( Settings::instance().chatMessagesToShow() ) );
+        html_text += QString( "&nbsp;&nbsp;&nbsp;<font color=%1><i>... %2 ...</i></font><br>" ).arg( Settings::instance().chatSystemTextColor() ).arg( tr( "only the last %1 messages are shown" ).arg( Settings::instance().chatMessagesToShow() ) );
         max_lines_message_written = true;
       }
       continue;

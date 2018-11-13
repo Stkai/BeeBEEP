@@ -154,13 +154,6 @@
       <property name="bottomMargin">
        <number>6</number>
       </property>
-      <item row="5" column="0">
-       <widget class="QCheckBox" name="mp_cbOpenChat">
-        <property name="text">
-         <string>Open chat after sending message</string>
-        </property>
-       </widget>
-      </item>
       <item row="2" column="1" rowspan="2">
        <spacer name="verticalSpacer_2">
         <property name="orientation">
@@ -173,28 +166,6 @@
          </size>
         </property>
        </spacer>
-      </item>
-      <item row="1" column="0" rowspan="4">
-       <widget class="GuiMessageEdit" name="mp_teMessage">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>160</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>16777215</height>
-         </size>
-        </property>
-       </widget>
       </item>
       <item row="1" column="1">
        <widget class="QPushButton" name="mp_pbEmoticons">
@@ -231,6 +202,28 @@
         </property>
         <property name="flat">
          <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" rowspan="4">
+       <widget class="GuiMessageEdit" name="mp_teMessage">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>160</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
         </property>
        </widget>
       </item>
@@ -272,6 +265,20 @@
         </property>
        </widget>
       </item>
+      <item row="5" column="0" colspan="2">
+       <widget class="QCheckBox" name="mp_cbOpenChat">
+        <property name="text">
+         <string>Open chat after sending message</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0" colspan="2">
+       <widget class="QCheckBox" name="mp_cbFlagAsAlert">
+        <property name="text">
+         <string>Marks the message as important</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -296,8 +303,9 @@
   <tabstop>mp_pbEditUsers</tabstop>
   <tabstop>mp_pbSend</tabstop>
   <tabstop>mp_cbOpenChat</tabstop>
-  <tabstop>mp_twEmoticons</tabstop>
+  <tabstop>mp_cbFlagAsAlert</tabstop>
   <tabstop>mp_teTo</tabstop>
+  <tabstop>mp_twEmoticons</tabstop>
  </tabstops>
  <resources>
   <include location="../beebeep.qrc"/>

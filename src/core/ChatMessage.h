@@ -46,6 +46,7 @@ public:
   inline bool isFromLocalUser() const;
   inline bool isFromAutoresponder() const;
   inline bool alertCanBeSent() const;
+  inline bool isImportant() const;
 
   inline VNumber userId() const;
   inline const QString& message() const;
@@ -62,6 +63,7 @@ private:
   QDateTime m_timestamp;
   QColor m_textColor;
   Type m_type;
+  bool m_isImportant;
 
 };
 
@@ -71,7 +73,8 @@ inline bool ChatMessage::isValid() const { return m_userId != ID_INVALID; }
 inline bool ChatMessage::isFromSystem() const { return m_userId == ID_SYSTEM_MESSAGE; }
 inline bool ChatMessage::isFromLocalUser() const { return m_userId == ID_LOCAL_USER; }
 inline bool ChatMessage::isFromAutoresponder() const { return m_type == ChatMessage::Autoresponder; }
-inline bool ChatMessage::alertCanBeSent() const { return !isFromLocalUser() && !isFromSystem() && (m_type == ChatMessage::Chat || m_type == ChatMessage::FileTransfer || m_type == ChatMessage::ImagePreview || m_type == ChatMessage::Autoresponder); }
+inline bool ChatMessage::alertCanBeSent() const { return m_isImportant || (!isFromLocalUser() && !isFromSystem() && (m_type == ChatMessage::Chat || m_type == ChatMessage::FileTransfer || m_type == ChatMessage::ImagePreview || m_type == ChatMessage::Autoresponder)); }
+inline bool ChatMessage::isImportant() const { return m_isImportant; }
 inline VNumber ChatMessage::userId() const { return m_userId; }
 inline const QString& ChatMessage::message() const { return m_message; }
 inline const QDateTime& ChatMessage::timestamp() const { return m_timestamp; }

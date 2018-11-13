@@ -32,7 +32,7 @@ class Message
 public:
   // For Backward Compatibility do not change the order
   enum Type { Undefined, Beep, Hello, Ping, Pong, Chat, System, User, File, Share, Group, Folder, Read, Hive, ShareBox, ShareDesktop, Buzz, NumTypes };
-  enum Flag { Private, UserWriting, UserStatus, Create /* it was UserName in 3.0.9 */ , UserVCard, Refused, List, Request, GroupChat, Delete, Auto, NumFlags };
+  enum Flag { Private, UserWriting, UserStatus, Create /* it was UserName in 3.0.9 */ , UserVCard, Refused, List, Request, GroupChat, Delete, Auto, Important, NumFlags };
 
   Message();
   Message( const Message& );
@@ -55,6 +55,8 @@ public:
   inline const QDateTime& timestamp() const;
   inline const QString& text() const;
   inline bool hasFlag( Flag ) const;
+  inline void setImportant();
+  inline bool isImportant() const;
 
 private:
   Type m_type;
@@ -83,5 +85,7 @@ inline const QString& Message::data() const { return m_data; }
 inline const QDateTime& Message::timestamp() const { return m_timestamp; }
 inline const QString& Message::text() const { return m_text; }
 inline bool Message::hasFlag( Flag f ) const { return m_flags != 0 && m_flags & (1 << f); }
+inline void Message::setImportant() { addFlag( Message::Important ); }
+inline bool Message::isImportant() const { return hasFlag( Message::Important ); }
 
 #endif // BEEBEEP_MESSAGE_H

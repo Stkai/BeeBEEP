@@ -370,7 +370,7 @@ void GuiMain::closeEvent( QCloseEvent* e )
     if( !sets->isWritable() )
     {
       if( QMessageBox::warning( this, Settings::instance().programName(),
-                              QString( "%1<br />%2<br />%3<br />%4<br />%5" ).arg( tr( "<b>Settings can not be saved</b>. Path:" ) )
+                              QString( "%1<br>%2<br>%3<br>%4<br>%5" ).arg( tr( "<b>Settings can not be saved</b>. Path:" ) )
                                                                      .arg( sets->fileName() )
                                                                      .arg( tr( "<b>is not writable</b> by user:" ) )
                                                                      .arg( Settings::instance().localUser().accountName() )
@@ -387,7 +387,7 @@ void GuiMain::closeEvent( QCloseEvent* e )
       if( !SaveChatList::canBeSaved() )
       {
         if( QMessageBox::warning( this, Settings::instance().programName(),
-                              QString( "%1<br />%2<br />%3<br />%4<br />%5" ).arg( tr( "<b>Chat messages can not be saved</b>. Path:" ) )
+                              QString( "%1<br>%2<br>%3<br>%4<br>%5" ).arg( tr( "<b>Chat messages can not be saved</b>. Path:" ) )
                                                                      .arg( Settings::instance().savedChatsFilePath() )
                                                                      .arg( tr( "<b>is not writable</b> by user:" ) )
                                                                      .arg( Settings::instance().localUser().accountName() )
@@ -630,7 +630,7 @@ void GuiMain::checkViewActions()
 void GuiMain::showAbout()
 {
   QMessageBox::about( this, Settings::instance().programName(),
-                      QString( "<b>%1</b> - %2<br /><br />%3 %4 %5 %6<br />%7 %8<br />%9<br />" )
+                      QString( "<b>%1</b> - %2<br><br>%3 %4 %5 %6<br>%7 %8<br>%9<br>" )
                       .arg( Settings::instance().programName() )
                       .arg( tr( "Secure Lan Messenger" ) )
                       .arg( tr( "Version" ) )
@@ -639,20 +639,20 @@ void GuiMain::showAbout()
                       .arg( Settings::instance().operatingSystem( true ) )
                       .arg( tr( "developed by" ) )
                       .arg( QString( "<a href='http://it.linkedin.com/pub/marco-mastroddi/20/5a7/191'>Marco Mastroddi</a>" ) )
-                      .arg( QString( "e-mail: <a href='mailto://marco.mastroddi@gmail.com'>marco.mastroddi@gmail.com</a><br />web: <a href='http://www.beebeep.net'>www.beebeep.net</a>" ) )
+                      .arg( QString( "e-mail: <a href='mailto://marco.mastroddi@gmail.com'>marco.mastroddi@gmail.com</a><br>web: <a href='http://www.beebeep.net'>www.beebeep.net</a>" ) )
                       );
 
 }
 
 void GuiMain::showLicense()
 {
-  QString license_txt = tr( "BeeBEEP is free software: you can redistribute it and/or modify<br />"
-  "it under the terms of the GNU General Public License as published<br />"
-  "by the Free Software Foundation, either version 3 of the License<br />"
-  "or (at your option) any later version.<br /><br />"
-  "BeeBEEP is distributed in the hope that it will be useful,<br />"
-  "but WITHOUT ANY WARRANTY; without even the implied warranty<br />"
-  "of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.<br />"
+  QString license_txt = tr( "BeeBEEP is free software: you can redistribute it and/or modify<br>"
+  "it under the terms of the GNU General Public License as published<br>"
+  "by the Free Software Foundation, either version 3 of the License<br>"
+  "or (at your option) any later version.<br><br>"
+  "BeeBEEP is distributed in the hope that it will be useful,<br>"
+  "but WITHOUT ANY WARRANTY; without even the implied warranty<br>"
+  "of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.<br>"
   "See the GNU General Public License for more details." );
   QMessageBox::about( this, Settings::instance().programName(), license_txt );
 }
@@ -1756,17 +1756,17 @@ void GuiMain::setChatInactiveWindowOpacityLevelInAction( QAction* act )
 void GuiMain::sendMessage( VNumber chat_id, const QString& msg )
 {
 #ifdef BEEBEEP_DEBUG
-  int num_messages = beeCore->sendChatMessage( chat_id, msg );
+  int num_messages = beeCore->sendChatMessage( chat_id, msg, false );
   qDebug() << num_messages << "messages sent";
 #else
-  beeCore->sendChatMessage( chat_id, msg );
+  beeCore->sendChatMessage( chat_id, msg, false );
 #endif
   mp_chatList->updateChat( ChatManager::instance().chat( chat_id ) ); // to sort the chats
 }
 
 void GuiMain::showAlertForMessage( const Chat& c, const ChatMessage& cm )
 {
-  if( Settings::instance().beepOnNewMessageArrived() )
+  if( Settings::instance().beepOnNewMessageArrived() || cm.isImportant() )
     playBeep();
 
   bool show_message_in_tray = true;
@@ -1781,7 +1781,7 @@ void GuiMain::showAlertForMessage( const Chat& c, const ChatMessage& cm )
     fl_chat->setMainIcon( true );
     QApplication::alert( fl_chat, 0 );
 
-    if( Settings::instance().raiseOnNewMessageArrived() )
+    if( Settings::instance().raiseOnNewMessageArrived() || cm.isImportant() )
     {
       fl_chat->raiseOnTop();
       show_message_in_tray = false;
@@ -1862,15 +1862,17 @@ void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
   bool alert_can_be_showed = (c.isDefault() ? Settings::instance().enableDefaultChatNotifications() : false) && cm.alertCanBeSent();
   if( alert_can_be_showed && c.isGroup() && Settings::instance().isNotificationDisabledForGroup( c.privateId() ) )
     alert_can_be_showed = false;
+  if( cm.isImportant() )
+    alert_can_be_showed = true;
 
   GuiFloatingChat* fl_chat = floatingChat( c.id() );
 
-  if( !fl_chat && Settings::instance().alwaysOpenChatOnNewMessageArrived() && alert_can_be_showed )
+  if( !fl_chat && (Settings::instance().alwaysOpenChatOnNewMessageArrived() || cm.isImportant() ) && alert_can_be_showed )
   {
     fl_chat = createFloatingChat( c );
     floating_chat_created = true;
     fl_chat->show();
-    if( !Settings::instance().raiseOnNewMessageArrived() )
+    if( !Settings::instance().raiseOnNewMessageArrived() && !cm.isImportant() )
       fl_chat->showMinimized();
   }
 
@@ -2427,7 +2429,7 @@ void GuiMain::updadePluginMenu()
   mp_menuPlugins->addAction( IconManager::instance().icon( "plugin.png" ), tr( "Plugin Manager..." ), this, SLOT( showPluginManager() ) );
 
   QString help_data_ts = tr( "is a plugin developed by" );
-  QString help_data_format = QString( "<p>%1 <b>%2</b> %3 <b>%4</b>.<br /><i>%5</i></p><br />" );
+  QString help_data_format = QString( "<p>%1 <b>%2</b> %3 <b>%4</b>.<br><i>%5</i></p><br>" );
 
   mp_menuPlugins->addAction( mp_actViewScreenShot );
 
@@ -2860,7 +2862,7 @@ void GuiMain::linkSavedChat( const QString& chat_name )
   if( ChatManager::instance().chatHasSavedText( chat_name_selected ) )
   {
      switch( QMessageBox::question( this, Settings::instance().programName(),
-               tr( "The chat '%1' selected has already a saved text.<br />"
+               tr( "The chat '%1' selected has already a saved text.<br>"
                    "What do you want to do with the selected saved text?" ).arg( chat_name_selected ),
                    tr( "Overwrite" ), tr( "Add in the head" ), tr( "Cancel" ), 2, 2 ) )
      {
@@ -3126,7 +3128,7 @@ void GuiMain::selectLanguage()
       language_message = tr( "New language '%1' is selected." ).arg( gl.languageSelected() );
 
     QMessageBox::information( this, Settings::instance().programName(),
-                              QString( "%1<br />%2" ).arg( language_message ).arg( tr( "You must restart %1 to apply these changes." )
+                              QString( "%1<br>%2" ).arg( language_message ).arg( tr( "You must restart %1 to apply these changes." )
                                                                                     .arg( Settings::instance().programName() ) ) );
 
     Settings::instance().setLanguage( gl.languageSelected() );
@@ -3649,7 +3651,8 @@ void GuiMain::showAllChats()
       if( fl_chat->isMinimized() )
         fl_chat->showNormal();
       else
-        show();
+        fl_chat->show();
+      fl_chat->raiseOnTop();
 
       if( fl_chat == mp_lastActiveWindow )
         last_active_window_exists = true;
@@ -3660,6 +3663,7 @@ void GuiMain::showAllChats()
     showNormal();
   else
     show();
+  raiseOnTop();
 
   if( this == mp_lastActiveWindow )
     last_active_window_exists = true;
@@ -4235,7 +4239,8 @@ void GuiMain::createMessage()
       int num_chat_opened = 0;
       foreach( VNumber chat_id, gcm.toChatIdList() )
       {
-        sendMessage( chat_id, gcm.message() );
+        beeCore->sendChatMessage( chat_id, gcm.message(), gcm.messageIsImportant() );
+        mp_chatList->updateChat( ChatManager::instance().chat( chat_id ) ); // to sort the chats
         if( gcm.openChat() && num_chat_opened < max_chat_to_open )
         {
           showChat( chat_id );

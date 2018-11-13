@@ -242,10 +242,10 @@ quint32 QxtGlobalShortcutPrivate::nativeKeycode(Qt::Key key)
 
 bool QxtGlobalShortcutPrivate::registerShortcut(quint32 nativeKey, quint32 nativeMods)
 {
-    return RegisterHotKey(0, nativeMods ^ nativeKey, nativeMods, nativeKey);
+    return RegisterHotKey(NULL, nativeMods ^ nativeKey, nativeMods, nativeKey);
 }
 
 bool QxtGlobalShortcutPrivate::unregisterShortcut(quint32 nativeKey, quint32 nativeMods)
 {
-    return UnregisterHotKey(0, nativeMods ^ nativeKey);
+    return UnregisterHotKey(NULL, nativeMods ^ nativeKey);
 }

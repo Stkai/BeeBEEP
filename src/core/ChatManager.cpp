@@ -207,7 +207,7 @@ void ChatManager::updateChatSavedText( const QString& old_chat_name, const QStri
   QString chat_text_old = m_history.take( old_chat_name );
   if( add_to_new && chatHasSavedText( new_chat_name ) )
   {
-    chat_text_old.append( "<br />" );
+    chat_text_old.append( "<br>" );
     chat_text_old.append( chatSavedText( new_chat_name ) );
   }
 
@@ -273,7 +273,7 @@ int ChatManager::savedChatSize( const QString& chat_name ) const
 {
   if( chatHasSavedText( chat_name ) )
   {
-    return chatSavedText( chat_name ).split( "<br />", QString::SkipEmptyParts ).size();
+    return chatSavedText( chat_name ).split( "<br>", QString::SkipEmptyParts ).size();
   }
   else
     return 0;

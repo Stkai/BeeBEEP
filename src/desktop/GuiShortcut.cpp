@@ -37,12 +37,12 @@ GuiShortcut::GuiShortcut( QWidget *parent )
   Bee::removeContextHelpButton( this );
 
   QStringList labels;
-  labels << tr( "Key" ) << tr( "Action" );
+  labels << tr( "Key" ) << tr( "Type" ) << tr( "Action" );
   mp_twShortcuts->setHeaderLabels( labels );
   mp_twShortcuts->setAlternatingRowColors( true );
   mp_twShortcuts->setSortingEnabled( true );
   mp_twShortcuts->setRootIsDecorated( false );
-  mp_twShortcuts->sortByColumn( 1, Qt::AscendingOrder );
+  mp_twShortcuts->sortByColumn( 2, Qt::AscendingOrder );
 
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( saveShortcuts() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
@@ -63,7 +63,8 @@ void GuiShortcut::loadShortcuts()
     {
       item = new QTreeWidgetItem( mp_twShortcuts );
       item->setText( 0, ShortcutManager::instance().shortcutKey( i ) );
-      item->setText( 1, ShortcutManager::instance().shortcutName( i ) );
+      item->setText( 1, ShortcutManager::instance().isGlobalShortcut( i ) ? tr( "Global" ) : tr( "Local" ) );
+      item->setText( 2, ShortcutManager::instance().shortcutName( i ) );
       item->setData( 0, Qt::UserRole+1, i );
 #ifndef BEEBEEP_USE_QXT
       if( ShortcutManager::instance().isGlobalShortcut( i ) )
@@ -114,7 +115,7 @@ void GuiShortcut::checkItemClicked( QTreeWidgetItem* item, int )
 
   bool ok = false;
   QString shortcut_key = QInputDialog::getText( this, Settings::instance().programName(),
-                                                tr( "Insert shorcut for the action: %1" ).arg( item->text( 1 ).toLower() ),
+                                                tr( "Insert shorcut for the action: %1" ).arg( item->text( 2 ).toLower() ),
                                                 QLineEdit::Normal, shortcut_previous_key, &ok ).simplified();
 
   if( !ok )

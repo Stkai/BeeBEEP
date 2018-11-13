@@ -1087,6 +1087,10 @@ Please select a different name.</source>
         <source>Open chat after sending message</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Marks the message as important</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiEditVCard</name>
@@ -2348,10 +2352,6 @@ Please select a different name.</source>
         <translation>提示詢問網路密碼</translation>
     </message>
     <message>
-        <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br /&gt;it under the terms of the GNU General Public License as published&lt;br /&gt;by the Free Software Foundation, either version 3 of the License&lt;br /&gt;or (at your option) any later version.&lt;br /&gt;&lt;br /&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br /&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br /&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br /&gt;See the GNU General Public License for more details.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Show chat toolbar</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2453,10 +2453,6 @@ Please select a different name.</source>
     </message>
     <message>
         <source>%1 will not start on windows boot.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br /&gt;What do you want to do with the selected saved text?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2637,6 +2633,14 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Enable notifications also for chat with all users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it under the terms of the GNU General Public License as published&lt;br&gt;by the Free Software Foundation, either version 3 of the License&lt;br&gt;or (at your option) any later version.&lt;br&gt;&lt;br&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br&gt;See the GNU General Public License for more details.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br&gt;What do you want to do with the selected saved text?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3515,6 +3519,18 @@ Please select a different name.</source>
     <message>
         <source>You cannot use the comma for your shortcut.</source>
         <translation>你不能在你捷徑使用逗號.</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Global</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Local</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

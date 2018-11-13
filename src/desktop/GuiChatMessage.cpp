@@ -23,10 +23,32 @@
 
 #include "GuiChatMessage.h"
 #include "ChatMessage.h"
+#include "EmoticonManager.h"
+#include "IconManager.h"
 #include "Settings.h"
 #include "Protocol.h"
+#include "Settings.h"
 #include "UserManager.h"
 
+
+static QString textImportantPrefix()
+{
+  QString text_important_prefix = QString( "%1 " );
+  QString emoticon_text = QString::fromUtf8( "❗" );
+  if( !Settings::instance().useNativeEmoticons() )
+  {
+    Emoticon e = EmoticonManager::instance().emoticon( emoticon_text );
+    int emoticon_size = 14;
+    return text_important_prefix.arg( e.toHtml( emoticon_size ) );
+  }
+  else
+    return text_important_prefix.arg( emoticon_text );
+}
+
+static QString textImportantSuffix()
+{
+  return QString( " " ) + textImportantPrefix();
+}
 
 QString GuiChatMessage::datetimestampToString( const ChatMessage& cm, bool show_timestamp, bool show_datestamp )
 {
@@ -70,7 +92,7 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
                                                                .arg( Settings::instance().chatUseColoredUserNames() ? u.color() : Settings::instance().chatDefaultUserNameColor() )
                                                                .arg( user_name )
                                                                .arg( Settings::instance().showTextInModeRTL() ? QString( "" ) : QString( ":" ) )
-                                                               .arg( (use_chat_compact && !Settings::instance().showTextInModeRTL()) ? QString( " " ) : QLatin1String( "<br />" ) );
+                                                               .arg( (use_chat_compact && !Settings::instance().showTextInModeRTL()) ? QString( " " ) : QLatin1String( "<br>" ) );
 
   QString html_message;
 
@@ -81,18 +103,24 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
   else
     html_message = QString( "%1 %2 %3" ).arg( html_user_name ).arg( html_date_time_stamp ).arg( text_formatted );
 
+  if( cm.isImportant() )
+  {
+    html_message.prepend(  QLatin1String( "<br>" ) + textImportantPrefix() );
+    html_message.append( textImportantSuffix() + QLatin1String( "<br>" ) );
+  }
+
   if( last_user_id == ID_SYSTEM_MESSAGE )
   {
     if( !skip_system_message )
-      html_message.prepend( QLatin1String( "<br />" ) );
+      html_message.prepend( QLatin1String( "<br>" ) );
   }
   else
   {
     if( !append_message_to_previous && !use_chat_compact )
-      html_message.prepend( QLatin1String( "<br />" ) );
+      html_message.prepend( QLatin1String( "<br>" ) );
   }
 
-  html_message += QLatin1String( "<br />" );
+  html_message += QLatin1String( "<br>" );
 
   return html_message;
 }
@@ -104,13 +132,19 @@ QString GuiChatMessage::formatSystemMessage( const ChatMessage& cm, VNumber last
 
   QString date_time_stamp = cm.type() != ChatMessage::ImagePreview ? datetimestampToString( cm, show_timestamp, show_datestamp ) : QString( "" );
 
-  QString html_message = QString( "<font color=%1>%2%3</font><br />" )
+  QString html_message = QString( "<font color=%1>%2%3</font><br>" )
                            .arg( Settings::instance().chatSystemTextColor() )
                            .arg( date_time_stamp.isEmpty() ? date_time_stamp : QString( "(%1) " ).arg( date_time_stamp ) )
                            .arg( cm.message() );
 
+  if( cm.isImportant() )
+  {
+    html_message.prepend(  QLatin1String( "<br>" ) + textImportantPrefix() );
+    html_message.append( textImportantSuffix() + QLatin1String( "<br>" ) );
+  }
+
   if( cm.type() != ChatMessage::Other && last_user_id != ID_SYSTEM_MESSAGE )
-    html_message.prepend( QLatin1String( "<br />" ) );
+    html_message.prepend( QLatin1String( "<br>" ) );
 
   return html_message;
 }
