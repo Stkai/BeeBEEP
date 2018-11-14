@@ -23,6 +23,7 @@
 
 #include "IconManager.h"
 #include "ChatManager.h"
+#include "EmoticonManager.h"
 #include "GuiCreateMessage.h"
 #include "GuiChatItem.h"
 #include "GuiChatMessage.h"

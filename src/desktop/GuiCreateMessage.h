@@ -62,6 +62,6 @@ private:
 inline QString GuiCreateMessage::message() { return mp_teMessage->message(); }
 inline const QList<VNumber>& GuiCreateMessage::toChatIdList() const { return m_toChatIdList; }
 inline bool GuiCreateMessage::openChat() const { return mp_cbOpenChat->isEnabled() && mp_cbOpenChat->isChecked(); }
-inline bool GuiCreateMessage::messageIsImportant() const { return mp_cbFlagAsAlert->isEnabled() && mp_cbFlagAsAlert->isChecked(); }
+inline bool GuiCreateMessage::messageIsImportant() const { return mp_cbFlagAsImportant->isEnabled() && mp_cbFlagAsImportant->isChecked(); }
 
 #endif // BEEBEEP_GUICREATEMESSAGE_H

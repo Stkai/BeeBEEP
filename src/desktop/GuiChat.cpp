@@ -427,7 +427,7 @@ QString GuiChat::chatMessageToText( const ChatMessage& cm )
   else
     s = GuiChatMessage::formatSystemMessage( cm, m_lastMessageUserId, Settings::instance().chatShowMessageTimestamp(), false );
 
-  m_lastMessageUserId = cm.userId();
+  m_lastMessageUserId = cm.isImportant() ? ID_IMPORTANT_MESSAGE : cm.userId();
   return s;
 }
 

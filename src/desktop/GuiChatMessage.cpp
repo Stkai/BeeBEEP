@@ -34,12 +34,12 @@ static QString textImportantPrefix()
 {
   if( Settings::instance().useOnlyTextEmoticons() )
   {
-    return QString( "<font color=red><b>!!!</b></font> " );
+    return QString( "<font color=red><b>!!</b></font> " );
   }
   else
   {
     QString text_important_prefix = QString( "%1 " );
-    QString emoticon_text = QString::fromUtf8( "❗" );
+    QString emoticon_text = QString::fromUtf8( "‼" );
     if( !Settings::instance().useNativeEmoticons() )
     {
       Emoticon e = EmoticonManager::instance().emoticon( emoticon_text );
@@ -53,7 +53,7 @@ static QString textImportantPrefix()
 
 static QString textImportantSuffix()
 {
-  return QString( " " ) + textImportantPrefix();
+  return QString( "" );
 }
 
 QString GuiChatMessage::datetimestampToString( const ChatMessage& cm, bool show_timestamp, bool show_datestamp )
@@ -79,6 +79,10 @@ QString GuiChatMessage::datetimestampToString( const ChatMessage& cm, bool show_
 QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNumber last_user_id, bool show_timestamp, bool show_datestamp, bool skip_system_message,
                                        bool show_message_group_by_user, bool use_your_name, bool use_chat_compact )
 {
+  QString html_message = "";
+  if( cm.isImportant() )
+    html_message += textImportantPrefix();
+
   QString text_formatted = cm.message();
   QString text_color = (cm.textColor().isValid() && cm.textColor() != QColor( 0, 0, 0 )) ? cm.textColor().name() : "";
   if( !text_color.isEmpty() )
@@ -102,24 +106,24 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
                                                                .arg( user_name )
                                                                .arg( Settings::instance().showTextInModeRTL() ? QString( "" ) : QString( ":" ) )
                                                                .arg( (use_chat_compact && !Settings::instance().showTextInModeRTL()) ? QString( " " ) : QLatin1String( "<br>" ) );
-  QString html_message;
   if( Settings::instance().showTextInModeRTL() )
-    html_message = QString( "%1 %2 %3" ).arg( html_user_name ).arg( html_date_time_stamp ).arg( text_formatted );
+    html_message += QString( "%1 %2 %3" ).arg( html_user_name ).arg( html_date_time_stamp ).arg( text_formatted );
   else if( use_chat_compact )
-    html_message = QString( "%1 %2 %3" ).arg( html_date_time_stamp ).arg( html_user_name.isEmpty() ? QLatin1String( "&nbsp;&nbsp;" ) : html_user_name ).arg( text_formatted );
+    html_message += QString( "%1 %2 %3" ).arg( html_date_time_stamp ).arg( html_user_name.isEmpty() ? QLatin1String( "&nbsp;&nbsp;" ) : html_user_name ).arg( text_formatted );
   else
-    html_message = QString( "%1 %2 %3" ).arg( html_user_name ).arg( html_date_time_stamp ).arg( text_formatted );
+    html_message += QString( "%1 %2 %3" ).arg( html_user_name ).arg( html_date_time_stamp ).arg( text_formatted );
 
   if( cm.isImportant() )
-  {
-    html_message.prepend(  QLatin1String( "<br>" ) + textImportantPrefix() );
-    html_message.append( textImportantSuffix() + QLatin1String( "<br>" ) );
-  }
+    html_message.append( textImportantSuffix() );
 
   if( last_user_id == ID_SYSTEM_MESSAGE )
   {
     if( !skip_system_message )
       html_message.prepend( QLatin1String( "<br>" ) );
+  }
+  else if( last_user_id == ID_IMPORTANT_MESSAGE || cm.isImportant() )
+  {
+    html_message.prepend( QLatin1String( "<br>" ) );
   }
   else
   {
@@ -146,7 +150,7 @@ QString GuiChatMessage::formatSystemMessage( const ChatMessage& cm, VNumber last
 
   if( cm.isImportant() )
   {
-    html_message.prepend(  QLatin1String( "<br>" ) + textImportantPrefix() );
+    html_message.prepend( textImportantPrefix() );
     html_message.append( textImportantSuffix() + QLatin1String( "<br>" ) );
   }
 
@@ -189,7 +193,7 @@ QString GuiChatMessage::chatToHtml( const Chat& c, bool skip_system_message, boo
       html_text += formatMessage( u, cm, last_message_user_id, force_timestamp || Settings::instance().chatShowMessageTimestamp(), force_datestamp, skip_system_message, false, true, true );
     }
 
-    last_message_user_id = cm.userId();
+    last_message_user_id = cm.isImportant() ? ID_IMPORTANT_MESSAGE : cm.userId();
   }
 
   return html_text;

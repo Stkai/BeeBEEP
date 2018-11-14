@@ -12,7 +12,7 @@ BeeBEEP 5.4.3
 - Added "EnableDefaultChatNotifications" option
 - Added "Regenerate HASH code" button in Edit Profile window (to easily avoid "same HASH errors")
 - Added notification a few days before user's birthday event (birthday is now saved with user data)
-- Added flag "Important" to chat message (raise the receiver chat window on top)
+- Added flag "Important!!" to chat message in "create message" window (raise the receiver chat window on top)
 - Added "DisableMenuSettings" option in beebeep.rc
 - Added "UseMessageTimestampWithAP" option (timestamp can be showed with am/pm suffix)
 

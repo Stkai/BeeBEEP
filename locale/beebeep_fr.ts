@@ -1316,27 +1316,27 @@ Please select a different name.</source>
 <context>
     <name>GuiCreateMessage</name>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="40"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="41"/>
         <source>Create message</source>
         <translation>Créer un message</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="118"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="119"/>
         <source>Nobody</source>
         <translation>Personne</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="125"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="126"/>
         <source>Add recipients</source>
         <translation>Ajouter un destinataire</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="167"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="168"/>
         <source>Please select at least one recipient for your message.</source>
         <translation>Veuillez sélectionner au moins un destinataire pour votre message.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="174"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="175"/>
         <source>You cannot send an empty message.</source>
         <translation>Vous ne pouvez pas envoyer un message vide.</translation>
     </message>
@@ -1344,7 +1344,7 @@ Please select a different name.</source>
 <context>
     <name>GuiCreateMessageWidget</name>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.ui" line="271"/>
+        <location filename="../src/desktop/GuiCreateMessage.ui" line="233"/>
         <source>Open chat after sending message</source>
         <translation>Ouvrir la discussion après l&apos;envoi du message</translation>
     </message>
@@ -1364,7 +1364,7 @@ Please select a different name.</source>
         <translation>Message</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.ui" line="251"/>
+        <location filename="../src/desktop/GuiCreateMessage.ui" line="213"/>
         <source>Click to send message</source>
         <translation>Cliquer pour envoyer le message</translation>
     </message>
@@ -5023,12 +5023,12 @@ Please select a different name.</source>
         <translation>Ouvrir une discussion avec %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="94"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="98"/>
         <source>You</source>
         <translation>Vous</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="94"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="98"/>
         <source>Unknown</source>
         <translation>Inconnu</translation>
     </message>

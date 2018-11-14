@@ -1317,27 +1317,27 @@ Välj ett annat namn.</translation>
 <context>
     <name>GuiCreateMessage</name>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="40"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="41"/>
         <source>Create message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="118"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="119"/>
         <source>Nobody</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="125"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="126"/>
         <source>Add recipients</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="167"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="168"/>
         <source>Please select at least one recipient for your message.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="174"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="175"/>
         <source>You cannot send an empty message.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1345,7 +1345,7 @@ Välj ett annat namn.</translation>
 <context>
     <name>GuiCreateMessageWidget</name>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.ui" line="271"/>
+        <location filename="../src/desktop/GuiCreateMessage.ui" line="233"/>
         <source>Open chat after sending message</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1365,7 +1365,7 @@ Välj ett annat namn.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.ui" line="251"/>
+        <location filename="../src/desktop/GuiCreateMessage.ui" line="213"/>
         <source>Click to send message</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5021,12 +5021,12 @@ Välj ett annat namn.</translation>
         <translation>Öppna chatt med %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="94"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="98"/>
         <source>You</source>
         <translation>Du</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="94"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="98"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>

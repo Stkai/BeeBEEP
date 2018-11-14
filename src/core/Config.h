@@ -111,5 +111,6 @@ const int AUTO_BROADCAST_CHECK_TICK = 31;
 #define ID_DOTDOT_FOLDER          20
 #define ID_SHAREDESKTOP_MESSAGE   21
 #define ID_BUZZ_MESSAGE           22
+#define ID_IMPORTANT_MESSAGE      23
 
 #endif // BEEBEEP_CONFIG_H
