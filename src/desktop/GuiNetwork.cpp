@@ -107,6 +107,7 @@ void GuiNetwork::loadSettings()
 
   mp_cbDisableProxy->setChecked( Settings::instance().disableSystemProxyForConnections() );
   mp_cbUseDefaultMulticastGroupAddress->setChecked( Settings::instance().useDefaultMulticastGroupAddress() );
+  mp_cbBroadcastToOfflineUsers->setChecked( Settings::instance().broadcastToOfflineUsers() );
 
   m_restartConnection = false;
 }
@@ -123,6 +124,8 @@ void GuiNetwork::checkAndSearch()
   Settings::instance().setMaxUsersToConnectInATick( mp_sbMaxUsersToContact->value() );
   Settings::instance().setPreventMultipleConnectionsFromSingleHostAddress( mp_cbPreventMultipleConnectionsFromSingleHostAddress->isChecked() );
   Settings::instance().setUseHive( mp_cbUseHive->isChecked() );
+  Settings::instance().setBroadcastToOfflineUsers( mp_cbBroadcastToOfflineUsers->isChecked() );
+
   QString s_preferred_subnet = mp_comboPreferredSubnet->itemData( mp_comboPreferredSubnet->currentIndex() ).toString();
   if( s_preferred_subnet != Settings::instance().localSubnetForced() )
   {
@@ -135,6 +138,7 @@ void GuiNetwork::checkAndSearch()
   if( prev_multi_group != Settings::instance().useDefaultMulticastGroupAddress() )
     m_restartConnection = true;
 
+  Settings::instance().save();
   accept();
 }
 

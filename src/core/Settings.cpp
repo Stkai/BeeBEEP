@@ -144,6 +144,7 @@ Settings::Settings()
   m_tickIntervalCheckIdle = 10;
   m_tickIntervalCheckNetwork = 5;
   m_tickIntervalBroadcasting = 0;
+  m_broadcastToOfflineUsers = false;
 
   m_chatMessageFilter = QBitArray( static_cast<int>(ChatMessage::NumTypes) );
   for( int i = 0; i < ChatMessage::NumTypes; i++ )
@@ -1119,6 +1120,7 @@ void Settings::load()
   m_useHive = sets->value( "UseHiveProtocol", m_useHive ).toBool();
   m_disableSystemProxyForConnections = sets->value( "DisableSystemProxyForConnections", m_disableSystemProxyForConnections ).toBool();
   m_useDefaultMulticastGroupAddress = sets->value( "UseDefaultMulticastGroupAddress", m_useDefaultMulticastGroupAddress ).toBool();
+  m_broadcastToOfflineUsers = sets->value( "BroadcastToOfflineUsers", m_broadcastToOfflineUsers ).toBool();
   sets->endGroup();
   loadBroadcastAddressesFromFileHosts();
 
@@ -1452,7 +1454,7 @@ void Settings::save()
   sets->setValue( "UseHiveProtocol", m_useHive );
   sets->setValue( "DisableSystemProxyForConnections", m_disableSystemProxyForConnections );
   sets->setValue( "UseDefaultMulticastGroupAddress", m_useDefaultMulticastGroupAddress );
-
+  sets->setValue( "BroadcastToOfflineUsers", m_broadcastToOfflineUsers );
   sets->endGroup();
   sets->beginGroup( "FileShare" );
   sets->setValue( "EnableFileTransfer", m_enableFileTransfer );

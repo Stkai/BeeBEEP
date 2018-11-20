@@ -15,6 +15,7 @@ BeeBEEP 5.4.3
 - Added flag "Important!!" to chat message in "create message" window (raise the receiver chat window on top)
 - Added "DisableMenuSettings" option in beebeep.rc
 - Added "UseMessageTimestampWithAP" option (timestamp can be showed with am/pm suffix)
+- Added "BroadcastToOfflineUsers" option
 
 BeeBEEP 5.4.2
 - Removed option "On close minimize on tray" for MacOSX

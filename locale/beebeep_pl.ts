@@ -756,22 +756,22 @@
         <translation>Adres</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="120"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="121"/>
         <source>Please insert a valid IP Address.</source>
         <translation>Wprowadź prawidłowy adres IP.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="130"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="131"/>
         <source>Please insert a valid Port or use the default one %1.</source>
         <translation>Wprowadź prawidłowy port lub użyj domyślnego %1.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="160"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="161"/>
         <source>These IP Address and Port are already in list.</source>
         <translation>Ten adres IP i port jest już wprowadzony na listę.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="217"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="218"/>
         <source>Please select an item in the list.</source>
         <translation>Proszę wybrać pozycję z listy.</translation>
     </message>
@@ -791,7 +791,7 @@
         <translation>Wyczyść wszystko</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="242"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="243"/>
         <source>auto added</source>
         <translation>automatycznie dodany</translation>
     </message>
@@ -3424,7 +3424,7 @@ Proszę wybrać inną nazwę.</translation>
         <translation>Nieznanych adresów</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="148"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="152"/>
         <source>File HOSTS not found.</source>
         <translation>Plik HOSTS nie znaleziony.</translation>
     </message>
@@ -3444,7 +3444,7 @@ Proszę wybrać inną nazwę.</translation>
         <translation>wybrane przez system</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="148"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="152"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
@@ -3472,22 +3472,27 @@ Proszę wybrać inną nazwę.</translation>
         <translation>Użyj protokołu hive do kontaktu z niedostępnymi użytkownikami</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="389"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="375"/>
+        <source>Contact offline users directly</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiNetwork.ui" line="396"/>
         <source>Disable system proxy for connections</source>
         <translation>Wyłącz systemowe proxy dla połączeń</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="433"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="440"/>
         <source>Show file HOSTS...</source>
         <translation>Pokaż plik HOSTS...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="453"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="460"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="460"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="467"/>
         <source>Cancel</source>
         <translation>Anuluj</translation>
     </message>
@@ -3497,12 +3502,12 @@ Proszę wybrać inną nazwę.</translation>
         <translation>Maksymalna liczba użytkowników do kontaktu każdej sekundy</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="375"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="382"/>
         <source>Prevent multiple connections from single host address</source>
         <translation>Zapobiegaj wielokrotnym połączeniom z pojedynczego adresu hosta</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="382"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="389"/>
         <source>Enable Zero Configuration Networking</source>
         <translation>Włącz konfigurację zerowej sieci</translation>
     </message>
@@ -5116,7 +5121,7 @@ Proszę wybrać inną nazwę.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="1819"/>
+        <location filename="../src/core/Settings.cpp" line="1821"/>
         <source>Autoresponder</source>
         <translation>Autoodpowiedź</translation>
     </message>

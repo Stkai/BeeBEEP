@@ -2788,6 +2788,10 @@ Please select a different name.</source>
         <source>Use default multicast group address</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Contact offline users directly</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiPluginManager</name>

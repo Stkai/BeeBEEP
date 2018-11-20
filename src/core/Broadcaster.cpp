@@ -40,7 +40,7 @@ Broadcaster::Broadcaster( QObject *parent )
 
 bool Broadcaster::startBroadcastServer()
 {
-  if( !mp_receiverSocket->bind( Settings::instance().hostAddressToListen(), Settings::instance().defaultBroadcastPort(),
+  if( !mp_receiverSocket->bind( Settings::instance().hostAddressToListen(), static_cast<quint16>(Settings::instance().defaultBroadcastPort()),
                                 QUdpSocket::ShareAddress | QUdpSocket::ReuseAddressHint ) )
   {
     qWarning() << "Broadcaster cannot bind the broadcast port" << Settings::instance().defaultBroadcastPort();
@@ -158,7 +158,7 @@ bool Broadcaster::contactNetworkAddress( const NetworkAddress& na )
   {
     QByteArray broadcast_data = Protocol::instance().broadcastMessage( na.hostAddress() );
     m_networkAddressesWaitingForLoopback.append( QPair<NetworkAddress,QDateTime>( na, QDateTime::currentDateTime() ) );
-    if( mp_senderSocket->writeDatagram( broadcast_data, na.hostAddress(), Settings::instance().defaultBroadcastPort() ) > 0 )
+    if( mp_senderSocket->writeDatagram( broadcast_data, na.hostAddress(), static_cast<quint16>(Settings::instance().defaultBroadcastPort()) ) > 0 )
     {
       qDebug() << "Broadcaster sends datagram to" << qPrintable( na.hostAddress().toString() ) << Settings::instance().defaultBroadcastPort();
       return true;
@@ -219,7 +219,7 @@ void Broadcaster::readBroadcastDatagram()
     QHostAddress sender_ip;
     quint16 sender_port;
     QByteArray datagram;
-    datagram.resize( mp_receiverSocket->pendingDatagramSize() );
+    datagram.resize( static_cast<int>(mp_receiverSocket->pendingDatagramSize()) );
     if( mp_receiverSocket->readDatagram( datagram.data(), datagram.size(), &sender_ip, &sender_port ) == -1 )
     {
       qWarning() << "Broadcasting has found and error reading datagram" << num_datagram_read;
@@ -385,9 +385,11 @@ void Broadcaster::onTickEvent( int )
   {
     if( m_newBroadcastRequested )
     {
-      setAddOfflineUsersInNetworkAddresses( true );
+      if( Settings::instance().broadcastToOfflineUsers() )
+        setAddOfflineUsersInNetworkAddresses( true );
       updateAddresses();
-      setAddOfflineUsersInNetworkAddresses( false );
+      if( Settings::instance().broadcastToOfflineUsers() )
+        setAddOfflineUsersInNetworkAddresses( false );
     }
     return;
   }

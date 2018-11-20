@@ -351,6 +351,8 @@ public:
   inline bool disableSystemProxyForConnections() const;
   inline void setUseDefaultMulticastGroupAddress( bool );
   inline bool useDefaultMulticastGroupAddress() const;
+  inline void setBroadcastToOfflineUsers( bool );
+  inline bool broadcastToOfflineUsers() const;
 
   inline bool keyEscapeMinimizeInTray() const;
   inline void setKeyEscapeMinimizeInTray( bool );
@@ -600,6 +602,7 @@ private:
 
   bool m_disableSystemProxyForConnections;
   bool m_useDefaultMulticastGroupAddress;
+  bool m_broadcastToOfflineUsers;
 
   QDateTime m_lastSave;
   QString m_logPath;
@@ -1137,5 +1140,7 @@ inline bool Settings::enableDefaultChatNotifications() const { return m_enableDe
 inline bool Settings::disableMenuSettings() const { return m_disableMenuSettings; }
 inline void Settings::setUseMessageTimestampWithAP( bool new_value ) { m_useMessageTimestampWithAP = new_value; }
 inline bool Settings::useMessageTimestampWithAP() const { return m_useMessageTimestampWithAP; }
+inline void Settings::setBroadcastToOfflineUsers( bool new_value ) { m_broadcastToOfflineUsers = new_value; }
+inline bool Settings::broadcastToOfflineUsers() const { return m_broadcastToOfflineUsers; }
 
 #endif // BEEBEEP_SETTINGS_

@@ -760,22 +760,22 @@
         <translation>Adresse</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="120"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="121"/>
         <source>Please insert a valid IP Address.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="130"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="131"/>
         <source>Please insert a valid Port or use the default one %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="160"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="161"/>
         <source>These IP Address and Port are already in list.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="217"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="218"/>
         <source>Please select an item in the list.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -795,7 +795,7 @@
         <translation>Blank ut alt</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="242"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="243"/>
         <source>auto added</source>
         <translation>lagt til automatisk</translation>
     </message>
@@ -3457,7 +3457,7 @@ Velg et annet navn.</translation>
         <translation type="unfinished">Ukjent adresse</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="148"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="152"/>
         <source>File HOSTS not found.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3486,7 +3486,7 @@ Velg et annet navn.</translation>
 %1 er fjerna fra lista.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="148"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="152"/>
         <source>Ok</source>
         <translation type="unfinished">Ok</translation>
     </message>
@@ -3514,22 +3514,27 @@ Velg et annet navn.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="389"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="375"/>
+        <source>Contact offline users directly</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiNetwork.ui" line="396"/>
         <source>Disable system proxy for connections</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="433"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="440"/>
         <source>Show file HOSTS...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="453"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="460"/>
         <source>Ok</source>
         <translation type="unfinished">Ok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="460"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="467"/>
         <source>Cancel</source>
         <translation type="unfinished">Avbryt</translation>
     </message>
@@ -3555,12 +3560,12 @@ Velg et annet navn.</translation>
         <translation type="obsolete">sekunder (0=avslått, 0=standard)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="375"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="382"/>
         <source>Prevent multiple connections from single host address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="382"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="389"/>
         <source>Enable Zero Configuration Networking</source>
         <translation type="unfinished">Slå på nullkonfigurasjonsnettverk</translation>
     </message>
@@ -5210,7 +5215,7 @@ Velg et annet navn.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="1819"/>
+        <location filename="../src/core/Settings.cpp" line="1821"/>
         <source>Autoresponder</source>
         <translation type="unfinished"></translation>
     </message>

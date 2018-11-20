@@ -758,22 +758,22 @@
         <translation>Cím</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="120"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="121"/>
         <source>Please insert a valid IP Address.</source>
         <translation>Kérjük, adjon meg egy érvényes IP-címet.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="130"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="131"/>
         <source>Please insert a valid Port or use the default one %1.</source>
         <translation>Kérjük, adjon meg egy érvényes portot, vagy használja az alapértelmezett %1 -et.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="160"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="161"/>
         <source>These IP Address and Port are already in list.</source>
         <translation>Ezek az IP-címek és portok már szerepelnek a listán.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="217"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="218"/>
         <source>Please select an item in the list.</source>
         <translation>Kérjük, válasszon ki egy elemet a listából.</translation>
     </message>
@@ -793,7 +793,7 @@
         <translation>Az összes törlése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="242"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="243"/>
         <source>auto added</source>
         <translation>automatikusan hozzáadva</translation>
     </message>
@@ -3447,7 +3447,7 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation>Ismeretlen cím</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="148"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="152"/>
         <source>File HOSTS not found.</source>
         <translation>A HOSTS fájl nem található.</translation>
     </message>
@@ -3467,7 +3467,7 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation> rendszer által kiválasztott</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="148"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="152"/>
         <source>Ok</source>
         <translation>Rendben</translation>
     </message>
@@ -3495,22 +3495,27 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation>Használja a hive protokollt, hogy kapcsolatba léphessen az offline felhasználókkal</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="389"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="375"/>
+        <source>Contact offline users directly</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiNetwork.ui" line="396"/>
         <source>Disable system proxy for connections</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="433"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="440"/>
         <source>Show file HOSTS...</source>
         <translation>A HOSTS fájl megjelenítése...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="453"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="460"/>
         <source>Ok</source>
         <translation>Rendben</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="460"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="467"/>
         <source>Cancel</source>
         <translation>Mégsem</translation>
     </message>
@@ -3520,12 +3525,12 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation>Kapcsolódó felhasználók maximális száma másodpercenként</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="375"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="382"/>
         <source>Prevent multiple connections from single host address</source>
         <translation>Megakadályozzuk a többszörös kapcsolatot egyetlen gazdaszámítógép címről</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="382"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="389"/>
         <source>Enable Zero Configuration Networking</source>
         <translation>Zéró konfigurációs hálózat engedélyezése</translation>
     </message>
@@ -5148,7 +5153,7 @@ Kérjük, válassz egy másik nevet.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="1819"/>
+        <location filename="../src/core/Settings.cpp" line="1821"/>
         <source>Autoresponder</source>
         <translation type="unfinished"></translation>
     </message>

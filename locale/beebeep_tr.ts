@@ -756,22 +756,22 @@
         <translation>Adres</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="120"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="121"/>
         <source>Please insert a valid IP Address.</source>
         <translation>Lütfen geçerli bir IP Adresi girin.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="130"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="131"/>
         <source>Please insert a valid Port or use the default one %1.</source>
         <translation>Lütfen geçerli bir Bağlantı Noktası girin ya da varsayılan %1 kullanın.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="160"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="161"/>
         <source>These IP Address and Port are already in list.</source>
         <translation>Bu IP Adresi ve Bağlantı Noktası zaten listede var.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="217"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="218"/>
         <source>Please select an item in the list.</source>
         <translation>Lütfen listede bir öğe seçin.</translation>
     </message>
@@ -791,7 +791,7 @@
         <translation>Hepsini Temizle</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiAddUser.cpp" line="242"/>
+        <location filename="../src/desktop/GuiAddUser.cpp" line="243"/>
         <source>auto added</source>
         <translation>Otomatik Eklendi</translation>
     </message>
@@ -3450,7 +3450,7 @@ Lütfen farklı bir isim seçin.</translation>
         <translation>Bilinmeyen adres</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="148"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="152"/>
         <source>File HOSTS not found.</source>
         <translation>HOSTS dosyası bulunamadı.</translation>
     </message>
@@ -3465,7 +3465,7 @@ Lütfen farklı bir isim seçin.</translation>
         <translation>sistem tarafından seçildi</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="148"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="152"/>
         <source>Ok</source>
         <translation>Tamam</translation>
     </message>
@@ -3493,22 +3493,27 @@ Lütfen farklı bir isim seçin.</translation>
         <translation>Çevrimdışı kullanıcılarla iletişim kurmak için kovan protokolünü kullanın</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="389"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="375"/>
+        <source>Contact offline users directly</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiNetwork.ui" line="396"/>
         <source>Disable system proxy for connections</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="433"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="440"/>
         <source>Show file HOSTS...</source>
         <translation>HOSTS dosyasını göster...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="453"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="460"/>
         <source>Ok</source>
         <translation>Tamam</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="460"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="467"/>
         <source>Cancel</source>
         <translation>İptal</translation>
     </message>
@@ -3518,12 +3523,12 @@ Lütfen farklı bir isim seçin.</translation>
         <translation>Her zaman en fazla kullanıcı ile iletişim kur</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="375"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="382"/>
         <source>Prevent multiple connections from single host address</source>
         <translation>Tek adresten birden çok bağlantıyı engelle</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="382"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="389"/>
         <source>Enable Zero Configuration Networking</source>
         <translation>Sıfır Yapılandırma Ağını Etkinleştir</translation>
     </message>
@@ -5145,7 +5150,7 @@ Lütfen farklı bir isim seçin.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="1819"/>
+        <location filename="../src/core/Settings.cpp" line="1821"/>
         <source>Autoresponder</source>
         <translation type="unfinished"></translation>
     </message>

@@ -109,6 +109,7 @@ void GuiAddUser::saveUsers()
   foreach( NetworkAddress na, m_networkAddresses )
     sl.append( Protocol::instance().saveNetworkAddress( na ) );
   Settings::instance().setNetworkAddressList( sl );
+  Settings::instance().save();
   accept();
 }
 

@@ -370,6 +370,13 @@
          </widget>
         </item>
         <item>
+         <widget class="QCheckBox" name="mp_cbBroadcastToOfflineUsers">
+          <property name="text">
+           <string>Contact offline users directly</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QCheckBox" name="mp_cbPreventMultipleConnectionsFromSingleHostAddress">
           <property name="text">
            <string>Prevent multiple connections from single host address</string>
@@ -473,6 +480,7 @@
   <tabstop>mp_cbUseDefaultMulticastGroupAddress</tabstop>
   <tabstop>mp_cbBroadcastInterval</tabstop>
   <tabstop>mp_cbUseHive</tabstop>
+  <tabstop>mp_cbBroadcastToOfflineUsers</tabstop>
   <tabstop>mp_cbPreventMultipleConnectionsFromSingleHostAddress</tabstop>
   <tabstop>mp_cbEnableMDns</tabstop>
   <tabstop>mp_cbDisableProxy</tabstop>

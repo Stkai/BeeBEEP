@@ -2922,6 +2922,10 @@ Inserisci un nome differente.</translation>
         <source>Use default multicast group address</source>
         <translation>Usa il gruppo predefinito per il multicast</translation>
     </message>
+    <message>
+        <source>Contact offline users directly</source>
+        <translation>Contatta direttamente gli utenti non in linea</translation>
+    </message>
 </context>
 <context>
     <name>GuiPluginManager</name>
