@@ -58,6 +58,7 @@ include(sharedesktop/sharedesktop.pri)
 HEADERS += Interfaces.h Tips.h
 
 RESOURCES += beebeep.qrc emojis.qrc
+RESOURCES += qdarkstyle/style.qrc
 
 win32: RC_FILE = beebeep.rc
 macx: ICON = beebeep.icns
@@ -65,3 +66,4 @@ macx: include(mdns/mdns.pri)
 
 message( Libs: $$LIBS )
 message( Defines: $$DEFINES )
+message( Resources: $$RESOURCES )

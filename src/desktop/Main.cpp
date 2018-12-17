@@ -205,6 +205,20 @@ int main( int argc, char *argv[] )
   if( Settings::instance().autoUserAway() )
     bee_app.setIdleTimeout( Settings::instance().userAwayTimeout() );
 
+  /*
+  QFile f(":qdarkstyle/style.qss");
+  if (!f.exists())
+  {
+      printf("Unable to set stylesheet, file not found\n");
+  }
+  else
+  {
+      f.open(QFile::ReadOnly | QFile::Text);
+      QTextStream ts(&f);
+      qApp->setStyleSheet(ts.readAll());
+  }
+  */
+
   Core bee_core;
   bee_core.loadUsersAndGroups();
 
