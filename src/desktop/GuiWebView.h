@@ -26,6 +26,7 @@
 
 #include "Config.h"
 #include "ui_GuiWebView.h"
+class QWebEngineView;
 
 
 class GuiWebView : public QMainWindow, private Ui::GuiWebViewWidget
@@ -40,6 +41,9 @@ signals:
 
 public slots:
   void loadNews();
+
+private:
+  QWebEngineView* mp_view;
 
 };
 

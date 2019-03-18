@@ -33,6 +33,9 @@ GuiWebView::GuiWebView( QWidget* parent )
   setupUi( this );
   setWindowIcon( IconManager::instance().icon( "network.png" ) );
   setWindowTitle( QString( "%1 - %2" ).arg( tr( "News" ) ).arg( Settings::instance().programName() ) );
+  mp_view = new QWebEngineView( mp_central );
+  mp_view->setObjectName( "mp_view" );
+  mp_layout->addWidget( mp_view, 0, 0, 1, 1 );
   connect( mp_view, SIGNAL( loadFinished( bool ) ), this, SIGNAL( newsLoadFinished( bool ) ) );
 }
 
