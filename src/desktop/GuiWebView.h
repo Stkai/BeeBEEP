@@ -26,7 +26,6 @@
 
 #include "Config.h"
 #include "ui_GuiWebView.h"
-class QWebEngineView;
 
 
 class GuiWebView : public QMainWindow, private Ui::GuiWebViewWidget

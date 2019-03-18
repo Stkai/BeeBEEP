@@ -132,6 +132,7 @@ private slots:
   void openWebSite();
   void openDownloadPluginPage();
   void openDonationPage();
+  void openDeveloperWebSite();
   void openHelpPage();
   void clearChat( VNumber );
   void removeChat( VNumber );

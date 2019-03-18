@@ -597,6 +597,16 @@ QString Settings::copyMastroWebSite() const
   return QString( COPYMASTRO_WEBSITE );
 }
 
+QString Settings::developerWebSite() const
+{
+  QString web_url = QString::fromLatin1( QByteArray::fromBase64( "aHR0cHM6Ly93d3cubWFyY29tYXN0cm9kZGkuY29tL2Fib3V0X21lLnBocD9sYW5nPQ==" ) );
+  if( m_language == "it" )
+    web_url += QString( "it_IT" );
+  else
+    web_url += QString( "en_US" );
+  return web_url;
+}
+
 QString Settings::hunspellVersion() const
 {
   return QString( HUNSPELL_VERSION );

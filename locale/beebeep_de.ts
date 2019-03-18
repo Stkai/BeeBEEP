@@ -2699,6 +2699,10 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>News</source>
         <translation type="unfinished">Neuigkeiten</translation>
     </message>
+    <message>
+        <source>Information about %1...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

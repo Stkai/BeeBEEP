@@ -2755,6 +2755,14 @@ Inserisci un nome differente.</translation>
         <source>News</source>
         <translation>Notizie</translation>
     </message>
+    <message>
+        <source>Open the %1 website...</source>
+        <translation type="obsolete">Apri il sito web di %1...</translation>
+    </message>
+    <message>
+        <source>Information about %1...</source>
+        <translation>Informazioni su %1...</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

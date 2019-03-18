@@ -2647,6 +2647,10 @@ Please select a different name.</source>
         <source>News</source>
         <translation type="unfinished">Новини</translation>
     </message>
+    <message>
+        <source>Information about %1...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

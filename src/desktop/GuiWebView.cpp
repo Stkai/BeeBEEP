@@ -39,7 +39,6 @@ GuiWebView::GuiWebView( QWidget* parent )
   connect( mp_view, SIGNAL( loadFinished( bool ) ), this, SIGNAL( newsLoadFinished( bool ) ) );
 }
 
-
 void GuiWebView::loadNews()
 {
   mp_view->load( QUrl( "https://www.marcomastroddi.com" ) );

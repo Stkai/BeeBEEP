@@ -121,8 +121,8 @@ FORMS += desktop/GuiAddUser.ui \
   desktop/GuiWizard.ui \
   desktop/GuiWorkgroups.ui
 
-defined( BEEBEEP_USE_WEBENGINE ) : {
+contains( DEFINES, BEEBEEP_USE_WEBENGINE ) : {
   HEADERS += desktop/GuiWebView.h
   SOURCES += desktop/GuiWebView.cpp
   FORMS += desktop/GuiWebView.ui
-  }
+}

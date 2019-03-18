@@ -96,6 +96,7 @@ public:
   QString gaUrl() const;
   QString gaEventVersion() const;
   QString copyMastroWebSite() const;
+  QString developerWebSite() const;
 
   QString guiCustomListStyleSheet( const QString& background_color, const QString& background_image_path ) const;
 

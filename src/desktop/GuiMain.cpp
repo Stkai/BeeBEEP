@@ -740,6 +740,10 @@ void GuiMain::createMenus()
 
   mp_menuMain->addSeparator();
   mp_menuMain->addAction( mp_actViewLog );
+#ifdef BEEBEEP_USE_WEBENGINE
+  mp_menuMain->addSeparator();
+  mp_menuMain->addAction( mp_actWebView );
+#endif
   mp_menuMain->addSeparator();
   mp_menuMain->addMenu( mp_menuPlugins );
   mp_menuMain->addSeparator();
@@ -1180,6 +1184,8 @@ void GuiMain::createMenus()
   mp_menuInfo->addAction( IconManager::instance().icon( "plugin.png" ), tr( "Download plugins..." ), this, SLOT( openDownloadPluginPage() ) );
   mp_menuInfo->addAction( IconManager::instance().icon( "info.png" ), tr( "Help online..." ), this, SLOT( openHelpPage() ) );
   mp_menuInfo->addSeparator();
+  mp_menuInfo->addAction( IconManager::instance().icon( "star.png" ), tr( "Information about %1..." ).arg( "Marco Mastroddi" ), this, SLOT( openDeveloperWebSite() ) );
+  mp_menuInfo->addSeparator();
   mp_menuInfo->addAction( IconManager::instance().icon( "tip.png" ), tr( "Tip of the day" ), this, SLOT( showTipOfTheDay() ) );
   mp_menuInfo->addAction( IconManager::instance().icon( "fact.png" ), tr( "Fact of the day" ), this, SLOT( showFactOfTheDay() ) );
 
@@ -1230,9 +1236,6 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actCreateGroupChat );
   mp_barMain->addAction( mp_actViewFileTransfer );
   mp_barMain->addAction( mp_actViewFileSharing );
-#ifdef BEEBEEP_USE_WEBENGINE
-  mp_barMain->addAction( mp_actWebView );
-#endif
 
 }
 
@@ -1268,7 +1271,7 @@ void GuiMain::createMainWidgets()
   mp_savedChatList->setMainToolTip( QString( "%1\n(%2)" ).arg( mp_tabMain->tabToolTip( tab_index ), tooltip_right_button ) );
 
 #ifdef BEEBEEP_USE_WEBENGINE
-  mp_webView = new GuiWebView;
+  mp_webView = new GuiWebView();
   connect( mp_webView, SIGNAL( newsLoadFinished( bool ) ), this, SLOT( onNewsLoad( bool ) ) );
 #endif
 
@@ -2962,6 +2965,11 @@ void GuiMain::openDonationPage()
 void GuiMain::openHelpPage()
 {
   openWebUrl( Settings::instance().helpWebSite() );
+}
+
+void GuiMain::openDeveloperWebSite()
+{
+  openWebUrl( Settings::instance().developerWebSite() );
 }
 
 void GuiMain::setInIdle()
