@@ -78,7 +78,7 @@ void GAnalytics::doPost()
                                               .arg( Settings::instance().version( false, false ) ) );
 #endif
 
-  qint64 days_used = qMax( (qint64)0, (qint64)Settings::instance().settingsCreationDate().daysTo( QDate::currentDate() ) ) + 1;
+  qint64 days_used = qMax( static_cast<qint64>(0), static_cast<qint64>(Settings::instance().settingsCreationDate().daysTo( QDate::currentDate() ) ) + 1 );
   query.addQueryItem( "ev", QString::number( days_used ) );
 
 #if QT_VERSION >= 0x050000

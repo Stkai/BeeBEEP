@@ -2643,6 +2643,10 @@ Please select a different name.</source>
         <source>Show the time with the AM/PM notation</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>News</source>
+        <translation type="unfinished">Новини</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -3790,6 +3794,13 @@ Please select a different name.</source>
     <message>
         <source>User Path</source>
         <translation>Шлях користувача</translation>
+    </message>
+</context>
+<context>
+    <name>GuiWebView</name>
+    <message>
+        <source>News</source>
+        <translation type="unfinished">Новини</translation>
     </message>
 </context>
 <context>

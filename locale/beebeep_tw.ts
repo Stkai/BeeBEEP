@@ -2655,6 +2655,10 @@ Please select a different name.</source>
         <source>beta</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>News</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -3823,6 +3827,13 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Remove user</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GuiWebView</name>
+    <message>
+        <source>News</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

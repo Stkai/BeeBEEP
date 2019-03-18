@@ -61,6 +61,9 @@
 #include "GuiUserList.h"
 #include "GuiMain.h"
 #include "GuiVCard.h"
+#ifdef BEEBEEP_USE_WEBENGINE
+  #include "GuiWebView.h"
+#endif
 #include "GuiWizard.h"
 #include "GuiWorkgroups.h"
 #include "IconManager.h"
@@ -361,6 +364,7 @@ void GuiMain::closeEvent( QCloseEvent* e )
 #else
     saveGeometryAndState();
 #endif
+
   QSettings* sets = Settings::instance().objectSettings();
   sets->deleteLater();
 
@@ -406,6 +410,11 @@ void GuiMain::closeEvent( QCloseEvent* e )
 
   if( mp_screenShot )
     mp_screenShot->close();
+
+#ifdef BEEBEEP_USE_WEBENGINE
+  if( mp_webView )
+    mp_webView->close();
+#endif
 
   if( mp_log )
     mp_log->close();
@@ -492,6 +501,9 @@ void GuiMain::onCoreConnected()
 {
   m_coreIsConnecting = false;
   initGuiItems();
+#ifdef BEEBEEP_USE_WEBENGINE
+  QTimer::singleShot( 0, mp_webView, SLOT( loadNews() ) );
+#endif
 }
 
 void GuiMain::onCoreDisconnected()
@@ -702,6 +714,12 @@ void GuiMain::createActions()
   connect( mp_actCreateMessage, SIGNAL( triggered() ), this, SLOT( createMessage() ) );
   if( Settings::instance().disableCreateMessage() )
     mp_actCreateMessage->setToolTip( tr( "The option has been disabled by your system administrator.") );
+
+#ifdef BEEBEEP_USE_WEBENGINE
+  mp_actWebView = new QAction( IconManager::instance().icon( "network.png" ), tr( "News" ), this );
+  connect( mp_actWebView, SIGNAL( triggered() ), this, SLOT( showWebView() ) );
+  mp_actWebView->setDisabled( true );
+#endif
 }
 
 void GuiMain::createMenus()
@@ -1212,6 +1230,10 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addAction( mp_actCreateGroupChat );
   mp_barMain->addAction( mp_actViewFileTransfer );
   mp_barMain->addAction( mp_actViewFileSharing );
+#ifdef BEEBEEP_USE_WEBENGINE
+  mp_barMain->addAction( mp_actWebView );
+#endif
+
 }
 
 void GuiMain::createMainWidgets()
@@ -1244,6 +1266,11 @@ void GuiMain::createMainWidgets()
   tab_index = mp_tabMain->addTab( mp_savedChatList, IconManager::instance().icon( "saved-chat-list.png" ), "" );
   mp_tabMain->setTabToolTip( tab_index, tr( "Chat histories" ) );
   mp_savedChatList->setMainToolTip( QString( "%1\n(%2)" ).arg( mp_tabMain->tabToolTip( tab_index ), tooltip_right_button ) );
+
+#ifdef BEEBEEP_USE_WEBENGINE
+  mp_webView = new GuiWebView;
+  connect( mp_webView, SIGNAL( newsLoadFinished( bool ) ), this, SLOT( onNewsLoad( bool ) ) );
+#endif
 
   mp_dockFileTransfers = new QDockWidget( tr( "File Transfers" ), this );
   mp_dockFileTransfers->setObjectName( "GuiFileTransferDock" );
@@ -4274,6 +4301,18 @@ void GuiMain::createMessage()
     }
   }
 }
+
+#ifdef BEEBEEP_USE_WEBENGINE
+void GuiMain::showWebView()
+{
+  mp_webView->show();
+}
+
+void GuiMain::onNewsLoad( bool ok )
+{
+  mp_actWebView->setEnabled( ok );
+}
+#endif
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
 void GuiMain::onShareDesktopImageAvailable( const User& u, const QImage& img, const QString& image_type, QRgb diff_color )

@@ -2751,6 +2751,10 @@ Inserisci un nome differente.</translation>
         <source>beta</source>
         <translation>beta</translation>
     </message>
+    <message>
+        <source>News</source>
+        <translation>Notizie</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -3976,6 +3980,13 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Status description</source>
         <translation>Descrizione dello stato</translation>
+    </message>
+</context>
+<context>
+    <name>GuiWebView</name>
+    <message>
+        <source>News</source>
+        <translation>Notizie</translation>
     </message>
 </context>
 <context>

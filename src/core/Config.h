@@ -32,6 +32,9 @@
   #include <QtWidgets>
   #include <QtMultimedia>
   #include <QtPrintSupport>
+  #ifdef BEEBEEP_USE_WEBENGINE
+    #include <QWebEngineView>
+  #endif
 #else
   typedef int qintptr;
   #define Q_NULLPTR NULL

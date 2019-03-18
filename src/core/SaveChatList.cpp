@@ -99,7 +99,7 @@ void SaveChatList::saveChats( QDataStream* stream )
   }
 
   qint32 num_of_chats = ChatManager::instance().countNotEmptyChats( false );
-  quint64 file_pos = stream->device()->pos();
+  qint64 file_pos = stream->device()->pos();
   (*stream) << num_of_chats;
 
   QStringList chat_lines;

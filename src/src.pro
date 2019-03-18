@@ -20,7 +20,10 @@ TEMPLATE = app
 TARGET = beebeep
 
 QT += network xml
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets multimedia printsupport
+greaterThan(QT_MAJOR_VERSION, 4): {
+  QT += widgets multimedia printsupport webenginewidgets
+  DEFINES += BEEBEEP_USE_WEBENGINE
+}
 
 unix:!macx:!android: equals(QT_MAJOR_VERSION, 4) {
   greaterThan(QT_MINOR_VERSION, 6): {

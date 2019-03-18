@@ -2695,6 +2695,10 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>beta</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>News</source>
+        <translation type="unfinished">Neuigkeiten</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -3866,6 +3870,13 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>User Path</source>
         <translation>Benutzerpfad</translation>
+    </message>
+</context>
+<context>
+    <name>GuiWebView</name>
+    <message>
+        <source>News</source>
+        <translation type="unfinished">Neuigkeiten</translation>
     </message>
 </context>
 <context>

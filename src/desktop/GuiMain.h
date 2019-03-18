@@ -50,6 +50,9 @@ class User;
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   class GuiShareDesktop;
 #endif
+#ifdef BEEBEEP_USE_WEBENGINE
+  class GuiWebView;
+#endif
 
 
 class GuiMain : public QMainWindow
@@ -192,6 +195,10 @@ private slots:
   void onNewsAvailable( const QString& );
   void showDefaultServerPortInMenu();
   void createMessage();
+#ifdef BEEBEEP_USE_WEBENGINE
+  void showWebView();
+  void onNewsLoad( bool );
+#endif
 
 protected:
   void keyPressEvent( QKeyEvent* );
@@ -338,6 +345,12 @@ private:
   int m_unreadActivities;
   bool m_coreIsConnecting;
   bool m_changeTabToUserListOnFirstConnected;
+
+#ifdef BEEBEEP_USE_WEBENGINE
+  GuiWebView* mp_webView;
+  QAction* mp_actWebView;
+#endif
+
 
 };
 

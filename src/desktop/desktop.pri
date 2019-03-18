@@ -44,6 +44,7 @@ HEADERS += desktop/BeeApplication.h \
   desktop/GuiUserItem.h \
   desktop/GuiUserList.h \
   desktop/GuiVCard.h \
+  desktop/GuiWebView.h \
   desktop/GuiWizard.h \
   desktop/GuiWorkgroups.h
 
@@ -90,6 +91,7 @@ SOURCES +=  desktop/BeeApplication.cpp \
   desktop/GuiUserItem.cpp \
   desktop/GuiUserList.cpp \
   desktop/GuiVCard.cpp \
+  desktop/GuiWebView.cpp \
   desktop/GuiWizard.cpp \
   desktop/GuiWorkgroups.cpp \
   desktop/Main.cpp
@@ -118,5 +120,6 @@ FORMS += desktop/GuiAddUser.ui \
   desktop/GuiShortcut.ui \
   desktop/GuiUserList.ui \
   desktop/GuiVCard.ui \
+  desktop/GuiWebView.ui \
   desktop/GuiWizard.ui \
   desktop/GuiWorkgroups.ui
