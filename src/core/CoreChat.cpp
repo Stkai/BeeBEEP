@@ -54,7 +54,7 @@ void Core::createDefaultChat()
     c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Other ) );
   }
 
-  if( QDate::currentDate().month() == 1 && QDate::currentDate().day() >= 1 && QDate::currentDate().day() <= 8 )
+  if( QDate::currentDate().month() == 1 && QDate::currentDate().day() >= 1 && QDate::currentDate().day() <= 3 )
   {
     QString new_year_icons;
     if( Settings::instance().useNativeEmoticons() )
@@ -796,9 +796,8 @@ void Core::addChatHeader( Chat* p_chat )
 
   if( p_chat->isDefault() )
   {
-    QString hv_msg = QByteArray::fromBase64( "QmVlQkVFUCB2ZXJzaW9uICZjb3B5OyBNYXJjbyBNYXN0cm9kZGk=" );
-    hv_msg.replace( "version", Settings::instance().version( false, false ) );
-    header_msg = QString( "%1 <b>%2</b>." ).arg( IconManager::instance().toHtml( "beebeep.png", "***" ), hv_msg );
+    QString hv_msg = QByteArray::fromBase64( "QmVlQkVFUCAlMSAmY29weTsgJTIgTWFyY28gTWFzdHJvZGRp=" );
+    header_msg = QString( "%1 <b>%2</b>." ).arg( IconManager::instance().toHtml( "beebeep.png", "***" ), hv_msg.arg( Settings::instance().version( false, false ) ).arg( QDate::currentDate().year() ) );
     p_chat->addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( header_msg ), ChatMessage::System ) );
     header_msg = QString( "%1 %2." ).arg( IconManager::instance().toHtml( "chat-small.png", "*C*" ), tr( "Chat with all users" ) );
   }

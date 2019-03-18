@@ -205,19 +205,19 @@ int main( int argc, char *argv[] )
   if( Settings::instance().autoUserAway() )
     bee_app.setIdleTimeout( Settings::instance().userAwayTimeout() );
 
-  /*
-  QFile f(":qdarkstyle/style.qss");
-  if (!f.exists())
+  if( Settings::instance().useDarkStyle() )
   {
-      printf("Unable to set stylesheet, file not found\n");
+    qDebug() << "Darkstyle mode enabled";
+    QFile f(":qdarkstyle/style.qss");
+    if( f.exists() )
+    {
+      f.open( QFile::ReadOnly | QFile::Text );
+      QTextStream ts( &f );
+      qApp->setStyleSheet( ts.readAll() );
+    }
+    else
+      qWarning() << "Unable to set Darkstyle mode: file not found";
   }
-  else
-  {
-      f.open(QFile::ReadOnly | QFile::Text);
-      QTextStream ts(&f);
-      qApp->setStyleSheet(ts.readAll());
-  }
-  */
 
   Core bee_core;
   bee_core.loadUsersAndGroups();

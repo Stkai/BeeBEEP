@@ -1023,7 +1023,10 @@ void GuiMain::createMenus()
   mp_menuSettings->addAction( IconManager::instance().icon( "language.png" ), tr( "Select language" ) + QString( "..." ), this, SLOT( selectLanguage() ) );
   mp_menuSettings->addAction( IconManager::instance().icon( "theme.png" ), tr( "Select icon theme" ) + QString( "..." ), this, SLOT( selectIconSourcePath() ) );
   mp_menuSettings->addSeparator();
-
+  act = mp_menuSettings->addAction( tr( "Use the dark theme" ).arg( Settings::instance().programName() ) + QString( " (%1)" ).arg( tr( "beta" ) ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().useDarkStyle() );
+  act->setData( 77 );
   act = mp_menuSettings->addAction( tr( "Enable maximize button" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().enableMaximizeButton() );
@@ -1715,6 +1718,10 @@ void GuiMain::settingsChanged( QAction* act )
     Settings::instance().setUseMessageTimestampWithAP( act->isChecked() );
     refresh_chat = true;
     break;
+  case 77:
+    Settings::instance().setUseDarkStyle( act->isChecked() );
+    showRestartApplicationAlertMessage();
+    break;
   case 99:
     break;
   default:
@@ -1865,15 +1872,19 @@ void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
   }
 
   bool floating_chat_created = false;
-  bool alert_can_be_showed = (c.isDefault() ? Settings::instance().enableDefaultChatNotifications() : false) && cm.alertCanBeSent();
-  if( alert_can_be_showed && c.isGroup() && Settings::instance().isNotificationDisabledForGroup( c.privateId() ) )
-    alert_can_be_showed = false;
-  if( cm.isImportant() )
-    alert_can_be_showed = true;
+  bool alert_can_be_showed = cm.alertCanBeSent();
+
+  if( alert_can_be_showed )
+  {
+    if( c.isDefault() )
+      alert_can_be_showed = Settings::instance().enableDefaultChatNotifications();
+    else if( c.isGroup() )
+      alert_can_be_showed = Settings::instance().isNotificationDisabledForGroup( c.privateId() );
+  }
 
   GuiFloatingChat* fl_chat = floatingChat( c.id() );
 
-  if( !fl_chat && (Settings::instance().alwaysOpenChatOnNewMessageArrived() || cm.isImportant() ) && alert_can_be_showed )
+  if( !fl_chat && Settings::instance().alwaysOpenChatOnNewMessageArrived() && alert_can_be_showed )
   {
     fl_chat = createFloatingChat( c );
     floating_chat_created = true;
@@ -1886,7 +1897,7 @@ void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
   if( fl_chat && !floating_chat_created )
     fl_chat->showChatMessage( c, cm );
 
-    if( !cm.alertCanBeSent() ) // use this instead of alert_can_be_showed because it takes care also of groups
+  if( !cm.alertCanBeSent() ) // use this instead of alert_can_be_showed because it takes care also of groups
     return;
 
   bool chat_is_visible = fl_chat && fl_chat->isActiveWindow();

@@ -16,6 +16,7 @@ BeeBEEP 5.4.3
 - Added "DisableMenuSettings" option in beebeep.rc
 - Added "UseMessageTimestampWithAP" option (timestamp can be showed with am/pm suffix)
 - Added "BroadcastToOfflineUsers" option
+- Added "Use the dark theme" option (beta)
 
 BeeBEEP 5.4.2
 - Removed option "On close minimize on tray" for MacOSX

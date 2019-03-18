@@ -2743,6 +2743,14 @@ Inserisci un nome differente.</translation>
         <source>Show the time with the AM/PM notation</source>
         <translation>Mostra l&apos;orario con la notazione AM/PM</translation>
     </message>
+    <message>
+        <source>Use the dark theme</source>
+        <translation>Usa il tema scuro</translation>
+    </message>
+    <message>
+        <source>beta</source>
+        <translation>beta</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

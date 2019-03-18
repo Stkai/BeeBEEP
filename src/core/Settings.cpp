@@ -192,6 +192,7 @@ Settings::Settings()
   m_chatSystemTextColor = "#808080";
 
   m_useMessageTimestampWithAP = false;
+  m_useDarkStyle = false;
 }
 
 void Settings::createApplicationUuid()
@@ -1069,6 +1070,7 @@ void Settings::load()
   m_maxChatsToOpenAfterSendingMessage = sets->value( "MaxChatsToOpenAfterSendingMessage", m_maxChatsToOpenAfterSendingMessage ).toInt();
   m_showUsersOnConnection = sets->value( "ShowUsersOnConnection", m_showUsersOnConnection ).toBool();
   m_enableMaximizeButton = sets->value( "EnableMaximizeButton", false ).toBool();
+  m_useDarkStyle = sets->value( "UseDarkStyle", m_useDarkStyle ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -1413,6 +1415,7 @@ void Settings::save()
   sets->setValue( "MaxChatsToOpenAfterSendingMessage", m_maxChatsToOpenAfterSendingMessage );
   sets->setValue( "ShowUsersOnConnection", m_showUsersOnConnection );
   sets->setValue( "EnableMaximizeButton", m_enableMaximizeButton );
+  sets->setValue( "UseDarkStyle", m_useDarkStyle );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );

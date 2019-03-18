@@ -508,6 +508,9 @@ public:
   inline void setSendOfflineMessagesToDefaultChat( bool );
   inline bool sendOfflineMessagesToDefaultChat() const;
 
+  inline void setUseDarkStyle( bool );
+  inline bool useDarkStyle() const;
+
   QString autoresponderName() const;
 
   QNetworkProxy systemNetworkProxy( const QNetworkProxyQuery& ) const;
@@ -793,6 +796,8 @@ private:
 
   bool m_sendOfflineMessagesToDefaultChat;
   bool m_useMessageTimestampWithAP;
+
+  bool m_useDarkStyle;
 
 };
 
@@ -1142,5 +1147,7 @@ inline void Settings::setUseMessageTimestampWithAP( bool new_value ) { m_useMess
 inline bool Settings::useMessageTimestampWithAP() const { return m_useMessageTimestampWithAP; }
 inline void Settings::setBroadcastToOfflineUsers( bool new_value ) { m_broadcastToOfflineUsers = new_value; }
 inline bool Settings::broadcastToOfflineUsers() const { return m_broadcastToOfflineUsers; }
+inline void Settings::setUseDarkStyle( bool new_value ) { m_useDarkStyle = new_value; }
+inline bool Settings::useDarkStyle() const { return m_useDarkStyle; }
 
 #endif // BEEBEEP_SETTINGS_

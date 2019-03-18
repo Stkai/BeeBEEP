@@ -44,7 +44,7 @@ Connection* Core::connection( VNumber user_id ) const
     if( c->userId() == user_id )
       return c;
   }
-  return 0;
+  return Q_NULLPTR;
 }
 
 bool Core::hasConnection( const QHostAddress& sender_ip, int sender_port ) const
@@ -163,7 +163,7 @@ void Core::setConnectionError( QAbstractSocket::SocketError se )
   Connection* c = qobject_cast<Connection*>( sender() );
   if( c )
   {
-    qWarning() << "Connection from" << qPrintable( c->networkAddress().toString() ) << "has an error:" << c->errorString() << "-" << (int)se;
+    qWarning() << "Connection from" << qPrintable( c->networkAddress().toString() ) << "has an error:" << c->errorString() << "-" << static_cast<int>(se);
     closeConnection( c );
   }
   else

@@ -2647,6 +2647,14 @@ Please select a different name.</source>
         <source>Show the time with the AM/PM notation</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Use the dark theme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>beta</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
