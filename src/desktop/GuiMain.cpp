@@ -650,8 +650,8 @@ void GuiMain::showAbout()
                       .arg( tr( "for" ) )
                       .arg( Settings::instance().operatingSystem( true ) )
                       .arg( tr( "developed by" ) )
-                      .arg( QString( "<a href='http://it.linkedin.com/pub/marco-mastroddi/20/5a7/191'>Marco Mastroddi</a>" ) )
-                      .arg( QString( "e-mail: <a href='mailto://marco.mastroddi@gmail.com'>marco.mastroddi@gmail.com</a><br>web: <a href='http://www.beebeep.net'>www.beebeep.net</a>" ) )
+                      .arg( QString( "<a href='%1'>Marco Mastroddi</a>" ).arg( Settings::instance().developerWebSite() ) )
+                      .arg( QString( "e-mail: <a href='mailto://marco.mastroddi@gmail.com'>marco.mastroddi@gmail.com</a><br>web: <a href='%1'>www.beebeep.net</a>" ).arg( Settings::instance().officialWebSite() ) )
                       );
 
 }
@@ -1045,7 +1045,7 @@ void GuiMain::createMenus()
   mp_menuSettings->addAction( IconManager::instance().icon( "language.png" ), tr( "Select language" ) + QString( "..." ), this, SLOT( selectLanguage() ) );
   mp_menuSettings->addAction( IconManager::instance().icon( "theme.png" ), tr( "Select icon theme" ) + QString( "..." ), this, SLOT( selectIconSourcePath() ) );
   mp_menuSettings->addSeparator();
-  act = mp_menuSettings->addAction( tr( "Use the dark theme" ).arg( Settings::instance().programName() ) + QString( " (%1)" ).arg( tr( "beta" ) ), this, SLOT( settingsChanged() ) );
+  act = mp_menuSettings->addAction( tr( "Use the dark theme" ) + QString( " (%1)" ).arg( tr( "beta" ) ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().useDarkStyle() );
   act->setData( 77 );

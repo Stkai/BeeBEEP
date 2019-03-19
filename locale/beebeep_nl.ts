@@ -1388,7 +1388,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="278"/>
         <source>Marks the message as important</source>
-        <translation type="unfinished"></translation>
+        <translation>Markeer bericht als belangrijk</translation>
     </message>
 </context>
 <context>
@@ -1437,17 +1437,17 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="221"/>
         <source>Be careful, by changing the hash code you may no longer be a member of some groups and you will have to get invited again. Do you really want to regenerate your hash code?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wees voorzichtig, door de hash-code te veranderen, ben je misschien niet langer lid van een aantal groepen en moet je opnieuw worden uitgenodigd. Wil je echt je hash-code regenereren?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="222"/>
         <source>Yes</source>
-        <translation type="unfinished">Ja</translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="222"/>
         <source>No</source>
-        <translation type="unfinished">Nee</translation>
+        <translation>Nee</translation>
     </message>
 </context>
 <context>
@@ -2213,7 +2213,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="897"/>
         <source>Enable notifications also for chat with all users</source>
-        <translation type="unfinished"></translation>
+        <translation>Meldingen inschakelen voor chatten met alle gebruikers</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="979"/>
@@ -2667,7 +2667,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="661"/>
         <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it under the terms of the GNU General Public License as published&lt;br&gt;by the Free Software Foundation, either version 3 of the License&lt;br&gt;or (at your option) any later version.&lt;br&gt;&lt;br&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br&gt;See the GNU General Public License for more details.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="674"/>
@@ -2687,12 +2687,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="716"/>
         <source>The option has been disabled by your system administrator.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dezeoptie is uitgezet door de systeembeheerder.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="719"/>
         <source>News</source>
-        <translation type="unfinished">Nieuws</translation>
+        <translation>Nieuws</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="739"/>
@@ -2742,17 +2742,17 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="931"/>
         <source>Select chat background color</source>
-        <translation type="unfinished"></translation>
+        <translation>Selekteer achtergrondkleur voor de chat</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="933"/>
         <source>Select chat default text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Selekteer de standaard chat tekstkleur</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="935"/>
         <source>Select chat system text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Selekteer de chatsysteem tekst kleur</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1022"/>
@@ -2787,12 +2787,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1048"/>
         <source>Use the dark theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik de donkere thema</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1048"/>
         <source>beta</source>
-        <translation type="unfinished"></translation>
+        <translation>beta</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1052"/>
@@ -2812,7 +2812,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1187"/>
         <source>Information about %1...</source>
-        <translation type="unfinished"></translation>
+        <translation>Informatie over %1...</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1245"/>
@@ -2842,7 +2842,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1699"/>
         <source>Please select the opacity percentage of inactive chat window (default: %1%)</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer het dekkingspercentage van de inactieve chatvenster (standaard: %1%)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1789"/>
@@ -2852,7 +2852,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1796"/>
         <source>Show inactive chat window with %1% opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon inactief chatvenster met %1% dekking</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1879"/>
@@ -2964,7 +2964,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2913"/>
         <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br&gt;What do you want to do with the selected saved text?</source>
-        <translation type="unfinished"></translation>
+        <translation>De geselecteerde chat %1 heeft al een opgeslagen tekst.&lt;br&gt;Wat wilt u doen met de geselecteerde opgeslagen tekst?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3021"/>
@@ -2974,7 +2974,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3231"/>
         <source>Show the time with the AM/PM notation</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon de tijd van de AM/PM notatie</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3252"/>
@@ -3564,7 +3564,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="375"/>
         <source>Contact offline users directly</source>
-        <translation type="unfinished"></translation>
+        <translation>Contact de gebruikers offline direct</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="396"/>
@@ -4553,17 +4553,17 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiShortcut.cpp" line="40"/>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Type</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShortcut.cpp" line="66"/>
         <source>Global</source>
-        <translation type="unfinished"></translation>
+        <translation>Globaal</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShortcut.cpp" line="66"/>
         <source>Local</source>
-        <translation type="unfinished"></translation>
+        <translation>Lokaal</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShortcut.cpp" line="118"/>
@@ -4840,7 +4840,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="471"/>
         <source>Regenerate your hash code...</source>
-        <translation type="unfinished"></translation>
+        <translation>Regenereer je hash-code...</translation>
     </message>
     <message>
         <source>Other informations</source>
@@ -4930,7 +4930,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiWebView.cpp" line="35"/>
         <source>News</source>
-        <translation type="unfinished">Nieuws</translation>
+        <translation>Nieuws</translation>
     </message>
 </context>
 <context>
@@ -5132,27 +5132,27 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="743"/>
         <source>Today is %1&apos;s birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Verjaardag van %1 is vandaag</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="745"/>
         <source>Tomorrow is %1&apos;s birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Morgen is verjaardag van %1</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="747"/>
         <source>%1&apos;s birthday is in %2 days</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 zijn verjaardag is over %2 dagen</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="749"/>
         <source>Yesterday was %1&apos;s birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Gisteren was de verjaardag van %1</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="756"/>
         <source>Happy Birthday to you!</source>
-        <translation type="unfinished">Gelukkige verjaardag!</translation>
+        <translation>Van harte gefeliciteerd!</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="788"/>

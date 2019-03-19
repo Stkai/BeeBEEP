@@ -16,13 +16,13 @@ TEMPLATE = app
 !macx:DEFINES += MAKE_BEEBEEP_PORTABLE
 #DEFINES += BEEBEEP_DISABLE_FILE_TRANSFER
 #DEFINES += BEEBEEP_DISABLE_SEND_MESSAGE
+#DEFINES += BEEBEEP_USE_WEBENGINE
 
 TARGET = beebeep
 
 QT += network xml
 greaterThan(QT_MAJOR_VERSION, 4): {
-  QT += widgets multimedia printsupport webenginewidgets
-  DEFINES += BEEBEEP_USE_WEBENGINE
+  QT += widgets multimedia printsupport
 }
 
 unix:!macx:!android: equals(QT_MAJOR_VERSION, 4) {

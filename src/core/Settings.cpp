@@ -680,7 +680,7 @@ QString Settings::dnsRecord() const
 
 QString Settings::gaTrackingId() const
 {
-  return QString( BEEBEEP_GA_TRACKING_ID );
+  return QString( BEEBEEP_GA_TRACKING_ID_NEW );
 }
 
 QString Settings::gaUrl() const

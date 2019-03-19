@@ -29,7 +29,7 @@
 GAnalytics::GAnalytics( QObject* parent )
  : QObject( parent )
 {
-  setObjectName( "GAnalytics" );
+  setObjectName( "BeeBEEP Analytics" );
   mp_manager = new QNetworkAccessManager( this );
   connect( mp_manager, SIGNAL( finished( QNetworkReply* ) ), this, SLOT( onReplyFinished( QNetworkReply* ) ) );
 }
@@ -87,10 +87,7 @@ void GAnalytics::doPost()
   QByteArray query_data = query.encodedQuery();
 #endif
 
-#ifdef BEEBEEP_DEBUG
-  qDebug() << qPrintable( objectName() ) << "posts query:" << qPrintable( query_data );
-#endif
-
+  qDebug() << "Posting anonymous data to BeeBEEP statistics:" << qPrintable( query_data );
   mp_manager->post( req, query_data );
 }
 
