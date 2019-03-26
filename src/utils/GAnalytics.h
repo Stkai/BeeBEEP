@@ -42,6 +42,7 @@ signals:
 
 protected slots:
   void onReplyFinished( QNetworkReply* );
+  void onSslErrors( const QList<QSslError>& );
 
 private:
   QNetworkAccessManager* mp_manager;

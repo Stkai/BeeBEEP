@@ -53,6 +53,7 @@ protected slots:
   void onDownloadProgress( qint64, qint64 );
 
 protected:
+  QString filePathFromFileName( const QString& );
   QString filePathFromUrl( const QUrl& );
   QString fileNameFromUrl( const QUrl& );
   void doDownload( const QUrl& );

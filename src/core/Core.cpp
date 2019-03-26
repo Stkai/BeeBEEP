@@ -254,8 +254,12 @@ bool Core::start()
   if( Settings::instance().checkNewVersionAtStartup() )
     QTimer::singleShot( 3000, this, SLOT( checkNewVersion() ) );
 
+ #ifdef BEEBEEP_DEBUG
+  QTimer::singleShot( 6000, this, SLOT( postUsageStatistics() ) );
+ #else
   if( Settings::instance().canPostUsageStatistics() )
     QTimer::singleShot( 7000, this, SLOT( postUsageStatistics() ) );
+ #endif
 
   emit connected();
 

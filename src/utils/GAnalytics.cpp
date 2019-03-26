@@ -88,7 +88,10 @@ void GAnalytics::doPost()
 #endif
 
   qDebug() << "Posting anonymous data to BeeBEEP statistics:" << qPrintable( query_data );
-  mp_manager->post( req, query_data );
+  QNetworkReply* reply = mp_manager->post( req, query_data );
+#ifndef QT_NO_SSL
+  connect( reply, SIGNAL( sslErrors( const QList<QSslError>& ) ), this, SLOT( onSslErrors( const QList<QSslError>& ) ) );
+#endif
 }
 
 void GAnalytics::onReplyFinished( QNetworkReply *reply )
@@ -105,4 +108,14 @@ void GAnalytics::onReplyFinished( QNetworkReply *reply )
 
   reply->deleteLater();
   emit jobFinished();
+}
+
+void GAnalytics::onSslErrors( const QList<QSslError>& ssl_errors )
+{
+#ifndef QT_NO_SSL
+  foreach( QSslError ssl_error, ssl_errors )
+    qWarning() << qPrintable( objectName() ) << "has found SSL error:" << qPrintable( ssl_error.errorString() );
+#else
+  Q_UNUSED( ssl_errors );
+#endif
 }

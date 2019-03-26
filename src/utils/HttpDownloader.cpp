@@ -39,6 +39,12 @@ void HttpDownloader::cleanUp()
   mp_manager->setProxy( QNetworkProxy::NoProxy );
 }
 
+QString HttpDownloader::filePathFromFileName( const QString& file_name )
+{
+  QString file_path_tmp = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().downloadDirectory() ).arg( file_name ) );
+  return m_overwriteExistingFiles ? file_path_tmp : Bee::uniqueFilePath( file_path_tmp, false );
+}
+
 QString HttpDownloader::fileNameFromUrl( const QUrl& url )
 {
   QString url_path = url.path();
@@ -48,8 +54,7 @@ QString HttpDownloader::fileNameFromUrl( const QUrl& url )
 QString HttpDownloader::filePathFromUrl( const QUrl& url )
 {
   QString file_name = fileNameFromUrl( url );
-  QString file_path_tmp = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().downloadDirectory() ).arg( file_name ) );
-  return m_overwriteExistingFiles ? file_path_tmp : Bee::uniqueFilePath( file_path_tmp, false );
+  return filePathFromFileName( file_name );
 }
 
 void HttpDownloader::startDownload()
@@ -120,7 +125,28 @@ void HttpDownloader::onReplyFinished( QNetworkReply *reply )
   }
   else
   {
-    file_path = filePathFromUrl( url );
+    QVariant header_file_name = reply->header( QNetworkRequest::ContentDispositionHeader );
+    if( header_file_name.isValid() )
+    {
+      QStringList sl_file_name = header_file_name.toString().split( ";" );
+      foreach( QString s_ref, sl_file_name )
+      {
+        QString s = s_ref.simplified();
+        if( s.startsWith( "filename=" ) )
+        {
+          QString file_name = s.remove( 0, 9 );
+          if( file_name.startsWith( "\"" ) )
+            file_name.remove( 0, 1 );
+          if( file_name.endsWith( "\"" ) )
+            file_name.chop( 1 );
+          file_path = filePathFromFileName( file_name );
+          qDebug() << qPrintable( url.toString() ) << "has file name:" << qPrintable( file_name );
+          break;
+        }
+      }
+    }
+    if( file_path.isEmpty() )
+      file_path = filePathFromUrl( url );
     if( saveToDisk( file_path, reply ) )
       qDebug() << "Url" << url.toString() << "saved to" << qPrintable( file_path );
     else

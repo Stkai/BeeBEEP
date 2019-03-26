@@ -17,14 +17,14 @@
   <key>CFBundleName</key>
   <string>BeeBEEP</string>
   <key>CFBundleVersion</key>
-  <string>5.4.3</string>
+  <string>5.6.2</string>
   <key>CFBundleSignature</key>
   <string>bbip</string>
   <key>LSMinimumSystemVersion</key>
   <string>10.8.0</string>
   <key>NSHumanReadableCopyright</key>
-  <string>Copyright © Marco Mastroddi, All Rights Reserved</string>
+  <string>Copyright © 2019 Marco Mastroddi, All Rights Reserved</string>
   <key>CFBundleShortVersionString</key>
-  <string>5.4.3</string>
+  <string>5.6.2</string>
 </dict>
 </plist>

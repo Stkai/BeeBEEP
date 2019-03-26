@@ -584,17 +584,12 @@ QString Settings::languageWebSite() const
 
 QString Settings::updaterWebSite() const
 {
-  return officialWebSite() + QString( BEEBEEP_UPDATER_WEBSITE );
+  return QString("https://www.marcomastroddi.com/beebeep") + QString( BEEBEEP_UPDATER_WEBSITE );
 }
 
 QString Settings::newsWebSite() const
 {
   return officialWebSite() + QString( BEEBEEP_NEWS_WEBSITE );
-}
-
-QString Settings::copyMastroWebSite() const
-{
-  return QString( COPYMASTRO_WEBSITE );
 }
 
 QString Settings::developerWebSite() const
@@ -612,12 +607,12 @@ QString Settings::hunspellVersion() const
   return QString( HUNSPELL_VERSION );
 }
 
-QString Settings::operatingSystem( bool use_long_name  ) const
+QString Settings::operatingSystem( bool use_long_name ) const
 {
   QString os_name_long = "Unknown OS";
   QString os_name_short = "unknown";
 #ifdef Q_OS_WIN
-  os_name_long = "MS Windows";
+  os_name_long = "Microsoft Windows";
   os_name_short = "Windows";
 #endif
 #ifdef Q_OS_LINUX
@@ -625,12 +620,12 @@ QString Settings::operatingSystem( bool use_long_name  ) const
   os_name_short = "Linux";
 #endif
 #ifdef Q_OS_MAC
-  os_name_long = "MacOSX";
-  os_name_short = "OSX";
+  os_name_long = "Apple MacOSX";
+  os_name_short = "MacOSX";
 #endif
 #ifdef Q_OS_OS2
-  os_name_long = "OS/2";
-  os_name_short = "OS2";
+  os_name_long = "eComStation";
+  os_name_short = "eCS";
 #endif
 #ifdef BEEBEEP_FOR_RASPBERRY_PI
   os_name_long = "Raspberry PI";
@@ -680,7 +675,7 @@ QString Settings::dnsRecord() const
 
 QString Settings::gaTrackingId() const
 {
-  return QString( BEEBEEP_GA_TRACKING_ID_NEW );
+  return QString( BEEBEEP_GA_TRACKING_ID );
 }
 
 QString Settings::gaUrl() const
