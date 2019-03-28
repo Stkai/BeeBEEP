@@ -3500,12 +3500,12 @@ Vyberte prosím jiné jméno.</translation>
         <translation type="unfinished">výchozí</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="64"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="65"/>
         <source>Unknown address</source>
         <translation>Neznámá adresa</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="152"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="158"/>
         <source>File HOSTS not found.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3514,12 +3514,12 @@ Vyberte prosím jiné jméno.</translation>
         <translation type="obsolete">Soubor je prázdný</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="91"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="92"/>
         <source>none</source>
         <translation>žádný</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="99"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="100"/>
         <source>selected by system</source>
         <translation>vybráno systémem</translation>
     </message>
@@ -3534,7 +3534,7 @@ Vyberte prosím jiné jméno.</translation>
  %1 je odebrán ze seznamu.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="152"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="158"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
@@ -3542,47 +3542,57 @@ Vyberte prosím jiné jméno.</translation>
 <context>
     <name>GuiNetworkWidget</name>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="361"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="388"/>
         <source>Use fixed interval to search users</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="291"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="281"/>
         <source>* (read only section)</source>
         <translation>* (část pouze pro čtení)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="348"/>
-        <source>Use default multicast group address</source>
+        <location filename="../src/desktop/GuiNetwork.ui" line="308"/>
+        <source>IP Multicast TTL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="368"/>
-        <source>Use hive protocol to contact offline users</source>
+        <location filename="../src/desktop/GuiNetwork.ui" line="328"/>
+        <source>(only for IPv4 multicast)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="375"/>
+        <source>Use default multicast group address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiNetwork.ui" line="395"/>
+        <source>Use hive protocol to contact offline users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiNetwork.ui" line="402"/>
         <source>Contact offline users directly</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="396"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="423"/>
         <source>Disable system proxy for connections</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="440"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="467"/>
         <source>Show file HOSTS...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="460"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="487"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="467"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="494"/>
         <source>Cancel</source>
         <translation>Zrušit</translation>
     </message>
@@ -3599,7 +3609,7 @@ Vyberte prosím jiné jméno.</translation>
         <translation type="obsolete">Povolit interval prohledávání</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="243"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="239"/>
         <source>Max users to contact every second</source>
         <translation>Maximální počet uživatelů kontaktovaných každou vteřinu</translation>
     </message>
@@ -3608,27 +3618,27 @@ Vyberte prosím jiné jméno.</translation>
         <translation type="obsolete">s (0=zakázáno, 10=výchozí) {0=?} {0=?}</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="382"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="409"/>
         <source>Prevent multiple connections from single host address</source>
         <translation>Zabránit vícenásobnému připojení z jedné adresy</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="389"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="416"/>
         <source>Enable Zero Configuration Networking</source>
         <translation>Povolit Zero Configuration sítě</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="44"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="98"/>
         <source>UDP Port in beebeep.rc *</source>
         <translation>UDP Port v beebeep.rc *</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="175"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="188"/>
         <source>Local subnet address *</source>
         <translation>Adresa místní podsítě *</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="79"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="111"/>
         <source>Multicast group in beebeep.rc *</source>
         <translation>Multicast skupina v beebeep.rc *</translation>
     </message>
@@ -3638,17 +3648,17 @@ Vyberte prosím jiné jméno.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="211"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="271"/>
         <source>Preferred subnet</source>
         <translation>Preferovaná podsíť</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="127"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="88"/>
         <source>(the same for all clients)</source>
         <translation>(stejné pro všechny klienty)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="111"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="50"/>
         <source>(search users here by default)</source>
         <translation>(ve výchozím nastavení zde hledat uživatele)</translation>
     </message>
@@ -5279,7 +5289,7 @@ Vyberte prosím jiné jméno.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="1834"/>
+        <location filename="../src/core/Settings.cpp" line="1838"/>
         <source>Autoresponder</source>
         <translation type="unfinished"></translation>
     </message>

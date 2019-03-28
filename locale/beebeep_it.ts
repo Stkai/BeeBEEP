@@ -2946,6 +2946,14 @@ Inserisci un nome differente.</translation>
         <source>Contact offline users directly</source>
         <translation>Contatta direttamente gli utenti non in linea</translation>
     </message>
+    <message>
+        <source>IP Multicast TTL</source>
+        <translation>IP Multicast TTL</translation>
+    </message>
+    <message>
+        <source>(only for IPv4 multicast)</source>
+        <translation>(solo per il multicast con IPv4)</translation>
+    </message>
 </context>
 <context>
     <name>GuiPluginManager</name>

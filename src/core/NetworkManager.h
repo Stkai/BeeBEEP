@@ -42,6 +42,7 @@ public:
   inline const QHostAddress& localBroadcastAddress() const;
   inline const QString& localHostAddressScopeId() const;
   inline const QString& localInterfaceHardwareAddress() const;
+  QNetworkInterface localNetworkInterface() const;
 
 
   QList<QHostAddress> splitInIPv4HostAddresses( const QHostAddress& ) const;
@@ -61,7 +62,7 @@ public:
     if( mp_instance )
     {
       delete mp_instance;
-      mp_instance = NULL;
+      mp_instance = Q_NULLPTR;
     }
   }
 

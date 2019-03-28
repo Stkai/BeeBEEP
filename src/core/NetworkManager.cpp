@@ -25,7 +25,7 @@
 #include "Settings.h"
 
 
-NetworkManager* NetworkManager::mp_instance = NULL;
+NetworkManager* NetworkManager::mp_instance = Q_NULLPTR;
 
 
 NetworkManager::NetworkManager()
@@ -58,6 +58,20 @@ QList<NetworkEntry> NetworkManager::availableNetworkEntries() const
     }
   }
   return network_entries;
+}
+
+QNetworkInterface NetworkManager::localNetworkInterface() const
+{
+  if( !m_localInterfaceHardwareAddress.isEmpty() )
+  {
+    QList<QNetworkInterface> interface_list = QNetworkInterface::allInterfaces();
+    foreach( QNetworkInterface if_net, interface_list )
+    {
+      if( isNetworkInterfaceAvailable( if_net ) && if_net.hardwareAddress() == m_localInterfaceHardwareAddress )
+        return if_net;
+    }
+  }
+  return QNetworkInterface();
 }
 
 bool NetworkManager::isMainInterfaceUp() const

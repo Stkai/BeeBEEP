@@ -3500,12 +3500,12 @@ Gebruik aub een andere naam.</translation>
         <translation>Standaard</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="64"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="65"/>
         <source>Unknown address</source>
         <translation>Onbekend adres</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="152"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="158"/>
         <source>File HOSTS not found.</source>
         <translation>Bestand HOSTS niet gevonden.</translation>
     </message>
@@ -3514,12 +3514,12 @@ Gebruik aub een andere naam.</translation>
         <translation type="obsolete">Bestand is leeg</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="91"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="92"/>
         <source>none</source>
         <translation>Geen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="99"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="100"/>
         <source>selected by system</source>
         <translation>geselecteerd door systeem</translation>
     </message>
@@ -3534,7 +3534,7 @@ Gebruik aub een andere naam.</translation>
 %1 is uit de lijst verwijderd.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="152"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="158"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
@@ -3542,47 +3542,57 @@ Gebruik aub een andere naam.</translation>
 <context>
     <name>GuiNetworkWidget</name>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="361"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="388"/>
         <source>Use fixed interval to search users</source>
         <translation>Gebruik vast interval om gebruikers te zoeken</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="291"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="281"/>
         <source>* (read only section)</source>
         <translation>* (alleen lezen sectie)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="348"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="308"/>
+        <source>IP Multicast TTL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiNetwork.ui" line="328"/>
+        <source>(only for IPv4 multicast)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiNetwork.ui" line="375"/>
         <source>Use default multicast group address</source>
         <translation>Gebruik standaard multicast groep adres</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="368"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="395"/>
         <source>Use hive protocol to contact offline users</source>
         <translation>Gebruik hive protocol om offline gebruikers te contacten</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="375"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="402"/>
         <source>Contact offline users directly</source>
         <translation>Contact de gebruikers offline direct</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="396"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="423"/>
         <source>Disable system proxy for connections</source>
         <translation>Zet systeem proxy voor verbindingen uit</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="440"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="467"/>
         <source>Show file HOSTS...</source>
         <translation>Toon het bestand HOSTS...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="460"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="487"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="467"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="494"/>
         <source>Cancel</source>
         <translation>Annuleer</translation>
     </message>
@@ -3599,7 +3609,7 @@ Gebruik aub een andere naam.</translation>
         <translation type="obsolete">Zet interval aan</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="243"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="239"/>
         <source>Max users to contact every second</source>
         <translation>Max aantal gebruikers om contact te maken</translation>
     </message>
@@ -3608,27 +3618,27 @@ Gebruik aub een andere naam.</translation>
         <translation type="obsolete">seconden (0=uit, 10=standaard) </translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="382"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="409"/>
         <source>Prevent multiple connections from single host address</source>
         <translation>Voorkom meerdere verbindingen van 1 host adres</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="389"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="416"/>
         <source>Enable Zero Configuration Networking</source>
         <translation>Nul configuratie netwerken inschakelen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="44"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="98"/>
         <source>UDP Port in beebeep.rc *</source>
         <translation>UDP Poort in beebeep.rc *</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="175"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="188"/>
         <source>Local subnet address *</source>
         <translation>Lokaal subnet adres *</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="79"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="111"/>
         <source>Multicast group in beebeep.rc *</source>
         <translation>Multicast groep in beebeep.rc *</translation>
     </message>
@@ -3638,17 +3648,17 @@ Gebruik aub een andere naam.</translation>
         <translation>Zoek gebruikers overal</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="211"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="271"/>
         <source>Preferred subnet</source>
         <translation>Voorkeur subnet</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="127"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="88"/>
         <source>(the same for all clients)</source>
         <translation>(zelfde voor alle cliënten)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="111"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="50"/>
         <source>(search users here by default)</source>
         <translation>(zoek alle gebruikers standaard hier)</translation>
     </message>
@@ -5279,7 +5289,7 @@ Gebruik aub een andere naam.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="1834"/>
+        <location filename="../src/core/Settings.cpp" line="1838"/>
         <source>Autoresponder</source>
         <translation>Autobeantwoorder</translation>
     </message>

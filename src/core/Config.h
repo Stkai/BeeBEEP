@@ -94,7 +94,7 @@ const int AUTORESPONDER_MESSAGE_PROTO_VERSION = 74;
 const int TICK_INTERVAL = 1000;
 const int PING_INTERVAL_IDLE = 4700;
 const int PING_INTERVAL_TICK = 7;
-const int AUTO_BROADCAST_CHECK_TICK = 31;
+const int AUTO_BROADCAST_CHECK_TICK = 87;
 
 // Protocol
 #define ID_INVALID                0

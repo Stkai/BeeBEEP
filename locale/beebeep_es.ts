@@ -3472,12 +3472,12 @@ Por favor, elija un nombre diferente.</translation>
         <translation>predeterminado</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="64"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="65"/>
         <source>Unknown address</source>
         <translation>Dirección desconocida</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="152"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="158"/>
         <source>File HOSTS not found.</source>
         <translation>Archivo HOST no encontrado.</translation>
     </message>
@@ -3486,12 +3486,12 @@ Por favor, elija un nombre diferente.</translation>
         <translation type="obsolete">El archivo está vacío</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="91"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="92"/>
         <source>none</source>
         <translation>ninguna</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="99"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="100"/>
         <source>selected by system</source>
         <translation>seleccionada por el sistema</translation>
     </message>
@@ -3506,7 +3506,7 @@ Por favor, elija un nombre diferente.</translation>
 %1 será removido de la lista.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="152"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="158"/>
         <source>Ok</source>
         <translation>Aceptar</translation>
     </message>
@@ -3514,47 +3514,57 @@ Por favor, elija un nombre diferente.</translation>
 <context>
     <name>GuiNetworkWidget</name>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="361"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="388"/>
         <source>Use fixed interval to search users</source>
         <translation>Usar intervalo fijo para buscar usuarios</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="291"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="281"/>
         <source>* (read only section)</source>
         <translation>* (sección de sólo lectura)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="348"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="308"/>
+        <source>IP Multicast TTL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiNetwork.ui" line="328"/>
+        <source>(only for IPv4 multicast)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiNetwork.ui" line="375"/>
         <source>Use default multicast group address</source>
         <translation>Usar dirección del grupo multicast predeterminada</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="368"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="395"/>
         <source>Use hive protocol to contact offline users</source>
         <translation>Usar el protocolo hive para contactar a los usuarios desconectados</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="375"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="402"/>
         <source>Contact offline users directly</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="396"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="423"/>
         <source>Disable system proxy for connections</source>
         <translation>Deshabilitar el proxy del sistema para las conexiones</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="440"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="467"/>
         <source>Show file HOSTS...</source>
         <translation>Mostrar archivo HOSTS...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="460"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="487"/>
         <source>Ok</source>
         <translation>Aceptar</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="467"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="494"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
@@ -3567,32 +3577,32 @@ Por favor, elija un nombre diferente.</translation>
         <translation type="obsolete">Ingrese las direcciones IP o subred de su LAN separado por coma (ej: 1.1.1.1, 2.2.2.2, 3.3.3.3)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="243"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="239"/>
         <source>Max users to contact every second</source>
         <translation>Usuarios máximos para contactar cada segundo</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="382"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="409"/>
         <source>Prevent multiple connections from single host address</source>
         <translation>Evitar múltiples conexiones de una sola dirección de host</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="389"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="416"/>
         <source>Enable Zero Configuration Networking</source>
         <translation>Habilitar Zero Configuration Networking</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="44"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="98"/>
         <source>UDP Port in beebeep.rc *</source>
         <translation>Puerto UDP en beebeep.rc *</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="175"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="188"/>
         <source>Local subnet address *</source>
         <translation>Dirección de subred local *</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="79"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="111"/>
         <source>Multicast group in beebeep.rc *</source>
         <translation>Grupo multicast en beebeep.rc *</translation>
     </message>
@@ -3602,17 +3612,17 @@ Por favor, elija un nombre diferente.</translation>
         <translation>Buscar usuarios cada</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="211"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="271"/>
         <source>Preferred subnet</source>
         <translation>Subred preferida</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="127"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="88"/>
         <source>(the same for all clients)</source>
         <translation>(lo mismo para todos los clientes)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="111"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="50"/>
         <source>(search users here by default)</source>
         <translation>(busca usuarios aquí por defecto)</translation>
     </message>
@@ -5223,7 +5233,7 @@ Por favor, elija un nombre diferente.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="1834"/>
+        <location filename="../src/core/Settings.cpp" line="1838"/>
         <source>Autoresponder</source>
         <translation>Respuesta automática</translation>
     </message>

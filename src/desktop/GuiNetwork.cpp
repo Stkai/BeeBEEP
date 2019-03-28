@@ -58,6 +58,7 @@ void GuiNetwork::loadSettings()
   else
     mp_leMulticastGroup->setText( "" );
   mp_lHelpMulticastGroup->setText( QString( "(%1: %2)" ).arg( tr( "default" ) ).arg( Settings::instance().defaultMulticastGroupAddress().toString() ) );
+  mp_sbIpMulticastTtl->setValue( Settings::instance().ipMulticastTtl() );
 
   QHostAddress base_host_addresses = NetworkManager::instance().localBroadcastAddress();
   if( base_host_addresses.isNull() )
@@ -136,6 +137,11 @@ void GuiNetwork::checkAndSearch()
   bool prev_multi_group = Settings::instance().useDefaultMulticastGroupAddress();
   Settings::instance().setUseDefaultMulticastGroupAddress( mp_cbUseDefaultMulticastGroupAddress->isChecked() );
   if( prev_multi_group != Settings::instance().useDefaultMulticastGroupAddress() )
+    m_restartConnection = true;
+
+  int prev_ttl = Settings::instance().ipMulticastTtl();
+  Settings::instance().setIpMulticastTtl( mp_sbIpMulticastTtl->value() );
+  if( prev_ttl != Settings::instance().ipMulticastTtl() )
     m_restartConnection = true;
 
   Settings::instance().save();

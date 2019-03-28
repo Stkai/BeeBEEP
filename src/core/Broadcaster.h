@@ -72,6 +72,8 @@ private:
   QList< QPair<NetworkAddress, QDateTime> > m_networkAddressesWaitingForLoopback;
   bool m_addOfflineUsersInNetworkAddresses;
   QHostAddress m_multicastGroupAddress;
+  bool m_multicastRequested;
+  QNetworkInterface m_multicastInterface;
 
 };
 

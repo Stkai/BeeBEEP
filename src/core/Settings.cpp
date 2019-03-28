@@ -44,7 +44,8 @@ Settings::Settings()
   m_defaultBroadcastPort = DEFAULT_BROADCAST_PORT;
   m_defaultListenerPort = DEFAULT_LISTENER_PORT;
   m_defaultFileTransferPort = DEFAULT_FILE_TRANSFER_PORT;
-  m_defaultMulticastGroupAddress = QHostAddress( "239.255.64.75" ); // default group address for BeeBEEP
+  m_defaultMulticastGroupAddress = QHostAddress( QStringLiteral( "239.255.64.75" ) ); // default group address IPv4 for BeeBEEP
+  m_defaultMulticastGroupAddressIPv6 = QHostAddress( QStringLiteral( "ff12::2115" ) ); // default group address IPv6 for BeeBEEP
   m_resetGeometryAtStartup = false;
   m_saveGeometryOnExit = false;
   m_saveDataInDocumentsFolder = false;
@@ -81,6 +82,7 @@ Settings::Settings()
   m_preferredSubnets = "";
   m_disableSystemProxyForConnections = true;
   m_useDefaultMulticastGroupAddress = true;
+  m_ipMulticastTtl = 1;
   m_useIPv6 = false;
   m_useHive = true;
   m_checkNewVersionAtStartup = true;
@@ -1128,6 +1130,7 @@ void Settings::load()
   m_disableSystemProxyForConnections = sets->value( "DisableSystemProxyForConnections", m_disableSystemProxyForConnections ).toBool();
   m_useDefaultMulticastGroupAddress = sets->value( "UseDefaultMulticastGroupAddress", m_useDefaultMulticastGroupAddress ).toBool();
   m_broadcastToOfflineUsers = sets->value( "BroadcastToOfflineUsers", m_broadcastToOfflineUsers ).toBool();
+  m_ipMulticastTtl = sets->value( "IpMulticastTtl", m_ipMulticastTtl ).toInt();
   sets->endGroup();
   loadBroadcastAddressesFromFileHosts();
 
@@ -1463,6 +1466,7 @@ void Settings::save()
   sets->setValue( "DisableSystemProxyForConnections", m_disableSystemProxyForConnections );
   sets->setValue( "UseDefaultMulticastGroupAddress", m_useDefaultMulticastGroupAddress );
   sets->setValue( "BroadcastToOfflineUsers", m_broadcastToOfflineUsers );
+  sets->setValue( "IpMulticastTtl", m_ipMulticastTtl );
   sets->endGroup();
   sets->beginGroup( "FileShare" );
   sets->setValue( "EnableFileTransfer", m_enableFileTransfer );

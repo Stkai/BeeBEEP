@@ -2796,6 +2796,14 @@ Please select a different name.</source>
         <source>Contact offline users directly</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>IP Multicast TTL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(only for IPv4 multicast)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiPluginManager</name>
