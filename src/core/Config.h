@@ -69,6 +69,11 @@ const int DEFAULT_BROADCAST_PORT = 36475;
 const int DEFAULT_LISTENER_PORT = 6475;
 const int DEFAULT_FILE_TRANSFER_PORT = 6476;
 
+// Multicast
+const char DEFAULT_IPV4_MULTICAST_ADDRESS[] = "239.255.64.75";
+const char DEFAULT_IPV6_MULTICAST_ADDRESS[] = "ff12::2115";
+const int DEFAULT_IPV4_MULTICAST_TTL_OPTION = 1;
+
 // Connection I/O
 #define DATA_BLOCK_SIZE_16 quint16
 // set the limit to 65535 - sizeof( quint16 ) ... or a value near it

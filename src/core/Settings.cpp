@@ -44,8 +44,14 @@ Settings::Settings()
   m_defaultBroadcastPort = DEFAULT_BROADCAST_PORT;
   m_defaultListenerPort = DEFAULT_LISTENER_PORT;
   m_defaultFileTransferPort = DEFAULT_FILE_TRANSFER_PORT;
-  m_defaultMulticastGroupAddress = QHostAddress( QStringLiteral( "239.255.64.75" ) ); // default group address IPv4 for BeeBEEP
-  m_defaultMulticastGroupAddressIPv6 = QHostAddress( QStringLiteral( "ff12::2115" ) ); // default group address IPv6 for BeeBEEP
+
+#if QT_VERSION >= 0x050000
+  m_defaultMulticastGroupAddress = QHostAddress( QStringLiteral( DEFAULT_IPV4_MULTICAST_ADDRESS ) ); // default group address IPv4 for BeeBEEP
+  m_defaultMulticastGroupAddressIPv6 = QHostAddress( QStringLiteral( DEFAULT_IPV6_MULTICAST_ADDRESS ) ); // default group address IPv6 for BeeBEEP
+#else
+  m_defaultMulticastGroupAddress = QHostAddress( QString( DEFAULT_IPV4_MULTICAST_ADDRESS ) );
+  m_defaultMulticastGroupAddressIPv6 = QHostAddress( QString( DEFAULT_IPV6_MULTICAST_ADDRESS ) );
+#endif
   m_resetGeometryAtStartup = false;
   m_saveGeometryOnExit = false;
   m_saveDataInDocumentsFolder = false;
@@ -82,7 +88,7 @@ Settings::Settings()
   m_preferredSubnets = "";
   m_disableSystemProxyForConnections = true;
   m_useDefaultMulticastGroupAddress = true;
-  m_ipMulticastTtl = 1;
+  m_ipMulticastTtl = DEFAULT_IPV4_MULTICAST_TTL_OPTION;
   m_useIPv6 = false;
   m_useHive = true;
   m_checkNewVersionAtStartup = true;
