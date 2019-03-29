@@ -55,6 +55,7 @@ private slots:
   void contactNetworkAddresses();
 
 protected:
+  void sendMulticastDatagram();
   bool contactNetworkAddress( const NetworkAddress& );
 
   bool addNetworkAddress( const NetworkAddress&, bool split_ipv4_address );
@@ -72,7 +73,6 @@ private:
   QList< QPair<NetworkAddress, QDateTime> > m_networkAddressesWaitingForLoopback;
   bool m_addOfflineUsersInNetworkAddresses;
   QHostAddress m_multicastGroupAddress;
-  bool m_multicastRequested;
   QNetworkInterface m_multicastInterface;
 
 };

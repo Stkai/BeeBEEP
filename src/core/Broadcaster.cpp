@@ -32,7 +32,7 @@
 Broadcaster::Broadcaster( QObject *parent )
   : QObject( parent ), m_networkAddresses(), m_newBroadcastRequested( false ),
     m_networkAddressesWaitingForLoopback(), m_addOfflineUsersInNetworkAddresses( false ),
-    m_multicastGroupAddress(), m_multicastRequested( false )
+    m_multicastGroupAddress()
 {
   mp_receiverSocket = new QUdpSocket( this );
   mp_senderSocket = new QUdpSocket( this );
@@ -40,10 +40,9 @@ Broadcaster::Broadcaster( QObject *parent )
 
 bool Broadcaster::startBroadcastServer()
 {
-  if( !mp_receiverSocket->bind( Settings::instance().hostAddressToListen(), static_cast<quint16>(Settings::instance().defaultBroadcastPort()),
-                                QUdpSocket::ShareAddress | QUdpSocket::ReuseAddressHint ) )
+  if( !mp_receiverSocket->bind( Settings::instance().hostAddressToListen(), static_cast<quint16>(Settings::instance().defaultBroadcastPort()), QUdpSocket::ShareAddress | QUdpSocket::ReuseAddressHint ) )
   {
-    qWarning() << "Broadcaster cannot bind the broadcast port" << Settings::instance().defaultBroadcastPort();
+    qWarning() << "Broadcast receiver cannot bind the broadcast port" << Settings::instance().defaultBroadcastPort();
     return false;
   }
 
@@ -77,10 +76,8 @@ bool Broadcaster::startBroadcastServer()
     m_networkAddresses.clear();
   if( !m_networkAddressesWaitingForLoopback.isEmpty() )
     m_networkAddressesWaitingForLoopback.clear();
-  m_newBroadcastRequested = false;
   m_addOfflineUsersInNetworkAddresses = false;
-  m_multicastRequested = false;
-  updateAddresses();
+  m_newBroadcastRequested = false;
   return true;
 }
 
@@ -115,26 +112,12 @@ void Broadcaster::stopBroadcasting()
     m_networkAddressesWaitingForLoopback.clear();
   m_newBroadcastRequested = false;
   m_addOfflineUsersInNetworkAddresses = false;
-  m_multicastRequested = false;
 }
 
 void Broadcaster::sendBroadcast()
 {
-  if( mp_senderSocket->state() != QAbstractSocket::BoundState )
-  {
-#ifdef BEEBEEP_DEBUG
-    qWarning() << "Unable to send broadcast with a closed socket";
-#endif
-    return;
-  }
-
-  if( m_networkAddresses.isEmpty() )
-  {
-    m_newBroadcastRequested = true;
-    m_multicastRequested = true;
-  }
-  else
-    updateAddresses();
+  sendMulticastDatagram();
+  m_newBroadcastRequested = true;
 }
 
 bool Broadcaster::addNetworkAddress( const NetworkAddress& network_address, bool split_ipv4_address )
@@ -180,10 +163,14 @@ bool Broadcaster::contactNetworkAddress( const NetworkAddress& na )
   else
   {
     QByteArray broadcast_data = Protocol::instance().broadcastMessage( na.hostAddress() );
-    m_networkAddressesWaitingForLoopback.append( QPair<NetworkAddress,QDateTime>( na, QDateTime::currentDateTime() ) );
     if( mp_senderSocket->writeDatagram( broadcast_data, na.hostAddress(), static_cast<quint16>(Settings::instance().defaultBroadcastPort()) ) > 0 )
     {
       qDebug() << "Broadcaster sends datagram to" << qPrintable( na.hostAddress().toString() ) << Settings::instance().defaultBroadcastPort();
+      if( na.hostAddress() == NetworkManager::instance().localBroadcastAddress() )
+      {
+        m_networkAddressesWaitingForLoopback.append( QPair<NetworkAddress,QDateTime>( na, QDateTime::currentDateTime() ) );
+        qDebug() << "Waiting for loopback datagram from" << qPrintable( na.hostAddress().toString() );
+      }
       return true;
     }
     else
@@ -223,9 +210,7 @@ void Broadcaster::removeHostAddressFromWaitingList( const QHostAddress& host_add
   {
     if( it->first.hostAddress() == host_address )
     {
-#ifdef BEEBEEP_DEBUG
       qDebug() << "Broadcaster has received loopback datagram from host:" << qPrintable( it->first.toString() );
-#endif
       it = m_networkAddressesWaitingForLoopback.erase( it );
     }
     else
@@ -265,6 +250,8 @@ void Broadcaster::readBroadcastDatagram()
       qWarning() << "Broadcaster has received and invalid host address in data:" << datagram;
     else
       removeHostAddressFromWaitingList( sender_host_address );
+    if( !sender_ip.isNull() )
+      removeHostAddressFromWaitingList( sender_ip );
 
     bool ok = false;
     int sender_listener_port = m.text().toInt( &ok );
@@ -321,8 +308,6 @@ void Broadcaster::updateAddresses()
 
   m_networkAddressesWaitingForLoopback.clear();
   m_networkAddresses.clear();
-  m_newBroadcastRequested = false;
-  m_multicastRequested = true;
 
   foreach( QString s_address, Settings::instance().broadcastAddressesInFileHosts() )
   {
@@ -408,19 +393,6 @@ void Broadcaster::onTickEvent( int )
     checkLoopbackDatagram();
   }
 
-  if( m_networkAddresses.isEmpty() )
-  {
-    if( m_newBroadcastRequested )
-    {
-      if( Settings::instance().broadcastToOfflineUsers() )
-        setAddOfflineUsersInNetworkAddresses( true );
-      updateAddresses();
-      if( Settings::instance().broadcastToOfflineUsers() )
-        setAddOfflineUsersInNetworkAddresses( false );
-    }
-    return;
-  }
-
   if( mp_receiverSocket->state() != QAbstractSocket::BoundState )
   {
 #ifdef BEEBEEP_DEBUG
@@ -437,25 +409,36 @@ void Broadcaster::onTickEvent( int )
     return;
   }
 
-  contactNetworkAddresses();
+  if( m_networkAddresses.isEmpty() )
+  {
+    if( m_newBroadcastRequested )
+    {
+      if( Settings::instance().broadcastToOfflineUsers() )
+        setAddOfflineUsersInNetworkAddresses( true );
+      updateAddresses();
+      if( Settings::instance().broadcastToOfflineUsers() )
+        setAddOfflineUsersInNetworkAddresses( false );
+      m_newBroadcastRequested = false;
+    }
+  }
+  else
+    contactNetworkAddresses();
+}
+
+void Broadcaster::sendMulticastDatagram()
+{
+  if( !m_multicastGroupAddress.isNull() )
+  {
+    QByteArray broadcast_data = Protocol::instance().broadcastMessage( m_multicastGroupAddress );
+    if( mp_senderSocket->writeDatagram( broadcast_data, m_multicastGroupAddress, static_cast<quint16>(Settings::instance().defaultBroadcastPort()) ) > 0 )
+      qDebug() << "Broadcaster sends multicast datagram to" << qPrintable( m_multicastGroupAddress.toString() ) << Settings::instance().defaultBroadcastPort();
+    else
+      qWarning() << "Unable to send multicast datagram to" << qPrintable( m_multicastGroupAddress.toString() ) << Settings::instance().defaultBroadcastPort();
+  }
 }
 
 void Broadcaster::contactNetworkAddresses()
 {
-  if( m_multicastRequested )
-  {
-    if( !m_multicastGroupAddress.isNull() )
-    {
-      QByteArray broadcast_data = Protocol::instance().broadcastMessage( m_multicastGroupAddress );
-      if( mp_senderSocket->writeDatagram( broadcast_data, m_multicastGroupAddress, static_cast<quint16>(Settings::instance().defaultBroadcastPort()) ) > 0 )
-        qDebug() << "Broadcaster sends multicast datagram to" << qPrintable( m_multicastGroupAddress.toString() ) << Settings::instance().defaultBroadcastPort();
-      else
-        qWarning() << "Unable to send multicast datagram to" << qPrintable( m_multicastGroupAddress.toString() ) << Settings::instance().defaultBroadcastPort();
-    }
-    m_multicastRequested = false;
-    return;
-  }
-
   int contacted_users = 0;
   while( !m_networkAddresses.isEmpty() )
   {

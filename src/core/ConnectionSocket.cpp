@@ -165,7 +165,7 @@ qint64 ConnectionSocket::readBlock()
   {
     if( m_protoVersion > SECURE_LEVEL_2_PROTO_VERSION )
     {
-      if( bytes_available < (int)sizeof(DATA_BLOCK_SIZE_32))
+      if( bytes_available < static_cast<int>(sizeof(DATA_BLOCK_SIZE_32)))
       {
 #ifdef BEEBEEP_DEBUG
         qDebug() << "ConnectionSocket from" << qPrintable( m_networkAddress.toString() ) << "has only" << bytes_available << "bytes... wait for more";
@@ -178,7 +178,7 @@ qint64 ConnectionSocket::readBlock()
     }
     else
     {
-      if( bytes_available < (int)sizeof(DATA_BLOCK_SIZE_16))
+      if( bytes_available < static_cast<int>(sizeof(DATA_BLOCK_SIZE_16)))
       {
 #ifdef BEEBEEP_DEBUG
         qDebug() << "ConnectionSocket from" << qPrintable( m_networkAddress.toString() ) << "has only" << bytes_available << "bytes... wait for more";
@@ -206,7 +206,7 @@ qint64 ConnectionSocket::readBlock()
   QByteArray byte_array_read;
   data_stream >> byte_array_read;
 
-  if( byte_array_read.size() != (int)m_blockSize )
+  if( byte_array_read.size() != static_cast<int>(m_blockSize) )
   {
     qWarning() << "ConnectionSocket read an invalid block size from" << qPrintable( m_networkAddress.toString() ) << ":"
                << byte_array_read.size() << "bytes read and" << m_blockSize << "bytes aspected";
@@ -257,7 +257,7 @@ QByteArray ConnectionSocket::serializeData( const QByteArray& bytes_to_send )
     else
       data_stream.setVersion( DATASTREAM_VERSION_2 );
 
-    data_stream << (DATA_BLOCK_SIZE_32)0;
+    data_stream << static_cast<DATA_BLOCK_SIZE_32>(0);
 
     if( bytes_to_send.size() > DATA_BLOCK_SIZE_32_LIMIT )
     {
@@ -270,12 +270,12 @@ QByteArray ConnectionSocket::serializeData( const QByteArray& bytes_to_send )
       data_stream << bytes_to_send;
 
     data_stream.device()->seek( 0 );
-    data_stream << (DATA_BLOCK_SIZE_32)(data_block.size() - sizeof(DATA_BLOCK_SIZE_32));
+    data_stream << static_cast<DATA_BLOCK_SIZE_32>(static_cast<unsigned int>(data_block.size()) - sizeof(DATA_BLOCK_SIZE_32));
   }
   else
   {
     data_stream.setVersion( DATASTREAM_VERSION_1 );
-    data_stream << (DATA_BLOCK_SIZE_16)0;
+    data_stream << static_cast<DATA_BLOCK_SIZE_16>(0);
 
     if( bytes_to_send.size() > DATA_BLOCK_SIZE_16_LIMIT )
     {
@@ -288,7 +288,7 @@ QByteArray ConnectionSocket::serializeData( const QByteArray& bytes_to_send )
       data_stream << bytes_to_send;
 
     data_stream.device()->seek( 0 );
-    data_stream << (DATA_BLOCK_SIZE_16)(data_block.size() - sizeof(DATA_BLOCK_SIZE_16));
+    data_stream << static_cast<DATA_BLOCK_SIZE_16>(static_cast<unsigned int>(data_block.size()) - sizeof(DATA_BLOCK_SIZE_16));
   }
 
   return data_block;
@@ -406,7 +406,7 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
   int peer_datastream_version = Protocol::instance().datastreamVersion( m );
   if( peer_datastream_version > 0 )
   {
-    m_datastreamVersion = qMax( 0, (int)qMin( peer_datastream_version, Protocol::instance().datastreamMaxVersion() ) );
+    m_datastreamVersion = qMax( 0, static_cast<int>( qMin( peer_datastream_version, Protocol::instance().datastreamMaxVersion() ) ) );
 #ifdef BEEBEEP_DEBUG
     qDebug() << "ConnectionSocket uses handshaked datastream version" << m_datastreamVersion;
 #endif
@@ -456,7 +456,7 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
 
 int ConnectionSocket::fileTransferBufferSize() const
 {
-  return m_protoVersion > SECURE_LEVEL_2_PROTO_VERSION ? Settings::instance().fileTransferBufferSize() : qMin( (int)65456, Settings::instance().fileTransferBufferSize() );
+  return m_protoVersion > SECURE_LEVEL_2_PROTO_VERSION ? Settings::instance().fileTransferBufferSize() : qMin( static_cast<int>(65456), Settings::instance().fileTransferBufferSize() );
 }
 
 void ConnectionSocket::checkConnectionTimeout( int ticks )
@@ -484,13 +484,13 @@ int ConnectionSocket::activityIdle() const
     return TICK_INTERVAL; // force a read block
 
 #if QT_VERSION < 0x040700
-  quint64 idle_time = m_latestActivityDateTime.time().msecsTo( QDateTime::currentDateTime().time() );
+  qint64 idle_time = m_latestActivityDateTime.time().msecsTo( QDateTime::currentDateTime().time() );
 #else
-  quint64 idle_time = m_latestActivityDateTime.msecsTo( QDateTime::currentDateTime() );
+  qint64 idle_time = m_latestActivityDateTime.msecsTo( QDateTime::currentDateTime() );
 #endif
 
   if( idle_time < 2147483647 )
-    return (int)idle_time;
+    return static_cast<int>(idle_time);
   else
     return 2147483647;
 }

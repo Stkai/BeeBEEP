@@ -201,7 +201,7 @@ bool Core::start()
   else
   {
     qDebug() << "Broadcaster starts broadcasting with tcp listener port" << Settings::instance().localUser().networkAddress().hostPort() << "and udp port" << Settings::instance().defaultBroadcastPort();
-    QTimer::singleShot( 1000, this, SLOT( sendBroadcastMessage() ) );
+    QTimer::singleShot( 2000, this, SLOT( sendBroadcastMessage() ) );
   }
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,

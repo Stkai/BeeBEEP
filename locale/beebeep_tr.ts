@@ -72,12 +72,12 @@
         <translation>%1 %2 ağına bağlısınız.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="348"/>
+        <location filename="../src/core/Core.cpp" line="352"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1 %2 Ağ Bağlantısı kesildi.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="279"/>
+        <location filename="../src/core/Core.cpp" line="283"/>
         <source>%1 Zero Configuration started with service name: %2</source>
         <translation>%1 Sıfır Yapılandırma servis adıyla başladı: %2</translation>
     </message>
@@ -112,47 +112,47 @@
         <translation>%1 Sadece bu çalışma gruplarına katılmayı seçtiniz: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="294"/>
+        <location filename="../src/core/Core.cpp" line="298"/>
         <source>%1 Zero Configuration service closed.</source>
         <translation>%1 Sıfır Yapılandırma servisi kapandı.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="354"/>
+        <location filename="../src/core/Core.cpp" line="358"/>
         <source>Disconnected</source>
         <translation>Bağlantı Kesildi</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="372"/>
+        <location filename="../src/core/Core.cpp" line="376"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
         <translation>%1 Sıfır Yapılandırma servis için ağa göz atıyor: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="379"/>
+        <location filename="../src/core/Core.cpp" line="383"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation>%1 Sıfır Yapılandırma servis için ağa göz atamıyor: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="404"/>
+        <location filename="../src/core/Core.cpp" line="408"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1 %2 ağında yayınlanıyor...</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="406"/>
+        <location filename="../src/core/Core.cpp" line="410"/>
         <source>Searching users</source>
         <translation>Kullanıcılar Aranıyor</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="534"/>
+        <location filename="../src/core/Core.cpp" line="538"/>
         <source>New version is available</source>
         <translation>Yeni versiyon mevcut</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="535"/>
+        <location filename="../src/core/Core.cpp" line="539"/>
         <source>Click here to download</source>
         <translation>İndirmek için tıklayınız</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="622"/>
+        <location filename="../src/core/Core.cpp" line="626"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>Maksimum kimliğe ulaşıldı. Lütfen uygulamayı kapatın ve yeniden başlatın.</translation>
     </message>
@@ -313,7 +313,7 @@
         <translation>%1 %2 gruptan ayrıldığınız konusunda bilgilendirilemiyor.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="446"/>
+        <location filename="../src/core/Core.cpp" line="450"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1 Ağ arabirimi %2 düştü.</translation>
     </message>
@@ -5188,7 +5188,7 @@ Lütfen farklı bir isim seçin.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="1838"/>
+        <location filename="../src/core/Settings.cpp" line="1837"/>
         <source>Autoresponder</source>
         <translation type="unfinished"></translation>
     </message>

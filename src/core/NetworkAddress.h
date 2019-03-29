@@ -32,7 +32,7 @@ class NetworkAddress
 public:
   NetworkAddress();
   NetworkAddress( const NetworkAddress& );
-  NetworkAddress( const QHostAddress&, int );
+  NetworkAddress( const QHostAddress&, quint16 );
 
   NetworkAddress& operator=( const NetworkAddress& );
   inline bool operator==( const NetworkAddress& ) const;
@@ -47,8 +47,8 @@ public:
 
   inline void setHostAddress( const QHostAddress& );
   inline const QHostAddress& hostAddress() const;
-  inline void setHostPort( int );
-  inline int hostPort() const;
+  inline void setHostPort( quint16 );
+  inline quint16 hostPort() const;
 
   inline void setInfo( const QString& );
   inline const QString& info() const;
@@ -58,7 +58,7 @@ public:
 
 private:
   QHostAddress m_hostAddress;
-  int m_hostPort;
+  quint16 m_hostPort;
   QString m_info;
 
 };
@@ -77,8 +77,8 @@ inline bool NetworkAddress::isIPv6Address() const { return m_hostAddress.protoco
 inline bool NetworkAddress::isProtocolValid() const { return isIPv4Address() || isIPv6Address(); }
 inline void NetworkAddress::setHostAddress( const QHostAddress& new_value ) { m_hostAddress = new_value; }
 inline const QHostAddress& NetworkAddress::hostAddress() const { return m_hostAddress; }
-inline void NetworkAddress::setHostPort( int new_value ) { m_hostPort = new_value; }
-inline int NetworkAddress::hostPort() const { return m_hostPort; }
+inline void NetworkAddress::setHostPort( quint16 new_value ) { m_hostPort = new_value; }
+inline quint16 NetworkAddress::hostPort() const { return m_hostPort; }
 inline void NetworkAddress::setInfo( const QString& new_value ) { m_info = new_value; }
 inline const QString& NetworkAddress::info() const { return m_info; }
 

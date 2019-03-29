@@ -34,7 +34,7 @@ NetworkAddress::NetworkAddress( const NetworkAddress& na )
   (void)operator=( na );
 }
 
-NetworkAddress::NetworkAddress( const QHostAddress& ha, int hp )
+NetworkAddress::NetworkAddress( const QHostAddress& ha, quint16 hp )
  : m_hostAddress( ha ), m_hostPort( hp ), m_info( "" )
 {
 }
