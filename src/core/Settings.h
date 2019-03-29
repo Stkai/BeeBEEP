@@ -127,7 +127,7 @@ public:
   inline bool useIPv6() const;
   QHostAddress hostAddressToListen();
   inline const QHostAddress& multicastGroupAddress() const;
-  inline const QHostAddress& defaultMulticastGroupAddress() const;
+  QHostAddress defaultMulticastGroupAddress() const;
   inline void setIpMulticastTtl( int );
   inline int ipMulticastTtl() const;
   inline int defaultBroadcastPort() const;
@@ -566,8 +566,6 @@ private:
 
   bool m_useIPv6;
   QHostAddress m_multicastGroupAddress;
-  QHostAddress m_defaultMulticastGroupAddress;
-  QHostAddress m_defaultMulticastGroupAddressIPv6;
   bool m_useChatWithAllUsers;
   bool m_useHive;
   bool m_enableSaveData;
@@ -1034,7 +1032,6 @@ inline void Settings::setUseDefaultMulticastGroupAddress( bool new_value ) { m_u
 inline bool Settings::useDefaultMulticastGroupAddress() const { return m_useDefaultMulticastGroupAddress; }
 inline bool Settings::useIPv6() const { return m_useIPv6; }
 inline const QHostAddress& Settings::multicastGroupAddress() const { return m_multicastGroupAddress; }
-inline const QHostAddress& Settings::defaultMulticastGroupAddress() const { return m_useIPv6 ? m_defaultMulticastGroupAddressIPv6 : m_defaultMulticastGroupAddress; }
 inline void Settings::setIpMulticastTtl( int new_value ) { m_ipMulticastTtl = new_value; }
 inline int Settings::ipMulticastTtl() const { return m_ipMulticastTtl; }
 inline void Settings::setUseReturnToSendMessage( bool new_value ) { m_useReturnToSendMessage = new_value; }
