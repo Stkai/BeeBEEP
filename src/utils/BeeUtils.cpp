@@ -743,7 +743,7 @@ QString Bee::userBirthdayToText( const User& u )
       birthday_text = QObject::tr( "Today is %1's birthday" ).arg( u.name() );
     else if( days_to == 1 )
       birthday_text =  QObject::tr( "Tomorrow is %1's birthday" ).arg( u.name() );
-    else if( days_to > 1 && days_to < 10 )
+    else if( days_to > 1 && days_to < 4 )
       birthday_text= QObject::tr( "%1's birthday is in %2 days" ).arg( u.name() ).arg( days_to );
     else if( days_to == -1 )
       birthday_text = QObject::tr( "Yesterday was %1's birthday" ).arg( u.name() );

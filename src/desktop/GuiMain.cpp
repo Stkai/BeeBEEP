@@ -980,6 +980,12 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().useNativeDialogs() );
   act->setData( 4 );
+  act = mp_menuFileTransferSettings->addAction( tr( "Always shows the progress of file transfer" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().alwaysShowFileTransferProgress() );
+  act->setData( 78 );
+
+
   mp_menuFileTransferSettings->addSeparator();
   mp_actSelectDownloadFolder = mp_menuFileTransferSettings->addAction( IconManager::instance().icon( "download-folder.png" ), tr( "Select download folder" ) + QString( "..." ), this, SLOT( selectDownloadDirectory() ) );
 
@@ -1315,7 +1321,7 @@ void GuiMain::settingsChanged( QAction* act )
   bool ok = false;
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Settings changed for action id" << settings_data_id << "to" << (bool)(act->isChecked());
+  qDebug() << "Settings changed for action id" << settings_data_id << "to" << static_cast<int>(act->isChecked());
 #endif
 
   switch( settings_data_id )
@@ -1751,6 +1757,9 @@ void GuiMain::settingsChanged( QAction* act )
   case 77:
     Settings::instance().setUseDarkStyle( act->isChecked() );
     showRestartApplicationAlertMessage();
+    break;
+  case 78:
+    Settings::instance().setalwaysShowFileTransferProgress( act->isChecked() );
     break;
   case 99:
     break;
@@ -3995,11 +4004,24 @@ void GuiMain::onChangeSettingOnExistingFile( QAction* act )
 void GuiMain::onFileTransferProgress( VNumber peer_id, const User& u, const FileInfo& fi, FileSizeType bytes )
 {
   mp_fileTransfer->setProgress( peer_id, u, fi, bytes );
+  if( Settings::instance().alwaysShowFileTransferProgress() )
+  {
+    if( !mp_dockFileTransfers->isVisible() )
+    {
+      mp_dockFileTransfers->show();
+      raiseOnTop();
+    }
+  }
 }
 
 void GuiMain::onFileTransferMessage( VNumber peer_id, const User& u, const FileInfo& fi, const QString& msg )
 {
   mp_fileTransfer->setMessage( peer_id, u, fi, msg );
+  if( Settings::instance().alwaysShowFileTransferProgress() )
+  {
+    if( !mp_dockFileTransfers->isVisible() )
+      mp_dockFileTransfers->show();
+  }
 }
 
 void GuiMain::onFileTransferCompleted( VNumber peer_id, const User& u, const FileInfo& fi )

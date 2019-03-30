@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -2762,6 +2762,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Information about %1...</source>
         <translation>Informazioni su %1...</translation>
+    </message>
+    <message>
+        <source>Always shows the progress of file transfer</source>
+        <translation>Mostra sempre la progressione del trasferimento dei file</translation>
     </message>
 </context>
 <context>

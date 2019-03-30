@@ -165,7 +165,7 @@ qint64 ConnectionSocket::readBlock()
   {
     if( m_protoVersion > SECURE_LEVEL_2_PROTO_VERSION )
     {
-      if( bytes_available < static_cast<int>(sizeof(DATA_BLOCK_SIZE_32)))
+      if( static_cast<unsigned long>(bytes_available) < sizeof(DATA_BLOCK_SIZE_32) )
       {
 #ifdef BEEBEEP_DEBUG
         qDebug() << "ConnectionSocket from" << qPrintable( m_networkAddress.toString() ) << "has only" << bytes_available << "bytes... wait for more";
@@ -178,7 +178,7 @@ qint64 ConnectionSocket::readBlock()
     }
     else
     {
-      if( bytes_available < static_cast<int>(sizeof(DATA_BLOCK_SIZE_16)))
+      if( static_cast<unsigned long>(bytes_available) < sizeof(DATA_BLOCK_SIZE_16) )
       {
 #ifdef BEEBEEP_DEBUG
         qDebug() << "ConnectionSocket from" << qPrintable( m_networkAddress.toString() ) << "has only" << bytes_available << "bytes... wait for more";
@@ -204,12 +204,35 @@ qint64 ConnectionSocket::readBlock()
   }
 
   QByteArray byte_array_read;
+#if QT_VERSION >= 0x050700
+  data_stream.startTransaction();
+#endif
   data_stream >> byte_array_read;
 
-  if( byte_array_read.size() != static_cast<int>(m_blockSize) )
+#if QT_VERSION >= 0x050700
+  if( !data_stream.commitTransaction() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "ConnectionSocket from" << qPrintable( m_networkAddress.toString() ) << "cannot complete transaction and unable to read" << bytes_available;
+#endif
+    return 0;
+  }
+#endif
+
+  if( byte_array_read.size() < 1 )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "ConnectionSocket from" << qPrintable( m_networkAddress.toString() ) << "has" << bytes_available << "but it is busy and read 0 bytes";
+#endif
+    return 0;
+  }
+
+  unsigned int byte_array_read_size = static_cast<unsigned int>(byte_array_read.size());
+
+  if( byte_array_read_size != m_blockSize )
   {
     qWarning() << "ConnectionSocket read an invalid block size from" << qPrintable( m_networkAddress.toString() ) << ":"
-               << byte_array_read.size() << "bytes read and" << m_blockSize << "bytes aspected";
+               << byte_array_read_size << "bytes read and" << m_blockSize << "bytes aspected";
   }
 
   m_blockSize = 0;
@@ -230,7 +253,7 @@ qint64 ConnectionSocket::readBlock()
   else
     emit dataReceived( decrypted_byte_array );
 
-  return byte_array_read.size();
+  return byte_array_read_size;
 }
 
 void ConnectionSocket::flushAll()
@@ -516,6 +539,7 @@ void ConnectionSocket::onTickEvent( int  )
     return;
   }
 
+#if QT_VERSION < 0x050700
   qint64 bytes_available = bytesAvailable();
   if( bytes_available > 0 )
   {
@@ -528,6 +552,7 @@ void ConnectionSocket::onTickEvent( int  )
         return;
     }
   }
+#endif
 
   if( m_tickCounter % PING_INTERVAL_TICK == 0 )
     emit pingRequest();

@@ -18,6 +18,7 @@ BeeBEEP 5.6.0
 - Added "BroadcastToOfflineUsers" option
 - Added "IP Multicast TTL" option
 - Added "Use the dark theme" option (beta)
+- Added "RaiseOnNewFileTransfer" option
 
 BeeBEEP 5.4.2
 - Removed option "On close minimize on tray" for MacOSX

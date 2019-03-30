@@ -96,7 +96,7 @@ void FileTransferPeer::checkDownloadData( const QByteArray& byte_array )
   }
 
   m_bytesTransferred = byte_array.size();
-  m_totalBytesTransferred += m_bytesTransferred;
+  m_totalBytesTransferred += static_cast<FileSizeType>(m_bytesTransferred);
 
   sendTransferData(); // send to upload client that data is arrived
 

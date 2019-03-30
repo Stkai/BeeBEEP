@@ -1031,6 +1031,7 @@ void Settings::load()
 #endif
   m_stayOnTop = sets->value( "StayOnTop", false ).toBool();
   m_raiseOnNewMessageArrived = sets->value( "RaiseOnNewMessageArrived", false ).toBool();
+  m_alwaysShowFileTransferProgress = sets->value( "AlwaysShowFileTransferProgress", false ).toBool();
   m_alwaysOpenChatOnNewMessageArrived = sets->value( "AlwaysOpenChatOnNewMessageArrived", true ).toBool();
   m_beepFilePath = checkFilePath( Bee::convertToNativeFolderSeparator( sets->value( "BeepFilePath", defaultBeepFilePath( true ) ).toString() ), defaultBeepFilePath( true ) );
   m_loadOnTrayAtStartup = sets->value( "LoadOnTrayAtStartup", false ).toBool();
@@ -1102,7 +1103,7 @@ void Settings::load()
   m_tickIntervalCheckNetwork = qMax( sets->value( "TickIntervalCheckNetwork", m_tickIntervalCheckNetwork ).toInt(), 5 );
   m_tickIntervalBroadcasting = qMax( sets->value( "TickIntervalBroadcasting", m_tickIntervalBroadcasting ).toInt(), 0 );
   NetworkAddress local_user_network_address = m_localUser.networkAddress();
-  local_user_network_address.setHostPort( sets->value( "ListenerPort", DEFAULT_LISTENER_PORT ).toInt() );
+  local_user_network_address.setHostPort( sets->value( "ListenerPort", DEFAULT_LISTENER_PORT ).toUInt() );
   m_localUser.setNetworkAddress( local_user_network_address );
   m_pongTimeout = qMax( sets->value( "ConnectionActivityTimeout(ms)", 30000 ).toInt(), 13000 );
   m_writingTimeout = qMax( sets->value( "WritingTimeout", 3000 ).toInt(), 3000 );
@@ -1376,6 +1377,7 @@ void Settings::save()
   sets->setValue( "StayOnTop", m_stayOnTop );
   sets->setValue( "BeepFilePath", m_beepFilePath );
   sets->setValue( "RaiseOnNewMessageArrived", m_raiseOnNewMessageArrived );
+  sets->setValue( "AlwaysShowFileTransferProgress", m_alwaysShowFileTransferProgress );
   sets->setValue( "AlwaysOpenChatOnNewMessageArrived", m_alwaysOpenChatOnNewMessageArrived );
   sets->setValue( "LoadOnTrayAtStartup", m_loadOnTrayAtStartup );
   sets->setValue( "ShowNotificationOnTray", m_showNotificationOnTray );
