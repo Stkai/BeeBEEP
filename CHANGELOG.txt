@@ -1,6 +1,7 @@
 BEEBEEP (Secure Lan Messanger) - CHANGELOG - (c) Marco Mastroddi
 
 BeeBEEP 5.6.0
+- Now the Avatar icon border in the chat right panel will be yellow if the messages have not yet been displayed in the user's chat
 - If option "Always open chat on new message" is enabled and "Raise previously opened 
   chat on new message" is disabled, the window is now opened minimized to show icon
   blinking on taskbar.

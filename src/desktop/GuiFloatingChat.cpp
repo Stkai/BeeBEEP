@@ -182,13 +182,17 @@ void GuiFloatingChat::updateChatMember( const Chat& c, const User& u )
     act_user->setData( u.id() );
   }
 
+
   act_user->setText( u.name() );
   int avatar_size = qMax( mp_barMembers->iconSize().width(), 32 );
-  act_user->setIcon( Bee::avatarForUser( u, QSize( avatar_size, avatar_size ), Settings::instance().showUserPhoto() ) );
   QString user_tooltip = Bee::toolTipForUser( u, true );
   if( !u.isLocal() && u.protocolVersion() >= 63 && !c.userHasReadMessages( u.id() ) )
+  {
     user_tooltip += QString( "\n%1" ).arg( tr( "%1 has not read last messages" ).arg( u.name() ) );
-
+    act_user->setIcon( Bee::avatarForUser( u, QSize( avatar_size, avatar_size ), Settings::instance().showUserPhoto(), User::Away ) );
+  }
+  else
+    act_user->setIcon( Bee::avatarForUser( u, QSize( avatar_size, avatar_size ), Settings::instance().showUserPhoto() ) );
   act_user->setToolTip( user_tooltip.trimmed() );
   act_user->setEnabled( u.isStatusConnected() );
 }

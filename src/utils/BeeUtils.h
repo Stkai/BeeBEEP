@@ -73,7 +73,7 @@ namespace Bee
   bool setLastModifiedToFile( const QString&, const QDateTime& );
   bool showFileInGraphicalShell( const QString& );
   bool folderIsWriteable( const QString& );
-  QPixmap avatarForUser( const User&, const QSize&, bool use_available_user_image );
+  QPixmap avatarForUser( const User&, const QSize&, bool use_available_user_image, int user_status = -1 );
   QString toolTipForUser( const User&, bool only_status );
   void setWindowStaysOnTop( QWidget*, bool );
   QString stringListToTextString( const QStringList&, int max_items = -1 );

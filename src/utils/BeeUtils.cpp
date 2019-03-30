@@ -627,10 +627,12 @@ static int GetBoxSize( int pix_size )
   return box_size;
 }
 
-QPixmap Bee::avatarForUser( const User& u, const QSize& avatar_size, bool use_available_user_image )
+QPixmap Bee::avatarForUser( const User& u, const QSize& avatar_size, bool use_available_user_image, int user_status )
 {
   QPixmap user_avatar;
   bool default_avatar_used = false;
+  if( user_status < 0 )
+    user_status = u.status();
   if( u.vCard().photo().isNull() || !use_available_user_image )
   {
     default_avatar_used = true;
@@ -643,7 +645,7 @@ QPixmap Bee::avatarForUser( const User& u, const QSize& avatar_size, bool use_av
     av.setSize( avatar_size );
     if( !av.create() )
     {
-      user_avatar = QIcon( Bee::menuUserStatusIconFileName( u.status() ) ).pixmap( avatar_size );
+      user_avatar = QIcon( Bee::menuUserStatusIconFileName( user_status ) ).pixmap( avatar_size );
       return user_avatar;
     }
     else
@@ -670,13 +672,13 @@ QPixmap Bee::avatarForUser( const User& u, const QSize& avatar_size, bool use_av
   QPainter p( &pix );
   if( !default_avatar_used )
   {
-    pix.fill( Bee::userStatusColor( u.status() ) );
+    pix.fill( Bee::userStatusColor( user_status ) );
     p.drawPixmap( box_start_width, box_start_height, pix_width - box_width, pix_height - box_height, user_avatar.scaled( pix_width - box_width, pix_height - box_height ) );
   }
   else
   {
     p.drawPixmap( 0, 0, pix_width, pix_height, user_avatar );
-    p.setPen( Bee::userStatusColor( u.status() ) );
+    p.setPen( Bee::userStatusColor( user_status ) );
     for( int i = 0; i < box_height; i++ )
     {
       p.drawLine( 0, i, pix_width, i );
