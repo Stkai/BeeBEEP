@@ -196,6 +196,8 @@ private slots:
   void onNewsAvailable( const QString& );
   void showDefaultServerPortInMenu();
   void createMessage();
+  void updateChatColors();
+  void resetAllColors();
 #ifdef BEEBEEP_USE_WEBENGINE
   void showWebView();
   void onNewsLoad( bool );

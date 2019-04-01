@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="uk_UA" sourcelanguage="en">
+<TS version="2.0" language="uk_UA" sourcelanguage="en">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -931,6 +931,18 @@
     <message>
         <source>Open selected text as url</source>
         <translation>Відкрити виделений текст, як URL</translation>
+    </message>
+    <message>
+        <source>Select chat default text color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select chat system text color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must close and reopen this window to see the changes applied.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2653,6 +2665,18 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Always shows the progress of file transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restore the colors to the default ones</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must close and reopen the chat windows to see the changes applied.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to restore the colors to the default ones?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

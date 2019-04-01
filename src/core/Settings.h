@@ -517,6 +517,8 @@ public:
 
   QString autoresponderName() const;
 
+  void resetAllColors();
+
   QNetworkProxy systemNetworkProxy( const QNetworkProxyQuery& ) const;
 
   QString simpleEncrypt( const QString& );
@@ -638,7 +640,7 @@ private:
   bool m_showEmoticons;
   bool m_showMessagesGroupByUser;
   bool m_stayOnTop;
-  bool m_alwaysOpenChatOnNewMessageArrived;  
+  bool m_alwaysOpenChatOnNewMessageArrived;
   bool m_raiseOnNewMessageArrived;
   bool m_alwaysShowFileTransferProgress;
   bool m_showUserPhoto;

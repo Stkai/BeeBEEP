@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -963,6 +963,18 @@
     <message>
         <source>Yes and hide this chat</source>
         <translation>Si e nascondi questa conversazione</translation>
+    </message>
+    <message>
+        <source>Select chat default text color</source>
+        <translation>Seleziona il colore del testo</translation>
+    </message>
+    <message>
+        <source>Select chat system text color</source>
+        <translation>Seleziona il colore dei messaggi di sistema</translation>
+    </message>
+    <message>
+        <source>You must close and reopen this window to see the changes applied.</source>
+        <translation>Devi chiudere e riaprire questa finestra per vedere le modifiche applicate.</translation>
     </message>
 </context>
 <context>
@@ -2766,6 +2778,18 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Always shows the progress of file transfer</source>
         <translation>Mostra sempre la progressione del trasferimento dei file</translation>
+    </message>
+    <message>
+        <source>Restore the colors to the default ones</source>
+        <translation>Ripristina i colori a quelli predefiniti</translation>
+    </message>
+    <message>
+        <source>You must close and reopen the chat windows to see the changes applied.</source>
+        <translation>Devi chiudere e riaprire le finestre delle conversazioni per vedere le modifiche applicate.</translation>
+    </message>
+    <message>
+        <source>Do you really want to restore the colors to the default ones?</source>
+        <translation>Vuoi veramente ripristinare i colori a quelli predefiniti?</translation>
     </message>
 </context>
 <context>

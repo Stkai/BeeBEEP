@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="zh_TW">
+<TS version="2.0" language="zh_TW">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -930,6 +930,18 @@
     </message>
     <message>
         <source>Yes and hide this chat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select chat default text color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select chat system text color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must close and reopen this window to see the changes applied.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2665,6 +2677,18 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Always shows the progress of file transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restore the colors to the default ones</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must close and reopen the chat windows to see the changes applied.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to restore the colors to the default ones?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

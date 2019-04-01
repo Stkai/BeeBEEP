@@ -1071,6 +1071,7 @@ void GuiMain::createMenus()
 #endif
 
   mp_menuSettings->addSeparator();
+  mp_menuSettings->addAction( IconManager::instance().icon( "update.png" ), tr( "Restore the colors to the default ones" ).arg( Settings::instance().programName() ), this, SLOT( resetAllColors() ) );
   mp_actSaveWindowGeometry = mp_menuSettings->addAction( IconManager::instance().icon( "save-window.png" ), tr( "Save window's geometry" ), this, SLOT( askSaveGeometryAndState() ) );
   mp_actSaveWindowGeometry->setDisabled( Settings::instance().resetGeometryAtStartup() );
   mp_menuSettings->addAction( IconManager::instance().icon( "reset-window.png" ), tr( "Reset geometry of all windows" ), this, SLOT( askResetGeometryAndState() ) );
@@ -1718,11 +1719,7 @@ void GuiMain::settingsChanged( QAction* act )
       if( c.isValid() )
       {
         Settings::instance().setChatBackgroundColor( c.name() );
-        foreach( GuiFloatingChat* fl_chat, m_floatingChats )
-        {
-          if( fl_chat->guiChat()->chatId() != ID_DEFAULT_CHAT )
-            fl_chat->guiChat()->updateChatColors();
-        }
+        updateChatColors();
       }
     }
     break;
@@ -1732,11 +1729,7 @@ void GuiMain::settingsChanged( QAction* act )
       if( c.isValid() )
       {
         Settings::instance().setChatDefaultTextColor( c.name() );
-        foreach( GuiFloatingChat* fl_chat, m_floatingChats )
-        {
-          if( fl_chat->guiChat()->chatId() != ID_DEFAULT_CHAT )
-            fl_chat->guiChat()->updateChatColors();
-        }
+        updateChatColors();
       }
     }
     break;
@@ -1744,7 +1737,11 @@ void GuiMain::settingsChanged( QAction* act )
     {
       QColor c = QColorDialog::getColor( QColor( Settings::instance().chatSystemTextColor() ), this );
       if( c.isValid() )
+      {
         Settings::instance().setChatSystemTextColor( c.name() );
+        updateChatColors();
+        QMessageBox::information( this, Settings::instance().programName(), tr( "You must close and reopen the chat windows to see the changes applied." ), tr( "Ok" ) );
+      }
     }
     break;
   case 75:
@@ -3513,6 +3510,7 @@ GuiFloatingChat* GuiMain::createFloatingChat( const Chat& c )
     connect( fl_chat, SIGNAL( chatIsAboutToClose( VNumber ) ), this, SLOT( removeFloatingChatFromList( VNumber ) ) );
     connect( fl_chat, SIGNAL( readAllMessages( VNumber ) ), this, SLOT( readAllMessagesInChat( VNumber ) ) );
     connect( fl_chat, SIGNAL( showVCardRequest( VNumber ) ), this, SLOT( showVCard( VNumber ) ) );
+    connect( fl_chat, SIGNAL( updateChatColorsRequest() ), this, SLOT( updateChatColors() ) );
     m_floatingChats.append( fl_chat );
     fl_chat->setWindowFlagsAndGeometry();
     fl_chat->setSaveGeometryDisabled( Settings::instance().resetGeometryAtStartup() );
@@ -4329,6 +4327,29 @@ void GuiMain::createMessage()
       }
       updateTabTitles();
     }
+  }
+}
+
+void GuiMain::updateChatColors()
+{
+  if( m_floatingChats.isEmpty() )
+    return;
+
+  foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+  {
+    if( fl_chat->guiChat()->chatId() != ID_DEFAULT_CHAT )
+      fl_chat->guiChat()->updateChatColors();
+  }
+}
+
+void GuiMain::resetAllColors()
+{
+  if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to restore the colors to the default ones?" ), tr( "Yes"), tr( "No" ), QString::null, 1, 1 ) == 0 )
+  {
+    Settings::instance().setUseDarkStyle( false );
+    Settings::instance().resetAllColors();
+    Settings::instance().save();
+    showRestartApplicationAlertMessage();
   }
 }
 

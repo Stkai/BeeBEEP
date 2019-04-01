@@ -60,6 +60,7 @@ signals:
   void readAllMessages( VNumber );
   void chatIsAboutToClose( VNumber );
   void showVCardRequest( VNumber );
+  void updateChatColorsRequest();
 
 protected:
   void closeEvent( QCloseEvent* );

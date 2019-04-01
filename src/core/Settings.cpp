@@ -161,12 +161,6 @@ Settings::Settings()
   m_maxUsersToConnectInATick = 25;
   m_showTextInModeRTL = false;
   m_showChatsInOneWindow = false;
-  m_homeBackgroundColor = "#f5f5f5";
-  m_defaultChatBackgroundColor = "#f5f5f5";
-  m_userListBackgroundColor = "#ffffff";
-  m_chatListBackgroundColor = "#ffffff";
-  m_groupListBackgroundColor = "#ffffff";
-  m_savedChatListBackgroundColor = "#ffffff";
   m_maxLogLines = 5000;
   m_enableDefaultChatNotifications = true;
 
@@ -182,18 +176,30 @@ Settings::Settings()
 
   m_delayConnectionAtStartup = 5000;
 
-  m_chatDefaultUserNameColor = "#000000";
+
   m_maxChatsToOpenAfterSendingMessage = 6;
   m_showUsersOnConnection = false;
 
   m_chatActiveWindowOpacityLevel = 100;
   m_chatInactiveWindowOpacityLevel = chatInactiveWindowDefaultOpacityLevel();
-  m_chatBackgroundColor = "#ffffff";
-  m_chatDefaultTextColor = "#555555";
-  m_chatSystemTextColor = "#808080";
 
   m_useMessageTimestampWithAP = false;
   m_useDarkStyle = false;
+  m_chatDefaultUserNameColor = "#000000";
+  resetAllColors();
+}
+
+void Settings::resetAllColors()
+{
+  m_homeBackgroundColor = "#f5f5f5";
+  m_defaultChatBackgroundColor = "#f5f5f5";
+  m_userListBackgroundColor = "#ffffff";
+  m_chatListBackgroundColor = "#ffffff";
+  m_groupListBackgroundColor = "#ffffff";
+  m_savedChatListBackgroundColor = "#ffffff";
+  m_chatBackgroundColor = "#ffffff";
+  m_chatDefaultTextColor = "#555555";
+  m_chatSystemTextColor = "#808080";
 }
 
 void Settings::createApplicationUuid()

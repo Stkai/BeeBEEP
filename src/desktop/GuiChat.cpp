@@ -105,6 +105,12 @@ GuiChat::GuiChat( QWidget *parent )
   mp_actSelectBackgroundColor = new QAction( IconManager::instance().icon( "background-color.png" ), tr( "Change background color" ), this );
   connect( mp_actSelectBackgroundColor, SIGNAL( triggered() ), this, SLOT( selectBackgroundColor() ) );
 
+  mp_actSelectForegroundColor = new QAction( IconManager::instance().icon( "font-color.png" ), tr( "Select chat default text color" ), this );
+  connect( mp_actSelectForegroundColor, SIGNAL( triggered() ), this, SLOT( selectForegroundColor() ) );
+
+  mp_actSelectSystemColor = new QAction( IconManager::instance().icon( "log.png" ), tr( "Select chat system text color" ), this );
+  connect( mp_actSelectSystemColor, SIGNAL( triggered() ), this, SLOT( selectSystemColor() ) );
+
   mp_actSaveAs = new QAction( IconManager::instance().icon( "save-as.png" ), tr( "Save chat" ), this );
   connect( mp_actSaveAs, SIGNAL( triggered() ), this, SLOT( saveChat() ) );
 
@@ -288,12 +294,10 @@ void GuiChat::updateActions( const Chat& c, bool is_connected, int connected_use
 void GuiChat::customContextMenu( const QPoint& )
 {
   mp_menuContext->clear();
-
-  if( mp_actSelectBackgroundColor->isEnabled() )
-  {
-    mp_menuContext->addAction( mp_actSelectBackgroundColor );
-    mp_menuContext->addSeparator();
-  }
+  mp_menuContext->addAction( mp_actSelectBackgroundColor );
+  mp_menuContext->addAction(  mp_actSelectForegroundColor );
+  mp_menuContext->addAction(  mp_actSelectSystemColor );
+  mp_menuContext->addSeparator();
   mp_menuContext->addAction( mp_actFindTextInChat );
   mp_menuContext->addSeparator();
   mp_menuContext->addAction( IconManager::instance().icon( "select-all.png" ), tr( "Select All" ), mp_teChat, SLOT( selectAll() ), QKeySequence::SelectAll );
@@ -452,7 +456,6 @@ bool GuiChat::setChat( const Chat& c )
   m_chatId = c.id();
 
   updateChatColors();
-  mp_actSelectBackgroundColor->setEnabled( c.isDefault() );
 
   QString html_text = "";
 
@@ -635,7 +638,7 @@ void GuiChat::updateChatColors()
 void GuiChat::selectFontColor()
 {
   QColor c = QColorDialog::getColor( QColor( Settings::instance().chatFontColor() ), this );
-  if( c.isValid() )
+  if( c.isValid() && c.name() != Settings::instance().chatFontColor() )
   {
     Settings::instance().setChatFontColor( c.name() );
     setChatFontColor( c.name() );
@@ -644,11 +647,35 @@ void GuiChat::selectFontColor()
 
 void GuiChat::selectBackgroundColor()
 {
-  QColor c = QColorDialog::getColor( QColor( Settings::instance().defaultChatBackgroundColor() ), this );
+  QColor c = QColorDialog::getColor( QColor( (m_chatId == ID_DEFAULT_CHAT ? Settings::instance().defaultChatBackgroundColor() : Settings::instance().chatBackgroundColor() ) ), this );
   if( c.isValid() )
   {
-    Settings::instance().setDefaultChatBackgroundColor( c.name() );
-    updateChatColors();
+    if( m_chatId == ID_DEFAULT_CHAT )
+      Settings::instance().setDefaultChatBackgroundColor( c.name() );
+    else
+      Settings::instance().setChatBackgroundColor( c.name() );
+    emit updateChatColorsRequest();
+  }
+}
+
+void GuiChat::selectForegroundColor()
+{
+  QColor c = QColorDialog::getColor( QColor( Settings::instance().chatDefaultTextColor() ), this );
+  if( c.isValid() && c.name() != Settings::instance().chatDefaultTextColor() )
+  {
+    Settings::instance().setChatDefaultTextColor( c.name() );
+    emit updateChatColorsRequest();
+  }
+}
+
+void GuiChat::selectSystemColor()
+{
+  QColor c = QColorDialog::getColor( QColor( Settings::instance().chatSystemTextColor() ), this );
+  if( c.isValid() && c.name() != Settings::instance().chatSystemTextColor() )
+  {
+    Settings::instance().setChatSystemTextColor( c.name() );
+    QMessageBox::information( this, Settings::instance().programName(), tr( "You must close and reopen this window to see the changes applied." ), tr( "Ok" ) );
+    emit updateChatColorsRequest();
   }
 }
 
