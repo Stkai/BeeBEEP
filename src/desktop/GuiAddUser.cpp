@@ -124,9 +124,9 @@ void GuiAddUser::addUser()
   }
 
   bool ok = false;
-  int address_port = mp_lePort->text().simplified().toInt( &ok, 10 );
+  quint16 address_port = mp_lePort->text().simplified().toUInt( &ok );
 
-  if( !ok || address_port < 1 || address_port > 65535 )
+  if( !ok || address_port < 1 || address_port > 65534 )
   {
     QMessageBox::information( this, Settings::instance().programName(), tr( "Please insert a valid Port or use the default one %1." ).arg( DEFAULT_LISTENER_PORT ) );
     mp_lePort->setFocus();
@@ -142,7 +142,7 @@ void GuiAddUser::addUser()
     {
       foreach( QHostAddress ha, ha_list )
       {
-        NetworkAddress na( NetworkAddress( ha, address_port ) );
+        NetworkAddress na( ha, address_port );
         na.setInfo( user_comment );
         if( !m_networkAddresses.contains( na ) )
         {
