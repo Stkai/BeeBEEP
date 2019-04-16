@@ -188,7 +188,7 @@ void GuiChat::updateActions( const Chat& c, bool is_connected, int connected_use
   mp_teChat->setEnabled( c.isValid() );
 
   bool local_user_is_member = c.hasUser( Settings::instance().localUser().id() );
-  bool chat_is_empty = c.isEmpty();
+  bool chat_is_empty = ChatManager::instance().isChatEmpty( c, true );
   bool can_send_files = false;
   UserList chat_members;
 #ifdef BEEBEEP_USE_SHAREDESKTOP
