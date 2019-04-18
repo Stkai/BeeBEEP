@@ -742,7 +742,7 @@ QHostAddress Settings::hostAddressToListen()
 #endif
 }
 
-void Settings::setLocalUserHost( const QHostAddress& host_address, int host_port )
+void Settings::setLocalUserHost( const QHostAddress& host_address, quint16 host_port )
 {
   if( host_address.isNull() || host_address.toString() == QString( "0.0.0.0" ) )
     m_localUser.setNetworkAddress( NetworkAddress( QHostAddress( "127.0.0.1" ), host_port ) );
@@ -1109,7 +1109,7 @@ void Settings::load()
   m_tickIntervalCheckNetwork = qMax( sets->value( "TickIntervalCheckNetwork", m_tickIntervalCheckNetwork ).toInt(), 5 );
   m_tickIntervalBroadcasting = qMax( sets->value( "TickIntervalBroadcasting", m_tickIntervalBroadcasting ).toInt(), 0 );
   NetworkAddress local_user_network_address = m_localUser.networkAddress();
-  local_user_network_address.setHostPort( sets->value( "ListenerPort", DEFAULT_LISTENER_PORT ).toUInt() );
+  local_user_network_address.setHostPort( static_cast<quint16>(sets->value( "ListenerPort", DEFAULT_LISTENER_PORT ).toUInt()) );
   m_localUser.setNetworkAddress( local_user_network_address );
   m_pongTimeout = qMax( sets->value( "ConnectionActivityTimeout(ms)", 30000 ).toInt(), 13000 );
   m_writingTimeout = qMax( sets->value( "WritingTimeout", 3000 ).toInt(), 3000 );

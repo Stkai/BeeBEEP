@@ -121,7 +121,7 @@ public:
 
   inline const User& localUser() const;
   inline void setLocalUser( const User& );
-  void setLocalUserHost( const QHostAddress&, int );
+  void setLocalUserHost( const QHostAddress&, quint16 );
   inline void setLocalUserStatus( User::Status );
 
   inline bool useIPv6() const;

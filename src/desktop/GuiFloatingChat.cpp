@@ -155,7 +155,7 @@ void GuiFloatingChat::updateChatTitle( const Chat& c )
   }
 
   setMainIcon( c.unreadMessages() > 0 );
-  setWindowTitle( window_title );
+  setWindowTitle( c.isDefault() ? window_title : QString( "%1 - %2").arg( window_title, "Chat" ) );
 }
 
 void GuiFloatingChat::updateChatMember( const Chat& c, const User& u )

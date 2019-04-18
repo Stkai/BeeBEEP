@@ -54,8 +54,17 @@ bool Broadcaster::startBroadcastServer()
   {
     if( !Settings::instance().useIPv6() )
     {
-      qDebug() << "Broadcaster UDP Socket uses Multicast TTL Option" << Settings::instance().ipMulticastTtl();
-      mp_senderSocket->setSocketOption( QAbstractSocket::MulticastTtlOption, Settings::instance().ipMulticastTtl() );
+      if( Settings::instance().ipMulticastTtl() > 0 && Settings::instance().ipMulticastTtl() < 256 )
+      {
+        qDebug() << "Broadcaster UDP Socket uses Multicast TTL Option" << Settings::instance().ipMulticastTtl();
+        mp_senderSocket->setSocketOption( QAbstractSocket::MulticastTtlOption, Settings::instance().ipMulticastTtl() );
+      }
+      else
+      {
+        qWarning() << Settings::instance().ipMulticastTtl() << "is an invalid value for Multicast TTL option";
+        qDebug() << "Broadcaster UDP Socket uses default Multicast TTL Option" << DEFAULT_IPV4_MULTICAST_TTL_OPTION;
+        mp_senderSocket->setSocketOption( QAbstractSocket::MulticastTtlOption, DEFAULT_IPV4_MULTICAST_TTL_OPTION );
+      }
     }
 
     m_multicastInterface = NetworkManager::instance().localNetworkInterface();

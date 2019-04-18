@@ -265,7 +265,7 @@ void GuiMain::raiseOnTop()
 
 void GuiMain::updateWindowTitle()
 {
-  setWindowTitle( Settings::instance().localUser().name() );
+  setWindowTitle( QString( "%1 - %2" ).arg( Settings::instance().localUser().name(), Settings::instance().programName() ) );
 }
 
 static QString RemoveMenuStringFromTooltip( const QString& s )
@@ -732,6 +732,8 @@ void GuiMain::createMenus()
   mp_menuMain = new QMenu( tr( "Main" ), this );
   mp_menuMain->addAction( mp_actConnect );
   mp_menuMain->addAction( mp_actDisconnect );
+  mp_menuMain->addSeparator();
+  mp_menuMain->addAction( mp_actBroadcast );
   mp_menuMain->addSeparator();
   if( Settings::instance().resourceFolder() != Settings::instance().dataFolder() )
     mp_menuMain->addAction( IconManager::instance().icon( "resource-folder.png" ), tr( "Open your resource folder" ), this, SLOT( openResourceFolder() ) );
@@ -1237,10 +1239,13 @@ void GuiMain::createToolAndMenuBars()
 
   mp_barMain->addAction( mp_menuStatus->menuAction() );
   mp_barMain->addAction( mp_actVCard );
-  mp_barMain->addAction( mp_actViewNewMessage );
+  mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actBroadcast );
+  mp_barMain->addSeparator();
+  mp_barMain->addAction( mp_actViewNewMessage );
   mp_barMain->addAction( mp_actCreateMessage );
   mp_barMain->addAction( mp_actCreateGroupChat );
+  mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actViewFileTransfer );
   mp_barMain->addAction( mp_actViewFileSharing );
 
