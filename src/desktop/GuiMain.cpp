@@ -1073,7 +1073,7 @@ void GuiMain::createMenus()
 #endif
 
   mp_menuSettings->addSeparator();
-  mp_menuSettings->addAction( IconManager::instance().icon( "update.png" ), tr( "Restore the colors to the default ones" ).arg( Settings::instance().programName() ), this, SLOT( resetAllColors() ) );
+  mp_menuSettings->addAction( IconManager::instance().icon( "update.png" ), tr( "Restore the colors to the default ones" ), this, SLOT( resetAllColors() ) );
   mp_actSaveWindowGeometry = mp_menuSettings->addAction( IconManager::instance().icon( "save-window.png" ), tr( "Save window's geometry" ), this, SLOT( askSaveGeometryAndState() ) );
   mp_actSaveWindowGeometry->setDisabled( Settings::instance().resetGeometryAtStartup() );
   mp_menuSettings->addAction( IconManager::instance().icon( "reset-window.png" ), tr( "Reset geometry of all windows" ), this, SLOT( askResetGeometryAndState() ) );

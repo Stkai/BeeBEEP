@@ -87,7 +87,7 @@ void GAnalytics::doPost()
   QByteArray query_data = query.encodedQuery();
 #endif
 
-  qDebug() << "Posting anonymous data to BeeBEEP statistics:" << qPrintable( query_data );
+  qDebug() << "Posting anonymous data to BeeBEEP statistics:" << query_data;
   QNetworkReply* reply = mp_manager->post( req, query_data );
 #ifndef QT_NO_SSL
   connect( reply, SIGNAL( sslErrors( const QList<QSslError>& ) ), this, SLOT( onSslErrors( const QList<QSslError>& ) ) );

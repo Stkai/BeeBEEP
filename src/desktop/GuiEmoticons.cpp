@@ -87,7 +87,7 @@ void GuiEmoticons::loadEmoticons( int current_index )
   if( current_index < 0 )
     return;
 
-  GuiEmoticonWidget* gwe = 0;
+  GuiEmoticonWidget* gwe = Q_NULLPTR;
   QList<Emoticon> emoticon_list;
 
   if( current_index != m_recentTabIndex )
@@ -104,7 +104,7 @@ void GuiEmoticons::loadEmoticons( int current_index )
     if( !w )
       return;
 
-    gwe = (GuiEmoticonWidget*)w;
+    gwe = static_cast<GuiEmoticonWidget*>(w);
     if( !gwe )
       return;
   }
@@ -125,7 +125,7 @@ void GuiEmoticons::loadEmoticons( int current_index )
     emoticon_list =  EmoticonManager::instance().emoticonsByGroup( gwe->emoticonGroup() );
 
   QList<QPushButton*> button_list;
-  QPushButton* emoticon_button = 0;
+  QPushButton* emoticon_button = Q_NULLPTR;
 
   int emoticon_size = Settings::instance().emoticonSizeInMenu();
   gwe->setEmoticonSize( emoticon_size );
@@ -156,7 +156,7 @@ void GuiEmoticons::loadEmoticons( int current_index )
     emoticon_button->setIconSize( gwe->emoticonSize() );
     emoticon_button->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
     emoticon_button->setFixedSize( gwe->emoticonButtonSize() );
-    emoticon_button->setStyleSheet( "QPushButton:hover{ background-color: #ffcf04; }");
+    emoticon_button->setStyleSheet( "QPushButton { background-color: #dcdcdc; } QPushButton:hover{ background-color: #ffcf04; }");
     if( Settings::instance().useNativeEmoticons() )
       emoticon_button->setFont( f );
     setEmoticonToButton( e, emoticon_button );

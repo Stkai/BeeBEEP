@@ -125,6 +125,7 @@ void HttpDownloader::onReplyFinished( QNetworkReply *reply )
   }
   else
   {
+#if QT_VERSION >= 0x040800
     QVariant header_file_name = reply->header( QNetworkRequest::ContentDispositionHeader );
     if( header_file_name.isValid() )
     {
@@ -145,6 +146,7 @@ void HttpDownloader::onReplyFinished( QNetworkReply *reply )
         }
       }
     }
+#endif
     if( file_path.isEmpty() )
       file_path = filePathFromUrl( url );
     if( saveToDisk( file_path, reply ) )
