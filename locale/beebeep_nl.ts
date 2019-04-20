@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="nl_BE" sourcelanguage="en_US">
+<TS version="2.1" language="nl_BE" sourcelanguage="en_US">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -984,12 +984,12 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="108"/>
         <source>Select chat default text color</source>
-        <translation type="unfinished">Selekteer de standaard chat tekstkleur</translation>
+        <translation>Selekteer de standaard chat tekstkleur</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="111"/>
         <source>Select chat system text color</source>
-        <translation type="unfinished">Selekteer de chatsysteem tekst kleur</translation>
+        <translation>Selekteer de chatsysteem tekst kleur</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="117"/>
@@ -1060,7 +1060,7 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="677"/>
         <source>You must close and reopen this window to see the changes applied.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit venster sluiten en opnieuw openen om de aangebrachte wijzigingen te zien.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="805"/>
@@ -2775,7 +2775,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="983"/>
         <source>Always shows the progress of file transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon altijd de voortgang van de bestandsoverdracht</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1028"/>
@@ -2830,7 +2830,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1074"/>
         <source>Restore the colors to the default ones</source>
-        <translation type="unfinished"></translation>
+        <translation>Herstel de kleuren naar de standaardinstellingen</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1077"/>
@@ -2875,7 +2875,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1743"/>
         <source>You must close and reopen the chat windows to see the changes applied.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit chatvenster sluiten en opnieuw openen om de aangebrachte wijzigingen te zien.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1795"/>
@@ -3068,7 +3068,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4347"/>
         <source>Do you really want to restore the colors to the default ones?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wilt u de kleuren echt herstellen naar de standaardkleuren?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4449"/>
@@ -3593,12 +3593,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="308"/>
         <source>IP Multicast TTL</source>
-        <translation type="unfinished"></translation>
+        <translation>IP Multicats TTL</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="328"/>
         <source>(only for IPv4 multicast)</source>
-        <translation type="unfinished"></translation>
+        <translation>(alleen voor IPv4 multicast)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="375"/>
