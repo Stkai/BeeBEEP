@@ -571,7 +571,7 @@ QString Settings::officialWebSite() const
 
 QString Settings::pluginWebSite() const
 {
-  return officialWebSite() + QString( BEEBEEP_DOWNLOAD_WEBSITE );
+  return officialWebSite() + QString( BEEBEEP_DOWNLOAD_WEBSITE ) + "#plugins";
 }
 
 QString Settings::downloadWebSite() const
@@ -594,9 +594,9 @@ QString Settings::languageWebSite() const
   return officialWebSite() + QString( BEEBEEP_LANGUAGE_WEBSITE );
 }
 
-QString Settings::updaterWebSite() const
+QString Settings::lastVersionUrl() const
 {
-  return QString("https://www.marcomastroddi.com/beebeep") + QString( BEEBEEP_UPDATER_WEBSITE );
+  return officialWebSite() + QString( BEEBEEP_LAST_VERSION_FILE );
 }
 
 QString Settings::newsWebSite() const

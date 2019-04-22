@@ -37,7 +37,7 @@ void Updater::checkForNewVersion()
   m_versionAvailable = "";
   m_downloadUrl = "";
   m_news = "";
-  QUrl url( Settings::instance().updaterWebSite() );
+  QUrl url( Settings::instance().lastVersionUrl() );
 
   HttpDownloader* http_downloader = new HttpDownloader( this );
   connect( http_downloader, SIGNAL( downloadCompleted( const QString& ) ),this, SLOT( onDownloadCompleted( const QString& ) ), Qt::QueuedConnection );

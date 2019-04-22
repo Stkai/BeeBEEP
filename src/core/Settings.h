@@ -90,7 +90,7 @@ public:
   QString languageWebSite() const;
   QString newsWebSite() const;
   QString httpUserAgent() const;
-  QString updaterWebSite() const;
+  QString lastVersionUrl() const;
   QString downloadWebSite() const;
   QString gaTrackingId() const;
   QString gaUrl() const;
