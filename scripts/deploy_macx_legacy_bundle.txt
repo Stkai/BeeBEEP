@@ -107,6 +107,7 @@ $MACDEPLOY_APP $BUNDLE_FOLDER -dmg
 echo "Done"
 
 printf "Now compress BeeBEEP.app with version ${BEEBEEP_VERSION} ... "
+ditto -c -k --sequesterRsrc --keepParent $BUNDLE_FOLDER beebeep-${BEEBEEP_VERSION}-qt563-osx.zip
 #zip -r -y -q  beebeep-${BEEBEEP_VERSION}-qt563.zip $BUNDLE_FOLDER
 echo "Done"
 

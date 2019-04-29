@@ -110,4 +110,9 @@ printf "Renaming DMG with version ${BEEBEEP_VERSION} ... "
 mv BeeBEEP.dmg beebeep-${BEEBEEP_VERSION}.dmg
 echo "Done"
 
+printf "Making alzo ZIP version ... "
+ditto -c -k --sequesterRsrc --keepParent $BUNDLE_FOLDER beebeep-${BEEBEEP_VERSION}-osx.zip
+echo "Done"
+
 echo "BeeBEEP to Bundle - Process completed."
+
