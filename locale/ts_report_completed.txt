@@ -6,7 +6,7 @@
      beebeep_de.ts :   91%    96/(1051-26)
      beebeep_en.ts :    2%    1006/(1025-0)
      beebeep_es.ts :   97%    37/(1046-21)
-     beebeep_fr.ts :   97%    37/(1051-26)
+     beebeep_fr.ts :  100%    0/(1051-26)
      beebeep_hu.ts :   91%    97/(1035-10)
      beebeep_it.ts :  100%    0/(1083-58)
      beebeep_nb.ts :   57%    450/(1051-26)

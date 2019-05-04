@@ -1120,17 +1120,17 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="108"/>
         <source>Select chat default text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner la couleur par défaut du texte de discussion</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="111"/>
         <source>Select chat system text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner la couleur système du texte de discussion</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="677"/>
         <source>You must close and reopen this window to see the changes applied.</source>
-        <translation type="unfinished"></translation>
+        <translation>Merci de fermer et rouvrir cette fenêtre pour appliquer les modifications.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="757"/>
@@ -1387,7 +1387,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="278"/>
         <source>Marks the message as important</source>
-        <translation type="unfinished"></translation>
+        <translation>Signale le message comme important</translation>
     </message>
 </context>
 <context>
@@ -1436,17 +1436,17 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="221"/>
         <source>Be careful, by changing the hash code you may no longer be a member of some groups and you will have to get invited again. Do you really want to regenerate your hash code?</source>
-        <translation type="unfinished"></translation>
+        <translation>Attention, en changeant le code de hachage, vous pourriez ne plus être membre de certains groupes et vous devrez être invité de nouveau. Voulez-vous vraiment régénerer le code de hachage ?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="222"/>
         <source>Yes</source>
-        <translation type="unfinished">Oui</translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="222"/>
         <source>No</source>
-        <translation type="unfinished">Non</translation>
+        <translation>Non</translation>
     </message>
 </context>
 <context>
@@ -2397,7 +2397,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="661"/>
         <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it under the terms of the GNU General Public License as published&lt;br&gt;by the Free Software Foundation, either version 3 of the License&lt;br&gt;or (at your option) any later version.&lt;br&gt;&lt;br&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br&gt;See the GNU General Public License for more details.</source>
-        <translation type="unfinished"></translation>
+        <translation>BeeBEEP est un logiciel gratuit : vous pouvez le redistribuer et/ou le modifier&lt;br&gt;selon les termes de la GNU General Public License comme définie &lt;br&gt;par la Free Software Foundation, selon la version 3 de la License&lt;br&gt;ou (à votre convenance) toute version ultérieure.&lt;br&gt;&lt;br&gt;BeeBEEP est diffusé en espérant être utile,&lt;br&gt;mais SANS AUCUNE GARANTIE; même sans garantie tacite&lt;br&gt;de qualité commerciale ou de réponse à un besoin particulier.&lt;br&gt;Voir la GNU General Public License pour plus de précisions.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="674"/>
@@ -2422,7 +2422,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="719"/>
         <source>News</source>
-        <translation type="unfinished">Actualités</translation>
+        <translation>Actualités</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="741"/>
@@ -2472,22 +2472,22 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="933"/>
         <source>Select chat background color</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir la couleur de fond de la discussion</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="935"/>
         <source>Select chat default text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir la couleur du texte par défaut de la discussion</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="937"/>
         <source>Select chat system text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir la couleur du texte système de la discussion</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="985"/>
         <source>Always shows the progress of file transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Toujours montrer la progression du transfert de fichier</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1030"/>
@@ -2522,12 +2522,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1056"/>
         <source>Use the dark theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser le thème sombre</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1056"/>
         <source>beta</source>
-        <translation type="unfinished"></translation>
+        <translation>beta</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1060"/>
@@ -2542,7 +2542,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1076"/>
         <source>Restore the colors to the default ones</source>
-        <translation type="unfinished"></translation>
+        <translation>Restaurer les couleurs par défaut</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1079"/>
@@ -2552,7 +2552,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1196"/>
         <source>Information about %1...</source>
-        <translation type="unfinished"></translation>
+        <translation>Information sur %1...</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1257"/>
@@ -2587,12 +2587,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1711"/>
         <source>Please select the opacity percentage of inactive chat window (default: %1%)</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez choisir le pourcentage d&apos;opacité de la fenêtre de discussion inactive (par défaut : %1%)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1748"/>
         <source>You must close and reopen the chat windows to see the changes applied.</source>
-        <translation type="unfinished"></translation>
+        <translation>Merci de fermer et rouvrir la fenêtre de discussion pour appliquer les modifications.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1800"/>
@@ -2602,7 +2602,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1807"/>
         <source>Show inactive chat window with %1% opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher la fenêtre de discussion inactive avec %1% d&apos;opacité</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1890"/>
@@ -2724,7 +2724,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2924"/>
         <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br&gt;What do you want to do with the selected saved text?</source>
-        <translation type="unfinished"></translation>
+        <translation>La discussion &apos;%1&apos; choisie a déjà un texte sauvegardé.&lt;br&gt;Que voulez-vous faire avec le texte sauvegardé sélectionné ?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3032"/>
@@ -2734,7 +2734,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3242"/>
         <source>Show the time with the AM/PM notation</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher l&apos;heure avec la notation AM/PM</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3263"/>
@@ -2795,7 +2795,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4352"/>
         <source>Do you really want to restore the colors to the default ones?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous vraiment restaurer les couleurs par défaut ?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4454"/>
@@ -3289,7 +3289,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="899"/>
         <source>Enable notifications also for chat with all users</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer les notifications même pour les discussions avec tous les utilisateurs</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="992"/>
@@ -3573,12 +3573,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="308"/>
         <source>IP Multicast TTL</source>
-        <translation type="unfinished"></translation>
+        <translation>TTL IP Multicast</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="328"/>
         <source>(only for IPv4 multicast)</source>
-        <translation type="unfinished"></translation>
+        <translation>(uniquement pour la multidiffusion IPv4)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="375"/>
@@ -3594,7 +3594,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="402"/>
         <source>Contact offline users directly</source>
-        <translation type="unfinished"></translation>
+        <translation>Contacter les utilisateurs hors-ligne directement</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="423"/>
@@ -4567,17 +4567,17 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiShortcut.cpp" line="40"/>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Type</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShortcut.cpp" line="66"/>
         <source>Global</source>
-        <translation type="unfinished"></translation>
+        <translation>Global</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShortcut.cpp" line="66"/>
         <source>Local</source>
-        <translation type="unfinished"></translation>
+        <translation>Local</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShortcut.cpp" line="118"/>
@@ -4854,7 +4854,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="471"/>
         <source>Regenerate your hash code...</source>
-        <translation type="unfinished"></translation>
+        <translation>Régénérer votre code de hashage...</translation>
     </message>
     <message>
         <source>Other informations</source>
@@ -4945,7 +4945,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiWebView.cpp" line="35"/>
         <source>News</source>
-        <translation type="unfinished">Actualités</translation>
+        <translation>Actualités</translation>
     </message>
 </context>
 <context>
@@ -5147,27 +5147,27 @@ Please select a different name.</source>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="745"/>
         <source>Today is %1&apos;s birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Aujourd&apos;hui, c&apos;est l&apos;anniversaire de %1</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="747"/>
         <source>Tomorrow is %1&apos;s birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Demain, c&apos;est l&apos;anniversaire de %1</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="749"/>
         <source>%1&apos;s birthday is in %2 days</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;anniversaire de %1 est dans %2 jours</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="751"/>
         <source>Yesterday was %1&apos;s birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier, c&apos;était l&apos;anniversaire de %1</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="758"/>
         <source>Happy Birthday to you!</source>
-        <translation type="unfinished">Joyeux Anniversaire !</translation>
+        <translation>Joyeux Anniversaire !</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="790"/>
