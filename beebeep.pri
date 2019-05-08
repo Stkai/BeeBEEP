@@ -4,7 +4,7 @@ macx: {
   QMAKE_INFO_PLIST = $$PWD/misc/Info.plist
 }
 
-win32: {
+win32-msvc: {
   QMAKE_LFLAGS += /INCREMENTAL:NO
   QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5.01
 }
