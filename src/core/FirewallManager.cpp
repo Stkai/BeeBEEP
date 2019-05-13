@@ -23,7 +23,7 @@
 
 #include "FirewallManager.h"
 
-FirewallManager* FirewallManager::mp_instance = NULL;
+FirewallManager* FirewallManager::mp_instance = Q_NULLPTR;
 
 
 FirewallManager::FirewallManager()
