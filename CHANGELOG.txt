@@ -1,5 +1,8 @@
 BEEBEEP (Secure Lan Messanger) - CHANGELOG - (c) Marco Mastroddi
 
+BeeBEEP 5.6.1
+- Updated to Qt 5.9.8 (Windows)
+
 BeeBEEP 5.6.0
 - Now the Avatar icon border in the chat right panel will be yellow if the messages have not yet been 
   displayed in the user's chat.
