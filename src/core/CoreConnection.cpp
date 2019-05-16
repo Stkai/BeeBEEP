@@ -111,7 +111,7 @@ void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )
     }
   }
 
-  NetworkAddress na( sender_ip, sender_port );
+  NetworkAddress na( sender_ip, static_cast<quint16>(sender_port) );
   if( isUserConnected( na ) )
   {
     User u = UserManager::instance().findUserByNetworkAddress( na );
@@ -126,7 +126,7 @@ void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )
 
   Connection *c = createConnection();
   setupNewConnection( c );
-  c->connectToNetworkAddress( NetworkAddress( sender_ip, sender_port ) );
+  c->connectToNetworkAddress( na );
 }
 
 void Core::checkNewConnection( qintptr socket_descriptor )
@@ -270,6 +270,9 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
     {
       if( user_path_changed )
       {
+ #ifdef BEEBEEP_DEBUG
+        qDebug() << "User path changed:" << u.path() << "vs" << user_found.path();
+ #endif
         if( Settings::instance().userRecognitionMethod() == Settings::RecognizeByAccountAndDomain )
         {
           sAlertMsg = tr( "%1 Connection closed to user %2 because it uses your account name: %3." )
@@ -298,7 +301,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
         qWarning() << "User with account" << qPrintable( u.accountPath() ) << "and path" << qPrintable( u.path() ) << "is recognized to be Local";
       }
       else
-        qDebug() << "User with account" << qPrintable( u.accountPath() ) << "and path" << qPrintable( u.path() ) << "is recognized to be Local";
+        qDebug() << "Test connection from localhost to port" << mp_listener->serverPort() << "was successful";
 
       closeConnection( c );
       return;
@@ -420,4 +423,16 @@ int Core::connectedUsers() const
   }
 
   return connected_users;
+}
+
+void Core::checkConnectionPorts()
+{
+  if( isConnected() && connectedUsers() == 0 )
+  {
+    NetworkAddress na( NetworkManager::instance().localHostAddress(), mp_listener->serverPort() );
+    qDebug() << "Checking connection to localhost" << qPrintable( na.toString() );
+    Connection *c = createConnection();
+    setupNewConnection( c );
+    c->connectToNetworkAddress( na );
+  }
 }

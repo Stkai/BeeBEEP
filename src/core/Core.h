@@ -130,6 +130,9 @@ public slots:
   void stopDnsMulticasting();
 #endif
 
+  /* CoreConnection */
+  void checkConnectionPorts();
+
   /* CoreChat */
   void sendWritingMessage( VNumber );
   void buildSavedChatList();
