@@ -27,6 +27,7 @@
 #include "Connection.h"
 #include "Core.h"
 #include "FileShare.h"
+#include "FirewallManager.h"
 #include "IconManager.h"
 #include "NetworkManager.h"
 #include "Protocol.h"
@@ -429,10 +430,17 @@ void Core::checkConnectionPorts()
 {
   if( isConnected() && connectedUsers() == 0 )
   {
+    // FIXME: it works always... not useful to check if firewall ports are opened
     NetworkAddress na( NetworkManager::instance().localHostAddress(), mp_listener->serverPort() );
     qDebug() << "Checking connection to localhost" << qPrintable( na.toString() );
     Connection *c = createConnection();
     setupNewConnection( c );
     c->connectToNetworkAddress( na );
   }
+}
+
+void Core::checkFirewall()
+{
+  // FIXME: how to do this?
+  FirewallManager::instance().allowApplication( Settings::instance().programName(), QDir::toNativeSeparators( qApp->applicationFilePath() ) );
 }

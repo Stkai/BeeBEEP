@@ -29,3 +29,12 @@ FirewallManager* FirewallManager::mp_instance = Q_NULLPTR;
 FirewallManager::FirewallManager()
 {
 }
+
+#ifndef Q_OS_WIN
+bool FirewallManager::allowApplication( const QString& app_name, const QString& app_path )
+{
+  Q_UNUSED( app_name );
+  Q_UNUSED( app_path );
+  return false;
+}
+#endif

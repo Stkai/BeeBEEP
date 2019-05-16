@@ -23,3 +23,12 @@
 
 #include "FirewallManager.h"
 
+
+bool FirewallManager::allowApplication( const QString& app_name, const QString& app_path )
+{
+  Q_UNUSED( app_name );
+  Q_UNUSED( app_path );
+  return false;
+}
+
+

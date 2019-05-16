@@ -132,6 +132,7 @@ public slots:
 
   /* CoreConnection */
   void checkConnectionPorts();
+  void checkFirewall();
 
   /* CoreChat */
   void sendWritingMessage( VNumber );

@@ -261,9 +261,7 @@ bool Core::start()
     QTimer::singleShot( 7000, this, SLOT( postUsageStatistics() ) );
  #endif
 
-  QTimer::singleShot( 20000, this, SLOT( checkConnectionPorts() ) );
   emit connected();
-
   return true;
 }
 

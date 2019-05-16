@@ -33,7 +33,7 @@ class FirewallManager
   static FirewallManager* mp_instance;
 
 public:
-
+  bool allowApplication( const QString& app_name, const QString& app_path );
 
   static FirewallManager& instance()
   {
