@@ -52,3 +52,56 @@ Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\BeeBEEP"; Filename
 [Run]
 Filename: "{app}\beebeep.exe"; Description: "{cm:LaunchProgram,BeeBEEP}"; Flags: nowait postinstall skipifsilent
 
+[Code]
+// Utility functions for Inno Setup
+// used to add/remove programs from the windows firewall rules
+
+const
+  NET_FW_SCOPE_ALL = 0;
+  NET_FW_IP_VERSION_ANY = 2;
+
+procedure SetFirewallException(AppName,FileName:string);
+var
+  FirewallObject: Variant;
+  FirewallManager: Variant;
+  FirewallProfile: Variant;
+begin
+  try
+    FirewallObject := CreateOleObject('HNetCfg.FwAuthorizedApplication');
+    FirewallObject.ProcessImageFileName := FileName;
+    FirewallObject.Name := AppName;
+    FirewallObject.Scope := NET_FW_SCOPE_ALL;
+    FirewallObject.IpVersion := NET_FW_IP_VERSION_ANY;
+    FirewallObject.Enabled := True;
+    FirewallManager := CreateOleObject('HNetCfg.FwMgr');
+    FirewallProfile := FirewallManager.LocalPolicy.CurrentProfile;
+    FirewallProfile.AuthorizedApplications.Add(FirewallObject);
+  except
+  end;
+end;
+
+procedure RemoveFirewallException( FileName:string );
+var
+  FirewallManager: Variant;
+  FirewallProfile: Variant;
+begin
+  try
+    FirewallManager := CreateOleObject('HNetCfg.FwMgr');
+    FirewallProfile := FirewallManager.LocalPolicy.CurrentProfile;
+    FireWallProfile.AuthorizedApplications.Remove(FileName);
+  except
+  end;
+end;
+
+procedure CurStepChanged(CurStep: TSetupStep);
+begin
+  if CurStep=ssPostInstall then
+     SetFirewallException('BeeBEEP', ExpandConstant('{app}\')+'beebeep.exe');
+end;
+
+procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
+begin
+  if CurUninstallStep=usPostUninstall then
+     RemoveFirewallException(ExpandConstant('{app}\')+'beebeep.exe');
+end;
+
