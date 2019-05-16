@@ -36,6 +36,7 @@ GuiGroupItem::GuiGroupItem( QTreeWidget* parent )
 {
   setItemId( ID_INVALID );
   setObjectType( ObjectInvalid );
+  m_unreadMessages = 0;
 }
 
 GuiGroupItem::GuiGroupItem( QTreeWidgetItem* parent )
@@ -61,7 +62,8 @@ bool GuiGroupItem::operator<( const GuiGroupItem& item ) const
 
 void GuiGroupItem::setGroupName( const QString& group_name, int unread_messages )
 {
-  if( unread_messages > 0 )
+  m_unreadMessages = unread_messages;
+  if( m_unreadMessages > 0 )
     setText( 0, QString( "(%1) %2" ).arg( unread_messages ).arg( group_name ) );
   else
     setText( 0, group_name );
@@ -112,4 +114,15 @@ bool GuiGroupItem::updateChat( const Chat& c )
   }
 
   return true;
+}
+
+void GuiGroupItem::onTickEvent( int ticks )
+{
+  if( m_unreadMessages > 0 )
+  {
+    if( ticks % 2 == 0 )
+      setIcon( 0, IconManager::instance().icon( "beebeep-message.png" ) );
+    else
+      setIcon( 0, IconManager::instance().icon( "group.png" ) );
+  }
 }

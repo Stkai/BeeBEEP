@@ -41,6 +41,8 @@ public:
   void updateUser( const User& );
   void updateChat( const Chat& );
 
+  void onTickEvent( int );
+
 signals:
   void openChatForGroupRequest( VNumber group_id );
   void createGroupRequest();

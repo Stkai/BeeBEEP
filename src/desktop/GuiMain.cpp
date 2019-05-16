@@ -1920,7 +1920,7 @@ void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
     if( c.isDefault() )
       alert_can_be_showed = Settings::instance().enableDefaultChatNotifications();
     else if( c.isGroup() )
-      alert_can_be_showed = Settings::instance().isNotificationDisabledForGroup( c.privateId() );
+      alert_can_be_showed = !Settings::instance().isNotificationDisabledForGroup( c.privateId() );
   }
 
   GuiFloatingChat* fl_chat = floatingChat( c.id() );
@@ -3796,6 +3796,7 @@ void GuiMain::onTickEvent( int ticks )
   mp_trayIcon->onTickEvent( ticks );
   mp_chatList->onTickEvent( ticks );
   mp_userList->onTickEvent( ticks );
+  mp_groupList->onTickEvent( ticks );
   mp_fileSharing->onTickEvent( ticks );
 
   if( beeCore->hasFileTransferInProgress() )

@@ -299,3 +299,16 @@ void GuiGroupList::updateBackground()
   mp_twGroupList->setStyleSheet( w_stylesheet );
 }
 
+void GuiGroupList::onTickEvent( int ticks )
+{
+  GuiGroupItem* item;
+  QTreeWidgetItemIterator it( mp_twGroupList );
+  while( *it )
+  {
+    item = dynamic_cast<GuiGroupItem*>( *it );
+    item->onTickEvent( ticks );
+    ++it;
+  }
+}
+
+

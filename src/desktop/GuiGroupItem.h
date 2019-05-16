@@ -50,8 +50,10 @@ public:
 
   bool updateUser( const User& );
   bool updateChat( const Chat& );
+  void onTickEvent( int );
 
 private:
+  int m_unreadMessages;
   inline void setObjectType( ObjectTypeId );
   inline int objectType() const;
   void setGroupName( const QString&, int );
