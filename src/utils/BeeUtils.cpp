@@ -763,23 +763,6 @@ QString Bee::userBirthdayToText( const User& u )
   return birthday_text;
 }
 
-void Bee::setWindowStaysOnTop( QWidget* w, bool enable )
-{
-  bool w_was_visible = w->isVisible();
-  if( w_was_visible )
-    w->hide();
-
-  Qt::WindowFlags w_flags = w->windowFlags();
-  if( enable )
-    w_flags |= Qt::WindowStaysOnTopHint;
-  else
-    w_flags &= ~Qt::WindowStaysOnTopHint;
-  w->setWindowFlags( w_flags );
-
-  if( w_was_visible )
-    QMetaObject::invokeMethod( w, "show", Qt::QueuedConnection );
-}
-
 QString Bee::stringListToTextString( const QStringList& sl, int max_items )
 {
   if( sl.isEmpty() )
@@ -859,6 +842,23 @@ void Bee::raiseOnTop( QWidget* w )
     Bee::setWindowStaysOnTop( w, false );
 #endif
   }
+}
+
+void Bee::setWindowStaysOnTop( QWidget* w, bool enable )
+{
+  bool w_was_visible = w->isVisible();
+  if( w_was_visible )
+    w->hide();
+
+  Qt::WindowFlags w_flags = w->windowFlags();
+  if( enable )
+    w_flags |= Qt::WindowStaysOnTopHint;
+  else
+    w_flags &= ~Qt::WindowStaysOnTopHint;
+  w->setWindowFlags( w_flags );
+
+  if( w_was_visible )
+    QMetaObject::invokeMethod( w, "show", Qt::QueuedConnection );
 }
 
 bool Bee::areStringListEqual( const QStringList& sl1, const QStringList& sl2, Qt::CaseSensitivity cs )

@@ -540,20 +540,18 @@ void ConnectionSocket::onTickEvent( int  )
     return;
   }
 
-#if QT_VERSION < 0x050700
   qint64 bytes_available = bytesAvailable();
   if( bytes_available > 0 )
   {
     if( m_blockSize == 0 || bytes_available >= m_blockSize )
     {
 #ifdef BEEBEEP_DEBUG
-      qDebug() << qPrintable( m_networkAddress.toString() ) << "has" << (int)bytesAvailable() << "bytes available: read forced";
+      qDebug() << qPrintable( m_networkAddress.toString() ) << "has" << bytes_available << "bytes available: read forced";
 #endif
       if( readBlock() > 0 )
         return;
     }
   }
-#endif
 
   if( m_tickCounter % PING_INTERVAL_TICK == 0 )
     emit pingRequest();
