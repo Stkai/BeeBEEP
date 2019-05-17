@@ -212,6 +212,7 @@ qint64 ConnectionSocket::readBlock()
 #if QT_VERSION >= 0x050700
   if( !data_stream.commitTransaction() )
   {
+    data_stream.rollbackTransaction();
 #ifdef BEEBEEP_DEBUG
     qDebug() << "ConnectionSocket from" << qPrintable( m_networkAddress.toString() ) << "cannot complete transaction and unable to read" << bytes_available;
 #endif
