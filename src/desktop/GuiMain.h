@@ -320,6 +320,9 @@ private:
   QAction* mp_actChangeStatusDescription;
   QAction* mp_actCreateMessage;
 
+  QAction* mp_actShowUserListOnConnection;
+  QAction* mp_actShowChatListOnConnection;
+
   QMenu* mp_menuNetworkStatus;
   QAction* mp_actHostAddress;
   QAction* mp_actPortBroadcast;

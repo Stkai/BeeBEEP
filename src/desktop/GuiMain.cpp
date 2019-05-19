@@ -825,14 +825,15 @@ void GuiMain::createMenus()
   mp_actPromptPassword->setChecked( Settings::instance().askPasswordAtStartup() );
   mp_actPromptPassword->setData( 17 );
   mp_menuConnectionSettings->addSeparator();
-  act = mp_menuConnectionSettings->addAction( tr( "Show the user list" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showUsersOnConnection() );
-  act->setData( 69 );
-  act = mp_menuConnectionSettings->addAction( tr( "Show the chat list" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showChatsOnConnection() );
-  act->setData( 79 );
+
+  mp_actShowUserListOnConnection = mp_menuConnectionSettings->addAction( tr( "Show the user list" ), this, SLOT( settingsChanged() ) );
+  mp_actShowUserListOnConnection->setCheckable( true );
+  mp_actShowUserListOnConnection->setChecked( Settings::instance().showUsersOnConnection() );
+  mp_actShowUserListOnConnection->setData( 69 );
+  mp_actShowChatListOnConnection = mp_menuConnectionSettings->addAction( tr( "Show the chat list" ), this, SLOT( settingsChanged() ) );
+  mp_actShowChatListOnConnection->setCheckable( true );
+  mp_actShowChatListOnConnection->setChecked( Settings::instance().showChatsOnConnection() );
+  mp_actShowChatListOnConnection->setData( 79 );
 
   mp_menuNetworkStatus = new QMenu( tr( "Network" ), this );
   mp_menuNetworkStatus->setIcon( IconManager::instance().icon( "network.png" ) );
@@ -1708,6 +1709,7 @@ void GuiMain::settingsChanged( QAction* act )
     break;
   case 69:
     Settings::instance().setShowUsersOnConnection( act->isChecked() );
+    mp_actShowChatListOnConnection->setChecked( Settings::instance().showChatsOnConnection() );
     break;
   case 70:
     Settings::instance().setAlwaysOpenChatOnNewMessageArrived( act->isChecked() );
@@ -1776,6 +1778,7 @@ void GuiMain::settingsChanged( QAction* act )
     break;
   case 79:
     Settings::instance().setShowChatsOnConnection( act->isChecked() );
+    mp_actShowUserListOnConnection->setChecked( Settings::instance().showUsersOnConnection() );
     break;
   case 99:
     break;
