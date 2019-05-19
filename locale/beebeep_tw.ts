@@ -979,6 +979,14 @@
         <source>Change background color</source>
         <translation type="unfinished">變更背景色</translation>
     </message>
+    <message>
+        <source>Hide empty chats</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Write a message</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiChatListWidget</name>
@@ -2548,10 +2556,6 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Create a message</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>none</source>
         <translation type="unfinished">無</translation>
     </message>
@@ -2561,10 +2565,6 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Select download folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show the user list at once</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2689,6 +2689,18 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Do you really want to restore the colors to the default ones?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show the user list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show the chat list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Write a message</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3160,6 +3172,25 @@ Please select a different name.</source>
     </message>
 </context>
 <context>
+    <name>GuiSelectItems</name>
+    <message>
+        <source>One or more elements of the list have been selected but are hidden by the search text. Do you still want to add them?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished">是</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">取消</translation>
+    </message>
+</context>
+<context>
     <name>GuiSelectItemsWidget</name>
     <message>
         <source>Ok</source>
@@ -3171,6 +3202,14 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Clear selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished">搜尋</translation>
+    </message>
+    <message>
+        <source>Clear filter</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

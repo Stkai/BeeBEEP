@@ -36,7 +36,7 @@ GuiCreateMessage::GuiCreateMessage( QWidget *parent )
  : QDialog( parent )
 {
   setupUi( this );
-  setWindowIcon( IconManager::instance().icon( "message-to-many.png" ) );
+  setWindowIcon( IconManager::instance().icon( "message-create.png" ) );
   setObjectName( "GuiCreateMessage" );
   setWindowTitle( tr( "Create message" ) + QString( " - %1" ).arg( Settings::instance().programName() ) );
 
@@ -141,6 +141,8 @@ void GuiCreateMessage::editRecipients()
     item = new GuiChatItem( tw );
     item->setChatId( c.id() );
     item->updateItem( c );
+    if( m_toChatIdList.contains( c.id() ) )
+      item->setSelected( true );
   }
 
   gsi.show();

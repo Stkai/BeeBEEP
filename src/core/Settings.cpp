@@ -179,6 +179,8 @@ Settings::Settings()
 
   m_maxChatsToOpenAfterSendingMessage = 6;
   m_showUsersOnConnection = false;
+  m_showChatsOnConnection = false;
+  m_hideEmptyChatsInList = true;
 
   m_chatActiveWindowOpacityLevel = 100;
   m_chatInactiveWindowOpacityLevel = chatInactiveWindowDefaultOpacityLevel();
@@ -1087,6 +1089,10 @@ void Settings::load()
   m_emoticonSourcePath = sets->value( "EmoticonSourcePath", m_emoticonSourcePath ).toString();
   m_maxChatsToOpenAfterSendingMessage = sets->value( "MaxChatsToOpenAfterSendingMessage", m_maxChatsToOpenAfterSendingMessage ).toInt();
   m_showUsersOnConnection = sets->value( "ShowUsersOnConnection", m_showUsersOnConnection ).toBool();
+  m_showChatsOnConnection = sets->value( "ShowChatsOnConnection", m_showChatsOnConnection ).toBool();
+  if( m_showChatsOnConnection && m_showUsersOnConnection )
+    m_showUsersOnConnection = false;
+  m_hideEmptyChatsInList = sets->value( "HideEmptyChatsInList", m_hideEmptyChatsInList ).toBool();
   m_enableMaximizeButton = sets->value( "EnableMaximizeButton", false ).toBool();
   m_useDarkStyle = sets->value( "UseDarkStyle", m_useDarkStyle ).toBool();
   sets->endGroup();
@@ -1434,6 +1440,8 @@ void Settings::save()
   sets->setValue( "EmoticonSourcePath", m_emoticonSourcePath );
   sets->setValue( "MaxChatsToOpenAfterSendingMessage", m_maxChatsToOpenAfterSendingMessage );
   sets->setValue( "ShowUsersOnConnection", m_showUsersOnConnection );
+  sets->setValue( "ShowChatsOnConnection", m_showChatsOnConnection );
+  sets->setValue( "HideEmptyChatsInList", m_hideEmptyChatsInList );
   sets->setValue( "EnableMaximizeButton", m_enableMaximizeButton );
   sets->setValue( "UseDarkStyle", m_useDarkStyle );
   sets->endGroup();

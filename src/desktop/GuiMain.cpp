@@ -165,6 +165,8 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_chatList, SIGNAL( chatToClear( VNumber ) ), this, SLOT( clearChat( VNumber ) ) );
   connect( mp_chatList, SIGNAL( chatToEdit( VNumber ) ), this, SLOT( editGroupChat( VNumber ) ) );
   connect( mp_chatList, SIGNAL( createNewChatRequest() ), this, SLOT( createGroupChat() ) );
+  connect( mp_chatList, SIGNAL( createNewMessageRequest() ), this, SLOT( createMessage() ) );
+    connect( mp_chatList, SIGNAL( hideEmptyChatsRequest() ), this, SLOT( onHideEmptyChatsRequest() ) );
 
   connect( mp_trayIcon, SIGNAL( activated( QSystemTrayIcon::ActivationReason ) ), this, SLOT( trayIconClicked( QSystemTrayIcon::ActivationReason ) ) );
   connect( mp_trayIcon, SIGNAL( messageClicked() ), this, SLOT( trayMessageClicked() ) );
@@ -548,7 +550,12 @@ void GuiMain::startCore()
   if( beeCore->start() )
   {
     m_autoConnectOnInterfaceUp = true;
-    if( Settings::instance().showUsersOnConnection() )
+    if( Settings::instance().showChatsOnConnection() )
+    {
+      mp_tabMain->setCurrentWidget( mp_chatList );
+      m_changeTabToUserListOnFirstConnected = false;
+    }
+    else if( Settings::instance().showUsersOnConnection() )
     {
       mp_tabMain->setCurrentWidget( mp_userList );
       m_changeTabToUserListOnFirstConnected = false;
@@ -710,7 +717,7 @@ void GuiMain::createActions()
   mp_actViewScreenShot = new QAction( IconManager::instance().icon( "screenshot.png" ), tr( "Make a screenshot" ), this );
   connect( mp_actViewScreenShot, SIGNAL( triggered() ), this, SLOT( showScreenShotWindow() ) );
 
-  mp_actCreateMessage = new QAction( IconManager::instance().icon( "message-to-many.png" ), tr( "Create a message" ), this );
+  mp_actCreateMessage = new QAction( IconManager::instance().icon( "message-create" ), tr( "Write a message" ), this );
   connect( mp_actCreateMessage, SIGNAL( triggered() ), this, SLOT( createMessage() ) );
   if( Settings::instance().disableCreateMessage() )
     mp_actCreateMessage->setToolTip( tr( "The option has been disabled by your system administrator.") );
@@ -818,10 +825,14 @@ void GuiMain::createMenus()
   mp_actPromptPassword->setChecked( Settings::instance().askPasswordAtStartup() );
   mp_actPromptPassword->setData( 17 );
   mp_menuConnectionSettings->addSeparator();
-  act = mp_menuConnectionSettings->addAction( tr( "Show the user list at once" ), this, SLOT( settingsChanged() ) );
+  act = mp_menuConnectionSettings->addAction( tr( "Show the user list" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().showUsersOnConnection() );
   act->setData( 69 );
+  act = mp_menuConnectionSettings->addAction( tr( "Show the chat list" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showChatsOnConnection() );
+  act->setData( 79 );
 
   mp_menuNetworkStatus = new QMenu( tr( "Network" ), this );
   mp_menuNetworkStatus->setIcon( IconManager::instance().icon( "network.png" ) );
@@ -1762,6 +1773,9 @@ void GuiMain::settingsChanged( QAction* act )
     break;
   case 78:
     Settings::instance().setalwaysShowFileTransferProgress( act->isChecked() );
+    break;
+  case 79:
+    Settings::instance().setShowChatsOnConnection( act->isChecked() );
     break;
   case 99:
     break;
@@ -3046,7 +3060,7 @@ void GuiMain::onUserChanged( const User& u )
   mp_userList->setUser( u, true );
   mp_groupList->updateUser( u );
   mp_chatList->updateUser( u );
- foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+  foreach( GuiFloatingChat* fl_chat, m_floatingChats )
     fl_chat->updateUser( u );
   checkViewActions();
   if( u.isLocal() )
@@ -4357,6 +4371,12 @@ void GuiMain::resetAllColors()
     Settings::instance().save();
     showRestartApplicationAlertMessage();
   }
+}
+
+void GuiMain::onHideEmptyChatsRequest()
+{
+  Settings::instance().setHideEmptyChatsInList( !Settings::instance().hideEmptyChatsInList() );
+  mp_chatList->updateChats();
 }
 
 #ifdef BEEBEEP_USE_WEBENGINE

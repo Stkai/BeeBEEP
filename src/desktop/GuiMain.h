@@ -198,6 +198,7 @@ private slots:
   void createMessage();
   void updateChatColors();
   void resetAllColors();
+  void onHideEmptyChatsRequest();
 #ifdef BEEBEEP_USE_WEBENGINE
   void showWebView();
   void onNewsLoad( bool );

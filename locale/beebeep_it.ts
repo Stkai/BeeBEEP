@@ -1011,6 +1011,14 @@
         <source>Change background color</source>
         <translation>Cambia il colore di sfondo</translation>
     </message>
+    <message>
+        <source>Hide empty chats</source>
+        <translation>Nascondi le conversazioni senza messaggi</translation>
+    </message>
+    <message>
+        <source>Write a message</source>
+        <translation>Scrivi un messaggio</translation>
+    </message>
 </context>
 <context>
     <name>GuiChatListWidget</name>
@@ -2629,7 +2637,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Create a message</source>
-        <translation>Crea un messaggio</translation>
+        <translation type="vanished">Crea un messaggio</translation>
     </message>
     <message>
         <source>none</source>
@@ -2653,7 +2661,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show the user list at once</source>
-        <translation>Mostra subito la lista degli utenti</translation>
+        <translation type="vanished">Mostra subito la lista degli utenti</translation>
     </message>
     <message>
         <source>Raise previously opened chat on new message</source>
@@ -2790,6 +2798,18 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Do you really want to restore the colors to the default ones?</source>
         <translation>Vuoi veramente ripristinare i colori a quelli predefiniti?</translation>
+    </message>
+    <message>
+        <source>Show the user list</source>
+        <translation>Mostra la lista degli utenti</translation>
+    </message>
+    <message>
+        <source>Show the chat list</source>
+        <translation>Mostra la lista delle conversazioni</translation>
+    </message>
+    <message>
+        <source>Write a message</source>
+        <translation>Scrivi un messaggio</translation>
     </message>
 </context>
 <context>
@@ -3296,6 +3316,25 @@ Inserisci un nome differente.</translation>
     </message>
 </context>
 <context>
+    <name>GuiSelectItems</name>
+    <message>
+        <source>One or more elements of the list have been selected but are hidden by the search text. Do you still want to add them?</source>
+        <translation>Uno o più elementi della lista sono stati selezionati ma risultano nascosti dal testo di ricerca. Vuoi comunque aggiungerli?</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation>Si</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation>No</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Annulla</translation>
+    </message>
+</context>
+<context>
     <name>GuiSelectItemsWidget</name>
     <message>
         <source>Ok</source>
@@ -3308,6 +3347,14 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Clear selection</source>
         <translation>Deseleziona tutto</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Cerca</translation>
+    </message>
+    <message>
+        <source>Clear filter</source>
+        <translation>Cancella il filtro</translation>
     </message>
 </context>
 <context>

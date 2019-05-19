@@ -4,6 +4,8 @@ BeeBEEP 5.6.1
 - Updated to Qt 5.9.8 (Windows)
 - Fixed an error in group notification when new message arrives
 - Windows installer now creates a rule in firewall for BeeBEEP 
+- Added "ShowChatsOnConnection" option to show the chat list at startup
+- Added "HideEmptyChatsInList" option to hide empty chats in list
 
 BeeBEEP 5.6.0
 - Now the Avatar icon border in the chat right panel will be yellow if the messages have not yet been 

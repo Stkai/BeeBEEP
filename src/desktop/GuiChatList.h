@@ -44,6 +44,8 @@ signals:
   void chatToClear( VNumber chat_id );
   void chatToEdit( VNumber chat_id );
   void createNewChatRequest();
+  void createNewMessageRequest();
+  void hideEmptyChatsRequest();
 
 public slots:
   void updateChat( const Chat& );

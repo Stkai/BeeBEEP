@@ -6,11 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>508</width>
-    <height>352</height>
+    <width>557</width>
+    <height>429</height>
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
+   <property name="verticalSpacing">
+    <number>20</number>
+   </property>
    <item row="0" column="0" rowspan="2">
     <widget class="GuiEmoticons" name="mp_twEmoticons">
      <property name="sizePolicy">
@@ -42,21 +45,9 @@
       <string>To</string>
      </property>
      <property name="flat">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>6</number>
-      </property>
-      <property name="rightMargin">
-       <number>0</number>
-      </property>
-      <property name="bottomMargin">
-       <number>6</number>
-      </property>
       <item row="0" column="1">
        <widget class="QPushButton" name="mp_pbEditUsers">
         <property name="sizePolicy">
@@ -138,22 +129,7 @@
      <property name="title">
       <string>Message</string>
      </property>
-     <property name="flat">
-      <bool>true</bool>
-     </property>
      <layout class="QGridLayout" name="gridLayout_3">
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>6</number>
-      </property>
-      <property name="rightMargin">
-       <number>0</number>
-      </property>
-      <property name="bottomMargin">
-       <number>6</number>
-      </property>
       <item row="2" column="1" rowspan="2">
        <spacer name="verticalSpacer_2">
         <property name="orientation">

@@ -91,31 +91,28 @@ void GuiChatList::updateChat( const Chat& c )
   if( !c.isValid() )
     return;
 
-  if( c.isEmpty() && !c.isDefault() )
-    return;
-
-  if( !m_filter.isEmpty() )
-  {
-    if( c.isDefault() )
-    {
-      if( !GuiChatItem::defaultChatName().contains( m_filter, Qt::CaseInsensitive ) )
-        return;
-    }
-    else
-    {
-      if( !c.name().contains( m_filter, Qt::CaseInsensitive ) )
-        return;
-    }
-  }
-
   GuiChatItem* item = itemFromChatId( c.id() );
   if( !item )
   {
     item = new GuiChatItem( mp_twChatList );
     item->setChatId( c.id() );
   }
-
   item->updateItem( c );
+
+  bool hide_item = false;
+
+  if( !c.isDefault() && Settings::instance().hideEmptyChatsInList() )
+    hide_item = ChatManager::instance().isChatEmpty( c, true );
+
+  if( !hide_item && !m_filter.isEmpty() )
+  {
+    if( c.isDefault() )
+      hide_item = !GuiChatItem::defaultChatName().contains( m_filter, Qt::CaseInsensitive );
+    else
+      hide_item = !c.name().contains( m_filter, Qt::CaseInsensitive );
+  }
+
+  item->setHidden( hide_item );
 }
 
 void GuiChatList::updateUser( const User& u )
@@ -145,6 +142,10 @@ void GuiChatList::showChatMenu( const QPoint& p )
 {
   mp_menuContext->clear();
   QAction* act;
+  act = mp_menuContext->addAction( tr( "Hide empty chats" ), this, SIGNAL( hideEmptyChatsRequest() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().hideEmptyChatsInList() );
+  mp_menuContext->addSeparator();
 
   QTreeWidgetItem* item = mp_twChatList->itemAt( p );
   if( !item )
@@ -157,6 +158,7 @@ void GuiChatList::showChatMenu( const QPoint& p )
       mp_menuContext->addSeparator();
     }
 
+    act = mp_menuContext->addAction( IconManager::instance().icon( "message-create.png" ), tr( "Write a message" ), this, SIGNAL( createNewMessageRequest() ) );
     act = mp_menuContext->addAction( IconManager::instance().icon( "group-create.png" ), tr( "Create new group chat" ), this, SIGNAL( createNewChatRequest() ) );
     act->setEnabled( create_chat_is_enabled );
   }
@@ -166,8 +168,12 @@ void GuiChatList::showChatMenu( const QPoint& p )
     m_chatSelected = chat_item->chatId();
     Chat c = ChatManager::instance().chat( m_chatSelected );
     if( !c.isValid() )
+    {
+      mp_twChatList->clearSelection();
+      qWarning() << "ChatListView is unable to find chat id" << m_chatSelected << " and item is hidden";
+      item->setHidden( true );
       return;
-
+    }
     act = mp_menuContext->addAction( IconManager::instance().icon( "chat.png" ), tr( "Show" ), this, SLOT( openChatSelected() ) );
     mp_menuContext->setDefaultAction( act );
     mp_menuContext->addSeparator();
@@ -180,13 +186,13 @@ void GuiChatList::showChatMenu( const QPoint& p )
       mp_menuContext->addAction( IconManager::instance().icon( "group-edit.png" ), tr( "Edit" ), this, SLOT( editChatSelected() ) );
     }
     m_blockShowChatRequest = true;
-    mp_twChatList->clearSelection();
   }
 
   mp_menuContext->addSeparator();
   mp_menuContext->addAction( IconManager::instance().icon( "background-color.png" ), tr( "Change background color" ) + QString("..."), this, SLOT( selectBackgroundColor() ) );
 
   mp_menuContext->exec( QCursor::pos() );
+  mp_twChatList->clearSelection();
 }
 
 void GuiChatList::openChatSelected()

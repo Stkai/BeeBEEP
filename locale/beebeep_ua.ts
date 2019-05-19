@@ -979,6 +979,14 @@
         <source>Create new group chat</source>
         <translation>Створити новий груповий чат</translation>
     </message>
+    <message>
+        <source>Hide empty chats</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Write a message</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiChatListWidget</name>
@@ -2069,7 +2077,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Show the user list at once</source>
-        <translation>Показувати перелік користувачів відразу</translation>
+        <translation type="vanished">Показувати перелік користувачів відразу</translation>
     </message>
     <message>
         <source>Use font emoticons</source>
@@ -2325,7 +2333,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Create a message</source>
-        <translation>Створити повідомлення</translation>
+        <translation type="vanished">Створити повідомлення</translation>
     </message>
     <message>
         <source>Do you want to close anyway?</source>
@@ -2677,6 +2685,18 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Do you really want to restore the colors to the default ones?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show the user list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show the chat list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Write a message</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3146,6 +3166,25 @@ Please select a different name.</source>
     </message>
 </context>
 <context>
+    <name>GuiSelectItems</name>
+    <message>
+        <source>One or more elements of the list have been selected but are hidden by the search text. Do you still want to add them?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished">Так</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished">Ні</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>GuiSelectItemsWidget</name>
     <message>
         <source>Ok</source>
@@ -3158,6 +3197,14 @@ Please select a different name.</source>
     <message>
         <source>Clear selection</source>
         <translation>Відмінити вибір</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished">Пошук</translation>
+    </message>
+    <message>
+        <source>Clear filter</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

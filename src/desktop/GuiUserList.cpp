@@ -222,6 +222,7 @@ void GuiUserList::showUserMenu( const QPoint& p )
     m_blockShowChatRequest = true;
     emit showVCardRequest( user_item->userId() );
   }
+  mp_twUsers->clearSelection();
 }
 
 void GuiUserList::userItemClicked( QTreeWidgetItem* item, int )

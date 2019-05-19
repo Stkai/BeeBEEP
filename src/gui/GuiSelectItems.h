@@ -37,10 +37,20 @@ public:
 
   inline QTreeWidget* treeWidget() const;
 
+protected:
+  virtual void resetList();
+  virtual void updateList();
+  virtual void sortList();
+
 protected slots:
   void onOkClicked();
   void onCancelClicked();
   void onClearClicked();
+  void searchText( const QString& );
+  void onClearFilterClicked();
+
+private:
+  QString m_textToSearch;
 
 };
 

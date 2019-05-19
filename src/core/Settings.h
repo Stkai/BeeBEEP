@@ -281,6 +281,10 @@ public:
   inline int maxChatsToOpenAfterSendingMessage() const;
   inline void setShowUsersOnConnection( bool );
   inline bool showUsersOnConnection() const;
+  inline void setShowChatsOnConnection( bool );
+  inline bool showChatsOnConnection() const;
+  inline void setHideEmptyChatsInList( bool );
+  inline bool hideEmptyChatsInList() const;
   inline void setEnableMaximizeButton( bool );
   inline bool enableMaximizeButton() const;
   inline int chatActiveWindowOpacityLevel() const;
@@ -670,6 +674,7 @@ private:
   QString m_chatDefaultUserNameColor;
   int m_maxChatsToOpenAfterSendingMessage;
   bool m_showUsersOnConnection;
+  bool m_showChatsOnConnection;
   bool m_enableMaximizeButton;
   int m_chatActiveWindowOpacityLevel;
   int m_chatInactiveWindowOpacityLevel;
@@ -803,6 +808,7 @@ private:
 
   bool m_sendOfflineMessagesToDefaultChat;
   bool m_useMessageTimestampWithAP;
+  bool m_hideEmptyChatsInList;
 
   bool m_useDarkStyle;
 
@@ -1132,8 +1138,14 @@ inline void Settings::setChatUseColoredUserNames( bool new_value ) { m_chatUseCo
 inline bool Settings::chatUseColoredUserNames() const { return m_chatUseColoredUserNames; }
 inline const QString& Settings::chatDefaultUserNameColor() const { return m_chatDefaultUserNameColor; }
 inline int Settings::maxChatsToOpenAfterSendingMessage() const { return m_maxChatsToOpenAfterSendingMessage; }
-inline void Settings::setShowUsersOnConnection( bool new_value ) { m_showUsersOnConnection = new_value; }
+inline void Settings::setShowUsersOnConnection( bool new_value ) { m_showUsersOnConnection = new_value; if( m_showUsersOnConnection ) m_showChatsOnConnection = false; }
 inline bool Settings::showUsersOnConnection() const { return m_showUsersOnConnection; }
+inline void Settings::setShowChatsOnConnection( bool new_value ) { m_showChatsOnConnection = new_value; if( m_showChatsOnConnection ) m_showUsersOnConnection = false; }
+inline bool Settings::showChatsOnConnection() const { return m_showChatsOnConnection; }
+
+inline void Settings::setHideEmptyChatsInList( bool new_value ) { m_hideEmptyChatsInList = new_value; }
+inline bool Settings::hideEmptyChatsInList() const { return m_hideEmptyChatsInList; }
+
 inline bool Settings::canAddMembersToGroup() const { return m_canAddMembersToGroup; }
 inline bool Settings::canRemoveMembersFromGroup() const { return m_canRemoveMembersFromGroup; }
 inline bool Settings::disableCreateMessage() const { return m_disableCreateMessage; }
