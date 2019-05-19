@@ -32,7 +32,7 @@ class GuiChatItem : public QTreeWidgetItem
 {
 
 public:
-  enum ChatDataType { ChatId = Qt::UserRole+2, ChatName, ChatIsGroup, ChatUnreadMessages, ChatMessages };
+  enum ChatDataType { ChatId = Qt::UserRole+2, ChatName, ChatIsGroup, ChatUnreadMessages, ChatMessages, ChatLastMessageTimestamp };
 
   GuiChatItem( QTreeWidget* );
 
@@ -43,7 +43,8 @@ public:
   inline void setIsGroup( bool );
   inline bool isGroup() const;
   inline int unreadMessages() const;
-  QString chatName() const;
+  inline QString chatName() const;
+  inline QDateTime lastMessageTimestamp() const;
 
   bool updateItem( const Chat& );
 
@@ -66,5 +67,6 @@ inline void GuiChatItem::setIsGroup( bool new_value ) { setData( 0, ChatIsGroup,
 inline bool GuiChatItem::isGroup() const { return data( 0, ChatIsGroup ).toBool(); }
 inline int GuiChatItem::unreadMessages() const { return data( 0, ChatUnreadMessages ).toInt(); }
 inline QString GuiChatItem::chatName() const { return data( 0, ChatName ).toString(); }
+QDateTime GuiChatItem::lastMessageTimestamp() const { return data( 0, ChatLastMessageTimestamp ).toDateTime(); }
 
 #endif // BEEBEEP_GUICHATITEM_H

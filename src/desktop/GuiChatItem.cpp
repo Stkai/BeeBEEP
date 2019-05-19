@@ -37,6 +37,7 @@ GuiChatItem::GuiChatItem( QTreeWidget* parent )
   setData( 0, ChatIsGroup, false );
   setData( 0, ChatUnreadMessages, 0 );
   setData( 0, ChatMessages, 0 );
+  setData( 0, ChatLastMessageTimestamp, QDateTime( QDate( 1975, 4, 6), QTime( 7, 15 ) ) );
 }
 
 bool GuiChatItem::operator<( const QTreeWidgetItem& item ) const
@@ -56,6 +57,12 @@ bool GuiChatItem::operator<( const QTreeWidgetItem& item ) const
   other_messages = item.data( 0, GuiChatItem::ChatMessages ).toInt();
   if( chat_messages != other_messages )
     return chat_messages < other_messages;
+
+  QDateTime chat_timestamp = lastMessageTimestamp();
+  QDateTime other_timestamp = item.data( 0, GuiChatItem::ChatLastMessageTimestamp ).toDateTime();
+
+  if( chat_timestamp != other_timestamp )
+    return chat_timestamp < other_timestamp;
 
   return data( 0, GuiChatItem::ChatName ).toString().toLower() < item.data( 0, GuiChatItem::ChatName ).toString().toLower();
 }
@@ -114,6 +121,8 @@ bool GuiChatItem::updateItem( const Chat& c )
   setToolTip( 0, tool_tip );
   setData( 0, ChatUnreadMessages, c.unreadMessages() );
   setData( 0, ChatMessages, c.messages().size() + ChatManager::instance().savedChatSize( c.name() ) );
+  if( c.lastMessageTimestamp().isValid() )
+    setData( 0, ChatLastMessageTimestamp, c.lastMessageTimestamp() );
   if( m_defaultIcon.isNull() )
     m_defaultIcon = IconManager::instance().icon( "chat.png" );
   if( !chatHasOnlineUsers( c ) )
