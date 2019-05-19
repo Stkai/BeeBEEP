@@ -374,7 +374,7 @@ void BeeApplication::setMainWidget( QWidget* w )
   mp_mainWidget = w;
 }
 
-void BeeApplication::isDesktopLocked()
+bool BeeApplication::isDesktopLocked()
 {
   return m_isDesktopLocked;
 }
