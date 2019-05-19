@@ -47,6 +47,8 @@ public:
   bool otherInstanceExists();
   void preventMultipleInstances();
 
+  void setMainWidget( QWidget* );
+
   void init();
   void setIdleTimeout( int ); // in minutes
   inline int idleTimeout() const;
@@ -88,6 +90,7 @@ protected:
   bool isScreenSaverRunning();
   QString localServerName() const;
   void addSleepWatcher();
+  bool isDesktopLocked();
 
 protected slots:
   void checkTicks( int );
@@ -112,8 +115,11 @@ private:
 #endif
 
   bool m_isInSleepMode;
+  bool m_isDesktopLocked;
 
   TickManager* mp_tickManager;
+
+  QWidget* mp_mainWidget;
 
 };
 

@@ -53,6 +53,7 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
   m_isInIdle = false;
   mp_localServer = Q_NULLPTR;
   m_isInSleepMode = false;
+  m_isDesktopLocked = false;
 
   mp_jobThread = new QThread();
   m_jobsInProgress = 0;
@@ -184,7 +185,7 @@ bool BeeApplication::notify( QObject* obj_receiver, QEvent* obj_event )
 
 void BeeApplication::checkIdle()
 {
-  if( isScreenSaverRunning() || idleTimeFromSystem() > m_idleTimeout )
+  if( isScreenSaverRunning() || isDesktopLocked() || idleTimeFromSystem() > m_idleTimeout )
     setIdle();
   else
     removeIdle();
@@ -365,4 +366,16 @@ void BeeApplication::checkTicks( int ticks )
 #if !defined( Q_OS_WIN ) && !defined( Q_OS_MAC )
 void BeeApplication::addSleepWatcher()
 {}
+#endif
+
+#if !defined( Q_OS_WIN )
+void BeeApplication::setMainWidget( QWidget* w )
+{
+  mp_mainWidget = w;
+}
+
+void BeeApplication::isDesktopLocked()
+{
+  return m_isDesktopLocked;
+}
 #endif

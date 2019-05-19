@@ -120,7 +120,7 @@ int main( int argc, char *argv[] )
   qDebug() << "Font selected for chat:" << chat_font.toString();
   qDebug() << "Font pixel size:" << chat_font.pixelSize();
   qDebug() << "Font point size:" << chat_font.pointSize();
-  qDebug() << "Font height:" << (int)(QFontMetrics( chat_font).height() );
+  qDebug() << "Font height:" << static_cast<int>(QFontMetrics( chat_font).height() );
   qDebug() << "Emoticon size in chat:" << Settings::instance().emoticonSizeInChat();
   qDebug() << "Emoticon size in edit:" << Settings::instance().emoticonSizeInEdit();
 #endif
@@ -238,6 +238,7 @@ int main( int argc, char *argv[] )
   QMetaObject::invokeMethod( &mw, "checkWindowFlagsAndShow", Qt::QueuedConnection );
   qDebug() << "Loading saved session";
   mw.loadSession();
+  bee_app.setMainWidget( &mw );
   /* Event Loop */
   qDebug() << "Enter in the main event loop";
   int iRet = bee_app.exec();

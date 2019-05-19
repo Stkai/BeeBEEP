@@ -26,6 +26,16 @@
 #if QT_VERSION < 0x050000  // qt 4.8
 #include "qt_windows.h"
 #endif
+// For WTSRegisterSessionNotification and Session Change message
+#include <WtsApi32.h>
+#pragma comment(lib,"wtsapi32.lib")
+
+
+void BeeApplication::setMainWidget( QWidget* w )
+{
+  mp_mainWidget = w;
+  WTSRegisterSessionNotification( reinterpret_cast<HWND>(mp_mainWidget->winId()), NOTIFY_FOR_THIS_SESSION );
+}
 
 bool BeeApplication::winEventFilter( MSG* event_message, long* event_result )
 {
@@ -39,7 +49,62 @@ bool BeeApplication::winEventFilter( MSG* event_message, long* event_result )
       wakeFromSleep();
   }
 
+  if( event_message->message == WM_WTSSESSION_CHANGE )
+  {
+    if( event_message->wParam == WTS_SESSION_LOCK )
+    {
+#ifdef BEEBEEP_DEBUG
+      qDebug() << "Session change detected: desktop is locked";
+#endif
+      if( !m_isDesktopLocked )
+      {
+        m_isDesktopLocked = true;
+        setIdle();
+      }
+    }
+
+    if( event_message->wParam == WTS_SESSION_UNLOCK )
+    {
+#ifdef BEEBEEP_DEBUG
+      qDebug() << "Session change detected: desktop is now unlocked";
+#endif
+      if( m_isDesktopLocked )
+        m_isDesktopLocked = false;
+    }
+
+    if( event_message->wParam == WTS_SESSION_LOGOFF )
+    {
+#ifdef BEEBEEP_DEBUG
+      qDebug() << "Session change detected: logoff";
+#endif
+      forceShutdown();
+    }
+  }
   return false; // Qt must handle event every time
+}
+
+bool IsDesktopAvailable()
+{
+  HDESK desktop = OpenDesktop( TEXT( "Default" ), 0, false, DESKTOP_SWITCHDESKTOP );
+  if( desktop )
+  {
+    if( SwitchDesktop( desktop ) )
+    {
+      CloseDesktop(desktop);
+      return true;
+    }
+    else
+    {
+      CloseDesktop( desktop );
+    }
+  }
+  return false;
+}
+
+bool BeeApplication::isDesktopLocked()
+{
+  // Using Win Event Filter instead of !isDesktopAvailable()
+  return m_isDesktopLocked;
 }
 
 #if QT_VERSION >= 0x050000
