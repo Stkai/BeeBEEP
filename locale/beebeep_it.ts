@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -2637,7 +2637,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Create a message</source>
-        <translation type="vanished">Crea un messaggio</translation>
+        <translation type="obsolete">Crea un messaggio</translation>
     </message>
     <message>
         <source>none</source>
@@ -2661,7 +2661,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show the user list at once</source>
-        <translation type="vanished">Mostra subito la lista degli utenti</translation>
+        <translation type="obsolete">Mostra subito la lista degli utenti</translation>
     </message>
     <message>
         <source>Raise previously opened chat on new message</source>

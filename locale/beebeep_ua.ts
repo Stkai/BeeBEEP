@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="uk_UA" sourcelanguage="en">
+<TS version="2.0" language="uk_UA" sourcelanguage="en">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -2077,7 +2077,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Show the user list at once</source>
-        <translation type="vanished">Показувати перелік користувачів відразу</translation>
+        <translation type="obsolete">Показувати перелік користувачів відразу</translation>
     </message>
     <message>
         <source>Use font emoticons</source>
@@ -2333,7 +2333,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Create a message</source>
-        <translation type="vanished">Створити повідомлення</translation>
+        <translation type="obsolete">Створити повідомлення</translation>
     </message>
     <message>
         <source>Do you want to close anyway?</source>
