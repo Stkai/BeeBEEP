@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="nl_BE" sourcelanguage="en_US">
+<TS version="2.1" language="nl_BE" sourcelanguage="en_US">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -1218,12 +1218,12 @@
     <message>
         <location filename="../src/desktop/GuiChatList.cpp" line="145"/>
         <source>Hide empty chats</source>
-        <translation type="unfinished"></translation>
+        <translation>Verberg lege chats</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatList.cpp" line="161"/>
         <source>Write a message</source>
-        <translation type="unfinished"></translation>
+        <translation>Schrijf een bericht</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatList.cpp" line="162"/>
@@ -1317,7 +1317,7 @@
     <message>
         <location filename="../src/desktop/GuiCreateGroup.ui" line="33"/>
         <source>Cancel</source>
-        <translation>Afbreken</translation>
+        <translation>Annuleren</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateGroup.cpp" line="40"/>
@@ -1873,7 +1873,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiLanguage.ui" line="205"/>
         <source>Cancel</source>
-        <translation>Afbreken</translation>
+        <translation>Annuleren</translation>
     </message>
 </context>
 <context>
@@ -2141,7 +2141,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="720"/>
         <source>Write a message</source>
-        <translation type="unfinished"></translation>
+        <translation>Schrijf een bericht</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="982"/>
@@ -2753,12 +2753,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="829"/>
         <source>Show the user list</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon de gebruikerslijst</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="833"/>
         <source>Show the chat list</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon de chatlijst</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="907"/>
@@ -3368,7 +3368,7 @@ Gebruik aub een andere naam.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="4281"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4287"/>
         <source>Cancel</source>
-        <translation>Afbreken</translation>
+        <translation>Annuleer</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="293"/>
@@ -4117,22 +4117,22 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/gui/GuiSelectItems.cpp" line="65"/>
         <source>One or more elements of the list have been selected but are hidden by the search text. Do you still want to add them?</source>
-        <translation type="unfinished"></translation>
+        <translation>Een of meer elementen van de lijst zijn geselecteerd maar worden verborgen door de zoektekst. Wil je ze nog steeds toevoegen?</translation>
     </message>
     <message>
         <location filename="../src/gui/GuiSelectItems.cpp" line="66"/>
         <source>Yes</source>
-        <translation type="unfinished">Ja</translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <location filename="../src/gui/GuiSelectItems.cpp" line="66"/>
         <source>No</source>
-        <translation type="unfinished">Nee</translation>
+        <translation>Nee</translation>
     </message>
     <message>
         <location filename="../src/gui/GuiSelectItems.cpp" line="66"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuleer</translation>
     </message>
 </context>
 <context>
@@ -4140,12 +4140,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/gui/GuiSelectItems.ui" line="48"/>
         <source>Search</source>
-        <translation type="unfinished">Zoek</translation>
+        <translation>Zoek</translation>
     </message>
     <message>
         <location filename="../src/gui/GuiSelectItems.ui" line="61"/>
         <source>Clear filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Filter opschonen</translation>
     </message>
     <message>
         <location filename="../src/gui/GuiSelectItems.ui" line="92"/>
