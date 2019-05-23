@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="uk_UA" sourcelanguage="en">
+<TS version="2.0" language="uk_UA" sourcelanguage="en">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -3701,6 +3701,34 @@ Please select a different name.</source>
     <message>
         <source>Change background color</source>
         <translation>Змінити колір фону</translation>
+    </message>
+    <message>
+        <source>You cannot send files to %1 because the user is offline.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to send %1 %2 to %3?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>file</source>
+        <translation type="unfinished">файл</translation>
+    </message>
+    <message>
+        <source>files</source>
+        <translation type="unfinished">файли</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished">Так</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished">Ні</translation>
+    </message>
+    <message>
+        <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
+        <translation type="unfinished">Бібліотека Qt для цієї ОС не підтримує перетаскування файлів. Вам необхідно Вибрати знову файл для відправки.</translation>
     </message>
 </context>
 <context>

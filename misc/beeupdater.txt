@@ -1,14 +1,14 @@
 [Windows]
-CurrentVersion=4.2.0
+CurrentVersion=5.6.1
 
 [Linux]
-CurrentVersion=4.2.0
+CurrentVersion=5.6.1
 
 [MacOSX]
-CurrentVersion=4.2.0
+CurrentVersion=5.6.1
 
 [OS2]
-CurrentVersion=4.2.0
+CurrentVersion=5.6.1
 
 [Info]
 News="<a style='text-decoration: none;' href='http://www.marcomastroddi.com'><b><font color=#dede00>Give a look to Marco Mastroddi new website!</font></a></b><br /><i>Get Lucky!</i><br /><b>Go Wild!</b>"

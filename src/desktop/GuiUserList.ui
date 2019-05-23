@@ -16,6 +16,9 @@
     <height>0</height>
    </size>
   </property>
+  <property name="acceptDrops">
+   <bool>true</bool>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
     <number>0</number>
@@ -34,6 +37,9 @@
    </property>
    <item row="0" column="0">
     <widget class="QTreeWidget" name="mp_twUsers">
+     <property name="dragDropMode">
+      <enum>QAbstractItemView::DropOnly</enum>
+     </property>
      <column>
       <property name="text">
        <string notr="true">1</string>

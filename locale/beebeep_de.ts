@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE" sourcelanguage="en">
+<TS version="2.0" language="de_DE" sourcelanguage="en">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -2517,7 +2517,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br /&gt;it under the terms of the GNU General Public License as published&lt;br /&gt;by the Free Software Foundation, either version 3 of the License&lt;br /&gt;or (at your option) any later version.&lt;br /&gt;&lt;br /&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br /&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br /&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br /&gt;See the GNU General Public License for more details.</source>
-        <translation type="obsolete">BeeBEEP ist freie Software. Du kannst sie gemäß&lt;br /&gt;den Bedingungen der GNU General Public License&lt;br /&gt;laut Veröffentlichung der Free Software Foundation&lt;br /&gt;Lizenzauflage&#xa0;3 oder (optional) einer neueren Auflage verbreiten und/oder verändern.&lt;br /&gt;&lt;br /&gt;BeeBEEP wird mit dem Ziel bereitgestellt, einen Nutzen zu bringen,&lt;br /&gt;aber UNTER AUSSCHLUSS JEGLICHER GEWÄHRLEISTUNG,&lt;br /&gt;selbst der stillschweigenden Gewährleistung auf MARKTGÄNGIGKEIT oder&lt;br /&gt;EIGNUNG FÜR EINEN BESTIMMTEN ZWECK&lt;br /&gt; Weitere Details kannst du der GNU General Public License entnehmen.</translation>
+        <translation type="obsolete">BeeBEEP ist freie Software. Du kannst sie gemäß&lt;br /&gt;den Bedingungen der GNU General Public License&lt;br /&gt;laut Veröffentlichung der Free Software Foundation&lt;br /&gt;Lizenzauflage 3 oder (optional) einer neueren Auflage verbreiten und/oder verändern.&lt;br /&gt;&lt;br /&gt;BeeBEEP wird mit dem Ziel bereitgestellt, einen Nutzen zu bringen,&lt;br /&gt;aber UNTER AUSSCHLUSS JEGLICHER GEWÄHRLEISTUNG,&lt;br /&gt;selbst der stillschweigenden Gewährleistung auf MARKTGÄNGIGKEIT oder&lt;br /&gt;EIGNUNG FÜR EINEN BESTIMMTEN ZWECK&lt;br /&gt; Weitere Details kannst du der GNU General Public License entnehmen.</translation>
     </message>
     <message>
         <source>Please save the network password in the next dialog if you want to use password without prompt.</source>
@@ -3765,6 +3765,34 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>Change background color</source>
         <translation>Hintergrundfarbe ändern</translation>
+    </message>
+    <message>
+        <source>You cannot send files to %1 because the user is offline.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to send %1 %2 to %3?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>file</source>
+        <translation type="unfinished">Datei</translation>
+    </message>
+    <message>
+        <source>files</source>
+        <translation type="unfinished">Dateien</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished">Ja</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished">Nein</translation>
+    </message>
+    <message>
+        <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
+        <translation type="unfinished">Die Qt-Bibliothek dieses Betriebssystems unterstützt Ziehen und Ablegen von Dateien nicht. Du musst die Datei zum Senden erneut auswählen.</translation>
     </message>
 </context>
 <context>

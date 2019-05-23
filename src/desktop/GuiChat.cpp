@@ -818,7 +818,7 @@ void GuiChat::checkAndSendUrls( const QMimeData* source )
     {
       QMessageBox::information( this, Settings::instance().programName(),
                                 tr( "Qt library for this OS doesn't support Drag and Drop for files. You have to select again the file to send." ) );
-      qWarning() << "Drag and drop has invalid file path" << local_file;
+      qWarning() << "Qt error: drag and drop has invalid file path" << local_file;
       return;
     }
 

@@ -25,6 +25,7 @@
 #include "GuiUserList.h"
 #include "GuiConfig.h"
 #include "IconManager.h"
+#include "Protocol.h"
 #include "Settings.h"
 #include "UserManager.h"
 
@@ -324,3 +325,127 @@ void GuiUserList::updateBackground()
                                                                   IconManager::instance().iconPath( "user-list.png" ) );
   mp_twUsers->setStyleSheet( w_stylesheet );
 }
+
+void GuiUserList::dragEnterEvent( QDragEnterEvent* event )
+{
+  if( event->mimeData()->hasUrls() )
+  {
+    QTreeWidgetItem* item = mp_twUsers->itemAt( event->pos() );
+    if( item )
+    {
+      item->setSelected( true );
+      event->acceptProposedAction();
+    }
+  }
+}
+
+void GuiUserList::dragMoveEvent( QDragMoveEvent* event )
+{
+  if( event->mimeData()->hasUrls() )
+  {
+    QTreeWidgetItem* item = mp_twUsers->itemAt( event->pos() );
+    if( item  )
+    {
+      int user_status = item->data( 0, GuiUserItem::Status ).toInt();
+      if( user_status != User::Offline )
+      {
+        if( !item->isSelected() )
+        {
+          mp_twUsers->clearSelection();
+          item->setSelected( true );
+        }
+      }
+      else
+        mp_twUsers->clearSelection();
+    }
+  }
+}
+
+void GuiUserList::dropEvent( QDropEvent *event )
+{
+  if( event->mimeData()->hasUrls() )
+  {
+    QTreeWidgetItem* item = mp_twUsers->itemAt( event->pos() );
+    checkAndSendUrls( item, event->mimeData() );
+    mp_twUsers->clearSelection();
+  }
+}
+
+void GuiUserList::checkAndSendUrls( QTreeWidgetItem* item, const QMimeData* source )
+{
+  if( !source->hasUrls() )
+    return;
+
+  if( !item )
+    return;
+
+  GuiUserItem* user_item = dynamic_cast<GuiUserItem*>(item);
+  if( !user_item )
+  {
+    qWarning() << "Invalid item found in GuiUserList::checkAndSendUrls";
+    return;
+  }
+
+  QString user_name = user_item->data( 0, GuiUserItem::UserName ).toString();
+  VNumber chat_id = user_item->chatId();
+  int user_status = user_item->data( 0, GuiUserItem::Status ).toInt();
+  if( user_status == User::Offline )
+  {
+    QMessageBox::information( this, Settings::instance().programName(), tr( "You cannot send files to %1 because the user is offline." ).arg( user_name ) );
+    return;
+  }
+
+  QStringList file_path_list;
+  QString file_path;
+  int num_files = 0;
+
+  foreach( QUrl url, source->urls() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Checking pasted url:" << qPrintable( url.toString() );
+#endif
+
+#if QT_VERSION >= 0x040800
+    if( url.isLocalFile() )
+#else
+    if( url.scheme() == QLatin1String( "file" ) )
+#endif
+    {
+      file_path = url.toLocalFile();
+      num_files += Protocol::instance().countFilesCanBeSharedInPath( file_path );
+      if( num_files > Settings::instance().maxQueuedDownloads() )
+        break;
+      file_path_list.append( file_path );
+    }
+  }
+
+  if( num_files <= 0 )
+    return;
+
+  num_files = qMin( num_files, Settings::instance().maxQueuedDownloads() );
+
+  if( QMessageBox::question( this, Settings::instance().programName(),
+                             tr( "Do you want to send %1 %2 to %3?" ).arg( num_files )
+                             .arg( num_files == 1 ? tr( "file" ) : tr( "files" ) ).arg( user_name ),
+                             tr( "Yes" ), tr( "No" ), QString(), 0, 1 ) == 1 )
+  {
+    return;
+  }
+
+  foreach( QString local_file, file_path_list )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Drag and drop: send file" << local_file << "to chat" << chat_id;
+#endif
+    if( !QFile::exists( local_file ) )
+    {
+      QMessageBox::information( this, Settings::instance().programName(),
+                                tr( "Qt library for this OS doesn't support Drag and Drop for files. You have to select again the file to send." ) );
+      qWarning() << "Qt error: drag and drop has invalid file path" << local_file;
+      return;
+    }
+
+    emit sendFileToChatRequest( chat_id, local_file );
+  }
+}
+

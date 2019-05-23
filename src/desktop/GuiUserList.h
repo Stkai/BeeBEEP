@@ -57,6 +57,7 @@ signals:
   void userSelected( VNumber );
   void chatSelected( VNumber );
   void showVCardRequest( VNumber );
+  void sendFileToChatRequest( VNumber, const QString& );
 
 protected slots:
   void userItemClicked( QTreeWidgetItem*, int );
@@ -73,6 +74,10 @@ protected:
   void sortUsers();
   void resetList();
   void updateBackground();
+  void dragEnterEvent( QDragEnterEvent* );
+  void dragMoveEvent( QDragMoveEvent* );
+  void dropEvent( QDropEvent* );
+  void checkAndSendUrls( QTreeWidgetItem*, const QMimeData* );
 
 private:
   QString m_filter;
