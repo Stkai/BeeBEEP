@@ -95,6 +95,7 @@ SOURCES +=  desktop/BeeApplication.cpp \
   desktop/Main.cpp
 
 win32: SOURCES += desktop/BeeApplication_win.cpp
+win32: LIBS += -lwtsapi32
 macx: SOURCES += desktop/BeeApplication_mac.cpp
 
 FORMS += desktop/GuiAddUser.ui \

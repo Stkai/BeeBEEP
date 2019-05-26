@@ -28,7 +28,6 @@
 #endif
 // For WTSRegisterSessionNotification and Session Change message
 #include <WtsApi32.h>
-#pragma comment(lib,"wtsapi32.lib")
 
 
 void BeeApplication::setMainWidget( QWidget* w )
