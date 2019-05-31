@@ -56,9 +56,10 @@ include(gui/gui.pri)
 include(desktop/desktop.pri)
 include(override/override.pri)
 include(utils/utils.pri)
-win32:macx:unix: {
+win32|unix|macx {
   include(sharedesktop/sharedesktop.pri)
 }
+
 
 HEADERS += Interfaces.h Tips.h
 
