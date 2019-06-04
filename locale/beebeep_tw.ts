@@ -2703,6 +2703,10 @@ Please select a different name.</source>
         <source>Write a message</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Raise main window on new message</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

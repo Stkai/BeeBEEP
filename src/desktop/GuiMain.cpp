@@ -918,6 +918,10 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().showChatsInOneWindow() );
   act->setData( 7 );
+  act = mp_menuChatSettings->addAction( tr( "Raise main window on new message" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().raiseMainWindowOnNewMessageArrived() );
+  act->setData( 80 );
   act = mp_menuChatSettings->addAction( tr( "Always open chat on new message" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().alwaysOpenChatOnNewMessageArrived() );
@@ -1781,6 +1785,9 @@ void GuiMain::settingsChanged( QAction* act )
     Settings::instance().setShowChatsOnConnection( act->isChecked() );
     mp_actShowUserListOnConnection->setChecked( Settings::instance().showUsersOnConnection() );
     break;
+  case 80:
+    Settings::instance().setRaiseMainWindowOnNewMessageArrived( act->isChecked() );
+    break;
   case 99:
     break;
   default:
@@ -1859,11 +1866,10 @@ void GuiMain::showAlertForMessage( const Chat& c, const ChatMessage& cm )
       show_message_in_tray = false;
     }
   }
-  else
-  {
-    if( Settings::instance().raiseOnNewMessageArrived() )
-      raiseOnTop();
-  }
+
+  if( Settings::instance().raiseMainWindowOnNewMessageArrived() )
+    raiseOnTop();
+
 
   updateNewMessageAction();
 
@@ -2222,7 +2228,7 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi, const QStrin
     {
       if( isMinimized() || !isActiveWindow() )
       {
-        if( Settings::instance().raiseOnNewMessageArrived() )
+        if( Settings::instance().raiseMainWindowOnNewMessageArrived() )
           raiseOnTop();
         mp_actViewNewMessage->setEnabled( true );
       }

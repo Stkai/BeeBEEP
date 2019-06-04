@@ -2,7 +2,8 @@ BEEBEEP (Secure Lan Messanger) - CHANGELOG - (c) Marco Mastroddi
 
 BeeBEEP 5.6.2 (Developing version)
 - New feature: you can also send files (dragging and) dropping them on the user in main user list window
-
+- Added "RaiseMainWindowOnNewMessageArrived" option
+-(Desktop Sharing feature re-enabled)
 
 BeeBEEP 5.6.1
 - Updated to Qt 5.9.8 (Windows)
@@ -10,6 +11,7 @@ BeeBEEP 5.6.1
 - Windows installer now creates a rule in firewall for BeeBEEP 
 - Added "ShowChatsOnConnection" option to show the chat list at startup
 - Added "HideEmptyChatsInList" option to hide empty chats in list
+- (Disabled Desktop Sharing feature for testing)
 
 BeeBEEP 5.6.0
 - Now the Avatar icon border in the chat right panel will be yellow if the messages have not yet been 
@@ -32,6 +34,7 @@ BeeBEEP 5.6.0
 - Added "IP Multicast TTL" option
 - Added "Use the dark theme" option (beta)
 - Added "RaiseOnNewFileTransfer" option
+- (Disabled Desktop Sharing feature for testing)
 
 BeeBEEP 5.4.2
 - Removed option "On close minimize on tray" for MacOSX

@@ -1039,6 +1039,7 @@ void Settings::load()
 #endif
   m_stayOnTop = sets->value( "StayOnTop", false ).toBool();
   m_raiseOnNewMessageArrived = sets->value( "RaiseOnNewMessageArrived", false ).toBool();
+  m_raiseMainWindowOnNewMessageArrived = sets->value( "RaiseMainWindowOnNewMessageArrived", false ).toBool();
   m_alwaysShowFileTransferProgress = sets->value( "AlwaysShowFileTransferProgress", false ).toBool();
   m_alwaysOpenChatOnNewMessageArrived = sets->value( "AlwaysOpenChatOnNewMessageArrived", true ).toBool();
   m_beepFilePath = checkFilePath( Bee::convertToNativeFolderSeparator( sets->value( "BeepFilePath", defaultBeepFilePath( true ) ).toString() ), defaultBeepFilePath( true ) );
@@ -1389,6 +1390,7 @@ void Settings::save()
   sets->setValue( "StayOnTop", m_stayOnTop );
   sets->setValue( "BeepFilePath", m_beepFilePath );
   sets->setValue( "RaiseOnNewMessageArrived", m_raiseOnNewMessageArrived );
+  sets->setValue( "RaiseMainWindowOnNewMessageArrived", m_raiseMainWindowOnNewMessageArrived );
   sets->setValue( "AlwaysShowFileTransferProgress", m_alwaysShowFileTransferProgress );
   sets->setValue( "AlwaysOpenChatOnNewMessageArrived", m_alwaysOpenChatOnNewMessageArrived );
   sets->setValue( "LoadOnTrayAtStartup", m_loadOnTrayAtStartup );

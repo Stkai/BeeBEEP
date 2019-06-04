@@ -216,6 +216,9 @@ public:
   inline void setStayOnTop( bool );
   inline bool raiseOnNewMessageArrived() const;
   inline void setRaiseOnNewMessageArrived( bool );
+  inline bool raiseMainWindowOnNewMessageArrived() const;
+  inline void setRaiseMainWindowOnNewMessageArrived( bool );
+
   inline bool alwaysShowFileTransferProgress() const;
   inline void setalwaysShowFileTransferProgress( bool );
   inline bool alwaysOpenChatOnNewMessageArrived() const;
@@ -646,6 +649,7 @@ private:
   bool m_stayOnTop;
   bool m_alwaysOpenChatOnNewMessageArrived;
   bool m_raiseOnNewMessageArrived;
+  bool m_raiseMainWindowOnNewMessageArrived;
   bool m_alwaysShowFileTransferProgress;
   bool m_showUserPhoto;
   bool m_showTipsOfTheDay;
@@ -919,6 +923,8 @@ inline bool Settings::stayOnTop() const { return m_stayOnTop; }
 inline void Settings::setStayOnTop( bool new_value ) { m_stayOnTop = new_value; }
 inline bool Settings::raiseOnNewMessageArrived() const { return m_raiseOnNewMessageArrived; }
 inline void Settings::setRaiseOnNewMessageArrived( bool new_value ) { m_raiseOnNewMessageArrived = new_value; }
+inline bool Settings::raiseMainWindowOnNewMessageArrived() const { return m_raiseMainWindowOnNewMessageArrived; }
+inline void Settings::setRaiseMainWindowOnNewMessageArrived( bool new_value ) { m_raiseMainWindowOnNewMessageArrived = new_value; }
 inline bool Settings::alwaysShowFileTransferProgress() const { return m_alwaysShowFileTransferProgress; }
 inline void Settings::setalwaysShowFileTransferProgress( bool new_value ) { m_alwaysShowFileTransferProgress = new_value; }
 inline bool Settings::alwaysOpenChatOnNewMessageArrived() const { return m_alwaysOpenChatOnNewMessageArrived; }
