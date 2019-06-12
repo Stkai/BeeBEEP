@@ -2711,7 +2711,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="921"/>
         <source>Raise main window on new message</source>
-        <translation type="unfinished"></translation>
+        <translation>Przywróc główne okno przy nowej wiadomości</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="925"/>
@@ -4701,37 +4701,37 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="394"/>
         <source>You cannot send files to %1 because the user is offline.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie możesz wysłać plików do %1 ponieważ użytkownik jest niedostępny.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="428"/>
         <source>Do you want to send %1 %2 to %3?</source>
-        <translation type="unfinished"></translation>
+        <translation>Czy chcesz wysłać %1 %2 do %3?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="429"/>
         <source>file</source>
-        <translation type="unfinished">plik</translation>
+        <translation>plik</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="429"/>
         <source>files</source>
-        <translation type="unfinished">plików</translation>
+        <translation>plików</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="430"/>
         <source>Yes</source>
-        <translation type="unfinished">Tak</translation>
+        <translation>Tak</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="430"/>
         <source>No</source>
-        <translation type="unfinished">Nie</translation>
+        <translation>Nie</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="443"/>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation type="unfinished">Biblioteka Qt w tym systemie nie wspiera przeciągania i upuszczania plików. Musisz wybrać jeszcze raz by wysłać.</translation>
+        <translation>Biblioteka Qt w tym systemie nie wspiera przeciągania i upuszczania plików. Musisz wybrać jeszcze raz plik do wysłania.</translation>
     </message>
 </context>
 <context>

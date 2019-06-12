@@ -11,7 +11,7 @@
      beebeep_it.ts :  100%    0/(1102-60)
      beebeep_nb.ts :   56%    467/(1068-26)
      beebeep_nl.ts :   96%    44/(1079-37)
-     beebeep_pl.ts :  100%    8/(1047-5)
+     beebeep_pl.ts :  100%    0/(1047-5)
      beebeep_pt.ts :   92%    90/(1068-26)
      beebeep_rs.ts :   45%    581/(1062-20)
      beebeep_ru.ts :   95%    57/(1053-11)
