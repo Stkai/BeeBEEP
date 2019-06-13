@@ -934,15 +934,15 @@
     </message>
     <message>
         <source>Select chat default text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть колір тексту чату за замовчуванням</translation>
     </message>
     <message>
         <source>Select chat system text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть колір системного тексту чаті</translation>
     </message>
     <message>
         <source>You must close and reopen this window to see the changes applied.</source>
-        <translation type="unfinished"></translation>
+        <translation>Щоб застосовати зміни, потрібно закрити та знову відкрити вікно чату.</translation>
     </message>
 </context>
 <context>
@@ -981,11 +981,11 @@
     </message>
     <message>
         <source>Hide empty chats</source>
-        <translation type="unfinished"></translation>
+        <translation>Приховати пусті чати</translation>
     </message>
     <message>
         <source>Write a message</source>
-        <translation type="unfinished"></translation>
+        <translation>Написати повідомлення</translation>
     </message>
 </context>
 <context>
@@ -1110,7 +1110,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Marks the message as important</source>
-        <translation type="unfinished"></translation>
+        <translation>Позначити повідомлення як важливе</translation>
     </message>
 </context>
 <context>
@@ -1149,15 +1149,15 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Be careful, by changing the hash code you may no longer be a member of some groups and you will have to get invited again. Do you really want to regenerate your hash code?</source>
-        <translation type="unfinished"></translation>
+        <translation>Будьте обережні, змінюючи хеш-код, ви більше не зможете бути учасником деяких груп, і вам доведеться знову отримати запрошення. Ви дійсно хочете перегенерувати хеш-код?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished">Так</translation>
+        <translation>Так</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished">Ні</translation>
+        <translation>Ні</translation>
     </message>
 </context>
 <context>
@@ -1344,7 +1344,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Change background color</source>
-        <translation>Змінити колір фона</translation>
+        <translation>Змінити колір фону</translation>
     </message>
     <message>
         <source>Create new group chat</source>
@@ -1367,11 +1367,11 @@ Please select a different name.</source>
     <name>GuiGroupListWidget</name>
     <message>
         <source>Insert keywords</source>
-        <translation>Вставити ключові слова</translation>
+        <translation>Ввести текст для пошуку</translation>
     </message>
     <message>
         <source>Clear keywords</source>
-        <translation>Очистити ключові слова</translation>
+        <translation>Очистити текст пошуку</translation>
     </message>
 </context>
 <context>
@@ -1498,7 +1498,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Whole word</source>
-        <translation>Слово целиком</translation>
+        <translation>Слово повністю</translation>
     </message>
     <message>
         <source>Please select a file to save the log.</source>
@@ -1530,7 +1530,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Save log as</source>
-        <translation>Зберегти журнал как</translation>
+        <translation>зберегти журнал як</translation>
     </message>
     <message>
         <source>Copy to clipboard</source>
@@ -1558,7 +1558,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Case sensitive</source>
-        <translation>С урахуванням регістру</translation>
+        <translation>З урахуванням регістру</translation>
     </message>
 </context>
 <context>
@@ -1653,7 +1653,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Change your status description...</source>
-        <translation>Змінити опис вашого статуса...</translation>
+        <translation>Змінити опис вашого статусу...</translation>
     </message>
     <message>
         <source>Start the new application to copy file and folders by Marco Mastroddi</source>
@@ -2177,7 +2177,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Show only message notifications</source>
-        <translation>Показувати сповіщення тілько про повідомлення</translation>
+        <translation>Показати лише сповіщення про повідомлення</translation>
     </message>
     <message>
         <source>%1 removed</source>
@@ -2617,91 +2617,91 @@ Please select a different name.</source>
     </message>
     <message>
         <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it under the terms of the GNU General Public License as published&lt;br&gt;by the Free Software Foundation, either version 3 of the License&lt;br&gt;or (at your option) any later version.&lt;br&gt;&lt;br&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br&gt;See the GNU General Public License for more details.</source>
-        <translation type="unfinished"></translation>
+        <translation>BeeBEEP є вільним програмним забезпеченням: ви можете розповсюджувати його та / або змінювати&lt;br /&gt;згідно з умовами Загальної громадської ліцензії GNU опублікованої&lt;br /&gt;Фонду вільного програмного забезпечення, версії 3 ліцензії&lt;br /&gt; або (за вашим вибором) будь-якої більш пізньої версії.&lt;br  /&gt;&lt;br /&gt;BeeBEEP розповсюджується з надією, що він буде корисним, але без будь-якої гарантії; навіть без передбачуваної гарантії&lt;br /&gt;про комерційну або придатність для окремої мети.&lt;br /&gt; Докладнішу інформацію див. У GNU General Public License.</translation>
     </message>
     <message>
         <source>The option has been disabled by your system administrator.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ця опція відключена вашим системним адмістратором.</translation>
     </message>
     <message>
         <source>Enable notifications also for chat with all users</source>
-        <translation type="unfinished"></translation>
+        <translation>Увімкніть сповіщення також для спілкування з усіма користувачами</translation>
     </message>
     <message>
         <source>Select chat background color</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть колір фону чату</translation>
     </message>
     <message>
         <source>Select chat default text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть колір тексту чату за замовчуванням</translation>
     </message>
     <message>
         <source>Select chat system text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть колір системного тексту чату</translation>
     </message>
     <message>
         <source>Use the dark theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Використання темної теми</translation>
     </message>
     <message>
         <source>beta</source>
-        <translation type="unfinished"></translation>
+        <translation>бета</translation>
     </message>
     <message>
         <source>Please select the opacity percentage of inactive chat window (default: %1%)</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка виберіть відсоток прозорості неактивного вікна чату (за замовчуванням: %1%)</translation>
     </message>
     <message>
         <source>Show inactive chat window with %1% opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Показувати неактивне вікно чату з %1% прозорості</translation>
     </message>
     <message>
         <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br&gt;What do you want to do with the selected saved text?</source>
-        <translation type="unfinished"></translation>
+        <translation>У вибраному чаті &apos;%1&apos;  вже збережений текст. &lt;br&gt; Що робити з вибраним збереженим текстом?</translation>
     </message>
     <message>
         <source>Show the time with the AM/PM notation</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати час у форматі AM/PM</translation>
     </message>
     <message>
         <source>News</source>
-        <translation type="unfinished">Новини</translation>
+        <translation>Новини</translation>
     </message>
     <message>
         <source>Information about %1...</source>
-        <translation type="unfinished"></translation>
+        <translation>Інформація про %1...</translation>
     </message>
     <message>
         <source>Always shows the progress of file transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Завжди показувати прогрес передачі файлу</translation>
     </message>
     <message>
         <source>Restore the colors to the default ones</source>
-        <translation type="unfinished"></translation>
+        <translation>Встановити колір по замовчуванню</translation>
     </message>
     <message>
         <source>You must close and reopen the chat windows to see the changes applied.</source>
-        <translation type="unfinished"></translation>
+        <translation>Щоб застосовати зміни, потрібно закрити та знову відкрити вікна чату.</translation>
     </message>
     <message>
         <source>Do you really want to restore the colors to the default ones?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви дійсно хочете відновити колір до по замовчуванню?</translation>
     </message>
     <message>
         <source>Show the user list</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати список користувачів</translation>
     </message>
     <message>
         <source>Show the chat list</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати список чатів</translation>
     </message>
     <message>
         <source>Write a message</source>
-        <translation type="unfinished"></translation>
+        <translation>Написати повідомлення</translation>
     </message>
     <message>
         <source>Raise main window on new message</source>
-        <translation type="unfinished"></translation>
+        <translation>Активувати головне вікно з новим повідомленням</translation>
     </message>
 </context>
 <context>
@@ -2743,7 +2743,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>users</source>
-        <translation>Користувачі</translation>
+        <translation>користувачі</translation>
     </message>
     <message>
         <source>Network</source>
@@ -2842,19 +2842,19 @@ Please select a different name.</source>
     </message>
     <message>
         <source>(search users here by default)</source>
-        <translation>(шукати користувачів тут за замовчуванням)</translation>
+        <translation>(За замовчуванням шукати користувачів тут)</translation>
     </message>
     <message>
         <source>Contact offline users directly</source>
-        <translation type="unfinished"></translation>
+        <translation>Безпосередній зв’язок з відключеним користувачем</translation>
     </message>
     <message>
         <source>IP Multicast TTL</source>
-        <translation type="unfinished"></translation>
+        <translation>IP Мультикаст TTL</translation>
     </message>
     <message>
         <source>(only for IPv4 multicast)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Мультикаст тільки для IPv4)</translation>
     </message>
 </context>
 <context>
@@ -3064,7 +3064,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Search saved chat</source>
-        <translation>Пошук по збереженим чатум</translation>
+        <translation>Пошук в збережених чатах</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -3173,19 +3173,19 @@ Please select a different name.</source>
     <name>GuiSelectItems</name>
     <message>
         <source>One or more elements of the list have been selected but are hidden by the search text. Do you still want to add them?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вибрано один або кілька елементів списку, але вони приховані пошуковим текстом. Ви все ще хочете додати їх?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished">Так</translation>
+        <translation>Так</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished">Ні</translation>
+        <translation>Ні</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Відмінити</translation>
     </message>
 </context>
 <context>
@@ -3204,11 +3204,11 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished">Пошук</translation>
+        <translation>Пошук</translation>
     </message>
     <message>
         <source>Clear filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистити фільтр</translation>
     </message>
 </context>
 <context>
@@ -3607,15 +3607,15 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Тип</translation>
     </message>
     <message>
         <source>Global</source>
-        <translation type="unfinished"></translation>
+        <translation>Глобально</translation>
     </message>
     <message>
         <source>Local</source>
-        <translation type="unfinished"></translation>
+        <translation>Локально</translation>
     </message>
 </context>
 <context>
@@ -3708,31 +3708,31 @@ Please select a different name.</source>
     </message>
     <message>
         <source>You cannot send files to %1 because the user is offline.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не можна надіслати файли до %1, оскільки цей користувач відключений.</translation>
     </message>
     <message>
         <source>Do you want to send %1 %2 to %3?</source>
-        <translation type="unfinished"></translation>
+        <translation>Хочете надіслати %1 %2 до %3?</translation>
     </message>
     <message>
         <source>file</source>
-        <translation type="unfinished">файл</translation>
+        <translation>файл</translation>
     </message>
     <message>
         <source>files</source>
-        <translation type="unfinished">файли</translation>
+        <translation>файли</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished">Так</translation>
+        <translation>Так</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished">Ні</translation>
+        <translation>Ні</translation>
     </message>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation type="unfinished">Бібліотека Qt для цієї ОС не підтримує перетаскування файлів. Вам необхідно Вибрати знову файл для відправки.</translation>
+        <translation>Бібліотека Qt для цієї ОС не підтримує перетаскування файлів. Вам необхідно Вибрати знову файл для відправки.</translation>
     </message>
 </context>
 <context>
@@ -3857,7 +3857,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Regenerate your hash code...</source>
-        <translation type="unfinished"></translation>
+        <translation>Перегенрація вашого хеш коду...</translation>
     </message>
 </context>
 <context>
@@ -3919,7 +3919,7 @@ Please select a different name.</source>
     <name>GuiWebView</name>
     <message>
         <source>News</source>
-        <translation type="unfinished">Новини</translation>
+        <translation>Новини</translation>
     </message>
 </context>
 <context>
@@ -4049,7 +4049,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Show file transfers</source>
-        <translation>Показати передачи файлів</translation>
+        <translation>Показати передачу файлів</translation>
     </message>
     <message>
         <source>Open chat with all users</source>
@@ -4145,23 +4145,23 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Today is %1&apos;s birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Сьогодні день народження %1</translation>
     </message>
     <message>
         <source>Tomorrow is %1&apos;s birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Завтра день народження %1</translation>
     </message>
     <message>
         <source>%1&apos;s birthday is in %2 days</source>
-        <translation type="unfinished"></translation>
+        <translation>У %1 день народження за %2 днів</translation>
     </message>
     <message>
         <source>Yesterday was %1&apos;s birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Вчора був день народження %1</translation>
     </message>
     <message>
         <source>Happy Birthday to you!</source>
-        <translation type="unfinished">С днем нарождення!</translation>
+        <translation>З днем Нарождення!</translation>
     </message>
 </context>
 <context>
@@ -4187,7 +4187,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>If you want to format your message with words in regular and bold font write a [text to format] .</source>
-        <translation type="unfinished"></translation>
+        <translation>Якщо ви хочете відформатувати ваше повідомлення словами зі звичайним і напівжирним шрифтом, виділіть текст квадратними дужками [текст для форматування].</translation>
     </message>
 </context>
 <context>
@@ -4389,7 +4389,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>status error</source>
-        <translation>помилка статуса</translation>
+        <translation>помилка статусу</translation>
     </message>
     <message>
         <source>offline</source>

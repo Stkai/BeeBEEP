@@ -18,7 +18,7 @@
      beebeep_sv.ts :   59%    431/(1068-26)
      beebeep_tr.ts :   90%    114/(1052-10)
      beebeep_tw.ts :   42%    605/(1054-12)
-     beebeep_ua.ts :   95%    58/(1048-6)
+     beebeep_ua.ts :  100%    0/(1048-6)
      beebeep_vi.ts :   58%    441/(1066-24)
      beebeep_xx.ts :    0%    1042/(1042-0)
 
