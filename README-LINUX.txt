@@ -1,12 +1,12 @@
 /****************************************************************
  *                 LINUX INSTALL GUIDE                          *
- *  Latest version on: http://beebeep.sourceforge.net/help.php  *
+ *  Latest version on: https://beebeep.net/help                 *
  *                                                              *
  ****************************************************************/
 
 
 1) Download the right version for your system (32 or 64 bits):
-   http://beebeep.sourceforge.net/download.php
+   https://beebeep.net/download
 
 2) Uncompress the package in your favorite folder
 
