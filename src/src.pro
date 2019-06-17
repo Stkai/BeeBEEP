@@ -59,7 +59,11 @@ include(utils/utils.pri)
 win32|unix|macx {
   include(sharedesktop/sharedesktop.pri)
 }
-
+greaterThan(QT_MAJOR_VERSION, 4): {
+  greaterThan(QT_MINOR_VERSION, 4): {
+    include(videocall/videocall.pri)
+  }
+}
 
 HEADERS += Interfaces.h Tips.h
 
