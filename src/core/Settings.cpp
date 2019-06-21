@@ -124,6 +124,7 @@ Settings::Settings()
   m_localUser.setStatus( User::Online );
   m_localUser.setVersion( version( false, false ) );
   setPassword( defaultPassword() );
+
   m_resourceFolder = ".";
 #if QT_VERSION >= 0x050400
   m_dataFolder = Bee::convertToNativeFolderSeparator( QStandardPaths::writableLocation( QStandardPaths::AppDataLocation ) );
@@ -134,6 +135,7 @@ Settings::Settings()
 #else
   m_dataFolder = Bee::convertToNativeFolderSeparator( QDesktopServices::storageLocation( QDesktopServices::DataLocation ) );
 #endif
+
   m_lastSave = QDateTime::currentDateTime();
 
   m_preventMultipleConnectionsFromSingleHostAddress = true;
@@ -176,7 +178,6 @@ Settings::Settings()
 
   m_delayConnectionAtStartup = 5000;
 
-
   m_maxChatsToOpenAfterSendingMessage = 6;
   m_showUsersOnConnection = false;
   m_showChatsOnConnection = false;
@@ -189,6 +190,20 @@ Settings::Settings()
   m_useDarkStyle = false;
   m_chatDefaultUserNameColor = "#000000";
   resetAllColors();
+}
+
+void Settings::initFolders( const QString& app_folder )
+{
+  m_resourceFolder = app_folder;
+#if QT_VERSION >= 0x050400
+  m_dataFolder = Bee::convertToNativeFolderSeparator( QStandardPaths::writableLocation( QStandardPaths::AppDataLocation ) );
+#elif QT_VERSION >= 0x050000
+  m_dataFolder = Bee::convertToNativeFolderSeparator( QString( "%1/%2" )
+                   .arg( QStandardPaths::writableLocation( QStandardPaths::DataLocation ) )
+                   .arg( programName() ) );
+#else
+  m_dataFolder = Bee::convertToNativeFolderSeparator( QDesktopServices::storageLocation( QDesktopServices::DataLocation ) );
+#endif
 }
 
 void Settings::resetAllColors()

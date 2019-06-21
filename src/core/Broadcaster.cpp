@@ -266,7 +266,7 @@ void Broadcaster::readBroadcastDatagram()
     int sender_listener_port = m.text().toInt( &ok );
     if( !ok )
     {
-      qWarning() << "Broadcaster has received an invalid listener port" << datagram;
+      qWarning() << "Broadcaster has received an invalid listener port from datagram:" << datagram;
       continue;
     }
 
@@ -278,12 +278,10 @@ void Broadcaster::readBroadcastDatagram()
       continue;
     }
 
-#ifdef BEEBEEP_DEBUG
     if( sender_host_address.isNull() )
       qDebug() << "Broadcaster has found new peer" << qPrintable( sender_ip.toString() ) << sender_listener_port;
     else
       qDebug() << "Broadcaster has found new peer" << qPrintable( sender_ip.toString() ) << sender_listener_port << "with datagram from" << qPrintable( sender_host_address.toString() );
-#endif
     emit newPeerFound( sender_ip, sender_listener_port );
   }
 

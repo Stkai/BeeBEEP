@@ -36,6 +36,8 @@ class Settings
 public:
   QSettings* objectSettings() const; // deleteLater instance after call
 
+  void initFolders( const QString& app_folder );
+
   bool enableSaveData() const;
 
   QString currentSettingsFilePath() const;

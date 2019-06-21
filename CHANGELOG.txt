@@ -1,4 +1,4 @@
-BEEBEEP (Secure Lan Messanger) - CHANGELOG - (c) Marco Mastroddi
+BEEBEEP (Secure Office Messenger) - CHANGELOG - (c) Marco Mastroddi
 
 BeeBEEP 5.6.2 
 - New feature: you can also send files (dragging and) dropping them on the user in main user list window
