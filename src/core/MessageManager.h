@@ -37,6 +37,11 @@ public:
   void addMessageToSend( VNumber to_user_id, VNumber chat_id, const Message& );
   QList<MessageRecord> takeMessagesToSend( VNumber user_id );
 
+  void addMessageRecords( const QList<MessageRecord>& );
+
+  bool unsentMessagesCanBeSaved() const;
+  bool saveUnsentMessages();
+
   static MessageManager& instance()
   {
     if( !mp_instance )
@@ -49,7 +54,7 @@ public:
     if( mp_instance )
     {
       delete mp_instance;
-      mp_instance = NULL;
+      mp_instance = Q_NULLPTR;
     }
   }
 

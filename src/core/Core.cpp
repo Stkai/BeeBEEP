@@ -30,6 +30,7 @@
 #include "IconManager.h"
 #include "SaveChatList.h"
 #include "Settings.h"
+#include "MessageManager.h"
 #include "NetworkManager.h"
 #include "Protocol.h"
 #include "UserManager.h"
@@ -96,6 +97,7 @@ bool Core::checkSavingPaths()
 {
   bool settings_can_be_saved = true;
   bool chats_can_be_saved = true;
+  bool unsent_messages_can_be_saved = true;
 
   QSettings* sets = Settings::instance().objectSettings();
   sets->deleteLater();
@@ -130,9 +132,28 @@ bool Core::checkSavingPaths()
       qDebug() << "Chat messages will be saved in path:" << qPrintable( Settings::instance().savedChatsFilePath() );
   }
   else
-    qDebug() << "Save chat messages options is disabled";
+    qDebug() << "Save chat messages option is disabled";
 
-  return settings_can_be_saved && chats_can_be_saved;
+  if( Settings::instance().chatSaveUnsentMessages() )
+  {
+    if( !MessageManager::instance().unsentMessagesCanBeSaved() )
+    {
+      qWarning() << "User" << Settings::instance().localUser().accountName() << "cannot save unsent messages in path:" << qPrintable( Settings::instance().unsentMessagesFilePath() );
+      dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
+                             tr( "%1 User %2 cannot save unsent messages in path: %3" ).arg( IconManager::instance().toHtml( "warning.png", "*E*" ) )
+                                                                                .arg( Settings::instance().localUser().accountName() )
+                                                                                .arg( Settings::instance().unsentMessagesFilePath() ),
+                             DispatchToChat, ChatMessage::System );
+
+      unsent_messages_can_be_saved = false;
+    }
+    else
+      qDebug() << "Unsent messages will be saved in path:" << qPrintable( Settings::instance().unsentMessagesFilePath() );
+  }
+  else
+    qDebug() << "Save unsent messages option is disabled";
+
+  return settings_can_be_saved && chats_can_be_saved && unsent_messages_can_be_saved;
 }
 
 bool Core::start()
@@ -339,6 +360,7 @@ void Core::stop()
   checkSavingPaths();
   saveUsersAndGroups();
   saveChatMessages();
+  saveUnsentMessages();
   Settings::instance().save();
 
   if( Settings::instance().localUser().isStatusConnected() )
@@ -484,6 +506,17 @@ bool Core::saveChatMessages()
   }
   else
     return false;
+}
+
+bool Core::saveUnsentMessages()
+{
+  if( !Settings::instance().enableSaveData() )
+  {
+    qDebug() << "Skip saving unsent messages because you have disabled this option in RC file";
+    return false;
+  }
+
+  return MessageManager::instance().saveUnsentMessages();
 }
 
 void Core::checkNewVersion()

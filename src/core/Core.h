@@ -226,6 +226,7 @@ protected:
   bool saveChatMessages();
   void showMessage( const QString&, int ms_to_show );
   void sendMessageToAllConnectedUsers( const Message& );
+  bool saveUnsentMessages();
 
   /* CoreConnection */
   Connection* connection( VNumber ) const;

@@ -398,6 +398,9 @@ public:
   inline void setChatAutoSave( bool );
   inline int chatMaxLineSaved() const;
   inline void setChatMaxLineSaved( int );
+  QString unsentMessagesFilePath() const;
+  inline bool chatSaveUnsentMessages() const;
+  inline void setChatSaveUnsentMessages( bool );
 
   inline bool autoUserAway() const;
   inline void setAutoUserAway( bool );
@@ -739,6 +742,7 @@ private:
 
   bool m_chatAutoSave;
   int m_chatMaxLineSaved;
+  bool m_chatSaveUnsentMessages;
 
   bool m_autoUserAway;
 
@@ -970,6 +974,8 @@ inline bool Settings::chatAutoSave() const { return m_chatAutoSave; }
 inline void Settings::setChatAutoSave( bool new_value ) { m_chatAutoSave = new_value; }
 inline int Settings::chatMaxLineSaved() const { return m_chatMaxLineSaved; }
 inline void Settings::setChatMaxLineSaved( int new_value ) { m_chatMaxLineSaved = new_value; }
+inline bool Settings::chatSaveUnsentMessages() const { return m_chatSaveUnsentMessages; }
+inline void Settings::setChatSaveUnsentMessages( bool new_value ) { m_chatSaveUnsentMessages = new_value; }
 inline bool Settings::autoUserAway() const { return m_autoUserAway; }
 inline void Settings::setAutoUserAway( bool new_value ) { m_autoUserAway = new_value; }
 inline QStringList Settings::pluginSettings( const QString& plugin_name ) const { return m_pluginSettings.value( plugin_name ); }

@@ -24,7 +24,7 @@
 #ifndef BEEBEEP_BUILDSAVEDCHATLIST_H
 #define BEEBEEP_BUILDSAVEDCHATLIST_H
 
-#include "Config.h"
+#include "MessageRecord.h"
 
 
 class BuildSavedChatList : public QObject
@@ -34,7 +34,8 @@ class BuildSavedChatList : public QObject
 public:
   explicit BuildSavedChatList( QObject* parent = Q_NULLPTR );
 
-  inline const QMap<QString, QString> savedChats() const;
+  inline const QMap<QString, QString>& savedChats() const;
+  inline const QList<MessageRecord>& unsentMessages() const;
   inline int elapsedTime() const;
 
 signals:
@@ -45,16 +46,19 @@ public slots:
 
 protected:
   void loadSavedChats( QDataStream* );
+  void loadUnsentMessages();
 
 private:
   QMap<QString, QString> m_savedChats;
+  QList<MessageRecord> m_unsentMessages;
   int m_elapsedTime;
 
 };
 
 
 // Inline Functions
-inline const QMap<QString, QString> BuildSavedChatList::savedChats() const { return m_savedChats; }
+inline const QMap<QString, QString>& BuildSavedChatList::savedChats() const { return m_savedChats; }
+inline const QList<MessageRecord>& BuildSavedChatList::unsentMessages() const { return m_unsentMessages; }
 inline int BuildSavedChatList::elapsedTime() const { return m_elapsedTime; }
 
 #endif // BEEBEEP_BUILDSAVEDCHATLIST_H

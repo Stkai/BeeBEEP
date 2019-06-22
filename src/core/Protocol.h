@@ -29,6 +29,7 @@
 #include "FileInfo.h"
 #include "Group.h"
 #include "Message.h"
+#include "MessageRecord.h"
 #include "ChatMessageData.h"
 #include "User.h"
 #include "UserRecord.h"
@@ -115,6 +116,9 @@ public:
   UserStatusRecord loadUserStatusRecord( const QString& ) const;
   Message userRecordListToHiveMessage( const QList<UserRecord>& );
   QList<UserRecord> hiveMessageToUserRecordList( const Message& ) const;
+
+  QString saveMessageRecord( const MessageRecord& ) const;
+  MessageRecord loadMessageRecord( const QString& ) const;
 
   QString saveNetworkAddress( const NetworkAddress& ) const;
   NetworkAddress loadNetworkAddress( const QString& ) const;

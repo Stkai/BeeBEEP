@@ -1066,6 +1066,7 @@ void Settings::load()
   m_textSizeInChatMessagePreviewOnTray = sets->value( "TextSizeInChatMessagePreviewOnTray", 40 ).toInt();
   m_showFileTransferCompletedOnTray = sets->value( "ShowFileTransferCompletedOnTray", true ).toBool();
   m_chatAutoSave = sets->value( "ChatAutoSave", true ).toBool();
+  m_chatSaveUnsentMessages = sets->value( "ChatSaveUnsentMessages", true ).toBool();
   m_chatMaxLineSaved = sets->value( "ChatMaxLineSaved", 8000 ).toInt();
   m_showChatToolbar = sets->value( "ShowChatToolbar", true ).toBool();
   m_showTipsOfTheDay = sets->value( "ShowTipsOfTheDay", true ).toBool();
@@ -1417,6 +1418,7 @@ void Settings::save()
   sets->setValue( "ShowFileTransferCompletedOnTray", m_showFileTransferCompletedOnTray );
   sets->setValue( "ChatAutoSave", m_chatAutoSave );
   sets->setValue( "ChatMaxLineSaved", m_chatMaxLineSaved );
+  sets->setValue( "ChatSaveUnsentMessages", m_chatSaveUnsentMessages );
   sets->setValue( "ShowChatToolbar", m_showChatToolbar );
   sets->setValue( "ShowTipsOfTheDay", m_showTipsOfTheDay );
   sets->setValue( "ShowOnlyOnlineUsers", m_showOnlyOnlineUsers );
@@ -1772,6 +1774,11 @@ bool Settings::setDataFolder()
 QString Settings::savedChatsFilePath() const
 {
   return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder() ).arg( "beebeep.dat" ) );
+}
+
+QString Settings::unsentMessagesFilePath() const
+{
+  return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder() ).arg( "beebeep.off" ) );
 }
 
 QString Settings::defaultHostsFilePath( bool use_resource_folder ) const

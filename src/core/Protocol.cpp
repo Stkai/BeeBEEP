@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "BeeUtils.h"
+#include "ChatManager.h"
 #include "ColorManager.h"
 #include "EmoticonManager.h"
 #include "PluginManager.h"
@@ -575,7 +576,7 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   /* Create User */
   User u( newId() );
   u.setName( user_name );
-  u.setNetworkAddress( NetworkAddress( peer_address, listener_port ) );
+  u.setNetworkAddress( NetworkAddress( peer_address, static_cast<quint16>(listener_port) ) );
   u.setStatus( user_status );
   u.setStatusChangedIn( status_changed_in );
   u.setStatusDescription( user_status_description );
@@ -659,7 +660,7 @@ UserRecord Protocol::loadUserRecord( const QString& s ) const
     return UserRecord();
   }
 
-  NetworkAddress na( user_host_address, host_port );
+  NetworkAddress na( user_host_address, static_cast<quint16>(host_port) );
 
   if( !sl.isEmpty() )
     na.setInfo( sl.takeFirst() );
@@ -715,6 +716,104 @@ UserRecord Protocol::loadUserRecord( const QString& s ) const
   }
 
   return ur;
+}
+
+QString Protocol::saveMessageRecord( const MessageRecord& mr ) const
+{
+  QStringList sl_root;
+  User u = UserManager::instance().findUser( mr.toUserId() );
+  if( !u.isValid() )
+  {
+    qWarning() << "Unable to save unsent messages for invalid user id" << mr.toUserId();
+    return QString::null;
+  }
+  Chat c = ChatManager::instance().chat( mr.chatId() );
+  if( !c.isValid() )
+  {
+    qWarning() << "Unable to save unsent messages for invalid chat id" << mr.chatId();
+    return QString::null;
+  }
+
+  QStringList sl_user;
+  sl_user << u.path();
+  sl_user << u.accountName();
+  sl_user << u.domainName();
+  sl_root.append( Settings::instance().simpleEncrypt( sl_user.join( DATA_FIELD_SEPARATOR ) ) );
+  QStringList sl_chat;
+  sl_chat << c.name();
+  sl_chat << c.privateId();
+  sl_root.append( Settings::instance().simpleEncrypt( sl_chat.join( DATA_FIELD_SEPARATOR ) ) );
+  QByteArray ba = fromMessage( mr.message(), Settings::instance().protoVersion() );
+  sl_root.append( QString::fromLatin1( ba.toBase64() ) );
+  return sl_root.join( PROTOCOL_FIELD_SEPARATOR );
+}
+
+MessageRecord Protocol::loadMessageRecord( const QString& s ) const
+{
+  QStringList sl_root = s.split( PROTOCOL_FIELD_SEPARATOR );
+  if( sl_root.size() < 3 )
+  {
+    qWarning() << sl_root.size() << "is invalid message record data size";
+    return MessageRecord();
+  }
+
+  QStringList sl_user = Settings::instance().simpleDecrypt( sl_root.at( 0 ) ).split( DATA_FIELD_SEPARATOR );
+  if( sl_user.isEmpty() )
+  {
+    qWarning() << "User data not found in message record";
+    return MessageRecord();
+  }
+
+  if( sl_user.size() < 3 )
+  {
+    qWarning() << sl_user.size() << "is invalid user data found in message record";
+    return MessageRecord();
+  }
+
+  User u;
+  if( Settings::instance().userRecognitionMethod() == Settings::RecognizeByAccountAndDomain )
+    u = UserManager::instance().findUserByAccountNameAndDomainName( sl_user.at( 1 ), sl_user.at( 2 ) );
+  else if( Settings::instance().userRecognitionMethod() == Settings::RecognizeByAccount )
+    u = UserManager::instance().findUserByAccountName( sl_user.at( 1 ) );
+  else
+    u = UserManager::instance().findUserByPath( sl_user.at( 0 ) );
+  if( !u.isValid() )
+  {
+    qWarning() << "User found in message record is not in your user list";
+    return MessageRecord();
+  }
+
+  QStringList sl_chat = Settings::instance().simpleDecrypt( sl_root.at( 1 ) ).split( DATA_FIELD_SEPARATOR );
+  if( sl_chat.isEmpty() )
+  {
+    qWarning() << "Chat data not found in message record";
+    return MessageRecord();
+  }
+
+  if( sl_chat.size() < 2 )
+  {
+    qWarning() << sl_chat.size() << "is invalid chat data found in message record";
+    return MessageRecord();
+  }
+
+  Chat c = ChatManager::instance().findChatByPrivateId( sl_chat.at( 1 ), false, u.id() );
+  if( !c.isValid() )
+    c = ChatManager::instance().findChatByName( sl_chat.at( 0 ) );
+
+  if( !c.isValid() )
+  {
+    qWarning() << "Chat found in message record is not in your chat list";
+    return MessageRecord();
+  }
+
+  Message m = toMessage( QByteArray::fromBase64( sl_root.at( 2 ).toLatin1() ), Settings::instance().protoVersion() );
+  if( !m.isValid() )
+  {
+    qWarning() << "Invalid message data found in message record";
+    return MessageRecord();
+  }
+
+  return MessageRecord( u.id(), c.id(), m );
 }
 
 QString Protocol::saveUser( const User& u ) const
@@ -782,7 +881,7 @@ NetworkAddress Protocol::loadNetworkAddress( const QString& s ) const
     return NetworkAddress();
   }
 
-  NetworkAddress na( user_host_address, host_port );
+  NetworkAddress na( user_host_address, static_cast<quint16>(host_port) );
   if( !sl.isEmpty() )
     na.setInfo( sl.takeFirst() );
 

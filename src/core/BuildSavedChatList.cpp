@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "BuildSavedChatList.h"
+#include "Protocol.h"
 #include "Settings.h"
 
 
@@ -35,6 +36,7 @@ void BuildSavedChatList::buildList()
 {
   QTime elapsed_time;
   elapsed_time.start();
+
   QString file_name = Settings::instance().savedChatsFilePath();
   QFile file( file_name );
 
@@ -50,10 +52,13 @@ void BuildSavedChatList::buildList()
   QStringList file_header;
 
   stream >> file_header;
-
-  loadSavedChats( &stream );
-
+  if( stream.status() != QDataStream::Ok )
+    qWarning() << "Error reading header datastream, abort loading saved chats";
+  else
+    loadSavedChats( &stream );
   file.close();
+
+  loadUnsentMessages();
 
   m_elapsedTime = elapsed_time.elapsed();
 
@@ -62,8 +67,14 @@ void BuildSavedChatList::buildList()
 
 void BuildSavedChatList::loadSavedChats( QDataStream* stream )
 {
-  int num_of_chats = 0;
+  qint32 num_of_chats = 0;
   (*stream) >> num_of_chats;
+
+  if( stream->status() != QDataStream::Ok )
+  {
+    qWarning() << "Error reading number of chats in datastream, abort loading saved chats";
+    return;
+  }
 
   if( num_of_chats <= 0 )
     return;
@@ -99,5 +110,67 @@ void BuildSavedChatList::loadSavedChats( QDataStream* stream )
     else
       m_savedChats.insert( chat_name, chat_text );
   }
+}
+
+void BuildSavedChatList::loadUnsentMessages()
+{
+  QString file_name = Settings::instance().unsentMessagesFilePath();
+  QFile file( file_name );
+  if( !file.open( QIODevice::ReadOnly ) )
+  {
+    qWarning() << "Unable to open file" << file.fileName() << ": loading saved unsent messages aborted";
+    return;
+  }
+
+  QDataStream stream( &file );
+  stream.setVersion( Settings::instance().dataStreamVersion( true ) );
+
+  QStringList file_header;
+  stream >> file_header;
+  if( stream.status() != QDataStream::Ok )
+  {
+    qWarning() << "Error reading header datastream, abort loading unsent messages";
+    file.close();
+    return;
+  }
+
+  qint32 num_of_unsent_messages = 0;
+  stream >> num_of_unsent_messages;
+  if( stream.status() != QDataStream::Ok )
+  {
+    qWarning() << "Error reading number of unsent messages datastream, abort loading unsent messages";
+    file.close();
+    return;
+  }
+
+  if( num_of_unsent_messages > 0 )
+  {
+    for( int i = 1; i <= num_of_unsent_messages; i++ )
+    {
+
+      QString smr;
+      stream >> smr;
+      if( stream.status() != QDataStream::Ok )
+      {
+        qWarning() << "Error reading datastream, abort loading unsent message:" << i;
+        break;
+      }
+
+      QString decoded_smr = Settings::instance().simpleDecrypt( smr );
+      MessageRecord mr = Protocol::instance().loadMessageRecord( decoded_smr );
+      if( !mr.isValid() )
+      {
+        qWarning() << "Error reading saved unsent message:" << i;
+        continue;
+      }
+
+      m_unsentMessages.append( mr );
+    }
+    qDebug() << "Loading" << m_unsentMessages.size() << "unsent messages from" << qPrintable( file_name ) << "completed";
+  }
+  else
+    qDebug() << "0 saved unsent messaged found in" << qPrintable( file_name );
+
+  file.close();
 }
 

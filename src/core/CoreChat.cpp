@@ -463,8 +463,12 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg, bool is_importan
     }
 
     if( !offline_users.isEmpty() )
-      dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "The message will be delivered to %1." ).arg( Bee::stringListToTextString( offline_users, 3 ) ),
+    {
+      dispatchSystemMessage( chat_id, ID_LOCAL_USER, QString( "%1 %2" )
+                             .arg( IconManager::instance().toHtml( "unsent-message.png", "*m*" ) )
+                             .arg( tr( "The message will be delivered to %1." ).arg( Bee::stringListToTextString( offline_users, 3 ) ) ),
                              DispatchToChat, ChatMessage::Other );
+    }
   }
 
   return messages_sent;
@@ -621,7 +625,7 @@ void Core::addListToSavedChats()
   qDebug() << qPrintable( loading_status );
   loading_status = tr( "%1 saved chats are added to history" ).arg( bscl->savedChats().size() );
 
-  if( bscl->savedChats().size() > 1 )
+  if( bscl->savedChats().size() > 0 )
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( IconManager::instance().toHtml( "saved-chat.png", "*H*" ), loading_status ),
                            DispatchToChat, ChatMessage::System );
@@ -629,9 +633,16 @@ void Core::addListToSavedChats()
 
   ChatManager::instance().addSavedChats( bscl->savedChats() );
 
+  if( bscl->unsentMessages().size() > 0 )
+  {
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2" )
+                           .arg( IconManager::instance().toHtml( "unsent-message.png", "*m*" ) )
+                           .arg( tr( "%1 unsent messages will be sent as soon as possible." ).arg( bscl->unsentMessages().size() ) ),
+                           DispatchToChat, ChatMessage::System );
+    MessageManager::instance().addMessageRecords( bscl->unsentMessages() );
+  }
   if( beeApp )
     beeApp->removeJob( bscl );
-
   bscl->deleteLater();
   emit savedChatListAvailable();
 }
@@ -675,7 +686,10 @@ int Core::checkOfflineMessagesForUser( const User& u )
 
   foreach( VNumber ci, chat_list )
   {
-    dispatchSystemMessage( ci, u.id(), tr( "Offline messages sent to %2." ).arg( u.name() ), DispatchToChat, ChatMessage::Other );
+    dispatchSystemMessage( ci, u.id(), QString( "%1 %2" )
+                           .arg( IconManager::instance().toHtml( "unsent-message.png", "*m*" ) )
+                           .arg( tr( "Offline messages sent to %2." ).arg( u.name() ) ),
+                           DispatchToChat, ChatMessage::Other );
   }
 
   return message_list.size();

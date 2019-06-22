@@ -905,6 +905,10 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().chatAutoSave() );
   act->setData( 18 );
+  act = mp_menuChatSettings->addAction( tr( "Save unsent messages" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatSaveUnsentMessages() );
+  act->setData( 81 );
   act = mp_menuChatSettings->addAction( tr( "Send offline messages also to chat with all users" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().sendOfflineMessagesToDefaultChat() );
@@ -1787,6 +1791,9 @@ void GuiMain::settingsChanged( QAction* act )
     break;
   case 80:
     Settings::instance().setRaiseMainWindowOnNewMessageArrived( act->isChecked() );
+    break;
+  case 81:
+    Settings::instance().setChatSaveUnsentMessages( act->isChecked() );
     break;
   case 99:
     break;

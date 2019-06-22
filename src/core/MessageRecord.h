@@ -52,7 +52,7 @@ private:
 
 
 // Inline Functions
-inline bool MessageRecord::isValid() const { return m_toUserId != ID_INVALID; }
+inline bool MessageRecord::isValid() const { return m_toUserId != ID_INVALID && m_chatId != ID_INVALID && m_message.isValid(); }
 inline VNumber MessageRecord::toUserId() const { return m_toUserId; }
 inline VNumber MessageRecord::chatId() const { return m_chatId; }
 inline const Message& MessageRecord::message() const { return m_message; }

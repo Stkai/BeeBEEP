@@ -165,5 +165,6 @@
         <file>images/multicast-group.png</file>
         <file>images/reset-window.png</file>
         <file>images/message-create.png</file>
+        <file>images/unsent-message.png</file>
     </qresource>
 </RCC>
