@@ -391,15 +391,24 @@ void Settings::loadRcFile()
   qDebug() << "Check for RC file in current path:" << qPrintable( rc_file_path );
   if( !rc_file_info.exists() || !rc_file_info.isReadable() )
   {
+#ifdef Q_OS_UNIX
+    rc_file_path = QLatin1String( "/etc/beebeep.rc" );
+    rc_file_info = QFileInfo( rc_file_path );
+    qDebug() << "Check for RC file in system path:" << qPrintable( rc_file_path );
+    if( !rc_file_info.exists() || !rc_file_info.isReadable() )
+    {
+#endif
     rc_file_info = QFileInfo( defaultRcFilePath( false ) );
     rc_file_path = Bee::convertToNativeFolderSeparator( rc_file_info.absoluteFilePath() );
     qDebug() << "Check for RC file in custom path:" << qPrintable( rc_file_path );
-
     if( !rc_file_info.exists() || !rc_file_info.isReadable() )
     {
       qDebug() << "RC file not found:" << qPrintable( programName() ) << "uses default RC configuration";
       return;
     }
+#ifdef Q_OS_UNIX
+    }
+#endif
   }
 
   QSettings* sets = new QSettings( rc_file_path, QSettings::IniFormat );

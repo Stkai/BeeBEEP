@@ -5,6 +5,7 @@ BeeBEEP 5.6.3 (Under development)
 - Unsent messages are now saved in file beebeep.off when BeeBEEP is closed (option can be disabled)
 - Fixed system tray icon size (default is 24px) in Linux Desktop Environment.
 - Updated HUNSPELL library to 1.7.0
+- File beebeep.rc can be placed also in /etc folder in Unix like systems.
 
 BeeBEEP 5.6.2 
 - New feature: you can also send files (dragging and) dropping them on the user in main user list window
