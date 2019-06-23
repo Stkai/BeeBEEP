@@ -166,5 +166,6 @@
         <file>images/reset-window.png</file>
         <file>images/message-create.png</file>
         <file>images/unsent-message.png</file>
+        <file>images/beebeep-tray.png</file>
     </qresource>
 </RCC>

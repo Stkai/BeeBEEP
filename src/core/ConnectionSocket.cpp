@@ -32,7 +32,8 @@
 ConnectionSocket::ConnectionSocket( QObject* parent )
   : QTcpSocket( parent ), m_blockSize( 0 ), m_isHelloSent( false ), m_userId( ID_INVALID ), m_protoVersion( 1 ),
     m_cipherKey( "" ), m_publicKey1( "" ), m_publicKey2( "" ), m_networkAddress(), m_latestActivityDateTime(),
-    m_checkConnectionTimeout( false ), m_tickCounter( 0 ), m_isAborted( false ), m_datastreamVersion( 0 )
+    m_checkConnectionTimeout( false ), m_tickCounter( 0 ), m_isAborted( false ), m_datastreamVersion( 0 ),
+    m_isTestConnection( false )
 {
   if( Settings::instance().useLowDelayOptionOnSocket() )
     setSocketOption( QAbstractSocket::LowDelayOption, 1 );
@@ -352,22 +353,30 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
 
 void ConnectionSocket::sendQuestionHello()
 {
-  m_checkConnectionTimeout = false;
-  m_publicKey1 = Protocol::instance().newMd5Id();
-#ifdef CONNECTION_SOCKET_IO_DEBUG
-  qDebug() << "ConnectionSocket is sending pkey1 with shared-key:" << qPrintable( m_publicKey1 );
-#endif
-  if( sendData( Protocol::instance().helloMessage( m_publicKey1 ) ) )
+  if( m_isTestConnection )
   {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "ConnectionSocket has sent question HELLO to" << qPrintable( m_networkAddress.toString() );
-#endif
-    m_isHelloSent = true;
+    if( sendData( Protocol::instance().testQuestionMessage() ) )
+      qDebug() << "Connection TEST request to" << qPrintable( m_networkAddress.toString() );
   }
   else
   {
-    qWarning() << "ConnectionSocket is unable to send question HELLO to" << qPrintable( m_networkAddress.toString() );
-    emit abortRequest();
+    m_checkConnectionTimeout = false;
+    m_publicKey1 = Protocol::instance().newMd5Id();
+#ifdef CONNECTION_SOCKET_IO_DEBUG
+    qDebug() << "ConnectionSocket is sending pkey1 with shared-key:" << qPrintable( m_publicKey1 );
+#endif
+    if( sendData( Protocol::instance().helloMessage( m_publicKey1 ) ) )
+    {
+#ifdef BEEBEEP_DEBUG
+      qDebug() << "ConnectionSocket has sent question HELLO to" << qPrintable( m_networkAddress.toString() );
+#endif
+      m_isHelloSent = true;
+    }
+    else
+    {
+      qWarning() << "ConnectionSocket is unable to send question HELLO to" << qPrintable( m_networkAddress.toString() );
+      emit abortRequest();
+    }
   }
 }
 
@@ -400,6 +409,9 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
     emit abortRequest();
     return;
   }
+
+  if( checkTestMessage( m ) )
+    return;
 
   if( m.type() != Message::Hello )
   {
@@ -555,4 +567,27 @@ void ConnectionSocket::onTickEvent( int  )
 
   if( m_tickCounter % PING_INTERVAL_TICK == 0 )
     emit pingRequest();
+}
+
+bool ConnectionSocket::checkTestMessage( const Message& m )
+{
+  if( m.type() != Message::Test )
+    return false;
+
+  if( Protocol::instance().isTestQuestionMessage( m ) )
+  {
+    qDebug() << "Connection TEST request from" << qPrintable( m_networkAddress.toString() );
+    if( sendData( Protocol::instance().testAnswerMessage() ) )
+      qDebug() << "Connection TEST from" << qPrintable( m_networkAddress.toString() ) << "completed";
+  }
+
+  if( Protocol::instance().isTestAnswerMessage( m ) )
+  {
+    qDebug() << "Connection TEST to" << qPrintable( m_networkAddress.toString() ) << "completed";
+    emit connectionTestCompleted();
+  }
+
+  disconnectFromHost();
+  emit disconnected();
+  return true;
 }

@@ -59,11 +59,15 @@ public:
 
   void onTickEvent( int );
 
+  inline bool isTestConnection() const;
+  inline void setTestConnection( bool );
+
 signals:
   void dataReceived( const QByteArray& );
   void authenticationRequested( const QByteArray& );
   void abortRequest();
   void pingRequest();
+  void connectionTestCompleted();
 
 protected slots:
   qint64 readBlock();
@@ -77,6 +81,8 @@ protected:
   QByteArray serializeData( const QByteArray& );
   const QByteArray& cipherKey() const;
   bool createCipherKey( const QString& );
+
+  bool checkTestMessage( const Message& );
 
 private:
   // max block size contains lowers
@@ -98,6 +104,8 @@ private:
   int m_datastreamVersion;
   int m_pingByteArraySize;
 
+  bool m_isTestConnection;
+
 };
 
 
@@ -109,5 +117,7 @@ inline bool ConnectionSocket::isConnected() const { return isOpen() && (state() 
 inline bool ConnectionSocket::isConnecting() const { return isOpen() && (state() == QAbstractSocket::HostLookupState || state() == QAbstractSocket::ConnectingState); }
 inline const QDateTime& ConnectionSocket::latestActivityDateTime() const { return m_latestActivityDateTime; }
 inline const NetworkAddress& ConnectionSocket::networkAddress() const { return m_networkAddress; }
+inline bool ConnectionSocket::isTestConnection() const { return m_isTestConnection; }
+inline void ConnectionSocket::setTestConnection( bool new_value ) { m_isTestConnection = new_value; }
 
 #endif // BEEBEEP_CONNECTIONSOCKET_H

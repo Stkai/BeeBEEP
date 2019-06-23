@@ -43,11 +43,11 @@ const char BEEBEEP_LAST_VERSION_FILE[] = "last_version.php";
 const char BEEBEEP_GA_TRACKING_ID[] = "UA-57878696-1";  // VUEtNTc4Nzg2OTYtMQ==
 const char BEEBEEP_GA_URL[] = "https://www.google-analytics.com/collect";
 const char BEEBEEP_GA_EVENT_VERSION[] = "1";
-const char HUNSPELL_VERSION[] = "1.6.1";
+const char HUNSPELL_VERSION[] = "1.7.0";
 const char BEEBEEP_VERSION[] = "5.6.3";
 const int BEEBEEP_PROTO_VERSION = 74;
 const int BEEBEEP_SETTINGS_VERSION = 11;
-const int BEEBEEP_BUILD = 1128;
+const int BEEBEEP_BUILD = 1129;
 
 #endif // BEEBEEP_VERSION_H
 

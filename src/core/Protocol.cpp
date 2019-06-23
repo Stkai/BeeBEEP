@@ -71,6 +71,7 @@ QString Protocol::messageHeader( Message::Type mt ) const
   case Message::Hive:     return "BEE-HIVE";
   case Message::ShareBox: return "BEE-SBOX";
   case Message::ShareDesktop : return "BEE-DESK";
+  case Message::Test:     return "BEE-TEST";
   default:                return "BEE-BOOH";
   }
 }
@@ -109,6 +110,8 @@ Message::Type Protocol::messageType( const QString& msg_type ) const
     return Message::Hive;
   else if( msg_type == "BEE-DESK" )
     return Message::ShareDesktop;
+  else if( msg_type == "BEE-TEST" )
+    return Message::Test;
   else
     return Message::Undefined;
 }
@@ -214,6 +217,28 @@ Message Protocol::toMessage( const QByteArray& byte_array_data, int proto_versio
   m.setText( msg_txt );
 
   return m;
+}
+
+QByteArray Protocol::testQuestionMessage() const
+{
+  Message m( Message::Test, ID_TEST_MESSAGE, QString( "?" ) );
+  return fromMessage( m, 1 );
+}
+
+bool Protocol::isTestQuestionMessage( const Message& m ) const
+{
+  return m.type() == Message::Test && m.text() == QString( "?" );
+}
+
+QByteArray Protocol::testAnswerMessage() const
+{
+  Message m( Message::Test, ID_TEST_MESSAGE, QString("Ok") );
+  return fromMessage( m, 1 );
+}
+
+bool Protocol::isTestAnswerMessage( const Message& m ) const
+{
+  return m.type() == Message::Test && m.text() == QString( "Ok" );
 }
 
 QByteArray Protocol::pingMessage() const

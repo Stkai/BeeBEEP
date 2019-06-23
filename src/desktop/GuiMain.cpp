@@ -2766,9 +2766,10 @@ void GuiMain::selectBeepFile()
     return;
 
   Settings::instance().setBeepFilePath( file_path );
-  qDebug() << "New sound file selected:" << file_path;
+  qDebug() << "New sound file selected:" << qPrintable( file_path );
 
   AudioManager::instance().clearBeep();
+  AudioManager::instance().playBeep();
 
   if( !Settings::instance().beepOnNewMessageArrived() )
   {

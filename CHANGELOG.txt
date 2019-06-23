@@ -2,7 +2,9 @@ BEEBEEP (Secure Office Messenger) - CHANGELOG - (c) Marco Mastroddi
 
 BeeBEEP 5.6.3 (Under development)
 - Fixed a bug in MacOSX: custom resource folder path will be the same of data folder
-- Unsent messages are now saved when BeeBEEP is closed (option can be disabled)
+- Unsent messages are now saved in file beebeep.off when BeeBEEP is closed (option can be disabled)
+- Fixed system tray icon size (default is 24px) in Linux Desktop Environment.
+- Updated HUNSPELL library to 1.7.0
 
 BeeBEEP 5.6.2 
 - New feature: you can also send files (dragging and) dropping them on the user in main user list window

@@ -55,7 +55,11 @@ public:
   QByteArray broadcastMessage( const QHostAddress& ) const;
   QHostAddress hostAddressFromBroadcastMessage( const Message& ) const;
   QByteArray helloMessage( const QString& cipher_key_tmp ) const;
+  QByteArray testQuestionMessage() const;
+  bool isTestQuestionMessage( const Message& ) const;
+  QByteArray testAnswerMessage() const;
   Message writingMessage( const QString& chat_private_id ) const;
+  bool isTestAnswerMessage( const Message& ) const;
   inline Message systemMessage( const QString& ) const;
   Message chatMessage( const Chat&, const QString& );
   Message chatReadMessage( const Chat& );
