@@ -93,6 +93,7 @@ bool MessageManager::saveUnsentMessages()
     return false;
   }
 
+  qDebug() << "Saving unsent messages in" << qPrintable( file_name );
   QDataStream stream( &file );
   stream.setVersion( Settings::instance().dataStreamVersion( false ) );
 
@@ -101,6 +102,12 @@ bool MessageManager::saveUnsentMessages()
   file_header << Settings::instance().version( false, false );
   file_header << QString::number( Settings::instance().protoVersion() );
   stream << file_header;
+  if( stream.status() != QDataStream::Ok )
+  {
+    qWarning() << "Datastream error: unable to save file header";
+    file.close();
+    return false;
+  }
 
   QStringList sl_smr;
   if( !m_messagesToSend.isEmpty() )
@@ -111,17 +118,33 @@ bool MessageManager::saveUnsentMessages()
       if( !smr.isEmpty() )
         sl_smr.append( Settings::instance().simpleEncrypt( smr ) );
     }
-    m_messagesToSend.clear();
   }
   qint32 sl_smr_size = sl_smr.size();
   stream << sl_smr_size;
+  if( stream.status() != QDataStream::Ok )
+  {
+    qWarning() << "Datastream error: unable to save number of unsent messages";
+    file.close();
+    return false;
+  }
   if( sl_smr_size > 0 )
   {
+    int sl_smr_counter = 0;
     foreach( QString smr, sl_smr )
+    {
+      sl_smr_counter++;
       stream << smr;
+      if( stream.status() != QDataStream::Ok )
+      {
+        qWarning() << "Datastream error: unable to save unsent message" << sl_smr_counter;
+        file.close();
+        return false;
+      }
+    }
   }
   file.close();
-  qDebug() << sl_smr_size << "unsent messages saved to" << qPrintable( file_name );
+  m_messagesToSend.clear();
+  qDebug() << sl_smr_size << "unsent messages saved";
   return true;
 }
 

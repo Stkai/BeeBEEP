@@ -499,13 +499,7 @@ bool Core::saveChatMessages()
   }
 
   SaveChatList scl;
-  if( scl.save() )
-  {
-    qDebug() << "Chat messages are saved in path:" << qPrintable( Settings::instance().savedChatsFilePath() );
-    return true;
-  }
-  else
-    return false;
+  return scl.save();
 }
 
 bool Core::saveUnsentMessages()

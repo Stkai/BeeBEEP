@@ -40,7 +40,7 @@ public slots:
   bool save();
 
 protected:
-  void saveChats( QDataStream* );
+  bool saveChats( QDataStream* );
 
 };
 

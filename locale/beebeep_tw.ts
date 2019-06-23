@@ -490,6 +490,14 @@
         <source>%1 Connection closed to user %2 because it uses same hash code of the already connected user %3: %4.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>%1 User %2 cannot save unsent messages in path: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 unsent messages will be sent as soon as possible.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>File</name>
@@ -2707,6 +2715,14 @@ Please select a different name.</source>
         <source>Raise main window on new message</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Save unsent messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Saving unsent messages may fail if &apos;Save users&apos; and &apos;Save groups&apos; options are not enabled. Do you want to enable them?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -3939,6 +3955,20 @@ Please select a different name.</source>
     <message>
         <source>Remove user</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GuiVideoCall</name>
+    <message>
+        <source>Yes</source>
+        <translation type="obsolete">是</translation>
+    </message>
+</context>
+<context>
+    <name>GuiVideoSettingsWidget</name>
+    <message>
+        <source>Close</source>
+        <translation type="obsolete">關閉</translation>
     </message>
 </context>
 <context>

@@ -82,50 +82,58 @@ bool SaveChatList::save()
   file_header << Settings::instance().version( false, false );
   file_header << QString::number( Settings::instance().protoVersion() );
 
+  bool save_ok = false;
   stream << file_header;
-
-  saveChats( &stream );
+  if( stream.status() != QDataStream::Ok )
+    qWarning() << "Datastream error: unable to save file header";
+  else
+    save_ok = saveChats( &stream );
 
   file.close();
-  return true;
+  return save_ok;
 }
 
-void SaveChatList::saveChats( QDataStream* stream )
+bool SaveChatList::saveChats( QDataStream* stream )
 {
-  if( Settings::instance().chatMaxLineSaved() <= 0 )
-  {
-    (*stream) << 0;
-    return;
-  }
-
-  qint32 num_of_chats = ChatManager::instance().countNotEmptyChats( false );
+  qint32 num_saved_chats = 0;
   qint64 file_pos = stream->device()->pos();
-  (*stream) << num_of_chats;
+  (*stream) << num_saved_chats; // we set it to zero until save is not completed
+  if( stream->status() != QDataStream::Ok )
+  {
+    qWarning() << "Datastream error: unable to save number of chats";
+    return false;
+  }
 
   QStringList chat_lines;
   QString chat_name_encrypted;
   QString chat_text_encrypted;
-  qint32 chat_counter = 0;
   QStringList chat_name_saved_list;
 
   foreach( Chat c, ChatManager::instance().constChatList() )
   {
     if( c.isEmpty() )
       continue;
-    qDebug() << "Saving chat:" << qPrintable( c.name() );
-    chat_name_saved_list << c.name();
-    chat_counter++;
-    chat_name_encrypted = Settings::instance().simpleEncrypt( c.name() );
-    (*stream) << chat_name_encrypted;
-    QString html_text = GuiChatMessage::chatToHtml( c, true, true, true );
 
+    QString html_text = GuiChatMessage::chatToHtml( c, true, true, true );
     if( ChatManager::instance().chatHasSavedText( c.name() ) )
       html_text.prepend( ChatManager::instance().chatSavedText( c.name() ) );
 
     if( html_text.simplified().isEmpty() )
     {
-      (*stream) << QString( "" );
+      qDebug() << "Skip saving empty chat:" << qPrintable( c.name() );
       continue;
+    }
+
+    qDebug() << "Saving chat:" << qPrintable( c.name() );
+    num_saved_chats++;
+    chat_name_saved_list << c.name();
+
+    chat_name_encrypted = Settings::instance().simpleEncrypt( c.name() );
+    (*stream) << chat_name_encrypted;
+    if( stream->status() != QDataStream::Ok )
+    {
+      qWarning() << "Datastream error: unable to save chat" << qPrintable( c.name() );
+      return false;
     }
 
     chat_lines = html_text.split( "<br>", QString::SkipEmptyParts );
@@ -140,6 +148,11 @@ void SaveChatList::saveChats( QDataStream* stream )
 
     chat_text_encrypted = Settings::instance().simpleEncrypt( html_text );
     (*stream) << chat_text_encrypted;
+    if( stream->status() != QDataStream::Ok )
+    {
+      qWarning() << "Datastream error: unable to save messages of chat" << qPrintable( c.name() );
+      return false;
+    }
   }
 
   QMap<QString, QString>::const_iterator it = ChatManager::instance().constHistoryMap().constBegin();
@@ -148,21 +161,39 @@ void SaveChatList::saveChats( QDataStream* stream )
     if( !chat_name_saved_list.contains( it.key() ) )
     {
       qDebug() << "Saving history for chat:" << qPrintable( it.key() );
-      chat_counter++;
+      num_saved_chats++;
       chat_name_encrypted = Settings::instance().simpleEncrypt( it.key() );
       (*stream) << chat_name_encrypted;
+      if( stream->status() != QDataStream::Ok )
+      {
+        qWarning() << "Datastream error: unable to save history name" << qPrintable( it.key() );
+        return false;
+      }
       chat_text_encrypted = Settings::instance().simpleEncrypt( it.value() );
       (*stream) << chat_text_encrypted;
+      if( stream->status() != QDataStream::Ok )
+      {
+        qWarning() << "Datastream error: unable to save history messages" << qPrintable( it.key() );
+        return false;
+      }
     }
     else
-      qDebug() << "Skip saving history for previous saved chat:" << qPrintable( it.key() );
+      qDebug() << "Skip saving history for previous saved chat" << qPrintable( it.key() );
     ++it;
   }
 
-  if( chat_counter != num_of_chats )
+  if( num_saved_chats > 0 )
   {
     stream->device()->seek( file_pos );
-    (*stream) << chat_counter;
+    (*stream) << num_saved_chats;
+    if( stream->status() != QDataStream::Ok )
+    {
+      qWarning() << "Datastream error: unable to save number of chats (final)";
+      return false;
+    }
   }
+
+  qDebug() << num_saved_chats << "chat saved";
+  return true;
 }
 

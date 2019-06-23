@@ -879,14 +879,14 @@ void GuiMain::createMenus()
   mp_actAddUsers = mp_menuUsersSettings->addAction( IconManager::instance().icon( "user-add.png" ), tr( "Add users" ) + QString( "..." ), this, SLOT( showAddUser() ) );
   mp_menuUsersSettings->addAction( IconManager::instance().icon( "workgroup.png" ), tr( "Workgroups" ) + QString( "..." ), this, SLOT( showWorkgroups() ) );
   mp_menuUsersSettings->addSeparator();
-  act = mp_menuUsersSettings->addAction( tr( "Save users" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().saveUserList() );
-  act->setData( 32 );
-  act = mp_menuUsersSettings->addAction( tr( "Save groups" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().saveGroupList() );
-  act->setData( 2 );
+  mp_actSaveUserList = mp_menuUsersSettings->addAction( tr( "Save users" ), this, SLOT( settingsChanged() ) );
+  mp_actSaveUserList->setCheckable( true );
+  mp_actSaveUserList->setChecked( Settings::instance().saveUserList() );
+  mp_actSaveUserList->setData( 32 );
+  mp_actSaveGroupList = mp_menuUsersSettings->addAction( tr( "Save groups" ), this, SLOT( settingsChanged() ) );
+  mp_actSaveGroupList->setCheckable( true );
+  mp_actSaveGroupList->setChecked( Settings::instance().saveGroupList() );
+  mp_actSaveGroupList->setData( 2 );
   mp_menuUsersSettings->addSeparator();
   act = mp_menuUsersSettings->addAction( tr( "Set your status to away automatically" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -1793,7 +1793,21 @@ void GuiMain::settingsChanged( QAction* act )
     Settings::instance().setRaiseMainWindowOnNewMessageArrived( act->isChecked() );
     break;
   case 81:
-    Settings::instance().setChatSaveUnsentMessages( act->isChecked() );
+    {
+      Settings::instance().setChatSaveUnsentMessages( act->isChecked() );
+      if( Settings::instance().chatSaveUnsentMessages() && (!Settings::instance().saveUserList() || !Settings::instance().saveGroupList()) )
+      {
+        if( QMessageBox::question( this, Settings::instance().programName(),
+                               tr( "Saving unsent messages may fail if 'Save users' and 'Save groups' options are not enabled. Do you want to enable them?" ),
+                               tr( "Yes" ), tr( "No"), QString::null, 0, 1 ) )
+        {
+          Settings::instance().setSaveUserList( true );
+          Settings::instance().setSaveGroupList( true );
+          mp_actSaveUserList->setChecked( true );
+          mp_actSaveGroupList->setChecked( true );
+        }
+      }
+    }
     break;
   case 99:
     break;

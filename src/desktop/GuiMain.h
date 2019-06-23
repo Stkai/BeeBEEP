@@ -319,6 +319,8 @@ private:
   QAction* mp_actRemoveInactiveUsers;
   QAction* mp_actChangeStatusDescription;
   QAction* mp_actCreateMessage;
+  QAction* mp_actSaveUserList;
+  QAction* mp_actSaveGroupList;
 
   QAction* mp_actShowUserListOnConnection;
   QAction* mp_actShowChatListOnConnection;

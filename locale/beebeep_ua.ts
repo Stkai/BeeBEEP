@@ -494,6 +494,14 @@
         <source>%1 You have added members: %2.</source>
         <translation>%1 Ви додали учасників: %2.</translation>
     </message>
+    <message>
+        <source>%1 User %2 cannot save unsent messages in path: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 unsent messages will be sent as soon as possible.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>File</name>
@@ -2703,6 +2711,14 @@ Please select a different name.</source>
         <source>Raise main window on new message</source>
         <translation>Активувати головне вікно з новим повідомленням</translation>
     </message>
+    <message>
+        <source>Save unsent messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Saving unsent messages may fail if &apos;Save users&apos; and &apos;Save groups&apos; options are not enabled. Do you want to enable them?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -3913,6 +3929,32 @@ Please select a different name.</source>
     <message>
         <source>User Path</source>
         <translation>Шлях користувача</translation>
+    </message>
+</context>
+<context>
+    <name>GuiVideoCall</name>
+    <message>
+        <source>Yes</source>
+        <translation type="obsolete">Так</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="obsolete">Ні</translation>
+    </message>
+</context>
+<context>
+    <name>GuiVideoSettingsWidget</name>
+    <message>
+        <source>Video</source>
+        <translation type="obsolete">Відео</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="obsolete">Аудіо</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="obsolete">Закрити</translation>
     </message>
 </context>
 <context>

@@ -518,6 +518,14 @@
         <source>%1 Connection closed to user %2 because it uses same hash code of the already connected user %3: %4.</source>
         <translation>%1 Connessione chiusa all&apos;utente %2 perché sta usando lo stesso codice hash dell&apos;utente connesso %3: %4.</translation>
     </message>
+    <message>
+        <source>%1 User %2 cannot save unsent messages in path: %3</source>
+        <translation>%1 L&apos;utente %2 non può salvare i messaggi non inviati nel percorso: %3</translation>
+    </message>
+    <message>
+        <source>%1 unsent messages will be sent as soon as possible.</source>
+        <translation>%1 messaggi non inviati saranno spediti appena possibile.</translation>
+    </message>
 </context>
 <context>
     <name>File</name>
@@ -2815,6 +2823,14 @@ Inserisci un nome differente.</translation>
         <source>Raise main window on new message</source>
         <translation>Porta in primo piano la finestra principale all&apos;arrivo di un nuovo messaggio</translation>
     </message>
+    <message>
+        <source>Save unsent messages</source>
+        <translation>Salva i messaggi non inviati</translation>
+    </message>
+    <message>
+        <source>Saving unsent messages may fail if &apos;Save users&apos; and &apos;Save groups&apos; options are not enabled. Do you want to enable them?</source>
+        <translation>Il salvataggio dei messaggi non inviati potrebbe non andare a buon fine se non sono abilitate anche le opzioni &quot;Salva gli utenti&quot;.e &quot;Salva i gruppi&quot;. Vuoi attivarle?</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -4103,6 +4119,36 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Status description</source>
         <translation>Descrizione dello stato</translation>
+    </message>
+</context>
+<context>
+    <name>GuiVideoCall</name>
+    <message>
+        <source>Do you want to end the video call?</source>
+        <translation type="vanished">Vuoi terminare la video chiamata?</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="vanished">Si</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="vanished">No</translation>
+    </message>
+</context>
+<context>
+    <name>GuiVideoSettingsWidget</name>
+    <message>
+        <source>Video</source>
+        <translation type="obsolete">Video</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="obsolete">Audio</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="obsolete">Chiudi</translation>
     </message>
 </context>
 <context>

@@ -510,6 +510,14 @@
         <source>%1 Connection closed to user %2 because it uses same hash code of the already connected user %3: %4.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>%1 User %2 cannot save unsent messages in path: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 unsent messages will be sent as soon as possible.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>File</name>
@@ -2747,6 +2755,14 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Raise main window on new message</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Save unsent messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Saving unsent messages may fail if &apos;Save users&apos; and &apos;Save groups&apos; options are not enabled. Do you want to enable them?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -3981,6 +3997,32 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>User Path</source>
         <translation>Benutzerpfad</translation>
+    </message>
+</context>
+<context>
+    <name>GuiVideoCall</name>
+    <message>
+        <source>Yes</source>
+        <translation type="obsolete">Ja</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="obsolete">Nein</translation>
+    </message>
+</context>
+<context>
+    <name>GuiVideoSettingsWidget</name>
+    <message>
+        <source>Video</source>
+        <translation type="obsolete">Video</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="obsolete">Audio</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="obsolete">Schließen</translation>
     </message>
 </context>
 <context>
