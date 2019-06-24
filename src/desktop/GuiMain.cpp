@@ -142,6 +142,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( beeCore, SIGNAL( localUserIsBuzzedBy( const User& ) ), this, SLOT( showBuzzFromUser( const User& ) ) );
   connect( beeCore, SIGNAL( newSystemStatusMessage( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
   connect( beeCore, SIGNAL( newsAvailable( const QString& ) ), this, SLOT( onNewsAvailable( const QString& ) ) );
+  connect( beeCore, SIGNAL( offlineMessageSentToUser( const User& ) ), this, SLOT( updateUser( const User& ) ) );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   connect( beeCore, SIGNAL( shareDesktopImageAvailable( const User&, const QImage&, const QString&, QRgb ) ), this, SLOT( onShareDesktopImageAvailable( const User&, const QImage&, const QString&, QRgb ) ) );
   connect( beeCore, SIGNAL( shareDesktopUpdate( const User& ) ), this, SLOT( onShareDesktopUpdate( const User& ) ) );
@@ -946,10 +947,6 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().showChatToolbar() );
   act->setData( 42 );
-  act = mp_menuChatSettings->addAction( "", this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setData( 71 );
-  setChatInactiveWindowOpacityLevelInAction( act );
   mp_menuChatSettings->addSeparator();
   act = mp_menuChatSettings->addAction( IconManager::instance().icon( "background-color.png" ), tr( "Select chat background color" ), this, SLOT( settingsChanged() ) );
   act->setData( 72 );
@@ -1086,6 +1083,10 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().stayOnTop() );
   act->setData( 14 );
+  act = mp_menuSettings->addAction( "", this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setData( 71 );
+  setChatInactiveWindowOpacityLevelInAction( act );
 #ifdef Q_OS_WIN
   act = mp_menuSettings->addAction( tr( "Start %1 automatically" ).arg( Settings::instance().programName() ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -1990,7 +1991,7 @@ void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
 
   if( chat_is_visible )
   {
-    readAllMessagesInChat( c.id() );
+    readAllMessagesInChat( c.id() ); // read will update the lists
     if( !cm.isFromSystem() && !cm.isFromLocalUser() )
       fl_chat->statusBar()->showMessage( "" ); // reset writing message
   }
@@ -1998,12 +1999,20 @@ void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
   {
     if( alert_can_be_showed )
       showAlertForMessage( c, cm );
-    mp_groupList->updateChat( c ); // for unread messages
-    mp_userList->updateChat( c ); // to sort users
-    mp_chatList->updateChat( c ); // to sort chats
+    mp_groupList->updateChat( c );
+    mp_userList->updateChat( c );
+    mp_chatList->updateChat( c );
   }
-
   updateNewMessageAction();
+}
+
+void GuiMain::updateUser( const User& u )
+{
+  mp_userList->setUser( u, false );
+  mp_chatList->updateUser( u );
+  mp_groupList->updateUser( u );
+  foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+    fl_chat->updateUser( u );
 }
 
 void GuiMain::searchUsers()
@@ -3892,7 +3901,7 @@ void GuiMain::readAllMessagesInChat( VNumber chat_id )
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Updating chat with" << qPrintable( c.name() ) << "after read all messages";
 #endif
-    mp_userList->setUnreadMessages( c.id(), 0 );
+    mp_userList->setUnreadMessages( c.id(), 0, true );
     mp_chatList->updateChat( c );
     mp_groupList->updateChat( c );
   }
@@ -4409,6 +4418,48 @@ void GuiMain::onHideEmptyChatsRequest()
 {
   Settings::instance().setHideEmptyChatsInList( !Settings::instance().hideEmptyChatsInList() );
   mp_chatList->updateChats();
+}
+
+void GuiMain::onApplicationFocusChanged( QWidget* old, QWidget* now )
+{
+  if( old == Q_NULLPTR && isAncestorOf( now )  )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Main window has grabbed focus";
+#endif
+    m_prevActivatedState = true;
+    setWindowOpacity( Settings::instance().chatActiveWindowOpacityLevel() / 100.0 );
+    return;
+  }
+
+  if( isAncestorOf( old ) && now == Q_NULLPTR )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Main window has lost focus";
+#endif
+    m_prevActivatedState = false;
+    return;
+  }
+
+  bool current_state = isActiveWindow();
+  if( current_state != m_prevActivatedState )
+  {
+    m_prevActivatedState = current_state;
+    if( current_state )
+    {
+#ifdef BEEBEEP_DEBUG
+      qDebug() << "Main window has grabbed focus (active)";
+#endif
+      setWindowOpacity( Settings::instance().chatActiveWindowOpacityLevel() / 100.0 );
+    }
+    else
+    {
+#ifdef BEEBEEP_DEBUG
+      qDebug() << "Main window has lost focus (active)";
+#endif
+      setWindowOpacity( Settings::instance().chatInactiveWindowOpacityLevel() / 100.0 );
+    }
+  }
 }
 
 #ifdef BEEBEEP_USE_WEBENGINE

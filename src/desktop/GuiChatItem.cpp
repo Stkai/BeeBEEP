@@ -25,6 +25,7 @@
 #include "Chat.h"
 #include "ChatManager.h"
 #include "IconManager.h"
+#include "MessageManager.h"
 #include "Settings.h"
 #include "UserManager.h"
 
@@ -77,6 +78,7 @@ bool GuiChatItem::updateItem( const Chat& c )
   QString chat_name;
   QString tool_tip;
   m_defaultIcon = QIcon();
+  int unsent_messages = MessageManager::instance().countMessagesToSendInChatId( c.id() );
 
   if( c.isDefault() )
   {
@@ -112,6 +114,9 @@ bool GuiChatItem::updateItem( const Chat& c )
     setData( 0, ChatName, chat_name );
     setIsGroup( c.isGroup() );
   }
+
+  if( unsent_messages > 0 )
+    tool_tip += QString( "\n[%1 %2]" ).arg( unsent_messages ).arg( QObject::tr( "unsent messages" ) );
 
   if( c.unreadMessages() > 0 )
     chat_name.prepend( QString( "(%1) " ).arg( c.unreadMessages() ) );

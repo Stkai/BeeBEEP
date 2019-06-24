@@ -25,6 +25,7 @@
 #include "BeeUtils.h"
 #include "ChatMessage.h"
 #include "IconManager.h"
+#include "MessageManager.h"
 #include "PluginManager.h"
 #include "User.h"
 #if QT_VERSION < 0x050000
@@ -723,6 +724,10 @@ QString Bee::toolTipForUser( const User& u, bool only_status )
   {
     if( u.lastConnection().isValid() )
       tool_tip += QString( "\n(%1 %2)" ).arg( QObject::tr( "last connection" ) ).arg( Bee::dateTimeToString( u.lastConnection() ) );
+
+    int unsent_messages = MessageManager::instance().countMessagesToSendToUserId( u.id() );
+    if( unsent_messages > 0 )
+      tool_tip += QString( "\n[%1 %2]" ).arg( unsent_messages ).arg( QObject::tr( "unsent messages" ) );
   }
 
   if( !u.vCard().birthday().isNull() )

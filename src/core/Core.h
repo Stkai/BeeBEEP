@@ -159,6 +159,7 @@ signals:
   void chatRemoved( const Chat& );
   void newChatMessage( const Chat&, const ChatMessage& );
   void chatReadByUser( const Chat&, const User& );
+  void offlineMessageSentToUser( const User& );
   void fileDownloadRequest( const User&, const FileInfo& );
   void folderDownloadRequest( const User&, const QString&, const QList<FileInfo>& );
   void fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType );

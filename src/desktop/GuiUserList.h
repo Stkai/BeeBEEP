@@ -39,8 +39,8 @@ public:
 
   void setUser( const User&, bool );
   void removeUser( const User& );
-  void setUnreadMessages( VNumber private_chat_id, int );
-  void setMessages( VNumber private_chat_id, int );
+  void setUnreadMessages( VNumber private_chat_id, int, bool update_user );
+  void setMessages( VNumber private_chat_id, int, bool update_user );
   void updateUsers();
   void updateChat( const Chat& );
 

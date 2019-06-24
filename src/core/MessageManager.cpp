@@ -39,7 +39,7 @@ void MessageManager::addMessageToSend( VNumber to_user_id, VNumber chat_id, cons
   m_messagesToSend.append( mr );
 }
 
-QList<MessageRecord> MessageManager::takeMessagesToSend( VNumber user_id )
+QList<MessageRecord> MessageManager::takeMessagesToSendToUserId( VNumber user_id )
 {
   QList<MessageRecord> message_list;
   QList<MessageRecord>::iterator it = m_messagesToSend.begin();
@@ -54,6 +54,28 @@ QList<MessageRecord> MessageManager::takeMessagesToSend( VNumber user_id )
       ++it;
   }
   return message_list;
+}
+
+int MessageManager::countMessagesToSendToUserId( VNumber user_id )
+{
+  int counter = 0;
+  foreach( MessageRecord mr, m_messagesToSend )
+  {
+    if( mr.toUserId() == user_id )
+      counter++;
+  }
+  return counter;
+}
+
+int MessageManager::countMessagesToSendInChatId( VNumber chat_id )
+{
+  int counter = 0;
+  foreach( MessageRecord mr, m_messagesToSend )
+  {
+    if( mr.chatId() == chat_id )
+      counter++;
+  }
+  return counter;
 }
 
 bool MessageManager::unsentMessagesCanBeSaved() const

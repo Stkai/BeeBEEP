@@ -183,7 +183,6 @@ void GuiFloatingChat::updateChatMember( const Chat& c, const User& u )
     act_user->setData( u.id() );
   }
 
-
   act_user->setText( u.name() );
   int avatar_size = qMax( mp_barMembers->iconSize().width(), 32 );
   QString user_tooltip = Bee::toolTipForUser( u, true );

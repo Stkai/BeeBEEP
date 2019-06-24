@@ -637,9 +637,39 @@ void Core::addListToSavedChats()
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2" )
                            .arg( IconManager::instance().toHtml( "unsent-message.png", "*m*" ) )
-                           .arg( tr( "%1 unsent messages will be sent as soon as possible." ).arg( bscl->unsentMessages().size() ) ),
+                           .arg( tr( "%1 offline messages will be sent as soon as possible." ).arg( bscl->unsentMessages().size() ) ),
                            DispatchToChat, ChatMessage::System );
-    MessageManager::instance().addMessageRecords( bscl->unsentMessages() );
+
+    QList<MessageRecord> checked_unsent_messages;
+    foreach( MessageRecord mr, bscl->unsentMessages() )
+    {
+      QString msg_txt = mr.message().text();
+      if( msg_txt.size() > 120 )
+      {
+        msg_txt.resize( 120 );
+        msg_txt.append( "..." );
+      }
+      User to_user = UserManager::instance().findUser( mr.toUserId() );
+      Chat to_chat = ChatManager::instance().chat( mr.chatId() );
+      if( !to_user.isValid() || !to_chat.isValid() )
+      {
+        qWarning() << "Offline message to user" << qPrintable( QString( "%1" ).arg( to_user.isValid() ? to_user.name() : QString( "%1 (unknown)").arg( mr.toUserId() ) ) )
+                   << "and to chat" << qPrintable( QString( "%1" ).arg( to_chat.isValid() ? to_chat.name() : QString( "%1 (unknown)").arg( mr.chatId() ) ) )
+                   << "will not be sent:" << msg_txt;
+      }
+      else
+      {
+        dispatchSystemMessage( mr.chatId(), ID_LOCAL_USER, QString( "%1 (%2) %3: &quot;%4&quot;" )
+                             .arg( IconManager::instance().toHtml( "unsent-message.png", "*m*" ) )
+                             .arg( mr.message().timestamp().toString( "yyyy-MM-dd hh:mm:ss" ) )
+                             .arg( tr( "Offline message will be sent to %1" ).arg( to_user.name() ) )
+                             .arg( msg_txt ),
+                             DispatchToChat, ChatMessage::Other );
+        checked_unsent_messages.append( mr );
+      }
+    }
+    if( !checked_unsent_messages.isEmpty() )
+      MessageManager::instance().addMessageRecords( checked_unsent_messages );
   }
   if( beeApp )
     beeApp->removeJob( bscl );
@@ -667,7 +697,7 @@ bool Core::clearMessagesInChat( VNumber chat_id, bool clear_history )
 
 int Core::checkOfflineMessagesForUser( const User& u )
 {
-  QList<MessageRecord> message_list = MessageManager::instance().takeMessagesToSend( u.id() );
+  QList<MessageRecord> message_list = MessageManager::instance().takeMessagesToSendToUserId( u.id() );
   if( message_list.isEmpty() )
     return 0;
 
@@ -691,6 +721,8 @@ int Core::checkOfflineMessagesForUser( const User& u )
                            .arg( tr( "Offline messages sent to %2." ).arg( u.name() ) ),
                            DispatchToChat, ChatMessage::Other );
   }
+
+  emit offlineMessageSentToUser( u );
 
   return message_list.size();
 }

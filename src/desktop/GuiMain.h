@@ -199,6 +199,8 @@ private slots:
   void updateChatColors();
   void resetAllColors();
   void onHideEmptyChatsRequest();
+  void updateUser( const User& );
+  void onApplicationFocusChanged( QWidget*, QWidget* );
 #ifdef BEEBEEP_USE_WEBENGINE
   void showWebView();
   void onNewsLoad( bool );

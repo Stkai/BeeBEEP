@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="zh_TW">
+<TS version="2.0" language="zh_TW">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -495,7 +495,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>%1 unsent messages will be sent as soon as possible.</source>
+        <source>%1 offline messages will be sent as soon as possible.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Offline message will be sent to %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4221,6 +4225,10 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Happy Birthday to you!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unsent messages</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

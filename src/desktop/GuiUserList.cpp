@@ -125,26 +125,32 @@ GuiUserItem* GuiUserList::itemFromChatId( VNumber chat_id )
   return Q_NULLPTR;
 }
 
-void GuiUserList::setUnreadMessages( VNumber private_chat_id, int n )
+void GuiUserList::setUnreadMessages( VNumber private_chat_id, int n, bool update_user )
 {
   GuiUserItem* item = itemFromChatId( private_chat_id );
   if( !item )
     return;
 
   item->setUnreadMessages( n );
-  item->updateUser();
-  sortUsers();
+  if( update_user )
+  {
+    item->updateUser();
+    sortUsers();
+  }
 }
 
-void GuiUserList::setMessages( VNumber private_chat_id, int n )
+void GuiUserList::setMessages( VNumber private_chat_id, int n, bool update_user )
 {
   GuiUserItem* item = itemFromChatId( private_chat_id );
   if( !item )
     return;
 
   item->setMessages( n );
-  item->updateUser();
-  sortUsers();
+  if( update_user )
+  {
+    item->updateUser();
+    sortUsers();
+  }
 }
 
 void GuiUserList::setUser( const User& u, bool sort_users )
@@ -281,9 +287,9 @@ void GuiUserList::onTickEvent( int ticks )
 
 void GuiUserList::updateChat( const Chat& c )
 {
-  setUnreadMessages( c.id(), c.unreadMessages() );
+  setUnreadMessages( c.id(), c.unreadMessages(), false );
   int chat_messages = c.chatMessages() + ChatManager::instance().savedChatSize( c.name() );
-  setMessages( c.id(), chat_messages );
+  setMessages( c.id(), chat_messages, true );
 }
 
 void GuiUserList::onItemEntered( QTreeWidgetItem* item, int )

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -524,7 +524,19 @@
     </message>
     <message>
         <source>%1 unsent messages will be sent as soon as possible.</source>
+        <translation type="obsolete">%1 messaggi non inviati saranno spediti appena possibile.</translation>
+    </message>
+    <message>
+        <source>Unsent message will be sent to %1</source>
+        <translation type="obsolete">Un messaggio non inviato sarà recapitato a %1</translation>
+    </message>
+    <message>
+        <source>%1 offline messages will be sent as soon as possible.</source>
         <translation>%1 messaggi non inviati saranno spediti appena possibile.</translation>
+    </message>
+    <message>
+        <source>Offline message will be sent to %1</source>
+        <translation>Un messaggio non inviato sarà recapitato a %1</translation>
     </message>
 </context>
 <context>
@@ -4125,15 +4137,15 @@ Inserisci un nome differente.</translation>
     <name>GuiVideoCall</name>
     <message>
         <source>Do you want to end the video call?</source>
-        <translation type="vanished">Vuoi terminare la video chiamata?</translation>
+        <translation type="obsolete">Vuoi terminare la video chiamata?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="vanished">Si</translation>
+        <translation type="obsolete">Si</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="vanished">No</translation>
+        <translation type="obsolete">No</translation>
     </message>
 </context>
 <context>
@@ -4430,6 +4442,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Happy Birthday to you!</source>
         <translation>Buon Compleanno!</translation>
+    </message>
+    <message>
+        <source>unsent messages</source>
+        <translation>messaggi non inviati</translation>
     </message>
 </context>
 <context>

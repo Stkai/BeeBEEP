@@ -35,7 +35,9 @@ class MessageManager
 
 public:
   void addMessageToSend( VNumber to_user_id, VNumber chat_id, const Message& );
-  QList<MessageRecord> takeMessagesToSend( VNumber user_id );
+  QList<MessageRecord> takeMessagesToSendToUserId( VNumber );
+  int countMessagesToSendToUserId( VNumber );
+  int countMessagesToSendInChatId( VNumber );
 
   void addMessageRecords( const QList<MessageRecord>& );
 
