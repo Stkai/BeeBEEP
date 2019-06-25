@@ -756,6 +756,7 @@ void GuiMain::createMenus()
 
   mp_menuMain->addSeparator();
   mp_menuMain->addAction( IconManager::instance().icon( "network-test.png" ), tr( "Test your network" ), this, SLOT( showNetworkTest() ) );
+  mp_menuMain->addSeparator();
   mp_menuMain->addAction( mp_actViewLog );
 #ifdef BEEBEEP_USE_WEBENGINE
   mp_menuMain->addSeparator();

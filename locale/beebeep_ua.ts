@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="uk_UA" sourcelanguage="en">
+<TS version="2.1" language="uk_UA" sourcelanguage="en">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -2723,6 +2723,10 @@ Please select a different name.</source>
         <source>Saving unsent messages may fail if &apos;Save users&apos; and &apos;Save groups&apos; options are not enabled. Do you want to enable them?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Test your network</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -2788,6 +2792,88 @@ Please select a different name.</source>
     <message>
         <source>File HOSTS not found.</source>
         <translation>Файл HOSTS не знайдено.</translation>
+    </message>
+</context>
+<context>
+    <name>GuiNetworkTest</name>
+    <message>
+        <source>Network test</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your network parameters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IP Address</source>
+        <translation type="unfinished">IP-адреса</translation>
+    </message>
+    <message>
+        <source>Message port</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File transfer port</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter the host address and the port you want to test the connection.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The host address entered is not valid.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The port entered is not valid.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connecting to %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connection to %1 is active.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connection to %1 has error #%2: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connection to %1 has been closed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GuiNetworkTestDialog</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Діалог</translation>
+    </message>
+    <message>
+        <source>IP Address</source>
+        <translation type="unfinished">IP-адреса</translation>
+    </message>
+    <message>
+        <source>Port</source>
+        <translation type="unfinished">Порт</translation>
+    </message>
+    <message>
+        <source>Test connection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear report</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Закрити</translation>
     </message>
 </context>
 <context>
@@ -4211,6 +4297,30 @@ Please select a different name.</source>
     </message>
     <message>
         <source>unsent messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The connection to %1 was not successful.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The tested network address %1 is not present among the available addresses of the network interface to which the connection has been made.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The connection to host address %1 was successful.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The port tested by the connection is %1 but the one that answered is %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The connection to port %1 was successful.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to complete the test with an invalid network address.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

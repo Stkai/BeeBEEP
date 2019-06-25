@@ -43,11 +43,9 @@ protected slots:
   void onError( QAbstractSocket::SocketError );
   void onConnected();
   void onDisconnected();
-  void onHostFound();
   void onTestCompleted( const QString& );
   void closeTest();
   void clearReport();
-
 
 protected:
   void addToReport( const QString& );

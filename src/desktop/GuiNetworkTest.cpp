@@ -103,40 +103,30 @@ void GuiNetworkTest::removeConnection( ConnectionSocket* cs, bool abort_connecti
   }
 }
 
-void GuiNetworkTest::onHostFound()
-{
-  QString msg;
-  ConnectionSocket* cs = qobject_cast<ConnectionSocket*>( sender() );
-  if( cs )
-    msg = tr( "Connecting to %1 has found host." ).arg( cs->networkAddress().toString() );
-  else
-    msg = tr( "Unknown connection has found host." );
-  addToReport( msg );
-}
-
 void GuiNetworkTest::onConnected()
 {
-  QString msg;
   ConnectionSocket* cs = qobject_cast<ConnectionSocket*>( sender() );
   if( cs )
-    msg = tr( "Connection to %1 is active." ).arg( cs->networkAddress().toString() );
+  {
+    QString msg = tr( "Connection to %1 is active." ).arg( cs->networkAddress().toString() );
+    addToReport( msg );
+  }
   else
-    msg = tr( "Unknown connection is active." );
-  addToReport( msg );
+    qWarning() << "Test network has found an unkown connection socket on slot onConnected()";
 }
 
 void GuiNetworkTest::onError( QAbstractSocket::SocketError se )
 {
-  QString msg;
   ConnectionSocket* cs = qobject_cast<ConnectionSocket*>( sender() );
   if( cs )
   {
-    msg = tr( "Connection to %1 has error #%2." ).arg( cs->networkAddress().toString() ).arg( static_cast<int>(se) );
+    QString msg = tr( "Connection to %1 has error #%2: %3" ).arg( cs->networkAddress().toString() ).arg( static_cast<int>(se) ).arg( cs->errorString() );
+    addToReport( msg );
     removeConnection( cs, true );
   }
   else
-    msg = tr( "Unknown connection has error #%2." ).arg( static_cast<int>(se) );
-  addToReport( msg );
+    qWarning() << "Test network has found an unkown connection socket on slot onError(" << static_cast<int>(se) << ")";
+
 }
 
 void GuiNetworkTest::onTestCompleted( const QString& msg )
@@ -145,20 +135,22 @@ void GuiNetworkTest::onTestCompleted( const QString& msg )
   ConnectionSocket* cs = qobject_cast<ConnectionSocket*>( sender() );
   if( cs )
     removeConnection( cs );
+  else
+    qWarning() << "Test network has found an unkown connection socket on slot onTestCompleted(" << qPrintable( msg ) << ")";
 }
 
 void GuiNetworkTest::onDisconnected()
 {
-  QString msg;
   ConnectionSocket* cs = qobject_cast<ConnectionSocket*>( sender() );
   if( cs )
   {
-    msg = tr( "Connection to %1 has been disconnected." ).arg( cs->networkAddress().toString() );
+    QString msg = tr( "Connection to %1 has been closed." ).arg( cs->networkAddress().toString() );
+    addToReport( msg );
     removeConnection( cs );
   }
   else
-    msg = tr( "Unknown connection has been disconnected." );
-  addToReport( msg );
+    qWarning() << "Test network has found an unkown connection socket on slot onDisconnected()";
+
 }
 
 void GuiNetworkTest::addToReport( const QString& msg )

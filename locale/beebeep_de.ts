@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE" sourcelanguage="en">
+<TS version="2.1" language="de_DE" sourcelanguage="en">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -2529,7 +2529,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br /&gt;it under the terms of the GNU General Public License as published&lt;br /&gt;by the Free Software Foundation, either version 3 of the License&lt;br /&gt;or (at your option) any later version.&lt;br /&gt;&lt;br /&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br /&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br /&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br /&gt;See the GNU General Public License for more details.</source>
-        <translation type="obsolete">BeeBEEP ist freie Software. Du kannst sie gemäß&lt;br /&gt;den Bedingungen der GNU General Public License&lt;br /&gt;laut Veröffentlichung der Free Software Foundation&lt;br /&gt;Lizenzauflage 3 oder (optional) einer neueren Auflage verbreiten und/oder verändern.&lt;br /&gt;&lt;br /&gt;BeeBEEP wird mit dem Ziel bereitgestellt, einen Nutzen zu bringen,&lt;br /&gt;aber UNTER AUSSCHLUSS JEGLICHER GEWÄHRLEISTUNG,&lt;br /&gt;selbst der stillschweigenden Gewährleistung auf MARKTGÄNGIGKEIT oder&lt;br /&gt;EIGNUNG FÜR EINEN BESTIMMTEN ZWECK&lt;br /&gt; Weitere Details kannst du der GNU General Public License entnehmen.</translation>
+        <translation type="obsolete">BeeBEEP ist freie Software. Du kannst sie gemäß&lt;br /&gt;den Bedingungen der GNU General Public License&lt;br /&gt;laut Veröffentlichung der Free Software Foundation&lt;br /&gt;Lizenzauflage&#xa0;3 oder (optional) einer neueren Auflage verbreiten und/oder verändern.&lt;br /&gt;&lt;br /&gt;BeeBEEP wird mit dem Ziel bereitgestellt, einen Nutzen zu bringen,&lt;br /&gt;aber UNTER AUSSCHLUSS JEGLICHER GEWÄHRLEISTUNG,&lt;br /&gt;selbst der stillschweigenden Gewährleistung auf MARKTGÄNGIGKEIT oder&lt;br /&gt;EIGNUNG FÜR EINEN BESTIMMTEN ZWECK&lt;br /&gt; Weitere Details kannst du der GNU General Public License entnehmen.</translation>
     </message>
     <message>
         <source>Please save the network password in the next dialog if you want to use password without prompt.</source>
@@ -2767,6 +2767,10 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Saving unsent messages may fail if &apos;Save users&apos; and &apos;Save groups&apos; options are not enabled. Do you want to enable them?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Test your network</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -2832,6 +2836,88 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>default</source>
         <translation type="unfinished">Standard</translation>
+    </message>
+</context>
+<context>
+    <name>GuiNetworkTest</name>
+    <message>
+        <source>Network test</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your network parameters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IP Address</source>
+        <translation type="unfinished">IP-Adresse</translation>
+    </message>
+    <message>
+        <source>Message port</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File transfer port</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter the host address and the port you want to test the connection.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The host address entered is not valid.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished">OK</translation>
+    </message>
+    <message>
+        <source>The port entered is not valid.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connecting to %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connection to %1 is active.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connection to %1 has error #%2: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connection to %1 has been closed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GuiNetworkTestDialog</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Dialogfeld</translation>
+    </message>
+    <message>
+        <source>IP Address</source>
+        <translation type="unfinished">IP-Adresse</translation>
+    </message>
+    <message>
+        <source>Port</source>
+        <translation type="unfinished">Port</translation>
+    </message>
+    <message>
+        <source>Test connection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear report</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Schließen</translation>
     </message>
 </context>
 <context>
@@ -4295,6 +4381,30 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>unsent messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The connection to %1 was not successful.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The tested network address %1 is not present among the available addresses of the network interface to which the connection has been made.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The connection to host address %1 was successful.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The port tested by the connection is %1 but the one that answered is %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The connection to port %1 was successful.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to complete the test with an invalid network address.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

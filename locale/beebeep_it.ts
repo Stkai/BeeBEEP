@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -2843,6 +2843,10 @@ Inserisci un nome differente.</translation>
         <source>Saving unsent messages may fail if &apos;Save users&apos; and &apos;Save groups&apos; options are not enabled. Do you want to enable them?</source>
         <translation>Il salvataggio dei messaggi non inviati potrebbe non andare a buon fine se non sono abilitate anche le opzioni &quot;Salva gli utenti&quot;.e &quot;Salva i gruppi&quot;. Vuoi attivarle?</translation>
     </message>
+    <message>
+        <source>Test your network</source>
+        <translation>Testa la tua rete</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -2926,6 +2930,104 @@ Inserisci un nome differente.</translation>
     <message>
         <source>default</source>
         <translation>predefinito</translation>
+    </message>
+</context>
+<context>
+    <name>GuiNetworkTest</name>
+    <message>
+        <source>Network test</source>
+        <translation>Test di rete</translation>
+    </message>
+    <message>
+        <source>Your network parameters</source>
+        <translation>I tuoi parametri di rete</translation>
+    </message>
+    <message>
+        <source>IP Address</source>
+        <translation>Indirizzo IP</translation>
+    </message>
+    <message>
+        <source>Message port</source>
+        <translation>Porta (messaggi)</translation>
+    </message>
+    <message>
+        <source>File transfer port</source>
+        <translation>Porta (trasferimento file)</translation>
+    </message>
+    <message>
+        <source>Enter the host address and the port you want to test the connection.</source>
+        <translation>Inserisci l&apos;indirizzo IP e la porta su cui vuoi testare la connessione.</translation>
+    </message>
+    <message>
+        <source>The host address entered is not valid.</source>
+        <translation>L&apos;indirizzo IP inserito non è valido.</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation>Ok</translation>
+    </message>
+    <message>
+        <source>The port entered is not valid.</source>
+        <translation>La porta inserita non è valida.</translation>
+    </message>
+    <message>
+        <source>Connecting to %1</source>
+        <translation>Connessione a %1 in corso</translation>
+    </message>
+    <message>
+        <source>Connection to %1 is active.</source>
+        <translation>La connessione a %1 è attiva.</translation>
+    </message>
+    <message>
+        <source>Unknown connection is active.</source>
+        <translation type="vanished">La connessione sconosciuta è attiva.</translation>
+    </message>
+    <message>
+        <source>Connection to %1 has error #%2.</source>
+        <translation type="vanished">La connessione a %1 ha avuto un errore #%2.</translation>
+    </message>
+    <message>
+        <source>Unknown connection has error #%2.</source>
+        <translation type="obsolete">La connessione sconosciuta ha avuto un errore #%1.</translation>
+    </message>
+    <message>
+        <source>Connection to %1 has been disconnected.</source>
+        <translation type="obsolete">La connessione a %1 è stata chiusa.</translation>
+    </message>
+    <message>
+        <source>Connection to %1 has error #%2: %3</source>
+        <translation>La connessione a %1 ha riscontrato il seguente errore #%2: %3</translation>
+    </message>
+    <message>
+        <source>Connection to %1 has been closed.</source>
+        <translation>La connessione a %1 è stata chiusa.</translation>
+    </message>
+</context>
+<context>
+    <name>GuiNetworkTestDialog</name>
+    <message>
+        <source>Dialog</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>IP Address</source>
+        <translation>Indirizzo IP</translation>
+    </message>
+    <message>
+        <source>Port</source>
+        <translation>Porta</translation>
+    </message>
+    <message>
+        <source>Test connection</source>
+        <translation>Prova connessione</translation>
+    </message>
+    <message>
+        <source>Clear report</source>
+        <translation>Cancella il report</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Chiudi</translation>
     </message>
 </context>
 <context>
@@ -4446,6 +4548,30 @@ Inserisci un nome differente.</translation>
     <message>
         <source>unsent messages</source>
         <translation>messaggi non inviati</translation>
+    </message>
+    <message>
+        <source>The connection to %1 was not successful.</source>
+        <translation>La connessione a %1 non ha avuto successo.</translation>
+    </message>
+    <message>
+        <source>The tested network address %1 is not present among the available addresses of the network interface to which the connection has been made.</source>
+        <translation>L&apos;indirizzo di rete testato %1 non è presente tra gli indirizzi disponibili dell&apos;interfaccia di rete a cui la connessione è stata effettuata.</translation>
+    </message>
+    <message>
+        <source>The connection to host address %1 was successful.</source>
+        <translation>La connessione all&apos;indirizzo %1 ha avuto successo.</translation>
+    </message>
+    <message>
+        <source>The port tested by the connection is %1 but the one that answered is %2.</source>
+        <translation>La porta testata dalla connessione è la %1 ma quella che ha risposto è la %2.</translation>
+    </message>
+    <message>
+        <source>The connection to port %1 was successful.</source>
+        <translation>La connessione alla porta %1 ha avuto successo.</translation>
+    </message>
+    <message>
+        <source>Unable to complete the test with an invalid network address.</source>
+        <translation>Impossibile completare il test di connessione con un indirizzo di rete non valido.</translation>
     </message>
 </context>
 <context>
