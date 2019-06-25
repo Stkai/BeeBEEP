@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "ConnectionSocket.h"
+#include "NetworkManager.h"
 #include "Protocol.h"
 #include "Settings.h"
 
@@ -33,7 +34,7 @@ ConnectionSocket::ConnectionSocket( QObject* parent )
   : QTcpSocket( parent ), m_blockSize( 0 ), m_isHelloSent( false ), m_userId( ID_INVALID ), m_protoVersion( 1 ),
     m_cipherKey( "" ), m_publicKey1( "" ), m_publicKey2( "" ), m_networkAddress(), m_latestActivityDateTime(),
     m_checkConnectionTimeout( false ), m_tickCounter( 0 ), m_isAborted( false ), m_datastreamVersion( 0 ),
-    m_isTestConnection( false )
+    m_isTestConnection( false ), m_serverPort( 0 )
 {
   if( Settings::instance().useLowDelayOptionOnSocket() )
     setSocketOption( QAbstractSocket::LowDelayOption, 1 );
@@ -46,12 +47,13 @@ ConnectionSocket::ConnectionSocket( QObject* parent )
   connect( this, SIGNAL( bytesWritten( qint64 ) ), this, SLOT( onBytesWritten( qint64 ) ) );
 }
 
-void ConnectionSocket::initSocket( qintptr socket_descriptor )
+void ConnectionSocket::initSocket( qintptr socket_descriptor, quint16 server_port )
 {
   m_isAborted = false;
   setSocketDescriptor( socket_descriptor );
   m_networkAddress.setHostAddress( peerAddress() );
   m_networkAddress.setHostPort( peerPort() );
+  m_serverPort = server_port;
   m_tickCounter = 0;
   m_checkConnectionTimeout = false;
 }
@@ -62,6 +64,7 @@ void ConnectionSocket::connectToNetworkAddress( const NetworkAddress& network_ad
   m_networkAddress = network_address;
   m_tickCounter = 0;
   m_checkConnectionTimeout = true;
+  m_serverPort = 0;
   connectToHost( network_address.hostAddress(), network_address.hostPort() );
 }
 
@@ -355,7 +358,7 @@ void ConnectionSocket::sendQuestionHello()
 {
   if( m_isTestConnection )
   {
-    if( sendData( Protocol::instance().testQuestionMessage() ) )
+    if( sendData( Protocol::instance().testQuestionMessage( m_networkAddress ) ) )
       qDebug() << "Connection TEST request to" << qPrintable( m_networkAddress.toString() );
   }
   else
@@ -503,7 +506,13 @@ void ConnectionSocket::checkConnectionTimeout( int ticks )
   if( ticks < Settings::instance().tickIntervalConnectionTimeout() )
     return;
 
-  qDebug() << "Connection timeout for" << qPrintable( m_networkAddress.toString() ) << ":" << ticks << "ticks";
+  if( m_isTestConnection )
+  {
+    qDebug() << "Connection TEST timeout for" << qPrintable( m_networkAddress.toString() );
+    emit connectionTestCompleted( QObject::tr( "The connection to %1 was not successful." ).arg( m_networkAddress.toString() ) );
+  }
+  else
+    qDebug() << "Connection timeout for" << qPrintable( m_networkAddress.toString() ) << ":" << ticks << "ticks";
   disconnectFromHost();
   emit disconnected();
 }
@@ -576,17 +585,52 @@ bool ConnectionSocket::checkTestMessage( const Message& m )
 
   if( Protocol::instance().isTestQuestionMessage( m ) )
   {
-    qDebug() << "Connection TEST request from" << qPrintable( m_networkAddress.toString() );
-    if( sendData( Protocol::instance().testAnswerMessage() ) )
-      qDebug() << "Connection TEST from" << qPrintable( m_networkAddress.toString() ) << "completed";
-  }
+    NetworkAddress tested_na = Protocol::instance().networkAddressFromTestMessage( m );
+    if( tested_na.isHostAddressValid() && tested_na.isHostPortValid() )
+    {
+      QString answer_msg = "";
+      qDebug() << "Connection TEST for" << qPrintable( tested_na.toString() ) << "requested from" << qPrintable( m_networkAddress.toString() );
 
-  if( Protocol::instance().isTestAnswerMessage( m ) )
+      if( !NetworkManager::instance().isLocalHostAddress( tested_na.hostAddress() ) )
+      {
+        qWarning() << "The tested network address" << qPrintable( tested_na.hostAddress().toString() ) << "is not a valid localhost address of your network interfaces.";
+        answer_msg += QObject::tr( "The tested network address %1 is not present among the available addresses of the network interface to which the connection has been made." ).arg( tested_na.hostAddress().toString() );
+      }
+      else
+        answer_msg += QObject::tr( "The connection to host address %1 was successful." ).arg( tested_na.hostAddress().toString() );
+
+      answer_msg += QString( "<br>" );
+      if( tested_na.hostPort() != m_serverPort )
+      {
+        qWarning() << "Port tested is" << tested_na.hostPort() << "but answering port is" << m_serverPort;
+        answer_msg += QObject::tr( "The port tested by the connection is %1 but the one that answered is %2." ).arg( tested_na.hostPort() ).arg( m_serverPort );
+        tested_na.setHostPort( m_serverPort );
+      }
+      else
+        answer_msg += QObject::tr( "The connection to port %1 was successful." ).arg( tested_na.hostPort() );
+
+      if( sendData( Protocol::instance().testAnswerMessage( tested_na, true, answer_msg ) ) )
+        qDebug() << "Connection TEST from" << qPrintable( m_networkAddress.toString() ) << "successfully completed";
+    }
+    else
+    {
+      qDebug() << "Connection TEST from" << qPrintable( m_networkAddress.toString() ) << "refused";
+      sendData( Protocol::instance().testAnswerMessage( tested_na, false, QObject::tr( "Unable to complete the test with an invalid network address.") ) );
+    }
+  }
+  else if( Protocol::instance().isTestAnswerMessage( m ) )
   {
-    qDebug() << "Connection TEST to" << qPrintable( m_networkAddress.toString() ) << "completed";
-    emit connectionTestCompleted();
+    qDebug() << "Connection TEST to" << qPrintable( m_networkAddress.toString() ) << "completed with answer:" << m.text();
+    if( m.hasFlag( Message::Refused ) )
+      qDebug() << "Connection TEST to" << qPrintable( m_networkAddress.toString() ) << "refused with answer:" << m.text();
+    else
+      qDebug() << "Connection TEST to" << qPrintable( m_networkAddress.toString() ) << "completed with answer:" << m.text();
+    emit connectionTestCompleted( m.text() );
   }
+  else
+    qWarning() << "Connection TEST from" << qPrintable( m_networkAddress.toString() )  << "is not supported";
 
+  flush();
   disconnectFromHost();
   emit disconnected();
   return true;

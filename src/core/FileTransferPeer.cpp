@@ -32,7 +32,7 @@ FileTransferPeer::FileTransferPeer( QObject *parent )
   : QObject( parent ), m_transferType( FileInfo::Upload ), m_id( ID_INVALID ),
     m_fileInfo( ID_INVALID, FileInfo::Upload ), m_file(), m_state( FileTransferPeer::Unknown ),
     m_bytesTransferred( 0 ), m_totalBytesTransferred( 0 ), m_socket( parent ),
-    m_time( QTime::currentTime() ), m_socketDescriptor( 0 ), m_remoteUserId( ID_INVALID )
+    m_time( QTime::currentTime() ), m_socketDescriptor( 0 ), m_remoteUserId( ID_INVALID ), m_serverPort( 0 )
 {
   setObjectName( "FileTransferPeer" );
 #ifdef BEEBEEP_DEBUG
@@ -108,12 +108,12 @@ void FileTransferPeer::startConnection()
 
   m_time.start();
 
-  if( m_socketDescriptor )
+  if( m_socketDescriptor > 0 )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << qPrintable( name() ) << "set socket descriptor" << m_socketDescriptor;
 #endif
-    m_socket.initSocket( m_socketDescriptor );
+    m_socket.initSocket( m_socketDescriptor, m_serverPort );
   }
   else
   {

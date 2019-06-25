@@ -55,9 +55,10 @@ public:
   QByteArray broadcastMessage( const QHostAddress& ) const;
   QHostAddress hostAddressFromBroadcastMessage( const Message& ) const;
   QByteArray helloMessage( const QString& cipher_key_tmp ) const;
-  QByteArray testQuestionMessage() const;
+  QByteArray testQuestionMessage( const NetworkAddress& ) const;
   bool isTestQuestionMessage( const Message& ) const;
-  QByteArray testAnswerMessage() const;
+  QByteArray testAnswerMessage( const NetworkAddress&, bool test_is_accepted, const QString& answer_msg = "Ok" ) const;
+  NetworkAddress networkAddressFromTestMessage( const Message& ) const;
   Message writingMessage( const QString& chat_private_id ) const;
   bool isTestAnswerMessage( const Message& ) const;
   inline Message systemMessage( const QString& ) const;

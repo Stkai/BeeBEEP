@@ -79,7 +79,7 @@ protected slots:
   void startNewDownload();
   void checkUploadRequest( const FileInfo& );
   void peerDestroyed();
-  void setupPeer( FileTransferPeer*, int );
+  void setupPeer( FileTransferPeer*, qintptr, quint16 server_port = 0 );
 
 private:
   QList<FileInfo> m_files;

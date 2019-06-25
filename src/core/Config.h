@@ -64,6 +64,7 @@ typedef quint64 FileSizeType;
   #define LAST_DATASTREAM_VERSION DATASTREAM_VERSION_2
 #endif
 
+const int MAX_SOCKET_PORT = 65535;
 // Broadcast
 const int DEFAULT_BROADCAST_PORT = 36475;
 const int DEFAULT_LISTENER_PORT = 6475;

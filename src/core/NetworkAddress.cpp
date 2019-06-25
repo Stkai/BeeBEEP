@@ -155,9 +155,18 @@ NetworkAddress NetworkAddress::fromString( const QString& address_string )
     return NetworkAddress();
   }
 
+
   NetworkAddress na;
   na.setHostAddress( host_address );
-  if( host_port > 0 )
-    na.setHostPort( host_port );
+  if( host_port > 0 && host_port <= MAX_SOCKET_PORT )
+  {
+    na.setHostPort( static_cast<quint16>(host_port) );
+  }
+#ifdef BEEBEEP_DEBUG
+  else {
+    qDebug() << "Host port" << host_port << "is outside the range [0-65535] found in" << address_string;
+  }
+#endif
+
   return na;
 }

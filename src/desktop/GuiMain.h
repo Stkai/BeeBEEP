@@ -40,6 +40,7 @@ class GuiFloatingChat;
 class GuiGroupList;
 class GuiHome;
 class GuiLog;
+class GuiNetworkTest;
 class GuiSavedChat;
 class GuiSavedChatList;
 class GuiScreenShot;
@@ -205,6 +206,7 @@ private slots:
   void showWebView();
   void onNewsLoad( bool );
 #endif
+  void showNetworkTest();
 
 protected:
   void keyPressEvent( QKeyEvent* );
@@ -362,6 +364,8 @@ private:
   QAction* mp_actWebView;
 #endif
 
+
+  GuiNetworkTest* mp_networkTest;
 
 };
 

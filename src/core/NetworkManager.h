@@ -44,7 +44,6 @@ public:
   inline const QString& localInterfaceHardwareAddress() const;
   QNetworkInterface localNetworkInterface() const;
 
-
   QList<QHostAddress> splitInIPv4HostAddresses( const QHostAddress& ) const;
   bool isLocalHostAddress( const QHostAddress& ) const;
   QList<QHostAddress> localBroadcastAddresses() const;

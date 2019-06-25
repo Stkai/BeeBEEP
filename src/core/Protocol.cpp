@@ -219,26 +219,50 @@ Message Protocol::toMessage( const QByteArray& byte_array_data, int proto_versio
   return m;
 }
 
-QByteArray Protocol::testQuestionMessage() const
+QByteArray Protocol::testQuestionMessage( const NetworkAddress& na ) const
 {
-  Message m( Message::Test, ID_TEST_MESSAGE, QString( "?" ) );
+  Message m( Message::Test, ID_TEST_MESSAGE, "?" );
+  m.addFlag( Message::Private );
+  m.addFlag( Message::Request );
+  QStringList sl_data;
+  sl_data << na.toString();
+  m.setData( sl_data.join( DATA_FIELD_SEPARATOR ) );
   return fromMessage( m, 1 );
 }
 
 bool Protocol::isTestQuestionMessage( const Message& m ) const
 {
-  return m.type() == Message::Test && m.text() == QString( "?" );
+  return m.type() == Message::Test && m.hasFlag( Message::Private ) && m.hasFlag( Message::Request );
 }
 
-QByteArray Protocol::testAnswerMessage() const
+QByteArray Protocol::testAnswerMessage( const NetworkAddress& na, bool test_is_accepted, const QString& answer_msg ) const
 {
-  Message m( Message::Test, ID_TEST_MESSAGE, QString("Ok") );
+  Message m( Message::Test, ID_TEST_MESSAGE, answer_msg );
+  m.addFlag( Message::Private );
+  m.addFlag( Message::Auto );
+  if( !test_is_accepted )
+    m.addFlag( Message::Refused );
+  QStringList sl_data;
+  sl_data << na.toString();
+  m.setData( sl_data.join( DATA_FIELD_SEPARATOR ) );
   return fromMessage( m, 1 );
 }
 
 bool Protocol::isTestAnswerMessage( const Message& m ) const
 {
-  return m.type() == Message::Test && m.text() == QString( "Ok" );
+  return m.type() == Message::Test && m.hasFlag( Message::Private ) && m.hasFlag( Message::Auto );
+}
+
+NetworkAddress Protocol::networkAddressFromTestMessage( const Message& m ) const
+{
+  NetworkAddress na;
+  if( m.data().isEmpty() )
+    return na;
+
+  QStringList sl_data = m.data().split( DATA_FIELD_SEPARATOR );
+  if( sl_data.isEmpty() )
+    return na;
+  return NetworkAddress::fromString( sl_data.at( 0 ) );
 }
 
 QByteArray Protocol::pingMessage() const
@@ -679,7 +703,7 @@ UserRecord Protocol::loadUserRecord( const QString& s ) const
   }
   bool ok = false;
   int host_port = sl.takeFirst().toInt( &ok, 10 );
-  if( !ok || host_port < 1 || host_port > 65535 )
+  if( !ok || host_port < 1 || host_port > MAX_SOCKET_PORT )
   {
     qWarning() << "Invalid user record found in data:" << s << "(host port error)";
     return UserRecord();
@@ -900,7 +924,7 @@ NetworkAddress Protocol::loadNetworkAddress( const QString& s ) const
 
   bool ok = false;
   int host_port = sl.takeFirst().toInt( &ok, 10 );
-  if( !ok || host_port < 1 || host_port > 65535 )
+  if( !ok || host_port < 1 || host_port > MAX_SOCKET_PORT )
   {
     qWarning() << "Invalid network address found in data:" << s << "(host port error)";
     return NetworkAddress();

@@ -26,6 +26,7 @@ HEADERS += desktop/BeeApplication.h \
   desktop/GuiMain.h \
   desktop/GuiMessageEdit.h \
   desktop/GuiNetwork.h \
+  desktop/GuiNetworkTest.h \
   desktop/GuiPluginManager.h \
   desktop/GuiPresetMessageList.h \
   desktop/GuiRefusedChat.h \
@@ -72,6 +73,7 @@ SOURCES +=  desktop/BeeApplication.cpp \
   desktop/GuiMain.cpp \
   desktop/GuiMessageEdit.cpp \
   desktop/GuiNetwork.cpp \
+  desktop/GuiNetworkTest.cpp \
   desktop/GuiPluginManager.cpp \
   desktop/GuiPresetMessageList.cpp \
   desktop/GuiRefusedChat.cpp \
@@ -109,6 +111,7 @@ FORMS += desktop/GuiAddUser.ui \
   desktop/GuiHome.ui \
   desktop/GuiLanguage.ui \
   desktop/GuiNetwork.ui \
+  desktop/GuiNetworkTest.ui \
   desktop/GuiPluginManager.ui \
   desktop/GuiRefusedChat.ui \
   desktop/GuiSavedChat.ui \

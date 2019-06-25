@@ -178,10 +178,10 @@ void FileTransfer::incomingConnection( qintptr socket_descriptor )
   upload_peer->setTransferType( FileInfo::Upload );
   upload_peer->setId( Protocol::instance().newId() );
   m_peers.append( upload_peer );
-  setupPeer( upload_peer, socket_descriptor );
+  setupPeer( upload_peer, socket_descriptor, serverPort() );
 }
 
-void FileTransfer::setupPeer( FileTransferPeer* transfer_peer, int socket_descriptor )
+void FileTransfer::setupPeer( FileTransferPeer* transfer_peer, qintptr socket_descriptor, quint16 server_port )
 {
   if( transfer_peer->isInQueue() )
   {
@@ -204,7 +204,7 @@ void FileTransfer::setupPeer( FileTransferPeer* transfer_peer, int socket_descri
   connect( transfer_peer, SIGNAL( destroyed() ), this, SLOT( peerDestroyed() ) );
   connect( transfer_peer, SIGNAL( completed( VNumber, VNumber, const FileInfo& ) ), this, SIGNAL( completed( VNumber, VNumber, const FileInfo& ) ) );
 
-  transfer_peer->setConnectionDescriptor( socket_descriptor );
+  transfer_peer->setConnectionDescriptor( socket_descriptor, server_port );
   int delay = Random::number( 1, 9 ) * 100;
 #ifdef BEEBEEP_DEBUG
   qDebug() << transfer_peer->name() << "starts in" << delay << "ms";

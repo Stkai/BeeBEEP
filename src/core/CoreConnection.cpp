@@ -133,8 +133,8 @@ void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )
 void Core::checkNewConnection( qintptr socket_descriptor )
 {
   Connection *c = createConnection();
-  c->initSocket( socket_descriptor );
-  qDebug() << "New connection from" << qPrintable( c->networkAddress().toString() );
+  c->initSocket( socket_descriptor, mp_listener->serverPort() );
+  qDebug() << "New connection to port" << mp_listener->serverPort() << "from" << qPrintable( c->networkAddress().toString() );
   setupNewConnection( c );
 }
 

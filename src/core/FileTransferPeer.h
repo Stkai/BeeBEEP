@@ -49,7 +49,7 @@ public:
   inline bool isDownload() const;
   inline void setId( VNumber );
   inline VNumber id() const;
-  inline void setConnectionDescriptor( int ); // if descriptor = 0 socket tries to connect to remote host (client side)
+  inline void setConnectionDescriptor( qintptr socket_descriptor, quint16 server_port ); // if descriptor = 0 socket tries to connect to remote host (client side)
   void setFileInfo( FileInfo::TransferType, const FileInfo& );
   inline const FileInfo& fileInfo() const;
 
@@ -110,15 +110,16 @@ protected:
   FileSizeType m_totalBytesTransferred;
   ConnectionSocket m_socket;
   QTime m_time;
-  int m_socketDescriptor;
+  qintptr m_socketDescriptor;
   VNumber m_remoteUserId;
+  quint16 m_serverPort;
 
 };
 
 
 // Inline Functions
 inline QString FileTransferPeer::name() const { return QString( "%1 Peer #%2" ).arg( isDownload() ? "Download" : "Upload" ).arg( m_id ); }
-inline void FileTransferPeer::setConnectionDescriptor( int new_value ) { m_socketDescriptor = new_value; }
+inline void FileTransferPeer::setConnectionDescriptor( qintptr socket_descriptor, quint16 server_port ) { m_socketDescriptor = socket_descriptor; m_serverPort = server_port; }
 inline void FileTransferPeer::setInQueue() { m_state = FileTransferPeer::Queue; }
 inline bool FileTransferPeer::isInQueue() const { return m_state == FileTransferPeer::Queue; }
 inline void FileTransferPeer::removeFromQueue() { m_state = FileTransferPeer::Starting; }

@@ -42,6 +42,7 @@
 #include "GuiHome.h"
 #include "GuiLanguage.h"
 #include "GuiLog.h"
+#include "GuiNetworkTest.h"
 #include "GuiPluginManager.h"
 #include "GuiRefusedChat.h"
 #include "GuiSavedChat.h"
@@ -96,6 +97,7 @@ GuiMain::GuiMain( QWidget *parent )
   mp_fileSharing = Q_NULLPTR;
   mp_screenShot = Q_NULLPTR;
   mp_log = Q_NULLPTR;
+  mp_networkTest = Q_NULLPTR;
   m_unreadActivities = 0;
 
   mp_barMain = addToolBar( tr( "Show the main tool bar" ) );
@@ -414,6 +416,9 @@ void GuiMain::closeEvent( QCloseEvent* e )
 
   if( mp_screenShot )
     mp_screenShot->close();
+
+  if( mp_networkTest )
+    mp_networkTest->close();
 
 #ifdef BEEBEEP_USE_WEBENGINE
   if( mp_webView )
@@ -750,6 +755,7 @@ void GuiMain::createMenus()
   mp_menuMain->addAction( IconManager::instance().icon( "download-folder.png" ), tr( "Open your download folder" ), this, SLOT( openDownloadFolder() ) );
 
   mp_menuMain->addSeparator();
+  mp_menuMain->addAction( IconManager::instance().icon( "network-test.png" ), tr( "Test your network" ), this, SLOT( showNetworkTest() ) );
   mp_menuMain->addAction( mp_actViewLog );
 #ifdef BEEBEEP_USE_WEBENGINE
   mp_menuMain->addSeparator();
@@ -3852,7 +3858,10 @@ void GuiMain::onTickEvent( int ticks )
   mp_chatList->onTickEvent( ticks );
   mp_userList->onTickEvent( ticks );
   mp_groupList->onTickEvent( ticks );
-  mp_fileSharing->onTickEvent( ticks );
+  if( mp_fileSharing )
+    mp_fileSharing->onTickEvent( ticks );
+  if( mp_networkTest )
+    mp_networkTest->onTickEvent( ticks );
 
   if( beeCore->hasFileTransferInProgress() )
     mp_actViewFileTransfer->setIcon( ticks % 2 == 0 ? IconManager::instance().icon( "file-transfer-progress.png" ) : IconManager::instance().icon( "file-transfer.png" ) );
@@ -4596,3 +4605,10 @@ void GuiMain::sendScreenshotToChat( VNumber chat_id )
     QTimer::singleShot( 200, fl_chat, SLOT( showNormal() ) );
 }
 #endif
+
+void GuiMain::showNetworkTest()
+{
+  if( !mp_networkTest )
+    mp_networkTest = new GuiNetworkTest( this );
+  mp_networkTest->showUp();
+}

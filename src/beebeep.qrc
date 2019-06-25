@@ -167,5 +167,6 @@
         <file>images/message-create.png</file>
         <file>images/unsent-message.png</file>
         <file>images/beebeep-tray.png</file>
+        <file>images/network-test.png</file>
     </qresource>
 </RCC>

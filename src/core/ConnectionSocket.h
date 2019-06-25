@@ -36,7 +36,7 @@ public:
   explicit ConnectionSocket( QObject* parent = Q_NULLPTR );
 
   void connectToNetworkAddress( const NetworkAddress& );
-  void initSocket( qintptr );
+  void initSocket( qintptr, quint16 server_port );
 
   bool sendData( const QByteArray& );
 
@@ -62,12 +62,14 @@ public:
   inline bool isTestConnection() const;
   inline void setTestConnection( bool );
 
+  inline bool isServerSocket() const;
+
 signals:
   void dataReceived( const QByteArray& );
   void authenticationRequested( const QByteArray& );
   void abortRequest();
   void pingRequest();
-  void connectionTestCompleted();
+  void connectionTestCompleted( const QString& );
 
 protected slots:
   qint64 readBlock();
@@ -106,6 +108,8 @@ private:
 
   bool m_isTestConnection;
 
+  quint16 m_serverPort;
+
 };
 
 
@@ -119,5 +123,6 @@ inline const QDateTime& ConnectionSocket::latestActivityDateTime() const { retur
 inline const NetworkAddress& ConnectionSocket::networkAddress() const { return m_networkAddress; }
 inline bool ConnectionSocket::isTestConnection() const { return m_isTestConnection; }
 inline void ConnectionSocket::setTestConnection( bool new_value ) { m_isTestConnection = new_value; }
+inline bool ConnectionSocket::isServerSocket() const { return m_serverPort > 0; }
 
 #endif // BEEBEEP_CONNECTIONSOCKET_H
