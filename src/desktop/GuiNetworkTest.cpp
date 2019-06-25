@@ -36,21 +36,19 @@ GuiNetworkTest::GuiNetworkTest( QWidget *parent )
   setWindowIcon( IconManager::instance().icon( "network-test.png" ) );
   Bee::removeContextHelpButton( this );
 
-  QString s_txt1 = QString( "<b>%1</b>&nbsp;&nbsp;&nbsp;%2: <b>%3</b>&nbsp;&nbsp;&nbsp;%4: <b>%5</b>&nbsp;&nbsp;&nbsp;%6: %7" )
-                     .arg( tr( "Your parameters" ) )
+  QString s_txt1 = QString( "<b>%1</b>.<br>%2: <b>%3</b>&nbsp;&nbsp;&nbsp;%4: <b>%5</b>&nbsp;&nbsp;&nbsp;%6: <b>%7</b>" )
+                     .arg( tr( "Your network parameters" ) )
                      .arg( tr( "IP Address" ) ).arg( Settings::instance().localUser().networkAddress().hostAddress().toString() )
-                     .arg( tr( "Port" ) ).arg( Settings::instance().localUser().networkAddress().hostPort() )
-                     .arg( tr( "Subnet" ) ).arg( NetworkManager::instance().localBroadcastAddress().toString() );
+                     .arg( tr( "Message port" ) ).arg( Settings::instance().localUser().networkAddress().hostPort() )
+                     .arg( tr( "File transfer port" ) ).arg( Settings::instance().defaultFileTransferPort() );
 
-  QString s_txt2 = mp_lHelp->text();
+  QString s_txt2 = tr( "Enter the host address and the port you want to test the connection.");
 
   QString s_header = QString( "%1<br><br>%2." ).arg( s_txt1 ).arg( s_txt2 );
   mp_lHelp->setText( s_header );
-
   connect( mp_pbTest, SIGNAL( clicked() ), this, SLOT( startTest() ) );
   connect( mp_pbClose, SIGNAL( clicked() ), this, SLOT( closeTest() ) );
   connect( mp_pbClear, SIGNAL( clicked() ), this, SLOT( clearReport() ) );
-
 }
 
 void GuiNetworkTest::showUp()
@@ -81,11 +79,11 @@ void GuiNetworkTest::startTest()
   ConnectionSocket* cs = new ConnectionSocket( this );
   cs->setTestConnection( true );
   connect( cs, SIGNAL( connected() ), this, SLOT( onConnected() ) );
-  connect( cs, SIGNAL( hostFound() ), this, SLOT( onHostFound() ) );
   connect( cs, SIGNAL( disconnected() ), this, SLOT( onDisconnected() ) );
   connect( cs, SIGNAL( error( QAbstractSocket::SocketError ) ), this, SLOT( onError( QAbstractSocket::SocketError ) ) );
   connect( cs, SIGNAL( connectionTestCompleted( const QString& ) ), this, SLOT( onTestCompleted( const QString& ) ) );
   m_connections.append( cs );
+  addToReport( tr( "Connecting to %1" ).arg( na.toString() + QString( "..." ) ) );
   cs->connectToNetworkAddress( na );
 }
 
@@ -94,7 +92,6 @@ void GuiNetworkTest::removeConnection( ConnectionSocket* cs, bool abort_connecti
   if( m_connections.removeOne( cs ) )
   {
     disconnect( cs, SIGNAL( connected() ), this, SLOT( onConnected() ) );
-    disconnect( cs, SIGNAL( hostFound() ), this, SLOT( onHostFound() ) );
     disconnect( cs, SIGNAL( disconnected() ), this, SLOT( onDisconnected() ) );
     disconnect( cs, SIGNAL( error( QAbstractSocket::SocketError ) ), this, SLOT( onError( QAbstractSocket::SocketError ) ) );
     disconnect( cs, SIGNAL( connectionTestCompleted( const QString& ) ), this, SLOT( onTestCompleted( const QString& ) ) );
@@ -111,7 +108,7 @@ void GuiNetworkTest::onHostFound()
   QString msg;
   ConnectionSocket* cs = qobject_cast<ConnectionSocket*>( sender() );
   if( cs )
-    msg = tr( "Connection to %1 has found host." ).arg( cs->networkAddress().toString() );
+    msg = tr( "Connecting to %1 has found host." ).arg( cs->networkAddress().toString() );
   else
     msg = tr( "Unknown connection has found host." );
   addToReport( msg );
