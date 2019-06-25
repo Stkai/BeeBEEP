@@ -3385,11 +3385,15 @@ void GuiMain::showDefaultServerPortInMenu()
     {
       file_transfer_port = QString::number( beeCore->fileTransferPort() );
       mp_actPortFileTransfer->setEnabled( true );
+      if( mp_networkTest )
+        mp_networkTest->updateSettings( QString::number( beeCore->fileTransferPort() ) );
     }
     else
     {
       file_transfer_port = tr( "disabled" );
       mp_actPortFileTransfer->setEnabled( false );
+      if( mp_networkTest )
+        mp_networkTest->updateSettings( file_transfer_port );
     }
 
 #ifdef BEEBEEP_USE_MULTICAST_DNS
@@ -4611,5 +4615,6 @@ void GuiMain::showNetworkTest()
 {
   if( !mp_networkTest )
     mp_networkTest = new GuiNetworkTest( this );
+  mp_networkTest->updateSettings( Settings::instance().enableFileTransfer() ? QString::number( beeCore->fileTransferPort() ) : tr( "disabled" ) );
   mp_networkTest->showUp();
 }

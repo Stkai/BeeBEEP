@@ -638,6 +638,6 @@ bool ConnectionSocket::checkTestMessage( const Message& m )
 
   flush();
   disconnectFromHost();
-  emit disconnected();
+  emit abortRequest();
   return true;
 }

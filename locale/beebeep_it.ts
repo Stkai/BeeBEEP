@@ -3010,6 +3010,10 @@ Inserisci un nome differente.</translation>
         <source>Enter the host address and the port you want to test.</source>
         <translation>Inserisci l&apos;indirizzo IP e la porta su cui vuoi testare la connessione.</translation>
     </message>
+    <message>
+        <source>It is not possible to perform the test if you are not connected to the BeeBEEP network.</source>
+        <translation>Non è possibile effettuare il test se non sei connesso alla rete di BeeBEEP.</translation>
+    </message>
 </context>
 <context>
     <name>GuiNetworkTestDialog</name>

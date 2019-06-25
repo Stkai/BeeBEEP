@@ -39,7 +39,7 @@ bool FileTransfer::startListener()
 {
   qDebug() << "Starting File Transfer server";
 
-  if( !listen( Settings::instance().hostAddressToListen(), Settings::instance().defaultFileTransferPort() ) )
+  if( !listen( Settings::instance().hostAddressToListen(), static_cast<quint16>(Settings::instance().defaultFileTransferPort() ) ) )
   {
     qWarning() << "Unable to bind default file transfer port" << Settings::instance().defaultFileTransferPort();
     if( !listen( Settings::instance().hostAddressToListen() ) )
@@ -339,7 +339,7 @@ FileTransferPeer* FileTransfer::peer( VNumber peer_id ) const
     ++it;
   }
   qWarning() << "File Transfer server has not found the peer" << peer_id;
-  return 0;
+  return Q_NULLPTR;
 }
 
 void FileTransfer::peerDestroyed()
@@ -406,7 +406,7 @@ FileTransferPeer* FileTransfer::nextDownloadInQueue() const
       }
     }
   }
-  return 0;
+  return Q_NULLPTR;
 }
 
 void FileTransfer::startNewDownload()

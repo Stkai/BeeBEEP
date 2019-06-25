@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "BeeUtils.h"
+#include "Core.h"
 #include "GuiNetworkTest.h"
 #include "IconManager.h"
 #include "NetworkManager.h"
@@ -36,20 +37,22 @@ GuiNetworkTest::GuiNetworkTest( QWidget *parent )
   setWindowIcon( IconManager::instance().icon( "network-test.png" ) );
   Bee::removeContextHelpButton( this );
 
-  QString s_txt1 = QString( "<b>%1</b>.<br>%2: <b>%3</b>&nbsp;&nbsp;&nbsp;%4: <b>%5</b>&nbsp;&nbsp;&nbsp;%6: <b>%7</b>" )
-                     .arg( tr( "Your network parameters" ) )
-                     .arg( tr( "IP Address" ) ).arg( Settings::instance().localUser().networkAddress().hostAddress().toString() )
-                     .arg( tr( "Message port" ) ).arg( Settings::instance().localUser().networkAddress().hostPort() )
-                     .arg( tr( "File transfer port" ) ).arg( Settings::instance().defaultFileTransferPort() );
-
-  QString s_txt2 = tr( "Enter the host address and the port you want to test.");
-
-  mp_lHelp1->setText( s_txt1 );
-  mp_lHelp2->setText( s_txt2 );
 
   connect( mp_pbTest, SIGNAL( clicked() ), this, SLOT( startTest() ) );
   connect( mp_pbClose, SIGNAL( clicked() ), this, SLOT( closeTest() ) );
   connect( mp_pbClear, SIGNAL( clicked() ), this, SLOT( clearReport() ) );
+}
+
+void GuiNetworkTest::updateSettings( const QString& file_transfer_port )
+{
+  QString s_txt1 = QString( "<b>%1</b>.<br>%2: <b>%3</b>&nbsp;&nbsp;&nbsp;%4: <b>%5</b>&nbsp;&nbsp;&nbsp;%6: <b>%7</b>" )
+                     .arg( tr( "Your network parameters" ) )
+                     .arg( tr( "IP Address" ) ).arg( Settings::instance().localUser().networkAddress().hostAddress().toString() )
+                     .arg( tr( "Message port" ) ).arg( Settings::instance().localUser().networkAddress().hostPort() )
+                     .arg( tr( "File transfer port" ) ).arg( file_transfer_port );
+  QString s_txt2 = tr( "Enter the host address and the port you want to test.");
+  mp_lHelp1->setText( s_txt1 );
+  mp_lHelp2->setText( s_txt2 );
 }
 
 void GuiNetworkTest::showUp()
@@ -72,7 +75,13 @@ void GuiNetworkTest::startTest()
   if( !ok || host_port < 1 || host_port > MAX_SOCKET_PORT )
   {
     QMessageBox::warning( this, Settings::instance().programName(), tr( "The port entered is not valid." ), tr( "Ok" ) );
-    mp_leIpAddress->setFocus();
+    mp_lePort->setFocus();
+    return;
+  }
+
+  if( !beeCore->isConnected() )
+  {
+    QMessageBox::warning( this, Settings::instance().programName(), tr( "It is not possible to perform the test if you are not connected to the BeeBEEP network." ), tr( "Ok" ) );
     return;
   }
 

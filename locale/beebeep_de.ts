@@ -2892,6 +2892,10 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Enter the host address and the port you want to test.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>It is not possible to perform the test if you are not connected to the BeeBEEP network.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiNetworkTestDialog</name>

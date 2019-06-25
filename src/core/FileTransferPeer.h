@@ -59,7 +59,6 @@ public:
   inline bool isActive() const;
   inline bool isTransferCompleted() const;
   void startUpload( const FileInfo& );
-  void cancelTransfer();
 
   void onTickEvent( int );
 
@@ -72,6 +71,7 @@ signals:
 
 public slots:
   void startConnection();
+  void cancelTransfer();
 
 protected slots:
   void socketError( QAbstractSocket::SocketError );

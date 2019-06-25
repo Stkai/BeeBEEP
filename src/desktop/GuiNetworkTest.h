@@ -36,6 +36,7 @@ public:
   explicit GuiNetworkTest( QWidget *parent = Q_NULLPTR );
 
   void onTickEvent( int );
+  void updateSettings( const QString& file_transfer_port );
   void showUp();
 
 protected slots:
