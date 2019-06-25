@@ -3587,7 +3587,7 @@ Kérjük, válassz egy másik nevet.</translation>
     <name>GuiNetworkTest</name>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="35"/>
-        <source>Network test</source>
+        <source>Test your network</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3612,42 +3612,42 @@ Kérjük, válassz egy másik nevet.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="45"/>
-        <source>Enter the host address and the port you want to test the connection.</source>
+        <source>Enter the host address and the port you want to test.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetworkTest.cpp" line="64"/>
+        <location filename="../src/desktop/GuiNetworkTest.cpp" line="65"/>
         <source>The host address entered is not valid.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetworkTest.cpp" line="64"/>
-        <location filename="../src/desktop/GuiNetworkTest.cpp" line="73"/>
+        <location filename="../src/desktop/GuiNetworkTest.cpp" line="65"/>
+        <location filename="../src/desktop/GuiNetworkTest.cpp" line="74"/>
         <source>Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetworkTest.cpp" line="73"/>
+        <location filename="../src/desktop/GuiNetworkTest.cpp" line="74"/>
         <source>The port entered is not valid.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetworkTest.cpp" line="86"/>
+        <location filename="../src/desktop/GuiNetworkTest.cpp" line="88"/>
         <source>Connecting to %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetworkTest.cpp" line="111"/>
+        <location filename="../src/desktop/GuiNetworkTest.cpp" line="114"/>
         <source>Connection to %1 is active.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetworkTest.cpp" line="123"/>
+        <location filename="../src/desktop/GuiNetworkTest.cpp" line="126"/>
         <source>Connection to %1 has error #%2: %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetworkTest.cpp" line="147"/>
+        <location filename="../src/desktop/GuiNetworkTest.cpp" line="150"/>
         <source>Connection to %1 has been closed.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3655,32 +3655,31 @@ Kérjük, válassz egy másik nevet.</translation>
 <context>
     <name>GuiNetworkTestDialog</name>
     <message>
-        <location filename="../src/desktop/GuiNetworkTest.ui" line="17"/>
         <source>Dialog</source>
-        <translation type="unfinished">Párbeszéd</translation>
+        <translation type="obsolete">Párbeszéd</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetworkTest.ui" line="61"/>
+        <location filename="../src/desktop/GuiNetworkTest.ui" line="94"/>
         <source>IP Address</source>
         <translation type="unfinished">IP cím</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetworkTest.ui" line="93"/>
+        <location filename="../src/desktop/GuiNetworkTest.ui" line="132"/>
         <source>Port</source>
         <translation type="unfinished">Port</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetworkTest.ui" line="125"/>
+        <location filename="../src/desktop/GuiNetworkTest.ui" line="170"/>
         <source>Test connection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetworkTest.ui" line="150"/>
+        <location filename="../src/desktop/GuiNetworkTest.ui" line="204"/>
         <source>Clear report</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetworkTest.ui" line="170"/>
+        <location filename="../src/desktop/GuiNetworkTest.ui" line="224"/>
         <source>Close</source>
         <translation type="unfinished">Bezárás</translation>
     </message>
@@ -5460,27 +5459,27 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="597"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="603"/>
         <source>The tested network address %1 is not present among the available addresses of the network interface to which the connection has been made.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="600"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="606"/>
         <source>The connection to host address %1 was successful.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="606"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="612"/>
         <source>The port tested by the connection is %1 but the one that answered is %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="610"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="616"/>
         <source>The connection to port %1 was successful.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="618"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="624"/>
         <source>Unable to complete the test with an invalid network address.</source>
         <translation type="unfinished"></translation>
     </message>

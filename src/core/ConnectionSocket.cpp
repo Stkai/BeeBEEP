@@ -583,6 +583,12 @@ bool ConnectionSocket::checkTestMessage( const Message& m )
   if( m.type() != Message::Test )
     return false;
 
+  if( !m_isTestConnection )
+  {
+    m_isTestConnection = true;
+    qDebug() << "Connection become TEST after request from" << qPrintable( m_networkAddress.toString() );
+  }
+
   if( Protocol::instance().isTestQuestionMessage( m ) )
   {
     NetworkAddress tested_na = Protocol::instance().networkAddressFromTestMessage( m );

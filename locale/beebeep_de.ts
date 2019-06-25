@@ -2841,10 +2841,6 @@ Bitte wähle einen anderen Namen aus.</translation>
 <context>
     <name>GuiNetworkTest</name>
     <message>
-        <source>Network test</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Your network parameters</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2858,10 +2854,6 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>File transfer port</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter the host address and the port you want to test the connection.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2892,12 +2884,20 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Connection to %1 has been closed.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Test your network</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter the host address and the port you want to test.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiNetworkTestDialog</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Dialogfeld</translation>
+        <translation type="obsolete">Dialogfeld</translation>
     </message>
     <message>
         <source>IP Address</source>

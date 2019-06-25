@@ -2936,7 +2936,7 @@ Inserisci un nome differente.</translation>
     <name>GuiNetworkTest</name>
     <message>
         <source>Network test</source>
-        <translation>Test di rete</translation>
+        <translation type="vanished">Test di rete</translation>
     </message>
     <message>
         <source>Your network parameters</source>
@@ -2956,7 +2956,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Enter the host address and the port you want to test the connection.</source>
-        <translation>Inserisci l&apos;indirizzo IP e la porta su cui vuoi testare la connessione.</translation>
+        <translation type="vanished">Inserisci l&apos;indirizzo IP e la porta su cui vuoi testare la connessione.</translation>
     </message>
     <message>
         <source>The host address entered is not valid.</source>
@@ -3002,13 +3002,17 @@ Inserisci un nome differente.</translation>
         <source>Connection to %1 has been closed.</source>
         <translation>La connessione a %1 è stata chiusa.</translation>
     </message>
+    <message>
+        <source>Test your network</source>
+        <translation>Testa la tua rete</translation>
+    </message>
+    <message>
+        <source>Enter the host address and the port you want to test.</source>
+        <translation>Inserisci l&apos;indirizzo IP e la porta su cui vuoi testare la connessione.</translation>
+    </message>
 </context>
 <context>
     <name>GuiNetworkTestDialog</name>
-    <message>
-        <source>Dialog</source>
-        <translation></translation>
-    </message>
     <message>
         <source>IP Address</source>
         <translation>Indirizzo IP</translation>

@@ -32,7 +32,7 @@ GuiNetworkTest::GuiNetworkTest( QWidget *parent )
   : QDialog( parent ), m_connections()
 {
   setupUi( this );
-  setWindowTitle( tr( "Network test" ) + QString( " - %1" ).arg( Settings::instance().programName() ) );
+  setWindowTitle( tr( "Test your network" ) + QString( " - %1" ).arg( Settings::instance().programName() ) );
   setWindowIcon( IconManager::instance().icon( "network-test.png" ) );
   Bee::removeContextHelpButton( this );
 
@@ -42,10 +42,11 @@ GuiNetworkTest::GuiNetworkTest( QWidget *parent )
                      .arg( tr( "Message port" ) ).arg( Settings::instance().localUser().networkAddress().hostPort() )
                      .arg( tr( "File transfer port" ) ).arg( Settings::instance().defaultFileTransferPort() );
 
-  QString s_txt2 = tr( "Enter the host address and the port you want to test the connection.");
+  QString s_txt2 = tr( "Enter the host address and the port you want to test.");
 
-  QString s_header = QString( "%1<br><br>%2." ).arg( s_txt1 ).arg( s_txt2 );
-  mp_lHelp->setText( s_header );
+  mp_lHelp1->setText( s_txt1 );
+  mp_lHelp2->setText( s_txt2 );
+
   connect( mp_pbTest, SIGNAL( clicked() ), this, SLOT( startTest() ) );
   connect( mp_pbClose, SIGNAL( clicked() ), this, SLOT( closeTest() ) );
   connect( mp_pbClear, SIGNAL( clicked() ), this, SLOT( clearReport() ) );
@@ -75,6 +76,7 @@ void GuiNetworkTest::startTest()
     return;
   }
 
+  mp_pbTest->setEnabled( false );
   NetworkAddress na( host_address, static_cast<quint16>(host_port) );
   ConnectionSocket* cs = new ConnectionSocket( this );
   cs->setTestConnection( true );
@@ -85,6 +87,7 @@ void GuiNetworkTest::startTest()
   m_connections.append( cs );
   addToReport( tr( "Connecting to %1" ).arg( na.toString() + QString( "..." ) ) );
   cs->connectToNetworkAddress( na );
+  QTimer::singleShot( 5000, this, SLOT( enableTestButton() ) );
 }
 
 void GuiNetworkTest::removeConnection( ConnectionSocket* cs, bool abort_connection )
@@ -193,4 +196,9 @@ void GuiNetworkTest::onTickEvent( int ticks )
     if( cs->isConnecting() || cs->isConnected() )
       cs->onTickEvent( ticks );
   }
+}
+
+void GuiNetworkTest::enableTestButton()
+{
+  mp_pbTest->setEnabled( true );
 }

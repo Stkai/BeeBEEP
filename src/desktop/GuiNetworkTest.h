@@ -46,6 +46,7 @@ protected slots:
   void onTestCompleted( const QString& );
   void closeTest();
   void clearReport();
+  void enableTestButton();
 
 protected:
   void addToReport( const QString& );
