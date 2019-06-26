@@ -88,7 +88,6 @@ QIcon GuiIconProvider::findIcon( const FileInfo& file_info )
           return mime_icon;
       }
     }
-  }
   #endif
 #endif
 
