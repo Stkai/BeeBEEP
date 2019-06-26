@@ -168,5 +168,6 @@
         <file>images/unsent-message.png</file>
         <file>images/beebeep-tray.png</file>
         <file>images/network-test.png</file>
+        <file>images/file-compressed.png</file>
     </qresource>
 </RCC>

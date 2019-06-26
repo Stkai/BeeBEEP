@@ -52,7 +52,7 @@ GuiShareBox::GuiShareBox( QWidget *parent )
   mp_splitter->addWidget( mp_outFrame );
   grid_layout->addWidget( mp_splitter, 1, 0, 1, 1);
 
-  mp_lTitle->setText( QString( "<b>%1</b>" ).arg( tr( "ShareBox" ) ) );
+  mp_lTitle->setText( QString( "<b>%1</b>" ).arg( QString( "BeeBOX" ) ) );
 
   mp_myBox->initTree();
   mp_outBox->initTree();
@@ -61,12 +61,12 @@ GuiShareBox::GuiShareBox( QWidget *parent )
   m_outCurrentFolder = "";
   m_userId = ID_INVALID;
 
-  mp_pbMyUpdate->setToolTip( tr( "Update your ShareBox" ) );
-  mp_pbMyCreateFolder->setToolTip( tr( "Create folder in your ShareBox" ) );
+  mp_pbMyUpdate->setToolTip( tr( "Update your BeeBOX" ) );
+  mp_pbMyCreateFolder->setToolTip( tr( "Create folder in your BeeBOX" ) );
   mp_pbMyOpenFolder->setToolTip( tr( "Show current folder" ) );
-  mp_pbOutUpdate->setToolTip( tr( "Update ShareBox" ) );
+  mp_pbOutUpdate->setToolTip( tr( "Update BeeBOX" ) );
   mp_pbOutParentFolder->setToolTip( tr( "Back to parent folder" ) );
-  mp_pbOutCreateFolder->setToolTip( tr( "Create folder in ShareBox" ) );
+  mp_pbOutCreateFolder->setToolTip( tr( "Create folder in BeeBOX" ) );
 
   mp_pbSelectMyBox->setIcon( IconManager::instance().icon( "sharebox.png" ) );
   mp_pbMyUpdate->setIcon( IconManager::instance().icon( "update.png" ) );
@@ -114,7 +114,7 @@ void GuiShareBox::onEnableMyShareBoxClicked()
 
   if( select_box )
   {
-    QMessageBox::information( this, Settings::instance().programName(), tr( "ShareBox path does not exist. Please select a valid folder.") );
+    QMessageBox::information( this, Settings::instance().programName(), tr( "BeeBOX path does not exist. Please select a valid folder.") );
     selectMyShareBoxFolder();
   }
   else
@@ -127,7 +127,7 @@ void GuiShareBox::onEnableMyShareBoxClicked()
 void GuiShareBox::selectMyShareBoxFolder()
 {
   QString folder_path = FileDialog::getExistingDirectory( this,
-                                                          tr( "%1 - Select the ShareBox folder" )
+                                                          tr( "%1 - Select the BeeBOX folder" )
                                                           .arg( Settings::instance().programName() ),
                                                                 Settings::instance().shareBoxPath() );
   if( folder_path.isEmpty() )
@@ -141,7 +141,7 @@ void GuiShareBox::selectMyShareBoxFolder()
 void GuiShareBox::setUsers()
 {
   mp_comboUsers->clear();
-  mp_comboUsers->addItem( QString( "..." ), (VNumber)ID_INVALID );
+  mp_comboUsers->addItem( QString( "..." ), static_cast<VNumber>(ID_INVALID) );
   foreach( User u, UserManager::instance().userList().toList() )
   {
     if( u.isStatusConnected() )
@@ -342,7 +342,7 @@ void GuiShareBox::onMyItemDoubleClicked( QTreeWidgetItem* item, int )
   if( !item )
     return;
 
-  GuiShareBoxFileInfoItem* file_info_item = (GuiShareBoxFileInfoItem*)item;
+  GuiShareBoxFileInfoItem* file_info_item = dynamic_cast<GuiShareBoxFileInfoItem*>(item);
 
   if( file_info_item->isFolder() )
   {
@@ -367,7 +367,7 @@ void GuiShareBox::onOutItemDoubleClicked( QTreeWidgetItem* item, int )
   if( !item )
     return;
 
-  GuiShareBoxFileInfoItem* file_info_item = (GuiShareBoxFileInfoItem*)item;
+  GuiShareBoxFileInfoItem* file_info_item = dynamic_cast<GuiShareBoxFileInfoItem*>(item);
 
   if( file_info_item->isFolder() )
   {
@@ -388,7 +388,7 @@ void GuiShareBox::onShareBoxSelected( int )
   if( current_user_id > ID_LOCAL_USER )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "ShareBox requests list for user" << current_user_id;
+    qDebug() << "BeeBOX requests list for user" << current_user_id;
 #endif
     makeShareBoxRequest( current_user_id, current_user_id == m_userId ? m_outCurrentFolder : "", false );
   }
@@ -418,7 +418,7 @@ void GuiShareBox::onShareFolderUnavailable( const User& u, const QString& folder
     if( folder_path != m_outCurrentFolder )
       return;
 
-    mp_lOutBox->setText( tr( "%1 <b>%2</b>" ).arg( folder_path.isEmpty() ? tr( "ShareBox" ) : folder_path ).arg( tr( "is unavailable" ) ) );
+    mp_lOutBox->setText( tr( "%1 <b>%2</b>" ).arg( folder_path.isEmpty() ? QString( "BeeBOX" ) : folder_path ).arg( tr( "is unavailable" ) ) );
     mp_outBox->setToolTip( Bee::removeHtmlTags( mp_lOutBox->text() ) );
   }
 
@@ -487,13 +487,13 @@ void GuiShareBox::dropInMyBox( const QString& share_path )
   QStringList sl_paths = share_path.split( "\n" );
   QList<FileInfo> selected_list = mp_outBox->selectedFileInfoList();
   if( sl_paths.size() != selected_list.size() )
-    qWarning() << "ShareBox (mybox) has found drop list size" << sl_paths.size() << "not equal to selected list size" << selected_list.size();
+    qWarning() << "BeeBOX (mybox) has found drop list size" << sl_paths.size() << "not equal to selected list size" << selected_list.size();
 
   foreach( FileInfo file_info, selected_list )
   {
 #ifdef BEEBEEP_DEBUG
     QString from_path = file_info.shareFolder().isEmpty() ? file_info.name() : QString( "%1%2%3" ).arg( file_info.shareFolder() ).arg( QDir::separator() ).arg( file_info.name() );
-    qDebug() << "Drop in MY sharebox the file" << file_info.name() << "->" << from_path;
+    qDebug() << "Drop in MY BeeBOX the file" << file_info.name() << "->" << from_path;
 #endif
     QString to_path;
     if( m_myCurrentFolder.isEmpty() )
@@ -510,13 +510,13 @@ void GuiShareBox::dropInOutBox( const QString& share_path )
   QStringList sl_paths = share_path.split( "\n" );
   QList<FileInfo> selected_list = mp_myBox->selectedFileInfoList();
   if( sl_paths.size() != selected_list.size() )
-    qWarning() << "ShareBox (outbox) has found drop list size" << sl_paths.size() << "not equal to selected list size" << selected_list.size();
+    qWarning() << "BeeBOX (outbox) has found drop list size" << sl_paths.size() << "not equal to selected list size" << selected_list.size();
 
   foreach( FileInfo file_info, selected_list )
   {
     QString to_path = Bee::convertToNativeFolderSeparator( m_outCurrentFolder );
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "Drop in OUT sharebox the file" << file_info.name() << "->" << to_path;
+    qDebug() << "Drop in OUT BeeBOX the file" << file_info.name() << "->" << to_path;
 #endif
     emit shareBoxUploadRequest( m_userId, file_info, to_path );
   }
@@ -525,7 +525,7 @@ void GuiShareBox::dropInOutBox( const QString& share_path )
 void GuiShareBox::onFileUploadCompleted( VNumber user_id, const FileInfo& fi )
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "ShareBox (upload completed) update list of the folder" << qPrintable( fi.shareFolder() ) << "and user" << user_id;
+  qDebug() << "BeeBOX (upload completed) update list of the folder" << qPrintable( fi.shareFolder() ) << "and user" << user_id;
 #else
   Q_UNUSED( fi );
 #endif
@@ -536,7 +536,7 @@ void GuiShareBox::onFileUploadCompleted( VNumber user_id, const FileInfo& fi )
 void GuiShareBox::onFileDownloadCompleted( VNumber, const FileInfo& fi )
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "ShareBox (download completed) update list of the folder" << qPrintable( fi.shareFolder() );
+  qDebug() << "BeeBOX (download completed) update list of the folder" << qPrintable( fi.shareFolder() );
 #else
   Q_UNUSED( fi );
 #endif

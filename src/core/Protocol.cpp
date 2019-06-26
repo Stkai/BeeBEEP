@@ -1256,6 +1256,7 @@ Message Protocol::fileInfoToMessage( const FileInfo& fi )
     sl << fi.lastModified().toString( Qt::ISODate );
   else
     sl << QString( "" );
+  sl << fi.mimeType();
   m.setData( sl.join( DATA_FIELD_SEPARATOR ) );
   m.addFlag( Message::Private );
   return m;
@@ -1268,7 +1269,7 @@ FileInfo Protocol::fileInfoFromMessage( const Message& m )
   QStringList sl = m.data().split( DATA_FIELD_SEPARATOR );
   if( sl.size() < 4 )
     return fi;
-  fi.setHostPort( sl.takeFirst().toInt() );
+  fi.setHostPort( static_cast<quint16>(sl.takeFirst().toUInt()) );
   fi.setSize( Bee::qVariantToVNumber( sl.takeFirst() ) );
   fi.setId( Bee::qVariantToVNumber( sl.takeFirst() ) );
   QString password = sl.takeFirst();
@@ -1296,6 +1297,9 @@ FileInfo Protocol::fileInfoFromMessage( const Message& m )
         fi.setLastModified( dt_last_modified );
     }
   }
+
+  if( !sl.isEmpty() )
+    fi.setMimeType( sl.takeFirst() );
 
   return fi;
 }
@@ -1336,6 +1340,11 @@ FileInfo Protocol::fileInfo( const QFileInfo& fi, const QString& share_folder, b
 
   file_info.setLastModified( fi.lastModified() );
   file_info.setChatPrivateId( chat_private_id );
+
+#if QT_VERSION >= 0x050000
+  QMimeDatabase mime_db;
+  file_info.setMimeType( mime_db.mimeTypeForFile( fi ).name() );
+#endif
 
   return file_info;
 }

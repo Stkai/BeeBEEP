@@ -207,6 +207,7 @@ private slots:
   void onNewsLoad( bool );
 #endif
   void showNetworkTest();
+  void onNetworkTestWindowClosed();
 
 protected:
   void keyPressEvent( QKeyEvent* );

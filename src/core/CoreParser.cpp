@@ -201,7 +201,7 @@ void Core::parseFileMessage( const User& u, const Message& m )
     if( file_info.exists() && file_info.isDir() )
       to_path = Bee::uniqueFilePath( to_path, false );
 
-    qDebug() << "ShareBox downloads from user" << qPrintable( u.path() ) << "the file" << qPrintable( fi.name() ) << "in path" << qPrintable( to_path );
+    qDebug() << "BeeBOX downloads from user" << qPrintable( u.path() ) << "the file" << qPrintable( fi.name() ) << "in path" << qPrintable( to_path );
     fi.setPath( to_path );
 
     mp_fileTransfer->downloadFile( u.id(), fi );

@@ -1290,7 +1290,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show the ShareBox</source>
-        <translation>Mostra le ShareBox</translation>
+        <translation type="vanished">Mostra le ShareBox</translation>
     </message>
     <message>
         <source>downloading</source>
@@ -1315,6 +1315,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>%1 is not available</source>
         <translation>%1 non è disponibile</translation>
+    </message>
+    <message>
+        <source>Show the BeeBOX</source>
+        <translation>Mostra la BeeBOX</translation>
     </message>
 </context>
 <context>
@@ -3503,19 +3507,19 @@ Inserisci un nome differente.</translation>
     <name>GuiShareBox</name>
     <message>
         <source>ShareBox</source>
-        <translation>ShareBox</translation>
+        <translation type="vanished">ShareBox</translation>
     </message>
     <message>
         <source>Update your ShareBox</source>
-        <translation>Aggiorna la tua ShareBox</translation>
+        <translation type="vanished">Aggiorna la tua ShareBox</translation>
     </message>
     <message>
         <source>Update ShareBox</source>
-        <translation>Aggiorna la ShareBox</translation>
+        <translation type="vanished">Aggiorna la ShareBox</translation>
     </message>
     <message>
         <source>ShareBox path does not exist. Please select a valid folder.</source>
-        <translation>Il percorso della ShareBox non esiste. Selezionane uno valido.</translation>
+        <translation type="vanished">Il percorso della ShareBox non esiste. Selezionane uno valido.</translation>
     </message>
     <message>
         <source>Your ShareBox is disabled</source>
@@ -3527,7 +3531,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>%1 - Select the ShareBox folder</source>
-        <translation>%1 - Seleziona la cartella della ShareBox</translation>
+        <translation type="vanished">%1 - Seleziona la cartella della ShareBox</translation>
     </message>
     <message>
         <source>%1 &lt;b&gt;%2&lt;/b&gt;</source>
@@ -3551,7 +3555,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Create folder in your ShareBox</source>
-        <translation>Crea una cartella nella tua ShareBox</translation>
+        <translation type="vanished">Crea una cartella nella tua ShareBox</translation>
     </message>
     <message>
         <source>Show current folder</source>
@@ -3559,7 +3563,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Create folder in ShareBox</source>
-        <translation>Crea una cartella nello ShareBox</translation>
+        <translation type="vanished">Crea una cartella nello ShareBox</translation>
     </message>
     <message>
         <source>Back to parent folder</source>
@@ -3576,6 +3580,30 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Disabled</source>
         <translation>Disabilitato</translation>
+    </message>
+    <message>
+        <source>Update your BeeBOX</source>
+        <translation>Aggiorna la tua BeeBOX</translation>
+    </message>
+    <message>
+        <source>Create folder in your BeeBOX</source>
+        <translation>Crea una cartella nella tua BeeBOX</translation>
+    </message>
+    <message>
+        <source>Update BeeBOX</source>
+        <translation>Aggiorna BeeBOX</translation>
+    </message>
+    <message>
+        <source>Create folder in BeeBOX</source>
+        <translation>Crea una cartella in BeeBOX</translation>
+    </message>
+    <message>
+        <source>BeeBOX path does not exist. Please select a valid folder.</source>
+        <translation>Il percorso di BeeBOX non esiste. Selezionane uno valido.</translation>
+    </message>
+    <message>
+        <source>%1 - Select the BeeBOX folder</source>
+        <translation>%1 - Seleziona la cartella di BeeBOX</translation>
     </message>
 </context>
 <context>
@@ -3601,7 +3629,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Enable my ShareBox</source>
-        <translation>Abilita la mia ShareBox</translation>
+        <translation type="vanished">Abilita la mia ShareBox</translation>
     </message>
     <message>
         <source>Select your folder</source>
@@ -3614,6 +3642,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Select user</source>
         <translation>Seleziona un utente</translation>
+    </message>
+    <message>
+        <source>Enable my BeeBOX</source>
+        <translation>Abilita la mia BeeBOX</translation>
     </message>
 </context>
 <context>

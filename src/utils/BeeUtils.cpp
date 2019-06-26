@@ -265,6 +265,12 @@ bool Bee::isFileTypeBundle( const QString& file_suffix )
   return sx == "app" || sx == "dmg";
 }
 
+bool Bee::isFileTypeCompressed( const QString& file_suffix )
+{
+  QString sx = file_suffix.toLower();
+  return sx == "zip" || sx == "rar" || sx == "7z" || sx == "gz";
+}
+
 Bee::FileType Bee::fileTypeFromSuffix( const QString& file_suffix )
 {
   if( isFileTypeDocument( file_suffix ) )
@@ -278,6 +284,9 @@ Bee::FileType Bee::fileTypeFromSuffix( const QString& file_suffix )
 
   if( isFileTypeVideo( file_suffix ) )
     return Bee::FileVideo;
+
+  if( isFileTypeCompressed( file_suffix ) )
+    return Bee::FileCompressed;
 
   if( isFileTypeExe( file_suffix ) )
     return Bee::FileExe;
@@ -296,7 +305,8 @@ static const char* FileTypeToString[] =
   QT_TRANSLATE_NOOP( "File", "Document" ),
   QT_TRANSLATE_NOOP( "File", "Other" ),
   QT_TRANSLATE_NOOP( "File", "Executable" ),
-  QT_TRANSLATE_NOOP( "File", "MacOSX" )
+  QT_TRANSLATE_NOOP( "File", "MacOSX" ),
+  QT_TRANSLATE_NOOP( "File", "Compressed" )
 };
 
 QString Bee::fileTypeToString( Bee::FileType ft )

@@ -27,7 +27,7 @@
 #include "IconManager.h"
 
 
-GuiIconProvider* GuiIconProvider::mp_instance = NULL;
+GuiIconProvider* GuiIconProvider::mp_instance = Q_NULLPTR;
 
 
 GuiIconProvider::GuiIconProvider()
@@ -61,6 +61,8 @@ QIcon GuiIconProvider::iconFromFileType( int file_type )
     return IconManager::instance().icon( "file-exe.png" );
   case Bee::FileBundle:
     return IconManager::instance().icon( "file-bundle.png" );
+  case Bee::FileCompressed:
+    return IconManager::instance().icon( "file-compressed.png" );
   default:
     return IconManager::instance().icon( "file-other.png" );
   };
@@ -68,12 +70,32 @@ QIcon GuiIconProvider::iconFromFileType( int file_type )
 
 QIcon GuiIconProvider::findIcon( const FileInfo& file_info )
 {
+#ifdef Q_OS_WIN
   if( m_cache.contains( file_info.suffix() ) )
     return m_cache.value( file_info.suffix() );
+#endif
+
+#if QT_VERSION >= 0x050000
+  #ifdef Q_OS_LINUX
+    if( !file_info.mimeType().isEmpty() )
+    {
+      QMimeDatabase mime_db;
+      QMimeType file_mt = mime_db.mimeTypeForName( file_info.mimeType() );
+      if( file_mt.isValid() )
+      {
+        QIcon mime_icon = QIcon::fromTheme( file_mt.iconName() );
+        if( !mime_icon.isNull() )
+          return mime_icon;
+      }
+    }
+  }
+  #endif
+#endif
 
   QFileInfo fi( file_info.path() );
   if( fi.exists() )
   {
+ #ifdef Q_OS_WIN
     QIcon icon_value = m_provider.icon( fi );
     if( !icon_value.isNull() )
     {
@@ -81,7 +103,7 @@ QIcon GuiIconProvider::findIcon( const FileInfo& file_info )
         m_cache.insert( fi.suffix(), icon_value );
       return icon_value;
     }
-
+#endif
     if( fi.isBundle() )
       return iconFromFileType( Bee::FileBundle );
     if( fi.isExecutable() )

@@ -1250,7 +1250,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Show the ShareBox</source>
-        <translation>Показати сховище</translation>
+        <translation type="vanished">Показати сховище</translation>
     </message>
     <message>
         <source>%1 is not available</source>
@@ -1267,6 +1267,10 @@ Please select a different name.</source>
     <message>
         <source>Show my shared files</source>
         <translation>Показати мои загальнодоступні файли</translation>
+    </message>
+    <message>
+        <source>Show the BeeBOX</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3329,7 +3333,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>%1 - Select the ShareBox folder</source>
-        <translation>%1 - Виберіть папку ShareBox</translation>
+        <translation type="vanished">%1 - Виберіть папку ShareBox</translation>
     </message>
     <message>
         <source>%1: access denied.</source>
@@ -3353,15 +3357,15 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Update ShareBox</source>
-        <translation>Оновити ShareBox</translation>
+        <translation type="vanished">Оновити ShareBox</translation>
     </message>
     <message>
         <source>Update your ShareBox</source>
-        <translation>Оновити ваш ShareBox</translation>
+        <translation type="vanished">Оновити ваш ShareBox</translation>
     </message>
     <message>
         <source>Create folder in ShareBox</source>
-        <translation>Створити папку в сховищі</translation>
+        <translation type="vanished">Створити папку в сховищі</translation>
     </message>
     <message>
         <source>%1 already exists.</source>
@@ -3381,15 +3385,39 @@ Please select a different name.</source>
     </message>
     <message>
         <source>ShareBox path does not exist. Please select a valid folder.</source>
-        <translation>Путь до ShareBox не існує. Виберіть допустиму  папку.</translation>
+        <translation type="vanished">Путь до ShareBox не існує. Виберіть допустиму  папку.</translation>
     </message>
     <message>
         <source>ShareBox</source>
-        <translation>ShareBox</translation>
+        <translation type="vanished">ShareBox</translation>
     </message>
     <message>
         <source>Create folder in your ShareBox</source>
-        <translation>Створити папку в вашем хранилище</translation>
+        <translation type="vanished">Створити папку в вашем хранилище</translation>
+    </message>
+    <message>
+        <source>Update your BeeBOX</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create folder in your BeeBOX</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update BeeBOX</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create folder in BeeBOX</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BeeBOX path does not exist. Please select a valid folder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 - Select the BeeBOX folder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3423,7 +3451,11 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Enable my ShareBox</source>
-        <translation>Включити мой ShareBox</translation>
+        <translation type="vanished">Включити мой ShareBox</translation>
+    </message>
+    <message>
+        <source>Enable my BeeBOX</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

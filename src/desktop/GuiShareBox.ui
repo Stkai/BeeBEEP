@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>607</width>
-    <height>344</height>
+    <width>623</width>
+    <height>347</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -165,7 +165,7 @@
          <enum>Qt::LeftToRight</enum>
         </property>
         <property name="text">
-         <string>Enable my ShareBox</string>
+         <string>Enable my BeeBOX</string>
         </property>
        </widget>
       </item>
@@ -560,7 +560,7 @@
         </property>
         <property name="minimumSize">
          <size>
-          <width>60</width>
+          <width>75</width>
           <height>26</height>
          </size>
         </property>

@@ -244,14 +244,14 @@ void FileTransfer::checkUploadRequest( const FileInfo& file_info_to_check )
   {
     if( !Settings::instance().enableFileSharing() )
     {
-      qWarning() << "ShareBox file upload request refused (file sharing disabled):" << file_info_to_check.name();
+      qWarning() << "BeeBOX file upload request refused (file sharing disabled):" << file_info_to_check.name();
       upload_peer->cancelTransfer();
       return;
     }
 
     if( !Settings::instance().useShareBox() )
     {
-      qWarning() << "ShareBox file upload request refused (sharebox disabled):" << file_info_to_check.name();
+      qWarning() << "BeeBOX file upload request refused (sharebox disabled):" << file_info_to_check.name();
       upload_peer->cancelTransfer();
       return;
     }
@@ -271,13 +271,13 @@ void FileTransfer::checkUploadRequest( const FileInfo& file_info_to_check )
       QFileInfo share_box_file_info( file_path );
       if( !share_box_file_info.exists() )
       {
-        qWarning() << "ShareBox file upload request refused (not exists):" << file_path;
+        qWarning() << "BeeBOX file upload request refused (not exists):" << file_path;
         upload_peer->cancelTransfer();
       }
 
       if( !share_box_file_info.isReadable() )
       {
-        qWarning() << "ShareBox file upload request refused (not readable):" << file_path;
+        qWarning() << "BeeBOX file upload request refused (not readable):" << file_path;
         upload_peer->cancelTransfer();
       }
 

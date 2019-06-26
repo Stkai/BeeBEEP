@@ -30,7 +30,7 @@ class User;
 
 namespace Bee
 {
-  enum FileType { FileAudio, FileVideo, FileImage, FileDocument, FileOther, FileExe, FileBundle, NumFileType };
+  enum FileType { FileAudio, FileVideo, FileImage, FileDocument, FileOther, FileExe, FileBundle, FileCompressed, NumFileType };
 
   inline QIcon userStatusIcon( int );
   QColor userStatusColor( int );
@@ -52,6 +52,7 @@ namespace Bee
   bool isFileTypeDocument( const QString& );
   bool isFileTypeExe( const QString& );
   bool isFileTypeBundle( const QString& );
+  bool isFileTypeCompressed( const QString& );
   QString fileTypeToString( FileType );
   QString dateTimeStringSuffix( const QDateTime& );
   QString capitalizeFirstLetter( const QString&, bool all_chars_after_space );

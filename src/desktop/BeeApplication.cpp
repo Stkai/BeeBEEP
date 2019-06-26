@@ -64,10 +64,6 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
   if( testAttribute( Qt::AA_DontShowIconsInMenus ) )
     setAttribute( Qt::AA_DontShowIconsInMenus, false );
 #endif
-#if QT_VERSION >= 0x050600
-  if( !testAttribute( Qt::AA_EnableHighDpiScaling ) )
-    setAttribute( Qt::AA_EnableHighDpiScaling, true );
-#endif
   addSleepWatcher();
 
   signal( SIGINT, &quitAfterSignal );

@@ -676,7 +676,7 @@ void Core::sendShareBoxRequest( VNumber user_id, const QString& folder_name, boo
   else if( user_id != ID_LOCAL_USER )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "ShareBox sends request to user" << user_id << "for folder" << qPrintable( folder_name );
+    qDebug() << "BeeBOX sends request to user" << user_id << "for folder" << qPrintable( folder_name );
 #endif
     Message m = Protocol::instance().shareBoxRequestPathList( folder_name, create_folder );
     Connection* c = connection( user_id );
@@ -699,7 +699,7 @@ void Core::sendShareBoxRequest( VNumber user_id, const QString& folder_name, boo
 void Core::buildShareBoxFileList( const User& u, const QString& folder_name, bool create_folder )
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Sharebox builds file list in folder" << qPrintable( folder_name ) << "for user" << qPrintable( u.path() );
+  qDebug() << "BeeBOX builds file list in folder" << qPrintable( folder_name ) << "for user" << qPrintable( u.path() );
 #endif
   QString folder_path = QString( "%1%2%3" ).arg( Settings::instance().shareBoxPath() ).arg( QDir::separator() ).arg( folder_name );
   if( create_folder )
@@ -707,7 +707,7 @@ void Core::buildShareBoxFileList( const User& u, const QString& folder_name, boo
     QDir share_box_folder( Settings::instance().shareBoxPath() );
     if( !share_box_folder.mkpath( folder_path ) )
     {
-      qWarning() << "ShareBox is unable to create folder" << qPrintable( folder_path ) << "for user" << qPrintable( u.path() );
+      qWarning() << "BeeBOX is unable to create folder" << qPrintable( folder_path ) << "for user" << qPrintable( u.path() );
       if( u.isLocal() )
         emit shareBoxUnavailable( u, folder_name );
       else
@@ -715,7 +715,7 @@ void Core::buildShareBoxFileList( const User& u, const QString& folder_name, boo
       return;
     }
     else
-      qDebug() << "ShareBox creates folder" << qPrintable( folder_path ) << "for user" << qPrintable( u.path() );
+      qDebug() << "BeeBOX creates folder" << qPrintable( folder_path ) << "for user" << qPrintable( u.path() );
   }
 
   BuildFileList *bfl = new BuildFileList;
@@ -744,7 +744,7 @@ void Core::sendShareBoxList()
   bfl->deleteLater();
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Sharebox has found" << file_info_list.size() << "files in folder" << qPrintable( folder_name );
+  qDebug() << "BeeBOX has found" << file_info_list.size() << "files in folder" << qPrintable( folder_name );
 #endif
 
   if( to_user_id != ID_LOCAL_USER )

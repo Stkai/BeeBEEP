@@ -1258,7 +1258,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Show the ShareBox</source>
-        <translation>ShareBox anzeigen</translation>
+        <translation type="vanished">ShareBox anzeigen</translation>
     </message>
     <message>
         <source>Show the network shared files</source>
@@ -1291,6 +1291,10 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>%1 is not available</source>
         <translation>%1 ist nicht verfügbar</translation>
+    </message>
+    <message>
+        <source>Show the BeeBOX</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3369,7 +3373,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     <name>GuiShareBox</name>
     <message>
         <source>%1 - Select the ShareBox folder</source>
-        <translation>%1 - ShareBox-Ordner auswählen</translation>
+        <translation type="vanished">%1 - ShareBox-Ordner auswählen</translation>
     </message>
     <message>
         <source>%1: access denied.</source>
@@ -3393,7 +3397,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Update ShareBox</source>
-        <translation>ShareBox aktualisieren</translation>
+        <translation type="vanished">ShareBox aktualisieren</translation>
     </message>
     <message>
         <source>Your ShareBox is disabled</source>
@@ -3401,11 +3405,11 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Update your ShareBox</source>
-        <translation>Eigene ShareBox aktualisieren</translation>
+        <translation type="vanished">Eigene ShareBox aktualisieren</translation>
     </message>
     <message>
         <source>Create folder in ShareBox</source>
-        <translation>Ordner in ShareBox erstellen</translation>
+        <translation type="vanished">Ordner in ShareBox erstellen</translation>
     </message>
     <message>
         <source>%1 already exists.</source>
@@ -3413,7 +3417,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>ShareBox path does not exist. Please select a valid folder.</source>
-        <translation>Wähle bitte einen gültigen Ordner aus.</translation>
+        <translation type="vanished">Wähle bitte einen gültigen Ordner aus.</translation>
     </message>
     <message>
         <source>ShareBox is not available</source>
@@ -3421,11 +3425,11 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>ShareBox</source>
-        <translation>ShareBox</translation>
+        <translation type="vanished">ShareBox</translation>
     </message>
     <message>
         <source>Create folder in your ShareBox</source>
-        <translation>Ordner in eigener ShareBox erstellen</translation>
+        <translation type="vanished">Ordner in eigener ShareBox erstellen</translation>
     </message>
     <message>
         <source>Back to parent folder</source>
@@ -3442,6 +3446,30 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>Disabled</source>
         <translation>Deaktiviert</translation>
+    </message>
+    <message>
+        <source>Update your BeeBOX</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create folder in your BeeBOX</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update BeeBOX</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create folder in BeeBOX</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BeeBOX path does not exist. Please select a valid folder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 - Select the BeeBOX folder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3475,11 +3503,15 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Enable my ShareBox</source>
-        <translation>Eigene ShareBox aktivieren</translation>
+        <translation type="vanished">Eigene ShareBox aktivieren</translation>
     </message>
     <message>
         <source>Select user</source>
         <translation>Benutzer auswählen</translation>
+    </message>
+    <message>
+        <source>Enable my BeeBOX</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

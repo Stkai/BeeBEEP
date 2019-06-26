@@ -1338,7 +1338,7 @@ void GuiMain::startExternalApplicationFromActionData()
   QString application_path = act->data().toString();
   qDebug() << "Starting external application:" << qPrintable( application_path );
   if( !QDesktopServices::openUrl( QUrl::fromLocalFile( application_path ) ) )
-    QMessageBox::information( this, Settings::instance().programName(), tr( "Unable to open %1" ).arg( application_path ), tr( "Ok" ) );
+    QMessageBox::information( qApp->activeWindow(), Settings::instance().programName(), tr( "Unable to open %1" ).arg( application_path ), tr( "Ok" ) );
 }
 
 void GuiMain::settingsChanged()
@@ -1427,6 +1427,8 @@ void GuiMain::settingsChanged( QAction* act )
         Bee::setWindowStaysOnTop( mp_log, act->isChecked() );
       if( mp_screenShot )
         Bee::setWindowStaysOnTop( mp_screenShot, act->isChecked() );
+      if( mp_networkTest )
+        Bee::setWindowStaysOnTop( mp_networkTest, act->isChecked() );
     }
     break;
   case 15:
@@ -2756,14 +2758,14 @@ void GuiMain::openUrl( const QUrl& file_url )
 #else
     bool is_exe_file = fi.isExecutable() && !fi.isDir();
 #endif
-    if( is_exe_file && QMessageBox::question( this, Settings::instance().programName(),
+    if( is_exe_file && QMessageBox::question( qApp->activeWindow(), Settings::instance().programName(),
                              tr( "Do you want to open the file %1?" ).arg( file_path ),
                              tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) != 0 )
       return;
 
     qDebug() << "Open file:" << file_path;
     if( !QDesktopServices::openUrl( QUrl::fromLocalFile( file_path ) ) )
-      QMessageBox::information( this, Settings::instance().programName(),
+      QMessageBox::information( qApp->activeWindow(), Settings::instance().programName(),
                               tr( "Unable to open %1" ).arg( file_path.isEmpty() ? file_url.toString() : file_path ), tr( "Ok" ) );
   }
   else
@@ -4157,7 +4159,6 @@ void GuiMain::showFileSharingWindow()
     connect( mp_fileSharing, SIGNAL( downloadSharedFilesRequest( const QList<SharedFileInfo>& ) ), this, SLOT( downloadSharedFiles( QList<SharedFileInfo> ) ) );
     connect( beeCore, SIGNAL( userChanged( const User& ) ), mp_fileSharing, SLOT( onUserChanged( const User& ) ) );
   }
-
   mp_fileSharing->showUp();
 }
 
@@ -4178,7 +4179,6 @@ void GuiMain::showScreenShotWindow()
     connect( mp_screenShot, SIGNAL( screenShotToSend( const QString& ) ), this, SLOT( sendFile( const QString& ) ) );
     connect( mp_screenShot, SIGNAL( destroyed() ), this, SLOT( onScreenShotWindowClosed() ) );
   }
-
   mp_screenShot->showUp();
 }
 
@@ -4614,7 +4614,16 @@ void GuiMain::sendScreenshotToChat( VNumber chat_id )
 void GuiMain::showNetworkTest()
 {
   if( !mp_networkTest )
+  {
     mp_networkTest = new GuiNetworkTest( this );
-  mp_networkTest->updateSettings( Settings::instance().enableFileTransfer() ? QString::number( beeCore->fileTransferPort() ) : tr( "disabled" ) );
+    mp_networkTest->updateSettings( Settings::instance().enableFileTransfer() ? QString::number( beeCore->fileTransferPort() ) : tr( "disabled" ) );
+    connect( mp_networkTest, SIGNAL( destroyed() ), this, SLOT( onScreenShotWindowClosed() ) );
+  }
   mp_networkTest->showUp();
+}
+
+void GuiMain::onNetworkTestWindowClosed()
+{
+  if( mp_networkTest )
+    mp_networkTest = Q_NULLPTR;
 }

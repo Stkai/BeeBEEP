@@ -90,7 +90,7 @@ void GuiShareNetwork::setupToolBar( QToolBar* bar )
   mp_comboFileType = new QComboBox( bar );
   mp_comboFileType->setObjectName( "GuiComboBoxFilterFileType" );
   for( int i = Bee::FileAudio; i < Bee::NumFileType; i++ )
-    mp_comboFileType->insertItem( i, GuiIconProvider::instance().iconFromFileType( i ), Bee::fileTypeToString( (Bee::FileType)i ), i );
+    mp_comboFileType->insertItem( i, GuiIconProvider::instance().iconFromFileType( i ), Bee::fileTypeToString( static_cast<Bee::FileType>(i) ), i );
   mp_comboFileType->insertItem( Bee::NumFileType, IconManager::instance().icon( "star.png" ), tr( "All Files" ), Bee::NumFileType );
   mp_comboFileType->setCurrentIndex( Bee::NumFileType );
   bar->addWidget( mp_comboFileType );
@@ -269,7 +269,7 @@ void GuiShareNetwork::checkItemDoubleClicked( QTreeWidgetItem* item, int )
   if( !item )
     return;
 
-  GuiFileInfoItem* file_info_item = (GuiFileInfoItem*)item;
+  GuiFileInfoItem* file_info_item = dynamic_cast<GuiFileInfoItem*>(item);
 
   if( !file_info_item->isObjectFile() )
     return;
@@ -311,10 +311,10 @@ bool GuiShareNetwork::filterPassThrough( VNumber user_id, const FileInfo& fi )
   if( filter_user_id > 0 && user_id != filter_user_id )
     return false;
 
-  if( mp_comboFileType->currentIndex() == (int)Bee::NumFileType )
+  if( mp_comboFileType->currentIndex() == static_cast<int>(Bee::NumFileType) )
     return true;
   else
-    return mp_comboFileType->currentIndex() == (int)Bee::fileTypeFromSuffix( fi.suffix() );
+    return mp_comboFileType->currentIndex() == static_cast<int>(Bee::fileTypeFromSuffix( fi.suffix() ));
 }
 
 void GuiShareNetwork::showMessage( VNumber user_id, VNumber file_info_id, const QString& msg )

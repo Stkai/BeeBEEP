@@ -158,7 +158,7 @@ void GuiFileSharing::createToolbars()
 {
   mp_actViewShareLocal = mp_barView->addAction( IconManager::instance().icon( "upload.png" ), tr( "Show my shared files" ), this, SLOT( raiseLocalShareView() ) );
   mp_actViewShareNetwork = mp_barView->addAction( IconManager::instance().icon( "download.png" ), tr( "Show the network shared files" ), this, SLOT( raiseNetworkShareView() ) );
-  mp_actViewShareBox = mp_barView->addAction( IconManager::instance().icon( "sharebox.png" ), tr( "Show the ShareBox" ), this, SLOT( raiseShareBoxView() ) );
+  mp_actViewShareBox = mp_barView->addAction( IconManager::instance().icon( "sharebox.png" ), tr( "Show the BeeBOX" ), this, SLOT( raiseShareBoxView() ) );
   addToolBarBreak( Qt::RightToolBarArea );
 }
 

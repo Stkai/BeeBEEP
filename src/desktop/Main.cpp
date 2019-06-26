@@ -74,6 +74,9 @@ bool SetTranslator( QTranslator* translator, QString language_folder, QString la
 
 int main( int argc, char *argv[] )
 {
+#if QT_VERSION >= 0x050600
+  QCoreApplication::setAttribute( Qt::AA_EnableHighDpiScaling, true );
+#endif
   BeeApplication bee_app( argc, argv );
   (void)Settings::instance();
   bee_app.setApplicationName( Settings::instance().programName() );

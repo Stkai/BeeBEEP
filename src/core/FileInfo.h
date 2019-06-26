@@ -58,7 +58,7 @@ public:
   inline void setIsFolder( bool );
   inline void setNetworkAddress( const NetworkAddress& );
   inline void setHostAddress( const QHostAddress& );
-  inline void setHostPort( int );
+  inline void setHostPort( quint16 );
   inline const NetworkAddress& networkAddress() const;
   inline const QByteArray& password() const;
   inline void setPassword( const QByteArray& );
@@ -72,6 +72,8 @@ public:
   inline void setIsInShareBox( bool );
   inline const QString& chatPrivateId() const;
   inline void setChatPrivateId( const QString& );
+  inline const QString& mimeType() const;
+  inline void setMimeType( const QString& );
 
 private:
   TransferType m_transferType;
@@ -88,6 +90,7 @@ private:
   QDateTime m_lastModified;
   bool m_isInShareBox;
   QString m_chatPrivateId;
+  QString m_mimeType;
 
 };
 
@@ -116,7 +119,7 @@ inline void FileInfo::setIsFolder( bool new_value ) { m_isFolder = new_value; }
 inline void FileInfo::setNetworkAddress( const NetworkAddress& new_value ) { m_networkAddress = new_value; }
 inline const NetworkAddress& FileInfo::networkAddress() const { return m_networkAddress; }
 inline void FileInfo::setHostAddress( const QHostAddress& new_value ) { m_networkAddress.setHostAddress( new_value ); }
-inline void FileInfo::setHostPort( int new_value ) { m_networkAddress.setHostPort( new_value ); }
+inline void FileInfo::setHostPort( quint16 new_value ) { m_networkAddress.setHostPort( new_value ); }
 inline const QByteArray& FileInfo::password() const { return m_password; }
 inline void FileInfo::setPassword( const QByteArray& new_value ) { m_password = new_value; }
 inline VNumber FileInfo::id() const { return m_id; }
@@ -129,5 +132,7 @@ inline bool FileInfo::isInShareBox() const { return m_isInShareBox; }
 inline void FileInfo::setIsInShareBox( bool new_value ) { m_isInShareBox = new_value; }
 inline const QString& FileInfo::chatPrivateId() const { return m_chatPrivateId; }
 inline void FileInfo::setChatPrivateId( const QString& new_value ) { m_chatPrivateId = new_value; }
+inline const QString& FileInfo::mimeType() const { return m_mimeType; }
+inline void FileInfo::setMimeType( const QString& new_value ) { m_mimeType = new_value; }
 
 #endif // BEEBEEP_FILEINFO_H

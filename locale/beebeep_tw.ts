@@ -1232,10 +1232,6 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show the ShareBox</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Show the bar of local file sharing</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1265,6 +1261,10 @@ Please select a different name.</source>
     </message>
     <message>
         <source>%1 is not available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show the BeeBOX</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3327,7 +3327,7 @@ Please select a different name.</source>
     <name>GuiShareBox</name>
     <message>
         <source>%1 - Select the ShareBox folder</source>
-        <translation>%1-選擇分享盒目錄</translation>
+        <translation type="vanished">%1-選擇分享盒目錄</translation>
     </message>
     <message>
         <source>%1: access denied.</source>
@@ -3351,7 +3351,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Update ShareBox</source>
-        <translation>更新分享盒</translation>
+        <translation type="vanished">更新分享盒</translation>
     </message>
     <message>
         <source>Your ShareBox is disabled</source>
@@ -3359,11 +3359,11 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Update your ShareBox</source>
-        <translation>更新你的分享盒</translation>
+        <translation type="vanished">更新你的分享盒</translation>
     </message>
     <message>
         <source>Create folder in ShareBox</source>
-        <translation>於分享盒建立目錄</translation>
+        <translation type="vanished">於分享盒建立目錄</translation>
     </message>
     <message>
         <source>%1 already exists.</source>
@@ -3371,7 +3371,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>ShareBox path does not exist. Please select a valid folder.</source>
-        <translation>分享盒路徑不存在, 請選擇有效目錄.</translation>
+        <translation type="vanished">分享盒路徑不存在, 請選擇有效目錄.</translation>
     </message>
     <message>
         <source>ShareBox is not available</source>
@@ -3379,11 +3379,11 @@ Please select a different name.</source>
     </message>
     <message>
         <source>ShareBox</source>
-        <translation>分享盒</translation>
+        <translation type="vanished">分享盒</translation>
     </message>
     <message>
         <source>Create folder in your ShareBox</source>
-        <translation>於你的分享盒建立目錄</translation>
+        <translation type="vanished">於你的分享盒建立目錄</translation>
     </message>
     <message>
         <source>Back to parent folder</source>
@@ -3399,6 +3399,30 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update your BeeBOX</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create folder in your BeeBOX</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update BeeBOX</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create folder in BeeBOX</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BeeBOX path does not exist. Please select a valid folder.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 - Select the BeeBOX folder</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3433,10 +3457,14 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Enable my ShareBox</source>
-        <translation>開啟我的分享盒</translation>
+        <translation type="vanished">開啟我的分享盒</translation>
     </message>
     <message>
         <source>Select user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable my BeeBOX</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
