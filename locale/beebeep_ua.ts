@@ -1175,6 +1175,10 @@ Please select a different name.</source>
         <source>No</source>
         <translation>Ні</translation>
     </message>
+    <message>
+        <source>It is preferable to use square images to avoid display problems.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiEmoticons</name>

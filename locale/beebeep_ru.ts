@@ -1440,38 +1440,44 @@ Please select a different name.</source>
         <translation>Изображения</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="136"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="135"/>
         <source>Unable to load image %1.</source>
         <translation>Не удается загрузить изображение %1.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="136"/>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="167"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="135"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="143"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="179"/>
         <source>Ok</source>
         <translation>ОК</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="176"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="143"/>
+        <source>It is preferable to use square images to avoid display problems.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="188"/>
         <source>Please insert your nickname.</source>
         <translation>Пожалуйста вставьте ваш псевдоним.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="184"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="196"/>
         <source>The nickname &apos;%1&apos; is already in use by the user %2.</source>
         <translation>Псевдоним &apos;%1&apos; уже используется пользователем %2.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="221"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="233"/>
         <source>Be careful, by changing the hash code you may no longer be a member of some groups and you will have to get invited again. Do you really want to regenerate your hash code?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="222"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="234"/>
         <source>Yes</source>
         <translation type="unfinished">Да</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.cpp" line="222"/>
+        <location filename="../src/desktop/GuiEditVCard.cpp" line="234"/>
         <source>No</source>
         <translation type="unfinished">Нет</translation>
     </message>

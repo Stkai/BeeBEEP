@@ -1219,6 +1219,10 @@ Inserisci un nome differente.</translation>
         <source>No</source>
         <translation>No</translation>
     </message>
+    <message>
+        <source>It is preferable to use square images to avoid display problems.</source>
+        <translation>E&apos; preferibile usare immagini quadrate per evitare problemi di visualizzazione.</translation>
+    </message>
 </context>
 <context>
     <name>GuiEmoticons</name>

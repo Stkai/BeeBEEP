@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>453</width>
-    <height>356</height>
+    <width>480</width>
+    <height>380</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -463,7 +463,7 @@
       <widget class="QPushButton" name="mp_pbRegenerateHash">
        <property name="minimumSize">
         <size>
-         <width>180</width>
+         <width>220</width>
          <height>0</height>
         </size>
        </property>

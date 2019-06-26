@@ -718,7 +718,7 @@ void GuiMain::createActions()
   mp_actViewFileSharing = new QAction( IconManager::instance().icon( "file-sharing.png" ), tr( "Show file sharing window" ), this );
   connect( mp_actViewFileSharing, SIGNAL( triggered() ), this, SLOT( showFileSharingWindow() ) );
 
-  mp_actViewLog = new QAction( IconManager::instance().icon( "log.png" ), tr( "Show the %1 log" ).arg( Settings::instance().programName() ), this );
+  mp_actViewLog = new QAction( IconManager::instance().icon( "log.png" ), tr( "Show the %1 log" ).arg( Settings::instance().programName() )+QString("..."), this );
   connect( mp_actViewLog, SIGNAL( triggered() ), this, SLOT( showLogWindow() ) );
 
   mp_actViewScreenShot = new QAction( IconManager::instance().icon( "screenshot.png" ), tr( "Make a screenshot" ), this );
@@ -749,13 +749,14 @@ void GuiMain::createMenus()
   mp_menuMain->addSeparator();
   mp_menuMain->addAction( mp_actBroadcast );
   mp_menuMain->addSeparator();
-  if( Settings::instance().resourceFolder() != Settings::instance().dataFolder() )
-    mp_menuMain->addAction( IconManager::instance().icon( "resource-folder.png" ), tr( "Open your resource folder" ), this, SLOT( openResourceFolder() ) );
-  mp_menuMain->addAction( IconManager::instance().icon( "data-folder.png" ), tr( "Open your data folder" ), this, SLOT( openDataFolder() ) );
-  mp_menuMain->addAction( IconManager::instance().icon( "download-folder.png" ), tr( "Open your download folder" ), this, SLOT( openDownloadFolder() ) );
-
+  mp_menuMain->addAction( mp_actVCard );
   mp_menuMain->addSeparator();
-  mp_menuMain->addAction( IconManager::instance().icon( "network-test.png" ), tr( "Test your network" ), this, SLOT( showNetworkTest() ) );
+  if( Settings::instance().resourceFolder() != Settings::instance().dataFolder() )
+    mp_menuMain->addAction( IconManager::instance().icon( "resource-folder.png" ), tr( "Open your resource folder" )+QString("..."), this, SLOT( openResourceFolder() ) );
+  mp_menuMain->addAction( IconManager::instance().icon( "data-folder.png" ), tr( "Open your data folder" )+QString("..."), this, SLOT( openDataFolder() ) );
+  mp_menuMain->addAction( IconManager::instance().icon( "download-folder.png" ), tr( "Open your download folder" )+QString("..."), this, SLOT( openDownloadFolder() ) );
+  mp_menuMain->addSeparator();
+  mp_menuMain->addAction( IconManager::instance().icon( "network-test.png" ), tr( "Test your network" )+QString("..."), this, SLOT( showNetworkTest() ) );
   mp_menuMain->addSeparator();
   mp_menuMain->addAction( mp_actViewLog );
 #ifdef BEEBEEP_USE_WEBENGINE

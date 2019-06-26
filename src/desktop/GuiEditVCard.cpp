@@ -130,7 +130,6 @@ void GuiEditVCard::changePhoto()
   QImage img;
   QImageReader img_reader( photo_path );
   img_reader.setAutoDetectImageFormat( true );
-  img_reader.setScaledSize( QSize( 96, 96 ) );
   if( !img_reader.read( &img ) )
   {
     QMessageBox::warning( this, Settings::instance().programName(), tr( "Unable to load image %1." ).arg( photo_path ), tr( "Ok" ) );
@@ -138,7 +137,9 @@ void GuiEditVCard::changePhoto()
     return;
   }
 
-  QPixmap pix = QPixmap::fromImage( img );
+  if( img.width() != img.height() )
+    QMessageBox::information( this, Settings::instance().programName(), tr( "It is preferable to use square images to avoid display problems." ), tr( "Ok" ) );
+  QPixmap pix = QPixmap::fromImage( img.scaled( 96, 96, Qt::KeepAspectRatio ) );
   if( !pix.isNull() )
   {
     mp_lPhoto->setPixmap( pix );
