@@ -527,6 +527,11 @@ public:
   inline void setUseDarkStyle( bool );
   inline bool useDarkStyle() const;
 
+  inline void setShowTipsAtStartup( bool );
+  inline bool showTipsAtStartup() const;
+  inline void setShowFactsAtStartup( bool );
+  inline bool showfactsAtStartup() const;
+
   QString autoresponderName() const;
 
   void resetAllColors();
@@ -821,6 +826,8 @@ private:
   bool m_hideEmptyChatsInList;
 
   bool m_useDarkStyle;
+  bool m_showTipsAtStartup;
+  bool m_showFactsAtStartup;
 
 };
 

@@ -551,23 +551,27 @@
     </message>
     <message>
         <source>Image</source>
-        <translation>Immagini</translation>
+        <translation>Immagine</translation>
     </message>
     <message>
         <source>Document</source>
-        <translation>Documenti</translation>
+        <translation>Documento</translation>
     </message>
     <message>
         <source>Other</source>
-        <translation>Altri</translation>
+        <translation>Altro</translation>
     </message>
     <message>
         <source>Executable</source>
-        <translation>Eseguibili</translation>
+        <translation>Eseguibile</translation>
     </message>
     <message>
         <source>MacOSX</source>
         <translation>MacOSX</translation>
+    </message>
+    <message>
+        <source>Compressed</source>
+        <translation>Compresso</translation>
     </message>
 </context>
 <context>
@@ -2850,6 +2854,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Test your network</source>
         <translation>Testa la tua rete</translation>
+    </message>
+    <message>
+        <source>Show tips and facts of the day</source>
+        <translation>Mostra suggerimenti e fatti del giorno</translation>
     </message>
 </context>
 <context>

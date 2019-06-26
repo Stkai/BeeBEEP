@@ -537,6 +537,10 @@
         <source>Executable</source>
         <translation>Виконуваний</translation>
     </message>
+    <message>
+        <source>Compressed</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FileTransferPeer</name>
@@ -2729,6 +2733,10 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Test your network</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show tips and facts of the day</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

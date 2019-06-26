@@ -8,6 +8,8 @@ BeeBEEP 5.6.3 (Under development)
 - File beebeep.rc can be placed also in /etc folder in Unix like systems (Linux and MacOSX)
 - User and chat tooltips show also unsent messages
 - New feature: you can test your network connections in menu "Main" - "Test your network"  
+- Added "Show tips and facts of the day" option in menu "Settings" - "On connection"
+- File share: file icons are now selected from file mimetype in Linux.
 
 BeeBEEP 5.6.2 
 - New feature: you can also send files (dragging and) dropping them on the user in main user list window

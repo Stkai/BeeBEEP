@@ -844,6 +844,12 @@ void GuiMain::createMenus()
   mp_actShowChatListOnConnection->setChecked( Settings::instance().showChatsOnConnection() );
   mp_actShowChatListOnConnection->setData( 79 );
 
+  mp_menuConnectionSettings->addSeparator();
+  act = mp_menuConnectionSettings->addAction( tr( "Show tips and facts of the day" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showTipsOfTheDay() );
+  act->setData( 82 );
+
   mp_menuNetworkStatus = new QMenu( tr( "Network" ), this );
   mp_menuNetworkStatus->setIcon( IconManager::instance().icon( "network.png" ) );
   mp_menuSettings->addMenu( mp_menuNetworkStatus );
@@ -1818,6 +1824,9 @@ void GuiMain::settingsChanged( QAction* act )
         }
       }
     }
+    break;
+  case 82:
+    Settings::instance().setShowTipsOfTheDay( act->isChecked() );
     break;
   case 99:
     break;
