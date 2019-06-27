@@ -86,6 +86,7 @@ private slots:
   void onCoreDisconnected();
   void showAbout();
   void showLicense();
+  void showAboutQt();
   void onUserChanged( const User& );
   void showWritingUser( const User&, VNumber );
   void onUserRemoved( const User& );

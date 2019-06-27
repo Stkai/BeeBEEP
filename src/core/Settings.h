@@ -37,7 +37,6 @@ public:
   QSettings* objectSettings() const; // deleteLater instance after call
 
   void initFolders( const QString& app_folder );
-
   bool enableSaveData() const;
 
   QString currentSettingsFilePath() const;
@@ -77,6 +76,7 @@ public:
   QString defaultPluginFolderPath( bool use_resource_folder ) const;
   QString defaultGroupsFilePath( bool use_resource_folder ) const;
 
+  bool isDevelopmentVersion( const QString& v = QString::null ) const;
   QString version( bool qt_version, bool debug_info ) const;
   int protoVersion() const;
   inline int dataStreamVersion( bool in_load_event ) const;

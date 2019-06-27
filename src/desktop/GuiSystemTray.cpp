@@ -62,6 +62,9 @@ void GuiSystemTray::showUserStatusChanged( VNumber chat_id, const QString& msg )
 
 void GuiSystemTray::setUnreadMessages( VNumber chat_id, int ur )
 {
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "GuiSystemTray::setUnreadMessages(" << chat_id << "," << ur << ")";
+#endif
   if( ur > 0 )
   {
     m_chatId = chat_id;

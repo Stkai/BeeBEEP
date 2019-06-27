@@ -455,8 +455,6 @@ bool GuiChat::setChat( const Chat& c )
 
   m_chatId = c.id();
 
-  updateChatColors();
-
   QString html_text = "";
 
   if( ChatManager::instance().isLoadHistoryCompleted() && historyCanBeShowed() )
@@ -536,6 +534,15 @@ bool GuiChat::setChat( const Chat& c )
     mp_teChat->verticalScrollBar()->setValue( qMin( scrollbar_previous_value, mp_teChat->verticalScrollBar()->maximum() ) );
 
   QApplication::restoreOverrideCursor();
+  updateChat( c );
+  return true;
+}
+
+bool GuiChat::updateChat( const Chat& c )
+{
+  if( m_chatId != c.id() )
+    return false;
+  updateChatColors();
   return true;
 }
 

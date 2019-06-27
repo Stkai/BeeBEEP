@@ -53,6 +53,7 @@ public:
   void editChatMembers();
 
   void updateChatColors();
+  bool updateChat( const Chat& );
 
   void onTickEvent( int );
 

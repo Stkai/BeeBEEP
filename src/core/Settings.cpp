@@ -539,13 +539,33 @@ void Settings::setUserRecognitionMethod( int new_value )
     m_userRecognitionMethod = new_value;
 }
 
+bool Settings::isDevelopmentVersion( const QString& v ) const
+{
+  QString s_version;
+  if( v.isEmpty() )
+    s_version = QString( BEEBEEP_VERSION );
+  else
+    s_version = v;
+
+  QStringList sl = s_version.split( "." );
+  if( sl.isEmpty() )
+  {
+    qWarning() << "INVALID BEEBEEP VERSION FOUND";
+    return true;
+  }
+  int v_num = sl.last().toInt();
+  return v_num % 2 == 1;
+}
+
 QString Settings::version( bool qt_version, bool debug_info ) const
 {
   QString s_version = QString( BEEBEEP_VERSION );
+  if( isDevelopmentVersion( s_version ) || debug_info )
+    s_version += QString( "-%1" ).arg( BEEBEEP_BUILD );
 
   if( debug_info )
   {
-    s_version += QString( " (b%1p%2)" ).arg( BEEBEEP_BUILD ).arg( BEEBEEP_PROTO_VERSION );
+    s_version += QString( "-p%2" ).arg( BEEBEEP_PROTO_VERSION );
 #ifdef BEEBEEP_DISABLE_FILE_TRANSFER
     s_version += QLatin1String( "-noft" );
 #endif

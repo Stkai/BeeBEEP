@@ -223,9 +223,14 @@ void GuiFloatingChat::updateChatMembers( const Chat& c )
 
 void GuiFloatingChat::updateChat( const Chat& c )
 {
-  if( c.id() != mp_chat->chatId() )
-    return;
-  setChat( c );
+  if( mp_chat->updateChat( c ) )
+  {
+    setMainIcon( c.unreadMessages() > 0 );
+    updateChatTitle( c );
+    updateChatMembers( c );
+    mp_chat->updateShortcuts();
+    mp_chat->updateActions( c, beeCore->isConnected(), beeCore->connectedUsers() );
+  }
 }
 
 bool GuiFloatingChat::setChat( const Chat& c )
@@ -488,7 +493,14 @@ void GuiFloatingChat::showChatMessage( const Chat& c, const ChatMessage& cm )
   if( mp_chat->appendChatMessage( c, cm ) )
   {
     if( cm.isFromLocalUser() )
+    {
       updateChatMembers( c );
+    }
+    else
+    {
+      if( !cm.isFromSystem()  )
+        statusBar()->showMessage( "" ); // reset writing message
+    }
   }
 }
 

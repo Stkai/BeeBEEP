@@ -655,11 +655,14 @@ void GuiMain::checkViewActions()
 
 void GuiMain::showAbout()
 {
+#ifdef Q_OS_MAC
+  QMessageBox::about( Q_NULLPTR, Settings::instance().programName(),
+#else
   QMessageBox::about( this, Settings::instance().programName(),
-                      QString( "<b>%1</b> - %2<br><br>%3 %4 %5 %6<br>%7 %8<br>%9<br>" )
+#endif
+                      QString( "<b>%1</b> - Secure Office Messenger<br><br>%2<br>%3 %4 %5<br><br>%6 %7<br>%8<br>" )
                       .arg( Settings::instance().programName() )
-                      .arg( tr( "Secure Lan Messenger" ) )
-                      .arg( tr( "Version" ) )
+                      .arg( Settings::instance().isDevelopmentVersion() ? tr( "Development version") : tr( "Version" ) )
                       .arg( Settings::instance().version( true, true ) )
                       .arg( tr( "for" ) )
                       .arg( Settings::instance().operatingSystem( true ) )
@@ -667,7 +670,6 @@ void GuiMain::showAbout()
                       .arg( QString( "<a href='%1'>Marco Mastroddi</a>" ).arg( Settings::instance().developerWebSite() ) )
                       .arg( QString( "e-mail: <a href='mailto://marco.mastroddi@gmail.com'>marco.mastroddi@gmail.com</a><br>web: <a href='%1'>www.beebeep.net</a>" ).arg( Settings::instance().officialWebSite() ) )
                       );
-
 }
 
 void GuiMain::showLicense()
@@ -680,7 +682,20 @@ void GuiMain::showLicense()
   "but WITHOUT ANY WARRANTY; without even the implied warranty<br>"
   "of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.<br>"
   "See the GNU General Public License for more details." );
+#ifdef Q_OS_MAC
+  QMessageBox::about( Q_NULLPTR, Settings::instance().programName(), license_txt );
+#else
   QMessageBox::about( this, Settings::instance().programName(), license_txt );
+#endif
+}
+
+void GuiMain::showAboutQt()
+{
+#ifdef Q_OS_MAC
+  QMessageBox::aboutQt( Q_NULLPTR, Settings::instance().programName() );
+#else
+  QMessageBox::aboutQt( this, Settings::instance().programName() );
+#endif
 }
 
 void GuiMain::createActions()
@@ -1221,7 +1236,7 @@ void GuiMain::createMenus()
   mp_menuInfo->addSeparator();
   mp_menuInfo->addAction( mp_actAbout );
   mp_menuInfo->addAction( IconManager::instance().icon( "license.png" ), tr( "Show %1's license..." ).arg( Settings::instance().programName() ), this, SLOT( showLicense() ) );
-  act = mp_menuInfo->addAction( IconManager::instance().icon( "qt.png" ), tr( "Qt Library..." ), qApp, SLOT( aboutQt() ) );
+  act = mp_menuInfo->addAction( IconManager::instance().icon( "qt.png" ), tr( "Qt Library..." ), this, SLOT( showAboutQt() ) );
   act->setMenuRole( QAction::AboutQtRole );
   mp_menuInfo->addSeparator();
   mp_menuInfo->addAction( IconManager::instance().icon( "beebeep.png" ), tr( "Open %1 official website..." ).arg( Settings::instance().programName() ), this, SLOT( openWebSite() ) );
@@ -1266,11 +1281,13 @@ void GuiMain::createToolAndMenuBars()
   QLabel *label_version = new QLabel( this );
   label_version->setTextFormat( Qt::RichText );
   label_version->setAlignment( Qt::AlignHCenter | Qt::AlignVCenter );
-  QString label_version_text = QString( "&nbsp;&nbsp;<b>%1</b> %2&nbsp;" )
+  QString label_version_text = QString( "&nbsp;&nbsp;<b>%1%2</b> %3&nbsp;" )
                                 .arg( Settings::instance().version( false, false ) )
+                                .arg( Settings::instance().isDevelopmentVersion() ? QString( "-dev" ) : "" )
                                 .arg( IconManager::instance().toHtml( Settings::instance().operatingSystemIconPath(), "*", 12, 12 ) );
-  label_version->setText( label_version_text );
-  label_version->setToolTip( QString( "BeeBEEP %1 %2" ).arg( Settings::instance().version( true, true ), Settings::instance().operatingSystem( true ) ) );
+                                label_version->setText( label_version_text );
+  label_version->setToolTip( QString( "BeeBEEP %1 %2%3" ).arg( Settings::instance().version( true, true ), Settings::instance().operatingSystem( true ),
+                                                               Settings::instance().isDevelopmentVersion() ? QString( " (%1)" ).arg( tr("Development Version") ) : "" ) );
   menuBar()->setCornerWidget( label_version );
 
   mp_barMain->addAction( mp_menuStatus->menuAction() );
@@ -1995,12 +2012,9 @@ void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
   if( fl_chat && !floating_chat_created )
     fl_chat->showChatMessage( c, cm );
 
-  bool chat_is_visible = fl_chat && fl_chat->isActiveWindow();
-  if( chat_is_visible )
+  if( fl_chat && fl_chat->isActiveWindow() )
   {
-    readAllMessagesInChat( c.id() ); // read will update the lists
-    if( !cm.isFromSystem() && !cm.isFromLocalUser() )
-      fl_chat->statusBar()->showMessage( "" ); // reset writing message
+    readAllMessagesInChat( c.id() );
   }
   else
   {
@@ -3133,6 +3147,9 @@ void GuiMain::onUserRemoved( const User& u )
 
 void GuiMain::onChatChanged( const Chat& c )
 {
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "GuiMain::onChatChanged(" << c.name() << ")";
+#endif
   mp_userList->updateChat( c );
   mp_chatList->updateChat( c );
   mp_groupList->updateChat( c );
@@ -3906,7 +3923,6 @@ void GuiMain::onChatReadByUser( const Chat& c, const User& u )
 void GuiMain::readAllMessagesInChat( VNumber chat_id )
 {
   beeCore->readAllMessagesInChat( chat_id );
-  updateNewMessageAction();
 }
 
 void GuiMain::saveSession( QSessionManager& )
@@ -3927,6 +3943,9 @@ void GuiMain::updateEmoticons()
 void GuiMain::updateNewMessageAction()
 {
   Chat c = ChatManager::instance().firstChatWithUnreadMessages();
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "GuiMain::updateNewMessageAction(" << (c.isValid() ? c.name() : "no new messages") << ")";
+#endif
   mp_trayIcon->setNextChatToRead( c );
   mp_actViewNewMessage->setEnabled( c.isValid() );
   int chat_tab_index = mp_tabMain->indexOf( mp_chatList );
