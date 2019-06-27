@@ -836,27 +836,24 @@ void Bee::showUp( QWidget* w )
 
 void Bee::raiseOnTop( QWidget* w )
 {
+#ifdef Q_OS_WIN
+  Bee::showUp( w );
+  if( !(w->windowFlags() & Qt::WindowStaysOnTopHint) )
+  {
+    ::SetWindowPos( (HWND)w->winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
+    ::SetWindowPos( (HWND)w->winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
+  }
+#else
   bool on_top_flag_added = false;
   if( !(w->windowFlags() & Qt::WindowStaysOnTopHint) )
   {
-#if defined Q_OS_WIN && QT_VERSION < 0x050000
-    ::SetWindowPos( (HWND)w->winId(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
-#else
     Bee::setWindowStaysOnTop( w, true );
-#endif
     on_top_flag_added = true;
   }
-
   Bee::showUp( w );
-
   if( on_top_flag_added )
-  {
-#if defined Q_OS_WIN && QT_VERSION < 0x050000
-    ::SetWindowPos( (HWND)w->winId(), HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE );
-#else
     Bee::setWindowStaysOnTop( w, false );
 #endif
-  }
 }
 
 void Bee::setWindowStaysOnTop( QWidget* w, bool enable )

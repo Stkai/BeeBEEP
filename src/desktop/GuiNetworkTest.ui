@@ -150,6 +150,12 @@
      </item>
      <item row="1" column="4">
       <widget class="QPushButton" name="mp_pbTest">
+       <property name="minimumSize">
+        <size>
+         <width>120</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="text">
         <string>Test connection</string>
        </property>
@@ -200,6 +206,12 @@
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <widget class="QPushButton" name="mp_pbClear">
+       <property name="minimumSize">
+        <size>
+         <width>90</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="text">
         <string>Clear report</string>
        </property>
@@ -220,6 +232,12 @@
      </item>
      <item>
       <widget class="QPushButton" name="mp_pbClose">
+       <property name="minimumSize">
+        <size>
+         <width>90</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="text">
         <string>Close</string>
        </property>

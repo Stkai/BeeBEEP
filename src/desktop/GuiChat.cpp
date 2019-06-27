@@ -75,7 +75,7 @@ GuiChat::GuiChat( QWidget *parent )
   m_defaultChatPalette.setColor( QPalette::Highlight, Qt::yellow );
   m_defaultChatPalette.setColor( QPalette::HighlightedText, Qt::black );
   mp_teChat->setPalette( m_defaultChatPalette );
-  mp_teChat->setFocusPolicy( Qt::ClickFocus );
+  mp_teChat->setFocusPolicy( Qt::NoFocus );
   mp_teChat->setReadOnly( true );
   mp_teChat->setUndoRedoEnabled( false );
   mp_teChat->setContextMenuPolicy( Qt::CustomContextMenu );

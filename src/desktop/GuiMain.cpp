@@ -191,12 +191,10 @@ void GuiMain::initShortcuts()
   mp_scMinimizeAllChats = new QShortcut( this );
   mp_scMinimizeAllChats->setContext( Qt::ApplicationShortcut );
   connect( mp_scMinimizeAllChats, SIGNAL( activated() ), this, SLOT( minimizeAllChats() ) );
-
 #ifdef BEEBEEP_USE_QXT
   mp_scShowAllChats = new QxtGlobalShortcut( this );
   connect( mp_scShowAllChats, SIGNAL( activated() ), this, SLOT( showAllChats() ) );
 #endif
-
   mp_scShowNextUnreadMessage = new QShortcut( this );
   mp_scShowNextUnreadMessage->setContext( Qt::ApplicationShortcut );
   connect( mp_scShowNextUnreadMessage, SIGNAL( activated() ), this, SLOT( showNextChat() ) );
@@ -234,10 +232,10 @@ void GuiMain::checkWindowFlagsAndShow()
   if( mp_tabMain->currentWidget() != mp_home )
     mp_tabMain->setCurrentWidget( mp_home );
 
-  Bee::setWindowStaysOnTop( this, Settings::instance().stayOnTop() );
-
   if( !Settings::instance().enableMaximizeButton() )
     setWindowFlags( windowFlags() & ~Qt::WindowMaximizeButtonHint );
+
+  Bee::setWindowStaysOnTop( this, Settings::instance().stayOnTop() );
 
   if( !isVisible() )
     show();
