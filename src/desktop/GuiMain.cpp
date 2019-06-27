@@ -471,7 +471,7 @@ void GuiMain::showNextChat()
     showChat( c.id() );
     GuiFloatingChat* fl_chat = floatingChat( c.id() );
     if( fl_chat && !fl_chat->isActiveWindow() )
-      QApplication::setActiveWindow( fl_chat );
+      fl_chat->setFocusInChat();
   }
   else
     showMessage( tr( "No new message available" ), 5000 );
@@ -1965,8 +1965,6 @@ void GuiMain::showAlertForMessage( const Chat& c, const ChatMessage& cm )
 
     mp_trayIcon->showNewMessageArrived( c.id(), msg, long_time_show );
   }
-  else
-    mp_trayIcon->setUnreadMessages( c.id(), c.unreadMessages() );
 }
 
 void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
@@ -2500,7 +2498,6 @@ void GuiMain::showChat( VNumber chat_id )
 
   fl_chat->show();
   fl_chat->showUp();
-  QApplication::setActiveWindow( fl_chat );
   fl_chat->setFocusInChat();
 }
 
