@@ -221,10 +221,18 @@ void GuiFloatingChat::updateChatMembers( const Chat& c )
   }
 }
 
+void GuiFloatingChat::updateChat( const Chat& c )
+{
+  if( c.id() != mp_chat->chatId() )
+    return;
+  setChat( c );
+}
+
 bool GuiFloatingChat::setChat( const Chat& c )
 {
   if( mp_chat->setChat( c ) )
   {
+    setMainIcon( c.unreadMessages() > 0 );
     updateChatTitle( c );
     updateChatMembers( c );
     mp_chat->updateShortcuts();

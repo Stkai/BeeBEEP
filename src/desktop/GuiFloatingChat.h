@@ -40,6 +40,7 @@ public:
   void setWindowFlagsAndGeometry();
   inline bool chatIsVisible() const;
   void setMainIcon( bool with_message );
+  void updateChat( const Chat& );
   void updateUser( const User& );
   void setFocusInChat();
   void updateActions( bool is_connected, int connected_users );

@@ -25,6 +25,7 @@
 #define BEEBEEP_GUISYSTEMTRAY_H
 
 #include "Config.h"
+class Chat;
 
 
 class GuiSystemTray : public QSystemTrayIcon
@@ -42,6 +43,8 @@ public:
   void setUnreadMessages( VNumber, int );
   inline VNumber chatId() const;
   inline void resetChatId();
+
+  void setNextChatToRead( const Chat& );
 
   inline bool iconStatusIsMessage() const;
 

@@ -753,9 +753,7 @@ bool Core::readAllMessagesInChat( VNumber chat_id )
       addChatHeader( &c );
     }
     ChatManager::instance().setChat( c );
-
-    // no signal... it will be managed in Gui
-    // emit chatChanged( c );
+    emit chatChanged( c );
     sendLocalUserHasReadChatMessage( c );
     return true;
   }
@@ -783,6 +781,9 @@ void Core::sendLocalUserHasReadChatMessage( const Chat& c )
     {
       if( user_connection->protoVersion() > 62 )
       {
+#ifdef BEEBEEP_DEBUG
+        qDebug() << "Sending read chat message to" << to_user_id;
+#endif
         user_connection->sendMessage( m );
       }
 #ifdef BEEBEEP_DEBUG

@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "Chat.h"
 #include "GuiSystemTray.h"
 #include "IconManager.h"
 #include "Settings.h"
@@ -30,6 +31,14 @@ GuiSystemTray::GuiSystemTray( QObject *parent )
   : QSystemTrayIcon( parent ), m_iconStatus( -1 ), m_chatId( ID_INVALID )
 {
   setDefaultIcon();
+}
+
+void GuiSystemTray::setNextChatToRead( const Chat& c )
+{
+  if( c.isValid() )
+    setUnreadMessages( c.id(), c.unreadMessages() );
+  else
+    setUnreadMessages( ID_INVALID, 0 );
 }
 
 void GuiSystemTray::showNewMessageArrived( VNumber chat_id, const QString& msg, bool long_time )
@@ -53,11 +62,16 @@ void GuiSystemTray::showUserStatusChanged( VNumber chat_id, const QString& msg )
 
 void GuiSystemTray::setUnreadMessages( VNumber chat_id, int ur )
 {
-  m_chatId = chat_id;
   if( ur > 0 )
+  {
+    m_chatId = chat_id;
     setMessageIcon();
+  }
   else
+  {
+    resetChatId();
     setDefaultIcon();
+  }
 }
 
 void GuiSystemTray::setDefaultIcon()

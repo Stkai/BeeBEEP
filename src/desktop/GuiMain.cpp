@@ -1892,15 +1892,10 @@ void GuiMain::showAlertForMessage( const Chat& c, const ChatMessage& cm )
   bool show_message_in_tray = true;
 
   GuiFloatingChat* fl_chat = floatingChat( c.id() );
-
   if( fl_chat )
   {
-    if( fl_chat->chatIsVisible() )
-      return;
-
     fl_chat->setMainIcon( true );
     QApplication::alert( fl_chat, 0 );
-
     if( Settings::instance().raiseOnNewMessageArrived() || cm.isImportant() )
     {
       fl_chat->raiseOnTop();
@@ -1910,9 +1905,6 @@ void GuiMain::showAlertForMessage( const Chat& c, const ChatMessage& cm )
 
   if( Settings::instance().raiseMainWindowOnNewMessageArrived() )
     raiseOnTop();
-
-
-  updateNewMessageAction();
 
   if( show_message_in_tray )
   {
@@ -1957,7 +1949,7 @@ void GuiMain::showAlertForMessage( const Chat& c, const ChatMessage& cm )
     mp_trayIcon->showNewMessageArrived( c.id(), msg, long_time_show );
   }
   else
-    mp_trayIcon->setUnreadMessages( c.id(), 0 );
+    mp_trayIcon->setUnreadMessages( c.id(), c.unreadMessages() );
 }
 
 void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
@@ -2003,11 +1995,7 @@ void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
   if( fl_chat && !floating_chat_created )
     fl_chat->showChatMessage( c, cm );
 
-  if( !cm.alertCanBeSent() ) // use this instead of alert_can_be_showed because it takes care also of groups
-    return;
-
   bool chat_is_visible = fl_chat && fl_chat->isActiveWindow();
-
   if( chat_is_visible )
   {
     readAllMessagesInChat( c.id() ); // read will update the lists
@@ -2016,13 +2004,9 @@ void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
   }
   else
   {
-    if( alert_can_be_showed )
+    if( cm.alertCanBeSent() && alert_can_be_showed )
       showAlertForMessage( c, cm );
-    mp_groupList->updateChat( c );
-    mp_userList->updateChat( c );
-    mp_chatList->updateChat( c );
   }
-  updateNewMessageAction();
 }
 
 void GuiMain::updateUser( const User& u )
@@ -2707,8 +2691,7 @@ void GuiMain::trayIconClicked( QSystemTrayIcon::ActivationReason ar )
 
 void GuiMain::trayMessageClicked()
 {
-  // QT 2017-04-24: Currently this signal is not sent on macOS.
-
+  // QT 2019-06-27: Currently this signal is not sent on macOS.
   if( mp_trayIcon->chatId() != ID_INVALID && ChatManager::instance().chat( mp_trayIcon->chatId() ).isValid() )
   {
     VNumber chat_id = mp_trayIcon->chatId();
@@ -3155,9 +3138,10 @@ void GuiMain::onChatChanged( const Chat& c )
   mp_groupList->updateChat( c );
   GuiFloatingChat* fl_chat = floatingChat( c.id() );
   if( fl_chat )
-    fl_chat->setChat( c );
+    fl_chat->updateChat( c );
   mp_savedChatList->updateSavedChats();
   updateTabTitles();
+  updateNewMessageAction();
 }
 
 void GuiMain::onChatRemoved( const Chat& c )
@@ -3169,7 +3153,10 @@ void GuiMain::onChatRemoved( const Chat& c )
   mp_chatList->updateChats();
   mp_groupList->updateGroups();
   mp_savedChatList->updateSavedChats();
+  if( mp_trayIcon->chatId() == c.id() )
+    mp_trayIcon->setUnreadMessages( c.id(), 0 );
   updateTabTitles();
+  updateNewMessageAction();
 }
 
 bool GuiMain::checkAllChatMembersAreConnected( const QList<VNumber>& users_id )
@@ -3212,8 +3199,6 @@ void GuiMain::clearChat( VNumber chat_id )
   default:
     return;
   }
-
-  updateTabTitles();
 }
 
 void GuiMain::removeChat( VNumber chat_id )
@@ -3476,7 +3461,6 @@ void GuiMain::checkUserSelected( VNumber user_id )
       return;
     }
   }
-
   showChat( c.id() );
 }
 
@@ -3921,32 +3905,7 @@ void GuiMain::onChatReadByUser( const Chat& c, const User& u )
 
 void GuiMain::readAllMessagesInChat( VNumber chat_id )
 {
-  if( beeCore->readAllMessagesInChat( chat_id ) )
-  {
-    Chat c = ChatManager::instance().chat( chat_id );
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Updating chat with" << qPrintable( c.name() ) << "after read all messages";
-#endif
-    mp_userList->setUnreadMessages( c.id(), 0, true );
-    mp_chatList->updateChat( c );
-    mp_groupList->updateChat( c );
-  }
-
-  GuiFloatingChat *fl_chat = floatingChat( chat_id );
-  if( fl_chat )
-    fl_chat->setMainIcon( false );
-
-  Chat c = ChatManager::instance().firstChatWithUnreadMessages();
-  if( c.isValid() )
-  {
-    mp_trayIcon->setUnreadMessages( c.id(), c.unreadMessages() );
-  }
-  else
-  {
-    mp_trayIcon->resetChatId();
-    mp_trayIcon->setDefaultIcon();
-  }
-
+  beeCore->readAllMessagesInChat( chat_id );
   updateNewMessageAction();
 }
 
@@ -3967,7 +3926,9 @@ void GuiMain::updateEmoticons()
 
 void GuiMain::updateNewMessageAction()
 {
-  mp_actViewNewMessage->setEnabled( ChatManager::instance().hasUnreadMessages() );
+  Chat c = ChatManager::instance().firstChatWithUnreadMessages();
+  mp_trayIcon->setNextChatToRead( c );
+  mp_actViewNewMessage->setEnabled( c.isValid() );
   int chat_tab_index = mp_tabMain->indexOf( mp_chatList );
   if( mp_actViewNewMessage->isEnabled() )
   {
@@ -4128,10 +4089,7 @@ void GuiMain::onFileTransferCompleted( VNumber peer_id, const User& u, const Fil
   GuiFloatingChat* fl_chat = floatingChat( c.id() );
   if( fl_chat && fl_chat->isActiveWindow() )
     return;
-
-  mp_userList->updateChat( c );
-  mp_chatList->updateChat( c );
-  updateNewMessageAction();
+  onChatChanged( c );
 }
 
 void GuiMain::sendBuzzToUser( VNumber user_id )
