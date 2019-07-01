@@ -1853,7 +1853,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Secure Lan Messenger</source>
-        <translation>Безпечний мережевий мессенжер</translation>
+        <translation type="vanished">Безпечний мережевий мессенжер</translation>
     </message>
     <message>
         <source>Escape key minimize to tray icon</source>
@@ -2741,6 +2741,10 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Show tips and facts of the day</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Development version</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -1285,7 +1285,7 @@ void GuiMain::createToolAndMenuBars()
                                 .arg( IconManager::instance().toHtml( Settings::instance().operatingSystemIconPath(), "*", 12, 12 ) );
                                 label_version->setText( label_version_text );
   label_version->setToolTip( QString( "BeeBEEP %1 %2%3" ).arg( Settings::instance().version( true, true ), Settings::instance().operatingSystem( true ),
-                                                               Settings::instance().isDevelopmentVersion() ? QString( " (%1)" ).arg( tr("Development Version") ) : "" ) );
+                                                               Settings::instance().isDevelopmentVersion() ? QString( " (%1)" ).arg( tr("Development version") ) : "" ) );
   menuBar()->setCornerWidget( label_version );
 
   mp_barMain->addAction( mp_menuStatus->menuAction() );

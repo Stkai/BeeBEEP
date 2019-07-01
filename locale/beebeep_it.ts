@@ -1856,10 +1856,6 @@ Inserisci un nome differente.</translation>
         <translation>Annulla</translation>
     </message>
     <message>
-        <source>Secure Lan Messenger</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>New message arrived</source>
         <translation>Nuovo messaggio arrivato</translation>
     </message>
@@ -2862,6 +2858,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Show tips and facts of the day</source>
         <translation>Mostra suggerimenti e fatti del giorno</translation>
+    </message>
+    <message>
+        <source>Development version</source>
+        <translation>Versione di sviluppo</translation>
     </message>
 </context>
 <context>
