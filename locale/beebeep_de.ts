@@ -41,7 +41,7 @@
     </message>
     <message>
         <source>Autoresponder</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoresponder</translation>
     </message>
 </context>
 <context>
@@ -68,7 +68,7 @@
     </message>
     <message>
         <source>%1 You are about to send %2 to %3. Checking folder...</source>
-        <translation>%1 Du bis im Begriff, %2 an %3 zu senden. Ordner wird überprüft...</translation>
+        <translation>%1 Du bist im Begriff, %2 an %3 zu senden. Ordner wird überprüft...</translation>
     </message>
     <message>
         <source>Chat with all connected users</source>
@@ -324,7 +324,7 @@
     </message>
     <message>
         <source>%1 %2 is a folder. You can share it.</source>
-        <translation>%1 %2 is ein Ordner. Du kannst ihn freigeben.</translation>
+        <translation>%1 %2 ist ein Ordner. Du kannst ihn freigeben.</translation>
     </message>
     <message>
         <source>%1 users connected</source>
@@ -476,51 +476,51 @@
     </message>
     <message>
         <source>%1 %2 uses old encryption level.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 verwendet eine alte Verschlüsselungsstufe.</translation>
     </message>
     <message>
         <source>%1 %2 will be informed of your changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 wird über deine Änderungen informiert.</translation>
     </message>
     <message>
         <source>%1 This kind of change can be temporary if the user exists and does not leave the group spontaneously.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Diese Art der Änderung kann vorübergehend sein, wenn der Benutzer existiert und die Gruppe nicht spontan verlässt.</translation>
     </message>
     <message>
         <source>%1 %2 wants to remove you from the group chat %3. If you agree please leave the group.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 möchte dich aus dem Gruppenchat %3 entfernen. Wenn du einverstanden bist, verlasse bitte die Gruppe.</translation>
     </message>
     <message>
         <source>%1 You have left group chat %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Du hast den Gruppenchat %2 verlassen.</translation>
     </message>
     <message>
         <source>You are not a member of group %1. Your messages will be not shown.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du bist kein Mitglied der Gruppe %1. Deine Nachrichten werden nicht angezeigt.</translation>
     </message>
     <message>
         <source>domain</source>
-        <translation type="unfinished"></translation>
+        <translation>Domain</translation>
     </message>
     <message>
         <source>%1 Connection closed to user %2 because it uses your hash code.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Verbindung zu Benutzer %2 geschlossen, da dein Hash-Code verwendet wird.</translation>
     </message>
     <message>
         <source>%1 Connection closed to user %2 because it uses same hash code of the already connected user %3: %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Verbindung zu Benutzer %2 geschlossen, da derselbe Hash-Code des bereits verbundenen Benutzers %3 verwendet wird: %4.</translation>
     </message>
     <message>
         <source>%1 User %2 cannot save unsent messages in path: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Benutzer %2 kann ungesendete Nachrichten nicht im Pfad speichern: %3</translation>
     </message>
     <message>
         <source>%1 offline messages will be sent as soon as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Offline-Nachrichten werden schnellstmöglich gesendet.</translation>
     </message>
     <message>
         <source>Offline message will be sent to %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Offline-Nachricht wird an %1 gesendet</translation>
     </message>
 </context>
 <context>
@@ -555,7 +555,7 @@
     </message>
     <message>
         <source>Compressed</source>
-        <translation type="unfinished"></translation>
+        <translation>Komprimierte</translation>
     </message>
 </context>
 <context>
@@ -970,15 +970,15 @@
     </message>
     <message>
         <source>Select chat default text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard-Textfarbe für Chat auswählen</translation>
     </message>
     <message>
         <source>Select chat system text color</source>
-        <translation type="unfinished"></translation>
+        <translation>System-Textfarbe für Chat auswählen</translation>
     </message>
     <message>
         <source>You must close and reopen this window to see the changes applied.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du musst dieses Fenster schließen und erneut öffnen, damit die Änderungen übernommen werden.</translation>
     </message>
 </context>
 <context>
@@ -1017,11 +1017,11 @@
     </message>
     <message>
         <source>Hide empty chats</source>
-        <translation type="unfinished"></translation>
+        <translation>Leere Chats verstecken</translation>
     </message>
     <message>
         <source>Write a message</source>
-        <translation type="unfinished"></translation>
+        <translation>Nachricht schreiben</translation>
     </message>
 </context>
 <context>
@@ -1100,57 +1100,57 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Please select at least one member for the group.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wähle bitte mindestens ein Mitglied für die Gruppe aus.</translation>
     </message>
 </context>
 <context>
     <name>GuiCreateMessage</name>
     <message>
         <source>Create message</source>
-        <translation type="unfinished"></translation>
+        <translation>Nachricht erstellen</translation>
     </message>
     <message>
         <source>Nobody</source>
-        <translation type="unfinished"></translation>
+        <translation>Niemand</translation>
     </message>
     <message>
         <source>Add recipients</source>
-        <translation type="unfinished"></translation>
+        <translation>Empfänger hinzufügen</translation>
     </message>
     <message>
         <source>Please select at least one recipient for your message.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wähle bitte mindestens einen Empfänger für deine Nachricht aus.</translation>
     </message>
     <message>
         <source>You cannot send an empty message.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du kannst keine leere Nachricht senden.</translation>
     </message>
 </context>
 <context>
     <name>GuiCreateMessageWidget</name>
     <message>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>An</translation>
     </message>
     <message>
         <source>Add recipients</source>
-        <translation type="unfinished"></translation>
+        <translation>Empfänger hinzufügen</translation>
     </message>
     <message>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Nachricht</translation>
     </message>
     <message>
         <source>Click to send message</source>
-        <translation type="unfinished"></translation>
+        <translation>Zum Senden der Nachricht klicken</translation>
     </message>
     <message>
         <source>Open chat after sending message</source>
-        <translation type="unfinished"></translation>
+        <translation>Chat nach dem Senden den Nachricht öffnen</translation>
     </message>
     <message>
         <source>Marks the message as important</source>
-        <translation type="unfinished"></translation>
+        <translation>Nachricht als wichtig markieren</translation>
     </message>
 </context>
 <context>
@@ -1185,23 +1185,23 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Disabled by system administrator</source>
-        <translation type="unfinished"></translation>
+        <translation>Vom Systemadministrator deaktiviert</translation>
     </message>
     <message>
         <source>Be careful, by changing the hash code you may no longer be a member of some groups and you will have to get invited again. Do you really want to regenerate your hash code?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sei vorsichtig. Wenn du den Hash-Code änderst, bist du möglicherweise nicht mehr Mitglied einiger Gruppen und musst erneut eingeladen werden. Möchtest du deinen Hash-Code wirklich neu generieren?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished">Ja</translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished">Nein</translation>
+        <translation>Nein</translation>
     </message>
     <message>
         <source>It is preferable to use square images to avoid display problems.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwende vorzugsweise quadratische Bilder, um Anzeigeprobleme zu vermeiden.</translation>
     </message>
 </context>
 <context>
@@ -1302,7 +1302,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Show the BeeBOX</source>
-        <translation type="unfinished"></translation>
+        <translation>Die BeeBOX anzeigen</translation>
     </message>
 </context>
 <context>
@@ -1329,7 +1329,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>The window geometry and state are saved</source>
-        <translation type="obsolete">Fenstereinstellungen gespeichert</translation>
+        <translation type="obsolete">Die Größe und der Status des Fensters wurden gespeichert</translation>
     </message>
     <message>
         <source>Show the preset messages panel</source>
@@ -1341,7 +1341,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Save window&apos;s geometry</source>
-        <translation>Fenstereinstellungen speichern</translation>
+        <translation>Fenstergröße speichern</translation>
     </message>
     <message>
         <source>Show the bar of members</source>
@@ -1357,31 +1357,31 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Save all</source>
-        <translation type="unfinished"></translation>
+        <translation>Alles speichern</translation>
     </message>
     <message>
         <source>Save only geometry</source>
-        <translation type="unfinished"></translation>
+        <translation>Nur Größe speichern</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>Window geometry saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Fenstergröße gespeichert</translation>
     </message>
     <message>
         <source>Window geometry and state saved</source>
-        <translation type="unfinished">Fenstermaße und -zustand gespeichert</translation>
+        <translation>Fenstergröße und -zustand gespeichert</translation>
     </message>
     <message>
         <source>Qt libraries have a bug on saving the window&apos;s state.</source>
-        <translation type="unfinished"></translation>
+        <translation>Qt-Bibliotheken haben einen Fehler beim Speichern des Fensterzustands.</translation>
     </message>
     <message>
         <source>If you have layout problem please save only geometry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenn du Layoutprobleme hast, speichere bitte nur die Größe.</translation>
     </message>
 </context>
 <context>
@@ -1781,7 +1781,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Raise chat window on new message</source>
-        <translation type="obsolete">Chatfenster bei neuer Nachricht in den Vordergrund</translation>
+        <translation type="obsolete">Chatfenster bei neuer Nachricht in den Vordergrund bringen</translation>
     </message>
     <message>
         <source>%1 is not connected.</source>
@@ -1829,7 +1829,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Window geometry and state saved</source>
-        <translation>Fenstermaße und -zustand gespeichert</translation>
+        <translation>Fenstergröße und -zustand gespeichert</translation>
     </message>
     <message>
         <source>Please select the user to whom you would like to send a file.</source>
@@ -2113,7 +2113,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Reset window geometry</source>
-        <translation>Fenstermaße wiederherstellen</translation>
+        <translation>Fenstergröße wiederherstellen</translation>
     </message>
     <message>
         <source>Plugins</source>
@@ -2349,7 +2349,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Save window&apos;s geometry</source>
-        <translation>Fenstermaße speichern</translation>
+        <translation>Fenstergröße speichern</translation>
     </message>
     <message>
         <source>Show the chat in compact view mode</source>
@@ -2533,11 +2533,11 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Do you want to clear all saved status descriptions?</source>
-        <translation>Möchtest du all gespeicherten Statusnachrichten löschen?</translation>
+        <translation>Möchtest du alle gespeicherten Statusnachrichten löschen?</translation>
     </message>
     <message>
         <source>&lt;b&gt;Chat messages can not be saved&lt;/b&gt;. Path:</source>
-        <translation>Pfad:</translation>
+        <translation>&lt;b&gt;Chatnachrichten können nicht gespeichert werden&lt;/b&gt;. Pfad:</translation>
     </message>
     <message>
         <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br /&gt;it under the terms of the GNU General Public License as published&lt;br /&gt;by the Free Software Foundation, either version 3 of the License&lt;br /&gt;or (at your option) any later version.&lt;br /&gt;&lt;br /&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br /&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br /&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br /&gt;See the GNU General Public License for more details.</source>
@@ -2613,179 +2613,179 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbinden</translation>
     </message>
     <message>
         <source>Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Trennen</translation>
     </message>
     <message>
         <source>none</source>
-        <translation type="unfinished">keine</translation>
+        <translation>keine</translation>
     </message>
     <message>
         <source>Open your download folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Downloadordner öffnen</translation>
     </message>
     <message>
         <source>Select download folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Downloadordner wählen</translation>
     </message>
     <message>
         <source>Raise previously opened chat on new message</source>
-        <translation type="unfinished"></translation>
+        <translation>Zuvor geöffneten Chat bei neuer Nachricht in den Vordergrund bringen</translation>
     </message>
     <message>
         <source>Always open chat on new message</source>
-        <translation type="unfinished"></translation>
+        <translation>Bei neuer Nachricht immer Chat öffnen</translation>
     </message>
     <message>
         <source>You are not allowed create groups. The option has been disabled by your system administrator.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du darfst keine Gruppen erstellen. Die Option wurde von deinem Systemadministrator deaktiviert.</translation>
     </message>
     <message>
         <source>You are not allowed modify groups. The option has been disabled by your system administrator.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du darfst keine Gruppen ändern. Die Option wurde von deinem Systemadministrator deaktiviert.</translation>
     </message>
     <message>
         <source>Reset geometry of all windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Größe aller Fenster zurücksetzen</translation>
     </message>
     <message>
         <source>Do you really want to reset window&apos;s geometry?</source>
-        <translation type="unfinished"></translation>
+        <translation>Willst du wirklich die Fenstergröße zurücksetzen?</translation>
     </message>
     <message>
         <source>Geometry of all windows has been reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Größe aller Fenster wurde zurückgesetzt</translation>
     </message>
     <message>
         <source>Save all</source>
-        <translation type="unfinished"></translation>
+        <translation>Alles speichern</translation>
     </message>
     <message>
         <source>Save only geometry</source>
-        <translation type="unfinished"></translation>
+        <translation>Nur Größe speichern</translation>
     </message>
     <message>
         <source>Window geometry saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Fenstergröße gespeichert</translation>
     </message>
     <message>
         <source>Qt libraries have a bug on saving the window&apos;s state.</source>
-        <translation type="unfinished"></translation>
+        <translation>Qt-Bibliotheken haben einen Fehler beim Speichern des Fensterstatus.</translation>
     </message>
     <message>
         <source>If you have layout problem please save only geometry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenn du Layoutprobleme hast, speichere bitte nur die Größe.</translation>
     </message>
     <message>
         <source>Enable maximize button</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximieren-Schaltfläche aktivieren</translation>
     </message>
     <message>
         <source>The option has been disabled by your system administrator.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Option wurde von deinem Systemadministrator deaktiviert.</translation>
     </message>
     <message>
         <source>Select chat background color</source>
-        <translation type="unfinished"></translation>
+        <translation>Hintergrundfarbe für den Chat auswählen</translation>
     </message>
     <message>
         <source>Select chat default text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard-Textfarbe für Chat auswählen</translation>
     </message>
     <message>
         <source>Select chat system text color</source>
-        <translation type="unfinished"></translation>
+        <translation>System-Textfarbe für Chat auswählen</translation>
     </message>
     <message>
         <source>Please select the opacity percentage of inactive chat window (default: %1%)</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte wähle den Prozentsatz der Deckkraft des inaktiven Chat-Fensters aus (Standard: %1%)</translation>
     </message>
     <message>
         <source>Show inactive chat window with %1% opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Inaktives Chatfenster mit %1% Deckkraft anzeigen</translation>
     </message>
     <message>
         <source>Enable notifications also for chat with all users</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiviere Benachrichtigungen auch für Chats mit allen Benutzern</translation>
     </message>
     <message>
         <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it under the terms of the GNU General Public License as published&lt;br&gt;by the Free Software Foundation, either version 3 of the License&lt;br&gt;or (at your option) any later version.&lt;br&gt;&lt;br&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br&gt;See the GNU General Public License for more details.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br&gt;What do you want to do with the selected saved text?</source>
-        <translation type="unfinished"></translation>
+        <translation>Der ausgewählte Chat &apos;%1&apos; hat bereits einen gespeicherten Text.&lt;br&gt; Was möchten Sie mit dem ausgewählten gespeicherten Text tun?</translation>
     </message>
     <message>
         <source>Show the time with the AM/PM notation</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeit in der Darstellungsart AM/PM anzeigen</translation>
     </message>
     <message>
         <source>Use the dark theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Dunkles Thema verwenden</translation>
     </message>
     <message>
         <source>beta</source>
-        <translation type="unfinished"></translation>
+        <translation>beta</translation>
     </message>
     <message>
         <source>News</source>
-        <translation type="unfinished">Neuigkeiten</translation>
+        <translation>Neuigkeiten</translation>
     </message>
     <message>
         <source>Information about %1...</source>
-        <translation type="unfinished"></translation>
+        <translation>Informationen über %1...</translation>
     </message>
     <message>
         <source>Always shows the progress of file transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Den Fortschritt von Dateiübertragungen immer anzeigen</translation>
     </message>
     <message>
         <source>Restore the colors to the default ones</source>
-        <translation type="unfinished"></translation>
+        <translation>Farben auf die Standardwerte zurücksetzen</translation>
     </message>
     <message>
         <source>You must close and reopen the chat windows to see the changes applied.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du musst das Chatfenster schließen und erneut öffnen, um die Änderungen zu sehen.</translation>
     </message>
     <message>
         <source>Do you really want to restore the colors to the default ones?</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchtest du die Farben wirklich auf die Standardwerte zurücksetzen?</translation>
     </message>
     <message>
         <source>Show the user list</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzerliste anzeigen</translation>
     </message>
     <message>
         <source>Show the chat list</source>
-        <translation type="unfinished"></translation>
+        <translation>Chatliste anzeigen</translation>
     </message>
     <message>
         <source>Write a message</source>
-        <translation type="unfinished"></translation>
+        <translation>Nachricht erstellen</translation>
     </message>
     <message>
         <source>Raise main window on new message</source>
-        <translation type="unfinished"></translation>
+        <translation>Hauptfenster bei neuer Nachricht in den Vordergrund bringen</translation>
     </message>
     <message>
         <source>Save unsent messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungesendete Nachrichten speichern</translation>
     </message>
     <message>
         <source>Saving unsent messages may fail if &apos;Save users&apos; and &apos;Save groups&apos; options are not enabled. Do you want to enable them?</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Speichern von nicht gesendeten Nachrichten kann fehlschlagen, wenn die Optionen &apos;Benutzer speichern&apos; und &apos;Gruppen speichern&apos; nicht aktiviert sind. Möchtest du sie aktivieren?</translation>
     </message>
     <message>
         <source>Test your network</source>
-        <translation type="unfinished"></translation>
+        <translation>Dein Netzwerk testen</translation>
     </message>
     <message>
         <source>Show tips and facts of the day</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige Tipps und Fakten des Tages</translation>
     </message>
 </context>
 <context>
@@ -2851,66 +2851,66 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>default</source>
-        <translation type="unfinished">Standard</translation>
+        <translation>Standard</translation>
     </message>
 </context>
 <context>
     <name>GuiNetworkTest</name>
     <message>
         <source>Your network parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>Deine Netzwerkparameter</translation>
     </message>
     <message>
         <source>IP Address</source>
-        <translation type="unfinished">IP-Adresse</translation>
+        <translation>IP-Adresse</translation>
     </message>
     <message>
         <source>Message port</source>
-        <translation type="unfinished"></translation>
+        <translation>Nachrichtenport</translation>
     </message>
     <message>
         <source>File transfer port</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateiübertragungsport</translation>
     </message>
     <message>
         <source>The host address entered is not valid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die eingegebene Hostadresse ist ungültig.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished">OK</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>The port entered is not valid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der eingegebene Port ist ungültig.</translation>
     </message>
     <message>
         <source>Connecting to %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbinde zu %1</translation>
     </message>
     <message>
         <source>Connection to %1 is active.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbindung zu %1 ist aktiv.</translation>
     </message>
     <message>
         <source>Connection to %1 has error #%2: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbindung zu %1 hat Fehler #%2: %3</translation>
     </message>
     <message>
         <source>Connection to %1 has been closed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbindung zu %1 wurde geschlossen.</translation>
     </message>
     <message>
         <source>Test your network</source>
-        <translation type="unfinished"></translation>
+        <translation>Dein Netzwerk testen</translation>
     </message>
     <message>
         <source>Enter the host address and the port you want to test.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gib die Hostadresse und den Port ein, den du testen möchtest.</translation>
     </message>
     <message>
         <source>It is not possible to perform the test if you are not connected to the BeeBEEP network.</source>
-        <translation type="unfinished"></translation>
+        <translation>Es ist nicht möglich, den Test durchzuführen, wenn du nicht mit dem BeeBEEP-Netzwerk verbunden bist.</translation>
     </message>
 </context>
 <context>
@@ -2921,23 +2921,23 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>IP Address</source>
-        <translation type="unfinished">IP-Adresse</translation>
+        <translation>IP-Adresse</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished">Port</translation>
+        <translation>Port</translation>
     </message>
     <message>
         <source>Test connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbindung testen</translation>
     </message>
     <message>
         <source>Clear report</source>
-        <translation type="unfinished"></translation>
+        <translation>Bericht löschen</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Schließen</translation>
+        <translation>Schließen</translation>
     </message>
 </context>
 <context>
@@ -3008,23 +3008,23 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Disable system proxy for connections</source>
-        <translation type="unfinished"></translation>
+        <translation>System-Proxy für Verbindungen deaktivieren</translation>
     </message>
     <message>
         <source>Use default multicast group address</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard-Multicast-Gruppenadresse verwenden</translation>
     </message>
     <message>
         <source>Contact offline users directly</source>
-        <translation type="unfinished"></translation>
+        <translation>Offline-Benutzer direkt kontaktieren</translation>
     </message>
     <message>
         <source>IP Multicast TTL</source>
-        <translation type="unfinished"></translation>
+        <translation>IP Multicast TTL</translation>
     </message>
     <message>
         <source>(only for IPv4 multicast)</source>
-        <translation type="unfinished"></translation>
+        <translation>(nur für IPv4 Multicast)</translation>
     </message>
 </context>
 <context>
@@ -3343,42 +3343,42 @@ Bitte wähle einen anderen Namen aus.</translation>
     <name>GuiSelectItems</name>
     <message>
         <source>One or more elements of the list have been selected but are hidden by the search text. Do you still want to add them?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein oder mehrere Elemente der Liste wurden ausgewählt, werden jedoch durch den Suchtext ausgeblendet. Möchtest du sie trotzdem hinzufügen?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished">Ja</translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished">Nein</translation>
+        <translation>Nein</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
 </context>
 <context>
     <name>GuiSelectItemsWidget</name>
     <message>
         <source>Ok</source>
-        <translation type="unfinished">OK</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>Clear selection</source>
-        <translation type="unfinished">Auswahl aufheben</translation>
+        <translation>Auswahl aufheben</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished">Suchen</translation>
+        <translation>Suchen</translation>
     </message>
     <message>
         <source>Clear filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Filter löschen</translation>
     </message>
 </context>
 <context>
@@ -3461,27 +3461,27 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Update your BeeBOX</source>
-        <translation type="unfinished"></translation>
+        <translation>Deine BeeBOX aktualisieren</translation>
     </message>
     <message>
         <source>Create folder in your BeeBOX</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordner in deiner BeeBOX erstellen</translation>
     </message>
     <message>
         <source>Update BeeBOX</source>
-        <translation type="unfinished"></translation>
+        <translation>BeeBOX aktualisieren</translation>
     </message>
     <message>
         <source>Create folder in BeeBOX</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordner in BeeBOX erstellen</translation>
     </message>
     <message>
         <source>BeeBOX path does not exist. Please select a valid folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>BeeBOX-Pfad existiert nicht. Bitte wähle einen gültigen Ordner.</translation>
     </message>
     <message>
         <source>%1 - Select the BeeBOX folder</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - BeeBOX-Ordner auswählen</translation>
     </message>
 </context>
 <context>
@@ -3523,7 +3523,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Enable my BeeBOX</source>
-        <translation type="unfinished"></translation>
+        <translation>Meine BeeBOX aktivieren</translation>
     </message>
 </context>
 <context>
@@ -3821,15 +3821,15 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <source>Global</source>
-        <translation type="unfinished"></translation>
+        <translation>Global</translation>
     </message>
     <message>
         <source>Local</source>
-        <translation type="unfinished"></translation>
+        <translation>Lokal</translation>
     </message>
 </context>
 <context>
@@ -3926,31 +3926,31 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>You cannot send files to %1 because the user is offline.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du kannst keine Dateien an %1 senden, da der Benutzer offline ist.</translation>
     </message>
     <message>
         <source>Do you want to send %1 %2 to %3?</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchtest du %1 %2 an %3 senden?</translation>
     </message>
     <message>
         <source>file</source>
-        <translation type="unfinished">Datei</translation>
+        <translation>Datei</translation>
     </message>
     <message>
         <source>files</source>
-        <translation type="unfinished">Dateien</translation>
+        <translation>Dateien</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished">Ja</translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished">Nein</translation>
+        <translation>Nein</translation>
     </message>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation type="unfinished">Die Qt-Bibliothek dieses Betriebssystems unterstützt Ziehen und Ablegen von Dateien nicht. Du musst die Datei zum Senden erneut auswählen.</translation>
+        <translation>Die Qt-Bibliothek dieses Betriebssystems unterstützt Ziehen und Ablegen von Dateien nicht. Du musst die Datei zum Senden erneut auswählen.</translation>
     </message>
 </context>
 <context>
@@ -4039,7 +4039,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>dd/MM/yyyy</source>
-        <translation>TT.MM.JJJ</translation>
+        <translation>dd/MM/yyyy</translation>
     </message>
     <message>
         <source>Remove photo</source>
@@ -4079,7 +4079,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Regenerate your hash code...</source>
-        <translation type="unfinished"></translation>
+        <translation>Deinen Hash-Code regenerieren...</translation>
     </message>
 </context>
 <context>
@@ -4167,7 +4167,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     <name>GuiWebView</name>
     <message>
         <source>News</source>
-        <translation type="unfinished">Neuigkeiten</translation>
+        <translation>Neuigkeiten</translation>
     </message>
 </context>
 <context>
@@ -4186,7 +4186,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Disabled by system administrator</source>
-        <translation type="unfinished"></translation>
+        <translation>Vom Systemadministrator deaktiviert</translation>
     </message>
 </context>
 <context>
@@ -4209,7 +4209,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished">OK</translation>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
@@ -4409,51 +4409,51 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Today is %1&apos;s birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 hat heute Geburtstag</translation>
     </message>
     <message>
         <source>Tomorrow is %1&apos;s birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>&gt;Morgen hat %1 Geburtstag</translation>
     </message>
     <message>
         <source>%1&apos;s birthday is in %2 days</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Geburtstag von %1 ist in %2 Tagen</translation>
     </message>
     <message>
         <source>Yesterday was %1&apos;s birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestern hatte %1 Geburtstag</translation>
     </message>
     <message>
         <source>Happy Birthday to you!</source>
-        <translation type="unfinished">Herzlichen Glückwunsch zum Geburtstag!</translation>
+        <translation>Herzlichen Glückwunsch zum Geburtstag!</translation>
     </message>
     <message>
         <source>unsent messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungesendete Nachrichten</translation>
     </message>
     <message>
         <source>The connection to %1 was not successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Verbindung zu %1 war nicht erfolgreich.</translation>
     </message>
     <message>
         <source>The tested network address %1 is not present among the available addresses of the network interface to which the connection has been made.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die getestete Netzwerkadresse %1 ist unter den verfügbaren Adressen der Netzwerkschnittstelle, zu der die Verbindung hergestellt wurde, nicht vorhanden.</translation>
     </message>
     <message>
         <source>The connection to host address %1 was successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Verbindung zur Hostadresse %1 war erfolgreich.</translation>
     </message>
     <message>
         <source>The port tested by the connection is %1 but the one that answered is %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der von der Verbindung getestete Port ist %1, geantwortet hat aber %2.</translation>
     </message>
     <message>
         <source>The connection to port %1 was successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Verbindung zu Port %1 war erfolgreich.</translation>
     </message>
     <message>
         <source>Unable to complete the test with an invalid network address.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Test kann nicht mit einer ungültigen Netzwerkadresse abgeschlossen werden.</translation>
     </message>
 </context>
 <context>
@@ -4482,7 +4482,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     <name>Settings</name>
     <message>
         <source>Autoresponder</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoresponder</translation>
     </message>
 </context>
 <context>

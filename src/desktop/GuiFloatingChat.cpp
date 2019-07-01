@@ -279,8 +279,8 @@ void GuiFloatingChat::closeEvent( QCloseEvent* e )
 
 void GuiFloatingChat::setWindowFlagsAndGeometry()
 {
-  Bee::setWindowStaysOnTop( this, Settings::instance().stayOnTop() );
   setAttribute( Qt::WA_ShowWithoutActivating );
+  Bee::setWindowStaysOnTop( this, Settings::instance().stayOnTop() );
 
   if( Settings::instance().floatingChatGeometry().isEmpty() )
   {
