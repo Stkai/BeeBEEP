@@ -98,6 +98,8 @@ public:
   QString gaUrl() const;
   QString gaEventVersion() const;
   QString developerWebSite() const;
+  QString tipsWebSite() const;
+  QString factWebSite() const;
 
   QString guiCustomListStyleSheet( const QString& background_color, const QString& background_image_path ) const;
 
@@ -344,9 +346,6 @@ public:
   inline const QString& beepFilePath() const;
   inline void setBeepFilePath( const QString& );
 
-  inline bool showTipsOfTheDay() const;
-  inline void setShowTipsOfTheDay( bool );
-
   inline bool automaticFileName() const;
   inline void setAutomaticFileName( bool );
   inline bool overwriteExistingFiles() const;
@@ -527,11 +526,6 @@ public:
   inline void setUseDarkStyle( bool );
   inline bool useDarkStyle() const;
 
-  inline void setShowTipsAtStartup( bool );
-  inline bool showTipsAtStartup() const;
-  inline void setShowFactsAtStartup( bool );
-  inline bool showfactsAtStartup() const;
-
   QString autoresponderName() const;
 
   void resetAllColors();
@@ -662,7 +656,6 @@ private:
   bool m_raiseMainWindowOnNewMessageArrived;
   bool m_alwaysShowFileTransferProgress;
   bool m_showUserPhoto;
-  bool m_showTipsOfTheDay;
   bool m_automaticFileName;
   bool m_overwriteExistingFiles;
   bool m_showChatToolbar;
@@ -827,8 +820,6 @@ private:
 
   bool m_useDarkStyle;
   bool m_showTipsAtStartup;
-  bool m_showFactsAtStartup;
-
 };
 
 
@@ -926,8 +917,6 @@ inline bool Settings::beepOnNewMessageArrived() const { return m_beepOnNewMessag
 inline void Settings::setBeepOnNewMessageArrived( bool new_value ) { m_beepOnNewMessageArrived = new_value; }
 inline const QString& Settings::beepFilePath() const { return m_beepFilePath; }
 inline void Settings::setBeepFilePath( const QString& new_value ) { m_beepFilePath = new_value; }
-inline bool Settings::showTipsOfTheDay() const { return m_showTipsOfTheDay; }
-inline void Settings::setShowTipsOfTheDay( bool new_value ) { m_showTipsOfTheDay = new_value; }
 inline bool Settings::showVCardOnRightClick() const { return m_showVCardOnRightClick; }
 inline void Settings::setShowVCardOnRightClick( bool new_value ) { m_showVCardOnRightClick = new_value; }
 inline bool Settings::showMessagesGroupByUser() const { return m_showMessagesGroupByUser; }

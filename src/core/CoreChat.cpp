@@ -33,7 +33,6 @@
 #include "PluginManager.h"
 #include "Random.h"
 #include "Settings.h"
-#include "Tips.h"
 #include "UserManager.h"
 
 
@@ -525,20 +524,6 @@ void Core::sendWritingMessage( VNumber chat_id )
 
     c->sendMessage( m );
   }
-}
-
-void Core::showFactOfTheDay()
-{
-  QString fact_of_the_day = QString( "%1 %2" ).arg( IconManager::instance().toHtml( "fact.png", "*T*" ),
-                                                   qApp->translate( "Tips", BeeBeepFacts[ Random::number( 0, (BeeBeepFactsSize-1) ) ] ) );
-  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, fact_of_the_day, DispatchToChat, ChatMessage::System );
-}
-
-void Core::showTipOfTheDay()
-{
-  QString tip_of_the_day = QString( "%1 %2" ).arg( IconManager::instance().toHtml( "tip.png", "*T*" ),
-                                                   qApp->translate( "Tips", BeeBeepTips[ Random::number( 0, (BeeBeepTipsSize-1) ) ] ) );
-  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tip_of_the_day, DispatchToChat, ChatMessage::System );
 }
 
 void Core::sendGroupChatRequestMessage( const Chat& group_chat, const UserList& user_list, const User& to_user )

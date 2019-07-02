@@ -66,7 +66,7 @@ win32|unix|macx {
 #  }
 #}
 
-HEADERS += Interfaces.h Tips.h
+HEADERS += Interfaces.h
 
 RESOURCES += beebeep.qrc emojis.qrc
 RESOURCES += qdarkstyle/style.qrc

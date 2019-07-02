@@ -858,12 +858,6 @@ void GuiMain::createMenus()
   mp_actShowChatListOnConnection->setChecked( Settings::instance().showChatsOnConnection() );
   mp_actShowChatListOnConnection->setData( 79 );
 
-  mp_menuConnectionSettings->addSeparator();
-  act = mp_menuConnectionSettings->addAction( tr( "Show tips and facts of the day" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showTipsOfTheDay() );
-  act->setData( 82 );
-
   mp_menuNetworkStatus = new QMenu( tr( "Network" ), this );
   mp_menuNetworkStatus->setIcon( IconManager::instance().icon( "network.png" ) );
   mp_menuSettings->addMenu( mp_menuNetworkStatus );
@@ -1244,8 +1238,8 @@ void GuiMain::createMenus()
   mp_menuInfo->addSeparator();
   mp_menuInfo->addAction( IconManager::instance().icon( "star.png" ), tr( "Information about %1..." ).arg( "Marco Mastroddi" ), this, SLOT( openDeveloperWebSite() ) );
   mp_menuInfo->addSeparator();
-  mp_menuInfo->addAction( IconManager::instance().icon( "tip.png" ), tr( "Tip of the day" ), this, SLOT( showTipOfTheDay() ) );
-  mp_menuInfo->addAction( IconManager::instance().icon( "fact.png" ), tr( "Fact of the day" ), this, SLOT( showFactOfTheDay() ) );
+  mp_menuInfo->addAction( IconManager::instance().icon( "tip.png" ), tr( "Show Tips..." ), this, SLOT( showTipOfTheDay() ) );
+  mp_menuInfo->addAction( IconManager::instance().icon( "fact.png" ), tr( "Discover the fact of the day..." ), this, SLOT( showFactOfTheDay() ) );
 
 #ifdef BEEBEEP_DEBUG
   mp_menuInfo->addSeparator();
@@ -1840,9 +1834,6 @@ void GuiMain::settingsChanged( QAction* act )
         }
       }
     }
-    break;
-  case 82:
-    Settings::instance().setShowTipsOfTheDay( act->isChecked() );
     break;
   case 99:
     break;
@@ -2471,14 +2462,12 @@ void GuiMain::selectDownloadDirectory()
 
 void GuiMain::showTipOfTheDay()
 {
-  mp_tabMain->setCurrentWidget( mp_home );
-  beeCore->showTipOfTheDay();
+  openWebUrl( Settings::instance().tipsWebSite() );
 }
 
 void GuiMain::showFactOfTheDay()
 {
-  mp_tabMain->setCurrentWidget( mp_home );
-  beeCore->showFactOfTheDay();
+  openWebUrl( Settings::instance().factWebSite() );
 }
 
 void GuiMain::showChat( VNumber chat_id )

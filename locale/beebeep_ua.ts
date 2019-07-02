@@ -1689,7 +1689,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Fact of the day</source>
-        <translation>Факт дня</translation>
+        <translation type="vanished">Факт дня</translation>
     </message>
     <message>
         <source>By unread messages</source>
@@ -2317,7 +2317,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Tip of the day</source>
-        <translation>Підказка дня</translation>
+        <translation type="vanished">Підказка дня</translation>
     </message>
     <message>
         <source>Set your status to away automatically</source>
@@ -2740,11 +2740,15 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show tips and facts of the day</source>
+        <source>Development version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Development version</source>
+        <source>Show Tips...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Discover the fact of the day...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4413,180 +4417,180 @@ Please select a different name.</source>
     <name>Tips</name>
     <message>
         <source>&lt;i&gt;Wonder is the beginning of wisdom.&lt;/i&gt; (Socrates)</source>
-        <translation>&lt;i&gt;Здивування - це початок мудрості.&lt;/i&gt; (Сократ)</translation>
+        <translation type="vanished">&lt;i&gt;Здивування - це початок мудрості.&lt;/i&gt; (Сократ)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Intellectuals solve problems; geniuses prevent them.&lt;/i&gt; (Albert Einstein)</source>
-        <translation>&lt;i&gt;Інтелектуали вирішують проблеми, генії ж їх попереджають.&lt;/i&gt; (Альберт Ейнштейн)</translation>
+        <translation type="vanished">&lt;i&gt;Інтелектуали вирішують проблеми, генії ж їх попереджають.&lt;/i&gt; (Альберт Ейнштейн)</translation>
     </message>
     <message>
         <source>You can search previous sent message in the history using the CTRL+Up e CTRL+Down keys.</source>
-        <translation>Ви можете знайти віправлене повідомлення в історії використовуйте клавіші CTRL+Вгору і CTRL+Донизу.</translation>
+        <translation type="vanished">Ви можете знайти віправлене повідомлення в історії використовуйте клавіші CTRL+Вгору і CTRL+Донизу.</translation>
     </message>
     <message>
         <source>If you want a &lt;b&gt;bold text&lt;/b&gt; write a *bold text*.</source>
-        <translation>Якщо ви хочете &lt;b&gt;напівжирний текст&lt;/b&gt;, наберить *bold text*.</translation>
+        <translation type="vanished">Якщо ви хочете &lt;b&gt;напівжирний текст&lt;/b&gt;, наберить *bold text*.</translation>
     </message>
     <message>
         <source>&lt;i&gt;All truths are easy to understand once they are discovered; the point is to discover them.&lt;/i&gt; (Galileo Galilei)</source>
-        <translation>&lt;i&gt;Всі істини легко зрозуміти після їх виявлення; суть полягає в тому, щоб виявити їх.&lt;/i&gt; (Галілео Галілей)</translation>
+        <translation type="vanished">&lt;i&gt;Всі істини легко зрозуміти після їх виявлення; суть полягає в тому, щоб виявити їх.&lt;/i&gt; (Галілео Галілей)</translation>
     </message>
     <message>
         <source>&lt;i&gt;We can not stop wishing our wishes.&lt;/i&gt; (Arthur Schopenhauer)</source>
-        <translation>&lt;i&gt;Ми не можемо перестати бажати наші бажання.&lt;/i&gt; (Артур Шопенгауер)</translation>
+        <translation type="vanished">&lt;i&gt;Ми не можемо перестати бажати наші бажання.&lt;/i&gt; (Артур Шопенгауер)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Every day in Africa a gazelle wakes up. It knows it must run faster than the fastest lion or it will be killed. Every morning a lion wakes up. It knows that it must outrun the slowest gazelle or it will starve to death. It doesn&apos;t matter whether you are a lion or a gazelle. When the sun comes up, you better be running.&lt;/i&gt; (Abe Gubegna)</source>
-        <translation>&lt;i&gt;Щоранку в Африці прокидається газель - вона знає, що мусить бігти швидше, аніж найпрудкіший лев, інакше вона загине. Щоранку в Африці прокидається лев - він знає, що має бігти швидше, аніж найповільніша газель, інакше помре з голоду. Не важливо, лев ти чи газель - коли зійде сонце, ти мусиш бігти
+        <translation type="vanished">&lt;i&gt;Щоранку в Африці прокидається газель - вона знає, що мусить бігти швидше, аніж найпрудкіший лев, інакше вона загине. Щоранку в Африці прокидається лев - він знає, що має бігти швидше, аніж найповільніша газель, інакше помре з голоду. Не важливо, лев ти чи газель - коли зійде сонце, ти мусиш бігти
 .&lt;/i&gt; (Крістофер Макдугал)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Attitude is a little thing that makes a big difference.&lt;/i&gt; (Winston Churchill)</source>
-        <translation>&lt;i&gt;Позиция - це маленька річ, яка дає великий відрив.&lt;/i&gt; (Уінстон Черчілль)</translation>
+        <translation type="vanished">&lt;i&gt;Позиция - це маленька річ, яка дає великий відрив.&lt;/i&gt; (Уінстон Черчілль)</translation>
     </message>
     <message>
         <source>&lt;i&gt;If a program is useful, it will have to be changed.&lt;/i&gt; (Law of Computer Programming)</source>
-        <translation>&lt;i&gt;Якщо програма корисна, она повинна бути змінена.&lt;/i&gt; (Закон компютерного программування)</translation>
+        <translation type="vanished">&lt;i&gt;Якщо програма корисна, она повинна бути змінена.&lt;/i&gt; (Закон компютерного программування)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Who will guard the guards themselves?&lt;/i&gt; (Decimus Junius Juvenal)</source>
-        <translation>&lt;i&gt;Хто стерегтитиме самих сторожів?&lt;/i&gt; (Децим Юній Ювенал)</translation>
+        <translation type="vanished">&lt;i&gt;Хто стерегтитиме самих сторожів?&lt;/i&gt; (Децим Юній Ювенал)</translation>
     </message>
     <message>
         <source>&lt;i&gt;What does not destroy me, makes me strong.&lt;/i&gt; (Friedrich Nietzsche)</source>
-        <translation>&lt;i&gt;Що не вбиває мене, то робить мене сильніше.&lt;/i&gt; (Фридріх Ніцше)</translation>
+        <translation type="vanished">&lt;i&gt;Що не вбиває мене, то робить мене сильніше.&lt;/i&gt; (Фридріх Ніцше)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Everything you can imagine is real.&lt;/i&gt; (Pablo Picasso)</source>
-        <translation>&lt;i&gt;Все що ви можете уявити - реально.&lt;/i&gt; (Пабло Пікассо)</translation>
+        <translation type="vanished">&lt;i&gt;Все що ви можете уявити - реально.&lt;/i&gt; (Пабло Пікассо)</translation>
     </message>
     <message>
         <source>&lt;i&gt;The only man who never makes a mistake is the man who never does anything.&lt;/i&gt; (Theodore Roosevelt)</source>
-        <translation>&lt;i&gt;Людина, яка ніколи не робить помилки, - це людина, яка ніколи нічого не робить.&lt;/i&gt; (Теодор Рузвельт)</translation>
+        <translation type="vanished">&lt;i&gt;Людина, яка ніколи не робить помилки, - це людина, яка ніколи нічого не робить.&lt;/i&gt; (Теодор Рузвельт)</translation>
     </message>
     <message>
         <source>&lt;i&gt;A different language is a different vision of life.&lt;/i&gt; (Federico Fellini)</source>
-        <translation>&lt;i&gt;Інша мова - інше бачення життя.&lt;/i&gt; (Федеріко Фелліні)</translation>
+        <translation type="vanished">&lt;i&gt;Інша мова - інше бачення життя.&lt;/i&gt; (Федеріко Фелліні)</translation>
     </message>
     <message>
         <source>You can disable message notification from a group right clicking on its name on the list.</source>
-        <translation>Ви можете відключити сповіщення про повідомлення від групи, клацнувши правою кнопкою на ній в списку.</translation>
+        <translation type="vanished">Ви можете відключити сповіщення про повідомлення від групи, клацнувши правою кнопкою на ній в списку.</translation>
     </message>
     <message>
         <source>&lt;i&gt;Stay hungry, stay foolish.&lt;/i&gt; (Steve Jobs)</source>
-        <translation>&lt;i&gt;Залишайтеся спраглими, залишайтеся навіженими&lt;/i&gt; (Стів Джобс)</translation>
+        <translation type="vanished">&lt;i&gt;Залишайтеся спраглими, залишайтеся навіженими&lt;/i&gt; (Стів Джобс)</translation>
     </message>
     <message>
         <source>If you want an &lt;u&gt;underlined text&lt;/u&gt; write a _underlined text_.</source>
-        <translation>Якщо ви хочете &lt;u&gt;підкреслений текст&lt;/u&gt;, наберіть _underlined text_.</translation>
+        <translation type="vanished">Якщо ви хочете &lt;u&gt;підкреслений текст&lt;/u&gt;, наберіть _underlined text_.</translation>
     </message>
     <message>
         <source>&lt;i&gt;Patience is also a form of action.&lt;/i&gt; (Auguste Rodin)</source>
-        <translation>&lt;i&gt;Терпіння - це також форма действия.&lt;/i&gt; (Огюст Роден)</translation>
+        <translation type="vanished">&lt;i&gt;Терпіння - це також форма действия.&lt;/i&gt; (Огюст Роден)</translation>
     </message>
     <message>
         <source>You can switch between chats with CTRL+TAB if there are new messages availables.</source>
-        <translation>Ви можете переключатись між чатами за допомогою CTRL+TAB, якщо є нові доступні повідомлення.</translation>
+        <translation type="vanished">Ви можете переключатись між чатами за допомогою CTRL+TAB, якщо є нові доступні повідомлення.</translation>
     </message>
     <message>
         <source>&lt;i&gt;I am not young enough to know everything.&lt;/i&gt; (Oscar Wilde)</source>
-        <translation>&lt;i&gt;Я не настільки молодий, щоб знати все.&lt;/i&gt; (Оскар Уайлд)</translation>
+        <translation type="vanished">&lt;i&gt;Я не настільки молодий, щоб знати все.&lt;/i&gt; (Оскар Уайлд)</translation>
     </message>
     <message>
         <source>You can select multiple files from network shares and download them simultaneously with a right click.</source>
-        <translation>Ви можете вибрати декілька файлів з загальнодоступних в мережі і завантажувати їх одночасно за допомогою правого клацання мишею.</translation>
+        <translation type="vanished">Ви можете вибрати декілька файлів з загальнодоступних в мережі і завантажувати їх одночасно за допомогою правого клацання мишею.</translation>
     </message>
     <message>
         <source>&lt;i&gt;Difficulties are things that show a person what they are.&lt;/i&gt; (Epictetus)</source>
-        <translation>&lt;i&gt;Труднощі - це речі, які показують людину, як вона є.&lt;/i&gt; (Эпіктет)</translation>
+        <translation type="vanished">&lt;i&gt;Труднощі - це речі, які показують людину, як вона є.&lt;/i&gt; (Эпіктет)</translation>
     </message>
     <message>
         <source>If you want an &lt;i&gt;italic text&lt;/i&gt; write a /italic text/.</source>
-        <translation>Якщо ви хочете &lt;i&gt;нахилений текст&lt;/i&gt;, наберіть /italic text/.</translation>
+        <translation type="vanished">Якщо ви хочете &lt;i&gt;нахилений текст&lt;/i&gt;, наберіть /italic text/.</translation>
     </message>
     <message>
         <source>You can drop files to active chat and send them to members.</source>
-        <translation>Ви можете перетягнути файли в активний чат і відправити їх участникам.</translation>
+        <translation type="vanished">Ви можете перетягнути файли в активний чат і відправити їх участникам.</translation>
     </message>
     <message>
         <source>&lt;i&gt;Free is that mind guided by the fantasy.&lt;/i&gt; (Marco Mastroddi)</source>
-        <translation>&lt;i&gt;Свобода - це розум, який керується фантазією.&lt;/i&gt; (Marco Mastroddi)</translation>
+        <translation type="vanished">&lt;i&gt;Свобода - це розум, який керується фантазією.&lt;/i&gt; (Marco Mastroddi)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Dum loquimur fugerit invida aetas: carpe diem, quam minimum credula postero&lt;/i&gt; (Orazio)</source>
-        <translation>&lt;i&gt;Жити кожен день із задоволенням, шукаючи позитивні емоції у всьому і не відкладати повнокровне життя на невизначене, невідоме майбутнє.&lt;/i&gt; (Гораціо)</translation>
+        <translation type="vanished">&lt;i&gt;Жити кожен день із задоволенням, шукаючи позитивні емоції у всьому і не відкладати повнокровне життя на невизначене, невідоме майбутнє.&lt;/i&gt; (Гораціо)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Fear is the path to the dark side.&lt;/i&gt; (Joda)</source>
-        <translation>&lt;i&gt;Страх - це шлях на темную сторону.&lt;/i&gt; (Йода)</translation>
+        <translation type="vanished">&lt;i&gt;Страх - це шлях на темную сторону.&lt;/i&gt; (Йода)</translation>
     </message>
     <message>
         <source>&lt;i&gt;A man&apos;s character is his fate.&lt;/i&gt; (Eraclitus)</source>
-        <translation>&lt;i&gt;Характер людини - це его доля.&lt;/i&gt; (Эраклитус)</translation>
+        <translation type="vanished">&lt;i&gt;Характер людини - це его доля.&lt;/i&gt; (Эраклитус)</translation>
     </message>
     <message>
         <source>&lt;i&gt;A home without books is a body without soul.&lt;/i&gt; (Marcus Tullius Cicero)</source>
-        <translation>&lt;i&gt;Домівка без книг - це телі без душі.&lt;/i&gt; (Марк Туллій Ціцерон)</translation>
+        <translation type="vanished">&lt;i&gt;Домівка без книг - це телі без душі.&lt;/i&gt; (Марк Туллій Ціцерон)</translation>
     </message>
     <message>
         <source>&lt;i&gt;A lack of doubt leads to a lack of creativity.&lt;/i&gt; (Evert Jan Ouweneel)</source>
-        <translation>&lt;i&gt;Відсутність сумнівів призводить до відсутності творчості.&lt;/i&gt; (Evert Jan Ouweneel)</translation>
+        <translation type="vanished">&lt;i&gt;Відсутність сумнівів призводить до відсутності творчості.&lt;/i&gt; (Evert Jan Ouweneel)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Okay, Houston, we&apos;ve had a problem here.&lt;/i&gt; (John L. Swigert)</source>
-        <translation>&lt;i&gt;Окей, Хьюстон, у нас тут проблема.&lt;/i&gt; (Джон Леонард Суайгер)</translation>
+        <translation type="vanished">&lt;i&gt;Окей, Хьюстон, у нас тут проблема.&lt;/i&gt; (Джон Леонард Суайгер)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Necessity is the last and strongest weapon.&lt;/i&gt; (Titus Livius)</source>
-        <translation>&lt;i&gt;Нужда - це остання і найсильніша зброя.&lt;/i&gt; (Тіт Лівій)</translation>
+        <translation type="vanished">&lt;i&gt;Нужда - це остання і найсильніша зброя.&lt;/i&gt; (Тіт Лівій)</translation>
     </message>
     <message>
         <source>&lt;i&gt;No wise man ever wished to be younger.&lt;/i&gt; (Jonathan Swift)</source>
-        <translation>&lt;i&gt;Нерозумна людина постійно бажає бути молодшою.&lt;/i&gt; (Джонатан Свіфт)</translation>
+        <translation type="vanished">&lt;i&gt;Нерозумна людина постійно бажає бути молодшою.&lt;/i&gt; (Джонатан Свіфт)</translation>
     </message>
     <message>
         <source>&lt;i&gt;There is always one more bug.&lt;/i&gt; (Lubarsky&apos;s Law)</source>
-        <translation>&lt;i&gt;Там завжди є ще один баг.&lt;/i&gt; (Lubarsky&apos;s Law)</translation>
+        <translation type="vanished">&lt;i&gt;Там завжди є ще один баг.&lt;/i&gt; (Lubarsky&apos;s Law)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Life without the courage for death is slavery.&lt;/i&gt; (Lucius Annaeus Seneca)</source>
-        <translation>&lt;i&gt;Життя без мужності до смерті - це рабство.&lt;/i&gt; (Луцій Анней Сенека)</translation>
+        <translation type="vanished">&lt;i&gt;Життя без мужності до смерті - це рабство.&lt;/i&gt; (Луцій Анней Сенека)</translation>
     </message>
     <message>
         <source>&lt;i&gt;A journey of a thousand miles begins with a single step.&lt;/i&gt; (Confucius)</source>
-        <translation>&lt;i&gt;Подорож в тисячу миль починаєтся з одного кроку.&lt;/i&gt; (Конфуцій)</translation>
+        <translation type="vanished">&lt;i&gt;Подорож в тисячу миль починаєтся з одного кроку.&lt;/i&gt; (Конфуцій)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Old-aged people are not wise, they are simply careful.&lt;/i&gt; (Ernest Hemingway)</source>
-        <translation>&lt;i&gt;Люди похилого віку не мудрі, вони просто обережні.&lt;/i&gt; (Эрнест Хемінгуэй)</translation>
+        <translation type="vanished">&lt;i&gt;Люди похилого віку не мудрі, вони просто обережні.&lt;/i&gt; (Эрнест Хемінгуэй)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Truth prevails where opinions are free.&lt;/i&gt; (Thomas Paine)</source>
-        <translation>&lt;i&gt;Правда переважає там, где думки вільні.&lt;/i&gt; (Томас Пейн)</translation>
+        <translation type="vanished">&lt;i&gt;Правда переважає там, где думки вільні.&lt;/i&gt; (Томас Пейн)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Second star to the right, and straight on till morning.&lt;/i&gt; (Peter Pan)</source>
-        <translation>&lt;i&gt;Друга зірка направо і прямо до ранку.&lt;/i&gt; (Питер Пэн)</translation>
+        <translation type="vanished">&lt;i&gt;Друга зірка направо і прямо до ранку.&lt;/i&gt; (Питер Пэн)</translation>
     </message>
     <message>
         <source>&lt;i&gt;I&apos;ve seen things you people wouldn&apos;t believe...&lt;/i&gt; (Batty)</source>
-        <translation>&lt;i&gt;Я бачу речі, в які ви люди не можете поверіти...&lt;/i&gt; (Рой Батті)</translation>
+        <translation type="vanished">&lt;i&gt;Я бачу речі, в які ви люди не можете поверіти...&lt;/i&gt; (Рой Батті)</translation>
     </message>
     <message>
         <source>&lt;i&gt;I dream my painting and then paint my dream.&lt;/i&gt; (Vincent Van Gogh)</source>
-        <translation>&lt;i&gt;Я мрію своїм малюванням і потім малюю мою мрію.&lt;/i&gt; (Вінцент Ван Гог)</translation>
+        <translation type="vanished">&lt;i&gt;Я мрію своїм малюванням і потім малюю мою мрію.&lt;/i&gt; (Вінцент Ван Гог)</translation>
     </message>
     <message>
         <source>&lt;i&gt;If anything can go wrong, it will.&lt;/i&gt; (Murphy&apos;s Law)</source>
-        <translation>&lt;i&gt;Якщо що-небудь може йти неправильно, воно буде йти.&lt;/i&gt; (Закон Мерфі)</translation>
+        <translation type="vanished">&lt;i&gt;Якщо що-небудь може йти неправильно, воно буде йти.&lt;/i&gt; (Закон Мерфі)</translation>
     </message>
     <message>
         <source>&lt;i&gt;We become what we think.&lt;/i&gt; (Buddha)</source>
-        <translation>&lt;i&gt;Ми робимо те, що ми думаємо.&lt;/i&gt; (Будда)</translation>
+        <translation type="vanished">&lt;i&gt;Ми робимо те, що ми думаємо.&lt;/i&gt; (Будда)</translation>
     </message>
     <message>
         <source>&lt;i&gt;I can calculate the motion of heavenly bodies, but not the madness of people.&lt;/i&gt; (Isaac Newton)</source>
-        <translation>&lt;i&gt;Я можу вирахувати рух небесних тіл, але не безумство людей.&lt;/i&gt; (Ісаак Ньютон)</translation>
+        <translation type="vanished">&lt;i&gt;Я можу вирахувати рух небесних тіл, але не безумство людей.&lt;/i&gt; (Ісаак Ньютон)</translation>
     </message>
 </context>
 <context>

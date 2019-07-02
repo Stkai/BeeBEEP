@@ -1901,11 +1901,11 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Tip of the day</source>
-        <translation>Suggerimenti</translation>
+        <translation type="vanished">Suggerimenti</translation>
     </message>
     <message>
         <source>Fact of the day</source>
-        <translation>Perle di saggezza</translation>
+        <translation type="vanished">Perle di saggezza</translation>
     </message>
     <message>
         <source>Enable file transfer</source>
@@ -2857,11 +2857,23 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show tips and facts of the day</source>
-        <translation>Mostra suggerimenti e fatti del giorno</translation>
+        <translation type="vanished">Mostra suggerimenti e fatti del giorno</translation>
     </message>
     <message>
         <source>Development version</source>
         <translation>Versione di sviluppo</translation>
+    </message>
+    <message>
+        <source>Show tip of the day</source>
+        <translation type="vanished">Mostra suggetimento del giorno</translation>
+    </message>
+    <message>
+        <source>Show Tips...</source>
+        <translation>Mostra i suggerimenti...</translation>
+    </message>
+    <message>
+        <source>Discover the fact of the day...</source>
+        <translation>Scopri la frase del giorno...</translation>
     </message>
 </context>
 <context>
@@ -4659,179 +4671,115 @@ Inserisci un nome differente.</translation>
     <name>Tips</name>
     <message>
         <source>You can switch between chats with CTRL+TAB if there are new messages availables.</source>
-        <translation>Puoi passare da una conversazione ad un&apos;altra usando CTRL+TAB se sono presenti nuovi messaggi.</translation>
+        <translation type="vanished">Puoi passare da una conversazione ad un&apos;altra usando CTRL+TAB se sono presenti nuovi messaggi.</translation>
     </message>
     <message>
         <source>If you want a &lt;b&gt;bold text&lt;/b&gt; write a *bold text*.</source>
-        <translation>Se vuoi usare il &lt;b&gt;testo in grassetto&lt;/b&gt; usa gli asterischi e scrivi *testo in grassetto*.</translation>
+        <translation type="vanished">Se vuoi usare il &lt;b&gt;testo in grassetto&lt;/b&gt; usa gli asterischi e scrivi *testo in grassetto*.</translation>
     </message>
     <message>
         <source>If you want an &lt;i&gt;italic text&lt;/i&gt; write a /italic text/.</source>
-        <translation>Se vuoi usare il &lt;i&gt;testo in corsivo&lt;/i&gt; puoi usare le / e scrivere /testo in corsivo/.</translation>
+        <translation type="vanished">Se vuoi usare il &lt;i&gt;testo in corsivo&lt;/i&gt; puoi usare le / e scrivere /testo in corsivo/.</translation>
     </message>
     <message>
         <source>If you want an &lt;u&gt;underlined text&lt;/u&gt; write a _underlined text_.</source>
-        <translation>Se vuoi usare il &lt;u&gt;testo sottilineato&lt;/u&gt; puoi usare il carattere _ e scrivere _testo sottolineato_.</translation>
+        <translation type="vanished">Se vuoi usare il &lt;u&gt;testo sottilineato&lt;/u&gt; puoi usare il carattere _ e scrivere _testo sottolineato_.</translation>
     </message>
     <message>
         <source>&lt;i&gt;Free is that mind guided by the fantasy.&lt;/i&gt; (Marco Mastroddi)</source>
-        <translation>&lt;i&gt;Libera è quella mente guidata dalla fantasia.&lt;/i&gt; (Marco Mastroddi)</translation>
+        <translation type="vanished">&lt;i&gt;Libera è quella mente guidata dalla fantasia.&lt;/i&gt; (Marco Mastroddi)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Stay hungry, stay foolish.&lt;/i&gt; (Steve Jobs)</source>
-        <translation>&lt;i&gt;Siate affamati, siate folli.&lt;/i&gt; (Steve Jobs)</translation>
+        <translation type="vanished">&lt;i&gt;Siate affamati, siate folli.&lt;/i&gt; (Steve Jobs)</translation>
     </message>
     <message>
         <source>&lt;i&gt;There is always one more bug.&lt;/i&gt; (Lubarsky&apos;s Law)</source>
-        <translation>&lt;i&gt;Ci sarà sempre un altro bug.&lt;/i&gt; (Legge di Lubarsky)</translation>
+        <translation type="vanished">&lt;i&gt;Ci sarà sempre un altro bug.&lt;/i&gt; (Legge di Lubarsky)</translation>
     </message>
     <message>
         <source>&lt;i&gt;If anything can go wrong, it will.&lt;/i&gt; (Murphy&apos;s Law)</source>
-        <translation>&lt;i&gt;Se qualcosa può andare storto, ci andrà.&lt;/i&gt; (Legge di Murphy)</translation>
+        <translation type="vanished">&lt;i&gt;Se qualcosa può andare storto, ci andrà.&lt;/i&gt; (Legge di Murphy)</translation>
     </message>
     <message>
         <source>&lt;i&gt;If a program is useful, it will have to be changed.&lt;/i&gt; (Law of Computer Programming)</source>
-        <translation>&lt;i&gt;Se un programma è utile probabilmente dovrà essere cambiato.&lt;/i&gt; (Legge della Programmazione)</translation>
+        <translation type="vanished">&lt;i&gt;Se un programma è utile probabilmente dovrà essere cambiato.&lt;/i&gt; (Legge della Programmazione)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Intellectuals solve problems; geniuses prevent them.&lt;/i&gt; (Albert Einstein)</source>
-        <translation>&lt;i&gt;Le menti intelligentii risolvono i problemi; quelle geniali li prevengono.&lt;/i&gt; (Albert Einstein)</translation>
+        <translation type="vanished">&lt;i&gt;Le menti intelligentii risolvono i problemi; quelle geniali li prevengono.&lt;/i&gt; (Albert Einstein)</translation>
     </message>
     <message>
         <source>&lt;i&gt;What does not destroy me, makes me strong.&lt;/i&gt; (Friedrich Nietzsche)</source>
-        <translation>&lt;i&gt;Quello che non mi uccide, mi fortifica.&lt;/i&gt; (Friedrich Nietzsche)</translation>
+        <translation type="vanished">&lt;i&gt;Quello che non mi uccide, mi fortifica.&lt;/i&gt; (Friedrich Nietzsche)</translation>
     </message>
     <message>
         <source>&lt;i&gt;I am not young enough to know everything.&lt;/i&gt; (Oscar Wilde)</source>
-        <translation>&lt;i&gt;Non sono così giovane da conoscere ogni cosa.&lt;/i&gt; (Oscar Wilde)</translation>
+        <translation type="vanished">&lt;i&gt;Non sono così giovane da conoscere ogni cosa.&lt;/i&gt; (Oscar Wilde)</translation>
     </message>
     <message>
         <source>&lt;i&gt;A lack of doubt leads to a lack of creativity.&lt;/i&gt; (Evert Jan Ouweneel)</source>
-        <translation>&lt;i&gt;Un&apos;assenza di dubbi conduce ad una mancanza di creatività.&lt;/i&gt; (Evert Jan Ouweneel)</translation>
+        <translation type="vanished">&lt;i&gt;Un&apos;assenza di dubbi conduce ad una mancanza di creatività.&lt;/i&gt; (Evert Jan Ouweneel)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Fear is the path to the dark side.&lt;/i&gt; (Joda)</source>
-        <translation>&lt;i&gt;La paura conduce al lato oscuro.&lt;/i&gt; (Joda)</translation>
+        <translation type="vanished">&lt;i&gt;La paura conduce al lato oscuro.&lt;/i&gt; (Joda)</translation>
     </message>
     <message>
         <source>&lt;i&gt;I dream my painting and then paint my dream.&lt;/i&gt; (Vincent Van Gogh)</source>
-        <translation>&lt;i&gt;Sogno i miei dipinti e poi dipingo i miei sogni.&lt;/i&gt; (Vincent Van Gogh)</translation>
+        <translation type="vanished">&lt;i&gt;Sogno i miei dipinti e poi dipingo i miei sogni.&lt;/i&gt; (Vincent Van Gogh)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Everything you can imagine is real.&lt;/i&gt; (Pablo Picasso)</source>
-        <translation>&lt;i&gt;Qualsiasi cosa tu possa immaginare è reale.&lt;/i&gt; (Pablo Picasso)</translation>
+        <translation type="vanished">&lt;i&gt;Qualsiasi cosa tu possa immaginare è reale.&lt;/i&gt; (Pablo Picasso)</translation>
     </message>
     <message>
         <source>&lt;i&gt;All truths are easy to understand once they are discovered; the point is to discover them.&lt;/i&gt; (Galileo Galilei)</source>
-        <translation>&lt;i&gt;Tutte le verità sono facili da comprendere una volta scoperte; il punto è scoprirle.&lt;/i&gt; (Galileo Galilei)</translation>
+        <translation type="vanished">&lt;i&gt;Tutte le verità sono facili da comprendere una volta scoperte; il punto è scoprirle.&lt;/i&gt; (Galileo Galilei)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Truth prevails where opinions are free.&lt;/i&gt; (Thomas Paine)</source>
-        <translation>&lt;i&gt;La verità emerge quando le opinioni sono libere.&lt;/i&gt; (Thomas Paine)</translation>
+        <translation type="vanished">&lt;i&gt;La verità emerge quando le opinioni sono libere.&lt;/i&gt; (Thomas Paine)</translation>
     </message>
     <message>
         <source>&lt;i&gt;I&apos;ve seen things you people wouldn&apos;t believe...&lt;/i&gt; (Batty)</source>
-        <translation>&lt;i&gt;Ho visto cose che voi umani non potreste immaginare...&lt;/i&gt; (Batty)</translation>
+        <translation type="vanished">&lt;i&gt;Ho visto cose che voi umani non potreste immaginare...&lt;/i&gt; (Batty)</translation>
     </message>
     <message>
         <source>&lt;i&gt;A different language is a different vision of life.&lt;/i&gt; (Federico Fellini)</source>
-        <translation>&lt;i&gt;Un linguaggio diverso è una diversa visione della vita.&lt;/i&gt; (Federico Fellini)</translation>
+        <translation type="vanished">&lt;i&gt;Un linguaggio diverso è una diversa visione della vita.&lt;/i&gt; (Federico Fellini)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Dum loquimur fugerit invida aetas: carpe diem, quam minimum credula postero&lt;/i&gt; (Orazio)</source>
-        <translation>&lt;i&gt;Dum loquimur fugerit invida aetas: carpe diem, quam minimum credula postero&lt;/i&gt; (Orazio)</translation>
+        <translation type="vanished">&lt;i&gt;Dum loquimur fugerit invida aetas: carpe diem, quam minimum credula postero&lt;/i&gt; (Orazio)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Every day in Africa a gazelle wakes up. It knows it must run faster than the fastest lion or it will be killed. Every morning a lion wakes up. It knows that it must outrun the slowest gazelle or it will starve to death. It doesn&apos;t matter whether you are a lion or a gazelle. When the sun comes up, you better be running.&lt;/i&gt; (Abe Gubegna)</source>
-        <translation>&lt;i&gt;Ogni giorno in Africa una gazzella si sveglia e sa che dovrà correre più veloce del leone o verrà uccisa. Ogni mattina un leone si sveglia e sa che dovrà correre più veloce della gazzella o morirà di fame. Non importa che tu sia leone o gazzella. Quando il sole sorge, inizia a correre.&lt;/i&gt; (Abe Gubegna)</translation>
+        <translation type="vanished">&lt;i&gt;Ogni giorno in Africa una gazzella si sveglia e sa che dovrà correre più veloce del leone o verrà uccisa. Ogni mattina un leone si sveglia e sa che dovrà correre più veloce della gazzella o morirà di fame. Non importa che tu sia leone o gazzella. Quando il sole sorge, inizia a correre.&lt;/i&gt; (Abe Gubegna)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Okay, Houston, we&apos;ve had a problem here.&lt;/i&gt; (John L. Swigert)</source>
-        <translation>&lt;i&gt;Okay, Houston, qui abbiamo avuto un problema.&lt;/i&gt; (John L. Swigert)</translation>
+        <translation type="vanished">&lt;i&gt;Okay, Houston, qui abbiamo avuto un problema.&lt;/i&gt; (John L. Swigert)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Second star to the right, and straight on till morning.&lt;/i&gt; (Peter Pan)</source>
-        <translation>&lt;i&gt;Seconda stella a destra e poi dritti fino al mattino.&lt;/i&gt; (Peter Pan)</translation>
+        <translation type="vanished">&lt;i&gt;Seconda stella a destra e poi dritti fino al mattino.&lt;/i&gt; (Peter Pan)</translation>
     </message>
     <message>
         <source>You can search previous sent message in the history using the CTRL+Up e CTRL+Down keys.</source>
-        <translation>Puoi navigare tra i messaggi che hai inviato usando le combinazioni CTRL+FrecciaSu e CTRL+FrecciaGiù.</translation>
+        <translation type="vanished">Puoi navigare tra i messaggi che hai inviato usando le combinazioni CTRL+FrecciaSu e CTRL+FrecciaGiù.</translation>
     </message>
     <message>
         <source>You can drop files to active chat and send them to members.</source>
-        <translation>Puoi trascinare un file nella conversazione attiva per inviarlo a tutti i membri.</translation>
+        <translation type="vanished">Puoi trascinare un file nella conversazione attiva per inviarlo a tutti i membri.</translation>
     </message>
     <message>
         <source>You can select multiple files from network shares and download them simultaneously with a right click.</source>
-        <translation>Puoi selezionare uno o più file dalla condivisione di rete e scaricarli tutti insieme usando il pulsante destro.</translation>
+        <translation type="vanished">Puoi selezionare uno o più file dalla condivisione di rete e scaricarli tutti insieme usando il pulsante destro.</translation>
     </message>
     <message>
         <source>You can disable message notification from a group right clicking on its name on the list.</source>
-        <translation>Puoi disabilitare le notifiche di un gruppo premendo il tasto destro sul nome del gruppo nella lista.</translation>
-    </message>
-    <message>
-        <source>&lt;i&gt;A man&apos;s character is his fate.&lt;/i&gt; (Eraclitus)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>&lt;i&gt;Necessity is the last and strongest weapon.&lt;/i&gt; (Titus Livius)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>&lt;i&gt;Old-aged people are not wise, they are simply careful.&lt;/i&gt; (Ernest Hemingway)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>&lt;i&gt;A journey of a thousand miles begins with a single step.&lt;/i&gt; (Confucius)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>&lt;i&gt;Life without the courage for death is slavery.&lt;/i&gt; (Lucius Annaeus Seneca)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>&lt;i&gt;I can calculate the motion of heavenly bodies, but not the madness of people.&lt;/i&gt; (Isaac Newton)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>&lt;i&gt;Wonder is the beginning of wisdom.&lt;/i&gt; (Socrates)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>&lt;i&gt;No wise man ever wished to be younger.&lt;/i&gt; (Jonathan Swift)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>&lt;i&gt;The only man who never makes a mistake is the man who never does anything.&lt;/i&gt; (Theodore Roosevelt)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>&lt;i&gt;Attitude is a little thing that makes a big difference.&lt;/i&gt; (Winston Churchill)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>&lt;i&gt;We become what we think.&lt;/i&gt; (Buddha)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>&lt;i&gt;Difficulties are things that show a person what they are.&lt;/i&gt; (Epictetus)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>&lt;i&gt;Who will guard the guards themselves?&lt;/i&gt; (Decimus Junius Juvenal)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>&lt;i&gt;A home without books is a body without soul.&lt;/i&gt; (Marcus Tullius Cicero)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>&lt;i&gt;We can not stop wishing our wishes.&lt;/i&gt; (Arthur Schopenhauer)</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>&lt;i&gt;Patience is also a form of action.&lt;/i&gt; (Auguste Rodin)</source>
-        <translation></translation>
+        <translation type="vanished">Puoi disabilitare le notifiche di un gruppo premendo il tasto destro sul nome del gruppo nella lista.</translation>
     </message>
 </context>
 <context>

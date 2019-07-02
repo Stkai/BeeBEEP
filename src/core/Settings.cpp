@@ -632,7 +632,12 @@ QString Settings::donationWebSite() const
 
 QString Settings::helpWebSite() const
 {
-  return officialWebSite() + QString( BEEBEEP_HELP_WEBSITE );
+  QString web_url = officialWebSite() + QString( BEEBEEP_HELP_WEBSITE );
+  if( m_language == "it" )
+    web_url += QString( "?lang=it_IT" );
+  else
+    web_url += QString( "?lang=en_US" );
+  return web_url;
 }
 
 QString Settings::languageWebSite() const
@@ -657,6 +662,26 @@ QString Settings::developerWebSite() const
     web_url += QString( "it_IT" );
   else
     web_url += QString( "en_US" );
+  return web_url;
+}
+
+QString Settings::tipsWebSite() const
+{
+  QString web_url = officialWebSite() + QString( BEEBEEP_TIPS_WEBSITE );
+  if( m_language == "it" )
+    web_url += QString( "?lang=it_IT" );
+  else
+    web_url += QString( "?lang=en_US" );
+  return web_url;
+}
+
+QString Settings::factWebSite() const
+{
+  QString web_url = officialWebSite() + QString( BEEBEEP_FACT_WEBSITE );
+  if( m_language == "it" )
+    web_url += QString( "?lang=it_IT" );
+  else
+    web_url += QString( "?lang=en_US" );
   return web_url;
 }
 
@@ -1098,7 +1123,6 @@ void Settings::load()
   m_chatSaveUnsentMessages = sets->value( "ChatSaveUnsentMessages", true ).toBool();
   m_chatMaxLineSaved = sets->value( "ChatMaxLineSaved", 8000 ).toInt();
   m_showChatToolbar = sets->value( "ShowChatToolbar", true ).toBool();
-  m_showTipsOfTheDay = sets->value( "ShowTipsOfTheDay", true ).toBool();
   m_showOnlyOnlineUsers = sets->value( "ShowOnlyOnlineUsers", false ).toBool();
   m_showUserPhoto = sets->value( "ShowUserPhoto", true ).toBool();
   m_showVCardOnRightClick = sets->value( "ShowVCardOnRightClick", true ).toBool();
@@ -1449,7 +1473,6 @@ void Settings::save()
   sets->setValue( "ChatMaxLineSaved", m_chatMaxLineSaved );
   sets->setValue( "ChatSaveUnsentMessages", m_chatSaveUnsentMessages );
   sets->setValue( "ShowChatToolbar", m_showChatToolbar );
-  sets->setValue( "ShowTipsOfTheDay", m_showTipsOfTheDay );
   sets->setValue( "ShowOnlyOnlineUsers", m_showOnlyOnlineUsers );
   sets->setValue( "ShowUserPhoto", m_showUserPhoto );
   sets->setValue( "ShowVCardOnRightClick", m_showVCardOnRightClick );

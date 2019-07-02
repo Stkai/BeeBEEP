@@ -251,12 +251,6 @@ bool Core::start()
   if( Settings::instance().disableSystemProxyForConnections() )
     qDebug() << "System proxy is disabled for connections";
 
-  if( Settings::instance().showTipsOfTheDay() )
-  {
-    showTipOfTheDay();
-    showFactOfTheDay();
-  }
-
   if( !Settings::instance().localUser().isStatusConnected() )
   {
     if( previous_local_user_status < User::Online || previous_local_user_status >= User::NumStatus )
