@@ -617,7 +617,7 @@ QString Settings::officialWebSite() const
 
 QString Settings::pluginWebSite() const
 {
-  return officialWebSite() + QString( BEEBEEP_DOWNLOAD_WEBSITE ) + "#plugins";
+  return officialWebSite() + QString( BEEBEEP_DOWNLOAD_WEBSITE ) + "#plugin";
 }
 
 QString Settings::downloadWebSite() const
