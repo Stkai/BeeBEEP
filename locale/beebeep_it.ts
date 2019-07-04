@@ -538,6 +538,14 @@
         <source>Offline message will be sent to %1</source>
         <translation>Un messaggio non inviato sarà recapitato a %1</translation>
     </message>
+    <message>
+        <source>%1 Do you need support? Visit the %2.</source>
+        <translation>%1 Hai bisogno di assistenza? Visita la %2.</translation>
+    </message>
+    <message>
+        <source>help page</source>
+        <translation>pagina di aiuto</translation>
+    </message>
 </context>
 <context>
     <name>File</name>

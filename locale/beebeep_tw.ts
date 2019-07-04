@@ -502,6 +502,14 @@
         <source>Offline message will be sent to %1</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>%1 Do you need support? Visit the %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>help page</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>File</name>

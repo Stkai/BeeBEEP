@@ -265,6 +265,11 @@ bool Core::start()
   qDebug() << "Local user current path:" << qPrintable( Settings::instance().localUser().path() );
 
   checkSavingPaths();
+  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
+                         tr( "%1 Do you need support? Visit the %2." )
+                         .arg( IconManager::instance().toHtml( "info.png", "*I*" ) )
+                         .arg( QString( "<a href=%1>%2</a>" ).arg( Settings::instance().helpWebSite() ).arg( tr( "help page" ) ) ),
+                         DispatchToChat, ChatMessage::System );
 
   if( Settings::instance().checkNewVersionAtStartup() )
     QTimer::singleShot( 3000, this, SLOT( checkNewVersion() ) );
