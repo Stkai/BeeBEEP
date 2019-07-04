@@ -1475,7 +1475,7 @@ QList<FileInfo> Protocol::messageFolderToInfoList( const Message& m, const QHost
 
       fi.setTransferType( FileInfo::Download );
       fi.setHostAddress( server_address );
-      fi.setHostPort( server_port );
+      fi.setHostPort( static_cast<quint16>(server_port) );
       fi.setName( sl_tmp.takeFirst() );
       fi.setSuffix( sl_tmp.takeFirst() );
       fi.setSize( Bee::qVariantToVNumber( sl_tmp.takeFirst() ) );
@@ -1555,7 +1555,7 @@ QList<FileInfo> Protocol::messageToFileShare( const Message& m, const QHostAddre
 
       fi.setTransferType( FileInfo::Download );
       fi.setHostAddress( server_address );
-      fi.setHostPort( server_port );
+      fi.setHostPort( static_cast<quint16>(server_port) );
       fi.setName( sl_tmp.takeFirst() );
       fi.setSuffix( sl_tmp.takeFirst() );
       fi.setSize( Bee::qVariantToVNumber( sl_tmp.takeFirst() ) );
@@ -1670,7 +1670,7 @@ QList<FileInfo> Protocol::messageToShareBoxFileList( const Message& m, const QHo
       FileInfo fi;
       fi.setTransferType( FileInfo::Download );
       fi.setHostAddress( server_address );
-      fi.setHostPort( server_port );
+      fi.setHostPort( static_cast<quint16>(server_port) );
       fi.setName( sl_tmp.takeFirst() );
       fi.setSuffix( sl_tmp.takeFirst() );
       fi.setSize( Bee::qVariantToVNumber( sl_tmp.takeFirst() ) );
@@ -2115,7 +2115,7 @@ void Protocol::hexToUnsignedChar(  const QByteArray& hex_byte_array, unsigned ch
     {
       if( msb )
       {
-        out_string[j] = int(hex_string[i++] - '0')*16;
+        out_string[j] = static_cast<unsigned char>(int(hex_string[i++] - '0')*16);
         msb = false;
       }
       else
@@ -2128,7 +2128,7 @@ void Protocol::hexToUnsignedChar(  const QByteArray& hex_byte_array, unsigned ch
     {
       if( msb )
       {
-        out_string[j] = (int(toupper(hex_string[i++]) - 'A') + 10) * 16;
+        out_string[j] = static_cast<unsigned char>((int(toupper(hex_string[i++]) - 'A') + 10) * 16);
         msb = false;
       }
       else
