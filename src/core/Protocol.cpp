@@ -755,13 +755,15 @@ UserRecord Protocol::loadUserRecord( const QString& s ) const
   if( !sl.isEmpty() )
   {
     ur.setLastConnection( QDateTime::fromString( sl.takeFirst(), Qt::ISODate ) );
-    qDebug() << "User" << qPrintable( ur.name() ) << "has last connection date saved:" << qPrintable( ur.lastConnection().toString( Qt::ISODate ) );
+    if( ur.lastConnection().isValid() )
+      qDebug() << "User" << qPrintable( ur.name() ) << "has last connection date saved:" << qPrintable( ur.lastConnection().toString( Qt::ISODate ) );
   }
 
   if( !sl.isEmpty() )
   {
     ur.setBirthday( QDate::fromString( sl.takeFirst(), Qt::ISODate ) );
-    qDebug() << "User" << qPrintable( ur.name() ) << "has birthday saved:" << qPrintable( ur.birthday().toString( Qt::ISODate ) );
+    if( ur.birthday().isValid() )
+      qDebug() << "User" << qPrintable( ur.name() ) << "has birthday saved:" << qPrintable( ur.birthday().toString( Qt::ISODate ) );
   }
 
   return ur;
