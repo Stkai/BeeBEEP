@@ -97,7 +97,6 @@ bool MessageManager::unsentMessagesCanBeSaved() const
 
 bool MessageManager::saveUnsentMessages()
 {
-  QString auth_code = generateUnsentMessagesAuthCode();
   QString file_name = Settings::instance().unsentMessagesFilePath();
   QFile file( file_name );
   if( !Settings::instance().chatSaveUnsentMessages() )
@@ -120,6 +119,8 @@ bool MessageManager::saveUnsentMessages()
   qDebug() << "Saving unsent messages in" << qPrintable( file_name );
   QDataStream stream( &file );
   stream.setVersion( Settings::instance().dataStreamVersion( false ) );
+
+  QString auth_code = saveMessagesAuthCode();
 
   QStringList file_header;
   file_header << Settings::instance().programName();
@@ -181,15 +182,15 @@ void MessageManager::addMessageRecords( const QList<MessageRecord>& mr_list )
     m_messagesToSend.append( mr_list );
 }
 
-QString MessageManager::generateUnsentMessagesAuthCode() const
+QString MessageManager::generateSaveMessagesAuthCode() const
 {
-  Settings::instance().setOfflineMessageSaveTimestamp( QDateTime::currentDateTime() );
-  return unsentMessagesAuthCode();
+  Settings::instance().setSaveMessagesTimestamp( QDateTime::currentDateTime() );
+  return saveMessagesAuthCode();
 }
 
-QString MessageManager::unsentMessagesAuthCode() const
+QString MessageManager::saveMessagesAuthCode() const
 {
-  QString s = Settings::instance().offlineMessageSaveTimestamp().toString( Qt::ISODate );
+  QString s = Settings::instance().saveMessagesTimestamp().toString( Qt::ISODate );
   s += Settings::instance().localUser().name();
   QByteArray ba = s.toUtf8().toBase64();
   QByteArray auth_code = QCryptographicHash::hash( ba, QCryptographicHash::Sha1 );

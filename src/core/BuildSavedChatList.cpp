@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "BuildSavedChatList.h"
+#include "MessageManager.h"
 #include "Protocol.h"
 #include "Settings.h"
 
@@ -32,8 +33,50 @@ BuildSavedChatList::BuildSavedChatList( QObject *parent )
   setObjectName( "BuildSavedChatList" );
 }
 
+QString BuildSavedChatList::checkAuthCodeFromFileHeader( const QStringList& file_header, const QString& file_name ) const
+{
+  QString auth_code;
+  int proto_version = 0;
+
+  if( file_header.size() >= 3 )
+  {
+    bool ok = false;
+    proto_version = file_header.at( 2 ).toInt( &ok );
+    if( !ok )
+    {
+      qWarning() << "Invalid protocol version found in the header of file" << qPrintable( file_name );
+      return auth_code;
+    }
+  }
+  else
+  {
+    qWarning() << file_header.size() << "is invalid header size in file" << qPrintable( file_name );
+    return auth_code;
+  }
+
+  if( proto_version >= SAVE_MESSAGE_AUTH_CODE_PROTO_VERSION )
+  {
+    if( file_header.size() >= 4 )
+    {
+      auth_code = file_header.at( 3 );
+      if( auth_code.isEmpty() )
+        qWarning() << "Empty AUTH code found in the header of file" << qPrintable( file_name );
+    }
+    else
+      qWarning() << file_header.size() << "is invalid header size in file" << qPrintable( file_name );
+  }
+  else
+  {
+    qDebug() << "Old protocol found in file header of file" << qPrintable( file_name );
+    auth_code = MessageManager::instance().saveMessagesAuthCode();
+  }
+  return auth_code;
+}
+
+
 void BuildSavedChatList::buildList()
 {
+  m_savedChatsAuthCode = QString::null;
   QTime elapsed_time;
   elapsed_time.start();
 
@@ -42,7 +85,7 @@ void BuildSavedChatList::buildList()
 
   if( !file.open( QIODevice::ReadOnly ) )
   {
-    qWarning() << "Unable to open file" << file.fileName() << ": loading saved chats aborted";
+    qWarning() << "Unable to open file" << qPrintable( file_name ) << ": loading saved chats aborted";
     return;
   }
 
@@ -52,10 +95,13 @@ void BuildSavedChatList::buildList()
   QStringList file_header;
 
   stream >> file_header;
-  if( stream.status() != QDataStream::Ok )
-    qWarning() << "Error reading header datastream, abort loading saved chats";
-  else
+  if( stream.status() == QDataStream::Ok )
+  {
+    m_savedChatsAuthCode = checkAuthCodeFromFileHeader( file_header, file_name );
     loadSavedChats( &stream );
+  }
+  else
+    qWarning() << "Error reading header datastream, abort loading saved chats";
   file.close();
 
   loadUnsentMessages();
@@ -110,6 +156,7 @@ void BuildSavedChatList::loadSavedChats( QDataStream* stream )
     else
       m_savedChats.insert( chat_name, chat_text );
   }
+  qDebug() << m_savedChats.size() << "saved chats found";
 }
 
 void BuildSavedChatList::loadUnsentMessages()
@@ -135,20 +182,7 @@ void BuildSavedChatList::loadUnsentMessages()
     return;
   }
 
-  if( file_header.size() < 4 )
-  {
-    qWarning() << file_header.size() << "is invalid header size in file" << qPrintable( file_name );
-    file.close();
-    return;
-  }
-
-  m_unsentMessagesAuthCode = file_header.at( 3 );
-  if( m_unsentMessagesAuthCode.isEmpty() )
-  {
-    qWarning() << "Empty AUTH code found in the header of file" << qPrintable( file_name ) << ": loading saved unsent messages aborted";
-    file.close();
-    return;
-  }
+  m_unsentMessagesAuthCode = checkAuthCodeFromFileHeader( file_header, file_name );
 
   qint32 num_of_unsent_messages = 0;
   stream >> num_of_unsent_messages;

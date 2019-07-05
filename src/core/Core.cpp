@@ -358,6 +358,7 @@ void Core::stop()
   m_connections.clear();
   checkSavingPaths();
   saveUsersAndGroups();
+  MessageManager::instance().generateSaveMessagesAuthCode();
   saveChatMessages();
   saveUnsentMessages();
   Settings::instance().save();

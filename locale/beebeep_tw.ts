@@ -514,6 +514,10 @@
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Saved chats had an incorrect authorization code and will not be added to history.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>File</name>

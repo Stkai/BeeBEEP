@@ -550,6 +550,10 @@
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
         <translation>I messaggi salvati ancora da inviare avevano un codice di autorizzazione errato e non verranno spediti.</translation>
     </message>
+    <message>
+        <source>Saved chats had an incorrect authorization code and will not be added to history.</source>
+        <translation>Le conversazioni salvate avevano un codice di autorizzazione non valido e non sono state inserite nella storia dei messaggi.</translation>
+    </message>
 </context>
 <context>
     <name>File</name>

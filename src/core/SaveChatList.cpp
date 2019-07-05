@@ -23,8 +23,9 @@
 
 #include "ChatManager.h"
 #include "GuiChatMessage.h"
-#include "SaveChatList.h"
+#include "MessageManager.h"
 #include "Protocol.h"
+#include "SaveChatList.h"
 #include "Settings.h"
 
 
@@ -77,10 +78,13 @@ bool SaveChatList::save()
   QDataStream stream( &file );
   stream.setVersion( Settings::instance().dataStreamVersion( false ) );
 
+  QString auth_code = MessageManager::instance().saveMessagesAuthCode();
+
   QStringList file_header;
   file_header << Settings::instance().programName();
   file_header << Settings::instance().version( false, false );
   file_header << QString::number( Settings::instance().protoVersion() );
+  file_header << auth_code;
 
   bool save_ok = false;
   stream << file_header;

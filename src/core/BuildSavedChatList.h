@@ -36,6 +36,7 @@ public:
 
   inline const QMap<QString, QString>& savedChats() const;
   inline const QList<MessageRecord>& unsentMessages() const;
+  inline const QString& savedChatsAuthCode() const;
   inline const QString& unsentMessagesAuthCode() const;
   inline int elapsedTime() const;
 
@@ -48,10 +49,12 @@ public slots:
 protected:
   void loadSavedChats( QDataStream* );
   void loadUnsentMessages();
+  QString checkAuthCodeFromFileHeader( const QStringList& file_header, const QString& file_name ) const;
 
 private:
   QMap<QString, QString> m_savedChats;
   QList<MessageRecord> m_unsentMessages;
+  QString m_savedChatsAuthCode;
   QString m_unsentMessagesAuthCode;
   int m_elapsedTime;
 
@@ -61,6 +64,7 @@ private:
 // Inline Functions
 inline const QMap<QString, QString>& BuildSavedChatList::savedChats() const { return m_savedChats; }
 inline const QList<MessageRecord>& BuildSavedChatList::unsentMessages() const { return m_unsentMessages; }
+inline const QString& BuildSavedChatList::savedChatsAuthCode() const { return m_savedChatsAuthCode; }
 inline const QString& BuildSavedChatList::unsentMessagesAuthCode() const { return m_unsentMessagesAuthCode; }
 inline int BuildSavedChatList::elapsedTime() const { return m_elapsedTime; }
 
