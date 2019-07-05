@@ -114,11 +114,12 @@ void BuildSavedChatList::loadSavedChats( QDataStream* stream )
 
 void BuildSavedChatList::loadUnsentMessages()
 {
+  m_unsentMessagesAuthCode = QString::null;
   QString file_name = Settings::instance().unsentMessagesFilePath();
   QFile file( file_name );
   if( !file.open( QIODevice::ReadOnly ) )
   {
-    qWarning() << "Unable to open file" << file.fileName() << ": loading saved unsent messages aborted";
+    qWarning() << "Unable to open file" << qPrintable( file_name ) << ": loading saved unsent messages aborted";
     return;
   }
 
@@ -130,6 +131,21 @@ void BuildSavedChatList::loadUnsentMessages()
   if( stream.status() != QDataStream::Ok )
   {
     qWarning() << "Error reading header datastream, abort loading unsent messages";
+    file.close();
+    return;
+  }
+
+  if( file_header.size() < 4 )
+  {
+    qWarning() << file_header.size() << "is invalid header size in file" << qPrintable( file_name );
+    file.close();
+    return;
+  }
+
+  m_unsentMessagesAuthCode = file_header.at( 3 );
+  if( m_unsentMessagesAuthCode.isEmpty() )
+  {
+    qWarning() << "Empty AUTH code found in the header of file" << qPrintable( file_name ) << ": loading saved unsent messages aborted";
     file.close();
     return;
   }
@@ -173,4 +189,5 @@ void BuildSavedChatList::loadUnsentMessages()
 
   file.close();
 }
+
 

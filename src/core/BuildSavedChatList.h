@@ -36,6 +36,7 @@ public:
 
   inline const QMap<QString, QString>& savedChats() const;
   inline const QList<MessageRecord>& unsentMessages() const;
+  inline const QString& unsentMessagesAuthCode() const;
   inline int elapsedTime() const;
 
 signals:
@@ -51,6 +52,7 @@ protected:
 private:
   QMap<QString, QString> m_savedChats;
   QList<MessageRecord> m_unsentMessages;
+  QString m_unsentMessagesAuthCode;
   int m_elapsedTime;
 
 };
@@ -59,6 +61,7 @@ private:
 // Inline Functions
 inline const QMap<QString, QString>& BuildSavedChatList::savedChats() const { return m_savedChats; }
 inline const QList<MessageRecord>& BuildSavedChatList::unsentMessages() const { return m_unsentMessages; }
+inline const QString& BuildSavedChatList::unsentMessagesAuthCode() const { return m_unsentMessagesAuthCode; }
 inline int BuildSavedChatList::elapsedTime() const { return m_elapsedTime; }
 
 #endif // BEEBEEP_BUILDSAVEDCHATLIST_H

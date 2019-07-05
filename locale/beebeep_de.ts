@@ -524,11 +524,15 @@
     </message>
     <message>
         <source>%1 Do you need support? Visit the %2.</source>
-        <translation>%1 Benötigst du Unterstützung? Besuche %2.</translation>
+        <translation>%1 Benötigst du Unterstützung? Besuche die %2.</translation>
     </message>
     <message>
         <source>help page</source>
         <translation>Hilfeseite</translation>
+    </message>
+    <message>
+        <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

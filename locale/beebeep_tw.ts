@@ -510,6 +510,10 @@
         <source>help page</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>File</name>

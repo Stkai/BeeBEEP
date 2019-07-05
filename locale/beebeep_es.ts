@@ -192,23 +192,23 @@
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="221"/>
-        <location filename="../src/core/CoreChat.cpp" line="839"/>
-        <location filename="../src/core/CoreChat.cpp" line="850"/>
+        <location filename="../src/core/CoreChat.cpp" line="849"/>
+        <location filename="../src/core/CoreChat.cpp" line="860"/>
         <source>%1 Chat with %2.</source>
         <translation>%1 Chat con %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="625"/>
+        <location filename="../src/core/CoreChat.cpp" line="634"/>
         <source>%1 offline messages will be sent as soon as possible.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="650"/>
+        <location filename="../src/core/CoreChat.cpp" line="658"/>
         <source>Offline message will be sent to %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="839"/>
+        <location filename="../src/core/CoreChat.cpp" line="849"/>
         <source>Unknown %1</source>
         <translation>Desconocido %1</translation>
     </message>
@@ -298,7 +298,12 @@
         <translation>No es posible enviar el mensaje: este chat está deshabilitado.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="834"/>
+        <location filename="../src/core/CoreChat.cpp" line="627"/>
+        <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreChat.cpp" line="844"/>
         <source>Chat with all users</source>
         <translation>Chat con todos los usuarios</translation>
     </message>
@@ -323,12 +328,12 @@
         <translation>%1 chats guardados se han añadido al historial</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="706"/>
+        <location filename="../src/core/CoreChat.cpp" line="716"/>
         <source>Offline messages sent to %2.</source>
         <translation>Mensajes fuera de linea enviados a %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="793"/>
+        <location filename="../src/core/CoreChat.cpp" line="803"/>
         <source>%1 You have buzzed %2.</source>
         <translation>%1 Has enviado una alerta Buzz a %2.</translation>
     </message>
@@ -5626,7 +5631,7 @@ Por favor, elija un nombre diferente.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="1929"/>
+        <location filename="../src/core/Settings.cpp" line="1949"/>
         <source>Autoresponder</source>
         <translation>Respuesta automática</translation>
     </message>

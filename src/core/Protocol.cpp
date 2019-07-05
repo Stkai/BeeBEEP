@@ -1938,6 +1938,7 @@ ChatRecord Protocol::loadChatRecord( const QString& s ) const
   return cr;
 }
 
+
 QString Protocol::linkifyText( QString text )
 {
 #ifdef Q_OS_WIN

@@ -1216,6 +1216,7 @@ void Settings::load()
   m_useLowDelayOptionOnSocket = sets->value( "UseLowDelayOptionOnSocket", false ).toBool();
   m_delayConnectionAtStartup = qMax( 3000, sets->value( "DelayConnectionAtStartup(ms)", m_delayConnectionAtStartup ).toInt() );
   m_sendOfflineMessagesToDefaultChat = sets->value( "SendOfflineMessagesToDefaultChat", false ).toBool();
+  m_offlineMessageSaveTimestamp = sets->value( "OfflineMessageSaveTimestamp", QDateTime() ).toDateTime();
   sets->endGroup();
 
   sets->beginGroup( "Network");
@@ -1556,6 +1557,7 @@ void Settings::save()
   sets->setValue( "TickIntervalBroadcasting", m_tickIntervalBroadcasting );
   sets->setValue( "DelayConnectionAtStartup(ms)", m_delayConnectionAtStartup );
   sets->setValue( "SendOfflineMessagesToDefaultChat", m_sendOfflineMessagesToDefaultChat );
+  sets->setValue( "OfflineMessageSaveTimestamp", m_offlineMessageSaveTimestamp );
   sets->endGroup();
   sets->beginGroup( "Network");
 #ifdef BEEBEEP_USE_MULTICAST_DNS

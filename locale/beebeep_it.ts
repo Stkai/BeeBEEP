@@ -546,6 +546,10 @@
         <source>help page</source>
         <translation>pagina di aiuto</translation>
     </message>
+    <message>
+        <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
+        <translation>I messaggi salvati ancora da inviare avevano un codice di autorizzazione errato e non verranno spediti.</translation>
+    </message>
 </context>
 <context>
     <name>File</name>

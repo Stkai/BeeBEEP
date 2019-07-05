@@ -530,6 +530,9 @@ public:
 
   void resetAllColors();
 
+  inline void setOfflineMessageSaveTimestamp( const QDateTime& );
+  inline const QDateTime& offlineMessageSaveTimestamp() const;
+
   QNetworkProxy systemNetworkProxy( const QNetworkProxyQuery& ) const;
 
   QString simpleEncrypt( const QString& );
@@ -819,7 +822,9 @@ private:
   bool m_hideEmptyChatsInList;
 
   bool m_useDarkStyle;
-  bool m_showTipsAtStartup;
+
+  QDateTime m_offlineMessageSaveTimestamp;
+
 };
 
 
@@ -1181,5 +1186,7 @@ inline void Settings::setBroadcastToOfflineUsers( bool new_value ) { m_broadcast
 inline bool Settings::broadcastToOfflineUsers() const { return m_broadcastToOfflineUsers; }
 inline void Settings::setUseDarkStyle( bool new_value ) { m_useDarkStyle = new_value; }
 inline bool Settings::useDarkStyle() const { return m_useDarkStyle; }
+inline void Settings::setOfflineMessageSaveTimestamp( const QDateTime& new_value ) { m_offlineMessageSaveTimestamp = new_value; }
+inline const QDateTime& Settings::offlineMessageSaveTimestamp() const { return m_offlineMessageSaveTimestamp; }
 
 #endif // BEEBEEP_SETTINGS_

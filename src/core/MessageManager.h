@@ -44,6 +44,8 @@ public:
   bool unsentMessagesCanBeSaved() const;
   bool saveUnsentMessages();
 
+  QString unsentMessagesAuthCode() const;
+
   static MessageManager& instance()
   {
     if( !mp_instance )
@@ -62,6 +64,7 @@ public:
 
 protected:
   MessageManager();
+  QString generateUnsentMessagesAuthCode() const;
 
 private:
   QList<MessageRecord> m_messagesToSend;
