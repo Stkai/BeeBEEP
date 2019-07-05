@@ -392,7 +392,7 @@ void Settings::loadRcFile()
   if( !rc_file_info.exists() || !rc_file_info.isReadable() )
   {
 #ifdef Q_OS_UNIX
-    rc_file_path = QLatin1String( "/etc/beebeep.rc" );
+    rc_file_path = QLatin1String( "/etc/beebeep/beebeep.rc" );
     rc_file_info = QFileInfo( rc_file_path );
     qDebug() << "Check for RC file in system path:" << qPrintable( rc_file_path );
     if( !rc_file_info.exists() || !rc_file_info.isReadable() )
@@ -826,21 +826,39 @@ void Settings::loadBroadcastAddressesFromFileHosts()
   if( !m_broadcastAddressesInFileHosts.isEmpty() )
     m_broadcastAddressesInFileHosts.clear();
 
-  QString file_path = defaultHostsFilePath( true );
-  QFile file( file_path );
-  if( !file.open( QIODevice::ReadOnly ) )
+  QFileInfo hosts_file_info( defaultHostsFilePath( true ) );
+  QString hosts_file_path = Bee::convertToNativeFolderSeparator( hosts_file_info.absoluteFilePath() );
+  qDebug() << "Check for HOSTS file in current path:" << qPrintable( hosts_file_path );
+  if( !hosts_file_info.exists() || !hosts_file_info.isReadable() )
   {
-    qDebug() << "File HOSTS not found in current path:" << qPrintable( file_path );
-    file_path = defaultHostsFilePath( false );
-    file.setFileName( file_path );
-    if( !file.open( QIODevice::ReadOnly ) )
+#ifdef Q_OS_UNIX
+    hosts_file_path = QLatin1String( "/etc/beebeep/beehosts.ini" );
+    hosts_file_info = QFileInfo( hosts_file_path );
+    qDebug() << "Check for HOSTS file in system path:" << qPrintable( hosts_file_path );
+    if( !hosts_file_info.exists() || !hosts_file_info.isReadable() )
     {
-      qDebug() << "File HOSTS not found in custom path:" << qPrintable( file_path );
-      return;
+#endif
+      hosts_file_info = QFileInfo( defaultHostsFilePath( false ) );
+      hosts_file_path = Bee::convertToNativeFolderSeparator( hosts_file_info.absoluteFilePath() );
+      qDebug() << "Check for HOSTS file in custom path:" << qPrintable( hosts_file_path );
+      if( !hosts_file_info.exists() || !hosts_file_info.isReadable() )
+      {
+        qDebug() << "HOSTS file not found";
+        return;
+      }
+#ifdef Q_OS_UNIX
     }
+#endif
   }
 
-  qDebug() << "Reading HOSTS from file" << qPrintable( file_path );
+  QFile file( hosts_file_path );
+  if( !file.open( QIODevice::ReadOnly ) )
+  {
+    qWarning() << "Cannot open file HOSTS in path" << qPrintable( hosts_file_path );
+    return;
+  }
+
+  qDebug() << "Reading HOSTS from file" << qPrintable( hosts_file_path );
   QString address_string;
   QString line_read;
   int num_lines = 0;

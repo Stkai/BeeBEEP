@@ -524,11 +524,11 @@
     </message>
     <message>
         <source>%1 Do you need support? Visit the %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Benötigst du Unterstützung? Besuche %2.</translation>
     </message>
     <message>
         <source>help page</source>
-        <translation type="unfinished"></translation>
+        <translation>Hilfeseite</translation>
     </message>
 </context>
 <context>
@@ -2377,7 +2377,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Do you want to quit %1?</source>
-        <translation>Möchten Sie %1 beenden?</translation>
+        <translation>Möchtest du %1 beenden?</translation>
     </message>
     <message>
         <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br /&gt;What do you want to do with the selected saved text?</source>
@@ -2725,7 +2725,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br&gt;What do you want to do with the selected saved text?</source>
-        <translation>Der ausgewählte Chat &apos;%1&apos; hat bereits einen gespeicherten Text.&lt;br&gt; Was möchten Sie mit dem ausgewählten gespeicherten Text tun?</translation>
+        <translation>Der ausgewählte Chat &apos;%1&apos; hat bereits einen gespeicherten Text.&lt;br&gt; Was möchtest du mit dem ausgewählten gespeicherten Text tun?</translation>
     </message>
     <message>
         <source>Show the time with the AM/PM notation</source>
@@ -2797,7 +2797,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Development version</source>
-        <translation></translation>
+        <translation>Entwicklerversion</translation>
     </message>
     <message>
         <source>Show tip of the day</source>
