@@ -519,7 +519,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Saved chats had an incorrect authorization code and will not be added to history.</source>
+        <source>Saved chats had an incorrect authorization code.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

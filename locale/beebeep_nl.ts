@@ -200,8 +200,8 @@
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="221"/>
-        <location filename="../src/core/CoreChat.cpp" line="860"/>
-        <location filename="../src/core/CoreChat.cpp" line="871"/>
+        <location filename="../src/core/CoreChat.cpp" line="856"/>
+        <location filename="../src/core/CoreChat.cpp" line="867"/>
         <source>%1 Chat with %2.</source>
         <translation>%1 Chat met %2.</translation>
     </message>
@@ -210,7 +210,7 @@
         <translation type="obsolete">Chat met alle aangesloten gebruikers</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="860"/>
+        <location filename="../src/core/CoreChat.cpp" line="856"/>
         <source>Unknown %1</source>
         <translation>Onbekend %1</translation>
     </message>
@@ -300,17 +300,12 @@
         <translation>Kan bericht niet verzenden: de chat is uitgeschakeld.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="615"/>
-        <source>Saved chats had an incorrect authorization code and will not be added to history.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/core/CoreChat.cpp" line="638"/>
+        <location filename="../src/core/CoreChat.cpp" line="634"/>
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="855"/>
+        <location filename="../src/core/CoreChat.cpp" line="851"/>
         <source>Chat with all users</source>
         <translation>Chat met alle gebruikers</translation>
     </message>
@@ -330,27 +325,32 @@
         <translation>Niemand heeft het bericht ontvangen.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="624"/>
+        <location filename="../src/core/CoreChat.cpp" line="619"/>
+        <source>Saved chats had an incorrect authorization code.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreChat.cpp" line="622"/>
         <source>%1 saved chats are added to history</source>
         <translation>%1 opgeslagen chats zijn aan geschiedenis toegevoegd</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="645"/>
+        <location filename="../src/core/CoreChat.cpp" line="641"/>
         <source>%1 offline messages will be sent as soon as possible.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="669"/>
+        <location filename="../src/core/CoreChat.cpp" line="665"/>
         <source>Offline message will be sent to %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="727"/>
+        <location filename="../src/core/CoreChat.cpp" line="723"/>
         <source>Offline messages sent to %2.</source>
         <translation>Offline bericht verzonden naar%2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="814"/>
+        <location filename="../src/core/CoreChat.cpp" line="810"/>
         <source>%1 You have buzzed %2.</source>
         <translation>%1 Je bent gebuzzed %2.</translation>
     </message>
@@ -1322,7 +1322,7 @@
         <translation>Chat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.ui" line="136"/>
+        <location filename="../src/desktop/GuiChat.ui" line="133"/>
         <source>Click to send message or just hit enter</source>
         <translation>Klik om bericht te sturen of druk op enter</translation>
     </message>

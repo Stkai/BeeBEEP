@@ -242,8 +242,8 @@
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="221"/>
-        <location filename="../src/core/CoreChat.cpp" line="860"/>
-        <location filename="../src/core/CoreChat.cpp" line="871"/>
+        <location filename="../src/core/CoreChat.cpp" line="856"/>
+        <location filename="../src/core/CoreChat.cpp" line="867"/>
         <source>%1 Chat with %2.</source>
         <translation>%1 Чат с %2.</translation>
     </message>
@@ -293,17 +293,12 @@
         <translation>Никто не получил сообщение.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="615"/>
-        <source>Saved chats had an incorrect authorization code and will not be added to history.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/core/CoreChat.cpp" line="638"/>
+        <location filename="../src/core/CoreChat.cpp" line="634"/>
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="855"/>
+        <location filename="../src/core/CoreChat.cpp" line="851"/>
         <source>Chat with all users</source>
         <translation>Чат со всеми пользователями</translation>
     </message>
@@ -313,32 +308,37 @@
         <translation>Сообщение будет доставлено %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="624"/>
+        <location filename="../src/core/CoreChat.cpp" line="619"/>
+        <source>Saved chats had an incorrect authorization code.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreChat.cpp" line="622"/>
         <source>%1 saved chats are added to history</source>
         <translation>%1 сохранённых чатоd добавлены к истории</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="645"/>
+        <location filename="../src/core/CoreChat.cpp" line="641"/>
         <source>%1 offline messages will be sent as soon as possible.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="669"/>
+        <location filename="../src/core/CoreChat.cpp" line="665"/>
         <source>Offline message will be sent to %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="727"/>
+        <location filename="../src/core/CoreChat.cpp" line="723"/>
         <source>Offline messages sent to %2.</source>
         <translation>Офлайн сообщения отправлены %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="814"/>
+        <location filename="../src/core/CoreChat.cpp" line="810"/>
         <source>%1 You have buzzed %2.</source>
         <translation>%1 Вы будите %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="860"/>
+        <location filename="../src/core/CoreChat.cpp" line="856"/>
         <source>Unknown %1</source>
         <translation>Неизвестный %1</translation>
     </message>
@@ -1302,7 +1302,7 @@
         <translation>Чат</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.ui" line="136"/>
+        <location filename="../src/desktop/GuiChat.ui" line="133"/>
         <source>Click to send message or just hit enter</source>
         <translation>Нажмите для отправки сообщения или просто нажмите Enter</translation>
     </message>

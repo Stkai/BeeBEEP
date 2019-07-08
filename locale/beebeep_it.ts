@@ -552,7 +552,11 @@
     </message>
     <message>
         <source>Saved chats had an incorrect authorization code and will not be added to history.</source>
-        <translation>Le conversazioni salvate avevano un codice di autorizzazione non valido e non sono state inserite nella storia dei messaggi.</translation>
+        <translation type="vanished">Le conversazioni salvate avevano un codice di autorizzazione non valido e non sono state inserite nella storia dei messaggi.</translation>
+    </message>
+    <message>
+        <source>Saved chats had an incorrect authorization code.</source>
+        <translation>Le conversazioni salvate avevano un codice di autorizzazione non valido.</translation>
     </message>
 </context>
 <context>
