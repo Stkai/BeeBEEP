@@ -34,9 +34,6 @@
      <height>120</height>
     </size>
    </property>
-   <property name="focusPolicy">
-    <enum>Qt::ClickFocus</enum>
-   </property>
    <property name="readOnly">
     <bool>true</bool>
    </property>
