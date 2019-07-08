@@ -604,33 +604,29 @@ void Core::addListToSavedChats()
     return;
   }
 
-  ChatManager::instance().addSavedChats( QMap<QString, QString>() );
+  ChatManager::instance().addSavedChats( bscl->savedChats() );
+  QString loading_status = QString( "%1 saved chats are added to history (elapsed time: %2)" )
+                           .arg( bscl->savedChats().size() )
+                           .arg( Bee::elapsedTimeToString( bscl->elapsedTime() ) );
+  qDebug() << qPrintable( loading_status );
   if( bscl->savedChats().size() > 0 )
   {
-    if( bscl->savedChatsAuthCode() != MessageManager::instance().saveMessagesAuthCode() )
+    if( Settings::instance().saveMessagesTimestamp().isValid() && bscl->savedChatsAuthCode() != MessageManager::instance().saveMessagesAuthCode() )
     {
       qWarning() << "Incorrect autorization code found in saved chats file";
       dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2" )
                              .arg( IconManager::instance().toHtml( "warning.png", "*!*" ) )
-                             .arg( tr( "Saved chats had an incorrect authorization code and will not be added to history.") ),
+                             .arg( tr( "Saved chats had an incorrect authorization code.") ),
                              DispatchToChat, ChatMessage::System );
     }
-    else
-    {
-      QString loading_status = QString( "%1 saved chats are added to history (elapsed time: %2)" )
-                               .arg( bscl->savedChats().size() )
-                               .arg( Bee::elapsedTimeToString( bscl->elapsedTime() ) );
-      qDebug() << qPrintable( loading_status );
-      loading_status = tr( "%1 saved chats are added to history" ).arg( bscl->savedChats().size() );
-      dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( IconManager::instance().toHtml( "saved-chat.png", "*H*" ), loading_status ),
-                             DispatchToChat, ChatMessage::System );
-      ChatManager::instance().addSavedChats( bscl->savedChats() );
-    }
+    loading_status = tr( "%1 saved chats are added to history" ).arg( bscl->savedChats().size() );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( IconManager::instance().toHtml( "saved-chat.png", "*H*" ), loading_status ),
+                           DispatchToChat, ChatMessage::System );
   }
 
   if( bscl->unsentMessages().size() > 0 )
   {
-    if( bscl->unsentMessagesAuthCode() != MessageManager::instance().saveMessagesAuthCode() )
+    if( Settings::instance().saveMessagesTimestamp().isValid() && bscl->unsentMessagesAuthCode() != MessageManager::instance().saveMessagesAuthCode() )
     {
       qWarning() << "Incorrect autorization code found in offline messages file";
       dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2" )
