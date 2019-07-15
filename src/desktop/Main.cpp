@@ -75,7 +75,10 @@ bool SetTranslator( QTranslator* translator, QString language_folder, QString la
 int main( int argc, char *argv[] )
 {
 #if QT_VERSION >= 0x050600
-  QCoreApplication::setAttribute( Qt::AA_EnableHighDpiScaling, true );
+  // Windows with 4k monitors, icons are too big... linux is about to test... MacOSX is ok
+  #ifdef Q_OS_MAC
+    QCoreApplication::setAttribute( Qt::AA_EnableHighDpiScaling, true );
+  #endif
 #endif
   BeeApplication bee_app( argc, argv );
   (void)Settings::instance();
