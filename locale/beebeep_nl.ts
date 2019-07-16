@@ -102,7 +102,7 @@
     <message>
         <location filename="../src/core/Core.cpp" line="143"/>
         <source>%1 User %2 cannot save unsent messages in path: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Gebruiker %2 kan geen verzonden bericht opslaan in pad: %3</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="177"/>
@@ -127,12 +127,12 @@
     <message>
         <location filename="../src/core/Core.cpp" line="269"/>
         <source>%1 Do you need support? Visit the %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Heb je hulp nodig? Bezoek %2.</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="271"/>
         <source>help page</source>
-        <translation type="unfinished"></translation>
+        <translation>help pagina</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="317"/>
@@ -300,6 +300,11 @@
         <translation>Kan bericht niet verzenden: de chat is uitgeschakeld.</translation>
     </message>
     <message>
+        <location filename="../src/core/CoreChat.cpp" line="619"/>
+        <source>Saved chats had an incorrect authorization code.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/core/CoreChat.cpp" line="634"/>
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
         <translation type="unfinished"></translation>
@@ -325,11 +330,6 @@
         <translation>Niemand heeft het bericht ontvangen.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="619"/>
-        <source>Saved chats had an incorrect authorization code.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/core/CoreChat.cpp" line="622"/>
         <source>%1 saved chats are added to history</source>
         <translation>%1 opgeslagen chats zijn aan geschiedenis toegevoegd</translation>
@@ -337,12 +337,12 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="641"/>
         <source>%1 offline messages will be sent as soon as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 offline berichten zullen zo spoedig mogelijk worden verzonden.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="665"/>
         <source>Offline message will be sent to %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Offline bericht wordt verzonden naar %1</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="723"/>
@@ -712,7 +712,7 @@
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="309"/>
         <source>Compressed</source>
-        <translation type="unfinished"></translation>
+        <translation>Gecomprimeerd</translation>
     </message>
 </context>
 <context>
@@ -1494,7 +1494,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="141"/>
         <source>It is preferable to use square images to avoid display problems.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het verdient de voorkeur vierkante afbeeldingen te gebruiken om weergaveproblemen te voorkomen.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="177"/>
@@ -1599,7 +1599,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="161"/>
         <source>Show the BeeBOX</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon de BeeBOX</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="274"/>
@@ -2193,7 +2193,7 @@ Gebruik aub een andere naam.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="663"/>
         <location filename="../src/desktop/GuiMain.cpp" line="1282"/>
         <source>Development version</source>
-        <translation type="unfinished"></translation>
+        <translation>Development versie</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="740"/>
@@ -2789,7 +2789,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="772"/>
         <source>Test your network</source>
-        <translation type="unfinished"></translation>
+        <translation>Test je netwerk</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="812"/>
@@ -2824,7 +2824,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="930"/>
         <source>Save unsent messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Sla niet verzonden bericht op</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="934"/>
@@ -2834,7 +2834,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="947"/>
         <source>Raise main window on new message</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon hoofdvenster bij nieuw bericht</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="951"/>
@@ -2939,12 +2939,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1241"/>
         <source>Show Tips...</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon Tips...</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1242"/>
         <source>Discover the fact of the day...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ontdekt de feit van de dag...</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1302"/>
@@ -2984,7 +2984,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1827"/>
         <source>Saving unsent messages may fail if &apos;Save users&apos; and &apos;Save groups&apos; options are not enabled. Do you want to enable them?</source>
-        <translation type="unfinished"></translation>
+        <translation>Het opslaan van niet-verzonden berichten kan mislukken als &apos;Gebruikers opslaan&apos; en &apos;Groepen opslaan&apos; opties zijn niet ingeschakeld. Wil je ze inschakelen?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1872"/>
@@ -3692,74 +3692,74 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="36"/>
         <source>Test your network</source>
-        <translation type="unfinished"></translation>
+        <translation>Test je netwerk</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="49"/>
         <source>Your network parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>Parameters van je netwerk</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="50"/>
         <source>IP Address</source>
-        <translation type="unfinished">IP adres</translation>
+        <translation>IP adres</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="51"/>
         <source>Message port</source>
-        <translation type="unfinished"></translation>
+        <translation>Bericht poort</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="52"/>
         <source>File transfer port</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestandsoverdracht poort</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="53"/>
         <source>Enter the host address and the port you want to test.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vul het host adres en poort in welke je wilt testen.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="68"/>
         <source>The host address entered is not valid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het ingevulde host adres is niet geldig.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="68"/>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="77"/>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="84"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="77"/>
         <source>The port entered is not valid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Poort nummer is niet geldig.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="84"/>
         <source>It is not possible to perform the test if you are not connected to the BeeBEEP network.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het is niet mogelijk om de test uit te voeren als u niet bent verbonden met het BeeBEEP-netwerk.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="97"/>
         <source>Connecting to %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbonden met %1</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="123"/>
         <source>Connection to %1 is active.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbinding met %1 is actief.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="135"/>
         <source>Connection to %1 has error #%2: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbinding met %1 heeft fout #%2: %3</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="159"/>
         <source>Connection to %1 has been closed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbinding met %1 is gesloten.</translation>
     </message>
 </context>
 <context>
@@ -3767,27 +3767,27 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.ui" line="78"/>
         <source>IP Address</source>
-        <translation type="unfinished">IP adres</translation>
+        <translation>IP adres</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.ui" line="116"/>
         <source>Port</source>
-        <translation type="unfinished">Poort</translation>
+        <translation>Poort</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.ui" line="160"/>
         <source>Test connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Test verbinding</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.ui" line="216"/>
         <source>Clear report</source>
-        <translation type="unfinished"></translation>
+        <translation>Wis report</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.ui" line="242"/>
         <source>Close</source>
-        <translation type="unfinished">Sluiten</translation>
+        <translation>Sluit</translation>
     </message>
 </context>
 <context>
@@ -4403,32 +4403,32 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="64"/>
         <source>Update your BeeBOX</source>
-        <translation type="unfinished"></translation>
+        <translation>Update je BeeBOX</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="65"/>
         <source>Create folder in your BeeBOX</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak map aan in je BeeBOX</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="67"/>
         <source>Update BeeBOX</source>
-        <translation type="unfinished"></translation>
+        <translation>Update BeeBOX</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="69"/>
         <source>Create folder in BeeBOX</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak map aan in BeeBOX</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="117"/>
         <source>BeeBOX path does not exist. Please select a valid folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>BeeBOX pad bestaat niet. Selecteer een geldige map.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="130"/>
         <source>%1 - Select the BeeBOX folder</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - Selecteer de BeeBOX map</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="411"/>
@@ -4504,7 +4504,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiShareBox.ui" line="168"/>
         <source>Enable my BeeBOX</source>
-        <translation type="unfinished"></translation>
+        <translation>Zet BeeBOX aan</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.ui" line="193"/>
@@ -5017,37 +5017,37 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="400"/>
         <source>You cannot send files to %1 because the user is offline.</source>
-        <translation type="unfinished"></translation>
+        <translation>Je kan geen bestanden versturen naar %1, omdat de gebruiker offline is.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="434"/>
         <source>Do you want to send %1 %2 to %3?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wil je versturen %1 %2 naar %3?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="435"/>
         <source>file</source>
-        <translation type="unfinished">bestand</translation>
+        <translation>bestand</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="435"/>
         <source>files</source>
-        <translation type="unfinished">bestanden</translation>
+        <translation>bestanden</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="436"/>
         <source>Yes</source>
-        <translation type="unfinished">Ja</translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="436"/>
         <source>No</source>
-        <translation type="unfinished">Nee</translation>
+        <translation>Nee</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="449"/>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation type="unfinished">Qt bibliotheek voor dit besturingssysteem ondersteunt geen Drag en drop voor bestanden. U moet het bestand dat u wilt versturen opnieuw selecteren.</translation>
+        <translation>Qt bibliotheek voor dit besturingssysteem ondersteunt geen Drag en drop voor bestanden. U moet het bestand dat u wilt versturen opnieuw selecteren.</translation>
     </message>
 </context>
 <context>
@@ -5474,7 +5474,7 @@ Gebruik aub een andere naam.</translation>
         <location filename="../src/desktop/GuiChatItem.cpp" line="119"/>
         <location filename="../src/utils/BeeUtils.cpp" line="740"/>
         <source>unsent messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Niet verstuurd bericht</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="98"/>
@@ -5639,32 +5639,32 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/core/ConnectionSocket.cpp" line="512"/>
         <source>The connection to %1 was not successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>De verbinding naar %1 is niet gelukt.</translation>
     </message>
     <message>
         <location filename="../src/core/ConnectionSocket.cpp" line="603"/>
         <source>The tested network address %1 is not present among the available addresses of the network interface to which the connection has been made.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het geteste netwerkadres %1 is niet aanwezig onder de beschikbare adressen van de netwerkinterface waarmee de verbinding tot stand is gebracht.</translation>
     </message>
     <message>
         <location filename="../src/core/ConnectionSocket.cpp" line="606"/>
         <source>The connection to host address %1 was successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>De verbinding met host adres %1 was succesvol.</translation>
     </message>
     <message>
         <location filename="../src/core/ConnectionSocket.cpp" line="612"/>
         <source>The port tested by the connection is %1 but the one that answered is %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>De poort die door de verbinding is getest, is%1, maar degene die heeft beantwoord, is%2.</translation>
     </message>
     <message>
         <location filename="../src/core/ConnectionSocket.cpp" line="616"/>
         <source>The connection to port %1 was successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>De verbinding naar %1 is gelukt.</translation>
     </message>
     <message>
         <location filename="../src/core/ConnectionSocket.cpp" line="624"/>
         <source>Unable to complete the test with an invalid network address.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan de test niet voltooien met een ongeldige netwerk adres.</translation>
     </message>
 </context>
 <context>
