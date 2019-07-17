@@ -170,7 +170,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_chatList, SIGNAL( chatToEdit( VNumber ) ), this, SLOT( editGroupChat( VNumber ) ) );
   connect( mp_chatList, SIGNAL( createNewChatRequest() ), this, SLOT( createGroupChat() ) );
   connect( mp_chatList, SIGNAL( createNewMessageRequest() ), this, SLOT( createMessage() ) );
-    connect( mp_chatList, SIGNAL( hideEmptyChatsRequest() ), this, SLOT( onHideEmptyChatsRequest() ) );
+  connect( mp_chatList, SIGNAL( hideEmptyChatsRequest() ), this, SLOT( onHideEmptyChatsRequest() ) );
 
   connect( mp_trayIcon, SIGNAL( activated( QSystemTrayIcon::ActivationReason ) ), this, SLOT( trayIconClicked( QSystemTrayIcon::ActivationReason ) ) );
   connect( mp_trayIcon, SIGNAL( messageClicked() ), this, SLOT( trayMessageClicked() ) );
@@ -931,6 +931,19 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().chatSaveUnsentMessages() );
   act->setData( 81 );
+  mp_actSaveFileTransferMessages = mp_menuChatSettings->addAction( tr( "Save file transfer messages" ), this, SLOT( settingsChanged() ) );
+  mp_actSaveFileTransferMessages->setCheckable( true );
+  mp_actSaveFileTransferMessages->setChecked( Settings::instance().chatSaveFileTransfers() );
+  mp_actSaveFileTransferMessages->setData( 82 );
+  mp_actSaveSystemMessages = mp_menuChatSettings->addAction( tr( "Save system messages" ), this, SLOT( settingsChanged() ) );
+  mp_actSaveSystemMessages->setCheckable( true );
+  mp_actSaveSystemMessages->setChecked( Settings::instance().chatSaveSystemMessages() );
+  mp_actSaveSystemMessages->setData( 83 );
+  act = mp_menuChatSettings->addAction( "", this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setData( 84 );
+  setChatMaxLinesToSaveInAction( act );
+  mp_menuChatSettings->addSeparator();
   act = mp_menuChatSettings->addAction( tr( "Send offline messages also to chat with all users" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().sendOfflineMessagesToDefaultChat() );
@@ -1470,7 +1483,21 @@ void GuiMain::settingsChanged( QAction* act )
     }
     break;
   case 18:
-    Settings::instance().setChatAutoSave( act->isChecked() );
+    {
+      Settings::instance().setChatAutoSave( act->isChecked() );
+      if( !Settings::instance().chatAutoSave() && (Settings::instance().chatSaveFileTransfers() || !Settings::instance().chatSaveSystemMessages()) )
+      {
+        if( QMessageBox::warning( this, Settings::instance().programName(),
+                               tr( "There will be no saving of 'system' and 'file transfer' messages if this option is disabled." ),
+                               tr( "Ok" ), tr( "Cancel" ), QString::null, 0, 1 ) )
+        {
+          Settings::instance().setChatSaveFileTransfers( false );
+          Settings::instance().setChatSaveSystemMessages( false );
+          mp_actSaveFileTransferMessages->setChecked( false );
+          mp_actSaveSystemMessages->setChecked( false );
+        }
+      }
+    }
     break;
   case 19:
     Settings::instance().setShowNotificationOnTray( act->isChecked() );
@@ -1825,13 +1852,38 @@ void GuiMain::settingsChanged( QAction* act )
       {
         if( QMessageBox::question( this, Settings::instance().programName(),
                                tr( "Saving unsent messages may fail if 'Save users' and 'Save groups' options are not enabled. Do you want to enable them?" ),
-                               tr( "Yes" ), tr( "No"), QString::null, 0, 1 ) )
+                               tr( "Yes" ), tr( "No"), QString::null, 0, 1 ) == 0 )
         {
           Settings::instance().setSaveUserList( true );
           Settings::instance().setSaveGroupList( true );
           mp_actSaveUserList->setChecked( true );
           mp_actSaveGroupList->setChecked( true );
         }
+      }
+    }
+    break;
+  case 82:
+    Settings::instance().setChatSaveFileTransfers( act->isChecked() );
+    showCheckSaveChatMessages();
+    break;
+  case 83:
+    Settings::instance().setChatSaveSystemMessages( act->isChecked() );
+    showCheckSaveChatMessages();
+    break;
+  case 84:
+    {
+ #if QT_VERSION >= 0x050000
+      int save_max_lines = QInputDialog::getInt( qApp->activeWindow(), Settings::instance().programName(),
+#else
+      int save_max_lines = QInputDialog::getInteger( qApp->activeWindow(), Settings::instance().programName(),
+#endif
+                                                 tr( "Please select the maximum number of lines to be saved in the conversation (current: %1)." ).arg( Settings::instance().chatMaxLineSaved() ),
+                                                 Settings::instance().chatMaxLineSaved(),
+                                                 100, 30000, 100, &ok );
+      if( ok )
+      {
+        Settings::instance().setChatMaxLineSaved( save_max_lines );
+        setChatMaxLinesToSaveInAction( act );
       }
     }
     break;
@@ -1862,6 +1914,22 @@ void GuiMain::settingsChanged( QAction* act )
     Settings::instance().save();
 }
 
+void GuiMain::showCheckSaveChatMessages()
+{
+  if( !Settings::instance().chatAutoSave() && (Settings::instance().chatSaveFileTransfers() || !Settings::instance().chatSaveSystemMessages()) )
+  {
+    if( QMessageBox::warning( this, Settings::instance().programName(),
+                              tr( "There will be no saving of 'system' and 'file transfer' messages if this option is disabled." ),
+                              tr( "Ok" ), tr( "Cancel" ), QString::null, 0, 1 ) )
+    {
+      Settings::instance().setChatSaveFileTransfers( false );
+      Settings::instance().setChatSaveSystemMessages( false );
+      mp_actSaveFileTransferMessages->setChecked( false );
+      mp_actSaveSystemMessages->setChecked( false );
+    }
+  }
+}
+
 void GuiMain::setChatMessagesToShowInAction( QAction* act )
 {
   act->setText( tr( "Show only last %1 messages" ).arg( Settings::instance().chatMessagesToShow() ) );
@@ -1877,6 +1945,13 @@ void GuiMain::setChatInactiveWindowOpacityLevelInAction( QAction* act )
 {
   act->setChecked( Settings::instance().chatInactiveWindowOpacityLevel() < 100 );
   act->setText( tr( "Show inactive chat window with %1% opacity" ).arg( Settings::instance().chatInactiveWindowOpacityLevel() ) );
+}
+
+void GuiMain::setChatMaxLinesToSaveInAction( QAction* act )
+{
+  act->setText( tr( "Save maximum %1 lines of chat" ).arg( Settings::instance().chatMaxLineSaved() ) );
+  act->setEnabled( Settings::instance().chatAutoSave() );
+  act->setChecked( Settings::instance().chatMaxLineSaved() > 0 );
 }
 
 void GuiMain::sendMessage( VNumber chat_id, const QString& msg )

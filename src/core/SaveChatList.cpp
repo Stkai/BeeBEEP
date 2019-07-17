@@ -118,7 +118,8 @@ bool SaveChatList::saveChats( QDataStream* stream )
     if( c.isEmpty() )
       continue;
 
-    QString html_text = GuiChatMessage::chatToHtml( c, true, true, true );
+    QString html_text = GuiChatMessage::chatToHtml( c, !Settings::instance().chatSaveFileTransfers(),
+                                                    !Settings::instance().chatSaveSystemMessages(), true, true );
     if( ChatManager::instance().chatHasSavedText( c.name() ) )
       html_text.prepend( ChatManager::instance().chatSavedText( c.name() ) );
 

@@ -2767,6 +2767,26 @@ Please select a different name.</source>
         <source>Discover the fact of the day...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Save file transfer messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save system messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There will be no saving of &apos;system&apos; and &apos;file transfer&apos; messages if this option is disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save maximum %1 lines of chat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select the maximum number of lines to be saved in the conversation (current: %1).</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

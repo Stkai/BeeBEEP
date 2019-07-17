@@ -25,7 +25,7 @@
 #include "Settings.h"
 
 
-HistoryManager* HistoryManager::mp_instance = NULL;
+HistoryManager* HistoryManager::mp_instance = Q_NULLPTR;
 
 
 HistoryManager::HistoryManager()

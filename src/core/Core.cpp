@@ -129,10 +129,22 @@ bool Core::checkSavingPaths()
       chats_can_be_saved = false;
     }
     else
+    {
       qDebug() << "Chat messages will be saved in path:" << qPrintable( Settings::instance().savedChatsFilePath() );
+      if( Settings::instance().chatSaveFileTransfers() )
+        qWarning() << "File transfer messages will be saved also";
+      if( Settings::instance().chatSaveSystemMessages() )
+        qWarning() << "System messages will be saved also";
+    }
   }
   else
+  {
     qDebug() << "Save chat messages option is disabled";
+    if( Settings::instance().chatSaveFileTransfers() )
+      qWarning() << "File transfer messages will be not saved because 'Save messages' option is disabled";
+    if( Settings::instance().chatSaveSystemMessages() )
+      qWarning() << "System messages will be not saved because 'Save messages' option is disabled";
+  }
 
   if( Settings::instance().chatSaveUnsentMessages() )
   {

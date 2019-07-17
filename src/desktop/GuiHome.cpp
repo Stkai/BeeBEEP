@@ -61,7 +61,7 @@ bool GuiHome::addSystemMessage( const ChatMessage& cm )
   if( !GuiChatMessage::messageCanBeShowedInActivity( cm ) )
     return false;
 
-  QString sys_message = GuiChatMessage::formatSystemMessage( cm, ID_SYSTEM_MESSAGE, Settings::instance().homeShowMessageTimestamp(), false );
+  QString sys_message = GuiChatMessage::formatSystemMessage( cm, ID_SYSTEM_MESSAGE, Settings::instance().homeShowMessageTimestamp(), false, Settings::instance().chatCompact() );
 
   if( sys_message.isEmpty() )
     return false;

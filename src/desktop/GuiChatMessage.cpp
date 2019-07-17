@@ -118,7 +118,7 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
 
   if( last_user_id == ID_SYSTEM_MESSAGE )
   {
-    if( !skip_system_message )
+    if( !skip_system_message && !use_chat_compact )
       html_message.prepend( QLatin1String( "<br>" ) );
   }
   else if( last_user_id == ID_IMPORTANT_MESSAGE || cm.isImportant() )
@@ -136,7 +136,7 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
   return html_message;
 }
 
-QString GuiChatMessage::formatSystemMessage( const ChatMessage& cm, VNumber last_user_id, bool show_timestamp, bool show_datestamp )
+QString GuiChatMessage::formatSystemMessage( const ChatMessage& cm, VNumber last_user_id, bool show_timestamp, bool show_datestamp, bool use_chat_compact )
 {
   if( cm.message().isEmpty() )
     return QString( "" );
@@ -154,13 +154,13 @@ QString GuiChatMessage::formatSystemMessage( const ChatMessage& cm, VNumber last
     html_message.append( textImportantSuffix() + QLatin1String( "<br>" ) );
   }
 
-  if( cm.type() != ChatMessage::Other && last_user_id != ID_SYSTEM_MESSAGE )
+  if( !use_chat_compact && cm.type() != ChatMessage::Other && last_user_id != ID_SYSTEM_MESSAGE )
     html_message.prepend( QLatin1String( "<br>" ) );
 
   return html_message;
 }
 
-QString GuiChatMessage::chatToHtml( const Chat& c, bool skip_system_message, bool force_timestamp, bool force_datestamp )
+QString GuiChatMessage::chatToHtml( const Chat& c, bool skip_file_transfers, bool skip_system_message, bool force_timestamp, bool force_datestamp )
 {
   UserList chat_users;
   QString html_text = "";
@@ -174,12 +174,21 @@ QString GuiChatMessage::chatToHtml( const Chat& c, bool skip_system_message, boo
   User u;
 
   foreach( ChatMessage cm, c.messages() )
-  {
+  {  
     if( cm.isFromSystem() )
     {
-      if( skip_system_message )
-        continue;
-      html_text += formatSystemMessage( cm, last_message_user_id, force_timestamp || Settings::instance().chatShowMessageTimestamp(), force_datestamp );
+      if( cm.isFileTransfer() || cm.isImagePreview() )
+      {
+        if( skip_file_transfers )
+          continue;
+        html_text += formatSystemMessage( cm, last_message_user_id, force_timestamp || Settings::instance().chatShowMessageTimestamp(), force_datestamp, Settings::instance().chatCompact() );
+      }
+      else
+      {
+        if( skip_system_message )
+          continue;
+        html_text += formatSystemMessage( cm, last_message_user_id, force_timestamp || Settings::instance().chatShowMessageTimestamp(), force_datestamp, Settings::instance().chatCompact() );
+      }
     }
     else
     {
@@ -190,9 +199,8 @@ QString GuiChatMessage::chatToHtml( const Chat& c, bool skip_system_message, boo
         if( u.isValid() )
           chat_users.set( u );
       }
-      html_text += formatMessage( u, cm, last_message_user_id, force_timestamp || Settings::instance().chatShowMessageTimestamp(), force_datestamp, skip_system_message, false, true, true );
+      html_text += formatMessage( u, cm, last_message_user_id, force_timestamp || Settings::instance().chatShowMessageTimestamp(), force_datestamp, skip_system_message, false, true, Settings::instance().chatCompact() );
     }
-
     last_message_user_id = cm.isImportant() ? ID_IMPORTANT_MESSAGE : cm.userId();
   }
 

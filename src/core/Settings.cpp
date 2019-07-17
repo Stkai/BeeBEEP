@@ -135,6 +135,7 @@ Settings::Settings()
 #else
   m_dataFolder = Bee::convertToNativeFolderSeparator( QDesktopServices::storageLocation( QDesktopServices::DataLocation ) );
 #endif
+  m_cacheFolder = defaultCacheFolderPath();
 
   m_lastSave = QDateTime::currentDateTime();
 
@@ -207,6 +208,7 @@ void Settings::initFolders( const QString& app_folder )
 #else
   m_dataFolder = Bee::convertToNativeFolderSeparator( QDesktopServices::storageLocation( QDesktopServices::DataLocation ) );
 #endif
+  m_cacheFolder = defaultCacheFolderPath();
 }
 
 void Settings::resetAllColors()
@@ -1142,7 +1144,9 @@ void Settings::load()
   m_showFileTransferCompletedOnTray = sets->value( "ShowFileTransferCompletedOnTray", true ).toBool();
   m_chatAutoSave = sets->value( "ChatAutoSave", true ).toBool();
   m_chatSaveUnsentMessages = sets->value( "ChatSaveUnsentMessages", true ).toBool();
-  m_chatMaxLineSaved = sets->value( "ChatMaxLineSaved", 8000 ).toInt();
+  m_chatMaxLineSaved = sets->value( "ChatMaxLineSaved", 9000 ).toInt();
+  m_chatSaveFileTransfers = sets->value( "ChatSaveFileTransfers", m_chatAutoSave ).toBool();
+  m_chatSaveSystemMessages = sets->value( "ChatSaveSystemMessages", false ).toBool();
   m_showChatToolbar = sets->value( "ShowChatToolbar", true ).toBool();
   m_showOnlyOnlineUsers = sets->value( "ShowOnlyOnlineUsers", false ).toBool();
   m_showUserPhoto = sets->value( "ShowUserPhoto", true ).toBool();
@@ -1494,6 +1498,8 @@ void Settings::save()
   sets->setValue( "ChatAutoSave", m_chatAutoSave );
   sets->setValue( "ChatMaxLineSaved", m_chatMaxLineSaved );
   sets->setValue( "ChatSaveUnsentMessages", m_chatSaveUnsentMessages );
+  sets->setValue( "ChatSaveFileTransfers", m_chatSaveFileTransfers );
+  sets->setValue( "ChatSaveSystemMessages", m_chatSaveSystemMessages );
   sets->setValue( "ShowChatToolbar", m_showChatToolbar );
   sets->setValue( "ShowOnlyOnlineUsers", m_showOnlyOnlineUsers );
   sets->setValue( "ShowUserPhoto", m_showUserPhoto );
@@ -1670,13 +1676,38 @@ void Settings::addTemporaryFilePath( const QString& file_path )
   }
 }
 
-void Settings::clearTemporaryFile()
+bool Settings::isFileImageInCache( const QString& file_path ) const
+{
+  QFileInfo file_info( file_path );
+  if( !Bee::isFileTypeImage( file_info.suffix() ) )
+    return false;
+  QString base_folder_path = Bee::convertToNativeFolderSeparator( file_info.absoluteDir().path() );
+  if( base_folder_path == m_cacheFolder )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << qPrintable( file_path ) << "is in cache";
+#endif
+    return true;
+  }
+  else
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << qPrintable( file_path ) << "is NOT in cache but in:" << qPrintable( base_folder_path );
+#endif
+    return false;
+  }
+}
+
+void Settings::clearTemporaryFiles()
 {
   if( m_tempFilePathList.isEmpty() )
     return;
 
   foreach( QString file_path, m_tempFilePathList )
   {
+    if( m_chatSaveFileTransfers && isFileImageInCache( file_path ) )
+      continue;
+
     if( QFile::exists( file_path ) )
     {
       if( !QFile::remove( file_path ) )
@@ -1841,9 +1872,27 @@ bool Settings::setDataFolder()
     qWarning() << "Data folder" << qPrintable( m_dataFolder ) << "is not writeable";
     return false;
   }
+  qDebug() << "Data folder (smart):" << qPrintable( m_dataFolder );
 
-  qDebug() << "Data folder (smart):" << qPrintable(  m_dataFolder );
+  m_cacheFolder = defaultCacheFolderPath();
+  QDir cache_folder( m_cacheFolder );
+  if( !cache_folder.exists() )
+  {
+    if( !cache_folder.mkpath( m_cacheFolder ) )
+    {
+      qWarning() << "Unable to create cache folder" << qPrintable( cache_folder.absolutePath() ) ;
+      m_cacheFolder = m_dataFolder;
+    }
+    else
+      qDebug() << "Cache folder created in" << qPrintable( m_cacheFolder );
+  }
+  qDebug() << "Cache folder:" << qPrintable( m_cacheFolder );
   return true;
+}
+
+QString Settings::defaultCacheFolderPath() const
+{
+  return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder() ).arg( "cache" ) );
 }
 
 QString Settings::savedChatsFilePath() const

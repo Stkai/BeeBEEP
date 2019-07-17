@@ -47,6 +47,8 @@ public:
   inline bool isFromAutoresponder() const;
   inline bool alertCanBeSent() const;
   inline bool isImportant() const;
+  inline bool isFileTransfer() const;
+  inline bool isImagePreview() const;
 
   inline VNumber userId() const;
   inline const QString& message() const;
@@ -75,6 +77,8 @@ inline bool ChatMessage::isFromLocalUser() const { return m_userId == ID_LOCAL_U
 inline bool ChatMessage::isFromAutoresponder() const { return m_type == ChatMessage::Autoresponder; }
 inline bool ChatMessage::alertCanBeSent() const { return m_isImportant || (!isFromLocalUser() && !isFromSystem() && (m_type == ChatMessage::Chat || m_type == ChatMessage::FileTransfer || m_type == ChatMessage::ImagePreview || isFromAutoresponder())); }
 inline bool ChatMessage::isImportant() const { return m_isImportant; }
+inline bool ChatMessage::isFileTransfer() const { return m_type == ChatMessage::FileTransfer; }
+inline bool ChatMessage::isImagePreview() const { return m_type == ChatMessage::ImagePreview; }
 inline VNumber ChatMessage::userId() const { return m_userId; }
 inline const QString& ChatMessage::message() const { return m_message; }
 inline const QDateTime& ChatMessage::timestamp() const { return m_timestamp; }

@@ -429,7 +429,7 @@ QString GuiChat::chatMessageToText( const ChatMessage& cm )
                                        Settings::instance().showMessagesGroupByUser(), m_chatId == ID_DEFAULT_CHAT ? true : Settings::instance().chatUseYourNameInsteadOfYou(), Settings::instance().chatCompact() );
   }
   else
-    s = GuiChatMessage::formatSystemMessage( cm, m_lastMessageUserId, Settings::instance().chatShowMessageTimestamp(), false );
+    s = GuiChatMessage::formatSystemMessage( cm, m_lastMessageUserId, Settings::instance().chatShowMessageTimestamp(), false, Settings::instance().chatCompact() );
 
   m_lastMessageUserId = cm.isImportant() ? ID_IMPORTANT_MESSAGE : cm.userId();
   return s;
@@ -750,7 +750,7 @@ void GuiChat::checkAndSendImage( const QMimeData* source )
     return;
 
   QString image_format = "png";
-  QString image_initial_path = Settings::instance().dataFolder() +
+  QString image_initial_path = Settings::instance().cacheFolder() +
                                     QString( "/beeimgtmp-%1." ).arg( Bee::dateTimeStringSuffix( QDateTime::currentDateTime() ) )
                                     + image_format;
   QString file_path = Bee::uniqueFilePath( image_initial_path, false );

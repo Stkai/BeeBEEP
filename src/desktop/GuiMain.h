@@ -258,6 +258,8 @@ private:
   QString tabToolTip( int );
   void showRestartConnectionAlertMessage();
   void showRestartApplicationAlertMessage();
+  void showCheckSaveChatMessages();
+  void setChatMaxLinesToSaveInAction( QAction* );
 
 private:
   QTabWidget* mp_tabMain;
@@ -327,6 +329,8 @@ private:
   QAction* mp_actCreateMessage;
   QAction* mp_actSaveUserList;
   QAction* mp_actSaveGroupList;
+  QAction* mp_actSaveFileTransferMessages;
+  QAction* mp_actSaveSystemMessages;
 
   QAction* mp_actShowUserListOnConnection;
   QAction* mp_actShowChatListOnConnection;
@@ -365,7 +369,6 @@ private:
   GuiWebView* mp_webView;
   QAction* mp_actWebView;
 #endif
-
 
   GuiNetworkTest* mp_networkTest;
 

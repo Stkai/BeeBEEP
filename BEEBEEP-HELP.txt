@@ -157,6 +157,8 @@ ChatSaveDirectory=.
 ChatAutoSave=true
 ChatMaxLineSaved=3000
 ChatSaveUnsentMessages=true (default=true) [5.6.3]
+ChatSaveFileTransfers=true (default=true) [5.6.5]
+ChatSaveSystemMessages=false (default=false) [5.6.5]
 MainWindowGeometry=(do not edit manually)
 MainWindowState=(do not edit manually)
 ChatSplitterState=(do not edit manually)

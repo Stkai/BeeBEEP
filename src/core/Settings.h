@@ -69,6 +69,7 @@ public:
   inline const QDate& settingsCreationDate() const;
   inline const QString& dataFolder() const;
   inline const QString& resourceFolder() const;
+  inline const QString& cacheFolder() const;
   QString defaultHostsFilePath( bool use_resource_folder ) const;
   QString defaultRcFilePath( bool use_resource_folder ) const;
   QString defaultSettingsFilePath() const;
@@ -400,6 +401,10 @@ public:
   QString unsentMessagesFilePath() const;
   inline bool chatSaveUnsentMessages() const;
   inline void setChatSaveUnsentMessages( bool );
+  inline bool chatSaveFileTransfers() const;
+  inline void setChatSaveFileTransfers( bool );
+  inline bool chatSaveSystemMessages() const;
+  inline void setChatSaveSystemMessages( bool );
 
   inline bool autoUserAway() const;
   inline void setAutoUserAway( bool );
@@ -414,7 +419,7 @@ public:
   inline bool pluginHasSettings( const QString& ) const;
 
   void addTemporaryFilePath( const QString& );
-  void clearTemporaryFile();
+  void clearTemporaryFiles();
 
   bool addStartOnSystemBoot();
   bool removeStartOnSystemBoot();
@@ -564,10 +569,13 @@ protected:
   QHostAddress subnetFromHostAddress( const QHostAddress& ) const;
   QString checkFilePath( const QString& file_path, const QString& default_value );
   QString checkFolderPath( const QString& folder_path, const QString& default_value );
+  QString defaultCacheFolderPath() const;
+  bool isFileImageInCache( const QString& ) const;
 
 private:
   QString m_resourceFolder;
   QString m_dataFolder;
+  QString m_cacheFolder;
 
   // RC
   bool m_useSettingsFileIni;
@@ -744,6 +752,8 @@ private:
   bool m_chatAutoSave;
   int m_chatMaxLineSaved;
   bool m_chatSaveUnsentMessages;
+  bool m_chatSaveFileTransfers;
+  bool m_chatSaveSystemMessages;
 
   bool m_autoUserAway;
 
@@ -832,6 +842,7 @@ private:
 inline bool Settings::enableSaveData() const { return m_enableSaveData; }
 inline const QString& Settings::resourceFolder() const { return m_resourceFolder; }
 inline const QString& Settings::dataFolder() const { return m_dataFolder; }
+inline const QString& Settings::cacheFolder() const { return m_cacheFolder; }
 inline const User& Settings::localUser() const { return m_localUser; }
 inline void Settings::setLocalUser( const User& new_value ) { m_localUser = new_value; }
 inline void Settings::setLocalUserStatus( User::Status new_value ) { m_localUser.setStatus( new_value ); }
@@ -973,7 +984,7 @@ inline void Settings::setEnableFileSharing( bool new_value ) { m_enableFileShari
 inline int Settings::maxFileShared() const { return m_maxFileShared; }
 inline bool Settings::chatAutoSave() const { return m_chatAutoSave; }
 inline void Settings::setChatAutoSave( bool new_value ) { m_chatAutoSave = new_value; }
-inline int Settings::chatMaxLineSaved() const { return m_chatMaxLineSaved; }
+inline int Settings::chatMaxLineSaved() const { return m_chatMaxLineSaved > 100 ? m_chatMaxLineSaved: 100; }
 inline void Settings::setChatMaxLineSaved( int new_value ) { m_chatMaxLineSaved = new_value; }
 inline bool Settings::chatSaveUnsentMessages() const { return m_chatSaveUnsentMessages; }
 inline void Settings::setChatSaveUnsentMessages( bool new_value ) { m_chatSaveUnsentMessages = new_value; }
@@ -1157,10 +1168,8 @@ inline void Settings::setShowUsersOnConnection( bool new_value ) { m_showUsersOn
 inline bool Settings::showUsersOnConnection() const { return m_showUsersOnConnection; }
 inline void Settings::setShowChatsOnConnection( bool new_value ) { m_showChatsOnConnection = new_value; if( m_showChatsOnConnection ) m_showUsersOnConnection = false; }
 inline bool Settings::showChatsOnConnection() const { return m_showChatsOnConnection; }
-
 inline void Settings::setHideEmptyChatsInList( bool new_value ) { m_hideEmptyChatsInList = new_value; }
 inline bool Settings::hideEmptyChatsInList() const { return m_hideEmptyChatsInList; }
-
 inline bool Settings::canAddMembersToGroup() const { return m_canAddMembersToGroup; }
 inline bool Settings::canRemoveMembersFromGroup() const { return m_canRemoveMembersFromGroup; }
 inline bool Settings::disableCreateMessage() const { return m_disableCreateMessage; }
@@ -1188,5 +1197,9 @@ inline void Settings::setUseDarkStyle( bool new_value ) { m_useDarkStyle = new_v
 inline bool Settings::useDarkStyle() const { return m_useDarkStyle; }
 inline void Settings::setSaveMessagesTimestamp( const QDateTime& new_value ) { m_saveMessagesTimestamp = new_value; }
 inline const QDateTime& Settings::saveMessagesTimestamp() const { return m_saveMessagesTimestamp; }
+inline bool Settings::chatSaveFileTransfers() const { return m_chatSaveFileTransfers; }
+inline void Settings::setChatSaveFileTransfers( bool new_value ) { m_chatSaveFileTransfers = new_value; }
+inline bool Settings::chatSaveSystemMessages() const { return m_chatSaveSystemMessages; }
+inline void Settings::setChatSaveSystemMessages( bool new_value ) { m_chatSaveSystemMessages = new_value; }
 
 #endif // BEEBEEP_SETTINGS_

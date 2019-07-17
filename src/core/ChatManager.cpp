@@ -331,7 +331,9 @@ bool ChatManager::isChatRefused( const QString& chat_private_id ) const
 
 bool ChatManager::setChatToSavedChats( const Chat& c )
 {
-  QString saved_chat_text = GuiChatMessage::chatToHtml( c, true, true, true );
+  QString saved_chat_text = GuiChatMessage::chatToHtml( c, !Settings::instance().chatSaveFileTransfers(),
+                                                        !Settings::instance().chatSaveSystemMessages(),
+                                                        true, true );
   if( saved_chat_text.isEmpty() )
     return false;
   if( chatHasSavedText( c.name() ) )

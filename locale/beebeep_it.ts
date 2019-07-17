@@ -2895,6 +2895,30 @@ Inserisci un nome differente.</translation>
         <source>Discover the fact of the day...</source>
         <translation>Scopri la frase del giorno...</translation>
     </message>
+    <message>
+        <source>Save file transfer messages</source>
+        <translation>Salva i messaggi di trasferimento file</translation>
+    </message>
+    <message>
+        <source>Save system messages</source>
+        <translation>Salva i messaggi di sistema</translation>
+    </message>
+    <message>
+        <source>There will be no saving of &apos;system&apos; and &apos;file transfer&apos; messages if this option is disabled.</source>
+        <translation>Il salvataggio dei messaggi di sistema e di trasferimento file non ci sarà se questa opzione viene disabilitata.</translation>
+    </message>
+    <message>
+        <source>Save maximum %1 lines of chat</source>
+        <translation>Salva massimo %1 righe della conversazione</translation>
+    </message>
+    <message>
+        <source>Please select the maximum number of lines to be saved in the conversation (current: %1%).</source>
+        <translation type="obsolete">Seleziona il numero massimo di righe da salvare nella conversazione (attuale %1).</translation>
+    </message>
+    <message>
+        <source>Please select the maximum number of lines to be saved in the conversation (current: %1).</source>
+        <translation>Seleziona il numero massimo di righe da salvare nella conversazione (attuale %1).</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

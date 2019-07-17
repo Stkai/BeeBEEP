@@ -260,14 +260,9 @@ int main( int argc, char *argv[] )
   Settings::instance().loadRcFile();
   Settings::instance().save();
 
-#ifdef BEEBEEP_DEBUG
-  //Settings::instance().createDefaultRcFile();
-  //Settings::instance().createDefaultHostsFile();
-#endif
-
   /* CleanUp */
   bee_app.cleanUp();
-  Settings::instance().clearTemporaryFile();
+  Settings::instance().clearTemporaryFiles();
   GuiIconProvider::close();
   FileShare::close();
   HistoryManager::close();
