@@ -1,11 +1,11 @@
 BEEBEEP (Secure Office Messenger) - CHANGELOG - (c) Marco Mastroddi
 
 BeeBEEP 5.6.5 (in development)
-- "ChatSaveFileTransfers" and "ChatSaveSystemMessages" options added in Settings - Chat: 
-  if enabled history save also these messages
+- "ChatSaveFileTransfers" and "ChatSaveSystemMessages" options added in Settings - Chat menu: 
+  if enabled history saves also these messages
 - Disabled High DPI icons in windows (can be enabled with qt.conf file)
-- Added new option in Settings - Chat:
-  "Save maximum # lines in chat": you can choose how many lines to save for every chat
+- Added new option in Settings - Chat - "Save maximum lines in chat": 
+  you can choose how many lines to save for every chat
 
 BeeBEEP 5.6.4
 - For security reasons the beebeep.off file (saved unsent messages) are now linked to the beebeep.ini file 
