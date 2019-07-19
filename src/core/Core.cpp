@@ -631,7 +631,7 @@ void Core::onTickEvent( int ticks )
 
         int group_chats = checkGroupChatAfterUserReconnect( u );
         int offline_messages = checkOfflineMessagesForUser( u );
-        if( Settings::instance().useHive() && u.protocolVersion() >= HIVE_PROTO_VERSION )
+        if( Settings::instance().useHive() )
           sendLocalConnectedUsersTo( u );
         UserManager::instance().removeNewConnectedUserId( u.id() );
 

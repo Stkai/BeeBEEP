@@ -460,20 +460,13 @@ void Core::sendLocalConnectedUsersTo( const User& to_user )
 
     msg_to_send = Protocol::instance().userRecordListToHiveMessage( user_record_list );
     if( sendMessageToLocalNetwork( to_user, msg_to_send ) )
-    {
-#ifdef BEEBEEP_DEBUG
       qDebug() << "Hive protocol sends" << user_record_list.size() << "connected users to" << qPrintable( to_user.path() );
-#endif
-      return;
-    }
     else
       qWarning() << "Hive protocol is unable to send" << user_record_list.size() << "connected users to" << qPrintable( to_user.path() );
   }
 
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Hive protocol tries to send" <<  qPrintable( to_user.path() ) << "to" << user_record_list.size() << "connected users";
-#endif
 
+  qDebug() << "Hive protocol shares new user" <<  qPrintable( to_user.path() ) << "to other" << user_record_list.size() << "connected users";
   user_record_list.clear();
   ur.setNetworkAddress( to_user.networkAddress() );
   user_record_list.append( ur );
