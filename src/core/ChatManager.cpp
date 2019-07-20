@@ -26,7 +26,7 @@
 #include "User.h"
 #include "Settings.h"
 
-ChatManager* ChatManager::mp_instance = NULL;
+ChatManager* ChatManager::mp_instance = Q_NULLPTR;
 
 
 ChatManager::ChatManager()
@@ -341,3 +341,28 @@ bool ChatManager::setChatToSavedChats( const Chat& c )
   m_history.insert( c.name(), saved_chat_text );
   return true;
 }
+
+QString ChatManager::chatSavedText( const QString& chat_name, int max_lines ) const
+{
+  QString saved_text = m_history.value( chat_name );
+  if( max_lines < 0 )
+   return saved_text;
+
+  QStringList sl = saved_text.split( "<br>" );
+  if( sl.size() <= max_lines )
+    return saved_text;
+
+  saved_text = "";
+  QStringListIterator it( sl );
+  it.toBack();
+  int line_counter = 0;
+  while( it.hasPrevious() )
+  {
+    line_counter++;
+    if( line_counter >= max_lines )
+      break;
+    saved_text.prepend( QString( "%1%2").arg( it.previous() ).arg( "<br>" ) );
+  }
+  return saved_text;
+}
+

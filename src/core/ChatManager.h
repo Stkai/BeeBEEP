@@ -63,7 +63,7 @@ public:
   bool userIsInGroupChat( VNumber ) const;
 
   void addSavedChats( const QMap<QString, QString>& );
-  inline QString chatSavedText( const QString& ) const;
+  QString chatSavedText( const QString&, int max_lines = -1 ) const;
   inline bool chatHasSavedText( const QString& ) const;
   inline void removeSavedTextFromChat( const QString& );
   inline bool isLoadHistoryCompleted() const;
@@ -92,7 +92,7 @@ public:
     if( mp_instance )
     {
       delete mp_instance;
-      mp_instance = NULL;
+      mp_instance = Q_NULLPTR;
     }
   }
 
@@ -115,7 +115,6 @@ inline Chat ChatManager::defaultChat() const { return chat( ID_DEFAULT_CHAT ); }
 inline const QList<Chat>& ChatManager::constChatList() const { return m_chats; }
 inline QList<Chat>& ChatManager::chatList() { return m_chats; }
 inline bool ChatManager::hasName( const QString& chat_name ) const { return findChatByName( chat_name ).isValid(); }
-inline QString ChatManager::chatSavedText( const QString& chat_name ) const { return m_history.value( chat_name ); }
 inline bool ChatManager::chatHasSavedText( const QString& chat_name ) const { return m_history.contains( chat_name ); }
 inline void ChatManager::removeSavedTextFromChat( const QString& chat_name ) { m_history.remove( chat_name ); }
 inline bool ChatManager::isLoadHistoryCompleted() const { return m_isLoadHistoryCompleted; }

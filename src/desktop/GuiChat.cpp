@@ -448,6 +448,9 @@ void GuiChat::updateChat()
 
 void GuiChat::loadSavedMessages()
 {
+  emit showStatusMessageRequest( tr( "Loading of saved messages..." ), 3000 );
+  QApplication::processEvents();
+
   if( !ChatManager::instance().isLoadHistoryCompleted() )
   {
     emit showStatusMessageRequest( tr( "The loading of saved messages has not yet been completed."), 2000 );
@@ -512,6 +515,17 @@ bool GuiChat::setChat( const Chat& c )
   bool max_lines_message_written = false;
   m_lastMessageUserId = ID_SYSTEM_MESSAGE;
 
+  if( ChatManager::instance().isLoadHistoryCompleted() && historyCanBeShowed() )
+  {
+    if( !ChatManager::instance().chatHasSavedText( c.name() ) )
+    {
+      if( c.isPrivate() && c.name().contains( "@" ) && ChatManager::instance().chatHasSavedText( User::nameFromPath( c.name() ) ) )
+        html_text += ChatManager::instance().chatSavedText( User::nameFromPath( c.name() ), 80 );
+    }
+    else
+      html_text += ChatManager::instance().chatSavedText( c.name(), 80 );
+  }
+
   foreach( ChatMessage cm, c.messages() )
   {
     num_lines--;
@@ -558,8 +572,7 @@ bool GuiChat::setChat( const Chat& c )
   setLastMessageTimestamp( c.lastMessageTimestamp() );
   ensureLastMessageVisible();
   updateChat( c );
-  emit showStatusMessageRequest( tr( "Loading of saved messages..." ), 3000 );
-  QTimer::singleShot( 2000, this, SLOT( loadSavedMessages() ) );
+  QTimer::singleShot( 3000, this, SLOT( loadSavedMessages() ) );
   return true;
 }
 

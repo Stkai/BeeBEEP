@@ -659,11 +659,11 @@ void Core::addListToSavedChats()
         }
         else
         {
-          dispatchSystemMessage( mr.chatId(), ID_LOCAL_USER, QString( "%1 (%2) %3: &quot;%4&quot;" )
+          dispatchSystemMessage( mr.chatId(), ID_LOCAL_USER, QString( "%1 %2: &quot;%3&quot; [%4]" )
                                  .arg( IconManager::instance().toHtml( "unsent-message.png", "*m*" ) )
-                                 .arg( mr.message().timestamp().toString( "yyyy-MM-dd hh:mm:ss" ) )
                                  .arg( tr( "Offline message will be sent to %1" ).arg( to_user.name() ) )
-                                 .arg( msg_txt ),
+                                 .arg( msg_txt )
+                                 .arg( mr.message().timestamp().toString( "yyyy-MM-dd hh:mm:ss" ) ),
                                  DispatchToChat, ChatMessage::Other );
           checked_unsent_messages.append( mr );
         }
