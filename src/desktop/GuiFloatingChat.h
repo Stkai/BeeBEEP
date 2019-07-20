@@ -48,6 +48,7 @@ public:
   void showChatMessage( const Chat&, const ChatMessage& );
   void updateEmoticons();
   inline void setChatToolbarVisible( bool );
+  void loadSavedMessages();
 
   void onTickEvent( int );
 
@@ -56,6 +57,7 @@ public:
 public slots:
   void showUp();
   void raiseOnTop();
+  void showStatusMessage( const QString&, int );
 
 signals:
   void readAllMessages( VNumber );

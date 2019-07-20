@@ -2129,7 +2129,7 @@ void GuiMain::showWritingUser( const User& u, VNumber chat_id )
   QString msg = tr( "%1 is writing..." ).arg( u.name() );
   GuiFloatingChat* fl_chat = floatingChat( chat_id );
   if( fl_chat )
-    fl_chat->statusBar()->showMessage( msg, Settings::instance().writingTimeout() );
+    fl_chat->showStatusMessage( msg, Settings::instance().writingTimeout() );
 }
 
 void GuiMain::setUserStatusSelected( int user_status )

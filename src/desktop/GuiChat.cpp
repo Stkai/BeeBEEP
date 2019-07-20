@@ -446,30 +446,67 @@ void GuiChat::updateChat()
   setChat( c );
 }
 
+void GuiChat::loadSavedMessages()
+{
+  if( !ChatManager::instance().isLoadHistoryCompleted() )
+  {
+    emit showStatusMessageRequest( tr( "The loading of saved messages has not yet been completed."), 2000 );
+    QTimer::singleShot( 0, this, SLOT( operationCompleted() ) );
+    return;
+  }
+
+  if( !historyCanBeShowed() )
+  {
+    QTimer::singleShot( 0, this, SLOT( operationCompleted() ) );
+    return;
+  }
+
+  Chat c = ChatManager::instance().chat( m_chatId );
+  if( !c.isValid() )
+  {
+    QTimer::singleShot( 0, this, SLOT( operationCompleted() ) );
+    return;
+  }
+
+  QString html_text = "";
+  if( !ChatManager::instance().chatHasSavedText( c.name() ) )
+  {
+    if( c.isPrivate() && c.name().contains( "@" ) && ChatManager::instance().chatHasSavedText( User::nameFromPath( c.name() ) ) )
+      html_text += ChatManager::instance().chatSavedText( User::nameFromPath( c.name() ) );
+  }
+  else
+    html_text += ChatManager::instance().chatSavedText( c.name() );
+
+  if( html_text.isEmpty() )
+  {
+    emit showStatusMessageRequest( tr( "No saved messages were found."), 2000 );
+    QTimer::singleShot( 0, this, SLOT( operationCompleted() ) );
+    return;
+  }
+
+  bool updates_is_enabled = mp_teChat->updatesEnabled();
+  mp_teChat->setUpdatesEnabled( false );
+  html_text += mp_teChat->toHtml();
+  mp_teChat->clear();
+  QTextDocument *text_document = mp_teChat->document();
+  QTextOption text_option = text_document->defaultTextOption();
+  text_option.setTextDirection( Settings::instance().showTextInModeRTL() ? Qt::RightToLeft : Qt::LeftToRight );
+  text_document->setDefaultTextOption( text_option );
+  mp_teChat->setDocument( text_document );
+  mp_teChat->setHtml( html_text );
+  mp_teChat->setUpdatesEnabled( updates_is_enabled );
+  ensureLastMessageVisible();
+  QTimer::singleShot( 0, this, SLOT( operationCompleted() ) );
+}
+
 bool GuiChat::setChat( const Chat& c )
 {
   if( !c.isValid() )
     return false;
 
-  QApplication::setOverrideCursor( Qt::WaitCursor );
-
   m_chatId = c.id();
 
   QString html_text = "";
-
-  if( ChatManager::instance().isLoadHistoryCompleted() && historyCanBeShowed() )
-  {
-    if( !ChatManager::instance().chatHasSavedText( c.name() ) )
-    {
-      if( c.isPrivate() && c.name().contains( "@" ) && ChatManager::instance().chatHasSavedText( User::nameFromPath( c.name() ) ) )
-        html_text += ChatManager::instance().chatSavedText( User::nameFromPath( c.name() ) );
-    }
-    else
-      html_text += ChatManager::instance().chatSavedText( c.name() );
-
-    if( !html_text.isEmpty() )
-      html_text += QLatin1String( "<br>" );
-  }
 
   int num_lines = c.messages().size();
   bool max_lines_message_written = false;
@@ -499,13 +536,7 @@ bool GuiChat::setChat( const Chat& c )
     }
   }
 
-#ifdef BEEBEEP_DEBUG
-  QTime time_to_open;
-  time_to_open.start();
-#endif
-
   bool updates_is_enabled = mp_teChat->updatesEnabled();
-  int scrollbar_previous_value = mp_teChat->verticalScrollBar() ? mp_teChat->verticalScrollBar()->value() : -1;
   mp_teChat->setUpdatesEnabled( false );
   mp_teChat->clear();
 
@@ -524,17 +555,11 @@ bool GuiChat::setChat( const Chat& c )
   mp_teChat->setHtml( html_text );
   mp_teChat->setUpdatesEnabled( updates_is_enabled );
 
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Elapsed time to set HTML text in chat:" << time_to_open.elapsed() << "ms";
-#endif
-
   setLastMessageTimestamp( c.lastMessageTimestamp() );
-
-  if( scrollbar_previous_value >= 0 && mp_teChat->verticalScrollBar() )
-    mp_teChat->verticalScrollBar()->setValue( qMin( scrollbar_previous_value, mp_teChat->verticalScrollBar()->maximum() ) );
-
-  QApplication::restoreOverrideCursor();
+  ensureLastMessageVisible();
   updateChat( c );
+  emit showStatusMessageRequest( tr( "Loading of saved messages..." ), 3000 );
+  QTimer::singleShot( 2000, this, SLOT( loadSavedMessages() ) );
   return true;
 }
 
@@ -1089,6 +1114,11 @@ void GuiChat::resetChatFontToDefault()
     return;
   Settings::instance().setChatFont( QApplication::font() );
   setChatFont( Settings::instance().chatFont() );
+}
+
+void GuiChat::operationCompleted()
+{
+  emit showStatusMessageRequest( tr( "Ready." ), -1 );
 }
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP

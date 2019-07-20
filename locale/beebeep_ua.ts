@@ -976,6 +976,22 @@
         <source>You must close and reopen this window to see the changes applied.</source>
         <translation>Щоб застосовати зміни, потрібно закрити та знову відкрити вікно чату.</translation>
     </message>
+    <message>
+        <source>The loading of saved messages has not yet been completed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No saved messages were found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Loading of saved messages...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ready.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiChatList</name>

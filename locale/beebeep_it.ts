@@ -1020,6 +1020,22 @@
         <source>You must close and reopen this window to see the changes applied.</source>
         <translation>Devi chiudere e riaprire questa finestra per vedere le modifiche applicate.</translation>
     </message>
+    <message>
+        <source>The loading of saved messages has not yet been completed.</source>
+        <translation>Il caricamento dei messaggi salvati non è stato ancora completato.</translation>
+    </message>
+    <message>
+        <source>No saved messages were found.</source>
+        <translation>Non sono stati trovati altri messaggi salvati.</translation>
+    </message>
+    <message>
+        <source>Loading of saved messages...</source>
+        <translation>Caricamento dei messaggi salvati in corso...</translation>
+    </message>
+    <message>
+        <source>Ready.</source>
+        <translation>Pronto.</translation>
+    </message>
 </context>
 <context>
     <name>GuiChatList</name>
@@ -1434,6 +1450,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>If you have layout problem please save only geometry.</source>
         <translation>Se hai problemi di layout salva solo le dimensioni.</translation>
+    </message>
+    <message>
+        <source>Loading of saved messages...</source>
+        <translation type="vanished">Caricamento dei messaggi salvati in corso...</translation>
     </message>
 </context>
 <context>

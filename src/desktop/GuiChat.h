@@ -71,6 +71,7 @@ signals:
   void toggleVisibilityPresetMessagesPanelRequest();
   void hideRequest();
   void updateChatColorsRequest();
+  void showStatusMessageRequest( const QString&, int );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   void shareDesktopToChatRequest( VNumber, bool );
   void screenshotToChatRequest( VNumber );
@@ -80,6 +81,7 @@ public slots:
   void addEmoticon( const Emoticon& );
   void ensureFocusInChat();
   void addText( const QString& );
+  void loadSavedMessages();
 
 protected:
   void setLastMessageTimestamp( const QDateTime& );
@@ -119,6 +121,7 @@ private slots:
   void findNextTextInChat();
   void openSelectedTextAsUrl();
   void resetChatFontToDefault();
+  void operationCompleted();
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   void shareDesktopToChat();
   void sendScreenshotToChat();
