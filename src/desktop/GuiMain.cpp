@@ -1252,13 +1252,13 @@ void GuiMain::createMenus()
   mp_menuInfo->addAction( IconManager::instance().icon( "beebeep.png" ), tr( "Open %1 official website..." ).arg( Settings::instance().programName() ), this, SLOT( openWebSite() ) );
   mp_menuInfo->addAction( IconManager::instance().icon( "update.png" ), tr( "Check for new version..." ), this, SLOT( checkNewVersion() ) );
   mp_menuInfo->addAction( IconManager::instance().icon( "plugin.png" ), tr( "Download plugins..." ), this, SLOT( openDownloadPluginPage() ) );
+  mp_menuInfo->addSeparator();
   mp_menuInfo->addAction( IconManager::instance().icon( "info.png" ), tr( "Help online..." ), this, SLOT( openHelpPage() ) );
+  mp_menuInfo->addAction( IconManager::instance().icon( "tip.png" ), tr( "Show tips..." ), this, SLOT( showTipOfTheDay() ) );
+  mp_menuInfo->addAction( IconManager::instance().icon( "chat-small.png" ), tr( "Read FAQ..." ), this, SLOT( showFaq() ) );
+  mp_menuInfo->addAction( IconManager::instance().icon( "fact.png" ), tr( "Discover the fact of the day..." ), this, SLOT( showFactOfTheDay() ) );
   mp_menuInfo->addSeparator();
   mp_menuInfo->addAction( IconManager::instance().icon( "star.png" ), tr( "Information about %1..." ).arg( "Marco Mastroddi" ), this, SLOT( openDeveloperWebSite() ) );
-  mp_menuInfo->addSeparator();
-  mp_menuInfo->addAction( IconManager::instance().icon( "tip.png" ), tr( "Show Tips..." ), this, SLOT( showTipOfTheDay() ) );
-  mp_menuInfo->addAction( IconManager::instance().icon( "fact.png" ), tr( "Discover the fact of the day..." ), this, SLOT( showFactOfTheDay() ) );
-
 #ifdef BEEBEEP_DEBUG
   mp_menuInfo->addSeparator();
   act = mp_menuInfo->addAction( tr( "Add +1 user to anonymous usage statistics" ), this, SLOT( settingsChanged() ) );
@@ -2572,6 +2572,11 @@ void GuiMain::showTipOfTheDay()
 void GuiMain::showFactOfTheDay()
 {
   openWebUrl( Settings::instance().factWebSite() );
+}
+
+void GuiMain::showFaq()
+{
+  openWebUrl( Settings::instance().faqWebSite() );
 }
 
 void GuiMain::showChat( VNumber chat_id )

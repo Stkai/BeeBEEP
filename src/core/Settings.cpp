@@ -692,6 +692,16 @@ QString Settings::factWebSite() const
   return web_url;
 }
 
+QString Settings::faqWebSite() const
+{
+  QString web_url = officialWebSite() + QString( BEEBEEP_FAQ_WEBSITE );
+  if( m_language == "it" )
+    web_url += QString( "?lang=it_IT" );
+  else
+    web_url += QString( "?lang=en_US" );
+  return web_url;
+}
+
 QString Settings::hunspellVersion() const
 {
   return QString( HUNSPELL_VERSION );

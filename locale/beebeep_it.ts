@@ -2909,7 +2909,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show Tips...</source>
-        <translation>Mostra i suggerimenti...</translation>
+        <translation type="vanished">Mostra i suggerimenti...</translation>
     </message>
     <message>
         <source>Discover the fact of the day...</source>
@@ -2946,6 +2946,18 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Please select the number of days that items (such as images) can remain cached (current: %1, never clear: -1, always clear: 0).</source>
         <translation>Seleziona il numero di giorni in cui gli elementi (ad esempio le immagini) possono restare memorizzati nella cache (attuale: %1, non cancellare mai: -1, cancella sempre: 0).</translation>
+    </message>
+    <message>
+        <source>Show Faq...</source>
+        <translation type="vanished">Mostra le FAQ...</translation>
+    </message>
+    <message>
+        <source>Show tips...</source>
+        <translation>Mostra i suggerimenti...</translation>
+    </message>
+    <message>
+        <source>Read FAQ...</source>
+        <translation>Leggi le FAQ...</translation>
     </message>
 </context>
 <context>

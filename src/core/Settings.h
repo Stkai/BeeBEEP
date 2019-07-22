@@ -101,6 +101,7 @@ public:
   QString developerWebSite() const;
   QString tipsWebSite() const;
   QString factWebSite() const;
+  QString faqWebSite() const;
 
   QString guiCustomListStyleSheet( const QString& background_color, const QString& background_image_path ) const;
 

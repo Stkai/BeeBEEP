@@ -42,6 +42,7 @@ const char BEEBEEP_CHECK_VERSION_WEBSITE[] = "check_version.php";
 const char BEEBEEP_LAST_VERSION_FILE[] = "last_version.php";
 const char BEEBEEP_FACT_WEBSITE[] = "fact";
 const char BEEBEEP_TIPS_WEBSITE[] = "tips";
+const char BEEBEEP_FAQ_WEBSITE[] = "faq";
 const char BEEBEEP_GA_TRACKING_ID[] = "UA-57878696-4";
 const char BEEBEEP_GA_URL[] = "https://www.google-analytics.com/collect";
 const char BEEBEEP_GA_EVENT_VERSION[] = "1";
@@ -49,7 +50,7 @@ const char HUNSPELL_VERSION[] = "1.7.0";
 const char BEEBEEP_VERSION[] = "5.6.5";
 const int BEEBEEP_PROTO_VERSION = 76;
 const int BEEBEEP_SETTINGS_VERSION = 12;
-const int BEEBEEP_BUILD = 1169;
+const int BEEBEEP_BUILD = 1171;
 
 #endif // BEEBEEP_VERSION_H
 

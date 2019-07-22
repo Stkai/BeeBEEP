@@ -2772,10 +2772,6 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show Tips...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Discover the fact of the day...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2805,6 +2801,14 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Please select the number of days that items (such as images) can remain cached (current: %1, never clear: -1, always clear: 0).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show tips...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read FAQ...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
