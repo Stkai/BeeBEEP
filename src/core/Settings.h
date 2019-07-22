@@ -440,6 +440,9 @@ public:
   inline void setRemoveInactiveUsers( bool );
   inline bool removeInactiveUsers() const;
 
+  inline int clearCacheAfterDays() const;
+  inline void setClearCacheAfterDays( int );
+
   inline void setSaveUserList( bool );
   inline bool saveUserList() const;
   inline void setUserList( const QStringList& );
@@ -776,6 +779,8 @@ private:
   int m_maxUserStatusDescriptionInList;
   int m_maxDaysOfUserInactivity;
   bool m_removeInactiveUsers;
+
+  int m_clearCacheAfterDays;
 
   bool m_saveUserList;
   QStringList m_userList;
@@ -1201,5 +1206,7 @@ inline bool Settings::chatSaveFileTransfers() const { return m_chatSaveFileTrans
 inline void Settings::setChatSaveFileTransfers( bool new_value ) { m_chatSaveFileTransfers = new_value; }
 inline bool Settings::chatSaveSystemMessages() const { return m_chatSaveSystemMessages; }
 inline void Settings::setChatSaveSystemMessages( bool new_value ) { m_chatSaveSystemMessages = new_value; }
+inline int Settings::clearCacheAfterDays() const { return m_clearCacheAfterDays; }
+inline void Settings::setClearCacheAfterDays( int new_value ) { m_clearCacheAfterDays = new_value; }
 
 #endif // BEEBEEP_SETTINGS_

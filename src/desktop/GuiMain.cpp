@@ -939,10 +939,15 @@ void GuiMain::createMenus()
   mp_actSaveSystemMessages->setCheckable( true );
   mp_actSaveSystemMessages->setChecked( Settings::instance().chatSaveSystemMessages() );
   mp_actSaveSystemMessages->setData( 83 );
+  mp_menuChatSettings->addSeparator();
   act = mp_menuChatSettings->addAction( "", this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setData( 84 );
   setChatMaxLinesToSaveInAction( act );
+  act = mp_menuChatSettings->addAction( "", this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setData( 85 );
+  setClearCacheAfterDaysInAction( act );
   mp_menuChatSettings->addSeparator();
   act = mp_menuChatSettings->addAction( tr( "Send offline messages also to chat with all users" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -1872,7 +1877,7 @@ void GuiMain::settingsChanged( QAction* act )
     break;
   case 84:
     {
- #if QT_VERSION >= 0x050000
+#if QT_VERSION >= 0x050000
       int save_max_lines = QInputDialog::getInt( qApp->activeWindow(), Settings::instance().programName(),
 #else
       int save_max_lines = QInputDialog::getInteger( qApp->activeWindow(), Settings::instance().programName(),
@@ -1884,6 +1889,23 @@ void GuiMain::settingsChanged( QAction* act )
       {
         Settings::instance().setChatMaxLineSaved( save_max_lines );
         setChatMaxLinesToSaveInAction( act );
+      }
+    }
+    break;
+  case 85:
+    {
+#if QT_VERSION >= 0x050000
+      int cc_days = QInputDialog::getInt( qApp->activeWindow(), Settings::instance().programName(),
+#else
+      int cc_days = QInputDialog::getInteger( qApp->activeWindow(), Settings::instance().programName(),
+#endif
+                                                 tr( "Please select the number of days that items (such as images) can remain cached (current: %1, never clear: -1, always clear: 0)." ).arg( Settings::instance().clearCacheAfterDays() ),
+                                                 Settings::instance().clearCacheAfterDays(),
+                                                 -1, 999, 10, &ok );
+      if( ok )
+      {
+        Settings::instance().setClearCacheAfterDays( cc_days );
+        setClearCacheAfterDaysInAction( act );
       }
     }
     break;
@@ -1952,6 +1974,13 @@ void GuiMain::setChatMaxLinesToSaveInAction( QAction* act )
   act->setText( tr( "Save maximum %1 lines of chat" ).arg( Settings::instance().chatMaxLineSaved() ) );
   act->setEnabled( Settings::instance().chatAutoSave() );
   act->setChecked( Settings::instance().chatMaxLineSaved() > 0 );
+}
+
+void GuiMain::setClearCacheAfterDaysInAction( QAction* act )
+{
+  act->setText( tr( "Clean the cache from items older than %1 days" ).arg( Settings::instance().clearCacheAfterDays() >= 0 ? Settings::instance().clearCacheAfterDays() : 96 ) );
+  act->setEnabled( Settings::instance().chatAutoSave() );
+  act->setChecked( Settings::instance().clearCacheAfterDays() >= 0 );
 }
 
 void GuiMain::sendMessage( VNumber chat_id, const QString& msg )

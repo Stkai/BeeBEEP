@@ -6,7 +6,7 @@
 
 
 1) Download the right version for your system (32 or 64 bits):
-   https://beebeep.net/download
+   https://www.beebeep.net/download
 
 2) Uncompress the package in your favorite folder
 

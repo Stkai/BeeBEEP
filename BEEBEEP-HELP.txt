@@ -58,6 +58,9 @@ AllowRemoveMembersFromGroup=[true/false] allow current user to remove members to
 AllowEditNickname=[true/false] allow current user to edit his/her nickname. It is useful disabled with option UserRecognitionMethod=2 or UserRecognitionMethod=1 (default=true) [5.4.3]
 DisableCreateMessage=[true/false] if not disabled user can send broadcast messages without creating groups (default=false) [5.4.3]
 DisableMenuSettings=[true/false] hide the settings menu on top menu (default=false) [5.4.3]
+ClearCacheAfterDays=[integer] -1: never            (default=96) [5.6.5]
+                               0: always
+                             365: after 1 year
 
 [Groups]
 TrustNickname=[true/false] if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect (default=true) [1.0.0] [obsolete in 4.0.0]
@@ -237,6 +240,7 @@ ConnectionTimeout=5000
 UseLowDelayOptionOnSocket=[true/false] Try to optimize the socket for low latency. For a QTcpSocket this would set the TCP_NODELAY option and disable Nagle's algorithm (default=false) [3.0.5]
 DelayConnectionAtStartup(ms)=[integer] sometimes BeeBEEP starts before the network so you can delay connection (default=3000) [4.2.0]
 SendOfflineMessagesToDefaultChat=[true/false] Send offline messages to default chat (all users) also (default=false) [4.2.0]
+ClearCacheAfterDays=[integer] see above (default 96) [5.6.5]
 
 [Network]
 BroadcastAddresses=(do not edit manually)

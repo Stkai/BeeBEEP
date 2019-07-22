@@ -260,6 +260,7 @@ private:
   void showRestartApplicationAlertMessage();
   void showCheckSaveChatMessages();
   void setChatMaxLinesToSaveInAction( QAction* );
+  void setClearCacheAfterDaysInAction( QAction* );
 
 private:
   QTabWidget* mp_tabMain;

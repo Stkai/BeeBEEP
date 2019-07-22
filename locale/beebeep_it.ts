@@ -2939,6 +2939,14 @@ Inserisci un nome differente.</translation>
         <source>Please select the maximum number of lines to be saved in the conversation (current: %1).</source>
         <translation>Seleziona il numero massimo di righe da salvare nella conversazione (attuale %1).</translation>
     </message>
+    <message>
+        <source>Clean the cache from items older than %1 days</source>
+        <translation>Pulisci la cache dagli elementi più vecchi di %1 giorni</translation>
+    </message>
+    <message>
+        <source>Please select the number of days that items (such as images) can remain cached (current: %1, never clear: -1, always clear: 0).</source>
+        <translation>Seleziona il numero di giorni in cui gli elementi (ad esempio le immagini) possono restare memorizzati nella cache (attuale: %1, non cancellare mai: -1, cancella sempre: 0).</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

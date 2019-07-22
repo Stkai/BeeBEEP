@@ -2855,6 +2855,14 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Please select the maximum number of lines to be saved in the conversation (current: %1).</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Clean the cache from items older than %1 days</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select the number of days that items (such as images) can remain cached (current: %1, never clear: -1, always clear: 0).</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

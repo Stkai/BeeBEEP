@@ -109,6 +109,7 @@ Settings::Settings()
   m_canRemoveMembersFromGroup = true;
   m_allowEditNickname = true;
   m_disableCreateMessage = false;
+  m_clearCacheAfterDays = 96;
   /* Default RC end */
 
   m_emoticonSizeInEdit = 18;
@@ -473,6 +474,7 @@ void Settings::loadRcFile()
   m_allowEditNickname = sets->value( "AllowEditNickname", m_allowEditNickname ).toBool();
   m_disableCreateMessage = sets->value( "DisableCreateMessage", m_disableCreateMessage ).toBool();
   m_disableMenuSettings = sets->value( "DisableMenuSettings", m_disableMenuSettings ).toBool();
+  m_clearCacheAfterDays = qMax( -1, sets->value( "ClearCacheAfterDays", m_clearCacheAfterDays ).toInt() );
   sets->endGroup();
   QStringList key_list = sets->allKeys();
   foreach( QString key, key_list )
@@ -1224,6 +1226,7 @@ void Settings::load()
   m_delayConnectionAtStartup = qMax( 3000, sets->value( "DelayConnectionAtStartup(ms)", m_delayConnectionAtStartup ).toInt() );
   m_sendOfflineMessagesToDefaultChat = sets->value( "SendOfflineMessagesToDefaultChat", false ).toBool();
   m_saveMessagesTimestamp = sets->value( "SaveMessagesTimestamp", QDateTime() ).toDateTime();
+  m_clearCacheAfterDays = qMax( -1, sets->value( "ClearCacheAfterDays", m_clearCacheAfterDays ).toInt() );
   sets->endGroup();
 
   sets->beginGroup( "Network");
@@ -1567,6 +1570,7 @@ void Settings::save()
   sets->setValue( "DelayConnectionAtStartup(ms)", m_delayConnectionAtStartup );
   sets->setValue( "SendOfflineMessagesToDefaultChat", m_sendOfflineMessagesToDefaultChat );
   sets->setValue( "SaveMessagesTimestamp", m_saveMessagesTimestamp );
+  sets->setValue( "ClearCacheAfterDays", m_clearCacheAfterDays );
   sets->endGroup();
   sets->beginGroup( "Network");
 #ifdef BEEBEEP_USE_MULTICAST_DNS
