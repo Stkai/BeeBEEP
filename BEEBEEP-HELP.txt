@@ -108,6 +108,7 @@ DefaultTextColor=[string] default text color of the chat window (default=#fff) [
 SystemTextColor=[string] system text color of the chat window (default=#fff) [5.4.3]
 EnableDefaultChatNotifications=[true/false] enable notifications for chat will all (default=true) [5.4.3]
 UseMessageTimestampWithAP=[true/false] chat message timestamp can be showed with am/pm suffix (default=false) [5.4.3]
+MaxMessagesToShow=[integer] maximum number of messages to show in chat for performance reason (default=800, -1 all) [5.6.5]
 
 [User]
 LocalColor= your nickname color in chat

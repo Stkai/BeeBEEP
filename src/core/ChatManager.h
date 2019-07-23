@@ -63,7 +63,7 @@ public:
   bool userIsInGroupChat( VNumber ) const;
 
   void addSavedChats( const QMap<QString, QString>& );
-  QString chatSavedText( const QString&, int max_lines = -1 ) const;
+  QString chatSavedText( const QString&, int max_lines = -1, int *missed_lines = Q_NULLPTR ) const;
   inline bool chatHasSavedText( const QString& ) const;
   inline void removeSavedTextFromChat( const QString& );
   inline bool isLoadHistoryCompleted() const;

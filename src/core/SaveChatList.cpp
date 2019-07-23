@@ -118,11 +118,11 @@ bool SaveChatList::saveChats( QDataStream* stream )
     if( c.isEmpty() )
       continue;
 
-    QString html_text = GuiChatMessage::chatToHtml( c, !Settings::instance().chatSaveFileTransfers(),
-                                                    !Settings::instance().chatSaveSystemMessages(), true, true );
+    QString html_text = "";
     if( ChatManager::instance().chatHasSavedText( c.name() ) )
-      html_text.prepend( ChatManager::instance().chatSavedText( c.name() ) );
-
+      html_text.append( ChatManager::instance().chatSavedText( c.name(), Settings::instance().chatMaxLineSaved() ) );
+    html_text.append( GuiChatMessage::chatToHtml( c, !Settings::instance().chatSaveFileTransfers(),
+                                                    !Settings::instance().chatSaveSystemMessages(), true, true, true ) );
     if( html_text.simplified().isEmpty() )
     {
       qDebug() << "Skip saving empty chat:" << qPrintable( c.name() );

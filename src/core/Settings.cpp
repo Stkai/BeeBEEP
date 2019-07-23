@@ -194,6 +194,12 @@ Settings::Settings()
 
   m_saveMessagesTimestamp = QDateTime::currentDateTime();
 
+#if QT_VERSION >= 0x050000
+  m_chatMessagesToShow = 900;
+#else
+  m_chatMessagesToShow = 400;
+#endif
+
   resetAllColors();
 }
 
@@ -992,8 +998,7 @@ void Settings::load()
   if( m_chatMessageFilter.size() < static_cast<int>(ChatMessage::NumTypes) )
     m_chatMessageFilter.resize( static_cast<int>(ChatMessage::NumTypes) );
   m_showOnlyMessagesInDefaultChat = sets->value( "ShowOnlyMessagesInDefaultChat", true ).toBool();
-  m_chatMessagesToShow = sets->value( "ChatMessagesToShow", 80 ).toInt();
-  m_chatMaxMessagesToShow = sets->value( "ChatMaxMessagesToShow", false ).toBool();
+  m_chatMessagesToShow = sets->value( "MaxMessagesToShow", m_chatMessagesToShow ).toInt();
   m_imagePreviewHeight = qMax( 48, sets->value( "ImagePreviewHeight", 160 ).toInt() );
   m_useReturnToSendMessage = sets->value( "UseKeyReturnToSendMessage", m_useReturnToSendMessage ).toBool();
   m_chatUseYourNameInsteadOfYou = sets->value( "UseYourNameInsteadOfYou", false ).toBool();
@@ -1404,8 +1409,7 @@ void Settings::save()
   sets->setValue( "ShowMessagesGroupByUsers", m_showMessagesGroupByUser );
   sets->setValue( "MessageFilter", m_chatMessageFilter );
   sets->setValue( "ShowOnlyMessagesInDefaultChat", m_showOnlyMessagesInDefaultChat );
-  sets->setValue( "ChatMessagesToShow", m_chatMessagesToShow );
-  sets->setValue( "ChatMaxMessagesToShow", m_chatMaxMessagesToShow );
+  sets->setValue( "MaxMessagesToShow", m_chatMessagesToShow );
   sets->setValue( "ImagePreviewHeight", m_imagePreviewHeight );
   sets->setValue( "UseKeyReturnToSendMessage", m_useReturnToSendMessage );
   sets->setValue( "UseYourNameInsteadOfYou", m_chatUseYourNameInsteadOfYou );

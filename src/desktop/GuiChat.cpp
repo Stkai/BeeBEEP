@@ -471,35 +471,7 @@ void GuiChat::loadSavedMessages()
     return;
   }
 
-  QString html_text = "";
-  if( !ChatManager::instance().chatHasSavedText( c.name() ) )
-  {
-    if( c.isPrivate() && c.name().contains( "@" ) && ChatManager::instance().chatHasSavedText( User::nameFromPath( c.name() ) ) )
-      html_text += ChatManager::instance().chatSavedText( User::nameFromPath( c.name() ) );
-  }
-  else
-    html_text += ChatManager::instance().chatSavedText( c.name() );
-
-  if( html_text.isEmpty() )
-  {
-    emit showStatusMessageRequest( tr( "No saved messages were found."), 2000 );
-    QTimer::singleShot( 0, this, SLOT( operationCompleted() ) );
-    return;
-  }
-
-  bool updates_is_enabled = mp_teChat->updatesEnabled();
-  mp_teChat->setUpdatesEnabled( false );
-  html_text += mp_teChat->toHtml();
-  mp_teChat->clear();
-  QTextDocument *text_document = mp_teChat->document();
-  QTextOption text_option = text_document->defaultTextOption();
-  text_option.setTextDirection( Settings::instance().showTextInModeRTL() ? Qt::RightToLeft : Qt::LeftToRight );
-  text_document->setDefaultTextOption( text_option );
-  mp_teChat->setDocument( text_document );
-  mp_teChat->setHtml( html_text );
-  mp_teChat->setUpdatesEnabled( updates_is_enabled );
-  ensureLastMessageVisible();
-  QTimer::singleShot( 0, this, SLOT( operationCompleted() ) );
+  setChat( c );
 }
 
 bool GuiChat::setChat( const Chat& c )
@@ -509,70 +481,71 @@ bool GuiChat::setChat( const Chat& c )
 
   m_chatId = c.id();
 
-  QString html_text = "";
-
-  int num_lines = c.messages().size();
-  bool max_lines_message_written = false;
+  int missed_lines = 0;
+  int num_messages = c.messages().size();
+  int msg_lines = Settings::instance().chatMessagesToShow() >= 0 ? qMin( num_messages, Settings::instance().chatMessagesToShow() ) : num_messages;
+  int history_lines = Settings::instance().chatMessagesToShow() >= 0 ? qMax( 0, Settings::instance().chatMessagesToShow() - msg_lines ) : -1;
   m_lastMessageUserId = ID_SYSTEM_MESSAGE;
 
-  if( ChatManager::instance().isLoadHistoryCompleted() && historyCanBeShowed() )
+  QString html_text = "";
+  if( ChatManager::instance().isLoadHistoryCompleted() && historyCanBeShowed() && history_lines != 0 )
   {
     if( !ChatManager::instance().chatHasSavedText( c.name() ) )
     {
       if( c.isPrivate() && c.name().contains( "@" ) && ChatManager::instance().chatHasSavedText( User::nameFromPath( c.name() ) ) )
-        html_text += ChatManager::instance().chatSavedText( User::nameFromPath( c.name() ), 80 );
+        html_text += ChatManager::instance().chatSavedText( User::nameFromPath( c.name() ), history_lines, &missed_lines );
     }
     else
-      html_text += ChatManager::instance().chatSavedText( c.name(), 80 );
+      html_text += ChatManager::instance().chatSavedText( c.name(), history_lines, &missed_lines );
+  }
+
+  if( Settings::instance().chatMessagesToShow() >= 0 && (missed_lines > 0 || num_messages > msg_lines) )
+  {
+    QString limit_reached_text = "";
+    limit_reached_text += QString( "<p><font color=%1><i>... %2 ...<br>... %3 - %4 ...</i></font></p>" )
+                            .arg( Settings::instance().chatSystemTextColor() )
+                            .arg( tr( "only the last %1 messages are shown" )
+                            .arg( Settings::instance().chatMessagesToShow() ) )
+                            .arg( tr( "maximum number of messages to show reached" ) )
+                            .arg( tr( "see the history for more" ) );
+
+    if( !html_text.isEmpty() )
+      html_text.prepend( limit_reached_text );
+    else
+      html_text += limit_reached_text;
   }
 
   foreach( ChatMessage cm, c.messages() )
   {
-    num_lines--;
-
-    if( Settings::instance().chatMaxMessagesToShow() && num_lines >= Settings::instance().chatMessagesToShow() )
+    if( num_messages > msg_lines )
     {
-      if( !max_lines_message_written )
-      {
-        html_text += QString( "&nbsp;&nbsp;&nbsp;<font color=%1><i>... %2 ...</i></font><br>" ).arg( Settings::instance().chatSystemTextColor() ).arg( tr( "only the last %1 messages are shown" ).arg( Settings::instance().chatMessagesToShow() ) );
-        max_lines_message_written = true;
-      }
+      num_messages--;
       continue;
     }
     else
-    {
-      if( max_lines_message_written )
-      {
-        m_lastMessageUserId = cm.isFromSystem() ? ID_LOCAL_USER : ID_SYSTEM_MESSAGE;
-        max_lines_message_written = false;
-      }
       html_text += chatMessageToText( cm );
-    }
   }
 
-  bool updates_is_enabled = mp_teChat->updatesEnabled();
-  mp_teChat->setUpdatesEnabled( false );
-  mp_teChat->clear();
-
-  QTextDocument *text_document = mp_teChat->document();
+  QTextDocument *text_document = mp_teMessage->document();
   QTextOption text_option = text_document->defaultTextOption();
   text_option.setTextDirection( Settings::instance().showTextInModeRTL() ? Qt::RightToLeft : Qt::LeftToRight );
   text_document->setDefaultTextOption( text_option );
-  mp_teChat->setDocument( text_document );
-
-  text_document = mp_teMessage->document();
+  mp_teMessage->setDocument( text_document );
+  bool updates_is_enabled = mp_teChat->updatesEnabled();
+  mp_teChat->setUpdatesEnabled( false );
+  mp_teChat->clear();
+  text_document = mp_teChat->document();
   text_option = text_document->defaultTextOption();
   text_option.setTextDirection( Settings::instance().showTextInModeRTL() ? Qt::RightToLeft : Qt::LeftToRight );
   text_document->setDefaultTextOption( text_option );
-  mp_teMessage->setDocument( text_document );
-
+  mp_teChat->setDocument( text_document );
   mp_teChat->setHtml( html_text );
   mp_teChat->setUpdatesEnabled( updates_is_enabled );
 
   setLastMessageTimestamp( c.lastMessageTimestamp() );
   ensureLastMessageVisible();
   updateChat( c );
-  QTimer::singleShot( 3000, this, SLOT( loadSavedMessages() ) );
+  QTimer::singleShot( 0, this, SLOT( operationCompleted() ) );
   return true;
 }
 
@@ -738,6 +711,13 @@ void GuiChat::addText( const QString& txt )
 
 void GuiChat::saveChat()
 {
+  Chat c = ChatManager::instance().chat( m_chatId );
+  if( !c.isValid() )
+  {
+    qWarning() << "Invalid chat id" << m_chatId << "found in GuiChat::saveChat()";
+    return;
+  }
+
   QString file_name = FileDialog::getSaveFileName( this,
                         tr( "Please select a file to save the messages of the chat." ),
                         Settings::instance().dataFolder(), "PDF Chat Files (*.pdf)" );
@@ -750,10 +730,16 @@ void GuiChat::saveChat()
   QPrinter printer;
   printer.setOutputFormat( QPrinter::PdfFormat );
   printer.setOutputFileName( file_name );
-  QTextDocument *doc = mp_teChat->document();
+  QTextDocument *doc = new QTextDocument( this );
+  QString html_text = "";
+  if( ChatManager::instance().chatHasSavedText( c.name() ) )
+    html_text.append( ChatManager::instance().chatSavedText( c.name() ) );
+  html_text.append( GuiChatMessage::chatToHtml( c, !Settings::instance().chatSaveFileTransfers(),
+                                                  !Settings::instance().chatSaveSystemMessages(), true, true, Settings::instance().chatCompact() ) );
+  doc->setHtml( html_text );
   doc->print( &printer );
-
   QMessageBox::information( this, Settings::instance().programName(), tr( "%1: save completed." ).arg( file_name ), tr( "Ok" ) );
+  doc->deleteLater();
 }
 
 void GuiChat::clearChat()

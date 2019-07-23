@@ -333,7 +333,7 @@ bool ChatManager::setChatToSavedChats( const Chat& c )
 {
   QString saved_chat_text = GuiChatMessage::chatToHtml( c, !Settings::instance().chatSaveFileTransfers(),
                                                         !Settings::instance().chatSaveSystemMessages(),
-                                                        true, true );
+                                                        true, true, true );
   if( saved_chat_text.isEmpty() )
     return false;
   if( chatHasSavedText( c.name() ) )
@@ -342,8 +342,10 @@ bool ChatManager::setChatToSavedChats( const Chat& c )
   return true;
 }
 
-QString ChatManager::chatSavedText( const QString& chat_name, int max_lines ) const
+QString ChatManager::chatSavedText( const QString& chat_name, int max_lines, int *missed_lines ) const
 {
+  if( missed_lines )
+    *missed_lines = 0;
   QString saved_text = m_history.value( chat_name );
   if( max_lines < 0 )
    return saved_text;
@@ -363,6 +365,8 @@ QString ChatManager::chatSavedText( const QString& chat_name, int max_lines ) co
       break;
     saved_text.prepend( QString( "%1%2").arg( it.previous() ).arg( "<br>" ) );
   }
+  if( missed_lines )
+    *missed_lines = qMax( 0, sl.size() - max_lines);
   return saved_text;
 }
 

@@ -57,7 +57,7 @@ public:
   int chatMessages() const;
   inline void addUnreadMessage();
   inline void readAllMessages();
-  inline const QList<ChatMessage> messages() const;
+  inline const QList<ChatMessage>& messages() const;
   void addMessage( const ChatMessage& );
   void clearMessages();
   inline const QString& privateId() const;
@@ -106,7 +106,7 @@ inline void Chat::setLastMessageTimestamp( const QDateTime& new_value ) { m_last
 inline int Chat::unreadMessages() const { return m_unreadMessages; }
 inline void Chat::addUnreadMessage() { m_unreadMessages++; }
 inline void Chat::readAllMessages() { m_unreadMessages = 0; }
-inline const QList<ChatMessage> Chat::messages() const { return m_messages; }
+inline const QList<ChatMessage>& Chat::messages() const { return m_messages; }
 inline void Chat::setReadMessagesByUser( VNumber user_id ) { m_unreadMessageUsersId.removeOne( user_id ); }
 inline bool Chat::userHasReadMessages( VNumber user_id ) const { return !m_unreadMessageUsersId.contains( user_id ); }
 inline void Chat::setLastModified( const QDateTime& new_value ) { m_group.setLastModified( new_value ); }

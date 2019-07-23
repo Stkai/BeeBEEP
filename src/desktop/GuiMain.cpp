@@ -986,6 +986,10 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().showChatToolbar() );
   act->setData( 42 );
+  act = mp_menuChatSettings->addAction( "", this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  setChatMessagesToShowInAction( act );
+  act->setData( 27 );
   mp_menuChatSettings->addSeparator();
   act = mp_menuChatSettings->addAction( IconManager::instance().icon( "background-color.png" ), tr( "Select chat background color" ), this, SLOT( settingsChanged() ) );
   act->setData( 72 );
@@ -1550,24 +1554,21 @@ void GuiMain::settingsChanged( QAction* act )
     break;
   case 27:
     {
-      Settings::instance().setChatMaxMessagesToShow( act->isChecked() );
-      if( act->isChecked() )
-      {
 #if QT_VERSION >= 0x050000
-        int num_messages = QInputDialog::getInt( qApp->activeWindow(), Settings::instance().programName(),
+      int num_messages = QInputDialog::getInt( qApp->activeWindow(), Settings::instance().programName(),
 #else
-        int num_messages = QInputDialog::getInteger( qApp->activeWindow(), Settings::instance().programName(),
+      int num_messages = QInputDialog::getInteger( qApp->activeWindow(), Settings::instance().programName(),
 #endif
-                                                     tr( "Please select the maximum number of messages to be showed" ),
-                                                     Settings::instance().chatMessagesToShow(),
-                                                     10, 1000, 5, &ok );
-        if( ok )
-        {
-          Settings::instance().setChatMessagesToShow( num_messages );
-          setChatMessagesToShowInAction( act );
-        }
+                                                   tr( "Please select the maximum number of messages to be showed" ) + QString( "\n" )
+                                                   + tr( "(current: %1, default: 800, all: -1, none: 0)" ).arg( Settings::instance().chatMessagesToShow() ),
+                                                   Settings::instance().chatMessagesToShow(),
+                                                   -1, 3000, 10, &ok );
+      if( ok )
+      {
+        Settings::instance().setChatMessagesToShow( num_messages );
+        setChatMessagesToShowInAction( act );
+        refresh_chat = true;
       }
-      refresh_chat = true;
     }
     break;
   case 28:
@@ -1954,7 +1955,8 @@ void GuiMain::showCheckSaveChatMessages()
 
 void GuiMain::setChatMessagesToShowInAction( QAction* act )
 {
-  act->setText( tr( "Show only last %1 messages" ).arg( Settings::instance().chatMessagesToShow() ) );
+  act->setText( tr( "Show only last %1 messages" ).arg( Settings::instance().chatMessagesToShow() >= 0 ? Settings::instance().chatMessagesToShow() : 800 ) );
+  act->setChecked( Settings::instance().chatMessagesToShow() >= 0 );
 }
 
 void GuiMain::setMaxInactivityDaysInAction( QAction* act )
@@ -3417,12 +3419,6 @@ void GuiMain::showChatSettingsMenu()
   act->setCheckable( true );
   act->setChecked( Settings::instance().showMessagesGroupByUser() );
   act->setData( 13 );
-
-  act = mp_menuChat->addAction( "", this, SLOT( settingsChanged() ) );
-  setChatMessagesToShowInAction( act );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().chatMaxMessagesToShow() );
-  act->setData( 27 );
 
   act = mp_menuChat->addAction( tr( "Show your name instead of 'You'" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );

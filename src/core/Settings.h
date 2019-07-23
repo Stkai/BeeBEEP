@@ -235,8 +235,6 @@ public:
   inline void setShowOnlyMessagesInDefaultChat( bool );
   inline bool showVCardOnRightClick() const;
   inline void setShowVCardOnRightClick( bool );
-  inline bool chatMaxMessagesToShow() const;
-  inline void setChatMaxMessagesToShow( bool );
   inline int chatMessagesToShow() const;
   inline void setChatMessagesToShow( int );
   inline const QSize& mainBarIconSize() const;
@@ -676,7 +674,6 @@ private:
   bool m_showChatToolbar;
   bool m_showOnlyMessagesInDefaultChat;
   bool m_showVCardOnRightClick;
-  bool m_chatMaxMessagesToShow;
   int m_chatMessagesToShow;
   bool m_showEmoticonMenu;
   bool m_useNativeEmoticons;
@@ -1026,8 +1023,6 @@ inline void Settings::setShowMinimizedAtStartup( bool new_value ) { m_showMinimi
 inline bool Settings::showMinimizedAtStartup() const { return m_showMinimizedAtStartup; }
 inline int Settings::chatMessagesToShow() const { return m_chatMessagesToShow; }
 inline void Settings::setChatMessagesToShow( int new_value ) { m_chatMessagesToShow = new_value; }
-inline bool Settings::chatMaxMessagesToShow() const { return m_chatMaxMessagesToShow; }
-inline void Settings::setChatMaxMessagesToShow( bool new_value ) { m_chatMaxMessagesToShow = new_value; }
 inline int Settings::emoticonSizeInEdit() const { return m_emoticonSizeInEdit; }
 inline int Settings::emoticonSizeInChat() const { return m_emoticonSizeInChat; }
 inline int Settings::emoticonSizeInMenu() const { return m_emoticonSizeInMenu; }

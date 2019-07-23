@@ -43,4 +43,3 @@ QString IconManager::iconPath( const QString& icon_name ) const
   else
     return defaulIconPath( icon_name );
 }
-
