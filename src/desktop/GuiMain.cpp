@@ -1560,9 +1560,11 @@ void GuiMain::settingsChanged( QAction* act )
       int num_messages = QInputDialog::getInteger( qApp->activeWindow(), Settings::instance().programName(),
 #endif
                                                    tr( "Please select the maximum number of messages to be showed" ) + QString( "\n" )
-                                                   + tr( "(current: %1, default: 800, all: -1, none: 0)" ).arg( Settings::instance().chatMessagesToShow() ),
+                                                   + tr( "(current: %1, default: %2, all: -1, none: 0)" )
+                                                       .arg( Settings::instance().chatMessagesToShow() )
+                                                       .arg( Settings::instance().defaultChatMessagesToShow() ),
                                                    Settings::instance().chatMessagesToShow(),
-                                                   -1, 3000, 10, &ok );
+                                                   -1, 2000, 10, &ok );
       if( ok )
       {
         Settings::instance().setChatMessagesToShow( num_messages );

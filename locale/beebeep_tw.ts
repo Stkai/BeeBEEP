@@ -981,15 +981,19 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>No saved messages were found.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Loading of saved messages...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ready.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>maximum number of messages to show reached</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>go to the history to see them all</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2809,6 +2813,10 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Read FAQ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(current: %1, default: %2, all: -1, none: 0)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

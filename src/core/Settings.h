@@ -235,6 +235,7 @@ public:
   inline void setShowOnlyMessagesInDefaultChat( bool );
   inline bool showVCardOnRightClick() const;
   inline void setShowVCardOnRightClick( bool );
+  int defaultChatMessagesToShow() const;
   inline int chatMessagesToShow() const;
   inline void setChatMessagesToShow( int );
   inline const QSize& mainBarIconSize() const;

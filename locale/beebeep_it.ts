@@ -1026,7 +1026,7 @@
     </message>
     <message>
         <source>No saved messages were found.</source>
-        <translation>Non sono stati trovati altri messaggi salvati.</translation>
+        <translation type="vanished">Non sono stati trovati altri messaggi salvati.</translation>
     </message>
     <message>
         <source>Loading of saved messages...</source>
@@ -1035,6 +1035,14 @@
     <message>
         <source>Ready.</source>
         <translation>Pronto.</translation>
+    </message>
+    <message>
+        <source>maximum number of messages to show reached</source>
+        <translation>il limite massimo di messaggi da visualizzare è stato raggiunto</translation>
+    </message>
+    <message>
+        <source>go to the history to see them all</source>
+        <translation>vai alle conversazioni salvate per guardarli tutti</translation>
     </message>
 </context>
 <context>
@@ -2958,6 +2966,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Read FAQ...</source>
         <translation>Leggi le FAQ...</translation>
+    </message>
+    <message>
+        <source>(current: %1, default: %2, all: -1, none: 0)</source>
+        <translation>(attuale: %1, predefinito: %2, tutti: -1, nessuno: 0)</translation>
     </message>
 </context>
 <context>

@@ -507,8 +507,7 @@ bool GuiChat::setChat( const Chat& c )
                             .arg( tr( "only the last %1 messages are shown" )
                             .arg( Settings::instance().chatMessagesToShow() ) )
                             .arg( tr( "maximum number of messages to show reached" ) )
-                            .arg( tr( "see the history for more" ) );
-
+                            .arg( tr( "go to the history to see them all" ) );
     if( !html_text.isEmpty() )
       html_text.prepend( limit_reached_text );
     else

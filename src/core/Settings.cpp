@@ -194,12 +194,6 @@ Settings::Settings()
 
   m_saveMessagesTimestamp = QDateTime::currentDateTime();
 
-#if QT_VERSION >= 0x050000
-  m_chatMessagesToShow = 900;
-#else
-  m_chatMessagesToShow = 400;
-#endif
-
   resetAllColors();
 }
 
@@ -229,6 +223,15 @@ void Settings::resetAllColors()
   m_chatBackgroundColor = "#ffffff";
   m_chatDefaultTextColor = "#555555";
   m_chatSystemTextColor = "#808080";
+}
+
+int Settings::defaultChatMessagesToShow() const
+{
+#if QT_VERSION >= 0x050000
+  return 900;
+#else
+  return 400;
+#endif
 }
 
 void Settings::createApplicationUuid()
@@ -998,7 +1001,7 @@ void Settings::load()
   if( m_chatMessageFilter.size() < static_cast<int>(ChatMessage::NumTypes) )
     m_chatMessageFilter.resize( static_cast<int>(ChatMessage::NumTypes) );
   m_showOnlyMessagesInDefaultChat = sets->value( "ShowOnlyMessagesInDefaultChat", true ).toBool();
-  m_chatMessagesToShow = sets->value( "MaxMessagesToShow", m_chatMessagesToShow ).toInt();
+  m_chatMessagesToShow = sets->value( "MaxMessagesToShow", defaultChatMessagesToShow() ).toInt();
   m_imagePreviewHeight = qMax( 48, sets->value( "ImagePreviewHeight", 160 ).toInt() );
   m_useReturnToSendMessage = sets->value( "UseKeyReturnToSendMessage", m_useReturnToSendMessage ).toBool();
   m_chatUseYourNameInsteadOfYou = sets->value( "UseYourNameInsteadOfYou", false ).toBool();
