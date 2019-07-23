@@ -23,6 +23,7 @@
 
 #include "BeeUtils.h"
 #include "ChatManager.h"
+#include "FileDialog.h"
 #include "GuiChatItem.h"
 #include "GuiSavedChat.h"
 #include "IconManager.h"
@@ -31,107 +32,115 @@
 
 
 GuiSavedChat::GuiSavedChat( QWidget* parent )
- : QDialog( parent )
+ : QMainWindow( parent )
 {
-  setupUi( this );
   setObjectName( "GuiSavedChat" );
   Bee::removeContextHelpButton( this );
   setWindowFlags( windowFlags() | Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint );
   setWindowIcon( IconManager::instance().icon( "saved-chat.png" ) );
 
-  mp_menuContext = new QMenu( this );
-
-  mp_scFindTextInChat = new QShortcut( this );
-  mp_scFindTextInChat->setContext( Qt::WindowShortcut );
-  connect( mp_scFindTextInChat, SIGNAL( activated() ), this, SLOT( showFindTextInChatDialog() ) );
-
-  mp_scFindNextTextInChat = new QShortcut( this );
-  mp_scFindNextTextInChat->setContext( Qt::WindowShortcut );
-  connect( mp_scFindNextTextInChat, SIGNAL( activated() ), this, SLOT( findNextTextInChat() ) );
-
-  mp_scPrint = new QShortcut( this );
-  mp_scPrint->setContext( Qt::WindowShortcut );
-  connect( mp_scPrint, SIGNAL( activated() ), this, SLOT( printChat() ) );
-
+  mp_teSavedChat = new QTextBrowser( this );
+  mp_teSavedChat->setToolTip( tr( "Right click to open menu" ) );
+  QPalette p = mp_teSavedChat->palette();
+  p.setColor( QPalette::Highlight, Qt::yellow );
+  p.setColor( QPalette::HighlightedText, Qt::black );
+  mp_teSavedChat->setPalette( p );
+  mp_teSavedChat->setFocusPolicy( Qt::StrongFocus ); // need focus for keyboard events like CTRL+c
+  mp_teSavedChat->setReadOnly( true );
+  mp_teSavedChat->setUndoRedoEnabled( false );
+  mp_teSavedChat->setOpenExternalLinks( false );
+  mp_teSavedChat->setOpenLinks( false );
+  mp_teSavedChat->setAcceptRichText( false );
   mp_teSavedChat->setContextMenuPolicy( Qt::CustomContextMenu );
   connect( mp_teSavedChat, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( customContextMenu( const QPoint& ) ) );
+  connect( mp_teSavedChat, SIGNAL( anchorClicked( const QUrl& ) ), this, SLOT( checkAnchorClicked( const QUrl&  ) ) );
+
+  setCentralWidget( mp_teSavedChat );
+
+  mp_barHistory = new QToolBar( tr( "Show the toolbar" ), this );
+  mp_barHistory->setObjectName( "GuiHistoryToolBar" );
+  addToolBar( Qt::BottomToolBarArea, mp_barHistory );
+  mp_barHistory->setAllowedAreas( Qt::BottomToolBarArea | Qt::TopToolBarArea );
+  mp_barHistory->setFloatable( false );
+  mp_barHistory->setIconSize( Settings::instance().mainBarIconSize() );
+  setupToolBar( mp_barHistory );
+  mp_barHistory->toggleViewAction()->setVisible( false );
+
+  mp_menuContext = new QMenu( this );
+}
+
+void GuiSavedChat::setupToolBar( QToolBar* bar )
+{
+  /* filter by keywords */
+  QLabel* label = new QLabel( bar );
+  label->setObjectName( "GuiLabelFilterTextHistory" );
+  label->setAlignment( Qt::AlignRight | Qt::AlignTrailing | Qt::AlignVCenter );
+  label->setText( QString( "   " ) + tr( "Search" ) + QString( " " ) );
+  bar->addWidget( label );
+  mp_leFilter = new QLineEdit( bar );
+  mp_leFilter->setObjectName( "GuiLineEditFilterHistory" );
+#if QT_VERSION >= 0x040700
+  mp_leFilter->setPlaceholderText( tr( "keyword" ) );
+#endif
+  bar->addWidget( mp_leFilter );
+  connect( mp_leFilter, SIGNAL( returnPressed() ), this, SLOT( findTextInHistory() ) );
+
+  /* search button */
+  bar->addAction( IconManager::instance().icon( "search.png" ), tr( "Find" ), this, SLOT( findTextInHistory() ) );
+
+  /* flags */
+  mp_cbCaseSensitive = new QCheckBox( bar );
+  mp_cbCaseSensitive->setObjectName( "GuiCheckBoxFindCaseSensitiveInLog" );
+  mp_cbCaseSensitive->setText( tr( "Case sensitive" ) );
+  bar->addWidget( mp_cbCaseSensitive );
+
+  mp_cbWholeWordOnly = new QCheckBox( bar );
+  mp_cbWholeWordOnly->setObjectName( "GuiCheckBoxFindWholeWordOnlyInLog" );
+  mp_cbWholeWordOnly->setText( tr( "Whole word" ) );
+  bar->addWidget( mp_cbWholeWordOnly );
+
+  /* save as button */
+  bar->addSeparator();
+  bar->addAction( IconManager::instance().icon( "save-as.png" ), tr( "Save as" ), this, SLOT( saveHistoryAs() ) );
+  bar->addSeparator();
+  bar->addAction( IconManager::instance().icon( "printer.png" ), tr( "Print..." ), this, SLOT( printChat() ) );
+  bar->addSeparator();
+  bar->addAction( IconManager::instance().icon( "delete.png" ), tr( "Clear messages" ), this, SLOT( deleteSavedChat() ) );
 }
 
 void GuiSavedChat::showSavedChat( const QString& chat_name )
 {
   m_savedChatName = chat_name;
+  QString window_chat_title = chat_name == Settings::instance().defaultChatName() ? GuiChatItem::defaultChatName().toUpper() : chat_name;
+  setWindowTitle( QString( "%1 - %2" ).arg( window_chat_title ).arg( tr( "Saved chat" ) ) );
+
   QString html_text = "";
   if( !ChatManager::instance().chatHasSavedText( chat_name ) )
     html_text += QString( "<br>*** %1 ***<br>" ).arg( tr( "Empty" ) );
   else
-    html_text += QString( "%1<br><br><br>" ).arg( ChatManager::instance().chatSavedText( chat_name ) );
+    html_text += ChatManager::instance().chatSavedText( chat_name );
 
+  html_text += QString( "<br>*** %1: %2 ***<br><br><br>" ).arg( tr( "Saved chat" ) ).arg( tr( "end of messages" ) );
+  bool updates_enabled = mp_teSavedChat->updatesEnabled();
+  mp_teSavedChat->setUpdatesEnabled( false );
   mp_teSavedChat->setText( html_text );
-
-  QScrollBar *bar = mp_teSavedChat->verticalScrollBar();
-  bar->setValue( bar->maximum() );
-
-  QString window_chat_title = chat_name == Settings::instance().defaultChatName() ? GuiChatItem::defaultChatName().toUpper() : chat_name;
-  setWindowTitle( window_chat_title );
+  mp_teSavedChat->setUpdatesEnabled( updates_enabled );
+  /* Performance issue: do not set the bar to maximum */
 }
 
 void GuiSavedChat::customContextMenu( const QPoint& )
 {
   mp_menuContext->clear();
-
-  QAction* act = mp_menuContext->addAction( IconManager::instance().icon( "search.png" ), tr( "Find text in chat" ), this, SLOT( showFindTextInChatDialog() ) );
-  QKeySequence ks = ShortcutManager::instance().shortcut( ShortcutManager::FindTextInChat );
-  if( !ks.isEmpty() && Settings::instance().useShortcuts() )
-    act->setShortcut( ks );
-  mp_menuContext->addSeparator();
-  mp_menuContext->addAction( IconManager::instance().icon( "paste.png" ), tr( "Copy to clipboard" ), mp_teSavedChat, SLOT( copy() ), QKeySequence::Copy );
-  mp_menuContext->addSeparator();
   mp_menuContext->addAction( IconManager::instance().icon( "select-all.png" ), tr( "Select All" ), mp_teSavedChat, SLOT( selectAll() ), QKeySequence::SelectAll );
+  mp_menuContext->addSeparator();
   mp_menuContext->addSeparator();
   if( !mp_teSavedChat->textCursor().selectedText().isEmpty() )
   {
-    mp_menuContext->addAction( IconManager::instance().icon( "network.png" ), tr( "Open selected text as url" ), this, SLOT( openSelectedTextAsUrl() ) );
+    mp_menuContext->addAction( IconManager::instance().icon( "copy.png" ), tr( "Copy to clipboard" ), mp_teSavedChat, SLOT( copy() ), QKeySequence::Copy );
     mp_menuContext->addSeparator();
+    mp_menuContext->addAction( IconManager::instance().icon( "network.png" ), tr( "Open selected text as url" ), this, SLOT( openSelectedTextAsUrl() ) );
   }
-  act = mp_menuContext->addAction( IconManager::instance().icon( "printer.png" ), tr( "Print..." ), this, SLOT( printChat() ) );
-  ks = ShortcutManager::instance().shortcut( ShortcutManager::Print );
-  if( !ks.isEmpty() && Settings::instance().useShortcuts() )
-    act->setShortcut( ks );
-
-  mp_menuContext->addSeparator();
-  mp_menuContext->addAction( IconManager::instance().icon( "remove-saved-chat.png" ), tr( "Delete" ), this, SLOT( deleteSavedChat() ) );
-
   mp_menuContext->exec( QCursor::pos() );
-}
-
-void GuiSavedChat::updateShortcuts()
-{
-  QKeySequence ks = ShortcutManager::instance().shortcut( ShortcutManager::FindNextTextInChat );
-  if( !ks.isEmpty() )
-  {
-    mp_scFindNextTextInChat->setKey( ks );
-    mp_scFindNextTextInChat->setEnabled( Settings::instance().useShortcuts() );
-  }
-  else
-    mp_scFindNextTextInChat->setEnabled( false );
-
-  ks = ShortcutManager::instance().shortcut( ShortcutManager::FindTextInChat );
-  if( !ks.isEmpty() && Settings::instance().useShortcuts() )
-  {
-    mp_scFindTextInChat->setKey( ks );
-    mp_scFindTextInChat->setEnabled( Settings::instance().useShortcuts() );
-  }
-  else
-    mp_scFindTextInChat->setEnabled( false );
-
-  ks = ShortcutManager::instance().shortcut( ShortcutManager::Print );
-  if( !ks.isEmpty() )
-  {
-    mp_scPrint->setKey( ks );
-    mp_scPrint->setEnabled( Settings::instance().useShortcuts() );
-  }
-  else
-    mp_scPrint->setEnabled( false );
 }
 
 void GuiSavedChat::printChat()
@@ -148,54 +157,7 @@ void GuiSavedChat::printChat()
 
   if( dlg->exec() == QDialog::Accepted)
     mp_teSavedChat->print( dlg->printer() );
-
   dlg->deleteLater();
-}
-
-void GuiSavedChat::showFindTextInChatDialog()
-{
-  QString label = tr( "Find text in chat" );
-  bool ok = false;
-  QString text_to_search = QInputDialog::getText( this, Settings::instance().programName(), label,
-                                                  QLineEdit::Normal, m_lastTextFound, &ok );
-  if( ok )
-    findTextInChat( text_to_search.simplified() );
-}
-
-void GuiSavedChat::findNextTextInChat()
-{
-  findTextInChat( m_lastTextFound );
-}
-
-void GuiSavedChat::findTextInChat( const QString& txt )
-{
-  if( txt.isEmpty() )
-    return;
-
-  QTextDocument::FindFlags find_flags = 0;
-  bool search_from_start = false;
-  if( txt != m_lastTextFound )
-  {
-    mp_teSavedChat->moveCursor( QTextCursor::Start );
-    search_from_start = true;
-  }
-
-  if( !mp_teSavedChat->find( txt, find_flags ) )
-  {
-    if( !search_from_start )
-    {
-      mp_teSavedChat->moveCursor( QTextCursor::Start );
-      if( mp_teSavedChat->find( txt, find_flags ) )
-      {
-        m_lastTextFound = txt;
-        return;
-      }
-    }
-
-    QMessageBox::information( this, Settings::instance().programName(), tr( "%1 not found in chat." ).arg( QString( "\"%1\"" ).arg( txt ) ) );
-  }
-  else
-    m_lastTextFound = txt;
 }
 
 void GuiSavedChat::openSelectedTextAsUrl()
@@ -215,4 +177,51 @@ void GuiSavedChat::deleteSavedChat()
 {
   emit deleteSavedChatRequest( m_savedChatName );
   close();
+}
+
+void GuiSavedChat::checkAnchorClicked( const QUrl& url )
+{
+  emit openUrl( url );
+}
+
+void GuiSavedChat::findTextInHistory()
+{
+  QString txt = mp_leFilter->text().simplified();
+  if( txt.isEmpty() )
+    return;
+
+  QTextDocument::FindFlags find_flags;
+  if( mp_cbCaseSensitive->isChecked() )
+    find_flags |= QTextDocument::FindCaseSensitively;
+  if( mp_cbWholeWordOnly->isChecked() )
+    find_flags |= QTextDocument::FindWholeWords;
+
+  if( !mp_teSavedChat->find( txt, find_flags ) )
+  {
+    mp_teSavedChat->moveCursor( QTextCursor::Start );
+    if( !mp_teSavedChat->find( txt ) )
+    {
+      QMessageBox::information( this, Settings::instance().programName(), tr( "%1 not found" ).arg( QString( "\"%1\"" ).arg( txt ) ) + QString( "." ), tr( "Ok" ) );
+      return;
+    }
+  }
+}
+
+void GuiSavedChat::saveHistoryAs()
+{
+  QString file_name = FileDialog::getSaveFileName( this,
+                          tr( "Please select a file where to save the messages showed in this window." ),
+                          Settings::instance().dataFolder(), "PDF Chat Files (*.pdf)" );
+  if( file_name.isEmpty() )
+    return;
+
+  if( !file_name.toLower().endsWith( QLatin1String( ".pdf" ) ) )
+    file_name.append( QLatin1String( ".pdf" ) );
+
+  QPrinter printer;
+  printer.setOutputFormat( QPrinter::PdfFormat );
+  printer.setOutputFileName( file_name );
+  QTextDocument *doc = mp_teSavedChat->document();
+  doc->print( &printer );
+  QMessageBox::information( this, Settings::instance().programName(), tr( "%1: save completed." ).arg( file_name ), tr( "Ok" ) );
 }

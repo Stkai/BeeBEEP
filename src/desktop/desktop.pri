@@ -114,7 +114,6 @@ FORMS += desktop/GuiAddUser.ui \
   desktop/GuiNetworkTest.ui \
   desktop/GuiPluginManager.ui \
   desktop/GuiRefusedChat.ui \
-  desktop/GuiSavedChat.ui \
   desktop/GuiSavedChatList.ui \
   desktop/GuiShareBox.ui \
   desktop/GuiShareLocal.ui \

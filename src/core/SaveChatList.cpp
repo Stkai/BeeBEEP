@@ -112,13 +112,15 @@ bool SaveChatList::saveChats( QDataStream* stream )
   QString chat_name_encrypted;
   QString chat_text_encrypted;
   QStringList chat_name_saved_list;
+  QString html_text;
 
   foreach( Chat c, ChatManager::instance().constChatList() )
   {
     if( c.isEmpty() )
       continue;
 
-    QString html_text = "";
+    html_text = "";
+
     if( ChatManager::instance().chatHasSavedText( c.name() ) )
       html_text.append( ChatManager::instance().chatSavedText( c.name(), Settings::instance().chatMaxLineSaved() ) );
     html_text.append( GuiChatMessage::chatToHtml( c, !Settings::instance().chatSaveFileTransfers(),
@@ -141,15 +143,15 @@ bool SaveChatList::saveChats( QDataStream* stream )
       return false;
     }
 
-    chat_lines = html_text.split( "<br>", QString::SkipEmptyParts );
+    chat_lines = html_text.split( "<br>", QString::SkipEmptyParts, Qt::CaseInsensitive );
     if( chat_lines.size() > Settings::instance().chatMaxLineSaved() )
     {
       qWarning() << "Chat exceeds line size limit with" << chat_lines.size();
       while( chat_lines.size() > Settings::instance().chatMaxLineSaved() )
         chat_lines.removeFirst();
-      html_text = chat_lines.join( "<br>" );
-      html_text.append( "<br>" ); // SkipEmptyParts remove the last one too
     }
+    html_text = chat_lines.join( "<br>" );
+    html_text.append( "<br>" ); // SkipEmptyParts remove the last one too
 
     chat_text_encrypted = Settings::instance().simpleEncrypt( html_text );
     (*stream) << chat_text_encrypted;
@@ -174,7 +176,17 @@ bool SaveChatList::saveChats( QDataStream* stream )
         qWarning() << "Datastream error: unable to save history name" << qPrintable( it.key() );
         return false;
       }
-      chat_text_encrypted = Settings::instance().simpleEncrypt( it.value() );
+      html_text = it.value();
+      chat_lines = html_text.split( "<br>", QString::SkipEmptyParts, Qt::CaseInsensitive );
+      if( chat_lines.size() > Settings::instance().chatMaxLineSaved() )
+      {
+        qWarning() << "History exceeds line size limit with" << chat_lines.size();
+        while( chat_lines.size() > Settings::instance().chatMaxLineSaved() )
+          chat_lines.removeFirst();
+      }
+      html_text = chat_lines.join( "<br>" );
+      html_text.append( "<br>" ); // SkipEmptyParts remove the last one too
+      chat_text_encrypted = Settings::instance().simpleEncrypt( html_text );
       (*stream) << chat_text_encrypted;
       if( stream->status() != QDataStream::Ok )
       {

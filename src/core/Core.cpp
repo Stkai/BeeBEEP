@@ -132,9 +132,9 @@ bool Core::checkSavingPaths()
     {
       qDebug() << "Chat messages will be saved in path:" << qPrintable( Settings::instance().savedChatsFilePath() );
       if( Settings::instance().chatSaveFileTransfers() )
-        qWarning() << "File transfer messages will be saved also";
+        qDebug() << "File transfer messages will also be saved";
       if( Settings::instance().chatSaveSystemMessages() )
-        qWarning() << "System messages will be saved also";
+        qDebug() << "System messages will also be saved";
     }
   }
   else

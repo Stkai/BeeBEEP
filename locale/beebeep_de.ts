@@ -930,7 +930,7 @@
     </message>
     <message>
         <source>Select All</source>
-        <translation>Alle auswählen</translation>
+        <translation type="vanished">Alle auswählen</translation>
     </message>
     <message>
         <source>Use key Return to make a carriage return</source>
@@ -954,7 +954,7 @@
     </message>
     <message>
         <source>Please select a file to save the messages of the chat.</source>
-        <translation>Wähle bitte eine Datei aus, um die Chatnachrichten zu speichern.</translation>
+        <translation type="vanished">Wähle bitte eine Datei aus, um die Chatnachrichten zu speichern.</translation>
     </message>
     <message>
         <source>Clear messages</source>
@@ -1013,7 +1013,19 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>go to the history to see them all</source>
+        <source>Select all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>open %1 to read them all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>the saved chat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select a file to save all the messages of the chat.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1187,6 +1199,10 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>Marks the message as important</source>
         <translation>Nachricht als wichtig markieren</translation>
+    </message>
+    <message>
+        <source>Send this message to all users individually</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1482,11 +1498,15 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation>Alle auswählen</translation>
+        <translation type="vanished">Alle auswählen</translation>
     </message>
     <message>
         <source>Show the timestamp</source>
         <translation>Zeitstempel anzeigen</translation>
+    </message>
+    <message>
+        <source>Select all</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1638,7 +1658,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation>Alle auswählen</translation>
+        <translation type="vanished">Alle auswählen</translation>
     </message>
     <message>
         <source>Open file</source>
@@ -1659,6 +1679,10 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>Right click to open menu</source>
         <translation>Menü per Rechtsklick öffnen</translation>
+    </message>
+    <message>
+        <source>Select all</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1941,7 +1965,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Chat histories</source>
-        <translation>Chatverläufe</translation>
+        <translation type="vanished">Chatverläufe</translation>
     </message>
     <message>
         <source>Unable to open %1</source>
@@ -2005,7 +2029,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Do you want to delete this saved chat?</source>
-        <translation>Möchtest du diesen gespeicherten Chat löschen?</translation>
+        <translation type="vanished">Möchtest du diesen gespeicherten Chat löschen?</translation>
     </message>
     <message>
         <source>Save messages</source>
@@ -2856,10 +2880,6 @@ Bitte wähle einen anderen Namen aus.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Please select the maximum number of lines to be saved in the conversation (current: %1).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Clean the cache from items older than %1 days</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2877,6 +2897,22 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>(current: %1, default: %2, all: -1, none: 0)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Saved chats</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to delete saved chat with %1?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select the maximum number of lines to be saved in the chat (current: %1).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There are no messages saved in the chat with %1.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2904,7 +2940,11 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation>Alle auswählen</translation>
+        <translation type="vanished">Alle auswählen</translation>
+    </message>
+    <message>
+        <source>Select all</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3283,11 +3323,11 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>%1 not found in chat.</source>
-        <translation>%1 wurde nicht im Chat gefunden.</translation>
+        <translation type="vanished">%1 wurde nicht im Chat gefunden.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation type="vanished">Löschen</translation>
     </message>
     <message>
         <source>Copy to clipboard</source>
@@ -3299,7 +3339,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Find text in chat</source>
-        <translation>Text in Chat suchen</translation>
+        <translation type="vanished">Text in Chat suchen</translation>
     </message>
     <message>
         <source>Select All</source>
@@ -3308,6 +3348,70 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>Open selected text as url</source>
         <translation>Ausgewählten Text als URL im Browser öffnen</translation>
+    </message>
+    <message>
+        <source>Right click to open menu</source>
+        <translation type="unfinished">Menü per Rechtsklick öffnen</translation>
+    </message>
+    <message>
+        <source>Show the toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished">Suchen</translation>
+    </message>
+    <message>
+        <source>keyword</source>
+        <translation type="unfinished">Schlüsselwort</translation>
+    </message>
+    <message>
+        <source>Find</source>
+        <translation type="unfinished">Suchen</translation>
+    </message>
+    <message>
+        <source>Case sensitive</source>
+        <translation type="unfinished">Groß-/Kleinschreibung berücksichtigen</translation>
+    </message>
+    <message>
+        <source>Whole word</source>
+        <translation type="unfinished">Gesamtes Wort</translation>
+    </message>
+    <message>
+        <source>Save as</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear messages</source>
+        <translation type="unfinished">Nachrichten löschen</translation>
+    </message>
+    <message>
+        <source>Saved chat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>end of messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 not found</source>
+        <translation type="unfinished">%1 wurde nicht gefunden</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished">OK</translation>
+    </message>
+    <message>
+        <source>Please select a file to save the messages of the chat.</source>
+        <translation type="obsolete">Wähle bitte eine Datei aus, um die Chatnachrichten zu speichern.</translation>
+    </message>
+    <message>
+        <source>%1: save completed.</source>
+        <translation type="unfinished">%1:Speichern abgeschlossen.</translation>
+    </message>
+    <message>
+        <source>Please select a file where to save the messages showed in this window.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

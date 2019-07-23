@@ -228,7 +228,7 @@ void Settings::resetAllColors()
 int Settings::defaultChatMessagesToShow() const
 {
 #if QT_VERSION >= 0x050000
-  return 900;
+  return 800;
 #else
   return 400;
 #endif

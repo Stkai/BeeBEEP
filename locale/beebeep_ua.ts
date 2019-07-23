@@ -922,7 +922,7 @@
     </message>
     <message>
         <source>Select All</source>
-        <translation>Вибрати все</translation>
+        <translation type="vanished">Вибрати все</translation>
     </message>
     <message>
         <source>Use key Return to make a carriage return</source>
@@ -946,7 +946,7 @@
     </message>
     <message>
         <source>Please select a file to save the messages of the chat.</source>
-        <translation>Будь ласка, виберіть файл для збереження повідомлень чату.</translation>
+        <translation type="vanished">Будь ласка, виберіть файл для збереження повідомлень чату.</translation>
     </message>
     <message>
         <source>Send a screenshot</source>
@@ -993,7 +993,19 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>go to the history to see them all</source>
+        <source>Select all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>open %1 to read them all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>the saved chat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select a file to save all the messages of the chat.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1163,6 +1175,10 @@ Please select a different name.</source>
     <message>
         <source>Marks the message as important</source>
         <translation>Позначити повідомлення як важливе</translation>
+    </message>
+    <message>
+        <source>Send this message to all users individually</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1450,11 +1466,15 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Select All</source>
-        <translation>Вибрати все</translation>
+        <translation type="vanished">Вибрати все</translation>
     </message>
     <message>
         <source>Show the timestamp</source>
         <translation>Показати мітку часу</translation>
+    </message>
+    <message>
+        <source>Select all</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1606,7 +1626,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Select All</source>
-        <translation>Вибрати все</translation>
+        <translation type="vanished">Вибрати все</translation>
     </message>
     <message>
         <source>Open file</source>
@@ -1619,6 +1639,10 @@ Please select a different name.</source>
     <message>
         <source>Case sensitive</source>
         <translation>З урахуванням регістру</translation>
+    </message>
+    <message>
+        <source>Select all</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1921,7 +1945,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Chat histories</source>
-        <translation>Історія чатів</translation>
+        <translation type="vanished">Історія чатів</translation>
     </message>
     <message>
         <source>Unable to open %1</source>
@@ -1985,7 +2009,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Do you want to delete this saved chat?</source>
-        <translation>Ви бажаєте видалити цей збережений чат?</translation>
+        <translation type="vanished">Ви бажаєте видалити цей збережений чат?</translation>
     </message>
     <message>
         <source>Save messages</source>
@@ -2800,10 +2824,6 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Please select the maximum number of lines to be saved in the conversation (current: %1).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Clean the cache from items older than %1 days</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2821,6 +2841,22 @@ Please select a different name.</source>
     </message>
     <message>
         <source>(current: %1, default: %2, all: -1, none: 0)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Saved chats</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to delete saved chat with %1?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select the maximum number of lines to be saved in the chat (current: %1).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There are no messages saved in the chat with %1.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2848,7 +2884,11 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Select All</source>
-        <translation>Вибрати все</translation>
+        <translation type="vanished">Вибрати все</translation>
+    </message>
+    <message>
+        <source>Select all</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3227,11 +3267,11 @@ Please select a different name.</source>
     </message>
     <message>
         <source>%1 not found in chat.</source>
-        <translation>%1 не знайдено в чаті.</translation>
+        <translation type="vanished">%1 не знайдено в чаті.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Видалити</translation>
+        <translation type="vanished">Видалити</translation>
     </message>
     <message>
         <source>Copy to clipboard</source>
@@ -3243,7 +3283,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Find text in chat</source>
-        <translation>Найти текст в чаті</translation>
+        <translation type="vanished">Найти текст в чаті</translation>
     </message>
     <message>
         <source>Select All</source>
@@ -3252,6 +3292,70 @@ Please select a different name.</source>
     <message>
         <source>Open selected text as url</source>
         <translation>Відкрити виділений текст, як URL</translation>
+    </message>
+    <message>
+        <source>Right click to open menu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show the toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished">Пошук</translation>
+    </message>
+    <message>
+        <source>keyword</source>
+        <translation type="unfinished">ключове слово</translation>
+    </message>
+    <message>
+        <source>Find</source>
+        <translation type="unfinished">Знайти</translation>
+    </message>
+    <message>
+        <source>Case sensitive</source>
+        <translation type="unfinished">З урахуванням регістру</translation>
+    </message>
+    <message>
+        <source>Whole word</source>
+        <translation type="unfinished">Слово повністю</translation>
+    </message>
+    <message>
+        <source>Save as</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear messages</source>
+        <translation type="unfinished">Очистити повідомлення</translation>
+    </message>
+    <message>
+        <source>Saved chat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>end of messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 not found</source>
+        <translation type="unfinished">%1 не знайдено</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select a file to save the messages of the chat.</source>
+        <translation type="obsolete">Будь ласка, виберіть файл для збереження повідомлень чату.</translation>
+    </message>
+    <message>
+        <source>%1: save completed.</source>
+        <translation type="unfinished">%1: збереження завершено.</translation>
+    </message>
+    <message>
+        <source>Please select a file where to save the messages showed in this window.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

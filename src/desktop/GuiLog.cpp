@@ -67,7 +67,6 @@ GuiLog::GuiLog( QWidget* parent )
 
   m_timer.setInterval( 1000 );
   connect( &m_timer, SIGNAL( timeout() ), this, SLOT( refreshLog() ) );
-
 }
 
 void GuiLog::setupToolBar( QToolBar* bar )
@@ -205,7 +204,7 @@ void GuiLog::findTextInLog()
   if( txt.isEmpty() )
     return;
 
-  QTextDocument::FindFlags find_flags = 0;
+  QTextDocument::FindFlags find_flags;
   if( mp_cbCaseSensitive->isChecked() )
     find_flags |= QTextDocument::FindCaseSensitively;
   if( mp_cbWholeWordOnly->isChecked() )
@@ -296,7 +295,7 @@ void GuiLog::logToFile( bool yes )
 void GuiLog::openLogMenu( const QPoint& )
 {
   mp_logMenu->clear();
-  mp_logMenu->addAction( IconManager::instance().icon( "select-all.png" ), tr( "Select All" ), mp_teLog, SLOT( selectAll() ), QKeySequence::SelectAll );
+  mp_logMenu->addAction( IconManager::instance().icon( "select-all.png" ), tr( "Select all" ), mp_teLog, SLOT( selectAll() ), QKeySequence::SelectAll );
   mp_logMenu->addSeparator();
   QAction* act = mp_logMenu->addAction( IconManager::instance().icon( "copy.png" ), tr( "Copy to clipboard" ), mp_teLog, SLOT( copy() ), QKeySequence::Copy );
   act->setEnabled( !mp_teLog->textCursor().selectedText().isEmpty() );

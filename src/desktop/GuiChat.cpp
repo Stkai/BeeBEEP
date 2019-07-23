@@ -300,7 +300,7 @@ void GuiChat::customContextMenu( const QPoint& )
   mp_menuContext->addSeparator();
   mp_menuContext->addAction( mp_actFindTextInChat );
   mp_menuContext->addSeparator();
-  mp_menuContext->addAction( IconManager::instance().icon( "select-all.png" ), tr( "Select All" ), mp_teChat, SLOT( selectAll() ), QKeySequence::SelectAll );
+  mp_menuContext->addAction( IconManager::instance().icon( "select-all.png" ), tr( "Select all" ), mp_teChat, SLOT( selectAll() ), QKeySequence::SelectAll );
   mp_menuContext->addSeparator();
   QAction* act = mp_menuContext->addAction( IconManager::instance().icon( "copy.png" ), tr( "Copy to clipboard" ), mp_teChat, SLOT( copy() ), QKeySequence::Copy );
   act->setEnabled( !mp_teChat->textCursor().selectedText().isEmpty() );
@@ -501,13 +501,16 @@ bool GuiChat::setChat( const Chat& c )
 
   if( Settings::instance().chatMessagesToShow() >= 0 && (missed_lines > 0 || num_messages > msg_lines) )
   {
+    QUrl saved_chat_url;
+    saved_chat_url.setUrl( QString( "#%1").arg( m_chatId ) );
+    saved_chat_url.setScheme( "beeshowsavedchat" );
     QString limit_reached_text = "";
-    limit_reached_text += QString( "<p><font color=%1><i>... %2 ...<br>... %3 - %4 ...</i></font></p>" )
+    limit_reached_text += QString( "<p><font color=%1><i>... %2 ...<br>... %3, %4 ...</i></font></p>" )
                             .arg( Settings::instance().chatSystemTextColor() )
                             .arg( tr( "only the last %1 messages are shown" )
                             .arg( Settings::instance().chatMessagesToShow() ) )
                             .arg( tr( "maximum number of messages to show reached" ) )
-                            .arg( tr( "go to the history to see them all" ) );
+                            .arg( tr( "open %1 to read them all" ).arg( QString( "<a href='%1'>%2</a>" ).arg( saved_chat_url.toString() ).arg( tr( "the saved chat" ) ) ) );
     if( !html_text.isEmpty() )
       html_text.prepend( limit_reached_text );
     else
@@ -718,7 +721,7 @@ void GuiChat::saveChat()
   }
 
   QString file_name = FileDialog::getSaveFileName( this,
-                        tr( "Please select a file to save the messages of the chat." ),
+                        tr( "Please select a file to save all the messages of the chat." ),
                         Settings::instance().dataFolder(), "PDF Chat Files (*.pdf)" );
   if( file_name.isEmpty() )
     return;

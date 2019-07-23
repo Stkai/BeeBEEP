@@ -180,6 +180,36 @@ void GuiCreateMessage::sendMessage()
   }
 
   mp_teMessage->addMessageToHistory();
+  QList<VNumber> to_chat_id_list;
+  if( sendAsPrivate() )
+  {
+    foreach( VNumber chat_id, m_toChatIdList )
+    {
+      Chat c = ChatManager::instance().chat( chat_id );
+      if( c.isValid() )
+      {
+        if( c.isGroup() )
+        {
+          QList<VNumber> chat_members = c.usersId();
+          foreach( VNumber member_id, chat_members )
+          {
+            if( member_id != ID_LOCAL_USER )
+            {
+              Chat to_chat = ChatManager::instance().privateChatForUser( member_id );
+              if( to_chat.isValid() && !to_chat_id_list.contains( to_chat.id() ) )
+                to_chat_id_list.append( to_chat.id() );
+            }
+          }
+        }
+        else
+        {
+          if( !to_chat_id_list.contains( chat_id ) )
+            to_chat_id_list.append( chat_id );
+        }
+      }
+    }
+    m_toChatIdList = to_chat_id_list;
+  }
 
   QDialog::accept();
 }

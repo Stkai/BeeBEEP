@@ -90,7 +90,7 @@ void GuiHome::customContextMenu( const QPoint& )
   mp_menuContext->clear();
   mp_menuContext->addAction( IconManager::instance().icon( "background-color.png" ), tr( "Change background color" ) + QString("..."), this, SLOT( selectBackgroundColor() ) );
   mp_menuContext->addSeparator();
-  mp_menuContext->addAction( IconManager::instance().icon( "select-all.png" ), tr( "Select All" ), mp_teSystem, SLOT( selectAll() ), QKeySequence::SelectAll );
+  mp_menuContext->addAction( IconManager::instance().icon( "select-all.png" ), tr( "Select all" ), mp_teSystem, SLOT( selectAll() ), QKeySequence::SelectAll );
   mp_menuContext->addSeparator();
   QAction* act = mp_menuContext->addAction( IconManager::instance().icon( "copy.png" ), tr( "Copy to clipboard" ), mp_teSystem, SLOT( copy() ), QKeySequence::Copy );
   act->setEnabled( !mp_teSystem->textCursor().selectedText().isEmpty() );

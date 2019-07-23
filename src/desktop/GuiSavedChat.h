@@ -25,17 +25,15 @@
 #define BEEBEEP_GUISAVEDCHAT_H
 
 #include "Config.h"
-#include "ui_GuiSavedChat.h"
 
 
-class GuiSavedChat : public QDialog, private Ui::GuiSavedChatDialog
+class GuiSavedChat : public QMainWindow
 {
   Q_OBJECT
 
 public:
   explicit GuiSavedChat( QWidget *parent = Q_NULLPTR );
   inline const QString& savedChatName() const;
-  void updateShortcuts();
 
 signals:
   void openUrl( const QUrl& );
@@ -46,22 +44,24 @@ public slots:
 
 protected slots:
   void printChat();
-  void showFindTextInChatDialog();
-  void findNextTextInChat();
   void customContextMenu( const QPoint& );
   void openSelectedTextAsUrl();
   void deleteSavedChat();
+  void saveHistoryAs();
+  void findTextInHistory();
+  void checkAnchorClicked( const QUrl& );
+
+protected:
+  void setupToolBar( QToolBar* );
 
 private:
-  void findTextInChat( const QString& );
-
-  QString m_savedChatName;
-  QString m_lastTextFound;
-  QShortcut* mp_scFindTextInChat;
-  QShortcut* mp_scFindNextTextInChat;
-  QShortcut* mp_scPrint;
-
+  QTextBrowser* mp_teSavedChat;
+  QLineEdit* mp_leFilter;
+  QCheckBox* mp_cbCaseSensitive;
+  QCheckBox* mp_cbWholeWordOnly;
+  QToolBar* mp_barHistory;
   QMenu* mp_menuContext;
+  QString m_savedChatName;
 
 };
 

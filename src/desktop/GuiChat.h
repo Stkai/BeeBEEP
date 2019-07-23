@@ -72,6 +72,7 @@ signals:
   void hideRequest();
   void updateChatColorsRequest();
   void showStatusMessageRequest( const QString&, int );
+  void openSavedChatRequest( VNumber );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   void shareDesktopToChatRequest( VNumber, bool );
   void screenshotToChatRequest( VNumber );

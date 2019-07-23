@@ -1346,7 +1346,7 @@ void GuiMain::createMainWidgets()
 
   mp_savedChatList = new GuiSavedChatList( this );
   tab_index = mp_tabMain->addTab( mp_savedChatList, IconManager::instance().icon( "saved-chat-list.png" ), "" );
-  mp_tabMain->setTabToolTip( tab_index, tr( "Chat histories" ) );
+  mp_tabMain->setTabToolTip( tab_index, tr( "Saved chats" ) );
   mp_savedChatList->setMainToolTip( QString( "%1\n(%2)" ).arg( mp_tabMain->tabToolTip( tab_index ), tooltip_right_button ) );
 
 #ifdef BEEBEEP_USE_WEBENGINE
@@ -1885,7 +1885,7 @@ void GuiMain::settingsChanged( QAction* act )
 #else
       int save_max_lines = QInputDialog::getInteger( qApp->activeWindow(), Settings::instance().programName(),
 #endif
-                                                 tr( "Please select the maximum number of lines to be saved in the conversation (current: %1)." ).arg( Settings::instance().chatMaxLineSaved() ),
+                                                 tr( "Please select the maximum number of lines to be saved in the chat (current: %1)." ).arg( Settings::instance().chatMaxLineSaved() ),
                                                  Settings::instance().chatMaxLineSaved(),
                                                  100, 30000, 100, &ok );
       if( ok )
@@ -2831,7 +2831,27 @@ void GuiMain::openUrl( const QUrl& file_url )
   qDebug() << "Opening url (not encoded):" << qPrintable( file_url.toString() );
 #endif
 
-  if( file_url.scheme() == QLatin1String( "beeshowfileinfolder" ) )
+  if( file_url.scheme() == QLatin1String( "beeshowsavedchat" ) )
+  {
+    QStringList sl_chat_id = file_url.toString().split( "#" );
+    if( !sl_chat_id.isEmpty() )
+    {
+      bool chat_id_is_integer = false;
+      VNumber chat_id = sl_chat_id.last().toULongLong( &chat_id_is_integer );
+      if( chat_id_is_integer && chat_id > 0 )
+      {
+        QString chat_name = ChatManager::instance().chatName( chat_id );
+        if( ChatManager::instance().chatHasSavedText( chat_name ) )
+          showSavedChatSelected( chat_name );
+        else
+          QMessageBox::information( QApplication::activeWindow(), Settings::instance().programName(),
+                                    tr( "There are no messages saved in the chat with %1." ).arg( chat_name ), tr( "Ok" ) );
+      }
+      else
+        qWarning() << "Invalid chat id" << chat_id << "found parsing open history request in GuiMain::openUrl(...)";
+    }
+  }
+  else if( file_url.scheme() == QLatin1String( "beeshowfileinfolder" ) )
   {
     QUrl adj_file_url = file_url;
     adj_file_url.setScheme( QLatin1String( "file" ) );
@@ -3048,6 +3068,7 @@ void GuiMain::showSavedChatSelected( const QString& chat_name )
 
   GuiSavedChat* saved_chat = new GuiSavedChat( this );
   saved_chat->setAttribute( Qt::WA_DeleteOnClose, true );
+  saved_chat->resize( qMin( (QApplication::desktop()->availableGeometry().width()-80), 680 ), 420 );
   connect( saved_chat, SIGNAL( deleteSavedChatRequest( const QString& ) ), this, SLOT( removeSavedChat( const QString& ) ) );
   connect( saved_chat, SIGNAL( openUrl( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
   saved_chat->showSavedChat( chat_name );
@@ -3056,7 +3077,7 @@ void GuiMain::showSavedChatSelected( const QString& chat_name )
 
 void GuiMain::removeSavedChat( const QString& chat_name )
 {
-  if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you want to delete this saved chat?" ), tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 1 )
+  if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you want to delete saved chat with %1?" ).arg( chat_name ), tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 1 )
     return;
 
   foreach( QWidget* w, qApp->allWidgets() )
@@ -4275,7 +4296,6 @@ void GuiMain::showLogWindow()
     mp_log->resize( qMin( (QApplication::desktop()->availableGeometry().width()-20), 760 ), 460 );
     connect( mp_log, SIGNAL( destroyed() ), this, SLOT( onLogWindowClosed() ) );
   }
-
   mp_log->showUp();
 }
 

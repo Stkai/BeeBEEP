@@ -378,7 +378,7 @@ void GuiMessageEdit::contextMenuEvent( QContextMenuEvent *event )
   act = mp_menuContext->addAction( IconManager::instance().icon( "paste.png" ), tr( "Paste" ), this, SLOT( paste() ), QKeySequence::Paste );
   act->setEnabled( canPaste() );
   mp_menuContext->addSeparator();
-  mp_menuContext->addAction( IconManager::instance().icon( "select-all.png" ), tr( "Select All" ), this, SLOT( selectAll() ), QKeySequence::SelectAll );
+  mp_menuContext->addAction( IconManager::instance().icon( "select-all.png" ), tr( "Select all" ), this, SLOT( selectAll() ), QKeySequence::SelectAll );
   mp_menuContext->addSeparator();
   if( !m_actionsToContextMenu.isEmpty() )
   {

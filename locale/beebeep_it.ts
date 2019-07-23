@@ -798,7 +798,7 @@
     </message>
     <message>
         <source>Select All</source>
-        <translation>Seleziona tutto</translation>
+        <translation type="vanished">Seleziona tutto</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -826,7 +826,7 @@
     </message>
     <message>
         <source>Please select a file to save the messages of the chat.</source>
-        <translation>Seleziona un file dove salvare la conversazione in corso.</translation>
+        <translation type="vanished">Seleziona un file dove salvare la conversazione in corso.</translation>
     </message>
     <message>
         <source>%1: save completed.</source>
@@ -1042,7 +1042,23 @@
     </message>
     <message>
         <source>go to the history to see them all</source>
-        <translation>vai alle conversazioni salvate per guardarli tutti</translation>
+        <translation type="vanished">vai alle conversazioni salvate per guardarli tutti</translation>
+    </message>
+    <message>
+        <source>Select all</source>
+        <translation>Seleziona tutto</translation>
+    </message>
+    <message>
+        <source>open %1 to read them all</source>
+        <translation>apri %1 per leggerli tutti</translation>
+    </message>
+    <message>
+        <source>the saved chat</source>
+        <translation>la conversazione salvata</translation>
+    </message>
+    <message>
+        <source>Please select a file to save all the messages of the chat.</source>
+        <translation>Seleziona un file dove salvare tutti i messaggi della conversazione.</translation>
     </message>
 </context>
 <context>
@@ -1215,6 +1231,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Marks the message as important</source>
         <translation>Contrassegna il messaggio come importante</translation>
+    </message>
+    <message>
+        <source>Send this message to all users individually</source>
+        <translation>Invia questo messaggio a tutti gli utenti individualmente</translation>
     </message>
 </context>
 <context>
@@ -1518,7 +1538,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation>Seleziona tutto</translation>
+        <translation type="vanished">Seleziona tutto</translation>
     </message>
     <message>
         <source>Print...</source>
@@ -1535,6 +1555,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Click here for latest news</source>
         <translation type="obsolete">Premi qui per le ultime notizie</translation>
+    </message>
+    <message>
+        <source>Select all</source>
+        <translation>Seleziona tutto</translation>
     </message>
 </context>
 <context>
@@ -1686,7 +1710,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation>Seleziona tutto</translation>
+        <translation type="vanished">Seleziona tutto</translation>
     </message>
     <message>
         <source>Copy to clipboard</source>
@@ -1703,6 +1727,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Right click to open menu</source>
         <translation>Pulsante destro per aprire il menu</translation>
+    </message>
+    <message>
+        <source>Select all</source>
+        <translation>Seleziona tutto</translation>
     </message>
 </context>
 <context>
@@ -2353,7 +2381,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Chat histories</source>
-        <translation>Conversazioni salvate</translation>
+        <translation type="vanished">Conversazioni salvate</translation>
     </message>
     <message>
         <source>Starting</source>
@@ -2481,7 +2509,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Do you want to delete this saved chat?</source>
-        <translation>Vuoi cancellare questa conversazione salvata?</translation>
+        <translation type="vanished">Vuoi cancellare questa conversazione salvata?</translation>
     </message>
     <message>
         <source>Do you want to clear messages with %1?</source>
@@ -2945,7 +2973,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Please select the maximum number of lines to be saved in the conversation (current: %1).</source>
-        <translation>Seleziona il numero massimo di righe da salvare nella conversazione (attuale %1).</translation>
+        <translation type="vanished">Seleziona il numero massimo di righe da salvare nella conversazione (attuale %1).</translation>
     </message>
     <message>
         <source>Clean the cache from items older than %1 days</source>
@@ -2970,6 +2998,26 @@ Inserisci un nome differente.</translation>
     <message>
         <source>(current: %1, default: %2, all: -1, none: 0)</source>
         <translation>(attuale: %1, predefinito: %2, tutti: -1, nessuno: 0)</translation>
+    </message>
+    <message>
+        <source>Saved chats</source>
+        <translation>Conversazioni salvate</translation>
+    </message>
+    <message>
+        <source>There are no messages saved in the conversation with %1.</source>
+        <translation type="obsolete">Non ci sono messaggi salvati nella conversazione con %1.</translation>
+    </message>
+    <message>
+        <source>Do you want to delete saved chat with %1?</source>
+        <translation>Vuoi cancellare la conversazione salvata con %1?</translation>
+    </message>
+    <message>
+        <source>Please select the maximum number of lines to be saved in the chat (current: %1).</source>
+        <translation>Seleziona il numero massimo di righe da salvare nella conversazione (attuale %1).</translation>
+    </message>
+    <message>
+        <source>There are no messages saved in the chat with %1.</source>
+        <translation>Non ci sono messaggi salvati nella conversazione con %1.</translation>
     </message>
 </context>
 <context>
@@ -2996,6 +3044,10 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Select All</source>
+        <translation type="vanished">Seleziona tutto</translation>
+    </message>
+    <message>
+        <source>Select all</source>
         <translation>Seleziona tutto</translation>
     </message>
 </context>
@@ -3433,7 +3485,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Find text in chat</source>
-        <translation>Trova testo nella conversazione</translation>
+        <translation type="vanished">Trova testo nella conversazione</translation>
     </message>
     <message>
         <source>Copy to clipboard</source>
@@ -3453,11 +3505,75 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>%1 not found in chat.</source>
-        <translation>%1 non trovato nella conversazione.</translation>
+        <translation type="vanished">%1 non trovato nella conversazione.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Cancella</translation>
+        <translation type="vanished">Cancella</translation>
+    </message>
+    <message>
+        <source>Right click to open menu</source>
+        <translation>Pulsante destro per aprire il menu</translation>
+    </message>
+    <message>
+        <source>Show the toolbar</source>
+        <translation>Mostra la barra degli strumenti</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation>Cerca</translation>
+    </message>
+    <message>
+        <source>keyword</source>
+        <translation>parola chiave</translation>
+    </message>
+    <message>
+        <source>Find</source>
+        <translation>Trova</translation>
+    </message>
+    <message>
+        <source>Case sensitive</source>
+        <translation>Maiuscole/Minuscole</translation>
+    </message>
+    <message>
+        <source>Whole word</source>
+        <translation>Parola intera</translation>
+    </message>
+    <message>
+        <source>Save as</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Clear messages</source>
+        <translation>Cancella i messaggi</translation>
+    </message>
+    <message>
+        <source>Saved chat</source>
+        <translation>Conversazione salvata</translation>
+    </message>
+    <message>
+        <source>end of messages</source>
+        <translation>fine dei messaggi</translation>
+    </message>
+    <message>
+        <source>%1 not found</source>
+        <translation>%1 non trovato</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation>Ok</translation>
+    </message>
+    <message>
+        <source>Please select a file to save the messages of the chat.</source>
+        <translation type="obsolete">Seleziona un file dove salvare la conversazione in corso.</translation>
+    </message>
+    <message>
+        <source>%1: save completed.</source>
+        <translation>%1: salvataggio completato.</translation>
+    </message>
+    <message>
+        <source>Please select a file where to save the messages showed in this window.</source>
+        <translation>Seleziona un file dove salvare i messaggi mostrati in questa finestra.</translation>
     </message>
 </context>
 <context>

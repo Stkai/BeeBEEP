@@ -32,23 +32,7 @@
 
 static QString textImportantPrefix()
 {
-  if( Settings::instance().useOnlyTextEmoticons() )
-  {
-    return QString( "<font color=red><b>!!</b></font> " );
-  }
-  else
-  {
-    QString text_important_prefix = QString( "%1 " );
-    QString emoticon_text = QString::fromUtf8( "‼" );
-    if( !Settings::instance().useNativeEmoticons() )
-    {
-      Emoticon e = EmoticonManager::instance().emoticon( emoticon_text );
-      int emoticon_size = 14;
-      return text_important_prefix.arg( e.toHtml( emoticon_size ) );
-    }
-    else
-      return text_important_prefix.arg( emoticon_text );
-  }
+  return QString( "<font color=red><b>!!</b></font> " );
 }
 
 static QString textImportantSuffix()
@@ -116,19 +100,22 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
   if( cm.isImportant() )
     html_message.append( textImportantSuffix() );
 
-  if( last_user_id == ID_SYSTEM_MESSAGE )
+  if( !use_chat_compact )
   {
-    if( !skip_system_message && !use_chat_compact )
+    if( last_user_id == ID_SYSTEM_MESSAGE )
+    {
+      if( !skip_system_message )
+        html_message.prepend( QLatin1String( "<br>" ) );
+    }
+    else if( last_user_id == ID_IMPORTANT_MESSAGE || cm.isImportant() )
+    {
       html_message.prepend( QLatin1String( "<br>" ) );
-  }
-  else if( last_user_id == ID_IMPORTANT_MESSAGE || cm.isImportant() )
-  {
-    html_message.prepend( QLatin1String( "<br>" ) );
-  }
-  else
-  {
-    if( !append_message_to_previous && !use_chat_compact )
-      html_message.prepend( QLatin1String( "<br>" ) );
+    }
+    else
+    {
+      if( !append_message_to_previous )
+        html_message.prepend( QLatin1String( "<br>" ) );
+    }
   }
 
   html_message += QLatin1String( "<br>" );
@@ -147,19 +134,26 @@ QString GuiChatMessage::formatSystemMessage( const ChatMessage& cm, VNumber last
                            .arg( Settings::instance().chatSystemTextColor() )
                            .arg( date_time_stamp.isEmpty() ? date_time_stamp : QString( "(%1) " ).arg( date_time_stamp ) )
                            .arg( cm.message() );
-
   if( cm.isImportant() )
   {
     html_message.prepend( textImportantPrefix() );
     html_message.append( textImportantSuffix() );
-    if( !use_chat_compact )
-      html_message.append( QLatin1String( "<br>" ) );
   }
 
   html_message.append( QLatin1String( "<br>" ) );
 
-  if( !use_chat_compact && cm.type() != ChatMessage::Other && last_user_id != ID_SYSTEM_MESSAGE )
-    html_message.prepend( QLatin1String( "<br>" ) );
+  if( !use_chat_compact )
+  {
+    if( cm.type() != ChatMessage::Other && last_user_id != ID_SYSTEM_MESSAGE )
+    {
+      html_message.prepend( QLatin1String( "<br>" ) );
+    }
+    else
+    {
+      if( cm.isImportant() )
+        html_message.prepend( QLatin1String( "<br>" ) );
+    }
+  }
 
   return html_message;
 }

@@ -878,7 +878,7 @@
     </message>
     <message>
         <source>Select All</source>
-        <translation>全選</translation>
+        <translation type="vanished">全選</translation>
     </message>
     <message>
         <source>Word completer is enabled</source>
@@ -898,7 +898,7 @@
     </message>
     <message>
         <source>Please select a file to save the messages of the chat.</source>
-        <translation>請選擇檔案儲存聊天訊息.</translation>
+        <translation type="vanished">請選擇檔案儲存聊天訊息.</translation>
     </message>
     <message>
         <source>Clear messages</source>
@@ -993,7 +993,19 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>go to the history to see them all</source>
+        <source>Select all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>open %1 to read them all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>the saved chat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select a file to save all the messages of the chat.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1161,6 +1173,10 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Marks the message as important</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send this message to all users individually</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1437,7 +1453,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Select All</source>
-        <translation type="unfinished">全選</translation>
+        <translation type="obsolete">全選</translation>
     </message>
     <message>
         <source>Copy to clipboard</source>
@@ -1450,6 +1466,10 @@ Please select a different name.</source>
     <message>
         <source>Show the timestamp</source>
         <translation type="unfinished">顯示時間旗標</translation>
+    </message>
+    <message>
+        <source>Select all</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1602,7 +1622,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Select All</source>
-        <translation>全選</translation>
+        <translation type="vanished">全選</translation>
     </message>
     <message>
         <source>Open file</source>
@@ -1623,6 +1643,10 @@ Please select a different name.</source>
     <message>
         <source>Right click to open menu</source>
         <translation type="unfinished">滑鼠右擊開啟選單</translation>
+    </message>
+    <message>
+        <source>Select all</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1865,7 +1889,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Chat histories</source>
-        <translation>聊天紀錄</translation>
+        <translation type="vanished">聊天紀錄</translation>
     </message>
     <message>
         <source>Configure network...</source>
@@ -1917,7 +1941,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Do you want to delete this saved chat?</source>
-        <translation>你要刪除此儲存的對話嗎?</translation>
+        <translation type="vanished">你要刪除此儲存的對話嗎?</translation>
     </message>
     <message>
         <source>Save messages</source>
@@ -2796,10 +2820,6 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Please select the maximum number of lines to be saved in the conversation (current: %1).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Clean the cache from items older than %1 days</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2817,6 +2837,22 @@ Please select a different name.</source>
     </message>
     <message>
         <source>(current: %1, default: %2, all: -1, none: 0)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Saved chats</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to delete saved chat with %1?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select the maximum number of lines to be saved in the chat (current: %1).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There are no messages saved in the chat with %1.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2844,7 +2880,11 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Select All</source>
-        <translation>全選</translation>
+        <translation type="vanished">全選</translation>
+    </message>
+    <message>
+        <source>Select all</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3221,7 +3261,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Find text in chat</source>
-        <translation type="unfinished">搜尋聊天文字</translation>
+        <translation type="obsolete">搜尋聊天文字</translation>
     </message>
     <message>
         <source>Copy to clipboard</source>
@@ -3241,11 +3281,75 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">刪除</translation>
+        <translation type="obsolete">刪除</translation>
     </message>
     <message>
         <source>%1 not found in chat.</source>
-        <translation type="unfinished">%1 在聊天內找不到.</translation>
+        <translation type="obsolete">%1 在聊天內找不到.</translation>
+    </message>
+    <message>
+        <source>Right click to open menu</source>
+        <translation type="unfinished">滑鼠右擊開啟選單</translation>
+    </message>
+    <message>
+        <source>Show the toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished">搜尋</translation>
+    </message>
+    <message>
+        <source>keyword</source>
+        <translation type="unfinished">關鍵字</translation>
+    </message>
+    <message>
+        <source>Find</source>
+        <translation type="unfinished">搜尋</translation>
+    </message>
+    <message>
+        <source>Case sensitive</source>
+        <translation type="unfinished">大小寫有差異</translation>
+    </message>
+    <message>
+        <source>Whole word</source>
+        <translation type="unfinished">整個字詞</translation>
+    </message>
+    <message>
+        <source>Save as</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear messages</source>
+        <translation type="unfinished">清除訊息</translation>
+    </message>
+    <message>
+        <source>Saved chat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>end of messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 not found</source>
+        <translation type="unfinished">%1 找不到</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select a file to save the messages of the chat.</source>
+        <translation type="obsolete">請選擇檔案儲存聊天訊息.</translation>
+    </message>
+    <message>
+        <source>%1: save completed.</source>
+        <translation type="unfinished">%1: 儲存完畢.</translation>
+    </message>
+    <message>
+        <source>Please select a file where to save the messages showed in this window.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
