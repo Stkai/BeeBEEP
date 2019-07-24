@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=BeeBEEP
+Version=1.0
+Exec=/usr/local/bin/beebeep
+Comment=BeeBEEP free office messenger
+Icon=/usr/local/share/beebeep/beebeep.png
+Type=Application
+Terminal=false
+StartupNotify=true
+Encoding=UTF-8
+Categories=InstantMessaging;
