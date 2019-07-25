@@ -22,7 +22,13 @@ TARGET = beebeep
 
 QT += network xml
 greaterThan(QT_MAJOR_VERSION, 4): {
-  QT += widgets multimedia printsupport
+  QT += widgets printsupport
+}
+
+win32|unix {
+  greaterThan(QT_MAJOR_VERSION, 4): {
+    QT += multimedia
+  }
 }
 
 unix:!macx:!android: equals(QT_MAJOR_VERSION, 4) {

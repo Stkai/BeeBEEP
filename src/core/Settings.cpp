@@ -1171,7 +1171,10 @@ void Settings::load()
 #endif
 
   m_logPath = checkFolderPath( Bee::convertToNativeFolderSeparator( sets->value( "LogFolderPath", dataFolder() ).toString() ), dataFolder() );
-  m_pluginPath = checkFolderPath( Bee::convertToNativeFolderSeparator( sets->value( "PluginPath", defaultPluginFolderPath( true ) ).toString() ), defaultPluginFolderPath( true ) );
+  QString plugin_folder_path = defaultPluginFolderPath( true );
+  if( plugin_folder_path.isNull() )
+    plugin_folder_path = resourceFolder();
+  m_pluginPath = checkFolderPath( Bee::convertToNativeFolderSeparator( sets->value( "PluginPath", plugin_folder_path ).toString() ), plugin_folder_path );
   m_languagePath = checkFolderPath( Bee::convertToNativeFolderSeparator( sets->value( "LanguagePath", resourceFolder() ).toString() ), resourceFolder() );
   m_keyEscapeMinimizeInTray = sets->value( "KeyEscapeMinimizeInTray", false ).toBool();
 #ifdef Q_OS_MAC

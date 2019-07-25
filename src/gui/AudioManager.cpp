@@ -56,6 +56,12 @@ void AudioManager::clearBeep()
   }
 }
 
+#ifdef Q_OS_OS2
+void AudioManager::playBeep()
+{
+  QApplication::beep();
+}
+#else
 void AudioManager::playBeep()
 {
   if( !mp_sound )
@@ -88,3 +94,4 @@ void AudioManager::playBeep()
   else
     QApplication::beep();
 }
+#endif

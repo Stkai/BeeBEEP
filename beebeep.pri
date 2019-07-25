@@ -1,7 +1,16 @@
 
 macx: {
-  CONFIG += app_bundle
   QMAKE_INFO_PLIST = $$PWD/misc/Info.plist
+}
+
+macx: {
+  CONFIG(debug,debug|release) {
+    CONFIG -= app_bundle
+    message( Building BeeBEEP without BUNDLE )
+  } else {
+    CONFIG += app_bundle
+    message( Building BeeBEEP BUNDLE )
+  }
 }
 
 win32-msvc: {
