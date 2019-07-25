@@ -249,25 +249,28 @@ void GuiLog::refreshLog()
 
   if( !plain_text.isEmpty() )
   {
-    bool block_scrolling = false;
-    QScrollBar *bar = mp_teLog->verticalScrollBar();
-    if( bar )
+    if( !mp_teLog->document()->isEmpty() )
     {
-      if( bar->isSliderDown() || bar->maximum() != bar->value() )
-        block_scrolling = true;
-    }
-
-    QTextCursor cursor( mp_teLog->textCursor() );
-    cursor.movePosition( QTextCursor::End );
-    cursor.insertText( plain_text );
-
-    if( !block_scrolling )
-    {
+      bool block_scrolling = false;
+      QScrollBar *bar = mp_teLog->verticalScrollBar();
       if( bar )
-        bar->setValue( bar->maximum() );
-      else
-        mp_teLog->ensureCursorVisible();
+      {
+        if( bar->isSliderDown() || bar->value() == 0 || bar->maximum() != bar->value() )
+          block_scrolling = true;
+      }
+
+      QTextCursor cursor( mp_teLog->textCursor() );
+      cursor.movePosition( QTextCursor::End );
+      cursor.insertText( plain_text );
+
+      if( !block_scrolling )
+      {
+        if( bar )
+          bar->setValue( bar->maximum() );
+      }
     }
+    else
+      mp_teLog->setPlainText( plain_text );
   }
 }
 

@@ -234,7 +234,7 @@ bool Core::sendScreenshotToChat( VNumber chat_id )
   }
 
   QString screenshot_format = Settings::instance().shareDesktopImageType();
-  QString screenshot_initial_path = Settings::instance().resourceFolder() +
+  QString screenshot_initial_path = Settings::instance().cacheFolder() +
                                     QString( "/beesshottmp-%1." ).arg( Bee::dateTimeStringSuffix( QDateTime::currentDateTime() ) )
                                     + screenshot_format;
   QString file_path = Bee::uniqueFilePath( screenshot_initial_path, false );

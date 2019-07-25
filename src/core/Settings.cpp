@@ -197,9 +197,77 @@ Settings::Settings()
   resetAllColors();
 }
 
-void Settings::initFolders( const QString& app_folder )
+QStringList Settings::resourceFolders() const
 {
+  QStringList system_folders;
+  system_folders.append( dataFolder() );
+  system_folders.append( resourceFolder() );
+#ifdef Q_OS_MAC
+  QDir mac_plugin_dir( QApplication::applicationDirPath() );
+  if( mac_plugin_dir.cdUp() && mac_plugin_dir.cd( "PlugIns" ) )
+    system_folders.append( Bee::convertToNativeFolderSeparator( mac_plugin_dir.absolutePath() ) );
+#endif
+#ifdef Q_OS_UNIX
+  system_folders.append( QLatin1String( "/etc/beebeep/" ) );
+  system_folders.append( QLatin1String( "/usr/local/etc/beebeep/" ) );
+  system_folders.append( QLatin1String( "/usr/lib/beebeep/" ) );
+  system_folders.append( QLatin1String( "/usr/local/lib/beebeep/" ) );
+#endif
+  return system_folders;
+}
+
+QStringList Settings::dataFolders() const
+{
+  QStringList system_folders;
+  system_folders.append( dataFolder() );
+#ifdef Q_OS_UNIX
+  system_folders.append( QLatin1String( "/usr/share/beebeep/" ) );
+  system_folders.append( QLatin1String( "/usr/local/share/beebeep/" ) );
+#endif
+  system_folders.append( cacheFolder() );
+  return system_folders;
+}
+
+QString Settings::findFileInFolders( const QString& file_name, const QStringList& folder_list ) const
+{
+  qDebug() << "Searching file" << qPrintable( file_name );
+  foreach( QString folder_path, folder_list )
+  {
+    folder_path = Bee::convertToNativeFolderSeparator( folder_path );
+    if( !folder_path.endsWith( Bee::naviveFolderSeparator() ) )
+      folder_path.append( Bee::naviveFolderSeparator() );
+    QString file_path = folder_path + file_name;
+    QFileInfo fi( file_path );
+    if( fi.exists() )
+    {
+      qDebug() << "File found:" << qPrintable( file_path );
+      if( !fi.isReadable() )
+        qWarning() << "Skip file" << qPrintable( file_path ) << "because is not readable";
+      else
+        return file_path;
+    }
+    else
+      qDebug() << "File not found in folder:" << qPrintable( folder_path );
+  }
+  return QString::null;
+}
+
+void Settings::initFolders()
+{
+  QString app_folder = Bee::convertToNativeFolderSeparator( QApplication::applicationDirPath() );
+  qDebug() << "Applicaction folder:" << qPrintable( app_folder );
+
+#ifdef Q_OS_MAC
+  QDir macos_dir( app_folder );
+  if( macos_dir.cdUp() && macos_dir.cd( "Resources" ) )
+    m_resourceFolder = Bee::convertToNativeFolderSeparator( macos_dir.absolutePath() );
+  else
+    m_resourceFolder = app_folder;
+#else
   m_resourceFolder = app_folder;
+#endif
+  qDebug() << "Resource folder:" << qPrintable( m_resourceFolder );
+
 #if QT_VERSION >= 0x050400
   m_dataFolder = Bee::convertToNativeFolderSeparator( QStandardPaths::writableLocation( QStandardPaths::AppDataLocation ) );
 #elif QT_VERSION >= 0x050000
@@ -223,15 +291,6 @@ void Settings::resetAllColors()
   m_chatBackgroundColor = "#ffffff";
   m_chatDefaultTextColor = "#555555";
   m_chatSystemTextColor = "#808080";
-}
-
-int Settings::defaultChatMessagesToShow() const
-{
-#if QT_VERSION >= 0x050000
-  return 800;
-#else
-  return 400;
-#endif
 }
 
 void Settings::createApplicationUuid()
@@ -337,7 +396,7 @@ QString Settings::createLocalUserHash()
 
 bool Settings::createDefaultRcFile()
 {
-  QFileInfo rc_file_info = defaultRcFilePath( false );
+  QFileInfo rc_file_info( dataFolder() + Bee::naviveFolderSeparator() + QLatin1String( "beebeep.rc" ) );
   if( rc_file_info.exists() )
   {
     qDebug() << "RC default configuration file exists in" << qPrintable( rc_file_info.absoluteFilePath() );
@@ -401,30 +460,14 @@ bool Settings::createDefaultRcFile()
 
 void Settings::loadRcFile()
 {
-  QFileInfo rc_file_info( defaultRcFilePath( true ) );
-  QString rc_file_path = Bee::convertToNativeFolderSeparator( rc_file_info.absoluteFilePath() );
-  qDebug() << "Check for RC file in current path:" << qPrintable( rc_file_path );
-  if( !rc_file_info.exists() || !rc_file_info.isReadable() )
+  QString rc_file_path = findFileInFolders( "beebeep.rc", resourceFolders() );
+  if( rc_file_path.isNull() )
   {
-#ifdef Q_OS_UNIX
-    rc_file_path = QLatin1String( "/etc/beebeep/beebeep.rc" );
-    rc_file_info = QFileInfo( rc_file_path );
-    qDebug() << "Check for RC file in system path:" << qPrintable( rc_file_path );
-    if( !rc_file_info.exists() || !rc_file_info.isReadable() )
-    {
-#endif
-    rc_file_info = QFileInfo( defaultRcFilePath( false ) );
-    rc_file_path = Bee::convertToNativeFolderSeparator( rc_file_info.absoluteFilePath() );
-    qDebug() << "Check for RC file in custom path:" << qPrintable( rc_file_path );
-    if( !rc_file_info.exists() || !rc_file_info.isReadable() )
-    {
-      qDebug() << "RC file not found:" << qPrintable( programName() ) << "uses default RC configuration";
-      return;
-    }
-#ifdef Q_OS_UNIX
-    }
-#endif
+    qDebug() << "RC configuration file not found";
+    return;
   }
+  else
+    qDebug() << "Loading settings from RC configuration file";
 
   QSettings* sets = new QSettings( rc_file_path, QSettings::IniFormat );
   sets->setFallbacksEnabled( false );
@@ -524,25 +567,26 @@ bool Settings::createDefaultHostsFile()
   sl << "#";
   sl << " ";
 
-  QFile file_host_ini( defaultHostsFilePath( false ) );
-  if( file_host_ini.exists() )
+  QString file_hosts_path = dataFolder() + Bee::naviveFolderSeparator() + QLatin1String( "beehosts.ini" );
+  QFile file_hosts_ini( file_hosts_path );
+  if( file_hosts_ini.exists() )
   {
-    qDebug() << "HOSTS default configuration file exists in" << file_host_ini.fileName();
+    qDebug() << "HOSTS default configuration file exists in" << qPrintable( file_hosts_path );
     return false;
   }
 
-  if( file_host_ini.open( QIODevice::WriteOnly ) )
+  if( file_hosts_ini.open( QIODevice::WriteOnly ) )
   {
-    QTextStream ts( &file_host_ini );
+    QTextStream ts( &file_hosts_ini );
     foreach( QString line, sl )
       ts << line << endl;
-    file_host_ini.close();
-    qDebug() << "HOSTS default configuration file created in" << file_host_ini.fileName();
+    file_hosts_ini.close();
+    qDebug() << "HOSTS default configuration file created in" << qPrintable( file_hosts_path );
     return true;
   }
   else
   {
-    qWarning() << "Unable to create the HOSTS default configuration file in" << file_host_ini.fileName();
+    qWarning() << "Unable to create the HOSTS default configuration file in" << qPrintable( file_hosts_path );
     return false;
   }
 }
@@ -740,7 +784,6 @@ QString Settings::operatingSystem( bool use_long_name ) const
   os_name_long = "Raspberry PI";
   os_name_short = "PI";
 #endif
-
   return use_long_name ? os_name_long : os_name_short;
 }
 
@@ -847,34 +890,21 @@ void Settings::setLocalUserHost( const QHostAddress& host_address, quint16 host_
     m_localUser.setNetworkAddress( NetworkAddress( host_address, host_port ) );
 }
 
+QString Settings::defaultHostsFilePath() const
+{
+  return findFileInFolders( QLatin1String( "beehosts.ini" ), resourceFolders() );
+}
+
 void Settings::loadBroadcastAddressesFromFileHosts()
 {
   if( !m_broadcastAddressesInFileHosts.isEmpty() )
     m_broadcastAddressesInFileHosts.clear();
 
-  QFileInfo hosts_file_info( defaultHostsFilePath( true ) );
-  QString hosts_file_path = Bee::convertToNativeFolderSeparator( hosts_file_info.absoluteFilePath() );
-  qDebug() << "Check for HOSTS file in current path:" << qPrintable( hosts_file_path );
-  if( !hosts_file_info.exists() || !hosts_file_info.isReadable() )
+  QString hosts_file_path = defaultHostsFilePath();
+  if( hosts_file_path.isNull() )
   {
-#ifdef Q_OS_UNIX
-    hosts_file_path = QLatin1String( "/etc/beebeep/beehosts.ini" );
-    hosts_file_info = QFileInfo( hosts_file_path );
-    qDebug() << "Check for HOSTS file in system path:" << qPrintable( hosts_file_path );
-    if( !hosts_file_info.exists() || !hosts_file_info.isReadable() )
-    {
-#endif
-      hosts_file_info = QFileInfo( defaultHostsFilePath( false ) );
-      hosts_file_path = Bee::convertToNativeFolderSeparator( hosts_file_info.absoluteFilePath() );
-      qDebug() << "Check for HOSTS file in custom path:" << qPrintable( hosts_file_path );
-      if( !hosts_file_info.exists() || !hosts_file_info.isReadable() )
-      {
-        qDebug() << "HOSTS file not found";
-        return;
-      }
-#ifdef Q_OS_UNIX
-    }
-#endif
+    qDebug() << "HOSTS file not found";
+    return;
   }
 
   QFile file( hosts_file_path );
@@ -1809,20 +1839,6 @@ void Settings::clearNativeSettings()
     sets.clear();
 }
 
-void Settings::setResourceFolder()
-{
-  m_resourceFolder = Bee::convertToNativeFolderSeparator( QApplication::applicationDirPath() );
-
-#ifdef Q_OS_MAC
-  QDir macos_dir( m_resourceFolder );
-  macos_dir.cdUp();
-  macos_dir.cd( "Resources" );
-  m_resourceFolder = macos_dir.absolutePath();
-#endif
-
-  qDebug() << "Resource folder:" << qPrintable( m_resourceFolder );
-}
-
 bool Settings::setDataFolder()
 {
   m_dataFolder = Bee::convertToNativeFolderSeparator( m_resourceFolder );
@@ -1926,18 +1942,6 @@ QString Settings::unsentMessagesFilePath() const
   return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder() ).arg( "beebeep.off" ) );
 }
 
-QString Settings::defaultHostsFilePath( bool use_resource_folder ) const
-{
-  QString root_folder = use_resource_folder ? resourceFolder() : dataFolder();
-  return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( root_folder ).arg( QLatin1String( "beehosts.ini" ) ) );
-}
-
-QString Settings::defaultRcFilePath( bool use_resource_folder ) const
-{
-  QString root_folder = use_resource_folder ? resourceFolder() : dataFolder();
-  return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( root_folder ).arg( QLatin1String( "beebeep.rc" ) ) );
-}
-
 QString Settings::defaultSettingsFilePath() const
 {
   return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder() ).arg( QLatin1String( "beebeep.ini" ) ) );
@@ -1951,27 +1955,19 @@ QString Settings::defaultBeepFilePath( bool use_resource_folder ) const
 
 QString Settings::defaultPluginFolderPath( bool use_resource_folder ) const
 {
-#ifdef Q_OS_MAC
-  QString macx_plugins_path = resourceFolder();
-  if( macx_plugins_path.endsWith( "Contents/Resources", Qt::CaseInsensitive ) )
+  if( use_resource_folder )
   {
-     QDir macx_plugins_dir( macx_plugins_path );
-     if( macx_plugins_dir.cdUp() )
-     {
-       if( macx_plugins_dir.cd( "PlugIns" ) )
-         macx_plugins_path = macx_plugins_dir.absolutePath();
-     }
+    QString test_plugin_file = QString( "libnumbertextmarker." ) + Bee::pluginFileExtension();
+    QString test_plugin_path = findFileInFolders( test_plugin_file, resourceFolders() );
+    if( !test_plugin_path.isNull() )
+    {
+      QFileInfo fi_plugin( test_plugin_path );
+      return Bee::convertToNativeFolderSeparator( fi_plugin.absolutePath() );
+    }
+    return resourceFolder();
   }
-  return use_resource_folder ? macx_plugins_path : dataFolder();
-#else
-  return use_resource_folder ? resourceFolder() : dataFolder();
-#endif
-}
-
-QString Settings::defaultGroupsFilePath( bool use_resource_folder ) const
-{
-  QString root_folder = use_resource_folder ? resourceFolder() : dataFolder();
-  return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( root_folder ).arg( QLatin1String( "beegroups.ini" ) ) );
+  else
+    return dataFolder();
 }
 
 QString Settings::simpleEncrypt( const QString& text_to_encrypt )
@@ -2020,4 +2016,13 @@ QString Settings::guiCustomListStyleSheet( const QString& background_color, cons
 QString Settings::autoresponderName() const
 {
   return QT_TRANSLATE_NOOP( "Settings", "Autoresponder" );
+}
+
+int Settings::defaultChatMessagesToShow() const
+{
+#if QT_VERSION >= 0x050000
+  return 800;
+#else
+  return 400;
+#endif
 }

@@ -150,11 +150,8 @@ void GuiNetwork::checkAndSearch()
 
 void GuiNetwork::showFileHosts()
 {
-  QString hosts_file_path = Settings::instance().defaultHostsFilePath( true );
-  if( !QFile::exists( hosts_file_path ) )
-    hosts_file_path = Settings::instance().defaultHostsFilePath( false );
-
-  if( !Bee::showFileInGraphicalShell( hosts_file_path ) )
+  QString hosts_file_path = Settings::instance().defaultHostsFilePath();
+  if( hosts_file_path.isNull() || !Bee::showFileInGraphicalShell( hosts_file_path ) )
     QMessageBox::information( this, Settings::instance().programName(), QString( "%1\n%2" ).arg( hosts_file_path ).arg( tr( "File HOSTS not found." ) ), tr( "Ok" ) );
 }
 

@@ -36,7 +36,7 @@ class Settings
 public:
   QSettings* objectSettings() const; // deleteLater instance after call
 
-  void initFolders( const QString& app_folder );
+  void initFolders();
   bool enableSaveData() const;
 
   QString currentSettingsFilePath() const;
@@ -45,7 +45,6 @@ public:
   QString accountNameFromSystemEnvinroment() const;
   void createLocalUser( const QString& user_name );
   QString createLocalUserHash();
-  void setResourceFolder();
   bool setDataFolder();
   bool createDefaultRcFile();
   bool createDefaultHostsFile();
@@ -70,12 +69,10 @@ public:
   inline const QString& dataFolder() const;
   inline const QString& resourceFolder() const;
   inline const QString& cacheFolder() const;
-  QString defaultHostsFilePath( bool use_resource_folder ) const;
-  QString defaultRcFilePath( bool use_resource_folder ) const;
   QString defaultSettingsFilePath() const;
   QString defaultBeepFilePath( bool use_resource_folder ) const;
   QString defaultPluginFolderPath( bool use_resource_folder ) const;
-  QString defaultGroupsFilePath( bool use_resource_folder ) const;
+  QString defaultHostsFilePath() const;
 
   bool isDevelopmentVersion( const QString& v = QString::null ) const;
   QString version( bool qt_version, bool debug_info ) const;
@@ -574,6 +571,9 @@ protected:
   QString checkFolderPath( const QString& folder_path, const QString& default_value );
   QString defaultCacheFolderPath() const;
   bool isFileImageInCache( const QString& ) const;
+  QString findFileInFolders( const QString&, const QStringList& ) const;
+  QStringList resourceFolders() const;
+  QStringList dataFolders() const;
 
 private:
   QString m_resourceFolder;

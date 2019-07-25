@@ -910,3 +910,14 @@ QColor Bee::selectColor( QWidget* w, const QColor& default_color )
 {
   return QColorDialog::getColor( default_color, w );
 }
+
+QString Bee::pluginFileExtension()
+{
+#if defined Q_OS_MAC
+  return QLatin1String( "dylib" );
+#elif defined Q_OS_UNIX
+  return QLatin1String( "so" );
+#else
+  return QLatin1String( "dll" );
+#endif
+}

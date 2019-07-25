@@ -87,6 +87,7 @@ namespace Bee
   bool areStringListEqual( const QStringList&, const QStringList&, Qt::CaseSensitivity cs = Qt::CaseInsensitive );
   QString dateTimeToString( const QDateTime& );
   QString beeColorsToHtmlText( const QString& );
+  QString pluginFileExtension();
 
 }
 
