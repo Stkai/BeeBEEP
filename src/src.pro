@@ -6,6 +6,16 @@ CONFIG(debug,debug|release) {
   message( Building BeeBEEP in Release Mode )
 }
 
+macx: {
+  CONFIG(debug,debug|release) {
+    CONFIG -= app_bundle
+    message( Building BeeBEEP without BUNDLE )
+  } else {
+    CONFIG += app_bundle
+    message( Building BeeBEEP BUNDLE )
+  }
+}
+
 message( Qt version: $$[QT_VERSION] )
 
 include(../beebeep.pri)
@@ -45,6 +55,11 @@ unix:!macx:!android: {
 macx: {
   QMAKE_LFLAGS += -F/System/Library/Frameworks/ApplicationServices.framework
   LIBS += -framework ApplicationServices
+  lessThan( QT_MAJOR_VERSION, 5) | lessThan(QT_MINOR_VERSION, 9) {
+    QMAKE_INFO_PLIST = ../misc/Info_legacy.plist
+  } else {
+    QMAKE_INFO_PLIST = ../misc/Info.plist
+  }
 }
 
 win32: {
@@ -81,6 +96,8 @@ win32: RC_FILE = beebeep.rc
 macx: ICON = beebeep.icns
 macx: include(mdns/mdns.pri)
 
+message( Config: $$CONFIG )
 message( Libs: $$LIBS )
 message( Defines: $$DEFINES )
 message( Resources: $$RESOURCES )
+macx: message( Info.plist: $$QMAKE_INFO_PLIST )
