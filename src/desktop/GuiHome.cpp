@@ -113,7 +113,6 @@ int GuiHome::loadSystemMessages()
 {
   int num_sys_msg = 0;
   mp_teSystem->clear();
-  Bee::setBackgroundColor( mp_teSystem, QColor( Settings::instance().homeBackgroundColor() ) );
   Chat c = ChatManager::instance().defaultChat();
   foreach( ChatMessage cm, c.messages() )
   {
@@ -183,6 +182,13 @@ void GuiHome::selectBackgroundColor()
   if( c.isValid() )
   {
     Settings::instance().setHomeBackgroundColor( c.name() );
-    Bee::setBackgroundColor( mp_teSystem, c );
+    updateBackground();
   }
+}
+
+void GuiHome::updateBackground()
+{
+  if( Settings::instance().useDarkStyle() && Settings::instance().homeBackgroundColor() == Settings::instance().defaultSystemBackgroundColor() )
+    return;
+  mp_teSystem->setStyleSheet( QString( "#GuiSystemViewer { background-color: %1; }" ).arg( Settings::instance().homeBackgroundColor() ) );
 }

@@ -59,6 +59,8 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
   m_jobsInProgress = 0;
   mp_tickManager = Q_NULLPTR;
 
+  m_defaultCss = styleSheet();
+
 #ifdef Q_OS_LINUX
   m_xcbConnectHasError = true;
   if( testAttribute( Qt::AA_DontShowIconsInMenus ) )
@@ -375,3 +377,8 @@ bool BeeApplication::isDesktopLocked()
   return m_isDesktopLocked;
 }
 #endif
+
+void BeeApplication::resetStyle()
+{
+  setStyleSheet( m_defaultCss );
+}

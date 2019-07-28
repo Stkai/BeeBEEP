@@ -210,20 +210,6 @@ int main( int argc, char *argv[] )
   if( Settings::instance().autoUserAway() )
     bee_app.setIdleTimeout( Settings::instance().userAwayTimeout() );
 
-  if( Settings::instance().useDarkStyle() )
-  {
-    qDebug() << "Darkstyle mode enabled";
-    QFile f(":qdarkstyle/style.qss");
-    if( f.exists() )
-    {
-      f.open( QFile::ReadOnly | QFile::Text );
-      QTextStream ts( &f );
-      qApp->setStyleSheet( ts.readAll() );
-    }
-    else
-      qWarning() << "Unable to set Darkstyle mode: file not found";
-  }
-
   Core bee_core;
   bee_core.loadUsersAndGroups();
 
@@ -241,6 +227,7 @@ int main( int argc, char *argv[] )
   QObject::connect( &bee_app, SIGNAL( sleepRequest() ), &mw, SLOT( onSleepRequest() ) );
   QObject::connect( &bee_app, SIGNAL( wakeUpRequest() ), &mw, SLOT( onWakeUpRequest() ) );
   QObject::connect( &bee_app, SIGNAL( focusChanged( QWidget*, QWidget* ) ), &mw, SLOT( onApplicationFocusChanged( QWidget*, QWidget* ) ) );
+  mw.loadStyle();
   QMetaObject::invokeMethod( &mw, "checkWindowFlagsAndShow", Qt::QueuedConnection );
   qDebug() << "Loading saved session";
   mw.loadSession();

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>480</width>
-    <height>380</height>
+    <width>500</width>
+    <height>400</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -132,6 +132,18 @@
      <layout class="QGridLayout" name="gridLayout">
       <item row="0" column="0">
        <widget class="QLabel" name="mp_lNickname">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>76</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="text">
          <string>Nickname</string>
         </property>
@@ -140,7 +152,7 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="1" colspan="2">
+      <item row="0" column="1">
        <widget class="QLineEdit" name="mp_leNickname">
         <property name="text">
          <string/>
@@ -152,6 +164,18 @@
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="mp_lFirstName">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>76</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="text">
          <string>First name</string>
         </property>
@@ -160,7 +184,7 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="1" colspan="2">
+      <item row="1" column="1">
        <widget class="QLineEdit" name="mp_leFirstName">
         <property name="maxLength">
          <number>30</number>
@@ -169,6 +193,18 @@
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="mp_lLastName">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>76</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="text">
          <string>Last name</string>
         </property>
@@ -177,7 +213,7 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="1" colspan="2">
+      <item row="2" column="1">
        <widget class="QLineEdit" name="mp_leLastName">
         <property name="maxLength">
          <number>30</number>
@@ -186,6 +222,18 @@
       </item>
       <item row="3" column="0">
        <widget class="QLabel" name="mp_lBirthday">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>76</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="text">
          <string>Birthday</string>
         </property>
@@ -196,17 +244,14 @@
       </item>
       <item row="3" column="1">
        <widget class="QDateEdit" name="mp_deBirthday">
-        <property name="minimumSize">
-         <size>
-          <width>120</width>
-          <height>0</height>
-         </size>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
-        </property>
-        <property name="showGroupSeparator" stdset="0">
-         <bool>false</bool>
         </property>
         <property name="displayFormat">
          <string>dd/MM/yyyy</string>
@@ -216,21 +261,20 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="2">
-       <spacer name="horizontalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>171</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
       <item row="4" column="0">
        <widget class="QLabel" name="mp_lEmail">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>76</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="text">
          <string>Email</string>
         </property>
@@ -239,7 +283,7 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="1" colspan="2">
+      <item row="4" column="1">
        <widget class="QLineEdit" name="mp_leEmail">
         <property name="maxLength">
          <number>80</number>
@@ -248,6 +292,18 @@
       </item>
       <item row="5" column="0">
        <widget class="QLabel" name="mp_lPhone">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>76</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="text">
          <string>Phone</string>
         </property>
@@ -256,7 +312,7 @@
         </property>
        </widget>
       </item>
-      <item row="5" column="1" colspan="2">
+      <item row="5" column="1">
        <widget class="QLineEdit" name="mp_lePhone">
         <property name="maxLength">
          <number>80</number>

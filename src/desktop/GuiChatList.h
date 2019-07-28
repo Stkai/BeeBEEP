@@ -38,6 +38,7 @@ public:
   inline void setMainToolTip( const QString& );
 
   void updateChats();
+  void updateBackground();
 
 signals:
   void chatSelected( VNumber chat_id );
@@ -64,7 +65,6 @@ protected slots:
 
 protected:
   GuiChatItem* itemFromChatId( VNumber );
-  void updateBackground();
 
 private:
   QMenu* mp_menuContext;

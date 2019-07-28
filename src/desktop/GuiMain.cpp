@@ -1840,8 +1840,10 @@ void GuiMain::settingsChanged( QAction* act )
     refresh_chat = true;
     break;
   case 77:
-    Settings::instance().setUseDarkStyle( act->isChecked() );
-    showRestartApplicationAlertMessage();
+    {
+      Settings::instance().setUseDarkStyle( act->isChecked() );
+      QTimer::singleShot( 0, this, SLOT( loadStyle() ) );
+    }
     break;
   case 78:
     Settings::instance().setalwaysShowFileTransferProgress( act->isChecked() );
@@ -4522,7 +4524,11 @@ void GuiMain::resetAllColors()
     Settings::instance().setUseDarkStyle( false );
     Settings::instance().resetAllColors();
     Settings::instance().save();
-    showRestartApplicationAlertMessage();
+    loadStyle();
+    updateChatColors();
+    GuiFloatingChat* fl_chat = floatingChat( ID_DEFAULT_CHAT );
+    if( fl_chat )
+      fl_chat->guiChat()->updateChatColors();
   }
 }
 
@@ -4724,4 +4730,29 @@ void GuiMain::onNetworkTestWindowClosed()
 {
   if( mp_networkTest )
     mp_networkTest = Q_NULLPTR;
+}
+
+void GuiMain::loadStyle()
+{
+  if( Settings::instance().useDarkStyle() )
+  {
+    qDebug() << "Darkstyle mode enabled";
+    QFile f(":qdarkstyle/style.qss");
+    if( f.exists() )
+    {
+      f.open( QFile::ReadOnly | QFile::Text );
+      QTextStream ts( &f );
+      beeApp->setStyleSheet( ts.readAll() );
+    }
+    else
+      qWarning() << "Unable to set Darkstyle mode: file not found";
+  }
+  else
+    beeApp->resetStyle();
+
+  mp_home->updateBackground();
+  mp_userList->updateBackground();
+  mp_chatList->updateBackground();
+  mp_groupList->updateBackground();
+  mp_savedChatList->updateBackground();
 }

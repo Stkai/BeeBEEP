@@ -79,6 +79,7 @@ signals:
 public slots:
   void checkIdle();
   void forceShutdown();
+  void resetStyle();
 
 protected:
   bool notify( QObject* receiver, QEvent* event );
@@ -120,6 +121,8 @@ private:
   TickManager* mp_tickManager;
 
   QWidget* mp_mainWidget;
+
+  QString m_defaultCss;
 
 };
 

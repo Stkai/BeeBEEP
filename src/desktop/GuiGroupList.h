@@ -43,6 +43,8 @@ public:
 
   void onTickEvent( int );
 
+  void updateBackground();
+
 signals:
   void openChatForGroupRequest( VNumber group_id );
   void createGroupRequest();
@@ -62,7 +64,6 @@ protected slots:
 
 protected:
   GuiGroupItem* itemFromId( VNumber );
-  void updateBackground();
 
 private:
   QAction* mp_actCreateGroup;

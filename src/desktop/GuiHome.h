@@ -44,6 +44,8 @@ public:
 
   void setNews( const QString& );
 
+  void updateBackground();
+
 signals:
   void openUrlRequest( const QUrl& );
 

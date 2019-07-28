@@ -80,6 +80,7 @@ public slots:
   void onWakeUpRequest();
   void onSleepRequest();
   void disconnectFromNetwork();
+  void loadStyle();
 
 private slots:
   void onCoreConnected();

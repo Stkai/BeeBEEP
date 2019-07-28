@@ -44,7 +44,6 @@ GuiGroupList::GuiGroupList( QWidget* parent )
   mp_twGroupList->setSortingEnabled( true );
   mp_twGroupList->setIconSize( Settings::instance().avatarIconSize() );
   mp_twGroupList->setHeaderHidden( true );
-  updateBackground();
 
 #if QT_VERSION >= 0x040700
   mp_leFilter->setPlaceholderText( tr( "Search group" ) );
@@ -294,6 +293,12 @@ void GuiGroupList::selectBackgroundColor()
 
 void GuiGroupList::updateBackground()
 {
+  if( Settings::instance().useDarkStyle() && Settings::instance().groupListBackgroundColor() == Settings::instance().defaultListBackgroundColor() )
+  {
+    if( !mp_twGroupList->styleSheet().isEmpty() )
+      mp_twGroupList->setStyleSheet( QString() );
+    return;
+  }
   QString w_stylesheet = Settings::instance().guiCustomListStyleSheet( Settings::instance().groupListBackgroundColor(),
                                                                   IconManager::instance().iconPath( "group-list.png" ) );
   mp_twGroupList->setStyleSheet( w_stylesheet );

@@ -282,12 +282,12 @@ void Settings::initFolders()
 
 void Settings::resetAllColors()
 {
-  m_homeBackgroundColor = "#f5f5f5";
-  m_defaultChatBackgroundColor = "#f5f5f5";
-  m_userListBackgroundColor = "#ffffff";
-  m_chatListBackgroundColor = "#ffffff";
-  m_groupListBackgroundColor = "#ffffff";
-  m_savedChatListBackgroundColor = "#ffffff";
+  m_homeBackgroundColor = defaultSystemBackgroundColor();
+  m_defaultChatBackgroundColor = defaultSystemBackgroundColor();
+  m_userListBackgroundColor = defaultListBackgroundColor();
+  m_chatListBackgroundColor = defaultListBackgroundColor();
+  m_groupListBackgroundColor = defaultListBackgroundColor();
+  m_savedChatListBackgroundColor = defaultListBackgroundColor();
   m_chatBackgroundColor = "#ffffff";
   m_chatDefaultTextColor = "#555555";
   m_chatSystemTextColor = "#808080";

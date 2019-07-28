@@ -49,6 +49,8 @@ public:
   inline void setMainToolTip( const QString& );
   inline QString mainToolTip() const;
 
+  void updateBackground();
+
   void onTickEvent( int );
 
   void clear();
@@ -73,7 +75,6 @@ protected:
   GuiUserItem* itemFromChatId( VNumber );
   void sortUsers();
   void resetList();
-  void updateBackground();
   void dragEnterEvent( QDragEnterEvent* );
   void dragMoveEvent( QDragMoveEvent* );
   void dropEvent( QDropEvent* );

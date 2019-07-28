@@ -46,7 +46,6 @@ GuiUserList::GuiUserList( QWidget* parent )
   mp_twUsers->setObjectName( "GuiCustomList" );
   mp_twUsers->setMouseTracking( true );
   mp_twUsers->setHeaderHidden( true );
-  updateBackground();
 
   m_filter = "";
   m_blockShowChatRequest = false;
@@ -327,6 +326,12 @@ void GuiUserList::selectBackgroundColor()
 
 void GuiUserList::updateBackground()
 {
+  if( Settings::instance().useDarkStyle() && Settings::instance().userListBackgroundColor() == Settings::instance().defaultListBackgroundColor() )
+  {
+    if( !mp_twUsers->styleSheet().isEmpty() )
+      mp_twUsers->setStyleSheet( QString() );
+    return;
+  }
   QString w_stylesheet = Settings::instance().guiCustomListStyleSheet( Settings::instance().userListBackgroundColor(),
                                                                   IconManager::instance().iconPath( "user-list.png" ) );
   mp_twUsers->setStyleSheet( w_stylesheet );

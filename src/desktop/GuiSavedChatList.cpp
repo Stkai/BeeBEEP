@@ -43,7 +43,6 @@ GuiSavedChatList::GuiSavedChatList( QWidget* parent )
   mp_twSavedChatList->setMouseTracking( true );
   mp_twSavedChatList->setIconSize( Settings::instance().avatarIconSize() );
   mp_twSavedChatList->setHeaderHidden( true );
-  updateBackground();
 
   m_savedChatSelected = "";
   m_blockShowChatRequest = false;
@@ -195,6 +194,12 @@ void GuiSavedChatList::selectBackgroundColor()
 
 void GuiSavedChatList::updateBackground()
 {
+  if( Settings::instance().useDarkStyle() && Settings::instance().savedChatListBackgroundColor() == Settings::instance().defaultListBackgroundColor() )
+  {
+    if( !mp_twSavedChatList->styleSheet().isEmpty() )
+      mp_twSavedChatList->setStyleSheet( QString() );
+    return;
+  }
   QString w_stylesheet = Settings::instance().guiCustomListStyleSheet( Settings::instance().savedChatListBackgroundColor(),
                                                                     IconManager::instance().iconPath( "saved-chat-list.png" ) );
   mp_twSavedChatList->setStyleSheet( w_stylesheet );

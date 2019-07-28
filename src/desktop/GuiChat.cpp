@@ -671,10 +671,15 @@ void GuiChat::selectBackgroundColor()
   if( c.isValid() )
   {
     if( m_chatId == ID_DEFAULT_CHAT )
+    {
       Settings::instance().setDefaultChatBackgroundColor( c.name() );
+      updateChatColors();
+    }
     else
+    {
       Settings::instance().setChatBackgroundColor( c.name() );
-    emit updateChatColorsRequest();
+      emit updateChatColorsRequest();
+    }
   }
 }
 

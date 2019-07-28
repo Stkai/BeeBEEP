@@ -530,11 +530,12 @@ public:
 
   inline void setUseDarkStyle( bool );
   inline bool useDarkStyle() const;
-
-  QString autoresponderName() const;
+  inline QString defaultListBackgroundColor() const;
+  inline QString defaultSystemBackgroundColor() const;
 
   void resetAllColors();
 
+  QString autoresponderName() const;
   inline void setSaveMessagesTimestamp( const QDateTime& );
   inline const QDateTime& saveMessagesTimestamp() const;
 
@@ -1205,5 +1206,7 @@ inline bool Settings::chatSaveSystemMessages() const { return m_chatSaveSystemMe
 inline void Settings::setChatSaveSystemMessages( bool new_value ) { m_chatSaveSystemMessages = new_value; }
 inline int Settings::clearCacheAfterDays() const { return m_clearCacheAfterDays; }
 inline void Settings::setClearCacheAfterDays( int new_value ) { m_clearCacheAfterDays = new_value; }
+inline QString Settings::defaultListBackgroundColor() const { return QLatin1String( "#ffffff" ); }
+inline QString Settings::defaultSystemBackgroundColor() const { return QLatin1String( "#f5f5f5" ); }
 
 #endif // BEEBEEP_SETTINGS_

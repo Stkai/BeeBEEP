@@ -37,6 +37,8 @@ public:
 
   inline void setMainToolTip( const QString& );
 
+  void updateBackground();
+
 signals:
   void savedChatSelected( const QString& );
   void savedChatRemoved( const QString& );
@@ -54,9 +56,6 @@ protected slots:
   void filterText( const QString& );
   void clearFilter();
   void selectBackgroundColor();
-
-protected:
-  void updateBackground();
 
 private:
   QString m_savedChatSelected;
