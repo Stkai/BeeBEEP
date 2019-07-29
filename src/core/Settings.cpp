@@ -2013,7 +2013,7 @@ QString Settings::guiCustomListStyleSheet( const QString& background_color, cons
                    "background-position: bottom center;"
                    "background-attachment: fixed;"
                    "padding-bottom: 32px;"
-                   "color: black; }" ).arg( background_color ).arg( background_image_path );
+                   "}" ).arg( background_color ).arg( background_image_path );
 }
 
 QString Settings::autoresponderName() const

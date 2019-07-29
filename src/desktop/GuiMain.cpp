@@ -1315,6 +1315,9 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actViewFileTransfer );
   mp_barMain->addAction( mp_actViewFileSharing );
+#if defined Q_OS_UNIX
+  setMinimumWidth( mp_barMain->actions().size() * (mp_barMain->iconSize().width()+8) + 20 );
+#endif
 
 }
 
@@ -4136,7 +4139,7 @@ void GuiMain::resetGeometryAndState()
   move( QApplication::desktop()->availableGeometry().width() - frameGeometry().width(),
         QApplication::desktop()->availableGeometry().height() - frameGeometry().height() );
 #elif defined BEEBEEP_FOR_RASPBERRY_PI
-  move( QApplication::desktop()->availableGeometry().width() - frameGeometry().width(), 40 );
+  move( QApplication::desktop()->availableGeometry().width() - frameGeometry().width(), 70 );
 #elif defined Q_OS_MAC
   move( QApplication::desktop()->availableGeometry().width() - frameGeometry().width() - 20, 0 );
 #else
