@@ -62,12 +62,14 @@ protected slots:
   void filterText( const QString& );
   void clearFilter();
   void selectBackgroundColor();
+  void showMenuSettings();
 
 protected:
   GuiChatItem* itemFromChatId( VNumber );
 
 private:
   QMenu* mp_menuContext;
+  QMenu* mp_menuSettings;
   VNumber m_chatSelected;
   bool m_blockShowChatRequest;
   QString m_filter;

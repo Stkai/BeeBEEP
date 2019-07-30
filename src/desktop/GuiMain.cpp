@@ -4141,7 +4141,11 @@ void GuiMain::resetGeometryAndState()
 #elif defined BEEBEEP_FOR_RASPBERRY_PI
   move( QApplication::desktop()->availableGeometry().width() - frameGeometry().width(), 70 );
 #elif defined Q_OS_MAC
-  move( QApplication::desktop()->availableGeometry().width() - frameGeometry().width() - 20, 0 );
+  #if QT_VERSION >= 0x050900
+    move( QApplication::desktop()->availableGeometry().width() - frameGeometry().width(), 0 );
+  #else
+    move( QApplication::desktop()->availableGeometry().width() - frameGeometry().width() - 20, 0 );
+  #endif
 #else
   move( QApplication::desktop()->availableGeometry().width() - frameGeometry().width(), 0 );
 #endif

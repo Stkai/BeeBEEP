@@ -16,6 +16,9 @@
     <height>0</height>
    </size>
   </property>
+  <property name="acceptDrops">
+   <bool>true</bool>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
     <number>0</number>
@@ -34,6 +37,9 @@
    </property>
    <item row="0" column="0">
     <widget class="QTreeWidget" name="mp_twChatList">
+     <property name="contextMenuPolicy">
+      <enum>Qt::CustomContextMenu</enum>
+     </property>
      <column>
       <property name="text">
        <string notr="true">1</string>
@@ -58,6 +64,32 @@
      <property name="bottomMargin">
       <number>2</number>
      </property>
+     <item>
+      <widget class="QPushButton" name="mp_pbSettings">
+       <property name="maximumSize">
+        <size>
+         <width>26</width>
+         <height>26</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>View options</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../beebeep.qrc">
+         <normaloff>:/images/settings.png</normaloff>:/images/settings.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>16</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
      <item>
       <widget class="QLineEdit" name="mp_leFilter">
        <property name="toolTip">
@@ -103,6 +135,7 @@
  </widget>
  <tabstops>
   <tabstop>mp_twChatList</tabstop>
+  <tabstop>mp_pbSettings</tabstop>
   <tabstop>mp_leFilter</tabstop>
   <tabstop>mp_pbClearFilter</tabstop>
  </tabstops>

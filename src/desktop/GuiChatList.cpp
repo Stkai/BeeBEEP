@@ -53,13 +53,14 @@ GuiChatList::GuiChatList( QWidget* parent )
 #endif
 
   mp_menuContext = new QMenu( parent );
-
+  mp_menuSettings = new QMenu( parent );
   mp_pbClearFilter->setIcon( IconManager::instance().icon( "clear.png" ) );
 
   connect( mp_twChatList, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showChatMenu( const QPoint& ) ) );
   connect( mp_twChatList, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( chatClicked( QTreeWidgetItem*, int ) ), Qt::QueuedConnection );
   connect( mp_leFilter, SIGNAL( textChanged( const QString& ) ), this, SLOT( filterText( const QString& ) ) );
   connect( mp_pbClearFilter, SIGNAL( clicked() ), this, SLOT( clearFilter() ) );
+  connect( mp_pbSettings, SIGNAL( clicked() ), this, SLOT( showMenuSettings() ) );
 }
 
 void GuiChatList::updateChats()
@@ -258,4 +259,21 @@ void GuiChatList::updateBackground()
   QString w_stylesheet = Settings::instance().guiCustomListStyleSheet( Settings::instance().chatListBackgroundColor(),
                                                                     IconManager::instance().iconPath( "chat-list.png" ) );
   mp_twChatList->setStyleSheet( w_stylesheet );
+}
+
+void GuiChatList::showMenuSettings()
+{
+  bool create_chat_is_enabled = UserManager::instance().userList().toList().size() >= 2;
+  QAction* act;
+  mp_menuSettings->clear();
+  act = mp_menuSettings->addAction( tr( "Hide empty chats" ), this, SIGNAL( hideEmptyChatsRequest() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().hideEmptyChatsInList() );
+  mp_menuSettings->addSeparator();
+  act = mp_menuSettings->addAction( IconManager::instance().icon( "message-create.png" ), tr( "Write a message" ), this, SIGNAL( createNewMessageRequest() ) );
+  act = mp_menuSettings->addAction( IconManager::instance().icon( "group-create.png" ), tr( "Create new group chat" ), this, SIGNAL( createNewChatRequest() ) );
+  act->setEnabled( create_chat_is_enabled );
+  mp_menuSettings->addSeparator();
+  mp_menuSettings->addAction( IconManager::instance().icon( "background-color.png" ), tr( "Change background color" ) + QString("..."), this, SLOT( selectBackgroundColor() ) );
+  mp_menuSettings->exec( QCursor::pos() );
 }
