@@ -31,7 +31,7 @@
 FileTransferPeer::FileTransferPeer( QObject *parent )
   : QObject( parent ), m_transferType( FileInfo::Upload ), m_id( ID_INVALID ),
     m_fileInfo( ID_INVALID, FileInfo::Upload ), m_file(), m_state( FileTransferPeer::Unknown ),
-    m_bytesTransferred( 0 ), m_totalBytesTransferred( 0 ), m_socket( parent ),
+    m_bytesTransferred( 0 ), m_totalBytesTransferred( 0 ), m_socket(),
     m_time( QTime::currentTime() ), m_socketDescriptor( 0 ), m_remoteUserId( ID_INVALID ), m_serverPort( 0 )
 {
   setObjectName( "FileTransferPeer" );

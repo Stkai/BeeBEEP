@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="tr_TR">
+<TS version="2.0" language="tr_TR">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -986,7 +986,7 @@
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="124"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1055"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1060"/>
         <source>Find text in chat</source>
         <translation>Sohbet İçinde Metin Bul</translation>
     </message>
@@ -1102,68 +1102,68 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="697"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="702"/>
         <source>You must close and reopen this window to see the changes applied.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="724"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="729"/>
         <source>Please select a file to save all the messages of the chat.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="838"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="843"/>
         <source>Do you want to send %1 %2 to the members of this chat?</source>
         <translation>Bu sohbetin üyelerine %1 %2 göndermek ister misiniz?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="953"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="958"/>
         <source>Spell checking is enabled</source>
         <translation>Yazım Denetimi Etkinleştirildi</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="960"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="984"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="965"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="989"/>
         <source>There is not a valid dictionary</source>
         <translation>Geçerli Bir Sözlük Yok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="977"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="982"/>
         <source>Word completer is enabled</source>
         <translation>Kelime Tamamlayıcı Etkinleştirildi</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="979"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="984"/>
         <source>Word completer is disabled</source>
         <translation>Kelime Tamamlayıcı Devre Dışı</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1093"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1098"/>
         <source>%1 not found in chat.</source>
         <translation>%1 sohbette bulunamadı.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1114"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1119"/>
         <source>Do you want to restore the default font?</source>
         <translation>Varsayılan yazı tipini geri yüklemek istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1122"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1127"/>
         <source>Ready.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1133"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1138"/>
         <source>Do you want to send a screenshot?</source>
         <translation>Ekran Görüntüsü göndermek istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1133"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1138"/>
         <source>Yes and hide this chat</source>
         <translation>Evet ve bu sohbeti gizle</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="955"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="960"/>
         <source>Spell checking is disabled</source>
         <translation>Yazım Denetimi Devre Dışı</translation>
     </message>
@@ -1179,7 +1179,7 @@
     </message>
     <message>
         <source>Select All</source>
-        <translation type="vanished">Hepsini Seç</translation>
+        <translation type="obsolete">Hepsini Seç</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="336"/>
@@ -1198,16 +1198,16 @@
     </message>
     <message>
         <source>Please select a file to save the messages of the chat.</source>
-        <translation type="vanished">Sohbet mesajlarını kaydetmek için lütfen bir dosya seçin.</translation>
+        <translation type="obsolete">Sohbet mesajlarını kaydetmek için lütfen bir dosya seçin.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="743"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="748"/>
         <source>%1: save completed.</source>
         <translation>%1: kaydetme tamamlandı.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="697"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="743"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="702"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="748"/>
         <source>Ok</source>
         <translation>Tamam</translation>
     </message>
@@ -1222,46 +1222,46 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="790"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="795"/>
         <source>Unable to save temporary file: %1</source>
         <translation>Geçici dosya kaydedilemiyor: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="839"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="844"/>
         <source>file</source>
         <translation>dosya</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="839"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="844"/>
         <source>files</source>
         <translation>dosyalar</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="840"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1114"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1133"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="845"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1119"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1138"/>
         <source>Yes</source>
         <translation>Evet</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="840"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1114"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1133"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="845"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1119"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1138"/>
         <source>No</source>
         <translation>Hayır</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="853"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="858"/>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
         <translation>QT Kitaplığı bu işletim sistemi için dosyaları Sürükle ve Bırak özelliğini desteklemez. Gönderilecek dosyayı tekrar seçmelisiniz.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="937"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="942"/>
         <source>Use key Return to send message</source>
         <translation>ENTER Tuşunu Mesajı Göndermek İçin Kullan</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="939"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="944"/>
         <source>Use key Return to make a carriage return</source>
         <translation>ENTER Tuşunu Satırbaşı Yapmak İçin Kullan</translation>
     </message>
@@ -1269,22 +1269,25 @@
 <context>
     <name>GuiChatList</name>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="53"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="52"/>
         <source>Search chat</source>
         <translation>Sohbet Ara</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatList.cpp" line="145"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="269"/>
         <source>Hide empty chats</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatList.cpp" line="161"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="273"/>
         <source>Write a message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatList.cpp" line="162"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="274"/>
         <source>Create new group chat</source>
         <translation>Yeni Grup Sohbeti Oluştur</translation>
     </message>
@@ -1310,6 +1313,7 @@
     </message>
     <message>
         <location filename="../src/desktop/GuiChatList.cpp" line="192"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="277"/>
         <source>Change background color</source>
         <translation>Arkaplan Rengini Değiştir</translation>
     </message>
@@ -1322,12 +1326,17 @@
 <context>
     <name>GuiChatListWidget</name>
     <message>
-        <location filename="../src/desktop/GuiChatList.ui" line="64"/>
+        <location filename="../src/desktop/GuiChatList.ui" line="76"/>
+        <source>View options</source>
+        <translation type="unfinished">Seçenekleri Gör</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiChatList.ui" line="96"/>
         <source>Insert keywords</source>
         <translation>Anahtar Kelimeler Ekle</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.ui" line="83"/>
+        <location filename="../src/desktop/GuiChatList.ui" line="115"/>
         <source>Clear keywords</source>
         <translation>Anahtar Kelimeleri Temizle</translation>
     </message>
@@ -1621,7 +1630,7 @@ Lütfen farklı bir isim seçin.</translation>
     </message>
     <message>
         <source>Show the ShareBox</source>
-        <translation type="vanished">Paylaşım Kutusunu Göster</translation>
+        <translation type="obsolete">Paylaşım Kutusunu Göster</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="170"/>
@@ -1766,43 +1775,43 @@ Lütfen farklı bir isim seçin.</translation>
 <context>
     <name>GuiGroupList</name>
     <message>
-        <location filename="../src/desktop/GuiGroupList.cpp" line="50"/>
+        <location filename="../src/desktop/GuiGroupList.cpp" line="49"/>
         <source>Search group</source>
         <translation>Grup Ara</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiGroupList.cpp" line="60"/>
+        <location filename="../src/desktop/GuiGroupList.cpp" line="59"/>
         <source>Create new group chat</source>
         <translation>Yeni Grup Sohbeti Oluştur</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiGroupList.cpp" line="63"/>
+        <location filename="../src/desktop/GuiGroupList.cpp" line="62"/>
         <source>Edit group chat</source>
         <translation>Grup Sohbetini Düzenle</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiGroupList.cpp" line="66"/>
+        <location filename="../src/desktop/GuiGroupList.cpp" line="65"/>
         <source>Open chat</source>
         <translation>Sohbeti Aç</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiGroupList.cpp" line="69"/>
+        <location filename="../src/desktop/GuiGroupList.cpp" line="68"/>
         <source>Enable notifications</source>
         <translation>Bildirimleri Etkinleştir</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiGroupList.cpp" line="72"/>
+        <location filename="../src/desktop/GuiGroupList.cpp" line="71"/>
         <source>Disable notifications</source>
         <translation>Bildirimleri Devre Dışı Bırak</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiGroupList.cpp" line="176"/>
+        <location filename="../src/desktop/GuiGroupList.cpp" line="175"/>
         <source>Please wait for two or more users</source>
         <translation>Lütfen iki veya daha fazla kullanıcı için bekleyiniz</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiGroupList.cpp" line="183"/>
-        <location filename="../src/desktop/GuiGroupList.cpp" line="207"/>
+        <location filename="../src/desktop/GuiGroupList.cpp" line="182"/>
+        <location filename="../src/desktop/GuiGroupList.cpp" line="206"/>
         <source>Change background color</source>
         <translation>Arkaplan Rengini Değiştir</translation>
     </message>
@@ -1829,7 +1838,7 @@ Lütfen farklı bir isim seçin.</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation type="vanished">Hepsini Seç</translation>
+        <translation type="obsolete">Hepsini Seç</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiHome.cpp" line="91"/>
@@ -1980,7 +1989,7 @@ Lütfen farklı bir isim seçin.</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation type="vanished">Hepsini Seç</translation>
+        <translation type="obsolete">Hepsini Seç</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="303"/>
@@ -2068,10 +2077,10 @@ Lütfen farklı bir isim seçin.</translation>
         <translation>Ana Araç Çubuğunu Göster</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3486"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3487"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3488"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3489"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3504"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3505"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3506"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3507"/>
         <source>offline</source>
         <translation>Bağlı Değil</translation>
     </message>
@@ -2079,24 +2088,24 @@ Lütfen farklı bir isim seçin.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="348"/>
         <location filename="../src/desktop/GuiMain.cpp" line="386"/>
         <location filename="../src/desktop/GuiMain.cpp" line="403"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1865"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2178"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2380"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2453"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2460"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2524"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2735"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2889"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2920"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3082"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3305"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3328"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3354"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3642"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3800"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4154"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4522"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4673"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1871"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2187"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2389"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2462"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2469"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2536"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2753"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2907"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2938"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3100"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3323"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3346"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3372"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3660"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3818"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4176"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4544"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4699"/>
         <source>Yes</source>
         <translation>Evet</translation>
     </message>
@@ -2104,24 +2113,24 @@ Lütfen farklı bir isim seçin.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="348"/>
         <location filename="../src/desktop/GuiMain.cpp" line="386"/>
         <location filename="../src/desktop/GuiMain.cpp" line="403"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1865"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2178"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2380"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2453"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2460"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2524"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2735"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2889"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2920"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3082"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3305"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3328"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3354"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3642"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3800"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4154"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4522"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4673"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1871"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2187"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2389"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2462"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2469"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2536"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2753"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2907"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2938"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3100"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3323"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3346"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3372"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3660"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3818"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4176"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4544"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4699"/>
         <source>No</source>
         <translation>Hayır</translation>
     </message>
@@ -2149,7 +2158,7 @@ Lütfen farklı bir isim seçin.</translation>
     </message>
     <message>
         <source>Secure Lan Messenger</source>
-        <translation type="vanished">Güvenli Yerel Ağ Mesajlaşma Uygulaması</translation>
+        <translation type="obsolete">Güvenli Yerel Ağ Mesajlaşma Uygulaması</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="663"/>
@@ -2176,18 +2185,18 @@ Lütfen farklı bir isim seçin.</translation>
         <translation type="obsolete">İndirme Klasörü...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1067"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1070"/>
         <source>Select beep file...</source>
         <translation>Beep Dosyasını Seç...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1068"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1071"/>
         <source>Play beep</source>
         <translation>Beep Çalıştır</translation>
     </message>
     <message>
         <source>Chat histories</source>
-        <translation type="vanished">Sohbet Geçmişi</translation>
+        <translation type="obsolete">Sohbet Geçmişi</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="977"/>
@@ -2200,17 +2209,17 @@ Lütfen farklı bir isim seçin.</translation>
         <translation>Ayarlar</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1022"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1026"/>
         <source>If a file already exists</source>
         <translation>Dosya Zaten Varsa</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1185"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1188"/>
         <source>Show only the online users</source>
         <translation>Sadece Bağlı Olan Kullanıcıları Göster</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1028"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1032"/>
         <source>Generate automatic filename</source>
         <translation>Otomatik Dosya Adı Oluştur</translation>
     </message>
@@ -2220,17 +2229,17 @@ Lütfen farklı bir isim seçin.</translation>
         <translation>Dosya Aktarımını Etkinleştir</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3465"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3483"/>
         <source>Use HTML tags</source>
         <translation>HTML Etiketlerini Kullan</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3470"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3488"/>
         <source>Use clickable links</source>
         <translation>Tıklanabilir Linkleri Kullan</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3443"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3461"/>
         <source>Show messages grouped by user</source>
         <translation>Kullanıcıya Göre Gruplandırılmış İletileri Göster</translation>
     </message>
@@ -2240,7 +2249,7 @@ Lütfen farklı bir isim seçin.</translation>
         <translation>Mesajları Kaydet</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1216"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1219"/>
         <source>Status</source>
         <translation>Durum</translation>
     </message>
@@ -2251,46 +2260,46 @@ Lütfen farklı bir isim seçin.</translation>
     </message>
     <message>
         <source>Tip of the day</source>
-        <translation type="vanished">Günün İpucu</translation>
+        <translation type="obsolete">Günün İpucu</translation>
     </message>
     <message>
         <source>Fact of the day</source>
-        <translation type="vanished">Günün Gerçeği</translation>
+        <translation type="obsolete">Günün Gerçeği</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1252"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1255"/>
         <source>Show %1&apos;s license...</source>
         <translation>%1 Lisansını Göster...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1256"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1259"/>
         <source>Open %1 official website...</source>
         <translation>%1 Resmi Web Sitesini Aç...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1257"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1260"/>
         <source>Check for new version...</source>
         <translation>Yeni Sürüm Kontrolü Yap...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1258"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1261"/>
         <source>Download plugins...</source>
         <translation>Eklenti İndir...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1260"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1263"/>
         <source>Help online...</source>
         <translation>İnternet Üzerinden Yardım...</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="875"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1334"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1340"/>
         <source>Users</source>
         <translation>Kullanıcılar</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="713"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1283"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1286"/>
         <source>Quit</source>
         <translation>Çıkış</translation>
     </message>
@@ -2310,7 +2319,7 @@ Lütfen farklı bir isim seçin.</translation>
         <translation>Ana Menü</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1190"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1193"/>
         <source>Show the user&apos;s picture</source>
         <translation>Kullanıcının Resmini Göster</translation>
     </message>
@@ -2321,32 +2330,32 @@ Lütfen farklı bir isim seçin.</translation>
         <translation>Sohbet</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1125"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1128"/>
         <source>Always stay on top</source>
         <translation>Her Zaman Üstte Kal</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3433"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3451"/>
         <source>Show the timestamp</source>
         <translation>Zaman Damgasını Göster</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1962"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1971"/>
         <source>Show only last %1 messages</source>
         <translation>Sadece Son %1 Mesajı Göster</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1038"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1042"/>
         <source>Prompt before downloading file</source>
         <translation>Dosyayı İndirmeden Önce Sor</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1147"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1150"/>
         <source>Options</source>
         <translation>Seçenekler</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1195"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1198"/>
         <source>Show the user&apos;s vCard on right click</source>
         <translation>Sağ Tıklamada Kullanıcının vCard&apos;ını Göster</translation>
     </message>
@@ -2366,77 +2375,77 @@ Lütfen farklı bir isim seçin.</translation>
         <translation>Veri Klasörünü Aç</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3421"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3439"/>
         <source>Use RTL mode to show text</source>
         <translation>Metni Göstermek İçin RTL Modunu Kullan</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1042"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1046"/>
         <source>Use native file dialogs</source>
         <translation>Yerel Dosya İletişim Kutularını Kullan</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1031"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1035"/>
         <source>Ask me</source>
         <translation>Bana Sor</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1062"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1065"/>
         <source>Enable Buzz sound</source>
         <translation>Titreşim Sesini Etkinleştir</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1149"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1152"/>
         <source>Sort users in ascending order</source>
         <translation>Kullanıcıları Artan Sırada Sırala</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1154"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1157"/>
         <source>Sorting mode</source>
         <translation>Sıralama Modu</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1158"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1161"/>
         <source>Default mode</source>
         <translation>Varsayılan Mod</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1164"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1167"/>
         <source>By user name</source>
         <translation>Kullanıdı Adına Göre</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1170"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1173"/>
         <source>By user status</source>
         <translation>Kullanıcı Durumuna Göre</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1176"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1179"/>
         <source>By unread messages</source>
         <translation>Okunmamış Mesajlara Göre</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1200"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1203"/>
         <source>Show status color in background</source>
         <translation>Durum Rengini Arka Planda Göster</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1212"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1215"/>
         <source>Change size of the user&apos;s picture</source>
         <translation>Kullanıcı Resminin Boyutunu Değiştir</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1225"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1228"/>
         <source>Recently used</source>
         <translation>Son Kullanılan</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1229"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1232"/>
         <source>Change your status description...</source>
         <translation>Durum Açıklamanızı Değiştirin ...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1230"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1233"/>
         <source>Clear all status descriptions</source>
         <translation>Tüm Durum Açıklamalarını Temizle</translation>
     </message>
@@ -2461,12 +2470,12 @@ Lütfen farklı bir isim seçin.</translation>
         <translation>Yeni Mesajı Göster</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1248"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1251"/>
         <source>?</source>
         <translation>BeeBEEP</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1253"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1256"/>
         <source>Qt Library...</source>
         <translation>Qt Kütüphanesi...</translation>
     </message>
@@ -2475,12 +2484,12 @@ Lütfen farklı bir isim seçin.</translation>
         <translation type="obsolete">%1 Facebook&apos;da Beğen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1249"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1252"/>
         <source>Donate for %1</source>
         <translation>%1 İçin Bağış Yap</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1276"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1279"/>
         <source>Show</source>
         <translation>Göster</translation>
     </message>
@@ -2495,81 +2504,81 @@ Lütfen farklı bir isim seçin.</translation>
         <translation>ESC Düğmesi Simge Durumuna Küçültsün</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1077"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1080"/>
         <source>Show only message notifications</source>
         <translation>Sadece Mesaj Bildirimlerini Göster</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1081"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1084"/>
         <source>Show chat message preview</source>
         <translation>Sohbet Mesajı Önizlemesini Göster</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1344"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1350"/>
         <source>Groups</source>
         <translation>Gruplar</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1339"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1345"/>
         <source>Chats</source>
         <translation>Sohbetler</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1357"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1363"/>
         <source>File Transfers</source>
         <translation>Dosya Aktarımları</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2477"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2489"/>
         <source>Downloading %1 files</source>
         <translation>%1 Dosya İndiriliyor</translation>
     </message>
     <message>
         <source>Do you want to delete this saved chat?</source>
-        <translation type="vanished">Bu kaydedilen sohbeti silmek istiyor musunuz?</translation>
+        <translation type="obsolete">Bu kaydedilen sohbeti silmek istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3323"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3341"/>
         <source>Do you want to clear messages with %1?</source>
         <translation>%1 ile mesajlaşmalarınızı silmek istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3428"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3446"/>
         <source>Show the chat in compact view mode</source>
         <translation>Sohbeti Özet Görünüm Modunda Göster</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3477"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3495"/>
         <source>Restore default font</source>
         <translation>Varsayılan Yazı Tipini Geri Yükle</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3641"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3659"/>
         <source>Do you want to delete user %1?</source>
         <translation>%1 Kullanıcısını Silmek İstiyor Musunuz?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3799"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3817"/>
         <source>Do you want to clear all saved status descriptions?</source>
         <translation>Tüm kayıtlı durum açıklamalarını temizlemek istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4098"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4116"/>
         <source>Qt libraries have a bug on saving the window&apos;s state.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4099"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4117"/>
         <source>If you have layout problem please save only geometry.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4220"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4242"/>
         <source>New file from %1</source>
         <translation>%1 den Yeni Dosya</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4241"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4263"/>
         <source>%1 is buzzing you!</source>
         <translation>%1 Seni Titretti!</translation>
     </message>
@@ -2584,13 +2593,13 @@ Lütfen farklı bir isim seçin.</translation>
         <translation>Bağlıyken Çıkış Yaptığımda Uyar</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1205"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1208"/>
         <source>Show the status description</source>
         <translation>Durum Açıklamasını Göster</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="834"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1142"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1145"/>
         <source>Save window&apos;s geometry</source>
         <translation>Pencerenin Şeklini Kaydet</translation>
     </message>
@@ -2649,17 +2658,17 @@ Lütfen farklı bir isim seçin.</translation>
         <translation>Dosya Paylaşımını Etkinleştir</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1055"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1058"/>
         <source>Sound</source>
         <translation>Ses</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1058"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1061"/>
         <source>Enable BEEP alert</source>
         <translation>BEEP Uyarısını Etkinleştir</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1070"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1073"/>
         <source>System tray icon</source>
         <translation>Sistem Tepsisi Simgesi</translation>
     </message>
@@ -2689,12 +2698,12 @@ Lütfen farklı bir isim seçin.</translation>
         <translation>Engellenen Sohbetler</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1113"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1116"/>
         <source>Shortcuts</source>
         <translation>Kısayollar</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1114"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1117"/>
         <source>Select language</source>
         <translation>Dil Seçin</translation>
     </message>
@@ -2734,17 +2743,17 @@ Lütfen farklı bir isim seçin.</translation>
         <translation>Grupları Kaydet</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1073"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1076"/>
         <source>Enable tray icon notifications</source>
         <translation>Tepsi Simgesi Bildirimlerini Etkinleştir</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1085"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1088"/>
         <source>Show file notifications</source>
         <translation>Dosya Bildirimlerini Göster</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1115"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1118"/>
         <source>Select icon theme</source>
         <translation>Simge Temasını Seç</translation>
     </message>
@@ -2755,7 +2764,7 @@ Lütfen farklı bir isim seçin.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="663"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1304"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1307"/>
         <source>Development version</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2870,480 +2879,490 @@ Lütfen farklı bir isim seçin.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1046"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1050"/>
         <source>Always shows the progress of file transfer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1053"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1056"/>
         <source>Select download folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1091"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1094"/>
         <source>Desktop sharing</source>
         <translation>Masaüstü Paylaşımı</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1094"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1097"/>
         <source>Enable desktop sharing</source>
         <translation>Masaüstü Paylaşımını Etkinleştir</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1099"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1102"/>
         <source>Select screen capture interval</source>
         <translation>Ekran Yakalama Ölçülerini Seç</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1101"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1104"/>
         <source>Select image type</source>
         <translation>Görüntü Türünü Seç</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1103"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1106"/>
         <source>Select image quality</source>
         <translation>Görüntü Kalitesini Seç</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1106"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1109"/>
         <source>Fit image to screen</source>
         <translation>Görüntüyü Ekrana Sığdır</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1117"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1120"/>
         <source>Use the dark theme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1117"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1120"/>
         <source>beta</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1121"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1124"/>
         <source>Enable maximize button</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1134"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1137"/>
         <source>Start %1 automatically</source>
         <translation>%1 Otomatik Olarak Başlat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1141"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1144"/>
         <source>Restore the colors to the default ones</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1144"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1147"/>
         <source>Reset geometry of all windows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1261"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1264"/>
         <source>Show tips...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1262"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1265"/>
         <source>Read FAQ...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1265"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1268"/>
         <source>Information about %1...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1263"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1266"/>
         <source>Discover the fact of the day...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1324"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1022"/>
+        <source>Always download files into the folder with the user&apos;s name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="1330"/>
         <source>Right click to open menu</source>
         <translation>Menüyü Açmak İçin Sağ Tıklayın</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1329"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1335"/>
         <source>Activities</source>
         <translation>Etkinlikler</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1349"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1355"/>
         <source>Saved chats</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1500"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1949"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1506"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1958"/>
         <source>There will be no saving of &apos;system&apos; and &apos;file transfer&apos; messages if this option is disabled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1520"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1526"/>
         <source>How many minutes of idle %1 can wait before changing status to away?</source>
         <translation>Durumu değiştirmeden önce %1 boşta kaç dakika beklesin?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1562"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1568"/>
         <source>Please select the maximum number of messages to be showed</source>
         <translation>Lütfen gösterilecek maksimum mesaj sayısını seçin</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1613"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1619"/>
         <source>Please select the number of inactive days before user is removed</source>
         <translation>Lütfen kullanıcı kaldırılmadan önce etkin olunmayan gün sayısını seçin</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1764"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1770"/>
         <source>milliseconds, 5000 default</source>
         <translation>milisaniye, 5000 varsayılan</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1794"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1800"/>
         <source>Please select the opacity percentage of inactive chat window (default: %1%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1831"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1837"/>
         <source>You must close and reopen the chat windows to see the changes applied.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1864"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1870"/>
         <source>Saving unsent messages may fail if &apos;Save users&apos; and &apos;Save groups&apos; options are not enabled. Do you want to enable them?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1890"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1896"/>
         <source>Please select the maximum number of lines to be saved in the chat (current: %1).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1968"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1977"/>
         <source>Remove users after %1 days of inactivity</source>
         <translation>%1 Gün Etkin Olmadığında Kullanıcıları Kaldırın</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1975"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1984"/>
         <source>Show inactive chat window with %1% opacity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1980"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1989"/>
         <source>Save maximum %1 lines of chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1987"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1996"/>
         <source>Clean the cache from items older than %1 days</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2043"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2055"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2052"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2064"/>
         <source>to all</source>
         <translation>Herkes</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2045"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2057"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2054"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2066"/>
         <source>to</source>
         <translation>e</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2047"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2059"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2056"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2068"/>
         <source>to you</source>
         <translation>Kendine</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2053"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2062"/>
         <source>New message from</source>
         <translation>Yeni Mesaj</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2063"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2072"/>
         <source>New message arrived</source>
         <translation>Yeni Mesaj Geldi</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2164"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2173"/>
         <source>%1 is writing...</source>
         <translation>%1 yazıyor...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2177"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2186"/>
         <source>Do you want to disconnect from %1 network?</source>
         <translation>%1 Ağ Bağlantısını Kesmek İstiyor Musunuz?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2219"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2228"/>
         <source>You are %1%2</source>
         <translation>%1%2 siniz</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2231"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2240"/>
         <source>Please insert the new status description</source>
         <translation>Lütfen Yeni Durum Açıklaması Ekleyin</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2281"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2290"/>
         <source>%1 - Select a file</source>
         <translation>%1 - Bir Dosya Seç</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2281"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2290"/>
         <source>or more</source>
         <translation>ya da daha fazla</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2300"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2309"/>
         <source>File transfer is not enabled.</source>
         <translation>Dosya Aktarımı Etkin Değil.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2306"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2315"/>
         <source>You are not connected.</source>
         <translation>Bağlanamadınız.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2323"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2332"/>
         <source>There is no user connected.</source>
         <translation>Bağlı Kullanıcı Yok.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2329"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2338"/>
         <source>Please select the user to whom you would like to send a file.</source>
         <translation>Lütfen Dosya Göndermek İstediğiniz Kullanıcıyı Seçin.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2338"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2347"/>
         <source>User not found.</source>
         <translation>Kullanıcı Bulunamadı.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2360"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2509"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2369"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2521"/>
         <source>File transfer is disabled. You cannot download %1.</source>
         <translation>Dosya Aktarımı Devre Dışı. %1 İndiremezsiniz.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2380"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2524"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2389"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2536"/>
         <source>Yes, and don&apos;t ask anymore</source>
         <translation>Evet ve Tekrar Sorma</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2412"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2421"/>
         <source>%1 already exists. Please select a new filename.</source>
         <translation>%1 zaten var. Lütfen yeni bir dosya adı seçin.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2451"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2460"/>
         <source>You cannot download all these files at once. Do you want to download the first %1 files of the list?</source>
         <translation>Tüm bu dosyaları tek seferde indiremezsiniz. Listedeki ilk %1 dosyayı indirmek istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2459"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2468"/>
         <source>Downloading %1 files is a hard duty. Maybe you have to wait a lot of minutes. Do yo want to continue?</source>
         <translation>%1 dosya indirilmesi uzun sürebilir. Belki de bir kaç dakika beklemek zorunda kalabilirsiniz. Devam etmek ister misiniz?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2523"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2535"/>
         <source>Do you want to download folder %1 (%2 files) from %3?</source>
         <translation>%1 klasörünü %3 dosyadan (%2 dosya) indirmek istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2564"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2576"/>
         <source>%1 - Select the download folder</source>
         <translation>%1 - İndirme Klasörünü Seçin</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2658"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2584"/>
+        <source>The files will be downloaded to the folder:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="2676"/>
         <source>Plugin Manager...</source>
         <translation>Eklenti Yöneticisi...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2681"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2699"/>
         <source>Start the new application to copy file and folders by Marco Mastroddi</source>
         <translation>Marco Mastroddi klasör ve dosyalarını kopyalamak için yeni bir uygulama başlatın</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2734"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2752"/>
         <source>Your name is not changed. Do you want to continue?</source>
         <translation>Adınız değişmedi. Devam etmek istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2888"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2906"/>
         <source>Do you want to open the file %1?</source>
         <translation>%1 dosyasını açmak istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2934"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2952"/>
         <source>Sound module is not working</source>
         <translation>Ses modülü çalışmıyor</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2957"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2975"/>
         <source>You are not allowed create groups. The option has been disabled by your system administrator.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2978"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2996"/>
         <source>There is a chat with the same members: %1.</source>
         <translation>Aynı üyelerle sohbet var: %1.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3000"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3018"/>
         <source>You are not allowed modify groups. The option has been disabled by your system administrator.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3082"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3100"/>
         <source>Do you want to delete saved chat with %1?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3115"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3133"/>
         <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br&gt;What do you want to do with the selected saved text?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3223"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3241"/>
         <source>Your status description</source>
         <translation>Durum Açıklamanız</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3438"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3456"/>
         <source>Show the time with the AM/PM notation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3453"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3471"/>
         <source>Show username&apos;s color</source>
         <translation>Kullanıcı Adının Rengini Göster</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3493"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3511"/>
         <source>none</source>
         <translation type="unfinished">yok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4007"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4068"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4025"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4086"/>
         <source>You have new message</source>
         <translation>Yeni Mesajınız Var</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4100"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4118"/>
         <source>Save all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4100"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4118"/>
         <source>Save only geometry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4116"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4134"/>
         <source>Window geometry saved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4154"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4176"/>
         <source>Do you really want to reset window&apos;s geometry?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4169"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4191"/>
         <source>Geometry of all windows has been reset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4395"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4417"/>
         <source>You are using the default icons.</source>
         <translation>Varsayılan simgeleri kullanıyorsunuz.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4401"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4423"/>
         <source>You are using custom icons in folder %1.</source>
         <translation>%1 klasöründe özel simgeleri kullanıyorsunuz.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4402"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4424"/>
         <source>Restore default icons</source>
         <translation>Varsayılan simgeleri geri yükle</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4522"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4544"/>
         <source>Do you really want to restore the colors to the default ones?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4672"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4698"/>
         <source>Do you really want to share your desktop with %1?</source>
         <translation>Masaüstünüzü %1 ile gerçekten paylaşmak istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4396"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4402"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4411"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4418"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4424"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4433"/>
         <source>Select the icon folder</source>
         <translation>Simge Klasörünü Seç</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4432"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4454"/>
         <source>You are using the default emoticons.</source>
         <translation>Varsayılan ifadeleri kullanıyorsunuz.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4433"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4439"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4448"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4455"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4461"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4470"/>
         <source>Select the emoticon folder</source>
         <translation>İfade Klasörünü Seç</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4438"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4460"/>
         <source>You are using custom emoticons in folder %1.</source>
         <translation>%1 klasöründe özel ifadeleri kullanıyorsunuz.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4439"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4461"/>
         <source>Restore default emoticons</source>
         <translation>Varsayılan ifadeleri geri yükle</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4465"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4487"/>
         <source>You have to restart your connection to apply changes.</source>
         <translation>Değişiklikleri uygulamak için bağlantınızı yeniden başlatmanız gerekir.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="725"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2980"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2998"/>
         <source>Create new group chat</source>
         <translation>Yeni Grup Sohbeti Oluştur</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3046"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3064"/>
         <source>Starting</source>
         <translation>Başlangıç</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3263"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3286"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3281"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3304"/>
         <source>%1 removed</source>
         <translation>%1 Kaldırıldı</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3448"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3466"/>
         <source>Show your name instead of &apos;You&apos;</source>
         <translation>&apos;Kendin&apos; yerine ismini göster</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3460"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3478"/>
         <source>Show emoticons</source>
         <translation>İfadeleri Göster</translation>
     </message>
@@ -3353,42 +3372,42 @@ Lütfen farklı bir isim seçin.</translation>
         <translation>Yazı Tipi İfadelerini Kullan</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3753"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3771"/>
         <source>at lunch</source>
         <translation>Yemekte</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3762"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3780"/>
         <source>in a meeting</source>
         <translation>Toplantıda</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3943"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3961"/>
         <source>Select your dictionary path</source>
         <translation>Sözlük Yolunu Seçin</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3951"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3969"/>
         <source>Dictionary selected: %1</source>
         <translation>Sözlük Seçildi: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3953"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3971"/>
         <source>Unable to set dictionary: %1</source>
         <translation>Sözlük Ayarlanamadı : %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4118"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4136"/>
         <source>Window geometry and state saved</source>
         <translation>Pencere Şekli Kaydedildi</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4383"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4405"/>
         <source>%1 blocked chats</source>
         <translation>%1 Engellenen Sohbetler</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1268"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1271"/>
         <source>Add +1 user to anonymous usage statistics</source>
         <translation>Anonim kullanım istatistiklerine +1 kullanıcı ekle</translation>
     </message>
@@ -3398,14 +3417,14 @@ Lütfen farklı bir isim seçin.</translation>
         <translation>Ağ</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2660"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2678"/>
         <source>is a plugin developed by</source>
         <translation>geliştirilen bir eklentidir @</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1379"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2895"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3139"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1385"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2913"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3157"/>
         <source>Unable to open %1</source>
         <translation>%1 Açılamıyor</translation>
     </message>
@@ -3425,58 +3444,59 @@ Lütfen farklı bir isim seçin.</translation>
         <translation>Kapanırken</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1379"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1501"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1831"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1950"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2850"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2895"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2957"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3000"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3139"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4465"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4470"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1385"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1507"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1837"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1959"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2588"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2868"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2913"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2975"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3018"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3157"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4487"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4492"/>
         <source>Ok</source>
         <translation>Tamam</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2908"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2926"/>
         <source>Sound files (*.wav)</source>
         <translation>Ses Dosyaları (*.wav)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2920"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2938"/>
         <source>Sound is not enabled on a new message. Do you want to enable it?</source>
         <translation>Yeni mesajda ses etkin değil. Bunu etkinleştirmek ister misiniz?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2939"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2957"/>
         <source>Sound file not found</source>
         <translation>Ses dosyası bulunamadı</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2930"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2948"/>
         <source>The default BEEP will be used</source>
         <translation>Varsayılan BEEP kullanılacaktır</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3025"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3043"/>
         <source>Now %1 will start on windows boot.</source>
         <translation>%1 artık Windows açılışında başlayacak.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3033"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3040"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3051"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3058"/>
         <source>Unable to add this key in the registry: permission denied.</source>
         <translation>Bu anahtar kayıt defterine eklenemiyor: erişim reddedildi.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3038"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3056"/>
         <source>%1 will not start on windows boot.</source>
         <translation>%1 artık Windows açılışında başlamayacak.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3106"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3124"/>
         <source>Please select a chat you would like to link the saved text.</source>
         <translation>Lütfen kayıtlı metindeki link vermek istediğiniz bir sohbeti seçin.</translation>
     </message>
@@ -3485,78 +3505,78 @@ Lütfen farklı bir isim seçin.</translation>
         <translation type="obsolete">Seçilen &apos;%1&apos; sohbeti zaten kayıtlı bir metindir.&lt;br /&gt;Seçilen kayıtlı metni ne yapmak istiyorsunuz?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1025"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3117"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1029"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3135"/>
         <source>Overwrite</source>
         <translation>Üzerine Yaz</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2850"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2868"/>
         <source>There are no messages saved in the chat with %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3117"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3135"/>
         <source>Add in the head</source>
         <translation>Başlığa Ekle</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3304"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3322"/>
         <source>All the members of this chat are not online. The changes may not be permanent. Do you wish to continue?</source>
         <translation>Bu sohbetin tüm üyeleri bağlı değil. Değişiklikler kalıcı olmayabilir. Devam etmek ister misiniz?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3353"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3371"/>
         <source>Do you want to leave the chat with %1?</source>
         <translation>%1 ile olan sohbetten ayrılmak istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3359"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3377"/>
         <source>Unable to leave the chat with %1.</source>
         <translation>%1 ile olan sohbetten çıkılamıyor.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3491"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3509"/>
         <source>inactive</source>
         <translation>pasif</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3521"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4719"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3539"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4745"/>
         <source>disabled</source>
         <translation>devre dışı</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3531"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3549"/>
         <source>active</source>
         <translation>aktif</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3608"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3626"/>
         <source>%1 is online</source>
         <translation>%1 Bağlı</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3610"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3628"/>
         <source>%1 is offline</source>
         <translation>%1 Bağlı Değil</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3622"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3640"/>
         <source>Please select the new size of the user picture</source>
         <translation>Lütfen kullanıcı resminin yeni boyutunu seçin</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1501"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1950"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2498"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2980"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3117"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4100"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4396"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4402"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4433"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4439"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1507"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1959"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2510"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2998"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3135"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4118"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4418"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4424"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4455"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4461"/>
         <source>Cancel</source>
         <translation>İptal</translation>
     </message>
@@ -3581,85 +3601,85 @@ Lütfen farklı bir isim seçin.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1365"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1371"/>
         <source>Show the file transfer panel</source>
         <translation>Dosya Aktarım Panelini Göster</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1485"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1491"/>
         <source>Please save the network password in the next dialog if you want to use password without prompt.</source>
         <translation>Şifre uyarısı vermesini istemiyorsanız lütfen ağ iletişim şifresini bir sonraki iletişim kutusunda kaydedin.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1563"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1569"/>
         <source>(current: %1, default: %2, all: -1, none: 0)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1740"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1746"/>
         <source>jpg for photo, png for presentation</source>
         <translation>fotoğraf için jpg, sunum için png</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1751"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1757"/>
         <source>-1 default, 10 low, 60 medium, 100 high</source>
         <translation>-1 varsayılan, 10 düşük, 60 orta, 100 yüksek</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1907"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1913"/>
         <source>Please select the number of days that items (such as images) can remain cached (current: %1, never clear: -1, always clear: 0).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2379"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2388"/>
         <source>Do you want to download %1 (%2) from %3?</source>
         <translation>%3 den %1 (%2) indirmek istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2492"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2504"/>
         <source>File is not available for download.</source>
         <translation>İndirilecek dosya mevcut değil.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2494"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2506"/>
         <source>%1 is not connected.</source>
         <translation>%1 bağlı değil.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2495"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2507"/>
         <source>Please reload the list of shared files.</source>
         <translation>Lütfen paylaşılan dosyaların listesini yeniden yükleyin.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2498"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2510"/>
         <source>Reload file list</source>
         <translation>Dosya listesini yeniden yükle</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3319"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3337"/>
         <source>Chat with %1 is empty.</source>
         <translation>%1 boşta, sohbet edin.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3326"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3352"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3344"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3370"/>
         <source>Yes and delete history</source>
         <translation>Evet ve geçmişi sil</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3386"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3404"/>
         <source>Default language is restored.</source>
         <translation>Varsayılan dil geri yüklendi.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3388"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3406"/>
         <source>New language &apos;%1&apos; is selected.</source>
         <translation>Yeni dil &apos;%1&apos; seçildi.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2619"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3391"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4470"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2637"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3409"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4492"/>
         <source>You must restart %1 to apply these changes.</source>
         <translation>Bu değişiklikleri uygulamak için %1 i yeniden başlatmanız gerekir.</translation>
     </message>
@@ -3698,7 +3718,7 @@ Lütfen farklı bir isim seçin.</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation type="vanished">Hepsini Seç</translation>
+        <translation type="obsolete">Hepsini Seç</translation>
     </message>
 </context>
 <context>
@@ -4167,7 +4187,7 @@ Lütfen farklı bir isim seçin.</translation>
     </message>
     <message>
         <source>Find text in chat</source>
-        <translation type="vanished">Sohbet içindeki metni bul</translation>
+        <translation type="obsolete">Sohbet içindeki metni bul</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="139"/>
@@ -4272,47 +4292,47 @@ Lütfen farklı bir isim seçin.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="vanished">Sil</translation>
+        <translation type="obsolete">Sil</translation>
     </message>
     <message>
         <source>%1 not found in chat.</source>
-        <translation type="vanished">%1 sohbette bulunamadı.</translation>
+        <translation type="obsolete">%1 sohbette bulunamadı.</translation>
     </message>
 </context>
 <context>
     <name>GuiSavedChatList</name>
     <message>
-        <location filename="../src/desktop/GuiSavedChatList.cpp" line="53"/>
+        <location filename="../src/desktop/GuiSavedChatList.cpp" line="52"/>
         <source>Search saved chat</source>
         <translation>Kayıtlı sohbet ara</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiSavedChatList.cpp" line="89"/>
+        <location filename="../src/desktop/GuiSavedChatList.cpp" line="88"/>
         <source>Please select an item</source>
         <translation>Lütfen bir öğe seçin</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiSavedChatList.cpp" line="95"/>
+        <location filename="../src/desktop/GuiSavedChatList.cpp" line="94"/>
         <source>Show</source>
         <translation>Göster</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiSavedChatList.cpp" line="98"/>
+        <location filename="../src/desktop/GuiSavedChatList.cpp" line="97"/>
         <source>Link to chat</source>
         <translation>Sohbete bağla</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiSavedChatList.cpp" line="101"/>
+        <location filename="../src/desktop/GuiSavedChatList.cpp" line="100"/>
         <source>Delete</source>
         <translation>Sil</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiSavedChatList.cpp" line="107"/>
+        <location filename="../src/desktop/GuiSavedChatList.cpp" line="106"/>
         <source>Change background color</source>
         <translation>Arkaplan Rengini Değiştir</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiSavedChatList.cpp" line="163"/>
+        <location filename="../src/desktop/GuiSavedChatList.cpp" line="162"/>
         <source>Click to view saved chat with %1</source>
         <translation>%1 ile kayıtlı sohbeti görmek için tıklayın</translation>
     </message>
@@ -4483,15 +4503,15 @@ Lütfen farklı bir isim seçin.</translation>
     <name>GuiShareBox</name>
     <message>
         <source>ShareBox</source>
-        <translation type="vanished">Paylaşım Kutusu</translation>
+        <translation type="obsolete">Paylaşım Kutusu</translation>
     </message>
     <message>
         <source>Update your ShareBox</source>
-        <translation type="vanished">Paylaşım Kutusunu Güncelleyin</translation>
+        <translation type="obsolete">Paylaşım Kutusunu Güncelleyin</translation>
     </message>
     <message>
         <source>Create folder in your ShareBox</source>
-        <translation type="vanished">Paylaşım Kutunuzda Bir Klasör Oluşturun</translation>
+        <translation type="obsolete">Paylaşım Kutunuzda Bir Klasör Oluşturun</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="66"/>
@@ -4500,7 +4520,7 @@ Lütfen farklı bir isim seçin.</translation>
     </message>
     <message>
         <source>Update ShareBox</source>
-        <translation type="vanished">Paylaşım Kutusunu Güncelle</translation>
+        <translation type="obsolete">Paylaşım Kutusunu Güncelle</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="68"/>
@@ -4509,15 +4529,15 @@ Lütfen farklı bir isim seçin.</translation>
     </message>
     <message>
         <source>Create folder in ShareBox</source>
-        <translation type="vanished">Paylaşım Kutusunda Bir Klasör Oluşturun</translation>
+        <translation type="obsolete">Paylaşım Kutusunda Bir Klasör Oluşturun</translation>
     </message>
     <message>
         <source>ShareBox path does not exist. Please select a valid folder.</source>
-        <translation type="vanished">Paylaşım Kutusu yolu mevcut değil. Lütfen geçerli bir klasör seçin.</translation>
+        <translation type="obsolete">Paylaşım Kutusu yolu mevcut değil. Lütfen geçerli bir klasör seçin.</translation>
     </message>
     <message>
         <source>%1 - Select the ShareBox folder</source>
-        <translation type="vanished">%1 - Paylaşım Kutusu Klasörünü Seçin</translation>
+        <translation type="obsolete">%1 - Paylaşım Kutusu Klasörünü Seçin</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="64"/>
@@ -4618,7 +4638,7 @@ Lütfen farklı bir isim seçin.</translation>
     </message>
     <message>
         <source>Enable my ShareBox</source>
-        <translation type="vanished">Paylaşım Kutumu Etkinleştir</translation>
+        <translation type="obsolete">Paylaşım Kutumu Etkinleştir</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.ui" line="168"/>
@@ -5111,48 +5131,48 @@ Lütfen farklı bir isim seçin.</translation>
 <context>
     <name>GuiUserList</name>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="54"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="53"/>
         <source>Search user</source>
         <translation>Kullanıcı Ara</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="308"/>
-        <location filename="../src/desktop/GuiUserList.cpp" line="315"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="307"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="314"/>
         <source>Change background color</source>
         <translation>Arkaplan Rengini Değiştir</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="400"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="405"/>
         <source>You cannot send files to %1 because the user is offline.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="434"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="439"/>
         <source>Do you want to send %1 %2 to %3?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="435"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="440"/>
         <source>file</source>
         <translation type="unfinished">dosya</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="435"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="440"/>
         <source>files</source>
         <translation type="unfinished">dosyalar</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="436"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="441"/>
         <source>Yes</source>
         <translation type="unfinished">Evet</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="436"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="441"/>
         <source>No</source>
         <translation type="unfinished">Hayır</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="449"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="454"/>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
         <translation type="unfinished">QT Kitaplığı bu işletim sistemi için dosyaları Sürükle ve Bırak özelliğini desteklemez. Gönderilecek dosyayı tekrar seçmelisiniz.</translation>
     </message>
@@ -5547,7 +5567,7 @@ Lütfen farklı bir isim seçin.</translation>
     <name>QObject</name>
     <message>
         <location filename="../src/desktop/GuiChatItem.cpp" line="73"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3316"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3334"/>
         <source>All users</source>
         <translation>Tüm kullanıcılar</translation>
     </message>
@@ -5787,7 +5807,7 @@ Lütfen farklı bir isim seçin.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2021"/>
+        <location filename="../src/core/Settings.cpp" line="2022"/>
         <source>Autoresponder</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5796,179 +5816,179 @@ Lütfen farklı bir isim seçin.</translation>
     <name>Tips</name>
     <message>
         <source>You can switch between chats with CTRL+TAB if there are new messages availables.</source>
-        <translation type="vanished">Yeni mesaj geldiğinde, CTRL + TAB tuşları ile sohbetler arasında geçiş yapabilirsiniz.</translation>
+        <translation type="obsolete">Yeni mesaj geldiğinde, CTRL + TAB tuşları ile sohbetler arasında geçiş yapabilirsiniz.</translation>
     </message>
     <message>
         <source>If you want a &lt;b&gt;bold text&lt;/b&gt; write a *bold text*.</source>
-        <translation type="vanished">&lt;b&gt;Kalın&lt;/b&gt; bir metin yazmak istiyorsanız *yıldız kullanarak* yazın.</translation>
+        <translation type="obsolete">&lt;b&gt;Kalın&lt;/b&gt; bir metin yazmak istiyorsanız *yıldız kullanarak* yazın.</translation>
     </message>
     <message>
         <source>If you want an &lt;i&gt;italic text&lt;/i&gt; write a /italic text/.</source>
-        <translation type="vanished">&lt;i&gt;İtalik&lt;/i&gt; bir metin yazmak istiyorsanız /taksim kullanarak/ yazın.</translation>
+        <translation type="obsolete">&lt;i&gt;İtalik&lt;/i&gt; bir metin yazmak istiyorsanız /taksim kullanarak/ yazın.</translation>
     </message>
     <message>
         <source>If you want an &lt;u&gt;underlined text&lt;/u&gt; write a _underlined text_.</source>
-        <translation type="vanished">&lt;u&gt;Altı Çizili&lt;/u&gt; bir metin yazmak istiyorsanız _alt çizgi kullanarak_ yazın.</translation>
+        <translation type="obsolete">&lt;u&gt;Altı Çizili&lt;/u&gt; bir metin yazmak istiyorsanız _alt çizgi kullanarak_ yazın.</translation>
     </message>
     <message>
         <source>You can search previous sent message in the history using the CTRL+Up e CTRL+Down keys.</source>
-        <translation type="vanished">Geçmişte gönderilen mesajlarda arama yapmak için Ctrl+Yukarı ve Ctrl+Aşağı tuşlarını kullanabilirsiniz.</translation>
+        <translation type="obsolete">Geçmişte gönderilen mesajlarda arama yapmak için Ctrl+Yukarı ve Ctrl+Aşağı tuşlarını kullanabilirsiniz.</translation>
     </message>
     <message>
         <source>You can drop files to active chat and send them to members.</source>
-        <translation type="vanished">Dosyaları aktif sohbet penceresine sürükleyerek üyelere gönderebilirsiniz.</translation>
+        <translation type="obsolete">Dosyaları aktif sohbet penceresine sürükleyerek üyelere gönderebilirsiniz.</translation>
     </message>
     <message>
         <source>You can select multiple files from network shares and download them simultaneously with a right click.</source>
-        <translation type="vanished">Ağ paylaşımlarından birden fazla dosya seçebilir ve bunları sağ tıklama ile aynı anda indirebilirsiniz.</translation>
+        <translation type="obsolete">Ağ paylaşımlarından birden fazla dosya seçebilir ve bunları sağ tıklama ile aynı anda indirebilirsiniz.</translation>
     </message>
     <message>
         <source>You can disable message notification from a group right clicking on its name on the list.</source>
-        <translation type="vanished">Grup sohbeti mesaj bildirimini listeden ismine sağ tıklayarak devre dışı bırakabilirsiniz.</translation>
+        <translation type="obsolete">Grup sohbeti mesaj bildirimini listeden ismine sağ tıklayarak devre dışı bırakabilirsiniz.</translation>
     </message>
     <message>
         <source>&lt;i&gt;Free is that mind guided by the fantasy.&lt;/i&gt; (Marco Mastroddi)</source>
-        <translation type="vanished">&lt;i&gt;Özgür, hayal gücünün rehberlik ettiği akıldır.&lt;/i&gt; (Marco Mastroddi)</translation>
+        <translation type="obsolete">&lt;i&gt;Özgür, hayal gücünün rehberlik ettiği akıldır.&lt;/i&gt; (Marco Mastroddi)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Stay hungry, stay foolish.&lt;/i&gt; (Steve Jobs)</source>
-        <translation type="vanished">&lt;i&gt;Sizi aç kalmanız rahatsız etmiyorsa, aptal kalmanız da rahatsız etmeyecektir.&lt;i&gt;(Steve Jobs)</translation>
+        <translation type="obsolete">&lt;i&gt;Sizi aç kalmanız rahatsız etmiyorsa, aptal kalmanız da rahatsız etmeyecektir.&lt;i&gt;(Steve Jobs)</translation>
     </message>
     <message>
         <source>&lt;i&gt;There is always one more bug.&lt;/i&gt; (Lubarsky&apos;s Law)</source>
-        <translation type="vanished">&lt;i&gt;Her zaman bir tane daha hata vardır.&lt;/i&gt; (Lubarsky&apos;s Law)</translation>
+        <translation type="obsolete">&lt;i&gt;Her zaman bir tane daha hata vardır.&lt;/i&gt; (Lubarsky&apos;s Law)</translation>
     </message>
     <message>
         <source>&lt;i&gt;If anything can go wrong, it will.&lt;/i&gt; (Murphy&apos;s Law)</source>
-        <translation type="vanished">&lt;i&gt;Birşey ters gidecekse, gider.&lt;/i&gt; (Murphy&apos;s Law)</translation>
+        <translation type="obsolete">&lt;i&gt;Birşey ters gidecekse, gider.&lt;/i&gt; (Murphy&apos;s Law)</translation>
     </message>
     <message>
         <source>&lt;i&gt;If a program is useful, it will have to be changed.&lt;/i&gt; (Law of Computer Programming)</source>
-        <translation type="vanished">&lt;i&gt;Bir program kullanışlıysa, değiştirilmelidir.&lt;/i&gt; (Bilgisayar Programcılığı Hukuku)</translation>
+        <translation type="obsolete">&lt;i&gt;Bir program kullanışlıysa, değiştirilmelidir.&lt;/i&gt; (Bilgisayar Programcılığı Hukuku)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Intellectuals solve problems; geniuses prevent them.&lt;/i&gt; (Albert Einstein)</source>
-        <translation type="vanished">&lt;i&gt;Entellektüeller problemleri çözer; dahiler onları engeller.&lt;/i&gt; (Albert Einstein)</translation>
+        <translation type="obsolete">&lt;i&gt;Entellektüeller problemleri çözer; dahiler onları engeller.&lt;/i&gt; (Albert Einstein)</translation>
     </message>
     <message>
         <source>&lt;i&gt;What does not destroy me, makes me strong.&lt;/i&gt; (Friedrich Nietzsche)</source>
-        <translation type="vanished">&lt;i&gt;Beni yok etmeyen şey beni güçlü kılıyor.&lt;/i&gt; (Friedrich Nietzsche)</translation>
+        <translation type="obsolete">&lt;i&gt;Beni yok etmeyen şey beni güçlü kılıyor.&lt;/i&gt; (Friedrich Nietzsche)</translation>
     </message>
     <message>
         <source>&lt;i&gt;I am not young enough to know everything.&lt;/i&gt; (Oscar Wilde)</source>
-        <translation type="vanished">&lt;i&gt;Ben her şeyi bilecek kadar genç değilim.&lt;/i&gt; (Oscar Wilde)</translation>
+        <translation type="obsolete">&lt;i&gt;Ben her şeyi bilecek kadar genç değilim.&lt;/i&gt; (Oscar Wilde)</translation>
     </message>
     <message>
         <source>&lt;i&gt;A lack of doubt leads to a lack of creativity.&lt;/i&gt; (Evert Jan Ouweneel)</source>
-        <translation type="vanished">&lt;i&gt;Şüphe eksikliği, yaratıcılık eksikliğine yol açar.&lt;/i&gt; (Evert Jan Ouweneel)</translation>
+        <translation type="obsolete">&lt;i&gt;Şüphe eksikliği, yaratıcılık eksikliğine yol açar.&lt;/i&gt; (Evert Jan Ouweneel)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Fear is the path to the dark side.&lt;/i&gt; (Joda)</source>
-        <translation type="vanished">&lt;i&gt;Korku karanlık tarafa giden yoldur.&lt;/i&gt; (Joda)</translation>
+        <translation type="obsolete">&lt;i&gt;Korku karanlık tarafa giden yoldur.&lt;/i&gt; (Joda)</translation>
     </message>
     <message>
         <source>&lt;i&gt;I dream my painting and then paint my dream.&lt;/i&gt; (Vincent Van Gogh)</source>
-        <translation type="vanished">&lt;i&gt;Resmimi hayal ediyor ve rüyamı çiziyorum.&lt;/i&gt; (Vincent Van Gogh)</translation>
+        <translation type="obsolete">&lt;i&gt;Resmimi hayal ediyor ve rüyamı çiziyorum.&lt;/i&gt; (Vincent Van Gogh)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Everything you can imagine is real.&lt;/i&gt; (Pablo Picasso)</source>
-        <translation type="vanished">&lt;i&gt;Hayal edebildiğin her şey gerçektir.&lt;/i&gt; (Pablo Picasso)</translation>
+        <translation type="obsolete">&lt;i&gt;Hayal edebildiğin her şey gerçektir.&lt;/i&gt; (Pablo Picasso)</translation>
     </message>
     <message>
         <source>&lt;i&gt;All truths are easy to understand once they are discovered; the point is to discover them.&lt;/i&gt; (Galileo Galilei)</source>
-        <translation type="vanished">&lt;i&gt;Tüm doğrular, keşfedildikten sonra anlaşılması kolaydır; Buradaki nokta onları keşfetmektir.&lt;/i&gt; (Galileo Galilei)</translation>
+        <translation type="obsolete">&lt;i&gt;Tüm doğrular, keşfedildikten sonra anlaşılması kolaydır; Buradaki nokta onları keşfetmektir.&lt;/i&gt; (Galileo Galilei)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Truth prevails where opinions are free.&lt;/i&gt; (Thomas Paine)</source>
-        <translation type="vanished">&lt;i&gt;Hakikat, fikirlerin özgür olduğu hallerde geçerlidir.&lt;/i&gt; (Thomas Paine)</translation>
+        <translation type="obsolete">&lt;i&gt;Hakikat, fikirlerin özgür olduğu hallerde geçerlidir.&lt;/i&gt; (Thomas Paine)</translation>
     </message>
     <message>
         <source>&lt;i&gt;I&apos;ve seen things you people wouldn&apos;t believe...&lt;/i&gt; (Batty)</source>
-        <translation type="vanished">&lt;i&gt;İnsanların inanmayacağı şeyleri gördüm.&lt;/i&gt; (Batty)</translation>
+        <translation type="obsolete">&lt;i&gt;İnsanların inanmayacağı şeyleri gördüm.&lt;/i&gt; (Batty)</translation>
     </message>
     <message>
         <source>&lt;i&gt;A man&apos;s character is his fate.&lt;/i&gt; (Eraclitus)</source>
-        <translation type="vanished">&lt;i&gt;Bir erkeğin karakteri onun kaderidir.&lt;/i&gt; (Eraclitus)</translation>
+        <translation type="obsolete">&lt;i&gt;Bir erkeğin karakteri onun kaderidir.&lt;/i&gt; (Eraclitus)</translation>
     </message>
     <message>
         <source>&lt;i&gt;A different language is a different vision of life.&lt;/i&gt; (Federico Fellini)</source>
-        <translation type="vanished">&lt;i&gt;Farklı bir dil, farklı bir yaşam görüşüdür.&lt;/i&gt; (Federico Fellini)</translation>
+        <translation type="obsolete">&lt;i&gt;Farklı bir dil, farklı bir yaşam görüşüdür.&lt;/i&gt; (Federico Fellini)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Dum loquimur fugerit invida aetas: carpe diem, quam minimum credula postero&lt;/i&gt; (Orazio)</source>
-        <translation type="vanished">&lt;i&gt;Biz konuşurken bile gaddar zaman kayar gider. Günü kavra, bir sonraki güne olabildiğince az güven&lt;/i&gt; (Orazio)</translation>
+        <translation type="obsolete">&lt;i&gt;Biz konuşurken bile gaddar zaman kayar gider. Günü kavra, bir sonraki güne olabildiğince az güven&lt;/i&gt; (Orazio)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Every day in Africa a gazelle wakes up. It knows it must run faster than the fastest lion or it will be killed. Every morning a lion wakes up. It knows that it must outrun the slowest gazelle or it will starve to death. It doesn&apos;t matter whether you are a lion or a gazelle. When the sun comes up, you better be running.&lt;/i&gt; (Abe Gubegna)</source>
-        <translation type="vanished">&lt;i&gt;Afrika&apos;da her gün bir ceylan uyanır. En hızlı aslandan daha hızlı koşması gerektiğini yoksa öldürüleceğini bilir. Her sabah bir aslan uyanır. En yavaş ceylandan daha hızlı koşması gerektiğini yoksa açlıktan öleceğini bilir. Aslan ya da ceylan olmanız önemli değil. Güneş doğduğunda, koşabildiğiniz kadar koşmalısınız.&lt;/i&gt; (Abe Gubegna)</translation>
+        <translation type="obsolete">&lt;i&gt;Afrika&apos;da her gün bir ceylan uyanır. En hızlı aslandan daha hızlı koşması gerektiğini yoksa öldürüleceğini bilir. Her sabah bir aslan uyanır. En yavaş ceylandan daha hızlı koşması gerektiğini yoksa açlıktan öleceğini bilir. Aslan ya da ceylan olmanız önemli değil. Güneş doğduğunda, koşabildiğiniz kadar koşmalısınız.&lt;/i&gt; (Abe Gubegna)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Okay, Houston, we&apos;ve had a problem here.&lt;/i&gt; (John L. Swigert)</source>
-        <translation type="vanished">&lt;i&gt;Tamam, Houston, burada bir sorunumuz var.&lt;/i&gt; (John L. Swigert)</translation>
+        <translation type="obsolete">&lt;i&gt;Tamam, Houston, burada bir sorunumuz var.&lt;/i&gt; (John L. Swigert)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Second star to the right, and straight on till morning.&lt;/i&gt; (Peter Pan)</source>
-        <translation type="vanished">&lt;i&gt;Sağdaki ikinci yıldız ve sabaha kadar dümdüz.&lt;/i&gt; (Peter Pan)</translation>
+        <translation type="obsolete">&lt;i&gt;Sağdaki ikinci yıldız ve sabaha kadar dümdüz.&lt;/i&gt; (Peter Pan)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Necessity is the last and strongest weapon.&lt;/i&gt; (Titus Livius)</source>
-        <translation type="vanished">&lt;i&gt;Gereklilik, son ve en güçlü silahtır.&lt;/i&gt; (Titus Livius)</translation>
+        <translation type="obsolete">&lt;i&gt;Gereklilik, son ve en güçlü silahtır.&lt;/i&gt; (Titus Livius)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Old-aged people are not wise, they are simply careful.&lt;/i&gt; (Ernest Hemingway)</source>
-        <translation type="vanished">&lt;i&gt;Eski yaşlı insanlar akıllı değil, sadece dikkatlidirler.&lt;/i&gt; (Ernest Hemingway)</translation>
+        <translation type="obsolete">&lt;i&gt;Eski yaşlı insanlar akıllı değil, sadece dikkatlidirler.&lt;/i&gt; (Ernest Hemingway)</translation>
     </message>
     <message>
         <source>&lt;i&gt;A journey of a thousand miles begins with a single step.&lt;/i&gt; (Confucius)</source>
-        <translation type="vanished">&lt;i&gt;Bin kilometrelik bir yolculuk, tek bir adımla başlar.&lt;/i&gt; (Confucius)</translation>
+        <translation type="obsolete">&lt;i&gt;Bin kilometrelik bir yolculuk, tek bir adımla başlar.&lt;/i&gt; (Confucius)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Life without the courage for death is slavery.&lt;/i&gt; (Lucius Annaeus Seneca)</source>
-        <translation type="vanished">&lt;i&gt;Ölüm cesareti olmayan hayat, köledir.&lt;/i&gt; (Lucius Annaeus Seneca)</translation>
+        <translation type="obsolete">&lt;i&gt;Ölüm cesareti olmayan hayat, köledir.&lt;/i&gt; (Lucius Annaeus Seneca)</translation>
     </message>
     <message>
         <source>&lt;i&gt;I can calculate the motion of heavenly bodies, but not the madness of people.&lt;/i&gt; (Isaac Newton)</source>
-        <translation type="vanished">&lt;i&gt;Cennetteki cisimlerin hareketlerini hesaplayabilirim ama insanların çılgınlığını değil&lt;/i&gt; (Isaac Newton)</translation>
+        <translation type="obsolete">&lt;i&gt;Cennetteki cisimlerin hareketlerini hesaplayabilirim ama insanların çılgınlığını değil&lt;/i&gt; (Isaac Newton)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Wonder is the beginning of wisdom.&lt;/i&gt; (Socrates)</source>
-        <translation type="vanished">&lt;i&gt;Merak bilgelik başlangıcıdır.&lt;/i&gt; (Socrates)</translation>
+        <translation type="obsolete">&lt;i&gt;Merak bilgelik başlangıcıdır.&lt;/i&gt; (Socrates)</translation>
     </message>
     <message>
         <source>&lt;i&gt;No wise man ever wished to be younger.&lt;/i&gt; (Jonathan Swift)</source>
-        <translation type="vanished">&lt;i&gt;Hiçbir bilge insan daha genç olmayı istemedi.&lt;/i&gt; (Jonathan Swift)</translation>
+        <translation type="obsolete">&lt;i&gt;Hiçbir bilge insan daha genç olmayı istemedi.&lt;/i&gt; (Jonathan Swift)</translation>
     </message>
     <message>
         <source>&lt;i&gt;The only man who never makes a mistake is the man who never does anything.&lt;/i&gt; (Theodore Roosevelt)</source>
-        <translation type="vanished">&lt;i&gt;Asla hata yapmayan kişi, hiçbir şey yapmayan kişidir.&lt;/i&gt; (Theodore Roosevelt)</translation>
+        <translation type="obsolete">&lt;i&gt;Asla hata yapmayan kişi, hiçbir şey yapmayan kişidir.&lt;/i&gt; (Theodore Roosevelt)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Attitude is a little thing that makes a big difference.&lt;/i&gt; (Winston Churchill)</source>
-        <translation type="vanished">&lt;i&gt;Tutum, büyük bir fark yaratan küçük bir şeydir.&lt;/i&gt; (Winston Churchill)</translation>
+        <translation type="obsolete">&lt;i&gt;Tutum, büyük bir fark yaratan küçük bir şeydir.&lt;/i&gt; (Winston Churchill)</translation>
     </message>
     <message>
         <source>&lt;i&gt;We become what we think.&lt;/i&gt; (Buddha)</source>
-        <translation type="vanished">&lt;i&gt;Ne düşünüyorsak o oluruz.&lt;/i&gt; (Buddha)</translation>
+        <translation type="obsolete">&lt;i&gt;Ne düşünüyorsak o oluruz.&lt;/i&gt; (Buddha)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Difficulties are things that show a person what they are.&lt;/i&gt; (Epictetus)</source>
-        <translation type="vanished">&lt;i&gt;Zorluklar, bir kişiye ne olduklarını gösteren şeylerdir.&lt;/i&gt; (Epictetus)</translation>
+        <translation type="obsolete">&lt;i&gt;Zorluklar, bir kişiye ne olduklarını gösteren şeylerdir.&lt;/i&gt; (Epictetus)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Who will guard the guards themselves?&lt;/i&gt; (Decimus Junius Juvenal)</source>
-        <translation type="vanished">&lt;i&gt;Muhafızları kim koruyacak?&lt;/i&gt; (Decimus Junius Juvenal)</translation>
+        <translation type="obsolete">&lt;i&gt;Muhafızları kim koruyacak?&lt;/i&gt; (Decimus Junius Juvenal)</translation>
     </message>
     <message>
         <source>&lt;i&gt;A home without books is a body without soul.&lt;/i&gt; (Marcus Tullius Cicero)</source>
-        <translation type="vanished">&lt;i&gt;Kitapsız bir ev ruhsuz bir bedendir.&lt;/i&gt; (Marcus Tullius Cicero)</translation>
+        <translation type="obsolete">&lt;i&gt;Kitapsız bir ev ruhsuz bir bedendir.&lt;/i&gt; (Marcus Tullius Cicero)</translation>
     </message>
     <message>
         <source>&lt;i&gt;We can not stop wishing our wishes.&lt;/i&gt; (Arthur Schopenhauer)</source>
-        <translation type="vanished">&lt;i&gt;İsteklerini yerine getirmeyi bırakamayız.&lt;/i&gt; (Arthur Schopenhauer)</translation>
+        <translation type="obsolete">&lt;i&gt;İsteklerini yerine getirmeyi bırakamayız.&lt;/i&gt; (Arthur Schopenhauer)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Patience is also a form of action.&lt;/i&gt; (Auguste Rodin)</source>
-        <translation type="vanished">&lt;i&gt;Sabır aynı zamanda bir eylem şeklidir.&lt;/i&gt; (Auguste Rodin)</translation>
+        <translation type="obsolete">&lt;i&gt;Sabır aynı zamanda bir eylem şeklidir.&lt;/i&gt; (Auguste Rodin)</translation>
     </message>
 </context>
 <context>

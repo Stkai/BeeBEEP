@@ -10,6 +10,7 @@ BeeBEEP 5.6.5 (in development)
   you can choose how many lines to save for every chat
 - Added "Clear cache items after X days" option: default is 96 days
 - Added new option in Settings - Chat - "Show only # messages" to avoid performance issue
+- Added "Always download files into the folder with the user's name" option in menu Settings - File Transfer
 
 BeeBEEP 5.6.4
 - For security reasons the beebeep.off file (saved unsent messages) are now linked to the beebeep.ini file 

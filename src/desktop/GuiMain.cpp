@@ -1019,6 +1019,10 @@ void GuiMain::createMenus()
   mp_actEnableFileSharing->setDisabled( Settings::instance().disableFileSharing() );
 
   mp_menuFileTransferSettings->addSeparator();
+  act = mp_menuFileTransferSettings->addAction( tr( "Always download files into the folder with the user's name" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().downloadInUserFolder() );
+  act->setData( 86 );
   mp_menuExistingFile = mp_menuFileTransferSettings->addMenu( tr( "If a file already exists" ) + QString( "..." ) );
   mp_actGroupExistingFile = new QActionGroup( this );
   mp_actGroupExistingFile->setExclusive( true );
@@ -1047,7 +1051,6 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().alwaysShowFileTransferProgress() );
   act->setData( 78 );
-
 
   mp_menuFileTransferSettings->addSeparator();
   mp_actSelectDownloadFolder = mp_menuFileTransferSettings->addAction( IconManager::instance().icon( "download-folder.png" ), tr( "Select download folder" ) + QString( "..." ), this, SLOT( selectDownloadDirectory() ) );
@@ -1917,6 +1920,9 @@ void GuiMain::settingsChanged( QAction* act )
       }
     }
     break;
+  case 86:
+    Settings::instance().setDownloadInUserFolder( act->isChecked() );
+    break;
   case 99:
     break;
   default:
@@ -2435,7 +2441,7 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi, const QStrin
 
 void GuiMain::downloadFile( const User& u, const FileInfo& fi )
 {
-  if( !askToDownloadFile( u, fi, Settings::instance().downloadDirectory(), true ) )
+  if( !askToDownloadFile( u, fi, Settings::instance().downloadInUserFolder() ? Settings::instance().downloadDirectoryForUser( u ) : Settings::instance().downloadDirectory(), true ) )
     beeCore->refuseToDownloadFile( u.id(), fi );
 }
 
@@ -2466,8 +2472,11 @@ void GuiMain::downloadSharedFiles( const QList<SharedFileInfo>& share_file_info_
 
   foreach( SharedFileInfo sfi, share_file_info_list )
   {
-    download_folder = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().downloadDirectory(), sfi.second.shareFolder() ) );
     u = UserManager::instance().findUser( sfi.first );
+    download_folder = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().downloadInUserFolder() ?
+                                                                                   Settings::instance().downloadDirectoryForUser( u ) :
+                                                                                   Settings::instance().downloadDirectory(), sfi.second.shareFolder() ) );
+
     if( !askToDownloadFile( u, sfi.second, download_folder, false ) )
       return;
 
@@ -2487,7 +2496,7 @@ void GuiMain::downloadSharedFile( VNumber user_id, VNumber file_id )
 
   if( u.isStatusConnected() && file_info.isValid() )
   {
-    askToDownloadFile( u, file_info, Settings::instance().downloadDirectory(), true );
+    askToDownloadFile( u, file_info, Settings::instance().downloadInUserFolder() ? Settings::instance().downloadDirectoryForUser( u ) : Settings::instance().downloadDirectory(), true );
     return;
   }
 
@@ -2541,7 +2550,7 @@ void GuiMain::downloadFolder( const User& u, const QString& folder_name, const Q
     int files_to_download = 0;
     foreach( FileInfo fi, file_info_list )
     {
-      download_folder = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().downloadDirectory(), fi.shareFolder() ) );
+      download_folder = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().downloadInUserFolder() ? Settings::instance().downloadDirectoryForUser( u ) : Settings::instance().downloadDirectory(), fi.shareFolder() ) );
       if( !askToDownloadFile( u, fi, download_folder, false ) )
         return;
 
@@ -2571,6 +2580,12 @@ void GuiMain::selectDownloadDirectory()
     return;
 
   Settings::instance().setDownloadDirectory( download_directory_path );
+  QMessageBox::information( this, Settings::instance().programName(),
+                            QString( "%1<br>%2%3%4" ).arg( tr( "The files will be downloaded to the folder:" ) )
+                                                     .arg( download_directory_path )
+                                                     .arg( Bee::naviveFolderSeparator() )
+                                                     .arg( Settings::instance().downloadInUserFolder() ? Bee::convertToNativeFolderSeparator( QString( "<user's name>" ) ) : "" ),
+                            tr( "Ok" ) );
 }
 
 void GuiMain::showTipOfTheDay()

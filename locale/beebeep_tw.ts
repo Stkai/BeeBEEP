@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="zh_TW">
+<TS version="2.0" language="zh_TW">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -878,7 +878,7 @@
     </message>
     <message>
         <source>Select All</source>
-        <translation type="vanished">全選</translation>
+        <translation type="obsolete">全選</translation>
     </message>
     <message>
         <source>Word completer is enabled</source>
@@ -898,7 +898,7 @@
     </message>
     <message>
         <source>Please select a file to save the messages of the chat.</source>
-        <translation type="vanished">請選擇檔案儲存聊天訊息.</translation>
+        <translation type="obsolete">請選擇檔案儲存聊天訊息.</translation>
     </message>
     <message>
         <source>Clear messages</source>
@@ -1060,6 +1060,10 @@
     </message>
     <message>
         <source>Clear keywords</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View options</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1622,7 +1626,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Select All</source>
-        <translation type="vanished">全選</translation>
+        <translation type="obsolete">全選</translation>
     </message>
     <message>
         <source>Open file</source>
@@ -1873,7 +1877,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Secure Lan Messenger</source>
-        <translation type="vanished">加密區網傳送者</translation>
+        <translation type="obsolete">加密區網傳送者</translation>
     </message>
     <message>
         <source>Escape key minimize to tray icon</source>
@@ -1889,7 +1893,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Chat histories</source>
-        <translation type="vanished">聊天紀錄</translation>
+        <translation type="obsolete">聊天紀錄</translation>
     </message>
     <message>
         <source>Configure network...</source>
@@ -1941,7 +1945,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Do you want to delete this saved chat?</source>
-        <translation type="vanished">你要刪除此儲存的對話嗎?</translation>
+        <translation type="obsolete">你要刪除此儲存的對話嗎?</translation>
     </message>
     <message>
         <source>Save messages</source>
@@ -2205,7 +2209,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Tip of the day</source>
-        <translation type="vanished">每日小提示</translation>
+        <translation type="obsolete">每日小提示</translation>
     </message>
     <message>
         <source>Set your status to away automatically</source>
@@ -2855,6 +2859,14 @@ Please select a different name.</source>
         <source>There are no messages saved in the chat with %1.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Always download files into the folder with the user&apos;s name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The files will be downloaded to the folder:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -2880,7 +2892,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Select All</source>
-        <translation type="vanished">全選</translation>
+        <translation type="obsolete">全選</translation>
     </message>
     <message>
         <source>Select all</source>
@@ -3519,7 +3531,7 @@ Please select a different name.</source>
     <name>GuiShareBox</name>
     <message>
         <source>%1 - Select the ShareBox folder</source>
-        <translation type="vanished">%1-選擇分享盒目錄</translation>
+        <translation type="obsolete">%1-選擇分享盒目錄</translation>
     </message>
     <message>
         <source>%1: access denied.</source>
@@ -3543,7 +3555,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Update ShareBox</source>
-        <translation type="vanished">更新分享盒</translation>
+        <translation type="obsolete">更新分享盒</translation>
     </message>
     <message>
         <source>Your ShareBox is disabled</source>
@@ -3551,11 +3563,11 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Update your ShareBox</source>
-        <translation type="vanished">更新你的分享盒</translation>
+        <translation type="obsolete">更新你的分享盒</translation>
     </message>
     <message>
         <source>Create folder in ShareBox</source>
-        <translation type="vanished">於分享盒建立目錄</translation>
+        <translation type="obsolete">於分享盒建立目錄</translation>
     </message>
     <message>
         <source>%1 already exists.</source>
@@ -3563,7 +3575,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>ShareBox path does not exist. Please select a valid folder.</source>
-        <translation type="vanished">分享盒路徑不存在, 請選擇有效目錄.</translation>
+        <translation type="obsolete">分享盒路徑不存在, 請選擇有效目錄.</translation>
     </message>
     <message>
         <source>ShareBox is not available</source>
@@ -3571,11 +3583,11 @@ Please select a different name.</source>
     </message>
     <message>
         <source>ShareBox</source>
-        <translation type="vanished">分享盒</translation>
+        <translation type="obsolete">分享盒</translation>
     </message>
     <message>
         <source>Create folder in your ShareBox</source>
-        <translation type="vanished">於你的分享盒建立目錄</translation>
+        <translation type="obsolete">於你的分享盒建立目錄</translation>
     </message>
     <message>
         <source>Back to parent folder</source>
@@ -3649,7 +3661,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Enable my ShareBox</source>
-        <translation type="vanished">開啟我的分享盒</translation>
+        <translation type="obsolete">開啟我的分享盒</translation>
     </message>
     <message>
         <source>Select user</source>

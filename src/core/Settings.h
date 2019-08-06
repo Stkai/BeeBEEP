@@ -221,7 +221,6 @@ public:
   inline void setRaiseOnNewMessageArrived( bool );
   inline bool raiseMainWindowOnNewMessageArrived() const;
   inline void setRaiseMainWindowOnNewMessageArrived( bool );
-
   inline bool alwaysShowFileTransferProgress() const;
   inline void setalwaysShowFileTransferProgress( bool );
   inline bool alwaysOpenChatOnNewMessageArrived() const;
@@ -298,6 +297,8 @@ public:
   inline int chatInactiveWindowDefaultOpacityLevel() const;
   inline void setEnableDefaultChatNotifications( bool );
   inline bool enableDefaultChatNotifications() const;
+  inline void setDownloadInUserFolder( bool );
+  inline bool downloadInUserFolder() const;
 
   inline bool usePreviewFileDialog() const;
   inline void setPreviewFileDialogGeometry( const QByteArray& );
@@ -338,6 +339,7 @@ public:
 
   inline const QString& downloadDirectory() const;
   inline void setDownloadDirectory( const QString& );
+  QString downloadDirectoryForUser( const User& ) const;
 
   inline bool beepOnNewMessageArrived() const;
   inline void setBeepOnNewMessageArrived( bool );
@@ -700,6 +702,7 @@ private:
   int m_chatActiveWindowOpacityLevel;
   int m_chatInactiveWindowOpacityLevel;
   bool m_enableDefaultChatNotifications;
+  bool m_downloadInUserFolder;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -1208,5 +1211,7 @@ inline int Settings::clearCacheAfterDays() const { return m_clearCacheAfterDays;
 inline void Settings::setClearCacheAfterDays( int new_value ) { m_clearCacheAfterDays = new_value; }
 inline QString Settings::defaultListBackgroundColor() const { return QLatin1String( "#ffffff" ); }
 inline QString Settings::defaultSystemBackgroundColor() const { return QLatin1String( "#f5f5f5" ); }
+inline void Settings::setDownloadInUserFolder( bool new_value ) { m_downloadInUserFolder = new_value; }
+inline bool Settings::downloadInUserFolder() const { return m_downloadInUserFolder; }
 
 #endif // BEEBEEP_SETTINGS_

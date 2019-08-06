@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -552,7 +552,7 @@
     </message>
     <message>
         <source>Saved chats had an incorrect authorization code and will not be added to history.</source>
-        <translation type="vanished">Le conversazioni salvate avevano un codice di autorizzazione non valido e non sono state inserite nella storia dei messaggi.</translation>
+        <translation type="obsolete">Le conversazioni salvate avevano un codice di autorizzazione non valido e non sono state inserite nella storia dei messaggi.</translation>
     </message>
     <message>
         <source>Saved chats had an incorrect authorization code.</source>
@@ -798,7 +798,7 @@
     </message>
     <message>
         <source>Select All</source>
-        <translation type="vanished">Seleziona tutto</translation>
+        <translation type="obsolete">Seleziona tutto</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -826,7 +826,7 @@
     </message>
     <message>
         <source>Please select a file to save the messages of the chat.</source>
-        <translation type="vanished">Seleziona un file dove salvare la conversazione in corso.</translation>
+        <translation type="obsolete">Seleziona un file dove salvare la conversazione in corso.</translation>
     </message>
     <message>
         <source>%1: save completed.</source>
@@ -1026,7 +1026,7 @@
     </message>
     <message>
         <source>No saved messages were found.</source>
-        <translation type="vanished">Non sono stati trovati altri messaggi salvati.</translation>
+        <translation type="obsolete">Non sono stati trovati altri messaggi salvati.</translation>
     </message>
     <message>
         <source>Loading of saved messages...</source>
@@ -1042,7 +1042,7 @@
     </message>
     <message>
         <source>go to the history to see them all</source>
-        <translation type="vanished">vai alle conversazioni salvate per guardarli tutti</translation>
+        <translation type="obsolete">vai alle conversazioni salvate per guardarli tutti</translation>
     </message>
     <message>
         <source>Select all</source>
@@ -1113,6 +1113,10 @@
     <message>
         <source>Clear keywords</source>
         <translation>Cancella le parole chiave</translation>
+    </message>
+    <message>
+        <source>View options</source>
+        <translation>Opzioni di visualizzazione</translation>
     </message>
 </context>
 <context>
@@ -1362,7 +1366,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show the ShareBox</source>
-        <translation type="vanished">Mostra le ShareBox</translation>
+        <translation type="obsolete">Mostra le ShareBox</translation>
     </message>
     <message>
         <source>downloading</source>
@@ -1481,7 +1485,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Loading of saved messages...</source>
-        <translation type="vanished">Caricamento dei messaggi salvati in corso...</translation>
+        <translation type="obsolete">Caricamento dei messaggi salvati in corso...</translation>
     </message>
 </context>
 <context>
@@ -1538,7 +1542,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation type="vanished">Seleziona tutto</translation>
+        <translation type="obsolete">Seleziona tutto</translation>
     </message>
     <message>
         <source>Print...</source>
@@ -1710,7 +1714,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation type="vanished">Seleziona tutto</translation>
+        <translation type="obsolete">Seleziona tutto</translation>
     </message>
     <message>
         <source>Copy to clipboard</source>
@@ -1977,11 +1981,11 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Tip of the day</source>
-        <translation type="vanished">Suggerimenti</translation>
+        <translation type="obsolete">Suggerimenti</translation>
     </message>
     <message>
         <source>Fact of the day</source>
-        <translation type="vanished">Perle di saggezza</translation>
+        <translation type="obsolete">Perle di saggezza</translation>
     </message>
     <message>
         <source>Enable file transfer</source>
@@ -2381,7 +2385,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Chat histories</source>
-        <translation type="vanished">Conversazioni salvate</translation>
+        <translation type="obsolete">Conversazioni salvate</translation>
     </message>
     <message>
         <source>Starting</source>
@@ -2509,7 +2513,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Do you want to delete this saved chat?</source>
-        <translation type="vanished">Vuoi cancellare questa conversazione salvata?</translation>
+        <translation type="obsolete">Vuoi cancellare questa conversazione salvata?</translation>
     </message>
     <message>
         <source>Do you want to clear messages with %1?</source>
@@ -2933,7 +2937,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show tips and facts of the day</source>
-        <translation type="vanished">Mostra suggerimenti e fatti del giorno</translation>
+        <translation type="obsolete">Mostra suggerimenti e fatti del giorno</translation>
     </message>
     <message>
         <source>Development version</source>
@@ -2941,11 +2945,11 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show tip of the day</source>
-        <translation type="vanished">Mostra suggetimento del giorno</translation>
+        <translation type="obsolete">Mostra suggetimento del giorno</translation>
     </message>
     <message>
         <source>Show Tips...</source>
-        <translation type="vanished">Mostra i suggerimenti...</translation>
+        <translation type="obsolete">Mostra i suggerimenti...</translation>
     </message>
     <message>
         <source>Discover the fact of the day...</source>
@@ -2973,7 +2977,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Please select the maximum number of lines to be saved in the conversation (current: %1).</source>
-        <translation type="vanished">Seleziona il numero massimo di righe da salvare nella conversazione (attuale %1).</translation>
+        <translation type="obsolete">Seleziona il numero massimo di righe da salvare nella conversazione (attuale %1).</translation>
     </message>
     <message>
         <source>Clean the cache from items older than %1 days</source>
@@ -2985,7 +2989,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show Faq...</source>
-        <translation type="vanished">Mostra le FAQ...</translation>
+        <translation type="obsolete">Mostra le FAQ...</translation>
     </message>
     <message>
         <source>Show tips...</source>
@@ -3019,6 +3023,14 @@ Inserisci un nome differente.</translation>
         <source>There are no messages saved in the chat with %1.</source>
         <translation>Non ci sono messaggi salvati nella conversazione con %1.</translation>
     </message>
+    <message>
+        <source>Always download files into the folder with the user&apos;s name</source>
+        <translation>Scarica sempre i file dentro la cartella con il nome dell&apos;utente</translation>
+    </message>
+    <message>
+        <source>The files will be downloaded to the folder:</source>
+        <translation>I file saranno scaricati nella cartella:</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -3044,7 +3056,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation type="vanished">Seleziona tutto</translation>
+        <translation type="obsolete">Seleziona tutto</translation>
     </message>
     <message>
         <source>Select all</source>
@@ -3112,7 +3124,7 @@ Inserisci un nome differente.</translation>
     <name>GuiNetworkTest</name>
     <message>
         <source>Network test</source>
-        <translation type="vanished">Test di rete</translation>
+        <translation type="obsolete">Test di rete</translation>
     </message>
     <message>
         <source>Your network parameters</source>
@@ -3132,7 +3144,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Enter the host address and the port you want to test the connection.</source>
-        <translation type="vanished">Inserisci l&apos;indirizzo IP e la porta su cui vuoi testare la connessione.</translation>
+        <translation type="obsolete">Inserisci l&apos;indirizzo IP e la porta su cui vuoi testare la connessione.</translation>
     </message>
     <message>
         <source>The host address entered is not valid.</source>
@@ -3156,11 +3168,11 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Unknown connection is active.</source>
-        <translation type="vanished">La connessione sconosciuta è attiva.</translation>
+        <translation type="obsolete">La connessione sconosciuta è attiva.</translation>
     </message>
     <message>
         <source>Connection to %1 has error #%2.</source>
-        <translation type="vanished">La connessione a %1 ha avuto un errore #%2.</translation>
+        <translation type="obsolete">La connessione a %1 ha avuto un errore #%2.</translation>
     </message>
     <message>
         <source>Unknown connection has error #%2.</source>
@@ -3485,7 +3497,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Find text in chat</source>
-        <translation type="vanished">Trova testo nella conversazione</translation>
+        <translation type="obsolete">Trova testo nella conversazione</translation>
     </message>
     <message>
         <source>Copy to clipboard</source>
@@ -3505,11 +3517,11 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>%1 not found in chat.</source>
-        <translation type="vanished">%1 non trovato nella conversazione.</translation>
+        <translation type="obsolete">%1 non trovato nella conversazione.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="vanished">Cancella</translation>
+        <translation type="obsolete">Cancella</translation>
     </message>
     <message>
         <source>Right click to open menu</source>
@@ -3743,19 +3755,19 @@ Inserisci un nome differente.</translation>
     <name>GuiShareBox</name>
     <message>
         <source>ShareBox</source>
-        <translation type="vanished">ShareBox</translation>
+        <translation type="obsolete">ShareBox</translation>
     </message>
     <message>
         <source>Update your ShareBox</source>
-        <translation type="vanished">Aggiorna la tua ShareBox</translation>
+        <translation type="obsolete">Aggiorna la tua ShareBox</translation>
     </message>
     <message>
         <source>Update ShareBox</source>
-        <translation type="vanished">Aggiorna la ShareBox</translation>
+        <translation type="obsolete">Aggiorna la ShareBox</translation>
     </message>
     <message>
         <source>ShareBox path does not exist. Please select a valid folder.</source>
-        <translation type="vanished">Il percorso della ShareBox non esiste. Selezionane uno valido.</translation>
+        <translation type="obsolete">Il percorso della ShareBox non esiste. Selezionane uno valido.</translation>
     </message>
     <message>
         <source>Your ShareBox is disabled</source>
@@ -3767,7 +3779,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>%1 - Select the ShareBox folder</source>
-        <translation type="vanished">%1 - Seleziona la cartella della ShareBox</translation>
+        <translation type="obsolete">%1 - Seleziona la cartella della ShareBox</translation>
     </message>
     <message>
         <source>%1 &lt;b&gt;%2&lt;/b&gt;</source>
@@ -3791,7 +3803,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Create folder in your ShareBox</source>
-        <translation type="vanished">Crea una cartella nella tua ShareBox</translation>
+        <translation type="obsolete">Crea una cartella nella tua ShareBox</translation>
     </message>
     <message>
         <source>Show current folder</source>
@@ -3799,7 +3811,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Create folder in ShareBox</source>
-        <translation type="vanished">Crea una cartella nello ShareBox</translation>
+        <translation type="obsolete">Crea una cartella nello ShareBox</translation>
     </message>
     <message>
         <source>Back to parent folder</source>
@@ -3865,7 +3877,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Enable my ShareBox</source>
-        <translation type="vanished">Abilita la mia ShareBox</translation>
+        <translation type="obsolete">Abilita la mia ShareBox</translation>
     </message>
     <message>
         <source>Select your folder</source>
@@ -4883,115 +4895,115 @@ Inserisci un nome differente.</translation>
     <name>Tips</name>
     <message>
         <source>You can switch between chats with CTRL+TAB if there are new messages availables.</source>
-        <translation type="vanished">Puoi passare da una conversazione ad un&apos;altra usando CTRL+TAB se sono presenti nuovi messaggi.</translation>
+        <translation type="obsolete">Puoi passare da una conversazione ad un&apos;altra usando CTRL+TAB se sono presenti nuovi messaggi.</translation>
     </message>
     <message>
         <source>If you want a &lt;b&gt;bold text&lt;/b&gt; write a *bold text*.</source>
-        <translation type="vanished">Se vuoi usare il &lt;b&gt;testo in grassetto&lt;/b&gt; usa gli asterischi e scrivi *testo in grassetto*.</translation>
+        <translation type="obsolete">Se vuoi usare il &lt;b&gt;testo in grassetto&lt;/b&gt; usa gli asterischi e scrivi *testo in grassetto*.</translation>
     </message>
     <message>
         <source>If you want an &lt;i&gt;italic text&lt;/i&gt; write a /italic text/.</source>
-        <translation type="vanished">Se vuoi usare il &lt;i&gt;testo in corsivo&lt;/i&gt; puoi usare le / e scrivere /testo in corsivo/.</translation>
+        <translation type="obsolete">Se vuoi usare il &lt;i&gt;testo in corsivo&lt;/i&gt; puoi usare le / e scrivere /testo in corsivo/.</translation>
     </message>
     <message>
         <source>If you want an &lt;u&gt;underlined text&lt;/u&gt; write a _underlined text_.</source>
-        <translation type="vanished">Se vuoi usare il &lt;u&gt;testo sottilineato&lt;/u&gt; puoi usare il carattere _ e scrivere _testo sottolineato_.</translation>
+        <translation type="obsolete">Se vuoi usare il &lt;u&gt;testo sottilineato&lt;/u&gt; puoi usare il carattere _ e scrivere _testo sottolineato_.</translation>
     </message>
     <message>
         <source>&lt;i&gt;Free is that mind guided by the fantasy.&lt;/i&gt; (Marco Mastroddi)</source>
-        <translation type="vanished">&lt;i&gt;Libera è quella mente guidata dalla fantasia.&lt;/i&gt; (Marco Mastroddi)</translation>
+        <translation type="obsolete">&lt;i&gt;Libera è quella mente guidata dalla fantasia.&lt;/i&gt; (Marco Mastroddi)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Stay hungry, stay foolish.&lt;/i&gt; (Steve Jobs)</source>
-        <translation type="vanished">&lt;i&gt;Siate affamati, siate folli.&lt;/i&gt; (Steve Jobs)</translation>
+        <translation type="obsolete">&lt;i&gt;Siate affamati, siate folli.&lt;/i&gt; (Steve Jobs)</translation>
     </message>
     <message>
         <source>&lt;i&gt;There is always one more bug.&lt;/i&gt; (Lubarsky&apos;s Law)</source>
-        <translation type="vanished">&lt;i&gt;Ci sarà sempre un altro bug.&lt;/i&gt; (Legge di Lubarsky)</translation>
+        <translation type="obsolete">&lt;i&gt;Ci sarà sempre un altro bug.&lt;/i&gt; (Legge di Lubarsky)</translation>
     </message>
     <message>
         <source>&lt;i&gt;If anything can go wrong, it will.&lt;/i&gt; (Murphy&apos;s Law)</source>
-        <translation type="vanished">&lt;i&gt;Se qualcosa può andare storto, ci andrà.&lt;/i&gt; (Legge di Murphy)</translation>
+        <translation type="obsolete">&lt;i&gt;Se qualcosa può andare storto, ci andrà.&lt;/i&gt; (Legge di Murphy)</translation>
     </message>
     <message>
         <source>&lt;i&gt;If a program is useful, it will have to be changed.&lt;/i&gt; (Law of Computer Programming)</source>
-        <translation type="vanished">&lt;i&gt;Se un programma è utile probabilmente dovrà essere cambiato.&lt;/i&gt; (Legge della Programmazione)</translation>
+        <translation type="obsolete">&lt;i&gt;Se un programma è utile probabilmente dovrà essere cambiato.&lt;/i&gt; (Legge della Programmazione)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Intellectuals solve problems; geniuses prevent them.&lt;/i&gt; (Albert Einstein)</source>
-        <translation type="vanished">&lt;i&gt;Le menti intelligentii risolvono i problemi; quelle geniali li prevengono.&lt;/i&gt; (Albert Einstein)</translation>
+        <translation type="obsolete">&lt;i&gt;Le menti intelligentii risolvono i problemi; quelle geniali li prevengono.&lt;/i&gt; (Albert Einstein)</translation>
     </message>
     <message>
         <source>&lt;i&gt;What does not destroy me, makes me strong.&lt;/i&gt; (Friedrich Nietzsche)</source>
-        <translation type="vanished">&lt;i&gt;Quello che non mi uccide, mi fortifica.&lt;/i&gt; (Friedrich Nietzsche)</translation>
+        <translation type="obsolete">&lt;i&gt;Quello che non mi uccide, mi fortifica.&lt;/i&gt; (Friedrich Nietzsche)</translation>
     </message>
     <message>
         <source>&lt;i&gt;I am not young enough to know everything.&lt;/i&gt; (Oscar Wilde)</source>
-        <translation type="vanished">&lt;i&gt;Non sono così giovane da conoscere ogni cosa.&lt;/i&gt; (Oscar Wilde)</translation>
+        <translation type="obsolete">&lt;i&gt;Non sono così giovane da conoscere ogni cosa.&lt;/i&gt; (Oscar Wilde)</translation>
     </message>
     <message>
         <source>&lt;i&gt;A lack of doubt leads to a lack of creativity.&lt;/i&gt; (Evert Jan Ouweneel)</source>
-        <translation type="vanished">&lt;i&gt;Un&apos;assenza di dubbi conduce ad una mancanza di creatività.&lt;/i&gt; (Evert Jan Ouweneel)</translation>
+        <translation type="obsolete">&lt;i&gt;Un&apos;assenza di dubbi conduce ad una mancanza di creatività.&lt;/i&gt; (Evert Jan Ouweneel)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Fear is the path to the dark side.&lt;/i&gt; (Joda)</source>
-        <translation type="vanished">&lt;i&gt;La paura conduce al lato oscuro.&lt;/i&gt; (Joda)</translation>
+        <translation type="obsolete">&lt;i&gt;La paura conduce al lato oscuro.&lt;/i&gt; (Joda)</translation>
     </message>
     <message>
         <source>&lt;i&gt;I dream my painting and then paint my dream.&lt;/i&gt; (Vincent Van Gogh)</source>
-        <translation type="vanished">&lt;i&gt;Sogno i miei dipinti e poi dipingo i miei sogni.&lt;/i&gt; (Vincent Van Gogh)</translation>
+        <translation type="obsolete">&lt;i&gt;Sogno i miei dipinti e poi dipingo i miei sogni.&lt;/i&gt; (Vincent Van Gogh)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Everything you can imagine is real.&lt;/i&gt; (Pablo Picasso)</source>
-        <translation type="vanished">&lt;i&gt;Qualsiasi cosa tu possa immaginare è reale.&lt;/i&gt; (Pablo Picasso)</translation>
+        <translation type="obsolete">&lt;i&gt;Qualsiasi cosa tu possa immaginare è reale.&lt;/i&gt; (Pablo Picasso)</translation>
     </message>
     <message>
         <source>&lt;i&gt;All truths are easy to understand once they are discovered; the point is to discover them.&lt;/i&gt; (Galileo Galilei)</source>
-        <translation type="vanished">&lt;i&gt;Tutte le verità sono facili da comprendere una volta scoperte; il punto è scoprirle.&lt;/i&gt; (Galileo Galilei)</translation>
+        <translation type="obsolete">&lt;i&gt;Tutte le verità sono facili da comprendere una volta scoperte; il punto è scoprirle.&lt;/i&gt; (Galileo Galilei)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Truth prevails where opinions are free.&lt;/i&gt; (Thomas Paine)</source>
-        <translation type="vanished">&lt;i&gt;La verità emerge quando le opinioni sono libere.&lt;/i&gt; (Thomas Paine)</translation>
+        <translation type="obsolete">&lt;i&gt;La verità emerge quando le opinioni sono libere.&lt;/i&gt; (Thomas Paine)</translation>
     </message>
     <message>
         <source>&lt;i&gt;I&apos;ve seen things you people wouldn&apos;t believe...&lt;/i&gt; (Batty)</source>
-        <translation type="vanished">&lt;i&gt;Ho visto cose che voi umani non potreste immaginare...&lt;/i&gt; (Batty)</translation>
+        <translation type="obsolete">&lt;i&gt;Ho visto cose che voi umani non potreste immaginare...&lt;/i&gt; (Batty)</translation>
     </message>
     <message>
         <source>&lt;i&gt;A different language is a different vision of life.&lt;/i&gt; (Federico Fellini)</source>
-        <translation type="vanished">&lt;i&gt;Un linguaggio diverso è una diversa visione della vita.&lt;/i&gt; (Federico Fellini)</translation>
+        <translation type="obsolete">&lt;i&gt;Un linguaggio diverso è una diversa visione della vita.&lt;/i&gt; (Federico Fellini)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Dum loquimur fugerit invida aetas: carpe diem, quam minimum credula postero&lt;/i&gt; (Orazio)</source>
-        <translation type="vanished">&lt;i&gt;Dum loquimur fugerit invida aetas: carpe diem, quam minimum credula postero&lt;/i&gt; (Orazio)</translation>
+        <translation type="obsolete">&lt;i&gt;Dum loquimur fugerit invida aetas: carpe diem, quam minimum credula postero&lt;/i&gt; (Orazio)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Every day in Africa a gazelle wakes up. It knows it must run faster than the fastest lion or it will be killed. Every morning a lion wakes up. It knows that it must outrun the slowest gazelle or it will starve to death. It doesn&apos;t matter whether you are a lion or a gazelle. When the sun comes up, you better be running.&lt;/i&gt; (Abe Gubegna)</source>
-        <translation type="vanished">&lt;i&gt;Ogni giorno in Africa una gazzella si sveglia e sa che dovrà correre più veloce del leone o verrà uccisa. Ogni mattina un leone si sveglia e sa che dovrà correre più veloce della gazzella o morirà di fame. Non importa che tu sia leone o gazzella. Quando il sole sorge, inizia a correre.&lt;/i&gt; (Abe Gubegna)</translation>
+        <translation type="obsolete">&lt;i&gt;Ogni giorno in Africa una gazzella si sveglia e sa che dovrà correre più veloce del leone o verrà uccisa. Ogni mattina un leone si sveglia e sa che dovrà correre più veloce della gazzella o morirà di fame. Non importa che tu sia leone o gazzella. Quando il sole sorge, inizia a correre.&lt;/i&gt; (Abe Gubegna)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Okay, Houston, we&apos;ve had a problem here.&lt;/i&gt; (John L. Swigert)</source>
-        <translation type="vanished">&lt;i&gt;Okay, Houston, qui abbiamo avuto un problema.&lt;/i&gt; (John L. Swigert)</translation>
+        <translation type="obsolete">&lt;i&gt;Okay, Houston, qui abbiamo avuto un problema.&lt;/i&gt; (John L. Swigert)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Second star to the right, and straight on till morning.&lt;/i&gt; (Peter Pan)</source>
-        <translation type="vanished">&lt;i&gt;Seconda stella a destra e poi dritti fino al mattino.&lt;/i&gt; (Peter Pan)</translation>
+        <translation type="obsolete">&lt;i&gt;Seconda stella a destra e poi dritti fino al mattino.&lt;/i&gt; (Peter Pan)</translation>
     </message>
     <message>
         <source>You can search previous sent message in the history using the CTRL+Up e CTRL+Down keys.</source>
-        <translation type="vanished">Puoi navigare tra i messaggi che hai inviato usando le combinazioni CTRL+FrecciaSu e CTRL+FrecciaGiù.</translation>
+        <translation type="obsolete">Puoi navigare tra i messaggi che hai inviato usando le combinazioni CTRL+FrecciaSu e CTRL+FrecciaGiù.</translation>
     </message>
     <message>
         <source>You can drop files to active chat and send them to members.</source>
-        <translation type="vanished">Puoi trascinare un file nella conversazione attiva per inviarlo a tutti i membri.</translation>
+        <translation type="obsolete">Puoi trascinare un file nella conversazione attiva per inviarlo a tutti i membri.</translation>
     </message>
     <message>
         <source>You can select multiple files from network shares and download them simultaneously with a right click.</source>
-        <translation type="vanished">Puoi selezionare uno o più file dalla condivisione di rete e scaricarli tutti insieme usando il pulsante destro.</translation>
+        <translation type="obsolete">Puoi selezionare uno o più file dalla condivisione di rete e scaricarli tutti insieme usando il pulsante destro.</translation>
     </message>
     <message>
         <source>You can disable message notification from a group right clicking on its name on the list.</source>
-        <translation type="vanished">Puoi disabilitare le notifiche di un gruppo premendo il tasto destro sul nome del gruppo nella lista.</translation>
+        <translation type="obsolete">Puoi disabilitare le notifiche di un gruppo premendo il tasto destro sul nome del gruppo nella lista.</translation>
     </message>
 </context>
 <context>

@@ -272,7 +272,8 @@ MaxQueuedDownloads = is the max number of downloads can be selected in file shar
 MaxSharedFiles=[integer] is the max number of shared files for user (default=4096) [4.0.0]
 FileTransferConfirmTimeout=30000
 FileTransferBufferSize=65456
-ConfirmOnDownloadFile=[true/false] if it is true always prompt before downloading a file
+ConfirmOnDownloadFile=[true/false] if it is true always prompt before downloading a fileù
+DownloadInUserFolder=[true/false] if it is true BeeBEEP always download files into the folder with the user's name (default=false) [5.6.5]
 ShareList=(do not edit manually)
 
 [ShareDesktop]

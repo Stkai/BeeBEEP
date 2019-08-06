@@ -1331,10 +1331,10 @@ void Settings::load()
   m_maxQueuedDownloads = sets->value( "MaxQueuedDownloads", 400 ).toInt();
   m_fileTransferConfirmTimeout = qMax( sets->value( "FileTransferConfirmTimeout", 30000 ).toInt(), 1000 );
   m_fileTransferBufferSize = qMax( sets->value( "FileTransferBufferSize", 65456 ).toInt(), 2048 );
-
   m_automaticFileName = sets->value( "SetAutomaticFileNameOnSave", true ).toBool();
   m_overwriteExistingFiles = sets->value( "OverwriteExistingFiles", false ).toBool();
   m_confirmOnDownloadFile = sets->value( "ConfirmOnDownloadFile", m_confirmOnDownloadFile ).toBool();
+  m_downloadInUserFolder = sets->value( "DownloadInUserFolder", false ).toBool();
   QStringList local_share = sets->value( "ShareList", QStringList() ).toStringList();
   if( !local_share.isEmpty() )
   {
@@ -1656,6 +1656,7 @@ void Settings::save()
   sets->setValue( "MaxQueuedDownloads", m_maxQueuedDownloads );
   sets->setValue( "ConfirmOnDownloadFile", m_confirmOnDownloadFile );
   sets->setValue( "ShareList", m_localShare );
+  sets->setValue( "DownloadInUserFolder", m_downloadInUserFolder );
   sets->endGroup();
 
   sets->beginGroup( "Group" );
@@ -2028,4 +2029,10 @@ int Settings::defaultChatMessagesToShow() const
 #else
   return 400;
 #endif
+}
+
+QString Settings::downloadDirectoryForUser( const User& u ) const
+{
+  QString user_name = u.name();
+  return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( downloadDirectory() ).arg( user_name ) );
 }
