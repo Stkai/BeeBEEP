@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "Avatar.h"
+#include "BeeUtils.h"
 #include "ChatManager.h"
 #include "ColorManager.h"
 #include "Connection.h"
@@ -277,25 +278,25 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
         if( Settings::instance().userRecognitionMethod() == Settings::RecognizeByAccountAndDomain )
         {
           sAlertMsg = tr( "%1 Connection closed to user %2 because it uses your account name: %3." )
-                          .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), u.path(), u.accountPath() );
+                          .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), Bee::replaceHtmlSpecialCharacters( u.path() ), u.accountPath() );
           sAlertMsg += QString( " (%1)" ).arg( tr( "domain" ) );
         }
         else if( Settings::instance().userRecognitionMethod() == Settings::RecognizeByAccount )
         {
           sAlertMsg = tr( "%1 Connection closed to user %2 because it uses your account name: %3." )
-                          .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), u.path(), u.accountName() );
+                          .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), Bee::replaceHtmlSpecialCharacters( u.path() ), u.accountName() );
         }
         else
         {
           if( u.name() == user_found.name() )
           {
             sAlertMsg = tr( "%1 Connection closed to user %2 because it uses your nickname: %3." )
-                          .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), u.path(), u.name() );
+                          .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), Bee::replaceHtmlSpecialCharacters( u.path() ), Bee::replaceHtmlSpecialCharacters( u.name() ) );
           }
           else
           {
             sAlertMsg = tr( "%1 Connection closed to user %2 because it uses your hash code." )
-                          .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), u.path() );
+                          .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), Bee::replaceHtmlSpecialCharacters( u.path() ) );
           }
         }
         dispatchSystemMessage( ID_DEFAULT_CHAT, user_found.id(), sAlertMsg, DispatchToDefaultAndPrivateChat, ChatMessage::Connection );
@@ -315,14 +316,14 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
         if( Settings::instance().userRecognitionMethod() == Settings::RecognizeByAccountAndDomain )
         {
           sAlertMsg = tr( "%1 Connection closed to user %2 because it uses same account name of the already connected user %3: %4." )
-                        .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), u.path(), user_found.path(), u.accountPath() );
+                        .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), Bee::replaceHtmlSpecialCharacters( u.path() ), Bee::replaceHtmlSpecialCharacters( user_found.path() ), u.accountPath() );
           sAlertMsg += QString( " (%1)" ).arg( tr( "domain" ) );
           qDebug() << "User" << qPrintable( u.path() ) << "is already connected with account (domain)" << qPrintable( user_found.accountPath() );
         }
         else if( Settings::instance().userRecognitionMethod() == Settings::RecognizeByAccount )
         {
           sAlertMsg = tr( "%1 Connection closed to user %2 because it uses same account name of the already connected user %3: %4." )
-                        .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), u.path(), user_found.path(), u.accountName() );
+                        .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), Bee::replaceHtmlSpecialCharacters( u.path() ), Bee::replaceHtmlSpecialCharacters( user_found.path() ), u.accountName() );
           qDebug() << "User" << qPrintable( u.path() ) << "is already connected with account" << qPrintable( user_found.accountName() );
         }
         else
@@ -330,13 +331,13 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
           if( u.name() == user_found.name() )
           {
             sAlertMsg = tr( "%1 Connection closed to user %2 because it uses same nickname of the already connected user %3: %4." )
-                          .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), u.path(), user_found.path(), u.name() );
+                          .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), Bee::replaceHtmlSpecialCharacters( u.path() ), Bee::replaceHtmlSpecialCharacters( user_found.path() ), Bee::replaceHtmlSpecialCharacters( u.name() ) );
             qDebug() << "User" << qPrintable( u.path() ) << "is already connected with the same nickname of" << qPrintable( user_found.path() );
           }
           else
           {
             sAlertMsg = tr( "%1 Connection closed to user %2 because it uses same hash code of the already connected user %3: %4." )
-                          .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), u.path(), user_found.path(), u.name() );
+                          .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), Bee::replaceHtmlSpecialCharacters( u.path() ), Bee::replaceHtmlSpecialCharacters( user_found.path() ), Bee::replaceHtmlSpecialCharacters( u.name() ) );
             qDebug() << "User" << qPrintable( u.path() ) << "is already connected with the same hash code of" << qPrintable( user_found.path() );
           }
         }
@@ -393,7 +394,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
 
   if( c->protoVersion() < SECURE_LEVEL_3_PROTO_VERSION )
   {
-    QString sAlertMsg = tr( "%1 %2 uses old encryption level." ).arg( IconManager::instance().toHtml( "warning.png", "*E*" ), u.path() );
+    QString sAlertMsg = tr( "%1 %2 uses old encryption level." ).arg( IconManager::instance().toHtml( "warning.png", "*E*" ), Bee::replaceHtmlSpecialCharacters( u.path() ) );
     dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sAlertMsg, DispatchToDefaultAndPrivateChat, ChatMessage::Connection );
   }
 

@@ -79,12 +79,10 @@ void Core::setLocalUserStatusDescription( int user_status, const QString& new_st
 void Core::showUserNameChanged( const User& u, const QString& old_user_name )
 {
   QString sHtmlMsg = IconManager::instance().toHtml( "profile.png", "*N*" ) + QString( " " );
-
   if( u.isLocal() )
-    sHtmlMsg += tr( "You have changed your nickname from %1 to %2." ).arg( old_user_name, u.name() );
+    sHtmlMsg += tr( "You have changed your nickname from %1 to %2." ).arg( Bee::replaceHtmlSpecialCharacters( old_user_name ), Bee::replaceHtmlSpecialCharacters( u.name() ) );
   else
-    sHtmlMsg += tr( "%1 has changed the nickname in %2." ).arg( old_user_name, u.name() );
-
+    sHtmlMsg += tr( "%1 has changed the nickname in %2." ).arg( Bee::replaceHtmlSpecialCharacters( old_user_name ), Bee::replaceHtmlSpecialCharacters( u.name() ) );
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::UserInfo );
 }
 
@@ -97,7 +95,7 @@ void Core::showUserVCardChanged( const User& u, const VCard& old_vcard )
     QString txt_birthday = Bee::userBirthdayToText( u );
     if( !txt_birthday.isEmpty() )
     {
-      sHtmlMsg = QString( "%1 <b>%2.</b>" ).arg( IconManager::instance().toHtml( "birthday.png", "*!*" ), txt_birthday );
+      sHtmlMsg = QString( "%1 <b>%2.</b>" ).arg( IconManager::instance().toHtml( "birthday.png", "*!*" ), Bee::replaceHtmlSpecialCharacters( txt_birthday ) );
       dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::UserInfo );
     }
   }
@@ -107,8 +105,8 @@ void Core::showUserVCardChanged( const User& u, const VCard& old_vcard )
     if( !u.vCard().info().isEmpty() )
     {
       sHtmlMsg = QString( "%1 %2" ).arg( IconManager::instance().toHtml( "info.png", "*I*" ),
-                                      (u.isLocal() ? tr( "You share this information" ) : tr( "%1 shares this information" ).arg( u.name() )) );
-      sHtmlMsg += QString( ": <b>%1</b>" ).arg( u.vCard().info() );
+                                      (u.isLocal() ? tr( "You share this information" ) : tr( "%1 shares this information" ).arg( Bee::replaceHtmlSpecialCharacters( u.name() ) )) );
+      sHtmlMsg += QString( ": <b>%1</b>" ).arg( Bee::replaceHtmlSpecialCharacters( u.vCard().info() ) );
       if( u.isLocal() )
         dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToChat, ChatMessage::UserInfo );
       else

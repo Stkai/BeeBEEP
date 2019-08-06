@@ -1985,22 +1985,24 @@ QString Protocol::formatHtmlText( const QString& text )
   QString text_formatted = "";
   int last_semicolon_index = -1;
   bool there_is_a_space_before_it = false;
+  QChar c;
 
   for( int i = 0; i < text.length(); i++ )
   {
-    if( text.at( i ) == QLatin1Char( ' ' ) )
+    c = text.at( i );
+    if( c == QLatin1Char( ' ' ) )
     {
       if( there_is_a_space_before_it )
         text_formatted += QLatin1String( "&nbsp; " ); // space added for emoticons recognize
       else
         text_formatted += QLatin1Char( ' ' );
     }
-    else if( text.at( i ) == QLatin1Char( '\n' ) )
+    else if( c == QLatin1Char( '\n' ) )
     {
       // space added to match url after a \n
       text_formatted += QLatin1String( "<br> " );
     }
-    else if( text.at( i ) == QLatin1Char( '<' ) )
+    else if( c == QLatin1Char( '<' ) )
     {
       if( Settings::instance().chatUseHtmlTags() )
       {
@@ -2013,7 +2015,7 @@ QString Protocol::formatHtmlText( const QString& text )
       else
         text_formatted += QLatin1String( "&lt;" );
     }
-    else if( text.at( i ) == QLatin1Char( '>' ) )
+    else if( c == QLatin1Char( '>' ) )
     {
       if( Settings::instance().chatUseHtmlTags() )
       {
@@ -2024,21 +2026,21 @@ QString Protocol::formatHtmlText( const QString& text )
       else
         text_formatted += QLatin1String( "&gt;" );
     }
-    else if( text.at( i ) == QLatin1Char( '"' ) )
+    else if( c == QLatin1Char( '"' ) )
     {
       if( last_semicolon_index >= 0 )
         text_formatted += QLatin1Char( '"' );
       else
         text_formatted += QLatin1String( "&quot;" );
     }
-    else if( text.at( i ) == QLatin1Char( '&' ) )
+    else if( c == QLatin1Char( '&' ) )
     {
       text_formatted += QLatin1Char( '&' ); // not &amp; for Linkify
     }
     else
-      text_formatted += text.at( i );
+      text_formatted += c;
 
-    there_is_a_space_before_it = text.at( i ) == QLatin1Char( ' ' );
+    there_is_a_space_before_it = c == QLatin1Char( ' ' );
   }
 
   if( last_semicolon_index >= 0 )

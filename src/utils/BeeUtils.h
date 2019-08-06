@@ -59,6 +59,7 @@ namespace Bee
   QColor invertColor( const QColor& );
   bool isColorNear( const QColor&, const QColor& );
   QString removeHtmlTags( const QString& );
+  QString replaceHtmlSpecialCharacters( const QString& );
   inline int toLittleEndianFromBig( int );
   QString chatMessageTypeToString( int );
   QBrush defaultTextBrush();
@@ -88,6 +89,7 @@ namespace Bee
   QString dateTimeToString( const QDateTime& );
   QString beeColorsToHtmlText( const QString& );
   QString pluginFileExtension();
+  QString removeInvalidCharactersForFilePath( const QString& );
 
 }
 

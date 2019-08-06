@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeUtils.h"
 #include "GuiChatMessage.h"
 #include "ChatMessage.h"
 #include "EmoticonManager.h"
@@ -79,7 +80,7 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
 
   QString date_time_stamp = datetimestampToString( cm, show_timestamp, show_datestamp );
   QString html_date_time_stamp = date_time_stamp.isEmpty() ? date_time_stamp : QString( "<font color=%1>(%2)</font>" ).arg( Settings::instance().chatSystemTextColor() ).arg( date_time_stamp );
-  QString user_name = append_message_to_previous ? QString( "" ) : (u.isLocal() && !use_your_name) ? QObject::tr( "You" ) : (u.isValid() ? u.name() : QObject::tr( "Unknown" ));
+  QString user_name = append_message_to_previous ? QString( "" ) : (u.isLocal() && !use_your_name) ? QObject::tr( "You" ) : (u.isValid() ? Bee::replaceHtmlSpecialCharacters( u.name() ) : QObject::tr( "Unknown" ));
   if( cm.isFromAutoresponder() )
   {
     append_message_to_previous = false;
@@ -172,7 +173,7 @@ QString GuiChatMessage::chatToHtml( const Chat& c, bool skip_file_transfers, boo
   User u;
 
   foreach( ChatMessage cm, c.messages() )
-  {  
+  {
     if( cm.isFromSystem() )
     {
       if( cm.isFileTransfer() || cm.isImagePreview() )

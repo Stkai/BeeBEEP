@@ -921,3 +921,47 @@ QString Bee::pluginFileExtension()
   return QLatin1String( "dll" );
 #endif
 }
+
+QString Bee::removeInvalidCharactersForFilePath( const QString& s )
+{
+  QString valid_path = s.simplified();
+  valid_path.replace( QRegExp( "[" + QRegExp::escape( "\\/:*?\"<>|$[]+,;=" ) + "]" ), QString( "_" ) );
+  return valid_path;
+}
+
+QString Bee::replaceHtmlSpecialCharacters( const QString& s )
+{
+  // It is different from Protocol::formatHtmlText(...)
+  QString text = s.trimmed();
+  QString html_text = "";
+  bool there_is_a_space_before_it = false;
+  QChar c;
+
+  for( int i = 0; i < text.length(); i++ )
+  {
+    c = text.at( i );
+    if( c == QLatin1Char( ' ' ) )
+    {
+      if( there_is_a_space_before_it )
+        html_text += QLatin1String( "&nbsp;" );
+      else
+        html_text += QLatin1Char( ' ' );
+      there_is_a_space_before_it = true;
+    }
+    else
+    {
+      there_is_a_space_before_it = false;
+      if( c == QLatin1Char( '\n' ) )
+        html_text += QLatin1String( "<br>" );
+      else if( c == QLatin1Char( '<' ) )
+        html_text += QLatin1String( "&lt;" );
+      else if( c == QLatin1Char( '>' ) )
+        html_text += QLatin1String( "&gt;" );
+      else if( c == QLatin1Char( '\t' ) )
+        html_text += QLatin1String( "&nbsp;&nbsp;" );
+      else
+        html_text += c;
+    }
+  }
+  return html_text;
+}

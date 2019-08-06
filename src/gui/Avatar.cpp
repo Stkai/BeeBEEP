@@ -76,14 +76,20 @@ bool Avatar::create()
     return false;
   }
 
-  QStringList sl_name = m_name.split( " ", QString::SkipEmptyParts );
-  if( sl_name.isEmpty() )
+  QString converted_name = "";
+  for( int i = 0; i < m_name.size(); i++ )
   {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Unable to create avatar: string list is empty";
-#endif
-    return false;
+    QChar c = m_name.at( i );
+    if( c.isLetterOrNumber() || c.isSpace() )
+      converted_name += c;
   }
+
+  if( converted_name.isEmpty() )
+    converted_name = "x x";
+
+  QStringList sl_name = converted_name.simplified().split( " ", QString::SkipEmptyParts );
+  if( sl_name.isEmpty() )
+    sl_name << "x" << "x";
 
   QString text_to_write;
   if( sl_name.size() == 1 )
@@ -107,7 +113,7 @@ bool Avatar::create()
   f.setBold( true );
   QFontMetrics fm( f );
   int w_min_max_size = m_size.width() >= 24 ? 8 : m_size.width() >= 16 ? 4 : 3;
-  int w_max_size = m_size.width() - qMax( w_min_max_size, (int)(m_size.width() / 6) );
+  int w_max_size = m_size.width() - qMax( w_min_max_size, static_cast<int>(m_size.width() / 6) );
 
   while( fm.width( text_to_write ) > w_max_size )
   {

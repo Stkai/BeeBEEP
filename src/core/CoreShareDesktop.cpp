@@ -49,7 +49,7 @@ bool Core::startShareDesktop( VNumber user_id )
   QString sHtmlMsg;
   if( u.protocolVersion() < SHARE_DESKTOP_PROTO_VERSION )
   {
-    sHtmlMsg = tr( "%1 You cannot share desktop with %2." ).arg( IconManager::instance().toHtml( "desktop-share-refused.png", "*G*" ), u.name() );
+    sHtmlMsg = tr( "%1 You cannot share desktop with %2." ).arg( IconManager::instance().toHtml( "desktop-share-refused.png", "*G*" ), Bee::replaceHtmlSpecialCharacters( u.name() ) );
     dispatchSystemMessage( ID_DEFAULT_CHAT, user_id, sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::System );
     qDebug() << "You cannot share desktop with" << qPrintable( u.path() ) << "with old protocol" << u.protocolVersion();
     emit shareDesktopUpdate( u );
@@ -62,7 +62,7 @@ bool Core::startShareDesktop( VNumber user_id )
     return false;
   }
 
-  sHtmlMsg = tr( "%1 You start to share desktop with %2." ).arg( IconManager::instance().toHtml( "desktop-share.png", "*G*" ), u.name() );
+  sHtmlMsg = tr( "%1 You start to share desktop with %2." ).arg( IconManager::instance().toHtml( "desktop-share.png", "*G*" ), Bee::replaceHtmlSpecialCharacters( u.name() ) );
   dispatchSystemMessage( ID_DEFAULT_CHAT, user_id, sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::System );
   qDebug() << "Start to share desktop with" << qPrintable( u.path() );
   if( !mp_shareDesktop->isActive() )
@@ -86,7 +86,7 @@ void Core::stopShareDesktop( VNumber user_id )
   User u = UserManager::instance().findUser( user_id );
   if( u.isValid() )
   {
-    QString sHtmlMsg = tr( "%1 You stop to share desktop with %2." ).arg( IconManager::instance().toHtml( "desktop-share-refused.png", "*G*" ), u.name() );
+    QString sHtmlMsg = tr( "%1 You stop to share desktop with %2." ).arg( IconManager::instance().toHtml( "desktop-share-refused.png", "*G*" ), Bee::replaceHtmlSpecialCharacters( u.name() ) );
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::System );
     sendMessageToLocalNetwork( u, Protocol::instance().shareDesktopImageDataToMessage( ShareDesktopData( "", "png", false, 0 ) ) ); // Empty image stops desktop sharing
     emit shareDesktopUpdate( u );

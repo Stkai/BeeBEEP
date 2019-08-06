@@ -62,16 +62,16 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
   mp_lPath->setText( u.isStatusConnected() ? QString( "%1: <b>%2</b>&nbsp;&nbsp;&nbsp;%3: <b>%4</b>" )
                                                .arg( "IP Address" ).arg( u.networkAddress().hostAddress().toString() )
                                                .arg( "Port" ).arg( u.networkAddress().hostPort() )
-                                           : u.path() );
+                                           : Bee::replaceHtmlSpecialCharacters( u.path() ) );
   m_userColor = u.color();
 
   QString name_txt = "";
   if( u.vCard().hasFullName() && u.vCard().fullName() != u.name() )
     name_txt = QString( "<font color=""%1"">%2</font> %3 " ).arg( u.color(), u.vCard().fullName(), tr( "is" ) );
-  name_txt += QString( "<font color=""%1""><b>%2</b></font>" ).arg( u.color(), u.name() );
+  name_txt += QString( "<font color=""%1""><b>%2</b></font>" ).arg( u.color(), Bee::replaceHtmlSpecialCharacters( u.name() ) );
   mp_lName->setText( name_txt );
 
-  mp_lStatusDescription->setText( u.statusDescription().isEmpty() ? QString( "" ) : QString( "<i>%1</i>" ).arg( u.statusDescription() ) );
+  mp_lStatusDescription->setText( u.statusDescription().isEmpty() ? QString( "" ) : QString( "<i>%1</i>" ).arg( Bee::replaceHtmlSpecialCharacters( u.statusDescription() ) ) );
 
   if( u.vCard().birthday().isValid() )
   {

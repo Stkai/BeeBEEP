@@ -2033,6 +2033,11 @@ int Settings::defaultChatMessagesToShow() const
 
 QString Settings::downloadDirectoryForUser( const User& u ) const
 {
-  QString user_name = u.name();
-  return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( downloadDirectory() ).arg( user_name ) );
+  if( Settings::instance().downloadInUserFolder() )
+  {
+    QString user_name = Bee::removeInvalidCharactersForFilePath( u.name() );
+    return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( downloadDirectory() ).arg( user_name ) );
+  }
+  else
+    return downloadDirectory();
 }
