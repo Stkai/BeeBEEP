@@ -54,7 +54,7 @@
    [ DEVELOPER LIBRARIES ]
 
    For BeeBEEP 2
-   # sudo apt-get install build-essential libxcb-screensaver0-dev qt5-default qtmultimedia5-dev libqt5multimedia5-plugins libavahi-compat-libdnssd-dev
+   # sudo apt-get install build-essential libgl1-mesa-dev libqt5x11extras5-dev libxcb-screensaver0-dev qt5-default qtmultimedia5-dev libqt5multimedia5-plugins libavahi-compat-libdnssd-dev
    * if qt5-default is not available remove it and add these packages: qtbase5-dev qtchooser qt5-qmake qtbase-dev-tools
 
    For BeeBEEP 3,4,5
