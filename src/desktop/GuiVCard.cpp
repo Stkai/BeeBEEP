@@ -110,9 +110,15 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
     user_version = "";
 
   if( !user_version.isEmpty() )
+  {
     mp_lStatus->setText( QString( " (%1) " ).arg( user_version ) );
+    mp_lStatus->setToolTip( tr( "BeeBEEP version" ) );
+  }
   else
-    mp_lStatus->setText( user_version );
+  {
+    mp_lStatus->setText( "" );
+    mp_lStatus->setToolTip( "" );
+  }
 
   if( u.isLocal() )
   {

@@ -4222,6 +4222,10 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Birthday: %1</source>
         <translation>%1</translation>
     </message>
+    <message>
+        <source>BeeBEEP version</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiVCardDialog</name>

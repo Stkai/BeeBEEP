@@ -4156,6 +4156,10 @@ Please select a different name.</source>
         <source>is</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>BeeBEEP version</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiVCardDialog</name>

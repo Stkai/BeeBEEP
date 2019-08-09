@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -4395,6 +4395,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Disabled by system administrator</source>
         <translation type="obsolete">Disabilitato dall&apos;amministratore di sistema</translation>
+    </message>
+    <message>
+        <source>BeeBEEP version</source>
+        <translation>Versione di BeeBEEP</translation>
     </message>
 </context>
 <context>
