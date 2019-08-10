@@ -70,8 +70,9 @@ public:
   inline const QString& resourceFolder() const;
   inline const QString& cacheFolder() const;
   QString defaultSettingsFilePath() const;
-  QString defaultBeepFilePath( bool use_resource_folder ) const;
-  QString defaultPluginFolderPath( bool use_resource_folder ) const;
+  QString defaultBeepFilePath() const;
+  QString defaultPluginFolderPath() const;
+  QString defaultLanguageFolderPath() const;
   QString defaultHostsFilePath() const;
 
   bool isDevelopmentVersion( const QString& v = QString::null ) const;
@@ -574,7 +575,7 @@ protected:
   QString checkFolderPath( const QString& folder_path, const QString& default_value );
   QString defaultCacheFolderPath() const;
   bool isFileImageInCache( const QString& ) const;
-  QString findFileInFolders( const QString&, const QStringList& ) const;
+  QString findFileInFolders( const QString&, const QStringList&, bool return_folder_path = false ) const;
   QStringList resourceFolders() const;
   QStringList dataFolders() const;
 

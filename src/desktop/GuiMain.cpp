@@ -948,32 +948,15 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setData( 85 );
   setClearCacheAfterDaysInAction( act );
-  mp_menuChatSettings->addSeparator();
-  act = mp_menuChatSettings->addAction( tr( "Send offline messages also to chat with all users" ), this, SLOT( settingsChanged() ) );
+  act = mp_menuChatSettings->addAction( "", this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
-  act->setChecked( Settings::instance().sendOfflineMessagesToDefaultChat() );
-  act->setData( 66 );
-  act = mp_menuChatSettings->addAction( tr( "Enable notifications also for chat with all users" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().enableDefaultChatNotifications() );
-  act->setData( 75 );
+  setChatMessagesToShowInAction( act );
+  act->setData( 27 );
   mp_menuChatSettings->addSeparator();
   act = mp_menuChatSettings->addAction( tr( "Open chats in a single window" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().showChatsInOneWindow() );
   act->setData( 7 );
-  act = mp_menuChatSettings->addAction( tr( "Raise main window on new message" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().raiseMainWindowOnNewMessageArrived() );
-  act->setData( 80 );
-  act = mp_menuChatSettings->addAction( tr( "Always open chat on new message" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().alwaysOpenChatOnNewMessageArrived() );
-  act->setData( 70 );
-  act = mp_menuChatSettings->addAction( tr( "Raise previously opened chat on new message" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().raiseOnNewMessageArrived() );
-  act->setData( 15 );
   act = mp_menuChatSettings->addAction( tr( "Clear all read messages on closing window" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().chatClearAllReadMessages() );
@@ -986,10 +969,15 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().showChatToolbar() );
   act->setData( 42 );
+  mp_menuChatSettings->addSeparator();
+  act = mp_menuChatSettings->addAction( tr( "Send offline messages also to chat with all users" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().sendOfflineMessagesToDefaultChat() );
+  act->setData( 66 );
   act = mp_menuChatSettings->addAction( "", this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
-  setChatMessagesToShowInAction( act );
-  act->setData( 27 );
+  act->setData( 71 );
+  setChatInactiveWindowOpacityLevelInAction( act );
   mp_menuChatSettings->addSeparator();
   act = mp_menuChatSettings->addAction( IconManager::instance().icon( "background-color.png" ), tr( "Select chat background color" ), this, SLOT( settingsChanged() ) );
   act->setData( 72 );
@@ -1055,24 +1043,38 @@ void GuiMain::createMenus()
   mp_menuFileTransferSettings->addSeparator();
   mp_actSelectDownloadFolder = mp_menuFileTransferSettings->addAction( IconManager::instance().icon( "download-folder.png" ), tr( "Select download folder" ) + QString( "..." ), this, SLOT( selectDownloadDirectory() ) );
 
-  mp_menuSoundSettings = new QMenu( tr( "Sound" ), this );
-  mp_menuSoundSettings->setIcon( IconManager::instance().icon( "bell.png" ) );
-  mp_menuSettings->addMenu( mp_menuSoundSettings );
-  mp_actBeepOnNewMessage = mp_menuSoundSettings->addAction( tr( "Enable BEEP alert" ), this, SLOT( settingsChanged() ) );
+  mp_menuNotificationSettings = new QMenu( tr( "Notifications" ), this );
+  mp_menuNotificationSettings->setIcon( IconManager::instance().icon( "bell.png" ) );
+  mp_menuSettings->addMenu( mp_menuNotificationSettings );
+  mp_actBeepOnNewMessage = mp_menuNotificationSettings->addAction( tr( "Enable BEEP alert" ), this, SLOT( settingsChanged() ) );
   mp_actBeepOnNewMessage->setCheckable( true );
   mp_actBeepOnNewMessage->setChecked( Settings::instance().beepOnNewMessageArrived() );
   mp_actBeepOnNewMessage->setData( 34 );
-  act = mp_menuSoundSettings->addAction( tr( "Enable Buzz sound" ), this, SLOT( settingsChanged() ) );
+  act = mp_menuNotificationSettings->addAction( tr( "Enable Buzz sound" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().playBuzzSound() );
   act->setData( 56 );
-  mp_menuSoundSettings->addSeparator();
-  mp_menuSoundSettings->addAction( IconManager::instance().icon( "file-beep.png" ), tr( "Select beep file..." ), this, SLOT( selectBeepFile() ) );
-  mp_menuSoundSettings->addAction( IconManager::instance().icon( "play.png" ), tr( "Play beep" ), this, SLOT( testBeepFile() ) );
-
+  act = mp_menuNotificationSettings->addAction( tr( "Enable notifications also for chat with all users" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().enableDefaultChatNotifications() );
+  act->setData( 75 );
+  mp_menuNotificationSettings->addSeparator();
+  act = mp_menuNotificationSettings->addAction( tr( "Raise main window on new message" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().raiseMainWindowOnNewMessageArrived() );
+  act->setData( 80 );
+  act = mp_menuNotificationSettings->addAction( tr( "Always open chat on new message" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().alwaysOpenChatOnNewMessageArrived() );
+  act->setData( 70 );
+  act = mp_menuNotificationSettings->addAction( tr( "Raise previously opened chat on new message" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().raiseOnNewMessageArrived() );
+  act->setData( 15 );
+  mp_menuNotificationSettings->addSeparator();
   mp_menuTrayIconSettings = new QMenu( tr( "System tray icon" ), this );
   mp_menuTrayIconSettings->setIcon( IconManager::instance().icon( "settings-tray-icon.png" ) );
-  mp_menuSettings->addMenu( mp_menuTrayIconSettings );
+  mp_menuNotificationSettings->addMenu( mp_menuTrayIconSettings );
   act = mp_menuTrayIconSettings->addAction( tr( "Enable tray icon notifications" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().showNotificationOnTray()  );
@@ -1089,6 +1091,9 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().showFileTransferCompletedOnTray() );
   act->setData( 48 );
+  mp_menuNotificationSettings->addSeparator();
+  mp_menuNotificationSettings->addAction( IconManager::instance().icon( "file-beep.png" ), tr( "Select beep file..." ), this, SLOT( selectBeepFile() ) );
+  mp_menuNotificationSettings->addAction( IconManager::instance().icon( "play.png" ), tr( "Play beep" ), this, SLOT( testBeepFile() ) );
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   QMenu* menu_share_desktop = new QMenu( tr( "Desktop sharing" ), this );
@@ -1129,10 +1134,6 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().stayOnTop() );
   act->setData( 14 );
-  act = mp_menuSettings->addAction( "", this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setData( 71 );
-  setChatInactiveWindowOpacityLevelInAction( act );
 #ifdef Q_OS_WIN
   act = mp_menuSettings->addAction( tr( "Start %1 automatically" ).arg( Settings::instance().programName() ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -4563,7 +4564,6 @@ void GuiMain::onApplicationFocusChanged( QWidget* old, QWidget* now )
     qDebug() << "Main window has grabbed focus";
 #endif
     m_prevActivatedState = true;
-    setWindowOpacity( Settings::instance().chatActiveWindowOpacityLevel() / 100.0 );
     return;
   }
 
@@ -4580,20 +4580,12 @@ void GuiMain::onApplicationFocusChanged( QWidget* old, QWidget* now )
   if( current_state != m_prevActivatedState )
   {
     m_prevActivatedState = current_state;
+#ifdef BEEBEEP_DEBUG
     if( current_state )
-    {
-#ifdef BEEBEEP_DEBUG
       qDebug() << "Main window has grabbed focus (active)";
-#endif
-      setWindowOpacity( Settings::instance().chatActiveWindowOpacityLevel() / 100.0 );
-    }
     else
-    {
-#ifdef BEEBEEP_DEBUG
       qDebug() << "Main window has lost focus (active)";
 #endif
-      setWindowOpacity( Settings::instance().chatInactiveWindowOpacityLevel() / 100.0 );
-    }
   }
 }
 

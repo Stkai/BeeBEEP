@@ -139,7 +139,11 @@ int main( int argc, char *argv[] )
 
   /* Apply system language */
   QTranslator translator;
-  SetTranslator( &translator, Settings::instance().languagePath(), Settings::instance().language() );
+  if( !SetTranslator( &translator, Settings::instance().languagePath(), Settings::instance().language() ) )
+  {
+    qDebug() << "Looking for language in default folders...";
+    SetTranslator( &translator, Settings::instance().defaultLanguageFolderPath(), Settings::instance().language() );
+  }
 
   /* Init Network Manager */
   (void)NetworkManager::instance();
@@ -202,7 +206,7 @@ int main( int argc, char *argv[] )
 #endif
 
   /* Init Plugins */
-  PluginManager::instance().loadPlugins();
+  PluginManager::instance().loadPlugins( Settings::instance().pluginPath() );
 
   /* Init BeeApp */
   bee_app.init();

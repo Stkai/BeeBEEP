@@ -1,0 +1,101 @@
+[DEBREATE-0.7.13]
+<<CTRL>>
+Package: beebeep
+Version: 5.6.5-1
+Maintainer: Marco Mastroddi <marco.mastroddi@gmail.com>
+Section: comm
+Homepage: https://www.beebeep.net
+Architecture: amd64
+Priority: optional
+Depends: libqt5multimedia5 (>=5.0.0), libqt5x11extras5 (>=5.0.0), libqt5printsupport5 (>=5.0.0), libqt5gui5 (>=5.0.0), libqt5network5 (>=5.0.0), libqt5widgets5 (>=5.0.0), libqt5core5a (>=5.0.0)
+Description: Free office messenger
+ This office messaging application, BeeBEEP,  does not need an external
+ server to let users communicate with each other. In your office, in your
+ laboratory, at school, at home, in the hospital  or in any other activity
+ having the need for security and privacy, BeeBEEP is the best way to keep
+ your private messages safe.
+
+<</CTRL>>
+<<FILES>>
+1
+/home/mastro/Sources/beebeep-code/src/images/beebeep.png -> beebeep.png -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_vi.qm -> beebeep_vi.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_ua.qm -> beebeep_ua.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_tw.qm -> beebeep_tw.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_tr.qm -> beebeep_tr.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_sv.qm -> beebeep_sv.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_ru.qm -> beebeep_ru.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_rs.qm -> beebeep_rs.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_pt.qm -> beebeep_pt.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_pl.qm -> beebeep_pl.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_nl.qm -> beebeep_nl.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_nb.qm -> beebeep_nb.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_it.qm -> beebeep_it.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_hu.qm -> beebeep_hu.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_fr.qm -> beebeep_fr.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_es.qm -> beebeep_es.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_en.qm -> beebeep_en.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_de.qm -> beebeep_de.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_cz.qm -> beebeep_cz.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_cn.qm -> beebeep_cn.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/misc/beep.wav -> beep.wav -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/test/libregularboldtextmarker.so* -> libregularboldtextmarker.so -> /usr/lib/beebeep
+/home/mastro/Sources/beebeep-code/test/librainbowtextmarker.so* -> librainbowtextmarker.so -> /usr/lib/beebeep
+/home/mastro/Sources/beebeep-code/test/libnumbertextmarker.so* -> libnumbertextmarker.so -> /usr/lib/beebeep
+/home/mastro/Sources/beebeep-code/test/beebeep* -> beebeep -> /usr/lib/beebeep
+<</FILES>>
+<<SCRIPTS>>
+<<PREINST>>
+1
+
+<</PREINST>>
+<<POSTINST>>
+1
+#! /bin/bash -e
+
+ln -fs "/usr/lib/beebeep/beebeep" "/usr/bin/beebeep"
+<</POSTINST>>
+<<PRERM>>
+1
+#! /bin/bash -e
+
+rm -f "/usr/bin/beebeep"
+<</PRERM>>
+<<POSTRM>>
+0
+<</POSTRM>>
+<</SCRIPTS>>
+<<CHANGELOG>>
+<<DEST>>DEFAULT<</DEST>>
+beebeep (5.6.5) bionic; urgency=low
+
+  * Initial release
+  * BeeBEEP first debian package
+
+ -- Marco Mastroddi <marco.mastroddi@gmail.com>  Wed, 24 Jul 2019 07:53:08 +0200
+
+<</CHANGELOG>>
+<<COPYRIGHT>>
+Copyright © 2019 <Marco Mastroddi> [marco.mastroddi@gmail.com]
+
+/usr/share/common-licenses/GPL-3
+<</COPYRIGHT>>
+<<MENU>>
+1
+Name=BeeBEEP
+Version=1.0
+Exec=/usr/bin/beebeep
+Comment=BeeBEEP free office messenger
+Icon=/usr/share/beebeep/beebeep.png
+Type=Application
+Terminal=false
+StartupNotify=true
+Encoding=UTF-8
+Categories=Office;InstantMessaging;
+<</MENU>>
+<<BUILD>>
+1
+1
+1
+strip
+<</BUILD>>

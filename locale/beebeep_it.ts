@@ -2425,7 +2425,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Sound</source>
-        <translation>Suoni</translation>
+        <translation type="obsolete">Suoni</translation>
     </message>
     <message>
         <source>Enable BEEP alert</source>
@@ -3030,6 +3030,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>The files will be downloaded to the folder:</source>
         <translation>I file saranno scaricati nella cartella:</translation>
+    </message>
+    <message>
+        <source>Notifications</source>
+        <translation>Notifiche</translation>
     </message>
 </context>
 <context>

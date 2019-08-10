@@ -228,7 +228,7 @@ QStringList Settings::dataFolders() const
   return system_folders;
 }
 
-QString Settings::findFileInFolders( const QString& file_name, const QStringList& folder_list ) const
+QString Settings::findFileInFolders( const QString& file_name, const QStringList& folder_list, bool return_folder_path ) const
 {
   qDebug() << "Searching file" << qPrintable( file_name );
   foreach( QString folder_path, folder_list )
@@ -240,11 +240,11 @@ QString Settings::findFileInFolders( const QString& file_name, const QStringList
     QFileInfo fi( file_path );
     if( fi.exists() )
     {
-      qDebug() << "File found:" << qPrintable( file_path );
+      qDebug() << "File" << qPrintable( file_name ) << "found in folder" << qPrintable( file_path );
       if( !fi.isReadable() )
         qWarning() << "Skip file" << qPrintable( file_path ) << "because is not readable";
       else
-        return file_path;
+        return return_folder_path ? folder_path : file_path;
     }
     else
       qDebug() << "File not found in folder:" << qPrintable( folder_path );
@@ -1171,11 +1171,10 @@ void Settings::load()
 #endif
 
   m_logPath = checkFolderPath( Bee::convertToNativeFolderSeparator( sets->value( "LogFolderPath", dataFolder() ).toString() ), dataFolder() );
-  QString plugin_folder_path = defaultPluginFolderPath( true );
-  if( plugin_folder_path.isNull() )
-    plugin_folder_path = resourceFolder();
+  QString plugin_folder_path = defaultPluginFolderPath();
   m_pluginPath = checkFolderPath( Bee::convertToNativeFolderSeparator( sets->value( "PluginPath", plugin_folder_path ).toString() ), plugin_folder_path );
-  m_languagePath = checkFolderPath( Bee::convertToNativeFolderSeparator( sets->value( "LanguagePath", resourceFolder() ).toString() ), resourceFolder() );
+  QString language_folder_path = defaultLanguageFolderPath();
+  m_languagePath = checkFolderPath( Bee::convertToNativeFolderSeparator( sets->value( "LanguagePath", language_folder_path ).toString() ), language_folder_path );
   m_keyEscapeMinimizeInTray = sets->value( "KeyEscapeMinimizeInTray", false ).toBool();
 #ifdef Q_OS_MAC
   m_minimizeInTray = false;
@@ -1187,7 +1186,7 @@ void Settings::load()
   m_raiseMainWindowOnNewMessageArrived = sets->value( "RaiseMainWindowOnNewMessageArrived", false ).toBool();
   m_alwaysShowFileTransferProgress = sets->value( "AlwaysShowFileTransferProgress", false ).toBool();
   m_alwaysOpenChatOnNewMessageArrived = sets->value( "AlwaysOpenChatOnNewMessageArrived", true ).toBool();
-  m_beepFilePath = checkFilePath( Bee::convertToNativeFolderSeparator( sets->value( "BeepFilePath", defaultBeepFilePath( true ) ).toString() ), defaultBeepFilePath( true ) );
+  m_beepFilePath = checkFilePath( Bee::convertToNativeFolderSeparator( sets->value( "BeepFilePath", defaultBeepFilePath() ).toString() ), defaultBeepFilePath() );
   m_loadOnTrayAtStartup = sets->value( "LoadOnTrayAtStartup", false ).toBool();
   m_showNotificationOnTray = sets->value( "ShowNotificationOnTray", true ).toBool();
   m_showOnlyMessageNotificationOnTray = sets->value( "ShowOnlyMessageNotificationOnTray", true ).toBool();
@@ -1951,27 +1950,31 @@ QString Settings::defaultSettingsFilePath() const
   return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder() ).arg( QLatin1String( "beebeep.ini" ) ) );
 }
 
-QString Settings::defaultBeepFilePath( bool use_resource_folder ) const
+QString Settings::defaultBeepFilePath() const
 {
-  QString root_folder = use_resource_folder ? resourceFolder() : dataFolder();
-  return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( root_folder ).arg( QLatin1String( "beep.wav" ) ) );
+  QString beep_file_path = findFileInFolders( QLatin1String( "beep.wav" ), dataFolders() );
+  if( beep_file_path.isNull() )
+    return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( resourceFolder() ).arg( QLatin1String( "beep.wav" ) ) );
+  else
+    return beep_file_path;
 }
 
-QString Settings::defaultPluginFolderPath( bool use_resource_folder ) const
+QString Settings::defaultPluginFolderPath() const
 {
-  if( use_resource_folder )
-  {
-    QString test_plugin_file = QString( "libnumbertextmarker." ) + Bee::pluginFileExtension();
-    QString test_plugin_path = findFileInFolders( test_plugin_file, resourceFolders() );
-    if( !test_plugin_path.isNull() )
-    {
-      QFileInfo fi_plugin( test_plugin_path );
-      return Bee::convertToNativeFolderSeparator( fi_plugin.absolutePath() );
-    }
-    return resourceFolder();
-  }
-  else
-    return dataFolder();
+  QString test_plugin_file = QLatin1String( "libnumbertextmarker." ) + Bee::pluginFileExtension();
+  QString test_plugin_path = findFileInFolders( test_plugin_file, resourceFolders(), true );
+  if( test_plugin_path.isNull() )
+    test_plugin_path = findFileInFolders( test_plugin_file, dataFolders(), true );
+  return test_plugin_path.isNull() ? resourceFolder() : test_plugin_path;
+}
+
+QString Settings::defaultLanguageFolderPath() const
+{
+  QString test_language_file = QLatin1String( "beebeep_it.qm" );
+  QString test_language_path = findFileInFolders( test_language_file, resourceFolders(), true );
+  if( test_language_path.isNull() )
+    test_language_path = findFileInFolders( test_language_file, dataFolders(), true );
+  return test_language_path.isNull() ? resourceFolder() : test_language_path;
 }
 
 QString Settings::simpleEncrypt( const QString& text_to_encrypt )

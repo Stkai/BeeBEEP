@@ -1745,7 +1745,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Sound</source>
-        <translation>Ton</translation>
+        <translation type="obsolete">Ton</translation>
     </message>
     <message>
         <source>Users</source>
@@ -2925,6 +2925,10 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>The files will be downloaded to the folder:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notifications</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

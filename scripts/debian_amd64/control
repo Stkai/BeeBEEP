@@ -1,12 +1,14 @@
 Package: beebeep
-Version: 5.6.8
+Version: 5.6.5-1
 Maintainer: Marco Mastroddi <marco.mastroddi@gmail.com>
 Section: comm
 Homepage: https://www.beebeep.net
 Architecture: amd64
 Priority: optional
-Description: BeeBEEP is a free office messenger.
- BeeBEEP is the office messaging application that does not need an external server
- to let users communicate with each other. In your office, in your laboratory, at school,
- at home, in the hospital or in any other activity having the need for security and privacy,
- BeeBEEP is the best way to keep your private messages safe.
+Depends: libqt5multimedia5 (>=5.0.0), libqt5x11extras5 (>=5.0.0), libqt5printsupport5 (>=5.0.0), libqt5gui5 (>=5.0.0), libqt5network5 (>=5.0.0), libqt5widgets5 (>=5.0.0), libqt5core5a (>=5.0.0)
+Description: Free office messenger
+ This office messaging application, BeeBEEP,  does not need an external
+ server to let users communicate with each other. In your office, in your
+ laboratory, at school, at home, in the hospital  or in any other activity
+ having the need for security and privacy, BeeBEEP is the best way to keep
+ your private messages safe.

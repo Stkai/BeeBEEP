@@ -26,6 +26,9 @@ BASE_FOLDER=".."
 RELEASE_FOLDER="beebeep-${BEEBEEP_VERSION}-${BEEBEEP_QT_VERSION}-${BEEBEEP_ARCH_TYPE}"
 
 echo "Cleaning previous packages with the same name..."
+rm -rf *.deb
+rm -rf *.lintian
+rm -rf DEBIAN
 rm -rf $RELEASE_FOLDER
 rm -rf $RELEASE_FOLDER.tar.gz
 echo "Making $RELEASE_FOLDER ..."
@@ -48,9 +51,9 @@ cp $BASE_FOLDER/misc/beehosts_example.ini $RELEASE_FOLDER
 echo "Copying sound..."
 cp $BASE_FOLDER/misc/beep.wav $RELEASE_FOLDER
 echo "Copying Plugins..."
-cp $BASE_FOLDER/test/libnumbertextmarker.so.1.0.0 $RELEASE_FOLDER
-cp $BASE_FOLDER/test/librainbowtextmarker.so.1.0.0 $RELEASE_FOLDER
-cp $BASE_FOLDER/test/libregularboldtextmarker.so.1.0.0 $RELEASE_FOLDER
+cp $BASE_FOLDER/test/libnumbertextmarker.so $RELEASE_FOLDER
+cp $BASE_FOLDER/test/librainbowtextmarker.so $RELEASE_FOLDER
+cp $BASE_FOLDER/test/libregularboldtextmarker.so $RELEASE_FOLDER
 echo "Copying Executable..."
 cp $BASE_FOLDER/test/beebeep $RELEASE_FOLDER
 echo "Making tar.gz package..."

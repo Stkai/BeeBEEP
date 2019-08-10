@@ -43,20 +43,32 @@ void PluginManager::clearPlugins()
   }
 }
 
-void PluginManager::loadPlugins()
+void PluginManager::loadPlugins( const QString& plugin_folder_path, bool search_also_in_default_folders )
 {
   clearPlugins();
-  qDebug() << "Loading plugins from path:" << qPrintable( Settings::instance().pluginPath() );
-  QDir plugin_dir( Settings::instance().pluginPath() );
+  qDebug() << "Loading plugins from path:" << qPrintable( plugin_folder_path );
+  QDir plugin_dir( plugin_folder_path );
   if( !plugin_dir.exists() )
   {
-    qWarning() << "Plugin folder" << qPrintable( Settings::instance().pluginPath() ) << "not found";
+    qWarning() << "Plugin folder" << qPrintable( plugin_folder_path ) << "not found";
     return;
   }
 
   foreach( QString file_name, plugin_dir.entryList() )
     addPlugin( plugin_dir.absoluteFilePath( file_name ) );
 
+  if( count() < 1 && search_also_in_default_folders )
+  {
+    qDebug() << "No plugins found... checking default folders";
+    QString plugin_default_path = Settings::instance().defaultPluginFolderPath();
+    if( plugin_default_path != plugin_folder_path )
+    {
+      loadPlugins( plugin_default_path, false );
+      if( count() > 0 )
+        Settings::instance().setPluginPath( plugin_default_path );
+      return;
+    }
+  }
   qDebug() << m_textMarkers.size() << "text marker plugins found";
   sortPlugins();
 }
@@ -306,13 +318,15 @@ bool PluginManager::fileCanBeSkipped( const QString& file_name ) const
 {
    QStringList file_names_to_skip;
 #ifdef Q_OS_WIN
-   file_names_to_skip << QString( "icudt53.dll" );
-   file_names_to_skip << QString( "icuin53.dll" );
-   file_names_to_skip << QString( "icuuc53.dll" );
    file_names_to_skip << QString( "msvcp100.dll" );
    file_names_to_skip << QString( "msvcr100.dll" );
    file_names_to_skip << QString( "msvcp120.dll" );
    file_names_to_skip << QString( "msvcr120.dll" );
+   file_names_to_skip << QString( "msvcp140.dll" );
+   file_names_to_skip << QString( "vccorlib140.dll" );
+   file_names_to_skip << QString( "vcruntime140.dll" );
+   file_names_to_skip << QString( "libEGL.dll" );
+   file_names_to_skip << QString( "libGLESv2.dll" );
    file_names_to_skip << QString( "Qt5Core.dll" );
    file_names_to_skip << QString( "Qt5Gui.dll" );
    file_names_to_skip << QString( "Qt5Multimedia.dll" );

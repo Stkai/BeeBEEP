@@ -37,7 +37,7 @@ public:
   inline const QList<TextMarkerInterface*>& textMarkers() const;
   inline int count() const;
 
-  void loadPlugins();
+  void loadPlugins( const QString& plugin_folder_path, bool search_also_in_default_folders = true );
   void setPluginEnabled( const QString& plugin_name, bool );
   void setPluginsEnabled( bool );
 

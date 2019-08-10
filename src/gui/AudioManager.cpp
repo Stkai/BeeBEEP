@@ -72,7 +72,7 @@ void AudioManager::playBeep()
       if( !QFile::exists( beep_file_path ) )
       {
         qDebug() << "AudioManager did not find BEEP file" << qPrintable( beep_file_path );
-        beep_file_path = Bee::convertToNativeFolderSeparator( Settings::instance().defaultBeepFilePath( true ) );
+        beep_file_path = Settings::instance().defaultBeepFilePath();
       }
 
       if( QFile::exists( beep_file_path ) )

@@ -293,7 +293,7 @@ private:
   QMenu* mp_menuUsersSettings;
   QMenu* mp_menuChatSettings;
   QMenu* mp_menuFileTransferSettings;
-  QMenu* mp_menuSoundSettings;
+  QMenu* mp_menuNotificationSettings;
   QMenu* mp_menuTrayIconSettings;
   QMenu* mp_menuExistingFile;
   QMenu* mp_menuConnectionSettings;

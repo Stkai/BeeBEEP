@@ -196,7 +196,7 @@ void GuiPluginManager::loadPlugin()
   }
 
   Settings::instance().setPluginPath( dir_path );
-  PluginManager::instance().loadPlugins();
+  PluginManager::instance().loadPlugins( dir_path, false );
   updatePlugins();
   m_changed = true;
   mp_pbLoad->setEnabled( false );
