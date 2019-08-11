@@ -169,5 +169,6 @@
         <file>images/beebeep-tray.png</file>
         <file>images/network-test.png</file>
         <file>images/file-compressed.png</file>
+        <file>images/beebeep-message-tray.png</file>
     </qresource>
 </RCC>

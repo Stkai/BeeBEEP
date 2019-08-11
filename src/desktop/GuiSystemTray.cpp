@@ -94,7 +94,11 @@ void GuiSystemTray::setMessageIcon()
 {
   if( m_iconStatus != GuiSystemTray::Message )
   {
+#if defined( Q_OS_UNIX ) && !defined( Q_OS_MACX )
+    setIcon( IconManager::instance().icon( "beebeep-message-tray.png" ) );
+#else
     setIcon( IconManager::instance().icon( "beebeep-message.png" ) );
+#endif
     m_iconStatus = GuiSystemTray::Message;
   }
 }
@@ -129,6 +133,12 @@ void GuiSystemTray::onTickEvent( int ticks )
 #endif
     }
     else
+    {
+#if defined( Q_OS_UNIX ) && !defined( Q_OS_MACX )
+      setIcon( IconManager::instance().icon( "beebeep-message-tray.png" ) );
+#else
       setIcon( IconManager::instance().icon( "beebeep-message.png" ) );
+#endif
+    }
   }
 }
