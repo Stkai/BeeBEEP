@@ -1968,9 +1968,9 @@ void GuiMain::settingsChanged( QAction* act )
     {
       QApplication::processEvents(); // Menu is closing and status bar will be reset -> force events to display next messages
       if( act->isChecked() )
-        showMessage( tr( "Option enabled." ), 5000 );
+        showMessage( tr( "Option enabled." ), 3000 );
       else
-        showMessage( tr( "Option disabled." ), 5000 );
+        showMessage( tr( "Option disabled." ), 3000 );
     }
     Settings::instance().save();
   }
