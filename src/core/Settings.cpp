@@ -1276,6 +1276,11 @@ void Settings::load()
   m_delayConnectionAtStartup = qMax( 3000, sets->value( "DelayConnectionAtStartup(ms)", m_delayConnectionAtStartup ).toInt() );
   m_sendOfflineMessagesToDefaultChat = sets->value( "SendOfflineMessagesToDefaultChat", false ).toBool();
   m_saveMessagesTimestamp = sets->value( "SaveMessagesTimestamp", QDateTime() ).toDateTime();
+  if( m_saveMessagesTimestamp.isNull() )
+  {
+    qDebug() << "Generating new save messages timestamp";
+    m_saveMessagesTimestamp = QDateTime::currentDateTime();
+  }
   m_clearCacheAfterDays = qMax( -1, sets->value( "ClearCacheAfterDays", m_clearCacheAfterDays ).toInt() );
   sets->endGroup();
 

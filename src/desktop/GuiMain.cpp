@@ -787,7 +787,24 @@ void GuiMain::createMenus()
 
   /* System Menu */
   mp_menuSettings = new QMenu( tr( "Settings" ), this );
-  //mp_menuSettings->setIcon( IconManager::instance().icon( "settings.png" ) );
+  mp_menuInterfaceSettings = new QMenu( tr( "Interface" ), this );
+  mp_menuInterfaceSettings->setIcon( IconManager::instance().icon( "interface.png" ) );
+  mp_menuSettings->addMenu( mp_menuInterfaceSettings );
+  act = mp_menuInterfaceSettings->addAction( tr( "Use the dark theme" ) + QString( " (%1)" ).arg( tr( "beta" ) ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().useDarkStyle() );
+  act->setData( 77 );
+  act = mp_menuInterfaceSettings->addAction( tr( "Enable maximize button" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().enableMaximizeButton() );
+  act->setData( 28 );
+  mp_menuInterfaceSettings->addSeparator();
+  mp_menuInterfaceSettings->addAction( IconManager::instance().icon( "shortcut.png" ), tr( "Shortcuts" ) + QString( "..." ), this, SLOT( editShortcuts() ) );
+  mp_menuInterfaceSettings->addAction( IconManager::instance().icon( "language.png" ), tr( "Select language" ) + QString( "..." ), this, SLOT( selectLanguage() ) );
+  mp_menuInterfaceSettings->addAction( IconManager::instance().icon( "theme.png" ), tr( "Select icon theme" ) + QString( "..." ), this, SLOT( selectIconSourcePath() ) );
+  mp_menuInterfaceSettings->addSeparator();
+  mp_menuInterfaceSettings->addSeparator();
+  mp_menuInterfaceSettings->addAction( IconManager::instance().icon( "update.png" ), tr( "Restore the colors to the default ones" ), this, SLOT( resetAllColors() ) );
 
   mp_menuStartupSettings = new QMenu( tr( "On start" ), this );
   mp_menuStartupSettings->setIcon( IconManager::instance().icon( "settings-start.png" ) );
@@ -863,6 +880,8 @@ void GuiMain::createMenus()
   mp_menuSettings->addMenu( mp_menuNetworkStatus );
   mp_menuNetworkStatus->addAction( mp_actConfigureNetwork );
   mp_menuNetworkStatus->addSeparator();
+  mp_menuNetworkStatus->addAction( IconManager::instance().icon( "workgroup.png" ), tr( "Your workgroups" ) + QString( "..." ), this, SLOT( showWorkgroups() ) );
+  mp_menuNetworkStatus->addSeparator();
   mp_actHostAddress = mp_menuNetworkStatus->addAction( IconManager::instance().icon( "network.png" ), QString( "ip" ) );
   mp_actPortBroadcast = mp_menuNetworkStatus->addAction( IconManager::instance().icon( "broadcast.png" ), QString( "udp1" ) );
   mp_actMulticastGroupAddress = mp_menuNetworkStatus->addAction( IconManager::instance().icon( "multicast-group.png" ), QString( "multicast" ) );
@@ -899,7 +918,6 @@ void GuiMain::createMenus()
   connect( mp_actGroupRecognizeUsers, SIGNAL( triggered( QAction* ) ), this, SLOT( settingsChanged( QAction* ) ) );
   mp_menuUsersSettings->addSeparator();
   mp_actAddUsers = mp_menuUsersSettings->addAction( IconManager::instance().icon( "user-add.png" ), tr( "Add users" ) + QString( "..." ), this, SLOT( showAddUser() ) );
-  mp_menuUsersSettings->addAction( IconManager::instance().icon( "workgroup.png" ), tr( "Workgroups" ) + QString( "..." ), this, SLOT( showWorkgroups() ) );
   mp_menuUsersSettings->addSeparator();
   mp_actSaveUserList = mp_menuUsersSettings->addAction( tr( "Save users" ), this, SLOT( settingsChanged() ) );
   mp_actSaveUserList->setCheckable( true );
@@ -910,10 +928,6 @@ void GuiMain::createMenus()
   mp_actSaveGroupList->setChecked( Settings::instance().saveGroupList() );
   mp_actSaveGroupList->setData( 2 );
   mp_menuUsersSettings->addSeparator();
-  act = mp_menuUsersSettings->addAction( tr( "Set your status to away automatically" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().autoUserAway() );
-  act->setData( 20 );
   mp_actRemoveInactiveUsers = mp_menuUsersSettings->addAction( "", this, SLOT( settingsChanged() ) );
   mp_actRemoveInactiveUsers->setCheckable( true );
   mp_actRemoveInactiveUsers->setChecked( Settings::instance().removeInactiveUsers() );
@@ -923,35 +937,36 @@ void GuiMain::createMenus()
   mp_menuChatSettings = new QMenu( tr( "Chat" ), this );
   mp_menuChatSettings->setIcon( IconManager::instance().icon( "chat.png" ) );
   mp_menuSettings->addMenu( mp_menuChatSettings );
-  act = mp_menuChatSettings->addAction( tr( "Save messages" ), this, SLOT( settingsChanged() ) );
+  mp_menuChatSaveSettings = new QMenu( tr( "Save messages" ) + QString( "..." ), this );
+  mp_menuChatSaveSettings->setIcon( IconManager::instance().icon( "save-as.png" ) );
+  mp_menuChatSettings->addMenu( mp_menuChatSaveSettings );
+  act = mp_menuChatSaveSettings->addAction( tr( "Enable message saving" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().chatAutoSave() );
   act->setData( 18 );
-  act = mp_menuChatSettings->addAction( tr( "Save unsent messages" ), this, SLOT( settingsChanged() ) );
+  mp_menuChatSaveSettings->addSeparator();
+  act = mp_menuChatSaveSettings->addAction( tr( "Save unsent messages" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().chatSaveUnsentMessages() );
   act->setData( 81 );
-  mp_actSaveFileTransferMessages = mp_menuChatSettings->addAction( tr( "Save file transfer messages" ), this, SLOT( settingsChanged() ) );
+  mp_actSaveFileTransferMessages = mp_menuChatSaveSettings->addAction( tr( "Save file transfer messages" ), this, SLOT( settingsChanged() ) );
   mp_actSaveFileTransferMessages->setCheckable( true );
   mp_actSaveFileTransferMessages->setChecked( Settings::instance().chatSaveFileTransfers() );
   mp_actSaveFileTransferMessages->setData( 82 );
-  mp_actSaveSystemMessages = mp_menuChatSettings->addAction( tr( "Save system messages" ), this, SLOT( settingsChanged() ) );
+  mp_actSaveSystemMessages = mp_menuChatSaveSettings->addAction( tr( "Save system messages" ), this, SLOT( settingsChanged() ) );
   mp_actSaveSystemMessages->setCheckable( true );
   mp_actSaveSystemMessages->setChecked( Settings::instance().chatSaveSystemMessages() );
   mp_actSaveSystemMessages->setData( 83 );
   mp_menuChatSettings->addSeparator();
-  act = mp_menuChatSettings->addAction( "", this, SLOT( settingsChanged() ) );
+  act = mp_menuChatSaveSettings->addAction( "", this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setData( 84 );
   setChatMaxLinesToSaveInAction( act );
-  act = mp_menuChatSettings->addAction( "", this, SLOT( settingsChanged() ) );
+  mp_menuChatSaveSettings->addSeparator();
+  act = mp_menuChatSaveSettings->addAction( "", this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setData( 85 );
   setClearCacheAfterDaysInAction( act );
-  act = mp_menuChatSettings->addAction( "", this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  setChatMessagesToShowInAction( act );
-  act->setData( 27 );
   mp_menuChatSettings->addSeparator();
   act = mp_menuChatSettings->addAction( tr( "Open chats in a single window" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -976,16 +991,23 @@ void GuiMain::createMenus()
   act->setData( 66 );
   act = mp_menuChatSettings->addAction( "", this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
+  setChatMessagesToShowInAction( act );
+  act->setData( 27 );
+  act = mp_menuChatSettings->addAction( "", this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
   act->setData( 71 );
   setChatInactiveWindowOpacityLevelInAction( act );
   mp_menuChatSettings->addSeparator();
-  act = mp_menuChatSettings->addAction( IconManager::instance().icon( "background-color.png" ), tr( "Select chat background color" ), this, SLOT( settingsChanged() ) );
+
+  mp_menuChatColorSettings = new QMenu( tr( "Colors" ) + QString( "..." ), this );
+  mp_menuChatColorSettings->setIcon( IconManager::instance().icon( "colors.png" ) );
+  mp_menuChatSettings->addMenu( mp_menuChatColorSettings );
+  act = mp_menuChatColorSettings->addAction( IconManager::instance().icon( "background-color.png" ), tr( "Select chat background color" ), this, SLOT( settingsChanged() ) );
   act->setData( 72 );
-  act = mp_menuChatSettings->addAction( IconManager::instance().icon( "font-color.png" ), tr( "Select chat default text color" ), this, SLOT( settingsChanged() ) );
+  act = mp_menuChatColorSettings->addAction( IconManager::instance().icon( "font-color.png" ), tr( "Select chat default text color" ), this, SLOT( settingsChanged() ) );
   act->setData( 73 );
-  act = mp_menuChatSettings->addAction( IconManager::instance().icon( "log.png" ), tr( "Select chat system text color" ), this, SLOT( settingsChanged() ) );
+  act = mp_menuChatColorSettings->addAction( IconManager::instance().icon( "log.png" ), tr( "Select chat system text color" ), this, SLOT( settingsChanged() ) );
   act->setData( 74 );
-  mp_menuChatSettings->addSeparator();
   mp_actSelectEmoticonSourcePath = mp_menuChatSettings->addAction( IconManager::instance().icon( "emoticon.png" ), tr( "Select emoticon theme" ) + QString( "..." ), this, SLOT( selectEmoticonSourcePath() ) );
   mp_actSelectEmoticonSourcePath->setEnabled( !Settings::instance().useNativeEmoticons() );
   mp_menuChatSettings->addAction( IconManager::instance().icon( "dictionary.png" ), tr( "Dictionary" ) + QString( "..." ), this, SLOT( selectDictionatyPath() ) );
@@ -1118,18 +1140,6 @@ void GuiMain::createMenus()
 #endif
 
   mp_menuSettings->addSeparator();
-  mp_menuSettings->addAction( IconManager::instance().icon( "shortcut.png" ), tr( "Shortcuts" ) + QString( "..." ), this, SLOT( editShortcuts() ) );
-  mp_menuSettings->addAction( IconManager::instance().icon( "language.png" ), tr( "Select language" ) + QString( "..." ), this, SLOT( selectLanguage() ) );
-  mp_menuSettings->addAction( IconManager::instance().icon( "theme.png" ), tr( "Select icon theme" ) + QString( "..." ), this, SLOT( selectIconSourcePath() ) );
-  mp_menuSettings->addSeparator();
-  act = mp_menuSettings->addAction( tr( "Use the dark theme" ) + QString( " (%1)" ).arg( tr( "beta" ) ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().useDarkStyle() );
-  act->setData( 77 );
-  act = mp_menuSettings->addAction( tr( "Enable maximize button" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().enableMaximizeButton() );
-  act->setData( 28 );
   act = mp_menuSettings->addAction( tr( "Always stay on top" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().stayOnTop() );
@@ -1141,8 +1151,6 @@ void GuiMain::createMenus()
   act->setData( 16 );
 #endif
 
-  mp_menuSettings->addSeparator();
-  mp_menuSettings->addAction( IconManager::instance().icon( "update.png" ), tr( "Restore the colors to the default ones" ), this, SLOT( resetAllColors() ) );
   mp_actSaveWindowGeometry = mp_menuSettings->addAction( IconManager::instance().icon( "save-window.png" ), tr( "Save window's geometry" ), this, SLOT( askSaveGeometryAndState() ) );
   mp_actSaveWindowGeometry->setDisabled( Settings::instance().resetGeometryAtStartup() );
   mp_menuSettings->addAction( IconManager::instance().icon( "reset-window.png" ), tr( "Reset geometry of all windows" ), this, SLOT( askResetGeometryAndState() ) );
@@ -1226,6 +1234,11 @@ void GuiMain::createMenus()
     act->setIconVisibleInMenu( true );
   }
   mp_menuStatus->addSeparator();
+  mp_actSetAutoAway = mp_menuStatus->addAction( tr( "Set your status to away automatically" ), this, SLOT( settingsChanged() ) );
+  mp_actSetAutoAway->setCheckable( true );
+  mp_actSetAutoAway->setChecked( Settings::instance().autoUserAway() );
+  mp_actSetAutoAway->setData( 20 );
+  mp_menuStatus->addSeparator();
   mp_menuUserStatusList = new QMenu( tr( "Recently used" ), this );
   act = mp_menuStatus->addMenu( mp_menuUserStatusList );
   act->setIcon( IconManager::instance().icon( "recent.png" ) );
@@ -1243,6 +1256,8 @@ void GuiMain::createMenus()
   QMenu* context_menu_users = new QMenu( "Menu", this );
   context_menu_users->addAction( mp_actVCard );
   context_menu_users->addAction( mp_actChangeStatusDescription );
+  context_menu_users->addSeparator();
+  context_menu_users->addAction( mp_actSetAutoAway );
   context_menu_users->addSeparator();
   context_menu_users->addAction( mp_actConfigureNetwork );
   context_menu_users->addAction( mp_actAddUsers );
@@ -1896,7 +1911,7 @@ void GuiMain::settingsChanged( QAction* act )
 #endif
                                                  tr( "Please select the maximum number of lines to be saved in the chat (current: %1)." ).arg( Settings::instance().chatMaxLineSaved() ),
                                                  Settings::instance().chatMaxLineSaved(),
-                                                 100, 30000, 100, &ok );
+                                                 100, 50000, 100, &ok );
       if( ok )
       {
         Settings::instance().setChatMaxLineSaved( save_max_lines );
@@ -1948,7 +1963,17 @@ void GuiMain::settingsChanged( QAction* act )
   }
 
   if( settings_data_id > 0 && settings_data_id < 99 )
+  {
+    if( act->isCheckable() )
+    {
+      QApplication::processEvents(); // Menu is closing and status bar will be reset -> force events to display next messages
+      if( act->isChecked() )
+        showMessage( tr( "Option enabled." ), 5000 );
+      else
+        showMessage( tr( "Option disabled." ), 5000 );
+    }
     Settings::instance().save();
+  }
 }
 
 void GuiMain::showCheckSaveChatMessages()
@@ -3226,7 +3251,7 @@ void GuiMain::updateLocalStatusMessage()
 
 void GuiMain::onStatusBarMessageChanged( const QString& msg )
 {
-  if( msg.isEmpty() && !Settings::instance().localUser().statusDescription().isEmpty() )
+  if( msg.isNull() && !Settings::instance().localUser().statusDescription().isEmpty() )
     QTimer::singleShot( 0, this, SLOT( updateLocalStatusMessage() ) );
 }
 

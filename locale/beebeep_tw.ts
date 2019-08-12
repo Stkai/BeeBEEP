@@ -1809,7 +1809,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Workgroups</source>
-        <translation>工作群組</translation>
+        <translation type="obsolete">工作群組</translation>
     </message>
     <message>
         <source>Download plugins...</source>
@@ -2869,6 +2869,30 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Interface</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable message saving</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your workgroups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Option enabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Option disabled.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4375,6 +4399,10 @@ Please select a different name.</source>
     <message>
         <source>Remove workgroup</source>
         <translation>移除群組</translation>
+    </message>
+    <message>
+        <source>Your workgroups</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

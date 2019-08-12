@@ -49,7 +49,8 @@ unix:!macx:!android: equals(QT_MAJOR_VERSION, 4) {
 }
 
 unix:!macx:!android: {
-  LIBS= -lxcb -lxcb-screensaver
+  LIBS += -lxcb -lxcb-screensaver
+  CONFIG += largefile
 }
 
 macx: {

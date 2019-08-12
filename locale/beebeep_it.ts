@@ -2465,7 +2465,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Workgroups</source>
-        <translation>Gruppi di lavoro</translation>
+        <translation type="obsolete">Gruppi di lavoro</translation>
     </message>
     <message>
         <source>Shortcuts</source>
@@ -3034,6 +3034,30 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Notifications</source>
         <translation>Notifiche</translation>
+    </message>
+    <message>
+        <source>Interface</source>
+        <translation>Interfaccia</translation>
+    </message>
+    <message>
+        <source>Enable message saving</source>
+        <translation>Abilita il salvataggio dei messaggi</translation>
+    </message>
+    <message>
+        <source>Colors</source>
+        <translation>Colori</translation>
+    </message>
+    <message>
+        <source>Your workgroups</source>
+        <translation>I tuoi gruppi di lavoro</translation>
+    </message>
+    <message>
+        <source>Option enabled.</source>
+        <translation>Opzione abilitata.</translation>
+    </message>
+    <message>
+        <source>Option disabled.</source>
+        <translation>Opzione disabilitata.</translation>
     </message>
 </context>
 <context>
@@ -4635,6 +4659,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>This workgroup is already in list.</source>
         <translation>Questo gruppo di lavoro è già presente nella lista.</translation>
+    </message>
+    <message>
+        <source>Your workgroups</source>
+        <translation>I tuoi gruppi di lavoro</translation>
     </message>
 </context>
 <context>

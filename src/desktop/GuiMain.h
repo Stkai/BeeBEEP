@@ -288,6 +288,7 @@ private:
   QMenu* mp_menuTrayIcon;
   QMenu* mp_menuUserList;
   QMenu* mp_menuUserStatusList;
+  QMenu* mp_menuInterfaceSettings;
   QMenu* mp_menuStartupSettings;
   QMenu* mp_menuCloseSettings;
   QMenu* mp_menuUsersSettings;
@@ -297,6 +298,8 @@ private:
   QMenu* mp_menuTrayIconSettings;
   QMenu* mp_menuExistingFile;
   QMenu* mp_menuConnectionSettings;
+  QMenu* mp_menuChatColorSettings;
+  QMenu* mp_menuChatSaveSettings;
 
   QToolBar* mp_barMain;
 
@@ -334,6 +337,7 @@ private:
   QAction* mp_actSaveGroupList;
   QAction* mp_actSaveFileTransferMessages;
   QAction* mp_actSaveSystemMessages;
+  QAction* mp_actSetAutoAway;
 
   QAction* mp_actShowUserListOnConnection;
   QAction* mp_actShowChatListOnConnection;

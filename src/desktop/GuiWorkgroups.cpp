@@ -32,7 +32,7 @@ GuiWorkgroups::GuiWorkgroups( QWidget *parent )
   : QDialog( parent ), m_workgroups(), m_restartConnection( false )
 {
   setupUi( this );
-  setWindowTitle( tr( "Workgroups" ) + QString( " - %1" ).arg( Settings::instance().programName() ) );
+  setWindowTitle( tr( "Your workgroups" ) + QString( " - %1" ).arg( Settings::instance().programName() ) );
   setWindowIcon( IconManager::instance().icon( "workgroup.png" ) );
   Bee::removeContextHelpButton( this );
 
