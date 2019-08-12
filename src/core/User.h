@@ -77,6 +77,8 @@ public:
   inline const QDateTime& statusChangedIn() const;
   inline void setLastConnection( const QDateTime& );
   inline const QDateTime& lastConnection() const;
+  inline void setWorkgroups( const QStringList& );
+  inline const QStringList& workgroups() const;
 
   inline QString path() const;
   inline QString accountPath() const;
@@ -103,6 +105,7 @@ private:
   int m_protocolVersion;
   QDateTime m_statusChangedIn;
   QDateTime m_lastConnection;
+  QStringList m_workgroups;
 
 };
 
@@ -147,5 +150,7 @@ inline void User::setLastConnection( const QDateTime& new_value ) { m_lastConnec
 inline const QDateTime& User::lastConnection() const { return m_lastConnection; }
 inline QString User::path() const { return QString( "%1@%2" ).arg( name().toLower(), m_networkAddress.toString() ); }
 inline QString User::accountPath() const { return m_domainName.isEmpty() ? m_accountName : QString( "%1@%2" ).arg( m_accountName, m_domainName ); }
+inline void User::setWorkgroups( const QStringList& new_value ) { m_workgroups = new_value; }
+inline const QStringList& User::workgroups() const { return m_workgroups; }
 
 #endif // BEEBEEP_USER_H

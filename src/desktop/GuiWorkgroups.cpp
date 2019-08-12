@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "Core.h"
 #include "BeeUtils.h"
 #include "Config.h"
 #include "GuiWorkgroups.h"
@@ -74,7 +75,7 @@ void GuiWorkgroups::updateWorkgroupList()
 void GuiWorkgroups::loadWorkgroups()
 {
   mp_cbAcceptOnlyWorkgroups->setChecked( Settings::instance().acceptConnectionsOnlyFromWorkgroups() );
-  m_workgroups = Settings::instance().workgroups();
+  m_workgroups = Settings::instance().localUser().workgroups();
   m_restartConnection = false;
   updateWorkgroupList();
 }
@@ -82,13 +83,13 @@ void GuiWorkgroups::loadWorkgroups()
 void GuiWorkgroups::saveWorkgroups()
 {
   if( mp_cbAcceptOnlyWorkgroups->isChecked() != Settings::instance().acceptConnectionsOnlyFromWorkgroups() ||
-      !Bee::areStringListEqual( m_workgroups, Settings::instance().workgroups() ) )
+      !Bee::areStringListEqual( m_workgroups, Settings::instance().localUser().workgroups() ) )
   {
     m_restartConnection = true;
+    Settings::instance().setAcceptConnectionsOnlyFromWorkgroups( mp_cbAcceptOnlyWorkgroups->isChecked() );
+    beeCore->setLocalUserWorkgroups( m_workgroups );
+    Settings::instance().save();
   }
-  Settings::instance().setAcceptConnectionsOnlyFromWorkgroups( mp_cbAcceptOnlyWorkgroups->isChecked() );
-  Settings::instance().setWorkgroups( m_workgroups );
-  Settings::instance().save();
   accept();
 }
 
@@ -110,7 +111,7 @@ void GuiWorkgroups::addWorkgroup()
     return;
   }
 
-  m_workgroups.append( s_workgroup );
+  m_workgroups.append( Bee::capitalizeFirstLetter( s_workgroup, false ) );
   updateWorkgroupList();
 }
 

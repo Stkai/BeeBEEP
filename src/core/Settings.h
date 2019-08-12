@@ -36,7 +36,7 @@ class Settings
 public:
   QSettings* objectSettings() const; // deleteLater instance after call
 
-  void initFolders();
+  void setDefaultFolders();
   bool enableSaveData() const;
 
   QString currentSettingsFilePath() const;
@@ -450,8 +450,6 @@ public:
 
   inline void setAcceptConnectionsOnlyFromWorkgroups( bool );
   inline bool acceptConnectionsOnlyFromWorkgroups() const;
-  inline void setWorkgroups( const QStringList& );
-  inline const QStringList& workgroups() const;
 
   inline void setShortcuts( const QStringList& );
   inline const QStringList& shortcuts() const;
@@ -795,7 +793,6 @@ private:
   bool m_promptOnCloseEvent;
 
   bool m_acceptConnectionsOnlyFromWorkgroups;
-  QStringList m_workgroups;
 
   QStringList m_shortcuts;
   bool m_useShortcuts;
@@ -1055,8 +1052,6 @@ inline void Settings::setFileSharingGeometry( const QByteArray& new_value ) { m_
 inline const QByteArray& Settings::fileSharingGeometry() const { return m_fileSharingGeometry; }
 inline void Settings::setAcceptConnectionsOnlyFromWorkgroups( bool new_value ) { m_acceptConnectionsOnlyFromWorkgroups = new_value; }
 inline bool Settings::acceptConnectionsOnlyFromWorkgroups() const { return m_acceptConnectionsOnlyFromWorkgroups; }
-inline void Settings::setWorkgroups( const QStringList& new_value ) { m_workgroups = new_value; }
-inline const QStringList& Settings::workgroups() const { return m_workgroups; }
 inline int Settings::maxUserStatusDescriptionInList() const { return m_maxUserStatusDescriptionInList; }
 inline void Settings::setMaxDaysOfUserInactivity( int new_value ) { m_maxDaysOfUserInactivity = new_value; }
 inline int Settings::maxDaysOfUserInactivity() const { return m_maxDaysOfUserInactivity; }

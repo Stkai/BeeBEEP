@@ -246,13 +246,13 @@ bool Core::start()
   QTimer::singleShot( 12000, this, SLOT( startDnsMulticasting() ) );
 #endif
 
-  if( Settings::instance().acceptConnectionsOnlyFromWorkgroups() && !Settings::instance().workgroups().isEmpty() )
+  if( Settings::instance().acceptConnectionsOnlyFromWorkgroups() && !Settings::instance().localUser().workgroups().isEmpty() )
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                            tr( "%1 You have selected to join only in these workgroups: %2" )
-                           .arg( IconManager::instance().toHtml( "workgroup.png", "*C*" ) ).arg( Bee::stringListToTextString( Settings::instance().workgroups() ) ),
+                           .arg( IconManager::instance().toHtml( "workgroup.png", "*C*" ) ).arg( Bee::stringListToTextString( Settings::instance().localUser().workgroups() ) ),
                            DispatchToChat, ChatMessage::Connection );
-    qDebug() << "Protocol accepts connections only from these workgroups:" << qPrintable( Settings::instance().workgroups().join( ", " ) );
+    qDebug() << "Protocol accepts connections only from these workgroups:" << qPrintable( Settings::instance().localUser().workgroups().join( ", " ) );
   }
 
   if( Settings::instance().enableFileTransfer() )

@@ -341,10 +341,10 @@ QByteArray Protocol::helloMessage( const QString& public_key ) const
   data_list << Settings::instance().version( false, false );
   data_list << Settings::instance().localUser().hash();
   data_list << Settings::instance().localUser().color();
-  if( Settings::instance().workgroups().isEmpty() )
+  if( Settings::instance().localUser().workgroups().isEmpty() )
     data_list << QString( "" );
   else
-    data_list << Settings::instance().workgroups().join( ", " );
+    data_list << Settings::instance().localUser().workgroups().join( ", " );
   data_list << Settings::instance().localUser().qtVersion();
   data_list << QString::number( m_datastreamMaxVersion );
   if( Settings::instance().localUser().statusChangedIn().isValid() )
@@ -485,16 +485,16 @@ QStringList Protocol::workgroupsFromHelloMessage( const Message& hello_message )
 
 bool Protocol::acceptConnectionFromWorkgroup( const Message& hello_message ) const
 {
-  if( Settings::instance().workgroups().isEmpty() )
+  if( Settings::instance().localUser().workgroups().isEmpty() )
     return true;
 
   QStringList workgroups = workgroupsFromHelloMessage( hello_message );
   if( workgroups.isEmpty() )
-    return Settings::instance().workgroups().isEmpty();
+    return Settings::instance().localUser().workgroups().isEmpty();
 
   foreach( QString workgroup, workgroups )
   {
-    if( Settings::instance().workgroups().contains( workgroup, Qt::CaseInsensitive ) )
+    if( Settings::instance().localUser().workgroups().contains( workgroup, Qt::CaseInsensitive ) )
       return true;
   }
   return false;
@@ -597,9 +597,24 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   if( !sl.isEmpty() )
     user_color = sl.takeFirst();
 
-  /* skip workgroups */
-  if( !sl.isEmpty() )
-    sl.takeFirst();
+  QStringList user_workgroups;
+  if( !sl.isEmpty() && !Settings::instance().localUser().workgroups().isEmpty() )
+  {
+    QString s_workgroups = sl.takeFirst();
+    if( !s_workgroups.isEmpty() )
+    {
+      QStringList user_workgroups_tmp = s_workgroups.split( ", ", QString::SkipEmptyParts );
+      if( !Settings::instance().localUser().workgroups().isEmpty() )
+      {
+        foreach( QString user_workgroup, user_workgroups_tmp )
+        {
+          // User can see only his/her workgroups
+          if( Settings::instance().localUser().workgroups().contains( user_workgroup, Qt::CaseInsensitive ) )
+            user_workgroups.append( user_workgroup );
+        }
+      }
+    }
+  }
 
   QString user_qt_version = Settings::instance().localUser().qtVersion();
   if( !sl.isEmpty() )
@@ -635,6 +650,7 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   u.setHash( user_hash.isEmpty() ? newMd5Id() : user_hash );
   u.setColor( user_color );
   u.setQtVersion( user_qt_version );
+  u.setWorkgroups( user_workgroups );
   return u;
 }
 

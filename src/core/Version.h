@@ -50,7 +50,7 @@ const char HUNSPELL_VERSION[] = "1.7.0";
 const char BEEBEEP_VERSION[] = "5.6.5";
 const int BEEBEEP_PROTO_VERSION = 76;
 const int BEEBEEP_SETTINGS_VERSION = 12;
-const int BEEBEEP_BUILD = 1192;
+const int BEEBEEP_BUILD = 1193;
 
 #endif // BEEBEEP_VERSION_H
 

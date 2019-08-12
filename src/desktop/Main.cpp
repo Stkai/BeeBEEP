@@ -111,7 +111,7 @@ int main( int argc, char *argv[] )
   if( bee_app.testAttribute( Qt::AA_EnableHighDpiScaling ) )
     qDebug( "High DPI scaling enabled" );
 #endif
-  Settings::instance().initFolders();
+  Settings::instance().setDefaultFolders();
   Settings::instance().loadRcFile();
   Settings::instance().setDataFolder();
   qDebug() << "Settings path:" << qPrintable( Settings::instance().currentSettingsFilePath() );

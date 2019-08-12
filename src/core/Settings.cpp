@@ -252,7 +252,7 @@ QString Settings::findFileInFolders( const QString& file_name, const QStringList
   return QString::null;
 }
 
-void Settings::initFolders()
+void Settings::setDefaultFolders()
 {
   QString app_folder = Bee::convertToNativeFolderSeparator( QApplication::applicationDirPath() );
   qDebug() << "Applicaction folder:" << qPrintable( app_folder );
@@ -1291,7 +1291,7 @@ void Settings::load()
   m_localSubnetForced = sets->value( "LocalSubnetForced", "" ).toString();
   m_networkAddressList = sets->value( "UserPathList", QStringList() ).toStringList();
   m_acceptConnectionsOnlyFromWorkgroups = sets->value( "AcceptConnectionsOnlyFromWorkgroups", m_acceptConnectionsOnlyFromWorkgroups ).toBool();
-  m_workgroups = sets->value( "Workgroups", QStringList() ).toStringList();
+  m_localUser.setWorkgroups( sets->value( "Workgroups", QStringList() ).toStringList() );
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   m_useMulticastDns = sets->value( "UseMulticastDns", m_useMulticastDns ).toBool();
 #endif
@@ -1638,7 +1638,7 @@ void Settings::save()
   sets->setValue( "LocalSubnetForced", m_localSubnetForced );
   sets->setValue( "UserPathList", m_networkAddressList );
   sets->setValue( "AcceptConnectionsOnlyFromWorkgroups", m_acceptConnectionsOnlyFromWorkgroups );
-  sets->setValue( "Workgroups", m_workgroups );
+  sets->setValue( "Workgroups", m_localUser.workgroups() );
   sets->setValue( "MaxUsersToConnectInATick", m_maxUsersToConnectInATick );
   sets->setValue( "UseHiveProtocol", m_useHive );
   sets->setValue( "DisableSystemProxyForConnections", m_disableSystemProxyForConnections );

@@ -740,6 +740,17 @@ QString Bee::toolTipForUser( const User& u, bool only_status )
       tool_tip += QString( "\n[%1 %2]" ).arg( unsent_messages ).arg( QObject::tr( "unsent messages" ) );
   }
 
+  if( !u.workgroups().isEmpty() )
+  {
+    QString user_workgroups = u.workgroups().join( ", " );
+    if( user_workgroups.size() > 90 )
+    {
+       user_workgroups.truncate( 90 );
+       user_workgroups.append( "..." );
+    }
+    tool_tip += QString( "\n%1: %2" ).arg( QObject::tr( "Workgroups" ) ).arg( user_workgroups );
+  }
+
   if( !u.vCard().birthday().isNull() )
   {
     QString text = userBirthdayToText( u );

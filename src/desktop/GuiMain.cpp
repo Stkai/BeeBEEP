@@ -4410,8 +4410,8 @@ void GuiMain::showWorkgroups()
   if( gw.restartConnection() )
     showRestartConnectionAlertMessage();
 
-  if( Settings::instance().acceptConnectionsOnlyFromWorkgroups() && !Settings::instance().workgroups().isEmpty() )
-    qDebug() << "Protocol now accepts connections only from these workgroups:" << qPrintable( Settings::instance().workgroups().join( ", " ) );
+  if( Settings::instance().acceptConnectionsOnlyFromWorkgroups() && !Settings::instance().localUser().workgroups().isEmpty() )
+    qDebug() << "Protocol now accepts connections only from these workgroups:" << qPrintable( Settings::instance().localUser().workgroups().join( ", " ) );
 }
 
 void GuiMain::showRefusedChats()

@@ -81,6 +81,7 @@ public:
   void changeUserColor( VNumber, const QString& );
   bool userCanBeRemoved( const User& );
   void regenerateLocalUserHash();
+  void setLocalUserWorkgroups( const QStringList& );
 
   /* CoreChat */
   void createPrivateChat( const User& );
