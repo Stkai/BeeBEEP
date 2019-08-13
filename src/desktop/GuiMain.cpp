@@ -1328,7 +1328,7 @@ void GuiMain::createToolAndMenuBars()
 #if defined Q_OS_MAC
   setMinimumWidth( mp_barMain->actions().size() * (mp_barMain->iconSize().width()+8) + 20 );
 #elif defined Q_OS_UNIX
-  setMinimumWidth( mp_barMain->actions().size() * (mp_barMain->iconSize().width()+4) + 10 );
+  setMinimumWidth( mp_barMain->actions().size() * (mp_barMain->iconSize().width()+4) + 20 );
 #endif
 
 }
