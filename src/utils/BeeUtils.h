@@ -55,7 +55,7 @@ namespace Bee
   bool isFileTypeCompressed( const QString& );
   QString fileTypeToString( FileType );
   QString dateTimeStringSuffix( const QDateTime& );
-  QString capitalizeFirstLetter( const QString&, bool all_chars_after_space );
+  QString capitalizeFirstLetter( const QString&, bool all_chars_after_space, bool lower_all_characters = true );
   QColor invertColor( const QColor& );
   bool isColorNear( const QColor&, const QColor& );
   QString removeHtmlTags( const QString& );

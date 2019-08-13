@@ -84,7 +84,7 @@ void GuiUserList::resetList()
   {
     mp_twUsers->setRootIsDecorated( true );
     GuiUserItem* others_workgroup = new GuiUserItem( mp_twUsers );
-    others_workgroup->setWorkgroup( Bee::capitalizeFirstLetter( GuiUserItem::othersWorkgroup(), false ) );
+    others_workgroup->setWorkgroup( Bee::capitalizeFirstLetter( GuiUserItem::othersWorkgroup(), false, false ) );
   }
   else
     mp_twUsers->setRootIsDecorated( false );
@@ -205,7 +205,7 @@ GuiUserItem* GuiUserList::createUserItemInWorkgroup( const User& u, const QStrin
     if( !parent_workgroup )
     {
       parent_workgroup = new GuiUserItem( mp_twUsers );
-      parent_workgroup->setWorkgroup( Bee::capitalizeFirstLetter( user_workgroup, false ) );
+      parent_workgroup->setWorkgroup( Bee::capitalizeFirstLetter( user_workgroup, false, false ) );
     }
     item = new GuiUserItem( parent_workgroup );
     item->setUserId( u.id() );

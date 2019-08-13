@@ -343,33 +343,40 @@ QString Bee::dateTimeStringSuffix( const QDateTime& dt )
   return s;
 }
 
-QString Bee::capitalizeFirstLetter( const QString& txt, bool all_chars_after_space )
+QString Bee::capitalizeFirstLetter( const QString& txt, bool all_chars_after_space, bool lower_all_characters )
 {
   if( txt.isEmpty() )
     return txt;
-  QString tmp = txt.toLower();
+
   QString capitalized = "";
-  bool apply_title_case = true;
-  QChar c;
-  for( int i = 0; i < tmp.size(); i++ )
+  QString tmp = lower_all_characters ? txt.toLower() : txt;
+  if( all_chars_after_space )
   {
-    c = tmp.at( i );
-
-    if( c.isSpace() )
+    QChar c;
+    bool apply_title_case = true;
+    for( int i = 0; i < tmp.size(); i++ )
     {
-      capitalized += c;
-      if( all_chars_after_space )
+      c = tmp.at( i );
+      if( c.isSpace() )
+      {
+        capitalized += c;
         apply_title_case = true;
+      }
+      else if( apply_title_case )
+      {
+        capitalized += c.toTitleCase();
+        apply_title_case = false;
+      }
+      else
+        capitalized += c;
     }
-    else if( apply_title_case )
-    {
-      capitalized += c.toTitleCase();
-      apply_title_case = false;
-    }
-    else
-      capitalized += c;
   }
-
+  else
+  {
+    tmp.remove( 0, 1 );
+    capitalized += txt.at( 0 ).toTitleCase();
+    capitalized += tmp;
+  }
   return capitalized;
 }
 

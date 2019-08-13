@@ -67,7 +67,7 @@ void GuiWorkgroups::updateWorkgroupList()
   foreach( QString s_workgroup, m_workgroups )
   {
     QTreeWidgetItem* item = new QTreeWidgetItem( mp_twWorkgroups );
-    item->setText( 0, s_workgroup );
+    item->setText( 0, Bee::capitalizeFirstLetter( s_workgroup, false, false ) );
     item->setIcon( 0, IconManager::instance().icon( "workgroup.png" ));
   }
 }
@@ -111,7 +111,7 @@ void GuiWorkgroups::addWorkgroup()
     return;
   }
 
-  m_workgroups.append( Bee::capitalizeFirstLetter( s_workgroup, false ) );
+  m_workgroups.append( s_workgroup );
   updateWorkgroupList();
 }
 
