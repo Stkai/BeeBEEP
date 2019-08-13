@@ -60,6 +60,7 @@ GuiShareBox::GuiShareBox( QWidget *parent )
   m_myCurrentFolder = "";
   m_outCurrentFolder = "";
   m_userId = ID_INVALID;
+  mp_fsWatcher = new QFileSystemWatcher( this );
 
   mp_pbMyUpdate->setToolTip( tr( "Update your BeeBOX" ) );
   mp_pbMyCreateFolder->setToolTip( tr( "Create folder in your BeeBOX" ) );
@@ -91,6 +92,7 @@ GuiShareBox::GuiShareBox( QWidget *parent )
   connect( mp_pbMyCreateFolder, SIGNAL( clicked() ), this, SLOT( createFolderInMyBox() ) );
   connect( mp_pbOutCreateFolder, SIGNAL( clicked() ), this, SLOT( createFolderInOutBox() ) );
   connect( mp_pbMyOpenFolder, SIGNAL( clicked() ), this, SLOT( openMyBox() ) );
+  connect( mp_fsWatcher, SIGNAL( directoryChanged( const QString& ) ), this, SLOT( updateFolder( const QString& ) ) );
 }
 
 void GuiShareBox::onEnableMyShareBoxClicked()
@@ -206,7 +208,30 @@ void GuiShareBox::setCurrentFolder( VNumber user_id, const QString& new_path )
       m_outCurrentFolder = "";
   }
   else
+  {
+    if( Settings::instance().useShareBox() )
+    {
+      QString old_dir_to_watch = Bee::convertToNativeFolderSeparator( m_myCurrentFolder.isEmpty() ? Settings::instance().shareBoxPath() : QString( "%1/%2" ).arg( Settings::instance().shareBoxPath(), m_myCurrentFolder ) );
+      QString new_dir_to_watch = Bee::convertToNativeFolderSeparator( new_path.isEmpty() ? Settings::instance().shareBoxPath() : QString( "%1/%2" ).arg( Settings::instance().shareBoxPath(), new_path ) );
+      mp_fsWatcher->removePath( old_dir_to_watch );
+      mp_fsWatcher->addPath( new_dir_to_watch );
+#ifdef BEEBEEP_DEBUG
+      qDebug() << "FileSystemWatcher is now checking path" << qPrintable( mp_fsWatcher->directories().join( ", " ) );
+#endif
+    }
+    else
+    {
+      QStringList fsw_dirs = mp_fsWatcher->directories();
+      if( !fsw_dirs.isEmpty() )
+      {
+#ifdef BEEBEEP_DEBUG
+        qDebug() << "FileSystemWatcher does not check path" << qPrintable( fsw_dirs.join( ", " ) ) << "anymore";
+#endif
+        mp_fsWatcher->removePaths( fsw_dirs );
+      }
+    }
     m_myCurrentFolder = new_path;
+  }
 }
 
 void GuiShareBox::disableBox( VNumber user_id )
@@ -243,7 +268,7 @@ void GuiShareBox::enableBox( VNumber user_id )
   {
     mp_pbMyCreateFolder->setEnabled( true );
     mp_pbMyOpenFolder->setEnabled( true );
-    mp_pbMyUpdate->setEnabled( true );
+    mp_pbMyUpdate->setEnabled( false );
     mp_lMyBox->setEnabled( true );
   }
   else
@@ -610,4 +635,15 @@ void GuiShareBox::backToParentFolder()
   }
   else
     mp_pbOutParentFolder->setEnabled( false );
+}
+
+void GuiShareBox::updateFolder( const QString& f )
+{
+  if( Settings::instance().useShareBox() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Folder" << qPrintable( f ) << "changed -> updating ShareBox";
+#endif
+    mp_pbMyUpdate->setEnabled( true );
+  }
 }

@@ -66,6 +66,7 @@ protected slots:
   void createFolderInBox( VNumber );
   void dropInMyBox( const QString& );
   void dropInOutBox( const QString& );
+  void updateFolder( const QString& );
 
 protected:
   void updateMyBox( const QString&, const QList<FileInfo>& );
@@ -90,6 +91,8 @@ private:
   QString m_myCurrentFolder;
   QString m_outCurrentFolder;
   QSplitter* mp_splitter;
+
+  QFileSystemWatcher* mp_fsWatcher;
 
 };
 

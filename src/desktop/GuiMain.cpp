@@ -1325,8 +1325,10 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actViewFileTransfer );
   mp_barMain->addAction( mp_actViewFileSharing );
-#if defined Q_OS_UNIX
+#if defined Q_OS_MAC
   setMinimumWidth( mp_barMain->actions().size() * (mp_barMain->iconSize().width()+8) + 20 );
+#elif defined Q_OS_UNIX
+  setMinimumWidth( mp_barMain->actions().size() * (mp_barMain->iconSize().width()+4) + 10 );
 #endif
 
 }
