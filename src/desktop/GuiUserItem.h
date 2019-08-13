@@ -32,7 +32,7 @@ class GuiUserItem : public QTreeWidgetItem
 {
 
 public:
-  enum UserDataType { UserId = Qt::UserRole+2, ChatId, Messages, UnreadMessages, UserName, Priority, Status };
+  enum UserDataType { UserId = Qt::UserRole+2, ChatId, Messages, UnreadMessages, UserName, Priority, Status, Workgroup };
 
   GuiUserItem( QTreeWidget* );
   GuiUserItem( QTreeWidgetItem* );
@@ -47,9 +47,16 @@ public:
   inline int messages() const;
   inline void setUnreadMessages( int );
   inline int unreadMessages() const;
+  inline void setParentWorkgroup( const QString& );
+  inline const QString& parentWorkgroup() const;
+  static QString othersWorkgroup();
+  inline QString workgroup() const;
 
   bool updateUser();
   bool updateUser( const User& );
+
+  void setWorkgroup( const QString& );
+  inline bool isWorkgroup() const;
 
   void onTickEvent( int );
 
@@ -60,6 +67,7 @@ private:
   void showUserStatus();
 
   QIcon m_defaultIcon;
+  QString m_parentWorkgroup;
 
 };
 
@@ -74,5 +82,9 @@ inline int GuiUserItem::messages() const { return data( 0, Messages ).toInt(); }
 inline void GuiUserItem::setUnreadMessages( int unread_messages ) { setData( 0, UnreadMessages, unread_messages ); }
 inline int GuiUserItem::unreadMessages() const { return data( 0, UnreadMessages ).toInt(); }
 inline void GuiUserItem::setDefaultIcon( const QIcon& new_value ) { m_defaultIcon = new_value; }
+inline bool GuiUserItem::isWorkgroup() const { return data( 0, Workgroup ).toBool(); }
+inline void GuiUserItem::setParentWorkgroup( const QString& new_value ) { m_parentWorkgroup = new_value; }
+inline const QString& GuiUserItem::parentWorkgroup() const { return m_parentWorkgroup; }
+inline QString GuiUserItem::workgroup() const { return isWorkgroup() ? data( 0, UserName ).toString() : ""; }
 
 #endif // BEEBEEP_GUIUSERITEM_H

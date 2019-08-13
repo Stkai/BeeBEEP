@@ -2537,7 +2537,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Show only the online users</source>
-        <translation>Показати тільки активних користувачів</translation>
+        <translation type="obsolete">Показати тільки активних користувачів</translation>
     </message>
     <message>
         <source>Dictionary selected: %1</source>
@@ -2897,6 +2897,14 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Option disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show online users only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show users in their workgroups</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4112,6 +4120,10 @@ Please select a different name.</source>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
         <translation>Бібліотека Qt для цієї ОС не підтримує перетаскування файлів. Вам необхідно Вибрати знову файл для відправки.</translation>
     </message>
+    <message>
+        <source>You cannot send files to the workgroup &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiUserListWidget</name>
@@ -4601,6 +4613,14 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Unable to complete the test with an invalid network address.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>others</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Workgroups</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -1157,70 +1157,61 @@ void GuiMain::createMenus()
 
   /* User List Menu */
   mp_menuUserList = new QMenu( tr( "Options" ), this );
-
+    act = mp_menuUserList->addAction( tr( "Show online users only" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showOnlyOnlineUsers() );
+  act->setData( 6 );
+  act = mp_menuUserList->addAction( tr( "Show users in their workgroups" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showUsersInWorkgroups() );
+  act->setData( 87 );
+  mp_menuUserList->addSeparator();
   act = mp_menuUserList->addAction( tr( "Sort users in ascending order" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().sortUsersAscending() );
   act->setData( 49 );
-
   QMenu* sorting_users_menu = mp_menuUserList->addMenu( tr( "Sorting mode" ) + QString( "..." ) );
   QActionGroup* sorting_users_action_group = new QActionGroup( this );
   sorting_users_action_group->setExclusive( true );
-
   act = sorting_users_menu->addAction( tr( "Default mode" ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().userSortingMode() < 1 || Settings::instance().userSortingMode() > 3 );
   act->setData( 50 );
   sorting_users_action_group->addAction( act );
-
   act = sorting_users_menu->addAction( tr( "By user name" ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().userSortingMode() == 1 );
   act->setData( 51 );
   sorting_users_action_group->addAction( act );
-
   act = sorting_users_menu->addAction( tr( "By user status" ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().userSortingMode() == 2 );
   act->setData( 52 );
   sorting_users_action_group->addAction( act );
-
   act = sorting_users_menu->addAction( tr( "By unread messages" ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().userSortingMode() == 3 );
   act->setData( 53 );
   sorting_users_action_group->addAction( act );
   connect( sorting_users_action_group, SIGNAL( triggered( QAction* ) ), this, SLOT( settingsChanged( QAction* ) ) );
-
   mp_menuUserList->addSeparator();
-
-  act = mp_menuUserList->addAction( tr( "Show only the online users" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showOnlyOnlineUsers() );
-  act->setData( 6 );
-
   act = mp_menuUserList->addAction( tr( "Show the user's picture" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().showUserPhoto() );
   act->setData( 21 );
-
   act = mp_menuUserList->addAction( tr( "Show the user's vCard on right click" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().showVCardOnRightClick() );
   act->setData( 25 );
-
   act = mp_menuUserList->addAction( tr( "Show status color in background" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().showUserStatusBackgroundColor() );
   act->setData( 38 );
-
   act = mp_menuUserList->addAction( tr( "Show the status description" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().showUserStatusDescription() );
   act->setData( 37 );
-
   mp_menuUserList->addSeparator();
-
   mp_menuUserList->addAction( tr( "Change size of the user's picture" ), this, SLOT( changeAvatarSizeInList() ) );
   mp_userList->setMenuSettings( mp_menuUserList );
 
@@ -1938,6 +1929,10 @@ void GuiMain::settingsChanged( QAction* act )
     break;
   case 86:
     Settings::instance().setDownloadInUserFolder( act->isChecked() );
+    break;
+  case 87:
+    Settings::instance().setShowUsersInWorkgroups( act->isChecked() );
+    refresh_users = true;
     break;
   case 99:
     break;

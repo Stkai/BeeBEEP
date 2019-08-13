@@ -1829,7 +1829,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show only the online users</source>
-        <translation>Mostra solo gli utenti connessi</translation>
+        <translation type="obsolete">Mostra solo gli utenti connessi</translation>
     </message>
     <message>
         <source>Chats</source>
@@ -3058,6 +3058,14 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Option disabled.</source>
         <translation>Opzione disabilitata.</translation>
+    </message>
+    <message>
+        <source>Show online users only</source>
+        <translation>Mostra solo gli utenti connessi</translation>
+    </message>
+    <message>
+        <source>Show users in their workgroups</source>
+        <translation>Mostra gli utenti nei loro gruppi di lavoro</translation>
     </message>
 </context>
 <context>
@@ -4358,6 +4366,10 @@ Inserisci un nome differente.</translation>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
         <translation>Le librerie Qt per questo OS non supportano il Drag and Drop per i file. Dovrai selezionare nuovamente il file da inviare.</translation>
     </message>
+    <message>
+        <source>You cannot send files to the workgroup &apos;%1&apos;.</source>
+        <translation>Non puoi inviare file al gruppo di lavoro &apos;%1&apos;.</translation>
+    </message>
 </context>
 <context>
     <name>GuiUserListWidget</name>
@@ -4896,6 +4908,14 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Unable to complete the test with an invalid network address.</source>
         <translation>Impossibile completare il test di connessione con un indirizzo di rete non valido.</translation>
+    </message>
+    <message>
+        <source>others</source>
+        <translation>altri</translation>
+    </message>
+    <message>
+        <source>Workgroups</source>
+        <translation>Gruppi di lavoro</translation>
     </message>
 </context>
 <context>

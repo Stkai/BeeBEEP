@@ -30,14 +30,28 @@
 #include "UserManager.h"
 
 
-GuiUserItem::GuiUserItem( QTreeWidget* parent )
-  : QTreeWidgetItem( parent )
+QString GuiUserItem::othersWorkgroup()
 {
+  return QObject::tr( "others" );
+}
+
+GuiUserItem::GuiUserItem( QTreeWidget* parent )
+  : QTreeWidgetItem( parent ), m_parentWorkgroup( "" )
+{
+  setData( 0, Workgroup, false );
 }
 
 GuiUserItem::GuiUserItem( QTreeWidgetItem* parent )
-  : QTreeWidgetItem( parent )
+  : QTreeWidgetItem( parent ), m_parentWorkgroup( "" )
 {
+  setData( 0, Workgroup, false );
+}
+
+void GuiUserItem::setWorkgroup( const QString& wg_name )
+{
+  setData( 0, Workgroup, true );
+  setData( 0, UserName, wg_name );
+  setText( 0, wg_name );
 }
 
 static int UserStatusSortingOrder( int user_status )
@@ -58,6 +72,29 @@ bool GuiUserItem::operator<( const QTreeWidgetItem& item ) const
   QString other_name = item.data( 0, GuiUserItem::UserName ).toString().toLower();
   int user_item_priority = data( 0, GuiUserItem::Priority ).toInt();
   int other_priority = item.data( 0, GuiUserItem::Priority ).toInt();
+
+  bool user_workgroup = data( 0, GuiUserItem::Workgroup ).toBool();
+  bool other_workgroup = item.data( 0, GuiUserItem::Workgroup ).toBool();
+  if( user_workgroup || other_workgroup )
+  {
+    if( user_workgroup && !other_workgroup )
+    {
+      return true;
+    }
+    else if( !user_workgroup && other_workgroup )
+    {
+      return false;
+    }
+    else
+    {
+      if( user_name == GuiUserItem::othersWorkgroup() )
+        return false;
+      else if( other_name == GuiUserItem::othersWorkgroup() )
+        return true;
+      else
+        return user_name < other_name;
+    }
+  }
 
   if( Settings::instance().userSortingMode() == 1 ) // by name
   {
@@ -98,14 +135,15 @@ QIcon GuiUserItem::selectUserIcon( int user_status, bool use_big_icon ) const
 
 bool GuiUserItem::updateUser()
 {
-  return updateUser( UserManager::instance().findUser( userId() ) );
+  return isWorkgroup() ? false : updateUser( UserManager::instance().findUser( userId() ) );
 }
 
 bool GuiUserItem::updateUser( const User& u )
 {
+  if( isWorkgroup() )
+    return false;
   if( u.id() != userId() )
     return false;
-
   if( !u.isValid() )
   {
     setData( 0, GuiUserItem::Priority, 100000000 );
@@ -191,7 +229,7 @@ void GuiUserItem::showUserStatus()
 
 void GuiUserItem::onTickEvent( int ticks )
 {
-  if( unreadMessages() > 0 )
+  if( !isWorkgroup() && unreadMessages() > 0 )
   {
     if( ticks % 2 == 0 )
       setIcon( 0, IconManager::instance().icon( "beebeep-message.png" ) );

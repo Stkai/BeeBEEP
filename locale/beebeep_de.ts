@@ -2485,7 +2485,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Show only the online users</source>
-        <translation>Nur Benutzer anzeigen, die online sind</translation>
+        <translation type="obsolete">Nur Benutzer anzeigen, die online sind</translation>
     </message>
     <message>
         <source>Dictionary selected: %1</source>
@@ -2953,6 +2953,14 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Option disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show online users only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show users in their workgroups</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4188,6 +4196,10 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
         <translation>Die Qt-Bibliothek dieses Betriebssystems unterstützt Ziehen und Ablegen von Dateien nicht. Du musst die Datei zum Senden erneut auswählen.</translation>
     </message>
+    <message>
+        <source>You cannot send files to the workgroup &apos;%1&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiUserListWidget</name>
@@ -4698,6 +4710,14 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>Unable to complete the test with an invalid network address.</source>
         <translation>Der Test kann nicht mit einer ungültigen Netzwerkadresse abgeschlossen werden.</translation>
+    </message>
+    <message>
+        <source>others</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Workgroups</source>
+        <translation type="unfinished">Arbeitsgruppen</translation>
     </message>
 </context>
 <context>

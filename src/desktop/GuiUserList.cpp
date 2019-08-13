@@ -80,6 +80,14 @@ void GuiUserList::resetList()
   if( mp_twUsers->topLevelItemCount() > 0 )
     mp_twUsers->clear();
   mp_twUsers->setIconSize( Settings::instance().avatarIconSize() );
+  if( Settings::instance().showUsersInWorkgroups() )
+  {
+    mp_twUsers->setRootIsDecorated( true );
+    GuiUserItem* others_workgroup = new GuiUserItem( mp_twUsers );
+    others_workgroup->setWorkgroup( Bee::capitalizeFirstLetter( GuiUserItem::othersWorkgroup(), false ) );
+  }
+  else
+    mp_twUsers->setRootIsDecorated( false );
 }
 
 void GuiUserList::updateUsers()
@@ -96,28 +104,58 @@ void GuiUserList::updateUsers()
   sortUsers();
 }
 
-GuiUserItem* GuiUserList::itemFromUserId( VNumber user_id )
+QList<GuiUserItem*> GuiUserList::itemsFromUserId( VNumber user_id )
+{
+  QList<GuiUserItem*> items;
+  GuiUserItem* item;
+  QTreeWidgetItemIterator it( mp_twUsers );
+  while( *it )
+  {
+    item = dynamic_cast<GuiUserItem*>( *it );
+    if( item && !item->isWorkgroup() && item->userId() == user_id )
+      items.append( item );
+    ++it;
+  }
+  return items;
+}
+
+QList<GuiUserItem*> GuiUserList::itemsFromChatId( VNumber chat_id )
+{
+  QList<GuiUserItem*> items;
+  GuiUserItem* item;
+  QTreeWidgetItemIterator it( mp_twUsers );
+  while( *it )
+  {
+    item = dynamic_cast<GuiUserItem*>( *it );
+    if( item && !item->isWorkgroup() && item->chatId() == chat_id )
+      items.append( item );
+    ++it;
+  }
+  return items;
+}
+
+GuiUserItem* GuiUserList::itemFromWorkgroup( const QString& workgroup_name )
 {
   GuiUserItem* item;
   QTreeWidgetItemIterator it( mp_twUsers );
   while( *it )
   {
     item = dynamic_cast<GuiUserItem*>( *it );
-    if( item->userId() == user_id )
+    if( item && item->isWorkgroup() && item->workgroup().toLower() == workgroup_name.toLower() )
       return item;
     ++it;
   }
   return Q_NULLPTR;
 }
 
-GuiUserItem* GuiUserList::itemFromChatId( VNumber chat_id )
+GuiUserItem* GuiUserList::itemFromUserIdAndWorkgroup( VNumber user_id, const QString& workgroup_name )
 {
   GuiUserItem* item;
   QTreeWidgetItemIterator it( mp_twUsers );
   while( *it )
   {
     item = dynamic_cast<GuiUserItem*>( *it );
-    if( item->chatId() == chat_id )
+    if( item && !item->isWorkgroup() && item->userId() == user_id && item->workgroup().toLower() == workgroup_name.toLower() )
       return item;
     ++it;
   }
@@ -126,30 +164,61 @@ GuiUserItem* GuiUserList::itemFromChatId( VNumber chat_id )
 
 void GuiUserList::setUnreadMessages( VNumber private_chat_id, int n, bool update_user )
 {
-  GuiUserItem* item = itemFromChatId( private_chat_id );
-  if( !item )
+  QList<GuiUserItem*> items = itemsFromChatId( private_chat_id );
+  if( items.isEmpty() )
     return;
 
-  item->setUnreadMessages( n );
-  if( update_user )
+  foreach( GuiUserItem* item, items )
   {
-    item->updateUser();
-    sortUsers();
+    item->setUnreadMessages( n );
+    if( update_user )
+      item->updateUser();
   }
+
+  if( update_user )
+    sortUsers();
 }
 
 void GuiUserList::setMessages( VNumber private_chat_id, int n, bool update_user )
 {
-  GuiUserItem* item = itemFromChatId( private_chat_id );
-  if( !item )
+  QList<GuiUserItem*> items = itemsFromChatId( private_chat_id );
+  if( items.isEmpty() )
     return;
 
-  item->setMessages( n );
-  if( update_user )
+  foreach( GuiUserItem* item, items )
   {
-    item->updateUser();
-    sortUsers();
+    item->setMessages( n );
+    if( update_user )
+      item->updateUser();
   }
+
+  if( update_user )
+    sortUsers();
+}
+
+GuiUserItem* GuiUserList::createUserItemInWorkgroup( const User& u, const QString& user_workgroup )
+{
+  GuiUserItem* item = Q_NULLPTR;
+  if( !user_workgroup.isEmpty() )
+  {
+    GuiUserItem* parent_workgroup = itemFromWorkgroup( user_workgroup );
+    if( !parent_workgroup )
+    {
+      parent_workgroup = new GuiUserItem( mp_twUsers );
+      parent_workgroup->setWorkgroup( Bee::capitalizeFirstLetter( user_workgroup, false ) );
+    }
+    item = new GuiUserItem( parent_workgroup );
+    item->setUserId( u.id() );
+    item->setParentWorkgroup( user_workgroup );
+    if( u.isStatusConnected() )
+      parent_workgroup->setExpanded( true );
+  }
+  else
+  {
+    item = new GuiUserItem( mp_twUsers );
+    item->setUserId( u.id() );
+  }
+  return item;
 }
 
 void GuiUserList::setUser( const User& u, bool sort_users )
@@ -157,52 +226,102 @@ void GuiUserList::setUser( const User& u, bool sort_users )
   if( u.isLocal() )
     return;
 
-  GuiUserItem* item = itemFromUserId( u.id() );
-  if( !item )
+  QList<GuiUserItem*> items = itemsFromUserId( u.id() );
+  if( !u.isStatusConnected() && Settings::instance().showOnlyOnlineUsers() )
   {
-    if( !u.isStatusConnected() && Settings::instance().showOnlyOnlineUsers() )
-      return;
-
-    item = new GuiUserItem( mp_twUsers );
-    item->setUserId( u.id() );
-  }
-  else
-  {
-    if( !u.isStatusConnected() && Settings::instance().showOnlyOnlineUsers() )
+    if( !items.isEmpty() )
     {
-      removeUser( u );
-      return;
+      foreach( GuiUserItem* item, items )
+        removeUserItem( item );
+    }
+    return;
+  }
+
+  if( !items.isEmpty() )
+  {
+    if( Settings::instance().showUsersInWorkgroups() )
+    {
+      bool reload_items = false;
+      foreach( GuiUserItem* item, items )
+      {
+        if( u.workgroups().isEmpty() )
+        {
+          if( item->workgroup().toLower() != GuiUserItem::othersWorkgroup().toLower() )
+          {
+            removeUserItem( item );
+            reload_items = true;
+          }
+        }
+        else
+        {
+          if( !u.workgroups().contains( item->workgroup(), Qt::CaseInsensitive ) )
+          {
+            removeUserItem( item );
+            reload_items = true;
+          }
+        }
+      }
+      if( reload_items )
+        items = itemsFromUserId( u.id() );
     }
   }
 
-  Chat c = ChatManager::instance().privateChatForUser( u.id() );
-  if( c.isValid() )
+  if( Settings::instance().showUsersInWorkgroups() )
   {
-    item->setChatId( c.id() );
-    item->setUnreadMessages( c.unreadMessages() );
+    if( !u.workgroups().isEmpty() )
+    {
+      foreach( QString workgroup_name, u.workgroups() )
+      {
+        if( !itemFromUserIdAndWorkgroup( u.id(), workgroup_name ) )
+          items.append( createUserItemInWorkgroup( u, workgroup_name ) );
+      }
+    }
+    else
+    {
+      if( !itemFromUserIdAndWorkgroup( u.id(), GuiUserItem::othersWorkgroup() ) )
+        items.append( createUserItemInWorkgroup( u, GuiUserItem::othersWorkgroup() ) );
+    }
+  }
+  else
+  {
+    if( items.isEmpty() )
+      items.append( createUserItemInWorkgroup( u, QString::null ) );
   }
 
-  item->updateUser( u );
+  foreach( GuiUserItem* item, items )
+  {
+    Chat c = ChatManager::instance().privateChatForUser( u.id() );
+    if( c.isValid() )
+    {
+      item->setChatId( c.id() );
+      item->setUnreadMessages( c.unreadMessages() );
+    }
+    item->updateUser( u );
+  }
 
   if( sort_users )
     sortUsers();
 }
 
+void GuiUserList::removeUserItem( GuiUserItem* item )
+{
+  if( !item )
+    return;
+  QTreeWidgetItem* root_item = mp_twUsers->invisibleRootItem();
+  if( root_item )
+  {
+    root_item->removeChild( dynamic_cast<QTreeWidgetItem*>( item ) );
+    delete item;
+  }
+}
+
 void GuiUserList::removeUser( const User& u )
 {
-  GuiUserItem* item = itemFromUserId( u.id() );
-  if( item )
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Delete user item from GuiUserList";
-#endif
-    QTreeWidgetItem* root_item = mp_twUsers->invisibleRootItem();
-    if( root_item )
-    {
-      root_item->removeChild( dynamic_cast<QTreeWidgetItem*>( item ) );
-      delete item;
-    }
-  }
+  QList<GuiUserItem*> items = itemsFromUserId( u.id() );
+  if( items.isEmpty() )
+    return;
+  foreach( GuiUserItem* item, items )
+    removeUserItem( item );
 }
 
 void GuiUserList::showUserMenu( const QPoint& p )
@@ -216,6 +335,9 @@ void GuiUserList::showUserMenu( const QPoint& p )
   }
 
   GuiUserItem* user_item = dynamic_cast<GuiUserItem*>( item );
+  if( user_item->isWorkgroup() )
+    return;
+
   if( user_item->chatId() == ID_DEFAULT_CHAT )
   {
     emit chatSelected( ID_DEFAULT_CHAT );
@@ -243,6 +365,10 @@ void GuiUserList::userItemClicked( QTreeWidgetItem* item, int )
   }
 
   GuiUserItem* user_item = dynamic_cast<GuiUserItem*>( item );
+  if( !user_item )
+    return;
+  if( user_item->isWorkgroup() )
+    return;
   if( user_item->chatId() != ID_INVALID )
     emit chatSelected( user_item->chatId() );
   else
@@ -279,7 +405,8 @@ void GuiUserList::onTickEvent( int ticks )
   while( *it )
   {
     item = dynamic_cast<GuiUserItem*>( *it );
-    item->onTickEvent( ticks );
+    if( item )
+      item->onTickEvent( ticks );
     ++it;
   }
 }
@@ -344,8 +471,12 @@ void GuiUserList::dragEnterEvent( QDragEnterEvent* event )
     QTreeWidgetItem* item = mp_twUsers->itemAt( event->pos() );
     if( item )
     {
-      item->setSelected( true );
-      event->acceptProposedAction();
+      GuiUserItem* user_item = dynamic_cast<GuiUserItem*>( item );
+      if( user_item && !user_item->isWorkgroup() )
+      {
+        item->setSelected( true );
+        event->acceptProposedAction();
+      }
     }
   }
 }
@@ -357,17 +488,21 @@ void GuiUserList::dragMoveEvent( QDragMoveEvent* event )
     QTreeWidgetItem* item = mp_twUsers->itemAt( event->pos() );
     if( item  )
     {
-      int user_status = item->data( 0, GuiUserItem::Status ).toInt();
-      if( user_status != User::Offline )
+      GuiUserItem* user_item = dynamic_cast<GuiUserItem*>( item );
+      if( user_item && !user_item->isWorkgroup() )
       {
-        if( !item->isSelected() )
+        int user_status = user_item->data( 0, GuiUserItem::Status ).toInt();
+        if( user_status != User::Offline )
         {
-          mp_twUsers->clearSelection();
-          item->setSelected( true );
+          if( !user_item->isSelected() )
+          {
+            mp_twUsers->clearSelection();
+            user_item->setSelected( true );
+          }
         }
+        else
+          mp_twUsers->clearSelection();
       }
-      else
-        mp_twUsers->clearSelection();
     }
   }
 }
@@ -377,8 +512,12 @@ void GuiUserList::dropEvent( QDropEvent *event )
   if( event->mimeData()->hasUrls() )
   {
     QTreeWidgetItem* item = mp_twUsers->itemAt( event->pos() );
-    checkAndSendUrls( item, event->mimeData() );
-    mp_twUsers->clearSelection();
+    GuiUserItem* user_item = dynamic_cast<GuiUserItem*>( item );
+    if( user_item && !user_item->isWorkgroup() )
+    {
+      checkAndSendUrls( item, event->mimeData() );
+      mp_twUsers->clearSelection();
+    }
   }
 }
 
@@ -398,6 +537,13 @@ void GuiUserList::checkAndSendUrls( QTreeWidgetItem* item, const QMimeData* sour
   }
 
   QString user_name = user_item->data( 0, GuiUserItem::UserName ).toString();
+
+  if( user_item->isWorkgroup() )
+  {
+    QMessageBox::information( this, Settings::instance().programName(), tr( "You cannot send files to the workgroup '%1'." ).arg( user_name ) );
+    return;
+  }
+
   VNumber chat_id = user_item->chatId();
   int user_status = user_item->data( 0, GuiUserItem::Status ).toInt();
   if( user_status == User::Offline )

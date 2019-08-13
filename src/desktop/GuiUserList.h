@@ -71,8 +71,12 @@ protected slots:
   void selectBackgroundColor();
 
 protected:
-  GuiUserItem* itemFromUserId( VNumber );
-  GuiUserItem* itemFromChatId( VNumber );
+  GuiUserItem* createUserItemInWorkgroup( const User&, const QString& user_workgroup );
+  QList<GuiUserItem*> itemsFromUserId( VNumber );
+  QList<GuiUserItem*> itemsFromChatId( VNumber );
+  GuiUserItem* itemFromWorkgroup( const QString& );
+  GuiUserItem* itemFromUserIdAndWorkgroup( VNumber, const QString& );
+  void removeUserItem( GuiUserItem* );
   void sortUsers();
   void resetList();
   void dragEnterEvent( QDragEnterEvent* );

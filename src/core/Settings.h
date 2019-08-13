@@ -300,6 +300,8 @@ public:
   inline bool enableDefaultChatNotifications() const;
   inline void setDownloadInUserFolder( bool );
   inline bool downloadInUserFolder() const;
+  inline void setShowUsersInWorkgroups( bool );
+  inline bool showUsersInWorkgroups() const;
 
   inline bool usePreviewFileDialog() const;
   inline void setPreviewFileDialogGeometry( const QByteArray& );
@@ -702,6 +704,7 @@ private:
   int m_chatInactiveWindowOpacityLevel;
   bool m_enableDefaultChatNotifications;
   bool m_downloadInUserFolder;
+  bool m_showUsersInWorkgroups;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -1209,5 +1212,7 @@ inline QString Settings::defaultListBackgroundColor() const { return QLatin1Stri
 inline QString Settings::defaultSystemBackgroundColor() const { return QLatin1String( "#f5f5f5" ); }
 inline void Settings::setDownloadInUserFolder( bool new_value ) { m_downloadInUserFolder = new_value; }
 inline bool Settings::downloadInUserFolder() const { return m_downloadInUserFolder; }
+inline void Settings::setShowUsersInWorkgroups( bool new_value ) { m_showUsersInWorkgroups = new_value; }
+inline bool Settings::showUsersInWorkgroups() const { return m_showUsersInWorkgroups; }
 
 #endif // BEEBEEP_SETTINGS_

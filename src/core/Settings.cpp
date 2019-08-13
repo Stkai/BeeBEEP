@@ -1242,6 +1242,7 @@ void Settings::load()
   m_hideEmptyChatsInList = sets->value( "HideEmptyChatsInList", m_hideEmptyChatsInList ).toBool();
   m_enableMaximizeButton = sets->value( "EnableMaximizeButton", false ).toBool();
   m_useDarkStyle = sets->value( "UseDarkStyle", m_useDarkStyle ).toBool();
+  m_showUsersInWorkgroups = sets->value( "ShowUsersInWorkgroups", false ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -1600,6 +1601,7 @@ void Settings::save()
   sets->setValue( "HideEmptyChatsInList", m_hideEmptyChatsInList );
   sets->setValue( "EnableMaximizeButton", m_enableMaximizeButton );
   sets->setValue( "UseDarkStyle", m_useDarkStyle );
+  sets->setValue( "ShowUsersInWorkgroups", m_showUsersInWorkgroups );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );
