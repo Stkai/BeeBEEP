@@ -538,6 +538,18 @@
         <source>Saved chats had an incorrect authorization code.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Disconnecting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 Reconnecting to the %2 Network in progress.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reconnecting</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>File</name>
@@ -2963,6 +2975,18 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Show users in their workgroups</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>There are still files that have not been transferred and will be interrupted. Do you want to continue anyway?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restart connection now</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restart later manually</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -4493,6 +4517,30 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>Your workgroups</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="obsolete">Ja</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="obsolete">Nein</translation>
+    </message>
+    <message>
+        <source>Don&apos;t you want to be part of these workgroups anymore?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes, remove me</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Abbrechen</translation>
+    </message>
+    <message>
+        <source>Right click to open menu</source>
+        <translation type="unfinished">Menü per Rechtsklick öffnen</translation>
     </message>
 </context>
 <context>

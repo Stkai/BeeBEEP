@@ -525,7 +525,7 @@ void GuiMain::startCore()
   if( beeCore->isConnected() || m_coreIsConnecting )
     return;
 
-  mp_home->setNews( "" );
+  mp_home->resetNews();
   m_coreIsConnecting = true;
 
   if( Settings::instance().askChangeUserAtStartup() )
@@ -595,13 +595,54 @@ void GuiMain::disconnectFromNetwork()
 
 void GuiMain::stopCore()
 {
+  if( isFileTransferInProgress() )
+    return;
+
   if( mp_tabMain->currentWidget() != mp_home )
     mp_tabMain->setCurrentWidget( mp_home );
+
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   foreach( GuiShareDesktop* gsd, m_desktops )
     gsd->close();
 #endif
+
   beeCore->stop();
+}
+
+void GuiMain::restartCore()
+{
+  if( !beeCore->isConnected() && !m_coreIsConnecting )
+  {
+    startCore();
+    return;
+  }
+
+  if( isFileTransferInProgress() )
+    return;
+
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  foreach( GuiShareDesktop* gsd, m_desktops )
+    gsd->close();
+#endif
+
+  mp_home->resetNews();
+  m_coreIsConnecting = true;
+  beeCore->restart();
+}
+
+bool GuiMain::isFileTransferInProgress()
+{
+  if( !m_autoConnectOnInterfaceUp || m_forceShutdown )
+    return false;
+
+  if( beeCore->hasFileTransferInProgress() )
+  {
+    if( QMessageBox::warning( this, Settings::instance().programName(),
+        tr( "There are still files that have not been transferred and will be interrupted. Do you want to continue anyway?" ),
+        tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 0 )
+      return true;
+  }
+  return false;
 }
 
 void GuiMain::initGuiItems()
@@ -880,7 +921,7 @@ void GuiMain::createMenus()
   mp_menuSettings->addMenu( mp_menuNetworkStatus );
   mp_menuNetworkStatus->addAction( mp_actConfigureNetwork );
   mp_menuNetworkStatus->addSeparator();
-  mp_menuNetworkStatus->addAction( IconManager::instance().icon( "workgroup.png" ), tr( "Your workgroups" ) + QString( "..." ), this, SLOT( showWorkgroups() ) );
+  mp_actEditWorkgroups = mp_menuNetworkStatus->addAction( IconManager::instance().icon( "workgroup.png" ), tr( "Your workgroups" ) + QString( "..." ), this, SLOT( showWorkgroups() ) );
   mp_menuNetworkStatus->addSeparator();
   mp_actHostAddress = mp_menuNetworkStatus->addAction( IconManager::instance().icon( "network.png" ), QString( "ip" ) );
   mp_actPortBroadcast = mp_menuNetworkStatus->addAction( IconManager::instance().icon( "broadcast.png" ), QString( "udp1" ) );
@@ -1236,6 +1277,8 @@ void GuiMain::createMenus()
   loadUserStatusRecentlyUsed();
   mp_actChangeStatusDescription = mp_menuStatus->addAction( IconManager::instance().icon( "user-status.png" ), tr( "Change your status description..." ), this, SLOT( changeStatusDescription() ) );
   mp_menuStatus->addAction( IconManager::instance().icon( "clear.png" ), tr( "Clear all status descriptions" ), this, SLOT( clearRecentlyUsedUserStatus() ) );
+  mp_menuStatus->addSeparator();
+  mp_menuStatus->addAction( mp_actEditWorkgroups );
   mp_menuStatus->addSeparator();
   act = mp_menuStatus->addAction( QIcon( Bee::menuUserStatusIconFileName( User::Offline ) ), Bee::userStatusToString( User::Offline ), this, SLOT( statusSelected() ) );
   act->setData( User::Offline );
@@ -1719,16 +1762,17 @@ void GuiMain::settingsChanged( QAction* act )
     Settings::instance().setPlayBuzzSound( act->isChecked() );
     break;
   case 57:
-    showRestartConnectionAlertMessage();
     Settings::instance().setUserRecognitionMethod( Settings::RecognizeByAccountAndDomain );
+    showRestartConnectionAlertMessage();
     break;
   case 58:
-    showRestartConnectionAlertMessage();
     Settings::instance().setUserRecognitionMethod( Settings::RecognizeByAccount );
+    showRestartConnectionAlertMessage();
+
     break;
   case 59:
-    showRestartConnectionAlertMessage();
     Settings::instance().setUserRecognitionMethod( Settings::RecognizeByNickname );
+    showRestartConnectionAlertMessage();
     break;
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   case 60:
@@ -4404,11 +4448,11 @@ void GuiMain::showWorkgroups()
   if( gw.exec() != QDialog::Accepted )
     return;
 
+  if( Settings::instance().acceptConnectionsOnlyFromWorkgroups() && !Settings::instance().localUser().workgroups().isEmpty() )
+    qDebug() << "You have selected to accept connections only from these workgroups:" << qPrintable( Settings::instance().localUser().workgroups().join( ", " ) );
+
   if( gw.restartConnection() )
     showRestartConnectionAlertMessage();
-
-  if( Settings::instance().acceptConnectionsOnlyFromWorkgroups() && !Settings::instance().localUser().workgroups().isEmpty() )
-    qDebug() << "Protocol now accepts connections only from these workgroups:" << qPrintable( Settings::instance().localUser().workgroups().join( ", " ) );
 }
 
 void GuiMain::showRefusedChats()
@@ -4502,7 +4546,11 @@ void GuiMain::selectEmoticonSourcePath()
 
 void GuiMain::showRestartConnectionAlertMessage()
 {
-  QMessageBox::information( this, Settings::instance().programName(), tr( "You have to restart your connection to apply changes." ), tr( "Ok" ) );
+  if( QMessageBox::information( this, Settings::instance().programName(), tr( "You have to restart your connection to apply changes." ),
+                            tr( "Restart connection now" ), tr( "Restart later manually" ), QString::null, 0, 1 ) == 0 )
+  {
+    QTimer::singleShot( 0, this, SLOT( restartCore() ) );
+  }
 }
 
 void GuiMain::showRestartApplicationAlertMessage()

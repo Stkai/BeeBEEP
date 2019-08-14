@@ -68,6 +68,7 @@ public slots:
   void checkWindowFlagsAndShow();
   void startCore();
   void stopCore();
+  void restartCore();
   void forceShutdown();
   void hideToTrayIcon();
   void setInIdle();
@@ -263,6 +264,7 @@ private:
   void showCheckSaveChatMessages();
   void setChatMaxLinesToSaveInAction( QAction* );
   void setClearCacheAfterDaysInAction( QAction* );
+  bool isFileTransferInProgress();
 
 private:
   QTabWidget* mp_tabMain;
@@ -338,6 +340,7 @@ private:
   QAction* mp_actSaveFileTransferMessages;
   QAction* mp_actSaveSystemMessages;
   QAction* mp_actSetAutoAway;
+  QAction* mp_actEditWorkgroups;
 
   QAction* mp_actShowUserListOnConnection;
   QAction* mp_actShowChatListOnConnection;

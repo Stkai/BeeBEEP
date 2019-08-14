@@ -49,6 +49,9 @@ public:
 signals:
   void openUrlRequest( const QUrl& );
 
+public slots:
+  void resetNews();
+
 protected slots:
   void checkAnchorClicked( const QUrl& );
   void customContextMenu( const QPoint& );
@@ -56,7 +59,6 @@ protected slots:
   void reloadMessages();
   void printActivities();
   void selectBackgroundColor();
-  void resetNews();
 
 private:
   QString m_prev_sys_mess;

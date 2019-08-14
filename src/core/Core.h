@@ -54,6 +54,7 @@ public:
   bool isConnected() const;
   bool start();
   void stop();
+  void restart();
 
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   bool dnsMulticastingIsActive() const;
@@ -186,6 +187,7 @@ signals:
 #endif
 
 protected slots:
+  bool restartConnection();
   void onUpdaterJobCompleted();
   void onPostUsageStatisticsJobCompleted();
 #ifdef BEEBEEP_USE_MULTICAST_DNS

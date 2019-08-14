@@ -518,6 +518,18 @@
         <source>Saved chats had an incorrect authorization code.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Disconnecting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 Reconnecting to the %2 Network in progress.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reconnecting</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>File</name>
@@ -2903,6 +2915,18 @@ Please select a different name.</source>
         <source>Show users in their workgroups</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>There are still files that have not been transferred and will be interrupted. Do you want to continue anyway?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restart connection now</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restart later manually</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -4415,6 +4439,26 @@ Please select a different name.</source>
     <message>
         <source>Your workgroups</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="obsolete">是</translation>
+    </message>
+    <message>
+        <source>Don&apos;t you want to be part of these workgroups anymore?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes, remove me</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">取消</translation>
+    </message>
+    <message>
+        <source>Right click to open menu</source>
+        <translation type="unfinished">滑鼠右擊開啟選單</translation>
     </message>
 </context>
 <context>

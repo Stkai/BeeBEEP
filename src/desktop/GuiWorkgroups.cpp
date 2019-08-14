@@ -46,6 +46,7 @@ GuiWorkgroups::GuiWorkgroups( QWidget *parent )
   mp_twWorkgroups->setRootIsDecorated( false );
   mp_twWorkgroups->setContextMenuPolicy( Qt::CustomContextMenu );
   mp_twWorkgroups->setSelectionMode( QAbstractItemView::MultiSelection );
+  mp_twWorkgroups->sortByColumn( 0, Qt::AscendingOrder );
 
   mp_menuContext = new QMenu( this );
   mp_menuContext->addAction( IconManager::instance().icon( "delete.png" ), tr( "Remove workgroup" ), this, SLOT( removeWorkgroup() ) );
@@ -68,7 +69,8 @@ void GuiWorkgroups::updateWorkgroupList()
   {
     QTreeWidgetItem* item = new QTreeWidgetItem( mp_twWorkgroups );
     item->setText( 0, Bee::capitalizeFirstLetter( s_workgroup, false, false ) );
-    item->setIcon( 0, IconManager::instance().icon( "workgroup.png" ));
+    item->setIcon( 0, IconManager::instance().icon( "workgroup.png" ) );
+    item->setToolTip( 0, tr( "Right click to open menu" ) );
   }
 }
 
@@ -76,6 +78,7 @@ void GuiWorkgroups::loadWorkgroups()
 {
   mp_cbAcceptOnlyWorkgroups->setChecked( Settings::instance().acceptConnectionsOnlyFromWorkgroups() );
   m_workgroups = Settings::instance().localUser().workgroups();
+  m_workgroups.sort();
   m_restartConnection = false;
   updateWorkgroupList();
 }
@@ -112,6 +115,7 @@ void GuiWorkgroups::addWorkgroup()
   }
 
   m_workgroups.append( s_workgroup );
+  m_workgroups.sort();
   updateWorkgroupList();
 }
 
@@ -136,9 +140,28 @@ void GuiWorkgroups::removeWorkgroup()
     return;
   }
 
+  QStringList workgroups_to_remove;
   foreach( QTreeWidgetItem* item, items )
-    m_workgroups.removeOne( item->text( 0 ) );
+    workgroups_to_remove.append( item->text( 0 ) );
 
+  if( QMessageBox::question( this, Settings::instance().programName(), tr( "Don't you want to be part of these workgroups anymore?" ) + QString( "\n" ) + workgroups_to_remove.join( ", " ),
+                             tr( "Yes, remove me" ), tr( "Cancel" ), QString::null, 1, 1 ) != 0 )
+    return;
+
+  foreach( QString s, workgroups_to_remove )
+  {
+    QString wg_to_remove = s.toLower();
+    QStringList::iterator it = m_workgroups.begin();
+    while( it != m_workgroups.end() )
+    {
+      if( it->toLower() == wg_to_remove )
+      {
+        m_workgroups.erase( it );
+        break;
+      }
+      ++it;
+    }
+  }
   updateWorkgroupList();
 }
 

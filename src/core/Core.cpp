@@ -392,6 +392,43 @@ void Core::stop()
   emit disconnected();
 }
 
+void Core::restart()
+{
+  showMessage( tr( "Disconnecting" ), 3000 );
+  qDebug() << "Restarting network core...";
+  mp_broadcaster->stopBroadcasting();
+#ifdef BEEBEEP_USE_MULTICAST_DNS
+  stopDnsMulticasting();
+#endif
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  if( mp_shareDesktop->isActive() )
+    mp_shareDesktop->stop();
+ #endif
+  stopFileTransferServer();
+  mp_listener->close();
+  foreach( Connection* c, m_connections )
+    closeConnection( c );
+  m_connections.clear();
+  if( Settings::instance().localUser().isStatusConnected() )
+  {
+    Settings::instance().setLocalUserStatus( User::Offline );
+    emit userChanged( Settings::instance().localUser() );
+  }
+  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
+                         tr( "%1 Reconnecting to the %2 Network in progress." )
+                           .arg( IconManager::instance().toHtml( "network-disconnected.png", "*D*" ),
+                           Settings::instance().programName() )+QString( ".." ),
+                         DispatchToChat, ChatMessage::Connection );
+  emit disconnected();
+  QTimer::singleShot( 1000, this, SLOT( restartConnection() ) );
+}
+
+bool Core::restartConnection()
+{
+  showMessage( tr( "Reconnecting" ), 3000 );
+  return start();
+}
+
 void Core::sendMulticastingMessage()
 {
   if( !Settings::instance().useMulticastDns() )

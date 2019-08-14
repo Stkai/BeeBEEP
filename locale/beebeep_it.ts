@@ -558,6 +558,18 @@
         <source>Saved chats had an incorrect authorization code.</source>
         <translation>Le conversazioni salvate avevano un codice di autorizzazione non valido.</translation>
     </message>
+    <message>
+        <source>Disconnecting</source>
+        <translation>Disconnessione in corso</translation>
+    </message>
+    <message>
+        <source>%1 Reconnecting to the %2 Network in progress.</source>
+        <translation>%1 Riconnessione alla rete %2 in corso.</translation>
+    </message>
+    <message>
+        <source>Reconnecting</source>
+        <translation>Riconnessione in corso</translation>
+    </message>
 </context>
 <context>
     <name>File</name>
@@ -3067,6 +3079,18 @@ Inserisci un nome differente.</translation>
         <source>Show users in their workgroups</source>
         <translation>Mostra gli utenti nei loro gruppi di lavoro</translation>
     </message>
+    <message>
+        <source>There are still files that have not been transferred and will be interrupted. Do you want to continue anyway?</source>
+        <translation>Ci sono ancora dei file che non sono stati trasferiti e verranno interrotti. Vuoi continuare ugualmente?</translation>
+    </message>
+    <message>
+        <source>Restart connection now</source>
+        <translation>Riconnettiti ora</translation>
+    </message>
+    <message>
+        <source>Restart later manually</source>
+        <translation>Riconnettiti dopo manualmente</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -4675,6 +4699,34 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Your workgroups</source>
         <translation>I tuoi gruppi di lavoro</translation>
+    </message>
+    <message>
+        <source>Do you want to delete these workgroups?</source>
+        <translation type="obsolete">Vuoi cancellare questi gruppi di lavoro?</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="obsolete">Si</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="obsolete">No</translation>
+    </message>
+    <message>
+        <source>Don&apos;t you want to be part of these workgroups anymore?</source>
+        <translation>Non vuoi più fare parte di questi gruppi di lavoro?</translation>
+    </message>
+    <message>
+        <source>Yes, remove me</source>
+        <translation>Si, cancellami</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Annulla</translation>
+    </message>
+    <message>
+        <source>Right click to open menu</source>
+        <translation>Pulsante destro per aprire il menu</translation>
     </message>
 </context>
 <context>
