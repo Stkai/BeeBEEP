@@ -30,7 +30,9 @@
 
 #if QT_VERSION >= 0x050000
   #include <QtWidgets>
+#if !defined Q_OS_OS2
   #include <QtMultimedia>
+#endif
   #include <QtPrintSupport>
   #ifdef BEEBEEP_USE_WEBENGINE
     #include <QWebEngineView>

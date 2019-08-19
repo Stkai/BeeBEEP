@@ -43,7 +43,7 @@
 
 class QxtGlobalShortcutPrivate : public QxtPrivate<QxtGlobalShortcut>
 #if QT_VERSION >= QT_VERSION_CHECK(5,0,0) && !defined(Q_OS_MAC)
-        ,public QAbstractNativeEventFilter
+        , public QAbstractNativeEventFilter
 #endif
 {
 public:

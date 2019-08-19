@@ -643,6 +643,8 @@ void GuiShareBox::updateFolder( const QString& f )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Folder" << qPrintable( f ) << "changed -> updating ShareBox";
+#else
+    Q_UNUSED( f );
 #endif
     mp_pbMyUpdate->setEnabled( true );
   }

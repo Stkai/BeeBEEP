@@ -34,7 +34,6 @@
 #include <xcb/xcb.h>
 #include <X11/Xlib.h>
 
-
 namespace {
 
 const QVector<quint32> maskModifiers = QVector<quint32>()

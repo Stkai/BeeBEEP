@@ -54,6 +54,7 @@ echo "Copying Plugins..."
 cp $BASE_FOLDER/test/libnumbertextmarker.so $RELEASE_FOLDER
 cp $BASE_FOLDER/test/librainbowtextmarker.so $RELEASE_FOLDER
 cp $BASE_FOLDER/test/libregularboldtextmarker.so $RELEASE_FOLDER
+chmod a-x $RELEASE_FOLDER/*.so
 echo "Copying Executable..."
 cp $BASE_FOLDER/test/beebeep $RELEASE_FOLDER
 echo "Making tar.gz package..."

@@ -6,7 +6,7 @@ CONFIG(debug,debug|release) {
   message( Building BeeBEEP in Release Mode )
 }
 
-macx: {
+macx {
   CONFIG(debug,debug|release) {
     CONFIG -= app_bundle
     message( Building BeeBEEP without BUNDLE )
@@ -53,7 +53,7 @@ unix:!macx:!android: {
   CONFIG += largefile
 }
 
-macx: {
+macx {
   QMAKE_LFLAGS += -F/System/Library/Frameworks/ApplicationServices.framework
   LIBS += -framework ApplicationServices
   lessThan( QT_MAJOR_VERSION, 5) | lessThan(QT_MINOR_VERSION, 9) {
@@ -63,14 +63,13 @@ macx: {
   }
 }
 
-win32: {
+win32 {
   DEFINES += _CRT_SECURE_NO_WARNINGS
   LIBS += -luser32
 }
 
 message( Qt modules: $$QT )
 
-include(qxt/qxt.pri)
 include(../locale/locale.pri)
 include(hunspell/hunspell.pri)
 include(core/core.pri)
@@ -78,7 +77,8 @@ include(gui/gui.pri)
 include(desktop/desktop.pri)
 include(override/override.pri)
 include(utils/utils.pri)
-win32|unix|macx {
+win32|unix {
+  include(qxt/qxt.pri)
   include(sharedesktop/sharedesktop.pri)
 }
 
