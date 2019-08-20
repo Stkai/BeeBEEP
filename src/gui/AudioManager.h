@@ -61,7 +61,9 @@ protected:
   AudioManager();
 
 private:
-#ifdef BEEBEEP_USE_PHONON4
+#if defined( Q_OS_OS2 )
+  void* mp_sound;
+#elif defined( BEEBEEP_USE_PHONON4 )
   Phonon::MediaObject *mp_sound;
 #else
   QSound* mp_sound;

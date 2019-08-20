@@ -33,6 +33,12 @@ AudioManager::AudioManager()
 {
 }
 
+#if defined( Q_OS_OS2 )
+  bool AudioManager::isAudioDeviceAvailable() { return true; }
+  void AudioManager::clearBeep() {}
+  void AudioManager::playBeep() { QApplication::beep(); }
+#else
+
 bool AudioManager::isAudioDeviceAvailable()
 {
 #if QT_VERSION >= 0x050000
@@ -56,12 +62,6 @@ void AudioManager::clearBeep()
   }
 }
 
-#ifdef Q_OS_OS2
-void AudioManager::playBeep()
-{
-  QApplication::beep();
-}
-#else
 void AudioManager::playBeep()
 {
   if( !mp_sound )
