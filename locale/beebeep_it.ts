@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -1250,7 +1250,11 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Send this message to all users individually</source>
-        <translation>Invia questo messaggio a tutti gli utenti individualmente</translation>
+        <translation type="obsolete">Invia questo messaggio a tutti gli utenti individualmente</translation>
+    </message>
+    <message>
+        <source>Send this message to all recipients individually</source>
+        <translation>Invia questo messaggio a tutti i destinatari individualmente</translation>
     </message>
 </context>
 <context>

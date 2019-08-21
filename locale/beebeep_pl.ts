@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="pl_PL">
+<TS version="2.1" language="pl_PL">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -1442,22 +1442,22 @@ Proszę wybrać inną nazwę.</translation>
         <translation>Stwórz wiadomość</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="119"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="124"/>
         <source>Nobody</source>
         <translation>Nikt</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="126"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="131"/>
         <source>Add recipients</source>
         <translation>Dodaj adresatów</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="170"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="175"/>
         <source>Please select at least one recipient for your message.</source>
         <translation>Proszę wybrać co najmniej jednego odbiorcę Twojej wiadomości.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="177"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="182"/>
         <source>You cannot send an empty message.</source>
         <translation>Nie możesz wysłać pustej wiadomości.</translation>
     </message>
@@ -1491,8 +1491,12 @@ Proszę wybrać inną nazwę.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="265"/>
-        <source>Send this message to all users individually</source>
+        <source>Send this message to all recipients individually</source>
         <translation>Wyślij tę wiadomość do wszystkich użytkowników indywidualnie</translation>
+    </message>
+    <message>
+        <source>Send this message to all users individually</source>
+        <translation type="obsolete">Wyślij tę wiadomość do wszystkich użytkowników indywidualnie</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="136"/>
@@ -5911,7 +5915,7 @@ Proszę wybrać inną nazwę.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2032"/>
+        <location filename="../src/core/Settings.cpp" line="2036"/>
         <source>Autoresponder</source>
         <translation>Autoodpowiedź</translation>
     </message>

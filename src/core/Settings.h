@@ -302,7 +302,10 @@ public:
   inline bool downloadInUserFolder() const;
   inline void setShowUsersInWorkgroups( bool );
   inline bool showUsersInWorkgroups() const;
-
+  inline void setOpenChatWhenSendNewMessage( bool );
+  inline bool openChatWhenSendNewMessage() const;
+  inline void setSendNewMessageIndividually( bool );
+  inline bool sendNewMessageIndividually() const;
   inline bool usePreviewFileDialog() const;
   inline void setPreviewFileDialogGeometry( const QByteArray& );
   inline const QByteArray& previewFileDialogGeometry();
@@ -705,6 +708,8 @@ private:
   bool m_enableDefaultChatNotifications;
   bool m_downloadInUserFolder;
   bool m_showUsersInWorkgroups;
+  bool m_openChatWhenSendNewMessage;
+  bool m_sendNewMessageIndividually;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -1214,5 +1219,9 @@ inline void Settings::setDownloadInUserFolder( bool new_value ) { m_downloadInUs
 inline bool Settings::downloadInUserFolder() const { return m_downloadInUserFolder; }
 inline void Settings::setShowUsersInWorkgroups( bool new_value ) { m_showUsersInWorkgroups = new_value; }
 inline bool Settings::showUsersInWorkgroups() const { return m_showUsersInWorkgroups; }
+inline void Settings::setOpenChatWhenSendNewMessage( bool new_value ) { m_openChatWhenSendNewMessage = new_value; }
+inline bool Settings::openChatWhenSendNewMessage() const { return m_openChatWhenSendNewMessage; }
+inline void Settings::setSendNewMessageIndividually( bool new_value ) { m_sendNewMessageIndividually = new_value; }
+inline bool Settings::sendNewMessageIndividually() const { return m_sendNewMessageIndividually; }
 
 #endif // BEEBEEP_SETTINGS_

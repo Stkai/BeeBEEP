@@ -1435,22 +1435,22 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="119"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="124"/>
         <source>Nobody</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="126"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="131"/>
         <source>Add recipients</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="170"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="175"/>
         <source>Please select at least one recipient for your message.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="177"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="182"/>
         <source>You cannot send an empty message.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1484,7 +1484,7 @@ Please select a different name.</source>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="265"/>
-        <source>Send this message to all users individually</source>
+        <source>Send this message to all recipients individually</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5756,7 +5756,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2032"/>
+        <location filename="../src/core/Settings.cpp" line="2036"/>
         <source>Autoresponder</source>
         <translation type="unfinished"></translation>
     </message>

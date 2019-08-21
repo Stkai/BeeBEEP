@@ -66,6 +66,9 @@ GuiCreateMessage::GuiCreateMessage( QWidget *parent )
     updateEmoticons();
   }
 
+  mp_cbSendPrivate->setChecked( Settings::instance().sendNewMessageIndividually() );
+  mp_cbOpenChat->setChecked( Settings::instance().openChatWhenSendNewMessage() );
+
   if( !Settings::instance().createMessageGeometry().isEmpty() )
     restoreGeometry( Settings::instance().createMessageGeometry() );
 
@@ -78,6 +81,8 @@ GuiCreateMessage::GuiCreateMessage( QWidget *parent )
 
 void GuiCreateMessage::closeEvent( QCloseEvent* ev )
 {
+  Settings::instance().setSendNewMessageIndividually( mp_cbSendPrivate->isChecked() );
+  Settings::instance().setOpenChatWhenSendNewMessage( mp_cbOpenChat->isChecked() );
   if( isVisible() )
   {
     Settings::instance().setShowEmoticonMenu( mp_twEmoticons->isVisible() );

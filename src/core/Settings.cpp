@@ -1243,6 +1243,8 @@ void Settings::load()
   m_enableMaximizeButton = sets->value( "EnableMaximizeButton", false ).toBool();
   m_useDarkStyle = sets->value( "UseDarkStyle", m_useDarkStyle ).toBool();
   m_showUsersInWorkgroups = sets->value( "ShowUsersInWorkgroups", false ).toBool();
+  m_openChatWhenSendNewMessage = sets->value( "OpenChatWhenSendNewMessage", true ).toBool();
+  m_sendNewMessageIndividually = sets->value( "SendNewMessageIndividually", false ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -1602,6 +1604,8 @@ void Settings::save()
   sets->setValue( "EnableMaximizeButton", m_enableMaximizeButton );
   sets->setValue( "UseDarkStyle", m_useDarkStyle );
   sets->setValue( "ShowUsersInWorkgroups", m_showUsersInWorkgroups );
+  sets->setValue( "OpenChatWhenSendNewMessage", m_openChatWhenSendNewMessage );
+  sets->setValue( "SendNewMessageIndividually", m_sendNewMessageIndividually );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );

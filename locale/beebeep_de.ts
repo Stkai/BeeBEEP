@@ -1217,7 +1217,7 @@ Bitte wähle einen anderen Namen aus.</translation>
         <translation>Nachricht als wichtig markieren</translation>
     </message>
     <message>
-        <source>Send this message to all users individually</source>
+        <source>Send this message to all recipients individually</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

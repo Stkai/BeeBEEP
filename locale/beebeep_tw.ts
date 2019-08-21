@@ -1192,7 +1192,7 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Send this message to all users individually</source>
+        <source>Send this message to all recipients individually</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -1449,22 +1449,22 @@ Please select a different name.</source>
         <translation>Créer un message</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="119"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="124"/>
         <source>Nobody</source>
         <translation>Personne</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="126"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="131"/>
         <source>Add recipients</source>
         <translation>Ajouter un destinataire</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="170"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="175"/>
         <source>Please select at least one recipient for your message.</source>
         <translation>Veuillez sélectionner au moins un destinataire pour votre message.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="177"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="182"/>
         <source>You cannot send an empty message.</source>
         <translation>Vous ne pouvez pas envoyer un message vide.</translation>
     </message>
@@ -1498,7 +1498,7 @@ Please select a different name.</source>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="265"/>
-        <source>Send this message to all users individually</source>
+        <source>Send this message to all recipients individually</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6007,7 +6007,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2032"/>
+        <location filename="../src/core/Settings.cpp" line="2036"/>
         <source>Autoresponder</source>
         <translation>Répondeur automatique</translation>
     </message>

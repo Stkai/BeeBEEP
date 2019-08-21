@@ -218,6 +218,8 @@ HideEmptyChatsInList=[true/false] if true the empty chats are hidden in the chat
 UseDarkStyle=[true/false] if true BeeBEEP uses dark style theme [5.4.3]
 RaiseOnNewFileTransfer=[true/false] if true on new file transfer BeeBEEP raises itself on top (default=true) [5.6.0]
 ShowUsersInWorkgroups=[true/false] if true the users in user list will be shown in their workgroups (default=false) [5.65]
+OpenChatWhenSendNewMessage=[true/false] used in "Create message" window (default=true) [5.6.5]
+SendNewMessageIndividually=[true/false] used in "Create message" window (default=true) [5.6.5]
 
 [Tools]
 LogToFile=[true/false] enable file logging
