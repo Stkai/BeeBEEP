@@ -5541,37 +5541,37 @@ Please select a different name.</source>
         <translation>工作群组</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="51"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="52"/>
         <source>Remove workgroup</source>
         <translation>移除工作群组</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="72"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="73"/>
         <source>Right click to open menu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="104"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="105"/>
         <source>Please insert a workgroup.</source>
         <translation>请插入工作群组</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="111"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="112"/>
         <source>This workgroup is already in list.</source>
         <translation>该工作群组已在列表中</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="146"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="147"/>
         <source>Don&apos;t you want to be part of these workgroups anymore?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="147"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="148"/>
         <source>Yes, remove me</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="147"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="148"/>
         <source>Cancel</source>
         <translation type="unfinished">取消</translation>
     </message>
@@ -5580,7 +5580,7 @@ Please select a different name.</source>
         <translation type="obsolete">是</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="53"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="54"/>
         <source>Clear all</source>
         <translation>清除所有</translation>
     </message>
@@ -5590,7 +5590,7 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="138"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="139"/>
         <source>Please select an item in the list.</source>
         <translation>请从列表中选择一个项目。</translation>
     </message>

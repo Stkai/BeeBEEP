@@ -5667,37 +5667,37 @@ Vyberte prosím jiné jméno.</translation>
         <translation>Pracovní skupiny</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="51"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="52"/>
         <source>Remove workgroup</source>
         <translation>Odstranit uživatelskou cestu</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="72"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="73"/>
         <source>Right click to open menu</source>
         <translation type="unfinished">Pravým klikem otevřít menu</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="104"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="105"/>
         <source>Please insert a workgroup.</source>
         <translation>Zadejte prosím pracovní skupinu.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="111"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="112"/>
         <source>This workgroup is already in list.</source>
         <translation>Tato pracovní skupina je již v seznamu.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="146"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="147"/>
         <source>Don&apos;t you want to be part of these workgroups anymore?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="147"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="148"/>
         <source>Yes, remove me</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="147"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="148"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5710,7 +5710,7 @@ Vyberte prosím jiné jméno.</translation>
         <translation type="obsolete">Ne</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="53"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="54"/>
         <source>Clear all</source>
         <translation>Odstranit vše</translation>
     </message>
@@ -5720,7 +5720,7 @@ Vyberte prosím jiné jméno.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="138"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="139"/>
         <source>Please select an item in the list.</source>
         <translation>Vyberte prosím položku ze seznamu.</translation>
     </message>
