@@ -43,12 +43,12 @@ bool BeeApplication::winEventFilter( MSG* event_message, long* event_result )
   {
     if( event_message->wParam == PBT_APMSUSPEND )
       forceSleep();
-
-    if( event_message->wParam == PBT_APMRESUMESUSPEND )
+    else if( event_message->wParam == PBT_APMRESUMESUSPEND )
       wakeFromSleep();
+    else
+      ignoreEvent();
   }
-
-  if( event_message->message == WM_WTSSESSION_CHANGE )
+  else if( event_message->message == WM_WTSSESSION_CHANGE )
   {
     if( event_message->wParam == WTS_SESSION_LOCK )
     {
@@ -61,8 +61,7 @@ bool BeeApplication::winEventFilter( MSG* event_message, long* event_result )
         setIdle();
       }
     }
-
-    if( event_message->wParam == WTS_SESSION_UNLOCK )
+    else if( event_message->wParam == WTS_SESSION_UNLOCK )
     {
 #ifdef BEEBEEP_DEBUG
       qDebug() << "Session change detected: desktop is now unlocked";
@@ -70,15 +69,19 @@ bool BeeApplication::winEventFilter( MSG* event_message, long* event_result )
       if( m_isDesktopLocked )
         m_isDesktopLocked = false;
     }
-
-    if( event_message->wParam == WTS_SESSION_LOGOFF )
+    else if( event_message->wParam == WTS_SESSION_LOGOFF )
     {
 #ifdef BEEBEEP_DEBUG
       qDebug() << "Session change detected: logoff";
 #endif
       forceShutdown();
     }
+    else
+      ignoreEvent();
   }
+  else
+    ignoreEvent();
+
   return false; // Qt must handle event every time
 }
 

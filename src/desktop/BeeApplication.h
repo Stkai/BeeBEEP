@@ -92,6 +92,7 @@ protected:
   QString localServerName() const;
   void addSleepWatcher();
   bool isDesktopLocked();
+  void ignoreEvent( const QString& );
 
 protected slots:
   void checkTicks( int );

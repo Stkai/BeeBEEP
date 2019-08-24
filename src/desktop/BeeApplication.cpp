@@ -382,3 +382,9 @@ void BeeApplication::resetStyle()
 {
   setStyleSheet( m_defaultCss );
 }
+
+void BeeApplication::ignoreEvent( const QString& log_text = "" )
+{
+  if( !log_text.isEmpty() )
+    qDebug() << log_text;
+}
