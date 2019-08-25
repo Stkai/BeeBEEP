@@ -213,19 +213,21 @@ QStringList Settings::resourceFolders() const
   system_folders.append( QLatin1String( "/usr/lib/beebeep/" ) );
   system_folders.append( QLatin1String( "/usr/local/lib/beebeep/" ) );
 #endif
+  system_folders.removeDuplicates();
   return system_folders;
 }
 
 QStringList Settings::dataFolders() const
 {
-  QStringList system_folders;
-  system_folders.append( dataFolder() );
+  QStringList data_folders;
+  data_folders.append( dataFolder() );
 #ifdef Q_OS_UNIX
-  system_folders.append( QLatin1String( "/usr/share/beebeep/" ) );
-  system_folders.append( QLatin1String( "/usr/local/share/beebeep/" ) );
+  data_folders.append( QLatin1String( "/usr/share/beebeep/" ) );
+  data_folders.append( QLatin1String( "/usr/local/share/beebeep/" ) );
 #endif
-  system_folders.append( cacheFolder() );
-  return system_folders;
+  data_folders.append( cacheFolder() );
+  data_folders.removeDuplicates();
+  return data_folders;
 }
 
 QString Settings::findFileInFolders( const QString& file_name, const QStringList& folder_list, bool return_folder_path ) const
@@ -1963,7 +1965,15 @@ QString Settings::defaultSettingsFilePath() const
 
 QString Settings::defaultBeepFilePath() const
 {
-  QString beep_file_path = findFileInFolders( QLatin1String( "beep.wav" ), dataFolders() );
+  QStringList data_folders;
+  data_folders.append( Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder() ).arg( QLatin1String( "resources" ) ) ) );
+  data_folders.append( dataFolders() );
+#ifndef Q_OS_MAC
+  data_folders.append( Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( resourceFolder() ).arg( QLatin1String( "resources" ) ) ) );
+#endif
+  data_folders.append( resourceFolders() );
+  data_folders.removeDuplicates();
+  QString beep_file_path = findFileInFolders( QLatin1String( "beep.wav" ), data_folders );
   if( beep_file_path.isNull() )
     return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( resourceFolder() ).arg( QLatin1String( "beep.wav" ) ) );
   else
@@ -1972,19 +1982,31 @@ QString Settings::defaultBeepFilePath() const
 
 QString Settings::defaultPluginFolderPath() const
 {
+  QStringList data_folders;
+  data_folders.append( Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder() ).arg( QLatin1String( "plugins" ) ) ) );
+  data_folders.append( dataFolders() );
+#ifndef Q_OS_MAC
+  data_folders.append( Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( resourceFolder() ).arg( QLatin1String( "plugins" ) ) ) );
+#endif
+  data_folders.append( resourceFolders() );
+  data_folders.removeDuplicates();
   QString test_plugin_file = QLatin1String( "libnumbertextmarker." ) + Bee::pluginFileExtension();
-  QString test_plugin_path = findFileInFolders( test_plugin_file, resourceFolders(), true );
-  if( test_plugin_path.isNull() )
-    test_plugin_path = findFileInFolders( test_plugin_file, dataFolders(), true );
+  QString test_plugin_path = findFileInFolders( test_plugin_file, data_folders, true );
   return test_plugin_path.isNull() ? resourceFolder() : test_plugin_path;
 }
 
 QString Settings::defaultLanguageFolderPath() const
 {
+  QStringList data_folders;
+  data_folders.append( Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder() ).arg( QLatin1String( "languages" ) ) ) );
+  data_folders.append( dataFolders() );
+#ifndef Q_OS_MAC
+  data_folders.append( Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( resourceFolder() ).arg( QLatin1String( "languages" ) ) ) );
+#endif
+  data_folders.append( resourceFolders() );
+  data_folders.removeDuplicates();
   QString test_language_file = QLatin1String( "beebeep_it.qm" );
-  QString test_language_path = findFileInFolders( test_language_file, resourceFolders(), true );
-  if( test_language_path.isNull() )
-    test_language_path = findFileInFolders( test_language_file, dataFolders(), true );
+  QString test_language_path = findFileInFolders( test_language_file, data_folders, true );
   return test_language_path.isNull() ? resourceFolder() : test_language_path;
 }
 
