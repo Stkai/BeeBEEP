@@ -45,7 +45,7 @@ void FileTransferPeer::checkUploadData( const QByteArray& byte_array )
 
 void FileTransferPeer::checkUploadRequest( const QByteArray& byte_array )
 {
-  Message m = Protocol::instance().toMessage( byte_array, m_socket.protoVersion() );
+  Message m = Protocol::instance().toMessage( byte_array, mp_socket->protoVersion() );
   if( !m.isValid() )
   {
     qWarning() << qPrintable( name() ) << "receives an invalid file request:" << byte_array;
@@ -70,9 +70,9 @@ void FileTransferPeer::startUpload( const FileInfo& fi )
   setTransferType( FileInfo::Upload );
   setFileInfo( FileInfo::Upload, fi );
   qDebug() << qPrintable( name() ) << "starts uploading" << qPrintable( Bee::convertToNativeFolderSeparator( fi.path() ) );
-  if( m_socket.protoVersion() < FILE_TRANSFER_2_PROTO_VERSION )
+  if( mp_socket->protoVersion() < FILE_TRANSFER_2_PROTO_VERSION )
   {
-    qWarning() << qPrintable( name() ) << "using an old file upload protocol version" << m_socket.protoVersion();
+    qWarning() << qPrintable( name() ) << "using an old file upload protocol version" << mp_socket->protoVersion();
     m_state = FileTransferPeer::Transferring;
     sendUploadData();
   }
@@ -99,9 +99,9 @@ void FileTransferPeer::sendFileHeader()
   }
 
   Message file_header_message = Protocol::instance().fileInfoToMessage( m_fileInfo );
-  QByteArray file_header = Protocol::instance().fromMessage( file_header_message, m_socket.protoVersion() );
+  QByteArray file_header = Protocol::instance().fromMessage( file_header_message, mp_socket->protoVersion() );
 
-  if( !m_socket.sendData( file_header ) )
+  if( !mp_socket->sendData( file_header ) )
     setError( tr( "unable to send file header" ) );
 }
 
@@ -147,9 +147,9 @@ void FileTransferPeer::sendUploadData()
   if( m_file.atEnd() )
     return;
 
-  QByteArray byte_array = m_file.read( m_socket.fileTransferBufferSize() );
+  QByteArray byte_array = m_file.read( mp_socket->fileTransferBufferSize() );
 
-  if( m_socket.sendData( byte_array ) )
+  if( mp_socket->sendData( byte_array ) )
   {
     m_bytesTransferred = byte_array.size();
   }

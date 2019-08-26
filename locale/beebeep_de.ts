@@ -2976,15 +2976,15 @@ Bitte wähle einen anderen Namen aus.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>There are still files that have not been transferred and will be interrupted. Do you want to continue anyway?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Restart connection now</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Restart later manually</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There are still files that have not been transferred and will be interrupted. Do you want to disconnect anyway?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

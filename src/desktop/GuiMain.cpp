@@ -68,6 +68,7 @@
 #include "GuiWizard.h"
 #include "GuiWorkgroups.h"
 #include "IconManager.h"
+#include "NetworkManager.h"
 #include "PluginManager.h"
 #include "Protocol.h"
 #include "SaveChatList.h"
@@ -632,14 +633,17 @@ void GuiMain::restartCore()
 
 bool GuiMain::isFileTransferInProgress()
 {
-  if( !m_autoConnectOnInterfaceUp || m_forceShutdown )
+  if( m_forceShutdown )
+    return false;
+
+  if( !NetworkManager::instance().isMainInterfaceUp() )
     return false;
 
   if( beeCore->hasFileTransferInProgress() )
   {
     if( QMessageBox::warning( this, Settings::instance().programName(),
-        tr( "There are still files that have not been transferred and will be interrupted. Do you want to continue anyway?" ),
-        tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 0 )
+        tr( "There are still files that have not been transferred and will be interrupted. Do you want to disconnect anyway?" ),
+        tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 1 )
       return true;
   }
   return false;
@@ -3405,16 +3409,28 @@ void GuiMain::clearChat( VNumber chat_id )
   if( ChatManager::instance().chatHasSavedText( c.name() ) )
     button_2_text = QString( "  " ) + tr( "Yes and delete history" ) + QString( "  " );
 
+  bool chat_cleared = false;
   switch( QMessageBox::information( activeWindow(), Settings::instance().programName(), question_txt, tr( "Yes" ), tr( "No" ), button_2_text, 1, 1 ) )
   {
   case 0:
-    beeCore->clearMessagesInChat( chat_id, false );
+    chat_cleared = beeCore->clearMessagesInChat( chat_id, false );
     break;
   case 2:
-    beeCore->clearMessagesInChat( chat_id, true );
+    chat_cleared = beeCore->clearMessagesInChat( chat_id, true );
     break;
   default:
     return;
+  }
+
+  if( chat_cleared )
+  {
+    GuiFloatingChat* fl_chat = floatingChat( chat_id );
+    if( fl_chat )
+    {
+      Chat c = ChatManager::instance().chat( chat_id );
+      if( c.isValid() )
+        fl_chat->setChat( c );
+    }
   }
 }
 

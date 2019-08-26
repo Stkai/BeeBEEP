@@ -25,7 +25,7 @@
 
 
 TickManager::TickManager( QObject *parent )
-  : QObject( parent ), mp_timer( 0 ), m_ticks( 0 ), m_mutex()
+  : QObject( parent ), mp_timer( Q_NULLPTR ), m_ticks( 0 ), m_mutex()
 {
   setObjectName( "TickManager" );
 }
@@ -72,7 +72,7 @@ void TickManager::stopTicks()
 #endif
   mp_timer->stop();
   mp_timer->deleteLater();
-  mp_timer = 0;
+  mp_timer = Q_NULLPTR;
 }
 
 void TickManager::onTimerTimeout()

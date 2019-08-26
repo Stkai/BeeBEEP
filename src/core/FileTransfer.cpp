@@ -201,8 +201,8 @@ void FileTransfer::setupPeer( FileTransferPeer* transfer_peer, qintptr socket_de
 
   connect( transfer_peer, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType ) ), this, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType ) ) );
   connect( transfer_peer, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ), this, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ) );
-  connect( transfer_peer, SIGNAL( destroyed() ), this, SLOT( peerDestroyed() ) );
   connect( transfer_peer, SIGNAL( completed( VNumber, VNumber, const FileInfo& ) ), this, SIGNAL( completed( VNumber, VNumber, const FileInfo& ) ) );
+  connect( transfer_peer, SIGNAL( operationCompleted() ), this, SLOT( deletePeer() ) );
 
   transfer_peer->setConnectionDescriptor( socket_descriptor, server_port );
   int delay = Random::number( 1, 9 ) * 100;
@@ -342,7 +342,7 @@ FileTransferPeer* FileTransfer::peer( VNumber peer_id ) const
   return Q_NULLPTR;
 }
 
-void FileTransfer::peerDestroyed()
+void FileTransfer::deletePeer()
 {
   if( !sender() )
   {
@@ -350,11 +350,16 @@ void FileTransfer::peerDestroyed()
     return;
   }
 
-  if( m_peers.removeOne( (FileTransferPeer*)sender() ) )
-    qDebug() << "Removing peer from list." << m_peers.size() << "peers remained";
+  FileTransferPeer* sender_peer = dynamic_cast<FileTransferPeer*>( sender() );
+
+  if( m_peers.removeOne( sender_peer ) )
+  {
+    qDebug() << "Removed peer from list." << m_peers.size() << "peers remained";
+    sender_peer->deleteLater();
+  }
 
   if( isListening() && downloadsInQueue() > 0 )
-    startNewDownload();
+    QTimer::singleShot( 0, this, SLOT( startNewDownload() ) ); // to next main loop avoiding a crash
 }
 
 bool FileTransfer::cancelTransfer( VNumber peer_id )

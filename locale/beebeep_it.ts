@@ -3085,7 +3085,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>There are still files that have not been transferred and will be interrupted. Do you want to continue anyway?</source>
-        <translation>Ci sono ancora dei file che non sono stati trasferiti e verranno interrotti. Vuoi continuare ugualmente?</translation>
+        <translation type="obsolete">Ci sono ancora dei file che non sono stati trasferiti e verranno interrotti. Vuoi continuare ugualmente?</translation>
     </message>
     <message>
         <source>Restart connection now</source>
@@ -3094,6 +3094,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Restart later manually</source>
         <translation>Riconnettiti dopo manualmente</translation>
+    </message>
+    <message>
+        <source>There are still files that have not been transferred and will be interrupted. Do you want to disconnect anyway?</source>
+        <translation>Ci sono ancora dei file che non sono stati trasferiti e verranno interrotti. Vuoi disconnetterti ugualmente?</translation>
     </message>
 </context>
 <context>

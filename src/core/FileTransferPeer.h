@@ -68,6 +68,7 @@ signals:
   void completed( VNumber peer_id, VNumber user_id, const FileInfo& );
   void fileUploadRequest( const FileInfo& );
   void userValidationRequested( VNumber peer_id, VNumber user_id );
+  void operationCompleted();
 
 public slots:
   void startConnection();
@@ -108,7 +109,7 @@ protected:
   TransferState m_state;
   int m_bytesTransferred;
   FileSizeType m_totalBytesTransferred;
-  ConnectionSocket m_socket;
+  ConnectionSocket* mp_socket;
   QTime m_time;
   qintptr m_socketDescriptor;
   VNumber m_remoteUserId;
@@ -128,10 +129,10 @@ inline bool FileTransferPeer::isDownload() const { return m_transferType == File
 inline void FileTransferPeer::setId( VNumber new_value ) { m_id = new_value; }
 inline VNumber FileTransferPeer::id() const { return m_id; }
 inline const FileInfo& FileTransferPeer::fileInfo() const { return m_fileInfo; }
-inline QHostAddress FileTransferPeer::peerAddress() const { return m_socket.peerAddress(); }
-inline bool FileTransferPeer::isActive() const { return m_state == FileTransferPeer::Starting || m_state == FileTransferPeer::Request || m_socket.isConnected(); }
+inline QHostAddress FileTransferPeer::peerAddress() const { return mp_socket->peerAddress(); }
+inline bool FileTransferPeer::isActive() const { return m_state >= FileTransferPeer::Starting && m_state <= FileTransferPeer::Completed; }
 inline bool FileTransferPeer::isTransferCompleted() const { return m_state == FileTransferPeer::Completed; }
 inline void FileTransferPeer::setRemoteUserId( VNumber new_value ) { m_remoteUserId = new_value; }
-inline VNumber FileTransferPeer::remoteUserId() const { return m_socket.userId() != ID_INVALID ? m_socket.userId() : m_remoteUserId; }
+inline VNumber FileTransferPeer::remoteUserId() const { return mp_socket->userId() != ID_INVALID ? mp_socket->userId() : m_remoteUserId; }
 
 #endif // BEEBEEP_FILETRANSFERSERVERPEER_H

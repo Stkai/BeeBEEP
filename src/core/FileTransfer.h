@@ -78,7 +78,7 @@ protected:
 protected slots:
   void startNewDownload();
   void checkUploadRequest( const FileInfo& );
-  void peerDestroyed();
+  void deletePeer();
   void setupPeer( FileTransferPeer*, qintptr, quint16 server_port = 0 );
 
 private:

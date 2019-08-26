@@ -31,18 +31,18 @@
 FileTransferPeer::FileTransferPeer( QObject *parent )
   : QObject( parent ), m_transferType( FileInfo::Upload ), m_id( ID_INVALID ),
     m_fileInfo( ID_INVALID, FileInfo::Upload ), m_file(), m_state( FileTransferPeer::Unknown ),
-    m_bytesTransferred( 0 ), m_totalBytesTransferred( 0 ), m_socket(),
+    m_bytesTransferred( 0 ), m_totalBytesTransferred( 0 ), mp_socket( Q_NULLPTR ),
     m_time( QTime::currentTime() ), m_socketDescriptor( 0 ), m_remoteUserId( ID_INVALID ), m_serverPort( 0 )
 {
   setObjectName( "FileTransferPeer" );
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Peer created for transfer file";
 #endif
-  connect( &m_socket, SIGNAL( error( QAbstractSocket::SocketError ) ), this, SLOT( socketError( QAbstractSocket::SocketError ) ) );
-  connect( &m_socket, SIGNAL( authenticationRequested( const QByteArray& ) ), this, SLOT( checkUserAuthentication( const QByteArray& ) ) );
-  connect( &m_socket, SIGNAL( dataReceived( const QByteArray& ) ), this, SLOT( checkTransferData( const QByteArray& ) ) );
-  connect( &m_socket, SIGNAL( abortRequest() ), this, SLOT( cancelTransfer() ) );
-
+  mp_socket = new ConnectionSocket( this );
+  connect( mp_socket, SIGNAL( error( QAbstractSocket::SocketError ) ), this, SLOT( socketError( QAbstractSocket::SocketError ) ) );
+  connect( mp_socket, SIGNAL( authenticationRequested( const QByteArray& ) ), this, SLOT( checkUserAuthentication( const QByteArray& ) ) );
+  connect( mp_socket, SIGNAL( dataReceived( const QByteArray& ) ), this, SLOT( checkTransferData( const QByteArray& ) ) );
+  connect( mp_socket, SIGNAL( abortRequest() ), this, SLOT( cancelTransfer() ) );
 }
 
 void FileTransferPeer::cancelTransfer()
@@ -52,12 +52,12 @@ void FileTransferPeer::cancelTransfer()
   if( m_state != FileTransferPeer::Completed )
     m_state = FileTransferPeer::Cancelled;
   qDebug() << qPrintable( name() ) << "cancels the transfer";
-  if( m_socket.isOpen() )
-    m_socket.abortConnection();
+  if( mp_socket->isOpen() )
+    mp_socket->abortConnection();
   closeAll();
   if( m_fileInfo.isValid() && remoteUserId() != ID_INVALID )
     emit message( id(), remoteUserId(), m_fileInfo, tr( "Transfer cancelled" ) );
-  deleteLater();
+  emit operationCompleted();
 }
 
 void FileTransferPeer::closeAll()
@@ -65,12 +65,12 @@ void FileTransferPeer::closeAll()
 #ifdef BEEBEEP_DEBUG
   qDebug() << qPrintable( name() ) << "cleans up";
 #endif
-  if( m_socket.isOpen() )
+  if( mp_socket->isOpen() )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << qPrintable( name() ) << "close socket with descriptor" << m_socket.socketDescriptor();
+    qDebug() << qPrintable( name() ) << "close socket with descriptor" << mp_socket->socketDescriptor();
 #endif
-    m_socket.closeConnection();
+    mp_socket->closeConnection();
   }
 
   if( m_file.isOpen() )
@@ -115,14 +115,14 @@ void FileTransferPeer::startConnection()
 #ifdef BEEBEEP_DEBUG
     qDebug() << qPrintable( name() ) << "set socket descriptor" << m_socketDescriptor;
 #endif
-    m_socket.initSocket( m_socketDescriptor, m_serverPort );
+    mp_socket->initSocket( m_socketDescriptor, m_serverPort );
   }
   else
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << qPrintable( name() ) << "is connecting to" << qPrintable( m_fileInfo.networkAddress().toString() );
 #endif
-    m_socket.connectToNetworkAddress( m_fileInfo.networkAddress() );
+    mp_socket->connectToNetworkAddress( m_fileInfo.networkAddress() );
   }
 
   QTimer::singleShot( Settings::instance().fileTransferConfirmTimeout(), this, SLOT( connectionTimeout() ) );
@@ -137,14 +137,14 @@ void FileTransferPeer::setTransferCompleted()
     Bee::setLastModifiedToFile( m_fileInfo.path(), m_fileInfo.lastModified() );
   emit message( id(), remoteUserId(), m_fileInfo, tr( "Transfer completed in %1" ).arg( Bee::elapsedTimeToString( m_time.elapsed() ) ) );
   emit completed( id(), remoteUserId(), m_fileInfo );
-  deleteLater();
+  emit operationCompleted();
 }
 
 void FileTransferPeer::socketError( QAbstractSocket::SocketError )
 {
   // Make a check to remove the error after a transfer completed
   if( m_state <= FileTransferPeer::Transferring )
-    setError( m_socket.errorString() );
+    setError( mp_socket->errorString() );
 }
 
 void FileTransferPeer::setError( const QString& str_err )
@@ -154,7 +154,7 @@ void FileTransferPeer::setError( const QString& str_err )
   closeAll();
   if( remoteUserId() != ID_INVALID && m_fileInfo.isValid() )
     emit message( id(), remoteUserId(), m_fileInfo, str_err );
-  deleteLater();
+  operationCompleted();
 }
 
 void FileTransferPeer::showProgress()
@@ -184,7 +184,7 @@ void FileTransferPeer::checkUserAuthentication( const QByteArray& auth_byte_arra
 #ifdef BEEBEEP_DEBUG
   qDebug() << qPrintable( name() ) << "checks authentication message";
 #endif
-  Message m = Protocol::instance().toMessage( auth_byte_array, m_socket.protoVersion() );
+  Message m = Protocol::instance().toMessage( auth_byte_array, mp_socket->protoVersion() );
   if( !m.isValid() )
   {
     qWarning() << qPrintable( name() ) << "has found an invalid auth message";
@@ -192,7 +192,7 @@ void FileTransferPeer::checkUserAuthentication( const QByteArray& auth_byte_arra
     return;
   }
 
-  User user_to_check = Protocol::instance().createUser( m, m_socket.peerAddress() );
+  User user_to_check = Protocol::instance().createUser( m, mp_socket->peerAddress() );
   User user_connected;
   if( user_to_check.isValid() )
     user_connected = Protocol::instance().recognizeUser( user_to_check, Settings::instance().userRecognitionMethod() );
@@ -209,7 +209,7 @@ void FileTransferPeer::checkUserAuthentication( const QByteArray& auth_byte_arra
 
 void FileTransferPeer::setUserAuthorized( VNumber user_id )
 {
-  m_socket.setUserId( user_id );
+  mp_socket->setUserId( user_id );
   if( m_remoteUserId == ID_INVALID )
     m_remoteUserId = user_id;
   if( user_id != m_remoteUserId )
@@ -228,7 +228,7 @@ void FileTransferPeer::onTickEvent( int )
 {
   if( m_state == FileTransferPeer::Transferring )
   {
-    if( m_socket.activityIdle() > Settings::instance().pongTimeout() )
+    if( mp_socket->activityIdle() > Settings::instance().pongTimeout() )
       setError( tr( "Transfer timeout" ) );
   }
 }

@@ -36,12 +36,12 @@ void FileTransferPeer::sendDownloadData()
 void FileTransferPeer::sendDownloadRequest()
 {
   qDebug() << qPrintable( name() ) << "sending file request:" << m_fileInfo.id() << m_fileInfo.password();
-  if( m_socket.sendData( Protocol::instance().fromMessage( Protocol::instance().fileInfoToMessage( m_fileInfo ), m_socket.protoVersion() ) ) )
+  if( mp_socket->sendData( Protocol::instance().fromMessage( Protocol::instance().fileInfoToMessage( m_fileInfo ), mp_socket->protoVersion() ) ) )
   {
-    if( m_socket.protoVersion() < FILE_TRANSFER_2_PROTO_VERSION )
+    if( mp_socket->protoVersion() < FILE_TRANSFER_2_PROTO_VERSION )
     {
       m_state = FileTransferPeer::Transferring;
-      qWarning() << qPrintable( name() ) << "using an old file download protocol version" << m_socket.protoVersion();
+      qWarning() << qPrintable( name() ) << "using an old file download protocol version" << mp_socket->protoVersion();
     }
     else
       m_state = FileTransferPeer::FileHeader;
@@ -55,7 +55,7 @@ void FileTransferPeer::sendDownloadDataConfirmation()
 #ifdef BEEBEEP_DEBUG
   qDebug() << qPrintable( name() ) << "sending corfirmation for" << m_bytesTransferred << "bytes";
 #endif
-  if( !m_socket.sendData( Protocol::instance().bytesArrivedConfirmation( m_bytesTransferred ) ) )
+  if( !mp_socket->sendData( Protocol::instance().bytesArrivedConfirmation( m_bytesTransferred ) ) )
     cancelTransfer();
 }
 
@@ -71,7 +71,7 @@ void FileTransferPeer::checkDownloadData( const QByteArray& byte_array )
 
   if( m_state == FileTransferPeer::FileHeader )
   {
-    Message file_header_message = Protocol::instance().toMessage( byte_array, m_socket.protoVersion() );
+    Message file_header_message = Protocol::instance().toMessage( byte_array, mp_socket->protoVersion() );
     if( !file_header_message.isValid() )
     {
       setError( tr( "invalid file header" ) );
