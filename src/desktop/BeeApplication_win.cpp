@@ -46,7 +46,7 @@ bool BeeApplication::winEventFilter( MSG* event_message, long* event_result )
     else if( event_message->wParam == PBT_APMRESUMESUSPEND )
       wakeFromSleep();
     else
-      ignoreEvent();
+      ignoreEvent( "" );
   }
   else if( event_message->message == WM_WTSSESSION_CHANGE )
   {
@@ -77,10 +77,10 @@ bool BeeApplication::winEventFilter( MSG* event_message, long* event_result )
       forceShutdown();
     }
     else
-      ignoreEvent();
+      ignoreEvent( "" );
   }
   else
-    ignoreEvent();
+    ignoreEvent( "" );
 
   return false; // Qt must handle event every time
 }
