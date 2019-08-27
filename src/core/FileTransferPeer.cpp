@@ -32,7 +32,7 @@ FileTransferPeer::FileTransferPeer( QObject *parent )
   : QObject( parent ), m_transferType( FileInfo::Upload ), m_id( ID_INVALID ),
     m_fileInfo( ID_INVALID, FileInfo::Upload ), m_file(), m_state( FileTransferPeer::Unknown ),
     m_bytesTransferred( 0 ), m_totalBytesTransferred( 0 ), mp_socket( Q_NULLPTR ),
-    m_time( QTime::currentTime() ), m_socketDescriptor( 0 ), m_remoteUserId( ID_INVALID ), m_serverPort( 0 )
+    m_socketDescriptor( 0 ), m_remoteUserId( ID_INVALID ), m_serverPort( 0 ), m_elapsedTime( 0 )
 {
   setObjectName( "FileTransferPeer" );
 #ifdef BEEBEEP_DEBUG
@@ -84,6 +84,8 @@ void FileTransferPeer::closeAll()
 
   if( !isTransferCompleted() && isDownload() && m_file.exists() )
     m_file.remove();
+
+  computeElapsedTime();
 }
 
 void FileTransferPeer::setFileInfo( FileInfo::TransferType ftt, const FileInfo& fi )
@@ -107,8 +109,8 @@ void FileTransferPeer::startConnection()
   m_state = FileTransferPeer::Request;
   m_bytesTransferred = 0;
   m_totalBytesTransferred = 0;
-
-  m_time.start();
+  m_elapsedTime = 0;
+  m_startTimestamp = QDateTime::currentDateTime();
 
   if( m_socketDescriptor > 0 )
   {
@@ -135,7 +137,7 @@ void FileTransferPeer::setTransferCompleted()
   closeAll();
   if( isDownload() && m_fileInfo.lastModified().isValid() )
     Bee::setLastModifiedToFile( m_fileInfo.path(), m_fileInfo.lastModified() );
-  emit message( id(), remoteUserId(), m_fileInfo, tr( "Transfer completed in %1" ).arg( Bee::elapsedTimeToString( m_time.elapsed() ) ) );
+  emit message( id(), remoteUserId(), m_fileInfo, tr( "Transfer completed in %1" ).arg( Bee::timeToString( m_elapsedTime ) ) );
   emit completed( id(), remoteUserId(), m_fileInfo );
   emit operationCompleted();
 }
@@ -160,7 +162,13 @@ void FileTransferPeer::setError( const QString& str_err )
 void FileTransferPeer::showProgress()
 {
   if( m_totalBytesTransferred > 0 )
-    emit progress( id(), remoteUserId(), m_fileInfo, m_totalBytesTransferred );
+  {
+    computeElapsedTime();
+#ifdef BEEBEEP_DEBUG
+    qWarning() << qPrintable( name() ) << "has elapsed ms:" << m_elapsedTime;
+#endif
+    emit progress( id(), remoteUserId(), m_fileInfo, m_totalBytesTransferred, m_elapsedTime );
+  }
 }
 
 void FileTransferPeer::checkTransferData( const QByteArray& byte_array )
@@ -231,4 +239,18 @@ void FileTransferPeer::onTickEvent( int )
     if( mp_socket->activityIdle() > Settings::instance().pongTimeout() )
       setError( tr( "Transfer timeout" ) );
   }
+}
+
+void FileTransferPeer::computeElapsedTime()
+{
+  if( m_startTimestamp.isValid() )
+  {
+    qint64 elapsed_time_ms = qAbs( QDateTime::currentDateTime().msecsTo( m_startTimestamp ) );
+    if( elapsed_time_ms >= 86399999 ) // no more than 1 day - 1 ms
+      m_elapsedTime = 86399999;
+    else
+      m_elapsedTime = static_cast<int>( elapsed_time_ms );
+  }
+  else
+    m_elapsedTime = 0;
 }

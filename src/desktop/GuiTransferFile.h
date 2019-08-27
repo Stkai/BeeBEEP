@@ -36,13 +36,13 @@ class GuiTransferFile : public QTreeWidget
   Q_OBJECT
 
 public:
-  enum ColumnType { ColumnCancel, ColumnReport, ColumnFile, ColumnUser, ColumnProgress, ColumnSort };
+  enum ColumnType { ColumnCancel, ColumnReport, ColumnTimeLeft, ColumnFile, ColumnUser, ColumnProgress, ColumnSort };
   enum FileDataType { PeerId = Qt::UserRole+2, FileId, FilePath, TransferInProgress, TransferCompleted };
 
   GuiTransferFile( QWidget* parent = Q_NULLPTR );
 
 public slots:
-  void setProgress( VNumber, const User&, const FileInfo&, FileSizeType );
+  void setProgress( VNumber, const User&, const FileInfo&, FileSizeType, int );
   void setMessage( VNumber, const User&, const FileInfo&, const QString& );
 
 signals:
@@ -51,7 +51,7 @@ signals:
 
 protected:
   QTreeWidgetItem* findItem( VNumber );
-  void showProgress( QTreeWidgetItem*, const FileInfo&, FileSizeType );
+  void showProgress( QTreeWidgetItem*, const FileInfo&, FileSizeType, int );
   void showIcon( QTreeWidgetItem* );
 
 private slots:

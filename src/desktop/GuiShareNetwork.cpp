@@ -457,7 +457,7 @@ void GuiShareNetwork::updateUser( const User& u )
   }
 }
 
-void GuiShareNetwork::onFileTransferProgress( VNumber /* unused_peer_id */, const User& u, const FileInfo& fi, FileSizeType bytes )
+void GuiShareNetwork::onFileTransferProgress( VNumber /* unused_peer_id */, const User& u, const FileInfo& fi, FileSizeType bytes, int elapsed_time )
 {
   GuiFileInfoItem* item = m_fileInfoList.fileItem( u.id(), fi.id() );
   if( !item )
@@ -471,9 +471,10 @@ void GuiShareNetwork::onFileTransferProgress( VNumber /* unused_peer_id */, cons
     return;
   }
 
-  QString file_transfer_progress = QString( "%1 %2 of %3 (%4%)" ).arg( fi.isDownload() ? tr( "Downloading" ) : tr( "Uploading" ),
+  QString file_transfer_progress = QString( "%1 %2 of %3 (%4% - %5)" ).arg( fi.isDownload() ? tr( "Downloading" ) : tr( "Uploading" ),
                                       Bee::bytesToString( bytes ), Bee::bytesToString( fi.size() ),
-                                      QString::number( static_cast<FileSizeType>( (bytes * 100) / fi.size())) );
+                                      QString::number( static_cast<FileSizeType>( (bytes * 100) / fi.size())),
+                                      Bee::transferTimeLeft( bytes, fi.size(), elapsed_time ) );
 
 
   item->setText( GuiFileInfoItem::ColumnStatus, file_transfer_progress );

@@ -34,7 +34,7 @@ GuiTransferFile::GuiTransferFile( QWidget *parent )
 {
   setObjectName( "GuiTransferFile" );
   QStringList labels;
-  labels << "" << "%" << tr( "File" ) << tr( "User" ) << tr( "Status" ) << "";
+  labels << "" << "%" << tr( "Time left" ) << tr( "File" ) << tr( "User" ) << tr( "Status" ) << "";
   setHeaderLabels( labels );
   setRootIsDecorated( false );
   setSortingEnabled( false );
@@ -48,17 +48,20 @@ GuiTransferFile::GuiTransferFile( QWidget *parent )
   hv->setSectionResizeMode( ColumnReport, QHeaderView::ResizeToContents );
   hv->setSectionResizeMode( ColumnFile, QHeaderView::ResizeToContents );
   hv->setSectionResizeMode( ColumnUser, QHeaderView::ResizeToContents );
+  hv->setSectionResizeMode( ColumnTimeLeft, QHeaderView::ResizeToContents );
   hv->setSectionResizeMode( ColumnProgress, QHeaderView::Stretch );
 #else
   hv->setResizeMode( ColumnCancel, QHeaderView::Fixed );
   hv->setResizeMode( ColumnReport, QHeaderView::ResizeToContents );
   hv->setResizeMode( ColumnFile, QHeaderView::ResizeToContents );
   hv->setResizeMode( ColumnUser, QHeaderView::ResizeToContents );
+  hv->setResizeMode( ColumnTimeLeft, QHeaderView::ResizeToContents );
   hv->setResizeMode( ColumnProgress, QHeaderView::Stretch );
 #endif
 
   setColumnWidth( ColumnCancel, 32 );
   setColumnWidth( ColumnReport, 48 );
+  setColumnWidth( ColumnTimeLeft, 40 );
   hv->hide();
 
   mp_menuContext = new QMenu( this );
@@ -69,7 +72,7 @@ GuiTransferFile::GuiTransferFile( QWidget *parent )
   connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( openMenu( const QPoint& ) ) );
 }
 
-void GuiTransferFile::setProgress( VNumber peer_id, const User& u, const FileInfo& fi, FileSizeType bytes )
+void GuiTransferFile::setProgress( VNumber peer_id, const User& u, const FileInfo& fi, FileSizeType bytes, int elapsed_time )
 {
 #ifdef BEEBEEP_DEBUG
   qDebug() << "GuiTransferFile setProgress::" << bytes << "of" << fi.size() << "bytes";
@@ -91,6 +94,7 @@ void GuiTransferFile::setProgress( VNumber peer_id, const User& u, const FileInf
     item->setData( ColumnFile, TransferInProgress, true );
     item->setData( ColumnFile, TransferCompleted, false );
     item->setText( ColumnUser, u.name() );
+    item->setText( ColumnTimeLeft, "" );
     item->setIcon( ColumnCancel, IconManager::instance().icon( "delete.png") );
     item->setText( ColumnSort, QString( "C0%1").arg( peer_id ) );
     sortItems( ColumnSort, Qt::DescendingOrder );
@@ -101,7 +105,7 @@ void GuiTransferFile::setProgress( VNumber peer_id, const User& u, const FileInf
     if( bytes > 0 )
       item->setData( ColumnFile, TransferCompleted, (bool)(bytes==fi.size()) );
     item->setData( ColumnFile, TransferInProgress, (bool)(bytes<fi.size()) );
-    showProgress( item, fi, bytes );
+    showProgress( item, fi, bytes, elapsed_time );
   }
 
   showIcon( item );
@@ -153,38 +157,34 @@ QTreeWidgetItem* GuiTransferFile::findItem( VNumber peer_id )
   return 0;
 }
 
-void GuiTransferFile::showProgress( QTreeWidgetItem* item, const FileInfo& fi, FileSizeType bytes )
+void GuiTransferFile::showProgress( QTreeWidgetItem* item, const FileInfo& fi, FileSizeType bytes, int elapsed_time )
 {
-  if( fi.size() == 0 )
-  {
-#ifdef BEEBEEP_DEBUG
-    qWarning() << "GuiTransferFile::showProgress try to show progress divided by 0:" << fi.path();
-#endif
-    return;
-  }
-
+  FileSizeType fi_size = fi.size() > 0 ? fi.size() : 1;
   if( item->data( ColumnFile, TransferCompleted ).toBool() )
   {
     item->setText( ColumnProgress, tr( "Transfer completed" ) );
     item->setText( ColumnReport, QString( "100" ) );
+    item->setText( ColumnTimeLeft, "" );
     return;
   }
 
-  QString file_transfer_progress_perc = QString::number( static_cast<FileSizeType>( (bytes * 100) / fi.size()));
-  QString file_transfer_progress = bytes == 0 ? tr( "Waiting" ) : QString( "%1 %2 of %3" ).arg( fi.isDownload() ? tr( "Downloading" ) : tr( "Uploading" ),
-                                      Bee::bytesToString( bytes ), Bee::bytesToString( fi.size() ) );
+  QString file_transfer_progress_perc = QString::number( static_cast<FileSizeType>( (bytes * 100) / fi_size));
+  QString file_transfer_progress = bytes == 0 ? tr( "Waiting" ) : QString( "%1 %2 %3 %4" ).arg( fi.isDownload() ? tr( "Downloading" ) : tr( "Uploading" ),
+                                      Bee::bytesToString( bytes ), tr( "of" ), Bee::bytesToString( fi_size ) );
 
   item->setText( ColumnProgress, file_transfer_progress );
   if( bytes == 0 )
   {
     item->setIcon( ColumnReport, IconManager::instance().icon( "timer.png" ) );
     item->setText( ColumnReport, "" );
+    item->setText( ColumnTimeLeft, "" );
   }
   else
   {
     if( !item->icon( ColumnReport ).isNull() )
       item->setIcon( ColumnReport, QIcon() );
     item->setText( ColumnReport, file_transfer_progress_perc );
+    item->setText( ColumnTimeLeft, Bee::transferTimeLeft( bytes, fi_size, elapsed_time ) );
   }
 }
 
@@ -192,7 +192,7 @@ void GuiTransferFile::setMessage( VNumber peer_id, const User& u, const FileInfo
 {
   QTreeWidgetItem* item = findItem( peer_id );
   if( !item )
-    setProgress( peer_id, u, fi, 0 );
+    setProgress( peer_id, u, fi, 0, 1 );
   item = findItem( peer_id );
   if( !item )
   {
@@ -202,6 +202,7 @@ void GuiTransferFile::setMessage( VNumber peer_id, const User& u, const FileInfo
 
   item->setData( ColumnFile, TransferInProgress, false );
   item->setText( ColumnProgress, msg );
+  item->setText( ColumnTimeLeft, "" );
   showIcon( item );
 }
 

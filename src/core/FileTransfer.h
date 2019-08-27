@@ -61,7 +61,7 @@ public:
 
 signals:
   void message( VNumber peer_id, VNumber user_id, const FileInfo&, const QString& );
-  void progress( VNumber peer_id, VNumber user_id, const FileInfo&, FileSizeType );
+  void progress( VNumber peer_id, VNumber user_id, const FileInfo&, FileSizeType, int );
   void completed( VNumber peer_id, VNumber user_id, const FileInfo& );
   void listening();
 

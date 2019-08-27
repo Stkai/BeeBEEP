@@ -572,6 +572,13 @@
     </message>
 </context>
 <context>
+    <name>Date</name>
+    <message>
+        <source>more than 1 day</source>
+        <translation>più di 1 giorno</translation>
+    </message>
+</context>
+<context>
     <name>File</name>
     <message>
         <source>Audio</source>
@@ -4358,6 +4365,14 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Waiting</source>
         <translation>In attesa</translation>
+    </message>
+    <message>
+        <source>of</source>
+        <translation>di</translation>
+    </message>
+    <message>
+        <source>Time left</source>
+        <translation>Attesa</translation>
     </message>
 </context>
 <context>

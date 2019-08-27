@@ -536,6 +536,13 @@
     </message>
 </context>
 <context>
+    <name>Date</name>
+    <message>
+        <source>more than 1 day</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>File</name>
     <message>
         <source>Audio</source>
@@ -4104,6 +4111,14 @@ Please select a different name.</source>
     <message>
         <source>Waiting</source>
         <translation>Очікування</translation>
+    </message>
+    <message>
+        <source>of</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time left</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

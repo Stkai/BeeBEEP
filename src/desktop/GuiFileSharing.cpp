@@ -65,7 +65,7 @@ GuiFileSharing::GuiFileSharing( QWidget *parent )
   connect( beeCore, SIGNAL( shareBoxDownloadCompleted( VNumber, const FileInfo& ) ), mp_shareBox, SLOT( onFileDownloadCompleted( VNumber, const FileInfo& ) ) );
   connect( beeCore, SIGNAL( shareBoxUploadCompleted( VNumber, const FileInfo& ) ), mp_shareBox, SLOT( onFileUploadCompleted( VNumber, const FileInfo& ) ) );
   connect( beeCore, SIGNAL( fileTransferCompleted( VNumber, const User&, const FileInfo& ) ), this, SLOT( onFileTransferCompleted( VNumber, const User&, const FileInfo& ) ) );
-  connect( beeCore, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ), this, SLOT( onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ) );
+  connect( beeCore, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType, int ) ), this, SLOT( onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType, int ) ) );
 
   connect( mp_shareLocal, SIGNAL( sharePathAdded( const QString& ) ), this, SLOT( addToShare( const QString& ) ) );
   connect( mp_shareLocal, SIGNAL( sharePathRemoved( const QString& ) ), this, SLOT( removeFromShare( const QString& ) ) );
@@ -291,7 +291,7 @@ void GuiFileSharing::showUserFileList( const User& u )
   statusBar()->showMessage( share_message, 5000 );
 }
 
-void GuiFileSharing::onFileTransferProgress( VNumber peer_id, const User& u, const FileInfo& fi, FileSizeType bytes )
+void GuiFileSharing::onFileTransferProgress( VNumber peer_id, const User& u, const FileInfo& fi, FileSizeType bytes, int elapsed_time )
 {
   if( fi.size() == 0 )
   {
@@ -301,7 +301,7 @@ void GuiFileSharing::onFileTransferProgress( VNumber peer_id, const User& u, con
     return;
   }
 
-  mp_shareNetwork->onFileTransferProgress( peer_id, u, fi, bytes );
+  mp_shareNetwork->onFileTransferProgress( peer_id, u, fi, bytes, elapsed_time );
 
   QString file_transfer_progress;
   int msg_timeout = 0;
@@ -319,6 +319,7 @@ void GuiFileSharing::onFileTransferProgress( VNumber peer_id, const User& u, con
   {
     file_transfer_progress = QString( "%1: %2" ).arg( fi.name(),
                                fi.isDownload() ? tr( "download completed" ) : tr( "upload completed" ) );
+    file_transfer_progress += QString( " (%1)" ).arg( Bee::timeToString( elapsed_time ) );
     msg_timeout = 3000;
   }
 

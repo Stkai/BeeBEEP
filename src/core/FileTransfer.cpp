@@ -199,7 +199,7 @@ void FileTransfer::setupPeer( FileTransferPeer* transfer_peer, qintptr socket_de
     connect( transfer_peer, SIGNAL( fileUploadRequest( const FileInfo& ) ), this, SLOT( checkUploadRequest( const FileInfo& ) ) );
   }
 
-  connect( transfer_peer, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType ) ), this, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType ) ) );
+  connect( transfer_peer, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType, int ) ), this, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType, int ) ) );
   connect( transfer_peer, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ), this, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ) );
   connect( transfer_peer, SIGNAL( completed( VNumber, VNumber, const FileInfo& ) ), this, SIGNAL( completed( VNumber, VNumber, const FileInfo& ) ) );
   connect( transfer_peer, SIGNAL( operationCompleted() ), this, SLOT( deletePeer() ) );

@@ -203,7 +203,7 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
   emit fileTransferMessage( peer_id, u, fi, msg );
 }
 
-void Core::checkFileTransferProgress( VNumber peer_id, VNumber user_id, const FileInfo& fi, FileSizeType bytes )
+void Core::checkFileTransferProgress( VNumber peer_id, VNumber user_id, const FileInfo& fi, FileSizeType bytes, int elapsed_time )
 {
   User u = UserManager::instance().findUser( user_id );
   if( !u.isValid() )
@@ -211,7 +211,7 @@ void Core::checkFileTransferProgress( VNumber peer_id, VNumber user_id, const Fi
     qWarning() << "Unable to find user" << user_id << "for the file transfer" << fi.name();
     return;
   }
-  emit fileTransferProgress( peer_id, u, fi, bytes );
+  emit fileTransferProgress( peer_id, u, fi, bytes, elapsed_time );
 }
 
 bool Core::sendFile( VNumber user_id, const QString& file_path, const QString& share_folder, bool to_share_box, VNumber chat_id )

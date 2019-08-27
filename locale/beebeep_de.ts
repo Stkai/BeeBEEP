@@ -552,6 +552,13 @@
     </message>
 </context>
 <context>
+    <name>Date</name>
+    <message>
+        <source>more than 1 day</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>File</name>
     <message>
         <source>Audio</source>
@@ -4180,6 +4187,14 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>Waiting</source>
         <translation>Warten</translation>
+    </message>
+    <message>
+        <source>of</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time left</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -41,8 +41,6 @@ namespace Bee
   QString userStatusToString( int );
   QString userBirthdayToText( const User& );
   inline VNumber qVariantToVNumber( const QVariant& );
-  QString bytesToString( FileSizeType, int precision = -1 );
-  QString elapsedTimeToString( int msec );
   QString uniqueFilePath( const QString&, bool add_date_time );
   QString suffixFromFile( const QString& );
   FileType fileTypeFromSuffix( const QString& );
@@ -90,6 +88,12 @@ namespace Bee
   QString beeColorsToHtmlText( const QString& );
   QString pluginFileExtension();
   QString removeInvalidCharactersForFilePath( const QString& );
+
+  QString bytesToString( FileSizeType, int precision = -1 );
+  QString timeToString( int msec );
+  qint64 roundFromDouble( double d );
+  qint64 bytesPerSecond( FileSizeType transferred_byte_size, int time_elapsed_ms );
+  QString transferTimeLeft( FileSizeType bytes_transferred, FileSizeType total_bytes, int elapsed_time );
 
 }
 

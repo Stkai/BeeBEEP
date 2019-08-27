@@ -131,7 +131,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( beeCore, SIGNAL( userChanged( const User& ) ), this, SLOT( onUserChanged( const User& ) ) );
   connect( beeCore, SIGNAL( userRemoved( const User& ) ), this, SLOT( onUserRemoved( const User& ) ) );
   connect( beeCore, SIGNAL( userIsWriting( const User&, VNumber ) ), this, SLOT( showWritingUser( const User&, VNumber ) ) );
-  connect( beeCore, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ), this, SLOT( onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType ) ) );
+  connect( beeCore, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType, int ) ), this, SLOT( onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType, int ) ) );
   connect( beeCore, SIGNAL( fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& ) ), this, SLOT( onFileTransferMessage( VNumber, const User&, const FileInfo&, const QString& ) ) );
   connect( beeCore, SIGNAL( fileTransferCompleted( VNumber, const User&, const FileInfo& ) ), this, SLOT( onFileTransferCompleted( VNumber, const User&, const FileInfo& ) ) );
   connect( beeCore, SIGNAL( fileShareAvailable( const User& ) ), this, SLOT( showSharesForUser( const User& ) ) );
@@ -637,6 +637,9 @@ bool GuiMain::isFileTransferInProgress()
     return false;
 
   if( !NetworkManager::instance().isMainInterfaceUp() )
+    return false;
+
+  if( beeApp->isInSleepMode() )
     return false;
 
   if( beeCore->hasFileTransferInProgress() )
@@ -4280,9 +4283,9 @@ void GuiMain::onChangeSettingOnExistingFile( QAction* act )
   Settings::instance().save();
 }
 
-void GuiMain::onFileTransferProgress( VNumber peer_id, const User& u, const FileInfo& fi, FileSizeType bytes )
+void GuiMain::onFileTransferProgress( VNumber peer_id, const User& u, const FileInfo& fi, FileSizeType bytes, int elapsed_time )
 {
-  mp_fileTransfer->setProgress( peer_id, u, fi, bytes );
+  mp_fileTransfer->setProgress( peer_id, u, fi, bytes, elapsed_time );
   if( Settings::instance().alwaysShowFileTransferProgress() )
   {
     if( !mp_dockFileTransfers->isVisible() )

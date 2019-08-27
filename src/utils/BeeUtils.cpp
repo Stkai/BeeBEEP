@@ -136,54 +136,6 @@ QColor Bee::userStatusForegroundColor( int user_status )
   }
 }
 
-QString Bee::bytesToString( FileSizeType bytes, int precision )
-{
-  QString suffix;
-  double result = 0;
-  int prec = 1;
-  if( bytes > 1000000000 )
-  {
-    suffix = "Gb";
-    result = bytes / 1000000000.0;
-    prec = 3;
-  }
-  else if( bytes > 1000000 )
-  {
-    suffix = "Mb";
-    result = bytes / 1000000.0;
-    prec = 2;
-  }
-  else if( bytes > 1000 )
-  {
-    suffix = "kb";
-    result = bytes / 1000.0;
-    prec = result >= 10 ? 0 : 1;
-  }
-  else
-  {
-    suffix = "b";
-    result = bytes;
-    prec = 0;
-  }
-  return QString( "%1 %2").arg( result, 0, 'f', prec > 0 ? (precision >= 0 ? precision : prec) : 0 ).arg( suffix );
-}
-
-QString Bee::elapsedTimeToString( int time_elapsed )
-{
-  QTime t( 0, 0 );
-  t = t.addMSecs( time_elapsed );
-  QString s = "";
-  if( t.hour() == 0 && t.minute() == 0 && t.second() == 0 )
-    s = QString( "%1 ms" ).arg( t.msec() );
-  else if( t.hour() == 0 && t.minute() == 0 )
-    s = QString( "%1 s" ).arg( t.second() );
-  else if( t.hour() == 0 )
-    s = QString( "%1 m, %2 s" ).arg( t.minute() ).arg( t.second() );
-  else
-    s = QString( "%1 h, %2 m, %3 s" ).arg( t.hour() ).arg( t.minute() ).arg( t.second() );
-  return s;
-}
-
 QString Bee::uniqueFilePath( const QString& file_path, bool add_date_time )
 {
   int counter = 1;
@@ -982,4 +934,91 @@ QString Bee::replaceHtmlSpecialCharacters( const QString& s )
     }
   }
   return html_text;
+}
+
+qint64 Bee::roundFromDouble( double d )
+{
+  qint64 i = static_cast<qint64>( d );
+  return ((d - i) >= 0.5) ? ++i : i;
+}
+
+qint64 Bee::bytesPerSecond( FileSizeType transferred_byte_size, int time_elapsed_ms )
+{
+  double dtbs = static_cast<double>( transferred_byte_size );
+  double dte = static_cast<double>( time_elapsed_ms );
+  if( dtbs > 0 && dte > 0 )
+    return qMax( static_cast<qint64>(1), roundFromDouble( (dtbs*1000.0)/dte ) );
+  else
+    return 1;
+}
+
+QString Bee::bytesToString( FileSizeType bytes, int precision )
+{
+  QString suffix;
+  double result = 0;
+  int prec = 1;
+  if( bytes > 1000000000000 )
+  {
+    suffix = "Tb";
+    result = bytes / 1000000000000.0;
+    prec = 5;
+  }
+  else if( bytes > 1000000000 )
+  {
+    suffix = "Gb";
+    result = bytes / 1000000000.0;
+    prec = 3;
+  }
+  else if( bytes > 1000000 )
+  {
+    suffix = "Mb";
+    result = bytes / 1000000.0;
+    prec = 2;
+  }
+  else if( bytes > 1000 )
+  {
+    suffix = "kb";
+    result = bytes / 1000.0;
+    prec = result >= 10 ? 0 : 1;
+  }
+  else
+  {
+    suffix = "b";
+    result = bytes;
+    prec = 0;
+  }
+  return QString( "%1 %2").arg( result, 0, 'f', prec > 0 ? (precision >= 0 ? precision : prec) : 0 ).arg( suffix );
+}
+
+QString Bee::timeToString( int msec )
+{
+  if( msec <= 0 )
+    return QString( "" );
+  if( msec >= 86399999 )
+    return QT_TRANSLATE_NOOP( "Date", "more than 1 day" );
+  QTime t( 0, 0 );
+  t = t.addMSecs( msec );
+  QString s = "";
+  if( t.hour() == 0 && t.minute() == 0 && t.second() == 0 )
+    s = QString( "%1 ms" ).arg( t.msec() );
+  else if( t.hour() == 0 && t.minute() == 0 )
+    s = QString( "%1 s" ).arg( t.second() );
+  else if( t.hour() == 0 )
+    s = QString( "%1 m, %2 s" ).arg( t.minute() ).arg( t.second() );
+  else
+    s = QString( "%1 h, %2 m, %3 s" ).arg( t.hour() ).arg( t.minute() ).arg( t.second() );
+  return s;
+}
+
+QString Bee::transferTimeLeft( FileSizeType bytes_transferred, FileSizeType total_bytes, int elapsed_time )
+{
+  qint64 bytes_per_second = bytesPerSecond( bytes_transferred, elapsed_time );
+  FileSizeType bytes_left = bytes_transferred >= total_bytes ? 0 : total_bytes - bytes_transferred;
+  int ms_left = (bytes_left * 1000) / bytes_per_second;
+  if( ms_left < 1000 )
+    return timeToString( 1000 );
+  else if( ms_left < 2000 )
+    return timeToString( 2000 );
+  else
+    return timeToString( ms_left );
 }
