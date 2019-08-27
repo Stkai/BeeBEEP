@@ -194,5 +194,5 @@ QString MessageManager::saveMessagesAuthCode() const
   s += Settings::instance().localUser().name();
   QByteArray ba = s.toUtf8().toBase64();
   QByteArray auth_code = QCryptographicHash::hash( ba, QCryptographicHash::Sha1 );
-  return QString::fromLatin1( auth_code );
+  return QString::fromLatin1( auth_code.toHex() );
 }

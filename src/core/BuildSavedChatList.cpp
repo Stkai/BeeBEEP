@@ -28,12 +28,12 @@
 
 
 BuildSavedChatList::BuildSavedChatList( QObject *parent )
-  : QObject( parent )
+  : QObject( parent ), m_elapsedTime( 0 ), m_protocolVersion( 1 )
 {
   setObjectName( "BuildSavedChatList" );
 }
 
-QString BuildSavedChatList::checkAuthCodeFromFileHeader( const QStringList& file_header, const QString& file_name ) const
+QString BuildSavedChatList::checkAuthCodeFromFileHeader( const QStringList& file_header, const QString& file_name )
 {
   QString auth_code;
   int proto_version = 0;
@@ -70,6 +70,8 @@ QString BuildSavedChatList::checkAuthCodeFromFileHeader( const QStringList& file
     qDebug() << "Old protocol found in file header of file" << qPrintable( file_name );
     auth_code = MessageManager::instance().saveMessagesAuthCode();
   }
+  if( proto_version > m_protocolVersion )
+    m_protocolVersion = proto_version;
   return auth_code;
 }
 

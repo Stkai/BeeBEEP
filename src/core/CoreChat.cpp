@@ -609,7 +609,8 @@ void Core::addListToSavedChats()
   qDebug() << qPrintable( loading_status );
   if( bscl->savedChats().size() > 0 )
   {
-    if( Settings::instance().saveMessagesTimestamp().isValid() && bscl->savedChatsAuthCode() != MessageManager::instance().saveMessagesAuthCode() )
+    // it must be > and not >= to bypass Qt4 and Qt5 problem of different SHA1 code generated (fixed in the SAVE_MESSAGE_AUTH_CODE_PROTO_VERSION+1 version)
+    if( bscl->protocolVersion() > SAVE_MESSAGE_AUTH_CODE_PROTO_VERSION && Settings::instance().saveMessagesTimestamp().isValid() && bscl->savedChatsAuthCode() != MessageManager::instance().saveMessagesAuthCode() )
     {
       qWarning() << "Incorrect autorization code found in saved chats file";
       dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2" )

@@ -39,6 +39,7 @@ public:
   inline const QString& savedChatsAuthCode() const;
   inline const QString& unsentMessagesAuthCode() const;
   inline int elapsedTime() const;
+  inline int protocolVersion() const;
 
 signals:
   void listCompleted();
@@ -49,7 +50,7 @@ public slots:
 protected:
   void loadSavedChats( QDataStream* );
   void loadUnsentMessages();
-  QString checkAuthCodeFromFileHeader( const QStringList& file_header, const QString& file_name ) const;
+  QString checkAuthCodeFromFileHeader( const QStringList& file_header, const QString& file_name );
   void clearCacheItems();
 
 private:
@@ -58,6 +59,7 @@ private:
   QString m_savedChatsAuthCode;
   QString m_unsentMessagesAuthCode;
   int m_elapsedTime;
+  int m_protocolVersion;
 
 };
 
@@ -68,5 +70,6 @@ inline const QList<MessageRecord>& BuildSavedChatList::unsentMessages() const { 
 inline const QString& BuildSavedChatList::savedChatsAuthCode() const { return m_savedChatsAuthCode; }
 inline const QString& BuildSavedChatList::unsentMessagesAuthCode() const { return m_unsentMessagesAuthCode; }
 inline int BuildSavedChatList::elapsedTime() const { return m_elapsedTime; }
+inline int BuildSavedChatList::protocolVersion() const { return m_protocolVersion; }
 
 #endif // BEEBEEP_BUILDSAVEDCHATLIST_H
