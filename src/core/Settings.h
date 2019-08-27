@@ -417,6 +417,7 @@ public:
   inline bool confirmOnDownloadFile() const;
   inline void setConfirmOnDownloadFile( bool );
   inline int maxSimultaneousDownloads() const;
+  inline void setMaxQueuedDownloads( int );
   inline int maxQueuedDownloads() const;
 
   inline QStringList pluginSettings( const QString& ) const;
@@ -1011,6 +1012,7 @@ inline int Settings::dataStreamVersion( bool in_load_event ) const { return in_l
 inline bool Settings::confirmOnDownloadFile() const { return m_confirmOnDownloadFile; }
 inline void Settings::setConfirmOnDownloadFile( bool new_value ) { m_confirmOnDownloadFile = new_value; }
 inline int Settings::maxSimultaneousDownloads() const { return m_maxSimultaneousDownloads; }
+inline void Settings::setMaxQueuedDownloads( int new_value ) { m_maxQueuedDownloads = new_value; }
 inline int Settings::maxQueuedDownloads() const { return m_maxQueuedDownloads; }
 inline const QDate& Settings::settingsCreationDate() const { return m_settingsCreationDate; }
 inline void Settings::setSaveGroupList( bool new_value ) { m_saveGroupList = new_value; }

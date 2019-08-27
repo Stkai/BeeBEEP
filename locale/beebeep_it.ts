@@ -3106,6 +3106,14 @@ Inserisci un nome differente.</translation>
         <source>There are still files that have not been transferred and will be interrupted. Do you want to disconnect anyway?</source>
         <translation>Ci sono ancora dei file che non sono stati trasferiti e verranno interrotti. Vuoi disconnetterti ugualmente?</translation>
     </message>
+    <message>
+        <source>Please select the maximum number of files you can queue up for the transfer (current: %1).</source>
+        <translation>Seleziona il numero massimo di file che puoi aggiungere alla coda di trasferimento (attuale: %1).</translation>
+    </message>
+    <message>
+        <source>Add up to %1 files to the transfer queue</source>
+        <translation>Aggiungi fino a %1 file alla coda di trasferimento</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

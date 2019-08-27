@@ -1075,8 +1075,11 @@ void GuiMain::createMenus()
   mp_actEnableFileSharing->setChecked( Settings::instance().enableFileSharing() );
   mp_actEnableFileSharing->setData( 5 );
   mp_actEnableFileSharing->setDisabled( Settings::instance().disableFileSharing() );
-
   mp_menuFileTransferSettings->addSeparator();
+  mp_actConfirmDownload = mp_menuFileTransferSettings->addAction( tr( "Prompt before downloading file" ), this, SLOT( settingsChanged() ) );
+  mp_actConfirmDownload->setCheckable( true );
+  mp_actConfirmDownload->setChecked( Settings::instance().confirmOnDownloadFile() );
+  mp_actConfirmDownload->setData( 30 );
   act = mp_menuFileTransferSettings->addAction( tr( "Always download files into the folder with the user's name" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().downloadInUserFolder() );
@@ -1097,19 +1100,20 @@ void GuiMain::createMenus()
   mp_actGroupExistingFile->addAction( mp_actGenerateAutomaticFilename );
   mp_actGroupExistingFile->addAction( mp_actAskToDoOnExistingFile );
   connect( mp_actGroupExistingFile, SIGNAL( triggered( QAction* ) ), this, SLOT( onChangeSettingOnExistingFile( QAction* ) ) );
-  mp_actConfirmDownload = mp_menuFileTransferSettings->addAction( tr( "Prompt before downloading file" ), this, SLOT( settingsChanged() ) );
-  mp_actConfirmDownload->setCheckable( true );
-  mp_actConfirmDownload->setChecked( Settings::instance().confirmOnDownloadFile() );
-  mp_actConfirmDownload->setData( 30 );
-  act = mp_menuFileTransferSettings->addAction( tr( "Use native file dialogs" ), this, SLOT( settingsChanged() ) );
+  mp_menuFileTransferSettings->addSeparator();
+  act = mp_menuFileTransferSettings->addAction( "", this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
-  act->setChecked( Settings::instance().useNativeDialogs() );
-  act->setData( 4 );
+  setMaxQueuedDownloadsInAction( act );
+  act->setData( 88 );
   act = mp_menuFileTransferSettings->addAction( tr( "Always shows the progress of file transfer" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().alwaysShowFileTransferProgress() );
   act->setData( 78 );
-
+  mp_menuFileTransferSettings->addSeparator();
+  act = mp_menuFileTransferSettings->addAction( tr( "Use native file dialogs" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().useNativeDialogs() );
+  act->setData( 4 );
   mp_menuFileTransferSettings->addSeparator();
   mp_actSelectDownloadFolder = mp_menuFileTransferSettings->addAction( IconManager::instance().icon( "download-folder.png" ), tr( "Select download folder" ) + QString( "..." ), this, SLOT( selectDownloadDirectory() ) );
 
@@ -1633,9 +1637,9 @@ void GuiMain::settingsChanged( QAction* act )
       if( ok )
       {
         Settings::instance().setChatMessagesToShow( num_messages );
-        setChatMessagesToShowInAction( act );
         refresh_chat = true;
       }
+      setChatMessagesToShowInAction( act );
     }
     break;
   case 28:
@@ -1861,10 +1865,8 @@ void GuiMain::settingsChanged( QAction* act )
                                                  Settings::instance().chatInactiveWindowOpacityLevel(),
                                                  10, 100, 5, &ok );
       if( ok )
-      {
         Settings::instance().setChatInactiveWindowOpacityLevel( opacity_level );
-        setChatInactiveWindowOpacityLevelInAction( act );
-      }
+      setChatInactiveWindowOpacityLevelInAction( act );
     }
     break;
   case 72:
@@ -1957,10 +1959,8 @@ void GuiMain::settingsChanged( QAction* act )
                                                  Settings::instance().chatMaxLineSaved(),
                                                  100, 50000, 100, &ok );
       if( ok )
-      {
         Settings::instance().setChatMaxLineSaved( save_max_lines );
-        setChatMaxLinesToSaveInAction( act );
-      }
+      setChatMaxLinesToSaveInAction( act );
     }
     break;
   case 85:
@@ -1974,10 +1974,8 @@ void GuiMain::settingsChanged( QAction* act )
                                                  Settings::instance().clearCacheAfterDays(),
                                                  -1, 999, 10, &ok );
       if( ok )
-      {
         Settings::instance().setClearCacheAfterDays( cc_days );
-        setClearCacheAfterDaysInAction( act );
-      }
+      setClearCacheAfterDaysInAction( act );
     }
     break;
   case 86:
@@ -1986,6 +1984,21 @@ void GuiMain::settingsChanged( QAction* act )
   case 87:
     Settings::instance().setShowUsersInWorkgroups( act->isChecked() );
     refresh_users = true;
+    break;
+  case 88:
+    {
+#if QT_VERSION >= 0x050000
+      int max_files_in_queue = QInputDialog::getInt( qApp->activeWindow(), Settings::instance().programName(),
+#else
+      int max_files_in_queue = QInputDialog::getInteger( qApp->activeWindow(), Settings::instance().programName(),
+#endif
+                                  tr( "Please select the maximum number of files you can queue up for the transfer (current: %1)." ).arg( Settings::instance().maxQueuedDownloads() ),
+                                  Settings::instance().maxQueuedDownloads(),
+                                  1, 9999, 10, &ok );
+      if( ok )
+        Settings::instance().setMaxQueuedDownloads( max_files_in_queue);
+      setMaxQueuedDownloadsInAction( act );
+    }
     break;
   case 99:
     break;
@@ -2070,6 +2083,12 @@ void GuiMain::setClearCacheAfterDaysInAction( QAction* act )
   act->setText( tr( "Clean the cache from items older than %1 days" ).arg( Settings::instance().clearCacheAfterDays() >= 0 ? Settings::instance().clearCacheAfterDays() : 96 ) );
   act->setEnabled( Settings::instance().chatAutoSave() );
   act->setChecked( Settings::instance().clearCacheAfterDays() >= 0 );
+}
+
+void GuiMain::setMaxQueuedDownloadsInAction( QAction* act )
+{
+  act->setText( tr( "Add up to %1 files to the transfer queue" ).arg( Settings::instance().maxQueuedDownloads() ) );
+  act->setChecked( Settings::instance().maxQueuedDownloads() > 0 );
 }
 
 void GuiMain::sendMessage( VNumber chat_id, const QString& msg )

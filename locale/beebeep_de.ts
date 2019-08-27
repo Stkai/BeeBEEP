@@ -2994,6 +2994,14 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>There are still files that have not been transferred and will be interrupted. Do you want to disconnect anyway?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Please select the maximum number of files you can queue up for the transfer (current: %1).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add up to %1 files to the transfer queue</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

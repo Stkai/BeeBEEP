@@ -264,6 +264,7 @@ private:
   void showCheckSaveChatMessages();
   void setChatMaxLinesToSaveInAction( QAction* );
   void setClearCacheAfterDaysInAction( QAction* );
+  void setMaxQueuedDownloadsInAction( QAction* );
   bool isFileTransferInProgress();
 
 private:

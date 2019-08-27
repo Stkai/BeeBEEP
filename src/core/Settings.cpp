@@ -1337,7 +1337,7 @@ void Settings::load()
   m_maxFileShared = qMax( 1024, sets->value( "MaxSharedFiles", 8192 ).toInt() );
   m_shareBoxPath = checkFolderPath( sets->value( "ShareBoxPath", "" ).toString(), "" );
   m_maxSimultaneousDownloads = sets->value( "MaxSimultaneousDownloads", 3 ).toInt();
-  m_maxQueuedDownloads = sets->value( "MaxQueuedDownloads", 400 ).toInt();
+  m_maxQueuedDownloads = qMax( 1, sets->value( "MaxQueuedDownloads", 400 ).toInt() );
   m_fileTransferConfirmTimeout = qMax( sets->value( "FileTransferConfirmTimeout", 30000 ).toInt(), 1000 );
   m_fileTransferBufferSize = qMax( sets->value( "FileTransferBufferSize", 65456 ).toInt(), 2048 );
   m_automaticFileName = sets->value( "SetAutomaticFileNameOnSave", true ).toBool();
