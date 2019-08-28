@@ -2236,7 +2236,7 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation>Beállítások</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1084"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1087"/>
         <source>If a file already exists</source>
         <translation>Ha egy fájl már létezik</translation>
     </message>
@@ -2245,7 +2245,7 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation type="obsolete">Csak a bejelentkezett felhasználók megjelenítése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1090"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1093"/>
         <source>Generate automatic filename</source>
         <translation>Automatikus fájlnév generálása</translation>
     </message>
@@ -2371,7 +2371,7 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation>Csak az utolsó %1 üzenetek</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1100"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1079"/>
         <source>Prompt before downloading file</source>
         <translation>Kérdés fájl letöltés előtt</translation>
     </message>
@@ -2406,12 +2406,12 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation>Használja az RTL módot a szöveg megjelenítéséhez</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1104"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1113"/>
         <source>Use native file dialogs</source>
         <translation>Használjon eredeti fájl párbeszédablakokat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1093"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1096"/>
         <source>Ask me</source>
         <translation>Kérdezz engem</translation>
     </message>
@@ -2918,7 +2918,7 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1113"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1108"/>
         <source>Always shows the progress of file transfer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3023,7 +3023,7 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1080"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1083"/>
         <source>Always download files into the folder with the user&apos;s name</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3603,7 +3603,7 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation type="obsolete">A kiválasztott &apos;%1&apos;beszélgetés szövege  már el van mentve.&lt;br /&gt;Mit szeretne tenni a kiválasztott mentendő szöveggel?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1087"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1090"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3223"/>
         <source>Overwrite</source>
         <translation>Átír</translation>
@@ -5182,6 +5182,11 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="68"/>
+        <source>Remove all completed transfers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/desktop/GuiTransferFile.cpp" line="127"/>
         <source>Completed</source>
         <translation>Befejezve</translation>
@@ -5231,9 +5236,8 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation>Szeretné megszakítani a %1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="68"/>
         <source>Remove all transfers</source>
-        <translation>Ősszes átvitel eltávolítása</translation>
+        <translation type="obsolete">Ősszes átvitel eltávolítása</translation>
     </message>
 </context>
 <context>

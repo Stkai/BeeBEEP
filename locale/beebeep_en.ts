@@ -2191,12 +2191,12 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1084"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1087"/>
         <source>If a file already exists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1090"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1093"/>
         <source>Generate automatic filename</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2314,7 +2314,7 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1100"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1079"/>
         <source>Prompt before downloading file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2349,12 +2349,12 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1104"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1113"/>
         <source>Use native file dialogs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1093"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1096"/>
         <source>Ask me</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2846,7 +2846,7 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1113"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1108"/>
         <source>Always shows the progress of file transfer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2951,7 +2951,7 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1080"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1083"/>
         <source>Always download files into the folder with the user&apos;s name</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3528,7 +3528,7 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1087"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1090"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3223"/>
         <source>Overwrite</source>
         <translation type="unfinished"></translation>
@@ -5045,6 +5045,11 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="68"/>
+        <source>Remove all completed transfers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/desktop/GuiTransferFile.cpp" line="127"/>
         <source>Completed</source>
         <translation type="unfinished"></translation>
@@ -5087,11 +5092,6 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiTransferFile.cpp" line="219"/>
         <source>Do you want to cancel the transfer of %1?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="68"/>
-        <source>Remove all transfers</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

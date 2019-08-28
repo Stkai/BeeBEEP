@@ -2228,7 +2228,7 @@ Please select a different name.</source>
         <translation>Podešavanje</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1084"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1087"/>
         <source>If a file already exists</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2237,7 +2237,7 @@ Please select a different name.</source>
         <translation type="obsolete">Prikaži samo prijavljene korisnike</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1090"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1093"/>
         <source>Generate automatic filename</source>
         <translation>Generiše automatski naziv fajla</translation>
     </message>
@@ -2373,7 +2373,7 @@ Please select a different name.</source>
         <translation>Prikaži samo poslednjih %1 poruka</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1100"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1079"/>
         <source>Prompt before downloading file</source>
         <translation>Prompt pre downloadovanja fajla</translation>
     </message>
@@ -2408,12 +2408,12 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1104"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1113"/>
         <source>Use native file dialogs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1093"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1096"/>
         <source>Ask me</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2804,7 +2804,7 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1113"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1108"/>
         <source>Always shows the progress of file transfer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2909,7 +2909,7 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1080"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1083"/>
         <source>Always download files into the folder with the user&apos;s name</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3589,7 +3589,7 @@ Please select a different name.</source>
         <translation type="obsolete">Chat &apos;%1&apos; izabran je već snimljen.&lt;br/&gt;Šta želiš sa snimljenim tekstom?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1087"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1090"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3223"/>
         <source>Overwrite</source>
         <translation>Prebriši</translation>
@@ -5139,6 +5139,11 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="68"/>
+        <source>Remove all completed transfers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/desktop/GuiTransferFile.cpp" line="127"/>
         <source>Completed</source>
         <translation>Završeno</translation>
@@ -5188,9 +5193,8 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="68"/>
         <source>Remove all transfers</source>
-        <translation>Obriši sve prenose</translation>
+        <translation type="obsolete">Obriši sve prenose</translation>
     </message>
 </context>
 <context>

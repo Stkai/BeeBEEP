@@ -2225,7 +2225,7 @@ Proszę wybrać inną nazwę.</translation>
         <translation>Ustawienia</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1084"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1087"/>
         <source>If a file already exists</source>
         <translation>Jeśli plik istnieje</translation>
     </message>
@@ -2234,7 +2234,7 @@ Proszę wybrać inną nazwę.</translation>
         <translation type="obsolete">Pokazuj tylko dostępnych użytkowników</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1090"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1093"/>
         <source>Generate automatic filename</source>
         <translation>Wygeneruj nazwę pliku automatycznie</translation>
     </message>
@@ -2360,7 +2360,7 @@ Proszę wybrać inną nazwę.</translation>
         <translation>Pokaż tylko ostatnie %1 wiadomości</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1100"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1079"/>
         <source>Prompt before downloading file</source>
         <translation>Pytaj przed pobraniem pliku</translation>
     </message>
@@ -2395,7 +2395,7 @@ Proszę wybrać inną nazwę.</translation>
         <translation>Użyj trybu RTL do pokazywania tekstu</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1104"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1113"/>
         <source>Use native file dialogs</source>
         <translation>Używaj wbudowanych okien dialogowych plików</translation>
     </message>
@@ -2415,7 +2415,7 @@ Proszę wybrać inną nazwę.</translation>
         <translation>Napisz wiadomość</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1093"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1096"/>
         <source>Ask me</source>
         <translation>Zapytaj mnie</translation>
     </message>
@@ -2937,12 +2937,12 @@ Proszę wybrać inną nazwę.</translation>
         <translation>Wybierz systemowy kolor tekstu czatu</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1080"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1083"/>
         <source>Always download files into the folder with the user&apos;s name</source>
         <translation>Zawsze pobieraj pliki do folderu z nazwą użytkownika</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1113"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1108"/>
         <source>Always shows the progress of file transfer</source>
         <translation>Zawsze pokazuj postęp przesyłania pliku</translation>
     </message>
@@ -3596,7 +3596,7 @@ Proszę wybrać inną nazwę.</translation>
         <translation type="obsolete">Wybrany czat %1 już posiada zachowany tekst.&lt;br&gt;Co chcesz zrobić z wybranym zachowanym tekstem?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1087"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1090"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3223"/>
         <source>Overwrite</source>
         <translation>Nadpisz</translation>
@@ -5174,6 +5174,11 @@ Proszę wybrać inną nazwę.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="68"/>
+        <source>Remove all completed transfers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/desktop/GuiTransferFile.cpp" line="127"/>
         <source>Completed</source>
         <translation>Zakończony</translation>
@@ -5219,9 +5224,8 @@ Proszę wybrać inną nazwę.</translation>
         <translation>Czy chcesz przerwać transfer %1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="68"/>
         <source>Remove all transfers</source>
-        <translation>Usuń wszystkie transfery</translation>
+        <translation type="obsolete">Usuń wszystkie transfery</translation>
     </message>
 </context>
 <context>

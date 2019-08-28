@@ -4182,7 +4182,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Remove all transfers</source>
-        <translation>Alle Übertragungen entfernen</translation>
+        <translation type="obsolete">Alle Übertragungen entfernen</translation>
     </message>
     <message>
         <source>Cancel Transfer</source>
@@ -4202,6 +4202,10 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Time left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove all completed transfers</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

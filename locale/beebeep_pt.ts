@@ -2245,7 +2245,7 @@ Selecione um nome diferente.</translation>
         <translation>Configurações</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1084"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1087"/>
         <source>If a file already exists</source>
         <translation>Se um arquivo já existir</translation>
     </message>
@@ -2254,7 +2254,7 @@ Selecione um nome diferente.</translation>
         <translation type="obsolete">Mostrar apenas usuários ONLINE</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1090"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1093"/>
         <source>Generate automatic filename</source>
         <translation>Criar nome de arquivo automático</translation>
     </message>
@@ -2390,7 +2390,7 @@ Selecione um nome diferente.</translation>
         <translation>Mostrar apenas as ultimas %1 mensagens</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1100"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1079"/>
         <source>Prompt before downloading file</source>
         <translation>Confirmar antes de baixar arquivo</translation>
     </message>
@@ -2425,12 +2425,12 @@ Selecione um nome diferente.</translation>
         <translation>Use o modo RTL para mostrar o texto</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1104"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1113"/>
         <source>Use native file dialogs</source>
         <translation>Use diálogos de arquivos nativos</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1093"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1096"/>
         <source>Ask me</source>
         <translation>Me pergunte</translation>
     </message>
@@ -2797,7 +2797,7 @@ Selecione um nome diferente.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1113"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1108"/>
         <source>Always shows the progress of file transfer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2897,7 +2897,7 @@ Selecione um nome diferente.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1080"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1083"/>
         <source>Always download files into the folder with the user&apos;s name</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3582,7 +3582,7 @@ Selecione um nome diferente.</translation>
         <translation type="obsolete">O chat &apos;%1&apos; selecionado já tem um texto salvo. &lt;br /&gt; O que você deseja fazer com o texto salvo selecionado?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1087"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1090"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3223"/>
         <source>Overwrite</source>
         <translation>Sobrescrever</translation>
@@ -5228,6 +5228,11 @@ Selecione um nome diferente.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="68"/>
+        <source>Remove all completed transfers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/desktop/GuiTransferFile.cpp" line="127"/>
         <source>Completed</source>
         <translation>Competo</translation>
@@ -5277,9 +5282,8 @@ Selecione um nome diferente.</translation>
         <translation>Você deseja cancelar a transferência de%1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="68"/>
         <source>Remove all transfers</source>
-        <translation>Remover todas as transferências</translation>
+        <translation type="obsolete">Remover todas as transferências</translation>
     </message>
 </context>
 <context>

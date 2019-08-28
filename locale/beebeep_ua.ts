@@ -4106,7 +4106,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Remove all transfers</source>
-        <translation>Видалити всі передачі</translation>
+        <translation type="obsolete">Видалити всі передачі</translation>
     </message>
     <message>
         <source>Cancel Transfer</source>
@@ -4126,6 +4126,10 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Time left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove all completed transfers</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

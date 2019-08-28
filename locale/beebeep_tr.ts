@@ -2234,7 +2234,7 @@ Lütfen farklı bir isim seçin.</translation>
         <translation>Ayarlar</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1084"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1087"/>
         <source>If a file already exists</source>
         <translation>Dosya Zaten Varsa</translation>
     </message>
@@ -2243,7 +2243,7 @@ Lütfen farklı bir isim seçin.</translation>
         <translation type="obsolete">Sadece Bağlı Olan Kullanıcıları Göster</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1090"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1093"/>
         <source>Generate automatic filename</source>
         <translation>Otomatik Dosya Adı Oluştur</translation>
     </message>
@@ -2369,7 +2369,7 @@ Lütfen farklı bir isim seçin.</translation>
         <translation>Sadece Son %1 Mesajı Göster</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1100"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1079"/>
         <source>Prompt before downloading file</source>
         <translation>Dosyayı İndirmeden Önce Sor</translation>
     </message>
@@ -2404,12 +2404,12 @@ Lütfen farklı bir isim seçin.</translation>
         <translation>Metni Göstermek İçin RTL Modunu Kullan</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1104"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1113"/>
         <source>Use native file dialogs</source>
         <translation>Yerel Dosya İletişim Kutularını Kullan</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1093"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1096"/>
         <source>Ask me</source>
         <translation>Bana Sor</translation>
     </message>
@@ -2901,7 +2901,7 @@ Lütfen farklı bir isim seçin.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1113"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1108"/>
         <source>Always shows the progress of file transfer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3011,7 +3011,7 @@ Lütfen farklı bir isim seçin.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1080"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1083"/>
         <source>Always download files into the folder with the user&apos;s name</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3591,7 +3591,7 @@ Lütfen farklı bir isim seçin.</translation>
         <translation type="obsolete">Seçilen &apos;%1&apos; sohbeti zaten kayıtlı bir metindir.&lt;br /&gt;Seçilen kayıtlı metni ne yapmak istiyorsunuz?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1087"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1090"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3223"/>
         <source>Overwrite</source>
         <translation>Üzerine Yaz</translation>
@@ -5179,6 +5179,11 @@ Lütfen farklı bir isim seçin.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/desktop/GuiTransferFile.cpp" line="68"/>
+        <source>Remove all completed transfers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/desktop/GuiTransferFile.cpp" line="127"/>
         <source>Completed</source>
         <translation>Tamamlandı</translation>
@@ -5224,9 +5229,8 @@ Lütfen farklı bir isim seçin.</translation>
         <translation>%1 aktarımını iptal etmek istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiTransferFile.cpp" line="68"/>
         <source>Remove all transfers</source>
-        <translation>Tüm aktarımları kaldır</translation>
+        <translation type="obsolete">Tüm aktarımları kaldır</translation>
     </message>
 </context>
 <context>

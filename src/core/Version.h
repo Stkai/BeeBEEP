@@ -47,10 +47,10 @@ const char BEEBEEP_GA_TRACKING_ID[] = "UA-57878696-4";
 const char BEEBEEP_GA_URL[] = "https://www.google-analytics.com/collect";
 const char BEEBEEP_GA_EVENT_VERSION[] = "1";
 const char HUNSPELL_VERSION[] = "1.7.0";
-const char BEEBEEP_VERSION[] = "5.6.5";
+const char BEEBEEP_VERSION[] = "5.6.7";
 const int BEEBEEP_PROTO_VERSION = 77;
 const int BEEBEEP_SETTINGS_VERSION = 12;
-const int BEEBEEP_BUILD = 1210;
+const int BEEBEEP_BUILD = 1211;
 
 #endif // BEEBEEP_VERSION_H
 

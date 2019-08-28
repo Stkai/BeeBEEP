@@ -4116,7 +4116,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Remove all transfers</source>
-        <translation>移除所有傳輸</translation>
+        <translation type="obsolete">移除所有傳輸</translation>
     </message>
     <message>
         <source>Cancel Transfer</source>
@@ -4136,6 +4136,10 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Time left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove all completed transfers</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

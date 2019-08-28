@@ -4360,7 +4360,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Remove all transfers</source>
-        <translation>Cancella tutti i trasferimenti</translation>
+        <translation type="obsolete">Cancella tutti i trasferimenti</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -4381,6 +4381,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Time left</source>
         <translation>Attesa</translation>
+    </message>
+    <message>
+        <source>Remove all completed transfers</source>
+        <translation>Cancella tutti i trasferimenti completati</translation>
     </message>
 </context>
 <context>
