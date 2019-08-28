@@ -625,7 +625,7 @@ void Core::addListToSavedChats()
 
   if( bscl->unsentMessages().size() > 0 )
   {
-    if( Settings::instance().saveMessagesTimestamp().isValid() && bscl->unsentMessagesAuthCode() != MessageManager::instance().saveMessagesAuthCode() )
+    if( bscl->protocolVersion() > SAVE_MESSAGE_AUTH_CODE_PROTO_VERSION && Settings::instance().saveMessagesTimestamp().isValid() && bscl->unsentMessagesAuthCode() != MessageManager::instance().saveMessagesAuthCode() )
     {
       qWarning() << "Incorrect autorization code found in offline messages file";
       dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2" )
