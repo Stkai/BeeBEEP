@@ -2121,7 +2121,7 @@ QList<QByteArray> Protocol::splitByteArray( const QByteArray& byte_array, int nu
   return array_list;
 }
 
-void Protocol::hexToUnsignedChar(  const QByteArray& hex_byte_array, unsigned char* out_string, unsigned int len_out_string ) const
+void Protocol::hexToUnsignedChar( const QByteArray& hex_byte_array, unsigned char* out_string, unsigned int len_out_string ) const
 {
   // Thanks to Christophe David
   const char* hex_string = hex_byte_array.data();

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="uk_UA" sourcelanguage="en">
+<TS version="2.1" language="uk_UA" sourcelanguage="en">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -496,31 +496,31 @@
     </message>
     <message>
         <source>%1 User %2 cannot save unsent messages in path: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Користувач %2 не може зберегти невідправлені повідомлення по шляху: %3</translation>
     </message>
     <message>
         <source>%1 offline messages will be sent as soon as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Offline message will be sent to %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Офлайн повідомлення відправлені %1</translation>
     </message>
     <message>
         <source>%1 Do you need support? Visit the %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Вам потрібна підтримка? Відвідайте%2.</translation>
     </message>
     <message>
         <source>help page</source>
-        <translation type="unfinished"></translation>
+        <translation>Сторінка допомоги</translation>
     </message>
     <message>
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Офлайн-повідомлення, які ще не надіслані, мають неправильний код авторизації і вони не надсилаються.</translation>
     </message>
     <message>
         <source>Saved chats had an incorrect authorization code.</source>
-        <translation type="unfinished"></translation>
+        <translation>Збережені чати мають неправильний код авторизації.</translation>
     </message>
     <message>
         <source>Disconnecting</source>
@@ -574,7 +574,7 @@
     </message>
     <message>
         <source>Compressed</source>
-        <translation type="unfinished"></translation>
+        <translation>Стиснутий</translation>
     </message>
 </context>
 <context>
@@ -801,7 +801,7 @@
     </message>
     <message>
         <source>Do you want to send a screenshot?</source>
-        <translation>Ви хочете послать снимок экрана?</translation>
+        <translation>Ви хочете передати знімок экрану?</translation>
     </message>
     <message>
         <source>only the last %1 messages are shown</source>
@@ -941,7 +941,7 @@
     </message>
     <message>
         <source>Select All</source>
-        <translation type="obsolete">Вибрати все</translation>
+        <translation type="vanished">Вибрати все</translation>
     </message>
     <message>
         <source>Use key Return to make a carriage return</source>
@@ -965,7 +965,7 @@
     </message>
     <message>
         <source>Please select a file to save the messages of the chat.</source>
-        <translation type="obsolete">Будь ласка, виберіть файл для збереження повідомлень чату.</translation>
+        <translation type="vanished">Будь ласка, виберіть файл для збереження повідомлень чату.</translation>
     </message>
     <message>
         <source>Send a screenshot</source>
@@ -997,35 +997,35 @@
     </message>
     <message>
         <source>The loading of saved messages has not yet been completed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Завантаження збережених повідомлень ще не завершено.</translation>
     </message>
     <message>
         <source>Loading of saved messages...</source>
-        <translation type="unfinished"></translation>
+        <translation>Завантаження збережених повідомлень...</translation>
     </message>
     <message>
         <source>Ready.</source>
-        <translation type="unfinished"></translation>
+        <translation>Готово.</translation>
     </message>
     <message>
         <source>maximum number of messages to show reached</source>
-        <translation type="unfinished"></translation>
+        <translation>досягнута максимальна кількість повідомлень</translation>
     </message>
     <message>
         <source>Select all</source>
-        <translation type="unfinished"></translation>
+        <translation>Вибрати все</translation>
     </message>
     <message>
         <source>open %1 to read them all</source>
-        <translation type="unfinished"></translation>
+        <translation>відкрити%1, щоб прочитати все</translation>
     </message>
     <message>
         <source>the saved chat</source>
-        <translation type="unfinished"></translation>
+        <translation>записаний чат</translation>
     </message>
     <message>
         <source>Please select a file to save all the messages of the chat.</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка виберіть файл, щоб зберегти всі повідомлення чату.</translation>
     </message>
 </context>
 <context>
@@ -1094,7 +1094,7 @@
     </message>
     <message>
         <source>Click to send message or just hit enter</source>
-        <translation>Клацніть для відтправки повідомлення або просто нажміть Enter</translation>
+        <translation>Клацніть для відправки повідомлення або просто натисніть Enter</translation>
     </message>
 </context>
 <context>
@@ -1200,6 +1200,10 @@ Please select a different name.</source>
         <translation>Позначити повідомлення як важливе</translation>
     </message>
     <message>
+        <source>Send this message to all users individually</source>
+        <translation type="vanished">Надіслати це повідомлення всім користувачам індивідуально</translation>
+    </message>
+    <message>
         <source>Send this message to all recipients individually</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1252,7 +1256,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>It is preferable to use square images to avoid display problems.</source>
-        <translation type="unfinished"></translation>
+        <translation>використовуйте переважно  квадратні зображення, щоб уникнути проблем із відображенням.</translation>
     </message>
 </context>
 <context>
@@ -1333,7 +1337,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Show the ShareBox</source>
-        <translation type="obsolete">Показати сховище</translation>
+        <translation type="vanished">Показати сховище</translation>
     </message>
     <message>
         <source>%1 is not available</source>
@@ -1353,7 +1357,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Show the BeeBOX</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати BeeBOX</translation>
     </message>
 </context>
 <context>
@@ -1489,7 +1493,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Select All</source>
-        <translation type="obsolete">Вибрати все</translation>
+        <translation type="vanished">Вибрати все</translation>
     </message>
     <message>
         <source>Show the timestamp</source>
@@ -1497,7 +1501,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Select all</source>
-        <translation type="unfinished"></translation>
+        <translation>Вибрати усе</translation>
     </message>
 </context>
 <context>
@@ -1649,7 +1653,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Select All</source>
-        <translation type="obsolete">Вибрати все</translation>
+        <translation type="vanished">Вибрати все</translation>
     </message>
     <message>
         <source>Open file</source>
@@ -1665,7 +1669,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Select all</source>
-        <translation type="unfinished"></translation>
+        <translation>Вибрати усе</translation>
     </message>
 </context>
 <context>
@@ -1736,7 +1740,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Sound</source>
-        <translation type="obsolete">Звук</translation>
+        <translation type="vanished">Звук</translation>
     </message>
     <message>
         <source>Users</source>
@@ -1772,7 +1776,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Fact of the day</source>
-        <translation type="obsolete">Факт дня</translation>
+        <translation type="vanished">Факт дня</translation>
     </message>
     <message>
         <source>By unread messages</source>
@@ -1856,7 +1860,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Workgroups</source>
-        <translation type="obsolete">Рабочі групи</translation>
+        <translation type="vanished">Рабочі групи</translation>
     </message>
     <message>
         <source>Download plugins...</source>
@@ -1936,7 +1940,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Secure Lan Messenger</source>
-        <translation type="obsolete">Безпечний мережевий мессенжер</translation>
+        <translation type="vanished">Безпечний мережевий мессенжер</translation>
     </message>
     <message>
         <source>Escape key minimize to tray icon</source>
@@ -1968,7 +1972,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Chat histories</source>
-        <translation type="obsolete">Історія чатів</translation>
+        <translation type="vanished">Історія чатів</translation>
     </message>
     <message>
         <source>Unable to open %1</source>
@@ -2032,7 +2036,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Do you want to delete this saved chat?</source>
-        <translation type="obsolete">Ви бажаєте видалити цей збережений чат?</translation>
+        <translation type="vanished">Ви бажаєте видалити цей збережений чат?</translation>
     </message>
     <message>
         <source>Save messages</source>
@@ -2400,7 +2404,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Tip of the day</source>
-        <translation type="obsolete">Підказка дня</translation>
+        <translation type="vanished">Підказка дня</translation>
     </message>
     <message>
         <source>Set your status to away automatically</source>
@@ -2556,7 +2560,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Show only the online users</source>
-        <translation type="obsolete">Показати тільки активних користувачів</translation>
+        <translation type="vanished">Показати тільки активних користувачів</translation>
     </message>
     <message>
         <source>Dictionary selected: %1</source>
@@ -2812,90 +2816,86 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Save unsent messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Зберегти невідправлені повідомлення</translation>
     </message>
     <message>
         <source>Saving unsent messages may fail if &apos;Save users&apos; and &apos;Save groups&apos; options are not enabled. Do you want to enable them?</source>
-        <translation type="unfinished"></translation>
+        <translation>Збереження невідправлених повідомлень може не вдатися, якщо параметри &quot;Зберегти користувачів&quot; та &quot;Зберегти групи&quot; не ввімкнено. Ви хочете їх включити?</translation>
     </message>
     <message>
         <source>Test your network</source>
-        <translation type="unfinished"></translation>
+        <translation>Тестування вашої мережі</translation>
     </message>
     <message>
         <source>Development version</source>
-        <translation type="unfinished"></translation>
+        <translation>Версія розробника</translation>
     </message>
     <message>
         <source>Discover the fact of the day...</source>
-        <translation type="unfinished"></translation>
+        <translation>Дізнайтеся факт дня...</translation>
     </message>
     <message>
         <source>Save file transfer messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Зберегти повідомлення про передачу файлів</translation>
     </message>
     <message>
         <source>Save system messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Зберегти системні повідомлення</translation>
     </message>
     <message>
         <source>There will be no saving of &apos;system&apos; and &apos;file transfer&apos; messages if this option is disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Збереження повідомлень &apos;системні&apos; та &apos;передача файлів&apos; не буде збережено, якщо цю опцію вимкнено.</translation>
     </message>
     <message>
         <source>Save maximum %1 lines of chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Збережено макксимально %1 рядків чату</translation>
     </message>
     <message>
         <source>Clean the cache from items older than %1 days</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистка кешу від елементів старіших бульше %1 днів</translation>
     </message>
     <message>
         <source>Please select the number of days that items (such as images) can remain cached (current: %1, never clear: -1, always clear: 0).</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть кількість днів, скільки будуть зберігатись  елементи (наприклад, зображення) у кешованому режимі (поточний стан:%1, ніколи: -1, завжди: 0).</translation>
     </message>
     <message>
         <source>Show tips...</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати поради...</translation>
     </message>
     <message>
         <source>Read FAQ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Прочитайте поширені запитання...</translation>
     </message>
     <message>
         <source>(current: %1, default: %2, all: -1, none: 0)</source>
-        <translation type="unfinished"></translation>
+        <translation>(поточне: %1, по замовчуванню:%2, усі: -1, жодного: 0)</translation>
     </message>
     <message>
         <source>Saved chats</source>
-        <translation type="unfinished"></translation>
+        <translation>Збережені чати</translation>
     </message>
     <message>
         <source>Do you want to delete saved chat with %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви хочете видалити збережений чат з %1?</translation>
     </message>
     <message>
         <source>Please select the maximum number of lines to be saved in the chat (current: %1).</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка виберіть максимальну кількість стрічок для запису цього чату (поточне значення: %1).</translation>
     </message>
     <message>
         <source>There are no messages saved in the chat with %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>У чаті немає збережених повідомлень із %1.</translation>
     </message>
     <message>
-        <source>Always download files into the folder with the user&apos;s name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The files will be downloaded to the folder:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Notifications</source>
+        <source>There are still files that have not been transferred and will be interrupted. Do you want to disconnect anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Interface</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your workgroups</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2907,15 +2907,11 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Your workgroups</source>
+        <source>Always download files into the folder with the user&apos;s name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Option enabled.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Option disabled.</source>
+        <source>Notifications</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2927,23 +2923,31 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Please select the maximum number of files you can queue up for the transfer (current: %1).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Option enabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Option disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add up to %1 files to the transfer queue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The files will be downloaded to the folder:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Restart connection now</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Restart later manually</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>There are still files that have not been transferred and will be interrupted. Do you want to disconnect anyway?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Please select the maximum number of files you can queue up for the transfer (current: %1).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add up to %1 files to the transfer queue</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2971,11 +2975,11 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Select All</source>
-        <translation type="obsolete">Вибрати все</translation>
+        <translation type="vanished">Вибрати все</translation>
     </message>
     <message>
         <source>Select all</source>
-        <translation type="unfinished"></translation>
+        <translation>Вибрати все</translation>
     </message>
 </context>
 <context>
@@ -3021,59 +3025,59 @@ Please select a different name.</source>
     <name>GuiNetworkTest</name>
     <message>
         <source>Your network parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметри Вашої мережі</translation>
     </message>
     <message>
         <source>IP Address</source>
-        <translation type="unfinished">IP-адреса</translation>
+        <translation>IP-адреса</translation>
     </message>
     <message>
         <source>Message port</source>
-        <translation type="unfinished"></translation>
+        <translation>Порт повідомлень</translation>
     </message>
     <message>
         <source>File transfer port</source>
-        <translation type="unfinished"></translation>
+        <translation>Порт передачі файлів</translation>
     </message>
     <message>
         <source>The host address entered is not valid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Адреса вузля введена неправильно.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>OК</translation>
     </message>
     <message>
         <source>The port entered is not valid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Порт введено не правильно.</translation>
     </message>
     <message>
         <source>Connecting to %1</source>
-        <translation type="unfinished"></translation>
+        <translation>З’єднання з %1</translation>
     </message>
     <message>
         <source>Connection to %1 is active.</source>
-        <translation type="unfinished"></translation>
+        <translation>З’єднання з %1 активно.</translation>
     </message>
     <message>
         <source>Connection to %1 has error #%2: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>З’єднання з %1 з помилками #%2: %3</translation>
     </message>
     <message>
         <source>Connection to %1 has been closed.</source>
-        <translation type="unfinished"></translation>
+        <translation>З’єднання з %1 закрито.</translation>
     </message>
     <message>
         <source>Test your network</source>
-        <translation type="unfinished"></translation>
+        <translation>Тестування вашої мережі</translation>
     </message>
     <message>
         <source>Enter the host address and the port you want to test.</source>
-        <translation type="unfinished"></translation>
+        <translation>Введіть адресу вузла та порт для тестування.</translation>
     </message>
     <message>
         <source>It is not possible to perform the test if you are not connected to the BeeBEEP network.</source>
-        <translation type="unfinished"></translation>
+        <translation>Виконання тесту неможливо, якщо ви не підключені до мережі BeeBEEP.</translation>
     </message>
 </context>
 <context>
@@ -3084,23 +3088,23 @@ Please select a different name.</source>
     </message>
     <message>
         <source>IP Address</source>
-        <translation type="unfinished">IP-адреса</translation>
+        <translation>IP-адреса</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished">Порт</translation>
+        <translation>Порт</translation>
     </message>
     <message>
         <source>Test connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Перевірка З’єднання</translation>
     </message>
     <message>
         <source>Clear report</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистити звіт</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Закрити</translation>
+        <translation>Закрити</translation>
     </message>
 </context>
 <context>
@@ -3354,11 +3358,11 @@ Please select a different name.</source>
     </message>
     <message>
         <source>%1 not found in chat.</source>
-        <translation type="obsolete">%1 не знайдено в чаті.</translation>
+        <translation type="vanished">%1 не знайдено в чаті.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="obsolete">Видалити</translation>
+        <translation type="vanished">Видалити</translation>
     </message>
     <message>
         <source>Copy to clipboard</source>
@@ -3370,7 +3374,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Find text in chat</source>
-        <translation type="obsolete">Найти текст в чаті</translation>
+        <translation type="vanished">Найти текст в чаті</translation>
     </message>
     <message>
         <source>Select All</source>
@@ -3382,55 +3386,55 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Right click to open menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Правий клік миші для відкриття меню</translation>
     </message>
     <message>
         <source>Show the toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати панель інструментів</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished">Пошук</translation>
+        <translation>Пошук</translation>
     </message>
     <message>
         <source>keyword</source>
-        <translation type="unfinished">ключове слово</translation>
+        <translation>ключове слово</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished">Знайти</translation>
+        <translation>Знайти</translation>
     </message>
     <message>
         <source>Case sensitive</source>
-        <translation type="unfinished">З урахуванням регістру</translation>
+        <translation>З урахуванням регістру</translation>
     </message>
     <message>
         <source>Whole word</source>
-        <translation type="unfinished">Слово повністю</translation>
+        <translation>Слово повністю</translation>
     </message>
     <message>
         <source>Save as</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Clear messages</source>
-        <translation type="unfinished">Очистити повідомлення</translation>
+        <translation>Очистити повідомлення</translation>
     </message>
     <message>
         <source>Saved chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Збережений чат</translation>
     </message>
     <message>
         <source>end of messages</source>
-        <translation type="unfinished"></translation>
+        <translation>кінець повідомлення</translation>
     </message>
     <message>
         <source>%1 not found</source>
-        <translation type="unfinished">%1 не знайдено</translation>
+        <translation>%1 не знайдено</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>OК</translation>
     </message>
     <message>
         <source>Please select a file to save the messages of the chat.</source>
@@ -3438,11 +3442,11 @@ Please select a different name.</source>
     </message>
     <message>
         <source>%1: save completed.</source>
-        <translation type="unfinished">%1: збереження завершено.</translation>
+        <translation>%1: збереження завершено.</translation>
     </message>
     <message>
         <source>Please select a file where to save the messages showed in this window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка виберіть файл, щоб зберегти повідомлення показні у цьому вікні.</translation>
     </message>
 </context>
 <context>
@@ -3559,7 +3563,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Hide this window before capture screenshot</source>
-        <translation>Приховати це вікно для зняття знімка екрана</translation>
+        <translation>Приховати це вікно зі знімку екрану</translation>
     </message>
     <message>
         <source>Capture screen</source>
@@ -3616,7 +3620,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>%1 - Select the ShareBox folder</source>
-        <translation type="obsolete">%1 - Виберіть папку ShareBox</translation>
+        <translation type="vanished">%1 - Виберіть папку ShareBox</translation>
     </message>
     <message>
         <source>%1: access denied.</source>
@@ -3640,15 +3644,15 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Update ShareBox</source>
-        <translation type="obsolete">Оновити ShareBox</translation>
+        <translation type="vanished">Оновити ShareBox</translation>
     </message>
     <message>
         <source>Update your ShareBox</source>
-        <translation type="obsolete">Оновити ваш ShareBox</translation>
+        <translation type="vanished">Оновити ваш ShareBox</translation>
     </message>
     <message>
         <source>Create folder in ShareBox</source>
-        <translation type="obsolete">Створити папку в сховищі</translation>
+        <translation type="vanished">Створити папку в сховищі</translation>
     </message>
     <message>
         <source>%1 already exists.</source>
@@ -3668,39 +3672,39 @@ Please select a different name.</source>
     </message>
     <message>
         <source>ShareBox path does not exist. Please select a valid folder.</source>
-        <translation type="obsolete">Путь до ShareBox не існує. Виберіть допустиму  папку.</translation>
+        <translation type="vanished">Шлях до Cховища не існує. Виберіть допустиму  папку.</translation>
     </message>
     <message>
         <source>ShareBox</source>
-        <translation type="obsolete">ShareBox</translation>
+        <translation type="vanished">Сховище (ShareBox)</translation>
     </message>
     <message>
         <source>Create folder in your ShareBox</source>
-        <translation type="obsolete">Створити папку в вашем хранилище</translation>
+        <translation type="vanished">Створити папку в вашому Cховищі</translation>
     </message>
     <message>
         <source>Update your BeeBOX</source>
-        <translation type="unfinished"></translation>
+        <translation>Оновити ваш BeeBox</translation>
     </message>
     <message>
         <source>Create folder in your BeeBOX</source>
-        <translation type="unfinished"></translation>
+        <translation>Створити папку в вашому BeeBOX</translation>
     </message>
     <message>
         <source>Update BeeBOX</source>
-        <translation type="unfinished"></translation>
+        <translation>Оновити BeeBox</translation>
     </message>
     <message>
         <source>Create folder in BeeBOX</source>
-        <translation type="unfinished"></translation>
+        <translation>Створити папку в BeeBOX</translation>
     </message>
     <message>
         <source>BeeBOX path does not exist. Please select a valid folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Шлях до BeeBox не існує. Виберіть допустиму  папку.</translation>
     </message>
     <message>
         <source>%1 - Select the BeeBOX folder</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - Вибрана папка BeeBox</translation>
     </message>
 </context>
 <context>
@@ -3734,11 +3738,11 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Enable my ShareBox</source>
-        <translation type="obsolete">Включити мой ShareBox</translation>
+        <translation type="vanished">Включити мій ShareBox</translation>
     </message>
     <message>
         <source>Enable my BeeBOX</source>
-        <translation type="unfinished"></translation>
+        <translation>Включити мій BeeBox</translation>
     </message>
 </context>
 <context>
@@ -3982,7 +3986,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Double click to open %1</source>
-        <translation>Подвійне клацання для відткриття %1</translation>
+        <translation>Подвійне клацання для відкриття %1</translation>
     </message>
     <message>
         <source>All Files</source>
@@ -4106,7 +4110,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Remove all transfers</source>
-        <translation type="obsolete">Видалити всі передачі</translation>
+        <translation type="vanished">Видалити всі передачі</translation>
     </message>
     <message>
         <source>Cancel Transfer</source>
@@ -4121,15 +4125,15 @@ Please select a different name.</source>
         <translation>Очікування</translation>
     </message>
     <message>
-        <source>of</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Time left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Remove all completed transfers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>of</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4462,12 +4466,8 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Yes</source>
-        <translation type="obsolete">Так</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">Ні</translation>
+        <source>Right click to open menu</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Don&apos;t you want to be part of these workgroups anymore?</source>
@@ -4479,10 +4479,6 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Right click to open menu</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4556,7 +4552,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>%1 is %2</source>
-        <translation>%1 це %2</translation>
+        <translation>%1 - %2</translation>
     </message>
     <message>
         <source>Click to open chat with all local users</source>
@@ -4664,31 +4660,31 @@ Please select a different name.</source>
     </message>
     <message>
         <source>unsent messages</source>
-        <translation type="unfinished"></translation>
+        <translation>непередані повідомлення</translation>
     </message>
     <message>
         <source>The connection to %1 was not successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>З’єднання з %1 не вдалося.</translation>
     </message>
     <message>
         <source>The tested network address %1 is not present among the available addresses of the network interface to which the connection has been made.</source>
-        <translation type="unfinished"></translation>
+        <translation>Тестована мережева адреса %1 відсутня серед доступних адрес мережевого інтерфейсу, з яким встановлено з&apos;єднання.</translation>
     </message>
     <message>
         <source>The connection to host address %1 was successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>З’єднання з вузлом %1 успішне.</translation>
     </message>
     <message>
         <source>The port tested by the connection is %1 but the one that answered is %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Тестований порт з’єднання %1, проте той, що відповів %2.</translation>
     </message>
     <message>
         <source>The connection to port %1 was successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>З’єднання з портом %1 успішне.</translation>
     </message>
     <message>
         <source>Unable to complete the test with an invalid network address.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможливо завершити тестування з неправильною мережевою адресою.</translation>
     </message>
     <message>
         <source>others</source>
@@ -4736,180 +4732,180 @@ Please select a different name.</source>
     <name>Tips</name>
     <message>
         <source>&lt;i&gt;Wonder is the beginning of wisdom.&lt;/i&gt; (Socrates)</source>
-        <translation type="obsolete">&lt;i&gt;Здивування - це початок мудрості.&lt;/i&gt; (Сократ)</translation>
+        <translation type="vanished">&lt;i&gt;Здивування - це початок мудрості.&lt;/i&gt; (Сократ)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Intellectuals solve problems; geniuses prevent them.&lt;/i&gt; (Albert Einstein)</source>
-        <translation type="obsolete">&lt;i&gt;Інтелектуали вирішують проблеми, генії ж їх попереджають.&lt;/i&gt; (Альберт Ейнштейн)</translation>
+        <translation type="vanished">&lt;i&gt;Інтелектуали вирішують проблеми, генії ж їх попереджають.&lt;/i&gt; (Альберт Ейнштейн)</translation>
     </message>
     <message>
         <source>You can search previous sent message in the history using the CTRL+Up e CTRL+Down keys.</source>
-        <translation type="obsolete">Ви можете знайти віправлене повідомлення в історії використовуйте клавіші CTRL+Вгору і CTRL+Донизу.</translation>
+        <translation type="vanished">Ви можете знайти віправлене повідомлення в історії використовуйте клавіші CTRL+Вгору і CTRL+Донизу.</translation>
     </message>
     <message>
         <source>If you want a &lt;b&gt;bold text&lt;/b&gt; write a *bold text*.</source>
-        <translation type="obsolete">Якщо ви хочете &lt;b&gt;напівжирний текст&lt;/b&gt;, наберить *bold text*.</translation>
+        <translation type="vanished">Якщо ви хочете &lt;b&gt;напівжирний текст&lt;/b&gt;, наберить *bold text*.</translation>
     </message>
     <message>
         <source>&lt;i&gt;All truths are easy to understand once they are discovered; the point is to discover them.&lt;/i&gt; (Galileo Galilei)</source>
-        <translation type="obsolete">&lt;i&gt;Всі істини легко зрозуміти після їх виявлення; суть полягає в тому, щоб виявити їх.&lt;/i&gt; (Галілео Галілей)</translation>
+        <translation type="vanished">&lt;i&gt;Всі істини легко зрозуміти після їх виявлення; суть полягає в тому, щоб виявити їх.&lt;/i&gt; (Галілео Галілей)</translation>
     </message>
     <message>
         <source>&lt;i&gt;We can not stop wishing our wishes.&lt;/i&gt; (Arthur Schopenhauer)</source>
-        <translation type="obsolete">&lt;i&gt;Ми не можемо перестати бажати наші бажання.&lt;/i&gt; (Артур Шопенгауер)</translation>
+        <translation type="vanished">&lt;i&gt;Ми не можемо перестати бажати наші бажання.&lt;/i&gt; (Артур Шопенгауер)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Every day in Africa a gazelle wakes up. It knows it must run faster than the fastest lion or it will be killed. Every morning a lion wakes up. It knows that it must outrun the slowest gazelle or it will starve to death. It doesn&apos;t matter whether you are a lion or a gazelle. When the sun comes up, you better be running.&lt;/i&gt; (Abe Gubegna)</source>
-        <translation type="obsolete">&lt;i&gt;Щоранку в Африці прокидається газель - вона знає, що мусить бігти швидше, аніж найпрудкіший лев, інакше вона загине. Щоранку в Африці прокидається лев - він знає, що має бігти швидше, аніж найповільніша газель, інакше помре з голоду. Не важливо, лев ти чи газель - коли зійде сонце, ти мусиш бігти
+        <translation type="vanished">&lt;i&gt;Щоранку в Африці прокидається газель - вона знає, що мусить бігти швидше, аніж найпрудкіший лев, інакше вона загине. Щоранку в Африці прокидається лев - він знає, що має бігти швидше, аніж найповільніша газель, інакше помре з голоду. Не важливо, лев ти чи газель - коли зійде сонце, ти мусиш бігти
 .&lt;/i&gt; (Крістофер Макдугал)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Attitude is a little thing that makes a big difference.&lt;/i&gt; (Winston Churchill)</source>
-        <translation type="obsolete">&lt;i&gt;Позиция - це маленька річ, яка дає великий відрив.&lt;/i&gt; (Уінстон Черчілль)</translation>
+        <translation type="vanished">&lt;i&gt;Позиция - це маленька річ, яка дає великий відрив.&lt;/i&gt; (Уінстон Черчілль)</translation>
     </message>
     <message>
         <source>&lt;i&gt;If a program is useful, it will have to be changed.&lt;/i&gt; (Law of Computer Programming)</source>
-        <translation type="obsolete">&lt;i&gt;Якщо програма корисна, она повинна бути змінена.&lt;/i&gt; (Закон компютерного программування)</translation>
+        <translation type="vanished">&lt;i&gt;Якщо програма корисна, она повинна бути змінена.&lt;/i&gt; (Закон компютерного программування)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Who will guard the guards themselves?&lt;/i&gt; (Decimus Junius Juvenal)</source>
-        <translation type="obsolete">&lt;i&gt;Хто стерегтитиме самих сторожів?&lt;/i&gt; (Децим Юній Ювенал)</translation>
+        <translation type="vanished">&lt;i&gt;Хто стерегтитиме самих сторожів?&lt;/i&gt; (Децим Юній Ювенал)</translation>
     </message>
     <message>
         <source>&lt;i&gt;What does not destroy me, makes me strong.&lt;/i&gt; (Friedrich Nietzsche)</source>
-        <translation type="obsolete">&lt;i&gt;Що не вбиває мене, то робить мене сильніше.&lt;/i&gt; (Фридріх Ніцше)</translation>
+        <translation type="vanished">&lt;i&gt;Що не вбиває мене, то робить мене сильніше.&lt;/i&gt; (Фридріх Ніцше)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Everything you can imagine is real.&lt;/i&gt; (Pablo Picasso)</source>
-        <translation type="obsolete">&lt;i&gt;Все що ви можете уявити - реально.&lt;/i&gt; (Пабло Пікассо)</translation>
+        <translation type="vanished">&lt;i&gt;Все що ви можете уявити - реально.&lt;/i&gt; (Пабло Пікассо)</translation>
     </message>
     <message>
         <source>&lt;i&gt;The only man who never makes a mistake is the man who never does anything.&lt;/i&gt; (Theodore Roosevelt)</source>
-        <translation type="obsolete">&lt;i&gt;Людина, яка ніколи не робить помилки, - це людина, яка ніколи нічого не робить.&lt;/i&gt; (Теодор Рузвельт)</translation>
+        <translation type="vanished">&lt;i&gt;Людина, яка ніколи не робить помилки, - це людина, яка ніколи нічого не робить.&lt;/i&gt; (Теодор Рузвельт)</translation>
     </message>
     <message>
         <source>&lt;i&gt;A different language is a different vision of life.&lt;/i&gt; (Federico Fellini)</source>
-        <translation type="obsolete">&lt;i&gt;Інша мова - інше бачення життя.&lt;/i&gt; (Федеріко Фелліні)</translation>
+        <translation type="vanished">&lt;i&gt;Інша мова - інше бачення життя.&lt;/i&gt; (Федеріко Фелліні)</translation>
     </message>
     <message>
         <source>You can disable message notification from a group right clicking on its name on the list.</source>
-        <translation type="obsolete">Ви можете відключити сповіщення про повідомлення від групи, клацнувши правою кнопкою на ній в списку.</translation>
+        <translation type="vanished">Ви можете відключити сповіщення про повідомлення від групи, клацнувши правою кнопкою на ній в списку.</translation>
     </message>
     <message>
         <source>&lt;i&gt;Stay hungry, stay foolish.&lt;/i&gt; (Steve Jobs)</source>
-        <translation type="obsolete">&lt;i&gt;Залишайтеся спраглими, залишайтеся навіженими&lt;/i&gt; (Стів Джобс)</translation>
+        <translation type="vanished">&lt;i&gt;Залишайтеся спраглими, залишайтеся навіженими&lt;/i&gt; (Стів Джобс)</translation>
     </message>
     <message>
         <source>If you want an &lt;u&gt;underlined text&lt;/u&gt; write a _underlined text_.</source>
-        <translation type="obsolete">Якщо ви хочете &lt;u&gt;підкреслений текст&lt;/u&gt;, наберіть _underlined text_.</translation>
+        <translation type="vanished">Якщо ви хочете &lt;u&gt;підкреслений текст&lt;/u&gt;, наберіть _underlined text_.</translation>
     </message>
     <message>
         <source>&lt;i&gt;Patience is also a form of action.&lt;/i&gt; (Auguste Rodin)</source>
-        <translation type="obsolete">&lt;i&gt;Терпіння - це також форма действия.&lt;/i&gt; (Огюст Роден)</translation>
+        <translation type="vanished">&lt;i&gt;Терпіння - це також форма действия.&lt;/i&gt; (Огюст Роден)</translation>
     </message>
     <message>
         <source>You can switch between chats with CTRL+TAB if there are new messages availables.</source>
-        <translation type="obsolete">Ви можете переключатись між чатами за допомогою CTRL+TAB, якщо є нові доступні повідомлення.</translation>
+        <translation type="vanished">Ви можете переключатись між чатами за допомогою CTRL+TAB, якщо є нові доступні повідомлення.</translation>
     </message>
     <message>
         <source>&lt;i&gt;I am not young enough to know everything.&lt;/i&gt; (Oscar Wilde)</source>
-        <translation type="obsolete">&lt;i&gt;Я не настільки молодий, щоб знати все.&lt;/i&gt; (Оскар Уайлд)</translation>
+        <translation type="vanished">&lt;i&gt;Я не настільки молодий, щоб знати все.&lt;/i&gt; (Оскар Уайлд)</translation>
     </message>
     <message>
         <source>You can select multiple files from network shares and download them simultaneously with a right click.</source>
-        <translation type="obsolete">Ви можете вибрати декілька файлів з загальнодоступних в мережі і завантажувати їх одночасно за допомогою правого клацання мишею.</translation>
+        <translation type="vanished">Ви можете вибрати декілька файлів з загальнодоступних в мережі і завантажувати їх одночасно за допомогою правого клацання мишею.</translation>
     </message>
     <message>
         <source>&lt;i&gt;Difficulties are things that show a person what they are.&lt;/i&gt; (Epictetus)</source>
-        <translation type="obsolete">&lt;i&gt;Труднощі - це речі, які показують людину, як вона є.&lt;/i&gt; (Эпіктет)</translation>
+        <translation type="vanished">&lt;i&gt;Труднощі - це речі, які показують людину, як вона є.&lt;/i&gt; (Эпіктет)</translation>
     </message>
     <message>
         <source>If you want an &lt;i&gt;italic text&lt;/i&gt; write a /italic text/.</source>
-        <translation type="obsolete">Якщо ви хочете &lt;i&gt;нахилений текст&lt;/i&gt;, наберіть /italic text/.</translation>
+        <translation type="vanished">Якщо ви хочете &lt;i&gt;нахилений текст&lt;/i&gt;, наберіть /italic text/.</translation>
     </message>
     <message>
         <source>You can drop files to active chat and send them to members.</source>
-        <translation type="obsolete">Ви можете перетягнути файли в активний чат і відправити їх участникам.</translation>
+        <translation type="vanished">Ви можете перетягнути файли в активний чат і відправити їх участникам.</translation>
     </message>
     <message>
         <source>&lt;i&gt;Free is that mind guided by the fantasy.&lt;/i&gt; (Marco Mastroddi)</source>
-        <translation type="obsolete">&lt;i&gt;Свобода - це розум, який керується фантазією.&lt;/i&gt; (Marco Mastroddi)</translation>
+        <translation type="vanished">&lt;i&gt;Свобода - це розум, який керується фантазією.&lt;/i&gt; (Marco Mastroddi)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Dum loquimur fugerit invida aetas: carpe diem, quam minimum credula postero&lt;/i&gt; (Orazio)</source>
-        <translation type="obsolete">&lt;i&gt;Жити кожен день із задоволенням, шукаючи позитивні емоції у всьому і не відкладати повнокровне життя на невизначене, невідоме майбутнє.&lt;/i&gt; (Гораціо)</translation>
+        <translation type="vanished">&lt;i&gt;Жити кожен день із задоволенням, шукаючи позитивні емоції у всьому і не відкладати повнокровне життя на невизначене, невідоме майбутнє.&lt;/i&gt; (Гораціо)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Fear is the path to the dark side.&lt;/i&gt; (Joda)</source>
-        <translation type="obsolete">&lt;i&gt;Страх - це шлях на темную сторону.&lt;/i&gt; (Йода)</translation>
+        <translation type="vanished">&lt;i&gt;Страх - це шлях на темную сторону.&lt;/i&gt; (Йода)</translation>
     </message>
     <message>
         <source>&lt;i&gt;A man&apos;s character is his fate.&lt;/i&gt; (Eraclitus)</source>
-        <translation type="obsolete">&lt;i&gt;Характер людини - це его доля.&lt;/i&gt; (Эраклитус)</translation>
+        <translation type="vanished">&lt;i&gt;Характер людини - це его доля.&lt;/i&gt; (Эраклитус)</translation>
     </message>
     <message>
         <source>&lt;i&gt;A home without books is a body without soul.&lt;/i&gt; (Marcus Tullius Cicero)</source>
-        <translation type="obsolete">&lt;i&gt;Домівка без книг - це телі без душі.&lt;/i&gt; (Марк Туллій Ціцерон)</translation>
+        <translation type="vanished">&lt;i&gt;Домівка без книг - це телі без душі.&lt;/i&gt; (Марк Туллій Ціцерон)</translation>
     </message>
     <message>
         <source>&lt;i&gt;A lack of doubt leads to a lack of creativity.&lt;/i&gt; (Evert Jan Ouweneel)</source>
-        <translation type="obsolete">&lt;i&gt;Відсутність сумнівів призводить до відсутності творчості.&lt;/i&gt; (Evert Jan Ouweneel)</translation>
+        <translation type="vanished">&lt;i&gt;Відсутність сумнівів призводить до відсутності творчості.&lt;/i&gt; (Evert Jan Ouweneel)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Okay, Houston, we&apos;ve had a problem here.&lt;/i&gt; (John L. Swigert)</source>
-        <translation type="obsolete">&lt;i&gt;Окей, Хьюстон, у нас тут проблема.&lt;/i&gt; (Джон Леонард Суайгер)</translation>
+        <translation type="vanished">&lt;i&gt;Окей, Хьюстон, у нас тут проблема.&lt;/i&gt; (Джон Леонард Суайгер)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Necessity is the last and strongest weapon.&lt;/i&gt; (Titus Livius)</source>
-        <translation type="obsolete">&lt;i&gt;Нужда - це остання і найсильніша зброя.&lt;/i&gt; (Тіт Лівій)</translation>
+        <translation type="vanished">&lt;i&gt;Нужда - це остання і найсильніша зброя.&lt;/i&gt; (Тіт Лівій)</translation>
     </message>
     <message>
         <source>&lt;i&gt;No wise man ever wished to be younger.&lt;/i&gt; (Jonathan Swift)</source>
-        <translation type="obsolete">&lt;i&gt;Нерозумна людина постійно бажає бути молодшою.&lt;/i&gt; (Джонатан Свіфт)</translation>
+        <translation type="vanished">&lt;i&gt;Нерозумна людина постійно бажає бути молодшою.&lt;/i&gt; (Джонатан Свіфт)</translation>
     </message>
     <message>
         <source>&lt;i&gt;There is always one more bug.&lt;/i&gt; (Lubarsky&apos;s Law)</source>
-        <translation type="obsolete">&lt;i&gt;Там завжди є ще один баг.&lt;/i&gt; (Lubarsky&apos;s Law)</translation>
+        <translation type="vanished">&lt;i&gt;Там завжди є ще один баг.&lt;/i&gt; (Lubarsky&apos;s Law)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Life without the courage for death is slavery.&lt;/i&gt; (Lucius Annaeus Seneca)</source>
-        <translation type="obsolete">&lt;i&gt;Життя без мужності до смерті - це рабство.&lt;/i&gt; (Луцій Анней Сенека)</translation>
+        <translation type="vanished">&lt;i&gt;Життя без мужності до смерті - це рабство.&lt;/i&gt; (Луцій Анней Сенека)</translation>
     </message>
     <message>
         <source>&lt;i&gt;A journey of a thousand miles begins with a single step.&lt;/i&gt; (Confucius)</source>
-        <translation type="obsolete">&lt;i&gt;Подорож в тисячу миль починаєтся з одного кроку.&lt;/i&gt; (Конфуцій)</translation>
+        <translation type="vanished">&lt;i&gt;Подорож в тисячу миль починаєтся з одного кроку.&lt;/i&gt; (Конфуцій)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Old-aged people are not wise, they are simply careful.&lt;/i&gt; (Ernest Hemingway)</source>
-        <translation type="obsolete">&lt;i&gt;Люди похилого віку не мудрі, вони просто обережні.&lt;/i&gt; (Эрнест Хемінгуэй)</translation>
+        <translation type="vanished">&lt;i&gt;Люди похилого віку не мудрі, вони просто обережні.&lt;/i&gt; (Эрнест Хемінгуэй)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Truth prevails where opinions are free.&lt;/i&gt; (Thomas Paine)</source>
-        <translation type="obsolete">&lt;i&gt;Правда переважає там, где думки вільні.&lt;/i&gt; (Томас Пейн)</translation>
+        <translation type="vanished">&lt;i&gt;Правда переважає там, где думки вільні.&lt;/i&gt; (Томас Пейн)</translation>
     </message>
     <message>
         <source>&lt;i&gt;Second star to the right, and straight on till morning.&lt;/i&gt; (Peter Pan)</source>
-        <translation type="obsolete">&lt;i&gt;Друга зірка направо і прямо до ранку.&lt;/i&gt; (Питер Пэн)</translation>
+        <translation type="vanished">&lt;i&gt;Друга зірка направо і прямо до ранку.&lt;/i&gt; (Питер Пэн)</translation>
     </message>
     <message>
         <source>&lt;i&gt;I&apos;ve seen things you people wouldn&apos;t believe...&lt;/i&gt; (Batty)</source>
-        <translation type="obsolete">&lt;i&gt;Я бачу речі, в які ви люди не можете поверіти...&lt;/i&gt; (Рой Батті)</translation>
+        <translation type="vanished">&lt;i&gt;Я бачу речі, в які ви люди не можете поверіти...&lt;/i&gt; (Рой Батті)</translation>
     </message>
     <message>
         <source>&lt;i&gt;I dream my painting and then paint my dream.&lt;/i&gt; (Vincent Van Gogh)</source>
-        <translation type="obsolete">&lt;i&gt;Я мрію своїм малюванням і потім малюю мою мрію.&lt;/i&gt; (Вінцент Ван Гог)</translation>
+        <translation type="vanished">&lt;i&gt;Я мрію своїм малюванням і потім малюю мою мрію.&lt;/i&gt; (Вінцент Ван Гог)</translation>
     </message>
     <message>
         <source>&lt;i&gt;If anything can go wrong, it will.&lt;/i&gt; (Murphy&apos;s Law)</source>
-        <translation type="obsolete">&lt;i&gt;Якщо що-небудь може йти неправильно, воно буде йти.&lt;/i&gt; (Закон Мерфі)</translation>
+        <translation type="vanished">&lt;i&gt;Якщо що-небудь може йти неправильно, воно буде йти.&lt;/i&gt; (Закон Мерфі)</translation>
     </message>
     <message>
         <source>&lt;i&gt;We become what we think.&lt;/i&gt; (Buddha)</source>
-        <translation type="obsolete">&lt;i&gt;Ми робимо те, що ми думаємо.&lt;/i&gt; (Будда)</translation>
+        <translation type="vanished">&lt;i&gt;Ми робимо те, що ми думаємо.&lt;/i&gt; (Будда)</translation>
     </message>
     <message>
         <source>&lt;i&gt;I can calculate the motion of heavenly bodies, but not the madness of people.&lt;/i&gt; (Isaac Newton)</source>
-        <translation type="obsolete">&lt;i&gt;Я можу вирахувати рух небесних тіл, але не безумство людей.&lt;/i&gt; (Ісаак Ньютон)</translation>
+        <translation type="vanished">&lt;i&gt;Я можу вирахувати рух небесних тіл, але не безумство людей.&lt;/i&gt; (Ісаак Ньютон)</translation>
     </message>
 </context>
 <context>
