@@ -158,7 +158,7 @@ void GuiChatList::showChatMenu( const QPoint& p )
       mp_menuContext->addSeparator();
     }
 
-    act = mp_menuContext->addAction( IconManager::instance().icon( "message-create.png" ), tr( "Write a message" ), this, SIGNAL( createNewMessageRequest() ) );
+    mp_menuContext->addAction( IconManager::instance().icon( "message-create.png" ), tr( "Write a message" ), this, SIGNAL( createNewMessageRequest() ) );
     act = mp_menuContext->addAction( IconManager::instance().icon( "group-create.png" ), tr( "Create new group chat" ), this, SIGNAL( createNewChatRequest() ) );
     act->setEnabled( create_chat_is_enabled );
   }
@@ -270,7 +270,7 @@ void GuiChatList::showMenuSettings()
   act->setCheckable( true );
   act->setChecked( Settings::instance().hideEmptyChatsInList() );
   mp_menuSettings->addSeparator();
-  act = mp_menuSettings->addAction( IconManager::instance().icon( "message-create.png" ), tr( "Write a message" ), this, SIGNAL( createNewMessageRequest() ) );
+  mp_menuSettings->addAction( IconManager::instance().icon( "message-create.png" ), tr( "Write a message" ), this, SIGNAL( createNewMessageRequest() ) );
   act = mp_menuSettings->addAction( IconManager::instance().icon( "group-create.png" ), tr( "Create new group chat" ), this, SIGNAL( createNewChatRequest() ) );
   act->setEnabled( create_chat_is_enabled );
   mp_menuSettings->addSeparator();

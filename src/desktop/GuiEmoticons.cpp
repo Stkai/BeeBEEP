@@ -29,7 +29,7 @@
 
 
 GuiEmoticons::GuiEmoticons( QWidget* parent )
-  : QTabWidget( parent )
+  : QTabWidget( parent ), m_recentTabIndex( 0 )
 {
   setObjectName( "GuiEmoticons" );
   setTabPosition( QTabWidget::West );

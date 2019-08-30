@@ -1271,9 +1271,6 @@ void Settings::load()
   m_localUser.setNetworkAddress( local_user_network_address );
   m_pongTimeout = qMax( sets->value( "ConnectionActivityTimeout(ms)", 30000 ).toInt(), 13000 );
   m_writingTimeout = qMax( sets->value( "WritingTimeout", 3000 ).toInt(), 3000 );
-  int mod_buffer_size = m_fileTransferBufferSize % ENCRYPTED_DATA_BLOCK_SIZE; // For a corrected encryption
-  if( mod_buffer_size > 0 )
-    m_fileTransferBufferSize -= mod_buffer_size;
   m_tickIntervalConnectionTimeout = qMax( sets->value( "TickIntervalConnectionTimeout", m_tickIntervalConnectionTimeout ).toInt(), 3 );
   if( m_settingsVersion < 6 && m_tickIntervalConnectionTimeout < 16 )
     m_tickIntervalConnectionTimeout = 16;
@@ -1340,6 +1337,11 @@ void Settings::load()
   m_maxQueuedDownloads = qMax( 1, sets->value( "MaxQueuedDownloads", 400 ).toInt() );
   m_fileTransferConfirmTimeout = qMax( sets->value( "FileTransferConfirmTimeout", 30000 ).toInt(), 1000 );
   m_fileTransferBufferSize = qMax( sets->value( "FileTransferBufferSize", 65456 ).toInt(), 2048 );
+  int mod_buffer_size = m_fileTransferBufferSize % ENCRYPTED_DATA_BLOCK_SIZE; // For a corrected encryption
+  if( mod_buffer_size > 0 )
+    m_fileTransferBufferSize -= mod_buffer_size;
+  if( m_fileTransferBufferSize < 2048 )
+    m_fileTransferBufferSize = 2048;
   m_automaticFileName = sets->value( "SetAutomaticFileNameOnSave", true ).toBool();
   m_overwriteExistingFiles = sets->value( "OverwriteExistingFiles", false ).toBool();
   m_confirmOnDownloadFile = sets->value( "ConfirmOnDownloadFile", m_confirmOnDownloadFile ).toBool();

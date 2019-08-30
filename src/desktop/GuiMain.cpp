@@ -373,7 +373,6 @@ void GuiMain::closeEvent( QCloseEvent* e )
   QSettings* sets = Settings::instance().objectSettings();
   sets->deleteLater();
 
-
   if( !m_forceShutdown )
   {
     if( !sets->isWritable() )
