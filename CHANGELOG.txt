@@ -1,14 +1,8 @@
-BEEBEEP (Free Office Messenger) - CHANGELOG - (c) Marco Mastroddi
-For more information please visit https://www.beebeep.net
+BEEBEEP (Free Office Messenger) - CHANGELOG - (c) 2019 Marco Mastroddi
+For more informations please visit https://www.beebeep.net
 
 
-BeeBEEP 5.6.7 (in development)
-- Added "Time left" on file transfer progress
-- Added "Show users in their workgroups" option in user list settings
-- Added "Time left" column in File Transfer window
-- Added "Add up to # files to the transfer queue" option in Settings - File Transfer menu
-
-BeeBEEP 5.6.5 (beta released)
+BeeBEEP 5.6.8
 - "ChatSaveFileTransfers" and "ChatSaveSystemMessages" options added in Settings - Chat menu: 
   if enabled history saves also these messages
 - Disabled High DPI icons in windows (can be enabled with qt.conf file)
@@ -26,6 +20,9 @@ BeeBEEP 5.6.5 (beta released)
   - "Workgroups" -> "Your workgroups" in "Network" menu
   - "Set your status to away automatically" is now in "User status" menu in the toolbar
   - added new Menu "Interface"
+- Added "Show users in their workgroups" option in user list settings
+- Added "Time left" column in File Transfer window
+- Added "Add up to # files to the transfer queue" option in Settings - File Transfer menu
 
 BeeBEEP 5.6.4
 - For security reasons the beebeep.off file (saved unsent messages) are now linked to the beebeep.ini file 

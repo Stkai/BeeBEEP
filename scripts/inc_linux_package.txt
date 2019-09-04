@@ -51,6 +51,7 @@ cp $BASE_FOLDER/misc/beehosts_example.ini $RELEASE_FOLDER
 echo "Copying sound..."
 cp $BASE_FOLDER/misc/beep.wav $RELEASE_FOLDER
 echo "Copying Plugins..."
+chmod a-x $BASE_FOLDER/test/*.so
 cp $BASE_FOLDER/test/libnumbertextmarker.so $RELEASE_FOLDER
 cp $BASE_FOLDER/test/librainbowtextmarker.so $RELEASE_FOLDER
 cp $BASE_FOLDER/test/libregularboldtextmarker.so $RELEASE_FOLDER
