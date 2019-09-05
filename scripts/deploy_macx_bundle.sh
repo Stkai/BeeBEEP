@@ -98,7 +98,7 @@ echo "Done"
 
 #copy plugins
 printf "Copy plugins ... "
-cp $SOURCE_DIR/test/*.1.0.0.dylib $BUNDLE_FOLDER/Contents/PlugIns/.
+cp $SOURCE_DIR/test/*.dylib $BUNDLE_FOLDER/Contents/PlugIns/.
 echo "Done"
 
 #mac deploy frameworks

@@ -28,7 +28,7 @@ RELEASE_FOLDER="beebeep-${BEEBEEP_VERSION}-${BEEBEEP_QT_VERSION}-${BEEBEEP_ARCH_
 echo "Cleaning previous packages with the same name..."
 rm -rf *.deb
 rm -rf *.lintian
-rm -rf DEBIAN
+sudo rm -rf DEBIAN
 rm -rf $RELEASE_FOLDER
 rm -rf $RELEASE_FOLDER.tar.gz
 echo "Making $RELEASE_FOLDER ..."
