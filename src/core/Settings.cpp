@@ -779,8 +779,8 @@ QString Settings::operatingSystem( bool use_long_name ) const
   os_name_short = "MacOSX";
 #endif
 #ifdef Q_OS_OS2
-  os_name_long = "eComStation";
-  os_name_short = "eCS";
+  os_name_long = "OS/2";
+  os_name_short = "OS2";
 #endif
 #ifdef BEEBEEP_FOR_RASPBERRY_PI
   os_name_long = "Raspberry PI";
