@@ -524,22 +524,22 @@
     </message>
     <message>
         <source>Disconnecting</source>
-        <translation type="unfinished"></translation>
+        <translation>Відключення</translation>
     </message>
     <message>
         <source>%1 Reconnecting to the %2 Network in progress.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 перепідключення до мережі %2 виконується.</translation>
     </message>
     <message>
         <source>Reconnecting</source>
-        <translation type="unfinished"></translation>
+        <translation>Перепідключення</translation>
     </message>
 </context>
 <context>
     <name>Date</name>
     <message>
         <source>more than 1 day</source>
-        <translation type="unfinished"></translation>
+        <translation>більше 1 дня</translation>
     </message>
 </context>
 <context>
@@ -1083,7 +1083,7 @@
     </message>
     <message>
         <source>View options</source>
-        <translation type="unfinished">Переглянути параметри</translation>
+        <translation>Переглянути параметри</translation>
     </message>
 </context>
 <context>
@@ -1205,7 +1205,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Send this message to all recipients individually</source>
-        <translation type="unfinished"></translation>
+        <translation>Надіслати це повідомлення всім отримувачам індивідуально</translation>
     </message>
 </context>
 <context>
@@ -2888,67 +2888,67 @@ Please select a different name.</source>
     </message>
     <message>
         <source>There are still files that have not been transferred and will be interrupted. Do you want to disconnect anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ще є файли, які не передані, і їх передача буде перервана. Ви все одно хочете відключитися?</translation>
     </message>
     <message>
         <source>Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Інтерфейс</translation>
     </message>
     <message>
         <source>Your workgroups</source>
-        <translation type="unfinished"></translation>
+        <translation>Ваші робочі групи</translation>
     </message>
     <message>
         <source>Enable message saving</source>
-        <translation type="unfinished"></translation>
+        <translation>Включити збереження повідомлень</translation>
     </message>
     <message>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Кольори</translation>
     </message>
     <message>
         <source>Always download files into the folder with the user&apos;s name</source>
-        <translation type="unfinished"></translation>
+        <translation>Завжди завантажувати файли в папку з іменем користувача</translation>
     </message>
     <message>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Сповіщення</translation>
     </message>
     <message>
         <source>Show online users only</source>
-        <translation type="unfinished"></translation>
+        <translation>Показувати лише підключених користувачів</translation>
     </message>
     <message>
         <source>Show users in their workgroups</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати користувачів у своїх робочих групах</translation>
     </message>
     <message>
         <source>Please select the maximum number of files you can queue up for the transfer (current: %1).</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть максимальну кількість файлів, яку можна поставити в чергу на передачу (поточне значення:%1).</translation>
     </message>
     <message>
         <source>Option enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштування включено.</translation>
     </message>
     <message>
         <source>Option disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштування виключено.</translation>
     </message>
     <message>
         <source>Add up to %1 files to the transfer queue</source>
-        <translation type="unfinished"></translation>
+        <translation>Додайте до%1 файлів до черги передачі</translation>
     </message>
     <message>
         <source>The files will be downloaded to the folder:</source>
-        <translation type="unfinished"></translation>
+        <translation>Файли будуть завантажені в папку:</translation>
     </message>
     <message>
         <source>Restart connection now</source>
-        <translation type="unfinished"></translation>
+        <translation>Перезавантажте з’єднання зараз</translation>
     </message>
     <message>
         <source>Restart later manually</source>
-        <translation type="unfinished"></translation>
+        <translation>Перезавантажте вручну пізніше</translation>
     </message>
 </context>
 <context>
@@ -4126,15 +4126,15 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Time left</source>
-        <translation type="unfinished"></translation>
+        <translation>Залишилось часу</translation>
     </message>
     <message>
         <source>Remove all completed transfers</source>
-        <translation type="unfinished"></translation>
+        <translation>Видалити усі завершені передачі</translation>
     </message>
     <message>
         <source>of</source>
-        <translation type="unfinished"></translation>
+        <translation>з</translation>
     </message>
 </context>
 <context>
@@ -4177,7 +4177,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>You cannot send files to the workgroup &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви не можете надсилати файли до робочої групи &apos;%1&apos;.</translation>
     </message>
 </context>
 <context>
@@ -4243,7 +4243,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>BeeBEEP version</source>
-        <translation type="unfinished"></translation>
+        <translation>Версія BeeBEEP</translation>
     </message>
 </context>
 <context>
@@ -4310,7 +4310,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Information to display to other users</source>
-        <translation type="unfinished"></translation>
+        <translation>Інформація для користувачів</translation>
     </message>
 </context>
 <context>
@@ -4467,23 +4467,23 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Your workgroups</source>
-        <translation type="unfinished"></translation>
+        <translation>Ваші робочі групи</translation>
     </message>
     <message>
         <source>Right click to open menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Клацніть правою кнопкою, щоб відкрити меню</translation>
     </message>
     <message>
         <source>Don&apos;t you want to be part of these workgroups anymore?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви більше не хочете бути користувачем цих робочих груп?</translation>
     </message>
     <message>
         <source>Yes, remove me</source>
-        <translation type="unfinished"></translation>
+        <translation>Так, видаліть мене</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Відмінити</translation>
     </message>
 </context>
 <context>
@@ -4692,11 +4692,11 @@ Please select a different name.</source>
     </message>
     <message>
         <source>others</source>
-        <translation type="unfinished"></translation>
+        <translation>інші</translation>
     </message>
     <message>
         <source>Workgroups</source>
-        <translation type="unfinished"></translation>
+        <translation>Рабочі групи</translation>
     </message>
 </context>
 <context>
