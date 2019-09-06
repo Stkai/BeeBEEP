@@ -1,7 +1,7 @@
 [DEBREATE-0.7.13]
 <<CTRL>>
 Package: beebeep
-Version: 5.6.5-1
+Version: 5.6.8-1
 Maintainer: Marco Mastroddi <marco.mastroddi@gmail.com>
 Section: comm
 Homepage: https://www.beebeep.net
@@ -67,10 +67,23 @@ rm -f "/usr/bin/beebeep"
 <</SCRIPTS>>
 <<CHANGELOG>>
 <<DEST>>DEFAULT<</DEST>>
-beebeep (5.6.5) bionic; urgency=low
+beebeep (5.6.8) bionic; urgency=low
 
   * Initial release
-  * BeeBEEP first debian package
+  * BeeBEEP 5.6.8
+  * "ChatSaveFileTransfers" and "ChatSaveSystemMessages" options added 
+  * Disabled High DPI icons in windows (can be enabled with qt.conf file)
+  * Added new option in Settings - Chat - "Save maximum lines in chat"
+  * Added "Clear cache items after X days" option: default is 96 days
+  * Added new option in Settings - Chat - "Show only # messages"
+  * Added "Always download files into the folder with the user's name" option
+  * Improved search for predefined folders in Unix environment
+  * Compiled with large file support in Linux
+  * Reorganization of the "Settings" menu
+  * Added "Show users in their workgroups" option in user list settings
+  * Added "Time left" column in File Transfer window
+  * Added "Add up to # files to the transfer queue" option
+
 
  -- Marco Mastroddi <marco.mastroddi@gmail.com>  Wed, 24 Jul 2019 07:53:08 +0200
 
