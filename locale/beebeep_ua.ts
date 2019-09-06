@@ -4266,7 +4266,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Informations to display to other users</source>
-        <translation>Інформація для користувачів</translation>
+        <translation type="vanished">Інформація для користувачів</translation>
     </message>
     <message>
         <source>dd/MM/yyyy</source>
@@ -4307,6 +4307,10 @@ Please select a different name.</source>
     <message>
         <source>Regenerate your hash code...</source>
         <translation>Перегенрація вашого хеш коду...</translation>
+    </message>
+    <message>
+        <source>Information to display to other users</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

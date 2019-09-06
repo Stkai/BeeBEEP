@@ -4378,11 +4378,15 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Informations to display to other users</source>
-        <translation>Informationen, die anderen Benutzern angezeigt werden sollen</translation>
+        <translation type="vanished">Informationen, die anderen Benutzern angezeigt werden sollen</translation>
     </message>
     <message>
         <source>Regenerate your hash code...</source>
         <translation>Deinen Hash-Code regenerieren...</translation>
+    </message>
+    <message>
+        <source>Information to display to other users</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

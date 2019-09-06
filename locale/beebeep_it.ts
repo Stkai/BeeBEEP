@@ -4564,11 +4564,15 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Informations to display to other users</source>
-        <translation>Informazioni da mostrare agli altri utenti</translation>
+        <translation type="vanished">Informazioni da mostrare agli altri utenti</translation>
     </message>
     <message>
         <source>Regenerate your hash code...</source>
         <translation>Rigenera il tuo codice utente...</translation>
+    </message>
+    <message>
+        <source>Information to display to other users</source>
+        <translation>Informazioni da mostrare agli altri utenti</translation>
     </message>
 </context>
 <context>

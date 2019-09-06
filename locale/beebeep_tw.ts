@@ -4311,11 +4311,11 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Informations to display to other users</source>
+        <source>Regenerate your hash code...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Regenerate your hash code...</source>
+        <source>Information to display to other users</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
