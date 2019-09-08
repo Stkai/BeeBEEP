@@ -144,6 +144,11 @@ bool NetworkManager::searchLocalHostAddress()
   qDebug() << "Searching local host address...";
   // Collect the list
   m_networkEntries = availableNetworkEntries();
+  if( m_networkEntries.isEmpty() )
+  {
+    qWarning() << "There are not available network entries (check your network interfaces)";
+    return false;
+  }
 
   foreach( NetworkEntry ne, m_networkEntries )
     qDebug() << "Network entry found:" << qPrintable( ne.hardware() ) << "-" << qPrintable( ne.hostAddress().toString() ) << "-" << qPrintable( ne.broadcast().toString() );
@@ -189,7 +194,7 @@ bool NetworkManager::searchLocalHostAddress()
     return true;
   }
 
-  qWarning() << "Local host address not found";
+  qWarning() << "Unable to set local host address";
   return false;
 }
 
@@ -233,6 +238,7 @@ bool NetworkManager::forceLocalHostAddress( const QHostAddress& local_host_addre
     }
   }
 
+  qWarning() << "No network entry found with forced IP:" << qPrintable( local_host_address_forced.toString() );
   return false;
 }
 
@@ -268,6 +274,7 @@ bool NetworkManager::forceLocalSubnet( const QString& local_subnet_forced )
       qWarning() << "Skip invalid network entry for host address" << qPrintable( network_entry.hostAddress().toString() );
   }
 
+  qWarning() << "No network entry found with forced subnet:" << qPrintable( local_subnet_forced );
   return false;
 }
 

@@ -527,13 +527,11 @@ void Core::checkNetworkInterface()
     {
       if( NetworkManager::instance().isMainInterfaceUnavailable() )
       {
-#ifdef BEEBEEP_DEBUG
-         qDebug() << "Main network interface is not available. Searching...";
-#endif
+        qDebug() << "Main network interface is not available. Searching...";
         if( NetworkManager::instance().searchLocalHostAddress() )
           QMetaObject::invokeMethod( this, "checkNetworkInterface", Qt::QueuedConnection );
         else
-          qWarning() << "Network iterface not found. Please check your connection";
+          qWarning() << "Network interface not found";
       }
     }
   }
