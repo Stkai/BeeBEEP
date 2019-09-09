@@ -172,5 +172,8 @@
         <file>images/beebeep-message-tray.png</file>
         <file>images/interface.png</file>
         <file>images/colors.png</file>
+        <file>images/quote.png</file>
+        <file>images/quote-text.png</file>
+        <file>images/quote-background.png</file>
     </qresource>
 </RCC>

@@ -310,6 +310,10 @@ public:
   inline void setPreviewFileDialogGeometry( const QByteArray& );
   inline const QByteArray& previewFileDialogGeometry();
   inline int previewFileDialogImageSize() const;
+  inline void setChatQuoteBackgroundColor( const QString& );
+  inline const QString& chatQuoteBackgroundColor() const;
+  inline void setChatQuoteTextColor( const QString& );
+  inline const QString& chatQuoteTextColor() const;
 
   inline bool allowEditNickname() const;
 
@@ -711,6 +715,8 @@ private:
   bool m_showUsersInWorkgroups;
   bool m_openChatWhenSendNewMessage;
   bool m_sendNewMessageIndividually;
+  QString m_chatQuoteBackgroundColor;
+  QString m_chatQuoteTextColor;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -1225,5 +1231,9 @@ inline void Settings::setOpenChatWhenSendNewMessage( bool new_value ) { m_openCh
 inline bool Settings::openChatWhenSendNewMessage() const { return m_openChatWhenSendNewMessage; }
 inline void Settings::setSendNewMessageIndividually( bool new_value ) { m_sendNewMessageIndividually = new_value; }
 inline bool Settings::sendNewMessageIndividually() const { return m_sendNewMessageIndividually; }
+inline void Settings::setChatQuoteBackgroundColor( const QString& new_value ) { m_chatQuoteBackgroundColor = new_value; }
+inline const QString& Settings::chatQuoteBackgroundColor() const { return m_chatQuoteBackgroundColor; }
+inline void Settings::setChatQuoteTextColor( const QString& new_value ) { m_chatQuoteTextColor = new_value; }
+inline const QString& Settings::chatQuoteTextColor() const { return m_chatQuoteTextColor; }
 
 #endif // BEEBEEP_SETTINGS_

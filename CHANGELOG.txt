@@ -2,6 +2,9 @@ BEEBEEP (Free Office Messenger) - CHANGELOG - (c) 2019 Marco Mastroddi
 For more informations please visit https://www.beebeep.net
 
 
+BeeBEEP 5.6.9 (in development)
+- Added "Quote selected text" option to context menu (right click) of the chat
+
 BeeBEEP 5.6.8
 - "ChatSaveFileTransfers" and "ChatSaveSystemMessages" options added in Settings - Chat menu: 
   if enabled history saves also these messages

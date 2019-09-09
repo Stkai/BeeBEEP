@@ -192,6 +192,9 @@ Settings::Settings()
   m_useDarkStyle = false;
   m_chatDefaultUserNameColor = "#000000";
 
+  m_chatQuoteBackgroundColor = "#808080";
+  m_chatQuoteTextColor = "#ffffff";
+
   m_saveMessagesTimestamp = QDateTime::currentDateTime();
 
   resetAllColors();
@@ -293,6 +296,8 @@ void Settings::resetAllColors()
   m_chatBackgroundColor = "#ffffff";
   m_chatDefaultTextColor = "#555555";
   m_chatSystemTextColor = "#808080";
+  m_chatQuoteBackgroundColor = "#808080";
+  m_chatQuoteTextColor = "#ffffff";
 }
 
 void Settings::createApplicationUuid()
@@ -1047,6 +1052,8 @@ void Settings::load()
   m_chatSystemTextColor = sets->value( "SystemTextColor", m_chatSystemTextColor ).toString();
   m_enableDefaultChatNotifications = sets->value( "EnableDefaultChatNotifications", m_enableDefaultChatNotifications ).toBool();
   m_useMessageTimestampWithAP = sets->value( "UseMessageTimestampWithAP", m_useMessageTimestampWithAP ).toBool();
+  m_chatQuoteBackgroundColor = sets->value( "QuoteBackgroundColor", m_chatQuoteBackgroundColor ).toString();
+  m_chatQuoteTextColor = sets->value( "QuoteTextColor", m_chatQuoteTextColor ).toString();
   sets->endGroup();
 
   sets->beginGroup( "User" );
@@ -1470,6 +1477,8 @@ void Settings::save()
   sets->setValue( "SystemTextColor", m_chatSystemTextColor );
   sets->setValue( "EnableDefaultChatNotifications", m_enableDefaultChatNotifications );
   sets->setValue( "UseMessageTimestampWithAP", m_useMessageTimestampWithAP );
+  sets->setValue( "QuoteBackgroundColor", m_chatQuoteBackgroundColor );
+  sets->setValue( "QuoteTextColor", m_chatQuoteTextColor );
   sets->endGroup();
   sets->beginGroup( "User" );
   if( m_userRecognitionMethod != RecognizeByDefaultMethod )

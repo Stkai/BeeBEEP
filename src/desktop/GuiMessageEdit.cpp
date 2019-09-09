@@ -60,7 +60,6 @@ GuiMessageEdit::GuiMessageEdit( QWidget* parent )
 void GuiMessageEdit::createMessageToSend()
 {
   QString text;
-
   if( !m_emoticonsAdded.isEmpty() )
   {
     QString html_text = toHtml();
@@ -70,7 +69,10 @@ void GuiMessageEdit::createMessageToSend()
   }
   else
     text = toPlainText();
-
+  while( !text.isEmpty() && text.endsWith( " " ) )
+    text.chop( 1 );
+  if( text.endsWith( "\n" ) )
+    text.chop( 1 );
   m_currentMessage = text.trimmed().isEmpty() ? QLatin1String( "" ) : text;
   m_messageChanged = false;
 }

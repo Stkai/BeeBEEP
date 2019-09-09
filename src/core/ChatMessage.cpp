@@ -59,10 +59,14 @@ ChatMessage& ChatMessage::operator=( const ChatMessage& cm )
 
 void ChatMessage::fromMessage( const Message& m )
 {
-  if( m.type() == Message::System )
-    m_message = m.text();
-  else
+  if( m.type() != Message::System )
+  {
     m_message = Protocol::instance().formatHtmlText( m.text() );
+    if( m_message.endsWith( "<br>" ) )
+      m_message.chop( 4 );
+  }
+  else
+    m_message = m.text();
   m_timestamp = m.timestamp();
   ChatMessageData cm_data = Protocol::instance().dataFromChatMessage( m );
   if( cm_data.textColor().isValid() )

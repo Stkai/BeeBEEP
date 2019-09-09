@@ -121,6 +121,7 @@ private slots:
   void showFindTextInChatDialog();
   void findNextTextInChat();
   void openSelectedTextAsUrl();
+  void quoteSelectedText();
   void resetChatFontToDefault();
   void operationCompleted();
 #ifdef BEEBEEP_USE_SHAREDESKTOP
@@ -133,6 +134,7 @@ private slots:
 protected:
   void findTextInChat( const QString& );
   void updateChat();
+  void setChatStylesheet( QTextDocument* );
 
 private:
   VNumber m_chatId;

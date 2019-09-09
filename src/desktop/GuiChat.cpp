@@ -304,6 +304,8 @@ void GuiChat::customContextMenu( const QPoint& )
   mp_menuContext->addSeparator();
   QAction* act = mp_menuContext->addAction( IconManager::instance().icon( "copy.png" ), tr( "Copy to clipboard" ), mp_teChat, SLOT( copy() ), QKeySequence::Copy );
   act->setEnabled( !mp_teChat->textCursor().selectedText().isEmpty() );
+  act = mp_menuContext->addAction( IconManager::instance().icon( "quote.png" ), tr( "Quote selected text" ), this, SLOT( quoteSelectedText() ) );
+  act->setEnabled( !mp_teChat->textCursor().selectedText().isEmpty() );
   act = mp_menuContext->addAction( IconManager::instance().icon( "network.png" ), tr( "Open selected text as url" ), this, SLOT( openSelectedTextAsUrl() ) );
   act->setEnabled( !mp_teChat->textCursor().selectedText().isEmpty() );
   mp_menuContext->addSeparator();
@@ -474,6 +476,14 @@ void GuiChat::loadSavedMessages()
   setChat( c );
 }
 
+void GuiChat::setChatStylesheet( QTextDocument* text_document )
+{
+  // Valid only for NEW INSERTED HTML
+  QString default_chat_css = text_document->defaultStyleSheet();
+  default_chat_css.append( QString( " .bee-quote { background-color: %1; color: %2; }" ).arg( Settings::instance().chatQuoteBackgroundColor(), Settings::instance().chatQuoteTextColor() ) );
+  text_document->setDefaultStyleSheet( default_chat_css );
+}
+
 bool GuiChat::setChat( const Chat& c )
 {
   if( !c.isValid() )
@@ -540,10 +550,10 @@ bool GuiChat::setChat( const Chat& c )
   text_option = text_document->defaultTextOption();
   text_option.setTextDirection( Settings::instance().showTextInModeRTL() ? Qt::RightToLeft : Qt::LeftToRight );
   text_document->setDefaultTextOption( text_option );
+  setChatStylesheet( text_document );
   mp_teChat->setDocument( text_document );
   mp_teChat->setHtml( html_text );
   mp_teChat->setUpdatesEnabled( updates_is_enabled );
-
   setLastMessageTimestamp( c.lastMessageTimestamp() );
   ensureLastMessageVisible();
   updateChat( c );
@@ -653,6 +663,7 @@ void GuiChat::updateChatColors()
   QString text_color = Settings::instance().chatDefaultTextColor();
   mp_teMessage->setStyleSheet( QString( "#GuiMessageEdit { background-color: %1; color: %2; }" ).arg( background_color ).arg( text_color ) );
   mp_teChat->setStyleSheet( QString( "#GuiChatViewer { background-color: %1; color: %2; }" ).arg( background_color ).arg( text_color ) );
+  // No css for bee-quote because stylesheet is only applied to new inserted HTML
 }
 
 void GuiChat::selectFontColor()
@@ -1112,6 +1123,21 @@ void GuiChat::openSelectedTextAsUrl()
     QUrl url = QUrl::fromUserInput( selected_text );
     emit openUrl( url );
   }
+}
+
+void GuiChat::quoteSelectedText()
+{
+  QString selected_text = mp_teChat->textCursor().selectedText();
+  if( selected_text.isEmpty() )
+    return;
+  selected_text = mp_teChat->textCursor().selection().toHtml( "UTF-8" );
+  selected_text.replace( "</p>", "</p>\n" );
+  selected_text.replace( "<br>", "\n" );
+  selected_text = Bee::removeHtmlTags( selected_text );
+  selected_text.replace( "\n", "&nbsp;&nbsp;<br>&nbsp;&nbsp;" );
+  QString text_to_add = QString( " [quote]%1 [/quote]<br>" ).arg( selected_text.trimmed() );
+  mp_teMessage->addText( text_to_add );
+  mp_teMessage->setFocus();
 }
 
 void GuiChat::resetChatFontToDefault()

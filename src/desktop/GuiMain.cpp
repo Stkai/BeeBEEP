@@ -1055,6 +1055,10 @@ void GuiMain::createMenus()
   act->setData( 73 );
   act = mp_menuChatColorSettings->addAction( IconManager::instance().icon( "log.png" ), tr( "Select chat system text color" ), this, SLOT( settingsChanged() ) );
   act->setData( 74 );
+  act = mp_menuChatColorSettings->addAction( IconManager::instance().icon( "quote-text.png" ), tr( "Select quote text color" ), this, SLOT( settingsChanged() ) );
+  act->setData( 89 );
+  act = mp_menuChatColorSettings->addAction( IconManager::instance().icon( "quote-background.png" ), tr( "Select quote background color" ), this, SLOT( settingsChanged() ) );
+  act->setData( 90 );
   mp_actSelectEmoticonSourcePath = mp_menuChatSettings->addAction( IconManager::instance().icon( "emoticon.png" ), tr( "Select emoticon theme" ) + QString( "..." ), this, SLOT( selectEmoticonSourcePath() ) );
   mp_actSelectEmoticonSourcePath->setEnabled( !Settings::instance().useNativeEmoticons() );
   mp_menuChatSettings->addAction( IconManager::instance().icon( "dictionary.png" ), tr( "Dictionary" ) + QString( "..." ), this, SLOT( selectDictionatyPath() ) );
@@ -1462,7 +1466,8 @@ void GuiMain::settingsChanged( QAction* act )
   bool ok = false;
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Settings changed for action id" << settings_data_id << "to" << static_cast<int>(act->isChecked());
+  if( act->isCheckable() )
+    qDebug() << "Settings changed for action id" << settings_data_id << "to" << static_cast<int>(act->isChecked());
 #endif
 
   switch( settings_data_id )
@@ -1999,6 +2004,26 @@ void GuiMain::settingsChanged( QAction* act )
       setMaxQueuedDownloadsInAction( act );
     }
     break;
+  case 89:
+    {
+      QColor c = QColorDialog::getColor( QColor( Settings::instance().chatQuoteTextColor() ), this );
+      if( c.isValid() )
+      {
+        Settings::instance().setChatQuoteTextColor( c.name() );
+        refresh_chat = true;
+      }
+    }
+    break;
+  case 90:
+    {
+      QColor c = QColorDialog::getColor( QColor( Settings::instance().chatQuoteBackgroundColor() ), this );
+      if( c.isValid() )
+      {
+        Settings::instance().setChatQuoteBackgroundColor( c.name() );
+        refresh_chat = true;
+      }
+    }
+    break;
   case 99:
     break;
   default:
@@ -2186,7 +2211,6 @@ void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
 
   bool floating_chat_created = false;
   bool alert_can_be_showed = cm.alertCanBeSent();
-
   if( alert_can_be_showed )
   {
     if( c.isDefault() )

@@ -415,6 +415,7 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg, bool is_importan
     msg_to_send.replace( QLatin1Char( '<' ), QLatin1String( "&lt;" ) );
     msg_to_send.replace( "&lt;3", "<3" ); // hearth emoticon
   }
+
   PluginManager::instance().parseText( &msg_to_send, true );
 
   Message m = Protocol::instance().chatMessage( c, msg_to_send );

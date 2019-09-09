@@ -1027,6 +1027,10 @@
         <source>Please select a file to save all the messages of the chat.</source>
         <translation>Будь ласка виберіть файл, щоб зберегти всі повідомлення чату.</translation>
     </message>
+    <message>
+        <source>Quote selected text</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiChatList</name>

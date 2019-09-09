@@ -2053,6 +2053,10 @@ QString Protocol::formatHtmlText( const QString& text )
     {
       text_formatted += QLatin1Char( '&' ); // not &amp; for Linkify
     }
+    else if( c == QLatin1Char( '\r' ) )
+    {
+      // skip
+    }
     else
       text_formatted += c;
 
@@ -2065,6 +2069,8 @@ QString Protocol::formatHtmlText( const QString& text )
   text_formatted.replace( QRegExp("(^|\\s|>)_(\\S+)_(<|\\s|$)"), "\\1<u>\\2</u>\\3" );
   text_formatted.replace( QRegExp("(^|\\s|>)\\*(\\S+)\\*(<|\\s|$)"), "\\1<b>\\2</b>\\3" );
   text_formatted.replace( QRegExp("(^|\\s|>)\\/(\\S+)\\/(<|\\s|$)"), "\\1<i>\\2</i>\\3" );
+  text_formatted.replace( QLatin1String( "[quote]" ), QString( "<br><span class='bee-quote'>&nbsp;&nbsp;<i>" ) );
+  text_formatted.replace( QLatin1String( "[/quote]" ), "</i>&nbsp;&nbsp;</span> " );
 
   if( Settings::instance().chatUseClickableLinks() )
     text_formatted = linkifyText( text_formatted );
@@ -2074,7 +2080,7 @@ QString Protocol::formatHtmlText( const QString& text )
 
   PluginManager::instance().parseText( &text_formatted, false );
 
-  return text_formatted;
+  return text_formatted.trimmed();
 }
 
 /* Encryption */
