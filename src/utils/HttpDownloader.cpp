@@ -129,6 +129,7 @@ void HttpDownloader::onReplyFinished( QNetworkReply *reply )
     QVariant header_file_name = reply->header( QNetworkRequest::ContentDispositionHeader );
     if( header_file_name.isValid() )
     {
+    qDebug() << "IS VALID";
       QStringList sl_file_name = header_file_name.toString().split( ";" );
       foreach( QString s_ref, sl_file_name )
       {
@@ -148,7 +149,12 @@ void HttpDownloader::onReplyFinished( QNetworkReply *reply )
     }
 #endif
     if( file_path.isEmpty() )
-      file_path = filePathFromUrl( url );
+    {
+      if( url == QUrl( Settings::instance().lastVersionUrl() ) )
+        file_path = filePathFromFileName( "beebeep_last_versions.txt" );
+      else
+        file_path = filePathFromUrl( url );
+    }
     if( saveToDisk( file_path, reply ) )
       qDebug() << "Url" << url.toString() << "saved to" << qPrintable( file_path );
     else
