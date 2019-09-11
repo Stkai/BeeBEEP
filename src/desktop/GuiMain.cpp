@@ -210,6 +210,7 @@ void GuiMain::setupChatConnections( GuiChat* gui_chat )
   connect( gui_chat, SIGNAL( sendFileFromChatRequest( VNumber, const QString& ) ), this, SLOT( sendFileFromChat( VNumber, const QString& ) ) );
   connect( gui_chat, SIGNAL( editGroupRequest( VNumber ) ), this, SLOT( editGroupChat( VNumber ) ) );
   connect( gui_chat, SIGNAL( chatToClear( VNumber ) ), this, SLOT( clearChat( VNumber ) ) );
+  connect( gui_chat, SIGNAL( clearSystemMessagesRequestFromChat( VNumber ) ), this, SLOT( clearSystemMessagesInChat( VNumber ) ) );
   connect( gui_chat, SIGNAL( showChatMenuRequest() ), this, SLOT( showChatSettingsMenu() ) );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   connect( gui_chat, SIGNAL( shareDesktopToChatRequest( VNumber, bool ) ), this, SLOT( onShareDesktopRequestFromChat( VNumber, bool ) ) );
@@ -705,7 +706,7 @@ void GuiMain::showAbout()
 #else
   QMessageBox::about( this, Settings::instance().programName(),
 #endif
-                      QString( "<b>%1</b> - Secure Office Messenger<br><br>%2<br>%3 %4 %5<br><br>%6 %7<br>%8<br>" )
+                      QString( "<b>%1</b> - Free Office Messenger<br><br>%2<br>%3 %4 %5<br><br>%6 %7<br>%8<br>" )
                       .arg( Settings::instance().programName() )
                       .arg( Settings::instance().isDevelopmentVersion() ? tr( "Development version") : tr( "Version" ) )
                       .arg( Settings::instance().version( true, true ) )
@@ -1397,6 +1398,7 @@ void GuiMain::createMainWidgets()
 
   mp_home = new GuiHome( this );
   connect( mp_home, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
+  connect( mp_home, SIGNAL( clearSystemMessagesRequest( VNumber ) ), this, SLOT( clearSystemMessagesInChat( VNumber ) ) );
   tab_index = mp_tabMain->addTab( mp_home, IconManager::instance().icon( "activities.png" ), "" );
   mp_tabMain->setTabToolTip( tab_index, tr( "Activities" ) );
   mp_home->setMainToolTip( QString( "%1\n(%2)" ).arg( mp_tabMain->tabToolTip( tab_index ), tooltip_right_button ) );
@@ -3476,6 +3478,26 @@ void GuiMain::clearChat( VNumber chat_id )
       if( c.isValid() )
         fl_chat->setChat( c );
     }
+
+    if( chat_id == ID_DEFAULT_CHAT )
+      mp_home->loadSystemMessages();
+  }
+}
+
+void GuiMain::clearSystemMessagesInChat( VNumber chat_id )
+{
+  if( beeCore->clearSystemMessagesInChat( chat_id ) )
+  {
+    GuiFloatingChat* fl_chat = floatingChat( chat_id );
+    if( fl_chat )
+    {
+      Chat c = ChatManager::instance().chat( chat_id );
+      if( c.isValid() )
+        fl_chat->setChat( c );
+    }
+
+    if( chat_id == ID_DEFAULT_CHAT )
+      mp_home->loadSystemMessages();
   }
 }
 

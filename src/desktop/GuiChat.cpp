@@ -121,6 +121,9 @@ GuiChat::GuiChat( QWidget *parent )
   mp_actClear = new QAction( IconManager::instance().icon( "clear.png" ), tr( "Clear messages" ), this );
   connect( mp_actClear, SIGNAL( triggered() ), this, SLOT( clearChat() ) );
 
+  mp_actClearSystemMessages = new QAction( IconManager::instance().icon( "log.png" ), tr( "Clear system messages" ), this );
+  connect( mp_actClearSystemMessages, SIGNAL( triggered() ), this, SLOT( clearSystemMessages() ) );
+
   mp_actFindTextInChat = new QAction( IconManager::instance().icon( "search.png" ), tr( "Find text in chat" ), this );
   connect( mp_actFindTextInChat, SIGNAL( triggered() ), this, SLOT( showFindTextInChatDialog() ) );
 
@@ -218,6 +221,7 @@ void GuiChat::updateActions( const Chat& c, bool is_connected, int connected_use
   }
 
   mp_actClear->setDisabled( chat_is_empty );
+  mp_actClearSystemMessages->setEnabled( c.hasSystemMessages() );
   mp_actSendFile->setEnabled( Settings::instance().enableFileTransfer() && local_user_is_member && is_connected && can_send_files );
   mp_actSendFolder->setEnabled( Settings::instance().enableFileTransfer() && local_user_is_member && is_connected && can_send_files );
 
@@ -310,6 +314,7 @@ void GuiChat::customContextMenu( const QPoint& )
   act->setEnabled( !mp_teChat->textCursor().selectedText().isEmpty() );
   mp_menuContext->addSeparator();
   mp_menuContext->addAction( mp_actClear );
+  mp_menuContext->addAction( mp_actClearSystemMessages );
   mp_menuContext->addSeparator();
   mp_menuContext->addAction( mp_actPrint );
   mp_menuContext->addSeparator();
@@ -320,7 +325,7 @@ void GuiChat::customContextMenu( const QPoint& )
 bool GuiChat::messageCanBeShowed( const ChatMessage& cm )
 {
   if( m_chatId == ID_DEFAULT_CHAT && Settings::instance().showOnlyMessagesInDefaultChat() )
-    return GuiChatMessage::messageCanBeShowedInDefaultChat( cm ) && !Settings::instance().chatMessageFilter().testBit( static_cast<int>( cm.type() ) );
+    return cm.isChatActivity() && !Settings::instance().chatMessageFilter().testBit( static_cast<int>( cm.type() ) );
   else
     return !Settings::instance().chatMessageFilter().testBit( static_cast<int>( cm.type() ) );
 }
@@ -608,6 +613,7 @@ bool GuiChat::appendChatMessage( const Chat& c, const ChatMessage& cm )
 
   bool show_timestamp_last_message = !cm.isFromLocalUser() && !cm.isFromSystem();
   mp_actClear->setDisabled( c.isEmpty() && !ChatManager::instance().chatHasSavedText( c.name() ) );
+  mp_actClearSystemMessages->setEnabled( c.hasSystemMessages() );
   QString text_message = chatMessageToText( cm );
 
   if( !text_message.isEmpty() )
@@ -1151,6 +1157,11 @@ void GuiChat::resetChatFontToDefault()
 void GuiChat::operationCompleted()
 {
   emit showStatusMessageRequest( tr( "Ready." ), -1 );
+}
+
+void GuiChat::clearSystemMessages()
+{
+  emit clearSystemMessagesRequestFromChat( m_chatId );
 }
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP

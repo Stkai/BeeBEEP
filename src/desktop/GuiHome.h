@@ -48,6 +48,7 @@ public:
 
 signals:
   void openUrlRequest( const QUrl& );
+  void clearSystemMessagesRequest( VNumber );
 
 public slots:
   void resetNews();
@@ -59,6 +60,7 @@ protected slots:
   void reloadMessages();
   void printActivities();
   void selectBackgroundColor();
+  void clearSystemMessages();
 
 private:
   QString m_prev_sys_mess;

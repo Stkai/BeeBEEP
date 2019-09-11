@@ -55,10 +55,7 @@ GuiHome::GuiHome( QWidget* parent )
 
 bool GuiHome::addSystemMessage( const ChatMessage& cm )
 {
-  if( !cm.isFromSystem() )
-    return false;
-
-  if( !GuiChatMessage::messageCanBeShowedInActivity( cm ) )
+  if( !cm.isSystemActivity() )
     return false;
 
   QString sys_message = GuiChatMessage::formatSystemMessage( cm, ID_SYSTEM_MESSAGE, Settings::instance().homeShowMessageTimestamp(), false, Settings::instance().chatCompact() );
@@ -105,7 +102,8 @@ void GuiHome::customContextMenu( const QPoint& )
   act = mp_menuContext->addAction( tr( "Show the timestamp" ), this, SLOT( onAddTimestampClicked() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().homeShowMessageTimestamp() );
-
+  mp_menuContext->addSeparator();
+  act = mp_menuContext->addAction( IconManager::instance().icon( "clear.png" ), tr( "Clear system messages" ), this, SLOT( clearSystemMessages() ) );
   mp_menuContext->exec( QCursor::pos() );
 }
 
@@ -121,6 +119,11 @@ int GuiHome::loadSystemMessages()
   }
   QTimer::singleShot( 0, this, SLOT( resetNews() ) );
   return num_sys_msg;
+}
+
+void GuiHome::clearSystemMessages()
+{
+  emit clearSystemMessagesRequest( ID_DEFAULT_CHAT );
 }
 
 void GuiHome::resetNews()

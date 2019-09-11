@@ -4,6 +4,8 @@ For more informations please visit https://www.beebeep.net
 
 BeeBEEP 5.6.9 (in development)
 - Added "Quote selected text" option to context menu (right click) of the chat
+- Added "CheckUserConnectedFromDatagramIp" option in beebeep.rc (to prevent multiple connections from the same user but different ip addresses)
+- Added "Clear system messages" in activity and chat windows
 
 BeeBEEP 5.6.8
 - "ChatSaveFileTransfers" and "ChatSaveSystemMessages" options added in Settings - Chat menu: 

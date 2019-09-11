@@ -75,6 +75,39 @@ void Chat::clearMessages()
   m_messages.clear();
 }
 
+void Chat::clearSystemMessages()
+{
+  QList<ChatMessage>::iterator it = m_messages.begin();
+  bool skip_first_system_message = isDefault();
+  while( it != m_messages.end() )
+  {
+    if( skip_first_system_message )
+    {
+      skip_first_system_message = false;
+      ++it;
+    }
+    else if( it->isSystemActivity() )
+      it = m_messages.erase( it );
+    else
+      ++it;
+  }
+}
+
+bool Chat::hasSystemMessages() const
+{
+  int min_system_messages = isDefault() ? 2 : 1;
+  int counter = 0;
+  foreach( ChatMessage cm, m_messages )
+  {
+    if( cm.isSystemActivity() )
+      counter++;
+
+    if( counter > min_system_messages )
+      return true;
+  }
+  return false;
+}
+
 int Chat::chatMessages() const
 {
   int chat_messages = 0;

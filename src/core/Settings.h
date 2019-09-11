@@ -119,6 +119,8 @@ public:
 
   inline bool disableMenuSettings() const;
 
+  inline bool checkUserConnectedFromDatagramIp() const;
+
   QString dnsRecord() const;
   inline bool useMulticastDns() const;
   inline void setUseMulticastDns( bool );
@@ -604,6 +606,7 @@ private:
   QString m_dataFolderInRC;
   bool m_addAccountNameToDataFolder;
   QString m_preferredSubnets;
+  bool m_checkUserConnectedFromDatagramIp;
 
   bool m_useIPv6;
   QHostAddress m_multicastGroupAddress;
@@ -1235,5 +1238,6 @@ inline void Settings::setChatQuoteBackgroundColor( const QString& new_value ) { 
 inline const QString& Settings::chatQuoteBackgroundColor() const { return m_chatQuoteBackgroundColor; }
 inline void Settings::setChatQuoteTextColor( const QString& new_value ) { m_chatQuoteTextColor = new_value; }
 inline const QString& Settings::chatQuoteTextColor() const { return m_chatQuoteTextColor; }
+inline bool Settings::checkUserConnectedFromDatagramIp() const { return m_checkUserConnectedFromDatagramIp; }
 
 #endif // BEEBEEP_SETTINGS_

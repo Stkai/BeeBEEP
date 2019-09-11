@@ -90,6 +90,7 @@ public:
   Chat createGroupChat( const User&, const Group&, bool broadcast_message );
   bool changeGroupChat( const User&, const Group& );
   bool clearMessagesInChat( VNumber, bool clear_history );
+  bool clearSystemMessagesInChat( VNumber );
   bool removeChat( VNumber, bool save_chat_messages );
   bool readAllMessagesInChat( VNumber );
   void sendBuzzToUser( VNumber );
@@ -200,6 +201,7 @@ protected slots:
   /* CoreConnection */
   void checkNewConnection( qintptr );
   void newPeerFound( const QHostAddress&, int );
+  void newPeerFoundFromDatagram( const QHostAddress&, const QHostAddress&, int );
   void setConnectionError( QAbstractSocket::SocketError );
   void setConnectionClosed();
   void checkUserAuthentication( const QByteArray& );

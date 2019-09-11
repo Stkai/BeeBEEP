@@ -1083,6 +1083,10 @@
         <source>Quote selected text</source>
         <translation>Cita il testo selezionato</translation>
     </message>
+    <message>
+        <source>Clear system messages</source>
+        <translation>Cancella i messaggi di sistema</translation>
+    </message>
 </context>
 <context>
     <name>GuiChatList</name>
@@ -1590,6 +1594,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Select all</source>
         <translation>Seleziona tutto</translation>
+    </message>
+    <message>
+        <source>Clear system messages</source>
+        <translation>Cancella i messaggi di sistema</translation>
     </message>
 </context>
 <context>
@@ -3117,6 +3125,14 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Add up to %1 files to the transfer queue</source>
         <translation>Aggiungi fino a %1 file alla coda di trasferimento</translation>
+    </message>
+    <message>
+        <source>Select quote text color</source>
+        <translation>Seleziona il colore del testo citato</translation>
+    </message>
+    <message>
+        <source>Select quote background color</source>
+        <translation>Seleziona il colore di sfondo del testo citato</translation>
     </message>
 </context>
 <context>

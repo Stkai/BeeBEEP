@@ -1051,6 +1051,10 @@
         <source>Quote selected text</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Clear system messages</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiChatList</name>
@@ -1533,6 +1537,10 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Select all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear system messages</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3004,6 +3012,14 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Add up to %1 files to the transfer queue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select quote text color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select quote background color</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

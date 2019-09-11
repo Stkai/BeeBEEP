@@ -129,7 +129,6 @@ void HttpDownloader::onReplyFinished( QNetworkReply *reply )
     QVariant header_file_name = reply->header( QNetworkRequest::ContentDispositionHeader );
     if( header_file_name.isValid() )
     {
-    qDebug() << "IS VALID";
       QStringList sl_file_name = header_file_name.toString().split( ";" );
       foreach( QString s_ref, sl_file_name )
       {

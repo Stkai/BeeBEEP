@@ -1031,6 +1031,10 @@
         <source>Quote selected text</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Clear system messages</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiChatList</name>
@@ -1506,6 +1510,10 @@ Please select a different name.</source>
     <message>
         <source>Select all</source>
         <translation>Вибрати усе</translation>
+    </message>
+    <message>
+        <source>Clear system messages</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2953,6 +2961,14 @@ Please select a different name.</source>
     <message>
         <source>Restart later manually</source>
         <translation>Перезавантажте вручну пізніше</translation>
+    </message>
+    <message>
+        <source>Select quote text color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select quote background color</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -205,24 +205,3 @@ QString GuiChatMessage::chatToHtml( const Chat& c, bool skip_file_transfers, boo
 
   return html_text;
 }
-
-bool GuiChatMessage::messageCanBeShowedInActivity( const ChatMessage& cm )
-{
-  return !messageCanBeShowedInDefaultChat( cm );
-}
-
-bool GuiChatMessage::messageCanBeShowedInDefaultChat( const ChatMessage& cm )
-{
-  switch( cm.type() )
-  {
-  case ChatMessage::Header:
-  case ChatMessage::Chat:
-  case ChatMessage::History:
-  case ChatMessage::Other:
-  case ChatMessage::ImagePreview:
-  case ChatMessage::Autoresponder:
-    return true;
-  default:
-    return false;
-  }
-}

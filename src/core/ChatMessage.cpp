@@ -73,3 +73,26 @@ void ChatMessage::fromMessage( const Message& m )
     m_textColor = cm_data.textColor();
   m_isImportant = m.hasFlag( Message::Important );
 }
+
+bool ChatMessage::isChatActivity() const
+{
+  switch( m_type )
+  {
+  case ChatMessage::Header:
+  case ChatMessage::Chat:
+  case ChatMessage::History:
+  case ChatMessage::Other:
+  case ChatMessage::ImagePreview:
+  case ChatMessage::Autoresponder:
+    return true;
+  default:
+    return false;
+  }
+}
+
+bool ChatMessage::isSystemActivity() const
+{
+  return isFromSystem() && !isChatActivity();
+}
+
+

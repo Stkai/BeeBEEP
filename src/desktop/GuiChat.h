@@ -65,6 +65,7 @@ signals:
   void sendFileFromChatRequest( VNumber, const QString& );
   void editGroupRequest( VNumber );
   void chatToClear( VNumber );
+  void clearSystemMessagesRequestFromChat( VNumber );
   void showChatMenuRequest();
   void saveStateAndGeometryRequest();
   void toggleVisibilityEmoticonsPanelRequest();
@@ -124,6 +125,7 @@ private slots:
   void quoteSelectedText();
   void resetChatFontToDefault();
   void operationCompleted();
+  void clearSystemMessages();
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   void shareDesktopToChat();
   void sendScreenshotToChat();
@@ -144,6 +146,7 @@ private:
   QMenu* mp_menuFilters;
   QAction* mp_actSendFile;
   QAction* mp_actClear;
+  QAction* mp_actClearSystemMessages;
   QAction* mp_actSelectForegroundColor;
   QAction* mp_actSelectBackgroundColor;
   QAction* mp_actSelectSystemColor;

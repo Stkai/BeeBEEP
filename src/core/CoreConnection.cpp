@@ -83,6 +83,23 @@ Connection* Core::createConnection()
   return c;
 }
 
+void Core::newPeerFoundFromDatagram( const QHostAddress& datagram_ip, const QHostAddress& sender_ip, int sender_port )
+{
+  if( !datagram_ip.isNull() && datagram_ip != sender_ip )
+  {
+    if( Settings::instance().checkUserConnectedFromDatagramIp() )
+    {
+      NetworkAddress na( datagram_ip, static_cast<quint16>( sender_port ) );
+      if( isUserConnected( na ) )
+      {
+        qDebug() << "Skip datagram from" << qPrintable( sender_ip.toString() ) << "because it is already connected with" << qPrintable( na.toString() );
+        return;
+      }
+    }
+  }
+  newPeerFound( sender_ip, sender_port );
+}
+
 void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )
 {
   if( !isConnected() )

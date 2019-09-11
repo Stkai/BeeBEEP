@@ -44,6 +44,7 @@ Settings::Settings()
   m_defaultBroadcastPort = DEFAULT_BROADCAST_PORT;
   m_defaultListenerPort = DEFAULT_LISTENER_PORT;
   m_defaultFileTransferPort = DEFAULT_FILE_TRANSFER_PORT;
+  m_checkUserConnectedFromDatagramIp = true;
 
   m_resetGeometryAtStartup = false;
   m_saveGeometryOnExit = false;
@@ -453,6 +454,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "AllowEditNickname", m_allowEditNickname );
     sets->setValue( "DisableCreateMessage", m_disableCreateMessage );
     sets->setValue( "DisableMenuSettings", m_disableMenuSettings );
+    sets->setValue( "CheckUserConnectedFromDatagramIp", m_checkUserConnectedFromDatagramIp );
     sets->endGroup();
     sets->sync();
     qDebug() << "RC default configuration file created in" << qPrintable( Bee::convertToNativeFolderSeparator( sets->fileName() ) );
@@ -534,6 +536,7 @@ void Settings::loadRcFile()
   m_disableCreateMessage = sets->value( "DisableCreateMessage", m_disableCreateMessage ).toBool();
   m_disableMenuSettings = sets->value( "DisableMenuSettings", m_disableMenuSettings ).toBool();
   m_clearCacheAfterDays = qMax( -1, sets->value( "ClearCacheAfterDays", m_clearCacheAfterDays ).toInt() );
+  m_checkUserConnectedFromDatagramIp = sets->value( "CheckUserConnectedFromDatagramIp", m_checkUserConnectedFromDatagramIp ).toBool();
   sets->endGroup();
   QStringList key_list = sets->allKeys();
   foreach( QString key, key_list )

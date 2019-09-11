@@ -266,7 +266,7 @@ void Broadcaster::readBroadcastDatagram()
     int sender_listener_port = m.text().toInt( &ok );
     if( !ok )
     {
-      qWarning() << "Broadcaster has received an invalid listener port from datagram:" << datagram;
+      qWarning() << "Broadcaster has received an invalid listener port from datagram:" << m.text();
       continue;
     }
 
@@ -282,7 +282,7 @@ void Broadcaster::readBroadcastDatagram()
       qDebug() << "Broadcaster has found new peer" << qPrintable( sender_ip.toString() ) << sender_listener_port;
     else
       qDebug() << "Broadcaster has found new peer" << qPrintable( sender_ip.toString() ) << sender_listener_port << "with datagram from" << qPrintable( sender_host_address.toString() );
-    emit newPeerFound( sender_ip, sender_listener_port );
+    emit newPeerFoundFromDatagram( sender_host_address, sender_ip, sender_listener_port );
   }
 
   if( num_datagram_read > 1 )

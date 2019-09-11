@@ -697,6 +697,20 @@ bool Core::clearMessagesInChat( VNumber chat_id, bool clear_history )
   return true;
 }
 
+bool Core::clearSystemMessagesInChat( VNumber chat_id )
+{
+  Chat c = ChatManager::instance().chat( chat_id );
+  if( !c.isValid() )
+  {
+    qWarning() << "Invalid chat" << chat_id << "in Core::clearSystemMessagesInChat(...)";
+    return false;
+  }
+  c.clearSystemMessages();
+  ChatManager::instance().setChat( c );
+  emit chatChanged( c );
+  return true;
+}
+
 int Core::checkOfflineMessagesForUser( const User& u )
 {
   QList<MessageRecord> message_list = MessageManager::instance().takeMessagesToSendToUserId( u.id() );

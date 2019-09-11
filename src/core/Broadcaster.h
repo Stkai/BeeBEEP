@@ -49,6 +49,7 @@ public slots:
 
 signals:
   void newPeerFound( const QHostAddress&, int );
+  void newPeerFoundFromDatagram( const QHostAddress&, const QHostAddress&, int );
 
 private slots:
   void readBroadcastDatagram();

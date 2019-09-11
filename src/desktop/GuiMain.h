@@ -140,6 +140,7 @@ private slots:
   void openDeveloperWebSite();
   void openHelpPage();
   void clearChat( VNumber );
+  void clearSystemMessagesInChat( VNumber );
   void removeChat( VNumber );
   void showSharesForUser( const User& );
   void selectLanguage();

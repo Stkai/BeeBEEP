@@ -60,6 +60,7 @@ public:
   inline const QList<ChatMessage>& messages() const;
   void addMessage( const ChatMessage& );
   void clearMessages();
+  void clearSystemMessages();
   inline const QString& privateId() const;
   inline const QList<VNumber>& unreadMessageUsersId() const;
   inline void setReadMessagesByUser( VNumber );
@@ -72,6 +73,7 @@ public:
   bool isDefault() const;
   inline bool isGroup() const;
   bool hasMinimumUsersForGroup() const;
+  bool hasSystemMessages() const;
 
 private:
   Group m_group;
