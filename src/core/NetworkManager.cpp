@@ -47,13 +47,16 @@ QList<NetworkEntry> NetworkManager::availableNetworkEntries() const
   {
     if( isNetworkInterfaceAvailable( if_net ) )
     {
-      network_address_entries = if_net.addressEntries();
       hardware_address = if_net.hardwareAddress();
-      foreach( QNetworkAddressEntry nae, network_address_entries )
+      if( !Settings::instance().isLocalHardwareAddressToSkip( hardware_address ) )
       {
-        network_entry = NetworkEntry( hardware_address, nae );
-        if( isNetworkEntryAvailable( network_entry ) && !network_entries.contains( network_entry ) )
-          network_entries.append( network_entry );
+        network_address_entries = if_net.addressEntries();
+        foreach( QNetworkAddressEntry nae, network_address_entries )
+        {
+          network_entry = NetworkEntry( hardware_address, nae );
+          if( isNetworkEntryAvailable( network_entry ) && !network_entries.contains( network_entry ) )
+            network_entries.append( network_entry );
+        }
       }
     }
   }

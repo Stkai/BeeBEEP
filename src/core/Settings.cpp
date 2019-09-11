@@ -111,6 +111,8 @@ Settings::Settings()
   m_allowEditNickname = true;
   m_disableCreateMessage = false;
   m_clearCacheAfterDays = 96;
+
+  m_skipLocalHardwareAddresses = QStringList();
   /* Default RC end */
 
   m_emoticonSizeInEdit = 18;
@@ -455,6 +457,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "DisableCreateMessage", m_disableCreateMessage );
     sets->setValue( "DisableMenuSettings", m_disableMenuSettings );
     sets->setValue( "CheckUserConnectedFromDatagramIp", m_checkUserConnectedFromDatagramIp );
+    sets->setValue( "SkipLocalHardwareAddresses", m_skipLocalHardwareAddresses.isEmpty() ? QString( "" ) : m_skipLocalHardwareAddresses.join( "," ) );
     sets->endGroup();
     sets->sync();
     qDebug() << "RC default configuration file created in" << qPrintable( Bee::convertToNativeFolderSeparator( sets->fileName() ) );
@@ -537,13 +540,23 @@ void Settings::loadRcFile()
   m_disableMenuSettings = sets->value( "DisableMenuSettings", m_disableMenuSettings ).toBool();
   m_clearCacheAfterDays = qMax( -1, sets->value( "ClearCacheAfterDays", m_clearCacheAfterDays ).toInt() );
   m_checkUserConnectedFromDatagramIp = sets->value( "CheckUserConnectedFromDatagramIp", m_checkUserConnectedFromDatagramIp ).toBool();
+  m_skipLocalHardwareAddresses.clear();
+  QString local_hw_addresses_to_skip = sets->value( "SkipLocalHardwareAddresses", QString( "" ) ).toString();
+  if( !local_hw_addresses_to_skip.isEmpty() )
+  {
+    m_skipLocalHardwareAddresses = local_hw_addresses_to_skip.split( "," );
+    m_skipLocalHardwareAddresses.removeDuplicates();
+  }
   sets->endGroup();
   QStringList key_list = sets->allKeys();
   foreach( QString key, key_list )
     qDebug() << "RC read ->" << qPrintable( key ) << "=" << qPrintable( sets->value( key ).toString() );
-
   qDebug() << "RC configuration file read";
-
+  if( !m_skipLocalHardwareAddresses.isEmpty() )
+  {
+    foreach( QString hw_value, m_skipLocalHardwareAddresses )
+      qDebug() << "Skip local hardware address:" << qPrintable( hw_value );
+  }
   sets->deleteLater();
 }
 

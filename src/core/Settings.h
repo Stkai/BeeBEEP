@@ -129,6 +129,7 @@ public:
   inline void setLocalUser( const User& );
   void setLocalUserHost( const QHostAddress&, quint16 );
   inline void setLocalUserStatus( User::Status );
+  inline bool isLocalHardwareAddressToSkip( const QString& ) const;
 
   inline bool useIPv6() const;
   QHostAddress hostAddressToListen();
@@ -629,6 +630,8 @@ private:
   bool m_allowEditNickname;
   bool m_disableCreateMessage;
   bool m_disableMenuSettings;
+
+  QStringList m_skipLocalHardwareAddresses;
 
   // Ini
   bool m_firstTime;
@@ -1239,5 +1242,6 @@ inline const QString& Settings::chatQuoteBackgroundColor() const { return m_chat
 inline void Settings::setChatQuoteTextColor( const QString& new_value ) { m_chatQuoteTextColor = new_value; }
 inline const QString& Settings::chatQuoteTextColor() const { return m_chatQuoteTextColor; }
 inline bool Settings::checkUserConnectedFromDatagramIp() const { return m_checkUserConnectedFromDatagramIp; }
+inline bool Settings::isLocalHardwareAddressToSkip( const QString& hw_value ) const { return m_skipLocalHardwareAddresses.isEmpty() ? false : m_skipLocalHardwareAddresses.contains( hw_value, Qt::CaseInsensitive ); }
 
 #endif // BEEBEEP_SETTINGS_
