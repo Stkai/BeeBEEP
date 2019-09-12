@@ -46,6 +46,7 @@ public:
   void createLocalUser( const QString& user_name );
   QString createLocalUserHash();
   bool setDataFolder();
+  bool searchDataFolder();
   bool createDefaultRcFile();
   bool createDefaultHostsFile();
 

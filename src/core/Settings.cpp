@@ -276,15 +276,20 @@ void Settings::setDefaultFolders()
 #endif
   qDebug() << "Resource folder:" << qPrintable( m_resourceFolder );
 
+  if( !Bee::folderIsWriteable( m_resourceFolder ) )
+  {
 #if QT_VERSION >= 0x050400
-  m_dataFolder = Bee::convertToNativeFolderSeparator( QStandardPaths::writableLocation( QStandardPaths::AppDataLocation ) );
+    m_dataFolder = Bee::convertToNativeFolderSeparator( QStandardPaths::writableLocation( QStandardPaths::AppDataLocation ) );
 #elif QT_VERSION >= 0x050000
-  m_dataFolder = Bee::convertToNativeFolderSeparator( QString( "%1/%2" )
-                   .arg( QStandardPaths::writableLocation( QStandardPaths::DataLocation ) )
-                   .arg( programName() ) );
+    m_dataFolder = Bee::convertToNativeFolderSeparator( QString( "%1/%2" )
+                     .arg( QStandardPaths::writableLocation( QStandardPaths::DataLocation ) )
+                     .arg( programName() ) );
 #else
-  m_dataFolder = Bee::convertToNativeFolderSeparator( QDesktopServices::storageLocation( QDesktopServices::DataLocation ) );
+    m_dataFolder = Bee::convertToNativeFolderSeparator( QDesktopServices::storageLocation( QDesktopServices::DataLocation ) );
 #endif
+  }
+  else
+    m_dataFolder = m_resourceFolder;
   m_cacheFolder = defaultCacheFolderPath();
 }
 
@@ -457,7 +462,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "DisableCreateMessage", m_disableCreateMessage );
     sets->setValue( "DisableMenuSettings", m_disableMenuSettings );
     sets->setValue( "CheckUserConnectedFromDatagramIp", m_checkUserConnectedFromDatagramIp );
-    sets->setValue( "SkipLocalHardwareAddresses", m_skipLocalHardwareAddresses.isEmpty() ? QString( "" ) : m_skipLocalHardwareAddresses.join( "," ) );
+    sets->setValue( "SkipLocalHardwareAddresses", m_skipLocalHardwareAddresses.isEmpty() ? QString( "" ) : m_skipLocalHardwareAddresses.join( ", " ) );
     sets->endGroup();
     sets->sync();
     qDebug() << "RC default configuration file created in" << qPrintable( Bee::convertToNativeFolderSeparator( sets->fileName() ) );
@@ -479,7 +484,7 @@ void Settings::loadRcFile()
     return;
   }
   else
-    qDebug() << "Loading settings from RC configuration file";
+    qDebug() << "Loading settings from RC configuration file" << qPrintable( rc_file_path );
 
   QSettings* sets = new QSettings( rc_file_path, QSettings::IniFormat );
   sets->setFallbacksEnabled( false );
@@ -541,18 +546,30 @@ void Settings::loadRcFile()
   m_clearCacheAfterDays = qMax( -1, sets->value( "ClearCacheAfterDays", m_clearCacheAfterDays ).toInt() );
   m_checkUserConnectedFromDatagramIp = sets->value( "CheckUserConnectedFromDatagramIp", m_checkUserConnectedFromDatagramIp ).toBool();
   m_skipLocalHardwareAddresses.clear();
-  QString local_hw_addresses_to_skip = sets->value( "SkipLocalHardwareAddresses", QString( "" ) ).toString().trimmed();
-  if( !local_hw_addresses_to_skip.isEmpty() )
+  QString local_hw_addresses = sets->value( "SkipLocalHardwareAddresses", QString() ).toString();
+  QStringList local_hw_address_list;
+  if( local_hw_addresses.isEmpty() )
+    local_hw_address_list = sets->value( "SkipLocalHardwareAddresses", QStringList() ).toStringList();
+  else
+    local_hw_address_list = local_hw_addresses.split( "," );
+  if( !local_hw_address_list.isEmpty() )
   {
-    QStringList local_hw_address_list = local_hw_addresses_to_skip.split( "," );
     foreach( QString hw_value, local_hw_address_list )
-      m_skipLocalHardwareAddresses.append( hw_value.trimmed() );
+    {
+      if( !hw_value.isEmpty() )
+        m_skipLocalHardwareAddresses.append( hw_value.trimmed() );
+    }
     m_skipLocalHardwareAddresses.removeDuplicates();
   }
   sets->endGroup();
   QStringList key_list = sets->allKeys();
   foreach( QString key, key_list )
-    qDebug() << "RC read ->" << qPrintable( key ) << "=" << qPrintable( sets->value( key ).toString() );
+  {
+    QString sets_value = sets->value( key ).toString();
+    if( sets_value.isEmpty() )
+      sets_value = sets->value( key ).toStringList().join( ", " );
+    qDebug() << "RC read ->" << qPrintable( key ) << "=" << qPrintable( sets_value );
+  }
   qDebug() << "RC configuration file read";
   if( !m_skipLocalHardwareAddresses.isEmpty() )
   {
@@ -1884,21 +1901,9 @@ void Settings::clearNativeSettings()
     sets.clear();
 }
 
-bool Settings::setDataFolder()
+bool Settings::searchDataFolder()
 {
-  m_dataFolder = Bee::convertToNativeFolderSeparator( m_resourceFolder );
-
-  if( !m_saveDataInDocumentsFolder && !m_saveDataInUserApplicationFolder && m_dataFolderInRC.isEmpty() )
-  {
-    if( Bee::folderIsWriteable( m_dataFolder ) )
-    {
-      qDebug() << "Data folder:" << qPrintable( m_dataFolder );
-      return true;
-    }
-    else
-      qWarning() << "Default data folder" << qPrintable( m_dataFolder ) << "is not writeable";
-  }
-
+  qDebug() << "Searching data folder...";
   QString data_folder = m_addAccountNameToDataFolder ? accountNameFromSystemEnvinroment() : QLatin1String( "beebeep-data" );
   QString root_folder;
 
@@ -1954,8 +1959,25 @@ bool Settings::setDataFolder()
     qWarning() << "Data folder" << qPrintable( m_dataFolder ) << "is not writeable";
     return false;
   }
-  qDebug() << "Data folder (smart):" << qPrintable( m_dataFolder );
+  qDebug() << "Data folder (found):" << qPrintable( m_dataFolder );
+  return true;
+}
 
+
+bool Settings::setDataFolder()
+{
+  QStringList default_data_folders;
+  default_data_folders.append( m_dataFolder );
+  if( m_dataFolder != m_resourceFolder )
+    default_data_folders.append( m_resourceFolder );
+  m_dataFolder = findFileInFolders( "beebeep.ini", default_data_folders, true );
+  if( m_dataFolder.isEmpty() )
+  {
+    if( !searchDataFolder() )
+      qWarning() << "Unable to save data. Check your FS permissions";
+  }
+  else
+    qDebug() << "Data folder:" << qPrintable( m_dataFolder );
   m_cacheFolder = defaultCacheFolderPath();
   QDir cache_folder( m_cacheFolder );
   if( !cache_folder.exists() )
