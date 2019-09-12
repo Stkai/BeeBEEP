@@ -38,6 +38,7 @@ public:
 
   void setDefaultFolders();
   bool enableSaveData() const;
+  inline bool rcFileExists() const;
 
   QString currentSettingsFilePath() const;
   QString operatingSystem( bool use_long_name ) const;
@@ -633,6 +634,8 @@ private:
   bool m_disableMenuSettings;
 
   QStringList m_skipLocalHardwareAddresses;
+
+  bool m_rcFileExists;
 
   // Ini
   bool m_firstTime;
@@ -1244,5 +1247,6 @@ inline void Settings::setChatQuoteTextColor( const QString& new_value ) { m_chat
 inline const QString& Settings::chatQuoteTextColor() const { return m_chatQuoteTextColor; }
 inline bool Settings::checkUserConnectedFromDatagramIp() const { return m_checkUserConnectedFromDatagramIp; }
 inline bool Settings::isLocalHardwareAddressToSkip( const QString& hw_value ) const { return m_skipLocalHardwareAddresses.isEmpty() ? false : m_skipLocalHardwareAddresses.contains( hw_value, Qt::CaseInsensitive ); }
+inline bool Settings::rcFileExists() const { return m_rcFileExists; }
 
 #endif // BEEBEEP_SETTINGS_

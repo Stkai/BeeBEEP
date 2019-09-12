@@ -113,6 +113,8 @@ Settings::Settings()
 
   m_checkUserConnectedFromDatagramIp = false;
   m_skipLocalHardwareAddresses = QStringList();
+
+  m_rcFileExists = false;
   /* Default RC end */
 
   m_emoticonSizeInEdit = 18;
@@ -241,6 +243,8 @@ QString Settings::findFileInFolders( const QString& file_name, const QStringList
   qDebug() << "Searching file" << qPrintable( file_name );
   foreach( QString folder_path, folder_list )
   {
+    if( folder_path.trimmed().isEmpty() )
+      continue;
     folder_path = Bee::convertToNativeFolderSeparator( folder_path );
     if( !folder_path.endsWith( Bee::naviveFolderSeparator() ) )
       folder_path.append( Bee::naviveFolderSeparator() );
@@ -481,11 +485,12 @@ void Settings::loadRcFile()
   if( rc_file_path.isNull() )
   {
     qDebug() << "RC configuration file not found";
+    m_rcFileExists = false;
     return;
   }
   else
     qDebug() << "Loading settings from RC configuration file" << qPrintable( rc_file_path );
-
+  m_rcFileExists = true;
   QSettings* sets = new QSettings( rc_file_path, QSettings::IniFormat );
   sets->setFallbacksEnabled( false );
 
@@ -1906,13 +1911,17 @@ bool Settings::searchDataFolder()
   qDebug() << "Searching data folder...";
   QString data_folder = m_addAccountNameToDataFolder ? accountNameFromSystemEnvinroment() : QLatin1String( "beebeep-data" );
   QString root_folder;
+#ifdef Q_OS_MAC
+  bool rc_folder_is_writable = false;
+#else
   bool rc_folder_is_writable = Bee::folderIsWriteable( m_resourceFolder );
-#ifdef Q_OS_WIN32
-  if( m_resourceFolder.contains( "Program Files" ) || m_resourceFolder.startsWith( "C:\\Program" ) )
-  {
-    qDebug() << "Resource folder is default Windows Program Files and will not be used as data folder";
-    rc_folder_is_writable = false;
-  }
+  #ifdef Q_OS_WIN
+    if( m_resourceFolder.contains( "Program Files" ) || m_resourceFolder.startsWith( "C:\\Program" ) )
+    {
+      qDebug() << "Resource folder is default Windows Program Files and will not be used as data folder";
+      rc_folder_is_writable = false;
+    }
+  #endif
 #endif
 
 #if QT_VERSION >= 0x050400
@@ -1973,11 +1982,17 @@ bool Settings::searchDataFolder()
 
 bool Settings::setDataFolder()
 {
-  QStringList default_data_folders;
-  default_data_folders.append( m_dataFolder );
-  if( m_dataFolder != m_resourceFolder )
-    default_data_folders.append( m_resourceFolder );
-  m_dataFolder = findFileInFolders( "beebeep.ini", default_data_folders, true );
+  if( !rcFileExists() )
+  {
+    QStringList default_data_folders;
+    default_data_folders.append( m_dataFolder );
+    if( m_dataFolder != m_resourceFolder )
+      default_data_folders.append( m_resourceFolder );
+    m_dataFolder = findFileInFolders( "beebeep.ini", default_data_folders, true );
+  }
+  else
+    m_dataFolder = "";
+
   if( m_dataFolder.isEmpty() )
   {
     if( !searchDataFolder() )
