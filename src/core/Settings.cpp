@@ -1927,11 +1927,18 @@ bool Settings::searchDataFolder()
 #else
   bool rc_folder_is_writable = Bee::folderIsWriteable( m_resourceFolder );
   #ifdef Q_OS_WIN
-    if( m_resourceFolder.contains( "Program Files" ) || m_resourceFolder.startsWith( "C:\\Program" ) )
+    QProcessEnvironment pe = QProcessEnvironment::systemEnvironment();
+    QString env_program_files = pe.value( "PROGRAMFILES", QLatin1String( ":\\Program File" ) );
+    if( !env_program_files.isEmpty() )
+      qDebug() << "Checking if BeeBEEP is installed in system folder:" << qPrintable( env_program_files ) << "...";
+    if( m_resourceFolder.contains( "Program Files", Qt::CaseInsensitive ) || m_resourceFolder.contains( env_program_files, Qt::CaseInsensitive ) )
     {
+      qDebug() << "BeeBEEP is installed in system folder:" << qPrintable( m_resourceFolder );
       qDebug() << "Resource folder is default Windows Program Files and will not be used as data folder";
       rc_folder_is_writable = false;
     }
+    else
+      qDebug() << "BeeBEEP is installed in custom folder:" << qPrintable( m_resourceFolder );
   #endif
 #endif
 
