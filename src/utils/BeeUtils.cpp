@@ -447,7 +447,10 @@ QString Bee::convertToNativeFolderSeparator( const QString& raw_path )
     if( path_converted[ i ] == from_char )
       path_converted[ i ] = to_char;
   }
-
+  // Do not remove "double slash" because some paths can start with them
+  // Remove trailing slash
+  if( path_converted.endsWith( QDir::separator() ) )
+    path_converted.chop( 1 );
   return path_converted;
 }
 

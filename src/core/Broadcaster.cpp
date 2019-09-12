@@ -316,6 +316,17 @@ void Broadcaster::updateAddresses()
   m_networkAddressesWaitingForLoopback.clear();
   m_networkAddresses.clear();
 
+  if( Settings::instance().useOnlyMulticast() )
+  {
+    if( m_multicastGroupAddress.isNull() )
+      qWarning() << "Multicast only option enabled but the multicast group address is empty";
+#ifdef BEEBEEP_DEBUG
+    else
+      qDebug() << "Multicast only to" << qPrintable( m_multicastGroupAddress.toString() ) << "(option in RC enabled)";
+#endif
+    return;
+  }
+
   foreach( QString s_address, Settings::instance().broadcastAddressesInFileHosts() )
   {
     NetworkAddress na = NetworkAddress::fromString( s_address );

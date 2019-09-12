@@ -41,6 +41,7 @@ Settings::Settings()
   m_useChatWithAllUsers = true;
   m_useSettingsFileIni = true;
   m_broadcastOnlyToHostsIni = false;
+  m_useOnlyMulticast = false;
   m_defaultBroadcastPort = DEFAULT_BROADCAST_PORT;
   m_defaultListenerPort = DEFAULT_LISTENER_PORT;
   m_defaultFileTransferPort = DEFAULT_FILE_TRANSFER_PORT;
@@ -229,6 +230,13 @@ QStringList Settings::dataFolders() const
 {
   QStringList data_folders;
   data_folders.append( dataFolder() );
+#if QT_VERSION >= 0x050400
+  data_folders.append( Bee::convertToNativeFolderSeparator( QStandardPaths::writableLocation( QStandardPaths::AppDataLocation ) ) );
+#elif QT_VERSION >= 0x050000
+  data_folders.append( Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( QStandardPaths::writableLocation( QStandardPaths::DataLocation ) ).arg( programName() ) ) );
+#else
+  data_folders.append( Bee::convertToNativeFolderSeparator( QDesktopServices::storageLocation( QDesktopServices::DataLocation ) ) );
+#endif
 #ifdef Q_OS_UNIX
   data_folders.append( QLatin1String( "/usr/share/beebeep/" ) );
   data_folders.append( QLatin1String( "/usr/local/share/beebeep/" ) );
@@ -246,9 +254,10 @@ QString Settings::findFileInFolders( const QString& file_name, const QStringList
     if( folder_path.trimmed().isEmpty() )
       continue;
     folder_path = Bee::convertToNativeFolderSeparator( folder_path );
-    if( !folder_path.endsWith( Bee::naviveFolderSeparator() ) )
-      folder_path.append( Bee::naviveFolderSeparator() );
-    QString file_path = folder_path + file_name;
+    QString file_path = folder_path;
+    if( !file_path.endsWith( Bee::naviveFolderSeparator() ) )
+      file_path.append( Bee::naviveFolderSeparator() );
+    file_path += file_name;
     QFileInfo fi( file_path );
     if( fi.exists() )
     {
@@ -430,6 +439,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "EnableSaveData", m_enableSaveData );
     sets->setValue( "UseConfigurationFileIni", m_useSettingsFileIni );
     sets->setValue( "BroadcastOnlyToHostsIni", m_broadcastOnlyToHostsIni );
+    sets->setValue( "UseOnlyMulticast", m_useOnlyMulticast );
     sets->setValue( "BroadcastPort", m_defaultBroadcastPort );
     sets->setValue( "DefaultListenerPort", m_defaultListenerPort );
     sets->setValue( "DefaultFileTransferPort", m_defaultFileTransferPort );
@@ -481,7 +491,7 @@ bool Settings::createDefaultRcFile()
 
 void Settings::loadRcFile()
 {
-  QString rc_file_path = findFileInFolders( "beebeep.rc", resourceFolders() );
+  QString rc_file_path = findFileInFolders( QLatin1String( "beebeep.rc" ), resourceFolders() );
   if( rc_file_path.isNull() )
   {
     qDebug() << "RC configuration file not found";
@@ -502,6 +512,7 @@ void Settings::loadRcFile()
   m_enableSaveData = sets->value( "EnableSaveData", m_enableSaveData ).toBool();
   m_useSettingsFileIni = sets->value( "UseConfigurationFileIni", m_useSettingsFileIni ).toBool();
   m_broadcastOnlyToHostsIni = sets->value( "BroadcastOnlyToHostsIni", m_broadcastOnlyToHostsIni ).toBool();
+  m_useOnlyMulticast = sets->value( "UseOnlyMulticast", m_useOnlyMulticast ).toBool();
   m_defaultBroadcastPort = sets->value( "BroadcastPort", m_defaultBroadcastPort ).toInt();
   m_defaultListenerPort = sets->value( "DefaultListenerPort", m_defaultListenerPort ).toInt();
   m_defaultFileTransferPort = sets->value( "DefaultFileTransferPort", m_defaultFileTransferPort ).toInt();

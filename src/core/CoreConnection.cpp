@@ -341,7 +341,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
         {
           sAlertMsg = tr( "%1 Connection closed to user %2 because it uses same account name of the already connected user %3: %4." )
                         .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), Bee::replaceHtmlSpecialCharacters( u.path() ), Bee::replaceHtmlSpecialCharacters( user_found.path() ), u.accountName() );
-          qDebug() << "User" << qPrintable( u.path() ) << "is already connected with account" << qPrintable( user_found.accountName() );
+          qDebug() << "User" << qPrintable( u.path() ) << "is already connected with account" << qPrintable( user_found.accountPath() );
         }
         else
         {

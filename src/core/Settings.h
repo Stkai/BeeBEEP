@@ -371,6 +371,7 @@ public:
   inline void setLocalSubnetForced( const QString& );
   inline const QString& localSubnetForced() const;
   inline bool broadcastOnlyToHostsIni() const;
+  inline bool useOnlyMulticast() const;
   inline void setPreventMultipleConnectionsFromSingleHostAddress( bool );
   inline bool preventMultipleConnectionsFromSingleHostAddress();
   inline const QString& preferredSubnets() const;
@@ -626,6 +627,7 @@ private:
   bool m_disablePrivateChats;
   bool m_disableFileSharing;
   int m_userRecognitionMethod;
+  bool m_useOnlyMulticast;
 
   bool m_canAddMembersToGroup;
   bool m_canRemoveMembersFromGroup;
@@ -989,6 +991,7 @@ inline const QHostAddress& Settings::localHostAddressForced() const { return m_l
 inline void Settings::setLocalSubnetForced( const QString& new_value ) { m_localSubnetForced = new_value; }
 inline const QString& Settings::localSubnetForced() const { return m_localSubnetForced; }
 inline bool Settings::broadcastOnlyToHostsIni() const { return m_broadcastOnlyToHostsIni; }
+inline bool Settings::useOnlyMulticast() const { return m_useOnlyMulticast; }
 inline bool Settings::useMulticastDns() const { return m_useMulticastDns; }
 inline void Settings::setUseMulticastDns( bool new_value ) { m_useMulticastDns = new_value; }
 inline void Settings::setFirstTime( bool new_value ) { m_firstTime = new_value; }

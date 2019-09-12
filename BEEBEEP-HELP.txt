@@ -28,7 +28,7 @@ SaveDataInDocumentsFolder=[true/false] force BeeBEEP to save all data (settings 
 SaveDataInUserApplicationFolder=[true/false] force BeeBEEP to save all data (settings and history) in USER_APP_DATA/beebeep-data (in windows %appdata%\beebeep-data) (default=false) [1.0.3]
 AllowMultipleInstances=[true/false] enable the option to launch multiple instance of BeeBEEP (default=false) [1.0.0]
 DataFolderPath=(String "") you can specify the path of BeeBEEP data. In that folder will be saved history and settings (if UseConfigurationFileIni is true). It overrules SaveDataInDocumentsFolder and AddAccountNameToDataFolder=[true/false] you can add account name to data folder. It is useful, for example, to store all BeeBEEP data in a single shared folder specified in DataFolderPath (default=false) [1.0.3]
-UseMulticastDns=[true/false] if enabled BeeBEEP use Zero Configuration Networking ((default=true in macosx, default=false in others)
+UseMulticastDns=[true/false] if enabled BeeBEEP use Zero Configuration Networking (default=true in macosx, default=false in others)
 PreventMultipleConnectionsFromSingleHostAddress=[true/false] if enabled BeeBEEP blocks multiple connections from single IP address (default=true)
 PreferredSubnets=(Strings "" comma separated) you can specify your subnets. BeeBEEP search your default IP address in these entries (for example ="10.184.9.255,10.184.15.255") (default="") [3.0.1]
 UseIpv6=[true/false] enable Ipv6 protocol for connection (enable it if your network supports *only* IPv6... BeeBEEP works better in IPv4) (default=false)
@@ -63,6 +63,7 @@ ClearCacheAfterDays=[integer] -1: never            (default=96) [5.6.5]
                              365: after 1 year
 CheckUserConnectedFromDatagramIp=[true/false] if true BeeBEEP checks if the user is connected also from ip parsed in datagram (default=true) [5.6.9]
 SkipLocalHardwareAddresses=(Strings "" comma separated) tells to BeeBEEP which hardware addresses (usually mac addresses) must to be skipped (default="") [5.6.9]
+UseOnlyMulticast=[true/false] if enabled BeeBEEP will multicast only in the MulticastGroupAddress (if empty it uses default 239.255.64.75) (default=false) [5.6.9]
 
 [Groups]
 TrustNickname=[true/false] if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect (default=true) [1.0.0] [obsolete in 4.0.0]

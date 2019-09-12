@@ -59,7 +59,7 @@ void Updater::onDownloadCompleted( const QString& file_path )
   }
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << file_path << "download completed";
+  qDebug() << qPrintable( file_path ) << "download completed";
 #endif
 
   QSettings sets( file_path, QSettings::IniFormat );
