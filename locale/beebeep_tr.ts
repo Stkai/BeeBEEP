@@ -5993,7 +5993,7 @@ Lütfen farklı bir isim seçin.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2072"/>
+        <location filename="../src/core/Settings.cpp" line="2087"/>
         <source>Autoresponder</source>
         <translation type="unfinished"></translation>
     </message>

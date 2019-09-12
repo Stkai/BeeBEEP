@@ -44,7 +44,6 @@ Settings::Settings()
   m_defaultBroadcastPort = DEFAULT_BROADCAST_PORT;
   m_defaultListenerPort = DEFAULT_LISTENER_PORT;
   m_defaultFileTransferPort = DEFAULT_FILE_TRANSFER_PORT;
-  m_checkUserConnectedFromDatagramIp = true;
 
   m_resetGeometryAtStartup = false;
   m_saveGeometryOnExit = false;
@@ -112,6 +111,7 @@ Settings::Settings()
   m_disableCreateMessage = false;
   m_clearCacheAfterDays = 96;
 
+  m_checkUserConnectedFromDatagramIp = false;
   m_skipLocalHardwareAddresses = QStringList();
   /* Default RC end */
 
@@ -541,10 +541,12 @@ void Settings::loadRcFile()
   m_clearCacheAfterDays = qMax( -1, sets->value( "ClearCacheAfterDays", m_clearCacheAfterDays ).toInt() );
   m_checkUserConnectedFromDatagramIp = sets->value( "CheckUserConnectedFromDatagramIp", m_checkUserConnectedFromDatagramIp ).toBool();
   m_skipLocalHardwareAddresses.clear();
-  QString local_hw_addresses_to_skip = sets->value( "SkipLocalHardwareAddresses", QString( "" ) ).toString();
+  QString local_hw_addresses_to_skip = sets->value( "SkipLocalHardwareAddresses", QString( "" ) ).toString().trimmed();
   if( !local_hw_addresses_to_skip.isEmpty() )
   {
-    m_skipLocalHardwareAddresses = local_hw_addresses_to_skip.split( "," );
+    QStringList local_hw_address_list = local_hw_addresses_to_skip.split( "," );
+    foreach( QString hw_value, local_hw_address_list )
+      m_skipLocalHardwareAddresses.append( hw_value.trimmed() );
     m_skipLocalHardwareAddresses.removeDuplicates();
   }
   sets->endGroup();
