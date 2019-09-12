@@ -1906,6 +1906,14 @@ bool Settings::searchDataFolder()
   qDebug() << "Searching data folder...";
   QString data_folder = m_addAccountNameToDataFolder ? accountNameFromSystemEnvinroment() : QLatin1String( "beebeep-data" );
   QString root_folder;
+  bool rc_folder_is_writable = Bee::folderIsWriteable( m_resourceFolder );
+#ifdef Q_OS_WIN32
+  if( m_resourceFolder.contains( "Program Files" ) || m_resourceFolder.startsWith( "C:\\Program" ) )
+  {
+    qDebug() << "Resource folder is default Windows Program Files and will not be used as data folder";
+    rc_folder_is_writable = false;
+  }
+#endif
 
 #if QT_VERSION >= 0x050400
   if( !m_dataFolderInRC.isEmpty() )
@@ -1915,7 +1923,7 @@ bool Settings::searchDataFolder()
   else if( m_saveDataInDocumentsFolder )
     root_folder = QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation );
   else
-    root_folder = QStandardPaths::writableLocation( QStandardPaths::AppDataLocation );
+    root_folder = rc_folder_is_writable ? m_resourceFolder : QStandardPaths::writableLocation( QStandardPaths::AppDataLocation );
 #elif QT_VERSION >= 0x050000
   if( !m_dataFolderInRC.isEmpty() )
     root_folder = m_dataFolderInRC;
@@ -1924,7 +1932,7 @@ bool Settings::searchDataFolder()
   else if( m_saveDataInDocumentsFolder )
     root_folder = QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation );
   else
-    root_folder = QString( "%1/%2" ).arg( QStandardPaths::writableLocation( QStandardPaths::DataLocation ) ).arg( programName() );
+    root_folder = QString( "%1/%2" ).arg( rc_folder_is_writable ? m_resourceFolder : QStandardPaths::writableLocation( QStandardPaths::DataLocation ) ).arg( programName() );
 #else
   if( !m_dataFolderInRC.isEmpty() )
     root_folder = m_dataFolderInRC;
@@ -1933,7 +1941,7 @@ bool Settings::searchDataFolder()
   else if( m_saveDataInDocumentsFolder )
     root_folder = QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation );
   else
-    root_folder = QDesktopServices::storageLocation( QDesktopServices::DataLocation );
+    root_folder = QDesktopServices::storageLocation( rc_folder_is_writable ? m_resourceFolder : QDesktopServices::DataLocation );
 #endif
 
   if( m_addAccountNameToDataFolder || m_saveDataInDocumentsFolder )
@@ -1962,7 +1970,6 @@ bool Settings::searchDataFolder()
   qDebug() << "Data folder (found):" << qPrintable( m_dataFolder );
   return true;
 }
-
 
 bool Settings::setDataFolder()
 {
