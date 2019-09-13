@@ -304,9 +304,12 @@ void BeeApplication::slotConnectionEstablished()
 
 QString BeeApplication::localServerName() const
 {
-  QString server_name = QString( "%1_%2_%3" ).arg( organizationDomain(), organizationName(), applicationName() );
-  server_name.replace( QRegExp("[^\\w\\-. ]"), "" );
-  return server_name;
+  QProcessEnvironment pe = QProcessEnvironment::systemEnvironment();
+  QString account_name = pe.value( "USERNAME", "" );
+  if( account_name.isEmpty() )
+    account_name = pe.value( "USER", "" );
+  QString server_name = QString( "%1_%2_%3_%4" ).arg( organizationDomain(), organizationName(), applicationName(), account_name.isEmpty() ? QString( "k" ) : account_name );
+  return QString( "beebeep_%1" ).arg( QString::fromLatin1( QCryptographicHash::hash( server_name.toUtf8().toBase64(), QCryptographicHash::Md5 ).toHex() ) );
 }
 
 void BeeApplication::preventMultipleInstances()
