@@ -46,143 +46,143 @@
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="281"/>
         <source>Image Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Forhåndsvis bilde</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="282"/>
         <source>Autoresponder</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto-responder</translation>
     </message>
 </context>
 <context>
     <name>Core</name>
     <message>
-        <location filename="../src/core/Core.cpp" line="210"/>
+        <location filename="../src/core/Core.cpp" line="208"/>
         <source>%1 Unable to connect to %2 Network. Please check your firewall settings.</source>
         <translation>%1 kan ikke koble til %2 nettverk. Kontroller dine brannmurinstillinger.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="229"/>
+        <location filename="../src/core/Core.cpp" line="227"/>
         <source>%1 Unable to broadcast to %2 Network. Please check your firewall settings.</source>
         <translation>%1 kan ikke kringkaste til %2 nettverk. Kontroller dine brannmurinstillinger.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="242"/>
+        <location filename="../src/core/Core.cpp" line="240"/>
         <source>%1 You are connected to %2 Network.</source>
         <translation>%1 Du er kobla til %2 nettverk.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="386"/>
+        <location filename="../src/core/Core.cpp" line="384"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1 Du er kobla fra %2 nettverk.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="315"/>
+        <location filename="../src/core/Core.cpp" line="313"/>
         <source>%1 Zero Configuration started with service name: %2</source>
         <translation>%1 Null-konfigurasjon starta med tjenestenavn: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="109"/>
+        <location filename="../src/core/Core.cpp" line="107"/>
         <source>%1 User %2 cannot save settings in path: %3</source>
         <translation>%1 Bruker %2 kan ikke lagre innstillinger i stien: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="125"/>
+        <location filename="../src/core/Core.cpp" line="123"/>
         <source>%1 User %2 cannot save chat messages in path: %3</source>
         <translation>%1 Bruker %2 kan ikke lagre samtalemeldinger i stien: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="156"/>
+        <location filename="../src/core/Core.cpp" line="154"/>
         <source>%1 User %2 cannot save unsent messages in path: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Bruker %2 kan ikke lagre usendte meldinger i stien: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="190"/>
+        <location filename="../src/core/Core.cpp" line="188"/>
         <source>%1 Unable to connect to %2 Network. Please check if your network adapter is connected.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Kan ikke koble til nettverk %2. Kontroller at nettverkskortet ditt er tilkoplet.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="193"/>
+        <location filename="../src/core/Core.cpp" line="191"/>
         <source>Network adapter offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Nettverkskort er offline</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="197"/>
+        <location filename="../src/core/Core.cpp" line="195"/>
         <source>Connecting</source>
-        <translation type="unfinished"></translation>
+        <translation>Kobler til</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="253"/>
+        <location filename="../src/core/Core.cpp" line="251"/>
         <source>%1 You have selected to join only in these workgroups: %2</source>
         <translation>%1 Du har valgt å delta bare i disse arbeidsgruppene: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="282"/>
+        <location filename="../src/core/Core.cpp" line="280"/>
         <source>%1 Do you need support? Visit the %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Trenger du support? Besøk %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="284"/>
+        <location filename="../src/core/Core.cpp" line="282"/>
         <source>help page</source>
-        <translation type="unfinished"></translation>
+        <translation>hjelpeside</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="330"/>
+        <location filename="../src/core/Core.cpp" line="328"/>
         <source>%1 Zero Configuration service closed.</source>
         <translation>%1 Nullkonfigurasjonstjeneste lukka.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="392"/>
+        <location filename="../src/core/Core.cpp" line="390"/>
         <source>Disconnected</source>
-        <translation type="unfinished"></translation>
+        <translation>Frakoplet</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="398"/>
+        <location filename="../src/core/Core.cpp" line="396"/>
         <source>Disconnecting</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopler fra</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="419"/>
+        <location filename="../src/core/Core.cpp" line="417"/>
         <source>%1 Reconnecting to the %2 Network in progress.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Gjenoppkopling til %2 nettverket pågår.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="429"/>
+        <location filename="../src/core/Core.cpp" line="427"/>
         <source>Reconnecting</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopler til på nytt</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="447"/>
+        <location filename="../src/core/Core.cpp" line="445"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
         <translation>%1 Nullkonfigurasjon søker i nettverk etter tjeneste: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="454"/>
+        <location filename="../src/core/Core.cpp" line="452"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation>%1 Nullkonfigurasjon kan ikke søke i nettverket etter tjeneste: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="479"/>
+        <location filename="../src/core/Core.cpp" line="477"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1 Kringkaster til %2-nettverket...</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="481"/>
+        <location filename="../src/core/Core.cpp" line="479"/>
         <source>Searching users</source>
-        <translation type="unfinished"></translation>
+        <translation>Letter opp brukere</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="612"/>
+        <location filename="../src/core/Core.cpp" line="610"/>
         <source>New version is available</source>
         <translation>Ny versjon er tilgjengelig</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="613"/>
+        <location filename="../src/core/Core.cpp" line="611"/>
         <source>Click here to download</source>
         <translation>Klikk her for å laste ned</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="700"/>
+        <location filename="../src/core/Core.cpp" line="698"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>Har nådd maks ID. Vennligst lukk og restart program.</translation>
     </message>
@@ -215,22 +215,22 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="619"/>
         <source>Saved chats had an incorrect authorization code.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lagrede samtaler hadde en ukorrekt autorisasjonskode.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="641"/>
         <source>%1 offline messages will be sent as soon as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 offline-meldinger blir sendt så snart som mulig.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="664"/>
         <source>Offline message will be sent to %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Offlinemelding blir sendt til %1</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="870"/>
         <source>Unknown %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukjent %1</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="392"/>
@@ -240,77 +240,77 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="111"/>
         <source>%1 You have created group chat %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Du har oppretta gruppesamtale %2.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="118"/>
         <source>%1 %2 has added you to the group chat %3.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 har lagt deg til gruppesamtalen %3.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="158"/>
         <source>%1 You have changed the group name from %2 to %3.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Du endra gruppenavnet fra %2 til %3.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="160"/>
         <source>%1 %2 has changed the group name from %3 to %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 endra gruppenavnet fra %3 til %4.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="176"/>
         <source>%1 %2 will be informed of your changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 blir informert om dine endringer.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="190"/>
         <source>%1 You have removed members: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Du fjerna medlemmene: %2.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="192"/>
         <source>%1 %2 has removed members: %3.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 har fjerna medlemmene: %3.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="195"/>
         <source>%1 This kind of change can be temporary if the user exists and does not leave the group spontaneously.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Denne typen endring kan bli midlertidig hvis brukeren eksisterer og ikke forlater gruppenen umiddelbart.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="212"/>
         <source>%1 You have added members: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Du la til medlemmene: %2.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="214"/>
         <source>%1 %2 has added members: %3.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 la til medlemmene: %3.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="280"/>
         <source>%1 %2 has left the group chat %3.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 har forlatt gruppesamtale %3.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="301"/>
         <source>%1 %2 wants to remove you from the group chat %3. If you agree please leave the group.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 vil fjerne deg fra gruppesamtale %3. Hvis du er enig, vennligst forlat gruppa.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="320"/>
         <source>%1 %2 is added to saved chats.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 er lagt til lagrede samtaler.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="337"/>
         <source>%1 You have left group chat %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Du har forlatt gruppesamtale %2.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="368"/>
         <source>%1 Chat with %2 is archived.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Samtale med %2 er arkivert.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="398"/>
@@ -320,17 +320,17 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="634"/>
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Usendte offline-samtaler hadde en ukorrekt autorisasjonskode og blir ikke sendt.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="865"/>
         <source>Chat with all users</source>
-        <translation type="unfinished"></translation>
+        <translation>Samtale med alle brukere</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="437"/>
         <source>Unable to send the message to %1.</source>
-        <translation type="unfinished">Kan ikke sende melding til %1.</translation>
+        <translation>Kan ikke sende meldingen til %1.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="469"/>
@@ -340,12 +340,12 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="443"/>
         <source>Nobody has received the message.</source>
-        <translation type="unfinished">Ingen har mottatt meldinga.</translation>
+        <translation>Ingen har mottatt meldinga.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="622"/>
         <source>%1 saved chats are added to history</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 lagrede samtaler er lagt til historikk</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="737"/>
@@ -363,7 +363,7 @@
         <translation>%1 %2 kan ikke informeres om at du har forlatt gruppa.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="521"/>
+        <location filename="../src/core/Core.cpp" line="519"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1 nettverksgrensesnittet %2 er nede.</translation>
     </message>
@@ -465,12 +465,12 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="450"/>
         <source>%1 is added to file sharing with only %2 of %3 files (%4 limit reached)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 er lagt til fildeling med bare %2 av %3 filer (%4 grense passert)</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="458"/>
         <source>%1 is added to file sharing with %2 files, %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 er lagt til fildeling med %2 filer, %3</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="489"/>
@@ -500,7 +500,7 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="622"/>
         <source>invalid user #%1.</source>
-        <translation type="unfinished"></translation>
+        <translation>ugyldig bruker #%1.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="629"/>
@@ -540,15 +540,15 @@
     <message>
         <location filename="../src/core/CoreParser.cpp" line="407"/>
         <source>%1 has removed shared files</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 har fjerna delte filer</translation>
     </message>
     <message>
         <location filename="../src/core/CoreParser.cpp" line="409"/>
         <source>%1 has shared %2 files</source>
-        <translation type="unfinished">%1 har delt %2 filer</translation>
+        <translation>%1 har delt %2 filer</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="570"/>
+        <location filename="../src/core/CoreParser.cpp" line="572"/>
         <source>%1 %2 is buzzing you.</source>
         <translation>%1 %2 plinger på deg.</translation>
     </message>
@@ -598,72 +598,72 @@
         <translation>er lagt til favoritter</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="310"/>
+        <location filename="../src/core/CoreConnection.cpp" line="293"/>
         <source>%1 Connection closed to user %2 because it uses your nickname: %3.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Forbindelse stengt mot bruker %2 fordi den bruker ditt kallenavn: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="297"/>
-        <location filename="../src/core/CoreConnection.cpp" line="303"/>
+        <location filename="../src/core/CoreConnection.cpp" line="280"/>
+        <location filename="../src/core/CoreConnection.cpp" line="286"/>
         <source>%1 Connection closed to user %2 because it uses your account name: %3.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Forbindelse stengt til bruker %2 fordi den bruker ditt kontonavn: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="299"/>
-        <location filename="../src/core/CoreConnection.cpp" line="337"/>
+        <location filename="../src/core/CoreConnection.cpp" line="282"/>
+        <location filename="../src/core/CoreConnection.cpp" line="320"/>
         <source>domain</source>
-        <translation type="unfinished"></translation>
+        <translation>domene</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="315"/>
+        <location filename="../src/core/CoreConnection.cpp" line="298"/>
         <source>%1 Connection closed to user %2 because it uses your hash code.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Forbindelse stengt til bruker %2 fordi den bruker din hash-kode.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="335"/>
-        <location filename="../src/core/CoreConnection.cpp" line="342"/>
+        <location filename="../src/core/CoreConnection.cpp" line="318"/>
+        <location filename="../src/core/CoreConnection.cpp" line="325"/>
         <source>%1 Connection closed to user %2 because it uses same account name of the already connected user %3: %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Forbindelse stengt til bruker %2 fordin den bruker samme kontonavn som en allerede tilkoplet bruker %3: %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="350"/>
+        <location filename="../src/core/CoreConnection.cpp" line="333"/>
         <source>%1 Connection closed to user %2 because it uses same nickname of the already connected user %3: %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Forbindelse stengt til bruker %2 fordi den bruker samme kallenavn som en allerede tilkoplet bruker %3: %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="356"/>
+        <location filename="../src/core/CoreConnection.cpp" line="339"/>
         <source>%1 Connection closed to user %2 because it uses same hash code of the already connected user %3: %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Forbindelse stengt til bruker %2 fordin den bruker samme hash-kode som en allerede oppkoplet bruker %3: %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="410"/>
+        <location filename="../src/core/CoreConnection.cpp" line="393"/>
         <source>%1 users connected</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 brukere oppkoplet</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="414"/>
+        <location filename="../src/core/CoreConnection.cpp" line="397"/>
         <source>%1 %2 uses old encryption level.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 bruker gammelt krypteringsnivå.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreShareDesktop.cpp" line="52"/>
         <source>%1 You cannot share desktop with %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Du kan ikke dele skjerm med %2.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreShareDesktop.cpp" line="65"/>
         <source>%1 You start to share desktop with %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Du starter skjermdelling med %2.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreShareDesktop.cpp" line="89"/>
         <source>%1 You stop to share desktop with %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Du avslutter skjermdeling med %2.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreShareDesktop.cpp" line="133"/>
         <source>%1 %2 has closed the view of your shared desktop.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 har lukket visningen av din delte skjerm.</translation>
     </message>
     <message>
         <source>/beesshottmp-%1.</source>
@@ -672,15 +672,15 @@
     <message>
         <location filename="../src/core/CoreDispatcher.cpp" line="64"/>
         <source>You are not a member of group %1. Your messages will be not shown.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du er ikke medlem av gruppe %1. Dine meldinger blir ikke vist.</translation>
     </message>
 </context>
 <context>
     <name>Date</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="998"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="1001"/>
         <source>more than 1 day</source>
-        <translation type="unfinished"></translation>
+        <translation>mer enn 1 dag</translation>
     </message>
 </context>
 <context>
@@ -723,7 +723,7 @@
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="261"/>
         <source>Compressed</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakket</translation>
     </message>
 </context>
 <context>
@@ -795,22 +795,22 @@
     <message>
         <location filename="../src/desktop/GuiAddUser.cpp" line="41"/>
         <source>Your parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>Dine parametre</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAddUser.cpp" line="42"/>
         <source>IP Address</source>
-        <translation type="unfinished">IP-adresse</translation>
+        <translation>IP-adresse</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAddUser.cpp" line="43"/>
         <source>Port</source>
-        <translation type="unfinished">Port</translation>
+        <translation>Port</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAddUser.cpp" line="44"/>
         <source>Subnet</source>
-        <translation type="unfinished"></translation>
+        <translation>Subnet</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAddUser.cpp" line="52"/>
@@ -825,22 +825,22 @@
     <message>
         <location filename="../src/desktop/GuiAddUser.cpp" line="121"/>
         <source>Please insert a valid IP Address.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vennligst angi en gyldig IP-adresse.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAddUser.cpp" line="131"/>
         <source>Please insert a valid Port or use the default one %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vennligst angi en gyldig port eller bruk standardport %1.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAddUser.cpp" line="161"/>
         <source>These IP Address and Port are already in list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Disse IP-adressene og portene er allerede i lista.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAddUser.cpp" line="218"/>
         <source>Please select an item in the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vennligst velg et element i lista.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAddUser.cpp" line="62"/>
@@ -850,7 +850,7 @@
     <message>
         <location filename="../src/desktop/GuiAddUser.cpp" line="36"/>
         <source>Add users</source>
-        <translation type="unfinished"></translation>
+        <translation>Legg til brukere</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAddUser.cpp" line="64"/>
@@ -883,17 +883,17 @@
     <message>
         <location filename="../src/desktop/GuiAddUser.ui" line="185"/>
         <source>Add user</source>
-        <translation type="unfinished"></translation>
+        <translation>Legg til bruker</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAddUser.ui" line="219"/>
         <source>Auto add from your Subnet</source>
-        <translation type="unfinished"></translation>
+        <translation>Legg til automatisk fra ditt subnet</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAddUser.ui" line="148"/>
         <source>Add an &lt;b&gt;IP Address&lt;/b&gt; and &lt;b&gt;Port&lt;/b&gt; of the user you want to connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Legg til en &lt;b&gt;IP-adresse&lt;/b&gt; og &lt;b&gt;port&gt;/b&gt; for brukeren du vil tilkople</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAddUser.ui" line="96"/>
@@ -903,7 +903,7 @@
     <message>
         <location filename="../src/desktop/GuiAddUser.ui" line="129"/>
         <source>Split Subnet in IP Addresses to add all users in that range</source>
-        <translation type="unfinished"></translation>
+        <translation>Splitt subnet til IP-adresser for å tilføye aller brukere i det spennet</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAddUser.ui" line="239"/>
@@ -1045,17 +1045,17 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="528"/>
         <source>open %1 to read them all</source>
-        <translation type="unfinished"></translation>
+        <translation>åpne %1 for å lese alle</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="528"/>
         <source>the saved chat</source>
-        <translation type="unfinished"></translation>
+        <translation>den lagra samtalen</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="860"/>
         <source>Do you want to send %1 %2 to the members of this chat?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vil du sende %1 %2 til medlemmene av denne samtalen?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="975"/>
@@ -1105,27 +1105,27 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="232"/>
         <source>You are not connected</source>
-        <translation type="unfinished"></translation>
+        <translation>Du er ikke tilkopla</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="240"/>
         <source>Send messages is disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Send melding er slått av</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="246"/>
         <source>Chat with all users is disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Samtale med allee brukere er slått av</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="252"/>
         <source>Private chat is disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Privat samtale er slått av</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="261"/>
         <source>You have left this chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Du har folatt samtalen</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="343"/>
@@ -1140,38 +1140,38 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="130"/>
         <source>Restore the default font</source>
-        <translation type="unfinished"></translation>
+        <translation>Gjenopprett standardfont</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="139"/>
         <location filename="../src/desktop/GuiChat.cpp" line="290"/>
         <source>Share your desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Del skjermen din</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="143"/>
         <source>Send a screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Send en skjermkopi</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="269"/>
         <source>Write a message to all user</source>
-        <translation type="unfinished"></translation>
+        <translation>Skriv en melding til alle brukere</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="271"/>
         <source>Write a message to %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Skriv en melding til %1</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="286"/>
         <source>Your desktop is shared with %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Skjermen din er delt med %1</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="525"/>
         <source>only the last %1 messages are shown</source>
-        <translation type="unfinished"></translation>
+        <translation>bare de siste %1 meldingene vises</translation>
     </message>
     <message>
         <source>Please select a file to save the messages of the chat.</source>
@@ -1191,52 +1191,52 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="108"/>
         <source>Select chat default text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg standard tekstfarge for samtale</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="111"/>
         <source>Select chat system text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg systemtekstfarge for samtale</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="463"/>
         <source>The loading of saved messages has not yet been completed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lasting av lagrede meldinger er ennå ikke fullført.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="458"/>
         <source>Loading of saved messages...</source>
-        <translation type="unfinished"></translation>
+        <translation>Laster lagrede meldinger...</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="124"/>
         <source>Clear system messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Slett systemmeldinger</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="307"/>
         <source>Select all</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg alt</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="311"/>
         <source>Quote selected text</source>
-        <translation type="unfinished"></translation>
+        <translation>Sitér valgt tekst</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="527"/>
         <source>maximum number of messages to show reached</source>
-        <translation type="unfinished"></translation>
+        <translation>maksimalt antall meldinger for visning er nådd</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="719"/>
         <source>You must close and reopen this window to see the changes applied.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du må lukke og gjenåpne dette vinduet for å se påførte endringer.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="746"/>
         <source>Please select a file to save all the messages of the chat.</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg ei fil å lagre alle meldingene i samtalen til.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="812"/>
@@ -1285,22 +1285,22 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="1151"/>
         <source>Do you want to restore the default font?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vil du gjenopprette standardfonten?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="1159"/>
         <source>Ready.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klar.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="1175"/>
         <source>Do you want to send a screenshot?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vil du sende en skjermkopi?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="1175"/>
         <source>Yes and hide this chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja og lukk denne samtalen</translation>
     </message>
 </context>
 <context>
@@ -1308,25 +1308,25 @@
     <message>
         <location filename="../src/desktop/GuiChatList.cpp" line="52"/>
         <source>Search chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Søk samtale</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatList.cpp" line="145"/>
         <location filename="../src/desktop/GuiChatList.cpp" line="269"/>
         <source>Hide empty chats</source>
-        <translation type="unfinished"></translation>
+        <translation>Skjul tomme samtaler</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatList.cpp" line="161"/>
         <location filename="../src/desktop/GuiChatList.cpp" line="273"/>
         <source>Write a message</source>
-        <translation type="unfinished"></translation>
+        <translation>Skriv en melding</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatList.cpp" line="162"/>
         <location filename="../src/desktop/GuiChatList.cpp" line="274"/>
         <source>Create new group chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Opprett ny gruppesamtale</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatList.cpp" line="177"/>
@@ -1346,18 +1346,18 @@
     <message>
         <location filename="../src/desktop/GuiChatList.cpp" line="186"/>
         <source>Edit</source>
-        <translation type="unfinished">Rediger</translation>
+        <translation>Rediger</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatList.cpp" line="192"/>
         <location filename="../src/desktop/GuiChatList.cpp" line="277"/>
         <source>Change background color</source>
-        <translation type="unfinished">Endre bakgrunnsfarge</translation>
+        <translation>Endre bakgrunnsfarge</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatList.cpp" line="156"/>
         <source>Please wait for two or more users</source>
-        <translation type="unfinished"></translation>
+        <translation>Vennligst vent på to eller flere brukere</translation>
     </message>
 </context>
 <context>
@@ -1365,17 +1365,17 @@
     <message>
         <location filename="../src/desktop/GuiChatList.ui" line="76"/>
         <source>View options</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis alternativer</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatList.ui" line="96"/>
         <source>Insert keywords</source>
-        <translation type="unfinished"></translation>
+        <translation>Sett inn nøkkelord</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatList.ui" line="115"/>
         <source>Clear keywords</source>
-        <translation type="unfinished"></translation>
+        <translation>Slett nøkkelord</translation>
     </message>
 </context>
 <context>
@@ -1401,17 +1401,17 @@
     <message>
         <location filename="../src/desktop/GuiCreateGroup.ui" line="59"/>
         <source>Leave this group</source>
-        <translation type="unfinished"></translation>
+        <translation>Forlat gruppa</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateGroup.ui" line="94"/>
         <source>Group chat name</source>
-        <translation type="unfinished"></translation>
+        <translation>Navn på gruppesamtale</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateGroup.ui" line="107"/>
         <source>Members</source>
-        <translation type="unfinished"></translation>
+        <translation>Medlemmer</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateGroup.ui" line="40"/>
@@ -1431,17 +1431,17 @@
     <message>
         <location filename="../src/desktop/GuiCreateGroup.cpp" line="65"/>
         <source>Edit group chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Rediger gruppesamtale</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateGroup.cpp" line="71"/>
         <source>Create new group chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Opprett ny gruppesamtale</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateGroup.cpp" line="113"/>
         <source>Please select at least one member for the group.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vennligst velg minst et medlem til gruppa.</translation>
     </message>
     <message>
         <source>Please select two or more member for the group.</source>
@@ -1465,27 +1465,27 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.cpp" line="41"/>
         <source>Create message</source>
-        <translation type="unfinished"></translation>
+        <translation>Opprett melding</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.cpp" line="124"/>
         <source>Nobody</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.cpp" line="131"/>
         <source>Add recipients</source>
-        <translation type="unfinished"></translation>
+        <translation>Legg til mottakere</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.cpp" line="175"/>
         <source>Please select at least one recipient for your message.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vennligst velg minst en mottaker til meldinga di.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.cpp" line="182"/>
         <source>You cannot send an empty message.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du kan ikke sende en tom melding.</translation>
     </message>
 </context>
 <context>
@@ -1493,37 +1493,37 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="185"/>
         <source>Open chat after sending message</source>
-        <translation type="unfinished"></translation>
+        <translation>Åpne samtale etter sending av melding</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="45"/>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>Til</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="72"/>
         <source>Add recipients</source>
-        <translation type="unfinished"></translation>
+        <translation>Legg til mottakere</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="130"/>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Melding</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="210"/>
         <source>Click to send message</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikke for å sende melding</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="265"/>
         <source>Send this message to all recipients individually</source>
-        <translation type="unfinished"></translation>
+        <translation>Send meldinga til alle mottakere individuelt</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="136"/>
         <source>Marks the message as important</source>
-        <translation type="unfinished"></translation>
+        <translation>Merker meldinga som viktig</translation>
     </message>
 </context>
 <context>
@@ -1536,7 +1536,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="88"/>
         <source>Disabled by system administrator</source>
-        <translation type="unfinished"></translation>
+        <translation>Deaktivert av systemadministrator</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="123"/>
@@ -1563,7 +1563,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="141"/>
         <source>It is preferable to use square images to avoid display problems.</source>
-        <translation type="unfinished"></translation>
+        <translation>Det anbefales å bruke kvadratiske bilder for å inngå visningsproblemer.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="177"/>
@@ -1573,22 +1573,22 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="185"/>
         <source>The nickname &apos;%1&apos; is already in use by the user %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kallenavnet &apos;%1&apos; benyttes allerede av bruker %2.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="222"/>
         <source>Be careful, by changing the hash code you may no longer be a member of some groups and you will have to get invited again. Do you really want to regenerate your hash code?</source>
-        <translation type="unfinished"></translation>
+        <translation>Pass på, ved å endre hash-koden kan du miste medlemsskapet i noen grupper og du må inviteres på nytt. Vil du virkelig regenerere hash-koden din?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="223"/>
         <source>Yes</source>
-        <translation type="unfinished">Ja</translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="223"/>
         <source>No</source>
-        <translation type="unfinished">Nei</translation>
+        <translation>Nei</translation>
     </message>
 </context>
 <context>
@@ -1647,70 +1647,70 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="44"/>
         <source>File Sharing</source>
-        <translation type="unfinished"></translation>
+        <translation>Fildeling</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="53"/>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="153"/>
         <source>Show the view tool bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis visningsverktøylinja</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="159"/>
         <source>Show my shared files</source>
-        <translation type="unfinished">Vis mine delte filer</translation>
+        <translation>Vis mine delte filer</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="160"/>
         <source>Show the network shared files</source>
-        <translation type="unfinished">Vis filer delt over nettverket</translation>
+        <translation>Vis filer delt over nettverket</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="161"/>
         <source>Show the BeeBOX</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis BeeBOX&apos;en</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="274"/>
         <source>%1 is not available</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 er ikke tilgjengelig</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="290"/>
         <source>%1 has shared %2 files</source>
-        <translation type="unfinished">%1 har delt %2 filer</translation>
+        <translation>%1 har delt %2 filer</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="257"/>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="313"/>
         <source>downloading</source>
-        <translation type="unfinished"></translation>
+        <translation>laster ned</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="263"/>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="313"/>
         <source>uploading</source>
-        <translation type="unfinished"></translation>
+        <translation>laster opp</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="321"/>
         <source>download completed</source>
-        <translation type="unfinished"></translation>
+        <translation>nedlasting fullført</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="321"/>
         <source>upload completed</source>
-        <translation type="unfinished"></translation>
+        <translation>opplastning fullført</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="170"/>
         <source>Show the bar of local file sharing</source>
-        <translation type="unfinished">Vis linja med lokal fildeling</translation>
+        <translation>Vis linja med lokal fildeling</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="183"/>
         <source>Show the bar of network file sharing</source>
-        <translation type="unfinished">Vis linja med nettverksfildeling</translation>
+        <translation>Vis linja med nettverksfildeling</translation>
     </message>
 </context>
 <context>
@@ -1718,12 +1718,12 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="48"/>
         <source>Show group menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis gruppemeny</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="51"/>
         <source>Show the bar of members</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis medlemslinja</translation>
     </message>
     <message>
         <source>Show the bar of chat</source>
@@ -1732,7 +1732,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="59"/>
         <source>Show chat toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis meldingsverktøylinja</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="69"/>
@@ -1747,7 +1747,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="81"/>
         <source>Save window&apos;s geometry</source>
-        <translation type="unfinished">Lagre vindusgeometri</translation>
+        <translation>Lagre vindusgeometri</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="83"/>
@@ -1762,47 +1762,47 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="144"/>
         <source>Chat with all users</source>
-        <translation type="unfinished"></translation>
+        <translation>Samtal med alle brukere</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="192"/>
         <source>%1 has not read last messages</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 har ikke leste siste melding</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="403"/>
         <source>Qt libraries have a bug on saving the window&apos;s state.</source>
-        <translation type="unfinished"></translation>
+        <translation>Qt-bibliotekene har en feil ved lagring av vindusstatus.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="404"/>
         <source>If you have layout problem please save only geometry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hvis du har layout-problem, vennligst lagre kun geometri.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="405"/>
         <source>Save all</source>
-        <translation type="unfinished"></translation>
+        <translation>Lagre alt</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="405"/>
         <source>Save only geometry</source>
-        <translation type="unfinished"></translation>
+        <translation>Lagre kun geometri</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="405"/>
         <source>Cancel</source>
-        <translation type="unfinished">Avbryt</translation>
+        <translation>Avbryt</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="424"/>
         <source>Window geometry saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Vindusgeometri lagra</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="426"/>
         <source>Window geometry and state saved</source>
-        <translation type="unfinished">Vindusgeometri og status lagret</translation>
+        <translation>Vindusgeometri og status lagra</translation>
     </message>
 </context>
 <context>
@@ -1810,17 +1810,17 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiGroupList.cpp" line="49"/>
         <source>Search group</source>
-        <translation type="unfinished"></translation>
+        <translation>Søk gruppe</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiGroupList.cpp" line="59"/>
         <source>Create new group chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Opprett ny gruppesamtale</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiGroupList.cpp" line="62"/>
         <source>Edit group chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Rediger gruppesamtale</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiGroupList.cpp" line="65"/>
@@ -1840,13 +1840,13 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiGroupList.cpp" line="175"/>
         <source>Please wait for two or more users</source>
-        <translation type="unfinished"></translation>
+        <translation>Vennligst vent på to eller flere brukere</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiGroupList.cpp" line="182"/>
         <location filename="../src/desktop/GuiGroupList.cpp" line="206"/>
         <source>Change background color</source>
-        <translation type="unfinished">Endre bakgrunnsfarge</translation>
+        <translation>Endre bakgrunnsfarge</translation>
     </message>
 </context>
 <context>
@@ -1854,12 +1854,12 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiGroupList.ui" line="64"/>
         <source>Insert keywords</source>
-        <translation type="unfinished"></translation>
+        <translation>Sett inn nøkkelord</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiGroupList.ui" line="83"/>
         <source>Clear keywords</source>
-        <translation type="unfinished"></translation>
+        <translation>Slett nøkkelord</translation>
     </message>
 </context>
 <context>
@@ -1876,12 +1876,12 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiHome.cpp" line="88"/>
         <source>Change background color</source>
-        <translation type="unfinished">Endre bakgrunnsfarge</translation>
+        <translation>Endre bakgrunnsfarge</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiHome.cpp" line="90"/>
         <source>Select all</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg alt</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiHome.cpp" line="95"/>
@@ -1896,7 +1896,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiHome.cpp" line="106"/>
         <source>Clear system messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Slett systemmeldinger</translation>
     </message>
 </context>
 <context>
@@ -1908,7 +1908,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiHome.ui" line="62"/>
         <source>News</source>
-        <translation type="unfinished"></translation>
+        <translation>Nyheter</translation>
     </message>
 </context>
 <context>
@@ -2036,7 +2036,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="303"/>
         <source>Copy to clipboard</source>
-        <translation type="unfinished">Kopier til utklippstavle</translation>
+        <translation>Kopier til utklippstavle</translation>
     </message>
     <message>
         <source>Block scrolling</source>
@@ -2050,27 +2050,27 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="36"/>
         <source>Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Logg</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="44"/>
         <source>Right click to open menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Høyreklikk for å åpne meny</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="54"/>
         <source>Show log file</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis loggfil</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="57"/>
         <source>Show the log tool bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis logg-verktøylinja</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="66"/>
         <source>Log menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Loggmeny</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="144"/>
@@ -2107,12 +2107,12 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="301"/>
         <source>Select all</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg alt</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="312"/>
         <source>%1: log not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: logg ikke funnet.</translation>
     </message>
 </context>
 <context>
@@ -2125,7 +2125,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3591"/>
         <source>Show the chat in compact view mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis samtalen i kompakt visningsmodus</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3649"/>
@@ -2259,7 +2259,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1117"/>
         <source>Use native file dialogs</source>
-        <translation type="unfinished"></translation>
+        <translation>Bruk systemets fildialoger</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1091"/>
@@ -2429,7 +2429,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3454"/>
         <source>Do you want to clear messages with %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vil du slette meldinger med %1?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3584"/>
@@ -2523,22 +2523,22 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3516"/>
         <source>Do you want to leave the chat with %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vil du forlate samtalen med %1?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3522"/>
         <source>Unable to leave the chat with %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke forlate samtalen med %1.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3804"/>
         <source>Do you want to delete user %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vil du slette bruker %1?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3962"/>
         <source>Do you want to clear all saved status descriptions?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vil du slette alle lagra status-beskrivelser?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4387"/>
@@ -2598,389 +2598,389 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2812"/>
         <source>Start the new application to copy file and folders by Marco Mastroddi</source>
-        <translation type="unfinished">Start nytt program for kopiering av filer og mapper fra Marco Mastroddi</translation>
+        <translation>Start det nye programmet fra Marco Mastroddi for å kopiere filer og mapper</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="297"/>
         <source>connected</source>
-        <translation type="unfinished"></translation>
+        <translation>oppkoplet</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1077"/>
         <source>Enable file sharing</source>
-        <translation type="unfinished"></translation>
+        <translation>Slå på fildeling</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="349"/>
         <source>Do you want to quit %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vil du avslutte %1?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="755"/>
         <source>Search users</source>
-        <translation type="unfinished"></translation>
+        <translation>Søk brukere</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="758"/>
         <source>Configure network...</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurer nettverk...</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1067"/>
         <source>Blocked chats</source>
-        <translation type="unfinished"></translation>
+        <translation>Blokkerte samtaler</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="850"/>
         <source>Shortcuts</source>
-        <translation type="unfinished">Snarveier</translation>
+        <translation>Snarveier</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="851"/>
         <source>Select language</source>
-        <translation type="unfinished">Velg språk</translation>
+        <translation>Velg språk</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1065"/>
         <source>Dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordbok</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="946"/>
         <source>Recognize users</source>
-        <translation type="unfinished"></translation>
+        <translation>Gjenkjenn brukere</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="955"/>
         <source>By account name and domain name</source>
-        <translation type="unfinished"></translation>
+        <translation>Etter kontonavn og domenenavn</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="960"/>
         <source>By account name</source>
-        <translation type="unfinished"></translation>
+        <translation>Etter kontonavn</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="950"/>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>standard</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="950"/>
         <source>By nickname</source>
-        <translation type="unfinished"></translation>
+        <translation>Etter kallenavn</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="974"/>
         <source>Save groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Lagre grupper</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1156"/>
         <source>Enable tray icon notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Slå på oppgaveikon-oppdateringer</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1168"/>
         <source>Show file notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis fil-oppdateringer</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="852"/>
         <source>Select icon theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg ikon-tema</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1063"/>
         <source>Select emoticon theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg uttrykksikon-tema</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="711"/>
         <location filename="../src/desktop/GuiMain.cpp" line="1372"/>
         <source>Development version</source>
-        <translation type="unfinished"></translation>
+        <translation>Utviklingsversjon</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="648"/>
         <source>There are still files that have not been transferred and will be interrupted. Do you want to disconnect anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>Det er fortsatt filer som ikke er overført og vil bli avbrutt. Vil du kople fra likevel?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="723"/>
         <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it under the terms of the GNU General Public License as published&lt;br&gt;by the Free Software Foundation, either version 3 of the License&lt;br&gt;or (at your option) any later version.&lt;br&gt;&lt;br&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br&gt;See the GNU General Public License for more details.</source>
-        <translation type="unfinished"></translation>
+        <translation>BeeBEEP er fri programvare: du kan videredistribuere den og/eller endre&lt;br /&gt;den i henhold til betingelsene til GNU General Public License publisert&lt;br /&gt;av the Free Software Foundation, enten lisensversjon 3&lt;br /&gt;eller (etter ditt valg) uansett senere versjon.&lt;br /&gt;&lt;br /&gt;BeeBEEP distributeres i håp om å vise seg nyttig,&lt;br /&gt;men UTEN NOEN GARANTI; ikke engang implisitt&lt;br /&gt;for EGENSKAPER eller EGNETHET TIL NOE SPESIELT FORMÅL.&lt;br /&gt;Se GNU General Public License for flere detaljer.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="749"/>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Kople til</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="752"/>
         <source>Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Kople fra</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="791"/>
         <source>The option has been disabled by your system administrator.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dette alternativet er deaktivert av systemadministrator.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="794"/>
         <source>News</source>
-        <translation type="unfinished"></translation>
+        <translation>Nyheter</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="818"/>
         <source>Open your download folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Åpne nedlastingsmappa di</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="820"/>
         <source>Test your network</source>
-        <translation type="unfinished"></translation>
+        <translation>Test nettverket ditt</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="877"/>
         <source>Delay first connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Utsett første oppkopling</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="904"/>
         <source>On connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Ved forbindelse</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="907"/>
         <source>Prompts to change user</source>
-        <translation type="unfinished"></translation>
+        <translation>Be om å endre bruker</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="911"/>
         <source>Prompts to ask network password</source>
-        <translation type="unfinished"></translation>
+        <translation>Be om nettverkspassord</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="917"/>
         <source>Show the user list</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis brukerlista</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="921"/>
         <source>Show the chat list</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis samtale-lista</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="996"/>
         <source>Save unsent messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Lagre usendte meldinger</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1000"/>
         <source>Save file transfer messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Lagre filoverføringsmeldinger</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1004"/>
         <source>Save system messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Lagre systemmeldinger</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1036"/>
         <source>Send offline messages also to chat with all users</source>
-        <translation type="unfinished"></translation>
+        <translation>Send offline-meldinger også til samtale med alle brukere</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1140"/>
         <source>Raise main window on new message</source>
-        <translation type="unfinished"></translation>
+        <translation>Framhev hovedvindu ved ny melding</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1144"/>
         <source>Always open chat on new message</source>
-        <translation type="unfinished"></translation>
+        <translation>Alltid åpne samtale ved ny melding</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1148"/>
         <source>Raise previously opened chat on new message</source>
-        <translation type="unfinished"></translation>
+        <translation>Framhev tidligere åpnet samtale ved ny melding</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1031"/>
         <source>Show chat toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis meldingsverktøylinja</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1053"/>
         <source>Select chat background color</source>
-        <translation type="unfinished"></translation>
+        <translation>Endre bakgrunnsfarge for melding</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1055"/>
         <source>Select chat default text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg standard tekstfarge for samtale</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1057"/>
         <source>Select chat system text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg systemtekstfarge for samtale</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1112"/>
         <source>Always shows the progress of file transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Alltid vis framdrift for filoverføring</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1177"/>
         <source>Desktop sharing</source>
-        <translation type="unfinished"></translation>
+        <translation>Skjermdeling</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1180"/>
         <source>Enable desktop sharing</source>
-        <translation type="unfinished"></translation>
+        <translation>Slå på skjermdeling</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1185"/>
         <source>Select screen capture interval</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg skjermfangst-intervall</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1187"/>
         <source>Select image type</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg bilde-type</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1189"/>
         <source>Select image quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg bildekvalitet</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1192"/>
         <source>Fit image to screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Tilpass bilde til skjerm</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="841"/>
         <source>Use the dark theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Bruk mørkt tema</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="841"/>
         <source>beta</source>
-        <translation type="unfinished"></translation>
+        <translation>beta</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="845"/>
         <source>Enable maximize button</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiver maksimer-knapp</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1204"/>
         <source>Start %1 automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Start %1 automatisk</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="855"/>
         <source>Restore the colors to the default ones</source>
-        <translation type="unfinished"></translation>
+        <translation>Gjenopprett tilbake til standardfarger</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1212"/>
         <source>Reset geometry of all windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Nullstill geometri for alle vinduer</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1329"/>
         <source>Show tips...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis tips...</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1330"/>
         <source>Read FAQ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Les FAQ...</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1333"/>
         <source>Information about %1...</source>
-        <translation type="unfinished"></translation>
+        <translation>Informasjon om %1...</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1331"/>
         <source>Discover the fact of the day...</source>
-        <translation type="unfinished"></translation>
+        <translation>Oppdag dagens fakta...</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="838"/>
         <source>Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Grensesnitt</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="931"/>
         <source>Your workgroups</source>
-        <translation type="unfinished"></translation>
+        <translation>Dine arbeidsgrupper</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="991"/>
         <source>Enable message saving</source>
-        <translation type="unfinished"></translation>
+        <translation>Slå på meldingslagring</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1050"/>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Farger</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1059"/>
         <source>Select quote text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg sitéringstekstfarge</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1061"/>
         <source>Select quote background color</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg sitéringsbakgrunnsfarge</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1087"/>
         <source>Always download files into the folder with the user&apos;s name</source>
-        <translation type="unfinished"></translation>
+        <translation>Alltid last ned filer til mappa med brukerens navn</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1124"/>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Varsler</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1216"/>
         <source>Show online users only</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis kun tilkobla brukere</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1220"/>
         <source>Show users in their workgroups</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis bruker i sine arbeidsgrupper</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1397"/>
         <source>Right click to open menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Høyreklikk for å åpne meny</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1423"/>
         <source>Saved chats</source>
-        <translation type="unfinished"></translation>
+        <translation>Lagre samtaler</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1560"/>
         <source>Please save the network password in the next dialog if you want to use password without prompt.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vennligst lagre nettverkspassordet i neste dialog hvis du vil bruke passord uten å bli spurt.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1575"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2071"/>
         <source>There will be no saving of &apos;system&apos; and &apos;file transfer&apos; messages if this option is disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hvis dette alternatives deaktiveres, blir ikke &apos;system&apos; og &apos;filoverføring&apos; meldinger lagra.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1595"/>
@@ -2995,72 +2995,72 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1688"/>
         <source>Please select the number of inactive days before user is removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Angi antall inaktive dager før bruker fjernes</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1840"/>
         <source>milliseconds, 5000 default</source>
-        <translation type="unfinished"></translation>
+        <translation>millisekunder, 5000 standard</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1870"/>
         <source>Please select the opacity percentage of inactive chat window (default: %1%)</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg gjennomsiktighetsprosent for inaktivt meldingsvindu (stantard: %1%)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1905"/>
         <source>You must close and reopen the chat windows to see the changes applied.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du må lukke og gjenåpne samtale-vinduer for å se påførte endringer.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1938"/>
         <source>Saving unsent messages may fail if &apos;Save users&apos; and &apos;Save groups&apos; options are not enabled. Do you want to enable them?</source>
-        <translation type="unfinished"></translation>
+        <translation>Lagring av usendte meldinger kan feile hvis &apos;Lagre brukere&apos; og &apos;Lagre grupper&apos; alternativer er slått av. Vil du slå dem på?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1964"/>
         <source>Please select the maximum number of lines to be saved in the chat (current: %1).</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg maksimum antall linjer som kan lagres i samtalen (gjeldende: %1).</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2001"/>
         <source>Please select the maximum number of files you can queue up for the transfer (current: %1).</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg maksimum antall filer du kan legge i kø for overføring (gjeldende: %1).</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2058"/>
         <source>Option enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alternativ slått på.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2060"/>
         <source>Option disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alternativ slått av.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2090"/>
         <source>Remove users after %1 days of inactivity</source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern brukere etter %1 dagers inaktivitet</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2097"/>
         <source>Show inactive chat window with %1% opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis inaktivt samtalevindu med %1% gjennomsiktighet</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2102"/>
         <source>Save maximum %1 lines of chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Lagre maksimalt %1 linjer av samtale</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2109"/>
         <source>Clean the cache from items older than %1 days</source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern elementer eldre enn %1 dager fra cache</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2116"/>
         <source>Add up to %1 files to the transfer queue</source>
-        <translation type="unfinished"></translation>
+        <translation>Legg opptil %1 filer i overføringskøa</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2191"/>
@@ -3162,7 +3162,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2697"/>
         <source>The files will be downloaded to the folder:</source>
-        <translation type="unfinished"></translation>
+        <translation>Filene lastes ned til mappa:</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2789"/>
@@ -3172,168 +3172,168 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2865"/>
         <source>Your name is not changed. Do you want to continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Navnet ditt er uendra. Vil du fortsette?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3019"/>
         <source>Do you want to open the file %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vil du åpne fila %1?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3065"/>
         <source>Sound module is not working</source>
-        <translation type="unfinished"></translation>
+        <translation>Lydmodulen virker ikke</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3088"/>
         <source>You are not allowed create groups. The option has been disabled by your system administrator.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du har ikke lov å opprette grupper. Systemansvarlig har slått av denne muligheten.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3109"/>
         <source>There is a chat with the same members: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Det finnes en samtale med de samme medlemmene: %1.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3131"/>
         <source>You are not allowed modify groups. The option has been disabled by your system administrator.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du har ikke lov å redigere grupper. Systemansvarlig har slått av denne muligheten.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3213"/>
         <source>Do you want to delete saved chat with %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vil du slette lagra samtale med %1?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3246"/>
         <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br&gt;What do you want to do with the selected saved text?</source>
-        <translation type="unfinished"></translation>
+        <translation>Den valgte samtalen %1 har allerede en lagra tekst.&lt;br&gt;Hva vil du gjøre med den valgte lagra teksten?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3354"/>
         <source>Your status description</source>
-        <translation type="unfinished"></translation>
+        <translation>Din status-beskrivelse</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3601"/>
         <source>Show the time with the AM/PM notation</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis tid med AM/PM notasjon</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3616"/>
         <source>Show username&apos;s color</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis farge for brukernavn</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3656"/>
         <source>none</source>
-        <translation type="unfinished"></translation>
+        <translation>ingen</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4170"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4231"/>
         <source>You have new message</source>
-        <translation type="unfinished"></translation>
+        <translation>Du har ny melding</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4263"/>
         <source>Save all</source>
-        <translation type="unfinished"></translation>
+        <translation>Lagre alt</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4263"/>
         <source>Save only geometry</source>
-        <translation type="unfinished"></translation>
+        <translation>Lagre kun geometri</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4279"/>
         <source>Window geometry saved</source>
-        <translation type="unfinished"></translation>
+        <translation>Vindusgeometri lagra</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4321"/>
         <source>Do you really want to reset window&apos;s geometry?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vil du virkelig nullstille vindusgeometri?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4336"/>
         <source>Geometry of all windows has been reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Geometri har blitt nullstilt for alle vinduer</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4562"/>
         <source>You are using the default icons.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du bruker standardikon.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4568"/>
         <source>You are using custom icons in folder %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du bruker tilpassede ikon i mappe %1.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4569"/>
         <source>Restore default icons</source>
-        <translation type="unfinished"></translation>
+        <translation>Gjenopprett standardikon</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4633"/>
         <source>Restart connection now</source>
-        <translation type="unfinished"></translation>
+        <translation>Restart forbindelse nå</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4633"/>
         <source>Restart later manually</source>
-        <translation type="unfinished"></translation>
+        <translation>Restart senere manuelt</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4693"/>
         <source>Do you really want to restore the colors to the default ones?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vil du virkelig gjenopprette fargene til standardfarger?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4838"/>
         <source>Do you really want to share your desktop with %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vil du virkelig dele skjermen din med %1?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4563"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4569"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4578"/>
         <source>Select the icon folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg ikon-mappa</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4599"/>
         <source>You are using the default emoticons.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du bruker standard uttrykksikon.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4600"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4606"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4615"/>
         <source>Select the emoticon folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg uttrykksikon-mappa</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4605"/>
         <source>You are using custom emoticons in folder %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du bruker tilpassede uttrykksikon i mappe %1.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4606"/>
         <source>Restore default emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>Gjenopprett standard uttrykksikon</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4632"/>
         <source>You have to restart your connection to apply changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du må kople opp på nytt for å iverksette endringer.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="773"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3111"/>
         <source>Create new group chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Opprett ny gruppesamtale</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3916"/>
@@ -3363,12 +3363,12 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4261"/>
         <source>Qt libraries have a bug on saving the window&apos;s state.</source>
-        <translation type="unfinished"></translation>
+        <translation>Qt-bibliotekene har en feil ved lagring av vindusstatus.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4262"/>
         <source>If you have layout problem please save only geometry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hvis du har layout-problem, vennligst lagre kun geometri.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4281"/>
@@ -3378,17 +3378,17 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4550"/>
         <source>%1 blocked chats</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 blokkerte samtaler</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="782"/>
         <source>Show the %1 log</source>
-        <translation type="unfinished">Vis %1-loggen</translation>
+        <translation>Vis %1-loggen</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="785"/>
         <source>Make a screenshot</source>
-        <translation type="unfinished">Gjør en skjermfangst</translation>
+        <translation>Gjør en skjermfangst</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1336"/>
@@ -3415,98 +3415,98 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1019"/>
         <source>Open chats in a single window</source>
-        <translation type="unfinished"></translation>
+        <translation>Åpne samtaler i ett vindu</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="883"/>
         <source>Prompt on quit when connected</source>
-        <translation type="unfinished"></translation>
+        <translation>Spør ved avslutt hvis oppkopla</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1266"/>
         <source>Show the status description</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis statusbeskrivelsen</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="899"/>
         <location filename="../src/desktop/GuiMain.cpp" line="1210"/>
         <source>Save window&apos;s geometry</source>
-        <translation type="unfinished">Lagre vindusgeometri</translation>
+        <translation>Lagre vindusgeometri</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="860"/>
         <source>Show minimized</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis minimert</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="864"/>
         <source>Show only on system tray</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis kun på oppgaveliste</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="868"/>
         <source>Reset window geometry</source>
-        <translation type="unfinished"></translation>
+        <translation>Nullstill vindusgeometri</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="872"/>
         <source>Check for new version</source>
-        <translation type="unfinished"></translation>
+        <translation>Se etter ny versjon</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="970"/>
         <source>Save users</source>
-        <translation type="unfinished"></translation>
+        <translation>Lagre brukere</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="288"/>
         <source>news</source>
-        <translation type="unfinished"></translation>
+        <translation>nyheter</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="788"/>
         <source>Write a message</source>
-        <translation type="unfinished"></translation>
+        <translation>Skriv en melding</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="968"/>
         <source>Add users</source>
-        <translation type="unfinished"></translation>
+        <translation>Legg til brukere</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1284"/>
         <source>Set your status to away automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Sett statusen din til borte automatisk</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1135"/>
         <source>Enable notifications also for chat with all users</source>
-        <translation type="unfinished"></translation>
+        <translation>Slå på varsler også for samtaler med alle brukere</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1069"/>
         <source>File transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Filoverføring</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1122"/>
         <source>Select download folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg nedlastingsmappe</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1127"/>
         <source>Enable BEEP alert</source>
-        <translation type="unfinished"></translation>
+        <translation>Slå på BEEP alarm</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1153"/>
         <source>System tray icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Oppgavelinjeikon</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1403"/>
         <source>Activities</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiviteter</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1453"/>
@@ -3526,22 +3526,22 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1638"/>
         <source>(current: %1, default: %2, all: -1, none: 0)</source>
-        <translation type="unfinished"></translation>
+        <translation>(gjeldende: %1, standard: %2. alle; -1, ingen: 0)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1816"/>
         <source>jpg for photo, png for presentation</source>
-        <translation type="unfinished"></translation>
+        <translation>jpe for foto, png for presentasjon</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1827"/>
         <source>-1 default, 10 low, 60 medium, 100 high</source>
-        <translation type="unfinished"></translation>
+        <translation>-1 standard, 10 lav, 60 medium, 100 høy</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1979"/>
         <source>Please select the number of days that items (such as images) can remain cached (current: %1, never clear: -1, always clear: 0).</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg antall dager elementer (som bilder) kan bli i cache (gjeldende: %1, aldri fjern: -1, alltid fjern: 0).</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2171"/>
@@ -3569,7 +3569,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2602"/>
         <source>Downloading %1 files</source>
-        <translation type="unfinished"></translation>
+        <translation>Laster ned %1 filer</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3039"/>
@@ -3625,22 +3625,22 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="779"/>
         <source>Show file sharing window</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis fildelingsvindu</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="857"/>
         <source>On start</source>
-        <translation type="unfinished"></translation>
+        <translation>Ved start</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="880"/>
         <source>On close</source>
-        <translation type="unfinished"></translation>
+        <translation>Ved lukking</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3177"/>
         <source>Starting</source>
-        <translation type="unfinished"></translation>
+        <translation>Starter</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3248"/>
@@ -3655,22 +3655,22 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3611"/>
         <source>Show your name instead of &apos;You&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis navnet ditt i stedet for &apos;Du&apos;</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3623"/>
         <source>Show emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis uttrykksikon</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1027"/>
         <source>Use font emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>Bruk font-uttrykksikon</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3640"/>
         <source>Restore default font</source>
-        <translation type="unfinished"></translation>
+        <translation>Gjenopprett standardfont</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3654"/>
@@ -3750,13 +3750,13 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2981"/>
         <source>There are no messages saved in the chat with %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Det er ingen meldinger lagra i samtalen med %1.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3394"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3417"/>
         <source>%1 removed</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 fjerna</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3450"/>
@@ -3817,7 +3817,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiMessageEdit.cpp" line="383"/>
         <source>Select all</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg alt</translation>
     </message>
     <message>
         <source>Select All</source>
@@ -3829,32 +3829,32 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="37"/>
         <source>Network</source>
-        <translation type="unfinished">Nettverk</translation>
+        <translation>Nettverk</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="42"/>
         <source>seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>sekunder</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="43"/>
         <source>users</source>
-        <translation type="unfinished"></translation>
+        <translation>brukere</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="60"/>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>standard</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="65"/>
         <source>Unknown address</source>
-        <translation type="unfinished">Ukjent adresse</translation>
+        <translation>Ukjent adresse</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="155"/>
         <source>File HOSTS not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Filen HOSTS ikke funnet.</translation>
     </message>
     <message>
         <source>File is empty</source>
@@ -3863,12 +3863,12 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="92"/>
         <source>none</source>
-        <translation type="unfinished"></translation>
+        <translation>ingen</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="100"/>
         <source>selected by system</source>
-        <translation type="unfinished"></translation>
+        <translation>valgt av system</translation>
     </message>
     <message>
         <source>Warning</source>
@@ -3883,7 +3883,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="155"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
@@ -3891,74 +3891,74 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="36"/>
         <source>Test your network</source>
-        <translation type="unfinished"></translation>
+        <translation>Test nettverket ditt</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="49"/>
         <source>Your network parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>Dine nettverktsparametre</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="50"/>
         <source>IP Address</source>
-        <translation type="unfinished">IP-adresse</translation>
+        <translation>IP-adresse</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="51"/>
         <source>Message port</source>
-        <translation type="unfinished"></translation>
+        <translation>Meldingsport</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="52"/>
         <source>File transfer port</source>
-        <translation type="unfinished"></translation>
+        <translation>Filoverføringsport</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="53"/>
         <source>Enter the host address and the port you want to test.</source>
-        <translation type="unfinished"></translation>
+        <translation>Angi maskin-adressen og porten du vil teste.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="68"/>
         <source>The host address entered is not valid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Angitt maskinadresse er ikke gyldig.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="68"/>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="77"/>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="84"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="77"/>
         <source>The port entered is not valid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Angitt port er ikke gyldig.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="84"/>
         <source>It is not possible to perform the test if you are not connected to the BeeBEEP network.</source>
-        <translation type="unfinished"></translation>
+        <translation>Det er ikke mulig å uføre testen hvis du ikke er tilkoplet til BeeBEEP-nettverket.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="97"/>
         <source>Connecting to %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopler til %1</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="123"/>
         <source>Connection to %1 is active.</source>
-        <translation type="unfinished"></translation>
+        <translation>Forbindelse til %1 er aktiv.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="135"/>
         <source>Connection to %1 has error #%2: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Forbindelse til %1 har feil #%2: %3</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="159"/>
         <source>Connection to %1 has been closed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Forbindelse til %1 er koplet ned.</translation>
     </message>
 </context>
 <context>
@@ -3970,27 +3970,27 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.ui" line="78"/>
         <source>IP Address</source>
-        <translation type="unfinished">IP-adresse</translation>
+        <translation>IP-adresse</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.ui" line="116"/>
         <source>Port</source>
-        <translation type="unfinished">Port</translation>
+        <translation>Port</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.ui" line="160"/>
         <source>Test connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Test forbindelse</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.ui" line="216"/>
         <source>Clear report</source>
-        <translation type="unfinished"></translation>
+        <translation>Slett rapport</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.ui" line="242"/>
         <source>Close</source>
-        <translation type="unfinished">Lukk</translation>
+        <translation>Lukk</translation>
     </message>
 </context>
 <context>
@@ -3998,57 +3998,57 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="388"/>
         <source>Use fixed interval to search users</source>
-        <translation type="unfinished"></translation>
+        <translation>Bruk fast intervall for å søke brukere</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="281"/>
         <source>* (read only section)</source>
-        <translation type="unfinished">* (kun les seksjon)</translation>
+        <translation>* (kun les seksjon)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="308"/>
         <source>IP Multicast TTL</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="328"/>
         <source>(only for IPv4 multicast)</source>
-        <translation type="unfinished"></translation>
+        <translation>(kun for IPv4 multicast)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="375"/>
         <source>Use default multicast group address</source>
-        <translation type="unfinished"></translation>
+        <translation>Bruk standard multicast gruppe-adresse</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="395"/>
         <source>Use hive protocol to contact offline users</source>
-        <translation type="unfinished"></translation>
+        <translation>Bruk hive-protokoll for å kontakte offline-brukere</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="402"/>
         <source>Contact offline users directly</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontakt offline-brukere direkte</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="423"/>
         <source>Disable system proxy for connections</source>
-        <translation type="unfinished"></translation>
+        <translation>Deaktiver system-proxy for forbindelser</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="467"/>
         <source>Show file HOSTS...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis filen HOSTS...</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="487"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="494"/>
         <source>Cancel</source>
-        <translation type="unfinished">Avbryt</translation>
+        <translation>Avbryt</translation>
     </message>
     <message>
         <source>Addresses in beehosts.ini *</source>
@@ -4065,7 +4065,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="239"/>
         <source>Max users to contact every second</source>
-        <translation type="unfinished">Maks antall bruker å kontakte hvert sekund</translation>
+        <translation>Maks antall brukere å kontakte hvert sekund</translation>
     </message>
     <message>
         <source>seconds (0=disabled, 0=default)</source>
@@ -4074,47 +4074,47 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="409"/>
         <source>Prevent multiple connections from single host address</source>
-        <translation type="unfinished"></translation>
+        <translation>Hindre flere forbindelser fra enkelt-maskin-adresser</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="416"/>
         <source>Enable Zero Configuration Networking</source>
-        <translation type="unfinished">Slå på nullkonfigurasjonsnettverk</translation>
+        <translation>Slå på nullkonfigurasjonsnettverk</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="98"/>
         <source>UDP Port in beebeep.rc *</source>
-        <translation type="unfinished">UDP-port i beebeep.rc *</translation>
+        <translation>UDP-port i beebeep.rc *</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="188"/>
         <source>Local subnet address *</source>
-        <translation type="unfinished">Lokal subnett-adresse: *</translation>
+        <translation>Lokal subnett-adresse: *</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="111"/>
         <source>Multicast group in beebeep.rc *</source>
-        <translation type="unfinished">Multicast-gruppe i beebeep.rc *</translation>
+        <translation>Multicast-gruppe i beebeep.rc *</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="137"/>
         <source>Search users every</source>
-        <translation type="unfinished"></translation>
+        <translation>Søk brukere hver(t)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="271"/>
         <source>Preferred subnet</source>
-        <translation type="unfinished"></translation>
+        <translation>Foretrukket subnet</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="88"/>
         <source>(the same for all clients)</source>
-        <translation type="unfinished">(det samme for alle klienter)</translation>
+        <translation>(det samme for alle klienter)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="50"/>
         <source>(search users here by default)</source>
-        <translation type="unfinished">(søk bruker her som standard)</translation>
+        <translation>(søk bruker her som standard)</translation>
     </message>
 </context>
 <context>
@@ -4247,7 +4247,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="201"/>
         <source>Do you want to delete this preset?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vil du slette denne settingen?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="202"/>
@@ -4265,32 +4265,32 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiRefusedChat.cpp" line="35"/>
         <source>Blocked chats</source>
-        <translation type="unfinished"></translation>
+        <translation>Blokkerte samtaler</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiRefusedChat.cpp" line="41"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Navn</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiRefusedChat.cpp" line="41"/>
         <source>Blocked chat ID</source>
-        <translation type="unfinished"></translation>
+        <translation>Blokkert samtale-ID</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiRefusedChat.cpp" line="59"/>
         <source>Remove blocked chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern blokkert samtale</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiRefusedChat.cpp" line="61"/>
         <source>Clear all</source>
-        <translation type="unfinished">Blank ut alt</translation>
+        <translation>Blank ut alt</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiRefusedChat.cpp" line="122"/>
         <source>Please select an item in the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vennligst velg et element i lista.</translation>
     </message>
 </context>
 <context>
@@ -4298,17 +4298,17 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiRefusedChat.ui" line="17"/>
         <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiRefusedChat.ui" line="38"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiRefusedChat.ui" line="45"/>
         <source>Cancel</source>
-        <translation type="unfinished">Avbryt</translation>
+        <translation>Avbryt</translation>
     </message>
 </context>
 <context>
@@ -4335,58 +4335,58 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="43"/>
         <source>Right click to open menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Høyreklikk for å åpne meny</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="60"/>
         <source>Show the toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis verktøylinja</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="78"/>
         <source>Search</source>
-        <translation type="unfinished">Søk</translation>
+        <translation>Søk</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="83"/>
         <source>keyword</source>
-        <translation type="unfinished">nøkkelord</translation>
+        <translation>nøkkelord</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="89"/>
         <source>Find</source>
-        <translation type="unfinished">Finn</translation>
+        <translation>Finn</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="94"/>
         <source>Case sensitive</source>
-        <translation type="unfinished">Skill mellom store og små bokstaver</translation>
+        <translation>Skill mellom store og små bokstaver</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="99"/>
         <source>Whole word</source>
-        <translation type="unfinished">Hele ord</translation>
+        <translation>Hele ord</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="104"/>
         <source>Save as</source>
-        <translation type="unfinished"></translation>
+        <translation>Lagre som</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="108"/>
         <source>Clear messages</source>
-        <translation type="unfinished">Slett meldinger</translation>
+        <translation>Slett meldinger</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="115"/>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="123"/>
         <source>Saved chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Lagre samtale</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="123"/>
         <source>end of messages</source>
-        <translation type="unfinished"></translation>
+        <translation>slutt på meldinger</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="141"/>
@@ -4396,18 +4396,18 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="204"/>
         <source>%1 not found</source>
-        <translation type="unfinished">%1 ikke funnet</translation>
+        <translation>%1 ikke funnet</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="204"/>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="226"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="213"/>
         <source>Please select a file where to save the messages showed in this window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg ei fil å lagre meldingene vist i dette vinduet til.</translation>
     </message>
     <message>
         <source>Please select a file to save the messages of the chat.</source>
@@ -4416,7 +4416,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="226"/>
         <source>%1: save completed.</source>
-        <translation type="unfinished">%1: lagring fullført.</translation>
+        <translation>%1: lagring fullført.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="106"/>
@@ -4437,12 +4437,12 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiSavedChatList.cpp" line="52"/>
         <source>Search saved chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Søk lagret samtale</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChatList.cpp" line="88"/>
         <source>Please select an item</source>
-        <translation type="unfinished"></translation>
+        <translation>Vennligst velg et element</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChatList.cpp" line="94"/>
@@ -4462,12 +4462,12 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiSavedChatList.cpp" line="106"/>
         <source>Change background color</source>
-        <translation type="unfinished">Endre bakgrunnsfarge</translation>
+        <translation>Endre bakgrunnsfarge</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChatList.cpp" line="162"/>
         <source>Click to view saved chat with %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikk for å vise lagret samtale med %1</translation>
     </message>
 </context>
 <context>
@@ -4475,12 +4475,12 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiSavedChatList.ui" line="64"/>
         <source>Insert keywords</source>
-        <translation type="unfinished"></translation>
+        <translation>Sett inn nøkkelord</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChatList.ui" line="83"/>
         <source>Clear keywords</source>
-        <translation type="unfinished"></translation>
+        <translation>Slett nøkkelord</translation>
     </message>
 </context>
 <context>
@@ -4493,7 +4493,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiScreenShot.cpp" line="44"/>
         <source>Show the bar of screenshot plugin</source>
-        <translation type="unfinished">Vis linja med skjermkopi-utvidelse</translation>
+        <translation>Vis linja med skjermkopi-utvidelse</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiScreenShot.cpp" line="59"/>
@@ -4533,22 +4533,22 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiScreenShot.cpp" line="95"/>
         <source>Capture screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopier skjerm</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiScreenShot.cpp" line="96"/>
         <source>Send screenshot to a user</source>
-        <translation type="unfinished"></translation>
+        <translation>Send skjermkopi til en bruker</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiScreenShot.cpp" line="97"/>
         <source>Save screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Lagre skjermkopi</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiScreenShot.cpp" line="98"/>
         <source>Delete screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Slett skjermkopi</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiScreenShot.cpp" line="123"/>
@@ -4586,22 +4586,22 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/gui/GuiSelectItems.cpp" line="65"/>
         <source>One or more elements of the list have been selected but are hidden by the search text. Do you still want to add them?</source>
-        <translation type="unfinished"></translation>
+        <translation>Et eller flere elementer i lista er valgt, men skjules av søketeksten. Vil du likevel tilføye dem?</translation>
     </message>
     <message>
         <location filename="../src/gui/GuiSelectItems.cpp" line="66"/>
         <source>Yes</source>
-        <translation type="unfinished">Ja</translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <location filename="../src/gui/GuiSelectItems.cpp" line="66"/>
         <source>No</source>
-        <translation type="unfinished">Nei</translation>
+        <translation>Nei</translation>
     </message>
     <message>
         <location filename="../src/gui/GuiSelectItems.cpp" line="66"/>
         <source>Cancel</source>
-        <translation type="unfinished">Avbryt</translation>
+        <translation>Avbryt</translation>
     </message>
 </context>
 <context>
@@ -4609,27 +4609,27 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/gui/GuiSelectItems.ui" line="48"/>
         <source>Search</source>
-        <translation type="unfinished">Søk</translation>
+        <translation>Søk</translation>
     </message>
     <message>
         <location filename="../src/gui/GuiSelectItems.ui" line="61"/>
         <source>Clear filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Tøm filter</translation>
     </message>
     <message>
         <location filename="../src/gui/GuiSelectItems.ui" line="92"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <location filename="../src/gui/GuiSelectItems.ui" line="99"/>
         <source>Cancel</source>
-        <translation type="unfinished">Avbryt</translation>
+        <translation>Avbryt</translation>
     </message>
     <message>
         <location filename="../src/gui/GuiSelectItems.ui" line="81"/>
         <source>Clear selection</source>
-        <translation type="unfinished">Tøm utvalg</translation>
+        <translation>Tøm utvalg</translation>
     </message>
 </context>
 <context>
@@ -4645,7 +4645,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="67"/>
         <source>Show current folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis aktiv mappe</translation>
     </message>
     <message>
         <source>Update ShareBox</source>
@@ -4654,7 +4654,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="69"/>
         <source>Back to parent folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Tilbake til overordna mappe</translation>
     </message>
     <message>
         <source>ShareBox path does not exist. Please select a valid folder.</source>
@@ -4675,37 +4675,37 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="65"/>
         <source>Update your BeeBOX</source>
-        <translation type="unfinished"></translation>
+        <translation>Oppdater BeeBOX&apos;en din</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="66"/>
         <source>Create folder in your BeeBOX</source>
-        <translation type="unfinished"></translation>
+        <translation>Opprett mappe i BeeBOX&apos;en din</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="68"/>
         <source>Update BeeBOX</source>
-        <translation type="unfinished"></translation>
+        <translation>Oppdater BeeBOX</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="70"/>
         <source>Create folder in BeeBOX</source>
-        <translation type="unfinished"></translation>
+        <translation>Opprett mappe i BeeBOX</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="119"/>
         <source>BeeBOX path does not exist. Please select a valid folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>BeeBOS-sti eksisterer ikke. Vennligst velg ei gyldig mappe.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="132"/>
         <source>%1 - Select the BeeBOX folder</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - Velg BeeBOX-mappa</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="436"/>
         <source>%1: access denied.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: tilgang avvist.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="446"/>
@@ -4721,27 +4721,27 @@ Velg et annet navn.</translation>
         <location filename="../src/desktop/GuiShareBox.cpp" line="467"/>
         <location filename="../src/desktop/GuiShareBox.cpp" line="471"/>
         <source>Please wait</source>
-        <translation type="unfinished"></translation>
+        <translation>Vennligst vent</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="469"/>
         <source>Please wait for path %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Vennligst vent på stien %1</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="477"/>
         <source>Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Deaktivert</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="594"/>
         <source>Please insert the new folder name</source>
-        <translation type="unfinished"></translation>
+        <translation>Vennligst angi nytt mappenavn</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="600"/>
         <source>%1 already exists.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 eksisterer allerede.</translation>
     </message>
 </context>
 <context>
@@ -4776,7 +4776,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiShareBox.ui" line="168"/>
         <source>Enable my BeeBOX</source>
-        <translation type="unfinished"></translation>
+        <translation>Slå på min BeeBOX</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.ui" line="193"/>
@@ -4786,7 +4786,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiShareBox.ui" line="568"/>
         <source>Select user</source>
-        <translation type="unfinished"></translation>
+        <translation>Velg bruker</translation>
     </message>
     <message>
         <source>Select box</source>
@@ -4798,13 +4798,13 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/sharedesktop/GuiShareDesktop.cpp" line="75"/>
         <source>last update</source>
-        <translation type="unfinished"></translation>
+        <translation>siste oppdatering</translation>
     </message>
     <message>
         <location filename="../src/sharedesktop/GuiShareDesktop.cpp" line="75"/>
         <location filename="../src/sharedesktop/GuiShareDesktop.cpp" line="83"/>
         <source>Shared desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Delt skjerm</translation>
     </message>
 </context>
 <context>
@@ -4817,12 +4817,12 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiShareLocal.cpp" line="39"/>
         <source>max &lt;b&gt;%1&lt;/b&gt; files</source>
-        <translation type="unfinished"></translation>
+        <translation>maks &lt;b&gt;%1&lt;/b&gt; filer</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareLocal.cpp" line="39"/>
         <source>disabled</source>
-        <translation type="unfinished">inaktiv</translation>
+        <translation>deaktivert</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareLocal.cpp" line="48"/>
@@ -4917,7 +4917,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiShareLocal.cpp" line="157"/>
         <source>Do you want to remove this path:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vil du fjerne denne stien:</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareLocal.cpp" line="159"/>
@@ -4934,7 +4934,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiShareLocal.cpp" line="172"/>
         <source>Do you want to remove all shared paths?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vil du fjerne alle delte stier?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareLocal.cpp" line="223"/>
@@ -5010,7 +5010,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiShareNetwork.cpp" line="40"/>
         <source>Files and folders shared in your network</source>
-        <translation type="unfinished"></translation>
+        <translation>Filer og mapper delt i ditt nettverk</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareNetwork.cpp" line="66"/>
@@ -5044,12 +5044,12 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiShareNetwork.cpp" line="474"/>
         <source>Downloading</source>
-        <translation type="unfinished">Laster ned</translation>
+        <translation>Laster ned</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareNetwork.cpp" line="474"/>
         <source>Uploading</source>
-        <translation type="unfinished">Laster opp</translation>
+        <translation>Laster opp</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareNetwork.cpp" line="495"/>
@@ -5069,12 +5069,12 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiShareNetwork.cpp" line="41"/>
         <source>Right click to open menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Høyreklikk for å åpne meny</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareNetwork.cpp" line="121"/>
         <source>All users</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle brukere</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareNetwork.cpp" line="340"/>
@@ -5145,17 +5145,17 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiShortcut.cpp" line="40"/>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Type</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShortcut.cpp" line="66"/>
         <source>Global</source>
-        <translation type="unfinished"></translation>
+        <translation>Global</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShortcut.cpp" line="66"/>
         <source>Local</source>
-        <translation type="unfinished"></translation>
+        <translation>Lokal</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShortcut.cpp" line="118"/>
@@ -5165,12 +5165,12 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiShortcut.cpp" line="131"/>
         <source>You cannot use the comma for your shortcut.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du kan ikke bruke komma-tegnet i snarveien din.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShortcut.cpp" line="131"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
@@ -5226,12 +5226,12 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiTransferFile.cpp" line="37"/>
         <source>Time left</source>
-        <translation type="unfinished"></translation>
+        <translation>Gjenstående tid</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiTransferFile.cpp" line="68"/>
         <source>Remove all completed transfers</source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern alle fullførte overføringer</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiTransferFile.cpp" line="127"/>
@@ -5270,17 +5270,17 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiTransferFile.cpp" line="172"/>
         <source>Waiting</source>
-        <translation type="unfinished"></translation>
+        <translation>Venter</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiTransferFile.cpp" line="173"/>
         <source>of</source>
-        <translation type="unfinished"></translation>
+        <translation>av</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiTransferFile.cpp" line="219"/>
         <source>Do you want to cancel the transfer of %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vil du avbryte overføringa av %1?</translation>
     </message>
     <message>
         <source>Remove all transfers</source>
@@ -5292,53 +5292,53 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="53"/>
         <source>Search user</source>
-        <translation type="unfinished"></translation>
+        <translation>Søk bruker</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="434"/>
         <location filename="../src/desktop/GuiUserList.cpp" line="441"/>
         <source>Change background color</source>
-        <translation type="unfinished">Endre bakgrunnsfarge</translation>
+        <translation>Endre bakgrunnsfarge</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="543"/>
         <source>You cannot send files to the workgroup &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du kan ikke sende filer til arbeidsgruppa &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="551"/>
         <source>You cannot send files to %1 because the user is offline.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du kan ikke sende filer til %1 fordi brukeren er offline.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="585"/>
         <source>Do you want to send %1 %2 to %3?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vil du sende %1 %2 til %3?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="586"/>
         <source>file</source>
-        <translation type="unfinished">fil</translation>
+        <translation>fil</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="586"/>
         <source>files</source>
-        <translation type="unfinished">filer</translation>
+        <translation>filer</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="587"/>
         <source>Yes</source>
-        <translation type="unfinished">Ja</translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="587"/>
         <source>No</source>
-        <translation type="unfinished">Nei</translation>
+        <translation>Nei</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="600"/>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation type="unfinished">Qt-biblioteket for dette OS&apos;et støtter ikke Dra-og-slipp av filer. Du må velge på nytt fila som skal sendes.</translation>
+        <translation>Qt-biblioteket for dette OS&apos;et støtter ikke Dra-og-slipp av filer. Du må velge på nytt fila som skal sendes.</translation>
     </message>
 </context>
 <context>
@@ -5346,17 +5346,17 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiUserList.ui" line="76"/>
         <source>View options</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis alternativer</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.ui" line="96"/>
         <source>Insert keywords</source>
-        <translation type="unfinished"></translation>
+        <translation>Sett inn nøkkelord</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.ui" line="115"/>
         <source>Clear keywords</source>
-        <translation type="unfinished"></translation>
+        <translation>Slett nøkkelord</translation>
     </message>
 </context>
 <context>
@@ -5364,7 +5364,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="70"/>
         <source>is</source>
-        <translation type="unfinished"></translation>
+        <translation>er</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="78"/>
@@ -5374,7 +5374,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="80"/>
         <source>Happy Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Gratulerer med dagen</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="104"/>
@@ -5389,7 +5389,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="115"/>
         <source>BeeBEEP version</source>
-        <translation type="unfinished"></translation>
+        <translation>BeeBEEP versjon</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="146"/>
@@ -5404,17 +5404,17 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="168"/>
         <source>You cannot remove an user who is connected</source>
-        <translation type="unfinished"></translation>
+        <translation>Du kan ikke fjerne en bruker som er tilkopla</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="173"/>
         <source>You cannot remove an user who is in group chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Du kan ikke fjerne en bruker som deltar i gruppesamtale</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="178"/>
         <source>Remove this user</source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern denne brukeren</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="134"/>
@@ -5452,7 +5452,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="257"/>
         <source>dd/MM/yyyy</source>
-        <translation type="unfinished"></translation>
+        <translation>dd/mm/åååå</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="279"/>
@@ -5482,12 +5482,12 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="476"/>
         <source>Information to display to other users</source>
-        <translation type="unfinished"></translation>
+        <translation>Informasjon som skal vises til andre brukere</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="527"/>
         <source>Regenerate your hash code...</source>
-        <translation type="unfinished"></translation>
+        <translation>Regenerer hash-koden din...</translation>
     </message>
     <message>
         <source>Other informations</source>
@@ -5524,7 +5524,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiVCard.ui" line="314"/>
         <source>Status description</source>
-        <translation type="unfinished"></translation>
+        <translation>Status beskrivelse</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.ui" line="336"/>
@@ -5603,7 +5603,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiWebView.cpp" line="35"/>
         <source>News</source>
-        <translation type="unfinished"></translation>
+        <translation>Nyheter</translation>
     </message>
 </context>
 <context>
@@ -5621,7 +5621,7 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiWizard.cpp" line="67"/>
         <source>Disabled by system administrator</source>
-        <translation type="unfinished"></translation>
+        <translation>Deaktivert av systemadministrator</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWizard.cpp" line="77"/>
@@ -5639,12 +5639,12 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiWizard.ui" line="36"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWizard.ui" line="49"/>
         <source>Cancel</source>
-        <translation type="unfinished">Avbryt</translation>
+        <translation>Avbryt</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWizard.ui" line="92"/>
@@ -5657,42 +5657,42 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="42"/>
         <source>Workgroups</source>
-        <translation type="unfinished"></translation>
+        <translation>Arbeidsgrupper</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="52"/>
         <source>Remove workgroup</source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern arbeidsgruppe</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="73"/>
         <source>Right click to open menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Høyreklikk for å åpne meny</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="105"/>
         <source>Please insert a workgroup.</source>
-        <translation type="unfinished"></translation>
+        <translation>Legg inn ei arbeidsgruppe.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="112"/>
         <source>This workgroup is already in list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Denne arbeidsgruppa er allerede i lista.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="147"/>
         <source>Don&apos;t you want to be part of these workgroups anymore?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vil du ikke delta i disse arbeidsgruppene lenger?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="148"/>
         <source>Yes, remove me</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja, slett meg</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="148"/>
         <source>Cancel</source>
-        <translation type="unfinished">Avbryt</translation>
+        <translation>Avbryt</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -5705,17 +5705,17 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="54"/>
         <source>Clear all</source>
-        <translation type="unfinished">Blank ut alt</translation>
+        <translation>Blank ut alt</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="36"/>
         <source>Your workgroups</source>
-        <translation type="unfinished"></translation>
+        <translation>Dine arbeidsgrupper</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="139"/>
         <source>Please select an item in the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vennligst velg et element i lista.</translation>
     </message>
 </context>
 <context>
@@ -5723,32 +5723,32 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.ui" line="57"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Legg til</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.ui" line="102"/>
         <source>Accept connections only from your workgroups</source>
-        <translation type="unfinished">Godta forbindelser kun fra dine arbeidsgrupper</translation>
+        <translation>Godta forbindelser kun fra dine arbeidsgrupper</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.ui" line="86"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.ui" line="17"/>
         <source>Workgroups</source>
-        <translation type="unfinished"></translation>
+        <translation>Arbeidsgrupper</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.ui" line="23"/>
         <source>Enter the name of workgroup you want to add </source>
-        <translation type="unfinished"></translation>
+        <translation>Legg inn navnet på arbeidsgruppa til vil legge til </translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.ui" line="93"/>
         <source>Cancel</source>
-        <translation type="unfinished">Avbryt</translation>
+        <translation>Avbryt</translation>
     </message>
 </context>
 <context>
@@ -5778,12 +5778,12 @@ Velg et annet navn.</translation>
         <location filename="../src/desktop/GuiChatItem.cpp" line="73"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3447"/>
         <source>All users</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle brukere</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatItem.cpp" line="86"/>
         <source>Open chat with all users</source>
-        <translation type="unfinished"></translation>
+        <translation>Åpne samtale med alle brukere</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatItem.cpp" line="112"/>
@@ -5792,9 +5792,9 @@ Velg et annet navn.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatItem.cpp" line="119"/>
-        <location filename="../src/utils/BeeUtils.cpp" line="699"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="702"/>
         <source>unsent messages</source>
-        <translation type="unfinished"></translation>
+        <translation>usendte meldinger</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="83"/>
@@ -5804,12 +5804,12 @@ Velg et annet navn.</translation>
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="83"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukjent</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserItem.cpp" line="35"/>
         <source>others</source>
-        <translation type="unfinished"></translation>
+        <translation>andre</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserItem.cpp" line="161"/>
@@ -5822,65 +5822,65 @@ Velg et annet navn.</translation>
         <translation>Klikk for å åpne samtale med alle lokale brukere</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="670"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="673"/>
         <source>%1 is %2</source>
         <translation>%1 er %2</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="670"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="673"/>
         <source>You are %1</source>
-        <translation type="unfinished">Du er %1</translation>
+        <translation>Du er %1</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="690"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="693"/>
         <source>last update</source>
-        <translation type="unfinished"></translation>
+        <translation>siste oppdatering</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="695"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="698"/>
         <source>last connection</source>
-        <translation type="unfinished"></translation>
+        <translation>siste forbindelse</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="710"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="713"/>
         <source>Workgroups</source>
-        <translation type="unfinished"></translation>
+        <translation>Arbeidsgrupper</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="730"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="733"/>
         <source>Today is %1&apos;s birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>I dag har %1 fødselsdag</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="732"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="735"/>
         <source>Tomorrow is %1&apos;s birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>I morgen har %1 fødselsdag</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="734"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="737"/>
         <source>%1&apos;s birthday is in %2 days</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 har fødselsdag om %2 dager</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="736"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="739"/>
         <source>Yesterday was %1&apos;s birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 hadde fødselsdag i går</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="743"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="746"/>
         <source>Happy Birthday to you!</source>
-        <translation type="unfinished">Gratulerer med fødselsdagen!</translation>
+        <translation>Gratulerer med fødselsdagen!</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="758"/>
-        <location filename="../src/utils/BeeUtils.cpp" line="779"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="761"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="782"/>
         <source>and</source>
-        <translation type="unfinished"></translation>
+        <translation>og</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="784"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="787"/>
         <source>and %1 others</source>
-        <translation type="unfinished"></translation>
+        <translation>og %1 andre</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserItem.cpp" line="188"/>
@@ -5967,34 +5967,34 @@ Velg et annet navn.</translation>
         <translation type="obsolete">Alle brukere</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="512"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="515"/>
         <source>The connection to %1 was not successful.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="603"/>
-        <source>The tested network address %1 is not present among the available addresses of the network interface to which the connection has been made.</source>
-        <translation type="unfinished"></translation>
+        <translation>Oppkoplinga til %1 mislyktes.</translation>
     </message>
     <message>
         <location filename="../src/core/ConnectionSocket.cpp" line="606"/>
+        <source>The tested network address %1 is not present among the available addresses of the network interface to which the connection has been made.</source>
+        <translation>Testet nettverksadresse %1 finnes ikke blandt de tilgjengelige adressene for nettverksgrensesnittet som forbindelsen er oppretta mot.</translation>
+    </message>
+    <message>
+        <location filename="../src/core/ConnectionSocket.cpp" line="609"/>
         <source>The connection to host address %1 was successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>Oppkoplinga til maskin-adresse %1 var vellykket.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="612"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="615"/>
         <source>The port tested by the connection is %1 but the one that answered is %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Testa port på forbindelsen er %1, men den som svarte er %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="616"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="619"/>
         <source>The connection to port %1 was successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>Oppkoplinga til port %1 var vellykket.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="624"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="627"/>
         <source>Unable to complete the test with an invalid network address.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke fullføre test med en ugyldig nettverksadresse.</translation>
     </message>
 </context>
 <context>
@@ -6026,9 +6026,9 @@ Velg et annet navn.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2087"/>
+        <location filename="../src/core/Settings.cpp" line="2149"/>
         <source>Autoresponder</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto-responder</translation>
     </message>
 </context>
 <context>

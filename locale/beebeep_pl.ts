@@ -57,132 +57,132 @@
 <context>
     <name>Core</name>
     <message>
-        <location filename="../src/core/Core.cpp" line="210"/>
+        <location filename="../src/core/Core.cpp" line="208"/>
         <source>%1 Unable to connect to %2 Network. Please check your firewall settings.</source>
         <translation>%1 Nie można połączyć z siecią %2. Proszę sprawdzić ustawienia zapory sieciowej.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="229"/>
+        <location filename="../src/core/Core.cpp" line="227"/>
         <source>%1 Unable to broadcast to %2 Network. Please check your firewall settings.</source>
         <translation>%1 Nie można wysłać do sieci %2. Proszę sprawdzić ustawienia zapory sieciowej.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="242"/>
+        <location filename="../src/core/Core.cpp" line="240"/>
         <source>%1 You are connected to %2 Network.</source>
         <translation>%1 Połączono z siecią %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="386"/>
+        <location filename="../src/core/Core.cpp" line="384"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1 Rozłączono z siecią %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="315"/>
+        <location filename="../src/core/Core.cpp" line="313"/>
         <source>%1 Zero Configuration started with service name: %2</source>
         <translation>%1 Konfiguracja zerowa uruchomiona pod nazwą usługi: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="109"/>
+        <location filename="../src/core/Core.cpp" line="107"/>
         <source>%1 User %2 cannot save settings in path: %3</source>
         <translation>%1 Użytkownik %2 nie może zapisać ustawień w ścieżce: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="125"/>
+        <location filename="../src/core/Core.cpp" line="123"/>
         <source>%1 User %2 cannot save chat messages in path: %3</source>
         <translation>%1 Użytkownik %2 nie może zapisać wiadomości w ścieżce: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="156"/>
+        <location filename="../src/core/Core.cpp" line="154"/>
         <source>%1 User %2 cannot save unsent messages in path: %3</source>
         <translation>%1 Użytkownik %2 nie może zapisać niewysłanych wiadomości w ścieżce: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="190"/>
+        <location filename="../src/core/Core.cpp" line="188"/>
         <source>%1 Unable to connect to %2 Network. Please check if your network adapter is connected.</source>
         <translation>%1 Nie można połączyć z siecią %2. Proszę sprawdzić czy Twój adapter sieciowy jest podłączony.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="193"/>
+        <location filename="../src/core/Core.cpp" line="191"/>
         <source>Network adapter offline</source>
         <translation>Adapter sieciowy niedostępny</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="197"/>
+        <location filename="../src/core/Core.cpp" line="195"/>
         <source>Connecting</source>
         <translation>Łączenie</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="253"/>
+        <location filename="../src/core/Core.cpp" line="251"/>
         <source>%1 You have selected to join only in these workgroups: %2</source>
         <translation>%1 Wybrałeś dołączenie tylko do tych grup roboczych: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="282"/>
+        <location filename="../src/core/Core.cpp" line="280"/>
         <source>%1 Do you need support? Visit the %2.</source>
         <translation>%1 Potrzebujesz pomocy? Odwiedź %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="284"/>
+        <location filename="../src/core/Core.cpp" line="282"/>
         <source>help page</source>
         <translation>stronę pomocy</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="330"/>
+        <location filename="../src/core/Core.cpp" line="328"/>
         <source>%1 Zero Configuration service closed.</source>
         <translation>Usługa zerowej konfiguracji %1 zamknięta.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="392"/>
+        <location filename="../src/core/Core.cpp" line="390"/>
         <source>Disconnected</source>
         <translation>Rozłączony</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="398"/>
+        <location filename="../src/core/Core.cpp" line="396"/>
         <source>Disconnecting</source>
         <translation>Rozłączanie</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="419"/>
+        <location filename="../src/core/Core.cpp" line="417"/>
         <source>%1 Reconnecting to the %2 Network in progress.</source>
         <translation>%1 W trakcie ponownego łączenia do sieci %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="429"/>
+        <location filename="../src/core/Core.cpp" line="427"/>
         <source>Reconnecting</source>
         <translation>Ponowne łączenie</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="447"/>
+        <location filename="../src/core/Core.cpp" line="445"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
         <translation>%1 Zerowa konfiguracja przeszukuje sieć dla usługi: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="454"/>
+        <location filename="../src/core/Core.cpp" line="452"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation>%1 Zerowa konfiguracja nie może przeszukać sieci dla usługi: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="479"/>
+        <location filename="../src/core/Core.cpp" line="477"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1 Rozgłaszanie w sieci %2...</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="481"/>
+        <location filename="../src/core/Core.cpp" line="479"/>
         <source>Searching users</source>
         <translation>Wyszukiwanie użytkowników</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="612"/>
+        <location filename="../src/core/Core.cpp" line="610"/>
         <source>New version is available</source>
         <translation>Nowa wersja jest dostępna</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="613"/>
+        <location filename="../src/core/Core.cpp" line="611"/>
         <source>Click here to download</source>
         <translation>Kliknij tutaj by pobrać</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="700"/>
+        <location filename="../src/core/Core.cpp" line="698"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>Osiągnięto maksymalne ID. Proszę ponownie uruchomić aplikację.</translation>
     </message>
@@ -363,7 +363,7 @@
         <translation>%1 %2 nie może zostać poinformowany o opuszczeniu grupy przez Ciebie.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="521"/>
+        <location filename="../src/core/Core.cpp" line="519"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1 Interfejs sieciowy %2 został wyłączony.</translation>
     </message>
@@ -563,7 +563,7 @@
         <translation>%1 %2 wysyła do Ciebie folder: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="570"/>
+        <location filename="../src/core/CoreParser.cpp" line="572"/>
         <source>%1 %2 is buzzing you.</source>
         <translation>%1 %2 dzwoni do Ciebie.</translation>
     </message>
@@ -598,50 +598,50 @@
         <translation>został dodany do ulubionych</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="310"/>
+        <location filename="../src/core/CoreConnection.cpp" line="293"/>
         <source>%1 Connection closed to user %2 because it uses your nickname: %3.</source>
         <translation>%1 Połączenie do użytkownika %2 zamknięte, ponieważ używa Twojego nicka: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="297"/>
-        <location filename="../src/core/CoreConnection.cpp" line="303"/>
+        <location filename="../src/core/CoreConnection.cpp" line="280"/>
+        <location filename="../src/core/CoreConnection.cpp" line="286"/>
         <source>%1 Connection closed to user %2 because it uses your account name: %3.</source>
         <translation>%1 Połączenie do użytkownika %2 zamknięte, ponieważ używa Twojej nazwy konta: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="299"/>
-        <location filename="../src/core/CoreConnection.cpp" line="337"/>
+        <location filename="../src/core/CoreConnection.cpp" line="282"/>
+        <location filename="../src/core/CoreConnection.cpp" line="320"/>
         <source>domain</source>
         <translation>domena</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="315"/>
+        <location filename="../src/core/CoreConnection.cpp" line="298"/>
         <source>%1 Connection closed to user %2 because it uses your hash code.</source>
         <translation>%1 Połączenie do użytkownika %2 zamknięte, ponieważ używa takiego samego kodu skrótu.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="335"/>
-        <location filename="../src/core/CoreConnection.cpp" line="342"/>
+        <location filename="../src/core/CoreConnection.cpp" line="318"/>
+        <location filename="../src/core/CoreConnection.cpp" line="325"/>
         <source>%1 Connection closed to user %2 because it uses same account name of the already connected user %3: %4.</source>
         <translation>%1 Połączenie do użytkownika %2 zamknięte, ponieważ używa takiej samej nazwy konta jak już połączony użytkownik %3: %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="350"/>
+        <location filename="../src/core/CoreConnection.cpp" line="333"/>
         <source>%1 Connection closed to user %2 because it uses same nickname of the already connected user %3: %4.</source>
         <translation>%1 Połączenie do użytkownika %2 zamknięte, ponieważ używa takiego samego nicka jak już połączony użytkownik %3: %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="356"/>
+        <location filename="../src/core/CoreConnection.cpp" line="339"/>
         <source>%1 Connection closed to user %2 because it uses same hash code of the already connected user %3: %4.</source>
         <translation>%1 Połączenie do użytkownika %2 zamknięte, ponieważ używa takiego samego kodu skrótu jak już połączony użytkownik %3: %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="410"/>
+        <location filename="../src/core/CoreConnection.cpp" line="393"/>
         <source>%1 users connected</source>
         <translation>%1 połączonych użytkowników</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="414"/>
+        <location filename="../src/core/CoreConnection.cpp" line="397"/>
         <source>%1 %2 uses old encryption level.</source>
         <translation>%1 %2 używa starego poziomu szyfrowania.</translation>
     </message>
@@ -674,7 +674,7 @@
 <context>
     <name>Date</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="998"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="1001"/>
         <source>more than 1 day</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5750,7 +5750,7 @@ Proszę wybrać inną nazwę.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatItem.cpp" line="119"/>
-        <location filename="../src/utils/BeeUtils.cpp" line="699"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="702"/>
         <source>unsent messages</source>
         <translation>niewysłanych wiadomości</translation>
     </message>
@@ -5780,63 +5780,63 @@ Proszę wybrać inną nazwę.</translation>
         <translation>Kliknij by otworzyć czat z wszystkimi lokalnymi użytkownikami</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="670"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="673"/>
         <source>%1 is %2</source>
         <translation>%1 jest %2</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="670"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="673"/>
         <source>You are %1</source>
         <translation>Jesteś %1</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="690"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="693"/>
         <source>last update</source>
         <translation>ostatnia zmiana</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="695"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="698"/>
         <source>last connection</source>
         <translation>ostatnie połączenie</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="710"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="713"/>
         <source>Workgroups</source>
         <translation>Grupy robocze</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="730"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="733"/>
         <source>Today is %1&apos;s birthday</source>
         <translation>%1 ma dzisiaj urodziny</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="732"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="735"/>
         <source>Tomorrow is %1&apos;s birthday</source>
         <translation>%1 ma jutro urodziny</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="734"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="737"/>
         <source>%1&apos;s birthday is in %2 days</source>
         <translation>%1 ma urodziny za %2 dni</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="736"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="739"/>
         <source>Yesterday was %1&apos;s birthday</source>
         <translation>%1 miał wczoraj urodziny</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="743"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="746"/>
         <source>Happy Birthday to you!</source>
         <translation>Wszystkiego najlepszego z okazji urodzin!</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="758"/>
-        <location filename="../src/utils/BeeUtils.cpp" line="779"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="761"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="782"/>
         <source>and</source>
         <translation>i</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="784"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="787"/>
         <source>and %1 others</source>
         <translation>i %1 innych</translation>
     </message>
@@ -5921,32 +5921,32 @@ Proszę wybrać inną nazwę.</translation>
         <translation>Pokaż wszystkie czaty</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="512"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="515"/>
         <source>The connection to %1 was not successful.</source>
         <translation>Połączenie z %1 nie powiodło się.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="603"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="606"/>
         <source>The tested network address %1 is not present among the available addresses of the network interface to which the connection has been made.</source>
         <translation>Testowany adres sieciowy %1 nie znajduje się w zakresie adresów interfejsu sieciowego, z którym nawiązano połączenie.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="606"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="609"/>
         <source>The connection to host address %1 was successful.</source>
         <translation>Połączenie z hostem o adresie %1 powiodło się.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="612"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="615"/>
         <source>The port tested by the connection is %1 but the one that answered is %2.</source>
         <translation>Testowanym portem połączenia jest %1, ale odpowiedział port %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="616"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="619"/>
         <source>The connection to port %1 was successful.</source>
         <translation>Połączenie z portem %1 powiodło się.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="624"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="627"/>
         <source>Unable to complete the test with an invalid network address.</source>
         <translation>Nie można ukończyć testu z niepoprawnym adresem sieciowym.</translation>
     </message>
@@ -5980,7 +5980,7 @@ Proszę wybrać inną nazwę.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2087"/>
+        <location filename="../src/core/Settings.cpp" line="2149"/>
         <source>Autoresponder</source>
         <translation>Autoodpowiedź</translation>
     </message>

@@ -57,135 +57,135 @@
 <context>
     <name>Core</name>
     <message>
-        <location filename="../src/core/Core.cpp" line="210"/>
+        <location filename="../src/core/Core.cpp" line="208"/>
         <source>%1 Unable to connect to %2 Network. Please check your firewall settings.</source>
         <translation>%1 無法連線到 %2 網路。 請檢查您的防火牆設定。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="229"/>
+        <location filename="../src/core/Core.cpp" line="227"/>
         <source>%1 Unable to broadcast to %2 Network. Please check your firewall settings.</source>
         <translation>%1 無法廣播到 %2 網路。 請檢查您的防火牆設定。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="242"/>
+        <location filename="../src/core/Core.cpp" line="240"/>
         <source>%1 You are connected to %2 Network.</source>
         <translatorcomment>DT</translatorcomment>
         <translation>%1 您已連線到 %2 網路。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="386"/>
+        <location filename="../src/core/Core.cpp" line="384"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1 您已中斷與 %2 網路的連線。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="315"/>
+        <location filename="../src/core/Core.cpp" line="313"/>
         <source>%1 Zero Configuration started with service name: %2</source>
         <translation>%1 零組態以服務名稱啟動: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="109"/>
+        <location filename="../src/core/Core.cpp" line="107"/>
         <source>%1 User %2 cannot save settings in path: %3</source>
         <translation>%1 使用者 %2 無法將設定儲存在路徑: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="125"/>
+        <location filename="../src/core/Core.cpp" line="123"/>
         <source>%1 User %2 cannot save chat messages in path: %3</source>
         <translation>%1 使用者 %2 無法將聊天訊息儲存在路徑: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="156"/>
+        <location filename="../src/core/Core.cpp" line="154"/>
         <source>%1 User %2 cannot save unsent messages in path: %3</source>
         <translation>%1 使用者 %2 無法將未傳送的訊息儲存在路徑: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="190"/>
+        <location filename="../src/core/Core.cpp" line="188"/>
         <source>%1 Unable to connect to %2 Network. Please check if your network adapter is connected.</source>
         <translatorcomment>DT</translatorcomment>
         <translation>%1 無法連線到 %2 網路。 請檢查您的網路介面卡是否已連線。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="193"/>
+        <location filename="../src/core/Core.cpp" line="191"/>
         <source>Network adapter offline</source>
         <translation>網路介面卡離線</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="197"/>
+        <location filename="../src/core/Core.cpp" line="195"/>
         <source>Connecting</source>
         <translation>正在連線</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="253"/>
+        <location filename="../src/core/Core.cpp" line="251"/>
         <source>%1 You have selected to join only in these workgroups: %2</source>
         <translation>%1 您選擇只加入這些工作群組: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="282"/>
+        <location filename="../src/core/Core.cpp" line="280"/>
         <source>%1 Do you need support? Visit the %2.</source>
         <translation>%1 您需要支援? 訪問 %2。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="284"/>
+        <location filename="../src/core/Core.cpp" line="282"/>
         <source>help page</source>
         <translation>說明頁</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="330"/>
+        <location filename="../src/core/Core.cpp" line="328"/>
         <source>%1 Zero Configuration service closed.</source>
         <translation>%1 零組態服務已關閉。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="392"/>
+        <location filename="../src/core/Core.cpp" line="390"/>
         <source>Disconnected</source>
         <translation>已中斷連線</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="398"/>
+        <location filename="../src/core/Core.cpp" line="396"/>
         <source>Disconnecting</source>
         <translation>正在中斷連線</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="419"/>
+        <location filename="../src/core/Core.cpp" line="417"/>
         <source>%1 Reconnecting to the %2 Network in progress.</source>
         <translation>%1 重新連線到 %2 網路進行中。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="429"/>
+        <location filename="../src/core/Core.cpp" line="427"/>
         <source>Reconnecting</source>
         <translation>正在重新連線</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="447"/>
+        <location filename="../src/core/Core.cpp" line="445"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
         <translation>%1 零組態是瀏覽服務的網路: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="454"/>
+        <location filename="../src/core/Core.cpp" line="452"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation>%1 零組態無法瀏覽服務的網路: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="479"/>
+        <location filename="../src/core/Core.cpp" line="477"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1 廣播到 %2 網路...</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="481"/>
+        <location filename="../src/core/Core.cpp" line="479"/>
         <source>Searching users</source>
         <translatorcomment>DT</translatorcomment>
         <translation>搜尋使用者</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="612"/>
+        <location filename="../src/core/Core.cpp" line="610"/>
         <source>New version is available</source>
         <translation>有新版本可以使用</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="613"/>
+        <location filename="../src/core/Core.cpp" line="611"/>
         <source>Click here to download</source>
         <translation>按一下此處下載</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="700"/>
+        <location filename="../src/core/Core.cpp" line="698"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>已達到最大 ID。 請關閉並重新啟動應用程式。</translation>
     </message>
@@ -362,7 +362,7 @@
         <translation>%1 %2 無法告知您已離開群組。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="521"/>
+        <location filename="../src/core/Core.cpp" line="519"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1 網路介面 %2 已關閉。</translation>
     </message>
@@ -562,7 +562,7 @@
         <translation>%1 %2 正在向您傳送資料夾: %3。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="570"/>
+        <location filename="../src/core/CoreParser.cpp" line="572"/>
         <source>%1 %2 is buzzing you.</source>
         <translation>%1 %2 正在呼叫您。</translation>
     </message>
@@ -597,50 +597,50 @@
         <translation>已加入到我的最愛</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="310"/>
+        <location filename="../src/core/CoreConnection.cpp" line="293"/>
         <source>%1 Connection closed to user %2 because it uses your nickname: %3.</source>
         <translation>%1 連線已關閉到使用者 %2，因為它使用您的昵稱: %3。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="297"/>
-        <location filename="../src/core/CoreConnection.cpp" line="303"/>
+        <location filename="../src/core/CoreConnection.cpp" line="280"/>
+        <location filename="../src/core/CoreConnection.cpp" line="286"/>
         <source>%1 Connection closed to user %2 because it uses your account name: %3.</source>
         <translation>%1 連線已關閉到使用者 %2，因為它使用您的帳戶名稱: %3。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="299"/>
-        <location filename="../src/core/CoreConnection.cpp" line="337"/>
+        <location filename="../src/core/CoreConnection.cpp" line="282"/>
+        <location filename="../src/core/CoreConnection.cpp" line="320"/>
         <source>domain</source>
         <translation>網域</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="315"/>
+        <location filename="../src/core/CoreConnection.cpp" line="298"/>
         <source>%1 Connection closed to user %2 because it uses your hash code.</source>
         <translation>%1 連線已關閉到使用者 %2，因為它使用您的雜湊碼。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="335"/>
-        <location filename="../src/core/CoreConnection.cpp" line="342"/>
+        <location filename="../src/core/CoreConnection.cpp" line="318"/>
+        <location filename="../src/core/CoreConnection.cpp" line="325"/>
         <source>%1 Connection closed to user %2 because it uses same account name of the already connected user %3: %4.</source>
         <translation>%1 連線已關閉到使用者 %2，因為它使用已連線的使用者 %3 的相同帳號名稱: %4。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="350"/>
+        <location filename="../src/core/CoreConnection.cpp" line="333"/>
         <source>%1 Connection closed to user %2 because it uses same nickname of the already connected user %3: %4.</source>
         <translation>%1 連線已關閉到使用者 %2，因為它使用已連線的使用者 %3 的相同昵稱: %4。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="356"/>
+        <location filename="../src/core/CoreConnection.cpp" line="339"/>
         <source>%1 Connection closed to user %2 because it uses same hash code of the already connected user %3: %4.</source>
         <translation>%1 連線已關閉到使用者 %2，因為它使用已連線的使用者 %3 的相同雜湊碼: %4。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="410"/>
+        <location filename="../src/core/CoreConnection.cpp" line="393"/>
         <source>%1 users connected</source>
         <translation>%1 個使用者已連線</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="414"/>
+        <location filename="../src/core/CoreConnection.cpp" line="397"/>
         <source>%1 %2 uses old encryption level.</source>
         <translation>%1 %2 使用舊的加密等級。</translation>
     </message>
@@ -673,7 +673,7 @@
 <context>
     <name>Date</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="998"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="1001"/>
         <source>more than 1 day</source>
         <translation>1 天以上</translation>
     </message>
@@ -5584,7 +5584,7 @@ Please select a different name.</source>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatItem.cpp" line="119"/>
-        <location filename="../src/utils/BeeUtils.cpp" line="699"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="702"/>
         <source>unsent messages</source>
         <translation>未傳送訊息</translation>
     </message>
@@ -5614,63 +5614,63 @@ Please select a different name.</source>
         <translation>按一下與所有本地使用者開啟聊天</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="670"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="673"/>
         <source>%1 is %2</source>
         <translation>%1 是 %2</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="670"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="673"/>
         <source>You are %1</source>
         <translation>您是 %1</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="690"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="693"/>
         <source>last update</source>
         <translation>上次更新</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="695"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="698"/>
         <source>last connection</source>
         <translation>上次連線</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="710"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="713"/>
         <source>Workgroups</source>
         <translation>工作群組</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="730"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="733"/>
         <source>Today is %1&apos;s birthday</source>
         <translation>今天是 %1 的生日</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="732"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="735"/>
         <source>Tomorrow is %1&apos;s birthday</source>
         <translation>明天是 %1 的生日</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="734"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="737"/>
         <source>%1&apos;s birthday is in %2 days</source>
         <translation>%1 的生日在 %2 天內</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="736"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="739"/>
         <source>Yesterday was %1&apos;s birthday</source>
         <translation>昨天是 %1 的生日</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="743"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="746"/>
         <source>Happy Birthday to you!</source>
         <translation>祝您生日快樂!</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="758"/>
-        <location filename="../src/utils/BeeUtils.cpp" line="779"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="761"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="782"/>
         <source>and</source>
         <translation>和</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="784"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="787"/>
         <source>and %1 others</source>
         <translation>和 %1 其他</translation>
     </message>
@@ -5755,32 +5755,32 @@ Please select a different name.</source>
         <translation>顯示所有聊天</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="512"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="515"/>
         <source>The connection to %1 was not successful.</source>
         <translation>與 %1 的連線不成功。</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="603"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="606"/>
         <source>The tested network address %1 is not present among the available addresses of the network interface to which the connection has been made.</source>
         <translation>已測試的網路位址 %1 不存在於已連線的網路介面的可用位址。</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="606"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="609"/>
         <source>The connection to host address %1 was successful.</source>
         <translation>與主機位址 %1 的連線成功。</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="612"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="615"/>
         <source>The port tested by the connection is %1 but the one that answered is %2.</source>
         <translation>連線測試的埠為 %1，但回應的埠為 %2。</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="616"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="619"/>
         <source>The connection to port %1 was successful.</source>
         <translation>與埠 %1 的連線成功。</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="624"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="627"/>
         <source>Unable to complete the test with an invalid network address.</source>
         <translation>無法使用不正確網路位址完成測試。</translation>
     </message>
@@ -5814,7 +5814,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2087"/>
+        <location filename="../src/core/Settings.cpp" line="2149"/>
         <source>Autoresponder</source>
         <translation>自動回應器</translation>
     </message>
