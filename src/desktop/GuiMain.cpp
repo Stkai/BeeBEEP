@@ -3726,7 +3726,7 @@ void GuiMain::sendBroadcastMessage()
 {
   mp_actBroadcast->setDisabled( true );
   beeCore->sendBroadcastMessage();
-  beeCore->sendMulticastingMessage();
+  beeCore->sendDnsMulticastingMessage();
   QTimer::singleShot( 61 * 1000, this, SLOT( enableBroadcastAction() ) );
 }
 

@@ -121,7 +121,7 @@ public:
 
 public slots:
   void sendBroadcastMessage();
-  void sendMulticastingMessage();
+  void sendDnsMulticastingMessage();
   void checkNetworkInterface();
   void checkNewVersion();
   void postUsageStatistics();
@@ -201,7 +201,6 @@ protected slots:
   /* CoreConnection */
   void checkNewConnection( qintptr );
   void newPeerFound( const QHostAddress&, int );
-  void newPeerFoundFromDatagram( const QHostAddress&, const QHostAddress&, int );
   void setConnectionError( QAbstractSocket::SocketError );
   void setConnectionClosed();
   void checkUserAuthentication( const QByteArray& );

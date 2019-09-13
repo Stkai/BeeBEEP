@@ -31,8 +31,7 @@
 
 Broadcaster::Broadcaster( QObject *parent )
   : QObject( parent ), m_networkAddresses(), m_newBroadcastRequested( false ),
-    m_networkAddressesWaitingForLoopback(), m_addOfflineUsersInNetworkAddresses( false ),
-    m_multicastGroupAddress()
+    m_networkAddressesWaitingForLoopback(), m_multicastGroupAddress()
 {
   mp_receiverSocket = new QUdpSocket( this );
   mp_senderSocket = new QUdpSocket( this );
@@ -67,14 +66,7 @@ bool Broadcaster::startBroadcastServer()
       }
     }
 
-    m_multicastInterface = NetworkManager::instance().localNetworkInterface();
-    bool multicast_group_joined = false;
-    if( m_multicastInterface.isValid() )
-       multicast_group_joined = mp_receiverSocket->joinMulticastGroup( m_multicastGroupAddress, m_multicastInterface );
-     else
-       multicast_group_joined = mp_receiverSocket->joinMulticastGroup( m_multicastGroupAddress );
-
-    if( multicast_group_joined )
+    if( mp_receiverSocket->joinMulticastGroup( m_multicastGroupAddress ) )
       qDebug() << "Join to the multicast group" << qPrintable( m_multicastGroupAddress.toString() );
     else
       qWarning() << "Unable to join to the multicast group" << qPrintable( m_multicastGroupAddress.toString() );
@@ -85,7 +77,6 @@ bool Broadcaster::startBroadcastServer()
     m_networkAddresses.clear();
   if( !m_networkAddressesWaitingForLoopback.isEmpty() )
     m_networkAddressesWaitingForLoopback.clear();
-  m_addOfflineUsersInNetworkAddresses = false;
   m_newBroadcastRequested = false;
   return true;
 }
@@ -99,12 +90,7 @@ void Broadcaster::stopBroadcasting()
 #if QT_VERSION >= 0x040800
     if( !m_multicastGroupAddress.isNull() )
     {
-      bool multicast_group_left = false;
-      if( m_multicastInterface.isValid() )
-        multicast_group_left = mp_receiverSocket->leaveMulticastGroup( m_multicastGroupAddress, m_multicastInterface );
-      else
-        multicast_group_left = mp_receiverSocket->leaveMulticastGroup( m_multicastGroupAddress );
-      if( multicast_group_left )
+      if( mp_receiverSocket->leaveMulticastGroup( m_multicastGroupAddress ) )
         qDebug() << "Leave from the multicast group" << qPrintable( m_multicastGroupAddress.toString() );
       else
         qWarning() << "Unable to leave from the multicast group" << qPrintable( m_multicastGroupAddress.toString() );
@@ -120,7 +106,6 @@ void Broadcaster::stopBroadcasting()
   if( !m_networkAddressesWaitingForLoopback.isEmpty() )
     m_networkAddressesWaitingForLoopback.clear();
   m_newBroadcastRequested = false;
-  m_addOfflineUsersInNetworkAddresses = false;
 }
 
 void Broadcaster::sendBroadcast()
@@ -236,31 +221,33 @@ void Broadcaster::readBroadcastDatagram()
     QHostAddress sender_ip;
     quint16 sender_port;
     QByteArray datagram;
+
     datagram.resize( static_cast<int>(mp_receiverSocket->pendingDatagramSize()) );
+
     if( mp_receiverSocket->readDatagram( datagram.data(), datagram.size(), &sender_ip, &sender_port ) == -1 )
     {
       qWarning() << "Broadcasting has found and error reading datagram" << num_datagram_read;
       continue;
     }
+
     if( datagram.size() <= Protocol::instance().messageMinimumSize() )
     {
       qWarning() << "Broadcaster has received an invalid data size:" << datagram;
       continue;
     }
+
+    if( sender_ip.isNull() )
+    {
+      qWarning() << "Broadcaster has received datagram from invalid host address";
+      continue;
+    }
+
     Message m = Protocol::instance().toMessage( datagram, 1 );
     if( !m.isValid() || m.type() != Message::Beep )
     {
       qWarning() << "Broadcaster has received an invalid data:" << datagram;
       continue;
     }
-
-    QHostAddress sender_host_address = Protocol::instance().hostAddressFromBroadcastMessage( m );
-    if( sender_host_address.isNull() )
-      qWarning() << "Broadcaster has received and invalid host address in data:" << datagram;
-    else
-      removeHostAddressFromWaitingList( sender_host_address );
-    if( !sender_ip.isNull() )
-      removeHostAddressFromWaitingList( sender_ip );
 
     bool ok = false;
     int sender_listener_port = m.text().toInt( &ok );
@@ -270,19 +257,28 @@ void Broadcaster::readBroadcastDatagram()
       continue;
     }
 
+    removeHostAddressFromWaitingList( sender_ip );
+    // host_address_from_datagram it the host target of the message (so for multicast is 239.255.64.75,
+    // for broadcast 192.168.1.255, 10.0.0.255, ...)
+    QHostAddress host_address_from_datagram = Protocol::instance().hostAddressFromBroadcastMessage( m );
+    if( host_address_from_datagram.isNull() )
+      qWarning() << "Broadcaster has received and invalid host address in data:" << datagram;
+    else
+      removeHostAddressFromWaitingList( host_address_from_datagram );
+
     if( sender_listener_port == Settings::instance().localUser().networkAddress().hostPort() && NetworkManager::instance().isLocalHostAddress( sender_ip ) )
     {
 #ifdef BEEBEEP_DEBUG
-      qDebug() << "Broadcaster has received LOCAL datagram from ip address:" << qPrintable( Protocol::instance().hostAddressFromBroadcastMessage( m ).toString() );
+      qDebug() << "Broadcaster skips its own datagram received from" << qPrintable( sender_ip.toString() ) << "with source" << qPrintable( host_address_from_datagram.toString() );
 #endif
       continue;
     }
 
-    if( sender_host_address.isNull() )
+    if( host_address_from_datagram.isNull() )
       qDebug() << "Broadcaster has found new peer" << qPrintable( sender_ip.toString() ) << sender_listener_port;
     else
-      qDebug() << "Broadcaster has found new peer" << qPrintable( sender_ip.toString() ) << sender_listener_port << "with datagram from" << qPrintable( sender_host_address.toString() );
-    emit newPeerFoundFromDatagram( sender_host_address, sender_ip, sender_listener_port );
+      qDebug() << "Broadcaster has found new peer" << qPrintable( sender_ip.toString() ) << sender_listener_port << "with datagram from" << qPrintable( host_address_from_datagram.toString() );
+    emit newPeerFound( sender_ip, sender_listener_port );
   }
 
   if( num_datagram_read > 1 )
@@ -368,7 +364,7 @@ void Broadcaster::updateAddresses()
 
   updateUsersAddedManually();
 
-  if( m_addOfflineUsersInNetworkAddresses )
+  if( Settings::instance().broadcastToOfflineUsers() )
   {
     int offline_users_to_add = 0;
 
@@ -384,6 +380,9 @@ void Broadcaster::updateAddresses()
     {
       foreach( NetworkAddress na, Hive::instance().networkAddresses() )
       {
+        User u = UserManager::instance().findUserByNetworkAddress( na );
+        if( u.isValid() && u.isStatusConnected() )
+          continue;
         if( addNetworkAddress( na, false ) )
           offline_users_to_add++;
       }
@@ -431,11 +430,7 @@ void Broadcaster::onTickEvent( int )
   {
     if( m_newBroadcastRequested )
     {
-      if( Settings::instance().broadcastToOfflineUsers() )
-        setAddOfflineUsersInNetworkAddresses( true );
       updateAddresses();
-      if( Settings::instance().broadcastToOfflineUsers() )
-        setAddOfflineUsersInNetworkAddresses( false );
       m_newBroadcastRequested = false;
     }
   }

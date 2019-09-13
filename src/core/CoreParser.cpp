@@ -501,20 +501,22 @@ void Core::parseHiveMessage( const User& u, const Message& m )
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Hive message arrived with" << user_record_list.size() << "users from" << qPrintable( u.path() );
 #endif
+    int hive_users_added = 0;
     foreach( UserRecord ur, user_record_list )
     {
-      User user_found = UserManager::instance().findUserByNetworkAddress( ur.networkAddress() );
-      if( !user_found.isValid() || !user_found.isStatusConnected() )
+      if( !isUserConnected( ur.networkAddress() ) )
       {
         if( Hive::instance().addNetworkAddress( ur.networkAddress() ) )
         {
+          hive_users_added++;
 #ifdef BEEBEEP_DEBUG
           qDebug() << "Hive message contains this path" << qPrintable( ur.networkAddress().toString() ) << "and it is added to contact list";
 #endif
-          mp_broadcaster->setNewBroadcastRequested( true );
         }
       }
     }
+    if( hive_users_added > 0 )
+      mp_broadcaster->setNewBroadcastRequested( true );
   }
   else
     qWarning() << "Invalid flag found in hive message from user" << qPrintable( u.path() );

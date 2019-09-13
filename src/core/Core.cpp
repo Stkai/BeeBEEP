@@ -55,7 +55,6 @@ Core::Core( QObject* parent )
 
   mp_listener = new Listener( this );
   mp_broadcaster = new Broadcaster( this );
-  mp_broadcaster->setAddOfflineUsersInNetworkAddresses( false );
   mp_fileTransfer = new FileTransfer( this );
   m_shareListToBuild = 0;
 
@@ -71,7 +70,6 @@ Core::Core( QObject* parent )
   mp_shareDesktop = new ShareDesktop( this );
 #endif
 
-  connect( mp_broadcaster, SIGNAL( newPeerFoundFromDatagram( const QHostAddress&, const QHostAddress&, int ) ), this, SLOT( newPeerFoundFromDatagram( const QHostAddress&, const QHostAddress&, int ) ) );
   connect( mp_broadcaster, SIGNAL( newPeerFound( const QHostAddress&, int ) ), this, SLOT( newPeerFound( const QHostAddress&, int ) ) );
   connect( mp_listener, SIGNAL( newConnection( qintptr ) ), this, SLOT( checkNewConnection( qintptr ) ) );
   connect( mp_fileTransfer, SIGNAL( listening() ), this, SLOT( onFileTransferServerListening() ) );
@@ -342,7 +340,7 @@ void Core::onMulticastDnsServiceRegistered()
 {
   emit multicastDnsChanged();
   if( dnsMulticastingIsActive() )
-    sendMulticastingMessage();
+    sendDnsMulticastingMessage();
 }
 #endif
 
@@ -430,7 +428,7 @@ bool Core::restartConnection()
   return start();
 }
 
-void Core::sendMulticastingMessage()
+void Core::sendDnsMulticastingMessage()
 {
   if( !Settings::instance().useMulticastDns() )
     return;

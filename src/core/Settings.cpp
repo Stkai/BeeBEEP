@@ -1968,7 +1968,7 @@ bool Settings::searchDataFolder()
   else if( m_saveDataInDocumentsFolder )
     root_folder = QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation );
   else
-    root_folder = QDesktopServices::storageLocation( rc_folder_is_writable ? m_resourceFolder : QDesktopServices::DataLocation );
+    root_folder = rc_folder_is_writable ? m_resourceFolder : QDesktopServices::storageLocation( QDesktopServices::DataLocation );
 #endif
 
   if( m_addAccountNameToDataFolder || m_saveDataInDocumentsFolder )
