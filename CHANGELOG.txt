@@ -8,6 +8,7 @@ BeeBEEP 5.6.9 (in development)
 - Added "Clear system messages" in activity and chat windows
 - Added "SkipLocalHardwareAddresses" in beebeep.rc to skip unesuful network interfaces
 - The option "AllowMultipleInstances" can be enabled also in Terminal Server because it checks also user account
+- The avatar icon size is also applied in member icons of the chat windows
 
 BeeBEEP 5.6.8
 - "ChatSaveFileTransfers" and "ChatSaveSystemMessages" options added in Settings - Chat menu: 
