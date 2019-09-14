@@ -864,11 +864,13 @@ QString Bee::dateTimeToString( const QDateTime& dt )
   return dt.date() == QDate::currentDate() ? dt.time().toString( Qt::SystemLocaleShortDate ) : dt.toString( Qt::SystemLocaleShortDate );
 }
 
+QString Bee::beeColorYellow() { return "#dede00"; }
+
 QString Bee::beeColorsToHtmlText( const QString& txt )
 {
   QString bee_txt = "";
   for( int i = 0; i < txt.size(); i++ )
-    bee_txt.append( QString( "<font color=%1>%2</font>" ).arg( (i % 2 == 0) ? "#000000" : "#dede00" ).arg( txt.at( i ) ) );
+    bee_txt.append( QString( "<font color=%1>%2</font>" ).arg( (i % 2 == 0) ? "#000000" : beeColorYellow() ).arg( txt.at( i ) ) );
   return bee_txt;
 }
 

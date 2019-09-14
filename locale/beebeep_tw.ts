@@ -673,7 +673,7 @@
 <context>
     <name>Date</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="1001"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="1003"/>
         <source>more than 1 day</source>
         <translation>1 天以上</translation>
     </message>
@@ -1752,37 +1752,37 @@ Please select a different name.</source>
         <translation>%1 未讀取上次訊息</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="403"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="404"/>
         <source>Qt libraries have a bug on saving the window&apos;s state.</source>
         <translation>Qt 程式庫在儲存視窗狀態時有 Bug。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="404"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="405"/>
         <source>If you have layout problem please save only geometry.</source>
         <translation>如果您有佈局問題，請只儲存幾何體。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="405"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="406"/>
         <source>Save all</source>
         <translation>儲存所有</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="405"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="406"/>
         <source>Save only geometry</source>
         <translation>只儲存幾何體</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="405"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="406"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="424"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="425"/>
         <source>Window geometry saved</source>
         <translation>已儲存視窗幾何體</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="426"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="427"/>
         <source>Window geometry and state saved</source>
         <translation>視窗幾何體和狀態已儲存</translation>
     </message>
@@ -1874,6 +1874,16 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiHome.cpp" line="106"/>
         <source>Clear system messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiHome.cpp" line="142"/>
+        <source>Click here to see the latest news about BeeBEEP project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiHome.cpp" line="147"/>
+        <source>Click here to read more</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2089,10 +2099,10 @@ Please select a different name.</source>
         <translation>顯示主工具列</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3649"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3650"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3651"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3652"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3653"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3654"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3655"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3656"/>
         <source>offline</source>
         <translation>離線</translation>
     </message>
@@ -2101,24 +2111,24 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="387"/>
         <location filename="../src/desktop/GuiMain.cpp" line="404"/>
         <location filename="../src/desktop/GuiMain.cpp" line="649"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1939"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2305"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2507"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2580"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2587"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2649"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2866"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3020"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3051"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3213"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3436"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3460"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3517"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3805"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3963"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4321"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4693"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4839"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1943"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2309"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2511"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2584"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2591"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2653"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2870"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3024"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3055"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3217"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3440"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3464"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3521"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3815"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3973"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4331"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4703"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4849"/>
         <source>Yes</source>
         <translation>是</translation>
     </message>
@@ -2127,24 +2137,24 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="387"/>
         <location filename="../src/desktop/GuiMain.cpp" line="404"/>
         <location filename="../src/desktop/GuiMain.cpp" line="649"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1939"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2305"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2507"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2580"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2587"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2649"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2866"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3020"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3051"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3213"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3436"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3460"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3517"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3805"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3963"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4321"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4693"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4839"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1943"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2309"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2511"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2584"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2591"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2653"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2870"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3024"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3055"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3217"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3440"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3464"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3521"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3815"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3973"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4331"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4703"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4849"/>
         <source>No</source>
         <translation>否</translation>
     </message>
@@ -2222,17 +2232,17 @@ Please select a different name.</source>
         <translation>啟用檔案傳輸</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3628"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3632"/>
         <source>Use HTML tags</source>
         <translation>使用 HTML 標籤</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3633"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3637"/>
         <source>Use clickable links</source>
         <translation>使用可點擊連結</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3606"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3610"/>
         <source>Show messages grouped by user</source>
         <translation>以使用者分組顯示訊息</translation>
     </message>
@@ -2252,39 +2262,39 @@ Please select a different name.</source>
         <translation>外掛程式</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1320"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1324"/>
         <source>Show %1&apos;s license...</source>
         <translation>顯示 %1 的授權...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1324"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1328"/>
         <source>Open %1 official website...</source>
         <translation>開啟 %1 官方網站...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1325"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1329"/>
         <source>Check for new version...</source>
         <translation>檢查新版本...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1326"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1330"/>
         <source>Download plugins...</source>
         <translation>下載外掛程式...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1328"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1332"/>
         <source>Help online...</source>
         <translation>線上說明...</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="942"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1408"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1412"/>
         <source>Users</source>
         <translation>使用者</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="761"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1351"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1355"/>
         <source>Quit</source>
         <translation>離開</translation>
     </message>
@@ -2320,12 +2330,12 @@ Please select a different name.</source>
         <translation>使用最上層顯示</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3596"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3600"/>
         <source>Show the timestamp</source>
         <translation>顯示時間旗標</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2084"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2088"/>
         <source>Show only last %1 messages</source>
         <translation>只顯示上次 %1 則訊息</translation>
     </message>
@@ -2360,7 +2370,7 @@ Please select a different name.</source>
         <translation>開啟您的資料目錄</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3584"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3588"/>
         <source>Use RTL mode to show text</source>
         <translation>使用 RTL 模式顯示文字</translation>
     </message>
@@ -2455,22 +2465,22 @@ Please select a different name.</source>
         <translation>顯示新訊息</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1316"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1320"/>
         <source>?</source>
         <translation>?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1321"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1325"/>
         <source>Qt Library...</source>
         <translation>Qt 程式庫...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1317"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1321"/>
         <source>Donate for %1</source>
         <translation>贊助給 %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1344"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1348"/>
         <source>Show</source>
         <translation>顯示</translation>
     </message>
@@ -2495,72 +2505,72 @@ Please select a different name.</source>
         <translation>顯示聊天訊息預覽</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1418"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1422"/>
         <source>Groups</source>
         <translation>群組</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1413"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1417"/>
         <source>Chats</source>
         <translation>聊天</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1431"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1435"/>
         <source>File Transfers</source>
         <translation>檔案傳輸</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2602"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2606"/>
         <source>Downloading %1 files</source>
         <translation>正在下載 %1 個檔案</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2981"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2985"/>
         <source>There are no messages saved in the chat with %1.</source>
         <translation>與 %1 聊天中沒有已儲存的訊息。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3454"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3458"/>
         <source>Do you want to clear messages with %1?</source>
         <translation>您要清除訊息 %1 嗎?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3591"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3595"/>
         <source>Show the chat in compact view mode</source>
         <translation>以精簡檢視模式顯示聊天</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3640"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3644"/>
         <source>Restore default font</source>
         <translation>還原預設字型</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3804"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3814"/>
         <source>Do you want to delete user %1?</source>
         <translation>您要刪除使用者 %1 嗎?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3962"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3972"/>
         <source>Do you want to clear all saved status descriptions?</source>
         <translation>您要清除所有已儲存的狀態描述嗎?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4261"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4271"/>
         <source>Qt libraries have a bug on saving the window&apos;s state.</source>
         <translation>Qt 程式庫在儲存視窗狀態時有 Bug。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4262"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4272"/>
         <source>If you have layout problem please save only geometry.</source>
         <translation>如果您有佈局問題，請只儲存幾何體。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4387"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4397"/>
         <source>New file from %1</source>
         <translation>新檔案從 %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4408"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4418"/>
         <source>%1 is buzzing you!</source>
         <translation>%1 呼叫您!</translation>
     </message>
@@ -2732,7 +2742,7 @@ Please select a different name.</source>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="711"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1372"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1376"/>
         <source>Development version</source>
         <translation>開發版本</translation>
     </message>
@@ -2927,22 +2937,22 @@ Please select a different name.</source>
         <translation>重設所有視窗的幾何體</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1329"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1333"/>
         <source>Show tips...</source>
         <translation>顯示提示...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1330"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1334"/>
         <source>Read FAQ...</source>
         <translation>閱讀常見問題解答...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1333"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1337"/>
         <source>Information about %1...</source>
         <translation>有關 %1 的資訊...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1331"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1335"/>
         <source>Discover the fact of the day...</source>
         <translation>探索一天的事實...</translation>
     </message>
@@ -2997,425 +3007,425 @@ Please select a different name.</source>
         <translation>在其工作群組中顯示使用者</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1397"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1401"/>
         <source>Right click to open menu</source>
         <translation>按一下滑鼠右鍵開啟功能表</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1403"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1407"/>
         <source>Activities</source>
         <translation>活動</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1423"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1427"/>
         <source>Saved chats</source>
         <translation>儲存的聊天</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1575"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2071"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1579"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2075"/>
         <source>There will be no saving of &apos;system&apos; and &apos;file transfer&apos; messages if this option is disabled.</source>
         <translation>如果停用這個選項，將不會儲存「系統」和「檔案傳輸」訊息。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1595"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1599"/>
         <source>How many minutes of idle %1 can wait before changing status to away?</source>
         <translation>閒置多少分鐘 %1 可以等待多久，在變更狀態為離開前?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1637"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1641"/>
         <source>Please select the maximum number of messages to be showed</source>
         <translation>請選取要顯示的訊息最大數</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1688"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1692"/>
         <source>Please select the number of inactive days before user is removed</source>
         <translation>請選取移除使用者前的未活動天數</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1840"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1844"/>
         <source>milliseconds, 5000 default</source>
         <translation>毫秒，5000 預設</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1870"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1874"/>
         <source>Please select the opacity percentage of inactive chat window (default: %1%)</source>
         <translation>請選取未使用中聊天視窗的不透明度 (預設值: %1%)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1905"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1909"/>
         <source>You must close and reopen the chat windows to see the changes applied.</source>
         <translation>您必須關閉並重新開啟聊天視窗，才能看到套用的變更。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1938"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1942"/>
         <source>Saving unsent messages may fail if &apos;Save users&apos; and &apos;Save groups&apos; options are not enabled. Do you want to enable them?</source>
         <translation>如果未啟用「儲存使用者」和「儲存群組」選項，則儲存未傳送訊息可能會失敗。 您要啟用它們嗎?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1964"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1968"/>
         <source>Please select the maximum number of lines to be saved in the chat (current: %1).</source>
         <translation>請選取要在聊天中儲存的最大行數 (目前: %1)。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2001"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2005"/>
         <source>Please select the maximum number of files you can queue up for the transfer (current: %1).</source>
         <translation>請選取可以佇列進行傳輸的最大檔案數 (目前: %1)。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2058"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2062"/>
         <source>Option enabled.</source>
         <translation>選項已啟用。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2060"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2064"/>
         <source>Option disabled.</source>
         <translation>選項已停用。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2090"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2094"/>
         <source>Remove users after %1 days of inactivity</source>
         <translation>在 %1 天未活動後移除使用者</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2097"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2101"/>
         <source>Show inactive chat window with %1% opacity</source>
         <translation>以 %1% 不透明度，顯示未使用中聊天視窗</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2102"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2106"/>
         <source>Save maximum %1 lines of chat</source>
         <translation>最多儲存 %1 行聊天</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2109"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2113"/>
         <source>Clean the cache from items older than %1 days</source>
         <translation>從超過 %1 天的項目中清除快取</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2116"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2120"/>
         <source>Add up to %1 files to the transfer queue</source>
         <translation>將最多 %1 個檔案加入到傳輸佇列</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2171"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2183"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2175"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2187"/>
         <source>to all</source>
         <translation>對所有人</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2173"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2185"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2177"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2189"/>
         <source>to</source>
         <translation>對</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2175"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2187"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2179"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2191"/>
         <source>to you</source>
         <translation>對您</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2181"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2185"/>
         <source>New message from</source>
         <translation>新訊息來自</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2191"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2195"/>
         <source>New message arrived</source>
         <translation>新訊息已送達</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2291"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2295"/>
         <source>%1 is writing...</source>
         <translation>%1 正在寫入...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2304"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2308"/>
         <source>Do you want to disconnect from %1 network?</source>
         <translation>您要與 %1 網路中斷連線嗎?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2346"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2350"/>
         <source>You are %1%2</source>
         <translation>您是 %1%2</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2358"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2362"/>
         <source>Please insert the new status description</source>
         <translation>請輸入新的狀態描述</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2408"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2412"/>
         <source>%1 - Select a file</source>
         <translation>%1 - 選取檔案</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2408"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2412"/>
         <source>or more</source>
         <translation>或更多</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2427"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2431"/>
         <source>File transfer is not enabled.</source>
         <translation>檔案傳輸未啟用。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2433"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2437"/>
         <source>You are not connected.</source>
         <translation>您未連線。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2450"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2454"/>
         <source>There is no user connected.</source>
         <translation>沒有使用者連線。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2456"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2460"/>
         <source>Please select the user to whom you would like to send a file.</source>
         <translation>請選取希望傳送檔案的使用者。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2465"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2469"/>
         <source>User not found.</source>
         <translation>找不到使用者。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2487"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2634"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2491"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2638"/>
         <source>File transfer is disabled. You cannot download %1.</source>
         <translation>檔案傳輸已停用，您無法下載 %1。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2507"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2649"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2511"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2653"/>
         <source>Yes, and don&apos;t ask anymore</source>
         <translation>是，不再詢問</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2539"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2543"/>
         <source>%1 already exists. Please select a new filename.</source>
         <translation>%1 已經存在，請選取新的檔案名稱。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2578"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2582"/>
         <source>You cannot download all these files at once. Do you want to download the first %1 files of the list?</source>
         <translation>您不能一次下載所有這些檔案。 要下載清單的前 %1 個檔案嗎?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2586"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2590"/>
         <source>Downloading %1 files is a hard duty. Maybe you have to wait a lot of minutes. Do yo want to continue?</source>
         <translation>正在下載 %1 個檔案，檔案很大，您可能要等待一陣子。 您確定要繼續嗎?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2648"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2652"/>
         <source>Do you want to download folder %1 (%2 files) from %3?</source>
         <translation>您要從 %3 下載資料夾 %1 (%2 個檔案) 嗎?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2689"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2693"/>
         <source>%1 - Select the download folder</source>
         <translation>%1 - 選取下載資料夾</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2697"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2701"/>
         <source>The files will be downloaded to the folder:</source>
         <translation>檔案將下載到資料夾:</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2789"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2793"/>
         <source>Plugin Manager...</source>
         <translation>外掛程式管理員...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2812"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2816"/>
         <source>Start the new application to copy file and folders by Marco Mastroddi</source>
         <translation>開始新的應用程式來複製檔案和資料夾由巨集 Mastroddi</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2865"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2869"/>
         <source>Your name is not changed. Do you want to continue?</source>
         <translation>您的名稱不會變更。 要繼續嗎?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3019"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3023"/>
         <source>Do you want to open the file %1?</source>
         <translation>您要開啟檔案 %1 嗎?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3065"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3069"/>
         <source>Sound module is not working</source>
         <translation>音效模組未動作</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3088"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3092"/>
         <source>You are not allowed create groups. The option has been disabled by your system administrator.</source>
         <translation>不允許建立群組。 系統管理員已停用選項。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3109"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3113"/>
         <source>There is a chat with the same members: %1.</source>
         <translation>與相同的成員聊天: %1。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3131"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3135"/>
         <source>You are not allowed modify groups. The option has been disabled by your system administrator.</source>
         <translation>不允許修改群組。 系統管理員已停用選項。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3213"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3217"/>
         <source>Do you want to delete saved chat with %1?</source>
         <translation>您要刪除與 %1 的已儲存聊天嗎?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3246"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3250"/>
         <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br&gt;What do you want to do with the selected saved text?</source>
         <translation>選取的聊天「%1」已經儲存文字。&lt;br&gt;您希望如何處理選取的儲存文字?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3354"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3358"/>
         <source>Your status description</source>
         <translation>您的狀況描述</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3601"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3605"/>
         <source>Show the time with the AM/PM notation</source>
         <translation>使用 AM/PM 標記法顯示時間</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3616"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3620"/>
         <source>Show username&apos;s color</source>
         <translation>顯示使用者名稱的色彩</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3656"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3660"/>
         <source>none</source>
         <translation>無</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4170"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4231"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4180"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4241"/>
         <source>You have new message</source>
         <translation>您有新訊息</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4263"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4273"/>
         <source>Save all</source>
         <translation>儲存所有</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4263"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4273"/>
         <source>Save only geometry</source>
         <translation>只儲存幾何體</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4279"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4289"/>
         <source>Window geometry saved</source>
         <translation>已儲存視窗幾何體</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4321"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4331"/>
         <source>Do you really want to reset window&apos;s geometry?</source>
         <translation>您真的要重設視窗的幾何圖形?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4336"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4346"/>
         <source>Geometry of all windows has been reset</source>
         <translation>已重設所有視窗的幾何體</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4562"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4572"/>
         <source>You are using the default icons.</source>
         <translation>您正在使用預設圖示。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4568"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4578"/>
         <source>You are using custom icons in folder %1.</source>
         <translation>您正在資料夾 %1 中使用自訂圖示。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4569"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4579"/>
         <source>Restore default icons</source>
         <translation>還原預設圖示</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4633"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4643"/>
         <source>Restart connection now</source>
         <translation>立即重新啟動連線</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4633"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4643"/>
         <source>Restart later manually</source>
         <translation>稍後手動重新啟動</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4693"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4703"/>
         <source>Do you really want to restore the colors to the default ones?</source>
         <translation>您真的要將色彩還原到預設色彩嗎?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4838"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4848"/>
         <source>Do you really want to share your desktop with %1?</source>
         <translation>您真的要與 %1 共用桌面?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4563"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4569"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4578"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4573"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4579"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4588"/>
         <source>Select the icon folder</source>
         <translation>選取圖示資料夾</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4599"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4609"/>
         <source>You are using the default emoticons.</source>
         <translation>您正在使用預設表情。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4600"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4606"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4615"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4610"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4616"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4625"/>
         <source>Select the emoticon folder</source>
         <translation>選取表情資料夾</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4605"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4615"/>
         <source>You are using custom emoticons in folder %1.</source>
         <translation>您正在資料夾 %1 中使用自訂表情。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4606"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4616"/>
         <source>Restore default emoticons</source>
         <translation>還原預設表情</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4632"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4642"/>
         <source>You have to restart your connection to apply changes.</source>
         <translation>您必須重新啟動連線才能套用變更。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="773"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3111"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3115"/>
         <source>Create new group chat</source>
         <translation>建立新聊天群組</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3177"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3181"/>
         <source>Starting</source>
         <translation>開始中</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3394"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3417"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3398"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3421"/>
         <source>%1 removed</source>
         <translation>%1 已移除</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3611"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3615"/>
         <source>Show your name instead of &apos;You&apos;</source>
         <translation>顯示您的名稱而不是「您」</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3623"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3627"/>
         <source>Show emoticons</source>
         <translation>顯示表情</translation>
     </message>
@@ -3425,42 +3435,42 @@ Please select a different name.</source>
         <translation>使用字型表情</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3916"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3926"/>
         <source>at lunch</source>
         <translation>啟動時</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3925"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3935"/>
         <source>in a meeting</source>
         <translation>開會中</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4106"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4116"/>
         <source>Select your dictionary path</source>
         <translation>選取您的字典路徑</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4114"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4124"/>
         <source>Dictionary selected: %1</source>
         <translation>字典選取: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4116"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4126"/>
         <source>Unable to set dictionary: %1</source>
         <translation>無法設定字典: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4281"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4291"/>
         <source>Window geometry and state saved</source>
         <translation>視窗幾何體和狀態已儲存</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4550"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4560"/>
         <source>%1 blocked chats</source>
         <translation>%1 封鎖聊天</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1336"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1340"/>
         <source>Add +1 user to anonymous usage statistics</source>
         <translation>加入 +1 使用者給匿名使用統計</translation>
     </message>
@@ -3470,14 +3480,14 @@ Please select a different name.</source>
         <translation>網路</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2791"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2795"/>
         <source>is a plugin developed by</source>
         <translation>外掛程式開發由</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1453"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3026"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3270"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1457"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3030"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3274"/>
         <source>Unable to open %1</source>
         <translation>無法開啟 %1</translation>
     </message>
@@ -3497,130 +3507,130 @@ Please select a different name.</source>
         <translation>關閉時</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1453"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1576"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1905"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2072"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2701"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2981"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3026"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3088"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3131"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3270"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4641"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1457"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1580"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1909"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2076"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2705"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2985"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3030"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3092"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3135"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3274"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4651"/>
         <source>Ok</source>
         <translation>確定</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3039"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3043"/>
         <source>Sound files (*.wav)</source>
         <translation>音效檔 (*.wav)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3051"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3055"/>
         <source>Sound is not enabled on a new message. Do you want to enable it?</source>
         <translation>新訊息未啟用音效。 要啟用它嗎?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3070"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3074"/>
         <source>Sound file not found</source>
         <translation>音效檔找不到</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3061"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3065"/>
         <source>The default BEEP will be used</source>
         <translation>將使用預設的 BEEP</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3156"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3160"/>
         <source>Now %1 will start on windows boot.</source>
         <translatorcomment>DT</translatorcomment>
         <translation>現在 %1 將隨 Windows 啟動。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3164"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3171"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3168"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3175"/>
         <source>Unable to add this key in the registry: permission denied.</source>
         <translation>無法在登錄檔中加入這個機碼: 權限拒絕。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3169"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3173"/>
         <source>%1 will not start on windows boot.</source>
         <translation>%1 不會隨 Windows 啟動。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3237"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3241"/>
         <source>Please select a chat you would like to link the saved text.</source>
         <translation>請選取您希望連結已儲存文字的聊天。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1094"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3248"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3252"/>
         <source>Overwrite</source>
         <translation>覆寫</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3248"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3252"/>
         <source>Add in the head</source>
         <translation>加入到頂端</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3435"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3439"/>
         <source>All the members of this chat are not online. The changes may not be permanent. Do you wish to continue?</source>
         <translation>這個聊天的所有成員不在線上。 變更可能非永久性。 是否要繼續?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3516"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3520"/>
         <source>Do you want to leave the chat with %1?</source>
         <translation>您要離開聊天 %1 嗎?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3522"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3526"/>
         <source>Unable to leave the chat with %1.</source>
         <translation>無法離開與 %1 的聊天。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3654"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3658"/>
         <source>inactive</source>
         <translation>未使用中</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3684"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4885"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3688"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4895"/>
         <source>disabled</source>
         <translation>已停用</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3694"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3698"/>
         <source>active</source>
         <translation>啟用</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3771"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3775"/>
         <source>%1 is online</source>
         <translation>%1 在線上</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3773"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3777"/>
         <source>%1 is offline</source>
         <translation>%1 離線</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3785"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3789"/>
         <source>Please select the new size of the user picture</source>
         <translation>請選取使用者照片的新大小</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1576"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2072"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2623"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3111"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3248"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4263"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4563"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4569"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4600"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4606"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1580"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2076"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2627"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3115"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3252"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4273"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4573"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4579"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4610"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4616"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
@@ -3640,85 +3650,85 @@ Please select a different name.</source>
         <translation>選取下載資料夾</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1439"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1443"/>
         <source>Show the file transfer panel</source>
         <translation>顯示檔案傳輸面板</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1560"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1564"/>
         <source>Please save the network password in the next dialog if you want to use password without prompt.</source>
         <translation>請在下一對話方塊儲存網路密碼，如果您要使用密碼而不出現提示。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1638"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1642"/>
         <source>(current: %1, default: %2, all: -1, none: 0)</source>
         <translation>(目前:  %1，預設值:  %2，全部: -1，無: 0)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1816"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1820"/>
         <source>jpg for photo, png for presentation</source>
         <translation>jpg 用於照片，png 用於展示</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1827"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1831"/>
         <source>-1 default, 10 low, 60 medium, 100 high</source>
         <translation>-1 預設值，10 低，60 中，100 高</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1979"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1983"/>
         <source>Please select the number of days that items (such as images) can remain cached (current: %1, never clear: -1, always clear: 0).</source>
         <translation>請選取項目 (如圖片) 可以保留快取的天數 (目前: %1，永不清除: -1，始終清除: 0)。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2506"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2510"/>
         <source>Do you want to download %1 (%2) from %3?</source>
         <translation>您要從 %3 下載 %1 (%2) 嗎?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2617"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2621"/>
         <source>File is not available for download.</source>
         <translation>沒有可以下載的檔案。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2619"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2623"/>
         <source>%1 is not connected.</source>
         <translation>%1 未連線。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2620"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2624"/>
         <source>Please reload the list of shared files.</source>
         <translation>請重新載入共用檔案清單。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2623"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2627"/>
         <source>Reload file list</source>
         <translation>重新載入檔案清單</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3450"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3454"/>
         <source>Chat with %1 is empty.</source>
         <translation>與 %1 聊天空白。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3457"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3515"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3461"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3519"/>
         <source>Yes and delete history</source>
         <translation>是並刪除歷程紀錄</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3549"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3553"/>
         <source>Default language is restored.</source>
         <translation>預設語言已還原。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3551"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3555"/>
         <source>New language &apos;%1&apos; is selected.</source>
         <translation>新語言 %1 已選取。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2750"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3554"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4641"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2754"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3558"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4651"/>
         <source>You must restart %1 to apply these changes.</source>
         <translation>您必須重新啟動 %1 才能套用這些變更。</translation>
     </message>
@@ -5568,7 +5578,7 @@ Please select a different name.</source>
     <name>QObject</name>
     <message>
         <location filename="../src/desktop/GuiChatItem.cpp" line="73"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3447"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3451"/>
         <source>All users</source>
         <translation>所有使用者</translation>
     </message>

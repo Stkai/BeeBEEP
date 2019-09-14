@@ -312,7 +312,7 @@
     </message>
     <message>
         <source>Click here to download</source>
-        <translation>Premi qui per scaricarla</translation>
+        <translation>Fai clic qui per scaricarla</translation>
     </message>
     <message>
         <source>Max ID is reached. Please close and restart the application.</source>
@@ -1154,7 +1154,7 @@
     </message>
     <message>
         <source>Click to send message or just hit enter</source>
-        <translation>Premi qui o premi invio per spedire il messaggio</translation>
+        <translation>Fai clic qui o premi invio per spedire il messaggio</translation>
     </message>
 </context>
 <context>
@@ -1253,7 +1253,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Click to send message</source>
-        <translation>Click per inviare un messaggio</translation>
+        <translation>Clic per inviare un messaggio</translation>
     </message>
     <message>
         <source>Open chat after sending message</source>
@@ -1598,6 +1598,14 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Clear system messages</source>
         <translation>Cancella i messaggi di sistema</translation>
+    </message>
+    <message>
+        <source>Click here to see the latest news about BeeBEEP project</source>
+        <translation>Fai clic qui per vedere le ultime notizie sul progetto BeeBEEP</translation>
+    </message>
+    <message>
+        <source>Click here to read more</source>
+        <translation>Fai clic qui per approfondire</translation>
     </message>
 </context>
 <context>
@@ -4196,11 +4204,11 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Double click to download %1</source>
-        <translation>Doppio click per scaricare %1</translation>
+        <translation>Doppio clic per scaricare %1</translation>
     </message>
     <message>
         <source>Double click to open %1</source>
-        <translation>Doppio click per aprire %1</translation>
+        <translation>Doppio clic per aprire %1</translation>
     </message>
     <message>
         <source>Transfer completed</source>
@@ -4850,15 +4858,15 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Click to send message to group: %1</source>
-        <translation>Click per inviare un messaggio al gruppo: %1</translation>
+        <translation>Clic per inviare un messaggio al gruppo: %1</translation>
     </message>
     <message>
         <source>Click to open chat with all local users</source>
-        <translation>Click per aprire una conversazione con tutti gli utenti connessi</translation>
+        <translation>Clic per aprire una conversazione con tutti gli utenti connessi</translation>
     </message>
     <message>
         <source>Click to send a private message</source>
-        <translation>Click per inviare un messaggio privato</translation>
+        <translation>Clic per inviare un messaggio privato</translation>
     </message>
     <message>
         <source>Empty</source>

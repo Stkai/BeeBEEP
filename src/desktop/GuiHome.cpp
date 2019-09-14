@@ -133,14 +133,22 @@ void GuiHome::resetNews()
 
 void GuiHome::setNews( const QString& news )
 {
+  QString tooltip_text = "";
   if( news.isEmpty() )
   {
     mp_lNews->setText( QString( "<a style='text-decoration: none;' href='%1'><b>%2</b></a>" )
                          .arg( Settings::instance().newsWebSite() )
                          .arg( Bee::beeColorsToHtmlText( "B  e  e  B  E  E  P" ) ) );
+    tooltip_text = tr( "Click here to see the latest news about BeeBEEP project" );
   }
   else
+  {
     mp_lNews->setText( news );
+    tooltip_text = tr( "Click here to read more" );
+  }
+
+  if( !tooltip_text.isEmpty() )
+    mp_lNews->setToolTip( QString( "<span style='color: %1'>%2</span>" ).arg( Bee::beeColorYellow() ).arg( tooltip_text ) );
 }
 
 void GuiHome::reloadMessages()

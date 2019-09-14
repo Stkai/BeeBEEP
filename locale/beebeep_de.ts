@@ -1543,6 +1543,14 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Clear system messages</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Click here to see the latest news about BeeBEEP project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to read more</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiHomeWidget</name>
