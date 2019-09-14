@@ -1,14 +1,20 @@
 [Windows]
-CurrentVersion=5.6.1
+CurrentVersion=5.8.2
 
 [Linux]
-CurrentVersion=5.6.1
+CurrentVersion=5.8.2
 
 [MacOSX]
-CurrentVersion=5.6.1
+CurrentVersion=5.8.2
+
+[OSX]
+CurrentVersion=5.8.2
 
 [OS2]
-CurrentVersion=5.6.1
+CurrentVersion=5.8.2
+
+[PI]
+CurrentVersion=5.8.2
 
 [Info]
 News="<a style='text-decoration: none;' href='http://www.marcomastroddi.com'><b><font color=#dede00>Give a look to Marco Mastroddi new website!</font></a></b><br /><i>Get Lucky!</i><br /><b>Go Wild!</b>"
