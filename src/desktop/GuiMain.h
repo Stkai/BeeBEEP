@@ -343,6 +343,8 @@ private:
   QAction* mp_actSaveSystemMessages;
   QAction* mp_actSetAutoAway;
   QAction* mp_actEditWorkgroups;
+  QAction* mp_actEditAvatarIconSize;
+  QAction* mp_actShowOnlineUsersOnly;
 
   QAction* mp_actShowUserListOnConnection;
   QAction* mp_actShowChatListOnConnection;

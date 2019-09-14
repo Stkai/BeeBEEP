@@ -42,6 +42,7 @@ public:
   void setMainIcon( bool with_message );
   void updateChat( const Chat& );
   void updateUser( const User& );
+  void updateChatMembers( const Chat& );
   void setFocusInChat();
   void updateActions( bool is_connected, int connected_users );
   void setChatReadByUser( const Chat&, const User& );
@@ -69,7 +70,6 @@ protected:
   void closeEvent( QCloseEvent* );
   void keyPressEvent( QKeyEvent* );
   void updateChatTitle( const Chat& );
-  void updateChatMembers( const Chat& );
   void updateChatMember( const Chat&, const User& );
 
 private slots:

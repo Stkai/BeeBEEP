@@ -1213,10 +1213,10 @@ void GuiMain::createMenus()
 
   /* User List Menu */
   mp_menuUserList = new QMenu( tr( "Options" ), this );
-    act = mp_menuUserList->addAction( tr( "Show online users only" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showOnlyOnlineUsers() );
-  act->setData( 6 );
+  mp_actShowOnlineUsersOnly = mp_menuUserList->addAction( tr( "Show online users only" ), this, SLOT( settingsChanged() ) );
+  mp_actShowOnlineUsersOnly->setCheckable( true );
+  mp_actShowOnlineUsersOnly->setChecked( Settings::instance().showOnlyOnlineUsers() );
+  mp_actShowOnlineUsersOnly->setData( 6 );
   act = mp_menuUserList->addAction( tr( "Show users in their workgroups" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().showUsersInWorkgroups() );
@@ -1268,7 +1268,7 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().showUserStatusDescription() );
   act->setData( 37 );
   mp_menuUserList->addSeparator();
-  mp_menuUserList->addAction( tr( "Change size of the user's picture" ), this, SLOT( changeAvatarSizeInList() ) );
+  mp_actEditAvatarIconSize = mp_menuUserList->addAction( IconManager::instance().icon( "icon-size.png" ), tr( "Change size of the user's picture" ), this, SLOT( changeAvatarSizeInList() ) );
   mp_userList->setMenuSettings( mp_menuUserList );
 
   /* Status Menu */
@@ -1303,6 +1303,8 @@ void GuiMain::createMenus()
 
   /* Context Menu for user list view */
   QMenu* context_menu_users = new QMenu( "Menu", this );
+  context_menu_users->addAction( mp_actShowOnlineUsersOnly );
+  context_menu_users->addSeparator();
   context_menu_users->addAction( mp_actVCard );
   context_menu_users->addAction( mp_actChangeStatusDescription );
   context_menu_users->addSeparator();
@@ -1310,6 +1312,8 @@ void GuiMain::createMenus()
   context_menu_users->addSeparator();
   context_menu_users->addAction( mp_actConfigureNetwork );
   context_menu_users->addAction( mp_actAddUsers );
+  context_menu_users->addSeparator();
+  context_menu_users->addAction( mp_actEditAvatarIconSize );
   mp_userList->setContextMenuUsers( context_menu_users );
 
   /* Help Menu */
@@ -3792,6 +3796,12 @@ void GuiMain::changeAvatarSizeInList()
   mp_chatList->updateChats();
   mp_groupList->updateGroups();
   mp_savedChatList->updateSavedChats();
+  foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+  {
+    Chat c = ChatManager::instance().chat( fl_chat->guiChat()->chatId() );
+    if( c.isValid() )
+      fl_chat->updateChatMembers( c );
+  }
 }
 
 void GuiMain::toggleUserFavorite( VNumber user_id )

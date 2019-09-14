@@ -51,7 +51,7 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
   mp_barMembers = new QToolBar( tr( "Show the bar of members" ), this );
   addToolBar( Qt::RightToolBarArea, mp_barMembers );
   mp_barMembers->setObjectName( "GuiFloatingChatMemberToolBar" );
-  mp_barMembers->setIconSize( Settings::instance().mainBarIconSize() );
+  mp_barMembers->setIconSize( Settings::instance().avatarIconSize() );
   mp_barMembers->setAllowedAreas( Qt::AllToolBarAreas );
   mp_barMembers->setFloatable( false );
   mp_barMembers->toggleViewAction()->setVisible( false );
@@ -185,7 +185,7 @@ void GuiFloatingChat::updateChatMember( const Chat& c, const User& u )
   }
 
   act_user->setText( u.name() );
-  int avatar_size = qMax( mp_barMembers->iconSize().width(), 32 );
+  int avatar_size = mp_barMembers->iconSize().width();
   QString user_tooltip = Bee::toolTipForUser( u, true );
   if( !u.isLocal() && u.protocolVersion() >= 63 && !c.userHasReadMessages( u.id() ) )
   {
@@ -206,6 +206,7 @@ void GuiFloatingChat::updateChatMembers( const Chat& c )
   if( mp_barMembers->isEnabled() )
   {
     mp_barMembers->clear();
+    mp_barMembers->setIconSize( Settings::instance().avatarIconSize() );
     mp_barMembers->setVisible( true );
 
     UserList ul = UserManager::instance().userList().fromUsersId( c.usersId() );
