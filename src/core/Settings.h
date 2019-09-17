@@ -319,6 +319,10 @@ public:
   inline const QString& chatQuoteBackgroundColor() const;
   inline void setChatQuoteTextColor( const QString& );
   inline const QString& chatQuoteTextColor() const;
+  enum ChatOnSendingMessageTypes { SkipOnSendingMessage, MinimizeChatOnSendingMessage,
+                                   CloseChatOnSendingMessage, NumChatOnSendingMessageTypes };
+  inline void setChatOnSendingMessage( int );
+  inline int chatOnSendingMessage() const;
 
   inline bool allowEditNickname() const;
 
@@ -729,6 +733,7 @@ private:
   bool m_sendNewMessageIndividually;
   QString m_chatQuoteBackgroundColor;
   QString m_chatQuoteTextColor;
+  int m_chatOnSendingMessage;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -1251,5 +1256,7 @@ inline const QString& Settings::chatQuoteTextColor() const { return m_chatQuoteT
 inline bool Settings::checkUserConnectedFromDatagramIp() const { return m_checkUserConnectedFromDatagramIp; }
 inline bool Settings::isLocalHardwareAddressToSkip( const QString& hw_value ) const { return m_skipLocalHardwareAddresses.isEmpty() ? false : m_skipLocalHardwareAddresses.contains( hw_value, Qt::CaseInsensitive ); }
 inline bool Settings::rcFileExists() const { return m_rcFileExists; }
+inline void Settings::setChatOnSendingMessage( int new_value ) { m_chatOnSendingMessage = new_value; }
+inline int Settings::chatOnSendingMessage() const { return m_chatOnSendingMessage; }
 
 #endif // BEEBEEP_SETTINGS_

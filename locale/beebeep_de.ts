@@ -1055,6 +1055,22 @@
         <source>Clear system messages</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Schließen</translation>
+    </message>
+    <message>
+        <source>Close chat window on sending message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minimize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minimize chat window on sending message</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiChatList</name>
@@ -1123,6 +1139,10 @@
     <message>
         <source>Click to send message or just hit enter</source>
         <translation>Zum Senden der Nachricht hier klicken oder einfach Eingabetaste drücken</translation>
+    </message>
+    <message>
+        <source>close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3028,6 +3048,22 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Select quote background color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>On sending message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do nothing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Minimize chat window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close chat window</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -1087,6 +1087,22 @@
         <source>Clear system messages</source>
         <translation>Cancella i messaggi di sistema</translation>
     </message>
+    <message>
+        <source>Close</source>
+        <translation>Chiudi</translation>
+    </message>
+    <message>
+        <source>Close chat window on sending message</source>
+        <translation>Chiudi la finestra dopo l&apos;invio del messaggio</translation>
+    </message>
+    <message>
+        <source>Minimize</source>
+        <translation>Minimizza</translation>
+    </message>
+    <message>
+        <source>Minimize chat window on sending message</source>
+        <translation>Minimizza la finestra dopo l&apos;invio del messaggio</translation>
+    </message>
 </context>
 <context>
     <name>GuiChatList</name>
@@ -1155,6 +1171,10 @@
     <message>
         <source>Click to send message or just hit enter</source>
         <translation>Fai clic qui o premi invio per spedire il messaggio</translation>
+    </message>
+    <message>
+        <source>close</source>
+        <translation>chiudi</translation>
     </message>
 </context>
 <context>
@@ -3141,6 +3161,26 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Select quote background color</source>
         <translation>Seleziona il colore di sfondo del testo citato</translation>
+    </message>
+    <message>
+        <source>Close window on sending message</source>
+        <translation type="vanished">Chiudi la finestra dopo l&apos;invio del messaggio</translation>
+    </message>
+    <message>
+        <source>On sending message</source>
+        <translation>All&apos;invio del messaggio</translation>
+    </message>
+    <message>
+        <source>Do nothing</source>
+        <translation>Non fare nulla</translation>
+    </message>
+    <message>
+        <source>Minimize chat window</source>
+        <translation>Minimizza la finestra della conversazione</translation>
+    </message>
+    <message>
+        <source>Close chat window</source>
+        <translation>Chiudi la finestra della conversazione</translation>
     </message>
 </context>
 <context>

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>560</width>
-    <height>360</height>
+    <width>590</width>
+    <height>380</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -87,7 +87,10 @@
     <property name="bottomMargin">
      <number>0</number>
     </property>
-    <item row="0" column="0">
+    <property name="verticalSpacing">
+     <number>0</number>
+    </property>
+    <item row="0" column="0" rowspan="2">
      <widget class="GuiMessageEdit" name="mp_teMessage">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
@@ -119,14 +122,14 @@
       </property>
       <property name="minimumSize">
        <size>
-        <width>34</width>
+        <width>50</width>
         <height>34</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
         <width>50</width>
-        <height>50</height>
+        <height>34</height>
        </size>
       </property>
       <property name="toolTip">
@@ -147,6 +150,13 @@
       </property>
      </widget>
     </item>
+    <item row="1" column="1">
+     <widget class="QCheckBox" name="mp_cbSendAndClose">
+      <property name="text">
+       <string>close</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
  </widget>
@@ -159,6 +169,9 @@
  </customwidgets>
  <tabstops>
   <tabstop>mp_teMessage</tabstop>
+  <tabstop>mp_pbSend</tabstop>
+  <tabstop>mp_cbSendAndClose</tabstop>
+  <tabstop>mp_teChat</tabstop>
  </tabstops>
  <resources>
   <include location="../beebeep.qrc"/>

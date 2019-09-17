@@ -1105,6 +1105,9 @@ void Settings::load()
   m_useMessageTimestampWithAP = sets->value( "UseMessageTimestampWithAP", m_useMessageTimestampWithAP ).toBool();
   m_chatQuoteBackgroundColor = sets->value( "QuoteBackgroundColor", m_chatQuoteBackgroundColor ).toString();
   m_chatQuoteTextColor = sets->value( "QuoteTextColor", m_chatQuoteTextColor ).toString();
+  m_chatOnSendingMessage = sets->value( "CloseOnSendingMessage", SkipOnSendingMessage ).toInt();
+  if( m_chatOnSendingMessage < 0 || m_chatOnSendingMessage >= NumChatOnSendingMessageTypes )
+    m_chatOnSendingMessage = SkipOnSendingMessage;
   sets->endGroup();
 
   sets->beginGroup( "User" );
@@ -1235,7 +1238,7 @@ void Settings::load()
   m_pluginPath = checkFolderPath( Bee::convertToNativeFolderSeparator( sets->value( "PluginPath", plugin_folder_path ).toString() ), plugin_folder_path );
   QString language_folder_path = defaultLanguageFolderPath();
   m_languagePath = checkFolderPath( Bee::convertToNativeFolderSeparator( sets->value( "LanguagePath", language_folder_path ).toString() ), language_folder_path );
-  m_keyEscapeMinimizeInTray = sets->value( "KeyEscapeMinimizeInTray", false ).toBool();
+  m_keyEscapeMinimizeInTray = sets->value( "KeyEscapeMinimizeInTray", true ).toBool();
 #ifdef Q_OS_MAC
   m_minimizeInTray = false;
 #else
@@ -1530,6 +1533,7 @@ void Settings::save()
   sets->setValue( "UseMessageTimestampWithAP", m_useMessageTimestampWithAP );
   sets->setValue( "QuoteBackgroundColor", m_chatQuoteBackgroundColor );
   sets->setValue( "QuoteTextColor", m_chatQuoteTextColor );
+  sets->setValue( "CloseOnSendingMessage", m_chatOnSendingMessage );
   sets->endGroup();
   sets->beginGroup( "User" );
   if( m_userRecognitionMethod != RecognizeByDefaultMethod )

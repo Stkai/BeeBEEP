@@ -904,16 +904,6 @@ void GuiMain::createMenus()
   mp_menuConnectionSettings = new QMenu( tr( "On connection" ), this );
   mp_menuConnectionSettings->setIcon( IconManager::instance().icon( "connection.png" ) );
   mp_menuSettings->addMenu( mp_menuConnectionSettings );
-  act = mp_menuConnectionSettings->addAction( tr( "Prompts to change user" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().askChangeUserAtStartup() );
-  act->setData( 45 );
-  mp_actPromptPassword = mp_menuConnectionSettings->addAction( tr( "Prompts to ask network password" ), this, SLOT( settingsChanged() ) );
-  mp_actPromptPassword->setCheckable( true );
-  mp_actPromptPassword->setChecked( Settings::instance().askPasswordAtStartup() );
-  mp_actPromptPassword->setData( 17 );
-  mp_menuConnectionSettings->addSeparator();
-
   mp_actShowUserListOnConnection = mp_menuConnectionSettings->addAction( tr( "Show the user list" ), this, SLOT( settingsChanged() ) );
   mp_actShowUserListOnConnection->setCheckable( true );
   mp_actShowUserListOnConnection->setChecked( Settings::instance().showUsersOnConnection() );
@@ -922,6 +912,15 @@ void GuiMain::createMenus()
   mp_actShowChatListOnConnection->setCheckable( true );
   mp_actShowChatListOnConnection->setChecked( Settings::instance().showChatsOnConnection() );
   mp_actShowChatListOnConnection->setData( 79 );
+  mp_menuConnectionSettings->addSeparator();
+  act = mp_menuConnectionSettings->addAction( tr( "Prompts to change user" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().askChangeUserAtStartup() );
+  act->setData( 45 );
+  mp_actPromptPassword = mp_menuConnectionSettings->addAction( tr( "Prompts to ask network password" ), this, SLOT( settingsChanged() ) );
+  mp_actPromptPassword->setCheckable( true );
+  mp_actPromptPassword->setChecked( Settings::instance().askPasswordAtStartup() );
+  mp_actPromptPassword->setData( 17 );
 
   mp_menuNetworkStatus = new QMenu( tr( "Network" ), this );
   mp_menuNetworkStatus->setIcon( IconManager::instance().icon( "network.png" ) );
@@ -1046,7 +1045,26 @@ void GuiMain::createMenus()
   act->setData( 71 );
   setChatInactiveWindowOpacityLevelInAction( act );
   mp_menuChatSettings->addSeparator();
-
+  QMenu* menu_on_sending_message = mp_menuChatSettings->addMenu( tr( "On sending message" ) + QString( "..." ) );
+  menu_on_sending_message->setIcon( IconManager::instance().icon( "send.png" ) );
+  mp_actGroupOnSendingMessage = new QActionGroup( this );
+  mp_actGroupOnSendingMessage->setExclusive( true );
+  act = menu_on_sending_message->addAction( tr( "Do nothing" ) + QString( " (%1)" ).arg( tr( "default" ) ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatOnSendingMessage() == Settings::SkipOnSendingMessage );
+  act->setData( 91 );
+  mp_actGroupOnSendingMessage->addAction( act );
+  act = menu_on_sending_message->addAction( tr( "Minimize chat window" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatOnSendingMessage() == Settings::MinimizeChatOnSendingMessage );
+  act->setData( 92 );
+  mp_actGroupOnSendingMessage->addAction( act );
+  act = menu_on_sending_message->addAction( tr( "Close chat window" ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().chatOnSendingMessage() == Settings::CloseChatOnSendingMessage );
+  act->setData( 93 );
+  mp_actGroupOnSendingMessage->addAction( act );
+  connect( mp_actGroupOnSendingMessage, SIGNAL( triggered( QAction* ) ), this, SLOT( settingsChanged( QAction* ) ) );
   mp_menuChatColorSettings = new QMenu( tr( "Colors" ) + QString( "..." ), this );
   mp_menuChatColorSettings->setIcon( IconManager::instance().icon( "colors.png" ) );
   mp_menuChatSettings->addMenu( mp_menuChatColorSettings );
@@ -2028,6 +2046,27 @@ void GuiMain::settingsChanged( QAction* act )
         Settings::instance().setChatQuoteBackgroundColor( c.name() );
         refresh_chat = true;
       }
+    }
+    break;
+  case 91:
+    {
+      Settings::instance().setChatOnSendingMessage( Settings::SkipOnSendingMessage );
+      foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+        fl_chat->guiChat()->updateOnSendingMessage();
+    }
+    break;
+  case 92:
+    {
+      Settings::instance().setChatOnSendingMessage( Settings::MinimizeChatOnSendingMessage  );
+      foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+        fl_chat->guiChat()->updateOnSendingMessage();
+    }
+    break;
+  case 93:
+    {
+      Settings::instance().setChatOnSendingMessage( Settings::CloseChatOnSendingMessage );
+      foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+        fl_chat->guiChat()->updateOnSendingMessage();
     }
     break;
   case 99:

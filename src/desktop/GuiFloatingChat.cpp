@@ -102,6 +102,7 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
   connect( mp_chat, SIGNAL( toggleVisibilityEmoticonsPanelRequest() ), this, SLOT( toggleVisibilityEmoticonPanel() ) );
   connect( mp_chat, SIGNAL( toggleVisibilityPresetMessagesPanelRequest() ), this, SLOT( toggleVisibilityPresetMessagesPanel() ) );
   connect( mp_chat, SIGNAL( hideRequest() ), this, SLOT( showMinimized() ) );
+  connect( mp_chat, SIGNAL( closeRequest() ), this, SLOT( close() ) );
   connect( mp_chat, SIGNAL( updateChatColorsRequest() ), this, SIGNAL( updateChatColorsRequest() ) );
   connect( mp_chat, SIGNAL( showStatusMessageRequest( const QString&, int ) ), this, SLOT( showStatusMessage(const QString&, int ) ) );
   connect( qApp, SIGNAL( focusChanged( QWidget*, QWidget* ) ), this, SLOT( onApplicationFocusChanged( QWidget*, QWidget* ) ) );

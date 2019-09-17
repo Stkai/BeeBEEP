@@ -132,6 +132,7 @@ GuiChat::GuiChat( QWidget *parent )
 
   setChatFont( Settings::instance().chatFont() );
   setChatFontColor( Settings::instance().chatFontColor() );
+  updateOnSendingMessage();
 
   mp_pbSend->setIcon( IconManager::instance().icon( "send.png" ) );
 
@@ -180,6 +181,21 @@ void GuiChat::setupToolBar( QToolBar* chat_bar )
   act->setSeparator( true );
   mp_teMessage->addActionToContextMenu( act );
   mp_teMessage->addActionToContextMenu( mp_actRestoreDefaultFont );
+}
+
+void GuiChat::updateOnSendingMessage()
+{
+  if( Settings::instance().chatOnSendingMessage() == Settings::CloseChatOnSendingMessage )
+  {
+    mp_cbSendAndClose->setText( tr( "Close" ) );
+    mp_cbSendAndClose->setToolTip( tr( "Close chat window on sending message" ) );
+  }
+  else
+  {
+    mp_cbSendAndClose->setText( tr( "Minimize" ) );
+    mp_cbSendAndClose->setToolTip( tr( "Minimize chat window on sending message" ) );
+  }
+  mp_cbSendAndClose->setChecked( Settings::instance().chatOnSendingMessage() > Settings::SkipOnSendingMessage );
 }
 
 void GuiChat::updateActions( const Chat& c, bool is_connected, int connected_users )
@@ -404,7 +420,15 @@ void GuiChat::sendMessage()
   mp_teMessage->addMessageToHistory();
   emit newMessage( m_chatId, msg );
   mp_teMessage->clearMessage();
-  ensureFocusInChat();
+  if( mp_cbSendAndClose->isChecked() )
+  {
+    if( Settings::instance().chatOnSendingMessage() == Settings::CloseChatOnSendingMessage )
+      QMetaObject::invokeMethod( this, "closeRequest", Qt::QueuedConnection );
+    else
+      QMetaObject::invokeMethod( this, "hideRequest", Qt::QueuedConnection );
+  }
+  else
+    ensureFocusInChat();
 }
 
 void GuiChat::checkWriting()

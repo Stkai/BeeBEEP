@@ -52,6 +52,7 @@ public:
   inline QSplitter* chatSplitter() const;
   void editChatMembers();
 
+  void updateOnSendingMessage();
   void updateChatColors();
   bool updateChat( const Chat& );
 
@@ -71,6 +72,7 @@ signals:
   void toggleVisibilityEmoticonsPanelRequest();
   void toggleVisibilityPresetMessagesPanelRequest();
   void hideRequest();
+  void closeRequest();
   void updateChatColorsRequest();
   void showStatusMessageRequest( const QString&, int );
   void openSavedChatRequest( VNumber );
