@@ -842,6 +842,18 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().useDarkStyle() );
   act->setData( 77 );
+  act = mp_menuInterfaceSettings->addAction( tr( "Escape key minimize to tray icon" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().keyEscapeMinimizeInTray() );
+  act->setData( 29 );
+  act = mp_menuInterfaceSettings->addAction( tr( "Close button minimize to tray icon" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().minimizeInTray() );
+  act->setData( 11 );
+#ifdef Q_OS_MAC
+  // Close button on MacOSX must quit the app
+  act->setDisabled( true );
+#endif
   act = mp_menuInterfaceSettings->addAction( tr( "Enable maximize button" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().enableMaximizeButton() );
@@ -851,8 +863,8 @@ void GuiMain::createMenus()
   mp_menuInterfaceSettings->addAction( IconManager::instance().icon( "language.png" ), tr( "Select language" ) + QString( "..." ), this, SLOT( selectLanguage() ) );
   mp_menuInterfaceSettings->addAction( IconManager::instance().icon( "theme.png" ), tr( "Select icon theme" ) + QString( "..." ), this, SLOT( selectIconSourcePath() ) );
   mp_menuInterfaceSettings->addSeparator();
-  mp_menuInterfaceSettings->addSeparator();
   mp_menuInterfaceSettings->addAction( IconManager::instance().icon( "update.png" ), tr( "Restore the colors to the default ones" ), this, SLOT( resetAllColors() ) );
+  mp_menuInterfaceSettings->addAction( IconManager::instance().icon( "reset-window.png" ), tr( "Reset geometry of all windows" ), this, SLOT( askResetGeometryAndState() ) );
 
   mp_menuStartupSettings = new QMenu( tr( "On start" ), this );
   mp_menuStartupSettings->setIcon( IconManager::instance().icon( "settings-start.png" ) );
@@ -884,18 +896,6 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().promptOnCloseEvent() );
   act->setData( 36 );
-  act = mp_menuCloseSettings->addAction( tr( "Close button minimize to tray icon" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().minimizeInTray() );
-  act->setData( 11 );
-#ifdef Q_OS_MAC
-  // Close button on MacOSX must quit the app
-  act->setDisabled( true );
-#endif
-  act = mp_menuCloseSettings->addAction( tr( "Escape key minimize to tray icon" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().keyEscapeMinimizeInTray() );
-  act->setData( 29 );
   act = mp_menuCloseSettings->addAction( tr( "Save window's geometry" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().saveGeometryOnExit() );
@@ -1224,10 +1224,8 @@ void GuiMain::createMenus()
   act->setChecked( Settings::instance().hasStartOnSystemBoot() );
   act->setData( 16 );
 #endif
-
   mp_actSaveWindowGeometry = mp_menuSettings->addAction( IconManager::instance().icon( "save-window.png" ), tr( "Save window's geometry" ), this, SLOT( askSaveGeometryAndState() ) );
   mp_actSaveWindowGeometry->setDisabled( Settings::instance().resetGeometryAtStartup() );
-  mp_menuSettings->addAction( IconManager::instance().icon( "reset-window.png" ), tr( "Reset geometry of all windows" ), this, SLOT( askResetGeometryAndState() ) );
 
   /* User List Menu */
   mp_menuUserList = new QMenu( tr( "Options" ), this );
