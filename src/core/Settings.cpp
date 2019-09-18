@@ -101,6 +101,11 @@ Settings::Settings()
 #else
   m_disableSendMessage = false;
 #endif
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  m_disableDesktopSharing = false;
+#else
+  m_disableDesktopSharing = true;
+#endif
   m_startMinimized = false;
   m_signature = "";
   m_useOnlyTextEmoticons = false;
@@ -463,6 +468,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "UseHostnameForDefaultUsername", m_useHostnameForDefaultUsername );
     sets->setValue( "DisableFileTransfer", m_disableFileTransfer );
     sets->setValue( "DisableFileSharing", m_disableFileSharing );
+    sets->setValue( "DisableDesktopSharing", m_disableDesktopSharing );
     sets->setValue( "DisableSendMessage", m_disableSendMessage );
     sets->setValue( "UseEasyConnection", m_useEasyConnection );
     sets->setValue( "StartMinimized", m_startMinimized );
@@ -545,6 +551,7 @@ void Settings::loadRcFile()
   else
     m_disableFileSharing = sets->value( "DisableFileSharing", m_disableFileSharing ).toBool();
 #endif
+  m_disableDesktopSharing = sets->value( "DisableDesktopSharing", m_disableDesktopSharing ).toBool();
   m_disableSendMessage = sets->value( "DisableSendMessage", m_disableSendMessage ).toBool();
   m_useEasyConnection = sets->value( "UseEasyConnection", m_useEasyConnection ).toBool();
   m_startMinimized = sets->value( "StartMinimized", m_startMinimized ).toBool();
@@ -1078,7 +1085,7 @@ void Settings::load()
   m_chatFontColor = sets->value( "FontColor", QColor( Qt::black ).name() ).toString();
   m_defaultChatBackgroundColor = sets->value( "DefaultChatBackgroundColor", m_defaultChatBackgroundColor ).toString();
   m_chatCompact = sets->value( "CompactMessage", true ).toBool();
-  m_chatShowMessageTimestamp = sets->value( "ShowMessageTimestamp", false ).toBool();
+  m_chatShowMessageTimestamp = sets->value( "ShowMessageTimestamp", true ).toBool();
   m_beepOnNewMessageArrived = sets->value( "BeepOnNewMessageArrived", true ).toBool();
   m_chatUseHtmlTags = sets->value( "UseHtmlTags", false ).toBool();
   m_chatUseClickableLinks = sets->value( "UseClickableLinks", true ).toBool();
@@ -1424,7 +1431,10 @@ void Settings::load()
   sets->endGroup();
 
   sets->beginGroup( "ShareDesktop" );
-  m_enableShareDesktop = sets->value( "Enable", true ).toBool();
+  if( m_disableDesktopSharing )
+    m_enableShareDesktop = false;
+  else
+    m_enableShareDesktop = sets->value( "Enable", m_enableShareDesktop ).toBool();
   m_shareDesktopCaptureDelay = qMax( 1000, sets->value( "CaptureScreenInterval", m_shareDesktopCaptureDelay ).toInt() );
   m_shareDesktopFitToScreen = sets->value( "FitToScreen", false ).toBool();
   m_shareDesktopImageType = sets->value( "ImageType", "png" ).toString();

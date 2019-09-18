@@ -109,9 +109,9 @@ public:
   inline bool useHive() const;
 
   inline bool disablePrivateChats() const;
-
   inline bool disableFileTransfer() const;
   inline bool disableFileSharing() const;
+  inline bool disableDesktopSharing() const;
   inline bool disableSendMessage() const;
   inline bool useEasyConnection() const;
 
@@ -630,6 +630,7 @@ private:
   bool m_useOnlyTextEmoticons;
   bool m_disablePrivateChats;
   bool m_disableFileSharing;
+  bool m_disableDesktopSharing;
   int m_userRecognitionMethod;
   bool m_useOnlyMulticast;
 
@@ -1145,6 +1146,7 @@ inline bool Settings::showFileTransferCompletedOnTray() const { return m_showFil
 inline bool Settings::useLowDelayOptionOnSocket() const { return m_useLowDelayOptionOnSocket; }
 inline bool Settings::disableFileTransfer() const { return m_disableFileTransfer; }
 inline bool Settings::disableFileSharing() const { return m_disableFileSharing; }
+inline bool Settings::disableDesktopSharing() const { return m_disableDesktopSharing; }
 inline bool Settings::disableSendMessage() const { return m_disableSendMessage; }
 inline bool Settings::useEasyConnection() const { return m_useEasyConnection; }
 inline void Settings::setUseShareBox( bool new_value ) { m_useShareBox = new_value; }

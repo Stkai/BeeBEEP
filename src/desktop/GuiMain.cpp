@@ -1194,6 +1194,7 @@ void GuiMain::createMenus()
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   QMenu* menu_share_desktop = new QMenu( tr( "Desktop sharing" ), this );
   menu_share_desktop->setIcon( IconManager::instance().icon( "desktop-share.png" ) );
+  menu_share_desktop->setDisabled( Settings::instance().disableDesktopSharing() );
   mp_menuSettings->addMenu( menu_share_desktop );
   act = menu_share_desktop->addAction( tr( "Enable desktop sharing" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );

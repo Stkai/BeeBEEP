@@ -13,6 +13,7 @@ BeeBEEP 5.6.9 (in development)
   - Do nothing (default)
   - Minimize chat window
   - Close chat window
+- Added "DisableDesktopSharing" option in beebeep.rc
 
 BeeBEEP 5.6.8
 - "ChatSaveFileTransfers" and "ChatSaveSystemMessages" options added in Settings - Chat menu: 
