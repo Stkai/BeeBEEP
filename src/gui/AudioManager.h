@@ -40,6 +40,12 @@ public:
   void playBeep();
   void clearBeep();
 
+  static QAudioDeviceInfo defaultInputDevice();
+  static QAudioFormat defaultAudioFormat();
+#if QT_VERSION >= 0x050000
+  static QAudioEncoderSettings defaultAudioEncoderSettings();
+#endif
+
   static AudioManager& instance()
   {
     if( !mp_instance )

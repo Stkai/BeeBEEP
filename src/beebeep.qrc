@@ -176,5 +176,8 @@
         <file>images/quote-text.png</file>
         <file>images/quote-background.png</file>
         <file>images/icon-size.png</file>
+        <file>images/record.png</file>
+        <file>images/pause.png</file>
+        <file>images/microphone.png</file>
     </qresource>
 </RCC>

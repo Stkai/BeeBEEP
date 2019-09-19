@@ -33,6 +33,45 @@ AudioManager::AudioManager()
 {
 }
 
+QAudioFormat AudioManager::defaultAudioFormat()
+{
+  QAudioFormat audio_format;
+  audio_format.setSampleRate( 8000 );
+  audio_format.setChannelCount( 1 );
+  audio_format.setSampleSize( 16 );
+  audio_format.setSampleType( QAudioFormat::SignedInt );
+  audio_format.setByteOrder( QAudioFormat::LittleEndian );
+  audio_format.setCodec( "audio/pcm" );
+  QAudioDeviceInfo test_device_info( defaultInputDevice() );
+  if( !test_device_info.isFormatSupported( audio_format ) )
+  {
+    qWarning() << "AudioManager: default format is not supported. Trying to use nearest...";
+    audio_format = test_device_info.nearestFormat( audio_format );
+  }
+  return audio_format;
+}
+
+QAudioDeviceInfo AudioManager::defaultInputDevice()
+{
+  return QAudioDeviceInfo::defaultInputDevice();
+}
+
+#if QT_VERSION >= 0x050000
+QAudioEncoderSettings AudioManager::defaultAudioEncoderSettings()
+{
+  QAudioEncoderSettings audio_encoder_settings;
+  audio_encoder_settings.setCodec( "audio/amr" );
+  audio_encoder_settings.setQuality( QMultimedia::NormalQuality );
+  /*
+  audio_encoder_settings.setSampleRate( audio_format.sampleRate() );
+  audio_encoder_settings.setBitRate( 64000 );
+  audio_encoder_settings.setChannelCount( audio_format.channelCount() );
+  audio_encoder_settings.setEncodingMode( QMultimedia::ConstantBitRateEncoding );
+  */
+  return audio_encoder_settings;
+}
+#endif
+
 #if defined( Q_OS_OS2 )
   bool AudioManager::isAudioDeviceAvailable() { return true; }
   void AudioManager::clearBeep() {}
