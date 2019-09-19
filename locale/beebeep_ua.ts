@@ -3373,6 +3373,40 @@ Please select a different name.</source>
     </message>
 </context>
 <context>
+    <name>GuiRecordVoiceMessage</name>
+    <message>
+        <source>Record your voice message</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GuiRecordVoiceMessageDialog</name>
+    <message>
+        <source>Voice message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Record</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pause</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To</source>
+        <translation type="unfinished">Кому</translation>
+    </message>
+</context>
+<context>
     <name>GuiRefusedChat</name>
     <message>
         <source>Name</source>
