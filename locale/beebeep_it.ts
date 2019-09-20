@@ -45,7 +45,7 @@
     </message>
     <message>
         <source>Voice message</source>
-        <translation type="unfinished"></translation>
+        <translation>Messaggio vocale</translation>
     </message>
 </context>
 <context>
@@ -100,11 +100,11 @@
     </message>
     <message>
         <source>%1 %2: file not found.</source>
-        <translation type="vanished">%1 %2: file non trovato.</translation>
+        <translation>%1 %2: file non trovato.</translation>
     </message>
     <message>
         <source>%1 You have refused to download %2 from %3.</source>
-        <translation type="vanished">%1 Hai rifiutato di scaricare %2 da %3.</translation>
+        <translation>%1 Hai rifiutato di scaricare %2 da %3.</translation>
     </message>
     <message>
         <source>%1 %2 has refused to download %3.</source>
@@ -140,15 +140,15 @@
     </message>
     <message>
         <source>%1 is removed from file sharing with %2 files</source>
-        <translation type="vanished">%1 è stata rimossa dalla condivisione in rete con %2 file</translation>
+        <translation>%1 è stata rimossa dalla condivisione in rete con %2 file</translation>
     </message>
     <message>
         <source>%1 is added to file sharing (%2)</source>
-        <translation type="vanished">%1 è stato rimosso dalla condivisione in rete (%2)</translation>
+        <translation>%1 è stato rimosso dalla condivisione in rete (%2)</translation>
     </message>
     <message>
         <source>%1 is removed from file sharing</source>
-        <translation type="vanished">%1 è stato rimosso dalla condivisione in rete</translation>
+        <translation>%1 è stato rimosso dalla condivisione in rete</translation>
     </message>
     <message>
         <source>%1 %2 cannot be informed that you have left the group.</source>
@@ -156,19 +156,19 @@
     </message>
     <message>
         <source>%1 %2 is a folder. You can share it.</source>
-        <translation type="vanished">%1 %2 è una cartella. Puoi condividerla se vuoi.</translation>
+        <translation>%1 %2 è una cartella. Puoi condividerla se vuoi.</translation>
     </message>
     <message>
         <source>%1 Unable to send %2: %3 is not connected.</source>
-        <translation type="vanished">%1 Impossibile inviare %2: %3 non è in linea.</translation>
+        <translation>%1 Impossibile inviare %2: %3 non è in linea.</translation>
     </message>
     <message>
         <source>%1 You send %2 to %3.</source>
-        <translation type="vanished">%1 Stai inviando %2 a %3.</translation>
+        <translation>%1 Stai inviando %2 a %3.</translation>
     </message>
     <message>
         <source>%1 Unable to send %2. File transfer is disabled.</source>
-        <translation type="vanished">%1 Impossibile inviare %2. Il trasferimento dei file è disabilitato.</translation>
+        <translation>%1 Impossibile inviare %2. Il trasferimento dei file è disabilitato.</translation>
     </message>
     <message>
         <source>You share this information</source>
@@ -192,7 +192,7 @@
     </message>
     <message>
         <source>%1 Unable to send %2 to %3: user is offline.</source>
-        <translation type="vanished">%1 Impossibile inviare %2 a %3: l&apos;utente non è in linea.</translation>
+        <translation>%1 Impossibile inviare %2 a %3: l&apos;utente non è in linea.</translation>
     </message>
     <message>
         <source>The message will be delivered to %1.</source>
@@ -208,35 +208,35 @@
     </message>
     <message>
         <source>%1 You have refused to download folder %2 from %3.</source>
-        <translation type="vanished">%1 Hai rifiutato di scaricare la cartella %2 da %3.</translation>
+        <translation>%1 Hai rifiutato di scaricare la cartella %2 da %3.</translation>
     </message>
     <message>
         <source>%1 You are about to send %2 to %3. Checking folder...</source>
-        <translation type="vanished">%1 Stai inviando %2 a %3. Controllo della cartella in corso...</translation>
+        <translation>%1 Stai inviando %2 a %3. Controllo della cartella in corso...</translation>
     </message>
     <message>
         <source>%1 Unable to send folder %2</source>
-        <translation type="vanished">%1 Impossibile inviare la cartella %2</translation>
+        <translation>%1 Impossibile inviare la cartella %2</translation>
     </message>
     <message>
         <source>the folder is empty.</source>
-        <translation type="vanished">la cartella è vuota.</translation>
+        <translation>la cartella è vuota.</translation>
     </message>
     <message>
         <source>file transfer is not working.</source>
-        <translation type="vanished">il trasferimento dei file non è attivo.</translation>
+        <translation>il trasferimento dei file non è attivo.</translation>
     </message>
     <message>
         <source>%1 is not connected.</source>
-        <translation type="vanished">%1 non è in linea.</translation>
+        <translation>%1 non è in linea.</translation>
     </message>
     <message>
         <source>internal error.</source>
-        <translation type="vanished">errore interno.</translation>
+        <translation>errore interno.</translation>
     </message>
     <message>
         <source>%1 You send folder %2 to %3.</source>
-        <translation type="vanished">%1 Stai inviando la cartella %2 a %3.</translation>
+        <translation>%1 Stai inviando la cartella %2 a %3.</translation>
     </message>
     <message>
         <source>%1 %2 has refused to download folder %3.</source>
@@ -260,7 +260,7 @@
     </message>
     <message>
         <source>All paths are removed from file sharing</source>
-        <translation type="vanished">Tutte le condivisioni sono state eliminate</translation>
+        <translation>Tutte le condivisioni sono state eliminate</translation>
     </message>
     <message>
         <source>%1 Zero Configuration started with service name: %2</source>
@@ -332,11 +332,11 @@
     </message>
     <message>
         <source>%1 is added to file sharing with %2 files, %3</source>
-        <translation type="vanished">%1 è stata condivisa in rete con %2 file, %3</translation>
+        <translation>%1 è stata condivisa in rete con %2 file, %3</translation>
     </message>
     <message>
         <source>%1 is added to file sharing with only %2 of %3 files (%4 limit reached)</source>
-        <translation type="vanished">%1 è stata condivisa in rete con solo %2 file su %3, (il limite di %4 è stato raggiunto)</translation>
+        <translation>%1 è stata condivisa in rete con solo %2 file su %3, (il limite di %4 è stato raggiunto)</translation>
     </message>
     <message>
         <source>Unknown %1</source>
@@ -484,7 +484,7 @@
     </message>
     <message>
         <source>invalid user #%1.</source>
-        <translation type="vanished">utente non valido #%1.</translation>
+        <translation>utente non valido #%1.</translation>
     </message>
     <message>
         <source>%1 %2 uses old encryption level.</source>
@@ -576,15 +576,15 @@
     </message>
     <message>
         <source>%1 sent a voice message.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You sent a voice message.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ha inviato un messaggio vocale.</translation>
     </message>
     <message>
         <source>Listen</source>
-        <translation type="unfinished"></translation>
+        <translation>Ascolta</translation>
+    </message>
+    <message>
+        <source>voice message</source>
+        <translation>messaggio vocale</translation>
     </message>
 </context>
 <context>
@@ -1121,7 +1121,11 @@
     </message>
     <message>
         <source>Record voice message</source>
-        <translation type="unfinished"></translation>
+        <translation>Registra un messaggio vocale</translation>
+    </message>
+    <message>
+        <source>File transfer must be enabled to send voice messages</source>
+        <translation>Il trasferimento dei file deve essere abilitato per inviare dei messaggi vocali</translation>
     </message>
 </context>
 <context>
@@ -3202,6 +3206,18 @@ Inserisci un nome differente.</translation>
         <source>Close chat window</source>
         <translation>Chiudi la finestra della conversazione</translation>
     </message>
+    <message>
+        <source>Voice message</source>
+        <translation>Messaggio vocale</translation>
+    </message>
+    <message>
+        <source>Maximum duration</source>
+        <translation>Durata massima</translation>
+    </message>
+    <message>
+        <source>Please select the maximum duration (in seconds) that a voice message can have (current: %1).</source>
+        <translation>Inserisci la durata massima (in secondi) che un messaggio vocale può avere (attuale: %1).</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -3622,74 +3638,82 @@ Inserisci un nome differente.</translation>
     <name>GuiRecordVoiceMessage</name>
     <message>
         <source>Recording</source>
-        <translation type="unfinished"></translation>
+        <translation>Sto registrando</translation>
     </message>
     <message>
         <source>Paused</source>
-        <translation type="unfinished"></translation>
+        <translation>In pausa</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished">Pronto</translation>
-    </message>
-    <message>
-        <source>Click to start recording your message</source>
-        <translation type="unfinished"></translation>
+        <translation>Pronto</translation>
     </message>
     <message>
         <source>Pause</source>
-        <translation type="unfinished"></translation>
+        <translation>Pausa</translation>
     </message>
     <message>
         <source>Resume</source>
-        <translation type="unfinished"></translation>
+        <translation>Riprendi</translation>
     </message>
     <message>
         <source>Record</source>
-        <translation type="unfinished"></translation>
+        <translation>Registra</translation>
     </message>
     <message>
         <source>The message could not be recorded because an error has occurred: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Il messaggio non può essere registrato a causa di questo errore: %1</translation>
     </message>
     <message>
         <source>Do you want to start recording your voice message again?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vuoi iniziare a registrare da capo il tuo messaggio vocale?</translation>
     </message>
     <message>
         <source>Yes, clean and restart</source>
-        <translation type="unfinished"></translation>
+        <translation>Sì, cancella e riparti</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Annulla</translation>
+        <translation>Annulla</translation>
     </message>
     <message>
         <source>Please wait</source>
-        <translation type="unfinished">Attendere prego</translation>
+        <translation>Attendere prego</translation>
+    </message>
+    <message>
+        <source>Stopped. Reached the maximum duration of the voice message</source>
+        <translation>Finito. E&apos; stata raggiunta la durata massima del messaggio vocale</translation>
+    </message>
+    <message>
+        <source>Record your voice message</source>
+        <translation>Registra il tuo messaggio vocale</translation>
+    </message>
+    <message>
+        <source>Click to start recording your message</source>
+        <translation>Fai clic per iniziare a registrare il tuo messaggio</translation>
     </message>
 </context>
 <context>
     <name>GuiRecordVoiceMessageDialog</name>
     <message>
         <source>Voice message</source>
-        <translation type="unfinished"></translation>
+        <translation>Messaggio vocale</translation>
     </message>
     <message>
         <source>Record</source>
-        <translation type="unfinished"></translation>
+        <translation>Registra</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Annulla</translation>
+        <translation>Annulla</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Invia</translation>
     </message>
     <message>
         <source>To</source>
-        <translation type="unfinished">A</translation>
+        <translation>A</translation>
     </message>
 </context>
 <context>
@@ -5204,7 +5228,11 @@ Inserisci un nome differente.</translation>
     <name>T</name>
     <message>
         <source>Record your voice message</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Registra il tuo messaggio vocale</translation>
+    </message>
+    <message>
+        <source>Click to start recording your message</source>
+        <translation type="vanished">Fai clic per iniziare a registrare il tuo messaggio</translation>
     </message>
 </context>
 <context>

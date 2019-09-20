@@ -160,6 +160,7 @@ GuiChat::GuiChat( QWidget *parent )
 
 void GuiChat::setupToolBar( QToolBar* chat_bar )
 {
+  // Chat toolbar
   chat_bar->addAction( IconManager::instance().icon( "font.png" ), tr( "Change font style" ), this, SLOT( selectFont() ) );
   chat_bar->addAction( IconManager::instance().icon( "font-color.png" ), tr( "Change font color" ), this, SLOT( selectFontColor() ) );
   chat_bar->addAction( IconManager::instance().icon( "filter.png" ), tr( "Filter message" ), this, SLOT( showChatMessageFilterMenu() ) );
@@ -175,6 +176,13 @@ void GuiChat::setupToolBar( QToolBar* chat_bar )
   mp_actSendFolder = chat_bar->addAction( IconManager::instance().icon( "send-folder.png" ), tr( "Send folder" ), this, SLOT( sendFolder() ) );
 #ifdef BEEBEEP_USE_VOICE_CHAT
   mp_actRecordVoiceMessage = chat_bar->addAction( IconManager::instance().icon( "microphone.png" ), tr( "Record voice message" ), this, SLOT( recordVoiceMessage() ) );
+  mp_actRecordVoiceMessage->setCheckable( true );
+  mp_actRecordVoiceMessage->setDisabled( Settings::instance().disableVoiceMessages() );
+  if( !mp_actRecordVoiceMessage->isEnabled() )
+  {
+    if( !Settings::instance().enableFileTransfer() )
+      mp_actRecordVoiceMessage->setToolTip( tr( "File transfer must be enabled to send voice messages" ) );
+  }
 #endif
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   chat_bar->addAction( mp_actScreenshot );
@@ -248,8 +256,10 @@ void GuiChat::updateActions( const Chat& c, bool is_connected, int connected_use
   mp_actSendFile->setEnabled( Settings::instance().enableFileTransfer() && local_user_is_member && is_connected && can_send_files );
   mp_actSendFolder->setEnabled( Settings::instance().enableFileTransfer() && local_user_is_member && is_connected && can_send_files );
 #ifdef BEEBEEP_USE_VOICE_CHAT
-  mp_actRecordVoiceMessage->setEnabled( mp_actSendFile );
-  //mp_actRecordVoiceMessage->setEnabled( local_user_is_member && is_connected && can_send_files );
+  mp_actRecordVoiceMessage->setEnabled( mp_actSendFile->isEnabled() && !Settings::instance().disableVoiceMessages() );
+  mp_actRecordVoiceMessage->setToolTip( "" );
+  if( !mp_actRecordVoiceMessage->isEnabled() && !Settings::instance().enableFileTransfer() )
+    mp_actRecordVoiceMessage->setToolTip( tr( "File transfer must be enabled to send voice messages" ) );
 #endif
 
   if( !is_connected )
@@ -1247,18 +1257,17 @@ void GuiChat::onTickEvent( int )
 #ifdef BEEBEEP_USE_VOICE_CHAT
 void GuiChat::recordVoiceMessage()
 {
-  GuiRecordVoiceMessage grvm;
-  grvm.setModal( true );
-  grvm.setRecipient( ChatManager::instance().chatName( m_chatId ) );
-  grvm.show();
-  if( grvm.exec() == QDialog::Accepted )
-  {
-    qDebug() << "Recorded voice message to" << qPrintable( grvm.filePath() );
-    emit sendFileFromChatRequest( m_chatId, grvm.filePath() );
-  }
+  if( Settings::instance().disableVoiceMessages() )
+    return;
+  GuiRecordVoiceMessage* grvm = new GuiRecordVoiceMessage( parentWidget() );
+  grvm->setModal( true );
+  grvm->setRecipient( ChatManager::instance().chatName( m_chatId ) );
+  grvm->show();
+  if( grvm->exec() == QDialog::Accepted )
+    emit sendVoiceMessageRequest( m_chatId, grvm->filePath() );
   else
-  {
-    Settings::instance().addTemporaryFilePath( grvm.filePath() );
-  }
+    Settings::instance().addTemporaryFilePath( grvm->filePath() );
+  grvm->deleteLater();
+  mp_actRecordVoiceMessage->setChecked( false );
 }
 #endif

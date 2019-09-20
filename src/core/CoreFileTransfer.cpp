@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "AudioManager.h"
 #include "BeeApplication.h"
 #include "BeeUtils.h"
 #include "BuildFileList.h"
@@ -137,6 +138,9 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
   QString sys_msg = QString( "%1 %2 %3 %4 %5: %6." ).arg( icon_html, action_txt, fi.name(), fi.isDownload() ? tr( "from") : tr( "to" ), Bee::replaceHtmlSpecialCharacters( u.name() ), msg );
   QString sys_msg_img_preview = "";
   QString sys_msg_open_file = "";
+  QString sys_msg_play_voice_chat = "";
+  QString chat_voice_msg_html = "";
+  ChatMessage chat_voice_msg;
 
   FileTransferPeer *peer = mp_fileTransfer->peer( peer_id );
   if( peer )
@@ -179,26 +183,52 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
           qWarning() << "Unable to show image preview of the file" << img_preview_path;
       }
 
-      QString s_open = tr( "Open" );
-      sys_msg_open_file = QString( "%1" ).arg( icon_html );
-      sys_msg_open_file += QString( " %1 <a href=\"%2\">%3</a>." ).arg( s_open, file_url.toString(), fi.name() );
-      file_url.setScheme( QLatin1String( "beeshowfileinfolder" ) );
-      sys_msg_open_file += QString( " %1 <a href=\"%2\">%3</a>." ).arg( s_open, file_url.toString(), tr( "folder" ) );
+      if( AudioManager::isDefaultAudioContainerFile( fi ) )
+      {
+        QString sys_txt = tr( "%1 sent a voice message." ).arg( Bee::replaceHtmlSpecialCharacters( fi.isDownload() ? u.name() : Settings::instance().localUser().name() ) );
+        QString html_audio_icon = IconManager::instance().toHtml( "file-audio.png", "*v*" );
+        sys_msg_play_voice_chat = QString( "%1 %2 <a href=\"%3\">%4</a>." ).arg( html_audio_icon, sys_txt, file_url.toString(), tr( "Listen" ) );
+        chat_voice_msg_html = QString( "[ <a href=\"%1\">%2</a> ] %3" ).arg( file_url.toString(), tr( "voice message" ), html_audio_icon );
+      }
+      else
+      {
+        QString s_open = tr( "Open" );
+        sys_msg_open_file = QString( "%1" ).arg( icon_html );
+        sys_msg_open_file += QString( " %1 <a href=\"%2\">%3</a>." ).arg( s_open, file_url.toString(), fi.name() );
+        file_url.setScheme( QLatin1String( "beeshowfileinfolder" ) );
+        sys_msg_open_file += QString( " %1 <a href=\"%2\">%3</a>." ).arg( s_open, file_url.toString(), tr( "folder" ) );
+      }
     }
   }
 
   Chat chat_to_show_message = ChatManager::instance().findChatByPrivateId( fi.chatPrivateId(), false, u.id() );
-  if( chat_to_show_message.isValid() && fi.isDownload() )
+  if( chat_to_show_message.isValid() )
   {
-    chat_to_show_message.addUnreadMessage();
-    ChatManager::instance().setChat( chat_to_show_message );
+    if( fi.isDownload() )
+    {
+      chat_to_show_message.addUnreadMessage();
+      ChatManager::instance().setChat( chat_to_show_message );
+    }
+
+    if( !chat_voice_msg_html.isEmpty() )
+      chat_voice_msg = ChatMessage( fi.isDownload() ? u.id() : ID_LOCAL_USER, chat_voice_msg_html, ChatMessage::Voice );
   }
 
-  dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), sys_msg, chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
-  if( !sys_msg_img_preview.isEmpty() )
-    dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), sys_msg_img_preview, chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::ImagePreview );
-  if( !sys_msg_open_file.isEmpty() )
-    dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), sys_msg_open_file, chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+  if( !chat_voice_msg_html.isEmpty() )
+  {
+    if( chat_voice_msg.isValid() )
+      dispatchToChat( chat_voice_msg, chat_to_show_message.id() );
+    else
+      dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sys_msg_play_voice_chat, DispatchToDefaultAndPrivateChat, ChatMessage::Voice );
+  }
+  else
+  {
+    dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), sys_msg, chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+    if( !sys_msg_img_preview.isEmpty() )
+      dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), sys_msg_img_preview, chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::ImagePreview );
+    if( !sys_msg_open_file.isEmpty() )
+      dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), sys_msg_open_file, chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+  }
 
   emit fileTransferMessage( peer_id, u, fi, msg );
 }

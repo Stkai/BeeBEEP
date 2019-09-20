@@ -249,6 +249,8 @@ Bee::FileType Bee::fileTypeFromSuffix( const QString& file_suffix )
   return Bee::FileOther;
 }
 
+
+
 static const char* FileTypeToString[] =
 {
   QT_TRANSLATE_NOOP( "File", "Audio" ),
@@ -279,7 +281,8 @@ static const char* ChatMessageTypeToString[] =
   QT_TRANSLATE_NOOP( "ChatMessage", "History" ),
   QT_TRANSLATE_NOOP( "ChatMessage", "Other" ),
   QT_TRANSLATE_NOOP( "ChatMessage", "Image Preview" ),
-  QT_TRANSLATE_NOOP( "ChatMessage", "Autoresponder" )
+  QT_TRANSLATE_NOOP( "ChatMessage", "Autoresponder" ),
+  QT_TRANSLATE_NOOP( "ChatMessage", "Voice message" )
 };
 
 QString Bee::chatMessageTypeToString( int cmt )

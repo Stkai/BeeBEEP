@@ -216,6 +216,9 @@ void GuiMain::setupChatConnections( GuiChat* gui_chat )
   connect( gui_chat, SIGNAL( shareDesktopToChatRequest( VNumber, bool ) ), this, SLOT( onShareDesktopRequestFromChat( VNumber, bool ) ) );
   connect( gui_chat, SIGNAL( screenshotToChatRequest( VNumber ) ), this, SLOT( sendScreenshotToChat( VNumber ) ) );
 #endif
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  connect( gui_chat, SIGNAL( sendVoiceMessageRequest( VNumber, const QString& ) ), this, SLOT( sendVoiceMessageToChat( VNumber, const QString& ) ) );
+#endif
 }
 
 void GuiMain::checkWindowFlagsAndShow()
@@ -1083,6 +1086,15 @@ void GuiMain::createMenus()
   mp_menuChatSettings->addAction( IconManager::instance().icon( "dictionary.png" ), tr( "Dictionary" ) + QString( "..." ), this, SLOT( selectDictionatyPath() ) );
   mp_menuChatSettings->addSeparator();
   mp_menuChatSettings->addAction( IconManager::instance().icon( "refused-chat.png" ), tr( "Blocked chats" ) + QString( "..." ), this, SLOT( showRefusedChats() ) );
+
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  QMenu* menu_voice_message = new QMenu( tr( "Voice message" ), this );
+  menu_voice_message->setIcon( IconManager::instance().icon( "file-audio.png" ) );
+  menu_voice_message->setDisabled( Settings::instance().disableVoiceMessages() );
+  mp_menuSettings->addMenu( menu_voice_message );
+  act = menu_voice_message->addAction( IconManager::instance().icon( "timer.png" ), tr( "Maximum duration" ) + QString( "..." ), this, SLOT( settingsChanged() ) );
+  act->setData( 94 );
+#endif
 
   mp_menuFileTransferSettings = new QMenu( tr( "File transfer" ), this );
   mp_menuFileTransferSettings->setIcon( IconManager::instance().icon( "file-transfer.png" ) );
@@ -2001,8 +2013,10 @@ void GuiMain::settingsChanged( QAction* act )
                                                  Settings::instance().clearCacheAfterDays(),
                                                  -1, 999, 10, &ok );
       if( ok )
+      {
         Settings::instance().setClearCacheAfterDays( cc_days );
-      setClearCacheAfterDaysInAction( act );
+        setClearCacheAfterDaysInAction( act );
+      }
     }
     break;
   case 86:
@@ -2023,8 +2037,10 @@ void GuiMain::settingsChanged( QAction* act )
                                   Settings::instance().maxQueuedDownloads(),
                                   1, 9999, 10, &ok );
       if( ok )
+      {
         Settings::instance().setMaxQueuedDownloads( max_files_in_queue);
-      setMaxQueuedDownloadsInAction( act );
+        setMaxQueuedDownloadsInAction( act );
+      }
     }
     break;
   case 89:
@@ -2066,6 +2082,20 @@ void GuiMain::settingsChanged( QAction* act )
       Settings::instance().setChatOnSendingMessage( Settings::CloseChatOnSendingMessage );
       foreach( GuiFloatingChat* fl_chat, m_floatingChats )
         fl_chat->guiChat()->updateOnSendingMessage();
+    }
+    break;
+  case 94:
+    {
+#if QT_VERSION >= 0x050000
+      int max_duration = QInputDialog::getInt( qApp->activeWindow(), Settings::instance().programName(),
+#else
+      int max_duration = QInputDialog::getInteger( qApp->activeWindow(), Settings::instance().programName(),
+#endif
+                                  tr( "Please select the maximum duration (in seconds) that a voice message can have (current: %1)." ).arg( Settings::instance().voiceMessageMaxDuration() ),
+                                  Settings::instance().voiceMessageMaxDuration(),
+                                  10, 900, 10, &ok );
+      if( ok )
+        Settings::instance().setVoiceMessageMaxDuration( max_duration );
     }
     break;
   case 99:
@@ -4966,3 +4996,10 @@ void GuiMain::loadStyle()
   mp_groupList->updateBackground();
   mp_savedChatList->updateBackground();
 }
+
+#ifdef BEEBEEP_USE_VOICE_CHAT
+void GuiMain::sendVoiceMessageToChat( VNumber chat_id, const QString& file_path )
+{
+  sendFileFromChat( chat_id, file_path );
+}
+#endif

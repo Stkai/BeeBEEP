@@ -80,6 +80,9 @@ signals:
   void shareDesktopToChatRequest( VNumber, bool );
   void screenshotToChatRequest( VNumber );
 #endif
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  void sendVoiceMessageRequest( VNumber, const QString& );
+#endif
 
 public slots:
   void addEmoticon( const Emoticon& );

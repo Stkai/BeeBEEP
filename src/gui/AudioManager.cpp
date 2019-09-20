@@ -23,6 +23,7 @@
 
 #include "AudioManager.h"
 #include "BeeUtils.h"
+#include "FileInfo.h"
 #include "Settings.h"
 
 
@@ -72,9 +73,29 @@ QString AudioManager::defaultAudioContainer()
   return QLatin1String( "audio/ogg" );
 }
 
+QString AudioManager::defaultAudioContainerFilePrefix()
+{
+  return QLatin1String( "beemsg" );
+}
+
 QString AudioManager::defaultAudioContainerFileSuffix()
 {
   return QLatin1String( "ogg" );
+}
+
+QString AudioManager::createDefaultAudioContainerFilename()
+{
+  return QString( "%1-%2.%3" ).arg( AudioManager::defaultAudioContainerFilePrefix() ).arg( Bee::dateTimeStringSuffix( QDateTime::currentDateTime() ) ).arg( AudioManager::defaultAudioContainerFileSuffix() );
+}
+
+bool AudioManager::isDefaultAudioContainerFile( const FileInfo& file_info )
+{
+  return file_info.name().startsWith( defaultAudioContainerFilePrefix() ) && file_info.suffix() == defaultAudioContainerFileSuffix();
+}
+
+bool AudioManager::isDefaultAudioContainerFile( const QFileInfo& file_info )
+{
+  return file_info.baseName().startsWith( defaultAudioContainerFilePrefix() ) && file_info.suffix() == defaultAudioContainerFileSuffix();
 }
 
 #if defined( Q_OS_OS2 )

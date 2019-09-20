@@ -28,6 +28,7 @@
 #ifdef BEEBEEP_USE_PHONON4
   #include <phonon/MediaObject>
 #endif
+class FileInfo;
 
 
 class AudioManager
@@ -46,7 +47,11 @@ public:
   static QAudioEncoderSettings defaultAudioEncoderSettings();
 #endif
   static QString defaultAudioContainer();
+  static QString defaultAudioContainerFilePrefix();
   static QString defaultAudioContainerFileSuffix();
+  static QString createDefaultAudioContainerFilename();
+  static bool isDefaultAudioContainerFile( const FileInfo& );
+  static bool isDefaultAudioContainerFile( const QFileInfo& );
 
   static AudioManager& instance()
   {

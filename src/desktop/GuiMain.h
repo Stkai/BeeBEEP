@@ -213,6 +213,9 @@ private slots:
 #endif
   void showNetworkTest();
   void onNetworkTestWindowClosed();
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  void sendVoiceMessageToChat( VNumber, const QString& );
+#endif
 
 protected:
   void keyPressEvent( QKeyEvent* );

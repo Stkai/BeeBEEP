@@ -42,7 +42,6 @@ public:
 protected slots:
   void sendVoiceMessage();
   void toggleRecord();
-  void togglePause();
   void processAudioBuffer( const QAudioBuffer& );
   void updateRecorderProgress( qint64 );
   void onRecorderStatusChanged( QMediaRecorder::Status );
@@ -51,12 +50,17 @@ protected slots:
 
 protected:
   void clearAudioLevels();
+  void computeWarningDurantion();
+  void closeEvent( QCloseEvent* );
 
 private:
   QAudioRecorder* mp_audioRecorder;
   QAudioProbe* mp_audioProbe;
   QList<GuiAudioLevel*> m_audioLevels;
   QString m_filePath;
+
+  int m_warningDuration;
+  QColor m_defaultProgressBarColor;
 
 };
 

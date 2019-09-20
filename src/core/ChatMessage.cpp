@@ -43,6 +43,11 @@ ChatMessage::ChatMessage( VNumber user_id, const Message& m, ChatMessage::Type c
   fromMessage( m );
 }
 
+ChatMessage::ChatMessage( VNumber user_id, const QString& msg, ChatMessage::Type cmt )
+  : m_userId( user_id ), m_message( msg ), m_timestamp( QDateTime::currentDateTime() ), m_textColor(), m_type( cmt ), m_isImportant( false )
+{
+}
+
 ChatMessage& ChatMessage::operator=( const ChatMessage& cm )
 {
   if( this != &cm )
@@ -84,6 +89,7 @@ bool ChatMessage::isChatActivity() const
   case ChatMessage::Other:
   case ChatMessage::ImagePreview:
   case ChatMessage::Autoresponder:
+  case ChatMessage::Voice:
     return true;
   default:
     return false;

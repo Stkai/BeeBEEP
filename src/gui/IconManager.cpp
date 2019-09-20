@@ -28,7 +28,7 @@ IconManager* IconManager::mp_instance = Q_NULLPTR;
 
 
 IconManager::IconManager()
- : m_defaultSourcePath( ":/images/" ), m_sourcePath( "" )
+ : m_defaultSourcePath( ":/images" ), m_sourcePath( "" )
 {
 }
 

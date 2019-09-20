@@ -31,11 +31,12 @@ class Message;
 class ChatMessage
 {
 public:
-  enum Type { Header, System, Chat, Connection, UserInfo, FileTransfer, History, Other, ImagePreview, Autoresponder, NumTypes };
+  enum Type { Header, System, Chat, Connection, UserInfo, FileTransfer, History, Other, ImagePreview, Autoresponder, Voice, NumTypes };
 
   ChatMessage();
   ChatMessage( const ChatMessage& );
   ChatMessage( VNumber user_id, const Message&, ChatMessage::Type );
+  ChatMessage( VNumber user_id, const QString& msg, ChatMessage::Type );
 
   virtual ~ChatMessage() {}
 
@@ -50,6 +51,7 @@ public:
   inline bool isHeader() const;
   inline bool isFileTransfer() const;
   inline bool isImagePreview() const;
+  inline bool isVoice() const;
 
   bool isChatActivity() const;
   bool isSystemActivity() const;
@@ -79,11 +81,14 @@ inline bool ChatMessage::isValid() const { return m_userId != ID_INVALID; }
 inline bool ChatMessage::isFromSystem() const { return m_userId == ID_SYSTEM_MESSAGE; }
 inline bool ChatMessage::isFromLocalUser() const { return m_userId == ID_LOCAL_USER; }
 inline bool ChatMessage::isFromAutoresponder() const { return m_type == ChatMessage::Autoresponder; }
-inline bool ChatMessage::alertCanBeSent() const { return m_isImportant || (!isFromLocalUser() && !isFromSystem() && (m_type == ChatMessage::Chat || m_type == ChatMessage::FileTransfer || m_type == ChatMessage::ImagePreview || isFromAutoresponder())); }
+inline bool ChatMessage::alertCanBeSent() const { return m_isImportant || (!isFromLocalUser() && !isFromSystem() && (m_type == ChatMessage::Chat || m_type == ChatMessage::FileTransfer ||
+                                                                                                                     m_type == ChatMessage::ImagePreview || m_type == ChatMessage::Autoresponder ||
+                                                                                                                     m_type == ChatMessage::Voice) ); }
 inline bool ChatMessage::isImportant() const { return m_isImportant; }
 inline bool ChatMessage::isHeader() const { return m_type == ChatMessage::Header; }
 inline bool ChatMessage::isFileTransfer() const { return m_type == ChatMessage::FileTransfer; }
 inline bool ChatMessage::isImagePreview() const { return m_type == ChatMessage::ImagePreview; }
+inline bool ChatMessage::isVoice() const { return m_type == ChatMessage::Voice; }
 inline VNumber ChatMessage::userId() const { return m_userId; }
 inline const QString& ChatMessage::message() const { return m_message; }
 inline const QDateTime& ChatMessage::timestamp() const { return m_timestamp; }

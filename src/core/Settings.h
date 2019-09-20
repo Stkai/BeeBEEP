@@ -113,6 +113,7 @@ public:
   inline bool disableFileSharing() const;
   inline bool disableDesktopSharing() const;
   inline bool disableSendMessage() const;
+  inline bool disableVoiceMessages() const;
   inline bool useEasyConnection() const;
 
   inline bool canAddMembersToGroup() const;
@@ -513,6 +514,9 @@ public:
   inline void setUseMessageTimestampWithAP( bool );
   inline bool useMessageTimestampWithAP() const;
 
+  inline void setVoiceMessageMaxDuration( int );
+  inline int voiceMessageMaxDuration() const;
+
   void loadRcFile();
   void clearNativeSettings();
   void load();
@@ -639,6 +643,7 @@ private:
   bool m_allowEditNickname;
   bool m_disableCreateMessage;
   bool m_disableMenuSettings;
+  bool m_disableVoiceMessages;
 
   QStringList m_skipLocalHardwareAddresses;
 
@@ -873,6 +878,8 @@ private:
   bool m_useDarkStyle;
 
   QDateTime m_saveMessagesTimestamp;
+
+  int m_voiceMessageMaxDuration;
 
 };
 
@@ -1148,6 +1155,7 @@ inline bool Settings::disableFileTransfer() const { return m_disableFileTransfer
 inline bool Settings::disableFileSharing() const { return m_disableFileSharing; }
 inline bool Settings::disableDesktopSharing() const { return m_disableDesktopSharing; }
 inline bool Settings::disableSendMessage() const { return m_disableSendMessage; }
+inline bool Settings::disableVoiceMessages() const { return m_disableFileTransfer || m_disableVoiceMessages; }
 inline bool Settings::useEasyConnection() const { return m_useEasyConnection; }
 inline void Settings::setUseShareBox( bool new_value ) { m_useShareBox = new_value; }
 inline bool Settings::useShareBox() const { return m_useShareBox; }
@@ -1260,5 +1268,7 @@ inline bool Settings::isLocalHardwareAddressToSkip( const QString& hw_value ) co
 inline bool Settings::rcFileExists() const { return m_rcFileExists; }
 inline void Settings::setChatOnSendingMessage( int new_value ) { m_chatOnSendingMessage = new_value; }
 inline int Settings::chatOnSendingMessage() const { return m_chatOnSendingMessage; }
+inline void Settings::setVoiceMessageMaxDuration( int new_value ) { m_voiceMessageMaxDuration = new_value; }
+inline int Settings::voiceMessageMaxDuration() const { return m_voiceMessageMaxDuration;}
 
 #endif // BEEBEEP_SETTINGS_

@@ -27,8 +27,8 @@ TEMPLATE = app
 #DEFINES += BEEBEEP_DISABLE_FILE_TRANSFER
 #DEFINES += BEEBEEP_DISABLE_SEND_MESSAGE
 #DEFINES += BEEBEEP_DISABLE_VOICE_CHAT
-DEFINES += BEEBEEP_DISABLE_VIDEO_CALL
-DEFINES -= BEEBEEP_USE_WEBENGINE
+#DEFINES += BEEBEEP_DISABLE_VIDEO_CALL
+#DEFINES += BEEBEEP_USE_WEBENGINE
 
 TARGET = beebeep
 
@@ -84,8 +84,10 @@ win32|unix {
   include(sharedesktop/sharedesktop.pri)
 }
 
-!contains( DEFINES, BEEBEEP_DISABLE_VOICE_CHAT ) {
-  message( Custom module added: voicechat )
+contains( DEFINES, BEEBEEP_DISABLE_VOICE_CHAT ) {
+  message( Custom module disabled: voicechat )
+} else {
+  message( Custom module enabled: voicechat )
   include(voicechat/voicechat.pri)
 }
 
@@ -94,7 +96,9 @@ win32|unix {
 #    greaterThan( QT_MINOR_VERSION, 4 ): {
 #      message( Custom module added: videocall )
 #      include(videocall/videocall.pri)
-# } } }
+# } } } else {
+#   message( Custom module disabled: videocall )
+# }
 
 HEADERS += Interfaces.h
 

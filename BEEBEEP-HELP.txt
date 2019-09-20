@@ -44,6 +44,7 @@ DisableFileTransfer=[true/false] disable file transfer and the file sharing (def
 DisableFileSharing=[true/false] disable the file sharing (default=false) [4.0.0]
 DisableDesktopSharing=[true/false] disable the desktop sharing (default=false) [5.6.9]
 DisableSendMessage=[true/false] disable send message. BeeBEEP becomes a read only messenger (default=false) [3.0.6]
+DisableVoiceMessages=[true/false] disable voice message recording (default=false) [5.7.1]
 UseEasyConnection=[true/false] BeeBEEP uses account name (if the nickname is not already set) and connects to the network with a standard session
                               (the same of AskNicknameAtStartup=false and UseDefaultPassword=true AskPasswordAtStartup=false in beebeep.ini file) (default=false) [3.0.6]
 StartMinimized=[true/false] If enabled BeeBEEP starts minimized (can be overruled in beeebeep.ini) (default=false) [3.0.7]
@@ -290,3 +291,7 @@ CaptureScreenInterval=[integer] interval in ms of capture screen (default=2100) 
 FitToScreen=[true/false] fit desktop image from remote user in your screen (default=false) [4.2.0]
 ImageType=[string] is better to use jpg or png (default=jpg) [4.2.0]
 ImageQuality=[integer] image quality of jpg format, in case of png use 100 (default=60) [4.2.0]
+
+[VoiceMessage]
+MaxDuration=[integer] the max duration of voice message in seconds (default=100) [5.7.1]
+

@@ -164,9 +164,6 @@ void FileTransferPeer::showProgress()
   if( m_totalBytesTransferred > 0 )
   {
     computeElapsedTime();
-#ifdef BEEBEEP_DEBUG
-    qWarning() << qPrintable( name() ) << "has elapsed ms:" << m_elapsedTime;
-#endif
     emit progress( id(), remoteUserId(), m_fileInfo, m_totalBytesTransferred, m_elapsedTime );
   }
 }

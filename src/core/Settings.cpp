@@ -106,6 +106,11 @@ Settings::Settings()
 #else
   m_disableDesktopSharing = true;
 #endif
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  m_disableVoiceMessages = false;
+#else
+  m_disableVoiceMessages = true;
+#endif
   m_startMinimized = false;
   m_signature = "";
   m_useOnlyTextEmoticons = false;
@@ -207,6 +212,8 @@ Settings::Settings()
   m_chatQuoteTextColor = "#ffffff";
 
   m_saveMessagesTimestamp = QDateTime::currentDateTime();
+
+  m_voiceMessageMaxDuration = 5;
 
   resetAllColors();
 }
@@ -470,6 +477,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "DisableFileSharing", m_disableFileSharing );
     sets->setValue( "DisableDesktopSharing", m_disableDesktopSharing );
     sets->setValue( "DisableSendMessage", m_disableSendMessage );
+    sets->setValue( "DisableVoiceMessages", m_disableVoiceMessages );
     sets->setValue( "UseEasyConnection", m_useEasyConnection );
     sets->setValue( "StartMinimized", m_startMinimized );
     sets->setValue( "Signature", m_signature );
@@ -553,6 +561,7 @@ void Settings::loadRcFile()
 #endif
   m_disableDesktopSharing = sets->value( "DisableDesktopSharing", m_disableDesktopSharing ).toBool();
   m_disableSendMessage = sets->value( "DisableSendMessage", m_disableSendMessage ).toBool();
+  m_disableVoiceMessages = sets->value( "DisableVoiceMessages", m_disableVoiceMessages ).toBool();
   m_useEasyConnection = sets->value( "UseEasyConnection", m_useEasyConnection ).toBool();
   m_startMinimized = sets->value( "StartMinimized", m_startMinimized ).toBool();
   m_signature = sets->value( "Signature", m_signature ).toString();
@@ -1441,6 +1450,10 @@ void Settings::load()
   m_shareDesktopImageQuality = sets->value( "ImageQuality", 20 ).toInt();
   sets->endGroup();
 
+  sets->beginGroup( "VoiceMessage" );
+  m_voiceMessageMaxDuration = qMax( 5, sets->value( "MaxDuration", m_voiceMessageMaxDuration ).toInt() );
+  sets->endGroup();
+
   sets->beginGroup( "Plugin" );
   QStringList key_list = sets->value( "List", QStringList() ).toStringList();
   if( !key_list.isEmpty() )
@@ -1762,6 +1775,10 @@ void Settings::save()
   sets->setValue( "FitToScreen", m_shareDesktopFitToScreen );
   sets->setValue( "ImageType", m_shareDesktopImageType );
   sets->setValue( "ImageQuality", m_shareDesktopImageQuality );
+  sets->endGroup();
+
+  sets->beginGroup( "VoiceMessage" );
+  sets->setValue( "MaxDuration", m_voiceMessageMaxDuration );
   sets->endGroup();
 
   if( !m_pluginSettings.isEmpty() )
