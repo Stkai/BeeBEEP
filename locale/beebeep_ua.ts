@@ -43,6 +43,10 @@
         <source>History</source>
         <translation>Історія</translation>
     </message>
+    <message>
+        <source>Voice message</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Core</name>
@@ -72,19 +76,19 @@
     </message>
     <message>
         <source>%1 You are about to send %2 to %3. Checking folder...</source>
-        <translation>%1 Ви збираєтесь відправити %2 для %3. Перевірка папки...</translation>
+        <translation type="vanished">%1 Ви збираєтесь відправити %2 для %3. Перевірка папки...</translation>
     </message>
     <message>
         <source>%1 Unable to send %2. File transfer is disabled.</source>
-        <translation>%1 Неможливо Відправити %2. Передача файлів відключена.</translation>
+        <translation type="vanished">%1 Неможливо Відправити %2. Передача файлів відключена.</translation>
     </message>
     <message>
         <source>%1 Unable to send %2: %3 is not connected.</source>
-        <translation>%1 Неможливо відправити %2: %3 не підключений.</translation>
+        <translation type="vanished">%1 Неможливо відправити %2: %3 не підключений.</translation>
     </message>
     <message>
         <source>%1 is not connected.</source>
-        <translation>%1 не підключений.</translation>
+        <translation type="vanished">%1 не підключений.</translation>
     </message>
     <message>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
@@ -104,11 +108,11 @@
     </message>
     <message>
         <source>the folder is empty.</source>
-        <translation>папка порожня.</translation>
+        <translation type="vanished">папка порожня.</translation>
     </message>
     <message>
         <source>%1 Unable to send %2 to %3: user is offline.</source>
-        <translation>%1 Неможливо відправити %2 для %3: користувач відключений.</translation>
+        <translation type="vanished">%1 Неможливо відправити %2 для %3: користувач відключений.</translation>
     </message>
     <message>
         <source>%1 has shared %2 files</source>
@@ -236,7 +240,7 @@
     </message>
     <message>
         <source>%1 You have refused to download folder %2 from %3.</source>
-        <translation>%1 Ви відмовились завантажувати папку %2 з %3.</translation>
+        <translation type="vanished">%1 Ви відмовились завантажувати папку %2 з %3.</translation>
     </message>
     <message>
         <source>%1 Zero Configuration started with service name: %2</source>
@@ -248,7 +252,7 @@
     </message>
     <message>
         <source>%1 Unable to send folder %2</source>
-        <translation>%1 Не вдалося відправити папку %2</translation>
+        <translation type="vanished">%1 Не вдалося відправити папку %2</translation>
     </message>
     <message>
         <source>Click here to download</source>
@@ -256,7 +260,7 @@
     </message>
     <message>
         <source>%1 is added to file sharing with only %2 of %3 files (%4 limit reached)</source>
-        <translation>%1 доданий до спільного доступу %2 з %3 файлів (%4 ліміта використано)</translation>
+        <translation type="vanished">%1 доданий до спільного доступу %2 з %3 файлів (%4 ліміта використано)</translation>
     </message>
     <message>
         <source>%1 User %2 cannot save chat messages in path: %3</source>
@@ -272,7 +276,7 @@
     </message>
     <message>
         <source>file transfer is not working.</source>
-        <translation>передача файлів не працює.</translation>
+        <translation type="vanished">передача файлів не працює.</translation>
     </message>
     <message>
         <source>%1 Chat with %2.</source>
@@ -280,7 +284,7 @@
     </message>
     <message>
         <source>%1 You send folder %2 to %3.</source>
-        <translation>%1 Ви відправили папку %2 для %3.</translation>
+        <translation type="vanished">%1 Ви відправили папку %2 для %3.</translation>
     </message>
     <message>
         <source>Happy Birthday to %1!</source>
@@ -288,7 +292,7 @@
     </message>
     <message>
         <source>%1 You have refused to download %2 from %3.</source>
-        <translation>%1 Ви відмовились завантажувати %2 з %3.</translation>
+        <translation type="vanished">%1 Ви відмовились завантажувати %2 з %3.</translation>
     </message>
     <message>
         <source>Max ID is reached. Please close and restart the application.</source>
@@ -308,7 +312,7 @@
     </message>
     <message>
         <source>%1 is removed from file sharing</source>
-        <translation>%1 видалений зі спільного файлового доступу</translation>
+        <translation type="vanished">%1 видалений зі спільного файлового доступу</translation>
     </message>
     <message>
         <source>%1 This kind of change can be temporary if the user exists and does not leave the group spontaneously.</source>
@@ -316,11 +320,11 @@
     </message>
     <message>
         <source>%1 You send %2 to %3.</source>
-        <translation>%1 Ви відправили %2 в %3.</translation>
+        <translation type="vanished">%1 Ви відправили %2 в %3.</translation>
     </message>
     <message>
         <source>%1 is removed from file sharing with %2 files</source>
-        <translation>%1 видалений зі спільного файлового доступу з %2 файлів</translation>
+        <translation type="vanished">%1 видалений зі спільного файлового доступу з %2 файлів</translation>
     </message>
     <message>
         <source>%1 Broadcasting to the %2 Network...</source>
@@ -340,7 +344,7 @@
     </message>
     <message>
         <source>All paths are removed from file sharing</source>
-        <translation>Всі шляхи видалені з спільного доступу</translation>
+        <translation type="vanished">Всі шляхи видалені з спільного доступу</translation>
     </message>
     <message>
         <source>Unable to send the message: this chat is disabled.</source>
@@ -348,7 +352,7 @@
     </message>
     <message>
         <source>%1 %2 is a folder. You can share it.</source>
-        <translation>%1 %2 - це папка. Ви можете відкрити спільний доступ до неї.</translation>
+        <translation type="vanished">%1 %2 - це папка. Ви можете відкрити спільний доступ до неї.</translation>
     </message>
     <message>
         <source>%1 users connected</source>
@@ -380,7 +384,7 @@
     </message>
     <message>
         <source>%1 is added to file sharing with %2 files, %3</source>
-        <translation>%1 даданий в спільний доступ %2 файлів, %3</translation>
+        <translation type="vanished">%1 даданий в спільний доступ %2 файлів, %3</translation>
     </message>
     <message>
         <source>%1 Connection closed to user %2 because it uses your nickname: %3.</source>
@@ -396,7 +400,7 @@
     </message>
     <message>
         <source>%1 is added to file sharing (%2)</source>
-        <translation>%1 добавлений в спільний доступ (%2)</translation>
+        <translation type="vanished">%1 добавлений в спільний доступ (%2)</translation>
     </message>
     <message>
         <source>%1 You have removed members: %2.</source>
@@ -412,7 +416,7 @@
     </message>
     <message>
         <source>internal error.</source>
-        <translation>внутрішня помилка.</translation>
+        <translation type="vanished">внутрішня помилка.</translation>
     </message>
     <message>
         <source>%1 saved chats are added to history</source>
@@ -432,7 +436,7 @@
     </message>
     <message>
         <source>%1 %2: file not found.</source>
-        <translation>%1 %2: файл не знайдено.</translation>
+        <translation type="vanished">%1 %2: файл не знайдено.</translation>
     </message>
     <message>
         <source>Offline messages sent to %2.</source>
@@ -480,7 +484,7 @@
     </message>
     <message>
         <source>invalid user #%1.</source>
-        <translation>Недопустимий користувач  #%1.</translation>
+        <translation type="vanished">Недопустимий користувач  #%1.</translation>
     </message>
     <message>
         <source>%1 has removed shared files</source>
@@ -533,6 +537,18 @@
     <message>
         <source>Reconnecting</source>
         <translation>Перепідключення</translation>
+    </message>
+    <message>
+        <source>%1 sent a voice message.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You sent a voice message.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Listen</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1049,6 +1065,10 @@
     </message>
     <message>
         <source>Minimize chat window on sending message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Record voice message</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3375,8 +3395,52 @@ Please select a different name.</source>
 <context>
     <name>GuiRecordVoiceMessage</name>
     <message>
-        <source>Record your voice message</source>
+        <source>Recording</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paused</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click to start recording your message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pause</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Record</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The message could not be recorded because an error has occurred: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to start recording your voice message again?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes, clean and restart</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please wait</source>
+        <translation type="unfinished">Зачекайте</translation>
     </message>
 </context>
 <context>
@@ -3387,10 +3451,6 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Record</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pause</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4828,6 +4888,13 @@ Please select a different name.</source>
     <message>
         <source>Autoresponder</source>
         <translation>Автовідповідач</translation>
+    </message>
+</context>
+<context>
+    <name>T</name>
+    <message>
+        <source>Record your voice message</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -43,6 +43,10 @@
         <source>Autoresponder</source>
         <translation>Autoresponder</translation>
     </message>
+    <message>
+        <source>Voice message</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Core</name>
@@ -68,7 +72,7 @@
     </message>
     <message>
         <source>%1 You are about to send %2 to %3. Checking folder...</source>
-        <translation>%1 Du bist im Begriff, %2 an %3 zu senden. Ordner wird überprüft...</translation>
+        <translation type="vanished">%1 Du bist im Begriff, %2 an %3 zu senden. Ordner wird überprüft...</translation>
     </message>
     <message>
         <source>Chat with all connected users</source>
@@ -76,15 +80,15 @@
     </message>
     <message>
         <source>%1 Unable to send %2. File transfer is disabled.</source>
-        <translation>%1 %2 kann nicht gesendet werden. Die Dateiübertragung ist deaktiviert.</translation>
+        <translation type="vanished">%1 %2 kann nicht gesendet werden. Die Dateiübertragung ist deaktiviert.</translation>
     </message>
     <message>
         <source>%1 Unable to send %2: %3 is not connected.</source>
-        <translation>%1 %2 Kann nicht gesendet werden. %3 ist nicht verbunden.</translation>
+        <translation type="vanished">%1 %2 Kann nicht gesendet werden. %3 ist nicht verbunden.</translation>
     </message>
     <message>
         <source>%1 is not connected.</source>
-        <translation>%1 ist nicht verbunden.</translation>
+        <translation type="vanished">%1 ist nicht verbunden.</translation>
     </message>
     <message>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
@@ -104,11 +108,11 @@
     </message>
     <message>
         <source>the folder is empty.</source>
-        <translation>der Ordner ist leer.</translation>
+        <translation type="vanished">der Ordner ist leer.</translation>
     </message>
     <message>
         <source>%1 Unable to send %2 to %3: user is offline.</source>
-        <translation>%1 %2 konnte nicht an %3 gesendet werden: Benutzer ist offline.</translation>
+        <translation type="vanished">%1 %2 konnte nicht an %3 gesendet werden: Benutzer ist offline.</translation>
     </message>
     <message>
         <source>%1 has shared %2 files</source>
@@ -224,7 +228,7 @@
     </message>
     <message>
         <source>%1 You have refused to download folder %2 from %3.</source>
-        <translation>%1 Du hast den Download des Ordners %2 von %3 abgelehnt.</translation>
+        <translation type="vanished">%1 Du hast den Download des Ordners %2 von %3 abgelehnt.</translation>
     </message>
     <message>
         <source>%1 Zero Configuration started with service name: %2</source>
@@ -236,7 +240,7 @@
     </message>
     <message>
         <source>%1 Unable to send folder %2</source>
-        <translation>%1 Ordner %2 konnte nicht gesendet werden</translation>
+        <translation type="vanished">%1 Ordner %2 konnte nicht gesendet werden</translation>
     </message>
     <message>
         <source>Click here to download</source>
@@ -244,7 +248,7 @@
     </message>
     <message>
         <source>%1 is added to file sharing with only %2 of %3 files (%4 limit reached)</source>
-        <translation>%1 wird der Dateifreigabe nur mit %2 von %3 Dateien hinzugefügt (Grenzwert von %4 erreicht)</translation>
+        <translation type="vanished">%1 wird der Dateifreigabe nur mit %2 von %3 Dateien hinzugefügt (Grenzwert von %4 erreicht)</translation>
     </message>
     <message>
         <source>%1 User %2 cannot save chat messages in path: %3</source>
@@ -260,7 +264,7 @@
     </message>
     <message>
         <source>file transfer is not working.</source>
-        <translation>Dateiübertragung funktioniert nicht.</translation>
+        <translation type="vanished">Dateiübertragung funktioniert nicht.</translation>
     </message>
     <message>
         <source>%1 Chat with %2.</source>
@@ -268,7 +272,7 @@
     </message>
     <message>
         <source>%1 You send folder %2 to %3.</source>
-        <translation>%1 Du sendest den Ordner %2 an %3.</translation>
+        <translation type="vanished">%1 Du sendest den Ordner %2 an %3.</translation>
     </message>
     <message>
         <source>Happy Birthday to %1!</source>
@@ -276,7 +280,7 @@
     </message>
     <message>
         <source>%1 You have refused to download %2 from %3.</source>
-        <translation>%1 Du hast den Download der Datei %2 von %3 abgelehnt.</translation>
+        <translation type="vanished">%1 Du hast den Download der Datei %2 von %3 abgelehnt.</translation>
     </message>
     <message>
         <source>Max ID is reached. Please close and restart the application.</source>
@@ -292,15 +296,15 @@
     </message>
     <message>
         <source>%1 is removed from file sharing</source>
-        <translation>%1 wird aus der Dateifreigabe entfernt</translation>
+        <translation type="vanished">%1 wird aus der Dateifreigabe entfernt</translation>
     </message>
     <message>
         <source>%1 You send %2 to %3.</source>
-        <translation>%1 Du sendest %2 an %3.</translation>
+        <translation type="vanished">%1 Du sendest %2 an %3.</translation>
     </message>
     <message>
         <source>%1 is removed from file sharing with %2 files</source>
-        <translation>%1 wird mit %2 Dateien aus der Dateifreigabe entfernt</translation>
+        <translation type="vanished">%1 wird mit %2 Dateien aus der Dateifreigabe entfernt</translation>
     </message>
     <message>
         <source>%1 Broadcasting to the %2 Network...</source>
@@ -316,7 +320,7 @@
     </message>
     <message>
         <source>All paths are removed from file sharing</source>
-        <translation>Es werden alle Pfade aus der Dateifreigabe entfernt</translation>
+        <translation type="vanished">Es werden alle Pfade aus der Dateifreigabe entfernt</translation>
     </message>
     <message>
         <source>Unable to send the message: this chat is disabled.</source>
@@ -324,7 +328,7 @@
     </message>
     <message>
         <source>%1 %2 is a folder. You can share it.</source>
-        <translation>%1 %2 ist ein Ordner. Du kannst ihn freigeben.</translation>
+        <translation type="vanished">%1 %2 ist ein Ordner. Du kannst ihn freigeben.</translation>
     </message>
     <message>
         <source>%1 users connected</source>
@@ -344,7 +348,7 @@
     </message>
     <message>
         <source>%1 is added to file sharing with %2 files, %3</source>
-        <translation>%1 wird der Dateifreigabe mit %2 Dateien hinzugefügt, %3</translation>
+        <translation type="vanished">%1 wird der Dateifreigabe mit %2 Dateien hinzugefügt, %3</translation>
     </message>
     <message>
         <source>%1 Connection closed to user %2 because it uses your nickname: %3.</source>
@@ -360,7 +364,7 @@
     </message>
     <message>
         <source>%1 is added to file sharing (%2)</source>
-        <translation>%1 wird der Dateifreigabe hinzugefügt (%2)</translation>
+        <translation type="vanished">%1 wird der Dateifreigabe hinzugefügt (%2)</translation>
     </message>
     <message>
         <source>%1 Connection closed to user %2 because it uses same nickname of the already connected user %3: %4.</source>
@@ -368,7 +372,7 @@
     </message>
     <message>
         <source>internal error.</source>
-        <translation>interner Fehler.</translation>
+        <translation type="vanished">interner Fehler.</translation>
     </message>
     <message>
         <source>%1 Unable to connect to %2 Network. Please check your network adapters.</source>
@@ -392,7 +396,7 @@
     </message>
     <message>
         <source>%1 %2: file not found.</source>
-        <translation>%1 %2: Datei nicht gefunden.</translation>
+        <translation type="vanished">%1 %2: Datei nicht gefunden.</translation>
     </message>
     <message>
         <source>Offline messages sent to %2.</source>
@@ -472,7 +476,7 @@
     </message>
     <message>
         <source>invalid user #%1.</source>
-        <translation>ungültiger Benutzer #%1.</translation>
+        <translation type="vanished">ungültiger Benutzer #%1.</translation>
     </message>
     <message>
         <source>%1 %2 uses old encryption level.</source>
@@ -548,6 +552,18 @@
     </message>
     <message>
         <source>Reconnecting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 sent a voice message.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You sent a voice message.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Listen</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1069,6 +1085,10 @@
     </message>
     <message>
         <source>Minimize chat window on sending message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Record voice message</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3427,8 +3447,52 @@ Bitte wähle einen anderen Namen aus.</translation>
 <context>
     <name>GuiRecordVoiceMessage</name>
     <message>
-        <source>Record your voice message</source>
+        <source>Recording</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paused</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click to start recording your message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pause</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Record</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The message could not be recorded because an error has occurred: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to start recording your voice message again?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes, clean and restart</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Abbrechen</translation>
+    </message>
+    <message>
+        <source>Please wait</source>
+        <translation type="unfinished">Bitte warten</translation>
     </message>
 </context>
 <context>
@@ -3439,10 +3503,6 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Record</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pause</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4924,6 +4984,13 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>Autoresponder</source>
         <translation>Autoresponder</translation>
+    </message>
+</context>
+<context>
+    <name>T</name>
+    <message>
+        <source>Record your voice message</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
