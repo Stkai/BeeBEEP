@@ -10,13 +10,13 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>274</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>400</width>
-    <height>300</height>
+    <height>270</height>
    </size>
   </property>
   <property name="sizeGripEnabled">
@@ -55,7 +55,7 @@
      <property name="minimumSize">
       <size>
        <width>0</width>
-       <height>160</height>
+       <height>140</height>
       </size>
      </property>
      <property name="title">

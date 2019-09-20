@@ -37,6 +37,10 @@
   #include "SpellChecker.h"
 #endif
 #include "UserManager.h"
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  #include "GuiRecordVoiceMessage.h"
+#endif
+
 
 
 GuiChat::GuiChat( QWidget *parent )
@@ -169,6 +173,9 @@ void GuiChat::setupToolBar( QToolBar* chat_bar )
   updateActionsOnFocusChanged();
   mp_actSendFile = chat_bar->addAction( IconManager::instance().icon( "send-file.png" ), tr( "Send file" ), this, SLOT( sendFile() ) );
   mp_actSendFolder = chat_bar->addAction( IconManager::instance().icon( "send-folder.png" ), tr( "Send folder" ), this, SLOT( sendFolder() ) );
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  mp_actRecordVoiceMessage = chat_bar->addAction( IconManager::instance().icon( "microphone.png" ), tr( "Record voice message" ), this, SLOT( recordVoiceMessage() ) );
+#endif
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   chat_bar->addAction( mp_actScreenshot );
   chat_bar->addAction( mp_actShareDesktop );
@@ -240,6 +247,10 @@ void GuiChat::updateActions( const Chat& c, bool is_connected, int connected_use
   mp_actClearSystemMessages->setEnabled( c.hasSystemMessages() );
   mp_actSendFile->setEnabled( Settings::instance().enableFileTransfer() && local_user_is_member && is_connected && can_send_files );
   mp_actSendFolder->setEnabled( Settings::instance().enableFileTransfer() && local_user_is_member && is_connected && can_send_files );
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  mp_actRecordVoiceMessage->setEnabled( mp_actSendFile );
+  //mp_actRecordVoiceMessage->setEnabled( local_user_is_member && is_connected && can_send_files );
+#endif
 
   if( !is_connected )
   {
@@ -1231,4 +1242,23 @@ void GuiChat::onTickEvent( int ticks )
 #else
 void GuiChat::onTickEvent( int )
 {}
+#endif
+
+#ifdef BEEBEEP_USE_VOICE_CHAT
+void GuiChat::recordVoiceMessage()
+{
+  GuiRecordVoiceMessage grvm;
+  grvm.setModal( true );
+  grvm.setRecipient( ChatManager::instance().chatName( m_chatId ) );
+  grvm.show();
+  if( grvm.exec() == QDialog::Accepted )
+  {
+    qDebug() << "Recorded voice message to" << qPrintable( grvm.filePath() );
+    emit sendFileFromChatRequest( m_chatId, grvm.filePath() );
+  }
+  else
+  {
+    Settings::instance().addTemporaryFilePath( grvm.filePath() );
+  }
+}
 #endif

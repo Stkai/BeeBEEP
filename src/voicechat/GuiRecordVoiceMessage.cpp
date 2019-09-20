@@ -48,9 +48,14 @@ GuiRecordVoiceMessage::GuiRecordVoiceMessage( QWidget *parent )
   connect( mp_audioProbe, SIGNAL( audioBufferProbed( const QAudioBuffer& ) ), this, SLOT( processAudioBuffer( const QAudioBuffer& ) ) );
   mp_audioProbe->setSource( mp_audioRecorder );
 
-  QString amr_file_name = QString( "amsg_%1.amr" ).arg( Bee::dateTimeStringSuffix( QDateTime::currentDateTime() ) );
+  QString amr_file_name = QString( "amsg_%1.%2" ).arg( Bee::dateTimeStringSuffix( QDateTime::currentDateTime() ) ).arg( AudioManager::defaultAudioContainerFileSuffix() );
   QString file_path_tmp = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().cacheFolder() ).arg( amr_file_name ) );
   m_filePath = Bee::uniqueFilePath( file_path_tmp, false );
+  if( !mp_audioRecorder->setOutputLocation( QUrl::fromLocalFile( m_filePath ) ) )
+    qWarning() << "QAudioRecorder is unable to set output location to" << qPrintable( m_filePath );
+
+  mp_pbPause->setEnabled( false );
+  mp_lStatus->setText( tr( "Ready" ) );
 
   connect( mp_audioRecorder, SIGNAL( durationChanged( qint64 ) ), this, SLOT( updateRecorderProgress( qint64 ) ) );
   connect( mp_audioRecorder, SIGNAL( statusChanged( QMediaRecorder::Status ) ), this, SLOT( onRecorderStatusChanged( QMediaRecorder::Status ) ) );
@@ -74,12 +79,11 @@ void GuiRecordVoiceMessage::sendVoiceMessage()
 
 void GuiRecordVoiceMessage::updateRecorderProgress( qint64 duration_ms )
 {
-  if( mp_audioRecorder->error() != QMediaRecorder::NoError || duration_ms < 2000 )
+  if( mp_audioRecorder->error() != QMediaRecorder::NoError || duration_ms < 500 )
     return;
 
   int duration = qMax( 1, static_cast<int>(duration_ms / 1000.0) );
   mp_progressBar->setValue( duration );
-  mp_lStatus->setText( tr( "Recorded %1" ).arg( Bee::timeToString( duration_ms ) ) );
 }
 
 void GuiRecordVoiceMessage::onRecorderStatusChanged( QMediaRecorder::Status recorder_status )
@@ -88,16 +92,16 @@ void GuiRecordVoiceMessage::onRecorderStatusChanged( QMediaRecorder::Status reco
   switch( recorder_status )
   {
   case QMediaRecorder::RecordingStatus:
-    status_message = tr("Recording");
+    status_message = tr( "Recording" );
     break;
   case QMediaRecorder::PausedStatus:
     clearAudioLevels();
-    status_message = tr("Paused");
+    status_message = tr( "Paused" );
     break;
   case QMediaRecorder::UnloadedStatus:
   case QMediaRecorder::LoadedStatus:
     clearAudioLevels();
-    status_message = tr("Ready");
+    status_message = tr( "Ready" );
   default:
     break;
   }
@@ -111,19 +115,19 @@ void GuiRecordVoiceMessage::onRecorderStateChanged( QMediaRecorder::State record
   switch( recorder_state )
   {
   case QMediaRecorder::RecordingState:
-    mp_lStatus->setText( tr("Recording") );
-    mp_pbRecord->setText( tr("Stop") );
-    mp_pbPause->setText( tr("Pause") );
+    mp_lStatus->setText( tr( "Recording" ) );
+    mp_pbRecord->setText( tr( "Stop" ) );
+    mp_pbPause->setText( tr( "Pause" ) );
     break;
   case QMediaRecorder::PausedState:
-    mp_lStatus->setText( tr("Paused") );
-    mp_pbRecord->setText( tr("Stop") );
-    mp_pbPause->setText( tr("Resume") );
+    mp_lStatus->setText( tr( "Paused" ) );
+    mp_pbRecord->setText( tr( "Stop" ) );
+    mp_pbPause->setText( tr( "Resume" ) );
     break;
   case QMediaRecorder::StoppedState:
-    mp_lStatus->setText( tr("Stopped") );
-    mp_pbRecord->setText( tr("Record") );
-    mp_pbPause->setText( tr("Pause") );
+    mp_lStatus->setText( tr( "Stopped" ) );
+    mp_pbRecord->setText( tr( "Record" ) );
+    mp_pbPause->setText( tr( "Pause" ) );
     break;
   }
 
@@ -141,10 +145,14 @@ void GuiRecordVoiceMessage::toggleRecord()
 {
   if( mp_audioRecorder->state() == QMediaRecorder::StoppedState )
   {
+    mp_lStatus->setText( tr( "Please wait" ) + QString( "..." ) );
+    QApplication::setOverrideCursor( Qt::WaitCursor );
+    QApplication::processEvents();
     QAudioEncoderSettings audio_encoder_settings = AudioManager::defaultAudioEncoderSettings();
-    mp_audioRecorder->setEncodingSettings( audio_encoder_settings );
-    mp_audioRecorder->setOutputLocation( QUrl::fromLocalFile( m_filePath ) );
+    mp_audioRecorder->setEncodingSettings( audio_encoder_settings, QVideoEncoderSettings(), AudioManager::defaultAudioContainer() );
+
     mp_audioRecorder->record();
+    QApplication::restoreOverrideCursor();
   }
   else
     mp_audioRecorder->stop();
@@ -184,8 +192,7 @@ void GuiRecordVoiceMessage::clearAudioLevels()
 }
 
 
-
-/* Static Functions */
+/* Static Functions from Qt AudioRecorder example */
 // This function returns the maximum possible sample value for a given audio format
 qreal GetAudioPeakValue( const QAudioFormat& format )
 {
@@ -238,7 +245,7 @@ QVector<qreal> GetAudioBufferLevels(const QAudioBuffer& buffer)
     if (!buffer.format().isValid() || buffer.format().byteOrder() != QAudioFormat::LittleEndian)
         return values;
 
-    if (buffer.format().codec() != "audio/pcm")
+    if (buffer.format().codec() != "audio/pcm" )
         return values;
 
     int channelCount = buffer.format().channelCount();

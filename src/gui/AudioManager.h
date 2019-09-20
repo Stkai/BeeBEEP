@@ -45,6 +45,8 @@ public:
 #if QT_VERSION >= 0x050000
   static QAudioEncoderSettings defaultAudioEncoderSettings();
 #endif
+  static QString defaultAudioContainer();
+  static QString defaultAudioContainerFileSuffix();
 
   static AudioManager& instance()
   {

@@ -27,14 +27,15 @@
 GuiAudioLevel::GuiAudioLevel( QWidget *parent )
   : QWidget(parent), m_level( 0.0 )
 {
-  setBackgroundRole( QPalette::Base );
-  setAutoFillBackground( true );
-  setMinimumHeight( 30 );
+  setMinimumHeight( 18 );
+  setMaximumHeight( 32 );
   setMinimumWidth( 200 );
 }
 
 void GuiAudioLevel::setLevel( qreal level )
 {
+  if( m_level == level )
+   return;
   m_level = level;
   update();
 }
@@ -42,21 +43,8 @@ void GuiAudioLevel::setLevel( qreal level )
 void GuiAudioLevel::paintEvent( QPaintEvent* event )
 {
   Q_UNUSED(event);
-  QPainter painter( this );
-  painter.setPen( Qt::black );
-  painter.drawRect( QRect( painter.viewport().left()+10,
-                           painter.viewport().top()+10,
-                           painter.viewport().right()-20,
-                           painter.viewport().bottom()-20
-                         ) );
-  if( m_level == 0.0 )
-    return;
-
-  int pos = ( ( painter.viewport().right() - 20 ) - ( painter.viewport().left() + 11 ) ) * m_level;
-  painter.fillRect( painter.viewport().left()+11,
-                    painter.viewport().top()+10,
-                    pos,
-                    painter.viewport().height()-21,
-                    Qt::red
-                  );
+  QPainter painter(this);
+  qreal widthLevel = m_level * width();
+  painter.fillRect( 0, 0, widthLevel, height(), Qt::green );
+  painter.fillRect( widthLevel, 0, width(), height(), Qt::gray );
 }

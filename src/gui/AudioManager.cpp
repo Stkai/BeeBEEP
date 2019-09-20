@@ -41,7 +41,7 @@ QAudioFormat AudioManager::defaultAudioFormat()
   audio_format.setSampleSize( 16 );
   audio_format.setSampleType( QAudioFormat::SignedInt );
   audio_format.setByteOrder( QAudioFormat::LittleEndian );
-  audio_format.setCodec( "audio/pcm" );
+  audio_format.setCodec( "audio/x-speex" );
   QAudioDeviceInfo test_device_info( defaultInputDevice() );
   if( !test_device_info.isFormatSupported( audio_format ) )
   {
@@ -60,17 +60,22 @@ QAudioDeviceInfo AudioManager::defaultInputDevice()
 QAudioEncoderSettings AudioManager::defaultAudioEncoderSettings()
 {
   QAudioEncoderSettings audio_encoder_settings;
-  audio_encoder_settings.setCodec( "audio/amr" );
+  audio_encoder_settings.setCodec( "audio/x-speex" );
   audio_encoder_settings.setQuality( QMultimedia::NormalQuality );
-  /*
-  audio_encoder_settings.setSampleRate( audio_format.sampleRate() );
-  audio_encoder_settings.setBitRate( 64000 );
-  audio_encoder_settings.setChannelCount( audio_format.channelCount() );
-  audio_encoder_settings.setEncodingMode( QMultimedia::ConstantBitRateEncoding );
-  */
+  audio_encoder_settings.setEncodingMode( QMultimedia::ConstantQualityEncoding );
   return audio_encoder_settings;
 }
 #endif
+
+QString AudioManager::defaultAudioContainer()
+{
+  return QLatin1String( "audio/ogg" );
+}
+
+QString AudioManager::defaultAudioContainerFileSuffix()
+{
+  return QLatin1String( "ogg" );
+}
 
 #if defined( Q_OS_OS2 )
   bool AudioManager::isAudioDeviceAvailable() { return true; }
