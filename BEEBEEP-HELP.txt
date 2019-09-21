@@ -294,4 +294,5 @@ ImageQuality=[integer] image quality of jpg format, in case of png use 100 (defa
 
 [VoiceMessage]
 MaxDuration=[integer] the max duration of voice message in seconds (default=100) [5.7.1]
+UseVoicePlayer=[true/false] use the integrated player to listen voice messages (default=true) [5.7.1]
 

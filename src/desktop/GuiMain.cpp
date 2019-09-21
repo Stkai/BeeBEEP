@@ -76,6 +76,9 @@
 #include "ShortcutManager.h"
 #include "SpellChecker.h"
 #include "UserManager.h"
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  #include "VoicePlayer.h"
+#endif
 #ifdef Q_OS_WIN
   #include <Windows.h>
 #endif
@@ -100,6 +103,9 @@ GuiMain::GuiMain( QWidget *parent )
   mp_log = Q_NULLPTR;
   mp_networkTest = Q_NULLPTR;
   m_unreadActivities = 0;
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  mp_voicePlayer = Q_NULLPTR;
+#endif
 
   mp_barMain = addToolBar( tr( "Show the main tool bar" ) );
   mp_barMain->setObjectName( "GuiMainToolBar" );
@@ -425,6 +431,11 @@ void GuiMain::closeEvent( QCloseEvent* e )
 #ifdef BEEBEEP_USE_WEBENGINE
   if( mp_webView )
     mp_webView->close();
+#endif
+
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  if( mp_voicePlayer && !mp_voicePlayer->isStopped() )
+    mp_voicePlayer->stop();
 #endif
 
   if( mp_log )
@@ -1094,6 +1105,14 @@ void GuiMain::createMenus()
   mp_menuSettings->addMenu( menu_voice_message );
   act = menu_voice_message->addAction( IconManager::instance().icon( "timer.png" ), tr( "Maximum duration" ) + QString( "..." ), this, SLOT( settingsChanged() ) );
   act->setData( 94 );
+  #ifndef BEEBEEP_USE_VOICE_CHAT
+    act->setDisabled( true );
+  #endif
+  menu_voice_message->addSeparator();
+  act = menu_voice_message->addAction( tr( "Use the integrated voice message player" ) + QString( " (beta)" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().useVoicePlayer() );
+  act->setData( 95 );
 #endif
 
   mp_menuFileTransferSettings = new QMenu( tr( "File transfer" ), this );
@@ -2098,6 +2117,9 @@ void GuiMain::settingsChanged( QAction* act )
         Settings::instance().setVoiceMessageMaxDuration( max_duration );
     }
     break;
+  case 95:
+    Settings::instance().setUseVoicePlayer( act->isChecked() );
+    break;
   case 99:
     break;
   default:
@@ -3082,6 +3104,24 @@ void GuiMain::openUrl( const QUrl& file_url )
     }
 
     QFileInfo fi( file_path );
+#ifdef BEEBEEP_USE_VOICE_CHAT
+    if( Settings::instance().useVoicePlayer() && AudioManager::isDefaultAudioContainerFile( fi ) )
+    {
+      if( !mp_voicePlayer )
+        mp_voicePlayer = new VoicePlayer( this );
+
+      if( mp_voicePlayer->canPlay() )
+      {
+        if( !mp_voicePlayer->playFile( file_path ) )
+        {
+          QMessageBox::information( qApp->activeWindow(), Settings::instance().programName(),
+                                    tr( "Unable to open voice message %1" ).arg( file_path.isEmpty() ? file_url.toString() : file_path ), tr( "Ok" ) );
+        }
+        return;
+      }
+    }
+#endif
+
 #ifdef Q_OS_MAC
     bool is_exe_file = fi.isBundle();
 #else

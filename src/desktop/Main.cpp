@@ -240,6 +240,7 @@ int main( int argc, char *argv[] )
   /* Event Loop */
   qDebug() << "Enter in the main event loop";
   int iRet = bee_app.exec();
+  qDebug() << "Check and process the remaining events in loop";
 
   /* Check Icon Provider */
   qDebug() << "IconProvider has load in cache" << GuiIconProvider::instance().cacheSize() << "icons";

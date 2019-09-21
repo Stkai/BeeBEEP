@@ -34,6 +34,7 @@ AudioManager::AudioManager()
 {
 }
 
+#if QT_VERSION >= 0x050000
 QAudioFormat AudioManager::defaultAudioFormat()
 {
   QAudioFormat audio_format;
@@ -42,7 +43,7 @@ QAudioFormat AudioManager::defaultAudioFormat()
   audio_format.setSampleSize( 16 );
   audio_format.setSampleType( QAudioFormat::SignedInt );
   audio_format.setByteOrder( QAudioFormat::LittleEndian );
-  audio_format.setCodec( "audio/x-speex" );
+  audio_format.setCodec( "audio/pcm" );
   QAudioDeviceInfo test_device_info( defaultInputDevice() );
   if( !test_device_info.isFormatSupported( audio_format ) )
   {
@@ -57,10 +58,11 @@ QAudioDeviceInfo AudioManager::defaultInputDevice()
   return QAudioDeviceInfo::defaultInputDevice();
 }
 
-#if QT_VERSION >= 0x050000
 QAudioEncoderSettings AudioManager::defaultAudioEncoderSettings()
 {
   QAudioEncoderSettings audio_encoder_settings;
+  audio_encoder_settings.setChannelCount( 1 );
+  audio_encoder_settings.setSampleRate( 8000 );
   audio_encoder_settings.setCodec( "audio/x-speex" );
   audio_encoder_settings.setQuality( QMultimedia::NormalQuality );
   audio_encoder_settings.setEncodingMode( QMultimedia::ConstantQualityEncoding );

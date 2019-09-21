@@ -516,6 +516,8 @@ public:
 
   inline void setVoiceMessageMaxDuration( int );
   inline int voiceMessageMaxDuration() const;
+  inline void setUseVoicePlayer( bool );
+  inline bool useVoicePlayer() const;
 
   void loadRcFile();
   void clearNativeSettings();
@@ -880,6 +882,7 @@ private:
   QDateTime m_saveMessagesTimestamp;
 
   int m_voiceMessageMaxDuration;
+  bool m_useVoicePlayer;
 
 };
 
@@ -1270,5 +1273,7 @@ inline void Settings::setChatOnSendingMessage( int new_value ) { m_chatOnSending
 inline int Settings::chatOnSendingMessage() const { return m_chatOnSendingMessage; }
 inline void Settings::setVoiceMessageMaxDuration( int new_value ) { m_voiceMessageMaxDuration = new_value; }
 inline int Settings::voiceMessageMaxDuration() const { return m_voiceMessageMaxDuration;}
+inline void Settings::setUseVoicePlayer( bool new_value ) { m_useVoicePlayer = new_value; }
+inline bool Settings::useVoicePlayer() const { return m_useVoicePlayer; }
 
 #endif // BEEBEEP_SETTINGS_

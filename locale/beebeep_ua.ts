@@ -3050,6 +3050,14 @@ Please select a different name.</source>
         <source>Please select the maximum duration (in seconds) that a voice message can have (current: %1).</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Unable to open voice message %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use the integrated voice message player</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

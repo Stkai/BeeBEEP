@@ -379,4 +379,3 @@ QVector<qreal> GetAudioBufferLevels(const QAudioBuffer& buffer)
 
     return values;
 }
-

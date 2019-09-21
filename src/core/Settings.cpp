@@ -214,6 +214,7 @@ Settings::Settings()
   m_saveMessagesTimestamp = QDateTime::currentDateTime();
 
   m_voiceMessageMaxDuration = 5;
+  m_useVoicePlayer = true;
 
   resetAllColors();
 }
@@ -1452,6 +1453,7 @@ void Settings::load()
 
   sets->beginGroup( "VoiceMessage" );
   m_voiceMessageMaxDuration = qMax( 5, sets->value( "MaxDuration", m_voiceMessageMaxDuration ).toInt() );
+  m_useVoicePlayer = sets->value( "UseVoicePlayer", m_useVoicePlayer ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Plugin" );
@@ -1779,6 +1781,7 @@ void Settings::save()
 
   sets->beginGroup( "VoiceMessage" );
   sets->setValue( "MaxDuration", m_voiceMessageMaxDuration );
+  sets->setValue( "UseVoicePlayer", m_useVoicePlayer );
   sets->endGroup();
 
   if( !m_pluginSettings.isEmpty() )

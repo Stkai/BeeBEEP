@@ -21,42 +21,43 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifdef BEEBEEP_USE_VOICE_CHAT
-#ifndef BEEBEEP_AUDIOINFO_H
-#define BEEBEEP_AUDIOINFO_H
+#ifndef BEEBEEP_VOICEPLAYER_H
+#define BEEBEEP_VOICEPLAYER_H
 
 #include "Config.h"
 
-class AudioInfo : public QIODevice
+
+class VoicePlayer : public QObject
 {
   Q_OBJECT
 public:
-  AudioInfo( const QAudioFormat&, QObject* parent = Q_NULLPTR );
+  VoicePlayer( QObject* parent = Q_NULLPTR );
 
-  void start();
+  inline bool isPlaying() const;
+  inline bool isStopped() const;
+  inline const QString& currentFilePath() const;
+
+  inline bool canPlay() const;
+  bool playFile( const QString& );
   void stop();
 
-  inline qreal level() const;
-
-  qint64 readData(char *data, qint64 maxlen) override;
-  qint64 writeData(const char *data, qint64 len) override;
-
 signals:
-  void update();
+  void playing( const QString& );
+  void finished( const QString& );
 
-protected:
-  bool checkAudioFormat();
+protected slots:
+  void onError( QMediaPlayer::Error );
+
 
 private:
-  QAudioFormat m_format;
-  quint32 m_maxAmplitude;
-  qreal m_level; // 0.0 <= m_level <= 1.0
+  QString m_currentFilePath;
+  QMediaPlayer* mp_voicePlayer;
 
 };
 
-
 // Inline Functions
-inline qreal AudioInfo::level() const { return m_level; }
-
-#endif // BEEBEEP_AUDIOINFO_H
-#endif // BEEBEEP_USE_VOICE_CHAT
+inline const QString& VoicePlayer::currentFilePath() const { return m_currentFilePath; }
+inline bool VoicePlayer::canPlay() const { return mp_voicePlayer; }
+inline bool VoicePlayer::isPlaying() const { return mp_voicePlayer && mp_voicePlayer->state() == QMediaPlayer::PlayingState; }
+inline bool VoicePlayer::isStopped() const { return mp_voicePlayer && mp_voicePlayer->state() == QMediaPlayer::StoppedState; }
+#endif // BEEBEEP_VOICEPLAYER_H

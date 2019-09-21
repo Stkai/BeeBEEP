@@ -54,6 +54,9 @@ class User;
 #ifdef BEEBEEP_USE_WEBENGINE
   class GuiWebView;
 #endif
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  class VoicePlayer;
+#endif
 
 
 class GuiMain : public QMainWindow
@@ -390,6 +393,9 @@ private:
 
   GuiNetworkTest* mp_networkTest;
 
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  VoicePlayer* mp_voicePlayer;
+#endif
 };
 
 #endif // BEEBEEP_GUIMAIN_H

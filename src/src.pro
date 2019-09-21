@@ -26,7 +26,6 @@ TEMPLATE = app
 !macx:DEFINES += MAKE_BEEBEEP_PORTABLE
 #DEFINES += BEEBEEP_DISABLE_FILE_TRANSFER
 #DEFINES += BEEBEEP_DISABLE_SEND_MESSAGE
-#DEFINES += BEEBEEP_DISABLE_VOICE_CHAT
 #DEFINES += BEEBEEP_DISABLE_VIDEO_CALL
 #DEFINES += BEEBEEP_USE_WEBENGINE
 
@@ -40,6 +39,7 @@ greaterThan(QT_MAJOR_VERSION, 4): {
 win32|unix {
   greaterThan(QT_MAJOR_VERSION, 4): {
     QT += multimedia
+    DEFINES += BEEBEEP_USE_VOICE_CHAT
   }
 }
 
@@ -82,13 +82,9 @@ include(utils/utils.pri)
 win32|unix {
   include(qxt/qxt.pri)
   include(sharedesktop/sharedesktop.pri)
-}
-
-contains( DEFINES, BEEBEEP_DISABLE_VOICE_CHAT ) {
-  message( Custom module disabled: voicechat )
-} else {
-  message( Custom module enabled: voicechat )
-  include(voicechat/voicechat.pri)
+  contains(DEFINES, BEEBEEP_USE_VOICE_CHAT) {
+    include(voicechat/voicechat.pri)
+  }
 }
 
 #!contains( DEFINES, BEEBEEP_DISABLE_VIDEO_CALL ) {

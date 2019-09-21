@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#ifdef BEEBEEP_USE_VOICE_CHAT
 #include "AudioInfo.h"
 #include "AudioManager.h"
 
@@ -183,3 +184,4 @@ qint64 AudioInfo::writeData( const char *data, qint64 data_size )
   emit update();
   return data_size;
 }
+#endif // BEEBEEP_USE_VOICE_CHAT

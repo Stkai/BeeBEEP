@@ -3218,6 +3218,18 @@ Inserisci un nome differente.</translation>
         <source>Please select the maximum duration (in seconds) that a voice message can have (current: %1).</source>
         <translation>Inserisci la durata massima (in secondi) che un messaggio vocale può avere (attuale: %1).</translation>
     </message>
+    <message>
+        <source>Use voice player</source>
+        <translation type="vanished">Usa il lettore di messaggi vocali</translation>
+    </message>
+    <message>
+        <source>Unable to open voice message %1</source>
+        <translation>Impossibile aprire il messaggio vocale %1</translation>
+    </message>
+    <message>
+        <source>Use the integrated voice message player</source>
+        <translation>Usa il riproduttore integrato dei messaggi vocali</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
