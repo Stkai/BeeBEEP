@@ -657,34 +657,58 @@ void Core::addListToSavedChats()
                              DispatchToChat, ChatMessage::System );
       foreach( MessageRecord mr, bscl->unsentMessages() )
       {
-        QString msg_txt = mr.message().text();
-        if( msg_txt.size() > 120 )
+        bool add_message = false;
+        QString msg_txt;
+        FileInfo saved_fi;
+        if( mr.isVoiceMessage() )
         {
-           msg_txt.resize( 120 );
-           msg_txt.append( "..." );
+          saved_fi = Protocol::instance().fileInfoFromMessage( mr.message() );
+          msg_txt = saved_fi.name();
+        }
+        else
+        {
+          msg_txt = mr.message().text();
+          if( msg_txt.size() > 120 )
+          {
+             msg_txt.resize( 120 );
+             msg_txt.append( "..." );
+          }
         }
         User to_user = UserManager::instance().findUser( mr.toUserId() );
         Chat to_chat = ChatManager::instance().chat( mr.chatId() );
         if( !to_user.isValid() || !to_chat.isValid() )
         {
-          qWarning() << "Offline message to user" << qPrintable( QString( "%1" ).arg( to_user.isValid() ? to_user.name() : QString( "%1 (unknown)").arg( mr.toUserId() ) ) )
+          qWarning() << "Offline" << (mr.isVoiceMessage() ? "voice message" : "message" ) << "to user" << qPrintable( QString( "%1" ).arg( to_user.isValid() ? to_user.name() : QString( "%1 (unknown)").arg( mr.toUserId() ) ) )
                      << "and to chat" << qPrintable( QString( "%1" ).arg( to_chat.isValid() ? to_chat.name() : QString( "%1 (unknown)").arg( mr.chatId() ) ) )
-                     << "will not be sent:" << msg_txt;
+                     << "will not be sent:" << qPrintable( msg_txt );
         }
         else
         {
-          if( mr.message().type() == Message::File )
+          if( mr.isVoiceMessage() )
           {
-            FileInfo saved_file_info = Protocol::instance().fileInfoFromMessage( mr.message() );
-            FileInfo file_info = mp_fileTransfer->addFile( saved_file_info );
-            if( !file_info.isValid() )
+            QString file_path = QString( "%1%2%3" ).arg( Settings::instance().cacheFolder() ).arg( QDir::separator() ).arg( saved_fi.name() );
+            QFileInfo fi_voice( file_path );
+            if( fi_voice.exists() )
             {
-              qWarning() << "Unable to send (offline) file" << qPrintable( saved_file_info.path() ) << "to" << qPrintable( to_user.name() ) << ": file not found";
-              continue;
+              FileInfo file_info = mp_fileTransfer->addFile( fi_voice, saved_fi.shareFolder(), saved_fi.isInShareBox(), saved_fi.chatPrivateId(), saved_fi.contentType() );
+              if( file_info.isValid() )
+              {
+                mr.setMessage( Protocol::instance().fileInfoToMessage( file_info ) );
+                add_message = true;
+                QUrl file_url = QUrl::fromLocalFile( file_path );
+#ifdef BEEBEEP_USE_VOICE_CHAT
+                file_url.setScheme( FileInfo::urlSchemeVoiceMessage() );
+#endif
+                msg_txt = QString( "<a href=\"%1\">%2</a>" ).arg( file_url.toString(), tr( "voice message" ) );
+              }
             }
-            mr.setMessage( Protocol::instance().fileInfoToMessage( file_info ) );
+            else
+              qWarning() << "Saved voice message contains an invalid path:" << qPrintable( saved_fi.path() );
           }
           else
+            add_message = true;
+
+          if( add_message )
           {
             dispatchSystemMessage( mr.chatId(), ID_LOCAL_USER, QString( "%1 %2: &quot;%3&quot; [%4]" )
                                    .arg( IconManager::instance().toHtml( "unsent-message.png", "*m*" ) )
@@ -692,9 +716,9 @@ void Core::addListToSavedChats()
                                    .arg( msg_txt )
                                    .arg( mr.message().timestamp().toString( "yyyy-MM-dd hh:mm:ss" ) ),
                                    DispatchToChat, ChatMessage::Other );
+            MessageManager::instance().addMessageRecord( mr );
           }
         }
-        MessageManager::instance().addMessageRecord( mr );
       }
     }
   }
@@ -738,34 +762,56 @@ bool Core::clearSystemMessagesInChat( VNumber chat_id )
 
 int Core::checkOfflineMessagesForUser( const User& u )
 {
-  Connection* c = connection( u.id() );
-  if( !c )
-    return 0;
-
   QList<MessageRecord> message_list = MessageManager::instance().takeMessagesToSendToUserId( u.id() );
   if( message_list.isEmpty() )
     return 0;
 
   QList<VNumber> chat_list;
-  qDebug() << message_list.size() << "offline messages sent to" << qPrintable( u.path() );
-  foreach( MessageRecord mr, message_list )
+  QList<MessageRecord> unsent_messages;
+  int messages_sent = 0;
+  bool user_is_online = false;
+
+  Connection* c = connection( u.id() );
+  if( c && c->isValid() && c->isConnected() )
   {
-    if( !chat_list.contains( mr.chatId() ) )
-      chat_list.append( mr.chatId() );
-    c->sendMessage( mr.message() );
+    user_is_online = true;
+    foreach( MessageRecord mr, message_list )
+    {
+      if( c->sendMessage( mr.message() ) )
+      {
+        if( !chat_list.contains( mr.chatId() ) )
+          chat_list.append( mr.chatId() );
+        messages_sent++;
+      }
+      else
+      {
+#ifdef BEEBEEP_DEBUG
+        qDebug() << "Unable to send offline message now... Try later";
+        unsent_messages.append( mr );
+#endif
+      }
+    }
   }
 
-  foreach( VNumber ci, chat_list )
+  if( !user_is_online )
+    unsent_messages = message_list;
+
+  if( messages_sent > 0 )
   {
-    dispatchSystemMessage( ci, u.id(), QString( "%1 %2" )
-                           .arg( IconManager::instance().toHtml( "unsent-message.png", "*m*" ) )
-                           .arg( tr( "Offline messages sent to %2." ).arg( Bee::replaceHtmlSpecialCharacters( u.name() ) ) ),
-                           DispatchToChat, ChatMessage::Other );
+    foreach( VNumber ci, chat_list )
+    {
+      dispatchSystemMessage( ci, u.id(), QString( "%1 %2" )
+                             .arg( IconManager::instance().toHtml( "unsent-message.png", "*m*" ) )
+                             .arg( tr( "Offline messages sent to %2." ).arg( Bee::replaceHtmlSpecialCharacters( u.name() ) ) ),
+                             DispatchToChat, ChatMessage::Other );
+    }
+    qDebug() << messages_sent << "offline messages sent to" << qPrintable( u.path() ) << "-" << unsent_messages.size() << "messages left";
+    emit offlineMessageSentToUser( u );
   }
 
-  emit offlineMessageSentToUser( u );
-
-  return message_list.size();
+  if( !unsent_messages.isEmpty() )
+    MessageManager::instance().addMessageRecords( unsent_messages );
+  return messages_sent;
 }
 
 bool Core::readAllMessagesInChat( VNumber chat_id )

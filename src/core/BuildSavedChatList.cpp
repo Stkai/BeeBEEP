@@ -201,7 +201,6 @@ void BuildSavedChatList::loadUnsentMessages()
   {
     for( int i = 1; i <= num_of_unsent_messages; i++ )
     {
-
       QString smr;
       stream >> smr;
       if( stream.status() != QDataStream::Ok )

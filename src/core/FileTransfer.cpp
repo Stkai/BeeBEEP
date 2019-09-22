@@ -162,14 +162,6 @@ FileInfo FileTransfer::addFile( const QFileInfo& fi, const QString& share_folder
   return file_info;
 }
 
-FileInfo FileTransfer::addFile( const FileInfo& fi )
-{
-  QFileInfo qfi( fi.path() );
-  if( !qfi.exists() )
-    return FileInfo();
-  return addFile( qfi, fi.shareFolder(), fi.isInShareBox(), fi.chatPrivateId(), fi.contentType() );
-}
-
 void FileTransfer::addFileInfoList( const QList<FileInfo>& file_info_list )
 {
   foreach( FileInfo fi, file_info_list )

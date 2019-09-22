@@ -65,12 +65,6 @@ void Core::stopFileTransferServer()
 
 bool Core::downloadFile( VNumber user_id, const FileInfo& fi, bool show_message )
 {
-  if( !mp_fileTransfer->isActive() )
-  {
-    if( !startFileTransferServer() )
-      return false;
-  }
-
   User u = UserManager::instance().findUser( user_id );
   if( !u.isValid() )
   {
@@ -257,12 +251,6 @@ bool Core::sendFile( VNumber user_id, const QString& file_path, const QString& s
     dispatchSystemMessage( chat_id != ID_INVALID ? chat_id : ID_DEFAULT_CHAT, user_id, tr( "%1 Unable to send %2. File transfer is disabled." ).arg( icon_html, file_path ),
                            chat_id != ID_INVALID ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
     return false;
-  }
-
-  if( !mp_fileTransfer->isActive() )
-  {
-    if( !startFileTransferServer() )
-      return false;
   }
 
   User u = UserManager::instance().findUser( user_id );

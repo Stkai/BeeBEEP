@@ -179,6 +179,18 @@ void MessageManager::addMessageRecord( const MessageRecord& mr )
   m_messagesToSend.append( mr );
 }
 
+
+void MessageManager::addMessageRecords( const QList<MessageRecord>& mr_list )
+{
+  if( mr_list.isEmpty() )
+    return;
+  if( m_messagesToSend.isEmpty() )
+    m_messagesToSend = mr_list;
+  else
+    m_messagesToSend.append( mr_list );
+}
+
+
 QString MessageManager::generateSaveMessagesAuthCode() const
 {
   Settings::instance().setSaveMessagesTimestamp( QDateTime::currentDateTime() );

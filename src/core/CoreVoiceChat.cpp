@@ -39,12 +39,6 @@ bool Core::sendVoiceMessageToChat( VNumber chat_id, const QString& file_path )
     return false;
   }
 
-  if( !mp_fileTransfer->isActive() )
-  {
-    if( !startFileTransferServer() )
-      return false;
-  }
-
   QFileInfo file( file_path );
   if( !file.exists() )
   {

@@ -89,6 +89,7 @@ Settings::Settings()
   m_postUsageStatistics = true;
   m_useHostnameForDefaultUsername = false;
   m_useEasyConnection = false;
+
 #ifdef BEEBEEP_DISABLE_FILE_TRANSFER
   m_disableFileTransfer = true;
   m_disableFileSharing = true;
@@ -111,6 +112,7 @@ Settings::Settings()
 #else
   m_disableVoiceMessages = true;
 #endif
+
   m_startMinimized = false;
   m_signature = "";
   m_useOnlyTextEmoticons = false;

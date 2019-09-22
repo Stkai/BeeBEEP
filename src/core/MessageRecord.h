@@ -44,6 +44,8 @@ public:
   inline const Message& message() const;
   inline void setMessage( const Message& );
 
+  inline bool isVoiceMessage() const;
+
 private:
   VNumber m_toUserId;
   VNumber m_chatId;
@@ -58,5 +60,6 @@ inline VNumber MessageRecord::toUserId() const { return m_toUserId; }
 inline VNumber MessageRecord::chatId() const { return m_chatId; }
 inline const Message& MessageRecord::message() const { return m_message; }
 inline void MessageRecord::setMessage( const Message& new_value ) { m_message = new_value; }
+inline bool MessageRecord::isVoiceMessage() const { return m_message.type() == Message::File && m_message.hasFlag( Message::VoiceMessage ); }
 
 #endif // BEEBEEP_CHATMESSAGE_H

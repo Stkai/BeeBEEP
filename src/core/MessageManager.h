@@ -39,7 +39,10 @@ public:
   int countMessagesToSendToUserId( VNumber );
   int countMessagesToSendInChatId( VNumber );
 
+  inline VNumber nextUserWithUnsentMessages() const;
+
   void addMessageRecord( const MessageRecord& );
+  void addMessageRecords( const QList<MessageRecord>& );
 
   bool unsentMessagesCanBeSaved() const;
   bool saveUnsentMessages();
@@ -70,5 +73,9 @@ private:
   QList<MessageRecord> m_messagesToSend;
 
 };
+
+
+// Inline Functions
+VNumber MessageManager::nextUserWithUnsentMessages() const { return m_messagesToSend.isEmpty() ? ID_INVALID : m_messagesToSend.first().toUserId(); }
 
 #endif // BEEBEEP_MESSAGEMANAGER_H
