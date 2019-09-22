@@ -443,32 +443,47 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg, bool is_importan
       dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "Nobody has received the message." ), DispatchToChat, ChatMessage::Other );
   }
   else
+    messages_sent = sendMessageToChat( c, m );
+
+  return messages_sent;
+}
+
+int Core::sendMessageToChat( const Chat& c, const Message& m )
+{
+  int messages_sent = 0;
+  UserList user_list = c.id() == ID_DEFAULT_CHAT ? UserManager::instance().userList() : UserManager::instance().userList().fromUsersId( c.usersId() );
+  QStringList offline_users;
+  foreach( User u, user_list.toList() )
   {
-    UserList user_list = chat_id == ID_DEFAULT_CHAT ? UserManager::instance().userList() : UserManager::instance().userList().fromUsersId( c.usersId() );
-    QStringList offline_users;
-    foreach( User u, user_list.toList() )
-    {
-      if( u.isLocal() )
-        continue;
+    if( u.isLocal() )
+      continue;
 
-      if( sendMessageToLocalNetwork( u, m ) )
-      {
-        messages_sent += 1;
-      }
+    if( !sendMessageToLocalNetwork( u, m ) )
+    {
+      MessageManager::instance().addMessageToSend( u.id(), c.id(), m );
+      offline_users.append( Bee::replaceHtmlSpecialCharacters( u.name() ) );
+    }
+    else
+      messages_sent += 1;
+  }
+
+  if( !offline_users.isEmpty() )
+  {
+    QString sys_msg;
+    if( m.type() == Message::File )
+    {
+      if( m.hasFlag( Message::VoiceMessage ) )
+        sys_msg = tr( "The voice message will be delivered to %1." );
       else
-      {
-        MessageManager::instance().addMessageToSend( u.id(), chat_id, m );
-        offline_users.append( Bee::replaceHtmlSpecialCharacters( u.name() ) );
-      }
+        sys_msg = tr( "The file will be delivered to %1." );
     }
+    else
+      sys_msg = tr( "The message will be delivered to %1." );
 
-    if( !offline_users.isEmpty() )
-    {
-      dispatchSystemMessage( chat_id, ID_LOCAL_USER, QString( "%1 %2" )
-                             .arg( IconManager::instance().toHtml( "unsent-message.png", "*m*" ) )
-                             .arg( tr( "The message will be delivered to %1." ).arg( Bee::stringListToTextString( offline_users, 3 ) ) ),
-                             DispatchToChat, ChatMessage::Other );
-    }
+    dispatchSystemMessage( c.id(), ID_LOCAL_USER, QString( "%1 %2" )
+                           .arg( IconManager::instance().toHtml( "unsent-message.png", "*m*" ) )
+                           .arg( sys_msg.arg( Bee::stringListToTextString( offline_users, 3 ) ) ),
+                           DispatchToChat, ChatMessage::Other );
   }
 
   return messages_sent;
@@ -640,7 +655,6 @@ void Core::addListToSavedChats()
                              .arg( IconManager::instance().toHtml( "unsent-message.png", "*m*" ) )
                              .arg( tr( "%1 offline messages will be sent as soon as possible." ).arg( bscl->unsentMessages().size() ) ),
                              DispatchToChat, ChatMessage::System );
-      QList<MessageRecord> checked_unsent_messages;
       foreach( MessageRecord mr, bscl->unsentMessages() )
       {
         QString msg_txt = mr.message().text();
@@ -659,18 +673,29 @@ void Core::addListToSavedChats()
         }
         else
         {
-          dispatchSystemMessage( mr.chatId(), ID_LOCAL_USER, QString( "%1 %2: &quot;%3&quot; [%4]" )
-                                 .arg( IconManager::instance().toHtml( "unsent-message.png", "*m*" ) )
-                                 .arg( tr( "Offline message will be sent to %1" ).arg( Bee::replaceHtmlSpecialCharacters( to_user.name() ) ) )
-                                 .arg( msg_txt )
-                                 .arg( mr.message().timestamp().toString( "yyyy-MM-dd hh:mm:ss" ) ),
-                                 DispatchToChat, ChatMessage::Other );
-          checked_unsent_messages.append( mr );
+          if( mr.message().type() == Message::File )
+          {
+            FileInfo saved_file_info = Protocol::instance().fileInfoFromMessage( mr.message() );
+            FileInfo file_info = mp_fileTransfer->addFile( saved_file_info );
+            if( !file_info.isValid() )
+            {
+              qWarning() << "Unable to send (offline) file" << qPrintable( saved_file_info.path() ) << "to" << qPrintable( to_user.name() ) << ": file not found";
+              continue;
+            }
+            mr.setMessage( Protocol::instance().fileInfoToMessage( file_info ) );
+          }
+          else
+          {
+            dispatchSystemMessage( mr.chatId(), ID_LOCAL_USER, QString( "%1 %2: &quot;%3&quot; [%4]" )
+                                   .arg( IconManager::instance().toHtml( "unsent-message.png", "*m*" ) )
+                                   .arg( tr( "Offline message will be sent to %1" ).arg( Bee::replaceHtmlSpecialCharacters( to_user.name() ) ) )
+                                   .arg( msg_txt )
+                                   .arg( mr.message().timestamp().toString( "yyyy-MM-dd hh:mm:ss" ) ),
+                                   DispatchToChat, ChatMessage::Other );
+          }
         }
+        MessageManager::instance().addMessageRecord( mr );
       }
-
-      if( !checked_unsent_messages.isEmpty() )
-        MessageManager::instance().addMessageRecords( checked_unsent_messages );
     }
   }
   if( beeApp )
@@ -713,16 +738,16 @@ bool Core::clearSystemMessagesInChat( VNumber chat_id )
 
 int Core::checkOfflineMessagesForUser( const User& u )
 {
-  QList<MessageRecord> message_list = MessageManager::instance().takeMessagesToSendToUserId( u.id() );
-  if( message_list.isEmpty() )
-    return 0;
-
   Connection* c = connection( u.id() );
   if( !c )
     return 0;
 
+  QList<MessageRecord> message_list = MessageManager::instance().takeMessagesToSendToUserId( u.id() );
+  if( message_list.isEmpty() )
+    return 0;
+
   QList<VNumber> chat_list;
-  qDebug() << message_list.size() << "offline messages sent to" << u.path();
+  qDebug() << message_list.size() << "offline messages sent to" << qPrintable( u.path() );
   foreach( MessageRecord mr, message_list )
   {
     if( !chat_list.contains( mr.chatId() ) )

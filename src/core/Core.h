@@ -119,6 +119,11 @@ public:
   bool shareDesktopIsActive( VNumber user_id ) const;
 #endif
 
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  /* CoreVoiceChat.cpp */
+  bool sendVoiceMessageToChat( VNumber chat_id, const QString& file_path );
+#endif
+
 public slots:
   void sendBroadcastMessage();
   void sendDnsMulticastingMessage();
@@ -228,7 +233,7 @@ protected:
   void createLocalShareMessage();
   bool saveChatMessages();
   void showMessage( const QString&, int ms_to_show );
-  void sendMessageToAllConnectedUsers( const Message& );
+  int sendMessageToAllConnectedUsers( const Message& );
   bool saveUnsentMessages();
 
   /* CoreConnection */
@@ -276,6 +281,7 @@ protected:
   bool removeLocalUserFromGroupChatByOther( const User& other_user, const QString& chat_private_id );
   int archiveAllChats();
   bool sendChatAutoResponderMessageToUser( const Chat&, const QString& msg, VNumber user_id );
+  int sendMessageToChat( const Chat&, const Message& );
 
   /* CoreDispatcher */
   enum DispatchType { DispatchToAll, DispatchToAllChatsWithUser, DispatchToChat, DispatchToDefaultAndPrivateChat };

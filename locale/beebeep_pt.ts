@@ -212,28 +212,28 @@
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="221"/>
-        <location filename="../src/core/CoreChat.cpp" line="870"/>
-        <location filename="../src/core/CoreChat.cpp" line="881"/>
+        <location filename="../src/core/CoreChat.cpp" line="895"/>
+        <location filename="../src/core/CoreChat.cpp" line="906"/>
         <source>%1 Chat with %2.</source>
         <translation>%1 Chat com %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="619"/>
+        <location filename="../src/core/CoreChat.cpp" line="634"/>
         <source>Saved chats had an incorrect authorization code.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="641"/>
+        <location filename="../src/core/CoreChat.cpp" line="656"/>
         <source>%1 offline messages will be sent as soon as possible.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="664"/>
+        <location filename="../src/core/CoreChat.cpp" line="691"/>
         <source>Offline message will be sent to %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="870"/>
+        <location filename="../src/core/CoreChat.cpp" line="895"/>
         <source>Unknown %1</source>
         <translation>Desconhecido %1</translation>
     </message>
@@ -323,12 +323,22 @@
         <translation>Impossível enviar a mensagem: Chat desabilitado.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="634"/>
+        <location filename="../src/core/CoreChat.cpp" line="476"/>
+        <source>The voice message will be delivered to %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreChat.cpp" line="478"/>
+        <source>The file will be delivered to %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreChat.cpp" line="649"/>
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="865"/>
+        <location filename="../src/core/CoreChat.cpp" line="890"/>
         <source>Chat with all users</source>
         <translation>Chat Com TODOS os Menbros</translation>
     </message>
@@ -338,7 +348,7 @@
         <translation>Impossível enviar Mensagem para  %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="469"/>
+        <location filename="../src/core/CoreChat.cpp" line="481"/>
         <source>The message will be delivered to %1.</source>
         <translation>Esta mensagem SERÁ entregue para: %1.</translation>
     </message>
@@ -348,22 +358,22 @@
         <translation>Nenhum usuário Selecionado.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="622"/>
+        <location filename="../src/core/CoreChat.cpp" line="637"/>
         <source>%1 saved chats are added to history</source>
         <translation>%1 Conversas salvas são adicionadas ao histórico</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="737"/>
+        <location filename="../src/core/CoreChat.cpp" line="762"/>
         <source>Offline messages sent to %2.</source>
         <translation>Mensagem Offline enviada para %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="824"/>
+        <location filename="../src/core/CoreChat.cpp" line="849"/>
         <source>%1 You have buzzed %2.</source>
         <translation>%1 Você esta a  Bip %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="563"/>
+        <location filename="../src/core/CoreChat.cpp" line="578"/>
         <source>%1 %2 cannot be informed that you have left the group.</source>
         <translation>%1 %2 Sem informações que você deixou o Grupo.</translation>
     </message>
@@ -408,22 +418,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="190"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="193"/>
         <source>Listen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="195"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="199"/>
         <source>Open</source>
         <translation>Abrir</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="276"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="280"/>
         <source>%1 Unable to send %2 to %3: user is offline.</source>
         <translation>%1 Impossível enviar %2 para %3:usuário está  offline.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="253"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="257"/>
         <source>%1 Unable to send %2. File transfer is disabled.</source>
         <translation>%1 Impossível Enviar %2.Transferência de Arquivos está Desabilitada.</translation>
     </message>
@@ -438,112 +448,112 @@
         <translation>Baixar</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="199"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="203"/>
         <source>folder</source>
         <translation>Pasta</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="285"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="289"/>
         <source>%1 %2: file not found.</source>
         <translation>%1 %2: Arquivo não localizado.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="299"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="303"/>
         <source>%1 %2 is a folder. You can share it.</source>
         <translation>%1 %2 é uma pasta. Não pode ser compartilhada.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="324"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="328"/>
         <source>%1 Unable to send %2: %3 is not connected.</source>
         <translation>%1 Impossível enviar %2: %3 não conectado.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="318"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="322"/>
         <source>%1 You send %2 to %3.</source>
         <translation>%1 Enviado %2 para %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="350"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="354"/>
         <source>%1 You have refused to download %2 from %3.</source>
         <translation>%1 Download Recusado %2 de %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="378"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="382"/>
         <source>%1 You have refused to download folder %2 from %3.</source>
         <translation>%1 Download da Pasta Recusado %2 de %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="486"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="490"/>
         <source>%1 is added to file sharing (%2)</source>
         <translation>%1 adicionada ao compartilhamento (%2)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="480"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="484"/>
         <source>%1 is added to file sharing with only %2 of %3 files (%4 limit reached)</source>
         <translation>%1 é adicionado ao compartilhamento de arquivos com apenas%2 de%3 arquivos (%4 limite atingido)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="191"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="194"/>
         <source>voice message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="488"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="492"/>
         <source>%1 is added to file sharing with %2 files, %3</source>
         <translation>%1 Adicionado ao compartilhamento de arquivos com%2 arquivos,%3</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="519"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="523"/>
         <source>All paths are removed from file sharing</source>
         <translation>Caminhos excluidos do Compartilhamento</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="540"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="544"/>
         <source>%1 is removed from file sharing</source>
         <translation>%1 Removido do compatilhamento</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="542"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="546"/>
         <source>%1 is removed from file sharing with %2 files</source>
         <translation>%1 compartilhamento removido %2 arquivos</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="607"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="611"/>
         <source>%1 You are about to send %2 to %3. Checking folder...</source>
         <translation>%1 Mensagem será enviada %2 para %3. Verificando Pasta...</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="647"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="651"/>
         <source>%1 Unable to send folder %2</source>
         <translation>%1 Impossível enviar pasta %2</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="652"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="656"/>
         <source>invalid user #%1.</source>
         <translation>Membro invalido #%1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="659"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="663"/>
         <source>the folder is empty.</source>
         <translation>Pasta está Vazia.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="666"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="670"/>
         <source>file transfer is not working.</source>
         <translation>Transferência de Arquivos não está funcionando.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="674"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="678"/>
         <source>%1 is not connected.</source>
         <translation>%1 não está conectado.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="688"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="692"/>
         <source>internal error.</source>
         <translation>Erro Interno.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="693"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="697"/>
         <source>%1 You send folder %2 to %3.</source>
         <translation>%1 Pasta enviada  %2 para %3.</translation>
     </message>
@@ -553,37 +563,42 @@
         <translation>%1 %2 download Recusado %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="186"/>
+        <location filename="../src/core/CoreParser.cpp" line="188"/>
+        <source>%1 %2 is sending to you the voice message: %3.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreParser.cpp" line="190"/>
         <source>%1 %2 is sending to you the file: %3.</source>
         <translation>%1 %2 está enviando o arquivo: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="407"/>
+        <location filename="../src/core/CoreParser.cpp" line="417"/>
         <source>%1 has removed shared files</source>
         <translation>%1 Removeu Arquivos Compartilhado</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="409"/>
+        <location filename="../src/core/CoreParser.cpp" line="419"/>
         <source>%1 has shared %2 files</source>
         <translation>%1 compartilhou %2 arquivos</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="572"/>
+        <location filename="../src/core/CoreParser.cpp" line="582"/>
         <source>%1 %2 is buzzing you.</source>
         <translation>%1 %2 Esta Bip(chamando)  Você.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="439"/>
+        <location filename="../src/core/CoreParser.cpp" line="449"/>
         <source>%1 %2 has refused to download folder %3.</source>
         <translation>%1 %2 recusou fazer o download da pasta %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="449"/>
+        <location filename="../src/core/CoreParser.cpp" line="459"/>
         <source>unknown folder</source>
         <translation>Pasta Desconhecida</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="458"/>
+        <location filename="../src/core/CoreParser.cpp" line="468"/>
         <source>%1 %2 is sending to you the folder: %3.</source>
         <translation>%1 %2 está enviando  uma pasta: %3.</translation>
     </message>
@@ -692,6 +707,16 @@
     <message>
         <location filename="../src/core/CoreDispatcher.cpp" line="64"/>
         <source>You are not a member of group %1. Your messages will be not shown.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreVoiceChat.cpp" line="37"/>
+        <source>%1 Unable to send voice message. File transfer is disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreVoiceChat.cpp" line="51"/>
+        <source>%1 %2: voice message not found.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -992,154 +1017,154 @@
 <context>
     <name>GuiChat</name>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="164"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="171"/>
         <source>Change font style</source>
         <translation>Trocar Fonte</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="165"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="172"/>
         <source>Change font color</source>
         <translation>Trocar Cor da Fonte</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="109"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="116"/>
         <source>Change background color</source>
         <translation>Trocar cor de fundo</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="166"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="173"/>
         <source>Filter message</source>
         <translation>Filtre a mensagem</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="167"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="174"/>
         <source>Chat settings</source>
         <translation>Configuração do Chat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="168"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="175"/>
         <source>Spell checking</source>
         <translation>Verificando Ortografia</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="170"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="177"/>
         <source>Word completer</source>
         <translation>Completar texto</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="172"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="179"/>
         <source>Use Return key to send message</source>
         <translation>Use a tecla ENTER para enviar a mensagem</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="131"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1122"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="138"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1125"/>
         <source>Find text in chat</source>
         <translation>Procurar palavras no Chat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="175"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="182"/>
         <source>Send file</source>
         <translation>Enviar arquivo</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="176"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="183"/>
         <source>Send folder</source>
         <translation>Enviar Pasta</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="118"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="125"/>
         <source>Save chat</source>
         <translation>Salvar Chat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="121"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="128"/>
         <source>Print...</source>
         <translation>Imprimir...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="350"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="349"/>
         <source>Open selected text as url</source>
         <translation>Abrir selecionado texto no navegador</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="573"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="576"/>
         <source>open %1 to read them all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="573"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="576"/>
         <source>the saved chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="905"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="908"/>
         <source>Do you want to send %1 %2 to the members of this chat?</source>
         <translation>Você quer enviar%1 %2 para os membros deste chat?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1020"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1023"/>
         <source>Spell checking is enabled</source>
         <translation>Verificação Ortográfica ativada</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1027"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1051"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1030"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1054"/>
         <source>There is not a valid dictionary</source>
         <translation>Insira um Dicionário válido</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1044"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1047"/>
         <source>Word completer is enabled</source>
         <translation>Completar Texto Ativado</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1046"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1049"/>
         <source>Word completer is disabled</source>
         <translation>Completar Texto Desativado</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1160"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1163"/>
         <source>%1 not found in chat.</source>
         <translation>%1 Não Encontrado no chat.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1022"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1025"/>
         <source>Spell checking is disabled</source>
         <translation>Verificar Ortografia Desativado</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="125"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="132"/>
         <source>Clear messages</source>
         <translation>Limpar Mensagens</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="269"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="260"/>
         <source>You are not connected</source>
         <translation>Voce não esta conectado</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="277"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="268"/>
         <source>Send messages is disabled</source>
         <translation>Envio de mensagens esta Desativado</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="283"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="274"/>
         <source>Chat with all users is disabled</source>
         <translation>Chat com todos Usuarios esta Desativado</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="289"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="280"/>
         <source>Private chat is disabled</source>
         <translation>chat Privado esta Desativado</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="298"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="289"/>
         <source>You have left this chat</source>
         <translation>Você saiu deste chat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="346"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="345"/>
         <source>Copy to clipboard</source>
         <translation>Copiar</translation>
     </message>
@@ -1148,48 +1173,48 @@
         <translation type="obsolete">Selecionar Tudo</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="380"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="379"/>
         <source>Show only messages in default chat</source>
         <translation>Mostrar apenas mensapens do chat padrão </translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="423"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="422"/>
         <source>Last message %1</source>
         <translation>Última Mensagem: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="134"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="141"/>
         <source>Restore the default font</source>
         <translation>Restaurar para a Fonte Padrão</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="144"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="327"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="151"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="318"/>
         <source>Share your desktop</source>
         <translation>Compartilhar area de trabalho</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="148"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="155"/>
         <source>Send a screenshot</source>
         <translation>Enviar uma Print da tela</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="306"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="297"/>
         <source>Write a message to all user</source>
         <translation>Escrever uma Msg para Todos os Usuarios</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="308"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="299"/>
         <source>Write a message to %1</source>
         <translation>Escrever uma mensagem para %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="323"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="314"/>
         <source>Your desktop is shared with %1</source>
         <translation>Sua Tela esta Compartilhada com %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="570"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="573"/>
         <source>only the last %1 messages are shown</source>
         <translation>somente as últimas%1 mensagens são mostradas</translation>
     </message>
@@ -1198,158 +1223,162 @@
         <translation type="obsolete">Selecione um arquivo para salvar o chat.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="810"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="813"/>
         <source>%1: save completed.</source>
         <translation>%1: Arquivo gravado.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="764"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="810"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="767"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="813"/>
         <source>Ok</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="112"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="119"/>
         <source>Select chat default text color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="115"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="122"/>
         <source>Select chat system text color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="508"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="511"/>
         <source>The loading of saved messages has not yet been completed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="503"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="506"/>
         <source>Loading of saved messages...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="205"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="202"/>
         <source>Close</source>
         <translation type="unfinished">Fechar</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="206"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="203"/>
         <source>Close chat window on sending message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="210"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="207"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="211"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="208"/>
         <source>Minimize chat window on sending message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="128"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="135"/>
         <source>Clear system messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="178"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="330"/>
         <source>Record voice message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="184"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="262"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="328"/>
         <source>File transfer must be enabled to send voice messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="344"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="343"/>
         <source>Select all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="348"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="347"/>
         <source>Quote selected text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="572"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="463"/>
+        <source>Opening voice message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiChat.cpp" line="575"/>
         <source>maximum number of messages to show reached</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="764"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="767"/>
         <source>You must close and reopen this window to see the changes applied.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="791"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="794"/>
         <source>Please select a file to save all the messages of the chat.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="857"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="860"/>
         <source>Unable to save temporary file: %1</source>
         <translation>Impossível salvar arquivo temporário: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="906"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="909"/>
         <source>file</source>
         <translation>Arquivo</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="906"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="909"/>
         <source>files</source>
         <translation>arquvos</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="907"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1196"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1220"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="910"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1199"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1223"/>
         <source>Yes</source>
         <translation>Sim</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="907"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1196"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1220"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="910"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1199"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1223"/>
         <source>No</source>
         <translation>Não</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="920"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="923"/>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
         <translation>Qt library para este OSl não suporta &quot; Drag and Drop&quot;  para seus arquivos. Selecione novamente o arquivo a enviar.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1004"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1007"/>
         <source>Use key Return to send message</source>
         <translation>Use a Tecla ENTER para enviar a mensagem</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1006"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1009"/>
         <source>Use key Return to make a carriage return</source>
         <translation>Utilize a tecla ENTER para mudar de linha</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1196"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1199"/>
         <source>Do you want to restore the default font?</source>
         <translation>Você quer restaurar a fonte padrão?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1204"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1207"/>
         <source>Ready.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1220"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1223"/>
         <source>Do you want to send a screenshot?</source>
         <translation>Você quer enviar uma Print da tela?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1220"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1223"/>
         <source>Yes and hide this chat</source>
         <translation>Sim e esconda este chat</translation>
     </message>
@@ -1442,7 +1471,7 @@
         <translation>Click para enviar mensagem ou Tecle ENTER</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.ui" line="156"/>
+        <location filename="../src/desktop/GuiChat.ui" line="191"/>
         <source>close</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2197,10 +2226,10 @@ Selecione um nome diferente.</translation>
         <translation>Mostrar Barra Principal</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3761"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3762"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3763"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3764"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3770"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3771"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3772"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3773"/>
         <source>offline</source>
         <translation>Offline</translation>
     </message>
@@ -2216,17 +2245,17 @@ Selecione um nome diferente.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="2681"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2743"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2960"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3132"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3163"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3325"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3548"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3572"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3629"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3923"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4081"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4439"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4811"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4957"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3141"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3172"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3334"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3557"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3581"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3638"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3932"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4090"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4448"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4820"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4966"/>
         <source>Yes</source>
         <translation>Sim</translation>
     </message>
@@ -2242,17 +2271,17 @@ Selecione um nome diferente.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="2681"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2743"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2960"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3132"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3163"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3325"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3548"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3572"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3629"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3923"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4081"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4439"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4811"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4957"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3141"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3172"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3334"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3557"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3581"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3638"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3932"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4090"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4448"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4820"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4966"/>
         <source>No</source>
         <translation>Não</translation>
     </message>
@@ -2345,27 +2374,27 @@ Selecione um nome diferente.</translation>
         <translation>Habilitar trasnferência de Arquivos</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3628"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3637"/>
         <source>Do you want to leave the chat with %1?</source>
         <translation>Você quer sair do bate-papo com%1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3634"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3643"/>
         <source>Unable to leave the chat with %1.</source>
         <translation>Não é possível deixar o bate-papo com%1.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3740"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3749"/>
         <source>Use HTML tags</source>
         <translation>Utilizar HTML tags</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3745"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3754"/>
         <source>Use clickable links</source>
         <translation>Utilizar Links</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3718"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3727"/>
         <source>Show messages grouped by user</source>
         <translation>Mostrar mensagens agrupadas por usuário</translation>
     </message>
@@ -2461,7 +2490,7 @@ Selecione um nome diferente.</translation>
         <translation>Sempre sobrepor na tela</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3708"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3717"/>
         <source>Show the timestamp</source>
         <translation>Mostrar a Hora</translation>
     </message>
@@ -2501,7 +2530,7 @@ Selecione um nome diferente.</translation>
         <translation>Abri pasta de dados</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3696"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3705"/>
         <source>Use RTL mode to show text</source>
         <translation>Use o modo RTL para mostrar o texto</translation>
     </message>
@@ -2595,38 +2624,38 @@ Selecione um nome diferente.</translation>
         <translation type="obsolete">Like %1 on Facebook</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3506"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3529"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3515"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3538"/>
         <source>%1 removed</source>
         <translation>%1 removido</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3566"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3575"/>
         <source>Do you want to clear messages with %1?</source>
         <translation>Deseja limpar mensagens com%1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3703"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3712"/>
         <source>Show the chat in compact view mode</source>
         <translation>Mostrar o bate-papo no modo de exibição compacta</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3922"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3931"/>
         <source>Do you want to delete user %1?</source>
         <translation>Deseja excluir o usuário%1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4080"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4089"/>
         <source>Do you want to clear all saved status descriptions?</source>
         <translation>Deseja limpar todas as descrições de status salvas?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4505"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4514"/>
         <source>New file from %1</source>
         <translation>Novo arquivo de%1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4526"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4535"/>
         <source>%1 is buzzing you!</source>
         <translation>%1 Eestá Chamando no Chat!</translation>
     </message>
@@ -3232,213 +3261,218 @@ Selecione um nome diferente.</translation>
         <translation>Seu nome não é alterado. Você quer continuar?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3118"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3106"/>
         <source>Unable to open voice message %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3131"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3130"/>
+        <source>%1: no such file or directory.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="3140"/>
         <source>Do you want to open the file %1?</source>
         <translation>Você deseja abrir o arquivo%1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3177"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3186"/>
         <source>Sound module is not working</source>
         <translation>Modulo de som não esta Funcionando</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3200"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3209"/>
         <source>You are not allowed create groups. The option has been disabled by your system administrator.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3221"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3230"/>
         <source>There is a chat with the same members: %1.</source>
         <translation>Há um bate-papo com os mesmos membros:%1.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3243"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3252"/>
         <source>You are not allowed modify groups. The option has been disabled by your system administrator.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3325"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3334"/>
         <source>Do you want to delete saved chat with %1?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3358"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3367"/>
         <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br&gt;What do you want to do with the selected saved text?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3466"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3475"/>
         <source>Your status description</source>
         <translation>Sua descrição de Status</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3713"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3722"/>
         <source>Show the time with the AM/PM notation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3728"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3737"/>
         <source>Show username&apos;s color</source>
         <translation>Mostrar Nome Colorido</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3768"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3777"/>
         <source>none</source>
         <translation>nehnum</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4288"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4349"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4297"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4358"/>
         <source>You have new message</source>
         <translation>Você Tem Uma Nova mensagem</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4381"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4390"/>
         <source>Save all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4381"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4390"/>
         <source>Save only geometry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4397"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4406"/>
         <source>Window geometry saved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4439"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4448"/>
         <source>Do you really want to reset window&apos;s geometry?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4454"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4463"/>
         <source>Geometry of all windows has been reset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4680"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4689"/>
         <source>You are using the default icons.</source>
         <translation>Você Esta Usando icons padrão.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4686"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4695"/>
         <source>You are using custom icons in folder %1.</source>
         <translation>Você está usando ícones personalizados na pasta%1.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4687"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4696"/>
         <source>Restore default icons</source>
         <translation>Restaura icons Padrão</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4751"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4760"/>
         <source>Restart connection now</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4751"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4760"/>
         <source>Restart later manually</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4811"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4820"/>
         <source>Do you really want to restore the colors to the default ones?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4956"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4965"/>
         <source>Do you really want to share your desktop with %1?</source>
         <translation>Você realmente quer compartilhar sua área de trabalho com%1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4681"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4687"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4690"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4696"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4705"/>
         <source>Select the icon folder</source>
         <translation>Selecione Pasta de icon</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4717"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4726"/>
         <source>You are using the default emoticons.</source>
         <translation>Você esta usando emoticons padrão.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4718"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4724"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4727"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4733"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4742"/>
         <source>Select the emoticon folder</source>
         <translation>Selecione a pasta de emoticon</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4723"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4732"/>
         <source>You are using custom emoticons in folder %1.</source>
         <translation>Voce esta usando cistomizado emoticons da pasta %1.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4724"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4733"/>
         <source>Restore default emoticons</source>
         <translation>Restaurar emoticons Padrão</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4750"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4759"/>
         <source>You have to restart your connection to apply changes.</source>
         <translation>Você precisa reiniciar o Chat  para aplicar as alterações.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="787"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3223"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3232"/>
         <source>Create new group chat</source>
         <translation>Criar Novo Grupo no Chat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4034"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4043"/>
         <source>at lunch</source>
         <translation>no almoço</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4043"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4052"/>
         <source>in a meeting</source>
         <translation>em uma reunião</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4224"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4233"/>
         <source>Select your dictionary path</source>
         <translation>Selecione o caminho do dicionário</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4232"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4241"/>
         <source>Dictionary selected: %1</source>
         <translation>Dicionário selecionado: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4234"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4243"/>
         <source>Unable to set dictionary: %1</source>
         <translation>Impossível anexar dicionario: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4379"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4388"/>
         <source>Qt libraries have a bug on saving the window&apos;s state.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4380"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4389"/>
         <source>If you have layout problem please save only geometry.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4399"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4408"/>
         <source>Window geometry and state saved</source>
         <translation>Geometria e estado da janela salvos</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4668"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4677"/>
         <source>%1 blocked chats</source>
         <translation>%1 Chat Bbloqueados</translation>
     </message>
@@ -3469,8 +3503,8 @@ Selecione um nome diferente.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1505"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3138"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3382"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3147"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3391"/>
         <source>Unable to open %1</source>
         <translation>Impossível abrir %1</translation>
     </message>
@@ -3608,12 +3642,13 @@ Selecione um nome diferente.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="2166"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2795"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3075"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3118"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3138"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3200"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3243"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3382"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4759"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3106"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3130"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3147"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3209"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3252"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3391"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4768"/>
         <source>Ok</source>
         <translation>OK</translation>
     </message>
@@ -3671,38 +3706,38 @@ Selecione um nome diferente.</translation>
         <translation>Baixando %1 Arquivos</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3151"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3160"/>
         <source>Sound files (*.wav)</source>
         <translation>Arquicos de Som (*wav)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3163"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3172"/>
         <source>Sound is not enabled on a new message. Do you want to enable it?</source>
         <translation>Som está desabilitado para novas mensagens. Deseja habilitar ?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3182"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3191"/>
         <source>Sound file not found</source>
         <translation>Arquivo de som não encontrado</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3173"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3182"/>
         <source>The default BEEP will be used</source>
         <translation>Padrão BEEP será usado</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3268"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3277"/>
         <source>Now %1 will start on windows boot.</source>
         <translation>Agora %1 será iniciado com o Wndows.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3276"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3283"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3285"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3292"/>
         <source>Unable to add this key in the registry: permission denied.</source>
         <translation>Impossível adicionar esta chave no registro: permissão negada.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3281"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3290"/>
         <source>%1 will not start on windows boot.</source>
         <translation>%1 não será iniciado com o Windows.</translation>
     </message>
@@ -3711,7 +3746,7 @@ Selecione um nome diferente.</translation>
         <translation type="obsolete">Deseja excluir este bate-papo salvo?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3349"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3358"/>
         <source>Please select a chat you would like to link the saved text.</source>
         <translation>Por favor, selecione um chat que você gostaria de vincular o texto salvo.</translation>
     </message>
@@ -3721,7 +3756,7 @@ Selecione um nome diferente.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1143"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3360"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3369"/>
         <source>Overwrite</source>
         <translation>Sobrescrever</translation>
     </message>
@@ -3793,27 +3828,27 @@ Selecione um nome diferente.</translation>
         <translation> </translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3289"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3298"/>
         <source>Starting</source>
         <translation>Iniciando</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3360"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3369"/>
         <source>Add in the head</source>
         <translation>Adicionar em cabeçalho</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3547"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3556"/>
         <source>All the members of this chat are not online. The changes may not be permanent. Do you wish to continue?</source>
         <translation>Nem todos os membros deste chat estão Online. Mudanças podem ser perdidas. Continua?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3723"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3732"/>
         <source>Show your name instead of &apos;You&apos;</source>
         <translation>Mostre seu nome em vez de &quot;você&quot;</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3735"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3744"/>
         <source>Show emoticons</source>
         <translation>Mostrar Emoticons</translation>
     </message>
@@ -3823,38 +3858,38 @@ Selecione um nome diferente.</translation>
         <translation>Use Fonte Emoticons</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3752"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3761"/>
         <source>Restore default font</source>
         <translation>Restaurar para Font Padrão</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3766"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3775"/>
         <source>inactive</source>
         <translation>Inativo</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3796"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="5003"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3805"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="5012"/>
         <source>disabled</source>
         <translation>Desabilitado</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3806"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3815"/>
         <source>active</source>
         <translation>Ativo</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3883"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3892"/>
         <source>%1 is online</source>
         <translation>%1 está Online</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3885"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3894"/>
         <source>%1 is offline</source>
         <translation>%1 está Offline</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3897"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3906"/>
         <source>Please select the new size of the user picture</source>
         <translation>Selecione novo tamanho da foto</translation>
     </message>
@@ -3862,13 +3897,13 @@ Selecione um nome diferente.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="1628"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2166"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2717"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3223"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3360"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4381"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4681"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4687"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4718"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4724"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3232"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3369"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4390"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4690"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4696"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4727"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4733"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
@@ -3908,30 +3943,30 @@ Selecione um nome diferente.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3562"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3571"/>
         <source>Chat with %1 is empty.</source>
         <translation>Chat com %1 está vazio.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3569"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3627"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3578"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3636"/>
         <source>Yes and delete history</source>
         <translation>Sim, e Apague o Hostórico</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3661"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3670"/>
         <source>Default language is restored.</source>
         <translation>Idioma padrão restaurado.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3663"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3672"/>
         <source>New language &apos;%1&apos; is selected.</source>
         <translation>Novo idioma %1 selecionado.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2844"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3666"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4759"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3675"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4768"/>
         <source>You must restart %1 to apply these changes.</source>
         <translation>Reiniciar%1 para aplicar as alterações.</translation>
     </message>
@@ -6023,7 +6058,7 @@ Selecione um nome diferente.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatItem.cpp" line="73"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3559"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3568"/>
         <source>All users</source>
         <translation>Todos usuários</translation>
     </message>

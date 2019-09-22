@@ -183,19 +183,23 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
           qWarning() << "Unable to show image preview of the file" << img_preview_path;
       }
 
-      if( AudioManager::isDefaultAudioContainerFile( fi ) )
+      if( fi.isVoiceMessage() )
       {
         QString sys_txt = tr( "%1 sent a voice message." ).arg( Bee::replaceHtmlSpecialCharacters( fi.isDownload() ? u.name() : Settings::instance().localUser().name() ) );
-        QString html_audio_icon = IconManager::instance().toHtml( "file-audio.png", "*v*" );
+        QString html_audio_icon = IconManager::instance().toHtml( "voice-message.png", "*v*" );
+#ifdef BEEBEEP_USE_VOICE_CHAT
+        file_url.setScheme( FileInfo::urlSchemeVoiceMessage() );
+#endif
         sys_msg_play_voice_chat = QString( "%1 %2 <a href=\"%3\">%4</a>." ).arg( html_audio_icon, sys_txt, file_url.toString(), tr( "Listen" ) );
         chat_voice_msg_html = QString( "[ <a href=\"%1\">%2</a> ] %3" ).arg( file_url.toString(), tr( "voice message" ), html_audio_icon );
+        // New feature: adding save as to avoid cache deleted ... select voice message folder?
       }
       else
       {
         QString s_open = tr( "Open" );
         sys_msg_open_file = QString( "%1" ).arg( icon_html );
         sys_msg_open_file += QString( " %1 <a href=\"%2\">%3</a>." ).arg( s_open, file_url.toString(), fi.name() );
-        file_url.setScheme( QLatin1String( "beeshowfileinfolder" ) );
+        file_url.setScheme( FileInfo::urlSchemeShowFileInFolder() );
         sys_msg_open_file += QString( " %1 <a href=\"%2\">%3</a>." ).arg( s_open, file_url.toString(), tr( "folder" ) );
       }
     }
@@ -301,7 +305,7 @@ bool Core::sendFile( VNumber user_id, const QString& file_path, const QString& s
     return false;
   }
 
-  FileInfo fi = mp_fileTransfer->addFile( file, share_folder, to_share_box, chat_selected.privateId() );
+  FileInfo fi = mp_fileTransfer->addFile( file, share_folder, to_share_box, chat_selected.privateId(), FileInfo::File );
 
 #ifdef BEEBEEP_DEBUG
   qDebug() << "File path" << fi.path() << "is added to file transfer list";
@@ -445,7 +449,7 @@ void Core::addPathToShare( const QString& share_path )
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Adding to file sharing" << share_path;
 #endif
-    FileInfo file_info = Protocol::instance().fileInfo( fi, "", false, "" );
+    FileInfo file_info = Protocol::instance().fileInfo( fi, "", false, "", FileInfo::File );
     FileShare::instance().addToLocal( file_info );
 
     if( m_shareListToBuild > 0 )

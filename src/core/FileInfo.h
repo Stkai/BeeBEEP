@@ -31,6 +31,10 @@ class FileInfo
 {
 public:
   enum TransferType { Upload, Download };
+  enum ContentType { File, VoiceMessage, NumContentTypes };
+
+  static QString urlSchemeShowFileInFolder() { return QLatin1String( "beeshowfileinfolder" ); }
+  static QString urlSchemeVoiceMessage() { return QLatin1String( "beevoicemessage" ); }
 
   FileInfo();
   FileInfo( VNumber, FileInfo::TransferType );
@@ -74,6 +78,9 @@ public:
   inline void setChatPrivateId( const QString& );
   inline const QString& mimeType() const;
   inline void setMimeType( const QString& );
+  inline ContentType contentType() const;
+  inline void setContentType( ContentType );
+  inline bool isVoiceMessage() const;
 
 private:
   TransferType m_transferType;
@@ -91,6 +98,7 @@ private:
   bool m_isInShareBox;
   QString m_chatPrivateId;
   QString m_mimeType;
+  ContentType m_contentType;
 
 };
 
@@ -134,5 +142,8 @@ inline const QString& FileInfo::chatPrivateId() const { return m_chatPrivateId; 
 inline void FileInfo::setChatPrivateId( const QString& new_value ) { m_chatPrivateId = new_value; }
 inline const QString& FileInfo::mimeType() const { return m_mimeType; }
 inline void FileInfo::setMimeType( const QString& new_value ) { m_mimeType = new_value; }
+inline FileInfo::ContentType FileInfo::contentType() const { return m_contentType; }
+inline void FileInfo::setContentType( ContentType new_value ) { m_contentType = new_value; }
+inline bool FileInfo::isVoiceMessage() const { return m_contentType == VoiceMessage; }
 
 #endif // BEEBEEP_FILEINFO_H

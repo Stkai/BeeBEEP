@@ -39,7 +39,7 @@ public:
   int countMessagesToSendToUserId( VNumber );
   int countMessagesToSendInChatId( VNumber );
 
-  void addMessageRecords( const QList<MessageRecord>& );
+  void addMessageRecord( const MessageRecord& );
 
   bool unsentMessagesCanBeSaved() const;
   bool saveUnsentMessages();

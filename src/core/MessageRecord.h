@@ -42,6 +42,7 @@ public:
   inline VNumber toUserId() const;
   inline VNumber chatId() const;
   inline const Message& message() const;
+  inline void setMessage( const Message& );
 
 private:
   VNumber m_toUserId;
@@ -56,5 +57,6 @@ inline bool MessageRecord::isValid() const { return m_toUserId != ID_INVALID && 
 inline VNumber MessageRecord::toUserId() const { return m_toUserId; }
 inline VNumber MessageRecord::chatId() const { return m_chatId; }
 inline const Message& MessageRecord::message() const { return m_message; }
+inline void MessageRecord::setMessage( const Message& new_value ) { m_message = new_value; }
 
 #endif // BEEBEEP_CHATMESSAGE_H

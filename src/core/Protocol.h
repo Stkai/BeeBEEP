@@ -74,7 +74,7 @@ public:
   Message fileInfoToMessage( const FileInfo& );
   Message fileInfoRefusedToMessage( const FileInfo& );
   FileInfo fileInfoFromMessage( const Message& );
-  FileInfo fileInfo( const QFileInfo&, const QString& share_folder, bool to_share_box, const QString& chat_private_id );
+  FileInfo fileInfo( const QFileInfo&, const QString& share_folder, bool to_share_box, const QString& chat_private_id, FileInfo::ContentType );
   QString fileInfoHash( const QFileInfo& ) const;
   QString fileInfoHashTmp( VNumber, const QString&, FileSizeType ) const;
   ChatMessageData dataFromChatMessage( const Message& ) const;
@@ -139,6 +139,10 @@ public:
   Message readImageFromDesktopShared() const;
   Message shareDesktopImageDataToMessage( const ShareDesktopData& ) const;
   ShareDesktopData imageDataFromShareDesktopMessage( const Message& ) const;
+#endif
+
+#ifdef BEEBEEP_USE_VOICE_CHAT
+
 #endif
 
   inline VNumber currentId() const;

@@ -174,12 +174,9 @@ bool MessageManager::saveUnsentMessages()
   return true;
 }
 
-void MessageManager::addMessageRecords( const QList<MessageRecord>& mr_list )
+void MessageManager::addMessageRecord( const MessageRecord& mr )
 {
-  if( m_messagesToSend.isEmpty() )
-    m_messagesToSend = mr_list;
-  else
-    m_messagesToSend.append( mr_list );
+  m_messagesToSend.append( mr );
 }
 
 QString MessageManager::generateSaveMessagesAuthCode() const

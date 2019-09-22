@@ -44,9 +44,10 @@ public:
   inline bool isActive() const;
   inline bool hasActivePeers() const;
 
-  FileInfo addFile( const QFileInfo&, const QString& share_folder, bool to_share_box, const QString& chat_private_id );
+  FileInfo addFile( const QFileInfo&, const QString& share_folder, bool to_share_box, const QString& chat_private_id, FileInfo::ContentType );
+  FileInfo addFile( const FileInfo& );
   void addFileInfoList( const QList<FileInfo>& );
-  void removeFile( const QFileInfo& );
+  void removeFile( const QString& file_path );
 
   void downloadFile( VNumber from_user_id, const FileInfo& );
   bool cancelTransfer( VNumber peer_id );

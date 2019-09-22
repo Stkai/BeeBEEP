@@ -46,7 +46,7 @@ void VoicePlayer::onError( QMediaPlayer::Error error_code )
 
 bool VoicePlayer::playFile( const QString& file_path )
 {
-  if( !mp_voicePlayer )
+  if( !canPlay() )
     return false;
 
   if( isPlaying() )

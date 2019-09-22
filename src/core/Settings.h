@@ -1228,7 +1228,7 @@ inline bool Settings::allowEditNickname() const { return m_allowEditNickname; }
 inline int Settings::chatActiveWindowOpacityLevel() const { return m_chatActiveWindowOpacityLevel; }
 inline void Settings::setChatInactiveWindowOpacityLevel( int new_value ) { m_chatInactiveWindowOpacityLevel = new_value; }
 inline int Settings::chatInactiveWindowOpacityLevel() const { return m_chatInactiveWindowOpacityLevel; }
-inline int Settings::chatInactiveWindowDefaultOpacityLevel() const { return 75; }
+inline int Settings::chatInactiveWindowDefaultOpacityLevel() const { return 85; }
 inline void Settings::setChatBackgroundColor( const QString& new_value ) { m_chatBackgroundColor = new_value; }
 inline const QString& Settings::chatBackgroundColor() const { return m_chatBackgroundColor; }
 inline void Settings::setChatDefaultTextColor( const QString& new_value ) { m_chatDefaultTextColor = new_value; }

@@ -179,5 +179,6 @@
         <file>images/record.png</file>
         <file>images/pause.png</file>
         <file>images/microphone.png</file>
+        <file>images/voice-message.png</file>
     </qresource>
 </RCC>

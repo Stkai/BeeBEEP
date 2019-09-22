@@ -586,6 +586,26 @@
         <source>voice message</source>
         <translation>messaggio vocale</translation>
     </message>
+    <message>
+        <source>%1 Unable to send voice message. File transfer is disabled.</source>
+        <translation>%1 Impossibile inviare il messaggio vocale. Il trasferimento dei file è disabilitato.</translation>
+    </message>
+    <message>
+        <source>%1 %2: voice message not found.</source>
+        <translation>%1 %2: il messaggio vocale non esiste più.</translation>
+    </message>
+    <message>
+        <source>The voice message will be delivered to %1.</source>
+        <translation>Il messaggio vocale sarà recapitato a %1.</translation>
+    </message>
+    <message>
+        <source>The file will be delivered to %1.</source>
+        <translation>Il file sarà inviato a %1.</translation>
+    </message>
+    <message>
+        <source>%1 %2 is sending to you the voice message: %3.</source>
+        <translation>%1 %2 ti sta inviando il messaggio vocale: %3.</translation>
+    </message>
 </context>
 <context>
     <name>Date</name>
@@ -1126,6 +1146,10 @@
     <message>
         <source>File transfer must be enabled to send voice messages</source>
         <translation>Il trasferimento dei file deve essere abilitato per inviare dei messaggi vocali</translation>
+    </message>
+    <message>
+        <source>Opening voice message</source>
+        <translation>Sto aprendo il messaggio vocale</translation>
     </message>
 </context>
 <context>
@@ -3229,6 +3253,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Use the integrated voice message player</source>
         <translation>Usa il riproduttore integrato dei messaggi vocali</translation>
+    </message>
+    <message>
+        <source>%1: no such file or directory.</source>
+        <translation>%1: nessun file o cartella con questo nome.</translation>
     </message>
 </context>
 <context>

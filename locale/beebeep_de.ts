@@ -566,6 +566,26 @@
         <source>voice message</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>%1 Unable to send voice message. File transfer is disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 %2: voice message not found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The voice message will be delivered to %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The file will be delivered to %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 %2 is sending to you the voice message: %3.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Date</name>
@@ -1093,6 +1113,10 @@
     </message>
     <message>
         <source>File transfer must be enabled to send voice messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opening voice message</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3108,6 +3132,10 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Use the integrated voice message player</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1: no such file or directory.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

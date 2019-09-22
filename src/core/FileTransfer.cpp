@@ -131,9 +131,8 @@ FileInfo FileTransfer::fileInfo( const QString& file_absolute_path, const QStrin
   return FileInfo();
 }
 
-void FileTransfer::removeFile( const QFileInfo& fi )
+void FileTransfer::removeFile( const QString& file_path )
 {
-  QString file_path = fi.absoluteFilePath();
   QList<FileInfo>::iterator it = m_files.begin();
   while( it != m_files.end() )
   {
@@ -144,7 +143,7 @@ void FileTransfer::removeFile( const QFileInfo& fi )
   }
 }
 
-FileInfo FileTransfer::addFile( const QFileInfo& fi, const QString& share_folder, bool to_share_box, const QString& chat_private_id )
+FileInfo FileTransfer::addFile( const QFileInfo& fi, const QString& share_folder, bool to_share_box, const QString& chat_private_id, FileInfo::ContentType content_type )
 {
   FileInfo file_info = fileInfo( fi.absoluteFilePath(), chat_private_id );
   if( file_info.isValid() )
@@ -153,14 +152,22 @@ FileInfo FileTransfer::addFile( const QFileInfo& fi, const QString& share_folder
     if( file_info.fileHash() == file_hash )
       return file_info;
     else
-      removeFile( fi );
+      removeFile( fi.absoluteFilePath() );
   }
 
-  file_info = Protocol::instance().fileInfo( fi, share_folder, to_share_box, chat_private_id );
+  file_info = Protocol::instance().fileInfo( fi, share_folder, to_share_box, chat_private_id, content_type );
   file_info.setHostAddress( Settings::instance().localUser().networkAddress().hostAddress() );
   file_info.setHostPort( serverPort() );
   m_files.append( file_info );
   return file_info;
+}
+
+FileInfo FileTransfer::addFile( const FileInfo& fi )
+{
+  QFileInfo qfi( fi.path() );
+  if( !qfi.exists() )
+    return FileInfo();
+  return addFile( qfi, fi.shareFolder(), fi.isInShareBox(), fi.chatPrivateId(), fi.contentType() );
 }
 
 void FileTransfer::addFileInfoList( const QList<FileInfo>& file_info_list )
@@ -281,7 +288,7 @@ void FileTransfer::checkUploadRequest( const FileInfo& file_info_to_check )
         upload_peer->cancelTransfer();
       }
 
-      file_info = Protocol::instance().fileInfo( share_box_file_info, "", true, "" );
+      file_info = Protocol::instance().fileInfo( share_box_file_info, "", true, "", FileInfo::File );
     }
   }
   else

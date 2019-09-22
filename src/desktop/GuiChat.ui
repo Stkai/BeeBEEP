@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>590</width>
-    <height>380</height>
+    <width>522</width>
+    <height>337</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -90,7 +90,7 @@
     <property name="verticalSpacing">
      <number>0</number>
     </property>
-    <item row="0" column="0" rowspan="2">
+    <item row="0" column="0" rowspan="3">
      <widget class="GuiMessageEdit" name="mp_teMessage">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
@@ -112,7 +112,7 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="1">
+    <item row="1" column="1">
      <widget class="QPushButton" name="mp_pbSend">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -122,14 +122,14 @@
       </property>
       <property name="minimumSize">
        <size>
-        <width>50</width>
-        <height>34</height>
+        <width>38</width>
+        <height>38</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>50</width>
-        <height>34</height>
+        <width>38</width>
+        <height>38</height>
        </size>
       </property>
       <property name="toolTip">
@@ -150,7 +150,42 @@
       </property>
      </widget>
     </item>
-    <item row="1" column="1">
+    <item row="1" column="2">
+     <widget class="QPushButton" name="mp_pbRecordVoiceMessage">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>38</width>
+        <height>38</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>38</width>
+        <height>38</height>
+       </size>
+      </property>
+      <property name="icon">
+       <iconset resource="../beebeep.qrc">
+        <normaloff>:/images/microphone.png</normaloff>:/images/microphone.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>32</width>
+        <height>32</height>
+       </size>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1" colspan="2">
      <widget class="QCheckBox" name="mp_cbSendAndClose">
       <property name="text">
        <string>close</string>
@@ -170,6 +205,7 @@
  <tabstops>
   <tabstop>mp_teMessage</tabstop>
   <tabstop>mp_pbSend</tabstop>
+  <tabstop>mp_pbRecordVoiceMessage</tabstop>
   <tabstop>mp_cbSendAndClose</tabstop>
   <tabstop>mp_teChat</tabstop>
  </tabstops>

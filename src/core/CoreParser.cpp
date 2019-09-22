@@ -183,7 +183,11 @@ void Core::parseFileMessage( const User& u, const Message& m )
 
   fi.setHostAddress( u.networkAddress().hostAddress() );
 
-  QString sys_msg = tr( "%1 %2 is sending to you the file: %3." ).arg( IconManager::instance().toHtml( "download.png", "*F*" ), Bee::replaceHtmlSpecialCharacters( u.name() ), fi.name() );
+  QString sys_msg;
+  if( m.hasFlag( Message::VoiceMessage ) )
+    sys_msg = tr( "%1 %2 is sending to you the voice message: %3." ).arg( IconManager::instance().toHtml( "download.png", "*F*" ), Bee::replaceHtmlSpecialCharacters( u.name() ), fi.name() );
+  else
+    sys_msg = tr( "%1 %2 is sending to you the file: %3." ).arg( IconManager::instance().toHtml( "download.png", "*F*" ), Bee::replaceHtmlSpecialCharacters( u.name() ), fi.name() );
   dispatchSystemMessage( chat_to_show_message.id(), u.id(), sys_msg, chat_to_show_message.isValid() ? DispatchToChat : DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
 
   if( fi.isInShareBox() )
@@ -204,6 +208,12 @@ void Core::parseFileMessage( const User& u, const Message& m )
     qDebug() << "BeeBOX downloads from user" << qPrintable( u.path() ) << "the file" << qPrintable( fi.name() ) << "in path" << qPrintable( to_path );
     fi.setPath( to_path );
 
+    mp_fileTransfer->downloadFile( u.id(), fi );
+  }
+  else if( fi.isVoiceMessage() )
+  {
+    QString file_path = Bee::uniqueFilePath( QString( "%1/%2" ).arg( Settings::instance().cacheFolder(), fi.name() ), false );
+    fi.setPath( file_path );
     mp_fileTransfer->downloadFile( u.id(), fi );
   }
   else

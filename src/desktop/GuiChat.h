@@ -170,9 +170,6 @@ private:
   QAction* mp_actShareDesktop;
   QAction* mp_actScreenshot;
 #endif
-#ifdef BEEBEEP_USE_VOICE_CHAT
-  QAction* mp_actRecordVoiceMessage;
-#endif
 
   QSplitter* mp_splitter;
 

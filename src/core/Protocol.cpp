@@ -1275,8 +1275,11 @@ Message Protocol::fileInfoToMessage( const FileInfo& fi )
   else
     sl << QString( "" );
   sl << fi.mimeType();
+  sl << QString::number( fi.contentType() );
   m.setData( sl.join( DATA_FIELD_SEPARATOR ) );
   m.addFlag( Message::Private );
+  if( fi.contentType() == FileInfo::VoiceMessage )
+    m.addFlag( Message::VoiceMessage );
   return m;
 }
 
@@ -1287,6 +1290,7 @@ FileInfo Protocol::fileInfoFromMessage( const Message& m )
   QStringList sl = m.data().split( DATA_FIELD_SEPARATOR );
   if( sl.size() < 4 )
     return fi;
+  bool ok = false;
   fi.setHostPort( static_cast<quint16>(sl.takeFirst().toUInt()) );
   fi.setSize( Bee::qVariantToVNumber( sl.takeFirst() ) );
   fi.setId( Bee::qVariantToVNumber( sl.takeFirst() ) );
@@ -1319,10 +1323,17 @@ FileInfo Protocol::fileInfoFromMessage( const Message& m )
   if( !sl.isEmpty() )
     fi.setMimeType( sl.takeFirst() );
 
+  if( !sl.isEmpty() )
+  {
+    int content_type = sl.takeFirst().toInt( &ok );
+    if( ok && content_type >= 0 && content_type < FileInfo::NumContentTypes )
+      fi.setContentType( static_cast<FileInfo::ContentType>( content_type ) );
+  }
+
   return fi;
 }
 
-FileInfo Protocol::fileInfo( const QFileInfo& fi, const QString& share_folder, bool to_share_box, const QString& chat_private_id )
+FileInfo Protocol::fileInfo( const QFileInfo& fi, const QString& share_folder, bool to_share_box, const QString& chat_private_id, FileInfo::ContentType content_type )
 {
   FileInfo file_info = FileInfo( newId(), FileInfo::Upload );
   file_info.setName( fi.fileName() );
@@ -1363,6 +1374,8 @@ FileInfo Protocol::fileInfo( const QFileInfo& fi, const QString& share_folder, b
   QMimeDatabase mime_db;
   file_info.setMimeType( mime_db.mimeTypeForFile( fi ).name() );
 #endif
+
+  file_info.setContentType( content_type );
 
   return file_info;
 }
@@ -1870,7 +1883,7 @@ QString Protocol::fileInfoHash( const QFileInfo& file_info ) const
   sl << file_info.fileName();
   sl << QString::number( file_info.size() );
   sl << file_info.lastModified().toString( "dd.MM.yyyy-hh:mm:ss" );
-  return Settings::instance().simpleHash( sl.join( QString::number( Random::d100() ) ) );
+  return Settings::instance().simpleHash( sl.join( "-" ) );
 }
 
 QString Protocol::fileInfoHashTmp( VNumber file_info_id, const QString& file_info_name, FileSizeType file_info_size ) const
@@ -1879,7 +1892,7 @@ QString Protocol::fileInfoHashTmp( VNumber file_info_id, const QString& file_inf
   sl << QString::number( file_info_id );
   sl << file_info_name;
   sl << QString::number( file_info_size );
-  return Settings::instance().simpleHash( sl.join( QString::number( Random::d100() ) ) );
+  return Settings::instance().simpleHash( sl.join( "-" ) );
 }
 
 QString Protocol::newMd5Id()

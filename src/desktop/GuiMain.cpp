@@ -1100,7 +1100,7 @@ void GuiMain::createMenus()
 
 #ifdef BEEBEEP_USE_VOICE_CHAT
   QMenu* menu_voice_message = new QMenu( tr( "Voice message" ), this );
-  menu_voice_message->setIcon( IconManager::instance().icon( "file-audio.png" ) );
+  menu_voice_message->setIcon( IconManager::instance().icon( "microphone.png" ) );
   menu_voice_message->setDisabled( Settings::instance().disableVoiceMessages() );
   mp_menuSettings->addMenu( menu_voice_message );
   act = menu_voice_message->addAction( IconManager::instance().icon( "timer.png" ), tr( "Maximum duration" ) + QString( "..." ), this, SLOT( settingsChanged() ) );
@@ -3078,7 +3078,7 @@ void GuiMain::openUrl( const QUrl& file_url )
         qWarning() << "Invalid chat id" << chat_id << "found parsing open history request in GuiMain::openUrl(...)";
     }
   }
-  else if( file_url.scheme() == QLatin1String( "beeshowfileinfolder" ) )
+  else if( file_url.scheme() == FileInfo::urlSchemeShowFileInFolder() )
   {
     QUrl adj_file_url = file_url;
     adj_file_url.setScheme( QLatin1String( "file" ) );
@@ -3090,6 +3090,26 @@ void GuiMain::openUrl( const QUrl& file_url )
       return;
     }
   }
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  else if( file_url.scheme() == FileInfo::urlSchemeVoiceMessage() )
+  {
+    QUrl adj_file_url = file_url;
+    adj_file_url.setScheme( QLatin1String( "file" ) );
+    if( Settings::instance().useVoicePlayer() )
+    {
+      if( !mp_voicePlayer )
+        mp_voicePlayer = new VoicePlayer( this );
+      QString voice_file_path = Bee::convertToNativeFolderSeparator( adj_file_url.toLocalFile() );
+      if( !mp_voicePlayer->playFile( voice_file_path ) )
+      {
+        QMessageBox::information( qApp->activeWindow(), Settings::instance().programName(),
+                                  tr( "Unable to open voice message %1" ).arg( voice_file_path.isEmpty() ? adj_file_url.toString() : voice_file_path ), tr( "Ok" ) );
+      }
+    }
+    else
+      openUrl( adj_file_url );
+  }
+#endif
 #if QT_VERSION >= 0x040800
   else if( file_url.isLocalFile() )
 #else
@@ -3104,23 +3124,12 @@ void GuiMain::openUrl( const QUrl& file_url )
     }
 
     QFileInfo fi( file_path );
-#ifdef BEEBEEP_USE_VOICE_CHAT
-    if( Settings::instance().useVoicePlayer() && AudioManager::isDefaultAudioContainerFile( fi ) )
+    if( !fi.exists() )
     {
-      if( !mp_voicePlayer )
-        mp_voicePlayer = new VoicePlayer( this );
-
-      if( mp_voicePlayer->canPlay() )
-      {
-        if( !mp_voicePlayer->playFile( file_path ) )
-        {
-          QMessageBox::information( qApp->activeWindow(), Settings::instance().programName(),
-                                    tr( "Unable to open voice message %1" ).arg( file_path.isEmpty() ? file_url.toString() : file_path ), tr( "Ok" ) );
-        }
-        return;
-      }
+      QMessageBox::information( qApp->activeWindow(), Settings::instance().programName(),
+                                tr( "%1: no such file or directory." ).arg( file_path.isEmpty() ? file_url.toString() : file_path ), tr( "Ok" ) );
+      return;
     }
-#endif
 
 #ifdef Q_OS_MAC
     bool is_exe_file = fi.isBundle();
@@ -5040,6 +5049,6 @@ void GuiMain::loadStyle()
 #ifdef BEEBEEP_USE_VOICE_CHAT
 void GuiMain::sendVoiceMessageToChat( VNumber chat_id, const QString& file_path )
 {
-  sendFileFromChat( chat_id, file_path );
+  beeCore->sendVoiceMessageToChat( chat_id, file_path );
 }
 #endif

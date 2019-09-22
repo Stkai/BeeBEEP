@@ -237,7 +237,7 @@ void GuiTransferFile::checkItemDoubleClicked( QTreeWidgetItem* item, int )
   }
 
   QUrl url = QUrl::fromLocalFile( item->data( ColumnFile, FilePath ).toString() );
-  url.setScheme( "beeshowfileinfolder" );
+  url.setScheme( FileInfo::urlSchemeShowFileInFolder() );
   emit openFileCompleted( url );
 }
 

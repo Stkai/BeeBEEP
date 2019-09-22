@@ -21,8 +21,52 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "IconManager.h"
+#include "ChatManager.h"
 #include "Core.h"
+#include "Protocol.h"
+#include "Settings.h"
 
-#ifdef BEEBEEP_USE_VOICE_CHAT
+
+bool Core::sendVoiceMessageToChat( VNumber chat_id, const QString& file_path )
+{
+  QString icon_html = IconManager::instance().toHtml( "red-ball.png", "*F*" );
+
+  if( !Settings::instance().enableFileTransfer() )
+  {
+    dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "%1 Unable to send voice message. File transfer is disabled." ).arg( icon_html ),
+                           DispatchToChat, ChatMessage::FileTransfer );
+    return false;
+  }
+
+  if( !mp_fileTransfer->isActive() )
+  {
+    if( !startFileTransferServer() )
+      return false;
+  }
+
+  QFileInfo file( file_path );
+  if( !file.exists() )
+  {
+    dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "%1 %2: voice message not found." ).arg( icon_html, file_path ),
+                           DispatchToChat, ChatMessage::FileTransfer );
+    return false;
+  }
+
+  Chat c = ChatManager::instance().chat( chat_id );
+  if( !c.isValid() )
+  {
+    qWarning() << "Unable to send voice message because invalid chat found in Core::sendVoiceMessageToChat(...)";
+    return false;
+  }
+
+  FileInfo fi = mp_fileTransfer->addFile( file, "", false, c.privateId(), FileInfo::VoiceMessage );
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Voice message" << fi.path() << "is added to file transfer list";
 #endif
+  Message m = Protocol::instance().fileInfoToMessage( fi );
+  sendMessageToChat( c, m );
+  return true;
+}
+
 
