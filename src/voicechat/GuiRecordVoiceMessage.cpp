@@ -44,6 +44,13 @@ GuiRecordVoiceMessage::GuiRecordVoiceMessage( QWidget *parent )
   connect( mp_audioProbe, SIGNAL( audioBufferProbed( const QAudioBuffer& ) ), this, SLOT( processAudioBuffer( const QAudioBuffer& ) ) );
   mp_audioProbe->setSource( mp_audioRecorder );
 
+#ifdef BEEBEEP_DEBUG
+  QStringList supported_items = mp_audioRecorder->supportedAudioCodecs();
+  qDebug() << "QAudioRecorder supports these codecs:" << qPrintable( supported_items.join( ", " ) );
+  supported_items = mp_audioRecorder->supportedContainers();
+  qDebug() << "QAudioRecorder supports these containers:" << qPrintable( supported_items.join( ", " ) );
+#endif
+
   QString file_path_tmp = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().cacheFolder() ).arg( AudioManager::createDefaultAudioContainerFilename() ) );
   m_filePath = Bee::uniqueFilePath( file_path_tmp, false );
   if( !mp_audioRecorder->setOutputLocation( QUrl::fromLocalFile( m_filePath ) ) )
@@ -79,19 +86,28 @@ void GuiRecordVoiceMessage::sendVoiceMessage()
 {
   if( mp_audioRecorder->state() == QMediaRecorder::RecordingState || mp_audioRecorder->state() == QMediaRecorder::PausedState )
     mp_audioRecorder->stop();
-  QFileInfo file_info( m_filePath );
-  if( file_info.exists())
+  QUrl output_url = mp_audioRecorder->outputLocation();
+  QString output_file_path = Bee::convertToNativeFolderSeparator( output_url.toLocalFile() );
+  if( output_file_path != m_filePath )
   {
-    if( file_info.size() > 0 )
-    {
-      qDebug() << "Recorded voice message in file" << qPrintable( m_filePath );
-      accept();
-    }
-    else
-      reject();
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "QAudioRecorder old file path:" << qPrintable( m_filePath );
+    qDebug() << "QAudioRecorder old file path:" << qPrintable( output_file_path );
+#endif
+    m_filePath = output_file_path;
+  }
+
+  QFileInfo file_info( m_filePath );
+  if( file_info.exists() && file_info.size() > 0 )
+  {
+    qDebug() << "Recorded voice message in file" << qPrintable( m_filePath );
+    accept();
   }
   else
+  {
+    qWarning() << "File with voice message is empty or not exists:" << qPrintable( m_filePath );
     reject();
+  }
 }
 
 void GuiRecordVoiceMessage::updateRecorderProgress( qint64 duration_ms )
@@ -195,7 +211,7 @@ void GuiRecordVoiceMessage::onRecorderStateChanged( QMediaRecorder::State record
 void GuiRecordVoiceMessage::showRecorderError( QMediaRecorder::Error recorder_error )
 {
   QString s_error = mp_audioRecorder->errorString();
-  qWarning() << "VoiceRecorder exit with error code" << (int)recorder_error << "-" << qPrintable( s_error );
+  qWarning() << "VoiceRecorder exit with error code" << static_cast<int>(recorder_error) << "-" << qPrintable( s_error );
   mp_lStatus->setText( s_error );
   mp_pbSend->setEnabled( false );
 }
@@ -283,32 +299,33 @@ qreal GetAudioPeakValue( const QAudioFormat& format )
     break;
   case QAudioFormat::Float:
     {
-      if( format.sampleSize() != 32 ) // other sample formats are not supported
-        return qreal( 0 );
+    if( format.sampleSize() == 32 ) // other sample formats are not supported
       return qreal( 1.00003 );
+  }
+  break;
+  case QAudioFormat::SignedInt:
+  {
+      if( format.sampleSize() == 32 )
+        return qreal(INT_MAX);
+      if (format.sampleSize() == 16)
+        return qreal(SHRT_MAX);
+      if (format.sampleSize() == 8)
+        return qreal(CHAR_MAX);
     }
     break;
-    case QAudioFormat::SignedInt:
-      {
-        if( format.sampleSize() == 32 )
-            return qreal(INT_MAX);
-        if (format.sampleSize() == 16)
-            return qreal(SHRT_MAX);
-        if (format.sampleSize() == 8)
-            return qreal(CHAR_MAX);
-      }
-      break;
-    case QAudioFormat::UnSignedInt:
-        if (format.sampleSize() == 32)
-            return qreal(UINT_MAX);
-        if (format.sampleSize() == 16)
-            return qreal(USHRT_MAX);
-        if (format.sampleSize() == 8)
-            return qreal(UCHAR_MAX);
-        break;
+  case QAudioFormat::UnSignedInt:
+    {
+      if( format.sampleSize() == 32)
+        return qreal(UINT_MAX);
+      if( format.sampleSize() == 16)
+        return qreal(USHRT_MAX);
+      if( format.sampleSize() == 8)
+        return qreal(UCHAR_MAX);
     }
+    break;
+  }
 
-    return qreal(0);
+  return qreal(0);
 }
 
 template <class T>

@@ -215,7 +215,7 @@ Settings::Settings()
 
   m_saveMessagesTimestamp = QDateTime::currentDateTime();
 
-  m_voiceMessageMaxDuration = 5;
+  m_voiceMessageMaxDuration = 120;
   m_useVoicePlayer = true;
 
   resetAllColors();
