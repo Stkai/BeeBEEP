@@ -579,10 +579,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The file will be delivered to %1.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>%1 %2 is sending to you the voice message: %3.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3136,6 +3132,22 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>%1: no such file or directory.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>your IP address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>to search for users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>file transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>chat messages</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

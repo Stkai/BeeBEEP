@@ -459,9 +459,7 @@ void GuiChat::checkWriting()
 void GuiChat::checkAnchorClicked( const QUrl& url )
 {
   if( url.scheme() == FileInfo::urlSchemeVoiceMessage() )
-  {
-    emit showStatusMessageRequest( tr( "Opening voice message" ) + QString( "..." ), 4000 );
-  }
+    emit showStatusMessageRequest( tr( "Opening voice message" ) + QString( "..." ), 3000 );
   emit openUrl( url );
 }
 
@@ -509,7 +507,7 @@ void GuiChat::loadSavedMessages()
   if( !ChatManager::instance().isLoadHistoryCompleted() )
   {
     emit showStatusMessageRequest( tr( "The loading of saved messages has not yet been completed."), 2000 );
-    QTimer::singleShot( 0, this, SLOT( operationCompleted() ) );
+    QTimer::singleShot( 2000, this, SLOT( operationCompleted() ) );
     return;
   }
 

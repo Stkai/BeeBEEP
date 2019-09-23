@@ -520,6 +520,7 @@ void GuiFloatingChat::onTickEvent( int ticks )
 void GuiFloatingChat::showStatusMessage( const QString& msg, int timeout )
 {
   statusBar()->showMessage( msg, timeout );
+  QApplication::processEvents();
 }
 
 void GuiFloatingChat::loadSavedMessages()

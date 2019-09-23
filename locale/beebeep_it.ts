@@ -600,7 +600,7 @@
     </message>
     <message>
         <source>The file will be delivered to %1.</source>
-        <translation>Il file sarà inviato a %1.</translation>
+        <translation type="vanished">Il file sarà inviato a %1.</translation>
     </message>
     <message>
         <source>%1 %2 is sending to you the voice message: %3.</source>
@@ -3257,6 +3257,26 @@ Inserisci un nome differente.</translation>
     <message>
         <source>%1: no such file or directory.</source>
         <translation>%1: nessun file o cartella con questo nome.</translation>
+    </message>
+    <message>
+        <source>your IP address</source>
+        <translation>il tuo indirizzo IP</translation>
+    </message>
+    <message>
+        <source>to search for users</source>
+        <translation>per cercare gli utenti</translation>
+    </message>
+    <message>
+        <source>chat</source>
+        <translation type="obsolete">messaggi</translation>
+    </message>
+    <message>
+        <source>file transfer</source>
+        <translation>trasferimento file</translation>
+    </message>
+    <message>
+        <source>chat messages</source>
+        <translation>messaggi</translation>
     </message>
 </context>
 <context>

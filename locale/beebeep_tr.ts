@@ -187,7 +187,7 @@
         <translation>İndirmek için tıklayınız</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="698"/>
+        <location filename="../src/core/Core.cpp" line="710"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>Maksimum kimliğe ulaşıldı. Lütfen uygulamayı kapatın ve yeniden başlatın.</translation>
     </message>
@@ -262,8 +262,8 @@
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="221"/>
-        <location filename="../src/core/CoreChat.cpp" line="895"/>
-        <location filename="../src/core/CoreChat.cpp" line="906"/>
+        <location filename="../src/core/CoreChat.cpp" line="946"/>
+        <location filename="../src/core/CoreChat.cpp" line="957"/>
         <source>%1 Chat with %2.</source>
         <translation>%1 %2 ile sohbet edin.</translation>
     </message>
@@ -313,67 +313,62 @@
         <translation>Kimse mesajı almadı.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="476"/>
+        <location filename="../src/core/CoreChat.cpp" line="474"/>
         <source>The voice message will be delivered to %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="478"/>
-        <source>The file will be delivered to %1.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/core/CoreChat.cpp" line="649"/>
+        <location filename="../src/core/CoreChat.cpp" line="644"/>
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="890"/>
+        <location filename="../src/core/CoreChat.cpp" line="941"/>
         <source>Chat with all users</source>
         <translation>Tüm kullanıcılarla sohbet et</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="481"/>
+        <location filename="../src/core/CoreChat.cpp" line="476"/>
         <source>The message will be delivered to %1.</source>
         <translation>İleti %1 e teslim edilecek.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="634"/>
+        <location filename="../src/core/CoreChat.cpp" line="629"/>
         <source>Saved chats had an incorrect authorization code.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="637"/>
+        <location filename="../src/core/CoreChat.cpp" line="632"/>
         <source>%1 saved chats are added to history</source>
         <translation>%1 kayıtlı sohbet geçmişe eklendi</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="656"/>
+        <location filename="../src/core/CoreChat.cpp" line="651"/>
         <source>%1 offline messages will be sent as soon as possible.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="691"/>
+        <location filename="../src/core/CoreChat.cpp" line="696"/>
         <source>Offline message will be sent to %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="762"/>
+        <location filename="../src/core/CoreChat.cpp" line="810"/>
         <source>Offline messages sent to %2.</source>
         <translation>Çevrimdışı iletiler %2 ye gönderildi.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="849"/>
+        <location filename="../src/core/CoreChat.cpp" line="900"/>
         <source>%1 You have buzzed %2.</source>
         <translation>%1 %2 yi titretti.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="895"/>
+        <location filename="../src/core/CoreChat.cpp" line="946"/>
         <source>Unknown %1</source>
         <translation>Bilinmeyen %1</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="578"/>
+        <location filename="../src/core/CoreChat.cpp" line="573"/>
         <source>%1 %2 cannot be informed that you have left the group.</source>
         <translation>%1 %2 gruptan ayrıldığınız konusunda bilgilendirilemiyor.</translation>
     </message>
@@ -388,172 +383,173 @@
         <translation>%1 Dosya Aktarım sunucusu başlatılamıyor: bağlantı adresi / bağlantı noktası başarısız.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="89"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="83"/>
         <source>%1 Unable to download %2 from %3: user is offline.</source>
         <translation>%1 %3 den %2 indirilemedi: kullanıcı çevrimdışı.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="105"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="99"/>
         <source>%1 Unable to download %2 from %3: folder %4 cannot be created.</source>
         <translation>%1 %3 den %2 indirilemiyor: %4 klasörü oluşturulamıyor.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="117"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="111"/>
         <source>%1 Downloading %2 from %3.</source>
         <translation>%1 %3 den %2 indiriliyor.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="138"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="132"/>
         <source>from</source>
         <translation>den</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="138"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="132"/>
         <source>to</source>
         <translation>için</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="188"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="182"/>
         <source>%1 sent a voice message.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="193"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="187"/>
         <source>Listen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="199"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="193"/>
         <source>Open</source>
         <translation>Aç</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="280"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="268"/>
         <source>%1 Unable to send %2 to %3: user is offline.</source>
         <translation>%1 %2 den %3 e gönderilemiyor: kullanıcı çevrimdışı.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="257"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="251"/>
         <source>%1 Unable to send %2. File transfer is disabled.</source>
         <translation>%1 %2 ye gönderilemiyor: Dosya aktarımı devre dışı.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="137"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="131"/>
         <source>Upload</source>
         <translation>Yükle</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="137"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="131"/>
         <source>Download</source>
         <translation>İndir</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="203"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="197"/>
         <source>folder</source>
         <translation>klasör</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="289"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="277"/>
         <source>%1 %2: file not found.</source>
         <translation>%1 %2: dosya bulunamadı.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="303"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="291"/>
         <source>%1 %2 is a folder. You can share it.</source>
         <translation>%1 %2 bir klasördür. Paylaşabilirsiniz.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="328"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="316"/>
         <source>%1 Unable to send %2: %3 is not connected.</source>
         <translation>%1 %2 ye gönderilemiyor: %3 bağlı değil.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="322"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="310"/>
         <source>%1 You send %2 to %3.</source>
         <translation>%1 %2 den %3 ü gönderiyorsunuz.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="194"/>
+        <location filename="../src/core/CoreChat.cpp" line="690"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="188"/>
         <source>voice message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="354"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="342"/>
         <source>%1 You have refused to download %2 from %3.</source>
         <translation>%1 %3 den %2 i indirmeyi reddettiniz.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="382"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="370"/>
         <source>%1 You have refused to download folder %2 from %3.</source>
         <translation>%1 %3 den %2 klasörünü indirmeyi reddettiniz.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="484"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="472"/>
         <source>%1 is added to file sharing with only %2 of %3 files (%4 limit reached)</source>
         <translation>Dosya paylaşımına %1, sadece %2 %3 dosya ile eklenir (%4 sınırına ulaşıldı)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="490"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="478"/>
         <source>%1 is added to file sharing (%2)</source>
         <translation>Dosya paylaşımına %1 eklendi (%2)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="492"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="480"/>
         <source>%1 is added to file sharing with %2 files, %3</source>
         <translation>%1 %2 ile dosya paylaşımına eklendi, %3</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="523"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="511"/>
         <source>All paths are removed from file sharing</source>
         <translation>Tüm yollar dosya paylaşımından kaldırıldı</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="544"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="532"/>
         <source>%1 is removed from file sharing</source>
         <translation>%1 dosya paylaşımından kaldırıldı</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="546"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="534"/>
         <source>%1 is removed from file sharing with %2 files</source>
         <translation>%1 %2 ile dosya paylaşımından kaldırıldı</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="611"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="599"/>
         <source>%1 You are about to send %2 to %3. Checking folder...</source>
         <translation>%1 %2 den %3 ü yollamak üzeresiniz. Klasör kontrol ediliyor...</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="651"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="639"/>
         <source>%1 Unable to send folder %2</source>
         <translation>%1 %2 klasörü gönderilemiyor</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="656"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="644"/>
         <source>invalid user #%1.</source>
         <translation>geçersiz kullanıcı #%1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="663"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="651"/>
         <source>the folder is empty.</source>
         <translation>klasör boş.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="670"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="658"/>
         <source>file transfer is not working.</source>
         <translation>dosya aktarımı çalışmıyor.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="678"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="666"/>
         <source>%1 is not connected.</source>
         <translation>%1 bağlı değil.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="692"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="680"/>
         <source>internal error.</source>
         <translation>iç hata.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="697"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="685"/>
         <source>%1 You send folder %2 to %3.</source>
         <translation>%1 %3 klasörden %2 i gönderiyorsunuz.</translation>
     </message>
@@ -711,7 +707,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreVoiceChat.cpp" line="51"/>
+        <location filename="../src/core/CoreVoiceChat.cpp" line="45"/>
         <source>%1 %2: voice message not found.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1054,7 +1050,7 @@
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="138"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1125"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1123"/>
         <source>Find text in chat</source>
         <translation>Sohbet İçinde Metin Bul</translation>
     </message>
@@ -1190,93 +1186,93 @@
         <translation>Seçili Metni Link Olarak Aç</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="511"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="509"/>
         <source>The loading of saved messages has not yet been completed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="573"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="571"/>
         <source>only the last %1 messages are shown</source>
         <translation>sadece son %1 mesaj gösterilir</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="506"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="504"/>
         <source>Loading of saved messages...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="463"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="462"/>
         <source>Opening voice message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="575"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="573"/>
         <source>maximum number of messages to show reached</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="767"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="765"/>
         <source>You must close and reopen this window to see the changes applied.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="794"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="792"/>
         <source>Please select a file to save all the messages of the chat.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="908"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="906"/>
         <source>Do you want to send %1 %2 to the members of this chat?</source>
         <translation>Bu sohbetin üyelerine %1 %2 göndermek ister misiniz?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1023"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1021"/>
         <source>Spell checking is enabled</source>
         <translation>Yazım Denetimi Etkinleştirildi</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1030"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1054"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1028"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1052"/>
         <source>There is not a valid dictionary</source>
         <translation>Geçerli Bir Sözlük Yok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1047"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1045"/>
         <source>Word completer is enabled</source>
         <translation>Kelime Tamamlayıcı Etkinleştirildi</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1049"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1047"/>
         <source>Word completer is disabled</source>
         <translation>Kelime Tamamlayıcı Devre Dışı</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1163"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1161"/>
         <source>%1 not found in chat.</source>
         <translation>%1 sohbette bulunamadı.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1199"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1197"/>
         <source>Do you want to restore the default font?</source>
         <translation>Varsayılan yazı tipini geri yüklemek istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1207"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1205"/>
         <source>Ready.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1223"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1221"/>
         <source>Do you want to send a screenshot?</source>
         <translation>Ekran Görüntüsü göndermek istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1223"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1221"/>
         <source>Yes and hide this chat</source>
         <translation>Evet ve bu sohbeti gizle</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1025"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1023"/>
         <source>Spell checking is disabled</source>
         <translation>Yazım Denetimi Devre Dışı</translation>
     </message>
@@ -1314,67 +1310,67 @@
         <translation type="obsolete">Sohbet mesajlarını kaydetmek için lütfen bir dosya seçin.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="813"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="811"/>
         <source>%1: save completed.</source>
         <translation>%1: kaydetme tamamlandı.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="767"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="813"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="765"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="811"/>
         <source>Ok</source>
         <translation>Tamam</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="576"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="574"/>
         <source>open %1 to read them all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="576"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="574"/>
         <source>the saved chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="860"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="858"/>
         <source>Unable to save temporary file: %1</source>
         <translation>Geçici dosya kaydedilemiyor: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="909"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="907"/>
         <source>file</source>
         <translation>dosya</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="909"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="907"/>
         <source>files</source>
         <translation>dosyalar</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="910"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1199"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1223"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="908"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1197"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1221"/>
         <source>Yes</source>
         <translation>Evet</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="910"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1199"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1223"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="908"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1197"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1221"/>
         <source>No</source>
         <translation>Hayır</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="923"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="921"/>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
         <translation>QT Kitaplığı bu işletim sistemi için dosyaları Sürükle ve Bırak özelliğini desteklemez. Gönderilecek dosyayı tekrar seçmelisiniz.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1007"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1005"/>
         <source>Use key Return to send message</source>
         <translation>ENTER Tuşunu Mesajı Göndermek İçin Kullan</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1009"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1007"/>
         <source>Use key Return to make a carriage return</source>
         <translation>ENTER Tuşunu Satırbaşı Yapmak İçin Kullan</translation>
     </message>
@@ -3473,6 +3469,21 @@ Lütfen farklı bir isim seçin.</translation>
         <translation type="unfinished">yok</translation>
     </message>
     <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="3836"/>
+        <source>your IP address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="3837"/>
+        <source>to search for users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="3840"/>
+        <source>file transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4297"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4358"/>
         <source>You have new message</source>
@@ -3784,6 +3795,11 @@ Lütfen farklı bir isim seçin.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="3815"/>
         <source>active</source>
         <translation>aktif</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="3839"/>
+        <source>chat messages</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3892"/>
@@ -6243,7 +6259,7 @@ Lütfen farklı bir isim seçin.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2183"/>
+        <location filename="../src/core/Settings.cpp" line="2185"/>
         <source>Autoresponder</source>
         <translation type="unfinished"></translation>
     </message>

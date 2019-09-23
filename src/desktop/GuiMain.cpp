@@ -3833,11 +3833,11 @@ void GuiMain::showDefaultServerPortInMenu()
 #endif
   }
 
-  mp_actHostAddress->setText( QString( "ip: %1" ).arg( host_address ) );
-  mp_actPortBroadcast->setText( QString( "udp: %1" ).arg( broadcast_port ) );
+  mp_actHostAddress->setText( QString( "ip: %1 (%2)" ).arg( host_address ).arg( tr( "your IP address" ) ) );
+  mp_actPortBroadcast->setText( QString( "udp: %1 (%2)" ).arg( broadcast_port ).arg( tr( "to search for users" ) ) );
   mp_actMulticastGroupAddress->setText( QString( "multicast: %1" ).arg( multicast_group ) );
-  mp_actPortListener->setText( QString( "tcp1: %1" ).arg( listener_port ) );
-  mp_actPortFileTransfer->setText( QString( "tcp2: %1" ).arg( file_transfer_port ) );
+  mp_actPortListener->setText( QString( "tcp1: %1 (%2)" ).arg( listener_port ).arg( tr( "chat messages" ) ) );
+  mp_actPortFileTransfer->setText( QString( "tcp2: %1 (%2)" ).arg( file_transfer_port ).arg( tr( "file transfer" ) ) );
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   mp_actMulticastDns->setText( QString( "mdns: %1" ).arg( multicast_dns ) );
 #endif

@@ -4,9 +4,10 @@ For more informations please visit https://www.beebeep.net
 
 BeeBEEP 5.7.1 (in development)
 - New feature: voice messages (you can record your message and send it as file)
+- Voice messages can be also sent to offline users like text messages
 - Added "Quote selected text" option to context menu (right click) of the chat
 - Added "CheckUserConnectedFromDatagramIp" option in beebeep.rc (to prevent multiple connections from the same user but different ip addresses)
-- Added "Clear system messages" in activity and chat windows
+- Added "Clear system messages" option in context menu (right click) of activity and chat windows
 - Added "SkipLocalHardwareAddresses" in beebeep.rc to skip unesuful network interfaces
 - The option "AllowMultipleInstances" can be enabled also in Terminal Server because it checks also user account
 - The avatar icon size is also applied in member icons of the chat windows

@@ -187,7 +187,7 @@
         <translation>Kliknij tutaj by pobrać</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="698"/>
+        <location filename="../src/core/Core.cpp" line="710"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>Osiągnięto maksymalne ID. Proszę ponownie uruchomić aplikację.</translation>
     </message>
@@ -262,8 +262,8 @@
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="221"/>
-        <location filename="../src/core/CoreChat.cpp" line="895"/>
-        <location filename="../src/core/CoreChat.cpp" line="906"/>
+        <location filename="../src/core/CoreChat.cpp" line="946"/>
+        <location filename="../src/core/CoreChat.cpp" line="957"/>
         <source>%1 Chat with %2.</source>
         <translation>%1 Czat z %2.</translation>
     </message>
@@ -313,67 +313,62 @@
         <translation>Nikt nie otrzymał wiadomości.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="476"/>
+        <location filename="../src/core/CoreChat.cpp" line="474"/>
         <source>The voice message will be delivered to %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="478"/>
-        <source>The file will be delivered to %1.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/core/CoreChat.cpp" line="649"/>
+        <location filename="../src/core/CoreChat.cpp" line="644"/>
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
         <translation>Wiadomości offline czekające na wysłanie mają niepoprawny kod autoryzacyjny i nie zostaną wysłane.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="890"/>
+        <location filename="../src/core/CoreChat.cpp" line="941"/>
         <source>Chat with all users</source>
         <translation>Czat z wszystkimi użytkownikami</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="481"/>
+        <location filename="../src/core/CoreChat.cpp" line="476"/>
         <source>The message will be delivered to %1.</source>
         <translation>Wiadomość będzie dostarczona do %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="634"/>
+        <location filename="../src/core/CoreChat.cpp" line="629"/>
         <source>Saved chats had an incorrect authorization code.</source>
         <translation>Zachowane czaty mają niepoprawny kod autoryzacyjny.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="637"/>
+        <location filename="../src/core/CoreChat.cpp" line="632"/>
         <source>%1 saved chats are added to history</source>
         <translation>%1 zachowanych czatów dodano do historii</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="656"/>
+        <location filename="../src/core/CoreChat.cpp" line="651"/>
         <source>%1 offline messages will be sent as soon as possible.</source>
         <translation>%1 wiadomości offline zostanie wysłanych jak tylko będzie to możliwe.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="691"/>
+        <location filename="../src/core/CoreChat.cpp" line="696"/>
         <source>Offline message will be sent to %1</source>
         <translation>Wiadomości offline zostaną wysłane do %1</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="762"/>
+        <location filename="../src/core/CoreChat.cpp" line="810"/>
         <source>Offline messages sent to %2.</source>
         <translation>Wiadomości z trybu offline wysłane do %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="849"/>
+        <location filename="../src/core/CoreChat.cpp" line="900"/>
         <source>%1 You have buzzed %2.</source>
         <translation>%1 Zadzwoniłeś do %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="895"/>
+        <location filename="../src/core/CoreChat.cpp" line="946"/>
         <source>Unknown %1</source>
         <translation>Nieznany %1</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="578"/>
+        <location filename="../src/core/CoreChat.cpp" line="573"/>
         <source>%1 %2 cannot be informed that you have left the group.</source>
         <translation>%1 %2 nie może zostać poinformowany o opuszczeniu grupy przez Ciebie.</translation>
     </message>
@@ -388,172 +383,173 @@
         <translation>%1 Nie można rozpocząć transferu pliku: nie udało się podłączyć do adresu/portu.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="89"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="83"/>
         <source>%1 Unable to download %2 from %3: user is offline.</source>
         <translation>%1 Nie można pobrać %2 od %3: użytkownik jest niedostępny.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="105"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="99"/>
         <source>%1 Unable to download %2 from %3: folder %4 cannot be created.</source>
         <translation>%1 Nie można pobrać %2 od %3: nie można utworzyć folderu %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="117"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="111"/>
         <source>%1 Downloading %2 from %3.</source>
         <translation>%1 Pobieranie %2 od %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="138"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="132"/>
         <source>from</source>
         <translation>z</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="138"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="132"/>
         <source>to</source>
         <translation>do</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="188"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="182"/>
         <source>%1 sent a voice message.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="193"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="187"/>
         <source>Listen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="199"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="193"/>
         <source>Open</source>
         <translation>Otwórz</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="280"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="268"/>
         <source>%1 Unable to send %2 to %3: user is offline.</source>
         <translation>%1 Nie można wysłać %2 do %3: użytkownik jest niedostępny.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="257"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="251"/>
         <source>%1 Unable to send %2. File transfer is disabled.</source>
         <translation>%1 Nie można wysłać %2. Transfer plików jest wyłączony.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="137"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="131"/>
         <source>Upload</source>
         <translation>Wysyłanie</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="137"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="131"/>
         <source>Download</source>
         <translation>Pobieranie</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="203"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="197"/>
         <source>folder</source>
         <translation>folder</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="289"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="277"/>
         <source>%1 %2: file not found.</source>
         <translation>%1 %2: plik nie znaleziony.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="303"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="291"/>
         <source>%1 %2 is a folder. You can share it.</source>
         <translation>%1 %2 jest folderem. Możesz go udostępnić.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="328"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="316"/>
         <source>%1 Unable to send %2: %3 is not connected.</source>
         <translation>%1 Nie można wysłać %2: %3 nie jest podłączony.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="322"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="310"/>
         <source>%1 You send %2 to %3.</source>
         <translation>%1 Wysyłasz %2 do %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="194"/>
+        <location filename="../src/core/CoreChat.cpp" line="690"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="188"/>
         <source>voice message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="354"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="342"/>
         <source>%1 You have refused to download %2 from %3.</source>
         <translation>%1 Odmówiłeś pobrania %2 od %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="382"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="370"/>
         <source>%1 You have refused to download folder %2 from %3.</source>
         <translation>%1 Odmówiłeś pobrania folderu %2 od %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="484"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="472"/>
         <source>%1 is added to file sharing with only %2 of %3 files (%4 limit reached)</source>
         <translation>%1 został dodany do udostępniania tylko z %2 z %3 plików (osiągnięty limit %4)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="490"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="478"/>
         <source>%1 is added to file sharing (%2)</source>
         <translation>%1 został dodany do udostępniania (%2)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="492"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="480"/>
         <source>%1 is added to file sharing with %2 files, %3</source>
         <translation>%1 został dodany do udostępniania z %2 plikami, %3</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="523"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="511"/>
         <source>All paths are removed from file sharing</source>
         <translation>Wszystkie ścieżki zostały usunięte z udostępniania plików</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="544"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="532"/>
         <source>%1 is removed from file sharing</source>
         <translation>%1 został usunięty z udostępniania</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="546"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="534"/>
         <source>%1 is removed from file sharing with %2 files</source>
         <translation>%1 został usunięty z udostępniania z %2 plikami</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="611"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="599"/>
         <source>%1 You are about to send %2 to %3. Checking folder...</source>
         <translation>%1 Zamierzasz wysłać %2 do %3. Sprawdzanie folderu...</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="651"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="639"/>
         <source>%1 Unable to send folder %2</source>
         <translation>%1 Nie można wysłać folderu %2</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="656"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="644"/>
         <source>invalid user #%1.</source>
         <translation>niepoprawny użytkownik #%1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="663"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="651"/>
         <source>the folder is empty.</source>
         <translation>folder jest pusty.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="670"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="658"/>
         <source>file transfer is not working.</source>
         <translation>transfer plików nie działa.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="678"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="666"/>
         <source>%1 is not connected.</source>
         <translation>%1 nie jest połączony.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="692"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="680"/>
         <source>internal error.</source>
         <translation>wewnętrzny błąd.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="697"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="685"/>
         <source>%1 You send folder %2 to %3.</source>
         <translation>%1 Wysłałeś folder %2 do %3.</translation>
     </message>
@@ -711,7 +707,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreVoiceChat.cpp" line="51"/>
+        <location filename="../src/core/CoreVoiceChat.cpp" line="45"/>
         <source>%1 %2: voice message not found.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1054,7 +1050,7 @@
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="138"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1125"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1123"/>
         <source>Find text in chat</source>
         <translation>Znajdź tekst w czacie</translation>
     </message>
@@ -1190,93 +1186,93 @@
         <translation>Otwórz zaznaczony tekst jako odnośnik</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="511"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="509"/>
         <source>The loading of saved messages has not yet been completed.</source>
         <translation>Ładowanie zachowanych wiadomości nie zostało jeszcze ukończone.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="573"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="571"/>
         <source>only the last %1 messages are shown</source>
         <translation>tylko %1 ostatnich wiadomości jest pokazywanych</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="506"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="504"/>
         <source>Loading of saved messages...</source>
         <translation>Ładowanie zachowanych wiadomości...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="463"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="462"/>
         <source>Opening voice message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="575"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="573"/>
         <source>maximum number of messages to show reached</source>
         <translation>osiągnięto maksymalną liczbę wiadomości do pokazania</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="767"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="765"/>
         <source>You must close and reopen this window to see the changes applied.</source>
         <translation>Musisz zamknąć i otworzyć to okno by zobaczyć zmiany.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="794"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="792"/>
         <source>Please select a file to save all the messages of the chat.</source>
         <translation>Proszę wybrać plik do zachowania wszystkich wiadomości czatu.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="908"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="906"/>
         <source>Do you want to send %1 %2 to the members of this chat?</source>
         <translation>Chcesz wysłać %1 %2 do członków tego czatu?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1023"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1021"/>
         <source>Spell checking is enabled</source>
         <translation>Sprawdzanie pisowni jest włączone</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1030"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1054"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1028"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1052"/>
         <source>There is not a valid dictionary</source>
         <translation>Brak poprawnego słownika</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1047"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1045"/>
         <source>Word completer is enabled</source>
         <translation>Uzupełnianie słów jest włączone</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1049"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1047"/>
         <source>Word completer is disabled</source>
         <translation>Uzupełnianie słów jest wyłączone</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1163"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1161"/>
         <source>%1 not found in chat.</source>
         <translation>Nie znaleziono %1 w czacie.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1199"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1197"/>
         <source>Do you want to restore the default font?</source>
         <translation>Czy chcesz przywrócić domyślną czcionkę?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1207"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1205"/>
         <source>Ready.</source>
         <translation>Gotowy.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1223"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1221"/>
         <source>Do you want to send a screenshot?</source>
         <translation>Czy chcesz wysłać zrzut ekranu?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1223"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1221"/>
         <source>Yes and hide this chat</source>
         <translation>Tak i ukryj ten czat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1025"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1023"/>
         <source>Spell checking is disabled</source>
         <translation>Sprawdzanie pisowni jest wyłączone</translation>
     </message>
@@ -1314,67 +1310,67 @@
         <translation type="obsolete">Proszę wybrać plik, w którym zostaną zachowane wiadomości czatu.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="813"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="811"/>
         <source>%1: save completed.</source>
         <translation>%1: zapisywanie zakończone.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="767"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="813"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="765"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="811"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="576"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="574"/>
         <source>open %1 to read them all</source>
         <translation>otwórz %1 by wczytać je wszystkie</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="576"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="574"/>
         <source>the saved chat</source>
         <translation>zachowany czat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="860"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="858"/>
         <source>Unable to save temporary file: %1</source>
         <translation>Nie można zapisać tymczasowego pliku: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="909"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="907"/>
         <source>file</source>
         <translation>plik</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="909"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="907"/>
         <source>files</source>
         <translation>plików</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="910"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1199"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1223"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="908"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1197"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1221"/>
         <source>Yes</source>
         <translation>Tak</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="910"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1199"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1223"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="908"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1197"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1221"/>
         <source>No</source>
         <translation>Nie</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="923"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="921"/>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
         <translation>Biblioteka Qt w tym systemie nie wspiera przeciągania i upuszczania plików. Musisz wybrać jeszcze raz by wysłać.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1007"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1005"/>
         <source>Use key Return to send message</source>
         <translation>Użyj klawisza Enter by wysłać wiadomość</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1009"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1007"/>
         <source>Use key Return to make a carriage return</source>
         <translation>Użyj klawisza Enter by przejść do nowej linii</translation>
     </message>
@@ -3498,6 +3494,21 @@ Proszę wybrać inną nazwę.</translation>
         <translation>żaden</translation>
     </message>
     <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="3836"/>
+        <source>your IP address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="3837"/>
+        <source>to search for users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="3840"/>
+        <source>file transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4297"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4358"/>
         <source>You have new message</source>
@@ -3809,6 +3820,11 @@ Proszę wybrać inną nazwę.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="3815"/>
         <source>active</source>
         <translation>aktywny</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="3839"/>
+        <source>chat messages</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3892"/>
@@ -6230,7 +6246,7 @@ Proszę wybrać inną nazwę.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2183"/>
+        <location filename="../src/core/Settings.cpp" line="2185"/>
         <source>Autoresponder</source>
         <translation>Autoodpowiedź</translation>
     </message>
