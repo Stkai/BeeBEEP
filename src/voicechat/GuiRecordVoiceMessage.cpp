@@ -21,7 +21,6 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "AudioInfo.h"
 #include "AudioManager.h"
 #include "GuiAudioLevel.h"
 #include "GuiRecordVoiceMessage.h"
@@ -43,13 +42,6 @@ GuiRecordVoiceMessage::GuiRecordVoiceMessage( QWidget *parent )
   mp_audioProbe = new QAudioProbe( this );
   connect( mp_audioProbe, SIGNAL( audioBufferProbed( const QAudioBuffer& ) ), this, SLOT( processAudioBuffer( const QAudioBuffer& ) ) );
   mp_audioProbe->setSource( mp_audioRecorder );
-
-#ifdef BEEBEEP_DEBUG
-  QStringList supported_items = mp_audioRecorder->supportedAudioCodecs();
-  qDebug() << "QAudioRecorder supports these codecs:" << qPrintable( supported_items.join( ", " ) );
-  supported_items = mp_audioRecorder->supportedContainers();
-  qDebug() << "QAudioRecorder supports these containers:" << qPrintable( supported_items.join( ", " ) );
-#endif
 
   QString file_path_tmp = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().cacheFolder() ).arg( AudioManager::instance().createDefaultAudioContainerFilename() ) );
   m_filePath = Bee::uniqueFilePath( file_path_tmp, false );

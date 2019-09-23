@@ -83,16 +83,17 @@ void AudioManager::checkAudioDevice()
   qDebug() << "AudioManager uses audio format as default:" << qPrintable( m_defaultAudioFormat.codec() ) << m_defaultAudioFormat.sampleRate()
            << m_defaultAudioFormat.channelCount() << m_defaultAudioFormat.sampleSize() << m_defaultAudioFormat.sampleType() << m_defaultAudioFormat.byteOrder();
 
+  QAudioRecorder audio_recorder;
   QAudioEncoderSettings audio_encoder_settings;
+  supported_codecs = audio_recorder.supportedAudioCodecs();
+  if( supported_codecs.contains( "audio/x-speex" ) )
+    audio_encoder_settings.setCodec( "audio/x-speex" );
+  else if( supported_codecs.contains( "audio/x-wav" ) )
+    audio_encoder_settings.setCodec( "audio/x-wav" );
+  else
+    audio_encoder_settings.setCodec( "audio/x-raw" );
   audio_encoder_settings.setChannelCount( m_defaultAudioFormat.channelCount() );
   audio_encoder_settings.setSampleRate( m_defaultAudioFormat.sampleRate() );
-#ifdef Q_OS_LINUX
-  audio_encoder_settings.setCodec( "audio/x-speex" );
-#elif defined Q_OS_WIN32
-  audio_encoder_settings.setCodec( "audio/x-wav" );
-#else
-  audio_encoder_settings.setCodec( "audio/x-raw" );
-#endif
   audio_encoder_settings.setQuality( QMultimedia::NormalQuality );
   audio_encoder_settings.setEncodingMode( QMultimedia::ConstantQualityEncoding );
   m_defaultAudioEncoderSettings = audio_encoder_settings;
