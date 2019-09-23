@@ -681,24 +681,25 @@ void GuiMain::checkViewActions()
 {
   bool is_connected = beeCore->isConnected();
   int connected_users = beeCore->connectedUsers();
+  bool file_transfer_is_active = beeCore->isFileTransferActive();
 
   mp_actConnect->setEnabled( !m_coreIsConnecting && !is_connected );
   mp_actDisconnect->setEnabled( is_connected );
   mp_actBroadcast->setEnabled( is_connected );
   mp_actCreateMessage->setEnabled( is_connected && !Settings::instance().disableCreateMessage() );
   mp_actCreateGroupChat->setEnabled( UserManager::instance().userList().size() > 1 );
-  mp_actViewFileSharing->setEnabled( Settings::instance().enableFileTransfer() && Settings::instance().enableFileSharing() );
-  mp_actEnableFileSharing->setEnabled( Settings::instance().enableFileTransfer() && !Settings::instance().disableFileSharing() );
-  mp_menuExistingFile->setEnabled( Settings::instance().enableFileTransfer() );
-  mp_actConfirmDownload->setEnabled( Settings::instance().enableFileTransfer() );
-  mp_actSelectDownloadFolder->setEnabled( Settings::instance().enableFileTransfer() );
+  mp_actViewFileSharing->setEnabled( file_transfer_is_active && Settings::instance().enableFileSharing() );
+  mp_actEnableFileSharing->setEnabled( file_transfer_is_active && !Settings::instance().disableFileSharing() );
+  mp_menuExistingFile->setEnabled( file_transfer_is_active );
+  mp_actConfirmDownload->setEnabled( file_transfer_is_active );
+  mp_actSelectDownloadFolder->setEnabled( file_transfer_is_active );
 
   showDefaultServerPortInMenu();
 
   if( !m_floatingChats.isEmpty() )
   {
     foreach( GuiFloatingChat* fl_chat, m_floatingChats )
-      fl_chat->updateActions( is_connected, connected_users );
+      fl_chat->updateActions( is_connected, connected_users, file_transfer_is_active );
   }
 
   if( mp_fileSharing )
@@ -4986,12 +4987,13 @@ void GuiMain::onShareDesktopUpdate( const User& u )
 {
   bool core_is_connected = beeCore->isConnected();
   int connected_users = beeCore->connectedUsers();
+  bool file_transfer_is_active = beeCore->isFileTransferActive();
   QList<Chat> chat_list = ChatManager::instance().chatsWithUser( u.id() );
   foreach( Chat c, chat_list )
   {
     GuiFloatingChat* fl_chat = floatingChat( c.id() );
     if( fl_chat )
-      fl_chat->guiChat()->updateActions( c, core_is_connected, connected_users );
+      fl_chat->guiChat()->updateActions( c, core_is_connected, connected_users, file_transfer_is_active );
   }
 }
 

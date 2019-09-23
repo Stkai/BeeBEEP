@@ -44,7 +44,7 @@ public:
   void updateUser( const User& );
   void updateChatMembers( const Chat& );
   void setFocusInChat();
-  void updateActions( bool is_connected, int connected_users );
+  void updateActions( bool is_connected, int connected_users, bool file_transfer_is_active );
   void setChatReadByUser( const Chat&, const User& );
   void showChatMessage( const Chat&, const ChatMessage& );
   void updateEmoticons();

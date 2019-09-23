@@ -60,6 +60,7 @@ public:
   bool dnsMulticastingIsActive() const;
 #endif
 
+  inline bool isFileTransferActive() const;
   int fileTransferPort() const;
   inline bool hasFileTransferInProgress() const;
 
@@ -317,5 +318,6 @@ private:
 
 // Inline Functions
 inline bool Core::hasFileTransferInProgress() const { return isConnected() && mp_fileTransfer->hasActivePeers(); }
+inline bool Core::isFileTransferActive() const { return isConnected() && mp_fileTransfer->isActive(); }
 
 #endif // BEEBEEP_CLIENT_H

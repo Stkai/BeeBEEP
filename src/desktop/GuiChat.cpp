@@ -210,7 +210,7 @@ void GuiChat::updateOnSendingMessage()
   mp_cbSendAndClose->setChecked( Settings::instance().chatOnSendingMessage() > Settings::SkipOnSendingMessage );
 }
 
-void GuiChat::updateActions( const Chat& c, bool is_connected, int connected_users )
+void GuiChat::updateActions( const Chat& c, bool is_connected, int connected_users, bool file_transfer_is_active )
 {
   if( c.id() != m_chatId )
     return;
@@ -250,8 +250,8 @@ void GuiChat::updateActions( const Chat& c, bool is_connected, int connected_use
 
   mp_actClear->setDisabled( chat_is_empty );
   mp_actClearSystemMessages->setEnabled( c.hasSystemMessages() );
-  mp_actSendFile->setEnabled( Settings::instance().enableFileTransfer() && local_user_is_member && is_connected && can_send_files );
-  mp_actSendFolder->setEnabled( Settings::instance().enableFileTransfer() && local_user_is_member && is_connected && can_send_files );
+  mp_actSendFile->setEnabled( file_transfer_is_active && local_user_is_member && is_connected && can_send_files );
+  mp_actSendFolder->setEnabled( file_transfer_is_active && local_user_is_member && is_connected && can_send_files );
 
   if( !is_connected )
   {
@@ -323,8 +323,8 @@ void GuiChat::updateActions( const Chat& c, bool is_connected, int connected_use
 #endif
 
 #ifdef BEEBEEP_USE_VOICE_CHAT
-  mp_pbRecordVoiceMessage->setEnabled( mp_pbSend->isEnabled() && Settings::instance().enableFileTransfer() && !Settings::instance().disableVoiceMessages() );
-  if( !Settings::instance().enableFileTransfer() )
+  mp_pbRecordVoiceMessage->setEnabled( mp_pbSend->isEnabled() && file_transfer_is_active && !Settings::instance().disableVoiceMessages() );
+  if( !file_transfer_is_active )
     mp_pbRecordVoiceMessage->setToolTip( tr( "File transfer must be enabled to send voice messages" ) );
   else
     mp_pbRecordVoiceMessage->setToolTip( tr( "Record voice message" ) );
@@ -806,6 +806,8 @@ void GuiChat::saveChat()
     html_text.append( ChatManager::instance().chatSavedText( c.name() ) );
   html_text.append( GuiChatMessage::chatToHtml( c, !Settings::instance().chatSaveFileTransfers(),
                                                   !Settings::instance().chatSaveSystemMessages(), true, true, Settings::instance().chatCompact() ) );
+  html_text.replace( FileInfo::urlSchemeVoiceMessage() + QLatin1String(":"), "file://" );
+  html_text.replace( FileInfo::urlSchemeShowFileInFolder() + QLatin1String(":"), "file://" );
   doc->setHtml( html_text );
   doc->print( &printer );
   QMessageBox::information( this, Settings::instance().programName(), tr( "%1: save completed." ).arg( file_name ), tr( "Ok" ) );

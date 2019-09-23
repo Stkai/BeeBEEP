@@ -232,7 +232,7 @@ void GuiFloatingChat::updateChat( const Chat& c )
     updateChatTitle( c );
     updateChatMembers( c );
     mp_chat->updateShortcuts();
-    mp_chat->updateActions( c, beeCore->isConnected(), beeCore->connectedUsers() );
+    mp_chat->updateActions( c, beeCore->isConnected(), beeCore->connectedUsers(), beeCore->isFileTransferActive() );
   }
 }
 
@@ -244,19 +244,19 @@ bool GuiFloatingChat::setChat( const Chat& c )
     updateChatTitle( c );
     updateChatMembers( c );
     mp_chat->updateShortcuts();
-    mp_chat->updateActions( c, beeCore->isConnected(), beeCore->connectedUsers() );
+    mp_chat->updateActions( c, beeCore->isConnected(), beeCore->connectedUsers(), beeCore->isFileTransferActive() );
     return true;
   }
   else
     return false;
 }
 
-void GuiFloatingChat::updateActions( bool is_connected, int connected_users )
+void GuiFloatingChat::updateActions( bool is_connected, int connected_users, bool file_transfer_is_active )
 {
   Chat c = ChatManager::instance().chat( mp_chat->chatId() );
   if( !c.isValid() )
     return;
-  mp_chat->updateActions( c, is_connected, connected_users );
+  mp_chat->updateActions( c, is_connected, connected_users, file_transfer_is_active );
 }
 
 void GuiFloatingChat::updateUser( const User& u )

@@ -39,7 +39,7 @@ public:
   GuiChat( QWidget* parent = Q_NULLPTR );
 
   void setupToolBar( QToolBar* chat_bar );
-  void updateActions( const Chat&, bool is_connected, int connected_users );
+  void updateActions( const Chat&, bool is_connected, int connected_users, bool file_transfer_is_active );
 
   bool setChat( const Chat& );
   inline VNumber chatId() const;
