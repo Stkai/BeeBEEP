@@ -51,7 +51,7 @@ GuiRecordVoiceMessage::GuiRecordVoiceMessage( QWidget *parent )
   qDebug() << "QAudioRecorder supports these containers:" << qPrintable( supported_items.join( ", " ) );
 #endif
 
-  QString file_path_tmp = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().cacheFolder() ).arg( AudioManager::createDefaultAudioContainerFilename() ) );
+  QString file_path_tmp = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().cacheFolder() ).arg( AudioManager::instance().createDefaultAudioContainerFilename() ) );
   m_filePath = Bee::uniqueFilePath( file_path_tmp, false );
   if( !mp_audioRecorder->setOutputLocation( QUrl::fromLocalFile( m_filePath ) ) )
     qWarning() << "QAudioRecorder is unable to set output location to" << qPrintable( m_filePath );
@@ -239,7 +239,7 @@ void GuiRecordVoiceMessage::toggleRecord()
     mp_pbSend->setEnabled( true );
     QApplication::setOverrideCursor( Qt::WaitCursor );
     QApplication::processEvents();
-    mp_audioRecorder->setEncodingSettings( AudioManager::defaultAudioEncoderSettings(), QVideoEncoderSettings(), AudioManager::defaultAudioContainer() );
+    mp_audioRecorder->setEncodingSettings( AudioManager::instance().defaultAudioEncoderSettings(), QVideoEncoderSettings(), AudioManager::instance().defaultAudioContainer() );
     mp_audioRecorder->record();
     QApplication::restoreOverrideCursor();
   }

@@ -31,7 +31,7 @@ AudioInfo::AudioInfo( const QAudioFormat& audio_format, QObject* parent )
 {
   if( !checkAudioFormat() )
   {
-    m_format = AudioManager::defaultAudioFormat();
+    m_format = AudioManager::instance().defaultAudioFormat();
     checkAudioFormat();
   }
 }
