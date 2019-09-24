@@ -164,7 +164,7 @@ NetworkAddress NetworkAddress::fromString( const QString& address_string )
   }
 #ifdef BEEBEEP_DEBUG
   else {
-    qDebug() << "Host port" << host_port << "is outside the range [0-65535] found in" << address_string;
+    qDebug() << "Host port" << host_port << "is outside the range [1-65535] found in" << address_string;
   }
 #endif
 

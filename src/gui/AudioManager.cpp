@@ -86,12 +86,11 @@ void AudioManager::checkAudioDevice()
   QAudioRecorder audio_recorder;
   QAudioEncoderSettings audio_encoder_settings;
   supported_codecs = audio_recorder.supportedAudioCodecs();
+  qDebug() << "AudioManager supports these audio codecs (encoder):" << qPrintable( supported_codecs.join( ", " ) );
   if( supported_codecs.contains( "audio/x-speex" ) )
     audio_encoder_settings.setCodec( "audio/x-speex" );
-  else if( supported_codecs.contains( "audio/x-wav" ) )
-    audio_encoder_settings.setCodec( "audio/x-wav" );
   else
-    audio_encoder_settings.setCodec( "audio/x-raw" );
+    audio_encoder_settings.setCodec( audio_format.codec() );
   audio_encoder_settings.setChannelCount( m_defaultAudioFormat.channelCount() );
   audio_encoder_settings.setSampleRate( m_defaultAudioFormat.sampleRate() );
   audio_encoder_settings.setQuality( QMultimedia::NormalQuality );
@@ -109,10 +108,8 @@ QString AudioManager::defaultAudioContainer()
 {
   if( m_defaultAudioEncoderSettings.codec() == "audio/x-speex" )
     return QLatin1String( "audio/ogg" );
-  else if( m_defaultAudioEncoderSettings.codec() == "audio/x-wav" )
-    return QLatin1String( "audio/wav" );
   else
-    return QLatin1String( "audio/raw" );
+    return QLatin1String( "audio/wav" );
 }
 
 QString AudioManager::defaultAudioContainerFilePrefix()
