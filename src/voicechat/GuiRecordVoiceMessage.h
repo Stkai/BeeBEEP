@@ -25,7 +25,7 @@
 #define BEEBEEP_GUIRECORDVOICEMESSAGE_H
 
 #include "ui_GuiRecordVoiceMessage.h"
-#include "Config.h"
+#include "VoiceRecorder.h"
 class GuiAudioLevel;
 
 
@@ -40,13 +40,12 @@ public:
   inline const QString& filePath() const;
 
 protected slots:
+  void showRecorderError( VoiceRecorder::Error );
+  void onRecorderStateChanged( VoiceRecorder::State );
   void sendVoiceMessage();
   void toggleRecord();
   void processAudioBuffer( const QAudioBuffer& );
   void updateRecorderProgress( qint64 );
-  void onRecorderStatusChanged( QMediaRecorder::Status );
-  void onRecorderStateChanged( QMediaRecorder::State );
-  void showRecorderError( QMediaRecorder::Error );
 
 protected:
   void clearAudioLevels();
@@ -54,7 +53,7 @@ protected:
   void closeEvent( QCloseEvent* );
 
 private:
-  QAudioRecorder* mp_audioRecorder;
+  VoiceRecorder* mp_voiceRecorder;
   QAudioProbe* mp_audioProbe;
   QList<GuiAudioLevel*> m_audioLevels;
   QString m_filePath;

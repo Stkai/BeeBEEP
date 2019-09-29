@@ -285,7 +285,7 @@ void GuiUserList::setUser( const User& u, bool sort_users )
   else
   {
     if( items.isEmpty() )
-      items.append( createUserItemInWorkgroup( u, QString::null ) );
+      items.append( createUserItemInWorkgroup( u, QString() ) );
   }
 
   foreach( GuiUserItem* item, items )

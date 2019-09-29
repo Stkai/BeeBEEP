@@ -6,6 +6,7 @@ win32-msvc: {
 
 INCLUDEPATH += $$PWD/src $$PWD/src/core
 DESTDIR = $$PWD/test
+DEFINES += QT_DEPRECATED_WARNINGS
 
 unix:!macx:!android: {
   CONFIG(debug,debug|release) {

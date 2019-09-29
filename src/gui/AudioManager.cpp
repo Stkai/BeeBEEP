@@ -106,10 +106,14 @@ QAudioDeviceInfo AudioManager::defaultInputDevice()
 
 QString AudioManager::defaultAudioContainer()
 {
+#ifdef BEEBEEP_USE_OPUS_CODEC
+  return QLatin1String( "audio/opus" );
+#else
   if( m_defaultAudioEncoderSettings.codec() == "audio/x-speex" )
     return QLatin1String( "audio/ogg" );
   else
     return QLatin1String( "audio/wav" );
+#endif
 }
 
 QString AudioManager::defaultAudioContainerFilePrefix()
@@ -119,12 +123,16 @@ QString AudioManager::defaultAudioContainerFilePrefix()
 
 QString AudioManager::defaultAudioContainerFileSuffix()
 {
+#ifdef BEEBEEP_USE_OPUS_CODEC
+  return QLatin1String( "opus" );
+#else
   if( m_defaultAudioEncoderSettings.codec() == "audio/x-speex" )
-    return QLatin1String( "ogg" );
+    return QLatin1String( "spx" );
   else if( m_defaultAudioEncoderSettings.codec() == "audio/x-wav" )
     return QLatin1String( "wav" );
   else
     return QLatin1String( "raw" );
+#endif
 }
 
 QString AudioManager::createDefaultAudioContainerFilename()

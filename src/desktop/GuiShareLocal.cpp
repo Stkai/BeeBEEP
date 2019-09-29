@@ -156,7 +156,7 @@ void GuiShareLocal::removePath()
 
   if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you want to remove this path:" )
                              + QString( "\n%1").arg( share_selected ),
-                             tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
+                             tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) != 0 )
     return;
 
   setActionsEnabled( false );
@@ -170,7 +170,7 @@ void GuiShareLocal::clearAllPaths()
     return;
 
   if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you want to remove all shared paths?" ),
-                             tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
+                             tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) != 0 )
     return;
 
   emit removeAllPathsRequest();
