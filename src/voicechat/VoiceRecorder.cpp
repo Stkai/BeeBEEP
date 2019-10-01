@@ -30,7 +30,7 @@ const int VOICE_RECORDER_ELAPSED_TIME_INTERVAL = 1000;
 
 VoiceRecorder::VoiceRecorder( const QString& file_path, QObject* parent )
  : QObject( parent ), mp_audioInput( Q_NULLPTR ), m_filePath( file_path ), mp_file( Q_NULLPTR ),
-   m_error( NoError ), m_errorString( "" ),   m_state( StoppedState ),  m_duration( 0 ),
+   m_error( NoError ), m_errorString( "" ), m_state( StoppedState ),  m_duration( 0 ),
    m_audioFormat()
 {
 }
@@ -171,7 +171,7 @@ bool VoiceRecorder::setVolume( int new_value )
 {
   if( mp_audioInput )
   {
-    qreal linear_volume = QAudio::convertVolume( new_value / qreal( 100.0 ), QAudio::LogarithmicVolumeScale, QAudio::LinearVolumeScale);
+    qreal linear_volume = QAudio::convertVolume( new_value / qreal( 100.0 ), QAudio::LogarithmicVolumeScale, QAudio::LinearVolumeScale );
     mp_audioInput->setVolume( linear_volume );
     return true;
   }
