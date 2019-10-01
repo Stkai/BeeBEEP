@@ -38,18 +38,25 @@ GuiRecordVoiceMessage::GuiRecordVoiceMessage( QWidget *parent )
   setWindowIcon( IconManager::instance().icon( "microphone.png" ) );
   Bee::removeContextHelpButton( this );
 
+  mp_audioRecorder = new QAudioRecorder( this );
+  mp_audioProbe = new QAudioProbe( this );
+  connect( mp_audioProbe, SIGNAL( audioBufferProbed( const QAudioBuffer& ) ), this, SLOT( processAudioBuffer( const QAudioBuffer& ) ) );
+  mp_audioProbe->setSource( mp_audioRecorder );
+
+  QString file_path_tmp = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().cacheFolder() ).arg( AudioManager::instance().createDefaultAudioContainerFilename() ) );
+  m_filePath = Bee::uniqueFilePath( file_path_tmp, false );
+  if( !mp_audioRecorder->setOutputLocation( QUrl::fromLocalFile( m_filePath ) ) )
+    qWarning() << "QAudioRecorder is unable to set output location to" << qPrintable( m_filePath );
+
   mp_progressBar->setMinimum( 0 );
   mp_lStatus->setText( tr( "Click to start recording your message" ) );
   mp_pbSend->setEnabled( false );
   m_warningDuration = 80;
 
-  QString file_path_tmp = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().cacheFolder() ).arg( AudioManager::instance().createDefaultAudioContainerFilename() ) );
-  m_filePath = Bee::uniqueFilePath( file_path_tmp, false );
-  mp_voiceRecorder = new VoiceRecorder( m_filePath, this );
-
-  connect( mp_voiceRecorder, SIGNAL( durationChanged( qint64 ) ), this, SLOT( updateRecorderProgress( qint64 ) ) );
-  connect( mp_voiceRecorder, SIGNAL( stateChanged( VoiceRecorder::State ) ), this, SLOT( onRecorderStateChanged( VoiceRecorder::State ) ) );
-  connect( mp_voiceRecorder, SIGNAL( error( VoiceRecorder::Error ) ), this,  SLOT( showRecorderError( VoiceRecorder::Error ) ) );
+  connect( mp_audioRecorder, SIGNAL( durationChanged( qint64 ) ), this, SLOT( updateRecorderProgress( qint64 ) ) );
+  connect( mp_audioRecorder, SIGNAL( statusChanged( QMediaRecorder::Status ) ), this, SLOT( onRecorderStatusChanged( QMediaRecorder::Status ) ) );
+  connect( mp_audioRecorder, SIGNAL( stateChanged( QMediaRecorder::State ) ), this, SLOT( onRecorderStateChanged( QMediaRecorder::State ) ) );
+  connect( mp_audioRecorder, SIGNAL( error( QMediaRecorder::Error ) ), this,  SLOT( showRecorderError( QMediaRecorder::Error ) ) );
   connect( mp_pbRecord, SIGNAL( clicked() ), this, SLOT( toggleRecord() ) );
   connect( mp_pbSend, SIGNAL( clicked() ), this, SLOT( sendVoiceMessage() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
@@ -62,15 +69,26 @@ void GuiRecordVoiceMessage::setRecipient( const QString& new_value )
 
 void GuiRecordVoiceMessage::closeEvent( QCloseEvent* e )
 {
-  if( mp_voiceRecorder->state() == VoiceRecorder::RecordingState || mp_voiceRecorder->state() == VoiceRecorder::PausedState )
-    mp_voiceRecorder->stop();
+  if( mp_audioRecorder->state() == QMediaRecorder::RecordingState || mp_audioRecorder->state() == QMediaRecorder::PausedState )
+    mp_audioRecorder->stop();
   e->accept();
 }
 
 void GuiRecordVoiceMessage::sendVoiceMessage()
 {
-  if( mp_voiceRecorder->state() == VoiceRecorder::RecordingState || mp_voiceRecorder->state() == VoiceRecorder::PausedState )
-    mp_voiceRecorder->stop();
+  if( mp_audioRecorder->state() == QMediaRecorder::RecordingState || mp_audioRecorder->state() == QMediaRecorder::PausedState )
+    mp_audioRecorder->stop();
+  QUrl output_url = mp_audioRecorder->outputLocation();
+  QString output_file_path = Bee::convertToNativeFolderSeparator( output_url.toLocalFile() );
+  if( output_file_path != m_filePath )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "QAudioRecorder old file path:" << qPrintable( m_filePath );
+    qDebug() << "QAudioRecorder old file path:" << qPrintable( output_file_path );
+#endif
+    m_filePath = output_file_path;
+  }
+
   QFileInfo file_info( m_filePath );
   if( file_info.exists() && file_info.size() > 0 )
   {
@@ -86,7 +104,7 @@ void GuiRecordVoiceMessage::sendVoiceMessage()
 
 void GuiRecordVoiceMessage::updateRecorderProgress( qint64 duration_ms )
 {
-  if( mp_voiceRecorder->error() != VoiceRecorder::NoError )
+  if( mp_audioRecorder->error() != QMediaRecorder::NoError )
     return;
 
   if( duration_ms < 1000 )
@@ -102,7 +120,7 @@ void GuiRecordVoiceMessage::updateRecorderProgress( qint64 duration_ms )
     QPalette p = mp_progressBar->palette();
     p.setColor( QPalette::Highlight, Qt::darkRed );
     mp_progressBar->setPalette( p );
-    mp_voiceRecorder->stop();
+    mp_audioRecorder->stop();
     mp_lStatus->setText( tr( "Stopped. Reached the maximum duration of the voice message" ) );
     mp_pbRecord->setEnabled( false );
   }
@@ -128,44 +146,63 @@ void GuiRecordVoiceMessage::updateRecorderProgress( qint64 duration_ms )
   }
 }
 
+void GuiRecordVoiceMessage::onRecorderStatusChanged( QMediaRecorder::Status recorder_status )
+{
+  QString status_message = "";
+  switch( recorder_status )
+  {
+  case QMediaRecorder::RecordingStatus:
+    status_message = tr( "Recording" );
+    break;
+  case QMediaRecorder::PausedStatus:
+    clearAudioLevels();
+    status_message = tr( "Paused" );
+    break;
+  case QMediaRecorder::UnloadedStatus:
+    clearAudioLevels();
+    status_message = tr( "Ready" );
+    break;
+  case QMediaRecorder::LoadedStatus:
+    clearAudioLevels();
+    break;
+  default:
+    break;
+  }
+
+  if( mp_audioRecorder->error() == QMediaRecorder::NoError && !status_message.isEmpty() )
+    mp_lStatus->setText( status_message );
+}
+
 void GuiRecordVoiceMessage::computeWarningDurantion()
 {
   m_warningDuration = qMax( 1, qMin( 60, Settings::instance().voiceMessageMaxDuration() - qMax( 1, Settings::instance().voiceMessageMaxDuration() / 5 ) ) );
 }
 
-void GuiRecordVoiceMessage::onRecorderStateChanged( VoiceRecorder::State recorder_state )
+void GuiRecordVoiceMessage::onRecorderStateChanged( QMediaRecorder::State recorder_state )
 {
   switch( recorder_state )
   {
-  case VoiceRecorder::RecordingState:
+  case QMediaRecorder::RecordingState:
     mp_pbRecord->setText( tr( "Pause" ) );
     mp_pbRecord->setIcon( IconManager::instance().icon( "pause.png" ) );
     mp_progressBar->setMaximum( Settings::instance().voiceMessageMaxDuration() );
     computeWarningDurantion();
     break;
-  case VoiceRecorder::PausedState:
+  case QMediaRecorder::PausedState:
     mp_pbRecord->setText( tr( "Resume" ) );
     mp_pbRecord->setIcon( IconManager::instance().icon( "record.png" ) );
     mp_progressBar->setMaximum( Settings::instance().voiceMessageMaxDuration() );
-    clearAudioLevels();
-    mp_lStatus->setText( tr( "Paused" ) );
     break;
-  case VoiceRecorder::StoppedState:
+  case QMediaRecorder::StoppedState:
     mp_pbRecord->setText( tr( "Record" ) );
     mp_pbRecord->setIcon( IconManager::instance().icon( "record.png" ) );
-    clearAudioLevels();
-    break;
-  case VoiceRecorder::IdleState:
-    mp_lStatus->setText( tr( "Start talking" ) + QString( "..." ) );
-    break;
-  default:
     break;
   }
 }
 
-void GuiRecordVoiceMessage::showRecorderError( VoiceRecorder::Error recorder_error )
+void GuiRecordVoiceMessage::showRecorderError( QMediaRecorder::Error recorder_error )
 {
-  QString s_error = mp_voiceRecorder->errorString();
+  QString s_error = mp_audioRecorder->errorString();
   qWarning() << "VoiceRecorder exit with error code" << static_cast<int>(recorder_error) << "-" << qPrintable( s_error );
   mp_lStatus->setText( s_error );
   mp_pbSend->setEnabled( false );
@@ -173,19 +210,19 @@ void GuiRecordVoiceMessage::showRecorderError( VoiceRecorder::Error recorder_err
 
 void GuiRecordVoiceMessage::toggleRecord()
 {
-  if( mp_voiceRecorder->error() != VoiceRecorder::NoError )
+  if( mp_audioRecorder->error() != QMediaRecorder::NoError )
   {
-    mp_lStatus->setText( tr( "The message could not be recorded because an error has occurred: %1" ).arg( mp_voiceRecorder->errorString() ) );
+    mp_lStatus->setText( tr( "The message could not be recorded because an error has occurred: %1" ).arg( mp_audioRecorder->errorString() ) );
     mp_pbSend->setEnabled( false );
     return;
   }
 
-  if( mp_voiceRecorder->state() == VoiceRecorder::StoppedState )
+  if( mp_audioRecorder->state() == QMediaRecorder::StoppedState )
   {
     if( QFile::exists( m_filePath ) )
     {
       if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you want to start recording your voice message again?"),
-                                 tr( "Yes, clean and restart" ), tr( "Cancel" ), QString(), 1, 1 ) != 0 )
+                                 tr( "Yes, clean and restart" ), tr( "Cancel" ), QString::null, 1, 1 ) != 0 )
       {
         return;
       }
@@ -194,20 +231,18 @@ void GuiRecordVoiceMessage::toggleRecord()
     mp_pbSend->setEnabled( true );
     QApplication::setOverrideCursor( Qt::WaitCursor );
     QApplication::processEvents();
-    mp_voiceRecorder->record();
+    mp_audioRecorder->setEncodingSettings( AudioManager::instance().defaultAudioEncoderSettings(), QVideoEncoderSettings(), AudioManager::instance().defaultAudioContainer() );
+    mp_audioRecorder->record();
     QApplication::restoreOverrideCursor();
   }
-  else if( mp_voiceRecorder->state() == VoiceRecorder::IdleState )
+  else if( mp_audioRecorder->state() != QMediaRecorder::PausedState )
   {
-    // do nothing
-  }
-  else if( mp_voiceRecorder->state() != VoiceRecorder::PausedState )
-  {
-    mp_voiceRecorder->pause();
+    mp_audioRecorder->pause();
   }
   else
   {
-    mp_voiceRecorder->record();
+    mp_lStatus->setText( tr( "Please wait" ) + QString( "..." ) );
+    mp_audioRecorder->record();
   }
 }
 
@@ -237,7 +272,6 @@ void GuiRecordVoiceMessage::clearAudioLevels()
   for( int i = 0; i < m_audioLevels.size(); i++ )
     m_audioLevels.at( i )->setLevel( 0 );
 }
-
 
 /* Static Functions from Qt AudioRecorder example */
 // This function returns the maximum possible sample value for a given audio format
@@ -306,7 +340,7 @@ QVector<qreal> GetAudioBufferLevels( const T* buffer, int frames, int channels )
 // returns the audio level for each channel
 QVector<qreal> GetAudioBufferLevels(const QAudioBuffer& buffer)
 {
-  QVector<qreal> values;
+    QVector<qreal> values;
 
     if (!buffer.format().isValid() || buffer.format().byteOrder() != QAudioFormat::LittleEndian)
         return values;

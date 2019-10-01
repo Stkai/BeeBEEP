@@ -24,66 +24,29 @@
 #ifndef BEEBEEP_VOICERECORDER_H
 #define BEEBEEP_VOICERECORDER_H
 
-#include "VoiceEncoder.h"
-#include "VoiceFile.h"
+#include "Config.h"
+
 
 class VoiceRecorder : public QObject
 {
   Q_OBJECT
 public:
-  enum Error { NoError, ResourceError, FormatError, OutOfSpaceError };
-  enum State { StoppedState, RecordingState, PausedState, IdleState, NumStates };
+  VoiceRecorder( QObject* parent = Q_NULLPTR );
 
-  VoiceRecorder( const QString& file_path, QObject* parent = Q_NULLPTR );
-  ~VoiceRecorder();
-
-  inline const QString& filePath() const;
-  inline Error error() const;
-  inline const QString& errorString() const;
-  inline State state() const;
-
-  bool setVolume( int );
-  int volume() const;
-
-signals:
-  void error( VoiceRecorder::Error );
-  void stateChanged( VoiceRecorder::State );
-  void levelChanged( qreal );
-  void durationChanged( qint64 );
+  inline const QString& currentFilePath() const;
 
 public slots:
-  void record();
+  void start();
   void pause();
+  void resume();
   void stop();
 
-protected slots:
-  void onAudioInputStateChanged( QAudio::State );
-  void onAudioInputError( QAudio::Error );
-  void updateTimeElapsed();
-
-protected:
-  bool initAudioInput();
-  void closeAudioInput();
-  bool initOutputFile();
-  void closeOutputFile();
-  void setError( VoiceRecorder::Error, const QString& );
-
 private:
-  QAudioInput* mp_audioInput;
-  QString m_filePath;
-  VoiceFile* mp_file;
-  Error m_error;
-  QString m_errorString;
-  State m_state;
-  qint64 m_duration;
-  QAudioFormat m_audioFormat;
+  QString m_currentFilePath;
 
 };
 
 // Inline Functions
-inline const QString& VoiceRecorder::filePath() const { return m_filePath; }
-inline VoiceRecorder::Error VoiceRecorder::error() const { return m_error; }
-inline const QString& VoiceRecorder::errorString() const { return m_errorString; }
-inline VoiceRecorder::State VoiceRecorder::state() const { return m_state; }
+inline const QString& VoiceRecorder::currentFilePath() const { return m_currentFilePath; }
 
 #endif // BEEBEEP_VOICERECORDER_H

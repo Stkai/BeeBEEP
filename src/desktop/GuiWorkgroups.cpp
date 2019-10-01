@@ -145,7 +145,7 @@ void GuiWorkgroups::removeWorkgroup()
     workgroups_to_remove.append( item->text( 0 ) );
 
   if( QMessageBox::question( this, Settings::instance().programName(), tr( "Don't you want to be part of these workgroups anymore?" ) + QString( "\n" ) + workgroups_to_remove.join( ", " ),
-                             tr( "Yes, remove me" ), tr( "Cancel" ), QString(), 1, 1 ) != 0 )
+                             tr( "Yes, remove me" ), tr( "Cancel" ), QString::null, 1, 1 ) != 0 )
     return;
 
   foreach( QString s, workgroups_to_remove )

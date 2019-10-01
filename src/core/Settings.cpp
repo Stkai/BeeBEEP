@@ -285,7 +285,7 @@ QString Settings::findFileInFolders( const QString& file_name, const QStringList
     else
       qDebug() << "File not found in folder:" << qPrintable( folder_path );
   }
-  return QString();
+  return QString::null;
 }
 
 void Settings::setDefaultFolders()
@@ -1484,12 +1484,6 @@ void Settings::load()
     }
   }
 
-  if( m_firstTime && isLanguageRTL() )
-  {
-    qDebug() << "Change text orientation in chat to RTL according to language selected";
-    m_showTextInModeRTL = true;
-  }
-
   m_lastSave = QDateTime::currentDateTime();
   sets->deleteLater();
 }
@@ -2209,13 +2203,4 @@ QString Settings::downloadDirectoryForUser( const User& u ) const
   }
   else
     return downloadDirectory();
-}
-
-bool Settings::isLanguageRTL() const
-{
-  QString current_language = m_language.toLatin1();
-  if( current_language == QLatin1String( "ar" ) )
-    return true;
-  else
-    return false;
 }

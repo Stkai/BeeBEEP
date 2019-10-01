@@ -77,7 +77,7 @@ public:
   QString defaultLanguageFolderPath() const;
   QString defaultHostsFilePath() const;
 
-  bool isDevelopmentVersion( const QString& v = QString() ) const;
+  bool isDevelopmentVersion( const QString& v = QString::null ) const;
   QString version( bool qt_version, bool debug_info ) const;
   int protoVersion() const;
   inline int dataStreamVersion( bool in_load_event ) const;
@@ -352,7 +352,6 @@ public:
 
   inline const QString& language() const;
   inline void setLanguage( const QString& );
-  bool isLanguageRTL() const;
 
   inline const QString& lastDirectorySelected() const;
   inline void setLastDirectorySelected( const QString& );

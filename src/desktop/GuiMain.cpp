@@ -356,7 +356,7 @@ void GuiMain::closeEvent( QCloseEvent* e )
       if( Settings::instance().promptOnCloseEvent() )
       {
         if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you want to quit %1?" ).arg( Settings::instance().programName() ),
-                               tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 1 )
+                               tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 1 )
         {
           e->ignore();
           return;
@@ -393,7 +393,7 @@ void GuiMain::closeEvent( QCloseEvent* e )
                                                                      .arg( tr( "<b>is not writable</b> by user:" ) )
                                                                      .arg( Settings::instance().localUser().accountName() )
                                                                      .arg( tr( "Do you want to close anyway?" ) ),
-                              tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 1 )
+                              tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 1 )
       {
         e->ignore();
         return;
@@ -410,7 +410,7 @@ void GuiMain::closeEvent( QCloseEvent* e )
                                                                      .arg( tr( "<b>is not writable</b> by user:" ) )
                                                                      .arg( Settings::instance().localUser().accountName() )
                                                                      .arg( tr( "Do you want to close anyway?" ) ),
-                              tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 1 )
+                              tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 1 )
         {
           e->ignore();
           return;
@@ -660,7 +660,7 @@ bool GuiMain::isFileTransferInProgress()
   {
     if( QMessageBox::warning( this, Settings::instance().programName(),
         tr( "There are still files that have not been transferred and will be interrupted. Do you want to disconnect anyway?" ),
-        tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 1 )
+        tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 1 )
       return true;
   }
   return false;
@@ -1626,7 +1626,7 @@ void GuiMain::settingsChanged( QAction* act )
       {
         if( QMessageBox::warning( this, Settings::instance().programName(),
                                tr( "There will be no saving of 'system' and 'file transfer' messages if this option is disabled." ),
-                               tr( "Ok" ), tr( "Cancel" ), QString(), 0, 1 ) )
+                               tr( "Ok" ), tr( "Cancel" ), QString::null, 0, 1 ) )
         {
           Settings::instance().setChatSaveFileTransfers( false );
           Settings::instance().setChatSaveSystemMessages( false );
@@ -1989,7 +1989,7 @@ void GuiMain::settingsChanged( QAction* act )
       {
         if( QMessageBox::question( this, Settings::instance().programName(),
                                tr( "Saving unsent messages may fail if 'Save users' and 'Save groups' options are not enabled. Do you want to enable them?" ),
-                               tr( "Yes" ), tr( "No"), QString(), 0, 1 ) == 0 )
+                               tr( "Yes" ), tr( "No"), QString::null, 0, 1 ) == 0 )
         {
           Settings::instance().setSaveUserList( true );
           Settings::instance().setSaveGroupList( true );
@@ -2164,7 +2164,7 @@ void GuiMain::showCheckSaveChatMessages()
   {
     if( QMessageBox::warning( this, Settings::instance().programName(),
                               tr( "There will be no saving of 'system' and 'file transfer' messages if this option is disabled." ),
-                              tr( "Ok" ), tr( "Cancel" ), QString(), 0, 1 ) )
+                              tr( "Ok" ), tr( "Cancel" ), QString::null, 0, 1 ) )
     {
       Settings::instance().setChatSaveFileTransfers( false );
       Settings::instance().setChatSaveSystemMessages( false );
@@ -2397,7 +2397,7 @@ void GuiMain::setUserStatusSelected( int user_status )
     {
       if( !Settings::instance().promptOnCloseEvent() || QMessageBox::question( this, Settings::instance().programName(),
                                    tr( "Do you want to disconnect from %1 network?" ).arg( Settings::instance().programName() ),
-                                   tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 0 )
+                                   tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 0 )
       {
         disconnectFromNetwork();
         return;
@@ -2672,14 +2672,14 @@ void GuiMain::downloadSharedFiles( const QList<SharedFileInfo>& share_file_info_
     if( QMessageBox::question( activeWindow(), Settings::instance().programName(),
                                tr( "You cannot download all these files at once. Do you want to download the first %1 files of the list?" )
                                .arg( Settings::instance().maxQueuedDownloads() ),
-                               tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) != 0 )
+                               tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
       return;
   }
   else if( share_file_info_list.size() > 100 )
   {
     if( QMessageBox::question( activeWindow(), Settings::instance().programName(),
                            tr( "Downloading %1 files is a hard duty. Maybe you have to wait a lot of minutes. Do yo want to continue?" ).arg( share_file_info_list.size() ),
-                           tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) != 0 )
+                           tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
       return;
   }
 
@@ -2715,7 +2715,7 @@ void GuiMain::downloadSharedFile( VNumber user_id, VNumber file_id )
   info_msg += QLatin1String( "\n" ) + tr( "Please reload the list of shared files." );
 
   if( QMessageBox::information( activeWindow(), Settings::instance().programName(), info_msg,
-                              tr( "Reload file list" ), tr( "Cancel" ), QString(), 1, 1 ) == 0 )
+                              tr( "Reload file list" ), tr( "Cancel" ), QString::null, 1, 1 ) == 0 )
   {
     if( mp_fileSharing )
       mp_fileSharing->updateNetworkFileList();
@@ -2958,7 +2958,7 @@ bool GuiMain::showWizard()
     if( !beeCore->changeLocalUser( gw.userName() ) )
     {
       if( QMessageBox::question( this, Settings::instance().programName(), tr( "Your name is not changed. Do you want to continue?" ),
-                                 tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 1 )
+                                 tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 1 )
       {
         return false;
       }
@@ -3230,7 +3230,7 @@ void GuiMain::createGroupChat()
     if( QMessageBox::question( this, Settings::instance().programName(),
                                      QString( "%1\n%2" ).arg( tr( "There is a chat with the same members: %1." ).arg( c.name() ) )
                                                         .arg( "How do you want to continue?" ),
-                                     tr( "Create new group chat" ), tr( "Cancel" ), QString(), 1, 1 ) == 1 )
+                                     tr( "Create new group chat" ), tr( "Cancel" ), QString::null, 1, 1 ) == 1 )
     {
       return;
     }
@@ -3555,7 +3555,7 @@ bool GuiMain::checkAllChatMembersAreConnected( const QList<VNumber>& users_id )
   {
     if( QMessageBox::question( activeWindow(), Settings::instance().programName(),
                                tr( "All the members of this chat are not online. The changes may not be permanent. Do you wish to continue?" ),
-                               tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) != 0 )
+                               tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
        return false;
   }
   return true;
@@ -3930,7 +3930,7 @@ void GuiMain::toggleUserFavorite( VNumber user_id )
 void GuiMain::removeUserFromList( VNumber user_id )
 {
   QString question_txt = tr( "Do you want to delete user %1?" ).arg( UserManager::instance().findUser( user_id ).name() );
-  if( QMessageBox::question( activeWindow(), Settings::instance().programName(), question_txt, tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) != 0 )
+  if( QMessageBox::question( activeWindow(), Settings::instance().programName(), question_txt, tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
     return;
   beeCore->removeOfflineUser( user_id );
 }
@@ -4088,7 +4088,7 @@ void GuiMain::clearRecentlyUsedUserStatus()
 {
   if( QMessageBox::question( this, Settings::instance().programName(),
                              tr( "Do you want to clear all saved status descriptions?" ),
-                             tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) != 0 )
+                             tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
     return;
 
   qDebug() << "User status description list is cleared";
@@ -4446,7 +4446,7 @@ void GuiMain::resetGeometryAndState()
 
 void GuiMain::askResetGeometryAndState()
 {
-  if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to reset window's geometry?" ), tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 0 )
+  if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to reset window's geometry?" ), tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 0 )
   {
     resetGeometryAndState();
     if( !Settings::instance().floatingChatGeometry().isEmpty() )
@@ -4688,7 +4688,7 @@ void GuiMain::selectIconSourcePath()
   {
     ret_code = QMessageBox::information( this, Settings::instance().programName(),
                                          tr( "You are using the default icons." ),
-                                         tr( "Select the icon folder" ), tr( "Cancel" ), QString(), 1, 1 );
+                                         tr( "Select the icon folder" ), tr( "Cancel" ), QString::null, 1, 1 );
   }
   else
   {
@@ -4725,7 +4725,7 @@ void GuiMain::selectEmoticonSourcePath()
   {
     ret_code = QMessageBox::information( this, Settings::instance().programName(),
                                          tr( "You are using the default emoticons." ),
-                                         tr( "Select the emoticon folder" ), tr( "Cancel" ), QString(), 1, 1 );
+                                         tr( "Select the emoticon folder" ), tr( "Cancel" ), QString::null, 1, 1 );
   }
   else
   {
@@ -4758,7 +4758,7 @@ void GuiMain::selectEmoticonSourcePath()
 void GuiMain::showRestartConnectionAlertMessage()
 {
   if( QMessageBox::information( this, Settings::instance().programName(), tr( "You have to restart your connection to apply changes." ),
-                            tr( "Restart connection now" ), tr( "Restart later manually" ), QString(), 0, 1 ) == 0 )
+                            tr( "Restart connection now" ), tr( "Restart later manually" ), QString::null, 0, 1 ) == 0 )
   {
     QTimer::singleShot( 0, this, SLOT( restartCore() ) );
   }
@@ -4818,7 +4818,7 @@ void GuiMain::updateChatColors()
 
 void GuiMain::resetAllColors()
 {
-  if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to restore the colors to the default ones?" ), tr( "Yes"), tr( "No" ), QString(), 1, 1 ) == 0 )
+  if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to restore the colors to the default ones?" ), tr( "Yes"), tr( "No" ), QString::null, 1, 1 ) == 0 )
   {
     Settings::instance().setUseDarkStyle( false );
     Settings::instance().resetAllColors();
@@ -4964,7 +4964,7 @@ void GuiMain::onShareDesktopRequestFromChat( VNumber chat_id, bool enable_deskto
   {
     if( QMessageBox::question( activeWindow(), Settings::instance().programName(),
                                tr( "Do you really want to share your desktop with %1?" ).arg( c.name() ),
-                               tr( "Yes" ), tr( "No" ), QString(), 0, 1 ) == 1 )
+                               tr( "Yes" ), tr( "No" ), QString::null, 0, 1 ) == 1 )
       return;
 
     foreach( VNumber user_id, c.usersId() )

@@ -44,7 +44,6 @@ public:
 #if QT_VERSION >= 0x050000
   static QAudioDeviceInfo defaultInputDevice();
   inline const QAudioFormat& defaultAudioFormat() const;
-  inline quint32 defaultAudioFormatMaxAmplitude() const;
   inline const QAudioEncoderSettings& defaultAudioEncoderSettings() const;
   QString defaultAudioContainer();
   QString defaultAudioContainerFilePrefix();
@@ -91,6 +90,6 @@ private:
 // Inline Functions
 #if QT_VERSION >= 0x050000
 inline const QAudioFormat& AudioManager::defaultAudioFormat() const { return m_defaultAudioFormat; }
-inline const QAudioEncoderSettings& AudioManager::defaultAudioEncoderSettings() const { return m_defaultAudioEncoderSettings; }
+  inline const QAudioEncoderSettings& AudioManager::defaultAudioEncoderSettings() const { return m_defaultAudioEncoderSettings; }
 #endif
 #endif // BEEBEEP_AUDIOMANAGER_H

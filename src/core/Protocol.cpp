@@ -792,13 +792,13 @@ QString Protocol::saveMessageRecord( const MessageRecord& mr ) const
   if( !u.isValid() )
   {
     qWarning() << "Unable to save unsent messages for invalid user id" << mr.toUserId();
-    return QString();
+    return QString::null;
   }
   Chat c = ChatManager::instance().chat( mr.chatId() );
   if( !c.isValid() )
   {
     qWarning() << "Unable to save unsent messages for invalid chat id" << mr.chatId();
-    return QString();
+    return QString::null;
   }
 
   QStringList sl_user;

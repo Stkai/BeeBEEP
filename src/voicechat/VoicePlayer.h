@@ -48,7 +48,6 @@ signals:
 protected slots:
   void onError( QMediaPlayer::Error );
 
-
 private:
   QString m_currentFilePath;
   QMediaPlayer* mp_voicePlayer;

@@ -83,7 +83,6 @@ win32|unix {
   include(qxt/qxt.pri)
   include(sharedesktop/sharedesktop.pri)
   contains(DEFINES, BEEBEEP_USE_VOICE_CHAT) {
-    include(opus/opus.pri)
     include(voicechat/voicechat.pri)
   }
 }
@@ -113,6 +112,3 @@ message( Resources: $$RESOURCES )
 macx: message( Info.plist: $$QMAKE_INFO_PLIST )
 message( Object dir: $$OBJECTS_DIR )
 unix: message( CXX flags: $$QMAKE_CXXFLAGS )
-contains( QMAKE_HOST.arch, arm.* ):{
-  message( Building BeeBEEP for ARM processor );
-}
