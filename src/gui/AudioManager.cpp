@@ -116,9 +116,11 @@ QString AudioManager::defaultAudioContainerFileSuffix()
   return QLatin1String( "wav" );
 }
 
-QString AudioManager::createDefaultAudioContainerFilename()
+QString AudioManager::createDefaultAudioContainerFilename( const QString& owner_name )
 {
-  return QString( "%1-%2.%3" ).arg( AudioManager::defaultAudioContainerFilePrefix() ).arg( Bee::dateTimeStringSuffix( QDateTime::currentDateTime() ) ).arg( AudioManager::defaultAudioContainerFileSuffix() );
+  QString valid_owner_name = Bee::removeInvalidCharactersForFilePath( owner_name.simplified() );
+  valid_owner_name.replace( " ", "" );
+  return QString( "%1-%2-%3.%4" ).arg( AudioManager::defaultAudioContainerFilePrefix() ).arg( valid_owner_name ).arg( Bee::dateTimeStringSuffix( QDateTime::currentDateTime() ) ).arg( AudioManager::defaultAudioContainerFileSuffix() );
 }
 
 #else

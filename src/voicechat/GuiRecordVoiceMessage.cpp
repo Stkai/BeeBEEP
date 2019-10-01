@@ -43,7 +43,8 @@ GuiRecordVoiceMessage::GuiRecordVoiceMessage( QWidget *parent )
   connect( mp_audioProbe, SIGNAL( audioBufferProbed( const QAudioBuffer& ) ), this, SLOT( processAudioBuffer( const QAudioBuffer& ) ) );
   mp_audioProbe->setSource( mp_audioRecorder );
 
-  QString file_path_tmp = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().cacheFolder() ).arg( AudioManager::instance().createDefaultAudioContainerFilename() ) );
+  QString file_path_tmp = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().cacheFolder() )
+                                                                                 .arg( AudioManager::instance().createDefaultAudioContainerFilename( Settings::instance().localUser().name() ) ) );
   m_filePath = Bee::uniqueFilePath( file_path_tmp, false );
   if( !mp_audioRecorder->setOutputLocation( QUrl::fromLocalFile( m_filePath ) ) )
     qWarning() << "QAudioRecorder is unable to set output location to" << qPrintable( m_filePath );

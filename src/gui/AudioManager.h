@@ -48,7 +48,7 @@ public:
   QString defaultAudioContainer();
   QString defaultAudioContainerFilePrefix();
   QString defaultAudioContainerFileSuffix();
-  QString createDefaultAudioContainerFilename();
+  QString createDefaultAudioContainerFilename( const QString& owner_name );
 #endif
 
   static AudioManager& instance()
