@@ -179,14 +179,17 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
 
       if( fi.isVoiceMessage() )
       {
-        QString sys_txt = tr( "%1 sent a voice message." ).arg( Bee::replaceHtmlSpecialCharacters( fi.isDownload() ? u.name() : Settings::instance().localUser().name() ) );
-        QString html_audio_icon = IconManager::instance().toHtml( "voice-message.png", "*v*" );
+        if( fi.isDownload() )
+        {
+          QString sys_txt = tr( "%1 sent a voice message." ).arg( Bee::replaceHtmlSpecialCharacters( u.name() ) );
+          QString html_audio_icon = IconManager::instance().toHtml( "voice-message.png", "*v*" );
 #ifdef BEEBEEP_USE_VOICE_CHAT
-        file_url.setScheme( FileInfo::urlSchemeVoiceMessage() );
+          file_url.setScheme( FileInfo::urlSchemeVoiceMessage() );
 #endif
-        sys_msg_play_voice_chat = QString( "%1 %2 <a href=\"%3\">%4</a>." ).arg( html_audio_icon, sys_txt, file_url.toString(), tr( "Listen" ) );
-        chat_voice_msg_html = QString( "[ <a href=\"%1\">%2</a> ] %3" ).arg( file_url.toString(), tr( "voice message" ), html_audio_icon );
-        // New feature: adding save as to avoid cache deleted ... select voice message folder?
+          sys_msg_play_voice_chat = QString( "%1 %2 <a href=\"%3\">%4</a>." ).arg( html_audio_icon, sys_txt, file_url.toString(), tr( "Listen" ) );
+          chat_voice_msg_html = QString( "[ <a href=\"%1\">%2</a> ] %3" ).arg( file_url.toString(), tr( "voice message" ), html_audio_icon );
+          // New feature: adding save as to avoid cache deleted ... select voice message folder?
+        }
       }
       else
       {
@@ -212,12 +215,15 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
       chat_voice_msg = ChatMessage( fi.isDownload() ? u.id() : ID_LOCAL_USER, chat_voice_msg_html, ChatMessage::Voice );
   }
 
-  if( !chat_voice_msg_html.isEmpty() )
+  if( fi.isVoiceMessage() )
   {
-    if( chat_voice_msg.isValid() )
-      dispatchToChat( chat_voice_msg, chat_to_show_message.id() );
-    else
-      dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sys_msg_play_voice_chat, DispatchToDefaultAndPrivateChat, ChatMessage::Voice );
+    if( fi.isDownload() )
+    {
+      if( chat_voice_msg.isValid() )
+        dispatchToChat( chat_voice_msg, chat_to_show_message.id() );
+      else
+        dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sys_msg_play_voice_chat, DispatchToDefaultAndPrivateChat, ChatMessage::Voice );
+    }
   }
   else
   {

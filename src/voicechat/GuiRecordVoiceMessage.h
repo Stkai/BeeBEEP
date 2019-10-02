@@ -47,6 +47,7 @@ protected slots:
   void onRecorderStatusChanged( QMediaRecorder::Status );
   void onRecorderStateChanged( QMediaRecorder::State );
   void showRecorderError( QMediaRecorder::Error );
+  void onVolumeChanged( int );
 
 protected:
   void clearAudioLevels();

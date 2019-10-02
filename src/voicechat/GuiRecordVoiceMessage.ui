@@ -9,14 +9,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>362</width>
-    <height>230</height>
+    <width>320</width>
+    <height>280</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>300</width>
-    <height>230</height>
+    <width>320</width>
+    <height>280</height>
    </size>
   </property>
   <property name="sizeGripEnabled">
@@ -26,83 +26,6 @@
    <bool>true</bool>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="1" column="0" colspan="3">
-    <widget class="QGroupBox" name="mp_gbVoiceMessage">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>80</height>
-      </size>
-     </property>
-     <property name="title">
-      <string>Voice message</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-     <layout class="QVBoxLayout" name="mp_layoutLevels">
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="QProgressBar" name="mp_progressBar">
-          <property name="minimumSize">
-           <size>
-            <width>100</width>
-            <height>26</height>
-           </size>
-          </property>
-          <property name="maximum">
-           <number>200</number>
-          </property>
-          <property name="value">
-           <number>0</number>
-          </property>
-          <property name="format">
-           <string notr="true">%v s</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="mp_pbRecord">
-          <property name="text">
-           <string>Record</string>
-          </property>
-          <property name="icon">
-           <iconset resource="../beebeep.qrc">
-            <normaloff>:/images/record.png</normaloff>:/images/record.png</iconset>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <widget class="QLabel" name="mp_lStatus">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>42</height>
-         </size>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
    <item row="2" column="0">
     <widget class="QPushButton" name="mp_pbCancel">
      <property name="minimumSize">
@@ -150,6 +73,131 @@
      </property>
     </widget>
    </item>
+   <item row="1" column="0" colspan="3">
+    <widget class="QGroupBox" name="mp_gbVoiceMessage">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>80</height>
+      </size>
+     </property>
+     <property name="title">
+      <string>Voice message</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QProgressBar" name="mp_progressBar">
+          <property name="minimumSize">
+           <size>
+            <width>100</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="maximum">
+           <number>200</number>
+          </property>
+          <property name="value">
+           <number>0</number>
+          </property>
+          <property name="format">
+           <string notr="true">%v s</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="mp_pbRecord">
+          <property name="text">
+           <string>Record</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../beebeep.qrc">
+            <normaloff>:/images/record.png</normaloff>:/images/record.png</iconset>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="mp_lStatus">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>42</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QLabel" name="mp_lVolume">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Volume</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSlider" name="mp_sliderVolume">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>26</height>
+           </size>
+          </property>
+          <property name="maximum">
+           <number>100</number>
+          </property>
+          <property name="singleStep">
+           <number>1</number>
+          </property>
+          <property name="value">
+           <number>100</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="tickPosition">
+           <enum>QSlider::TicksBothSides</enum>
+          </property>
+          <property name="tickInterval">
+           <number>10</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="2" column="0">
+       <layout class="QVBoxLayout" name="mp_layoutLevels"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
    <item row="0" column="0" colspan="3">
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
@@ -178,8 +226,9 @@
  </widget>
  <tabstops>
   <tabstop>mp_pbRecord</tabstop>
-  <tabstop>mp_pbCancel</tabstop>
+  <tabstop>mp_sliderVolume</tabstop>
   <tabstop>mp_pbSend</tabstop>
+  <tabstop>mp_pbCancel</tabstop>
   <tabstop>mp_leTo</tabstop>
  </tabstops>
  <resources>

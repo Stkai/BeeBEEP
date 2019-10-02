@@ -39,6 +39,13 @@ bool Core::sendVoiceMessageToChat( VNumber chat_id, const QString& file_path )
     return false;
   }
 
+  Chat c = ChatManager::instance().chat( chat_id );
+  if( !c.isValid() )
+  {
+    qWarning() << "Unable to send voice message because invalid chat found in Core::sendVoiceMessageToChat(...)";
+    return false;
+  }
+
   QFileInfo file( file_path );
   if( !file.exists() )
   {
@@ -47,17 +54,17 @@ bool Core::sendVoiceMessageToChat( VNumber chat_id, const QString& file_path )
     return false;
   }
 
-  Chat c = ChatManager::instance().chat( chat_id );
-  if( !c.isValid() )
-  {
-    qWarning() << "Unable to send voice message because invalid chat found in Core::sendVoiceMessageToChat(...)";
-    return false;
-  }
-
   FileInfo fi = mp_fileTransfer->addFile( file, "", false, c.privateId(), FileInfo::VoiceMessage );
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Voice message" << fi.path() << "is added to file transfer list";
 #endif
+
+  QUrl file_url( file_path );
+  file_url.setScheme( FileInfo::urlSchemeVoiceMessage() );
+  QString msg_html = QString( "[ <a href=\"%1\">%2</a> ] %3" ).arg( file_url.toString(),
+                                                                    tr( "voice message" ),
+                                                                    IconManager::instance().toHtml( "voice-message.png", "*v*" ) );
+  dispatchToChat( ChatMessage( ID_LOCAL_USER, msg_html, ChatMessage::Voice ), chat_id );
   Message m = Protocol::instance().fileInfoToMessage( fi );
   sendMessageToChat( c, m );
   return true;
