@@ -172,8 +172,6 @@ QString AudioManager::createDefaultVoiceMessageFilename()
   return QString( "%1-%2-%3.%4" ).arg( AudioManager::defaultVoiceContainerFilePrefix() ).arg( valid_owner_name ).arg( Bee::dateTimeStringSuffix( QDateTime::currentDateTime() ) ).arg( AudioManager::defaultVoiceContainerFileSuffix() );
 }
 
-#else
-void AudioManager::checkAudioDevice() {}
 #endif
 
 #if defined( Q_OS_OS2 )
