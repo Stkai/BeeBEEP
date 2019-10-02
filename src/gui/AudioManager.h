@@ -41,7 +41,7 @@ public:
   void playBeep();
   void clearBeep();
 
-#if QT_VERSION >= 0x050000
+#if defined( BEEBEEP_USE_VOICE_CHAT )
   QAudioDeviceInfo defaultInputDevice();
   inline const QAudioFormat& defaultVoiceFormat() const;
   inline const QAudioEncoderSettings& defaultVoiceEncoderSettings() const;
@@ -67,7 +67,7 @@ public:
 
 protected:
   AudioManager();
-#if QT_VERSION >= 0x050000
+#if defined( BEEBEEP_USE_VOICE_CHAT )
   void checkAudioDevice();
   QString defaultVoiceContainer();
   QString defaultVoiceContainerFilePrefix();
@@ -82,7 +82,7 @@ private:
 #else
   QSound* mp_sound;
 #endif
-#if QT_VERSION >= 0x050000
+#if defined( BEEBEEP_USE_VOICE_CHAT )
   QAudioFormat m_defaultVoiceFormat;
   QAudioEncoderSettings m_defaultVoiceEncoderSettings;
   QString m_currentInputDeviceName;
@@ -91,7 +91,7 @@ private:
 
 
 // Inline Functions
-#if QT_VERSION >= 0x050000
+#if defined( BEEBEEP_USE_VOICE_CHAT )
 inline const QAudioFormat& AudioManager::defaultVoiceFormat() const { return m_defaultVoiceFormat; }
 inline const QAudioEncoderSettings& AudioManager::defaultVoiceEncoderSettings() const { return m_defaultVoiceEncoderSettings; }
 #endif

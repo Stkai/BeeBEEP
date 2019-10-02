@@ -31,16 +31,16 @@ AudioManager* AudioManager::mp_instance = Q_NULLPTR;
 
 AudioManager::AudioManager()
   : mp_sound( Q_NULLPTR )
-#if QT_VERSION >= 0x050000
+#if defined( BEEBEEP_USE_VOICE_CHAT )
    ,m_defaultVoiceFormat(), m_defaultVoiceEncoderSettings(), m_currentInputDeviceName()
-#endif
 {
-#ifdef BEEBEEP_USE_VOICE_CHAT
   checkAudioDevice();
-#endif
 }
+#else
+{}
+#endif
 
-#if QT_VERSION >= 0x050000
+#if defined( BEEBEEP_USE_VOICE_CHAT )
 void AudioManager::checkAudioDevice()
 {
   QAudioDeviceInfo dev_info = QAudioDeviceInfo::defaultInputDevice();
