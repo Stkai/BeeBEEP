@@ -24,7 +24,7 @@
 #include "EmoticonManager.h"
 
 
-EmoticonManager* EmoticonManager::mp_instance = NULL;
+EmoticonManager* EmoticonManager::mp_instance = Q_NULLPTR;
 
 
 EmoticonManager::EmoticonManager()

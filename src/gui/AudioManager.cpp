@@ -161,6 +161,10 @@ QString AudioManager::defaultVoiceContainerFileSuffix()
   QString voice_container = defaultVoiceContainer();
   if( voice_container == QLatin1String( "audio/ogg" ) )
     return QLatin1String( "ogg" );
+#ifdef Q_OS_WIN
+  else if( voice_container == QLatin1String( "audio/raw" ) )
+    return QLatin1String( "wav" );
+#endif
   else
     return QLatin1String( "raw" );
 }
