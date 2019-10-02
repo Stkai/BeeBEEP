@@ -160,7 +160,7 @@ void Core::parseFileMessage( const User& u, const Message& m )
 
   if( m.hasFlag( Message::Refused ) )
   {
-    dispatchSystemMessage( chat_to_show_message.id(), u.id(), tr( "%1 %2 has refused to download %3." )
+    dispatchSystemMessage( chat_to_show_message.id(), u.id(), tr( "%1 %2 has refused to download the file: %3" )
                            .arg( IconManager::instance().toHtml( "upload.png", "*F*" ), Bee::replaceHtmlSpecialCharacters( u.name() ), fi.name() ),
                            chat_to_show_message.isValid() ? DispatchToChat : DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
     return;
@@ -185,9 +185,9 @@ void Core::parseFileMessage( const User& u, const Message& m )
 
   QString sys_msg;
   if( m.hasFlag( Message::VoiceMessage ) )
-    sys_msg = tr( "%1 %2 is sending to you the voice message: %3." ).arg( IconManager::instance().toHtml( "download.png", "*F*" ), Bee::replaceHtmlSpecialCharacters( u.name() ), fi.name() );
+    sys_msg = tr( "%1 %2 is sending to you the voice message: %3" ).arg( IconManager::instance().toHtml( "download.png", "*F*" ), Bee::replaceHtmlSpecialCharacters( u.name() ), fi.name() );
   else
-    sys_msg = tr( "%1 %2 is sending to you the file: %3." ).arg( IconManager::instance().toHtml( "download.png", "*F*" ), Bee::replaceHtmlSpecialCharacters( u.name() ), fi.name() );
+    sys_msg = tr( "%1 %2 is sending to you the file: %3" ).arg( IconManager::instance().toHtml( "download.png", "*F*" ), Bee::replaceHtmlSpecialCharacters( u.name() ), fi.name() );
   dispatchSystemMessage( chat_to_show_message.id(), u.id(), sys_msg, chat_to_show_message.isValid() ? DispatchToChat : DispatchToAllChatsWithUser, ChatMessage::FileTransfer );
 
   if( fi.isInShareBox() )

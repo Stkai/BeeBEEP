@@ -408,27 +408,27 @@
         <translation>için</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="182"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="184"/>
         <source>%1 sent a voice message.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="187"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="189"/>
         <source>Listen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="193"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="196"/>
         <source>Open</source>
         <translation>Aç</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="268"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="274"/>
         <source>%1 Unable to send %2 to %3: user is offline.</source>
         <translation>%1 %2 den %3 e gönderilemiyor: kullanıcı çevrimdışı.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="251"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="257"/>
         <source>%1 Unable to send %2. File transfer is disabled.</source>
         <translation>%1 %2 ye gönderilemiyor: Dosya aktarımı devre dışı.</translation>
     </message>
@@ -443,130 +443,139 @@
         <translation>İndir</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="197"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="200"/>
         <source>folder</source>
         <translation>klasör</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="277"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="283"/>
         <source>%1 %2: file not found.</source>
         <translation>%1 %2: dosya bulunamadı.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="291"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="297"/>
         <source>%1 %2 is a folder. You can share it.</source>
         <translation>%1 %2 bir klasördür. Paylaşabilirsiniz.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="316"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="322"/>
         <source>%1 Unable to send %2: %3 is not connected.</source>
         <translation>%1 %2 ye gönderilemiyor: %3 bağlı değil.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="310"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="316"/>
         <source>%1 You send %2 to %3.</source>
         <translation>%1 %2 den %3 ü gönderiyorsunuz.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="690"/>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="188"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="190"/>
+        <location filename="../src/core/CoreVoiceChat.cpp" line="65"/>
         <source>voice message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="342"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="348"/>
         <source>%1 You have refused to download %2 from %3.</source>
         <translation>%1 %3 den %2 i indirmeyi reddettiniz.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="370"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="376"/>
         <source>%1 You have refused to download folder %2 from %3.</source>
         <translation>%1 %3 den %2 klasörünü indirmeyi reddettiniz.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="472"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="478"/>
         <source>%1 is added to file sharing with only %2 of %3 files (%4 limit reached)</source>
         <translation>Dosya paylaşımına %1, sadece %2 %3 dosya ile eklenir (%4 sınırına ulaşıldı)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="478"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="484"/>
         <source>%1 is added to file sharing (%2)</source>
         <translation>Dosya paylaşımına %1 eklendi (%2)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="480"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="486"/>
         <source>%1 is added to file sharing with %2 files, %3</source>
         <translation>%1 %2 ile dosya paylaşımına eklendi, %3</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="511"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="517"/>
         <source>All paths are removed from file sharing</source>
         <translation>Tüm yollar dosya paylaşımından kaldırıldı</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="532"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="538"/>
         <source>%1 is removed from file sharing</source>
         <translation>%1 dosya paylaşımından kaldırıldı</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="534"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="540"/>
         <source>%1 is removed from file sharing with %2 files</source>
         <translation>%1 %2 ile dosya paylaşımından kaldırıldı</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="599"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="605"/>
         <source>%1 You are about to send %2 to %3. Checking folder...</source>
         <translation>%1 %2 den %3 ü yollamak üzeresiniz. Klasör kontrol ediliyor...</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="639"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="645"/>
         <source>%1 Unable to send folder %2</source>
         <translation>%1 %2 klasörü gönderilemiyor</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="644"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="650"/>
         <source>invalid user #%1.</source>
         <translation>geçersiz kullanıcı #%1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="651"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="657"/>
         <source>the folder is empty.</source>
         <translation>klasör boş.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="658"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="664"/>
         <source>file transfer is not working.</source>
         <translation>dosya aktarımı çalışmıyor.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="666"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="672"/>
         <source>%1 is not connected.</source>
         <translation>%1 bağlı değil.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="680"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="686"/>
         <source>internal error.</source>
         <translation>iç hata.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="685"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="691"/>
         <source>%1 You send folder %2 to %3.</source>
         <translation>%1 %3 klasörden %2 i gönderiyorsunuz.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="163"/>
         <source>%1 %2 has refused to download %3.</source>
-        <translation>%1 %2 %3 indirmeyi reddetti.</translation>
+        <translation type="vanished">%1 %2 %3 indirmeyi reddetti.</translation>
+    </message>
+    <message>
+        <source>%1 %2 is sending to you the file: %3.</source>
+        <translation type="vanished">%1 %2 size dosya gönderiyor: %3.</translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreParser.cpp" line="163"/>
+        <source>%1 %2 has refused to download the file: %3</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/core/CoreParser.cpp" line="188"/>
-        <source>%1 %2 is sending to you the voice message: %3.</source>
+        <source>%1 %2 is sending to you the voice message: %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/core/CoreParser.cpp" line="190"/>
-        <source>%1 %2 is sending to you the file: %3.</source>
-        <translation>%1 %2 size dosya gönderiyor: %3.</translation>
+        <source>%1 %2 is sending to you the file: %3</source>
+        <translation>%1 %2 size dosya gönderiyor: %3</translation>
     </message>
     <message>
         <location filename="../src/core/CoreParser.cpp" line="417"/>
@@ -707,7 +716,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreVoiceChat.cpp" line="45"/>
+        <location filename="../src/core/CoreVoiceChat.cpp" line="52"/>
         <source>%1 %2: voice message not found.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4410,22 +4419,23 @@ Lütfen farklı bir isim seçin.</translation>
 <context>
     <name>GuiRecordVoiceMessage</name>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="155"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="159"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="284"/>
         <source>Recording</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="159"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="163"/>
         <source>Paused</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="163"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="167"/>
         <source>Ready</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="124"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="128"/>
         <source>Stopped. Reached the maximum duration of the voice message</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4435,76 +4445,91 @@ Lütfen farklı bir isim seçin.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="52"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="53"/>
         <source>Click to start recording your message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="186"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="190"/>
         <source>Pause</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="192"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="196"/>
         <source>Resume</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="197"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="201"/>
         <source>Record</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="215"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="219"/>
         <source>The message could not be recorded because an error has occurred: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="224"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="228"/>
         <source>Do you want to start recording your voice message again?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="225"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="229"/>
         <source>Yes, clean and restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="225"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="229"/>
         <source>Cancel</source>
         <translation type="unfinished">İptal</translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="230"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="244"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="234"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="249"/>
         <source>Please wait</source>
         <translation type="unfinished">Lütfen bekleyin</translation>
+    </message>
+    <message>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="274"/>
+        <source>Volume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="274"/>
+        <source>muted</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>GuiRecordVoiceMessageDialog</name>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="38"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="85"/>
         <source>Voice message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="68"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="115"/>
         <source>Record</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="115"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="38"/>
         <source>Cancel</source>
         <translation type="unfinished">İptal</translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="145"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="68"/>
         <source>Send</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="158"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="161"/>
+        <source>Volume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="206"/>
         <source>To</source>
         <translation type="unfinished"></translation>
     </message>

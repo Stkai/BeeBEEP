@@ -108,11 +108,11 @@
     </message>
     <message>
         <source>%1 %2 has refused to download %3.</source>
-        <translation>%1 %2 ha rifiutato di scaricare %3.</translation>
+        <translation type="vanished">%1 %2 ha rifiutato di scaricare %3.</translation>
     </message>
     <message>
         <source>%1 %2 is sending to you the file: %3.</source>
-        <translation>%1 %2 ti sta inviando il seguente file: %3.</translation>
+        <translation type="vanished">%1 %2 ti sta inviando il seguente file: %3.</translation>
     </message>
     <message>
         <source>You have changed your nickname from %1 to %2.</source>
@@ -604,7 +604,19 @@
     </message>
     <message>
         <source>%1 %2 is sending to you the voice message: %3.</source>
-        <translation>%1 %2 ti sta inviando il messaggio vocale: %3.</translation>
+        <translation type="vanished">%1 %2 ti sta inviando il messaggio vocale: %3.</translation>
+    </message>
+    <message>
+        <source>%1 %2 has refused to download the file: %3</source>
+        <translation>%1 %2 ha rifiutato di scaricare il file: %3</translation>
+    </message>
+    <message>
+        <source>%1 %2 is sending to you the voice message: %3</source>
+        <translation>%1 %2 ti sta inviando il messaggio vocale: %3</translation>
+    </message>
+    <message>
+        <source>%1 %2 is sending to you the file: %3</source>
+        <translation>%1 %2 ti sta inviando il seguente file: %3</translation>
     </message>
 </context>
 <context>
@@ -3752,6 +3764,14 @@ Inserisci un nome differente.</translation>
         <source>Click to start recording your message</source>
         <translation>Fai clic per iniziare a registrare il tuo messaggio</translation>
     </message>
+    <message>
+        <source>Volume</source>
+        <translation>Volume</translation>
+    </message>
+    <message>
+        <source>muted</source>
+        <translation>muto</translation>
+    </message>
 </context>
 <context>
     <name>GuiRecordVoiceMessageDialog</name>
@@ -3774,6 +3794,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>To</source>
         <translation>A</translation>
+    </message>
+    <message>
+        <source>Volume</source>
+        <translation>Volume</translation>
     </message>
 </context>
 <context>

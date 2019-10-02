@@ -392,7 +392,7 @@
     </message>
     <message>
         <source>%1 %2 is sending to you the file: %3.</source>
-        <translation>%1 %2 відправляє вам файл: %3.</translation>
+        <translation type="vanished">%1 %2 відправляє вам файл: %3.</translation>
     </message>
     <message>
         <source>%1 Zero Configuration service closed.</source>
@@ -444,7 +444,7 @@
     </message>
     <message>
         <source>%1 %2 has refused to download %3.</source>
-        <translation>%1 %2 відмовився завантажувати %3.</translation>
+        <translation type="vanished">%1 %2 відмовився завантажувати %3.</translation>
     </message>
     <message>
         <source>%1 Network interface %2 is gone down.</source>
@@ -563,8 +563,16 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>%1 %2 is sending to you the voice message: %3.</source>
+        <source>%1 %2 has refused to download the file: %3</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 %2 is sending to you the voice message: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 %2 is sending to you the file: %3</source>
+        <translation>%1 %2 відправляє вам файл: %3</translation>
     </message>
 </context>
 <context>
@@ -3514,6 +3522,14 @@ Please select a different name.</source>
         <source>Click to start recording your message</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Volume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>muted</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiRecordVoiceMessageDialog</name>
@@ -3536,6 +3552,10 @@ Please select a different name.</source>
     <message>
         <source>To</source>
         <translation type="unfinished">Кому</translation>
+    </message>
+    <message>
+        <source>Volume</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
