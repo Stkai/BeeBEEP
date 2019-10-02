@@ -43,7 +43,7 @@ AudioManager::AudioManager()
 #if QT_VERSION >= 0x050000
 void AudioManager::checkAudioDevice()
 {
-  QAudioDeviceInfo dev_info = defaultInputDevice();
+  QAudioDeviceInfo dev_info = QAudioDeviceInfo::defaultInputDevice();
   qDebug() << "AudioManager uses default input device:" << qPrintable( dev_info.deviceName() );
   QStringList supported_codecs = dev_info.supportedCodecs();
   qDebug() << "AudioManager supports these input codecs:" << qPrintable( supported_codecs.join( ", " ) );
