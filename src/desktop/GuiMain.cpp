@@ -3099,7 +3099,10 @@ void GuiMain::openUrl( const QUrl& file_url )
     if( Settings::instance().useVoicePlayer() )
     {
       if( !mp_voicePlayer )
+      {
         mp_voicePlayer = new VoicePlayer( this );
+        connect( mp_voicePlayer, SIGNAL( openWithExternalPlayer( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
+      }
       QString voice_file_path = Bee::convertToNativeFolderSeparator( adj_file_url.toLocalFile() );
       if( !mp_voicePlayer->playFile( voice_file_path ) )
       {

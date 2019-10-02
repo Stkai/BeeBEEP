@@ -40,7 +40,13 @@ VoicePlayer::VoicePlayer( QObject* parent )
 
 void VoicePlayer::onError( QMediaPlayer::Error error_code )
 {
-  qWarning() << "Voice player error" << static_cast<int>(error_code) << "-" << qPrintable( mp_voicePlayer->errorString() );
+  qWarning() << "VoicePlayer is stopped due the error" << static_cast<int>(error_code) << "-" << qPrintable( mp_voicePlayer->errorString() );
+  if( error_code == QMediaPlayer::ResourceError || error_code == QMediaPlayer::FormatError )
+  {
+    qDebug() << "VoicePlayer tries to use external player to read file" << qPrintable( m_currentFilePath );
+    QUrl file_url = QUrl::fromLocalFile( m_currentFilePath );
+    emit openWithExternalPlayer( file_url );
+  }
   stop();
 }
 

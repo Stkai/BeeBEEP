@@ -44,6 +44,7 @@ public:
 signals:
   void playing( const QString& );
   void finished( const QString& );
+  void openWithExternalPlayer( const QUrl& );
 
 protected slots:
   void onError( QMediaPlayer::Error );
