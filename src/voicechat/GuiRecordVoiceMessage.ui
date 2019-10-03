@@ -2,9 +2,6 @@
 <ui version="4.0">
  <class>GuiRecordVoiceMessageDialog</class>
  <widget class="QDialog" name="GuiRecordVoiceMessageDialog">
-  <property name="windowModality">
-   <enum>Qt::WindowModal</enum>
-  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -20,9 +17,6 @@
    </size>
   </property>
   <property name="sizeGripEnabled">
-   <bool>true</bool>
-  </property>
-  <property name="modal">
    <bool>true</bool>
   </property>
   <layout class="QGridLayout" name="gridLayout">

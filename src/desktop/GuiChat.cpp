@@ -37,10 +37,6 @@
   #include "SpellChecker.h"
 #endif
 #include "UserManager.h"
-#ifdef BEEBEEP_USE_VOICE_CHAT
-  #include "GuiRecordVoiceMessage.h"
-#endif
-
 
 
 GuiChat::GuiChat( QWidget *parent )
@@ -88,7 +84,7 @@ GuiChat::GuiChat( QWidget *parent )
   mp_teChat->setAcceptRichText( false );
 
 #ifdef BEEBEEP_USE_VOICE_CHAT
-  connect( mp_pbRecordVoiceMessage, SIGNAL( clicked() ), this, SLOT( recordVoiceMessage() ) );
+  connect( mp_pbRecordVoiceMessage, SIGNAL( clicked() ), this, SIGNAL( showVoiceMessageDialogRequest() ) );
 #else
   mp_pbRecordVoiceMessage->setDisabled( true );
   mp_pbRecordVoiceMessage->hide();
@@ -1255,21 +1251,4 @@ void GuiChat::onTickEvent( int ticks )
 #else
 void GuiChat::onTickEvent( int )
 {}
-#endif
-
-#ifdef BEEBEEP_USE_VOICE_CHAT
-void GuiChat::recordVoiceMessage()
-{
-  if( Settings::instance().disableVoiceMessages() )
-    return;
-  GuiRecordVoiceMessage* grvm = new GuiRecordVoiceMessage( parentWidget() );
-  grvm->setModal( true );
-  grvm->setRecipient( ChatManager::instance().chatName( m_chatId ) );
-  grvm->show();
-  if( grvm->exec() == QDialog::Accepted )
-    emit sendVoiceMessageRequest( m_chatId, grvm->filePath() );
-  else
-    Settings::instance().addTemporaryFilePath( grvm->filePath() );
-  grvm->deleteLater();
-}
 #endif

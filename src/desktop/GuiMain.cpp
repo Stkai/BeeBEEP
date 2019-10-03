@@ -222,9 +222,6 @@ void GuiMain::setupChatConnections( GuiChat* gui_chat )
   connect( gui_chat, SIGNAL( shareDesktopToChatRequest( VNumber, bool ) ), this, SLOT( onShareDesktopRequestFromChat( VNumber, bool ) ) );
   connect( gui_chat, SIGNAL( screenshotToChatRequest( VNumber ) ), this, SLOT( sendScreenshotToChat( VNumber ) ) );
 #endif
-#ifdef BEEBEEP_USE_VOICE_CHAT
-  connect( gui_chat, SIGNAL( sendVoiceMessageRequest( VNumber, const QString& ) ), this, SLOT( sendVoiceMessageToChat( VNumber, const QString& ) ) );
-#endif
 }
 
 void GuiMain::checkWindowFlagsAndShow()
@@ -2353,7 +2350,7 @@ void GuiMain::updateUser( const User& u )
 
 void GuiMain::searchUsers()
 {
-  GuiNetwork gn;
+  GuiNetwork gn( this );
   gn.setModal( true );
   gn.loadSettings();
   gn.setSizeGripEnabled( true );
@@ -4003,6 +4000,10 @@ GuiFloatingChat* GuiMain::createFloatingChat( const Chat& c )
     connect( fl_chat, SIGNAL( readAllMessages( VNumber ) ), this, SLOT( readAllMessagesInChat( VNumber ) ) );
     connect( fl_chat, SIGNAL( showVCardRequest( VNumber ) ), this, SLOT( showVCard( VNumber ) ) );
     connect( fl_chat, SIGNAL( updateChatColorsRequest() ), this, SLOT( updateChatColors() ) );
+#ifdef BEEBEEP_USE_VOICE_CHAT
+    connect( fl_chat, SIGNAL( sendVoiceMessageRequest( VNumber, const QString& ) ), this, SLOT( sendVoiceMessageToChat( VNumber, const QString& ) ) );
+#endif
+
     m_floatingChats.append( fl_chat );
     fl_chat->setWindowFlagsAndGeometry();
     fl_chat->setSaveGeometryDisabled( Settings::instance().resetGeometryAtStartup() );

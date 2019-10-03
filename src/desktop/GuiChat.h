@@ -81,7 +81,7 @@ signals:
   void screenshotToChatRequest( VNumber );
 #endif
 #ifdef BEEBEEP_USE_VOICE_CHAT
-  void sendVoiceMessageRequest( VNumber, const QString& );
+  void showVoiceMessageDialogRequest();
 #endif
 
 public slots:
@@ -136,9 +136,6 @@ private slots:
   void sendScreenshotToChat();
   void sendScreenshotToChat_Private();
   void enableScreenshotAction();
-#endif
-#ifdef BEEBEEP_USE_VOICE_CHAT
-  void recordVoiceMessage();
 #endif
 
 protected:

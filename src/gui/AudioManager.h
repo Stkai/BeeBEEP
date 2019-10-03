@@ -69,7 +69,6 @@ protected:
   AudioManager();
 #if defined( BEEBEEP_USE_VOICE_CHAT )
   void checkAudioDevice();
-  QString defaultVoiceContainer();
   QString defaultVoiceContainerFilePrefix();
   QString defaultVoiceContainerFileSuffix();
 #endif

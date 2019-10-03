@@ -27,6 +27,9 @@
 #include "GuiFloatingChat.h"
 #include "GuiEmoticons.h"
 #include "GuiPresetMessageList.h"
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  #include "GuiRecordVoiceMessage.h"
+#endif
 #include "GuiUserList.h"
 #include "IconManager.h"
 #include "Settings.h"
@@ -105,6 +108,7 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
   connect( mp_chat, SIGNAL( closeRequest() ), this, SLOT( close() ) );
   connect( mp_chat, SIGNAL( updateChatColorsRequest() ), this, SIGNAL( updateChatColorsRequest() ) );
   connect( mp_chat, SIGNAL( showStatusMessageRequest( const QString&, int ) ), this, SLOT( showStatusMessage(const QString&, int ) ) );
+  connect( mp_chat, SIGNAL( showVoiceMessageDialogRequest() ), this, SLOT( showRecordMessageDialog() ) );
   connect( qApp, SIGNAL( focusChanged( QWidget*, QWidget* ) ), this, SLOT( onApplicationFocusChanged( QWidget*, QWidget* ) ) );
 }
 
@@ -527,3 +531,18 @@ void GuiFloatingChat::loadSavedMessages()
 {
   QTimer::singleShot( 0, mp_chat, SLOT( loadSavedMessages() ) );
 }
+
+#ifdef BEEBEEP_USE_VOICE_CHAT
+void GuiFloatingChat::showRecordMessageDialog()
+{
+  if( Settings::instance().disableVoiceMessages() )
+    return;
+  GuiRecordVoiceMessage* grvm = new GuiRecordVoiceMessage( this );
+  grvm->setModal( true );
+  grvm->setRecipient( ChatManager::instance().chatName( mp_chat->chatId() ) );
+  grvm->show();
+  if( grvm->exec() == QDialog::Accepted )
+    emit sendVoiceMessageRequest( mp_chat->chatId(), grvm->filePath() );
+  // deleted in Close Event to bypass crash if you close a modal dialog with QUIT
+}
+#endif

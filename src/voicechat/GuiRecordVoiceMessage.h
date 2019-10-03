@@ -41,6 +41,7 @@ public:
 
 protected slots:
   void sendVoiceMessage();
+  void cancelVoiceMessage();
   void toggleRecord();
   void processAudioBuffer( const QAudioBuffer& );
   void updateRecorderProgress( qint64 );
@@ -53,6 +54,7 @@ protected:
   void clearAudioLevels();
   void computeWarningDurantion();
   void closeEvent( QCloseEvent* );
+  void checkAndSetFilePath();
 
 private:
   QAudioRecorder* mp_audioRecorder;
@@ -62,6 +64,7 @@ private:
 
   int m_warningDuration;
   QColor m_defaultProgressBarColor;
+  bool m_fileAccepted;
 
 };
 

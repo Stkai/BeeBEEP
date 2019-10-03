@@ -1834,10 +1834,15 @@ void Settings::setLastDirectorySelectedFromFile( const QString& file_path )
 
 void Settings::addTemporaryFilePath( const QString& file_path )
 {
+  if( file_path.isEmpty() )
+    return;
   if( !m_tempFilePathList.contains( file_path ) )
   {
-    m_tempFilePathList.append( file_path );
-    qDebug() << "Temporary file added:" << qPrintable( file_path );
+    if( QFile::exists( file_path ) )
+    {
+      m_tempFilePathList.append( file_path );
+      qDebug() << "Temporary file added:" << qPrintable( file_path );
+    }
   }
 }
 

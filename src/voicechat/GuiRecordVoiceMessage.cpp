@@ -55,6 +55,7 @@ GuiRecordVoiceMessage::GuiRecordVoiceMessage( QWidget *parent )
   m_warningDuration = 80;
   mp_sliderVolume->setRange( 0, 100 );
   mp_sliderVolume->setValue( 100 );
+  m_fileAccepted = false;
 
   connect( mp_audioRecorder, SIGNAL( durationChanged( qint64 ) ), this, SLOT( updateRecorderProgress( qint64 ) ) );
   connect( mp_audioRecorder, SIGNAL( statusChanged( QMediaRecorder::Status ) ), this, SLOT( onRecorderStatusChanged( QMediaRecorder::Status ) ) );
@@ -63,7 +64,7 @@ GuiRecordVoiceMessage::GuiRecordVoiceMessage( QWidget *parent )
   connect( mp_sliderVolume, SIGNAL( valueChanged( int ) ), this, SLOT( onVolumeChanged( int ) ) );
   connect( mp_pbRecord, SIGNAL( clicked() ), this, SLOT( toggleRecord() ) );
   connect( mp_pbSend, SIGNAL( clicked() ), this, SLOT( sendVoiceMessage() ) );
-  connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
+  connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( cancelVoiceMessage() ) );
 }
 
 void GuiRecordVoiceMessage::setRecipient( const QString& new_value )
@@ -75,27 +76,43 @@ void GuiRecordVoiceMessage::closeEvent( QCloseEvent* e )
 {
   if( mp_audioRecorder->state() == QMediaRecorder::RecordingState || mp_audioRecorder->state() == QMediaRecorder::PausedState )
     mp_audioRecorder->stop();
+  if( !m_fileAccepted )
+  {
+    checkAndSetFilePath();
+    Settings::instance().addTemporaryFilePath( m_filePath );
+  }
   e->accept();
+  deleteLater();
+}
+
+void GuiRecordVoiceMessage::checkAndSetFilePath()
+{
+  QUrl output_url = mp_audioRecorder->outputLocation();
+  QString output_file_path = Bee::convertToNativeFolderSeparator( output_url.toLocalFile() );
+  if( output_file_path != m_filePath )
+  {
+  #ifdef BEEBEEP_DEBUG
+    qDebug() << "QAudioRecorder old file path:" << qPrintable( m_filePath );
+    qDebug() << "QAudioRecorder old file path:" << qPrintable( output_file_path );
+  #endif
+    m_filePath = output_file_path;
+  }
+}
+
+void GuiRecordVoiceMessage::cancelVoiceMessage()
+{
+  reject();
 }
 
 void GuiRecordVoiceMessage::sendVoiceMessage()
 {
   if( mp_audioRecorder->state() == QMediaRecorder::RecordingState || mp_audioRecorder->state() == QMediaRecorder::PausedState )
     mp_audioRecorder->stop();
-  QUrl output_url = mp_audioRecorder->outputLocation();
-  QString output_file_path = Bee::convertToNativeFolderSeparator( output_url.toLocalFile() );
-  if( output_file_path != m_filePath )
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "QAudioRecorder old file path:" << qPrintable( m_filePath );
-    qDebug() << "QAudioRecorder old file path:" << qPrintable( output_file_path );
-#endif
-    m_filePath = output_file_path;
-  }
-
+  checkAndSetFilePath();
   QFileInfo file_info( m_filePath );
   if( file_info.exists() && file_info.size() > 0 )
   {
+    m_fileAccepted = true;
     qDebug() << "Recorded voice message in file" << qPrintable( m_filePath );
     accept();
   }
@@ -235,9 +252,11 @@ void GuiRecordVoiceMessage::toggleRecord()
     mp_pbSend->setEnabled( true );
     QApplication::setOverrideCursor( Qt::WaitCursor );
     QApplication::processEvents();
+    m_fileAccepted = false;
     AudioManager::instance().defaultInputDevice();
     mp_audioRecorder->setEncodingSettings( AudioManager::instance().defaultVoiceEncoderSettings() );
     mp_audioRecorder->record();
+
     QApplication::restoreOverrideCursor();
   }
   else if( mp_audioRecorder->state() != QMediaRecorder::PausedState )

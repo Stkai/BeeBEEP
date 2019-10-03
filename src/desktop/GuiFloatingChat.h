@@ -28,6 +28,7 @@
 class GuiEmoticons;
 class GuiPresetMessageList;
 
+
 class GuiFloatingChat : public QMainWindow
 {
   Q_OBJECT
@@ -65,6 +66,9 @@ signals:
   void chatIsAboutToClose( VNumber );
   void showVCardRequest( VNumber );
   void updateChatColorsRequest();
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  void sendVoiceMessageRequest( VNumber, const QString& );
+#endif
 
 protected:
   void closeEvent( QCloseEvent* );
@@ -79,6 +83,7 @@ private slots:
   void toggleVisibilityPresetMessagesPanel();
   void onGroupMemberActionTriggered();
   void showGroupMenu();
+  void showRecordMessageDialog();
 
 private:
   GuiChat* mp_chat;

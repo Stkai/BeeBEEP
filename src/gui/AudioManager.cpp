@@ -141,16 +141,6 @@ QAudioDeviceInfo AudioManager::defaultInputDevice()
   return selected_device;
 }
 
-QString AudioManager::defaultVoiceContainer()
-{
-  if( m_defaultVoiceEncoderSettings.codec().contains( QLatin1String( "opus" ), Qt::CaseInsensitive ) )
-    return QLatin1String( "audio/ogg" );
-  else if( m_defaultVoiceEncoderSettings.codec().contains( QLatin1String( "speex" ), Qt::CaseInsensitive ) )
-    return QLatin1String( "audio/ogg" );
-  else
-    return QLatin1String( "audio/raw" );
-}
-
 QString AudioManager::defaultVoiceContainerFilePrefix()
 {
   return QLatin1String( "beemsg" );
@@ -158,13 +148,12 @@ QString AudioManager::defaultVoiceContainerFilePrefix()
 
 QString AudioManager::defaultVoiceContainerFileSuffix()
 {
-  QString voice_container = defaultVoiceContainer();
-  if( voice_container == QLatin1String( "audio/ogg" ) )
+  if( m_defaultVoiceEncoderSettings.codec().contains( QLatin1String( "opus" ), Qt::CaseInsensitive ) )
     return QLatin1String( "ogg" );
-#ifdef Q_OS_WIN
-  else if( voice_container == QLatin1String( "audio/raw" ) )
+  else if( m_defaultVoiceEncoderSettings.codec().contains( QLatin1String( "speex" ), Qt::CaseInsensitive ) )
+    return QLatin1String( "ogg" );
+  else if( m_defaultVoiceEncoderSettings.codec().contains( QLatin1String( "audio/pcm" ), Qt::CaseInsensitive ) )
     return QLatin1String( "wav" );
-#endif
   else
     return QLatin1String( "raw" );
 }
