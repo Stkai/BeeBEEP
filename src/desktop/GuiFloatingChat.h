@@ -83,7 +83,9 @@ private slots:
   void toggleVisibilityPresetMessagesPanel();
   void onGroupMemberActionTriggered();
   void showGroupMenu();
+#ifdef BEEBEEP_USE_VOICE_CHAT
   void showRecordMessageDialog();
+#endif
 
 private:
   GuiChat* mp_chat;
