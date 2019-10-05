@@ -854,6 +854,7 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().useDarkStyle() );
   act->setData( 77 );
+  mp_menuInterfaceSettings->addSeparator();
   act = mp_menuInterfaceSettings->addAction( tr( "Escape key minimize to tray icon" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().keyEscapeMinimizeInTray() );
