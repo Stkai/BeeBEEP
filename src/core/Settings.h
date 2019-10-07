@@ -36,6 +36,7 @@ class Settings
 public:
   QSettings* objectSettings() const; // deleteLater instance after call
 
+  inline const QString& currentFilePath() const;
   void setDefaultFolders();
   bool enableSaveData() const;
   inline bool rcFileExists() const;
@@ -604,6 +605,7 @@ protected:
   QStringList dataFolders() const;
 
 private:
+  QString m_currentFilePath;
   QString m_resourceFolder;
   QString m_dataFolder;
   QString m_cacheFolder;
@@ -888,6 +890,7 @@ private:
 
 
 // Inline Functions
+inline const QString& Settings::currentFilePath() const { return m_currentFilePath; }
 inline bool Settings::enableSaveData() const { return m_enableSaveData; }
 inline const QString& Settings::resourceFolder() const { return m_resourceFolder; }
 inline const QString& Settings::dataFolder() const { return m_dataFolder; }

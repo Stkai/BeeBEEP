@@ -35,6 +35,7 @@ Settings::Settings()
  : m_localUser( ID_LOCAL_USER )
 {
   m_settingsVersion = BEEBEEP_SETTINGS_VERSION;
+  m_currentFilePath = "";
 
   /* Default RC start */
   m_enableSaveData = true;
@@ -1078,6 +1079,14 @@ void Settings::load()
 {
   qDebug() << "Creating local user and loading settings";
   QSettings *sets = objectSettings();
+#ifdef Q_OS_WIN
+  if( m_useSettingsFileIni )
+    m_currentFilePath = Bee::convertToNativeFolderSeparator( sets->fileName() );
+  else
+    m_currentFilePath = ""; // registry path
+#else
+  m_currentFilePath = Bee::convertToNativeFolderSeparator( sets->fileName() );
+#endif
 
   m_firstTime = sets->allKeys().isEmpty();
   sets->beginGroup( "Version" );

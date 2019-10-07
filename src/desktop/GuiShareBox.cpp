@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "BeeUtils.h"
+#include "BeeApplication.h"
 #include "GuiIconProvider.h"
 #include "GuiShareBox.h"
 #include "GuiShareBoxFileInfoList.h"
@@ -60,7 +61,7 @@ GuiShareBox::GuiShareBox( QWidget *parent )
   m_myCurrentFolder = "";
   m_outCurrentFolder = "";
   m_userId = ID_INVALID;
-  mp_fsWatcher = new QFileSystemWatcher( this );
+  mp_fsWatcher = beeApp->fsWatcher();
 
   mp_pbMyUpdate->setToolTip( tr( "Update your BeeBOX" ) );
   mp_pbMyCreateFolder->setToolTip( tr( "Create folder in your BeeBOX" ) );

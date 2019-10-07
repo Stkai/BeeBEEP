@@ -61,6 +61,10 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
 
   m_defaultCss = styleSheet();
 
+  mp_fsWatcher = new QFileSystemWatcher;
+  m_settingsFilePath = "";
+  connect( mp_fsWatcher, SIGNAL( fileChanged( const QString& ) ), this, SLOT( onFileChanged( const QString& ) ) );
+
 #ifdef Q_OS_LINUX
   m_xcbConnectHasError = true;
   if( testAttribute( Qt::AA_DontShowIconsInMenus ) )
@@ -81,8 +85,33 @@ BeeApplication::~BeeApplication()
     delete mp_localServer;
   }
 
+  clearPathsInFsWatcher();
+  delete mp_fsWatcher;
+
   if( mp_instance )
     mp_instance = Q_NULLPTR;
+}
+
+void BeeApplication::setSettingsFilePath( const QString& settings_file_path )
+{
+  if( !m_settingsFilePath.isEmpty() )
+    mp_fsWatcher->removePath( m_settingsFilePath );
+  m_settingsFilePath = "";
+  if( !settings_file_path.isEmpty() )
+  {
+    if( mp_fsWatcher->addPath( settings_file_path ) )
+      m_settingsFilePath = settings_file_path;
+  }
+}
+
+void BeeApplication::clearPathsInFsWatcher()
+{
+  QStringList sl_paths = mp_fsWatcher->directories();
+  if( !sl_paths.isEmpty() )
+    mp_fsWatcher->removePaths( sl_paths );
+  sl_paths =  mp_fsWatcher->files();
+  if( !sl_paths.isEmpty() )
+    mp_fsWatcher->removePaths( sl_paths );
 }
 
 void BeeApplication::forceShutdown()
@@ -390,4 +419,10 @@ void BeeApplication::ignoreEvent( const QString& log_text = "" )
 {
   if( !log_text.isEmpty() )
     qDebug() << log_text;
+}
+
+void BeeApplication::onFileChanged( const QString& file_path )
+{
+  if( file_path == m_settingsFilePath )
+    qWarning() << "Settings file changed: please edit the settings file only if BeeBEEP is closed or changes will be lost";
 }

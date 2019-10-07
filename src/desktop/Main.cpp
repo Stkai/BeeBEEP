@@ -214,6 +214,7 @@ int main( int argc, char *argv[] )
   bee_app.setAttribute( Qt::AA_DontUseNativeMenuBar );
   if( Settings::instance().autoUserAway() )
     bee_app.setIdleTimeout( Settings::instance().userAwayTimeout() );
+  bee_app.setSettingsFilePath( Settings::instance().currentFilePath() );
 
   Core bee_core;
   bee_core.loadUsersAndGroups();

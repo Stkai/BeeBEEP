@@ -63,6 +63,10 @@ public:
   inline bool isInSleepMode() const;
   void wakeFromSleep();
 
+  inline QFileSystemWatcher* fsWatcher() const;
+  void clearPathsInFsWatcher();
+  void setSettingsFilePath( const QString& );
+
 #ifdef Q_OS_WIN
   bool winEventFilter( MSG*, long* );
 #endif
@@ -99,6 +103,7 @@ protected slots:
   void setIdle();
   void removeIdle();
   void slotConnectionEstablished();
+  void onFileChanged( const QString& );
 
 private:
   static BeeApplication* mp_instance;
@@ -125,10 +130,14 @@ private:
 
   QString m_defaultCss;
 
+  QFileSystemWatcher* mp_fsWatcher;
+  QString m_settingsFilePath;
+
 };
 
 // Inline Functions
 inline int BeeApplication::idleTimeout() const { return m_idleTimeout; }
 inline bool BeeApplication::isInSleepMode() const { return m_isInSleepMode; }
+inline QFileSystemWatcher* BeeApplication::fsWatcher() const { return mp_fsWatcher; }
 
 #endif // BEEBEEP_APPLICATION_H
