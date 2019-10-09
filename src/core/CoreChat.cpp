@@ -961,7 +961,7 @@ void Core::addChatHeader( Chat* p_chat )
 
   if( Settings::instance().disableConnectionSocketEncryption() )
   {
-    header_msg = QString( "%1 %2." ).arg( IconManager::instance().toHtml( "warning.png", "*!*" ), tr( "End-to-end encryption disabled" ) );
+    header_msg = QString( "%1 %2." ).arg( IconManager::instance().toHtml( "warning.png", "*!*" ), tr( "End-to-end encryption is disabled" ) );
     p_chat->addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( header_msg ), ChatMessage::System ) );
   }
 }

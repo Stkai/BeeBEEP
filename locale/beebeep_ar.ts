@@ -332,7 +332,7 @@
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="964"/>
-        <source>End-to-end encryption disabled</source>
+        <source>End-to-end encryption is disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

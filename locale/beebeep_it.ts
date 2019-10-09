@@ -620,6 +620,10 @@
     </message>
     <message>
         <source>End-to-end encryption disabled</source>
+        <translation type="vanished">La crittografia nelle connessioni è stata disabilitata</translation>
+    </message>
+    <message>
+        <source>End-to-end encryption is disabled</source>
         <translation>La crittografia nelle connessioni è stata disabilitata</translation>
     </message>
 </context>

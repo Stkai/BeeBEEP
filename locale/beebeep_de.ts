@@ -591,7 +591,7 @@
         <translation>%1 %2 sendet dir folgende Datei: %3</translation>
     </message>
     <message>
-        <source>End-to-end encryption disabled</source>
+        <source>End-to-end encryption is disabled</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

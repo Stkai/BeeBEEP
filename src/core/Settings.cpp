@@ -599,7 +599,7 @@ void Settings::loadRcFile()
     }
     m_skipLocalHardwareAddresses.removeDuplicates();
   }
-  m_disableConnectionSocketEncryption =  sets->value( "DisableConnectionSocketEncryption", m_disableConnectionSocketEncryption ).toBool();
+  m_disableConnectionSocketEncryption = sets->value( "DisableConnectionSocketEncryption", m_disableConnectionSocketEncryption ).toBool();
   sets->endGroup();
   QStringList key_list = sets->allKeys();
   foreach( QString key, key_list )

@@ -144,7 +144,8 @@ Message Protocol::toMessage( const QByteArray& byte_array_data, int proto_versio
   QStringList sl = message_data.split( PROTOCOL_FIELD_SEPARATOR, QString::KeepEmptyParts );
   if( sl.size() < 7 )
   {
-    qWarning() << "Invalid number of fields in message:" << message_data.simplified();
+    if( !Settings::instance().disableConnectionSocketEncryption() )
+      qWarning() << "Invalid number of fields in message:" << message_data.simplified();
     return m;
   }
 
