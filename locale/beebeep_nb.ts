@@ -338,6 +338,11 @@
         <translation>Samtale med alle brukere</translation>
     </message>
     <message>
+        <location filename="../src/core/CoreChat.cpp" line="964"/>
+        <source>End-to-end encryption disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/core/CoreChat.cpp" line="437"/>
         <source>Unable to send the message to %1.</source>
         <translation>Kan ikke sende meldingen til %1.</translation>
@@ -4934,7 +4939,7 @@ Velg et annet navn.</translation>
         <translation type="obsolete">Oppdater din ShareBox</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="67"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="68"/>
         <source>Show current folder</source>
         <translation>Vis aktiv mappe</translation>
     </message>
@@ -4943,7 +4948,7 @@ Velg et annet navn.</translation>
         <translation type="obsolete">Oppdater ShareBox</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="69"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="70"/>
         <source>Back to parent folder</source>
         <translation>Tilbake til overordna mappe</translation>
     </message>
@@ -4964,73 +4969,73 @@ Velg et annet navn.</translation>
         <translation type="obsolete">%1 - Velg ShareBox-mappa</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="65"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="66"/>
         <source>Update your BeeBOX</source>
         <translation>Oppdater BeeBOX&apos;en din</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="66"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="67"/>
         <source>Create folder in your BeeBOX</source>
         <translation>Opprett mappe i BeeBOX&apos;en din</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="68"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="69"/>
         <source>Update BeeBOX</source>
         <translation>Oppdater BeeBOX</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="70"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="71"/>
         <source>Create folder in BeeBOX</source>
         <translation>Opprett mappe i BeeBOX</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="119"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="120"/>
         <source>BeeBOX path does not exist. Please select a valid folder.</source>
         <translation>BeeBOS-sti eksisterer ikke. Vennligst velg ei gyldig mappe.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="132"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="133"/>
         <source>%1 - Select the BeeBOX folder</source>
         <translation>%1 - Velg BeeBOX-mappa</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="436"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="437"/>
         <source>%1: access denied.</source>
         <translation>%1: tilgang avvist.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="446"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="447"/>
         <source>%1 &lt;b&gt;%2&lt;/b&gt;</source>
         <translation>%1 &lt;b&gt;%2&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="446"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="447"/>
         <source>is unavailable</source>
         <translation>er utilgjengelig</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="467"/>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="471"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="468"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="472"/>
         <source>Please wait</source>
         <translation>Vennligst vent</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="469"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="470"/>
         <source>Please wait for path %1</source>
         <translation>Vennligst vent på stien %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="477"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="478"/>
         <source>Disabled</source>
         <translation>Deaktivert</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="594"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="595"/>
         <source>Please insert the new folder name</source>
         <translation>Vennligst angi nytt mappenavn</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="600"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="601"/>
         <source>%1 already exists.</source>
         <translation>%1 eksisterer allerede.</translation>
     </message>
@@ -6317,7 +6322,7 @@ Velg et annet navn.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2190"/>
+        <location filename="../src/core/Settings.cpp" line="2202"/>
         <source>Autoresponder</source>
         <translation>Auto-responder</translation>
     </message>

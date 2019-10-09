@@ -245,7 +245,7 @@ qint64 ConnectionSocket::readBlock()
 
   m_blockSize = 0;
 
-  QByteArray decrypted_byte_array = Protocol::instance().decryptByteArray( byte_array_read, cipherKey(), m_protoVersion );
+  QByteArray decrypted_byte_array = Settings::instance().disableConnectionSocketEncryption() ? byte_array_read : Protocol::instance().decryptByteArray( byte_array_read, cipherKey(), m_protoVersion );
 
 #if defined( CONNECTION_SOCKET_IO_DEBUG_VERBOSE )
   qDebug() << "ConnectionSocket read from" << qPrintable( m_networkAddress.toString() ) << "the byte array:" << decrypted_byte_array;
@@ -338,7 +338,7 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
 #if defined( CONNECTION_SOCKET_IO_DEBUG_VERBOSE )
   qDebug() << "ConnectionSocket is sending to" << qPrintable( m_networkAddress.toString() ) << "the following data:" << byte_array;
 #endif
-  QByteArray byte_array_to_send = Protocol::instance().encryptByteArray( byte_array, cipherKey(), m_protoVersion );
+  QByteArray byte_array_to_send = Settings::instance().disableConnectionSocketEncryption() ? byte_array : Protocol::instance().encryptByteArray( byte_array, cipherKey(), m_protoVersion );
 
   QByteArray data_serialized = serializeData( byte_array_to_send );
 

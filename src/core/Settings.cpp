@@ -128,6 +128,8 @@ Settings::Settings()
   m_checkUserConnectedFromDatagramIp = false;
   m_skipLocalHardwareAddresses = QStringList();
 
+  m_disableConnectionSocketEncryption = false;
+
   m_rcFileExists = false;
   /* Default RC end */
 
@@ -597,6 +599,7 @@ void Settings::loadRcFile()
     }
     m_skipLocalHardwareAddresses.removeDuplicates();
   }
+  m_disableConnectionSocketEncryption =  sets->value( "DisableConnectionSocketEncryption", m_disableConnectionSocketEncryption ).toBool();
   sets->endGroup();
   QStringList key_list = sets->allKeys();
   foreach( QString key, key_list )

@@ -329,6 +329,11 @@
         <translation>Beszélgetés minden felhasználóval</translation>
     </message>
     <message>
+        <location filename="../src/core/CoreChat.cpp" line="964"/>
+        <source>End-to-end encryption disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/core/CoreChat.cpp" line="476"/>
         <source>The message will be delivered to %1.</source>
         <translation>Az üzenet továbbítódik a %1.</translation>
@@ -4924,7 +4929,7 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation type="obsolete">Hozzon létre egy mappát a ShareBox-ban</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="67"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="68"/>
         <source>Show current folder</source>
         <translation>Az aktuális mappa megjelenítése</translation>
     </message>
@@ -4933,7 +4938,7 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation type="obsolete">ShareBox frissítése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="69"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="70"/>
         <source>Back to parent folder</source>
         <translation>Vissza a szülő mappába</translation>
     </message>
@@ -4950,73 +4955,73 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation type="obsolete">%1 - Válassza ki a ShareBox mappát</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="65"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="66"/>
         <source>Update your BeeBOX</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="66"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="67"/>
         <source>Create folder in your BeeBOX</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="68"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="69"/>
         <source>Update BeeBOX</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="70"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="71"/>
         <source>Create folder in BeeBOX</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="119"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="120"/>
         <source>BeeBOX path does not exist. Please select a valid folder.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="132"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="133"/>
         <source>%1 - Select the BeeBOX folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="436"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="437"/>
         <source>%1: access denied.</source>
         <translation>%1: hozzáférés megtagadva.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="446"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="447"/>
         <source>%1 &lt;b&gt;%2&lt;/b&gt;</source>
         <translation>%1 &lt;b&gt;%2&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="446"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="447"/>
         <source>is unavailable</source>
         <translation>nem elérhető</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="467"/>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="471"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="468"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="472"/>
         <source>Please wait</source>
         <translation>Kérlek várj</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="469"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="470"/>
         <source>Please wait for path %1</source>
         <translation>Várjon a %1 elérési útra</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="477"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="478"/>
         <source>Disabled</source>
         <translation>Tiltva</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="594"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="595"/>
         <source>Please insert the new folder name</source>
         <translation>Kérjük adja meg  az új mappa nevét</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="600"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="601"/>
         <source>%1 already exists.</source>
         <translation>%1 már létezik.</translation>
     </message>
@@ -6287,7 +6292,7 @@ Kérjük, válassz egy másik nevet.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2190"/>
+        <location filename="../src/core/Settings.cpp" line="2202"/>
         <source>Autoresponder</source>
         <translation type="unfinished"></translation>
     </message>

@@ -338,6 +338,11 @@
         <translation>Discuter avec tous les utilisateurs</translation>
     </message>
     <message>
+        <location filename="../src/core/CoreChat.cpp" line="964"/>
+        <source>End-to-end encryption disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/core/CoreChat.cpp" line="437"/>
         <source>Unable to send the message to %1.</source>
         <translation>Impossible d&apos;envoyer le message à %1.</translation>
@@ -4971,7 +4976,7 @@ Please select a different name.</source>
         <translation type="obsolete">Créer un dossier dans votre ShareBox</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="67"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="68"/>
         <source>Show current folder</source>
         <translation>Montrer le dossier en cours</translation>
     </message>
@@ -4980,7 +4985,7 @@ Please select a different name.</source>
         <translation type="obsolete">Mettre à jour ShareBox</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="69"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="70"/>
         <source>Back to parent folder</source>
         <translation>Retour au dossier parent</translation>
     </message>
@@ -4997,73 +5002,73 @@ Please select a different name.</source>
         <translation type="obsolete">%1 - Choisir le dossier ShareBox</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="65"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="66"/>
         <source>Update your BeeBOX</source>
         <translation>Mettre à jour votre BeeBOX</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="66"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="67"/>
         <source>Create folder in your BeeBOX</source>
         <translation>Créer un dossier dans votre BeeBOX</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="68"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="69"/>
         <source>Update BeeBOX</source>
         <translation>Mettre à jour BeeBOX</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="70"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="71"/>
         <source>Create folder in BeeBOX</source>
         <translation>Créer un dossier dans BeeBOX</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="119"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="120"/>
         <source>BeeBOX path does not exist. Please select a valid folder.</source>
         <translation>Le chemin vers BeeBOX n&apos;existe pas. Veuillez choisir un dossier valide.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="132"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="133"/>
         <source>%1 - Select the BeeBOX folder</source>
         <translation>%1 - Choisir le dossier BeeBOX</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="436"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="437"/>
         <source>%1: access denied.</source>
         <translation>%1: accès refusé.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="446"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="447"/>
         <source>%1 &lt;b&gt;%2&lt;/b&gt;</source>
         <translation>%1 &lt;b&gt;%2&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="446"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="447"/>
         <source>is unavailable</source>
         <translation>n&apos;est pas disponible</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="467"/>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="471"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="468"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="472"/>
         <source>Please wait</source>
         <translation>Veuillez patienter</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="469"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="470"/>
         <source>Please wait for path %1</source>
         <translation>Veuillez patienter pour le chemin %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="477"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="478"/>
         <source>Disabled</source>
         <translation>Désactivé</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="594"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="595"/>
         <source>Please insert the new folder name</source>
         <translation>Veuillez saisir le nouveau nom de dossier</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="600"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="601"/>
         <source>%1 already exists.</source>
         <translation>%1 existe déjà.</translation>
     </message>
@@ -6359,7 +6364,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2190"/>
+        <location filename="../src/core/Settings.cpp" line="2202"/>
         <source>Autoresponder</source>
         <translation>Répondeur automatique</translation>
     </message>

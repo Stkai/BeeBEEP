@@ -327,6 +327,11 @@
         <translation>與所有使用者聊天</translation>
     </message>
     <message>
+        <location filename="../src/core/CoreChat.cpp" line="964"/>
+        <source>End-to-end encryption disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/core/CoreChat.cpp" line="476"/>
         <source>The message will be delivered to %1.</source>
         <translation>訊息將傳遞到 %1。</translation>
@@ -4808,83 +4813,83 @@ Please select a different name.</source>
 <context>
     <name>GuiShareBox</name>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="67"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="68"/>
         <source>Show current folder</source>
         <translation>顯示目前資料夾</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="69"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="70"/>
         <source>Back to parent folder</source>
         <translation>返回上層資料夾</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="65"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="66"/>
         <source>Update your BeeBOX</source>
         <translation>更新您的 BeeBOX</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="66"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="67"/>
         <source>Create folder in your BeeBOX</source>
         <translation>在 BeeBOX 建立資料夾</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="68"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="69"/>
         <source>Update BeeBOX</source>
         <translation>更新 BeeBOX</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="70"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="71"/>
         <source>Create folder in BeeBOX</source>
         <translation>在 BeeBOX 建立資料夾</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="119"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="120"/>
         <source>BeeBOX path does not exist. Please select a valid folder.</source>
         <translation>BeeBOX 路徑不存在。 請選取有效的資料夾。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="132"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="133"/>
         <source>%1 - Select the BeeBOX folder</source>
         <translation>%1 - 選取 BeeBOX 資料夾</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="436"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="437"/>
         <source>%1: access denied.</source>
         <translation>%1: 拒絕存取。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="446"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="447"/>
         <source>%1 &lt;b&gt;%2&lt;/b&gt;</source>
         <translation>%1 &lt;b&gt;%2&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="446"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="447"/>
         <source>is unavailable</source>
         <translation>不可用</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="467"/>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="471"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="468"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="472"/>
         <source>Please wait</source>
         <translation>請稍候</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="469"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="470"/>
         <source>Please wait for path %1</source>
         <translation>請稍候路徑 %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="477"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="478"/>
         <source>Disabled</source>
         <translation>已停用</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="594"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="595"/>
         <source>Please insert the new folder name</source>
         <translation>請輸入新的資料夾名稱</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="600"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="601"/>
         <source>%1 already exists.</source>
         <translation>%1 已經存在。</translation>
     </message>
@@ -6105,7 +6110,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2190"/>
+        <location filename="../src/core/Settings.cpp" line="2202"/>
         <source>Autoresponder</source>
         <translation>自動回應器</translation>
     </message>

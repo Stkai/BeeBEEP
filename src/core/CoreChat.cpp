@@ -958,6 +958,12 @@ void Core::addChatHeader( Chat* p_chat )
   }
 
   p_chat->addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( header_msg ), ChatMessage::Header ) );
+
+  if( Settings::instance().disableConnectionSocketEncryption() )
+  {
+    header_msg = QString( "%1 %2." ).arg( IconManager::instance().toHtml( "warning.png", "*!*" ), tr( "End-to-end encryption disabled" ) );
+    p_chat->addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( header_msg ), ChatMessage::System ) );
+  }
 }
 
 void Core::linkSavedChat( const QString& from_saved_chat_name, const QString& to_saved_chat_name, bool prepend_to_existing_saved_chat )

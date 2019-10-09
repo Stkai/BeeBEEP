@@ -569,6 +569,8 @@ public:
 
   QNetworkProxy systemNetworkProxy( const QNetworkProxyQuery& ) const;
 
+  inline bool disableConnectionSocketEncryption() const;
+
   QString simpleEncrypt( const QString& );
   QString simpleDecrypt( const QString& );
 
@@ -648,6 +650,8 @@ private:
   bool m_disableCreateMessage;
   bool m_disableMenuSettings;
   bool m_disableVoiceMessages;
+
+  bool m_disableConnectionSocketEncryption;
 
   QStringList m_skipLocalHardwareAddresses;
 
@@ -1278,5 +1282,6 @@ inline void Settings::setVoiceMessageMaxDuration( int new_value ) { m_voiceMessa
 inline int Settings::voiceMessageMaxDuration() const { return m_voiceMessageMaxDuration;}
 inline void Settings::setUseVoicePlayer( bool new_value ) { m_useVoicePlayer = new_value; }
 inline bool Settings::useVoicePlayer() const { return m_useVoicePlayer; }
+inline bool Settings::disableConnectionSocketEncryption() const { return m_disableConnectionSocketEncryption; }
 
 #endif // BEEBEEP_SETTINGS_

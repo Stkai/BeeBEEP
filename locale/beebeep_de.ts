@@ -590,6 +590,10 @@
         <source>%1 %2 is sending to you the file: %3</source>
         <translation>%1 %2 sendet dir folgende Datei: %3</translation>
     </message>
+    <message>
+        <source>End-to-end encryption disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Date</name>
