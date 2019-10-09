@@ -86,7 +86,7 @@ int main( int argc, char *argv[] )
   bee_app.setApplicationName( Settings::instance().programName() );
   bee_app.setOrganizationName( Settings::instance().organizationName() );
   bee_app.setOrganizationDomain( Settings::instance().organizationDomain() );
-  bee_app.setApplicationVersion( Settings::instance().version( false, false ) );
+  bee_app.setApplicationVersion( Settings::instance().version( false, false, false ) );
 
   if( bee_app.otherInstanceExists() )
   {
@@ -105,7 +105,7 @@ int main( int argc, char *argv[] )
   Random::init();
 
   /* Load Settings */
-  qDebug() << "Starting BeeBEEP" << qPrintable( Settings::instance().version( false, true ) )
+  qDebug() << "Starting BeeBEEP" << qPrintable( Settings::instance().version( true, false, true ) )
            << "for" << qPrintable( Settings::instance().operatingSystem( true ) )
            << "and Qt" << QT_VERSION_STR;
 #if QT_VERSION >= 0x050600

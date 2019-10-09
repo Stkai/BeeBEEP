@@ -142,7 +142,7 @@ Settings::Settings()
   m_saveUserList = true;
   m_saveGroupList = true;
   m_localUser.setStatus( User::Online );
-  m_localUser.setVersion( version( false, false ) );
+  m_localUser.setVersion( version( false, false, false ) );
   setPassword( defaultPassword() );
 
   m_resourceFolder = ".";
@@ -429,7 +429,7 @@ QString Settings::createLocalUserHash()
                               .arg( QString::number( Random::number( 6475, 36475 ) ) )
                               .arg( m_localUser.accountName() ).arg( m_localUser.name() )
                               .arg( QString::number( Random::number( 6475, 36475 ) ) )
-                              .arg( m_localUser.domainName() ).arg( version( true, true ) )
+                              .arg( m_localUser.domainName() ).arg( version( true, true, true ) )
                               .arg( QDateTime::currentDateTime().toString( "dd.MM.yyyy-hh:mm:ss.zzz" ) );
   QString local_user_hash = simpleHash( hash_parameters );
 #ifdef BEEBEEP_DEBUG
@@ -695,10 +695,10 @@ bool Settings::isDevelopmentVersion( const QString& v ) const
   return v_num % 2 == 1;
 }
 
-QString Settings::version( bool qt_version, bool debug_info ) const
+QString Settings::version( bool build_version, bool qt_version, bool debug_info ) const
 {
   QString s_version = QString( BEEBEEP_VERSION );
-  if( isDevelopmentVersion( s_version ) || debug_info )
+  if( build_version )
     s_version += QString( "-%1" ).arg( BEEBEEP_BUILD );
 
   if( debug_info )
@@ -720,7 +720,7 @@ QString Settings::version( bool qt_version, bool debug_info ) const
 
 QString Settings::httpUserAgent() const
 {
-  return QString( "%1 %2" ).arg( programName() ).arg( version( false, false ) );
+  return QString( "%1 %2" ).arg( programName() ).arg( version( false, false, false ) );
 }
 
 int Settings::protoVersion() const
@@ -1532,7 +1532,7 @@ void Settings::save()
   sets->clear();
 
   sets->beginGroup( "Version" );
-  sets->setValue( "Program", version( false, true ) );
+  sets->setValue( "Program", version( true, false, true ) );
   sets->setValue( "Proto", protoVersion() );
   sets->setValue( "Settings", BEEBEEP_SETTINGS_VERSION );
   sets->setValue( "DataStream", dataStreamVersion( false ) );

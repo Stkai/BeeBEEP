@@ -596,7 +596,7 @@ void Core::onUpdaterJobCompleted()
   if( latest_version.isEmpty() )
     return;
 
-  QString my_version = Settings::instance().version( false, false );
+  QString my_version = Settings::instance().version( false, false, false );
 
   if( my_version >= latest_version )
   {

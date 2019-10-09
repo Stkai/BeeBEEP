@@ -936,7 +936,7 @@ void Core::addChatHeader( Chat* p_chat )
   if( p_chat->isDefault() )
   {
     QString hv_msg = QByteArray::fromBase64( "QmVlQkVFUCAlMSAmY29weTsgJTIgTWFyY28gTWFzdHJvZGRp=" );
-    header_msg = QString( "%1 <b>%2</b>." ).arg( IconManager::instance().toHtml( "beebeep.png", "***" ), hv_msg.arg( Settings::instance().version( false, false ) ).arg( QDate::currentDate().year() ) );
+    header_msg = QString( "%1 <b>%2</b>." ).arg( IconManager::instance().toHtml( "beebeep.png", "***" ), hv_msg.arg( Settings::instance().version( false, false, false ) ).arg( QDate::currentDate().year() ) );
     p_chat->addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( header_msg ), ChatMessage::System ) );
     header_msg = QString( "%1 %2." ).arg( IconManager::instance().toHtml( "chat-small.png", "*C*" ), tr( "Chat with all users" ) );
   }

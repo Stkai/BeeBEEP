@@ -63,7 +63,7 @@ void GAnalytics::doPost()
   query.addQueryItem("aip", "1" ); // anonymized IP
   query.addQueryItem("ds", "app" );
   query.addQueryItem("an", Settings::instance().programName().toLower() );
-  query.addQueryItem("av", Settings::instance().version( false, false ) );
+  query.addQueryItem("av", Settings::instance().version( false, false, false ) );
   QString user_language = QLocale::system().name().toLower();
   if( !user_language.isEmpty() )
     query.addQueryItem( "ul", user_language );
@@ -72,10 +72,10 @@ void GAnalytics::doPost()
   query.addQueryItem( "ea", "usage" );
 #ifdef BEEBEEP_DEBUG
   query.addQueryItem( "el", QString( "%1-%2" ).arg( "zz_test" )
-                                              .arg( Settings::instance().version( false, false ) ) );
+                                              .arg( Settings::instance().version( false, false, false ) ) );
 #else
   query.addQueryItem( "el", QString( "%1-%2" ).arg( Settings::instance().operatingSystem( false ).toLower() )
-                                              .arg( Settings::instance().version( false, false ) ) );
+                                              .arg( Settings::instance().version( false, false, false ) ) );
 #endif
 
   qint64 days_used = qMax( static_cast<qint64>(0), static_cast<qint64>(Settings::instance().settingsCreationDate().daysTo( QDate::currentDate() ) ) + 1 );

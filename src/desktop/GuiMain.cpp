@@ -721,7 +721,7 @@ void GuiMain::showAbout()
                       QString( "<b>%1</b> - Free Office Messenger<br><br>%2<br>%3 %4 %5<br><br>%6 %7<br>%8<br>" )
                       .arg( Settings::instance().programName() )
                       .arg( Settings::instance().isDevelopmentVersion() ? tr( "Development version") : tr( "Version" ) )
-                      .arg( Settings::instance().version( true, true ) )
+                      .arg( Settings::instance().version( true, true, true ) )
                       .arg( tr( "for" ) )
                       .arg( Settings::instance().operatingSystem( true ) )
                       .arg( tr( "developed by" ) )
@@ -1415,11 +1415,11 @@ void GuiMain::createToolAndMenuBars()
   label_version->setTextFormat( Qt::RichText );
   label_version->setAlignment( Qt::AlignHCenter | Qt::AlignVCenter );
   QString label_version_text = QString( "&nbsp;&nbsp;<b>%1%2</b> %3&nbsp;" )
-                                .arg( Settings::instance().version( false, false ) )
+                                .arg( Settings::instance().version( Settings::instance().isDevelopmentVersion(), false, false ) )
                                 .arg( Settings::instance().isDevelopmentVersion() ? QString( "-dev" ) : "" )
                                 .arg( IconManager::instance().toHtml( Settings::instance().operatingSystemIconPath(), "*", 12, 12 ) );
                                 label_version->setText( label_version_text );
-  label_version->setToolTip( QString( "BeeBEEP %1 %2%3" ).arg( Settings::instance().version( true, true ), Settings::instance().operatingSystem( true ),
+  label_version->setToolTip( QString( "BeeBEEP %1 %2%3" ).arg( Settings::instance().version( true, true, true ), Settings::instance().operatingSystem( true ),
                                                                Settings::instance().isDevelopmentVersion() ? QString( " (%1)" ).arg( tr("Development version") ) : "" ) );
   menuBar()->setCornerWidget( label_version );
 
@@ -4505,7 +4505,7 @@ void GuiMain::onFileTransferMessage( VNumber peer_id, const User& u, const FileI
 
 void GuiMain::onFileTransferCompleted( VNumber peer_id, const User& u, const FileInfo& fi )
 {
-  Q_UNUSED( peer_id );
+  Q_UNUSED( peer_id )
   if( !fi.isDownload() )
     return;
 

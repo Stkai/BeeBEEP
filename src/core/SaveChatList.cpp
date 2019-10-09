@@ -82,7 +82,7 @@ bool SaveChatList::save()
 
   QStringList file_header;
   file_header << Settings::instance().programName();
-  file_header << Settings::instance().version( false, false );
+  file_header << Settings::instance().version( false, false, false );
   file_header << QString::number( Settings::instance().protoVersion() );
   file_header << auth_code;
 
