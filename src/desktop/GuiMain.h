@@ -131,6 +131,7 @@ private slots:
   void selectBeepFile();
   void testBeepFile();
   void playBeep();
+  void playBuzz();
   void editGroupChat( VNumber );
   void createGroupChat();
   void showSavedChatSelected( const QString& );

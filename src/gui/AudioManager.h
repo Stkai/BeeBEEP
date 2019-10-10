@@ -38,8 +38,9 @@ class AudioManager
 
 public:
   bool isAudioDeviceAvailable();
-  void playBeep();
+  void playBeep( int loops = 1 );
   void clearBeep();
+  void playBuzz();
 
 #if defined( BEEBEEP_USE_VOICE_CHAT )
   QAudioDeviceInfo defaultInputDevice();

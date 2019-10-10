@@ -1078,6 +1078,7 @@ void GuiMain::createMenus()
   act->setData( 93 );
   mp_actGroupOnSendingMessage->addAction( act );
   connect( mp_actGroupOnSendingMessage, SIGNAL( triggered( QAction* ) ), this, SLOT( settingsChanged( QAction* ) ) );
+  mp_menuChatSettings->addSeparator();
   mp_menuChatColorSettings = new QMenu( tr( "Colors" ) + QString( "..." ), this );
   mp_menuChatColorSettings->setIcon( IconManager::instance().icon( "colors.png" ) );
   mp_menuChatSettings->addMenu( mp_menuChatColorSettings );
@@ -1184,6 +1185,10 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().enableDefaultChatNotifications() );
   act->setData( 75 );
+  act = mp_menuNotificationSettings->addAction( tr( "Disable BEEP alert if your status is busy" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().disableBeepInUserStatusBusy() );
+  act->setData( 96 );
   mp_menuNotificationSettings->addSeparator();
   act = mp_menuNotificationSettings->addAction( tr( "Raise main window on new message" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -2119,6 +2124,9 @@ void GuiMain::settingsChanged( QAction* act )
   case 95:
     Settings::instance().setUseVoicePlayer( act->isChecked() );
     break;
+  case 96:
+    Settings::instance().setDisableBeepInUserStatusBusy( act->isChecked() );
+    break;
   case 99:
     break;
   default:
@@ -2223,8 +2231,18 @@ void GuiMain::sendMessage( VNumber chat_id, const QString& msg )
 
 void GuiMain::showAlertForMessage( const Chat& c, const ChatMessage& cm )
 {
-  if( Settings::instance().beepOnNewMessageArrived() || cm.isImportant() )
-    playBeep();
+  if( cm.isImportant() )
+  {
+    playBuzz();
+  }
+  else
+  {
+    if( Settings::instance().beepOnNewMessageArrived() &&
+        !(Settings::instance().localUser().status() == User::Busy && Settings::instance().disableBeepInUserStatusBusy()) )
+    {
+      playBeep();
+    }
+  }
 
   bool show_message_in_tray = true;
 
@@ -3201,6 +3219,11 @@ void GuiMain::testBeepFile()
 void GuiMain::playBeep()
 {
   AudioManager::instance().playBeep();
+}
+
+void GuiMain::playBuzz()
+{
+  AudioManager::instance().playBuzz();
 }
 
 void GuiMain::createGroupChat()
@@ -4534,7 +4557,7 @@ void GuiMain::sendBuzzToUser( VNumber user_id )
 void GuiMain::showBuzzFromUser( const User& u )
 {
   if( Settings::instance().playBuzzSound() )
-    playBeep();
+    playBuzz();
 
   Chat c = ChatManager::instance().privateChatForUser( u.id() );
   if( c.isValid() )

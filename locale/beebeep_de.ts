@@ -3162,6 +3162,10 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>chat messages</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Disable BEEP alert if your status is busy</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

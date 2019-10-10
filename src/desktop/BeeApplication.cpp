@@ -99,8 +99,13 @@ void BeeApplication::setSettingsFilePath( const QString& settings_file_path )
   m_settingsFilePath = "";
   if( !settings_file_path.isEmpty() )
   {
+#if QT_VERSION >= 0x050000
     if( mp_fsWatcher->addPath( settings_file_path ) )
       m_settingsFilePath = settings_file_path;
+#else
+    mp_fsWatcher->addPath( settings_file_path );
+    m_settingsFilePath = settings_file_path;
+#endif
   }
 }
 
@@ -350,6 +355,7 @@ void BeeApplication::preventMultipleInstances()
   mp_localServer->removeServer( server_name );
   mp_localServer->listen( server_name );
   QObject::connect( mp_localServer, SIGNAL( newConnection() ), this, SLOT( slotConnectionEstablished() ) );
+  qDebug() << "BeeBEEP starts with instance" << qPrintable( server_name );
 }
 
 bool BeeApplication::otherInstanceExists()

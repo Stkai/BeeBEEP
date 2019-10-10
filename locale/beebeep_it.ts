@@ -3298,6 +3298,10 @@ Inserisci un nome differente.</translation>
         <source>chat messages</source>
         <translation>messaggi</translation>
     </message>
+    <message>
+        <source>Disable BEEP alert if your status is busy</source>
+        <translation>Disabilita il BEEP di avviso se il tuo stato è occupato</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

@@ -171,6 +171,7 @@ QString AudioManager::createDefaultVoiceMessageFilename()
   bool AudioManager::isAudioDeviceAvailable() { return true; }
   void AudioManager::clearBeep() {}
   void AudioManager::playBeep() { QApplication::beep(); }
+  void AudioManager::playBuzz() { playBeep(); }
 #else
 
 bool AudioManager::isAudioDeviceAvailable()
@@ -196,7 +197,7 @@ void AudioManager::clearBeep()
   }
 }
 
-void AudioManager::playBeep()
+void AudioManager::playBeep( int loops )
 {
   if( !mp_sound )
   {
@@ -224,8 +225,21 @@ void AudioManager::playBeep()
   }
 
   if( mp_sound )
+  {
+#ifdef BEEBEEP_USE_PHONON4
+    if( loops > 1 )
+      mp_sound->play();
+#else
+    mp_sound->setLoops( loops );
+#endif
     mp_sound->play();
+  }
   else
     QApplication::beep();
+}
+
+void AudioManager::playBuzz()
+{
+  playBeep( 2 );
 }
 #endif

@@ -366,6 +366,8 @@ public:
   inline void setBeepOnNewMessageArrived( bool );
   inline const QString& beepFilePath() const;
   inline void setBeepFilePath( const QString& );
+  inline bool disableBeepInUserStatusBusy() const;
+  inline void setDisableBeepInUserStatusBusy( bool );
 
   inline bool automaticFileName() const;
   inline void setAutomaticFileName( bool );
@@ -779,7 +781,7 @@ private:
   QString m_language;
   bool m_beepOnNewMessageArrived;
   QString m_beepFilePath;
-
+  bool m_disableBeepInUserStatusBusy;
   QStringList m_broadcastAddressesInFileHosts;
   QHostAddress m_localHostAddressForced;
   QString m_localSubnetForced;
@@ -1283,5 +1285,7 @@ inline int Settings::voiceMessageMaxDuration() const { return m_voiceMessageMaxD
 inline void Settings::setUseVoicePlayer( bool new_value ) { m_useVoicePlayer = new_value; }
 inline bool Settings::useVoicePlayer() const { return m_useVoicePlayer; }
 inline bool Settings::disableConnectionSocketEncryption() const { return m_disableConnectionSocketEncryption; }
+inline bool Settings::disableBeepInUserStatusBusy() const { return m_disableBeepInUserStatusBusy; }
+inline void Settings::setDisableBeepInUserStatusBusy( bool new_value ) { m_disableBeepInUserStatusBusy = new_value; }
 
 #endif // BEEBEEP_SETTINGS_

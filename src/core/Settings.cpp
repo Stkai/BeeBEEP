@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeApplication.h"
 #include "BeeUtils.h"
 #include "ChatMessage.h"
 #include "NetworkAddress.h"
@@ -1090,6 +1091,7 @@ void Settings::load()
 #else
   m_currentFilePath = Bee::convertToNativeFolderSeparator( sets->fileName() );
 #endif
+  beeApp->setSettingsFilePath( m_currentFilePath );
 
   m_firstTime = sets->allKeys().isEmpty();
   sets->beginGroup( "Version" );
@@ -1111,6 +1113,7 @@ void Settings::load()
   m_chatCompact = sets->value( "CompactMessage", true ).toBool();
   m_chatShowMessageTimestamp = sets->value( "ShowMessageTimestamp", true ).toBool();
   m_beepOnNewMessageArrived = sets->value( "BeepOnNewMessageArrived", true ).toBool();
+  m_disableBeepInUserStatusBusy = sets->value( "DisableBeepInUserStatusBusy", false ).toBool();
   m_chatUseHtmlTags = sets->value( "UseHtmlTags", false ).toBool();
   m_chatUseClickableLinks = sets->value( "UseClickableLinks", true ).toBool();
   m_chatMessageHistorySize = sets->value( "MessageHistorySize", 10 ).toInt();
@@ -1531,7 +1534,7 @@ void Settings::save()
   }
 
   QSettings *sets = objectSettings();
-
+  beeApp->setSettingsFilePath( "" );
   sets->clear();
 
   sets->beginGroup( "Version" );
@@ -1549,6 +1552,7 @@ void Settings::save()
   sets->setValue( "CompactMessage", m_chatCompact );
   sets->setValue( "ShowMessageTimestamp", m_chatShowMessageTimestamp );
   sets->setValue( "BeepOnNewMessageArrived", m_beepOnNewMessageArrived );
+  sets->setValue( "DisableBeepInUserStatusBusy", m_disableBeepInUserStatusBusy );
   sets->setValue( "UseHtmlTags", m_chatUseHtmlTags );
   sets->setValue( "UseClickableLinks", m_chatUseClickableLinks );
   sets->setValue( "MessageHistorySize", m_chatMessageHistorySize );
@@ -1818,6 +1822,16 @@ void Settings::save()
     qDebug() << "Settings saved in" << qPrintable( Bee::convertToNativeFolderSeparator( sets->fileName() ) );
     m_lastSave = QDateTime::currentDateTime();
   }
+
+#ifdef Q_OS_WIN
+  if( m_useSettingsFileIni )
+    m_currentFilePath = Bee::convertToNativeFolderSeparator( sets->fileName() );
+  else
+    m_currentFilePath = ""; // registry path
+#else
+  m_currentFilePath = Bee::convertToNativeFolderSeparator( sets->fileName() );
+#endif
+  beeApp->setSettingsFilePath( m_currentFilePath );
   sets->deleteLater();
 }
 
