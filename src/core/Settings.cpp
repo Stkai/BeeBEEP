@@ -91,6 +91,7 @@ Settings::Settings()
   m_postUsageStatistics = true;
   m_useHostnameForDefaultUsername = false;
   m_useEasyConnection = false;
+  m_useUserFullName = false;
 
 #ifdef BEEBEEP_DISABLE_FILE_TRANSFER
   m_disableFileTransfer = true;
@@ -497,7 +498,9 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "DisableCreateMessage", m_disableCreateMessage );
     sets->setValue( "DisableMenuSettings", m_disableMenuSettings );
     sets->setValue( "CheckUserConnectedFromDatagramIp", m_checkUserConnectedFromDatagramIp );
-    sets->setValue( "SkipLocalHardwareAddresses", m_skipLocalHardwareAddresses.isEmpty() ? QString( "" ) : m_skipLocalHardwareAddresses.join( ", " ) );
+    sets->setValue( "SkipLocalHardwareAddresses", m_skipLocalHardwareAddresses.isEmpty() ? QString( "" ) : m_skipLocalHardwareAddresses.join( ", " ) );   
+    sets->setValue( "DisableConnectionSocketEncryption", m_disableConnectionSocketEncryption );
+    sets->setValue( "UseUserFullName", m_useUserFullName );
     sets->endGroup();
     sets->sync();
     qDebug() << "RC default configuration file created in" << qPrintable( Bee::convertToNativeFolderSeparator( sets->fileName() ) );
@@ -601,6 +604,7 @@ void Settings::loadRcFile()
     m_skipLocalHardwareAddresses.removeDuplicates();
   }
   m_disableConnectionSocketEncryption = sets->value( "DisableConnectionSocketEncryption", m_disableConnectionSocketEncryption ).toBool();
+  m_useUserFullName = sets->value( "UseUserFullName", m_useUserFullName ).toBool();
   sets->endGroup();
   QStringList key_list = sets->allKeys();
   foreach( QString key, key_list )

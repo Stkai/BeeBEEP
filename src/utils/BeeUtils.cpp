@@ -28,6 +28,7 @@
 #include "MessageManager.h"
 #include "PluginManager.h"
 #include "User.h"
+#include "Settings.h"
 #if QT_VERSION < 0x050000
   #ifdef Q_OS_WIN
     #include <Windows.h>
@@ -134,6 +135,13 @@ QColor Bee::userStatusForegroundColor( int user_status )
   default:
     return defaultBackgroundBrush().color();
   }
+}
+
+QString Bee::userNameToShow( const User& u )
+{
+  QString user_name = Settings::instance().useUserFullName() && u.vCard().hasFullName() ? u.vCard().fullName() : u.name();
+  user_name = Bee::removeHtmlTags( user_name );
+  return Bee::replaceHtmlSpecialCharacters( user_name );
 }
 
 QString Bee::uniqueFilePath( const QString& file_path, bool add_date_time )
@@ -248,8 +256,6 @@ Bee::FileType Bee::fileTypeFromSuffix( const QString& file_suffix )
 
   return Bee::FileOther;
 }
-
-
 
 static const char* FileTypeToString[] =
 {
@@ -613,7 +619,7 @@ QPixmap Bee::avatarForUser( const User& u, const QSize& avatar_size, bool use_av
   {
     default_avatar_used = true;
     Avatar av;
-    av.setName( u.isValid() ? u.name() : "??" );
+    av.setName( u.isValid() ? (Settings::instance().useUserFullName() && u.vCard().hasFullName() ? u.vCard().fullName() : u.name()) : "??" );
     if( u.isStatusConnected() )
       av.setColor( u.color() );
     else

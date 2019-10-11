@@ -988,12 +988,16 @@ void GuiMain::createMenus()
   mp_actSaveGroupList->setChecked( Settings::instance().saveGroupList() );
   mp_actSaveGroupList->setData( 2 );
   mp_menuUsersSettings->addSeparator();
+  mp_actShowUserFullName = mp_menuUsersSettings->addAction( tr( "Show the name and surname of the users" ) , this, SLOT( settingsChanged() ) );
+  mp_actShowUserFullName->setCheckable( true );
+  mp_actShowUserFullName->setChecked( Settings::instance().useUserFullName() );
+  mp_actShowUserFullName->setDisabled( true );
+  mp_menuUsersSettings->addSeparator();
   mp_actRemoveInactiveUsers = mp_menuUsersSettings->addAction( "", this, SLOT( settingsChanged() ) );
   mp_actRemoveInactiveUsers->setCheckable( true );
   mp_actRemoveInactiveUsers->setChecked( Settings::instance().removeInactiveUsers() );
   mp_actRemoveInactiveUsers->setData( 33 );
   setMaxInactivityDaysInAction( mp_actRemoveInactiveUsers );
-
   mp_menuChatSettings = new QMenu( tr( "Chat" ), this );
   mp_menuChatSettings->setIcon( IconManager::instance().icon( "chat.png" ) );
   mp_menuSettings->addMenu( mp_menuChatSettings );
@@ -1273,6 +1277,8 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().showUsersInWorkgroups() );
   act->setData( 87 );
+  if( mp_actShowUserFullName->isChecked() )
+    mp_menuUserList->addAction( mp_actShowUserFullName );
   mp_menuUserList->addSeparator();
   act = mp_menuUserList->addAction( tr( "Sort users in ascending order" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -1356,6 +1362,8 @@ void GuiMain::createMenus()
   /* Context Menu for user list view */
   QMenu* context_menu_users = new QMenu( "Menu", this );
   context_menu_users->addAction( mp_actShowOnlineUsersOnly );
+  if( mp_actShowUserFullName->isChecked() )
+    context_menu_users->addAction( mp_actShowUserFullName );
   context_menu_users->addSeparator();
   context_menu_users->addAction( mp_actVCard );
   context_menu_users->addAction( mp_actChangeStatusDescription );
@@ -3726,67 +3734,54 @@ void GuiMain::showAddUser()
 void GuiMain::showChatSettingsMenu()
 {
   mp_menuChat->clear();
-
   QAction* act = mp_menuChat->addAction( tr( "Use RTL mode to show text" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().showTextInModeRTL() );
   act->setData( 55 );
-
   mp_menuChat->addSeparator();
-
   act = mp_menuChat->addAction( tr( "Show the chat in compact view mode" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().chatCompact() );
   act->setData( 1 );
-
   act = mp_menuChat->addAction( tr( "Show the timestamp" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().chatShowMessageTimestamp() );
   act->setData( 3 );
-
   act = mp_menuChat->addAction( tr( "Show the time with the AM/PM notation" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().useMessageTimestampWithAP() );
   act->setData( 76 );
-
   act = mp_menuChat->addAction( tr( "Show messages grouped by user" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().showMessagesGroupByUser() );
   act->setData( 13 );
-
   act = mp_menuChat->addAction( tr( "Show your name instead of 'You'" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().chatUseYourNameInsteadOfYou() );
   act->setData( 41 );
-
+  if( mp_actShowUserFullName->isChecked() )
+    mp_menuChat->addAction( mp_actShowUserFullName );
   act = mp_menuChat->addAction( tr( "Show username's color" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().chatUseColoredUserNames() );
   act->setData( 67 );
-
   mp_menuChat->addSeparator();
-
   act = mp_menuChat->addAction( tr( "Show emoticons" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().showEmoticons() );
   act->setData( 10 );
-
   act = mp_menuChat->addAction( tr( "Use HTML tags" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().chatUseHtmlTags() );
   act->setData( 8 );
-
   act = mp_menuChat->addAction( tr( "Use clickable links" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().chatUseClickableLinks() );
   act->setData( 9 );
-
   mp_menuChat->addSeparator();
-
   act = mp_menuChat->addAction( tr( "Restore default font" ), this, SLOT( settingsChanged() ) );
   act->setIcon( IconManager::instance().icon( "font.png" ) );
   act->setData( 23 );
-
   mp_menuChat->exec( QCursor::pos() );
 }
 

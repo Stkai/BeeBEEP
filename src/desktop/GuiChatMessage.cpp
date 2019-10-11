@@ -78,9 +78,10 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
 
   bool append_message_to_previous = show_message_group_by_user && last_user_id == u.id() && !cm.isImportant();
 
+  QString user_name_to_show = Bee::userNameToShow( u );
   QString date_time_stamp = datetimestampToString( cm, show_timestamp, show_datestamp );
   QString html_date_time_stamp = date_time_stamp.isEmpty() ? date_time_stamp : QString( "<font color=%1>(%2)</font>" ).arg( Settings::instance().chatSystemTextColor() ).arg( date_time_stamp );
-  QString user_name = append_message_to_previous ? QString( "" ) : (u.isLocal() && !use_your_name) ? QObject::tr( "You" ) : (u.isValid() ? Bee::replaceHtmlSpecialCharacters( u.name() ) : QObject::tr( "Unknown" ));
+  QString user_name = append_message_to_previous ? QString( "" ) : (u.isLocal() && !use_your_name) ? QObject::tr( "You" ) : (u.isValid() ? user_name_to_show : QObject::tr( "Unknown" ));
   if( cm.isFromAutoresponder() )
   {
     append_message_to_previous = false;

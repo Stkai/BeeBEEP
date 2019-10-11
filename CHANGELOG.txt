@@ -17,6 +17,7 @@ BeeBEEP 5.7.5 (in development)
   - Close chat window
 - Added "DisableDesktopSharing" option in beebeep.rc
 - Added "DisableBeepInUserStatusBusy" option in Settings - Notifications menu
+- Added "UseUserFullName" option in beebeep.rc to show (if exists) user's full name instead of nickname
 
 BeeBEEP 5.6.8
 - "ChatSaveFileTransfers" and "ChatSaveSystemMessages" options added in Settings - Chat menu: 

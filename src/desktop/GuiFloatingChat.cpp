@@ -124,15 +124,16 @@ void GuiFloatingChat::updateChatTitle( const Chat& c )
     {
       QString user_status = u.status() != User::Online ? Bee::userStatusToString( u.status() ) : "";
       QString user_status_description = u.status() != User::Offline ? u.statusDescription() : "";
+      QString user_name = Bee::userNameToShow( u );
 
       if( !user_status.isEmpty() && !user_status_description.isEmpty() )
-        window_title = QString( "%1 [%2 - %3]" ).arg( u.name(), Bee::userStatusToString( u.status() ), user_status_description );
+        window_title = QString( "%1 [%2 - %3]" ).arg( user_name, Bee::userStatusToString( u.status() ), user_status_description );
       else if( !user_status.isEmpty() )
-        window_title = QString( "%1 (%2)" ).arg( u.name(), user_status );
+        window_title = QString( "%1 (%2)" ).arg( user_name, user_status );
       else if( !user_status_description.isEmpty() )
-        window_title = QString( "%1 [%2]" ).arg( u.name(), user_status_description );
+        window_title = QString( "%1 [%2]" ).arg( user_name, user_status_description );
       else
-        window_title = u.name();
+        window_title = user_name;
 
       m_mainWindowIcon = Bee::avatarForUser( u, QSize( 256, 256 ), true );
       setWindowTitle( window_title );
@@ -183,13 +184,15 @@ void GuiFloatingChat::updateChatMember( const Chat& c, const User& u )
     }
   }
 
+  QString user_name = Bee::userNameToShow( u );
   if( !act_user )
   {
-    act_user = mp_barMembers->addAction( u.name(), this, SLOT( onGroupMemberActionTriggered() ) );
+    act_user = mp_barMembers->addAction( user_name, this, SLOT( onGroupMemberActionTriggered() ) );
     act_user->setData( u.id() );
   }
+  else
+    act_user->setText( user_name );
 
-  act_user->setText( u.name() );
   int avatar_size = mp_barMembers->iconSize().width();
   QString user_tooltip = Bee::toolTipForUser( u, true );
   if( !u.isLocal() && u.protocolVersion() >= 63 && !c.userHasReadMessages( u.id() ) )

@@ -81,6 +81,8 @@ void GuiTransferFile::setProgress( VNumber peer_id, const User& u, const FileInf
   if( hv->isHidden() )
     hv->show();
 
+  QString user_name = Bee::userNameToShow( u );
+
   QTreeWidgetItem* item = findItem( peer_id );
   if( !item )
   {
@@ -93,12 +95,14 @@ void GuiTransferFile::setProgress( VNumber peer_id, const User& u, const FileInf
     item->setData( ColumnFile, FilePath, fi.path() );
     item->setData( ColumnFile, TransferInProgress, true );
     item->setData( ColumnFile, TransferCompleted, false );
-    item->setText( ColumnUser, u.name() );
+    item->setText( ColumnUser, user_name );
     item->setText( ColumnTimeLeft, "" );
     item->setIcon( ColumnCancel, IconManager::instance().icon( "delete.png") );
     item->setText( ColumnSort, QString( "C0%1").arg( peer_id ) );
     sortItems( ColumnSort, Qt::DescendingOrder );
   }
+  else
+    item->setText( ColumnUser, user_name );
 
   if( item->data( ColumnFile, TransferInProgress ).toBool() )
   {

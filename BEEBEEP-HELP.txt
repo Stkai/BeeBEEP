@@ -67,8 +67,9 @@ CheckUserConnectedFromDatagramIp=[true/false] if true BeeBEEP checks if the user
 SkipLocalHardwareAddresses=(Strings "" comma separated) tells to BeeBEEP which hardware addresses (usually mac addresses) must to be skipped (default="") [5.6.9]
 UseOnlyMulticast=[true/false] if enabled BeeBEEP will multicast only in the MulticastGroupAddress (if empty it uses default 239.255.64.75) (default=false) [5.6.9]
 DisableConnectionSocketEncryption=[true/false] if enabled BeeBEEP does not use encryption in its end-to-end connections. Use this option at your own risk and only if you know what you are doing... (default=false) [5.7.3]
+UseUserFullName=[true/false] it true BeeBEEP show name and surname of the users if they are not empty (default=false) [5.7.5]
 
-[Groups]
+[Groups] (obsolete)
 TrustNickname=[true/false] if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect (default=true) [1.0.0] [obsolete in 4.0.0]
 TrustSystemAccount=[true/false] if true BeeBEEP trusts only system account to recognize a user. Useful if your are in active directory domain or similar (default=false) [obsolete in 4.0.0]
 

@@ -352,6 +352,7 @@ private:
   QAction* mp_actEditWorkgroups;
   QAction* mp_actEditAvatarIconSize;
   QAction* mp_actShowOnlineUsersOnly;
+  QAction* mp_actShowUserFullName;
   QActionGroup* mp_actGroupOnSendingMessage;
 
   QAction* mp_actShowUserListOnConnection;

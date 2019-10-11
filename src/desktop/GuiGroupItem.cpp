@@ -78,7 +78,7 @@ bool GuiGroupItem::updateUser( const User& u )
     return false;
 
   setIcon( 0, Bee::avatarForUser( u, Settings::instance().avatarIconSize(), true ) );
-  setText( 0, u.name() );
+  setText( 0, Bee::userNameToShow( u ) );
   if( u.isStatusConnected() )
     setToolTip( 0, Bee::toolTipForUser( u, false ) );
   else

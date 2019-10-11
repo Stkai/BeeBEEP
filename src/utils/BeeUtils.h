@@ -40,6 +40,7 @@ namespace Bee
   QString menuUserStatusIconFileName( int );
   QString userStatusToString( int );
   QString userBirthdayToText( const User& );
+  QString userNameToShow( const User& );
   inline VNumber qVariantToVNumber( const QVariant& );
   QString uniqueFilePath( const QString&, bool add_date_time );
   QString suffixFromFile( const QString& );

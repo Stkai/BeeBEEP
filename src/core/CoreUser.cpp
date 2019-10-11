@@ -115,7 +115,7 @@ void Core::showUserVCardChanged( const User& u, const VCard& old_vcard )
     if( !u.vCard().info().isEmpty() )
     {
       sHtmlMsg = QString( "%1 %2" ).arg( IconManager::instance().toHtml( "info.png", "*I*" ),
-                                      (u.isLocal() ? tr( "You share this information" ) : tr( "%1 shares this information" ).arg( Bee::replaceHtmlSpecialCharacters( u.name() ) )) );
+                                      (u.isLocal() ? tr( "You share this information" ) : tr( "%1 shares this information" ).arg( Bee::userNameToShow( u ) )) );
       sHtmlMsg += QString( ": <b>%1</b>" ).arg( Bee::replaceHtmlSpecialCharacters( u.vCard().info() ) );
       if( u.isLocal() )
         dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToChat, ChatMessage::UserInfo );

@@ -95,7 +95,8 @@ bool GuiChatItem::updateItem( const Chat& c )
     {
       if( !u.isLocal() && u.isValid() )
       {
-        sl.append( u.name() );
+        QString user_name = Bee::userNameToShow( u );
+        sl.append( user_name );
         if( c.isPrivateForUser( u.id() ) )
           m_defaultIcon = Bee::avatarForUser( u, Settings::instance().avatarIconSize(), Settings::instance().showUserPhoto() );
       }

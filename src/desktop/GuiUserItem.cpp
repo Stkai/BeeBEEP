@@ -150,12 +150,13 @@ bool GuiUserItem::updateUser( const User& u )
     return false;
   }
 
-  setData( 0, UserName, u.isLocal() ? QString( " %1 " ).arg( GuiChatItem::defaultChatName() ) : u.name() );
+  QString user_name = u.isLocal() ? QString( " %1 " ).arg( GuiChatItem::defaultChatName() ) : Bee::userNameToShow( u );
+  setData( 0, UserName, user_name );
   setData( 0, Status, u.status() );
 
   int unread_messages = unreadMessages();
 
-  QString s = u.isLocal() ? GuiChatItem::defaultChatName() : u.name();
+  QString s = user_name.trimmed();
 
   if( u.isLocal() && !Settings::instance().chatWithAllUsersIsEnabled() )
     s.append( QString( " [%1] " ).arg( QObject::tr( "read only" ) ) );

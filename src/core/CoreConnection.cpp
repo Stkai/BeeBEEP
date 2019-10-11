@@ -331,13 +331,13 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
           if( u.name() == user_found.name() )
           {
             sAlertMsg = tr( "%1 Connection closed to user %2 because it uses same nickname of the already connected user %3: %4." )
-                          .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), Bee::replaceHtmlSpecialCharacters( u.path() ), Bee::replaceHtmlSpecialCharacters( user_found.path() ), Bee::replaceHtmlSpecialCharacters( u.name() ) );
+                          .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), Bee::replaceHtmlSpecialCharacters( u.path() ), Bee::replaceHtmlSpecialCharacters( user_found.path() ), Bee::userNameToShow( u ) );
             qDebug() << "User" << qPrintable( u.path() ) << "is already connected with the same nickname of" << qPrintable( user_found.path() );
           }
           else
           {
             sAlertMsg = tr( "%1 Connection closed to user %2 because it uses same hash code of the already connected user %3: %4." )
-                          .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), Bee::replaceHtmlSpecialCharacters( u.path() ), Bee::replaceHtmlSpecialCharacters( user_found.path() ), Bee::replaceHtmlSpecialCharacters( u.name() ) );
+                          .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), Bee::replaceHtmlSpecialCharacters( u.path() ), Bee::replaceHtmlSpecialCharacters( user_found.path() ), Bee::userNameToShow( u ) );
             qDebug() << "User" << qPrintable( u.path() ) << "is already connected with the same hash code of" << qPrintable( user_found.path() );
           }
         }
