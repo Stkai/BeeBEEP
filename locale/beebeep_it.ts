@@ -628,19 +628,23 @@
     </message>
     <message>
         <source>but encrypted connections allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>ma le connessioni criptate sono accettate</translation>
     </message>
     <message>
         <source>End-to-end encryption is enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>La crittografia nelle connessioni è stata abilitata</translation>
     </message>
     <message>
         <source>but not encrypted connections allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>ma le connessioni non criptate sono accettate</translation>
     </message>
     <message>
         <source>Connection with %1 has end-to-end encryption disabled</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">La connessione con %1 ha la crittografia disabilitata</translation>
+    </message>
+    <message>
+        <source>%1 has end-to-end encryption disabled</source>
+        <translation>%1 ha la crittografia disabilitata</translation>
     </message>
 </context>
 <context>
@@ -3320,15 +3324,15 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show the name and surname of the users</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra il nome ed il cognome degli utenti</translation>
     </message>
     <message>
         <source>End-to-end encryption is disabled</source>
-        <translation type="unfinished">La crittografia nelle connessioni è stata disabilitata</translation>
+        <translation>La crittografia nelle connessioni è stata disabilitata</translation>
     </message>
     <message>
         <source>End-to-end encryption is enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>La crittografia nelle connessioni è stata abilitata</translation>
     </message>
 </context>
 <context>
@@ -3633,7 +3637,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Always broadcast to local subnet address</source>
-        <translation type="unfinished"></translation>
+        <translation>Ricerca sempre gli utenti nella sottorete locale</translation>
     </message>
 </context>
 <context>

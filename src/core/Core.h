@@ -127,7 +127,6 @@ public:
 
 public slots:
   void sendBroadcastMessage();
-  void sendDnsMulticastingMessage();
   void checkNetworkInterface();
   void checkNewVersion();
   void postUsageStatistics();
@@ -135,6 +134,7 @@ public slots:
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   void startDnsMulticasting();
   void stopDnsMulticasting();
+  void sendDnsMulticastingMessage();
 #endif
 
   /* CoreConnection */

@@ -236,16 +236,24 @@ bool Core::start()
     QTimer::singleShot( 2000, this, SLOT( sendBroadcastMessage() ) );
   }
 
-  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
-                         tr( "%1 You are connected to %2 Network." )
-                         .arg( IconManager::instance().toHtml( "network-connected.png", "*C*" ),
-                               Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "%1 You are connected to %2 Network." ).arg( IconManager::instance().toHtml( "network-connected.png", "*C*" ),
+                         Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
 
   if( Settings::instance().disableConnectionSocketEncryption() )
   {
-    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
-                           QString( "%1 %2." ).arg( IconManager::instance().toHtml( "encryption-disabled.png", "*!*" ), tr( "End-to-end encryption is disabled" ) ),
-                           DispatchToChat, ChatMessage::Connection );
+    QString sys_msg = QString( "%1 %2" ).arg( IconManager::instance().toHtml( "encryption-disabled.png", "*!*" ), tr( "End-to-end encryption is disabled" ) );
+    if( Settings::instance().allowEncryptedConnectionsAlso() )
+      sys_msg += QString( " (%1)" ).arg( tr( "but encrypted connections allowed" ) );
+    sys_msg += QString( "." );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sys_msg, DispatchToChat, ChatMessage::Connection );
+  }
+  else
+  {
+    if( Settings::instance().allowNotEncryptedConnectionsAlso() )
+    {
+      QString sys_msg = QString( "%1 %2 (%3)." ).arg( IconManager::instance().toHtml( "warning.png", "*!*" ), tr( "End-to-end encryption is enabled" ), tr( "but not encrypted connections allowed" ) );
+      dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sys_msg, DispatchToChat, ChatMessage::Connection );
+    }
   }
 
 #ifdef BEEBEEP_USE_MULTICAST_DNS
@@ -435,6 +443,7 @@ bool Core::restartConnection()
   return start();
 }
 
+#ifdef BEEBEEP_USE_MULTICAST_DNS
 void Core::sendDnsMulticastingMessage()
 {
   if( !Settings::instance().useMulticastDns() )
@@ -443,7 +452,6 @@ void Core::sendDnsMulticastingMessage()
   if( !isConnected() )
     return;
 
-#ifdef BEEBEEP_USE_MULTICAST_DNS
   if( mp_mDns->isActive() )
   {
     if( mp_mDns->browseForService() )
@@ -465,9 +473,8 @@ void Core::sendDnsMulticastingMessage()
   else
     qDebug() << "Unable to send multicast message because MDnsManager is not active";
 #endif
-
-#endif
 }
+#endif
 
 void Core::updateUsersAddedManually()
 {
@@ -484,7 +491,7 @@ void Core::sendBroadcastMessage()
                          tr( "%1 Broadcasting to the %2 Network..." ).arg( IconManager::instance().toHtml( "broadcast.png", "*B*" ),
                                                                            Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
   showMessage( tr( "Searching users" ), 3000 );
-  QMetaObject::invokeMethod( mp_broadcaster, "sendBroadcast", Qt::QueuedConnection );
+  mp_broadcaster->sendBroadcast();
 }
 
 bool Core::isConnected() const
@@ -695,11 +702,11 @@ void Core::onTickEvent( int ticks )
 
     mp_broadcaster->onTickEvent( ticks );
 
-    if( Settings::instance().tickIntervalBroadcasting() > 0 && (ticks % Settings::instance().tickIntervalBroadcasting() == 0) )
-      mp_broadcaster->setNewBroadcastRequested( true );
-
-    if( (ticks % AUTO_BROADCAST_CHECK_TICK == 0) && m_connections.isEmpty() )
-      mp_broadcaster->setNewBroadcastRequested( true );
+    if( (Settings::instance().tickIntervalBroadcasting() > 0 && (ticks % Settings::instance().tickIntervalBroadcasting() == 0))
+        || ((ticks % AUTO_BROADCAST_CHECK_TICK == 0) && m_connections.isEmpty()) )
+    {
+      sendBroadcastMessage();
+    }
 
     foreach( Connection* c, m_connections )
       c->onTickEvent( ticks );

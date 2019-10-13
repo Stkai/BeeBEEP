@@ -3883,7 +3883,9 @@ void GuiMain::sendBroadcastMessage()
 {
   mp_actBroadcast->setDisabled( true );
   beeCore->sendBroadcastMessage();
+#ifdef BEEBEEP_USE_MULTICAST_DNS
   beeCore->sendDnsMulticastingMessage();
+#endif
   QTimer::singleShot( 61 * 1000, this, SLOT( enableBroadcastAction() ) );
 }
 

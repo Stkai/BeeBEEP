@@ -66,10 +66,13 @@ bool Broadcaster::startBroadcastServer()
       }
     }
 
-    if( mp_receiverSocket->joinMulticastGroup( m_multicastGroupAddress ) )
-      qDebug() << "Join to the multicast group" << qPrintable( m_multicastGroupAddress.toString() );
-    else
+    if( !mp_receiverSocket->joinMulticastGroup( m_multicastGroupAddress ) )
+    {
       qWarning() << "Unable to join to the multicast group" << qPrintable( m_multicastGroupAddress.toString() );
+      m_multicastGroupAddress = QHostAddress();
+    }
+    else
+      qDebug() << "Join to the multicast group" << qPrintable( m_multicastGroupAddress.toString() );
   }
 #endif
 
@@ -305,6 +308,20 @@ void Broadcaster::updateUsersAddedManually()
   }
 }
 
+int Broadcaster::updateUsersFromHive()
+{
+  int hive_users_to_contact = 0;
+  foreach( NetworkAddress na, Hive::instance().networkAddresses() )
+  {
+    User u = UserManager::instance().findUserByNetworkAddress( na );
+    if( u.isValid() && u.isStatusConnected() )
+      continue;
+    if( addNetworkAddress( na, false ) )
+      hive_users_to_contact++;
+  }
+  return hive_users_to_contact;
+}
+
 void Broadcaster::updateAddresses()
 {
 #ifdef BEEBEEP_DEBUG
@@ -369,35 +386,22 @@ void Broadcaster::updateAddresses()
   }
 
   updateUsersAddedManually();
+  int offline_users_to_add = 0;
+  if( Settings::instance().useHive() )
+    offline_users_to_add = updateUsersFromHive();
 
   if( Settings::instance().broadcastToOfflineUsers() )
   {
-    int offline_users_to_add = 0;
-
-    if( Hive::instance().networkAddresses().isEmpty() )
+    foreach( User u, UserManager::instance().userList().toList() )
     {
-      foreach( User u, UserManager::instance().userList().toList() )
-      {
-        if( !u.isStatusConnected() && addNetworkAddress( u.networkAddress(), false ) )
-          offline_users_to_add++;
-      }
+      if( !u.isStatusConnected() && addNetworkAddress( u.networkAddress(), false ) )
+        offline_users_to_add++;
     }
-    else
-    {
-      foreach( NetworkAddress na, Hive::instance().networkAddresses() )
-      {
-        User u = UserManager::instance().findUserByNetworkAddress( na );
-        if( u.isValid() && u.isStatusConnected() )
-          continue;
-        if( addNetworkAddress( na, false ) )
-          offline_users_to_add++;
-      }
-    }
+  }
 
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "Broadcaster adds" << offline_users_to_add << "offline users to network addresses";
+  qDebug() << "Broadcaster adds" << offline_users_to_add << "offline users to network addresses";
 #endif
-  }
 
 #ifdef BEEBEEP_DEBUG
   QStringList sl;
@@ -405,16 +409,14 @@ void Broadcaster::updateAddresses()
     sl << na.toString();
   qDebug() << "Broadcaster is contacting the followings addresses:" << qPrintable( sl.join( ", " ) );
 #endif
-  qDebug() << "Broadcaster will contact" << m_networkAddresses.size() << "network addresses";
+  qDebug() << "Broadcaster will contact" << m_networkAddresses.size() << "network addresses and" << offline_users_to_add << "offline users";
 
 }
 
 void Broadcaster::onTickEvent( int )
 {
   if( !m_networkAddressesWaitingForLoopback.isEmpty() )
-  {
     checkLoopbackDatagram();
-  }
 
   if( mp_receiverSocket->state() != QAbstractSocket::BoundState )
   {

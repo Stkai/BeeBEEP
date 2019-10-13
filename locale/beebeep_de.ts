@@ -607,7 +607,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Connection with %1 has end-to-end encryption disabled</source>
+        <source>%1 has end-to-end encryption disabled</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

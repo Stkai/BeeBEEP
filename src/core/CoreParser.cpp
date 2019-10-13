@@ -526,7 +526,7 @@ void Core::parseHiveMessage( const User& u, const Message& m )
       }
     }
     if( hive_users_added > 0 )
-      mp_broadcaster->setNewBroadcastRequested( true );
+      mp_broadcaster->updateUsersFromHive();
   }
   else
     qWarning() << "Invalid flag found in hive message from user" << qPrintable( u.path() );

@@ -398,15 +398,15 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
     {
       dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(),
                              tr( "%1 %2 uses old encryption level." ).arg( IconManager::instance().toHtml( "warning.png", "*!*" ), Bee::userNameToShow( u ) ),
-                             DispatchToDefaultAndPrivateChat, ChatMessage::Connection );
+                             DispatchToAllChatsWithUser, ChatMessage::Connection );
     }
   }
   else
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(),
                            QString( "%1 %2." ).arg( IconManager::instance().toHtml( "encryption-disabled.png", "*!*" ),
-                                                    tr( "Connection with %1 has end-to-end encryption disabled" ).arg( Bee::userNameToShow( u ) ) ),
-                           DispatchToDefaultAndPrivateChat, ChatMessage::Connection );
+                                                    tr( "%1 has end-to-end encryption disabled" ).arg( Bee::userNameToShow( u ) ) ),
+                           DispatchToAllChatsWithUser, Settings::instance().disableConnectionSocketEncryption() ? ChatMessage::Other : ChatMessage::Connection );
   }
 
   if( !Settings::instance().localUser().vCard().hasOnlyNickName() )

@@ -38,10 +38,10 @@ public:
   void stopBroadcasting();
 
   void onTickEvent( int );
-  inline void setNewBroadcastRequested( bool );
   inline void setAddOfflineUsersInNetworkAddresses( bool );
 
   void updateUsersAddedManually();
+  int updateUsersFromHive();
   inline const QHostAddress& multicastGroupAddress() const;
 
 public slots:
@@ -78,7 +78,6 @@ private:
 
 // Inline Functions
 inline bool Broadcaster::addHostAddress( const QHostAddress& ha ) { return addNetworkAddress( NetworkAddress( ha, 0 ), false ); }
-inline void Broadcaster::setNewBroadcastRequested( bool new_value ) { m_newBroadcastRequested = new_value; }
 inline const QHostAddress& Broadcaster::multicastGroupAddress() const { return m_multicastGroupAddress; }
 
 #endif // BEEBEEP_BROADCASTER_H
