@@ -594,6 +594,22 @@
         <source>End-to-end encryption is disabled</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>but encrypted connections allowed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End-to-end encryption is enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>but not encrypted connections allowed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connection with %1 has end-to-end encryption disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Date</name>
@@ -3166,6 +3182,18 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Disable BEEP alert if your status is busy</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Show the name and surname of the users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End-to-end encryption is disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End-to-end encryption is enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -3408,6 +3436,10 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>(only for IPv4 multicast)</source>
         <translation>(nur für IPv4 Multicast)</translation>
+    </message>
+    <message>
+        <source>Always broadcast to local subnet address</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

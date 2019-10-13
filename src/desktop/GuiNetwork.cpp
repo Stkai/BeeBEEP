@@ -84,6 +84,7 @@ void GuiNetwork::loadSettings()
   mp_sbMaxUsersToContact->setValue( Settings::instance().maxUsersToConnectInATick() );
 
   mp_cbPreventMultipleConnectionsFromSingleHostAddress->setChecked( Settings::instance().preventMultipleConnectionsFromSingleHostAddress() );
+  mp_cbBroadcastToLocalSubnetAlways->setChecked( Settings::instance().broadcastToLocalSubnetAlways() );
 
   mp_comboPreferredSubnet->clear();
 
@@ -126,6 +127,7 @@ void GuiNetwork::checkAndSearch()
   Settings::instance().setPreventMultipleConnectionsFromSingleHostAddress( mp_cbPreventMultipleConnectionsFromSingleHostAddress->isChecked() );
   Settings::instance().setUseHive( mp_cbUseHive->isChecked() );
   Settings::instance().setBroadcastToOfflineUsers( mp_cbBroadcastToOfflineUsers->isChecked() );
+  Settings::instance().setBroadcastToLocalSubnetAlways( mp_cbBroadcastToLocalSubnetAlways->isChecked() );
 
   QString s_preferred_subnet = mp_comboPreferredSubnet->itemData( mp_comboPreferredSubnet->currentIndex() ).toString();
   if( s_preferred_subnet != Settings::instance().localSubnetForced() )

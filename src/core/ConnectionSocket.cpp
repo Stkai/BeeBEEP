@@ -34,14 +34,15 @@ ConnectionSocket::ConnectionSocket( QObject* parent )
   : QTcpSocket( parent ), m_blockSize( 0 ), m_isHelloSent( false ), m_userId( ID_INVALID ), m_protoVersion( 1 ),
     m_cipherKey( "" ), m_publicKey1( "" ), m_publicKey2( "" ), m_networkAddress(), m_latestActivityDateTime(),
     m_checkConnectionTimeout( false ), m_tickCounter( 0 ), m_isAborted( false ), m_datastreamVersion( 0 ),
-    m_isTestConnection( false ), m_serverPort( 0 )
+    m_isTestConnection( false ), m_serverPort( 0 ), m_isEncrypted( true )
 {
   if( Settings::instance().useLowDelayOptionOnSocket() )
     setSocketOption( QAbstractSocket::LowDelayOption, 1 );
   if( Settings::instance().disableSystemProxyForConnections() )
     setProxy( QNetworkProxy::NoProxy );
   m_pingByteArraySize = Protocol::instance().pingMessage().size() + 10;
-
+  if( Settings::instance().disableConnectionSocketEncryption() )
+    m_isEncrypted = false;
   connect( this, SIGNAL( connected() ), this, SLOT( sendQuestionHello() ) );
   connect( this, SIGNAL( readyRead() ), this, SLOT( readBlock() ) );
   connect( this, SIGNAL( bytesWritten( qint64 ) ), this, SLOT( onBytesWritten( qint64 ) ) );
@@ -57,7 +58,7 @@ void ConnectionSocket::initSocket( qintptr socket_descriptor, quint16 server_por
   m_tickCounter = 0;
   m_checkConnectionTimeout = false;
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Connection socket init network address peer" << m_networkAddress.toString() << "and server port" << QString::number( m_serverPort );
+  qDebug() << "Connection socket initializes network address peer" << qPrintable( m_networkAddress.toString() ) << "and server port" << QString::number( m_serverPort );
 #endif
 }
 
@@ -87,6 +88,26 @@ void ConnectionSocket::closeConnection()
   }
   m_userId = ID_INVALID;
   m_isAborted = true;
+}
+
+void ConnectionSocket::useEncryption( bool encryption_enabled )
+{
+  if( m_isEncrypted )
+  {
+    if( !encryption_enabled )
+    {
+      qWarning() << "ConnectionSocket disables encryption for address peer" << qPrintable( m_networkAddress.toString() );
+      m_isEncrypted = false;
+    }
+  }
+  else
+  {
+    if( encryption_enabled )
+    {
+      qWarning() << "ConnectionSocket enables encryption for address peer" << qPrintable( m_networkAddress.toString() );
+      m_isEncrypted = true;
+    }
+  }
 }
 
 const QByteArray& ConnectionSocket::cipherKey() const
@@ -165,7 +186,7 @@ qint64 ConnectionSocket::readBlock()
 
 #ifdef BEEBEEP_DEBUG
   if( isConnecting() )
-    qDebug() << "Connection" << qPrintable( m_networkAddress.toString() ) << "use datastream version:" << data_stream.version();
+    qDebug() << "Connection" << qPrintable( m_networkAddress.toString() ) << "uses datastream version:" << data_stream.version();
 #endif
 
   if( m_blockSize == 0 )
@@ -244,11 +265,15 @@ qint64 ConnectionSocket::readBlock()
   }
 
   m_blockSize = 0;
+  QByteArray decrypted_byte_array;
 
-  QByteArray decrypted_byte_array = Settings::instance().disableConnectionSocketEncryption() ? byte_array_read : Protocol::instance().decryptByteArray( byte_array_read, cipherKey(), m_protoVersion );
+  if( isKeysHandshakeCompleted() && !m_isEncrypted )
+    decrypted_byte_array = byte_array_read;
+  else
+    decrypted_byte_array = Protocol::instance().decryptByteArray( byte_array_read, cipherKey(), m_protoVersion );
 
 #if defined( CONNECTION_SOCKET_IO_DEBUG_VERBOSE )
-  qDebug() << "ConnectionSocket read from" << qPrintable( m_networkAddress.toString() ) << "the byte array:" << decrypted_byte_array;
+  qDebug() << "ConnectionSocket reads from" << qPrintable( m_networkAddress.toString() ) << "the byte array:" << decrypted_byte_array;
 #endif
 
   if( m_userId == ID_INVALID )
@@ -338,7 +363,11 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
 #if defined( CONNECTION_SOCKET_IO_DEBUG_VERBOSE )
   qDebug() << "ConnectionSocket is sending to" << qPrintable( m_networkAddress.toString() ) << "the following data:" << byte_array;
 #endif
-  QByteArray byte_array_to_send = Settings::instance().disableConnectionSocketEncryption() ? byte_array : Protocol::instance().encryptByteArray( byte_array, cipherKey(), m_protoVersion );
+  QByteArray byte_array_to_send;
+  if( isKeysHandshakeCompleted() && !m_isEncrypted )
+    byte_array_to_send = byte_array;
+  else
+    byte_array_to_send = Protocol::instance().encryptByteArray( byte_array, cipherKey(), m_protoVersion );
 
   QByteArray data_serialized = serializeData( byte_array_to_send );
 
@@ -362,7 +391,7 @@ void ConnectionSocket::sendQuestionHello()
   if( m_isTestConnection )
   {
     if( sendData( Protocol::instance().testQuestionMessage( m_networkAddress ) ) )
-      qDebug() << "Connection TEST request to" << qPrintable( m_networkAddress.toString() );
+      qDebug() << "Connection TEST request sent to" << qPrintable( m_networkAddress.toString() );
   }
   else
   {
@@ -371,10 +400,10 @@ void ConnectionSocket::sendQuestionHello()
 #ifdef CONNECTION_SOCKET_IO_DEBUG
     qDebug() << "ConnectionSocket is sending pkey1 with shared-key:" << qPrintable( m_publicKey1 );
 #endif
-    if( sendData( Protocol::instance().helloMessage( m_publicKey1 ) ) )
+    if( sendData( Protocol::instance().helloMessage( m_publicKey1, m_isEncrypted ) ) )
     {
 #ifdef BEEBEEP_DEBUG
-      qDebug() << "ConnectionSocket has sent question HELLO to" << qPrintable( m_networkAddress.toString() );
+      qDebug() << "ConnectionSocket sent question HELLO to" << qPrintable( m_networkAddress.toString() );
 #endif
       m_isHelloSent = true;
     }
@@ -392,10 +421,10 @@ void ConnectionSocket::sendAnswerHello()
 #ifdef CONNECTION_SOCKET_IO_DEBUG
   qDebug() << "ConnectionSocket is sending pkey2 with shared-key:" << qPrintable( m_publicKey2 );
 #endif
-  if( sendData( Protocol::instance().helloMessage( m_publicKey2 ) ) )
+  if( sendData( Protocol::instance().helloMessage( m_publicKey2, m_isEncrypted ) ) )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "ConnectionSocket has sent answer HELLO to" << qPrintable( m_networkAddress.toString() );
+    qDebug() << "ConnectionSocket sent answer HELLO to" << qPrintable( m_networkAddress.toString() );
 #endif
     m_isHelloSent = true;
   }
@@ -411,7 +440,7 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
   Message m = Protocol::instance().toMessage( array_data, m_protoVersion );
   if( !m.isValid() )
   {
-    qWarning() << "ConnectionSocket has received an invalid HELLO from" << qPrintable( m_networkAddress.toString() );
+    qWarning() << "ConnectionSocket received an invalid HELLO from" << qPrintable( m_networkAddress.toString() );
     emit abortRequest();
     return;
   }
@@ -424,6 +453,35 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
     qWarning() << "ConnectionSocket is waiting for HELLO, but another message type" << m.type() << "is arrived from" << qPrintable( m_networkAddress.toString() );
     emit abortRequest();
     return;
+  }
+
+  if( isEncrypted() )
+  {
+    if( m.hasFlag( Message::EncryptionDisabled ) )
+    {
+      if( !Settings::instance().allowNotEncryptedConnectionsAlso() )
+      {
+        qWarning() << "ConnectionSocket does not accept authentication with encryption disabled from" << qPrintable( m_networkAddress.toString() );
+        emit abortRequest();
+        return;
+      }
+      else
+        useEncryption( false );
+    }
+  }
+  else
+  {
+    if( !m.hasFlag( Message::EncryptionDisabled ) )
+    {
+      if( !Settings::instance().allowEncryptedConnectionsAlso() )
+      {
+        qWarning() << "ConnectionSocket does not accept authentication with encryption enabled from" << qPrintable( m_networkAddress.toString() );
+        emit abortRequest();
+        return;
+      }
+      else
+        useEncryption( true );
+    }
   }
 
   if( Settings::instance().acceptConnectionsOnlyFromWorkgroups() )
@@ -476,20 +534,25 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
     {
       if( !createCipherKey( public_key ) )
       {
-        qWarning() << "You have not shared a public key for encryption";
+        qWarning() << "ConnectionSocket has not shared a public key to negotiate encryption with" << qPrintable( m_networkAddress.toString() );
         emit abortRequest();
         return;
       }
       else
       {
-        if( m_protoVersion < SECURE_LEVEL_3_PROTO_VERSION )
-          qWarning() << "Old encryption level 2 is activated with" << qPrintable( m_networkAddress.toString() );
+        if( isEncrypted() )
+        {
+          if( m_protoVersion < SECURE_LEVEL_3_PROTO_VERSION )
+            qWarning() << "Old encryption level 2 is activated with" << qPrintable( m_networkAddress.toString() );
+          else
+            qDebug() << "Encryption level 3 is activated with" << qPrintable( m_networkAddress.toString() );
+        }
         else
-          qDebug() << "Encryption level 3 is activated with" << qPrintable( m_networkAddress.toString() );
+          qDebug() << "ConnectionSocket has completed the initial negotiation with" << qPrintable( m_networkAddress.toString() );
       }
     }
     else
-      qWarning() << "Remote host" << qPrintable( m_networkAddress.toString() ) << "has not shared a public key for encryption";
+      qWarning() << "Remote host" << qPrintable( m_networkAddress.toString() ) << "has not shared a public key to negotiate encryption";
   }
 
   qDebug() << "ConnectionSocket request an authentication for" << qPrintable( m_networkAddress.toString() );

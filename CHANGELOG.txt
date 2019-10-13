@@ -18,6 +18,10 @@ BeeBEEP 5.7.5 (in development)
 - Added "DisableDesktopSharing" option in beebeep.rc
 - Added "DisableBeepInUserStatusBusy" option in Settings - Notifications menu
 - Added "UseUserFullName" option in beebeep.rc to show (if exists) user's full name instead of nickname
+- Added "DisableEncryptedConnections" option in beebeep.rc
+- Added "AllowNotEncryptedConnections" option in beebeep.rc (used with "DisableEncryptedConnections")
+- Added "AllowEncryptedConnectionsAlso" option in beebeep.rc (used with "DisableEncryptedConnections")
+- Added "BroadcastToLocalSubnetAlways" option to not send the HELLO message to the local subnet twice when multicasting is active
 
 BeeBEEP 5.6.8
 - "ChatSaveFileTransfers" and "ChatSaveSystemMessages" options added in Settings - Chat menu: 

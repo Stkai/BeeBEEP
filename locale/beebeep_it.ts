@@ -626,6 +626,22 @@
         <source>End-to-end encryption is disabled</source>
         <translation>La crittografia nelle connessioni è stata disabilitata</translation>
     </message>
+    <message>
+        <source>but encrypted connections allowed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End-to-end encryption is enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>but not encrypted connections allowed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connection with %1 has end-to-end encryption disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Date</name>
@@ -3302,6 +3318,18 @@ Inserisci un nome differente.</translation>
         <source>Disable BEEP alert if your status is busy</source>
         <translation>Disabilita il BEEP di avviso se il tuo stato è occupato</translation>
     </message>
+    <message>
+        <source>Show the name and surname of the users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End-to-end encryption is disabled</source>
+        <translation type="unfinished">La crittografia nelle connessioni è stata disabilitata</translation>
+    </message>
+    <message>
+        <source>End-to-end encryption is enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -3602,6 +3630,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>(only for IPv4 multicast)</source>
         <translation>(solo per il multicast con IPv4)</translation>
+    </message>
+    <message>
+        <source>Always broadcast to local subnet address</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

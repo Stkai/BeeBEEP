@@ -31,7 +31,7 @@
 
 Broadcaster::Broadcaster( QObject *parent )
   : QObject( parent ), m_networkAddresses(), m_newBroadcastRequested( false ),
-    m_networkAddressesWaitingForLoopback(), m_multicastGroupAddress()
+    m_networkAddressesWaitingForLoopback(), m_multicastGroupAddress(), m_isMulticastDatagramSent( false )
 {
   mp_receiverSocket = new QUdpSocket( this );
   mp_senderSocket = new QUdpSocket( this );
@@ -106,10 +106,12 @@ void Broadcaster::stopBroadcasting()
   if( !m_networkAddressesWaitingForLoopback.isEmpty() )
     m_networkAddressesWaitingForLoopback.clear();
   m_newBroadcastRequested = false;
+  m_isMulticastDatagramSent = false;
 }
 
 void Broadcaster::sendBroadcast()
 {
+  m_isMulticastDatagramSent = false;
   sendMulticastDatagram();
   m_newBroadcastRequested = true;
 }
@@ -349,7 +351,11 @@ void Broadcaster::updateAddresses()
     return;
   }
 
-  addHostAddress( NetworkManager::instance().localBroadcastAddress() );
+  if( !m_isMulticastDatagramSent || Settings::instance().broadcastToLocalSubnetAlways() )
+  {
+    addHostAddress( NetworkManager::instance().localBroadcastAddress() );
+    m_isMulticastDatagramSent = false;
+  }
 
   foreach( QHostAddress ha, NetworkManager::instance().localBroadcastAddresses() )
   {
@@ -444,7 +450,10 @@ void Broadcaster::sendMulticastDatagram()
   {
     QByteArray broadcast_data = Protocol::instance().broadcastMessage( m_multicastGroupAddress );
     if( mp_senderSocket->writeDatagram( broadcast_data, m_multicastGroupAddress, static_cast<quint16>(Settings::instance().defaultBroadcastPort()) ) > 0 )
+    {
       qDebug() << "Broadcaster sends multicast datagram to" << qPrintable( m_multicastGroupAddress.toString() ) << Settings::instance().defaultBroadcastPort();
+      m_isMulticastDatagramSent = true;
+    }
     else
       qWarning() << "Unable to send multicast datagram to" << qPrintable( m_multicastGroupAddress.toString() ) << Settings::instance().defaultBroadcastPort();
   }

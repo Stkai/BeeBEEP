@@ -54,7 +54,7 @@ public:
   QByteArray pongMessage() const;
   QByteArray broadcastMessage( const QHostAddress& ) const;
   QHostAddress hostAddressFromBroadcastMessage( const Message& ) const;
-  QByteArray helloMessage( const QString& cipher_key_tmp ) const;
+  QByteArray helloMessage( const QString& cipher_key_tmp, bool encrypted_connection ) const;
   QByteArray testQuestionMessage( const NetworkAddress& ) const;
   bool isTestQuestionMessage( const Message& ) const;
   QByteArray testAnswerMessage( const NetworkAddress&, bool test_is_accepted, const QString& answer_msg = "Ok" ) const;

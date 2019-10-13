@@ -950,6 +950,8 @@ void GuiMain::createMenus()
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   mp_actMulticastDns = mp_menuNetworkStatus->addAction( IconManager::instance().icon( "mdns.png" ), QString( "mdns" ) );
 #endif
+  mp_menuNetworkStatus->addSeparator();
+  mp_actEncryptedConnectionsAlso = mp_menuNetworkStatus->addAction( Settings::instance().disableConnectionSocketEncryption() ? IconManager::instance().icon( "encryption-disabled.png" ) : IconManager::instance().icon( "encryption-enabled.png" ), QString( "End-to-end encryption" ) );
 
   mp_menuUsersSettings = new QMenu( tr( "Users" ), this );
   mp_menuUsersSettings->setIcon( IconManager::instance().icon( "user-list.png" ) );
@@ -3803,6 +3805,7 @@ void GuiMain::showDefaultServerPortInMenu()
     mp_actHostAddress->setEnabled( true );
     mp_actPortBroadcast->setEnabled( true );
     mp_actPortListener->setEnabled( true );
+    mp_actEncryptedConnectionsAlso->setEnabled( true );
 
     host_address = Settings::instance().localUser().networkAddress().hostAddress().toString();
     broadcast_port = QString::number( Settings::instance().defaultBroadcastPort() );
@@ -3838,6 +3841,8 @@ void GuiMain::showDefaultServerPortInMenu()
     else
       mp_actMulticastDns->setEnabled( false );
 #endif
+
+
   }
   else
   {
@@ -3851,6 +3856,7 @@ void GuiMain::showDefaultServerPortInMenu()
 #ifdef BEEBEEP_USE_MULTICAST_DNS
     mp_actMulticastDns->setEnabled( false );
 #endif
+    mp_actEncryptedConnectionsAlso->setEnabled( false );
   }
 
   mp_actHostAddress->setText( QString( "ip: %1 (%2)" ).arg( host_address ).arg( tr( "your IP address" ) ) );
@@ -3861,6 +3867,16 @@ void GuiMain::showDefaultServerPortInMenu()
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   mp_actMulticastDns->setText( QString( "mdns: %1" ).arg( multicast_dns ) );
 #endif
+  if( Settings::instance().disableConnectionSocketEncryption() )
+  {
+    mp_actEncryptedConnectionsAlso->setIcon( IconManager::instance().icon( "warning.png" ) );
+    mp_actEncryptedConnectionsAlso->setText( tr( "End-to-end encryption is disabled" ) );
+  }
+  else
+  {
+    mp_actEncryptedConnectionsAlso->setIcon( IconManager::instance().icon( "encryption-enabled.png" ) );
+    mp_actEncryptedConnectionsAlso->setText( tr( "End-to-end encryption is enabled" ) );
+  }
 }
 
 void GuiMain::sendBroadcastMessage()

@@ -330,7 +330,7 @@ int Protocol::datastreamVersion( const Message& m ) const
   return datastream_version;
 }
 
-QByteArray Protocol::helloMessage( const QString& public_key ) const
+QByteArray Protocol::helloMessage( const QString& public_key, bool encrypted_connection ) const
 {
   QStringList data_list;
   data_list << QString::number( Settings::instance().localUser().networkAddress().hostPort() );
@@ -354,6 +354,8 @@ QByteArray Protocol::helloMessage( const QString& public_key ) const
     data_list << QString( "" );
   data_list << Settings::instance().localUser().domainName();
   Message m( Message::Hello, static_cast<VNumber>(Settings::instance().protoVersion()), data_list.join( DATA_FIELD_SEPARATOR ) );
+  if( !encrypted_connection )
+    m.addFlag( Message::EncryptionDisabled );
   m.setData( Settings::instance().currentHash() );
   return fromMessage( m, 1 );
 }
@@ -2201,10 +2203,7 @@ QByteArray Protocol::encryptByteArray( const QByteArray& text_to_encrypt, const 
     return QByteArray();
 
   if( cipher_key.isEmpty() )
-  {
-    qWarning() << "Unable to encrypt data with an empty cipher key";
-    return text_to_encrypt;
-  }
+    return text_to_encrypt.toBase64();
 
   if( proto_version < SECURE_LEVEL_3_PROTO_VERSION )
   {
@@ -2263,10 +2262,7 @@ QByteArray Protocol::decryptByteArray( const QByteArray& text_to_decrypt, const 
     return QByteArray();
 
   if( cipher_key.isEmpty() )
-  {
-    qWarning() << "Unable to decrypt data with an empty cipher key";
-    return text_to_decrypt;
-  }
+    return QByteArray::fromBase64( text_to_decrypt );
 
   if( proto_version < SECURE_LEVEL_3_PROTO_VERSION )
   {

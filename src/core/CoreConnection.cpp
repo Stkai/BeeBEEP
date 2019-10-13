@@ -392,10 +392,21 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
   emit userConnectionStatusChanged( u );
   showMessage( tr( "%1 users connected" ).arg( connectedUsers() ), 3000 );
 
-  if( c->protoVersion() < SECURE_LEVEL_3_PROTO_VERSION )
+  if( c->isEncrypted() )
   {
-    QString sAlertMsg = tr( "%1 %2 uses old encryption level." ).arg( IconManager::instance().toHtml( "warning.png", "*E*" ), Bee::replaceHtmlSpecialCharacters( u.path() ) );
-    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sAlertMsg, DispatchToDefaultAndPrivateChat, ChatMessage::Connection );
+    if( c->protoVersion() < SECURE_LEVEL_3_PROTO_VERSION )
+    {
+      dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(),
+                             tr( "%1 %2 uses old encryption level." ).arg( IconManager::instance().toHtml( "warning.png", "*!*" ), Bee::userNameToShow( u ) ),
+                             DispatchToDefaultAndPrivateChat, ChatMessage::Connection );
+    }
+  }
+  else
+  {
+    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(),
+                           QString( "%1 %2." ).arg( IconManager::instance().toHtml( "encryption-disabled.png", "*!*" ),
+                                                    tr( "Connection with %1 has end-to-end encryption disabled" ).arg( Bee::userNameToShow( u ) ) ),
+                           DispatchToDefaultAndPrivateChat, ChatMessage::Connection );
   }
 
   if( !Settings::instance().localUser().vCard().hasOnlyNickName() )

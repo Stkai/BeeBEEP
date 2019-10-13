@@ -72,6 +72,7 @@ private:
   bool m_newBroadcastRequested;
   QList< QPair<NetworkAddress, QDateTime> > m_networkAddressesWaitingForLoopback;
   QHostAddress m_multicastGroupAddress;
+  bool m_isMulticastDatagramSent;
 
 };
 

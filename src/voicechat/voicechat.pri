@@ -1,6 +1,7 @@
 
 INCLUDEPATH += $$PWD
 DEFINES += BEEBEEP_USE_VOICE_CHAT
+QTPLUGIN += qtaudio_coreaudio qtmedia_audioengine
 
 HEADERS += voicechat/GuiAudioLevel.h \
            voicechat/GuiRecordVoiceMessage.h \

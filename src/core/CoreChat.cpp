@@ -959,10 +959,24 @@ void Core::addChatHeader( Chat* p_chat )
 
   p_chat->addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( header_msg ), ChatMessage::Header ) );
 
-  if( Settings::instance().disableConnectionSocketEncryption() )
+  if( p_chat->isDefault() )
   {
-    header_msg = QString( "%1 %2." ).arg( IconManager::instance().toHtml( "warning.png", "*!*" ), tr( "End-to-end encryption is disabled" ) );
-    p_chat->addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( header_msg ), ChatMessage::System ) );
+    if( Settings::instance().disableConnectionSocketEncryption() )
+    {
+      header_msg = QString( "%1 %2" ).arg( IconManager::instance().toHtml( "encryption-disabled.png", "*!*" ), tr( "End-to-end encryption is disabled" ) );
+      if( Settings::instance().allowEncryptedConnectionsAlso() )
+        header_msg += QString( " (%1)" ).arg( tr( "but encrypted connections allowed" ) );
+      header_msg += QString( "." );
+      p_chat->addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( header_msg ), ChatMessage::Other ) );
+    }
+    else
+    {
+      if( Settings::instance().allowNotEncryptedConnectionsAlso() )
+      {
+        header_msg = QString( "%1 %2 (%3)." ).arg( IconManager::instance().toHtml( "warning.png", "*!*" ), tr( "End-to-end encryption is enabled" ), tr( "but not encrypted connections allowed" ) );
+        p_chat->addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( header_msg ), ChatMessage::Other ) );
+      }
+    }
   }
 }
 

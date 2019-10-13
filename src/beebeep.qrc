@@ -180,5 +180,7 @@
         <file>images/pause.png</file>
         <file>images/microphone.png</file>
         <file>images/voice-message.png</file>
+        <file>images/encryption-disabled.png</file>
+        <file>images/encryption-enabled.png</file>
     </qresource>
 </RCC>

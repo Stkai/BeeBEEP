@@ -390,6 +390,8 @@ public:
   inline bool useDefaultMulticastGroupAddress() const;
   inline void setBroadcastToOfflineUsers( bool );
   inline bool broadcastToOfflineUsers() const;
+  inline void setBroadcastToLocalSubnetAlways( bool );
+  inline bool broadcastToLocalSubnetAlways() const;
 
   inline bool keyEscapeMinimizeInTray() const;
   inline void setKeyEscapeMinimizeInTray( bool );
@@ -573,6 +575,8 @@ public:
   QNetworkProxy systemNetworkProxy( const QNetworkProxyQuery& ) const;
 
   inline bool disableConnectionSocketEncryption() const;
+  inline bool allowNotEncryptedConnectionsAlso() const;
+  inline bool allowEncryptedConnectionsAlso() const;
 
   QString simpleEncrypt( const QString& );
   QString simpleDecrypt( const QString& );
@@ -656,6 +660,8 @@ private:
   bool m_useUserFullName;
 
   bool m_disableConnectionSocketEncryption;
+  bool m_allowNotEncryptedConnectionsAlso;
+  bool m_allowEncryptedConnectionsAlso;
 
   QStringList m_skipLocalHardwareAddresses;
 
@@ -683,6 +689,7 @@ private:
   bool m_useDefaultMulticastGroupAddress;
   int m_ipMulticastTtl;
   bool m_broadcastToOfflineUsers;
+  bool m_broadcastToLocalSubnetAlways;
 
   QDateTime m_lastSave;
   QString m_logPath;
@@ -1254,6 +1261,8 @@ inline void Settings::setUseMessageTimestampWithAP( bool new_value ) { m_useMess
 inline bool Settings::useMessageTimestampWithAP() const { return m_useMessageTimestampWithAP; }
 inline void Settings::setBroadcastToOfflineUsers( bool new_value ) { m_broadcastToOfflineUsers = new_value; }
 inline bool Settings::broadcastToOfflineUsers() const { return m_broadcastToOfflineUsers; }
+inline void Settings::setBroadcastToLocalSubnetAlways( bool new_value ) { m_broadcastToLocalSubnetAlways = new_value; }
+inline bool Settings::broadcastToLocalSubnetAlways() const { return m_broadcastToLocalSubnetAlways; }
 inline void Settings::setUseDarkStyle( bool new_value ) { m_useDarkStyle = new_value; }
 inline bool Settings::useDarkStyle() const { return m_useDarkStyle; }
 inline void Settings::setSaveMessagesTimestamp( const QDateTime& new_value ) { m_saveMessagesTimestamp = new_value; }
@@ -1288,6 +1297,8 @@ inline int Settings::voiceMessageMaxDuration() const { return m_voiceMessageMaxD
 inline void Settings::setUseVoicePlayer( bool new_value ) { m_useVoicePlayer = new_value; }
 inline bool Settings::useVoicePlayer() const { return m_useVoicePlayer; }
 inline bool Settings::disableConnectionSocketEncryption() const { return m_disableConnectionSocketEncryption; }
+inline bool Settings::allowNotEncryptedConnectionsAlso() const { return m_allowNotEncryptedConnectionsAlso; }
+inline bool Settings::allowEncryptedConnectionsAlso() const { return m_allowEncryptedConnectionsAlso; }
 inline bool Settings::disableBeepInUserStatusBusy() const { return m_disableBeepInUserStatusBusy; }
 inline void Settings::setDisableBeepInUserStatusBusy( bool new_value ) { m_disableBeepInUserStatusBusy = new_value; }
 

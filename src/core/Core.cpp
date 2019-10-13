@@ -241,6 +241,13 @@ bool Core::start()
                          .arg( IconManager::instance().toHtml( "network-connected.png", "*C*" ),
                                Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
 
+  if( Settings::instance().disableConnectionSocketEncryption() )
+  {
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
+                           QString( "%1 %2." ).arg( IconManager::instance().toHtml( "encryption-disabled.png", "*!*" ), tr( "End-to-end encryption is disabled" ) ),
+                           DispatchToChat, ChatMessage::Connection );
+  }
+
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   QTimer::singleShot( 12000, this, SLOT( startDnsMulticasting() ) );
 #endif

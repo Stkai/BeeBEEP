@@ -131,6 +131,8 @@ Settings::Settings()
   m_skipLocalHardwareAddresses = QStringList();
 
   m_disableConnectionSocketEncryption = false;
+  m_allowNotEncryptedConnectionsAlso = false;
+  m_allowEncryptedConnectionsAlso = false;
 
   m_rcFileExists = false;
   /* Default RC end */
@@ -173,6 +175,7 @@ Settings::Settings()
   m_tickIntervalCheckNetwork = 5;
   m_tickIntervalBroadcasting = 0;
   m_broadcastToOfflineUsers = false;
+  m_broadcastToLocalSubnetAlways = false;
 
   m_chatMessageFilter = QBitArray( static_cast<int>(ChatMessage::NumTypes) );
   for( int i = 0; i < ChatMessage::NumTypes; i++ )
@@ -499,7 +502,9 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "DisableMenuSettings", m_disableMenuSettings );
     sets->setValue( "CheckUserConnectedFromDatagramIp", m_checkUserConnectedFromDatagramIp );
     sets->setValue( "SkipLocalHardwareAddresses", m_skipLocalHardwareAddresses.isEmpty() ? QString( "" ) : m_skipLocalHardwareAddresses.join( ", " ) );   
-    sets->setValue( "DisableConnectionSocketEncryption", m_disableConnectionSocketEncryption );
+    sets->setValue( "DisableEncryptedConnections", m_disableConnectionSocketEncryption );
+    sets->setValue( "AllowNotEncryptedConnectionsAlso", m_allowNotEncryptedConnectionsAlso );
+    sets->setValue( "AllowEncryptedConnectionsAlso", m_allowEncryptedConnectionsAlso );
     sets->setValue( "UseUserFullName", m_useUserFullName );
     sets->endGroup();
     sets->sync();
@@ -603,7 +608,9 @@ void Settings::loadRcFile()
     }
     m_skipLocalHardwareAddresses.removeDuplicates();
   }
-  m_disableConnectionSocketEncryption = sets->value( "DisableConnectionSocketEncryption", m_disableConnectionSocketEncryption ).toBool();
+  m_disableConnectionSocketEncryption = sets->value( "DisableEncryptedConnections", m_disableConnectionSocketEncryption ).toBool();
+  m_allowNotEncryptedConnectionsAlso = sets->value( "AllowNotEncryptedConnectionsAlso", m_allowNotEncryptedConnectionsAlso ).toBool();
+  m_allowEncryptedConnectionsAlso = sets->value( "AllowEncryptedConnectionsAlso", m_allowEncryptedConnectionsAlso ).toBool();
   m_useUserFullName = sets->value( "UseUserFullName", m_useUserFullName ).toBool();
   sets->endGroup();
   QStringList key_list = sets->allKeys();
@@ -1402,6 +1409,7 @@ void Settings::load()
   m_disableSystemProxyForConnections = sets->value( "DisableSystemProxyForConnections", m_disableSystemProxyForConnections ).toBool();
   m_useDefaultMulticastGroupAddress = sets->value( "UseDefaultMulticastGroupAddress", m_useDefaultMulticastGroupAddress ).toBool();
   m_broadcastToOfflineUsers = sets->value( "BroadcastToOfflineUsers", m_broadcastToOfflineUsers ).toBool();
+  m_broadcastToLocalSubnetAlways = sets->value( "BroadcastToLocalSubnetAlways", m_broadcastToLocalSubnetAlways ).toBool();
   m_ipMulticastTtl = sets->value( "IpMulticastTtl", m_ipMulticastTtl ).toInt();
   sets->endGroup();
   loadBroadcastAddressesFromFileHosts();
@@ -1765,6 +1773,7 @@ void Settings::save()
   sets->setValue( "DisableSystemProxyForConnections", m_disableSystemProxyForConnections );
   sets->setValue( "UseDefaultMulticastGroupAddress", m_useDefaultMulticastGroupAddress );
   sets->setValue( "BroadcastToOfflineUsers", m_broadcastToOfflineUsers );
+  sets->setValue( "BroadcastToLocalSubnetAlways", m_broadcastToLocalSubnetAlways );
   sets->setValue( "IpMulticastTtl", m_ipMulticastTtl );
   sets->endGroup();
   sets->beginGroup( "FileShare" );

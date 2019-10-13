@@ -66,7 +66,9 @@ ClearCacheAfterDays=[integer] -1: never            (default=96) [5.6.5]
 CheckUserConnectedFromDatagramIp=[true/false] if true BeeBEEP checks if the user is connected also from ip parsed in datagram (default=true) [5.6.9]
 SkipLocalHardwareAddresses=(Strings "" comma separated) tells to BeeBEEP which hardware addresses (usually mac addresses) must to be skipped (default="") [5.6.9]
 UseOnlyMulticast=[true/false] if enabled BeeBEEP will multicast only in the MulticastGroupAddress (if empty it uses default 239.255.64.75) (default=false) [5.6.9]
-DisableConnectionSocketEncryption=[true/false] if enabled BeeBEEP does not use encryption in its end-to-end connections. Use this option at your own risk and only if you know what you are doing... (default=false) [5.7.3]
+DisableEncryptedConnections=[true/false] if enabled BeeBEEP does not use encryption in its end-to-end connections. Use this option at your own risk and only if you know what you are doing... (default=false) [5.7.3]
+AllowNotEncryptedConnectionsAlso=[true/false] if enabled BeeBEEP accepts also NOT encrypted connections (default=false) [5.7.5]
+AllowEncryptedConnectionsAlso=[true/false] if enabled BeeBEEP accepts encrypted connections also if you have disabled encryption (default=false) [5.7.5]
 UseUserFullName=[true/false] it true BeeBEEP show name and surname of the users if they are not empty (default=false) [5.7.5]
 
 [Groups] (obsolete)
@@ -270,6 +272,7 @@ AutoSearchUsersWhenListIsEmpty=[true/false] if enabled BeeBEEP search for users 
 DisableSystemProxyForConnections=[true/false] if enabled BeeBEEP disable the proxy for local connections (default=false) [5.0.1]
 UseDefaultMulticastGroupAddress=[true/false] if enabled BeeBEEP joins the default multicast group address (default=true) [5.2.0]
 BroadcastToOfflineUsers=[true/false] if enabled BeeBEEP adds also offline users to broadcast list (default=false) [5.4.3]
+BroadcastToLocalSubnetAlways=[true/false] if enabled BeeBEEP always broadcast to local subnet (default=false) [5.7.5]
 IpMulticastTtl=[integer] multicast ttl option for IPv4 udp socket 1,2,4,8...255 (default=1) [5.6.0]
 
 [FileShare]

@@ -108,7 +108,9 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
   connect( mp_chat, SIGNAL( closeRequest() ), this, SLOT( close() ) );
   connect( mp_chat, SIGNAL( updateChatColorsRequest() ), this, SIGNAL( updateChatColorsRequest() ) );
   connect( mp_chat, SIGNAL( showStatusMessageRequest( const QString&, int ) ), this, SLOT( showStatusMessage(const QString&, int ) ) );
+#ifdef BEEBEEP_USE_VOICE_CHAT
   connect( mp_chat, SIGNAL( showVoiceMessageDialogRequest() ), this, SLOT( showRecordMessageDialog() ) );
+#endif
   connect( qApp, SIGNAL( focusChanged( QWidget*, QWidget* ) ), this, SLOT( onApplicationFocusChanged( QWidget*, QWidget* ) ) );
 }
 

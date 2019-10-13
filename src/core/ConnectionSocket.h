@@ -63,6 +63,7 @@ public:
   inline void setTestConnection( bool );
 
   inline bool isServerSocket() const;
+  inline bool isEncrypted() const;
 
 signals:
   void dataReceived( const QByteArray& );
@@ -85,6 +86,9 @@ protected:
   bool createCipherKey( const QString& );
 
   bool checkTestMessage( const Message& );
+
+  inline bool isKeysHandshakeCompleted() const;
+  void useEncryption( bool );
 
 private:
   // max block size contains lowers
@@ -110,6 +114,8 @@ private:
 
   quint16 m_serverPort;
 
+  bool m_isEncrypted;
+
 };
 
 
@@ -124,5 +130,7 @@ inline const NetworkAddress& ConnectionSocket::networkAddress() const { return m
 inline bool ConnectionSocket::isTestConnection() const { return m_isTestConnection; }
 inline void ConnectionSocket::setTestConnection( bool new_value ) { m_isTestConnection = new_value; }
 inline bool ConnectionSocket::isServerSocket() const { return m_serverPort > 0; }
+inline bool ConnectionSocket::isKeysHandshakeCompleted() const { return !m_cipherKey.isEmpty(); }
+inline bool ConnectionSocket::isEncrypted() const { return m_isEncrypted; }
 
 #endif // BEEBEEP_CONNECTIONSOCKET_H
