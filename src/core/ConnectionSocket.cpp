@@ -58,7 +58,7 @@ void ConnectionSocket::initSocket( qintptr socket_descriptor, quint16 server_por
   m_tickCounter = 0;
   m_checkConnectionTimeout = false;
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Connection socket initializes network address peer" << qPrintable( m_networkAddress.toString() ) << "and server port" << QString::number( m_serverPort );
+  qDebug() << "Connection socket initializes peer with network address" << qPrintable( m_networkAddress.toString() ) << "and server port" << m_serverPort;
 #endif
 }
 

@@ -254,7 +254,7 @@ void Broadcaster::checkLoopbackDatagram()
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Check" << m_networkAddressesWaitingForLoopback.size() << "loopback datagram";
 #endif
-  QList< QPair<NetworkAddress,QDateTime> >::iterator it = m_networkAddressesWaitingForLoopback.begin();
+  QList< QPair<NetworkAddress, QDateTime> >::iterator it = m_networkAddressesWaitingForLoopback.begin();
   while( it != m_networkAddressesWaitingForLoopback.end() )
   {
 #if QT_VERSION >= 0x040700
@@ -263,7 +263,7 @@ void Broadcaster::checkLoopbackDatagram()
     if( it->second.secsTo( QDateTime::currentDateTime() ) > 5 )
 #endif
     {
-      qWarning() << "Broadcaster didn't received yet a loopback datagram from host:" << qPrintable( it->first.toString() );
+      qWarning() << "Broadcaster didn't received yet a loopback datagram from" << qPrintable( it->first.toString() );
       it = m_networkAddressesWaitingForLoopback.erase( it );
     }
     else
@@ -273,12 +273,12 @@ void Broadcaster::checkLoopbackDatagram()
 
 void Broadcaster::removeHostAddressFromWaitingList( const QHostAddress& host_address )
 {
-  QList< QPair<NetworkAddress,QDateTime> >::iterator it = m_networkAddressesWaitingForLoopback.begin();
+  QList< QPair<NetworkAddress, QDateTime> >::iterator it = m_networkAddressesWaitingForLoopback.begin();
   while( it != m_networkAddressesWaitingForLoopback.end() )
   {
     if( it->first.hostAddress() == host_address )
     {
-      qDebug() << "Broadcaster has received loopback datagram from host:" << qPrintable( it->first.toString() );
+      qDebug() << "Broadcaster has received loopback datagram from" << qPrintable( it->first.toString() );
       it = m_networkAddressesWaitingForLoopback.erase( it );
     }
     else
@@ -319,7 +319,7 @@ void Broadcaster::readBroadcastDatagram()
     Message m = Protocol::instance().toMessage( datagram, 1 );
     if( !m.isValid() || m.type() != Message::Beep )
     {
-      qWarning() << "Broadcaster has received an invalid data:" << datagram;
+      qWarning() << "Broadcaster has received an invalid datagram from" << qPrintable( sender_ip.toString());
       continue;
     }
 
@@ -327,7 +327,7 @@ void Broadcaster::readBroadcastDatagram()
     int sender_listener_port = m.text().toInt( &ok );
     if( !ok )
     {
-      qWarning() << "Broadcaster has received an invalid listener port from datagram:" << m.text();
+      qWarning() << "Broadcaster has received an invalid listener port from" << qPrintable( sender_ip.toString() );
       continue;
     }
 
@@ -336,7 +336,7 @@ void Broadcaster::readBroadcastDatagram()
     // for broadcast 192.168.1.255, 10.0.0.255, ...)
     QHostAddress host_address_from_datagram = Protocol::instance().hostAddressFromBroadcastMessage( m );
     if( host_address_from_datagram.isNull() )
-      qWarning() << "Broadcaster has received and invalid host address in data:" << datagram;
+      qWarning() << "Broadcaster has received an invalid host address in datagram from" << qPrintable( sender_ip.toString() );
     else
       removeHostAddressFromWaitingList( host_address_from_datagram );
 
@@ -473,10 +473,13 @@ void Broadcaster::updateAddresses()
 #endif
 
 #ifdef BEEBEEP_DEBUG
-  QStringList sl;
-  foreach( NetworkAddress na, m_networkAddresses )
-    sl << na.toString();
-  qDebug() << "Broadcaster is contacting the followings addresses:" << qPrintable( sl.join( ", " ) );
+  if( !m_networkAddresses.isEmpty() )
+  {
+    QStringList sl;
+    foreach( NetworkAddress na, m_networkAddresses )
+      sl << na.toString();
+    qDebug() << "Broadcaster is contacting the followings addresses:" << qPrintable( sl.join( ", " ) );
+  }
 #endif
   qDebug() << "Broadcaster will contact" << m_networkAddresses.size() << "network addresses and" << offline_users_to_add << "offline users";
 
@@ -524,6 +527,8 @@ void Broadcaster::sendMulticastDatagram()
     {
       qDebug() << "Broadcaster sends multicast datagram to" << qPrintable( m_multicastGroupAddress.toString() ) << Settings::instance().defaultBroadcastPort();
       m_isMulticastDatagramSent = true;
+      m_networkAddressesWaitingForLoopback.append( QPair<NetworkAddress, QDateTime>( NetworkAddress( m_multicastGroupAddress, Settings::instance().defaultBroadcastPort() ), QDateTime::currentDateTime() ) );
+      qDebug() << "Waiting for loopback datagram from" << qPrintable( m_multicastGroupAddress.toString() );
     }
     else
       qWarning() << "Unable to send multicast datagram to" << qPrintable( m_multicastGroupAddress.toString() ) << Settings::instance().defaultBroadcastPort();
