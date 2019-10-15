@@ -73,15 +73,38 @@ bool Broadcaster::startBroadcastServer()
       if( NetworkManager::instance().networkInterfaceCanMulticast( if_net ) )
       {
         QString hardware_address = if_net.hardwareAddress();
+        if( hardware_address.isEmpty() )
+        {
+          bool add_this_hw_address = true;
+          hardware_address = "[unknown device";
+          QList<QNetworkAddressEntry> address_entries = if_net.addressEntries();
+          foreach( QNetworkAddressEntry address_entry, address_entries )
+          {
+            if( address_entry.ip().isLoopback() || address_entry.ip().toString() == QString( "127.0.0.1" ) || address_entry.ip().toString() == QString( "::1" ) )
+              add_this_hw_address = false;
+            hardware_address += QString( " - %1" ).arg( address_entry.ip().toString() );
+          }
+          hardware_address += "]";
+
+          if( !add_this_hw_address )
+          {
+            qDebug() << "Broadcaster skips to join to the multicast group" << qPrintable( m_multicastGroupAddress.toString() )
+                     << "in network interface" << qPrintable( hardware_address );
+            continue;
+          }
+        }
+
         if( !Settings::instance().isLocalHardwareAddressToSkip( hardware_address ) )
         {
           if( mp_receiverSocket->joinMulticastGroup( m_multicastGroupAddress, if_net ) )
           {
-            qDebug() << "Join to the multicast group" << qPrintable( m_multicastGroupAddress.toString() ) << "in network interface" << qPrintable( hardware_address );
+            qDebug() << "Broadcaster joins to the multicast group" << qPrintable( m_multicastGroupAddress.toString() )
+                     << "in network interface" << qPrintable( hardware_address );
             multicast_interfaces++;
           }
           else
-            qWarning() << "Unable to join to the multicast group" << qPrintable( m_multicastGroupAddress.toString() ) << "in network interface" << qPrintable( hardware_address );
+            qWarning() << "Broadcaster cannot join to the multicast group" << qPrintable( m_multicastGroupAddress.toString() )
+                       << "in network interface" << qPrintable( hardware_address );
         }
       }
     }
@@ -90,11 +113,11 @@ bool Broadcaster::startBroadcastServer()
     {
       if( !mp_receiverSocket->joinMulticastGroup( m_multicastGroupAddress ) )
       {
-        qWarning() << "Unable to join to the multicast group" << qPrintable( m_multicastGroupAddress.toString() ) << "in default network interface";
+        qWarning() << "Broadcaster cannot join to the multicast group" << qPrintable( m_multicastGroupAddress.toString() ) << "in default network interface";
         m_multicastGroupAddress = QHostAddress();
       }
       else
-        qDebug() << "Join to the multicast group" << qPrintable( m_multicastGroupAddress.toString() ) << "in default network interface";
+        qDebug() << "Broadcaster joins to the multicast group" << qPrintable( m_multicastGroupAddress.toString() ) << "in default network interface";
     }
   }
 #endif

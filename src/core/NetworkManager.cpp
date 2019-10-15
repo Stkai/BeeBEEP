@@ -99,13 +99,16 @@ bool NetworkManager::isMainInterfaceUp() const
 
 bool NetworkManager::isLocalHostAddress( const QHostAddress& host_address ) const
 {
-  QList<NetworkEntry> network_entries = availableNetworkEntries();
-  foreach( NetworkEntry ne, network_entries )
+  QList<QNetworkInterface> interface_list = QNetworkInterface::allInterfaces();
+  foreach( QNetworkInterface if_net, interface_list )
   {
-    if( ne.hostAddress() == host_address )
-      return true;
+    QList<QNetworkAddressEntry> address_entries = if_net.addressEntries();
+    foreach( QNetworkAddressEntry address_entry, address_entries)
+    {
+      if( address_entry.ip() == host_address )
+        return true;
+    }
   }
-
   return false;
 }
 

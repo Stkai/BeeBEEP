@@ -96,6 +96,14 @@ void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )
     return;
 #endif
 
+  if( NetworkManager::instance().isLocalHostAddress( sender_ip ) && sender_port == mp_listener->serverPort() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Skip new peer found" << qPrintable( sender_ip.toString() ) << ":" << sender_port << "because it is local user";
+#endif
+    return;
+  }
+
   if( Settings::instance().preventMultipleConnectionsFromSingleHostAddress() )
   {
     if( hasConnection( sender_ip, -1 ) )

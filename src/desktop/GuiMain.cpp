@@ -3554,9 +3554,7 @@ void GuiMain::onUserRemoved( const User& u )
 
 void GuiMain::onChatChanged( const Chat& c )
 {
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "GuiMain::onChatChanged(" << c.name() << ")";
-#endif
+  showMessage( tr( "%1 updated" ).arg( c.name() ), 2000 );
   mp_userList->updateChat( c );
   mp_chatList->updateChat( c );
   mp_groupList->updateChat( c );
@@ -4389,9 +4387,6 @@ void GuiMain::updateEmoticons()
 void GuiMain::updateNewMessageAction()
 {
   Chat c = ChatManager::instance().firstChatWithUnreadMessages();
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "GuiMain::updateNewMessageAction(" << (c.isValid() ? c.name() : "no new messages") << ")";
-#endif
   mp_trayIcon->setNextChatToRead( c );
   mp_actViewNewMessage->setEnabled( c.isValid() );
   int chat_tab_index = mp_tabMain->indexOf( mp_chatList );

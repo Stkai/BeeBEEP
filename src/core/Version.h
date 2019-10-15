@@ -28,11 +28,7 @@ const char BEEBEEP_NAME[] = "BeeBEEP";
 const char BEEBEEP_ORGANIZATION[] = "MarcoMastroddiSW";
 const char BEEBEEP_ORGANIZATION_DOMAIN[] = "beebeep.net";
 const char BEEBEEP_DNS_RECORD[] = "_beebeep._tcp";
-#ifdef BEEBEEP_DEBUG
-  const char BEEBEEP_WEBSITE[] = "http://127.0.0.1/beebeep.net/";
-#else
-  const char BEEBEEP_WEBSITE[] = "https://www.beebeep.net/";
-#endif
+const char BEEBEEP_WEBSITE[] = "https://www.beebeep.net/";
 const char BEEBEEP_DOWNLOAD_WEBSITE[] = "download";
 const char BEEBEEP_DONATE_WEBSITE[] = "donate";
 const char BEEBEEP_HELP_WEBSITE[] = "help";
@@ -50,7 +46,7 @@ const char HUNSPELL_VERSION[] = "1.7.0";
 const char BEEBEEP_VERSION[] = "5.7.7";
 const int BEEBEEP_PROTO_VERSION = 81;
 const int BEEBEEP_SETTINGS_VERSION = 15;
-const int BEEBEEP_BUILD = 1291;
+const int BEEBEEP_BUILD = 1292;
 
 #endif // BEEBEEP_VERSION_H
 

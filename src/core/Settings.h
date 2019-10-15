@@ -1291,7 +1291,7 @@ inline const QString& Settings::chatQuoteBackgroundColor() const { return m_chat
 inline void Settings::setChatQuoteTextColor( const QString& new_value ) { m_chatQuoteTextColor = new_value; }
 inline const QString& Settings::chatQuoteTextColor() const { return m_chatQuoteTextColor; }
 inline bool Settings::checkUserConnectedFromDatagramIp() const { return m_checkUserConnectedFromDatagramIp; }
-inline bool Settings::isLocalHardwareAddressToSkip( const QString& hw_value ) const { return m_skipLocalHardwareAddresses.isEmpty() ? false : m_skipLocalHardwareAddresses.contains( hw_value, Qt::CaseInsensitive ); }
+inline bool Settings::isLocalHardwareAddressToSkip( const QString& hw_value ) const { return hw_value.isEmpty() ? false : (m_skipLocalHardwareAddresses.isEmpty() ? false : m_skipLocalHardwareAddresses.contains( hw_value, Qt::CaseInsensitive )); }
 inline bool Settings::rcFileExists() const { return m_rcFileExists; }
 inline void Settings::setChatOnSendingMessage( int new_value ) { m_chatOnSendingMessage = new_value; }
 inline int Settings::chatOnSendingMessage() const { return m_chatOnSendingMessage; }
