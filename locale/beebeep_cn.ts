@@ -4,57 +4,57 @@
 <context>
     <name>ChatMessage</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="281"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="283"/>
         <source>Header</source>
         <translation>头部</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="282"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="284"/>
         <source>System</source>
         <translation>系统</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="283"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="285"/>
         <source>Chat</source>
         <translation>聊天</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="284"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="286"/>
         <source>Connection</source>
         <translation>连接</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="285"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="287"/>
         <source>User Information</source>
         <translation>用户信息</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="286"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="288"/>
         <source>File Transfer</source>
         <translation>文件传输</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="287"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="289"/>
         <source>History</source>
         <translation>历史</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="288"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="290"/>
         <source>Other</source>
         <translation>其他</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="289"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="291"/>
         <source>Image Preview</source>
         <translation>图片预览</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="290"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="292"/>
         <source>Autoresponder</source>
         <translation>自动响应</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="291"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="293"/>
         <source>Voice message</source>
         <translation type="unfinished"></translation>
     </message>
@@ -72,17 +72,17 @@
         <translation>%1无法广播到%2网络，请检查你的防火墙设置。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="240"/>
+        <location filename="../src/core/Core.cpp" line="239"/>
         <source>%1 You are connected to %2 Network.</source>
         <translation>%1你已经连上%2网络。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="401"/>
+        <location filename="../src/core/Core.cpp" line="399"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1你已经与%2网络断开连接。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="330"/>
+        <location filename="../src/core/Core.cpp" line="328"/>
         <source>%1 Zero Configuration started with service name: %2</source>
         <translation>%1零配置服务已经启动，名称：%2</translation>
     </message>
@@ -117,77 +117,77 @@
         <translation>正在连接</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="268"/>
+        <location filename="../src/core/Core.cpp" line="266"/>
         <source>%1 You have selected to join only in these workgroups: %2</source>
         <translation>%1你已经选择了只加入这些群组：%2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="297"/>
+        <location filename="../src/core/Core.cpp" line="295"/>
         <source>%1 Do you need support? Visit the %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="299"/>
+        <location filename="../src/core/Core.cpp" line="297"/>
         <source>help page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="345"/>
+        <location filename="../src/core/Core.cpp" line="343"/>
         <source>%1 Zero Configuration service closed.</source>
         <translation>%1零配置服务已关闭。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="407"/>
+        <location filename="../src/core/Core.cpp" line="405"/>
         <source>Disconnected</source>
         <translation>已断开</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="413"/>
+        <location filename="../src/core/Core.cpp" line="411"/>
         <source>Disconnecting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="434"/>
+        <location filename="../src/core/Core.cpp" line="432"/>
         <source>%1 Reconnecting to the %2 Network in progress.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="444"/>
+        <location filename="../src/core/Core.cpp" line="442"/>
         <source>Reconnecting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="462"/>
+        <location filename="../src/core/Core.cpp" line="460"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
         <translation>%1零配置正在为服务%2浏览网络</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="469"/>
+        <location filename="../src/core/Core.cpp" line="467"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation>%1零配置不能为服务%2浏览网络</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="493"/>
+        <location filename="../src/core/Core.cpp" line="491"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1正在广播到%2网络</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="495"/>
+        <location filename="../src/core/Core.cpp" line="493"/>
         <source>Searching users</source>
         <translation>正在搜索用户</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="626"/>
+        <location filename="../src/core/Core.cpp" line="624"/>
         <source>New version is available</source>
         <translation>有新版本可用</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="627"/>
+        <location filename="../src/core/Core.cpp" line="625"/>
         <source>Click here to download</source>
         <translation>点击这里下载</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="726"/>
+        <location filename="../src/core/Core.cpp" line="724"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>已达到最大ID数，请关闭并重新启动程序。</translation>
     </message>
@@ -324,22 +324,22 @@
         <translation>与所有用户聊天</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="248"/>
+        <location filename="../src/core/Core.cpp" line="246"/>
         <source>but encrypted connections allowed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="256"/>
+        <location filename="../src/core/Core.cpp" line="254"/>
         <source>End-to-end encryption is enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="256"/>
+        <location filename="../src/core/Core.cpp" line="254"/>
         <source>but not encrypted connections allowed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="246"/>
+        <location filename="../src/core/Core.cpp" line="244"/>
         <source>End-to-end encryption is disabled</source>
         <translation type="unfinished"></translation>
     </message>
@@ -389,7 +389,7 @@
         <translation>无法通知%1 %2你已离开组</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="535"/>
+        <location filename="../src/core/Core.cpp" line="533"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1与%2的网络接口下降</translation>
     </message>
@@ -746,7 +746,7 @@
 <context>
     <name>Date</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="1023"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="1025"/>
         <source>more than 1 day</source>
         <translation type="unfinished"></translation>
     </message>
@@ -754,42 +754,42 @@
 <context>
     <name>File</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="262"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="264"/>
         <source>Audio</source>
         <translation>音频</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="263"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="265"/>
         <source>Video</source>
         <translation>视频</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="264"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="266"/>
         <source>Image</source>
         <translation>图片</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="265"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="267"/>
         <source>Document</source>
         <translation>文档</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="266"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="268"/>
         <source>Other</source>
         <translation>其他</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="267"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="269"/>
         <source>Executable</source>
         <translation>可执行文件</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="268"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="270"/>
         <source>MacOSX</source>
         <translation>MacOX</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="269"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="271"/>
         <source>Compressed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5649,62 +5649,67 @@ Please select a different name.</source>
 <context>
     <name>GuiVCard</name>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="70"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="71"/>
         <source>is</source>
         <translation>是</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="78"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="74"/>
+        <source>from %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiVCard.cpp" line="81"/>
         <source>Birthday: %1</source>
         <translation>生日：%1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="80"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="83"/>
         <source>Happy Birthday</source>
         <translation>生日快乐</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="104"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="107"/>
         <source>old %1</source>
         <translation>旧的%1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="106"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="109"/>
         <source>new %1</source>
         <translation>新的%1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="115"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="118"/>
         <source>BeeBEEP version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="146"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="149"/>
         <source>Remove from favorites</source>
         <translation>从收藏中移除</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="151"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="154"/>
         <source>Add to favorites</source>
         <translation>添加到收藏</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="168"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="171"/>
         <source>You cannot remove an user who is connected</source>
         <translation>你不能移除在线的用户</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="173"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="176"/>
         <source>You cannot remove an user who is in group chat</source>
         <translation>你不能移除在群聊的用户</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="178"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="181"/>
         <source>Remove this user</source>
         <translation>移除该用户</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="134"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="137"/>
         <source>Open chat</source>
         <translation>打开聊天</translation>
     </message>
@@ -6063,7 +6068,7 @@ Please select a different name.</source>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatItem.cpp" line="120"/>
-        <location filename="../src/utils/BeeUtils.cpp" line="711"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="713"/>
         <source>unsent messages</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6093,63 +6098,63 @@ Please select a different name.</source>
         <translation>点击打开与本地用户的聊天</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="682"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="684"/>
         <source>%1 is %2</source>
         <translation>%1是%2</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="682"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="684"/>
         <source>You are %1</source>
         <translation>你是%1</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="702"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="704"/>
         <source>last update</source>
         <translation>最后一次更新</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="707"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="709"/>
         <source>last connection</source>
         <translation>最后一次连接</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="722"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="724"/>
         <source>Workgroups</source>
         <translation type="unfinished">工作群组</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="742"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="744"/>
         <source>Today is %1&apos;s birthday</source>
         <translation>今天是%1的生日</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="744"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="746"/>
         <source>Tomorrow is %1&apos;s birthday</source>
         <translation>明天是%1的生日</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="746"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="748"/>
         <source>%1&apos;s birthday is in %2 days</source>
         <translation>%1的生日在两天后</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="748"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="750"/>
         <source>Yesterday was %1&apos;s birthday</source>
         <translation>昨天是%1的生日</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="755"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="757"/>
         <source>Happy Birthday to you!</source>
         <translation>祝你生日快乐</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="770"/>
-        <location filename="../src/utils/BeeUtils.cpp" line="791"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="772"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="793"/>
         <source>and</source>
         <translation>并且</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="796"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="798"/>
         <source>and %1 others</source>
         <translation>和%1其他的</translation>
     </message>
@@ -6293,7 +6298,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2229"/>
+        <location filename="../src/core/Settings.cpp" line="2233"/>
         <source>Autoresponder</source>
         <translation>自动响应</translation>
     </message>

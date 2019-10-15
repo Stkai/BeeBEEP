@@ -473,7 +473,6 @@ void Core::sendLocalConnectedUsersTo( const User& to_user )
       qWarning() << "Hive protocol is unable to send" << user_record_list.size() << "connected users to" << qPrintable( to_user.path() );
   }
 
-
   qDebug() << "Hive protocol shares new user" <<  qPrintable( to_user.path() ) << "to other" << user_record_list.size() << "connected users";
   user_record_list.clear();
   ur.setNetworkAddress( to_user.networkAddress() );

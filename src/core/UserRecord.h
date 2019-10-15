@@ -56,6 +56,16 @@ public:
   inline const QDateTime& lastConnection() const;
   inline void setBirthday( const QDate& );
   inline const QDate& birthday() const;
+  inline const QString& firstName() const;
+  inline void setFirstName( const QString& );
+  inline const QString& lastName() const;
+  inline void setLastName( const QString& );
+  inline const QString& email() const;
+  inline void setEmail( const QString& );
+  inline const QString& phoneNumber() const;
+  inline void setPhoneNumber( const QString& );
+  inline void setLocalHostName( const QString& );
+  inline const QString& localHostName() const;
 
 private:
   QString m_name;
@@ -67,6 +77,11 @@ private:
   QString m_domainName;
   QDateTime m_lastConnection;
   QDate m_birthday;
+  QString m_firstName;
+  QString m_lastName;
+  QString m_email;
+  QString m_phoneNumber;
+  QString m_localHostName;
 
 };
 
@@ -91,5 +106,15 @@ inline void UserRecord::setLastConnection( const QDateTime& new_value ) { m_last
 inline const QDateTime& UserRecord::lastConnection() const { return m_lastConnection; }
 inline void UserRecord::setBirthday( const QDate& new_value ) { m_birthday = new_value; }
 inline const QDate& UserRecord::birthday() const { return m_birthday; }
+inline const QString& UserRecord::firstName() const { return m_firstName; }
+inline void UserRecord::setFirstName( const QString& new_value ) { m_firstName = new_value; }
+inline const QString& UserRecord::lastName() const { return m_lastName; }
+inline void UserRecord::setLastName( const QString& new_value ) { m_lastName = new_value; }
+inline const QString& UserRecord::email() const { return m_email; }
+inline void UserRecord::setEmail( const QString& new_value ) { m_email = new_value; }
+inline const QString& UserRecord::phoneNumber() const { return m_phoneNumber; }
+inline void UserRecord::setPhoneNumber( const QString& new_value ) { m_phoneNumber = new_value; }
+inline void UserRecord::setLocalHostName( const QString& new_value ) { m_localHostName = new_value; }
+inline const QString& UserRecord::localHostName() const { return m_localHostName; }
 
 #endif // BEEBEEP_USERRECORD_H

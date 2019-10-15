@@ -59,16 +59,19 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
 {
   m_userId = u.id();
   m_chatId = chat_id;
-  mp_lPath->setText( u.isStatusConnected() ? QString( "%1: <b>%2</b>&nbsp;&nbsp;&nbsp;%3: <b>%4</b>" )
-                                               .arg( "IP Address" ).arg( u.networkAddress().hostAddress().toString() )
-                                               .arg( "Port" ).arg( u.networkAddress().hostPort() )
-                                           : Bee::replaceHtmlSpecialCharacters( u.path() ) );
+  QString user_path = u.isStatusConnected() ? QString( "%1: <b>%2</b>&nbsp;&nbsp;&nbsp;%3: <b>%4</b>" )
+                                                .arg( "IP Address" ).arg( u.networkAddress().hostAddress().toString() )
+                                                .arg( "Port" ).arg( u.networkAddress().hostPort() )
+                                            : Bee::replaceHtmlSpecialCharacters( u.path() );
+  mp_lPath->setText( user_path );
   m_userColor = u.color();
 
   QString name_txt = "";
   if( u.vCard().hasFullName() && u.vCard().fullName() != u.name() )
     name_txt = QString( "<font color=""%1"">%2</font> %3 " ).arg( u.color(), u.vCard().fullName(), tr( "is" ) );
   name_txt += QString( "<font color=""%1""><b>%2</b></font>" ).arg( u.color(), Bee::replaceHtmlSpecialCharacters( u.name() ) );
+  if( !u.localHostName().isEmpty() )
+    name_txt.append( QString( " %1" ).arg( tr( "from %1" ).arg( u.localHostName() ) ) );
   mp_lName->setText( name_txt );
 
   mp_lStatusDescription->setText( u.statusDescription().isEmpty() ? QString( "" ) : QString( "<i>%1</i>" ).arg( Bee::replaceHtmlSpecialCharacters( u.statusDescription() ) ) );

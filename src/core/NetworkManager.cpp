@@ -45,7 +45,7 @@ QList<NetworkEntry> NetworkManager::availableNetworkEntries() const
 
   foreach( QNetworkInterface if_net, interface_list )
   {
-    if( isNetworkInterfaceAvailable( if_net ) )
+    if( networkInterfaceCanBroadcast( if_net ) )
     {
       hardware_address = if_net.hardwareAddress();
       if( !Settings::instance().isLocalHardwareAddressToSkip( hardware_address ) )
@@ -383,7 +383,6 @@ bool NetworkManager::isHostAddressInBroadcastSubnet( const QHostAddress& host_ad
 #endif
 
   return true;
-
 }
 
 QList<QHostAddress> NetworkManager::splitInIPv4HostAddresses( const QHostAddress& host_address ) const

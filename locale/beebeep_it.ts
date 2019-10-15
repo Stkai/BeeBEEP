@@ -4817,6 +4817,10 @@ Inserisci un nome differente.</translation>
         <source>BeeBEEP version</source>
         <translation>Versione di BeeBEEP</translation>
     </message>
+    <message>
+        <source>from %1</source>
+        <translation>da %1</translation>
+    </message>
 </context>
 <context>
     <name>GuiVCardDialog</name>

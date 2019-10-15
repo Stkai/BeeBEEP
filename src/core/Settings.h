@@ -117,6 +117,7 @@ public:
   inline bool disableVoiceMessages() const;
   inline bool useEasyConnection() const;
   inline bool useUserFullName() const;
+  inline bool appendHostNameToUserName() const;
 
   inline bool canAddMembersToGroup() const;
   inline bool canRemoveMembersFromGroup() const;
@@ -658,6 +659,7 @@ private:
   bool m_disableMenuSettings;
   bool m_disableVoiceMessages;
   bool m_useUserFullName;
+  bool m_appendHostNameToUserName;
 
   bool m_disableConnectionSocketEncryption;
   bool m_allowNotEncryptedConnectionsAlso;
@@ -966,6 +968,7 @@ inline void Settings::setShowOnlyOnlineUsers( bool new_value ) { m_showOnlyOnlin
 inline bool Settings::showUserPhoto() const { return m_showUserPhoto; }
 inline void Settings::setShowUserPhoto( bool new_value ) { m_showUserPhoto = new_value; }
 inline bool Settings::useUserFullName() const { return m_useUserFullName; }
+inline bool Settings::appendHostNameToUserName() const { return m_appendHostNameToUserName; }
 inline bool Settings::showEmoticons() const { return m_showEmoticons; }
 inline void Settings::setShowEmoticons( bool new_value ) { m_showEmoticons = new_value; }
 inline void Settings::setShowEmoticonMenu(bool new_value ) { m_showEmoticonMenu = new_value; }

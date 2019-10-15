@@ -2,7 +2,7 @@ BEEBEEP (Free Office Messenger) - CHANGELOG - (c) 2019 Marco Mastroddi
 For more informations please visit https://www.beebeep.net
 
 
-BeeBEEP 5.7.5 (in development)
+BeeBEEP 5.7.7 (in development)
 - New feature: voice messages (you can record your message and send it as file)
 - Voice messages can be also sent to offline users like text messages
 - Added "Quote selected text" option to context menu (right click) of the chat
@@ -22,6 +22,8 @@ BeeBEEP 5.7.5 (in development)
 - Added "AllowNotEncryptedConnections" option in beebeep.rc (used with "DisableEncryptedConnections")
 - Added "AllowEncryptedConnectionsAlso" option in beebeep.rc (used with "DisableEncryptedConnections")
 - Added "BroadcastToLocalSubnetAlways" option to not send the HELLO message to the local subnet twice when multicasting is active
+- User first and last names, email and phone number are now saved to use it also if the user is offline
+- Added "AppendHostNameToUserName" option in beebeep.rc
 
 BeeBEEP 5.6.8
 - "ChatSaveFileTransfers" and "ChatSaveSystemMessages" options added in Settings - Chat menu: 

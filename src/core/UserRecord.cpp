@@ -26,7 +26,8 @@
 
 UserRecord::UserRecord()
  : m_name( "" ), m_account( "" ), m_networkAddress( QHostAddress(), DEFAULT_LISTENER_PORT ),
-   m_isFavorite( false ), m_color( "#000000" ), m_hash( "" ), m_domainName( "" ), m_lastConnection(), m_birthday()
+   m_isFavorite( false ), m_color( "#000000" ), m_hash( "" ), m_domainName( "" ), m_lastConnection(),
+   m_birthday(),  m_firstName( "" ), m_lastName( "" ), m_email( "" ), m_phoneNumber( "" ), m_localHostName( "" )
 {
 }
 
@@ -37,7 +38,8 @@ UserRecord::UserRecord( const UserRecord& ur )
 
 UserRecord::UserRecord( const QString& user_name, const QString& user_account, const QString& user_hash, const QString& domain_name )
  : m_name( user_name ), m_account( user_account ), m_networkAddress( QHostAddress(), DEFAULT_LISTENER_PORT ),
-   m_isFavorite( false ), m_color( "#000000" ), m_hash( user_hash ), m_domainName( domain_name ), m_lastConnection(), m_birthday()
+   m_isFavorite( false ), m_color( "#000000" ), m_hash( user_hash ), m_domainName( domain_name ), m_lastConnection(),
+   m_birthday(), m_firstName( "" ), m_lastName( "" ), m_email( "" ), m_phoneNumber( "" ), m_localHostName( "" )
 {
 }
 
@@ -54,6 +56,11 @@ UserRecord& UserRecord::operator=( const UserRecord& ur )
     m_domainName = ur.m_domainName;
     m_lastConnection = ur.m_lastConnection;
     m_birthday = ur.m_birthday;
+    m_firstName = ur.m_firstName;
+    m_lastName = ur.m_lastName;
+    m_email = ur.m_email;
+    m_phoneNumber = ur.m_phoneNumber;
+    m_localHostName = ur.m_localHostName;
   }
   return *this;
 }

@@ -4,57 +4,57 @@
 <context>
     <name>ChatMessage</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="281"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="283"/>
         <source>Header</source>
         <translation>Encabezado</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="282"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="284"/>
         <source>System</source>
         <translation>Sistema</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="283"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="285"/>
         <source>Chat</source>
         <translation>Chat</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="284"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="286"/>
         <source>Connection</source>
         <translation>Conexión</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="285"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="287"/>
         <source>User Information</source>
         <translation>Info de usuario</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="286"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="288"/>
         <source>File Transfer</source>
         <translation>Transferir archivo</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="287"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="289"/>
         <source>History</source>
         <translation>Historial</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="288"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="290"/>
         <source>Other</source>
         <translation>Otros</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="289"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="291"/>
         <source>Image Preview</source>
         <translation>Vista previa de la imagen</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="290"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="292"/>
         <source>Autoresponder</source>
         <translation>Respuesta automática</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="291"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="293"/>
         <source>Voice message</source>
         <translation type="unfinished"></translation>
     </message>
@@ -72,17 +72,17 @@
         <translation>%1 No es posible transmitir a la red %2. Por favor, verifique su configuracion de firewall.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="240"/>
+        <location filename="../src/core/Core.cpp" line="239"/>
         <source>%1 You are connected to %2 Network.</source>
         <translation>%1 Estas conectado a la red %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="401"/>
+        <location filename="../src/core/Core.cpp" line="399"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1 Estas desconectado de la red %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="330"/>
+        <location filename="../src/core/Core.cpp" line="328"/>
         <source>%1 Zero Configuration started with service name: %2</source>
         <translation>%1 Zero Configuration comenzó con el nombre del servicio: %2</translation>
     </message>
@@ -117,77 +117,77 @@
         <translation>Conectando</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="268"/>
+        <location filename="../src/core/Core.cpp" line="266"/>
         <source>%1 You have selected to join only in these workgroups: %2</source>
         <translation>%1 Has elegido unirte solo a estos grupos de trabajo: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="297"/>
+        <location filename="../src/core/Core.cpp" line="295"/>
         <source>%1 Do you need support? Visit the %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="299"/>
+        <location filename="../src/core/Core.cpp" line="297"/>
         <source>help page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="345"/>
+        <location filename="../src/core/Core.cpp" line="343"/>
         <source>%1 Zero Configuration service closed.</source>
         <translation>%1 Servicio Zero Configuration cerrado.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="407"/>
+        <location filename="../src/core/Core.cpp" line="405"/>
         <source>Disconnected</source>
         <translation>Desconectado</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="413"/>
+        <location filename="../src/core/Core.cpp" line="411"/>
         <source>Disconnecting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="434"/>
+        <location filename="../src/core/Core.cpp" line="432"/>
         <source>%1 Reconnecting to the %2 Network in progress.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="444"/>
+        <location filename="../src/core/Core.cpp" line="442"/>
         <source>Reconnecting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="462"/>
+        <location filename="../src/core/Core.cpp" line="460"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
         <translation>%1 Zero Configuration esta navegando por la red para el servicio: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="469"/>
+        <location filename="../src/core/Core.cpp" line="467"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation>%1 Zero Configuration no puede navegar por la red para el servicio: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="493"/>
+        <location filename="../src/core/Core.cpp" line="491"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1 Transmitiendo a la red %2 ...</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="495"/>
+        <location filename="../src/core/Core.cpp" line="493"/>
         <source>Searching users</source>
         <translation>Buscando usuarios</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="626"/>
+        <location filename="../src/core/Core.cpp" line="624"/>
         <source>New version is available</source>
         <translation>Nueva versión disponible</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="627"/>
+        <location filename="../src/core/Core.cpp" line="625"/>
         <source>Click here to download</source>
         <translation>Clic aqui para descargar</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="726"/>
+        <location filename="../src/core/Core.cpp" line="724"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>Se ha alcanzado el número máximo de IDs. Cierra e inicia la aplicación.</translation>
     </message>
@@ -338,22 +338,22 @@
         <translation>Chat con todos los usuarios</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="248"/>
+        <location filename="../src/core/Core.cpp" line="246"/>
         <source>but encrypted connections allowed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="256"/>
+        <location filename="../src/core/Core.cpp" line="254"/>
         <source>End-to-end encryption is enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="256"/>
+        <location filename="../src/core/Core.cpp" line="254"/>
         <source>but not encrypted connections allowed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="246"/>
+        <location filename="../src/core/Core.cpp" line="244"/>
         <source>End-to-end encryption is disabled</source>
         <translation type="unfinished"></translation>
     </message>
@@ -393,7 +393,7 @@
         <translation>%1 %2 no puede ser informado de que has dejado el grupo.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="535"/>
+        <location filename="../src/core/Core.cpp" line="533"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1 Adaptardor de red %2 se desconecto.</translation>
     </message>
@@ -753,7 +753,7 @@
 <context>
     <name>Date</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="1023"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="1025"/>
         <source>more than 1 day</source>
         <translation type="unfinished"></translation>
     </message>
@@ -761,42 +761,42 @@
 <context>
     <name>File</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="262"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="264"/>
         <source>Audio</source>
         <translation>Sonido</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="263"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="265"/>
         <source>Video</source>
         <translation>Video</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="264"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="266"/>
         <source>Image</source>
         <translation>Imagen</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="265"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="267"/>
         <source>Document</source>
         <translation>Documento</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="266"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="268"/>
         <source>Other</source>
         <translation>Otros</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="267"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="269"/>
         <source>Executable</source>
         <translation>Ejecutable</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="268"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="270"/>
         <source>MacOSX</source>
         <translation>MacOSX</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="269"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="271"/>
         <source>Compressed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5711,62 +5711,67 @@ Por favor, elija un nombre diferente.</translation>
 <context>
     <name>GuiVCard</name>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="70"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="71"/>
         <source>is</source>
         <translation>es</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="78"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="74"/>
+        <source>from %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiVCard.cpp" line="81"/>
         <source>Birthday: %1</source>
         <translation>Cumpleaños: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="80"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="83"/>
         <source>Happy Birthday</source>
         <translation>Feliz cumpleaños</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="104"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="107"/>
         <source>old %1</source>
         <translation>Viejo %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="106"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="109"/>
         <source>new %1</source>
         <translation>Nuevo %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="115"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="118"/>
         <source>BeeBEEP version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="146"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="149"/>
         <source>Remove from favorites</source>
         <translation>Quitar de favoritos</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="151"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="154"/>
         <source>Add to favorites</source>
         <translation>Agregar a favoritos</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="168"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="171"/>
         <source>You cannot remove an user who is connected</source>
         <translation>No puedes eliminar un usuario que está conectado</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="173"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="176"/>
         <source>You cannot remove an user who is in group chat</source>
         <translation>No puedes eliminar un usuario con el que estás en un grupo</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="178"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="181"/>
         <source>Remove this user</source>
         <translation>Eliminar este usuario</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="134"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="137"/>
         <source>Open chat</source>
         <translation>Abrir Chat</translation>
     </message>
@@ -6145,7 +6150,7 @@ Por favor, elija un nombre diferente.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatItem.cpp" line="120"/>
-        <location filename="../src/utils/BeeUtils.cpp" line="711"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="713"/>
         <source>unsent messages</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6175,63 +6180,63 @@ Por favor, elija un nombre diferente.</translation>
         <translation>Clic para abrir chat con todos los usuarios locales</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="682"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="684"/>
         <source>%1 is %2</source>
         <translation>%1 está %2</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="682"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="684"/>
         <source>You are %1</source>
         <translation>Tú eres %1</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="702"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="704"/>
         <source>last update</source>
         <translation>última actualización</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="707"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="709"/>
         <source>last connection</source>
         <translation>última conexión</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="722"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="724"/>
         <source>Workgroups</source>
         <translation type="unfinished">Grupos de trabajo</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="742"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="744"/>
         <source>Today is %1&apos;s birthday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="744"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="746"/>
         <source>Tomorrow is %1&apos;s birthday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="746"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="748"/>
         <source>%1&apos;s birthday is in %2 days</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="748"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="750"/>
         <source>Yesterday was %1&apos;s birthday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="755"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="757"/>
         <source>Happy Birthday to you!</source>
         <translation type="unfinished">Feliz cumpleaños!!</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="770"/>
-        <location filename="../src/utils/BeeUtils.cpp" line="791"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="772"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="793"/>
         <source>and</source>
         <translation>y</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="796"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="798"/>
         <source>and %1 others</source>
         <translation>y %1 otros</translation>
     </message>
@@ -6379,7 +6384,7 @@ Por favor, elija un nombre diferente.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2229"/>
+        <location filename="../src/core/Settings.cpp" line="2233"/>
         <source>Autoresponder</source>
         <translation>Respuesta automática</translation>
     </message>

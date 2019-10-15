@@ -1,7 +1,7 @@
 [DEBREATE-0.7.13]
 <<CTRL>>
 Package: beebeep
-Version: 5.8.2-1
+Version: 5.7.5-1
 Maintainer: Marco Mastroddi <marco.mastroddi@gmail.com>
 Section: comm
 Homepage: https://www.beebeep.net
@@ -18,31 +18,31 @@ Description: Free office messenger
 <</CTRL>>
 <<FILES>>
 1
-/home/mastro/Sources/beebeep-code/src/images/beebeep.png -> beebeep.png -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_vi.qm -> beebeep_vi.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_ua.qm -> beebeep_ua.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_tw.qm -> beebeep_tw.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_tr.qm -> beebeep_tr.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_sv.qm -> beebeep_sv.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_ru.qm -> beebeep_ru.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_rs.qm -> beebeep_rs.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_pt.qm -> beebeep_pt.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_pl.qm -> beebeep_pl.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_nl.qm -> beebeep_nl.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_nb.qm -> beebeep_nb.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_it.qm -> beebeep_it.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_hu.qm -> beebeep_hu.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_fr.qm -> beebeep_fr.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_es.qm -> beebeep_es.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_en.qm -> beebeep_en.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_de.qm -> beebeep_de.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_cz.qm -> beebeep_cz.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_cn.qm -> beebeep_cn.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/misc/beep.wav -> beep.wav -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/test/libregularboldtextmarker.so* -> libregularboldtextmarker.so -> /usr/lib/beebeep
-/home/mastro/Sources/beebeep-code/test/librainbowtextmarker.so* -> librainbowtextmarker.so -> /usr/lib/beebeep
-/home/mastro/Sources/beebeep-code/test/libnumbertextmarker.so* -> libnumbertextmarker.so -> /usr/lib/beebeep
 /home/mastro/Sources/beebeep-code/test/beebeep* -> beebeep -> /usr/lib/beebeep
+/home/mastro/Sources/beebeep-code/test/libnumbertextmarker.so* -> libnumbertextmarker.so -> /usr/lib/beebeep
+/home/mastro/Sources/beebeep-code/test/librainbowtextmarker.so* -> librainbowtextmarker.so -> /usr/lib/beebeep
+/home/mastro/Sources/beebeep-code/test/libregularboldtextmarker.so* -> libregularboldtextmarker.so -> /usr/lib/beebeep
+/home/mastro/Sources/beebeep-code/misc/beep.wav -> beep.wav -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_cn.qm -> beebeep_cn.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_cz.qm -> beebeep_cz.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_de.qm -> beebeep_de.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_en.qm -> beebeep_en.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_es.qm -> beebeep_es.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_fr.qm -> beebeep_fr.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_hu.qm -> beebeep_hu.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_it.qm -> beebeep_it.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_nb.qm -> beebeep_nb.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_nl.qm -> beebeep_nl.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_pl.qm -> beebeep_pl.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_pt.qm -> beebeep_pt.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_rs.qm -> beebeep_rs.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_ru.qm -> beebeep_ru.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_sv.qm -> beebeep_sv.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_tr.qm -> beebeep_tr.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_tw.qm -> beebeep_tw.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_ua.qm -> beebeep_ua.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_vi.qm -> beebeep_vi.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/src/images/beebeep.png -> beebeep.png -> /usr/share/beebeep
 <</FILES>>
 <<SCRIPTS>>
 <<PREINST>>
@@ -67,7 +67,7 @@ rm -f "/usr/bin/beebeep"
 <</SCRIPTS>>
 <<CHANGELOG>>
 <<DEST>>DEFAULT<</DEST>>
-beebeep (5.8.2-1) bionic; urgency=low
+beebeep (5.7.5-1) bionic; urgency=low
 
   * New Feature: voice messages
   * Added "Quote selected text" option to context menu (right click) of the chat
@@ -75,8 +75,15 @@ beebeep (5.8.2-1) bionic; urgency=low
   * Added "Clear system messages" in activity and chat windows
   * Added "SkipLocalHardwareAddresses" in beebeep.rc to skip unesuful  interfaces
   * The avatar icon size is also applied in member icons of the chat windows
+  * Added "DisableDesktopSharing" option in beebeep.rc
+  * Added "DisableBeepInUserStatusBusy" option in Settings - Notifications menu
+  * Added "UseUserFullName" option in beebeep.rc
+  * Added "DisableEncryptedConnections" option in beebeep.rc
+  * Added "AllowNotEncryptedConnections" option in beebeep.rc
+  * Added "AllowEncryptedConnectionsAlso" option in beebeep.rc 
+  * Added "BroadcastToLocalSubnetAlways" option 
 
- -- Marco Mastroddi <marco.mastroddi@gmail.com>  Thu, 03 Oct 2019 14:52:02 +0200
+ -- Marco Mastroddi <marco.mastroddi@gmail.com>  Sun, 13 Oct 2019 16:26:05 +0200
 
 <</CHANGELOG>>
 <<COPYRIGHT>>

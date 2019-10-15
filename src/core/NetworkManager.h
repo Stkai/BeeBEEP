@@ -49,6 +49,9 @@ public:
   QList<QHostAddress> localBroadcastAddresses() const;
   inline bool isInLocalBroadcastAddresses( const QHostAddress& ) const;
 
+  inline bool networkInterfaceCanBroadcast( const QNetworkInterface& ) const;
+  inline bool networkInterfaceCanMulticast( const QNetworkInterface& ) const;
+
   static NetworkManager& instance()
   {
     if( !mp_instance )
@@ -95,7 +98,9 @@ inline const QHostAddress& NetworkManager::localBroadcastAddress() const { retur
 inline const QString& NetworkManager::localHostAddressScopeId() const { return m_localHostAddressScopeId; }
 inline const QString& NetworkManager::localInterfaceHardwareAddress() const { return m_localInterfaceHardwareAddress; }
 inline bool NetworkManager::isNetworkEntryAvailable( const NetworkEntry& ne ) const { return ne.isValid() && !ne.isLoopback() && ne.isProtocolValid() && !ne.isLinkLocal(); }
-inline bool NetworkManager::isNetworkInterfaceAvailable( const QNetworkInterface& ni ) const {  return (ni.flags() & QNetworkInterface::IsUp) && (ni.flags() & QNetworkInterface::IsRunning) && (ni.flags() & ~QNetworkInterface::IsLoopBack); }
+inline bool NetworkManager::isNetworkInterfaceAvailable( const QNetworkInterface& ni ) const { return (ni.flags() & QNetworkInterface::IsUp) && (ni.flags() & QNetworkInterface::IsRunning) && (ni.flags() & ~QNetworkInterface::IsLoopBack); }
+inline bool NetworkManager::networkInterfaceCanBroadcast( const QNetworkInterface& ni ) const { return isNetworkInterfaceAvailable( ni ) && (ni.flags() & QNetworkInterface::CanBroadcast); }
+inline bool NetworkManager::networkInterfaceCanMulticast( const QNetworkInterface& ni ) const { return isNetworkInterfaceAvailable( ni ) && (ni.flags() & QNetworkInterface::CanMulticast); }
 inline bool NetworkManager::isMainInterfaceUnavailable() const { return m_localInterfaceHardwareAddress.isEmpty(); }
 inline bool NetworkManager::isInLocalBroadcastAddresses( const QHostAddress& host_address ) const { return localBroadcastAddresses().contains( host_address ); }
 

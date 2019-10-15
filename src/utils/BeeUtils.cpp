@@ -140,6 +140,8 @@ QColor Bee::userStatusForegroundColor( int user_status )
 QString Bee::userNameToShow( const User& u )
 {
   QString user_name = Settings::instance().useUserFullName() && u.vCard().hasFullName() ? u.vCard().fullName() : u.name();
+  if( Settings::instance().appendHostNameToUserName() && !u.localHostName().isEmpty() )
+    user_name.append( QString( " [%1]" ).arg( u.localHostName() ) );
   user_name = Bee::removeHtmlTags( user_name );
   return Bee::replaceHtmlSpecialCharacters( user_name );
 }

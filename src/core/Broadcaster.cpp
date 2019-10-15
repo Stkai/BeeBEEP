@@ -66,13 +66,36 @@ bool Broadcaster::startBroadcastServer()
       }
     }
 
-    if( !mp_receiverSocket->joinMulticastGroup( m_multicastGroupAddress ) )
+    int multicast_interfaces = 0;
+    QList<QNetworkInterface> interface_list = QNetworkInterface::allInterfaces();
+    foreach( QNetworkInterface if_net, interface_list )
     {
-      qWarning() << "Unable to join to the multicast group" << qPrintable( m_multicastGroupAddress.toString() );
-      m_multicastGroupAddress = QHostAddress();
+      if( NetworkManager::instance().networkInterfaceCanMulticast( if_net ) )
+      {
+        QString hardware_address = if_net.hardwareAddress();
+        if( !Settings::instance().isLocalHardwareAddressToSkip( hardware_address ) )
+        {
+          if( mp_receiverSocket->joinMulticastGroup( m_multicastGroupAddress, if_net ) )
+          {
+            qDebug() << "Join to the multicast group" << qPrintable( m_multicastGroupAddress.toString() ) << "in network interface" << qPrintable( hardware_address );
+            multicast_interfaces++;
+          }
+          else
+            qWarning() << "Unable to join to the multicast group" << qPrintable( m_multicastGroupAddress.toString() ) << "in network interface" << qPrintable( hardware_address );
+        }
+      }
     }
-    else
-      qDebug() << "Join to the multicast group" << qPrintable( m_multicastGroupAddress.toString() );
+
+    if( multicast_interfaces == 0 )
+    {
+      if( !mp_receiverSocket->joinMulticastGroup( m_multicastGroupAddress ) )
+      {
+        qWarning() << "Unable to join to the multicast group" << qPrintable( m_multicastGroupAddress.toString() ) << "in default network interface";
+        m_multicastGroupAddress = QHostAddress();
+      }
+      else
+        qDebug() << "Join to the multicast group" << qPrintable( m_multicastGroupAddress.toString() ) << "in default network interface";
+    }
   }
 #endif
 
@@ -93,16 +116,39 @@ void Broadcaster::stopBroadcasting()
 #if QT_VERSION >= 0x040800
     if( !m_multicastGroupAddress.isNull() )
     {
-      if( mp_receiverSocket->leaveMulticastGroup( m_multicastGroupAddress ) )
-        qDebug() << "Leave from the multicast group" << qPrintable( m_multicastGroupAddress.toString() );
-      else
-        qWarning() << "Unable to leave from the multicast group" << qPrintable( m_multicastGroupAddress.toString() );
+      int multicast_interfaces = 0;
+      QList<QNetworkInterface> interface_list = QNetworkInterface::allInterfaces();
+      foreach( QNetworkInterface if_net, interface_list )
+      {
+        if( NetworkManager::instance().networkInterfaceCanMulticast( if_net ) )
+        {
+          QString hardware_address = if_net.hardwareAddress();
+          if( !Settings::instance().isLocalHardwareAddressToSkip( hardware_address ) )
+          {
+            if( mp_receiverSocket->leaveMulticastGroup( m_multicastGroupAddress, if_net ) )
+            {
+              multicast_interfaces++;
+              qDebug() << "Leave from the multicast group" << qPrintable( m_multicastGroupAddress.toString() ) << "in network interface" << qPrintable( hardware_address );
+            }
+            else
+              qWarning() << "Unable to join to the multicast group" << qPrintable( m_multicastGroupAddress.toString() ) << "in network interface" << qPrintable( hardware_address );
+          }
+        }
+      }
+
+      if( multicast_interfaces == 0 )
+      {
+        if( mp_receiverSocket->leaveMulticastGroup( m_multicastGroupAddress ) )
+          qDebug() << "Leave from the multicast group" << qPrintable( m_multicastGroupAddress.toString() ) << "in default network interface";
+        else
+          qWarning() << "Unable to leave from the multicast group" << qPrintable( m_multicastGroupAddress.toString() ) << "in default network interface";
+      }
     }
 #endif
     mp_receiverSocket->close();
   }
 
-  qDebug() << "Broadcaster stops broadcasting";
+  qDebug() << "Broadcaster stops to search users";
 
   if( !m_networkAddresses.isEmpty() )
     m_networkAddresses.clear();
@@ -151,7 +197,7 @@ bool Broadcaster::contactNetworkAddress( const NetworkAddress& na )
   if( !na.isHostAddressValid() )
     return false;
 
-  if( na.isHostPortValid() )
+  if( na.isHostPortValid() && na.hostPort() != Settings::instance().defaultBroadcastPort() )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Broadcaster skips this network address" << qPrintable( na.toString() ) << "and sends it to the CORE";

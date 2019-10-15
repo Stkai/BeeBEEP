@@ -232,7 +232,7 @@ bool Core::start()
   }
   else
   {
-    qDebug() << "Broadcaster starts broadcasting with tcp listener port" << Settings::instance().localUser().networkAddress().hostPort() << "and udp port" << Settings::instance().defaultBroadcastPort();
+    qDebug() << "Broadcaster starts to search users with tcp listener port" << Settings::instance().localUser().networkAddress().hostPort() << "and udp port" << Settings::instance().defaultBroadcastPort();
     QTimer::singleShot( 2000, this, SLOT( sendBroadcastMessage() ) );
   }
 

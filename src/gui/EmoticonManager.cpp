@@ -41,7 +41,6 @@ EmoticonManager::EmoticonManager()
 
 #ifdef BEEBEEP_DEBUG
   QString s_debug = "";
-
   qSort( m_uniqueKeys );
   foreach( QChar c, m_uniqueKeys )
   {

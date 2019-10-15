@@ -353,6 +353,7 @@ QByteArray Protocol::helloMessage( const QString& public_key, bool encrypted_con
   else
     data_list << QString( "" );
   data_list << Settings::instance().localUser().domainName();
+  data_list << Settings::instance().localUser().localHostName();
   Message m( Message::Hello, static_cast<VNumber>(Settings::instance().protoVersion()), data_list.join( DATA_FIELD_SEPARATOR ) );
   if( !encrypted_connection )
     m.addFlag( Message::EncryptionDisabled );
@@ -640,6 +641,10 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   if( !sl.isEmpty() )
     user_domain_name = sl.takeFirst();
 
+  QString user_local_host_name = "";
+  if( !sl.isEmpty() )
+    user_local_host_name = sl.takeFirst();
+
   /* Create User */
   User u( newId() );
   u.setName( user_name );
@@ -654,6 +659,7 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   u.setColor( user_color );
   u.setQtVersion( user_qt_version );
   u.setWorkgroups( user_workgroups );
+  u.setLocalHostName( user_local_host_name );
   return u;
 }
 
@@ -668,12 +674,14 @@ User Protocol::createTemporaryUser( const UserRecord& ur )
     u.setHash( newMd5Id() );
   u.setStatus( User::Offline );
   u.setIsFavorite( ur.isFavorite() );
-  if( ur.birthday().isValid() )
-  {
-    VCard vc = u.vCard();
-    vc.setBirthday( ur.birthday() );
-    u.setVCard( vc );
-  }
+  VCard vc = u.vCard();
+  vc.setBirthday( ur.birthday() );
+  vc.setFirstName( ur.firstName() );
+  vc.setLastName( ur.lastName() );
+  vc.setEmail( ur.email() );
+  vc.setPhoneNumber( ur.phoneNumber() );
+  u.setVCard( vc );
+  u.setLocalHostName( ur.localHostName() );
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Temporary user" << u.id() << qPrintable( u.path() ) << "created with account" << qPrintable( u.accountName() ) << "and hash" << qPrintable( u.hash() );
 #endif
@@ -699,6 +707,11 @@ QString Protocol::saveUserRecord( const UserRecord& ur, bool add_extras ) const
     sl << ur.domainName();
     sl << ur.lastConnection().toString( Qt::ISODate );
     sl << ur.birthday().toString( Qt::ISODate );
+    sl << ur.firstName();
+    sl << ur.lastName();
+    sl << ur.email();
+    sl << ur.phoneNumber();
+    sl << ur.localHostName();
   }
   return sl.join( DATA_FIELD_SEPARATOR );
 }
@@ -768,21 +781,71 @@ UserRecord Protocol::loadUserRecord( const QString& s ) const
   if( !sl.isEmpty() )
   {
     ur.setDomainName( sl.takeFirst() );
+ #ifdef BEEBEEP_DEBUG
     qDebug() << "User" << qPrintable( ur.name() ) << "has domain name saved:" << qPrintable( ur.domainName() );
+ #endif
   }
 
   if( !sl.isEmpty() )
   {
     ur.setLastConnection( QDateTime::fromString( sl.takeFirst(), Qt::ISODate ) );
     if( ur.lastConnection().isValid() )
+    {
+#ifdef BEEBEEP_DEBUG
       qDebug() << "User" << qPrintable( ur.name() ) << "has last connection date saved:" << qPrintable( ur.lastConnection().toString( Qt::ISODate ) );
+#endif
+    }
   }
 
   if( !sl.isEmpty() )
   {
     ur.setBirthday( QDate::fromString( sl.takeFirst(), Qt::ISODate ) );
     if( ur.birthday().isValid() )
+    {
+#ifdef BEEBEEP_DEBUG
       qDebug() << "User" << qPrintable( ur.name() ) << "has birthday saved:" << qPrintable( ur.birthday().toString( Qt::ISODate ) );
+#endif
+    }
+  }
+
+  if( !sl.isEmpty() )
+  {
+    ur.setFirstName( sl.takeFirst() );
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "User" << qPrintable( ur.name() ) << "has first name saved:" << qPrintable( ur.firstName() );
+#endif
+  }
+
+  if( !sl.isEmpty() )
+  {
+    ur.setLastName( sl.takeFirst() );
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "User" << qPrintable( ur.name() ) << "has last name saved:" << qPrintable( ur.lastName() );
+#endif
+  }
+
+  if( !sl.isEmpty() )
+  {
+    ur.setEmail( sl.takeFirst() );
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "User" << qPrintable( ur.name() ) << "has e-mail saved:" << qPrintable( ur.email() );
+#endif
+  }
+
+  if( !sl.isEmpty() )
+  {
+    ur.setPhoneNumber( sl.takeFirst() );
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "User" << qPrintable( ur.name() ) << "has phone number saved:" << qPrintable( ur.phoneNumber() );
+#endif
+  }
+
+  if( !sl.isEmpty() )
+  {
+    ur.setLocalHostName( sl.takeFirst() );
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "User" << qPrintable( ur.name() ) << "has local host name saved:" << qPrintable( ur.localHostName() );
+#endif
   }
 
   return ur;
@@ -901,6 +964,11 @@ QString Protocol::saveUser( const User& u ) const
   else
     ur.setLastConnection( QDateTime::currentDateTime() );
   ur.setBirthday( u.vCard().birthday() );
+  ur.setFirstName( u.vCard().firstName() );
+  ur.setLastName( u.vCard().lastName() );
+  ur.setEmail( u.vCard().email() );
+  ur.setPhoneNumber( u.vCard().phoneNumber() );
+  ur.setLocalHostName( u.localHostName() );
   return saveUserRecord( ur, true );
 }
 

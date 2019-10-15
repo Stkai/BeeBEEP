@@ -79,6 +79,8 @@ public:
   inline const QDateTime& lastConnection() const;
   inline void setWorkgroups( const QStringList& );
   inline const QStringList& workgroups() const;
+  inline void setLocalHostName( const QString& );
+  inline const QString& localHostName() const;
 
   inline QString path() const;
   inline QString accountPath() const;
@@ -106,6 +108,7 @@ private:
   QDateTime m_statusChangedIn;
   QDateTime m_lastConnection;
   QStringList m_workgroups;
+  QString m_localHostName;
 
 };
 
@@ -152,5 +155,7 @@ inline QString User::path() const { return QString( "%1@%2" ).arg( name().toLowe
 inline QString User::accountPath() const { return m_domainName.isEmpty() ? m_accountName : QString( "%1@%2" ).arg( m_accountName, m_domainName ); }
 inline void User::setWorkgroups( const QStringList& new_value ) { m_workgroups = new_value; }
 inline const QStringList& User::workgroups() const { return m_workgroups; }
+inline void User::setLocalHostName( const QString& new_value ) { m_localHostName = new_value; }
+inline const QString& User::localHostName() const { return m_localHostName; }
 
 #endif // BEEBEEP_USER_H

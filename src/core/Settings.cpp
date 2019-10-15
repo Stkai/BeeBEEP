@@ -92,6 +92,7 @@ Settings::Settings()
   m_useHostnameForDefaultUsername = false;
   m_useEasyConnection = false;
   m_useUserFullName = false;
+  m_appendHostNameToUserName = false;
 
 #ifdef BEEBEEP_DISABLE_FILE_TRANSFER
   m_disableFileTransfer = true;
@@ -420,11 +421,12 @@ void Settings::createLocalUser( const QString& user_name )
   m_localUser.setProtocolVersion( protoVersion() );
   m_localUser.setDomainName( QHostInfo::localDomainName() );
   m_localUser.setHash( Settings::instance().createLocalUserHash() );
+  m_localUser.setLocalHostName( QHostInfo::localHostName().toUpper() );
 
   qDebug() << "User name:" << qPrintable( m_localUser.name() );
   qDebug() << "System account:" << qPrintable( m_localUser.accountName() );
   qDebug() << "Local domain name:" << qPrintable( m_localUser.domainName() );
-  qDebug() << "Local host name:" << qPrintable( QHostInfo::localHostName() );
+  qDebug() << "Local host name:" << qPrintable( m_localUser.localHostName() );
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Local user hash:" << qPrintable( m_localUser.hash() );
 #endif
@@ -432,11 +434,11 @@ void Settings::createLocalUser( const QString& user_name )
 
 QString Settings::createLocalUserHash()
 {
-  QString hash_parameters = QString( "%1%2%3%4%5%6%7" )
+  QString hash_parameters = QString( "%1%2%3%4%5%6%7%8" )
                               .arg( QString::number( Random::number( 6475, 36475 ) ) )
                               .arg( m_localUser.accountName() ).arg( m_localUser.name() )
                               .arg( QString::number( Random::number( 6475, 36475 ) ) )
-                              .arg( m_localUser.domainName() ).arg( version( true, true, true ) )
+                              .arg( m_localUser.domainName() ).arg( m_localUser.localHostName() ).arg( version( true, true, true ) )
                               .arg( QDateTime::currentDateTime().toString( "dd.MM.yyyy-hh:mm:ss.zzz" ) );
   QString local_user_hash = simpleHash( hash_parameters );
 #ifdef BEEBEEP_DEBUG
@@ -506,6 +508,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "AllowNotEncryptedConnectionsAlso", m_allowNotEncryptedConnectionsAlso );
     sets->setValue( "AllowEncryptedConnectionsAlso", m_allowEncryptedConnectionsAlso );
     sets->setValue( "UseUserFullName", m_useUserFullName );
+    sets->setValue( "AppendHostNameToUserName", m_appendHostNameToUserName );
     sets->endGroup();
     sets->sync();
     qDebug() << "RC default configuration file created in" << qPrintable( Bee::convertToNativeFolderSeparator( sets->fileName() ) );
@@ -612,6 +615,7 @@ void Settings::loadRcFile()
   m_allowNotEncryptedConnectionsAlso = sets->value( "AllowNotEncryptedConnectionsAlso", m_allowNotEncryptedConnectionsAlso ).toBool();
   m_allowEncryptedConnectionsAlso = sets->value( "AllowEncryptedConnectionsAlso", m_allowEncryptedConnectionsAlso ).toBool();
   m_useUserFullName = sets->value( "UseUserFullName", m_useUserFullName ).toBool();
+  m_appendHostNameToUserName = sets->value( "AppendHostNameToUserName", m_appendHostNameToUserName ).toBool();
   sets->endGroup();
   QStringList key_list = sets->allKeys();
   foreach( QString key, key_list )
