@@ -4282,6 +4282,8 @@ void GuiMain::selectDictionatyPath()
   else
     QMessageBox::warning( this, Settings::instance().programName(), tr( "Unable to set dictionary: %1" ).arg( dictionary_path ) );
 #endif
+  Settings::instance().setUseSpellChecker( true );
+  Settings::instance().setUseWordCompleter( true );
 
   // update spellchecker and wordcompleter actions
   foreach( GuiFloatingChat* fl_chat, m_floatingChats )

@@ -3334,6 +3334,10 @@ Inserisci un nome differente.</translation>
         <source>End-to-end encryption is enabled</source>
         <translation>La crittografia nelle connessioni è stata abilitata</translation>
     </message>
+    <message>
+        <source>%1 updated</source>
+        <translation>%1 aggiornato</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

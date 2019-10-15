@@ -178,13 +178,26 @@ QStringList SpellChecker::suggest( const QString& word )
   if( word.isEmpty() )
     return suggest_list;
 
-  std::vector<std::string> suggest_word_list = mp_hunspell->suggest( std::string( mp_codec->fromUnicode( word ).constData() ) );
+  if( isGoodWord( word ) )
+    suggest_list.append( word );
+
+  std::vector<std::string> suggest_word_list;
   QString word_to_append;
 
+  suggest_word_list = mp_hunspell->suggest( std::string( mp_codec->fromUnicode( word ).constData() ) );
   for( std::vector<std::string>::size_type i = 0; i < suggest_word_list.size(); i++ )
   {
     word_to_append = mp_codec->toUnicode( suggest_word_list[ i ].c_str() );
-    suggest_list.append( word_to_append );
+    if( !suggest_list.contains( word_to_append, Qt::CaseInsensitive ) )
+      suggest_list.append( word_to_append );
+  }
+
+  suggest_word_list = mp_hunspell->suffix_suggest( std::string( mp_codec->fromUnicode( word ).constData() ) );
+  for( std::vector<std::string>::size_type i = 0; i < suggest_word_list.size(); i++ )
+  {
+    word_to_append = mp_codec->toUnicode( suggest_word_list[ i ].c_str() );
+    if( !suggest_list.contains( word_to_append, Qt::CaseInsensitive ) )
+      suggest_list.append( word_to_append );
   }
 
   return suggest_list;

@@ -3142,6 +3142,10 @@ Please select a different name.</source>
         <source>End-to-end encryption is enabled</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>%1 updated</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
