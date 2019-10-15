@@ -3554,7 +3554,9 @@ void GuiMain::onUserRemoved( const User& u )
 
 void GuiMain::onChatChanged( const Chat& c )
 {
+#ifdef BEEBEEP_DEBUG
   showMessage( tr( "%1 updated" ).arg( c.name() ), 2000 );
+#endif
   mp_userList->updateChat( c );
   mp_chatList->updateChat( c );
   mp_groupList->updateChat( c );
