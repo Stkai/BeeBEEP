@@ -47,7 +47,7 @@ QList<NetworkEntry> NetworkManager::availableNetworkEntries() const
   {
     if( networkInterfaceCanBroadcast( if_net ) )
     {
-      hardware_address = if_net.hardwareAddress();
+      hardware_address = if_net.hardwareAddress().isEmpty() ? if_net.name() : if_net.hardwareAddress();
       if( !Settings::instance().isLocalHardwareAddressToSkip( hardware_address ) )
       {
         network_address_entries = if_net.addressEntries();
@@ -70,7 +70,7 @@ QNetworkInterface NetworkManager::localNetworkInterface() const
     QList<QNetworkInterface> interface_list = QNetworkInterface::allInterfaces();
     foreach( QNetworkInterface if_net, interface_list )
     {
-      if( isNetworkInterfaceAvailable( if_net ) && if_net.hardwareAddress() == m_localInterfaceHardwareAddress )
+      if( isNetworkInterfaceAvailable( if_net ) && (if_net.hardwareAddress() == m_localInterfaceHardwareAddress || if_net.name() == m_localInterfaceHardwareAddress) )
         return if_net;
     }
   }

@@ -1347,6 +1347,7 @@ Message Protocol::fileInfoToMessage( const FileInfo& fi )
     sl << QString( "" );
   sl << fi.mimeType();
   sl << QString::number( fi.contentType() );
+  sl << QString::number( fi.filePosition() );
   m.setData( sl.join( DATA_FIELD_SEPARATOR ) );
   m.addFlag( Message::Private );
   if( fi.contentType() == FileInfo::VoiceMessage )
@@ -1362,8 +1363,10 @@ FileInfo Protocol::fileInfoFromMessage( const Message& m )
   if( sl.size() < 4 )
     return fi;
   bool ok = false;
-  fi.setHostPort( static_cast<quint16>(sl.takeFirst().toUInt()) );
-  fi.setSize( Bee::qVariantToVNumber( sl.takeFirst() ) );
+  quint16 host_port = sl.takeFirst().toUInt( &ok );
+  if( ok )
+    fi.setHostPort( host_port );
+  fi.setSize( Bee::qVariantToFileSizeType( sl.takeFirst() ) );
   fi.setId( Bee::qVariantToVNumber( sl.takeFirst() ) );
   QString password = sl.takeFirst();
   fi.setPassword( password.toUtf8() );
@@ -1399,6 +1402,15 @@ FileInfo Protocol::fileInfoFromMessage( const Message& m )
     int content_type = sl.takeFirst().toInt( &ok );
     if( ok && content_type >= 0 && content_type < FileInfo::NumContentTypes )
       fi.setContentType( static_cast<FileInfo::ContentType>( content_type ) );
+  }
+
+  if( !sl.isEmpty() )
+  {
+    FileSizeType file_position = Bee::qVariantToFileSizeType( sl.takeFirst() );
+    if( file_position <  fi.size() )
+      fi.setFilePosition( file_position );
+    else
+      fi.setFilePosition( fi.size() );
   }
 
   return fi;

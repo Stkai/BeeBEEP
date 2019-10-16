@@ -145,6 +145,7 @@ Settings::Settings()
   m_emoticonSizeInMenu = 24;
   m_emoticonInRecentMenu = 48;
   m_confirmOnDownloadFile = false;
+  m_resumeFileTransfer = true;
   m_promptOnCloseEvent = true;
   m_saveUserList = true;
   m_saveGroupList = true;
@@ -1455,6 +1456,7 @@ void Settings::load()
     m_fileTransferBufferSize = 2048;
   m_automaticFileName = sets->value( "SetAutomaticFileNameOnSave", true ).toBool();
   m_overwriteExistingFiles = sets->value( "OverwriteExistingFiles", false ).toBool();
+  m_resumeFileTransfer = sets->value( "ResumeFileTransfer", m_resumeFileTransfer ).toBool();
   m_confirmOnDownloadFile = sets->value( "ConfirmOnDownloadFile", m_confirmOnDownloadFile ).toBool();
   m_downloadInUserFolder = sets->value( "DownloadInUserFolder", false ).toBool();
   QStringList local_share = sets->value( "ShareList", QStringList() ).toStringList();
@@ -1788,6 +1790,7 @@ void Settings::save()
   sets->setValue( "ShareBoxPath", m_shareBoxPath );
   sets->setValue( "SetAutomaticFileNameOnSave", m_automaticFileName );
   sets->setValue( "OverwriteExistingFiles", m_overwriteExistingFiles );
+  sets->setValue( "ResumeFileTransfer", m_resumeFileTransfer );
   sets->setValue( "FileTransferConfirmTimeout", m_fileTransferConfirmTimeout );
   sets->setValue( "FileTransferBufferSize", m_fileTransferBufferSize );
   sets->setValue( "MaxSimultaneousDownloads", m_maxSimultaneousDownloads );

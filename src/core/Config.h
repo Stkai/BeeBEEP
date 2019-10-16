@@ -49,10 +49,8 @@
 #endif
 
 // Type definition: define doesn't always work in signal slot mechanish
-//#define VNumber quint64
-//#define FileSizeType quint64
 typedef quint64 VNumber;
-typedef quint64 FileSizeType;
+typedef qint64 FileSizeType;
 
 // Datastream QDataStream::Qt_4_0 = 7
 #define DATASTREAM_VERSION_1 7
@@ -90,6 +88,7 @@ const qint32 DATA_BLOCK_SIZE_32_LIMIT = 2147483615;
 const int SECURE_LEVEL_2_PROTO_VERSION = 60;
 const int SECURE_LEVEL_3_PROTO_VERSION = 73;
 const int FILE_TRANSFER_2_PROTO_VERSION = 63;
+const int FILE_TRANSFER_RESUME_PROTO_VERSION = 81;
 const int HIVE_PROTO_VERSION = 64;
 const int NEW_GROUP_PROTO_VERSION = 67;
 const int UTC_TIMESTAMP_PROTO_VERSION = 68;

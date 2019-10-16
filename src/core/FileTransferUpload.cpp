@@ -69,7 +69,7 @@ void FileTransferPeer::startUpload( const FileInfo& fi )
 {
   setTransferType( FileInfo::Upload );
   setFileInfo( FileInfo::Upload, fi );
-  qDebug() << qPrintable( name() ) << "starts uploading" << qPrintable( Bee::convertToNativeFolderSeparator( fi.path() ) );
+  qDebug() << qPrintable( name() ) << "starts uploading" << qPrintable( fi.path() ) << "from" << fi.filePosition() << "to" << fi.size() << "bytes";
   if( mp_socket->protoVersion() < FILE_TRANSFER_2_PROTO_VERSION )
   {
     qWarning() << qPrintable( name() ) << "using an old file upload protocol version" << mp_socket->protoVersion();
@@ -89,6 +89,7 @@ void FileTransferPeer::sendFileHeader()
   qDebug() << qPrintable( name() ) << "sends File Size Header for" << m_fileInfo.path();
 #endif
   m_bytesTransferred = 0;
+  m_totalBytesTransferred = 0;
   m_state = FileTransferPeer::Transferring;
 
   QFileInfo file_info_now_in_system( m_fileInfo.path() );
@@ -96,6 +97,12 @@ void FileTransferPeer::sendFileHeader()
   {
     m_fileInfo.setSize( file_info_now_in_system.size() );
     m_fileInfo.setLastModified( file_info_now_in_system.lastModified() );
+    if( m_fileInfo.filePosition() > 0 )
+    {
+      if( m_fileInfo.filePosition() > m_fileInfo.size() )
+        m_fileInfo.setFilePosition( 0 );
+      m_bytesTransferred = m_fileInfo.filePosition();
+    }
   }
 
   Message file_header_message = Protocol::instance().fileInfoToMessage( m_fileInfo );
@@ -107,7 +114,8 @@ void FileTransferPeer::sendFileHeader()
 
 void FileTransferPeer::checkUploading( const QByteArray& byte_array )
 {
-  if( byte_array.simplified().toInt() == m_bytesTransferred )
+  int bytes_to_check = byte_array.simplified().toInt();
+  if( bytes_to_check == m_bytesTransferred )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << qPrintable( name() ) << "receives corfirmation for" << m_bytesTransferred << "bytes";
@@ -124,7 +132,7 @@ void FileTransferPeer::checkUploading( const QByteArray& byte_array )
       sendTransferData();
   }
   else
-    setError( tr( "%1 bytes sent not confirmed (%2 bytes confirmed)").arg( m_bytesTransferred ).arg( byte_array.toInt() ) );
+    setError( tr( "%1 bytes sent not confirmed (%2 bytes confirmed)").arg( m_bytesTransferred ).arg( bytes_to_check ) );
 }
 
 void FileTransferPeer::sendUploadData()
@@ -140,6 +148,12 @@ void FileTransferPeer::sendUploadData()
     if( !m_file.open( QIODevice::ReadOnly ) )
     {
       setError( tr( "Unable to open file %1" ).arg( m_file.fileName() ) );
+      return;
+    }
+
+    if( m_totalBytesTransferred >= m_file.size() || !m_file.seek( m_totalBytesTransferred ) )
+    {
+      setError( tr( "Unable to seek %1 bytes in file %2" ).arg( m_totalBytesTransferred ).arg( m_file.fileName() ) );
       return;
     }
   }

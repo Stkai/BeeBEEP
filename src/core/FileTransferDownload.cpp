@@ -23,6 +23,7 @@
 
 #include "FileTransferPeer.h"
 #include "Protocol.h"
+#include "Settings.h"
 
 
 void FileTransferPeer::sendDownloadData()
@@ -35,7 +36,20 @@ void FileTransferPeer::sendDownloadData()
 
 void FileTransferPeer::sendDownloadRequest()
 {
-  qDebug() << qPrintable( name() ) << "sending file request:" << m_fileInfo.id() << m_fileInfo.password();
+  if( mp_socket->protoVersion() >= FILE_TRANSFER_RESUME_PROTO_VERSION )
+  {
+    QFileInfo file_info( m_file.fileName() );
+    if( file_info.exists() && Settings::instance().resumeFileTransfer() )
+      m_fileInfo.setFilePosition( file_info.size() );
+    else
+      m_fileInfo.setFilePosition( 0 );
+  }
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << qPrintable( name() ) << "sending file request:" << m_fileInfo.id() << m_fileInfo.password() << "-> seek" << m_fileInfo.filePosition();
+#else
+  qDebug() << qPrintable( name() ) << "sending file request for" << file_info.fileName() << "with starting position" << m_fileInfo.filePosition();
+#endif
   if( mp_socket->sendData( Protocol::instance().fromMessage( Protocol::instance().fileInfoToMessage( m_fileInfo ), mp_socket->protoVersion() ) ) )
   {
     if( mp_socket->protoVersion() < FILE_TRANSFER_2_PROTO_VERSION )
@@ -53,7 +67,7 @@ void FileTransferPeer::sendDownloadRequest()
 void FileTransferPeer::sendDownloadDataConfirmation()
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << qPrintable( name() ) << "sending corfirmation for" << m_bytesTransferred << "bytes";
+  qDebug() << qPrintable( name() ) << "sending confirmation for" << m_bytesTransferred << "bytes";
 #endif
   if( !mp_socket->sendData( Protocol::instance().bytesArrivedConfirmation( m_bytesTransferred ) ) )
     cancelTransfer();
@@ -84,7 +98,11 @@ void FileTransferPeer::checkDownloadData( const QByteArray& byte_array )
     if( file_header.lastModified().isValid() )
       m_fileInfo.setLastModified( file_header.lastModified() );
     m_state = FileTransferPeer::Transferring;
-    m_bytesTransferred = 0;
+
+    if( m_bytesTransferred > 0 && file_header.filePosition() != m_bytesTransferred )
+      m_bytesTransferred = 0;
+    m_totalBytesTransferred = static_cast<FileSizeType>( m_bytesTransferred );
+
     sendTransferData();
     return;
   }
@@ -96,13 +114,13 @@ void FileTransferPeer::checkDownloadData( const QByteArray& byte_array )
   }
 
   m_bytesTransferred = byte_array.size();
-  m_totalBytesTransferred += static_cast<FileSizeType>(m_bytesTransferred);
+  m_totalBytesTransferred += static_cast<FileSizeType>( m_bytesTransferred ) ;
 
   sendTransferData(); // send to upload client that data is arrived
 
   if( !m_file.isOpen() )
   {
-    if( !m_file.open( QIODevice::WriteOnly ) )
+    if( !m_file.open( QIODevice::WriteOnly | QIODevice::Append ) )
     {
       setError( tr( "Unable to open file %1" ).arg( m_file.fileName() ) );
       return;
@@ -123,4 +141,16 @@ void FileTransferPeer::checkDownloadData( const QByteArray& byte_array )
   if( m_totalBytesTransferred == m_fileInfo.size() )
     setTransferCompleted();
 }
+
+QString FileTransferPeer::temporaryFilePath() const
+{
+#ifdef Q_OS_OS2
+  return QString( "%1/%2.%3" ).arg( Settings::instance().cacheFolder(), m_fileInfo.fileHash(), QString( "tmp" ) );
+#else
+  return QString( "%1/%2.%3" ).arg( Settings::instance().cacheFolder(), m_fileInfo.fileHash(), QString( "part" ) );
+#endif
+}
+
+
+
 

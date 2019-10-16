@@ -681,7 +681,7 @@ QPixmap Bee::avatarForUser( const User& u, const QSize& avatar_size, bool use_av
 
 QString Bee::toolTipForUser( const User& u, bool only_status )
 {
-  QString tool_tip = u.isLocal() ? QObject::tr( "You are %1" ).arg( Bee::userStatusToString( u.status() ) ) : QObject::tr( "%1 is %2" ).arg( u.name(), Bee::userStatusToString( u.status() ) );
+  QString tool_tip = u.isLocal() ? QObject::tr( "You are %1" ).arg( Bee::userStatusToString( u.status() ) ) : QObject::tr( "%1 is %2" ).arg( Bee::userNameToShow( u ), Bee::userStatusToString( u.status() ) );
 
   if( only_status )
     return tool_tip;
@@ -739,15 +739,19 @@ QString Bee::userBirthdayToText( const User& u )
   QString birthday_text;
   if( !u.isLocal() )
   {
+    // Do not use Bee::userNameToShow( u ) to avoid computer name
+    QString user_name = Settings::instance().useUserFullName() && u.vCard().hasFullName() ? u.vCard().fullName() : u.name();
+    user_name = Bee::removeHtmlTags( user_name );
+    user_name = Bee::replaceHtmlSpecialCharacters( user_name );
     int days_to = u.daysToBirthDay();
     if( days_to == 0 )
-      birthday_text = QObject::tr( "Today is %1's birthday" ).arg( u.name() );
+      birthday_text = QObject::tr( "Today is %1's birthday" ).arg( user_name );
     else if( days_to == 1 )
-      birthday_text =  QObject::tr( "Tomorrow is %1's birthday" ).arg( u.name() );
+      birthday_text =  QObject::tr( "Tomorrow is %1's birthday" ).arg( user_name );
     else if( days_to > 1 && days_to < 4 )
-      birthday_text= QObject::tr( "%1's birthday is in %2 days" ).arg( u.name() ).arg( days_to );
+      birthday_text= QObject::tr( "%1's birthday is in %2 days" ).arg( user_name ).arg( days_to );
     else if( days_to == -1 )
-      birthday_text = QObject::tr( "Yesterday was %1's birthday" ).arg( u.name() );
+      birthday_text = QObject::tr( "Yesterday was %1's birthday" ).arg( user_name );
     else
       birthday_text = "";
   }
@@ -758,7 +762,6 @@ QString Bee::userBirthdayToText( const User& u )
     else
       birthday_text = "";
   }
-
   return birthday_text;
 }
 

@@ -338,6 +338,7 @@ private:
   QAction* mp_actOverwriteExistingFile;
   QAction* mp_actGenerateAutomaticFilename;
   QAction* mp_actAskToDoOnExistingFile;
+  QAction* mp_actResumeFileTransfer;
   QAction* mp_actBeepOnNewMessage;
   QActionGroup* mp_actGroupRecognizeUsers;
   QAction* mp_actSelectEmoticonSourcePath;

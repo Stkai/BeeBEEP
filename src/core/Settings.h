@@ -375,6 +375,8 @@ public:
   inline void setAutomaticFileName( bool );
   inline bool overwriteExistingFiles() const;
   inline void setOverwriteExistingFiles( bool );
+  inline bool resumeFileTransfer() const;
+  inline void setResumeFileTransfer( bool );
 
   inline const QStringList& broadcastAddressesInFileHosts() const;
   inline const QHostAddress& localHostAddressForced() const;
@@ -727,6 +729,7 @@ private:
   bool m_showUserPhoto;
   bool m_automaticFileName;
   bool m_overwriteExistingFiles;
+  bool m_resumeFileTransfer;
   bool m_showChatToolbar;
   bool m_showOnlyMessagesInDefaultChat;
   bool m_showVCardOnRightClick;
@@ -1022,6 +1025,8 @@ inline bool Settings::automaticFileName() const { return m_automaticFileName; }
 inline void Settings::setAutomaticFileName( bool new_value ) { m_automaticFileName = new_value; }
 inline bool Settings::overwriteExistingFiles() const { return m_overwriteExistingFiles; }
 inline void Settings::setOverwriteExistingFiles( bool new_value ) { m_overwriteExistingFiles = new_value; }
+inline bool Settings::resumeFileTransfer() const { return m_resumeFileTransfer; }
+inline void Settings::setResumeFileTransfer( bool new_value ) { m_resumeFileTransfer = new_value; }
 inline bool Settings::showChatToolbar() const { return m_showChatToolbar; }
 inline void Settings::setShowChatToolbar( bool new_value ) { m_showChatToolbar = new_value; }
 inline const QStringList& Settings::broadcastAddressesInFileHosts() const { return m_broadcastAddressesInFileHosts; }
@@ -1291,7 +1296,7 @@ inline const QString& Settings::chatQuoteBackgroundColor() const { return m_chat
 inline void Settings::setChatQuoteTextColor( const QString& new_value ) { m_chatQuoteTextColor = new_value; }
 inline const QString& Settings::chatQuoteTextColor() const { return m_chatQuoteTextColor; }
 inline bool Settings::checkUserConnectedFromDatagramIp() const { return m_checkUserConnectedFromDatagramIp; }
-inline bool Settings::isLocalHardwareAddressToSkip( const QString& hw_value ) const { return hw_value.isEmpty() ? false : (m_skipLocalHardwareAddresses.isEmpty() ? false : m_skipLocalHardwareAddresses.contains( hw_value, Qt::CaseInsensitive )); }
+inline bool Settings::isLocalHardwareAddressToSkip( const QString& hw_value ) const { return hw_value.isEmpty() ? true : (m_skipLocalHardwareAddresses.isEmpty() ? false : m_skipLocalHardwareAddresses.contains( hw_value, Qt::CaseInsensitive )); }
 inline bool Settings::rcFileExists() const { return m_rcFileExists; }
 inline void Settings::setChatOnSendingMessage( int new_value ) { m_chatOnSendingMessage = new_value; }
 inline int Settings::chatOnSendingMessage() const { return m_chatOnSendingMessage; }

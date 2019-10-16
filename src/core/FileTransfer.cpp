@@ -308,6 +308,10 @@ void FileTransfer::checkUploadRequest( const FileInfo& file_info_to_check )
     }
   }
 
+  if( Settings::instance().resumeFileTransfer() )
+    file_info.setFilePosition( file_info_to_check.filePosition() );
+  else
+    file_info.setFilePosition( 0 );
   upload_peer->startUpload( file_info );
 }
 

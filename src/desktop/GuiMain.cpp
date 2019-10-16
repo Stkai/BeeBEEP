@@ -1159,6 +1159,11 @@ void GuiMain::createMenus()
   mp_actGroupExistingFile->addAction( mp_actGenerateAutomaticFilename );
   mp_actGroupExistingFile->addAction( mp_actAskToDoOnExistingFile );
   connect( mp_actGroupExistingFile, SIGNAL( triggered( QAction* ) ), this, SLOT( onChangeSettingOnExistingFile( QAction* ) ) );
+  mp_menuExistingFile->addSeparator();
+  mp_actResumeFileTransfer = mp_menuExistingFile->addAction( tr( "Resume file transfer" ), this, SLOT( settingsChanged() ) );
+  mp_actResumeFileTransfer->setCheckable( true );
+  mp_actResumeFileTransfer->setChecked( Settings::instance().resumeFileTransfer() );
+  mp_actResumeFileTransfer->setData( 97 );
   mp_menuFileTransferSettings->addSeparator();
   act = mp_menuFileTransferSettings->addAction( "", this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -2136,6 +2141,9 @@ void GuiMain::settingsChanged( QAction* act )
     break;
   case 96:
     Settings::instance().setDisableBeepInUserStatusBusy( act->isChecked() );
+    break;
+  case 97:
+    Settings::instance().setResumeFileTransfer( act->isChecked() );
     break;
   case 99:
     break;
