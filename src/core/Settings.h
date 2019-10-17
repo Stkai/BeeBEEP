@@ -73,7 +73,7 @@ public:
   inline const QString& resourceFolder() const;
   inline const QString& cacheFolder() const;
   QString defaultSettingsFilePath() const;
-  QString defaultBeepFilePath() const;
+  QString defaultBeepFilePath();
   QString defaultPluginFolderPath() const;
   QString defaultLanguageFolderPath() const;
   QString defaultHostsFilePath() const;
@@ -370,6 +370,8 @@ public:
   inline void setBeepFilePath( const QString& );
   inline bool disableBeepInUserStatusBusy() const;
   inline void setDisableBeepInUserStatusBusy( bool );
+  inline bool beepInActiveWindowAlso() const;
+  inline void setBeepInActiveWindowAlso( bool );
 
   inline bool automaticFileName() const;
   inline void setAutomaticFileName( bool );
@@ -795,7 +797,9 @@ private:
   QString m_language;
   bool m_beepOnNewMessageArrived;
   QString m_beepFilePath;
+  QString m_beepDefaultFilePath;
   bool m_disableBeepInUserStatusBusy;
+  bool m_beepInActiveWindowAlso;
   QStringList m_broadcastAddressesInFileHosts;
   QHostAddress m_localHostAddressForced;
   QString m_localSubnetForced;
@@ -1309,5 +1313,8 @@ inline bool Settings::allowNotEncryptedConnectionsAlso() const { return m_allowN
 inline bool Settings::allowEncryptedConnectionsAlso() const { return m_allowEncryptedConnectionsAlso; }
 inline bool Settings::disableBeepInUserStatusBusy() const { return m_disableBeepInUserStatusBusy; }
 inline void Settings::setDisableBeepInUserStatusBusy( bool new_value ) { m_disableBeepInUserStatusBusy = new_value; }
+inline bool Settings::beepInActiveWindowAlso() const { return m_beepInActiveWindowAlso; }
+inline void Settings::setBeepInActiveWindowAlso( bool new_value ) { m_beepInActiveWindowAlso = new_value; }
+
 
 #endif // BEEBEEP_SETTINGS_

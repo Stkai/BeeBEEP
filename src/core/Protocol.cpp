@@ -759,7 +759,9 @@ UserRecord Protocol::loadUserRecord( const QString& s ) const
     QString favorite_txt = sl.takeFirst();
     if( favorite_txt == QString( "*" ) )
     {
+ #ifdef BEEBEEP_DEBUG
       qDebug() << "User" << qPrintable( ur.name() ) << "is in favorite list";
+ #endif
       ur.setFavorite( true );
     }
   }
@@ -767,7 +769,9 @@ UserRecord Protocol::loadUserRecord( const QString& s ) const
   if( !sl.isEmpty() )
   {
     ur.setColor( sl.takeFirst() );
+ #ifdef BEEBEEP_DEBUG
     qDebug() << "User" << qPrintable( ur.name() ) << "has color saved:" << qPrintable( ur.color() );
+ #endif
   }
 
   if( !sl.isEmpty() )
@@ -1347,7 +1351,7 @@ Message Protocol::fileInfoToMessage( const FileInfo& fi )
     sl << QString( "" );
   sl << fi.mimeType();
   sl << QString::number( fi.contentType() );
-  sl << QString::number( fi.filePosition() );
+  sl << QString::number( fi.startingPosition() );
   m.setData( sl.join( DATA_FIELD_SEPARATOR ) );
   m.addFlag( Message::Private );
   if( fi.contentType() == FileInfo::VoiceMessage )
@@ -1408,9 +1412,9 @@ FileInfo Protocol::fileInfoFromMessage( const Message& m )
   {
     FileSizeType file_position = Bee::qVariantToFileSizeType( sl.takeFirst() );
     if( file_position <  fi.size() )
-      fi.setFilePosition( file_position );
+      fi.setStartingPosition( file_position );
     else
-      fi.setFilePosition( fi.size() );
+      fi.setStartingPosition( fi.size() );
   }
 
   return fi;
@@ -1991,7 +1995,7 @@ QString Protocol::newMd5Id()
   return Settings::instance().simpleHash( sl.join( QString::number( Random::d100() ) ) );
 }
 
-QByteArray Protocol::bytesArrivedConfirmation( int num_bytes ) const
+QByteArray Protocol::bytesArrivedConfirmation( FileSizeType num_bytes ) const
 {
   QByteArray byte_array = QByteArray::number( num_bytes );
   while( byte_array.size() % ENCRYPTED_DATA_BLOCK_SIZE )

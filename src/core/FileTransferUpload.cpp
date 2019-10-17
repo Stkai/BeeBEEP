@@ -69,7 +69,7 @@ void FileTransferPeer::startUpload( const FileInfo& fi )
 {
   setTransferType( FileInfo::Upload );
   setFileInfo( FileInfo::Upload, fi );
-  qDebug() << qPrintable( name() ) << "starts uploading" << qPrintable( fi.path() ) << "from" << fi.filePosition() << "to" << fi.size() << "bytes";
+  qDebug() << qPrintable( name() ) << "starts uploading" << qPrintable( fi.path() ) << "from" << fi.startingPosition() << "to" << fi.size() << "bytes";
   if( mp_socket->protoVersion() < FILE_TRANSFER_2_PROTO_VERSION )
   {
     qWarning() << qPrintable( name() ) << "using an old file upload protocol version" << mp_socket->protoVersion();
@@ -97,12 +97,17 @@ void FileTransferPeer::sendFileHeader()
   {
     m_fileInfo.setSize( file_info_now_in_system.size() );
     m_fileInfo.setLastModified( file_info_now_in_system.lastModified() );
-    if( m_fileInfo.filePosition() > 0 )
+    if( m_fileInfo.startingPosition() > 0 )
     {
-      if( m_fileInfo.filePosition() > m_fileInfo.size() )
-        m_fileInfo.setFilePosition( 0 );
-      m_bytesTransferred = m_fileInfo.filePosition();
+      if( m_fileInfo.startingPosition() > m_fileInfo.size() )
+        m_fileInfo.setStartingPosition( 0 );
+      m_bytesTransferred = m_fileInfo.startingPosition();
     }
+  }
+  else
+  {
+    setError( tr( "file no longer exists" ) );
+    return;
   }
 
   Message file_header_message = Protocol::instance().fileInfoToMessage( m_fileInfo );

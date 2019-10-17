@@ -25,7 +25,7 @@
 #include "Settings.h"
 
 
-PluginManager* PluginManager::mp_instance = NULL;
+PluginManager* PluginManager::mp_instance = Q_NULLPTR;
 
 
 PluginManager::PluginManager()
@@ -46,11 +46,11 @@ void PluginManager::clearPlugins()
 void PluginManager::loadPlugins( const QString& plugin_folder_path, bool search_also_in_default_folders )
 {
   clearPlugins();
-  qDebug() << "Loading plugins from path:" << qPrintable( plugin_folder_path );
+  qDebug() << "Loading plugins from path" << qPrintable( plugin_folder_path );
   QDir plugin_dir( plugin_folder_path );
   if( !plugin_dir.exists() )
   {
-    qWarning() << "Plugin folder" << qPrintable( plugin_folder_path ) << "not found";
+    qWarning() << "Plugins folder" << qPrintable( plugin_folder_path ) << "not exists";
     return;
   }
 
@@ -114,12 +114,11 @@ void PluginManager::addPlugin( const QString& file_path )
         qDebug() << text_marker_plugin->name() << "already load... skip it";
       return;
     }
-
-    qDebug() << file_path << "is an invalid plugin";
+    qDebug() << qPrintable( file_path ) << "is not a valid plugin";
   }
 #ifdef BEEBEEP_DEBUG
   else
-    qDebug() << file_path << "is not a plugin";
+    qDebug() << qPrintable( file_path ) << "is not a plugin";
 #endif
 }
 
@@ -155,7 +154,7 @@ TextMarkerInterface* PluginManager::textMarker( const QString& text_marker_name 
     if( tmi->name() == text_marker_name )
       return tmi;
   }
-  return 0;
+  return Q_NULLPTR;
 }
 
 bool PluginManager::parseText( QString* p_txt, bool before_sending ) const

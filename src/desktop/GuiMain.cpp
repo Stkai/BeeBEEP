@@ -1159,8 +1159,7 @@ void GuiMain::createMenus()
   mp_actGroupExistingFile->addAction( mp_actGenerateAutomaticFilename );
   mp_actGroupExistingFile->addAction( mp_actAskToDoOnExistingFile );
   connect( mp_actGroupExistingFile, SIGNAL( triggered( QAction* ) ), this, SLOT( onChangeSettingOnExistingFile( QAction* ) ) );
-  mp_menuExistingFile->addSeparator();
-  mp_actResumeFileTransfer = mp_menuExistingFile->addAction( tr( "Resume file transfer" ), this, SLOT( settingsChanged() ) );
+  mp_actResumeFileTransfer = mp_menuFileTransferSettings->addAction( tr( "Resume file transfer" ) + QString( " (%1)" ).arg( tr( "when possible" ) ), this, SLOT( settingsChanged() ) );
   mp_actResumeFileTransfer->setCheckable( true );
   mp_actResumeFileTransfer->setChecked( Settings::instance().resumeFileTransfer() );
   mp_actResumeFileTransfer->setData( 97 );
@@ -1196,6 +1195,10 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().enableDefaultChatNotifications() );
   act->setData( 75 );
+  act = mp_menuNotificationSettings->addAction( tr( "Enable BEEP alert also for active chat windows" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().beepInActiveWindowAlso() );
+  act->setData( 98 );
   act = mp_menuNotificationSettings->addAction( tr( "Disable BEEP alert if your status is busy" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().disableBeepInUserStatusBusy() );
@@ -2145,6 +2148,9 @@ void GuiMain::settingsChanged( QAction* act )
   case 97:
     Settings::instance().setResumeFileTransfer( act->isChecked() );
     break;
+  case 98:
+    Settings::instance().setBeepInActiveWindowAlso( act->isChecked() );
+    break;
   case 99:
     break;
   default:
@@ -2341,18 +2347,18 @@ void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
   }
 
   bool floating_chat_created = false;
-  bool alert_can_be_showed = cm.alertCanBeSent();
-  if( alert_can_be_showed )
-  {
-    if( c.isDefault() )
-      alert_can_be_showed = Settings::instance().enableDefaultChatNotifications();
-    else if( c.isGroup() )
-      alert_can_be_showed = !Settings::instance().isNotificationDisabledForGroup( c.privateId() );
-  }
+  bool alert_can_be_notified = false;
+
+  if( c.isDefault() )
+    alert_can_be_notified = cm.alertCanBeSent() && Settings::instance().enableDefaultChatNotifications();
+  else if( c.isGroup() )
+    alert_can_be_notified = cm.alertCanBeSent() && !Settings::instance().isNotificationDisabledForGroup( c.privateId() );
+  else
+    alert_can_be_notified = cm.alertCanBeSent();
 
   GuiFloatingChat* fl_chat = floatingChat( c.id() );
 
-  if( !fl_chat && Settings::instance().alwaysOpenChatOnNewMessageArrived() && alert_can_be_showed )
+  if( !fl_chat && Settings::instance().alwaysOpenChatOnNewMessageArrived() && alert_can_be_notified )
   {
     fl_chat = createFloatingChat( c );
     floating_chat_created = true;
@@ -2367,11 +2373,13 @@ void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
 
   if( fl_chat && fl_chat->isActiveWindow() )
   {
+    if( alert_can_be_notified && (cm.isImportant() || Settings::instance().beepInActiveWindowAlso()) )
+      playBeep();
     readAllMessagesInChat( c.id() );
   }
   else
   {
-    if( cm.alertCanBeSent() && alert_can_be_showed )
+    if( alert_can_be_notified )
       showAlertForMessage( c, cm );
   }
 }

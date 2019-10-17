@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE" sourcelanguage="en">
+<TS version="2.0" language="de_DE" sourcelanguage="en">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -356,7 +356,7 @@
     </message>
     <message>
         <source>%1 %2 is sending to you the file: %3.</source>
-        <translation type="vanished">%1 %2 sendet dir folgende Datei: %3.</translation>
+        <translation type="obsolete">%1 %2 sendet dir folgende Datei: %3.</translation>
     </message>
     <message>
         <source>%1 Zero Configuration service closed.</source>
@@ -404,7 +404,7 @@
     </message>
     <message>
         <source>%1 %2 has refused to download %3.</source>
-        <translation type="vanished">%1 %2 hat das Herunterladen der Datei %3 abgelehnt.</translation>
+        <translation type="obsolete">%1 %2 hat das Herunterladen der Datei %3 abgelehnt.</translation>
     </message>
     <message>
         <source>%1 Network interface %2 is gone down.</source>
@@ -702,6 +702,18 @@
     <message>
         <source>unable to send file header</source>
         <translation>Dateiheader konnte nicht gesendet werden</translation>
+    </message>
+    <message>
+        <source>Transfer paused</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>file no longer exists</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to seek %1 bytes in file %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3198,6 +3210,18 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>%1 updated</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Resume file transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>when possible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable BEEP alert also for active chat windows</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -4452,7 +4476,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Not Completed</source>
-        <translation>Nicht abgeschlossen</translation>
+        <translation type="obsolete">Nicht abgeschlossen</translation>
     </message>
     <message>
         <source>Do you want to cancel the transfer of %1?</source>
@@ -4480,7 +4504,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Cancel Transfer</source>
-        <translation>Übertragung abbrechen</translation>
+        <translation type="obsolete">Übertragung abbrechen</translation>
     </message>
     <message>
         <source>Transfer completed</source>
@@ -4500,6 +4524,14 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Remove all completed transfers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not completed</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4676,7 +4708,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Informations to display to other users</source>
-        <translation type="vanished">Informationen, die anderen Benutzern angezeigt werden sollen</translation>
+        <translation type="obsolete">Informationen, die anderen Benutzern angezeigt werden sollen</translation>
     </message>
     <message>
         <source>Regenerate your hash code...</source>

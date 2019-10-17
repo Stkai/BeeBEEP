@@ -273,7 +273,6 @@ QStringList Settings::dataFolders() const
 
 QString Settings::findFileInFolders( const QString& file_name, const QStringList& folder_list, bool return_folder_path ) const
 {
-  qDebug() << "Searching file" << qPrintable( file_name );
   foreach( QString folder_path, folder_list )
   {
     if( folder_path.trimmed().isEmpty() )
@@ -286,14 +285,11 @@ QString Settings::findFileInFolders( const QString& file_name, const QStringList
     QFileInfo fi( file_path );
     if( fi.exists() )
     {
-      qDebug() << "File" << qPrintable( file_name ) << "found in folder" << qPrintable( file_path );
       if( !fi.isReadable() )
         qWarning() << "Skip file" << qPrintable( file_path ) << "because is not readable";
       else
         return return_folder_path ? folder_path : file_path;
     }
-    else
-      qDebug() << "File not found in folder:" << qPrintable( folder_path );
   }
   return QString::null;
 }
@@ -504,7 +500,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "DisableCreateMessage", m_disableCreateMessage );
     sets->setValue( "DisableMenuSettings", m_disableMenuSettings );
     sets->setValue( "CheckUserConnectedFromDatagramIp", m_checkUserConnectedFromDatagramIp );
-    sets->setValue( "SkipLocalHardwareAddresses", m_skipLocalHardwareAddresses.isEmpty() ? QString( "" ) : m_skipLocalHardwareAddresses.join( ", " ) );   
+    sets->setValue( "SkipLocalHardwareAddresses", m_skipLocalHardwareAddresses.isEmpty() ? QString( "" ) : m_skipLocalHardwareAddresses.join( ", " ) );
     sets->setValue( "DisableEncryptedConnections", m_disableConnectionSocketEncryption );
     sets->setValue( "AllowNotEncryptedConnectionsAlso", m_allowNotEncryptedConnectionsAlso );
     sets->setValue( "AllowEncryptedConnectionsAlso", m_allowEncryptedConnectionsAlso );
@@ -1130,6 +1126,7 @@ void Settings::load()
   m_chatShowMessageTimestamp = sets->value( "ShowMessageTimestamp", true ).toBool();
   m_beepOnNewMessageArrived = sets->value( "BeepOnNewMessageArrived", true ).toBool();
   m_disableBeepInUserStatusBusy = sets->value( "DisableBeepInUserStatusBusy", false ).toBool();
+  m_beepInActiveWindowAlso = sets->value( "EnableBeepInActiveWindow", false ).toBool();
   m_chatUseHtmlTags = sets->value( "UseHtmlTags", false ).toBool();
   m_chatUseClickableLinks = sets->value( "UseClickableLinks", true ).toBool();
   m_chatMessageHistorySize = sets->value( "MessageHistorySize", 10 ).toInt();
@@ -1571,6 +1568,7 @@ void Settings::save()
   sets->setValue( "ShowMessageTimestamp", m_chatShowMessageTimestamp );
   sets->setValue( "BeepOnNewMessageArrived", m_beepOnNewMessageArrived );
   sets->setValue( "DisableBeepInUserStatusBusy", m_disableBeepInUserStatusBusy );
+  sets->setValue( "EnableBeepInActiveWindow", m_beepInActiveWindowAlso );
   sets->setValue( "UseHtmlTags", m_chatUseHtmlTags );
   sets->setValue( "UseClickableLinks", m_chatUseClickableLinks );
   sets->setValue( "MessageHistorySize", m_chatMessageHistorySize );
@@ -2118,6 +2116,22 @@ bool Settings::setDataFolder()
       qDebug() << "Cache folder created in" << qPrintable( m_cacheFolder );
   }
   qDebug() << "Cache folder:" << qPrintable( m_cacheFolder );
+
+  QStringList folder_list = resourceFolders();
+  if( folder_list.size() > 1 )
+    qDebug() << "System files will be searched in the following folders:\n -" << qPrintable( resourceFolders().join( "\n - " ) );
+  else if( folder_list.size() == 1 )
+    qDebug() << "System files will be searched in the following folder:\n -" << qPrintable( folder_list.first() );
+  else
+    qDebug() << "System files will not be searched";
+
+  folder_list = dataFolders();
+  if( folder_list.size() > 1 )
+    qDebug() << "Configuration and data files will be searched in the following folders:\n -" << qPrintable( folder_list.join( "\n - " ) );
+  else if( folder_list.size() == 1 )
+    qDebug() << "Configuration and data files will be searched in the following folder:\n -" << qPrintable( folder_list.first() );
+  else
+    qDebug() << "Configuration and data files will not be searched";
   return true;
 }
 
@@ -2141,21 +2155,25 @@ QString Settings::defaultSettingsFilePath() const
   return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder() ).arg( QLatin1String( "beebeep.ini" ) ) );
 }
 
-QString Settings::defaultBeepFilePath() const
+QString Settings::defaultBeepFilePath()
 {
-  QStringList data_folders;
-  data_folders.append( Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder() ).arg( QLatin1String( "resources" ) ) ) );
-  data_folders.append( dataFolders() );
+  if( m_beepDefaultFilePath.isEmpty() )
+  {
+    QStringList data_folders;
+    data_folders.append( Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder() ).arg( QLatin1String( "resources" ) ) ) );
+    data_folders.append( dataFolders() );
 #ifndef Q_OS_MAC
-  data_folders.append( Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( resourceFolder() ).arg( QLatin1String( "resources" ) ) ) );
+    data_folders.append( Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( resourceFolder() ).arg( QLatin1String( "resources" ) ) ) );
 #endif
-  data_folders.append( resourceFolders() );
-  data_folders.removeDuplicates();
-  QString beep_file_path = findFileInFolders( QLatin1String( "beep.wav" ), data_folders );
-  if( beep_file_path.isNull() )
-    return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( resourceFolder() ).arg( QLatin1String( "beep.wav" ) ) );
-  else
-    return beep_file_path;
+    data_folders.append( resourceFolders() );
+    data_folders.removeDuplicates();
+    QString beep_file_path = findFileInFolders( QLatin1String( "beep.wav" ), data_folders );
+    if( beep_file_path.isNull() )
+      m_beepDefaultFilePath = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( resourceFolder() ).arg( QLatin1String( "beep.wav" ) ) );
+    else
+      m_beepDefaultFilePath = beep_file_path;
+  }
+  return m_beepDefaultFilePath;
 }
 
 QString Settings::defaultPluginFolderPath() const

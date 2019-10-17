@@ -16,7 +16,8 @@ BeeBEEP 5.7.7 (in development)
   - Minimize chat window
   - Close chat window
 - Added "DisableDesktopSharing" option in beebeep.rc
-- Added "DisableBeepInUserStatusBusy" option in Settings - Notifications menu
+- Added "DisableBeepInUserStatusBusy" option in beebeep.ini
+- Added "EnableBeepInActiveWindow" option in beebeep.ini 
 - Added "UseUserFullName" option in beebeep.rc to show (if exists) user's full name instead of nickname
 - Added "DisableEncryptedConnections" option in beebeep.rc
 - Added "AllowNotEncryptedConnections" option in beebeep.rc (used with "DisableEncryptedConnections")

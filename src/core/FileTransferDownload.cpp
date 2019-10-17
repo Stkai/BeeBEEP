@@ -40,15 +40,15 @@ void FileTransferPeer::sendDownloadRequest()
   {
     QFileInfo file_info( m_file.fileName() );
     if( file_info.exists() && Settings::instance().resumeFileTransfer() )
-      m_fileInfo.setFilePosition( file_info.size() );
+      m_fileInfo.setStartingPosition( file_info.size() );
     else
-      m_fileInfo.setFilePosition( 0 );
+      m_fileInfo.setStartingPosition( 0 );
   }
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << qPrintable( name() ) << "sending file request:" << m_fileInfo.id() << m_fileInfo.password() << "-> seek" << m_fileInfo.filePosition();
+  qDebug() << qPrintable( name() ) << "sending file request:" << m_fileInfo.id() << m_fileInfo.password() << "-> seek" << m_fileInfo.startingPosition();
 #else
-  qDebug() << qPrintable( name() ) << "sending file request for" << file_info.fileName() << "with starting position" << m_fileInfo.filePosition();
+  qDebug() << qPrintable( name() ) << "sending file request for" << m_fileInfo.name() << "with starting position" << m_fileInfo.startingPosition();
 #endif
   if( mp_socket->sendData( Protocol::instance().fromMessage( Protocol::instance().fileInfoToMessage( m_fileInfo ), mp_socket->protoVersion() ) ) )
   {
@@ -99,9 +99,9 @@ void FileTransferPeer::checkDownloadData( const QByteArray& byte_array )
       m_fileInfo.setLastModified( file_header.lastModified() );
     m_state = FileTransferPeer::Transferring;
 
-    if( m_bytesTransferred > 0 && file_header.filePosition() != m_bytesTransferred )
+    if( m_bytesTransferred > 0 && file_header.startingPosition() != m_bytesTransferred )
       m_bytesTransferred = 0;
-    m_totalBytesTransferred = static_cast<FileSizeType>( m_bytesTransferred );
+    m_totalBytesTransferred = m_bytesTransferred;
 
     sendTransferData();
     return;
@@ -113,8 +113,8 @@ void FileTransferPeer::checkDownloadData( const QByteArray& byte_array )
     return;
   }
 
-  m_bytesTransferred = byte_array.size();
-  m_totalBytesTransferred += static_cast<FileSizeType>( m_bytesTransferred ) ;
+  m_bytesTransferred = static_cast<FileSizeType>( byte_array.size() );
+  m_totalBytesTransferred += m_bytesTransferred;
 
   sendTransferData(); // send to upload client that data is arrived
 
@@ -127,7 +127,7 @@ void FileTransferPeer::checkDownloadData( const QByteArray& byte_array )
     }
   }
 
-  if( m_file.write( byte_array ) != m_bytesTransferred )
+  if( m_file.write( byte_array ) != static_cast<int>( m_bytesTransferred ) )
   {
     setError( tr( "Unable to write in the file %1" ).arg( m_file.fileName() ) );
     return;

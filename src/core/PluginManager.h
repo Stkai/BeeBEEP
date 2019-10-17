@@ -57,7 +57,7 @@ public:
     {
       mp_instance->clearPlugins();
       delete mp_instance;
-      mp_instance = NULL;
+      mp_instance = Q_NULLPTR;
     }
   }
 

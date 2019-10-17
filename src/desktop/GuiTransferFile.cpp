@@ -107,8 +107,8 @@ void GuiTransferFile::setProgress( VNumber peer_id, const User& u, const FileInf
   if( item->data( ColumnFile, TransferInProgress ).toBool() )
   {
     if( bytes > 0 )
-      item->setData( ColumnFile, TransferCompleted, (bool)(bytes==fi.size()) );
-    item->setData( ColumnFile, TransferInProgress, (bool)(bytes<fi.size()) );
+      item->setData( ColumnFile, TransferCompleted, static_cast<bool>( bytes == fi.size() ) );
+    item->setData( ColumnFile, TransferInProgress, static_cast<bool>( bytes < fi.size() ) );
     showProgress( item, fi, bytes, elapsed_time );
   }
 
@@ -134,13 +134,13 @@ void GuiTransferFile::showIcon( QTreeWidgetItem* item )
   else if( item->data( ColumnFile, TransferInProgress ).toBool() )
   {
     icon = IconManager::instance().icon( "delete.png" );
-    status_tip = tr( "Cancel Transfer" );
+    status_tip = tr( "Cancel transfer" );
     sort_string.prepend( 'C' );
   }
   else
   {
     icon = IconManager::instance().icon( "red-ball.png" );
-    status_tip = tr( "Not Completed" );
+    status_tip = tr( "Not completed" );
     sort_string.prepend( 'B' );
   }
 
@@ -158,7 +158,7 @@ QTreeWidgetItem* GuiTransferFile::findItem( VNumber peer_id )
       return *it;
     ++it;
   }
-  return 0;
+  return Q_NULLPTR;
 }
 
 void GuiTransferFile::showProgress( QTreeWidgetItem* item, const FileInfo& fi, FileSizeType bytes, int elapsed_time )

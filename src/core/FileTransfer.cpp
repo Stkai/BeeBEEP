@@ -65,9 +65,21 @@ void FileTransfer::stopListener()
   {
     close();
     qDebug() << "File Transfer server closed";
+    int file_transfers_paused = 0;
 
     foreach( FileTransferPeer* transfer_peer, m_peers )
-      transfer_peer->cancelTransfer();
+    {
+      if( Settings::instance().resumeFileTransfer() )
+      {
+        file_transfers_paused++;
+        transfer_peer->pauseTransfer();
+      }
+      else
+        transfer_peer->cancelTransfer();
+    }
+
+    if( file_transfers_paused > 0 )
+      qDebug() << file_transfers_paused << "file transfers paused";
     m_peers.clear();
     m_files.clear();
   }
@@ -309,9 +321,9 @@ void FileTransfer::checkUploadRequest( const FileInfo& file_info_to_check )
   }
 
   if( Settings::instance().resumeFileTransfer() )
-    file_info.setFilePosition( file_info_to_check.filePosition() );
+    file_info.setStartingPosition( file_info_to_check.startingPosition() );
   else
-    file_info.setFilePosition( 0 );
+    file_info.setStartingPosition( 0 );
   upload_peer->startUpload( file_info );
 }
 

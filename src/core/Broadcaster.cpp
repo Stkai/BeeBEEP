@@ -233,11 +233,15 @@ bool Broadcaster::contactNetworkAddress( const NetworkAddress& na )
     QByteArray broadcast_data = Protocol::instance().broadcastMessage( na.hostAddress() );
     if( mp_senderSocket->writeDatagram( broadcast_data, na.hostAddress(), static_cast<quint16>(Settings::instance().defaultBroadcastPort()) ) > 0 )
     {
+#ifdef BEEBEEP_DEBUG
       qDebug() << "Broadcaster sends datagram to" << qPrintable( na.hostAddress().toString() ) << Settings::instance().defaultBroadcastPort();
+#endif
       if( na.hostAddress() == NetworkManager::instance().localBroadcastAddress() )
       {
         m_networkAddressesWaitingForLoopback.append( QPair<NetworkAddress,QDateTime>( na, QDateTime::currentDateTime() ) );
+#ifdef BEEBEEP_DEBUG
         qDebug() << "Waiting for loopback datagram from" << qPrintable( na.hostAddress().toString() );
+#endif
       }
       return true;
     }
@@ -264,6 +268,11 @@ void Broadcaster::checkLoopbackDatagram()
 #endif
     {
       qWarning() << "Broadcaster didn't received yet a loopback datagram from" << qPrintable( it->first.toString() );
+      if( !m_multicastGroupAddress.isNull() && it->first.hostAddress() == m_multicastGroupAddress && !Settings::instance().broadcastToLocalSubnetAlways() )
+      {
+        qDebug() << "Broadcaster also tries to send to datagram to local address" << qPrintable( NetworkManager::instance().localBroadcastAddress().toString() );
+        addHostAddress( NetworkManager::instance().localBroadcastAddress() );
+      }
       it = m_networkAddressesWaitingForLoopback.erase( it );
     }
     else
@@ -391,12 +400,13 @@ int Broadcaster::updateUsersFromHive()
   return hive_users_to_contact;
 }
 
-void Broadcaster::updateAddresses()
+QList<NetworkAddress> Broadcaster::updateAddressesToSearchUsers()
 {
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Broadcaster updates the network addresses to search users";
 #endif
 
+  QList<NetworkAddress> network_address_list;
   m_networkAddressesWaitingForLoopback.clear();
   m_networkAddresses.clear();
 
@@ -404,11 +414,9 @@ void Broadcaster::updateAddresses()
   {
     if( m_multicastGroupAddress.isNull() )
       qWarning() << "Multicast only option enabled but the multicast group address is empty";
-#ifdef BEEBEEP_DEBUG
     else
       qDebug() << "Multicast only to" << qPrintable( m_multicastGroupAddress.toString() ) << "(option in RC enabled)";
-#endif
-    return;
+    return network_address_list;
   }
 
   foreach( QString s_address, Settings::instance().broadcastAddressesInFileHosts() )
@@ -416,10 +424,13 @@ void Broadcaster::updateAddresses()
     NetworkAddress na = NetworkAddress::fromString( s_address );
     if( na.isHostAddressValid() )
     {
+      if( !na.isHostPortValid() )
+        na.setHostPort( static_cast<quint16>( Settings::instance().defaultBroadcastPort() ) );
 #ifdef BEEBEEP_DEBUG
       qDebug() << "Network address saved in file hosts added:" << qPrintable( na.toString() );
 #endif
       addNetworkAddress( na, true );
+      network_address_list.append( na );
     }
     else
       qWarning() << "Broadcaster has found error in network address saved in file hosts:" << qPrintable( na.toString() );
@@ -434,13 +445,14 @@ void Broadcaster::updateAddresses()
     else
       qDebug() << "Broadcast only to hosts in INI file option enabled";
 #endif
-    return;
+    return network_address_list;
   }
 
   if( !m_isMulticastDatagramSent || Settings::instance().broadcastToLocalSubnetAlways() )
   {
     addHostAddress( NetworkManager::instance().localBroadcastAddress() );
     m_isMulticastDatagramSent = false;
+    network_address_list.append( NetworkAddress( NetworkManager::instance().localBroadcastAddress(), static_cast<quint16>( Settings::instance().defaultBroadcastPort() ) ) );
   }
 
   foreach( QHostAddress ha, NetworkManager::instance().localBroadcastAddresses() )
@@ -448,6 +460,7 @@ void Broadcaster::updateAddresses()
     if( ha != NetworkManager::instance().localBroadcastAddress() )
     {
       addHostAddress( ha );
+      network_address_list.append( NetworkAddress( ha, static_cast<quint16>( Settings::instance().defaultBroadcastPort() ) ) );
 #ifdef BEEBEEP_DEBUG
       qDebug() << "Broadcaster adds this address from local network:" << qPrintable( ha.toString() );
 #endif
@@ -464,25 +477,15 @@ void Broadcaster::updateAddresses()
     foreach( User u, UserManager::instance().userList().toList() )
     {
       if( !u.isStatusConnected() && addNetworkAddress( u.networkAddress(), false ) )
+      {
+        network_address_list.append( u.networkAddress() );
         offline_users_to_add++;
+      }
     }
   }
 
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Broadcaster adds" << offline_users_to_add << "offline users to network addresses";
-#endif
-
-#ifdef BEEBEEP_DEBUG
-  if( !m_networkAddresses.isEmpty() )
-  {
-    QStringList sl;
-    foreach( NetworkAddress na, m_networkAddresses )
-      sl << na.toString();
-    qDebug() << "Broadcaster is contacting the followings addresses:" << qPrintable( sl.join( ", " ) );
-  }
-#endif
-  qDebug() << "Broadcaster will contact" << m_networkAddresses.size() << "network addresses and" << offline_users_to_add << "offline users";
-
+  qDebug() << "Broadcaster will contact" << network_address_list.size() << "network addresses with" << m_networkAddresses.size() << "hosts and with" << offline_users_to_add << "offline users";
+  return network_address_list;
 }
 
 void Broadcaster::onTickEvent( int )
@@ -510,7 +513,14 @@ void Broadcaster::onTickEvent( int )
   {
     if( m_newBroadcastRequested )
     {
-      updateAddresses();
+      QList<NetworkAddress> network_addresses = updateAddressesToSearchUsers();
+      if( !network_addresses.isEmpty() )
+      {
+        QStringList sl_log_network_addresses;
+        foreach( NetworkAddress na, network_addresses )
+          sl_log_network_addresses.append( na.toString() );
+        qDebug() << "Searching users in these addresses:" << qPrintable( sl_log_network_addresses.join( ", " ) );
+      }
       m_newBroadcastRequested = false;
     }
   }
@@ -527,7 +537,7 @@ void Broadcaster::sendMulticastDatagram()
     {
       qDebug() << "Broadcaster sends multicast datagram to" << qPrintable( m_multicastGroupAddress.toString() ) << Settings::instance().defaultBroadcastPort();
       m_isMulticastDatagramSent = true;
-      m_networkAddressesWaitingForLoopback.append( QPair<NetworkAddress, QDateTime>( NetworkAddress( m_multicastGroupAddress, Settings::instance().defaultBroadcastPort() ), QDateTime::currentDateTime() ) );
+      m_networkAddressesWaitingForLoopback.append( QPair<NetworkAddress, QDateTime>( NetworkAddress( m_multicastGroupAddress, static_cast<quint16>( Settings::instance().defaultBroadcastPort() ) ), QDateTime::currentDateTime() ) );
       qDebug() << "Waiting for loopback datagram from" << qPrintable( m_multicastGroupAddress.toString() );
     }
     else
@@ -547,5 +557,7 @@ void Broadcaster::contactNetworkAddresses()
     if( contacted_users >= Settings::instance().maxUsersToConnectInATick() )
       break;
   }
+#ifdef BEEBEEP_DEBUG
   qDebug() << "Broadcaster has contacted" << contacted_users << "network addresses";
+#endif
 }

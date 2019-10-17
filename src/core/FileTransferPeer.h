@@ -112,7 +112,7 @@ protected:
   FileInfo m_fileInfo;
   QFile m_file;
   TransferState m_state;
-  int m_bytesTransferred;
+  FileSizeType m_bytesTransferred;
   FileSizeType m_totalBytesTransferred;
   ConnectionSocket* mp_socket;
   qintptr m_socketDescriptor;

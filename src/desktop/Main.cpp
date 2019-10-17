@@ -110,7 +110,7 @@ int main( int argc, char *argv[] )
            << "and Qt" << QT_VERSION_STR;
 #if QT_VERSION >= 0x050600
   if( bee_app.testAttribute( Qt::AA_EnableHighDpiScaling ) )
-    qDebug( "High DPI scaling enabled" );
+    qDebug( "Icons: high DPI scaling enabled" );
 #endif
   Settings::instance().setDefaultFolders();
   Settings::instance().loadRcFile();

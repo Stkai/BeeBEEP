@@ -60,7 +60,7 @@ protected:
 
   bool addNetworkAddress( const NetworkAddress&, bool split_ipv4_address );
   inline bool addHostAddress( const QHostAddress& );
-  void updateAddresses();
+  QList<NetworkAddress> updateAddressesToSearchUsers();
 
   void checkLoopbackDatagram();
   void removeHostAddressFromWaitingList( const QHostAddress& );

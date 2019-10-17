@@ -97,6 +97,7 @@ AddNewLineAfterMessage=[true/false] add a blank line after a message displayed [
 ShowMessageTimestamp=[true/false] show message timestamp in the chat
 BeepOnNewMessageArrived=[true/false] sound a beep when new message arrived (only if sound works) and the chat is not visible or active
 DisableBeepInUserStatusBusy=[true/false] disable beep sound when user status is busy (default=false) [5.7.5]
+EnableBeepInActiveWindow=[true/false] enable beep sound also when the chat window is active (default=false) [5.7.7]
 BeepAlwaysOnNewMessageArrived=[true/false] always sound a beep when new message arrived (only if sound works) [obsolete in 5.0.0]
 UseHtmlTags=[true/false] if enabled BeeBEEP doesn't parse tags html. Useful if you have to copy and paste in chat some html code
 UseClickableLinks=[true/false] enable link in chat message. So link clicked where opened by OS

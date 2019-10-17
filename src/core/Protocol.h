@@ -83,7 +83,7 @@ public:
   int datastreamVersion( const Message& ) const;
   QString publicKey( const Message& ) const;
   QByteArray createCipherKey( const QString&, const QString&, int ) const;
-  QByteArray bytesArrivedConfirmation( int ) const;
+  QByteArray bytesArrivedConfirmation( FileSizeType ) const;
   Message createFolderMessage( const QString&, const QList<FileInfo>&, int server_port );
   QList<FileInfo> messageFolderToInfoList( const Message&, const QHostAddress&, QString* pFolderName = Q_NULLPTR ) const;
   Message folderRefusedToMessage( const QString&, const QString& );

@@ -29,7 +29,7 @@ FileInfo::FileInfo()
     m_size( 0 ), m_shareFolder( "" ), m_isFolder( false ), m_networkAddress(),
     m_password( "" ), m_id( ID_INVALID ), m_fileHash(), m_lastModified(),
     m_isInShareBox( false ), m_chatPrivateId( "" ), m_mimeType( "" ),
-    m_contentType( File ), m_filePosition( 0 )
+    m_contentType( File ), m_startingPosition( 0 )
 {
 }
 
@@ -38,7 +38,7 @@ FileInfo::FileInfo( VNumber id, FileInfo::TransferType tt )
     m_size( 0 ), m_shareFolder( "" ), m_isFolder( false ), m_networkAddress(),
     m_password( "" ), m_id( id ), m_fileHash(), m_lastModified(),
     m_isInShareBox( false ), m_chatPrivateId( "" ), m_mimeType( "" ),
-    m_contentType( File ), m_filePosition( 0 )
+    m_contentType( File ), m_startingPosition( 0 )
 {
 }
 
@@ -62,7 +62,7 @@ FileInfo& FileInfo::operator=( const FileInfo& fi )
     m_chatPrivateId = fi.m_chatPrivateId;
     m_mimeType = fi.m_mimeType;
     m_contentType = fi.m_contentType;
-    m_filePosition = fi.m_filePosition;
+    m_startingPosition = fi.m_startingPosition;
   }
   return *this;
 }

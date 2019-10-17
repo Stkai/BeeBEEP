@@ -3,8 +3,6 @@
 //
 // Author: Marco Mastroddi (marco.mastroddi(AT)gmail.com)
 //
-// Latest version: http://sourceforge.net/p/beebeep/code/HEAD/tree/BEEBEEP-FAQ.txt
-//
 // $Id$
 //
 
@@ -17,5 +15,5 @@ or
 https://www.beebeep.net/support
 
 Other pages:
-https://www.bebeeep.net/activity
-
+https://www.beebeep.net/news
+https://www.beebeep.net/tips

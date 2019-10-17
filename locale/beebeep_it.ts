@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -108,11 +108,11 @@
     </message>
     <message>
         <source>%1 %2 has refused to download %3.</source>
-        <translation type="vanished">%1 %2 ha rifiutato di scaricare %3.</translation>
+        <translation type="obsolete">%1 %2 ha rifiutato di scaricare %3.</translation>
     </message>
     <message>
         <source>%1 %2 is sending to you the file: %3.</source>
-        <translation type="vanished">%1 %2 ti sta inviando il seguente file: %3.</translation>
+        <translation type="obsolete">%1 %2 ti sta inviando il seguente file: %3.</translation>
     </message>
     <message>
         <source>You have changed your nickname from %1 to %2.</source>
@@ -600,11 +600,11 @@
     </message>
     <message>
         <source>The file will be delivered to %1.</source>
-        <translation type="vanished">Il file sarà inviato a %1.</translation>
+        <translation type="obsolete">Il file sarà inviato a %1.</translation>
     </message>
     <message>
         <source>%1 %2 is sending to you the voice message: %3.</source>
-        <translation type="vanished">%1 %2 ti sta inviando il messaggio vocale: %3.</translation>
+        <translation type="obsolete">%1 %2 ti sta inviando il messaggio vocale: %3.</translation>
     </message>
     <message>
         <source>%1 %2 has refused to download the file: %3</source>
@@ -620,7 +620,7 @@
     </message>
     <message>
         <source>End-to-end encryption disabled</source>
-        <translation type="vanished">La crittografia nelle connessioni è stata disabilitata</translation>
+        <translation type="obsolete">La crittografia nelle connessioni è stata disabilitata</translation>
     </message>
     <message>
         <source>End-to-end encryption is disabled</source>
@@ -640,7 +640,7 @@
     </message>
     <message>
         <source>Connection with %1 has end-to-end encryption disabled</source>
-        <translation type="vanished">La connessione con %1 ha la crittografia disabilitata</translation>
+        <translation type="obsolete">La connessione con %1 ha la crittografia disabilitata</translation>
     </message>
     <message>
         <source>%1 has end-to-end encryption disabled</source>
@@ -738,6 +738,18 @@
     <message>
         <source>Unable to write in the file %1</source>
         <translation>Impossibile scrivere sul file %1</translation>
+    </message>
+    <message>
+        <source>Transfer paused</source>
+        <translation>Trasferimento in pausa</translation>
+    </message>
+    <message>
+        <source>file no longer exists</source>
+        <translation>il file non esiste più</translation>
+    </message>
+    <message>
+        <source>Unable to seek %1 bytes in file %2</source>
+        <translation>Impossibile partire dalla posizione %1 nel file %2</translation>
     </message>
 </context>
 <context>
@@ -3252,7 +3264,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Close window on sending message</source>
-        <translation type="vanished">Chiudi la finestra dopo l&apos;invio del messaggio</translation>
+        <translation type="obsolete">Chiudi la finestra dopo l&apos;invio del messaggio</translation>
     </message>
     <message>
         <source>On sending message</source>
@@ -3284,7 +3296,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Use voice player</source>
-        <translation type="vanished">Usa il lettore di messaggi vocali</translation>
+        <translation type="obsolete">Usa il lettore di messaggi vocali</translation>
     </message>
     <message>
         <source>Unable to open voice message %1</source>
@@ -3337,6 +3349,22 @@ Inserisci un nome differente.</translation>
     <message>
         <source>%1 updated</source>
         <translation>%1 aggiornato</translation>
+    </message>
+    <message>
+        <source>Resume file transfer</source>
+        <translation>Riprendi il trasferimento dei file</translation>
+    </message>
+    <message>
+        <source>when possible</source>
+        <translation>quando possibile</translation>
+    </message>
+    <message>
+        <source>Enable the BEEP alert also for active chat windows</source>
+        <translation type="obsolete">Abilita il BEEP di avviso anche per le finestre di chat attive</translation>
+    </message>
+    <message>
+        <source>Enable BEEP alert also for active chat windows</source>
+        <translation>Abilita il BEEP di avviso anche per le finestre di chat attive</translation>
     </message>
 </context>
 <context>
@@ -4662,11 +4690,11 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Cancel Transfer</source>
-        <translation>Trasferimento Interrotto</translation>
+        <translation type="obsolete">Trasferimento Interrotto</translation>
     </message>
     <message>
         <source>Not Completed</source>
-        <translation>Non Completato</translation>
+        <translation type="obsolete">Non Completato</translation>
     </message>
     <message>
         <source>Transfer completed</source>
@@ -4707,6 +4735,14 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Remove all completed transfers</source>
         <translation>Cancella tutti i trasferimenti completati</translation>
+    </message>
+    <message>
+        <source>Cancel transfer</source>
+        <translation>Annulla trasferimento</translation>
+    </message>
+    <message>
+        <source>Not completed</source>
+        <translation>Non completato</translation>
     </message>
 </context>
 <context>
@@ -4890,7 +4926,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Informations to display to other users</source>
-        <translation type="vanished">Informazioni da mostrare agli altri utenti</translation>
+        <translation type="obsolete">Informazioni da mostrare agli altri utenti</translation>
     </message>
     <message>
         <source>Regenerate your hash code...</source>
@@ -5368,11 +5404,11 @@ Inserisci un nome differente.</translation>
     <name>T</name>
     <message>
         <source>Record your voice message</source>
-        <translation type="vanished">Registra il tuo messaggio vocale</translation>
+        <translation type="obsolete">Registra il tuo messaggio vocale</translation>
     </message>
     <message>
         <source>Click to start recording your message</source>
-        <translation type="vanished">Fai clic per iniziare a registrare il tuo messaggio</translation>
+        <translation type="obsolete">Fai clic per iniziare a registrare il tuo messaggio</translation>
     </message>
 </context>
 <context>
