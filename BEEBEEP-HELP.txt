@@ -274,7 +274,7 @@ AutoSearchUsersWhenListIsEmpty=[true/false] if enabled BeeBEEP search for users 
 DisableSystemProxyForConnections=[true/false] if enabled BeeBEEP disable the proxy for local connections (default=false) [5.0.1]
 UseDefaultMulticastGroupAddress=[true/false] if enabled BeeBEEP joins the default multicast group address (default=true) [5.2.0]
 BroadcastToOfflineUsers=[true/false] if enabled BeeBEEP adds also offline users to broadcast list (default=false) [5.4.3]
-BroadcastToLocalSubnetAlways=[true/false] if enabled BeeBEEP always broadcast to local subnet (default=false) [5.7.5]
+BroadcastToLocalSubnet=[true/false] if enabled BeeBEEP always broadcast to local subnet (default=false) [5.7.5]
 IpMulticastTtl=[integer] multicast ttl option for IPv4 udp socket 1,2,4,8...255 (default=1) [5.6.0]
 
 [FileShare]

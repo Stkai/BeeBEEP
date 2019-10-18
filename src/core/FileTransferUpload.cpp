@@ -119,8 +119,16 @@ void FileTransferPeer::sendFileHeader()
 
 void FileTransferPeer::checkUploading( const QByteArray& byte_array )
 {
-  int bytes_to_check = byte_array.simplified().toInt();
-  if( bytes_to_check == m_bytesTransferred )
+  FileSizeType bytes_arrived = 0;
+  FileSizeType total_bytes = 0;
+  bool pause_transfer = false;
+  if( !Protocol::instance().parseFileTransferBytesArrivedConfirmation( mp_socket->protoVersion(), byte_array, &bytes_arrived, &total_bytes, &pause_transfer ) )
+  {
+    setError( tr( "remote host sent invalid data" ) );
+    return;
+  }
+
+  if( bytes_arrived == m_bytesTransferred )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << qPrintable( name() ) << "receives corfirmation for" << m_bytesTransferred << "bytes";
@@ -133,11 +141,13 @@ void FileTransferPeer::checkUploading( const QByteArray& byte_array )
       setError( tr( "%1 bytes uploaded but the file size is only %2 bytes" ).arg( m_totalBytesTransferred ).arg( m_fileInfo.size() ) );
     else if( m_totalBytesTransferred == m_fileInfo.size() )
       setTransferCompleted();
+    else if( pause_transfer )
+      setTransferPaused();
     else
       sendTransferData();
   }
   else
-    setError( tr( "%1 bytes sent not confirmed (%2 bytes confirmed)").arg( m_bytesTransferred ).arg( bytes_to_check ) );
+    setError( tr( "%1 bytes sent not confirmed (%2 bytes confirmed)").arg( m_bytesTransferred ).arg( bytes_arrived ) );
 }
 
 void FileTransferPeer::sendUploadData()

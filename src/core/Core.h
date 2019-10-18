@@ -172,6 +172,7 @@ signals:
   void fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType, int );
   void fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& );
   void fileTransferCompleted( VNumber, const User&, const FileInfo& );
+  void fileTransferPaused( VNumber, const User&, const FileInfo& );
   void fileShareAvailable( const User& );
   void localShareListAvailable();
   void savedChatListAvailable();
@@ -224,6 +225,7 @@ protected slots:
   void addFolderToFileTransfer();
   void sendShareBoxList();
   void onFileTransferCompleted( VNumber, VNumber, const FileInfo& );
+  void onFileTransferPaused( VNumber, VNumber, const FileInfo& );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   void onShareDesktopImageAvailable( const ShareDesktopData& );
 #endif

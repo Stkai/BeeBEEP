@@ -71,7 +71,9 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
     name_txt = QString( "<font color=""%1"">%2</font> %3 " ).arg( u.color(), u.vCard().fullName(), tr( "is" ) );
   name_txt += QString( "<font color=""%1""><b>%2</b></font>" ).arg( u.color(), Bee::replaceHtmlSpecialCharacters( u.name() ) );
   if( !u.localHostName().isEmpty() )
-    name_txt.append( QString( " %1" ).arg( tr( "from %1" ).arg( u.localHostName() ) ) );
+    name_txt.append( QString( " %1" ).arg( tr( "from %1" ).arg( u.localHostName().toLower() ) ) );
+  if( !u.domainName().isEmpty() )
+    name_txt.append( QString( ".%1" ).arg( u.domainName().toLower() ) );
   mp_lName->setText( name_txt );
 
   mp_lStatusDescription->setText( u.statusDescription().isEmpty() ? QString( "" ) : QString( "<i>%1</i>" ).arg( Bee::replaceHtmlSpecialCharacters( u.statusDescription() ) ) );

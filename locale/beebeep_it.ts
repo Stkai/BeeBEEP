@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -750,6 +750,10 @@
     <message>
         <source>Unable to seek %1 bytes in file %2</source>
         <translation>Impossibile partire dalla posizione %1 nel file %2</translation>
+    </message>
+    <message>
+        <source>remote host sent invalid data</source>
+        <translation>l&apos;host remoto ha inviato dati non validi</translation>
     </message>
 </context>
 <context>
@@ -4595,6 +4599,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>All users</source>
         <translation>Tutti</translation>
+    </message>
+    <message>
+        <source>Transfer paused</source>
+        <translation>Trasferimento in pausa</translation>
     </message>
 </context>
 <context>

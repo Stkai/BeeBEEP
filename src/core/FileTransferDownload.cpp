@@ -69,8 +69,14 @@ void FileTransferPeer::sendDownloadDataConfirmation()
 #ifdef BEEBEEP_DEBUG
   qDebug() << qPrintable( name() ) << "sending confirmation for" << m_bytesTransferred << "bytes";
 #endif
-  if( !mp_socket->sendData( Protocol::instance().bytesArrivedConfirmation( m_bytesTransferred ) ) )
+  if( !mp_socket->sendData( Protocol::instance().fileTransferBytesArrivedConfirmation( mp_socket->protoVersion(), m_bytesTransferred, m_totalBytesTransferred, isTransferPaused() ) ) )
     cancelTransfer();
+
+  if( isTransferPaused() )
+  {
+    closeAll();
+    emit operationCompleted();
+  }
 }
 
 void FileTransferPeer::checkDownloadData( const QByteArray& byte_array )

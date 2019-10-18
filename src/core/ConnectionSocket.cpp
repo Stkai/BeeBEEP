@@ -554,8 +554,9 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
     else
       qWarning() << "Remote host" << qPrintable( m_networkAddress.toString() ) << "has not shared a public key to negotiate encryption";
   }
-
+#ifdef BEEBEEP_DEBUG
   qDebug() << "ConnectionSocket request an authentication for" << qPrintable( m_networkAddress.toString() );
+#endif
   emit authenticationRequested( array_data );
 }
 

@@ -108,20 +108,12 @@ void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )
   {
     if( hasConnection( sender_ip, -1 ) )
     {
-      qWarning() << qPrintable( sender_ip.toString() ) << "is already connected and blocked by prevent multiple connections";
-      return;
-    }
-  }
-  else
-  {
-    if( hasConnection( sender_ip, sender_port ) )
-    {
-      qDebug() << qPrintable( sender_ip.toString() ) << ":" << sender_port << "is already connected (or connecting)";
+      qDebug() << qPrintable( sender_ip.toString() ) << "is already connected and blocked by prevent multiple connections option";
       return;
     }
   }
 
-  NetworkAddress na( sender_ip, static_cast<quint16>(sender_port) );
+  NetworkAddress na( sender_ip, static_cast<quint16>( sender_port ) );
   if( isUserConnected( na ) )
   {
     User u = UserManager::instance().findUserByNetworkAddress( na );

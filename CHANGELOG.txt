@@ -22,7 +22,7 @@ BeeBEEP 5.7.7 (in development)
 - Added "DisableEncryptedConnections" option in beebeep.rc
 - Added "AllowNotEncryptedConnections" option in beebeep.rc (used with "DisableEncryptedConnections")
 - Added "AllowEncryptedConnectionsAlso" option in beebeep.rc (used with "DisableEncryptedConnections")
-- Added "BroadcastToLocalSubnetAlways" option to not send the HELLO message to the local subnet twice when multicasting is active
+- Added "BroadcastToLocalSubnet" option to send or not send the HELLO message to the local subnet twice when multicasting is active
 - User first and last names, email and phone number are now saved to use it also if the user is offline
 - Added "AppendHostNameToUserName" option in beebeep.rc
 

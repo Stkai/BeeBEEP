@@ -51,6 +51,16 @@ GuiEditVCard::GuiEditVCard( QWidget *parent )
   connect( mp_pbRegenerateHash, SIGNAL( clicked() ), this, SLOT( regenerateHash() ) );
 }
 
+QString GuiEditVCard::currentAvatarName() const
+{
+  QString current_avatar_name = "";
+  if( Settings::instance().useUserFullName() )
+    current_avatar_name = QString( "%1 %2" ).arg( mp_leFirstName->text().simplified() ).arg( mp_leLastName->text().simplified() ).trimmed();
+  else
+    current_avatar_name = mp_leNickname->text().simplified();
+  return current_avatar_name.isEmpty() ? QLatin1String( "??" ) : current_avatar_name;
+}
+
 void GuiEditVCard::setUserColor( const QString& new_value )
 {
   m_userColor = new_value;
@@ -60,8 +70,8 @@ void GuiEditVCard::setUserColor( const QString& new_value )
   mp_leNickname->setPalette( palette );
   palette.setColor( QPalette::Foreground, c );
   mp_lNickname->setPalette( palette );
-  if( m_vCard.photo().isNull() && mp_leNickname->text().trimmed().size() > 0 )
-    mp_lPhoto->setPixmap( Avatar::create( mp_leNickname->text(), m_userColor, QSize( 96, 96 ) ) );
+  if( m_vCard.photo().isNull() )
+    mp_lPhoto->setPixmap( Avatar::create( currentAvatarName(), m_userColor, QSize( 96, 96 ) ) );
 }
 
 void GuiEditVCard::setUser( const User& u )
@@ -98,7 +108,7 @@ void GuiEditVCard::loadVCard()
   mp_leEmail->setText( m_vCard.email() );
 
   if( m_vCard.photo().isNull() )
-    mp_lPhoto->setPixmap( Avatar::create( m_vCard.nickName(), m_userColor, QSize( 96, 96 ) ) );
+    mp_lPhoto->setPixmap( Avatar::create( currentAvatarName(), m_userColor, QSize( 96, 96 ) ) );
   else
     mp_lPhoto->setPixmap( m_vCard.photo() );
 
@@ -149,7 +159,7 @@ void GuiEditVCard::changePhoto()
 
 void GuiEditVCard::removePhoto()
 {
-  mp_lPhoto->setPixmap( Avatar::create( m_vCard.nickName(), m_userColor, QSize( 96, 96 ) ) );
+  mp_lPhoto->setPixmap( Avatar::create( currentAvatarName(), m_userColor, QSize( 96, 96 ) ) );
   m_vCard.setPhoto( QPixmap() );
 }
 

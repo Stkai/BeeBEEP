@@ -47,6 +47,7 @@ protected:
   bool checkLineEdit( QLineEdit*, const QString& );
   bool checkData();
   void saveVCard();
+  QString currentAvatarName() const;
 
 private slots:
   void changePhoto();

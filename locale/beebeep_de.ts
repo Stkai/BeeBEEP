@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE" sourcelanguage="en">
+<TS version="2.1" language="de_DE" sourcelanguage="en">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -713,6 +713,10 @@
     </message>
     <message>
         <source>Unable to seek %1 bytes in file %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>remote host sent invalid data</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4385,6 +4389,10 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>All users</source>
         <translation>Alle Benutzer</translation>
+    </message>
+    <message>
+        <source>Transfer paused</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

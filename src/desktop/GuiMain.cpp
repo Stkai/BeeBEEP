@@ -140,6 +140,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( beeCore, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType, int ) ), this, SLOT( onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType, int ) ) );
   connect( beeCore, SIGNAL( fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& ) ), this, SLOT( onFileTransferMessage( VNumber, const User&, const FileInfo&, const QString& ) ) );
   connect( beeCore, SIGNAL( fileTransferCompleted( VNumber, const User&, const FileInfo& ) ), this, SLOT( onFileTransferCompleted( VNumber, const User&, const FileInfo& ) ) );
+  connect( beeCore, SIGNAL( fileTransferPaused( VNumber, const User&, const FileInfo& ) ), this, SLOT( onFileTransferPaused( VNumber, const User&, const FileInfo& ) ) );
   connect( beeCore, SIGNAL( fileShareAvailable( const User& ) ), this, SLOT( showSharesForUser( const User& ) ) );
   connect( beeCore, SIGNAL( chatChanged( const Chat& ) ), this, SLOT( onChatChanged( const Chat& ) ) );
   connect( beeCore, SIGNAL( chatRemoved( const Chat& ) ), this, SLOT( onChatRemoved( const Chat& ) ) );
@@ -4555,6 +4556,28 @@ void GuiMain::onFileTransferMessage( VNumber peer_id, const User& u, const FileI
 }
 
 void GuiMain::onFileTransferCompleted( VNumber peer_id, const User& u, const FileInfo& fi )
+{
+  Q_UNUSED( peer_id )
+  if( !fi.isDownload() )
+    return;
+
+  Chat c = ChatManager::instance().findChatByPrivateId( fi.chatPrivateId(), false, u.id() );
+  if( !c.isValid() )
+  {
+    qWarning() << "Unable to find chat by private id" << qPrintable( fi.chatPrivateId() ) << "for user" << qPrintable( u.name() ) << "in onFileTransferCompleted(...)";
+    return;
+  }
+
+  if( Settings::instance().showFileTransferCompletedOnTray() )
+    mp_trayIcon->showNewFileArrived( c.id(), tr( "New file from %1" ).arg( u.name() ), false );
+
+  GuiFloatingChat* fl_chat = floatingChat( c.id() );
+  if( fl_chat && fl_chat->isActiveWindow() )
+    return;
+  onChatChanged( c );
+}
+
+void GuiMain::onFileTransferPaused( VNumber peer_id, const User& u, const FileInfo& fi )
 {
   Q_UNUSED( peer_id )
   if( !fi.isDownload() )

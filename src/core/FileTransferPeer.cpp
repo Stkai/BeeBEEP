@@ -183,6 +183,19 @@ void FileTransferPeer::setTransferCompleted()
   emit operationCompleted();
 }
 
+void FileTransferPeer::setTransferPaused()
+{
+  qDebug() << qPrintable( name() ) << "has paused the transfer of file" << qPrintable( m_fileInfo.name() ) << "with user id" << remoteUserId();
+  m_state = FileTransferPeer::Paused;
+  emit message( id(), remoteUserId(), m_fileInfo, tr( "Transfer paused" ) );
+  emit paused( id(), remoteUserId(), m_fileInfo );
+  if( !isDownload() )
+  {
+    closeAll();
+    emit operationCompleted();
+  }
+}
+
 void FileTransferPeer::socketError( QAbstractSocket::SocketError )
 {
   // Make a check to remove the error after a transfer completed

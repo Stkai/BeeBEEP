@@ -177,7 +177,7 @@ Settings::Settings()
   m_tickIntervalCheckNetwork = 5;
   m_tickIntervalBroadcasting = 0;
   m_broadcastToOfflineUsers = false;
-  m_broadcastToLocalSubnetAlways = false;
+  m_broadcastToLocalSubnetAlways = true;
 
   m_chatMessageFilter = QBitArray( static_cast<int>(ChatMessage::NumTypes) );
   for( int i = 0; i < ChatMessage::NumTypes; i++ )
@@ -418,7 +418,7 @@ void Settings::createLocalUser( const QString& user_name )
   m_localUser.setProtocolVersion( protoVersion() );
   m_localUser.setDomainName( QHostInfo::localDomainName() );
   m_localUser.setHash( Settings::instance().createLocalUserHash() );
-  m_localUser.setLocalHostName( QHostInfo::localHostName().toUpper() );
+  m_localUser.setLocalHostName( QHostInfo::localHostName() );
 
   qDebug() << "User name:" << qPrintable( m_localUser.name() );
   qDebug() << "System account:" << qPrintable( m_localUser.accountName() );
@@ -1411,7 +1411,7 @@ void Settings::load()
   m_disableSystemProxyForConnections = sets->value( "DisableSystemProxyForConnections", m_disableSystemProxyForConnections ).toBool();
   m_useDefaultMulticastGroupAddress = sets->value( "UseDefaultMulticastGroupAddress", m_useDefaultMulticastGroupAddress ).toBool();
   m_broadcastToOfflineUsers = sets->value( "BroadcastToOfflineUsers", m_broadcastToOfflineUsers ).toBool();
-  m_broadcastToLocalSubnetAlways = sets->value( "BroadcastToLocalSubnetAlways", m_broadcastToLocalSubnetAlways ).toBool();
+  m_broadcastToLocalSubnetAlways = sets->value( "BroadcastToLocalSubnet", m_broadcastToLocalSubnetAlways ).toBool();
   m_ipMulticastTtl = sets->value( "IpMulticastTtl", m_ipMulticastTtl ).toInt();
   sets->endGroup();
   loadBroadcastAddressesFromFileHosts();
@@ -1777,7 +1777,7 @@ void Settings::save()
   sets->setValue( "DisableSystemProxyForConnections", m_disableSystemProxyForConnections );
   sets->setValue( "UseDefaultMulticastGroupAddress", m_useDefaultMulticastGroupAddress );
   sets->setValue( "BroadcastToOfflineUsers", m_broadcastToOfflineUsers );
-  sets->setValue( "BroadcastToLocalSubnetAlways", m_broadcastToLocalSubnetAlways );
+  sets->setValue( "BroadcastToLocalSubnet", m_broadcastToLocalSubnetAlways );
   sets->setValue( "IpMulticastTtl", m_ipMulticastTtl );
   sets->endGroup();
   sets->beginGroup( "FileShare" );

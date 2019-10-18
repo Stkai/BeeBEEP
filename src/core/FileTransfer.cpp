@@ -367,10 +367,13 @@ void FileTransfer::deletePeer()
 
   FileTransferPeer* sender_peer = dynamic_cast<FileTransferPeer*>( sender() );
 
-  if( m_peers.removeOne( sender_peer ) )
+  if( !sender_peer->isTransferPaused() )
   {
-    qDebug() << "Removed peer from list." << m_peers.size() << "peers remained";
-    sender_peer->deleteLater();
+    if( m_peers.removeOne( sender_peer ) )
+    {
+      qDebug() << "Removed peer from list." << m_peers.size() << "peers remained";
+      sender_peer->deleteLater();
+    }
   }
 
   if( isListening() && downloadsInQueue() > 0 )

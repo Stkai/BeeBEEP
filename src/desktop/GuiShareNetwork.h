@@ -52,6 +52,7 @@ public slots:
   void showMessage( VNumber, VNumber, const QString& );
   void onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType, int );
   void onFileTransferCompleted( VNumber, const User&, const FileInfo& );
+  void onFileTransferPaused( VNumber, const User&, const FileInfo& );
   void reloadList();
 
 protected slots:

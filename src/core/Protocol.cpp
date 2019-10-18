@@ -1995,12 +1995,63 @@ QString Protocol::newMd5Id()
   return Settings::instance().simpleHash( sl.join( QString::number( Random::d100() ) ) );
 }
 
-QByteArray Protocol::bytesArrivedConfirmation( FileSizeType num_bytes ) const
+QByteArray Protocol::fileTransferBytesArrivedConfirmation( int proto_version, FileSizeType bytes_arrived_size, FileSizeType total_bytes_arrived_size, bool pause_transfer ) const
 {
-  QByteArray byte_array = QByteArray::number( num_bytes );
-  while( byte_array.size() % ENCRYPTED_DATA_BLOCK_SIZE )
-    byte_array.prepend( '0' );
+  QByteArray byte_array;
+  if( proto_version < FILE_TRANSFER_RESUME_PROTO_VERSION )
+  {
+    byte_array = QByteArray::number( bytes_arrived_size );
+    while( byte_array.size() % ENCRYPTED_DATA_BLOCK_SIZE )
+      byte_array.prepend( '0' );
+  }
+  else
+  {
+    QStringList sl;
+    sl << QString::number( bytes_arrived_size );
+    sl << QString::number( total_bytes_arrived_size );
+    if( pause_transfer )
+      sl << QLatin1String( "2" );
+    else
+      sl << QLatin1String( "1" );
+    sl << QLatin1String( " " ); // end of message
+    byte_array = sl.join( DATA_FIELD_SEPARATOR ).toUtf8();
+    while( byte_array.size() % ENCRYPTED_DATA_BLOCK_SIZE )
+      byte_array.append( '0' );
+  }
   return byte_array;
+}
+
+bool Protocol::parseFileTransferBytesArrivedConfirmation( int proto_version, const QByteArray& bytes_arrived, FileSizeType* bytes_arrived_size, FileSizeType* total_bytes_arrived_size, bool* pause_transfer ) const
+{
+  bool ok = false;
+  if( proto_version < FILE_TRANSFER_RESUME_PROTO_VERSION )
+  {
+    *bytes_arrived_size = bytes_arrived.simplified().toInt( &ok );
+    *total_bytes_arrived_size = -1;
+    *pause_transfer = false;
+    return ok;
+  }
+  else
+  {
+    QByteArray bytes_to_parse = bytes_arrived;
+    while( bytes_to_parse.endsWith( '0' ) )
+      bytes_to_parse.chop( 1 );
+    QStringList sl_data = QString::fromUtf8( bytes_arrived.trimmed() ).split( DATA_FIELD_SEPARATOR );
+    if( sl_data.size() < 3 )
+      return false;
+    *bytes_arrived_size = Bee::qVariantToFileSizeType( sl_data.takeFirst(), &ok );
+    if( !ok )
+      return false;
+    *total_bytes_arrived_size = Bee::qVariantToFileSizeType( sl_data.takeFirst(), &ok );
+    if( !ok )
+      *total_bytes_arrived_size = -1;
+    int cmd_id = sl_data.takeFirst().toInt( &ok );
+    if( !ok )
+      *pause_transfer = false;
+    else
+      *pause_transfer = cmd_id == 2;
+    return true;
+  }
 }
 
 Message Protocol::userRecordListToHiveMessage( const QList<UserRecord>& user_record_list )

@@ -41,8 +41,8 @@ namespace Bee
   QString userStatusToString( int );
   QString userBirthdayToText( const User& );
   QString userNameToShow( const User& );
-  inline VNumber qVariantToVNumber( const QVariant& );
-  inline FileSizeType qVariantToFileSizeType( const QVariant& );
+  inline VNumber qVariantToVNumber( const QVariant&, bool *ok = Q_NULLPTR );
+  inline FileSizeType qVariantToFileSizeType( const QVariant&, bool *ok = Q_NULLPTR );
   QString uniqueFilePath( const QString&, bool add_date_time );
   QString suffixFromFile( const QString& );
   FileType fileTypeFromSuffix( const QString& );
@@ -103,8 +103,8 @@ namespace Bee
 
 // Inline Functions
 inline QIcon Bee::userStatusIcon( int user_status ) { return QIcon( userStatusIconFileName( user_status ) ); }
-inline VNumber Bee::qVariantToVNumber( const QVariant& v ) { return v.toULongLong(); }
-inline FileSizeType Bee::qVariantToFileSizeType( const QVariant& v ) { return v.toULongLong(); }
+inline VNumber Bee::qVariantToVNumber( const QVariant& v, bool* ok ) { return v.toULongLong( ok ); }
+inline FileSizeType Bee::qVariantToFileSizeType( const QVariant& v, bool* ok ) { return v.toLongLong( ok ); }
 inline int Bee::toLittleEndianFromBig( int big_endian_int ) { return static_cast<int>(0 | ((big_endian_int & 0x00ff) << 8) | ((big_endian_int & 0xff00) >> 8)); }
 inline bool Bee::isTimeToCheck( int ticks, int tick_for_check ) { return ticks % tick_for_check == 0; }
 

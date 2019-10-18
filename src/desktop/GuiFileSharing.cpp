@@ -66,6 +66,7 @@ GuiFileSharing::GuiFileSharing( QWidget *parent )
   connect( beeCore, SIGNAL( shareBoxUploadCompleted( VNumber, const FileInfo& ) ), mp_shareBox, SLOT( onFileUploadCompleted( VNumber, const FileInfo& ) ) );
   connect( beeCore, SIGNAL( fileTransferCompleted( VNumber, const User&, const FileInfo& ) ), this, SLOT( onFileTransferCompleted( VNumber, const User&, const FileInfo& ) ) );
   connect( beeCore, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType, int ) ), this, SLOT( onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType, int ) ) );
+  connect( beeCore, SIGNAL( fileTransferPaused( VNumber, const User&, const FileInfo& ) ), this, SLOT( onFileTransferPaused( VNumber, const User&, const FileInfo& ) ) );
 
   connect( mp_shareLocal, SIGNAL( sharePathAdded( const QString& ) ), this, SLOT( addToShare( const QString& ) ) );
   connect( mp_shareLocal, SIGNAL( sharePathRemoved( const QString& ) ), this, SLOT( removeFromShare( const QString& ) ) );
@@ -329,4 +330,9 @@ void GuiFileSharing::onFileTransferProgress( VNumber peer_id, const User& u, con
 void GuiFileSharing::onFileTransferCompleted( VNumber peer_id, const User& u, const FileInfo& file_info )
 {
   mp_shareNetwork->onFileTransferCompleted( peer_id, u, file_info );
+}
+
+void GuiFileSharing::onFileTransferPaused( VNumber peer_id, const User& u, const FileInfo& file_info )
+{
+  mp_shareNetwork->onFileTransferPaused( peer_id, u, file_info );
 }

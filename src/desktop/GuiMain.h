@@ -187,6 +187,7 @@ private slots:
   void onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType, int );
   void onFileTransferMessage( VNumber, const User&, const FileInfo&, const QString& );
   void onFileTransferCompleted( VNumber, const User&, const FileInfo& );
+  void onFileTransferPaused( VNumber, const User&, const FileInfo& );
   void sendBuzzToUser( VNumber );
   void showBuzzFromUser( const User& );
   void removeFloatingChatFromList( VNumber );

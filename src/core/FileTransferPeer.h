@@ -68,6 +68,7 @@ signals:
   void message( VNumber peer_id, VNumber user_id, const FileInfo&, const QString& );
   void progress( VNumber peer_id, VNumber user_id, const FileInfo&, FileSizeType, int );
   void completed( VNumber peer_id, VNumber user_id, const FileInfo& );
+  void paused( VNumber peer_id, VNumber user_id, const FileInfo& );
   void fileUploadRequest( const FileInfo& );
   void userValidationRequested( VNumber peer_id, VNumber user_id );
   void operationCompleted();
@@ -91,6 +92,7 @@ protected:
   void closeAll();
   void sendTransferData();
   void computeElapsedTime();
+  void setTransferPaused();
 
   /* FileTransferUpload */
   void sendUploadData();

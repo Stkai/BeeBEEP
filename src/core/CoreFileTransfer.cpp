@@ -845,3 +845,19 @@ void Core::onFileTransferCompleted( VNumber peer_id, VNumber user_id, const File
   else
     emit fileTransferCompleted( peer_id, u, fi );
 }
+
+void Core::onFileTransferPaused( VNumber peer_id, VNumber user_id, const FileInfo& fi )
+{
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Transfer paused of file" << qPrintable( QDir::toNativeSeparators( fi.path() ) ) << "and send signals";
+#endif
+
+  User u = UserManager::instance().findUser( user_id );
+  if( !u.isValid() )
+  {
+    qWarning() << "Invalid user" << user_id << "found on file transfer paused";
+    return;
+  }
+
+  emit fileTransferPaused( peer_id, u, fi );
+}
