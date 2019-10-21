@@ -343,6 +343,14 @@ QString Bee::capitalizeFirstLetter( const QString& txt, bool all_chars_after_spa
   return capitalized;
 }
 
+QString Bee::lowerFirstLetter( const QString& txt )
+{
+  if( !txt.isEmpty() && txt.at( 0 ).isUpper() )
+    return txt.at( 0 ).toLower() + txt.mid( 1 );
+  else
+    return txt;
+}
+
 QColor Bee::invertColor( const QColor& c )
 {
   int r, g, b;
@@ -352,8 +360,8 @@ QColor Bee::invertColor( const QColor& c )
   int i_b = 255 - b;
 
   int s_r = r - i_r;
-  int s_g = r - i_g;
-  int s_b = r - i_b;
+  int s_g = g - i_g;
+  int s_b = b - i_b;
 
   if( qAbs( s_r ) < 30 && qAbs( s_g ) < 30 && qAbs( s_b ) < 30 ) // gray on gray
     return QColor( 0, 0, 0 );

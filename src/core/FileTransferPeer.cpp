@@ -45,36 +45,6 @@ FileTransferPeer::FileTransferPeer( QObject *parent )
   connect( mp_socket, SIGNAL( abortRequest() ), this, SLOT( cancelTransfer() ) );
 }
 
-void FileTransferPeer::cancelTransfer()
-{
-  if( m_state == FileTransferPeer::Cancelled )
-    return;
-  if( m_state != FileTransferPeer::Completed && m_state != FileTransferPeer::Error )
-    m_state = FileTransferPeer::Cancelled;
-  qDebug() << qPrintable( name() ) << "cancels the file transfer";
-  if( mp_socket->isOpen() )
-    mp_socket->abortConnection();
-  closeAll();
-  if( m_fileInfo.isValid() && remoteUserId() != ID_INVALID )
-    emit message( id(), remoteUserId(), m_fileInfo, tr( "Transfer cancelled" ) );
-  emit operationCompleted();
-}
-
-void FileTransferPeer::pauseTransfer()
-{
-  if( m_state == FileTransferPeer::Paused )
-    return;
-  if( m_state != FileTransferPeer::Completed && m_state != FileTransferPeer::Error && m_state != FileTransferPeer::Cancelled )
-    m_state = FileTransferPeer::Paused;
-  qDebug() << qPrintable( name() ) << "cancels the file transfer";
-  if( mp_socket->isOpen() )
-    mp_socket->abortConnection();
-  closeAll();
-  if( m_fileInfo.isValid() && remoteUserId() != ID_INVALID )
-    emit message( id(), remoteUserId(), m_fileInfo, tr( "Transfer paused" ) );
-  emit operationCompleted();
-}
-
 void FileTransferPeer::closeAll()
 {
 #ifdef BEEBEEP_DEBUG
@@ -178,22 +148,47 @@ void FileTransferPeer::setTransferCompleted()
       qWarning() << qPrintable( name() ) << "cannot rename downloaded file" << qPrintable( m_file.fileName() ) << "to" << qPrintable( m_fileInfo.path() );
   }
 
-  emit message( id(), remoteUserId(), m_fileInfo, tr( "Transfer completed in %1" ).arg( Bee::timeToString( m_elapsedTime ) ) );
-  emit completed( id(), remoteUserId(), m_fileInfo );
+  emit message( id(), remoteUserId(), m_fileInfo, tr( "Transfer completed in %1" ).arg( Bee::timeToString( m_elapsedTime ) ), m_state );
   emit operationCompleted();
+}
+
+void FileTransferPeer::cancelTransfer()
+{
+  if( m_state == FileTransferPeer::Canceled )
+    return;
+  if( m_state != FileTransferPeer::Completed && m_state != FileTransferPeer::Error )
+    m_state = FileTransferPeer::Canceled;
+  qDebug() << qPrintable( name() ) << "cancels the file transfer";
+  if( mp_socket->isOpen() )
+    mp_socket->abortConnection();
+  closeAll();
+  if( m_fileInfo.isValid() && remoteUserId() != ID_INVALID )
+    emit message( id(), remoteUserId(), m_fileInfo, tr( "Transfer canceled" ), m_state );
+  emit operationCompleted();
+}
+
+void FileTransferPeer::pauseTransfer( bool close_connection )
+{
+  if( m_state == FileTransferPeer::Paused )
+    return;
+  if( m_state != FileTransferPeer::Completed && m_state != FileTransferPeer::Error && m_state != FileTransferPeer::Canceled )
+  {
+    qDebug() << qPrintable( name() ) << "pauses the file transfer";
+    if( close_connection )
+      setTransferPaused();
+    else
+      m_state = FileTransferPeer::Paused;
+  }
 }
 
 void FileTransferPeer::setTransferPaused()
 {
+  if( isTransferPaused() )
+    return;
   qDebug() << qPrintable( name() ) << "has paused the transfer of file" << qPrintable( m_fileInfo.name() ) << "with user id" << remoteUserId();
   m_state = FileTransferPeer::Paused;
-  emit message( id(), remoteUserId(), m_fileInfo, tr( "Transfer paused" ) );
-  emit paused( id(), remoteUserId(), m_fileInfo );
-  if( !isDownload() )
-  {
-    closeAll();
-    emit operationCompleted();
-  }
+  closeAll();
+  emit message( id(), remoteUserId(), m_fileInfo, tr( "Transfer paused after %1" ).arg( Bee::timeToString( m_elapsedTime ) ), m_state );
 }
 
 void FileTransferPeer::socketError( QAbstractSocket::SocketError )
@@ -209,7 +204,7 @@ void FileTransferPeer::setError( const QString& str_err )
   qWarning() << qPrintable( name() ) << "found an error when transfer file" << qPrintable( Bee::convertToNativeFolderSeparator( m_fileInfo.name() ) ) << ":" << str_err;
   closeAll();
   if( remoteUserId() != ID_INVALID && m_fileInfo.isValid() )
-    emit message( id(), remoteUserId(), m_fileInfo, str_err );
+    emit message( id(), remoteUserId(), m_fileInfo, str_err, m_state );
   operationCompleted();
 }
 
@@ -288,7 +283,19 @@ void FileTransferPeer::onTickEvent( int )
   if( m_state == FileTransferPeer::Transferring )
   {
     if( mp_socket->activityIdle() > Settings::instance().pongTimeout() )
-      setError( tr( "Transfer timeout" ) );
+    {
+      if( mp_socket->protoVersion() >= FILE_TRANSFER_RESUME_PROTO_VERSION && Settings::instance().resumeFileTransfer() )
+      {
+        pauseTransfer( false );
+        if( isDownload() )
+        {
+          m_bytesTransferred = 0;
+          sendDownloadDataConfirmation();
+        }
+      }
+      else
+        setError( tr( "Transfer timeout" ) );
+    }
   }
 }
 

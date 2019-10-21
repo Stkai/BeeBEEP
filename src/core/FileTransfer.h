@@ -26,8 +26,8 @@
 
 #include "Config.h"
 #include "FileInfo.h"
+#include "FileTransferPeer.h"
 #include "User.h"
-class FileTransferPeer;
 class Message;
 
 
@@ -50,25 +50,25 @@ public:
 
   void downloadFile( VNumber from_user_id, const FileInfo& );
   bool cancelTransfer( VNumber peer_id );
+  bool pauseTransfer( VNumber peer_id );
 
   void removeFilesToUser( VNumber user_id );
 
   inline void clearFiles();
 
-  FileTransferPeer* peer( VNumber ) const;
-
   void onTickEvent( int );
 
 signals:
-  void message( VNumber peer_id, VNumber user_id, const FileInfo&, const QString& );
+  void message( VNumber peer_id, VNumber user_id, const FileInfo&, const QString&, FileTransferPeer::TransferState );
   void progress( VNumber peer_id, VNumber user_id, const FileInfo&, FileSizeType, int );
-  void completed( VNumber peer_id, VNumber user_id, const FileInfo& );
   void listening();
 
 protected:
   void incomingConnection( qintptr );
   void resetServerFiles();
   int activeDownloads() const;
+
+  FileTransferPeer* peer( VNumber ) const;
 
   FileInfo fileInfo( VNumber ) const;
   FileInfo fileInfo( const QString& file_absolute_path, const QString chat_private_id ) const;

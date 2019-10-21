@@ -118,87 +118,83 @@ bool Core::downloadFile( VNumber user_id, const FileInfo& fi, bool show_message 
   return true;
 }
 
-void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const FileInfo& fi, const QString& msg )
+void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const FileInfo& fi, const QString& msg, FileTransferPeer::TransferState ft_state )
 {
   User u = UserManager::instance().findUser( user_id );
   if( !u.isValid() )
   {
-    qWarning() << "Unable to find user" << user_id << "for the file transfer" << qPrintable( fi.name() );
+    qWarning() << "Unable to find user" << user_id << "for the file transfer" << qPrintable( fi.name() ) << "in Core::checkFileTransferMessage(...)";
     return;
   }
 
   QString icon_html = IconManager::instance().toHtml( fi.isDownload() ? "download.png" : "upload.png", "*F*" );
   QString action_txt = fi.isDownload() ? tr( "Download" ) : tr( "Upload" );
-  QString sys_msg = QString( "%1 %2 %3 %4 %5: %6." ).arg( icon_html, action_txt, fi.name(), fi.isDownload() ? tr( "from") : tr( "to" ), Bee::userNameToShow( u ), msg );
+  QString sys_msg = QString( "%1 %2 %3 %4 %5: %6." ).arg( icon_html, action_txt, fi.name(), fi.isDownload() ? tr( "from") : tr( "to" ), Bee::userNameToShow( u ), Bee::lowerFirstLetter( msg ) );
   QString sys_msg_img_preview = "";
   QString sys_msg_open_file = "";
   QString sys_msg_play_voice_chat = "";
   QString chat_voice_msg_html = "";
   ChatMessage chat_voice_msg;
 
-  FileTransferPeer *peer = mp_fileTransfer->peer( peer_id );
-  if( peer )
+  if( ft_state == FileTransferPeer::Completed )
   {
-    if( peer->isTransferCompleted() )
+    if( fi.isDownload() )
+      FileShare::instance().addDownloadedFile( fi );
+    QUrl file_url = QUrl::fromLocalFile( fi.path() );
+    if( Bee::isFileTypeImage( fi.suffix() ) )
     {
-      if( fi.isDownload() )
-        FileShare::instance().addDownloadedFile( fi );
-      QUrl file_url = QUrl::fromLocalFile( fi.path() );
-      if( Bee::isFileTypeImage( fi.suffix() ) )
+      QImage img;
+      QImageReader img_reader( fi.path() );
+      img_reader.setAutoDetectImageFormat( true );
+      int img_preview_height = Settings::instance().imagePreviewHeight();
+      QString img_preview_path = fi.path();
+      if( img_reader.read( &img ) )
       {
-        QImage img;
-        QImageReader img_reader( fi.path() );
-        img_reader.setAutoDetectImageFormat( true );
-        int img_preview_height = Settings::instance().imagePreviewHeight();
-        QString img_preview_path = fi.path();
-        if( img_reader.read( &img ) )
+        if( img.height() > img_preview_height )
         {
-          if( img.height() > img_preview_height )
+          // PNG for transparency (always)
+          QString img_file_name = QString( "beeimgtmp-%1-%2.png" ).arg( Bee::dateTimeStringSuffix( QDateTime::currentDateTime() ) ).arg( fi.id() );
+          QString img_file_path_tmp = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().cacheFolder() ).arg( img_file_name ) );
+          QString img_file_path = Bee::uniqueFilePath( img_file_path_tmp, false );
+          QImage img_scaled = img.scaledToHeight( Settings::instance().imagePreviewHeight(), Qt::SmoothTransformation );
+          if( img_scaled.save( img_file_path, "png" ) )
           {
-            // PNG for transparency (always)
-            QString img_file_name = QString( "beeimgtmp-%1-%2.png" ).arg( Bee::dateTimeStringSuffix( QDateTime::currentDateTime() ) ).arg( fi.id() );
-            QString img_file_path_tmp = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().cacheFolder() ).arg( img_file_name ) );
-            QString img_file_path = Bee::uniqueFilePath( img_file_path_tmp, false );
-            QImage img_scaled = img.scaledToHeight( Settings::instance().imagePreviewHeight(), Qt::SmoothTransformation );
-            if( img_scaled.save( img_file_path, "png" ) )
-            {
-              Settings::instance().addTemporaryFilePath( img_file_path );
-              img_preview_path = img_file_path;
-            }
+            Settings::instance().addTemporaryFilePath( img_file_path );
+            img_preview_path = img_file_path;
           }
-          else
-            img_preview_height = img.height();
-
-          // I have to add <br> to center the image on the first display (maybe Qt bug)
-          sys_msg_img_preview = QString( "<br><div align=center><a href=\"%1\"><img src=\"%2\" height=\"%3\" /></a></div>" )
-                  .arg( file_url.toString(), QUrl::fromLocalFile( img_preview_path ).toString() ).arg( img_preview_height );
         }
         else
-          qWarning() << "Unable to show image preview of the file" << img_preview_path;
-      }
+          img_preview_height = img.height();
 
-      if( fi.isVoiceMessage() )
-      {
-        if( fi.isDownload() )
-        {
-          QString sys_txt = tr( "%1 sent a voice message." ).arg( Bee::userNameToShow( u ) );
-          QString html_audio_icon = IconManager::instance().toHtml( "voice-message.png", "*v*" );
-#ifdef BEEBEEP_USE_VOICE_CHAT
-          file_url.setScheme( FileInfo::urlSchemeVoiceMessage() );
-#endif
-          sys_msg_play_voice_chat = QString( "%1 %2 <a href=\"%3\">%4</a>." ).arg( html_audio_icon, sys_txt, file_url.toString(), tr( "Listen" ) );
-          chat_voice_msg_html = QString( "[ <a href=\"%1\">%2</a> ] %3" ).arg( file_url.toString(), tr( "voice message" ), html_audio_icon );
-          // New feature: adding save as to avoid cache deleted ... select voice message folder?
-        }
+        // I have to add <br> to center the image on the first display (maybe Qt bug)
+        sys_msg_img_preview = QString( "<br><div align=center><a href=\"%1\"><img src=\"%2\" height=\"%3\" /></a></div>" )
+                                .arg( file_url.toString(), QUrl::fromLocalFile( img_preview_path ).toString() ).arg( img_preview_height );
       }
       else
+        qWarning() << "Unable to show image preview of the file" << img_preview_path;
+    }
+
+    if( fi.isVoiceMessage() )
+    {
+      if( fi.isDownload() )
       {
-        QString s_open = tr( "Open" );
-        sys_msg_open_file = QString( "%1" ).arg( icon_html );
-        sys_msg_open_file += QString( " %1 <a href=\"%2\">%3</a>." ).arg( s_open, file_url.toString(), fi.name() );
-        file_url.setScheme( FileInfo::urlSchemeShowFileInFolder() );
-        sys_msg_open_file += QString( " %1 <a href=\"%2\">%3</a>." ).arg( s_open, file_url.toString(), tr( "folder" ) );
+        QString sys_txt = tr( "%1 sent a voice message." ).arg( Bee::userNameToShow( u ) );
+        QString html_audio_icon = IconManager::instance().toHtml( "voice-message.png", "*v*" );
+#ifdef BEEBEEP_USE_VOICE_CHAT
+        file_url.setScheme( FileInfo::urlSchemeVoiceMessage() );
+#endif
+        sys_msg_play_voice_chat = QString( "%1 %2 <a href=\"%3\">%4</a>." ).arg( html_audio_icon, sys_txt, file_url.toString(), tr( "Listen" ) );
+        chat_voice_msg_html = QString( "[ <a href=\"%1\">%2</a> ] %3" ).arg( file_url.toString(), tr( "voice message" ), html_audio_icon );
+        // New feature: adding save as to avoid cache deleted ... select voice message folder?
       }
+    }
+    else
+    {
+      QString s_open = tr( "Open" );
+      sys_msg_open_file = QString( "%1" ).arg( icon_html );
+      sys_msg_open_file += QString( " %1 <a href=\"%2\">%3</a>." ).arg( s_open, file_url.toString(), fi.name() );
+      file_url.setScheme( FileInfo::urlSchemeShowFileInFolder() );
+      sys_msg_open_file += QString( " %1 <a href=\"%2\">%3</a>." ).arg( s_open, file_url.toString(), tr( "folder" ) );
     }
   }
 
@@ -234,7 +230,7 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
       dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), sys_msg_open_file, chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
   }
 
-  emit fileTransferMessage( peer_id, u, fi, msg );
+  emit fileTransferMessage( peer_id, u, fi, msg, ft_state );
 }
 
 void Core::checkFileTransferProgress( VNumber peer_id, VNumber user_id, const FileInfo& fi, FileSizeType bytes, int elapsed_time )
@@ -242,7 +238,7 @@ void Core::checkFileTransferProgress( VNumber peer_id, VNumber user_id, const Fi
   User u = UserManager::instance().findUser( user_id );
   if( !u.isValid() )
   {
-    qWarning() << "Unable to find user" << user_id << "for the file transfer" << fi.name();
+    qWarning() << "Unable to find user" << user_id << "for the file transfer" << fi.name() << "in Core::checkFileTransferProgress(...)";
     return;
   }
   emit fileTransferProgress( peer_id, u, fi, bytes, elapsed_time );
@@ -262,7 +258,7 @@ bool Core::sendFile( VNumber user_id, const QString& file_path, const QString& s
   User u = UserManager::instance().findUser( user_id );
   if( !u.isValid() )
   {
-    qWarning() << "Unable to find user" << user_id << "to send file" << file_path;
+    qWarning() << "Unable to find user" << user_id << "for sending file" << file_path << "in Core::sendFile(...)";
     return false;
   }
 
@@ -273,14 +269,20 @@ bool Core::sendFile( VNumber user_id, const QString& file_path, const QString& s
   {
     dispatchSystemMessage( chat_id != ID_INVALID ? chat_id : ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2 to %3: user is offline." ).arg( icon_html, file_path, Bee::userNameToShow( u ) ),
                            chat_id != ID_INVALID ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
-    qWarning() << "Unable to send" << file_path << "to" << u.path() << "because user is offline";
     return false;
   }
 
   QFileInfo file( file_path );
   if( !file.exists() )
   {
-    dispatchSystemMessage( chat_id != ID_INVALID ? chat_id : ID_DEFAULT_CHAT, u.id(), tr( "%1 %2: file not found." ).arg( icon_html, file_path ),
+    dispatchSystemMessage( chat_id != ID_INVALID ? chat_id : ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2 to %3: file not found." ).arg( icon_html, file_path, Bee::userNameToShow( u ) ),
+                           chat_id != ID_INVALID ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+    return false;
+  }
+
+  if( !file.isDir() && file.size() <= 0 )
+  {
+    dispatchSystemMessage( chat_id != ID_INVALID ? chat_id : ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2 to %3: file is empty." ).arg( icon_html, file_path, Bee::userNameToShow( u ) ),
                            chat_id != ID_INVALID ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
     return false;
   }
@@ -328,8 +330,15 @@ bool Core::sendFile( VNumber user_id, const QString& file_path, const QString& s
 
 void Core::cancelFileTransfer( VNumber peer_id )
 {
-  qDebug() << "Core received a request for cancelling file transfer" << peer_id;
+  qDebug() << "Core received a request for cancelling file transfer id" << peer_id;
   mp_fileTransfer->cancelTransfer( peer_id );
+}
+
+void Core::pauseFileTransfer( VNumber peer_id )
+{
+  qDebug() << "Core received a request for pausing file transfer id" << peer_id;
+  if( !mp_fileTransfer->pauseTransfer( peer_id ) )
+    mp_fileTransfer->cancelTransfer( peer_id );
 }
 
 void Core::refuseToDownloadFile( VNumber user_id, const FileInfo& fi )
@@ -820,44 +829,4 @@ void Core::uploadToShareBox( VNumber to_user_id, const FileInfo& fi, const QStri
   qDebug() << "Upload file" << fi.path() << "to path" << to_path << "of user" << to_user_id;
 #endif
   sendFile( to_user_id, fi.path(), to_path, true, ID_INVALID );
-}
-
-void Core::onFileTransferCompleted( VNumber peer_id, VNumber user_id, const FileInfo& fi )
-{
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Transfer completed of file" << qPrintable( QDir::toNativeSeparators( fi.path() ) ) << "and send signals";
-#endif
-
-  User u = UserManager::instance().findUser( user_id );
-  if( !u.isValid() )
-  {
-    qWarning() << "Invalid user" << user_id << "found on file transfer completed";
-    return;
-  }
-
-  if( fi.isInShareBox() )
-  {
-    if( fi.isDownload() )
-      emit shareBoxDownloadCompleted( user_id, fi );
-    else
-      emit shareBoxUploadCompleted( user_id, fi );
-  }
-  else
-    emit fileTransferCompleted( peer_id, u, fi );
-}
-
-void Core::onFileTransferPaused( VNumber peer_id, VNumber user_id, const FileInfo& fi )
-{
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Transfer paused of file" << qPrintable( QDir::toNativeSeparators( fi.path() ) ) << "and send signals";
-#endif
-
-  User u = UserManager::instance().findUser( user_id );
-  if( !u.isValid() )
-  {
-    qWarning() << "Invalid user" << user_id << "found on file transfer paused";
-    return;
-  }
-
-  emit fileTransferPaused( peer_id, u, fi );
 }

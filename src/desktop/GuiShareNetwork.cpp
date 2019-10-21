@@ -489,14 +489,6 @@ void GuiShareNetwork::onFileTransferCompleted( VNumber /* unused_peer_id */, con
   showFileTransferCompleted( item, file_info.path() );
 }
 
-void GuiShareNetwork::onFileTransferPaused( VNumber /* unused_peer_id */, const User& u, const FileInfo& file_info )
-{
-  GuiFileInfoItem* item = m_fileInfoList.fileItem( u.id(), file_info.id() );
-  if( !item )
-    return;
-  item->setText( GuiFileInfoItem::ColumnStatus, tr( "Transfer paused" ) );
-}
-
 void GuiShareNetwork::showFileTransferCompleted( GuiFileInfoItem* item, const QString& file_path )
 {
   item->setFilePath( file_path );

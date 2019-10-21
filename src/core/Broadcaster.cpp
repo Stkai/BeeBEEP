@@ -538,7 +538,9 @@ void Broadcaster::sendMulticastDatagram()
       qDebug() << "Broadcaster sends multicast datagram to" << qPrintable( m_multicastGroupAddress.toString() ) << Settings::instance().defaultBroadcastPort();
       m_isMulticastDatagramSent = true;
       m_networkAddressesWaitingForLoopback.append( QPair<NetworkAddress, QDateTime>( NetworkAddress( m_multicastGroupAddress, static_cast<quint16>( Settings::instance().defaultBroadcastPort() ) ), QDateTime::currentDateTime() ) );
+#ifdef BEEBEEP_DEBUG
       qDebug() << "Waiting for loopback datagram from" << qPrintable( m_multicastGroupAddress.toString() );
+#endif
     }
     else
       qWarning() << "Unable to send multicast datagram to" << qPrintable( m_multicastGroupAddress.toString() ) << Settings::instance().defaultBroadcastPort();

@@ -16,6 +16,8 @@ HEADERS += desktop/BeeApplication.h \
   desktop/GuiFileInfoItem.h \
   desktop/GuiFileInfoList.h \
   desktop/GuiFileSharing.h \
+  desktop/GuiFileTransfer.h \
+  desktop/GuiFileTransferItem.h \
   desktop/GuiFloatingChat.h \
   desktop/GuiGroupItem.h \
   desktop/GuiGroupList.h \
@@ -41,7 +43,6 @@ HEADERS += desktop/BeeApplication.h \
   desktop/GuiShareNetwork.h \
   desktop/GuiShortcut.h \
   desktop/GuiSystemTray.h \
-  desktop/GuiTransferFile.h \
   desktop/GuiUserItem.h \
   desktop/GuiUserList.h \
   desktop/GuiVCard.h \
@@ -63,6 +64,8 @@ SOURCES +=  desktop/BeeApplication.cpp \
   desktop/GuiFileInfoItem.cpp \
   desktop/GuiFileInfoList.cpp \
   desktop/GuiFileSharing.cpp \
+  desktop/GuiFileTransfer.cpp \
+  desktop/GuiFileTransferItem.cpp \
   desktop/GuiFloatingChat.cpp \
   desktop/GuiGroupItem.cpp \
   desktop/GuiGroupList.cpp \
@@ -88,7 +91,6 @@ SOURCES +=  desktop/BeeApplication.cpp \
   desktop/GuiShareNetwork.cpp \
   desktop/GuiShortcut.cpp \
   desktop/GuiSystemTray.cpp \
-  desktop/GuiTransferFile.cpp \
   desktop/GuiUserItem.cpp \
   desktop/GuiUserList.cpp \
   desktop/GuiVCard.cpp \

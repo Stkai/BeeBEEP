@@ -396,7 +396,7 @@
     </message>
     <message>
         <source>%1 %2: file not found.</source>
-        <translation>%1 %2: Datei nicht gefunden.</translation>
+        <translation type="vanished">%1 %2: Datei nicht gefunden.</translation>
     </message>
     <message>
         <source>Offline messages sent to %2.</source>
@@ -610,6 +610,14 @@
         <source>%1 has end-to-end encryption disabled</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>%1 Unable to send %2 to %3: file not found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 Unable to send %2 to %3: file is empty.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Date</name>
@@ -693,7 +701,7 @@
     </message>
     <message>
         <source>Transfer cancelled</source>
-        <translation>Übertagung abgebrochen</translation>
+        <translation type="vanished">Übertagung abgebrochen</translation>
     </message>
     <message>
         <source>Transfer timeout</source>
@@ -702,10 +710,6 @@
     <message>
         <source>unable to send file header</source>
         <translation>Dateiheader konnte nicht gesendet werden</translation>
-    </message>
-    <message>
-        <source>Transfer paused</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>file no longer exists</source>
@@ -717,6 +721,14 @@
     </message>
     <message>
         <source>remote host sent invalid data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transfer canceled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transfer paused after %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1494,6 +1506,53 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>Show the BeeBOX</source>
         <translation>Die BeeBOX anzeigen</translation>
+    </message>
+</context>
+<context>
+    <name>GuiFileTransfer</name>
+    <message>
+        <source>Time left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation type="unfinished">Datei</translation>
+    </message>
+    <message>
+        <source>User</source>
+        <translation type="unfinished">Benutzer</translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation type="unfinished">Status</translation>
+    </message>
+    <message>
+        <source>Remove all completed transfers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to cancel the transfer of %1?</source>
+        <translation type="unfinished">Möchtest du die Übertragung von &quot;%1&quot; abbrechen?</translation>
+    </message>
+    <message>
+        <source>Pause</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished">Ja</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished">Nein</translation>
+    </message>
+    <message>
+        <source>You cannot open this file if the transfer has not been completed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished">OK</translation>
     </message>
 </context>
 <context>
@@ -4390,10 +4449,6 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>All users</source>
         <translation>Alle Benutzer</translation>
     </message>
-    <message>
-        <source>Transfer paused</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>GuiShareNetworkWidget</name>
@@ -4476,11 +4531,11 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>File</source>
-        <translation>Datei</translation>
+        <translation type="vanished">Datei</translation>
     </message>
     <message>
         <source>User</source>
-        <translation>Benutzer</translation>
+        <translation type="vanished">Benutzer</translation>
     </message>
     <message>
         <source>Not Completed</source>
@@ -4488,23 +4543,23 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Do you want to cancel the transfer of %1?</source>
-        <translation>Möchtest du die Übertragung von &quot;%1&quot; abbrechen?</translation>
+        <translation type="vanished">Möchtest du die Übertragung von &quot;%1&quot; abbrechen?</translation>
     </message>
     <message>
         <source>Downloading</source>
-        <translation>Wird heruntergeladen</translation>
+        <translation type="vanished">Wird heruntergeladen</translation>
     </message>
     <message>
         <source>Uploading</source>
-        <translation>Wird hochgeladen</translation>
+        <translation type="vanished">Wird hochgeladen</translation>
     </message>
     <message>
         <source>Completed</source>
-        <translation>Abgeschlossen</translation>
+        <translation type="vanished">Abgeschlossen</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation>Status</translation>
+        <translation type="vanished">Status</translation>
     </message>
     <message>
         <source>Remove all transfers</source>
@@ -4516,31 +4571,11 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Transfer completed</source>
-        <translation>Übertragung abgeschlossen</translation>
+        <translation type="vanished">Übertragung abgeschlossen</translation>
     </message>
     <message>
         <source>Waiting</source>
-        <translation>Warten</translation>
-    </message>
-    <message>
-        <source>of</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Time left</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remove all completed transfers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cancel transfer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Not completed</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Warten</translation>
     </message>
 </context>
 <context>
@@ -5135,6 +5170,42 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>Workgroups</source>
         <translation type="unfinished">Arbeitsgruppen</translation>
+    </message>
+    <message>
+        <source>Downloading</source>
+        <translation type="unfinished">Wird heruntergeladen</translation>
+    </message>
+    <message>
+        <source>Uploading</source>
+        <translation type="unfinished">Wird hochgeladen</translation>
+    </message>
+    <message>
+        <source>In queue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Starting</source>
+        <translation type="unfinished">Wird gestartet</translation>
+    </message>
+    <message>
+        <source>Cancel transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Completed</source>
+        <translation type="unfinished">Abgeschlossen</translation>
+    </message>
+    <message>
+        <source>Not completed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Canceled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resume transfer</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

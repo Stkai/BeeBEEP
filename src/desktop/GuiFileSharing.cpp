@@ -62,11 +62,8 @@ GuiFileSharing::GuiFileSharing( QWidget *parent )
   connect( beeCore, SIGNAL( localShareListAvailable() ), mp_shareLocal, SLOT( updateFileSharedList() ) );
   connect( beeCore, SIGNAL( shareBoxAvailable( const User&, const QString&, const QList<FileInfo>& ) ), this, SLOT( updateShareBox( const User&, const QString&, const QList<FileInfo>& ) ) );
   connect( beeCore, SIGNAL( shareBoxUnavailable( const User&, const QString& ) ), this, SLOT( onShareFolderUnavailable( const User&, const QString& ) ) );
-  connect( beeCore, SIGNAL( shareBoxDownloadCompleted( VNumber, const FileInfo& ) ), mp_shareBox, SLOT( onFileDownloadCompleted( VNumber, const FileInfo& ) ) );
-  connect( beeCore, SIGNAL( shareBoxUploadCompleted( VNumber, const FileInfo& ) ), mp_shareBox, SLOT( onFileUploadCompleted( VNumber, const FileInfo& ) ) );
-  connect( beeCore, SIGNAL( fileTransferCompleted( VNumber, const User&, const FileInfo& ) ), this, SLOT( onFileTransferCompleted( VNumber, const User&, const FileInfo& ) ) );
   connect( beeCore, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType, int ) ), this, SLOT( onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType, int ) ) );
-  connect( beeCore, SIGNAL( fileTransferPaused( VNumber, const User&, const FileInfo& ) ), this, SLOT( onFileTransferPaused( VNumber, const User&, const FileInfo& ) ) );
+  connect( beeCore, SIGNAL( fileTransferMessage( VNumber, const User&, const FileInfo&, const QString&, FileTransferPeer::TransferState ) ), this, SLOT( onFileTransferMessage( VNumber, const User&, const FileInfo&, const QString&, FileTransferPeer::TransferState ) ) );
 
   connect( mp_shareLocal, SIGNAL( sharePathAdded( const QString& ) ), this, SLOT( addToShare( const QString& ) ) );
   connect( mp_shareLocal, SIGNAL( sharePathRemoved( const QString& ) ), this, SLOT( removeFromShare( const QString& ) ) );
@@ -327,12 +324,20 @@ void GuiFileSharing::onFileTransferProgress( VNumber peer_id, const User& u, con
   statusBar()->showMessage( file_transfer_progress, msg_timeout );
 }
 
-void GuiFileSharing::onFileTransferCompleted( VNumber peer_id, const User& u, const FileInfo& file_info )
+void GuiFileSharing::onFileTransferMessage( VNumber peer_id, const User& u, const FileInfo& file_info, const QString&, FileTransferPeer::TransferState ft_state )
 {
-  mp_shareNetwork->onFileTransferCompleted( peer_id, u, file_info );
-}
-
-void GuiFileSharing::onFileTransferPaused( VNumber peer_id, const User& u, const FileInfo& file_info )
-{
-  mp_shareNetwork->onFileTransferPaused( peer_id, u, file_info );
+  if( ft_state != FileTransferPeer::Completed )
+    return;
+  if( file_info.isInShareBox() )
+  {
+    if( file_info.isDownload() )
+      mp_shareBox->onFileDownloadCompleted( peer_id, file_info );
+    else
+      mp_shareBox->onFileUploadCompleted( peer_id, file_info );
+  }
+  else
+  {
+    if( file_info.isDownload() )
+      mp_shareNetwork->onFileTransferCompleted( peer_id, u, file_info );
+  }
 }

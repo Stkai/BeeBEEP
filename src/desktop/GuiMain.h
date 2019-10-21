@@ -26,7 +26,7 @@
 
 
 #include "Config.h"
-#include "FileInfo.h"
+#include "FileTransferPeer.h"
 #ifdef BEEBEEP_USE_QXT
  #include "qxtglobalshortcut.h"
 #endif
@@ -45,7 +45,7 @@ class GuiSavedChat;
 class GuiSavedChatList;
 class GuiScreenShot;
 class GuiSystemTray;
-class GuiTransferFile;
+class GuiFileTransfer;
 class GuiUserList;
 class User;
 #ifdef BEEBEEP_USE_SHAREDESKTOP
@@ -185,9 +185,7 @@ private slots:
 #endif
   void startExternalApplicationFromActionData();
   void onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType, int );
-  void onFileTransferMessage( VNumber, const User&, const FileInfo&, const QString& );
-  void onFileTransferCompleted( VNumber, const User&, const FileInfo& );
-  void onFileTransferPaused( VNumber, const User&, const FileInfo& );
+  void onFileTransferMessage( VNumber, const User&, const FileInfo&, const QString&, FileTransferPeer::TransferState );
   void sendBuzzToUser( VNumber );
   void showBuzzFromUser( const User& );
   void removeFloatingChatFromList( VNumber );
@@ -278,7 +276,7 @@ private:
 
 private:
   QTabWidget* mp_tabMain;
-  GuiTransferFile* mp_fileTransfer;
+  GuiFileTransfer* mp_fileTransfer;
   GuiUserList* mp_userList;
   GuiChatList* mp_chatList;
   GuiSavedChatList* mp_savedChatList;

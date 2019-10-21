@@ -26,7 +26,7 @@
 
 #include "Config.h"
 #include "GuiShareNetwork.h"
-class FileInfo;
+#include "FileTransferPeer.h"
 class GuiLog;
 class GuiShareBox;
 class GuiShareLocal;
@@ -68,8 +68,7 @@ private slots:
   void updateShareBox( const User&, const QString&, const QList<FileInfo>& );
   void onShareFolderUnavailable( const User&, const QString& );
   void onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType, int );
-  void onFileTransferCompleted( VNumber, const User&, const FileInfo& );
-  void onFileTransferPaused( VNumber, const User&, const FileInfo& );
+  void onFileTransferMessage( VNumber, const User&, const FileInfo&, const QString&, FileTransferPeer::TransferState );
 
 protected:
   void closeEvent( QCloseEvent* );

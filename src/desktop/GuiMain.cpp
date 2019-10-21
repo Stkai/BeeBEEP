@@ -58,7 +58,7 @@
 #include "GuiShareNetwork.h"
 #include "GuiShortcut.h"
 #include "GuiSystemTray.h"
-#include "GuiTransferFile.h"
+#include "GuiFileTransfer.h"
 #include "GuiUserList.h"
 #include "GuiMain.h"
 #include "GuiVCard.h"
@@ -138,9 +138,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( beeCore, SIGNAL( userRemoved( const User& ) ), this, SLOT( onUserRemoved( const User& ) ) );
   connect( beeCore, SIGNAL( userIsWriting( const User&, VNumber ) ), this, SLOT( showWritingUser( const User&, VNumber ) ) );
   connect( beeCore, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType, int ) ), this, SLOT( onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType, int ) ) );
-  connect( beeCore, SIGNAL( fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& ) ), this, SLOT( onFileTransferMessage( VNumber, const User&, const FileInfo&, const QString& ) ) );
-  connect( beeCore, SIGNAL( fileTransferCompleted( VNumber, const User&, const FileInfo& ) ), this, SLOT( onFileTransferCompleted( VNumber, const User&, const FileInfo& ) ) );
-  connect( beeCore, SIGNAL( fileTransferPaused( VNumber, const User&, const FileInfo& ) ), this, SLOT( onFileTransferPaused( VNumber, const User&, const FileInfo& ) ) );
+  connect( beeCore, SIGNAL( fileTransferMessage( VNumber, const User&, const FileInfo&, const QString&, FileTransferPeer::TransferState ) ), this, SLOT( onFileTransferMessage( VNumber, const User&, const FileInfo&, const QString&, FileTransferPeer::TransferState ) ) );
   connect( beeCore, SIGNAL( fileShareAvailable( const User& ) ), this, SLOT( showSharesForUser( const User& ) ) );
   connect( beeCore, SIGNAL( chatChanged( const Chat& ) ), this, SLOT( onChatChanged( const Chat& ) ) );
   connect( beeCore, SIGNAL( chatRemoved( const Chat& ) ), this, SLOT( onChatRemoved( const Chat& ) ) );
@@ -160,7 +158,7 @@ GuiMain::GuiMain( QWidget *parent )
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   connect( beeCore, SIGNAL( multicastDnsChanged() ), this, SLOT( showDefaultServerPortInMenu() ) );
 #endif
-  connect( mp_fileTransfer, SIGNAL( transferCancelled( VNumber ) ), beeCore, SLOT( cancelFileTransfer( VNumber ) ) );
+  connect( mp_fileTransfer, SIGNAL( transferCanceled( VNumber ) ), beeCore, SLOT( cancelFileTransfer( VNumber ) ) );
   connect( mp_fileTransfer, SIGNAL( openFileCompleted( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
 
   connect( mp_userList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
@@ -1505,7 +1503,7 @@ void GuiMain::createMainWidgets()
 
   mp_dockFileTransfers = new QDockWidget( tr( "File Transfers" ), this );
   mp_dockFileTransfers->setObjectName( "GuiFileTransferDock" );
-  mp_fileTransfer = new GuiTransferFile( this );
+  mp_fileTransfer = new GuiFileTransfer( this );
   mp_dockFileTransfers->setWidget( mp_fileTransfer );
   mp_dockFileTransfers->setAllowedAreas( Qt::AllDockWidgetAreas );
   addDockWidget( Qt::BottomDockWidgetArea, mp_dockFileTransfers );
@@ -2392,6 +2390,7 @@ void GuiMain::updateUser( const User& u )
   mp_groupList->updateUser( u );
   foreach( GuiFloatingChat* fl_chat, m_floatingChats )
     fl_chat->updateUser( u );
+  mp_fileTransfer->updateUser( u );
 }
 
 void GuiMain::searchUsers()
@@ -4545,58 +4544,35 @@ void GuiMain::onFileTransferProgress( VNumber peer_id, const User& u, const File
   }
 }
 
-void GuiMain::onFileTransferMessage( VNumber peer_id, const User& u, const FileInfo& fi, const QString& msg )
+void GuiMain::onFileTransferMessage( VNumber peer_id, const User& u, const FileInfo& fi, const QString& msg, FileTransferPeer::TransferState ft_state )
 {
-  mp_fileTransfer->setMessage( peer_id, u, fi, msg );
+  mp_fileTransfer->setMessage( peer_id, u, fi, msg, ft_state );
   if( Settings::instance().alwaysShowFileTransferProgress() )
   {
     if( !mp_dockFileTransfers->isVisible() )
       mp_dockFileTransfers->show();
   }
-}
 
-void GuiMain::onFileTransferCompleted( VNumber peer_id, const User& u, const FileInfo& fi )
-{
-  Q_UNUSED( peer_id )
-  if( !fi.isDownload() )
-    return;
-
-  Chat c = ChatManager::instance().findChatByPrivateId( fi.chatPrivateId(), false, u.id() );
-  if( !c.isValid() )
+  if( ft_state == FileTransferPeer::Completed )
   {
-    qWarning() << "Unable to find chat by private id" << qPrintable( fi.chatPrivateId() ) << "for user" << qPrintable( u.name() ) << "in onFileTransferCompleted(...)";
-    return;
+    if( !fi.isInShareBox() && fi.isDownload() )
+    {
+      Chat c = ChatManager::instance().findChatByPrivateId( fi.chatPrivateId(), false, u.id() );
+      if( !c.isValid() )
+      {
+        qWarning() << "Unable to find chat by private id" << qPrintable( fi.chatPrivateId() ) << "for user" << qPrintable( u.name() ) << "in onFileTransferCompleted(...)";
+        return;
+      }
+
+      if( Settings::instance().showFileTransferCompletedOnTray() )
+        mp_trayIcon->showNewFileArrived( c.id(), tr( "New file from %1" ).arg( u.name() ), false );
+
+      GuiFloatingChat* fl_chat = floatingChat( c.id() );
+      if( fl_chat && fl_chat->isActiveWindow() )
+        return;
+      onChatChanged( c );
+    }
   }
-
-  if( Settings::instance().showFileTransferCompletedOnTray() )
-    mp_trayIcon->showNewFileArrived( c.id(), tr( "New file from %1" ).arg( u.name() ), false );
-
-  GuiFloatingChat* fl_chat = floatingChat( c.id() );
-  if( fl_chat && fl_chat->isActiveWindow() )
-    return;
-  onChatChanged( c );
-}
-
-void GuiMain::onFileTransferPaused( VNumber peer_id, const User& u, const FileInfo& fi )
-{
-  Q_UNUSED( peer_id )
-  if( !fi.isDownload() )
-    return;
-
-  Chat c = ChatManager::instance().findChatByPrivateId( fi.chatPrivateId(), false, u.id() );
-  if( !c.isValid() )
-  {
-    qWarning() << "Unable to find chat by private id" << qPrintable( fi.chatPrivateId() ) << "for user" << qPrintable( u.name() ) << "in onFileTransferCompleted(...)";
-    return;
-  }
-
-  if( Settings::instance().showFileTransferCompletedOnTray() )
-    mp_trayIcon->showNewFileArrived( c.id(), tr( "New file from %1" ).arg( u.name() ), false );
-
-  GuiFloatingChat* fl_chat = floatingChat( c.id() );
-  if( fl_chat && fl_chat->isActiveWindow() )
-    return;
-  onChatChanged( c );
 }
 
 void GuiMain::sendBuzzToUser( VNumber user_id )

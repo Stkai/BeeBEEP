@@ -100,7 +100,7 @@
     </message>
     <message>
         <source>%1 %2: file not found.</source>
-        <translation>%1 %2: file non trovato.</translation>
+        <translation type="vanished">%1 %2: file non trovato.</translation>
     </message>
     <message>
         <source>%1 You have refused to download %2 from %3.</source>
@@ -646,6 +646,14 @@
         <source>%1 has end-to-end encryption disabled</source>
         <translation>%1 ha la crittografia disabilitata</translation>
     </message>
+    <message>
+        <source>%1 Unable to send %2 to %3: file not found.</source>
+        <translation>%1 Impossibile inviare %2 a %3: il file non esiste più.</translation>
+    </message>
+    <message>
+        <source>%1 Unable to send %2 to %3: file is empty.</source>
+        <translation>%1 Impossibile inviare %2 a %3: il file è vuoto.</translation>
+    </message>
 </context>
 <context>
     <name>Date</name>
@@ -693,7 +701,7 @@
     <name>FileTransferPeer</name>
     <message>
         <source>Transfer cancelled</source>
-        <translation>Trasferimento cancellato</translation>
+        <translation type="vanished">Trasferimento cancellato</translation>
     </message>
     <message>
         <source>Transfer completed in %1</source>
@@ -741,7 +749,7 @@
     </message>
     <message>
         <source>Transfer paused</source>
-        <translation>Trasferimento in pausa</translation>
+        <translation type="vanished">Trasferimento in pausa</translation>
     </message>
     <message>
         <source>file no longer exists</source>
@@ -754,6 +762,14 @@
     <message>
         <source>remote host sent invalid data</source>
         <translation>l&apos;host remoto ha inviato dati non validi</translation>
+    </message>
+    <message>
+        <source>Transfer canceled</source>
+        <translation>Trasferimento annullato</translation>
+    </message>
+    <message>
+        <source>Transfer paused after %1</source>
+        <translation>Trasferimento in pausa dopo %1</translation>
     </message>
 </context>
 <context>
@@ -1550,6 +1566,53 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Show the BeeBOX</source>
         <translation>Mostra la BeeBOX</translation>
+    </message>
+</context>
+<context>
+    <name>GuiFileTransfer</name>
+    <message>
+        <source>Time left</source>
+        <translation>Attesa</translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation>File</translation>
+    </message>
+    <message>
+        <source>User</source>
+        <translation>Utente</translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation>Stato</translation>
+    </message>
+    <message>
+        <source>Remove all completed transfers</source>
+        <translation>Cancella tutti i trasferimenti completati</translation>
+    </message>
+    <message>
+        <source>Do you want to cancel the transfer of %1?</source>
+        <translation>Vuoi interrompere il trasferimento di %1?</translation>
+    </message>
+    <message>
+        <source>Pause</source>
+        <translation>Pausa</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation>Si</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation>No</translation>
+    </message>
+    <message>
+        <source>You cannot open this file if the transfer has not been completed.</source>
+        <translation>Non puoi aprire questo file se il suo trasferimento non è stato completato.</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
@@ -4602,7 +4665,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Transfer paused</source>
-        <translation>Trasferimento in pausa</translation>
+        <translation type="vanished">Trasferimento in pausa</translation>
     </message>
 </context>
 <context>
@@ -4682,19 +4745,19 @@ Inserisci un nome differente.</translation>
     <name>GuiTransferFile</name>
     <message>
         <source>File</source>
-        <translation>File</translation>
+        <translation type="vanished">File</translation>
     </message>
     <message>
         <source>User</source>
-        <translation>Utente</translation>
+        <translation type="vanished">Utente</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation>Stato</translation>
+        <translation type="vanished">Stato</translation>
     </message>
     <message>
         <source>Completed</source>
-        <translation>Completato</translation>
+        <translation type="vanished">Completato</translation>
     </message>
     <message>
         <source>Cancel Transfer</source>
@@ -4706,15 +4769,15 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Transfer completed</source>
-        <translation>Trasferimento completato</translation>
+        <translation type="vanished">Trasferimento completato</translation>
     </message>
     <message>
         <source>Downloading</source>
-        <translation>Scaricati</translation>
+        <translation type="vanished">Scaricati</translation>
     </message>
     <message>
         <source>Uploading</source>
-        <translation>Inviati</translation>
+        <translation type="vanished">Inviati</translation>
     </message>
     <message>
         <source>Remove all transfers</source>
@@ -4726,31 +4789,31 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Do you want to cancel the transfer of %1?</source>
-        <translation>Vuoi interrompere il trasferimento di %1?</translation>
+        <translation type="vanished">Vuoi interrompere il trasferimento di %1?</translation>
     </message>
     <message>
         <source>Waiting</source>
-        <translation>In attesa</translation>
+        <translation type="vanished">In attesa</translation>
     </message>
     <message>
         <source>of</source>
-        <translation>di</translation>
+        <translation type="vanished">di</translation>
     </message>
     <message>
         <source>Time left</source>
-        <translation>Attesa</translation>
+        <translation type="vanished">Attesa</translation>
     </message>
     <message>
         <source>Remove all completed transfers</source>
-        <translation>Cancella tutti i trasferimenti completati</translation>
+        <translation type="vanished">Cancella tutti i trasferimenti completati</translation>
     </message>
     <message>
         <source>Cancel transfer</source>
-        <translation>Annulla trasferimento</translation>
+        <translation type="vanished">Annulla trasferimento</translation>
     </message>
     <message>
         <source>Not completed</source>
-        <translation>Non completato</translation>
+        <translation type="vanished">Non completato</translation>
     </message>
 </context>
 <context>
@@ -5377,6 +5440,46 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Workgroups</source>
         <translation>Gruppi di lavoro</translation>
+    </message>
+    <message>
+        <source>Downloading</source>
+        <translation>Scaricamento in corso</translation>
+    </message>
+    <message>
+        <source>Uploading</source>
+        <translation>Caricamento in corso</translation>
+    </message>
+    <message>
+        <source>of</source>
+        <translation type="obsolete">di</translation>
+    </message>
+    <message>
+        <source>In queue</source>
+        <translation>In coda</translation>
+    </message>
+    <message>
+        <source>Starting</source>
+        <translation>Avvio in corso</translation>
+    </message>
+    <message>
+        <source>Cancel transfer</source>
+        <translation>Annulla trasferimento</translation>
+    </message>
+    <message>
+        <source>Completed</source>
+        <translation>Completato</translation>
+    </message>
+    <message>
+        <source>Not completed</source>
+        <translation>Non completato</translation>
+    </message>
+    <message>
+        <source>Canceled</source>
+        <translation>Annulato</translation>
+    </message>
+    <message>
+        <source>Resume transfer</source>
+        <translation>Riprendi trasferimento</translation>
     </message>
 </context>
 <context>

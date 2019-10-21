@@ -128,7 +128,11 @@ void FileTransferPeer::checkUploading( const QByteArray& byte_array )
     return;
   }
 
-  if( bytes_arrived == m_bytesTransferred )
+  if( bytes_arrived <= 0 && pause_transfer )
+  {
+    setTransferPaused();
+  }
+  else if( bytes_arrived == m_bytesTransferred )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << qPrintable( name() ) << "receives corfirmation for" << m_bytesTransferred << "bytes";
@@ -152,6 +156,9 @@ void FileTransferPeer::checkUploading( const QByteArray& byte_array )
 
 void FileTransferPeer::sendUploadData()
 {
+  if( m_state == FileTransferPeer::Paused )
+    return;
+
   if( m_state != FileTransferPeer::Transferring )
   {
     qWarning() << qPrintable( name() ) << "tries to send data, but it was in state" << m_state << "... skipped";

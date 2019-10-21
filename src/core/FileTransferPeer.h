@@ -33,7 +33,7 @@ class FileTransferPeer : public QObject
   Q_OBJECT
 
 public:
-  enum TransferState { Unknown, Queue, Starting, Request, FileHeader, Transferring, Completed, Error, Cancelled, Paused };
+  enum TransferState { Unknown, Queue, Starting, Request, FileHeader, Transferring, Completed, Error, Canceled, Paused };
 
   explicit FileTransferPeer( QObject *parent = Q_NULLPTR );
 
@@ -62,13 +62,13 @@ public:
   void startUpload( const FileInfo& );
   inline int elapsedTime() const;
 
+  void pauseTransfer( bool close_connection );
+
   void onTickEvent( int );
 
 signals:
-  void message( VNumber peer_id, VNumber user_id, const FileInfo&, const QString& );
+  void message( VNumber peer_id, VNumber user_id, const FileInfo&, const QString&, FileTransferPeer::TransferState );
   void progress( VNumber peer_id, VNumber user_id, const FileInfo&, FileSizeType, int );
-  void completed( VNumber peer_id, VNumber user_id, const FileInfo& );
-  void paused( VNumber peer_id, VNumber user_id, const FileInfo& );
   void fileUploadRequest( const FileInfo& );
   void userValidationRequested( VNumber peer_id, VNumber user_id );
   void operationCompleted();
@@ -76,7 +76,6 @@ signals:
 public slots:
   void startConnection();
   void cancelTransfer();
-  void pauseTransfer();
 
 protected slots:
   void socketError( QAbstractSocket::SocketError );
@@ -140,7 +139,7 @@ inline const FileInfo& FileTransferPeer::fileInfo() const { return m_fileInfo; }
 inline QHostAddress FileTransferPeer::peerAddress() const { return mp_socket->peerAddress(); }
 inline bool FileTransferPeer::isActive() const { return m_state >= FileTransferPeer::Starting && m_state <= FileTransferPeer::Completed; }
 inline bool FileTransferPeer::isTransferCompleted() const { return m_state == FileTransferPeer::Completed; }
-inline bool FileTransferPeer::isTransferPaused() const { return m_state == FileTransferPeer::Paused; }
+inline bool FileTransferPeer::isTransferPaused() const { return m_state == FileTransferPeer::Paused && !mp_socket->isConnected(); }
 inline void FileTransferPeer::setRemoteUserId( VNumber new_value ) { m_remoteUserId = new_value; }
 inline VNumber FileTransferPeer::remoteUserId() const { return mp_socket->userId() != ID_INVALID ? mp_socket->userId() : m_remoteUserId; }
 inline int FileTransferPeer::elapsedTime() const { return m_elapsedTime; }

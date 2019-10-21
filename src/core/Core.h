@@ -149,6 +149,7 @@ public slots:
   void buildLocalShareList();
   void sendFileShareRequestToAll();
   void cancelFileTransfer( VNumber );
+  void pauseFileTransfer( VNumber );
   void removeAllPathsFromShare();
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
@@ -170,9 +171,7 @@ signals:
   void fileDownloadRequest( const User&, const FileInfo& );
   void folderDownloadRequest( const User&, const QString&, const QList<FileInfo>& );
   void fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType, int );
-  void fileTransferMessage( VNumber, const User&, const FileInfo&, const QString& );
-  void fileTransferCompleted( VNumber, const User&, const FileInfo& );
-  void fileTransferPaused( VNumber, const User&, const FileInfo& );
+  void fileTransferMessage( VNumber, const User&, const FileInfo&, const QString&, FileTransferPeer::TransferState );
   void fileShareAvailable( const User& );
   void localShareListAvailable();
   void savedChatListAvailable();
@@ -181,8 +180,6 @@ signals:
   void networkInterfaceIsUp();
   void shareBoxAvailable( const User&, const QString&, const QList<FileInfo>& );
   void shareBoxUnavailable( const User&, const QString& );
-  void shareBoxDownloadCompleted( VNumber, const FileInfo& );
-  void shareBoxUploadCompleted( VNumber, const FileInfo& );
   void localUserIsBuzzedBy( const User& );
   void newSystemStatusMessage( const QString&, int );
   void newsAvailable( const QString& );
@@ -219,13 +216,11 @@ protected slots:
 
   /* CoreFileTransfer */
   void checkFileTransferProgress( VNumber, VNumber, const FileInfo&, FileSizeType, int );
-  void checkFileTransferMessage( VNumber, VNumber, const FileInfo&, const QString& );
+  void checkFileTransferMessage( VNumber, VNumber, const FileInfo&, const QString&, FileTransferPeer::TransferState );
   void onFileTransferServerListening();
   void addListToLocalShare();
   void addFolderToFileTransfer();
   void sendShareBoxList();
-  void onFileTransferCompleted( VNumber, VNumber, const FileInfo& );
-  void onFileTransferPaused( VNumber, VNumber, const FileInfo& );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   void onShareDesktopImageAvailable( const ShareDesktopData& );
 #endif

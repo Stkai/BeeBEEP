@@ -21,38 +21,35 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_GUITRANSFERFILE_H
-#define BEEBEEP_GUITRANSFERFILE_H
+#ifndef BEEBEEP_GUIFILETRANSFER_H
+#define BEEBEEP_GUIFILETRANSFER_H
 
-
-#include "Config.h"
-class FileInfo;
-class FileTransfer;
+#include "GuiFileTransferItem.h"
 class User;
 
 
-class GuiTransferFile : public QTreeWidget
+class GuiFileTransfer : public QTreeWidget
 {
   Q_OBJECT
 
 public:
-  enum ColumnType { ColumnCancel, ColumnReport, ColumnTimeLeft, ColumnFile, ColumnUser, ColumnProgress, ColumnSort };
-  enum FileDataType { PeerId = Qt::UserRole+2, FileId, FilePath, TransferInProgress, TransferCompleted };
-
-  GuiTransferFile( QWidget* parent = Q_NULLPTR );
+  GuiFileTransfer( QWidget* parent = Q_NULLPTR );
 
 public slots:
   void setProgress( VNumber, const User&, const FileInfo&, FileSizeType, int );
-  void setMessage( VNumber, const User&, const FileInfo&, const QString& );
+  void setMessage( VNumber, const User&, const FileInfo&, const QString&, FileTransferPeer::TransferState );
+  void updateUser( const User& );
 
 signals:
-  void transferCancelled( VNumber );
+  void transferCanceled( VNumber );
   void openFileCompleted( const QUrl& );
 
 protected:
-  QTreeWidgetItem* findItem( VNumber );
+  GuiFileTransferItem* findItem( VNumber );
+  GuiFileTransferItem* createItem( VNumber, const User&, const FileInfo& );
   void showProgress( QTreeWidgetItem*, const FileInfo&, FileSizeType, int );
   void showIcon( QTreeWidgetItem* );
+  void setCanceled( QTreeWidgetItem* );
 
 private slots:
   void checkItemClicked( QTreeWidgetItem*, int );
@@ -66,4 +63,4 @@ private:
 };
 
 
-#endif // BEEBEEP_GUITRANSFERFILE_H
+#endif // BEEBEEP_GUIFILETRANSFER_H

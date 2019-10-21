@@ -23,7 +23,6 @@
 
 #include "FileShare.h"
 #include "FileTransfer.h"
-#include "FileTransferPeer.h"
 #include "Random.h"
 #include "Settings.h"
 #include "Protocol.h"
@@ -65,21 +64,13 @@ void FileTransfer::stopListener()
   {
     close();
     qDebug() << "File Transfer server closed";
-    int file_transfers_paused = 0;
-
     foreach( FileTransferPeer* transfer_peer, m_peers )
     {
       if( Settings::instance().resumeFileTransfer() )
-      {
-        file_transfers_paused++;
-        transfer_peer->pauseTransfer();
-      }
+        transfer_peer->pauseTransfer( true );
       else
         transfer_peer->cancelTransfer();
     }
-
-    if( file_transfers_paused > 0 )
-      qDebug() << file_transfers_paused << "file transfers paused";
     m_peers.clear();
     m_files.clear();
   }
@@ -211,8 +202,7 @@ void FileTransfer::setupPeer( FileTransferPeer* transfer_peer, qintptr socket_de
   }
 
   connect( transfer_peer, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType, int ) ), this, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType, int ) ) );
-  connect( transfer_peer, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ), this, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString& ) ) );
-  connect( transfer_peer, SIGNAL( completed( VNumber, VNumber, const FileInfo& ) ), this, SIGNAL( completed( VNumber, VNumber, const FileInfo& ) ) );
+  connect( transfer_peer, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString&, FileTransferPeer::TransferState ) ), this, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString&, FileTransferPeer::TransferState ) ) );
   connect( transfer_peer, SIGNAL( operationCompleted() ), this, SLOT( deletePeer() ) );
 
   transfer_peer->setConnectionDescriptor( socket_descriptor, server_port );
@@ -353,7 +343,6 @@ FileTransferPeer* FileTransfer::peer( VNumber peer_id ) const
       return *it;
     ++it;
   }
-  qWarning() << "File Transfer server has not found the peer" << peer_id;
   return Q_NULLPTR;
 }
 
@@ -366,14 +355,10 @@ void FileTransfer::deletePeer()
   }
 
   FileTransferPeer* sender_peer = dynamic_cast<FileTransferPeer*>( sender() );
-
-  if( !sender_peer->isTransferPaused() )
+  if( m_peers.removeOne( sender_peer ) )
   {
-    if( m_peers.removeOne( sender_peer ) )
-    {
-      qDebug() << "Removed peer from list." << m_peers.size() << "peers remained";
-      sender_peer->deleteLater();
-    }
+    qDebug() << "Removed peer from list." << m_peers.size() << "peers remained";
+    sender_peer->deleteLater();
   }
 
   if( isListening() && downloadsInQueue() > 0 )
@@ -385,11 +370,27 @@ bool FileTransfer::cancelTransfer( VNumber peer_id )
   FileTransferPeer* transfer_peer = peer( peer_id );
   if( transfer_peer )
   {
-    qDebug() << "File Transfer server requests to cancel transfer in progress of" << transfer_peer->name();
     transfer_peer->cancelTransfer();
     return true;
   }
   qWarning() << "File Transfer server cannot cancel the file transfer because it has not found the peer" << peer_id;
+  return false;
+}
+
+bool FileTransfer::pauseTransfer( VNumber peer_id )
+{
+  FileTransferPeer* transfer_peer = peer( peer_id );
+  if( transfer_peer )
+  {
+    if( transfer_peer->isDownload() )
+    {
+      transfer_peer->pauseTransfer( false );
+      return true;
+    }
+    else
+      return false;
+  }
+  qWarning() << "File Transfer server cannot pause the file transfer because it has not found the peer" << peer_id;
   return false;
 }
 

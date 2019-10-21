@@ -329,7 +329,7 @@ void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
 
   HistoryManager::instance().clearTemporaryMessage();
 
-  // Fixed: when the text is fully cancelled the message box looses the color and the size... patched with the line below
+  // Fixed: when the text is fully Canceled the message box looses the color and the size... patched with the line below
   if( e->key() == Qt::Key_Backspace || e->key() == Qt::Key_Delete || e->key() == Qt::Key_Cancel )
   {
     if( textCursor().position() == 0 )
