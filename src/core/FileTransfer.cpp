@@ -71,8 +71,6 @@ void FileTransfer::stopListener()
       else
         transfer_peer->cancelTransfer();
     }
-    m_peers.clear();
-    m_files.clear();
   }
   else
     qDebug() << "File Transfer server is not active";
@@ -371,6 +369,8 @@ bool FileTransfer::cancelTransfer( VNumber peer_id )
   if( transfer_peer )
   {
     transfer_peer->cancelTransfer();
+    if( transfer_peer->isDownload() )
+      transfer_peer->removePartiallyDownloadedFile();
     return true;
   }
   qWarning() << "File Transfer server cannot cancel the file transfer because it has not found the peer" << peer_id;

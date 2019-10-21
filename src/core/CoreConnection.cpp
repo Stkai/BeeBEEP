@@ -400,13 +400,24 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
                              tr( "%1 %2 uses old encryption level." ).arg( IconManager::instance().toHtml( "warning.png", "*!*" ), Bee::userNameToShow( u ) ),
                              DispatchToAllChatsWithUser, ChatMessage::Connection );
     }
+
+    if( Settings::instance().disableConnectionSocketEncryption() )
+    {
+      dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(),
+                             QString( "%1 %2." ).arg( IconManager::instance().toHtml( "encryption-enabled.png", "*!*" ),
+                                                      tr( "%1 has end-to-end encryption enabled" ).arg( Bee::userNameToShow( u ) ) ),
+                             DispatchToAllChatsWithUser, ChatMessage::Connection );
+    }
   }
   else
   {
-    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(),
-                           QString( "%1 %2." ).arg( IconManager::instance().toHtml( "encryption-disabled.png", "*!*" ),
-                                                    tr( "%1 has end-to-end encryption disabled" ).arg( Bee::userNameToShow( u ) ) ),
-                           DispatchToAllChatsWithUser, Settings::instance().disableConnectionSocketEncryption() ? ChatMessage::Other : ChatMessage::Connection );
+    if( !Settings::instance().disableConnectionSocketEncryption() )
+    {
+      dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(),
+                             QString( "%1 %2." ).arg( IconManager::instance().toHtml( "encryption-disabled.png", "*!*" ),
+                                                      tr( "%1 has end-to-end encryption disabled" ).arg( Bee::userNameToShow( u ) ) ),
+                             DispatchToAllChatsWithUser, ChatMessage::Connection );
+    }
   }
 
   if( !Settings::instance().localUser().vCard().hasOnlyNickName() )

@@ -37,6 +37,9 @@ void FileTransferPeer::checkUploadData( const QByteArray& byte_array )
   case FileTransferPeer::Transferring:
     checkUploading( byte_array );
     break;
+  case FileTransferPeer::Pausing:
+    checkUploading( byte_array );
+    break;
   default:
     // discard data
     qWarning() << qPrintable( name() ) << "discards data:" << byte_array;
@@ -141,7 +144,9 @@ void FileTransferPeer::checkUploading( const QByteArray& byte_array )
 
     showProgress();
 
-    if( m_totalBytesTransferred > m_fileInfo.size() )
+    if( total_bytes > 0 && m_totalBytesTransferred != total_bytes )
+      setError( tr( "%1 bytes uploaded but the remote file size is %2 bytes" ).arg( m_totalBytesTransferred ).arg( total_bytes ) );
+    else if( m_totalBytesTransferred > m_fileInfo.size() )
       setError( tr( "%1 bytes uploaded but the file size is only %2 bytes" ).arg( m_totalBytesTransferred ).arg( m_fileInfo.size() ) );
     else if( m_totalBytesTransferred == m_fileInfo.size() )
       setTransferCompleted();
@@ -156,7 +161,7 @@ void FileTransferPeer::checkUploading( const QByteArray& byte_array )
 
 void FileTransferPeer::sendUploadData()
 {
-  if( m_state == FileTransferPeer::Paused )
+  if( m_state == FileTransferPeer::Paused || m_state == FileTransferPeer::Pausing )
     return;
 
   if( m_state != FileTransferPeer::Transferring )

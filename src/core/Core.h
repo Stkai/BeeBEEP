@@ -110,6 +110,7 @@ public:
   void sendShareBoxRequest( VNumber, const QString&, bool create_folder );
   void downloadFromShareBox( VNumber from_user_id, const FileInfo&, const QString& to_path );
   void uploadToShareBox( VNumber to_user_id, const FileInfo&, const QString& to_path );
+  bool resumeFileTransfer( VNumber user_id, const FileInfo& );
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   /* CoreShareDesktop */

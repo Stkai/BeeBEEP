@@ -159,7 +159,9 @@ GuiMain::GuiMain( QWidget *parent )
   connect( beeCore, SIGNAL( multicastDnsChanged() ), this, SLOT( showDefaultServerPortInMenu() ) );
 #endif
   connect( mp_fileTransfer, SIGNAL( transferCanceled( VNumber ) ), beeCore, SLOT( cancelFileTransfer( VNumber ) ) );
+  connect( mp_fileTransfer, SIGNAL( transferPaused( VNumber ) ), beeCore, SLOT( pauseFileTransfer( VNumber ) ) );
   connect( mp_fileTransfer, SIGNAL( openFileCompleted( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
+  connect( mp_fileTransfer, SIGNAL( resumeTransfer( VNumber, const FileInfo& ) ), this, SLOT( resumeFileTransfer( VNumber, const FileInfo& ) ) );
 
   connect( mp_userList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( mp_userList, SIGNAL( userSelected( VNumber ) ), this, SLOT( checkUserSelected( VNumber ) ) );
@@ -1162,6 +1164,10 @@ void GuiMain::createMenus()
   mp_actResumeFileTransfer->setCheckable( true );
   mp_actResumeFileTransfer->setChecked( Settings::instance().resumeFileTransfer() );
   mp_actResumeFileTransfer->setData( 97 );
+  act = mp_menuFileTransferSettings->addAction( "", this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setData( 100 );
+  setClearPartiallyDownloadedFilesAfterDaysInAction( act );
   mp_menuFileTransferSettings->addSeparator();
   act = mp_menuFileTransferSettings->addAction( "", this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -2152,6 +2158,23 @@ void GuiMain::settingsChanged( QAction* act )
     break;
   case 99:
     break;
+  case 100:
+    {
+#if QT_VERSION >= 0x050000
+      int cc_days = QInputDialog::getInt( qApp->activeWindow(), Settings::instance().programName(),
+#else
+      int cc_days = QInputDialog::getInteger( qApp->activeWindow(), Settings::instance().programName(),
+#endif
+                                              tr( "Please select the number of days that partially downloaded files can remain cached (current: %1, never clear: -1, always clear: 0)." ).arg( Settings::instance().removePartiallyDownloadedFilesAfterDays() ),
+                                              Settings::instance().clearCacheAfterDays(),
+                                              -1, 999, 10, &ok );
+      if( ok )
+      {
+        Settings::instance().setRemovePartiallyDownloadedFilesAfterDays( cc_days );
+        setClearPartiallyDownloadedFilesAfterDaysInAction( act );
+      }
+    }
+    break;
   default:
     qWarning() << "GuiMain::settingsChanged(): error in setting id" << act->data().toInt();
   }
@@ -2233,6 +2256,12 @@ void GuiMain::setClearCacheAfterDaysInAction( QAction* act )
   act->setText( tr( "Clean the cache from items older than %1 days" ).arg( Settings::instance().clearCacheAfterDays() >= 0 ? Settings::instance().clearCacheAfterDays() : 96 ) );
   act->setEnabled( Settings::instance().chatAutoSave() );
   act->setChecked( Settings::instance().clearCacheAfterDays() >= 0 );
+}
+
+void GuiMain::setClearPartiallyDownloadedFilesAfterDaysInAction( QAction* act )
+{
+  act->setText( tr( "Delete partially downloaded files after %1 days" ).arg( Settings::instance().removePartiallyDownloadedFilesAfterDays() >= 0 ? Settings::instance().removePartiallyDownloadedFilesAfterDays() : 5 ) );
+  act->setChecked( Settings::instance().removePartiallyDownloadedFilesAfterDays() >= 0 );
 }
 
 void GuiMain::setMaxQueuedDownloadsInAction( QAction* act )
@@ -5109,3 +5138,10 @@ void GuiMain::sendVoiceMessageToChat( VNumber chat_id, const QString& file_path 
   beeCore->sendVoiceMessageToChat( chat_id, file_path );
 }
 #endif
+
+void GuiMain::resumeFileTransfer( VNumber user_id, const FileInfo& file_info )
+{
+  if( !beeCore->isUserConnected( user_id ) )
+
+  beeCore->resumeFileTransfer( user_id, file_info );
+}

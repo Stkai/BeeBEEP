@@ -61,11 +61,11 @@ bool GuiFileTransferItem::updateFileInfo( const FileInfo& fi, FileSizeType bytes
     FileSizeType fi_size = m_fileInfo.size() > 0 ? m_fileInfo.size() : 1;
     if( bytes_transferred != fi.size() )
     {
-      QString file_transfer_progress = QString( "%1 / %3 (%4 ...)" ).arg( Bee::bytesToString( bytes_transferred ), Bee::bytesToString( fi_size ),
+      QString file_transfer_progress = QString( "%1 / %3 (%4)" ).arg( Bee::bytesToString( bytes_transferred ), Bee::bytesToString( fi_size ),
                                                                       m_fileInfo.isDownload() ? QObject::tr( "Downloading" ) : QObject::tr( "Uploading" ) );
       setText( ColumnProgress, file_transfer_progress );
       setText( ColumnReport, QString::number( static_cast<FileSizeType>( (bytes_transferred * 100) / fi_size ) ) );
-      setText( ColumnTimeLeft, Bee::transferTimeLeft( bytes_transferred, fi_size, elapsed_time ) );
+      setText( ColumnTimeLeft, Bee::transferTimeLeft( bytes_transferred, fi_size, m_fileInfo.startingPosition(), elapsed_time ) );
     }
     else
     {
@@ -141,6 +141,12 @@ void GuiFileTransferItem::update()
     icon = IconManager::instance().icon( "red-ball.png" );
     action_tip = QObject::tr( "Canceled" );
     sort_string.prepend( 'E' );
+  }
+  else if( m_transferState == FileTransferPeer::Pausing )
+  {
+    icon = IconManager::instance().icon( "timer.png" );
+    action_tip = QObject::tr( "Please wait" );
+    sort_string.prepend( 'C' );
   }
   else if( m_transferState == FileTransferPeer::Paused )
   {

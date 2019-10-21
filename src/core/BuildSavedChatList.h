@@ -52,6 +52,7 @@ protected:
   void loadUnsentMessages();
   QString checkAuthCodeFromFileHeader( const QStringList& file_header, const QString& file_name );
   void clearCacheItems();
+  void removePartiallyDownloadedFiles();
 
 private:
   QMap<QString, QString> m_savedChats;

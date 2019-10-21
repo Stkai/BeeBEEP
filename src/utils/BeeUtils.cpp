@@ -1048,9 +1048,13 @@ QString Bee::timeToString( int msec )
   return s;
 }
 
-QString Bee::transferTimeLeft( FileSizeType bytes_transferred, FileSizeType total_bytes, int elapsed_time )
+QString Bee::transferTimeLeft( FileSizeType bytes_transferred, FileSizeType total_bytes, FileSizeType starting_position, int elapsed_time )
 {
-  qint64 bytes_per_second = bytesPerSecond( bytes_transferred, elapsed_time );
+  qint64 bytes_per_second;
+  if( starting_position > 0 && bytes_transferred > starting_position )
+    bytes_per_second = bytesPerSecond( bytes_transferred - starting_position, elapsed_time );
+  else
+    bytes_per_second = bytesPerSecond( bytes_transferred, elapsed_time );
   FileSizeType bytes_left = bytes_transferred >= total_bytes ? 0 : total_bytes - bytes_transferred;
   int ms_left = (bytes_left * 1000) / bytes_per_second;
   if( ms_left < 1000 )

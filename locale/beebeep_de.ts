@@ -618,6 +618,10 @@
         <source>%1 Unable to send %2 to %3: file is empty.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>%1 has end-to-end encryption enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Date</name>
@@ -729,6 +733,14 @@
     </message>
     <message>
         <source>Transfer paused after %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 bytes uploaded but the remote file size is %2 bytes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transfer is about to pause</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1535,10 +1547,6 @@ Bitte wähle einen anderen Namen aus.</translation>
         <translation type="unfinished">Möchtest du die Übertragung von &quot;%1&quot; abbrechen?</translation>
     </message>
     <message>
-        <source>Pause</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Yes</source>
         <translation type="unfinished">Ja</translation>
     </message>
@@ -1553,6 +1561,14 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>Ok</source>
         <translation type="unfinished">OK</translation>
+    </message>
+    <message>
+        <source>Yes and delete the partially downloaded file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to try resuming the transfer of %1?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3283,6 +3299,14 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Enable BEEP alert also for active chat windows</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select the number of days that partially downloaded files can remain cached (current: %1, never clear: -1, always clear: 0).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete partially downloaded files after %1 days</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5206,6 +5230,10 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>Resume transfer</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please wait</source>
+        <translation type="unfinished">Bitte warten</translation>
     </message>
 </context>
 <context>

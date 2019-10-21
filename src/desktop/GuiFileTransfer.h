@@ -42,7 +42,9 @@ public slots:
 
 signals:
   void transferCanceled( VNumber );
+  void transferPaused( VNumber );
   void openFileCompleted( const QUrl& );
+  void resumeTransfer( VNumber, const FileInfo& );
 
 protected:
   GuiFileTransferItem* findItem( VNumber );

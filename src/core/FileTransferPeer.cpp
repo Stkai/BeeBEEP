@@ -67,7 +67,7 @@ void FileTransferPeer::closeAll()
     m_file.close();
   }
 
-  if( !isTransferCompleted() && isDownload() && m_file.exists() && !isTransferPaused() && !Settings::instance().resumeFileTransfer() )
+  if( !isTransferCompleted() && isDownload() && m_file.exists() && m_state != FileTransferPeer::Paused && !Settings::instance().resumeFileTransfer() )
     m_file.remove();
 
   computeElapsedTime();
@@ -125,27 +125,35 @@ void FileTransferPeer::setTransferCompleted()
   closeAll();
   if( isDownload() )
   {
-    if( QFile::exists( m_fileInfo.path() ) && Settings::instance().overwriteExistingFiles() )
+    if( m_fileInfo.path() != m_file.fileName() )
     {
-      if( QFile::remove( m_fileInfo.path() ) )
-        qDebug() << qPrintable( name() ) << "removes existing file" << qPrintable( m_fileInfo.path() );
+      if( QFile::exists( m_fileInfo.path() ) && Settings::instance().overwriteExistingFiles() )
+      {
+        if( QFile::remove( m_fileInfo.path() ) )
+          qDebug() << qPrintable( name() ) << "removes existing file" << qPrintable( m_fileInfo.path() );
+        else
+          qWarning() << qPrintable( name() ) << "cannot remove existing file" << qPrintable( m_fileInfo.path() );
+      }
+
+      if( QFile::exists( m_fileInfo.path() ) )
+      {
+        QString new_file_path = Bee::uniqueFilePath( m_fileInfo.path(), true );
+        m_fileInfo.setPath( new_file_path );
+      }
+
+      if( !m_file.rename( m_fileInfo.path() ) )
+      {
+        if( m_fileInfo.lastModified().isValid() )
+          Bee::setLastModifiedToFile( m_fileInfo.path(), m_fileInfo.lastModified() );
+      }
       else
-        qWarning() << qPrintable( name() ) << "cannot remove existing file" << qPrintable( m_fileInfo.path() );
-    }
-
-    if( QFile::exists( m_fileInfo.path() ) )
-    {
-      QString new_file_path = Bee::uniqueFilePath( m_fileInfo.path(), true );
-      m_fileInfo.setPath( new_file_path );
-    }
-
-    if( m_file.rename( m_fileInfo.path() ) )
-    {
-      if( m_fileInfo.lastModified().isValid() )
-        Bee::setLastModifiedToFile( m_fileInfo.path(), m_fileInfo.lastModified() );
+        qWarning() << qPrintable( name() ) << "cannot rename downloaded file" << qPrintable( m_file.fileName() ) << "to" << qPrintable( m_fileInfo.path() );
     }
     else
-      qWarning() << qPrintable( name() ) << "cannot rename downloaded file" << qPrintable( m_file.fileName() ) << "to" << qPrintable( m_fileInfo.path() );
+    {
+      if( QFile::exists( m_fileInfo.path() ) && m_fileInfo.lastModified().isValid() )
+        Bee::setLastModifiedToFile( m_fileInfo.path(), m_fileInfo.lastModified() );
+    }
   }
 
   emit message( id(), remoteUserId(), m_fileInfo, tr( "Transfer completed in %1" ).arg( Bee::timeToString( m_elapsedTime ) ), m_state );
@@ -171,24 +179,32 @@ void FileTransferPeer::pauseTransfer( bool close_connection )
 {
   if( m_state == FileTransferPeer::Paused )
     return;
+  if( m_state == FileTransferPeer::Pausing && !close_connection )
+    return;
   if( m_state != FileTransferPeer::Completed && m_state != FileTransferPeer::Error && m_state != FileTransferPeer::Canceled )
   {
-    qDebug() << qPrintable( name() ) << "pauses the file transfer";
-    if( close_connection )
-      setTransferPaused();
+    if( !close_connection )
+    {
+      qDebug() << qPrintable( name() ) << "is pausing the file transfer";
+      m_state = FileTransferPeer::Pausing;
+      if( m_fileInfo.isValid() && remoteUserId() != ID_INVALID )
+        emit message( id(), remoteUserId(), m_fileInfo, tr( "Transfer is about to pause" ), m_state );
+    }
     else
-      m_state = FileTransferPeer::Paused;
+      setTransferPaused();
   }
 }
 
 void FileTransferPeer::setTransferPaused()
 {
-  if( isTransferPaused() )
+  if( m_state == FileTransferPeer::Paused )
     return;
   qDebug() << qPrintable( name() ) << "has paused the transfer of file" << qPrintable( m_fileInfo.name() ) << "with user id" << remoteUserId();
   m_state = FileTransferPeer::Paused;
   closeAll();
-  emit message( id(), remoteUserId(), m_fileInfo, tr( "Transfer paused after %1" ).arg( Bee::timeToString( m_elapsedTime ) ), m_state );
+  if( m_fileInfo.isValid() && remoteUserId() != ID_INVALID )
+    emit message( id(), remoteUserId(), m_fileInfo, tr( "Transfer paused after %1" ).arg( Bee::timeToString( m_elapsedTime ) ), m_state );
+  emit operationCompleted();
 }
 
 void FileTransferPeer::socketError( QAbstractSocket::SocketError )

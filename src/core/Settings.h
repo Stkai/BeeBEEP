@@ -474,6 +474,9 @@ public:
 
   inline int clearCacheAfterDays() const;
   inline void setClearCacheAfterDays( int );
+  inline int removePartiallyDownloadedFilesAfterDays() const;
+  inline void setRemovePartiallyDownloadedFilesAfterDays( int );
+  QString partiallyDownloadedFileExtension() const;
 
   inline void setSaveUserList( bool );
   inline bool saveUserList() const;
@@ -849,6 +852,7 @@ private:
   bool m_removeInactiveUsers;
 
   int m_clearCacheAfterDays;
+  int m_removePartiallyDownloadedFilesAfterDays;
 
   bool m_saveUserList;
   QStringList m_userList;
@@ -1285,6 +1289,8 @@ inline bool Settings::chatSaveSystemMessages() const { return m_chatSaveSystemMe
 inline void Settings::setChatSaveSystemMessages( bool new_value ) { m_chatSaveSystemMessages = new_value; }
 inline int Settings::clearCacheAfterDays() const { return m_clearCacheAfterDays; }
 inline void Settings::setClearCacheAfterDays( int new_value ) { m_clearCacheAfterDays = new_value; }
+inline int Settings::removePartiallyDownloadedFilesAfterDays() const { return m_removePartiallyDownloadedFilesAfterDays; }
+inline void Settings::setRemovePartiallyDownloadedFilesAfterDays( int new_value ) { m_removePartiallyDownloadedFilesAfterDays = new_value; }
 inline QString Settings::defaultListBackgroundColor() const { return QLatin1String( "#ffffff" ); }
 inline QString Settings::defaultSystemBackgroundColor() const { return QLatin1String( "#f5f5f5" ); }
 inline void Settings::setDownloadInUserFolder( bool new_value ) { m_downloadInUserFolder = new_value; }

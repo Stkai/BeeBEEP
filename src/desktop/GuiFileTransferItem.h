@@ -43,6 +43,7 @@ public:
   inline const FileInfo& fileInfo() const;
   inline FileTransferPeer::TransferState transferState() const;
   void setTransferState( FileTransferPeer::TransferState );
+  inline bool isStopped() const;
 
   void init( VNumber peer_id, const User&, const FileInfo& );
   bool updateFileInfo( const FileInfo&, FileSizeType, int );
@@ -69,5 +70,5 @@ inline VNumber GuiFileTransferItem::peerId() const { return m_peerId; }
 inline VNumber GuiFileTransferItem::userId() const { return m_userId; }
 inline const FileInfo& GuiFileTransferItem::fileInfo() const { return m_fileInfo; }
 inline FileTransferPeer::TransferState GuiFileTransferItem::transferState() const { return m_transferState; }
-
+inline bool GuiFileTransferItem::isStopped() const { return m_transferState < FileTransferPeer::Starting || m_transferState > FileTransferPeer::Completed; }
 #endif // BEEBEEP_GUIFILETRANSFERITEM_H

@@ -654,6 +654,10 @@
         <source>%1 Unable to send %2 to %3: file is empty.</source>
         <translation>%1 Impossibile inviare %2 a %3: il file è vuoto.</translation>
     </message>
+    <message>
+        <source>%1 has end-to-end encryption enabled</source>
+        <translation>%1 ha la crittografia abilitata</translation>
+    </message>
 </context>
 <context>
     <name>Date</name>
@@ -713,7 +717,7 @@
     </message>
     <message>
         <source>%1 bytes sent not confirmed (%2 bytes confirmed)</source>
-        <translation>%1 bytes inviato non confermati( %2 bytes confermati invece)</translation>
+        <translation>%1 byte inviati non confermati (%2 byte confermati invece)</translation>
     </message>
     <message>
         <source>Unable to upload data</source>
@@ -721,11 +725,11 @@
     </message>
     <message>
         <source>%1 bytes downloaded but the file size is only %2 bytes</source>
-        <translation>%1 bytes scaricati ma la dimensione del file è di soli %2 bytes</translation>
+        <translation>%1 byte scaricati ma la dimensione del file è di soli %2 byte</translation>
     </message>
     <message>
         <source>%1 bytes uploaded but the file size is only %2 bytes</source>
-        <translation>%1 bytes caricati ma la dimensione del file è di soli %2 bytes</translation>
+        <translation>%1 byte caricati ma la dimensione del file è di soli %2 byte</translation>
     </message>
     <message>
         <source>unable to send file header</source>
@@ -770,6 +774,14 @@
     <message>
         <source>Transfer paused after %1</source>
         <translation>Trasferimento in pausa dopo %1</translation>
+    </message>
+    <message>
+        <source>%1 bytes uploaded but the remote file size is %2 bytes</source>
+        <translation>%1 byte caricati ma la dimensione del file remoto è di %2 byte</translation>
+    </message>
+    <message>
+        <source>Transfer is about to pause</source>
+        <translation>Trasferimento in procinto di andare in pausa</translation>
     </message>
 </context>
 <context>
@@ -1596,7 +1608,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Pause</source>
-        <translation>Pausa</translation>
+        <translation type="vanished">Pausa</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -1613,6 +1625,18 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Ok</source>
         <translation>Ok</translation>
+    </message>
+    <message>
+        <source>Yes and delete the partially downloaded file</source>
+        <translation>Sì e cancella il file scaricato parzialmente</translation>
+    </message>
+    <message>
+        <source>Yes and keep the partially downloaded file</source>
+        <translation type="vanished">Sì e mantieni il file scaricato parzialmente</translation>
+    </message>
+    <message>
+        <source>Do you want to try resuming the transfer of %1?</source>
+        <translation>Vuoi provare a recuperare il trasferimento di %1?</translation>
     </message>
 </context>
 <context>
@@ -3432,6 +3456,14 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Enable BEEP alert also for active chat windows</source>
         <translation>Abilita il BEEP di avviso anche per le finestre di chat attive</translation>
+    </message>
+    <message>
+        <source>Please select the number of days that partially downloaded files can remain cached (current: %1, never clear: -1, always clear: 0).</source>
+        <translation>Seleziona il numero di giorni in cui i file scaricati parzialmente possono restare memorizzati nella cache (attuale: %1, non cancellare mai: -1, cancella sempre: 0).</translation>
+    </message>
+    <message>
+        <source>Delete partially downloaded files after %1 days</source>
+        <translation>Cancella i file scaricati parzialmente dopo %1 giorni</translation>
     </message>
 </context>
 <context>
@@ -5480,6 +5512,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Resume transfer</source>
         <translation>Riprendi trasferimento</translation>
+    </message>
+    <message>
+        <source>Please wait</source>
+        <translation>Attendere prego</translation>
     </message>
 </context>
 <context>

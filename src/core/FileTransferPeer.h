@@ -33,7 +33,7 @@ class FileTransferPeer : public QObject
   Q_OBJECT
 
 public:
-  enum TransferState { Unknown, Queue, Starting, Request, FileHeader, Transferring, Completed, Error, Canceled, Paused };
+  enum TransferState { Unknown, Queue, Starting, Request, FileHeader, Transferring, Completed, Error, Canceled, Pausing, Paused };
 
   explicit FileTransferPeer( QObject *parent = Q_NULLPTR );
 
@@ -58,11 +58,11 @@ public:
 
   inline bool isActive() const;
   inline bool isTransferCompleted() const;
-  inline bool isTransferPaused() const;
   void startUpload( const FileInfo& );
   inline int elapsedTime() const;
 
   void pauseTransfer( bool close_connection );
+  bool removePartiallyDownloadedFile();
 
   void onTickEvent( int );
 
@@ -139,7 +139,6 @@ inline const FileInfo& FileTransferPeer::fileInfo() const { return m_fileInfo; }
 inline QHostAddress FileTransferPeer::peerAddress() const { return mp_socket->peerAddress(); }
 inline bool FileTransferPeer::isActive() const { return m_state >= FileTransferPeer::Starting && m_state <= FileTransferPeer::Completed; }
 inline bool FileTransferPeer::isTransferCompleted() const { return m_state == FileTransferPeer::Completed; }
-inline bool FileTransferPeer::isTransferPaused() const { return m_state == FileTransferPeer::Paused && !mp_socket->isConnected(); }
 inline void FileTransferPeer::setRemoteUserId( VNumber new_value ) { m_remoteUserId = new_value; }
 inline VNumber FileTransferPeer::remoteUserId() const { return mp_socket->userId() != ID_INVALID ? mp_socket->userId() : m_remoteUserId; }
 inline int FileTransferPeer::elapsedTime() const { return m_elapsedTime; }

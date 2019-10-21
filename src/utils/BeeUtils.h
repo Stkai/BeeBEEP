@@ -97,7 +97,7 @@ namespace Bee
   QString timeToString( int msec );
   qint64 roundFromDouble( double d );
   qint64 bytesPerSecond( FileSizeType transferred_byte_size, int time_elapsed_ms );
-  QString transferTimeLeft( FileSizeType bytes_transferred, FileSizeType total_bytes, int elapsed_time );
+  QString transferTimeLeft( FileSizeType bytes_transferred, FileSizeType total_bytes, FileSizeType starting_position, int elapsed_time );
 
 }
 

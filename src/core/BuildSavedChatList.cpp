@@ -83,6 +83,7 @@ void BuildSavedChatList::buildList()
   elapsed_time.start();
 
   clearCacheItems();
+  removePartiallyDownloadedFiles();
 
   QString file_name = Settings::instance().savedChatsFilePath();
   QFile file( file_name );
@@ -253,7 +254,9 @@ void BuildSavedChatList::clearCacheItems()
   QList<QFileInfo> fi_list = cache_dir.entryInfoList();
   foreach( QFileInfo fi, fi_list )
   {
-    int fi_days = static_cast<int>(qAbs( fi.lastModified().daysTo( today ) ));
+    if( fi.suffix() == Settings::instance().partiallyDownloadedFileExtension() )
+      continue;
+    int fi_days = static_cast<int>( qAbs( fi.lastModified().daysTo( today ) ) );
  #ifdef BEEBEEP_DEBUG
     qDebug() << "Cache file" << qPrintable( fi.fileName() ) << "is" << fi_days << "days old";
  #endif
@@ -269,4 +272,52 @@ void BuildSavedChatList::clearCacheItems()
     }
   }
   qDebug() << "Cleaned" << item_counter << "items from cache";
+}
+
+void BuildSavedChatList::removePartiallyDownloadedFiles()
+{
+  int clear_days = Settings::instance().removePartiallyDownloadedFilesAfterDays();
+  if( clear_days < 0 )
+  {
+    qDebug() << "Automatic remove of partially downloaded files is disabled";
+    return;
+  }
+
+  QString cache_folder = Settings::instance().cacheFolder();
+  QDir cache_dir( cache_folder );
+  if( !cache_dir.exists() )
+    return;
+  if( !cache_dir.isReadable() )
+  {
+    qWarning() << "Cache folder path" << qPrintable( cache_folder ) << "is not readable";
+    return;
+  }
+  qDebug() << "Cleaning partially downloaded files from path" << qPrintable( cache_folder );
+  cache_dir.setFilter( QDir::Files | QDir::NoDotAndDotDot );
+  cache_dir.setSorting( QDir::Time | QDir::Reversed );
+  QDateTime today = QDateTime::currentDateTime();
+  int item_counter = 0;
+  QList<QFileInfo> fi_list = cache_dir.entryInfoList();
+  foreach( QFileInfo fi, fi_list )
+  {
+    if( fi.suffix() != Settings::instance().partiallyDownloadedFileExtension() )
+      continue;
+    if( !fi.isFile() )
+      continue;
+    int fi_days = static_cast<int>( qAbs( fi.lastModified().daysTo( today ) ) );
+ #ifdef BEEBEEP_DEBUG
+    qDebug() << "Partially downloaded file" << qPrintable( fi.fileName() ) << "is" << fi_days << "days old";
+ #endif
+    if( clear_days == 0 || fi_days > clear_days )
+    {
+      if( cache_dir.remove( fi.fileName() ) )
+      {
+        item_counter++;
+        qDebug() << "Removed partially downloaded from cache:" << qPrintable( fi.fileName() ) << "(last modified" << qPrintable( fi.lastModified().toString( Qt::ISODate ) ) << ")";
+      }
+      else
+        qWarning() << "Unable to remove partially downloaded from cache:" << qPrintable( fi.fileName() ) << "(last modified" << qPrintable( fi.lastModified().toString( Qt::ISODate ) ) << ")";
+    }
+  }
+  qDebug() << "Cleaned" << item_counter << "partially downloaded files from cache";
 }

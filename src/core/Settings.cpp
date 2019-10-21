@@ -127,6 +127,7 @@ Settings::Settings()
   m_allowEditNickname = true;
   m_disableCreateMessage = false;
   m_clearCacheAfterDays = 96;
+  m_removePartiallyDownloadedFilesAfterDays = 5;
 
   m_checkUserConnectedFromDatagramIp = false;
   m_skipLocalHardwareAddresses = QStringList();
@@ -591,6 +592,7 @@ void Settings::loadRcFile()
   m_disableCreateMessage = sets->value( "DisableCreateMessage", m_disableCreateMessage ).toBool();
   m_disableMenuSettings = sets->value( "DisableMenuSettings", m_disableMenuSettings ).toBool();
   m_clearCacheAfterDays = qMax( -1, sets->value( "ClearCacheAfterDays", m_clearCacheAfterDays ).toInt() );
+  m_removePartiallyDownloadedFilesAfterDays = qMax( -1, sets->value( "RemovePartiallyDownloadedFilesAfterDays", m_removePartiallyDownloadedFilesAfterDays ).toInt() );
   m_checkUserConnectedFromDatagramIp = sets->value( "CheckUserConnectedFromDatagramIp", m_checkUserConnectedFromDatagramIp ).toBool();
   m_skipLocalHardwareAddresses.clear();
   QString local_hw_addresses = sets->value( "SkipLocalHardwareAddresses", QString() ).toString();
@@ -1392,6 +1394,7 @@ void Settings::load()
     m_saveMessagesTimestamp = QDateTime::currentDateTime();
   }
   m_clearCacheAfterDays = qMax( -1, sets->value( "ClearCacheAfterDays", m_clearCacheAfterDays ).toInt() );
+  m_removePartiallyDownloadedFilesAfterDays = qMax( -1, sets->value( "RemovePartiallyDownloadedFilesAfterDays", m_removePartiallyDownloadedFilesAfterDays ).toInt() );
   sets->endGroup();
 
   sets->beginGroup( "Network");
@@ -1758,6 +1761,7 @@ void Settings::save()
   sets->setValue( "SendOfflineMessagesToDefaultChat", m_sendOfflineMessagesToDefaultChat );
   sets->setValue( "SaveMessagesTimestamp", m_saveMessagesTimestamp );
   sets->setValue( "ClearCacheAfterDays", m_clearCacheAfterDays );
+  sets->setValue( "RemovePartiallyDownloadedFilesAfterDays", m_removePartiallyDownloadedFilesAfterDays );
   sets->endGroup();
   sets->beginGroup( "Network");
 #ifdef BEEBEEP_USE_MULTICAST_DNS
@@ -1910,6 +1914,15 @@ bool Settings::isFileImageInCache( const QString& file_path ) const
 #endif
     return false;
   }
+}
+
+QString Settings::partiallyDownloadedFileExtension() const
+{
+#ifdef Q_OS_OS2
+  return QString( "par" );
+#else
+  return QString( "part" );
+#endif
 }
 
 void Settings::clearTemporaryFiles()

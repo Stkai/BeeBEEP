@@ -602,6 +602,10 @@
         <source>%1 Unable to send %2 to %3: file is empty.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>%1 has end-to-end encryption enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Date</name>
@@ -713,6 +717,14 @@
     </message>
     <message>
         <source>Transfer paused after %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 bytes uploaded but the remote file size is %2 bytes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transfer is about to pause</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1515,10 +1527,6 @@ Please select a different name.</source>
         <translation type="unfinished">Ви хочете відминити передачу %1?</translation>
     </message>
     <message>
-        <source>Pause</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Yes</source>
         <translation type="unfinished">Так</translation>
     </message>
@@ -1532,6 +1540,14 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes and delete the partially downloaded file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to try resuming the transfer of %1?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3231,6 +3247,14 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Enable BEEP alert also for active chat windows</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select the number of days that partially downloaded files can remain cached (current: %1, never clear: -1, always clear: 0).</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete partially downloaded files after %1 days</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5122,6 +5146,10 @@ Please select a different name.</source>
     <message>
         <source>Resume transfer</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please wait</source>
+        <translation type="unfinished">Зачекайте</translation>
     </message>
 </context>
 <context>

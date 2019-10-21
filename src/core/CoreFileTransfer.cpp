@@ -41,13 +41,15 @@ bool Core::startFileTransferServer()
 {
   if( mp_fileTransfer->isActive() )
   {
+#ifdef BEEBEEP_DEBUG
     qDebug() << "Starting File Transfer server but it is already started";
+#endif
     return true;
   }
 
   if( !mp_fileTransfer->startListener() )
   {
-    QString icon_html = IconManager::instance().toHtml( "upload.png", "*F*" );
+    QString icon_html = IconManager::instance().toHtml( "warning.png", "*F*" );
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                            tr( "%1 Unable to start file transfer server: bind address/port failed." ).arg( icon_html ),
                            DispatchToChat, ChatMessage::FileTransfer );
@@ -829,4 +831,24 @@ void Core::uploadToShareBox( VNumber to_user_id, const FileInfo& fi, const QStri
   qDebug() << "Upload file" << fi.path() << "to path" << to_path << "of user" << to_user_id;
 #endif
   sendFile( to_user_id, fi.path(), to_path, true, ID_INVALID );
+}
+
+bool Core::resumeFileTransfer( VNumber user_id, const FileInfo& file_info )
+{
+  if( file_info.isDownload() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Try to resume downloading file" << qPrintable( file_info.path() ) << "from user" << user_id;
+#endif
+    mp_fileTransfer->downloadFile( user_id, file_info );
+  }
+  else
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Try to resume uploading file" << qPrintable( file_info.path() ) << "to user" << user_id;
+#endif
+    Chat c = ChatManager::instance().findChatByPrivateId( file_info.chatPrivateId(), false, user_id );
+    return sendFile( user_id, file_info.path(), file_info.shareFolder(), file_info.isInShareBox(), c.isValid() ? c.id() : ID_DEFAULT_CHAT );
+  }
+  return false;
 }

@@ -63,6 +63,7 @@ DisableMenuSettings=[true/false] hide the settings menu on top menu (default=fal
 ClearCacheAfterDays=[integer] -1: never            (default=96) [5.6.5]
                                0: always
                              365: after 1 year
+RemovePartiallyDownloadedFilesAfterDays= [same as ClearCacheAfterDays]  (default=5) [5.7.7]
 CheckUserConnectedFromDatagramIp=[true/false] if true BeeBEEP checks if the user is connected also from ip parsed in datagram (default=true) [5.6.9]
 SkipLocalHardwareAddresses=(Strings "" comma separated) tells to BeeBEEP which hardware addresses (usually mac addresses) must to be skipped (default="") [5.6.9]
 UseOnlyMulticast=[true/false] if enabled BeeBEEP will multicast only in the MulticastGroupAddress (if empty it uses default 239.255.64.75) (default=false) [5.6.9]
@@ -258,6 +259,7 @@ UseLowDelayOptionOnSocket=[true/false] Try to optimize the socket for low latenc
 DelayConnectionAtStartup(ms)=[integer] sometimes BeeBEEP starts before the network so you can delay connection (default=3000) [4.2.0]
 SendOfflineMessagesToDefaultChat=[true/false] Send offline messages to default chat (all users) also (default=false) [4.2.0]
 ClearCacheAfterDays=[integer] see above (default 96) [5.6.5]
+RemovePartiallyDownloadedFilesAfterDays=[integer] see above (default 5) [5.7.7]
 
 [Network]
 BroadcastAddresses=(do not edit manually)

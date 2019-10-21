@@ -103,10 +103,30 @@ GuiFileTransferItem* GuiFileTransfer::createItem( VNumber peer_id, const User& u
   QHeaderView* hv = header();
   if( hv->isHidden() )
     hv->show();
-  GuiFileTransferItem* item = new GuiFileTransferItem( this );
-  item->setFirstColumnSpanned( false );
-  item->init( peer_id, u, fi );
-  return item;
+
+  /* clean similar stopped items */
+  QList<QTreeWidgetItem*> items_to_clear;
+  QTreeWidgetItemIterator it( this );
+  while( *it )
+  {
+    GuiFileTransferItem* item = reinterpret_cast<GuiFileTransferItem*>( *it );
+    if( item && item->fileInfo().fileHash() == fi.fileHash() && item->userId() == u.id() && item->isStopped() )
+      items_to_clear.append( *it );
+    ++it;
+  }
+
+  foreach( QTreeWidgetItem* item_to_clear, items_to_clear )
+  {
+    int index_to_clear = indexOfTopLevelItem( item_to_clear );
+    if( index_to_clear >= 0 )
+      takeTopLevelItem( index_to_clear );
+    delete item_to_clear;
+  }
+
+  GuiFileTransferItem* new_item = new GuiFileTransferItem( this );
+  new_item->setFirstColumnSpanned( false );
+  new_item->init( peer_id, u, fi );
+  return new_item;
 }
 
 void GuiFileTransfer::setProgress( VNumber peer_id, const User& u, const FileInfo& fi, FileSizeType bytes, int elapsed_time )
@@ -116,6 +136,10 @@ void GuiFileTransfer::setProgress( VNumber peer_id, const User& u, const FileInf
     item = createItem( peer_id, u, fi );
   if( bytes > 0 )
     item->setTransferState( FileTransferPeer::Transferring );
+  else if( bytes < 0 )
+    item->setTransferState( FileTransferPeer::Error );
+  else
+    item->setTransferState( FileTransferPeer::Starting );
   item->updateFileInfo( fi, bytes, elapsed_time );
 }
 
@@ -141,10 +165,24 @@ void GuiFileTransfer::checkItemClicked( QTreeWidgetItem* tw_item, int col )
     if( item->transferState() == FileTransferPeer::Transferring )
     {
       QString q_txt = tr( "Do you want to cancel the transfer of %1?" ).arg( item->fileInfo().name() );
-      QString b_pause = Settings::instance().resumeFileTransfer() ? tr( "Pause" ) : QString();
-      int i_ret = QMessageBox::question( this, Settings::instance().programName(), q_txt, tr( "Yes" ), tr( "No" ), b_pause, 1, 1 );
-      if( i_ret == 0 || i_ret == 2 )
+      QString b_remove_partial_download = item->fileInfo().isDownload() && Settings::instance().resumeFileTransfer() ? tr( "Yes and delete the partially downloaded file" ) : QString();
+      int i_ret = QMessageBox::question( this, Settings::instance().programName(), q_txt, tr( "Yes" ), tr( "No" ), b_remove_partial_download, 1, 1 );
+      if( i_ret == 1 )
+        return;
+      else if( i_ret == 0 && Settings::instance().resumeFileTransfer() )
+        emit transferPaused( item->peerId() );
+      else
         emit transferCanceled( item->peerId() );
+    }
+    else if( item->transferState() == FileTransferPeer::Paused )
+    {
+      QString q_txt = tr( "Do you want to try resuming the transfer of %1?" ).arg( item->fileInfo().name() );
+      if( QMessageBox::question( this, Settings::instance().programName(), q_txt, tr( "Yes" ), tr( "No" ), QString(), 0, 1 ) == 0 )
+        emit resumeTransfer( item->userId(), item->fileInfo() );
+    }
+    else
+    {
+      // do nothing for now
     }
   }
 }

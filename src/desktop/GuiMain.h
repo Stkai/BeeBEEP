@@ -219,6 +219,7 @@ private slots:
 #ifdef BEEBEEP_USE_VOICE_CHAT
   void sendVoiceMessageToChat( VNumber, const QString& );
 #endif
+  void resumeFileTransfer( VNumber user_id, const FileInfo& );
 
 protected:
   void keyPressEvent( QKeyEvent* );
@@ -271,6 +272,7 @@ private:
   void showCheckSaveChatMessages();
   void setChatMaxLinesToSaveInAction( QAction* );
   void setClearCacheAfterDaysInAction( QAction* );
+  void setClearPartiallyDownloadedFilesAfterDaysInAction( QAction* );
   void setMaxQueuedDownloadsInAction( QAction* );
   bool isFileTransferInProgress();
 

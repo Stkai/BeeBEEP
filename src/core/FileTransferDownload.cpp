@@ -28,7 +28,7 @@
 
 void FileTransferPeer::sendDownloadData()
 {
-  if( m_state == FileTransferPeer::Transferring )
+  if( m_state == FileTransferPeer::Transferring || m_state == FileTransferPeer::Pausing )
     sendDownloadDataConfirmation();
   else
     qWarning() << qPrintable( name() ) << "tries to send download data but it is in invalid state";
@@ -40,7 +40,10 @@ void FileTransferPeer::sendDownloadRequest()
   {
     QFileInfo file_info( m_file.fileName() );
     if( file_info.exists() && Settings::instance().resumeFileTransfer() )
+    {
       m_fileInfo.setStartingPosition( file_info.size() );
+      m_bytesTransferred = file_info.size();
+    }
     else
       m_fileInfo.setStartingPosition( 0 );
   }
@@ -66,14 +69,17 @@ void FileTransferPeer::sendDownloadRequest()
 
 void FileTransferPeer::sendDownloadDataConfirmation()
 {
-  bool transfer_paused = m_state == FileTransferPeer::Paused;
+  bool transfer_is_about_to_pause = m_state == FileTransferPeer::Pausing;
 #ifdef BEEBEEP_DEBUG
-  qDebug() << qPrintable( name() ) << "sending confirmation for" << m_bytesTransferred << "bytes" << (transfer_paused ? "(paused)" : "(in progress)");
+  qDebug() << qPrintable( name() ) << "sending" << m_bytesTransferred << "confirmation for" << m_totalBytesTransferred << "/" << m_fileInfo.size() << "bytes" << (transfer_is_about_to_pause ? "(paused)" : "(in progress)");
 #endif
-  if( !mp_socket->sendData( Protocol::instance().fileTransferBytesArrivedConfirmation( mp_socket->protoVersion(), m_bytesTransferred, m_totalBytesTransferred, transfer_paused ) ) )
+  if( !mp_socket->sendData( Protocol::instance().fileTransferBytesArrivedConfirmation( mp_socket->protoVersion(), m_bytesTransferred, m_totalBytesTransferred, transfer_is_about_to_pause ) ) )
+  {
     cancelTransfer();
+    return;
+  }
 
-  if( transfer_paused )
+  if( transfer_is_about_to_pause )
     setTransferPaused();
 }
 
@@ -111,7 +117,7 @@ void FileTransferPeer::checkDownloadData( const QByteArray& byte_array )
     return;
   }
 
-  if( m_state != FileTransferPeer::Transferring )
+  if( m_state != FileTransferPeer::Transferring && m_state != FileTransferPeer::Pausing )
   {
     qWarning() << qPrintable( name() ) << "tries to check data with invalid state" << m_state;
     return;
@@ -148,13 +154,23 @@ void FileTransferPeer::checkDownloadData( const QByteArray& byte_array )
 
 QString FileTransferPeer::temporaryFilePath() const
 {
-#ifdef Q_OS_OS2
-  return QString( "%1/%2.%3" ).arg( Settings::instance().cacheFolder(), m_fileInfo.fileHash(), QString( "tmp" ) );
-#else
-  return QString( "%1/%2.%3" ).arg( Settings::instance().cacheFolder(), m_fileInfo.fileHash(), QString( "part" ) );
-#endif
+  return QString( "%1/%2.%3" ).arg( Settings::instance().cacheFolder(), m_fileInfo.fileHash(), Settings::instance().partiallyDownloadedFileExtension() );
 }
 
+bool FileTransferPeer::removePartiallyDownloadedFile()
+{
+  if( !isDownload() || isTransferCompleted() )
+    return false;
+  if( m_file.exists() && m_file.fileName().endsWith( QString( ".%1" ).arg( Settings::instance().partiallyDownloadedFileExtension() ) ) && m_file.remove() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Removed partially downloaded file" << qPrintable( m_file.fileName() );
+#endif
+    return true;
+  }
+  qWarning() << "Unable to remove partially downloaded file" << qPrintable( m_file.fileName() );
+  return false;
+}
 
 
 
