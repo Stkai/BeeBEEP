@@ -822,7 +822,7 @@
     </message>
     <message>
         <location filename="../src/core/FileTransferDownload.cpp" line="135"/>
-        <location filename="../src/core/FileTransferUpload.cpp" line="177"/>
+        <location filename="../src/core/FileTransferUpload.cpp" line="178"/>
         <source>Unable to open file %1</source>
         <translation>Fájl megnyitása nem lehetséges %1</translation>
     </message>
@@ -861,52 +861,57 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="294"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="216"/>
+        <source>Starting transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/FileTransferPeer.cpp" line="303"/>
         <source>Connection timeout</source>
         <translation>Csatlakozás időtúllépése</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="313"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="322"/>
         <source>Transfer timeout</source>
         <translation>Átvitel időtúllépése</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferUpload.cpp" line="112"/>
+        <location filename="../src/core/FileTransferUpload.cpp" line="111"/>
         <source>file no longer exists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferUpload.cpp" line="120"/>
+        <location filename="../src/core/FileTransferUpload.cpp" line="119"/>
         <source>unable to send file header</source>
         <translation>Nem sikerült elküldeni a fájl fejlécét</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferUpload.cpp" line="130"/>
+        <location filename="../src/core/FileTransferUpload.cpp" line="131"/>
         <source>remote host sent invalid data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferUpload.cpp" line="148"/>
+        <location filename="../src/core/FileTransferUpload.cpp" line="149"/>
         <source>%1 bytes uploaded but the remote file size is %2 bytes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferUpload.cpp" line="150"/>
+        <location filename="../src/core/FileTransferUpload.cpp" line="151"/>
         <source>%1 bytes uploaded but the file size is only %2 bytes</source>
         <translation>%1 bájt feltöltve, de a fájl mérete csak%2 bájt</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferUpload.cpp" line="159"/>
+        <location filename="../src/core/FileTransferUpload.cpp" line="160"/>
         <source>%1 bytes sent not confirmed (%2 bytes confirmed)</source>
         <translation>%1 küldött bájt nem megerősített (%2 bájt megerősítve)</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferUpload.cpp" line="183"/>
+        <location filename="../src/core/FileTransferUpload.cpp" line="184"/>
         <source>Unable to seek %1 bytes in file %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferUpload.cpp" line="199"/>
+        <location filename="../src/core/FileTransferUpload.cpp" line="200"/>
         <source>Unable to upload data</source>
         <translation>Nem lehet feltölteni az adatokat</translation>
     </message>
@@ -1907,39 +1912,39 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileTransfer.cpp" line="167"/>
+        <location filename="../src/desktop/GuiFileTransfer.cpp" line="168"/>
         <source>Do you want to cancel the transfer of %1?</source>
         <translation type="unfinished">Szeretné megszakítani a %1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileTransfer.cpp" line="168"/>
+        <location filename="../src/desktop/GuiFileTransfer.cpp" line="169"/>
         <source>Yes and delete the partially downloaded file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileTransfer.cpp" line="169"/>
-        <location filename="../src/desktop/GuiFileTransfer.cpp" line="180"/>
+        <location filename="../src/desktop/GuiFileTransfer.cpp" line="170"/>
+        <location filename="../src/desktop/GuiFileTransfer.cpp" line="181"/>
         <source>Yes</source>
         <translation type="unfinished">Igen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileTransfer.cpp" line="169"/>
-        <location filename="../src/desktop/GuiFileTransfer.cpp" line="180"/>
+        <location filename="../src/desktop/GuiFileTransfer.cpp" line="170"/>
+        <location filename="../src/desktop/GuiFileTransfer.cpp" line="181"/>
         <source>No</source>
         <translation type="unfinished">Nem</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileTransfer.cpp" line="179"/>
+        <location filename="../src/desktop/GuiFileTransfer.cpp" line="180"/>
         <source>Do you want to try resuming the transfer of %1?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileTransfer.cpp" line="204"/>
+        <location filename="../src/desktop/GuiFileTransfer.cpp" line="205"/>
         <source>You cannot open this file if the transfer has not been completed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileTransfer.cpp" line="204"/>
+        <location filename="../src/desktop/GuiFileTransfer.cpp" line="205"/>
         <source>Ok</source>
         <translation type="unfinished"></translation>
     </message>

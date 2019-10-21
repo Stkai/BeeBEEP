@@ -5141,7 +5141,5 @@ void GuiMain::sendVoiceMessageToChat( VNumber chat_id, const QString& file_path 
 
 void GuiMain::resumeFileTransfer( VNumber user_id, const FileInfo& file_info )
 {
-  if( !beeCore->isUserConnected( user_id ) )
-
   beeCore->resumeFileTransfer( user_id, file_info );
 }

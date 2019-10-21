@@ -743,6 +743,10 @@
         <source>Transfer is about to pause</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Starting transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiAddUser</name>

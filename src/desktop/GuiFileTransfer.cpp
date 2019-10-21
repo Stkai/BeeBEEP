@@ -132,19 +132,20 @@ GuiFileTransferItem* GuiFileTransfer::createItem( VNumber peer_id, const User& u
 void GuiFileTransfer::setProgress( VNumber peer_id, const User& u, const FileInfo& fi, FileSizeType bytes, int elapsed_time )
 {
   GuiFileTransferItem* item = findItem( peer_id );
-  if( !item )
+  if( !item && bytes > 0 )
+  {
     item = createItem( peer_id, u, fi );
-  if( bytes > 0 )
     item->setTransferState( FileTransferPeer::Transferring );
-  else if( bytes < 0 )
-    item->setTransferState( FileTransferPeer::Error );
-  else
-    item->setTransferState( FileTransferPeer::Starting );
-  item->updateFileInfo( fi, bytes, elapsed_time );
+  }
+  if( item )
+    item->updateFileInfo( fi, bytes, elapsed_time );
 }
 
 void GuiFileTransfer::setMessage( VNumber peer_id, const User& u, const FileInfo& fi, const QString& msg, FileTransferPeer::TransferState ft_state )
 {
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Showing file transfer message" << msg << "with state" << ft_state;
+#endif
   GuiFileTransferItem* item = findItem( peer_id );
   if( !item )
     item = createItem( peer_id, u, fi );

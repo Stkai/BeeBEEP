@@ -783,6 +783,10 @@
         <source>Transfer is about to pause</source>
         <translation>Trasferimento in procinto di andare in pausa</translation>
     </message>
+    <message>
+        <source>Starting transfer</source>
+        <translation>Avvio trasferimento in corso</translation>
+    </message>
 </context>
 <context>
     <name>GuiAddUser</name>

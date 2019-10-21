@@ -57,8 +57,8 @@ void FileTransferPeer::sendDownloadRequest()
   {
     if( mp_socket->protoVersion() < FILE_TRANSFER_2_PROTO_VERSION )
     {
-      m_state = FileTransferPeer::Transferring;
       qWarning() << qPrintable( name() ) << "using an old file download protocol version" << mp_socket->protoVersion();
+      setTransferringState();
     }
     else
       m_state = FileTransferPeer::FileHeader;
@@ -107,12 +107,12 @@ void FileTransferPeer::checkDownloadData( const QByteArray& byte_array )
     m_fileInfo.setSize( file_header.size() );
     if( file_header.lastModified().isValid() )
       m_fileInfo.setLastModified( file_header.lastModified() );
-    m_state = FileTransferPeer::Transferring;
 
     if( m_bytesTransferred > 0 && file_header.startingPosition() != m_bytesTransferred )
       m_bytesTransferred = 0;
     m_totalBytesTransferred = m_bytesTransferred;
 
+    setTransferringState();
     sendTransferData();
     return;
   }

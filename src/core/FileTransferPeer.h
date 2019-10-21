@@ -92,6 +92,7 @@ protected:
   void sendTransferData();
   void computeElapsedTime();
   void setTransferPaused();
+  void setTransferringState();
 
   /* FileTransferUpload */
   void sendUploadData();

@@ -94,8 +94,8 @@ void GuiFileTransferItem::setTransferState( FileTransferPeer::TransferState new_
 
 void GuiFileTransferItem::setMessage( const QString& msg, FileTransferPeer::TransferState ft_state  )
 {
-  setText( ColumnProgress, msg );
   setTransferState( ft_state );
+  setText( ColumnProgress, msg );
 }
 
 void GuiFileTransferItem::update()

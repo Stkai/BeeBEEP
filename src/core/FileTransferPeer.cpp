@@ -207,6 +207,15 @@ void FileTransferPeer::setTransferPaused()
   emit operationCompleted();
 }
 
+void FileTransferPeer::setTransferringState()
+{
+  if( m_state == FileTransferPeer::Transferring )
+    return;
+  m_state = FileTransferPeer::Transferring;
+  if( m_fileInfo.isValid() && remoteUserId() != ID_INVALID )
+    emit message( id(), remoteUserId(), m_fileInfo, tr( "Starting transfer" ), m_state );
+}
+
 void FileTransferPeer::socketError( QAbstractSocket::SocketError )
 {
   // Make a check to remove the error after a transfer completed

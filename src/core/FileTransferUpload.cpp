@@ -76,24 +76,23 @@ void FileTransferPeer::startUpload( const FileInfo& fi )
   if( mp_socket->protoVersion() < FILE_TRANSFER_2_PROTO_VERSION )
   {
     qWarning() << qPrintable( name() ) << "using an old file upload protocol version" << mp_socket->protoVersion();
-    m_state = FileTransferPeer::Transferring;
+    setTransferringState();
     sendUploadData();
   }
   else
-  {
-    m_state = FileTransferPeer::FileHeader;
     sendFileHeader();
-  }
 }
 
 void FileTransferPeer::sendFileHeader()
 {
+  if( m_state == FileTransferPeer::FileHeader )
+    return;
+  m_state = FileTransferPeer::FileHeader;
 #ifdef BEEBEEP_DEBUG
   qDebug() << qPrintable( name() ) << "sends File Size Header for" << m_fileInfo.path();
 #endif
   m_bytesTransferred = 0;
   m_totalBytesTransferred = 0;
-  m_state = FileTransferPeer::Transferring;
 
   QFileInfo file_info_now_in_system( m_fileInfo.path() );
   if( file_info_now_in_system.exists() )
@@ -118,6 +117,8 @@ void FileTransferPeer::sendFileHeader()
 
   if( !mp_socket->sendData( file_header ) )
     setError( tr( "unable to send file header" ) );
+  else
+    setTransferringState();
 }
 
 void FileTransferPeer::checkUploading( const QByteArray& byte_array )
