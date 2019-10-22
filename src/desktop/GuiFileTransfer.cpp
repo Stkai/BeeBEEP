@@ -42,6 +42,7 @@ GuiFileTransfer::GuiFileTransfer( QWidget *parent )
   setColumnHidden( GuiFileTransferItem::ColumnSort, true );
   sortItems( GuiFileTransferItem::ColumnSort, Qt::DescendingOrder );
   setContextMenuPolicy( Qt::CustomContextMenu );
+  setSelectionMode( QAbstractItemView::SingleSelection );
 
   QHeaderView* hv = header();
 #if QT_VERSION >= 0x050000
@@ -64,9 +65,6 @@ GuiFileTransfer::GuiFileTransfer( QWidget *parent )
   setColumnWidth( GuiFileTransferItem::ColumnReport, 48 );
   setColumnWidth( GuiFileTransferItem::ColumnTimeLeft, 40 );
   hv->hide();
-
-  mp_menuContext = new QMenu( this );
-  mp_menuContext->addAction( IconManager::instance().icon( "remove.png" ), tr( "Remove all completed transfers" ), this, SLOT( removeAllCompleted() ) );
 
   connect( this, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemClicked( QTreeWidgetItem*, int ) ) );
   connect( this, SIGNAL( itemDoubleClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemDoubleClicked( QTreeWidgetItem*, int ) ) );
@@ -119,8 +117,11 @@ GuiFileTransferItem* GuiFileTransfer::createItem( VNumber peer_id, const User& u
   {
     int index_to_clear = indexOfTopLevelItem( item_to_clear );
     if( index_to_clear >= 0 )
-      takeTopLevelItem( index_to_clear );
-    delete item_to_clear;
+    {
+      QTreeWidgetItem* item_taken = takeTopLevelItem( index_to_clear );
+      if( item_taken )
+        delete item_taken;
+    }
   }
 
   GuiFileTransferItem* new_item = new GuiFileTransferItem( this );
@@ -152,6 +153,24 @@ void GuiFileTransfer::setMessage( VNumber peer_id, const User& u, const FileInfo
   item->setMessage( msg, ft_state );
 }
 
+void GuiFileTransfer::pauseOrCancelTransfer( GuiFileTransferItem* item )
+{
+  if( !item )
+    return;
+  if( item->transferState() == FileTransferPeer::Transferring )
+  {
+    QString q_txt = tr( "Do you want to cancel the transfer of %1?" ).arg( item->fileInfo().name() );
+    QString b_remove_partial_download = item->fileInfo().isDownload() && Settings::instance().resumeFileTransfer() ? tr( "Yes and delete the partially downloaded file" ) : QString();
+    int i_ret = QMessageBox::question( this, Settings::instance().programName(), q_txt, tr( "Yes" ), tr( "No" ), b_remove_partial_download, 1, 1 );
+    if( i_ret == 1 )
+      return;
+    else if( i_ret == 0 && Settings::instance().resumeFileTransfer() )
+      emit transferPaused( item->peerId() );
+    else
+      emit transferCanceled( item->peerId() );
+  }
+}
+
 void GuiFileTransfer::checkItemClicked( QTreeWidgetItem* tw_item, int col )
 {
   if( !tw_item )
@@ -160,30 +179,14 @@ void GuiFileTransfer::checkItemClicked( QTreeWidgetItem* tw_item, int col )
     return;
   }
 
-  if( col == GuiFileTransferItem::ColumnCancel )
+  if( col <= GuiFileTransferItem::ColumnReport || col >= GuiFileTransferItem::ColumnProgress )
   {
     GuiFileTransferItem* item = reinterpret_cast<GuiFileTransferItem*>( tw_item );
-    if( item->transferState() == FileTransferPeer::Transferring )
+    if( item )
     {
-      QString q_txt = tr( "Do you want to cancel the transfer of %1?" ).arg( item->fileInfo().name() );
-      QString b_remove_partial_download = item->fileInfo().isDownload() && Settings::instance().resumeFileTransfer() ? tr( "Yes and delete the partially downloaded file" ) : QString();
-      int i_ret = QMessageBox::question( this, Settings::instance().programName(), q_txt, tr( "Yes" ), tr( "No" ), b_remove_partial_download, 1, 1 );
-      if( i_ret == 1 )
-        return;
-      else if( i_ret == 0 && Settings::instance().resumeFileTransfer() )
-        emit transferPaused( item->peerId() );
-      else
-        emit transferCanceled( item->peerId() );
-    }
-    else if( item->transferState() == FileTransferPeer::Paused )
-    {
-      QString q_txt = tr( "Do you want to try resuming the transfer of %1?" ).arg( item->fileInfo().name() );
-      if( QMessageBox::question( this, Settings::instance().programName(), q_txt, tr( "Yes" ), tr( "No" ), QString(), 0, 1 ) == 0 )
-        emit resumeTransfer( item->userId(), item->fileInfo() );
-    }
-    else
-    {
-      // do nothing for now
+      clearSelection();
+      item->setSelected( true );
+      openMenu( QCursor::pos() );
     }
   }
 }
@@ -211,15 +214,133 @@ void GuiFileTransfer::checkItemDoubleClicked( QTreeWidgetItem* tw_item, int )
   emit openFileCompleted( url );
 }
 
-void GuiFileTransfer::openMenu( const QPoint& )
+void GuiFileTransfer::openMenu( const QPoint& p )
 {
+  mp_menuContext = new QMenu( this );
   if( topLevelItemCount() > 0 )
-    mp_menuContext->exec( QCursor::pos() );
+  {
+    GuiFileTransferItem* item = findSelectedItem();
+    if( !item )
+    {
+      QTreeWidgetItem* tw_item = itemAt( p );
+      if( tw_item )
+        item = reinterpret_cast<GuiFileTransferItem*>( tw_item );
+      if( item )
+        item->setSelected( true );
+    }
+
+    if( item )
+    {
+      mp_menuContext->addAction( item->defaultIcon(), item->fileInfo().name() );
+      mp_menuContext->addSeparator();
+
+      if( item->transferState() == FileTransferPeer::Transferring )
+      {
+        if( Settings::instance().resumeFileTransfer() )
+        {
+          mp_menuContext->addAction( IconManager::instance().icon( "pause.png" ), tr( "Pause transfer" ), this, SLOT( pauseTransfer() ) );
+          mp_menuContext->addSeparator();
+        }
+        mp_menuContext->addAction( IconManager::instance().icon( "delete.png" ), tr( "Cancel transfer" ), this, SLOT( cancelTransfer() ) );
+      }
+
+      if( item->isStopped() )
+      {
+        if( Settings::instance().resumeFileTransfer() )
+        {
+          if( item->transferState() == FileTransferPeer::Paused )
+            mp_menuContext->addAction( IconManager::instance().icon( "play.png" ), tr( "Resume transfer" ), this, SLOT( resumeTransfer() ) );
+          else
+            mp_menuContext->addAction( IconManager::instance().icon( "play.png" ), tr( "Try to resume transfer" ), this, SLOT( resumeTransfer() ) );
+        }
+        mp_menuContext->addSeparator();
+        mp_menuContext->addAction( IconManager::instance().icon( "remove.png" ), tr( "Remove transfer" ), this, SLOT( removeTransfer() ) );
+      }
+
+      mp_menuContext->addSeparator();
+      mp_menuContext->addAction( IconManager::instance().icon( "clear.png" ), tr( "Hide all transfers stopped" ), this, SLOT( removeAllStopped() ) );
+    }
+    else
+      mp_menuContext->addAction( IconManager::instance().icon( "timer.png" ), tr( "Please select a file transfer to open the menu" ) );
+  }
+  else
+    mp_menuContext->addAction( IconManager::instance().icon( "pause.png" ), tr( "No file transfer in progress" ) );
+
+  mp_menuContext->exec( QCursor::pos() );
 }
 
-void GuiFileTransfer::removeAllCompleted()
+GuiFileTransferItem* GuiFileTransfer::findSelectedItem()
 {
+  QList<QTreeWidgetItem*> selected_items = selectedItems();
+  if( selected_items.isEmpty() )
+    return Q_NULLPTR;
+  GuiFileTransferItem* item = reinterpret_cast<GuiFileTransferItem*>( selected_items.first() );
+  clearSelection();
+  return item;
+}
+
+void GuiFileTransfer::cancelTransfer()
+{
+  GuiFileTransferItem* item = findSelectedItem();
+  if( !item )
+    return;
+  pauseOrCancelTransfer( item );
+}
+
+void GuiFileTransfer::pauseTransfer()
+{
+  GuiFileTransferItem* item = findSelectedItem();
+  if( !item )
+    return;
+  emit transferPaused( item->peerId() );
+}
+
+void GuiFileTransfer::resumeTransfer()
+{
+  GuiFileTransferItem* item = findSelectedItem();
+  if( !item )
+    return;
+  if( item->transferState() != FileTransferPeer::Paused )
+  {
+    QString q_txt = tr( "Do you want to try resuming the transfer of %1?" ).arg( item->fileInfo().name() );
+    if( QMessageBox::question( this, Settings::instance().programName(), q_txt, tr( "Yes" ), tr( "No" ), QString(), 0, 1 ) == 0 )
+      emit resumeTransfer( item->userId(), item->fileInfo() );
+  }
+  else
+    emit resumeTransfer( item->userId(), item->fileInfo() );
+}
+
+void GuiFileTransfer::removeTransfer()
+{
+  GuiFileTransferItem* item = findSelectedItem();
+  if( !item )
+    return;
+  int index_to_clear = indexOfTopLevelItem( item );
+  if( index_to_clear >= 0 )
+  {
+    QTreeWidgetItem* item_taken = takeTopLevelItem( index_to_clear );
+    if( item_taken )
+      delete item_taken;
+  }
+}
+
+void GuiFileTransfer::removeAllStopped()
+{
+  clearSelection();
   clear();
-  if( header()->isVisible() )
+  if( topLevelItemCount() == 0 && header()->isVisible() )
     header()->hide();
 }
+
+void GuiFileTransfer::onTickEvent( int ticks )
+{
+  QTreeWidgetItemIterator it( this );
+  while( *it )
+  {
+    GuiFileTransferItem* item = reinterpret_cast<GuiFileTransferItem*>( *it );
+    if( item )
+      item->onTickEvent( ticks );
+    ++it;
+  }
+}
+

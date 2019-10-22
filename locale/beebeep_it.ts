@@ -787,6 +787,10 @@
         <source>Starting transfer</source>
         <translation>Avvio trasferimento in corso</translation>
     </message>
+    <message>
+        <source>Transfer queued</source>
+        <translation>Trasferimento in coda</translation>
+    </message>
 </context>
 <context>
     <name>GuiAddUser</name>
@@ -1604,7 +1608,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Remove all completed transfers</source>
-        <translation>Cancella tutti i trasferimenti completati</translation>
+        <translation type="vanished">Cancella tutti i trasferimenti completati</translation>
     </message>
     <message>
         <source>Do you want to cancel the transfer of %1?</source>
@@ -1641,6 +1645,38 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Do you want to try resuming the transfer of %1?</source>
         <translation>Vuoi provare a recuperare il trasferimento di %1?</translation>
+    </message>
+    <message>
+        <source>Pause transfer</source>
+        <translation>Metti in pausa il trasferimento</translation>
+    </message>
+    <message>
+        <source>Cancel transfer</source>
+        <translation>Annulla trasferimento</translation>
+    </message>
+    <message>
+        <source>Resume transfer</source>
+        <translation>Riprendi trasferimento</translation>
+    </message>
+    <message>
+        <source>Try to resume transfer</source>
+        <translation>Tenta di recuperare il trasferimento</translation>
+    </message>
+    <message>
+        <source>Remove transfer</source>
+        <translation>Cancella il trasferimento</translation>
+    </message>
+    <message>
+        <source>Hide all transfers stopped</source>
+        <translation>Nascondi tutti i trasferimenti non in corso</translation>
+    </message>
+    <message>
+        <source>No file transfer in progress</source>
+        <translation>Nessun trasferimento di file in corso</translation>
+    </message>
+    <message>
+        <source>Please select a file transfer to open the menu</source>
+        <translation>Seleziona almeno un trasferimento file per aprie il menu</translation>
     </message>
 </context>
 <context>
@@ -3243,7 +3279,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Please select the number of days that items (such as images) can remain cached (current: %1, never clear: -1, always clear: 0).</source>
-        <translation>Seleziona il numero di giorni in cui gli elementi (ad esempio le immagini) possono restare memorizzati nella cache (attuale: %1, non cancellare mai: -1, cancella sempre: 0).</translation>
+        <translation type="vanished">Seleziona il numero di giorni in cui gli elementi (ad esempio le immagini) possono restare memorizzati nella cache (attuale: %1, non cancellare mai: -1, cancella sempre: 0).</translation>
     </message>
     <message>
         <source>Show Faq...</source>
@@ -3463,11 +3499,23 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Please select the number of days that partially downloaded files can remain cached (current: %1, never clear: -1, always clear: 0).</source>
-        <translation>Seleziona il numero di giorni in cui i file scaricati parzialmente possono restare memorizzati nella cache (attuale: %1, non cancellare mai: -1, cancella sempre: 0).</translation>
+        <translation type="vanished">Seleziona il numero di giorni in cui i file scaricati parzialmente possono restare memorizzati nella cache (attuale: %1, non cancellare mai: -1, cancella sempre: 0).</translation>
     </message>
     <message>
         <source>Delete partially downloaded files after %1 days</source>
         <translation>Cancella i file scaricati parzialmente dopo %1 giorni</translation>
+    </message>
+    <message>
+        <source>Please select the number of days that items (such as images) can remain cached.</source>
+        <translation>Seleziona il numero di giorni in cui gli elementi (ad esempio le immagini) possono restare memorizzati nella cache.</translation>
+    </message>
+    <message>
+        <source>current: %1, never clear: -1, always clear: 0</source>
+        <translation>attuale: %1, non cancellare mai: -1, cancella sempre: 0</translation>
+    </message>
+    <message>
+        <source>Please select the number of days that partially downloaded files can remain cached.</source>
+        <translation>Seleziona il numero di giorni in cui i file scaricati parzialmente possono restare memorizzati nella cache.</translation>
     </message>
 </context>
 <context>

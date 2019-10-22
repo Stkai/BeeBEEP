@@ -197,10 +197,10 @@ void FileTransfer::setupPeer( FileTransferPeer* transfer_peer, qintptr socket_de
   if( !transfer_peer->isDownload() )
   {
     connect( transfer_peer, SIGNAL( fileUploadRequest( const FileInfo& ) ), this, SLOT( checkUploadRequest( const FileInfo& ) ) );
+    connect( transfer_peer, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString&, FileTransferPeer::TransferState ) ), this, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString&, FileTransferPeer::TransferState ) ) );
   }
 
   connect( transfer_peer, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType, int ) ), this, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType, int ) ) );
-  connect( transfer_peer, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString&, FileTransferPeer::TransferState ) ), this, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString&, FileTransferPeer::TransferState ) ) );
   connect( transfer_peer, SIGNAL( operationCompleted() ), this, SLOT( deletePeer() ) );
 
   transfer_peer->setConnectionDescriptor( socket_descriptor, server_port );
@@ -322,11 +322,12 @@ void FileTransfer::downloadFile( VNumber from_user_id, const FileInfo& fi )
   download_peer->setId( Protocol::instance().newId() );
   download_peer->setFileInfo( FileInfo::Download, fi );
   download_peer->setRemoteUserId( from_user_id );
+
+  connect( download_peer, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString&, FileTransferPeer::TransferState ) ), this, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString&, FileTransferPeer::TransferState ) ) );
+  // connect before setInQueue to send message to GUI
   download_peer->setInQueue();
+
   m_peers.append( download_peer );
-#ifdef BEEBEEP_DEBUG
-  qDebug() << download_peer->name() << "is scheduled for download";
-#endif
 
   if( activeDownloads() < Settings::instance().maxSimultaneousDownloads() )
     setupPeer( download_peer, 0 );

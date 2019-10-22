@@ -86,6 +86,15 @@ void FileTransferPeer::setFileInfo( FileInfo::TransferType ftt, const FileInfo& 
 #endif
 }
 
+void FileTransferPeer::setInQueue()
+{
+  if( m_state == FileTransferPeer::Queue )
+    return;
+  m_state = FileTransferPeer::Queue;
+  qDebug() << qPrintable( name() ) << "has queued the transfer of file" << qPrintable( m_fileInfo.name() ) << "with user id" << remoteUserId();
+  emit message( id(), remoteUserId(), m_fileInfo, tr( "Transfer queued" ), m_state );
+}
+
 void FileTransferPeer::startConnection()
 {
   if( m_state >= FileTransferPeer::Request )
@@ -120,6 +129,8 @@ void FileTransferPeer::startConnection()
 
 void FileTransferPeer::setTransferCompleted()
 {
+  if( m_state == FileTransferPeer::Completed )
+    return;
   qDebug() << qPrintable( name() ) << "has completed the transfer of file" << qPrintable( m_fileInfo.name() ) << "with user id" << remoteUserId();
   m_state = FileTransferPeer::Completed;
   closeAll();

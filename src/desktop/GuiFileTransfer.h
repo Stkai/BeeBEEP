@@ -35,6 +35,8 @@ class GuiFileTransfer : public QTreeWidget
 public:
   GuiFileTransfer( QWidget* parent = Q_NULLPTR );
 
+  void onTickEvent( int );
+
 public slots:
   void setProgress( VNumber, const User&, const FileInfo&, FileSizeType, int );
   void setMessage( VNumber, const User&, const FileInfo&, const QString&, FileTransferPeer::TransferState );
@@ -52,11 +54,17 @@ protected:
   void showProgress( QTreeWidgetItem*, const FileInfo&, FileSizeType, int );
   void showIcon( QTreeWidgetItem* );
   void setCanceled( QTreeWidgetItem* );
+  GuiFileTransferItem* findSelectedItem();
+  void pauseOrCancelTransfer( GuiFileTransferItem* );
 
 private slots:
   void checkItemClicked( QTreeWidgetItem*, int );
   void checkItemDoubleClicked( QTreeWidgetItem*, int );
-  void removeAllCompleted();
+  void removeAllStopped();
+  void cancelTransfer();
+  void pauseTransfer();
+  void resumeTransfer();
+  void removeTransfer();
   void openMenu( const QPoint& );
 
 private:

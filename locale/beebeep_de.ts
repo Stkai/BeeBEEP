@@ -747,6 +747,10 @@
         <source>Starting transfer</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Transfer queued</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiAddUser</name>
@@ -1543,10 +1547,6 @@ Bitte wähle einen anderen Namen aus.</translation>
         <translation type="unfinished">Status</translation>
     </message>
     <message>
-        <source>Remove all completed transfers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Do you want to cancel the transfer of %1?</source>
         <translation type="unfinished">Möchtest du die Übertragung von &quot;%1&quot; abbrechen?</translation>
     </message>
@@ -1572,6 +1572,38 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Do you want to try resuming the transfer of %1?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pause transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resume transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Try to resume transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hide all transfers stopped</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No file transfer in progress</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select a file transfer to open the menu</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3114,10 +3146,6 @@ Bitte wähle einen anderen Namen aus.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Please select the number of days that items (such as images) can remain cached (current: %1, never clear: -1, always clear: 0).</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Show tips...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3306,11 +3334,19 @@ Bitte wähle einen anderen Namen aus.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Please select the number of days that partially downloaded files can remain cached (current: %1, never clear: -1, always clear: 0).</source>
+        <source>Delete partially downloaded files after %1 days</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete partially downloaded files after %1 days</source>
+        <source>Please select the number of days that items (such as images) can remain cached.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>current: %1, never clear: -1, always clear: 0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select the number of days that partially downloaded files can remain cached.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

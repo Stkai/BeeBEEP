@@ -28,13 +28,18 @@
 
 
 GuiFileTransferItem::GuiFileTransferItem( QTreeWidget* parent )
- : QTreeWidgetItem( parent ), m_peerId( ID_INVALID), m_userId( ID_INVALID ), m_fileInfo(), m_transferState( FileTransferPeer::Queue )
+ : QTreeWidgetItem( parent ), m_peerId( ID_INVALID), m_userId( ID_INVALID ), m_fileInfo(), m_transferState( FileTransferPeer::Unknown )
 {
 }
 
 GuiFileTransferItem::GuiFileTransferItem( QTreeWidgetItem* parent )
- : QTreeWidgetItem( parent ),  m_peerId( ID_INVALID), m_userId( ID_INVALID ), m_fileInfo(), m_transferState( FileTransferPeer::Queue )
+ : QTreeWidgetItem( parent ),  m_peerId( ID_INVALID), m_userId( ID_INVALID ), m_fileInfo(), m_transferState( FileTransferPeer::Unknown )
 {
+}
+
+QIcon GuiFileTransferItem::defaultIcon() const
+{
+  return m_fileInfo.isDownload() ? IconManager::instance().icon( "download.png" ) : IconManager::instance().icon( "upload.png" );
 }
 
 void GuiFileTransferItem::init( VNumber peer_id, const User& u, const FileInfo& fi )
@@ -42,7 +47,7 @@ void GuiFileTransferItem::init( VNumber peer_id, const User& u, const FileInfo& 
   m_peerId = peer_id;
   m_fileInfo = fi;
   m_userId = u.id();
-  setIcon( ColumnFile, fi.isDownload() ? IconManager::instance().icon( "download.png" ) : IconManager::instance().icon( "upload.png" ) );
+  setIcon( ColumnFile, defaultIcon() );
   setText( ColumnFile, fi.name() );
   setText( ColumnProgress, "" );
   setText( ColumnReport, "" );
@@ -108,13 +113,13 @@ void GuiFileTransferItem::update()
 
   if( m_transferState == FileTransferPeer::Queue )
   {
-    IconManager::instance().icon( "timer.png" );
+    icon = IconManager::instance().icon( "timer.png" );
     action_tip = QObject::tr( "In queue" );
     sort_string.prepend( 'Q' );
   }
   else if( m_transferState == FileTransferPeer::Starting )
   {
-    IconManager::instance().icon( "timer.png" );
+    icon = IconManager::instance().icon( "play.png" );
     action_tip = QObject::tr( "Starting" );
     sort_string.prepend( 'B' );
   }

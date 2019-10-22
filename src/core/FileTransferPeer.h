@@ -39,7 +39,7 @@ public:
 
   inline QString name() const;
 
-  inline void setInQueue();
+  void setInQueue();
   inline bool isInQueue() const;
   inline void removeFromQueue();
 
@@ -131,7 +131,6 @@ protected:
 // Inline Functions
 inline QString FileTransferPeer::name() const { return QString( "%1 Peer #%2" ).arg( isDownload() ? "Download" : "Upload" ).arg( m_id ); }
 inline void FileTransferPeer::setConnectionDescriptor( qintptr socket_descriptor, quint16 server_port ) { m_socketDescriptor = socket_descriptor; m_serverPort = server_port; }
-inline void FileTransferPeer::setInQueue() { m_state = FileTransferPeer::Queue; }
 inline bool FileTransferPeer::isInQueue() const { return m_state == FileTransferPeer::Queue; }
 inline void FileTransferPeer::removeFromQueue() { m_state = FileTransferPeer::Starting; }
 inline void FileTransferPeer::setTransferType( FileInfo::TransferType new_value ) { m_transferType = new_value; }

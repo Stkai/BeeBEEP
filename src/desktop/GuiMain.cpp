@@ -2053,9 +2053,9 @@ void GuiMain::settingsChanged( QAction* act )
 #else
       int cc_days = QInputDialog::getInteger( qApp->activeWindow(), Settings::instance().programName(),
 #endif
-                                                 tr( "Please select the number of days that items (such as images) can remain cached (current: %1, never clear: -1, always clear: 0)." ).arg( Settings::instance().clearCacheAfterDays() ),
-                                                 Settings::instance().clearCacheAfterDays(),
-                                                 -1, 999, 10, &ok );
+                                          tr( "Please select the number of days that items (such as images) can remain cached." ) +
+                                          QString( "\n(%1)" ).arg( tr( "current: %1, never clear: -1, always clear: 0" ).arg( Settings::instance().clearCacheAfterDays() ) ),
+                                          Settings::instance().clearCacheAfterDays(), -1, 999, 10, &ok );
       if( ok )
       {
         Settings::instance().setClearCacheAfterDays( cc_days );
@@ -2163,9 +2163,9 @@ void GuiMain::settingsChanged( QAction* act )
 #else
       int cc_days = QInputDialog::getInteger( qApp->activeWindow(), Settings::instance().programName(),
 #endif
-                                              tr( "Please select the number of days that partially downloaded files can remain cached (current: %1, never clear: -1, always clear: 0)." ).arg( Settings::instance().removePartiallyDownloadedFilesAfterDays() ),
-                                              Settings::instance().clearCacheAfterDays(),
-                                              -1, 999, 10, &ok );
+                                              tr( "Please select the number of days that partially downloaded files can remain cached." ) +
+                                              QString( "\n(%1)" ).arg( tr( "current: %1, never clear: -1, always clear: 0" ).arg( Settings::instance().removePartiallyDownloadedFilesAfterDays() ) ),
+                                              Settings::instance().removePartiallyDownloadedFilesAfterDays(), -1, 999, 10, &ok );
       if( ok )
       {
         Settings::instance().setRemovePartiallyDownloadedFilesAfterDays( cc_days );
@@ -4367,6 +4367,7 @@ void GuiMain::onTickEvent( int ticks )
   mp_chatList->onTickEvent( ticks );
   mp_userList->onTickEvent( ticks );
   mp_groupList->onTickEvent( ticks );
+  mp_fileTransfer->onTickEvent( ticks );
   if( mp_fileSharing )
     mp_fileSharing->onTickEvent( ticks );
   if( mp_networkTest )
