@@ -35,6 +35,7 @@ GuiCreateGroup::GuiCreateGroup( QWidget *parent )
   setupUi( this );
   setObjectName( "GuiCreateGroup" );
   Bee::removeContextHelpButton( this );
+  setWindowIcon( IconManager::instance().icon( "group-create.png" ) );
 
   QStringList labels;
   labels << tr( "Users" );

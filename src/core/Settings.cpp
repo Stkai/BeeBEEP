@@ -2254,12 +2254,12 @@ QString Settings::simpleDecrypt( const QString& text_to_decrypt )
 
 QString Settings::guiCustomListStyleSheet( const QString& background_color, const QString& background_image_path ) const
 {
-   return QString( "#GuiCustomList { background: %1 url(%2);"
-                   "background-repeat: no-repeat;"
-                   "background-position: bottom center;"
-                   "background-attachment: fixed;"
-                   "padding-bottom: 32px;"
-                   "}" ).arg( background_color ).arg( background_image_path );
+  return QString( "#GuiCustomList { background: %1 url(%2);"
+                  "background-repeat: no-repeat;"
+                  "background-position: bottom center;"
+                  "background-attachment: fixed;"
+                  "padding-bottom: 32px;"
+                  "}" ).arg( background_color ).arg( background_image_path );
 }
 
 QString Settings::autoresponderName() const

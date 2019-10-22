@@ -224,8 +224,10 @@ void GuiUserItem::showUserStatus()
     setTextColor( 0, Bee::userStatusColor( User::Offline ) );
   else if( user_status == User::Offline )
     setTextColor( 0, Bee::userStatusColor( user_status ) );
+  else if( Settings::instance().useDarkStyle() )
+    setTextColor( 0, QColor( "#F0F0F0" ) );
   else
-    setTextColor( 0, QColor( Qt::black ) );  // we have fixed background: white
+    setTextColor( 0, QColor( Qt::black ) );
 }
 
 void GuiUserItem::onTickEvent( int ticks )

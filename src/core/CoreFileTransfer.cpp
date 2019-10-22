@@ -131,12 +131,15 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
 
   QString icon_html = IconManager::instance().toHtml( fi.isDownload() ? "download.png" : "upload.png", "*F*" );
   QString action_txt = fi.isDownload() ? tr( "Download" ) : tr( "Upload" );
-  QString sys_msg = QString( "%1 %2 %3 %4 %5: %6." ).arg( icon_html, action_txt, fi.name(), fi.isDownload() ? tr( "from") : tr( "to" ), Bee::userNameToShow( u ), Bee::lowerFirstLetter( msg ) );
+  QString sys_msg = "";
   QString sys_msg_img_preview = "";
   QString sys_msg_open_file = "";
   QString sys_msg_play_voice_chat = "";
   QString chat_voice_msg_html = "";
   ChatMessage chat_voice_msg;
+
+  if( FileTransferPeer::stateIsStopped( ft_state ) )
+    sys_msg = QString( "%1 %2 %3 %4 %5: %6." ).arg( icon_html, action_txt, fi.name(), fi.isDownload() ? tr( "from") : tr( "to" ), Bee::userNameToShow( u ), Bee::lowerFirstLetter( msg ) );
 
   if( ft_state == FileTransferPeer::Completed )
   {
@@ -203,14 +206,14 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
   Chat chat_to_show_message = ChatManager::instance().findChatByPrivateId( fi.chatPrivateId(), false, u.id() );
   if( chat_to_show_message.isValid() )
   {
-    if( fi.isDownload() )
+    if( fi.isDownload() && ft_state == FileTransferPeer::Completed )
     {
       chat_to_show_message.addUnreadMessage();
       ChatManager::instance().setChat( chat_to_show_message );
-    }
 
-    if( !chat_voice_msg_html.isEmpty() )
-      chat_voice_msg = ChatMessage( fi.isDownload() ? u.id() : ID_LOCAL_USER, chat_voice_msg_html, ChatMessage::Voice );
+      if( !chat_voice_msg_html.isEmpty() )
+        chat_voice_msg = ChatMessage( fi.isDownload() ? u.id() : ID_LOCAL_USER, chat_voice_msg_html, ChatMessage::Voice );
+    }
   }
 
   if( fi.isVoiceMessage() )
@@ -225,7 +228,8 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
   }
   else
   {
-    dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), sys_msg, chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+    if( !sys_msg.isEmpty() )
+      dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), sys_msg, chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
     if( !sys_msg_img_preview.isEmpty() )
       dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), sys_msg_img_preview, chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::ImagePreview );
     if( !sys_msg_open_file.isEmpty() )

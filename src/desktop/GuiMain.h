@@ -234,6 +234,7 @@ protected:
   void saveGeometryAndState();
   void restoreGeometryAndState();
   void resetGeometryAndState();
+  void setMinimumWidthForStyle();
 
 private:
   void setupChatConnections( GuiChat* );

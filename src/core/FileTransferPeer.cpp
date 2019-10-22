@@ -337,3 +337,8 @@ void FileTransferPeer::computeElapsedTime()
   else
     m_elapsedTime = 0;
 }
+
+bool FileTransferPeer::stateIsStopped( FileTransferPeer::TransferState ft_state )
+{
+  return ft_state == Completed || ft_state == Error || ft_state == Canceled || ft_state == Paused;
+}

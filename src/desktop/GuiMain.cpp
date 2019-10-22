@@ -1462,12 +1462,8 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actViewFileTransfer );
   mp_barMain->addAction( mp_actViewFileSharing );
-#if defined Q_OS_MAC
-  setMinimumWidth( mp_barMain->actions().size() * (mp_barMain->iconSize().width()+8) + 20 );
-#elif defined Q_OS_UNIX
-  setMinimumWidth( mp_barMain->actions().size() * (mp_barMain->iconSize().width()+4) + 20 );
-#endif
 
+  setMinimumWidthForStyle();
 }
 
 void GuiMain::createMainWidgets()
@@ -1995,6 +1991,8 @@ void GuiMain::settingsChanged( QAction* act )
   case 77:
     {
       Settings::instance().setUseDarkStyle( act->isChecked() );
+      refresh_users = true;
+      setMinimumWidthForStyle();
       QTimer::singleShot( 0, this, SLOT( loadStyle() ) );
     }
     break;
@@ -4534,6 +4532,7 @@ void GuiMain::askResetGeometryAndState()
   if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to reset window's geometry?" ), tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 0 )
   {
     resetGeometryAndState();
+    setMinimumWidthForStyle();
     if( !Settings::instance().floatingChatGeometry().isEmpty() )
       Settings::instance().setFloatingChatGeometry( QByteArray() );
     if( !Settings::instance().floatingChatState().isEmpty() )
@@ -4579,7 +4578,10 @@ void GuiMain::onFileTransferMessage( VNumber peer_id, const User& u, const FileI
   if( Settings::instance().alwaysShowFileTransferProgress() )
   {
     if( !mp_dockFileTransfers->isVisible() )
+    {
       mp_dockFileTransfers->show();
+      raiseOnTop();
+    }
   }
 
   if( ft_state == FileTransferPeer::Completed )
@@ -5105,6 +5107,23 @@ void GuiMain::onNetworkTestWindowClosed()
 {
   if( mp_networkTest )
     mp_networkTest = Q_NULLPTR;
+}
+
+void GuiMain::setMinimumWidthForStyle()
+{
+  int old_w = width();
+  int wasted_w = Settings::instance().useDarkStyle() ? 60 : 20;
+#if defined Q_OS_MAC
+  int min_w = qMax( 320, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+8) + wasted_w );
+#elif defined Q_OS_UNIX
+  int min_w = qMax( 320, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+4) + wasted_w );
+#endif
+  setMinimumWidth( min_w );
+  if( min_w > old_w )
+  {
+    int new_pos_x = qMax( 1, pos().x() - (min_w - old_w) );
+    move( new_pos_x, pos().y() );
+  }
 }
 
 void GuiMain::loadStyle()

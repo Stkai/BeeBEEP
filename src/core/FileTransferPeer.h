@@ -64,6 +64,8 @@ public:
   void pauseTransfer( bool close_connection );
   bool removePartiallyDownloadedFile();
 
+  static bool stateIsStopped( FileTransferPeer::TransferState );
+
   void onTickEvent( int );
 
 signals:
