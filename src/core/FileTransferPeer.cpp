@@ -186,6 +186,16 @@ void FileTransferPeer::cancelTransfer()
   emit operationCompleted();
 }
 
+bool FileTransferPeer::canPauseTransfer() const
+{
+  if( m_state == FileTransferPeer::Transferring )
+  {
+    if( Settings::instance().resumeFileTransfer() && mp_socket->protoVersion() >= FILE_TRANSFER_RESUME_PROTO_VERSION )
+      return true;
+  }
+  return false;
+}
+
 void FileTransferPeer::pauseTransfer( bool close_connection )
 {
   if( m_state == FileTransferPeer::Paused )
@@ -199,7 +209,12 @@ void FileTransferPeer::pauseTransfer( bool close_connection )
       qDebug() << qPrintable( name() ) << "is pausing the file transfer";
       m_state = FileTransferPeer::Pausing;
       if( m_fileInfo.isValid() && remoteUserId() != ID_INVALID )
-        emit message( id(), remoteUserId(), m_fileInfo, tr( "Transfer is about to pause" ), m_state );
+      {
+        QString pause_msg = tr( "Transfer is about to pause" );
+        if( !m_fileInfo.isDownload() )
+          pause_msg += QString( " (%1)" ).arg( tr( "Please wait" ) );
+        emit message( id(), remoteUserId(), m_fileInfo, pause_msg, m_state );
+      }
     }
     else
       setTransferPaused();

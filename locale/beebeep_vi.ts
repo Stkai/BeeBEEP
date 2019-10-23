@@ -854,27 +854,32 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="202"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="213"/>
         <source>Transfer is about to pause</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="217"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="215"/>
+        <source>Please wait</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/FileTransferPeer.cpp" line="232"/>
         <source>Transfer paused after %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="227"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="242"/>
         <source>Starting transfer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="314"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="329"/>
         <source>Connection timeout</source>
         <translation>Thời gian chờ kết nối</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="333"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="348"/>
         <source>Transfer timeout</source>
         <translation>Thời gian chờ chuyển tập tin</translation>
     </message>
@@ -1916,24 +1921,34 @@ Vui lòng chọn một tên khác nhau.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="164"/>
-        <location filename="../src/desktop/GuiFileTransfer.cpp" line="306"/>
+        <location filename="../src/desktop/GuiFileTransfer.cpp" line="315"/>
         <source>Yes</source>
         <translation type="unfinished">Có</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="164"/>
-        <location filename="../src/desktop/GuiFileTransfer.cpp" line="306"/>
+        <location filename="../src/desktop/GuiFileTransfer.cpp" line="315"/>
         <source>No</source>
         <translation type="unfinished">Không</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileTransfer.cpp" line="264"/>
+        <location filename="../src/desktop/GuiFileTransfer.cpp" line="268"/>
         <source>Please select a file transfer to open the menu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileTransfer.cpp" line="305"/>
+        <location filename="../src/desktop/GuiFileTransfer.cpp" line="314"/>
         <source>Do you want to try resuming the transfer of %1?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFileTransfer.cpp" line="319"/>
+        <source>Resuming transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFileTransfer.cpp" line="319"/>
+        <source>Please wait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1947,37 +1962,37 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="unfinished">Đồng ý</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileTransfer.cpp" line="241"/>
+        <location filename="../src/desktop/GuiFileTransfer.cpp" line="245"/>
         <source>Pause transfer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileTransfer.cpp" line="244"/>
+        <location filename="../src/desktop/GuiFileTransfer.cpp" line="248"/>
         <source>Cancel transfer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileTransfer.cpp" line="252"/>
+        <location filename="../src/desktop/GuiFileTransfer.cpp" line="256"/>
         <source>Resume transfer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileTransfer.cpp" line="254"/>
+        <location filename="../src/desktop/GuiFileTransfer.cpp" line="258"/>
         <source>Try to resume transfer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileTransfer.cpp" line="257"/>
+        <location filename="../src/desktop/GuiFileTransfer.cpp" line="261"/>
         <source>Remove transfer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileTransfer.cpp" line="261"/>
+        <location filename="../src/desktop/GuiFileTransfer.cpp" line="265"/>
         <source>Hide all transfers stopped</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileTransfer.cpp" line="267"/>
+        <location filename="../src/desktop/GuiFileTransfer.cpp" line="271"/>
         <source>No file transfer in progress</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5241,28 +5256,28 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation>không có sẵn</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="468"/>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="472"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="471"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="475"/>
         <source>Please wait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="470"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="473"/>
         <source>Please wait for path %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="478"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="481"/>
         <source>Disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="595"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="597"/>
         <source>Please insert the new folder name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareBox.cpp" line="601"/>
+        <location filename="../src/desktop/GuiShareBox.cpp" line="603"/>
         <source>%1 already exists.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5570,12 +5585,12 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="unfinished">Đang tải lên</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="486"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="485"/>
         <source>Double click to open %1</source>
         <translation>Double-click để mở %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShareNetwork.cpp" line="487"/>
+        <location filename="../src/desktop/GuiShareNetwork.cpp" line="486"/>
         <source>Transfer completed</source>
         <translation>Chuyển hoàn thành</translation>
     </message>

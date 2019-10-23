@@ -5114,10 +5114,14 @@ void GuiMain::setMinimumWidthForStyle()
 {
   int old_w = width();
   int wasted_w = Settings::instance().useDarkStyle() ? 60 : 20;
-#if defined Q_OS_MAC
+#if defined( Q_OS_MAC )
   int min_w = qMax( 320, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+8) + wasted_w );
-#elif defined Q_OS_UNIX
+#elif defined( Q_OS_UNIX )
   int min_w = qMax( 320, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+4) + wasted_w );
+#elif defined( Q_OS_WIN )
+  int min_w = qMax( 320, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+2) + wasted_w );
+#else
+  int min_w = qMax( 320, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+2) + wasted_w );
 #endif
   setMinimumWidth( min_w );
   if( min_w > old_w )

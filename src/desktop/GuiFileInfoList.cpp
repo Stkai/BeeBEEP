@@ -94,7 +94,7 @@ GuiFileInfoItem* GuiFileInfoList::userItem( VNumber user_id )
 GuiFileInfoItem* GuiFileInfoList::createUserItem( const User& u )
 {
   GuiFileInfoItem* item = new GuiFileInfoItem( mp_tree );
-  item->initUser( u.id(), u.name() );
+  item->initUser( u.id(), Bee::userNameToShow( u ) );
   return item;
 }
 

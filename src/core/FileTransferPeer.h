@@ -61,6 +61,7 @@ public:
   void startUpload( const FileInfo& );
   inline int elapsedTime() const;
 
+  bool canPauseTransfer() const;
   void pauseTransfer( bool close_connection );
   bool removePartiallyDownloadedFile();
 

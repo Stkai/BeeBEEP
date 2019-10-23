@@ -186,7 +186,7 @@ void GuiFileTransfer::checkItemClicked( QTreeWidgetItem* tw_item, int col )
     {
       clearSelection();
       item->setSelected( true );
-      openMenu( QCursor::pos() );
+      openMenu( mapFromGlobal( QCursor::pos() ) );
     }
   }
 }
@@ -219,18 +219,22 @@ void GuiFileTransfer::openMenu( const QPoint& p )
   mp_menuContext = new QMenu( this );
   if( topLevelItemCount() > 0 )
   {
+    // click to open menu can unselect the item, so find out the item clicked and select it
     GuiFileTransferItem* item = findSelectedItem();
     if( !item )
     {
       QTreeWidgetItem* tw_item = itemAt( p );
       if( tw_item )
         item = reinterpret_cast<GuiFileTransferItem*>( tw_item );
-      if( item )
-        item->setSelected( true );
     }
 
     if( item )
     {
+      if( !item->isSelected() )
+      {
+        clearSelection();
+        item->setSelected( true );
+      }
       mp_menuContext->addAction( item->defaultIcon(), item->fileInfo().name() );
       mp_menuContext->addSeparator();
 
@@ -266,14 +270,19 @@ void GuiFileTransfer::openMenu( const QPoint& p )
   else
     mp_menuContext->addAction( IconManager::instance().icon( "pause.png" ), tr( "No file transfer in progress" ) );
 
-  mp_menuContext->exec( QCursor::pos() );
+  mp_menuContext->exec( p.isNull() ? QCursor::pos() : mapToGlobal( p ) );
 }
 
 GuiFileTransferItem* GuiFileTransfer::findSelectedItem()
 {
   QList<QTreeWidgetItem*> selected_items = selectedItems();
   if( selected_items.isEmpty() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "GuiFileTransfer has not found a selected item";
+#endif
     return Q_NULLPTR;
+  }
   GuiFileTransferItem* item = reinterpret_cast<GuiFileTransferItem*>( selected_items.first() );
   clearSelection();
   return item;
@@ -303,11 +312,12 @@ void GuiFileTransfer::resumeTransfer()
   if( item->transferState() != FileTransferPeer::Paused )
   {
     QString q_txt = tr( "Do you want to try resuming the transfer of %1?" ).arg( item->fileInfo().name() );
-    if( QMessageBox::question( this, Settings::instance().programName(), q_txt, tr( "Yes" ), tr( "No" ), QString(), 0, 1 ) == 0 )
-      emit resumeTransfer( item->userId(), item->fileInfo() );
+    if( QMessageBox::question( this, Settings::instance().programName(), q_txt, tr( "Yes" ), tr( "No" ), QString(), 0, 1 ) != 0 )
+      return;
   }
-  else
-    emit resumeTransfer( item->userId(), item->fileInfo() );
+
+  item->setMessage( tr( "Resuming transfer" ) + QString( " (%1)").arg( tr( "Please wait" ) ), FileTransferPeer::Queue );
+  emit resumeTransfer( item->userId(), item->fileInfo() );
 }
 
 void GuiFileTransfer::removeTransfer()

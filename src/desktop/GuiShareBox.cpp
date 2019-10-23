@@ -148,7 +148,7 @@ void GuiShareBox::setUsers()
   foreach( User u, UserManager::instance().userList().toList() )
   {
     if( u.isStatusConnected() )
-      mp_comboUsers->addItem( u.name(), u.id() );
+      mp_comboUsers->addItem( Bee::userNameToShow( u ), u.id() );
   }
   mp_comboUsers->setEnabled( Settings::instance().useShareBox() );
   mp_lUsers->setEnabled( mp_comboUsers->isEnabled() );
@@ -463,6 +463,9 @@ void GuiShareBox::makeShareBoxRequest( VNumber user_id, const QString& folder_pa
 
   if( Settings::instance().useShareBox() )
   {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "BeeBOX ask for updating folder" << folder_path << "of user" << user_id;
+#endif
     GuiShareBoxFileInfoList* pfil = fileInfoList( user_id );
     if( folder_path.isEmpty() )
       pfil->setToolTip( tr( "Please wait" ) );
@@ -499,12 +502,12 @@ void GuiShareBox::updateUser( const User& u )
       mp_comboUsers->removeItem( user_index );
     }
     else
-      mp_comboUsers->setItemText( user_index, u.name() );
+      mp_comboUsers->setItemText( user_index, Bee::userNameToShow( u ) );
   }
   else
   {
     if( u.isStatusConnected() )
-      mp_comboUsers->addItem( u.name(), u.id() );
+      mp_comboUsers->addItem( Bee::userNameToShow( u ), u.id() );
   }
 }
 
@@ -551,19 +554,18 @@ void GuiShareBox::dropInOutBox( const QString& share_path )
 void GuiShareBox::onFileUploadCompleted( VNumber user_id, const FileInfo& fi )
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "BeeBOX (upload completed) update list of the folder" << qPrintable( fi.shareFolder() ) << "and user" << user_id;
-#else
-  Q_UNUSED( fi );
+  qDebug() << "BeeBOX (upload completed) update list of the folder" << fi.shareFolder() << "and user" << user_id << "and current folder is" << m_outCurrentFolder << "of user" << m_userId;
 #endif
   if( m_userId == user_id && fi.shareFolder() == m_outCurrentFolder )
     updateOutBox();
 }
 
-void GuiShareBox::onFileDownloadCompleted( VNumber, const FileInfo& fi )
+void GuiShareBox::onFileDownloadCompleted( VNumber user_id, const FileInfo& fi )
 {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "BeeBOX (download completed) update list of the folder" << qPrintable( fi.shareFolder() );
+  qDebug() << "BeeBOX (download completed) update list of the folder" << fi.shareFolder() << "and user" << user_id << "and current folder is" << m_outCurrentFolder << "of user" << m_userId;
 #else
+  Q_UNUSED( user_id );
   Q_UNUSED( fi );
 #endif
   updateMyBox();

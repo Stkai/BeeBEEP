@@ -791,6 +791,10 @@
         <source>Transfer queued</source>
         <translation>Trasferimento in coda</translation>
     </message>
+    <message>
+        <source>Please wait</source>
+        <translation>Attendere prego</translation>
+    </message>
 </context>
 <context>
     <name>GuiAddUser</name>
@@ -1677,6 +1681,14 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Please select a file transfer to open the menu</source>
         <translation>Seleziona almeno un trasferimento file per aprie il menu</translation>
+    </message>
+    <message>
+        <source>Resuming transfer</source>
+        <translation>Recupero trasferimento in corso</translation>
+    </message>
+    <message>
+        <source>Please wait</source>
+        <translation>Attendere prego</translation>
     </message>
 </context>
 <context>

@@ -735,6 +735,10 @@
         <source>Transfer queued</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Please wait</source>
+        <translation type="unfinished">Зачекайте</translation>
+    </message>
 </context>
 <context>
     <name>GuiAddUser</name>
@@ -1589,6 +1593,14 @@ Please select a different name.</source>
     <message>
         <source>Please select a file transfer to open the menu</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resuming transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please wait</source>
+        <translation type="unfinished">Зачекайте</translation>
     </message>
 </context>
 <context>

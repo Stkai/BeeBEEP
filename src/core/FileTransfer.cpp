@@ -383,7 +383,7 @@ bool FileTransfer::pauseTransfer( VNumber peer_id )
   FileTransferPeer* transfer_peer = peer( peer_id );
   if( transfer_peer )
   {
-    if( transfer_peer->isDownload() )
+    if( transfer_peer->canPauseTransfer() )
     {
       transfer_peer->pauseTransfer( false );
       return true;

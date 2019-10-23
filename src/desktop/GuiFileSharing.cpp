@@ -331,9 +331,9 @@ void GuiFileSharing::onFileTransferMessage( VNumber peer_id, const User& u, cons
   if( file_info.isInShareBox() )
   {
     if( file_info.isDownload() )
-      mp_shareBox->onFileDownloadCompleted( peer_id, file_info );
+      mp_shareBox->onFileDownloadCompleted( u.id(), file_info );
     else
-      mp_shareBox->onFileUploadCompleted( peer_id, file_info );
+      mp_shareBox->onFileUploadCompleted( u.id(), file_info );
   }
   else
   {
