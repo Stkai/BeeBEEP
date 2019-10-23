@@ -96,6 +96,7 @@ GuiChat::GuiChat( QWidget *parent )
 
   mp_menuContext = new QMenu( this );
   mp_menuFilters = new QMenu( this );
+  mp_actFilterMessages = Q_NULLPTR;
 
   mp_scFocusInChat = new QShortcut( this );
   mp_scFocusInChat->setContext( Qt::WindowShortcut );
@@ -166,7 +167,9 @@ void GuiChat::setupToolBar( QToolBar* chat_bar )
   // Chat toolbar
   chat_bar->addAction( IconManager::instance().icon( "font.png" ), tr( "Change font style" ), this, SLOT( selectFont() ) );
   chat_bar->addAction( IconManager::instance().icon( "font-color.png" ), tr( "Change font color" ), this, SLOT( selectFontColor() ) );
-  chat_bar->addAction( IconManager::instance().icon( "filter.png" ), tr( "Filter message" ), this, SLOT( showChatMessageFilterMenu() ) );
+  mp_actFilterMessages = chat_bar->addAction( IconManager::instance().icon( "filter.png" ), tr( "Filter message" ), this, SLOT( showChatMessageFilterMenu() ) );
+  mp_actFilterMessages->setCheckable( true );
+  updateFilterMessagesButton();
   chat_bar->addAction( IconManager::instance().icon( "settings.png" ), tr( "Chat settings" ), this, SIGNAL( showChatMenuRequest() ) );
   mp_actSpellChecker = chat_bar->addAction( IconManager::instance().icon( "spellchecker.png" ), tr( "Spell checking" ), this, SLOT( onSpellCheckerActionClicked() ) );
   mp_actSpellChecker->setCheckable( true );
@@ -367,6 +370,23 @@ bool GuiChat::historyCanBeShowed()
   return !Settings::instance().chatMessageFilter().testBit( static_cast<int>( ChatMessage::History ) );
 }
 
+void GuiChat::updateFilterMessagesButton()
+{
+  if( !mp_actFilterMessages )
+    return;
+  QBitArray filter_array = Settings::instance().chatMessageFilter();
+  bool filters_active = false;
+  for( int i = 0; i < filter_array.size(); i++ )
+  {
+    if( filter_array.testBit( i ) )
+    {
+      filters_active = true;
+      break;
+    }
+  }
+  mp_actFilterMessages->setChecked( filters_active );
+}
+
 void GuiChat::showChatMessageFilterMenu()
 {
   mp_menuFilters->clear();
@@ -385,13 +405,13 @@ void GuiChat::showChatMessageFilterMenu()
     act->setChecked( !Settings::instance().chatMessageFilter().testBit( i ) );
     act->setData( i );
   }
-
   mp_menuFilters->exec( QCursor::pos() );
+  updateFilterMessagesButton();
 }
 
 void GuiChat::changeChatMessageFilter()
 {
-  QAction* act = qobject_cast<QAction*>(sender());
+  QAction* act = qobject_cast<QAction*>( sender() );
   if( !act )
     return;
 
@@ -408,6 +428,7 @@ void GuiChat::changeChatMessageFilter()
     Settings::instance().setChatMessageFilter( filter_array );
   }
 
+  updateFilterMessagesButton();
   updateChat();
 }
 
@@ -801,7 +822,7 @@ void GuiChat::saveChat()
   if( ChatManager::instance().chatHasSavedText( c.name() ) )
     html_text.append( ChatManager::instance().chatSavedText( c.name() ) );
   html_text.append( GuiChatMessage::chatToHtml( c, !Settings::instance().chatSaveFileTransfers(),
-                                                  !Settings::instance().chatSaveSystemMessages(), true, true, Settings::instance().chatCompact() ) );
+                                                  !Settings::instance().chatSaveSystemMessages(), true, true, Settings::instance().chatCompact(), Settings::instance().useCompactDataSaving() ) );
   html_text.replace( FileInfo::urlSchemeVoiceMessage() + QLatin1String(":"), "file://" );
   html_text.replace( FileInfo::urlSchemeShowFileInFolder() + QLatin1String(":"), "file://" );
   doc->setHtml( html_text );
@@ -1252,3 +1273,4 @@ void GuiChat::onTickEvent( int ticks )
 void GuiChat::onTickEvent( int )
 {}
 #endif
+

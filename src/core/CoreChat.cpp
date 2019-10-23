@@ -50,7 +50,7 @@ void Core::createDefaultChat()
     int my_age = QDate::currentDate().year() - 1975;
     sHtmlMsg = QString( "%1 <b>%2</b>" ).arg( IconManager::instance().toHtml( "birthday.png", "*!*" ),
                                               tr( "Happy birthday to Marco Mastroddi: %1 years old today! Cheers!!!" ).arg( my_age ) );
-    c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Other ) );
+    c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::UserInfo, false ) );
   }
 
   if( QDate::currentDate().month() == 1 && QDate::currentDate().day() >= 1 && QDate::currentDate().day() <= 3 )
@@ -61,13 +61,13 @@ void Core::createDefaultChat()
     else
       new_year_icons = QString( "%1&nbsp;&nbsp;%2&nbsp;&nbsp;%3" ).arg( IconManager::instance().toHtml( ":/emojis/objects/1f386.png", "*!*" ), IconManager::instance().toHtml( ":/emojis/objects/1f386.png", "*!*" ), IconManager::instance().toHtml( ":/emojis/objects/1f386.png", "*!*" ) );
     sHtmlMsg = QString( "%1&nbsp;&nbsp;&nbsp;<font color=red><b>%2</b></font>&nbsp;&nbsp;&nbsp;%3" ).arg( new_year_icons, tr( "Happy New Year!" ), new_year_icons );
-    c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Other ) );
+    c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Other, false ) );
   }
 
   if( Settings::instance().localUser().isBirthDay() )
   {
     sHtmlMsg = QString( "%1 <b>%2</b>" ).arg( IconManager::instance().toHtml( "birthday.png", "*!*" ), tr( "Happy Birthday to you!" ) );
-    c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Other ) );
+    c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::UserInfo, false ) );
   }
 
   ChatManager::instance().setChat( c );
@@ -113,21 +113,21 @@ Chat Core::createGroupChat( const User& u, const Group& g, bool broadcast_messag
   if( g.privateId().isEmpty() ) // to prevent creation message on load from settings
   {
     sHtmlMsg = tr( "%1 You have created group chat %2." ).arg( IconManager::instance().toHtml( "group-create.png", "*G*" ), QString( "<b>%1</b>" ).arg( Bee::removeHtmlTags( c.name() ) ) );
-    c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
+    c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System, false ) );
     c.setLastModifiedToNow();
   }
 
   if( !u.isLocal() )
   {
     sHtmlMsg = tr( "%1 %2 has added you to the group chat %3." ).arg( IconManager::instance().toHtml( "group-add.png", "*G*" ), Bee::userNameToShow( u ), QString( "<b>%1</b>" ).arg( Bee::replaceHtmlSpecialCharacters( c.name() ) ) );
-    c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
+    c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System, false ) );
   }
-
-  if( !sHtmlMsg.isEmpty() )
-    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToChat, ChatMessage::System );
 
   ChatManager::instance().setChat( c );
   emit chatChanged( c );
+
+  if( !sHtmlMsg.isEmpty() )
+    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToChat, ChatMessage::System, false );
 
   if( broadcast_message && isConnected() )
   {
@@ -162,7 +162,7 @@ bool Core::changeGroupChat( const User& u, const Group& g )
       sHtmlMsg = tr( "%1 You have changed the group name from %2 to %3." ).arg( IconManager::instance().toHtml( "group.png", "*G*" ), c.name(), QString( "<b>%1</b>" ).arg( Bee::replaceHtmlSpecialCharacters( g.name() ) ) );
     else
       sHtmlMsg = tr( "%1 %2 has changed the group name from %3 to %4." ).arg( IconManager::instance().toHtml( "group.png", "*G*" ), Bee::userNameToShow( u ), Bee::replaceHtmlSpecialCharacters( c.name() ), QString( "<b>%1</b>" ).arg( Bee::replaceHtmlSpecialCharacters( g.name() ) ) );
-    c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
+    c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System, false ) );
     chat_changed = true;
     if( ChatManager::instance().chatHasSavedText( c.name() ) )
       ChatManager::instance().updateChatSavedText( c.name(), g.name(), false );
@@ -178,7 +178,7 @@ bool Core::changeGroupChat( const User& u, const Group& g )
         if( u.isLocal() )
         {
           sHtmlMsg = tr( "%1 %2 will be informed of your changes." ).arg( IconManager::instance().toHtml( "group-remove.png", "*G*" ) ).arg( Bee::userNameToShow( old_user ) );
-          c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
+          c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System, false ) );
           group_removed_members.set( old_user );
         }
 
@@ -194,10 +194,10 @@ bool Core::changeGroupChat( const User& u, const Group& g )
       sHtmlMsg = tr( "%1 You have removed members: %2." ).arg( IconManager::instance().toHtml( "group-remove.png", "*G*" ), Bee::stringListToTextString( user_removed_string_list ) );
     else
       sHtmlMsg = tr( "%1 %2 has removed members: %3." ).arg( IconManager::instance().toHtml( "group-remove.png", "*G*" ), Bee::userNameToShow( u ), Bee::stringListToTextString( user_removed_string_list ) );
-    c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
+    c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System, false ) );
 
     sHtmlMsg = tr( "%1 This kind of change can be temporary if the user exists and does not leave the group spontaneously." ).arg( IconManager::instance().toHtml( "group-remove.png", "*G*" ) );
-    c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
+    c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System, false ) );
   }
 
   foreach( User u, group_new_members.toList() )
@@ -216,14 +216,14 @@ bool Core::changeGroupChat( const User& u, const Group& g )
       sHtmlMsg = tr( "%1 You have added members: %2." ).arg( IconManager::instance().toHtml( "group-add.png", "*G*" ), Bee::stringListToTextString( user_added_string_list ) );
     else
       sHtmlMsg = tr( "%1 %2 has added members: %3." ).arg( IconManager::instance().toHtml( "group-add.png", "*G*" ), Bee::userNameToShow( u ), Bee::stringListToTextString( user_added_string_list ) );
-    c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
+    c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System, false ) );
   }
 
   if( user_removed_string_list.size() > 0 || user_added_string_list.size() > 0 )
   {
     chat_changed = true;
     sHtmlMsg = tr( "%1 Chat with %2." ).arg( IconManager::instance().toHtml( "group.png", "*G*" ), Bee::stringListToTextString( user_string_list ) );
-    c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Header ) );
+    c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Header, false ) );
   }
 
   if( chat_changed )
@@ -281,15 +281,19 @@ bool Core::removeUserFromGroupChat( const User& u, const QString& chat_private_i
   }
   else
   {
-    QString sHtmlMsg = tr( "%1 %2 has left the group chat %3." ).arg( IconManager::instance().toHtml( "group-remove.png", "*G*" ), Bee::userNameToShow( u ), QString( "<b>%1</b>" ).arg( Bee::replaceHtmlSpecialCharacters( c.name() ) ) );
-    c.removeUser( u.id() );
-    c.setLastModifiedToNow();
-    c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
-    ChatManager::instance().setChat( c );
-    dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToChat, ChatMessage::System );
-    emit chatChanged( c );
-    return true;
+    if( c.hasUser( u.id() ) )
+    {
+      QString sHtmlMsg = tr( "%1 %2 has left the group chat %3." ).arg( IconManager::instance().toHtml( "group-remove.png", "*G*" ), Bee::userNameToShow( u ), QString( "<b>%1</b>" ).arg( Bee::replaceHtmlSpecialCharacters( c.name() ) ) );
+      c.removeUser( u.id() );
+      c.setLastModifiedToNow();
+      c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System, true ) );
+      ChatManager::instance().setChat( c );
+      dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToChat, ChatMessage::System, false );
+      emit chatChanged( c );
+      return true;
+    }
   }
+  return false;
 }
 
 bool Core::removeLocalUserFromGroupChatByOther( const User& other_user, const QString& chat_private_id )
@@ -303,9 +307,9 @@ bool Core::removeLocalUserFromGroupChatByOther( const User& other_user, const QS
   if( !c.isGroup() )
     return false;
   QString sHtmlMsg = tr( "%1 %2 wants to remove you from the group chat %3. If you agree please leave the group." ).arg( IconManager::instance().toHtml( "group-remove.png", "*G*" ), Bee::userNameToShow( other_user ), QString( "<b>%1</b>" ).arg( Bee::replaceHtmlSpecialCharacters( c.name() ) ) );
-  c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System ) );
+  c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::System, true ) );
   ChatManager::instance().setChat( c );
-  dispatchSystemMessage( ID_DEFAULT_CHAT, other_user.id(), sHtmlMsg, DispatchToChat, ChatMessage::System );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, other_user.id(), sHtmlMsg, DispatchToChat, ChatMessage::System, false );
   emit chatChanged( c );
   return true;
 }
@@ -323,7 +327,7 @@ bool Core::removeChat( VNumber chat_id, bool save_chat_messages )
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "%1 %2 is added to saved chats." )
                                                       .arg( IconManager::instance().toHtml( "saved-chat.png", "*H*" ), QString( "<b>%1</b>" ).arg( Bee::replaceHtmlSpecialCharacters( c.name() ) ) ),
-                           DispatchToChat, ChatMessage::System );
+                           DispatchToChat, ChatMessage::System, false );
   }
 
   clearMessagesInChat( c.id(), !save_chat_messages );
@@ -340,7 +344,7 @@ bool Core::removeChat( VNumber chat_id, bool save_chat_messages )
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "%1 You have left group chat %2." )
                            .arg( IconManager::instance().toHtml( "group-remove.png", "*G*" ) ).arg( QString( "<b>%1</b>" ).arg( Bee::replaceHtmlSpecialCharacters( c.name() ) ) ),
-                           DispatchToChat, ChatMessage::System );
+                           DispatchToChat, ChatMessage::System, true );
     qDebug() << "You have left group chat" << qPrintable( c.name() );
     Settings::instance().setNotificationEnabledForGroup( c.privateId(), false ); // reset notification in settings
     sendRefuseMessageToGroupChat( c );
@@ -371,7 +375,7 @@ int Core::archiveAllChats()
     {
       dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "%1 Chat with %2 is archived." )
                                                                .arg( IconManager::instance().toHtml( "saved-chat.png", "*H*" ), QString( "<b>%1</b>" ).arg( Bee::replaceHtmlSpecialCharacters( c.name() ) ) ),
-                             DispatchToChat, ChatMessage::System );
+                             DispatchToChat, ChatMessage::System, false );
       qDebug() << "Chat archived:" << c.name();
     }
 
@@ -393,13 +397,13 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg, bool is_importan
 {
   if( !isConnected() )
   {
-    dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "Unable to send the message: you are not connected." ), DispatchToChat, ChatMessage::Other );
+    dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "Unable to send the message: you are not connected." ), DispatchToChat, ChatMessage::Other, false );
     return 0;
   }
 
   if( chat_id == ID_DEFAULT_CHAT && !Settings::instance().chatWithAllUsersIsEnabled() )
   {
-    dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "Unable to send the message: this chat is disabled." ), DispatchToChat, ChatMessage::Other );
+    dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "Unable to send the message: this chat is disabled." ), DispatchToChat, ChatMessage::Other, false );
     return 0;
   }
 
@@ -428,7 +432,7 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg, bool is_importan
 
   int messages_sent = 0;
 
-  ChatMessage cm( ID_LOCAL_USER, m, ChatMessage::Chat );
+  ChatMessage cm( ID_LOCAL_USER, m, ChatMessage::Chat, true );
   dispatchToChat( cm, chat_id );
 
   if( chat_id == ID_DEFAULT_CHAT && !Settings::instance().sendOfflineMessagesToDefaultChat() )
@@ -440,11 +444,11 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg, bool is_importan
       else
         dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "Unable to send the message to %1." )
                                .arg( UserManager::instance().findUser( user_connection->userId() ).path() ),
-                               DispatchToChat, ChatMessage::Other );
+                               DispatchToChat, ChatMessage::UserInfo, false );
     }
 
     if( messages_sent == 0 )
-      dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "Nobody has received the message." ), DispatchToChat, ChatMessage::Other );
+      dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "Nobody has received the message." ), DispatchToChat, ChatMessage::Other, false );
   }
   else
     messages_sent = sendMessageToChat( c, m );
@@ -482,7 +486,7 @@ int Core::sendMessageToChat( const Chat& c, const Message& m )
     dispatchSystemMessage( c.id(), ID_LOCAL_USER, QString( "%1 %2" )
                            .arg( IconManager::instance().toHtml( "unsent-message.png", "*m*" ) )
                            .arg( sys_msg.arg( Bee::stringListToTextString( offline_users, 3 ) ) ),
-                           DispatchToChat, ChatMessage::Other );
+                           DispatchToChat, ChatMessage::Other, false );
   }
 
   return messages_sent;
@@ -576,7 +580,7 @@ void Core::sendRefuseMessageToGroupChat( const Chat& group_chat )
     if( !sendMessageToLocalNetwork( u, group_refuse_message ) )
       dispatchSystemMessage( group_chat.id(), ID_LOCAL_USER, tr( "%1 %2 cannot be informed that you have left the group." )
                              .arg( IconManager::instance().toHtml( "group-remove.png", "*G*" ) ).arg( Bee::userNameToShow( u ) ),
-                             DispatchToChat, ChatMessage::System );
+                             DispatchToChat, ChatMessage::System, false );
   }
 }
 
@@ -631,11 +635,11 @@ void Core::addListToSavedChats()
       dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2" )
                              .arg( IconManager::instance().toHtml( "warning.png", "*!*" ) )
                              .arg( tr( "Saved chats had an incorrect authorization code.") ),
-                             DispatchToChat, ChatMessage::System );
+                             DispatchToChat, ChatMessage::System, false );
     }
     loading_status = tr( "%1 saved chats are added to history" ).arg( bscl->savedChats().size() );
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( IconManager::instance().toHtml( "saved-chat.png", "*H*" ), loading_status ),
-                           DispatchToChat, ChatMessage::System );
+                           DispatchToChat, ChatMessage::System, false );
   }
 
   if( bscl->unsentMessages().size() > 0 )
@@ -646,14 +650,14 @@ void Core::addListToSavedChats()
       dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2" )
                              .arg( IconManager::instance().toHtml( "warning.png", "*!*" ) )
                              .arg( tr( "Offline messages still to be sent had an incorrect authorization code and will not be sent.") ),
-                             DispatchToChat, ChatMessage::System );
+                             DispatchToChat, ChatMessage::System, false );
     }
     else
     {
       dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2" )
                              .arg( IconManager::instance().toHtml( "unsent-message.png", "*m*" ) )
                              .arg( tr( "%1 offline messages will be sent as soon as possible." ).arg( bscl->unsentMessages().size() ) ),
-                             DispatchToChat, ChatMessage::System );
+                             DispatchToChat, ChatMessage::System, false );
       foreach( MessageRecord mr, bscl->unsentMessages() )
       {
         QString msg_txt;
@@ -700,7 +704,7 @@ void Core::addListToSavedChats()
                                .arg( tr( "Offline message will be sent to %1" ).arg( Bee::userNameToShow( to_user ) ) )
                                .arg( msg_txt )
                                .arg( mr.message().timestamp().toString( "yyyy-MM-dd hh:mm:ss" ) ),
-                               DispatchToChat, ChatMessage::Other );
+                               DispatchToChat, ChatMessage::Other, false );
         MessageManager::instance().addMessageRecord( mr );
       }
     }
@@ -812,7 +816,7 @@ int Core::checkOfflineMessagesForUser( const User& u )
       dispatchSystemMessage( ci, u.id(), QString( "%1 %2" )
                              .arg( IconManager::instance().toHtml( "unsent-message.png", "*m*" ) )
                              .arg( tr( "Offline messages sent to %2." ).arg( Bee::userNameToShow( u ) ) ),
-                             DispatchToChat, ChatMessage::Other );
+                             DispatchToChat, ChatMessage::Other, false );
     }
     qDebug() << messages_sent << "offline messages sent to" << qPrintable( u.path() ) << "-" << unsent_messages.size() << "messages left";
     emit offlineMessageSentToUser( u );
@@ -905,7 +909,7 @@ void Core::sendBuzzToUser( VNumber user_id )
     Chat c = ChatManager::instance().privateChatForUser( u.id() );
     if( !c.isValid() )
       c = ChatManager::instance().defaultChat();
-    dispatchSystemMessage( c.id(), u.id(), sys_msg, DispatchToChat, ChatMessage::Other );
+    dispatchSystemMessage( c.id(), u.id(), sys_msg, DispatchToChat, ChatMessage::Other, false );
   }
   else
     qWarning() << "Unable to send a buzz to offline user" << qPrintable( u.path() );
@@ -933,7 +937,7 @@ void Core::addChatHeader( Chat* p_chat )
     chat_has_history = ChatManager::instance().chatHasSavedText( User::nameFromPath( p_chat->name() ) );
 
   if( chat_has_history )
-    p_chat->addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( "" ), ChatMessage::History ) );
+    p_chat->addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( "" ), ChatMessage::History, false ) );
 
   QString header_msg = "";
 
@@ -941,7 +945,7 @@ void Core::addChatHeader( Chat* p_chat )
   {
     QString hv_msg = QByteArray::fromBase64( "QmVlQkVFUCAlMSAmY29weTsgJTIgTWFyY28gTWFzdHJvZGRp=" );
     header_msg = QString( "%1 <b>%2</b>." ).arg( IconManager::instance().toHtml( "beebeep.png", "***" ), hv_msg.arg( Settings::instance().version( false, false, false ) ).arg( QDate::currentDate().year() ) );
-    p_chat->addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( header_msg ), ChatMessage::System ) );
+    p_chat->addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( header_msg ), ChatMessage::System, false ) );
     header_msg = QString( "%1 %2." ).arg( IconManager::instance().toHtml( "chat-small.png", "*C*" ), tr( "Chat with all users" ) );
   }
   else if( p_chat->isPrivate() )
@@ -961,7 +965,7 @@ void Core::addChatHeader( Chat* p_chat )
     header_msg = tr( "%1 Chat with %2." ).arg( IconManager::instance().toHtml( "group.png", "*G*" ), Bee::stringListToTextString( user_string_list ) );
   }
 
-  p_chat->addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( header_msg ), ChatMessage::Header ) );
+  p_chat->addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( header_msg ), ChatMessage::Header, false ) );
 }
 
 void Core::linkSavedChat( const QString& from_saved_chat_name, const QString& to_saved_chat_name, bool prepend_to_existing_saved_chat )

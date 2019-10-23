@@ -4,57 +4,57 @@
 <context>
     <name>ChatMessage</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="283"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="284"/>
         <source>Header</source>
         <translation>Rubriek</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="284"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="285"/>
         <source>System</source>
         <translation>Systeem</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="285"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="286"/>
         <source>Chat</source>
         <translation>Chat</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="286"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="287"/>
         <source>Connection</source>
         <translation>Verbinding</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="287"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="288"/>
         <source>User Information</source>
         <translation>Gebruikersinformatie</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="288"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="289"/>
         <source>File Transfer</source>
         <translation>Bestandsoverdracht</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="289"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="290"/>
         <source>History</source>
         <translation>Geschiedenis</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="290"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="291"/>
         <source>Other</source>
         <translation>Andere</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="291"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="292"/>
         <source>Image Preview</source>
         <translation>Voorbeeld afbeelding</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="292"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="293"/>
         <source>Autoresponder</source>
         <translation>Autobeantwoorder</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="293"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="294"/>
         <source>Voice message</source>
         <translation type="unfinished"></translation>
     </message>
@@ -62,27 +62,27 @@
 <context>
     <name>Core</name>
     <message>
-        <location filename="../src/core/Core.cpp" line="207"/>
+        <location filename="../src/core/Core.cpp" line="205"/>
         <source>%1 Unable to connect to %2 Network. Please check your firewall settings.</source>
         <translation>%1 Kan niet verbinden met %2 netwerk. Controleer uw firewall instellingen.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="226"/>
+        <location filename="../src/core/Core.cpp" line="224"/>
         <source>%1 Unable to broadcast to %2 Network. Please check your firewall settings.</source>
         <translation>%1 Kan niet verzenden naar %2 netwerk. Controleer uw firewall instellingen.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="238"/>
+        <location filename="../src/core/Core.cpp" line="236"/>
         <source>%1 You are connected to %2 Network.</source>
         <translation>%1 U bent verbonden met %2 netwerk.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="398"/>
+        <location filename="../src/core/Core.cpp" line="396"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1 U bent niet langer verbonden met het %2 netwerk.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="327"/>
+        <location filename="../src/core/Core.cpp" line="325"/>
         <source>%1 Zero Configuration started with service name: %2</source>
         <translation>%1 Nul configuratie start altijd met service naam: %2</translation>
     </message>
@@ -105,97 +105,97 @@
         <translation type="obsolete">Netwerk adapter niet gevonden</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="153"/>
+        <location filename="../src/core/Core.cpp" line="152"/>
         <source>%1 User %2 cannot save unsent messages in path: %3</source>
         <translation>%1 Gebruiker %2 kan geen verzonden bericht opslaan in pad: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="187"/>
+        <location filename="../src/core/Core.cpp" line="185"/>
         <source>%1 Unable to connect to %2 Network. Please check if your network adapter is connected.</source>
         <translation>%1 Kan niet verbinden met %2 netwerk. Controleer of u netwerk adapter is verbonden.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="190"/>
+        <location filename="../src/core/Core.cpp" line="188"/>
         <source>Network adapter offline</source>
         <translation>Netwerk adapter offline</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="194"/>
+        <location filename="../src/core/Core.cpp" line="192"/>
         <source>Connecting</source>
         <translation>Verbinden</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="265"/>
+        <location filename="../src/core/Core.cpp" line="263"/>
         <source>%1 You have selected to join only in these workgroups: %2</source>
         <translation>%1 Je hebt ervoor gekozen om enkel van deze werkgroepen deel uit te maken: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="294"/>
+        <location filename="../src/core/Core.cpp" line="292"/>
         <source>%1 Do you need support? Visit the %2.</source>
         <translation>%1 Heb je hulp nodig? Bezoek %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="296"/>
+        <location filename="../src/core/Core.cpp" line="294"/>
         <source>help page</source>
         <translation>help pagina</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="342"/>
+        <location filename="../src/core/Core.cpp" line="340"/>
         <source>%1 Zero Configuration service closed.</source>
         <translation>%1 Nul configuratie service gesloten.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="404"/>
+        <location filename="../src/core/Core.cpp" line="402"/>
         <source>Disconnected</source>
         <translation>Verbinding verbroken</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="410"/>
+        <location filename="../src/core/Core.cpp" line="408"/>
         <source>Disconnecting</source>
         <translation>Verbinding verbroken</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="431"/>
+        <location filename="../src/core/Core.cpp" line="429"/>
         <source>%1 Reconnecting to the %2 Network in progress.</source>
         <translation>%1 Verbind opnieuw met %2 netwerk is bezig.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="441"/>
+        <location filename="../src/core/Core.cpp" line="439"/>
         <source>Reconnecting</source>
         <translation>Opnieuw verbinden</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="459"/>
+        <location filename="../src/core/Core.cpp" line="457"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
         <translation>%1 Nul configuratie doorzoekt het netwerk naar de %2-service</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="466"/>
+        <location filename="../src/core/Core.cpp" line="464"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation>%1 Nul configuratie kan het netwerk niet doorzoeken naar de %2-service</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="490"/>
+        <location filename="../src/core/Core.cpp" line="488"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1 Versturen naar %2 netwerk...</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="492"/>
+        <location filename="../src/core/Core.cpp" line="490"/>
         <source>Searching users</source>
         <translation>Zoek gebruikers</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="623"/>
+        <location filename="../src/core/Core.cpp" line="621"/>
         <source>New version is available</source>
         <translation>Nieuwe versie beschikbaar</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="624"/>
+        <location filename="../src/core/Core.cpp" line="622"/>
         <source>Click here to download</source>
         <translation>Klik hier om te downloaden</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="723"/>
+        <location filename="../src/core/Core.cpp" line="721"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>Max-ID is bereikt. Sluit en herstart Beebeep AUB.</translation>
     </message>
@@ -220,8 +220,8 @@
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="225"/>
-        <location filename="../src/core/CoreChat.cpp" line="950"/>
-        <location filename="../src/core/CoreChat.cpp" line="961"/>
+        <location filename="../src/core/CoreChat.cpp" line="954"/>
+        <location filename="../src/core/CoreChat.cpp" line="965"/>
         <source>%1 Chat with %2.</source>
         <translation>%1 Chat met %2.</translation>
     </message>
@@ -230,12 +230,12 @@
         <translation type="obsolete">Chat met alle aangesloten gebruikers</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="950"/>
+        <location filename="../src/core/CoreChat.cpp" line="954"/>
         <source>Unknown %1</source>
         <translation>Onbekend %1</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="396"/>
+        <location filename="../src/core/CoreChat.cpp" line="400"/>
         <source>Unable to send the message: you are not connected.</source>
         <translation>Kan bericht niet verzenden: u bent niet verbonden.</translation>
     </message>
@@ -290,122 +290,122 @@
         <translation>%1 %2 hebben: %3 toegevoegde leden.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="284"/>
+        <location filename="../src/core/CoreChat.cpp" line="286"/>
         <source>%1 %2 has left the group chat %3.</source>
         <translation>%1 %2 hebben de groepchat %3 verlaten.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="305"/>
+        <location filename="../src/core/CoreChat.cpp" line="309"/>
         <source>%1 %2 wants to remove you from the group chat %3. If you agree please leave the group.</source>
         <translation>%1 %2 wil je uit de groepchat %3 verwijderen als je er mee eens bent verlaat de groep.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="324"/>
+        <location filename="../src/core/CoreChat.cpp" line="328"/>
         <source>%1 %2 is added to saved chats.</source>
         <translation>%1 %2 zijn toegevoegd aan opgeslagen chats.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="341"/>
+        <location filename="../src/core/CoreChat.cpp" line="345"/>
         <source>%1 You have left group chat %2.</source>
         <translation>%1 Je hebt de groepchat %2 verlaten.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="372"/>
+        <location filename="../src/core/CoreChat.cpp" line="376"/>
         <source>%1 Chat with %2 is archived.</source>
         <translation>%1 Chat met %2 is gearchiveerd.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="402"/>
+        <location filename="../src/core/CoreChat.cpp" line="406"/>
         <source>Unable to send the message: this chat is disabled.</source>
         <translation>Kan bericht niet verzenden: de chat is uitgeschakeld.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="478"/>
+        <location filename="../src/core/CoreChat.cpp" line="482"/>
         <source>The voice message will be delivered to %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="633"/>
+        <location filename="../src/core/CoreChat.cpp" line="637"/>
         <source>Saved chats had an incorrect authorization code.</source>
         <translation>Opgeslagen chats hebben een onjuiste autorisatiecode.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="648"/>
+        <location filename="../src/core/CoreChat.cpp" line="652"/>
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
         <translation>Offline berichten die nog moesten worden verzonden, hadden een onjuiste autorisatiecode en worden niet verzonden.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="945"/>
+        <location filename="../src/core/CoreChat.cpp" line="949"/>
         <source>Chat with all users</source>
         <translation>Chat met alle gebruikers</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="245"/>
+        <location filename="../src/core/Core.cpp" line="243"/>
         <source>but encrypted connections allowed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="253"/>
+        <location filename="../src/core/Core.cpp" line="251"/>
         <source>End-to-end encryption is enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="253"/>
+        <location filename="../src/core/Core.cpp" line="251"/>
         <source>but not encrypted connections allowed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="243"/>
+        <location filename="../src/core/Core.cpp" line="241"/>
         <source>End-to-end encryption is disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="441"/>
+        <location filename="../src/core/CoreChat.cpp" line="445"/>
         <source>Unable to send the message to %1.</source>
         <translation>Kan bericht niet versturen naar %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="480"/>
+        <location filename="../src/core/CoreChat.cpp" line="484"/>
         <source>The message will be delivered to %1.</source>
         <translation>Dit bericht wordt verstuurd naar %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="447"/>
+        <location filename="../src/core/CoreChat.cpp" line="451"/>
         <source>Nobody has received the message.</source>
         <translation>Niemand heeft het bericht ontvangen.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="636"/>
+        <location filename="../src/core/CoreChat.cpp" line="640"/>
         <source>%1 saved chats are added to history</source>
         <translation>%1 opgeslagen chats zijn aan geschiedenis toegevoegd</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="655"/>
+        <location filename="../src/core/CoreChat.cpp" line="659"/>
         <source>%1 offline messages will be sent as soon as possible.</source>
         <translation>%1 offline berichten zullen zo spoedig mogelijk worden verzonden.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="700"/>
+        <location filename="../src/core/CoreChat.cpp" line="704"/>
         <source>Offline message will be sent to %1</source>
         <translation>Offline bericht wordt verzonden naar %1</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="814"/>
+        <location filename="../src/core/CoreChat.cpp" line="818"/>
         <source>Offline messages sent to %2.</source>
         <translation>Offline bericht verzonden naar%2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="904"/>
+        <location filename="../src/core/CoreChat.cpp" line="908"/>
         <source>%1 You have buzzed %2.</source>
         <translation>%1 Je bent gebuzzed %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="577"/>
+        <location filename="../src/core/CoreChat.cpp" line="581"/>
         <source>%1 %2 cannot be informed that you have left the group.</source>
         <translation>%1 %2 kan niet verwittigd worden dat u de groep verlaten heeft.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="532"/>
+        <location filename="../src/core/Core.cpp" line="530"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1 Netwerkkaart %2 is verdwenen.</translation>
     </message>
@@ -524,7 +524,7 @@
         <translation>%1 is toegevoegd aan bestandsdeling met %2 bestanden, %3 (verlopen tijd: %4)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="694"/>
+        <location filename="../src/core/CoreChat.cpp" line="698"/>
         <location filename="../src/core/CoreFileTransfer.cpp" line="192"/>
         <location filename="../src/core/CoreVoiceChat.cpp" line="65"/>
         <source>voice message</source>
@@ -779,7 +779,7 @@
 <context>
     <name>Date</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="1036"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="1037"/>
         <source>more than 1 day</source>
         <translation>meer dan 1 dag</translation>
     </message>
@@ -787,42 +787,42 @@
 <context>
     <name>File</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="264"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="265"/>
         <source>Audio</source>
         <translation>Geluid</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="265"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="266"/>
         <source>Video</source>
         <translation>Beeld</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="266"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="267"/>
         <source>Image</source>
         <translation>Afbeelding</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="267"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="268"/>
         <source>Document</source>
         <translation>Document</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="268"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="269"/>
         <source>Other</source>
         <translation>Andere</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="269"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="270"/>
         <source>Executable</source>
         <translation>Uitvoerbaar bestand</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="270"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="271"/>
         <source>MacOSX</source>
         <translation>MacOSX</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="271"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="272"/>
         <source>Compressed</source>
         <translation>Gecomprimeerd</translation>
     </message>
@@ -860,42 +860,42 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="170"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="185"/>
         <source>Transfer completed in %1</source>
         <translation>Overdracht voltooid in %1</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="185"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="200"/>
         <source>Transfer canceled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="213"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="228"/>
         <source>Transfer is about to pause</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="215"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="230"/>
         <source>Please wait</source>
         <translation type="unfinished">Wacht AUB</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="232"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="247"/>
         <source>Transfer paused after %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="242"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="257"/>
         <source>Starting transfer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="329"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="344"/>
         <source>Connection timeout</source>
         <translation>Kon niet tijdig verbinden</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="348"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="363"/>
         <source>Transfer timeout</source>
         <translation>Overdrachts timeout</translation>
     </message>
@@ -1122,290 +1122,290 @@
 <context>
     <name>GuiChat</name>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="167"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="168"/>
         <source>Change font style</source>
         <translation>Wijzig stijl lettertype</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="168"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="169"/>
         <source>Change font color</source>
         <translation>Wijzig tekstkleur</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="112"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="113"/>
         <source>Change background color</source>
         <translation>Wijzig achtergrondkleur</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="169"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="170"/>
         <source>Filter message</source>
         <translation>Bericht filteren</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="170"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="173"/>
         <source>Chat settings</source>
         <translation>Chat instellingen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="171"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="174"/>
         <source>Spell checking</source>
         <translation>Spellingscontrole</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="173"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="176"/>
         <source>Word completer</source>
         <translation>Automatische tekstaanvulling</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="175"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="178"/>
         <source>Use Return key to send message</source>
         <translation>Gebruik enter toets om bericht te verzenden</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="134"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1121"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="135"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1142"/>
         <source>Find text in chat</source>
         <translation>Vind text in chat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="178"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="181"/>
         <source>Send file</source>
         <translation>Stuur bestand</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="179"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="182"/>
         <source>Send folder</source>
         <translation>Stuur map</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="121"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="122"/>
         <source>Save chat</source>
         <translation>Sla chat op</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="198"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="201"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="199"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="202"/>
         <source>Close chat window on sending message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="203"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="206"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="204"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="207"/>
         <source>Minimize chat window on sending message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="115"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="116"/>
         <source>Select chat default text color</source>
         <translation>Selekteer de standaard chat tekstkleur</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="118"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="119"/>
         <source>Select chat system text color</source>
         <translation>Selekteer de chatsysteem tekst kleur</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="124"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="125"/>
         <source>Print...</source>
         <translation>Print...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="131"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="132"/>
         <source>Clear system messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="137"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="138"/>
         <source>Restore the default font</source>
         <translation>Herstel de standaard lettertype</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="147"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="314"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="148"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="317"/>
         <source>Share your desktop</source>
         <translation>Deel je desktop</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="151"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="152"/>
         <source>Send a screenshot</source>
         <translation>Stuur een schermafdruk</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="326"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="329"/>
         <source>Record voice message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="324"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="327"/>
         <source>File transfer must be enabled to send voice messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="256"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="259"/>
         <source>You are not connected</source>
         <translation>Je bent niet verbonden</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="264"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="267"/>
         <source>Send messages is disabled</source>
         <translation>Verzenden van bericht is uitgeschakeld</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="270"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="273"/>
         <source>Chat with all users is disabled</source>
         <translation>Chat met alle gebruikers is uitgeschakeld</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="276"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="279"/>
         <source>Private chat is disabled</source>
         <translation>Prive chat is uitgeschakeld</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="285"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="288"/>
         <source>You have left this chat</source>
         <translation>Je hebt deze chat verlaten</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="293"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="296"/>
         <source>Write a message to all user</source>
         <translation>Schrijf een bericht aan alle gebruikers</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="310"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="313"/>
         <source>Your desktop is shared with %1</source>
         <translation>Je desktop is gedeeld met %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="339"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="342"/>
         <source>Select all</source>
         <translation>Alles selecteren</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="343"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="346"/>
         <source>Quote selected text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="345"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="348"/>
         <source>Open selected text as url</source>
         <translation>Open geselecteerde tekst als url</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="505"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="526"/>
         <source>The loading of saved messages has not yet been completed.</source>
         <translation>Het laden van opgeslagen berichten is nog niet voltooid.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="567"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="588"/>
         <source>only the last %1 messages are shown</source>
         <translation>alleen de laatste %1 berichten worden getoond</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="500"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="521"/>
         <source>Loading of saved messages...</source>
         <translation>Laden van opgeslagen berichten...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="458"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="479"/>
         <source>Opening voice message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="569"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="590"/>
         <source>maximum number of messages to show reached</source>
         <translation>Het maximum aantal te tonen berichten bereikt</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="761"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="782"/>
         <source>You must close and reopen this window to see the changes applied.</source>
         <translation>Dit venster sluiten en opnieuw openen om de aangebrachte wijzigingen te zien.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="788"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="809"/>
         <source>Please select a file to save all the messages of the chat.</source>
         <translation>Selecteer een bestand om alle berichten van de chat op te slaan.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="904"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="925"/>
         <source>Do you want to send %1 %2 to the members of this chat?</source>
         <translation>Wil je %1 %2 zenden naar leden van deze chat?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1003"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1024"/>
         <source>Use key Return to send message</source>
         <translation>Gebruik enter toets om bericht te verzenden</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1005"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1026"/>
         <source>Use key Return to make a carriage return</source>
         <translation>Gebruik enter toest</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1019"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1040"/>
         <source>Spell checking is enabled</source>
         <translation>Spellingscontrole is actief</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1026"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1050"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1047"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1071"/>
         <source>There is not a valid dictionary</source>
         <translation>Er is geen geldige map</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1159"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1180"/>
         <source>%1 not found in chat.</source>
         <translation>%1 niet gevonden in chat.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1195"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1216"/>
         <source>Do you want to restore the default font?</source>
         <translation>Wil je de standaard lettertype herstellen?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1203"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1224"/>
         <source>Ready.</source>
         <translation>Klaar.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1219"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1240"/>
         <source>Do you want to send a screenshot?</source>
         <translation>Wil je een schermafdruk verzenden?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1219"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1240"/>
         <source>Yes and hide this chat</source>
         <translation>Ja en verberg deze chat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1021"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1042"/>
         <source>Spell checking is disabled</source>
         <translation>Spellingscontrole is uitgeschakeld</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1043"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1064"/>
         <source>Word completer is enabled</source>
         <translation>Automatische tekstaanvulling is ingeschakeld</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1045"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1066"/>
         <source>Word completer is disabled</source>
         <translation>Automatische tekstaanvulling is uitgeschakeld</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="128"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="129"/>
         <source>Clear messages</source>
         <translation>Berichten wissen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="341"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="344"/>
         <source>Copy to clipboard</source>
         <translation>Naar klembord kopiëren</translation>
     </message>
@@ -1414,12 +1414,12 @@
         <translation type="obsolete">Alles selecteren</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="375"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="395"/>
         <source>Show only messages in default chat</source>
         <translation>Toon alleen berichten in de standaardchat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="418"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="439"/>
         <source>Last message %1</source>
         <translation>Laatste bericht %1</translation>
     </message>
@@ -1428,7 +1428,7 @@
         <translation type="obsolete">Schrijf een bericht aan alle aangesloten gebruikers</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="295"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="298"/>
         <source>Write a message to %1</source>
         <translation>Schrijf bericht aan %1</translation>
     </message>
@@ -1437,57 +1437,57 @@
         <translation type="obsolete">Selecteer aub een bestand om de chatberichten in op te slaan.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="809"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="830"/>
         <source>%1: save completed.</source>
         <translation>%1: opslaan voltooid.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="761"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="809"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="782"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="830"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="570"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="591"/>
         <source>open %1 to read them all</source>
         <translation>open %1 om alles te lezen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="570"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="591"/>
         <source>the saved chat</source>
         <translation>de opgeslagen chat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="856"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="877"/>
         <source>Unable to save temporary file: %1</source>
         <translation>Kan tijdelijk bestand: %1 niet opslaan</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="905"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="926"/>
         <source>file</source>
         <translation>bestand</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="905"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="926"/>
         <source>files</source>
         <translation>bestanden</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="906"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1195"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1219"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="927"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1216"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1240"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="906"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1195"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1219"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="927"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1216"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1240"/>
         <source>No</source>
         <translation>Nee</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="919"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="940"/>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
         <translation>Qt bibliotheek voor dit besturingssysteem ondersteunt geen Drag en drop voor bestanden. U moet het bestand dat u wilt versturen opnieuw selecteren.</translation>
     </message>
@@ -6396,24 +6396,24 @@ Gebruik aub een andere naam.</translation>
         <translation type="obsolete">Chat openen met alle lokale gebruikers</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatItem.cpp" line="73"/>
+        <location filename="../src/desktop/GuiChatItem.cpp" line="78"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3646"/>
         <source>All users</source>
         <translation>Alle gebruikers</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatItem.cpp" line="86"/>
+        <location filename="../src/desktop/GuiChatItem.cpp" line="92"/>
         <source>Open chat with all users</source>
         <translation>Chat openen met alle gebruikers</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatItem.cpp" line="113"/>
+        <location filename="../src/desktop/GuiChatItem.cpp" line="121"/>
         <source>Open chat with %1</source>
         <translation>Open chat met %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatItem.cpp" line="120"/>
-        <location filename="../src/utils/BeeUtils.cpp" line="721"/>
+        <location filename="../src/desktop/GuiChatItem.cpp" line="128"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="722"/>
         <source>unsent messages</source>
         <translation>Niet verstuurd bericht</translation>
     </message>
@@ -6443,63 +6443,63 @@ Gebruik aub een andere naam.</translation>
         <translation>Klik om chat te openen met alle lokale gebruikers</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="692"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="693"/>
         <source>%1 is %2</source>
         <translation>%1 is %2</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="692"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="693"/>
         <source>You are %1</source>
         <translation>U bent %1</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="712"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="713"/>
         <source>last update</source>
         <translation>laatste update</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="717"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="718"/>
         <source>last connection</source>
         <translation>Laatste verbinding</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="732"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="733"/>
         <source>Workgroups</source>
         <translation>Werkgroepen</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="756"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="757"/>
         <source>Today is %1&apos;s birthday</source>
         <translation>Verjaardag van %1 is vandaag</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="758"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="759"/>
         <source>Tomorrow is %1&apos;s birthday</source>
         <translation>Morgen is verjaardag van %1</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="760"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="761"/>
         <source>%1&apos;s birthday is in %2 days</source>
         <translation>%1 zijn verjaardag is over %2 dagen</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="762"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="763"/>
         <source>Yesterday was %1&apos;s birthday</source>
         <translation>Gisteren was de verjaardag van %1</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="769"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="770"/>
         <source>Happy Birthday to you!</source>
         <translation>Van harte gefeliciteerd!</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="783"/>
-        <location filename="../src/utils/BeeUtils.cpp" line="804"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="784"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="805"/>
         <source>and</source>
         <translation>en</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="809"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="810"/>
         <source>and %1 others</source>
         <translation>en %1 anderen</translation>
     </message>
@@ -6697,7 +6697,7 @@ Gebruik aub een andere naam.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2267"/>
+        <location filename="../src/core/Settings.cpp" line="2270"/>
         <source>Autoresponder</source>
         <translation>Autobeantwoorder</translation>
     </message>

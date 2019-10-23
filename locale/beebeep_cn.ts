@@ -4,57 +4,57 @@
 <context>
     <name>ChatMessage</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="283"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="284"/>
         <source>Header</source>
         <translation>头部</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="284"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="285"/>
         <source>System</source>
         <translation>系统</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="285"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="286"/>
         <source>Chat</source>
         <translation>聊天</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="286"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="287"/>
         <source>Connection</source>
         <translation>连接</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="287"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="288"/>
         <source>User Information</source>
         <translation>用户信息</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="288"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="289"/>
         <source>File Transfer</source>
         <translation>文件传输</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="289"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="290"/>
         <source>History</source>
         <translation>历史</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="290"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="291"/>
         <source>Other</source>
         <translation>其他</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="291"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="292"/>
         <source>Image Preview</source>
         <translation>图片预览</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="292"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="293"/>
         <source>Autoresponder</source>
         <translation>自动响应</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="293"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="294"/>
         <source>Voice message</source>
         <translation type="unfinished"></translation>
     </message>
@@ -62,27 +62,27 @@
 <context>
     <name>Core</name>
     <message>
-        <location filename="../src/core/Core.cpp" line="207"/>
+        <location filename="../src/core/Core.cpp" line="205"/>
         <source>%1 Unable to connect to %2 Network. Please check your firewall settings.</source>
         <translation>%1 无法连接到%2网络，请检查你的防火墙设置。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="226"/>
+        <location filename="../src/core/Core.cpp" line="224"/>
         <source>%1 Unable to broadcast to %2 Network. Please check your firewall settings.</source>
         <translation>%1无法广播到%2网络，请检查你的防火墙设置。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="238"/>
+        <location filename="../src/core/Core.cpp" line="236"/>
         <source>%1 You are connected to %2 Network.</source>
         <translation>%1你已经连上%2网络。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="398"/>
+        <location filename="../src/core/Core.cpp" line="396"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1你已经与%2网络断开连接。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="327"/>
+        <location filename="../src/core/Core.cpp" line="325"/>
         <source>%1 Zero Configuration started with service name: %2</source>
         <translation>%1零配置服务已经启动，名称：%2</translation>
     </message>
@@ -97,97 +97,97 @@
         <translation>%1用户%2不能保存聊天消息在路径：%3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="153"/>
+        <location filename="../src/core/Core.cpp" line="152"/>
         <source>%1 User %2 cannot save unsent messages in path: %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="187"/>
+        <location filename="../src/core/Core.cpp" line="185"/>
         <source>%1 Unable to connect to %2 Network. Please check if your network adapter is connected.</source>
         <translation>%1不能连接%2网络，请检查你的网络适配器已经连接。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="190"/>
+        <location filename="../src/core/Core.cpp" line="188"/>
         <source>Network adapter offline</source>
         <translation>网络适配器离线</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="194"/>
+        <location filename="../src/core/Core.cpp" line="192"/>
         <source>Connecting</source>
         <translation>正在连接</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="265"/>
+        <location filename="../src/core/Core.cpp" line="263"/>
         <source>%1 You have selected to join only in these workgroups: %2</source>
         <translation>%1你已经选择了只加入这些群组：%2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="294"/>
+        <location filename="../src/core/Core.cpp" line="292"/>
         <source>%1 Do you need support? Visit the %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="296"/>
+        <location filename="../src/core/Core.cpp" line="294"/>
         <source>help page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="342"/>
+        <location filename="../src/core/Core.cpp" line="340"/>
         <source>%1 Zero Configuration service closed.</source>
         <translation>%1零配置服务已关闭。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="404"/>
+        <location filename="../src/core/Core.cpp" line="402"/>
         <source>Disconnected</source>
         <translation>已断开</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="410"/>
+        <location filename="../src/core/Core.cpp" line="408"/>
         <source>Disconnecting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="431"/>
+        <location filename="../src/core/Core.cpp" line="429"/>
         <source>%1 Reconnecting to the %2 Network in progress.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="441"/>
+        <location filename="../src/core/Core.cpp" line="439"/>
         <source>Reconnecting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="459"/>
+        <location filename="../src/core/Core.cpp" line="457"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
         <translation>%1零配置正在为服务%2浏览网络</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="466"/>
+        <location filename="../src/core/Core.cpp" line="464"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation>%1零配置不能为服务%2浏览网络</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="490"/>
+        <location filename="../src/core/Core.cpp" line="488"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1正在广播到%2网络</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="492"/>
+        <location filename="../src/core/Core.cpp" line="490"/>
         <source>Searching users</source>
         <translation>正在搜索用户</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="623"/>
+        <location filename="../src/core/Core.cpp" line="621"/>
         <source>New version is available</source>
         <translation>有新版本可用</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="624"/>
+        <location filename="../src/core/Core.cpp" line="622"/>
         <source>Click here to download</source>
         <translation>点击这里下载</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="723"/>
+        <location filename="../src/core/Core.cpp" line="721"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>已达到最大ID数，请关闭并重新启动程序。</translation>
     </message>
@@ -258,138 +258,138 @@
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="225"/>
-        <location filename="../src/core/CoreChat.cpp" line="950"/>
-        <location filename="../src/core/CoreChat.cpp" line="961"/>
+        <location filename="../src/core/CoreChat.cpp" line="954"/>
+        <location filename="../src/core/CoreChat.cpp" line="965"/>
         <source>%1 Chat with %2.</source>
         <translation>%1与%2聊天</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="284"/>
+        <location filename="../src/core/CoreChat.cpp" line="286"/>
         <source>%1 %2 has left the group chat %3.</source>
         <translation>%1 %2已离开群组聊天%3</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="305"/>
+        <location filename="../src/core/CoreChat.cpp" line="309"/>
         <source>%1 %2 wants to remove you from the group chat %3. If you agree please leave the group.</source>
         <translation>%1 %2希望将您从群组聊天%3中删除。如果你同意，请离开这个小组。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="324"/>
+        <location filename="../src/core/CoreChat.cpp" line="328"/>
         <source>%1 %2 is added to saved chats.</source>
         <translation>%1 %2被添加到已保存的聊天记录中</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="341"/>
+        <location filename="../src/core/CoreChat.cpp" line="345"/>
         <source>%1 You have left group chat %2.</source>
         <translation>%1你已经离开群聊组%2</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="372"/>
+        <location filename="../src/core/CoreChat.cpp" line="376"/>
         <source>%1 Chat with %2 is archived.</source>
         <translation>%1与%2的对话已经存档</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="396"/>
+        <location filename="../src/core/CoreChat.cpp" line="400"/>
         <source>Unable to send the message: you are not connected.</source>
         <translation>无法发送消息:您没有连接。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="402"/>
+        <location filename="../src/core/CoreChat.cpp" line="406"/>
         <source>Unable to send the message: this chat is disabled.</source>
         <translation>无法发送消息:此聊天被禁用</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="441"/>
+        <location filename="../src/core/CoreChat.cpp" line="445"/>
         <source>Unable to send the message to %1.</source>
         <translation>无法将消息发送到%1</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="447"/>
+        <location filename="../src/core/CoreChat.cpp" line="451"/>
         <source>Nobody has received the message.</source>
         <translation>没有人收到这条消息</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="478"/>
+        <location filename="../src/core/CoreChat.cpp" line="482"/>
         <source>The voice message will be delivered to %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="648"/>
+        <location filename="../src/core/CoreChat.cpp" line="652"/>
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="945"/>
+        <location filename="../src/core/CoreChat.cpp" line="949"/>
         <source>Chat with all users</source>
         <translation>与所有用户聊天</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="245"/>
+        <location filename="../src/core/Core.cpp" line="243"/>
         <source>but encrypted connections allowed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="253"/>
+        <location filename="../src/core/Core.cpp" line="251"/>
         <source>End-to-end encryption is enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="253"/>
+        <location filename="../src/core/Core.cpp" line="251"/>
         <source>but not encrypted connections allowed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="243"/>
+        <location filename="../src/core/Core.cpp" line="241"/>
         <source>End-to-end encryption is disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="480"/>
+        <location filename="../src/core/CoreChat.cpp" line="484"/>
         <source>The message will be delivered to %1.</source>
         <translation>消息将被发送到%1</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="633"/>
+        <location filename="../src/core/CoreChat.cpp" line="637"/>
         <source>Saved chats had an incorrect authorization code.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="636"/>
+        <location filename="../src/core/CoreChat.cpp" line="640"/>
         <source>%1 saved chats are added to history</source>
         <translation>%1保存的聊天记录将添加到历史记录中</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="655"/>
+        <location filename="../src/core/CoreChat.cpp" line="659"/>
         <source>%1 offline messages will be sent as soon as possible.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="700"/>
+        <location filename="../src/core/CoreChat.cpp" line="704"/>
         <source>Offline message will be sent to %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="814"/>
+        <location filename="../src/core/CoreChat.cpp" line="818"/>
         <source>Offline messages sent to %2.</source>
         <translation>发送到%2的脱机消息</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="904"/>
+        <location filename="../src/core/CoreChat.cpp" line="908"/>
         <source>%1 You have buzzed %2.</source>
         <translation>%1你已经和%2建立联系</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="950"/>
+        <location filename="../src/core/CoreChat.cpp" line="954"/>
         <source>Unknown %1</source>
         <translation>未知的%1</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="577"/>
+        <location filename="../src/core/CoreChat.cpp" line="581"/>
         <source>%1 %2 cannot be informed that you have left the group.</source>
         <translation>无法通知%1 %2你已离开组</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="532"/>
+        <location filename="../src/core/Core.cpp" line="530"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1与%2的网络接口下降</translation>
     </message>
@@ -483,7 +483,7 @@
         <translation>你将%2发送到%3</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="694"/>
+        <location filename="../src/core/CoreChat.cpp" line="698"/>
         <location filename="../src/core/CoreFileTransfer.cpp" line="192"/>
         <location filename="../src/core/CoreVoiceChat.cpp" line="65"/>
         <source>voice message</source>
@@ -760,7 +760,7 @@
 <context>
     <name>Date</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="1036"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="1037"/>
         <source>more than 1 day</source>
         <translation type="unfinished"></translation>
     </message>
@@ -768,42 +768,42 @@
 <context>
     <name>File</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="264"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="265"/>
         <source>Audio</source>
         <translation>音频</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="265"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="266"/>
         <source>Video</source>
         <translation>视频</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="266"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="267"/>
         <source>Image</source>
         <translation>图片</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="267"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="268"/>
         <source>Document</source>
         <translation>文档</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="268"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="269"/>
         <source>Other</source>
         <translation>其他</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="269"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="270"/>
         <source>Executable</source>
         <translation>可执行文件</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="270"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="271"/>
         <source>MacOSX</source>
         <translation>MacOX</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="271"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="272"/>
         <source>Compressed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -841,42 +841,42 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="170"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="185"/>
         <source>Transfer completed in %1</source>
         <translation>传输即将在%1内完成</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="185"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="200"/>
         <source>Transfer canceled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="213"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="228"/>
         <source>Transfer is about to pause</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="215"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="230"/>
         <source>Please wait</source>
         <translation type="unfinished">请等待</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="232"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="247"/>
         <source>Transfer paused after %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="242"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="257"/>
         <source>Starting transfer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="329"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="344"/>
         <source>Connection timeout</source>
         <translation>连接超时</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="348"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="363"/>
         <source>Transfer timeout</source>
         <translation>传输超时</translation>
     </message>
@@ -1103,280 +1103,280 @@
 <context>
     <name>GuiChat</name>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="167"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="168"/>
         <source>Change font style</source>
         <translation>修改字体</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="168"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="169"/>
         <source>Change font color</source>
         <translation>修改字体颜色</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="112"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="113"/>
         <source>Change background color</source>
         <translation>修改背景颜色</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="169"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="170"/>
         <source>Filter message</source>
         <translation>过滤消息</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="170"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="173"/>
         <source>Chat settings</source>
         <translation>聊天设置</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="171"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="174"/>
         <source>Spell checking</source>
         <translation>拼写检查</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="173"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="176"/>
         <source>Word completer</source>
         <translation>单词补全器</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="175"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="178"/>
         <source>Use Return key to send message</source>
         <translation>使用回车键发送消息</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="134"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1121"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="135"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1142"/>
         <source>Find text in chat</source>
         <translation>在聊天中查找文本</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="178"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="181"/>
         <source>Send file</source>
         <translation>发送文件</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="179"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="182"/>
         <source>Send folder</source>
         <translation>发送文件夹</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="121"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="122"/>
         <source>Save chat</source>
         <translation>保存聊天</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="198"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="201"/>
         <source>Close</source>
         <translation type="unfinished">关闭</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="199"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="202"/>
         <source>Close chat window on sending message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="203"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="206"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="204"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="207"/>
         <source>Minimize chat window on sending message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="115"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="116"/>
         <source>Select chat default text color</source>
         <translation type="unfinished">选择默认聊天文字颜色</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="118"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="119"/>
         <source>Select chat system text color</source>
         <translation type="unfinished">选择聊天系统文字颜色</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="124"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="125"/>
         <source>Print...</source>
         <translation>打印...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="131"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="132"/>
         <source>Clear system messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="137"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="138"/>
         <source>Restore the default font</source>
         <translation>还原默认字体</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="147"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="314"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="148"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="317"/>
         <source>Share your desktop</source>
         <translation>分享你的桌面</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="151"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="152"/>
         <source>Send a screenshot</source>
         <translation>发送截屏</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="326"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="329"/>
         <source>Record voice message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="324"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="327"/>
         <source>File transfer must be enabled to send voice messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="256"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="259"/>
         <source>You are not connected</source>
         <translation>你未连接</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="264"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="267"/>
         <source>Send messages is disabled</source>
         <translation>已关闭发送消息</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="270"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="273"/>
         <source>Chat with all users is disabled</source>
         <translation>和所有人聊天已关闭</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="276"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="279"/>
         <source>Private chat is disabled</source>
         <translation>隐私聊天已关闭</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="285"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="288"/>
         <source>You have left this chat</source>
         <translation>你已经离开聊天</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="293"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="296"/>
         <source>Write a message to all user</source>
         <translation>给所有用户写消息</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="310"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="313"/>
         <source>Your desktop is shared with %1</source>
         <translation>你的桌面已分享给%1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="339"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="342"/>
         <source>Select all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="343"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="346"/>
         <source>Quote selected text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="345"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="348"/>
         <source>Open selected text as url</source>
         <translation>以URL的形式打开选中文本</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="505"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="526"/>
         <source>The loading of saved messages has not yet been completed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="567"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="588"/>
         <source>only the last %1 messages are shown</source>
         <translation>只显示了最近%1消息</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="500"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="521"/>
         <source>Loading of saved messages...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="458"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="479"/>
         <source>Opening voice message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="569"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="590"/>
         <source>maximum number of messages to show reached</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="761"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="782"/>
         <source>You must close and reopen this window to see the changes applied.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="788"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="809"/>
         <source>Please select a file to save all the messages of the chat.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="904"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="925"/>
         <source>Do you want to send %1 %2 to the members of this chat?</source>
         <translation>你想给当前聊天成员发送%1%2吗？</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1019"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1040"/>
         <source>Spell checking is enabled</source>
         <translation>拼写检查已打开</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1026"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1050"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1047"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1071"/>
         <source>There is not a valid dictionary</source>
         <translation>没有有效的字典</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1043"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1064"/>
         <source>Word completer is enabled</source>
         <translation>单词补全器已打开</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1045"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1066"/>
         <source>Word completer is disabled</source>
         <translation>单词补全器已关闭</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1159"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1180"/>
         <source>%1 not found in chat.</source>
         <translation>在聊天中未找到%1 </translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1195"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1216"/>
         <source>Do you want to restore the default font?</source>
         <translation>你想还原默认字体吗</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1203"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1224"/>
         <source>Ready.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1219"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1240"/>
         <source>Do you want to send a screenshot?</source>
         <translation>你想发送截屏吗</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1219"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1240"/>
         <source>Yes and hide this chat</source>
         <translation>是的，隐藏聊天</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1021"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1042"/>
         <source>Spell checking is disabled</source>
         <translation>拼写检查已关闭</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="128"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="129"/>
         <source>Clear messages</source>
         <translation>清除消息</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="341"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="344"/>
         <source>Copy to clipboard</source>
         <translation>复制到剪切板</translation>
     </message>
@@ -1385,17 +1385,17 @@
         <translation type="obsolete">全选</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="375"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="395"/>
         <source>Show only messages in default chat</source>
         <translation>只显示默认聊天的消息</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="418"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="439"/>
         <source>Last message %1</source>
         <translation>最近消息%1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="295"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="298"/>
         <source>Write a message to %1</source>
         <translation>给%1写消息</translation>
     </message>
@@ -1404,67 +1404,67 @@
         <translation type="obsolete">请选择一个文件保存当前聊天的消息</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="809"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="830"/>
         <source>%1: save completed.</source>
         <translation>%1：保存完成。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="761"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="809"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="782"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="830"/>
         <source>Ok</source>
         <translation>好的</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="570"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="591"/>
         <source>open %1 to read them all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="570"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="591"/>
         <source>the saved chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="856"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="877"/>
         <source>Unable to save temporary file: %1</source>
         <translation>无法保存临时文件：%1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="905"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="926"/>
         <source>file</source>
         <translation>文件</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="905"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="926"/>
         <source>files</source>
         <translation>文件</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="906"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1195"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1219"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="927"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1216"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1240"/>
         <source>Yes</source>
         <translation>是</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="906"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1195"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1219"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="927"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1216"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1240"/>
         <source>No</source>
         <translation>不</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="919"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="940"/>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
         <translation>当前系统的Qt库不支持拖放文件，你需要选择文件发送。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1003"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1024"/>
         <source>Use key Return to send message</source>
         <translation>使用Return按键发送消息</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1005"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1026"/>
         <source>Use key Return to make a carriage return</source>
         <translation>使用Return按键实现回车操作</translation>
     </message>
@@ -6234,24 +6234,24 @@ Please select a different name.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/desktop/GuiChatItem.cpp" line="73"/>
+        <location filename="../src/desktop/GuiChatItem.cpp" line="78"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3646"/>
         <source>All users</source>
         <translation>所有用户</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatItem.cpp" line="86"/>
+        <location filename="../src/desktop/GuiChatItem.cpp" line="92"/>
         <source>Open chat with all users</source>
         <translation>与所有用户打开聊天</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatItem.cpp" line="113"/>
+        <location filename="../src/desktop/GuiChatItem.cpp" line="121"/>
         <source>Open chat with %1</source>
         <translation>和%1打开聊天</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatItem.cpp" line="120"/>
-        <location filename="../src/utils/BeeUtils.cpp" line="721"/>
+        <location filename="../src/desktop/GuiChatItem.cpp" line="128"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="722"/>
         <source>unsent messages</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6281,63 +6281,63 @@ Please select a different name.</source>
         <translation>点击打开与本地用户的聊天</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="692"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="693"/>
         <source>%1 is %2</source>
         <translation>%1是%2</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="692"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="693"/>
         <source>You are %1</source>
         <translation>你是%1</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="712"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="713"/>
         <source>last update</source>
         <translation>最后一次更新</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="717"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="718"/>
         <source>last connection</source>
         <translation>最后一次连接</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="732"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="733"/>
         <source>Workgroups</source>
         <translation type="unfinished">工作群组</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="756"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="757"/>
         <source>Today is %1&apos;s birthday</source>
         <translation>今天是%1的生日</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="758"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="759"/>
         <source>Tomorrow is %1&apos;s birthday</source>
         <translation>明天是%1的生日</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="760"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="761"/>
         <source>%1&apos;s birthday is in %2 days</source>
         <translation>%1的生日在两天后</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="762"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="763"/>
         <source>Yesterday was %1&apos;s birthday</source>
         <translation>昨天是%1的生日</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="769"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="770"/>
         <source>Happy Birthday to you!</source>
         <translation>祝你生日快乐</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="783"/>
-        <location filename="../src/utils/BeeUtils.cpp" line="804"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="784"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="805"/>
         <source>and</source>
         <translation>并且</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="809"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="810"/>
         <source>and %1 others</source>
         <translation>和%1其他的</translation>
     </message>
@@ -6531,7 +6531,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2267"/>
+        <location filename="../src/core/Settings.cpp" line="2270"/>
         <source>Autoresponder</source>
         <translation>自动响应</translation>
     </message>

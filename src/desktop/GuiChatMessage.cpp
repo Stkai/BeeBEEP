@@ -61,8 +61,8 @@ QString GuiChatMessage::datetimestampToString( const ChatMessage& cm, bool show_
   return date_time_stamp_format.isEmpty() ? date_time_stamp_format : (Settings::instance().useMessageTimestampWithAP() ? QLocale("en_US").toString( cm.timestamp(), date_time_stamp_format ) : cm.timestamp().toString( date_time_stamp_format ));
 }
 
-QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNumber last_user_id, bool show_timestamp, bool show_datestamp, bool skip_system_message,
-                                       bool show_message_group_by_user, bool use_your_name, bool use_chat_compact )
+QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNumber last_user_id, bool show_timestamp, bool show_datestamp,
+                                       bool skip_system_message, bool show_message_group_by_user, bool use_your_name, bool use_chat_compact )
 {
   QString html_message = "";
   if( cm.isImportant() )
@@ -160,7 +160,7 @@ QString GuiChatMessage::formatSystemMessage( const ChatMessage& cm, VNumber last
   return html_message;
 }
 
-QString GuiChatMessage::chatToHtml( const Chat& c, bool skip_file_transfers, bool skip_system_message, bool force_timestamp, bool force_datestamp, bool use_chat_compact )
+QString GuiChatMessage::chatToHtml( const Chat& c, bool skip_file_transfers, bool skip_system_message, bool force_timestamp, bool force_datestamp, bool use_chat_compact, bool skip_cannot_be_saved_messages )
 {
   UserList chat_users;
   QString html_text = "";
@@ -181,11 +181,15 @@ QString GuiChatMessage::chatToHtml( const Chat& c, bool skip_file_transfers, boo
       {
         if( skip_file_transfers )
           continue;
+        if( skip_cannot_be_saved_messages && !cm.canBeSaved() )
+          continue;
         html_text += formatSystemMessage( cm, last_message_user_id, force_timestamp || Settings::instance().chatShowMessageTimestamp(), force_datestamp, use_chat_compact );
       }
       else
       {
         if( skip_system_message )
+          continue;
+        if( skip_cannot_be_saved_messages && !cm.canBeSaved() )
           continue;
         html_text += formatSystemMessage( cm, last_message_user_id, force_timestamp || Settings::instance().chatShowMessageTimestamp(), force_datestamp, use_chat_compact );
       }

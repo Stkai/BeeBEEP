@@ -333,7 +333,7 @@ bool ChatManager::setChatToSavedChats( const Chat& c )
 {
   QString saved_chat_text = GuiChatMessage::chatToHtml( c, !Settings::instance().chatSaveFileTransfers(),
                                                         !Settings::instance().chatSaveSystemMessages(),
-                                                        true, true, true );
+                                                        true, true, true, Settings::instance().useCompactDataSaving() );
   if( saved_chat_text.isEmpty() )
     return false;
   if( chatHasSavedText( c.name() ) )

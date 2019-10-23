@@ -299,7 +299,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
                           .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), Bee::replaceHtmlSpecialCharacters( u.path() ) );
           }
         }
-        dispatchSystemMessage( ID_DEFAULT_CHAT, user_found.id(), sAlertMsg, DispatchToDefaultAndPrivateChat, ChatMessage::Connection );
+        dispatchSystemMessage( ID_DEFAULT_CHAT, user_found.id(), sAlertMsg, DispatchToDefaultAndPrivateChat, ChatMessage::Connection, false );
         qWarning() << "User with account" << qPrintable( u.accountPath() ) << "and path" << qPrintable( u.path() ) << "is recognized to be Local";
       }
       else
@@ -341,7 +341,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
             qDebug() << "User" << qPrintable( u.path() ) << "is already connected with the same hash code of" << qPrintable( user_found.path() );
           }
         }
-        dispatchSystemMessage( ID_DEFAULT_CHAT, user_found.id(), sAlertMsg, DispatchToDefaultAndPrivateChat, ChatMessage::Connection );
+        dispatchSystemMessage( ID_DEFAULT_CHAT, user_found.id(), sAlertMsg, DispatchToDefaultAndPrivateChat, ChatMessage::Connection, false );
       }
       else
         qDebug() << "User" << qPrintable( u.path() ) << "is already online with another connection:" << qPrintable( user_found.path() );
@@ -398,7 +398,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
     {
       dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(),
                              tr( "%1 %2 uses old encryption level." ).arg( IconManager::instance().toHtml( "warning.png", "*!*" ), Bee::userNameToShow( u ) ),
-                             DispatchToAllChatsWithUser, ChatMessage::Connection );
+                             DispatchToAllChatsWithUser, ChatMessage::Connection, false );
     }
 
     if( Settings::instance().disableConnectionSocketEncryption() )
@@ -406,7 +406,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
       dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(),
                              QString( "%1 %2." ).arg( IconManager::instance().toHtml( "encryption-enabled.png", "*!*" ),
                                                       tr( "%1 has end-to-end encryption enabled" ).arg( Bee::userNameToShow( u ) ) ),
-                             DispatchToAllChatsWithUser, ChatMessage::Connection );
+                             DispatchToAllChatsWithUser, ChatMessage::Connection, false );
     }
   }
   else
@@ -416,7 +416,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
       dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(),
                              QString( "%1 %2." ).arg( IconManager::instance().toHtml( "encryption-disabled.png", "*!*" ),
                                                       tr( "%1 has end-to-end encryption disabled" ).arg( Bee::userNameToShow( u ) ) ),
-                             DispatchToAllChatsWithUser, ChatMessage::Connection );
+                             DispatchToAllChatsWithUser, ChatMessage::Connection, false );
     }
   }
 

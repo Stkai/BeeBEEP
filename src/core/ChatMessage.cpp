@@ -28,7 +28,7 @@
 
 ChatMessage::ChatMessage()
   : m_userId( ID_INVALID ), m_message( "" ), m_timestamp(), m_textColor(),
-    m_type( ChatMessage::Other ), m_isImportant( false )
+    m_type( ChatMessage::Other ), m_isImportant( false ), m_canBeSaved( false )
 {
 }
 
@@ -37,14 +37,16 @@ ChatMessage::ChatMessage( const ChatMessage& cm )
   (void)operator=( cm );
 }
 
-ChatMessage::ChatMessage( VNumber user_id, const Message& m, ChatMessage::Type cmt )
-  : m_userId( user_id ), m_message( "" ), m_timestamp(), m_textColor(), m_type( cmt ), m_isImportant( false )
+ChatMessage::ChatMessage( VNumber user_id, const Message& m, ChatMessage::Type cmt, bool can_be_saved )
+  : m_userId( user_id ), m_message( "" ), m_timestamp(), m_textColor(), m_type( cmt ),
+    m_isImportant( false ), m_canBeSaved( can_be_saved )
 {
   fromMessage( m );
 }
 
-ChatMessage::ChatMessage( VNumber user_id, const QString& msg, ChatMessage::Type cmt )
-  : m_userId( user_id ), m_message( msg ), m_timestamp( QDateTime::currentDateTime() ), m_textColor(), m_type( cmt ), m_isImportant( false )
+ChatMessage::ChatMessage( VNumber user_id, const QString& msg, ChatMessage::Type cmt, bool can_be_saved )
+  : m_userId( user_id ), m_message( msg ), m_timestamp( QDateTime::currentDateTime() ), m_textColor(), m_type( cmt ),
+    m_isImportant( false ), m_canBeSaved( can_be_saved )
 {
 }
 
@@ -58,6 +60,7 @@ ChatMessage& ChatMessage::operator=( const ChatMessage& cm )
     m_textColor = cm.m_textColor;
     m_type = cm.m_type;
     m_isImportant = cm.m_isImportant;
+    m_canBeSaved = cm.m_canBeSaved;
   }
   return *this;
 }
@@ -85,6 +88,7 @@ bool ChatMessage::isChatActivity() const
   {
   case ChatMessage::Header:
   case ChatMessage::Chat:
+  case ChatMessage::FileTransfer:
   case ChatMessage::History:
   case ChatMessage::Other:
   case ChatMessage::ImagePreview:

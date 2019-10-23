@@ -142,6 +142,7 @@ protected:
   void findTextInChat( const QString& );
   void updateChat();
   void setChatStylesheet( QTextDocument* );
+  void updateFilterMessagesButton();
 
 private:
   VNumber m_chatId;
@@ -167,6 +168,7 @@ private:
   QAction* mp_actShareDesktop;
   QAction* mp_actScreenshot;
 #endif
+  QAction* mp_actFilterMessages;
 
   QSplitter* mp_splitter;
 

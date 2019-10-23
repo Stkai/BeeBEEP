@@ -115,6 +115,7 @@ public:
   inline bool disableDesktopSharing() const;
   inline bool disableSendMessage() const;
   inline bool disableVoiceMessages() const;
+  inline bool useCompactDataSaving() const;
   inline bool useEasyConnection() const;
   inline bool useUserFullName() const;
   inline bool appendHostNameToUserName() const;
@@ -665,6 +666,7 @@ private:
   bool m_disableCreateMessage;
   bool m_disableMenuSettings;
   bool m_disableVoiceMessages;
+  bool m_useCompactDataSaving;
   bool m_useUserFullName;
   bool m_appendHostNameToUserName;
 
@@ -1194,6 +1196,7 @@ inline bool Settings::disableFileSharing() const { return m_disableFileSharing; 
 inline bool Settings::disableDesktopSharing() const { return m_disableDesktopSharing; }
 inline bool Settings::disableSendMessage() const { return m_disableSendMessage; }
 inline bool Settings::disableVoiceMessages() const { return m_disableFileTransfer || m_disableVoiceMessages; }
+inline bool Settings::useCompactDataSaving() const { return m_useCompactDataSaving; }
 inline bool Settings::useEasyConnection() const { return m_useEasyConnection; }
 inline void Settings::setUseShareBox( bool new_value ) { m_useShareBox = new_value; }
 inline bool Settings::useShareBox() const { return m_useShareBox; }

@@ -77,7 +77,8 @@ void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Message dispatched to chat" << c.id();
 #endif
-  ChatMessage cm( from_user_id, m, m.hasFlag( Message::Auto ) ? ChatMessage::Autoresponder : ChatMessage::Chat );
+  bool is_auto_responder = m.hasFlag( Message::Auto );
+  ChatMessage cm( from_user_id, m, is_auto_responder ? ChatMessage::Autoresponder : ChatMessage::Chat, !is_auto_responder );
   c.addMessage( cm );
   if( cm.alertCanBeSent() )
   {
@@ -92,10 +93,10 @@ void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
   emit newChatMessage( c, cm );
 }
 
-void Core::dispatchSystemMessage( VNumber chat_id, VNumber from_user_id, const QString& msg, DispatchType dt, ChatMessage::Type cmt )
+void Core::dispatchSystemMessage( VNumber chat_id, VNumber from_user_id, const QString& msg, DispatchType dt, ChatMessage::Type cmt, bool can_be_saved )
 {
   Message m = Protocol::instance().systemMessage( msg );
-  ChatMessage cm( ID_SYSTEM_MESSAGE, m, cmt );
+  ChatMessage cm( ID_SYSTEM_MESSAGE, m, cmt, can_be_saved );
 
   if( chat_id == ID_INVALID )
     chat_id = ID_DEFAULT_CHAT;

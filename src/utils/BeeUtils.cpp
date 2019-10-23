@@ -148,7 +148,7 @@ QString Bee::userNameToShow( const User& u )
 
 QString Bee::uniqueFilePath( const QString& file_path, bool add_date_time )
 {
-  int counter = 1;
+  int counter = add_date_time ? 0 : 1;
   QFileInfo fi( file_path );
   QString dir_path = fi.absoluteDir().absolutePath();
   QString file_base_name = fi.completeBaseName();
@@ -157,9 +157,10 @@ QString Bee::uniqueFilePath( const QString& file_path, bool add_date_time )
 
   while( fi.exists() )
   {
-    new_file_name = QString( "%1 (%2)%3" )
+    new_file_name = QString( "%1%2%3%4" )
                       .arg( file_base_name )
-                      .arg( add_date_time ? QString( "%1 %2" ).arg( QDateTime::currentDateTime().toString( Qt::ISODate ).replace( ":", "." ), QString::number( counter ) ) : QString::number( counter ) )
+                      .arg( add_date_time ? QString( "-%1" ).arg( QDateTime::currentDateTime().toString( "yyyyMMddHHmmss" ) ) : QString( "" ) )
+                      .arg( counter > 0 ? ( add_date_time ? QString( "-%1" ).arg( counter ) : QString( " (%1)" ).arg( counter ) ) : QString( "" ) )
                       .arg( file_suffix.isEmpty() ? QString( "" ) : QString( ".%1" ) ).arg( file_suffix );
     fi.setFile( dir_path, new_file_name );
     counter++;
@@ -544,7 +545,7 @@ bool Bee::setLastModifiedToFile( const QString& to_path, const QDateTime& dt_las
   from_time_buffer.modtime = mod_time;
   from_time_buffer.actime = ac_time;
 
-  const char *to_file_name = to_path.toLatin1().constData();
+  const char *to_file_name = to_path.toUtf8().constData();
   ok = utime( to_file_name, &from_time_buffer ) == 0;
   if( !ok )
     qWarning() << "Function utime error" << errno << ":" << qPrintable( QString::fromLatin1( strerror( errno ) ) ) << "for file" << qPrintable( to_path );

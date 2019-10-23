@@ -93,6 +93,7 @@ Settings::Settings()
   m_useEasyConnection = false;
   m_useUserFullName = false;
   m_appendHostNameToUserName = false;
+  m_useCompactDataSaving = true;
 
 #ifdef BEEBEEP_DISABLE_FILE_TRANSFER
   m_disableFileTransfer = true;
@@ -490,6 +491,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "DisableSendMessage", m_disableSendMessage );
     sets->setValue( "DisableVoiceMessages", m_disableVoiceMessages );
     sets->setValue( "UseEasyConnection", m_useEasyConnection );
+    sets->setValue( "UseCompactDataSaving", m_useCompactDataSaving );
     sets->setValue( "StartMinimized", m_startMinimized );
     sets->setValue( "Signature", m_signature );
     sets->setValue( "UseOnlyTextEmoticons", m_useOnlyTextEmoticons );
@@ -579,6 +581,7 @@ void Settings::loadRcFile()
   m_disableSendMessage = sets->value( "DisableSendMessage", m_disableSendMessage ).toBool();
   m_disableVoiceMessages = sets->value( "DisableVoiceMessages", m_disableVoiceMessages ).toBool();
   m_useEasyConnection = sets->value( "UseEasyConnection", m_useEasyConnection ).toBool();
+  m_useCompactDataSaving = sets->value( "UseCompactDataSaving", m_useCompactDataSaving ).toBool();
   m_startMinimized = sets->value( "StartMinimized", m_startMinimized ).toBool();
   m_signature = sets->value( "Signature", m_signature ).toString();
   m_useOnlyTextEmoticons = sets->value( "UseOnlyTextEmoticons", m_useOnlyTextEmoticons ).toBool();

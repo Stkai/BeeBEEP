@@ -72,6 +72,7 @@ AllowNotEncryptedConnectionsAlso=[true/false] if enabled BeeBEEP accepts also NO
 AllowEncryptedConnectionsAlso=[true/false] if enabled BeeBEEP accepts encrypted connections also if you have disabled encryption (default=false) [5.7.5]
 UseUserFullName=[true/false] it true BeeBEEP show name and surname of the users if they are not empty (default=false) [5.7.5]
 AppendHostNameToUserName=[true/false] it true BeeBEEP append host/computer name to the user name (default=false) [5.7.7]
+UseCompactDataSaving=[true/false] it true BeeBEEP skips saving not important system messages in chats (default=true) [5.7.7]
 
 [Groups] (obsolete)
 TrustNickname=[true/false] if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect (default=true) [1.0.0] [obsolete in 4.0.0]

@@ -35,8 +35,8 @@ public:
 
   ChatMessage();
   ChatMessage( const ChatMessage& );
-  ChatMessage( VNumber user_id, const Message&, ChatMessage::Type );
-  ChatMessage( VNumber user_id, const QString& msg, ChatMessage::Type );
+  ChatMessage( VNumber user_id, const Message&, ChatMessage::Type, bool can_be_saved );
+  ChatMessage( VNumber user_id, const QString& msg, ChatMessage::Type, bool can_be_saved );
 
   virtual ~ChatMessage() {}
 
@@ -62,6 +62,8 @@ public:
   inline const QColor& textColor() const;
   inline ChatMessage::Type type() const;
 
+  inline bool canBeSaved() const;
+
 protected:
   virtual void fromMessage( const Message& );
 
@@ -72,6 +74,7 @@ private:
   QColor m_textColor;
   Type m_type;
   bool m_isImportant;
+  bool m_canBeSaved;
 
 };
 
@@ -94,6 +97,7 @@ inline const QString& ChatMessage::message() const { return m_message; }
 inline const QDateTime& ChatMessage::timestamp() const { return m_timestamp; }
 inline const QColor& ChatMessage::textColor() const { return m_textColor; }
 inline ChatMessage::Type ChatMessage::type() const { return m_type; }
+inline bool ChatMessage::canBeSaved() const { return m_canBeSaved; }
 
 #endif // BEEBEEP_CHATMESSAGE_H
 

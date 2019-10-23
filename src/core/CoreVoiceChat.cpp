@@ -35,7 +35,7 @@ bool Core::sendVoiceMessageToChat( VNumber chat_id, const QString& file_path )
   if( !Settings::instance().enableFileTransfer() )
   {
     dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "%1 Unable to send voice message. File transfer is disabled." ).arg( icon_html ),
-                           DispatchToChat, ChatMessage::FileTransfer );
+                           DispatchToChat, ChatMessage::FileTransfer, false );
     return false;
   }
 
@@ -50,7 +50,7 @@ bool Core::sendVoiceMessageToChat( VNumber chat_id, const QString& file_path )
   if( !file.exists() )
   {
     dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "%1 %2: voice message not found." ).arg( icon_html, file_path ),
-                           DispatchToChat, ChatMessage::FileTransfer );
+                           DispatchToChat, ChatMessage::FileTransfer, false );
     return false;
   }
 
@@ -64,7 +64,7 @@ bool Core::sendVoiceMessageToChat( VNumber chat_id, const QString& file_path )
   QString msg_html = QString( "[ <a href=\"%1\">%2</a> ] %3" ).arg( file_url.toString(),
                                                                     tr( "voice message" ),
                                                                     IconManager::instance().toHtml( "voice-message.png", "*v*" ) );
-  dispatchToChat( ChatMessage( ID_LOCAL_USER, msg_html, ChatMessage::Voice ), chat_id );
+  dispatchToChat( ChatMessage( ID_LOCAL_USER, msg_html, ChatMessage::Voice, true ), chat_id );
   Message m = Protocol::instance().fileInfoToMessage( fi );
   sendMessageToChat( c, m );
   return true;

@@ -146,14 +146,29 @@ void FileTransferPeer::setTransferCompleted()
           qWarning() << qPrintable( name() ) << "cannot remove existing file" << qPrintable( m_fileInfo.path() );
       }
 
-      if( QFile::exists( m_fileInfo.path() ) )
+      QFileInfo file_info_completed_file( m_fileInfo.path() );
+      if( file_info_completed_file.exists() )
       {
         QString new_file_path = Bee::uniqueFilePath( m_fileInfo.path(), true );
         m_fileInfo.setPath( new_file_path );
       }
-
-      if( !m_file.rename( m_fileInfo.path() ) )
+      else
       {
+        // Check if parent folder exists
+        QString parent_folder_path = Bee::convertToNativeFolderSeparator( file_info_completed_file.absolutePath() );
+        QDir parent_folder( parent_folder_path );
+        if( !parent_folder.exists() )
+        {
+          if( !parent_folder.mkpath( "." ) )
+            qWarning() << "Unable to create parent folder" << qPrintable( parent_folder_path );
+        }
+      }
+
+      if( m_file.rename( m_fileInfo.path() ) )
+      {
+#ifdef BEEBEEP_DEBUG
+         qDebug() << qPrintable( name() ) << "renames downloaded file to" << qPrintable( m_fileInfo.path() );
+#endif
         if( m_fileInfo.lastModified().isValid() )
           Bee::setLastModifiedToFile( m_fileInfo.path(), m_fileInfo.lastModified() );
       }

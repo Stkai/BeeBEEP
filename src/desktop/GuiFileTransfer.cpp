@@ -250,7 +250,7 @@ void GuiFileTransfer::openMenu( const QPoint& p )
 
       if( item->isStopped() )
       {
-        if( Settings::instance().resumeFileTransfer() )
+        if( Settings::instance().resumeFileTransfer() && item->transferState() != FileTransferPeer::Completed )
         {
           if( item->transferState() == FileTransferPeer::Paused )
             mp_menuContext->addAction( IconManager::instance().icon( "play.png" ), tr( "Resume transfer" ), this, SLOT( resumeTransfer() ) );

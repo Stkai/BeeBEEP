@@ -54,6 +54,11 @@ bool GuiChatItem::operator<( const QTreeWidgetItem& item ) const
   if( chat_messages != other_messages )
     return chat_messages < other_messages;
 
+  int chat_online_users = onlineUsers();
+  int other_online_users = item.data( 0, GuiChatItem::ChatOnlineUsers ).toInt();
+  if( chat_online_users != other_online_users )
+    return chat_online_users < other_online_users;
+
   chat_messages = data( 0, GuiChatItem::ChatMessages ).toInt();
   other_messages = item.data( 0, GuiChatItem::ChatMessages ).toInt();
   if( chat_messages != other_messages )
@@ -79,6 +84,7 @@ bool GuiChatItem::updateItem( const Chat& c )
   QString tool_tip;
   m_defaultIcon = QIcon();
   int unsent_messages = MessageManager::instance().countMessagesToSendInChatId( c.id() );
+  int online_users = 0;
 
   if( c.isDefault() )
   {
@@ -99,6 +105,8 @@ bool GuiChatItem::updateItem( const Chat& c )
         sl.append( user_name );
         if( c.isPrivateForUser( u.id() ) )
           m_defaultIcon = Bee::avatarForUser( u, Settings::instance().avatarIconSize(), Settings::instance().showUserPhoto() );
+        if( u.isStatusConnected() )
+          online_users++;
       }
     }
 
@@ -127,12 +135,18 @@ bool GuiChatItem::updateItem( const Chat& c )
   setToolTip( 0, tool_tip );
   setData( 0, ChatUnreadMessages, c.unreadMessages() );
   setData( 0, ChatMessages, c.messages().size() + ChatManager::instance().savedChatSize( c.name() ) );
+  setData( 0, ChatOnlineUsers, online_users );
   if( c.lastMessageTimestamp().isValid() )
     setData( 0, ChatLastMessageTimestamp, c.lastMessageTimestamp() );
   if( m_defaultIcon.isNull() )
     m_defaultIcon = IconManager::instance().icon( "chat.png" );
-  if( !chatHasOnlineUsers( c ) )
-    m_defaultIcon = Bee::convertToGrayScale( m_defaultIcon, Settings::instance().avatarIconSize() );
+
+  if( !c.isDefault() )
+  {
+    if( !Settings::instance().localUser().isStatusConnected() || online_users == 0 )
+      m_defaultIcon = Bee::convertToGrayScale( m_defaultIcon, Settings::instance().avatarIconSize() );
+  }
+
   setIcon( 0, m_defaultIcon );
   onTickEvent( 2 );
 
@@ -148,25 +162,4 @@ void GuiChatItem::onTickEvent( int ticks )
     else
       setIcon( 0, m_defaultIcon );
   }
-}
-
-bool GuiChatItem::chatHasOnlineUsers( const Chat& c )
-{
-  if( !Settings::instance().localUser().isStatusConnected() )
-    return false;
-
-  if( c.isDefault() )
-    return true;
-
-  foreach( VNumber user_id, c.usersId() )
-  {
-    if( user_id != ID_LOCAL_USER )
-    {
-      User u = UserManager::instance().findUser( user_id );
-      if( u.isValid() && u.isStatusConnected() )
-        return true;
-    }
-  }
-
-  return false;
 }

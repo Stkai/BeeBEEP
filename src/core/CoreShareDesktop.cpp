@@ -50,7 +50,7 @@ bool Core::startShareDesktop( VNumber user_id )
   if( u.protocolVersion() < SHARE_DESKTOP_PROTO_VERSION )
   {
     sHtmlMsg = tr( "%1 You cannot share desktop with %2." ).arg( IconManager::instance().toHtml( "desktop-share-refused.png", "*G*" ), Bee::userNameToShow( u ) );
-    dispatchSystemMessage( ID_DEFAULT_CHAT, user_id, sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::System );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, user_id, sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::System, false );
     qDebug() << "You cannot share desktop with" << qPrintable( u.path() ) << "with old protocol" << u.protocolVersion();
     emit shareDesktopUpdate( u );
     return false;
@@ -63,7 +63,7 @@ bool Core::startShareDesktop( VNumber user_id )
   }
 
   sHtmlMsg = tr( "%1 You start to share desktop with %2." ).arg( IconManager::instance().toHtml( "desktop-share.png", "*G*" ), Bee::userNameToShow( u ) );
-  dispatchSystemMessage( ID_DEFAULT_CHAT, user_id, sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::System );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, user_id, sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::System, false );
   qDebug() << "Start to share desktop with" << qPrintable( u.path() );
   if( !mp_shareDesktop->isActive() )
     mp_shareDesktop->start();
@@ -87,7 +87,7 @@ void Core::stopShareDesktop( VNumber user_id )
   if( u.isValid() )
   {
     QString sHtmlMsg = tr( "%1 You stop to share desktop with %2." ).arg( IconManager::instance().toHtml( "desktop-share-refused.png", "*G*" ), Bee::userNameToShow( u ) );
-    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::System );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::System, false );
     sendMessageToLocalNetwork( u, Protocol::instance().shareDesktopImageDataToMessage( ShareDesktopData( "", "png", false, 0 ) ) ); // Empty image stops desktop sharing
     emit shareDesktopUpdate( u );
   }
@@ -131,7 +131,7 @@ void Core::refuseToViewShareDesktop( VNumber from_user_id, VNumber to_user_id )
   {
     qDebug() << qPrintable( from_user.path() ) << "has closed the view of your shared desktop";
     QString sHtmlMsg = tr( "%1 %2 has closed the view of your shared desktop." ).arg( IconManager::instance().toHtml( "desktop-share-refused.png", "*G*" ), from_user.name() );
-    dispatchSystemMessage( ID_DEFAULT_CHAT, from_user.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::System );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, from_user.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::System, false );
     stopShareDesktop( from_user_id );
   }
 }

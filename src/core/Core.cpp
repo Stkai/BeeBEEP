@@ -106,7 +106,7 @@ bool Core::checkSavingPaths()
                            tr( "%1 User %2 cannot save settings in path: %3" ).arg( IconManager::instance().toHtml( "warning.png", "*E*" ) )
                                                                               .arg( Settings::instance().localUser().accountName() )
                                                                               .arg( Bee::convertToNativeFolderSeparator( sets->fileName() ) ),
-                           DispatchToChat, ChatMessage::System );
+                           DispatchToChat, ChatMessage::System, false );
 
     settings_can_be_saved = false;
   }
@@ -122,8 +122,7 @@ bool Core::checkSavingPaths()
                              tr( "%1 User %2 cannot save chat messages in path: %3" ).arg( IconManager::instance().toHtml( "warning.png", "*E*" ) )
                                                                                 .arg( Settings::instance().localUser().accountName() )
                                                                                 .arg( Settings::instance().savedChatsFilePath() ),
-                             DispatchToChat, ChatMessage::System );
-
+                             DispatchToChat, ChatMessage::System, false );
       chats_can_be_saved = false;
     }
     else
@@ -153,8 +152,7 @@ bool Core::checkSavingPaths()
                              tr( "%1 User %2 cannot save unsent messages in path: %3" ).arg( IconManager::instance().toHtml( "warning.png", "*E*" ) )
                                                                                 .arg( Settings::instance().localUser().accountName() )
                                                                                 .arg( Settings::instance().unsentMessagesFilePath() ),
-                             DispatchToChat, ChatMessage::System );
-
+                             DispatchToChat, ChatMessage::System, false );
       unsent_messages_can_be_saved = false;
     }
     else
@@ -186,7 +184,7 @@ bool Core::start()
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                              tr( "%1 Unable to connect to %2 Network. Please check if your network adapter is connected." )
                                .arg( IconManager::instance().toHtml( "network-disconnected.png", "*E*" ),
-                                     Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
+                                     Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection, false );
     showMessage( tr( "Network adapter offline" ), 5000 );
     return false;
   }
@@ -206,7 +204,7 @@ bool Core::start()
         dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                              tr( "%1 Unable to connect to %2 Network. Please check your firewall settings." )
                                .arg( IconManager::instance().toHtml( "network-disconnected.png", "*E*" ),
-                                     Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
+                                     Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection, false );
         qWarning() << "Unable to bind a valid listener port";
         return false;
       }
@@ -225,7 +223,7 @@ bool Core::start()
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                            tr( "%1 Unable to broadcast to %2 Network. Please check your firewall settings." )
                              .arg( IconManager::instance().toHtml( "network-disconnected.png", "*E*" ),
-                                   Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
+                                   Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection, false );
     mp_listener->close();
     return false;
   }
@@ -236,7 +234,7 @@ bool Core::start()
   }
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, tr( "%1 You are connected to %2 Network." ).arg( IconManager::instance().toHtml( "network-connected.png", "*C*" ),
-                         Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
+                         Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection, false );
 
   if( Settings::instance().disableConnectionSocketEncryption() )
   {
@@ -244,14 +242,14 @@ bool Core::start()
     if( Settings::instance().allowEncryptedConnectionsAlso() )
       sys_msg += QString( " (%1)" ).arg( tr( "but encrypted connections allowed" ) );
     sys_msg += QString( "." );
-    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sys_msg, DispatchToChat, ChatMessage::Connection );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sys_msg, DispatchToChat, ChatMessage::Connection, false );
   }
   else
   {
     if( Settings::instance().allowNotEncryptedConnectionsAlso() )
     {
       QString sys_msg = QString( "%1 %2 (%3)." ).arg( IconManager::instance().toHtml( "warning.png", "*!*" ), tr( "End-to-end encryption is enabled" ), tr( "but not encrypted connections allowed" ) );
-      dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sys_msg, DispatchToChat, ChatMessage::Connection );
+      dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, sys_msg, DispatchToChat, ChatMessage::Connection, false );
     }
   }
 
@@ -264,7 +262,7 @@ bool Core::start()
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                            tr( "%1 You have selected to join only in these workgroups: %2" )
                            .arg( IconManager::instance().toHtml( "workgroup.png", "*C*" ) ).arg( Bee::stringListToTextString( Settings::instance().localUser().workgroups() ) ),
-                           DispatchToChat, ChatMessage::Connection );
+                           DispatchToChat, ChatMessage::Connection, false );
     qDebug() << "Protocol accepts connections only from these workgroups:" << qPrintable( Settings::instance().localUser().workgroups().join( ", " ) );
   }
 
@@ -294,7 +292,7 @@ bool Core::start()
                          tr( "%1 Do you need support? Visit the %2." )
                          .arg( IconManager::instance().toHtml( "info.png", "*I*" ) )
                          .arg( QString( "<a href=%1>%2</a>" ).arg( Settings::instance().helpWebSite() ).arg( tr( "help page" ) ) ),
-                         DispatchToChat, ChatMessage::System );
+                         DispatchToChat, ChatMessage::System, false );
 
   if( Settings::instance().checkNewVersionAtStartup() )
     QTimer::singleShot( 3000, this, SLOT( checkNewVersion() ) );
@@ -398,7 +396,7 @@ void Core::stop()
                          tr( "%1 You are disconnected from %2 Network.")
                            .arg( IconManager::instance().toHtml( "network-disconnected.png", "*D*" ),
                            Settings::instance().programName() ), DispatchToChat,
-                           ChatMessage::Connection );
+                           ChatMessage::Connection, false );
 
   qDebug() << "Network core stopped";
   showMessage( tr( "Disconnected" ), 5000 );
@@ -431,7 +429,7 @@ void Core::restart()
                          tr( "%1 Reconnecting to the %2 Network in progress." )
                            .arg( IconManager::instance().toHtml( "network-disconnected.png", "*D*" ),
                            Settings::instance().programName() )+QString( ".." ),
-                         DispatchToChat, ChatMessage::Connection );
+                         DispatchToChat, ChatMessage::Connection, false );
   emit disconnected();
   QTimer::singleShot( 1000, this, SLOT( restartConnection() ) );
 }
@@ -488,7 +486,7 @@ void Core::sendBroadcastMessage()
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                          tr( "%1 Broadcasting to the %2 Network..." ).arg( IconManager::instance().toHtml( "broadcast.png", "*B*" ),
-                                                                           Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection );
+                                                                           Settings::instance().programName() ), DispatchToChat, ChatMessage::Connection, false );
   showMessage( tr( "Searching users" ), 3000 );
   mp_broadcaster->sendBroadcast();
 }
@@ -532,7 +530,7 @@ void Core::checkNetworkInterface()
                              tr( "%1 Network interface %2 is gone down.")
                                .arg( IconManager::instance().toHtml( "network-disconnected.png", "*D*" ),
                                NetworkManager::instance().localInterfaceHardwareAddress() ), DispatchToChat,
-                               ChatMessage::Connection );
+                               ChatMessage::Connection, false );
       emit networkInterfaceIsDown();
     }
     else
@@ -623,7 +621,7 @@ void Core::onUpdaterJobCompleted()
                                                            tr( "New version is available" ), download_url,
                                                            tr( "Click here to download" ) );
 
-  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, html_msg, DispatchToChat, ChatMessage::System );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, html_msg, DispatchToChat, ChatMessage::System, false );
 }
 
 void Core::postUsageStatistics()
@@ -721,7 +719,7 @@ void Core::onTickEvent( int ticks )
   {
     QString html_msg = QString( "%1 <b>%2</b>." ).arg( IconManager::instance().toHtml( "warning.png", "*!*" ),
                                                        tr( "Max ID is reached. Please close and restart the application." ) );
-    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, html_msg, DispatchToChat, ChatMessage::System );
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, html_msg, DispatchToChat, ChatMessage::System, false );
   }
 }
 

@@ -5119,7 +5119,7 @@ void GuiMain::setMinimumWidthForStyle()
 #elif defined( Q_OS_UNIX )
   int min_w = qMax( 320, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+4) + wasted_w );
 #elif defined( Q_OS_WIN )
-  int min_w = qMax( 320, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+2) + wasted_w );
+  int min_w = qMax( 300, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+2) + wasted_w );
 #else
   int min_w = qMax( 320, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+2) + wasted_w );
 #endif

@@ -4,57 +4,57 @@
 <context>
     <name>ChatMessage</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="283"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="284"/>
         <source>Header</source>
         <translation>رأس</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="284"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="285"/>
         <source>System</source>
         <translation>النظام</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="285"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="286"/>
         <source>Chat</source>
         <translation>محادثة</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="286"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="287"/>
         <source>Connection</source>
         <translation>اتصال</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="287"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="288"/>
         <source>User Information</source>
         <translation>معلومات المستخدم</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="288"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="289"/>
         <source>File Transfer</source>
         <translation>نقل الملفات</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="289"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="290"/>
         <source>History</source>
         <translation>تاريخ</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="290"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="291"/>
         <source>Other</source>
         <translation>أخرى</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="291"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="292"/>
         <source>Image Preview</source>
         <translation>معاينة الصورة</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="292"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="293"/>
         <source>Autoresponder</source>
         <translation>الرد الآلي</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="293"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="294"/>
         <source>Voice message</source>
         <translation type="unfinished"></translation>
     </message>
@@ -62,27 +62,27 @@
 <context>
     <name>Core</name>
     <message>
-        <location filename="../src/core/Core.cpp" line="207"/>
+        <location filename="../src/core/Core.cpp" line="205"/>
         <source>%1 Unable to connect to %2 Network. Please check your firewall settings.</source>
         <translation>%1 غير قادر على الاتصال بشبكة %2 يرجى التحقق من إعدادات جدار الحماية الخاص بك.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="226"/>
+        <location filename="../src/core/Core.cpp" line="224"/>
         <source>%1 Unable to broadcast to %2 Network. Please check your firewall settings.</source>
         <translation>%1  غير قادر على البث إلى شبكة %2 يرجى التحقق من إعدادات جدار الحماية الخاص بك.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="238"/>
+        <location filename="../src/core/Core.cpp" line="236"/>
         <source>%1 You are connected to %2 Network.</source>
         <translation>%1 أنت متصل إلى شبكة %2 .</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="398"/>
+        <location filename="../src/core/Core.cpp" line="396"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1 أنت غير متصل بشبكة %2 </translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="327"/>
+        <location filename="../src/core/Core.cpp" line="325"/>
         <source>%1 Zero Configuration started with service name: %2</source>
         <translation>%1 Zero Configuration started with service name: %2</translation>
     </message>
@@ -97,97 +97,97 @@
         <translation>%1 المستخدم %2 لا يمكن حفظ رسائل الدردشة في المسار: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="153"/>
+        <location filename="../src/core/Core.cpp" line="152"/>
         <source>%1 User %2 cannot save unsent messages in path: %3</source>
         <translation>%1 المستخدم %2 لا يمكن حفظ الرسائل غير المرسلة في المسار: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="187"/>
+        <location filename="../src/core/Core.cpp" line="185"/>
         <source>%1 Unable to connect to %2 Network. Please check if your network adapter is connected.</source>
         <translation>%1 غير قادر على الاتصال بشبكة %2 يرجى التحقق من توصيل محول الشبكة..</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="190"/>
+        <location filename="../src/core/Core.cpp" line="188"/>
         <source>Network adapter offline</source>
         <translation>محول الشبكة غير متصل</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="194"/>
+        <location filename="../src/core/Core.cpp" line="192"/>
         <source>Connecting</source>
         <translation>اتصال</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="265"/>
+        <location filename="../src/core/Core.cpp" line="263"/>
         <source>%1 You have selected to join only in these workgroups: %2</source>
         <translation>%1 لقد حددت الانضمام إلى مجموعات العمل هذه فقط: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="294"/>
+        <location filename="../src/core/Core.cpp" line="292"/>
         <source>%1 Do you need support? Visit the %2.</source>
         <translation>%1 هل تحتاج إلى دعم؟ زيارة %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="296"/>
+        <location filename="../src/core/Core.cpp" line="294"/>
         <source>help page</source>
         <translation>صفحة المساعدة</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="342"/>
+        <location filename="../src/core/Core.cpp" line="340"/>
         <source>%1 Zero Configuration service closed.</source>
         <translation>%1 تم إغلاق خدمة التكوين صفر.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="404"/>
+        <location filename="../src/core/Core.cpp" line="402"/>
         <source>Disconnected</source>
         <translation>قطع الاتصال</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="410"/>
+        <location filename="../src/core/Core.cpp" line="408"/>
         <source>Disconnecting</source>
         <translation>فصل</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="431"/>
+        <location filename="../src/core/Core.cpp" line="429"/>
         <source>%1 Reconnecting to the %2 Network in progress.</source>
         <translation>%1  إعادة الاتصال بالشبكة %2 قيد التقدم.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="441"/>
+        <location filename="../src/core/Core.cpp" line="439"/>
         <source>Reconnecting</source>
         <translation>إعادة الاتصال</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="459"/>
+        <location filename="../src/core/Core.cpp" line="457"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
         <translation>%1 تكوين الصفر هو تصفح الشبكة للخدمة: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="466"/>
+        <location filename="../src/core/Core.cpp" line="464"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation>%1 لا يمكن لـ Zero Configuration تصفح الشبكة للخدمة: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="490"/>
+        <location filename="../src/core/Core.cpp" line="488"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1 البث إلى %2 شبكة...</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="492"/>
+        <location filename="../src/core/Core.cpp" line="490"/>
         <source>Searching users</source>
         <translation>البحث في المستخدمين</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="623"/>
+        <location filename="../src/core/Core.cpp" line="621"/>
         <source>New version is available</source>
         <translation>نسخة جديدة متاحة</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="624"/>
+        <location filename="../src/core/Core.cpp" line="622"/>
         <source>Click here to download</source>
         <translation>إضغط هنا للتحميل</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="723"/>
+        <location filename="../src/core/Core.cpp" line="721"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>تم الوصول إلى أقصى معرف. يرجى إغلاق وإعادة تشغيل التطبيق.</translation>
     </message>
@@ -258,145 +258,145 @@
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="225"/>
-        <location filename="../src/core/CoreChat.cpp" line="950"/>
-        <location filename="../src/core/CoreChat.cpp" line="961"/>
+        <location filename="../src/core/CoreChat.cpp" line="954"/>
+        <location filename="../src/core/CoreChat.cpp" line="965"/>
         <source>%1 Chat with %2.</source>
         <translation>%1 محادثة مع %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="284"/>
+        <location filename="../src/core/CoreChat.cpp" line="286"/>
         <source>%1 %2 has left the group chat %3.</source>
         <translation>%1 %2 غادر دردشة المجموعة %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="305"/>
+        <location filename="../src/core/CoreChat.cpp" line="309"/>
         <source>%1 %2 wants to remove you from the group chat %3. If you agree please leave the group.</source>
         <translation>يريد %1 %2 من الدردشة الجماعية %3. ذا كنت توافق يرجى ترك المجموعة..</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="324"/>
+        <location filename="../src/core/CoreChat.cpp" line="328"/>
         <source>%1 %2 is added to saved chats.</source>
         <translation>%1 %2 يضاف إلى الدردشات المحفوظة.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="341"/>
+        <location filename="../src/core/CoreChat.cpp" line="345"/>
         <source>%1 You have left group chat %2.</source>
         <translation>%1 لقد تركت الدردشة الجماعية %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="372"/>
+        <location filename="../src/core/CoreChat.cpp" line="376"/>
         <source>%1 Chat with %2 is archived.</source>
         <translation>%1 المحادثة مع %2 تأرشفت.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="396"/>
+        <location filename="../src/core/CoreChat.cpp" line="400"/>
         <source>Unable to send the message: you are not connected.</source>
         <translation>غير قادر على إرسال الرسالة: أنت غير متصل.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="402"/>
+        <location filename="../src/core/CoreChat.cpp" line="406"/>
         <source>Unable to send the message: this chat is disabled.</source>
         <translation>غير قادر على إرسال الرسالة: تم تعطيل هذه الدردشة.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="441"/>
+        <location filename="../src/core/CoreChat.cpp" line="445"/>
         <source>Unable to send the message to %1.</source>
         <translation>غير قادر على إرسال الرسالة إلى %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="447"/>
+        <location filename="../src/core/CoreChat.cpp" line="451"/>
         <source>Nobody has received the message.</source>
         <translation>لا أحد تلقى الرسالة.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="478"/>
+        <location filename="../src/core/CoreChat.cpp" line="482"/>
         <source>The voice message will be delivered to %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="648"/>
+        <location filename="../src/core/CoreChat.cpp" line="652"/>
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
         <translation>الرسائل غير المتصلة التي لا يزال يتعين إرسالها بها رمز تفويض غير صحيح ولن يتم إرسالها.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="694"/>
+        <location filename="../src/core/CoreChat.cpp" line="698"/>
         <location filename="../src/core/CoreFileTransfer.cpp" line="192"/>
         <location filename="../src/core/CoreVoiceChat.cpp" line="65"/>
         <source>voice message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="945"/>
+        <location filename="../src/core/CoreChat.cpp" line="949"/>
         <source>Chat with all users</source>
         <translation>الدردشة مع جميع المستخدمين</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="245"/>
+        <location filename="../src/core/Core.cpp" line="243"/>
         <source>but encrypted connections allowed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="253"/>
+        <location filename="../src/core/Core.cpp" line="251"/>
         <source>End-to-end encryption is enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="253"/>
+        <location filename="../src/core/Core.cpp" line="251"/>
         <source>but not encrypted connections allowed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="243"/>
+        <location filename="../src/core/Core.cpp" line="241"/>
         <source>End-to-end encryption is disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="480"/>
+        <location filename="../src/core/CoreChat.cpp" line="484"/>
         <source>The message will be delivered to %1.</source>
         <translation>سيتم تسليم الرسالة إلى %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="633"/>
+        <location filename="../src/core/CoreChat.cpp" line="637"/>
         <source>Saved chats had an incorrect authorization code.</source>
         <translation>تحتوي الدردشات المحفوظة على رمز تفويض غير صحيح.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="636"/>
+        <location filename="../src/core/CoreChat.cpp" line="640"/>
         <source>%1 saved chats are added to history</source>
         <translation>%1 الدردشات المحفوظة تضاف إلى التاريخ</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="655"/>
+        <location filename="../src/core/CoreChat.cpp" line="659"/>
         <source>%1 offline messages will be sent as soon as possible.</source>
         <translation>%1 سيتم إرسال الرسائل في وضع عدم الاتصال في أقرب وقت ممكن.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="700"/>
+        <location filename="../src/core/CoreChat.cpp" line="704"/>
         <source>Offline message will be sent to %1</source>
         <translation>سيتم إرسال رسالة بلا اتصال إلى %1</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="814"/>
+        <location filename="../src/core/CoreChat.cpp" line="818"/>
         <source>Offline messages sent to %2.</source>
         <translation>تم إرسال الرسائل بلا اتصال إلى %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="904"/>
+        <location filename="../src/core/CoreChat.cpp" line="908"/>
         <source>%1 You have buzzed %2.</source>
         <translation>%1 لديك طنين مرسل %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="950"/>
+        <location filename="../src/core/CoreChat.cpp" line="954"/>
         <source>Unknown %1</source>
         <translation>غير معروف %1</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="577"/>
+        <location filename="../src/core/CoreChat.cpp" line="581"/>
         <source>%1 %2 cannot be informed that you have left the group.</source>
         <translation>%1 %2 لا يمكن أن تكون على علم لأنك تركت المجموعة.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="532"/>
+        <location filename="../src/core/Core.cpp" line="530"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1 واجهة الشبكة %2 تعطلت.</translation>
     </message>
@@ -759,7 +759,7 @@
 <context>
     <name>Date</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="1036"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="1037"/>
         <source>more than 1 day</source>
         <translation>أكثر من يوم واحد</translation>
     </message>
@@ -767,42 +767,42 @@
 <context>
     <name>File</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="264"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="265"/>
         <source>Audio</source>
         <translation>صوت</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="265"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="266"/>
         <source>Video</source>
         <translation>فيديو</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="266"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="267"/>
         <source>Image</source>
         <translation>صورة</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="267"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="268"/>
         <source>Document</source>
         <translation>مستند</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="268"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="269"/>
         <source>Other</source>
         <translation>أخرى</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="269"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="270"/>
         <source>Executable</source>
         <translation>تنفيذ</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="270"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="271"/>
         <source>MacOSX</source>
         <translation>ماك OSX</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="271"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="272"/>
         <source>Compressed</source>
         <translation>مضغوط</translation>
     </message>
@@ -840,42 +840,42 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="170"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="185"/>
         <source>Transfer completed in %1</source>
         <translation>اكتمل النقل في %1</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="185"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="200"/>
         <source>Transfer canceled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="213"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="228"/>
         <source>Transfer is about to pause</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="215"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="230"/>
         <source>Please wait</source>
         <translation type="unfinished">يرجى الانتظار</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="232"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="247"/>
         <source>Transfer paused after %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="242"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="257"/>
         <source>Starting transfer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="329"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="344"/>
         <source>Connection timeout</source>
         <translation>مهلة الاتصال</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="348"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="363"/>
         <source>Transfer timeout</source>
         <translation>مهلة النقل</translation>
     </message>
@@ -1102,360 +1102,360 @@
 <context>
     <name>GuiChat</name>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="167"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="168"/>
         <source>Change font style</source>
         <translation>تغيير نمط الخط</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="168"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="169"/>
         <source>Change font color</source>
         <translation>تغيير لون الخط</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="112"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="113"/>
         <source>Change background color</source>
         <translation>تغيير لون الخلفية</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="169"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="170"/>
         <source>Filter message</source>
         <translation>فلترة الرسالة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="170"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="173"/>
         <source>Chat settings</source>
         <translation>إعدادات الدردشة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="171"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="174"/>
         <source>Spell checking</source>
         <translation>التدقيق الإملائي</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="173"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="176"/>
         <source>Word completer</source>
         <translation>مكمل الكلمة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="175"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="178"/>
         <source>Use Return key to send message</source>
         <translation>استخدم مفتاح العودة لإرسال رسالة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="134"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1121"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="135"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1142"/>
         <source>Find text in chat</source>
         <translation>أوجد نص في المحادثة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="178"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="181"/>
         <source>Send file</source>
         <translation>إرسال ملف</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="179"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="182"/>
         <source>Send folder</source>
         <translation>إرسال مجلد</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="121"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="122"/>
         <source>Save chat</source>
         <translation>حفظ المحادثة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="115"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="116"/>
         <source>Select chat default text color</source>
         <translation>حدد لون النص الافتراضي للدردشة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="118"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="119"/>
         <source>Select chat system text color</source>
         <translation>حدد لون نص نظام الدردشة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="124"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="125"/>
         <source>Print...</source>
         <translation>طباعة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="131"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="132"/>
         <source>Clear system messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="137"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="138"/>
         <source>Restore the default font</source>
         <translation>استعادة الخط الافتراضي</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="147"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="314"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="148"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="317"/>
         <source>Share your desktop</source>
         <translation>مشاركة سطح المكتب الخاص بك</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="151"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="152"/>
         <source>Send a screenshot</source>
         <translation>إرسال لقطة شاشة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="198"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="201"/>
         <source>Close</source>
         <translation type="unfinished">إغلاق</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="199"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="202"/>
         <source>Close chat window on sending message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="203"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="206"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="204"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="207"/>
         <source>Minimize chat window on sending message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="256"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="259"/>
         <source>You are not connected</source>
         <translation>أنت غير متصل</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="264"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="267"/>
         <source>Send messages is disabled</source>
         <translation>إرسال الرسائل معطل</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="270"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="273"/>
         <source>Chat with all users is disabled</source>
         <translation>تم تعطيل الدردشة مع جميع المستخدمين</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="276"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="279"/>
         <source>Private chat is disabled</source>
         <translation>تم تعطيل الدردشة الخاصة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="285"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="288"/>
         <source>You have left this chat</source>
         <translation>لقد تركت هذه الدردشة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="293"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="296"/>
         <source>Write a message to all user</source>
         <translation>اكتب رسالة لجميع المستخدمين</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="310"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="313"/>
         <source>Your desktop is shared with %1</source>
         <translation>تمت مشاركة سطح المكتب مع %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="324"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="327"/>
         <source>File transfer must be enabled to send voice messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="326"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="329"/>
         <source>Record voice message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="339"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="342"/>
         <source>Select all</source>
         <translation>تحديد الكل</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="343"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="346"/>
         <source>Quote selected text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="345"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="348"/>
         <source>Open selected text as url</source>
         <translation>افتح النص المحدد كـ رابط</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="458"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="479"/>
         <source>Opening voice message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="505"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="526"/>
         <source>The loading of saved messages has not yet been completed.</source>
         <translation>لم يتم إكمال تحميل الرسائل المحفوظة.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="567"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="588"/>
         <source>only the last %1 messages are shown</source>
         <translation>يتم عرض رسائل %1 الأخيرة فقط</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="500"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="521"/>
         <source>Loading of saved messages...</source>
         <translation>جارٍ تحميل الرسائل المحفوظة ...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="569"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="590"/>
         <source>maximum number of messages to show reached</source>
         <translation>أقصى عدد من الرسائل لإظهار الوصول</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="761"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="782"/>
         <source>You must close and reopen this window to see the changes applied.</source>
         <translation>يجب عليك إغلاق وإعادة فتح هذه النافذة لرؤية التغييرات المطبقة.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="788"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="809"/>
         <source>Please select a file to save all the messages of the chat.</source>
         <translation>يرجى تحديد ملف لحفظ جميع رسائل الدردشة.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="904"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="925"/>
         <source>Do you want to send %1 %2 to the members of this chat?</source>
         <translation>هل تريد ان ترسل %1 %2 إلى أعضاء هذه الدردشة؟</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1019"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1040"/>
         <source>Spell checking is enabled</source>
         <translation>يتم تمكين التدقيق الإملائي</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1026"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1050"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1047"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1071"/>
         <source>There is not a valid dictionary</source>
         <translation>لا يوجد قاموس صالح</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1043"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1064"/>
         <source>Word completer is enabled</source>
         <translation>مكمل الكلمات ممكن</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1045"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1066"/>
         <source>Word completer is disabled</source>
         <translation>تم تعطيل مكمل الكلمات</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1159"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1180"/>
         <source>%1 not found in chat.</source>
         <translation>%1 غير موجود في الدردشة.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1195"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1216"/>
         <source>Do you want to restore the default font?</source>
         <translation>هل تريد استعادة الخط الافتراضي؟</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1203"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1224"/>
         <source>Ready.</source>
         <translation>جاهز</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1219"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1240"/>
         <source>Do you want to send a screenshot?</source>
         <translation>هل تريد إرسال لقطة شاشة؟</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1219"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1240"/>
         <source>Yes and hide this chat</source>
         <translation>نعم وإخفاء هذه الدردشة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1021"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1042"/>
         <source>Spell checking is disabled</source>
         <translation>التدقيق الإملائي معطل</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="128"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="129"/>
         <source>Clear messages</source>
         <translation>مسح الرسائل</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="341"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="344"/>
         <source>Copy to clipboard</source>
         <translation>نسخ إلى الحافظة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="375"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="395"/>
         <source>Show only messages in default chat</source>
         <translation>إظهار الرسائل فقط في الدردشة الافتراضية</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="418"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="439"/>
         <source>Last message %1</source>
         <translation>آخر رسالة %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="295"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="298"/>
         <source>Write a message to %1</source>
         <translation>اكتب رسالة إلى %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="809"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="830"/>
         <source>%1: save completed.</source>
         <translation>%1:اكتمل الحفظ.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="761"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="809"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="782"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="830"/>
         <source>Ok</source>
         <translation>موافق</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="570"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="591"/>
         <source>open %1 to read them all</source>
         <translation>فتح %1 لقراءة كل منهم</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="570"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="591"/>
         <source>the saved chat</source>
         <translation>الدردشة المحفوظة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="856"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="877"/>
         <source>Unable to save temporary file: %1</source>
         <translation>غير قادر على حفظ الملف المؤقت: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="905"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="926"/>
         <source>file</source>
         <translation>ملف</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="905"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="926"/>
         <source>files</source>
         <translation>ملفات</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="906"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1195"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1219"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="927"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1216"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1240"/>
         <source>Yes</source>
         <translation>نعم</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="906"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1195"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1219"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="927"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1216"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1240"/>
         <source>No</source>
         <translation>لا</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="919"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="940"/>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
         <translation>لا تدعم مكتبة Qt لنظام التشغيل هذا السحب والإفلات للملفات. يجب عليك تحديد الملف المراد إرساله مرة أخرى.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1003"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1024"/>
         <source>Use key Return to send message</source>
         <translation>استخدم مفتاح العودة لإرسال رسالة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1005"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1026"/>
         <source>Use key Return to make a carriage return</source>
         <translation>استخدام مفتاح العودة لجعل عودة النقل</translation>
     </message>
@@ -6120,24 +6120,24 @@ Please select a different name.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/desktop/GuiChatItem.cpp" line="73"/>
+        <location filename="../src/desktop/GuiChatItem.cpp" line="78"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3646"/>
         <source>All users</source>
         <translation>كل المستخدمين</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatItem.cpp" line="86"/>
+        <location filename="../src/desktop/GuiChatItem.cpp" line="92"/>
         <source>Open chat with all users</source>
         <translation>افتح الدردشة مع جميع المستخدمين</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatItem.cpp" line="113"/>
+        <location filename="../src/desktop/GuiChatItem.cpp" line="121"/>
         <source>Open chat with %1</source>
         <translation>افتح الدردشة مع %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatItem.cpp" line="120"/>
-        <location filename="../src/utils/BeeUtils.cpp" line="721"/>
+        <location filename="../src/desktop/GuiChatItem.cpp" line="128"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="722"/>
         <source>unsent messages</source>
         <translation>رسائل غير مرسلة</translation>
     </message>
@@ -6167,63 +6167,63 @@ Please select a different name.</source>
         <translation>انقر لفتح الدردشة مع جميع المستخدمين المحليين</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="692"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="693"/>
         <source>%1 is %2</source>
         <translation>%1 يكون %2</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="692"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="693"/>
         <source>You are %1</source>
         <translation>أنت %1</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="712"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="713"/>
         <source>last update</source>
         <translation>آخر تحديث</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="717"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="718"/>
         <source>last connection</source>
         <translation>آخر اتصال</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="732"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="733"/>
         <source>Workgroups</source>
         <translation>مجموعات العمل</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="756"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="757"/>
         <source>Today is %1&apos;s birthday</source>
         <translation>اليوم هو %1&apos;  يوم ميلادك</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="758"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="759"/>
         <source>Tomorrow is %1&apos;s birthday</source>
         <translation>غدا هو %1&apos;  يوم ميلادك</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="760"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="761"/>
         <source>%1&apos;s birthday is in %2 days</source>
         <translation>%1&apos; عيد ميلادك في %2 أيام</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="762"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="763"/>
         <source>Yesterday was %1&apos;s birthday</source>
         <translation>بالأمس كان %1&apos; يوم ميلادك</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="769"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="770"/>
         <source>Happy Birthday to you!</source>
         <translation>عيد ميلاد سعيد</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="783"/>
-        <location filename="../src/utils/BeeUtils.cpp" line="804"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="784"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="805"/>
         <source>and</source>
         <translation>و</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="809"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="810"/>
         <source>and %1 others</source>
         <translation>و %1 آخرين</translation>
     </message>
@@ -6421,7 +6421,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2267"/>
+        <location filename="../src/core/Settings.cpp" line="2270"/>
         <source>Autoresponder</source>
         <translation>الرد الآلي</translation>
     </message>

@@ -93,7 +93,7 @@ void Core::showUserNameChanged( const User& u, const QString& old_user_name )
     sHtmlMsg += tr( "You have changed your nickname from %1 to %2." ).arg( Bee::replaceHtmlSpecialCharacters( old_user_name ), Bee::replaceHtmlSpecialCharacters( u.name() ) );
   else
     sHtmlMsg += tr( "%1 has changed the nickname in %2." ).arg( Bee::replaceHtmlSpecialCharacters( old_user_name ), Bee::replaceHtmlSpecialCharacters( u.name() ) );
-  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::UserInfo );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::UserInfo, false );
 }
 
 void Core::showUserVCardChanged( const User& u, const VCard& old_vcard )
@@ -106,7 +106,7 @@ void Core::showUserVCardChanged( const User& u, const VCard& old_vcard )
     if( !txt_birthday.isEmpty() )
     {
       sHtmlMsg = QString( "%1 <b>%2.</b>" ).arg( IconManager::instance().toHtml( "birthday.png", "*!*" ), Bee::replaceHtmlSpecialCharacters( txt_birthday ) );
-      dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::UserInfo );
+      dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::UserInfo, false );
     }
   }
 
@@ -118,9 +118,9 @@ void Core::showUserVCardChanged( const User& u, const VCard& old_vcard )
                                       (u.isLocal() ? tr( "You share this information" ) : tr( "%1 shares this information" ).arg( Bee::userNameToShow( u ) )) );
       sHtmlMsg += QString( ": <b>%1</b>" ).arg( Bee::replaceHtmlSpecialCharacters( u.vCard().info() ) );
       if( u.isLocal() )
-        dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToChat, ChatMessage::UserInfo );
+        dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToChat, ChatMessage::UserInfo, false );
       else
-        dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::UserInfo );
+        dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::UserInfo, false );
     }
   }
 }
@@ -350,7 +350,7 @@ void Core::toggleUserFavorite( VNumber user_id )
   UserManager::instance().setUser( u );
   emit userChanged( u );
   QString sHtmlMsg = QString( "%1 %2 %3." ).arg( favorite_icon, u.name(), favorite_txt );
-  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToDefaultAndPrivateChat, ChatMessage::UserInfo );
+  dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToDefaultAndPrivateChat, ChatMessage::UserInfo, false );
 }
 
 bool Core::isUserConnected( VNumber user_id ) const

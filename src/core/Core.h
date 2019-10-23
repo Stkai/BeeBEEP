@@ -285,7 +285,7 @@ protected:
   /* CoreDispatcher */
   enum DispatchType { DispatchToAll, DispatchToAllChatsWithUser, DispatchToChat, DispatchToDefaultAndPrivateChat };
   Chat findChatFromMessageData( VNumber from_user_id, const Message& );
-  void dispatchSystemMessage( VNumber chat_id, VNumber from_user_id, const QString& msg, DispatchType, ChatMessage::Type );
+  void dispatchSystemMessage( VNumber chat_id, VNumber from_user_id, const QString& msg, DispatchType, ChatMessage::Type, bool can_be_saved );
   void dispatchChatMessageReceived( VNumber from_user_id, const Message& );
   void dispatchToAllChats( const ChatMessage& );
   void dispatchToAllChatsWithUser( const ChatMessage&, VNumber user_id );

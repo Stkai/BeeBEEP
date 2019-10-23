@@ -32,7 +32,7 @@ class GuiChatItem : public QTreeWidgetItem
 {
 
 public:
-  enum ChatDataType { ChatId = Qt::UserRole+2, ChatName, ChatIsGroup, ChatUnreadMessages, ChatMessages, ChatLastMessageTimestamp };
+  enum ChatDataType { ChatId = Qt::UserRole+2, ChatName, ChatIsGroup, ChatUnreadMessages, ChatMessages, ChatLastMessageTimestamp, ChatOnlineUsers };
 
   GuiChatItem( QTreeWidget* );
 
@@ -43,6 +43,7 @@ public:
   inline void setIsGroup( bool );
   inline bool isGroup() const;
   inline int unreadMessages() const;
+  inline int onlineUsers() const;
 
   inline QDateTime lastMessageTimestamp() const;
 
@@ -54,7 +55,6 @@ public:
 
 private:
   QIcon m_defaultIcon;
-  bool chatHasOnlineUsers( const Chat& );
 
 };
 
@@ -65,6 +65,7 @@ inline VNumber GuiChatItem::chatId() const { return Bee::qVariantToVNumber( data
 inline void GuiChatItem::setIsGroup( bool new_value ) { setData( 0, ChatIsGroup, new_value ); }
 inline bool GuiChatItem::isGroup() const { return data( 0, ChatIsGroup ).toBool(); }
 inline int GuiChatItem::unreadMessages() const { return data( 0, ChatUnreadMessages ).toInt(); }
+inline int GuiChatItem::onlineUsers() const { return data( 0, ChatOnlineUsers ).toInt(); }
 QDateTime GuiChatItem::lastMessageTimestamp() const { return data( 0, ChatLastMessageTimestamp ).toDateTime(); }
 
 #endif // BEEBEEP_GUICHATITEM_H

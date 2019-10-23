@@ -102,9 +102,6 @@ bool Broadcaster::startBroadcastServer()
                      << "in network interface" << qPrintable( hardware_address );
             multicast_interfaces++;
           }
-          else
-            qWarning() << "Broadcaster cannot join to the multicast group" << qPrintable( m_multicastGroupAddress.toString() )
-                       << "in network interface" << qPrintable( hardware_address );
         }
       }
     }
@@ -153,8 +150,6 @@ void Broadcaster::stopBroadcasting()
               multicast_interfaces++;
               qDebug() << "Leave from the multicast group" << qPrintable( m_multicastGroupAddress.toString() ) << "in network interface" << qPrintable( hardware_address );
             }
-            else
-              qWarning() << "Unable to join to the multicast group" << qPrintable( m_multicastGroupAddress.toString() ) << "in network interface" << qPrintable( hardware_address );
           }
         }
       }

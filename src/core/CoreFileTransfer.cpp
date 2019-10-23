@@ -52,7 +52,7 @@ bool Core::startFileTransferServer()
     QString icon_html = IconManager::instance().toHtml( "warning.png", "*F*" );
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                            tr( "%1 Unable to start file transfer server: bind address/port failed." ).arg( icon_html ),
-                           DispatchToChat, ChatMessage::FileTransfer );
+                           DispatchToChat, ChatMessage::System, false );
     return false;
   }
 
@@ -83,7 +83,7 @@ bool Core::downloadFile( VNumber user_id, const FileInfo& fi, bool show_message 
     {
       icon_html = IconManager::instance().toHtml( "red-ball.png", "*F*" );
       dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to download %2 from %3: user is offline." ).arg( icon_html, fi.name(), Bee::userNameToShow( u ) ),
-                             chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+                             chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
     }
     qWarning() << "Unable to download" << fi.name() << "from" << u.path() << "because user is offline";
     return false;
@@ -100,7 +100,7 @@ bool Core::downloadFile( VNumber user_id, const FileInfo& fi, bool show_message 
         icon_html = IconManager::instance().toHtml( "red-ball.png", "*F*" );
         dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to download %2 from %3: folder %4 cannot be created." )
                                .arg( icon_html, fi.name(), Bee::userNameToShow( u ), folder_path.absolutePath() ),
-                               chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+                               chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
       }
       qWarning() << "Unable to download" << qPrintable( fi.name() ) << "because folder" << qPrintable( folder_path.absolutePath() ) << "can not be created";
       return false;
@@ -112,7 +112,7 @@ bool Core::downloadFile( VNumber user_id, const FileInfo& fi, bool show_message 
     icon_html = IconManager::instance().toHtml( "download.png", "*F*" );
     dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 Downloading %2 from %3." )
                          .arg( icon_html, fi.name(), Bee::userNameToShow( u ) ),
-                         chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+                         chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
   }
 
   qDebug() << "Downloading file" << qPrintable( fi.path() ) << "from user" << qPrintable( u.path() );
@@ -139,7 +139,7 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
   ChatMessage chat_voice_msg;
 
   if( FileTransferPeer::stateIsStopped( ft_state ) )
-    sys_msg = QString( "%1 %2 %3 %4 %5: %6." ).arg( icon_html, action_txt, fi.name(), fi.isDownload() ? tr( "from") : tr( "to" ), Bee::userNameToShow( u ), Bee::lowerFirstLetter( msg ) );
+    sys_msg = QString( "%1 %2 %3 %4 %5: %6." ).arg( icon_html, action_txt, fi.name(), fi.isDownload() ? tr( "from" ) : tr( "to" ), Bee::userNameToShow( u ), Bee::lowerFirstLetter( msg ) );
 
   if( ft_state == FileTransferPeer::Completed )
   {
@@ -212,7 +212,7 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
       ChatManager::instance().setChat( chat_to_show_message );
 
       if( !chat_voice_msg_html.isEmpty() )
-        chat_voice_msg = ChatMessage( fi.isDownload() ? u.id() : ID_LOCAL_USER, chat_voice_msg_html, ChatMessage::Voice );
+        chat_voice_msg = ChatMessage( fi.isDownload() ? u.id() : ID_LOCAL_USER, chat_voice_msg_html, ChatMessage::Voice, true );
     }
   }
 
@@ -223,17 +223,17 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
       if( chat_voice_msg.isValid() )
         dispatchToChat( chat_voice_msg, chat_to_show_message.id() );
       else
-        dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sys_msg_play_voice_chat, DispatchToDefaultAndPrivateChat, ChatMessage::Voice );
+        dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sys_msg_play_voice_chat, DispatchToDefaultAndPrivateChat, ChatMessage::Voice, true );
     }
   }
   else
   {
     if( !sys_msg.isEmpty() )
-      dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), sys_msg, chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+      dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), sys_msg, chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, ft_state == FileTransferPeer::Completed );
     if( !sys_msg_img_preview.isEmpty() )
-      dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), sys_msg_img_preview, chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::ImagePreview );
+      dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), sys_msg_img_preview, chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::ImagePreview, true );
     if( !sys_msg_open_file.isEmpty() )
-      dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), sys_msg_open_file, chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+      dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), sys_msg_open_file, chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, ft_state == FileTransferPeer::Completed );
   }
 
   emit fileTransferMessage( peer_id, u, fi, msg, ft_state );
@@ -257,7 +257,7 @@ bool Core::sendFile( VNumber user_id, const QString& file_path, const QString& s
   if( !Settings::instance().enableFileTransfer() )
   {
     dispatchSystemMessage( chat_id != ID_INVALID ? chat_id : ID_DEFAULT_CHAT, user_id, tr( "%1 Unable to send %2. File transfer is disabled." ).arg( icon_html, file_path ),
-                           chat_id != ID_INVALID ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+                           chat_id != ID_INVALID ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
     return false;
   }
 
@@ -274,7 +274,7 @@ bool Core::sendFile( VNumber user_id, const QString& file_path, const QString& s
   if( !isUserConnected( u.id() ) )
   {
     dispatchSystemMessage( chat_id != ID_INVALID ? chat_id : ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2 to %3: user is offline." ).arg( icon_html, file_path, Bee::userNameToShow( u ) ),
-                           chat_id != ID_INVALID ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+                           chat_id != ID_INVALID ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
     return false;
   }
 
@@ -282,14 +282,14 @@ bool Core::sendFile( VNumber user_id, const QString& file_path, const QString& s
   if( !file.exists() )
   {
     dispatchSystemMessage( chat_id != ID_INVALID ? chat_id : ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2 to %3: file not found." ).arg( icon_html, file_path, Bee::userNameToShow( u ) ),
-                           chat_id != ID_INVALID ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+                           chat_id != ID_INVALID ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
     return false;
   }
 
   if( !file.isDir() && file.size() <= 0 )
   {
     dispatchSystemMessage( chat_id != ID_INVALID ? chat_id : ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2 to %3: file is empty." ).arg( icon_html, file_path, Bee::userNameToShow( u ) ),
-                           chat_id != ID_INVALID ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+                           chat_id != ID_INVALID ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
     return false;
   }
 
@@ -303,7 +303,7 @@ bool Core::sendFile( VNumber user_id, const QString& file_path, const QString& s
       return true;
 
     dispatchSystemMessage( chat_id != ID_INVALID ? chat_id : ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 is a folder. You can share it." ).arg( icon_html, file.fileName() ),
-                           chat_id != ID_INVALID ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+                           chat_id != ID_INVALID ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
     return false;
   }
 
@@ -322,14 +322,14 @@ bool Core::sendFile( VNumber user_id, const QString& file_path, const QString& s
     {
       qDebug() << "File Transfer: sending" << fi.path() << "to" << u.path();
       dispatchSystemMessage( chat_id != ID_INVALID ? chat_id : ID_DEFAULT_CHAT, u.id(), tr( "%1 You send %2 to %3." ).arg( icon_html, fi.name(), Bee::userNameToShow( u ) ),
-                             chat_id != ID_INVALID ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+                             chat_id != ID_INVALID ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
       return true;
     }
   }
 
   dispatchSystemMessage( chat_id != ID_INVALID ? chat_id : ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2: %3 is not connected." )
                          .arg( icon_html ).arg( fi.name() ).arg( Bee::userNameToShow( u ) ),
-                         chat_id != ID_INVALID ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+                         chat_id != ID_INVALID ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
   return false;
 
 }
@@ -362,7 +362,7 @@ void Core::refuseToDownloadFile( VNumber user_id, const FileInfo& fi )
   Chat chat_to_show_message = ChatManager::instance().findChatByPrivateId( fi.chatPrivateId(), false, user_id );
   dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 You have refused to download %2 from %3." )
                          .arg( IconManager::instance().toHtml( "download.png", "*F*" ), fi.name(), Bee::userNameToShow( u ) ),
-                         chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+                         chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
 
   Message m = Protocol::instance().fileInfoRefusedToMessage( fi );
 
@@ -390,7 +390,7 @@ void Core::refuseToDownloadFolder( VNumber user_id, const QString& folder_name, 
   Chat chat_to_show_message = ChatManager::instance().findChatByPrivateId( chat_private_id, false, user_id );
   dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 You have refused to download folder %2 from %3." )
                          .arg( IconManager::instance().toHtml( "download.png", "*F*" ), folder_name, Bee::userNameToShow( u ) ),
-                         chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+                         chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
 
   Message m = Protocol::instance().folderRefusedToMessage( folder_name, chat_private_id );
 
@@ -504,7 +504,7 @@ void Core::addListToLocalShare()
                      .arg( Bee::bytesToString( bfsl->shareSize() ) );
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( IconManager::instance().toHtml( "upload.png", "*F*" ), share_status ),
-                         DispatchToChat, ChatMessage::FileTransfer );
+                         DispatchToChat, ChatMessage::System, false );
 
   if( beeApp )
     beeApp->removeJob( bfsl );
@@ -532,7 +532,7 @@ void Core::removeAllPathsFromShare()
   QString share_status = tr( "All paths are removed from file sharing" );
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( IconManager::instance().toHtml( "upload.png", "*F*" ), share_status ),
-                         DispatchToChat, ChatMessage::FileTransfer );
+                         DispatchToChat, ChatMessage::FileTransfer, false );
 
   createLocalShareMessage();
   sendFileShareListToAll();
@@ -555,7 +555,7 @@ void Core::removePathFromShare( const QString& share_path )
     share_status = tr( "%1 is removed from file sharing with %2 files" ).arg( share_path ).arg( num_files );
 
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2." ).arg( IconManager::instance().toHtml( "upload.png", "*F*" ), share_status ),
-                         DispatchToChat, ChatMessage::FileTransfer );
+                         DispatchToChat, ChatMessage::FileTransfer, false );
 
   if( num_files > 0 )
   {
@@ -619,7 +619,7 @@ bool Core::sendFolder( const User& u, const QFileInfo& file_info, const QString&
 
   dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 You are about to send %2 to %3. Checking folder..." )
                          .arg( icon_html, file_info.fileName(), Bee::userNameToShow( u ) ),
-                         chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+                         chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
 
   BuildFileShareList *bfsl = new BuildFileShareList;
   bfsl->setFolderPath( Bee::convertToNativeFolderSeparator( file_info.absoluteFilePath() ) );
@@ -663,21 +663,21 @@ void Core::addFolderToFileTransfer()
   if( !u.isValid() )
   {
     dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, ID_LOCAL_USER, sys_header + tr( "invalid user #%1." ).arg( user_id ),
-                           chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+                           chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
     return;
   }
 
   if( file_info_list.isEmpty() )
   {
     dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, ID_LOCAL_USER, sys_header + tr( "the folder is empty." ),
-                           chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+                           chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
     return;
   }
 
   if( !mp_fileTransfer->isActive() )
   {
     dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, ID_LOCAL_USER, sys_header + tr( "file transfer is not working." ),
-                           chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+                           chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
     return;
   }
 
@@ -685,7 +685,7 @@ void Core::addFolderToFileTransfer()
   if( !c )
   {
     dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, ID_LOCAL_USER, sys_header + tr( "%1 is not connected." ).arg( Bee::userNameToShow( u ) ),
-                           chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+                           chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
     return;
   }
 
@@ -699,13 +699,13 @@ void Core::addFolderToFileTransfer()
   if( !m.isValid() )
   {
     dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), sys_header + tr( "internal error." ),
-                           chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+                           chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
     return;
   }
 
   dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 You send folder %2 to %3." )
                          .arg( icon_html, folder_name, Bee::userNameToShow( u ) ),
-                         chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer );
+                         chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
 
   c->sendMessage( m );
 
