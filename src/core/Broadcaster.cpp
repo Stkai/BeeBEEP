@@ -80,7 +80,7 @@ bool Broadcaster::startBroadcastServer()
           QList<QNetworkAddressEntry> address_entries = if_net.addressEntries();
           foreach( QNetworkAddressEntry address_entry, address_entries )
           {
-            if( address_entry.ip().isLoopback() || address_entry.ip().toString() == QString( "127.0.0.1" ) || address_entry.ip().toString() == QString( "::1" ) )
+            if( NetworkAddress::isLoopback( address_entry.ip() ) )
               add_this_hw_address = false;
             hardware_address += QString( " - %1" ).arg( address_entry.ip().toString() );
           }

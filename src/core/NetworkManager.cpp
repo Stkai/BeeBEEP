@@ -140,7 +140,7 @@ NetworkEntry NetworkManager::firstNetworkEntry( bool use_ipv4 ) const
 
 bool NetworkManager::searchLocalHostAddress()
 {
-  m_localHostAddress = QHostAddress( "127.0.0.1" );
+  m_localHostAddress = Settings::instance().useIPv6() ? QHostAddress::LocalHostIPv6 : QHostAddress::LocalHost;
   m_localBroadcastAddress = QHostAddress();
   m_localHostAddressScopeId = "";
   m_localInterfaceHardwareAddress = "";

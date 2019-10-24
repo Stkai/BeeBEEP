@@ -170,3 +170,9 @@ NetworkAddress NetworkAddress::fromString( const QString& address_string )
 
   return na;
 }
+
+bool NetworkAddress::isLoopback( const QHostAddress& ha )
+{
+  NetworkAddress na( ha, 6475 );
+  return na.isLoopback();
+}

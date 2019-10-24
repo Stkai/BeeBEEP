@@ -984,7 +984,7 @@ QHostAddress Settings::hostAddressToListen()
 void Settings::setLocalUserHost( const QHostAddress& host_address, quint16 host_port )
 {
   if( host_address.isNull() || host_address.toString() == QString( "0.0.0.0" ) )
-    m_localUser.setNetworkAddress( NetworkAddress( QHostAddress( "127.0.0.1" ), host_port ) );
+    m_localUser.setNetworkAddress( NetworkAddress( m_useIPv6 ? QHostAddress::LocalHostIPv6 : QHostAddress::LocalHost, host_port ) );
   else
     m_localUser.setNetworkAddress( NetworkAddress( host_address, host_port ) );
 }

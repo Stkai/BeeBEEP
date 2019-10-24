@@ -34,7 +34,7 @@ User::User()
 }
 
 User::User( VNumber new_id )
- : m_id( new_id ), m_vCard(), m_networkAddress( QHostAddress( "127.0.0.1" ), DEFAULT_LISTENER_PORT ),
+ : m_id( new_id ), m_vCard(), m_networkAddress( QHostAddress( QHostAddress::LocalHost ), DEFAULT_LISTENER_PORT ),
    m_status( User::Offline ), m_statusDescription( "" ), m_color( "#000000" ), m_accountName( "" ),
    m_domainName( "" ), m_version( "" ), m_hash( "" ), m_isFavorite( false ), m_qtVersion( "0" ),
    m_protocolVersion( 0 ), m_statusChangedIn(), m_lastConnection(), m_workgroups(), m_localHostName( "" )
