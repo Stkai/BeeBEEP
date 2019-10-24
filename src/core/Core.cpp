@@ -324,7 +324,7 @@ void Core::startDnsMulticasting()
       dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                              tr( "%1 Zero Configuration started with service name: %2" )
                                .arg( IconManager::instance().toHtml( "mdns.png", "*C*" ), Settings::instance().dnsRecord() ),
-                             DispatchToChat, ChatMessage::Connection );
+                             DispatchToChat, ChatMessage::Connection, false );
     }
   }
 }
@@ -339,7 +339,7 @@ void Core::stopDnsMulticasting()
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                              tr( "%1 Zero Configuration service closed." )
                                .arg( IconManager::instance().toHtml( "mdns.png", "*C*" ) ),
-                             DispatchToChat, ChatMessage::Connection );
+                             DispatchToChat, ChatMessage::Connection, false );
   }
 }
 
@@ -456,14 +456,14 @@ void Core::sendDnsMulticastingMessage()
       dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                                tr( "%1 Zero Configuration is browsing network for service: %2" )
                                  .arg( IconManager::instance().toHtml( "mdns.png", "*C*" ), Settings::instance().dnsRecord() ),
-                               DispatchToChat, ChatMessage::Connection );
+                               DispatchToChat, ChatMessage::Connection, false );
     }
     else
     {
       dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                                tr( "%1 Zero Configuration cannot browse network for service: %2" )
                                  .arg( IconManager::instance().toHtml( "mdns.png", "*C*" ), Settings::instance().dnsRecord() ),
-                               DispatchToChat, ChatMessage::Connection );
+                               DispatchToChat, ChatMessage::Connection, false );
     }
   }
 #ifdef BEEBEEP_DEBUG
