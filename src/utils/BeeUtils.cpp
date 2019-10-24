@@ -1075,20 +1075,33 @@ QString Bee::imagePreviewPath( const QString& source_image_path )
     QString file_png_path = QString( "%1-%2.png" ).arg( "img" ).arg( Protocol::instance().fileInfoHash( fi ) );
     QString image_preview_path = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().cacheFolder() ).arg( file_png_path ) );
     if( QFile::exists( image_preview_path ) )
+    {
+#ifdef BEEBEEP_DEBUG
+      qDebug() << "Image preview of" << source_image_path << "cached in file" << qPrintable( image_preview_path );
+#endif
       return image_preview_path;
+    }
     QImage img;
-    QImageReader img_reader( fi.path() );
+    QImageReader img_reader( source_image_path );
     img_reader.setAutoDetectImageFormat( true );
     if( img_reader.read( &img ) )
     {
       if( img.height() > Settings::instance().imagePreviewHeight() )
       {
+#ifdef BEEBEEP_DEBUG
+        qDebug() << "Image preview scaled and saving to" << qPrintable( image_preview_path );
+#endif
         // PNG for transparency (always)
         QImage img_scaled = img.scaledToHeight( Settings::instance().imagePreviewHeight(), Qt::SmoothTransformation );
-        if( !img_scaled.save( image_preview_path, "png" ) )
-          image_preview_path = "";
+        if( img_scaled.save( image_preview_path, "png" ) )
+          return image_preview_path;
+#ifdef BEEBEEP_DEBUG
+        else
+          qDebug() << "Unable to save scaled image preview to" << qPrintable( image_preview_path );
+#endif
       }
-      return image_preview_path;
+      else
+        return source_image_path;
     }
   }
   return QString( "" );

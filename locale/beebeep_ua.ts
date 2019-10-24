@@ -606,6 +606,10 @@
         <source>%1 has end-to-end encryption enabled</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>%1 Sending %2 files to %3 users: %4.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Date</name>
@@ -921,7 +925,7 @@
     </message>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation>Бібліотека Qt для цієї ОС не підтримує перетаскування файлів. Вам необхідно Вибрати знову файл для відправки.</translation>
+        <translation type="vanished">Бібліотека Qt для цієї ОС не підтримує перетаскування файлів. Вам необхідно Вибрати знову файл для відправки.</translation>
     </message>
     <message>
         <source>You are not connected</source>
@@ -1173,6 +1177,10 @@
     </message>
     <message>
         <source>Opening voice message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You are trying to send %1 files simultaneously but the maximum allowed is %2.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4638,11 +4646,19 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation>Бібліотека Qt для цієї ОС не підтримує перетаскування файлів. Вам необхідно Вибрати знову файл для відправки.</translation>
+        <translation type="vanished">Бібліотека Qt для цієї ОС не підтримує перетаскування файлів. Вам необхідно Вибрати знову файл для відправки.</translation>
     </message>
     <message>
         <source>You cannot send files to the workgroup &apos;%1&apos;.</source>
         <translation>Ви не можете надсилати файли до робочої групи &apos;%1&apos;.</translation>
+    </message>
+    <message>
+        <source>You are trying to send %1 files simultaneously but the maximum allowed is %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -142,10 +142,6 @@ void GuiChatList::showChatMenu( const QPoint& p )
 {
   mp_menuContext->clear();
   QAction* act;
-  act = mp_menuContext->addAction( tr( "Hide empty chats" ), this, SIGNAL( hideEmptyChatsRequest() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().hideEmptyChatsInList() );
-  mp_menuContext->addSeparator();
 
   QTreeWidgetItem* item = mp_twChatList->itemAt( p );
   if( !item )
@@ -190,7 +186,10 @@ void GuiChatList::showChatMenu( const QPoint& p )
 
   mp_menuContext->addSeparator();
   mp_menuContext->addAction( IconManager::instance().icon( "background-color.png" ), tr( "Change background color" ) + QString("..."), this, SLOT( selectBackgroundColor() ) );
-
+  mp_menuContext->addSeparator();
+  act = mp_menuContext->addAction( tr( "Hide empty chats" ), this, SIGNAL( hideEmptyChatsRequest() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().hideEmptyChatsInList() );
   mp_menuContext->exec( QCursor::pos() );
   mp_twChatList->clearSelection();
 }
@@ -266,14 +265,14 @@ void GuiChatList::showMenuSettings()
   bool create_chat_is_enabled = UserManager::instance().userList().toList().size() >= 2;
   QAction* act;
   mp_menuSettings->clear();
-  act = mp_menuSettings->addAction( tr( "Hide empty chats" ), this, SIGNAL( hideEmptyChatsRequest() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().hideEmptyChatsInList() );
-  mp_menuSettings->addSeparator();
   mp_menuSettings->addAction( IconManager::instance().icon( "message-create.png" ), tr( "Write a message" ), this, SIGNAL( createNewMessageRequest() ) );
   act = mp_menuSettings->addAction( IconManager::instance().icon( "group-create.png" ), tr( "Create new group chat" ), this, SIGNAL( createNewChatRequest() ) );
   act->setEnabled( create_chat_is_enabled );
   mp_menuSettings->addSeparator();
   mp_menuSettings->addAction( IconManager::instance().icon( "background-color.png" ), tr( "Change background color" ) + QString("..."), this, SLOT( selectBackgroundColor() ) );
+  mp_menuSettings->addSeparator();
+  act = mp_menuSettings->addAction( tr( "Hide empty chats" ), this, SIGNAL( hideEmptyChatsRequest() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().hideEmptyChatsInList() );
   mp_menuSettings->exec( QCursor::pos() );
 }

@@ -186,13 +186,13 @@ void FileTransfer::setupPeer( FileTransferPeer* transfer_peer, qintptr socket_de
   if( transfer_peer->isInQueue() )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << transfer_peer->name() << "is removed from queue";
+    qDebug() << qPrintable( transfer_peer->name() ) << "is removed from queue";
 #endif
     transfer_peer->removeFromQueue();
   }
 
 #ifdef BEEBEEP_DEBUG
-  qDebug() << transfer_peer->name() << "starts its connection. Active downloads:" << activeDownloads();
+  qDebug() << qPrintable( transfer_peer->name() ) << "starts its connection. Active downloads:" << activeDownloads();
 #endif
   if( !transfer_peer->isDownload() )
   {
@@ -206,7 +206,7 @@ void FileTransfer::setupPeer( FileTransferPeer* transfer_peer, qintptr socket_de
   transfer_peer->setConnectionDescriptor( socket_descriptor, server_port );
   int delay = Random::number( 1, 9 ) * 100;
 #ifdef BEEBEEP_DEBUG
-  qDebug() << transfer_peer->name() << "starts in" << delay << "ms";
+  qDebug() << qPrintable( transfer_peer->name() ) << "starts in" << delay << "ms";
 #endif
   QTimer::singleShot( delay, transfer_peer, SLOT( startConnection() ) );
 }

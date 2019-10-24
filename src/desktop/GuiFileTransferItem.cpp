@@ -115,7 +115,7 @@ void GuiFileTransferItem::update()
   {
     icon = IconManager::instance().icon( "timer.png" );
     action_tip = QObject::tr( "In queue" );
-    sort_string.prepend( 'Q' );
+    sort_string.prepend( 'E' );
   }
   else if( m_transferState == FileTransferPeer::Starting )
   {
@@ -133,19 +133,19 @@ void GuiFileTransferItem::update()
   {
     icon = IconManager::instance().icon( "green-ball.png" );
     action_tip = QObject::tr( "Completed" );
-    sort_string.prepend( 'D' );
+    sort_string.prepend( 'F' );
   }
   else if( m_transferState == FileTransferPeer::Error )
   {
     icon = IconManager::instance().icon( "red-ball.png" );
     action_tip = QObject::tr( "Not completed" );
-    sort_string.prepend( 'F' );
+    sort_string.prepend( 'H' );
   }
   else if( m_transferState == FileTransferPeer::Canceled )
   {
     icon = IconManager::instance().icon( "red-ball.png" );
     action_tip = QObject::tr( "Canceled" );
-    sort_string.prepend( 'E' );
+    sort_string.prepend( 'G' );
   }
   else if( m_transferState == FileTransferPeer::Pausing )
   {
@@ -157,7 +157,7 @@ void GuiFileTransferItem::update()
   {
     icon = IconManager::instance().icon( "pause.png" );
     action_tip = QObject::tr( "Resume transfer" );
-    sort_string.prepend( 'C' );
+    sort_string.prepend( 'D' );
   }
   else
   {

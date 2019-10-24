@@ -544,7 +544,7 @@ void Core::parseShareBoxMessage( const User& u, const Message& m )
   else if( !Settings::instance().useShareBox() )
     qDebug() << "Skips share box message arrived from" << qPrintable( u.path() ) << "(share box disabled)";
   else
-    qDebug() << "Parsing share box message from" << qPrintable( u.path() ) << "for folder:" << qPrintable( folder_name );
+    qDebug() << "Parsing share box message from" << qPrintable( u.path() ) << "for folder" << folder_name;
 #endif
 
   bool sharebox_is_active = Settings::instance().enableFileTransfer() && Settings::instance().enableFileSharing() && Settings::instance().useShareBox();

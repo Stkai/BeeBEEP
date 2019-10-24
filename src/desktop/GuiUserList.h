@@ -59,7 +59,7 @@ signals:
   void userSelected( VNumber );
   void chatSelected( VNumber );
   void showVCardRequest( VNumber );
-  void sendFileToChatRequest( VNumber, const QString& );
+  void sendFilesToChatRequest( VNumber, const QStringList& );
 
 protected slots:
   void userItemClicked( QTreeWidgetItem*, int );

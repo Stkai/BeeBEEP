@@ -109,6 +109,7 @@ private slots:
   void statusSelected();
   void changeStatusDescription();
   void sendFileFromChat( VNumber, const QString& );
+  void sendFilesFromChat( VNumber, const QStringList& );
   void sendFile( VNumber );
   void sendFile( const QString& );
   void downloadFolder( const User&, const QString&, const QList<FileInfo>& );
@@ -251,7 +252,6 @@ private:
   void checkAutoStartOnBoot( bool );
   void checkViewActions();
   bool sendFile( const User&, const QString&, VNumber chat_id );
-  void sendFiles( const User&, const QStringList&, VNumber chat_id );
   bool openWebUrl( const QString& );
   QStringList checkFilePath( const QString& );
   bool isAudioDeviceAvailable() const;

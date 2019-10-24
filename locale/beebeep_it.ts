@@ -658,6 +658,10 @@
         <source>%1 has end-to-end encryption enabled</source>
         <translation>%1 ha la crittografia abilitata</translation>
     </message>
+    <message>
+        <source>%1 Sending %2 files to %3 users: %4.</source>
+        <translation>%1 Stai inviando %2 file a %3 utenti: %4.</translation>
+    </message>
 </context>
 <context>
     <name>Date</name>
@@ -1005,7 +1009,7 @@
     </message>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation>Le librerie Qt per questo OS non supportano il Drag and Drop per i file. Dovrai selezionare nuovamente il file da inviare.</translation>
+        <translation type="vanished">Le librerie Qt per questo OS non supportano il Drag and Drop per i file. Dovrai selezionare nuovamente il file da inviare.</translation>
     </message>
     <message>
         <source>Filter message</source>
@@ -1246,6 +1250,10 @@
     <message>
         <source>Opening voice message</source>
         <translation>Sto aprendo il messaggio vocale</translation>
+    </message>
+    <message>
+        <source>You are trying to send %1 files simultaneously but the maximum allowed is %2.</source>
+        <translation>Stai tentando di inviare %1 file simultaneamente ma il massimo consentito è %2.</translation>
     </message>
 </context>
 <context>
@@ -4948,11 +4956,19 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation>Le librerie Qt per questo OS non supportano il Drag and Drop per i file. Dovrai selezionare nuovamente il file da inviare.</translation>
+        <translation type="vanished">Le librerie Qt per questo OS non supportano il Drag and Drop per i file. Dovrai selezionare nuovamente il file da inviare.</translation>
     </message>
     <message>
         <source>You cannot send files to the workgroup &apos;%1&apos;.</source>
         <translation>Non puoi inviare file al gruppo di lavoro &apos;%1&apos;.</translation>
+    </message>
+    <message>
+        <source>You are trying to send %1 files simultaneously but the maximum allowed is %2.</source>
+        <translation>Stai tentando di inviare %1 file simultaneamente ma il massimo consentito è %2.</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>

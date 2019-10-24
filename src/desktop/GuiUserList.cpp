@@ -572,12 +572,22 @@ void GuiUserList::checkAndSendUrls( QTreeWidgetItem* item, const QMimeData* sour
       num_files += Protocol::instance().countFilesCanBeSharedInPath( file_path );
       if( num_files > Settings::instance().maxQueuedDownloads() )
         break;
-      file_path_list.append( file_path );
+      file_path_list.append( Bee::convertToNativeFolderSeparator( file_path ) );
     }
   }
 
   if( num_files <= 0 )
     return;
+
+  if( file_path_list.isEmpty() )
+  {
+    if( num_files > 0 )
+    {
+      QMessageBox::warning( this, Settings::instance().programName(), tr( "You are trying to send %1 files simultaneously but the maximum allowed is %2." )
+                                                                      .arg( num_files ).arg( Settings::instance().maxQueuedDownloads() ), tr( "Ok" ) );
+    }
+    return;
+  }
 
   num_files = qMin( num_files, Settings::instance().maxQueuedDownloads() );
 
@@ -589,20 +599,6 @@ void GuiUserList::checkAndSendUrls( QTreeWidgetItem* item, const QMimeData* sour
     return;
   }
 
-  foreach( QString local_file, file_path_list )
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Drag and drop: send file" << local_file << "to chat" << chat_id;
-#endif
-    if( !QFile::exists( local_file ) )
-    {
-      QMessageBox::information( this, Settings::instance().programName(),
-                                tr( "Qt library for this OS doesn't support Drag and Drop for files. You have to select again the file to send." ) );
-      qWarning() << "Qt error: drag and drop has invalid file path" << local_file;
-      return;
-    }
-
-    emit sendFileToChatRequest( chat_id, local_file );
-  }
+  emit sendFilesToChatRequest( chat_id, file_path_list );
 }
 

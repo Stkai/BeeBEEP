@@ -294,7 +294,8 @@ protected:
   void dispatchToDefaultAndPrivateChat( const ChatMessage&, VNumber user_id );
 
   /* CoreFileTransfer */
-  bool sendFileToUser( const User&, const QString& file_path, const QString& share_folder, bool to_share_box, const Chat&, bool *show_file_preview );
+  bool sendFileToUser( const User&, const QString& file_path, const QString& share_folder, bool to_share_box, const Chat& );
+  bool showFileUploadPreviewInChat( const Chat&, const QString& file_path );
   void sendFileShareListTo( VNumber user_id );
   void sendFileShareListToAll();
   bool sendFolder( const User&, const QFileInfo&, const QString& chat_private_id );

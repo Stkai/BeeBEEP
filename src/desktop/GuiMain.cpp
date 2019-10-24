@@ -166,7 +166,7 @@ GuiMain::GuiMain( QWidget *parent )
   connect( mp_userList, SIGNAL( chatSelected( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( mp_userList, SIGNAL( userSelected( VNumber ) ), this, SLOT( checkUserSelected( VNumber ) ) );
   connect( mp_userList, SIGNAL( showVCardRequest( VNumber ) ), this, SLOT( showVCard( VNumber ) ) );
-  connect( mp_userList, SIGNAL( sendFileToChatRequest( VNumber, const QString& ) ), this, SLOT( sendFileFromChat( VNumber, const QString& ) ) );
+  connect( mp_userList, SIGNAL( sendFilesToChatRequest( VNumber, const QStringList& ) ), this, SLOT( sendFilesFromChat( VNumber, const QStringList& ) ) );
 
   connect( mp_groupList, SIGNAL( openChatForGroupRequest( VNumber ) ), this, SLOT( showChat( VNumber ) ) );
   connect( mp_groupList, SIGNAL( createGroupRequest() ), this, SLOT( createGroupChat() ) );
@@ -215,6 +215,7 @@ void GuiMain::setupChatConnections( GuiChat* gui_chat )
   connect( gui_chat, SIGNAL( nextChat() ), this, SLOT( showNextChat() ) );
   connect( gui_chat, SIGNAL( openUrl( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
   connect( gui_chat, SIGNAL( sendFileFromChatRequest( VNumber, const QString& ) ), this, SLOT( sendFileFromChat( VNumber, const QString& ) ) );
+  connect( gui_chat, SIGNAL( sendFilesFromChatRequest( VNumber, const QStringList& ) ), this, SLOT( sendFilesFromChat( VNumber, const QStringList& ) ) );
   connect( gui_chat, SIGNAL( editGroupRequest( VNumber ) ), this, SLOT( editGroupChat( VNumber ) ) );
   connect( gui_chat, SIGNAL( chatToClear( VNumber ) ), this, SLOT( clearChat( VNumber ) ) );
   connect( gui_chat, SIGNAL( clearSystemMessagesRequestFromChat( VNumber ) ), this, SLOT( clearSystemMessagesInChat( VNumber ) ) );
@@ -1284,17 +1285,6 @@ void GuiMain::createMenus()
 
   /* User List Menu */
   mp_menuUserList = new QMenu( tr( "Options" ), this );
-  mp_actShowOnlineUsersOnly = mp_menuUserList->addAction( tr( "Show online users only" ), this, SLOT( settingsChanged() ) );
-  mp_actShowOnlineUsersOnly->setCheckable( true );
-  mp_actShowOnlineUsersOnly->setChecked( Settings::instance().showOnlyOnlineUsers() );
-  mp_actShowOnlineUsersOnly->setData( 6 );
-  act = mp_menuUserList->addAction( tr( "Show users in their workgroups" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().showUsersInWorkgroups() );
-  act->setData( 87 );
-  if( mp_actShowUserFullName->isChecked() )
-    mp_menuUserList->addAction( mp_actShowUserFullName );
-  mp_menuUserList->addSeparator();
   act = mp_menuUserList->addAction( tr( "Sort users in ascending order" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().sortUsersAscending() );
@@ -1323,6 +1313,17 @@ void GuiMain::createMenus()
   act->setData( 53 );
   sorting_users_action_group->addAction( act );
   connect( sorting_users_action_group, SIGNAL( triggered( QAction* ) ), this, SLOT( settingsChanged( QAction* ) ) );
+  mp_menuUserList->addSeparator();
+  mp_actShowOnlineUsersOnly = mp_menuUserList->addAction( tr( "Show online users only" ), this, SLOT( settingsChanged() ) );
+  mp_actShowOnlineUsersOnly->setCheckable( true );
+  mp_actShowOnlineUsersOnly->setChecked( Settings::instance().showOnlyOnlineUsers() );
+  mp_actShowOnlineUsersOnly->setData( 6 );
+  act = mp_menuUserList->addAction( tr( "Show users in their workgroups" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showUsersInWorkgroups() );
+  act->setData( 87 );
+  if( mp_actShowUserFullName->isChecked() )
+    mp_menuUserList->addAction( mp_actShowUserFullName );
   mp_menuUserList->addSeparator();
   act = mp_menuUserList->addAction( tr( "Show the user's picture" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -1376,10 +1377,11 @@ void GuiMain::createMenus()
 
   /* Context Menu for user list view */
   QMenu* context_menu_users = new QMenu( "Menu", this );
-  context_menu_users->addAction( mp_actShowOnlineUsersOnly );
   if( mp_actShowUserFullName->isChecked() )
+  {
     context_menu_users->addAction( mp_actShowUserFullName );
-  context_menu_users->addSeparator();
+    context_menu_users->addSeparator();
+  }
   context_menu_users->addAction( mp_actVCard );
   context_menu_users->addAction( mp_actChangeStatusDescription );
   context_menu_users->addSeparator();
@@ -1389,6 +1391,8 @@ void GuiMain::createMenus()
   context_menu_users->addAction( mp_actAddUsers );
   context_menu_users->addSeparator();
   context_menu_users->addAction( mp_actEditAvatarIconSize );
+  context_menu_users->addSeparator();
+  context_menu_users->addAction( mp_actShowOnlineUsersOnly );
   mp_userList->setContextMenuUsers( context_menu_users );
 
   /* Help Menu */
@@ -2544,22 +2548,31 @@ void GuiMain::sendFileFromChat( VNumber chat_id, const QString& file_path )
   beeCore->sendFilesFromChat( c.id(), files_path_selected );
 }
 
+void GuiMain::sendFilesFromChat( VNumber chat_id, const QStringList& file_path_list )
+{
+  Chat c = ChatManager::instance().chat( chat_id );
+  if( !c.isValid() )
+    return;
+
+  if( c.isDefault() && !Settings::instance().chatWithAllUsersIsEnabled() )
+    return;
+
+  if( file_path_list.isEmpty() )
+    return;
+
+  beeCore->sendFilesFromChat( c.id(), file_path_list );
+}
+
 void GuiMain::sendFile( VNumber user_id )
 {
   User u = UserManager::instance().findUser( user_id );
   QStringList files_path_selected = checkFilePath( "" );
   if( files_path_selected.isEmpty() )
     return;
-  sendFiles( u, files_path_selected, ID_INVALID );
-}
-
-void GuiMain::sendFiles( const User& u, const QStringList& file_list, VNumber chat_id )
-{
-  foreach( QString file_path, file_list )
-  {
-    if( !sendFile( u, file_path, chat_id ) )
-      return;
-  }
+  Chat c = ChatManager::instance().privateChatForUser( user_id );
+  if( !c.isValid() )
+    qWarning() << "Unable to send files to user" << user_id << "without a private chat in GuiMain::sendFile(...)";
+  beeCore->sendFilesFromChat( c.id(), files_path_selected );
 }
 
 QStringList GuiMain::checkFilePath( const QString& file_path )

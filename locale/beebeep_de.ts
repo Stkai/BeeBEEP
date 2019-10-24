@@ -622,6 +622,10 @@
         <source>%1 has end-to-end encryption enabled</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>%1 Sending %2 files to %3 users: %4.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Date</name>
@@ -933,7 +937,7 @@
     </message>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation>Die Qt-Bibliothek dieses Betriebssystems unterstützt Ziehen und Ablegen von Dateien nicht. Du musst die Datei zum Senden erneut auswählen.</translation>
+        <translation type="vanished">Die Qt-Bibliothek dieses Betriebssystems unterstützt Ziehen und Ablegen von Dateien nicht. Du musst die Datei zum Senden erneut auswählen.</translation>
     </message>
     <message>
         <source>You are not connected</source>
@@ -1193,6 +1197,10 @@
     </message>
     <message>
         <source>Opening voice message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You are trying to send %1 files simultaneously but the maximum allowed is %2.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4690,11 +4698,19 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation>Die Qt-Bibliothek dieses Betriebssystems unterstützt Ziehen und Ablegen von Dateien nicht. Du musst die Datei zum Senden erneut auswählen.</translation>
+        <translation type="vanished">Die Qt-Bibliothek dieses Betriebssystems unterstützt Ziehen und Ablegen von Dateien nicht. Du musst die Datei zum Senden erneut auswählen.</translation>
     </message>
     <message>
         <source>You cannot send files to the workgroup &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You are trying to send %1 files simultaneously but the maximum allowed is %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished">OK</translation>
     </message>
 </context>
 <context>

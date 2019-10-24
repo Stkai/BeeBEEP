@@ -183,9 +183,11 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
   {
     if( fi.isDownload() && ft_state == FileTransferPeer::Completed )
     {
-      chat_to_show_message.addUnreadMessage();
-      ChatManager::instance().setChat( chat_to_show_message );
-
+      if( !fi.isInShareBox() )
+      {
+        chat_to_show_message.addUnreadMessage();
+        ChatManager::instance().setChat( chat_to_show_message );
+      }
       if( !chat_voice_msg_html.isEmpty() )
         chat_voice_msg = ChatMessage( fi.isDownload() ? u.id() : ID_LOCAL_USER, chat_voice_msg_html, ChatMessage::Voice, true );
     }
@@ -225,6 +227,33 @@ void Core::checkFileTransferProgress( VNumber peer_id, VNumber user_id, const Fi
   emit fileTransferProgress( peer_id, u, fi, bytes, elapsed_time );
 }
 
+bool Core::showFileUploadPreviewInChat( const Chat& c, const QString& file_path )
+{
+  if( !c.isValid() )
+    return false;
+
+  QFileInfo fi( file_path );
+  if( Bee::isFileTypeImage( fi.suffix() ) )
+  {
+    QString img_preview_path = Bee::imagePreviewPath( file_path );
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Showing image preview"<< img_preview_path << "of file" << qPrintable( file_path );
+#endif
+    if( !img_preview_path.isEmpty() )
+    {
+      QUrl file_url( file_path );
+      QString sys_msg_img_preview = QString( "<br><div align=center><a href=\"%1\"><img src=\"%2\"></a></div>" )
+                                      .arg( file_url.toString(), QUrl::fromLocalFile( img_preview_path ).toString() );
+                                    // I have to add <br> to center the image on the first display (maybe Qt bug?)
+      dispatchSystemMessage( c.id(), ID_LOCAL_USER, sys_msg_img_preview, DispatchToChat, ChatMessage::ImagePreview, true );
+      return true;
+    }
+    else
+      qWarning() << "Unable to show image preview of the file" << qPrintable( file_path );
+  }
+  return false;
+}
+
 int Core::sendFilesFromChat( VNumber chat_id, const QStringList& file_path_list )
 {
   if( file_path_list.isEmpty() )
@@ -245,17 +274,38 @@ int Core::sendFilesFromChat( VNumber chat_id, const QStringList& file_path_list 
   }
 
   int files_sent = 0;
-  bool show_file_preview = true;
-  UserList chat_members = UserManager::instance().userList().fromUsersId( c.usersId() );
+  QStringList to_users;
+  QStringList file_sent_list;
+  UserList chat_members = c.isDefault() ? UserManager::instance().userList() : UserManager::instance().userList().fromUsersId( c.usersId() );
   foreach( QString file_path, file_path_list )
   {
-    show_file_preview = true;
     foreach( User u, chat_members.toList() )
     {
-      if( sendFileToUser( u, file_path, "", false, c, &show_file_preview ) )
-        files_sent++;
+      if( !u.isLocal() )
+      {
+        if( sendFileToUser( u, file_path, "", false, c ) )
+        {
+          files_sent++;
+          QString user_name = Bee::userNameToShow( u );
+          if( !to_users.contains( user_name ) )
+            to_users.append( user_name );
+          if( !file_sent_list.contains( file_path ) )
+            file_sent_list.append( file_path );
+        }
+      }
     }
   }
+
+  if( to_users.size() > 1 || file_sent_list.size() > 1 )
+  {
+    dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "%1 Sending %2 files to %3 users: %4." ).arg( IconManager::instance().toHtml( "upload.png", "*F*" ) )
+                                                                                     .arg( file_sent_list.size() ).arg( to_users.size() ).arg( to_users.join( ", " ) ),
+                           DispatchToChat, ChatMessage::FileTransfer, false );
+  }
+
+  foreach( QString file_path, file_sent_list)
+    showFileUploadPreviewInChat( c, file_path );
+
   return files_sent;
 }
 
@@ -276,12 +326,16 @@ bool Core::sendFile( VNumber user_id, const QString& file_path, const QString& s
     return false;
   }
 
-  bool show_file_preview = true;
   Chat c = ChatManager::instance().chat( chat_id );
-  return sendFileToUser( u, file_path, share_folder, to_share_box, c, &show_file_preview );
+  if( !c.isValid() )
+    c = ChatManager::instance().privateChatForUser( user_id );
+  bool file_sent = sendFileToUser( u, file_path, share_folder, to_share_box, c );
+  if( file_sent && c.isValid() )
+    showFileUploadPreviewInChat( c, file_path );
+  return file_sent;
 }
 
-bool Core::sendFileToUser( const User&u, const QString& file_path, const QString& share_folder, bool to_share_box, const Chat& chat_selected, bool *show_file_preview )
+bool Core::sendFileToUser( const User&u, const QString& file_path, const QString& share_folder, bool to_share_box, const Chat& chat_selected )
 {
   if( u.isLocal() )
     return false;
@@ -328,27 +382,10 @@ bool Core::sendFileToUser( const User&u, const QString& file_path, const QString
       Message m = Protocol::instance().fileInfoToMessage( fi );
       if( c->sendMessage( m ) )
       {
-        bool show_image_preview = show_file_preview ? *show_file_preview : true;
         qDebug() << "Sending file" << fi.path() << "to" << qPrintable( u.path() );
         file_sent = true;
         dispatchSystemMessage( chat_selected.isValid() ? chat_selected.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 You send %2 to %3." ).arg( icon_html, fi.name(), Bee::userNameToShow( u ) ),
                                chat_selected.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
-        if( show_image_preview && Bee::isFileTypeImage( fi.suffix() ) && chat_selected.isValid() )
-        {
-          QString img_preview_path = Bee::imagePreviewPath( fi.path() );
-          if( !img_preview_path.isEmpty() )
-          {
-            QUrl file_url( fi.path() );
-            QString sys_msg_img_preview = QString( "<br><div align=center><a href=\"%1\"><img src=\"%2\"></a></div>" )
-                                .arg( file_url.toString(), QUrl::fromLocalFile( img_preview_path ).toString() );
-                                // I have to add <br> to center the image on the first display (maybe Qt bug?)
-            dispatchSystemMessage( chat_selected.id(), u.id(), sys_msg_img_preview, DispatchToChat, ChatMessage::ImagePreview, true );
-            if( show_file_preview )
-              *show_file_preview = false;
-          }
-          else
-            qWarning() << "Unable to show image preview of the file" << fi.path();
-        }
       }
     }
 
