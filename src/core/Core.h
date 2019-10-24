@@ -100,6 +100,7 @@ public:
 
   /* CoreFileTransfer */
   bool sendFile( VNumber user_id, const QString& file_path, const QString& share_folder, bool to_share_box, VNumber chat_id );
+  int sendFilesFromChat( VNumber chat_id, const QStringList& file_path_list );
   bool downloadFile( VNumber, const FileInfo&, bool show_message );
   void refuseToDownloadFile( VNumber, const FileInfo& );
   void refuseToDownloadFolder( VNumber, const QString& folder_name, const QString& chat_private_id );
@@ -293,6 +294,7 @@ protected:
   void dispatchToDefaultAndPrivateChat( const ChatMessage&, VNumber user_id );
 
   /* CoreFileTransfer */
+  bool sendFileToUser( const User&, const QString& file_path, const QString& share_folder, bool to_share_box, const Chat&, bool *show_file_preview );
   void sendFileShareListTo( VNumber user_id );
   void sendFileShareListToAll();
   bool sendFolder( const User&, const QFileInfo&, const QString& chat_private_id );

@@ -141,57 +141,32 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
   if( FileTransferPeer::stateIsStopped( ft_state ) )
     sys_msg = QString( "%1 %2 %3 %4 %5: %6." ).arg( icon_html, action_txt, fi.name(), fi.isDownload() ? tr( "from" ) : tr( "to" ), Bee::userNameToShow( u ), Bee::lowerFirstLetter( msg ) );
 
-  if( ft_state == FileTransferPeer::Completed )
+  if( fi.isDownload() && ft_state == FileTransferPeer::Completed )
   {
-    if( fi.isDownload() )
-      FileShare::instance().addDownloadedFile( fi );
+    FileShare::instance().addDownloadedFile( fi );
+
     QUrl file_url = QUrl::fromLocalFile( fi.path() );
     if( Bee::isFileTypeImage( fi.suffix() ) )
     {
-      QImage img;
-      QImageReader img_reader( fi.path() );
-      img_reader.setAutoDetectImageFormat( true );
-      int img_preview_height = Settings::instance().imagePreviewHeight();
-      QString img_preview_path = fi.path();
-      if( img_reader.read( &img ) )
-      {
-        if( img.height() > img_preview_height )
-        {
-          // PNG for transparency (always)
-          QString img_file_name = QString( "beeimgtmp-%1-%2.png" ).arg( Bee::dateTimeStringSuffix( QDateTime::currentDateTime() ) ).arg( fi.id() );
-          QString img_file_path_tmp = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().cacheFolder() ).arg( img_file_name ) );
-          QString img_file_path = Bee::uniqueFilePath( img_file_path_tmp, false );
-          QImage img_scaled = img.scaledToHeight( Settings::instance().imagePreviewHeight(), Qt::SmoothTransformation );
-          if( img_scaled.save( img_file_path, "png" ) )
-          {
-            Settings::instance().addTemporaryFilePath( img_file_path );
-            img_preview_path = img_file_path;
-          }
-        }
-        else
-          img_preview_height = img.height();
-
-        // I have to add <br> to center the image on the first display (maybe Qt bug)
-        sys_msg_img_preview = QString( "<br><div align=center><a href=\"%1\"><img src=\"%2\" height=\"%3\" /></a></div>" )
-                                .arg( file_url.toString(), QUrl::fromLocalFile( img_preview_path ).toString() ).arg( img_preview_height );
-      }
+      QString img_preview_path =  Bee::imagePreviewPath( fi.path() );
+      if( img_preview_path.isEmpty() )
+        qWarning() << "Unable to show image preview of the file" << fi.path();
       else
-        qWarning() << "Unable to show image preview of the file" << img_preview_path;
+        sys_msg_img_preview = QString( "<br><div align=center><a href=\"%1\"><img src=\"%2\"></a></div>" )
+                                .arg( file_url.toString(), QUrl::fromLocalFile( img_preview_path ).toString() );
+                                // I have to add <br> to center the image on the first display (maybe Qt bug?)
     }
 
     if( fi.isVoiceMessage() )
     {
-      if( fi.isDownload() )
-      {
-        QString sys_txt = tr( "%1 sent a voice message." ).arg( Bee::userNameToShow( u ) );
-        QString html_audio_icon = IconManager::instance().toHtml( "voice-message.png", "*v*" );
+      QString sys_txt = tr( "%1 sent a voice message." ).arg( Bee::userNameToShow( u ) );
+      QString html_audio_icon = IconManager::instance().toHtml( "voice-message.png", "*v*" );
 #ifdef BEEBEEP_USE_VOICE_CHAT
-        file_url.setScheme( FileInfo::urlSchemeVoiceMessage() );
+      file_url.setScheme( FileInfo::urlSchemeVoiceMessage() );
 #endif
-        sys_msg_play_voice_chat = QString( "%1 %2 <a href=\"%3\">%4</a>." ).arg( html_audio_icon, sys_txt, file_url.toString(), tr( "Listen" ) );
-        chat_voice_msg_html = QString( "[ <a href=\"%1\">%2</a> ] %3" ).arg( file_url.toString(), tr( "voice message" ), html_audio_icon );
-        // New feature: adding save as to avoid cache deleted ... select voice message folder?
-      }
+      sys_msg_play_voice_chat = QString( "%1 %2 <a href=\"%3\">%4</a>." ).arg( html_audio_icon, sys_txt, file_url.toString(), tr( "Listen" ) );
+      chat_voice_msg_html = QString( "[ <a href=\"%1\">%2</a> ] %3" ).arg( file_url.toString(), tr( "voice message" ), html_audio_icon );
+      // New feature: adding save as to avoid cache deleted ... select voice message folder
     }
     else
     {
@@ -250,10 +225,43 @@ void Core::checkFileTransferProgress( VNumber peer_id, VNumber user_id, const Fi
   emit fileTransferProgress( peer_id, u, fi, bytes, elapsed_time );
 }
 
+int Core::sendFilesFromChat( VNumber chat_id, const QStringList& file_path_list )
+{
+  if( file_path_list.isEmpty() )
+    return 0;
+
+  Chat c = ChatManager::instance().chat( chat_id );
+  if( !c.isValid() )
+  {
+    qWarning() << "Unable to find chat" << chat_id << "for sending files" << qPrintable( file_path_list.join( ", " ) );
+    return 0;
+  }
+
+  QString icon_html = IconManager::instance().toHtml( "red-ball.png", "*F*" );
+  if( !Settings::instance().enableFileTransfer() )
+  {
+    dispatchSystemMessage( chat_id, ID_LOCAL_USER, tr( "%1 Unable to send %2. File transfer is disabled." ).arg( icon_html, file_path_list.join( ", " ) ), DispatchToChat, ChatMessage::FileTransfer, false );
+    return 0;
+  }
+
+  int files_sent = 0;
+  bool show_file_preview = true;
+  UserList chat_members = UserManager::instance().userList().fromUsersId( c.usersId() );
+  foreach( QString file_path, file_path_list )
+  {
+    show_file_preview = true;
+    foreach( User u, chat_members.toList() )
+    {
+      if( sendFileToUser( u, file_path, "", false, c, &show_file_preview ) )
+        files_sent++;
+    }
+  }
+  return files_sent;
+}
+
 bool Core::sendFile( VNumber user_id, const QString& file_path, const QString& share_folder, bool to_share_box, VNumber chat_id )
 {
   QString icon_html = IconManager::instance().toHtml( "red-ball.png", "*F*" );
-
   if( !Settings::instance().enableFileTransfer() )
   {
     dispatchSystemMessage( chat_id != ID_INVALID ? chat_id : ID_DEFAULT_CHAT, user_id, tr( "%1 Unable to send %2. File transfer is disabled." ).arg( icon_html, file_path ),
@@ -268,70 +276,90 @@ bool Core::sendFile( VNumber user_id, const QString& file_path, const QString& s
     return false;
   }
 
+  bool show_file_preview = true;
+  Chat c = ChatManager::instance().chat( chat_id );
+  return sendFileToUser( u, file_path, share_folder, to_share_box, c, &show_file_preview );
+}
+
+bool Core::sendFileToUser( const User&u, const QString& file_path, const QString& share_folder, bool to_share_box, const Chat& chat_selected, bool *show_file_preview )
+{
   if( u.isLocal() )
     return false;
 
+  QString icon_html = IconManager::instance().toHtml( "red-ball.png", "*F*" );
   if( !isUserConnected( u.id() ) )
   {
-    dispatchSystemMessage( chat_id != ID_INVALID ? chat_id : ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2 to %3: user is offline." ).arg( icon_html, file_path, Bee::userNameToShow( u ) ),
-                           chat_id != ID_INVALID ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
+    dispatchSystemMessage( chat_selected.isValid() ? chat_selected.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2 to %3: user is offline." ).arg( icon_html, file_path, Bee::userNameToShow( u ) ),
+                           chat_selected.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
     return false;
   }
 
   QFileInfo file( file_path );
   if( !file.exists() )
   {
-    dispatchSystemMessage( chat_id != ID_INVALID ? chat_id : ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2 to %3: file not found." ).arg( icon_html, file_path, Bee::userNameToShow( u ) ),
-                           chat_id != ID_INVALID ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
+    dispatchSystemMessage( chat_selected.isValid() ? chat_selected.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2 to %3: file not found." ).arg( icon_html, file_path, Bee::userNameToShow( u ) ),
+                           chat_selected.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
     return false;
   }
 
   if( !file.isDir() && file.size() <= 0 )
   {
-    dispatchSystemMessage( chat_id != ID_INVALID ? chat_id : ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2 to %3: file is empty." ).arg( icon_html, file_path, Bee::userNameToShow( u ) ),
-                           chat_id != ID_INVALID ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
+    dispatchSystemMessage( chat_selected.isValid() ? chat_selected.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2 to %3: file is empty." ).arg( icon_html, file_path, Bee::userNameToShow( u ) ),
+                           chat_selected.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
     return false;
   }
 
-  Chat chat_selected;
-  if( chat_id != ID_INVALID )
-    chat_selected = ChatManager::instance().chat( chat_id );
-
+  bool file_sent = false;
   if( file.isDir() )
   {
     if( sendFolder( u, file, chat_selected.privateId() ) )
-      return true;
-
-    dispatchSystemMessage( chat_id != ID_INVALID ? chat_id : ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 is a folder. You can share it." ).arg( icon_html, file.fileName() ),
-                           chat_id != ID_INVALID ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
-    return false;
+      file_sent = true;
+    else
+      dispatchSystemMessage( chat_selected.isValid() ? chat_selected.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 %2 is a folder. You can share it." ).arg( icon_html, file.fileName() ),
+                             chat_selected.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
   }
-
-  FileInfo fi = mp_fileTransfer->addFile( file, share_folder, to_share_box, chat_selected.privateId(), FileInfo::File );
-
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "File path" << fi.path() << "is added to file transfer list";
-#endif
-
-  Connection* c = connection( u.id() );
-  if( c )
+  else
   {
-    icon_html = IconManager::instance().toHtml( "upload.png", "*F*" );
-    Message m = Protocol::instance().fileInfoToMessage( fi );
-    if( c->sendMessage( m ) )
+    FileInfo fi = mp_fileTransfer->addFile( file, share_folder, to_share_box, chat_selected.privateId(), FileInfo::File );
+    Connection* c = connection( u.id() );
+    if( c )
     {
-      qDebug() << "File Transfer: sending" << fi.path() << "to" << u.path();
-      dispatchSystemMessage( chat_id != ID_INVALID ? chat_id : ID_DEFAULT_CHAT, u.id(), tr( "%1 You send %2 to %3." ).arg( icon_html, fi.name(), Bee::userNameToShow( u ) ),
-                             chat_id != ID_INVALID ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
-      return true;
+      icon_html = IconManager::instance().toHtml( "upload.png", "*F*" );
+      Message m = Protocol::instance().fileInfoToMessage( fi );
+      if( c->sendMessage( m ) )
+      {
+        bool show_image_preview = show_file_preview ? *show_file_preview : true;
+        qDebug() << "Sending file" << fi.path() << "to" << qPrintable( u.path() );
+        file_sent = true;
+        dispatchSystemMessage( chat_selected.isValid() ? chat_selected.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 You send %2 to %3." ).arg( icon_html, fi.name(), Bee::userNameToShow( u ) ),
+                               chat_selected.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
+        if( show_image_preview && Bee::isFileTypeImage( fi.suffix() ) && chat_selected.isValid() )
+        {
+          QString img_preview_path = Bee::imagePreviewPath( fi.path() );
+          if( !img_preview_path.isEmpty() )
+          {
+            QUrl file_url( fi.path() );
+            QString sys_msg_img_preview = QString( "<br><div align=center><a href=\"%1\"><img src=\"%2\"></a></div>" )
+                                .arg( file_url.toString(), QUrl::fromLocalFile( img_preview_path ).toString() );
+                                // I have to add <br> to center the image on the first display (maybe Qt bug?)
+            dispatchSystemMessage( chat_selected.id(), u.id(), sys_msg_img_preview, DispatchToChat, ChatMessage::ImagePreview, true );
+            if( show_file_preview )
+              *show_file_preview = false;
+          }
+          else
+            qWarning() << "Unable to show image preview of the file" << fi.path();
+        }
+      }
+    }
+
+    if( !file_sent )
+    {
+      dispatchSystemMessage( chat_selected.isValid() ? chat_selected.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2: %3 is not connected." )
+                             .arg( icon_html ).arg( fi.name() ).arg( Bee::userNameToShow( u ) ),
+                             chat_selected.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
     }
   }
-
-  dispatchSystemMessage( chat_id != ID_INVALID ? chat_id : ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2: %3 is not connected." )
-                         .arg( icon_html ).arg( fi.name() ).arg( Bee::userNameToShow( u ) ),
-                         chat_id != ID_INVALID ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
-  return false;
-
+  return file_sent;
 }
 
 void Core::cancelFileTransfer( VNumber peer_id )
@@ -852,7 +880,7 @@ bool Core::resumeFileTransfer( VNumber user_id, const FileInfo& file_info )
     qDebug() << "Try to resume uploading file" << qPrintable( file_info.path() ) << "to user" << user_id;
 #endif
     Chat c = ChatManager::instance().findChatByPrivateId( file_info.chatPrivateId(), false, user_id );
-    return sendFile( user_id, file_info.path(), file_info.shareFolder(), file_info.isInShareBox(), c.isValid() ? c.id() : ID_DEFAULT_CHAT );
+    return sendFile( user_id, file_info.path(), file_info.shareFolder(), file_info.isInShareBox(), c.id() );
   }
   return false;
 }

@@ -27,6 +27,7 @@
 #include "IconManager.h"
 #include "MessageManager.h"
 #include "PluginManager.h"
+#include "Protocol.h"
 #include "User.h"
 #include "Settings.h"
 #if QT_VERSION < 0x050000
@@ -1064,4 +1065,31 @@ QString Bee::transferTimeLeft( FileSizeType bytes_transferred, FileSizeType tota
     return timeToString( 2000 );
   else
     return timeToString( ms_left );
+}
+
+QString Bee::imagePreviewPath( const QString& source_image_path )
+{
+  QFileInfo fi( source_image_path );
+  if( fi.exists() && fi.isReadable() )
+  {
+    QString file_png_path = QString( "%1-%2.png" ).arg( "img" ).arg( Protocol::instance().fileInfoHash( fi ) );
+    QString image_preview_path = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().cacheFolder() ).arg( file_png_path ) );
+    if( QFile::exists( image_preview_path ) )
+      return image_preview_path;
+    QImage img;
+    QImageReader img_reader( fi.path() );
+    img_reader.setAutoDetectImageFormat( true );
+    if( img_reader.read( &img ) )
+    {
+      if( img.height() > Settings::instance().imagePreviewHeight() )
+      {
+        // PNG for transparency (always)
+        QImage img_scaled = img.scaledToHeight( Settings::instance().imagePreviewHeight(), Qt::SmoothTransformation );
+        if( !img_scaled.save( image_preview_path, "png" ) )
+          image_preview_path = "";
+      }
+      return image_preview_path;
+    }
+  }
+  return QString( "" );
 }

@@ -2541,9 +2541,7 @@ void GuiMain::sendFileFromChat( VNumber chat_id, const QString& file_path )
   if( files_path_selected.isEmpty() )
     return;
 
-  UserList chat_members = UserManager::instance().userList().fromUsersId( c.usersId() );
-  foreach( User u, chat_members.toList() )
-    sendFiles( u, files_path_selected, chat_id );
+  beeCore->sendFilesFromChat( c.id(), files_path_selected );
 }
 
 void GuiMain::sendFile( VNumber user_id )

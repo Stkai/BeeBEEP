@@ -99,6 +99,8 @@ namespace Bee
   qint64 bytesPerSecond( FileSizeType transferred_byte_size, int time_elapsed_ms );
   QString transferTimeLeft( FileSizeType bytes_transferred, FileSizeType total_bytes, FileSizeType starting_position, int elapsed_time );
 
+  QString imagePreviewPath( const QString& source_image_path );
+
 }
 
 

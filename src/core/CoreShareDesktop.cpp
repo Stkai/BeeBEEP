@@ -244,8 +244,6 @@ bool Core::sendScreenshotToChat( VNumber chat_id )
     qWarning() << "Unable to save temporary screenshot in file" << qPrintable( file_path );
     return false;
   }
-
-  Settings::instance().addTemporaryFilePath( file_path );
   screen_shot.reset();
 
   foreach( VNumber user_id, c.usersId() )
