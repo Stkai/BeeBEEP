@@ -43,9 +43,13 @@ public:
   void playBuzz();
 
 #if defined( BEEBEEP_USE_VOICE_CHAT )
-  QAudioDeviceInfo defaultInputDevice();
-  inline const QAudioFormat& defaultVoiceFormat() const;
+  void checkAudioDevice( const QAudioDeviceInfo& input_device, QAudioEncoderSettings* audio_settings, QString* file_container );
+  QString voiceInputDeviceName() const;
+  QAudioEncoderSettings voiceEncoderSettings() const;
+  QString voiceFileContainer() const;
+  inline const QString& defaultInputDeviceName() const;
   inline const QAudioEncoderSettings& defaultVoiceEncoderSettings() const;
+  inline const QString& defaultVoiceFileContainer() const;
   QString createDefaultVoiceMessageFilename();
 #endif
 
@@ -69,7 +73,7 @@ public:
 protected:
   AudioManager();
 #if defined( BEEBEEP_USE_VOICE_CHAT )
-  void checkAudioDevice();
+  void checkDefaultAudioDevice();
   QString defaultVoiceContainerFilePrefix();
   QString defaultVoiceContainerFileSuffix();
 #endif
@@ -83,16 +87,17 @@ private:
   QSound* mp_sound;
 #endif
 #if defined( BEEBEEP_USE_VOICE_CHAT )
-  QAudioFormat m_defaultVoiceFormat;
+  QString m_defaultInputDeviceName;
   QAudioEncoderSettings m_defaultVoiceEncoderSettings;
-  QString m_currentInputDeviceName;
+  QString m_defaultVoiceFileContainer;
 #endif
 };
 
 
 // Inline Functions
 #if defined( BEEBEEP_USE_VOICE_CHAT )
-inline const QAudioFormat& AudioManager::defaultVoiceFormat() const { return m_defaultVoiceFormat; }
+inline const QString& AudioManager::defaultInputDeviceName() const { return m_defaultInputDeviceName; }
 inline const QAudioEncoderSettings& AudioManager::defaultVoiceEncoderSettings() const { return m_defaultVoiceEncoderSettings; }
+inline const QString& AudioManager::defaultVoiceFileContainer() const { return m_defaultVoiceFileContainer; }
 #endif
 #endif // BEEBEEP_AUDIOMANAGER_H

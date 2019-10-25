@@ -1106,3 +1106,21 @@ QString Bee::imagePreviewPath( const QString& source_image_path )
   }
   return QString( "" );
 }
+
+QVariant Bee::comboBoxData( const QComboBox* box )
+{
+  int box_index = box->currentIndex();
+  return box_index == -1 ? QVariant() : box->itemData( box_index );
+}
+
+bool Bee::selectComboBoxData( QComboBox* box, const QVariant& item_data )
+{
+  int box_index = box->findData( item_data );
+  if( box_index >= 0 )
+  {
+    box->setCurrentIndex( box_index );
+    return true;
+  }
+  else
+    return false;
+}

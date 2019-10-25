@@ -48,7 +48,7 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
   setMainIcon( false );
   mp_chat = new GuiChat( this );
 
-  mp_actGroupMenu = new QAction( IconManager::instance().icon( "group-edit.png" ), tr( "Show group menu" ), this );
+  mp_actGroupMenu = new QAction( IconManager::instance().icon( "group-edit.png" ), tr( "Edit group chat" ), this );
   connect( mp_actGroupMenu, SIGNAL( triggered() ), this, SLOT( showGroupMenu() ) );
 
   mp_barMembers = new QToolBar( tr( "Show the bar of members" ), this );

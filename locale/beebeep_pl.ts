@@ -2015,9 +2015,13 @@ Proszę wybrać inną nazwę.</translation>
 <context>
     <name>GuiFloatingChat</name>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="51"/>
         <source>Show group menu</source>
-        <translation>Pokaż menu grupy</translation>
+        <translation type="vanished">Pokaż menu grupy</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="51"/>
+        <source>Edit group chat</source>
+        <translation type="unfinished">Edytuj czat grupowy</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="54"/>

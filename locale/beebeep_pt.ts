@@ -2019,9 +2019,8 @@ Selecione um nome diferente.</translation>
 <context>
     <name>GuiFloatingChat</name>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="51"/>
         <source>Show group menu</source>
-        <translation>Mostrar o Menu de Grupo</translation>
+        <translation type="vanished">Mostrar o Menu de Grupo</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="54"/>
@@ -2031,6 +2030,11 @@ Selecione um nome diferente.</translation>
     <message>
         <source>Show the bar of chat</source>
         <translation type="obsolete">Mostrar Barra de Chat</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="51"/>
+        <source>Edit group chat</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="62"/>

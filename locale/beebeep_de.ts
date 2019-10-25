@@ -1659,7 +1659,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Show group menu</source>
-        <translation>Gruppenmenü anzeigen</translation>
+        <translation type="vanished">Gruppenmenü anzeigen</translation>
     </message>
     <message>
         <source>Save window&apos;s geometry</source>
@@ -1704,6 +1704,10 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>If you have layout problem please save only geometry.</source>
         <translation>Wenn du Layoutprobleme hast, speichere bitte nur die Größe.</translation>
+    </message>
+    <message>
+        <source>Edit group chat</source>
+        <translation type="unfinished">Gruppenchat bearbeiten</translation>
     </message>
 </context>
 <context>

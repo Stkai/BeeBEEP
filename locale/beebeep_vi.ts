@@ -2011,11 +2011,6 @@ Vui lòng chọn một tên khác nhau.</translation>
 <context>
     <name>GuiFloatingChat</name>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="51"/>
-        <source>Show group menu</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="54"/>
         <source>Show the bar of members</source>
         <translation type="unfinished"></translation>
@@ -2023,6 +2018,11 @@ Vui lòng chọn một tên khác nhau.</translation>
     <message>
         <source>Show the bar of chat</source>
         <translation type="obsolete">Hiện thanh chat</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="51"/>
+        <source>Edit group chat</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="62"/>

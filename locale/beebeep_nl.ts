@@ -2039,9 +2039,8 @@ Gebruik aub een andere naam.</translation>
 <context>
     <name>GuiFloatingChat</name>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="51"/>
         <source>Show group menu</source>
-        <translation>Toon groep menu</translation>
+        <translation type="vanished">Toon groep menu</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="54"/>
@@ -2051,6 +2050,11 @@ Gebruik aub een andere naam.</translation>
     <message>
         <source>Show the bar of chat</source>
         <translation type="obsolete">Toon de chatbalk</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="51"/>
+        <source>Edit group chat</source>
+        <translation type="unfinished">Bewerk groepchat</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="62"/>

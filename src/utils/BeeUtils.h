@@ -101,6 +101,9 @@ namespace Bee
 
   QString imagePreviewPath( const QString& source_image_path );
 
+  QVariant comboBoxData( const QComboBox* );
+  bool selectComboBoxData( QComboBox*, const QVariant& );
+
 }
 
 

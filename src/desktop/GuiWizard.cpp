@@ -43,7 +43,7 @@ GuiWizard::GuiWizard( QWidget *parent )
 
 void GuiWizard::loadSettings()
 {
-  mp_lAccount->setText( QString( "%1: %2" ).arg( tr( "Your system account is" ) ).arg( Settings::instance().localUser().accountName() ) );
+  mp_lAccount->setText( QString( "%1: %2\n\n%3" ).arg( tr( "Your system account is" ) ).arg( Settings::instance().localUser().accountName() ).arg( tr( "Press ok to continue or change your username.") ) );
 
   if( Settings::instance().allowEditNickname() )
   {

@@ -1655,7 +1655,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Show group menu</source>
-        <translation>Показати меню групового чату</translation>
+        <translation type="vanished">Показати меню групового чату</translation>
     </message>
     <message>
         <source>Window geometry saved</source>
@@ -1680,6 +1680,10 @@ Please select a different name.</source>
     <message>
         <source>Show chat toolbar</source>
         <translation>Показати панель інструментів чату</translation>
+    </message>
+    <message>
+        <source>Edit group chat</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -2005,9 +2005,13 @@ Please select a different name.</source>
 <context>
     <name>GuiFloatingChat</name>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="51"/>
         <source>Show group menu</source>
-        <translation>顯示群組功能表</translation>
+        <translation type="vanished">顯示群組功能表</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="51"/>
+        <source>Edit group chat</source>
+        <translation type="unfinished">編輯群組聊天</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="54"/>

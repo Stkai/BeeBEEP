@@ -2014,11 +2014,6 @@ Please select a different name.</source>
 <context>
     <name>GuiFloatingChat</name>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="51"/>
-        <source>Show group menu</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="54"/>
         <source>Show the bar of members</source>
         <translation type="unfinished"></translation>
@@ -2026,6 +2021,11 @@ Please select a different name.</source>
     <message>
         <source>Show the bar of chat</source>
         <translation type="obsolete">Prikaži naslov razgovora</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="51"/>
+        <source>Edit group chat</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="62"/>

@@ -2019,9 +2019,8 @@ Velg et annet navn.</translation>
 <context>
     <name>GuiFloatingChat</name>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="51"/>
         <source>Show group menu</source>
-        <translation>Vis gruppemeny</translation>
+        <translation type="vanished">Vis gruppemeny</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="54"/>
@@ -2031,6 +2030,11 @@ Velg et annet navn.</translation>
     <message>
         <source>Show the bar of chat</source>
         <translation type="obsolete">Vis menylinje for samtale</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="51"/>
+        <source>Edit group chat</source>
+        <translation type="unfinished">Rediger gruppesamtale</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="62"/>

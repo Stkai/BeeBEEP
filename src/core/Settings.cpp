@@ -1492,6 +1492,14 @@ void Settings::load()
   sets->beginGroup( "VoiceMessage" );
   m_voiceMessageMaxDuration = qMax( 5, sets->value( "MaxDuration", m_voiceMessageMaxDuration ).toInt() );
   m_useVoicePlayer = sets->value( "UseVoicePlayer", m_useVoicePlayer ).toBool();
+  m_voiceInputDeviceName = sets->value( "VoiceInputDeviceName", QString() ).toString();
+  m_voiceFileContainer = sets->value( "VoiceFileContainer", QString() ).toString();
+  m_voiceCodec = sets->value( "VoiceCodec", QString() ).toString();
+  m_voiceSampleRate = sets->value( "VoiceSampleRate", 0 ).toInt();
+  m_voiceBitRate = sets->value( "VoiceBitRate", 0 ).toInt();
+  m_voiceChannels = sets->value( "VoiceChannels", -1 ).toInt();
+  m_voiceEncodingMode = sets->value( "VoiceEncodingMode", -1 ).toInt();
+  m_voiceEncodingQuality = sets->value( "VoiceEncodingQuality", -1 ).toInt();
   sets->endGroup();
 
   sets->beginGroup( "Plugin" );
@@ -1825,6 +1833,14 @@ void Settings::save()
   sets->beginGroup( "VoiceMessage" );
   sets->setValue( "MaxDuration", m_voiceMessageMaxDuration );
   sets->setValue( "UseVoicePlayer", m_useVoicePlayer );
+  sets->setValue( "VoiceInputDeviceName", m_voiceInputDeviceName );
+  sets->setValue( "VoiceFileContainer", m_voiceFileContainer );
+  sets->setValue( "VoiceCodec", m_voiceCodec );
+  sets->setValue( "VoiceSampleRate", m_voiceSampleRate );
+  sets->setValue( "VoiceBitRate", m_voiceBitRate );
+  sets->setValue( "VoiceChannels", m_voiceChannels );
+  sets->setValue( "VoiceEncodingMode", m_voiceEncodingMode );
+  sets->setValue( "VoiceEncodingQuality", m_voiceEncodingQuality );
   sets->endGroup();
 
   if( !m_pluginSettings.isEmpty() )

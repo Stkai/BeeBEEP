@@ -219,6 +219,7 @@ private slots:
   void onNetworkTestWindowClosed();
 #ifdef BEEBEEP_USE_VOICE_CHAT
   void sendVoiceMessageToChat( VNumber, const QString& );
+  void showVoiceEncoderSettings();
 #endif
   void resumeFileTransfer( VNumber user_id, const FileInfo& );
 
@@ -401,6 +402,7 @@ private:
 
 #ifdef BEEBEEP_USE_VOICE_CHAT
   VoicePlayer* mp_voicePlayer;
+  QMenu* mp_menuVoiceMessage;
 #endif
 };
 

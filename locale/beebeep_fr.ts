@@ -2022,9 +2022,8 @@ Please select a different name.</source>
 <context>
     <name>GuiFloatingChat</name>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="51"/>
         <source>Show group menu</source>
-        <translation>Montrer le menu de groupe</translation>
+        <translation type="vanished">Montrer le menu de groupe</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="54"/>
@@ -2034,6 +2033,11 @@ Please select a different name.</source>
     <message>
         <source>Show the bar of chat</source>
         <translation type="obsolete">Afficher la barre de chat</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="51"/>
+        <source>Edit group chat</source>
+        <translation type="unfinished">Modifier la discussion de groupe</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="62"/>

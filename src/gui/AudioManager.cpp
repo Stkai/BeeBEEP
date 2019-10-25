@@ -32,37 +32,40 @@ AudioManager* AudioManager::mp_instance = Q_NULLPTR;
 AudioManager::AudioManager()
   : mp_sound( Q_NULLPTR )
 #if defined( BEEBEEP_USE_VOICE_CHAT )
-   ,m_defaultVoiceFormat(), m_defaultVoiceEncoderSettings(), m_currentInputDeviceName()
+   , m_defaultInputDeviceName(), m_defaultVoiceEncoderSettings(), m_defaultVoiceFileContainer( "audio/x-wav" )
 {
-  checkAudioDevice();
+  checkDefaultAudioDevice();
 }
 #else
 {}
 #endif
 
 #if defined( BEEBEEP_USE_VOICE_CHAT )
-void AudioManager::checkAudioDevice()
+void AudioManager::checkDefaultAudioDevice()
 {
-  QAudioDeviceInfo dev_info = QAudioDeviceInfo::defaultInputDevice();
-  qDebug() << "AudioManager uses default input device:" << qPrintable( dev_info.deviceName() );
-  QStringList supported_codecs = dev_info.supportedCodecs();
-  qDebug() << "AudioManager supports these input codecs:" << qPrintable( supported_codecs.join( ", " ) );
+  QAudioDeviceInfo input_device = QAudioDeviceInfo::defaultInputDevice();
+  m_defaultInputDeviceName = input_device.deviceName();
+  qDebug() << "AudioManager uses default input device:" << qPrintable( input_device.deviceName() );
+  checkAudioDevice( input_device, &m_defaultVoiceEncoderSettings, &m_defaultVoiceFileContainer );
+}
 
-  QList<int> supported_sample_rates = dev_info.supportedSampleRates();
+void AudioManager::checkAudioDevice( const QAudioDeviceInfo& input_device, QAudioEncoderSettings* audio_settings, QString* file_container )
+{
+  QStringList supported_codecs = input_device.supportedCodecs();
+  qDebug() << "AudioManager supports these input codecs:" << qPrintable( supported_codecs.join( ", " ) );
+  QList<int> supported_sample_rates = input_device.supportedSampleRates();
   QStringList sl;
   foreach( int sr, supported_sample_rates) {
     sl.append( QString::number( sr ) );
   }
   qDebug() << "AudioManager supports these sample rates:" << qPrintable( sl.join( ", " ) );
-
-  QList<int> supported_sample_sizes = dev_info.supportedSampleSizes();
+  QList<int> supported_sample_sizes = input_device.supportedSampleSizes();
   sl.clear();
   foreach( int sr, supported_sample_sizes ) {
     sl.append( QString::number( sr ) );
   }
   qDebug() << "AudioManager supports these sample sizes:" << qPrintable( sl.join( ", " ) );
-
-  QList<int> supported_channels = dev_info.supportedChannelCounts();
+  QList<int> supported_channels = input_device.supportedChannelCounts();
   sl.clear();
   foreach( int sr, supported_channels ) {
     sl.append( QString::number( sr ) );
@@ -76,31 +79,21 @@ void AudioManager::checkAudioDevice()
   audio_format.setSampleType( QAudioFormat::SignedInt );
   audio_format.setByteOrder( QAudioFormat::LittleEndian );
   audio_format.setCodec( "audio/pcm" );
-  if( !dev_info.isFormatSupported( audio_format ) )
+  if( !input_device.isFormatSupported( audio_format ) )
   {
     qWarning() << "AudioManager: default format is not supported. Trying to use nearest...";
-    m_defaultVoiceFormat = dev_info.nearestFormat( audio_format );
+    audio_format = input_device.nearestFormat( audio_format );
   }
-  else
-    m_defaultVoiceFormat = audio_format;
-  qDebug() << "AudioManager uses audio format as default:" << qPrintable( m_defaultVoiceFormat.codec() ) << m_defaultVoiceFormat.sampleRate()
-           << m_defaultVoiceFormat.channelCount() << m_defaultVoiceFormat.sampleSize() << m_defaultVoiceFormat.sampleType() << m_defaultVoiceFormat.byteOrder();
+  qDebug() << "AudioManager uses audio format as default:" << qPrintable( audio_format.codec() ) << audio_format.sampleRate()
+           << audio_format.channelCount() << audio_format.sampleSize() << audio_format.sampleType() << audio_format.byteOrder();
 
   QAudioRecorder audio_recorder;
   supported_codecs = audio_recorder.supportedAudioCodecs();
   QString best_voice_encoder_codec;
+  bool use_speex = false;
   if( !supported_codecs.isEmpty() )
   {
     qDebug() << "AudioManager supports these audio codecs (voice encoder):" << qPrintable( supported_codecs.join( ", " ) );
-    // Looking for OPUS codec first
-    foreach( QString supported_codec, supported_codecs )
-    {
-      if( supported_codec.contains( QLatin1String( "opus" ), Qt::CaseInsensitive ) )
-      {
-        best_voice_encoder_codec = supported_codec;
-        break;
-      }
-    }
     // Looking for SPEEX codec
     if( best_voice_encoder_codec.isEmpty() )
     {
@@ -109,36 +102,33 @@ void AudioManager::checkAudioDevice()
         if( supported_codec.contains( QLatin1String( "speex" ), Qt::CaseInsensitive ) )
         {
           best_voice_encoder_codec = supported_codec;
+          use_speex = true;
           break;
         }
       }
     }
   }
-  else
-    qWarning() << "AudioManager does not support audio codecs (voice encoder)";
 
   if( best_voice_encoder_codec.isEmpty() )
-    best_voice_encoder_codec = m_defaultVoiceFormat.codec();
+    best_voice_encoder_codec = audio_format.codec(); // usually audio/pcm
 
-  QAudioEncoderSettings audio_encoder_settings;
-  audio_encoder_settings.setCodec( best_voice_encoder_codec );
-  audio_encoder_settings.setChannelCount( m_defaultVoiceFormat.channelCount() );
-  audio_encoder_settings.setSampleRate( m_defaultVoiceFormat.sampleRate() );
-  audio_encoder_settings.setQuality( QMultimedia::NormalQuality );
-  audio_encoder_settings.setEncodingMode( QMultimedia::ConstantQualityEncoding );
-  m_defaultVoiceEncoderSettings = audio_encoder_settings;
-  qDebug() << "AudioManager uses voice encoder format as default:" << qPrintable( m_defaultVoiceEncoderSettings.codec() );
-}
-
-QAudioDeviceInfo AudioManager::defaultInputDevice()
-{
-  QAudioDeviceInfo selected_device = QAudioDeviceInfo::defaultInputDevice();
-  if( m_currentInputDeviceName != selected_device.deviceName() )
+  qDebug() << "AudioManager has selected this codec (voice encoder):" << qPrintable( best_voice_encoder_codec );
+  *audio_settings = QAudioEncoderSettings();
+  audio_settings->setCodec( best_voice_encoder_codec );
+  if( use_speex )
   {
-    checkAudioDevice();
-    m_currentInputDeviceName = selected_device.deviceName();
+    audio_settings->setSampleRate( audio_format.sampleRate() );
+    *file_container = "audio/ogg";
   }
-  return selected_device;
+  else
+  {
+    audio_settings->setSampleRate( audio_format.sampleRate() );
+    audio_settings->setChannelCount( audio_format.channelCount() );
+    *file_container = "audio/x-wav";
+  }
+  audio_settings->setQuality( QMultimedia::NormalQuality );
+  audio_settings->setEncodingMode( QMultimedia::ConstantQualityEncoding );
+  qDebug() << "AudioManager has selected this voice container (file):" << qPrintable( *file_container );
 }
 
 QString AudioManager::defaultVoiceContainerFilePrefix()
@@ -148,11 +138,10 @@ QString AudioManager::defaultVoiceContainerFilePrefix()
 
 QString AudioManager::defaultVoiceContainerFileSuffix()
 {
-  if( m_defaultVoiceEncoderSettings.codec().contains( QLatin1String( "opus" ), Qt::CaseInsensitive ) )
+  QString current_file_container = voiceFileContainer();
+  if( current_file_container == "audio/ogg" )
     return QLatin1String( "ogg" );
-  else if( m_defaultVoiceEncoderSettings.codec().contains( QLatin1String( "speex" ), Qt::CaseInsensitive ) )
-    return QLatin1String( "ogg" );
-  else if( m_defaultVoiceEncoderSettings.codec().contains( QLatin1String( "audio/pcm" ), Qt::CaseInsensitive ) )
+  else if( current_file_container == "audio/x-wav" )
     return QLatin1String( "wav" );
   else
     return QLatin1String( "raw" );
@@ -162,7 +151,29 @@ QString AudioManager::createDefaultVoiceMessageFilename()
 {
   QString valid_owner_name = Bee::removeInvalidCharactersForFilePath( Settings::instance().localUser().name().simplified() );
   valid_owner_name.replace( " ", "" );
-  return QString( "%1-%2-%3.%4" ).arg( AudioManager::defaultVoiceContainerFilePrefix() ).arg( valid_owner_name ).arg( Bee::dateTimeStringSuffix( QDateTime::currentDateTime() ) ).arg( AudioManager::defaultVoiceContainerFileSuffix() );
+  return QString( "%1-%2-%3.%4" ).arg( AudioManager::defaultVoiceContainerFilePrefix() ).arg( valid_owner_name ).arg( Bee::dateTimeStringSuffix( QDateTime::currentDateTime() ) ).arg( defaultVoiceContainerFileSuffix() );
+}
+
+QString AudioManager::voiceInputDeviceName() const
+{
+  return Settings::instance().voiceInputDeviceName().isEmpty() ? defaultInputDeviceName() : Settings::instance().voiceInputDeviceName();
+}
+
+QAudioEncoderSettings AudioManager::voiceEncoderSettings() const
+{
+  QAudioEncoderSettings aes;
+  aes.setCodec( Settings::instance().voiceCodec().isEmpty() ? AudioManager::instance().defaultVoiceEncoderSettings().codec() : Settings::instance().voiceCodec() );
+  aes.setSampleRate( Settings::instance().voiceSampleRate() <= 0 ? AudioManager::instance().defaultVoiceEncoderSettings().sampleRate() : Settings::instance().voiceSampleRate() );
+  aes.setBitRate( Settings::instance().voiceBitRate() <= 0 ? AudioManager::instance().defaultVoiceEncoderSettings().bitRate() : Settings::instance().voiceBitRate() );
+  aes.setChannelCount( Settings::instance().voiceChannels() < 0 ? AudioManager::instance().defaultVoiceEncoderSettings().channelCount() : Settings::instance().voiceChannels() );
+  aes.setEncodingMode( Settings::instance().voiceEncodingMode() < 0 ? AudioManager::instance().defaultVoiceEncoderSettings().encodingMode() : static_cast<QMultimedia::EncodingMode>( Settings::instance().voiceEncodingMode() ) );
+  aes.setQuality( Settings::instance().voiceEncodingQuality() < 0 ? AudioManager::instance().defaultVoiceEncoderSettings().quality() : static_cast<QMultimedia::EncodingQuality>( Settings::instance().voiceEncodingQuality() ) );
+  return aes;
+}
+
+QString AudioManager::voiceFileContainer() const
+{
+  return Settings::instance().voiceFileContainer().isEmpty() ? defaultVoiceFileContainer() : Settings::instance().voiceFileContainer();
 }
 
 #endif

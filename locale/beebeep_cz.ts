@@ -2035,9 +2035,8 @@ Vyberte prosím jiné jméno.</translation>
 <context>
     <name>GuiFloatingChat</name>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="51"/>
         <source>Show group menu</source>
-        <translation>Zobrazit nabídku skupin</translation>
+        <translation type="vanished">Zobrazit nabídku skupin</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="54"/>
@@ -2047,6 +2046,11 @@ Vyberte prosím jiné jméno.</translation>
     <message>
         <source>Show the bar of chat</source>
         <translation type="obsolete">Zobrazit lištu chatu</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="51"/>
+        <source>Edit group chat</source>
+        <translation type="unfinished">Upravit skupinový chat</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="62"/>

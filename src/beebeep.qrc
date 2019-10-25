@@ -182,5 +182,6 @@
         <file>images/voice-message.png</file>
         <file>images/encryption-disabled.png</file>
         <file>images/encryption-enabled.png</file>
+        <file>images/audio-settings.png</file>
     </qresource>
 </RCC>

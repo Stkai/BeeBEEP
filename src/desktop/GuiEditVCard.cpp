@@ -56,7 +56,8 @@ QString GuiEditVCard::currentAvatarName() const
   QString current_avatar_name = "";
   if( Settings::instance().useUserFullName() )
     current_avatar_name = QString( "%1 %2" ).arg( mp_leFirstName->text().simplified() ).arg( mp_leLastName->text().simplified() ).trimmed();
-  else
+
+  if( current_avatar_name.isEmpty() )
     current_avatar_name = mp_leNickname->text().simplified();
   return current_avatar_name.isEmpty() ? QLatin1String( "??" ) : current_avatar_name;
 }

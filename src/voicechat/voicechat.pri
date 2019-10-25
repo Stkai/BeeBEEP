@@ -5,11 +5,14 @@ QTPLUGIN += qtaudio_coreaudio qtmedia_audioengine
 
 HEADERS += voicechat/GuiAudioLevel.h \
            voicechat/GuiRecordVoiceMessage.h \
+           voicechat/GuiRecordVoiceMessageSettings.h \
            voicechat/VoicePlayer.h
 
 SOURCES += voicechat/GuiAudioLevel.cpp \
            voicechat/GuiRecordVoiceMessage.cpp \
+           voicechat/GuiRecordVoiceMessageSettings.cpp \
            voicechat/VoicePlayer.cpp \
            core/CoreVoiceChat.cpp
 
-FORMS += voicechat/GuiRecordVoiceMessage.ui
+FORMS += voicechat/GuiRecordVoiceMessage.ui \
+         voicechat/GuiRecordVoiceMessageSettings.ui

@@ -93,7 +93,7 @@ void GuiRecordVoiceMessage::checkAndSetFilePath()
   {
   #ifdef BEEBEEP_DEBUG
     qDebug() << "QAudioRecorder old file path:" << qPrintable( m_filePath );
-    qDebug() << "QAudioRecorder old file path:" << qPrintable( output_file_path );
+    qDebug() << "QAudioRecorder new file path:" << qPrintable( output_file_path );
   #endif
     m_filePath = output_file_path;
   }
@@ -253,8 +253,8 @@ void GuiRecordVoiceMessage::toggleRecord()
     QApplication::setOverrideCursor( Qt::WaitCursor );
     QApplication::processEvents();
     m_fileAccepted = false;
-    AudioManager::instance().defaultInputDevice();
-    mp_audioRecorder->setEncodingSettings( AudioManager::instance().defaultVoiceEncoderSettings() );
+    mp_audioRecorder->setAudioInput( AudioManager::instance().voiceInputDeviceName() );
+    mp_audioRecorder->setEncodingSettings( AudioManager::instance().voiceEncoderSettings(), QVideoEncoderSettings(), AudioManager::instance().voiceFileContainer() );
     mp_audioRecorder->record();
 
     QApplication::restoreOverrideCursor();

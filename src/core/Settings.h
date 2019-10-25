@@ -533,6 +533,22 @@ public:
   inline int voiceMessageMaxDuration() const;
   inline void setUseVoicePlayer( bool );
   inline bool useVoicePlayer() const;
+  inline void setVoiceInputDeviceName( const QString& );
+  inline const QString& voiceInputDeviceName() const;
+  inline void setVoiceFileContainer( const QString& );
+  inline const QString& voiceFileContainer() const;
+  inline void setVoiceCodec( const QString& );
+  inline const QString& voiceCodec() const;
+  inline void setVoiceSampleRate( int );
+  inline int voiceSampleRate() const;
+  inline void setVoiceBitRate( int );
+  inline int voiceBitRate() const;
+  inline void setVoiceChannels( int );
+  inline int voiceChannels() const;
+  inline void setVoiceEncodingMode( int );
+  inline int voiceEncodingMode() const;
+  inline void setVoiceEncodingQuality( int );
+  inline int voiceEncodingQuality() const;
 
   void loadRcFile();
   void clearNativeSettings();
@@ -915,6 +931,14 @@ private:
 
   int m_voiceMessageMaxDuration;
   bool m_useVoicePlayer;
+  QString m_voiceInputDeviceName;
+  QString m_voiceFileContainer;
+  QString m_voiceCodec;
+  int m_voiceSampleRate;
+  int m_voiceBitRate;
+  int m_voiceChannels;
+  int m_voiceEncodingMode;
+  int m_voiceEncodingQuality;
 
 };
 
@@ -1317,6 +1341,22 @@ inline void Settings::setVoiceMessageMaxDuration( int new_value ) { m_voiceMessa
 inline int Settings::voiceMessageMaxDuration() const { return m_voiceMessageMaxDuration;}
 inline void Settings::setUseVoicePlayer( bool new_value ) { m_useVoicePlayer = new_value; }
 inline bool Settings::useVoicePlayer() const { return m_useVoicePlayer; }
+inline void Settings::setVoiceInputDeviceName( const QString& new_value ) { m_voiceInputDeviceName = new_value; }
+inline const QString& Settings::voiceInputDeviceName() const { return m_voiceInputDeviceName; }
+inline void Settings::setVoiceFileContainer( const QString& new_value ) { m_voiceFileContainer = new_value; }
+inline const QString& Settings::voiceFileContainer() const { return m_voiceFileContainer; }
+inline void Settings::setVoiceCodec( const QString& new_value ) { m_voiceCodec = new_value; }
+inline const QString& Settings::voiceCodec() const { return m_voiceCodec; }
+inline void Settings::setVoiceSampleRate( int new_value ) { m_voiceSampleRate = new_value; }
+inline int Settings::voiceSampleRate() const { return m_voiceSampleRate; }
+inline void Settings::setVoiceBitRate( int new_value ) { m_voiceBitRate = new_value; }
+inline int Settings::voiceBitRate() const { return m_voiceBitRate; }
+inline void Settings::setVoiceChannels( int new_value ) { m_voiceChannels = new_value; }
+inline int Settings::voiceChannels() const { return m_voiceChannels; }
+inline void Settings::setVoiceEncodingMode( int new_value ) { m_voiceEncodingMode = new_value; }
+inline int Settings::voiceEncodingMode() const { return m_voiceEncodingMode; }
+inline void Settings::setVoiceEncodingQuality( int new_value ) { m_voiceEncodingQuality = new_value; }
+inline int Settings::voiceEncodingQuality() const { return m_voiceEncodingQuality; }
 inline bool Settings::disableConnectionSocketEncryption() const { return m_disableConnectionSocketEncryption; }
 inline bool Settings::allowNotEncryptedConnectionsAlso() const { return m_allowNotEncryptedConnectionsAlso; }
 inline bool Settings::allowEncryptedConnectionsAlso() const { return m_allowEncryptedConnectionsAlso; }

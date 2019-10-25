@@ -1743,7 +1743,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show group menu</source>
-        <translation>Mostra il menu del gruppo</translation>
+        <translation type="vanished">Mostra il menu del gruppo</translation>
     </message>
     <message>
         <source>Show chat toolbar</source>
@@ -1788,6 +1788,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Loading of saved messages...</source>
         <translation type="obsolete">Caricamento dei messaggi salvati in corso...</translation>
+    </message>
+    <message>
+        <source>Edit group chat</source>
+        <translation>Modifica il gruppo</translation>
     </message>
 </context>
 <context>

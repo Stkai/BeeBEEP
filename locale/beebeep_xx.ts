@@ -1975,7 +1975,7 @@ Please select a different name.</source>
     <name>GuiFloatingChat</name>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="51"/>
-        <source>Show group menu</source>
+        <source>Edit group chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

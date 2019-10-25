@@ -78,6 +78,7 @@
 #include "UserManager.h"
 #ifdef BEEBEEP_USE_VOICE_CHAT
   #include "VoicePlayer.h"
+  #include "GuiRecordVoiceMessageSettings.h"
 #endif
 #ifdef Q_OS_WIN
   #include <Windows.h>
@@ -279,7 +280,7 @@ void GuiMain::raiseOnTop()
 
 void GuiMain::updateWindowTitle()
 {
-  setWindowTitle( QString( "%1 - %2" ).arg( Settings::instance().localUser().name(), Settings::instance().programName() ) );
+  setWindowTitle( QString( "%1 - %2" ).arg( Bee::userNameToShow( Settings::instance().localUser() ), Settings::instance().programName() ) );
 }
 
 static QString RemoveMenuStringFromTooltip( const QString& s )
@@ -687,11 +688,22 @@ void GuiMain::checkViewActions()
   mp_actBroadcast->setEnabled( is_connected );
   mp_actCreateMessage->setEnabled( is_connected && !Settings::instance().disableCreateMessage() );
   mp_actCreateGroupChat->setEnabled( UserManager::instance().userList().size() > 1 );
-  mp_actViewFileSharing->setEnabled( file_transfer_is_active && Settings::instance().enableFileSharing() );
-  mp_actEnableFileSharing->setEnabled( file_transfer_is_active && !Settings::instance().disableFileSharing() );
-  mp_menuExistingFile->setEnabled( file_transfer_is_active );
-  mp_actConfirmDownload->setEnabled( file_transfer_is_active );
-  mp_actSelectDownloadFolder->setEnabled( file_transfer_is_active );
+  mp_actViewFileTransfer->setEnabled( Settings::instance().enableFileTransfer() );
+  mp_actViewFileSharing->setEnabled( file_transfer_is_active && Settings::instance().enableFileSharing() && !Settings::instance().disableFileSharing() );
+  if( mp_menuFileTransferSettings->isEnabled() )
+  {
+    foreach( QAction* act, mp_menuFileTransferSettings->actions() )
+    {
+      if( act->data().toInt() == 12 )
+        continue;
+      act->setEnabled( Settings::instance().enableFileTransfer() );
+    }
+  }
+  mp_actEnableFileSharing->setEnabled( Settings::instance().enableFileTransfer() && !Settings::instance().disableFileSharing() );
+
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  mp_menuVoiceMessage->setEnabled( Settings::instance().enableFileTransfer() );
+#endif
 
   showDefaultServerPortInMenu();
 
@@ -1106,23 +1118,6 @@ void GuiMain::createMenus()
   mp_menuChatSettings->addSeparator();
   mp_menuChatSettings->addAction( IconManager::instance().icon( "refused-chat.png" ), tr( "Blocked chats" ) + QString( "..." ), this, SLOT( showRefusedChats() ) );
 
-#ifdef BEEBEEP_USE_VOICE_CHAT
-  QMenu* menu_voice_message = new QMenu( tr( "Voice message" ), this );
-  menu_voice_message->setIcon( IconManager::instance().icon( "microphone.png" ) );
-  menu_voice_message->setDisabled( Settings::instance().disableVoiceMessages() );
-  mp_menuSettings->addMenu( menu_voice_message );
-  act = menu_voice_message->addAction( IconManager::instance().icon( "timer.png" ), tr( "Maximum duration" ) + QString( "..." ), this, SLOT( settingsChanged() ) );
-  act->setData( 94 );
-  #ifndef BEEBEEP_USE_VOICE_CHAT
-    act->setDisabled( true );
-  #endif
-  menu_voice_message->addSeparator();
-  act = menu_voice_message->addAction( tr( "Use the integrated voice message player" ) + QString( " (beta)" ), this, SLOT( settingsChanged() ) );
-  act->setCheckable( true );
-  act->setChecked( Settings::instance().useVoicePlayer() );
-  act->setData( 95 );
-#endif
-
   mp_menuFileTransferSettings = new QMenu( tr( "File transfer" ), this );
   mp_menuFileTransferSettings->setIcon( IconManager::instance().icon( "file-transfer.png" ) );
   mp_menuFileTransferSettings->setDisabled( Settings::instance().disableFileTransfer() );
@@ -1185,6 +1180,22 @@ void GuiMain::createMenus()
   act->setData( 4 );
   mp_menuFileTransferSettings->addSeparator();
   mp_actSelectDownloadFolder = mp_menuFileTransferSettings->addAction( IconManager::instance().icon( "download-folder.png" ), tr( "Select download folder" ) + QString( "..." ), this, SLOT( selectDownloadDirectory() ) );
+
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  mp_menuVoiceMessage = new QMenu( tr( "Voice message" ), this );
+  mp_menuVoiceMessage->setIcon( IconManager::instance().icon( "microphone.png" ) );
+  mp_menuVoiceMessage->setDisabled( Settings::instance().disableVoiceMessages() );
+  mp_menuSettings->addMenu( mp_menuVoiceMessage );
+  act = mp_menuVoiceMessage->addAction( IconManager::instance().icon( "audio-settings.png" ), tr( "Voice encoder" ) + QString( "..." ), this, SLOT( showVoiceEncoderSettings() ) );
+  mp_menuVoiceMessage->addSeparator();
+  act = mp_menuVoiceMessage->addAction( IconManager::instance().icon( "timer.png" ), tr( "Maximum duration" ) + QString( "..." ), this, SLOT( settingsChanged() ) );
+  act->setData( 94 );
+  mp_menuVoiceMessage->addSeparator();
+  act = mp_menuVoiceMessage->addAction( tr( "Use the integrated voice message player" ) + QString( " (beta)" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().useVoicePlayer() );
+  act->setData( 95 );
+#endif
 
   mp_menuNotificationSettings = new QMenu( tr( "Notifications" ), this );
   mp_menuNotificationSettings->setIcon( IconManager::instance().icon( "bell.png" ) );
@@ -3584,6 +3595,7 @@ void GuiMain::onUserChanged( const User& u )
   if( u.isLocal() )
   {
     updateStatusIcon();
+    updateWindowTitle();
   }
   else
   {
@@ -4717,19 +4729,19 @@ void GuiMain::setFileTransferEnabled( bool enable )
   if( Settings::instance().disableFileTransfer() )
     return;
 
- Settings::instance().setEnableFileTransfer( enable );
- if( !enable )
- {
-   Settings::instance().setEnableFileSharing( false );
-   Settings::instance().setUseShareBox( false );
-   mp_actEnableFileSharing->setChecked( false );
-   beeCore->stopFileTransferServer();
-   QMetaObject::invokeMethod( beeCore, "buildLocalShareList", Qt::QueuedConnection );
- }
- else
-   beeCore->startFileTransferServer();
+  Settings::instance().setEnableFileTransfer( enable );
+  if( !enable )
+  {
+    Settings::instance().setEnableFileSharing( false );
+    Settings::instance().setUseShareBox( false );
+    mp_actEnableFileSharing->setChecked( false );
+    beeCore->stopFileTransferServer();
+    QMetaObject::invokeMethod( beeCore, "buildLocalShareList", Qt::QueuedConnection );
+  }
+  else
+    beeCore->startFileTransferServer();
 
- checkViewActions();
+  checkViewActions();
 }
 
 void GuiMain::setFileSharingEnabled( bool enable )
@@ -5171,6 +5183,17 @@ void GuiMain::loadStyle()
 void GuiMain::sendVoiceMessageToChat( VNumber chat_id, const QString& file_path )
 {
   beeCore->sendVoiceMessageToChat( chat_id, file_path );
+}
+
+void GuiMain::showVoiceEncoderSettings()
+{
+  GuiRecordVoiceMessageSettings grvm( this );
+  grvm.setModal( true );
+  grvm.init();
+  grvm.loadSettings();
+  grvm.show();
+  if( grvm.exec() == QDialog::Accepted )
+    Settings::instance().save();
 }
 #endif
 
