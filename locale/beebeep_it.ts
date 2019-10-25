@@ -3541,6 +3541,10 @@ Inserisci un nome differente.</translation>
         <source>Please select the number of days that partially downloaded files can remain cached.</source>
         <translation>Seleziona il numero di giorni in cui i file scaricati parzialmente possono restare memorizzati nella cache.</translation>
     </message>
+    <message>
+        <source>Voice encoder</source>
+        <translation>Codificatore vocale</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -4053,6 +4057,72 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Volume</source>
         <translation>Volume</translation>
+    </message>
+</context>
+<context>
+    <name>GuiRecordVoiceMessageSettings</name>
+    <message>
+        <source>Voice encoder settings</source>
+        <translation>Impostazioni del codificatore vocale</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation>Predefinito</translation>
+    </message>
+</context>
+<context>
+    <name>GuiRecordVoiceMessageSettingsDialog</name>
+    <message>
+        <source>Encoding mode</source>
+        <translation>Modalità di codifica</translation>
+    </message>
+    <message>
+        <source>Constant bit rate</source>
+        <translation>Bit rate costante</translation>
+    </message>
+    <message>
+        <source>Average bit tate</source>
+        <translation>Bit rate mediato</translation>
+    </message>
+    <message>
+        <source>Constant quality</source>
+        <translation>Qualità costante</translation>
+    </message>
+    <message>
+        <source>Two pass</source>
+        <translation>Due passaggi</translation>
+    </message>
+    <message>
+        <source>Input device</source>
+        <translation>Periferica di ingresso</translation>
+    </message>
+    <message>
+        <source>Audio codec</source>
+        <translation>Codec audio</translation>
+    </message>
+    <message>
+        <source>File container</source>
+        <translation>Contenitore</translation>
+    </message>
+    <message>
+        <source>Sample rate</source>
+        <translation>Sample rate</translation>
+    </message>
+    <message>
+        <source>Channels</source>
+        <translation>Canali</translation>
+    </message>
+    <message>
+        <source>Restore to system defaults</source>
+        <translation>Ripristina valori predefiniti</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation>Ok</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Annulla</translation>
     </message>
 </context>
 <context>
@@ -5233,6 +5303,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Disabled by system administrator</source>
         <translation>Disabilitato dall&apos;amministratore di sistema</translation>
+    </message>
+    <message>
+        <source>Press ok to continue or change your username.</source>
+        <translation>Ok per continuare o cambia il tuo nome utente.</translation>
     </message>
 </context>
 <context>
