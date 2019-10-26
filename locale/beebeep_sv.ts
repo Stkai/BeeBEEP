@@ -4707,23 +4707,23 @@ Välj ett annat namn.</translation>
 <context>
     <name>GuiRecordVoiceMessage</name>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="176"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="303"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="170"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="308"/>
         <source>Recording</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="180"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="174"/>
         <source>Paused</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="184"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="178"/>
         <source>Ready</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="145"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="139"/>
         <source>Stopped. Reached the maximum duration of the voice message</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4733,58 +4733,58 @@ Välj ett annat namn.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="53"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="47"/>
         <source>Click to start recording your message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="207"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="201"/>
         <source>Pause</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="213"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="207"/>
         <source>Resume</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="218"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="212"/>
         <source>Record</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="236"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="230"/>
         <source>The message could not be recorded because an error has occurred: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="245"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="239"/>
         <source>Do you want to start recording your voice message again?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="246"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="240"/>
         <source>Yes, clean and restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="246"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="240"/>
         <source>Cancel</source>
         <translation type="unfinished">Avbryt</translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="251"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="268"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="245"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="273"/>
         <source>Please wait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="293"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="298"/>
         <source>Volume</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="293"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="298"/>
         <source>muted</source>
         <translation type="unfinished"></translation>
     </message>

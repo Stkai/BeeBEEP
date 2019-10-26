@@ -43,12 +43,6 @@ GuiRecordVoiceMessage::GuiRecordVoiceMessage( QWidget *parent )
   connect( mp_audioProbe, SIGNAL( audioBufferProbed( const QAudioBuffer& ) ), this, SLOT( processAudioBuffer( const QAudioBuffer& ) ) );
   mp_audioProbe->setSource( mp_audioRecorder );
 
-  QString file_path_tmp = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().cacheFolder() )
-                                                                                 .arg( AudioManager::instance().createDefaultVoiceMessageFilename() ) );
-  m_filePath = Bee::uniqueFilePath( file_path_tmp, false );
-  if( !mp_audioRecorder->setOutputLocation( QUrl::fromLocalFile( m_filePath ) ) )
-    qWarning() << "QAudioRecorder is unable to set output location to" << qPrintable( m_filePath );
-
   mp_progressBar->setMinimum( 0 );
   mp_lStatus->setText( tr( "Click to start recording your message" ) );
   mp_pbSend->setEnabled( false );
@@ -254,7 +248,18 @@ void GuiRecordVoiceMessage::toggleRecord()
     QApplication::processEvents();
     m_fileAccepted = false;
     mp_audioRecorder->setAudioInput( AudioManager::instance().voiceInputDeviceName() );
-    mp_audioRecorder->setEncodingSettings( AudioManager::instance().voiceEncoderSettings(), QVideoEncoderSettings(), AudioManager::instance().voiceFileContainer() );
+    mp_audioRecorder->setEncodingSettings( AudioManager::instance().voiceMessageEncoderSettings(), QVideoEncoderSettings(), AudioManager::instance().voiceMessageFileContainer() );
+    QString new_path = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().cacheFolder() ).arg( AudioManager::instance().createDefaultVoiceMessageFilename( AudioManager::instance().voiceMessageFileContainer() ) ) );
+    if( !m_filePath.isEmpty() && m_filePath != new_path )
+    {
+      QFile file_to_check( m_filePath );
+      if( file_to_check.exists() )
+        if( !file_to_check.remove() )
+          Settings::instance().addTemporaryFilePath( m_filePath );
+    }
+    m_filePath = new_path;
+    if( !mp_audioRecorder->setOutputLocation( QUrl::fromLocalFile( m_filePath ) ) )
+      qWarning() << "QAudioRecorder is unable to set output location to" << qPrintable( m_filePath );
     mp_audioRecorder->record();
 
     QApplication::restoreOverrideCursor();

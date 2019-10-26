@@ -114,8 +114,8 @@ void GuiRecordVoiceMessageSettings::encodingModeChanged( int button_clicked )
 void GuiRecordVoiceMessageSettings::loadSettings()
 {
   m_currentInputDevice = AudioManager::instance().voiceInputDeviceName();
-  m_currentFileContainer = AudioManager::instance().voiceFileContainer();
-  m_currentAudioEncoderSettings = AudioManager::instance().voiceEncoderSettings();
+  m_currentFileContainer = AudioManager::instance().voiceMessageFileContainer();
+  m_currentAudioEncoderSettings = AudioManager::instance().voiceMessageEncoderSettings();
   updateGui();
 }
 
@@ -152,7 +152,7 @@ void GuiRecordVoiceMessageSettings::saveSettings()
   m_currentInputDevice = Bee::comboBoxData( mp_comboInputDevice ).toString();
   Settings::instance().setVoiceInputDeviceName( !m_currentInputDevice.isEmpty() && m_currentInputDevice == AudioManager::instance().defaultInputDeviceName() ? QString() : m_currentInputDevice );
   m_currentFileContainer = Bee::comboBoxData( mp_comboContainer ).toString();
-  Settings::instance().setVoiceFileContainer( !m_currentFileContainer.isEmpty() && m_currentFileContainer == AudioManager::instance().voiceFileContainer() ? QString() : m_currentFileContainer );
+  Settings::instance().setVoiceFileMessageContainer( !m_currentFileContainer.isEmpty() && m_currentFileContainer == AudioManager::instance().voiceMessageFileContainer() ? QString() : m_currentFileContainer );
   QAudioEncoderSettings aes;
   aes.setCodec( Bee::comboBoxData( mp_comboAudioCodec ).toString() );
   aes.setSampleRate( Bee::comboBoxData( mp_comboSampleRate ).toInt());
@@ -161,20 +161,20 @@ void GuiRecordVoiceMessageSettings::saveSettings()
   aes.setEncodingMode( static_cast<QMultimedia::EncodingMode>( mp_bgEncodingMode->checkedId() ) );
   aes.setQuality( static_cast<QMultimedia::EncodingQuality>( mp_sliderQuality->value() ) );
   m_currentAudioEncoderSettings = aes;
-  Settings::instance().setVoiceCodec( aes.codec() == AudioManager::instance().defaultVoiceEncoderSettings().codec() ? QString() : aes.codec() );
-  Settings::instance().setVoiceSampleRate( aes.sampleRate() == AudioManager::instance().defaultVoiceEncoderSettings().sampleRate() ? 0 : aes.sampleRate() );
-  Settings::instance().setVoiceBitRate( aes.bitRate() == AudioManager::instance().defaultVoiceEncoderSettings().bitRate() ? 0 : aes.bitRate() );
-  Settings::instance().setVoiceChannels( aes.channelCount() == AudioManager::instance().defaultVoiceEncoderSettings().channelCount() ? -1 : aes.channelCount() );
-  Settings::instance().setVoiceEncodingMode( aes.encodingMode() == AudioManager::instance().defaultVoiceEncoderSettings().encodingMode() ? -1 : aes.encodingMode() );
-  Settings::instance().setVoiceEncodingQuality( aes.quality() == AudioManager::instance().defaultVoiceEncoderSettings().quality() ? -1 : aes.quality() );
+  Settings::instance().setVoiceCodec( aes.codec() == AudioManager::instance().defaultVoiceMessageEncoderSettings().codec() ? QString() : aes.codec() );
+  Settings::instance().setVoiceSampleRate( aes.sampleRate() == AudioManager::instance().defaultVoiceMessageEncoderSettings().sampleRate() ? 0 : aes.sampleRate() );
+  Settings::instance().setVoiceBitRate( aes.bitRate() == AudioManager::instance().defaultVoiceMessageEncoderSettings().bitRate() ? 0 : aes.bitRate() );
+  Settings::instance().setVoiceChannels( aes.channelCount() == AudioManager::instance().defaultVoiceMessageEncoderSettings().channelCount() ? -1 : aes.channelCount() );
+  Settings::instance().setVoiceEncodingMode( aes.encodingMode() == AudioManager::instance().defaultVoiceMessageEncoderSettings().encodingMode() ? -1 : aes.encodingMode() );
+  Settings::instance().setVoiceEncodingQuality( aes.quality() == AudioManager::instance().defaultVoiceMessageEncoderSettings().quality() ? -1 : aes.quality() );
   accept();
 }
 
 void GuiRecordVoiceMessageSettings::resetSettings()
 {
   m_currentInputDevice = AudioManager::instance().defaultInputDeviceName();
-  m_currentFileContainer = AudioManager::instance().voiceFileContainer();
-  m_currentAudioEncoderSettings = AudioManager::instance().defaultVoiceEncoderSettings();
+  m_currentFileContainer = AudioManager::instance().voiceMessageFileContainer();
+  m_currentAudioEncoderSettings = AudioManager::instance().defaultVoiceMessageEncoderSettings();
   updateGui();
 }
 

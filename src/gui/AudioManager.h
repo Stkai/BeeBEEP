@@ -45,12 +45,12 @@ public:
 #if defined( BEEBEEP_USE_VOICE_CHAT )
   void checkAudioDevice( const QAudioDeviceInfo& input_device, QAudioEncoderSettings* audio_settings, QString* file_container );
   QString voiceInputDeviceName() const;
-  QAudioEncoderSettings voiceEncoderSettings() const;
-  QString voiceFileContainer() const;
+  QAudioEncoderSettings voiceMessageEncoderSettings() const;
+  QString voiceMessageFileContainer() const;
   inline const QString& defaultInputDeviceName() const;
-  inline const QAudioEncoderSettings& defaultVoiceEncoderSettings() const;
-  inline const QString& defaultVoiceFileContainer() const;
-  QString createDefaultVoiceMessageFilename();
+  inline const QAudioEncoderSettings& defaultVoiceMessageEncoderSettings() const;
+  inline const QString& defaultVoiceMessageFileContainer() const;
+  QString createDefaultVoiceMessageFilename( const QString& container_name );
 #endif
 
   static AudioManager& instance()
@@ -74,8 +74,11 @@ protected:
   AudioManager();
 #if defined( BEEBEEP_USE_VOICE_CHAT )
   void checkDefaultAudioDevice();
-  QString defaultVoiceContainerFilePrefix();
-  QString defaultVoiceContainerFileSuffix();
+  QString defaultVoiceMessageContainerFilePrefix() const;
+  QString defaultVoiceMessageContainerFileSuffix() const;
+  bool findBestVoiceMessageCodecContainers( const QStringList& codecs, const QStringList& containers, QString* best_codec, QString* best_container ) const;
+  inline QString findBestVoiceMessageContainer( const QString& codec ) const;
+  inline QString voiceMessageContainerExtension( const QString& container ) const;
 #endif
 
 private:
@@ -88,8 +91,10 @@ private:
 #endif
 #if defined( BEEBEEP_USE_VOICE_CHAT )
   QString m_defaultInputDeviceName;
-  QAudioEncoderSettings m_defaultVoiceEncoderSettings;
-  QString m_defaultVoiceFileContainer;
+  QAudioEncoderSettings m_defaultVoiceMessageEncoderSettings;
+  QString m_defaultVoiceMessageFileContainer;
+  QMap<QString, QString> m_voiceMessageCodecContainers;
+  QMap<QString, QString> m_voiceMessageCodecContainerExtensions;
 #endif
 };
 
@@ -97,7 +102,10 @@ private:
 // Inline Functions
 #if defined( BEEBEEP_USE_VOICE_CHAT )
 inline const QString& AudioManager::defaultInputDeviceName() const { return m_defaultInputDeviceName; }
-inline const QAudioEncoderSettings& AudioManager::defaultVoiceEncoderSettings() const { return m_defaultVoiceEncoderSettings; }
-inline const QString& AudioManager::defaultVoiceFileContainer() const { return m_defaultVoiceFileContainer; }
+inline const QAudioEncoderSettings& AudioManager::defaultVoiceMessageEncoderSettings() const { return m_defaultVoiceMessageEncoderSettings; }
+inline const QString& AudioManager::defaultVoiceMessageFileContainer() const { return m_defaultVoiceMessageFileContainer; }
+inline QString AudioManager::findBestVoiceMessageContainer( const QString& codec ) const {return m_voiceMessageCodecContainers.value( codec, QString() ); }
+inline QString AudioManager::voiceMessageContainerExtension( const QString& container ) const { return m_voiceMessageCodecContainerExtensions.value( container, QString() ); }
 #endif
+
 #endif // BEEBEEP_AUDIOMANAGER_H

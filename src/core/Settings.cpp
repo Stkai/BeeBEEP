@@ -1493,7 +1493,7 @@ void Settings::load()
   m_voiceMessageMaxDuration = qMax( 5, sets->value( "MaxDuration", m_voiceMessageMaxDuration ).toInt() );
   m_useVoicePlayer = sets->value( "UseVoicePlayer", m_useVoicePlayer ).toBool();
   m_voiceInputDeviceName = sets->value( "VoiceInputDeviceName", QString() ).toString();
-  m_voiceFileContainer = sets->value( "VoiceFileContainer", QString() ).toString();
+  m_voiceFileMessageContainer = sets->value( "VoiceFileMessageContainer", QString() ).toString();
   m_voiceCodec = sets->value( "VoiceCodec", QString() ).toString();
   m_voiceSampleRate = sets->value( "VoiceSampleRate", 0 ).toInt();
   m_voiceBitRate = sets->value( "VoiceBitRate", 0 ).toInt();
@@ -1834,7 +1834,7 @@ void Settings::save()
   sets->setValue( "MaxDuration", m_voiceMessageMaxDuration );
   sets->setValue( "UseVoicePlayer", m_useVoicePlayer );
   sets->setValue( "VoiceInputDeviceName", m_voiceInputDeviceName );
-  sets->setValue( "VoiceFileContainer", m_voiceFileContainer );
+  sets->setValue( "VoiceFileMessageContainer", m_voiceFileMessageContainer );
   sets->setValue( "VoiceCodec", m_voiceCodec );
   sets->setValue( "VoiceSampleRate", m_voiceSampleRate );
   sets->setValue( "VoiceBitRate", m_voiceBitRate );

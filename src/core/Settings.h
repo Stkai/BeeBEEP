@@ -535,8 +535,8 @@ public:
   inline bool useVoicePlayer() const;
   inline void setVoiceInputDeviceName( const QString& );
   inline const QString& voiceInputDeviceName() const;
-  inline void setVoiceFileContainer( const QString& );
-  inline const QString& voiceFileContainer() const;
+  inline void setVoiceFileMessageContainer( const QString& );
+  inline const QString& voiceFileMessageContainer() const;
   inline void setVoiceCodec( const QString& );
   inline const QString& voiceCodec() const;
   inline void setVoiceSampleRate( int );
@@ -932,7 +932,7 @@ private:
   int m_voiceMessageMaxDuration;
   bool m_useVoicePlayer;
   QString m_voiceInputDeviceName;
-  QString m_voiceFileContainer;
+  QString m_voiceFileMessageContainer;
   QString m_voiceCodec;
   int m_voiceSampleRate;
   int m_voiceBitRate;
@@ -1343,8 +1343,8 @@ inline void Settings::setUseVoicePlayer( bool new_value ) { m_useVoicePlayer = n
 inline bool Settings::useVoicePlayer() const { return m_useVoicePlayer; }
 inline void Settings::setVoiceInputDeviceName( const QString& new_value ) { m_voiceInputDeviceName = new_value; }
 inline const QString& Settings::voiceInputDeviceName() const { return m_voiceInputDeviceName; }
-inline void Settings::setVoiceFileContainer( const QString& new_value ) { m_voiceFileContainer = new_value; }
-inline const QString& Settings::voiceFileContainer() const { return m_voiceFileContainer; }
+inline void Settings::setVoiceFileMessageContainer( const QString& new_value ) { m_voiceFileMessageContainer = new_value; }
+inline const QString& Settings::voiceFileMessageContainer() const { return m_voiceFileMessageContainer; }
 inline void Settings::setVoiceCodec( const QString& new_value ) { m_voiceCodec = new_value; }
 inline const QString& Settings::voiceCodec() const { return m_voiceCodec; }
 inline void Settings::setVoiceSampleRate( int new_value ) { m_voiceSampleRate = new_value; }
