@@ -72,6 +72,22 @@ bool AudioManager::findBestVoiceMessageCodecContainers( const QStringList& codec
   if( codecs.isEmpty() || containers.isEmpty() )
     return false;
 
+  if( !Settings::instance().useSystemVoiceEncoderSettings() )
+  {
+    QString default_codec_name = QLatin1String( "audio/pcm" );
+    if( codecs.contains( default_codec_name, Qt::CaseInsensitive ) )
+    {
+      *best_codec = default_codec_name;
+      QString default_codec_container = findBestVoiceMessageContainer( default_codec_name );
+      if( containers.contains( default_codec_container, Qt::CaseInsensitive ) )
+      {
+        *best_container = default_codec_container;
+        return true;
+      }
+    }
+    return false;
+  }
+
   foreach( QString codec_name, m_voiceMessageCodecContainers.keys() )
   {
     if( codecs.contains( codec_name, Qt::CaseInsensitive ) )
@@ -134,7 +150,7 @@ void AudioManager::checkAudioDevice( const QAudioDeviceInfo& input_device, QAudi
 
   QString best_voice_encoder_codec;
   QString best_voice_encoded_container;
-  bool best_codec_found = Settings::instance().useSystemVoiceEncoderSettings() ? findBestVoiceMessageCodecContainers( supported_codecs, supported_containers, &best_voice_encoder_codec, &best_voice_encoded_container ) : false;
+  bool best_codec_found = findBestVoiceMessageCodecContainers( supported_codecs, supported_containers, &best_voice_encoder_codec, &best_voice_encoded_container );
   if( best_codec_found )
   {
     qDebug() << "AudioManager has selected this codec (voice encoder):" << qPrintable( best_voice_encoder_codec );

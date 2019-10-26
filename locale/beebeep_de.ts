@@ -140,7 +140,7 @@
     </message>
     <message>
         <source>%1 shares this information</source>
-        <translation>%1 teilt diese Informationen</translation>
+        <translation type="vanished">%1 teilt diese Informationen</translation>
     </message>
     <message>
         <source>You have changed your nickname from %1 to %2.</source>
@@ -156,7 +156,7 @@
     </message>
     <message>
         <source>You share this information</source>
-        <translation>Du gibst diese Informationen frei</translation>
+        <translation type="vanished">Du gibst diese Informationen frei</translation>
     </message>
     <message>
         <source>%1 Downloading %2 from %3.</source>
@@ -3843,6 +3843,14 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Default</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Use custom encoder settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>expert users only</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiRecordVoiceMessageSettingsDialog</name>
@@ -3897,6 +3905,18 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>Cancel</source>
         <translation type="unfinished">Abbrechen</translation>
+    </message>
+    <message>
+        <source>Use system voice encoder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use custom settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Voice message recorder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

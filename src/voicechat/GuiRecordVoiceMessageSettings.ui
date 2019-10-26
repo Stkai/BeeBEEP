@@ -204,7 +204,7 @@
       </size>
      </property>
      <property name="title">
-      <string>Voice recorder</string>
+      <string>Voice message recorder</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

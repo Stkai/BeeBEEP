@@ -140,7 +140,7 @@
     </message>
     <message>
         <source>%1 shares this information</source>
-        <translation>%1 ділиться цією інформацією</translation>
+        <translation type="vanished">%1 ділиться цією інформацією</translation>
     </message>
     <message>
         <source>You have changed your nickname from %1 to %2.</source>
@@ -160,7 +160,7 @@
     </message>
     <message>
         <source>You share this information</source>
-        <translation>Ви ділитесь цією інформацією</translation>
+        <translation type="vanished">Ви ділитесь цією інформацією</translation>
     </message>
     <message>
         <source>%1 Downloading %2 from %3.</source>
@@ -3799,6 +3799,14 @@ Please select a different name.</source>
         <source>Default</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Use custom encoder settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>expert users only</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiRecordVoiceMessageSettingsDialog</name>
@@ -3852,6 +3860,18 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use system voice encoder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use custom settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Voice message recorder</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

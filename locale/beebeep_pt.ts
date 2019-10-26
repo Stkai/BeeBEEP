@@ -653,22 +653,20 @@
         <translation>%1trocou o apelido em %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="118"/>
         <source>You share this information</source>
-        <translation>Informação Compartilhada</translation>
+        <translation type="vanished">Informação Compartilhada</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="118"/>
         <source>%1 shares this information</source>
-        <translation>%1 compartilha esta informação</translation>
+        <translation type="vanished">%1 compartilha esta informação</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="341"/>
+        <location filename="../src/core/CoreUser.cpp" line="316"/>
         <source>is removed from favorites</source>
         <translation>Removido de Favoritos</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="347"/>
+        <location filename="../src/core/CoreUser.cpp" line="322"/>
         <source>is added to favorites</source>
         <translation>Adicionado a Favoritos</translation>
     </message>
@@ -4866,12 +4864,22 @@ Selecione um nome diferente.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="57"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="61"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="65"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="69"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="74"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="125"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="40"/>
+        <source>Use custom encoder settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="40"/>
+        <source>expert users only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="59"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="63"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="67"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="71"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="76"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="135"/>
         <source>Default</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4879,67 +4887,82 @@ Selecione um nome diferente.</translation>
 <context>
     <name>GuiRecordVoiceMessageSettingsDialog</name>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="17"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="61"/>
         <source>Encoding mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="39"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="83"/>
         <source>Constant bit rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="46"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="90"/>
         <source>Average bit tate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="66"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="104"/>
         <source>Constant quality</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="76"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="114"/>
         <source>Two pass</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="127"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="207"/>
+        <source>Voice message recorder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="219"/>
         <source>Input device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="147"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="239"/>
         <source>Audio codec</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="167"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="259"/>
         <source>File container</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="187"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="279"/>
         <source>Sample rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="207"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="299"/>
         <source>Channels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="231"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="165"/>
         <source>Restore to system defaults</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="251"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="32"/>
+        <source>Use system voice encoder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="52"/>
+        <source>Use custom settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="185"/>
         <source>Ok</source>
         <translation type="unfinished">OK</translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="258"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="192"/>
         <source>Cancel</source>
         <translation type="unfinished">Cancelar</translation>
     </message>
@@ -6757,7 +6780,7 @@ Selecione um nome diferente.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2286"/>
+        <location filename="../src/core/Settings.cpp" line="2292"/>
         <source>Autoresponder</source>
         <translation type="unfinished"></translation>
     </message>

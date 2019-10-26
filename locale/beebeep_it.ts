@@ -172,11 +172,11 @@
     </message>
     <message>
         <source>You share this information</source>
-        <translation>Tu condividi questa informazione</translation>
+        <translation type="vanished">Tu condividi questa informazione</translation>
     </message>
     <message>
         <source>%1 shares this information</source>
-        <translation>%1 condivide questa informazione</translation>
+        <translation type="vanished">%1 condivide questa informazione</translation>
     </message>
     <message>
         <source>Happy birthday to Marco Mastroddi: %1 years old today! Cheers!!!</source>
@@ -4069,6 +4069,14 @@ Inserisci un nome differente.</translation>
         <source>Default</source>
         <translation>Predefinito</translation>
     </message>
+    <message>
+        <source>Use custom encoder settings</source>
+        <translation>Usa le opzioni personalizzate</translation>
+    </message>
+    <message>
+        <source>expert users only</source>
+        <translation>solo per utenti esperti</translation>
+    </message>
 </context>
 <context>
     <name>GuiRecordVoiceMessageSettingsDialog</name>
@@ -4123,6 +4131,22 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Cancel</source>
         <translation>Annulla</translation>
+    </message>
+    <message>
+        <source>Use system voice encoder</source>
+        <translation>Usa il codificatore audio di sistema</translation>
+    </message>
+    <message>
+        <source>Use custom settings</source>
+        <translation>Usa le opzioni personalizzate</translation>
+    </message>
+    <message>
+        <source>Voice recorder</source>
+        <translation type="vanished">Registratore messaggi vocali</translation>
+    </message>
+    <message>
+        <source>Voice message recorder</source>
+        <translation>Registratore messaggi vocali</translation>
     </message>
 </context>
 <context>
