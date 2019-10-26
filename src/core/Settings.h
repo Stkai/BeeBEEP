@@ -549,6 +549,10 @@ public:
   inline int voiceEncodingMode() const;
   inline void setVoiceEncodingQuality( int );
   inline int voiceEncodingQuality() const;
+  inline void setUseCustomVoiceEncoderSettings( bool );
+  inline bool useCustomVoiceEncoderSettings() const;
+  inline void setUseSystemVoiceEncoderSettings( bool );
+  inline bool useSystemVoiceEncoderSettings() const;
 
   void loadRcFile();
   void clearNativeSettings();
@@ -939,6 +943,8 @@ private:
   int m_voiceChannels;
   int m_voiceEncodingMode;
   int m_voiceEncodingQuality;
+  bool m_useCustomVoiceEncoderSettings;
+  bool m_useSystemVoiceEncoderSettings;
 
 };
 
@@ -1357,6 +1363,10 @@ inline void Settings::setVoiceEncodingMode( int new_value ) { m_voiceEncodingMod
 inline int Settings::voiceEncodingMode() const { return m_voiceEncodingMode; }
 inline void Settings::setVoiceEncodingQuality( int new_value ) { m_voiceEncodingQuality = new_value; }
 inline int Settings::voiceEncodingQuality() const { return m_voiceEncodingQuality; }
+inline void Settings::setUseCustomVoiceEncoderSettings( bool new_value ) { m_useCustomVoiceEncoderSettings = new_value; }
+inline bool Settings::useCustomVoiceEncoderSettings() const { return m_useCustomVoiceEncoderSettings; }
+inline void Settings::setUseSystemVoiceEncoderSettings( bool new_value ) { m_useSystemVoiceEncoderSettings = new_value; }
+inline bool Settings::useSystemVoiceEncoderSettings() const { return m_useSystemVoiceEncoderSettings; }
 inline bool Settings::disableConnectionSocketEncryption() const { return m_disableConnectionSocketEncryption; }
 inline bool Settings::allowNotEncryptedConnectionsAlso() const { return m_allowNotEncryptedConnectionsAlso; }
 inline bool Settings::allowEncryptedConnectionsAlso() const { return m_allowEncryptedConnectionsAlso; }

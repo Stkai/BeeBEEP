@@ -134,20 +134,20 @@ void AudioManager::checkAudioDevice( const QAudioDeviceInfo& input_device, QAudi
 
   QString best_voice_encoder_codec;
   QString best_voice_encoded_container;
-  bool best_codec_found = findBestVoiceMessageCodecContainers( supported_codecs, supported_containers, &best_voice_encoder_codec, &best_voice_encoded_container );
+  bool best_codec_found = Settings::instance().useSystemVoiceEncoderSettings() ? findBestVoiceMessageCodecContainers( supported_codecs, supported_containers, &best_voice_encoder_codec, &best_voice_encoded_container ) : false;
   if( best_codec_found )
   {
     qDebug() << "AudioManager has selected this codec (voice encoder):" << qPrintable( best_voice_encoder_codec );
     audio_settings->setCodec( best_voice_encoder_codec );
-    qDebug() << "AudioManager has selected this file cointainer (voice):" << qPrintable( best_voice_encoded_container );
+    qDebug() << "AudioManager has selected this file cointainer (voice - mime type):" << qPrintable( best_voice_encoded_container );
     *file_container = best_voice_encoded_container;
   }
   else
   {
     audio_settings->setCodec( QString() );
     audio_settings->setSampleRate( audio_format.sampleRate() );
-    *file_container = QLatin1String( "audio/x-raw" );
-    qDebug() << "AudioManager has not found a valid code for voice message:" << qPrintable( *file_container );
+    *file_container = QLatin1String( "audio/x-wav" );
+    qDebug() << "AudioManager does not encode voice message and saves it as" << qPrintable( *file_container );
   }
 
   audio_settings->setChannelCount( audio_format.channelCount() );
@@ -178,12 +178,17 @@ QString AudioManager::voiceMessageFileContainer() const
 QAudioEncoderSettings AudioManager::voiceMessageEncoderSettings() const
 {
   QAudioEncoderSettings aes;
-  aes.setCodec( Settings::instance().voiceCodec().isEmpty() ? AudioManager::instance().defaultVoiceMessageEncoderSettings().codec() : Settings::instance().voiceCodec() );
-  aes.setSampleRate( Settings::instance().voiceSampleRate() <= 0 ? AudioManager::instance().defaultVoiceMessageEncoderSettings().sampleRate() : Settings::instance().voiceSampleRate() );
-  aes.setBitRate( Settings::instance().voiceBitRate() <= 0 ? AudioManager::instance().defaultVoiceMessageEncoderSettings().bitRate() : Settings::instance().voiceBitRate() );
-  aes.setChannelCount( Settings::instance().voiceChannels() < 0 ? AudioManager::instance().defaultVoiceMessageEncoderSettings().channelCount() : Settings::instance().voiceChannels() );
-  aes.setEncodingMode( Settings::instance().voiceEncodingMode() < 0 ? AudioManager::instance().defaultVoiceMessageEncoderSettings().encodingMode() : static_cast<QMultimedia::EncodingMode>( Settings::instance().voiceEncodingMode() ) );
-  aes.setQuality( Settings::instance().voiceEncodingQuality() < 0 ? AudioManager::instance().defaultVoiceMessageEncoderSettings().quality() : static_cast<QMultimedia::EncodingQuality>( Settings::instance().voiceEncodingQuality() ) );
+  if( Settings::instance().useCustomVoiceEncoderSettings() )
+  {
+    aes.setCodec( Settings::instance().voiceCodec() );
+    aes.setSampleRate( Settings::instance().voiceSampleRate() );
+    aes.setBitRate( Settings::instance().voiceBitRate() );
+    aes.setChannelCount( Settings::instance().voiceChannels() );
+    aes.setEncodingMode( static_cast<QMultimedia::EncodingMode>( Settings::instance().voiceEncodingMode() ) );
+    aes.setQuality( static_cast<QMultimedia::EncodingQuality>( Settings::instance().voiceEncodingQuality() ) );
+  }
+  else
+    aes = defaultVoiceMessageEncoderSettings();
   return aes;
 }
 

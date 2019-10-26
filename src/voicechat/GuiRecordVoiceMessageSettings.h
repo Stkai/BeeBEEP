@@ -42,6 +42,7 @@ public:
 protected slots:
   void resetSettings();
   void saveSettings();
+  void toggleCustomSettings( bool );
   void encodingModeChanged( int );
 
 protected:

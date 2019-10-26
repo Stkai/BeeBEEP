@@ -96,33 +96,8 @@ void Core::showUserNameChanged( const User& u, const QString& old_user_name )
   dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::UserInfo, false );
 }
 
-void Core::showUserVCardChanged( const User& u, const VCard& old_vcard )
+void Core::showUserVCardChanged( const User&, const VCard& )
 {
-  QString sHtmlMsg = "";
-
-  if( u.vCard().birthday() != old_vcard.birthday() )
-  {
-    QString txt_birthday = Bee::userBirthdayToText( u );
-    if( !txt_birthday.isEmpty() )
-    {
-      sHtmlMsg = QString( "%1 <b>%2.</b>" ).arg( IconManager::instance().toHtml( "birthday.png", "*!*" ), Bee::replaceHtmlSpecialCharacters( txt_birthday ) );
-      dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::UserInfo, false );
-    }
-  }
-
-  if( u.vCard().info() != old_vcard.info() )
-  {
-    if( !u.vCard().info().isEmpty() )
-    {
-      sHtmlMsg = QString( "%1 %2" ).arg( IconManager::instance().toHtml( "info.png", "*I*" ),
-                                      (u.isLocal() ? tr( "You share this information" ) : tr( "%1 shares this information" ).arg( Bee::userNameToShow( u ) )) );
-      sHtmlMsg += QString( ": <b>%1</b>" ).arg( Bee::replaceHtmlSpecialCharacters( u.vCard().info() ) );
-      if( u.isLocal() )
-        dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToChat, ChatMessage::UserInfo, false );
-      else
-        dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(), sHtmlMsg, DispatchToAllChatsWithUser, ChatMessage::UserInfo, false );
-    }
-  }
 }
 
 void Core::sendLocalUserStatus()

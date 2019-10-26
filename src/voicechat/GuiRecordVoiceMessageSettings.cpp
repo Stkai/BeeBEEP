@@ -37,6 +37,7 @@ GuiRecordVoiceMessageSettings::GuiRecordVoiceMessageSettings( QWidget *parent )
   setWindowIcon( IconManager::instance().icon( "audio-settings.png" ) );
   Bee::removeContextHelpButton( this );
 
+  mp_cbUseCustomSettings->setText( QString( "%1 (%2)" ).arg( tr( "Use custom encoder settings" ) ).arg( tr( "expert users only" ) ) );
   mp_bgEncodingMode = new QButtonGroup( this );
   mp_bgEncodingMode->setExclusive( true );
   mp_bgEncodingMode->addButton( mp_rbConstantQuality, static_cast<int>( QMultimedia::ConstantQualityEncoding ) );
@@ -46,6 +47,7 @@ GuiRecordVoiceMessageSettings::GuiRecordVoiceMessageSettings( QWidget *parent )
 
   mp_audioRecorder = new QAudioRecorder( this );
 
+  connect( mp_cbUseCustomSettings, SIGNAL( toggled( bool ) ), this, SLOT( toggleCustomSettings( bool ) ) );
   connect( mp_bgEncodingMode, SIGNAL( buttonClicked( int ) ), this, SLOT( encodingModeChanged( int ) ) );
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( saveSettings() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
@@ -111,8 +113,16 @@ void GuiRecordVoiceMessageSettings::encodingModeChanged( int button_clicked )
   }
 }
 
+void GuiRecordVoiceMessageSettings::toggleCustomSettings( bool )
+{
+  mp_gbVoiceRecorder->setEnabled( mp_cbUseCustomSettings->isChecked() );
+  mp_gbEncodingMode->setEnabled( mp_cbUseCustomSettings->isChecked() );
+}
+
 void GuiRecordVoiceMessageSettings::loadSettings()
 {
+  mp_cbUseSystemEncoder->setChecked( Settings::instance().useSystemVoiceEncoderSettings() );
+  mp_cbUseCustomSettings->setChecked( Settings::instance().useCustomVoiceEncoderSettings() );
   m_currentInputDevice = AudioManager::instance().voiceInputDeviceName();
   m_currentFileContainer = AudioManager::instance().voiceMessageFileContainer();
   m_currentAudioEncoderSettings = AudioManager::instance().voiceMessageEncoderSettings();
@@ -145,6 +155,7 @@ void GuiRecordVoiceMessageSettings::updateGui()
     p_button->setChecked( true );
     encodingModeChanged( button_id );
   }
+  toggleCustomSettings( mp_cbUseCustomSettings->isChecked() );
 }
 
 void GuiRecordVoiceMessageSettings::saveSettings()
@@ -167,11 +178,14 @@ void GuiRecordVoiceMessageSettings::saveSettings()
   Settings::instance().setVoiceChannels( aes.channelCount() == AudioManager::instance().defaultVoiceMessageEncoderSettings().channelCount() ? -1 : aes.channelCount() );
   Settings::instance().setVoiceEncodingMode( aes.encodingMode() == AudioManager::instance().defaultVoiceMessageEncoderSettings().encodingMode() ? -1 : aes.encodingMode() );
   Settings::instance().setVoiceEncodingQuality( aes.quality() == AudioManager::instance().defaultVoiceMessageEncoderSettings().quality() ? -1 : aes.quality() );
+  Settings::instance().setUseSystemVoiceEncoderSettings( mp_cbUseSystemEncoder->isChecked() );
+  Settings::instance().setUseCustomVoiceEncoderSettings( mp_cbUseCustomSettings->isChecked() );
   accept();
 }
 
 void GuiRecordVoiceMessageSettings::resetSettings()
 {
+  mp_cbUseCustomSettings->setChecked( false );
   m_currentInputDevice = AudioManager::instance().defaultInputDeviceName();
   m_currentFileContainer = AudioManager::instance().voiceMessageFileContainer();
   m_currentAudioEncoderSettings = AudioManager::instance().defaultVoiceMessageEncoderSettings();

@@ -5193,7 +5193,10 @@ void GuiMain::showVoiceEncoderSettings()
   grvm.loadSettings();
   grvm.show();
   if( grvm.exec() == QDialog::Accepted )
+  {
     Settings::instance().save();
+    AudioManager::instance().checkDefaultAudioDevice();
+  }
 }
 #endif
 

@@ -229,6 +229,8 @@ Settings::Settings()
 
   m_voiceMessageMaxDuration = 120;
   m_useVoicePlayer = true;
+  m_useCustomVoiceEncoderSettings = false;
+  m_useSystemVoiceEncoderSettings = false;
 
   resetAllColors();
 }
@@ -1500,6 +1502,8 @@ void Settings::load()
   m_voiceChannels = sets->value( "VoiceChannels", -1 ).toInt();
   m_voiceEncodingMode = sets->value( "VoiceEncodingMode", -1 ).toInt();
   m_voiceEncodingQuality = sets->value( "VoiceEncodingQuality", -1 ).toInt();
+  m_useCustomVoiceEncoderSettings = sets->value( "UseCustomVoiceEncoderSettings", m_useCustomVoiceEncoderSettings ).toBool();
+  m_useSystemVoiceEncoderSettings = sets->value( "UseSystemVoiceEncoderSettings", m_useSystemVoiceEncoderSettings ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Plugin" );
@@ -1841,6 +1845,8 @@ void Settings::save()
   sets->setValue( "VoiceChannels", m_voiceChannels );
   sets->setValue( "VoiceEncodingMode", m_voiceEncodingMode );
   sets->setValue( "VoiceEncodingQuality", m_voiceEncodingQuality );
+  sets->setValue( "UseCustomVoiceEncoderSettings", m_useCustomVoiceEncoderSettings );
+  sets->setValue( "UseSystemVoiceEncoderSettings", m_useSystemVoiceEncoderSettings );
   sets->endGroup();
 
   if( !m_pluginSettings.isEmpty() )

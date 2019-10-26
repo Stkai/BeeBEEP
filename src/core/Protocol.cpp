@@ -681,7 +681,6 @@ User Protocol::createTemporaryUser( const UserRecord& ur )
   vc.setEmail( ur.email() );
   vc.setPhoneNumber( ur.phoneNumber() );
   u.setVCard( vc );
-  u.setLocalHostName( ur.localHostName() );
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Temporary user" << u.id() << qPrintable( u.path() ) << "created with account" << qPrintable( u.accountName() ) << "and hash" << qPrintable( u.hash() );
 #endif

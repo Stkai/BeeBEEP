@@ -43,7 +43,7 @@ public:
   void playBuzz();
 
 #if defined( BEEBEEP_USE_VOICE_CHAT )
-  void checkAudioDevice( const QAudioDeviceInfo& input_device, QAudioEncoderSettings* audio_settings, QString* file_container );
+  void checkDefaultAudioDevice();
   QString voiceInputDeviceName() const;
   QAudioEncoderSettings voiceMessageEncoderSettings() const;
   QString voiceMessageFileContainer() const;
@@ -73,7 +73,7 @@ public:
 protected:
   AudioManager();
 #if defined( BEEBEEP_USE_VOICE_CHAT )
-  void checkDefaultAudioDevice();
+  void checkAudioDevice( const QAudioDeviceInfo& input_device, QAudioEncoderSettings* audio_settings, QString* file_container );
   QString defaultVoiceMessageContainerFilePrefix() const;
   QString defaultVoiceMessageContainerFileSuffix() const;
   bool findBestVoiceMessageCodecContainers( const QStringList& codecs, const QStringList& containers, QString* best_codec, QString* best_container ) const;
