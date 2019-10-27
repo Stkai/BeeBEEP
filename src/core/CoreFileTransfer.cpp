@@ -384,8 +384,12 @@ bool Core::sendFileToUser( const User&u, const QString& file_path, const QString
       {
         qDebug() << "Sending file" << fi.path() << "to" << qPrintable( u.path() );
         file_sent = true;
-        dispatchSystemMessage( chat_selected.isValid() ? chat_selected.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 You send %2 to %3." ).arg( icon_html, fi.name(), Bee::userNameToShow( u ) ),
-                               chat_selected.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
+        QUrl file_url = QUrl::fromLocalFile( fi.path() );
+        QString msg = tr( "%1 You send %2 to %3." ).arg( icon_html, QString( "<a href=\"%1\">%2</a>" ).arg( file_url.toString(), fi.name() ), Bee::userNameToShow( u ) );
+        file_url.setScheme( FileInfo::urlSchemeShowFileInFolder() );
+        msg += QString( " %1 <a href=\"%2\">%3</a>." ).arg( tr( "Open" ), file_url.toString(), tr( "folder" ) );
+        dispatchSystemMessage( chat_selected.isValid() ? chat_selected.id() : ID_DEFAULT_CHAT, u.id(), msg,
+                               chat_selected.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, true );
       }
     }
 
