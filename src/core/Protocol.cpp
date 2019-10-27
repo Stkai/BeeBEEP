@@ -330,7 +330,7 @@ int Protocol::datastreamVersion( const Message& m ) const
   return datastream_version;
 }
 
-QByteArray Protocol::helloMessage( const QString& public_key, bool encrypted_connection ) const
+QByteArray Protocol::helloMessage( const QString& public_key, bool encrypted_connection, bool data_compressed ) const
 {
   QStringList data_list;
   data_list << QString::number( Settings::instance().localUser().networkAddress().hostPort() );
@@ -357,6 +357,8 @@ QByteArray Protocol::helloMessage( const QString& public_key, bool encrypted_con
   Message m( Message::Hello, static_cast<VNumber>(Settings::instance().protoVersion()), data_list.join( DATA_FIELD_SEPARATOR ) );
   if( !encrypted_connection )
     m.addFlag( Message::EncryptionDisabled );
+  if( data_compressed )
+    m.addFlag( Message::Compressed );
   m.setData( Settings::instance().currentHash() );
   return fromMessage( m, 1 );
 }

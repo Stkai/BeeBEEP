@@ -136,6 +136,7 @@ Settings::Settings()
   m_disableConnectionSocketEncryption = false;
   m_allowNotEncryptedConnectionsAlso = false;
   m_allowEncryptedConnectionsAlso = false;
+  m_disableConnectionSocketDataCompression = false;
 
   m_rcFileExists = false;
   /* Default RC end */
@@ -511,6 +512,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "AllowEncryptedConnectionsAlso", m_allowEncryptedConnectionsAlso );
     sets->setValue( "UseUserFullName", m_useUserFullName );
     sets->setValue( "AppendHostNameToUserName", m_appendHostNameToUserName );
+    sets->setValue( "DisableConnectionSocketDataCompression", m_disableConnectionSocketDataCompression );
     sets->endGroup();
     sets->sync();
     qDebug() << "RC default configuration file created in" << qPrintable( Bee::convertToNativeFolderSeparator( sets->fileName() ) );
@@ -620,6 +622,7 @@ void Settings::loadRcFile()
   m_allowEncryptedConnectionsAlso = sets->value( "AllowEncryptedConnectionsAlso", m_allowEncryptedConnectionsAlso ).toBool();
   m_useUserFullName = sets->value( "UseUserFullName", m_useUserFullName ).toBool();
   m_appendHostNameToUserName = sets->value( "AppendHostNameToUserName", m_appendHostNameToUserName ).toBool();
+  m_disableConnectionSocketDataCompression = sets->value( "DisableConnectionSocketDataCompression", m_disableConnectionSocketDataCompression ).toBool();
   sets->endGroup();
   QStringList key_list = sets->allKeys();
   foreach( QString key, key_list )
@@ -1384,7 +1387,7 @@ void Settings::load()
   NetworkAddress local_user_network_address = m_localUser.networkAddress();
   local_user_network_address.setHostPort( static_cast<quint16>(sets->value( "ListenerPort", DEFAULT_LISTENER_PORT ).toUInt()) );
   m_localUser.setNetworkAddress( local_user_network_address );
-  m_pongTimeout = qMax( sets->value( "ConnectionActivityTimeout(ms)", 30000 ).toInt(), 13000 );
+  m_pongTimeout = qMax( sets->value( "ConnectionActivityTimeout(ms)", 30000 ).toInt(), PONG_DEFAULT_TIMEOUT );
   m_writingTimeout = qMax( sets->value( "WritingTimeout", 3000 ).toInt(), 3000 );
   m_tickIntervalConnectionTimeout = qMax( sets->value( "TickIntervalConnectionTimeout", m_tickIntervalConnectionTimeout ).toInt(), 3 );
   if( m_settingsVersion < 6 && m_tickIntervalConnectionTimeout < 16 )

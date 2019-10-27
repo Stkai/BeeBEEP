@@ -3333,6 +3333,14 @@ Please select a different name.</source>
         <source>Voice encoder</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Data compression is disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Data compression is enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

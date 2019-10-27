@@ -371,7 +371,8 @@ private:
   QAction* mp_actMulticastDns;
 #endif
   QAction* mp_actMulticastGroupAddress;
-  QAction* mp_actEncryptedConnectionsAlso;
+  QAction* mp_actEncryptedConnectionByDefault;
+  QAction* mp_actCompressedDataByDefault;
 
   QDockWidget* mp_dockFileTransfers;
 

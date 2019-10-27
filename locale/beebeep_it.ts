@@ -3499,7 +3499,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>End-to-end encryption is enabled</source>
-        <translation>La crittografia nelle connessioni è stata abilitata</translation>
+        <translation>La crittografia nelle connessioni è attiva</translation>
     </message>
     <message>
         <source>%1 updated</source>
@@ -3544,6 +3544,14 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Voice encoder</source>
         <translation>Codificatore vocale</translation>
+    </message>
+    <message>
+        <source>Data compression is disabled</source>
+        <translation>La compressione dei dati è stata disabilitata</translation>
+    </message>
+    <message>
+        <source>Data compression is enabled</source>
+        <translation>La compressione dei dati è attiva</translation>
     </message>
 </context>
 <context>

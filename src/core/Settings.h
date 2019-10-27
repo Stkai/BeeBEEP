@@ -606,6 +606,7 @@ public:
   inline bool disableConnectionSocketEncryption() const;
   inline bool allowNotEncryptedConnectionsAlso() const;
   inline bool allowEncryptedConnectionsAlso() const;
+  inline bool disableConnectionSocketDataCompression() const;
 
   QString simpleEncrypt( const QString& );
   QString simpleDecrypt( const QString& );
@@ -693,6 +694,7 @@ private:
   bool m_disableConnectionSocketEncryption;
   bool m_allowNotEncryptedConnectionsAlso;
   bool m_allowEncryptedConnectionsAlso;
+  bool m_disableConnectionSocketDataCompression;
 
   QStringList m_skipLocalHardwareAddresses;
 
@@ -1368,6 +1370,7 @@ inline bool Settings::useCustomVoiceEncoderSettings() const { return m_useCustom
 inline void Settings::setUseSystemVoiceEncoderSettings( bool new_value ) { m_useSystemVoiceEncoderSettings = new_value; }
 inline bool Settings::useSystemVoiceEncoderSettings() const { return m_useSystemVoiceEncoderSettings; }
 inline bool Settings::disableConnectionSocketEncryption() const { return m_disableConnectionSocketEncryption; }
+inline bool Settings::disableConnectionSocketDataCompression() const { return m_disableConnectionSocketDataCompression; }
 inline bool Settings::allowNotEncryptedConnectionsAlso() const { return m_allowNotEncryptedConnectionsAlso; }
 inline bool Settings::allowEncryptedConnectionsAlso() const { return m_allowEncryptedConnectionsAlso; }
 inline bool Settings::disableBeepInUserStatusBusy() const { return m_disableBeepInUserStatusBusy; }

@@ -965,7 +965,8 @@ void GuiMain::createMenus()
   mp_actMulticastDns = mp_menuNetworkStatus->addAction( IconManager::instance().icon( "mdns.png" ), QString( "mdns" ) );
 #endif
   mp_menuNetworkStatus->addSeparator();
-  mp_actEncryptedConnectionsAlso = mp_menuNetworkStatus->addAction( Settings::instance().disableConnectionSocketEncryption() ? IconManager::instance().icon( "encryption-disabled.png" ) : IconManager::instance().icon( "encryption-enabled.png" ), QString( "End-to-end encryption" ) );
+  mp_actEncryptedConnectionByDefault = mp_menuNetworkStatus->addAction( Settings::instance().disableConnectionSocketEncryption() ? IconManager::instance().icon( "encryption-disabled.png" ) : IconManager::instance().icon( "encryption-enabled.png" ), QString( "End-to-end encryption" ) );
+  mp_actCompressedDataByDefault = mp_menuNetworkStatus->addAction( Settings::instance().disableConnectionSocketDataCompression() ? IconManager::instance().icon( "folder.png" ) : IconManager::instance().icon( "file-compressed.png" ), QString( "Data compression" ) );
 
   mp_menuUsersSettings = new QMenu( tr( "Users" ), this );
   mp_menuUsersSettings->setIcon( IconManager::instance().icon( "user-list.png" ) );
@@ -3871,7 +3872,8 @@ void GuiMain::showDefaultServerPortInMenu()
     mp_actHostAddress->setEnabled( true );
     mp_actPortBroadcast->setEnabled( true );
     mp_actPortListener->setEnabled( true );
-    mp_actEncryptedConnectionsAlso->setEnabled( true );
+    mp_actEncryptedConnectionByDefault->setEnabled( true );
+    mp_actCompressedDataByDefault->setEnabled( true );
 
     host_address = Settings::instance().localUser().networkAddress().hostAddress().toString();
     broadcast_port = QString::number( Settings::instance().defaultBroadcastPort() );
@@ -3922,7 +3924,8 @@ void GuiMain::showDefaultServerPortInMenu()
 #ifdef BEEBEEP_USE_MULTICAST_DNS
     mp_actMulticastDns->setEnabled( false );
 #endif
-    mp_actEncryptedConnectionsAlso->setEnabled( false );
+    mp_actEncryptedConnectionByDefault->setEnabled( false );
+    mp_actCompressedDataByDefault->setEnabled( false );
   }
 
   mp_actHostAddress->setText( QString( "ip: %1 (%2)" ).arg( host_address ).arg( tr( "your IP address" ) ) );
@@ -3935,13 +3938,24 @@ void GuiMain::showDefaultServerPortInMenu()
 #endif
   if( Settings::instance().disableConnectionSocketEncryption() )
   {
-    mp_actEncryptedConnectionsAlso->setIcon( IconManager::instance().icon( "warning.png" ) );
-    mp_actEncryptedConnectionsAlso->setText( tr( "End-to-end encryption is disabled" ) );
+    mp_actEncryptedConnectionByDefault->setIcon( IconManager::instance().icon( "warning.png" ) );
+    mp_actEncryptedConnectionByDefault->setText( tr( "End-to-end encryption is disabled" ) );
   }
   else
   {
-    mp_actEncryptedConnectionsAlso->setIcon( IconManager::instance().icon( "encryption-enabled.png" ) );
-    mp_actEncryptedConnectionsAlso->setText( tr( "End-to-end encryption is enabled" ) );
+    mp_actEncryptedConnectionByDefault->setIcon( IconManager::instance().icon( "encryption-enabled.png" ) );
+    mp_actEncryptedConnectionByDefault->setText( tr( "End-to-end encryption is enabled" ) );
+  }
+
+  if( Settings::instance().disableConnectionSocketEncryption() )
+  {
+    mp_actCompressedDataByDefault->setIcon( IconManager::instance().icon( "folder.png" ) );
+    mp_actCompressedDataByDefault->setText( tr( "Data compression is disabled" ) );
+  }
+  else
+  {
+    mp_actCompressedDataByDefault->setIcon( IconManager::instance().icon( "file-compressed.png" ) );
+    mp_actCompressedDataByDefault->setText( tr( "Data compression is enabled" ) );
   }
 }
 
