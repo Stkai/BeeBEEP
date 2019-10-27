@@ -28,7 +28,7 @@
 
 #undef CONNECTION_SOCKET_IO_DEBUG
 #undef CONNECTION_SOCKET_IO_DEBUG_VERBOSE
-const char compressed_data_wasted_char = ' ';
+const char compressed_data_wasted_char = '\0';
 
 
 ConnectionSocket::ConnectionSocket( QObject* parent )
@@ -285,10 +285,9 @@ qint64 ConnectionSocket::readBlock()
 
   if( isCompressed() )
   {
-    QByteArray compressed_byte_array = decrypted_byte_array;
-    while( !compressed_byte_array.isEmpty() && compressed_byte_array.endsWith( compressed_data_wasted_char ) )
-      compressed_byte_array.chop( 1 );
-    QByteArray uncompressed_byte_array = qUncompress( compressed_byte_array );
+    while( !decrypted_byte_array.isEmpty() && decrypted_byte_array.endsWith( compressed_data_wasted_char ) )
+      decrypted_byte_array.chop( 1 );
+    QByteArray uncompressed_byte_array = qUncompress( decrypted_byte_array );
     if( !uncompressed_byte_array.isEmpty() )
       decrypted_byte_array = uncompressed_byte_array;
   }
