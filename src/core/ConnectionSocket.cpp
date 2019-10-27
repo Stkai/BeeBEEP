@@ -389,11 +389,11 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
     while( byte_array_to_send.size() % ENCRYPTED_DATA_BLOCK_SIZE )
       byte_array_to_send.append( compressed_data_wasted_char );
   }
-
-  if( isEncrypted() )
-    byte_array_to_send = Protocol::instance().encryptByteArray( byte_array, cipherKey(), m_protoVersion );
   else
     byte_array_to_send = byte_array;
+
+  if( isEncrypted() )
+    byte_array_to_send = Protocol::instance().encryptByteArray( byte_array_to_send, cipherKey(), m_protoVersion );
 
   QByteArray data_serialized = serializeData( byte_array_to_send );
 
