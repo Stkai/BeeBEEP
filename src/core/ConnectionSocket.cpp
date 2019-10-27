@@ -382,7 +382,7 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
 
   if( isCompressed() )
   {
-    byte_array_to_send = qCompress( byte_array_to_send );
+    byte_array_to_send = qCompress( byte_array );
 #ifdef BEEBEEP_DEBUG
     qDebug() << "ConnectionSocket compress data to sent from" << byte_array.size() << "to" << byte_array_to_send.size() << "bytes";
 #endif
