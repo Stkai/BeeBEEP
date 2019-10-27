@@ -28,6 +28,7 @@
 
 #undef CONNECTION_SOCKET_IO_DEBUG
 #undef CONNECTION_SOCKET_IO_DEBUG_VERBOSE
+const char compressed_data_wasted_char = ' ';
 
 
 ConnectionSocket::ConnectionSocket( QObject* parent )
@@ -277,41 +278,29 @@ qint64 ConnectionSocket::readBlock()
   m_blockSize = 0;
   QByteArray decrypted_byte_array;
 
-  if( isCompressed() )
-    decrypted_byte_array = qUncompress( byte_array_read );
+  if( isEncrypted() )
+    decrypted_byte_array = Protocol::instance().decryptByteArray( byte_array_read, cipherKey(), m_protoVersion );
   else
     decrypted_byte_array = byte_array_read;
 
-  if( isEncrypted() )
-    decrypted_byte_array = Protocol::instance().decryptByteArray( decrypted_byte_array, cipherKey(), m_protoVersion );
+  if( isCompressed() )
+  {
+    QByteArray compressed_byte_array = decrypted_byte_array;
+    while( !compressed_byte_array.isEmpty() && compressed_byte_array.endsWith( compressed_data_wasted_char ) )
+      compressed_byte_array.chop( 1 );
+    QByteArray uncompressed_byte_array = qUncompress( compressed_byte_array );
+    if( !uncompressed_byte_array.isEmpty() )
+      decrypted_byte_array = uncompressed_byte_array;
+  }
 
 #if defined( CONNECTION_SOCKET_IO_DEBUG_VERBOSE )
   qDebug() << "ConnectionSocket reads from" << qPrintable( m_networkAddress.toString() ) << "the byte array:" << decrypted_byte_array;
 #endif
 
   if( m_userId == ID_INVALID )
-  {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "HELLO received from" << qPrintable( m_networkAddress.toString() );
-#endif
     checkHelloMessage( decrypted_byte_array );
-  }
   else
-  {
-    if( isCompressed() )
-    {
-      QByteArray uncompressed_byte_array = qUncompress( decrypted_byte_array );
-      if( uncompressed_byte_array.isEmpty() )
-      {
-        qWarning() << "ConnectionSocket foun an invalid compressed data from" << qPrintable( m_networkAddress.toString() );
-        emit dataReceived( decrypted_byte_array );
-      }
-      else
-        emit dataReceived( uncompressed_byte_array );
-    }
-    else
-      emit dataReceived( decrypted_byte_array );
-  }
+    emit dataReceived( decrypted_byte_array );
 
   return byte_array_read_size;
 }
@@ -392,18 +381,20 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
 #endif
   QByteArray byte_array_to_send;
 
-  if( isEncrypted() )
-    byte_array_to_send = Protocol::instance().encryptByteArray( byte_array, cipherKey(), m_protoVersion );
-  else
-    byte_array_to_send = byte_array;
-
   if( isCompressed() )
   {
     byte_array_to_send = qCompress( byte_array_to_send );
 #ifdef BEEBEEP_DEBUG
     qDebug() << "ConnectionSocket compress data to sent from" << byte_array.size() << "to" << byte_array_to_send.size() << "bytes";
 #endif
+    while( byte_array_to_send.size() % ENCRYPTED_DATA_BLOCK_SIZE )
+      byte_array_to_send.append( compressed_data_wasted_char );
   }
+
+  if( isEncrypted() )
+    byte_array_to_send = Protocol::instance().encryptByteArray( byte_array, cipherKey(), m_protoVersion );
+  else
+    byte_array_to_send = byte_array;
 
   QByteArray data_serialized = serializeData( byte_array_to_send );
 
@@ -473,6 +464,10 @@ void ConnectionSocket::sendAnswerHello()
 
 void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
 {
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "HELLO received from" << qPrintable( m_networkAddress.toString() );
+#endif
+
   Message m = Protocol::instance().toMessage( array_data, m_protoVersion );
   if( !m.isValid() )
   {
