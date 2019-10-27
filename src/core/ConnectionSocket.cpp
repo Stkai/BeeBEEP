@@ -28,7 +28,7 @@
 
 #undef CONNECTION_SOCKET_IO_DEBUG
 #undef CONNECTION_SOCKET_IO_DEBUG_VERBOSE
-const char compressed_data_wasted_char = '\0';
+const char compressed_data_wasted_char = ' ';
 
 
 ConnectionSocket::ConnectionSocket( QObject* parent )
