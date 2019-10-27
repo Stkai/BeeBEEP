@@ -435,6 +435,7 @@
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="173"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="390"/>
         <source>Open</source>
         <translation>打开</translation>
     </message>
@@ -466,6 +467,7 @@
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="177"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="390"/>
         <source>folder</source>
         <translation>文件夹</translation>
     </message>
@@ -479,12 +481,12 @@
         <translation>%1 %2是一个文件夹。你可以分享</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="394"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="398"/>
         <source>%1 Unable to send %2: %3 is not connected.</source>
         <translation>%1无法发送%2:%3未连接</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="387"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="388"/>
         <source>%1 You send %2 to %3.</source>
         <translation>你将%2发送到%3</translation>
     </message>
@@ -506,82 +508,82 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="428"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="432"/>
         <source>%1 You have refused to download %2 from %3.</source>
         <translation>%1您拒绝从%3下载%2</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="456"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="460"/>
         <source>%1 You have refused to download folder %2 from %3.</source>
         <translation>%1您拒绝从%3下载文件夹%2</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="558"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="562"/>
         <source>%1 is added to file sharing with only %2 of %3 files (%4 limit reached)</source>
         <translation>将%1添加到文件共享中，只有%3文件中的%2(达到%4限制)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="564"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="568"/>
         <source>%1 is added to file sharing (%2)</source>
         <translation>将%1添加到文件共享中(%2）</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="566"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="570"/>
         <source>%1 is added to file sharing with %2 files, %3</source>
         <translation>将%1添加到与%2文件、%3文件共享的文件中</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="597"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="601"/>
         <source>All paths are removed from file sharing</source>
         <translation>从文件共享中删除所有路径</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="618"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="622"/>
         <source>%1 is removed from file sharing</source>
         <translation>从文件共享中删除%1</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="620"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="624"/>
         <source>%1 is removed from file sharing with %2 files</source>
         <translation>%1与%2从文件共享中移除</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="685"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="689"/>
         <source>%1 You are about to send %2 to %3. Checking folder...</source>
         <translation>%1你即将将%2发送到%3。检查文件夹…</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="725"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="729"/>
         <source>%1 Unable to send folder %2</source>
         <translation>%1无法发送文件夹%2</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="730"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="734"/>
         <source>invalid user #%1.</source>
         <translation>无效用户#%1</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="737"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="741"/>
         <source>the folder is empty.</source>
         <translation>文件夹是空的</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="744"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="748"/>
         <source>file transfer is not working.</source>
         <translation>文件传输无法工作</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="752"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="756"/>
         <source>%1 is not connected.</source>
         <translation>%1没有被连接</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="766"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="770"/>
         <source>internal error.</source>
         <translation>内部错误</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="771"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="775"/>
         <source>%1 You send folder %2 to %3.</source>
         <translation>%1你讲文件从%2发送到%3</translation>
     </message>
@@ -6575,32 +6577,32 @@ Please select a different name.</source>
         <translation>显示所有聊天记录</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="619"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="613"/>
         <source>The connection to %1 was not successful.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="710"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="704"/>
         <source>The tested network address %1 is not present among the available addresses of the network interface to which the connection has been made.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="713"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="707"/>
         <source>The connection to host address %1 was successful.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="719"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="713"/>
         <source>The port tested by the connection is %1 but the one that answered is %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="723"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="717"/>
         <source>The connection to port %1 was successful.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="731"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="725"/>
         <source>Unable to complete the test with an invalid network address.</source>
         <translation type="unfinished"></translation>
     </message>

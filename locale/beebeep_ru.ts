@@ -435,6 +435,7 @@
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="173"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="390"/>
         <source>Open</source>
         <translation>Открыть</translation>
     </message>
@@ -466,6 +467,7 @@
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="177"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="390"/>
         <source>folder</source>
         <translation>папка</translation>
     </message>
@@ -479,12 +481,12 @@
         <translation>%1 %2 - это папка. Вы можете открыть общий доступ к ней.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="394"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="398"/>
         <source>%1 Unable to send %2: %3 is not connected.</source>
         <translation>%1 Не удается отправить %2: %3 не подключен.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="387"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="388"/>
         <source>%1 You send %2 to %3.</source>
         <translation>%1 Вы отправили %2 в %3.</translation>
     </message>
@@ -506,82 +508,82 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="428"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="432"/>
         <source>%1 You have refused to download %2 from %3.</source>
         <translation>%1 Вы отказались загружать %2 из %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="456"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="460"/>
         <source>%1 You have refused to download folder %2 from %3.</source>
         <translation>%1 Вы отказались загружать папку %2 из %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="558"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="562"/>
         <source>%1 is added to file sharing with only %2 of %3 files (%4 limit reached)</source>
         <translation>%1 добавлен в общий доступ %2 из %3 файлов (%4 лимита использовано)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="564"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="568"/>
         <source>%1 is added to file sharing (%2)</source>
         <translation>%1 добавлен в файловый общий доступ (%2)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="566"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="570"/>
         <source>%1 is added to file sharing with %2 files, %3</source>
         <translation>%1 добавлен в общий доступ %2 файлов, %3</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="597"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="601"/>
         <source>All paths are removed from file sharing</source>
         <translation>Все пути исключены из файлового общего доступа</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="618"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="622"/>
         <source>%1 is removed from file sharing</source>
         <translation>%1 исключен из файлового общего доступа</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="620"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="624"/>
         <source>%1 is removed from file sharing with %2 files</source>
         <translation>%1 исключено из файлового общего доступа с %2 файлов</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="685"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="689"/>
         <source>%1 You are about to send %2 to %3. Checking folder...</source>
         <translation>%1 Вы собираетесь отправить %2 для %3. Проверка папки...</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="725"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="729"/>
         <source>%1 Unable to send folder %2</source>
         <translation>%1 Не удалось отправить папку %2</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="730"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="734"/>
         <source>invalid user #%1.</source>
         <translation>Недопустимый пользователь  #%1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="737"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="741"/>
         <source>the folder is empty.</source>
         <translation>папка пуста.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="744"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="748"/>
         <source>file transfer is not working.</source>
         <translation>передача файлов не работает.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="752"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="756"/>
         <source>%1 is not connected.</source>
         <translation>%1 не подключен.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="766"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="770"/>
         <source>internal error.</source>
         <translation>внутренняя ошибка.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="771"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="775"/>
         <source>%1 You send folder %2 to %3.</source>
         <translation>%1 Вы отправили папку %2 для%3.</translation>
     </message>
@@ -6453,32 +6455,32 @@ Please select a different name.</source>
         <translation>Показать все чаты</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="619"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="613"/>
         <source>The connection to %1 was not successful.</source>
         <translation>Подключение к %1 не удалось.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="710"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="704"/>
         <source>The tested network address %1 is not present among the available addresses of the network interface to which the connection has been made.</source>
         <translation>Проверенный сетевой адрес %1 отсутствует среди доступных адресов сетевого интерфейса на котором было установлено соединение.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="713"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="707"/>
         <source>The connection to host address %1 was successful.</source>
         <translation>Подключение к хосту с адресом %1 было успешным.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="719"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="713"/>
         <source>The port tested by the connection is %1 but the one that answered is %2.</source>
         <translation>Порт, проверенный соединением, - %1, но ответивший - %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="723"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="717"/>
         <source>The connection to port %1 was successful.</source>
         <translation>Подключение к порту %1 прошло успешно.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="731"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="725"/>
         <source>Unable to complete the test with an invalid network address.</source>
         <translation>Не удается завершить тест с недопустимым сетевым адресом.</translation>
     </message>

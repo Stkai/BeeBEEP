@@ -432,6 +432,7 @@
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="173"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="390"/>
         <source>Open</source>
         <translation>فتح</translation>
     </message>
@@ -458,6 +459,7 @@
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="177"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="390"/>
         <source>folder</source>
         <translation>مجلد</translation>
     </message>
@@ -471,12 +473,12 @@
         <translation>%1 %2 هو مجلد. يمكنك مشاركته.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="394"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="398"/>
         <source>%1 Unable to send %2: %3 is not connected.</source>
         <translation>%1 غير قادر على الإرسال %2: %3 غير متصل.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="387"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="388"/>
         <source>%1 You send %2 to %3.</source>
         <translation>%1 أرسلت %2 إلى %3.</translation>
     </message>
@@ -506,82 +508,82 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="428"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="432"/>
         <source>%1 You have refused to download %2 from %3.</source>
         <translation>%1 لقد رفضت التنزيل %2 من %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="456"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="460"/>
         <source>%1 You have refused to download folder %2 from %3.</source>
         <translation>%1 لقد رفضت تحميل المجلد %2 من %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="558"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="562"/>
         <source>%1 is added to file sharing with only %2 of %3 files (%4 limit reached)</source>
         <translation>%1 يضاف إلى ملف تقاسم مع فقط %2 of %3 ملفات (%4 بلغ الحد)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="564"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="568"/>
         <source>%1 is added to file sharing (%2)</source>
         <translation>%1 يضاف إلى ملف مشاركة (%2)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="566"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="570"/>
         <source>%1 is added to file sharing with %2 files, %3</source>
         <translation>تتم إضافة %1 إلى مشاركة الملفات مع ملفات %2 , %3</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="597"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="601"/>
         <source>All paths are removed from file sharing</source>
         <translation>تتم إزالة جميع المسارات من مشاركة الملفات</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="618"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="622"/>
         <source>%1 is removed from file sharing</source>
         <translation>%1 تتم إزالة من مشاركة الملفات</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="620"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="624"/>
         <source>%1 is removed from file sharing with %2 files</source>
         <translation>تتم إزالة %1 من مشاركة الملفات مع ملفات %2 </translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="685"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="689"/>
         <source>%1 You are about to send %2 to %3. Checking folder...</source>
         <translation>%1 أنت على وشك الإرسال %2 إلى %3. فحص المجلد...</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="725"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="729"/>
         <source>%1 Unable to send folder %2</source>
         <translation>%1 غير قادر على إرسال المجلد %2</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="730"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="734"/>
         <source>invalid user #%1.</source>
         <translation>مستخدم غير صالح #%1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="737"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="741"/>
         <source>the folder is empty.</source>
         <translation>المجلد فارغ</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="744"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="748"/>
         <source>file transfer is not working.</source>
         <translation>نقل الملفات لا يعمل.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="752"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="756"/>
         <source>%1 is not connected.</source>
         <translation>%1 غير متصل.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="766"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="770"/>
         <source>internal error.</source>
         <translation>خطأ داخلي.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="771"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="775"/>
         <source>%1 You send folder %2 to %3.</source>
         <translation>%1 أنت ترسل المجلد %2 إلى %3.</translation>
     </message>
@@ -6461,32 +6463,32 @@ Please select a different name.</source>
         <translation>عرض جميع الدردشات</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="619"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="613"/>
         <source>The connection to %1 was not successful.</source>
         <translation>الاتصال بـ %1 لم يكن ناجحاً.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="710"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="704"/>
         <source>The tested network address %1 is not present among the available addresses of the network interface to which the connection has been made.</source>
         <translation>عنوان الشبكة المختبرة %1 غير موجود بين العناوين المتاحة لواجهة الشبكة التي تم إجراء الاتصال بها.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="713"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="707"/>
         <source>The connection to host address %1 was successful.</source>
         <translation>الاتصال إلى عنوان المضيف %1 كان ناجحاً.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="719"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="713"/>
         <source>The port tested by the connection is %1 but the one that answered is %2.</source>
         <translation>المنفذ الذي تم اختباره بواسطة الاتصال هو %1 ولكن الذي أجاب هو %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="723"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="717"/>
         <source>The connection to port %1 was successful.</source>
         <translation>الاتصال بالمنفذ %1 كان ناجحاً.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="731"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="725"/>
         <source>Unable to complete the test with an invalid network address.</source>
         <translation>غير قادر على إكمال الاختبار بعنوان شبكة غير صالح.</translation>
     </message>

@@ -28,7 +28,6 @@
 
 #undef CONNECTION_SOCKET_IO_DEBUG
 #undef CONNECTION_SOCKET_IO_DEBUG_VERBOSE
-const char compressed_data_wasted_char = ' ';
 
 
 ConnectionSocket::ConnectionSocket( QObject* parent )
@@ -285,8 +284,6 @@ qint64 ConnectionSocket::readBlock()
 
   if( isCompressed() )
   {
-    while( !decrypted_byte_array.isEmpty() && decrypted_byte_array.endsWith( compressed_data_wasted_char ) )
-      decrypted_byte_array.chop( 1 );
     QByteArray uncompressed_byte_array = qUncompress( decrypted_byte_array );
     if( !uncompressed_byte_array.isEmpty() )
       decrypted_byte_array = uncompressed_byte_array;
@@ -383,11 +380,11 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
   if( isCompressed() )
   {
     byte_array_to_send = qCompress( byte_array );
-#ifdef BEEBEEP_DEBUG
+#ifdef CONNECTION_SOCKET_IO_DEBUG_VERBOSE
     qDebug() << "ConnectionSocket compress data to sent from" << byte_array.size() << "to" << byte_array_to_send.size() << "bytes";
 #endif
     while( byte_array_to_send.size() % ENCRYPTED_DATA_BLOCK_SIZE )
-      byte_array_to_send.append( compressed_data_wasted_char );
+      byte_array_to_send.append( QChar( ' ' ) );
   }
   else
     byte_array_to_send = byte_array;
