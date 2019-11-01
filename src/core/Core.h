@@ -295,6 +295,7 @@ protected:
 
   /* CoreFileTransfer */
   bool sendFileToUser( const User&, const QString& file_path, const QString& share_folder, bool to_share_box, const Chat& );
+  bool showFilesUploadPreviewInChat( const Chat&, const QStringList& file_paths );
   bool showFileUploadPreviewInChat( const Chat&, const QString& file_path );
   void sendFileShareListTo( VNumber user_id );
   void sendFileShareListToAll();

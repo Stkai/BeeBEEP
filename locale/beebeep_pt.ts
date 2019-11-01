@@ -418,22 +418,22 @@
         <translation>%1 Baixando %2 de %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="142"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="143"/>
         <source>from</source>
         <translation>De</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="142"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="143"/>
         <source>to</source>
         <translation>Para</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="162"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="161"/>
         <source>%1 sent a voice message.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="167"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="166"/>
         <source>Listen</source>
         <translation type="unfinished"></translation>
     </message>
@@ -442,18 +442,13 @@
         <translation type="vanished">Abrir</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="300"/>
-        <source>%1 Sending %2 files to %3 users: %4.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="345"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="352"/>
         <source>%1 Unable to send %2 to %3: user is offline.</source>
         <translation>%1 Impossível enviar %2 para %3:usuário está  offline.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="271"/>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="316"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="287"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="323"/>
         <source>%1 Unable to send %2. File transfer is disabled.</source>
         <translation>%1 Impossível Enviar %2.Transferência de Arquivos está Desabilitada.</translation>
     </message>
@@ -468,8 +463,8 @@
         <translation>Baixar</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="176"/>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="390"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="175"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="397"/>
         <source>folder</source>
         <translation>Pasta</translation>
     </message>
@@ -478,12 +473,12 @@
         <translation type="vanished">%1 %2: Arquivo não localizado.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="371"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="378"/>
         <source>%1 %2 is a folder. You can share it.</source>
         <translation>%1 %2 é uma pasta. Não pode ser compartilhada.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="398"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="405"/>
         <source>%1 Unable to send %2: %3 is not connected.</source>
         <translation>%1 Impossível enviar %2: %3 não conectado.</translation>
     </message>
@@ -492,115 +487,115 @@
         <translation type="vanished">%1 Enviado %2 para %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="173"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="172"/>
         <source>%1 sent %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="176"/>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="390"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="175"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="397"/>
         <source>Open %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="353"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="360"/>
         <source>%1 Unable to send %2 to %3: file not found.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="432"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="439"/>
         <source>%1 You have refused to download %2 from %3.</source>
         <translation>%1 Download Recusado %2 de %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="460"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="467"/>
         <source>%1 You have refused to download folder %2 from %3.</source>
         <translation>%1 Download da Pasta Recusado %2 de %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="568"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="575"/>
         <source>%1 is added to file sharing (%2)</source>
         <translation>%1 adicionada ao compartilhamento (%2)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="562"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="569"/>
         <source>%1 is added to file sharing with only %2 of %3 files (%4 limit reached)</source>
         <translation>%1 é adicionado ao compartilhamento de arquivos com apenas%2 de%3 arquivos (%4 limite atingido)</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="698"/>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="168"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="167"/>
         <location filename="../src/core/CoreVoiceChat.cpp" line="65"/>
         <source>voice message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="360"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="367"/>
         <source>%1 Unable to send %2 to %3: file is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="570"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="577"/>
         <source>%1 is added to file sharing with %2 files, %3</source>
         <translation>%1 Adicionado ao compartilhamento de arquivos com%2 arquivos,%3</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="601"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="608"/>
         <source>All paths are removed from file sharing</source>
         <translation>Caminhos excluidos do Compartilhamento</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="622"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="629"/>
         <source>%1 is removed from file sharing</source>
         <translation>%1 Removido do compatilhamento</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="624"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="631"/>
         <source>%1 is removed from file sharing with %2 files</source>
         <translation>%1 compartilhamento removido %2 arquivos</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="689"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="696"/>
         <source>%1 You are about to send %2 to %3. Checking folder...</source>
         <translation>%1 Mensagem será enviada %2 para %3. Verificando Pasta...</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="730"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="737"/>
         <source>%1 Unable to send folder %2</source>
         <translation>%1 Impossível enviar pasta %2</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="735"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="742"/>
         <source>invalid user #%1.</source>
         <translation>Membro invalido #%1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="742"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="749"/>
         <source>the folder is empty.</source>
         <translation>Pasta está Vazia.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="749"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="756"/>
         <source>file transfer is not working.</source>
         <translation>Transferência de Arquivos não está funcionando.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="757"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="764"/>
         <source>%1 is not connected.</source>
         <translation>%1 não está conectado.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="771"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="778"/>
         <source>internal error.</source>
         <translation>Erro Interno.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="777"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="784"/>
         <source>%1 Sending folder %2 to %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="387"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="394"/>
         <source>%1 Sending %2 to %3.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4506,62 +4501,62 @@ Selecione um nome diferente.</translation>
 <context>
     <name>GuiNetworkWidget</name>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="367"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="360"/>
         <source>Use fixed interval to search users</source>
         <translation>Use Intervalo Fixo Para Procurar Usuarios</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="337"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="458"/>
         <source>* (read only section)</source>
         <translation>* (leitura apenas)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="289"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="266"/>
         <source>IP Multicast TTL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="122"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="230"/>
         <source>(only for IPv4 multicast)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="360"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="353"/>
         <source>Use default multicast group address</source>
         <translation>Use o endereço do grupo de multicast padrão</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="388"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="381"/>
         <source>Use hive protocol to contact offline users</source>
         <translation>Use o protocolo de hive para contatar usuários offline</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="381"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="374"/>
         <source>Contact offline users directly</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="374"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="367"/>
         <source>Always broadcast to local subnet address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="395"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="388"/>
         <source>Disable system proxy for connections</source>
         <translation>Desative Proxy para Conexões</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="440"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="435"/>
         <source>Show file HOSTS...</source>
         <translation>Mostrar arquivo Host...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="460"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="478"/>
         <source>Ok</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="467"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="485"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
@@ -4574,52 +4569,52 @@ Selecione um nome diferente.</translation>
         <translation type="obsolete">Enter the IP addresses or subnet of your local area network separated by comma (example: 192.168.0.123, 192.168.0.45, 192.168.1.255)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="263"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="114"/>
         <source>Max users to contact every second</source>
         <translation>Máximo de usuários para contatar a cada segundo</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="402"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="395"/>
         <source>Prevent multiple connections from single host address</source>
         <translation>Impedir várias conexões de um único endereço de host</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="409"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="402"/>
         <source>Enable Zero Configuration Networking</source>
         <translation>Ativa configuração inicial de Rede</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="109"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="31"/>
         <source>UDP Port in beebeep.rc *</source>
         <translation>UDP Port in beebeep.rc *</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="35"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="66"/>
         <source>Local subnet address *</source>
         <translation>Endereço da subnet local *</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="208"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="201"/>
         <source>Multicast group in beebeep.rc *</source>
         <translation>Multicast group in beebeep.rc *</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="80"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="104"/>
         <source>Search users every</source>
         <translation>Pesquisar todos os usuários</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="70"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="327"/>
         <source>Preferred subnet</source>
         <translation>Preferido Subnet</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="279"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="243"/>
         <source>(the same for all clients)</source>
         <translation>(o mesmo para todos clients)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.ui" line="227"/>
+        <location filename="../src/desktop/GuiNetwork.ui" line="220"/>
         <source>(search users here by default)</source>
         <translation>(procurar usuario aqui por padrão)</translation>
     </message>

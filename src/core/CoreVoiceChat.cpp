@@ -59,7 +59,7 @@ bool Core::sendVoiceMessageToChat( VNumber chat_id, const QString& file_path )
   qDebug() << "Voice message" << fi.path() << "is added to file transfer list";
 #endif
 
-  QUrl file_url( file_path );
+  QUrl file_url = QUrl::fromLocalFile( file_path );
   file_url.setScheme( FileInfo::urlSchemeVoiceMessage() );
   QString msg_html = QString( "[ <a href=\"%1\">%2</a> ] %3" ).arg( file_url.toString(),
                                                                     tr( "voice message" ),

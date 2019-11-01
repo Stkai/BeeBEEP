@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>710</width>
-    <height>470</height>
+    <width>720</width>
+    <height>450</height>
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout_5">
-   <item row="0" column="0" colspan="4">
+   <item row="0" column="0">
     <widget class="QFrame" name="mp_frame1">
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
@@ -19,89 +19,11 @@
      <layout class="QGridLayout" name="gridLayout_3">
       <item row="0" column="0">
        <layout class="QGridLayout" name="gridLayout">
-        <item row="4" column="1">
-         <widget class="QSpinBox" name="mp_sbIpMulticastTtl">
-          <property name="maximum">
-           <number>255</number>
-          </property>
-          <property name="value">
-           <number>1</number>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="mp_lBase">
-          <property name="text">
-           <string>Local subnet address *</string>
-          </property>
-          <property name="textFormat">
-           <enum>Qt::PlainText</enum>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QLineEdit" name="mp_leSubnet">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-          <property name="readOnly">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="0">
-         <widget class="QLabel" name="mp_lPreferredSubnet">
-          <property name="text">
-           <string>Preferred subnet</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="0">
-         <widget class="QLabel" name="mp_lBroadcastInterval">
-          <property name="text">
-           <string>Search users every</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="3">
-         <spacer name="horizontalSpacer_3">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
         <item row="0" column="0">
          <widget class="QLabel" name="mp_lUdpPort">
           <property name="minimumSize">
            <size>
-            <width>260</width>
+            <width>280</width>
             <height>0</height>
            </size>
           </property>
@@ -113,13 +35,6 @@
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="3">
-         <widget class="QLabel" name="mp_lHelpTtl">
-          <property name="text">
-           <string>(only for IPv4 multicast)</string>
           </property>
          </widget>
         </item>
@@ -145,35 +60,16 @@
           </property>
          </widget>
         </item>
-        <item row="5" column="1">
-         <widget class="QComboBox" name="mp_comboPreferredSubnet">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>0</height>
-           </size>
+        <item row="1" column="0">
+         <widget class="QLabel" name="mp_lBase">
+          <property name="text">
+           <string>Local subnet address *</string>
           </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QLineEdit" name="mp_leUdpPort">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>0</height>
-           </size>
+          <property name="textFormat">
+           <enum>Qt::PlainText</enum>
           </property>
           <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-          <property name="readOnly">
-           <bool>true</bool>
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
@@ -201,6 +97,103 @@
            <number>15</number>
           </property>
          </widget>
+        </item>
+        <item row="6" column="0">
+         <widget class="QLabel" name="mp_lBroadcastInterval">
+          <property name="text">
+           <string>Search users every</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="0">
+         <widget class="QLabel" name="mp_lMaxUsersToContact">
+          <property name="text">
+           <string>Max users to contact every second</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="mp_leUdpPort">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>140</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="3">
+         <widget class="QLabel" name="mp_lHelpMulticastGroup">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QSpinBox" name="mp_sbIpMulticastTtl">
+          <property name="maximum">
+           <number>255</number>
+          </property>
+          <property name="value">
+           <number>1</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="mp_leSubnet">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>140</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="3">
+         <spacer name="horizontalSpacer_7">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
         <item row="3" column="0">
          <widget class="QLabel" name="mp_lMulticastGroup">
@@ -231,39 +224,10 @@
           </property>
          </widget>
         </item>
-        <item row="5" column="3">
-         <spacer name="horizontalSpacer_7">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="7" column="3">
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="7" column="0">
-         <widget class="QLabel" name="mp_lMaxUsersToContact">
+        <item row="4" column="3">
+         <widget class="QLabel" name="mp_lHelpTtl">
           <property name="text">
-           <string>Max users to contact every second</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           <string>(only for IPv4 multicast)</string>
           </property>
          </widget>
         </item>
@@ -283,6 +247,19 @@
           </property>
          </widget>
         </item>
+        <item row="7" column="3">
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
         <item row="4" column="0">
          <widget class="QLabel" name="mp_lIpMulticastTtl">
           <property name="text">
@@ -292,6 +269,19 @@
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
+        </item>
+        <item row="6" column="3">
+         <spacer name="horizontalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
         <item row="6" column="1">
          <widget class="QSpinBox" name="mp_sbBroadcastInterval">
@@ -321,20 +311,23 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="3">
-         <widget class="QLabel" name="mp_lHelpMulticastGroup">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
+        <item row="5" column="1">
+         <widget class="QComboBox" name="mp_comboPreferredSubnet">
+          <property name="minimumSize">
+           <size>
+            <width>140</width>
+            <height>0</height>
+           </size>
           </property>
          </widget>
         </item>
-        <item row="8" column="3">
-         <widget class="QLabel" name="mp_lRO">
+        <item row="5" column="0">
+         <widget class="QLabel" name="mp_lPreferredSubnet">
           <property name="text">
-           <string>* (read only section)</string>
+           <string>Preferred subnet</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
@@ -343,7 +336,7 @@
      </layout>
     </widget>
    </item>
-   <item row="1" column="0" colspan="4">
+   <item row="1" column="0">
     <widget class="QFrame" name="mp_frame2">
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
@@ -415,7 +408,7 @@
      </layout>
     </widget>
    </item>
-   <item row="2" column="0" colspan="4">
+   <item row="2" column="0">
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -429,44 +422,71 @@
     </spacer>
    </item>
    <item row="3" column="0">
-    <widget class="QPushButton" name="mp_pbShowFileHosts">
-     <property name="minimumSize">
-      <size>
-       <width>140</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Show file HOSTS...</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <spacer name="horizontalSpacer_4">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>371</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="3" column="2">
-    <widget class="QPushButton" name="mp_pbOk">
-     <property name="text">
-      <string>Ok</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="3">
-    <widget class="QPushButton" name="mp_pbCancel">
-     <property name="text">
-      <string>Cancel</string>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="mp_pbShowFileHosts">
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Show file HOSTS...</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_5">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="mp_lRO">
+       <property name="text">
+        <string>* (read only section)</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>371</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="mp_pbOk">
+       <property name="text">
+        <string>Ok</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="mp_pbCancel">
+       <property name="text">
+        <string>Cancel</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>

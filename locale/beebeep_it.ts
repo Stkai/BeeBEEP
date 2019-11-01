@@ -660,7 +660,7 @@
     </message>
     <message>
         <source>%1 Sending %2 files to %3 users: %4.</source>
-        <translation>%1 Stai inviando %2 file a %3 utenti: %4.</translation>
+        <translation type="vanished">%1 Stai inviando %2 file a %3 utenti: %4.</translation>
     </message>
     <message>
         <source>%1 sent %2.</source>

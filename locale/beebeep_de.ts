@@ -623,10 +623,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>%1 Sending %2 files to %3 users: %4.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>%1 sent %2.</source>
         <translation type="unfinished"></translation>
     </message>
