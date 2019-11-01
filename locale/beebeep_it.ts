@@ -96,7 +96,7 @@
     </message>
     <message>
         <source>Open</source>
-        <translation>Apri</translation>
+        <translation type="vanished">Apri</translation>
     </message>
     <message>
         <source>%1 %2: file not found.</source>
@@ -164,7 +164,7 @@
     </message>
     <message>
         <source>%1 You send %2 to %3.</source>
-        <translation>%1 Stai inviando %2 a %3.</translation>
+        <translation type="vanished">%1 Stai inviando %2 a %3.</translation>
     </message>
     <message>
         <source>%1 Unable to send %2. File transfer is disabled.</source>
@@ -236,7 +236,7 @@
     </message>
     <message>
         <source>%1 You send folder %2 to %3.</source>
-        <translation>%1 Stai inviando la cartella %2 a %3.</translation>
+        <translation type="vanished">%1 Stai inviando la cartella %2 a %3.</translation>
     </message>
     <message>
         <source>%1 %2 has refused to download folder %3.</source>
@@ -661,6 +661,22 @@
     <message>
         <source>%1 Sending %2 files to %3 users: %4.</source>
         <translation>%1 Stai inviando %2 file a %3 utenti: %4.</translation>
+    </message>
+    <message>
+        <source>%1 sent %2.</source>
+        <translation>%1 ha inviato %2.</translation>
+    </message>
+    <message>
+        <source>Open %1.</source>
+        <translation>Apri %1.</translation>
+    </message>
+    <message>
+        <source>%1 Sending %2 to %3.</source>
+        <translation>%1 Stai inviando %2 a %3.</translation>
+    </message>
+    <message>
+        <source>%1 Sending folder %2 to %3.</source>
+        <translation>%1 Stai inviando la cartella %2 a %3.</translation>
     </message>
 </context>
 <context>

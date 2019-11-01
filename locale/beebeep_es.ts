@@ -438,24 +438,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="173"/>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="390"/>
         <source>Open</source>
-        <translation>Abrir</translation>
+        <translation type="vanished">Abrir</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="301"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="300"/>
         <source>%1 Sending %2 files to %3 users: %4.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="346"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="345"/>
         <source>%1 Unable to send %2 to %3: user is offline.</source>
         <translation>%1 No es posible enviar %2 a %3: El usuario está desconectado.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="272"/>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="317"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="271"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="316"/>
         <source>%1 Unable to send %2. File transfer is disabled.</source>
         <translation>%1 No es posible enviar %2. La transferencia de archivos está deshabilitada.</translation>
     </message>
@@ -470,7 +468,7 @@
         <translation>Descarga</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="177"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="176"/>
         <location filename="../src/core/CoreFileTransfer.cpp" line="390"/>
         <source>folder</source>
         <translation>carpeta</translation>
@@ -480,7 +478,7 @@
         <translation type="vanished">%1 %2: archivo no encontrado.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="372"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="371"/>
         <source>%1 %2 is a folder. You can share it.</source>
         <translation>%1 %2 es una carpeta. No puedes compartirla.</translation>
     </message>
@@ -490,12 +488,22 @@
         <translation>%1 No se puede enviar %2: %3 no está conectado.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="388"/>
         <source>%1 You send %2 to %3.</source>
-        <translation>%1 Estás enviando %2 a %3.</translation>
+        <translation type="vanished">%1 Estás enviando %2 a %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="354"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="173"/>
+        <source>%1 sent %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="176"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="390"/>
+        <source>Open %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="353"/>
         <source>%1 Unable to send %2 to %3: file not found.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -527,7 +535,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="361"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="360"/>
         <source>%1 Unable to send %2 to %3: file is empty.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -557,39 +565,48 @@
         <translation>%1 Vas a enviar %2 a %3. Verificando carpeta...</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="729"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="730"/>
         <source>%1 Unable to send folder %2</source>
         <translation>%1 No es posible enviar carpeta %2</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="734"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="735"/>
         <source>invalid user #%1.</source>
         <translation>usuario no valido #%1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="741"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="742"/>
         <source>the folder is empty.</source>
         <translation>la carpeta está vacia.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="748"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="749"/>
         <source>file transfer is not working.</source>
         <translation>la transferencia del archivo no funciona.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="756"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="757"/>
         <source>%1 is not connected.</source>
         <translation>%1 no esta conectado.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="770"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="771"/>
         <source>internal error.</source>
         <translation>error interno.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="775"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="777"/>
+        <source>%1 Sending folder %2 to %3.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="387"/>
+        <source>%1 Sending %2 to %3.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>%1 You send folder %2 to %3.</source>
-        <translation>%1 Carpeta %2 enviada a %3.</translation>
+        <translation type="vanished">%1 Carpeta %2 enviada a %3.</translation>
     </message>
     <message>
         <source>%1 %2 has refused to download %3.</source>
@@ -673,60 +690,60 @@
         <translation>ha sido agregado a favoritos</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="288"/>
+        <location filename="../src/core/CoreConnection.cpp" line="290"/>
         <source>%1 Connection closed to user %2 because it uses your nickname: %3.</source>
         <translation>%1 Conexión cerrada para el usuario %2 porque usa tu alias: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="275"/>
-        <location filename="../src/core/CoreConnection.cpp" line="281"/>
+        <location filename="../src/core/CoreConnection.cpp" line="277"/>
+        <location filename="../src/core/CoreConnection.cpp" line="283"/>
         <source>%1 Connection closed to user %2 because it uses your account name: %3.</source>
         <translation>%1 Conexión cerrada para el usuario %2 porque está usando tu nombre de cuenta: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="277"/>
-        <location filename="../src/core/CoreConnection.cpp" line="315"/>
+        <location filename="../src/core/CoreConnection.cpp" line="279"/>
+        <location filename="../src/core/CoreConnection.cpp" line="317"/>
         <source>domain</source>
         <translation>dominio</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="293"/>
+        <location filename="../src/core/CoreConnection.cpp" line="295"/>
         <source>%1 Connection closed to user %2 because it uses your hash code.</source>
         <translation>%1 Conexión cerrada para el usuario %2 porque usa tu código hash.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="313"/>
-        <location filename="../src/core/CoreConnection.cpp" line="320"/>
+        <location filename="../src/core/CoreConnection.cpp" line="315"/>
+        <location filename="../src/core/CoreConnection.cpp" line="322"/>
         <source>%1 Connection closed to user %2 because it uses same account name of the already connected user %3: %4.</source>
         <translation>%1 Conexión cerrada con el usuario %2 porque está usando el mismo nombre de cuenta que un usuario conectado %3: %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="328"/>
+        <location filename="../src/core/CoreConnection.cpp" line="330"/>
         <source>%1 Connection closed to user %2 because it uses same nickname of the already connected user %3: %4.</source>
         <translation>%1 Conexión cerrada para el usuario %2 porque está usando el mismo alias que un usuario conectado %3: %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="334"/>
+        <location filename="../src/core/CoreConnection.cpp" line="336"/>
         <source>%1 Connection closed to user %2 because it uses same hash code of the already connected user %3: %4.</source>
         <translation>%1 Conexión cerrada para el usuario %2 porque está usando el mismo código hash que un usuario conectado %3: %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="388"/>
+        <location filename="../src/core/CoreConnection.cpp" line="402"/>
         <source>%1 users connected</source>
         <translation>%1 usuarios conectados</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="395"/>
+        <location filename="../src/core/CoreConnection.cpp" line="409"/>
         <source>%1 %2 uses old encryption level.</source>
         <translation>%1 %2 usa un nivel de cifrado antiguo.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="403"/>
+        <location filename="../src/core/CoreConnection.cpp" line="417"/>
         <source>%1 has end-to-end encryption enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="413"/>
+        <location filename="../src/core/CoreConnection.cpp" line="427"/>
         <source>%1 has end-to-end encryption disabled</source>
         <translation type="unfinished"></translation>
     </message>

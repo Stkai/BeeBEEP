@@ -170,11 +170,10 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
     }
     else
     {
-      QString s_open = tr( "Open" );
-      sys_msg_open_file = QString( "%1" ).arg( icon_html );
-      sys_msg_open_file += QString( " %1 <a href=\"%2\">%3</a>." ).arg( s_open, file_url.toString(), fi.name() );
+      sys_msg_open_file = QString( "%1 %2" ).arg( icon_html ).arg( tr( "%1 sent %2." ).arg( Bee::userNameToShow( u ) ).arg( QString( "<a href=\"%1\">%2</a>" ).arg( file_url.toString(), fi.name() ) ) );
       file_url.setScheme( FileInfo::urlSchemeShowFileInFolder() );
-      sys_msg_open_file += QString( " %1 <a href=\"%2\">%3</a>." ).arg( s_open, file_url.toString(), tr( "folder" ) );
+      sys_msg_open_file += QString( " " );
+      sys_msg_open_file += tr( "Open %1." ).arg( QString( "<a href=\"%1\">%2</a>" ).arg( file_url.toString(), tr( "folder" ) ) );
     }
   }
 
@@ -206,11 +205,11 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
   else
   {
     if( !sys_msg.isEmpty() )
-      dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), sys_msg, chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, ft_state == FileTransferPeer::Completed );
+      dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), sys_msg, chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
     if( !sys_msg_img_preview.isEmpty() )
       dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), sys_msg_img_preview, chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::ImagePreview, true );
     if( !sys_msg_open_file.isEmpty() )
-      dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), sys_msg_open_file, chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, ft_state == FileTransferPeer::Completed );
+      dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), sys_msg_open_file, chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, true );
   }
 
   emit fileTransferMessage( peer_id, u, fi, msg, ft_state );
@@ -385,9 +384,10 @@ bool Core::sendFileToUser( const User&u, const QString& file_path, const QString
         qDebug() << "Sending file" << fi.path() << "to" << qPrintable( u.path() );
         file_sent = true;
         QUrl file_url = QUrl::fromLocalFile( fi.path() );
-        QString msg = tr( "%1 You send %2 to %3." ).arg( icon_html, QString( "<a href=\"%1\">%2</a>" ).arg( file_url.toString(), fi.name() ), Bee::userNameToShow( u ) );
+        QString msg = tr( "%1 Sending %2 to %3." ).arg( icon_html, QString( "<a href=\"%1\">%2</a>" ).arg( file_url.toString(), fi.name() ), Bee::userNameToShow( u ) );
         file_url.setScheme( FileInfo::urlSchemeShowFileInFolder() );
-        msg += QString( " %1 <a href=\"%2\">%3</a>." ).arg( tr( "Open" ), file_url.toString(), tr( "folder" ) );
+        msg += QString( " " );
+        msg += tr( "Open %1." ).arg( QString( "<a href=\"%1\">%2</a>" ).arg( file_url.toString(), tr( "folder" ) ) );
         dispatchSystemMessage( chat_selected.isValid() ? chat_selected.id() : ID_DEFAULT_CHAT, u.id(), msg,
                                chat_selected.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, true );
       }
@@ -713,6 +713,7 @@ void Core::addFolderToFileTransfer()
   if( beeApp )
     beeApp->removeJob( bfsl );
   QString folder_name = bfsl->folderName();
+  QString folder_path = bfsl->folderPath();
   QList<FileInfo> file_info_list = bfsl->shareList();
   VNumber user_id = bfsl->userId();
   QString chat_private_id = bfsl->chatPrivateId();
@@ -758,7 +759,7 @@ void Core::addFolderToFileTransfer()
     return;
   }
 
-  qDebug() << "File Transfer: sending folder" << folder_name << "to" << u.path();
+  qDebug() << "Sending folder" << folder_name << "to" << qPrintable( u.path() );
 
   mp_fileTransfer->addFileInfoList( file_info_list );
 
@@ -772,12 +773,11 @@ void Core::addFolderToFileTransfer()
     return;
   }
 
-  dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 You send folder %2 to %3." )
-                         .arg( icon_html, folder_name, Bee::userNameToShow( u ) ),
-                         chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
-
+  QUrl folder_url = QUrl::fromLocalFile( folder_path );
+  QString msg = tr( "%1 Sending folder %2 to %3." ).arg( icon_html, QString( "<a href=\"%1\">%2</a>" ).arg( folder_url.toString(), folder_name ), Bee::userNameToShow( u ) );
+  dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), msg,
+                         chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, true );
   c->sendMessage( m );
-
 }
 
 void Core::sendShareBoxRequest( VNumber user_id, const QString& folder_name, bool create_folder )

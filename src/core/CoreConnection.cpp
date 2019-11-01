@@ -23,12 +23,14 @@
 
 #include "Avatar.h"
 #include "BeeUtils.h"
+#include "Broadcaster.h"
 #include "ChatManager.h"
 #include "ColorManager.h"
 #include "Connection.h"
 #include "Core.h"
 #include "FileShare.h"
 #include "FirewallManager.h"
+#include "Hive.h"
 #include "IconManager.h"
 #include "NetworkManager.h"
 #include "Protocol.h"
@@ -339,9 +341,20 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
         dispatchSystemMessage( ID_DEFAULT_CHAT, user_found.id(), sAlertMsg, DispatchToDefaultAndPrivateChat, ChatMessage::Connection, false );
       }
       else
+      {
         qDebug() << "User" << qPrintable( u.path() ) << "is already online with another connection:" << qPrintable( user_found.path() );
-
-      closeConnection( c );
+        int remote_protocol_version = c->protoVersion();
+        closeConnection( c );
+        if( remote_protocol_version < Settings::instance().protoVersion() || (remote_protocol_version == Settings::instance().protoVersion() && user_found.path() < Settings::instance().localUser().path()) )
+        {
+          if( !isUserConnected( user_found.id() ) )
+          {
+            qDebug() << "User" << qPrintable( user_found.path() ) << "is no longer connected";
+            if( mp_broadcaster->addNetworkAddress( user_found.networkAddress() ) )
+              qDebug() << "User" << qPrintable( user_found.path() ) << "is added to addresses to be contacted";
+          }
+        }
+      }
       return;
     }
 
@@ -350,7 +363,8 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
 
     u.setId( user_found.id() );
     u.setIsFavorite( user_found.isFavorite() );
-    u.setColor( user_found.color() );
+    if( !ColorManager::instance().isValidColor( u.color() ) || u.color() == QString( "#000000" ) )
+      u.setColor( user_found.color() );
   }
   else
     qDebug() << "New user connected:" << qPrintable( u.path() );

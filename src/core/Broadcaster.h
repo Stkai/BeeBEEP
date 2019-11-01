@@ -44,6 +44,8 @@ public:
   int updateUsersFromHive();
   inline const QHostAddress& multicastGroupAddress() const;
 
+  inline bool addNetworkAddress( const NetworkAddress& );
+
 public slots:
   void sendBroadcast();
 
@@ -79,5 +81,6 @@ private:
 // Inline Functions
 inline bool Broadcaster::addHostAddress( const QHostAddress& ha ) { return addNetworkAddress( NetworkAddress( ha, 0 ), false ); }
 inline const QHostAddress& Broadcaster::multicastGroupAddress() const { return m_multicastGroupAddress; }
+inline bool Broadcaster::addNetworkAddress( const NetworkAddress& na ) { return addNetworkAddress( na, false ); }
 
 #endif // BEEBEEP_BROADCASTER_H

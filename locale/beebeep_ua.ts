@@ -56,7 +56,7 @@
     </message>
     <message>
         <source>Open</source>
-        <translation>Відкрити</translation>
+        <translation type="vanished">Відкрити</translation>
     </message>
     <message>
         <source>from</source>
@@ -284,7 +284,7 @@
     </message>
     <message>
         <source>%1 You send folder %2 to %3.</source>
-        <translation>%1 Ви відправили папку %2 для %3.</translation>
+        <translation type="vanished">%1 Ви відправили папку %2 для %3.</translation>
     </message>
     <message>
         <source>Happy Birthday to %1!</source>
@@ -320,7 +320,7 @@
     </message>
     <message>
         <source>%1 You send %2 to %3.</source>
-        <translation>%1 Ви відправили %2 в %3.</translation>
+        <translation type="vanished">%1 Ви відправили %2 в %3.</translation>
     </message>
     <message>
         <source>%1 is removed from file sharing with %2 files</source>
@@ -608,6 +608,22 @@
     </message>
     <message>
         <source>%1 Sending %2 files to %3 users: %4.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 sent %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 Sending %2 to %3.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 Sending folder %2 to %3.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
