@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>396</width>
-    <height>158</height>
+    <width>460</width>
+    <height>230</height>
    </rect>
   </property>
   <property name="palette">
@@ -378,6 +378,20 @@
         </property>
         <property name="textInteractionFlags">
          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="Line" name="line">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="mp_lInfo">
+        <property name="text">
+         <string>Info</string>
         </property>
        </widget>
       </item>

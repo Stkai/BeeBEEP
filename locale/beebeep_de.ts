@@ -4884,6 +4884,10 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>from %1</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>No shared information</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiVCardDialog</name>
@@ -4955,6 +4959,10 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Information to display to other users</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>If you don&apos;t want to show the year to other users use 1900</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiVCardWidget</name>
@@ -5009,6 +5017,10 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>User Path</source>
         <translation>Benutzerpfad</translation>
+    </message>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

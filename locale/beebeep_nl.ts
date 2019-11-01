@@ -6136,47 +6136,52 @@ Gebruik aub een andere naam.</translation>
         <translation>Een gelukkige verjaardag</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="109"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="108"/>
+        <source>No shared information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiVCard.cpp" line="114"/>
         <source>old %1</source>
         <translation>oud %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="111"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="116"/>
         <source>new %1</source>
         <translation>nieuw %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="120"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="125"/>
         <source>BeeBEEP version</source>
         <translation>Beebeep versie</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="151"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="156"/>
         <source>Remove from favorites</source>
         <translation>Uit favorieten verwijderen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="156"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="161"/>
         <source>Add to favorites</source>
         <translation>Toegevoegd aan favorieten</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="173"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="178"/>
         <source>You cannot remove an user who is connected</source>
         <translation>Je kan geen gebruiker verwijderen als hij online is</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="178"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="183"/>
         <source>You cannot remove an user who is in group chat</source>
         <translation>Je kan geen gebruiker verwijderen als hij in een groepschat zit</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="183"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="188"/>
         <source>Remove this user</source>
         <translation>Verwijder deze gebruiker</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="139"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="144"/>
         <source>Open chat</source>
         <translation>Chat openen</translation>
     </message>
@@ -6213,37 +6218,42 @@ Gebruik aub een andere naam.</translation>
         <translation type="obsolete">dd/MM/yyyy</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="257"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="254"/>
+        <source>If you don&apos;t want to show the year to other users use 1900</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="260"/>
         <source>dd/MM/yyyy</source>
         <translation>dd/MM/yyyy</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="279"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="282"/>
         <source>Email</source>
         <translation>Email</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="308"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="311"/>
         <source>Phone</source>
         <translation>Telefoon</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="376"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="379"/>
         <source>Add or change photo</source>
         <translation>Foto toewijzen of wijzigen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="405"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="408"/>
         <source>Remove photo</source>
         <translation>Foto verwijderen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="437"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="440"/>
         <source>Change your nickname color</source>
         <translation>Wijzig kleur van bijnaam</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="476"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="479"/>
         <source>Information to display to other users</source>
         <translation>Informatie tonen aan andere gebruikers</translation>
     </message>
@@ -6252,7 +6262,7 @@ Gebruik aub een andere naam.</translation>
         <translation type="obsolete">Informatie tonen aan andere gebruikers</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="527"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="530"/>
         <source>Regenerate your hash code...</source>
         <translation>Regenereer je hash-code...</translation>
     </message>
@@ -6261,12 +6271,12 @@ Gebruik aub een andere naam.</translation>
         <translation type="obsolete">Andere gegevens</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="547"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="550"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="554"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="557"/>
         <source>Cancel</source>
         <translation>Annuleren</translation>
     </message>
@@ -6309,32 +6319,37 @@ Gebruik aub een andere naam.</translation>
         <translation>Telefoon</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="448"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="394"/>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiVCard.ui" line="462"/>
         <source>S</source>
         <translation>S</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="483"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="497"/>
         <source>Open chat</source>
         <translation>Chat openen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="521"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="535"/>
         <source>Send a file</source>
         <translation>Stuur een bestand</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="556"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="570"/>
         <source>Send a buzz</source>
         <translation>Stuur een buzz</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="591"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="605"/>
         <source>Change the nickname color</source>
         <translation>Wijzig bijnaam kleur</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="649"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="663"/>
         <source>Remove user</source>
         <translation>Verwijder gebruiker</translation>
     </message>

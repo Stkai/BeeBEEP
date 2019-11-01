@@ -80,7 +80,7 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
 
   if( u.vCard().birthday().isValid() )
   {
-    QString s_birth_day = tr( "Birthday: %1" ).arg( u.vCard().birthday().toString( Qt::SystemLocaleShortDate ) );
+    QString s_birth_day = tr( "Birthday: %1" ).arg( u.vCard().birthday().year() == 1900 ? u.vCard().birthday().toString( "d MMMM" ) : u.vCard().birthday().toString( "d MMMM yyyy" ) );
     if( u.isBirthDay() )
       s_birth_day += QString( " <font color=red><b>%1!!!</b></font>" ).arg( tr( "Happy Birthday" ) );
     mp_lBirthday->setText( s_birth_day );
@@ -101,6 +101,11 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
     mp_lPhone->setText( u.vCard().phoneNumber() );
   else
     mp_lPhone->setText( "" );
+
+  if( !u.vCard().info().isEmpty() )
+    mp_lInfo->setText( u.vCard().info() );
+  else
+    mp_lInfo->setText( tr( "No shared information" ) );
 
   QString user_version;
   if( u.version().isEmpty() )

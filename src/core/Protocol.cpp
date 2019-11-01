@@ -604,10 +604,10 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
     user_color = sl.takeFirst();
 
   QStringList user_workgroups;
-  if( !sl.isEmpty() && !Settings::instance().localUser().workgroups().isEmpty() )
+  if( !sl.isEmpty() )
   {
     QString s_workgroups = sl.takeFirst();
-    if( !s_workgroups.isEmpty() )
+    if( !s_workgroups.isEmpty() && !Settings::instance().localUser().workgroups().isEmpty() )
     {
       QStringList user_workgroups_tmp = s_workgroups.split( ", ", QString::SkipEmptyParts );
       if( !Settings::instance().localUser().workgroups().isEmpty() )

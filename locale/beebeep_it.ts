@@ -5150,6 +5150,10 @@ Inserisci un nome differente.</translation>
         <source>from %1</source>
         <translation>da %1</translation>
     </message>
+    <message>
+        <source>No shared information</source>
+        <translation>Nessuna informazione condivisa</translation>
+    </message>
 </context>
 <context>
     <name>GuiVCardDialog</name>
@@ -5225,6 +5229,10 @@ Inserisci un nome differente.</translation>
         <source>Information to display to other users</source>
         <translation>Informazioni da mostrare agli altri utenti</translation>
     </message>
+    <message>
+        <source>If you don&apos;t want to show the year to other users use 1900</source>
+        <translation>Se non vuoi mostrare l&apos;anno agli altri utenti usa 1900</translation>
+    </message>
 </context>
 <context>
     <name>GuiVCardWidget</name>
@@ -5279,6 +5287,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Status description</source>
         <translation>Descrizione dello stato</translation>
+    </message>
+    <message>
+        <source>Info</source>
+        <translation>Informazioni</translation>
     </message>
 </context>
 <context>

@@ -5910,47 +5910,52 @@ Please select a different name.</source>
         <translation>С днем рождения</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="109"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="108"/>
+        <source>No shared information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiVCard.cpp" line="114"/>
         <source>old %1</source>
         <translation>старый %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="111"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="116"/>
         <source>new %1</source>
         <translation>новый %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="120"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="125"/>
         <source>BeeBEEP version</source>
         <translation>Версия BeeBEEP</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="151"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="156"/>
         <source>Remove from favorites</source>
         <translation>Удалить из избранных</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="156"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="161"/>
         <source>Add to favorites</source>
         <translation>Добавить в избранные</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="173"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="178"/>
         <source>You cannot remove an user who is connected</source>
         <translation>Вы не можете удалить подключенного пользователя</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="178"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="183"/>
         <source>You cannot remove an user who is in group chat</source>
         <translation>Вы не можете удалить пользователя в групповом чате</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="183"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="188"/>
         <source>Remove this user</source>
         <translation>Удалить этого пользователя</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="139"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="144"/>
         <source>Open chat</source>
         <translation>Открыть чат</translation>
     </message>
@@ -5983,52 +5988,57 @@ Please select a different name.</source>
         <translation>День рождения</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="257"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="254"/>
+        <source>If you don&apos;t want to show the year to other users use 1900</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="260"/>
         <source>dd/MM/yyyy</source>
         <translation>дд/мм/гггг</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="279"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="282"/>
         <source>Email</source>
         <translation>Эл. почта</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="308"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="311"/>
         <source>Phone</source>
         <translation>Телефон</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="376"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="379"/>
         <source>Add or change photo</source>
         <translation>Добавить или изменить фото</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="405"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="408"/>
         <source>Remove photo</source>
         <translation>Удалить фото</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="437"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="440"/>
         <source>Change your nickname color</source>
         <translation>Изменить цвет вашего псевдонима</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="476"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="479"/>
         <source>Information to display to other users</source>
         <translation>Информация для отображения другим пользователям</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="527"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="530"/>
         <source>Regenerate your hash code...</source>
         <translation>Обновите свой хэш-код...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="547"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="550"/>
         <source>Ok</source>
         <translation>ОК</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEditVCard.ui" line="554"/>
+        <location filename="../src/desktop/GuiEditVCard.ui" line="557"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
@@ -6071,32 +6081,37 @@ Please select a different name.</source>
         <translation>Телефон</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="448"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="394"/>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiVCard.ui" line="462"/>
         <source>S</source>
         <translation>S</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="483"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="497"/>
         <source>Open chat</source>
         <translation>Открыть чат</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="521"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="535"/>
         <source>Send a file</source>
         <translation>Отправить файл</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="556"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="570"/>
         <source>Send a buzz</source>
         <translation>Разбудить</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="591"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="605"/>
         <source>Change the nickname color</source>
         <translation>Изменить цвет псевдонима</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="649"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="663"/>
         <source>Remove user</source>
         <translation>Удалить пользователя</translation>
     </message>
