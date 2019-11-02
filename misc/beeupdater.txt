@@ -17,4 +17,4 @@ CurrentVersion=5.8.2
 CurrentVersion=5.8.2
 
 [Info]
-News="<a style='text-decoration: none;' href='http://www.marcomastroddi.com'><b><font color=#dede00>Give a look to Marco Mastroddi new website!</font></a></b><br /><i>Get Lucky!</i><br /><b>Go Wild!</b>"
+News="<a style='text-decoration: none;' href='https://www.beebeep.net/news'><b><font color=#dede00>BeeBEEP news</font></a></b>"

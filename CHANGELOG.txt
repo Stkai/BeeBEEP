@@ -2,9 +2,10 @@ BEEBEEP (Free Office Messenger) - CHANGELOG - (c) 2019 Marco Mastroddi
 For more informations please visit https://www.beebeep.net
 
 
-BeeBEEP 5.7.7 (in development)
+BeeBEEP 5.8.2
 - New feature: voice messages (you can record your message and send it as file)
 - New feature: file transfer pause/resume
+- New feature: data compression with zlib 
 - Voice messages can be also sent to offline users like text messages
 - Added "Quote selected text" option to context menu (right click) of the chat
 - Added "CheckUserConnectedFromDatagramIp" option in beebeep.rc (to prevent multiple connections from the same user but different ip addresses)
@@ -26,6 +27,7 @@ BeeBEEP 5.7.7 (in development)
 - Added "BroadcastToLocalSubnet" option to send or not send the HELLO message to the local subnet twice when multicasting is active
 - User first and last names, email and phone number are now saved to use it also if the user is offline
 - Added "AppendHostNameToUserName" option in beebeep.rc
+- Added "DisableConnectionSocketDataCompression" option in beebeep.rc
 
 BeeBEEP 5.6.8
 - "ChatSaveFileTransfers" and "ChatSaveSystemMessages" options added in Settings - Chat menu: 
