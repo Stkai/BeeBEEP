@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// This file is part of BeeBEEP.
+// BeeBEEP Copyright (C) 2010-2019 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -13,7 +13,7 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with BeeBEEP.  If not, see <http://www.gnu.org/licenses/>.
+// along with BeeBEEP. If not, see <http://www.gnu.org/licenses/>.
 //
 // Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
@@ -50,6 +50,10 @@ GuiRecordVoiceMessage::GuiRecordVoiceMessage( QWidget *parent )
   mp_sliderVolume->setRange( 0, 100 );
   mp_sliderVolume->setValue( 100 );
   m_fileAccepted = false;
+
+  m_warningDuration = 80;
+  m_criticalDuration = 100;
+  m_maxDuration = 120;
 
   connect( mp_audioRecorder, SIGNAL( durationChanged( qint64 ) ), this, SLOT( updateRecorderProgress( qint64 ) ) );
   connect( mp_audioRecorder, SIGNAL( statusChanged( QMediaRecorder::Status ) ), this, SLOT( onRecorderStatusChanged( QMediaRecorder::Status ) ) );
@@ -107,7 +111,7 @@ void GuiRecordVoiceMessage::sendVoiceMessage()
   if( file_info.exists() && file_info.size() > 0 )
   {
     m_fileAccepted = true;
-    qDebug() << "Recorded voice message in file" << qPrintable( m_filePath );
+    qDebug() << "Recorded voice message saved in file" << qPrintable( m_filePath );
     accept();
   }
   else
@@ -130,33 +134,47 @@ void GuiRecordVoiceMessage::updateRecorderProgress( qint64 duration_ms )
 
   int duration_s = static_cast<int>( duration_ms / 1000.0 );
   mp_progressBar->setValue( duration_s );
-  if( duration_s >= Settings::instance().voiceMessageMaxDuration() )
+  if( duration_s >= m_maxDuration )
   {
     QPalette p = mp_progressBar->palette();
-    p.setColor( QPalette::Highlight, Qt::darkRed );
-    mp_progressBar->setPalette( p );
+    if( p.color( QPalette::Highlight ) != Qt::darkRed )
+    {
+      p.setColor( QPalette::Highlight, Qt::darkRed );
+      p.setColor( QPalette::HighlightedText, Qt::white );
+      mp_progressBar->setPalette( p );
+    }
     mp_audioRecorder->stop();
-    mp_lStatus->setText( tr( "Stopped. Reached the maximum duration of the voice message" ) );
+    mp_lStatus->setText( QString( "%1.<br>%2" ).arg( tr( "Stopped" ) ).arg( tr( "Reached the maximum duration of the voice message." ) ) );
     mp_pbRecord->setEnabled( false );
   }
-  else if( duration_s > m_warningDuration )
+  else if( duration_s >= m_criticalDuration )
   {
-    if( !m_defaultProgressBarColor.isValid() )
+    QPalette p = mp_progressBar->palette();
+    if( p.color( QPalette::Highlight ) != Qt::red )
     {
-      QPalette p = mp_progressBar->palette();
-      m_defaultProgressBarColor = p.color( QPalette::Highlight );
       p.setColor( QPalette::Highlight, Qt::red );
+      p.setColor( QPalette::HighlightedText, Qt::black );
+      mp_progressBar->setPalette( p );
+    }
+  }
+  else if( duration_s >= m_warningDuration )
+  {
+    QPalette p = mp_progressBar->palette();
+    if( p.color( QPalette::Highlight ) != Qt::yellow )
+    {
+      p.setColor( QPalette::Highlight, Qt::yellow );
+      p.setColor( QPalette::HighlightedText, Qt::black );
       mp_progressBar->setPalette( p );
     }
   }
   else
   {
-    if( m_defaultProgressBarColor.isValid() )
+    QPalette p = mp_progressBar->palette();
+    if( p.color( QPalette::Highlight ) != Qt::green )
     {
-      QPalette p = mp_progressBar->palette();
-      p.setColor( QPalette::Highlight, m_defaultProgressBarColor );
+      p.setColor( QPalette::Highlight, Qt::green );
+      p.setColor( QPalette::HighlightedText, Qt::black );
       mp_progressBar->setPalette( p );
-      m_defaultProgressBarColor = QColor();
     }
   }
 }
@@ -188,9 +206,12 @@ void GuiRecordVoiceMessage::onRecorderStatusChanged( QMediaRecorder::Status reco
     mp_lStatus->setText( status_message );
 }
 
-void GuiRecordVoiceMessage::computeWarningDurantion()
+void GuiRecordVoiceMessage::computeDurantionRange()
 {
-  m_warningDuration = qMax( 1, qMin( 60, Settings::instance().voiceMessageMaxDuration() - qMax( 1, Settings::instance().voiceMessageMaxDuration() / 5 ) ) );
+  float max_duration = qMax( 10, Settings::instance().voiceMessageMaxDuration() );
+  m_warningDuration = qMax( 6, qRound( max_duration / 100.0 * 70.0 ) );
+  m_criticalDuration = qMax( 8, qRound( max_duration / 100.0 * 90.0 ) );
+  m_maxDuration = qRound( max_duration );
 }
 
 void GuiRecordVoiceMessage::onRecorderStateChanged( QMediaRecorder::State recorder_state )
@@ -198,15 +219,14 @@ void GuiRecordVoiceMessage::onRecorderStateChanged( QMediaRecorder::State record
   switch( recorder_state )
   {
   case QMediaRecorder::RecordingState:
+    computeDurantionRange();
     mp_pbRecord->setText( tr( "Pause" ) );
     mp_pbRecord->setIcon( IconManager::instance().icon( "pause.png" ) );
-    mp_progressBar->setMaximum( Settings::instance().voiceMessageMaxDuration() );
-    computeWarningDurantion();
+    mp_progressBar->setMaximum( m_maxDuration );
     break;
   case QMediaRecorder::PausedState:
     mp_pbRecord->setText( tr( "Resume" ) );
     mp_pbRecord->setIcon( IconManager::instance().icon( "record.png" ) );
-    mp_progressBar->setMaximum( Settings::instance().voiceMessageMaxDuration() );
     break;
   case QMediaRecorder::StoppedState:
     mp_pbRecord->setText( tr( "Record" ) );
@@ -305,7 +325,7 @@ void GuiRecordVoiceMessage::processAudioBuffer( const QAudioBuffer& buffer )
     for( int i = 0; i < audio_levels.count(); i++ )
       m_audioLevels.at( i )->setLevel( audio_levels.at( i ) );
     if( mp_audioRecorder->status() == QMediaRecorder::RecordingStatus )
-      mp_lStatus->setText( tr( "Recording" ) );
+      mp_lStatus->setText( tr( "Recording" ) + QString( "..." ) );
   }
 }
 

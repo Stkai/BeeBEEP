@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// This file is part of BeeBEEP.
+// BeeBEEP Copyright (C) 2010-2019 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -13,7 +13,7 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with BeeBEEP.  If not, see <http://www.gnu.org/licenses/>.
+// along with BeeBEEP. If not, see <http://www.gnu.org/licenses/>.
 //
 // Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
@@ -733,27 +733,29 @@ void GuiMain::showAbout()
   QMessageBox::about( this, Settings::instance().programName(),
 #endif
                       QString( "<b>%1</b> - Free Office Messenger<br><br>%2<br>%3 %4 %5<br><br>%6 %7<br>%8<br>" )
-                      .arg( Settings::instance().programName() )
-                      .arg( Settings::instance().isDevelopmentVersion() ? tr( "Development version") : tr( "Version" ) )
-                      .arg( Settings::instance().version( true, true, true ) )
-                      .arg( tr( "for" ) )
-                      .arg( Settings::instance().operatingSystem( true ) )
-                      .arg( tr( "developed by" ) )
-                      .arg( QString( "<a href='%1'>Marco Mastroddi</a>" ).arg( Settings::instance().developerWebSite() ) )
-                      .arg( QString( "e-mail: <a href='mailto://marco.mastroddi@gmail.com'>marco.mastroddi@gmail.com</a><br>web: <a href='%1'>www.beebeep.net</a>" ).arg( Settings::instance().officialWebSite() ) )
+                        .arg( Settings::instance().programName() )
+                        .arg( Settings::instance().isDevelopmentVersion() ? tr( "Development version") : tr( "Version" ) )
+                        .arg( Settings::instance().version( true, true, true ) )
+                        .arg( tr( "for" ) )
+                        .arg( Settings::instance().operatingSystem( true ) )
+                        .arg( tr( "developed by" ) )
+                        .arg( QString( "<a href='%1'>Marco Mastroddi</a>" ).arg( Settings::instance().developerWebSite() ) )
+                        .arg( QString( "e-mail: <a href='mailto://marco.mastroddi@gmail.com'>marco.mastroddi@gmail.com</a><br>web: <a href='%1'>www.beebeep.net</a>" ).arg( Settings::instance().officialWebSite() ) )
                       );
 }
 
 void GuiMain::showLicense()
 {
-  QString license_txt = tr( "BeeBEEP is free software: you can redistribute it and/or modify<br>"
-  "it under the terms of the GNU General Public License as published<br>"
-  "by the Free Software Foundation, either version 3 of the License<br>"
-  "or (at your option) any later version.<br><br>"
-  "BeeBEEP is distributed in the hope that it will be useful,<br>"
-  "but WITHOUT ANY WARRANTY; without even the implied warranty<br>"
-  "of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.<br>"
-  "See the GNU General Public License for more details." );
+  QString license_txt = QLatin1String(
+  "BeeBEEP Copyright (C) 2010-2019 Marco Mastroddi <br><br>"
+  "BeeBEEP is free software: you can redistribute it and/or modify "
+  "it under the terms of the GNU General Public License as published "
+  "by the Free Software Foundation, either version 3 of the License "
+  "or (at your option) any later version. <br><br>"
+  "BeeBEEP is distributed in the hope that it will be useful, "
+  "but WITHOUT ANY WARRANTY; without even the implied warranty "
+  "of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. <br><br>"
+  "See the GNU General Public License for more details. <br><br>" );
 #ifdef Q_OS_MAC
   QMessageBox::about( Q_NULLPTR, Settings::instance().programName(), license_txt );
 #else

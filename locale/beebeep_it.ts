@@ -1271,6 +1271,12 @@
         <source>You are trying to send %1 files simultaneously but the maximum allowed is %2.</source>
         <translation>Stai tentando di inviare %1 file simultaneamente ma il massimo consentito è %2.</translation>
     </message>
+    <message>
+        <source>Voice messages are not available with this version of BeeBEEP.
+Download for free and install the version with this feature from the %1 website.</source>
+        <translation>I messaggi vocali non sono disponibili con questa versione di BeeBEEP.
+Scarica gratuitamente ed installa la versione con questa funzionalità dal sito web %1.</translation>
+    </message>
 </context>
 <context>
     <name>GuiChatList</name>
@@ -3194,10 +3200,6 @@ Inserisci un nome differente.</translation>
         <translation>Abilita le notifiche anche nella conversazione con tutti</translation>
     </message>
     <message>
-        <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it under the terms of the GNU General Public License as published&lt;br&gt;by the Free Software Foundation, either version 3 of the License&lt;br&gt;or (at your option) any later version.&lt;br&gt;&lt;br&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br&gt;See the GNU General Public License for more details.</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br&gt;What do you want to do with the selected saved text?</source>
         <translation>La conversazione &apos;%1&apos; selezionata ha già una storia salvata. &lt;br&gt;Cosa vuoi fare con la storia selezionata?</translation>
     </message>
@@ -4037,7 +4039,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Stopped. Reached the maximum duration of the voice message</source>
-        <translation>Finito. E&apos; stata raggiunta la durata massima del messaggio vocale</translation>
+        <translation type="vanished">Finito. E&apos; stata raggiunta la durata massima del messaggio vocale</translation>
     </message>
     <message>
         <source>Record your voice message</source>
@@ -4054,6 +4056,14 @@ Inserisci un nome differente.</translation>
     <message>
         <source>muted</source>
         <translation>muto</translation>
+    </message>
+    <message>
+        <source>Stopped</source>
+        <translation>Fermato</translation>
+    </message>
+    <message>
+        <source>Reached the maximum duration of the voice message.</source>
+        <translation>E&apos; stata raggiunta la durata massima del messaggio vocale.</translation>
     </message>
 </context>
 <context>

@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// This file is part of BeeBEEP.
+// BeeBEEP Copyright (C) 2010-2019 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -13,7 +13,7 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with BeeBEEP.  If not, see <http://www.gnu.org/licenses/>.
+// along with BeeBEEP. If not, see <http://www.gnu.org/licenses/>.
 //
 // Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
@@ -87,7 +87,7 @@ GuiChat::GuiChat( QWidget *parent )
   connect( mp_pbRecordVoiceMessage, SIGNAL( clicked() ), this, SIGNAL( showVoiceMessageDialogRequest() ) );
 #else
   mp_pbRecordVoiceMessage->setDisabled( true );
-  mp_pbRecordVoiceMessage->hide();
+  mp_pbRecordVoiceMessage->setToolTip( tr( "Voice messages are not available with this version of BeeBEEP.\nDownload for free and install the version with this feature from the %1 website." ).arg( Settings::instance().organizationDomain() ) );
 #endif
 
   m_chatId = ID_DEFAULT_CHAT;

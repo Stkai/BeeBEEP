@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// This file is part of BeeBEEP.
+// BeeBEEP Copyright (C) 2010-2019 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -13,7 +13,7 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with BeeBEEP.  If not, see <http://www.gnu.org/licenses/>.
+// along with BeeBEEP. If not, see <http://www.gnu.org/licenses/>.
 //
 // Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
@@ -52,7 +52,7 @@ protected slots:
 
 protected:
   void clearAudioLevels();
-  void computeWarningDurantion();
+  void computeDurantionRange();
   void closeEvent( QCloseEvent* );
   void checkAndSetFilePath();
 
@@ -61,10 +61,10 @@ private:
   QAudioProbe* mp_audioProbe;
   QList<GuiAudioLevel*> m_audioLevels;
   QString m_filePath;
-
-  int m_warningDuration;
-  QColor m_defaultProgressBarColor;
   bool m_fileAccepted;
+  int m_warningDuration;
+  int m_criticalDuration;
+  int m_maxDuration;
 
 };
 

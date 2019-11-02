@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// This file is part of BeeBEEP.
+// BeeBEEP Copyright (C) 2010-2019 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -13,7 +13,7 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with BeeBEEP.  If not, see <http://www.gnu.org/licenses/>.
+// along with BeeBEEP. If not, see <http://www.gnu.org/licenses/>.
 //
 // Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
@@ -482,7 +482,7 @@ void EmoticonManager::createEmojiFiles()
 
   text_stream_out << "//////////////////////////////////////////////////////////////////////\n"
                      "//\n"
-                     "// This file is part of BeeBEEP.\n"
+                     "// BeeBEEP Copyright (C) 2010-2019 Marco Mastroddi\n"
                      "//\n"
                      "// BeeBEEP is free software: you can redistribute it and/or modify\n"
                      "// it under the terms of the GNU General Public License as published\n"
@@ -495,7 +495,7 @@ void EmoticonManager::createEmojiFiles()
                      "// GNU General Public License for more details.\n"
                      "//\n"
                      "// You should have received a copy of the GNU General Public License\n"
-                     "// along with BeeBEEP.  If not, see <http://www.gnu.org/licenses/>.\n"
+                     "// along with BeeBEEP. If not, see <http://www.gnu.org/licenses/>.\n"
                      "//\n"
                      "// Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>\n"
                      "//\n"
