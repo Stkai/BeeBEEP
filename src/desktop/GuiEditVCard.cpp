@@ -42,6 +42,7 @@ GuiEditVCard::GuiEditVCard( QWidget *parent )
   mp_pbChangePhoto->setIcon( IconManager::instance().icon( "add.png" ) );
   mp_pbRemovePhoto->setIcon( IconManager::instance().icon( "delete.png" ) );
   mp_pbColor->setIcon( IconManager::instance().icon( "font-color.png" ) );
+  mp_deBirthday->setToolTip( tr( "If you don't want to show the year to other users use 1900. To remove your birthday use 01/01/1900" ) );
 
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( onOkClicked() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );

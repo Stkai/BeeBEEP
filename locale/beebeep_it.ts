@@ -1520,6 +1520,10 @@ Inserisci un nome differente.</translation>
         <source>It is preferable to use square images to avoid display problems.</source>
         <translation>E&apos; preferibile usare immagini quadrate per evitare problemi di visualizzazione.</translation>
     </message>
+    <message>
+        <source>If you don&apos;t want to show the year to other users use 1900. To remove your birthday use 01/01/1900</source>
+        <translation>Se non vuoi mostrare l&apos;anno agli altri utenti usa 1900. Per rimuovere il tuo compleanno usa 01/01/1900</translation>
+    </message>
 </context>
 <context>
     <name>GuiEmoticons</name>
@@ -5182,7 +5186,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>No shared information</source>
-        <translation>Nessuna informazione condivisa</translation>
+        <translation type="vanished">Nessuna informazione condivisa</translation>
     </message>
     <message>
         <source>none</source>
@@ -5191,6 +5195,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Workgroups</source>
         <translation>Gruppi di lavoro</translation>
+    </message>
+    <message>
+        <source>No shared information.</source>
+        <translation>Nessuna informazione condivisa.</translation>
     </message>
 </context>
 <context>
@@ -5269,7 +5277,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>If you don&apos;t want to show the year to other users use 1900</source>
-        <translation>Se non vuoi mostrare l&apos;anno agli altri utenti usa 1900</translation>
+        <translation type="vanished">Se non vuoi mostrare l&apos;anno agli altri utenti usa 1900</translation>
     </message>
 </context>
 <context>
@@ -5328,7 +5336,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Info</source>
-        <translation>Informazioni</translation>
+        <translation type="vanished">Informazioni</translation>
     </message>
     <message>
         <source>Workgroups</source>
@@ -5615,7 +5623,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>last update</source>
-        <translation>ultimo aggiornamento</translation>
+        <translation type="vanished">ultimo aggiornamento</translation>
     </message>
     <message>
         <source>and</source>
@@ -5627,7 +5635,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>last connection</source>
-        <translation>ultima connessione</translation>
+        <translation type="vanished">ultima connessione</translation>
     </message>
     <message>
         <source>All users</source>
@@ -5760,6 +5768,29 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Please wait</source>
         <translation>Attendere prego</translation>
+    </message>
+    <message>
+        <source>Last update</source>
+        <translation>Ultimo aggiornamento</translation>
+    </message>
+    <message>
+        <source>Last connection</source>
+        <translation>Ultima connessione</translation>
+    </message>
+    <message numerus="yes">
+        <source>%1 unsent message</source>
+        <comment>%1 unsent messages</comment>
+        <translation type="obsolete">
+            <numerusform>%1 messaggio non inviato</numerusform>
+            <numerusform>%1 messaggi non inviati</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <source>%n unsent message(s)</source>
+        <translation>
+            <numerusform>%n mesaggio non inviato</numerusform>
+            <numerusform>%n messaggi non inviati</numerusform>
+        </translation>
     </message>
 </context>
 <context>

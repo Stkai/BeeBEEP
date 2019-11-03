@@ -1435,6 +1435,10 @@ Please select a different name.</source>
         <source>It is preferable to use square images to avoid display problems.</source>
         <translation>використовуйте переважно  квадратні зображення, щоб уникнути проблем із відображенням.</translation>
     </message>
+    <message>
+        <source>If you don&apos;t want to show the year to other users use 1900. To remove your birthday use 01/01/1900</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiEmoticons</name>
@@ -4854,15 +4858,15 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>No shared information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>none</source>
         <translation type="unfinished">не визначено</translation>
     </message>
     <message>
         <source>Workgroups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No shared information.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4932,10 +4936,6 @@ Please select a different name.</source>
         <source>Information to display to other users</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>If you don&apos;t want to show the year to other users use 1900</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>GuiVCardWidget</name>
@@ -4990,10 +4990,6 @@ Please select a different name.</source>
     <message>
         <source>User Path</source>
         <translation>Шлях користувача</translation>
-    </message>
-    <message>
-        <source>Info</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Workgroups</source>
@@ -5228,7 +5224,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>last update</source>
-        <translation>останнє обовлення</translation>
+        <translation type="vanished">останнє обовлення</translation>
     </message>
     <message>
         <source>Set focus in message box</source>
@@ -5268,7 +5264,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>last connection</source>
-        <translation>останнє підключенийие</translation>
+        <translation type="vanished">останнє підключенийие</translation>
     </message>
     <message>
         <source>and %1 others</source>
@@ -5377,6 +5373,22 @@ Please select a different name.</source>
     <message>
         <source>Please wait</source>
         <translation type="unfinished">Зачекайте</translation>
+    </message>
+    <message>
+        <source>Last update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Last connection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <source>%n unsent message(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>

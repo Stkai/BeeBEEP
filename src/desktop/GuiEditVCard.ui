@@ -250,9 +250,6 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="toolTip">
-         <string>If you don't want to show the year to other users use 1900</string>
-        </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
         </property>

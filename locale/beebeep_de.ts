@@ -1455,6 +1455,10 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>It is preferable to use square images to avoid display problems.</source>
         <translation>Verwende vorzugsweise quadratische Bilder, um Anzeigeprobleme zu vermeiden.</translation>
     </message>
+    <message>
+        <source>If you don&apos;t want to show the year to other users use 1900. To remove your birthday use 01/01/1900</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiEmoticons</name>
@@ -4902,16 +4906,16 @@ Bitte wähle einen anderen Namen aus.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>No shared information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>none</source>
         <translation type="unfinished">keine</translation>
     </message>
     <message>
         <source>Workgroups</source>
         <translation type="unfinished">Arbeitsgruppen</translation>
+    </message>
+    <message>
+        <source>No shared information.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4984,10 +4988,6 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Information to display to other users</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>If you don&apos;t want to show the year to other users use 1900</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>GuiVCardWidget</name>
@@ -5042,10 +5042,6 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>User Path</source>
         <translation>Benutzerpfad</translation>
-    </message>
-    <message>
-        <source>Info</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Workgroups</source>
@@ -5288,7 +5284,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>last update</source>
-        <translation>zuletzt aktualisiert</translation>
+        <translation type="vanished">zuletzt aktualisiert</translation>
     </message>
     <message>
         <source>Set focus in message box</source>
@@ -5332,7 +5328,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>last connection</source>
-        <translation>zuletzt verbunden</translation>
+        <translation type="vanished">zuletzt verbunden</translation>
     </message>
     <message>
         <source>Find next text in chat</source>
@@ -5449,6 +5445,21 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>Please wait</source>
         <translation type="unfinished">Bitte warten</translation>
+    </message>
+    <message>
+        <source>Last update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Last connection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <source>%n unsent message(s)</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
 </context>
 <context>

@@ -695,36 +695,6 @@ QString Bee::toolTipForUser( const User& u, bool only_status )
   if( only_status )
     return tool_tip;
 
-  if( u.isStatusConnected() )
-  {
-    if( u.statusDescription().isEmpty() )
-      tool_tip += QString( "\n" );
-    else
-      tool_tip += QString( ": %1\n" ).arg( u.statusDescription() );
-
-    if( !u.vCard().info().isEmpty() )
-    {
-      tool_tip += QString( "~~~\n" );
-      tool_tip += u.vCard().info();
-      tool_tip += QString( "\n~~~\n" );
-    }
-
-    if( u.statusChangedIn().isValid() )
-      tool_tip += QString( "(%1 %2)" ).arg( QObject::tr( "last update" ) ).arg( Bee::dateTimeToString( u.statusChangedIn() ) );
-  }
-  else
-  {
-    if( u.lastConnection().isValid() )
-      tool_tip += QString( "\n(%1 %2)" ).arg( QObject::tr( "last connection" ) ).arg( Bee::dateTimeToString( u.lastConnection() ) );
-
-    int unsent_messages = MessageManager::instance().countMessagesToSendToUserId( u.id() );
-    if( unsent_messages > 0 )
-      tool_tip += QString( "\n[%1 %2]" ).arg( unsent_messages ).arg( QObject::tr( "unsent messages" ) );
-  }
-
-  if( !u.workgroups().isEmpty() )
-    tool_tip += QString( "\n%1: %2" ).arg( QObject::tr( "Workgroups" ) ).arg( Bee::stringListToTextString( u.workgroups(), true, 9 ) );
-
   if( !u.vCard().birthday().isNull() )
   {
     QString text = userBirthdayToText( u );
@@ -732,6 +702,34 @@ QString Bee::toolTipForUser( const User& u, bool only_status )
       tool_tip +=  QString( "\n* %1 *" ).arg( text );
   }
 
+  if( u.isStatusConnected() )
+  {
+    if( !u.statusDescription().isEmpty() )
+      tool_tip += QString( "\n%1" ).arg( u.statusDescription() );
+
+    if( !u.workgroups().isEmpty() )
+      tool_tip += QString( "\n%1: %2" ).arg( QObject::tr( "Workgroups" ) ).arg( Bee::stringListToTextString( u.workgroups(), true, 9 ) );
+
+    if( !u.vCard().info().isEmpty() )
+    {
+      tool_tip += QString( "\n~~~\n" );
+      tool_tip += u.vCard().info();
+      tool_tip += QString( "\n~~~" );
+    }
+
+    if( u.statusChangedIn().isValid() )
+      tool_tip += QString( "\n%1: %2" ).arg( QObject::tr( "Last update" ) ).arg( Bee::dateTimeToString( u.statusChangedIn() ) );
+  }
+  else
+  {
+    if( u.lastConnection().isValid() )
+      tool_tip += QString( "\n%1: %2" ).arg( QObject::tr( "Last connection" ) ).arg( Bee::dateTimeToString( u.lastConnection() ) );
+
+    int unsent_messages = MessageManager::instance().countMessagesToSendToUserId( u.id() );
+    if( unsent_messages > 0 )
+      tool_tip += QString( "\n%1" ).arg( QObject::tr( "%n unsent message(s)", "", unsent_messages ) );
+  }
+  tool_tip += QString( "\n" );
   return tool_tip;
 }
 

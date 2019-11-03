@@ -80,22 +80,25 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
     name_txt.append( QString( ".%1" ).arg( u.domainName().toLower() ) );
   mp_lName->setText( name_txt );
 
-  mp_lStatusDescription->setText( u.statusDescription().isEmpty() ? QString( "" ) : QString( "<i>%1</i>" ).arg( Bee::replaceHtmlSpecialCharacters( u.statusDescription() ) ) );
+  if( !u.statusDescription().isEmpty() )
+    mp_lStatusDescription->setText( QString( "<i>%1</i>" ).arg( Bee::replaceHtmlSpecialCharacters( u.statusDescription() ) ) );
+  else
+    mp_lStatusDescription->hide();
 
   if( u.vCard().birthday().isValid() )
   {
     QString s_birth_day = tr( "Birthday: %1" ).arg( u.vCard().birthday().year() == 1900 ? u.vCard().birthday().toString( "d MMMM" ) : u.vCard().birthday().toString( "d MMMM yyyy" ) );
     if( u.isBirthDay() )
-      s_birth_day += QString( " <font color=red><b>%1!!!</b></font>" ).arg( tr( "Happy Birthday" ) );
+      s_birth_day += QString( " - <font color=red><b>%1!!!</b></font>" ).arg( tr( "Happy Birthday" ) );
     mp_lBirthday->setText( s_birth_day );
   }
   else
-    mp_lBirthday->setText( "" );
+    mp_lBirthday->hide();
 
   if( !u.vCard().email().isEmpty() )
     mp_lEmail->setText( u.vCard().email() );
   else
-    mp_lEmail->setText( "" );
+    mp_lEmail->hide();
 
   mp_lPhoto->setPixmap( Bee::avatarForUser( u, QSize( 96, 96 ), true ) );
 
@@ -104,7 +107,7 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
   if( !u.vCard().phoneNumber().isEmpty() )
     mp_lPhone->setText( u.vCard().phoneNumber() );
   else
-    mp_lPhone->setText( "" );
+    mp_lPhone->hide();
 
   QString workgroups_txt = "";
   if( !u.workgroups().isEmpty() )
@@ -120,12 +123,12 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
     workgroups_txt = tr( "none" );
     mp_lWorkgroups->setToolTip( "" );
   }
-  mp_lWorkgroups->setText( QString( "%1: %2" ).arg( tr( "Workgroups" ), workgroups_txt ) );
+  mp_lWorkgroups->setText( QString( "<b>%1</b>: %2" ).arg( tr( "Workgroups" ), workgroups_txt ) );
 
   if( !u.vCard().info().isEmpty() )
-    mp_lInfo->setText( u.vCard().info() );
+    mp_teInfo->setPlainText( u.vCard().info() );
   else
-    mp_lInfo->setText( tr( "No shared information" ) );
+    mp_teInfo->setPlainText( tr( "No shared information." ) );
 
   QString user_version;
   if( u.version().isEmpty() )

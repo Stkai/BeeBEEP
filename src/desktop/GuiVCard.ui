@@ -7,8 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>460</width>
-    <height>247</height>
+    <height>299</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>460</width>
+    <height>0</height>
+   </size>
   </property>
   <property name="palette">
    <palette>
@@ -278,6 +284,9 @@
         <property name="alignment">
          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
         </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
         <property name="textInteractionFlags">
          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
         </property>
@@ -296,6 +305,9 @@
         </property>
         <property name="alignment">
          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
         </property>
         <property name="textInteractionFlags">
          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
@@ -382,13 +394,6 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="mp_lWorkgroups">
-        <property name="text">
-         <string>Workgroups</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="Line" name="line">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -396,9 +401,34 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="mp_lInfo">
+       <widget class="QLabel" name="mp_lWorkgroups">
         <property name="text">
-         <string>Info</string>
+         <string>Workgroups</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPlainTextEdit" name="mp_teInfo">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="lineWidth">
+         <number>2</number>
+        </property>
+        <property name="midLineWidth">
+         <number>1</number>
+        </property>
+        <property name="undoRedoEnabled">
+         <bool>false</bool>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+        <property name="plainText">
+         <string notr="true"/>
         </property>
        </widget>
       </item>

@@ -2968,6 +2968,7 @@ void GuiMain::showVCard( VNumber user_id )
     cursor_pos.setX( cursor_pos.x() - gvc->size().width() );
   gvc->move( cursor_pos );
   gvc->show();
+  gvc->adjustSize();
   gvc->setFixedSize( gvc->size() );
 }
 
