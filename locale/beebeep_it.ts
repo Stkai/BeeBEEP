@@ -200,7 +200,7 @@
     </message>
     <message>
         <source>Offline messages sent to %2.</source>
-        <translation>I messaggi non inviati sono stati spediti ora a %2.</translation>
+        <translation type="vanished">I messaggi non inviati sono stati spediti ora a %2.</translation>
     </message>
     <message>
         <source>folder</source>
@@ -536,7 +536,7 @@
     </message>
     <message>
         <source>%1 offline messages will be sent as soon as possible.</source>
-        <translation>%1 messaggi non inviati saranno spediti appena possibile.</translation>
+        <translation type="vanished">%1 messaggi non inviati saranno spediti appena possibile.</translation>
     </message>
     <message>
         <source>Offline message will be sent to %1</source>
@@ -552,7 +552,7 @@
     </message>
     <message>
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
-        <translation>I messaggi salvati ancora da inviare avevano un codice di autorizzazione errato e non verranno spediti.</translation>
+        <translation type="vanished">I messaggi salvati ancora da inviare avevano un codice di autorizzazione errato e non verranno spediti.</translation>
     </message>
     <message>
         <source>Saved chats had an incorrect authorization code and will not be added to history.</source>
@@ -681,6 +681,21 @@
     <message>
         <source>unknown duration</source>
         <translation type="vanished">durata sconosciuta</translation>
+    </message>
+    <message>
+        <source>Unsent messages had an incorrect authorization code and will not be sent.</source>
+        <translation>I messaggi salvati ancora da inviare avevano un codice di autorizzazione errato e non verranno spediti.</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n unsent message(s) will be sent as soon as possible.</source>
+        <translation>
+            <numerusform>%n messaggio non ancora inviato sarà spedito appena possibile.</numerusform>
+            <numerusform>%n messaggi non ancora inviati saranno spediti appena possibile.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Offline messages sent to %1.</source>
+        <translation>I messaggi non inviati sono stati spediti a %1.</translation>
     </message>
 </context>
 <context>

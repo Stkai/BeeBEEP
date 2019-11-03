@@ -400,7 +400,7 @@
     </message>
     <message>
         <source>Offline messages sent to %2.</source>
-        <translation>Offline-Nachrichten wurden an %2 gesendet.</translation>
+        <translation type="vanished">Offline-Nachrichten wurden an %2 gesendet.</translation>
     </message>
     <message>
         <source>%1 %2 has refused to download %3.</source>
@@ -520,7 +520,7 @@
     </message>
     <message>
         <source>%1 offline messages will be sent as soon as possible.</source>
-        <translation>%1 Offline-Nachrichten werden schnellstmöglich gesendet.</translation>
+        <translation type="vanished">%1 Offline-Nachrichten werden schnellstmöglich gesendet.</translation>
     </message>
     <message>
         <source>Offline message will be sent to %1</source>
@@ -533,10 +533,6 @@
     <message>
         <source>help page</source>
         <translation>Hilfeseite</translation>
-    </message>
-    <message>
-        <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Saved chats had an incorrect authorization code.</source>
@@ -637,6 +633,21 @@
     <message>
         <source>%1 Sending folder %2 to %3.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsent messages had an incorrect authorization code and will not be sent.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <source>%n unsent message(s) will be sent as soon as possible.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Offline messages sent to %1.</source>
+        <translation type="unfinished">Offline-Nachrichten wurden an %2 gesendet. {1.?}</translation>
     </message>
 </context>
 <context>

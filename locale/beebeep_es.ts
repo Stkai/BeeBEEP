@@ -223,14 +223,14 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="659"/>
-        <source>%1 offline messages will be sent as soon as possible.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/core/CoreChat.cpp" line="704"/>
         <source>Offline message will be sent to %1</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreChat.cpp" line="818"/>
+        <source>Offline messages sent to %1.</source>
+        <translation type="unfinished">Mensajes fuera de linea enviados a %2. {1.?}</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="954"/>
@@ -329,8 +329,16 @@
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="652"/>
-        <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
+        <source>Unsent messages had an incorrect authorization code and will not be sent.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../src/core/CoreChat.cpp" line="659"/>
+        <source>%n unsent message(s) will be sent as soon as possible.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="949"/>
@@ -378,9 +386,8 @@
         <translation>%1 chats guardados se han añadido al historial</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="818"/>
         <source>Offline messages sent to %2.</source>
-        <translation>Mensajes fuera de linea enviados a %2.</translation>
+        <translation type="vanished">Mensajes fuera de linea enviados a %2.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="908"/>
@@ -6280,32 +6287,32 @@ Por favor, elija un nombre diferente.</translation>
         <translation type="unfinished">Grupos de trabajo</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="499"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="505"/>
         <source>S</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="534"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="540"/>
         <source>Open chat</source>
         <translation>Abrir chat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="572"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="578"/>
         <source>Send a file</source>
         <translation>Enviar un archivo</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="607"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="613"/>
         <source>Send a buzz</source>
         <translation>Enviar una alerta Buzz</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="642"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="648"/>
         <source>Change the nickname color</source>
         <translation>Cambiar color del alias</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="700"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="706"/>
         <source>Remove user</source>
         <translation>Quitar usuario</translation>
     </message>

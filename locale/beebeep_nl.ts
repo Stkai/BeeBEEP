@@ -331,8 +331,25 @@
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="652"/>
+        <source>Unsent messages had an incorrect authorization code and will not be sent.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../src/core/CoreChat.cpp" line="659"/>
+        <source>%n unsent message(s) will be sent as soon as possible.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreChat.cpp" line="818"/>
+        <source>Offline messages sent to %1.</source>
+        <translation type="unfinished">Offline bericht verzonden naar%2. {1.?}</translation>
+    </message>
+    <message>
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
-        <translation>Offline berichten die nog moesten worden verzonden, hadden een onjuiste autorisatiecode en worden niet verzonden.</translation>
+        <translation type="vanished">Offline berichten die nog moesten worden verzonden, hadden een onjuiste autorisatiecode en worden niet verzonden.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="949"/>
@@ -380,9 +397,8 @@
         <translation>%1 opgeslagen chats zijn aan geschiedenis toegevoegd</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="659"/>
         <source>%1 offline messages will be sent as soon as possible.</source>
-        <translation>%1 offline berichten zullen zo spoedig mogelijk worden verzonden.</translation>
+        <translation type="vanished">%1 offline berichten zullen zo spoedig mogelijk worden verzonden.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="704"/>
@@ -390,9 +406,8 @@
         <translation>Offline bericht wordt verzonden naar %1</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="818"/>
         <source>Offline messages sent to %2.</source>
-        <translation>Offline bericht verzonden naar%2.</translation>
+        <translation type="vanished">Offline bericht verzonden naar%2.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="908"/>
@@ -6352,32 +6367,32 @@ Gebruik aub een andere naam.</translation>
         <translation type="unfinished">Werkgroepen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="499"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="505"/>
         <source>S</source>
         <translation>S</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="534"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="540"/>
         <source>Open chat</source>
         <translation>Chat openen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="572"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="578"/>
         <source>Send a file</source>
         <translation>Stuur een bestand</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="607"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="613"/>
         <source>Send a buzz</source>
         <translation>Stuur een buzz</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="642"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="648"/>
         <source>Change the nickname color</source>
         <translation>Wijzig bijnaam kleur</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="700"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="706"/>
         <source>Remove user</source>
         <translation>Verwijder gebruiker</translation>
     </message>

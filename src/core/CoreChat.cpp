@@ -649,14 +649,14 @@ void Core::addListToSavedChats()
       qWarning() << "Incorrect autorization code found in offline messages file";
       dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2" )
                              .arg( IconManager::instance().toHtml( "warning.png", "*!*" ) )
-                             .arg( tr( "Offline messages still to be sent had an incorrect authorization code and will not be sent.") ),
+                             .arg( tr( "Unsent messages had an incorrect authorization code and will not be sent.") ),
                              DispatchToChat, ChatMessage::System, false );
     }
     else
     {
       dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2" )
                              .arg( IconManager::instance().toHtml( "unsent-message.png", "*m*" ) )
-                             .arg( tr( "%1 offline messages will be sent as soon as possible." ).arg( bscl->unsentMessages().size() ) ),
+                             .arg( tr( "%n unsent message(s) will be sent as soon as possible.", "", bscl->unsentMessages().size() ) ),
                              DispatchToChat, ChatMessage::System, false );
       foreach( MessageRecord mr, bscl->unsentMessages() )
       {
@@ -815,7 +815,7 @@ int Core::checkOfflineMessagesForUser( const User& u )
     {
       dispatchSystemMessage( ci, u.id(), QString( "%1 %2" )
                              .arg( IconManager::instance().toHtml( "unsent-message.png", "*m*" ) )
-                             .arg( tr( "Offline messages sent to %2." ).arg( Bee::userNameToShow( u, true ) ) ),
+                             .arg( tr( "Offline messages sent to %1." ).arg( Bee::userNameToShow( u, true ) ) ),
                              DispatchToChat, ChatMessage::Other, false );
     }
     qDebug() << messages_sent << "offline messages sent to" << qPrintable( u.path() ) << "-" << unsent_messages.size() << "messages left";

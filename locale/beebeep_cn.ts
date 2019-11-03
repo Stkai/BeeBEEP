@@ -315,8 +315,20 @@
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="652"/>
-        <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
+        <source>Unsent messages had an incorrect authorization code and will not be sent.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../src/core/CoreChat.cpp" line="659"/>
+        <source>%n unsent message(s) will be sent as soon as possible.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreChat.cpp" line="818"/>
+        <source>Offline messages sent to %1.</source>
+        <translation type="unfinished">发送到%2的脱机消息 {1.?}</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="949"/>
@@ -359,19 +371,13 @@
         <translation>%1保存的聊天记录将添加到历史记录中</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="659"/>
-        <source>%1 offline messages will be sent as soon as possible.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/core/CoreChat.cpp" line="704"/>
         <source>Offline message will be sent to %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="818"/>
         <source>Offline messages sent to %2.</source>
-        <translation>发送到%2的脱机消息</translation>
+        <translation type="vanished">发送到%2的脱机消息</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="908"/>
@@ -6214,32 +6220,32 @@ Please select a different name.</source>
         <translation type="unfinished">工作群组</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="499"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="505"/>
         <source>S</source>
         <translation>S</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="534"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="540"/>
         <source>Open chat</source>
         <translation>打开聊天</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="572"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="578"/>
         <source>Send a file</source>
         <translation>发送一个文件</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="607"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="613"/>
         <source>Send a buzz</source>
         <translation>发送一个蜂鸣</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="642"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="648"/>
         <source>Change the nickname color</source>
         <translation>修改昵称颜色</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="700"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="706"/>
         <source>Remove user</source>
         <translation>移除用户</translation>
     </message>

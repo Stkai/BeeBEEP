@@ -223,14 +223,18 @@
         <translation>Les discussions enregistrées avaient un code d&apos;autorisation incorrect.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="659"/>
         <source>%1 offline messages will be sent as soon as possible.</source>
-        <translation>%1  messages hors ligne seront envoyés dès que possible.</translation>
+        <translation type="vanished">%1  messages hors ligne seront envoyés dès que possible.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="704"/>
         <source>Offline message will be sent to %1</source>
         <translation>Le message hors ligne sera envoyé à %1</translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreChat.cpp" line="818"/>
+        <source>Offline messages sent to %1.</source>
+        <translation type="unfinished">Messages hors-ligne envoyés à %2. {1.?}</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="954"/>
@@ -329,8 +333,20 @@
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="652"/>
+        <source>Unsent messages had an incorrect authorization code and will not be sent.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../src/core/CoreChat.cpp" line="659"/>
+        <source>%n unsent message(s) will be sent as soon as possible.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message>
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
-        <translation>Les messages hors ligne qui restent à envoyer ont un code d&apos;autorisation incorrect et ne seront pas envoyés.</translation>
+        <translation type="vanished">Les messages hors ligne qui restent à envoyer ont un code d&apos;autorisation incorrect et ne seront pas envoyés.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="949"/>
@@ -378,9 +394,8 @@
         <translation>%1 discussions enregistrées sont ajoutées à l&apos;historique</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="818"/>
         <source>Offline messages sent to %2.</source>
-        <translation>Messages hors-ligne envoyés à %2.</translation>
+        <translation type="vanished">Messages hors-ligne envoyés à %2.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="908"/>
@@ -6325,33 +6340,33 @@ Please select a different name.</source>
         <translation type="unfinished">Groupes de travail</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="499"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="505"/>
         <source>S</source>
         <translation>S</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="534"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="540"/>
         <source>Open chat</source>
         <translation>Ouvrir la discussion</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="572"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="578"/>
         <source>Send a file</source>
         <translation>Envoyer un fichier</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="607"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="613"/>
         <source>Send a buzz</source>
         <translatorcomment>Qu&apos;est-ce qu&apos;un buzz?</translatorcomment>
         <translation>Envoyer un buzz</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="642"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="648"/>
         <source>Change the nickname color</source>
         <translation>Changer la couleur du pseudo</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="700"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="706"/>
         <source>Remove user</source>
         <translation>Supprimer l&apos;utilisateur</translation>
     </message>

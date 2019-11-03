@@ -315,8 +315,24 @@
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="652"/>
+        <source>Unsent messages had an incorrect authorization code and will not be sent.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../src/core/CoreChat.cpp" line="659"/>
+        <source>%n unsent message(s) will be sent as soon as possible.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message>
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
-        <translation>الرسائل غير المتصلة التي لا يزال يتعين إرسالها بها رمز تفويض غير صحيح ولن يتم إرسالها.</translation>
+        <translation type="vanished">الرسائل غير المتصلة التي لا يزال يتعين إرسالها بها رمز تفويض غير صحيح ولن يتم إرسالها.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="698"/>
@@ -324,6 +340,11 @@
         <location filename="../src/core/CoreVoiceChat.cpp" line="66"/>
         <source>voice message</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreChat.cpp" line="818"/>
+        <source>Offline messages sent to %1.</source>
+        <translation type="unfinished">تم إرسال الرسائل بلا اتصال إلى %2. {1.?}</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="949"/>
@@ -366,9 +387,8 @@
         <translation>%1 الدردشات المحفوظة تضاف إلى التاريخ</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="659"/>
         <source>%1 offline messages will be sent as soon as possible.</source>
-        <translation>%1 سيتم إرسال الرسائل في وضع عدم الاتصال في أقرب وقت ممكن.</translation>
+        <translation type="vanished">%1 سيتم إرسال الرسائل في وضع عدم الاتصال في أقرب وقت ممكن.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="704"/>
@@ -376,9 +396,8 @@
         <translation>سيتم إرسال رسالة بلا اتصال إلى %1</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="818"/>
         <source>Offline messages sent to %2.</source>
-        <translation>تم إرسال الرسائل بلا اتصال إلى %2.</translation>
+        <translation type="vanished">تم إرسال الرسائل بلا اتصال إلى %2.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="908"/>
@@ -6126,32 +6145,32 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="499"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="505"/>
         <source>S</source>
         <translation>S</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="534"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="540"/>
         <source>Open chat</source>
         <translation>افتح محادثة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="572"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="578"/>
         <source>Send a file</source>
         <translation>أرسل ملف</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="607"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="613"/>
         <source>Send a buzz</source>
         <translation>أرسل طنين</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="642"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="648"/>
         <source>Change the nickname color</source>
         <translation>غير لون اللقب</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="700"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="706"/>
         <source>Remove user</source>
         <translation>أزل مستخدم</translation>
     </message>

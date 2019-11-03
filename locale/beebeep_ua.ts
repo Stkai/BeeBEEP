@@ -440,7 +440,7 @@
     </message>
     <message>
         <source>Offline messages sent to %2.</source>
-        <translation>Офлайн повідомлення відправлені %2.</translation>
+        <translation type="vanished">Офлайн повідомлення відправлені %2.</translation>
     </message>
     <message>
         <source>%1 %2 has refused to download %3.</source>
@@ -503,10 +503,6 @@
         <translation>%1 Користувач %2 не може зберегти невідправлені повідомлення по шляху: %3</translation>
     </message>
     <message>
-        <source>%1 offline messages will be sent as soon as possible.</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Offline message will be sent to %1</source>
         <translation>Офлайн повідомлення відправлені %1</translation>
     </message>
@@ -520,7 +516,7 @@
     </message>
     <message>
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
-        <translation>Офлайн-повідомлення, які ще не надіслані, мають неправильний код авторизації і вони не надсилаються.</translation>
+        <translation type="vanished">Офлайн-повідомлення, які ще не надіслані, мають неправильний код авторизації і вони не надсилаються.</translation>
     </message>
     <message>
         <source>Saved chats had an incorrect authorization code.</source>
@@ -621,6 +617,22 @@
     <message>
         <source>%1 Sending folder %2 to %3.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unsent messages had an incorrect authorization code and will not be sent.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <source>%n unsent message(s) will be sent as soon as possible.</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Offline messages sent to %1.</source>
+        <translation type="unfinished">Офлайн повідомлення відправлені %2. {1.?}</translation>
     </message>
 </context>
 <context>
