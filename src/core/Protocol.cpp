@@ -1353,6 +1353,7 @@ Message Protocol::fileInfoToMessage( const FileInfo& fi )
   sl << fi.mimeType();
   sl << QString::number( fi.contentType() );
   sl << QString::number( fi.startingPosition() );
+  sl << QString::number( fi.duration() );
   m.setData( sl.join( DATA_FIELD_SEPARATOR ) );
   m.addFlag( Message::Private );
   if( fi.contentType() == FileInfo::VoiceMessage )
@@ -1411,11 +1412,22 @@ FileInfo Protocol::fileInfoFromMessage( const Message& m )
 
   if( !sl.isEmpty() )
   {
-    FileSizeType file_position = Bee::qVariantToFileSizeType( sl.takeFirst() );
-    if( file_position <  fi.size() )
+    FileSizeType file_position = Bee::qVariantToFileSizeType( sl.takeFirst(), &ok );
+    if( !ok )
+      fi.setStartingPosition( 0 );
+    else if( file_position <  fi.size() )
       fi.setStartingPosition( file_position );
     else
       fi.setStartingPosition( fi.size() );
+  }
+
+  if( !sl.isEmpty() )
+  {
+    qint64 file_duration = Bee::qVariantToFileSizeType( sl.takeFirst(), &ok );
+    if( !ok || file_duration <= 0 )
+      fi.setDuration( -1 );
+    else
+      fi.setDuration( file_duration );
   }
 
   return fi;
@@ -1585,11 +1597,9 @@ QList<FileInfo> Protocol::messageFolderToInfoList( const Message& m, const QHost
   while( it != sl.end() )
   {
     QStringList sl_tmp = (*it).split( DATA_FIELD_SEPARATOR );
-
     if( sl_tmp.size() >= 7 )
     {
       FileInfo fi;
-
       fi.setTransferType( FileInfo::Download );
       fi.setHostAddress( server_address );
       fi.setHostPort( static_cast<quint16>(server_port) );
@@ -1604,7 +1614,6 @@ QList<FileInfo> Protocol::messageFolderToInfoList( const Message& m, const QHost
         fi.setChatPrivateId( sl_tmp.takeFirst() );
       file_info_list.append( fi );
     }
-
     ++it;
   }
 
@@ -1660,16 +1669,13 @@ QList<FileInfo> Protocol::messageToFileShare( const Message& m, const QHostAddre
   int server_port = sl.takeFirst().toInt();
 
   sl = m.text().split( PROTOCOL_FIELD_SEPARATOR, QString::SkipEmptyParts );
-
   QStringList::const_iterator it = sl.begin();
   while( it != sl.end() )
   {
     QStringList sl_tmp = (*it).split( DATA_FIELD_SEPARATOR );
-
     if( sl_tmp.size() >= 5 )
     {
       FileInfo fi;
-
       fi.setTransferType( FileInfo::Download );
       fi.setHostAddress( server_address );
       fi.setHostPort( static_cast<quint16>(server_port) );
@@ -1682,16 +1688,12 @@ QList<FileInfo> Protocol::messageToFileShare( const Message& m, const QHostAddre
         fi.setFileHash( sl_tmp.takeFirst() );
       else
         fi.setFileHash( fileInfoHashTmp( fi.id(), fi.name(), fi.size() ) );
-
       if( !sl_tmp.isEmpty() )
         fi.setShareFolder( Bee::convertToNativeFolderSeparator( sl_tmp.takeFirst() ) );
-
       file_info_list.append( fi );
     }
-
     ++it;
   }
-
   return file_info_list;
 }
 

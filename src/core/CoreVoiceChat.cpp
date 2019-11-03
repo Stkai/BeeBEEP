@@ -26,9 +26,10 @@
 #include "Core.h"
 #include "Protocol.h"
 #include "Settings.h"
+#include "BeeUtils.h"
 
 
-bool Core::sendVoiceMessageToChat( VNumber chat_id, const QString& file_path )
+bool Core::sendVoiceMessageToChat( VNumber chat_id, const QString& file_path, qint64 message_duration )
 {
   QString icon_html = IconManager::instance().toHtml( "red-ball.png", "*F*" );
 
@@ -54,15 +55,16 @@ bool Core::sendVoiceMessageToChat( VNumber chat_id, const QString& file_path )
     return false;
   }
 
-  FileInfo fi = mp_fileTransfer->addFile( file, "", false, c.privateId(), FileInfo::VoiceMessage );
+  FileInfo fi = mp_fileTransfer->addFile( file, "", false, c.privateId(), FileInfo::VoiceMessage, message_duration );
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Voice message" << fi.path() << "is added to file transfer list";
 #endif
 
   QUrl file_url = QUrl::fromLocalFile( file_path );
   file_url.setScheme( FileInfo::urlSchemeVoiceMessage() );
-  QString msg_html = QString( "[ <a href=\"%1\">%2</a> ] %3" ).arg( file_url.toString(),
+  QString msg_html = QString( "[ <a href=\"%1\">%2</a> ] (%3) %4" ).arg( file_url.toString(),
                                                                     tr( "voice message" ),
+                                                                    Bee::timeToString( message_duration ),
                                                                     IconManager::instance().toHtml( "voice-message.png", "*v*" ) );
   dispatchToChat( ChatMessage( ID_LOCAL_USER, msg_html, ChatMessage::Voice, true ), chat_id );
   Message m = Protocol::instance().fileInfoToMessage( fi );

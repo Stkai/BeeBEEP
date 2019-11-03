@@ -67,7 +67,7 @@ signals:
   void showVCardRequest( VNumber );
   void updateChatColorsRequest();
 #ifdef BEEBEEP_USE_VOICE_CHAT
-  void sendVoiceMessageRequest( VNumber, const QString& );
+  void sendVoiceMessageRequest( VNumber, const QString&, qint64 );
 #endif
 
 protected:

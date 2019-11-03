@@ -547,7 +547,9 @@ void GuiFloatingChat::showRecordMessageDialog()
   grvm->setRecipient( ChatManager::instance().chatName( mp_chat->chatId() ) );
   grvm->show();
   if( grvm->exec() == QDialog::Accepted )
-    emit sendVoiceMessageRequest( mp_chat->chatId(), grvm->filePath() );
+  {
+    emit sendVoiceMessageRequest( mp_chat->chatId(), grvm->filePath(), grvm->duration() );
+  }
   // deleted in Close Event to bypass crash if you close a modal dialog with QUIT
 }
 #endif

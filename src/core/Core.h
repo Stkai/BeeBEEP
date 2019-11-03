@@ -124,7 +124,7 @@ public:
 
 #ifdef BEEBEEP_USE_VOICE_CHAT
   /* CoreVoiceChat.cpp */
-  bool sendVoiceMessageToChat( VNumber chat_id, const QString& file_path );
+  bool sendVoiceMessageToChat( VNumber chat_id, const QString& file_path, qint64 message_duration );
 #endif
 
 public slots:

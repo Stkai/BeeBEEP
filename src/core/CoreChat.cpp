@@ -780,7 +780,7 @@ int Core::checkOfflineMessagesForUser( const User& u )
         QFileInfo fi_voice( file_path );
         if( fi_voice.exists() )
         {
-          FileInfo file_info = mp_fileTransfer->addFile( fi_voice, fi.shareFolder(), fi.isInShareBox(), fi.chatPrivateId(), fi.contentType() );
+          FileInfo file_info = mp_fileTransfer->addFile( fi_voice, fi.shareFolder(), fi.isInShareBox(), fi.chatPrivateId(), fi.contentType(), fi.duration() );
           mr.setMessage( Protocol::instance().fileInfoToMessage( file_info ) );
         }
         else

@@ -164,7 +164,11 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
       file_url.setScheme( FileInfo::urlSchemeVoiceMessage() );
 #endif
       sys_msg_play_voice_chat = QString( "%1 %2 <a href=\"%3\">%4</a>." ).arg( html_audio_icon, sys_txt, file_url.toString(), tr( "Listen" ) );
-      chat_voice_msg_html = QString( "[ <a href=\"%1\">%2</a> ] %3" ).arg( file_url.toString(), tr( "voice message" ), html_audio_icon );
+      chat_voice_msg_html = QString( "[ <a href=\"%1\">%2</a> ]%3%4" )
+                              .arg( file_url.toString() )
+                              .arg( tr( "voice message" ) )
+                              .arg( fi.duration() > 0 ? QString( " (%1) " ).arg( Bee::timeToString( fi.duration() ) ) : QString( " " ) )
+                              .arg( html_audio_icon );
       // New feature: adding save as to avoid cache deleted ... select voice message folder
     }
     else
@@ -380,7 +384,7 @@ bool Core::sendFileToUser( const User&u, const QString& file_path, const QString
   }
   else
   {
-    FileInfo fi = mp_fileTransfer->addFile( file, share_folder, to_share_box, chat_selected.privateId(), FileInfo::File );
+    FileInfo fi = mp_fileTransfer->addFile( file, share_folder, to_share_box, chat_selected.privateId(), FileInfo::File, -1 );
     Connection* c = connection( u.id() );
     if( c )
     {

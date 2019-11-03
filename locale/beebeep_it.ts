@@ -678,6 +678,10 @@
         <source>%1 Sending folder %2 to %3.</source>
         <translation>%1 Stai inviando la cartella %2 a %3.</translation>
     </message>
+    <message>
+        <source>unknown duration</source>
+        <translation type="vanished">durata sconosciuta</translation>
+    </message>
 </context>
 <context>
     <name>Date</name>

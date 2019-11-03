@@ -144,7 +144,7 @@ void FileTransfer::removeFile( const QString& file_path )
   }
 }
 
-FileInfo FileTransfer::addFile( const QFileInfo& fi, const QString& share_folder, bool to_share_box, const QString& chat_private_id, FileInfo::ContentType content_type )
+FileInfo FileTransfer::addFile( const QFileInfo& fi, const QString& share_folder, bool to_share_box, const QString& chat_private_id, FileInfo::ContentType content_type, qint64 message_duration )
 {
   FileInfo file_info = fileInfo( fi.absoluteFilePath(), chat_private_id );
   if( file_info.isValid() )
@@ -159,6 +159,7 @@ FileInfo FileTransfer::addFile( const QFileInfo& fi, const QString& share_folder
   file_info = Protocol::instance().fileInfo( fi, share_folder, to_share_box, chat_private_id, content_type );
   file_info.setHostAddress( Settings::instance().localUser().networkAddress().hostAddress() );
   file_info.setHostPort( serverPort() );
+  file_info.setDuration( message_duration );
   m_files.append( file_info );
   return file_info;
 }

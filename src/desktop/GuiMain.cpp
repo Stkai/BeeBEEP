@@ -214,7 +214,7 @@ void GuiMain::setupChatConnections( GuiChat* gui_chat )
   connect( gui_chat, SIGNAL( newMessage( VNumber, const QString& ) ), this, SLOT( sendMessage( VNumber, const QString& ) ) );
   connect( gui_chat, SIGNAL( writing( VNumber ) ), beeCore, SLOT( sendWritingMessage( VNumber ) ) );
   connect( gui_chat, SIGNAL( nextChat() ), this, SLOT( showNextChat() ) );
-  connect( gui_chat, SIGNAL( openUrl( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
+  connect( gui_chat, SIGNAL( openUrl( const QUrl&, VNumber ) ), this, SLOT( openUrlFromChat( const QUrl&, VNumber ) ) );
   connect( gui_chat, SIGNAL( sendFileFromChatRequest( VNumber, const QString& ) ), this, SLOT( sendFileFromChat( VNumber, const QString& ) ) );
   connect( gui_chat, SIGNAL( sendFilesFromChatRequest( VNumber, const QStringList& ) ), this, SLOT( sendFilesFromChat( VNumber, const QStringList& ) ) );
   connect( gui_chat, SIGNAL( editGroupRequest( VNumber ) ), this, SLOT( editGroupChat( VNumber ) ) );
@@ -3149,6 +3149,11 @@ void GuiMain::removeFromShare( const QString& share_path )
 
 void GuiMain::openUrl( const QUrl& file_url )
 {
+  openUrlFromChat( file_url, ID_INVALID );
+}
+
+void GuiMain::openUrlFromChat( const QUrl& file_url, VNumber chat_id )
+{
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Opening url (not encoded):" << qPrintable( file_url.toString() );
 #endif
@@ -3181,7 +3186,7 @@ void GuiMain::openUrl( const QUrl& file_url )
     {
       QFileInfo file_info_url( adj_file_url.toLocalFile() );
       adj_file_url = QUrl::fromLocalFile( Bee::convertToNativeFolderSeparator( file_info_url.absoluteDir().absolutePath() ) );
-      openUrl( adj_file_url );
+      openUrlFromChat( adj_file_url, chat_id );
       return;
     }
   }
@@ -3195,17 +3200,17 @@ void GuiMain::openUrl( const QUrl& file_url )
       if( !mp_voicePlayer )
       {
         mp_voicePlayer = new VoicePlayer( this );
-        connect( mp_voicePlayer, SIGNAL( openWithExternalPlayer( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
+        connect( mp_voicePlayer, SIGNAL( openWithExternalPlayer( const QUrl&, VNumber ) ), this, SLOT( openUrlFromChat( const QUrl&, VNumber ) ) );
       }
       QString voice_file_path = Bee::convertToNativeFolderSeparator( adj_file_url.toLocalFile() );
-      if( !mp_voicePlayer->playFile( voice_file_path ) )
+      if( !mp_voicePlayer->playFile( voice_file_path, chat_id ) )
       {
         QMessageBox::information( qApp->activeWindow(), Settings::instance().programName(),
                                   tr( "Unable to open voice message %1" ).arg( voice_file_path.isEmpty() ? adj_file_url.toString() : voice_file_path ), tr( "Ok" ) );
       }
     }
     else
-      openUrl( adj_file_url );
+      openUrlFromChat( adj_file_url, chat_id );
   }
 #endif
 #if QT_VERSION >= 0x040800
@@ -3968,7 +3973,7 @@ void GuiMain::sendBroadcastMessage()
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   beeCore->sendDnsMulticastingMessage();
 #endif
-  QTimer::singleShot( 61 * 1000, this, SLOT( enableBroadcastAction() ) );
+  QTimer::singleShot( 61000, this, SLOT( enableBroadcastAction() ) );
 }
 
 void GuiMain::enableBroadcastAction()
@@ -4120,7 +4125,7 @@ GuiFloatingChat* GuiMain::createFloatingChat( const Chat& c )
     connect( fl_chat, SIGNAL( showVCardRequest( VNumber ) ), this, SLOT( showVCard( VNumber ) ) );
     connect( fl_chat, SIGNAL( updateChatColorsRequest() ), this, SLOT( updateChatColors() ) );
 #ifdef BEEBEEP_USE_VOICE_CHAT
-    connect( fl_chat, SIGNAL( sendVoiceMessageRequest( VNumber, const QString& ) ), this, SLOT( sendVoiceMessageToChat( VNumber, const QString& ) ) );
+    connect( fl_chat, SIGNAL( sendVoiceMessageRequest( VNumber, const QString&, qint64 ) ), this, SLOT( sendVoiceMessageToChat( VNumber, const QString&, qint64 ) ) );
 #endif
 
     m_floatingChats.append( fl_chat );
@@ -5196,9 +5201,9 @@ void GuiMain::loadStyle()
 }
 
 #ifdef BEEBEEP_USE_VOICE_CHAT
-void GuiMain::sendVoiceMessageToChat( VNumber chat_id, const QString& file_path )
+void GuiMain::sendVoiceMessageToChat( VNumber chat_id, const QString& file_path, qint64 message_duration )
 {
-  beeCore->sendVoiceMessageToChat( chat_id, file_path );
+  beeCore->sendVoiceMessageToChat( chat_id, file_path, message_duration );
 }
 
 void GuiMain::showVoiceEncoderSettings()

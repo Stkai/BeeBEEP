@@ -62,7 +62,7 @@ signals:
   void newMessage( VNumber, const QString& );
   void writing( VNumber );
   void nextChat();
-  void openUrl( const QUrl& );
+  void openUrl( const QUrl&, VNumber );
   void sendFileFromChatRequest( VNumber, const QString& );
   void sendFilesFromChatRequest( VNumber, const QStringList& );
   void editGroupRequest( VNumber );

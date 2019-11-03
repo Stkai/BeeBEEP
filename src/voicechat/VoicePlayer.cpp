@@ -26,7 +26,7 @@
 
 
 VoicePlayer::VoicePlayer( QObject* parent )
- : QObject( parent ), m_currentFilePath(), mp_voicePlayer( Q_NULLPTR )
+ : QObject( parent ), m_chatId( ID_INVALID ), m_currentFilePath(), mp_voicePlayer( Q_NULLPTR )
 {
   if( AudioManager::instance().isAudioDeviceAvailable() )
   {
@@ -45,12 +45,12 @@ void VoicePlayer::onError( QMediaPlayer::Error error_code )
   {
     qDebug() << "VoicePlayer tries to use external player to read file" << qPrintable( m_currentFilePath );
     QUrl file_url = QUrl::fromLocalFile( m_currentFilePath );
-    emit openWithExternalPlayer( file_url );
+    emit openWithExternalPlayer( file_url, m_chatId );
   }
   stop();
 }
 
-bool VoicePlayer::playFile( const QString& file_path )
+bool VoicePlayer::playFile( const QString& file_path, VNumber chat_id )
 {
   if( !canPlay() )
     return false;
@@ -64,11 +64,12 @@ bool VoicePlayer::playFile( const QString& file_path )
     return false;
   }
 
+  m_chatId = chat_id;
   m_currentFilePath = file_path;
   QMediaContent media_content( QUrl::fromLocalFile( m_currentFilePath ) );
   mp_voicePlayer->setMedia( media_content );
   mp_voicePlayer->play();
-  emit playing( m_currentFilePath );
+  emit playing( m_currentFilePath, m_chatId );
   return true;
 }
 
@@ -77,7 +78,8 @@ void VoicePlayer::stop()
   if( mp_voicePlayer && !isStopped() )
     mp_voicePlayer->stop();
   if( !m_currentFilePath.isEmpty() )
-    emit finished( m_currentFilePath );
+    emit finished( m_currentFilePath, m_chatId );
+  m_chatId = ID_INVALID;
   m_currentFilePath = "";
 }
 

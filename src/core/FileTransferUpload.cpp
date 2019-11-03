@@ -63,8 +63,11 @@ void FileTransferPeer::checkUploadRequest( const QByteArray& byte_array )
     cancelTransfer();
     return;
   }
-
-  qDebug() << qPrintable( name() ) << "receives a file request:" << file_info.id() << file_info.password();
+#ifdef BEEBEEP_DEBUG
+  qDebug() << qPrintable( name() ) << "receives a file request:" << file_info.name() << file_info.id() << file_info.password();
+#else
+  qDebug() << qPrintable( name() ) << "receives a file request:" << file_info.name();
+#endif
   emit fileUploadRequest( file_info );
 }
 

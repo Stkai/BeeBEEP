@@ -36,26 +36,29 @@ public:
   inline bool isPlaying() const;
   inline bool isStopped() const;
   inline const QString& currentFilePath() const;
+  inline VNumber chatId() const;
 
   inline bool canPlay() const;
-  bool playFile( const QString& );
+  bool playFile( const QString&, VNumber );
   void stop();
 
 signals:
-  void playing( const QString& );
-  void finished( const QString& );
-  void openWithExternalPlayer( const QUrl& );
+  void playing( const QString&, VNumber );
+  void finished( const QString&, VNumber );
+  void openWithExternalPlayer( const QUrl&, VNumber );
 
 protected slots:
   void onError( QMediaPlayer::Error );
 
 private:
+  VNumber m_chatId;
   QString m_currentFilePath;
   QMediaPlayer* mp_voicePlayer;
 
 };
 
 // Inline Functions
+inline VNumber VoicePlayer::chatId() const { return m_chatId; }
 inline const QString& VoicePlayer::currentFilePath() const { return m_currentFilePath; }
 inline bool VoicePlayer::canPlay() const { return mp_voicePlayer; }
 inline bool VoicePlayer::isPlaying() const { return mp_voicePlayer && mp_voicePlayer->state() == QMediaPlayer::PlayingState; }

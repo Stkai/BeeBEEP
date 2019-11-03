@@ -44,7 +44,7 @@ public:
   inline bool isActive() const;
   inline bool hasActivePeers() const;
 
-  FileInfo addFile( const QFileInfo&, const QString& share_folder, bool to_share_box, const QString& chat_private_id, FileInfo::ContentType );
+  FileInfo addFile( const QFileInfo&, const QString& share_folder, bool to_share_box, const QString& chat_private_id, FileInfo::ContentType, qint64 message_duration );
   void addFileInfoList( const QList<FileInfo>& );
   void removeFile( const QString& file_path );
 

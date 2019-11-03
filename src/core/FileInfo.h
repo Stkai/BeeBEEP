@@ -83,6 +83,8 @@ public:
   inline bool isVoiceMessage() const;
   inline void setStartingPosition( FileSizeType );
   inline FileSizeType startingPosition() const;
+  inline void setDuration( qint64 );
+  inline qint64 duration() const;
 
 private:
   TransferType m_transferType;
@@ -102,6 +104,7 @@ private:
   QString m_mimeType;
   ContentType m_contentType;
   FileSizeType m_startingPosition;
+  qint64 m_duration;
 
 };
 
@@ -150,5 +153,7 @@ inline void FileInfo::setContentType( ContentType new_value ) { m_contentType = 
 inline bool FileInfo::isVoiceMessage() const { return m_contentType == VoiceMessage; }
 inline void FileInfo::setStartingPosition( FileSizeType new_value ) { m_startingPosition = new_value > 0 ? new_value : 0; }
 inline FileSizeType FileInfo::startingPosition() const { return m_startingPosition; }
+inline void FileInfo::setDuration( qint64 new_value ) { m_duration = new_value; }
+inline qint64 FileInfo::duration() const { return m_duration; }
 
 #endif // BEEBEEP_FILEINFO_H

@@ -38,6 +38,7 @@ public:
 
   void setRecipient( const QString& );
   inline const QString& filePath() const;
+  inline qint64 duration() const;
 
 protected slots:
   void sendVoiceMessage();
@@ -65,10 +66,12 @@ private:
   int m_warningDuration;
   int m_criticalDuration;
   int m_maxDuration;
+  qint64 m_duration;
 
 };
 
 // Inline Functions
 inline const QString& GuiRecordVoiceMessage::filePath() const { return m_filePath; }
+inline qint64 GuiRecordVoiceMessage::duration() const { return m_fileAccepted ? qMax( qint64( 1000 ), m_duration ) : -1; }
 
 #endif // BEEBEEP_GUIRECORDVOICEMESSAGE_H

@@ -129,6 +129,7 @@ private slots:
   void addToShare( const QString& );
   void removeFromShare( const QString& );
   void openUrl( const QUrl& );
+  void openUrlFromChat( const QUrl&, VNumber );
   void selectBeepFile();
   void testBeepFile();
   void playBeep();
@@ -218,7 +219,7 @@ private slots:
   void showNetworkTest();
   void onNetworkTestWindowClosed();
 #ifdef BEEBEEP_USE_VOICE_CHAT
-  void sendVoiceMessageToChat( VNumber, const QString& );
+  void sendVoiceMessageToChat( VNumber, const QString&, qint64 );
   void showVoiceEncoderSettings();
 #endif
   void resumeFileTransfer( VNumber user_id, const FileInfo& );

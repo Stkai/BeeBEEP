@@ -477,7 +477,7 @@ void GuiChat::checkAnchorClicked( const QUrl& url )
 {
   if( url.scheme() == FileInfo::urlSchemeVoiceMessage() )
     emit showStatusMessageRequest( tr( "Opening voice message" ) + QString( "..." ), 3000 );
-  emit openUrl( url );
+  emit openUrl( url, m_chatId );
 }
 
 QString GuiChat::chatMessageToText( const ChatMessage& cm )
@@ -1188,7 +1188,7 @@ void GuiChat::openSelectedTextAsUrl()
     qDebug() << "Try to open selected text as url:" << selected_text;
 #endif
     QUrl url = QUrl::fromUserInput( selected_text );
-    emit openUrl( url );
+    emit openUrl( url, m_chatId );
   }
 }
 

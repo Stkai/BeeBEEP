@@ -51,6 +51,7 @@ GuiRecordVoiceMessage::GuiRecordVoiceMessage( QWidget *parent )
   mp_sliderVolume->setValue( 100 );
   m_fileAccepted = false;
 
+  m_duration = -1;
   m_warningDuration = 80;
   m_criticalDuration = 100;
   m_maxDuration = 120;
@@ -125,6 +126,8 @@ void GuiRecordVoiceMessage::updateRecorderProgress( qint64 duration_ms )
 {
   if( mp_audioRecorder->error() != QMediaRecorder::NoError )
     return;
+
+  m_duration = duration_ms;
 
   if( duration_ms < 1000 )
   {
@@ -208,6 +211,7 @@ void GuiRecordVoiceMessage::onRecorderStatusChanged( QMediaRecorder::Status reco
 
 void GuiRecordVoiceMessage::computeDurantionRange()
 {
+  m_duration = 0;
   float max_duration = qMax( 10, Settings::instance().voiceMessageMaxDuration() );
   m_warningDuration = qMax( 6, qRound( max_duration / 100.0 * 70.0 ) );
   m_criticalDuration = qMax( 8, qRound( max_duration / 100.0 * 90.0 ) );
@@ -237,6 +241,7 @@ void GuiRecordVoiceMessage::onRecorderStateChanged( QMediaRecorder::State record
 
 void GuiRecordVoiceMessage::showRecorderError( QMediaRecorder::Error recorder_error )
 {
+  m_duration = -1;
   QString s_error = mp_audioRecorder->errorString();
   qWarning() << "VoiceRecorder exit with error code" << static_cast<int>(recorder_error) << "-" << qPrintable( s_error );
   mp_lStatus->setText( s_error );
