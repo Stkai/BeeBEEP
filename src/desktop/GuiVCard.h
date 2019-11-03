@@ -29,7 +29,7 @@
 class User;
 
 
-class GuiVCard : public QWidget, private Ui::GuiVCardWidget
+class GuiVCard : public QFrame, private Ui::GuiVCardWidget
 {
   Q_OBJECT
 

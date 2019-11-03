@@ -32,13 +32,17 @@
 
 
 GuiVCard::GuiVCard( QWidget *parent )
- : QWidget( parent )
+ : QFrame( parent )
 {
   setupUi( this );
   setObjectName( "GuiVCard" );
 
   setWindowFlags( Qt::Popup );
   setAttribute( Qt::WA_DeleteOnClose, true );
+  setFrameShape( QFrame::StyledPanel );
+  setFrameShadow( QFrame::Raised );
+  setLineWidth( 2 );
+  setMidLineWidth( 1 );
 
   mp_pbChat->setIcon( IconManager::instance().icon( "chat.png" ) );
   mp_pbFile->setIcon( IconManager::instance().icon( "send-file.png" ) );
