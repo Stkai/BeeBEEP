@@ -5184,6 +5184,14 @@ Inserisci un nome differente.</translation>
         <source>No shared information</source>
         <translation>Nessuna informazione condivisa</translation>
     </message>
+    <message>
+        <source>none</source>
+        <translation>nessuno</translation>
+    </message>
+    <message>
+        <source>Workgroups</source>
+        <translation>Gruppi di lavoro</translation>
+    </message>
 </context>
 <context>
     <name>GuiVCardDialog</name>
@@ -5321,6 +5329,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Info</source>
         <translation>Informazioni</translation>
+    </message>
+    <message>
+        <source>Workgroups</source>
+        <translation>Gruppi di lavoro</translation>
     </message>
 </context>
 <context>

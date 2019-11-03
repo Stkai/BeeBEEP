@@ -294,7 +294,10 @@ qint64 ConnectionSocket::readBlock()
 #endif
 
   if( m_userId == ID_INVALID )
+  {
+    m_checkConnectionTimeout = false;
     checkHelloMessage( decrypted_byte_array );
+  }
   else
     emit dataReceived( decrypted_byte_array );
 
@@ -418,7 +421,6 @@ void ConnectionSocket::sendQuestionHello()
   }
   else
   {
-    m_checkConnectionTimeout = false;
     m_publicKey1 = Protocol::instance().newMd5Id();
 #ifdef CONNECTION_SOCKET_IO_DEBUG
     qDebug() << "ConnectionSocket is sending pkey1 with shared-key:" << qPrintable( m_publicKey1 );
@@ -599,13 +601,10 @@ int ConnectionSocket::fileTransferBufferSize() const
   return m_protoVersion > SECURE_LEVEL_2_PROTO_VERSION ? Settings::instance().fileTransferBufferSize() : qMin( static_cast<int>(65456), Settings::instance().fileTransferBufferSize() );
 }
 
-void ConnectionSocket::checkConnectionTimeout( int ticks )
+bool ConnectionSocket::checkConnectionTimeout( int ticks )
 {
-  if( !m_checkConnectionTimeout )
-    return;
-
   if( ticks < Settings::instance().tickIntervalConnectionTimeout() )
-    return;
+    return false;
 
   if( m_isTestConnection )
   {
@@ -616,6 +615,7 @@ void ConnectionSocket::checkConnectionTimeout( int ticks )
     qDebug() << "Connection timeout for" << qPrintable( m_networkAddress.toString() ) << ":" << ticks << "ticks";
   disconnectFromHost();
   emit disconnected();
+  return true;
 }
 
 int ConnectionSocket::activityIdle() const
@@ -648,11 +648,11 @@ void ConnectionSocket::onTickEvent( int  )
 
   m_tickCounter++;
 
-  if( isConnecting() )
-  {
-    checkConnectionTimeout( m_tickCounter );
+  if( m_checkConnectionTimeout && checkConnectionTimeout( m_tickCounter ) )
     return;
-  }
+
+  if( isConnecting() )
+    return;
 
   if( m_tickCounter > 31536000 )
   {

@@ -79,7 +79,7 @@ namespace Bee
   QPixmap avatarForUser( const User&, const QSize&, bool use_available_user_image, int user_status = -1 );
   QString toolTipForUser( const User&, bool only_status );
   void setWindowStaysOnTop( QWidget*, bool );
-  QString stringListToTextString( const QStringList&, int max_items = -1 );
+  QString stringListToTextString( const QStringList&, bool strip_html_tags, int max_items = -1 );
   void removeContextHelpButton( QWidget* );
   QColor selectColor( QWidget*, const QColor& default_color );
   void setBackgroundColor( QWidget*, const QColor& );

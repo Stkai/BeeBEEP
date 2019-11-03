@@ -785,7 +785,7 @@
 <context>
     <name>Date</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="1038"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="1045"/>
         <source>more than 1 day</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6078,72 +6078,82 @@ Selecione um nome diferente.</translation>
 <context>
     <name>GuiVCard</name>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="71"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="75"/>
         <source>is</source>
         <translation>é</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="74"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="78"/>
         <source>from %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="83"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="87"/>
         <source>Birthday: %1</source>
         <translation>Aniversário de %1 Parabéns</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="85"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="89"/>
         <source>Happy Birthday</source>
         <translation>Feliz Aniversário</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="108"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="120"/>
+        <source>none</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiVCard.cpp" line="123"/>
+        <source>Workgroups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiVCard.cpp" line="128"/>
         <source>No shared information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="114"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="134"/>
         <source>old %1</source>
         <translation>idade %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="116"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="136"/>
         <source>new %1</source>
         <translation>novo %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="125"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="145"/>
         <source>BeeBEEP version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="156"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="176"/>
         <source>Remove from favorites</source>
         <translation>Remover de Favoritos</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="161"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="181"/>
         <source>Add to favorites</source>
         <translation>Adicionar a favoritos</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="178"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="198"/>
         <source>You cannot remove an user who is connected</source>
         <translation>Você não pode remover um usuário que está conectado</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="183"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="203"/>
         <source>You cannot remove an user who is in group chat</source>
         <translation>Você não pode remover um usuário que está no bate-papo em grupo</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="188"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="208"/>
         <source>Remove this user</source>
         <translation>Remover este usuário</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="144"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="164"/>
         <source>Open chat</source>
         <translation>Abrir Chat</translation>
     </message>
@@ -6281,37 +6291,42 @@ Selecione um nome diferente.</translation>
         <translation>Telefone</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="394"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="387"/>
+        <source>Workgroups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiVCard.ui" line="401"/>
         <source>Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="462"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="469"/>
         <source>S</source>
         <translation>S</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="497"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="504"/>
         <source>Open chat</source>
         <translation>Conversa Ativa</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="535"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="542"/>
         <source>Send a file</source>
         <translation>Envie um Arquivo</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="570"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="577"/>
         <source>Send a buzz</source>
         <translation>Enviar um Bip(Alerta)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="605"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="612"/>
         <source>Change the nickname color</source>
         <translation>Troque seu Apelido</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="663"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="670"/>
         <source>Remove user</source>
         <translation>Remover Usuário</translation>
     </message>
@@ -6429,17 +6444,17 @@ Selecione um nome diferente.</translation>
         <translation>Este Workgroup ja esta na Lista.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="147"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="149"/>
         <source>Don&apos;t you want to be part of these workgroups anymore?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="148"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="150"/>
         <source>Yes, remove me</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="148"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="150"/>
         <source>Cancel</source>
         <translation type="unfinished">Cancelar</translation>
     </message>
@@ -6462,7 +6477,7 @@ Selecione um nome diferente.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="139"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="141"/>
         <source>Please select an item in the list.</source>
         <translation>Favor selecione um item da Lista.</translation>
     </message>
@@ -6591,43 +6606,43 @@ Selecione um nome diferente.</translation>
         <translation>Ultima Conexão</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="734"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="727"/>
         <source>Workgroups</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="758"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="750"/>
         <source>Today is %1&apos;s birthday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="760"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="752"/>
         <source>Tomorrow is %1&apos;s birthday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="762"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="754"/>
         <source>%1&apos;s birthday is in %2 days</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="764"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="756"/>
         <source>Yesterday was %1&apos;s birthday</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="771"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="763"/>
         <source>Happy Birthday to you!</source>
         <translation type="unfinished">Feliz Aniversário!</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="785"/>
-        <location filename="../src/utils/BeeUtils.cpp" line="806"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="789"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="813"/>
         <source>and</source>
         <translation>e</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="811"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="818"/>
         <source>and %1 others</source>
         <translation>e %1 outros</translation>
     </message>

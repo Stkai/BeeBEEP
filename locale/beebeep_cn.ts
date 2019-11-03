@@ -778,7 +778,7 @@
 <context>
     <name>Date</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="1038"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="1045"/>
         <source>more than 1 day</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6004,72 +6004,82 @@ Please select a different name.</source>
 <context>
     <name>GuiVCard</name>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="71"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="75"/>
         <source>is</source>
         <translation>是</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="74"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="78"/>
         <source>from %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="83"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="87"/>
         <source>Birthday: %1</source>
         <translation>生日：%1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="85"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="89"/>
         <source>Happy Birthday</source>
         <translation>生日快乐</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="108"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="120"/>
+        <source>none</source>
+        <translation type="unfinished">无</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiVCard.cpp" line="123"/>
+        <source>Workgroups</source>
+        <translation type="unfinished">工作群组</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiVCard.cpp" line="128"/>
         <source>No shared information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="114"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="134"/>
         <source>old %1</source>
         <translation>旧的%1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="116"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="136"/>
         <source>new %1</source>
         <translation>新的%1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="125"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="145"/>
         <source>BeeBEEP version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="156"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="176"/>
         <source>Remove from favorites</source>
         <translation>从收藏中移除</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="161"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="181"/>
         <source>Add to favorites</source>
         <translation>添加到收藏</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="178"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="198"/>
         <source>You cannot remove an user who is connected</source>
         <translation>你不能移除在线的用户</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="183"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="203"/>
         <source>You cannot remove an user who is in group chat</source>
         <translation>你不能移除在群聊的用户</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="188"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="208"/>
         <source>Remove this user</source>
         <translation>移除该用户</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="144"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="164"/>
         <source>Open chat</source>
         <translation>打开聊天</translation>
     </message>
@@ -6199,37 +6209,42 @@ Please select a different name.</source>
         <translation>电话</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="394"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="387"/>
+        <source>Workgroups</source>
+        <translation type="unfinished">工作群组</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiVCard.ui" line="401"/>
         <source>Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="462"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="469"/>
         <source>S</source>
         <translation>S</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="497"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="504"/>
         <source>Open chat</source>
         <translation>打开聊天</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="535"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="542"/>
         <source>Send a file</source>
         <translation>发送一个文件</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="570"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="577"/>
         <source>Send a buzz</source>
         <translation>发送一个蜂鸣</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="605"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="612"/>
         <source>Change the nickname color</source>
         <translation>修改昵称颜色</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="663"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="670"/>
         <source>Remove user</source>
         <translation>移除用户</translation>
     </message>
@@ -6343,17 +6358,17 @@ Please select a different name.</source>
         <translation>该工作群组已在列表中</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="147"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="149"/>
         <source>Don&apos;t you want to be part of these workgroups anymore?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="148"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="150"/>
         <source>Yes, remove me</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="148"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="150"/>
         <source>Cancel</source>
         <translation type="unfinished">取消</translation>
     </message>
@@ -6372,7 +6387,7 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="139"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="141"/>
         <source>Please select an item in the list.</source>
         <translation>请从列表中选择一个项目。</translation>
     </message>
@@ -6493,43 +6508,43 @@ Please select a different name.</source>
         <translation>最后一次连接</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="734"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="727"/>
         <source>Workgroups</source>
         <translation type="unfinished">工作群组</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="758"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="750"/>
         <source>Today is %1&apos;s birthday</source>
         <translation>今天是%1的生日</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="760"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="752"/>
         <source>Tomorrow is %1&apos;s birthday</source>
         <translation>明天是%1的生日</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="762"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="754"/>
         <source>%1&apos;s birthday is in %2 days</source>
         <translation>%1的生日在两天后</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="764"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="756"/>
         <source>Yesterday was %1&apos;s birthday</source>
         <translation>昨天是%1的生日</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="771"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="763"/>
         <source>Happy Birthday to you!</source>
         <translation>祝你生日快乐</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="785"/>
-        <location filename="../src/utils/BeeUtils.cpp" line="806"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="789"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="813"/>
         <source>and</source>
         <translation>并且</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="811"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="818"/>
         <source>and %1 others</source>
         <translation>和%1其他的</translation>
     </message>

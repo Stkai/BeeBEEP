@@ -785,7 +785,7 @@
 <context>
     <name>Date</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="1038"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="1045"/>
         <source>more than 1 day</source>
         <translation>mer enn 1 dag</translation>
     </message>
@@ -6078,72 +6078,82 @@ Velg et annet navn.</translation>
 <context>
     <name>GuiVCard</name>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="71"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="75"/>
         <source>is</source>
         <translation>er</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="74"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="78"/>
         <source>from %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="83"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="87"/>
         <source>Birthday: %1</source>
         <translation>Fødselsdag: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="85"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="89"/>
         <source>Happy Birthday</source>
         <translation>Gratulerer med dagen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="108"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="120"/>
+        <source>none</source>
+        <translation type="unfinished">ingen</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiVCard.cpp" line="123"/>
+        <source>Workgroups</source>
+        <translation type="unfinished">Arbeidsgrupper</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiVCard.cpp" line="128"/>
         <source>No shared information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="114"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="134"/>
         <source>old %1</source>
         <translation>gammel %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="116"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="136"/>
         <source>new %1</source>
         <translation>ny %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="125"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="145"/>
         <source>BeeBEEP version</source>
         <translation>BeeBEEP versjon</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="156"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="176"/>
         <source>Remove from favorites</source>
         <translation>Slett fra favoritter</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="161"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="181"/>
         <source>Add to favorites</source>
         <translation>Legg til favoritter</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="178"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="198"/>
         <source>You cannot remove an user who is connected</source>
         <translation>Du kan ikke fjerne en bruker som er tilkopla</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="183"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="203"/>
         <source>You cannot remove an user who is in group chat</source>
         <translation>Du kan ikke fjerne en bruker som deltar i gruppesamtale</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="188"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="208"/>
         <source>Remove this user</source>
         <translation>Fjern denne brukeren</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="144"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="164"/>
         <source>Open chat</source>
         <translation>Åpne samtale</translation>
     </message>
@@ -6273,37 +6283,42 @@ Velg et annet navn.</translation>
         <translation>Telefon</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="394"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="387"/>
+        <source>Workgroups</source>
+        <translation type="unfinished">Arbeidsgrupper</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiVCard.ui" line="401"/>
         <source>Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="462"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="469"/>
         <source>S</source>
         <translation>S</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="497"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="504"/>
         <source>Open chat</source>
         <translation>Åpne samtale</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="535"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="542"/>
         <source>Send a file</source>
         <translation>Send ei fil</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="570"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="577"/>
         <source>Send a buzz</source>
         <translation>Send en pling</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="605"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="612"/>
         <source>Change the nickname color</source>
         <translation>Endre fargen på kallenav</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.ui" line="663"/>
+        <location filename="../src/desktop/GuiVCard.ui" line="670"/>
         <source>Remove user</source>
         <translation>Fjern bruker</translation>
     </message>
@@ -6421,17 +6436,17 @@ Velg et annet navn.</translation>
         <translation>Denne arbeidsgruppa er allerede i lista.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="147"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="149"/>
         <source>Don&apos;t you want to be part of these workgroups anymore?</source>
         <translation>Vil du ikke delta i disse arbeidsgruppene lenger?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="148"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="150"/>
         <source>Yes, remove me</source>
         <translation>Ja, slett meg</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="148"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="150"/>
         <source>Cancel</source>
         <translation>Avbryt</translation>
     </message>
@@ -6454,7 +6469,7 @@ Velg et annet navn.</translation>
         <translation>Dine arbeidsgrupper</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiWorkgroups.cpp" line="139"/>
+        <location filename="../src/desktop/GuiWorkgroups.cpp" line="141"/>
         <source>Please select an item in the list.</source>
         <translation>Vennligst velg et element i lista.</translation>
     </message>
@@ -6583,43 +6598,43 @@ Velg et annet navn.</translation>
         <translation>siste forbindelse</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="734"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="727"/>
         <source>Workgroups</source>
         <translation>Arbeidsgrupper</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="758"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="750"/>
         <source>Today is %1&apos;s birthday</source>
         <translation>I dag har %1 fødselsdag</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="760"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="752"/>
         <source>Tomorrow is %1&apos;s birthday</source>
         <translation>I morgen har %1 fødselsdag</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="762"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="754"/>
         <source>%1&apos;s birthday is in %2 days</source>
         <translation>%1 har fødselsdag om %2 dager</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="764"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="756"/>
         <source>Yesterday was %1&apos;s birthday</source>
         <translation>%1 hadde fødselsdag i går</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="771"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="763"/>
         <source>Happy Birthday to you!</source>
         <translation>Gratulerer med fødselsdagen!</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="785"/>
-        <location filename="../src/utils/BeeUtils.cpp" line="806"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="789"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="813"/>
         <source>and</source>
         <translation>og</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="811"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="818"/>
         <source>and %1 others</source>
         <translation>og %1 andre</translation>
     </message>

@@ -116,7 +116,9 @@ void GuiWorkgroups::addWorkgroup()
 
   m_workgroups.append( s_workgroup );
   m_workgroups.sort();
+  mp_leWorkgroup->clear();
   updateWorkgroupList();
+  mp_leWorkgroup->setFocus();
 }
 
 void GuiWorkgroups::openCustomMenu( const QPoint& p )

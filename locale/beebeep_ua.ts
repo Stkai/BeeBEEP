@@ -4857,6 +4857,14 @@ Please select a different name.</source>
         <source>No shared information</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>none</source>
+        <translation type="unfinished">не визначено</translation>
+    </message>
+    <message>
+        <source>Workgroups</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiVCardDialog</name>
@@ -4985,6 +4993,10 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Workgroups</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

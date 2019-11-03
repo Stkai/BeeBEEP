@@ -76,7 +76,6 @@ signals:
 protected slots:
   qint64 readBlock();
   void sendQuestionHello();
-  void checkConnectionTimeout( int );
   void onBytesWritten( qint64 );
 
 protected:
@@ -86,6 +85,7 @@ protected:
   const QByteArray& cipherKey() const;
   bool createCipherKey( const QString& );
 
+  bool checkConnectionTimeout( int );
   bool checkTestMessage( const Message& );
 
   inline bool isKeysHandshakeCompleted() const;

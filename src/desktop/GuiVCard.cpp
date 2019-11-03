@@ -106,6 +106,22 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
   else
     mp_lPhone->setText( "" );
 
+  QString workgroups_txt = "";
+  if( !u.workgroups().isEmpty() )
+  {
+    workgroups_txt = Bee::stringListToTextString( u.workgroups(), 9 );
+    if( u.workgroups().size() > 9 )
+      mp_lWorkgroups->setToolTip( Bee::stringListToTextString( u.workgroups(), true ) );
+    else
+      mp_lWorkgroups->setToolTip( "" );
+  }
+  else
+  {
+    workgroups_txt = tr( "none" );
+    mp_lWorkgroups->setToolTip( "" );
+  }
+  mp_lWorkgroups->setText( QString( "%1: %2" ).arg( tr( "Workgroups" ), workgroups_txt ) );
+
   if( !u.vCard().info().isEmpty() )
     mp_lInfo->setText( u.vCard().info() );
   else

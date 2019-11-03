@@ -724,15 +724,7 @@ QString Bee::toolTipForUser( const User& u, bool only_status )
   }
 
   if( !u.workgroups().isEmpty() )
-  {
-    QString user_workgroups = u.workgroups().join( ", " );
-    if( user_workgroups.size() > 90 )
-    {
-       user_workgroups.truncate( 90 );
-       user_workgroups.append( "..." );
-    }
-    tool_tip += QString( "\n%1: %2" ).arg( QObject::tr( "Workgroups" ) ).arg( user_workgroups );
-  }
+    tool_tip += QString( "\n%1: %2" ).arg( QObject::tr( "Workgroups" ) ).arg( Bee::stringListToTextString( u.workgroups(), true, 9 ) );
 
   if( !u.vCard().birthday().isNull() )
   {
@@ -775,36 +767,51 @@ QString Bee::userBirthdayToText( const User& u )
   return birthday_text;
 }
 
-QString Bee::stringListToTextString( const QStringList& sl, int max_items )
+QString Bee::stringListToTextString( const QStringList& sl2, bool strip_html_tags, int max_items )
 {
-  if( sl.isEmpty() )
+  QStringList sl_parsed;
+  foreach( QString s, sl2 )
+  {
+    if( !s.isEmpty() )
+    {
+      if( strip_html_tags )
+        sl_parsed.append( Bee::removeHtmlTags( s ) );
+      else
+        sl_parsed.append( s );
+    }
+  }
+
+  if( sl_parsed.isEmpty() )
     return "";
-  if( sl.size() == 1 )
-    return sl.first();
-  if( sl.size() == 2 )
-    return sl.join( QString( " %1 " ).arg( QObject::tr( "and" ) ) );
+  if( sl_parsed.size() == 1 )
+    return sl_parsed.first();
+  if( sl_parsed.size() == 2 )
+    return sl_parsed.join( QString( " %1 " ).arg( QObject::tr( "and" ) ) );
 
   QStringList sl_to_join;
-  if( max_items < 1 || max_items > (sl.size()-1))
-    max_items = sl.size()-1;
+  if( max_items < 1 || max_items > (sl_parsed.size()-1))
+    max_items = sl_parsed.size()-1;
   int num_items = 0;
 
-  foreach( QString s, sl )
+  foreach( QString s, sl_parsed )
   {
     if( num_items >= max_items )
       break;
     num_items++;
-    sl_to_join << s;
+    if( strip_html_tags )
+      sl_to_join.append( Bee::removeHtmlTags( s ) );
+    else
+      sl_to_join.append( s );
   }
 
   QString s_joined = sl_to_join.join( ", " );
-  int diff_items = sl.size() - sl_to_join.size();
+  int diff_items = sl_parsed.size() - sl_to_join.size();
   if( diff_items == 1 )
   {
-    if( !sl.last().isEmpty() )
+    if( !sl_parsed.last().isEmpty() )
     {
       s_joined.append( QString( " %1 " ).arg( QObject::tr( "and" ) ) );
-      s_joined.append( sl.last() );
+      s_joined.append( sl_parsed.last() );
     }
   }
   else
