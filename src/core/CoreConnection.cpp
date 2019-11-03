@@ -328,13 +328,13 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
           if( u.name() == user_found.name() )
           {
             sAlertMsg = tr( "%1 Connection closed to user %2 because it uses same nickname of the already connected user %3: %4." )
-                          .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), Bee::replaceHtmlSpecialCharacters( u.path() ), Bee::replaceHtmlSpecialCharacters( user_found.path() ), Bee::userNameToShow( u ) );
+                          .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), Bee::replaceHtmlSpecialCharacters( u.path() ), Bee::replaceHtmlSpecialCharacters( user_found.path() ), Bee::userNameToShowInHtml( u ) );
             qDebug() << "User" << qPrintable( u.path() ) << "is already connected with the same nickname of" << qPrintable( user_found.path() );
           }
           else
           {
             sAlertMsg = tr( "%1 Connection closed to user %2 because it uses same hash code of the already connected user %3: %4." )
-                          .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), Bee::replaceHtmlSpecialCharacters( u.path() ), Bee::replaceHtmlSpecialCharacters( user_found.path() ), Bee::userNameToShow( u ) );
+                          .arg( IconManager::instance().toHtml( "warning.png", "*E*" ), Bee::replaceHtmlSpecialCharacters( u.path() ), Bee::replaceHtmlSpecialCharacters( user_found.path() ), Bee::userNameToShowInHtml( u ) );
             qDebug() << "User" << qPrintable( u.path() ) << "is already connected with the same hash code of" << qPrintable( user_found.path() );
           }
         }
@@ -406,7 +406,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
     if( c->protoVersion() < SECURE_LEVEL_3_PROTO_VERSION )
     {
       dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(),
-                             tr( "%1 %2 uses old encryption level." ).arg( IconManager::instance().toHtml( "warning.png", "*!*" ), Bee::userNameToShow( u ) ),
+                             tr( "%1 %2 uses old encryption level." ).arg( IconManager::instance().toHtml( "warning.png", "*!*" ), Bee::userNameToShowInHtml( u ) ),
                              DispatchToAllChatsWithUser, ChatMessage::Connection, false );
     }
 
@@ -414,7 +414,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
     {
       dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(),
                              QString( "%1 %2." ).arg( IconManager::instance().toHtml( "encryption-enabled.png", "*!*" ),
-                                                      tr( "%1 has end-to-end encryption enabled" ).arg( Bee::userNameToShow( u ) ) ),
+                                                      tr( "%1 has end-to-end encryption enabled" ).arg( Bee::userNameToShowInHtml( u ) ) ),
                              DispatchToAllChatsWithUser, ChatMessage::Connection, false );
     }
   }
@@ -424,7 +424,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
     {
       dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(),
                              QString( "%1 %2." ).arg( IconManager::instance().toHtml( "encryption-disabled.png", "*!*" ),
-                                                      tr( "%1 has end-to-end encryption disabled" ).arg( Bee::userNameToShow( u ) ) ),
+                                                      tr( "%1 has end-to-end encryption disabled" ).arg( Bee::userNameToShowInHtml( u ) ) ),
                              DispatchToAllChatsWithUser, ChatMessage::Connection, false );
     }
   }

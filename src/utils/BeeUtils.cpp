@@ -138,13 +138,12 @@ QColor Bee::userStatusForegroundColor( int user_status )
   }
 }
 
-QString Bee::userNameToShow( const User& u )
+QString Bee::userNameToShow( const User& u, bool to_html )
 {
   QString user_name = Settings::instance().useUserFullName() && u.vCard().hasFullName() ? u.vCard().fullName() : u.name();
   if( Settings::instance().appendHostNameToUserName() && !u.localHostName().isEmpty() )
     user_name.append( QString( " [%1]" ).arg( u.localHostName() ) );
-  user_name = Bee::removeHtmlTags( user_name );
-  return Bee::replaceHtmlSpecialCharacters( user_name );
+  return to_html ? Bee::replaceHtmlSpecialCharacters( user_name ) : user_name;
 }
 
 QString Bee::uniqueFilePath( const QString& file_path, bool add_date_time )
@@ -275,7 +274,7 @@ static const char* FileTypeToString[] =
 
 QString Bee::fileTypeToString( Bee::FileType ft )
 {
-  if( ft < 0 || ft > Bee::NumFileType )
+  if( static_cast<int>( ft ) < 0 || ft > Bee::NumFileType )
     ft = Bee::FileOther;
   return qApp->translate( "File", FileTypeToString[ ft ] );
 }
@@ -427,9 +426,9 @@ QPixmap Bee::convertToGrayScale( const QPixmap& pix )
     return QPixmap();
 
   int pixels = img.width() * img.height();
-  if( pixels*(int)sizeof(QRgb) <= img.byteCount() )
+  if( pixels*static_cast<int>( sizeof( QRgb ) ) <= img.byteCount() )
   {
-    QRgb *data = (QRgb*)img.bits();
+    QRgb *data = reinterpret_cast<QRgb*>( img.bits() );
     for (int i = 0; i < pixels; i++)
     {
       int val = qGray(data[i]);
@@ -691,7 +690,7 @@ QPixmap Bee::avatarForUser( const User& u, const QSize& avatar_size, bool use_av
 
 QString Bee::toolTipForUser( const User& u, bool only_status )
 {
-  QString tool_tip = u.isLocal() ? QObject::tr( "You are %1" ).arg( Bee::userStatusToString( u.status() ) ) : QObject::tr( "%1 is %2" ).arg( Bee::userNameToShow( u ), Bee::userStatusToString( u.status() ) );
+  QString tool_tip = u.isLocal() ? QObject::tr( "You are %1" ).arg( Bee::userStatusToString( u.status() ) ) : QObject::tr( "%1 is %2" ).arg( Bee::userNameToShow( u, false ), Bee::userStatusToString( u.status() ) );
 
   if( only_status )
     return tool_tip;
@@ -767,10 +766,10 @@ QString Bee::userBirthdayToText( const User& u )
   return birthday_text;
 }
 
-QString Bee::stringListToTextString( const QStringList& sl2, bool strip_html_tags, int max_items )
+QString Bee::stringListToTextString( const QStringList& sl, bool strip_html_tags, int max_items )
 {
   QStringList sl_parsed;
-  foreach( QString s, sl2 )
+  foreach( QString s, sl )
   {
     if( !s.isEmpty() )
     {
@@ -1065,7 +1064,7 @@ QString Bee::transferTimeLeft( FileSizeType bytes_transferred, FileSizeType tota
   else
     bytes_per_second = bytesPerSecond( bytes_transferred, elapsed_time );
   FileSizeType bytes_left = bytes_transferred >= total_bytes ? 0 : total_bytes - bytes_transferred;
-  int ms_left = (bytes_left * 1000) / bytes_per_second;
+  int ms_left = static_cast<int>( (bytes_left * 1000) / bytes_per_second );
   if( ms_left < 1000 )
     return timeToString( 1000 );
   else if( ms_left < 2000 )
