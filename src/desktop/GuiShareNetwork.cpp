@@ -206,7 +206,7 @@ void GuiShareNetwork::loadShares( const User& u )
   if( file_shared > 0 )
   {
     if( mp_comboUsers->findData( u.id() ) == -1 )
-      mp_comboUsers->addItem( Bee::userNameToShow( u ), u.id() );
+      mp_comboUsers->addItem( Bee::userNameToShow( u, false ), u.id() );
   }
   else
   {
@@ -449,11 +449,11 @@ void GuiShareNetwork::updateUser( const User& u )
       mp_comboUsers->removeItem( user_index );
     }
     else
-      mp_comboUsers->setItemText( user_index, Bee::userNameToShow( u ) );
+      mp_comboUsers->setItemText( user_index, Bee::userNameToShow( u, false ) );
 
     GuiFileInfoItem* user_item = m_fileInfoList.userItem( u.id() );
     if( user_item )
-      user_item->initUser( u.id(), Bee::userNameToShow( u ) );
+      user_item->initUser( u.id(), Bee::userNameToShow( u, false ) );
   }
 }
 

@@ -280,7 +280,7 @@ void GuiMain::raiseOnTop()
 
 void GuiMain::updateWindowTitle()
 {
-  setWindowTitle( QString( "%1 - %2" ).arg( Bee::userNameToShow( Settings::instance().localUser() ), Settings::instance().programName() ) );
+  setWindowTitle( QString( "%1 - %2" ).arg( Bee::userNameToShow( Settings::instance().localUser(), false ), Settings::instance().programName() ) );
 }
 
 static QString RemoveMenuStringFromTooltip( const QString& s )

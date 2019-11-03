@@ -148,7 +148,7 @@ void GuiShareBox::setUsers()
   foreach( User u, UserManager::instance().userList().toList() )
   {
     if( u.isStatusConnected() )
-      mp_comboUsers->addItem( Bee::userNameToShow( u ), u.id() );
+      mp_comboUsers->addItem( Bee::userNameToShow( u, false ), u.id() );
   }
   mp_comboUsers->setEnabled( Settings::instance().useShareBox() );
   mp_lUsers->setEnabled( mp_comboUsers->isEnabled() );
@@ -502,12 +502,12 @@ void GuiShareBox::updateUser( const User& u )
       mp_comboUsers->removeItem( user_index );
     }
     else
-      mp_comboUsers->setItemText( user_index, Bee::userNameToShow( u ) );
+      mp_comboUsers->setItemText( user_index, Bee::userNameToShow( u, false ) );
   }
   else
   {
     if( u.isStatusConnected() )
-      mp_comboUsers->addItem( Bee::userNameToShow( u ), u.id() );
+      mp_comboUsers->addItem( Bee::userNameToShow( u, false ), u.id() );
   }
 }
 

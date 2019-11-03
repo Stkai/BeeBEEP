@@ -150,7 +150,7 @@ bool GuiUserItem::updateUser( const User& u )
     return false;
   }
 
-  QString user_name = u.isLocal() ? QString( " %1 " ).arg( GuiChatItem::defaultChatName() ) : Bee::userNameToShow( u );
+  QString user_name = u.isLocal() ? QString( " %1 " ).arg( GuiChatItem::defaultChatName() ) : Bee::userNameToShow( u, false );
   setData( 0, UserName, user_name );
   setData( 0, Status, u.status() );
 

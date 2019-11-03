@@ -126,7 +126,7 @@ void GuiFloatingChat::updateChatTitle( const Chat& c )
     {
       QString user_status = u.status() != User::Online ? Bee::userStatusToString( u.status() ) : "";
       QString user_status_description = u.status() != User::Offline ? u.statusDescription() : "";
-      QString user_name = Bee::userNameToShow( u );
+      QString user_name = Bee::userNameToShow( u, false );
 
       if( !user_status.isEmpty() && !user_status_description.isEmpty() )
         window_title = QString( "%1 [%2 - %3]" ).arg( user_name, Bee::userStatusToString( u.status() ), user_status_description );
@@ -186,7 +186,7 @@ void GuiFloatingChat::updateChatMember( const Chat& c, const User& u )
     }
   }
 
-  QString user_name = Bee::userNameToShow( u );
+  QString user_name = Bee::userNameToShow( u, false );
   if( !act_user )
   {
     act_user = mp_barMembers->addAction( user_name, this, SLOT( onGroupMemberActionTriggered() ) );

@@ -84,7 +84,7 @@ bool GuiFileTransferItem::updateFileInfo( const FileInfo& fi, FileSizeType bytes
 
 bool GuiFileTransferItem::updateUser( const User& u )
 {
-  setText( ColumnUser, Bee::userNameToShow( u ) );
+  setText( ColumnUser, Bee::userNameToShow( u, false ) );
   return true;
 }
 

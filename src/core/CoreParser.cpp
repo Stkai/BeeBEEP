@@ -161,7 +161,7 @@ void Core::parseFileMessage( const User& u, const Message& m )
   if( m.hasFlag( Message::Refused ) )
   {
     dispatchSystemMessage( chat_to_show_message.id(), u.id(), tr( "%1 %2 has refused to download the file: %3" )
-                           .arg( IconManager::instance().toHtml( "upload.png", "*F*" ), Bee::userNameToShowInHtml( u ), fi.name() ),
+                           .arg( IconManager::instance().toHtml( "upload.png", "*F*" ), Bee::userNameToShow( u, true ), fi.name() ),
                            chat_to_show_message.isValid() ? DispatchToChat : DispatchToAllChatsWithUser, ChatMessage::FileTransfer, false );
     return;
   }
@@ -185,9 +185,9 @@ void Core::parseFileMessage( const User& u, const Message& m )
 
   QString sys_msg;
   if( m.hasFlag( Message::VoiceMessage ) )
-    sys_msg = tr( "%1 %2 is sending to you the voice message: %3" ).arg( IconManager::instance().toHtml( "download.png", "*F*" ), Bee::userNameToShowInHtml( u ), fi.name() );
+    sys_msg = tr( "%1 %2 is sending to you the voice message: %3" ).arg( IconManager::instance().toHtml( "download.png", "*F*" ), Bee::userNameToShow( u, true ), fi.name() );
   else
-    sys_msg = tr( "%1 %2 is sending to you the file: %3" ).arg( IconManager::instance().toHtml( "download.png", "*F*" ), Bee::userNameToShowInHtml( u ), fi.name() );
+    sys_msg = tr( "%1 %2 is sending to you the file: %3" ).arg( IconManager::instance().toHtml( "download.png", "*F*" ), Bee::userNameToShow( u, true ), fi.name() );
   dispatchSystemMessage( chat_to_show_message.id(), u.id(), sys_msg, chat_to_show_message.isValid() ? DispatchToChat : DispatchToAllChatsWithUser, ChatMessage::FileTransfer, false );
 
   if( fi.isInShareBox() )
@@ -414,9 +414,9 @@ void Core::parseFileShareMessage( const User& u, const Message& m )
 
     QString share_status;
     if( prev_files > 0 && new_files == 0 )
-      share_status = tr( "%1 has removed shared files" ).arg( Bee::userNameToShowInHtml( u ) );
+      share_status = tr( "%1 has removed shared files" ).arg( Bee::userNameToShow( u, true ) );
     else if( new_files > 0 )
-      share_status = tr( "%1 has shared %2 files" ).arg( Bee::userNameToShowInHtml( u ) ).arg( new_files );
+      share_status = tr( "%1 has shared %2 files" ).arg( Bee::userNameToShow( u, true ) ).arg( new_files );
     else
       share_status = "";
 
@@ -447,7 +447,7 @@ void Core::parseFolderMessage( const User& u, const Message& m )
   {
     chat_to_show_message = ChatManager::instance().findChatByPrivateId( m.data(), false, u.id() );
     dispatchSystemMessage( chat_to_show_message.id(), u.id(), tr( "%1 %2 has refused to download folder %3." )
-                             .arg( IconManager::instance().toHtml( "upload.png", "*F*" ), Bee::userNameToShowInHtml( u ), m.text() ),
+                             .arg( IconManager::instance().toHtml( "upload.png", "*F*" ), Bee::userNameToShow( u, true ), m.text() ),
                              chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
     return;
   }
@@ -465,7 +465,7 @@ void Core::parseFolderMessage( const User& u, const Message& m )
     }
 
     chat_to_show_message = ChatManager::instance().findChatByPrivateId( file_info_list.first().chatPrivateId(), false, u.id() );
-    QString sys_msg = tr( "%1 %2 is sending to you the folder: %3." ).arg( IconManager::instance().toHtml( "download.png", "*F*" ), Bee::userNameToShowInHtml( u ), folder_name );
+    QString sys_msg = tr( "%1 %2 is sending to you the folder: %3." ).arg( IconManager::instance().toHtml( "download.png", "*F*" ), Bee::userNameToShow( u, true ), folder_name );
 
     dispatchSystemMessage( chat_to_show_message.id(), u.id(), sys_msg, chat_to_show_message.isValid() ? DispatchToChat : DispatchToAllChatsWithUser, ChatMessage::FileTransfer, false );
 
@@ -579,7 +579,7 @@ void Core::parseShareBoxMessage( const User& u, const Message& m )
 
 void Core::parseBuzzMessage( const User& u, const Message& )
 {
-  QString sys_msg = tr( "%1 %2 is buzzing you." ).arg( IconManager::instance().toHtml( "bell.png", "*Z*" ), Bee::userNameToShowInHtml( u ) );
+  QString sys_msg = tr( "%1 %2 is buzzing you." ).arg( IconManager::instance().toHtml( "bell.png", "*Z*" ), Bee::userNameToShow( u, true ) );
   Chat c = ChatManager::instance().privateChatForUser( u.id() );
   if( !c.isValid() )
     c = ChatManager::instance().defaultChat();
