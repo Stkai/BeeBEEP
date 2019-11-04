@@ -268,7 +268,7 @@ void GuiRecordVoiceMessage::toggleRecord()
       }
     }
 
-    if( !AudioManager::instance().isVoiceInputDeviceAvailable() )
+    if( mp_audioRecorder->audioInputs().isEmpty() )
     {
       QMessageBox::warning( this, Settings::instance().programName(), tr( "No device available for recording voice messages."), tr( "Ok" ) );
       return;

@@ -45,7 +45,6 @@ public:
 
 #if defined( BEEBEEP_USE_VOICE_CHAT )
   void checkDefaultAudioDevice();
-  bool isVoiceInputDeviceAvailable() const;
   QString voiceInputDeviceName() const;
 
   QAudioEncoderSettings voiceMessageEncoderSettings() const;
