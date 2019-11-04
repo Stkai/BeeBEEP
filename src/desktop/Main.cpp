@@ -190,7 +190,10 @@ int main( int argc, char *argv[] )
 
   /* Init Audio Manager */
   if( AudioManager::instance().isAudioDeviceAvailable() )
-    qDebug() << "Sound manager is enabled";
+  {
+    if( Settings::instance().beepOnNewMessageArrived() )
+      AudioManager::instance().loadBeepEffect();
+  }
   else
     qWarning() << "Sound manager seems to be not available for your system";
 

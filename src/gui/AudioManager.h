@@ -40,6 +40,7 @@ public:
   bool isAudioDeviceAvailable();
   void playBeep( int loops = 1 );
   void clearBeep();
+  bool loadBeepEffect();
   void playBuzz();
 
 #if defined( BEEBEEP_USE_VOICE_CHAT )
@@ -86,6 +87,8 @@ private:
   void* mp_sound;
 #elif defined( BEEBEEP_USE_PHONON4 )
   Phonon::MediaObject *mp_sound;
+#elif QT_VERSION >= 0x050000
+  QSoundEffect* mp_sound;
 #else
   QSound* mp_sound;
 #endif

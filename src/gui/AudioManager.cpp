@@ -240,38 +240,56 @@ void AudioManager::clearBeep()
   }
 }
 
+bool AudioManager::loadBeepEffect()
+{
+  if( mp_sound )
+    clearBeep();
+
+  if( !isAudioDeviceAvailable() )
+  {
+    qWarning() << "Audio device is not available and beep effect cannot be played";
+    return false;
+  }
+
+  QString beep_file_path = Settings::instance().beepFilePath();
+  if( !QFile::exists( beep_file_path ) )
+  {
+    qDebug() << "AudioManager did not find BEEP file" << qPrintable( beep_file_path );
+    beep_file_path = Settings::instance().defaultBeepFilePath();
+  }
+
+  if( QFile::exists( beep_file_path ) )
+  {
+#ifdef BEEBEEP_USE_PHONON4
+    qDebug() << "AudioManager create PHONON sound object from" << qPrintable( beep_file_path );
+    Phonon::MediaSource media_source( QUrl::fromLocalFile( beep_file_path ) );
+    mp_sound = Phonon::createPlayer( Phonon::MusicCategory, media_source );
+#elif QT_VERSION >= 0x050000
+    qDebug() << "AudioManager create sound effect object from" << qPrintable( beep_file_path );
+    mp_sound = new QSoundEffect;
+    mp_sound->setSource( QUrl::fromLocalFile( beep_file_path ) );
+#else
+    qDebug() << "AudioManager create sound object from" << qPrintable( beep_file_path );
+    mp_sound = new QSound( beep_file_path );
+#endif
+    return true;
+  }
+  else
+    return false;
+}
+
 void AudioManager::playBeep( int loops )
 {
   if( !mp_sound )
-  {
-    if( isAudioDeviceAvailable() )
-    {
-      QString beep_file_path = Settings::instance().beepFilePath();
-      if( !QFile::exists( beep_file_path ) )
-      {
-        qDebug() << "AudioManager did not find BEEP file" << qPrintable( beep_file_path );
-        beep_file_path = Settings::instance().defaultBeepFilePath();
-      }
-
-      if( QFile::exists( beep_file_path ) )
-      {
-#ifdef BEEBEEP_USE_PHONON4
-        qDebug() << "AudioManager create PHONON sound object from" << qPrintable( beep_file_path );
-        Phonon::MediaSource media_source( QUrl::fromLocalFile( beep_file_path ) );
-        mp_sound = Phonon::createPlayer( Phonon::MusicCategory, media_source );
-#else
-        qDebug() << "AudioManager create sound object from" << qPrintable( beep_file_path );
-        mp_sound = new QSound( beep_file_path );
-#endif
-      }
-    }
-  }
+    loadBeepEffect();
 
   if( mp_sound )
   {
 #ifdef BEEBEEP_USE_PHONON4
     if( loops > 1 )
       mp_sound->play();
+#elif QT_VERSION >= 0x050000
+    mp_sound->setLoopCount( loops );
 #else
     mp_sound->setLoops( loops );
 #endif
