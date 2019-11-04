@@ -21,7 +21,7 @@ Compression=lzma
 SolidCompression=yes
 AppCopyright=Copyright (C) 2019 Marco Mastroddi
 OutputDir=.
-LicenseFile=..\misc\license.txt
+LicenseFile=..\license.txt
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
