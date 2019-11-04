@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="nl_BE" sourcelanguage="en_US">
+<TS version="2.0" language="nl_BE" sourcelanguage="en_US">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -349,7 +349,7 @@
     </message>
     <message>
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
-        <translation type="vanished">Offline berichten die nog moesten worden verzonden, hadden een onjuiste autorisatiecode en worden niet verzonden.</translation>
+        <translation type="obsolete">Offline berichten die nog moesten worden verzonden, hadden een onjuiste autorisatiecode en worden niet verzonden.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="949"/>
@@ -398,7 +398,7 @@
     </message>
     <message>
         <source>%1 offline messages will be sent as soon as possible.</source>
-        <translation type="vanished">%1 offline berichten zullen zo spoedig mogelijk worden verzonden.</translation>
+        <translation type="obsolete">%1 offline berichten zullen zo spoedig mogelijk worden verzonden.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="704"/>
@@ -407,7 +407,7 @@
     </message>
     <message>
         <source>Offline messages sent to %2.</source>
-        <translation type="vanished">Offline bericht verzonden naar%2.</translation>
+        <translation type="obsolete">Offline bericht verzonden naar%2.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="908"/>
@@ -466,7 +466,7 @@
     </message>
     <message>
         <source>Open</source>
-        <translation type="vanished">Open</translation>
+        <translation type="obsolete">Open</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="356"/>
@@ -497,7 +497,7 @@
     </message>
     <message>
         <source>%1 %2: file not found.</source>
-        <translation type="vanished">%1 %2: bestand niet gevonden.</translation>
+        <translation type="obsolete">%1 %2: bestand niet gevonden.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="382"/>
@@ -511,7 +511,7 @@
     </message>
     <message>
         <source>%1 You send %2 to %3.</source>
-        <translation type="vanished">%1 U bent %2 naar %3 aan het versturen.</translation>
+        <translation type="obsolete">%1 U bent %2 naar %3 aan het versturen.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="176"/>
@@ -628,7 +628,7 @@
     </message>
     <message>
         <source>%1 You send folder %2 to %3.</source>
-        <translation type="vanished">%1 Je zend map %2 naar %3.</translation>
+        <translation type="obsolete">%1 Je zend map %2 naar %3.</translation>
     </message>
     <message>
         <source>%1 %2 has refused to download %3.</source>
@@ -649,7 +649,7 @@
         <translation>%1 heeft %2 bestanden gedeeld</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="582"/>
+        <location filename="../src/core/CoreParser.cpp" line="580"/>
         <source>%1 %2 is buzzing you.</source>
         <translation>%1 %2 buzzed je.</translation>
     </message>
@@ -695,11 +695,11 @@
     </message>
     <message>
         <source>You share this information</source>
-        <translation type="vanished">U deelt deze informatie</translation>
+        <translation type="obsolete">U deelt deze informatie</translation>
     </message>
     <message>
         <source>%1 shares this information</source>
-        <translation type="vanished">%1 deelt deze informatie</translation>
+        <translation type="obsolete">%1 deelt deze informatie</translation>
     </message>
     <message>
         <location filename="../src/core/CoreUser.cpp" line="316"/>
@@ -885,7 +885,7 @@
     </message>
     <message>
         <source>Transfer cancelled</source>
-        <translation type="vanished">Overdracht annuleren</translation>
+        <translation type="obsolete">Overdracht annuleren</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="95"/>
@@ -1533,7 +1533,7 @@ Download for free and install the version with this feature from the %1 website.
     </message>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation type="vanished">Qt bibliotheek voor dit besturingssysteem ondersteunt geen Drag en drop voor bestanden. U moet het bestand dat u wilt versturen opnieuw selecteren.</translation>
+        <translation type="obsolete">Qt bibliotheek voor dit besturingssysteem ondersteunt geen Drag en drop voor bestanden. U moet het bestand dat u wilt versturen opnieuw selecteren.</translation>
     </message>
 </context>
 <context>
@@ -2078,7 +2078,7 @@ Gebruik aub een andere naam.</translation>
     <name>GuiFloatingChat</name>
     <message>
         <source>Show group menu</source>
-        <translation type="vanished">Toon groep menu</translation>
+        <translation type="obsolete">Toon groep menu</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="54"/>
@@ -4251,7 +4251,7 @@ Gebruik aub een andere naam.</translation>
     </message>
     <message>
         <source>Please select the number of days that items (such as images) can remain cached (current: %1, never clear: -1, always clear: 0).</source>
-        <translation type="vanished">Selecteer het aantal dagen dat items (zoals afbeeldingen) in de cache kunnen blijven (actueel:%1 , nooit wissen: -1, altijd wissen: 0).</translation>
+        <translation type="obsolete">Selecteer het aantal dagen dat items (zoals afbeeldingen) in de cache kunnen blijven (actueel:%1 , nooit wissen: -1, altijd wissen: 0).</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2350"/>
@@ -4823,7 +4823,7 @@ Gebruik aub een andere naam.</translation>
     <name>GuiRecordVoiceMessage</name>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="191"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="333"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="340"/>
         <source>Recording</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4893,18 +4893,28 @@ Gebruik aub een andere naam.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="270"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="298"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="273"/>
+        <source>No device available for recording voice messages.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="273"/>
+        <source>Ok</source>
+        <translation type="unfinished">Ok</translation>
+    </message>
+    <message>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="277"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="305"/>
         <source>Please wait</source>
         <translation type="unfinished">Wacht AUB</translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="323"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="330"/>
         <source>Volume</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="323"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="330"/>
         <source>muted</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6011,27 +6021,27 @@ Gebruik aub een andere naam.</translation>
     <name>GuiTransferFile</name>
     <message>
         <source>File</source>
-        <translation type="vanished">Bestand</translation>
+        <translation type="obsolete">Bestand</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="vanished">Gebruiker</translation>
+        <translation type="obsolete">Gebruiker</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="vanished">Status</translation>
+        <translation type="obsolete">Status</translation>
     </message>
     <message>
         <source>Time left</source>
-        <translation type="vanished">Tijd over</translation>
+        <translation type="obsolete">Tijd over</translation>
     </message>
     <message>
         <source>Remove all completed transfers</source>
-        <translation type="vanished">Verwijder alle voltooide transfers</translation>
+        <translation type="obsolete">Verwijder alle voltooide transfers</translation>
     </message>
     <message>
         <source>Completed</source>
-        <translation type="vanished">Voltooid</translation>
+        <translation type="obsolete">Voltooid</translation>
     </message>
     <message>
         <source>Cancel Transfer</source>
@@ -6043,7 +6053,7 @@ Gebruik aub een andere naam.</translation>
     </message>
     <message>
         <source>Transfer completed</source>
-        <translation type="vanished">Overdracht voltooid</translation>
+        <translation type="obsolete">Overdracht voltooid</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -6051,19 +6061,19 @@ Gebruik aub een andere naam.</translation>
     </message>
     <message>
         <source>Downloading</source>
-        <translation type="vanished">Aan het downloaden</translation>
+        <translation type="obsolete">Aan het downloaden</translation>
     </message>
     <message>
         <source>Uploading</source>
-        <translation type="vanished">Aan het uploaden</translation>
+        <translation type="obsolete">Aan het uploaden</translation>
     </message>
     <message>
         <source>Waiting</source>
-        <translation type="vanished">Wachten</translation>
+        <translation type="obsolete">Wachten</translation>
     </message>
     <message>
         <source>Do you want to cancel the transfer of %1?</source>
-        <translation type="vanished">Wil je de overdracht van %1 annuleren of?</translation>
+        <translation type="obsolete">Wil je de overdracht van %1 annuleren of?</translation>
     </message>
     <message>
         <source>Remove all transfers</source>
@@ -6130,7 +6140,7 @@ Gebruik aub een andere naam.</translation>
     </message>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation type="vanished">Qt bibliotheek voor dit besturingssysteem ondersteunt geen Drag en drop voor bestanden. U moet het bestand dat u wilt versturen opnieuw selecteren.</translation>
+        <translation type="obsolete">Qt bibliotheek voor dit besturingssysteem ondersteunt geen Drag en drop voor bestanden. U moet het bestand dat u wilt versturen opnieuw selecteren.</translation>
     </message>
 </context>
 <context>
@@ -6666,11 +6676,11 @@ Gebruik aub een andere naam.</translation>
     </message>
     <message>
         <source>last update</source>
-        <translation type="vanished">laatste update</translation>
+        <translation type="obsolete">laatste update</translation>
     </message>
     <message>
         <source>last connection</source>
-        <translation type="vanished">Laatste verbinding</translation>
+        <translation type="obsolete">Laatste verbinding</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="711"/>

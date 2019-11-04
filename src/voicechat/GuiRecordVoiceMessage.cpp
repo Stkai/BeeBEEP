@@ -212,7 +212,7 @@ void GuiRecordVoiceMessage::onRecorderStatusChanged( QMediaRecorder::Status reco
 void GuiRecordVoiceMessage::computeDurantionRange()
 {
   m_duration = 0;
-  float max_duration = qMax( 10, Settings::instance().voiceMessageMaxDuration() );
+  double max_duration = qMax( 10, Settings::instance().voiceMessageMaxDuration() );
   m_warningDuration = qMax( 6, qRound( max_duration / 100.0 * 70.0 ) );
   m_criticalDuration = qMax( 8, qRound( max_duration / 100.0 * 90.0 ) );
   m_maxDuration = qRound( max_duration );
@@ -267,6 +267,13 @@ void GuiRecordVoiceMessage::toggleRecord()
         return;
       }
     }
+
+    if( !AudioManager::instance().isVoiceInputDeviceAvailable() )
+    {
+      QMessageBox::warning( this, Settings::instance().programName(), tr( "No device available for recording voice messages."), tr( "Ok" ) );
+      return;
+    }
+
     mp_lStatus->setText( tr( "Please wait" ) + QString( "..." ) );
     mp_pbSend->setEnabled( true );
     QApplication::setOverrideCursor( Qt::WaitCursor );

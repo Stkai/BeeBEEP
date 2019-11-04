@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="nb_NO">
+<TS version="2.0" language="nb_NO">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -224,7 +224,7 @@
     </message>
     <message>
         <source>%1 offline messages will be sent as soon as possible.</source>
-        <translation type="vanished">%1 offline-meldinger blir sendt så snart som mulig.</translation>
+        <translation type="obsolete">%1 offline-meldinger blir sendt så snart som mulig.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="704"/>
@@ -346,7 +346,7 @@
     </message>
     <message>
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
-        <translation type="vanished">Usendte offline-samtaler hadde en ukorrekt autorisasjonskode og blir ikke sendt.</translation>
+        <translation type="obsolete">Usendte offline-samtaler hadde en ukorrekt autorisasjonskode og blir ikke sendt.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="949"/>
@@ -395,7 +395,7 @@
     </message>
     <message>
         <source>Offline messages sent to %2.</source>
-        <translation type="vanished">Frakobla meldinger sendt til %2.</translation>
+        <translation type="obsolete">Frakobla meldinger sendt til %2.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="908"/>
@@ -454,7 +454,7 @@
     </message>
     <message>
         <source>Open</source>
-        <translation type="vanished">Åpne</translation>
+        <translation type="obsolete">Åpne</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="356"/>
@@ -485,7 +485,7 @@
     </message>
     <message>
         <source>%1 %2: file not found.</source>
-        <translation type="vanished">%1 %2: fil.ikke funnet.</translation>
+        <translation type="obsolete">%1 %2: fil.ikke funnet.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="382"/>
@@ -499,7 +499,7 @@
     </message>
     <message>
         <source>%1 You send %2 to %3.</source>
-        <translation type="vanished">%1 Du sendte %2 til %3.</translation>
+        <translation type="obsolete">%1 Du sendte %2 til %3.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="176"/>
@@ -616,7 +616,7 @@
     </message>
     <message>
         <source>%1 You send folder %2 to %3.</source>
-        <translation type="vanished">%1 Du sendte mappe %2 til %3.</translation>
+        <translation type="obsolete">%1 Du sendte mappe %2 til %3.</translation>
     </message>
     <message>
         <source>%1 %2 has refused to download %3.</source>
@@ -637,7 +637,7 @@
         <translation>%1 har delt %2 filer</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="582"/>
+        <location filename="../src/core/CoreParser.cpp" line="580"/>
         <source>%1 %2 is buzzing you.</source>
         <translation>%1 %2 plinger på deg.</translation>
     </message>
@@ -683,11 +683,11 @@
     </message>
     <message>
         <source>You share this information</source>
-        <translation type="vanished">Du deler denne informasjonen</translation>
+        <translation type="obsolete">Du deler denne informasjonen</translation>
     </message>
     <message>
         <source>%1 shares this information</source>
-        <translation type="vanished">%1 deler denne informasjonen</translation>
+        <translation type="obsolete">%1 deler denne informasjonen</translation>
     </message>
     <message>
         <location filename="../src/core/CoreUser.cpp" line="316"/>
@@ -873,7 +873,7 @@
     </message>
     <message>
         <source>Transfer cancelled</source>
-        <translation type="vanished">Overføring avbrutt</translation>
+        <translation type="obsolete">Overføring avbrutt</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="95"/>
@@ -1487,7 +1487,7 @@ Download for free and install the version with this feature from the %1 website.
     </message>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation type="vanished">Qt-biblioteket for dette OS&apos;et støtter ikke Dra-og-slipp av filer. Du må velge på nytt fila som skal sendes.</translation>
+        <translation type="obsolete">Qt-biblioteket for dette OS&apos;et støtter ikke Dra-og-slipp av filer. Du må velge på nytt fila som skal sendes.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="1020"/>
@@ -2058,7 +2058,7 @@ Velg et annet navn.</translation>
     <name>GuiFloatingChat</name>
     <message>
         <source>Show group menu</source>
-        <translation type="vanished">Vis gruppemeny</translation>
+        <translation type="obsolete">Vis gruppemeny</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="54"/>
@@ -3064,7 +3064,7 @@ Velg et annet navn.</translation>
     </message>
     <message>
         <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it under the terms of the GNU General Public License as published&lt;br&gt;by the Free Software Foundation, either version 3 of the License&lt;br&gt;or (at your option) any later version.&lt;br&gt;&lt;br&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br&gt;See the GNU General Public License for more details.</source>
-        <translation type="vanished">BeeBEEP er fri programvare: du kan videredistribuere den og/eller endre&lt;br /&gt;den i henhold til betingelsene til GNU General Public License publisert&lt;br /&gt;av the Free Software Foundation, enten lisensversjon 3&lt;br /&gt;eller (etter ditt valg) uansett senere versjon.&lt;br /&gt;&lt;br /&gt;BeeBEEP distributeres i håp om å vise seg nyttig,&lt;br /&gt;men UTEN NOEN GARANTI; ikke engang implisitt&lt;br /&gt;for EGENSKAPER eller EGNETHET TIL NOE SPESIELT FORMÅL.&lt;br /&gt;Se GNU General Public License for flere detaljer.</translation>
+        <translation type="obsolete">BeeBEEP er fri programvare: du kan videredistribuere den og/eller endre&lt;br /&gt;den i henhold til betingelsene til GNU General Public License publisert&lt;br /&gt;av the Free Software Foundation, enten lisensversjon 3&lt;br /&gt;eller (etter ditt valg) uansett senere versjon.&lt;br /&gt;&lt;br /&gt;BeeBEEP distributeres i håp om å vise seg nyttig,&lt;br /&gt;men UTEN NOEN GARANTI; ikke engang implisitt&lt;br /&gt;for EGENSKAPER eller EGNETHET TIL NOE SPESIELT FORMÅL.&lt;br /&gt;Se GNU General Public License for flere detaljer.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="777"/>
@@ -4038,7 +4038,7 @@ Velg et annet navn.</translation>
     </message>
     <message>
         <source>Please select the number of days that items (such as images) can remain cached (current: %1, never clear: -1, always clear: 0).</source>
-        <translation type="vanished">Velg antall dager elementer (som bilder) kan bli i cache (gjeldende: %1, aldri fjern: -1, alltid fjern: 0).</translation>
+        <translation type="obsolete">Velg antall dager elementer (som bilder) kan bli i cache (gjeldende: %1, aldri fjern: -1, alltid fjern: 0).</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2350"/>
@@ -4771,7 +4771,7 @@ Velg et annet navn.</translation>
     <name>GuiRecordVoiceMessage</name>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="191"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="333"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="340"/>
         <source>Recording</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4841,18 +4841,28 @@ Velg et annet navn.</translation>
         <translation type="unfinished">Avbryt</translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="270"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="298"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="273"/>
+        <source>No device available for recording voice messages.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="273"/>
+        <source>Ok</source>
+        <translation type="unfinished">Ok</translation>
+    </message>
+    <message>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="277"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="305"/>
         <source>Please wait</source>
         <translation type="unfinished">Vennligst vent</translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="323"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="330"/>
         <source>Volume</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="323"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="330"/>
         <source>muted</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5951,27 +5961,27 @@ Velg et annet navn.</translation>
     <name>GuiTransferFile</name>
     <message>
         <source>File</source>
-        <translation type="vanished">Fil</translation>
+        <translation type="obsolete">Fil</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="vanished">Bruker</translation>
+        <translation type="obsolete">Bruker</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="vanished">Status</translation>
+        <translation type="obsolete">Status</translation>
     </message>
     <message>
         <source>Time left</source>
-        <translation type="vanished">Gjenstående tid</translation>
+        <translation type="obsolete">Gjenstående tid</translation>
     </message>
     <message>
         <source>Remove all completed transfers</source>
-        <translation type="vanished">Fjern alle fullførte overføringer</translation>
+        <translation type="obsolete">Fjern alle fullførte overføringer</translation>
     </message>
     <message>
         <source>Completed</source>
-        <translation type="vanished">Fullført</translation>
+        <translation type="obsolete">Fullført</translation>
     </message>
     <message>
         <source>Cancel Transfer</source>
@@ -5983,7 +5993,7 @@ Velg et annet navn.</translation>
     </message>
     <message>
         <source>Transfer completed</source>
-        <translation type="vanished">Overføring fullført</translation>
+        <translation type="obsolete">Overføring fullført</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -5991,23 +6001,23 @@ Velg et annet navn.</translation>
     </message>
     <message>
         <source>Downloading</source>
-        <translation type="vanished">Laster ned</translation>
+        <translation type="obsolete">Laster ned</translation>
     </message>
     <message>
         <source>Uploading</source>
-        <translation type="vanished">Laster opp</translation>
+        <translation type="obsolete">Laster opp</translation>
     </message>
     <message>
         <source>Waiting</source>
-        <translation type="vanished">Venter</translation>
+        <translation type="obsolete">Venter</translation>
     </message>
     <message>
         <source>of</source>
-        <translation type="vanished">av</translation>
+        <translation type="obsolete">av</translation>
     </message>
     <message>
         <source>Do you want to cancel the transfer of %1?</source>
-        <translation type="vanished">Vil du avbryte overføringa av %1?</translation>
+        <translation type="obsolete">Vil du avbryte overføringa av %1?</translation>
     </message>
     <message>
         <source>Remove all transfers</source>
@@ -6074,7 +6084,7 @@ Velg et annet navn.</translation>
     </message>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation type="vanished">Qt-biblioteket for dette OS&apos;et støtter ikke Dra-og-slipp av filer. Du må velge på nytt fila som skal sendes.</translation>
+        <translation type="obsolete">Qt-biblioteket for dette OS&apos;et støtter ikke Dra-og-slipp av filer. Du må velge på nytt fila som skal sendes.</translation>
     </message>
 </context>
 <context>
@@ -6598,11 +6608,11 @@ Velg et annet navn.</translation>
     </message>
     <message>
         <source>last update</source>
-        <translation type="vanished">siste oppdatering</translation>
+        <translation type="obsolete">siste oppdatering</translation>
     </message>
     <message>
         <source>last connection</source>
-        <translation type="vanished">siste forbindelse</translation>
+        <translation type="obsolete">siste forbindelse</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="711"/>

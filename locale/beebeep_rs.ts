@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="sr" sourcelanguage="en_GB">
+<TS version="2.0" language="sr" sourcelanguage="en_GB">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -393,7 +393,7 @@
     </message>
     <message>
         <source>Offline messages sent to %2.</source>
-        <translation type="vanished">Poruka je OFFLINE poslata %2.</translation>
+        <translation type="obsolete">Poruka je OFFLINE poslata %2.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="908"/>
@@ -447,7 +447,7 @@
     </message>
     <message>
         <source>Open</source>
-        <translation type="vanished">Otvori</translation>
+        <translation type="obsolete">Otvori</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="356"/>
@@ -483,7 +483,7 @@
     </message>
     <message>
         <source>%1 %2: file not found.</source>
-        <translation type="vanished">%1 %2: nepostojeći fajl.</translation>
+        <translation type="obsolete">%1 %2: nepostojeći fajl.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="382"/>
@@ -497,7 +497,7 @@
     </message>
     <message>
         <source>%1 You send %2 to %3.</source>
-        <translation type="vanished">%1 šalješ %2 za %3.</translation>
+        <translation type="obsolete">%1 šalješ %2 za %3.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="698"/>
@@ -609,7 +609,7 @@
     </message>
     <message>
         <source>%1 You send folder %2 to %3.</source>
-        <translation type="vanished">%1 šalješ folder %2 za %3.</translation>
+        <translation type="obsolete">%1 šalješ folder %2 za %3.</translation>
     </message>
     <message>
         <source>%1 %2 has refused to download %3.</source>
@@ -630,7 +630,7 @@
         <translation type="unfinished">%1 je delio %2 fajlova</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="582"/>
+        <location filename="../src/core/CoreParser.cpp" line="580"/>
         <source>%1 %2 is buzzing you.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -676,11 +676,11 @@
     </message>
     <message>
         <source>You share this information</source>
-        <translation type="vanished">Deliš ove informacije</translation>
+        <translation type="obsolete">Deliš ove informacije</translation>
     </message>
     <message>
         <source>%1 shares this information</source>
-        <translation type="vanished">%1 deli ove informacije</translation>
+        <translation type="obsolete">%1 deli ove informacije</translation>
     </message>
     <message>
         <location filename="../src/core/CoreUser.cpp" line="316"/>
@@ -866,7 +866,7 @@
     </message>
     <message>
         <source>Transfer cancelled</source>
-        <translation type="vanished">Prenos je otkazan</translation>
+        <translation type="obsolete">Prenos je otkazan</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="95"/>
@@ -1449,7 +1449,7 @@ Download for free and install the version with this feature from the %1 website.
     </message>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation type="vanished">Program za ovaj OS ne podržava prevlačenje fajlova.</translation>
+        <translation type="obsolete">Program za ovaj OS ne podržava prevlačenje fajlova.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="1020"/>
@@ -4727,7 +4727,7 @@ Please select a different name.</source>
     <name>GuiRecordVoiceMessage</name>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="191"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="333"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="340"/>
         <source>Recording</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4797,18 +4797,28 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="270"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="298"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="273"/>
+        <source>No device available for recording voice messages.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="273"/>
+        <source>Ok</source>
+        <translation type="unfinished">OK</translation>
+    </message>
+    <message>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="277"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="305"/>
         <source>Please wait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="323"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="330"/>
         <source>Volume</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="323"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="330"/>
         <source>muted</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5863,19 +5873,19 @@ Please select a different name.</source>
     <name>GuiTransferFile</name>
     <message>
         <source>File</source>
-        <translation type="vanished">Fajl</translation>
+        <translation type="obsolete">Fajl</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="vanished">Korisnik</translation>
+        <translation type="obsolete">Korisnik</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="vanished">Status</translation>
+        <translation type="obsolete">Status</translation>
     </message>
     <message>
         <source>Completed</source>
-        <translation type="vanished">Završeno</translation>
+        <translation type="obsolete">Završeno</translation>
     </message>
     <message>
         <source>Cancel Transfer</source>
@@ -5887,7 +5897,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Transfer completed</source>
-        <translation type="vanished">Prenos završen</translation>
+        <translation type="obsolete">Prenos završen</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -5895,11 +5905,11 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Downloading</source>
-        <translation type="vanished">Downloadovanje</translation>
+        <translation type="obsolete">Downloadovanje</translation>
     </message>
     <message>
         <source>Uploading</source>
-        <translation type="vanished">Uploding</translation>
+        <translation type="obsolete">Uploding</translation>
     </message>
     <message>
         <source>Remove all transfers</source>

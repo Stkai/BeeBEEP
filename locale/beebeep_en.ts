@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="en_US">
+<TS version="2.0" language="en_US">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -501,7 +501,7 @@
     </message>
     <message>
         <source>%1 You send %2 to %3.</source>
-        <translation type="vanished">%1 Sending %2 to %3.</translation>
+        <translation type="obsolete">%1 Sending %2 to %3.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="409"/>
@@ -595,7 +595,7 @@
     </message>
     <message>
         <source>%1 You send folder %2 to %3.</source>
-        <translation type="vanished">%1 Sending folder %2 to %3.</translation>
+        <translation type="obsolete">%1 Sending folder %2 to %3.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreParser.cpp" line="163"/>
@@ -638,7 +638,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="582"/>
+        <location filename="../src/core/CoreParser.cpp" line="580"/>
         <source>%1 %2 is buzzing you.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4608,7 +4608,7 @@ Please select a different name.</source>
     <name>GuiRecordVoiceMessage</name>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="191"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="333"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="340"/>
         <source>Recording</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4678,18 +4678,28 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="270"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="298"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="273"/>
+        <source>No device available for recording voice messages.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="273"/>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="277"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="305"/>
         <source>Please wait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="323"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="330"/>
         <source>Volume</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="323"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="330"/>
         <source>muted</source>
         <translation type="unfinished"></translation>
     </message>

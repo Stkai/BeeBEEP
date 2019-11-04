@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="pl_PL">
+<TS version="2.0" language="pl_PL">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -338,7 +338,7 @@
     </message>
     <message>
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
-        <translation type="vanished">Wiadomości offline czekające na wysłanie mają niepoprawny kod autoryzacyjny i nie zostaną wysłane.</translation>
+        <translation type="obsolete">Wiadomości offline czekające na wysłanie mają niepoprawny kod autoryzacyjny i nie zostaną wysłane.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="949"/>
@@ -382,7 +382,7 @@
     </message>
     <message>
         <source>%1 offline messages will be sent as soon as possible.</source>
-        <translation type="vanished">%1 wiadomości offline zostanie wysłanych jak tylko będzie to możliwe.</translation>
+        <translation type="obsolete">%1 wiadomości offline zostanie wysłanych jak tylko będzie to możliwe.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="704"/>
@@ -391,7 +391,7 @@
     </message>
     <message>
         <source>Offline messages sent to %2.</source>
-        <translation type="vanished">Wiadomości z trybu offline wysłane do %2.</translation>
+        <translation type="obsolete">Wiadomości z trybu offline wysłane do %2.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="908"/>
@@ -455,7 +455,7 @@
     </message>
     <message>
         <source>Open</source>
-        <translation type="vanished">Otwórz</translation>
+        <translation type="obsolete">Otwórz</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="356"/>
@@ -491,7 +491,7 @@
     </message>
     <message>
         <source>%1 %2: file not found.</source>
-        <translation type="vanished">%1 %2: plik nie znaleziony.</translation>
+        <translation type="obsolete">%1 %2: plik nie znaleziony.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="382"/>
@@ -505,7 +505,7 @@
     </message>
     <message>
         <source>%1 You send %2 to %3.</source>
-        <translation type="vanished">%1 Wysyłasz %2 do %3.</translation>
+        <translation type="obsolete">%1 Wysyłasz %2 do %3.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="698"/>
@@ -617,7 +617,7 @@
     </message>
     <message>
         <source>%1 You send folder %2 to %3.</source>
-        <translation type="vanished">%1 Wysłałeś folder %2 do %3.</translation>
+        <translation type="obsolete">%1 Wysłałeś folder %2 do %3.</translation>
     </message>
     <message>
         <source>%1 %2 has refused to download %3.</source>
@@ -668,7 +668,7 @@
         <translation>%1 %2 wysyła do Ciebie folder: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="582"/>
+        <location filename="../src/core/CoreParser.cpp" line="580"/>
         <source>%1 %2 is buzzing you.</source>
         <translation>%1 %2 dzwoni do Ciebie.</translation>
     </message>
@@ -684,11 +684,11 @@
     </message>
     <message>
         <source>You share this information</source>
-        <translation type="vanished">Udostępniłeś tę informację</translation>
+        <translation type="obsolete">Udostępniłeś tę informację</translation>
     </message>
     <message>
         <source>%1 shares this information</source>
-        <translation type="vanished">%1 udostępnia tę informację</translation>
+        <translation type="obsolete">%1 udostępnia tę informację</translation>
     </message>
     <message>
         <location filename="../src/core/CoreUser.cpp" line="316"/>
@@ -870,7 +870,7 @@
     </message>
     <message>
         <source>Transfer cancelled</source>
-        <translation type="vanished">Transfer anulowany</translation>
+        <translation type="obsolete">Transfer anulowany</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="95"/>
@@ -1504,7 +1504,7 @@ Download for free and install the version with this feature from the %1 website.
     </message>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation type="vanished">Biblioteka Qt w tym systemie nie wspiera przeciągania i upuszczania plików. Musisz wybrać jeszcze raz by wysłać.</translation>
+        <translation type="obsolete">Biblioteka Qt w tym systemie nie wspiera przeciągania i upuszczania plików. Musisz wybrać jeszcze raz by wysłać.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="1020"/>
@@ -2055,7 +2055,7 @@ Proszę wybrać inną nazwę.</translation>
     <name>GuiFloatingChat</name>
     <message>
         <source>Show group menu</source>
-        <translation type="vanished">Pokaż menu grupy</translation>
+        <translation type="obsolete">Pokaż menu grupy</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="51"/>
@@ -3212,7 +3212,7 @@ Proszę wybrać inną nazwę.</translation>
     </message>
     <message>
         <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it under the terms of the GNU General Public License as published&lt;br&gt;by the Free Software Foundation, either version 3 of the License&lt;br&gt;or (at your option) any later version.&lt;br&gt;&lt;br&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br&gt;See the GNU General Public License for more details.</source>
-        <translation type="vanished">BeeBEEP jest wolnym oprogramowaniem: możesz rozpowszechniać i /lub&lt;br&gt;modyfikować je zgodnie z warunkami GNU General Public License&lt;br&gt;opublikowanej przez Free Software Foundation, w wersji 3 licencji&lt;br&gt;lub (do wyboru) dowolnej późniejszej.&lt;br&gt;&lt;br&gt;BeeBEEP jest rozpowszechniany w nadziei, że będzie użyteczny,&lt;br&gt;ale BEZ JAKICHKOLWIEK GWARANCJI; nawet bez dorozumianej gwaracji&lt;br&gt;PRZYDATNOŚCI HANDLOWEJ lub PRZYDATNOŚCI DO OKREŚLONEGO CELU.&lt;br&gt;Zajrzyj do GNU General Public License po więcej informacji.</translation>
+        <translation type="obsolete">BeeBEEP jest wolnym oprogramowaniem: możesz rozpowszechniać i /lub&lt;br&gt;modyfikować je zgodnie z warunkami GNU General Public License&lt;br&gt;opublikowanej przez Free Software Foundation, w wersji 3 licencji&lt;br&gt;lub (do wyboru) dowolnej późniejszej.&lt;br&gt;&lt;br&gt;BeeBEEP jest rozpowszechniany w nadziei, że będzie użyteczny,&lt;br&gt;ale BEZ JAKICHKOLWIEK GWARANCJI; nawet bez dorozumianej gwaracji&lt;br&gt;PRZYDATNOŚCI HANDLOWEJ lub PRZYDATNOŚCI DO OKREŚLONEGO CELU.&lt;br&gt;Zajrzyj do GNU General Public License po więcej informacji.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="777"/>
@@ -4242,7 +4242,7 @@ Proszę wybrać inną nazwę.</translation>
     </message>
     <message>
         <source>Please select the number of days that items (such as images) can remain cached (current: %1, never clear: -1, always clear: 0).</source>
-        <translation type="vanished">Proszę wybrać liczbę dni, przez które elementy (takie jka obrazy) mogą pozostawać w pamięci podręcznej (obecnie: %1. nigdy nie czyść: -1, zawsze czyść: 0).</translation>
+        <translation type="obsolete">Proszę wybrać liczbę dni, przez które elementy (takie jka obrazy) mogą pozostawać w pamięci podręcznej (obecnie: %1. nigdy nie czyść: -1, zawsze czyść: 0).</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2695"/>
@@ -4746,7 +4746,7 @@ Proszę wybrać inną nazwę.</translation>
     <name>GuiRecordVoiceMessage</name>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="191"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="333"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="340"/>
         <source>Recording</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4816,18 +4816,28 @@ Proszę wybrać inną nazwę.</translation>
         <translation type="unfinished">Anuluj</translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="270"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="298"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="273"/>
+        <source>No device available for recording voice messages.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="273"/>
+        <source>Ok</source>
+        <translation type="unfinished">Ok</translation>
+    </message>
+    <message>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="277"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="305"/>
         <source>Please wait</source>
         <translation type="unfinished">Proszę czekać</translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="323"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="330"/>
         <source>Volume</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="323"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="330"/>
         <source>muted</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5918,19 +5928,19 @@ Proszę wybrać inną nazwę.</translation>
     <name>GuiTransferFile</name>
     <message>
         <source>File</source>
-        <translation type="vanished">Plik</translation>
+        <translation type="obsolete">Plik</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="vanished">Użytkownik</translation>
+        <translation type="obsolete">Użytkownik</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="vanished">Status</translation>
+        <translation type="obsolete">Status</translation>
     </message>
     <message>
         <source>Completed</source>
-        <translation type="vanished">Zakończony</translation>
+        <translation type="obsolete">Zakończony</translation>
     </message>
     <message>
         <source>Cancel Transfer</source>
@@ -5942,23 +5952,23 @@ Proszę wybrać inną nazwę.</translation>
     </message>
     <message>
         <source>Transfer completed</source>
-        <translation type="vanished">Transfer zakończony</translation>
+        <translation type="obsolete">Transfer zakończony</translation>
     </message>
     <message>
         <source>Downloading</source>
-        <translation type="vanished">Pobieranie</translation>
+        <translation type="obsolete">Pobieranie</translation>
     </message>
     <message>
         <source>Uploading</source>
-        <translation type="vanished">Wysyłanie</translation>
+        <translation type="obsolete">Wysyłanie</translation>
     </message>
     <message>
         <source>Waiting</source>
-        <translation type="vanished">Oczekiwanie</translation>
+        <translation type="obsolete">Oczekiwanie</translation>
     </message>
     <message>
         <source>Do you want to cancel the transfer of %1?</source>
-        <translation type="vanished">Czy chcesz przerwać transfer %1?</translation>
+        <translation type="obsolete">Czy chcesz przerwać transfer %1?</translation>
     </message>
     <message>
         <source>Remove all transfers</source>
@@ -6025,7 +6035,7 @@ Proszę wybrać inną nazwę.</translation>
     </message>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation type="vanished">Biblioteka Qt w tym systemie nie wspiera przeciągania i upuszczania plików. Musisz wybrać jeszcze raz plik do wysłania.</translation>
+        <translation type="obsolete">Biblioteka Qt w tym systemie nie wspiera przeciągania i upuszczania plików. Musisz wybrać jeszcze raz plik do wysłania.</translation>
     </message>
 </context>
 <context>
@@ -6541,11 +6551,11 @@ Proszę wybrać inną nazwę.</translation>
     </message>
     <message>
         <source>last update</source>
-        <translation type="vanished">ostatnia zmiana</translation>
+        <translation type="obsolete">ostatnia zmiana</translation>
     </message>
     <message>
         <source>last connection</source>
-        <translation type="vanished">ostatnie połączenie</translation>
+        <translation type="obsolete">ostatnie połączenie</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="711"/>

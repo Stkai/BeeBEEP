@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="zh_TW">
+<TS version="2.0" language="zh_TW">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -335,7 +335,7 @@
     </message>
     <message>
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
-        <translation type="vanished">仍要傳送的離線訊息的授權碼不正確，不會傳送。</translation>
+        <translation type="obsolete">仍要傳送的離線訊息的授權碼不正確，不會傳送。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="949"/>
@@ -379,7 +379,7 @@
     </message>
     <message>
         <source>%1 offline messages will be sent as soon as possible.</source>
-        <translation type="vanished">%1 將儘快傳送離線訊息。</translation>
+        <translation type="obsolete">%1 將儘快傳送離線訊息。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="704"/>
@@ -388,7 +388,7 @@
     </message>
     <message>
         <source>Offline messages sent to %2.</source>
-        <translation type="vanished">離線訊息傳送到 %2。</translation>
+        <translation type="obsolete">離線訊息傳送到 %2。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="908"/>
@@ -452,7 +452,7 @@
     </message>
     <message>
         <source>Open</source>
-        <translation type="vanished">開啟</translation>
+        <translation type="obsolete">開啟</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="356"/>
@@ -488,7 +488,7 @@
     </message>
     <message>
         <source>%1 %2: file not found.</source>
-        <translation type="vanished">%1 %2: 找不到檔案。</translation>
+        <translation type="obsolete">%1 %2: 找不到檔案。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="382"/>
@@ -502,7 +502,7 @@
     </message>
     <message>
         <source>%1 You send %2 to %3.</source>
-        <translation type="vanished">%1 您傳送 %2 到 %3。</translation>
+        <translation type="obsolete">%1 您傳送 %2 到 %3。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="698"/>
@@ -614,7 +614,7 @@
     </message>
     <message>
         <source>%1 You send folder %2 to %3.</source>
-        <translation type="vanished">%1 您傳送資料夾 %2 到 %3。</translation>
+        <translation type="obsolete">%1 您傳送資料夾 %2 到 %3。</translation>
     </message>
     <message>
         <source>%1 %2 has refused to download %3.</source>
@@ -665,7 +665,7 @@
         <translation>%1 %2 正在向您傳送資料夾: %3。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="582"/>
+        <location filename="../src/core/CoreParser.cpp" line="580"/>
         <source>%1 %2 is buzzing you.</source>
         <translation>%1 %2 正在呼叫您。</translation>
     </message>
@@ -681,11 +681,11 @@
     </message>
     <message>
         <source>You share this information</source>
-        <translation type="vanished">您共用此資訊</translation>
+        <translation type="obsolete">您共用此資訊</translation>
     </message>
     <message>
         <source>%1 shares this information</source>
-        <translation type="vanished">%1 共用這個資訊</translation>
+        <translation type="obsolete">%1 共用這個資訊</translation>
     </message>
     <message>
         <location filename="../src/core/CoreUser.cpp" line="316"/>
@@ -867,7 +867,7 @@
     </message>
     <message>
         <source>Transfer cancelled</source>
-        <translation type="vanished">傳輸已取消</translation>
+        <translation type="obsolete">傳輸已取消</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="95"/>
@@ -1494,7 +1494,7 @@ Download for free and install the version with this feature from the %1 website.
     </message>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation type="vanished">這個作業系統的 Qt 程式庫不支援檔案的拖放。 您必須再次選取要傳送的檔案。</translation>
+        <translation type="obsolete">這個作業系統的 Qt 程式庫不支援檔案的拖放。 您必須再次選取要傳送的檔案。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="1020"/>
@@ -2043,7 +2043,7 @@ Please select a different name.</source>
     <name>GuiFloatingChat</name>
     <message>
         <source>Show group menu</source>
-        <translation type="vanished">顯示群組功能表</translation>
+        <translation type="obsolete">顯示群組功能表</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="51"/>
@@ -3108,7 +3108,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it under the terms of the GNU General Public License as published&lt;br&gt;by the Free Software Foundation, either version 3 of the License&lt;br&gt;or (at your option) any later version.&lt;br&gt;&lt;br&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br&gt;See the GNU General Public License for more details.</source>
-        <translation type="vanished">BeeBEEP 是免費軟體: 您可以重新分發和/或修改&lt;br&gt;根據 GNU 通用公共授權的條款，如 Free Software Foundation 已發佈&lt;br&gt;，授權的版本 3&lt;br&gt;或 (由您選擇) 任何更高版本。&lt;br&gt;&lt;br&gt;BeeBEEP 是分發在希望這將是有用的，&lt;br&gt;但沒有任何保證; 甚至沒有隱含的保證&lt;br&gt;為特定目的而供應商業或健身。&lt;br&gt;有關詳細資訊，請參閱 GNU 通用公共授權。</translation>
+        <translation type="obsolete">BeeBEEP 是免費軟體: 您可以重新分發和/或修改&lt;br&gt;根據 GNU 通用公共授權的條款，如 Free Software Foundation 已發佈&lt;br&gt;，授權的版本 3&lt;br&gt;或 (由您選擇) 任何更高版本。&lt;br&gt;&lt;br&gt;BeeBEEP 是分發在希望這將是有用的，&lt;br&gt;但沒有任何保證; 甚至沒有隱含的保證&lt;br&gt;為特定目的而供應商業或健身。&lt;br&gt;有關詳細資訊，請參閱 GNU 通用公共授權。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="777"/>
@@ -4168,7 +4168,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Please select the number of days that items (such as images) can remain cached (current: %1, never clear: -1, always clear: 0).</source>
-        <translation type="vanished">請選取項目 (如圖片) 可以保留快取的天數 (目前: %1，永不清除: -1，始終清除: 0)。</translation>
+        <translation type="obsolete">請選取項目 (如圖片) 可以保留快取的天數 (目前: %1，永不清除: -1，始終清除: 0)。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2695"/>
@@ -4668,7 +4668,7 @@ Please select a different name.</source>
     <name>GuiRecordVoiceMessage</name>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="191"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="333"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="340"/>
         <source>Recording</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4738,18 +4738,28 @@ Please select a different name.</source>
         <translation type="unfinished">取消</translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="270"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="298"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="273"/>
+        <source>No device available for recording voice messages.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="273"/>
+        <source>Ok</source>
+        <translation type="unfinished">確定</translation>
+    </message>
+    <message>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="277"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="305"/>
         <source>Please wait</source>
         <translation type="unfinished">請稍候</translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="323"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="330"/>
         <source>Volume</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="323"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="330"/>
         <source>muted</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5792,27 +5802,27 @@ Please select a different name.</source>
     <name>GuiTransferFile</name>
     <message>
         <source>File</source>
-        <translation type="vanished">檔案</translation>
+        <translation type="obsolete">檔案</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="vanished">使用者</translation>
+        <translation type="obsolete">使用者</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="vanished">狀態</translation>
+        <translation type="obsolete">狀態</translation>
     </message>
     <message>
         <source>Time left</source>
-        <translation type="vanished">剩餘時間</translation>
+        <translation type="obsolete">剩餘時間</translation>
     </message>
     <message>
         <source>Remove all completed transfers</source>
-        <translation type="vanished">移除所有已完成的傳輸</translation>
+        <translation type="obsolete">移除所有已完成的傳輸</translation>
     </message>
     <message>
         <source>Completed</source>
-        <translation type="vanished">已完成</translation>
+        <translation type="obsolete">已完成</translation>
     </message>
     <message>
         <source>Cancel Transfer</source>
@@ -5824,27 +5834,27 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Transfer completed</source>
-        <translation type="vanished">傳輸完成</translation>
+        <translation type="obsolete">傳輸完成</translation>
     </message>
     <message>
         <source>Downloading</source>
-        <translation type="vanished">正在下載</translation>
+        <translation type="obsolete">正在下載</translation>
     </message>
     <message>
         <source>Uploading</source>
-        <translation type="vanished">正在上傳</translation>
+        <translation type="obsolete">正在上傳</translation>
     </message>
     <message>
         <source>Waiting</source>
-        <translation type="vanished">等待中</translation>
+        <translation type="obsolete">等待中</translation>
     </message>
     <message>
         <source>of</source>
-        <translation type="vanished">/</translation>
+        <translation type="obsolete">/</translation>
     </message>
     <message>
         <source>Do you want to cancel the transfer of %1?</source>
-        <translation type="vanished">您要取消傳輸 %1 嗎?</translation>
+        <translation type="obsolete">您要取消傳輸 %1 嗎?</translation>
     </message>
 </context>
 <context>
@@ -5907,7 +5917,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation type="vanished">這個作業系統的 Qt 程式庫不支援檔案的拖放。 您必須再次選取要傳送的檔案。</translation>
+        <translation type="obsolete">這個作業系統的 Qt 程式庫不支援檔案的拖放。 您必須再次選取要傳送的檔案。</translation>
     </message>
 </context>
 <context>
@@ -6389,11 +6399,11 @@ Please select a different name.</source>
     </message>
     <message>
         <source>last update</source>
-        <translation type="vanished">上次更新</translation>
+        <translation type="obsolete">上次更新</translation>
     </message>
     <message>
         <source>last connection</source>
-        <translation type="vanished">上次連線</translation>
+        <translation type="obsolete">上次連線</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="711"/>

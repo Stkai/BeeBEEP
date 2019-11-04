@@ -231,7 +231,7 @@ void LogMessageHandler( QtMsgType type, const QMessageLogContext &context, const
   if( msg.isNull() || msg.isEmpty() )
     return;
 
-  Q_UNUSED( context );
+  Q_UNUSED( context )
   Log::instance().add( type, msg, "" );
 }
 

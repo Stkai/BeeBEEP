@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -96,11 +96,11 @@
     </message>
     <message>
         <source>Open</source>
-        <translation type="vanished">Apri</translation>
+        <translation type="obsolete">Apri</translation>
     </message>
     <message>
         <source>%1 %2: file not found.</source>
-        <translation type="vanished">%1 %2: file non trovato.</translation>
+        <translation type="obsolete">%1 %2: file non trovato.</translation>
     </message>
     <message>
         <source>%1 You have refused to download %2 from %3.</source>
@@ -164,7 +164,7 @@
     </message>
     <message>
         <source>%1 You send %2 to %3.</source>
-        <translation type="vanished">%1 Stai inviando %2 a %3.</translation>
+        <translation type="obsolete">%1 Stai inviando %2 a %3.</translation>
     </message>
     <message>
         <source>%1 Unable to send %2. File transfer is disabled.</source>
@@ -172,11 +172,11 @@
     </message>
     <message>
         <source>You share this information</source>
-        <translation type="vanished">Tu condividi questa informazione</translation>
+        <translation type="obsolete">Tu condividi questa informazione</translation>
     </message>
     <message>
         <source>%1 shares this information</source>
-        <translation type="vanished">%1 condivide questa informazione</translation>
+        <translation type="obsolete">%1 condivide questa informazione</translation>
     </message>
     <message>
         <source>Happy birthday to Marco Mastroddi: %1 years old today! Cheers!!!</source>
@@ -200,7 +200,7 @@
     </message>
     <message>
         <source>Offline messages sent to %2.</source>
-        <translation type="vanished">I messaggi non inviati sono stati spediti ora a %2.</translation>
+        <translation type="obsolete">I messaggi non inviati sono stati spediti ora a %2.</translation>
     </message>
     <message>
         <source>folder</source>
@@ -236,7 +236,7 @@
     </message>
     <message>
         <source>%1 You send folder %2 to %3.</source>
-        <translation type="vanished">%1 Stai inviando la cartella %2 a %3.</translation>
+        <translation type="obsolete">%1 Stai inviando la cartella %2 a %3.</translation>
     </message>
     <message>
         <source>%1 %2 has refused to download folder %3.</source>
@@ -536,7 +536,7 @@
     </message>
     <message>
         <source>%1 offline messages will be sent as soon as possible.</source>
-        <translation type="vanished">%1 messaggi non inviati saranno spediti appena possibile.</translation>
+        <translation type="obsolete">%1 messaggi non inviati saranno spediti appena possibile.</translation>
     </message>
     <message>
         <source>Offline message will be sent to %1</source>
@@ -552,7 +552,7 @@
     </message>
     <message>
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
-        <translation type="vanished">I messaggi salvati ancora da inviare avevano un codice di autorizzazione errato e non verranno spediti.</translation>
+        <translation type="obsolete">I messaggi salvati ancora da inviare avevano un codice di autorizzazione errato e non verranno spediti.</translation>
     </message>
     <message>
         <source>Saved chats had an incorrect authorization code and will not be added to history.</source>
@@ -660,7 +660,7 @@
     </message>
     <message>
         <source>%1 Sending %2 files to %3 users: %4.</source>
-        <translation type="vanished">%1 Stai inviando %2 file a %3 utenti: %4.</translation>
+        <translation type="obsolete">%1 Stai inviando %2 file a %3 utenti: %4.</translation>
     </message>
     <message>
         <source>%1 sent %2.</source>
@@ -680,7 +680,7 @@
     </message>
     <message>
         <source>unknown duration</source>
-        <translation type="vanished">durata sconosciuta</translation>
+        <translation type="obsolete">durata sconosciuta</translation>
     </message>
     <message>
         <source>Unsent messages had an incorrect authorization code and will not be sent.</source>
@@ -744,7 +744,7 @@
     <name>FileTransferPeer</name>
     <message>
         <source>Transfer cancelled</source>
-        <translation type="vanished">Trasferimento cancellato</translation>
+        <translation type="obsolete">Trasferimento cancellato</translation>
     </message>
     <message>
         <source>Transfer completed in %1</source>
@@ -792,7 +792,7 @@
     </message>
     <message>
         <source>Transfer paused</source>
-        <translation type="vanished">Trasferimento in pausa</translation>
+        <translation type="obsolete">Trasferimento in pausa</translation>
     </message>
     <message>
         <source>file no longer exists</source>
@@ -1044,7 +1044,7 @@
     </message>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation type="vanished">Le librerie Qt per questo OS non supportano il Drag and Drop per i file. Dovrai selezionare nuovamente il file da inviare.</translation>
+        <translation type="obsolete">Le librerie Qt per questo OS non supportano il Drag and Drop per i file. Dovrai selezionare nuovamente il file da inviare.</translation>
     </message>
     <message>
         <source>Filter message</source>
@@ -1665,7 +1665,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Remove all completed transfers</source>
-        <translation type="vanished">Cancella tutti i trasferimenti completati</translation>
+        <translation type="obsolete">Cancella tutti i trasferimenti completati</translation>
     </message>
     <message>
         <source>Do you want to cancel the transfer of %1?</source>
@@ -1673,7 +1673,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Pause</source>
-        <translation type="vanished">Pausa</translation>
+        <translation type="obsolete">Pausa</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -1697,7 +1697,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Yes and keep the partially downloaded file</source>
-        <translation type="vanished">Sì e mantieni il file scaricato parzialmente</translation>
+        <translation type="obsolete">Sì e mantieni il file scaricato parzialmente</translation>
     </message>
     <message>
         <source>Do you want to try resuming the transfer of %1?</source>
@@ -1788,7 +1788,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Show group menu</source>
-        <translation type="vanished">Mostra il menu del gruppo</translation>
+        <translation type="obsolete">Mostra il menu del gruppo</translation>
     </message>
     <message>
         <source>Show chat toolbar</source>
@@ -3344,7 +3344,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Please select the number of days that items (such as images) can remain cached (current: %1, never clear: -1, always clear: 0).</source>
-        <translation type="vanished">Seleziona il numero di giorni in cui gli elementi (ad esempio le immagini) possono restare memorizzati nella cache (attuale: %1, non cancellare mai: -1, cancella sempre: 0).</translation>
+        <translation type="obsolete">Seleziona il numero di giorni in cui gli elementi (ad esempio le immagini) possono restare memorizzati nella cache (attuale: %1, non cancellare mai: -1, cancella sempre: 0).</translation>
     </message>
     <message>
         <source>Show Faq...</source>
@@ -3564,7 +3564,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Please select the number of days that partially downloaded files can remain cached (current: %1, never clear: -1, always clear: 0).</source>
-        <translation type="vanished">Seleziona il numero di giorni in cui i file scaricati parzialmente possono restare memorizzati nella cache (attuale: %1, non cancellare mai: -1, cancella sempre: 0).</translation>
+        <translation type="obsolete">Seleziona il numero di giorni in cui i file scaricati parzialmente possono restare memorizzati nella cache (attuale: %1, non cancellare mai: -1, cancella sempre: 0).</translation>
     </message>
     <message>
         <source>Delete partially downloaded files after %1 days</source>
@@ -4062,7 +4062,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Stopped. Reached the maximum duration of the voice message</source>
-        <translation type="vanished">Finito. E&apos; stata raggiunta la durata massima del messaggio vocale</translation>
+        <translation type="obsolete">Finito. E&apos; stata raggiunta la durata massima del messaggio vocale</translation>
     </message>
     <message>
         <source>Record your voice message</source>
@@ -4087,6 +4087,14 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Reached the maximum duration of the voice message.</source>
         <translation>E&apos; stata raggiunta la durata massima del messaggio vocale.</translation>
+    </message>
+    <message>
+        <source>No device available for recording voice messages.</source>
+        <translation>Nessun dispositivo disponibile per la registrazione di messaggi vocali.</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
@@ -4199,7 +4207,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Voice recorder</source>
-        <translation type="vanished">Registratore messaggi vocali</translation>
+        <translation type="obsolete">Registratore messaggi vocali</translation>
     </message>
     <message>
         <source>Voice message recorder</source>
@@ -4924,7 +4932,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Transfer paused</source>
-        <translation type="vanished">Trasferimento in pausa</translation>
+        <translation type="obsolete">Trasferimento in pausa</translation>
     </message>
 </context>
 <context>
@@ -5004,19 +5012,19 @@ Inserisci un nome differente.</translation>
     <name>GuiTransferFile</name>
     <message>
         <source>File</source>
-        <translation type="vanished">File</translation>
+        <translation type="obsolete">File</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="vanished">Utente</translation>
+        <translation type="obsolete">Utente</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="vanished">Stato</translation>
+        <translation type="obsolete">Stato</translation>
     </message>
     <message>
         <source>Completed</source>
-        <translation type="vanished">Completato</translation>
+        <translation type="obsolete">Completato</translation>
     </message>
     <message>
         <source>Cancel Transfer</source>
@@ -5028,15 +5036,15 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Transfer completed</source>
-        <translation type="vanished">Trasferimento completato</translation>
+        <translation type="obsolete">Trasferimento completato</translation>
     </message>
     <message>
         <source>Downloading</source>
-        <translation type="vanished">Scaricati</translation>
+        <translation type="obsolete">Scaricati</translation>
     </message>
     <message>
         <source>Uploading</source>
-        <translation type="vanished">Inviati</translation>
+        <translation type="obsolete">Inviati</translation>
     </message>
     <message>
         <source>Remove all transfers</source>
@@ -5048,31 +5056,31 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Do you want to cancel the transfer of %1?</source>
-        <translation type="vanished">Vuoi interrompere il trasferimento di %1?</translation>
+        <translation type="obsolete">Vuoi interrompere il trasferimento di %1?</translation>
     </message>
     <message>
         <source>Waiting</source>
-        <translation type="vanished">In attesa</translation>
+        <translation type="obsolete">In attesa</translation>
     </message>
     <message>
         <source>of</source>
-        <translation type="vanished">di</translation>
+        <translation type="obsolete">di</translation>
     </message>
     <message>
         <source>Time left</source>
-        <translation type="vanished">Attesa</translation>
+        <translation type="obsolete">Attesa</translation>
     </message>
     <message>
         <source>Remove all completed transfers</source>
-        <translation type="vanished">Cancella tutti i trasferimenti completati</translation>
+        <translation type="obsolete">Cancella tutti i trasferimenti completati</translation>
     </message>
     <message>
         <source>Cancel transfer</source>
-        <translation type="vanished">Annulla trasferimento</translation>
+        <translation type="obsolete">Annulla trasferimento</translation>
     </message>
     <message>
         <source>Not completed</source>
-        <translation type="vanished">Non completato</translation>
+        <translation type="obsolete">Non completato</translation>
     </message>
 </context>
 <context>
@@ -5111,7 +5119,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation type="vanished">Le librerie Qt per questo OS non supportano il Drag and Drop per i file. Dovrai selezionare nuovamente il file da inviare.</translation>
+        <translation type="obsolete">Le librerie Qt per questo OS non supportano il Drag and Drop per i file. Dovrai selezionare nuovamente il file da inviare.</translation>
     </message>
     <message>
         <source>You cannot send files to the workgroup &apos;%1&apos;.</source>
@@ -5201,7 +5209,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>No shared information</source>
-        <translation type="vanished">Nessuna informazione condivisa</translation>
+        <translation type="obsolete">Nessuna informazione condivisa</translation>
     </message>
     <message>
         <source>none</source>
@@ -5292,7 +5300,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>If you don&apos;t want to show the year to other users use 1900</source>
-        <translation type="vanished">Se non vuoi mostrare l&apos;anno agli altri utenti usa 1900</translation>
+        <translation type="obsolete">Se non vuoi mostrare l&apos;anno agli altri utenti usa 1900</translation>
     </message>
 </context>
 <context>
@@ -5351,7 +5359,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Info</source>
-        <translation type="vanished">Informazioni</translation>
+        <translation type="obsolete">Informazioni</translation>
     </message>
     <message>
         <source>Workgroups</source>
@@ -5638,7 +5646,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>last update</source>
-        <translation type="vanished">ultimo aggiornamento</translation>
+        <translation type="obsolete">ultimo aggiornamento</translation>
     </message>
     <message>
         <source>and</source>
@@ -5650,7 +5658,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>last connection</source>
-        <translation type="vanished">ultima connessione</translation>
+        <translation type="obsolete">ultima connessione</translation>
     </message>
     <message>
         <source>All users</source>

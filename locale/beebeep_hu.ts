@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="hu_HU">
+<TS version="2.0" language="hu_HU">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -383,7 +383,7 @@
     </message>
     <message>
         <source>Offline messages sent to %2.</source>
-        <translation type="vanished">Kapcsolat nékül üzenetek küldése %2 -nak.</translation>
+        <translation type="obsolete">Kapcsolat nékül üzenetek küldése %2 -nak.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="908"/>
@@ -447,7 +447,7 @@
     </message>
     <message>
         <source>Open</source>
-        <translation type="vanished">Megnyitás</translation>
+        <translation type="obsolete">Megnyitás</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="356"/>
@@ -483,7 +483,7 @@
     </message>
     <message>
         <source>%1 %2: file not found.</source>
-        <translation type="vanished">%1 %2: a fájl nem található.</translation>
+        <translation type="obsolete">%1 %2: a fájl nem található.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="382"/>
@@ -497,7 +497,7 @@
     </message>
     <message>
         <source>%1 You send %2 to %3.</source>
-        <translation type="vanished">%1 Elküldöd %2-t %3-nek.</translation>
+        <translation type="obsolete">%1 Elküldöd %2-t %3-nek.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="698"/>
@@ -609,7 +609,7 @@
     </message>
     <message>
         <source>%1 You send folder %2 to %3.</source>
-        <translation type="vanished">%1 Elküldöd a mappát %2-t %3-nek.</translation>
+        <translation type="obsolete">%1 Elküldöd a mappát %2-t %3-nek.</translation>
     </message>
     <message>
         <source>%1 %2 has refused to download %3.</source>
@@ -660,7 +660,7 @@
         <translation>%1 %2 küldi neked a mappát: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="582"/>
+        <location filename="../src/core/CoreParser.cpp" line="580"/>
         <source>%1 %2 is buzzing you.</source>
         <translation>%1 %2 zümmög neked.</translation>
     </message>
@@ -676,11 +676,11 @@
     </message>
     <message>
         <source>You share this information</source>
-        <translation type="vanished">Ön megosztja az információkat</translation>
+        <translation type="obsolete">Ön megosztja az információkat</translation>
     </message>
     <message>
         <source>%1 shares this information</source>
-        <translation type="vanished">%1 információ megosztva</translation>
+        <translation type="obsolete">%1 információ megosztva</translation>
     </message>
     <message>
         <location filename="../src/core/CoreUser.cpp" line="316"/>
@@ -862,7 +862,7 @@
     </message>
     <message>
         <source>Transfer cancelled</source>
-        <translation type="vanished">Az átvitel megszakítva</translation>
+        <translation type="obsolete">Az átvitel megszakítva</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="95"/>
@@ -1496,7 +1496,7 @@ Download for free and install the version with this feature from the %1 website.
     </message>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation type="vanished">Qt könyvtár az operációs rendszer nem támogatja a fogd és vidd fájlokat. Ki kell választani újra a fájlt a küldéshez.</translation>
+        <translation type="obsolete">Qt könyvtár az operációs rendszer nem támogatja a fogd és vidd fájlokat. Ki kell választani újra a fájlt a küldéshez.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="1020"/>
@@ -2048,7 +2048,7 @@ Kérjük, válassz egy másik nevet.</translation>
     <name>GuiFloatingChat</name>
     <message>
         <source>Show group menu</source>
-        <translation type="vanished">A csoport menü megjelenítése</translation>
+        <translation type="obsolete">A csoport menü megjelenítése</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="51"/>
@@ -4736,7 +4736,7 @@ Kérjük, válassz egy másik nevet.</translation>
     <name>GuiRecordVoiceMessage</name>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="191"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="333"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="340"/>
         <source>Recording</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4806,18 +4806,28 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation type="unfinished">Mégsem</translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="270"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="298"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="273"/>
+        <source>No device available for recording voice messages.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="273"/>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="277"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="305"/>
         <source>Please wait</source>
         <translation type="unfinished">Kérlek várj</translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="323"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="330"/>
         <source>Volume</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="323"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="330"/>
         <source>muted</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5908,19 +5918,19 @@ Kérjük, válassz egy másik nevet.</translation>
     <name>GuiTransferFile</name>
     <message>
         <source>File</source>
-        <translation type="vanished">Fájl</translation>
+        <translation type="obsolete">Fájl</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="vanished">Felhasználó</translation>
+        <translation type="obsolete">Felhasználó</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="vanished">Állapot</translation>
+        <translation type="obsolete">Állapot</translation>
     </message>
     <message>
         <source>Completed</source>
-        <translation type="vanished">Befejezve</translation>
+        <translation type="obsolete">Befejezve</translation>
     </message>
     <message>
         <source>Cancel Transfer</source>
@@ -5932,7 +5942,7 @@ Kérjük, válassz egy másik nevet.</translation>
     </message>
     <message>
         <source>Transfer completed</source>
-        <translation type="vanished">Átvitel befejeződött</translation>
+        <translation type="obsolete">Átvitel befejeződött</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -5940,19 +5950,19 @@ Kérjük, válassz egy másik nevet.</translation>
     </message>
     <message>
         <source>Downloading</source>
-        <translation type="vanished">Letöltve</translation>
+        <translation type="obsolete">Letöltve</translation>
     </message>
     <message>
         <source>Uploading</source>
-        <translation type="vanished">Feltöltés</translation>
+        <translation type="obsolete">Feltöltés</translation>
     </message>
     <message>
         <source>Waiting</source>
-        <translation type="vanished">Várakozás</translation>
+        <translation type="obsolete">Várakozás</translation>
     </message>
     <message>
         <source>Do you want to cancel the transfer of %1?</source>
-        <translation type="vanished">Szeretné megszakítani a %1?</translation>
+        <translation type="obsolete">Szeretné megszakítani a %1?</translation>
     </message>
     <message>
         <source>Remove all transfers</source>
@@ -6539,11 +6549,11 @@ Kérjük, válassz egy másik nevet.</translation>
     </message>
     <message>
         <source>last update</source>
-        <translation type="vanished">Utolsó frissítés</translation>
+        <translation type="obsolete">Utolsó frissítés</translation>
     </message>
     <message>
         <source>last connection</source>
-        <translation type="vanished">Utolsó kapcsolat</translation>
+        <translation type="obsolete">Utolsó kapcsolat</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="711"/>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="tr_TR">
+<TS version="2.0" language="tr_TR">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -381,7 +381,7 @@
     </message>
     <message>
         <source>Offline messages sent to %2.</source>
-        <translation type="vanished">Çevrimdışı iletiler %2 ye gönderildi.</translation>
+        <translation type="obsolete">Çevrimdışı iletiler %2 ye gönderildi.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="908"/>
@@ -445,7 +445,7 @@
     </message>
     <message>
         <source>Open</source>
-        <translation type="vanished">Aç</translation>
+        <translation type="obsolete">Aç</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="356"/>
@@ -481,7 +481,7 @@
     </message>
     <message>
         <source>%1 %2: file not found.</source>
-        <translation type="vanished">%1 %2: dosya bulunamadı.</translation>
+        <translation type="obsolete">%1 %2: dosya bulunamadı.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="382"/>
@@ -495,7 +495,7 @@
     </message>
     <message>
         <source>%1 You send %2 to %3.</source>
-        <translation type="vanished">%1 %2 den %3 ü gönderiyorsunuz.</translation>
+        <translation type="obsolete">%1 %2 den %3 ü gönderiyorsunuz.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="698"/>
@@ -607,7 +607,7 @@
     </message>
     <message>
         <source>%1 You send folder %2 to %3.</source>
-        <translation type="vanished">%1 %3 klasörden %2 i gönderiyorsunuz.</translation>
+        <translation type="obsolete">%1 %3 klasörden %2 i gönderiyorsunuz.</translation>
     </message>
     <message>
         <source>%1 %2 has refused to download %3.</source>
@@ -658,7 +658,7 @@
         <translation>%1 %2 size klasörü gönderiyor: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="582"/>
+        <location filename="../src/core/CoreParser.cpp" line="580"/>
         <source>%1 %2 is buzzing you.</source>
         <translation>%1 %2 sizi titretiyor.</translation>
     </message>
@@ -674,11 +674,11 @@
     </message>
     <message>
         <source>You share this information</source>
-        <translation type="vanished">Bu bilgiyi paylaşıyorsunuz</translation>
+        <translation type="obsolete">Bu bilgiyi paylaşıyorsunuz</translation>
     </message>
     <message>
         <source>%1 shares this information</source>
-        <translation type="vanished">%1 bu bilgiyi paylaşıyor</translation>
+        <translation type="obsolete">%1 bu bilgiyi paylaşıyor</translation>
     </message>
     <message>
         <location filename="../src/core/CoreUser.cpp" line="316"/>
@@ -860,7 +860,7 @@
     </message>
     <message>
         <source>Transfer cancelled</source>
-        <translation type="vanished">Aktarım İptal Edildi</translation>
+        <translation type="obsolete">Aktarım İptal Edildi</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="95"/>
@@ -1494,7 +1494,7 @@ Download for free and install the version with this feature from the %1 website.
     </message>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation type="vanished">QT Kitaplığı bu işletim sistemi için dosyaları Sürükle ve Bırak özelliğini desteklemez. Gönderilecek dosyayı tekrar seçmelisiniz.</translation>
+        <translation type="obsolete">QT Kitaplığı bu işletim sistemi için dosyaları Sürükle ve Bırak özelliğini desteklemez. Gönderilecek dosyayı tekrar seçmelisiniz.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="1020"/>
@@ -2045,7 +2045,7 @@ Lütfen farklı bir isim seçin.</translation>
     <name>GuiFloatingChat</name>
     <message>
         <source>Show group menu</source>
-        <translation type="vanished">Grup Erkeklerini Göster</translation>
+        <translation type="obsolete">Grup Erkeklerini Göster</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="51"/>
@@ -4733,7 +4733,7 @@ Lütfen farklı bir isim seçin.</translation>
     <name>GuiRecordVoiceMessage</name>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="191"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="333"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="340"/>
         <source>Recording</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4803,18 +4803,28 @@ Lütfen farklı bir isim seçin.</translation>
         <translation type="unfinished">İptal</translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="270"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="298"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="273"/>
+        <source>No device available for recording voice messages.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="273"/>
+        <source>Ok</source>
+        <translation type="unfinished">Tamam</translation>
+    </message>
+    <message>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="277"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="305"/>
         <source>Please wait</source>
         <translation type="unfinished">Lütfen bekleyin</translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="323"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="330"/>
         <source>Volume</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="323"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="330"/>
         <source>muted</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5905,19 +5915,19 @@ Lütfen farklı bir isim seçin.</translation>
     <name>GuiTransferFile</name>
     <message>
         <source>File</source>
-        <translation type="vanished">Dosya</translation>
+        <translation type="obsolete">Dosya</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="vanished">Kullanıcı</translation>
+        <translation type="obsolete">Kullanıcı</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="vanished">Durum</translation>
+        <translation type="obsolete">Durum</translation>
     </message>
     <message>
         <source>Completed</source>
-        <translation type="vanished">Tamamlandı</translation>
+        <translation type="obsolete">Tamamlandı</translation>
     </message>
     <message>
         <source>Cancel Transfer</source>
@@ -5929,23 +5939,23 @@ Lütfen farklı bir isim seçin.</translation>
     </message>
     <message>
         <source>Transfer completed</source>
-        <translation type="vanished">Aktarım Tamamlandı</translation>
+        <translation type="obsolete">Aktarım Tamamlandı</translation>
     </message>
     <message>
         <source>Downloading</source>
-        <translation type="vanished">İndiriliyor</translation>
+        <translation type="obsolete">İndiriliyor</translation>
     </message>
     <message>
         <source>Uploading</source>
-        <translation type="vanished">Yükleniyor</translation>
+        <translation type="obsolete">Yükleniyor</translation>
     </message>
     <message>
         <source>Waiting</source>
-        <translation type="vanished">Bekliyor</translation>
+        <translation type="obsolete">Bekliyor</translation>
     </message>
     <message>
         <source>Do you want to cancel the transfer of %1?</source>
-        <translation type="vanished">%1 aktarımını iptal etmek istiyor musunuz?</translation>
+        <translation type="obsolete">%1 aktarımını iptal etmek istiyor musunuz?</translation>
     </message>
     <message>
         <source>Remove all transfers</source>
@@ -6532,11 +6542,11 @@ Lütfen farklı bir isim seçin.</translation>
     </message>
     <message>
         <source>last update</source>
-        <translation type="vanished">son güncelleme</translation>
+        <translation type="obsolete">son güncelleme</translation>
     </message>
     <message>
         <source>last connection</source>
-        <translation type="vanished">son bağlantı</translation>
+        <translation type="obsolete">son bağlantı</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="711"/>

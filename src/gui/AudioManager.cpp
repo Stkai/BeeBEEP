@@ -181,6 +181,18 @@ QString AudioManager::createDefaultVoiceMessageFilename( const QString& containe
   return QString( "beemsg-%2-%3.%4" ).arg( valid_owner_name ).arg( Bee::dateTimeStringSuffix( QDateTime::currentDateTime() ) ).arg( file_ext );
 }
 
+bool AudioManager::isVoiceInputDeviceAvailable() const
+{
+  QString default_device_name = voiceInputDeviceName();
+  QList<QAudioDeviceInfo> device_info_list = QAudioDeviceInfo::availableDevices( QAudio::AudioInput );
+  foreach( QAudioDeviceInfo device_info, device_info_list )
+  {
+    if( device_info.deviceName() == default_device_name )
+      return true;
+  }
+  return false;
+}
+
 QString AudioManager::voiceInputDeviceName() const
 {
   return Settings::instance().voiceInputDeviceName().isEmpty() ? defaultInputDeviceName() : Settings::instance().voiceInputDeviceName();

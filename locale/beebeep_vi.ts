@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="vi_VN">
+<TS version="2.0" language="vi_VN">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -386,7 +386,7 @@
     </message>
     <message>
         <source>Offline messages sent to %2.</source>
-        <translation type="vanished">Tin nhắn offline đã gửi đến%2.</translation>
+        <translation type="obsolete">Tin nhắn offline đã gửi đến%2.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="908"/>
@@ -445,7 +445,7 @@
     </message>
     <message>
         <source>Open</source>
-        <translation type="vanished">Mở</translation>
+        <translation type="obsolete">Mở</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="356"/>
@@ -481,7 +481,7 @@
     </message>
     <message>
         <source>%1 %2: file not found.</source>
-        <translation type="vanished">%1 %2: không tìm thấy.</translation>
+        <translation type="obsolete">%1 %2: không tìm thấy.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="382"/>
@@ -495,7 +495,7 @@
     </message>
     <message>
         <source>%1 You send %2 to %3.</source>
-        <translation type="vanished">%1 Bạn gửi %2 đến %3.</translation>
+        <translation type="obsolete">%1 Bạn gửi %2 đến %3.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="698"/>
@@ -607,7 +607,7 @@
     </message>
     <message>
         <source>%1 You send folder %2 to %3.</source>
-        <translation type="vanished">%1 Bạn gửi thư mục %2 đến %3.</translation>
+        <translation type="obsolete">%1 Bạn gửi thư mục %2 đến %3.</translation>
     </message>
     <message>
         <source>%1 %2 has refused to download %3.</source>
@@ -658,7 +658,7 @@
         <translation>%1 %2 đang gửi cho bạn thư mục: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="582"/>
+        <location filename="../src/core/CoreParser.cpp" line="580"/>
         <source>%1 %2 is buzzing you.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -674,11 +674,11 @@
     </message>
     <message>
         <source>You share this information</source>
-        <translation type="vanished">Bạn chia sẻ thông tin này</translation>
+        <translation type="obsolete">Bạn chia sẻ thông tin này</translation>
     </message>
     <message>
         <source>%1 shares this information</source>
-        <translation type="vanished">%1 chia sẻ thông tin này</translation>
+        <translation type="obsolete">%1 chia sẻ thông tin này</translation>
     </message>
     <message>
         <location filename="../src/core/CoreUser.cpp" line="316"/>
@@ -860,7 +860,7 @@
     </message>
     <message>
         <source>Transfer cancelled</source>
-        <translation type="vanished">Đã hủy chuyển</translation>
+        <translation type="obsolete">Đã hủy chuyển</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="95"/>
@@ -1494,7 +1494,7 @@ Download for free and install the version with this feature from the %1 website.
     </message>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation type="vanished">Qt library cho hệ điều hành này không hỗ trợ kéo thả tập tin. Bạn phải chọn tập tin để gửi lại.</translation>
+        <translation type="obsolete">Qt library cho hệ điều hành này không hỗ trợ kéo thả tập tin. Bạn phải chọn tập tin để gửi lại.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="1020"/>
@@ -4734,7 +4734,7 @@ Vui lòng chọn một tên khác nhau.</translation>
     <name>GuiRecordVoiceMessage</name>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="191"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="333"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="340"/>
         <source>Recording</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4804,18 +4804,28 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="unfinished">Hủy bỏ</translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="270"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="298"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="273"/>
+        <source>No device available for recording voice messages.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="273"/>
+        <source>Ok</source>
+        <translation type="unfinished">Đồng ý</translation>
+    </message>
+    <message>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="277"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="305"/>
         <source>Please wait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="323"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="330"/>
         <source>Volume</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="323"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="330"/>
         <source>muted</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5914,19 +5924,19 @@ Vui lòng chọn một tên khác nhau.</translation>
     <name>GuiTransferFile</name>
     <message>
         <source>File</source>
-        <translation type="vanished">Tập tin</translation>
+        <translation type="obsolete">Tập tin</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="vanished">Người dùng</translation>
+        <translation type="obsolete">Người dùng</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="vanished">Trạng thái</translation>
+        <translation type="obsolete">Trạng thái</translation>
     </message>
     <message>
         <source>Completed</source>
-        <translation type="vanished">Hoàn thành</translation>
+        <translation type="obsolete">Hoàn thành</translation>
     </message>
     <message>
         <source>Cancel Transfer</source>
@@ -5938,7 +5948,7 @@ Vui lòng chọn một tên khác nhau.</translation>
     </message>
     <message>
         <source>Transfer completed</source>
-        <translation type="vanished">Chuyển hoàn thành</translation>
+        <translation type="obsolete">Chuyển hoàn thành</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -5946,11 +5956,11 @@ Vui lòng chọn một tên khác nhau.</translation>
     </message>
     <message>
         <source>Downloading</source>
-        <translation type="vanished">Đang tải xuống</translation>
+        <translation type="obsolete">Đang tải xuống</translation>
     </message>
     <message>
         <source>Uploading</source>
-        <translation type="vanished">Đang tải lên</translation>
+        <translation type="obsolete">Đang tải lên</translation>
     </message>
     <message>
         <source>Remove all transfers</source>

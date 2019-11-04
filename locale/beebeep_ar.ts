@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ar_SA" sourcelanguage="en_US">
+<TS version="2.0" language="ar_SA" sourcelanguage="en_US">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -332,7 +332,7 @@
     </message>
     <message>
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
-        <translation type="vanished">الرسائل غير المتصلة التي لا يزال يتعين إرسالها بها رمز تفويض غير صحيح ولن يتم إرسالها.</translation>
+        <translation type="obsolete">الرسائل غير المتصلة التي لا يزال يتعين إرسالها بها رمز تفويض غير صحيح ولن يتم إرسالها.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="698"/>
@@ -388,7 +388,7 @@
     </message>
     <message>
         <source>%1 offline messages will be sent as soon as possible.</source>
-        <translation type="vanished">%1 سيتم إرسال الرسائل في وضع عدم الاتصال في أقرب وقت ممكن.</translation>
+        <translation type="obsolete">%1 سيتم إرسال الرسائل في وضع عدم الاتصال في أقرب وقت ممكن.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="704"/>
@@ -397,7 +397,7 @@
     </message>
     <message>
         <source>Offline messages sent to %2.</source>
-        <translation type="vanished">تم إرسال الرسائل بلا اتصال إلى %2.</translation>
+        <translation type="obsolete">تم إرسال الرسائل بلا اتصال إلى %2.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="908"/>
@@ -451,7 +451,7 @@
     </message>
     <message>
         <source>Open</source>
-        <translation type="vanished">فتح</translation>
+        <translation type="obsolete">فتح</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="356"/>
@@ -482,7 +482,7 @@
     </message>
     <message>
         <source>%1 %2: file not found.</source>
-        <translation type="vanished">%1 %2: الملف غي موجود.</translation>
+        <translation type="obsolete">%1 %2: الملف غي موجود.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="382"/>
@@ -496,7 +496,7 @@
     </message>
     <message>
         <source>%1 You send %2 to %3.</source>
-        <translation type="vanished">%1 أرسلت %2 إلى %3.</translation>
+        <translation type="obsolete">%1 أرسلت %2 إلى %3.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="161"/>
@@ -616,7 +616,7 @@
     </message>
     <message>
         <source>%1 You send folder %2 to %3.</source>
-        <translation type="vanished">%1 أنت ترسل المجلد %2 إلى %3.</translation>
+        <translation type="obsolete">%1 أنت ترسل المجلد %2 إلى %3.</translation>
     </message>
     <message>
         <source>%1 %2 has refused to download %3.</source>
@@ -667,7 +667,7 @@
         <translation>%1 %2 يرسل لك المجلد: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="582"/>
+        <location filename="../src/core/CoreParser.cpp" line="580"/>
         <source>%1 %2 is buzzing you.</source>
         <translation>%1 %2 يتصل بك.</translation>
     </message>
@@ -683,11 +683,11 @@
     </message>
     <message>
         <source>You share this information</source>
-        <translation type="vanished">أنت تشارك هذه المعلومات</translation>
+        <translation type="obsolete">أنت تشارك هذه المعلومات</translation>
     </message>
     <message>
         <source>%1 shares this information</source>
-        <translation type="vanished">%1 يشارك هذه المعلومات</translation>
+        <translation type="obsolete">%1 يشارك هذه المعلومات</translation>
     </message>
     <message>
         <location filename="../src/core/CoreUser.cpp" line="316"/>
@@ -869,7 +869,7 @@
     </message>
     <message>
         <source>Transfer cancelled</source>
-        <translation type="vanished">نقل الملغاة</translation>
+        <translation type="obsolete">نقل الملغاة</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="95"/>
@@ -1495,7 +1495,7 @@ Download for free and install the version with this feature from the %1 website.
     </message>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation type="vanished">لا تدعم مكتبة Qt لنظام التشغيل هذا السحب والإفلات للملفات. يجب عليك تحديد الملف المراد إرساله مرة أخرى.</translation>
+        <translation type="obsolete">لا تدعم مكتبة Qt لنظام التشغيل هذا السحب والإفلات للملفات. يجب عليك تحديد الملف المراد إرساله مرة أخرى.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="1020"/>
@@ -2042,7 +2042,7 @@ Please select a different name.</source>
     <name>GuiFloatingChat</name>
     <message>
         <source>Show group menu</source>
-        <translation type="vanished">إظهار قائمة المجموعة</translation>
+        <translation type="obsolete">إظهار قائمة المجموعة</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="51"/>
@@ -3101,7 +3101,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it under the terms of the GNU General Public License as published&lt;br&gt;by the Free Software Foundation, either version 3 of the License&lt;br&gt;or (at your option) any later version.&lt;br&gt;&lt;br&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br&gt;See the GNU General Public License for more details.</source>
-        <translation type="vanished">BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it under the terms of the GNU General Public License as published&lt;br&gt;by the Free Software Foundation, either version 3 of the License&lt;br&gt;or (at your option) any later version.&lt;br&gt;&lt;br&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br&gt;See the GNU General Public License for more details.</translation>
+        <translation type="obsolete">BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it under the terms of the GNU General Public License as published&lt;br&gt;by the Free Software Foundation, either version 3 of the License&lt;br&gt;or (at your option) any later version.&lt;br&gt;&lt;br&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br&gt;See the GNU General Public License for more details.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="777"/>
@@ -4165,7 +4165,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Please select the number of days that items (such as images) can remain cached (current: %1, never clear: -1, always clear: 0).</source>
-        <translation type="vanished">يرجى تحديد عدد الأيام التي يمكن أن تظل العناصر (مثل الصور) في ذاكرة التخزين المؤقت فيها (حالي: %1, لم يمسح: -1, دائما مسح: 0).</translation>
+        <translation type="obsolete">يرجى تحديد عدد الأيام التي يمكن أن تظل العناصر (مثل الصور) في ذاكرة التخزين المؤقت فيها (حالي: %1, لم يمسح: -1, دائما مسح: 0).</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2695"/>
@@ -4685,7 +4685,7 @@ Please select a different name.</source>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="191"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="333"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="340"/>
         <source>Recording</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4735,18 +4735,28 @@ Please select a different name.</source>
         <translation type="unfinished">إلغاء</translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="270"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="298"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="273"/>
+        <source>No device available for recording voice messages.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="273"/>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="277"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="305"/>
         <source>Please wait</source>
         <translation type="unfinished">يرجى الانتظار</translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="323"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="330"/>
         <source>Volume</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="323"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="330"/>
         <source>muted</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5801,27 +5811,27 @@ Please select a different name.</source>
     <name>GuiTransferFile</name>
     <message>
         <source>File</source>
-        <translation type="vanished">ملف</translation>
+        <translation type="obsolete">ملف</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="vanished">مستخدم</translation>
+        <translation type="obsolete">مستخدم</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="vanished">الحالة</translation>
+        <translation type="obsolete">الحالة</translation>
     </message>
     <message>
         <source>Time left</source>
-        <translation type="vanished">الوقت المتبقي</translation>
+        <translation type="obsolete">الوقت المتبقي</translation>
     </message>
     <message>
         <source>Remove all completed transfers</source>
-        <translation type="vanished">إزالة كل الملفات المكتملة النقل</translation>
+        <translation type="obsolete">إزالة كل الملفات المكتملة النقل</translation>
     </message>
     <message>
         <source>Completed</source>
-        <translation type="vanished">مكتمل</translation>
+        <translation type="obsolete">مكتمل</translation>
     </message>
     <message>
         <source>Cancel Transfer</source>
@@ -5833,27 +5843,27 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Transfer completed</source>
-        <translation type="vanished">اكتمل النقل</translation>
+        <translation type="obsolete">اكتمل النقل</translation>
     </message>
     <message>
         <source>Downloading</source>
-        <translation type="vanished">يتم التنزيل</translation>
+        <translation type="obsolete">يتم التنزيل</translation>
     </message>
     <message>
         <source>Uploading</source>
-        <translation type="vanished">يتم الرفع</translation>
+        <translation type="obsolete">يتم الرفع</translation>
     </message>
     <message>
         <source>Waiting</source>
-        <translation type="vanished">ينتظر</translation>
+        <translation type="obsolete">ينتظر</translation>
     </message>
     <message>
         <source>of</source>
-        <translation type="vanished">من</translation>
+        <translation type="obsolete">من</translation>
     </message>
     <message>
         <source>Do you want to cancel the transfer of %1?</source>
-        <translation type="vanished">هل تريد إلغاء النقل من %1?</translation>
+        <translation type="obsolete">هل تريد إلغاء النقل من %1?</translation>
     </message>
 </context>
 <context>
@@ -5916,7 +5926,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation type="vanished">مكتبة كيو تي لنظام التشغيل هذا doesn&apos;t دعم السحب والإفلات للملفات. يجب عليك تحديد الملف المراد إرساله مرة أخرى.</translation>
+        <translation type="obsolete">مكتبة كيو تي لنظام التشغيل هذا doesn&apos;t دعم السحب والإفلات للملفات. يجب عليك تحديد الملف المراد إرساله مرة أخرى.</translation>
     </message>
 </context>
 <context>
@@ -6398,11 +6408,11 @@ Please select a different name.</source>
     </message>
     <message>
         <source>last update</source>
-        <translation type="vanished">آخر تحديث</translation>
+        <translation type="obsolete">آخر تحديث</translation>
     </message>
     <message>
         <source>last connection</source>
-        <translation type="vanished">آخر اتصال</translation>
+        <translation type="obsolete">آخر اتصال</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="711"/>

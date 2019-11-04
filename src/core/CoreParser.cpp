@@ -519,9 +519,7 @@ void Core::parseHiveMessage( const User& u, const Message& m )
         if( Hive::instance().addNetworkAddress( ur.networkAddress() ) )
         {
           hive_users_added++;
-#ifdef BEEBEEP_DEBUG
-          qDebug() << "Hive message contains this path" << qPrintable( ur.networkAddress().toString() ) << "and it is added to contact list";
-#endif
+          qDebug() << "New user added from Hive with address" << qPrintable( ur.networkAddress().toString() );
         }
       }
     }

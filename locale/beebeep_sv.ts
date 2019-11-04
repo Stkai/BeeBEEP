@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="sv">
+<TS version="2.0" language="sv">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -387,7 +387,7 @@
     </message>
     <message>
         <source>Offline messages sent to %2.</source>
-        <translation type="vanished">Nedkopplat meddelande skickat till %2.</translation>
+        <translation type="obsolete">Nedkopplat meddelande skickat till %2.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="908"/>
@@ -446,7 +446,7 @@
     </message>
     <message>
         <source>Open</source>
-        <translation type="vanished">Öppna</translation>
+        <translation type="obsolete">Öppna</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="356"/>
@@ -482,7 +482,7 @@
     </message>
     <message>
         <source>%1 %2: file not found.</source>
-        <translation type="vanished">%1 %2: Filen kan inte hittas.</translation>
+        <translation type="obsolete">%1 %2: Filen kan inte hittas.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="382"/>
@@ -496,7 +496,7 @@
     </message>
     <message>
         <source>%1 You send %2 to %3.</source>
-        <translation type="vanished">%1 Du skickar %2 till %3.</translation>
+        <translation type="obsolete">%1 Du skickar %2 till %3.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="698"/>
@@ -608,7 +608,7 @@
     </message>
     <message>
         <source>%1 You send folder %2 to %3.</source>
-        <translation type="vanished">%1 Du skickar mappen &apos;%2&apos; till %3.</translation>
+        <translation type="obsolete">%1 Du skickar mappen &apos;%2&apos; till %3.</translation>
     </message>
     <message>
         <source>%1 %2 has refused to download %3.</source>
@@ -629,7 +629,7 @@
         <translation>%1 har delat %2 filer</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="582"/>
+        <location filename="../src/core/CoreParser.cpp" line="580"/>
         <source>%1 %2 is buzzing you.</source>
         <translation>%1 %2 surrar på dig.</translation>
     </message>
@@ -675,11 +675,11 @@
     </message>
     <message>
         <source>You share this information</source>
-        <translation type="vanished">Du delar den här informationen</translation>
+        <translation type="obsolete">Du delar den här informationen</translation>
     </message>
     <message>
         <source>%1 shares this information</source>
-        <translation type="vanished">%1 delar den här informationen</translation>
+        <translation type="obsolete">%1 delar den här informationen</translation>
     </message>
     <message>
         <location filename="../src/core/CoreUser.cpp" line="316"/>
@@ -865,7 +865,7 @@
     </message>
     <message>
         <source>Transfer cancelled</source>
-        <translation type="vanished">Överföringen avbruten</translation>
+        <translation type="obsolete">Överföringen avbruten</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="95"/>
@@ -1479,7 +1479,7 @@ Download for free and install the version with this feature from the %1 website.
     </message>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation type="vanished">Qt library för det här operativsystemet, stöder inte &apos;dra och släpp&apos; för filer. Du måste välja filen igen för att skicka.</translation>
+        <translation type="obsolete">Qt library för det här operativsystemet, stöder inte &apos;dra och släpp&apos; för filer. Du måste välja filen igen för att skicka.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="1020"/>
@@ -4743,7 +4743,7 @@ Välj ett annat namn.</translation>
     <name>GuiRecordVoiceMessage</name>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="191"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="333"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="340"/>
         <source>Recording</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4813,18 +4813,28 @@ Välj ett annat namn.</translation>
         <translation type="unfinished">Avbryt</translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="270"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="298"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="273"/>
+        <source>No device available for recording voice messages.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="273"/>
+        <source>Ok</source>
+        <translation type="unfinished">OK</translation>
+    </message>
+    <message>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="277"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="305"/>
         <source>Please wait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="323"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="330"/>
         <source>Volume</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="323"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="330"/>
         <source>muted</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5923,19 +5933,19 @@ Välj ett annat namn.</translation>
     <name>GuiTransferFile</name>
     <message>
         <source>File</source>
-        <translation type="vanished">Fil</translation>
+        <translation type="obsolete">Fil</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="vanished">Användare</translation>
+        <translation type="obsolete">Användare</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="vanished">Status</translation>
+        <translation type="obsolete">Status</translation>
     </message>
     <message>
         <source>Completed</source>
-        <translation type="vanished">Slutfört</translation>
+        <translation type="obsolete">Slutfört</translation>
     </message>
     <message>
         <source>Cancel Transfer</source>
@@ -5947,7 +5957,7 @@ Välj ett annat namn.</translation>
     </message>
     <message>
         <source>Transfer completed</source>
-        <translation type="vanished">Överföring slutförd</translation>
+        <translation type="obsolete">Överföring slutförd</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -5955,11 +5965,11 @@ Välj ett annat namn.</translation>
     </message>
     <message>
         <source>Downloading</source>
-        <translation type="vanished">Laddar ner</translation>
+        <translation type="obsolete">Laddar ner</translation>
     </message>
     <message>
         <source>Uploading</source>
-        <translation type="vanished">Laddar upp</translation>
+        <translation type="obsolete">Laddar upp</translation>
     </message>
     <message>
         <source>Remove all transfers</source>

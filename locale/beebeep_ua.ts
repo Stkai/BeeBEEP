@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="uk_UA" sourcelanguage="en">
+<TS version="2.0" language="uk_UA" sourcelanguage="en">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -56,7 +56,7 @@
     </message>
     <message>
         <source>Open</source>
-        <translation type="vanished">Відкрити</translation>
+        <translation type="obsolete">Відкрити</translation>
     </message>
     <message>
         <source>from</source>
@@ -140,7 +140,7 @@
     </message>
     <message>
         <source>%1 shares this information</source>
-        <translation type="vanished">%1 ділиться цією інформацією</translation>
+        <translation type="obsolete">%1 ділиться цією інформацією</translation>
     </message>
     <message>
         <source>You have changed your nickname from %1 to %2.</source>
@@ -160,7 +160,7 @@
     </message>
     <message>
         <source>You share this information</source>
-        <translation type="vanished">Ви ділитесь цією інформацією</translation>
+        <translation type="obsolete">Ви ділитесь цією інформацією</translation>
     </message>
     <message>
         <source>%1 Downloading %2 from %3.</source>
@@ -284,7 +284,7 @@
     </message>
     <message>
         <source>%1 You send folder %2 to %3.</source>
-        <translation type="vanished">%1 Ви відправили папку %2 для %3.</translation>
+        <translation type="obsolete">%1 Ви відправили папку %2 для %3.</translation>
     </message>
     <message>
         <source>Happy Birthday to %1!</source>
@@ -320,7 +320,7 @@
     </message>
     <message>
         <source>%1 You send %2 to %3.</source>
-        <translation type="vanished">%1 Ви відправили %2 в %3.</translation>
+        <translation type="obsolete">%1 Ви відправили %2 в %3.</translation>
     </message>
     <message>
         <source>%1 is removed from file sharing with %2 files</source>
@@ -436,11 +436,11 @@
     </message>
     <message>
         <source>%1 %2: file not found.</source>
-        <translation type="vanished">%1 %2: файл не знайдено.</translation>
+        <translation type="obsolete">%1 %2: файл не знайдено.</translation>
     </message>
     <message>
         <source>Offline messages sent to %2.</source>
-        <translation type="vanished">Офлайн повідомлення відправлені %2.</translation>
+        <translation type="obsolete">Офлайн повідомлення відправлені %2.</translation>
     </message>
     <message>
         <source>%1 %2 has refused to download %3.</source>
@@ -516,7 +516,7 @@
     </message>
     <message>
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
-        <translation type="vanished">Офлайн-повідомлення, які ще не надіслані, мають неправильний код авторизації і вони не надсилаються.</translation>
+        <translation type="obsolete">Офлайн-повідомлення, які ще не надіслані, мають неправильний код авторизації і вони не надсилаються.</translation>
     </message>
     <message>
         <source>Saved chats had an incorrect authorization code.</source>
@@ -717,7 +717,7 @@
     </message>
     <message>
         <source>Transfer cancelled</source>
-        <translation type="vanished">Передача відмінена</translation>
+        <translation type="obsolete">Передача відмінена</translation>
     </message>
     <message>
         <source>Transfer timeout</source>
@@ -949,7 +949,7 @@
     </message>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation type="vanished">Бібліотека Qt для цієї ОС не підтримує перетаскування файлів. Вам необхідно Вибрати знову файл для відправки.</translation>
+        <translation type="obsolete">Бібліотека Qt для цієї ОС не підтримує перетаскування файлів. Вам необхідно Вибрати знову файл для відправки.</translation>
     </message>
     <message>
         <source>You are not connected</source>
@@ -1688,7 +1688,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Show group menu</source>
-        <translation type="vanished">Показати меню групового чату</translation>
+        <translation type="obsolete">Показати меню групового чату</translation>
     </message>
     <message>
         <source>Window geometry saved</source>
@@ -3028,7 +3028,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it under the terms of the GNU General Public License as published&lt;br&gt;by the Free Software Foundation, either version 3 of the License&lt;br&gt;or (at your option) any later version.&lt;br&gt;&lt;br&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br&gt;See the GNU General Public License for more details.</source>
-        <translation type="vanished">BeeBEEP є вільним програмним забезпеченням: ви можете розповсюджувати його та / або змінювати&lt;br /&gt;згідно з умовами Загальної громадської ліцензії GNU опублікованої&lt;br /&gt;Фонду вільного програмного забезпечення, версії 3 ліцензії&lt;br /&gt; або (за вашим вибором) будь-якої більш пізньої версії.&lt;br  /&gt;&lt;br /&gt;BeeBEEP розповсюджується з надією, що він буде корисним, але без будь-якої гарантії; навіть без передбачуваної гарантії&lt;br /&gt;про комерційну або придатність для окремої мети.&lt;br /&gt; Докладнішу інформацію див. У GNU General Public License.</translation>
+        <translation type="obsolete">BeeBEEP є вільним програмним забезпеченням: ви можете розповсюджувати його та / або змінювати&lt;br /&gt;згідно з умовами Загальної громадської ліцензії GNU опублікованої&lt;br /&gt;Фонду вільного програмного забезпечення, версії 3 ліцензії&lt;br /&gt; або (за вашим вибором) будь-якої більш пізньої версії.&lt;br  /&gt;&lt;br /&gt;BeeBEEP розповсюджується з надією, що він буде корисним, але без будь-якої гарантії; навіть без передбачуваної гарантії&lt;br /&gt;про комерційну або придатність для окремої мети.&lt;br /&gt; Докладнішу інформацію див. У GNU General Public License.</translation>
     </message>
     <message>
         <source>The option has been disabled by your system administrator.</source>
@@ -3156,7 +3156,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Please select the number of days that items (such as images) can remain cached (current: %1, never clear: -1, always clear: 0).</source>
-        <translation type="vanished">Виберіть кількість днів, скільки будуть зберігатись  елементи (наприклад, зображення) у кешованому режимі (поточний стан:%1, ніколи: -1, завжди: 0).</translation>
+        <translation type="obsolete">Виберіть кількість днів, скільки будуть зберігатись  елементи (наприклад, зображення) у кешованому режимі (поточний стан:%1, ніколи: -1, завжди: 0).</translation>
     </message>
     <message>
         <source>Show tips...</source>
@@ -3804,6 +3804,14 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Reached the maximum duration of the voice message.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No device available for recording voice messages.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ok</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4690,11 +4698,11 @@ Please select a different name.</source>
     <name>GuiTransferFile</name>
     <message>
         <source>File</source>
-        <translation type="vanished">Файл</translation>
+        <translation type="obsolete">Файл</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="vanished">Користувач</translation>
+        <translation type="obsolete">Користувач</translation>
     </message>
     <message>
         <source>Not Completed</source>
@@ -4702,23 +4710,23 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Do you want to cancel the transfer of %1?</source>
-        <translation type="vanished">Ви хочете відминити передачу %1?</translation>
+        <translation type="obsolete">Ви хочете відминити передачу %1?</translation>
     </message>
     <message>
         <source>Downloading</source>
-        <translation type="vanished">Завантаження</translation>
+        <translation type="obsolete">Завантаження</translation>
     </message>
     <message>
         <source>Uploading</source>
-        <translation type="vanished">Відправка</translation>
+        <translation type="obsolete">Відправка</translation>
     </message>
     <message>
         <source>Completed</source>
-        <translation type="vanished">Завершено</translation>
+        <translation type="obsolete">Завершено</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="vanished">Статус</translation>
+        <translation type="obsolete">Статус</translation>
     </message>
     <message>
         <source>Remove all transfers</source>
@@ -4730,23 +4738,23 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Transfer completed</source>
-        <translation type="vanished">Передача завершена</translation>
+        <translation type="obsolete">Передача завершена</translation>
     </message>
     <message>
         <source>Waiting</source>
-        <translation type="vanished">Очікування</translation>
+        <translation type="obsolete">Очікування</translation>
     </message>
     <message>
         <source>Time left</source>
-        <translation type="vanished">Залишилось часу</translation>
+        <translation type="obsolete">Залишилось часу</translation>
     </message>
     <message>
         <source>Remove all completed transfers</source>
-        <translation type="vanished">Видалити усі завершені передачі</translation>
+        <translation type="obsolete">Видалити усі завершені передачі</translation>
     </message>
     <message>
         <source>of</source>
-        <translation type="vanished">з</translation>
+        <translation type="obsolete">з</translation>
     </message>
 </context>
 <context>
@@ -4785,7 +4793,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation type="vanished">Бібліотека Qt для цієї ОС не підтримує перетаскування файлів. Вам необхідно Вибрати знову файл для відправки.</translation>
+        <translation type="obsolete">Бібліотека Qt для цієї ОС не підтримує перетаскування файлів. Вам необхідно Вибрати знову файл для відправки.</translation>
     </message>
     <message>
         <source>You cannot send files to the workgroup &apos;%1&apos;.</source>
@@ -5236,7 +5244,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>last update</source>
-        <translation type="vanished">останнє обовлення</translation>
+        <translation type="obsolete">останнє обовлення</translation>
     </message>
     <message>
         <source>Set focus in message box</source>
@@ -5276,7 +5284,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>last connection</source>
-        <translation type="vanished">останнє підключенийие</translation>
+        <translation type="obsolete">останнє підключенийие</translation>
     </message>
     <message>
         <source>and %1 others</source>

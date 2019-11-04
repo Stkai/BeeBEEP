@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE" sourcelanguage="en">
+<TS version="2.0" language="de_DE" sourcelanguage="en">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -56,7 +56,7 @@
     </message>
     <message>
         <source>Open</source>
-        <translation type="vanished">Öffnen</translation>
+        <translation type="obsolete">Öffnen</translation>
     </message>
     <message>
         <source>from</source>
@@ -140,7 +140,7 @@
     </message>
     <message>
         <source>%1 shares this information</source>
-        <translation type="vanished">%1 teilt diese Informationen</translation>
+        <translation type="obsolete">%1 teilt diese Informationen</translation>
     </message>
     <message>
         <source>You have changed your nickname from %1 to %2.</source>
@@ -156,7 +156,7 @@
     </message>
     <message>
         <source>You share this information</source>
-        <translation type="vanished">Du gibst diese Informationen frei</translation>
+        <translation type="obsolete">Du gibst diese Informationen frei</translation>
     </message>
     <message>
         <source>%1 Downloading %2 from %3.</source>
@@ -272,7 +272,7 @@
     </message>
     <message>
         <source>%1 You send folder %2 to %3.</source>
-        <translation type="vanished">%1 Du sendest den Ordner %2 an %3.</translation>
+        <translation type="obsolete">%1 Du sendest den Ordner %2 an %3.</translation>
     </message>
     <message>
         <source>Happy Birthday to %1!</source>
@@ -300,7 +300,7 @@
     </message>
     <message>
         <source>%1 You send %2 to %3.</source>
-        <translation type="vanished">%1 Du sendest %2 an %3.</translation>
+        <translation type="obsolete">%1 Du sendest %2 an %3.</translation>
     </message>
     <message>
         <source>%1 is removed from file sharing with %2 files</source>
@@ -396,11 +396,11 @@
     </message>
     <message>
         <source>%1 %2: file not found.</source>
-        <translation type="vanished">%1 %2: Datei nicht gefunden.</translation>
+        <translation type="obsolete">%1 %2: Datei nicht gefunden.</translation>
     </message>
     <message>
         <source>Offline messages sent to %2.</source>
-        <translation type="vanished">Offline-Nachrichten wurden an %2 gesendet.</translation>
+        <translation type="obsolete">Offline-Nachrichten wurden an %2 gesendet.</translation>
     </message>
     <message>
         <source>%1 %2 has refused to download %3.</source>
@@ -520,7 +520,7 @@
     </message>
     <message>
         <source>%1 offline messages will be sent as soon as possible.</source>
-        <translation type="vanished">%1 Offline-Nachrichten werden schnellstmöglich gesendet.</translation>
+        <translation type="obsolete">%1 Offline-Nachrichten werden schnellstmöglich gesendet.</translation>
     </message>
     <message>
         <source>Offline message will be sent to %1</source>
@@ -732,7 +732,7 @@
     </message>
     <message>
         <source>Transfer cancelled</source>
-        <translation type="vanished">Übertagung abgebrochen</translation>
+        <translation type="obsolete">Übertagung abgebrochen</translation>
     </message>
     <message>
         <source>Transfer timeout</source>
@@ -960,7 +960,7 @@
     </message>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation type="vanished">Die Qt-Bibliothek dieses Betriebssystems unterstützt Ziehen und Ablegen von Dateien nicht. Du musst die Datei zum Senden erneut auswählen.</translation>
+        <translation type="obsolete">Die Qt-Bibliothek dieses Betriebssystems unterstützt Ziehen und Ablegen von Dateien nicht. Du musst die Datei zum Senden erneut auswählen.</translation>
     </message>
     <message>
         <source>You are not connected</source>
@@ -1691,7 +1691,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Show group menu</source>
-        <translation type="vanished">Gruppenmenü anzeigen</translation>
+        <translation type="obsolete">Gruppenmenü anzeigen</translation>
     </message>
     <message>
         <source>Save window&apos;s geometry</source>
@@ -3845,6 +3845,14 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Reached the maximum duration of the voice message.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>No device available for recording voice messages.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished">OK</translation>
+    </message>
 </context>
 <context>
     <name>GuiRecordVoiceMessageDialog</name>
@@ -4749,11 +4757,11 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="vanished">Datei</translation>
+        <translation type="obsolete">Datei</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="vanished">Benutzer</translation>
+        <translation type="obsolete">Benutzer</translation>
     </message>
     <message>
         <source>Not Completed</source>
@@ -4761,23 +4769,23 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Do you want to cancel the transfer of %1?</source>
-        <translation type="vanished">Möchtest du die Übertragung von &quot;%1&quot; abbrechen?</translation>
+        <translation type="obsolete">Möchtest du die Übertragung von &quot;%1&quot; abbrechen?</translation>
     </message>
     <message>
         <source>Downloading</source>
-        <translation type="vanished">Wird heruntergeladen</translation>
+        <translation type="obsolete">Wird heruntergeladen</translation>
     </message>
     <message>
         <source>Uploading</source>
-        <translation type="vanished">Wird hochgeladen</translation>
+        <translation type="obsolete">Wird hochgeladen</translation>
     </message>
     <message>
         <source>Completed</source>
-        <translation type="vanished">Abgeschlossen</translation>
+        <translation type="obsolete">Abgeschlossen</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="vanished">Status</translation>
+        <translation type="obsolete">Status</translation>
     </message>
     <message>
         <source>Remove all transfers</source>
@@ -4789,11 +4797,11 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Transfer completed</source>
-        <translation type="vanished">Übertragung abgeschlossen</translation>
+        <translation type="obsolete">Übertragung abgeschlossen</translation>
     </message>
     <message>
         <source>Waiting</source>
-        <translation type="vanished">Warten</translation>
+        <translation type="obsolete">Warten</translation>
     </message>
 </context>
 <context>
@@ -4832,7 +4840,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation type="vanished">Die Qt-Bibliothek dieses Betriebssystems unterstützt Ziehen und Ablegen von Dateien nicht. Du musst die Datei zum Senden erneut auswählen.</translation>
+        <translation type="obsolete">Die Qt-Bibliothek dieses Betriebssystems unterstützt Ziehen und Ablegen von Dateien nicht. Du musst die Datei zum Senden erneut auswählen.</translation>
     </message>
     <message>
         <source>You cannot send files to the workgroup &apos;%1&apos;.</source>
@@ -5295,7 +5303,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>last update</source>
-        <translation type="vanished">zuletzt aktualisiert</translation>
+        <translation type="obsolete">zuletzt aktualisiert</translation>
     </message>
     <message>
         <source>Set focus in message box</source>
@@ -5339,7 +5347,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>last connection</source>
-        <translation type="vanished">zuletzt verbunden</translation>
+        <translation type="obsolete">zuletzt verbunden</translation>
     </message>
     <message>
         <source>Find next text in chat</source>
