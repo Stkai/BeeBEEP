@@ -485,23 +485,9 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
   }
 
   bool use_encryption = true;
-  if( isEncrypted() )
+  if( Settings::instance().disableConnectionSocketEncryption() )
   {
-    if( m.hasFlag( Message::EncryptionDisabled ) )
-    {
-      if( !Settings::instance().allowNotEncryptedConnectionsAlso() )
-      {
-        qWarning() << "ConnectionSocket does not accept authentication with encryption disabled from" << qPrintable( m_networkAddress.toString() );
-        emit abortRequest();
-        return;
-      }
-      else
-        use_encryption = false;
-    }
-  }
-  else
-  {
-    if( !m.hasFlag( Message::EncryptionDisabled ) )
+   if( !m.hasFlag( Message::EncryptionDisabled ) )
     {
       if( !Settings::instance().allowEncryptedConnectionsAlso() )
       {
@@ -511,6 +497,20 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
       }
       else
         use_encryption = true;
+    }
+  }
+  else
+  {
+   if( m.hasFlag( Message::EncryptionDisabled ) )
+    {
+      if( !Settings::instance().allowNotEncryptedConnectionsAlso() )
+      {
+        qWarning() << "ConnectionSocket does not accept authentication with encryption disabled from" << qPrintable( m_networkAddress.toString() );
+        emit abortRequest();
+        return;
+      }
+      else
+        use_encryption = false;
     }
   }
 
