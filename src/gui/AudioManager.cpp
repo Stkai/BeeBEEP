@@ -213,6 +213,7 @@ QAudioEncoderSettings AudioManager::voiceMessageEncoderSettings() const
 #if defined( Q_OS_OS2 )
   bool AudioManager::isAudioDeviceAvailable() { return true; }
   void AudioManager::clearBeep() {}
+  bool AudioManager::loadBeepEffect() {}
   void AudioManager::playBeep() { QApplication::beep(); }
   void AudioManager::playBuzz() { playBeep(); }
 #else

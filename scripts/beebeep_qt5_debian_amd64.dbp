@@ -70,6 +70,8 @@ rm -f "/usr/bin/beebeep"
 beebeep (5.8.2-1) bionic; urgency=low
 
   * New Feature: voice messages
+  * New feature: file transfer pause/resume
+  * New feature: data compression with zlib
   * Added "Quote selected text" option to context menu (right click) of the chat
   * Added "CheckUserConnectedFromDatagramIp" option in beebeep.rc
   * Added "Clear system messages" in activity and chat windows
@@ -95,7 +97,7 @@ Copyright © 2019 <Marco Mastroddi> [<marco.mastroddi@gmail.com>]
 <</COPYRIGHT>>
 <<MENU>>
 1
-[FILENAME=beebeep.desktop]
+[FILENAME=beebeep]
 Name=BeeBEEP
 Version=1.0
 Exec=/usr/bin/beebeep
