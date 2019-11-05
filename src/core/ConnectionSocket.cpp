@@ -56,7 +56,7 @@ void ConnectionSocket::initSocket( qintptr socket_descriptor, quint16 server_por
   m_serverPort = server_port;
   m_tickCounter = 0;
   m_checkConnectionTimeout = false;
-  m_isEncrypted = !Settings::instance().disableConnectionSocketEncryption();
+  m_isEncrypted = true;
   m_isCompressed = false;
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Connection socket initializes peer with network address" << qPrintable( m_networkAddress.toString() ) << "and server port" << m_serverPort;
@@ -70,7 +70,7 @@ void ConnectionSocket::connectToNetworkAddress( const NetworkAddress& network_ad
   m_tickCounter = 0;
   m_checkConnectionTimeout = true;
   m_serverPort = 0;
-  m_isEncrypted = !Settings::instance().disableConnectionSocketEncryption();;
+  m_isEncrypted = true;
   m_isCompressed = false;
   connectToHost( network_address.hostAddress(), network_address.hostPort() );
 }
@@ -425,7 +425,7 @@ void ConnectionSocket::sendQuestionHello()
 #ifdef CONNECTION_SOCKET_IO_DEBUG
     qDebug() << "ConnectionSocket is sending pkey1 with shared-key:" << qPrintable( m_publicKey1 );
 #endif
-    if( sendData( Protocol::instance().helloMessage( m_publicKey1, isEncrypted(), !Settings::instance().disableConnectionSocketDataCompression() ) ) )
+    if( sendData( Protocol::instance().helloMessage( m_publicKey1, !Settings::instance().disableConnectionSocketEncryption(), !Settings::instance().disableConnectionSocketDataCompression() ) ) )
     {
 #ifdef BEEBEEP_DEBUG
       qDebug() << "ConnectionSocket sent question HELLO to" << qPrintable( m_networkAddress.toString() );
@@ -446,7 +446,7 @@ void ConnectionSocket::sendAnswerHello()
 #ifdef CONNECTION_SOCKET_IO_DEBUG
   qDebug() << "ConnectionSocket is sending pkey2 with shared-key:" << qPrintable( m_publicKey2 );
 #endif
-  if( sendData( Protocol::instance().helloMessage( m_publicKey2, isEncrypted(), !Settings::instance().disableConnectionSocketDataCompression() ) ) )
+  if( sendData( Protocol::instance().helloMessage( m_publicKey2, !Settings::instance().disableConnectionSocketEncryption(), !Settings::instance().disableConnectionSocketDataCompression() ) ) )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << "ConnectionSocket sent answer HELLO to" << qPrintable( m_networkAddress.toString() );
@@ -484,6 +484,7 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
     return;
   }
 
+  bool use_encryption = isEncrypted();
   if( isEncrypted() )
   {
     if( m.hasFlag( Message::EncryptionDisabled ) )
@@ -495,7 +496,7 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
         return;
       }
       else
-        useEncryption( false );
+        use_encryption = false;
     }
   }
   else
@@ -509,7 +510,7 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
         return;
       }
       else
-        useEncryption( true );
+        use_encryption = true;
     }
   }
 
@@ -529,6 +530,8 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
 
   if( !m_isHelloSent )
     sendAnswerHello();
+
+  useEncryption( use_encryption );
 
   // After sending HELLO to ensure low protocol version compatibility
   m_protoVersion = Protocol::instance().protoVersion( m );
