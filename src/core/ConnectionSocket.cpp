@@ -487,7 +487,7 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
   bool use_encryption = true;
   if( Settings::instance().disableConnectionSocketEncryption() )
   {
-   if( !m.hasFlag( Message::EncryptionDisabled ) )
+    if( !m.hasFlag( Message::EncryptionDisabled ) )
     {
       if( !Settings::instance().allowEncryptedConnectionsAlso() )
       {
@@ -498,10 +498,12 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
       else
         use_encryption = true;
     }
+    else
+      use_encryption = false;
   }
   else
   {
-   if( m.hasFlag( Message::EncryptionDisabled ) )
+    if( m.hasFlag( Message::EncryptionDisabled ) )
     {
       if( !Settings::instance().allowNotEncryptedConnectionsAlso() )
       {
@@ -511,7 +513,7 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
       }
       else
         use_encryption = false;
-    }
+    } 
   }
 
   if( Settings::instance().acceptConnectionsOnlyFromWorkgroups() )
