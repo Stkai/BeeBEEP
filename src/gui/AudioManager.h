@@ -38,9 +38,9 @@ class AudioManager
 
 public:
   bool isAudioDeviceAvailable();
+  bool loadBeepEffect();
   void playBeep( int loops = 1 );
   void clearBeep();
-  bool loadBeepEffect();
   void playBuzz();
 
 #if defined( BEEBEEP_USE_VOICE_CHAT )
