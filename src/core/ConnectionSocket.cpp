@@ -97,26 +97,21 @@ void ConnectionSocket::useCompression( bool compression_enabled )
 {
   m_isCompressed = compression_enabled;
   if( !Settings::instance().disableConnectionSocketDataCompression() && !m_isCompressed )
-    qWarning() << "ConnectionSocket disables compression for address peer" << qPrintable( m_networkAddress.toString() );
+    qDebug() << "ConnectionSocket disables compression for address peer" << qPrintable( m_networkAddress.toString() );
 }
 
 void ConnectionSocket::useEncryption( bool encryption_enabled )
 {
-  if( m_isEncrypted )
+  m_isEncrypted = encryption_enabled;
+  if( Settings::instance().disableConnectionSocketEncryption() && m_isEncrypted )
   {
-    if( !encryption_enabled )
-    {
-      qWarning() << "ConnectionSocket disables encryption for address peer" << qPrintable( m_networkAddress.toString() );
-      m_isEncrypted = false;
-    }
+    if( m_isEncrypted )
+      qDebug() << "ConnectionSocket enables encryption for address peer" << qPrintable( m_networkAddress.toString() );
   }
   else
   {
-    if( encryption_enabled )
-    {
-      qWarning() << "ConnectionSocket enables encryption for address peer" << qPrintable( m_networkAddress.toString() );
-      m_isEncrypted = true;
-    }
+    if( !m_isEncrypted )
+      qWarning() << "ConnectionSocket disables encryption for address peer" << qPrintable( m_networkAddress.toString() );
   }
 }
 
