@@ -484,7 +484,7 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
     return;
   }
 
-  bool use_encryption = isEncrypted();
+  bool use_encryption = true;
   if( isEncrypted() )
   {
     if( m.hasFlag( Message::EncryptionDisabled ) )
