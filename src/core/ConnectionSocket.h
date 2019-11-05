@@ -79,7 +79,7 @@ protected slots:
   void onBytesWritten( qint64 );
 
 protected:
-  void sendAnswerHello();
+  void sendAnswerHello( bool encryption_enabled, bool compression_enabled );
   void checkHelloMessage( const QByteArray& );
   QByteArray serializeData( const QByteArray& );
   const QByteArray& cipherKey() const;

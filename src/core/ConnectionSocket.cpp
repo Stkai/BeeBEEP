@@ -440,13 +440,13 @@ void ConnectionSocket::sendQuestionHello()
   }
 }
 
-void ConnectionSocket::sendAnswerHello()
+void ConnectionSocket::sendAnswerHello( bool encryption_enabled, bool compression_enabled )
 {
   m_publicKey2 = Protocol::instance().newMd5Id();
 #ifdef CONNECTION_SOCKET_IO_DEBUG
   qDebug() << "ConnectionSocket is sending pkey2 with shared-key:" << qPrintable( m_publicKey2 );
 #endif
-  if( sendData( Protocol::instance().helloMessage( m_publicKey2, !Settings::instance().disableConnectionSocketEncryption(), !Settings::instance().disableConnectionSocketDataCompression() ) ) )
+  if( sendData( Protocol::instance().helloMessage( m_publicKey2, encryption_enabled, compression_enabled ) ) )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << "ConnectionSocket sent answer HELLO to" << qPrintable( m_networkAddress.toString() );
@@ -484,6 +484,20 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
     return;
   }
 
+  if( Settings::instance().acceptConnectionsOnlyFromWorkgroups() )
+  {
+    if( !Protocol::instance().acceptConnectionFromWorkgroup( m ) )
+    {
+#ifdef BEEBEEP_DEBUG
+      qDebug() << "ConnectionSocket drops user of external workgroup from" << qPrintable( m_networkAddress.toString() );
+#endif
+      emit abortRequest();
+      return;
+    }
+    else
+      qDebug() << "ConnectionSocket has accepted user of your workgroup from" << qPrintable( m_networkAddress.toString() );
+  }
+
   bool use_encryption = true;
   if( Settings::instance().disableConnectionSocketEncryption() )
   {
@@ -516,27 +530,16 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
     } 
   }
 
-  if( Settings::instance().acceptConnectionsOnlyFromWorkgroups() )
-  {
-    if( !Protocol::instance().acceptConnectionFromWorkgroup( m ) )
-    {
-#ifdef BEEBEEP_DEBUG
-      qDebug() << "ConnectionSocket drops user of external workgroup from" << qPrintable( m_networkAddress.toString() );
-#endif
-      emit abortRequest();
-      return;
-    }
-    else
-      qDebug() << "ConnectionSocket has accepted user of your workgroup from" << qPrintable( m_networkAddress.toString() );
-  }
+  bool use_compression = m.hasFlag( Message::Compressed ) && !Settings::instance().disableConnectionSocketDataCompression();
 
   if( !m_isHelloSent )
-    sendAnswerHello();
-
-  useEncryption( use_encryption );
+    sendAnswerHello( use_encryption, use_compression );
 
   // After sending HELLO to ensure low protocol version compatibility
   m_protoVersion = Protocol::instance().protoVersion( m );
+
+  useEncryption( use_encryption );
+  useCompression( use_compression );
 
   int peer_datastream_version = Protocol::instance().datastreamVersion( m );
   if( peer_datastream_version > 0 )
@@ -562,38 +565,33 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
       qWarning() << "Old protocol version" << m_protoVersion << "is used with" << qPrintable( m_networkAddress.toString() );
   }
 
-  if( m_protoVersion > SECURE_LEVEL_2_PROTO_VERSION )
+  if( isEncrypted() )
   {
-    QString public_key = Protocol::instance().publicKey( m );
-    if( !public_key.isEmpty() )
+    if( m_protoVersion > SECURE_LEVEL_2_PROTO_VERSION )
     {
-      if( !createCipherKey( public_key ) )
+      QString public_key = Protocol::instance().publicKey( m );
+      if( !public_key.isEmpty() )
       {
-        qWarning() << "ConnectionSocket has not shared a public key to negotiate encryption with" << qPrintable( m_networkAddress.toString() );
-        emit abortRequest();
-        return;
-      }
-      else
-      {
-        if( isEncrypted() )
+        if( !createCipherKey( public_key ) )
+        {
+          qWarning() << "ConnectionSocket has not shared a public key to negotiate encryption with" << qPrintable( m_networkAddress.toString() );
+          emit abortRequest();
+          return;
+        }
+        else
         {
           if( m_protoVersion < SECURE_LEVEL_3_PROTO_VERSION )
             qWarning() << "Old encryption level 2 is activated with" << qPrintable( m_networkAddress.toString() );
           else
             qDebug() << "Encryption level 3 is activated with" << qPrintable( m_networkAddress.toString() );
         }
-        else
-          qDebug() << "ConnectionSocket has completed the initial negotiation with" << qPrintable( m_networkAddress.toString() );
       }
     }
     else
       qWarning() << "Remote host" << qPrintable( m_networkAddress.toString() ) << "has not shared a public key to negotiate encryption";
   }
-
-  if( m_protoVersion >= DATA_COMPRESSED_PROTO_VERSION && m.hasFlag( Message::Compressed ) && !Settings::instance().disableConnectionSocketDataCompression() )
-    useCompression( true );
   else
-    useCompression( false );
+    qDebug() << "ConnectionSocket has completed the initial negotiation with" << qPrintable( m_networkAddress.toString() );
 
 #ifdef BEEBEEP_DEBUG
   qDebug() << "ConnectionSocket request an authentication for" << qPrintable( m_networkAddress.toString() );
