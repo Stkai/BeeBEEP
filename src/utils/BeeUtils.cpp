@@ -1034,23 +1034,29 @@ QString Bee::bytesToString( FileSizeType bytes, int precision )
   return QString( "%1 %2").arg( result, 0, 'f', prec > 0 ? (precision >= 0 ? precision : prec) : 0 ).arg( suffix );
 }
 
-QString Bee::timeToString( int msec )
+QString Bee::timeToString( qint64 msec )
 {
   if( msec <= 0 )
     return QString( "" );
-  if( msec >= 86399999 )
-    return QT_TRANSLATE_NOOP( "Date", "more than 1 day" );
-  QTime t( 0, 0 );
-  t = t.addMSecs( msec );
+  int d = 0;
+  while( msec >= 86400000 )
+  {
+    d++;
+    msec -= 86400000;
+  }
   QString s = "";
-  if( t.hour() == 0 && t.minute() == 0 && t.second() == 0 )
+  QTime t( 0, 0 );
+  t = t.addMSecs( static_cast<int>( msec ) );
+  int total_hours = t.hour() + d * 24;
+
+  if( total_hours == 0 && t.minute() == 0 && t.second() == 0 )
     s = QString( "%1 ms" ).arg( t.msec() );
-  else if( t.hour() == 0 && t.minute() == 0 )
+  else if( total_hours == 0 && t.minute() == 0 )
     s = QString( "%1 s" ).arg( t.second() );
-  else if( t.hour() == 0 )
+  else if( total_hours == 0 )
     s = QString( "%1 m, %2 s" ).arg( t.minute() ).arg( t.second() );
   else
-    s = QString( "%1 h, %2 m, %3 s" ).arg( t.hour() ).arg( t.minute() ).arg( t.second() );
+    s = QString( "%1 h, %2 m, %3 s" ).arg( total_hours ).arg( t.minute() ).arg( t.second() );
   return s;
 }
 

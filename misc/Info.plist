@@ -16,6 +16,8 @@
   <string>net.beebeep</string>
   <key>CFBundleName</key>
   <string>BeeBEEP</string>
+  <key>CFBundleDisplayName</key>
+  <string>BeeBEEP (Free Office Messenger)</string>
   <key>CFBundleVersion</key>
   <string>5.8.2</string>
   <key>CFBundleSignature</key>
@@ -26,5 +28,7 @@
   <string>Copyright © 2019 Marco Mastroddi, All Rights Reserved</string>
   <key>CFBundleShortVersionString</key>
   <string>5.8.2</string>
+  <key>NSMicrophoneUsageDescription</key>
+  <string>BeeBEEP requires the use of the microphone to record voice messages.</string>
 </dict>
 </plist>

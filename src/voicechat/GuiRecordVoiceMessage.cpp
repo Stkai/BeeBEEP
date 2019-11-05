@@ -132,11 +132,13 @@ void GuiRecordVoiceMessage::updateRecorderProgress( qint64 duration_ms )
   if( duration_ms < 1000 )
   {
     mp_progressBar->setValue( 1 );
+    mp_lDuration->setText( Bee::timeToString( 1000 ) );
     return;
   }
 
   int duration_s = static_cast<int>( duration_ms / 1000.0 );
   mp_progressBar->setValue( duration_s );
+  mp_lDuration->setText( Bee::timeToString( duration_ms ) );
   if( duration_s >= m_maxDuration )
   {
     QPalette p = mp_progressBar->palette();
@@ -276,6 +278,7 @@ void GuiRecordVoiceMessage::toggleRecord()
 
     mp_lStatus->setText( tr( "Please wait" ) + QString( "..." ) );
     mp_pbSend->setEnabled( true );
+    mp_lDuration->setText( "" );
     QApplication::setOverrideCursor( Qt::WaitCursor );
     QApplication::processEvents();
     m_fileAccepted = false;

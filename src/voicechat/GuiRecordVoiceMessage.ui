@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>310</height>
+    <width>368</width>
+    <height>316</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -101,8 +101,30 @@
           <property name="value">
            <number>0</number>
           </property>
+          <property name="textVisible">
+           <bool>false</bool>
+          </property>
           <property name="format">
            <string notr="true">%v s</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="mp_lDuration">
+          <property name="minimumSize">
+           <size>
+            <width>30</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="textFormat">
+           <enum>Qt::PlainText</enum>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -151,7 +173,7 @@
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>26</height>
+            <height>0</height>
            </size>
           </property>
           <property name="text">
@@ -164,7 +186,7 @@
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>26</height>
+            <height>0</height>
            </size>
           </property>
           <property name="maximum">

@@ -94,7 +94,7 @@ namespace Bee
   QString removeInvalidCharactersForFilePath( const QString& );
 
   QString bytesToString( FileSizeType, int precision = -1 );
-  QString timeToString( int msec );
+  QString timeToString( qint64 msec );
   qint64 roundFromDouble( double d );
   qint64 bytesPerSecond( FileSizeType transferred_byte_size, int time_elapsed_ms );
   QString transferTimeLeft( FileSizeType bytes_transferred, FileSizeType total_bytes, FileSizeType starting_position, int elapsed_time );
