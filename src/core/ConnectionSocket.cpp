@@ -103,7 +103,7 @@ void ConnectionSocket::useCompression( bool compression_enabled )
 void ConnectionSocket::useEncryption( bool encryption_enabled )
 {
   m_isEncrypted = encryption_enabled;
-  if( Settings::instance().disableConnectionSocketEncryption() && m_isEncrypted )
+  if( Settings::instance().disableConnectionSocketEncryption() )
   {
     if( m_isEncrypted )
       qDebug() << "ConnectionSocket enables encryption for address peer" << qPrintable( m_networkAddress.toString() );

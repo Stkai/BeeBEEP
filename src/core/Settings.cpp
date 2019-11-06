@@ -135,7 +135,7 @@ Settings::Settings()
 
   m_disableConnectionSocketEncryption = false;
   m_allowNotEncryptedConnectionsAlso = false;
-  m_allowEncryptedConnectionsAlso = false;
+  m_allowEncryptedConnectionsAlso = true;
   m_disableConnectionSocketDataCompression = false;
 
   m_rcFileExists = false;
