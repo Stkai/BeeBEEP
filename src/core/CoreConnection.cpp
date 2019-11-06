@@ -233,7 +233,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
     return;
   }
 
-  Message m = Protocol::instance().toMessage( auth_byte_array, c->protoVersion() );
+  Message m = Protocol::instance().toMessage( auth_byte_array, c->protocolVersion() );
   if( !m.isValid() )
   {
     qWarning() << "Core has received an invalid HELLO from" << qPrintable( c->networkAddress().toString() );
@@ -343,16 +343,13 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
       else
       {
         qDebug() << "User" << qPrintable( u.path() ) << "is already online with another connection:" << qPrintable( user_found.path() );
-        int remote_protocol_version = c->protoVersion();
+        int remote_protocol_version = c->protocolVersion();
         closeConnection( c );
-        if( remote_protocol_version < Settings::instance().protoVersion() || (remote_protocol_version == Settings::instance().protoVersion() && user_found.path() < Settings::instance().localUser().path()) )
+        if( remote_protocol_version < Settings::instance().protocolVersion() ||
+          ( remote_protocol_version == Settings::instance().protocolVersion() && user_found.path() < Settings::instance().localUser().path() ) ) // just one of them to prevent collision
         {
-          if( !isUserConnected( user_found.id() ) )
-          {
-            qDebug() << "User" << qPrintable( user_found.path() ) << "is no longer connected";
-            if( mp_broadcaster->addNetworkAddress( user_found.networkAddress() ) )
-              qDebug() << "User" << qPrintable( user_found.path() ) << "is added to addresses to be contacted";
-          }
+          if( mp_broadcaster->addNetworkAddress( user_found.networkAddress() ) )
+            qDebug() << "User" << qPrintable( user_found.path() ) << "is added to addresses to be contacted later";
         }
       }
       return;
@@ -371,7 +368,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
 
   if( !ColorManager::instance().isValidColor( u.color() ) || u.color() == QString( "#000000" ) )
     u.setColor( ColorManager::instance().unselectedQString() );
-  u.setProtocolVersion( c->protoVersion() );
+  u.setProtocolVersion( c->protocolVersion() );
   u.setLastConnection( QDateTime::currentDateTime() );
   UserManager::instance().setUser( u );
 
@@ -403,7 +400,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
 
   if( c->isEncrypted() )
   {
-    if( c->protoVersion() < SECURE_LEVEL_3_PROTO_VERSION )
+    if( c->protocolVersion() < SECURE_LEVEL_3_PROTO_VERSION )
     {
       dispatchSystemMessage( ID_DEFAULT_CHAT, u.id(),
                              tr( "%1 %2 uses old encryption level." ).arg( IconManager::instance().toHtml( "warning.png", "*!*" ), Bee::userNameToShow( u, true ) ),
@@ -431,7 +428,7 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
 
   if( !Settings::instance().localUser().vCard().hasOnlyNickName() )
   {
-    if( c->protoVersion() > 1 )
+    if( c->protocolVersion() > 1 )
     {
 #ifdef BEEBEEP_DEBUG
       qDebug() << "Sending my VCard to" << qPrintable( u.path() );

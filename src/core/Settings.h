@@ -80,7 +80,7 @@ public:
 
   bool isDevelopmentVersion( const QString& v = QString::null ) const;
   QString version( bool build_version, bool qt_version, bool debug_info ) const;
-  int protoVersion() const;
+  int protocolVersion() const;
   inline int dataStreamVersion( bool in_load_event ) const;
   QString hunspellVersion() const;
   QString programName() const;

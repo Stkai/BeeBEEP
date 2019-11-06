@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE" sourcelanguage="en">
+<TS version="2.1" language="de_DE" sourcelanguage="en">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -648,13 +648,6 @@
     <message>
         <source>Offline messages sent to %1.</source>
         <translation type="unfinished">Offline-Nachrichten wurden an %2 gesendet. {1.?}</translation>
-    </message>
-</context>
-<context>
-    <name>Date</name>
-    <message>
-        <source>more than 1 day</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

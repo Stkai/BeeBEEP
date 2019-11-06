@@ -125,7 +125,7 @@ bool MessageManager::saveUnsentMessages()
   QStringList file_header;
   file_header << Settings::instance().programName();
   file_header << Settings::instance().version( false, false, false );
-  file_header << QString::number( Settings::instance().protoVersion() );
+  file_header << QString::number( Settings::instance().protocolVersion() );
   file_header << auth_code;
   stream << file_header;
   if( stream.status() != QDataStream::Ok )

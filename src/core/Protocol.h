@@ -79,7 +79,7 @@ public:
   QString fileInfoHashTmp( VNumber, const QString&, FileSizeType ) const;
   ChatMessageData dataFromChatMessage( const Message& ) const;
   QString chatMessageDataToString( const ChatMessageData& ) const;
-  int protoVersion( const Message& ) const;
+  int protocolVersion( const Message& ) const;
   int datastreamVersion( const Message& ) const;
   QString publicKey( const Message& ) const;
   QByteArray createCipherKey( const QString&, const QString&, int ) const;

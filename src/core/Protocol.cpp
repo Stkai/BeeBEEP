@@ -302,7 +302,7 @@ QHostAddress Protocol::hostAddressFromBroadcastMessage( const Message& m ) const
   return host_address;
 }
 
-int Protocol::protoVersion( const Message& m ) const
+int Protocol::protocolVersion( const Message& m ) const
 {
   int proto_version = static_cast<int>( m.id() <= ID_HELLO_MESSAGE ? 1 : m.id() );
   return proto_version;
@@ -354,7 +354,7 @@ QByteArray Protocol::helloMessage( const QString& public_key, bool encrypted_con
     data_list << QString( "" );
   data_list << Settings::instance().localUser().domainName();
   data_list << Settings::instance().localUser().localHostName();
-  Message m( Message::Hello, static_cast<VNumber>(Settings::instance().protoVersion()), data_list.join( DATA_FIELD_SEPARATOR ) );
+  Message m( Message::Hello, static_cast<VNumber>(Settings::instance().protocolVersion()), data_list.join( DATA_FIELD_SEPARATOR ) );
   if( !encrypted_connection )
     m.addFlag( Message::EncryptionDisabled );
   if( data_compressed )
@@ -881,7 +881,7 @@ QString Protocol::saveMessageRecord( const MessageRecord& mr ) const
   sl_chat << c.name();
   sl_chat << c.privateId();
   sl_root.append( Settings::instance().simpleEncrypt( sl_chat.join( DATA_FIELD_SEPARATOR ) ) );
-  QByteArray ba = fromMessage( mr.message(), Settings::instance().protoVersion() );
+  QByteArray ba = fromMessage( mr.message(), Settings::instance().protocolVersion() );
   sl_root.append( QString::fromLatin1( ba.toBase64() ) );
   return sl_root.join( PROTOCOL_FIELD_SEPARATOR );
 }
@@ -944,7 +944,7 @@ MessageRecord Protocol::loadMessageRecord( const QString& s ) const
     return MessageRecord();
   }
 
-  Message m = toMessage( QByteArray::fromBase64( sl_root.at( 2 ).toLatin1() ), Settings::instance().protoVersion() );
+  Message m = toMessage( QByteArray::fromBase64( sl_root.at( 2 ).toLatin1() ), Settings::instance().protocolVersion() );
   if( !m.isValid() )
   {
     qWarning() << "Invalid message data found in message record";

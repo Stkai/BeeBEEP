@@ -31,7 +31,7 @@
 
 
 ConnectionSocket::ConnectionSocket( QObject* parent )
-  : QTcpSocket( parent ), m_blockSize( 0 ), m_isHelloSent( false ), m_userId( ID_INVALID ), m_protoVersion( 1 ),
+  : QTcpSocket( parent ), m_blockSize( 0 ), m_isHelloSent( false ), m_userId( ID_INVALID ), m_protocolVersion( 1 ),
     m_cipherKey( "" ), m_publicKey1( "" ), m_publicKey2( "" ), m_networkAddress(), m_latestActivityDateTime(),
     m_checkConnectionTimeout( false ), m_tickCounter( 0 ), m_isAborted( false ), m_datastreamVersion( 0 ),
     m_isTestConnection( false ), m_serverPort( 0 ), m_isEncrypted( true ), m_isCompressed( false )
@@ -183,7 +183,7 @@ qint64 ConnectionSocket::readBlock()
   }
   else
   {
-    if( m_protoVersion > SECURE_LEVEL_2_PROTO_VERSION )
+    if( m_protocolVersion > SECURE_LEVEL_2_PROTO_VERSION )
       data_stream.setVersion( DATASTREAM_VERSION_2 );
     else
       data_stream.setVersion( DATASTREAM_VERSION_1 );
@@ -196,7 +196,7 @@ qint64 ConnectionSocket::readBlock()
 
   if( m_blockSize == 0 )
   {
-    if( m_protoVersion > SECURE_LEVEL_2_PROTO_VERSION )
+    if( m_protocolVersion > SECURE_LEVEL_2_PROTO_VERSION )
     {
       if( static_cast<unsigned long>(bytes_available) < sizeof(DATA_BLOCK_SIZE_32) )
       {
@@ -273,7 +273,7 @@ qint64 ConnectionSocket::readBlock()
   QByteArray decrypted_byte_array;
 
   if( isEncrypted() )
-    decrypted_byte_array = Protocol::instance().decryptByteArray( byte_array_read, cipherKey(), m_protoVersion );
+    decrypted_byte_array = Protocol::instance().decryptByteArray( byte_array_read, cipherKey(), m_protocolVersion );
   else
     decrypted_byte_array = byte_array_read;
 
@@ -316,7 +316,7 @@ QByteArray ConnectionSocket::serializeData( const QByteArray& bytes_to_send )
   QDataStream data_stream( &data_block, QIODevice::WriteOnly );
   data_stream.setByteOrder( QDataStream::BigEndian );
 
-  if( m_protoVersion > SECURE_LEVEL_2_PROTO_VERSION )
+  if( m_protocolVersion > SECURE_LEVEL_2_PROTO_VERSION )
   {
     if( m_datastreamVersion > 0 )
       data_stream.setVersion( m_datastreamVersion );
@@ -388,7 +388,7 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
     byte_array_to_send = byte_array;
 
   if( isEncrypted() )
-    byte_array_to_send = Protocol::instance().encryptByteArray( byte_array_to_send, cipherKey(), m_protoVersion );
+    byte_array_to_send = Protocol::instance().encryptByteArray( byte_array_to_send, cipherKey(), m_protocolVersion );
 
   QByteArray data_serialized = serializeData( byte_array_to_send );
 
@@ -461,7 +461,7 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
   qDebug() << "HELLO received from" << qPrintable( m_networkAddress.toString() );
 #endif
 
-  Message m = Protocol::instance().toMessage( array_data, m_protoVersion );
+  Message m = Protocol::instance().toMessage( array_data, m_protocolVersion );
   if( !m.isValid() )
   {
     qWarning() << "ConnectionSocket received an invalid HELLO from" << qPrintable( m_networkAddress.toString() );
@@ -531,7 +531,7 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
     sendAnswerHello( use_encryption, use_compression );
 
   // After sending HELLO to ensure low protocol version compatibility
-  m_protoVersion = Protocol::instance().protoVersion( m );
+  m_protocolVersion = Protocol::instance().protocolVersion( m );
 
   useEncryption( use_encryption );
   useCompression( use_compression );
@@ -547,22 +547,22 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
   else
     m_datastreamVersion = 0;
 
-  if( m_protoVersion != Settings::instance().protoVersion() )
+  if( m_protocolVersion != Settings::instance().protocolVersion() )
   {
     qWarning() << "Protocol version from" << qPrintable( m_networkAddress.toString() ) << "is"
-               << (m_protoVersion > Settings::instance().protoVersion() ? "newer" : "older") << "than yours";
-    if( m_protoVersion > Settings::instance().protoVersion() )
+               << (m_protocolVersion > Settings::instance().protocolVersion() ? "newer" : "older") << "than yours";
+    if( m_protocolVersion > Settings::instance().protocolVersion() )
     {
-      m_protoVersion = Settings::instance().protoVersion();
-      qWarning() << "Your old protocol version" << m_protoVersion << "is used with" << qPrintable( m_networkAddress.toString() );
+      m_protocolVersion = Settings::instance().protocolVersion();
+      qWarning() << "Your old protocol version" << m_protocolVersion << "is used with" << qPrintable( m_networkAddress.toString() );
     }
     else
-      qWarning() << "Old protocol version" << m_protoVersion << "is used with" << qPrintable( m_networkAddress.toString() );
+      qWarning() << "Old protocol version" << m_protocolVersion << "is used with" << qPrintable( m_networkAddress.toString() );
   }
 
   if( isEncrypted() )
   {
-    if( m_protoVersion > SECURE_LEVEL_2_PROTO_VERSION )
+    if( m_protocolVersion > SECURE_LEVEL_2_PROTO_VERSION )
     {
       QString public_key = Protocol::instance().publicKey( m );
       if( !public_key.isEmpty() )
@@ -575,7 +575,7 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
         }
         else
         {
-          if( m_protoVersion < SECURE_LEVEL_3_PROTO_VERSION )
+          if( m_protocolVersion < SECURE_LEVEL_3_PROTO_VERSION )
             qWarning() << "Old encryption level 2 is activated with" << qPrintable( m_networkAddress.toString() );
           else
             qDebug() << "Encryption level 3 is activated with" << qPrintable( m_networkAddress.toString() );
@@ -596,7 +596,7 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
 
 int ConnectionSocket::fileTransferBufferSize() const
 {
-  return m_protoVersion > SECURE_LEVEL_2_PROTO_VERSION ? Settings::instance().fileTransferBufferSize() : qMin( static_cast<int>(65456), Settings::instance().fileTransferBufferSize() );
+  return m_protocolVersion > SECURE_LEVEL_2_PROTO_VERSION ? Settings::instance().fileTransferBufferSize() : qMin( static_cast<int>(65456), Settings::instance().fileTransferBufferSize() );
 }
 
 bool ConnectionSocket::checkConnectionTimeout( int ticks )

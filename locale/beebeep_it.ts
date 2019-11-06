@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -702,7 +702,7 @@
     <name>Date</name>
     <message>
         <source>more than 1 day</source>
-        <translation>più di 1 giorno</translation>
+        <translation type="vanished">più di 1 giorno</translation>
     </message>
 </context>
 <context>

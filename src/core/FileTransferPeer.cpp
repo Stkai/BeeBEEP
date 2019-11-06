@@ -205,7 +205,7 @@ bool FileTransferPeer::canPauseTransfer() const
 {
   if( m_state == FileTransferPeer::Transferring )
   {
-    if( Settings::instance().resumeFileTransfer() && mp_socket->protoVersion() >= FILE_TRANSFER_RESUME_PROTO_VERSION )
+    if( Settings::instance().resumeFileTransfer() && mp_socket->protocolVersion() >= FILE_TRANSFER_RESUME_PROTO_VERSION )
       return true;
   }
   return false;
@@ -304,7 +304,7 @@ void FileTransferPeer::checkUserAuthentication( const QByteArray& auth_byte_arra
 #ifdef BEEBEEP_DEBUG
   qDebug() << qPrintable( name() ) << "checks authentication message";
 #endif
-  Message m = Protocol::instance().toMessage( auth_byte_array, mp_socket->protoVersion() );
+  Message m = Protocol::instance().toMessage( auth_byte_array, mp_socket->protocolVersion() );
   if( !m.isValid() )
   {
     qWarning() << qPrintable( name() ) << "has found an invalid auth message";
@@ -350,7 +350,7 @@ void FileTransferPeer::onTickEvent( int )
   {
     if( mp_socket->activityIdle() > Settings::instance().pongTimeout() )
     {
-      if( mp_socket->protoVersion() >= FILE_TRANSFER_RESUME_PROTO_VERSION && Settings::instance().resumeFileTransfer() )
+      if( mp_socket->protocolVersion() >= FILE_TRANSFER_RESUME_PROTO_VERSION && Settings::instance().resumeFileTransfer() )
       {
         pauseTransfer( false );
         if( isDownload() )

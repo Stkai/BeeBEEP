@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="fr_FR">
+<TS version="2.1" language="fr_FR">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -627,22 +627,22 @@
         <translation type="obsolete">%1 %2 vous envoie le fichier : %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="417"/>
+        <location filename="../src/core/CoreParser.cpp" line="421"/>
         <source>%1 has removed shared files</source>
         <translation>%1 a enlevé les fichiers partagés</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="419"/>
+        <location filename="../src/core/CoreParser.cpp" line="423"/>
         <source>%1 has shared %2 files</source>
         <translation>%1 a partagé %2 fichiers</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="580"/>
+        <location filename="../src/core/CoreParser.cpp" line="584"/>
         <source>%1 %2 is buzzing you.</source>
         <translation>%1 %2 vous sonne.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="449"/>
+        <location filename="../src/core/CoreParser.cpp" line="453"/>
         <source>%1 %2 has refused to download folder %3.</source>
         <translation>%1 %2 a refusé de télécharger le dossier %3.</translation>
     </message>
@@ -662,12 +662,12 @@
         <translation>%1 %2 vous envoie le fichier : %3</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="459"/>
+        <location filename="../src/core/CoreParser.cpp" line="463"/>
         <source>unknown folder</source>
         <translation>dossier inconnu</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="468"/>
+        <location filename="../src/core/CoreParser.cpp" line="472"/>
         <source>%1 %2 is sending to you the folder: %3.</source>
         <translation>%1 %2 vous envoie le dossier : %3.</translation>
     </message>
@@ -738,22 +738,22 @@
         <translation>%1 Connexion vers l&apos;utilisateur %2 fermée car elle utilise le code de hachage que l&apos;utilisateur déjà connecté %3: %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="402"/>
+        <location filename="../src/core/CoreConnection.cpp" line="399"/>
         <source>%1 users connected</source>
         <translation>%1 utilisateurs connectés</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="409"/>
+        <location filename="../src/core/CoreConnection.cpp" line="406"/>
         <source>%1 %2 uses old encryption level.</source>
         <translation>%1 %2 utilise l&apos;ancien niveau de cryptage.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="417"/>
+        <location filename="../src/core/CoreConnection.cpp" line="414"/>
         <source>%1 has end-to-end encryption enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="427"/>
+        <location filename="../src/core/CoreConnection.cpp" line="424"/>
         <source>%1 has end-to-end encryption disabled</source>
         <translation type="unfinished"></translation>
     </message>
@@ -800,9 +800,8 @@
 <context>
     <name>Date</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="1042"/>
         <source>more than 1 day</source>
-        <translation>plus d&apos;un jour</translation>
+        <translation type="vanished">plus d&apos;un jour</translation>
     </message>
 </context>
 <context>
@@ -4803,18 +4802,18 @@ Please select a different name.</source>
 <context>
     <name>GuiRecordVoiceMessage</name>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="191"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="340"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="193"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="343"/>
         <source>Recording</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="195"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="197"/>
         <source>Paused</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="199"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="201"/>
         <source>Ready</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4829,73 +4828,73 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="150"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="152"/>
         <source>Stopped</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="150"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="152"/>
         <source>Reached the maximum duration of the voice message.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="227"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="229"/>
         <source>Pause</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="232"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="234"/>
         <source>Resume</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="236"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="238"/>
         <source>Record</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="255"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="257"/>
         <source>The message could not be recorded because an error has occurred: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="264"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="266"/>
         <source>Do you want to start recording your voice message again?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="265"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="267"/>
         <source>Yes, clean and restart</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="265"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="267"/>
         <source>Cancel</source>
         <translation type="unfinished">Annuler</translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="273"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="275"/>
         <source>No device available for recording voice messages.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="273"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="275"/>
         <source>Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="277"/>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="305"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="279"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="308"/>
         <source>Please wait</source>
         <translation type="unfinished">Veuillez patienter</translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="330"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="333"/>
         <source>Volume</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="330"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="333"/>
         <source>muted</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4908,7 +4907,7 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="112"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="134"/>
         <source>Record</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4923,12 +4922,12 @@ Please select a different name.</source>
         <translation>Envoyer</translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="158"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="180"/>
         <source>Volume</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="203"/>
+        <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="225"/>
         <source>To</source>
         <translation>À</translation>
     </message>
@@ -6800,32 +6799,32 @@ Please select a different name.</source>
         <translation type="obsolete">Tous les utilisateurs</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="612"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="610"/>
         <source>The connection to %1 was not successful.</source>
         <translation>La connexion à %1 a echoué.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="704"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="702"/>
         <source>The tested network address %1 is not present among the available addresses of the network interface to which the connection has been made.</source>
         <translation>L&apos;adresse réseau testée %1 ne fait pas partie des adresses disponibles sur l&apos;interface réseau qui a servi à établir la connexion.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="707"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="705"/>
         <source>The connection to host address %1 was successful.</source>
         <translation>La connexion à l&apos;adresse de l&apos;hôte %1 a réussi.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="713"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="711"/>
         <source>The port tested by the connection is %1 but the one that answered is %2.</source>
         <translation>Le port testé par la connexion est %1 mais celui qui a répondu est %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="717"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="715"/>
         <source>The connection to port %1 was successful.</source>
         <translation>La connexion au port %1 a réussi.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="725"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="723"/>
         <source>Unable to complete the test with an invalid network address.</source>
         <translation>Impossible de terminer le test avec une adresse invalide.</translation>
     </message>

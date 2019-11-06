@@ -48,7 +48,7 @@ void FileTransferPeer::checkUploadData( const QByteArray& byte_array )
 
 void FileTransferPeer::checkUploadRequest( const QByteArray& byte_array )
 {
-  Message m = Protocol::instance().toMessage( byte_array, mp_socket->protoVersion() );
+  Message m = Protocol::instance().toMessage( byte_array, mp_socket->protocolVersion() );
   if( !m.isValid() )
   {
     qWarning() << qPrintable( name() ) << "receives an invalid file request:" << byte_array;
@@ -76,9 +76,9 @@ void FileTransferPeer::startUpload( const FileInfo& fi )
   setTransferType( FileInfo::Upload );
   setFileInfo( FileInfo::Upload, fi );
   qDebug() << qPrintable( name() ) << "starts uploading" << qPrintable( fi.path() ) << "from" << fi.startingPosition() << "to" << fi.size() << "bytes";
-  if( mp_socket->protoVersion() < FILE_TRANSFER_2_PROTO_VERSION )
+  if( mp_socket->protocolVersion() < FILE_TRANSFER_2_PROTO_VERSION )
   {
-    qWarning() << qPrintable( name() ) << "using an old file upload protocol version" << mp_socket->protoVersion();
+    qWarning() << qPrintable( name() ) << "using an old file upload protocol version" << mp_socket->protocolVersion();
     setTransferringState();
     sendUploadData();
   }
@@ -116,7 +116,7 @@ void FileTransferPeer::sendFileHeader()
   }
 
   Message file_header_message = Protocol::instance().fileInfoToMessage( m_fileInfo );
-  QByteArray file_header = Protocol::instance().fromMessage( file_header_message, mp_socket->protoVersion() );
+  QByteArray file_header = Protocol::instance().fromMessage( file_header_message, mp_socket->protocolVersion() );
 
   if( !mp_socket->sendData( file_header ) )
     setError( tr( "unable to send file header" ) );
@@ -129,7 +129,7 @@ void FileTransferPeer::checkUploading( const QByteArray& byte_array )
   FileSizeType bytes_arrived = 0;
   FileSizeType total_bytes = 0;
   bool pause_transfer = false;
-  if( !Protocol::instance().parseFileTransferBytesArrivedConfirmation( mp_socket->protoVersion(), byte_array, &bytes_arrived, &total_bytes, &pause_transfer ) )
+  if( !Protocol::instance().parseFileTransferBytesArrivedConfirmation( mp_socket->protocolVersion(), byte_array, &bytes_arrived, &total_bytes, &pause_transfer ) )
   {
     setError( tr( "remote host sent invalid data" ) );
     return;

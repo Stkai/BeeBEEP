@@ -879,7 +879,7 @@ void Core::sendLocalUserHasReadChatMessage( const Chat& c )
     user_connection = connection( to_user_id );
     if( user_connection )
     {
-      if( user_connection->protoVersion() > 62 )
+      if( user_connection->protocolVersion() > 62 )
       {
 #ifdef BEEBEEP_DEBUG
         qDebug() << "Sending read chat message to" << to_user_id;
@@ -888,7 +888,7 @@ void Core::sendLocalUserHasReadChatMessage( const Chat& c )
       }
 #ifdef BEEBEEP_DEBUG
       else
-        qDebug() << "Unable to send read chat message to" << to_user_id << "because the user has an old protocol version" << user_connection->protoVersion();
+        qDebug() << "Unable to send read chat message to" << to_user_id << "because the user has an old protocol version" << user_connection->protocolVersion();
 #endif
     }
   }

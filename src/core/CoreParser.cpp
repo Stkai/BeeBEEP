@@ -252,7 +252,9 @@ void Core::parseGroupMessage( const User& u, const Message& m )
       {
         if( cmd.groupLastModified() <= group_chat.lastModified() )
         {
+#ifdef BEEBEEP_DEBUG
           qDebug() << "Group chat request for" << qPrintable( cmd.groupName() ) << "from" << qPrintable( u.name() ) << "is skipped because it has old timestamp:" << qPrintable( cmd.groupLastModified().toString( Qt::ISODate ) );
+#endif
           return;
         }
 #ifdef BEEBEEP_DEBUG
@@ -265,7 +267,9 @@ void Core::parseGroupMessage( const User& u, const Message& m )
       {
         if( group_chat.lastModified().isValid() )
         {
+#ifdef BEEBEEP_DEBUG
           qDebug() << "Group chat request for" << qPrintable( cmd.groupName() ) << "from" << qPrintable( u.name() ) << "is skipped because it has not last modified date";
+#endif
           return;
         }
 #ifdef BEEBEEP_DEBUG
@@ -509,7 +513,7 @@ void Core::parseHiveMessage( const User& u, const Message& m )
     if( user_record_list.isEmpty() )
       return;
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "Hive message arrived with" << user_record_list.size() << "users from" << qPrintable( u.path() );
+    qDebug() << "Hive message arrived with" << user_record_list.size() << "user(s) from" << qPrintable( u.path() );
 #endif
     int hive_users_added = 0;
     foreach( UserRecord ur, user_record_list )

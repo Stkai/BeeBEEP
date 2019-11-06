@@ -453,7 +453,7 @@ void Core::refuseToDownloadFile( VNumber user_id, const FileInfo& fi )
     return;
   }
 
-  if( c->protoVersion() > 1 )
+  if( c->protocolVersion() > 1 )
     c->sendMessage( m );
 }
 
@@ -481,7 +481,7 @@ void Core::refuseToDownloadFolder( VNumber user_id, const QString& folder_name, 
     return;
   }
 
-  if( c->protoVersion() > 1 )
+  if( c->protocolVersion() > 1 )
     c->sendMessage( m );
 }
 

@@ -420,7 +420,7 @@ void Settings::createLocalUser( const QString& user_name )
     m_localUser.setName( user_name );
 
   m_localUser.setQtVersion( qtMajorVersion() );
-  m_localUser.setProtocolVersion( protoVersion() );
+  m_localUser.setProtocolVersion( protocolVersion() );
   m_localUser.setDomainName( QHostInfo::localDomainName() );
   m_localUser.setHash( Settings::instance().createLocalUserHash() );
   m_localUser.setLocalHostName( QHostInfo::localHostName() );
@@ -749,7 +749,7 @@ QString Settings::httpUserAgent() const
   return QString( "%1 %2" ).arg( programName() ).arg( version( false, false, false ) );
 }
 
-int Settings::protoVersion() const
+int Settings::protocolVersion() const
 {
   return BEEBEEP_PROTO_VERSION;
 }
@@ -1575,7 +1575,7 @@ void Settings::save()
 
   sets->beginGroup( "Version" );
   sets->setValue( "Program", version( true, false, true ) );
-  sets->setValue( "Proto", protoVersion() );
+  sets->setValue( "Proto", protocolVersion() );
   sets->setValue( "Settings", BEEBEEP_SETTINGS_VERSION );
   sets->setValue( "DataStream", dataStreamVersion( false ) );
   sets->setValue( "BeeBang", m_settingsCreationDate );

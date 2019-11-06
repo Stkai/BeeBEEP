@@ -47,7 +47,7 @@ public:
   inline VNumber userId() const;
   inline void setUserId( VNumber );
 
-  inline int protoVersion() const;
+  inline int protocolVersion() const;
   int fileTransferBufferSize() const;
 
   inline bool isConnected() const;
@@ -97,7 +97,7 @@ private:
   DATA_BLOCK_SIZE_32 m_blockSize;
   bool m_isHelloSent;
   VNumber m_userId;
-  int m_protoVersion;
+  int m_protocolVersion;
   QByteArray m_cipherKey;
   QString m_publicKey1;
   QString m_publicKey2;
@@ -125,7 +125,7 @@ private:
 // Inline Functions
 inline VNumber ConnectionSocket::userId() const { return m_userId; }
 inline void ConnectionSocket::setUserId( VNumber new_value ) { m_userId = new_value; }
-inline int ConnectionSocket::protoVersion() const { return m_protoVersion; }
+inline int ConnectionSocket::protocolVersion() const { return m_protocolVersion; }
 inline bool ConnectionSocket::isConnected() const { return isOpen() && (state() == QAbstractSocket::ConnectedState || state() == QAbstractSocket::BoundState); }
 inline bool ConnectionSocket::isConnecting() const { return isOpen() && (state() == QAbstractSocket::HostLookupState || state() == QAbstractSocket::ConnectingState); }
 inline const QDateTime& ConnectionSocket::latestActivityDateTime() const { return m_latestActivityDateTime; }
