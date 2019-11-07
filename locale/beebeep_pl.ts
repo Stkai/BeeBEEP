@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="pl_PL">
+<TS version="2.0" language="pl_PL">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -56,7 +56,7 @@
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="294"/>
         <source>Voice message</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiadomość głosowa</translation>
     </message>
 </context>
 <context>
@@ -315,26 +315,26 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="482"/>
         <source>The voice message will be delivered to %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiadomość głosowa zostanie doręczona do %1.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="652"/>
         <source>Unsent messages had an incorrect authorization code and will not be sent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Niewysłane wiadomości mają niepoprawny kod autoryzacyjny i nie zostaną wysłane.</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/core/CoreChat.cpp" line="659"/>
         <source>%n unsent message(s) will be sent as soon as possible.</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n niewysłanych wiadomości zostanie wysłanych najszybciej jak to możliwe.</numerusform>
+            <numerusform>%n niewysłanych wiadomości zostanie wysłanych najszybciej jak to możliwe.</numerusform>
+            <numerusform>%n niewysłanych wiadomości zostanie wysłanych najszybciej jak to możliwe.</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="818"/>
         <source>Offline messages sent to %1.</source>
-        <translation type="unfinished">Wiadomości z trybu offline wysłane do %2. {1.?}</translation>
+        <translation>Wiadomości z trybu offline wysłane do %1.</translation>
     </message>
     <message>
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
@@ -348,22 +348,22 @@
     <message>
         <location filename="../src/core/Core.cpp" line="243"/>
         <source>but encrypted connections allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>ale szyfrowane połączenia są dozwolone</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="251"/>
         <source>End-to-end encryption is enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Szyfrowanie end-to-end jest włączone</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="251"/>
         <source>but not encrypted connections allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>ale niezaszyfrowane połączenia są dozwolone</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="241"/>
         <source>End-to-end encryption is disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Szyfrowanie end-to-end jest wyłączone</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="484"/>
@@ -446,12 +446,12 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="161"/>
         <source>%1 sent a voice message.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 wysłał wiadomość głosową.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="166"/>
         <source>Listen</source>
-        <translation type="unfinished"></translation>
+        <translation>Słuchaj</translation>
     </message>
     <message>
         <source>Open</source>
@@ -481,7 +481,7 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="176"/>
         <source>%1 sent %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 wysłał %2.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="179"/>
@@ -512,23 +512,23 @@
         <location filename="../src/core/CoreFileTransfer.cpp" line="169"/>
         <location filename="../src/core/CoreVoiceChat.cpp" line="66"/>
         <source>voice message</source>
-        <translation type="unfinished"></translation>
+        <translation>wiadomość głosowa</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="179"/>
         <location filename="../src/core/CoreFileTransfer.cpp" line="401"/>
         <source>Open %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Otwórz %1.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="364"/>
         <source>%1 Unable to send %2 to %3: file not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Nie można wysłać %2 do %3: plik nie znaleziony.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="371"/>
         <source>%1 Unable to send %2 to %3: file is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Nie można wysłać %2 do %3: plik jest pusty.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="443"/>
@@ -608,12 +608,12 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="788"/>
         <source>%1 Sending folder %2 to %3.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Wysyłanie folderu %2 do %3.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="398"/>
         <source>%1 Sending %2 to %3.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Wysyłanie %2 do %3.</translation>
     </message>
     <message>
         <source>%1 You send folder %2 to %3.</source>
@@ -630,12 +630,12 @@
     <message>
         <location filename="../src/core/CoreParser.cpp" line="163"/>
         <source>%1 %2 has refused to download the file: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 odmówił pobrania pliku %3</translation>
     </message>
     <message>
         <location filename="../src/core/CoreParser.cpp" line="188"/>
         <source>%1 %2 is sending to you the voice message: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 wysyła do Ciebie wiadomość głosową: %3</translation>
     </message>
     <message>
         <location filename="../src/core/CoreParser.cpp" line="190"/>
@@ -751,12 +751,12 @@
     <message>
         <location filename="../src/core/CoreConnection.cpp" line="414"/>
         <source>%1 has end-to-end encryption enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ma włączone szyfrowanie end-to-end</translation>
     </message>
     <message>
         <location filename="../src/core/CoreConnection.cpp" line="424"/>
         <source>%1 has end-to-end encryption disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ma wyłączone szyfrowanie end-to-end</translation>
     </message>
     <message>
         <location filename="../src/core/CoreShareDesktop.cpp" line="52"/>
@@ -786,12 +786,12 @@
     <message>
         <location filename="../src/core/CoreVoiceChat.cpp" line="38"/>
         <source>%1 Unable to send voice message. File transfer is disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Nie można wysłać wiadomości głosowej. Transfer plików jest wyłączone.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreVoiceChat.cpp" line="53"/>
         <source>%1 %2: voice message not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2: nie znaleziono wiadomości głosowej.</translation>
     </message>
 </context>
 <context>
@@ -867,7 +867,7 @@
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="95"/>
         <source>Transfer queued</source>
-        <translation type="unfinished"></translation>
+        <translation>Transfer zakolejkowany</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="185"/>
@@ -877,27 +877,27 @@
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="200"/>
         <source>Transfer canceled</source>
-        <translation type="unfinished"></translation>
+        <translation>Transfer anulowany</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="228"/>
         <source>Transfer is about to pause</source>
-        <translation type="unfinished"></translation>
+        <translation>Transfer wkrótce się zatrzyma</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="230"/>
         <source>Please wait</source>
-        <translation type="unfinished">Proszę czekać</translation>
+        <translation>Proszę czekać</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="247"/>
         <source>Transfer paused after %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Transfer wstrzymany po %1</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="257"/>
         <source>Starting transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozpoczynanie transferu</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="344"/>
@@ -912,7 +912,7 @@
     <message>
         <location filename="../src/core/FileTransferUpload.cpp" line="114"/>
         <source>file no longer exists</source>
-        <translation type="unfinished"></translation>
+        <translation>plik już nie istnieje</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferUpload.cpp" line="122"/>
@@ -922,12 +922,12 @@
     <message>
         <location filename="../src/core/FileTransferUpload.cpp" line="134"/>
         <source>remote host sent invalid data</source>
-        <translation type="unfinished"></translation>
+        <translation>zdalny host wysłał niepoprawne dane</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferUpload.cpp" line="152"/>
         <source>%1 bytes uploaded but the remote file size is %2 bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 bajtów przesłanych, ale zdalny plik ma %2 bajtów</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferUpload.cpp" line="154"/>
@@ -942,7 +942,7 @@
     <message>
         <location filename="../src/core/FileTransferUpload.cpp" line="187"/>
         <source>Unable to seek %1 bytes in file %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie można przeszukać %1 bajtów w pliku %2</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferUpload.cpp" line="203"/>
@@ -1195,22 +1195,22 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="201"/>
         <source>Close</source>
-        <translation type="unfinished">Zamknij</translation>
+        <translation>Zamknij</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="202"/>
         <source>Close chat window on sending message</source>
-        <translation type="unfinished"></translation>
+        <translation>Zamknij okno czatu przy wysyłaniu wiadomości</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="206"/>
         <source>Minimize</source>
-        <translation type="unfinished"></translation>
+        <translation>Minimalizuj</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="207"/>
         <source>Minimize chat window on sending message</source>
-        <translation type="unfinished"></translation>
+        <translation>Minimalizuj okno czatu przy wysyłaniu wiadomości</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="116"/>
@@ -1230,7 +1230,7 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="132"/>
         <source>Clear system messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyczyść wiadomości systemowe</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="138"/>
@@ -1251,12 +1251,12 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="329"/>
         <source>Record voice message</source>
-        <translation type="unfinished"></translation>
+        <translation>Nagraj wiadomość głosową</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="327"/>
         <source>File transfer must be enabled to send voice messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Transfer plików musi być włączony by wysyłać wiadomości głosowe</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="259"/>
@@ -1301,7 +1301,7 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="346"/>
         <source>Quote selected text</source>
-        <translation type="unfinished"></translation>
+        <translation>Zacytuj zaznaczony tekst</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="348"/>
@@ -1327,12 +1327,12 @@
         <location filename="../src/desktop/GuiChat.cpp" line="90"/>
         <source>Voice messages are not available with this version of BeeBEEP.
 Download for free and install the version with this feature from the %1 website.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiadomości głosowe nie są dostępne w tej wersji BeeBEEP. Pobierz za darmo i zainstaluj wersję z tą funkcjonalnością ze strony %1.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="479"/>
         <source>Opening voice message</source>
-        <translation type="unfinished"></translation>
+        <translation>Otwieranie wiadomości głosowej</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="590"/>
@@ -1352,7 +1352,7 @@ Download for free and install the version with this feature from the %1 website.
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="926"/>
         <source>You are trying to send %1 files simultaneously but the maximum allowed is %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Próbujesz wysłać %1 plików jednocześnie, ale dozwolonych jest maksymalnie %2.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="935"/>
@@ -1599,7 +1599,7 @@ Download for free and install the version with this feature from the %1 website.
     <message>
         <location filename="../src/desktop/GuiChat.ui" line="191"/>
         <source>close</source>
-        <translation type="unfinished"></translation>
+        <translation>zamknij</translation>
     </message>
 </context>
 <context>
@@ -1747,7 +1747,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="45"/>
         <source>If you don&apos;t want to show the year to other users use 1900. To remove your birthday use 01/01/1900</source>
-        <translation type="unfinished"></translation>
+        <translation>Jeśli nie chcesz pokazywać roku innym użytkownikom użyj 1900. By usunąć Twoje urodziny użyj 01/01/1900</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="100"/>
@@ -1938,109 +1938,109 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="38"/>
         <source>Time left</source>
-        <translation type="unfinished"></translation>
+        <translation>Pozostało czasu</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="38"/>
         <source>File</source>
-        <translation type="unfinished">Plik</translation>
+        <translation>Plik</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="38"/>
         <source>User</source>
-        <translation type="unfinished">Użytkownik</translation>
+        <translation>Użytkownik</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="38"/>
         <source>Status</source>
-        <translation type="unfinished">Status</translation>
+        <translation>Status</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="162"/>
         <source>Do you want to cancel the transfer of %1?</source>
-        <translation type="unfinished">Czy chcesz przerwać transfer %1?</translation>
+        <translation>Czy chcesz przerwać transfer %1?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="163"/>
         <source>Yes and delete the partially downloaded file</source>
-        <translation type="unfinished"></translation>
+        <translation>Tak i skasuj częściowo pobrany plik</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="164"/>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="315"/>
         <source>Yes</source>
-        <translation type="unfinished">Tak</translation>
+        <translation>Tak</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="164"/>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="315"/>
         <source>No</source>
-        <translation type="unfinished">Nie</translation>
+        <translation>Nie</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="268"/>
         <source>Please select a file transfer to open the menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Proszę wybierz transfer plików by otworzyć menu</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="314"/>
         <source>Do you want to try resuming the transfer of %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Czy chcesz spróbować wznowić transfer %1?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="319"/>
         <source>Resuming transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Wznawianie transferu</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="319"/>
         <source>Please wait</source>
-        <translation type="unfinished">Proszę czekać</translation>
+        <translation>Proszę czekać</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="208"/>
         <source>You cannot open this file if the transfer has not been completed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie możesz otworzyć tego pliku jeśli transfer nie został zakończony.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="208"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="245"/>
         <source>Pause transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Wstrzymaj transfer</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="248"/>
         <source>Cancel transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Anuluj transfer</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="256"/>
         <source>Resume transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Wznów transfer</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="258"/>
         <source>Try to resume transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Spróbuj wznowić transfer</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="261"/>
         <source>Remove transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Usuń transfer</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="265"/>
         <source>Hide all transfers stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukryj wszystkie zatrzymane transfery</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="271"/>
         <source>No file transfer in progress</source>
-        <translation type="unfinished"></translation>
+        <translation>Brak transferu plików w toku</translation>
     </message>
 </context>
 <context>
@@ -2052,7 +2052,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="51"/>
         <source>Edit group chat</source>
-        <translation type="unfinished">Edytuj czat grupowy</translation>
+        <translation>Edytuj czat grupowy</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="54"/>
@@ -2226,17 +2226,17 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiHome.cpp" line="106"/>
         <source>Clear system messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyczyść wiadomości systemowe</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiHome.cpp" line="142"/>
         <source>Click here to see the latest news about BeeBEEP project</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tutaj by zobaczyć najnowsze wiadomości na temat projektu BeeBEEP</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiHome.cpp" line="147"/>
         <source>Click here to read more</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tutaj by przeczytać więcej</translation>
     </message>
 </context>
 <context>
@@ -2776,37 +2776,37 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1010"/>
         <source>Show the name and surname of the users</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokazuj imię i nazwisko użytkowników</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1084"/>
         <source>On sending message</source>
-        <translation type="unfinished"></translation>
+        <translation>Przy wysyłaniu wiadomości</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1088"/>
         <source>Do nothing</source>
-        <translation type="unfinished"></translation>
+        <translation>Nic nie rób</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1093"/>
         <source>Minimize chat window</source>
-        <translation type="unfinished"></translation>
+        <translation>Minimalizuj okno czatu</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1098"/>
         <source>Close chat window</source>
-        <translation type="unfinished"></translation>
+        <translation>Zamknij okno czatu</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1188"/>
         <source>Voice message</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiadomość głosowa</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1194"/>
         <source>Maximum duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Maksymalny czas trwania</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1155"/>
@@ -2816,12 +2816,12 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1162"/>
         <source>Resume file transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Wznów transfer plików</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1162"/>
         <source>when possible</source>
-        <translation type="unfinished"></translation>
+        <translation>kiedy możliwe</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1210"/>
@@ -2831,7 +2831,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1222"/>
         <source>Disable BEEP alert if your status is busy</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyłącz alert BEEP jeśli Twój status to zajęty</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1331"/>
@@ -3293,7 +3293,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1035"/>
         <source>Save file transfer messages</source>
-        <translation>Zachowajwiadomości o rtransferze plików</translation>
+        <translation>Zachowaj wiadomości o transferze plików</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1039"/>
@@ -3313,22 +3313,22 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1114"/>
         <source>Select quote text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybierz kolor cytowanego tekstu</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1116"/>
         <source>Select quote background color</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybierz kolor tła cytowanego tekstu</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1192"/>
         <source>Voice encoder</source>
-        <translation type="unfinished"></translation>
+        <translation>Koder głosu</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1227"/>
         <source>Raise main window on new message</source>
-        <translation>Przywróc główne okno przy nowej wiadomości</translation>
+        <translation>Przywróć główne okno przy nowej wiadomości</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1231"/>
@@ -3338,7 +3338,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1235"/>
         <source>Raise previously opened chat on new message</source>
-        <translation>Przywróc poprzednio otwarty czat przy nowej wiadomości</translation>
+        <translation>Przywróć poprzednio otwarty czat przy nowej wiadomości</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1066"/>
@@ -3478,7 +3478,7 @@ Proszę wybrać inną nazwę.</translation>
         <location filename="../src/desktop/GuiMain.cpp" line="1668"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2234"/>
         <source>There will be no saving of &apos;system&apos; and &apos;file transfer&apos; messages if this option is disabled.</source>
-        <translation>Wiadomości systemowe i transferu plików nie będą zachowane jesli ta opcja jest wyłączona.</translation>
+        <translation>Wiadomości systemowe i transferu plików nie będą zachowane jeśli ta opcja jest wyłączona.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1688"/>
@@ -3523,23 +3523,23 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2074"/>
         <source>Please select the number of days that items (such as images) can remain cached.</source>
-        <translation type="unfinished"></translation>
+        <translation>Proszę wybrać liczbę dni, przez które elementy (takie jak obrazki) mają pozostać w pamięci podręcznej.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2075"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2185"/>
         <source>current: %1, never clear: -1, always clear: 0</source>
-        <translation type="unfinished"></translation>
+        <translation>aktualnie: %1, nigdy nie czyść: -1, zawsze czyść: 0</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2098"/>
         <source>Please select the maximum number of files you can queue up for the transfer (current: %1).</source>
-        <translation type="unfinished"></translation>
+        <translation>Proszę wybrać maksymalną liczbę plików w kolejce do transferu (obecnie: %1).</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2156"/>
         <source>Please select the maximum duration (in seconds) that a voice message can have (current: %1).</source>
-        <translation type="unfinished"></translation>
+        <translation>Proszę wybrać maksymalny czas trwania (w sekundach) wiadomości głosowej (obecnie: %1).</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2221"/>
@@ -3574,12 +3574,12 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2279"/>
         <source>Delete partially downloaded files after %1 days</source>
-        <translation type="unfinished"></translation>
+        <translation>Usuń częściowo pobrane pliki po %1 dniach</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2285"/>
         <source>Add up to %1 files to the transfer queue</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj aż do %1 plików do kolejki transferu</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2350"/>
@@ -3724,12 +3724,12 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3210"/>
         <source>Unable to open voice message %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie można otworzyć wiadomości głosowej %1</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3234"/>
         <source>%1: no such file or directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: brak pliku lub katalogu.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3244"/>
@@ -3774,7 +3774,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3633"/>
         <source>%1 updated</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 zaktualizowany</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3827"/>
@@ -3794,37 +3794,37 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3939"/>
         <source>your IP address</source>
-        <translation type="unfinished"></translation>
+        <translation>Twój adres IP</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3940"/>
         <source>to search for users</source>
-        <translation type="unfinished"></translation>
+        <translation>do wyszukiwania użytkowników</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3943"/>
         <source>file transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>transfer plików</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3950"/>
         <source>End-to-end encryption is disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Szyfrowanie end-to-end jest wyłączone</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3955"/>
         <source>End-to-end encryption is enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Szyfrowanie end-to-end jest włączone</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3961"/>
         <source>Data compression is disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Kompresja danych jest wyłączona</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3966"/>
         <source>Data compression is enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Kompresja danych jest włączona</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4430"/>
@@ -3875,7 +3875,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4893"/>
         <source>Restart connection now</source>
-        <translation>Zrestartuj  teraz połączenie</translation>
+        <translation>Zrestartuj teraz połączenie</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4893"/>
@@ -4070,7 +4070,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3386"/>
         <source>Now %1 will start on windows boot.</source>
-        <translation>%1 będzie startować przy uruchomieniu windows.</translation>
+        <translation>%1 będzie startować przy uruchomieniu systemu.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3394"/>
@@ -4101,7 +4101,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2184"/>
         <source>Please select the number of days that partially downloaded files can remain cached.</source>
-        <translation type="unfinished"></translation>
+        <translation>Proszę wybrać liczbę dni, przez które częściowo pobrane pliki mają pozostać w pamięci podręcznej.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3176"/>
@@ -4147,7 +4147,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3942"/>
         <source>chat messages</source>
-        <translation type="unfinished"></translation>
+        <translation>wiadomości czatu</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4018"/>
@@ -4200,12 +4200,12 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1197"/>
         <source>Use the integrated voice message player</source>
-        <translation type="unfinished"></translation>
+        <translation>Użyj zintegrowanego odtwarzacza wiadomości głosowych</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1218"/>
         <source>Enable BEEP alert also for active chat windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Włącz alert BEEP także dla aktywnych okien czatu</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1532"/>
@@ -4234,7 +4234,7 @@ Proszę wybrać inną nazwę.</translation>
     </message>
     <message>
         <source>Please select the number of days that items (such as images) can remain cached (current: %1, never clear: -1, always clear: 0).</source>
-        <translation type="obsolete">Proszę wybrać liczbę dni, przez które elementy (takie jka obrazy) mogą pozostawać w pamięci podręcznej (obecnie: %1. nigdy nie czyść: -1, zawsze czyść: 0).</translation>
+        <translation type="obsolete">Proszę wybrać liczbę dni, przez które elementy (takie jak obrazy) mogą pozostawać w pamięci podręcznej (obecnie: %1, nigdy nie czyść: -1, zawsze czyść: 0).</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2695"/>
@@ -4465,7 +4465,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.ui" line="160"/>
         <source>Test connection</source>
-        <translation>Sprawdż połączenie</translation>
+        <translation>Sprawdź połączenie</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.ui" line="216"/>
@@ -4518,7 +4518,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="367"/>
         <source>Always broadcast to local subnet address</source>
-        <translation type="unfinished"></translation>
+        <translation>Zawsze rozgłaszaj na lokalny adres podsieci</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="388"/>
@@ -4740,98 +4740,98 @@ Proszę wybrać inną nazwę.</translation>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="193"/>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="343"/>
         <source>Recording</source>
-        <translation type="unfinished"></translation>
+        <translation>Nagrywanie</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="197"/>
         <source>Paused</source>
-        <translation type="unfinished"></translation>
+        <translation>Wstrzymane</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="201"/>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Gotowe</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="37"/>
         <source>Record your voice message</source>
-        <translation type="unfinished"></translation>
+        <translation>Nagraj swoją wiadomość głosową</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="47"/>
         <source>Click to start recording your message</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij by zacząć nagrywać wiadomość</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="152"/>
         <source>Stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>Zatrzymany</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="152"/>
         <source>Reached the maximum duration of the voice message.</source>
-        <translation type="unfinished"></translation>
+        <translation>Osiągnięto maksymalny czas trwania wiadomości głosowej.</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="229"/>
         <source>Pause</source>
-        <translation type="unfinished"></translation>
+        <translation>Wstrzymaj</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="234"/>
         <source>Resume</source>
-        <translation type="unfinished"></translation>
+        <translation>Wznów</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="238"/>
         <source>Record</source>
-        <translation type="unfinished"></translation>
+        <translation>Nagraj</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="257"/>
         <source>The message could not be recorded because an error has occurred: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiadomość nie została nagrana z powodu błędu: %1</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="266"/>
         <source>Do you want to start recording your voice message again?</source>
-        <translation type="unfinished"></translation>
+        <translation>Czy chcesz zacząć nagrywanie wiadomości jeszcze raz?</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="267"/>
         <source>Yes, clean and restart</source>
-        <translation type="unfinished"></translation>
+        <translation>Tak, wyczyść i ponów</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="267"/>
         <source>Cancel</source>
-        <translation type="unfinished">Anuluj</translation>
+        <translation>Anuluj</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="275"/>
         <source>No device available for recording voice messages.</source>
-        <translation type="unfinished"></translation>
+        <translation>Brak urządzenia do nagrywania wiadomości głosowych.</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="275"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="279"/>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="308"/>
         <source>Please wait</source>
-        <translation type="unfinished">Proszę czekać</translation>
+        <translation>Proszę czekać</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="333"/>
         <source>Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Głośność</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="333"/>
         <source>muted</source>
-        <translation type="unfinished"></translation>
+        <translation>wyciszone</translation>
     </message>
 </context>
 <context>
@@ -4839,32 +4839,32 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="82"/>
         <source>Voice message</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiadomość głosowa</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="134"/>
         <source>Record</source>
-        <translation type="unfinished"></translation>
+        <translation>Nagraj</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="35"/>
         <source>Cancel</source>
-        <translation type="unfinished">Anuluj</translation>
+        <translation>Anuluj</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="65"/>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyślij</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="180"/>
         <source>Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Głośność</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="225"/>
         <source>To</source>
-        <translation type="unfinished">Do</translation>
+        <translation>Do</translation>
     </message>
 </context>
 <context>
@@ -4872,17 +4872,17 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="36"/>
         <source>Voice encoder settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustawienia kodera głosu</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="40"/>
         <source>Use custom encoder settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Użyj niestandardowych ustawień kodera</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="40"/>
         <source>expert users only</source>
-        <translation type="unfinished"></translation>
+        <translation>tylko dla ekspertów</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="59"/>
@@ -4892,7 +4892,7 @@ Proszę wybrać inną nazwę.</translation>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="76"/>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="135"/>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Domyślnie</translation>
     </message>
 </context>
 <context>
@@ -4900,82 +4900,82 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="61"/>
         <source>Encoding mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Tryb kodowania</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="83"/>
         <source>Constant bit rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Stała szybkość transmisji</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="90"/>
         <source>Average bit tate</source>
-        <translation type="unfinished"></translation>
+        <translation>Średnia szybkość transmisji</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="104"/>
         <source>Constant quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Stała jakość</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="114"/>
         <source>Two pass</source>
-        <translation type="unfinished"></translation>
+        <translation>Dwa przebiegi</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="207"/>
         <source>Voice message recorder</source>
-        <translation type="unfinished"></translation>
+        <translation>Rejestrator wiadomości głosowych</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="219"/>
         <source>Input device</source>
-        <translation type="unfinished"></translation>
+        <translation>Urządzenie wejściowe</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="239"/>
         <source>Audio codec</source>
-        <translation type="unfinished"></translation>
+        <translation>Kodek audio</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="259"/>
         <source>File container</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontener plików</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="279"/>
         <source>Sample rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Częstotliwość próbkowania</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="299"/>
         <source>Channels</source>
-        <translation type="unfinished"></translation>
+        <translation>Kanały</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="165"/>
         <source>Restore to system defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Przywróć ustawienia domyślne</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="32"/>
         <source>Use system voice encoder</source>
-        <translation type="unfinished"></translation>
+        <translation>Użyj systemowego kodera głosu</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="52"/>
         <source>Use custom settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Użyj niestandardowych ustawień</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="185"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="192"/>
         <source>Cancel</source>
-        <translation type="unfinished">Anuluj</translation>
+        <translation>Anuluj</translation>
     </message>
 </context>
 <context>
@@ -5993,12 +5993,12 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="586"/>
         <source>You are trying to send %1 files simultaneously but the maximum allowed is %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Próbujesz wysłać %1 plików jednocześnie, ale dozwolonych jest maksymalnie %2.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="587"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="595"/>
@@ -6058,7 +6058,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="78"/>
         <source>from %1</source>
-        <translation type="unfinished"></translation>
+        <translation>od %1</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="90"/>
@@ -6073,17 +6073,17 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="123"/>
         <source>none</source>
-        <translation type="unfinished">żaden</translation>
+        <translation>żaden</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="126"/>
         <source>Workgroups</source>
-        <translation type="unfinished">Grupy robocze</translation>
+        <translation>Grupy robocze</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="131"/>
         <source>No shared information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Brak udostępnionej informacji.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="137"/>
@@ -6191,7 +6191,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="476"/>
         <source>Information to display to other users</source>
-        <translation type="unfinished"></translation>
+        <translation>Informacja do wyświetlania innym użytkownikom</translation>
     </message>
     <message>
         <source>Informations to display to other users</source>
@@ -6253,7 +6253,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiVCard.ui" line="406"/>
         <source>Workgroups</source>
-        <translation type="unfinished">Grupy robocze</translation>
+        <translation>Grupy robocze</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.ui" line="505"/>
@@ -6335,12 +6335,12 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiWizard.cpp" line="46"/>
         <source>Press ok to continue or change your username.</source>
-        <translation type="unfinished"></translation>
+        <translation>Naciśnij ok by kontynuować lub zmień swoją nazwę użytkownika.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWizard.cpp" line="67"/>
         <source>Disabled by system administrator</source>
-        <translation>Wyłaczone przez administratora systemu</translation>
+        <translation>Wyłączone przez administratora systemu</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWizard.cpp" line="77"/>
@@ -6557,20 +6557,20 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="721"/>
         <source>Last update</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostatnia aktualizacja</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="726"/>
         <source>Last connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostatnie połączenie</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/utils/BeeUtils.cpp" line="730"/>
         <source>%n unsent message(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n niewysłanych wiadomości</numerusform>
+            <numerusform>%n niewysłanych wiadomości</numerusform>
+            <numerusform>%n niewysłanych wiadomości</numerusform>
         </translation>
     </message>
     <message>
@@ -6722,52 +6722,52 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="70"/>
         <source>Downloading</source>
-        <translation type="unfinished">Pobieranie</translation>
+        <translation>Pobieranie</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="70"/>
         <source>Uploading</source>
-        <translation type="unfinished">Wysyłanie</translation>
+        <translation>Wysyłanie</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="117"/>
         <source>In queue</source>
-        <translation type="unfinished"></translation>
+        <translation>W kolejce</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="123"/>
         <source>Starting</source>
-        <translation type="unfinished">Uruchamianie</translation>
+        <translation>Uruchamianie</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="129"/>
         <source>Cancel transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Anuluj transfer</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="135"/>
         <source>Completed</source>
-        <translation type="unfinished">Zakończony</translation>
+        <translation>Zakończone</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="141"/>
         <source>Not completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Niezakończone</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="147"/>
         <source>Canceled</source>
-        <translation type="unfinished"></translation>
+        <translation>Anulowane</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="153"/>
         <source>Please wait</source>
-        <translation type="unfinished">Proszę czekać</translation>
+        <translation>Proszę czekać</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="159"/>
         <source>Resume transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Wznów transfer</translation>
     </message>
 </context>
 <context>
