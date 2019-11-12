@@ -525,7 +525,7 @@ void Core::checkNetworkInterface()
   {
     if( isConnected() )
     {
-      qWarning() << "Network interface is gone down";
+      qWarning() << "Network interface" << qPrintable( NetworkManager::instance().localInterfaceHardwareAddress() ) << "is gone down";
       dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                              tr( "%1 Network interface %2 is gone down.")
                                .arg( IconManager::instance().toHtml( "network-disconnected.png", "*D*" ),
