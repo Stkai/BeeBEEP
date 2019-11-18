@@ -340,7 +340,7 @@
         <location filename="../src/core/CoreChat.cpp" line="659"/>
         <source>%n unsent message(s) will be sent as soon as possible.</source>
         <translation>
-            <numerusform>%n message non envoyé seront envoyé dès que possible.</numerusform>
+            <numerusform>%n message non envoyé sera envoyé dès que possible.</numerusform>
             <numerusform>%n messages non envoyés seront envoyés dès que possible.</numerusform>
         </translation>
     </message>
