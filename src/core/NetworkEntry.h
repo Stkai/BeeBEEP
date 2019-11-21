@@ -48,11 +48,17 @@ public:
   inline const QString& hardware() const;
   inline const QHostAddress& hostAddress() const;
   inline const QHostAddress& broadcast() const;
+  inline const QHostAddress& netmask() const;
+  inline const QPair<QHostAddress, int> subnet() const;
+
+  bool hasHostAddress( const QHostAddress& ) const;
 
 private:
   QString m_hardware;
   NetworkAddress m_address;
   QHostAddress m_broadcast;
+  QHostAddress m_netmask;
+  QPair<QHostAddress, int> m_subnet;
 
 };
 
@@ -67,5 +73,7 @@ inline bool NetworkEntry::isProtocolValid() const { return m_address.isProtocolV
 inline const QString& NetworkEntry::hardware() const { return m_hardware; }
 inline const QHostAddress& NetworkEntry::hostAddress() const { return m_address.hostAddress(); }
 inline const QHostAddress& NetworkEntry::broadcast() const { return m_broadcast; }
+inline const QHostAddress& NetworkEntry::netmask() const { return m_netmask; }
+inline const QPair<QHostAddress, int> NetworkEntry::subnet() const { return m_subnet; }
 
 #endif // BEEBEEP_NETWORKENTRY_H

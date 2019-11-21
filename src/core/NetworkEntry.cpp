@@ -25,7 +25,7 @@
 
 
 NetworkEntry::NetworkEntry()
- : m_hardware( "" ), m_address(), m_broadcast()
+ : m_hardware( "" ), m_address(), m_broadcast(), m_netmask(), m_subnet()
 {
 }
 
@@ -35,8 +35,25 @@ NetworkEntry::NetworkEntry( const NetworkEntry& ne )
 }
 
 NetworkEntry::NetworkEntry( const QString& hw, const QNetworkAddressEntry& nae )
- : m_hardware( hw ), m_address( nae.ip(), 0 ), m_broadcast( nae.broadcast() )
+ : m_hardware( hw ), m_address( nae.ip(), 0 ), m_broadcast( nae.broadcast() ),
+   m_netmask( nae.netmask() ), m_subnet()
 {
+  if( m_address.isIPv4Address() )
+  {
+    QPair<QHostAddress, int> subnet_host_address;
+    if( !nae.broadcast().toString().endsWith( ".255" ) )
+    {
+      QStringList sl = nae.ip().toString().split( "." );
+      sl.removeLast();
+      sl.append( QString( "0" ) );
+      subnet_host_address = QHostAddress::parseSubnet( QString( "%1/%2" ).arg( sl.join( "." ), nae.netmask().toString() ) );
+    }
+    else
+      subnet_host_address = QHostAddress::parseSubnet( QString( "%1/%2" ).arg( nae.broadcast().toString().replace( ".255", ".0" ), nae.netmask().toString() ) );
+
+    if( !subnet_host_address.first.isNull() )
+      m_subnet = subnet_host_address;
+  }
 }
 
 NetworkEntry& NetworkEntry::operator=( const NetworkEntry& ne )
@@ -46,6 +63,14 @@ NetworkEntry& NetworkEntry::operator=( const NetworkEntry& ne )
     m_hardware = ne.m_hardware;
     m_address = ne.m_address;
     m_broadcast = ne.m_broadcast;
+    m_netmask = ne.m_netmask;
+    m_subnet = ne.m_subnet;
   }
   return *this;
 }
+
+bool NetworkEntry::hasHostAddress( const QHostAddress& host_address ) const
+{
+  return host_address.isInSubnet( m_subnet.first, m_subnet.second );
+}
+

@@ -36,6 +36,7 @@ class NetworkManager
 public:
   bool searchLocalHostAddress();
   bool isMainInterfaceUp() const;
+  bool isInterfaceUp( const QHostAddress& ) const;
   inline bool isMainInterfaceUnavailable() const;
 
   inline const QHostAddress& localHostAddress() const;

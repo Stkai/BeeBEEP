@@ -87,13 +87,23 @@ bool NetworkManager::isMainInterfaceUp() const
     return false;
   }
 
-  QList<NetworkEntry> network_entries = availableNetworkEntries();
-  foreach( NetworkEntry ne, network_entries )
+  foreach( NetworkEntry ne, m_networkEntries )
   {
     if( m_localInterfaceHardwareAddress == ne.hardware() )
       return true;
   }
 
+  return false;
+}
+
+bool NetworkManager::isInterfaceUp( const QHostAddress& host_address ) const
+{
+  QList<NetworkEntry> network_entries = availableNetworkEntries();
+  foreach( NetworkEntry ne, network_entries )
+  {
+    if( host_address.isInSubnet( ne.subnet() ) )
+      return true;
+  }
   return false;
 }
 
@@ -157,7 +167,8 @@ bool NetworkManager::searchLocalHostAddress()
   }
 
   foreach( NetworkEntry ne, m_networkEntries )
-    qDebug() << "Network entry found:" << qPrintable( ne.hardware() ) << "-" << qPrintable( ne.hostAddress().toString() ) << "-" << qPrintable( ne.broadcast().toString() );
+    qDebug() << "Network entry found:" << qPrintable( ne.hardware() ) << "-" << qPrintable( ne.hostAddress().toString() ) << "-" << qPrintable( ne.broadcast().toString() )
+             << qPrintable( ne.netmask().toString() );
 
   // check forced ip
   if( forceLocalHostAddress( Settings::instance().localHostAddressForced() ) )
