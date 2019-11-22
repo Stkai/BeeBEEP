@@ -2,6 +2,9 @@ BEEBEEP (Free Office Messenger) - CHANGELOG - (c) 2019 Marco Mastroddi
 For more informations please visit https://www.beebeep.net
 
 
+BeeBEEP 5.8.3 (in development)
+- Fixed known issue: BeeBEEP prevents the CTRL+ALT+B (or CMD+ALT+B on MacOSX) key sequence in other applications from working.
+
 BeeBEEP 5.8.2
 - New feature: voice messages (you can record your message and send it as file)
 - New feature: file transfer pause/resume
