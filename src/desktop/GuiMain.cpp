@@ -4274,13 +4274,16 @@ void GuiMain::updateShortcuts()
 
 #ifdef BEEBEEP_USE_QXT
   ks = ShortcutManager::instance().shortcut( ShortcutManager::ShowAllChats );
-  if( !ks.isEmpty() )
+  if( !ks.isEmpty() && Settings::instance().useShortcuts() )
   {
     mp_scShowAllChats->setShortcut( ks );
-    mp_scShowAllChats->setEnabled( Settings::instance().useShortcuts() );
+    mp_scShowAllChats->setEnabled( true );
   }
   else
+  {
+    mp_scShowAllChats->unsetShortcut();
     mp_scShowAllChats->setEnabled( false );
+  }
 #endif
   ks = ShortcutManager::instance().shortcut( ShortcutManager::ShowNextUnreadMessage );
   if( !ks.isEmpty() )
