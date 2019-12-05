@@ -174,7 +174,7 @@ Settings::Settings()
   m_acceptConnectionsOnlyFromWorkgroups = false;
   m_maxUserStatusDescriptionInList = 10;
 
-  m_tickIntervalConnectionTimeout = 16;
+  m_tickIntervalConnectionTimeout = TICK_INTERVAL_CONNECTION_TIMEOUT;
   m_useReturnToSendMessage = true;
   m_tickIntervalCheckIdle = 10;
   m_tickIntervalCheckNetwork = 5;
@@ -1387,13 +1387,15 @@ void Settings::load()
   NetworkAddress local_user_network_address = m_localUser.networkAddress();
   local_user_network_address.setHostPort( static_cast<quint16>(sets->value( "ListenerPort", DEFAULT_LISTENER_PORT ).toUInt()) );
   m_localUser.setNetworkAddress( local_user_network_address );
-  m_pongTimeout = qMax( sets->value( "ConnectionActivityTimeout(ms)", 30000 ).toInt(), PONG_DEFAULT_TIMEOUT );
-  m_writingTimeout = qMax( sets->value( "WritingTimeout", 3000 ).toInt(), 3000 );
-  m_tickIntervalConnectionTimeout = qMax( sets->value( "TickIntervalConnectionTimeout", m_tickIntervalConnectionTimeout ).toInt(), 3 );
-  if( m_settingsVersion < 6 && m_tickIntervalConnectionTimeout < 16 )
-    m_tickIntervalConnectionTimeout = 16;
+  m_pongTimeout = qMax( sets->value( "ConnectionActivityTimeout_ms", PONG_DEFAULT_TIMEOUT ).toInt(), 13000 );
+  if( m_pongTimeout > 40000 )
+    m_pongTimeout = 40000;
+  m_writingTimeout = qMax( sets->value( "WritingTimeout_ms", 3000 ).toInt(), 3000 );
+  m_tickIntervalConnectionTimeout = qMax( sets->value( "TickIntervalConnectionTimeout", m_tickIntervalConnectionTimeout ).toInt(), 5 );
+  if( m_settingsVersion < 6 && m_tickIntervalConnectionTimeout < TICK_INTERVAL_CONNECTION_TIMEOUT )
+    m_tickIntervalConnectionTimeout = TICK_INTERVAL_CONNECTION_TIMEOUT;
   m_useLowDelayOptionOnSocket = sets->value( "UseLowDelayOptionOnSocket", false ).toBool();
-  m_delayConnectionAtStartup = qMax( 3000, sets->value( "DelayConnectionAtStartup(ms)", m_delayConnectionAtStartup ).toInt() );
+  m_delayConnectionAtStartup = qMax( 3000, sets->value( "DelayConnectionAtStartup_ms", m_delayConnectionAtStartup ).toInt() );
   m_sendOfflineMessagesToDefaultChat = sets->value( "SendOfflineMessagesToDefaultChat", false ).toBool();
   m_saveMessagesTimestamp = sets->value( "SaveMessagesTimestamp", QDateTime() ).toDateTime();
   if( m_saveMessagesTimestamp.isNull() )
@@ -1770,12 +1772,12 @@ void Settings::save()
   sets->setValue( "TickIntervalCheckIdle", m_tickIntervalCheckIdle );
   sets->setValue( "TickIntervalCheckNetwork", m_tickIntervalCheckNetwork );
   sets->setValue( "ListenerPort", m_localUser.networkAddress().hostPort() );
-  sets->setValue( "ConnectionActivityTimeout(ms)", m_pongTimeout );
-  sets->setValue( "WritingTimeout", m_writingTimeout );
+  sets->setValue( "ConnectionActivityTimeout_ms", m_pongTimeout );
+  sets->setValue( "WritingTimeout_ms", m_writingTimeout );
   sets->setValue( "TickIntervalConnectionTimeout", m_tickIntervalConnectionTimeout );
   sets->setValue( "UseLowDelayOptionOnSocket", m_useLowDelayOptionOnSocket );
   sets->setValue( "TickIntervalBroadcasting", m_tickIntervalBroadcasting );
-  sets->setValue( "DelayConnectionAtStartup(ms)", m_delayConnectionAtStartup );
+  sets->setValue( "DelayConnectionAtStartup_ms", m_delayConnectionAtStartup );
   sets->setValue( "SendOfflineMessagesToDefaultChat", m_sendOfflineMessagesToDefaultChat );
   sets->setValue( "SaveMessagesTimestamp", m_saveMessagesTimestamp );
   sets->setValue( "ClearCacheAfterDays", m_clearCacheAfterDays );
