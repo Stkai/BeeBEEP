@@ -2308,7 +2308,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Ask me</source>
-        <translation>Fragen</translation>
+        <translation type="vanished">Fragen</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -2444,7 +2444,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Generate automatic filename</source>
-        <translation>Dateinamen automatisch erstellen</translation>
+        <translation type="vanished">Dateinamen automatisch erstellen</translation>
     </message>
     <message>
         <source>New message arrived</source>
@@ -3404,6 +3404,22 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Data compression is enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Generate new file name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Overwrite older</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Overwrite different size</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

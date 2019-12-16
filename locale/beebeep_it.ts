@@ -2120,7 +2120,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Generate automatic filename</source>
-        <translation>Genera automaticamente il nome dei file</translation>
+        <translation type="vanished">Genera automaticamente il nome dei file</translation>
     </message>
     <message>
         <source>Status</source>
@@ -2620,7 +2620,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Ask me</source>
-        <translation>Chiedimi</translation>
+        <translation type="vanished">Chiedimi</translation>
     </message>
     <message>
         <source>File transfer is not enabled.</source>
@@ -3593,6 +3593,22 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Data compression is enabled</source>
         <translation>La compressione dei dati è attiva</translation>
+    </message>
+    <message>
+        <source>Generate new file name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Overwrite older</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Overwrite different size</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

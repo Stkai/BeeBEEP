@@ -45,7 +45,7 @@
     </message>
     <message>
         <source>Voice message</source>
-        <translation type="unfinished"></translation>
+        <translation>Голосове повідомлення</translation>
     </message>
 </context>
 <context>
@@ -60,7 +60,7 @@
     </message>
     <message>
         <source>from</source>
-        <translation>із</translation>
+        <translation>від</translation>
     </message>
     <message>
         <source>%1 %2 has added members: %3.</source>
@@ -240,7 +240,7 @@
     </message>
     <message>
         <source>%1 You have refused to download folder %2 from %3.</source>
-        <translation>%1 Ви відмовились завантажувати папку %2 з %3.</translation>
+        <translation>%1 Ви відмовились завантажувати папку %2 із %3.</translation>
     </message>
     <message>
         <source>%1 Zero Configuration started with service name: %2</source>
@@ -512,7 +512,7 @@
     </message>
     <message>
         <source>help page</source>
-        <translation>Сторінка допомоги</translation>
+        <translation>Сторінку допомоги</translation>
     </message>
     <message>
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
@@ -536,35 +536,35 @@
     </message>
     <message>
         <source>%1 sent a voice message.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 відправив голосове повідомлення.</translation>
     </message>
     <message>
         <source>Listen</source>
-        <translation type="unfinished"></translation>
+        <translation>Прослухати</translation>
     </message>
     <message>
         <source>voice message</source>
-        <translation type="unfinished"></translation>
+        <translation>голосове повідомлення</translation>
     </message>
     <message>
         <source>%1 Unable to send voice message. File transfer is disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Неможливо відправити голосове повідомлення. Передача файлів відключена.</translation>
     </message>
     <message>
         <source>%1 %2: voice message not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2: голосове повідомлення не знайдено.</translation>
     </message>
     <message>
         <source>The voice message will be delivered to %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Голосове повідомлення доставлено до %1.</translation>
     </message>
     <message>
         <source>%1 %2 has refused to download the file: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 відмовився завантажувати цей файл %3</translation>
     </message>
     <message>
         <source>%1 %2 is sending to you the voice message: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 відправляє вам голосове повідомлення: %3</translation>
     </message>
     <message>
         <source>%1 %2 is sending to you the file: %3</source>
@@ -572,67 +572,67 @@
     </message>
     <message>
         <source>End-to-end encryption is disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Наскрізне шифрування вимкнуто</translation>
     </message>
     <message>
         <source>but encrypted connections allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>тільки шифроване з’єднання доступне</translation>
     </message>
     <message>
         <source>End-to-end encryption is enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Наскрізне шифрування увімкнуто</translation>
     </message>
     <message>
         <source>but not encrypted connections allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>тільки нешифроване з’єднання доступне</translation>
     </message>
     <message>
         <source>%1 has end-to-end encryption disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>у %1 наскрізне шифрування вимкнуто</translation>
     </message>
     <message>
         <source>%1 Unable to send %2 to %3: file not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Неможливо відправити %2 до %3: файл не знайдено.</translation>
     </message>
     <message>
         <source>%1 Unable to send %2 to %3: file is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Неможливо відправити %2 до %3: файл порожній.</translation>
     </message>
     <message>
         <source>%1 has end-to-end encryption enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>у %1 наскрізне шифрування увімкнуто</translation>
     </message>
     <message>
         <source>%1 sent %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 надіслано %2.</translation>
     </message>
     <message>
         <source>Open %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Відкрити %1.</translation>
     </message>
     <message>
         <source>%1 Sending %2 to %3.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Надсилається %2 до %3.</translation>
     </message>
     <message>
         <source>%1 Sending folder %2 to %3.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Надсилається папка %2 до %3.</translation>
     </message>
     <message>
         <source>Unsent messages had an incorrect authorization code and will not be sent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невідправлені повідомлення мали неправильний код авторизації і тому не надсилаються.</translation>
     </message>
     <message numerus="yes">
         <source>%n unsent message(s) will be sent as soon as possible.</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n невідправлене повідомлення буде надіслані якнайшвидше.</numerusform>
+            <numerusform>%n невідправлених повідомлень будуть надіслані якнайшвидше.</numerusform>
+            <numerusform>%n невідправлених повідомлень будуть надіслані якнайшвидше.</numerusform>
         </translation>
     </message>
     <message>
         <source>Offline messages sent to %1.</source>
-        <translation type="unfinished">Офлайн повідомлення відправлені %2. {1.?}</translation>
+        <translation>Офлайн повідомлення відправлені до %1.</translation>
     </message>
 </context>
 <context>
@@ -729,43 +729,43 @@
     </message>
     <message>
         <source>file no longer exists</source>
-        <translation type="unfinished"></translation>
+        <translation>файл більше не існує</translation>
     </message>
     <message>
         <source>Unable to seek %1 bytes in file %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Не можливо знайти %1 байт у файлі %2</translation>
     </message>
     <message>
         <source>remote host sent invalid data</source>
-        <translation type="unfinished"></translation>
+        <translation>віддалений хост надіслав недійсні дані</translation>
     </message>
     <message>
         <source>Transfer canceled</source>
-        <translation type="unfinished"></translation>
+        <translation>Передача відмінена</translation>
     </message>
     <message>
         <source>Transfer paused after %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Передача призупинена після %1</translation>
     </message>
     <message>
         <source>%1 bytes uploaded but the remote file size is %2 bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 байтов відправлено, але розмір віддаленого файлу всього %2 байт</translation>
     </message>
     <message>
         <source>Transfer is about to pause</source>
-        <translation type="unfinished"></translation>
+        <translation>Передача збирається призупинитись</translation>
     </message>
     <message>
         <source>Starting transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Старт передачі</translation>
     </message>
     <message>
         <source>Transfer queued</source>
-        <translation type="unfinished"></translation>
+        <translation>Передача у черзі</translation>
     </message>
     <message>
         <source>Please wait</source>
-        <translation type="unfinished">Зачекайте</translation>
+        <translation>Зачекайте</translation>
     </message>
 </context>
 <context>
@@ -776,7 +776,7 @@
     </message>
     <message>
         <source>auto added</source>
-        <translation>добавлено автоматично</translation>
+        <translation>додано автоматично</translation>
     </message>
     <message>
         <source>Please insert a valid IP Address.</source>
@@ -800,7 +800,7 @@
     </message>
     <message>
         <source>Please insert a valid Port or use the default one %1.</source>
-        <translation>Будь ласка введіть корректний порт або використовуйте порт по замовчуванню %1.</translation>
+        <translation>Будь ласка введіть корректний порт або використовуйте порт за замовчуванням %1.</translation>
     </message>
     <message>
         <source>Comment</source>
@@ -855,7 +855,7 @@
     </message>
     <message>
         <source>Auto add from your Subnet</source>
-        <translation>Автоматично додати з моєх підмережі</translation>
+        <translation>Автоматично додати з моїх підмереж</translation>
     </message>
     <message>
         <source>Split Subnet in IP Addresses to add all users in that range</source>
@@ -1001,7 +1001,7 @@
     </message>
     <message>
         <source>Chat settings</source>
-        <translation>Настройки чату</translation>
+        <translation>Налаштування чату</translation>
     </message>
     <message>
         <source>You have left this chat</source>
@@ -1013,7 +1013,7 @@
     </message>
     <message>
         <source>Do you want to restore the default font?</source>
-        <translation>Ви хочете відновити шрифт по замовчуванню?</translation>
+        <translation>Ви хочете відновити шрифт за замовчуванням?</translation>
     </message>
     <message>
         <source>Send folder</source>
@@ -1033,11 +1033,11 @@
     </message>
     <message>
         <source>Restore the default font</source>
-        <translation>Відновити шрифт по замовчуванню</translation>
+        <translation>Відновити шрифт за замовчуванням</translation>
     </message>
     <message>
         <source>Show only messages in default chat</source>
-        <translation>Показати тільки повідомлення в чаті по замовчуванню</translation>
+        <translation>Показати тільки повідомлення в чаті за замовчуванням</translation>
     </message>
     <message>
         <source>Spell checking</source>
@@ -1169,48 +1169,49 @@
     </message>
     <message>
         <source>Clear system messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистити системні повідомлення</translation>
     </message>
     <message>
         <source>Quote selected text</source>
-        <translation type="unfinished"></translation>
+        <translation>Цитувати вибраний текст</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Закрити</translation>
+        <translation>Закрити</translation>
     </message>
     <message>
         <source>Close chat window on sending message</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрити вікно чату після надсилання повідомлення</translation>
     </message>
     <message>
         <source>Minimize</source>
-        <translation type="unfinished"></translation>
+        <translation>Мінізувати</translation>
     </message>
     <message>
         <source>Minimize chat window on sending message</source>
-        <translation type="unfinished"></translation>
+        <translation>Мінізувати вікно чату після надсилання повідомлення</translation>
     </message>
     <message>
         <source>Record voice message</source>
-        <translation type="unfinished"></translation>
+        <translation>Записати голосове повідомлення</translation>
     </message>
     <message>
         <source>File transfer must be enabled to send voice messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Передача файлів мусить бути включена для надсилання голосових повідомлень</translation>
     </message>
     <message>
         <source>Opening voice message</source>
-        <translation type="unfinished"></translation>
+        <translation>Відкриття голосового повідомлення</translation>
     </message>
     <message>
         <source>You are trying to send %1 files simultaneously but the maximum allowed is %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви намагаєтесь надсилати %1 файли одночасно, але максимально дозволено %2.</translation>
     </message>
     <message>
         <source>Voice messages are not available with this version of BeeBEEP.
 Download for free and install the version with this feature from the %1 website.</source>
-        <translation type="unfinished"></translation>
+        <translation>Голосові повідомлення недоступні в цій версії BeeBEEP.
+Завантажте безкоштовно та встановіть версію з цією функцією з веб-сайту %1.</translation>
     </message>
 </context>
 <context>
@@ -1283,7 +1284,7 @@ Download for free and install the version with this feature from the %1 website.
     </message>
     <message>
         <source>close</source>
-        <translation type="unfinished"></translation>
+        <translation>закрити</translation>
     </message>
 </context>
 <context>
@@ -1449,7 +1450,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>If you don&apos;t want to show the year to other users use 1900. To remove your birthday use 01/01/1900</source>
-        <translation type="unfinished"></translation>
+        <translation>Якщо ви не бажаєте показувати рік іншим користувачам, встановіть рік 1900. Щоб видалити день народження, встановіть 01/01/1900</translation>
     </message>
 </context>
 <context>
@@ -1557,19 +1558,19 @@ Please select a different name.</source>
     <name>GuiFileTransfer</name>
     <message>
         <source>Time left</source>
-        <translation type="unfinished">Залишилось часу</translation>
+        <translation>Залишилось часу</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished">Файл</translation>
+        <translation>Файл</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished">Користувач</translation>
+        <translation>Користувач</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished">Статус</translation>
+        <translation>Статус</translation>
     </message>
     <message>
         <source>Remove all completed transfers</source>
@@ -1577,71 +1578,71 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Do you want to cancel the transfer of %1?</source>
-        <translation type="unfinished">Ви хочете відминити передачу %1?</translation>
+        <translation>Ви хочете відминити передачу %1?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished">Так</translation>
+        <translation>Так</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished">Ні</translation>
+        <translation>Ні</translation>
     </message>
     <message>
         <source>You cannot open this file if the transfer has not been completed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви не можете відкрити файл, якщо передача ще не завершена.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>OК</translation>
     </message>
     <message>
         <source>Yes and delete the partially downloaded file</source>
-        <translation type="unfinished"></translation>
+        <translation>Так і видалити частково завантажені файли</translation>
     </message>
     <message>
         <source>Do you want to try resuming the transfer of %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви хочете відновинити передачу %1?</translation>
     </message>
     <message>
         <source>Pause transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Пауза передачі</translation>
     </message>
     <message>
         <source>Cancel transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Відмінити передачу</translation>
     </message>
     <message>
         <source>Resume transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Відновити передачу</translation>
     </message>
     <message>
         <source>Try to resume transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Спробуйте відновити передачу</translation>
     </message>
     <message>
         <source>Remove transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Видалити передачу</translation>
     </message>
     <message>
         <source>Hide all transfers stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>Сховати всі зупинені передачі</translation>
     </message>
     <message>
         <source>No file transfer in progress</source>
-        <translation type="unfinished"></translation>
+        <translation>Не відбувається передача файлів</translation>
     </message>
     <message>
         <source>Please select a file transfer to open the menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть передачу файлу, щоб відкрити це меню</translation>
     </message>
     <message>
         <source>Resuming transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Відновлення передачі</translation>
     </message>
     <message>
         <source>Please wait</source>
-        <translation type="unfinished">Зачекайте</translation>
+        <translation>Зачекайте будь ласка</translation>
     </message>
 </context>
 <context>
@@ -1716,18 +1717,18 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Edit group chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Редагувати груповий чат</translation>
     </message>
 </context>
 <context>
     <name>GuiGroupList</name>
     <message>
         <source>Disable notifications</source>
-        <translation>Виключити сповіщення</translation>
+        <translation>Виключити оповіщення</translation>
     </message>
     <message>
         <source>Enable notifications</source>
-        <translation>Включити сповіщення</translation>
+        <translation>Включити оповіщення</translation>
     </message>
     <message>
         <source>Please wait for two or more users</source>
@@ -1793,15 +1794,15 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Clear system messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистити системні повідомлення</translation>
     </message>
     <message>
         <source>Click here to see the latest news about BeeBEEP project</source>
-        <translation type="unfinished"></translation>
+        <translation>Натисніть тут для перегляду останіх новин про проект BeeBEEP</translation>
     </message>
     <message>
         <source>Click here to read more</source>
-        <translation type="unfinished"></translation>
+        <translation>Клацніть тут для подальшого перегляду</translation>
     </message>
 </context>
 <context>
@@ -1874,7 +1875,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Restore to default language</source>
-        <translation>Відновити мову по замовчуванню</translation>
+        <translation>Відновити мову за замовчуванням</translation>
     </message>
 </context>
 <context>
@@ -2124,7 +2125,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Select download folder</source>
-        <translation>Виберить папку для завантаження</translation>
+        <translation>Виберить папку завантажень</translation>
     </message>
     <message>
         <source>By account name and domain name</source>
@@ -2224,7 +2225,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Restore default emoticons</source>
-        <translation>Відновити смайли по-замовчуванню</translation>
+        <translation>Відновити смайли по-замовчуванням</translation>
     </message>
     <message>
         <source>You are using custom emoticons in folder %1.</source>
@@ -2232,7 +2233,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>milliseconds, 5000 default</source>
-        <translation>мілісекунд, 5000 по замовчуванню</translation>
+        <translation>мілісекунд, 5000 за замовчуванням</translation>
     </message>
     <message>
         <source>Enable file sharing</source>
@@ -2256,7 +2257,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>The default BEEP will be used</source>
-        <translation>Буде використано звуковой сигнал по замовчуванню</translation>
+        <translation>Буде використано звуковой сигнал за замовчуванням</translation>
     </message>
     <message>
         <source>Do you want to disconnect from %1 network?</source>
@@ -2304,7 +2305,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Ask me</source>
-        <translation>Запитати мене</translation>
+        <translation type="vanished">Запитати мене</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -2352,7 +2353,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Default language is restored.</source>
-        <translation>Мова по замовчуванню відновлена.</translation>
+        <translation>Мова за замовчуванням відновлена.</translation>
     </message>
     <message>
         <source>connected</source>
@@ -2380,7 +2381,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>You are using the default emoticons.</source>
-        <translation>Ви використовуєте смайли по замовчуванню.</translation>
+        <translation>Ви використовуєте смайли за замовчуванням.</translation>
     </message>
     <message>
         <source>%1 is online</source>
@@ -2400,7 +2401,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Restore default icons</source>
-        <translation>Відновити іконки по замовчуванню</translation>
+        <translation>Відновити іконки за замовчуванням</translation>
     </message>
     <message>
         <source>Delay first connection</source>
@@ -2416,7 +2417,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Prompt on quit when connected</source>
-        <translation>Запитувати при виході, якщо в з&apos;єднанні</translation>
+        <translation>Запитувати про вихід, якщо в з&apos;єднанні</translation>
     </message>
     <message>
         <source>active</source>
@@ -2448,7 +2449,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Generate automatic filename</source>
-        <translation>Генерувати автоматично назви файлів</translation>
+        <translation type="vanished">Генерувати автоматично назви файлів</translation>
     </message>
     <message>
         <source>Send offline messages also to chat with all users</source>
@@ -2536,7 +2537,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Default mode</source>
-        <translation>Режим по замовчуванню</translation>
+        <translation>Режим за замовчуванням</translation>
     </message>
     <message>
         <source>Add in the head</source>
@@ -2588,7 +2589,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Show only message notifications</source>
-        <translation>Показати лише сповіщення про повідомлення</translation>
+        <translation>Показати лише повіщення про повідомлення</translation>
     </message>
     <message>
         <source>%1 removed</source>
@@ -2624,7 +2625,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Restore default font</source>
-        <translation>Відновити шрифт по замовчуванню</translation>
+        <translation>Відновити шрифт за замовчуванням</translation>
     </message>
     <message>
         <source>Unable to set dictionary: %1</source>
@@ -2676,7 +2677,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Show file notifications</source>
-        <translation>Показувати сповіщення про файли</translation>
+        <translation>Показувати оповіщення про файли</translation>
     </message>
     <message>
         <source>Starting</source>
@@ -2700,7 +2701,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>default</source>
-        <translation>по замовчуванню</translation>
+        <translation>за замовчуванням</translation>
     </message>
     <message>
         <source>Tip of the day</source>
@@ -2728,7 +2729,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>You are using the default icons.</source>
-        <translation>Ви використовуєте іконки по замовчуванню.</translation>
+        <translation>Ви використовуєте іконки за замовчуванням.</translation>
     </message>
     <message>
         <source>Create new group chat</source>
@@ -2764,7 +2765,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Enable tray icon notifications</source>
-        <translation>Включити сповіщення в треї</translation>
+        <translation>Включити оповіщення в треї</translation>
     </message>
     <message>
         <source>Show minimized</source>
@@ -2940,7 +2941,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>-1 default, 10 low, 60 medium, 100 high</source>
-        <translation>-1 по замовчуванню, 10 низька, 60 середня, 100 висока</translation>
+        <translation>-1 за замовчуванням, 10 низька, 60 середня, 100 висока</translation>
     </message>
     <message>
         <source>You are %1%2</source>
@@ -3036,7 +3037,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Enable notifications also for chat with all users</source>
-        <translation>Увімкніть сповіщення також для спілкування з усіма користувачами</translation>
+        <translation>Увімкнути оповіщення також для спілкування з усіма користувачами</translation>
     </message>
     <message>
         <source>Select chat background color</source>
@@ -3088,7 +3089,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Restore the colors to the default ones</source>
-        <translation>Встановити колір по замовчуванню</translation>
+        <translation>Встановити колір за замовчуванням</translation>
     </message>
     <message>
         <source>You must close and reopen the chat windows to see the changes applied.</source>
@@ -3096,7 +3097,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Do you really want to restore the colors to the default ones?</source>
-        <translation>Ви дійсно хочете відновити колір до по замовчуванню?</translation>
+        <translation>Ви дійсно хочете відновити колір до за замовчуванням?</translation>
     </message>
     <message>
         <source>Show the user list</source>
@@ -3168,7 +3169,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>(current: %1, default: %2, all: -1, none: 0)</source>
-        <translation>(поточне: %1, по замовчуванню:%2, усі: -1, жодного: 0)</translation>
+        <translation>(поточне: %1, за замовчуванням:%2, усі: -1, жодного: 0)</translation>
     </message>
     <message>
         <source>Saved chats</source>
@@ -3212,7 +3213,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Notifications</source>
-        <translation>Сповіщення</translation>
+        <translation>Оповіщення</translation>
     </message>
     <message>
         <source>Show online users only</source>
@@ -3244,134 +3245,150 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Restart connection now</source>
-        <translation>Перезавантажте з’єднання зараз</translation>
+        <translation>Перезавантажити з’єднання зараз</translation>
     </message>
     <message>
         <source>Restart later manually</source>
-        <translation>Перезавантажте вручну пізніше</translation>
+        <translation>Перезавантажити вручну пізніше</translation>
     </message>
     <message>
         <source>Select quote text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть колір тексту цитати</translation>
     </message>
     <message>
         <source>Select quote background color</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть колір фону цитати</translation>
     </message>
     <message>
         <source>On sending message</source>
-        <translation type="unfinished"></translation>
+        <translation>Після надсилання повідомлення</translation>
     </message>
     <message>
         <source>Do nothing</source>
-        <translation type="unfinished"></translation>
+        <translation>Нічого не робити</translation>
     </message>
     <message>
         <source>Minimize chat window</source>
-        <translation type="unfinished"></translation>
+        <translation>Згорнути вікно чату</translation>
     </message>
     <message>
         <source>Close chat window</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрити вікно чату</translation>
     </message>
     <message>
         <source>Voice message</source>
-        <translation type="unfinished"></translation>
+        <translation>Голосове повідомлення</translation>
     </message>
     <message>
         <source>Maximum duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Максимальна тривалість</translation>
     </message>
     <message>
         <source>Please select the maximum duration (in seconds) that a voice message can have (current: %1).</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть максимальну тривалість (в секундах) голосового повідомлення, що може бути (поточна:%1).</translation>
     </message>
     <message>
         <source>Unable to open voice message %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможливо відкрити повідомлення %1</translation>
     </message>
     <message>
         <source>Use the integrated voice message player</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати інтегрований програвач повідомлень</translation>
     </message>
     <message>
         <source>%1: no such file or directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: немає такого файлу чи каталогу.</translation>
     </message>
     <message>
         <source>your IP address</source>
-        <translation type="unfinished"></translation>
+        <translation>ваша IP-адреса</translation>
     </message>
     <message>
         <source>to search for users</source>
-        <translation type="unfinished"></translation>
+        <translation>до пошуку користувачів</translation>
     </message>
     <message>
         <source>file transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>передача файлу</translation>
     </message>
     <message>
         <source>chat messages</source>
-        <translation type="unfinished"></translation>
+        <translation>повідомлення в чаті</translation>
     </message>
     <message>
         <source>Disable BEEP alert if your status is busy</source>
-        <translation type="unfinished"></translation>
+        <translation>Вимкніть оповіщення BEEP, якщо ваш статус зайнятий</translation>
     </message>
     <message>
         <source>Show the name and surname of the users</source>
-        <translation type="unfinished"></translation>
+        <translation>Показувати ім’я та прізвище користувачів</translation>
     </message>
     <message>
         <source>End-to-end encryption is disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Наскрізне шифрування вимкнуто</translation>
     </message>
     <message>
         <source>End-to-end encryption is enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Наскрізне шифрування увімкнуто</translation>
     </message>
     <message>
         <source>%1 updated</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 оновлено</translation>
     </message>
     <message>
         <source>Resume file transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Відновити передачу файлу</translation>
     </message>
     <message>
         <source>when possible</source>
-        <translation type="unfinished"></translation>
+        <translation>по можливості</translation>
     </message>
     <message>
         <source>Enable BEEP alert also for active chat windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Увімкніть оповіщення BEEP також для активних вікон чату</translation>
     </message>
     <message>
         <source>Delete partially downloaded files after %1 days</source>
-        <translation type="unfinished"></translation>
+        <translation>Видалити частково завантажені файли через %1 днів</translation>
     </message>
     <message>
         <source>Please select the number of days that items (such as images) can remain cached.</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, виберіть кількість днів скільки елементи (наприклад, зображення) будуть зберігатись у кеші.</translation>
     </message>
     <message>
         <source>current: %1, never clear: -1, always clear: 0</source>
-        <translation type="unfinished"></translation>
+        <translation>поточне значення: %1, ніколи не видаляти: -1, зажди видаляти: 0</translation>
     </message>
     <message>
         <source>Please select the number of days that partially downloaded files can remain cached.</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, виберіть кількість днів скількичастково скачені файли будуть зберігатись у кеші.</translation>
     </message>
     <message>
         <source>Voice encoder</source>
-        <translation type="unfinished"></translation>
+        <translation>Голосовий кодер</translation>
     </message>
     <message>
         <source>Data compression is disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Стаскання даних відключено</translation>
     </message>
     <message>
         <source>Data compression is enabled</source>
+        <translation>Стискання даних увімкнуто</translation>
+    </message>
+    <message>
+        <source>Generate new file name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Skip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Overwrite older</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Overwrite different size</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3391,7 +3408,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Undo</source>
-        <translation>Відмінити</translation>
+        <translation>Скасувати</translation>
     </message>
     <message>
         <source>Paste</source>
@@ -3438,7 +3455,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>default</source>
-        <translation>по замовчуванню</translation>
+        <translation>за замовчуванням</translation>
     </message>
     <message>
         <source>File HOSTS not found.</source>
@@ -3579,7 +3596,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Use default multicast group address</source>
-        <translation>Використовувати мультикаст адресу групи по замовчуванню</translation>
+        <translation>Використовувати мультикаст адресу групи за замовчуванням</translation>
     </message>
     <message>
         <source>Search users every</source>
@@ -3587,7 +3604,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Preferred subnet</source>
-        <translation>Підмережа по замовчуванню</translation>
+        <translation>Підмережа за замовчуванням</translation>
     </message>
     <message>
         <source>(the same for all clients)</source>
@@ -3619,7 +3636,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Always broadcast to local subnet address</source>
-        <translation type="unfinished"></translation>
+        <translation>Завжди транслювати на локальну адресу підмережі</translation>
     </message>
 </context>
 <context>
@@ -3740,192 +3757,192 @@ Please select a different name.</source>
     <name>GuiRecordVoiceMessage</name>
     <message>
         <source>Recording</source>
-        <translation type="unfinished"></translation>
+        <translation>Записати</translation>
     </message>
     <message>
         <source>Paused</source>
-        <translation type="unfinished"></translation>
+        <translation>Призупинено</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Готово</translation>
     </message>
     <message>
         <source>Pause</source>
-        <translation type="unfinished"></translation>
+        <translation>Пауза</translation>
     </message>
     <message>
         <source>Resume</source>
-        <translation type="unfinished"></translation>
+        <translation>Продовжити</translation>
     </message>
     <message>
         <source>Record</source>
-        <translation type="unfinished"></translation>
+        <translation>Запис</translation>
     </message>
     <message>
         <source>The message could not be recorded because an error has occurred: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Повідомлення не вдалося записати, оскільки сталася помилка: %1</translation>
     </message>
     <message>
         <source>Do you want to start recording your voice message again?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви хочете знову почати записувати своє голосове повідомлення?</translation>
     </message>
     <message>
         <source>Yes, clean and restart</source>
-        <translation type="unfinished"></translation>
+        <translation>Так, очистити та повторити</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Відміна</translation>
     </message>
     <message>
         <source>Please wait</source>
-        <translation type="unfinished">Зачекайте</translation>
+        <translation>Зачекайте будь ласка</translation>
     </message>
     <message>
         <source>Record your voice message</source>
-        <translation type="unfinished"></translation>
+        <translation>Записати ваше голосове повідомлення</translation>
     </message>
     <message>
         <source>Click to start recording your message</source>
-        <translation type="unfinished"></translation>
+        <translation>Клацніть для запису Вашого повідомлення</translation>
     </message>
     <message>
         <source>Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Гучність</translation>
     </message>
     <message>
         <source>muted</source>
-        <translation type="unfinished"></translation>
+        <translation>звук вимкнено</translation>
     </message>
     <message>
         <source>Stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>Зупинити</translation>
     </message>
     <message>
         <source>Reached the maximum duration of the voice message.</source>
-        <translation type="unfinished"></translation>
+        <translation>Досягнуто максимальної тривалості голосового повідомлення.</translation>
     </message>
     <message>
         <source>No device available for recording voice messages.</source>
-        <translation type="unfinished"></translation>
+        <translation>Немає пристроїв для запису голосових повідомлень.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>OК</translation>
     </message>
 </context>
 <context>
     <name>GuiRecordVoiceMessageDialog</name>
     <message>
         <source>Voice message</source>
-        <translation type="unfinished"></translation>
+        <translation>Голосове повідомлення</translation>
     </message>
     <message>
         <source>Record</source>
-        <translation type="unfinished"></translation>
+        <translation>Запис</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Відміна</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Відправити</translation>
     </message>
     <message>
         <source>To</source>
-        <translation type="unfinished">Кому</translation>
+        <translation>Кому</translation>
     </message>
     <message>
         <source>Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Гучність</translation>
     </message>
 </context>
 <context>
     <name>GuiRecordVoiceMessageSettings</name>
     <message>
         <source>Voice encoder settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Налаштуванння голосовго кодування</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>за замовчуванням</translation>
     </message>
     <message>
         <source>Use custom encoder settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати  власні налаштування кодера</translation>
     </message>
     <message>
         <source>expert users only</source>
-        <translation type="unfinished"></translation>
+        <translation>Тільки для досвідчених користувачів</translation>
     </message>
 </context>
 <context>
     <name>GuiRecordVoiceMessageSettingsDialog</name>
     <message>
         <source>Encoding mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Режим кодування</translation>
     </message>
     <message>
         <source>Constant bit rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Постійний бітрейт</translation>
     </message>
     <message>
         <source>Average bit tate</source>
-        <translation type="unfinished"></translation>
+        <translation>усереднений бітрейт</translation>
     </message>
     <message>
         <source>Constant quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Постійна якість</translation>
     </message>
     <message>
         <source>Two pass</source>
-        <translation type="unfinished"></translation>
+        <translation>Два проходи</translation>
     </message>
     <message>
         <source>Input device</source>
-        <translation type="unfinished"></translation>
+        <translation>Пристрій входу</translation>
     </message>
     <message>
         <source>Audio codec</source>
-        <translation type="unfinished"></translation>
+        <translation>Аудіо кодек</translation>
     </message>
     <message>
         <source>File container</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл-контейнер</translation>
     </message>
     <message>
         <source>Sample rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Частота дискретизації</translation>
     </message>
     <message>
         <source>Channels</source>
-        <translation type="unfinished"></translation>
+        <translation>Канали</translation>
     </message>
     <message>
         <source>Restore to system defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Відновити налаштування за замовчуванням</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>OК</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Відміна</translation>
     </message>
     <message>
         <source>Use system voice encoder</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати системнийголосовий кодек</translation>
     </message>
     <message>
         <source>Use custom settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати власні налаштування</translation>
     </message>
     <message>
         <source>Voice message recorder</source>
-        <translation type="unfinished"></translation>
+        <translation>Записати голосове повідомлення</translation>
     </message>
 </context>
 <context>
@@ -4206,7 +4223,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Відмінити</translation>
+        <translation>Відміна</translation>
     </message>
 </context>
 <context>
@@ -4369,11 +4386,11 @@ Please select a different name.</source>
     <name>GuiShareDesktop</name>
     <message>
         <source>Shared desktop</source>
-        <translation>Робочий стіл зі спільним доступом</translation>
+        <translation>Спільний робочий стіл</translation>
     </message>
     <message>
         <source>last update</source>
-        <translation>Крайнє оновлення</translation>
+        <translation>Останє оновлення</translation>
     </message>
 </context>
 <context>
@@ -4683,7 +4700,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Отменить</translation>
+        <translation>Відміна</translation>
     </message>
     <message>
         <source>Dialog</source>
@@ -4801,11 +4818,11 @@ Please select a different name.</source>
     </message>
     <message>
         <source>You are trying to send %1 files simultaneously but the maximum allowed is %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви намагаєтесь надсилати %1 файли одночасно, проте максимально дозволено %2.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>OК</translation>
     </message>
 </context>
 <context>
@@ -4875,19 +4892,19 @@ Please select a different name.</source>
     </message>
     <message>
         <source>from %1</source>
-        <translation type="unfinished"></translation>
+        <translation>від %1</translation>
     </message>
     <message>
         <source>none</source>
-        <translation type="unfinished">не визначено</translation>
+        <translation>не визначено</translation>
     </message>
     <message>
         <source>Workgroups</source>
-        <translation type="unfinished"></translation>
+        <translation>Рабочі групи</translation>
     </message>
     <message>
         <source>No shared information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Загальної інформації немає.</translation>
     </message>
 </context>
 <context>
@@ -4950,11 +4967,11 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Regenerate your hash code...</source>
-        <translation>Перегенрація вашого хеш коду...</translation>
+        <translation>Перегенрація вашого хеш-коду...</translation>
     </message>
     <message>
         <source>Information to display to other users</source>
-        <translation type="unfinished"></translation>
+        <translation>Інформація для користувачів</translation>
     </message>
 </context>
 <context>
@@ -5013,7 +5030,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Workgroups</source>
-        <translation type="unfinished"></translation>
+        <translation>Рабочі групи</translation>
     </message>
 </context>
 <context>
@@ -5065,11 +5082,11 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Welcome to &lt;b&gt;%1 Network&lt;/b&gt;.</source>
-        <translation>Ласкаво просимо в мережу&lt;b&gt;%1&lt;/b&gt;.</translation>
+        <translation>Ласкаво просимо в мережу &lt;b&gt;%1&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>Press ok to continue or change your username.</source>
-        <translation type="unfinished"></translation>
+        <translation>Натисніть ОК для продовження або змініть своє ім’я.</translation>
     </message>
 </context>
 <context>
@@ -5135,7 +5152,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Відмінити</translation>
+        <translation>Відміна</translation>
     </message>
 </context>
 <context>
@@ -5158,11 +5175,11 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Accept connections only from your workgroups</source>
-        <translation>Приймати підключенийия тільки від ваших робочих груп</translation>
+        <translation>Приймати підключення тільки від ваших робочих груп</translation>
     </message>
     <message>
         <source>Enter the name of workgroup you want to add </source>
-        <translation>Введіть і&apos;мя робочої групи, яку ви хочете додати </translation>
+        <translation>Введіть і&apos;мя робочої групи, яку хочете додати </translation>
     </message>
 </context>
 <context>
@@ -5244,7 +5261,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>last update</source>
-        <translation type="obsolete">останнє обовлення</translation>
+        <translation type="obsolete">останнє оновлення</translation>
     </message>
     <message>
         <source>Set focus in message box</source>
@@ -5352,11 +5369,11 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Downloading</source>
-        <translation type="unfinished"></translation>
+        <translation>Завантаження</translation>
     </message>
     <message>
         <source>Uploading</source>
-        <translation type="unfinished">Відправка</translation>
+        <translation>Відправка</translation>
     </message>
     <message>
         <source>of</source>
@@ -5364,50 +5381,50 @@ Please select a different name.</source>
     </message>
     <message>
         <source>In queue</source>
-        <translation type="unfinished"></translation>
+        <translation>В черзі</translation>
     </message>
     <message>
         <source>Starting</source>
-        <translation type="unfinished">Старт</translation>
+        <translation>Пуск</translation>
     </message>
     <message>
         <source>Cancel transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Відмінити передачу</translation>
     </message>
     <message>
         <source>Completed</source>
-        <translation type="unfinished">Завершено</translation>
+        <translation>Завершено</translation>
     </message>
     <message>
         <source>Not completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Не завершено</translation>
     </message>
     <message>
         <source>Canceled</source>
-        <translation type="unfinished"></translation>
+        <translation>Відмінено</translation>
     </message>
     <message>
         <source>Resume transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Відновити передачу</translation>
     </message>
     <message>
         <source>Please wait</source>
-        <translation type="unfinished">Зачекайте</translation>
+        <translation>Зачекайте будь ласка</translation>
     </message>
     <message>
         <source>Last update</source>
-        <translation type="unfinished"></translation>
+        <translation>Останє оновлення</translation>
     </message>
     <message>
         <source>Last connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Останє підключення</translation>
     </message>
     <message numerus="yes">
         <source>%n unsent message(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n непередане повідомлення</numerusform>
+            <numerusform>%n непередані повідомлення</numerusform>
+            <numerusform>%n непередані повідомлення</numerusform>
         </translation>
     </message>
 </context>
@@ -5505,7 +5522,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>You can disable message notification from a group right clicking on its name on the list.</source>
-        <translation type="obsolete">Ви можете відключити сповіщення про повідомлення від групи, клацнувши правою кнопкою на ній в списку.</translation>
+        <translation type="obsolete">Ви можете відключити оповіщення про повідомлення від групи, клацнувши правою кнопкою на ній в списку.</translation>
     </message>
     <message>
         <source>&lt;i&gt;Stay hungry, stay foolish.&lt;/i&gt; (Steve Jobs)</source>
