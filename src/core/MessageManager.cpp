@@ -115,7 +115,6 @@ bool MessageManager::saveUnsentMessages()
     return false;
   }
 
-  QDateTime save_timestamp = QDateTime::currentDateTime();
   qDebug() << "Saving unsent messages in" << qPrintable( file_name );
   QDataStream stream( &file );
   stream.setVersion( Settings::instance().dataStreamVersion( false ) );
@@ -169,7 +168,6 @@ bool MessageManager::saveUnsentMessages()
     }
   }
   file.close();
-  m_messagesToSend.clear();
   qDebug() << sl_smr_size << "unsent messages saved";
   return true;
 }
@@ -178,7 +176,6 @@ void MessageManager::addMessageRecord( const MessageRecord& mr )
 {
   m_messagesToSend.append( mr );
 }
-
 
 void MessageManager::addMessageRecords( const QList<MessageRecord>& mr_list )
 {
@@ -189,7 +186,6 @@ void MessageManager::addMessageRecords( const QList<MessageRecord>& mr_list )
   else
     m_messagesToSend.append( mr_list );
 }
-
 
 QString MessageManager::generateSaveMessagesAuthCode() const
 {
