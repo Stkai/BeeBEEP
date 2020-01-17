@@ -53,7 +53,7 @@ QString GuiChatMessage::datetimestampToString( const ChatMessage& cm, bool show_
     if( !date_time_stamp_format.isEmpty() )
       date_time_stamp_format += QString( " " );
     if( Settings::instance().useMessageTimestampWithAP() )
-      date_time_stamp_format += QString( "h:m:s ap" );
+      date_time_stamp_format += QString( "h:mm:ss ap" );
     else
       date_time_stamp_format += QString( "hh:mm:ss" );
   }
