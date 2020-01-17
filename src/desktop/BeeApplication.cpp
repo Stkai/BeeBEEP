@@ -212,7 +212,10 @@ bool BeeApplication::notify( QObject* obj_receiver, QEvent* obj_event )
       removeIdle();
   }
 
-  return QApplication::notify( obj_receiver, obj_event );
+  if( !obj_receiver )
+    return false;
+  else
+    return QApplication::notify( obj_receiver, obj_event );
 }
 
 void BeeApplication::checkIdle()

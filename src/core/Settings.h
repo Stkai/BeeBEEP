@@ -324,7 +324,7 @@ public:
   inline const QString& chatQuoteBackgroundColor() const;
   inline void setChatQuoteTextColor( const QString& );
   inline const QString& chatQuoteTextColor() const;
-  enum ChatOnSendingMessageTypes { SkipOnSendingMessage, MinimizeChatOnSendingMessage,
+  enum ChatOnSendingMessageType { SkipOnSendingMessage, MinimizeChatOnSendingMessage,
                                    CloseChatOnSendingMessage, NumChatOnSendingMessageTypes };
   inline void setChatOnSendingMessage( int );
   inline int chatOnSendingMessage() const;
@@ -374,10 +374,11 @@ public:
   inline bool beepInActiveWindowAlso() const;
   inline void setBeepInActiveWindowAlso( bool );
 
-  inline bool automaticFileName() const;
-  inline void setAutomaticFileName( bool );
-  inline bool overwriteExistingFiles() const;
-  inline void setOverwriteExistingFiles( bool );
+  enum OnExistingFileActionType { GenerateNewFileName, SkipExistingFile, OverwriteExistingFile,
+                                  OverwriteOlderExistingFile, NumOnExistingFileActionTypes };
+  inline int onExistingFileAction() const;
+  inline void setOnExistingFileAction( int );
+  inline bool removeExistingFileOnDownloadCompleted() const;
   inline bool resumeFileTransfer() const;
   inline void setResumeFileTransfer( bool );
 
@@ -756,8 +757,7 @@ private:
   bool m_raiseMainWindowOnNewMessageArrived;
   bool m_alwaysShowFileTransferProgress;
   bool m_showUserPhoto;
-  bool m_automaticFileName;
-  bool m_overwriteExistingFiles;
+  int  m_onExistingFileAction;
   bool m_resumeFileTransfer;
   bool m_showChatToolbar;
   bool m_showOnlyMessagesInDefaultChat;
@@ -1063,10 +1063,9 @@ inline bool Settings::alwaysShowFileTransferProgress() const { return m_alwaysSh
 inline void Settings::setalwaysShowFileTransferProgress( bool new_value ) { m_alwaysShowFileTransferProgress = new_value; }
 inline bool Settings::alwaysOpenChatOnNewMessageArrived() const { return m_alwaysOpenChatOnNewMessageArrived; }
 inline void Settings::setAlwaysOpenChatOnNewMessageArrived( bool new_value ) { m_alwaysOpenChatOnNewMessageArrived = new_value; }
-inline bool Settings::automaticFileName() const { return m_automaticFileName; }
-inline void Settings::setAutomaticFileName( bool new_value ) { m_automaticFileName = new_value; }
-inline bool Settings::overwriteExistingFiles() const { return m_overwriteExistingFiles; }
-inline void Settings::setOverwriteExistingFiles( bool new_value ) { m_overwriteExistingFiles = new_value; }
+inline int Settings::onExistingFileAction() const { return m_onExistingFileAction; }
+inline void Settings::setOnExistingFileAction( int new_value ) { m_onExistingFileAction = new_value; }
+inline bool Settings::removeExistingFileOnDownloadCompleted() const { return m_onExistingFileAction == OverwriteExistingFile || m_onExistingFileAction == OverwriteOlderExistingFile; }
 inline bool Settings::resumeFileTransfer() const { return m_resumeFileTransfer; }
 inline void Settings::setResumeFileTransfer( bool new_value ) { m_resumeFileTransfer = new_value; }
 inline bool Settings::showChatToolbar() const { return m_showChatToolbar; }

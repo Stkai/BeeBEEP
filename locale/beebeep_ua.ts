@@ -767,6 +767,10 @@
         <source>Please wait</source>
         <translation>Зачекайте</translation>
     </message>
+    <message>
+        <source>Transfer skipped</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiAddUser</name>
@@ -2181,7 +2185,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>%1 already exists. Please select a new filename.</source>
-        <translation>%1 уже існує. Будь ласка виберіть нове ім&apos;я файлу.</translation>
+        <translation type="vanished">%1 уже існує. Будь ласка виберіть нове ім&apos;я файлу.</translation>
     </message>
     <message>
         <source>Do you want to leave the chat with %1?</source>
@@ -3385,10 +3389,6 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Overwrite older</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Overwrite different size</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

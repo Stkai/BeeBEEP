@@ -287,7 +287,7 @@ EnableFileTransfer=[true/false] enable file transfer/sharing/box <can be overrul
 EnableFileSharing=[true/false] enable file sharing/box <can be overruled by rc file> (default=false) [4.0.0]
 UseShareBox=[true/false] enable share box (default=false) [3.0.7]
 ShareBoxPath=[string] path of the box shared (default="") [3.0.7]
-SetAutomaticFileName=[true/false] on saving downloaded file BeeBEEP, if a file with the same name exists, add a number at the end and save it
+SetAutomaticFileName=[true/false] on saving downloaded file BeeBEEP, if a file with the same name exists, add a number at the end and save it [obsolete 5.8.3+]
 MaxSimultaneousDownloads= is the max number of simultaneous downloads in file transfer
 MaxQueuedDownloads = is the max number of downloads can be selected in file sharing at once
 MaxSharedFiles=[integer] is the max number of shared files for user (default=4096) [4.0.0]
@@ -296,6 +296,11 @@ FileTransferBufferSize=65456
 ConfirmOnDownloadFile=[true/false] if it is true always prompt before downloading a fileù
 DownloadInUserFolder=[true/false] if it is true BeeBEEP always download files into the folder with the user's name (default=false) [5.6.5]
 ShareList=(do not edit manually)
+OnExistingFileAction=[integer] 0: GenerateNewFileName (default=0) [5.8.3]
+                               1: SkipExistingFile
+                               2: OverwriteExistingFile
+                               3: OverwriteOlderExistingFile
+                               4: OverwriteDifferentSizeExistingFile
 
 [ShareDesktop]
 Enable=[true/false] enable file desktop sharing (default=true) [4.2.0]

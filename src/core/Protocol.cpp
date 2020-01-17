@@ -1314,9 +1314,9 @@ QStringList Protocol::userPathsFromGroupRequestMessage_obsolete( const Message& 
   return m.text().isEmpty() ? QStringList() : m.text().split( PROTOCOL_FIELD_SEPARATOR );
 }
 
-Message Protocol::fileInfoRefusedToMessage( const FileInfo& fi )
+Message Protocol::fileInfoRefusedToMessage( const FileInfo& fi, int proto_version )
 {
-  Message m = fileInfoToMessage( fi );
+  Message m = fileInfoToMessage( fi, proto_version);
   m.addFlag( Message::Refused );
   m.addFlag( Message::Private );
   return m;
@@ -1331,7 +1331,7 @@ Message Protocol::folderRefusedToMessage( const QString& folder_name, const QStr
   return m;
 }
 
-Message Protocol::fileInfoToMessage( const FileInfo& fi )
+Message Protocol::fileInfoToMessage( const FileInfo& fi, int proto_version )
 {
   Message m( Message::File, newId(), fi.name() );
   QStringList sl;
@@ -1347,7 +1347,12 @@ Message Protocol::fileInfoToMessage( const FileInfo& fi )
     sl << QString( "0" );
   sl << fi.chatPrivateId();
   if( fi.lastModified().isValid() )
-    sl << fi.lastModified().toString( Qt::ISODate );
+  {
+    if( proto_version >= FILE_TRANSFER_UTC_MODIFIED_DATE_PROTO_VERSION )
+      sl << fi.lastModified().toUTC().toString( Qt::ISODate );
+    else
+      sl << fi.lastModified().toString( Qt::ISODate );
+  }
   else
     sl << QString( "" );
   sl << fi.mimeType();
@@ -1361,7 +1366,7 @@ Message Protocol::fileInfoToMessage( const FileInfo& fi )
   return m;
 }
 
-FileInfo Protocol::fileInfoFromMessage( const Message& m )
+FileInfo Protocol::fileInfoFromMessage( const Message& m, int proto_version )
 {
   FileInfo fi( 0, FileInfo::Download );
   fi.setName( m.text() );
@@ -1396,7 +1401,12 @@ FileInfo Protocol::fileInfoFromMessage( const Message& m )
     {
       QDateTime dt_last_modified = QDateTime::fromString( sl.takeFirst(), Qt::ISODate );
       if( dt_last_modified.isValid() )
-        fi.setLastModified( dt_last_modified );
+      {
+        if( proto_version >= FILE_TRANSFER_UTC_MODIFIED_DATE_PROTO_VERSION )
+          fi.setLastModified( dt_last_modified.toLocalTime() );
+        else
+          fi.setLastModified( dt_last_modified );
+      }
     }
   }
 

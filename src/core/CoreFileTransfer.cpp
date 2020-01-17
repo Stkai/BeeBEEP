@@ -389,7 +389,7 @@ bool Core::sendFileToUser( const User&u, const QString& file_path, const QString
     if( c )
     {
       icon_html = IconManager::instance().toHtml( "upload.png", "*F*" );
-      Message m = Protocol::instance().fileInfoToMessage( fi );
+      Message m = Protocol::instance().fileInfoToMessage( fi, c->protocolVersion() );
       if( c->sendMessage( m ) )
       {
         qDebug() << "Sending file" << fi.path() << "to" << qPrintable( u.path() );
@@ -444,8 +444,6 @@ void Core::refuseToDownloadFile( VNumber user_id, const FileInfo& fi )
                          .arg( IconManager::instance().toHtml( "download.png", "*F*" ), fi.name(), Bee::userNameToShow( u, true ) ),
                          chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
 
-  Message m = Protocol::instance().fileInfoRefusedToMessage( fi );
-
   Connection* c = connection( u.id() );
   if( !c )
   {
@@ -454,7 +452,10 @@ void Core::refuseToDownloadFile( VNumber user_id, const FileInfo& fi )
   }
 
   if( c->protocolVersion() > 1 )
+  {
+    Message m = Protocol::instance().fileInfoRefusedToMessage( fi, c->protocolVersion() );
     c->sendMessage( m );
+  }
 }
 
 void Core::refuseToDownloadFolder( VNumber user_id, const QString& folder_name, const QString& chat_private_id )

@@ -1146,19 +1146,33 @@ void GuiMain::createMenus()
   mp_menuExistingFile = mp_menuFileTransferSettings->addMenu( tr( "If a file already exists" ) + QString( "..." ) );
   mp_actGroupExistingFile = new QActionGroup( this );
   mp_actGroupExistingFile->setExclusive( true );
-  mp_actOverwriteExistingFile = mp_menuExistingFile->addAction( tr( "Overwrite" ) );
-  mp_actOverwriteExistingFile->setCheckable( true );
-  mp_actOverwriteExistingFile->setChecked( Settings::instance().overwriteExistingFiles() );
-  mp_actGenerateAutomaticFilename = mp_menuExistingFile->addAction( tr( "Generate automatic filename" ) );
-  mp_actGenerateAutomaticFilename->setCheckable( true );
-  mp_actGenerateAutomaticFilename->setChecked( Settings::instance().automaticFileName() );
-  mp_actAskToDoOnExistingFile = mp_menuExistingFile->addAction( tr( "Ask me" ) );
-  mp_actAskToDoOnExistingFile->setCheckable( true );
-  mp_actAskToDoOnExistingFile->setChecked( !Settings::instance().automaticFileName() && !Settings::instance().overwriteExistingFiles() );
-  mp_actGroupExistingFile->addAction( mp_actOverwriteExistingFile );
-  mp_actGroupExistingFile->addAction( mp_actGenerateAutomaticFilename );
-  mp_actGroupExistingFile->addAction( mp_actAskToDoOnExistingFile );
+  act = mp_menuExistingFile->addAction( tr( "Generate new file name" ) );
+  act->setCheckable( true );
+  act->setChecked( true );
+  act->setData( (int)Settings::GenerateNewFileName );
+  mp_actGroupExistingFile->addAction( act );
+  act = mp_menuExistingFile->addAction( tr( "Skip" ) );
+  act->setCheckable( true );
+  act->setData( (int)Settings::SkipExistingFile );
+  mp_actGroupExistingFile->addAction( act );
+  act = mp_menuExistingFile->addAction( tr( "Overwrite" ) );
+  act->setCheckable( true );
+  act->setData( (int)Settings::OverwriteExistingFile );
+  mp_actGroupExistingFile->addAction( act );
+  act = mp_menuExistingFile->addAction( tr( "Overwrite older" ) );
+  act->setCheckable( true );
+  act->setData( (int)Settings::OverwriteOlderExistingFile );
+  mp_actGroupExistingFile->addAction( act );
+  foreach( QAction* act_to_select, mp_actGroupExistingFile->actions() )
+  {
+    if( act_to_select->data().toInt() == Settings::instance().onExistingFileAction() )
+    {
+      act_to_select->setChecked( true );
+      break;
+    }
+  }
   connect( mp_actGroupExistingFile, SIGNAL( triggered( QAction* ) ), this, SLOT( onChangeSettingOnExistingFile( QAction* ) ) );
+
   mp_actResumeFileTransfer = mp_menuFileTransferSettings->addAction( tr( "Resume file transfer" ) + QString( " (%1)" ).arg( tr( "when possible" ) ), this, SLOT( settingsChanged() ) );
   mp_actResumeFileTransfer->setCheckable( true );
   mp_actResumeFileTransfer->setChecked( Settings::instance().resumeFileTransfer() );
@@ -2678,9 +2692,6 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi, const QStrin
   }
 
   int msg_result = make_questions ? 0 : 1;
-  bool auto_file_name = Settings::instance().automaticFileName();
-  if( !make_questions )
-    auto_file_name = true;
 
   if( msg_result == 0 )
   {
@@ -2692,7 +2703,7 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi, const QStrin
           raiseOnTop();
         mp_actViewNewMessage->setEnabled( true );
       }
-      QString msg = tr( "Do you want to download %1 (%2) from %3?" ).arg( fi.name(), Bee::bytesToString( fi.size() ), u.name() );
+      QString msg = tr( "Do you want to download %1 (%2) from %3?" ).arg( fi.name(), Bee::bytesToString( fi.size() ), Bee::userNameToShow( u, false ) );
       msg_result = QMessageBox::question( this, Settings::instance().programName(), msg, tr( "No" ), tr( "Yes" ), tr( "Yes, and don't ask anymore" ), 0, 0 );
     }
     else
@@ -2708,30 +2719,13 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi, const QStrin
 
   if( msg_result > 0 )
   {
-    // Accepted
-    qDebug() << "You accept to download" << fi.name() << "from" << u.path();
-
     QFileInfo qfile_info( download_path, fi.name() );
-    if( qfile_info.exists() )
+    qDebug() << "You accept to download" << fi.name() << "from" << u.path();
+    if( qfile_info.exists() && Settings::instance().onExistingFileAction() == Settings::GenerateNewFileName )
     {
-      if( !Settings::instance().overwriteExistingFiles() )
-      {
-        QString file_name;
-        if( auto_file_name )
-        {
-          file_name = Bee::uniqueFilePath( qfile_info.absoluteFilePath(), true );
-          qDebug() << "File" << qfile_info.absoluteFilePath() << "exists. Save with" << file_name;
-        }
-        else
-        {
-          file_name = FileDialog::getSaveFileName( this,
-                            tr( "%1 already exists. Please select a new filename." ).arg( qfile_info.fileName() ),
-                            qfile_info.absoluteFilePath() );
-          if( file_name.isNull() || file_name.isEmpty() )
-            return false;
-        }
-        qfile_info = QFileInfo( file_name );
-      }
+      QString file_name = Bee::uniqueFilePath( qfile_info.absoluteFilePath(), true );
+      qDebug() << "File" << qfile_info.absoluteFilePath() << "exists. Save it with new path (auto):" << file_name;
+      qfile_info = QFileInfo( file_name );
     }
     FileInfo file_info = fi;
     file_info.setName( qfile_info.fileName() );
@@ -4603,8 +4597,7 @@ void GuiMain::onChangeSettingOnExistingFile( QAction* act )
   if( !act )
     return;
 
-  Settings::instance().setOverwriteExistingFiles( mp_actOverwriteExistingFile->isChecked() );
-  Settings::instance().setAutomaticFileName( mp_actGenerateAutomaticFilename->isChecked() );
+  Settings::instance().setOnExistingFileAction( act->data().toInt() );
   Settings::instance().save();
 }
 

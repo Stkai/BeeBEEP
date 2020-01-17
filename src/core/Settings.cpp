@@ -148,6 +148,7 @@ Settings::Settings()
   m_emoticonSizeInMenu = 24;
   m_emoticonInRecentMenu = 48;
   m_confirmOnDownloadFile = false;
+  m_onExistingFileAction = GenerateNewFileName;
   m_resumeFileTransfer = true;
   m_promptOnCloseEvent = true;
   m_saveUserList = true;
@@ -1464,8 +1465,15 @@ void Settings::load()
     m_fileTransferBufferSize -= mod_buffer_size;
   if( m_fileTransferBufferSize < 2048 )
     m_fileTransferBufferSize = 2048;
-  m_automaticFileName = sets->value( "SetAutomaticFileNameOnSave", true ).toBool();
-  m_overwriteExistingFiles = sets->value( "OverwriteExistingFiles", false ).toBool();
+  bool automatic_file_name = sets->value( "SetAutomaticFileNameOnSave", false ).toBool();
+  if( automatic_file_name )
+    m_onExistingFileAction = GenerateNewFileName;
+  bool overwrite_existing_files = sets->value( "OverwriteExistingFiles", false ).toBool();
+  if( overwrite_existing_files )
+    m_onExistingFileAction = OverwriteExistingFile;
+  m_onExistingFileAction = sets->value( "OnExistingFileAction", (int)m_onExistingFileAction ).toInt();
+  if( m_onExistingFileAction < 0 || m_onExistingFileAction >= NumOnExistingFileActionTypes )
+    m_onExistingFileAction = OverwriteOlderExistingFile;
   m_resumeFileTransfer = sets->value( "ResumeFileTransfer", m_resumeFileTransfer ).toBool();
   m_confirmOnDownloadFile = sets->value( "ConfirmOnDownloadFile", m_confirmOnDownloadFile ).toBool();
   m_downloadInUserFolder = sets->value( "DownloadInUserFolder", false ).toBool();
@@ -1810,8 +1818,7 @@ void Settings::save()
   sets->setValue( "UseShareBox", m_useShareBox );
   sets->setValue( "MaxSharedFiles", m_maxFileShared );
   sets->setValue( "ShareBoxPath", m_shareBoxPath );
-  sets->setValue( "SetAutomaticFileNameOnSave", m_automaticFileName );
-  sets->setValue( "OverwriteExistingFiles", m_overwriteExistingFiles );
+  sets->setValue( "OnExistingFileAction", m_onExistingFileAction );
   sets->setValue( "ResumeFileTransfer", m_resumeFileTransfer );
   sets->setValue( "FileTransferConfirmTimeout", m_fileTransferConfirmTimeout );
   sets->setValue( "FileTransferBufferSize", m_fileTransferBufferSize );

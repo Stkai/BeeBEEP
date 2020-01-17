@@ -339,9 +339,6 @@ private:
   QAction* mp_actSelectDownloadFolder;
   QAction* mp_actSaveWindowGeometry;
   QActionGroup* mp_actGroupExistingFile;
-  QAction* mp_actOverwriteExistingFile;
-  QAction* mp_actGenerateAutomaticFilename;
-  QAction* mp_actAskToDoOnExistingFile;
   QAction* mp_actResumeFileTransfer;
   QAction* mp_actBeepOnNewMessage;
   QActionGroup* mp_actGroupRecognizeUsers;

@@ -36,7 +36,56 @@ void FileTransferPeer::sendDownloadData()
 
 void FileTransferPeer::sendDownloadRequest()
 {
-  if( mp_socket->protocolVersion() >= FILE_TRANSFER_RESUME_PROTO_VERSION )
+  bool skip_file = false;
+  QFileInfo existing_file( m_fileInfo.path() );
+  if( existing_file.exists() )
+  {
+#ifdef BEEBEEP_DEBUG
+    qDebug() << qPrintable( name() ) << "has found that the file" << qPrintable( m_fileInfo.path() ) << "already exists";
+#endif
+    if( Settings::instance().onExistingFileAction() == Settings::SkipExistingFile )
+    {
+      qDebug() << qPrintable( name() ) << "skips to download existing file" << qPrintable( m_fileInfo.path() );
+      m_fileInfo.setStartingPosition( m_fileInfo.size() );
+      m_bytesTransferred = m_fileInfo.size();
+      skip_file = true;
+    }
+    else if( Settings::instance().onExistingFileAction() == Settings::OverwriteExistingFile )
+    {
+      qDebug() << qPrintable( name() ) << "is going to overwrite existing file" << qPrintable( m_fileInfo.path() );
+      m_fileInfo.setStartingPosition( 0 );
+      m_bytesTransferred = 0;
+    }
+    else if( Settings::instance().onExistingFileAction() == Settings::OverwriteOlderExistingFile )
+    {
+      QDateTime file_last_modified = existing_file.lastModified();
+      if( mp_socket->protocolVersion() >= FILE_TRANSFER_UTC_MODIFIED_DATE_PROTO_VERSION )
+        file_last_modified.toUTC();
+      if( file_last_modified < m_fileInfo.lastModified() )
+      {
+        qDebug() << qPrintable( name() ) << "is going to overwrite older existing file" << qPrintable( m_fileInfo.path() );
+        m_fileInfo.setStartingPosition( 0 );
+        m_bytesTransferred = 0;
+      }
+      else
+      {
+        qDebug() << qPrintable( name() ) << "skips to download older existing file" << qPrintable( m_fileInfo.path() );
+        m_fileInfo.setStartingPosition( m_fileInfo.size() );
+        m_bytesTransferred = m_fileInfo.size();
+        skip_file = true;
+      }
+    }
+    else
+    {
+#ifdef BEEBEEP_DEBUG
+      qDebug() << qPrintable( name() ) << "is going to overwrite it";
+#endif
+      m_bytesTransferred = 0;
+      m_fileInfo.setStartingPosition( 0 );
+    }
+  }
+
+  if( !skip_file && mp_socket->protocolVersion() >= FILE_TRANSFER_RESUME_PROTO_VERSION )
   {
     QFileInfo file_info( m_file.fileName() );
     if( file_info.exists() && Settings::instance().resumeFileTransfer() )
@@ -53,7 +102,7 @@ void FileTransferPeer::sendDownloadRequest()
 #else
   qDebug() << qPrintable( name() ) << "sending file request for" << m_fileInfo.name() << "with starting position" << m_fileInfo.startingPosition();
 #endif
-  if( mp_socket->sendData( Protocol::instance().fromMessage( Protocol::instance().fileInfoToMessage( m_fileInfo ), mp_socket->protocolVersion() ) ) )
+  if( mp_socket->sendData( Protocol::instance().fromMessage( Protocol::instance().fileInfoToMessage( m_fileInfo, mp_socket->protocolVersion() ), mp_socket->protocolVersion() ) ) )
   {
     if( mp_socket->protocolVersion() < FILE_TRANSFER_2_PROTO_VERSION )
     {
@@ -87,9 +136,8 @@ void FileTransferPeer::checkDownloadData( const QByteArray& byte_array )
 {
   if( m_state == FileTransferPeer::Request )
   {
-    // after the authentication we receive "HELLO" from the other peer. Otherwise the connection is aborted.
-    // Skip HELLO, but we will send file request;
-    sendTransferData();
+    qWarning() << qPrintable( name() ) << "has found an invalid Request state in FileTransferPeer::checkDownloadData(...)";
+    cancelTransfer();
     return;
   }
 
@@ -102,16 +150,27 @@ void FileTransferPeer::checkDownloadData( const QByteArray& byte_array )
       return;
     }
 
-    FileInfo file_header = Protocol::instance().fileInfoFromMessage( file_header_message );
-
-    m_fileInfo.setSize( file_header.size() );
-    if( file_header.lastModified().isValid() )
-      m_fileInfo.setLastModified( file_header.lastModified() );
-
+    FileInfo file_header = Protocol::instance().fileInfoFromMessage( file_header_message, mp_socket->protocolVersion() );
     if( m_bytesTransferred > 0 && file_header.startingPosition() != m_bytesTransferred )
       m_bytesTransferred = 0;
     m_totalBytesTransferred = m_bytesTransferred;
 
+    if( m_bytesTransferred > 0 && m_file.exists() && m_file.size() == m_totalBytesTransferred )
+    {
+      if( Settings::instance().onExistingFileAction() == Settings::SkipExistingFile )
+      {
+#ifdef BEEBEEP_DEBUG
+        qWarning() << qPrintable( name() ) << "skips to download already transferred file";
+#endif
+        m_isSkipped = true;
+        setTransferCompleted();
+        return;
+      }
+    }
+
+    m_fileInfo.setSize( file_header.size() );
+    if( file_header.lastModified().isValid() )
+      m_fileInfo.setLastModified( file_header.lastModified() );
     setTransferringState();
     sendTransferData();
     return;
@@ -128,22 +187,25 @@ void FileTransferPeer::checkDownloadData( const QByteArray& byte_array )
 
   sendTransferData(); // send to upload client that data is arrived
 
-  if( !m_file.isOpen() )
+  if( m_bytesTransferred > 0 )
   {
-    if( !m_file.open( QIODevice::WriteOnly | QIODevice::Append ) )
+    if( !m_file.isOpen() )
     {
-      setError( tr( "Unable to open file %1" ).arg( m_file.fileName() ) );
+      if( !m_file.open( QIODevice::WriteOnly | QIODevice::Append ) )
+      {
+        setError( tr( "Unable to open file %1" ).arg( m_file.fileName() ) );
+        return;
+      }
+    }
+
+    if( m_file.write( byte_array ) != static_cast<int>( m_bytesTransferred ) )
+    {
+      setError( tr( "Unable to write in the file %1" ).arg( m_file.fileName() ) );
       return;
     }
-  }
 
-  if( m_file.write( byte_array ) != static_cast<int>( m_bytesTransferred ) )
-  {
-    setError( tr( "Unable to write in the file %1" ).arg( m_file.fileName() ) );
-    return;
+    showProgress();
   }
-
-  showProgress();
 
   if( m_totalBytesTransferred > m_fileInfo.size() )
     setError( tr( "%1 bytes downloaded but the file size is only %2 bytes" ).arg( m_totalBytesTransferred ).arg( m_fileInfo.size() ) );
@@ -171,6 +233,3 @@ bool FileTransferPeer::removePartiallyDownloadedFile()
   qWarning() << "Unable to remove partially downloaded file" << qPrintable( m_file.fileName() );
   return false;
 }
-
-
-

@@ -664,7 +664,7 @@ void Core::addListToSavedChats()
 
         if( mr.isVoiceMessage() )
         {
-          FileInfo saved_fi = Protocol::instance().fileInfoFromMessage( mr.message() );
+          FileInfo saved_fi = Protocol::instance().fileInfoFromMessage( mr.message(), Settings::instance().protocolVersion() );
           msg_txt = saved_fi.name();
         }
         else
@@ -775,13 +775,13 @@ int Core::checkOfflineMessagesForUser( const User& u )
           continue;
         }
 
-        FileInfo fi = Protocol::instance().fileInfoFromMessage( mr.message() );
+        FileInfo fi = Protocol::instance().fileInfoFromMessage( mr.message(), c->protocolVersion() );
         QString file_path = QString( "%1%2%3" ).arg( Settings::instance().cacheFolder() ).arg( QDir::separator() ).arg( fi.name() );
         QFileInfo fi_voice( file_path );
         if( fi_voice.exists() )
         {
           FileInfo file_info = mp_fileTransfer->addFile( fi_voice, fi.shareFolder(), fi.isInShareBox(), fi.chatPrivateId(), fi.contentType(), fi.duration() );
-          mr.setMessage( Protocol::instance().fileInfoToMessage( file_info ) );
+          mr.setMessage( Protocol::instance().fileInfoToMessage( file_info, c->protocolVersion() ) );
         }
         else
         {

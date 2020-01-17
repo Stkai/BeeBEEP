@@ -71,9 +71,9 @@ public:
   Message groupChatRefuseMessage( const ChatMessageData& );
   QStringList userPathsFromGroupRequestMessage_obsolete( const Message& ) const;
   QList<UserRecord> userRecordsFromGroupRequestMessage( const Message& ) const;
-  Message fileInfoToMessage( const FileInfo& );
-  Message fileInfoRefusedToMessage( const FileInfo& );
-  FileInfo fileInfoFromMessage( const Message& );
+  Message fileInfoToMessage( const FileInfo&, int proto_version );
+  Message fileInfoRefusedToMessage( const FileInfo&, int proto_version );
+  FileInfo fileInfoFromMessage( const Message&, int proto_version );
   FileInfo fileInfo( const QFileInfo&, const QString& share_folder, bool to_share_box, const QString& chat_private_id, FileInfo::ContentType );
   QString fileInfoHash( const QFileInfo& ) const;
   QString fileInfoHashTmp( VNumber, const QString&, FileSizeType ) const;

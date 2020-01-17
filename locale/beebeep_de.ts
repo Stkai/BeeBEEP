@@ -775,6 +775,10 @@
         <source>Please wait</source>
         <translation type="unfinished">Bitte warten</translation>
     </message>
+    <message>
+        <source>Transfer skipped</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiAddUser</name>
@@ -2188,7 +2192,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>%1 already exists. Please select a new filename.</source>
-        <translation>%1 ist bereits vorhanden. Wähle bitte einen neuen Dateinamen aus.</translation>
+        <translation type="vanished">%1 ist bereits vorhanden. Wähle bitte einen neuen Dateinamen aus.</translation>
     </message>
     <message>
         <source>Do you want to leave the chat with %1?</source>
@@ -3416,10 +3420,6 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Overwrite older</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Overwrite different size</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

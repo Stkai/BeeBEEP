@@ -149,7 +149,7 @@ void Core::parseUserMessage( const User& u, const Message& m )
 
 void Core::parseFileMessage( const User& u, const Message& m )
 {
-  FileInfo fi = Protocol::instance().fileInfoFromMessage( m );
+  FileInfo fi = Protocol::instance().fileInfoFromMessage( m, u.protocolVersion() );
   if( !fi.isValid() )
   {
     qWarning() << "Invalid FileInfo received from user" << u.id() << ": [" << qPrintable( m.data() ) << "]:" << qPrintable( m.text() );
@@ -202,7 +202,7 @@ void Core::parseFileMessage( const User& u, const Message& m )
                                                                        .arg( fi.name() ) );
 
     QFileInfo file_info( to_path );
-    if( file_info.exists() && file_info.isDir() )
+    if( file_info.exists() && file_info.isDir() && Settings::instance().onExistingFileAction() == Settings::GenerateNewFileName )
       to_path = Bee::uniqueFilePath( to_path, false );
 
     qDebug() << "BeeBOX downloads from user" << qPrintable( u.path() ) << "the file" << qPrintable( fi.name() ) << "in path" << qPrintable( to_path );

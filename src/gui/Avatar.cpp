@@ -154,8 +154,13 @@ QPixmap Avatar::create( const QString& user_name, const QString& user_color, con
   av.setColor( user_color );
   av.setSize( icon_size );
 
-  if( av.create() )
-    return av.pixmap();
+  if( !av.create() )
+  {
+     QPixmap pix( icon_size );
+     pix.fill( user_color );
+     return pix;
+  }
   else
-    return IconManager::instance().icon( "beebeep.png" ).pixmap( icon_size );
+    return av.pixmap();
 }
+

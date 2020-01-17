@@ -32,7 +32,8 @@ FileTransferPeer::FileTransferPeer( QObject *parent )
   : QObject( parent ), m_transferType( FileInfo::Upload ), m_id( ID_INVALID ),
     m_fileInfo( ID_INVALID, FileInfo::Upload ), m_file(), m_state( FileTransferPeer::Unknown ),
     m_bytesTransferred( 0 ), m_totalBytesTransferred( 0 ), mp_socket( Q_NULLPTR ),
-    m_socketDescriptor( 0 ), m_remoteUserId( ID_INVALID ), m_serverPort( 0 ), m_elapsedTime( 0 )
+    m_socketDescriptor( 0 ), m_remoteUserId( ID_INVALID ), m_serverPort( 0 ), m_startTimestamp(),
+    m_elapsedTime( 0 ), m_isSkipped( false )
 {
   setObjectName( "FileTransferPeer" );
 #ifdef BEEBEEP_DEBUG
@@ -107,7 +108,8 @@ void FileTransferPeer::startConnection()
   m_bytesTransferred = 0;
   m_totalBytesTransferred = 0;
   m_elapsedTime = 0;
-  m_startTimestamp = QDateTime::currentDateTime();
+  m_startTimestamp = QDateTime();
+  m_isSkipped = false;
 
   if( m_socketDescriptor > 0 )
   {
@@ -134,11 +136,12 @@ void FileTransferPeer::setTransferCompleted()
   qDebug() << qPrintable( name() ) << "has completed the transfer of file" << qPrintable( m_fileInfo.name() ) << "with user id" << remoteUserId();
   m_state = FileTransferPeer::Completed;
   closeAll();
-  if( isDownload() )
+  if( isDownload() && !isSkipped() )
   {
     if( m_fileInfo.path() != m_file.fileName() )
     {
-      if( QFile::exists( m_fileInfo.path() ) && Settings::instance().overwriteExistingFiles() )
+      QFileInfo file_info_completed_file( m_fileInfo.path() );
+      if( file_info_completed_file.exists() && Settings::instance().removeExistingFileOnDownloadCompleted() )
       {
         if( QFile::remove( m_fileInfo.path() ) )
           qDebug() << qPrintable( name() ) << "removes existing file" << qPrintable( m_fileInfo.path() );
@@ -146,7 +149,6 @@ void FileTransferPeer::setTransferCompleted()
           qWarning() << qPrintable( name() ) << "cannot remove existing file" << qPrintable( m_fileInfo.path() );
       }
 
-      QFileInfo file_info_completed_file( m_fileInfo.path() );
       if( file_info_completed_file.exists() )
       {
         QString new_file_path = Bee::uniqueFilePath( m_fileInfo.path(), true );
@@ -182,7 +184,10 @@ void FileTransferPeer::setTransferCompleted()
     }
   }
 
-  emit message( id(), remoteUserId(), m_fileInfo, tr( "Transfer completed in %1" ).arg( Bee::timeToString( m_elapsedTime ) ), m_state );
+  if( isSkipped() )
+    emit message( id(), remoteUserId(), m_fileInfo, tr( "Transfer skipped" ), m_state );
+  else
+    emit message( id(), remoteUserId(), m_fileInfo, tr( "Transfer completed in %1" ).arg( Bee::timeToString( m_elapsedTime ) ), m_state );
   emit operationCompleted();
 }
 
@@ -252,6 +257,7 @@ void FileTransferPeer::setTransferringState()
 {
   if( m_state == FileTransferPeer::Transferring )
     return;
+  m_startTimestamp = QDateTime::currentDateTime();
   m_state = FileTransferPeer::Transferring;
   if( m_fileInfo.isValid() && remoteUserId() != ID_INVALID )
     emit message( id(), remoteUserId(), m_fileInfo, tr( "Starting transfer" ), m_state );

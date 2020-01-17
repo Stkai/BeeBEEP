@@ -52,6 +52,7 @@ public:
   inline void setConnectionDescriptor( qintptr socket_descriptor, quint16 server_port ); // if descriptor = 0 socket tries to connect to remote host (client side)
   void setFileInfo( FileInfo::TransferType, const FileInfo& );
   inline const FileInfo& fileInfo() const;
+  inline bool isSkipped() const;
 
   inline const Message& messageAuth() const; // Read below...
   inline QHostAddress peerAddress() const;
@@ -125,6 +126,7 @@ protected:
   quint16 m_serverPort;
   QDateTime m_startTimestamp;
   int m_elapsedTime;
+  bool m_isSkipped;
 
 };
 
@@ -145,5 +147,6 @@ inline bool FileTransferPeer::isTransferCompleted() const { return m_state == Fi
 inline void FileTransferPeer::setRemoteUserId( VNumber new_value ) { m_remoteUserId = new_value; }
 inline VNumber FileTransferPeer::remoteUserId() const { return mp_socket->userId() != ID_INVALID ? mp_socket->userId() : m_remoteUserId; }
 inline int FileTransferPeer::elapsedTime() const { return m_elapsedTime; }
+inline bool FileTransferPeer::isSkipped() const { return m_isSkipped; }
 
 #endif // BEEBEEP_FILETRANSFERSERVERPEER_H

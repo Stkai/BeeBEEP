@@ -56,7 +56,7 @@ void FileTransferPeer::checkUploadRequest( const QByteArray& byte_array )
     return;
   }
 
-  FileInfo file_info = Protocol::instance().fileInfoFromMessage( m );
+  FileInfo file_info = Protocol::instance().fileInfoFromMessage( m, mp_socket->protocolVersion() );
   if( !file_info.isValid() )
   {
     qWarning() << qPrintable( name() ) << "receives an invalid file info:" << byte_array;
@@ -92,7 +92,7 @@ void FileTransferPeer::sendFileHeader()
     return;
   m_state = FileTransferPeer::FileHeader;
 #ifdef BEEBEEP_DEBUG
-  qDebug() << qPrintable( name() ) << "sends File Size Header for" << m_fileInfo.path();
+  qDebug() << qPrintable( name() ) << "sends File Header for" << m_fileInfo.path();
 #endif
   m_bytesTransferred = 0;
   m_totalBytesTransferred = 0;
@@ -107,6 +107,7 @@ void FileTransferPeer::sendFileHeader()
       if( m_fileInfo.startingPosition() > m_fileInfo.size() )
         m_fileInfo.setStartingPosition( 0 );
       m_bytesTransferred = m_fileInfo.startingPosition();
+      m_isSkipped = m_bytesTransferred == m_fileInfo.size();
     }
   }
   else
@@ -115,7 +116,7 @@ void FileTransferPeer::sendFileHeader()
     return;
   }
 
-  Message file_header_message = Protocol::instance().fileInfoToMessage( m_fileInfo );
+  Message file_header_message = Protocol::instance().fileInfoToMessage( m_fileInfo, mp_socket->protocolVersion() );
   QByteArray file_header = Protocol::instance().fromMessage( file_header_message, mp_socket->protocolVersion() );
 
   if( !mp_socket->sendData( file_header ) )

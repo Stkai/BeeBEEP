@@ -834,6 +834,10 @@
         <source>Please wait</source>
         <translation>Attendere prego</translation>
     </message>
+    <message>
+        <source>Transfer skipped</source>
+        <translation>Trasferimento saltato</translation>
+    </message>
 </context>
 <context>
     <name>GuiAddUser</name>
@@ -2164,7 +2168,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>%1 already exists. Please select a new filename.</source>
-        <translation>%1 esiste già. Seleziona un nuovo nome per il file.</translation>
+        <translation type="vanished">%1 esiste già. Seleziona un nuovo nome per il file.</translation>
     </message>
     <message>
         <source>%1 - Select the download folder</source>
@@ -3596,19 +3600,15 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Generate new file name</source>
-        <translation type="unfinished"></translation>
+        <translation>Genera un nuovo nome del file</translation>
     </message>
     <message>
         <source>Skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Salta</translation>
     </message>
     <message>
         <source>Overwrite older</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Overwrite different size</source>
-        <translation type="unfinished"></translation>
+        <translation>Sovrascrivi più vecchi</translation>
     </message>
 </context>
 <context>
