@@ -4347,17 +4347,22 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation>felhasználók</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="65"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="63"/>
+        <source>Disabled</source>
+        <translation type="unfinished">Tiltva</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="69"/>
         <source>Unknown address</source>
         <translation>Ismeretlen cím</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="157"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="161"/>
         <source>File HOSTS not found.</source>
         <translation>A HOSTS fájl nem található.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="93"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="97"/>
         <source>none</source>
         <translation>egyik sem</translation>
     </message>
@@ -4367,12 +4372,12 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation type="unfinished">Alapértelmezett</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="101"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="105"/>
         <source>selected by system</source>
         <translation> rendszer által kiválasztott</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="157"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="161"/>
         <source>Ok</source>
         <translation>Rendben</translation>
     </message>
@@ -6812,7 +6817,7 @@ Kérjük, válassz egy másik nevet.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2304"/>
+        <location filename="../src/core/Settings.cpp" line="2307"/>
         <source>Autoresponder</source>
         <translation type="unfinished"></translation>
     </message>

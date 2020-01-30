@@ -4322,12 +4322,17 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="65"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="63"/>
+        <source>Disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="69"/>
         <source>Unknown address</source>
         <translation type="unfinished">Nepoznata adresa</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="157"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="161"/>
         <source>File HOSTS not found.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4336,12 +4341,12 @@ Please select a different name.</source>
         <translation type="obsolete">Fajl je prazan</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="93"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="97"/>
         <source>none</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="101"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="105"/>
         <source>selected by system</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4356,7 +4361,7 @@ Please select a different name.</source>
 %1 je izbrisan sa liste.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="157"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="161"/>
         <source>Ok</source>
         <translation type="unfinished">OK</translation>
     </message>
@@ -6757,7 +6762,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2304"/>
+        <location filename="../src/core/Settings.cpp" line="2307"/>
         <source>Autoresponder</source>
         <translation type="unfinished"></translation>
     </message>

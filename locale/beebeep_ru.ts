@@ -4289,17 +4289,22 @@ Please select a different name.</source>
         <translation>пользователи</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="65"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="63"/>
+        <source>Disabled</source>
+        <translation type="unfinished">Отключено</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="69"/>
         <source>Unknown address</source>
         <translation>Неизвестный адрес</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="157"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="161"/>
         <source>File HOSTS not found.</source>
         <translation>Файл HOSTS не найден.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="93"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="97"/>
         <source>none</source>
         <translation>не определена</translation>
     </message>
@@ -4309,12 +4314,12 @@ Please select a different name.</source>
         <translation>по-умолчанию</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="101"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="105"/>
         <source>selected by system</source>
         <translation>выбрано системой</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiNetwork.cpp" line="157"/>
+        <location filename="../src/desktop/GuiNetwork.cpp" line="161"/>
         <source>Ok</source>
         <translation>ОК</translation>
     </message>
@@ -6673,7 +6678,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2304"/>
+        <location filename="../src/core/Settings.cpp" line="2307"/>
         <source>Autoresponder</source>
         <translation>Автоответ</translation>
     </message>

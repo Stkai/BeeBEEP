@@ -3698,6 +3698,10 @@ Inserisci un nome differente.</translation>
         <source>default</source>
         <translation>predefinito</translation>
     </message>
+    <message>
+        <source>Disabled</source>
+        <translation>Disabilitato</translation>
+    </message>
 </context>
 <context>
     <name>GuiNetworkTest</name>

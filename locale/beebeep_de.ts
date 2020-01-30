@@ -3492,6 +3492,10 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>default</source>
         <translation>Standard</translation>
     </message>
+    <message>
+        <source>Disabled</source>
+        <translation type="unfinished">Deaktiviert</translation>
+    </message>
 </context>
 <context>
     <name>GuiNetworkTest</name>

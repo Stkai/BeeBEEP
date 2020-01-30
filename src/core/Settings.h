@@ -109,6 +109,7 @@ public:
   inline void setUseHive( bool );
   inline bool useHive() const;
 
+  inline bool disableMulticast() const;
   inline bool disablePrivateChats() const;
   inline bool disableFileTransfer() const;
   inline bool disableFileSharing() const;
@@ -676,6 +677,7 @@ private:
   bool m_startMinimized;
   QString m_signature;
   bool m_useOnlyTextEmoticons;
+  bool m_disableMulticast;
   bool m_disablePrivateChats;
   bool m_disableFileSharing;
   bool m_disableDesktopSharing;
@@ -1245,6 +1247,7 @@ inline void Settings::setShowTextInModeRTL( bool new_value ) { m_showTextInModeR
 inline bool Settings::showTextInModeRTL() const { return m_showTextInModeRTL; }
 inline void Settings::setPlayBuzzSound( bool new_value ) { m_playBuzzSound = new_value; }
 inline bool Settings::playBuzzSound() const { return m_playBuzzSound; }
+inline bool Settings::disableMulticast() const { return m_disableMulticast; }
 inline bool Settings::disablePrivateChats() const { return m_disablePrivateChats; }
 inline void Settings::setShowChatsInOneWindow( bool new_value ) { m_showChatsInOneWindow = new_value; }
 inline bool Settings::showChatsInOneWindow() const { return m_showChatsInOneWindow; }

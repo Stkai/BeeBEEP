@@ -122,6 +122,7 @@ Settings::Settings()
   m_signature = "";
   m_useOnlyTextEmoticons = false;
   m_disablePrivateChats = false;
+  m_disableMulticast = false;
   m_userRecognitionMethod = RecognizeByDefaultMethod;
   m_canAddMembersToGroup = true;
   m_canRemoveMembersFromGroup = true;
@@ -500,6 +501,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "Signature", m_signature );
     sets->setValue( "UseOnlyTextEmoticons", m_useOnlyTextEmoticons );
     sets->setValue( "DisablePrivateChats", m_disablePrivateChats );
+    sets->setValue( "DisableMulticast", m_disableMulticast );
     sets->setValue( "UserRecognitionMethod", m_userRecognitionMethod );
     sets->setValue( "AllowAddMembersToGroup", m_canAddMembersToGroup );
     sets->setValue( "AllowRemoveMembersFromGroup", m_canRemoveMembersFromGroup );
@@ -591,6 +593,7 @@ void Settings::loadRcFile()
   m_signature = sets->value( "Signature", m_signature ).toString();
   m_useOnlyTextEmoticons = sets->value( "UseOnlyTextEmoticons", m_useOnlyTextEmoticons ).toBool();
   m_disablePrivateChats = sets->value( "DisablePrivateChats", m_disablePrivateChats ).toBool();
+  m_disableMulticast = sets->value( "DisableMulticast", m_disableMulticast ).toBool();
   int user_recognition_method = sets->value( "UserRecognitionMethod", -1 ).toInt();
   setUserRecognitionMethod( (user_recognition_method < 0 ? (trust_system_account ? RecognizeByAccount : m_userRecognitionMethod) : user_recognition_method) );
 

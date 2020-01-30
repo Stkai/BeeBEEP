@@ -60,6 +60,10 @@ void GuiNetwork::loadSettings()
   mp_lHelpMulticastGroup->setText( QString( "(%1: %2)" ).arg( tr( "default" ) ).arg( Settings::instance().defaultMulticastGroupAddress().toString() ) );
   mp_sbIpMulticastTtl->setValue( Settings::instance().ipMulticastTtl() );
 
+  mp_leMulticastGroup->setText( tr( "Disabled" ) );
+  mp_sbIpMulticastTtl->setEnabled( !Settings::instance().disableMulticast() );
+  mp_cbUseDefaultMulticastGroupAddress->setEnabled( !Settings::instance().disableMulticast() );
+
   QHostAddress base_host_addresses = NetworkManager::instance().localBroadcastAddress();
   if( base_host_addresses.isNull() )
     mp_leSubnet->setText( tr( "Unknown address" ) );

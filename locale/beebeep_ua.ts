@@ -3461,6 +3461,10 @@ Please select a different name.</source>
         <source>File HOSTS not found.</source>
         <translation>Файл HOSTS не знайдено.</translation>
     </message>
+    <message>
+        <source>Disabled</source>
+        <translation type="unfinished">Відключено</translation>
+    </message>
 </context>
 <context>
     <name>GuiNetworkTest</name>
