@@ -2957,9 +2957,12 @@ void GuiMain::showVCard( VNumber user_id )
 
   QPoint cursor_pos = QCursor::pos();
   QRect screen_rect = qApp->desktop()->availableGeometry( cursor_pos );
-  int diff_margin =  (cursor_pos.x() + gvc->size().width()+5) - screen_rect.width();
+  int diff_margin = cursor_pos.x() + gvc->size().width() - screen_rect.width();
   if( diff_margin > 0 )
-    cursor_pos.setX( cursor_pos.x() - gvc->size().width() );
+    cursor_pos.setX( cursor_pos.x() - gvc->size().width() - 16 );
+  diff_margin = cursor_pos.y() + gvc->size().height() - screen_rect.height();
+  if( diff_margin > 0 )
+    cursor_pos.setY( cursor_pos.y() - gvc->size().height() + 24 );
   gvc->move( cursor_pos );
   gvc->show();
   gvc->adjustSize();
@@ -3309,7 +3312,8 @@ void GuiMain::createGroupChat()
   if( !Settings::instance().canAddMembersToGroup() )
   {
     QMessageBox::information( this, Settings::instance().programName(),
-                              tr( "You are not allowed create groups. The option has been disabled by your system administrator." ), tr( "Ok" ) );
+                              tr( "You are not allowed create groups." ) + QString( " " ) + tr( "The option has been disabled by your system administrator." ),
+                              tr( "Ok" ) );
     return;
   }
 
@@ -3352,7 +3356,8 @@ void GuiMain::editGroupChat( VNumber chat_id )
   if( !Settings::instance().canAddMembersToGroup() && !Settings::instance().canRemoveMembersFromGroup() )
   {
     QMessageBox::information( this, Settings::instance().programName(),
-                              tr( "You are not allowed modify groups. The option has been disabled by your system administrator." ), tr( "Ok" ) );
+                              tr( "You are not allowed modify groups." ) + QString( " " ) + tr( "The option has been disabled by your system administrator." ),
+                              tr( "Ok" ) );
     return;
   }
 
@@ -4907,6 +4912,13 @@ void GuiMain::onNewsAvailable( const QString& news )
 
 void GuiMain::createMessage()
 {
+  if( Settings::instance().disableCreateMessage() )
+  {
+    QMessageBox::information( this, Settings::instance().programName(),
+                              tr( "You are not allowed create new message." ) + QString( " " ) + tr( "The option has been disabled by your system administrator." ),
+                              tr( "Ok" ) );
+    return;
+  }
   GuiCreateMessage gcm;
   gcm.setModal( true );
   gcm.setSizeGripEnabled( true );
