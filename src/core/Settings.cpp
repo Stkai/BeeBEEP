@@ -235,6 +235,8 @@ Settings::Settings()
   m_useCustomVoiceEncoderSettings = false;
   m_useSystemVoiceEncoderSettings = false;
 
+  m_keepModificationDateOnFileTransferred = true;
+
   resetAllColors();
 }
 
@@ -628,6 +630,10 @@ void Settings::loadRcFile()
   m_appendHostNameToUserName = sets->value( "AppendHostNameToUserName", m_appendHostNameToUserName ).toBool();
   m_disableConnectionSocketDataCompression = sets->value( "DisableConnectionSocketDataCompression", m_disableConnectionSocketDataCompression ).toBool();
   sets->endGroup();
+
+  qDebug() << "RC read common settings";
+  loadCommonSettings( sets, true );
+
   QStringList key_list = sets->allKeys();
   foreach( QString key, key_list )
   {
@@ -1130,7 +1136,114 @@ void Settings::load()
   sets->endGroup();
 
   bool qt_is_compatible = qt_version_in_settings == qtMajorMinorVersion();
+  loadCommonSettings( sets, false );
 
+  sets->beginGroup( "VCard" );
+  VCard vc;
+  vc.setNickName( sets->value( "NickName",  m_localUser.vCard().nickName() ).toString() );
+  vc.setFirstName( sets->value( "FirstName", m_localUser.vCard().firstName() ).toString() );
+  vc.setLastName( sets->value( "LastName", m_localUser.vCard().lastName() ).toString() );
+  QDate dt = sets->value( "Birthday", m_localUser.vCard().birthday() ).toDate();
+  if( dt.isValid() )
+    vc.setBirthday( dt );
+  vc.setEmail( sets->value( "Email", m_localUser.vCard().email() ).toString() );
+  QPixmap pix = sets->value( "Photo", m_localUser.vCard().photo() ).value<QPixmap>();
+  if( !pix.isNull() )
+    vc.setPhoto( pix );
+  vc.setPhoneNumber( sets->value( "Phone", m_localUser.vCard().phoneNumber() ).toString() );
+  vc.setInfo( sets->value( "Info", m_localUser.vCard().info() ).toString() );
+  m_localUser.setVCard( vc );
+  sets->endGroup();
+
+  sets->beginGroup( "Gui" );
+  if( m_resetGeometryAtStartup || m_settingsVersion < 9 || !qt_is_compatible )
+  {
+    m_guiGeometry = "";
+    m_guiState = "";
+    m_floatingChatGeometry = "";
+    m_floatingChatState = "";
+    m_floatingChatSplitterState = "";
+    m_mainBarIconSize = QSize( 24, 24 );
+    m_avatarIconSize = QSize( 28, 28 );
+    m_previewFileDialogGeometry = "";
+    m_createMessageGeometry = "";
+    m_fileSharingGeometry = "";
+    qDebug() << "The geometry has been reset at startup";
+  }
+  else
+  {
+    m_guiGeometry = sets->value( "MainWindowGeometry", "" ).toByteArray();
+    m_guiState = sets->value( "MainWindowState", "" ).toByteArray();
+    m_floatingChatGeometry = sets->value( "FloatingChatGeometry", "" ).toByteArray();
+    m_floatingChatState = sets->value( "FloatingChatState", "" ).toByteArray();
+    m_floatingChatSplitterState = sets->value( "FloatingChatSplitterState", "" ).toByteArray();
+    m_previewFileDialogGeometry = sets->value( "PreviewFileDialogGeometry", "" ).toByteArray();
+    m_createMessageGeometry = sets->value( "CreateMessageGeometry", "" ).toByteArray();
+    m_fileSharingGeometry = sets->value( "FileSharingGeometry", "" ).toByteArray();
+  }
+
+#if QT_VERSION == 0x050906
+  if( m_settingsVersion < 11 )
+  {
+    // Bug in restore state for QDockWidgets
+    // https://bugreports.qt.io/browse/QTBUG-68939
+    m_guiState = "";
+    m_floatingChatState = "";
+  }
+#endif
+
+#if QT_VERSION >= 0x050000
+  m_lastDirectorySelected = Bee::convertToNativeFolderSeparator( sets->value( "LastDirectorySelected", QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation ) ).toString() );
+  m_lastDirectorySelected = checkFolderPath( m_lastDirectorySelected, Bee::convertToNativeFolderSeparator( QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation ) ) );
+  m_downloadDirectory = Bee::convertToNativeFolderSeparator( sets->value( "DownloadDirectory", QStandardPaths::writableLocation( QStandardPaths::DownloadLocation ) ).toString() );
+  m_downloadDirectory = checkFolderPath( m_downloadDirectory, Bee::convertToNativeFolderSeparator( QStandardPaths::writableLocation( QStandardPaths::DownloadLocation ) ) );
+#else
+  m_lastDirectorySelected = Bee::convertToNativeFolderSeparator( sets->value( "LastDirectorySelected", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString() );
+  m_lastDirectorySelected = checkFolderPath( m_lastDirectorySelected, Bee::convertToNativeFolderSeparator( QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ) );
+  m_downloadDirectory = Bee::convertToNativeFolderSeparator( sets->value( "DownloadDirectory", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString() );
+  m_downloadDirectory = checkFolderPath( m_downloadDirectory, Bee::convertToNativeFolderSeparator( QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ) );
+#endif
+
+  m_logPath = checkFolderPath( Bee::convertToNativeFolderSeparator( sets->value( "LogFolderPath", dataFolder() ).toString() ), dataFolder() );
+  QString plugin_folder_path = defaultPluginFolderPath();
+  m_pluginPath = checkFolderPath( Bee::convertToNativeFolderSeparator( sets->value( "PluginPath", plugin_folder_path ).toString() ), plugin_folder_path );
+  QString language_folder_path = defaultLanguageFolderPath();
+  m_languagePath = checkFolderPath( Bee::convertToNativeFolderSeparator( sets->value( "LanguagePath", language_folder_path ).toString() ), language_folder_path );
+  m_beepFilePath = checkFilePath( Bee::convertToNativeFolderSeparator( sets->value( "BeepFilePath", defaultBeepFilePath() ).toString() ), defaultBeepFilePath() );
+  sets->endGroup();
+
+  sets->beginGroup( "Plugin" );
+  QStringList key_list = sets->value( "List", QStringList() ).toStringList();
+  if( !key_list.isEmpty() )
+  {
+    QStringList plugin_settings_tmp;
+    QStringList::const_iterator it = key_list.constBegin();
+    while( it != key_list.constEnd() )
+    {
+      plugin_settings_tmp = sets->value( *it, QStringList() ).toStringList();
+      if( !plugin_settings_tmp.isEmpty() )
+        setPluginSettings( *it, plugin_settings_tmp );
+      ++it;
+    }
+  }
+  sets->endGroup();
+
+  if( !m_allowEditNickname && userRecognitionMethod() != Settings::RecognizeByNickname )
+  {
+    if( m_localUser.name() != m_localUser.accountName() )
+    {
+      qWarning() << "AllowEditNickname is disabled but nickname changed to" << qPrintable( m_localUser.name() );
+      qDebug() << "Restoring system account name:" << qPrintable( m_localUser.accountName() );
+      m_localUser.setName( m_localUser.accountName() );
+    }
+  }
+
+  m_lastSave = QDateTime::currentDateTime();
+  sets->deleteLater();
+}
+
+void Settings::loadCommonSettings( QSettings* sets, bool in_file_rc )
+{
   sets->beginGroup( "Chat" );
   m_chatFont.fromString( sets->value( "Font", QApplication::font().toString() ).toString() );
   setChatFont( m_chatFont );
@@ -1177,10 +1290,13 @@ void Settings::load()
     int user_recognition_method = sets->value( "RecognitionMethod", m_userRecognitionMethod ).toInt();
     setUserRecognitionMethod( user_recognition_method );
   }
-  m_localUser.setHash( sets->value( "LocalHash", m_localUser.hash() ).toString() );
-  m_localUser.setName( sets->value( "LocalName", m_localUser.name() ).toString() );
-  m_localUser.setColor( sets->value( "LocalColor", m_localUser.color() ).toString() );
-  m_localUser.setStatusDescription( sets->value( "LocalLastStatusDescription", m_localUser.statusDescription() ).toString() );
+  if( !in_file_rc )
+  {
+    m_localUser.setHash( sets->value( "LocalHash", m_localUser.hash() ).toString() );
+    m_localUser.setName( sets->value( "LocalName", m_localUser.name() ).toString() );
+    m_localUser.setColor( sets->value( "LocalColor", m_localUser.color() ).toString() );
+    m_localUser.setStatusDescription( sets->value( "LocalLastStatusDescription", m_localUser.statusDescription() ).toString() );
+  }
   m_autoUserAway = sets->value( "AutoAwayStatus", false ).toBool();
   m_userAwayTimeout = qMax( sets->value( "UserAwayTimeout", 10 ).toInt(), 1 ); // minutes
   if( m_useEasyConnection )
@@ -1202,16 +1318,19 @@ void Settings::load()
     enc_pass = simpleDecrypt( sets->value( "EncPwd", "" ).toString() );
   setPassword( enc_pass );
   m_saveUserList = sets->value( "SaveUsers", m_saveUserList ).toBool();
-  QString user_list = sets->value( "List", "" ).toString();
-  if( !user_list.isEmpty() )
-    m_userList = simpleDecrypt( user_list ).split( QString( "\n" ) );
-  else
-    m_userList = QStringList();
-  QString user_status_list = sets->value( "StatusList", "" ).toString();
-  if( !user_status_list.isEmpty() )
-    m_userStatusList = simpleDecrypt( user_status_list ).split( QString( "\n" ) );
-  else
-    m_userStatusList = QStringList();
+  if( !in_file_rc )
+  {
+    QString user_list = sets->value( "List", "" ).toString();
+    if( !user_list.isEmpty() )
+      m_userList = simpleDecrypt( user_list ).split( QString( "\n" ) );
+    else
+      m_userList = QStringList();
+    QString user_status_list = sets->value( "StatusList", "" ).toString();
+    if( !user_status_list.isEmpty() )
+      m_userStatusList = simpleDecrypt( user_status_list ).split( QString( "\n" ) );
+    else
+      m_userStatusList = QStringList();
+  }
   m_maxUserStatusDescriptionInList = sets->value( "MaxStatusDescriptionInList", m_maxUserStatusDescriptionInList ).toInt();
   m_presetMessages = sets->value( "PresetMessages", QMap<QString,QVariant>() ).toMap();
   m_refusedChats = sets->value( "RefusedChats", QStringList() ).toStringList();
@@ -1219,86 +1338,14 @@ void Settings::load()
   m_removeInactiveUsers = sets->value( "RemoveInactiveUsers", true ).toBool();
   sets->endGroup();
 
-  sets->beginGroup( "VCard" );
-  VCard vc;
-  vc.setNickName( sets->value( "NickName",  m_localUser.vCard().nickName() ).toString() );
-  vc.setFirstName( sets->value( "FirstName", m_localUser.vCard().firstName() ).toString() );
-  vc.setLastName( sets->value( "LastName", m_localUser.vCard().lastName() ).toString() );
-  QDate dt = sets->value( "Birthday", m_localUser.vCard().birthday() ).toDate();
-  if( dt.isValid() )
-    vc.setBirthday( dt );
-  vc.setEmail( sets->value( "Email", m_localUser.vCard().email() ).toString() );
-  QPixmap pix = sets->value( "Photo", m_localUser.vCard().photo() ).value<QPixmap>();
-  if( !pix.isNull() )
-    vc.setPhoto( pix );
-  vc.setPhoneNumber( sets->value( "Phone", m_localUser.vCard().phoneNumber() ).toString() );
-  vc.setInfo( sets->value( "Info", m_localUser.vCard().info() ).toString() );
-  m_localUser.setVCard( vc );
-  sets->endGroup();
-
   sets->beginGroup( "Gui" );
+  m_mainBarIconSize = sets->value( "MainBarIconSize", QSize( 24, 24 ) ).toSize();
+  m_avatarIconSize = sets->value( "AvatarIconSize", QSize( 28, 28 ) ).toSize();
   m_resetGeometryAtStartup = sets->value( "ResetWindowGeometryAtStartup", m_resetGeometryAtStartup ).toBool();
-
-  if( m_resetGeometryAtStartup || m_settingsVersion < 9 || !qt_is_compatible )
-  {
-    m_guiGeometry = "";
-    m_guiState = "";
-    m_floatingChatGeometry = "";
-    m_floatingChatState = "";
-    m_floatingChatSplitterState = "";
-    m_mainBarIconSize = QSize( 24, 24 );
-    m_avatarIconSize = QSize( 28, 28 );
-    m_previewFileDialogGeometry = "";
-    m_createMessageGeometry = "";
-    m_fileSharingGeometry = "";
-    qDebug() << "The geometry has been reset at startup";
-  }
-  else
-  {
-    m_guiGeometry = sets->value( "MainWindowGeometry", "" ).toByteArray();
-    m_guiState = sets->value( "MainWindowState", "" ).toByteArray();
-    m_floatingChatGeometry = sets->value( "FloatingChatGeometry", "" ).toByteArray();
-    m_floatingChatState = sets->value( "FloatingChatState", "" ).toByteArray();
-    m_floatingChatSplitterState = sets->value( "FloatingChatSplitterState", "" ).toByteArray();
-    m_mainBarIconSize = sets->value( "MainBarIconSize", QSize( 24, 24 ) ).toSize();
-    m_avatarIconSize = sets->value( "AvatarIconSize", QSize( 28, 28 ) ).toSize();
-    m_previewFileDialogGeometry = sets->value( "PreviewFileDialogGeometry", "" ).toByteArray();
-    m_createMessageGeometry = sets->value( "CreateMessageGeometry", "" ).toByteArray();
-    m_fileSharingGeometry = sets->value( "FileSharingGeometry", "" ).toByteArray();
-  }
-
-#if QT_VERSION == 0x050906
-  if( m_settingsVersion < 11 )
-  {
-    // Bug in restore state for QDockWidgets
-    // https://bugreports.qt.io/browse/QTBUG-68939
-    m_guiState = "";
-    m_floatingChatState = "";
-  }
-#endif
-
   m_saveGeometryOnExit = sets->value( "SaveGeometryOnExit", m_saveGeometryOnExit ).toBool();
-
   m_language = sets->value( "Language", QLocale::system().name() ).toString();
   if( m_language.size() > 2 )
     m_language.resize( 2 );
-#if QT_VERSION >= 0x050000
-  m_lastDirectorySelected = Bee::convertToNativeFolderSeparator( sets->value( "LastDirectorySelected", QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation ) ).toString() );
-  m_lastDirectorySelected = checkFolderPath( m_lastDirectorySelected, Bee::convertToNativeFolderSeparator( QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation ) ) );
-  m_downloadDirectory = Bee::convertToNativeFolderSeparator( sets->value( "DownloadDirectory", QStandardPaths::writableLocation( QStandardPaths::DownloadLocation ) ).toString() );
-  m_downloadDirectory = checkFolderPath( m_downloadDirectory, Bee::convertToNativeFolderSeparator( QStandardPaths::writableLocation( QStandardPaths::DownloadLocation ) ) );
-#else
-  m_lastDirectorySelected = Bee::convertToNativeFolderSeparator( sets->value( "LastDirectorySelected", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString() );
-  m_lastDirectorySelected = checkFolderPath( m_lastDirectorySelected, Bee::convertToNativeFolderSeparator( QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ) );
-  m_downloadDirectory = Bee::convertToNativeFolderSeparator( sets->value( "DownloadDirectory", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString() );
-  m_downloadDirectory = checkFolderPath( m_downloadDirectory, Bee::convertToNativeFolderSeparator( QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ) );
-#endif
-
-  m_logPath = checkFolderPath( Bee::convertToNativeFolderSeparator( sets->value( "LogFolderPath", dataFolder() ).toString() ), dataFolder() );
-  QString plugin_folder_path = defaultPluginFolderPath();
-  m_pluginPath = checkFolderPath( Bee::convertToNativeFolderSeparator( sets->value( "PluginPath", plugin_folder_path ).toString() ), plugin_folder_path );
-  QString language_folder_path = defaultLanguageFolderPath();
-  m_languagePath = checkFolderPath( Bee::convertToNativeFolderSeparator( sets->value( "LanguagePath", language_folder_path ).toString() ), language_folder_path );
   m_keyEscapeMinimizeInTray = sets->value( "KeyEscapeMinimizeInTray", true ).toBool();
 #ifdef Q_OS_MAC
   m_minimizeInTray = false;
@@ -1310,7 +1357,7 @@ void Settings::load()
   m_raiseMainWindowOnNewMessageArrived = sets->value( "RaiseMainWindowOnNewMessageArrived", false ).toBool();
   m_alwaysShowFileTransferProgress = sets->value( "AlwaysShowFileTransferProgress", false ).toBool();
   m_alwaysOpenChatOnNewMessageArrived = sets->value( "AlwaysOpenChatOnNewMessageArrived", true ).toBool();
-  m_beepFilePath = checkFilePath( Bee::convertToNativeFolderSeparator( sets->value( "BeepFilePath", defaultBeepFilePath() ).toString() ), defaultBeepFilePath() );
+
   m_loadOnTrayAtStartup = sets->value( "LoadOnTrayAtStartup", false ).toBool();
   m_showNotificationOnTray = sets->value( "ShowNotificationOnTray", true ).toBool();
   m_showOnlyMessageNotificationOnTray = sets->value( "ShowOnlyMessageNotificationOnTray", true ).toBool();
@@ -1376,12 +1423,15 @@ void Settings::load()
   m_maxLogLines = sets->value( "MaxLogLines", m_maxLogLines ).toInt();
   m_useSpellChecker = sets->value( "UseSpellChecker", true ).toBool();
   m_useWordCompleter = sets->value( "UseWordCompleter", false ).toBool();
-  m_dictionaryPath = checkFilePath( sets->value( "DictionaryPath", "" ).toString(), "" );
   m_checkNewVersionAtStartup = sets->value( "SearchForNewVersionAtStartup", m_checkNewVersionAtStartup ).toBool();
   m_postUsageStatistics = sets->value( "SendAnonymousUsageStatistics", m_postUsageStatistics ).toBool();
-  m_applicationUuid = sets->value( "Uuid", "" ).toString();
-  m_applicationUuidCreationDate = sets->value( "UuidCreationDate", QDate::currentDate() ).toDate();
-  m_statsPostDate = sets->value( "StatsPostDate", QDate() ).toDate();
+  if( !in_file_rc )
+  {
+    m_dictionaryPath = checkFilePath( sets->value( "DictionaryPath", "" ).toString(), "" );
+    m_applicationUuid = sets->value( "Uuid", "" ).toString();
+    m_applicationUuidCreationDate = sets->value( "UuidCreationDate", QDate::currentDate() ).toDate();
+    m_statsPostDate = sets->value( "StatsPostDate", QDate() ).toDate();
+  }
   sets->endGroup();
 
   sets->beginGroup( "Misc" );
@@ -1401,24 +1451,31 @@ void Settings::load()
   m_useLowDelayOptionOnSocket = sets->value( "UseLowDelayOptionOnSocket", false ).toBool();
   m_delayConnectionAtStartup = qMax( 3000, sets->value( "DelayConnectionAtStartup_ms", m_delayConnectionAtStartup ).toInt() );
   m_sendOfflineMessagesToDefaultChat = sets->value( "SendOfflineMessagesToDefaultChat", false ).toBool();
-  m_saveMessagesTimestamp = sets->value( "SaveMessagesTimestamp", QDateTime() ).toDateTime();
-  if( m_saveMessagesTimestamp.isNull() )
+  if( !in_file_rc )
   {
-    qDebug() << "Generating new save messages timestamp";
-    m_saveMessagesTimestamp = QDateTime::currentDateTime();
+    m_saveMessagesTimestamp = sets->value( "SaveMessagesTimestamp", QDateTime() ).toDateTime();
+    if( m_saveMessagesTimestamp.isNull() )
+    {
+      qDebug() << "Generating new save messages timestamp";
+      m_saveMessagesTimestamp = QDateTime::currentDateTime();
+    }
   }
   m_clearCacheAfterDays = qMax( -1, sets->value( "ClearCacheAfterDays", m_clearCacheAfterDays ).toInt() );
   m_removePartiallyDownloadedFilesAfterDays = qMax( -1, sets->value( "RemovePartiallyDownloadedFilesAfterDays", m_removePartiallyDownloadedFilesAfterDays ).toInt() );
   sets->endGroup();
 
   sets->beginGroup( "Network");
-  QString local_host_address = sets->value( "LocalHostAddressForced", "" ).toString();
-  if( !local_host_address.isEmpty() )
-    m_localHostAddressForced = QHostAddress( local_host_address );
+  if( !in_file_rc )
+  {
+    QString local_host_address = sets->value( "LocalHostAddressForced", "" ).toString();
+    if( !local_host_address.isEmpty() )
+      m_localHostAddressForced = QHostAddress( local_host_address );
+    m_networkAddressList = sets->value( "UserPathList", QStringList() ).toStringList();
+  }
   m_localSubnetForced = sets->value( "LocalSubnetForced", "" ).toString();
-  m_networkAddressList = sets->value( "UserPathList", QStringList() ).toStringList();
-  m_acceptConnectionsOnlyFromWorkgroups = sets->value( "AcceptConnectionsOnlyFromWorkgroups", m_acceptConnectionsOnlyFromWorkgroups ).toBool();
   m_localUser.setWorkgroups( sets->value( "Workgroups", QStringList() ).toStringList() );
+  m_acceptConnectionsOnlyFromWorkgroups = sets->value( "AcceptConnectionsOnlyFromWorkgroups", m_acceptConnectionsOnlyFromWorkgroups ).toBool();
+
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   m_useMulticastDns = sets->value( "UseMulticastDns", m_useMulticastDns ).toBool();
 #endif
@@ -1431,7 +1488,8 @@ void Settings::load()
   m_broadcastToLocalSubnetAlways = sets->value( "BroadcastToLocalSubnet", m_broadcastToLocalSubnetAlways ).toBool();
   m_ipMulticastTtl = sets->value( "IpMulticastTtl", m_ipMulticastTtl ).toInt();
   sets->endGroup();
-  loadBroadcastAddressesFromFileHosts();
+  if( !in_file_rc )
+    loadBroadcastAddressesFromFileHosts();
 
   sets->beginGroup( "FileShare" );
   if( m_disableFileTransfer )
@@ -1480,21 +1538,28 @@ void Settings::load()
   m_resumeFileTransfer = sets->value( "ResumeFileTransfer", m_resumeFileTransfer ).toBool();
   m_confirmOnDownloadFile = sets->value( "ConfirmOnDownloadFile", m_confirmOnDownloadFile ).toBool();
   m_downloadInUserFolder = sets->value( "DownloadInUserFolder", false ).toBool();
-  QStringList local_share = sets->value( "ShareList", QStringList() ).toStringList();
-  if( !local_share.isEmpty() )
+  m_keepModificationDateOnFileTransferred = sets->value( "KeepModificationDateOnFileTransferred", m_keepModificationDateOnFileTransferred ).toBool();
+  if( !in_file_rc )
   {
-    foreach( QString share_path, local_share )
-      m_localShare.append( Bee::convertToNativeFolderSeparator( share_path ) );
+    QStringList local_share = sets->value( "ShareList", QStringList() ).toStringList();
+    if( !local_share.isEmpty() )
+    {
+      foreach( QString share_path, local_share )
+        m_localShare.append( Bee::convertToNativeFolderSeparator( share_path ) );
+    }
+    else
+      m_localShare = local_share;
   }
-  else
-    m_localShare = local_share;
   sets->endGroup();
 
-  sets->beginGroup( "Group" );
-  m_saveGroupList = sets->value( "SaveGroups", m_saveGroupList ).toBool();
-  m_groupSilenced = sets->value( "Silenced", QStringList() ).toStringList();
-  m_groupList = sets->value( "List", QStringList() ).toStringList();
-  sets->endGroup();
+  if( !in_file_rc )
+  {
+    sets->beginGroup( "Group" );
+    m_saveGroupList = sets->value( "SaveGroups", m_saveGroupList ).toBool();
+    m_groupSilenced = sets->value( "Silenced", QStringList() ).toStringList();
+    m_groupList = sets->value( "List", QStringList() ).toStringList();
+    sets->endGroup();
+  }
 
   sets->beginGroup( "ShareDesktop" );
   if( m_disableDesktopSharing )
@@ -1521,35 +1586,6 @@ void Settings::load()
   m_useCustomVoiceEncoderSettings = sets->value( "UseCustomVoiceEncoderSettings", m_useCustomVoiceEncoderSettings ).toBool();
   m_useSystemVoiceEncoderSettings = sets->value( "UseSystemVoiceEncoderSettings", m_useSystemVoiceEncoderSettings ).toBool();
   sets->endGroup();
-
-  sets->beginGroup( "Plugin" );
-  QStringList key_list = sets->value( "List", QStringList() ).toStringList();
-  if( !key_list.isEmpty() )
-  {
-    QStringList plugin_settings_tmp;
-    QStringList::const_iterator it = key_list.constBegin();
-    while( it != key_list.constEnd() )
-    {
-      plugin_settings_tmp = sets->value( *it, QStringList() ).toStringList();
-      if( !plugin_settings_tmp.isEmpty() )
-        setPluginSettings( *it, plugin_settings_tmp );
-      ++it;
-    }
-  }
-  sets->endGroup();
-
-  if( !m_allowEditNickname && userRecognitionMethod() != Settings::RecognizeByNickname )
-  {
-    if( m_localUser.name() != m_localUser.accountName() )
-    {
-      qWarning() << "AllowEditNickname is disabled but nickname changed to" << qPrintable( m_localUser.name() );
-      qDebug() << "Restoring system account name:" << qPrintable( m_localUser.accountName() );
-      m_localUser.setName( m_localUser.accountName() );
-    }
-  }
-
-  m_lastSave = QDateTime::currentDateTime();
-  sets->deleteLater();
 }
 
 QString Settings::qtMajorVersion() const
@@ -1830,6 +1866,7 @@ void Settings::save()
   sets->setValue( "ConfirmOnDownloadFile", m_confirmOnDownloadFile );
   sets->setValue( "ShareList", m_localShare );
   sets->setValue( "DownloadInUserFolder", m_downloadInUserFolder );
+  sets->setValue( "KeepModificationDateOnFileTransferred", m_keepModificationDateOnFileTransferred );
   sets->endGroup();
 
   sets->beginGroup( "Group" );

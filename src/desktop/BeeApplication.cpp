@@ -58,6 +58,7 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
   mp_jobThread = new QThread();
   m_jobsInProgress = 0;
   mp_tickManager = Q_NULLPTR;
+  mp_sleepWatcher = Q_NULLPTR;
 
   m_defaultCss = styleSheet();
 
@@ -84,6 +85,9 @@ BeeApplication::~BeeApplication()
     mp_localServer->close();
     delete mp_localServer;
   }
+
+  if( mp_sleepWatcher )
+    removeEventFilter( mp_sleepWatcher );
 
   clearPathsInFsWatcher();
   delete mp_fsWatcher;

@@ -480,6 +480,8 @@ public:
   inline int removePartiallyDownloadedFilesAfterDays() const;
   inline void setRemovePartiallyDownloadedFilesAfterDays( int );
   QString partiallyDownloadedFileExtension() const;
+  inline void setKeepModificationDateOnFileTransferred( bool );
+  inline bool keepModificationDateOnFileTransferred() const;
 
   inline void setSaveUserList( bool );
   inline bool saveUserList() const;
@@ -644,6 +646,8 @@ protected:
   QString findFileInFolders( const QString&, const QStringList&, bool return_folder_path = false ) const;
   QStringList resourceFolders() const;
   QStringList dataFolders() const;
+
+  void loadCommonSettings( QSettings*, bool in_file_rc );
 
 private:
   QString m_currentFilePath;
@@ -879,6 +883,7 @@ private:
 
   int m_clearCacheAfterDays;
   int m_removePartiallyDownloadedFilesAfterDays;
+  bool m_keepModificationDateOnFileTransferred;
 
   bool m_saveUserList;
   QStringList m_userList;
@@ -1379,6 +1384,7 @@ inline bool Settings::disableBeepInUserStatusBusy() const { return m_disableBeep
 inline void Settings::setDisableBeepInUserStatusBusy( bool new_value ) { m_disableBeepInUserStatusBusy = new_value; }
 inline bool Settings::beepInActiveWindowAlso() const { return m_beepInActiveWindowAlso; }
 inline void Settings::setBeepInActiveWindowAlso( bool new_value ) { m_beepInActiveWindowAlso = new_value; }
-
+inline void Settings::setKeepModificationDateOnFileTransferred( bool new_value ) { m_keepModificationDateOnFileTransferred = new_value; }
+inline bool Settings::keepModificationDateOnFileTransferred() const { return m_keepModificationDateOnFileTransferred; }
 
 #endif // BEEBEEP_SETTINGS_

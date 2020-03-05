@@ -130,7 +130,9 @@ public:
 
 void BeeApplication::addSleepWatcher()
 {
-  installNativeEventFilter( new BeeWindowsEventFilter() );
+  QAbstractNativeEventFilter* anef = new BeeWindowsEventFilter();
+  installNativeEventFilter( anef );
+  mp_sleepWatcher = anef;
 }
 
 #else

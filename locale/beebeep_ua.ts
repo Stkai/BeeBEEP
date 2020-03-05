@@ -2037,7 +2037,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>You are not allowed modify groups. The option has been disabled by your system administrator.</source>
-        <translation>Ви не можете змінити групи. Ця опция відключена вашим системним адміністратором.</translation>
+        <translation type="vanished">Ви не можете змінити групи. Ця опция відключена вашим системним адміністратором.</translation>
     </message>
     <message>
         <source>Chats</source>
@@ -2573,7 +2573,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>You are not allowed create groups. The option has been disabled by your system administrator.</source>
-        <translation>Ви не можете створювати групи. Ця опція відключена системним адміністратором.</translation>
+        <translation type="vanished">Ви не можете створювати групи. Ця опція відключена системним адміністратором.</translation>
     </message>
     <message>
         <source>Please select the number of inactive days before user is removed</source>
@@ -3389,6 +3389,22 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Overwrite older</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Keep the original modification date of the transferred file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You are not allowed create groups.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You are not allowed modify groups.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You are not allowed create new message.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

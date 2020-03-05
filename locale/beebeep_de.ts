@@ -3016,11 +3016,11 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>You are not allowed create groups. The option has been disabled by your system administrator.</source>
-        <translation>Du darfst keine Gruppen erstellen. Die Option wurde von deinem Systemadministrator deaktiviert.</translation>
+        <translation type="vanished">Du darfst keine Gruppen erstellen. Die Option wurde von deinem Systemadministrator deaktiviert.</translation>
     </message>
     <message>
         <source>You are not allowed modify groups. The option has been disabled by your system administrator.</source>
-        <translation>Du darfst keine Gruppen ändern. Die Option wurde von deinem Systemadministrator deaktiviert.</translation>
+        <translation type="vanished">Du darfst keine Gruppen ändern. Die Option wurde von deinem Systemadministrator deaktiviert.</translation>
     </message>
     <message>
         <source>Reset geometry of all windows</source>
@@ -3420,6 +3420,22 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Overwrite older</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Keep the original modification date of the transferred file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You are not allowed create groups.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You are not allowed modify groups.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You are not allowed create new message.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

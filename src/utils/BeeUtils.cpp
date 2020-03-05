@@ -1036,8 +1036,10 @@ QString Bee::bytesToString( FileSizeType bytes, int precision )
 
 QString Bee::timeToString( qint64 msec )
 {
-  if( msec <= 0 )
-    return QString( "" );
+  if( msec < 0 )
+    return QString( "?" );
+  if( msec == 0 )
+    return QString( "0 ms" );
   int d = 0;
   while( msec >= 86400000 )
   {

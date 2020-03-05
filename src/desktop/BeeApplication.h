@@ -95,6 +95,7 @@ protected:
   bool isScreenSaverRunning();
   QString localServerName() const;
   void addSleepWatcher();
+  void removeSleepWatcher();
   bool isDesktopLocked();
   void ignoreEvent( const QString& );
 
@@ -132,6 +133,8 @@ private:
 
   QFileSystemWatcher* mp_fsWatcher;
   QString m_settingsFilePath;
+
+  QObject* mp_sleepWatcher;
 
 };
 

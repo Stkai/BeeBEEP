@@ -3,7 +3,13 @@ For more informations please visit https://www.beebeep.net
 
 
 BeeBEEP 5.8.3 (in development)
-- Fixed known issue: BeeBEEP prevents the CTRL+ALT+B (or CMD+ALT+B on MacOSX) key sequence in other applications from working.
+- Fixed known issue: BeeBEEP prevents the CTRL+ALT+B (or CMD+ALT+B on MacOSX) key sequence in other applications from working
+- Added "KeepModificationDateOnFileTransferred" option in beebeep.ini (it is always enabled in BeeBOX)
+- Almost all the options of file beebeep.ini can be used in file beebeep.rc also
+- User icons in chat window can be clicked also if the user is offline
+- Fixed a bug in options "Disable create message" and "Disable edit groups"
+- Disabled by default the option to search users by a multicast datagram
+- Fixed a visualization bug if you open an user VCARD near the side of your desktop
 
 BeeBEEP 5.8.2
 - New feature: voice messages (you can record your message and send it as file)

@@ -1173,6 +1173,10 @@ void GuiMain::createMenus()
   }
   connect( mp_actGroupExistingFile, SIGNAL( triggered( QAction* ) ), this, SLOT( onChangeSettingOnExistingFile( QAction* ) ) );
 
+  act = mp_menuFileTransferSettings->addAction( tr( "Keep the original modification date of the transferred file" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().keepModificationDateOnFileTransferred() );
+  act->setData( 101 );
   mp_actResumeFileTransfer = mp_menuFileTransferSettings->addAction( tr( "Resume file transfer" ) + QString( " (%1)" ).arg( tr( "when possible" ) ), this, SLOT( settingsChanged() ) );
   mp_actResumeFileTransfer->setCheckable( true );
   mp_actResumeFileTransfer->setChecked( Settings::instance().resumeFileTransfer() );
@@ -2205,6 +2209,9 @@ void GuiMain::settingsChanged( QAction* act )
       }
     }
     break;
+  case 101:
+    Settings::instance().setKeepModificationDateOnFileTransferred( act->isChecked() );
+    break;
   default:
     qWarning() << "GuiMain::settingsChanged(): error in setting id" << act->data().toInt();
   }
@@ -2226,7 +2233,7 @@ void GuiMain::settingsChanged( QAction* act )
     QApplication::restoreOverrideCursor();
   }
 
-  if( settings_data_id > 0 && settings_data_id < 99 )
+  if( settings_data_id > 0 && settings_data_id != 99 )
   {
     if( act->isCheckable() )
     {

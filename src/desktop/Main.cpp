@@ -254,6 +254,7 @@ int main( int argc, char *argv[] )
   Settings::instance().save();
 
   /* CleanUp */
+  bee_app.processEvents( QEventLoop::AllEvents, 2000 );
   bee_app.cleanUp();
   Settings::instance().clearTemporaryFiles();
   GuiIconProvider::close();
@@ -281,7 +282,6 @@ int main( int argc, char *argv[] )
   Log::instance().closeFileStream();
   Log::instance().close();
   Settings::close();
-
   /* Exit */
   return iRet;
 }

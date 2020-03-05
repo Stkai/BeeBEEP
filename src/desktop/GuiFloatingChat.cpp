@@ -191,6 +191,7 @@ void GuiFloatingChat::updateChatMember( const Chat& c, const User& u )
   {
     act_user = mp_barMembers->addAction( user_name, this, SLOT( onGroupMemberActionTriggered() ) );
     act_user->setData( u.id() );
+    act_user->setCheckable( false );
   }
   else
     act_user->setText( user_name );
@@ -205,7 +206,6 @@ void GuiFloatingChat::updateChatMember( const Chat& c, const User& u )
   else
     act_user->setIcon( Bee::avatarForUser( u, QSize( avatar_size, avatar_size ), Settings::instance().showUserPhoto() ) );
   act_user->setToolTip( user_tooltip.trimmed() );
-  act_user->setEnabled( u.isStatusConnected() );
 }
 
 void GuiFloatingChat::updateChatMembers( const Chat& c )

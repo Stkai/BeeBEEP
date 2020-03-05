@@ -3148,11 +3148,11 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>You are not allowed create groups. The option has been disabled by your system administrator.</source>
-        <translation>Non sei abilitato a creare i gruppi. L&apos;opzione è stata disabilitata dal tuo amministratore di sistema.</translation>
+        <translation type="vanished">Non sei abilitato a creare i gruppi. L&apos;opzione è stata disabilitata dal tuo amministratore di sistema.</translation>
     </message>
     <message>
         <source>You are not allowed modify groups. The option has been disabled by your system administrator.</source>
-        <translation>Non sei abilitato a modificare i gruppi. L&apos;opzione è stata disabilitata dal tuo amministratore di sistema.</translation>
+        <translation type="vanished">Non sei abilitato a modificare i gruppi. L&apos;opzione è stata disabilitata dal tuo amministratore di sistema.</translation>
     </message>
     <message>
         <source>Reset geometry of all windows</source>
@@ -3609,6 +3609,22 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Overwrite older</source>
         <translation>Sovrascrivi più vecchi</translation>
+    </message>
+    <message>
+        <source>Keep the original modification date of the transferred file</source>
+        <translation>Preserva la data di modifica originale del file trasferito</translation>
+    </message>
+    <message>
+        <source>You are not allowed create groups.</source>
+        <translation>Non sei abilitato alla creazione dei gruppi.</translation>
+    </message>
+    <message>
+        <source>You are not allowed modify groups.</source>
+        <translation>Non sei abilitato a modificare i gruppi.</translation>
+    </message>
+    <message>
+        <source>You are not allowed create new message.</source>
+        <translation>Non sei abilitato alla creazione di un nuovo messaggio.</translation>
     </message>
 </context>
 <context>

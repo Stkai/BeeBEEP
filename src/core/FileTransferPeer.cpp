@@ -171,7 +171,7 @@ void FileTransferPeer::setTransferCompleted()
 #ifdef BEEBEEP_DEBUG
          qDebug() << qPrintable( name() ) << "renames downloaded file to" << qPrintable( m_fileInfo.path() );
 #endif
-        if( m_fileInfo.lastModified().isValid() )
+        if( (m_fileInfo.isInShareBox() || Settings::instance().keepModificationDateOnFileTransferred()) && m_fileInfo.lastModified().isValid() )
           Bee::setLastModifiedToFile( m_fileInfo.path(), m_fileInfo.lastModified() );
       }
       else
@@ -179,7 +179,7 @@ void FileTransferPeer::setTransferCompleted()
     }
     else
     {
-      if( QFile::exists( m_fileInfo.path() ) && m_fileInfo.lastModified().isValid() )
+      if( (m_fileInfo.isInShareBox() || Settings::instance().keepModificationDateOnFileTransferred()) && m_fileInfo.lastModified().isValid() && QFile::exists( m_fileInfo.path() ) )
         Bee::setLastModifiedToFile( m_fileInfo.path(), m_fileInfo.lastModified() );
     }
   }

@@ -294,7 +294,7 @@ MaxQueuedDownloads = is the max number of downloads can be selected in file shar
 MaxSharedFiles=[integer] is the max number of shared files for user (default=4096) [4.0.0]
 FileTransferConfirmTimeout=30000
 FileTransferBufferSize=65456
-ConfirmOnDownloadFile=[true/false] if it is true always prompt before downloading a fileù
+ConfirmOnDownloadFile=[true/false] if it is true always prompt before downloading a file
 DownloadInUserFolder=[true/false] if it is true BeeBEEP always download files into the folder with the user's name (default=false) [5.6.5]
 ShareList=(do not edit manually)
 OnExistingFileAction=[integer] 0: GenerateNewFileName (default=0) [5.8.3]
@@ -302,6 +302,7 @@ OnExistingFileAction=[integer] 0: GenerateNewFileName (default=0) [5.8.3]
                                2: OverwriteExistingFile
                                3: OverwriteOlderExistingFile
                                4: OverwriteDifferentSizeExistingFile
+KeepModificationDateOnFileTransferred=[true/false] if it is true BeeBEEP keeps the modification date of the original file [5.8.3]
 
 [ShareDesktop]
 Enable=[true/false] enable file desktop sharing (default=true) [4.2.0]
