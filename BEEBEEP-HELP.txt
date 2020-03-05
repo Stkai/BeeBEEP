@@ -80,6 +80,11 @@ DisableMulticast=[true/false] BeeBEEP skips to multicast if this option is enabl
 TrustNickname=[true/false] if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect (default=true) [1.0.0] [obsolete in 4.0.0]
 TrustSystemAccount=[true/false] if true BeeBEEP trusts only system account to recognize a user. Useful if your are in active directory domain or similar (default=false) [obsolete in 4.0.0]
 
+/***********************************************************************************************************/
+/***  PLEASE NOTE                                                                                        ***/
+/***  Since BeeBEEP 5.8.3 almost all the option in file beebeep.ini can be used in file beebeep.rc also. ***/
+/***********************************************************************************************************/
+
 /***************************/
 /***  FILE: beebeep.ini  ***/
 /***************************/
