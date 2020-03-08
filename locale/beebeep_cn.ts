@@ -2252,22 +2252,22 @@ Please select a different name.</source>
         <translation>文件</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLanguage.cpp" line="53"/>
+        <location filename="../src/desktop/GuiLanguage.cpp" line="52"/>
         <source>For the latest language translations please visit the %1</source>
         <translation>最新的语言请访问%1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLanguage.cpp" line="54"/>
+        <location filename="../src/desktop/GuiLanguage.cpp" line="53"/>
         <source>official website</source>
         <translation>官方网站</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLanguage.cpp" line="98"/>
+        <location filename="../src/desktop/GuiLanguage.cpp" line="100"/>
         <source>Select a language folder</source>
         <translation>选择一个语言文件夹</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLanguage.cpp" line="125"/>
+        <location filename="../src/desktop/GuiLanguage.cpp" line="127"/>
         <source>Language &apos;%1&apos;&apos; not found.</source>
         <translation>语言%1没有找到</translation>
     </message>
@@ -6799,7 +6799,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2344"/>
+        <location filename="../src/core/Settings.cpp" line="2356"/>
         <source>Autoresponder</source>
         <translation>自动响应</translation>
     </message>

@@ -139,7 +139,7 @@ GuiChat::GuiChat( QWidget *parent )
   connect( mp_actRestoreDefaultFont, SIGNAL( triggered() ), this, SLOT( resetChatFontToDefault() ) );
 
   setChatFont( Settings::instance().chatFont() );
-  setChatFontColor( Settings::instance().chatFontColor() );
+  updateChatColors();
   updateOnSendingMessage();
 
   mp_pbSend->setIcon( IconManager::instance().icon( "send.png" ) );
@@ -717,21 +717,20 @@ void GuiChat::selectFont()
   if( ok )
   {
     Settings::instance().setChatFont( f );
+    Settings::instance().save();
     setChatFont( f );
+    mp_teMessage->update();
+    mp_teChat->ensureCursorVisible();
   }
-}
-
-void GuiChat::setChatFontColor( const QString& color_name )
-{
-  mp_teMessage->setTextColor( QColor( color_name ) );
 }
 
 void GuiChat::updateChatColors()
 {
   QString background_color = m_chatId == ID_DEFAULT_CHAT ? Settings::instance().defaultChatBackgroundColor() : Settings::instance().chatBackgroundColor();
-  QString text_color = Settings::instance().chatDefaultTextColor();
+  QString text_color = Settings::instance().chatFontColor() != Settings::instance().chatDefaultTextColor() ? Settings::instance().chatFontColor(): Settings::instance().chatDefaultTextColor();
+  mp_teMessage->setTextColor( text_color );
   mp_teMessage->setStyleSheet( QString( "#GuiMessageEdit { background-color: %1; color: %2; }" ).arg( background_color ).arg( text_color ) );
-  mp_teChat->setStyleSheet( QString( "#GuiChatViewer { background-color: %1; color: %2; }" ).arg( background_color ).arg( text_color ) );
+  mp_teChat->setStyleSheet( QString( "#GuiChatViewer { background-color: %1; color: %2; }" ).arg( background_color ).arg( Settings::instance().chatDefaultTextColor() ) );
   // No css for bee-quote because stylesheet is only applied to new inserted HTML
 }
 
@@ -741,7 +740,8 @@ void GuiChat::selectFontColor()
   if( c.isValid() && c.name() != Settings::instance().chatFontColor() )
   {
     Settings::instance().setChatFontColor( c.name() );
-    setChatFontColor( c.name() );
+    Settings::instance().save();
+    emit updateChatColorsRequest();
   }
 }
 

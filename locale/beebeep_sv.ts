@@ -2265,22 +2265,22 @@ Välj ett annat namn.</translation>
         <translation>Fil</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLanguage.cpp" line="53"/>
+        <location filename="../src/desktop/GuiLanguage.cpp" line="52"/>
         <source>For the latest language translations please visit the %1</source>
         <translation>Besök %1 för de senaste språkfilerna</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLanguage.cpp" line="54"/>
+        <location filename="../src/desktop/GuiLanguage.cpp" line="53"/>
         <source>official website</source>
         <translation>officiell webbsida</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLanguage.cpp" line="98"/>
+        <location filename="../src/desktop/GuiLanguage.cpp" line="100"/>
         <source>Select a language folder</source>
         <translation>Välj en språkmapp</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLanguage.cpp" line="125"/>
+        <location filename="../src/desktop/GuiLanguage.cpp" line="127"/>
         <source>Language &apos;%1&apos;&apos; not found.</source>
         <translation>Språket &apos;%1&apos; kan inte hittas.</translation>
     </message>
@@ -6839,7 +6839,7 @@ Välj ett annat namn.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2344"/>
+        <location filename="../src/core/Settings.cpp" line="2356"/>
         <source>Autoresponder</source>
         <translation type="unfinished"></translation>
     </message>

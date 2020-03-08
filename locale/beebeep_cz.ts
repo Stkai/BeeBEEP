@@ -2298,22 +2298,22 @@ Vyberte prosím jiné jméno.</translation>
         <translation>Soubor</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLanguage.cpp" line="53"/>
+        <location filename="../src/desktop/GuiLanguage.cpp" line="52"/>
         <source>For the latest language translations please visit the %1</source>
         <translation>Pro nejnovější jazykový soubor navštivte prosím %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLanguage.cpp" line="54"/>
+        <location filename="../src/desktop/GuiLanguage.cpp" line="53"/>
         <source>official website</source>
         <translation>oficiální webová stránka</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLanguage.cpp" line="98"/>
+        <location filename="../src/desktop/GuiLanguage.cpp" line="100"/>
         <source>Select a language folder</source>
         <translation>Vybrat složku s jazykem</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLanguage.cpp" line="125"/>
+        <location filename="../src/desktop/GuiLanguage.cpp" line="127"/>
         <source>Language &apos;%1&apos;&apos; not found.</source>
         <translation>Jazyk &apos;%1&apos;&apos; nebyl nalezen.</translation>
     </message>
@@ -6921,7 +6921,7 @@ Vyberte prosím jiné jméno.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2344"/>
+        <location filename="../src/core/Settings.cpp" line="2356"/>
         <source>Autoresponder</source>
         <translation type="unfinished"></translation>
     </message>

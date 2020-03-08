@@ -113,7 +113,7 @@ int main( int argc, char *argv[] )
     qDebug( "Icons: high DPI scaling enabled" );
 #endif
   Settings::instance().setDefaultFolders();
-  Settings::instance().loadRcFile();
+  Settings::instance().loadRcFile( true );
   Settings::instance().setDataFolder();
   qDebug() << "Settings path:" << qPrintable( Settings::instance().currentSettingsFilePath() );
   Settings::instance().createLocalUser( "" );
@@ -250,7 +250,7 @@ int main( int argc, char *argv[] )
 
   /* Save final session */
   Settings::instance().setRecentEmoticons( EmoticonManager::instance().saveRencentEmoticons() );
-  Settings::instance().loadRcFile();
+  Settings::instance().loadRcFile( false );
   Settings::instance().save();
 
   /* CleanUp */

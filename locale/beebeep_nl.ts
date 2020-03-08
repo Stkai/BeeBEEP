@@ -2317,22 +2317,22 @@ Gebruik aub een andere naam.</translation>
         <translation>Bestand</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLanguage.cpp" line="53"/>
+        <location filename="../src/desktop/GuiLanguage.cpp" line="52"/>
         <source>For the latest language translations please visit the %1</source>
         <translation>Voor de laatste vertaling bezoek %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLanguage.cpp" line="54"/>
+        <location filename="../src/desktop/GuiLanguage.cpp" line="53"/>
         <source>official website</source>
         <translation>Officiële website</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLanguage.cpp" line="98"/>
+        <location filename="../src/desktop/GuiLanguage.cpp" line="100"/>
         <source>Select a language folder</source>
         <translation>Selecteer de map met taalbestanden</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLanguage.cpp" line="125"/>
+        <location filename="../src/desktop/GuiLanguage.cpp" line="127"/>
         <source>Language &apos;%1&apos;&apos; not found.</source>
         <translation>Taal &apos;%1&apos; niet gevonden.</translation>
     </message>
@@ -6979,7 +6979,7 @@ Gebruik aub een andere naam.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2344"/>
+        <location filename="../src/core/Settings.cpp" line="2356"/>
         <source>Autoresponder</source>
         <translation>Autobeantwoorder</translation>
     </message>

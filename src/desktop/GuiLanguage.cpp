@@ -41,7 +41,6 @@ GuiLanguage::GuiLanguage( QWidget *parent )
   labels << tr( "Language" ) << tr( "File" );
   mp_twLanguage->setHeaderLabels( labels );
   mp_twLanguage->setAlternatingRowColors( true );
-  mp_twLanguage->setSortingEnabled( true );
   mp_twLanguage->setRootIsDecorated( false );
 
   m_languageSelected = Settings::instance().language();
@@ -76,6 +75,7 @@ void GuiLanguage::loadLanguages()
     return;
   }
 
+  mp_twLanguage->setSortingEnabled( false );
   QTreeWidgetItem* item;
   QStringList filter_list;
   filter_list << QString( "*.qm" );
@@ -91,6 +91,8 @@ void GuiLanguage::loadLanguages()
     item->setText( 1, language_file.fileName() );
     item->setToolTip( 1, language_file.absoluteFilePath() );
   }
+  mp_twLanguage->setSortingEnabled( true );
+  mp_twLanguage->sortByColumn( 0, Qt::AscendingOrder );
 }
 
 void GuiLanguage::selectFolder()

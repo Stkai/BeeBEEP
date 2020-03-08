@@ -96,7 +96,6 @@ protected:
   QString chatMessageToText( const ChatMessage& );
   bool messageCanBeShowed( const ChatMessage& );
   bool historyCanBeShowed();
-  void setChatFontColor( const QString& );
   void dragEnterEvent( QDragEnterEvent* );
   void dropEvent( QDropEvent* );
   void updateSpellCheckerToolTip();

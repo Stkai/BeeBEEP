@@ -558,7 +558,7 @@ public:
   inline void setUseSystemVoiceEncoderSettings( bool );
   inline bool useSystemVoiceEncoderSettings() const;
 
-  void loadRcFile();
+  void loadRcFile( bool load_common_settings );
   void clearNativeSettings();
   void load();
   void save();

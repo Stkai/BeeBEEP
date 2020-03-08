@@ -330,7 +330,7 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="818"/>
         <source>Offline messages sent to %1.</source>
-        <translation type="unfinished">Офлайн сообщения отправлены %2. {1.?}</translation>
+        <translation type="unfinished">Офлайн сообщения отправлены %1.</translation>
     </message>
     <message>
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
@@ -2261,22 +2261,22 @@ Please select a different name.</source>
         <translation>Файл</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLanguage.cpp" line="53"/>
+        <location filename="../src/desktop/GuiLanguage.cpp" line="52"/>
         <source>For the latest language translations please visit the %1</source>
         <translation>Для получения самых новых переводов посетите %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLanguage.cpp" line="54"/>
+        <location filename="../src/desktop/GuiLanguage.cpp" line="53"/>
         <source>official website</source>
         <translation>официальный веб-сайт</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLanguage.cpp" line="98"/>
+        <location filename="../src/desktop/GuiLanguage.cpp" line="100"/>
         <source>Select a language folder</source>
         <translation>Выберите папку языка</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiLanguage.cpp" line="125"/>
+        <location filename="../src/desktop/GuiLanguage.cpp" line="127"/>
         <source>Language &apos;%1&apos;&apos; not found.</source>
         <translation>Язык &apos;%1&apos;&apos; не найден.</translation>
     </message>
@@ -6700,7 +6700,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2344"/>
+        <location filename="../src/core/Settings.cpp" line="2356"/>
         <source>Autoresponder</source>
         <translation>Автоответ</translation>
     </message>

@@ -223,10 +223,6 @@ Settings::Settings()
 
   m_useMessageTimestampWithAP = false;
   m_useDarkStyle = false;
-  m_chatDefaultUserNameColor = "#000000";
-
-  m_chatQuoteBackgroundColor = "#808080";
-  m_chatQuoteTextColor = "#ffffff";
 
   m_saveMessagesTimestamp = QDateTime::currentDateTime();
 
@@ -338,6 +334,7 @@ void Settings::setDefaultFolders()
 
 void Settings::resetAllColors()
 {
+  m_chatDefaultUserNameColor = "#000000";
   m_homeBackgroundColor = defaultSystemBackgroundColor();
   m_defaultChatBackgroundColor = defaultSystemBackgroundColor();
   m_userListBackgroundColor = defaultListBackgroundColor();
@@ -345,8 +342,8 @@ void Settings::resetAllColors()
   m_groupListBackgroundColor = defaultListBackgroundColor();
   m_savedChatListBackgroundColor = defaultListBackgroundColor();
   m_chatBackgroundColor = "#ffffff";
-  m_chatDefaultTextColor = "#555555";
-  m_chatSystemTextColor = "#808080";
+  m_chatDefaultTextColor = "#000000";
+  m_chatSystemTextColor = "#555555";
   m_chatQuoteBackgroundColor = "#808080";
   m_chatQuoteTextColor = "#ffffff";
 }
@@ -530,7 +527,7 @@ bool Settings::createDefaultRcFile()
   return rc_file_created;
 }
 
-void Settings::loadRcFile()
+void Settings::loadRcFile( bool load_common_settings )
 {
   QString rc_file_path = findFileInFolders( QLatin1String( "beebeep.rc" ), resourceFolders() );
   if( rc_file_path.isNull() )
@@ -631,8 +628,11 @@ void Settings::loadRcFile()
   m_disableConnectionSocketDataCompression = sets->value( "DisableConnectionSocketDataCompression", m_disableConnectionSocketDataCompression ).toBool();
   sets->endGroup();
 
-  qDebug() << "RC read common settings";
-  loadCommonSettings( sets, true );
+  if( load_common_settings )
+  {
+    qDebug() << "RC read common settings";
+    loadCommonSettings( sets, true );
+  }
 
   QStringList key_list = sets->allKeys();
   foreach( QString key, key_list )
@@ -1245,8 +1245,20 @@ void Settings::load()
 void Settings::loadCommonSettings( QSettings* sets, bool in_file_rc )
 {
   sets->beginGroup( "Chat" );
-  m_chatFont.fromString( sets->value( "Font", QApplication::font().toString() ).toString() );
-  setChatFont( m_chatFont );
+  QString chat_font_string = sets->value( "Font", "" ).toString();
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Load default chat font:" << chat_font_string;
+#endif
+  if( !chat_font_string.isEmpty() )
+  {
+    QFont f;
+    if( f.fromString( chat_font_string ) )
+      setChatFont( f );
+    else
+      qWarning() << "Invalid font string found in ChatFont setting value:" << chat_font_string;
+  }
+  else
+    setChatFont( QApplication::font() );
   m_chatFontColor = sets->value( "FontColor", QColor( Qt::black ).name() ).toString();
   m_defaultChatBackgroundColor = sets->value( "DefaultChatBackgroundColor", m_defaultChatBackgroundColor ).toString();
   m_chatCompact = sets->value( "CompactMessage", true ).toBool();
