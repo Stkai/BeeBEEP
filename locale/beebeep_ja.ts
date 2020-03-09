@@ -4402,12 +4402,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="478"/>
         <source>Ok</source>
-        <translation type="unfinished">OK</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="485"/>
         <source>Cancel</source>
-        <translation type="unfinished">キャンセル</translation>
+        <translation>キャンセル</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="114"/>
@@ -4465,7 +4465,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiPluginManager.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished">ダイアログ</translation>
+        <translation>ダイアログ</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiPluginManager.ui" line="100"/>
@@ -4480,7 +4480,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiPluginManager.ui" line="133"/>
         <source>Close</source>
-        <translation type="unfinished">閉じる</translation>
+        <translation>閉じる</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiPluginManager.cpp" line="37"/>
@@ -4495,7 +4495,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiPluginManager.cpp" line="44"/>
         <source>Version</source>
-        <translation type="unfinished">バージョン</translation>
+        <translation>バージョン</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiPluginManager.cpp" line="44"/>
@@ -4674,7 +4674,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="267"/>
         <source>Cancel</source>
-        <translation type="unfinished">キャンセル</translation>
+        <translation>キャンセル</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="275"/>
@@ -4684,13 +4684,13 @@ Please select a different name.</source>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="275"/>
         <source>Ok</source>
-        <translation type="unfinished">OK</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="279"/>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="308"/>
         <source>Please wait</source>
-        <translation type="unfinished">お待ち下さい</translation>
+        <translation>お待ち下さい</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="333"/>
@@ -4708,7 +4708,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="82"/>
         <source>Voice message</source>
-        <translation type="unfinished">ボイスメッセージ</translation>
+        <translation>ボイスメッセージ</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="134"/>
@@ -4718,7 +4718,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="35"/>
         <source>Cancel</source>
-        <translation type="unfinished">キャンセル</translation>
+        <translation>キャンセル</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="65"/>
@@ -4733,7 +4733,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="225"/>
         <source>To</source>
-        <translation type="unfinished">宛先</translation>
+        <translation>宛先</translation>
     </message>
 </context>
 <context>
@@ -4839,12 +4839,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="185"/>
         <source>Ok</source>
-        <translation type="unfinished">OK</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="192"/>
         <source>Cancel</source>
-        <translation type="unfinished">キャンセル</translation>
+        <translation>キャンセル</translation>
     </message>
 </context>
 <context>
@@ -4872,7 +4872,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiRefusedChat.cpp" line="61"/>
         <source>Clear all</source>
-        <translation type="unfinished">すべてクリアする</translation>
+        <translation>すべてクリアする</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiRefusedChat.cpp" line="122"/>
@@ -5264,7 +5264,7 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiShareBox.cpp" line="471"/>
         <location filename="../src/desktop/GuiShareBox.cpp" line="475"/>
         <source>Please wait</source>
-        <translation type="unfinished">お待ち下さい</translation>
+        <translation>お待ち下さい</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="473"/>
@@ -6267,7 +6267,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="693"/>
         <source>You are %1</source>
-        <translation type="unfinished">あなたは %1</translation>
+        <translation>あなたは %1</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="711"/>
@@ -6385,7 +6385,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="118"/>
         <source>Find text in chat</source>
-        <translation type="unfinished">チャットからを検索</translation>
+        <translation>チャットからを検索</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="120"/>
@@ -6445,7 +6445,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="70"/>
         <source>Uploading</source>
-        <translation type="unfinished">アップロードしています</translation>
+        <translation>アップロードしています</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="117"/>
