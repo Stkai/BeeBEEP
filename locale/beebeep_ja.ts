@@ -124,7 +124,7 @@
     <message>
         <location filename="../src/core/Core.cpp" line="292"/>
         <source>%1 Do you need support? Visit the %2.</source>
-        <translation>%1 サポートが必要なら%2.にアクセス。</translation>
+        <translation>%1 サポートが必要であれば%2をご確認ください。</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="294"/>
@@ -261,7 +261,8 @@
         <location filename="../src/core/CoreChat.cpp" line="954"/>
         <location filename="../src/core/CoreChat.cpp" line="965"/>
         <source>%1 Chat with %2.</source>
-        <translation>%1 %2 のチャット。</translation>
+        <translatorcomment>引数はユーザー名</translatorcomment>
+        <translation>%1 %2 とのチャット。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="286"/>
@@ -286,6 +287,7 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="376"/>
         <source>%1 Chat with %2 is archived.</source>
+        <translatorcomment>引数はたぶんチャット名</translatorcomment>
         <translation>%1 %2 のチャットは保存されました。</translation>
     </message>
     <message>
@@ -358,7 +360,7 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="484"/>
         <source>The message will be delivered to %1.</source>
-        <translation>%1 にメッセージを送信。</translation>
+        <translation>メッセージは後で %1 に届けられます。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="637"/>
@@ -373,7 +375,7 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="704"/>
         <source>Offline message will be sent to %1</source>
-        <translation>オフラインメッセージを %1 に送信します</translation>
+        <translation>オフラインメッセージは後で %1 に届けられます</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="908"/>
@@ -555,7 +557,7 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="398"/>
         <source>%1 Sending %2 to %3.</source>
-        <translation>%1 %3 へ %2 を送信。</translation>
+        <translation>%1 %3 へ %2 を送信中。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="166"/>
@@ -633,12 +635,12 @@
     <message>
         <location filename="../src/core/CoreUser.cpp" line="93"/>
         <source>You have changed your nickname from %1 to %2.</source>
-        <translation>あなたはニックネームを %1 から %2 に変更。</translation>
+        <translation>あなたはユーザー名を %1 から %2 に変更。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreUser.cpp" line="95"/>
         <source>%1 has changed the nickname in %2.</source>
-        <translation>%1 はニックネームを %2 に変更しました。</translation>
+        <translation>%1 はユーザー名を %2 に変更しました。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreUser.cpp" line="316"/>
@@ -653,7 +655,7 @@
     <message>
         <location filename="../src/core/CoreConnection.cpp" line="290"/>
         <source>%1 Connection closed to user %2 because it uses your nickname: %3.</source>
-        <translation>%1 ユーザー %2 との接続を終了しました。理由: あなたのニックネーム %3 を使用しています。</translation>
+        <translation>%1 ユーザー %2 との接続を終了しました。理由: あなたのユーザー名 %3 を使用しています。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreConnection.cpp" line="277"/>
@@ -681,7 +683,7 @@
     <message>
         <location filename="../src/core/CoreConnection.cpp" line="330"/>
         <source>%1 Connection closed to user %2 because it uses same nickname of the already connected user %3: %4.</source>
-        <translation>%1 ユーザー %2 との接続を終了しました。理由: 接続済みのユーザー %3 と同じニックネームを使用しています: %4。</translation>
+        <translation>%1 ユーザー %2 との接続を終了しました。理由: 接続済みのユーザー %3 と同じユーザー名を使用しています: %4。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreConnection.cpp" line="336"/>
@@ -691,7 +693,7 @@
     <message>
         <location filename="../src/core/CoreConnection.cpp" line="399"/>
         <source>%1 users connected</source>
-        <translation>%1 ユーザーが接続</translation>
+        <translation>%1 名のユーザーと接続</translation>
     </message>
     <message>
         <location filename="../src/core/CoreConnection.cpp" line="406"/>
@@ -769,7 +771,7 @@
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="269"/>
         <source>Other</source>
-        <translation>ほか</translation>
+        <translation>その他</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="270"/>
@@ -818,7 +820,7 @@
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="190"/>
         <source>Transfer completed in %1</source>
-        <translation>転送完了 (%1)</translation>
+        <translation>転送完了 (所要時間 %1)</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="188"/>
@@ -941,12 +943,12 @@
     <message>
         <location filename="../src/desktop/GuiAddUser.cpp" line="131"/>
         <source>Please insert a valid Port or use the default one %1.</source>
-        <translation>有効なポートあるいは既定のポート %1 を入力してください。</translation>
+        <translation>有効なポートあるいは初期設定のポート %1 を入力してください。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAddUser.cpp" line="161"/>
         <source>These IP Address and Port are already in list.</source>
-        <translation>これらの IPアドレスとポートは既に一覧に存在します。</translation>
+        <translation>この IPアドレスとポートは既に一覧に存在します。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAddUser.cpp" line="218"/>
@@ -999,12 +1001,12 @@
     <message>
         <location filename="../src/desktop/GuiAddUser.ui" line="219"/>
         <source>Auto add from your Subnet</source>
-        <translation>あなたのサブネットから自動で追加</translation>
+        <translation>サブネット上のユーザを自動で追加</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAddUser.ui" line="148"/>
         <source>Add an &lt;b&gt;IP Address&lt;/b&gt; and &lt;b&gt;Port&lt;/b&gt; of the user you want to connect</source>
-        <translation>接続したいユーザーの &lt;b&gt;IPアドレス&lt;/b&gt;と&lt;b&gt;ポート&lt;/b&gt;を指定して追加します</translation>
+        <translation>接続したいユーザーの &lt;b&gt;IPアドレス&lt;/b&gt;と&lt;b&gt;ポート&lt;/b&gt;を指定して追加してください</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAddUser.ui" line="96"/>
@@ -1047,7 +1049,7 @@
     <message>
         <location filename="../src/desktop/GuiAskPassword.ui" line="62"/>
         <source>Use standard session (encrypted but authentication is not required)</source>
-        <translation>標準セッションを使用 (暗号化されていますが、認証はなし)</translation>
+        <translation>標準のセッション (暗号化されていますが、認証パスワードは不要です)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAskPassword.ui" line="69"/>
@@ -1057,7 +1059,7 @@
     <message>
         <location filename="../src/desktop/GuiAskPassword.ui" line="124"/>
         <source>* Password must be the same for all user you want to connect</source>
-        <translation>注意: 接続したい全員で同じパスワードを使う必要があります</translation>
+        <translation>※接続する全てのユーザーで同じパスワードを使う必要があります</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiAskPassword.ui" line="153"/>
@@ -1090,7 +1092,7 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="169"/>
         <source>Change font color</source>
-        <translation>フォントの色を変更</translation>
+        <translation>文字色を変更</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="113"/>
@@ -1136,7 +1138,7 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="182"/>
         <source>Send folder</source>
-        <translation>フォルダ送信</translation>
+        <translation>フォルダごと送信</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="122"/>
@@ -1202,7 +1204,7 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="329"/>
         <source>Record voice message</source>
-        <translation>ボイスメッセージを記録</translation>
+        <translation>ボイスメッセージを録音</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="327"/>
@@ -1227,7 +1229,7 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="279"/>
         <source>Private chat is disabled</source>
-        <translation>プライベート・チャットは無効化されています</translation>
+        <translation>個人的なチャットは無効化されています</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="288"/>
@@ -1299,7 +1301,7 @@ Download for free and install the version with this feature from the %1 website.
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="809"/>
         <source>Please select a file to save all the messages of the chat.</source>
-        <translation>チャットのすべてのメッセージを保存するファイルを選択</translation>
+        <translation>チャットのすべてのメッセージを保存するファイルを選択.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="926"/>
@@ -1340,12 +1342,12 @@ Download for free and install the version with this feature from the %1 website.
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="1212"/>
         <source>Do you want to restore the default font?</source>
-        <translation>フォントの指定を規定値に初期化しますか？</translation>
+        <translation>フォントの指定を初期設定に戻しますか?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="1220"/>
         <source>Ready.</source>
-        <translation>利用可能。</translation>
+        <translation>準備完了。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="1236"/>
@@ -1547,7 +1549,7 @@ Download for free and install the version with this feature from the %1 website.
     <message>
         <location filename="../src/desktop/GuiCreateGroup.ui" line="14"/>
         <source>Dialog</source>
-        <translation></translation>
+        <translation>ダイアログ</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateGroup.ui" line="59"/>
@@ -1604,7 +1606,7 @@ Download for free and install the version with this feature from the %1 website.
         <source>%1 already exists as group name or chat name.
 Please select a different name.</source>
         <translation>%1 は既に存在するグループ名またはチャット名です。
-違う名前にしてください。。</translation>
+違う名前にしてください。</translation>
     </message>
 </context>
 <context>
@@ -1617,7 +1619,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.cpp" line="124"/>
         <source>Nobody</source>
-        <translation>なし</translation>
+        <translation>未設定</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.cpp" line="131"/>
@@ -1627,7 +1629,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.cpp" line="175"/>
         <source>Please select at least one recipient for your message.</source>
-        <translation>メッセージの送信先を 1 つ以上選択してください。</translation>
+        <translation>メッセージの送信先を 1 件以上指定してください。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.cpp" line="182"/>
@@ -1665,7 +1667,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="265"/>
         <source>Send this message to all recipients individually</source>
-        <translation>このメッセージをすべての送信先に個別に送信</translation>
+        <translation>すべての送信先にこのメッセージを個別に送信</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="136"/>
@@ -1720,12 +1722,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="189"/>
         <source>Please insert your nickname.</source>
-        <translation>ニックネームを入力してください。</translation>
+        <translation>ユーザー名を入力してください。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="197"/>
         <source>The nickname &apos;%1&apos; is already in use by the user %2.</source>
-        <translation>そのニックネーム「%1」は、ユーザー %2 が使用済みです。</translation>
+        <translation>そのユーザー名「%1」は、ユーザー %2 が使用済みです。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="234"/>
@@ -1753,7 +1755,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiEmoticons.cpp" line="51"/>
         <source>Smiley</source>
-        <translation>顔</translation>
+        <translation>表情</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEmoticons.cpp" line="53"/>
@@ -1768,7 +1770,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiEmoticons.cpp" line="57"/>
         <source>Places</source>
-        <translation>地域</translation>
+        <translation>場所・地域</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEmoticons.cpp" line="59"/>
@@ -2155,7 +2157,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiHome.cpp" line="142"/>
         <source>Click here to see the latest news about BeeBEEP project</source>
-        <translation>クリックで、BeeBEEPプロジェクトの最新情報が見れます！</translation>
+        <translation>クリックで、BeeBEEPプロジェクトの最新情報が見れます</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiHome.cpp" line="147"/>
@@ -2168,7 +2170,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiHome.ui" line="62"/>
         <source>News</source>
-        <translation></translation>
+        <translation>ニュース</translation>
     </message>
 </context>
 <context>
@@ -2214,7 +2216,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiLanguage.ui" line="17"/>
         <source>Dialog</source>
-        <translation></translation>
+        <translation>ダイアログ</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiLanguage.ui" line="45"/>
@@ -2297,7 +2299,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="135"/>
         <source>Please select a file to save the log.</source>
-        <translation>ログを保存するファイルを選択</translation>
+        <translation>ログを保存するファイルを選択.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="36"/>
@@ -2339,7 +2341,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="170"/>
         <source>%1: save log completed.</source>
-        <translation>ログ保存完了 %1</translation>
+        <translation>ログ保存完了 %1.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="171"/>
@@ -2474,7 +2476,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1278"/>
         <source>Select beep file...</source>
-        <translation>ビープ音のファイルを選択(&amp;F)</translation>
+        <translation>ビープ音用のファイルを選択(&amp;F)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1279"/>
@@ -2484,7 +2486,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1058"/>
         <source>Clear all read messages on closing window</source>
-        <translation>未読メッセージをウィンドウを閉じたら消去</translation>
+        <translation>既読のメッセージをウィンドウを閉じたら消去</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="865"/>
@@ -2514,7 +2516,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3837"/>
         <source>Show messages grouped by user</source>
-        <translation>メッセージをユーザーごとにグループ化</translation>
+        <translation>メッセージをユーザーごとにまとめる</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1023"/>
@@ -2544,7 +2546,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1440"/>
         <source>Check for new version...</source>
-        <translation>最新版を確認(&amp;C)...</translation>
+        <translation>最新版の確認(&amp;C)...</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1441"/>
@@ -2581,12 +2583,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="835"/>
         <source>Main</source>
-        <translation>メイン(&amp;M)</translation>
+        <translation>主な操作(&amp;M)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1360"/>
         <source>Show the user&apos;s picture</source>
-        <translation>ユーザーの画像を表示</translation>
+        <translation>ユーザーのプロフィール画像を表示</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="862"/>
@@ -2612,17 +2614,17 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1138"/>
         <source>Prompt before downloading file</source>
-        <translation>ファイルのダウンロード前に質問(&amp;P)</translation>
+        <translation>ファイルのダウンロード前に確認(&amp;P)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1319"/>
         <source>Options</source>
-        <translation></translation>
+        <translation>オプション</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1364"/>
         <source>Show the user&apos;s vCard on right click</source>
-        <translation>右クリックでユーザーの vCard を表示</translation>
+        <translation>右クリックでユーザーの情報カードを表示</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="408"/>
@@ -2697,7 +2699,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1395"/>
         <source>Recently used</source>
-        <translation>最近使用した説明</translation>
+        <translation>最近使用した状態</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1399"/>
@@ -2707,7 +2709,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1400"/>
         <source>Clear all status descriptions</source>
-        <translation>状態の説明をすべて消去</translation>
+        <translation>追加した状態の説明をすべて消去</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="807"/>
@@ -2732,12 +2734,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1431"/>
         <source>?</source>
-        <translation></translation>
+        <translation>ヘルプ(&amp;H)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1436"/>
         <source>Qt Library...</source>
-        <translation>Qt ライブラリ...</translation>
+        <translation>&amp;Qt ライブラリ...</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1432"/>
@@ -2817,7 +2819,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3948"/>
         <source>chat messages</source>
-        <translation>チャットメッセージ</translation>
+        <translation>チャット用</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4063"/>
@@ -2852,7 +2854,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1054"/>
         <source>Open chats in a single window</source>
-        <translation>ひとつのウインドウにチャットを開く(&amp;W)</translation>
+        <translation>すべてのチャットをひとつのウインドウに開く(&amp;W)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="924"/>
@@ -2878,7 +2880,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="905"/>
         <source>Show only on system tray</source>
-        <translation>システムトレイにのみ表示(&amp;T)</translation>
+        <translation>タスクトレイにのみ表示(&amp;T)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="909"/>
@@ -2908,7 +2910,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1390"/>
         <source>Set your status to away automatically</source>
-        <translation>自動で状態を離籍中にする</translation>
+        <translation>自動で状態を離席中にする</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1124"/>
@@ -2923,12 +2925,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1224"/>
         <source>Enable BEEP alert</source>
-        <translation>ビープ音を有効化(&amp;E)</translation>
+        <translation>ビープ音で通知(&amp;E)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1258"/>
         <source>System tray icon</source>
-        <translation>システムトレイの通知(&amp;T)</translation>
+        <translation>タスクトレイの通知(&amp;T)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="358"/>
@@ -2963,7 +2965,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1120"/>
         <source>Dictionary</source>
-        <translation>辞書(&amp;D)</translation>
+        <translation>辞書の選択(&amp;D)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="977"/>
@@ -2989,7 +2991,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="981"/>
         <source>By nickname</source>
-        <translation>ニックネーム(&amp;N)</translation>
+        <translation>ユーザー名(&amp;N)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1005"/>
@@ -3073,22 +3075,22 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="945"/>
         <source>Prompts to change user</source>
-        <translation>ユーザー名の変更を質問</translation>
+        <translation>ユーザー名の変更を確認</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="949"/>
         <source>Prompts to ask network password</source>
-        <translation>パスワードの使用を質問</translation>
+        <translation>パスワードの設定を確認</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="936"/>
         <source>Show the user list</source>
-        <translation>ユーザー一覧を表示(&amp;U)</translation>
+        <translation>ユーザーの一覧を表示(&amp;U)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="940"/>
         <source>Show the chat list</source>
-        <translation>チャット一覧を表示(&amp;C)</translation>
+        <translation>チャットの一覧を表示(&amp;C)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1031"/>
@@ -3198,7 +3200,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1298"/>
         <source>Fit image to screen</source>
-        <translation>モニタに画像をフィット(&amp;F)</translation>
+        <translation>全面全体に表示(&amp;F)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="869"/>
@@ -3243,12 +3245,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1448"/>
         <source>Information about %1...</source>
-        <translation>%1 について(&amp;I)...</translation>
+        <translation>開発者 %1(&amp;I)...</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1446"/>
         <source>Discover the fact of the day...</source>
-        <translation>今日の事実を発見...</translation>
+        <translation>今日の一言...</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="866"/>
@@ -3328,7 +3330,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1180"/>
         <source>when possible</source>
-        <translation>可能であれば</translation>
+        <translation>可能なら</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1210"/>
@@ -3379,7 +3381,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1706"/>
         <source>How many minutes of idle %1 can wait before changing status to away?</source>
-        <translation>%1 が何分間アイドル状態になれば、状態を離籍中しますか？</translation>
+        <translation>%1 が何分間アイドル状態になれば、状態を離席中しますか？</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1748"/>
@@ -3460,12 +3462,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2286"/>
         <source>Save maximum %1 lines of chat</source>
-        <translation>チャットを %1 行まで保存(&amp;M)</translation>
+        <translation>最大 %1 行までチャットを保存(&amp;M)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2293"/>
         <source>Clean the cache from items older than %1 days</source>
-        <translation>%1 日前の項目のキャッシュ削除(&amp;C)</translation>
+        <translation>%1 日経過でデータのキャッシュ削除(&amp;C)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2300"/>
@@ -3570,7 +3572,7 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="2714"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2839"/>
         <source>Yes, and don&apos;t ask anymore</source>
-        <translation>はい、また質問不要です</translation>
+        <translation>はい、今後も確認不要</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2768"/>
@@ -3640,6 +3642,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3449"/>
         <source>Do you want to delete saved chat with %1?</source>
+        <translatorcomment>引数にはグループチャット名も入る</translatorcomment>
         <translation>%1 の保存済みチャットを削除しますか？</translation>
     </message>
     <message>
@@ -3994,11 +3997,13 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3753"/>
         <source>Do you want to leave the chat with %1?</source>
+        <translatorcomment>引数は c.name たぶんチャット名</translatorcomment>
         <translation>%1 のチャットから退出しますか？</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3759"/>
         <source>Unable to leave the chat with %1.</source>
+        <translatorcomment>引数は c.name たぶんチャット名</translatorcomment>
         <translation>%1 のチャットから退出できません。</translation>
     </message>
     <message>
@@ -4020,12 +4025,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4024"/>
         <source>%1 is online</source>
-        <translation>%1 はオンライン</translation>
+        <translation>%1 はオンラインです</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4026"/>
         <source>%1 is offline</source>
-        <translation>%1 はオフライン</translation>
+        <translation>%1 はオフラインです</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4038"/>
@@ -4134,6 +4139,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3687"/>
         <source>Chat with %1 is empty.</source>
+        <translatorcomment>引数はチャット名</translatorcomment>
         <translation>%1 のチャットは空です。</translation>
     </message>
     <message>
@@ -4266,17 +4272,17 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="51"/>
         <source>Message port</source>
-        <translation>メッセージ用ポート</translation>
+        <translation>メッセージ用ポート番号</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="52"/>
         <source>File transfer port</source>
-        <translation>ファイル転送用ポート</translation>
+        <translation>ファイル転送用ポート番号</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="53"/>
         <source>Enter the host address and the port you want to test.</source>
-        <translation>テストするホストアドレスとポートを入力してください。</translation>
+        <translation>テストするホストアドレスとポート番号を入力してください。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="68"/>
@@ -4318,7 +4324,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="159"/>
         <source>Connection to %1 has been closed.</source>
-        <translation>%1 への接続はクローズしました。</translation>
+        <translation>%1 への接続が終了しました。</translation>
     </message>
 </context>
 <context>
@@ -4467,7 +4473,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiPluginManager.ui" line="14"/>
         <source>Dialog</source>
-        <translation></translation>
+        <translation>ダイアログ</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiPluginManager.ui" line="100"/>
@@ -4555,7 +4561,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="46"/>
         <source>Edit</source>
-        <translation>編集</translation>
+        <translation>内容を編集</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="47"/>
@@ -4576,7 +4582,7 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="142"/>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="146"/>
         <source>Please insert your new preset message.</source>
-        <translation>定型文を入力してください。</translation>
+        <translation>新規追加する定型文を入力してください。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiPresetMessageList.cpp" line="164"/>
@@ -4666,7 +4672,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="266"/>
         <source>Do you want to start recording your voice message again?</source>
-        <translation>再度ボイスメッセージを録音開始しますか？</translation>
+        <translation>再度ボイスメッセージの録音を開始しますか？</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="267"/>
@@ -4887,7 +4893,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiRefusedChat.ui" line="17"/>
         <source>Dialog</source>
-        <translation></translation>
+        <translation>ダイアログ</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiRefusedChat.ui" line="38"/>
@@ -4905,7 +4911,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="119"/>
         <source>Empty</source>
-        <translation>内容なし</translation>
+        <translation>保存済みのチャットはありません</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="139"/>
@@ -4971,7 +4977,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="123"/>
         <source>end of messages</source>
-        <translation>メッセージの終端</translation>
+        <translation>メッセージは以上です</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="141"/>
@@ -4992,12 +4998,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="213"/>
         <source>Please select a file where to save the messages showed in this window.</source>
-        <translation>このウィンドウに表示されたメッセージを保存するファイルを選択</translation>
+        <translation>このウィンドウに表示されたメッセージを保存するファイルを選択.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="226"/>
         <source>%1: save completed.</source>
-        <translation>保存完了 %1</translation>
+        <translation>保存完了 %1.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="106"/>
@@ -5040,6 +5046,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiSavedChatList.cpp" line="162"/>
         <source>Click to view saved chat with %1</source>
+        <translatorcomment>引数はチャット名</translatorcomment>
         <translation>クリックで、保存された %1 のチャットを表示</translation>
     </message>
 </context>
@@ -5313,7 +5320,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiShareBox.ui" line="14"/>
         <source>Form</source>
-        <translation></translation>
+        <translation>フォーム</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.ui" line="168"/>
@@ -5355,7 +5362,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiShareLocal.cpp" line="39"/>
         <source>max &lt;b&gt;%1&lt;/b&gt; files</source>
-        <translation>最大 &lt;b&gt;%1&lt;/b&gt; ファイル</translation>
+        <translation>最大 &lt;b&gt;%1&lt;/b&gt; 個のファイル</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareLocal.cpp" line="39"/>
@@ -5425,7 +5432,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiShareLocal.cpp" line="90"/>
         <source>Clear all shared paths from the list</source>
-        <translation>一覧からすべての共有パスを除去</translation>
+        <translation>すべての共有パスを一覧から除去</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareLocal.cpp" line="99"/>
@@ -5435,7 +5442,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiShareLocal.cpp" line="101"/>
         <source>File transfer is disabled</source>
-        <translation>ファイル転送が設定で無効</translation>
+        <translation>ファイル転送の設定が無効です</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareLocal.cpp" line="119"/>
@@ -5490,7 +5497,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiShareLocal.ui" line="14"/>
         <source>Form</source>
-        <translation></translation>
+        <translation>フォーム</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareLocal.ui" line="72"/>
@@ -5513,7 +5520,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiShareNetwork.cpp" line="57"/>
         <source>Search shared files in your network</source>
-        <translation>あなたのネットワークで共有されているファイルを検索</translation>
+        <translation>あなたのネットワークに共有されているファイルを検索</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareNetwork.cpp" line="60"/>
@@ -5523,7 +5530,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiShareNetwork.cpp" line="61"/>
         <source>Clear and reload list</source>
-        <translation>一覧を白紙化し更新</translation>
+        <translation>一覧をクリアして更新</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareNetwork.cpp" line="79"/>
@@ -5533,7 +5540,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiShareNetwork.cpp" line="88"/>
         <source>File Type</source>
-        <translation>ファイル種別</translation>
+        <translation>ファイル形式</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareNetwork.cpp" line="94"/>
@@ -5598,7 +5605,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiShareNetwork.cpp" line="40"/>
         <source>Files and folders shared in your network</source>
-        <translation>あなたのネットワークで共有されているファイル</translation>
+        <translation>あなたのネットワーク上に共有中のファイル</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareNetwork.cpp" line="41"/>
@@ -5623,7 +5630,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiShareNetwork.cpp" line="390"/>
         <source>Download single file</source>
-        <translation>ファイルをダウンロード</translation>
+        <translation>ファイルをダウンロード(&amp;D)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareNetwork.cpp" line="390"/>
@@ -5638,7 +5645,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiShareNetwork.cpp" line="404"/>
         <source>Expand all items</source>
-        <translation>全項目を展開(&amp;E）</translation>
+        <translation>全項目を展開(&amp;E)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareNetwork.cpp" line="405"/>
@@ -5656,7 +5663,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiShareNetwork.ui" line="14"/>
         <source>Form</source>
-        <translation>ニュース</translation>
+        <translation>フォーム</translation>
     </message>
 </context>
 <context>
@@ -5664,7 +5671,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiShortcut.cpp" line="35"/>
         <source>Shortcuts</source>
-        <translation>ショートカット</translation>
+        <translation>ショートカットキー</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShortcut.cpp" line="40"/>
@@ -5712,7 +5719,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiShortcut.ui" line="17"/>
         <source>Dialog</source>
-        <translation></translation>
+        <translation>ダイアログ</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShortcut.ui" line="23"/>
@@ -5722,7 +5729,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiShortcut.ui" line="50"/>
         <source>Restore default shortcuts</source>
-        <translation>ショートカットキーを初期に戻す</translation>
+        <translation>ショートカットキーを初期設定に戻す</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShortcut.ui" line="53"/>
@@ -5761,7 +5768,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="551"/>
         <source>You cannot send files to %1 because the user is offline.</source>
-        <translation>ユーザー %1 はオフラインなのでファイル送信できませんでした。</translation>
+        <translation>ユーザー %1 はオフラインなため、ファイルを送信できません.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="586"/>
@@ -5776,7 +5783,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="595"/>
         <source>Do you want to send %1 %2 to %3?</source>
-        <translation>%1 %2を %3 に送信しますか？</translation>
+        <translation>%3 に %1 %2 を 送信しますか？</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="596"/>
@@ -5822,12 +5829,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="75"/>
         <source>is</source>
-        <translation>PCアカウント</translation>
+        <translation>のユーザー名</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="78"/>
         <source>from %1</source>
-        <translation>(%1)</translation>
+        <translation>(PCアカウント %1)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="90"/>
@@ -5837,7 +5844,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="92"/>
         <source>Happy Birthday</source>
-        <translation>お誕生日おめでとう</translation>
+        <translation>お誕生日おめでとうございます</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="123"/>
@@ -5882,12 +5889,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="201"/>
         <source>You cannot remove an user who is connected</source>
-        <translation>接続しているユーザーは削除できません</translation>
+        <translation>接続中のユーザーは削除できません</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="206"/>
         <source>You cannot remove an user who is in group chat</source>
-        <translation>グループチャット中のユーザーは削除できません</translation>
+        <translation>グループチャットに参加しているユーザーは削除できません</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="211"/>
@@ -5905,12 +5912,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="14"/>
         <source>Dialog</source>
-        <translation></translation>
+        <translation>ダイアログ</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="148"/>
         <source>Nickname</source>
-        <translation>ニックネーム</translation>
+        <translation>ユーザー名</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="180"/>
@@ -5945,22 +5952,22 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="376"/>
         <source>Add or change photo</source>
-        <translation>写真の追加または変更</translation>
+        <translation>プロフィール画像を変更</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="405"/>
         <source>Remove photo</source>
-        <translation>写真を除去</translation>
+        <translation>プロフィール画像を除去</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="437"/>
         <source>Change your nickname color</source>
-        <translation>ニックネームの色を変更</translation>
+        <translation>ユーザー名の色を変更</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="476"/>
         <source>Information to display to other users</source>
-        <translation>ほかのユーザーに表示される情報</translation>
+        <translation>ほかのユーザーに表示する情報</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="527"/>
@@ -5983,7 +5990,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiVCard.ui" line="87"/>
         <source>Widget</source>
-        <translation></translation>
+        <translation>ウィジット</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.ui" line="282"/>
@@ -6043,7 +6050,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiVCard.ui" line="648"/>
         <source>Change the nickname color</source>
-        <translation>ニックネームの色を変更</translation>
+        <translation>ユーザー名の色を変更</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.ui" line="706"/>
@@ -6084,7 +6091,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiWizard.cpp" line="77"/>
         <source>Your nickname can not be empty.</source>
-        <translation>ニックネームは空欄にできません。</translation>
+        <translation>ユーザー名は空欄にできません。</translation>
     </message>
 </context>
 <context>
@@ -6092,7 +6099,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiWizard.ui" line="14"/>
         <source>Dialog</source>
-        <translation></translation>
+        <translation>ダイアログ</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWizard.ui" line="36"/>
@@ -6230,12 +6237,13 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiChatItem.cpp" line="121"/>
         <source>Open chat with %1</source>
+        <translatorcomment>引数はチャット名</translatorcomment>
         <translation>%1 のチャットを開く</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatItem.cpp" line="128"/>
         <source>unsent messages</source>
-        <translation>未送信のメッセージ</translation>
+        <translation>個の未送信メッセージ</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="84"/>
@@ -6307,7 +6315,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="751"/>
         <source>%1&apos;s birthday is in %2 days</source>
-        <translation>%1 の誕生日は %2 日後です</translation>
+        <translation>%1 の誕生日まであと %2 日</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="753"/>
@@ -6317,7 +6325,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="760"/>
         <source>Happy Birthday to you!</source>
-        <translation>お誕生日おめでとう！</translation>
+        <translation>お誕生日おめでとうございます!</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="786"/>
@@ -6343,7 +6351,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="100"/>
         <source>Empty</source>
-        <translation>なし</translation>
+        <translation>保存済みのチャットはありません</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="102"/>
@@ -6363,7 +6371,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="108"/>
         <source>Minimize all chats</source>
-        <translation>すべてのチャット最小化</translation>
+        <translation>すべてのチャットを最小化</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="110"/>
@@ -6483,7 +6491,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="153"/>
         <source>Please wait</source>
-        <translation>お待ちください</translation>
+        <translation>処理中</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="159"/>
@@ -6535,11 +6543,13 @@ Please select a different name.</source>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="77"/>
         <source>available</source>
+        <translatorcomment>在席</translatorcomment>
         <translation>対応できます</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="78"/>
         <source>busy</source>
+        <translatorcomment>ビジーは日本語的ではなかった</translatorcomment>
         <translation>忙しいです</translation>
     </message>
     <message>
@@ -6550,7 +6560,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="80"/>
         <source>status error</source>
-        <translation>状態のエラー</translation>
+        <translation>状態の取得エラー</translation>
     </message>
 </context>
 </TS>
