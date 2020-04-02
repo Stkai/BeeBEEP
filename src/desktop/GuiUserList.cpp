@@ -96,7 +96,7 @@ void GuiUserList::updateUsers()
   foreach( User u, UserManager::instance().userList().toList() )
   {
     if( m_filter.isEmpty() || u.vCard().nickName().contains( m_filter, Qt::CaseInsensitive ) ||
-        u.vCard().fullName().contains( m_filter, Qt::CaseInsensitive ) ||
+        u.vCard().fullName( Settings::instance().useUserFirstNameFirstInFullName() ).contains( m_filter, Qt::CaseInsensitive ) ||
         u.vCard().email().contains( m_filter, Qt::CaseInsensitive ) ||
         u.vCard().phoneNumber().contains( m_filter, Qt::CaseInsensitive ) )
       setUser( u, false );

@@ -1277,6 +1277,18 @@ Download for free and install the version with this feature from the %1 website.
     </message>
 </context>
 <context>
+    <name>GuiChatMessage</name>
+    <message>
+        <source>yyyy-MM-dd</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hh:mm:ss</source>
+        <extracomment>default time format in chat message</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>GuiChatWidget</name>
     <message>
         <source>Chat</source>
@@ -3407,6 +3419,10 @@ Please select a different name.</source>
         <source>You are not allowed create new message.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Show surname before firstname of the users</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -4925,6 +4941,10 @@ Please select a different name.</source>
     <message>
         <source>No shared information.</source>
         <translation>Загальної інформації немає.</translation>
+    </message>
+    <message>
+        <source>d MMMM yyyy</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

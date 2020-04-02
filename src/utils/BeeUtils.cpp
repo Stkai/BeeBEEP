@@ -140,7 +140,7 @@ QColor Bee::userStatusForegroundColor( int user_status )
 
 QString Bee::userNameToShow( const User& u, bool to_html )
 {
-  QString user_name = Settings::instance().useUserFullName() && u.vCard().hasFullName() ? u.vCard().fullName() : u.name();
+  QString user_name = Settings::instance().useUserFullName() && u.vCard().hasFullName() ? u.vCard().fullName( Settings::instance().useUserFirstNameFirstInFullName() ) : u.name();
   if( Settings::instance().appendHostNameToUserName() && !u.localHostName().isEmpty() )
     user_name.append( QString( " [%1]" ).arg( u.localHostName() ) );
   return to_html ? Bee::replaceHtmlSpecialCharacters( user_name ) : user_name;
@@ -630,7 +630,7 @@ QPixmap Bee::avatarForUser( const User& u, const QSize& avatar_size, bool use_av
   {
     default_avatar_used = true;
     Avatar av;
-    av.setName( u.isValid() ? (Settings::instance().useUserFullName() && u.vCard().hasFullName() ? u.vCard().fullName() : u.name()) : "??" );
+    av.setName( u.isValid() ? (Settings::instance().useUserFullName() && u.vCard().hasFullName() ? u.vCard().fullName( Settings::instance().useUserFirstNameFirstInFullName() ) : u.name()) : "??" );
     if( u.isStatusConnected() )
       av.setColor( u.color() );
     else
@@ -739,7 +739,7 @@ QString Bee::userBirthdayToText( const User& u )
   if( !u.isLocal() )
   {
     // Do not use Bee::userNameToShow( u ) to avoid computer name
-    QString user_name = Settings::instance().useUserFullName() && u.vCard().hasFullName() ? u.vCard().fullName() : u.name();
+    QString user_name = Settings::instance().useUserFullName() && u.vCard().hasFullName() ? u.vCard().fullName( Settings::instance().useUserFirstNameFirstInFullName() ) : u.name();
     user_name = Bee::removeHtmlTags( user_name );
     user_name = Bee::replaceHtmlSpecialCharacters( user_name );
     int days_to = u.daysToBirthDay();

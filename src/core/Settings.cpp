@@ -1428,6 +1428,7 @@ void Settings::loadCommonSettings( QSettings* sets, bool in_file_rc )
   m_showUsersInWorkgroups = sets->value( "ShowUsersInWorkgroups", false ).toBool();
   m_openChatWhenSendNewMessage = sets->value( "OpenChatWhenSendNewMessage", true ).toBool();
   m_sendNewMessageIndividually = sets->value( "SendNewMessageIndividually", false ).toBool();
+  m_useUserFirstNameFirstInFullName = sets->value( "ShowUserFirstNameFirstInFullName", useUserFirstNameFirstInFullNameFromLanguage() ).toBool();
   sets->endGroup();
 
   sets->beginGroup( "Tools" );
@@ -1815,6 +1816,7 @@ void Settings::save()
   sets->setValue( "ShowUsersInWorkgroups", m_showUsersInWorkgroups );
   sets->setValue( "OpenChatWhenSendNewMessage", m_openChatWhenSendNewMessage );
   sets->setValue( "SendNewMessageIndividually", m_sendNewMessageIndividually );
+  sets->setValue( "ShowUserFirstNameFirstInFullName", m_useUserFirstNameFirstInFullName );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );
@@ -2374,4 +2376,12 @@ QString Settings::downloadDirectoryForUser( const User& u ) const
   }
   else
     return downloadDirectory();
+}
+
+bool Settings::useUserFirstNameFirstInFullNameFromLanguage() const
+{
+  if( m_language == "ja" ) // japanese
+    return false;
+  else
+    return true;
 }

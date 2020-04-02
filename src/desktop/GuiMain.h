@@ -355,6 +355,7 @@ private:
   QAction* mp_actEditAvatarIconSize;
   QAction* mp_actShowOnlineUsersOnly;
   QAction* mp_actShowUserFullName;
+  QAction* mp_actShowUserFirstNameFirstInFullName;
   QActionGroup* mp_actGroupOnSendingMessage;
 
   QAction* mp_actShowUserListOnConnection;

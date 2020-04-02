@@ -1011,6 +1011,10 @@ void GuiMain::createMenus()
   mp_actShowUserFullName->setCheckable( true );
   mp_actShowUserFullName->setChecked( Settings::instance().useUserFullName() );
   mp_actShowUserFullName->setDisabled( true );
+  mp_actShowUserFirstNameFirstInFullName = mp_menuUsersSettings->addAction( tr( "Show surname before firstname of the users" ) , this, SLOT( settingsChanged() ) );
+  mp_actShowUserFirstNameFirstInFullName->setCheckable( true );
+  mp_actShowUserFirstNameFirstInFullName->setChecked( !Settings::instance().useUserFirstNameFirstInFullName() );
+  mp_actShowUserFirstNameFirstInFullName->setData( 102 );
   mp_menuUsersSettings->addSeparator();
   mp_actRemoveInactiveUsers = mp_menuUsersSettings->addAction( "", this, SLOT( settingsChanged() ) );
   mp_actRemoveInactiveUsers->setCheckable( true );
@@ -1356,6 +1360,7 @@ void GuiMain::createMenus()
   act->setData( 87 );
   if( mp_actShowUserFullName->isChecked() )
     mp_menuUserList->addAction( mp_actShowUserFullName );
+  mp_menuUserList->addAction( mp_actShowUserFirstNameFirstInFullName );
   mp_menuUserList->addSeparator();
   act = mp_menuUserList->addAction( tr( "Show the user's picture" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -1410,10 +1415,9 @@ void GuiMain::createMenus()
   /* Context Menu for user list view */
   QMenu* context_menu_users = new QMenu( "Menu", this );
   if( mp_actShowUserFullName->isChecked() )
-  {
     context_menu_users->addAction( mp_actShowUserFullName );
-    context_menu_users->addSeparator();
-  }
+  context_menu_users->addAction( mp_actShowUserFirstNameFirstInFullName );
+  context_menu_users->addSeparator();
   context_menu_users->addAction( mp_actVCard );
   context_menu_users->addAction( mp_actChangeStatusDescription );
   context_menu_users->addSeparator();
@@ -2211,6 +2215,9 @@ void GuiMain::settingsChanged( QAction* act )
     break;
   case 101:
     Settings::instance().setKeepModificationDateOnFileTransferred( act->isChecked() );
+    break;
+  case 102:
+    Settings::instance().setUseUserFirstNameFirstInFullName( !act->isChecked() );
     break;
   default:
     qWarning() << "GuiMain::settingsChanged(): error in setting id" << act->data().toInt();
@@ -3843,7 +3850,10 @@ void GuiMain::showChatSettingsMenu()
   act->setChecked( Settings::instance().chatUseYourNameInsteadOfYou() );
   act->setData( 41 );
   if( mp_actShowUserFullName->isChecked() )
+  {
     mp_menuChat->addAction( mp_actShowUserFullName );
+    mp_menuChat->addAction( mp_actShowUserFirstNameFirstInFullName );
+  }
   act = mp_menuChat->addAction( tr( "Show username's color" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().chatUseColoredUserNames() );

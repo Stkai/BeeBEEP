@@ -71,8 +71,8 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
   m_userColor = u.color();
 
   QString name_txt = "";
-  if( u.vCard().hasFullName() && u.vCard().fullName() != u.name() )
-    name_txt = QString( "<font color=""%1"">%2</font> %3 " ).arg( u.color(), u.vCard().fullName(), tr( "is" ) );
+  if( u.vCard().hasFullName() && u.vCard().fullName( Settings::instance().useUserFirstNameFirstInFullName() ) != u.name() )
+    name_txt = QString( "<font color=""%1"">%2</font> %3 " ).arg( u.color(), u.vCard().fullName( Settings::instance().useUserFirstNameFirstInFullName() ), tr( "is" ) );
   name_txt += QString( "<font color=""%1""><b>%2</b></font>" ).arg( u.color(), Bee::replaceHtmlSpecialCharacters( u.name() ) );
   if( !u.localHostName().isEmpty() )
     name_txt.append( QString( " %1" ).arg( tr( "from %1" ).arg( u.localHostName().toLower() ) ) );
@@ -87,7 +87,9 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
 
   if( u.vCard().birthday().isValid() )
   {
-    QString s_birth_day = tr( "Birthday: %1" ).arg( u.vCard().birthday().year() == 1900 ? u.vCard().birthday().toString( "d MMMM" ) : u.vCard().birthday().toString( "d MMMM yyyy" ) );
+    QString s_birth_day = tr( "Birthday: %1" ).arg( u.vCard().birthday().year() == 1900 ? u.vCard().birthday().toString( "d MMMM" )
+                            //: This date format refers to a birthday.
+                            : u.vCard().birthday().toString( tr("d MMMM yyyy" ) ) );
     if( u.isBirthDay() )
       s_birth_day += QString( " - <font color=red><b>%1!!!</b></font>" ).arg( tr( "Happy Birthday" ) );
     mp_lBirthday->setText( s_birth_day );

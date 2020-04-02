@@ -46,7 +46,8 @@ QString GuiChatMessage::datetimestampToString( const ChatMessage& cm, bool show_
   QString date_time_stamp_format = "";
 
   if( show_datestamp || cm.timestamp().date() != QDate::currentDate() )
-    date_time_stamp_format += QString( "yyyy-MM-dd" );
+    //: default date format in chat message
+    date_time_stamp_format += tr( "yyyy-MM-dd" );
 
   if( show_timestamp )
   {
@@ -55,7 +56,8 @@ QString GuiChatMessage::datetimestampToString( const ChatMessage& cm, bool show_
     if( Settings::instance().useMessageTimestampWithAP() )
       date_time_stamp_format += QString( "h:mm:ss ap" );
     else
-      date_time_stamp_format += QString( "hh:mm:ss" );
+      //: default time format in chat message
+      date_time_stamp_format += tr( "hh:mm:ss" );
   }
 
   return date_time_stamp_format.isEmpty() ? date_time_stamp_format : (Settings::instance().useMessageTimestampWithAP() ? QLocale("en_US").toString( cm.timestamp(), date_time_stamp_format ) : cm.timestamp().toString( date_time_stamp_format ));

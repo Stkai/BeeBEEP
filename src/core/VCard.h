@@ -45,7 +45,7 @@ public:
   inline void setFirstName( const QString& );
   inline const QString& lastName() const;
   inline void setLastName( const QString& );
-  inline QString fullName() const;
+  inline QString fullName( bool first_name_first ) const;
   inline bool hasFullName() const;
   inline const QDate& birthday() const;
   inline void setBirthday( const QDate& );
@@ -81,7 +81,7 @@ inline const QString& VCard::firstName() const { return m_firstName; }
 inline void VCard::setFirstName( const QString& new_value ) { m_firstName = new_value; }
 inline const QString& VCard::lastName() const { return m_lastName; }
 inline void VCard::setLastName( const QString& new_value ) { m_lastName = new_value; }
-inline QString VCard::fullName() const { return QString( "%1 %2" ).arg( m_firstName, m_lastName ).simplified(); }
+inline QString VCard::fullName( bool first_name_first ) const { return first_name_first ? QString( "%1 %2" ).arg( m_firstName, m_lastName ).simplified() : QString( "%1 %2" ).arg( m_lastName, m_firstName ).simplified(); }
 inline const QDate& VCard::birthday() const { return m_birthday; }
 inline void VCard::setBirthday( const QDate& new_value ) { m_birthday = new_value; }
 inline const QString& VCard::email() const { return m_email; }

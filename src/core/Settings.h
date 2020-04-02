@@ -605,6 +605,10 @@ public:
   inline void setSaveMessagesTimestamp( const QDateTime& );
   inline const QDateTime& saveMessagesTimestamp() const;
 
+  inline void setUseUserFirstNameFirstInFullName( bool );
+  inline bool useUserFirstNameFirstInFullName() const;
+  bool useUserFirstNameFirstInFullNameFromLanguage() const;
+
   QNetworkProxy systemNetworkProxy( const QNetworkProxyQuery& ) const;
 
   inline bool disableConnectionSocketEncryption() const;
@@ -697,6 +701,7 @@ private:
   bool m_useCompactDataSaving;
   bool m_useUserFullName;
   bool m_appendHostNameToUserName;
+  bool m_useUserFirstNameFirstInFullName;
 
   bool m_disableConnectionSocketEncryption;
   bool m_allowNotEncryptedConnectionsAlso;
@@ -1386,5 +1391,7 @@ inline bool Settings::beepInActiveWindowAlso() const { return m_beepInActiveWind
 inline void Settings::setBeepInActiveWindowAlso( bool new_value ) { m_beepInActiveWindowAlso = new_value; }
 inline void Settings::setKeepModificationDateOnFileTransferred( bool new_value ) { m_keepModificationDateOnFileTransferred = new_value; }
 inline bool Settings::keepModificationDateOnFileTransferred() const { return m_keepModificationDateOnFileTransferred; }
+inline void Settings::setUseUserFirstNameFirstInFullName( bool new_value ) { m_useUserFirstNameFirstInFullName = new_value; }
+inline bool Settings::useUserFirstNameFirstInFullName() const { return m_useUserFirstNameFirstInFullName; }
 
 #endif // BEEBEEP_SETTINGS_

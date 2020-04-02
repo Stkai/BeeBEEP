@@ -1360,6 +1360,18 @@ Scarica gratuitamente ed installa la versione con questa funzionalità dal sito 
     </message>
 </context>
 <context>
+    <name>GuiChatMessage</name>
+    <message>
+        <source>yyyy-MM-dd</source>
+        <translation>yyyy-MM-dd</translation>
+    </message>
+    <message>
+        <source>hh:mm:ss</source>
+        <extracomment>default time format in chat message</extracomment>
+        <translation>hh:mm:ss</translation>
+    </message>
+</context>
+<context>
     <name>GuiChatWidget</name>
     <message>
         <source>Chat</source>
@@ -3626,6 +3638,10 @@ Inserisci un nome differente.</translation>
         <source>You are not allowed create new message.</source>
         <translation>Non sei abilitato alla creazione di un nuovo messaggio.</translation>
     </message>
+    <message>
+        <source>Show surname before firstname of the users</source>
+        <translation>Mostra prima il cognome del nome degli utenti</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -5258,6 +5274,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>No shared information.</source>
         <translation>Nessuna informazione condivisa.</translation>
+    </message>
+    <message>
+        <source>d MMMM yyyy</source>
+        <translation>d MMMM yyyy</translation>
     </message>
 </context>
 <context>
