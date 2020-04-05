@@ -1531,13 +1531,13 @@ Download for free and install the version with this feature from the %1 website.
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="50"/>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished"></translation>
+        <translation>yyyy年MM月dd日</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="60"/>
         <source>hh:mm:ss</source>
         <extracomment>default time format in chat message</extracomment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1638,12 +1638,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.cpp" line="131"/>
         <source>Add recipients</source>
-        <translation>送信先を追加</translation>
+        <translation>宛先を追加</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.cpp" line="175"/>
         <source>Please select at least one recipient for your message.</source>
-        <translation>メッセージの送信先を 1 件以上指定してください。</translation>
+        <translation>メッセージの宛先を 1 件以上指定してください。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.cpp" line="182"/>
@@ -1661,12 +1661,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="45"/>
         <source>To</source>
-        <translation>送信先</translation>
+        <translation>宛先</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="72"/>
         <source>Add recipients</source>
-        <translation>送信先を追加</translation>
+        <translation>宛先を追加</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="130"/>
@@ -1681,7 +1681,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="265"/>
         <source>Send this message to all recipients individually</source>
-        <translation>すべての送信先にこのメッセージを個別に送信</translation>
+        <translation>すべての宛先にこのメッセージを個別に送信</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="136"/>
@@ -3259,7 +3259,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1452"/>
         <source>Information about %1...</source>
-        <translation>開発者 %1(&amp;I)...</translation>
+        <translation>開発者 %1...</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1450"/>
@@ -3319,7 +3319,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1014"/>
         <source>Show surname before firstname of the users</source>
-        <translation type="unfinished"></translation>
+        <translation>ユーザーの姓を名の前に表示</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1153"/>
@@ -5436,7 +5436,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiShareLocal.cpp" line="86"/>
         <source>Remove shared path</source>
-        <translation>共有中のパスを除去</translation>
+        <translation>共有中のパスを除去(&amp;D)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareLocal.cpp" line="87"/>
@@ -5863,7 +5863,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="92"/>
         <source>d MMMM yyyy</source>
-        <translation type="unfinished"></translation>
+        <translation>yyyy年MMMM月d日</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="94"/>
