@@ -13,6 +13,16 @@
 /* CLOSED OR DATA MODIFIED WILL BE LOST   */
 /******************************************/
 
+/* PLEASE NOTE
+ * If the value of an option in the beebeep.rc file is a string containing a period, 
+ * comma or other type of punctuation, you must enclose the string in two quotation marks. 
+ * For example:
+ * PreferredSubnets=192.168.1.255, 10.0.0.255 (ERROR)
+ * PreferredSubnets="192.168.1.255, 10.0.0.255" (OK) 
+ *
+**/
+
+
 /***************************/
 /***  FILE: beebeep.rc   ***/
 /***************************/
