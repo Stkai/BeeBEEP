@@ -491,7 +491,7 @@
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="179"/>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="401"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="408"/>
         <source>folder</source>
         <translation>map</translation>
     </message>
@@ -500,12 +500,12 @@
         <translation type="obsolete">%1 %2: bestand niet gevonden.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="382"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="389"/>
         <source>%1 %2 is a folder. You can share it.</source>
         <translation>%1 %2 is een map. U kunt het delen.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="409"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="416"/>
         <source>%1 Unable to send %2: %3 is not connected.</source>
         <translation>%1 Kan %2 niet versturen: %3 is niet aangemeld.</translation>
     </message>
@@ -520,32 +520,37 @@
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="179"/>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="401"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="408"/>
         <source>Open %1.</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="364"/>
+        <source>%1 Unable to send %2 to %3: file extension &apos;%4&apos; is not allowed in file transfer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="371"/>
         <source>%1 Unable to send %2 to %3: file not found.</source>
         <translation>%1 kan niet worden verzonden %2 naar%3: bestand niet gevonden.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="443"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="450"/>
         <source>%1 You have refused to download %2 from %3.</source>
         <translation>%1 U hebt de download van %2 geweigerd van %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="472"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="479"/>
         <source>%1 You have refused to download folder %2 from %3.</source>
         <translation>%1 Je hebt geweigerd om de map %2 te downloaden van %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="580"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="590"/>
         <source>%1 is added to file sharing (%2)</source>
         <translation>%1 is toegevoegd aan bestandsdeling (%2)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="574"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="584"/>
         <source>%1 is added to file sharing with only %2 of %3 files (%4 limit reached)</source>
         <translation>%1 is toegevoegd aan bestandsdeling met %2 bestanden, %3 (verlopen tijd: %4)</translation>
     </message>
@@ -557,72 +562,72 @@
         <translation>Spraakbericht</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="371"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="378"/>
         <source>%1 Unable to send %2 to %3: file is empty.</source>
         <translation>%1 kan niet worden verzonden %2 naar %3: bestand is leeg.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="582"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="592"/>
         <source>%1 is added to file sharing with %2 files, %3</source>
         <translation>%1 is toegevoegd aan bestandsdeling %2 bestanden, %3</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="613"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="623"/>
         <source>All paths are removed from file sharing</source>
         <translation>Alle paden zijn verwijderd van gedeelde bestanden</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="634"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="644"/>
         <source>%1 is removed from file sharing</source>
         <translation>%1 is verwijderd uit de bestandsdeling</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="636"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="646"/>
         <source>%1 is removed from file sharing with %2 files</source>
         <translation>%1 is verwijderd uit de bestandsdeling met %2 bestanden</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="701"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="711"/>
         <source>%1 You are about to send %2 to %3. Checking folder...</source>
         <translation>%1 Je staat op het punt om %2 te versturen naar %3. Controleer map...</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="742"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="752"/>
         <source>%1 Unable to send folder %2</source>
         <translation>%1 Kan niet versturen naar map %2</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="747"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="757"/>
         <source>invalid user #%1.</source>
         <translation>Ongeldige gebruike #%1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="754"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="764"/>
         <source>the folder is empty.</source>
         <translation>de map is leeg.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="761"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="771"/>
         <source>file transfer is not working.</source>
         <translation>Bestandsoverdracht werkt niet.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="769"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="779"/>
         <source>%1 is not connected.</source>
         <translation>%1 is niet verbonden.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="783"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="793"/>
         <source>internal error.</source>
         <translation>interne fout.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="789"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="799"/>
         <source>%1 Sending folder %2 to %3.</source>
         <translation>%1 Verzendmap %2 naar %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="398"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="405"/>
         <source>%1 Sending %2 to %3.</source>
         <translation>%1 Bezig met verzenden %2 naar %3.</translation>
     </message>
@@ -814,6 +819,22 @@
     <message>
         <source>more than 1 day</source>
         <translation type="vanished">meer dan 1 dag</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="50"/>
+        <source>yyyy-MM-dd</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="57"/>
+        <source>h:mm:ss ap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="60"/>
+        <source>hh:mm:ss</source>
+        <extracomment>default time format in chat message</extracomment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1614,20 +1635,6 @@ Download gratis en installeer de versie met deze functie van de %1 website.</tra
         <location filename="../src/desktop/GuiChatList.ui" line="115"/>
         <source>Clear keywords</source>
         <translation>Wis sleutelwoorden</translation>
-    </message>
-</context>
-<context>
-    <name>GuiChatMessage</name>
-    <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="50"/>
-        <source>yyyy-MM-dd</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="60"/>
-        <source>hh:mm:ss</source>
-        <extracomment>default time format in chat message</extracomment>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7003,7 +7010,7 @@ Gebruik aub een andere naam.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2358"/>
+        <location filename="../src/core/Settings.cpp" line="2383"/>
         <source>Autoresponder</source>
         <translation>Autobeantwoorder</translation>
     </message>

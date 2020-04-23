@@ -1498,10 +1498,21 @@ bool Protocol::fileCanBeShared( const QFileInfo& file_info )
     return false;
   }
 
-  if( file_info.isDir() && file_info.fileName().endsWith( "." ) )
+  if( file_info.isDir() )
   {
-    // skip folder . and folder ..
-    return false;
+    if( file_info.fileName().endsWith( "." ) )
+    {
+      // skip folder . and folder ..
+      return false;
+    }
+  }
+  else
+  {
+    if( !Settings::instance().isFileExtensionAllowedInFileTransfer( file_info.suffix() ) )
+    {
+      qDebug() << "Path" << qPrintable( file_info.absoluteFilePath() ) << "has file extension not allowed and cannot be shared";
+      return false;
+    }
   }
 
   if( !file_info.isReadable() )

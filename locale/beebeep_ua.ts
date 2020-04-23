@@ -634,12 +634,29 @@
         <source>Offline messages sent to %1.</source>
         <translation>Офлайн повідомлення відправлені до %1.</translation>
     </message>
+    <message>
+        <source>%1 Unable to send %2 to %3: file extension &apos;%4&apos; is not allowed in file transfer.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Date</name>
     <message>
         <source>more than 1 day</source>
         <translation type="vanished">більше 1 дня</translation>
+    </message>
+    <message>
+        <source>yyyy-MM-dd</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>h:mm:ss ap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hh:mm:ss</source>
+        <extracomment>default time format in chat message</extracomment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1274,18 +1291,6 @@ Download for free and install the version with this feature from the %1 website.
     <message>
         <source>View options</source>
         <translation>Переглянути параметри</translation>
-    </message>
-</context>
-<context>
-    <name>GuiChatMessage</name>
-    <message>
-        <source>yyyy-MM-dd</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>hh:mm:ss</source>
-        <extracomment>default time format in chat message</extracomment>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

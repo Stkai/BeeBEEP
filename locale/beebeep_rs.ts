@@ -477,7 +477,7 @@
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="179"/>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="401"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="408"/>
         <source>folder</source>
         <translation>folder</translation>
     </message>
@@ -486,12 +486,12 @@
         <translation type="obsolete">%1 %2: nepostojeći fajl.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="382"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="389"/>
         <source>%1 %2 is a folder. You can share it.</source>
         <translation>%1 %2 je folder. Nemožeš ga deliti.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="409"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="416"/>
         <source>%1 Unable to send %2: %3 is not connected.</source>
         <translation>%1 nemogu da pošaljem %2: %3 nije prijavljen.</translation>
     </message>
@@ -508,102 +508,107 @@
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="179"/>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="401"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="408"/>
         <source>Open %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="364"/>
-        <source>%1 Unable to send %2 to %3: file not found.</source>
+        <source>%1 Unable to send %2 to %3: file extension &apos;%4&apos; is not allowed in file transfer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="371"/>
+        <source>%1 Unable to send %2 to %3: file not found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="378"/>
         <source>%1 Unable to send %2 to %3: file is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="443"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="450"/>
         <source>%1 You have refused to download %2 from %3.</source>
         <translation>%1 odbili se download %2 od %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="472"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="479"/>
         <source>%1 You have refused to download folder %2 from %3.</source>
         <translation>%1 odbili se download folder %2 od %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="574"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="584"/>
         <source>%1 is added to file sharing with only %2 of %3 files (%4 limit reached)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="580"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="590"/>
         <source>%1 is added to file sharing (%2)</source>
         <translation>%1 je dodat u fajlove za deljenje (%2)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="582"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="592"/>
         <source>%1 is added to file sharing with %2 files, %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="613"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="623"/>
         <source>All paths are removed from file sharing</source>
         <translation>Sve putanje su izbrisane iz spiska za deljenje fajlova</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="634"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="644"/>
         <source>%1 is removed from file sharing</source>
         <translation>%1 se više ne deli</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="636"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="646"/>
         <source>%1 is removed from file sharing with %2 files</source>
         <translation>%1 je izbrisan iz deljenja sa %2 fajlom</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="701"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="711"/>
         <source>%1 You are about to send %2 to %3. Checking folder...</source>
         <translation>%1 je za slanje %2 za %3. Proveri folder...</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="742"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="752"/>
         <source>%1 Unable to send folder %2</source>
         <translation>%1 nemože da pošalje folder %2</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="747"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="757"/>
         <source>invalid user #%1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="754"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="764"/>
         <source>the folder is empty.</source>
         <translation>folder je prazan.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="761"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="771"/>
         <source>file transfer is not working.</source>
         <translation>prenos fajlova nije u funkciji.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="769"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="779"/>
         <source>%1 is not connected.</source>
         <translation>%1 nije prijavljen.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="783"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="793"/>
         <source>internal error.</source>
         <translation>interna greška.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="789"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="799"/>
         <source>%1 Sending folder %2 to %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="398"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="405"/>
         <source>%1 Sending %2 to %3.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -787,6 +792,25 @@
     <message>
         <location filename="../src/core/CoreVoiceChat.cpp" line="53"/>
         <source>%1 %2: voice message not found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Date</name>
+    <message>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="50"/>
+        <source>yyyy-MM-dd</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="57"/>
+        <source>h:mm:ss ap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="60"/>
+        <source>hh:mm:ss</source>
+        <extracomment>default time format in chat message</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1582,20 +1606,6 @@ Download for free and install the version with this feature from the %1 website.
     <message>
         <location filename="../src/desktop/GuiChatList.ui" line="115"/>
         <source>Clear keywords</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>GuiChatMessage</name>
-    <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="50"/>
-        <source>yyyy-MM-dd</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="60"/>
-        <source>hh:mm:ss</source>
-        <extracomment>default time format in chat message</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6800,7 +6810,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2358"/>
+        <location filename="../src/core/Settings.cpp" line="2383"/>
         <source>Autoresponder</source>
         <translation type="unfinished"></translation>
     </message>

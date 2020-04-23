@@ -697,12 +697,29 @@
         <source>Offline messages sent to %1.</source>
         <translation>I messaggi non inviati sono stati spediti a %1.</translation>
     </message>
+    <message>
+        <source>%1 Unable to send %2 to %3: file extension &apos;%4&apos; is not allowed in file transfer.</source>
+        <translation>%1 Impossibile inviare %2 a %3: l&apos;estensione del file &apos;%4&apos; non è consentita nel trasferimento dei file.</translation>
+    </message>
 </context>
 <context>
     <name>Date</name>
     <message>
         <source>more than 1 day</source>
         <translation type="vanished">più di 1 giorno</translation>
+    </message>
+    <message>
+        <source>yyyy-MM-dd</source>
+        <translation>yyyy-MM-dd</translation>
+    </message>
+    <message>
+        <source>h:mm:ss ap</source>
+        <translation>h:mm:ss ap</translation>
+    </message>
+    <message>
+        <source>hh:mm:ss</source>
+        <extracomment>default time format in chat message</extracomment>
+        <translation>hh:mm:ss</translation>
     </message>
 </context>
 <context>
@@ -1363,12 +1380,12 @@ Scarica gratuitamente ed installa la versione con questa funzionalità dal sito 
     <name>GuiChatMessage</name>
     <message>
         <source>yyyy-MM-dd</source>
-        <translation>yyyy-MM-dd</translation>
+        <translation type="vanished">yyyy-MM-dd</translation>
     </message>
     <message>
         <source>hh:mm:ss</source>
         <extracomment>default time format in chat message</extracomment>
-        <translation>hh:mm:ss</translation>
+        <translation type="vanished">hh:mm:ss</translation>
     </message>
 </context>
 <context>

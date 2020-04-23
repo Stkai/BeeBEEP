@@ -233,6 +233,8 @@ Settings::Settings()
 
   m_keepModificationDateOnFileTransferred = true;
 
+  m_allowedFileExtensionsInFileTransfer = QStringList();
+
   resetAllColors();
 }
 
@@ -515,6 +517,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "UseUserFullName", m_useUserFullName );
     sets->setValue( "AppendHostNameToUserName", m_appendHostNameToUserName );
     sets->setValue( "DisableConnectionSocketDataCompression", m_disableConnectionSocketDataCompression );
+    sets->setValue( "AllowedFileExtensionsInFileTransfer", m_allowedFileExtensionsInFileTransfer.isEmpty() ? QString( "" ) : m_allowedFileExtensionsInFileTransfer.join( ", " ) );
     sets->endGroup();
     sets->sync();
     qDebug() << "RC default configuration file created in" << qPrintable( Bee::convertToNativeFolderSeparator( sets->fileName() ) );
@@ -604,19 +607,17 @@ void Settings::loadRcFile( bool load_common_settings )
   m_clearCacheAfterDays = qMax( -1, sets->value( "ClearCacheAfterDays", m_clearCacheAfterDays ).toInt() );
   m_removePartiallyDownloadedFilesAfterDays = qMax( -1, sets->value( "RemovePartiallyDownloadedFilesAfterDays", m_removePartiallyDownloadedFilesAfterDays ).toInt() );
   m_checkUserConnectedFromDatagramIp = sets->value( "CheckUserConnectedFromDatagramIp", m_checkUserConnectedFromDatagramIp ).toBool();
+  // Remember to use "" for the string in INI files
+  QString local_hw_addresses = sets->value( "SkipLocalHardwareAddresses", m_skipLocalHardwareAddresses.join( "," ) ).toString().simplified();
   m_skipLocalHardwareAddresses.clear();
-  QString local_hw_addresses = sets->value( "SkipLocalHardwareAddresses", QString() ).toString();
-  QStringList local_hw_address_list;
-  if( local_hw_addresses.isEmpty() )
-    local_hw_address_list = sets->value( "SkipLocalHardwareAddresses", QStringList() ).toStringList();
-  else
-    local_hw_address_list = local_hw_addresses.split( "," );
-  if( !local_hw_address_list.isEmpty() )
+  if( !local_hw_addresses.isEmpty() )
   {
+    QStringList local_hw_address_list = local_hw_addresses.split( "," );
     foreach( QString hw_value, local_hw_address_list )
     {
+      hw_value = hw_value.trimmed();
       if( !hw_value.isEmpty() )
-        m_skipLocalHardwareAddresses.append( hw_value.trimmed() );
+        m_skipLocalHardwareAddresses.append( hw_value );
     }
     m_skipLocalHardwareAddresses.removeDuplicates();
   }
@@ -626,6 +627,27 @@ void Settings::loadRcFile( bool load_common_settings )
   m_useUserFullName = sets->value( "UseUserFullName", m_useUserFullName ).toBool();
   m_appendHostNameToUserName = sets->value( "AppendHostNameToUserName", m_appendHostNameToUserName ).toBool();
   m_disableConnectionSocketDataCompression = sets->value( "DisableConnectionSocketDataCompression", m_disableConnectionSocketDataCompression ).toBool();
+  // Remember to use "" for the string in INI files
+  QString allowed_file_extensions = sets->value( "AllowedFileExtensionsInFileTransfer", m_allowedFileExtensionsInFileTransfer.join( ";" ) ).toString().simplified();
+  m_allowedFileExtensionsInFileTransfer.clear();
+  if( !allowed_file_extensions.trimmed().isEmpty() )
+  {
+    QStringList allowed_file_extensions_list = allowed_file_extensions.split( "," );
+    foreach( QString file_ext, allowed_file_extensions_list )
+    {
+      file_ext = file_ext.trimmed();
+      if( !file_ext.isEmpty() )
+      {
+        if( file_ext.startsWith( "*" ) )
+          file_ext.remove( 0, 1 );
+        if( file_ext.startsWith( "." ) )
+          file_ext.remove( 0, 1 );
+        if( !file_ext.isEmpty() )
+          m_allowedFileExtensionsInFileTransfer.append( file_ext.toLower() );
+      }
+    }
+    m_allowedFileExtensionsInFileTransfer.removeDuplicates();
+  }
   sets->endGroup();
 
   if( load_common_settings )
@@ -648,6 +670,9 @@ void Settings::loadRcFile( bool load_common_settings )
     foreach( QString hw_value, m_skipLocalHardwareAddresses )
       qDebug() << "Skip local hardware address:" << qPrintable( hw_value );
   }
+  if( !m_allowedFileExtensionsInFileTransfer.isEmpty() )
+    qWarning() << "File transfer allows only these extensions:" << qPrintable( m_allowedFileExtensionsInFileTransfer.join("," ) );
+
   sets->deleteLater();
 }
 
@@ -1342,10 +1367,10 @@ void Settings::loadCommonSettings( QSettings* sets, bool in_file_rc )
       m_userStatusList = simpleDecrypt( user_status_list ).split( QString( "\n" ) );
     else
       m_userStatusList = QStringList();
+     m_refusedChats = sets->value( "RefusedChats", QStringList() ).toStringList();
   }
   m_maxUserStatusDescriptionInList = sets->value( "MaxStatusDescriptionInList", m_maxUserStatusDescriptionInList ).toInt();
   m_presetMessages = sets->value( "PresetMessages", QMap<QString,QVariant>() ).toMap();
-  m_refusedChats = sets->value( "RefusedChats", QStringList() ).toStringList();
   m_maxDaysOfUserInactivity = sets->value( "MaxDaysOfUserInactivity", m_maxDaysOfUserInactivity ).toInt();
   m_removeInactiveUsers = sets->value( "RemoveInactiveUsers", true ).toBool();
   sets->endGroup();
@@ -2384,4 +2409,11 @@ bool Settings::useUserFirstNameFirstInFullNameFromLanguage() const
     return false;
   else
     return true;
+}
+
+bool Settings::isFileExtensionAllowedInFileTransfer( const QString& file_ext ) const
+{
+  if( m_allowedFileExtensionsInFileTransfer.isEmpty() )
+    return true;
+  return file_ext.isEmpty() ? false : m_allowedFileExtensionsInFileTransfer.contains( file_ext, Qt::CaseInsensitive );
 }

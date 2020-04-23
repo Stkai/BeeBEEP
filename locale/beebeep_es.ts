@@ -471,7 +471,7 @@
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="179"/>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="401"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="408"/>
         <source>folder</source>
         <translation>carpeta</translation>
     </message>
@@ -480,12 +480,12 @@
         <translation type="obsolete">%1 %2: archivo no encontrado.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="382"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="389"/>
         <source>%1 %2 is a folder. You can share it.</source>
         <translation>%1 %2 es una carpeta. No puedes compartirla.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="409"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="416"/>
         <source>%1 Unable to send %2: %3 is not connected.</source>
         <translation>%1 No se puede enviar %2: %3 no está conectado.</translation>
     </message>
@@ -500,32 +500,37 @@
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="179"/>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="401"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="408"/>
         <source>Open %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="364"/>
+        <source>%1 Unable to send %2 to %3: file extension &apos;%4&apos; is not allowed in file transfer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="371"/>
         <source>%1 Unable to send %2 to %3: file not found.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="443"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="450"/>
         <source>%1 You have refused to download %2 from %3.</source>
         <translation>%1 Has rechazado la descarga de %2 desde %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="472"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="479"/>
         <source>%1 You have refused to download folder %2 from %3.</source>
         <translation>%1 Has rechazado la descarga de la carpeta %2 desde %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="580"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="590"/>
         <source>%1 is added to file sharing (%2)</source>
         <translation>%1 está añadido para compartir (%2)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="574"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="584"/>
         <source>%1 is added to file sharing with only %2 of %3 files (%4 limit reached)</source>
         <translation>%1 se ha añadido al uso compartido de archivos con sólo %2 de %3 archivos (se ha alcanzado el límite de %4)</translation>
     </message>
@@ -537,72 +542,72 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="371"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="378"/>
         <source>%1 Unable to send %2 to %3: file is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="582"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="592"/>
         <source>%1 is added to file sharing with %2 files, %3</source>
         <translation>%1 se han añadido %2 archivos, %3 al uso compartido de archivos</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="613"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="623"/>
         <source>All paths are removed from file sharing</source>
         <translation>Todas las rutas se han eliminado del uso compartido de archivos</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="634"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="644"/>
         <source>%1 is removed from file sharing</source>
         <translation>%1 esta eliminado del uso compartido de archivos</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="636"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="646"/>
         <source>%1 is removed from file sharing with %2 files</source>
         <translation>%1 se ha eliminado la compartición de %2 archivos</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="701"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="711"/>
         <source>%1 You are about to send %2 to %3. Checking folder...</source>
         <translation>%1 Vas a enviar %2 a %3. Verificando carpeta...</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="742"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="752"/>
         <source>%1 Unable to send folder %2</source>
         <translation>%1 No es posible enviar carpeta %2</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="747"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="757"/>
         <source>invalid user #%1.</source>
         <translation>usuario no valido #%1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="754"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="764"/>
         <source>the folder is empty.</source>
         <translation>la carpeta está vacia.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="761"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="771"/>
         <source>file transfer is not working.</source>
         <translation>la transferencia del archivo no funciona.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="769"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="779"/>
         <source>%1 is not connected.</source>
         <translation>%1 no esta conectado.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="783"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="793"/>
         <source>internal error.</source>
         <translation>error interno.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="789"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="799"/>
         <source>%1 Sending folder %2 to %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="398"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="405"/>
         <source>%1 Sending %2 to %3.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -786,6 +791,25 @@
     <message>
         <location filename="../src/core/CoreVoiceChat.cpp" line="53"/>
         <source>%1 %2: voice message not found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Date</name>
+    <message>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="50"/>
+        <source>yyyy-MM-dd</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="57"/>
+        <source>h:mm:ss ap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="60"/>
+        <source>hh:mm:ss</source>
+        <extracomment>default time format in chat message</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1582,20 +1606,6 @@ Download for free and install the version with this feature from the %1 website.
         <location filename="../src/desktop/GuiChatList.ui" line="115"/>
         <source>Clear keywords</source>
         <translation>Borrar palabras clave</translation>
-    </message>
-</context>
-<context>
-    <name>GuiChatMessage</name>
-    <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="50"/>
-        <source>yyyy-MM-dd</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="60"/>
-        <source>hh:mm:ss</source>
-        <extracomment>default time format in chat message</extracomment>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6907,7 +6917,7 @@ Por favor, elija un nombre diferente.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2358"/>
+        <location filename="../src/core/Settings.cpp" line="2383"/>
         <source>Autoresponder</source>
         <translation>Respuesta automática</translation>
     </message>

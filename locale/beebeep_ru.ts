@@ -481,7 +481,7 @@
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="179"/>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="401"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="408"/>
         <source>folder</source>
         <translation>папка</translation>
     </message>
@@ -490,12 +490,12 @@
         <translation type="obsolete">%1 %2: файл не найден.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="382"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="389"/>
         <source>%1 %2 is a folder. You can share it.</source>
         <translation>%1 %2 - это папка. Вы можете открыть общий доступ к ней.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="409"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="416"/>
         <source>%1 Unable to send %2: %3 is not connected.</source>
         <translation>%1 Не удается отправить %2: %3 не подключен.</translation>
     </message>
@@ -512,102 +512,107 @@
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="179"/>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="401"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="408"/>
         <source>Open %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="364"/>
-        <source>%1 Unable to send %2 to %3: file not found.</source>
+        <source>%1 Unable to send %2 to %3: file extension &apos;%4&apos; is not allowed in file transfer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="371"/>
+        <source>%1 Unable to send %2 to %3: file not found.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="378"/>
         <source>%1 Unable to send %2 to %3: file is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="443"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="450"/>
         <source>%1 You have refused to download %2 from %3.</source>
         <translation>%1 Вы отказались загружать %2 из %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="472"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="479"/>
         <source>%1 You have refused to download folder %2 from %3.</source>
         <translation>%1 Вы отказались загружать папку %2 из %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="574"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="584"/>
         <source>%1 is added to file sharing with only %2 of %3 files (%4 limit reached)</source>
         <translation>%1 добавлен в общий доступ %2 из %3 файлов (%4 лимита использовано)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="580"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="590"/>
         <source>%1 is added to file sharing (%2)</source>
         <translation>%1 добавлен в файловый общий доступ (%2)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="582"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="592"/>
         <source>%1 is added to file sharing with %2 files, %3</source>
         <translation>%1 добавлен в общий доступ %2 файлов, %3</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="613"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="623"/>
         <source>All paths are removed from file sharing</source>
         <translation>Все пути исключены из файлового общего доступа</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="634"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="644"/>
         <source>%1 is removed from file sharing</source>
         <translation>%1 исключен из файлового общего доступа</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="636"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="646"/>
         <source>%1 is removed from file sharing with %2 files</source>
         <translation>%1 исключено из файлового общего доступа с %2 файлов</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="701"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="711"/>
         <source>%1 You are about to send %2 to %3. Checking folder...</source>
         <translation>%1 Вы собираетесь отправить %2 для %3. Проверка папки...</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="742"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="752"/>
         <source>%1 Unable to send folder %2</source>
         <translation>%1 Не удалось отправить папку %2</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="747"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="757"/>
         <source>invalid user #%1.</source>
         <translation>Недопустимый пользователь  #%1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="754"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="764"/>
         <source>the folder is empty.</source>
         <translation>папка пуста.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="761"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="771"/>
         <source>file transfer is not working.</source>
         <translation>передача файлов не работает.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="769"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="779"/>
         <source>%1 is not connected.</source>
         <translation>%1 не подключен.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="783"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="793"/>
         <source>internal error.</source>
         <translation>внутренняя ошибка.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="789"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="799"/>
         <source>%1 Sending folder %2 to %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="398"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="405"/>
         <source>%1 Sending %2 to %3.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -795,6 +800,22 @@
     <message>
         <source>more than 1 day</source>
         <translation type="vanished">более 1 дня</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="50"/>
+        <source>yyyy-MM-dd</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="57"/>
+        <source>h:mm:ss ap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="60"/>
+        <source>hh:mm:ss</source>
+        <extracomment>default time format in chat message</extracomment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1582,20 +1603,6 @@ Download for free and install the version with this feature from the %1 website.
         <location filename="../src/desktop/GuiChatList.ui" line="115"/>
         <source>Clear keywords</source>
         <translation>Очистить ключевые слова</translation>
-    </message>
-</context>
-<context>
-    <name>GuiChatMessage</name>
-    <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="50"/>
-        <source>yyyy-MM-dd</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="60"/>
-        <source>hh:mm:ss</source>
-        <extracomment>default time format in chat message</extracomment>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6724,7 +6731,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2358"/>
+        <location filename="../src/core/Settings.cpp" line="2383"/>
         <source>Autoresponder</source>
         <translation>Автоответ</translation>
     </message>

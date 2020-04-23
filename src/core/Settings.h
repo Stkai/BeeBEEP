@@ -129,6 +129,9 @@ public:
 
   inline bool checkUserConnectedFromDatagramIp() const;
 
+  inline const QStringList& allowedFileExtensionsInFileTransfer() const;
+  bool isFileExtensionAllowedInFileTransfer( const QString& ) const;
+
   QString dnsRecord() const;
   inline bool useMulticastDns() const;
   inline void setUseMulticastDns( bool );
@@ -709,6 +712,7 @@ private:
   bool m_disableConnectionSocketDataCompression;
 
   QStringList m_skipLocalHardwareAddresses;
+  QStringList m_allowedFileExtensionsInFileTransfer;
 
   bool m_rcFileExists;
 
@@ -1393,5 +1397,6 @@ inline void Settings::setKeepModificationDateOnFileTransferred( bool new_value )
 inline bool Settings::keepModificationDateOnFileTransferred() const { return m_keepModificationDateOnFileTransferred; }
 inline void Settings::setUseUserFirstNameFirstInFullName( bool new_value ) { m_useUserFirstNameFirstInFullName = new_value; }
 inline bool Settings::useUserFirstNameFirstInFullName() const { return m_useUserFirstNameFirstInFullName; }
+inline const QStringList& Settings::allowedFileExtensionsInFileTransfer() const { return m_allowedFileExtensionsInFileTransfer; }
 
 #endif // BEEBEEP_SETTINGS_

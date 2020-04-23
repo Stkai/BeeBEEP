@@ -359,6 +359,13 @@ bool Core::sendFileToUser( const User&u, const QString& file_path, const QString
   }
 
   QFileInfo file( file_path );
+  if( !Settings::instance().isFileExtensionAllowedInFileTransfer( file.suffix() ) )
+  {
+    dispatchSystemMessage( chat_selected.isValid() ? chat_selected.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2 to %3: file extension '%4' is not allowed in file transfer." ).arg( icon_html, file_path, Bee::userNameToShow( u, true ), file.suffix().toUpper() ),
+                           chat_selected.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
+    return false;
+  }
+
   if( !file.exists() )
   {
     dispatchSystemMessage( chat_selected.isValid() ? chat_selected.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2 to %3: file not found." ).arg( icon_html, file_path, Bee::userNameToShow( u, true ) ),
@@ -536,19 +543,22 @@ void Core::addPathToShare( const QString& share_path )
   }
   else
   {
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Adding to file sharing" << share_path;
-#endif
-    FileInfo file_info = Protocol::instance().fileInfo( fi, "", false, "", FileInfo::File );
-    FileShare::instance().addToLocal( file_info );
-
-    if( m_shareListToBuild > 0 )
-      m_shareListToBuild--;
-
-    if( m_shareListToBuild == 0 )
+    if( Protocol::instance().fileCanBeShared( fi ) )
     {
-      createLocalShareMessage();
-      emit localShareListAvailable();
+#ifdef BEEBEEP_DEBUG
+      qDebug() << "Adding to file sharing" << share_path;
+#endif
+      FileInfo file_info = Protocol::instance().fileInfo( fi, "", false, "", FileInfo::File );
+      FileShare::instance().addToLocal( file_info );
+
+      if( m_shareListToBuild > 0 )
+        m_shareListToBuild--;
+
+      if( m_shareListToBuild == 0 )
+      {
+        createLocalShareMessage();
+        emit localShareListAvailable();
+      }
     }
   }
 }

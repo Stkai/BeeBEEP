@@ -649,6 +649,26 @@
         <source>Offline messages sent to %1.</source>
         <translation type="unfinished">Offline-Nachrichten wurden an %2 gesendet. {1.?}</translation>
     </message>
+    <message>
+        <source>%1 Unable to send %2 to %3: file extension &apos;%4&apos; is not allowed in file transfer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Date</name>
+    <message>
+        <source>yyyy-MM-dd</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>h:mm:ss ap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hh:mm:ss</source>
+        <extracomment>default time format in chat message</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>File</name>
@@ -1285,18 +1305,6 @@ Download for free and install the version with this feature from the %1 website.
     <message>
         <source>View options</source>
         <translation type="unfinished">Optionen anzeigen</translation>
-    </message>
-</context>
-<context>
-    <name>GuiChatMessage</name>
-    <message>
-        <source>yyyy-MM-dd</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>hh:mm:ss</source>
-        <extracomment>default time format in chat message</extracomment>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

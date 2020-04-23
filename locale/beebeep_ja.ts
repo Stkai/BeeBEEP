@@ -439,7 +439,7 @@
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="179"/>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="401"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="408"/>
         <source>Open %1.</source>
         <translation>%1を開く。</translation>
     </message>
@@ -456,106 +456,111 @@
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="364"/>
+        <source>%1 Unable to send %2 to %3: file extension &apos;%4&apos; is not allowed in file transfer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="371"/>
         <source>%1 Unable to send %2 to %3: file not found.</source>
         <translation>%1 %3 に %2 送信失敗。ファイルがありません。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="371"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="378"/>
         <source>%1 Unable to send %2 to %3: file is empty.</source>
         <translation>%1 %3 に %2 を送信失敗。空のファイルです。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="382"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="389"/>
         <source>%1 %2 is a folder. You can share it.</source>
         <translation>%1 %2 はフォルダーです。共有可能です。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="409"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="416"/>
         <source>%1 Unable to send %2: %3 is not connected.</source>
         <translation>%1 %2 を送信失敗。%3 は未接続です。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="443"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="450"/>
         <source>%1 You have refused to download %2 from %3.</source>
         <translation>%1 %3 からの %2 のダウンロードを拒否しました。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="472"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="479"/>
         <source>%1 You have refused to download folder %2 from %3.</source>
         <translation>%1 %3 からの %2 フォルダのダウンロードを拒否しました。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="574"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="584"/>
         <source>%1 is added to file sharing with only %2 of %3 files (%4 limit reached)</source>
         <translation>%1 がファイル共有に追加 %3 中 %2 ファイル (%4 までの制限)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="580"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="590"/>
         <source>%1 is added to file sharing (%2)</source>
         <translation>%1 がファイル共有に追加 (%2)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="582"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="592"/>
         <source>%1 is added to file sharing with %2 files, %3</source>
         <translation>%1 がファイル共有に追加 %2 ファイル (%3)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="613"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="623"/>
         <source>All paths are removed from file sharing</source>
         <translation>すべてのパスがファイル共有から除去されました</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="634"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="644"/>
         <source>%1 is removed from file sharing</source>
         <translation>ファイル共有から除去されました: %1</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="636"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="646"/>
         <source>%1 is removed from file sharing with %2 files</source>
         <translation>ファイル共有から除去されました: %1 の %2 ファイル</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="701"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="711"/>
         <source>%1 You are about to send %2 to %3. Checking folder...</source>
         <translation>%1 %3 に %2 を送信します。フォルダを確認中...</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="742"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="752"/>
         <source>%1 Unable to send folder %2</source>
         <translation>%1 フォルダ %2 を送信不可</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="747"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="757"/>
         <source>invalid user #%1.</source>
         <translation>無効なユーザー #%1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="754"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="764"/>
         <source>the folder is empty.</source>
         <translation>フォルダが空です。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="761"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="771"/>
         <source>file transfer is not working.</source>
         <translation>ファイル転送が利用できません。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="769"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="779"/>
         <source>%1 is not connected.</source>
         <translation>%1 は未接続です。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="783"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="793"/>
         <source>internal error.</source>
         <translation>内部エラー。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="789"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="799"/>
         <source>%1 Sending folder %2 to %3.</source>
         <translation>%1 %3 へフォルダ %2 を送信。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="398"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="405"/>
         <source>%1 Sending %2 to %3.</source>
         <translation>%1 %3 へ %2 を送信中。</translation>
     </message>
@@ -583,7 +588,7 @@
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="179"/>
-        <location filename="../src/core/CoreFileTransfer.cpp" line="401"/>
+        <location filename="../src/core/CoreFileTransfer.cpp" line="408"/>
         <source>folder</source>
         <translation>フォルダー</translation>
     </message>
@@ -744,6 +749,25 @@
         <location filename="../src/core/CoreVoiceChat.cpp" line="53"/>
         <source>%1 %2: voice message not found.</source>
         <translation>%1 %2: ボイスメッセージが見つかりません。</translation>
+    </message>
+</context>
+<context>
+    <name>Date</name>
+    <message>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="50"/>
+        <source>yyyy-MM-dd</source>
+        <translation type="unfinished">yyyy年MM月dd日</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="57"/>
+        <source>h:mm:ss ap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="60"/>
+        <source>hh:mm:ss</source>
+        <extracomment>default time format in chat message</extracomment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1529,15 +1553,8 @@ Download for free and install the version with this feature from the %1 website.
 <context>
     <name>GuiChatMessage</name>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="50"/>
         <source>yyyy-MM-dd</source>
-        <translation>yyyy年MM月dd日</translation>
-    </message>
-    <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="60"/>
-        <source>hh:mm:ss</source>
-        <extracomment>default time format in chat message</extracomment>
-        <translation></translation>
+        <translation type="vanished">yyyy年MM月dd日</translation>
     </message>
 </context>
 <context>
@@ -6552,7 +6569,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2358"/>
+        <location filename="../src/core/Settings.cpp" line="2383"/>
         <source>Autoresponder</source>
         <translation>自動応答</translation>
     </message>
