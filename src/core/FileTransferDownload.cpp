@@ -85,9 +85,16 @@ void FileTransferPeer::sendDownloadRequest()
     }
   }
 
+  QFileInfo file_info( m_file.fileName() );
+  if( !Settings::instance().isFileExtensionAllowedInFileTransfer( file_info.suffix() ) )
+  {
+    qWarning() << qPrintable( name() ) << "is not allowed to download file" << qPrintable( m_file.fileName() ) << "with extension" << file_info.suffix();
+    cancelTransfer();
+    return;
+  }
+
   if( !skip_file && mp_socket->protocolVersion() >= FILE_TRANSFER_RESUME_PROTO_VERSION )
   {
-    QFileInfo file_info( m_file.fileName() );
     if( file_info.exists() && Settings::instance().resumeFileTransfer() )
     {
       m_fileInfo.setStartingPosition( file_info.size() );

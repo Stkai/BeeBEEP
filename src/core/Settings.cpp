@@ -139,6 +139,8 @@ Settings::Settings()
   m_allowEncryptedConnectionsAlso = true;
   m_disableConnectionSocketDataCompression = false;
 
+  m_allowedFileExtensionsInFileTransfer = QStringList();
+
   m_rcFileExists = false;
   /* Default RC end */
 
@@ -530,20 +532,30 @@ bool Settings::createDefaultRcFile()
   return rc_file_created;
 }
 
-void Settings::loadRcFile( bool load_common_settings )
+QSettings* Settings::objectRcSettings() const
 {
   QString rc_file_path = findFileInFolders( QLatin1String( "beebeep.rc" ), resourceFolders() );
-  if( rc_file_path.isNull() )
+  if( rc_file_path.isEmpty() )
+    return Q_NULLPTR;
+  QSettings* sets = new QSettings( rc_file_path, QSettings::IniFormat );
+  sets->setFallbacksEnabled( false );
+  return sets;
+}
+
+void Settings::loadRcFile()
+{
+  QSettings *sets = objectRcSettings();
+  if( sets )
+  {
+    qDebug() << "Loading settings from RC configuration file" << qPrintable( sets->fileName() );
+    m_rcFileExists = true;
+  }
+  else
   {
     qDebug() << "RC configuration file not found";
     m_rcFileExists = false;
     return;
   }
-  else
-    qDebug() << "Loading settings from RC configuration file" << qPrintable( rc_file_path );
-  m_rcFileExists = true;
-  QSettings* sets = new QSettings( rc_file_path, QSettings::IniFormat );
-  sets->setFallbacksEnabled( false );
 
   sets->beginGroup( "Groups" );
   bool trust_system_account = sets->value( "TrustSystemAccount", false ).toBool(); // for compatibility
@@ -649,12 +661,6 @@ void Settings::loadRcFile( bool load_common_settings )
     m_allowedFileExtensionsInFileTransfer.removeDuplicates();
   }
   sets->endGroup();
-
-  if( load_common_settings )
-  {
-    qDebug() << "RC read common settings";
-    loadCommonSettings( sets, true );
-  }
 
   QStringList key_list = sets->allKeys();
   foreach( QString key, key_list )
@@ -1161,7 +1167,7 @@ void Settings::load()
   sets->endGroup();
 
   bool qt_is_compatible = qt_version_in_settings == qtMajorMinorVersion();
-  loadCommonSettings( sets, false );
+  loadCommonSettings( sets );
 
   sets->beginGroup( "VCard" );
   VCard vc;
@@ -1267,13 +1273,41 @@ void Settings::load()
   sets->deleteLater();
 }
 
-void Settings::loadCommonSettings( QSettings* sets, bool in_file_rc )
+
+void Settings::beginCommonGroup( QSettings* system_rc, QSettings* user_ini, const QString& group_name )
 {
-  sets->beginGroup( "Chat" );
-  QString chat_font_string = sets->value( "Font", "" ).toString();
-#ifdef BEEBEEP_DEBUG
-  qDebug() << "Load default chat font:" << chat_font_string;
-#endif
+  if( system_rc )
+    system_rc->beginGroup( group_name );
+  if( user_ini )
+    user_ini->beginGroup( group_name );
+}
+
+void Settings::endCommonGroup( QSettings* system_rc, QSettings* user_ini )
+{
+  if( system_rc )
+    system_rc->endGroup();
+  if( user_ini )
+    user_ini->endGroup();
+}
+
+QVariant Settings::commonValue( QSettings* system_rc, QSettings* user_ini, const QString& key, const QVariant& default_value )
+{
+  if( system_rc && user_ini )
+    return system_rc->value( key, user_ini->value( key, default_value ) );
+  else if( system_rc )
+    return system_rc->value( key, default_value );
+  else if( user_ini )
+    return user_ini->value( key, default_value );
+  else
+    return default_value;
+}
+
+void Settings::loadCommonSettings( QSettings* user_ini )
+{
+  QSettings* system_rc = objectRcSettings();
+  beginCommonGroup( system_rc, user_ini, "Chat" );
+  QString chat_font_string = commonValue( system_rc, user_ini,  "Font", "" ).toString();
+
   if( !chat_font_string.isEmpty() )
   {
     QFont f;
@@ -1284,58 +1318,51 @@ void Settings::loadCommonSettings( QSettings* sets, bool in_file_rc )
   }
   else
     setChatFont( QApplication::font() );
-  m_chatFontColor = sets->value( "FontColor", QColor( Qt::black ).name() ).toString();
-  m_defaultChatBackgroundColor = sets->value( "DefaultChatBackgroundColor", m_defaultChatBackgroundColor ).toString();
-  m_chatCompact = sets->value( "CompactMessage", true ).toBool();
-  m_chatShowMessageTimestamp = sets->value( "ShowMessageTimestamp", true ).toBool();
-  m_beepOnNewMessageArrived = sets->value( "BeepOnNewMessageArrived", true ).toBool();
-  m_disableBeepInUserStatusBusy = sets->value( "DisableBeepInUserStatusBusy", false ).toBool();
-  m_beepInActiveWindowAlso = sets->value( "EnableBeepInActiveWindow", false ).toBool();
-  m_chatUseHtmlTags = sets->value( "UseHtmlTags", false ).toBool();
-  m_chatUseClickableLinks = sets->value( "UseClickableLinks", true ).toBool();
-  m_chatMessageHistorySize = sets->value( "MessageHistorySize", 10 ).toInt();
-  m_showEmoticons = sets->value( "ShowEmoticons", true ).toBool();
-  m_showMessagesGroupByUser = sets->value( "ShowMessagesGroupByUsers", true ).toBool();
-  m_chatMessageFilter = sets->value( "MessageFilter", m_chatMessageFilter ).toBitArray();
+  m_chatFontColor = commonValue( system_rc, user_ini, "FontColor", QColor( Qt::black ).name() ).toString();
+  m_defaultChatBackgroundColor = commonValue( system_rc, user_ini, "DefaultChatBackgroundColor", m_defaultChatBackgroundColor ).toString();
+  m_chatCompact = commonValue( system_rc, user_ini, "CompactMessage", true ).toBool();
+  m_chatShowMessageTimestamp = commonValue( system_rc, user_ini, "ShowMessageTimestamp", true ).toBool();
+  m_beepOnNewMessageArrived = commonValue( system_rc, user_ini, "BeepOnNewMessageArrived", true ).toBool();
+  m_disableBeepInUserStatusBusy = commonValue( system_rc, user_ini, "DisableBeepInUserStatusBusy", false ).toBool();
+  m_beepInActiveWindowAlso = commonValue( system_rc, user_ini, "EnableBeepInActiveWindow", false ).toBool();
+  m_chatUseHtmlTags = commonValue( system_rc, user_ini, "UseHtmlTags", false ).toBool();
+  m_chatUseClickableLinks = commonValue( system_rc, user_ini, "UseClickableLinks", true ).toBool();
+  m_chatMessageHistorySize = commonValue( system_rc, user_ini, "MessageHistorySize", 10 ).toInt();
+  m_showEmoticons = commonValue( system_rc, user_ini, "ShowEmoticons", true ).toBool();
+  m_showMessagesGroupByUser = commonValue( system_rc, user_ini, "ShowMessagesGroupByUsers", true ).toBool();
+  m_chatMessageFilter = commonValue( system_rc, user_ini, "MessageFilter", m_chatMessageFilter ).toBitArray();
   if( m_chatMessageFilter.size() < static_cast<int>(ChatMessage::NumTypes) )
     m_chatMessageFilter.resize( static_cast<int>(ChatMessage::NumTypes) );
-  m_showOnlyMessagesInDefaultChat = sets->value( "ShowOnlyMessagesInDefaultChat", true ).toBool();
-  m_chatMessagesToShow = sets->value( "MaxMessagesToShow", defaultChatMessagesToShow() ).toInt();
-  m_imagePreviewHeight = qMax( 48, sets->value( "ImagePreviewHeight", 160 ).toInt() );
-  m_useReturnToSendMessage = sets->value( "UseKeyReturnToSendMessage", m_useReturnToSendMessage ).toBool();
-  m_chatUseYourNameInsteadOfYou = sets->value( "UseYourNameInsteadOfYou", false ).toBool();
-  m_chatClearAllReadMessages = sets->value( "ClearAllReadMessages", false ).toBool();
-  m_chatUseColoredUserNames = sets->value( "UseColoredUserNames", true ).toBool();
-  m_chatDefaultUserNameColor = sets->value( "DefaultUserNameColor", "#000" ).toString();
-  m_chatActiveWindowOpacityLevel = qMax( 10, qMin( 100, sets->value( "ActiveWindowOpacityLevel", m_chatActiveWindowOpacityLevel ).toInt() ) );
-  m_chatInactiveWindowOpacityLevel = qMax( 10, qMin( 100, sets->value( "InactiveWindowOpacityLevel", m_chatInactiveWindowOpacityLevel ).toInt() ) );
-  m_chatBackgroundColor = sets->value( "BackgroundColor", m_chatBackgroundColor ).toString();
-  m_chatDefaultTextColor = sets->value( "DefaultTextColor", m_chatDefaultTextColor ).toString();
-  m_chatSystemTextColor = sets->value( "SystemTextColor", m_chatSystemTextColor ).toString();
-  m_enableDefaultChatNotifications = sets->value( "EnableDefaultChatNotifications", m_enableDefaultChatNotifications ).toBool();
-  m_useMessageTimestampWithAP = sets->value( "UseMessageTimestampWithAP", m_useMessageTimestampWithAP ).toBool();
-  m_chatQuoteBackgroundColor = sets->value( "QuoteBackgroundColor", m_chatQuoteBackgroundColor ).toString();
-  m_chatQuoteTextColor = sets->value( "QuoteTextColor", m_chatQuoteTextColor ).toString();
-  m_chatOnSendingMessage = sets->value( "CloseOnSendingMessage", SkipOnSendingMessage ).toInt();
+  m_showOnlyMessagesInDefaultChat = commonValue( system_rc, user_ini, "ShowOnlyMessagesInDefaultChat", true ).toBool();
+  m_chatMessagesToShow = commonValue( system_rc, user_ini, "MaxMessagesToShow", defaultChatMessagesToShow() ).toInt();
+  m_imagePreviewHeight = qMax( 48, commonValue( system_rc, user_ini, "ImagePreviewHeight", 160 ).toInt() );
+  m_useReturnToSendMessage = commonValue( system_rc, user_ini, "UseKeyReturnToSendMessage", m_useReturnToSendMessage ).toBool();
+  m_chatUseYourNameInsteadOfYou = commonValue( system_rc, user_ini, "UseYourNameInsteadOfYou", false ).toBool();
+  m_chatClearAllReadMessages = commonValue( system_rc, user_ini, "ClearAllReadMessages", false ).toBool();
+  m_chatUseColoredUserNames = commonValue( system_rc, user_ini, "UseColoredUserNames", true ).toBool();
+  m_chatDefaultUserNameColor = commonValue( system_rc, user_ini, "DefaultUserNameColor", "#000" ).toString();
+  m_chatActiveWindowOpacityLevel = qMax( 10, qMin( 100, commonValue( system_rc, user_ini, "ActiveWindowOpacityLevel", m_chatActiveWindowOpacityLevel ).toInt() ) );
+  m_chatInactiveWindowOpacityLevel = qMax( 10, qMin( 100, commonValue( system_rc, user_ini, "InactiveWindowOpacityLevel", m_chatInactiveWindowOpacityLevel ).toInt() ) );
+  m_chatBackgroundColor = commonValue( system_rc, user_ini, "BackgroundColor", m_chatBackgroundColor ).toString();
+  m_chatDefaultTextColor = commonValue( system_rc, user_ini, "DefaultTextColor", m_chatDefaultTextColor ).toString();
+  m_chatSystemTextColor = commonValue( system_rc, user_ini, "SystemTextColor", m_chatSystemTextColor ).toString();
+  m_enableDefaultChatNotifications = commonValue( system_rc, user_ini, "EnableDefaultChatNotifications", m_enableDefaultChatNotifications ).toBool();
+  m_useMessageTimestampWithAP = commonValue( system_rc, user_ini, "UseMessageTimestampWithAP", m_useMessageTimestampWithAP ).toBool();
+  m_chatQuoteBackgroundColor = commonValue( system_rc, user_ini, "QuoteBackgroundColor", m_chatQuoteBackgroundColor ).toString();
+  m_chatQuoteTextColor = commonValue( system_rc, user_ini, "QuoteTextColor", m_chatQuoteTextColor ).toString();
+  m_chatOnSendingMessage = commonValue( system_rc, user_ini, "CloseOnSendingMessage", SkipOnSendingMessage ).toInt();
   if( m_chatOnSendingMessage < 0 || m_chatOnSendingMessage >= NumChatOnSendingMessageTypes )
     m_chatOnSendingMessage = SkipOnSendingMessage;
-  sets->endGroup();
+  endCommonGroup( system_rc, user_ini );
 
-  sets->beginGroup( "User" );
-  if( m_userRecognitionMethod == RecognizeByDefaultMethod )
-  {
-    int user_recognition_method = sets->value( "RecognitionMethod", m_userRecognitionMethod ).toInt();
-    setUserRecognitionMethod( user_recognition_method );
-  }
-  if( !in_file_rc )
-  {
-    m_localUser.setHash( sets->value( "LocalHash", m_localUser.hash() ).toString() );
-    m_localUser.setName( sets->value( "LocalName", m_localUser.name() ).toString() );
-    m_localUser.setColor( sets->value( "LocalColor", m_localUser.color() ).toString() );
-    m_localUser.setStatusDescription( sets->value( "LocalLastStatusDescription", m_localUser.statusDescription() ).toString() );
-  }
-  m_autoUserAway = sets->value( "AutoAwayStatus", false ).toBool();
-  m_userAwayTimeout = qMax( sets->value( "UserAwayTimeout", 10 ).toInt(), 1 ); // minutes
+  beginCommonGroup( system_rc, user_ini, "User" );
+  setUserRecognitionMethod( commonValue( system_rc, user_ini, "RecognitionMethod", m_userRecognitionMethod ).toInt() );
+  m_localUser.setHash( user_ini->value( "LocalHash", m_localUser.hash() ).toString() );
+  m_localUser.setName( user_ini->value( "LocalName", m_localUser.name() ).toString() );
+  m_localUser.setColor( user_ini->value( "LocalColor", m_localUser.color() ).toString() );
+  m_localUser.setStatusDescription( user_ini->value( "LocalLastStatusDescription", m_localUser.statusDescription() ).toString() );
+  m_autoUserAway = commonValue( system_rc, user_ini, "AutoAwayStatus", false ).toBool();
+  m_userAwayTimeout = qMax( commonValue( system_rc, user_ini, "UserAwayTimeout", 10 ).toInt(), 1 ); // minutes
   if( m_useEasyConnection )
   {
     m_useDefaultPassword = true;
@@ -1344,206 +1371,195 @@ void Settings::loadCommonSettings( QSettings* sets, bool in_file_rc )
   }
   else
   {
-    m_useDefaultPassword = sets->value( "UseDefaultPassword", true ).toBool();
-    m_askChangeUserAtStartup = sets->value( "AskChangeUserAtStartup", m_firstTime ).toBool();
-    m_askPasswordAtStartup = sets->value( "AskPasswordAtStartup", false ).toBool();
+    m_useDefaultPassword = user_ini->value( "UseDefaultPassword", true ).toBool();
+    m_askChangeUserAtStartup = user_ini->value( "AskChangeUserAtStartup", m_firstTime ).toBool();
+    m_askPasswordAtStartup = user_ini->value( "AskPasswordAtStartup", false ).toBool();
   }
 
-  m_savePassword = sets->value( "SavePassword", false ).toBool();
+  m_savePassword = user_ini->value( "SavePassword", false ).toBool();
   QString enc_pass = "";
   if( m_savePassword )
-    enc_pass = simpleDecrypt( sets->value( "EncPwd", "" ).toString() );
+    enc_pass = simpleDecrypt( user_ini->value( "EncPwd", "" ).toString() );
   setPassword( enc_pass );
-  m_saveUserList = sets->value( "SaveUsers", m_saveUserList ).toBool();
-  if( !in_file_rc )
-  {
-    QString user_list = sets->value( "List", "" ).toString();
-    if( !user_list.isEmpty() )
-      m_userList = simpleDecrypt( user_list ).split( QString( "\n" ) );
-    else
-      m_userList = QStringList();
-    QString user_status_list = sets->value( "StatusList", "" ).toString();
-    if( !user_status_list.isEmpty() )
-      m_userStatusList = simpleDecrypt( user_status_list ).split( QString( "\n" ) );
-    else
-      m_userStatusList = QStringList();
-     m_refusedChats = sets->value( "RefusedChats", QStringList() ).toStringList();
-  }
-  m_maxUserStatusDescriptionInList = sets->value( "MaxStatusDescriptionInList", m_maxUserStatusDescriptionInList ).toInt();
-  m_presetMessages = sets->value( "PresetMessages", QMap<QString,QVariant>() ).toMap();
-  m_maxDaysOfUserInactivity = sets->value( "MaxDaysOfUserInactivity", m_maxDaysOfUserInactivity ).toInt();
-  m_removeInactiveUsers = sets->value( "RemoveInactiveUsers", true ).toBool();
-  sets->endGroup();
+  m_saveUserList = commonValue( system_rc, user_ini, "SaveUsers", m_saveUserList ).toBool();
+  QString user_list = user_ini->value( "List", "" ).toString();
+  if( !user_list.isEmpty() )
+    m_userList = simpleDecrypt( user_list ).split( QString( "\n" ) );
+  else
+    m_userList = QStringList();
+  QString user_status_list = user_ini->value( "StatusList", "" ).toString();
+  if( !user_status_list.isEmpty() )
+    m_userStatusList = simpleDecrypt( user_status_list ).split( QString( "\n" ) );
+  else
+    m_userStatusList = QStringList();
+   m_refusedChats = user_ini->value( "RefusedChats", QStringList() ).toStringList();
 
-  sets->beginGroup( "Gui" );
-  m_mainBarIconSize = sets->value( "MainBarIconSize", QSize( 24, 24 ) ).toSize();
-  m_avatarIconSize = sets->value( "AvatarIconSize", QSize( 28, 28 ) ).toSize();
-  m_resetGeometryAtStartup = sets->value( "ResetWindowGeometryAtStartup", m_resetGeometryAtStartup ).toBool();
-  m_saveGeometryOnExit = sets->value( "SaveGeometryOnExit", m_saveGeometryOnExit ).toBool();
-  m_language = sets->value( "Language", QLocale::system().name() ).toString();
+  m_maxUserStatusDescriptionInList = commonValue( system_rc, user_ini, "MaxStatusDescriptionInList", m_maxUserStatusDescriptionInList ).toInt();
+  m_presetMessages = commonValue( system_rc, user_ini, "PresetMessages", QMap<QString,QVariant>() ).toMap();
+  m_maxDaysOfUserInactivity = commonValue( system_rc, user_ini, "MaxDaysOfUserInactivity", m_maxDaysOfUserInactivity ).toInt();
+  m_removeInactiveUsers = commonValue( system_rc, user_ini, "RemoveInactiveUsers", true ).toBool();
+  endCommonGroup( system_rc, user_ini );
+
+  beginCommonGroup( system_rc, user_ini, "Gui" );
+  m_mainBarIconSize = commonValue( system_rc, user_ini, "MainBarIconSize", QSize( 24, 24 ) ).toSize();
+  m_avatarIconSize = commonValue( system_rc, user_ini, "AvatarIconSize", QSize( 28, 28 ) ).toSize();
+  m_resetGeometryAtStartup = commonValue( system_rc, user_ini, "ResetWindowGeometryAtStartup", m_resetGeometryAtStartup ).toBool();
+  m_saveGeometryOnExit = commonValue( system_rc, user_ini, "SaveGeometryOnExit", m_saveGeometryOnExit ).toBool();
+  m_language = commonValue( system_rc, user_ini, "Language", QLocale::system().name() ).toString();
   if( m_language.size() > 2 )
     m_language.resize( 2 );
-  m_keyEscapeMinimizeInTray = sets->value( "KeyEscapeMinimizeInTray", true ).toBool();
+  m_keyEscapeMinimizeInTray = commonValue( system_rc, user_ini, "KeyEscapeMinimizeInTray", true ).toBool();
 #ifdef Q_OS_MAC
   m_minimizeInTray = false;
 #else
-  m_minimizeInTray = sets->value( "MinimizeInTray", true ).toBool();
+  m_minimizeInTray = commonValue( system_rc, user_ini, "MinimizeInTray", true ).toBool();
 #endif
-  m_stayOnTop = sets->value( "StayOnTop", false ).toBool();
-  m_raiseOnNewMessageArrived = sets->value( "RaiseOnNewMessageArrived", false ).toBool();
-  m_raiseMainWindowOnNewMessageArrived = sets->value( "RaiseMainWindowOnNewMessageArrived", false ).toBool();
-  m_alwaysShowFileTransferProgress = sets->value( "AlwaysShowFileTransferProgress", false ).toBool();
-  m_alwaysOpenChatOnNewMessageArrived = sets->value( "AlwaysOpenChatOnNewMessageArrived", true ).toBool();
+  m_stayOnTop = commonValue( system_rc, user_ini, "StayOnTop", false ).toBool();
+  m_raiseOnNewMessageArrived = commonValue( system_rc, user_ini, "RaiseOnNewMessageArrived", false ).toBool();
+  m_raiseMainWindowOnNewMessageArrived = commonValue( system_rc, user_ini, "RaiseMainWindowOnNewMessageArrived", false ).toBool();
+  m_alwaysShowFileTransferProgress = commonValue( system_rc, user_ini, "AlwaysShowFileTransferProgress", false ).toBool();
+  m_alwaysOpenChatOnNewMessageArrived = commonValue( system_rc, user_ini, "AlwaysOpenChatOnNewMessageArrived", true ).toBool();
 
-  m_loadOnTrayAtStartup = sets->value( "LoadOnTrayAtStartup", false ).toBool();
-  m_showNotificationOnTray = sets->value( "ShowNotificationOnTray", true ).toBool();
-  m_showOnlyMessageNotificationOnTray = sets->value( "ShowOnlyMessageNotificationOnTray", true ).toBool();
-  m_trayMessageTimeout = qMax( sets->value( "ShowNotificationOnTrayTimeout", 10000 ).toInt(), 1000 );
-  m_showChatMessageOnTray = sets->value( "ShowChatMessageOnTray", false ).toBool();
-  m_textSizeInChatMessagePreviewOnTray = sets->value( "TextSizeInChatMessagePreviewOnTray", 40 ).toInt();
-  m_showFileTransferCompletedOnTray = sets->value( "ShowFileTransferCompletedOnTray", true ).toBool();
-  m_chatAutoSave = sets->value( "ChatAutoSave", true ).toBool();
-  m_chatSaveUnsentMessages = sets->value( "ChatSaveUnsentMessages", true ).toBool();
-  m_chatMaxLineSaved = sets->value( "ChatMaxLineSaved", 9000 ).toInt();
-  m_chatSaveFileTransfers = sets->value( "ChatSaveFileTransfers", m_chatAutoSave ).toBool();
-  m_chatSaveSystemMessages = sets->value( "ChatSaveSystemMessages", false ).toBool();
-  m_showChatToolbar = sets->value( "ShowChatToolbar", true ).toBool();
-  m_showOnlyOnlineUsers = sets->value( "ShowOnlyOnlineUsers", false ).toBool();
-  m_showUserPhoto = sets->value( "ShowUserPhoto", true ).toBool();
-  m_showVCardOnRightClick = sets->value( "ShowVCardOnRightClick", true ).toBool();
-  m_showEmoticonMenu = sets->value( "ShowEmoticonMenu", false ).toBool();
-  m_showPresetMessages = sets->value( "ShowPresetMessages", false ).toBool();
-  m_emoticonSizeInEdit = qMax( 12, sets->value( "EmoticonSizeInEdit", m_emoticonSizeInEdit ).toInt() );
-  m_emoticonSizeInChat = qMax( 12, sets->value( "EmoticonSizeInChat", m_emoticonSizeInChat ).toInt() );
-  m_emoticonSizeInMenu = sets->value( "EmoticonSizeInMenu", m_emoticonSizeInMenu ).toInt();
-  m_emoticonInRecentMenu = sets->value( "EmoticonsInRecentMenu", m_emoticonInRecentMenu ).toInt();
-  m_recentEmoticons = sets->value( "RecentEmoticons", QStringList() ).toStringList();
-  m_useNativeEmoticons = sets->value( "UseNativeEmoticons", m_useNativeEmoticons ).toBool();
-  m_showMinimizedAtStartup = sets->value( "ShowMinimizedAtStartup", m_startMinimized ).toBool();
-  m_promptOnCloseEvent = sets->value( "PromptOnCloseEvent", m_promptOnCloseEvent ).toBool();
-  m_showUserStatusBackgroundColor = sets->value( "ShowUserStatusBackgroundColor", false ).toBool();
-  m_showUserStatusDescription = sets->value( "ShowUserStatusDescription", true ).toBool();
-  m_shortcuts = sets->value( "Shortcuts", QStringList() ).toStringList();
-  m_useShortcuts = sets->value( "UseShortcuts", false ).toBool();
-  m_useNativeDialogs = sets->value( "UseNativeFileDialogs", m_useNativeDialogs ).toBool();
-  m_homeShowMessageTimestamp = sets->value( "ShowActivitiesTimestamp", false ).toBool();
-  m_homeBackgroundColor = sets->value( "HomeBackgroundColor", m_homeBackgroundColor ).toString();
-  m_userListBackgroundColor = sets->value( "UserListBackgroundColor", m_userListBackgroundColor ).toString();
-  m_chatListBackgroundColor = sets->value( "ChatListBackgroundColor", m_chatListBackgroundColor ).toString();
-  m_groupListBackgroundColor = sets->value( "GroupListBackgroundColor", m_groupListBackgroundColor ).toString();
-  m_savedChatListBackgroundColor = sets->value( "SavedChatListBackgroundColor", m_savedChatListBackgroundColor ).toString();
-  m_usePreviewFileDialog = sets->value( "UsePreviewFileDialog", m_usePreviewFileDialog ).toBool();
-  m_previewFileDialogImageSize = qMax( 100, sets->value( "PreviewFileDialogImageSize", m_previewFileDialogImageSize ).toInt() );
-  m_userSortingMode = qMax( 0, sets->value( "UserSortingMode", 0 ).toInt() );
-  m_sortUsersAscending = sets->value( "SortUsersAscending", true ).toBool();
-  m_showTextInModeRTL = sets->value( "ShowChatTextInModeRTL", m_showTextInModeRTL ).toBool();
-  m_playBuzzSound = sets->value( "PlayBuzzSound", true ).toBool();
-  bool open_chat_in_new_window = sets->value( "AlwaysOpenNewFloatingChat", !m_showChatsInOneWindow ).toBool();
-  m_showChatsInOneWindow = sets->value( "ShowChatsInOneWindow", !open_chat_in_new_window ).toBool();
-  m_iconSourcePath = sets->value( "IconSourcePath", m_iconSourcePath ).toString();
-  m_emoticonSourcePath = sets->value( "EmoticonSourcePath", m_emoticonSourcePath ).toString();
-  m_maxChatsToOpenAfterSendingMessage = sets->value( "MaxChatsToOpenAfterSendingMessage", m_maxChatsToOpenAfterSendingMessage ).toInt();
-  m_showUsersOnConnection = sets->value( "ShowUsersOnConnection", m_showUsersOnConnection ).toBool();
-  m_showChatsOnConnection = sets->value( "ShowChatsOnConnection", m_showChatsOnConnection ).toBool();
+  m_loadOnTrayAtStartup = commonValue( system_rc, user_ini, "LoadOnTrayAtStartup", false ).toBool();
+  m_showNotificationOnTray = commonValue( system_rc, user_ini, "ShowNotificationOnTray", true ).toBool();
+  m_showOnlyMessageNotificationOnTray = commonValue( system_rc, user_ini, "ShowOnlyMessageNotificationOnTray", true ).toBool();
+  m_trayMessageTimeout = qMax( commonValue( system_rc, user_ini, "ShowNotificationOnTrayTimeout", 10000 ).toInt(), 1000 );
+  m_showChatMessageOnTray = commonValue( system_rc, user_ini, "ShowChatMessageOnTray", false ).toBool();
+  m_textSizeInChatMessagePreviewOnTray = commonValue( system_rc, user_ini, "TextSizeInChatMessagePreviewOnTray", 40 ).toInt();
+  m_showFileTransferCompletedOnTray = commonValue( system_rc, user_ini, "ShowFileTransferCompletedOnTray", true ).toBool();
+  m_chatAutoSave = commonValue( system_rc, user_ini, "ChatAutoSave", true ).toBool();
+  m_chatSaveUnsentMessages = commonValue( system_rc, user_ini, "ChatSaveUnsentMessages", true ).toBool();
+  m_chatMaxLineSaved = commonValue( system_rc, user_ini, "ChatMaxLineSaved", 9000 ).toInt();
+  m_chatSaveFileTransfers = commonValue( system_rc, user_ini, "ChatSaveFileTransfers", m_chatAutoSave ).toBool();
+  m_chatSaveSystemMessages = commonValue( system_rc, user_ini, "ChatSaveSystemMessages", false ).toBool();
+  m_showChatToolbar = commonValue( system_rc, user_ini, "ShowChatToolbar", true ).toBool();
+  m_showOnlyOnlineUsers = commonValue( system_rc, user_ini, "ShowOnlyOnlineUsers", false ).toBool();
+  m_showUserPhoto = commonValue( system_rc, user_ini, "ShowUserPhoto", true ).toBool();
+  m_showVCardOnRightClick = commonValue( system_rc, user_ini, "ShowVCardOnRightClick", true ).toBool();
+  m_showEmoticonMenu = commonValue( system_rc, user_ini, "ShowEmoticonMenu", false ).toBool();
+  m_showPresetMessages = commonValue( system_rc, user_ini, "ShowPresetMessages", false ).toBool();
+  m_emoticonSizeInEdit = qMax( 12, commonValue( system_rc, user_ini, "EmoticonSizeInEdit", m_emoticonSizeInEdit ).toInt() );
+  m_emoticonSizeInChat = qMax( 12, commonValue( system_rc, user_ini, "EmoticonSizeInChat", m_emoticonSizeInChat ).toInt() );
+  m_emoticonSizeInMenu = commonValue( system_rc, user_ini, "EmoticonSizeInMenu", m_emoticonSizeInMenu ).toInt();
+  m_emoticonInRecentMenu = commonValue( system_rc, user_ini, "EmoticonsInRecentMenu", m_emoticonInRecentMenu ).toInt();
+  m_recentEmoticons = user_ini->value( "RecentEmoticons", QStringList() ).toStringList();
+  m_useNativeEmoticons = commonValue( system_rc, user_ini, "UseNativeEmoticons", m_useNativeEmoticons ).toBool();
+  m_showMinimizedAtStartup = commonValue( system_rc, user_ini, "ShowMinimizedAtStartup", m_startMinimized ).toBool();
+  m_promptOnCloseEvent = commonValue( system_rc, user_ini, "PromptOnCloseEvent", m_promptOnCloseEvent ).toBool();
+  m_showUserStatusBackgroundColor = commonValue( system_rc, user_ini, "ShowUserStatusBackgroundColor", false ).toBool();
+  m_showUserStatusDescription = commonValue( system_rc, user_ini, "ShowUserStatusDescription", true ).toBool();
+  m_shortcuts = commonValue( system_rc, user_ini, "Shortcuts", QStringList() ).toStringList();
+  m_useShortcuts = commonValue( system_rc, user_ini, "UseShortcuts", false ).toBool();
+  m_useNativeDialogs = commonValue( system_rc, user_ini, "UseNativeFileDialogs", m_useNativeDialogs ).toBool();
+  m_homeShowMessageTimestamp = commonValue( system_rc, user_ini, "ShowActivitiesTimestamp", false ).toBool();
+  m_homeBackgroundColor = commonValue( system_rc, user_ini, "HomeBackgroundColor", m_homeBackgroundColor ).toString();
+  m_userListBackgroundColor = commonValue( system_rc, user_ini, "UserListBackgroundColor", m_userListBackgroundColor ).toString();
+  m_chatListBackgroundColor = commonValue( system_rc, user_ini, "ChatListBackgroundColor", m_chatListBackgroundColor ).toString();
+  m_groupListBackgroundColor = commonValue( system_rc, user_ini, "GroupListBackgroundColor", m_groupListBackgroundColor ).toString();
+  m_savedChatListBackgroundColor = commonValue( system_rc, user_ini, "SavedChatListBackgroundColor", m_savedChatListBackgroundColor ).toString();
+  m_usePreviewFileDialog = commonValue( system_rc, user_ini, "UsePreviewFileDialog", m_usePreviewFileDialog ).toBool();
+  m_previewFileDialogImageSize = qMax( 100, commonValue( system_rc, user_ini, "PreviewFileDialogImageSize", m_previewFileDialogImageSize ).toInt() );
+  m_userSortingMode = qMax( 0, commonValue( system_rc, user_ini, "UserSortingMode", 0 ).toInt() );
+  m_sortUsersAscending = commonValue( system_rc, user_ini, "SortUsersAscending", true ).toBool();
+  m_showTextInModeRTL = commonValue( system_rc, user_ini, "ShowChatTextInModeRTL", m_showTextInModeRTL ).toBool();
+  m_playBuzzSound = commonValue( system_rc, user_ini, "PlayBuzzSound", true ).toBool();
+  bool open_chat_in_new_window = commonValue( system_rc, user_ini, "AlwaysOpenNewFloatingChat", !m_showChatsInOneWindow ).toBool();
+  m_showChatsInOneWindow = commonValue( system_rc, user_ini, "ShowChatsInOneWindow", !open_chat_in_new_window ).toBool();
+  m_iconSourcePath = commonValue( system_rc, user_ini, "IconSourcePath", m_iconSourcePath ).toString();
+  m_emoticonSourcePath = commonValue( system_rc, user_ini, "EmoticonSourcePath", m_emoticonSourcePath ).toString();
+  m_maxChatsToOpenAfterSendingMessage = commonValue( system_rc, user_ini, "MaxChatsToOpenAfterSendingMessage", m_maxChatsToOpenAfterSendingMessage ).toInt();
+  m_showUsersOnConnection = commonValue( system_rc, user_ini, "ShowUsersOnConnection", m_showUsersOnConnection ).toBool();
+  m_showChatsOnConnection = commonValue( system_rc, user_ini, "ShowChatsOnConnection", m_showChatsOnConnection ).toBool();
   if( m_showChatsOnConnection && m_showUsersOnConnection )
     m_showUsersOnConnection = false;
-  m_hideEmptyChatsInList = sets->value( "HideEmptyChatsInList", m_hideEmptyChatsInList ).toBool();
-  m_enableMaximizeButton = sets->value( "EnableMaximizeButton", false ).toBool();
-  m_useDarkStyle = sets->value( "UseDarkStyle", m_useDarkStyle ).toBool();
-  m_showUsersInWorkgroups = sets->value( "ShowUsersInWorkgroups", false ).toBool();
-  m_openChatWhenSendNewMessage = sets->value( "OpenChatWhenSendNewMessage", true ).toBool();
-  m_sendNewMessageIndividually = sets->value( "SendNewMessageIndividually", false ).toBool();
-  m_useUserFirstNameFirstInFullName = sets->value( "ShowUserFirstNameFirstInFullName", useUserFirstNameFirstInFullNameFromLanguage() ).toBool();
-  sets->endGroup();
+  m_hideEmptyChatsInList = commonValue( system_rc, user_ini, "HideEmptyChatsInList", m_hideEmptyChatsInList ).toBool();
+  m_enableMaximizeButton = commonValue( system_rc, user_ini, "EnableMaximizeButton", false ).toBool();
+  m_useDarkStyle = user_ini->value( "UseDarkStyle", m_useDarkStyle ).toBool();
+  m_showUsersInWorkgroups = commonValue( system_rc, user_ini, "ShowUsersInWorkgroups", false ).toBool();
+  m_openChatWhenSendNewMessage = user_ini->value( "OpenChatWhenSendNewMessage", true ).toBool();
+  m_sendNewMessageIndividually = user_ini->value( "SendNewMessageIndividually", false ).toBool();
+  m_useUserFirstNameFirstInFullName = commonValue( system_rc, user_ini, "ShowUserFirstNameFirstInFullName", useUserFirstNameFirstInFullNameFromLanguage() ).toBool();
+  endCommonGroup( system_rc, user_ini );
 
-  sets->beginGroup( "Tools" );
-  m_logToFile = sets->value( "LogToFile", false ).toBool();
-  m_maxLogLines = sets->value( "MaxLogLines", m_maxLogLines ).toInt();
-  m_useSpellChecker = sets->value( "UseSpellChecker", true ).toBool();
-  m_useWordCompleter = sets->value( "UseWordCompleter", false ).toBool();
-  m_checkNewVersionAtStartup = sets->value( "SearchForNewVersionAtStartup", m_checkNewVersionAtStartup ).toBool();
-  m_postUsageStatistics = sets->value( "SendAnonymousUsageStatistics", m_postUsageStatistics ).toBool();
-  if( !in_file_rc )
-  {
-    m_dictionaryPath = checkFilePath( sets->value( "DictionaryPath", "" ).toString(), "" );
-    m_applicationUuid = sets->value( "Uuid", "" ).toString();
-    m_applicationUuidCreationDate = sets->value( "UuidCreationDate", QDate::currentDate() ).toDate();
-    m_statsPostDate = sets->value( "StatsPostDate", QDate() ).toDate();
-  }
-  sets->endGroup();
+  beginCommonGroup( system_rc, user_ini, "Tools" );
+  m_logToFile = commonValue( system_rc, user_ini, "LogToFile", false ).toBool();
+  m_maxLogLines = commonValue( system_rc, user_ini, "MaxLogLines", m_maxLogLines ).toInt();
+  m_useSpellChecker = commonValue( system_rc, user_ini, "UseSpellChecker", true ).toBool();
+  m_useWordCompleter = commonValue( system_rc, user_ini, "UseWordCompleter", false ).toBool();
+  m_checkNewVersionAtStartup = commonValue( system_rc, user_ini, "SearchForNewVersionAtStartup", m_checkNewVersionAtStartup ).toBool();
+  m_postUsageStatistics = commonValue( system_rc, user_ini, "SendAnonymousUsageStatistics", m_postUsageStatistics ).toBool();
+  m_dictionaryPath = checkFilePath( user_ini->value( "DictionaryPath", "" ).toString(), "" );
+  m_applicationUuid = user_ini->value( "Uuid", "" ).toString();
+  m_applicationUuidCreationDate = user_ini->value( "UuidCreationDate", QDate::currentDate() ).toDate();
+  m_statsPostDate = user_ini->value( "StatsPostDate", QDate() ).toDate();
+  endCommonGroup( system_rc, user_ini );
 
-  sets->beginGroup( "Misc" );
-  m_tickIntervalCheckIdle = qMax( sets->value( "TickIntervalCheckIdle", m_tickIntervalCheckIdle ).toInt(), 2 );
-  m_tickIntervalCheckNetwork = qMax( sets->value( "TickIntervalCheckNetwork", m_tickIntervalCheckNetwork ).toInt(), 5 );
-  m_tickIntervalBroadcasting = qMax( sets->value( "TickIntervalBroadcasting", m_tickIntervalBroadcasting ).toInt(), 0 );
+  beginCommonGroup( system_rc, user_ini, "Misc" );
+  m_tickIntervalCheckIdle = qMax( commonValue( system_rc, user_ini, "TickIntervalCheckIdle", m_tickIntervalCheckIdle ).toInt(), 2 );
+  m_tickIntervalCheckNetwork = qMax( commonValue( system_rc, user_ini, "TickIntervalCheckNetwork", m_tickIntervalCheckNetwork ).toInt(), 5 );
+  m_tickIntervalBroadcasting = qMax( commonValue( system_rc, user_ini, "TickIntervalBroadcasting", m_tickIntervalBroadcasting ).toInt(), 0 );
   NetworkAddress local_user_network_address = m_localUser.networkAddress();
-  local_user_network_address.setHostPort( static_cast<quint16>(sets->value( "ListenerPort", DEFAULT_LISTENER_PORT ).toUInt()) );
+  local_user_network_address.setHostPort( static_cast<quint16>(commonValue( system_rc, user_ini, "ListenerPort", DEFAULT_LISTENER_PORT ).toUInt()) );
   m_localUser.setNetworkAddress( local_user_network_address );
-  m_pongTimeout = qMax( sets->value( "ConnectionActivityTimeout_ms", PONG_DEFAULT_TIMEOUT ).toInt(), 13000 );
+  m_pongTimeout = qMax( commonValue( system_rc, user_ini, "ConnectionActivityTimeout_ms", PONG_DEFAULT_TIMEOUT ).toInt(), 13000 );
   if( m_pongTimeout > 40000 )
     m_pongTimeout = 40000;
-  m_writingTimeout = qMax( sets->value( "WritingTimeout_ms", 3000 ).toInt(), 3000 );
-  m_tickIntervalConnectionTimeout = qMax( sets->value( "TickIntervalConnectionTimeout", m_tickIntervalConnectionTimeout ).toInt(), 5 );
+  m_writingTimeout = qMax( commonValue( system_rc, user_ini, "WritingTimeout_ms", 3000 ).toInt(), 3000 );
+  m_tickIntervalConnectionTimeout = qMax( commonValue( system_rc, user_ini, "TickIntervalConnectionTimeout", m_tickIntervalConnectionTimeout ).toInt(), 5 );
   if( m_settingsVersion < 6 && m_tickIntervalConnectionTimeout < TICK_INTERVAL_CONNECTION_TIMEOUT )
     m_tickIntervalConnectionTimeout = TICK_INTERVAL_CONNECTION_TIMEOUT;
-  m_useLowDelayOptionOnSocket = sets->value( "UseLowDelayOptionOnSocket", false ).toBool();
-  m_delayConnectionAtStartup = qMax( 3000, sets->value( "DelayConnectionAtStartup_ms", m_delayConnectionAtStartup ).toInt() );
-  m_sendOfflineMessagesToDefaultChat = sets->value( "SendOfflineMessagesToDefaultChat", false ).toBool();
-  if( !in_file_rc )
+  m_useLowDelayOptionOnSocket = commonValue( system_rc, user_ini, "UseLowDelayOptionOnSocket", false ).toBool();
+  m_delayConnectionAtStartup = qMax( 3000, commonValue( system_rc, user_ini, "DelayConnectionAtStartup_ms", m_delayConnectionAtStartup ).toInt() );
+  m_sendOfflineMessagesToDefaultChat = commonValue( system_rc, user_ini, "SendOfflineMessagesToDefaultChat", false ).toBool();
+  m_saveMessagesTimestamp = user_ini->value( "SaveMessagesTimestamp", QDateTime() ).toDateTime();
+  if( m_saveMessagesTimestamp.isNull() )
   {
-    m_saveMessagesTimestamp = sets->value( "SaveMessagesTimestamp", QDateTime() ).toDateTime();
-    if( m_saveMessagesTimestamp.isNull() )
-    {
-      qDebug() << "Generating new save messages timestamp";
-      m_saveMessagesTimestamp = QDateTime::currentDateTime();
-    }
+    qDebug() << "Generating new save messages timestamp";
+    m_saveMessagesTimestamp = QDateTime::currentDateTime();
   }
-  m_clearCacheAfterDays = qMax( -1, sets->value( "ClearCacheAfterDays", m_clearCacheAfterDays ).toInt() );
-  m_removePartiallyDownloadedFilesAfterDays = qMax( -1, sets->value( "RemovePartiallyDownloadedFilesAfterDays", m_removePartiallyDownloadedFilesAfterDays ).toInt() );
-  sets->endGroup();
+  m_clearCacheAfterDays = qMax( -1, commonValue( system_rc, user_ini, "ClearCacheAfterDays", m_clearCacheAfterDays ).toInt() );
+  m_removePartiallyDownloadedFilesAfterDays = qMax( -1, commonValue( system_rc, user_ini, "RemovePartiallyDownloadedFilesAfterDays", m_removePartiallyDownloadedFilesAfterDays ).toInt() );
+  endCommonGroup( system_rc, user_ini );
 
-  sets->beginGroup( "Network");
-  if( !in_file_rc )
-  {
-    QString local_host_address = sets->value( "LocalHostAddressForced", "" ).toString();
-    if( !local_host_address.isEmpty() )
-      m_localHostAddressForced = QHostAddress( local_host_address );
-    m_networkAddressList = sets->value( "UserPathList", QStringList() ).toStringList();
-  }
-  m_localSubnetForced = sets->value( "LocalSubnetForced", "" ).toString();
-  m_localUser.setWorkgroups( sets->value( "Workgroups", QStringList() ).toStringList() );
-  m_acceptConnectionsOnlyFromWorkgroups = sets->value( "AcceptConnectionsOnlyFromWorkgroups", m_acceptConnectionsOnlyFromWorkgroups ).toBool();
+  beginCommonGroup( system_rc, user_ini, "Network");
+  QString local_host_address = user_ini->value( "LocalHostAddressForced", "" ).toString();
+  if( !local_host_address.isEmpty() )
+    m_localHostAddressForced = QHostAddress( local_host_address );
+  m_networkAddressList = commonValue( system_rc, user_ini, "UserPathList", QStringList() ).toStringList();
+  m_localSubnetForced = commonValue( system_rc, user_ini, "LocalSubnetForced", "" ).toString();
+  m_localUser.setWorkgroups( commonValue( system_rc, user_ini, "Workgroups", QStringList() ).toStringList() );
+  m_acceptConnectionsOnlyFromWorkgroups = commonValue( system_rc, user_ini, "AcceptConnectionsOnlyFromWorkgroups", m_acceptConnectionsOnlyFromWorkgroups ).toBool();
 
 #ifdef BEEBEEP_USE_MULTICAST_DNS
-  m_useMulticastDns = sets->value( "UseMulticastDns", m_useMulticastDns ).toBool();
+  m_useMulticastDns = commonValue( system_rc, user_ini, "UseMulticastDns", m_useMulticastDns ).toBool();
 #endif
-  m_maxUsersToConnectInATick = sets->value( "MaxUsersToConnectInATick", m_maxUsersToConnectInATick ).toInt();
-  m_preventMultipleConnectionsFromSingleHostAddress = sets->value( "PreventMultipleConnectionsFromSingleHostAddress", m_preventMultipleConnectionsFromSingleHostAddress ).toBool();
-  m_useHive = sets->value( "UseHiveProtocol", m_useHive ).toBool();
-  m_disableSystemProxyForConnections = sets->value( "DisableSystemProxyForConnections", m_disableSystemProxyForConnections ).toBool();
-  m_useDefaultMulticastGroupAddress = sets->value( "UseDefaultMulticastGroupAddress", m_useDefaultMulticastGroupAddress ).toBool();
-  m_broadcastToOfflineUsers = sets->value( "BroadcastToOfflineUsers", m_broadcastToOfflineUsers ).toBool();
-  m_broadcastToLocalSubnetAlways = sets->value( "BroadcastToLocalSubnet", m_broadcastToLocalSubnetAlways ).toBool();
-  m_ipMulticastTtl = sets->value( "IpMulticastTtl", m_ipMulticastTtl ).toInt();
-  sets->endGroup();
-  if( !in_file_rc )
-    loadBroadcastAddressesFromFileHosts();
+  m_maxUsersToConnectInATick = commonValue( system_rc, user_ini, "MaxUsersToConnectInATick", m_maxUsersToConnectInATick ).toInt();
+  m_preventMultipleConnectionsFromSingleHostAddress = commonValue( system_rc, user_ini, "PreventMultipleConnectionsFromSingleHostAddress", m_preventMultipleConnectionsFromSingleHostAddress ).toBool();
+  m_useHive = commonValue( system_rc, user_ini, "UseHiveProtocol", m_useHive ).toBool();
+  m_disableSystemProxyForConnections = commonValue( system_rc, user_ini, "DisableSystemProxyForConnections", m_disableSystemProxyForConnections ).toBool();
+  m_useDefaultMulticastGroupAddress = commonValue( system_rc, user_ini, "UseDefaultMulticastGroupAddress", m_useDefaultMulticastGroupAddress ).toBool();
+  m_broadcastToOfflineUsers = commonValue( system_rc, user_ini, "BroadcastToOfflineUsers", m_broadcastToOfflineUsers ).toBool();
+  m_broadcastToLocalSubnetAlways = commonValue( system_rc, user_ini, "BroadcastToLocalSubnet", m_broadcastToLocalSubnetAlways ).toBool();
+  m_ipMulticastTtl = commonValue( system_rc, user_ini, "IpMulticastTtl", m_ipMulticastTtl ).toInt();
+  endCommonGroup( system_rc, user_ini );
 
-  sets->beginGroup( "FileShare" );
+  loadBroadcastAddressesFromFileHosts();
+
+  beginCommonGroup( system_rc, user_ini, "FileShare" );
   if( m_disableFileTransfer )
     m_enableFileTransfer = false;
   else
-    m_enableFileTransfer = sets->value( "EnableFileTransfer", true ).toBool();
+    m_enableFileTransfer = user_ini->value( "EnableFileTransfer", true ).toBool();
 
   if( m_enableFileTransfer )
   {
     if( m_disableFileSharing )
       m_enableFileSharing = false;
     else
-      m_enableFileSharing = sets->value( "EnableFileSharing", false ).toBool();
+      m_enableFileSharing = user_ini->value( "EnableFileSharing", false ).toBool();
 
     if( m_enableFileSharing )
-      m_useShareBox = sets->value( "UseShareBox", false ).toBool();
+      m_useShareBox = user_ini->value( "UseShareBox", false ).toBool();
     else
       m_useShareBox = false;
   }
@@ -1553,77 +1569,73 @@ void Settings::loadCommonSettings( QSettings* sets, bool in_file_rc )
     m_useShareBox = false;
   }
 
-  m_maxFileShared = qMax( 1024, sets->value( "MaxSharedFiles", 8192 ).toInt() );
-  m_shareBoxPath = checkFolderPath( sets->value( "ShareBoxPath", "" ).toString(), "" );
-  m_maxSimultaneousDownloads = sets->value( "MaxSimultaneousDownloads", 3 ).toInt();
-  m_maxQueuedDownloads = qMax( 1, sets->value( "MaxQueuedDownloads", 400 ).toInt() );
-  m_fileTransferConfirmTimeout = qMax( sets->value( "FileTransferConfirmTimeout", 30000 ).toInt(), 1000 );
-  m_fileTransferBufferSize = qMax( sets->value( "FileTransferBufferSize", 65456 ).toInt(), 2048 );
+  m_maxFileShared = qMax( 1024, commonValue( system_rc, user_ini, "MaxSharedFiles", 8192 ).toInt() );
+  m_shareBoxPath = checkFolderPath( user_ini->value( "ShareBoxPath", "" ).toString(), "" );
+  m_maxSimultaneousDownloads = commonValue( system_rc, user_ini, "MaxSimultaneousDownloads", 3 ).toInt();
+  m_maxQueuedDownloads = qMax( 1, commonValue( system_rc, user_ini, "MaxQueuedDownloads", 400 ).toInt() );
+  m_fileTransferConfirmTimeout = qMax( commonValue( system_rc, user_ini, "FileTransferConfirmTimeout", 30000 ).toInt(), 1000 );
+  m_fileTransferBufferSize = qMax( commonValue( system_rc, user_ini, "FileTransferBufferSize", 65456 ).toInt(), 2048 );
   int mod_buffer_size = m_fileTransferBufferSize % ENCRYPTED_DATA_BLOCK_SIZE; // For a corrected encryption
   if( mod_buffer_size > 0 )
     m_fileTransferBufferSize -= mod_buffer_size;
   if( m_fileTransferBufferSize < 2048 )
     m_fileTransferBufferSize = 2048;
-  bool automatic_file_name = sets->value( "SetAutomaticFileNameOnSave", false ).toBool();
+  bool automatic_file_name = commonValue( system_rc, user_ini, "SetAutomaticFileNameOnSave", false ).toBool();
   if( automatic_file_name )
     m_onExistingFileAction = GenerateNewFileName;
-  bool overwrite_existing_files = sets->value( "OverwriteExistingFiles", false ).toBool();
+  bool overwrite_existing_files = commonValue( system_rc, user_ini, "OverwriteExistingFiles", false ).toBool();
   if( overwrite_existing_files )
     m_onExistingFileAction = OverwriteExistingFile;
-  m_onExistingFileAction = sets->value( "OnExistingFileAction", (int)m_onExistingFileAction ).toInt();
+  m_onExistingFileAction = commonValue( system_rc, user_ini, "OnExistingFileAction", (int)m_onExistingFileAction ).toInt();
   if( m_onExistingFileAction < 0 || m_onExistingFileAction >= NumOnExistingFileActionTypes )
     m_onExistingFileAction = OverwriteOlderExistingFile;
-  m_resumeFileTransfer = sets->value( "ResumeFileTransfer", m_resumeFileTransfer ).toBool();
-  m_confirmOnDownloadFile = sets->value( "ConfirmOnDownloadFile", m_confirmOnDownloadFile ).toBool();
-  m_downloadInUserFolder = sets->value( "DownloadInUserFolder", false ).toBool();
-  m_keepModificationDateOnFileTransferred = sets->value( "KeepModificationDateOnFileTransferred", m_keepModificationDateOnFileTransferred ).toBool();
-  if( !in_file_rc )
+  m_resumeFileTransfer = commonValue( system_rc, user_ini, "ResumeFileTransfer", m_resumeFileTransfer ).toBool();
+  m_confirmOnDownloadFile = commonValue( system_rc, user_ini, "ConfirmOnDownloadFile", m_confirmOnDownloadFile ).toBool();
+  m_downloadInUserFolder = commonValue( system_rc, user_ini, "DownloadInUserFolder", false ).toBool();
+  m_keepModificationDateOnFileTransferred = commonValue( system_rc, user_ini, "KeepModificationDateOnFileTransferred", m_keepModificationDateOnFileTransferred ).toBool();
+  QStringList local_share = user_ini->value( "ShareList", QStringList() ).toStringList();
+  if( !local_share.isEmpty() )
   {
-    QStringList local_share = sets->value( "ShareList", QStringList() ).toStringList();
-    if( !local_share.isEmpty() )
-    {
-      foreach( QString share_path, local_share )
-        m_localShare.append( Bee::convertToNativeFolderSeparator( share_path ) );
-    }
-    else
-      m_localShare = local_share;
+    foreach( QString share_path, local_share )
+      m_localShare.append( Bee::convertToNativeFolderSeparator( share_path ) );
   }
-  sets->endGroup();
+  else
+    m_localShare = local_share;
+  endCommonGroup( system_rc, user_ini );
 
-  if( !in_file_rc )
-  {
-    sets->beginGroup( "Group" );
-    m_saveGroupList = sets->value( "SaveGroups", m_saveGroupList ).toBool();
-    m_groupSilenced = sets->value( "Silenced", QStringList() ).toStringList();
-    m_groupList = sets->value( "List", QStringList() ).toStringList();
-    sets->endGroup();
-  }
+  beginCommonGroup( system_rc, user_ini, "Group" );
+  m_saveGroupList = commonValue( system_rc, user_ini, "SaveGroups", m_saveGroupList ).toBool();
+  m_groupSilenced = user_ini->value( "Silenced", QStringList() ).toStringList();
+  m_groupList = user_ini->value( "List", QStringList() ).toStringList();
+  endCommonGroup( system_rc, user_ini );
 
-  sets->beginGroup( "ShareDesktop" );
+  beginCommonGroup( system_rc, user_ini, "ShareDesktop" );
   if( m_disableDesktopSharing )
     m_enableShareDesktop = false;
   else
-    m_enableShareDesktop = sets->value( "Enable", m_enableShareDesktop ).toBool();
-  m_shareDesktopCaptureDelay = qMax( 1000, sets->value( "CaptureScreenInterval", m_shareDesktopCaptureDelay ).toInt() );
-  m_shareDesktopFitToScreen = sets->value( "FitToScreen", false ).toBool();
-  m_shareDesktopImageType = sets->value( "ImageType", "png" ).toString();
-  m_shareDesktopImageQuality = sets->value( "ImageQuality", 20 ).toInt();
-  sets->endGroup();
+    m_enableShareDesktop = commonValue( system_rc, user_ini, "Enable", m_enableShareDesktop ).toBool();
+  m_shareDesktopCaptureDelay = qMax( 1000, commonValue( system_rc, user_ini, "CaptureScreenInterval", m_shareDesktopCaptureDelay ).toInt() );
+  m_shareDesktopFitToScreen = commonValue( system_rc, user_ini, "FitToScreen", false ).toBool();
+  m_shareDesktopImageType = commonValue( system_rc, user_ini, "ImageType", "png" ).toString();
+  m_shareDesktopImageQuality = commonValue( system_rc, user_ini, "ImageQuality", 20 ).toInt();
+  endCommonGroup( system_rc, user_ini );
 
-  sets->beginGroup( "VoiceMessage" );
-  m_voiceMessageMaxDuration = qMax( 5, sets->value( "MaxDuration", m_voiceMessageMaxDuration ).toInt() );
-  m_useVoicePlayer = sets->value( "UseVoicePlayer", m_useVoicePlayer ).toBool();
-  m_voiceInputDeviceName = sets->value( "VoiceInputDeviceName", QString() ).toString();
-  m_voiceFileMessageContainer = sets->value( "VoiceFileMessageContainer", QString() ).toString();
-  m_voiceCodec = sets->value( "VoiceCodec", QString() ).toString();
-  m_voiceSampleRate = sets->value( "VoiceSampleRate", 0 ).toInt();
-  m_voiceBitRate = sets->value( "VoiceBitRate", 0 ).toInt();
-  m_voiceChannels = sets->value( "VoiceChannels", -1 ).toInt();
-  m_voiceEncodingMode = sets->value( "VoiceEncodingMode", -1 ).toInt();
-  m_voiceEncodingQuality = sets->value( "VoiceEncodingQuality", -1 ).toInt();
-  m_useCustomVoiceEncoderSettings = sets->value( "UseCustomVoiceEncoderSettings", m_useCustomVoiceEncoderSettings ).toBool();
-  m_useSystemVoiceEncoderSettings = sets->value( "UseSystemVoiceEncoderSettings", m_useSystemVoiceEncoderSettings ).toBool();
-  sets->endGroup();
+  beginCommonGroup( system_rc, user_ini, "VoiceMessage" );
+  m_voiceMessageMaxDuration = qMax( 5, commonValue( system_rc, user_ini, "MaxDuration", m_voiceMessageMaxDuration ).toInt() );
+  m_useVoicePlayer = commonValue( system_rc, user_ini, "UseVoicePlayer", m_useVoicePlayer ).toBool();
+  m_voiceInputDeviceName = user_ini->value( "VoiceInputDeviceName", QString() ).toString();
+  m_voiceFileMessageContainer = commonValue( system_rc, user_ini, "VoiceFileMessageContainer", QString() ).toString();
+  m_voiceCodec = commonValue( system_rc, user_ini, "VoiceCodec", QString() ).toString();
+  m_voiceSampleRate = commonValue( system_rc, user_ini, "VoiceSampleRate", 0 ).toInt();
+  m_voiceBitRate = commonValue( system_rc, user_ini, "VoiceBitRate", 0 ).toInt();
+  m_voiceChannels = commonValue( system_rc, user_ini, "VoiceChannels", -1 ).toInt();
+  m_voiceEncodingMode = commonValue( system_rc, user_ini, "VoiceEncodingMode", -1 ).toInt();
+  m_voiceEncodingQuality = commonValue( system_rc, user_ini, "VoiceEncodingQuality", -1 ).toInt();
+  m_useCustomVoiceEncoderSettings = commonValue( system_rc, user_ini, "UseCustomVoiceEncoderSettings", m_useCustomVoiceEncoderSettings ).toBool();
+  m_useSystemVoiceEncoderSettings = commonValue( system_rc, user_ini, "UseSystemVoiceEncoderSettings", m_useSystemVoiceEncoderSettings ).toBool();
+  endCommonGroup( system_rc, user_ini );
+
+  system_rc->deleteLater();
 }
 
 QString Settings::qtMajorVersion() const

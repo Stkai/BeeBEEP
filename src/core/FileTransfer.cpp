@@ -227,13 +227,20 @@ void FileTransfer::checkUploadRequest( const FileInfo& file_info_to_check )
   FileTransferPeer *upload_peer = qobject_cast<FileTransferPeer*>( sender() );
   if( !upload_peer )
   {
-    qWarning() << "File Transfer server received a signal from invalid upload peer";
+    qWarning() << "File Transfer server received a signal from invalid upload peer for file" << qPrintable( file_info_to_check.name() );
     return;
   }
 
   if( !Settings::instance().enableFileTransfer() )
   {
-    qWarning() << "File Transfer is disabled";
+    qWarning() << "File Transfer is disabled: unable to upload file" << qPrintable( file_info_to_check.name() );
+    upload_peer->cancelTransfer();
+    return;
+  }
+
+  if( !Settings::instance().isFileExtensionAllowedInFileTransfer( file_info_to_check.suffix() ) )
+  {
+    qWarning() << "File Transfer is not allowed to upload file" << qPrintable( file_info_to_check.name() ) << "with extension" << file_info_to_check.suffix();
     upload_peer->cancelTransfer();
     return;
   }

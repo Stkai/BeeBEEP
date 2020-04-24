@@ -79,3 +79,10 @@ bool FileInfo::operator<( const FileInfo& fi ) const
   else
     return m_path < fi.m_path;
 }
+
+void FileInfo::setNameAndSuffix( const QString& file_name )
+{
+  m_name = file_name;
+  QFileInfo fi_tmp( file_name );
+  m_suffix = fi_tmp.suffix();
+}

@@ -50,6 +50,7 @@ public:
   inline void setTransferType( TransferType );
   inline const QString& name() const;
   inline void setName( const QString& );
+  void setNameAndSuffix( const QString& file_name );
   inline const QString& path() const;
   inline void setPath( const QString& );
   inline const QString& suffix() const;

@@ -1316,7 +1316,7 @@ QStringList Protocol::userPathsFromGroupRequestMessage_obsolete( const Message& 
 
 Message Protocol::fileInfoRefusedToMessage( const FileInfo& fi, int proto_version )
 {
-  Message m = fileInfoToMessage( fi, proto_version);
+  Message m = fileInfoToMessage( fi, proto_version );
   m.addFlag( Message::Refused );
   m.addFlag( Message::Private );
   return m;
@@ -1369,7 +1369,7 @@ Message Protocol::fileInfoToMessage( const FileInfo& fi, int proto_version )
 FileInfo Protocol::fileInfoFromMessage( const Message& m, int proto_version )
 {
   FileInfo fi( 0, FileInfo::Download );
-  fi.setName( m.text() );
+  fi.setNameAndSuffix( m.text() );
   QStringList sl = m.data().split( DATA_FIELD_SEPARATOR );
   if( sl.size() < 4 )
     return fi;

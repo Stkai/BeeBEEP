@@ -2734,17 +2734,15 @@ bool GuiMain::askToDownloadFile( const User& u, const FileInfo& fi, const QStrin
   if( msg_result > 0 )
   {
     QFileInfo qfile_info( download_path, fi.name() );
-    qDebug() << "You accept to download" << fi.name() << "from" << u.path();
+    qDebug() << "You accept to download" << fi.name() << "from" << qPrintable( u.path() );
     if( qfile_info.exists() && Settings::instance().onExistingFileAction() == Settings::GenerateNewFileName )
     {
       QString file_name = Bee::uniqueFilePath( qfile_info.absoluteFilePath(), true );
-      qDebug() << "File" << qfile_info.absoluteFilePath() << "exists. Save it with new path (auto):" << file_name;
+      qDebug() << "File" << qfile_info.absoluteFilePath() << "exists. Save it with new path (auto):" << qPrintable( file_name );
       qfile_info = QFileInfo( file_name );
     }
     FileInfo file_info = fi;
-    file_info.setName( qfile_info.fileName() );
     file_info.setPath( qfile_info.absoluteFilePath() );
-    file_info.setSuffix( qfile_info.suffix() );
     return beeCore->downloadFile( u.id(), file_info, make_questions );
   }
   else

@@ -68,6 +68,13 @@ void FileTransferPeer::checkUploadRequest( const QByteArray& byte_array )
 #else
   qDebug() << qPrintable( name() ) << "receives a file request:" << file_info.name();
 #endif
+  if( !file_info.name().endsWith( file_info.suffix(), Qt::CaseInsensitive ) )
+  {
+    qWarning() << qPrintable( name() ) << "receives an invalid file info with name" << qPrintable( file_info.name() ) << "and extension" << file_info.suffix();
+    cancelTransfer();
+    return;
+  }
+
   emit fileUploadRequest( file_info );
 }
 

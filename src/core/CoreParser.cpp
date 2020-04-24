@@ -172,6 +172,12 @@ void Core::parseFileMessage( const User& u, const Message& m )
     return;
   }
 
+  if( !fi.name().endsWith( fi.suffix(), Qt::CaseInsensitive ) )
+  {
+    qWarning() << "Invalid file transfer request received from user" << qPrintable( u.path() ) << ": file extension is" << fi.suffix() << "but the file name is" << fi.name();
+    return;
+  }
+
   if( fi.isInShareBox() )
   {
     if( !Settings::instance().useShareBox() || Settings::instance().disableFileSharing() )
@@ -181,15 +187,24 @@ void Core::parseFileMessage( const User& u, const Message& m )
     }
   }
 
-  fi.setHostAddress( u.networkAddress().hostAddress() );
-
   QString sys_msg;
   if( m.hasFlag( Message::VoiceMessage ) )
+  {
     sys_msg = tr( "%1 %2 is sending to you the voice message: %3" ).arg( IconManager::instance().toHtml( "download.png", "*F*" ), Bee::userNameToShow( u, true ), fi.name() );
+  }
   else
+  {
+    if( !Settings::instance().isFileExtensionAllowedInFileTransfer( fi.suffix() ) )
+    {
+      qWarning() << "User" << qPrintable( u.path() ) << "is sending to you the file" << fi.name() << "but you are not allowed to download this file extension";
+      refuseToDownloadFile( u.id(), fi );
+      return;
+    }
     sys_msg = tr( "%1 %2 is sending to you the file: %3" ).arg( IconManager::instance().toHtml( "download.png", "*F*" ), Bee::userNameToShow( u, true ), fi.name() );
+  }
   dispatchSystemMessage( chat_to_show_message.id(), u.id(), sys_msg, chat_to_show_message.isValid() ? DispatchToChat : DispatchToAllChatsWithUser, ChatMessage::FileTransfer, false );
 
+  fi.setHostAddress( u.networkAddress().hostAddress() );
   if( fi.isInShareBox() )
   {
     QString to_path;

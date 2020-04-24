@@ -35,6 +35,7 @@ class Settings
 
 public:
   QSettings* objectSettings() const; // deleteLater instance after call
+  QSettings* objectRcSettings() const; // deleteLater instance after call
 
   inline const QString& currentFilePath() const;
   void setDefaultFolders();
@@ -561,7 +562,7 @@ public:
   inline void setUseSystemVoiceEncoderSettings( bool );
   inline bool useSystemVoiceEncoderSettings() const;
 
-  void loadRcFile( bool load_common_settings );
+  void loadRcFile();
   void clearNativeSettings();
   void load();
   void save();
@@ -654,7 +655,10 @@ protected:
   QStringList resourceFolders() const;
   QStringList dataFolders() const;
 
-  void loadCommonSettings( QSettings*, bool in_file_rc );
+  void beginCommonGroup( QSettings* system_rc, QSettings* user_ini, const QString& );
+  void endCommonGroup( QSettings* system_rc, QSettings* user_ini );
+  QVariant commonValue( QSettings* system_rc, QSettings* user_ini, const QString& key, const QVariant& default_value );
+  void loadCommonSettings( QSettings* user_ini );
 
 private:
   QString m_currentFilePath;
