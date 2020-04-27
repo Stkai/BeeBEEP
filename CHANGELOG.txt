@@ -10,6 +10,7 @@ BeeBEEP 5.8.3 (in development)
 - Fixed a bug in options "Disable create message" and "Disable edit groups"
 - Disabled by default the option to search users by a multicast datagram
 - Fixed a visualization bug if you open an user VCARD near the side of your desktop
+- Added "AllowedFileExtensionsInFileTransfer" option in beebeep.rc
 
 BeeBEEP 5.8.2
 - New feature: voice messages (you can record your message and send it as file)

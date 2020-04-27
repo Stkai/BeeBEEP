@@ -485,10 +485,19 @@ void Core::parseFolderMessage( const User& u, const Message& m )
 
     chat_to_show_message = ChatManager::instance().findChatByPrivateId( file_info_list.first().chatPrivateId(), false, u.id() );
     QString sys_msg = tr( "%1 %2 is sending to you the folder: %3." ).arg( IconManager::instance().toHtml( "download.png", "*F*" ), Bee::userNameToShow( u, true ), folder_name );
-
     dispatchSystemMessage( chat_to_show_message.id(), u.id(), sys_msg, chat_to_show_message.isValid() ? DispatchToChat : DispatchToAllChatsWithUser, ChatMessage::FileTransfer, false );
 
-    emit folderDownloadRequest( u, folder_name, file_info_list );
+    foreach(FileInfo fi, file_info_list )
+    {
+      if( !Settings::instance().isFileExtensionAllowedInFileTransfer( fi.suffix() ) )
+      {
+        qWarning() << "User" << qPrintable( u.path() ) << "is sending to you the file" << fi.name() << "in folder" << folder_name << "but you are not allowed to download this file extension";
+        refuseToDownloadFile( u.id(), fi );
+      }
+    }
+
+    if( !file_info_list.isEmpty() )
+      emit folderDownloadRequest( u, folder_name, file_info_list );
   }
   else
     qWarning() << "Invalid flag found in folder message from user" << qPrintable( u.path() );

@@ -1624,8 +1624,8 @@ QList<FileInfo> Protocol::messageFolderToInfoList( const Message& m, const QHost
       fi.setTransferType( FileInfo::Download );
       fi.setHostAddress( server_address );
       fi.setHostPort( static_cast<quint16>(server_port) );
-      fi.setName( sl_tmp.takeFirst() );
-      fi.setSuffix( sl_tmp.takeFirst() );
+      fi.setNameAndSuffix( sl_tmp.takeFirst() );
+      sl_tmp.takeFirst(); // suffix obsolete since 5.8.3
       fi.setSize( Bee::qVariantToVNumber( sl_tmp.takeFirst() ) );
       fi.setId( Bee::qVariantToVNumber( sl_tmp.takeFirst() ) );
       fi.setPassword( sl_tmp.takeFirst().toUtf8() );
@@ -1700,18 +1700,21 @@ QList<FileInfo> Protocol::messageToFileShare( const Message& m, const QHostAddre
       fi.setTransferType( FileInfo::Download );
       fi.setHostAddress( server_address );
       fi.setHostPort( static_cast<quint16>(server_port) );
-      fi.setName( sl_tmp.takeFirst() );
-      fi.setSuffix( sl_tmp.takeFirst() );
-      fi.setSize( Bee::qVariantToVNumber( sl_tmp.takeFirst() ) );
-      fi.setId( Bee::qVariantToVNumber( sl_tmp.takeFirst() ) );
-      fi.setPassword( sl_tmp.takeFirst().toUtf8() );
-      if( !sl_tmp.isEmpty() )
-        fi.setFileHash( sl_tmp.takeFirst() );
-      else
-        fi.setFileHash( fileInfoHashTmp( fi.id(), fi.name(), fi.size() ) );
-      if( !sl_tmp.isEmpty() )
-        fi.setShareFolder( Bee::convertToNativeFolderSeparator( sl_tmp.takeFirst() ) );
-      file_info_list.append( fi );
+      fi.setNameAndSuffix( sl_tmp.takeFirst() );
+      if( Settings::instance().isFileExtensionAllowedInFileTransfer( fi.suffix() ) )
+      {
+        sl_tmp.takeFirst(); // suffix obsolete since 5.8.3
+        fi.setSize( Bee::qVariantToVNumber( sl_tmp.takeFirst() ) );
+        fi.setId( Bee::qVariantToVNumber( sl_tmp.takeFirst() ) );
+        fi.setPassword( sl_tmp.takeFirst().toUtf8() );
+        if( !sl_tmp.isEmpty() )
+          fi.setFileHash( sl_tmp.takeFirst() );
+        else
+          fi.setFileHash( fileInfoHashTmp( fi.id(), fi.name(), fi.size() ) );
+        if( !sl_tmp.isEmpty() )
+          fi.setShareFolder( Bee::convertToNativeFolderSeparator( sl_tmp.takeFirst() ) );
+        file_info_list.append( fi );
+      }
     }
     ++it;
   }
@@ -1811,8 +1814,8 @@ QList<FileInfo> Protocol::messageToShareBoxFileList( const Message& m, const QHo
       fi.setTransferType( FileInfo::Download );
       fi.setHostAddress( server_address );
       fi.setHostPort( static_cast<quint16>(server_port) );
-      fi.setName( sl_tmp.takeFirst() );
-      fi.setSuffix( sl_tmp.takeFirst() );
+      QString file_name_tmp = sl_tmp.takeFirst();
+      sl_tmp.takeFirst(); // suffix obsolete since 5.8.3
       fi.setSize( Bee::qVariantToVNumber( sl_tmp.takeFirst() ) );
       fi.setId( Bee::qVariantToVNumber( sl_tmp.takeFirst() ) );
       fi.setPassword( sl_tmp.takeFirst().toUtf8() );
@@ -1826,9 +1829,18 @@ QList<FileInfo> Protocol::messageToShareBoxFileList( const Message& m, const QHo
       s_tmp = sl_tmp.takeFirst();
       fi.setIsFolder( !s_tmp.isEmpty() );
       fi.setIsInShareBox( true );
-      file_info_list.append( fi );
+      if( fi.isFolder() )
+      {
+        fi.setName( file_name_tmp );
+        file_info_list.append( fi );
+      }
+      else
+      {
+        fi.setNameAndSuffix( file_name_tmp );
+        if( Settings::instance().isFileExtensionAllowedInFileTransfer( fi.suffix() ) )
+          file_info_list.append( fi );
+      }
     }
-
     ++it;
   }
 

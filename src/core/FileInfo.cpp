@@ -84,5 +84,5 @@ void FileInfo::setNameAndSuffix( const QString& file_name )
 {
   m_name = file_name;
   QFileInfo fi_tmp( file_name );
-  m_suffix = fi_tmp.suffix();
+  setSuffix( fi_tmp.suffix() ); // to be lowered
 }

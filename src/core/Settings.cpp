@@ -2427,5 +2427,7 @@ bool Settings::isFileExtensionAllowedInFileTransfer( const QString& file_ext ) c
 {
   if( m_allowedFileExtensionsInFileTransfer.isEmpty() )
     return true;
+  if( file_ext.toLower() == partiallyDownloadedFileExtension().toLower() )
+    return true;
   return file_ext.isEmpty() ? false : m_allowedFileExtensionsInFileTransfer.contains( file_ext, Qt::CaseInsensitive );
 }

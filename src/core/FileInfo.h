@@ -124,7 +124,7 @@ inline void FileInfo::setName( const QString& new_value ) { m_name = new_value; 
 inline const QString& FileInfo::path() const { return m_path; }
 inline void FileInfo::setPath( const QString& new_value ) { m_path = new_value; }
 inline const QString& FileInfo::suffix() const { return m_suffix; }
-inline void FileInfo::setSuffix( const QString& new_value ) { m_suffix = new_value; }
+inline void FileInfo::setSuffix( const QString& new_value ) { m_suffix = new_value.toLower(); }
 inline FileSizeType FileInfo::size() const { return m_size; }
 inline void FileInfo::setSize( FileSizeType new_value ) { m_size = new_value > 0 ? new_value : 0; }
 inline const QString& FileInfo::shareFolder() const { return m_shareFolder; }
