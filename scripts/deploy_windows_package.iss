@@ -7,19 +7,19 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{85A0D6B6-2163-425F-92E7-E0BC4CEDCE9A}
 AppName=BeeBEEP
-AppVersion=5.8.2
-AppVerName=BeeBEEP 5.8.2
+AppVersion=5.8.4
+AppVerName=BeeBEEP 5.8.4
 AppPublisher=Marco Mastroddi Software
 AppPublisherURL=https://www.beebeep.net/
 AppSupportURL=https://www.beebeep.net/
 AppUpdatesURL=https://www.beebeep.net/
 DefaultDirName={pf}\BeeBEEP
 DisableProgramGroupPage=yes
-OutputBaseFilename=beebeep-setup-5.8.2
+OutputBaseFilename=beebeep-setup-5.8.4
 SetupIconFile=..\src\beebeep.ico
 Compression=lzma
 SolidCompression=yes
-AppCopyright=Copyright (C) 2019 Marco Mastroddi
+AppCopyright=Copyright (C) 2020 Marco Mastroddi
 OutputDir=.
 LicenseFile=..\LICENSE.txt
 
@@ -40,8 +40,8 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: "..\..\beebeep-5.8.2\beebeep.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\beebeep-5.8.2\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\..\beebeep-5.8.4\beebeep.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\beebeep-5.8.4\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

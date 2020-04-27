@@ -21,7 +21,7 @@
 #
 ######################################################################
 
-BEEBEEP_VERSION=5.8.2
+BEEBEEP_VERSION=5.8.4
 
 echo "Making BeeBEEP Bundle version ${BEEBEEP_VERSION} LEGACY Qt 5.6.3"
 

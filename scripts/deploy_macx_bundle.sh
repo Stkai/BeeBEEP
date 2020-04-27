@@ -21,7 +21,7 @@
 #
 ######################################################################
 
-BEEBEEP_VERSION=5.8.2
+BEEBEEP_VERSION=5.8.4
 
 echo "Making BeeBEEP Bundle version ${BEEBEEP_VERSION}"
 
@@ -35,7 +35,7 @@ echo "Bundle folder:" $BUNDLE_FOLDER
 BUNDLE_DMG="BeeBEEP.dmg"
 echo "Bundle:" $BUNDLE_DMG
 
-MACDEPLOY_APP=../../Qt/5.12.7/clang_64/bin/macdeployqt
+MACDEPLOY_APP=../../Qt/5.12.8/clang_64/bin/macdeployqt
 echo "Mac Deploy App:" $MACDEPLOY_APP
 
 # delete previous bundle folder
