@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// BeeBEEP Copyright (C) 2010-2019 Marco Mastroddi
+// BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -69,6 +69,7 @@ private slots:
   void onShareFolderUnavailable( const User&, const QString& );
   void onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType, int );
   void onFileTransferMessage( VNumber, const User&, const FileInfo&, const QString&, FileTransferPeer::TransferState );
+  void showAllowedFileExtensions();
 
 protected:
   void closeEvent( QCloseEvent* );
@@ -99,6 +100,7 @@ private:
   QAction* mp_actViewScreenShot;
   QAction* mp_actViewLog;
   QAction* mp_actViewShareBox;
+  QAction* mp_actFileExtensionAllowed;
 
 };
 

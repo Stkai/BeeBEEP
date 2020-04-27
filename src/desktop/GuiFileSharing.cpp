@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// BeeBEEP Copyright (C) 2010-2019 Marco Mastroddi
+// BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -157,6 +157,11 @@ void GuiFileSharing::createToolbars()
   mp_actViewShareLocal = mp_barView->addAction( IconManager::instance().icon( "upload.png" ), tr( "Show my shared files" ), this, SLOT( raiseLocalShareView() ) );
   mp_actViewShareNetwork = mp_barView->addAction( IconManager::instance().icon( "download.png" ), tr( "Show the network shared files" ), this, SLOT( raiseNetworkShareView() ) );
   mp_actViewShareBox = mp_barView->addAction( IconManager::instance().icon( "sharebox.png" ), tr( "Show the BeeBOX" ), this, SLOT( raiseShareBoxView() ) );
+  mp_barView->addSeparator();
+  if( Settings::instance().allowedFileExtensionsInFileTransfer().isEmpty() )
+    mp_actFileExtensionAllowed = mp_barView->addAction( IconManager::instance().icon( "star.png" ), tr( "All types of files are allowed for file transfer" ), this, SLOT( showAllowedFileExtensions() ) );
+  else
+    mp_actFileExtensionAllowed = mp_barView->addAction( IconManager::instance().icon( "warning.png" ), tr( "Only certain types of files are allowed for file transfer" ), this, SLOT( showAllowedFileExtensions() ) );
   addToolBarBreak( Qt::RightToolBarArea );
 }
 
@@ -340,4 +345,13 @@ void GuiFileSharing::onFileTransferMessage( VNumber peer_id, const User& u, cons
     if( file_info.isDownload() )
       mp_shareNetwork->onFileTransferCompleted( peer_id, u, file_info );
   }
+}
+
+void GuiFileSharing::showAllowedFileExtensions()
+{
+  QString msg_box_title = QString( "%1 - %2" ).arg( tr( "Allowed file extensions" ), Settings::instance().programName() );
+  if( Settings::instance().allowedFileExtensionsInFileTransfer().isEmpty() )
+    QMessageBox::information( this, msg_box_title, QString( "%1<br>%2" ).arg( tr( "File transfer has no rules on file extensions." ), tr( "All types of files can be sent and received.") ), tr( "Ok" ) );
+  else
+    QMessageBox::warning( this, msg_box_title, QString( "%1<br>%2" ).arg( tr( "Only files with this type of extension can be transferred:" ), Settings::instance().allowedFileExtensionsInFileTransfer().join( ", " ).toUpper() ), tr( "Ok" ) );
 }

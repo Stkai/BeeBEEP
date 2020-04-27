@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// BeeBEEP Copyright (C) 2010-2019 Marco Mastroddi
+// BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -85,9 +85,7 @@ FileSizeType BuildFileShareList::addPathToList( const QString& path_name, const 
     foreach( QString fp, dir_path.entryList() )
     {
       QString file_path = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( path_url, fp ) );
-      QFileInfo file_info( file_path );
-      if( file_info.isDir() || Protocol::instance().fileCanBeShared( file_info ) )
-        path_size += addPathToList( subfolder_name, file_path );
+      path_size += addPathToList( subfolder_name, file_path );
     }
 
     return path_size;

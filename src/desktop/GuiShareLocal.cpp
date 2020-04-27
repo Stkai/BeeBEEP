@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// BeeBEEP Copyright (C) 2010-2019 Marco Mastroddi
+// BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -35,8 +35,8 @@ GuiShareLocal::GuiShareLocal( QWidget *parent )
   setupUi( this );
   setAcceptDrops( true );
 
-  mp_lTitle->setText( QString( "<b>%1</b> (%2)" ).arg( tr( "Share your folders or files" ) )
-                        .arg( Settings::instance().enableFileSharing() ? tr( "max <b>%1</b> files" ).arg( Settings::instance().maxFileShared() ) : tr( "disabled" ) ) );
+  QString window_title = QString( "<b>%1</b> (%2)" ).arg( tr( "Share your folders or files" ) ).arg( Settings::instance().enableFileSharing() ? tr( "max <b>%1</b> files" ).arg( Settings::instance().maxFileShared() ) : tr( "disabled" ) );
+  mp_lTitle->setText( window_title );
 
   mp_twMyShares->setContextMenuPolicy( Qt::CustomContextMenu );
   mp_twMyShares->setRootIsDecorated( false );

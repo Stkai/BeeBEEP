@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// BeeBEEP Copyright (C) 2010-2019 Marco Mastroddi
+// BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -53,7 +53,8 @@ GuiShareBox::GuiShareBox( QWidget *parent )
   mp_splitter->addWidget( mp_outFrame );
   grid_layout->addWidget( mp_splitter, 1, 0, 1, 1);
 
-  mp_lTitle->setText( QString( "<b>%1</b>" ).arg( QString( "BeeBOX" ) ) );
+  QString window_title = QString( "<b>%1</b>" ).arg( QString( "BeeBOX" ) );
+  mp_lTitle->setText( window_title );
 
   mp_myBox->initTree();
   mp_outBox->initTree();

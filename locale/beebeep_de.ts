@@ -650,7 +650,15 @@
         <translation type="unfinished">Offline-Nachrichten wurden an %2 gesendet. {1.?}</translation>
     </message>
     <message>
-        <source>%1 Unable to send %2 to %3: file extension &apos;%4&apos; is not allowed in file transfer.</source>
+        <source>%1 Unable to download %2 from %3: file extension &apos;%4&apos; is not allowed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 Unable to send %2 to %3: file extension &apos;%4&apos; is not allowed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>the folder is empty or contains only files that are not allowed.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1587,6 +1595,46 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>Show the BeeBOX</source>
         <translation>Die BeeBOX anzeigen</translation>
+    </message>
+    <message>
+        <source>Share your folders or files</source>
+        <translation type="obsolete">Eigene Ordner oder Dateien freigeben</translation>
+    </message>
+    <message>
+        <source>max &lt;b&gt;%1&lt;/b&gt; files</source>
+        <translation type="obsolete">max. &lt;b&gt;%1&lt;/b&gt; Dateien</translation>
+    </message>
+    <message>
+        <source>disabled</source>
+        <translation type="obsolete">deaktiviert</translation>
+    </message>
+    <message>
+        <source>Allowed file extensions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File transfer has no rules on file extensions.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All types of files can be sent and received.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished">OK</translation>
+    </message>
+    <message>
+        <source>All types of files are allowed for file transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Only certain types of files are allowed for file transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Only files with this type of extension can be transferred:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -699,7 +699,19 @@
     </message>
     <message>
         <source>%1 Unable to send %2 to %3: file extension &apos;%4&apos; is not allowed in file transfer.</source>
-        <translation>%1 Impossibile inviare %2 a %3: l&apos;estensione del file &apos;%4&apos; non è consentita nel trasferimento dei file.</translation>
+        <translation type="vanished">%1 Impossibile inviare %2 a %3: l&apos;estensione del file &apos;%4&apos; non è consentita nel trasferimento dei file.</translation>
+    </message>
+    <message>
+        <source>%1 Unable to download %2 from %3: file extension &apos;%4&apos; is not allowed.</source>
+        <translation>%1 Impossibile scaricare %2 da %3: l&apos;estensione del file &apos;%4&apos; non è consentita.</translation>
+    </message>
+    <message>
+        <source>%1 Unable to send %2 to %3: file extension &apos;%4&apos; is not allowed.</source>
+        <translation>%1 Impossibile inviare %2 a %3: l&apos;estensione del file &apos;%4&apos; non è consentita.</translation>
+    </message>
+    <message>
+        <source>the folder is empty or contains only files that are not allowed.</source>
+        <translation>la cartella è vuota o contiene solamente file che non sono consentiti.</translation>
     </message>
 </context>
 <context>
@@ -1676,6 +1688,46 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Show the BeeBOX</source>
         <translation>Mostra la BeeBOX</translation>
+    </message>
+    <message>
+        <source>Share your folders or files</source>
+        <translation type="vanished">Condividi le tue cartelle o file</translation>
+    </message>
+    <message>
+        <source>max &lt;b&gt;%1&lt;/b&gt; files</source>
+        <translation type="vanished">massimo &lt;b&gt;%1&lt;/b&gt; file</translation>
+    </message>
+    <message>
+        <source>disabled</source>
+        <translation type="vanished">disabilitato</translation>
+    </message>
+    <message>
+        <source>Allowed file extensions</source>
+        <translation>Estensioni di file ammesse</translation>
+    </message>
+    <message>
+        <source>File transfer has no rules on file extensions.</source>
+        <translation>Il trasferimento dei file non ha regole sulle estensioni dei file.</translation>
+    </message>
+    <message>
+        <source>All types of files can be sent and received.</source>
+        <translation>Tutti i tipi di file possono essere inviati e ricevuti.</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation>Ok</translation>
+    </message>
+    <message>
+        <source>All types of files are allowed for file transfer</source>
+        <translation>Tutti i tipi di file possono essere inviati e ricevuti</translation>
+    </message>
+    <message>
+        <source>Only certain types of files are allowed for file transfer</source>
+        <translation>Solo alcuni tipi di file possono essere inviati e ricevuti</translation>
+    </message>
+    <message>
+        <source>Only files with this type of extension can be transferred:</source>
+        <translation>Solo i file con questo tipo di estensione possono essere trasferiti:</translation>
     </message>
 </context>
 <context>
@@ -4689,6 +4741,10 @@ Inserisci un nome differente.</translation>
         <source>%1 - Select the BeeBOX folder</source>
         <translation>%1 - Seleziona la cartella di BeeBOX</translation>
     </message>
+    <message>
+        <source>Allowed file extensions</source>
+        <translation type="vanished">Estensioni di file ammesse</translation>
+    </message>
 </context>
 <context>
     <name>GuiShareBoxFileInfoList</name>
@@ -4861,6 +4917,10 @@ Inserisci un nome differente.</translation>
         <source>Do you want to remove all shared paths?</source>
         <translation>Vuoi eliminare tutte le condivisioni?</translation>
     </message>
+    <message>
+        <source>Allowed file extensions</source>
+        <translation type="vanished">Estensioni di file ammesse</translation>
+    </message>
 </context>
 <context>
     <name>GuiShareLocalWidget</name>
@@ -5002,6 +5062,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Transfer paused</source>
         <translation type="obsolete">Trasferimento in pausa</translation>
+    </message>
+    <message>
+        <source>Allowed file extensions</source>
+        <translation type="vanished">Estensioni di file ammesse</translation>
     </message>
 </context>
 <context>

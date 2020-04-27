@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// BeeBEEP Copyright (C) 2010-2019 Marco Mastroddi
+// BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -640,7 +640,7 @@ void Settings::loadRcFile()
   m_appendHostNameToUserName = sets->value( "AppendHostNameToUserName", m_appendHostNameToUserName ).toBool();
   m_disableConnectionSocketDataCompression = sets->value( "DisableConnectionSocketDataCompression", m_disableConnectionSocketDataCompression ).toBool();
   // Remember to use "" for the string in INI files
-  QString allowed_file_extensions = sets->value( "AllowedFileExtensionsInFileTransfer", m_allowedFileExtensionsInFileTransfer.join( ";" ) ).toString().simplified();
+  QString allowed_file_extensions = sets->value( "AllowedFileExtensionsInFileTransfer", m_allowedFileExtensionsInFileTransfer.join( "," ) ).toString().simplified();
   m_allowedFileExtensionsInFileTransfer.clear();
   if( !allowed_file_extensions.trimmed().isEmpty() )
   {
@@ -677,7 +677,7 @@ void Settings::loadRcFile()
       qDebug() << "Skip local hardware address:" << qPrintable( hw_value );
   }
   if( !m_allowedFileExtensionsInFileTransfer.isEmpty() )
-    qWarning() << "File transfer allows only these extensions:" << qPrintable( m_allowedFileExtensionsInFileTransfer.join("," ) );
+    qWarning() << "File transfer allows only these extensions:" << qPrintable( m_allowedFileExtensionsInFileTransfer.join( ", " ).toUpper() );
 
   sets->deleteLater();
 }

@@ -1,4 +1,4 @@
-BEEBEEP (Free Office Messenger) - CHANGELOG - (c) 2019 Marco Mastroddi
+BEEBEEP (Free Office Messenger) - CHANGELOG - (c) 2020 Marco Mastroddi
 For more informations please visit https://www.beebeep.net
 
 

@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// BeeBEEP Copyright (C) 2010-2019 Marco Mastroddi
+// BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -105,6 +105,19 @@ bool Core::downloadFile( VNumber user_id, const FileInfo& fi, bool show_message 
       qWarning() << "Unable to download" << qPrintable( fi.name() ) << "because folder" << qPrintable( folder_path.absolutePath() ) << "can not be created";
       return false;
     }
+  }
+
+  if( !Settings::instance().isFileExtensionAllowedInFileTransfer( file_info.suffix() ) )
+  {
+    if( show_message )
+    {
+      icon_html = IconManager::instance().toHtml( "red-ball.png", "*F*" );
+      dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to download %2 from %3: file extension '%4' is not allowed." )
+                             .arg( icon_html, fi.name(), Bee::userNameToShow( u, true ), file_info.suffix().toUpper() ),
+                             chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
+    }
+    qWarning() << "Unable to download" << qPrintable( fi.path() ) << "because file extension" << file_info.suffix() << "is not allowed";
+    return false;
   }
 
   if( show_message )
@@ -359,9 +372,9 @@ bool Core::sendFileToUser( const User&u, const QString& file_path, const QString
   }
 
   QFileInfo file( file_path );
-  if( !Settings::instance().isFileExtensionAllowedInFileTransfer( file.suffix() ) )
+  if( !file.isDir() && !Settings::instance().isFileExtensionAllowedInFileTransfer( file.suffix() ) )
   {
-    dispatchSystemMessage( chat_selected.isValid() ? chat_selected.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2 to %3: file extension '%4' is not allowed in file transfer." ).arg( icon_html, file_path, Bee::userNameToShow( u, true ), file.suffix().toUpper() ),
+    dispatchSystemMessage( chat_selected.isValid() ? chat_selected.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2 to %3: file extension '%4' is not allowed." ).arg( icon_html, file_path, Bee::userNameToShow( u, true ), file.suffix().toUpper() ),
                            chat_selected.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
     return false;
   }
@@ -761,8 +774,12 @@ void Core::addFolderToFileTransfer()
 
   if( file_info_list.isEmpty() )
   {
-    dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, ID_LOCAL_USER, sys_header + tr( "the folder is empty." ),
-                           chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
+    if( Settings::instance().allowedFileExtensionsInFileTransfer().isEmpty() )
+      dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, ID_LOCAL_USER, sys_header + tr( "the folder is empty." ),
+                             chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
+    else
+      dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, ID_LOCAL_USER, sys_header + tr( "the folder is empty or contains only files that are not allowed." ),
+                             chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
     return;
   }
 

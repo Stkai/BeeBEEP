@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// BeeBEEP Copyright (C) 2010-2019 Marco Mastroddi
+// BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -483,21 +483,30 @@ void Core::parseFolderMessage( const User& u, const Message& m )
       return;
     }
 
-    chat_to_show_message = ChatManager::instance().findChatByPrivateId( file_info_list.first().chatPrivateId(), false, u.id() );
+    QString chat_private_id = file_info_list.first().chatPrivateId();
+    chat_to_show_message = ChatManager::instance().findChatByPrivateId( chat_private_id, false, u.id() );
     QString sys_msg = tr( "%1 %2 is sending to you the folder: %3." ).arg( IconManager::instance().toHtml( "download.png", "*F*" ), Bee::userNameToShow( u, true ), folder_name );
     dispatchSystemMessage( chat_to_show_message.id(), u.id(), sys_msg, chat_to_show_message.isValid() ? DispatchToChat : DispatchToAllChatsWithUser, ChatMessage::FileTransfer, false );
 
-    foreach(FileInfo fi, file_info_list )
+    QList<FileInfo> file_info_list_allowed;
+    foreach( FileInfo fi, file_info_list )
     {
       if( !Settings::instance().isFileExtensionAllowedInFileTransfer( fi.suffix() ) )
       {
         qWarning() << "User" << qPrintable( u.path() ) << "is sending to you the file" << fi.name() << "in folder" << folder_name << "but you are not allowed to download this file extension";
         refuseToDownloadFile( u.id(), fi );
       }
+      else
+        file_info_list_allowed.append( fi );
     }
 
-    if( !file_info_list.isEmpty() )
-      emit folderDownloadRequest( u, folder_name, file_info_list );
+    if( file_info_list_allowed.isEmpty() )
+    {
+      qWarning() << "User" << qPrintable( u.path() ) << "sent you the folder" << folder_name << "but all the files contained are not allowed";
+      refuseToDownloadFolder( u.id(), folder_name, chat_private_id );
+    }
+    else
+      emit folderDownloadRequest( u, folder_name, file_info_list_allowed );
   }
   else
     qWarning() << "Invalid flag found in folder message from user" << qPrintable( u.path() );

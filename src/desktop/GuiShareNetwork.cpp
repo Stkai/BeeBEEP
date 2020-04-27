@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// BeeBEEP Copyright (C) 2010-2019 Marco Mastroddi
+// BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -35,9 +35,11 @@ GuiShareNetwork::GuiShareNetwork( QWidget *parent )
   : QWidget( parent ), m_fileInfoList()
 {
   setupUi( this );
-
   setObjectName( "GuiShareNetwork" );
-  mp_lTitle->setText( QString( "<b>%1</b>" ).arg( tr( "Files and folders shared in your network" ) ) );
+
+  QString window_title = QString( "<b>%1</b>" ).arg( tr( "Files and folders shared in your network" ) );
+  mp_lTitle->setText( window_title );
+
   mp_twShares->setToolTip( tr( "Right click to open menu" ) );
 
   m_fileInfoList.initTree( mp_twShares, false );
