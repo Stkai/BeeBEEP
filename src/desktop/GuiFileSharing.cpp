@@ -157,11 +157,11 @@ void GuiFileSharing::createToolbars()
   mp_actViewShareLocal = mp_barView->addAction( IconManager::instance().icon( "upload.png" ), tr( "Show my shared files" ), this, SLOT( raiseLocalShareView() ) );
   mp_actViewShareNetwork = mp_barView->addAction( IconManager::instance().icon( "download.png" ), tr( "Show the network shared files" ), this, SLOT( raiseNetworkShareView() ) );
   mp_actViewShareBox = mp_barView->addAction( IconManager::instance().icon( "sharebox.png" ), tr( "Show the BeeBOX" ), this, SLOT( raiseShareBoxView() ) );
-  mp_barView->addSeparator();
-  if( Settings::instance().allowedFileExtensionsInFileTransfer().isEmpty() )
-    mp_actFileExtensionAllowed = mp_barView->addAction( IconManager::instance().icon( "star.png" ), tr( "All types of files are allowed for file transfer" ), this, SLOT( showAllowedFileExtensions() ) );
-  else
-    mp_actFileExtensionAllowed = mp_barView->addAction( IconManager::instance().icon( "warning.png" ), tr( "Only certain types of files are allowed for file transfer" ), this, SLOT( showAllowedFileExtensions() ) );
+  if( !Settings::instance().allowedFileExtensionsInFileTransfer().isEmpty() )
+  {
+    mp_barView->addSeparator();
+    mp_barView->addAction( IconManager::instance().icon( "warning.png" ), tr( "Only certain types of files are allowed for file transfer" ), this, SLOT( showAllowedFileExtensions() ) );
+  }
   addToolBarBreak( Qt::RightToolBarArea );
 }
 

@@ -1969,12 +1969,7 @@ Lütfen farklı bir isim seçin.</translation>
         <translation>yükleniyor</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="162"/>
-        <source>All types of files are allowed for file transfer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="164"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="163"/>
         <source>Only certain types of files are allowed for file transfer</source>
         <translation type="unfinished"></translation>
     </message>

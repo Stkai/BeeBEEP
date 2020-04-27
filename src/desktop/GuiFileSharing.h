@@ -100,7 +100,6 @@ private:
   QAction* mp_actViewScreenShot;
   QAction* mp_actViewLog;
   QAction* mp_actViewShareBox;
-  QAction* mp_actFileExtensionAllowed;
 
 };
 

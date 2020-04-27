@@ -1611,10 +1611,6 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>All types of files are allowed for file transfer</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Only certain types of files are allowed for file transfer</source>
         <translation type="unfinished"></translation>
     </message>

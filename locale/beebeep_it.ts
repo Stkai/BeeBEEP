@@ -1719,7 +1719,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>All types of files are allowed for file transfer</source>
-        <translation>Tutti i tipi di file possono essere inviati e ricevuti</translation>
+        <translation type="vanished">Tutti i tipi di file possono essere inviati e ricevuti</translation>
     </message>
     <message>
         <source>Only certain types of files are allowed for file transfer</source>
