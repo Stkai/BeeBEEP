@@ -62,132 +62,132 @@
 <context>
     <name>Core</name>
     <message>
-        <location filename="../src/core/Core.cpp" line="205"/>
+        <location filename="../src/core/Core.cpp" line="212"/>
         <source>%1 Unable to connect to %2 Network. Please check your firewall settings.</source>
         <translation>%1 غير قادر على الاتصال بشبكة %2 يرجى التحقق من إعدادات جدار الحماية الخاص بك.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="224"/>
+        <location filename="../src/core/Core.cpp" line="231"/>
         <source>%1 Unable to broadcast to %2 Network. Please check your firewall settings.</source>
         <translation>%1  غير قادر على البث إلى شبكة %2 يرجى التحقق من إعدادات جدار الحماية الخاص بك.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="236"/>
+        <location filename="../src/core/Core.cpp" line="243"/>
         <source>%1 You are connected to %2 Network.</source>
         <translation>%1 أنت متصل إلى شبكة %2 .</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="396"/>
+        <location filename="../src/core/Core.cpp" line="403"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1 أنت غير متصل بشبكة %2 </translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="325"/>
+        <location filename="../src/core/Core.cpp" line="332"/>
         <source>%1 Zero Configuration started with service name: %2</source>
         <translation>%1 Zero Configuration started with service name: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="106"/>
+        <location filename="../src/core/Core.cpp" line="107"/>
         <source>%1 User %2 cannot save settings in path: %3</source>
         <translation>%1 المستخدم %2 لا يمكن حفظ الإعدادات في المسار: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="122"/>
+        <location filename="../src/core/Core.cpp" line="123"/>
         <source>%1 User %2 cannot save chat messages in path: %3</source>
         <translation>%1 المستخدم %2 لا يمكن حفظ رسائل الدردشة في المسار: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="152"/>
+        <location filename="../src/core/Core.cpp" line="153"/>
         <source>%1 User %2 cannot save unsent messages in path: %3</source>
         <translation>%1 المستخدم %2 لا يمكن حفظ الرسائل غير المرسلة في المسار: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="185"/>
+        <location filename="../src/core/Core.cpp" line="192"/>
         <source>%1 Unable to connect to %2 Network. Please check if your network adapter is connected.</source>
         <translation>%1 غير قادر على الاتصال بشبكة %2 يرجى التحقق من توصيل محول الشبكة..</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="188"/>
+        <location filename="../src/core/Core.cpp" line="195"/>
         <source>Network adapter offline</source>
         <translation>محول الشبكة غير متصل</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="192"/>
+        <location filename="../src/core/Core.cpp" line="199"/>
         <source>Connecting</source>
         <translation>اتصال</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="263"/>
+        <location filename="../src/core/Core.cpp" line="270"/>
         <source>%1 You have selected to join only in these workgroups: %2</source>
         <translation>%1 لقد حددت الانضمام إلى مجموعات العمل هذه فقط: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="292"/>
+        <location filename="../src/core/Core.cpp" line="299"/>
         <source>%1 Do you need support? Visit the %2.</source>
         <translation>%1 هل تحتاج إلى دعم؟ زيارة %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="294"/>
+        <location filename="../src/core/Core.cpp" line="301"/>
         <source>help page</source>
         <translation>صفحة المساعدة</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="340"/>
+        <location filename="../src/core/Core.cpp" line="347"/>
         <source>%1 Zero Configuration service closed.</source>
         <translation>%1 تم إغلاق خدمة التكوين صفر.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="402"/>
+        <location filename="../src/core/Core.cpp" line="409"/>
         <source>Disconnected</source>
         <translation>قطع الاتصال</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="408"/>
+        <location filename="../src/core/Core.cpp" line="415"/>
         <source>Disconnecting</source>
         <translation>فصل</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="429"/>
+        <location filename="../src/core/Core.cpp" line="436"/>
         <source>%1 Reconnecting to the %2 Network in progress.</source>
         <translation>%1  إعادة الاتصال بالشبكة %2 قيد التقدم.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="439"/>
+        <location filename="../src/core/Core.cpp" line="446"/>
         <source>Reconnecting</source>
         <translation>إعادة الاتصال</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="457"/>
+        <location filename="../src/core/Core.cpp" line="464"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
         <translation>%1 تكوين الصفر هو تصفح الشبكة للخدمة: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="464"/>
+        <location filename="../src/core/Core.cpp" line="471"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation>%1 لا يمكن لـ Zero Configuration تصفح الشبكة للخدمة: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="488"/>
+        <location filename="../src/core/Core.cpp" line="495"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1 البث إلى %2 شبكة...</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="490"/>
+        <location filename="../src/core/Core.cpp" line="497"/>
         <source>Searching users</source>
         <translation>البحث في المستخدمين</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="621"/>
+        <location filename="../src/core/Core.cpp" line="628"/>
         <source>New version is available</source>
         <translation>نسخة جديدة متاحة</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="622"/>
+        <location filename="../src/core/Core.cpp" line="629"/>
         <source>Click here to download</source>
         <translation>إضغط هنا للتحميل</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="721"/>
+        <location filename="../src/core/Core.cpp" line="728"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>تم الوصول إلى أقصى معرف. يرجى إغلاق وإعادة تشغيل التطبيق.</translation>
     </message>
@@ -352,22 +352,22 @@
         <translation>الدردشة مع جميع المستخدمين</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="243"/>
+        <location filename="../src/core/Core.cpp" line="250"/>
         <source>but encrypted connections allowed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="251"/>
+        <location filename="../src/core/Core.cpp" line="258"/>
         <source>End-to-end encryption is enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="251"/>
+        <location filename="../src/core/Core.cpp" line="258"/>
         <source>but not encrypted connections allowed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="241"/>
+        <location filename="../src/core/Core.cpp" line="248"/>
         <source>End-to-end encryption is disabled</source>
         <translation type="unfinished"></translation>
     </message>
@@ -415,7 +415,7 @@
         <translation>%1 %2 لا يمكن أن تكون على علم لأنك تركت المجموعة.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="530"/>
+        <location filename="../src/core/Core.cpp" line="537"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1 واجهة الشبكة %2 تعطلت.</translation>
     </message>
@@ -2544,8 +2544,8 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="4072"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4234"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4595"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4976"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="5122"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4982"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="5128"/>
         <source>Yes</source>
         <translation>نعم</translation>
     </message>
@@ -2570,8 +2570,8 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="4072"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4234"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4595"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4976"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="5122"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4982"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="5128"/>
         <source>No</source>
         <translation>لا</translation>
     </message>
@@ -3199,7 +3199,7 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="819"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3327"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3371"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4933"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4939"/>
         <source>The option has been disabled by your system administrator.</source>
         <translation>تم تعطيل الخيار بواسطة مسؤول النظام لديك.</translation>
     </message>
@@ -3924,76 +3924,81 @@ Please select a different name.</source>
         <translation>تم إعادة تعيين هندسة جميع النوافذ</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4838"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4783"/>
+        <source>The download folder does not exists or is not writable. Please select a new one.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="4844"/>
         <source>You are using the default icons.</source>
         <translation>أنت تستخدم الرموز الافتراضية</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4844"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4850"/>
         <source>You are using custom icons in folder %1.</source>
         <translation>أنت تستخدم الرموز المخصصة في المجلد %1.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4845"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4851"/>
         <source>Restore default icons</source>
         <translation>استعادة الرموز الافتراضية</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4909"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4915"/>
         <source>Restart connection now</source>
         <translation>أعد تشغيل الاتصال الآن</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4909"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4915"/>
         <source>Restart later manually</source>
         <translation>أعد التشغيل لاحقًا يدويًا</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4933"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4939"/>
         <source>You are not allowed create new message.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4976"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4982"/>
         <source>Do you really want to restore the colors to the default ones?</source>
         <translation>هل تريد حقًا استعادة الألوان إلى الألوان الافتراضية؟</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="5121"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="5127"/>
         <source>Do you really want to share your desktop with %1?</source>
         <translation>هل تريد حقًا مشاركة سطح المكتب مع %1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4839"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4845"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4854"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4851"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4860"/>
         <source>Select the icon folder</source>
         <translation>حدد مجلد الأيقونة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4875"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4881"/>
         <source>You are using the default emoticons.</source>
         <translation>أنت تستخدم الرموز الافتراضية</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4876"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4882"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4891"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4888"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4897"/>
         <source>Select the emoticon folder</source>
         <translation>حدد مجلد التعبيرات</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4881"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4887"/>
         <source>You are using custom emoticons in folder %1.</source>
         <translation>أنت تستخدم الرموز المخصصة في المجلد %1.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4882"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4888"/>
         <source>Restore default emoticons</source>
         <translation>استعادة الرموز الافتراضية</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4908"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4914"/>
         <source>You have to restart your connection to apply changes.</source>
         <translation>يجب عليك إعادة الاتصال لتطبيق التغييرات.</translation>
     </message>
@@ -4060,7 +4065,7 @@ Please select a different name.</source>
         <translation>نافذة الهندسة والدولة المحفوظة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4826"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4832"/>
         <source>%1 blocked chats</source>
         <translation>%1 الدردشات المحجوبة</translation>
     </message>
@@ -4114,8 +4119,9 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="3328"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3372"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3511"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4917"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4934"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4783"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4923"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4940"/>
         <source>Ok</source>
         <translation>موافق</translation>
     </message>
@@ -4193,7 +4199,7 @@ Please select a different name.</source>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3918"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="5169"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="5175"/>
         <source>disabled</source>
         <translation>تعطيل</translation>
     </message>
@@ -4224,10 +4230,10 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="3351"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3489"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4537"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4839"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4845"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4876"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4851"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4882"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4888"/>
         <source>Cancel</source>
         <translation>إلغاء</translation>
     </message>
@@ -4329,7 +4335,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2945"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3796"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4917"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4923"/>
         <source>You must restart %1 to apply these changes.</source>
         <translation>يجب إعادة تشغيل %1 لتطبيق هذه التغييرات..</translation>
     </message>
@@ -6520,12 +6526,12 @@ Please select a different name.</source>
         <translation>انقر لفتح الدردشة مع جميع المستخدمين المحليين</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="693"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="698"/>
         <source>%1 is %2</source>
         <translation>%1 يكون %2</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="693"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="698"/>
         <source>You are %1</source>
         <translation>أنت %1</translation>
     </message>
@@ -6538,22 +6544,22 @@ Please select a different name.</source>
         <translation type="obsolete">آخر اتصال</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="711"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="716"/>
         <source>Workgroups</source>
         <translation>مجموعات العمل</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="721"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="726"/>
         <source>Last update</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="726"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="731"/>
         <source>Last connection</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/utils/BeeUtils.cpp" line="730"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="735"/>
         <source>%n unsent message(s)</source>
         <translation type="unfinished">
             <numerusform></numerusform>
@@ -6565,38 +6571,38 @@ Please select a different name.</source>
         </translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="747"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="752"/>
         <source>Today is %1&apos;s birthday</source>
         <translation>اليوم هو %1&apos;  يوم ميلادك</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="749"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="754"/>
         <source>Tomorrow is %1&apos;s birthday</source>
         <translation>غدا هو %1&apos;  يوم ميلادك</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="751"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="756"/>
         <source>%1&apos;s birthday is in %2 days</source>
         <translation>%1&apos; عيد ميلادك في %2 أيام</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="753"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="758"/>
         <source>Yesterday was %1&apos;s birthday</source>
         <translation>بالأمس كان %1&apos; يوم ميلادك</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="760"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="765"/>
         <source>Happy Birthday to you!</source>
         <translation>عيد ميلاد سعيد</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="786"/>
-        <location filename="../src/utils/BeeUtils.cpp" line="810"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="791"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="815"/>
         <source>and</source>
         <translation>و</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="815"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="820"/>
         <source>and %1 others</source>
         <translation>و %1 آخرين</translation>
     </message>
@@ -6794,7 +6800,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2395"/>
+        <location filename="../src/core/Settings.cpp" line="2423"/>
         <source>Autoresponder</source>
         <translation>الرد الآلي</translation>
     </message>

@@ -62,132 +62,132 @@
 <context>
     <name>Core</name>
     <message>
-        <location filename="../src/core/Core.cpp" line="205"/>
+        <location filename="../src/core/Core.cpp" line="212"/>
         <source>%1 Unable to connect to %2 Network. Please check your firewall settings.</source>
         <translation>%1 %2 ネットワークに接続できません。ファイアーウォールの設定を確認してください。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="224"/>
+        <location filename="../src/core/Core.cpp" line="231"/>
         <source>%1 Unable to broadcast to %2 Network. Please check your firewall settings.</source>
         <translation>%1 %2 ネットワークにブロードキャストできません。ファイアーウォールの設定を確認してください。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="236"/>
+        <location filename="../src/core/Core.cpp" line="243"/>
         <source>%1 You are connected to %2 Network.</source>
         <translation>%1 %2 ネットワークに接続しました。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="396"/>
+        <location filename="../src/core/Core.cpp" line="403"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1 %2 ネットワークから切断されました。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="325"/>
+        <location filename="../src/core/Core.cpp" line="332"/>
         <source>%1 Zero Configuration started with service name: %2</source>
         <translation>%1 ゼロ構成を以下のサービス名で開始: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="106"/>
+        <location filename="../src/core/Core.cpp" line="107"/>
         <source>%1 User %2 cannot save settings in path: %3</source>
         <translation>%1 ユーザー %2 はパスに設定を保存できません: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="122"/>
+        <location filename="../src/core/Core.cpp" line="123"/>
         <source>%1 User %2 cannot save chat messages in path: %3</source>
         <translation>%1 ユーザー %2 はパスにチャットのメッセージを保存できません: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="152"/>
+        <location filename="../src/core/Core.cpp" line="153"/>
         <source>%1 User %2 cannot save unsent messages in path: %3</source>
         <translation>%1 ユーザー %2 はパスに未送信メッセージを保存できません: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="185"/>
+        <location filename="../src/core/Core.cpp" line="192"/>
         <source>%1 Unable to connect to %2 Network. Please check if your network adapter is connected.</source>
         <translation>%1 %2 ネットワークに接続できません。ネットワークアダプターの接続を確認してください。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="188"/>
+        <location filename="../src/core/Core.cpp" line="195"/>
         <source>Network adapter offline</source>
         <translation>ネットワークアダプターがオフライン</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="192"/>
+        <location filename="../src/core/Core.cpp" line="199"/>
         <source>Connecting</source>
         <translation>接続中</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="263"/>
+        <location filename="../src/core/Core.cpp" line="270"/>
         <source>%1 You have selected to join only in these workgroups: %2</source>
         <translation>%1 これらの作業グループのみに参加することを選択: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="292"/>
+        <location filename="../src/core/Core.cpp" line="299"/>
         <source>%1 Do you need support? Visit the %2.</source>
         <translation>%1 サポートが必要であれば%2をご確認ください。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="294"/>
+        <location filename="../src/core/Core.cpp" line="301"/>
         <source>help page</source>
         <translation>ヘルプページ</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="340"/>
+        <location filename="../src/core/Core.cpp" line="347"/>
         <source>%1 Zero Configuration service closed.</source>
         <translation>%1 ゼロ構成サービスは停止しました。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="402"/>
+        <location filename="../src/core/Core.cpp" line="409"/>
         <source>Disconnected</source>
         <translation>切断されました</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="408"/>
+        <location filename="../src/core/Core.cpp" line="415"/>
         <source>Disconnecting</source>
         <translation>切断中</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="429"/>
+        <location filename="../src/core/Core.cpp" line="436"/>
         <source>%1 Reconnecting to the %2 Network in progress.</source>
         <translation>%1 %2 ネットワークに再接続中。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="439"/>
+        <location filename="../src/core/Core.cpp" line="446"/>
         <source>Reconnecting</source>
         <translation>再接続中</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="457"/>
+        <location filename="../src/core/Core.cpp" line="464"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
         <translation>%1 ゼロ構成はサービスを参照中: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="464"/>
+        <location filename="../src/core/Core.cpp" line="471"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation>%1 ゼロ構成はサービスを参照できません: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="488"/>
+        <location filename="../src/core/Core.cpp" line="495"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1 %2 ネットワークにブロードキャスト...</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="490"/>
+        <location filename="../src/core/Core.cpp" line="497"/>
         <source>Searching users</source>
         <translation>ユーザー検索中</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="621"/>
+        <location filename="../src/core/Core.cpp" line="628"/>
         <source>New version is available</source>
         <translation>最新版があります</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="622"/>
+        <location filename="../src/core/Core.cpp" line="629"/>
         <source>Click here to download</source>
         <translation>ここをクリックしてダウンロード</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="721"/>
+        <location filename="../src/core/Core.cpp" line="728"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>最大IDに達しました。このアプリケーションを終了し再起動してください。</translation>
     </message>
@@ -338,22 +338,22 @@
         <translation>すべてのユーザーとのチャット</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="243"/>
+        <location filename="../src/core/Core.cpp" line="250"/>
         <source>but encrypted connections allowed</source>
         <translation>暗号化接続は許可されています</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="251"/>
+        <location filename="../src/core/Core.cpp" line="258"/>
         <source>End-to-end encryption is enabled</source>
         <translation>端末間の暗号化: 有効</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="251"/>
+        <location filename="../src/core/Core.cpp" line="258"/>
         <source>but not encrypted connections allowed</source>
         <translation>暗号化接続は許可されていません</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="241"/>
+        <location filename="../src/core/Core.cpp" line="248"/>
         <source>End-to-end encryption is disabled</source>
         <translation>端末間の暗号化: 無効</translation>
     </message>
@@ -393,7 +393,7 @@
         <translation>%1 %2 にあなたのグループ退出は通知されません。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="530"/>
+        <location filename="../src/core/Core.cpp" line="537"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1 ネットワークインターフェース %2 はダウンしました。</translation>
     </message>
@@ -457,7 +457,7 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="377"/>
         <source>%1 Unable to send %2 to %3: file extension &apos;%4&apos; is not allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %3 へ %2 を送信できません: ファイル拡張子 %4 は許可されていません。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="384"/>
@@ -542,7 +542,7 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="781"/>
         <source>the folder is empty or contains only files that are not allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>フォルダーが空、あるいは許可されていないファイルしかありません。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="788"/>
@@ -572,7 +572,7 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="115"/>
         <source>%1 Unable to download %2 from %3: file extension &apos;%4&apos; is not allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %3 から %2 をダウンロードできません: ファイル拡張子 %4 は許可されていません。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="179"/>
@@ -766,18 +766,18 @@
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="50"/>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished">yyyy年MM月dd日</translation>
+        <translation>yyyy年MM月dd日</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="57"/>
         <source>h:mm:ss ap</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="60"/>
         <source>hh:mm:ss</source>
         <extracomment>default time format in chat message</extracomment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1875,7 +1875,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="352"/>
         <source>Allowed file extensions</source>
-        <translation type="unfinished"></translation>
+        <translation>許可するファイル拡張子</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="173"/>
@@ -1885,7 +1885,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="163"/>
         <source>Only certain types of files are allowed for file transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>特定の種類のファイルのみファイル転送が許可されています</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="186"/>
@@ -1905,23 +1905,23 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
         <source>File transfer has no rules on file extensions.</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイル転送時のファイル拡張子の規制はありません。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
         <source>All types of files can be sent and received.</source>
-        <translation type="unfinished"></translation>
+        <translation>すべての種類のファイルを送受信できます。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="356"/>
         <source>Ok</source>
-        <translation type="unfinished">OK</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="356"/>
         <source>Only files with this type of extension can be transferred:</source>
-        <translation type="unfinished"></translation>
+        <translation>この種類のの拡張子のファイルのみ転送可能:</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="260"/>
@@ -1932,7 +1932,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="159"/>
         <source>Show the BeeBOX</source>
-        <translation>BeeBOXを表示</translation>
+        <translation>BeeBOX を表示</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="266"/>
@@ -2489,8 +2489,8 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="4072"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4234"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4595"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4976"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="5122"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4982"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="5128"/>
         <source>Yes</source>
         <translation>はい(&amp;Y)</translation>
     </message>
@@ -2515,8 +2515,8 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="4072"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4234"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4595"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4976"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="5122"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4982"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="5128"/>
         <source>No</source>
         <translation>いいえ(&amp;N)</translation>
     </message>
@@ -2813,7 +2813,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="804"/>
         <source>Show new message</source>
-        <translation>新着メッセージを表示(&amp;S)</translation>
+        <translation>新着メッセージを表示(&amp;N)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1435"/>
@@ -3127,7 +3127,7 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="819"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3327"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3371"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4933"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4939"/>
         <source>The option has been disabled by your system administrator.</source>
         <translation>あなたのシステムの管理者によってオプションが無効化されています。</translation>
     </message>
@@ -3470,7 +3470,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1710"/>
         <source>How many minutes of idle %1 can wait before changing status to away?</source>
-        <translation>%1 が何分間アイドル状態になれば、状態を離席中しますか？</translation>
+        <translation>%1 が何分間アイドル状態になれば、状態を離席中にしますか？</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1752"/>
@@ -3831,76 +3831,81 @@ Please select a different name.</source>
         <translation>すべてのウィンドウの配置記憶は初期化されました</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4838"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4783"/>
+        <source>The download folder does not exists or is not writable. Please select a new one.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="4844"/>
         <source>You are using the default icons.</source>
         <translation>現在デフォルトのアイコンをお使いです。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4844"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4850"/>
         <source>You are using custom icons in folder %1.</source>
         <translation>カスタムのアイコンを使用中です。フォルダ:%1。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4845"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4851"/>
         <source>Restore default icons</source>
         <translation>アイコンを初期化</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4909"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4915"/>
         <source>Restart connection now</source>
         <translation>すぐに再接続</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4909"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4915"/>
         <source>Restart later manually</source>
         <translation>後で自分で行う</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4933"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4939"/>
         <source>You are not allowed create new message.</source>
         <translation>あなたは新規メッセージを作成できません。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4976"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4982"/>
         <source>Do you really want to restore the colors to the default ones?</source>
         <translation>色を初期設定に戻しますか？</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="5121"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="5127"/>
         <source>Do you really want to share your desktop with %1?</source>
         <translation>%1 にデスクトップを共有しますか？</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4839"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4845"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4854"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4851"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4860"/>
         <source>Select the icon folder</source>
         <translation>アイコンのフォルダを選択</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4875"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4881"/>
         <source>You are using the default emoticons.</source>
         <translation>現在デフォルトの絵文字をお使いです。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4876"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4882"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4891"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4888"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4897"/>
         <source>Select the emoticon folder</source>
         <translation>絵文字のフォルダを選択</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4881"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4887"/>
         <source>You are using custom emoticons in folder %1.</source>
         <translation>カスタムの絵文字を使用中です。フォルダ:%1。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4882"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4888"/>
         <source>Restore default emoticons</source>
         <translation>絵文字を初期化</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4908"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4914"/>
         <source>You have to restart your connection to apply changes.</source>
         <translation>変更を適用するには再接続してください。</translation>
     </message>
@@ -3967,7 +3972,7 @@ Please select a different name.</source>
         <translation>ウィンドウの配置と状態が記憶されました</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4826"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4832"/>
         <source>%1 blocked chats</source>
         <translation>%1 個のブロック済みチャット</translation>
     </message>
@@ -4021,8 +4026,9 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="3328"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3372"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3511"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4917"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4934"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4783"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4923"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4940"/>
         <source>Ok</source>
         <translation>OK</translation>
     </message>
@@ -4102,7 +4108,7 @@ Please select a different name.</source>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3918"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="5169"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="5175"/>
         <source>disabled</source>
         <translation>無効</translation>
     </message>
@@ -4133,10 +4139,10 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="3351"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3489"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4537"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4839"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4845"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4876"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4851"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4882"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4888"/>
         <source>Cancel</source>
         <translation>キャンセル</translation>
     </message>
@@ -4250,7 +4256,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2945"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3796"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4917"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4923"/>
         <source>You must restart %1 to apply these changes.</source>
         <translation>これらの変更を適用するには %1 を再起動する必要があります。</translation>
     </message>
@@ -5322,7 +5328,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="68"/>
         <source>Create folder in your BeeBOX</source>
-        <translation>あなたの BeeBOX内にフォルダを作成</translation>
+        <translation>あなたの BeeBOX 内にフォルダを作成</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="70"/>
@@ -5557,7 +5563,7 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiShareLocal.cpp" line="159"/>
         <location filename="../src/desktop/GuiShareLocal.cpp" line="173"/>
         <source>Yes</source>
-        <translation>はい</translation>
+        <translation>はい(&amp;Y)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareLocal.cpp" line="159"/>
@@ -6365,70 +6371,70 @@ Please select a different name.</source>
         <translation>クリックで、すべてのローカルのユーザーとのチャットを開く</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="693"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="698"/>
         <source>%1 is %2</source>
         <translation>%1 は %2</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="693"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="698"/>
         <source>You are %1</source>
         <translation>あなたの状態は %1</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="711"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="716"/>
         <source>Workgroups</source>
         <translation>作業グループ</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="721"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="726"/>
         <source>Last update</source>
         <translation>更新日時</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="726"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="731"/>
         <source>Last connection</source>
         <translation>最終接続</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/utils/BeeUtils.cpp" line="730"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="735"/>
         <source>%n unsent message(s)</source>
         <translation>
             <numerusform>%n 個の未送信メッセージ</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="747"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="752"/>
         <source>Today is %1&apos;s birthday</source>
         <translation>今日は %1 の誕生日です</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="749"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="754"/>
         <source>Tomorrow is %1&apos;s birthday</source>
         <translation>明日は %1 の誕生日です</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="751"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="756"/>
         <source>%1&apos;s birthday is in %2 days</source>
         <translation>%1 の誕生日まであと %2 日</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="753"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="758"/>
         <source>Yesterday was %1&apos;s birthday</source>
         <translation>昨日は %1 の誕生日でした</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="760"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="765"/>
         <source>Happy Birthday to you!</source>
         <translation>お誕生日おめでとうございます!</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="786"/>
-        <location filename="../src/utils/BeeUtils.cpp" line="810"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="791"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="815"/>
         <source>and</source>
         <translation>と</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="815"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="820"/>
         <source>and %1 others</source>
         <translation>と %1 ほか</translation>
     </message>
@@ -6622,7 +6628,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2395"/>
+        <location filename="../src/core/Settings.cpp" line="2423"/>
         <source>Autoresponder</source>
         <translation>自動応答</translation>
     </message>

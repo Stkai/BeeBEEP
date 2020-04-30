@@ -288,8 +288,8 @@ QString Settings::findFileInFolders( const QString& file_name, const QStringList
       continue;
     folder_path = Bee::convertToNativeFolderSeparator( folder_path );
     QString file_path = folder_path;
-    if( !file_path.endsWith( Bee::naviveFolderSeparator() ) )
-      file_path.append( Bee::naviveFolderSeparator() );
+    if( !file_path.endsWith( Bee::nativeFolderSeparator() ) )
+      file_path.append( Bee::nativeFolderSeparator() );
     file_path += file_name;
     QFileInfo fi( file_path );
     if( fi.exists() )
@@ -319,7 +319,7 @@ void Settings::setDefaultFolders()
 #endif
   qDebug() << "Resource folder:" << qPrintable( m_resourceFolder );
 
-  if( !Bee::folderIsWriteable( m_resourceFolder ) )
+  if( !Bee::folderIsWriteable( m_resourceFolder, false ) )
   {
 #if QT_VERSION >= 0x050400
     m_dataFolder = Bee::convertToNativeFolderSeparator( QStandardPaths::writableLocation( QStandardPaths::AppDataLocation ) );
@@ -456,7 +456,7 @@ QString Settings::createLocalUserHash()
 
 bool Settings::createDefaultRcFile()
 {
-  QFileInfo rc_file_info( dataFolder() + Bee::naviveFolderSeparator() + QLatin1String( "beebeep.rc" ) );
+  QFileInfo rc_file_info( dataFolder() + Bee::nativeFolderSeparator() + QLatin1String( "beebeep.rc" ) );
   if( rc_file_info.exists() )
   {
     qDebug() << "RC default configuration file exists in" << qPrintable( rc_file_info.absoluteFilePath() );
@@ -712,7 +712,7 @@ bool Settings::createDefaultHostsFile()
   sl << "#";
   sl << " ";
 
-  QString file_hosts_path = dataFolder() + Bee::naviveFolderSeparator() + QLatin1String( "beehosts.ini" );
+  QString file_hosts_path = dataFolder() + Bee::nativeFolderSeparator() + QLatin1String( "beehosts.ini" );
   QFile file_hosts_ini( file_hosts_path );
   if( file_hosts_ini.exists() )
   {
@@ -1118,10 +1118,24 @@ QString Settings::checkFilePath( const QString& file_path, const QString& defaul
   return file.exists() ? file_path : default_value;
 }
 
-QString Settings::checkFolderPath( const QString& folder_path, const QString& default_value )
+QString Settings::checkFolderPath( const QString& folder_path, const QString& default_value, bool check_writable )
 {
-  QDir folder( folder_path );
-  return folder.exists() ? folder_path : default_value;
+  if( folder_path.isEmpty() )
+    return default_value;
+
+  if( check_writable )
+  {
+    if( Bee::folderIsWriteable( folder_path, false ) )
+      return folder_path;
+  }
+  else
+  {
+    if( QFile::exists( folder_path ) )
+      return folder_path;
+  }
+
+  qWarning() << "The folder" << folder_path << "load in settings is not usable and" << default_value << "is taken by default";
+  return default_value;
 }
 
 QSettings* Settings::objectSettings() const
@@ -1225,21 +1239,18 @@ void Settings::load()
 
 #if QT_VERSION >= 0x050000
   m_lastDirectorySelected = Bee::convertToNativeFolderSeparator( sets->value( "LastDirectorySelected", QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation ) ).toString() );
-  m_lastDirectorySelected = checkFolderPath( m_lastDirectorySelected, Bee::convertToNativeFolderSeparator( QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation ) ) );
   m_downloadDirectory = Bee::convertToNativeFolderSeparator( sets->value( "DownloadDirectory", QStandardPaths::writableLocation( QStandardPaths::DownloadLocation ) ).toString() );
-  m_downloadDirectory = checkFolderPath( m_downloadDirectory, Bee::convertToNativeFolderSeparator( QStandardPaths::writableLocation( QStandardPaths::DownloadLocation ) ) );
 #else
   m_lastDirectorySelected = Bee::convertToNativeFolderSeparator( sets->value( "LastDirectorySelected", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString() );
-  m_lastDirectorySelected = checkFolderPath( m_lastDirectorySelected, Bee::convertToNativeFolderSeparator( QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ) );
   m_downloadDirectory = Bee::convertToNativeFolderSeparator( sets->value( "DownloadDirectory", QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ).toString() );
-  m_downloadDirectory = checkFolderPath( m_downloadDirectory, Bee::convertToNativeFolderSeparator( QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) ) );
 #endif
-
-  m_logPath = checkFolderPath( Bee::convertToNativeFolderSeparator( sets->value( "LogFolderPath", dataFolder() ).toString() ), dataFolder() );
+  m_downloadDirectory = checkFolderPath( m_downloadDirectory, defaultDownloadFolderPath(), true );
+  m_lastDirectorySelected = checkFolderPath( m_lastDirectorySelected, dataFolder(), false );
+  m_logPath = checkFolderPath( Bee::convertToNativeFolderSeparator( sets->value( "LogFolderPath", dataFolder() ).toString() ), dataFolder(), true );
   QString plugin_folder_path = defaultPluginFolderPath();
-  m_pluginPath = checkFolderPath( Bee::convertToNativeFolderSeparator( sets->value( "PluginPath", plugin_folder_path ).toString() ), plugin_folder_path );
+  m_pluginPath = checkFolderPath( Bee::convertToNativeFolderSeparator( sets->value( "PluginPath", plugin_folder_path ).toString() ), plugin_folder_path, false );
   QString language_folder_path = defaultLanguageFolderPath();
-  m_languagePath = checkFolderPath( Bee::convertToNativeFolderSeparator( sets->value( "LanguagePath", language_folder_path ).toString() ), language_folder_path );
+  m_languagePath = checkFolderPath( Bee::convertToNativeFolderSeparator( sets->value( "LanguagePath", language_folder_path ).toString() ), language_folder_path, false );
   m_beepFilePath = checkFilePath( Bee::convertToNativeFolderSeparator( sets->value( "BeepFilePath", defaultBeepFilePath() ).toString() ), defaultBeepFilePath() );
   sets->endGroup();
 
@@ -1570,7 +1581,7 @@ void Settings::loadCommonSettings( QSettings* user_ini )
   }
 
   m_maxFileShared = qMax( 1024, commonValue( system_rc, user_ini, "MaxSharedFiles", 8192 ).toInt() );
-  m_shareBoxPath = checkFolderPath( user_ini->value( "ShareBoxPath", "" ).toString(), "" );
+  m_shareBoxPath = checkFolderPath( user_ini->value( "ShareBoxPath", "" ).toString(), "", false );
   m_maxSimultaneousDownloads = commonValue( system_rc, user_ini, "MaxSimultaneousDownloads", 3 ).toInt();
   m_maxQueuedDownloads = qMax( 1, commonValue( system_rc, user_ini, "MaxQueuedDownloads", 400 ).toInt() );
   m_fileTransferConfirmTimeout = qMax( commonValue( system_rc, user_ini, "FileTransferConfirmTimeout", 30000 ).toInt(), 1000 );
@@ -2151,7 +2162,7 @@ bool Settings::searchDataFolder()
 #ifdef Q_OS_MAC
   bool rc_folder_is_writable = false;
 #else
-  bool rc_folder_is_writable = Bee::folderIsWriteable( m_resourceFolder );
+  bool rc_folder_is_writable = Bee::folderIsWriteable( m_resourceFolder, false );
   #ifdef Q_OS_WIN
     QProcessEnvironment pe = QProcessEnvironment::systemEnvironment();
     QString env_program_files = pe.value( "PROGRAMFILES", QLatin1String( ":\\Program File" ) );
@@ -2215,7 +2226,7 @@ bool Settings::searchDataFolder()
       qDebug() << "Data folder created in" << qPrintable( m_dataFolder );
   }
 
-  if( !Bee::folderIsWriteable( m_dataFolder ) )
+  if( !Bee::folderIsWriteable( m_dataFolder, false ) )
   {
     qWarning() << "Data folder" << qPrintable( m_dataFolder ) << "is not writeable";
     return false;
@@ -2274,6 +2285,23 @@ bool Settings::setDataFolder()
   else
     qDebug() << "Configuration and data files will not be searched";
   return true;
+}
+
+QString Settings::defaultDownloadFolderPath() const
+{
+#if QT_VERSION >= 0x050000
+  QString default_download_folder = Bee::convertToNativeFolderSeparator( QStandardPaths::writableLocation( QStandardPaths::DownloadLocation ) );
+#else
+  QString default_download_folder = Bee::convertToNativeFolderSeparator( QDesktopServices::storageLocation( QDesktopServices::DocumentsLocation ) );
+#endif
+  if( Bee::folderIsWriteable( default_download_folder, false ) )
+    return default_download_folder;
+
+  default_download_folder = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder() ).arg( "download" ) );
+  if( Bee::folderIsWriteable( default_download_folder, true ) )
+    return default_download_folder;
+  else
+    return dataFolder();
 }
 
 QString Settings::defaultCacheFolderPath() const

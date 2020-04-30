@@ -112,7 +112,7 @@ void GuiShareBox::onEnableMyShareBoxClicked()
     {
       QDir box_folder( Settings::instance().shareBoxPath() );
       if( box_folder.exists() )
-        select_box = !Bee::folderIsWriteable( Settings::instance().shareBoxPath() );
+        select_box = !Bee::folderIsWriteable( Settings::instance().shareBoxPath(), false );
     }
   }
 

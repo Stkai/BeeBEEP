@@ -3506,6 +3506,10 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Show surname before firstname of the users</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>The download folder does not exists or is not writable. Please select a new one.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

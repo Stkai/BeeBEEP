@@ -96,6 +96,7 @@ bool Core::checkSavingPaths()
   bool settings_can_be_saved = true;
   bool chats_can_be_saved = true;
   bool unsent_messages_can_be_saved = true;
+  bool download_folder_can_be_used = true;
 
   QSettings* sets = Settings::instance().objectSettings();
   sets->deleteLater();
@@ -161,7 +162,13 @@ bool Core::checkSavingPaths()
   else
     qDebug() << "Save unsent messages option is disabled";
 
-  return settings_can_be_saved && chats_can_be_saved && unsent_messages_can_be_saved;
+  if( !Bee::folderIsWriteable( Settings::instance().downloadDirectory(), false ) )
+  {
+    qWarning() << "Download folder" << Settings::instance().downloadDirectory() << "does not exists or is not writable";
+    if( !Settings::instance().disableFileTransfer() && Settings::instance().enableFileTransfer() )
+      download_folder_can_be_used = false;
+  }
+  return settings_can_be_saved && chats_can_be_saved && unsent_messages_can_be_saved && download_folder_can_be_used;
 }
 
 bool Core::start()

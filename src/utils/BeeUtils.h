@@ -70,12 +70,12 @@ namespace Bee
   QBrush userStatusBackgroundBrush( int );
   QPixmap convertToGrayScale( const QPixmap& );
   QPixmap convertToGrayScale( const QIcon&, const QSize& pixmap_size );
-  QChar naviveFolderSeparator();
+  QChar nativeFolderSeparator();
   QString convertToNativeFolderSeparator( const QString& );
   QString folderCdUp( const QString& );
   bool setLastModifiedToFile( const QString&, const QDateTime& );
   bool showFileInGraphicalShell( const QString& );
-  bool folderIsWriteable( const QString& );
+  bool folderIsWriteable( const QString&, bool create_folder_if_not_exists );
   QPixmap avatarForUser( const User&, const QSize&, bool use_available_user_image, int user_status = -1 );
   QString toolTipForUser( const User&, bool only_status );
   void setWindowStaysOnTop( QWidget*, bool );

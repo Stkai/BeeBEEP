@@ -648,12 +648,13 @@ protected:
   void loadBroadcastAddressesFromFileHosts();
   QHostAddress subnetFromHostAddress( const QHostAddress& ) const;
   QString checkFilePath( const QString& file_path, const QString& default_value );
-  QString checkFolderPath( const QString& folder_path, const QString& default_value );
+  QString checkFolderPath( const QString& folder_path, const QString& default_value, bool check_writable );
   QString defaultCacheFolderPath() const;
   bool isFileImageInCache( const QString& ) const;
   QString findFileInFolders( const QString&, const QStringList&, bool return_folder_path = false ) const;
   QStringList resourceFolders() const;
   QStringList dataFolders() const;
+  QString defaultDownloadFolderPath() const;
 
   void beginCommonGroup( QSettings* system_rc, QSettings* user_ini, const QString& );
   void endCommonGroup( QSettings* system_rc, QSettings* user_ini );

@@ -446,7 +446,7 @@ QPixmap Bee::convertToGrayScale( const QPixmap& pix )
   return ret_pix;
 }
 
-QChar Bee::naviveFolderSeparator()
+QChar Bee::nativeFolderSeparator()
 {
   return QDir::separator();
 }
@@ -476,12 +476,12 @@ QString Bee::convertToNativeFolderSeparator( const QString& raw_path )
 
 QString Bee::folderCdUp( const QString& folder_path )
 {
-  QStringList sl = Bee::convertToNativeFolderSeparator( folder_path ).split( naviveFolderSeparator() );
+  QStringList sl = Bee::convertToNativeFolderSeparator( folder_path ).split( nativeFolderSeparator() );
   if( sl.isEmpty() )
     return folder_path;
 
   sl.removeLast();
-  return sl.join( naviveFolderSeparator() );
+  return sl.join( nativeFolderSeparator() );
 }
 
 bool Bee::setLastModifiedToFile( const QString& to_path, const QDateTime& dt_last_modified )
@@ -594,18 +594,23 @@ bool Bee::showFileInGraphicalShell( const QString& file_path )
   return false;
 }
 
-bool Bee::folderIsWriteable( const QString& folder_path )
+bool Bee::folderIsWriteable( const QString& folder_path, bool create_folder_if_not_exists )
 {
   QDir folder_to_test( folder_path );
   if( !folder_to_test.exists() )
-    return folder_to_test.mkpath( "." );
+  {
+    if( create_folder_if_not_exists )
+      return folder_to_test.mkpath( "." );
+    else
+      return false;
+  }
 
   QFile test_file( QString( "%1/%2" ).arg( folder_path ).arg( "beetestfile.txt" ) );
   if( test_file.open( QFile::WriteOnly ) )
   {
+    bool ok = test_file.write( QByteArray( "BeeBEEP" ) ) > 0;
     test_file.close();
-    test_file.remove();
-    return true;
+    return ok && test_file.remove();
   }
   else
     return false;

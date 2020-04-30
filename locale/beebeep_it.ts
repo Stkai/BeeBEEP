@@ -3711,6 +3711,10 @@ Inserisci un nome differente.</translation>
         <source>Show surname before firstname of the users</source>
         <translation>Mostra prima il cognome del nome degli utenti</translation>
     </message>
+    <message>
+        <source>The download folder does not exists or is not writable. Please select a new one.</source>
+        <translation>La cartella Download non esiste o non è scrivibile. Per favore, selezionane una nuova.</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

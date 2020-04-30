@@ -2891,7 +2891,7 @@ void GuiMain::selectDownloadDirectory()
   QMessageBox::information( this, Settings::instance().programName(),
                             QString( "%1<br>%2%3%4" ).arg( tr( "The files will be downloaded to the folder:" ) )
                                                      .arg( download_directory_path )
-                                                     .arg( Bee::naviveFolderSeparator() )
+                                                     .arg( Bee::nativeFolderSeparator() )
                                                      .arg( Settings::instance().downloadInUserFolder() ? Bee::convertToNativeFolderSeparator( QString( "<user's name>" ) ) : "" ),
                             tr( "Ok" ) );
 }
@@ -4777,8 +4777,14 @@ void GuiMain::setFileTransferEnabled( bool enable )
     QMetaObject::invokeMethod( beeCore, "buildLocalShareList", Qt::QueuedConnection );
   }
   else
+  {
+    if( !Bee::folderIsWriteable( Settings::instance().downloadDirectory(), false ) )
+    {
+      QMessageBox::warning( this, Settings::instance().programName(), tr( "The download folder does not exists or is not writable. Please select a new one." ), tr( "Ok" ) );
+      selectDownloadDirectory();
+    }
     beeCore->startFileTransferServer();
-
+  }
   checkViewActions();
 }
 

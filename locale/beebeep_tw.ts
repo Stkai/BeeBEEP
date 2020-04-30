@@ -62,132 +62,132 @@
 <context>
     <name>Core</name>
     <message>
-        <location filename="../src/core/Core.cpp" line="205"/>
+        <location filename="../src/core/Core.cpp" line="212"/>
         <source>%1 Unable to connect to %2 Network. Please check your firewall settings.</source>
         <translation>%1 無法連線到 %2 網路。 請檢查您的防火牆設定。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="224"/>
+        <location filename="../src/core/Core.cpp" line="231"/>
         <source>%1 Unable to broadcast to %2 Network. Please check your firewall settings.</source>
         <translation>%1 無法廣播到 %2 網路。 請檢查您的防火牆設定。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="236"/>
+        <location filename="../src/core/Core.cpp" line="243"/>
         <source>%1 You are connected to %2 Network.</source>
         <translation>%1 您已連線到 %2 網路。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="396"/>
+        <location filename="../src/core/Core.cpp" line="403"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1 您已中斷與 %2 網路的連線。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="325"/>
+        <location filename="../src/core/Core.cpp" line="332"/>
         <source>%1 Zero Configuration started with service name: %2</source>
         <translation>%1 零組態以服務名稱啟動: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="106"/>
+        <location filename="../src/core/Core.cpp" line="107"/>
         <source>%1 User %2 cannot save settings in path: %3</source>
         <translation>%1 使用者 %2 無法將設定儲存在路徑: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="122"/>
+        <location filename="../src/core/Core.cpp" line="123"/>
         <source>%1 User %2 cannot save chat messages in path: %3</source>
         <translation>%1 使用者 %2 無法將聊天訊息儲存在路徑: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="152"/>
+        <location filename="../src/core/Core.cpp" line="153"/>
         <source>%1 User %2 cannot save unsent messages in path: %3</source>
         <translation>%1 使用者 %2 無法將未傳送的訊息儲存在路徑: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="185"/>
+        <location filename="../src/core/Core.cpp" line="192"/>
         <source>%1 Unable to connect to %2 Network. Please check if your network adapter is connected.</source>
         <translation>%1 無法連線到 %2 網路。 請檢查您的網路介面卡是否已連線。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="188"/>
+        <location filename="../src/core/Core.cpp" line="195"/>
         <source>Network adapter offline</source>
         <translation>網路介面卡離線</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="192"/>
+        <location filename="../src/core/Core.cpp" line="199"/>
         <source>Connecting</source>
         <translation>正在連線</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="263"/>
+        <location filename="../src/core/Core.cpp" line="270"/>
         <source>%1 You have selected to join only in these workgroups: %2</source>
         <translation>%1 您選擇只加入這些工作群組: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="292"/>
+        <location filename="../src/core/Core.cpp" line="299"/>
         <source>%1 Do you need support? Visit the %2.</source>
         <translation>%1 您需要支援? 訪問 %2。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="294"/>
+        <location filename="../src/core/Core.cpp" line="301"/>
         <source>help page</source>
         <translation>說明頁</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="340"/>
+        <location filename="../src/core/Core.cpp" line="347"/>
         <source>%1 Zero Configuration service closed.</source>
         <translation>%1 零組態服務已關閉。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="402"/>
+        <location filename="../src/core/Core.cpp" line="409"/>
         <source>Disconnected</source>
         <translation>已中斷連線</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="408"/>
+        <location filename="../src/core/Core.cpp" line="415"/>
         <source>Disconnecting</source>
         <translation>正在中斷連線</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="429"/>
+        <location filename="../src/core/Core.cpp" line="436"/>
         <source>%1 Reconnecting to the %2 Network in progress.</source>
         <translation>%1 重新連線到 %2 網路進行中。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="439"/>
+        <location filename="../src/core/Core.cpp" line="446"/>
         <source>Reconnecting</source>
         <translation>正在重新連線</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="457"/>
+        <location filename="../src/core/Core.cpp" line="464"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
         <translation>%1 零組態是瀏覽服務的網路: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="464"/>
+        <location filename="../src/core/Core.cpp" line="471"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation>%1 零組態無法瀏覽服務的網路: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="488"/>
+        <location filename="../src/core/Core.cpp" line="495"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1 廣播到 %2 網路...</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="490"/>
+        <location filename="../src/core/Core.cpp" line="497"/>
         <source>Searching users</source>
         <translation>搜尋使用者</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="621"/>
+        <location filename="../src/core/Core.cpp" line="628"/>
         <source>New version is available</source>
         <translation>有新版本可以使用</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="622"/>
+        <location filename="../src/core/Core.cpp" line="629"/>
         <source>Click here to download</source>
         <translation>按一下此處下載</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="721"/>
+        <location filename="../src/core/Core.cpp" line="728"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>已達到最大 ID。 請關閉並重新啟動應用程式。</translation>
     </message>
@@ -336,22 +336,22 @@
         <translation>與所有使用者聊天</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="243"/>
+        <location filename="../src/core/Core.cpp" line="250"/>
         <source>but encrypted connections allowed</source>
         <translation>但允許加密的連線</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="251"/>
+        <location filename="../src/core/Core.cpp" line="258"/>
         <source>End-to-end encryption is enabled</source>
         <translation>已啟用端對端加密</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="251"/>
+        <location filename="../src/core/Core.cpp" line="258"/>
         <source>but not encrypted connections allowed</source>
         <translation>但不允許加密的連線</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="241"/>
+        <location filename="../src/core/Core.cpp" line="248"/>
         <source>End-to-end encryption is disabled</source>
         <translation>已停用端對端加密</translation>
     </message>
@@ -391,7 +391,7 @@
         <translation>%1 %2 無法告知您已離開群組。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="530"/>
+        <location filename="../src/core/Core.cpp" line="537"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1 網路介面 %2 已關閉。</translation>
     </message>
@@ -2480,8 +2480,8 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="4072"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4234"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4595"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4976"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="5122"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4982"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="5128"/>
         <source>Yes</source>
         <translation>是</translation>
     </message>
@@ -2506,8 +2506,8 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="4072"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4234"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4595"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4976"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="5122"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4982"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="5128"/>
         <source>No</source>
         <translation>否</translation>
     </message>
@@ -3126,7 +3126,7 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="819"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3327"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3371"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4933"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4939"/>
         <source>The option has been disabled by your system administrator.</source>
         <translation>系統管理員已停用選項。</translation>
     </message>
@@ -3841,76 +3841,81 @@ Please select a different name.</source>
         <translation>已重設所有視窗的幾何圖形</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4838"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4783"/>
+        <source>The download folder does not exists or is not writable. Please select a new one.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="4844"/>
         <source>You are using the default icons.</source>
         <translation>您正在使用預設圖示。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4844"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4850"/>
         <source>You are using custom icons in folder %1.</source>
         <translation>您正在資料夾 %1 中使用自訂圖示。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4845"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4851"/>
         <source>Restore default icons</source>
         <translation>還原預設圖示</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4909"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4915"/>
         <source>Restart connection now</source>
         <translation>立即重新啟動連線</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4909"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4915"/>
         <source>Restart later manually</source>
         <translation>稍後手動重新啟動</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4933"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4939"/>
         <source>You are not allowed create new message.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4976"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4982"/>
         <source>Do you really want to restore the colors to the default ones?</source>
         <translation>您真的要將色彩還原到預設色彩嗎?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="5121"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="5127"/>
         <source>Do you really want to share your desktop with %1?</source>
         <translation>您真的要與 %1 共用桌面?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4839"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4845"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4854"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4851"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4860"/>
         <source>Select the icon folder</source>
         <translation>選取圖示資料夾</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4875"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4881"/>
         <source>You are using the default emoticons.</source>
         <translation>您正在使用預設表情。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4876"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4882"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4891"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4888"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4897"/>
         <source>Select the emoticon folder</source>
         <translation>選取表情資料夾</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4881"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4887"/>
         <source>You are using custom emoticons in folder %1.</source>
         <translation>您正在資料夾 %1 中使用自訂表情。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4882"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4888"/>
         <source>Restore default emoticons</source>
         <translation>還原預設表情</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4908"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4914"/>
         <source>You have to restart your connection to apply changes.</source>
         <translation>您必須重新啟動連線才能套用變更。</translation>
     </message>
@@ -3977,7 +3982,7 @@ Please select a different name.</source>
         <translation>視窗幾何圖形和狀態已儲存</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4826"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4832"/>
         <source>%1 blocked chats</source>
         <translation>%1 封鎖聊天</translation>
     </message>
@@ -4031,8 +4036,9 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="3328"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3372"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3511"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4917"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4934"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4783"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4923"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4940"/>
         <source>Ok</source>
         <translation>確定</translation>
     </message>
@@ -4110,7 +4116,7 @@ Please select a different name.</source>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3918"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="5169"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="5175"/>
         <source>disabled</source>
         <translation>已停用</translation>
     </message>
@@ -4141,10 +4147,10 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="3351"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3489"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4537"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4839"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4845"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4876"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4851"/>
         <location filename="../src/desktop/GuiMain.cpp" line="4882"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4888"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
@@ -4257,7 +4263,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2945"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3796"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4917"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4923"/>
         <source>You must restart %1 to apply these changes.</source>
         <translation>您必須重新啟動 %1 才能套用這些變更。</translation>
     </message>
@@ -6369,70 +6375,70 @@ Please select a different name.</source>
         <translation>按一下與所有本地使用者開啟聊天</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="693"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="698"/>
         <source>%1 is %2</source>
         <translation>%1 是 %2</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="693"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="698"/>
         <source>You are %1</source>
         <translation>您是 %1</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="711"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="716"/>
         <source>Workgroups</source>
         <translation>工作群組</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="721"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="726"/>
         <source>Last update</source>
         <translation>上次更新</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="726"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="731"/>
         <source>Last connection</source>
         <translation>上次連線</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/utils/BeeUtils.cpp" line="730"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="735"/>
         <source>%n unsent message(s)</source>
         <translation>
             <numerusform>%n 個未傳送訊息</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="747"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="752"/>
         <source>Today is %1&apos;s birthday</source>
         <translation>今天是 %1 的生日</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="749"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="754"/>
         <source>Tomorrow is %1&apos;s birthday</source>
         <translation>明天是 %1 的生日</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="751"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="756"/>
         <source>%1&apos;s birthday is in %2 days</source>
         <translation>%1 的生日在 %2 天內</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="753"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="758"/>
         <source>Yesterday was %1&apos;s birthday</source>
         <translation>昨天是 %1 的生日</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="760"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="765"/>
         <source>Happy Birthday to you!</source>
         <translation>祝您生日快樂!</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="786"/>
-        <location filename="../src/utils/BeeUtils.cpp" line="810"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="791"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="815"/>
         <source>and</source>
         <translation>和</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="815"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="820"/>
         <source>and %1 others</source>
         <translation>和 %1 其他</translation>
     </message>
@@ -6626,7 +6632,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2395"/>
+        <location filename="../src/core/Settings.cpp" line="2423"/>
         <source>Autoresponder</source>
         <translation>自動回應器</translation>
     </message>
