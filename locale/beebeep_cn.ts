@@ -56,7 +56,7 @@
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="294"/>
         <source>Voice message</source>
-        <translation type="unfinished"></translation>
+        <translation>语音消息</translation>
     </message>
 </context>
 <context>
@@ -99,7 +99,7 @@
     <message>
         <location filename="../src/core/Core.cpp" line="153"/>
         <source>%1 User %2 cannot save unsent messages in path: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1用户%2不能保存设置在路径：%3</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="192"/>
@@ -124,12 +124,12 @@
     <message>
         <location filename="../src/core/Core.cpp" line="299"/>
         <source>%1 Do you need support? Visit the %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1需要帮助吗？访问%2。</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="301"/>
         <source>help page</source>
-        <translation type="unfinished"></translation>
+        <translation>帮助页面</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="347"/>
@@ -144,17 +144,17 @@
     <message>
         <location filename="../src/core/Core.cpp" line="415"/>
         <source>Disconnecting</source>
-        <translation type="unfinished"></translation>
+        <translation>正在断开</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="436"/>
         <source>%1 Reconnecting to the %2 Network in progress.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1正在重新连接至%2.</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="446"/>
         <source>Reconnecting</source>
-        <translation type="unfinished"></translation>
+        <translation>重新连接中</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="464"/>
@@ -169,7 +169,7 @@
     <message>
         <location filename="../src/core/Core.cpp" line="495"/>
         <source>%1 Broadcasting to the %2 Network...</source>
-        <translation>%1正在广播到%2网络</translation>
+        <translation>%1正在广播到%2网络...</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="497"/>
@@ -261,12 +261,12 @@
         <location filename="../src/core/CoreChat.cpp" line="954"/>
         <location filename="../src/core/CoreChat.cpp" line="965"/>
         <source>%1 Chat with %2.</source>
-        <translation>%1与%2聊天</translation>
+        <translation>%1与%2聊天。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="286"/>
         <source>%1 %2 has left the group chat %3.</source>
-        <translation>%1 %2已离开群组聊天%3</translation>
+        <translation>%1 %2已离开群组聊天%3.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="309"/>
@@ -276,17 +276,17 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="328"/>
         <source>%1 %2 is added to saved chats.</source>
-        <translation>%1 %2被添加到已保存的聊天记录中</translation>
+        <translation>%1 %2被添加到已保存的聊天记录中。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="345"/>
         <source>%1 You have left group chat %2.</source>
-        <translation>%1你已经离开群聊组%2</translation>
+        <translation>%1你已经离开群聊组%2。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="376"/>
         <source>%1 Chat with %2 is archived.</source>
-        <translation>%1与%2的对话已经存档</translation>
+        <translation>%1与%2的对话已经存档。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="400"/>
@@ -296,39 +296,39 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="406"/>
         <source>Unable to send the message: this chat is disabled.</source>
-        <translation>无法发送消息:此聊天被禁用</translation>
+        <translation>无法发送消息:此聊天被禁用。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="445"/>
         <source>Unable to send the message to %1.</source>
-        <translation>无法将消息发送到%1</translation>
+        <translation>无法将消息发送到%1。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="451"/>
         <source>Nobody has received the message.</source>
-        <translation>没有人收到这条消息</translation>
+        <translation>没有人收到这条消息。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="482"/>
         <source>The voice message will be delivered to %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>消息将被发送到%1。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="652"/>
         <source>Unsent messages had an incorrect authorization code and will not be sent.</source>
-        <translation type="unfinished"></translation>
+        <translation>消息认证错误，未发送。</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/core/CoreChat.cpp" line="659"/>
         <source>%n unsent message(s) will be sent as soon as possible.</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n 消息将尽快发送。</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="818"/>
         <source>Offline messages sent to %1.</source>
-        <translation type="unfinished">发送到%2的脱机消息 {1.?}</translation>
+        <translation>发送离线消息给 %1。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="949"/>
@@ -338,32 +338,32 @@
     <message>
         <location filename="../src/core/Core.cpp" line="250"/>
         <source>but encrypted connections allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>允许加密连接</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="258"/>
         <source>End-to-end encryption is enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>端到端加密已开启</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="258"/>
         <source>but not encrypted connections allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>不使用加密连接</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="248"/>
         <source>End-to-end encryption is disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>端到端加密已关闭</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="484"/>
         <source>The message will be delivered to %1.</source>
-        <translation>消息将被发送到%1</translation>
+        <translation>消息将被发送到%1.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="637"/>
         <source>Saved chats had an incorrect authorization code.</source>
-        <translation type="unfinished"></translation>
+        <translation>保存验证错误的聊天。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="640"/>
@@ -373,7 +373,7 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="704"/>
         <source>Offline message will be sent to %1</source>
-        <translation type="unfinished"></translation>
+        <translation>离线消息将发送给 %1</translation>
     </message>
     <message>
         <source>Offline messages sent to %2.</source>
@@ -382,7 +382,7 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="908"/>
         <source>%1 You have buzzed %2.</source>
-        <translation>%1你已经和%2建立联系</translation>
+        <translation>%1你已经和%2建立联系。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="954"/>
@@ -392,32 +392,32 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="581"/>
         <source>%1 %2 cannot be informed that you have left the group.</source>
-        <translation>无法通知%1 %2你已离开组</translation>
+        <translation>无法通知%1 %2你已离开组。</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="537"/>
         <source>%1 Network interface %2 is gone down.</source>
-        <translation>%1与%2的网络接口下降</translation>
+        <translation>%1与%2的网络接口下降。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="54"/>
         <source>%1 Unable to start file transfer server: bind address/port failed.</source>
-        <translation>%1无法启动文件传输服务器:绑定地址/端口失败</translation>
+        <translation>%1无法启动文件传输服务器:绑定地址/端口失败。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="85"/>
         <source>%1 Unable to download %2 from %3: user is offline.</source>
-        <translation>%1无法从%3下载%2:用户脱机</translation>
+        <translation>%1无法从%3下载%2:用户脱机。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="101"/>
         <source>%1 Unable to download %2 from %3: folder %4 cannot be created.</source>
-        <translation>%1无法从%3下载%2:无法创建文件夹%4</translation>
+        <translation>%1无法从%3下载%2:无法创建文件夹%4。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="126"/>
         <source>%1 Downloading %2 from %3.</source>
-        <translation>%1从%3下载%2</translation>
+        <translation>%1从%3下载%2.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="156"/>
@@ -432,12 +432,12 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="174"/>
         <source>%1 sent a voice message.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 发送了一条语音消息。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="179"/>
         <source>Listen</source>
-        <translation type="unfinished"></translation>
+        <translation>监听</translation>
     </message>
     <message>
         <source>Open</source>
@@ -457,7 +457,7 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="115"/>
         <source>%1 Unable to download %2 from %3: file extension &apos;%4&apos; is not allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 不能从%3下载文件:%2,文件插件‘%4’未启用</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="146"/>
@@ -472,7 +472,7 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="189"/>
         <source>%1 sent %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1发送了%2.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="192"/>
@@ -503,28 +503,28 @@
         <location filename="../src/core/CoreFileTransfer.cpp" line="182"/>
         <location filename="../src/core/CoreVoiceChat.cpp" line="66"/>
         <source>voice message</source>
-        <translation type="unfinished"></translation>
+        <translation>语音消息</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="192"/>
         <location filename="../src/core/CoreFileTransfer.cpp" line="421"/>
         <source>Open %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>打开%1.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="377"/>
         <source>%1 Unable to send %2 to %3: file extension &apos;%4&apos; is not allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1不能发送%2到%3:文件插件‘%4’未启用。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="384"/>
         <source>%1 Unable to send %2 to %3: file not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1无法发送%2到%3:文件未找到</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="391"/>
         <source>%1 Unable to send %2 to %3: file is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1无法发送%2到%3:空文件</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="463"/>
@@ -589,7 +589,7 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="781"/>
         <source>the folder is empty or contains only files that are not allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>空文件夹或包含不允许的文件。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="788"/>
@@ -609,12 +609,12 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="816"/>
         <source>%1 Sending folder %2 to %3.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1正在发送文件夹%2到%3。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="418"/>
         <source>%1 Sending %2 to %3.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1正在发送%2到%3</translation>
     </message>
     <message>
         <source>%1 You send folder %2 to %3.</source>
@@ -631,12 +631,12 @@
     <message>
         <location filename="../src/core/CoreParser.cpp" line="163"/>
         <source>%1 %2 has refused to download the file: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2拒绝下载文件:%3</translation>
     </message>
     <message>
         <location filename="../src/core/CoreParser.cpp" line="193"/>
         <source>%1 %2 is sending to you the voice message: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2正在向你发送语音消息:%3</translation>
     </message>
     <message>
         <location filename="../src/core/CoreParser.cpp" line="203"/>
@@ -753,12 +753,12 @@
     <message>
         <location filename="../src/core/CoreConnection.cpp" line="414"/>
         <source>%1 has end-to-end encryption enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>%1启用了端到端加密</translation>
     </message>
     <message>
         <location filename="../src/core/CoreConnection.cpp" line="424"/>
         <source>%1 has end-to-end encryption disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>%1关闭了端到端加密</translation>
     </message>
     <message>
         <location filename="../src/core/CoreShareDesktop.cpp" line="52"/>
@@ -788,12 +788,12 @@
     <message>
         <location filename="../src/core/CoreVoiceChat.cpp" line="38"/>
         <source>%1 Unable to send voice message. File transfer is disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1无法发送语音消息：文件传输已禁用</translation>
     </message>
     <message>
         <location filename="../src/core/CoreVoiceChat.cpp" line="53"/>
         <source>%1 %2: voice message not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2:语音消息未找到</translation>
     </message>
 </context>
 <context>
@@ -801,18 +801,18 @@
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="50"/>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished"></translation>
+        <translation>yyyy-MM-dd</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="57"/>
         <source>h:mm:ss ap</source>
-        <translation type="unfinished"></translation>
+        <translation>h:mm:ss ap</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="60"/>
         <source>hh:mm:ss</source>
         <extracomment>default time format in chat message</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>hh:mm:ss</translation>
     </message>
 </context>
 <context>
@@ -850,12 +850,12 @@
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="271"/>
         <source>MacOSX</source>
-        <translation>MacOX</translation>
+        <translation>MacOSX</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="272"/>
         <source>Compressed</source>
-        <translation type="unfinished"></translation>
+        <translation>已压缩</translation>
     </message>
 </context>
 <context>
@@ -888,7 +888,7 @@
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="96"/>
         <source>Transfer queued</source>
-        <translation type="unfinished"></translation>
+        <translation>传输队列</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="190"/>
@@ -898,32 +898,32 @@
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="188"/>
         <source>Transfer skipped</source>
-        <translation type="unfinished"></translation>
+        <translation>跳过传输</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="205"/>
         <source>Transfer canceled</source>
-        <translation type="unfinished"></translation>
+        <translation>取消传输</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="233"/>
         <source>Transfer is about to pause</source>
-        <translation type="unfinished"></translation>
+        <translation>传输即将暂停</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="235"/>
         <source>Please wait</source>
-        <translation type="unfinished">请等待</translation>
+        <translation>请稍等</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="252"/>
         <source>Transfer paused after %1</source>
-        <translation type="unfinished"></translation>
+        <translation>传输将在%1后暂停</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="263"/>
         <source>Starting transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>正在开始传输</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="350"/>
@@ -938,7 +938,7 @@
     <message>
         <location filename="../src/core/FileTransferUpload.cpp" line="122"/>
         <source>file no longer exists</source>
-        <translation type="unfinished"></translation>
+        <translation>文件已不存在</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferUpload.cpp" line="130"/>
@@ -948,12 +948,12 @@
     <message>
         <location filename="../src/core/FileTransferUpload.cpp" line="142"/>
         <source>remote host sent invalid data</source>
-        <translation type="unfinished"></translation>
+        <translation>远程主机发送了无效数据</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferUpload.cpp" line="160"/>
         <source>%1 bytes uploaded but the remote file size is %2 bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>已经上传了%1字节，但是远程文件有%2字节</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferUpload.cpp" line="162"/>
@@ -968,7 +968,7 @@
     <message>
         <location filename="../src/core/FileTransferUpload.cpp" line="195"/>
         <source>Unable to seek %1 bytes in file %2</source>
-        <translation type="unfinished"></translation>
+        <translation>无法找到%1字节在文件%2中</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferUpload.cpp" line="211"/>
@@ -1221,32 +1221,32 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="201"/>
         <source>Close</source>
-        <translation type="unfinished">关闭</translation>
+        <translation>关闭</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="202"/>
         <source>Close chat window on sending message</source>
-        <translation type="unfinished"></translation>
+        <translation>发送消息时关闭聊天窗口</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="206"/>
         <source>Minimize</source>
-        <translation type="unfinished"></translation>
+        <translation>最小化</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="207"/>
         <source>Minimize chat window on sending message</source>
-        <translation type="unfinished"></translation>
+        <translation>发送消息时最小化聊天窗口</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="116"/>
         <source>Select chat default text color</source>
-        <translation type="unfinished">选择默认聊天文字颜色</translation>
+        <translation>选择默认聊天文字颜色</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="119"/>
         <source>Select chat system text color</source>
-        <translation type="unfinished">选择聊天系统文字颜色</translation>
+        <translation>选择聊天系统文字颜色</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="125"/>
@@ -1256,7 +1256,7 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="132"/>
         <source>Clear system messages</source>
-        <translation type="unfinished"></translation>
+        <translation>清楚系统消息</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="138"/>
@@ -1277,12 +1277,12 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="329"/>
         <source>Record voice message</source>
-        <translation type="unfinished"></translation>
+        <translation>录音</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="327"/>
         <source>File transfer must be enabled to send voice messages</source>
-        <translation type="unfinished"></translation>
+        <translation>必须启用文件传输才能发送语音消息</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="259"/>
@@ -1322,12 +1322,12 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="342"/>
         <source>Select all</source>
-        <translation type="unfinished"></translation>
+        <translation>全选</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="346"/>
         <source>Quote selected text</source>
-        <translation type="unfinished"></translation>
+        <translation>引用所选文本</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="348"/>
@@ -1337,7 +1337,7 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="526"/>
         <source>The loading of saved messages has not yet been completed.</source>
-        <translation type="unfinished"></translation>
+        <translation>保存了未加载完的消息。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="588"/>
@@ -1347,38 +1347,39 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="521"/>
         <source>Loading of saved messages...</source>
-        <translation type="unfinished"></translation>
+        <translation>正在加载已保存的消息。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="90"/>
         <source>Voice messages are not available with this version of BeeBEEP.
 Download for free and install the version with this feature from the %1 website.</source>
-        <translation type="unfinished"></translation>
+        <translation>当前版本的BeeBEEP不支持语音消息
+免费从%1网站下载安装支持的版本。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="479"/>
         <source>Opening voice message</source>
-        <translation type="unfinished"></translation>
+        <translation>打开语音消息中</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="590"/>
         <source>maximum number of messages to show reached</source>
-        <translation type="unfinished"></translation>
+        <translation>已达到最大显示数量</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="782"/>
         <source>You must close and reopen this window to see the changes applied.</source>
-        <translation type="unfinished"></translation>
+        <translation>您必须关闭并重新打开此窗口，才能看到应用的更改。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="809"/>
         <source>Please select a file to save all the messages of the chat.</source>
-        <translation type="unfinished"></translation>
+        <translation>请选择一个文件以保存所有的聊天消息。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="926"/>
         <source>You are trying to send %1 files simultaneously but the maximum allowed is %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>您正在尝试发送%1文件但最大允许%2.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="935"/>
@@ -1419,7 +1420,7 @@ Download for free and install the version with this feature from the %1 website.
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="1220"/>
         <source>Ready.</source>
-        <translation type="unfinished"></translation>
+        <translation>已完成。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="1236"/>
@@ -1484,12 +1485,12 @@ Download for free and install the version with this feature from the %1 website.
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="591"/>
         <source>open %1 to read them all</source>
-        <translation type="unfinished"></translation>
+        <translation>打开 %1 来阅读所有内容</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="591"/>
         <source>the saved chat</source>
-        <translation type="unfinished"></translation>
+        <translation>保存的聊天</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="877"/>
@@ -1546,13 +1547,13 @@ Download for free and install the version with this feature from the %1 website.
         <location filename="../src/desktop/GuiChatList.cpp" line="192"/>
         <location filename="../src/desktop/GuiChatList.cpp" line="277"/>
         <source>Hide empty chats</source>
-        <translation type="unfinished"></translation>
+        <translation>隐藏空的聊天</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatList.cpp" line="158"/>
         <location filename="../src/desktop/GuiChatList.cpp" line="270"/>
         <source>Write a message</source>
-        <translation type="unfinished"></translation>
+        <translation>新建一条消息</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatList.cpp" line="160"/>
@@ -1597,7 +1598,7 @@ Download for free and install the version with this feature from the %1 website.
     <message>
         <location filename="../src/desktop/GuiChatList.ui" line="76"/>
         <source>View options</source>
-        <translation type="unfinished">查看选项</translation>
+        <translation>查看选项</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatList.ui" line="96"/>
@@ -1620,12 +1621,12 @@ Download for free and install the version with this feature from the %1 website.
     <message>
         <location filename="../src/desktop/GuiChat.ui" line="136"/>
         <source>Click to send message or just hit enter</source>
-        <translation>点击发送消息或者只是点击确定</translation>
+        <translation>点击发送消息或按下Enter键</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.ui" line="191"/>
         <source>close</source>
-        <translation type="unfinished"></translation>
+        <translation>关闭</translation>
     </message>
 </context>
 <context>
@@ -1750,7 +1751,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="265"/>
         <source>Send this message to all recipients individually</source>
-        <translation type="unfinished"></translation>
+        <translation>单独向所有收件人发送此消息</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="136"/>
@@ -1768,7 +1769,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="45"/>
         <source>If you don&apos;t want to show the year to other users use 1900. To remove your birthday use 01/01/1900</source>
-        <translation type="unfinished"></translation>
+        <translation>如果不想向其他用户显示年份，请使用 1900。要删除您的生日使用 01/01/1900</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="100"/>
@@ -1800,7 +1801,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="153"/>
         <source>It is preferable to use square images to avoid display problems.</source>
-        <translation type="unfinished"></translation>
+        <translation>尽量使用方形图像以避免显示问题</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="189"/>
@@ -1935,7 +1936,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="159"/>
         <source>Show the BeeBOX</source>
-        <translation type="unfinished"></translation>
+        <translation>显示BeeBOX</translation>
     </message>
     <message>
         <source>Share your folders or files</source>
@@ -1952,7 +1953,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="352"/>
         <source>Allowed file extensions</source>
-        <translation type="unfinished"></translation>
+        <translation>允许文件扩展</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="266"/>
@@ -1963,7 +1964,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="163"/>
         <source>Only certain types of files are allowed for file transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>只允许传输指定的文件类型</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="324"/>
@@ -1978,23 +1979,23 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
         <source>File transfer has no rules on file extensions.</source>
-        <translation type="unfinished"></translation>
+        <translation>传输任何类型的文件。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
         <source>All types of files can be sent and received.</source>
-        <translation type="unfinished"></translation>
+        <translation>允许发送接受任何文件类型。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="356"/>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>确定</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="356"/>
         <source>Only files with this type of extension can be transferred:</source>
-        <translation type="unfinished"></translation>
+        <translation>只允许传输指定的文件类：</translation>
     </message>
 </context>
 <context>
@@ -2002,109 +2003,109 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="38"/>
         <source>Time left</source>
-        <translation type="unfinished"></translation>
+        <translation>剩余时间</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="38"/>
         <source>File</source>
-        <translation type="unfinished">文件</translation>
+        <translation>文件</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="38"/>
         <source>User</source>
-        <translation type="unfinished">用户</translation>
+        <translation>用户</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="38"/>
         <source>Status</source>
-        <translation type="unfinished">状态</translation>
+        <translation>状态</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="162"/>
         <source>Do you want to cancel the transfer of %1?</source>
-        <translation type="unfinished">你想取消传输：%1?</translation>
+        <translation>要取消传输：%1吗？</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="163"/>
         <source>Yes and delete the partially downloaded file</source>
-        <translation type="unfinished"></translation>
+        <translation>是，并删除部分下载的文件</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="164"/>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="315"/>
         <source>Yes</source>
-        <translation type="unfinished">是</translation>
+        <translation>是</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="164"/>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="315"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>不</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="268"/>
         <source>Please select a file transfer to open the menu</source>
-        <translation type="unfinished"></translation>
+        <translation>请选择文件传输以打开菜单</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="314"/>
         <source>Do you want to try resuming the transfer of %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>是否要尝试恢复 %1 的传输？</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="319"/>
         <source>Resuming transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>恢复传输</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="319"/>
         <source>Please wait</source>
-        <translation type="unfinished">请等待</translation>
+        <translation>请等待</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="208"/>
         <source>You cannot open this file if the transfer has not been completed.</source>
-        <translation type="unfinished"></translation>
+        <translation>不能打开尚未传输完成的文件。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="208"/>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>确定</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="245"/>
         <source>Pause transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>暂停传输</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="248"/>
         <source>Cancel transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>取消传输</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="256"/>
         <source>Resume transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>恢复传输</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="258"/>
         <source>Try to resume transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>尝试恢复传输</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="261"/>
         <source>Remove transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>移除传输</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="265"/>
         <source>Hide all transfers stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>隐藏所有已停止的传输</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="271"/>
         <source>No file transfer in progress</source>
-        <translation type="unfinished"></translation>
+        <translation>没有正在传输的文件</translation>
     </message>
 </context>
 <context>
@@ -2116,7 +2117,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="51"/>
         <source>Edit group chat</source>
-        <translation type="unfinished">编辑群聊</translation>
+        <translation>编辑群聊</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="54"/>
@@ -2275,7 +2276,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiHome.cpp" line="90"/>
         <source>Select all</source>
-        <translation type="unfinished"></translation>
+        <translation>全选</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiHome.cpp" line="95"/>
@@ -2290,17 +2291,17 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiHome.cpp" line="106"/>
         <source>Clear system messages</source>
-        <translation type="unfinished"></translation>
+        <translation>清除系统消息</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiHome.cpp" line="142"/>
         <source>Click here to see the latest news about BeeBEEP project</source>
-        <translation type="unfinished"></translation>
+        <translation>点击此处查看BeeBEEP项目的最新消息</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiHome.cpp" line="147"/>
         <source>Click here to read more</source>
-        <translation type="unfinished"></translation>
+        <translation>点击此处查看更多</translation>
     </message>
 </context>
 <context>
@@ -2503,7 +2504,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="301"/>
         <source>Select all</source>
-        <translation type="unfinished"></translation>
+        <translation>全选</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="312"/>
@@ -2820,43 +2821,43 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="662"/>
         <source>There are still files that have not been transferred and will be interrupted. Do you want to disconnect anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>仍有文件尚未传输完成。您仍要断开连接吗？</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="737"/>
         <location filename="../src/desktop/GuiMain.cpp" line="1491"/>
         <source>Development version</source>
-        <translation type="unfinished"></translation>
+        <translation>开发版本</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="816"/>
         <source>Write a message</source>
-        <translation type="unfinished"></translation>
+        <translation>新建一条消息</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1088"/>
         <source>On sending message</source>
-        <translation type="unfinished"></translation>
+        <translation>消息正在发送</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1092"/>
         <source>Do nothing</source>
-        <translation type="unfinished"></translation>
+        <translation>什么都不做</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1097"/>
         <source>Minimize chat window</source>
-        <translation type="unfinished"></translation>
+        <translation>最小化聊天窗口</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1102"/>
         <source>Close chat window</source>
-        <translation type="unfinished"></translation>
+        <translation>关闭聊天窗口</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1219"/>
         <source>Use the integrated voice message player</source>
-        <translation type="unfinished"></translation>
+        <translation>使用集成播放器播放</translation>
     </message>
     <message>
         <source>Ask me</source>
@@ -2870,7 +2871,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1240"/>
         <source>Enable BEEP alert also for active chat windows</source>
-        <translation type="unfinished"></translation>
+        <translation>允许活动窗口发送BEEP通知</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1324"/>
@@ -3183,17 +3184,17 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="977"/>
         <source>Recognize users</source>
-        <translation>组织用户</translation>
+        <translation>排序方式</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="986"/>
         <source>By account name and domain name</source>
-        <translation>按照账户名和域名</translation>
+        <translation>按用户名和域名</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="991"/>
         <source>By account name</source>
-        <translation>按照账户名</translation>
+        <translation>按用户名</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="981"/>
@@ -3270,7 +3271,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="848"/>
         <source>Test your network</source>
-        <translation type="unfinished"></translation>
+        <translation>测试你的网络</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="918"/>
@@ -3280,7 +3281,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="933"/>
         <source>On connection</source>
-        <translation>在连接</translation>
+        <translation>连接中</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="945"/>
@@ -3295,27 +3296,27 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="936"/>
         <source>Show the user list</source>
-        <translation type="unfinished"></translation>
+        <translation>显示用户列表</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="940"/>
         <source>Show the chat list</source>
-        <translation type="unfinished"></translation>
+        <translation>显示聊天列表</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1035"/>
         <source>Save unsent messages</source>
-        <translation type="unfinished"></translation>
+        <translation>保存未发送的消息</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1039"/>
         <source>Save file transfer messages</source>
-        <translation type="unfinished"></translation>
+        <translation>保存文件传输消息</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1043"/>
         <source>Save system messages</source>
-        <translation type="unfinished"></translation>
+        <translation>保存系统消息</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1075"/>
@@ -3325,7 +3326,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1249"/>
         <source>Raise main window on new message</source>
-        <translation type="unfinished"></translation>
+        <translation>新消息弹出主窗口</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1253"/>
@@ -3360,7 +3361,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1197"/>
         <source>Always shows the progress of file transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>始终显示文件传输的进度</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1286"/>
@@ -3395,12 +3396,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="869"/>
         <source>Use the dark theme</source>
-        <translation type="unfinished"></translation>
+        <translation>使用夜间模式</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="869"/>
         <source>beta</source>
-        <translation type="unfinished"></translation>
+        <translation>Beta</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="886"/>
@@ -3415,7 +3416,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="895"/>
         <source>Restore the colors to the default ones</source>
-        <translation type="unfinished"></translation>
+        <translation>还原默认颜色</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="896"/>
@@ -3425,132 +3426,132 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1448"/>
         <source>Show tips...</source>
-        <translation type="unfinished"></translation>
+        <translation>显示提示</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1449"/>
         <source>Read FAQ...</source>
-        <translation type="unfinished"></translation>
+        <translation>查看常见问题</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1452"/>
         <source>Information about %1...</source>
-        <translation type="unfinished"></translation>
+        <translation>相关信息 %1...</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1450"/>
         <source>Discover the fact of the day...</source>
-        <translation type="unfinished"></translation>
+        <translation>发现一天的事实...</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="866"/>
         <source>Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>界面</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="959"/>
         <source>Your workgroups</source>
-        <translation type="unfinished"></translation>
+        <translation>你的工作组</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1010"/>
         <source>Show the name and surname of the users</source>
-        <translation type="unfinished"></translation>
+        <translation>显示用户姓名</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1030"/>
         <source>Enable message saving</source>
-        <translation type="unfinished"></translation>
+        <translation>允许保存消息</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1109"/>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>颜色</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1118"/>
         <source>Select quote text color</source>
-        <translation type="unfinished"></translation>
+        <translation>选择引用文本颜色</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1120"/>
         <source>Select quote background color</source>
-        <translation type="unfinished"></translation>
+        <translation>选择背景颜色</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1210"/>
         <source>Voice message</source>
-        <translation type="unfinished"></translation>
+        <translation>语音消息</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1216"/>
         <source>Maximum duration</source>
-        <translation type="unfinished"></translation>
+        <translation>最长持续时间</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1146"/>
         <source>Always download files into the folder with the user&apos;s name</source>
-        <translation type="unfinished"></translation>
+        <translation>始终按用户分类下载文件</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1014"/>
         <source>Show surname before firstname of the users</source>
-        <translation type="unfinished"></translation>
+        <translation>在 姓 名 方式显示用户</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1153"/>
         <source>Generate new file name</source>
-        <translation type="unfinished"></translation>
+        <translation>生成新文件名</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1158"/>
         <source>Skip</source>
-        <translation type="unfinished"></translation>
+        <translation>跳过</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1166"/>
         <source>Overwrite older</source>
-        <translation type="unfinished"></translation>
+        <translation>覆盖较旧</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1180"/>
         <source>Keep the original modification date of the transferred file</source>
-        <translation type="unfinished"></translation>
+        <translation>保留传输文件的原始修改日期</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1184"/>
         <source>Resume file transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>恢复文件传输</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1184"/>
         <source>when possible</source>
-        <translation type="unfinished"></translation>
+        <translation>当允许时</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1214"/>
         <source>Voice encoder</source>
-        <translation type="unfinished"></translation>
+        <translation>语音格式</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1225"/>
         <source>Notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>通知</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1244"/>
         <source>Disable BEEP alert if your status is busy</source>
-        <translation type="unfinished"></translation>
+        <translation>忙碌时禁用BEEP提示</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1353"/>
         <source>Show online users only</source>
-        <translation type="unfinished"></translation>
+        <translation>仅显示在线用户</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1357"/>
         <source>Show users in their workgroups</source>
-        <translation type="unfinished"></translation>
+        <translation>在对应的用户组中显示用户</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1512"/>
@@ -3565,13 +3566,13 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1538"/>
         <source>Saved chats</source>
-        <translation type="unfinished"></translation>
+        <translation>保存聊天</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1690"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2262"/>
         <source>There will be no saving of &apos;system&apos; and &apos;file transfer&apos; messages if this option is disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>如果禁用此选项，将不会保存&quot;系统&quot;和&quot;文件传输&quot;消息。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1710"/>
@@ -3601,53 +3602,53 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2020"/>
         <source>You must close and reopen the chat windows to see the changes applied.</source>
-        <translation type="unfinished"></translation>
+        <translation>您必须关闭并重新打开聊天窗口，才能看到应用的更改。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2055"/>
         <source>Saving unsent messages may fail if &apos;Save users&apos; and &apos;Save groups&apos; options are not enabled. Do you want to enable them?</source>
-        <translation type="unfinished"></translation>
+        <translation>如果未启用&quot;保存用户&quot;和&quot;保存组&quot;选项，则保存未发送的消息可能会失败。是否要启用它们？</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2081"/>
         <source>Please select the maximum number of lines to be saved in the chat (current: %1).</source>
-        <translation type="unfinished"></translation>
+        <translation>请选择要在聊天中保存的最大行数（当前：%1）。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2096"/>
         <source>Please select the number of days that items (such as images) can remain cached.</source>
-        <translation type="unfinished"></translation>
+        <translation>请选择项目（如图像）保留天数。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2097"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2207"/>
         <source>current: %1, never clear: -1, always clear: 0</source>
-        <translation type="unfinished"></translation>
+        <translation>当前:%1，从不清除: -1，始终清晰:0</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2120"/>
         <source>Please select the maximum number of files you can queue up for the transfer (current: %1).</source>
-        <translation type="unfinished"></translation>
+        <translation>请选择传输队列的最大文件数（当前：%1）。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2178"/>
         <source>Please select the maximum duration (in seconds) that a voice message can have (current: %1).</source>
-        <translation type="unfinished"></translation>
+        <translation>请选择语音消息的最大持续时间（以秒为单位）。当前：%1）。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2249"/>
         <source>Option enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>已启用选项。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2251"/>
         <source>Option disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>已禁用选项。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2281"/>
         <source>Remove users after %1 days of inactivity</source>
-        <translation>用户%1天不活跃是移除用户</translation>
+        <translation>移除%1天不活跃用户</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2288"/>
@@ -3657,22 +3658,22 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2293"/>
         <source>Save maximum %1 lines of chat</source>
-        <translation type="unfinished"></translation>
+        <translation>最多保存 %1 行聊天记录</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2300"/>
         <source>Clean the cache from items older than %1 days</source>
-        <translation type="unfinished"></translation>
+        <translation>清除早于 %1 天的记录</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2307"/>
         <source>Delete partially downloaded files after %1 days</source>
-        <translation type="unfinished"></translation>
+        <translation>删除 %1 天前的文件</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2313"/>
         <source>Add up to %1 files to the transfer queue</source>
-        <translation type="unfinished"></translation>
+        <translation>最多将 %1 文件添加到传输队列</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2378"/>
@@ -3796,7 +3797,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2892"/>
         <source>The files will be downloaded to the folder:</source>
-        <translation type="unfinished"></translation>
+        <translation>文件下载文件夹：</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2988"/>
@@ -3816,12 +3817,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3219"/>
         <source>Unable to open voice message %1</source>
-        <translation type="unfinished"></translation>
+        <translation>不能打开语音消息%1</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3243"/>
         <source>%1: no such file or directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1：文件或文件夹不存在。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3253"/>
@@ -3849,7 +3850,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3454"/>
         <source>Do you want to delete saved chat with %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>是否要删除与 %1 的聊天？</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3487"/>
@@ -3864,7 +3865,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3644"/>
         <source>%1 updated</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 已上传</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3838"/>
@@ -3884,37 +3885,37 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3953"/>
         <source>your IP address</source>
-        <translation type="unfinished"></translation>
+        <translation>你的IP地址</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3954"/>
         <source>to search for users</source>
-        <translation type="unfinished"></translation>
+        <translation>搜索用户</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3957"/>
         <source>file transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>文件传输</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3964"/>
         <source>End-to-end encryption is disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>端到端加密已关闭</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3969"/>
         <source>End-to-end encryption is enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>端到端加密已开启</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3975"/>
         <source>Data compression is disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>禁用数据压缩</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3980"/>
         <source>Data compression is enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>启用数据压缩</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4447"/>
@@ -3950,7 +3951,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4783"/>
         <source>The download folder does not exists or is not writable. Please select a new one.</source>
-        <translation type="unfinished"></translation>
+        <translation>下载文件夹不存在或无法写入。请重新选择。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4844"/>
@@ -3970,22 +3971,22 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4915"/>
         <source>Restart connection now</source>
-        <translation type="unfinished"></translation>
+        <translation>立即重新连接</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4915"/>
         <source>Restart later manually</source>
-        <translation type="unfinished"></translation>
+        <translation>稍后手动重新启动</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4939"/>
         <source>You are not allowed create new message.</source>
-        <translation type="unfinished"></translation>
+        <translation>不允许创建新消息。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4982"/>
         <source>Do you really want to restore the colors to the default ones?</source>
-        <translation type="unfinished"></translation>
+        <translation>确认将颜色还原到默认颜色吗？</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="5127"/>
@@ -4194,17 +4195,17 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="1162"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3489"/>
         <source>Overwrite</source>
-        <translation>复写</translation>
+        <translation>覆盖</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2206"/>
         <source>Please select the number of days that partially downloaded files can remain cached.</source>
-        <translation type="unfinished"></translation>
+        <translation>请选择下载的文件可以保留缓存的天数。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3185"/>
         <source>There are no messages saved in the chat with %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>和 %1 的聊天没有保存任何消息。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3489"/>
@@ -4245,7 +4246,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3956"/>
         <source>chat messages</source>
-        <translation type="unfinished"></translation>
+        <translation>聊天消息</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4032"/>
@@ -4303,7 +4304,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1753"/>
         <source>(current: %1, default: %2, all: -1, none: 0)</source>
-        <translation type="unfinished"></translation>
+        <translation>（当前:%1,默认:%2,全部:-1,无:0）</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1931"/>
@@ -4343,12 +4344,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3327"/>
         <source>You are not allowed create groups.</source>
-        <translation type="unfinished"></translation>
+        <translation>不允许创建组。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3371"/>
         <source>You are not allowed modify groups.</source>
-        <translation type="unfinished"></translation>
+        <translation>不允许修改组。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3692"/>
@@ -4409,7 +4410,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMessageEdit.cpp" line="383"/>
         <source>Select all</source>
-        <translation type="unfinished"></translation>
+        <translation>全选</translation>
     </message>
     <message>
         <source>Select All</source>
@@ -4436,7 +4437,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="63"/>
         <source>Disabled</source>
-        <translation type="unfinished">关闭</translation>
+        <translation>关闭</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="69"/>
@@ -4474,74 +4475,74 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="36"/>
         <source>Test your network</source>
-        <translation type="unfinished"></translation>
+        <translation>测试你的网络</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="49"/>
         <source>Your network parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>你的网络参数</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="50"/>
         <source>IP Address</source>
-        <translation type="unfinished">IP地址</translation>
+        <translation>IP地址</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="51"/>
         <source>Message port</source>
-        <translation type="unfinished"></translation>
+        <translation>消息端口</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="52"/>
         <source>File transfer port</source>
-        <translation type="unfinished"></translation>
+        <translation>文件传输端口</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="53"/>
         <source>Enter the host address and the port you want to test.</source>
-        <translation type="unfinished"></translation>
+        <translation>输入主机地址和要测试的端口。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="68"/>
         <source>The host address entered is not valid.</source>
-        <translation type="unfinished"></translation>
+        <translation>输入的主机地址不存在。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="68"/>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="77"/>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="84"/>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>好的</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="77"/>
         <source>The port entered is not valid.</source>
-        <translation type="unfinished"></translation>
+        <translation>输入的端口无效。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="84"/>
         <source>It is not possible to perform the test if you are not connected to the BeeBEEP network.</source>
-        <translation type="unfinished"></translation>
+        <translation>如果未连接到 BeeBEEP 网络，则无法执行测试。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="97"/>
         <source>Connecting to %1</source>
-        <translation type="unfinished"></translation>
+        <translation>正在连接到 %1</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="123"/>
         <source>Connection to %1 is active.</source>
-        <translation type="unfinished"></translation>
+        <translation>已激活与 %1 的连接。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="135"/>
         <source>Connection to %1 has error #%2: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>与 %1 的连接有错误 #%2： %3</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="159"/>
         <source>Connection to %1 has been closed.</source>
-        <translation type="unfinished"></translation>
+        <translation>与 %1 的连接已关闭。</translation>
     </message>
 </context>
 <context>
@@ -4553,27 +4554,27 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.ui" line="78"/>
         <source>IP Address</source>
-        <translation type="unfinished">IP地址</translation>
+        <translation>IP地址</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.ui" line="116"/>
         <source>Port</source>
-        <translation type="unfinished">端口</translation>
+        <translation>端口</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.ui" line="160"/>
         <source>Test connection</source>
-        <translation type="unfinished"></translation>
+        <translation>测试连接</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.ui" line="216"/>
         <source>Clear report</source>
-        <translation type="unfinished"></translation>
+        <translation>清除结果</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.ui" line="242"/>
         <source>Close</source>
-        <translation type="unfinished">关闭</translation>
+        <translation>关闭关闭</translation>
     </message>
 </context>
 <context>
@@ -4591,12 +4592,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="266"/>
         <source>IP Multicast TTL</source>
-        <translation type="unfinished"></translation>
+        <translation>IP 多播 TTL</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="230"/>
         <source>(only for IPv4 multicast)</source>
-        <translation type="unfinished"></translation>
+        <translation>（仅适用于 IPv4 多播）</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="353"/>
@@ -4616,7 +4617,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="367"/>
         <source>Always broadcast to local subnet address</source>
-        <translation type="unfinished"></translation>
+        <translation>始终广播到本地子网地址</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="388"/>
@@ -4656,7 +4657,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="31"/>
         <source>UDP Port in beebeep.rc *</source>
-        <translation>UDP端口于beebeep.rc*</translation>
+        <translation>beebeep.rcUDP端口*</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="66"/>
@@ -4666,7 +4667,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="201"/>
         <source>Multicast group in beebeep.rc *</source>
-        <translation>广播组与于beebeep.rc*</translation>
+        <translation>beebeep.rc广播组*</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="104"/>
@@ -4838,98 +4839,98 @@ Please select a different name.</source>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="193"/>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="343"/>
         <source>Recording</source>
-        <translation type="unfinished"></translation>
+        <translation>正在录音</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="197"/>
         <source>Paused</source>
-        <translation type="unfinished"></translation>
+        <translation>已暂停</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="201"/>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>准备</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="37"/>
         <source>Record your voice message</source>
-        <translation type="unfinished"></translation>
+        <translation>录制语音消息</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="47"/>
         <source>Click to start recording your message</source>
-        <translation type="unfinished"></translation>
+        <translation>单击以开始录制消息</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="152"/>
         <source>Stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>已停止</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="152"/>
         <source>Reached the maximum duration of the voice message.</source>
-        <translation type="unfinished"></translation>
+        <translation>已达到语音消息的最长时间。</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="229"/>
         <source>Pause</source>
-        <translation type="unfinished"></translation>
+        <translation>暂停</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="234"/>
         <source>Resume</source>
-        <translation type="unfinished"></translation>
+        <translation>恢复</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="238"/>
         <source>Record</source>
-        <translation type="unfinished"></translation>
+        <translation>录音</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="257"/>
         <source>The message could not be recorded because an error has occurred: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>无法记录该消息，因为发生了错误： %1</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="266"/>
         <source>Do you want to start recording your voice message again?</source>
-        <translation type="unfinished"></translation>
+        <translation>是否要再次开始录制语音消息？</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="267"/>
         <source>Yes, clean and restart</source>
-        <translation type="unfinished"></translation>
+        <translation>是，清除并重启</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="267"/>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="275"/>
         <source>No device available for recording voice messages.</source>
-        <translation type="unfinished"></translation>
+        <translation>没有可用于录制语音消息的设备。</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="275"/>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>好的</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="279"/>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="308"/>
         <source>Please wait</source>
-        <translation type="unfinished">请等待</translation>
+        <translation>请稍等</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="333"/>
         <source>Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>音量</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="333"/>
         <source>muted</source>
-        <translation type="unfinished"></translation>
+        <translation>静音</translation>
     </message>
 </context>
 <context>
@@ -4937,32 +4938,32 @@ Please select a different name.</source>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="82"/>
         <source>Voice message</source>
-        <translation type="unfinished"></translation>
+        <translation>语音消息</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="134"/>
         <source>Record</source>
-        <translation type="unfinished"></translation>
+        <translation>录制</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="35"/>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="65"/>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>发送</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="180"/>
         <source>Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>音量</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="225"/>
         <source>To</source>
-        <translation type="unfinished">到</translation>
+        <translation>到</translation>
     </message>
 </context>
 <context>
@@ -4970,17 +4971,17 @@ Please select a different name.</source>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="36"/>
         <source>Voice encoder settings</source>
-        <translation type="unfinished"></translation>
+        <translation>语音录制设置</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="40"/>
         <source>Use custom encoder settings</source>
-        <translation type="unfinished"></translation>
+        <translation>使用自定义录音设置</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="40"/>
         <source>expert users only</source>
-        <translation type="unfinished"></translation>
+        <translation>仅限专家用户</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="59"/>
@@ -4990,7 +4991,7 @@ Please select a different name.</source>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="76"/>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="135"/>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>默认</translation>
     </message>
 </context>
 <context>
@@ -4998,82 +4999,82 @@ Please select a different name.</source>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="61"/>
         <source>Encoding mode</source>
-        <translation type="unfinished"></translation>
+        <translation>录音模式</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="83"/>
         <source>Constant bit rate</source>
-        <translation type="unfinished"></translation>
+        <translation>恒定比特率</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="90"/>
         <source>Average bit tate</source>
-        <translation type="unfinished"></translation>
+        <translation>平均 位率</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="104"/>
         <source>Constant quality</source>
-        <translation type="unfinished"></translation>
+        <translation>恒定质量</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="114"/>
         <source>Two pass</source>
-        <translation type="unfinished"></translation>
+        <translation>两次传递</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="207"/>
         <source>Voice message recorder</source>
-        <translation type="unfinished"></translation>
+        <translation>语音留言记录器</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="219"/>
         <source>Input device</source>
-        <translation type="unfinished"></translation>
+        <translation>输入设备</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="239"/>
         <source>Audio codec</source>
-        <translation type="unfinished"></translation>
+        <translation>音频编解码器</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="259"/>
         <source>File container</source>
-        <translation type="unfinished"></translation>
+        <translation>文件容器</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="279"/>
         <source>Sample rate</source>
-        <translation type="unfinished"></translation>
+        <translation>采样率</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="299"/>
         <source>Channels</source>
-        <translation type="unfinished"></translation>
+        <translation>频道</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="165"/>
         <source>Restore to system defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>还原到系统默认值</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="32"/>
         <source>Use system voice encoder</source>
-        <translation type="unfinished"></translation>
+        <translation>使用系统语音编码器</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="52"/>
         <source>Use custom settings</source>
-        <translation type="unfinished"></translation>
+        <translation>使用自定义设置</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="185"/>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>确认</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="192"/>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
 </context>
 <context>
@@ -5151,58 +5152,58 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="43"/>
         <source>Right click to open menu</source>
-        <translation type="unfinished"></translation>
+        <translation>右键打开菜单</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="60"/>
         <source>Show the toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>显示工具条</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="78"/>
         <source>Search</source>
-        <translation type="unfinished">搜索</translation>
+        <translation>搜索</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="83"/>
         <source>keyword</source>
-        <translation type="unfinished">关键字</translation>
+        <translation>关键字</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="89"/>
         <source>Find</source>
-        <translation type="unfinished">查找</translation>
+        <translation>查找</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="94"/>
         <source>Case sensitive</source>
-        <translation type="unfinished">区分大小写</translation>
+        <translation>区分大小写</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="99"/>
         <source>Whole word</source>
-        <translation type="unfinished">整个单词</translation>
+        <translation>整个单词</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="104"/>
         <source>Save as</source>
-        <translation type="unfinished"></translation>
+        <translation>另存为</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="108"/>
         <source>Clear messages</source>
-        <translation type="unfinished">清除消息</translation>
+        <translation>清除消息</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="115"/>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="123"/>
         <source>Saved chat</source>
-        <translation type="unfinished"></translation>
+        <translation>保存聊天</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="123"/>
         <source>end of messages</source>
-        <translation type="unfinished"></translation>
+        <translation>消息结尾</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="141"/>
@@ -5212,18 +5213,18 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="204"/>
         <source>%1 not found</source>
-        <translation type="unfinished">%1未找到</translation>
+        <translation>%1未找到</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="204"/>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="226"/>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>确认</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="213"/>
         <source>Please select a file where to save the messages showed in this window.</source>
-        <translation type="unfinished"></translation>
+        <translation>请选择一个文件以保存所有的聊天消息。</translation>
     </message>
     <message>
         <source>Please select a file to save the messages of the chat.</source>
@@ -5232,7 +5233,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="226"/>
         <source>%1: save completed.</source>
-        <translation type="unfinished">%1：保存完成。</translation>
+        <translation>%1：保存完成。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="106"/>
@@ -5402,22 +5403,22 @@ Please select a different name.</source>
     <message>
         <location filename="../src/gui/GuiSelectItems.cpp" line="65"/>
         <source>One or more elements of the list have been selected but are hidden by the search text. Do you still want to add them?</source>
-        <translation type="unfinished"></translation>
+        <translation>已选择列表的一个或多个元素，但搜索文本将隐藏。您仍要添加它们吗？</translation>
     </message>
     <message>
         <location filename="../src/gui/GuiSelectItems.cpp" line="66"/>
         <source>Yes</source>
-        <translation type="unfinished">是</translation>
+        <translation>是</translation>
     </message>
     <message>
         <location filename="../src/gui/GuiSelectItems.cpp" line="66"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>否</translation>
     </message>
     <message>
         <location filename="../src/gui/GuiSelectItems.cpp" line="66"/>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
 </context>
 <context>
@@ -5425,12 +5426,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/gui/GuiSelectItems.ui" line="48"/>
         <source>Search</source>
-        <translation type="unfinished">搜索</translation>
+        <translation>搜索</translation>
     </message>
     <message>
         <location filename="../src/gui/GuiSelectItems.ui" line="61"/>
         <source>Clear filter</source>
-        <translation type="unfinished"></translation>
+        <translation>清除条件</translation>
     </message>
     <message>
         <location filename="../src/gui/GuiSelectItems.ui" line="92"/>
@@ -5491,32 +5492,32 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="67"/>
         <source>Update your BeeBOX</source>
-        <translation type="unfinished"></translation>
+        <translation>更新你的BeeBox</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="68"/>
         <source>Create folder in your BeeBOX</source>
-        <translation type="unfinished"></translation>
+        <translation>在 BeeBOX 中创建文件夹</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="70"/>
         <source>Update BeeBOX</source>
-        <translation type="unfinished"></translation>
+        <translation>更新BeeBox</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="72"/>
         <source>Create folder in BeeBOX</source>
-        <translation type="unfinished"></translation>
+        <translation>在 BeeBOX 中创建文件夹</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="121"/>
         <source>BeeBOX path does not exist. Please select a valid folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>BeeBox路径不存在，请选择有效的路径。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="134"/>
         <source>%1 - Select the BeeBOX folder</source>
-        <translation type="unfinished"></translation>
+        <translation>%1-选择BeeBOX文件夹</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="438"/>
@@ -5592,7 +5593,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiShareBox.ui" line="168"/>
         <source>Enable my BeeBOX</source>
-        <translation type="unfinished"></translation>
+        <translation>打开我的BeeBox</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.ui" line="193"/>
@@ -6081,47 +6082,47 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="543"/>
         <source>You cannot send files to the workgroup &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>您不能将文件发送到工作组&quot;%1&quot;。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="551"/>
         <source>You cannot send files to %1 because the user is offline.</source>
-        <translation type="unfinished"></translation>
+        <translation>不能将文件发送给 %1，因为用户处于离线状态。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="586"/>
         <source>You are trying to send %1 files simultaneously but the maximum allowed is %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>您尝试同时发送 %1 个文件，但允许的最大数量 %2。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="587"/>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>好的</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="595"/>
         <source>Do you want to send %1 %2 to %3?</source>
-        <translation type="unfinished"></translation>
+        <translation>是否要发送 %1 %2 给 %3？</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="596"/>
         <source>file</source>
-        <translation type="unfinished">文件</translation>
+        <translation>文件</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="596"/>
         <source>files</source>
-        <translation type="unfinished">文件</translation>
+        <translation>文件</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="597"/>
         <source>Yes</source>
-        <translation type="unfinished">是</translation>
+        <translation>是</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="597"/>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>否</translation>
     </message>
     <message>
         <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
@@ -6156,7 +6157,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="78"/>
         <source>from %1</source>
-        <translation type="unfinished"></translation>
+        <translation>来自%1</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="90"/>
@@ -6166,7 +6167,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="92"/>
         <source>d MMMM yyyy</source>
-        <translation type="unfinished"></translation>
+        <translation>d MMMM yyyy</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="94"/>
@@ -6176,17 +6177,17 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="125"/>
         <source>none</source>
-        <translation type="unfinished">无</translation>
+        <translation>无</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="128"/>
         <source>Workgroups</source>
-        <translation type="unfinished">工作群组</translation>
+        <translation>工作组</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="133"/>
         <source>No shared information.</source>
-        <translation type="unfinished"></translation>
+        <translation>没有共享信息。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="139"/>
@@ -6201,7 +6202,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="150"/>
         <source>BeeBEEP version</source>
-        <translation type="unfinished"></translation>
+        <translation>BeeBEEP版本</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="181"/>
@@ -6294,7 +6295,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="476"/>
         <source>Information to display to other users</source>
-        <translation type="unfinished"></translation>
+        <translation>向其他用户显示的信息</translation>
     </message>
     <message>
         <source>Informations to display to other users</source>
@@ -6356,7 +6357,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiVCard.ui" line="406"/>
         <source>Workgroups</source>
-        <translation type="unfinished">工作群组</translation>
+        <translation>工作组</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.ui" line="505"/>
@@ -6434,7 +6435,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiWizard.cpp" line="46"/>
         <source>Press ok to continue or change your username.</source>
-        <translation type="unfinished"></translation>
+        <translation>按&quot;确定&quot;以继续或更改您的用户名。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWizard.cpp" line="67"/>
@@ -6485,7 +6486,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="73"/>
         <source>Right click to open menu</source>
-        <translation type="unfinished"></translation>
+        <translation>右键打开菜单</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="105"/>
@@ -6500,17 +6501,17 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="149"/>
         <source>Don&apos;t you want to be part of these workgroups anymore?</source>
-        <translation type="unfinished"></translation>
+        <translation>你不想再成为这些工作组的一员了吗？</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="150"/>
         <source>Yes, remove me</source>
-        <translation type="unfinished"></translation>
+        <translation>是的，删除我</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="150"/>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -6524,7 +6525,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="36"/>
         <source>Your workgroups</source>
-        <translation type="unfinished"></translation>
+        <translation>你的工作组</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="141"/>
@@ -6599,7 +6600,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiChatItem.cpp" line="128"/>
         <source>unsent messages</source>
-        <translation type="unfinished"></translation>
+        <translation>未发送消息</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="86"/>
@@ -6614,7 +6615,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiUserItem.cpp" line="35"/>
         <source>others</source>
-        <translation type="unfinished"></translation>
+        <translation>其他</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserItem.cpp" line="162"/>
@@ -6647,23 +6648,23 @@ Please select a different name.</source>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="716"/>
         <source>Workgroups</source>
-        <translation type="unfinished">工作群组</translation>
+        <translation>工作组</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="726"/>
         <source>Last update</source>
-        <translation type="unfinished"></translation>
+        <translation>最近更新</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="731"/>
         <source>Last connection</source>
-        <translation type="unfinished"></translation>
+        <translation>最后一次连接</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/utils/BeeUtils.cpp" line="735"/>
         <source>%n unsent message(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n 未发送消息</numerusform>
         </translation>
     </message>
     <message>
@@ -6785,82 +6786,82 @@ Please select a different name.</source>
     <message>
         <location filename="../src/core/ConnectionSocket.cpp" line="610"/>
         <source>The connection to %1 was not successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>与 %1 连接失败。</translation>
     </message>
     <message>
         <location filename="../src/core/ConnectionSocket.cpp" line="702"/>
         <source>The tested network address %1 is not present among the available addresses of the network interface to which the connection has been made.</source>
-        <translation type="unfinished"></translation>
+        <translation>已连接到的网络接口的可用地址中不存在经过测试的网络地址 %1。</translation>
     </message>
     <message>
         <location filename="../src/core/ConnectionSocket.cpp" line="705"/>
         <source>The connection to host address %1 was successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>与主机地址 %1 连接成功。</translation>
     </message>
     <message>
         <location filename="../src/core/ConnectionSocket.cpp" line="711"/>
         <source>The port tested by the connection is %1 but the one that answered is %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>连接测试的端口为 %1，但应答的端口为 %2。</translation>
     </message>
     <message>
         <location filename="../src/core/ConnectionSocket.cpp" line="715"/>
         <source>The connection to port %1 was successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>与端口 %1 连接成功。</translation>
     </message>
     <message>
         <location filename="../src/core/ConnectionSocket.cpp" line="723"/>
         <source>Unable to complete the test with an invalid network address.</source>
-        <translation type="unfinished"></translation>
+        <translation>不能使用无效的网络地址测试。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="70"/>
         <source>Downloading</source>
-        <translation type="unfinished">下载中</translation>
+        <translation>下载中</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="70"/>
         <source>Uploading</source>
-        <translation type="unfinished">上传中</translation>
+        <translation>上传中</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="117"/>
         <source>In queue</source>
-        <translation type="unfinished"></translation>
+        <translation>在队列中</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="123"/>
         <source>Starting</source>
-        <translation type="unfinished">正在启动</translation>
+        <translation>正在启动</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="129"/>
         <source>Cancel transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>取消传输</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="135"/>
         <source>Completed</source>
-        <translation type="unfinished">已完成</translation>
+        <translation>已完成</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="141"/>
         <source>Not completed</source>
-        <translation type="unfinished"></translation>
+        <translation>未完成</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="147"/>
         <source>Canceled</source>
-        <translation type="unfinished"></translation>
+        <translation>取消</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="153"/>
         <source>Please wait</source>
-        <translation type="unfinished">请等待</translation>
+        <translation>请稍等</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="159"/>
         <source>Resume transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>恢复传输</translation>
     </message>
 </context>
 <context>
@@ -6942,7 +6943,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="77"/>
         <source>available</source>
-        <translation>有空</translation>
+        <translation>在线</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="78"/>
