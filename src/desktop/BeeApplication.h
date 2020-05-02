@@ -57,8 +57,6 @@ public:
   void addJob( QObject* );
   void removeJob( QObject* );
 
-  static void quitAfterSignal( int );
-
   void forceSleep();
   inline bool isInSleepMode() const;
   void wakeFromSleep();
@@ -105,6 +103,9 @@ protected slots:
   void removeIdle();
   void slotConnectionEstablished();
   void onFileChanged( const QString& );
+#if QT_VERSION >= 0x050200
+  void onApplicationStateChanged( Qt::ApplicationState );
+#endif
 
 private:
   static BeeApplication* mp_instance;

@@ -37,6 +37,29 @@
 
 BeeApplication *BeeApplication::mp_instance = Q_NULLPTR;
 
+static void QuitAfterSignal( int sig )
+{
+  qWarning() << "Signal" << sig << "received by system";
+  if( beeApp )
+    beeApp->forceShutdown();
+}
+
+#ifdef Q_OS_LINUX
+static void SleepAfterSignal( int sig )
+{
+  qWarning() << "Signal" << sig << "received by system";
+  if( beeApp )
+    beeApp->forceSleep();
+}
+
+static void WakeAfterSignal( int sig )
+{
+  qWarning() << "Signal" << sig << "received by system";
+  if( beeApp )
+    beeApp->wakeFromSleep();
+}
+#endif
+
 
 BeeApplication::BeeApplication( int& argc, char** argv  )
   : QApplication( argc, argv )
@@ -66,16 +89,22 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
   m_settingsFilePath = "";
   connect( mp_fsWatcher, SIGNAL( fileChanged( const QString& ) ), this, SLOT( onFileChanged( const QString& ) ) );
 
+#if QT_VERSION >= 0x050200
+  connect( this, SIGNAL( applicationStateChanged( Qt::ApplicationState ) ), this, SLOT( onApplicationStateChanged( Qt::ApplicationState ) ) );
+#endif
+
 #ifdef Q_OS_LINUX
   m_xcbConnectHasError = true;
   if( testAttribute( Qt::AA_DontShowIconsInMenus ) )
     setAttribute( Qt::AA_DontShowIconsInMenus, false );
+  signal( SIGTSTP, &SleepAfterSignal );
+  signal( SIGCONT, &WakeAfterSignal );
 #endif
   addSleepWatcher();
 
-  signal( SIGINT, &quitAfterSignal );
-  signal( SIGTERM, &quitAfterSignal );
-  signal( SIGABRT, &quitAfterSignal );
+  signal( SIGINT, &QuitAfterSignal );
+  signal( SIGTERM, &QuitAfterSignal );
+  signal( SIGABRT, &QuitAfterSignal );
 }
 
 BeeApplication::~BeeApplication()
@@ -130,12 +159,6 @@ void BeeApplication::forceShutdown()
   quit();
 }
 
-void BeeApplication::quitAfterSignal( int sig )
-{
-  qWarning() << "Signal" << sig << "received by system";
-  if( beeApp )
-    beeApp->forceShutdown();
-}
 
 void BeeApplication::init()
 {
@@ -161,6 +184,8 @@ void BeeApplication::forceSleep()
 
 void BeeApplication::wakeFromSleep()
 {
+  if( !m_isInSleepMode )
+    return;
   qDebug() << "System wakes up from sleep...";
   m_isInSleepMode = false;
   emit wakeUpRequest();
@@ -439,3 +464,11 @@ void BeeApplication::onFileChanged( const QString& file_path )
   if( file_path == m_settingsFilePath )
     qWarning() << "Settings file changed: please edit the settings file only if BeeBEEP is closed or changes will be lost";
 }
+
+#if QT_VERSION >= 0x050200
+void BeeApplication::onApplicationStateChanged( Qt::ApplicationState state )
+{
+  if( state == Qt::ApplicationSuspended )
+    forceSleep();
+}
+#endif
