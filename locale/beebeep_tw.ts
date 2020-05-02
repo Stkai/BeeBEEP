@@ -455,7 +455,7 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="377"/>
         <source>%1 Unable to send %2 to %3: file extension &apos;%4&apos; is not allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 無法將 %2 傳送到 %3: 不允許檔案副檔名「%4」。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="384"/>
@@ -540,7 +540,7 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="781"/>
         <source>the folder is empty or contains only files that are not allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>資料夾為空或只有不允許的檔案。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="788"/>
@@ -570,7 +570,7 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="115"/>
         <source>%1 Unable to download %2 from %3: file extension &apos;%4&apos; is not allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 無法從 %3 下載 %2: 不允許檔案副檔名「%4」。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="179"/>
@@ -764,18 +764,18 @@
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="50"/>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished"></translation>
+        <translation>yyyy-MM-dd</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="57"/>
         <source>h:mm:ss ap</source>
-        <translation type="unfinished"></translation>
+        <translation>h:mm:ss ap</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="60"/>
         <source>hh:mm:ss</source>
         <extracomment>default time format in chat message</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>hh:mm:ss</translation>
     </message>
 </context>
 <context>
@@ -857,7 +857,7 @@
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="188"/>
         <source>Transfer skipped</source>
-        <translation type="unfinished"></translation>
+        <translation>傳輸已略過</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="205"/>
@@ -1852,31 +1852,19 @@ Please select a different name.</source>
         <translation>顯示網路共用檔案</translation>
     </message>
     <message>
-        <source>Share your folders or files</source>
-        <translation type="obsolete">共用您的檔案或資料夾</translation>
-    </message>
-    <message>
-        <source>max &lt;b&gt;%1&lt;/b&gt; files</source>
-        <translation type="obsolete">最大 &lt;b&gt;%1&lt;/b&gt; 個檔案</translation>
-    </message>
-    <message>
-        <source>disabled</source>
-        <translation type="obsolete">已停用</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="352"/>
         <source>Allowed file extensions</source>
-        <translation type="unfinished"></translation>
+        <translation>允許的檔案副檔名</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="173"/>
         <source>Show the bar of local file sharing</source>
-        <translation>顯示本機共用列</translation>
+        <translation>顯示本機檔案共用列</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="163"/>
         <source>Only certain types of files are allowed for file transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>只允許某些類型的檔案進行檔案傳輸</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="186"/>
@@ -1896,23 +1884,23 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
         <source>File transfer has no rules on file extensions.</source>
-        <translation type="unfinished"></translation>
+        <translation>檔案傳輸沒有檔案副檔名的規則。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
         <source>All types of files can be sent and received.</source>
-        <translation type="unfinished"></translation>
+        <translation>所有類型的檔案都可以傳送和接收。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="356"/>
         <source>Ok</source>
-        <translation type="unfinished">確定</translation>
+        <translation>確定</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="356"/>
         <source>Only files with this type of extension can be transferred:</source>
-        <translation type="unfinished"></translation>
+        <translation>只能傳輸具有此類副檔名的檔案:</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="260"/>
@@ -2574,10 +2562,6 @@ Please select a different name.</source>
         <translation>如果檔案已存在</translation>
     </message>
     <message>
-        <source>Generate automatic filename</source>
-        <translation type="vanished">自動產生檔案名稱</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1132"/>
         <source>Enable file transfer</source>
         <translation>啟用檔案傳輸</translation>
@@ -2729,10 +2713,6 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="1202"/>
         <source>Use native file dialogs</source>
         <translation>使用原生檔案對話方塊</translation>
-    </message>
-    <message>
-        <source>Ask me</source>
-        <translation type="vanished">詢問我</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1232"/>
@@ -3033,7 +3013,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1126"/>
         <source>Blocked chats</source>
-        <translation>已封鎖聊天</translation>
+        <translation>封鎖的聊天</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="891"/>
@@ -3388,27 +3368,27 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1014"/>
         <source>Show surname before firstname of the users</source>
-        <translation type="unfinished"></translation>
+        <translation>將姓氏顯示在使用者的名字之前</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1153"/>
         <source>Generate new file name</source>
-        <translation type="unfinished"></translation>
+        <translation>產生新檔案名稱</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1158"/>
         <source>Skip</source>
-        <translation type="unfinished"></translation>
+        <translation>略過</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1166"/>
         <source>Overwrite older</source>
-        <translation type="unfinished"></translation>
+        <translation>覆寫較舊的</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1180"/>
         <source>Keep the original modification date of the transferred file</source>
-        <translation type="unfinished"></translation>
+        <translation>保留傳輸檔案的原始修改日期</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1184"/>
@@ -3663,10 +3643,6 @@ Please select a different name.</source>
         <translation>是且不再詢問</translation>
     </message>
     <message>
-        <source>%1 already exists. Please select a new filename.</source>
-        <translation type="vanished">%1 已經存在，請選取新的檔案名稱。</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2773"/>
         <source>You cannot download all these files at once. Do you want to download the first %1 files of the list?</source>
         <translation>您不能一次下載所有這些檔案。 要下載清單的前 %1 個檔案嗎?</translation>
@@ -3727,17 +3703,9 @@ Please select a different name.</source>
         <translation>音效模組未動作</translation>
     </message>
     <message>
-        <source>You are not allowed create groups. The option has been disabled by your system administrator.</source>
-        <translation type="vanished">不允許建立群組。 系統管理員已停用選項。</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3349"/>
         <source>There is a chat with the same members: %1.</source>
         <translation>與相同的成員聊天: %1。</translation>
-    </message>
-    <message>
-        <source>You are not allowed modify groups. The option has been disabled by your system administrator.</source>
-        <translation type="vanished">不允許修改群組。 系統管理員已停用選項。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3454"/>
@@ -3843,7 +3811,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4783"/>
         <source>The download folder does not exists or is not writable. Please select a new one.</source>
-        <translation type="unfinished"></translation>
+        <translation>下載資料夾不存在或無法寫入。 請選擇一個新的。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4844"/>
@@ -3873,7 +3841,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4939"/>
         <source>You are not allowed create new message.</source>
-        <translation type="unfinished"></translation>
+        <translation>您不允許建立新訊息。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4982"/>
@@ -4232,12 +4200,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3327"/>
         <source>You are not allowed create groups.</source>
-        <translation type="unfinished"></translation>
+        <translation>您不允許建立群組。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3371"/>
         <source>You are not allowed modify groups.</source>
-        <translation type="unfinished"></translation>
+        <translation>您不允許修改群組。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3692"/>
@@ -4321,7 +4289,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="63"/>
         <source>Disabled</source>
-        <translation type="unfinished">已停用</translation>
+        <translation>已停用</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="69"/>
@@ -4962,7 +4930,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiRefusedChat.cpp" line="35"/>
         <source>Blocked chats</source>
-        <translation>已封鎖聊天</translation>
+        <translation>封鎖的聊天</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiRefusedChat.cpp" line="41"/>
@@ -4972,7 +4940,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiRefusedChat.cpp" line="41"/>
         <source>Blocked chat ID</source>
-        <translation>封鎖聊天 ID</translation>
+        <translation>封鎖的聊天 ID</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiRefusedChat.cpp" line="59"/>
@@ -5944,7 +5912,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="92"/>
         <source>d MMMM yyyy</source>
-        <translation type="unfinished"></translation>
+        <translation>d MMMM yyyy</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="94"/>
@@ -6372,7 +6340,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiUserItem.cpp" line="184"/>
         <source>Click to open chat with all local users</source>
-        <translation>按一下與所有本地使用者開啟聊天</translation>
+        <translation>按一下與所有本機使用者開啟聊天</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="698"/>
