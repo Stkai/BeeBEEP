@@ -482,7 +482,7 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="115"/>
         <source>%1 Unable to download %2 from %3: file extension &apos;%4&apos; is not allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Kan %2 niet downloaden van%3: bestandsextensie %4 is niet toegestaan.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="146"/>
@@ -564,7 +564,7 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="377"/>
         <source>%1 Unable to send %2 to %3: file extension &apos;%4&apos; is not allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Kan %2 niet verzenden naar %3: bestandsextensie %4 is niet toegestaan.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="391"/>
@@ -614,7 +614,7 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="781"/>
         <source>the folder is empty or contains only files that are not allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>de map is leeg of bevat alleen bestanden die niet zijn toegestaan.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="788"/>
@@ -833,18 +833,18 @@
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="50"/>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="57"/>
         <source>h:mm:ss ap</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="60"/>
         <source>hh:mm:ss</source>
         <extracomment>default time format in chat message</extracomment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -930,7 +930,7 @@
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="188"/>
         <source>Transfer skipped</source>
-        <translation type="unfinished"></translation>
+        <translation>Overdracht overgeslagen</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="205"/>
@@ -1964,7 +1964,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="352"/>
         <source>Allowed file extensions</source>
-        <translation type="unfinished"></translation>
+        <translation>Toegestane bestandsextensie</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="277"/>
@@ -1974,7 +1974,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="163"/>
         <source>Only certain types of files are allowed for file transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Alleen bepaalde bestandstypes zijn toegestaan voor bestandsoverdracht</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="293"/>
@@ -1984,23 +1984,23 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
         <source>File transfer has no rules on file extensions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestandsoverdracht heeft geen regels voor bestandsextensie.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
         <source>All types of files can be sent and received.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle bestandstypen worden verzonden en ontvangen.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="356"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="356"/>
         <source>Only files with this type of extension can be transferred:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alleen bepaalde bestandstypen kan worden verzonden:</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="260"/>
@@ -2910,27 +2910,27 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1014"/>
         <source>Show surname before firstname of the users</source>
-        <translation type="unfinished"></translation>
+        <translation>Toon achternaam eerst dan voornaam van de gebruikers</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1153"/>
         <source>Generate new file name</source>
-        <translation type="unfinished"></translation>
+        <translation>Genereer nieuw bestandsnaam</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1158"/>
         <source>Skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Overslaan</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1166"/>
         <source>Overwrite older</source>
-        <translation type="unfinished"></translation>
+        <translation>Overschrijf ouder</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1180"/>
         <source>Keep the original modification date of the transferred file</source>
-        <translation type="unfinished"></translation>
+        <translation>Hou de orginele datum van de overdrachtsbestand</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1184"/>
@@ -2996,12 +2996,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3327"/>
         <source>You are not allowed create groups.</source>
-        <translation type="unfinished"></translation>
+        <translation>Je mag geen groepen aanmaken.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3371"/>
         <source>You are not allowed modify groups.</source>
-        <translation type="unfinished"></translation>
+        <translation>Je mag de groepen niet veranderen.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3758"/>
@@ -4004,7 +4004,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4783"/>
         <source>The download folder does not exists or is not writable. Please select a new one.</source>
-        <translation type="unfinished"></translation>
+        <translation>De downloadmap bestaat niet of is niet beschrijfbaar. Selecteer een nieuwe.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4844"/>
@@ -4034,7 +4034,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4939"/>
         <source>You are not allowed create new message.</source>
-        <translation type="unfinished"></translation>
+        <translation>Je mag geen nieuwe berichten aanmaken.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4982"/>
@@ -4531,7 +4531,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="63"/>
         <source>Disabled</source>
-        <translation type="unfinished">Uitgeschakeld</translation>
+        <translation>Uitgeschakeld</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="69"/>
@@ -6310,7 +6310,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="92"/>
         <source>d MMMM yyyy</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="94"/>
