@@ -89,6 +89,12 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
   m_settingsFilePath = "";
   connect( mp_fsWatcher, SIGNAL( fileChanged( const QString& ) ), this, SLOT( onFileChanged( const QString& ) ) );
 
+  mp_networkConfigurationManager = new QNetworkConfigurationManager;
+  connect( mp_networkConfigurationManager, SIGNAL( configurationAdded( const QNetworkConfiguration& ) ), this, SLOT( onNetworkConfigurationAdded( const QNetworkConfiguration& ) ) );
+  connect( mp_networkConfigurationManager, SIGNAL( configurationChanged( const QNetworkConfiguration& ) ), this, SLOT( onNetworkConfigurationChanged( const QNetworkConfiguration& ) ) );
+  connect( mp_networkConfigurationManager, SIGNAL( configurationRemoved( const QNetworkConfiguration& ) ), this, SLOT( onNetworkConfigurationRemoved( const QNetworkConfiguration& ) ) );
+  connect( mp_networkConfigurationManager, SIGNAL( onlineStateChanged( bool ) ), this, SLOT( onNetworkMagnagerOnlineStateChanged( bool ) ) );
+
 #if QT_VERSION >= 0x050200
   connect( this, SIGNAL( applicationStateChanged( Qt::ApplicationState ) ), this, SLOT( onApplicationStateChanged( Qt::ApplicationState ) ) );
 #endif
@@ -120,6 +126,7 @@ BeeApplication::~BeeApplication()
 
   clearPathsInFsWatcher();
   delete mp_fsWatcher;
+  delete mp_networkConfigurationManager;
 
   if( mp_instance )
     mp_instance = Q_NULLPTR;
@@ -147,7 +154,7 @@ void BeeApplication::clearPathsInFsWatcher()
   QStringList sl_paths = mp_fsWatcher->directories();
   if( !sl_paths.isEmpty() )
     mp_fsWatcher->removePaths( sl_paths );
-  sl_paths =  mp_fsWatcher->files();
+  sl_paths = mp_fsWatcher->files();
   if( !sl_paths.isEmpty() )
     mp_fsWatcher->removePaths( sl_paths );
 }
@@ -169,6 +176,8 @@ void BeeApplication::init()
   connect( mp_tickManager, SIGNAL( tickEvent( int ) ), this, SLOT( checkTicks( int ) ) );
   addJob( mp_tickManager );
   QMetaObject::invokeMethod( mp_tickManager, "startTicks", Qt::QueuedConnection );
+  qDebug() << "Network configuration manager is starting";
+  QMetaObject::invokeMethod( mp_networkConfigurationManager, "updateConfigurations", Qt::QueuedConnection );
 }
 
 void BeeApplication::forceSleep()
@@ -472,3 +481,30 @@ void BeeApplication::onApplicationStateChanged( Qt::ApplicationState state )
     forceSleep();
 }
 #endif
+
+void BeeApplication::onNetworkConfigurationAdded( const QNetworkConfiguration& net_conf )
+{
+  qDebug() << "Network configuration is added:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() );
+  onNetworkConfigurationChanged( net_conf );
+}
+
+void BeeApplication::onNetworkConfigurationChanged( const QNetworkConfiguration& net_conf )
+{
+  qDebug() << "Checking network configuration:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() );
+}
+
+void BeeApplication::onNetworkConfigurationRemoved( const QNetworkConfiguration& net_conf )
+{
+  qDebug() << "Network configuration is added:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() );
+  onNetworkConfigurationChanged( net_conf );
+}
+
+void BeeApplication::onNetworkMagnagerOnlineStateChanged( bool is_online )
+{
+  qDebug() << "Network configuration manager is now" << (is_online ? "online" : "offline");
+  if( is_online )
+    wakeFromSleep();
+  else
+    forceSleep();
+}
+

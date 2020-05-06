@@ -106,6 +106,10 @@ protected slots:
 #if QT_VERSION >= 0x050200
   void onApplicationStateChanged( Qt::ApplicationState );
 #endif
+  void onNetworkConfigurationAdded( const QNetworkConfiguration& );
+  void onNetworkConfigurationChanged( const QNetworkConfiguration& );
+  void onNetworkConfigurationRemoved( const QNetworkConfiguration& );
+  void onNetworkMagnagerOnlineStateChanged( bool );
 
 private:
   static BeeApplication* mp_instance;
@@ -136,6 +140,8 @@ private:
   QString m_settingsFilePath;
 
   QObject* mp_sleepWatcher;
+
+  QNetworkConfigurationManager* mp_networkConfigurationManager;
 
 };
 

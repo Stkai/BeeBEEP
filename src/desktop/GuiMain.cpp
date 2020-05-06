@@ -4455,6 +4455,9 @@ void GuiMain::onTickEvent( int ticks )
     gsd->onTickEvent( ticks );
 #endif
 
+  if( beeApp->isInSleepMode() )
+    return;
+
   if( !m_coreIsConnecting )
   {
     if( Bee::isTimeToCheck( ticks, Settings::instance().tickIntervalCheckIdle() ) )

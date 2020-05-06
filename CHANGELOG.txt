@@ -12,6 +12,7 @@ BeeBEEP 5.8.3 (in development)
 - Fixed a visualization bug if you open an user VCARD near the side of your desktop
 - Added "AllowedFileExtensionsInFileTransfer" option in beebeep.rc
 - Fixed a bug on Download folder when you copy BeeBEEP from a computer to another one
+- Suspend/sleep mode is now managed also in Linux systems.
 
 BeeBEEP 5.8.2
 - New feature: voice messages (you can record your message and send it as file)
