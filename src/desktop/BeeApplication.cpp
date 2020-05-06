@@ -87,7 +87,7 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
 
   mp_fsWatcher = new QFileSystemWatcher;
   m_settingsFilePath = "";
-  connect( mp_fsWatcher, SIGNAL( fileChanged( const QString& ) ), this, SLOT( onFileChanged( const QString& ) ) );
+  //connect( mp_fsWatcher, SIGNAL( fileChanged( const QString& ) ), this, SLOT( onFileChanged( const QString& ) ) );
 
   mp_networkConfigurationManager = new QNetworkConfigurationManager;
   connect( mp_networkConfigurationManager, SIGNAL( configurationAdded( const QNetworkConfiguration& ) ), this, SLOT( onNetworkConfigurationAdded( const QNetworkConfiguration& ) ) );
@@ -484,24 +484,32 @@ void BeeApplication::onApplicationStateChanged( Qt::ApplicationState state )
 
 void BeeApplication::onNetworkConfigurationAdded( const QNetworkConfiguration& net_conf )
 {
-  qDebug() << "Network configuration is added:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() );
+  qDebug() << "Network configuration is added:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() ) << "-" << qPrintable( net_conf.bearerTypeName() );
   onNetworkConfigurationChanged( net_conf );
 }
 
 void BeeApplication::onNetworkConfigurationChanged( const QNetworkConfiguration& net_conf )
 {
-  qDebug() << "Checking network configuration:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() );
+  if( !net_conf.isValid() )
+  {
+    qWarning() << "Network configuration" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() ) << "is not valid";
+    return;
+  }
+  qDebug() << "Checking network configuration:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() )
+           << "- state:" << net_conf.state()
+           << "- bearer:" << qPrintable( net_conf.bearerTypeName() ) << net_conf.bearerType() << net_conf.bearerTypeFamily()
+           << "- purpose:" << net_conf.purpose()
+           << "- type:" << net_conf.type();
 }
 
 void BeeApplication::onNetworkConfigurationRemoved( const QNetworkConfiguration& net_conf )
 {
-  qDebug() << "Network configuration is added:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() );
-  onNetworkConfigurationChanged( net_conf );
+  qDebug() << "Network configuration is removed:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() ) << "-" << qPrintable( net_conf.bearerTypeName() );
 }
 
 void BeeApplication::onNetworkMagnagerOnlineStateChanged( bool is_online )
 {
-  qDebug() << "Network configuration manager is now" << (is_online ? "online" : "offline");
+  qDebug() << "Network configuration manager has changed state to" << (is_online ? "online" : "offline");
   if( is_online )
     wakeFromSleep();
   else

@@ -115,8 +115,8 @@ int main( int argc, char *argv[] )
   Settings::instance().setDefaultFolders();
   Settings::instance().loadRcFile();
   Settings::instance().setDataFolder();
-  qDebug() << "Settings path:" << qPrintable( Settings::instance().currentSettingsFilePath() );
   Settings::instance().createLocalUser( "" );
+  qDebug() << "Settings path:" << qPrintable( Settings::instance().currentSettingsFilePath() );
   Settings::instance().load();
   Settings::instance().createApplicationUuid();
   Log::instance().setMaxLogLines( Settings::instance().maxLogLines() );

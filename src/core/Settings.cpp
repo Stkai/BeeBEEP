@@ -430,10 +430,10 @@ void Settings::createLocalUser( const QString& user_name )
   m_localUser.setHash( Settings::instance().createLocalUserHash() );
   m_localUser.setLocalHostName( QHostInfo::localHostName() );
 
-  qDebug() << "User name:" << qPrintable( m_localUser.name() );
-  qDebug() << "System account:" << qPrintable( m_localUser.accountName() );
-  qDebug() << "Local domain name:" << qPrintable( m_localUser.domainName() );
-  qDebug() << "Local host name:" << qPrintable( m_localUser.localHostName() );
+  qDebug() << "System - user name:" << qPrintable( m_localUser.name() );
+  qDebug() << "System - account:" << qPrintable( m_localUser.accountName() );
+  qDebug() << "System - domain name:" << qPrintable( m_localUser.domainName() );
+  qDebug() << "System - host name:" << qPrintable( m_localUser.localHostName() );
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Local user hash:" << qPrintable( m_localUser.hash() );
 #endif
@@ -678,8 +678,7 @@ void Settings::loadRcFile()
   }
   if( !m_allowedFileExtensionsInFileTransfer.isEmpty() )
     qWarning() << "File transfer allows only these extensions:" << qPrintable( m_allowedFileExtensionsInFileTransfer.join( ", " ).toUpper() );
-
-  sets->deleteLater();
+  delete sets;
 }
 
 bool Settings::createDefaultHostsFile()
@@ -1048,7 +1047,7 @@ void Settings::loadBroadcastAddressesFromFileHosts()
   QString hosts_file_path = defaultHostsFilePath();
   if( hosts_file_path.isNull() )
   {
-    qDebug() << "HOSTS file not found";
+    qDebug() << "File beehosts.ini not found";
     return;
   }
 
@@ -1152,13 +1151,13 @@ QSettings* Settings::objectSettings() const
 
   if( !sets->isWritable() )
     qWarning() << sets->fileName() << "is not a writable path. Settings cannot be saved.";
-
+  // remember to delete it
   return sets;
 }
 
 void Settings::load()
 {
-  qDebug() << "Creating local user and loading settings";
+  qDebug() << "Loading settings";
   QSettings *sets = objectSettings();
 #ifdef Q_OS_WIN
   if( m_useSettingsFileIni )
@@ -1281,7 +1280,10 @@ void Settings::load()
   }
 
   m_lastSave = QDateTime::currentDateTime();
-  sets->deleteLater();
+  qDebug() << "Loading host addresses from file HOSTS";
+  Settings::instance().loadBroadcastAddressesFromFileHosts();
+  qDebug() << "Loading settings completed";
+  delete sets;
 }
 
 
@@ -1315,6 +1317,7 @@ QVariant Settings::commonValue( QSettings* system_rc, QSettings* user_ini, const
 
 void Settings::loadCommonSettings( QSettings* user_ini )
 {
+  qDebug() << "Loading settings eventually overruled by RC file";
   QSettings* system_rc = objectRcSettings();
   beginCommonGroup( system_rc, user_ini, "Chat" );
   QString chat_font_string = commonValue( system_rc, user_ini,  "Font", "" ).toString();
@@ -1554,8 +1557,6 @@ void Settings::loadCommonSettings( QSettings* user_ini )
   m_ipMulticastTtl = commonValue( system_rc, user_ini, "IpMulticastTtl", m_ipMulticastTtl ).toInt();
   endCommonGroup( system_rc, user_ini );
 
-  loadBroadcastAddressesFromFileHosts();
-
   beginCommonGroup( system_rc, user_ini, "FileShare" );
   if( m_disableFileTransfer )
     m_enableFileTransfer = false;
@@ -1645,8 +1646,7 @@ void Settings::loadCommonSettings( QSettings* user_ini )
   m_useCustomVoiceEncoderSettings = commonValue( system_rc, user_ini, "UseCustomVoiceEncoderSettings", m_useCustomVoiceEncoderSettings ).toBool();
   m_useSystemVoiceEncoderSettings = commonValue( system_rc, user_ini, "UseSystemVoiceEncoderSettings", m_useSystemVoiceEncoderSettings ).toBool();
   endCommonGroup( system_rc, user_ini );
-
-  system_rc->deleteLater();
+  delete system_rc;
 }
 
 QString Settings::qtMajorVersion() const
