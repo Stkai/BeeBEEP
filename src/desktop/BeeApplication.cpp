@@ -87,7 +87,7 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
 
   mp_fsWatcher = new QFileSystemWatcher;
   m_settingsFilePath = "";
-  //connect( mp_fsWatcher, SIGNAL( fileChanged( const QString& ) ), this, SLOT( onFileChanged( const QString& ) ) );
+  connect( mp_fsWatcher, SIGNAL( fileChanged( const QString& ) ), this, SLOT( onFileChanged( const QString& ) ) );
 
   mp_networkConfigurationManager = new QNetworkConfigurationManager;
   connect( mp_networkConfigurationManager, SIGNAL( configurationAdded( const QNetworkConfiguration& ) ), this, SLOT( onNetworkConfigurationAdded( const QNetworkConfiguration& ) ) );

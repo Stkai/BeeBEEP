@@ -870,6 +870,10 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().useDarkStyle() );
   act->setData( 77 );
+  act = mp_menuInterfaceSettings->addAction( tr( "Reset minimum width for applied style" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().resetMinimumWidthForStyle() );
+  act->setData( 103 );
   mp_menuInterfaceSettings->addSeparator();
   act = mp_menuInterfaceSettings->addAction( tr( "Escape key minimize to tray icon" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -2218,6 +2222,10 @@ void GuiMain::settingsChanged( QAction* act )
     break;
   case 102:
     Settings::instance().setUseUserFirstNameFirstInFullName( !act->isChecked() );
+    break;
+  case 103:
+    Settings::instance().setResetMinimumWidthForStyle( act->isChecked() );
+    setMinimumWidthForStyle();
     break;
   default:
     qWarning() << "GuiMain::settingsChanged(): error in setting id" << act->data().toInt();
@@ -5189,23 +5197,28 @@ void GuiMain::onNetworkTestWindowClosed()
 
 void GuiMain::setMinimumWidthForStyle()
 {
-  int old_w = width();
-  int wasted_w = Settings::instance().useDarkStyle() ? 60 : 20;
-#if defined( Q_OS_MAC )
-  int min_w = qMax( 320, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+8) + wasted_w );
-#elif defined( Q_OS_UNIX )
-  int min_w = qMax( 320, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+4) + wasted_w );
-#elif defined( Q_OS_WIN )
-  int min_w = qMax( 300, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+2) + wasted_w );
-#else
-  int min_w = qMax( 320, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+2) + wasted_w );
-#endif
-  setMinimumWidth( min_w );
-  if( min_w > old_w )
+  if( Settings::instance().resetMinimumWidthForStyle() )
   {
-    int new_pos_x = qMax( 1, pos().x() - (min_w - old_w) );
-    move( new_pos_x, pos().y() );
+    int old_w = width();
+    int wasted_w = Settings::instance().useDarkStyle() ? 60 : 20;
+#if defined( Q_OS_MAC )
+    int min_w = qMax( 320, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+8) + wasted_w );
+#elif defined( Q_OS_UNIX )
+    int min_w = qMax( 320, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+4) + wasted_w );
+#elif defined( Q_OS_WIN )
+    int min_w = qMax( 300, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+2) + wasted_w );
+#else
+    int min_w = qMax( 320, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+2) + wasted_w );
+#endif
+    setMinimumWidth( min_w );
+    if( min_w > old_w )
+    {
+      int new_pos_x = qMax( 1, pos().x() - (min_w - old_w) );
+      move( new_pos_x, pos().y() );
+    }
   }
+  else
+    setMinimumWidth( 90 );
 }
 
 void GuiMain::loadStyle()

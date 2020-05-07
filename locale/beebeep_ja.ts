@@ -2461,10 +2461,10 @@ Please select a different name.</source>
         <translation>メインツールバーを表示</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3881"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3882"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3883"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3884"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3889"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3890"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3891"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3892"/>
         <source>offline</source>
         <translation>オフライン</translation>
     </message>
@@ -2473,24 +2473,24 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="396"/>
         <location filename="../src/desktop/GuiMain.cpp" line="413"/>
         <location filename="../src/desktop/GuiMain.cpp" line="663"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2056"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2515"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2721"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2775"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2782"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2844"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3065"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3254"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3285"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3454"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3678"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3702"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3759"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4072"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4234"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4595"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4982"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="5128"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2060"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2523"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2729"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2783"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2790"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2852"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3073"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3262"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3293"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3462"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3686"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3710"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3767"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4080"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4242"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4606"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4993"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="5139"/>
         <source>Yes</source>
         <translation>はい(&amp;Y)</translation>
     </message>
@@ -2499,24 +2499,24 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="396"/>
         <location filename="../src/desktop/GuiMain.cpp" line="413"/>
         <location filename="../src/desktop/GuiMain.cpp" line="663"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2056"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2515"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2721"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2775"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2782"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2844"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3065"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3254"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3285"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3454"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3678"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3702"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3759"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4072"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4234"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4595"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4982"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="5128"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2060"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2523"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2729"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2783"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2790"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2852"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3073"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3262"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3293"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3462"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3686"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3710"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3767"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4080"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4242"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4606"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4993"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="5139"/>
         <source>No</source>
         <translation>いいえ(&amp;N)</translation>
     </message>
@@ -2558,17 +2558,17 @@ Please select a different name.</source>
         <translation>開発者</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1282"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1286"/>
         <source>Select beep file...</source>
         <translation>ビープ音用のファイルを選択(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1283"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1287"/>
         <source>Play beep</source>
         <translation>ビープ音を再生(&amp;P)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1062"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1066"/>
         <source>Clear all read messages on closing window</source>
         <translation>既読のメッセージをウィンドウを閉じたら消去</translation>
     </message>
@@ -2578,37 +2578,37 @@ Please select a different name.</source>
         <translation>設定(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1150"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1154"/>
         <source>If a file already exists</source>
         <translation>ファイルが既に存在したら(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1132"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1136"/>
         <source>Enable file transfer</source>
         <translation>ファイル転送を有効(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3864"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3872"/>
         <source>Use HTML tags</source>
         <translation>HTMLタグを使用</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3868"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3876"/>
         <source>Use clickable links</source>
         <translation>リンクをクリック可能にする</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3842"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3850"/>
         <source>Show messages grouped by user</source>
         <translation>メッセージをユーザーごとにまとめる</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1027"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1031"/>
         <source>Save messages</source>
         <translation>メッセージの保存(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1386"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1390"/>
         <source>Status</source>
         <translation>状態</translation>
     </message>
@@ -2618,39 +2618,39 @@ Please select a different name.</source>
         <translation>プラグイン(&amp;P)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1439"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1443"/>
         <source>Show %1&apos;s license...</source>
         <translation>%1 のライセンス...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1443"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1447"/>
         <source>Open %1 official website...</source>
         <translation>%1 公式サイト...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1444"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1448"/>
         <source>Check for new version...</source>
         <translation>最新版の確認(&amp;C)...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1445"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1449"/>
         <source>Download plugins...</source>
         <translation>プラグインのダウンロード...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1447"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1451"/>
         <source>Help online...</source>
         <translation>オンラインヘルプ...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="973"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1523"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="977"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1527"/>
         <source>Users</source>
         <translation>ユーザー</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="789"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1470"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1474"/>
         <source>Quit</source>
         <translation>終了(&amp;X)</translation>
     </message>
@@ -2670,43 +2670,43 @@ Please select a different name.</source>
         <translation>主な操作(&amp;M)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1365"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1369"/>
         <source>Show the user&apos;s picture</source>
         <translation>ユーザーのプロフィール画像を表示</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="862"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1024"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1028"/>
         <source>Chat</source>
         <translation>チャット(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1309"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1313"/>
         <source>Always stay on top</source>
         <translation>常に手前に表示(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3834"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3842"/>
         <source>Show the timestamp</source>
         <translation>日時を表示</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2275"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2283"/>
         <source>Show only last %1 messages</source>
         <translation>最近の %1 メッセージのみ表示(&amp;L)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1142"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1146"/>
         <source>Prompt before downloading file</source>
         <translation>ファイルのダウンロード前に確認(&amp;P)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1323"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1327"/>
         <source>Options</source>
         <translation>オプション</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1369"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1373"/>
         <source>Show the user&apos;s vCard on right click</source>
         <translation>右クリックでユーザーの情報カードを表示</translation>
     </message>
@@ -2726,72 +2726,72 @@ Please select a different name.</source>
         <translation>データ用フォルダーを開く(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3825"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3833"/>
         <source>Use RTL mode to show text</source>
         <translation>書字方向を右から左へ</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1202"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1206"/>
         <source>Use native file dialogs</source>
         <translation>内蔵のファイル選択機能を使用(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1232"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1236"/>
         <source>Enable Buzz sound</source>
         <translation>バズ音を有効化(2連続ビープ音)(&amp;B)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1324"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1328"/>
         <source>Sort users in ascending order</source>
         <translation>ユーザーを昇順に表示</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1328"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1332"/>
         <source>Sorting mode</source>
         <translation>並び順</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1331"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1335"/>
         <source>Default mode</source>
         <translation>初期設定</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1336"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1340"/>
         <source>By user name</source>
         <translation>ユーザー名順</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1341"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1345"/>
         <source>By user status</source>
         <translation>ユーザーの状態順</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1346"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1350"/>
         <source>By unread messages</source>
         <translation>未読順</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1373"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1377"/>
         <source>Show status color in background</source>
         <translation>背景に状態の色を表示</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1382"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1386"/>
         <source>Change size of the user&apos;s picture</source>
         <translation>ユーザー用画像のサイズ変更</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1400"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1404"/>
         <source>Recently used</source>
         <translation>最近使用した状態</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1404"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1408"/>
         <source>Change your status description...</source>
         <translation>状態の説明を変更...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1405"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1409"/>
         <source>Clear all status descriptions</source>
         <translation>追加した状態の説明をすべて消去</translation>
     </message>
@@ -2816,168 +2816,168 @@ Please select a different name.</source>
         <translation>新着メッセージを表示(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1435"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1439"/>
         <source>?</source>
         <translation>ヘルプ(&amp;H)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1440"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1444"/>
         <source>Qt Library...</source>
         <translation>&amp;Qt ライブラリ...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1436"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1440"/>
         <source>Donate for %1</source>
         <translation>%1 に寄付</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1463"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1467"/>
         <source>Show</source>
         <translation>表示(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="878"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="882"/>
         <source>Close button minimize to tray icon</source>
         <translation>閉じるボタンでトレイに格納(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="874"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="878"/>
         <source>Escape key minimize to tray icon</source>
         <translation>Esc キーでトレイに格納(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1269"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1273"/>
         <source>Show only message notifications</source>
         <translation>メッセージの通知のみ表示(&amp;M)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1273"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1277"/>
         <source>Show chat message preview</source>
         <translation>チャットメッセージのプレビュー(&amp;P)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1533"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1537"/>
         <source>Groups</source>
         <translation>グループ</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1528"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1532"/>
         <source>Chats</source>
         <translation>チャット</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1546"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1550"/>
         <source>File Transfers</source>
         <translation>ファイル転送</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2206"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2210"/>
         <source>Please select the number of days that partially downloaded files can remain cached.</source>
         <translation>ダウンロード未完了のファイルがキャッシュに残る日数を入力します。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2797"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2805"/>
         <source>Downloading %1 files</source>
         <translation>%1 ファイルをダウンロード中</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3185"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3193"/>
         <source>There are no messages saved in the chat with %1.</source>
         <translation>%1 の保存済みメッセージはありません。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3696"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3704"/>
         <source>Do you want to clear messages with %1?</source>
         <translation>%1 とのメッセージを消去しますか？</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3830"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3838"/>
         <source>Show the chat in compact view mode</source>
         <translation>チャットをコンパクトに表示</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3873"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3881"/>
         <source>Restore default font</source>
         <translation>フォント指定の初期化</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3956"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3964"/>
         <source>chat messages</source>
         <translation>チャット用</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4071"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4079"/>
         <source>Do you want to delete user %1?</source>
         <translation>ユーザー %1 を削除しますか？</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4233"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4241"/>
         <source>Do you want to clear all saved status descriptions?</source>
         <translation>保存済みのすべての状態の説明を消去しますか？</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4535"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4546"/>
         <source>Qt libraries have a bug on saving the window&apos;s state.</source>
         <translation>Qt ライブラリにはウィンドウの状態を記憶する際にバグがあります。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4536"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4547"/>
         <source>If you have layout problem please save only geometry.</source>
         <translation>レイアウトでの問題が発生すれば配置のみ記憶してください。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4661"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4672"/>
         <source>New file from %1</source>
         <translation>%1 からの新しいファイル</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4684"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4695"/>
         <source>%1 is buzzing you!</source>
         <translation>%1 があなたにバズしました！</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1058"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1062"/>
         <source>Open chats in a single window</source>
         <translation>すべてのチャットをひとつのウインドウに開く(&amp;W)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="924"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="928"/>
         <source>Prompt on quit when connected</source>
         <translation>接続中に終了したら確認</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1377"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1381"/>
         <source>Show the status description</source>
         <translation>状態の説明を表示</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="928"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1319"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="932"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1323"/>
         <source>Save window&apos;s geometry</source>
         <translation>ウィンドウの配置を記憶</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="901"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="905"/>
         <source>Show minimized</source>
         <translation>最小化(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="905"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="909"/>
         <source>Show only on system tray</source>
         <translation>タスクトレイにのみ表示(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="909"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="913"/>
         <source>Reset window geometry</source>
         <translation>ウィンドウの配置を初期化</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="913"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="917"/>
         <source>Check for new version</source>
         <translation>最新版を確認(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1001"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1005"/>
         <source>Save users</source>
         <translation>ユーザーを保存</translation>
     </message>
@@ -2987,32 +2987,32 @@ Please select a different name.</source>
         <translation>接続</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="999"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1003"/>
         <source>Add users</source>
         <translation>ユーザーの追加</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1395"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1399"/>
         <source>Set your status to away automatically</source>
         <translation>自動で状態を離席中にする</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1128"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1132"/>
         <source>File transfer</source>
         <translation>ファイル転送(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1136"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1140"/>
         <source>Enable file sharing</source>
         <translation>ファイル共有を有効(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1228"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1232"/>
         <source>Enable BEEP alert</source>
         <translation>ビープ音で通知(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1262"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1266"/>
         <source>System tray icon</source>
         <translation>タスクトレイの通知(&amp;T)</translation>
     </message>
@@ -3032,79 +3032,79 @@ Please select a different name.</source>
         <translation>ネットワークの設定...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1126"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1130"/>
         <source>Blocked chats</source>
         <translation>ブロックしたチャット(&amp;B)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="891"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="895"/>
         <source>Shortcuts</source>
         <translation>ショートカットキー(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="892"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="896"/>
         <source>Select language</source>
         <translation>表示言語の選択(&amp;L)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1124"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1128"/>
         <source>Dictionary</source>
         <translation>辞書の選択(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="977"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="981"/>
         <source>Recognize users</source>
         <translation>ユーザーの認識法(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="986"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="990"/>
         <source>By account name and domain name</source>
         <translation>アカウント名とドメイン名(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="991"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="995"/>
         <source>By account name</source>
         <translation>アカウント名(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="981"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1092"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="985"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1096"/>
         <source>default</source>
         <translation>規定</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="981"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="985"/>
         <source>By nickname</source>
         <translation>ユーザー名(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1005"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1009"/>
         <source>Save groups</source>
         <translation>グループを保存</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1265"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1269"/>
         <source>Enable tray icon notifications</source>
         <translation>通知領域の通知を有効(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1277"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1281"/>
         <source>Show file notifications</source>
         <translation>ファイルの通知を表示(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="893"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="897"/>
         <source>Select icon theme</source>
         <translation>アイコンテーマの選択(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1122"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1126"/>
         <source>Select emoticon theme</source>
         <translation>絵文字テーマを選択</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="737"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1491"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1495"/>
         <source>Development version</source>
         <translation>開発版</translation>
     </message>
@@ -3125,9 +3125,9 @@ Please select a different name.</source>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="819"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3327"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3371"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4939"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3335"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3379"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4950"/>
         <source>The option has been disabled by your system administrator.</source>
         <translation>あなたのシステムの管理者によってオプションが無効化されています。</translation>
     </message>
@@ -3147,142 +3147,142 @@ Please select a different name.</source>
         <translation>ネットワークテスト</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="918"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="922"/>
         <source>Delay first connection</source>
         <translation>遅延して接続(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="933"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="937"/>
         <source>On connection</source>
         <translation>接続時(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="945"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="949"/>
         <source>Prompts to change user</source>
         <translation>ユーザー名の変更を確認</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="949"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="953"/>
         <source>Prompts to ask network password</source>
         <translation>パスワードの設定を確認</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="936"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="940"/>
         <source>Show the user list</source>
         <translation>ユーザーの一覧を表示(&amp;U)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="940"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="944"/>
         <source>Show the chat list</source>
         <translation>チャットの一覧を表示(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1035"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1039"/>
         <source>Save unsent messages</source>
         <translation>未送信メッセージを保存(&amp;U)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1039"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1043"/>
         <source>Save file transfer messages</source>
         <translation>ファイル転送メッセージを保存(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1043"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1047"/>
         <source>Save system messages</source>
         <translation>システムのメッセージを保存(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1075"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1079"/>
         <source>Send offline messages also to chat with all users</source>
         <translation>すべてのユーザーとのチャットにもオフライン送信</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1088"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1092"/>
         <source>On sending message</source>
         <translation>メッセージ送信時(&amp;M)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1092"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1096"/>
         <source>Do nothing</source>
         <translation>何もしない(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1097"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1101"/>
         <source>Minimize chat window</source>
         <translation>チャットウィンドウを最小化(&amp;M)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1102"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1106"/>
         <source>Close chat window</source>
         <translation>チャットウィンドウを閉じる(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1249"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1253"/>
         <source>Raise main window on new message</source>
         <translation>新着メッセージでメイン画面を表示(&amp;M)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1253"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1257"/>
         <source>Always open chat on new message</source>
         <translation>新着メッセージでチャットを開く(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1257"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1261"/>
         <source>Raise previously opened chat on new message</source>
         <translation>新着メッセージで開いているチャットを表示(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1070"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1074"/>
         <source>Show chat toolbar</source>
         <translation>チャット用ツールバーを表示</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1112"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1116"/>
         <source>Select chat background color</source>
         <translation>チャットの背景色を選択(&amp;B)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1114"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1118"/>
         <source>Select chat default text color</source>
         <translation>チャットの通常の文字色を選択(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1116"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1120"/>
         <source>Select chat system text color</source>
         <translation>チャットのシステムの文字色を選択(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1197"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1201"/>
         <source>Always shows the progress of file transfer</source>
         <translation>常にファイル転送の進行状況を表示(&amp;P)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1286"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1290"/>
         <source>Desktop sharing</source>
         <translation>デスクトップ共有(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1290"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1294"/>
         <source>Enable desktop sharing</source>
         <translation>デスクトップ共有を有効化(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1295"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1299"/>
         <source>Select screen capture interval</source>
         <translation>画面キャプチャの更新間隔</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1297"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1301"/>
         <source>Select image type</source>
         <translation>画像の種類</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1299"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1303"/>
         <source>Select image quality</source>
         <translation>画像の品質</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1302"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1306"/>
         <source>Fit image to screen</source>
         <translation>全面全体に表示(&amp;F)</translation>
     </message>
@@ -3297,42 +3297,42 @@ Please select a different name.</source>
         <translation>ベータ機能</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="886"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="890"/>
         <source>Enable maximize button</source>
         <translation>最大化ボタンを有効化(&amp;M)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1314"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1318"/>
         <source>Start %1 automatically</source>
         <translation>自動で %1 を起動</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="895"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="899"/>
         <source>Restore the colors to the default ones</source>
         <translation>色を初期設定に戻す</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="896"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="900"/>
         <source>Reset geometry of all windows</source>
         <translation>すべてのウィンドウ配置を初期化</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1448"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1452"/>
         <source>Show tips...</source>
         <translation>使い方のヒント...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1449"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1453"/>
         <source>Read FAQ...</source>
         <translation>FAQ閲覧...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1452"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1456"/>
         <source>Information about %1...</source>
         <translation>開発者 %1...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1450"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1454"/>
         <source>Discover the fact of the day...</source>
         <translation>今日の一言...</translation>
     </message>
@@ -3342,659 +3342,664 @@ Please select a different name.</source>
         <translation>インターフェース(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="959"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="963"/>
         <source>Your workgroups</source>
         <translation>作業グループに参加(&amp;W)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1010"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1014"/>
         <source>Show the name and surname of the users</source>
         <translation>姓名を表示</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1030"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1034"/>
         <source>Enable message saving</source>
         <translation>メッセージを保存(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1109"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1113"/>
         <source>Colors</source>
         <translation>色(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1118"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1122"/>
         <source>Select quote text color</source>
         <translation>引用の文字色を選択(&amp;Q)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1120"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1124"/>
         <source>Select quote background color</source>
         <translation>引用の背景色を選択(&amp;U)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1210"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1214"/>
         <source>Voice message</source>
         <translation>ボイスメッセージ(&amp;V)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1216"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1220"/>
         <source>Maximum duration</source>
         <translation>記録時間の限度(&amp;M)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1146"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1150"/>
         <source>Always download files into the folder with the user&apos;s name</source>
         <translation>ユーザー名のフォルダを作成しダウンロード(&amp;U)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1014"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="873"/>
+        <source>Reset minimum width for applied style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="1018"/>
         <source>Show surname before firstname of the users</source>
         <translation>ユーザーの姓を名の前に表示</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1153"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1157"/>
         <source>Generate new file name</source>
         <translation>ファイル名を生成(&amp;G)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1158"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1162"/>
         <source>Skip</source>
         <translation>スキップ(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1166"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1170"/>
         <source>Overwrite older</source>
         <translation>フォルダを上書き</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1180"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1184"/>
         <source>Keep the original modification date of the transferred file</source>
         <translation>転送ファイルの元の更新日時を保つ(&amp;K)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1184"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1188"/>
         <source>Resume file transfer</source>
         <translation>ファイル転送の再開(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1184"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1188"/>
         <source>when possible</source>
         <translation>可能なら</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1214"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1218"/>
         <source>Voice encoder</source>
         <translation>音声エンコーダー(&amp;V)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1225"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1229"/>
         <source>Notifications</source>
         <translation>通知(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1244"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1248"/>
         <source>Disable BEEP alert if your status is busy</source>
         <translation>状態が「忙しい」ならビープ音を無効(&amp;B)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1353"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1357"/>
         <source>Show online users only</source>
         <translation>オンラインのユーザーのみ表示</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1357"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1361"/>
         <source>Show users in their workgroups</source>
         <translation>作業クグループ内にユーザーを表示</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1512"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1516"/>
         <source>Right click to open menu</source>
         <translation>右クリックでメニューを開く</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1518"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1522"/>
         <source>Activities</source>
         <translation>実行履歴</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1538"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1542"/>
         <source>Saved chats</source>
         <translation>保存済みチャット</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1690"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2262"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1694"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2270"/>
         <source>There will be no saving of &apos;system&apos; and &apos;file transfer&apos; messages if this option is disabled.</source>
         <translation>このオプションの無効により「システム」と「ファイル転送」メッセージは保存されません。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1710"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1714"/>
         <source>How many minutes of idle %1 can wait before changing status to away?</source>
         <translation>%1 が何分間アイドル状態になれば、状態を離席中にしますか？</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1752"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1756"/>
         <source>Please select the maximum number of messages to be showed</source>
         <translation>表示するメッセージの最大数を指定</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1803"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1807"/>
         <source>Please select the number of inactive days before user is removed</source>
         <translation>ユーザーを除去するための未稼働日数を指定</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1955"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1959"/>
         <source>milliseconds, 5000 default</source>
         <translation>ミリ秒、初期値 5000</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1985"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1989"/>
         <source>Please select the opacity percentage of inactive chat window (default: %1%)</source>
         <translation>アクティブでないウィンドウの不透明度の比率を指定 (初期値 %1%)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2020"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2024"/>
         <source>You must close and reopen the chat windows to see the changes applied.</source>
         <translation>変更を適用するにはチャットウインドウを閉じ開きなおす必要があります。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2055"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2059"/>
         <source>Saving unsent messages may fail if &apos;Save users&apos; and &apos;Save groups&apos; options are not enabled. Do you want to enable them?</source>
         <translation>設定のユーザーの「ユーザーを保存」と「グループを保存」が有効でない場合、未送信メッセージの保存に失敗することがあります。これらを有効にしますか？</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2081"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2085"/>
         <source>Please select the maximum number of lines to be saved in the chat (current: %1).</source>
         <translation>保存するメッセージの最大行数を入力します (現在 %1)。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2096"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2100"/>
         <source>Please select the number of days that items (such as images) can remain cached.</source>
         <translation>画像などキャッシュを残す日数を入力します。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2097"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2207"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2101"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2211"/>
         <source>current: %1, never clear: -1, always clear: 0</source>
         <translation>現在: %1, 消さない: -1, 常に削除: 0</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2120"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2124"/>
         <source>Please select the maximum number of files you can queue up for the transfer (current: %1).</source>
         <translation>転送処理待ちファイルの限度を入力します (現在 %1)。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2178"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2182"/>
         <source>Please select the maximum duration (in seconds) that a voice message can have (current: %1).</source>
         <translation>ボイスメッセージを録音する秒数の限度を入力 (現在 %1)。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2249"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2257"/>
         <source>Option enabled.</source>
         <translation>オプションを有効にしました。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2251"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2259"/>
         <source>Option disabled.</source>
         <translation>オプションを無効にしました。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2281"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2289"/>
         <source>Remove users after %1 days of inactivity</source>
         <translation>%1 日未稼働のユーザーを除去(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2288"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2296"/>
         <source>Show inactive chat window with %1% opacity</source>
         <translation>アクティブでないチャットの不透明度 %1% (&amp;O)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2293"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2301"/>
         <source>Save maximum %1 lines of chat</source>
         <translation>最大 %1 行までチャットを保存(&amp;M)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2300"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2308"/>
         <source>Clean the cache from items older than %1 days</source>
         <translation>%1 日経過でデータのキャッシュ削除(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2307"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2315"/>
         <source>Delete partially downloaded files after %1 days</source>
         <translation>ダウンロード未完了ファイルを %1 日後に削除(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2313"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2321"/>
         <source>Add up to %1 files to the transfer queue</source>
         <translation>%1 ファイルまで転送処理待ちに追加(&amp;Q)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2378"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2390"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2386"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2398"/>
         <source>to all</source>
         <translation>から 全員</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2380"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2392"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2388"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2400"/>
         <source>to</source>
         <translation>から</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2382"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2394"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2390"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2402"/>
         <source>to you</source>
         <translation>から あなた</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2388"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2396"/>
         <source>New message from</source>
         <translation>新着メッセージ: 送信者</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2398"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2406"/>
         <source>New message arrived</source>
         <translation>新着メッセージ到着</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2501"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2509"/>
         <source>%1 is writing...</source>
         <translation>%1 が入力中...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2514"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2522"/>
         <source>Do you want to disconnect from %1 network?</source>
         <translation>%1 ネットワークから切断しますか？</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2556"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2564"/>
         <source>You are %1%2</source>
         <translation>あなたの状態は %1%2</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2568"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2576"/>
         <source>Please insert the new status description</source>
         <translation>状態の説明を新たに入力</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2625"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2633"/>
         <source>%1 - Select a file</source>
         <translation>%1 - ファイルを選択</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2625"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2633"/>
         <source>or more</source>
         <translation> (複数可能)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2644"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2652"/>
         <source>File transfer is not enabled.</source>
         <translation>ファイル転送が有効になっていません。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2650"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2658"/>
         <source>You are not connected.</source>
         <translation>あなたは接続していません。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2667"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2675"/>
         <source>There is no user connected.</source>
         <translation>ユーザーの接続がありません。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2673"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2681"/>
         <source>Please select the user to whom you would like to send a file.</source>
         <translation>ファイルを送信したいユーザーを選択してください。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2682"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2690"/>
         <source>User not found.</source>
         <translation>ユーザーが見つかりません。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2704"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2829"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2712"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2837"/>
         <source>File transfer is disabled. You cannot download %1.</source>
         <translation>ファイル転送が無効になっています。ファイル %1 をダウンロードできません。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2721"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2844"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2729"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2852"/>
         <source>Yes, and don&apos;t ask anymore</source>
         <translation>はい、今後も確認不要</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2773"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2781"/>
         <source>You cannot download all these files at once. Do you want to download the first %1 files of the list?</source>
         <translation>これらのファイルを一度にダウンロードすることはできません。一覧の最初の %1 ファイルをダウンロードしますか？</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2781"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2789"/>
         <source>Downloading %1 files is a hard duty. Maybe you have to wait a lot of minutes. Do yo want to continue?</source>
         <translation>%1 ファイルもダウンロードするのは大変です。時間がかかる可能性があります。よろしいですか？</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2843"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2851"/>
         <source>Do you want to download folder %1 (%2 files) from %3?</source>
         <translation>%3 のフォルダー  %1 (%2 ファイル) をダウンロードしますか？</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2884"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2892"/>
         <source>%1 - Select the download folder</source>
         <translation>%1 - ダウンロードするフォルダーを選択</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2892"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2900"/>
         <source>The files will be downloaded to the folder:</source>
         <translation>フォルダにファイルがダウンロードされます:</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2988"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2996"/>
         <source>Plugin Manager...</source>
         <translation>プラグイン管理(&amp;P)...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3011"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3019"/>
         <source>Start the new application to copy file and folders by Marco Mastroddi</source>
         <translation>ファイルとフォルダのコピー用の新しいアプリケーションを起動 (Marco Mastroddi作成)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3064"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3072"/>
         <source>Your name is not changed. Do you want to continue?</source>
         <translation>ユーザー名が変更されていませんが、よろしいですか？</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3219"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3227"/>
         <source>Unable to open voice message %1</source>
         <translation>ボイスメッセージが開けません: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3243"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3251"/>
         <source>%1: no such file or directory.</source>
         <translation>ファイルまたはフォルダがありません: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3253"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3261"/>
         <source>Do you want to open the file %1?</source>
         <translation>ファイル %1 を開きますか？</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3299"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3307"/>
         <source>Sound module is not working</source>
         <translation>サウンドデバイスが利用できません</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3349"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3357"/>
         <source>There is a chat with the same members: %1.</source>
         <translation>同じメンバーとのチャットがあります: %1.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3454"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3462"/>
         <source>Do you want to delete saved chat with %1?</source>
         <translatorcomment>引数にはグループチャット名も入る</translatorcomment>
         <translation>%1 の保存済みチャットを削除しますか？</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3487"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3495"/>
         <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br&gt;What do you want to do with the selected saved text?</source>
         <translation>チャット「%1」は既に保存済みテキストです。&lt;br&gt;上書きは以前の保存内容を消去します。&lt;br&gt;この保存済みテキストをどうしますか？</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3595"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3603"/>
         <source>Your status description</source>
         <translation>あなたの状態の説明</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3644"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3652"/>
         <source>%1 updated</source>
         <translation>%1 に新着あり</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3838"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3846"/>
         <source>Show the time with the AM/PM notation</source>
         <translation>時間を AM/PM で表示</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3855"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3863"/>
         <source>Show username&apos;s color</source>
         <translation>ユーザー名の色を使用</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3888"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3896"/>
         <source>none</source>
         <translation>なし</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3953"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3961"/>
         <source>your IP address</source>
         <translation>自分のIPアドレス</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3954"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3962"/>
         <source>to search for users</source>
         <translation>ユーザー検索用</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3957"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3965"/>
         <source>file transfer</source>
         <translation>ファイル転送</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3964"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3972"/>
         <source>End-to-end encryption is disabled</source>
         <translation>端末間の暗号化: 無効</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3969"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3977"/>
         <source>End-to-end encryption is enabled</source>
         <translation>端末間の暗号化: 有効</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3975"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3983"/>
         <source>Data compression is disabled</source>
         <translation>データ圧縮: 無効</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3980"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3988"/>
         <source>Data compression is enabled</source>
         <translation>データ圧縮: 有効</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4447"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4505"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4455"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4516"/>
         <source>You have new message</source>
         <translation>新着メッセージがあります</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4537"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4548"/>
         <source>Save all</source>
         <translation>すべて保存</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4537"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4548"/>
         <source>Save only geometry</source>
         <translation>配置のみ記憶</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4553"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4564"/>
         <source>Window geometry saved</source>
         <translation>ウィンドウの配置が記憶されました</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4595"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4606"/>
         <source>Do you really want to reset window&apos;s geometry?</source>
         <translation>ウィンドウの配置記憶を初期化しますか？</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4611"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4622"/>
         <source>Geometry of all windows has been reset</source>
         <translation>すべてのウィンドウの配置記憶は初期化されました</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4783"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4794"/>
         <source>The download folder does not exists or is not writable. Please select a new one.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4844"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4855"/>
         <source>You are using the default icons.</source>
         <translation>現在デフォルトのアイコンをお使いです。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4850"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4861"/>
         <source>You are using custom icons in folder %1.</source>
         <translation>カスタムのアイコンを使用中です。フォルダ:%1。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4851"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4862"/>
         <source>Restore default icons</source>
         <translation>アイコンを初期化</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4915"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4926"/>
         <source>Restart connection now</source>
         <translation>すぐに再接続</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4915"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4926"/>
         <source>Restart later manually</source>
         <translation>後で自分で行う</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4939"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4950"/>
         <source>You are not allowed create new message.</source>
         <translation>あなたは新規メッセージを作成できません。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4982"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4993"/>
         <source>Do you really want to restore the colors to the default ones?</source>
         <translation>色を初期設定に戻しますか？</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="5127"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="5138"/>
         <source>Do you really want to share your desktop with %1?</source>
         <translation>%1 にデスクトップを共有しますか？</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4845"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4851"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4860"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4856"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4862"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4871"/>
         <source>Select the icon folder</source>
         <translation>アイコンのフォルダを選択</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4881"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4892"/>
         <source>You are using the default emoticons.</source>
         <translation>現在デフォルトの絵文字をお使いです。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4882"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4888"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4897"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4893"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4899"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4908"/>
         <source>Select the emoticon folder</source>
         <translation>絵文字のフォルダを選択</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4887"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4898"/>
         <source>You are using custom emoticons in folder %1.</source>
         <translation>カスタムの絵文字を使用中です。フォルダ:%1。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4888"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4899"/>
         <source>Restore default emoticons</source>
         <translation>絵文字を初期化</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4914"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4925"/>
         <source>You have to restart your connection to apply changes.</source>
         <translation>変更を適用するには再接続してください。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="801"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3351"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3359"/>
         <source>Create new group chat</source>
         <translation>新規グループチャットを作成</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3418"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3426"/>
         <source>Starting</source>
         <translation>開始中</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3636"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3659"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3644"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3667"/>
         <source>%1 removed</source>
         <translation>%1 を削除しました</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3846"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3854"/>
         <source>Show your name instead of &apos;You&apos;</source>
         <translation>「あなた」でなく名前を表示</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3860"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3868"/>
         <source>Show emoticons</source>
         <translation>絵文字を表示</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1066"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1070"/>
         <source>Use font emoticons</source>
         <translation>フォントの絵文字を使用(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4187"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4195"/>
         <source>at lunch</source>
         <translation>昼食中</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4196"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4204"/>
         <source>in a meeting</source>
         <translation>会議中</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4380"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4388"/>
         <source>Select your dictionary path</source>
         <translation>辞書のパスを選択</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4388"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4396"/>
         <source>Dictionary selected: %1</source>
         <translation>辞書を設定しました: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4390"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4398"/>
         <source>Unable to set dictionary: %1</source>
         <translation>辞書を設定できません: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4555"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4566"/>
         <source>Window geometry and state saved</source>
         <translation>ウィンドウの配置と状態が記憶されました</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4832"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4843"/>
         <source>%1 blocked chats</source>
         <translation>%1 個のブロック済みチャット</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1455"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1459"/>
         <source>Add +1 user to anonymous usage statistics</source>
         <translation>匿名の使用統計に +1ユーザー追加</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="954"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="958"/>
         <source>Network</source>
         <translation>ネットワーク(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2990"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2998"/>
         <source>is a plugin developed by</source>
         <translation>プラグインです。開発者</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1568"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3260"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3511"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1572"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3268"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3519"/>
         <source>Unable to open %1</source>
         <translation>%1 は開けません</translation>
     </message>
@@ -4004,145 +4009,145 @@ Please select a different name.</source>
         <translation>ニュース</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="898"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="902"/>
         <source>On start</source>
         <translation>起動時(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="921"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="925"/>
         <source>On close</source>
         <translation>閉じた時</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1568"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1691"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2020"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2263"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2896"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3185"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3219"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3243"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3260"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3328"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3372"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3511"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4783"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4923"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4940"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1572"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1695"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2024"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2271"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2904"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3193"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3227"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3251"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3268"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3336"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3380"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3519"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4794"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4934"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4951"/>
         <source>Ok</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3273"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3281"/>
         <source>Sound files (*.wav)</source>
         <translation>音声ファイル (*.wav)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3285"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3293"/>
         <source>Sound is not enabled on a new message. Do you want to enable it?</source>
         <translation>新着メッセージ用の音が有効ではありません。有効にしますか？</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3304"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3312"/>
         <source>Sound file not found</source>
         <translation>音声ファイルがみつかりません</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3295"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3303"/>
         <source>The default BEEP will be used</source>
         <translation>標準のビープ音が使用されます</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3397"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3405"/>
         <source>Now %1 will start on windows boot.</source>
         <translation>%1 は Windows 起動時に実行されます。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3405"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3412"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3413"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3420"/>
         <source>Unable to add this key in the registry: permission denied.</source>
         <translation>レジストリへの起動用のキーの追加に失敗: 拒否されました。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3410"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3418"/>
         <source>%1 will not start on windows boot.</source>
         <translation>%1 は Windows 起動時に実行されません。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3478"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3486"/>
         <source>Please select a chat you would like to link the saved text.</source>
         <translation>保存済みテキストを関連付けたいチャットを選択してください。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1162"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3489"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1166"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3497"/>
         <source>Overwrite</source>
         <translation>上書き</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3489"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3497"/>
         <source>Add in the head</source>
         <translation>先頭に追加</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3677"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3685"/>
         <source>All the members of this chat are not online. The changes may not be permanent. Do you wish to continue?</source>
         <translation>このチャットの全メンバーがオンラインではありません。この変更の反映は続かないかもしれません。よろしいですか？</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3758"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3766"/>
         <source>Do you want to leave the chat with %1?</source>
         <translatorcomment>引数は c.name たぶんチャット名</translatorcomment>
         <translation>%1 のチャットから退出しますか？</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3764"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3772"/>
         <source>Unable to leave the chat with %1.</source>
         <translatorcomment>引数は c.name たぶんチャット名</translatorcomment>
         <translation>%1 のチャットから退出できません。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3886"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3894"/>
         <source>inactive</source>
         <translation>未使用</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3918"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="5175"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3926"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="5186"/>
         <source>disabled</source>
         <translation>無効</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3928"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3936"/>
         <source>active</source>
         <translation>使用</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4032"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4040"/>
         <source>%1 is online</source>
         <translation>%1 はオンラインです</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4034"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4042"/>
         <source>%1 is offline</source>
         <translation>%1 はオフラインです</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4046"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4054"/>
         <source>Please select the new size of the user picture</source>
         <translation>表示するユーザーの画像の大きさを指定</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1691"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2263"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2818"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3351"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3489"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4537"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4845"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4851"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4882"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4888"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1695"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2271"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2826"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3359"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3497"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4548"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4856"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4862"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4893"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4899"/>
         <source>Cancel</source>
         <translation>キャンセル</translation>
     </message>
@@ -4152,111 +4157,111 @@ Please select a different name.</source>
         <translation>メッセージ作成</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1236"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1240"/>
         <source>Enable notifications also for chat with all users</source>
         <translation>すべてのユーザーとのチャットでも通知する(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1207"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1211"/>
         <source>Select download folder</source>
         <translation>ダウンロードするフォルダを選択(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1219"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1223"/>
         <source>Use the integrated voice message player</source>
         <translation>内蔵のボイスメッセージ再生機能(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1240"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1244"/>
         <source>Enable BEEP alert also for active chat windows</source>
         <translation>アクティブなチャットウインドウでもビープ音を鳴らす(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1554"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1558"/>
         <source>Show the file transfer panel</source>
         <translation>ファイル転送パネルを表示</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1675"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1679"/>
         <source>Please save the network password in the next dialog if you want to use password without prompt.</source>
         <translation>入力手順なしでパスワードを使うには、次の入力欄で「パスワードを保存」を選択してください。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1753"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1757"/>
         <source>(current: %1, default: %2, all: -1, none: 0)</source>
         <translation>(現在: %1, 初期値: %2, なし: 0)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1931"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1935"/>
         <source>jpg for photo, png for presentation</source>
         <translation>写真用の jpg、図表用の png</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1942"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1946"/>
         <source>-1 default, 10 low, 60 medium, 100 high</source>
         <translation>-1 規定値, 10 低, 60 中, 100 高</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2720"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2728"/>
         <source>Do you want to download %1 (%2) from %3?</source>
         <translation>%3 からの %1 (%2) をダウンロードしますか？</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2812"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2820"/>
         <source>File is not available for download.</source>
         <translation>ダウンロード可能になっていません。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2814"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2822"/>
         <source>%1 is not connected.</source>
         <translation>%1 は未接続です。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2815"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2823"/>
         <source>Please reload the list of shared files.</source>
         <translation>共有ファイルの一覧を更新してください。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2818"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2826"/>
         <source>Reload file list</source>
         <translation>一覧を更新</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3327"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3335"/>
         <source>You are not allowed create groups.</source>
         <translation>あなたはグループを作成できません。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3371"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3379"/>
         <source>You are not allowed modify groups.</source>
         <translation>あなたはグループを変更できません。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3692"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3700"/>
         <source>Chat with %1 is empty.</source>
         <translatorcomment>引数はチャット名</translatorcomment>
         <translation>%1 のチャットは空です。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3699"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3757"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3707"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3765"/>
         <source>Yes and delete history</source>
         <translation>はい、履歴も削除</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3791"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3799"/>
         <source>Default language is restored.</source>
         <translation>言語設定が初期化されました。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3793"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3801"/>
         <source>New language &apos;%1&apos; is selected.</source>
         <translation>新たに言語 %1 が選択されました。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2945"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3796"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4923"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2953"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3804"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4934"/>
         <source>You must restart %1 to apply these changes.</source>
         <translation>これらの変更を適用するには %1 を再起動する必要があります。</translation>
     </message>
@@ -6325,7 +6330,7 @@ Please select a different name.</source>
     <name>QObject</name>
     <message>
         <location filename="../src/desktop/GuiChatItem.cpp" line="78"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3689"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3697"/>
         <source>All users</source>
         <translation>すべてのユーザー</translation>
     </message>
@@ -6628,7 +6633,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2423"/>
+        <location filename="../src/core/Settings.cpp" line="2425"/>
         <source>Autoresponder</source>
         <translation>自動応答</translation>
     </message>

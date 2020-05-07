@@ -151,6 +151,7 @@ Settings::Settings()
   m_emoticonSizeInMenu = 24;
   m_emoticonInRecentMenu = 48;
   m_confirmOnDownloadFile = false;
+  m_resetMinimumWidthForStyle = true;
   m_onExistingFileAction = GenerateNewFileName;
   m_resumeFileTransfer = true;
   m_promptOnCloseEvent = true;
@@ -1433,7 +1434,6 @@ void Settings::loadCommonSettings( QSettings* user_ini )
   m_raiseMainWindowOnNewMessageArrived = commonValue( system_rc, user_ini, "RaiseMainWindowOnNewMessageArrived", false ).toBool();
   m_alwaysShowFileTransferProgress = commonValue( system_rc, user_ini, "AlwaysShowFileTransferProgress", false ).toBool();
   m_alwaysOpenChatOnNewMessageArrived = commonValue( system_rc, user_ini, "AlwaysOpenChatOnNewMessageArrived", true ).toBool();
-
   m_loadOnTrayAtStartup = commonValue( system_rc, user_ini, "LoadOnTrayAtStartup", false ).toBool();
   m_showNotificationOnTray = commonValue( system_rc, user_ini, "ShowNotificationOnTray", true ).toBool();
   m_showOnlyMessageNotificationOnTray = commonValue( system_rc, user_ini, "ShowOnlyMessageNotificationOnTray", true ).toBool();
@@ -1493,6 +1493,7 @@ void Settings::loadCommonSettings( QSettings* user_ini )
   m_openChatWhenSendNewMessage = user_ini->value( "OpenChatWhenSendNewMessage", true ).toBool();
   m_sendNewMessageIndividually = user_ini->value( "SendNewMessageIndividually", false ).toBool();
   m_useUserFirstNameFirstInFullName = commonValue( system_rc, user_ini, "ShowUserFirstNameFirstInFullName", useUserFirstNameFirstInFullNameFromLanguage() ).toBool();
+  m_resetMinimumWidthForStyle = commonValue( system_rc, user_ini, "ResetMinimumWidthForStyle", m_resetMinimumWidthForStyle ).toBool();
   endCommonGroup( system_rc, user_ini );
 
   beginCommonGroup( system_rc, user_ini, "Tools" );
@@ -1865,6 +1866,7 @@ void Settings::save()
   sets->setValue( "OpenChatWhenSendNewMessage", m_openChatWhenSendNewMessage );
   sets->setValue( "SendNewMessageIndividually", m_sendNewMessageIndividually );
   sets->setValue( "ShowUserFirstNameFirstInFullName", m_useUserFirstNameFirstInFullName );
+  sets->setValue( "ResetMinimumWidthForStyle", m_resetMinimumWidthForStyle );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );

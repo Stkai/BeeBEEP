@@ -3715,6 +3715,10 @@ Inserisci un nome differente.</translation>
         <source>The download folder does not exists or is not writable. Please select a new one.</source>
         <translation>La cartella Download non esiste o non è scrivibile. Per favore, selezionane una nuova.</translation>
     </message>
+    <message>
+        <source>Reset minimum width for applied style</source>
+        <translation type="unfinished">Imposta la larghezza minima per lo stile applicato</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

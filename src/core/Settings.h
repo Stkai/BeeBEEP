@@ -330,9 +330,11 @@ public:
   inline void setChatQuoteTextColor( const QString& );
   inline const QString& chatQuoteTextColor() const;
   enum ChatOnSendingMessageType { SkipOnSendingMessage, MinimizeChatOnSendingMessage,
-                                   CloseChatOnSendingMessage, NumChatOnSendingMessageTypes };
+                                  CloseChatOnSendingMessage, NumChatOnSendingMessageTypes };
   inline void setChatOnSendingMessage( int );
   inline int chatOnSendingMessage() const;
+  inline void setResetMinimumWidthForStyle( bool );
+  inline bool resetMinimumWidthForStyle();
 
   inline bool allowEditNickname() const;
 
@@ -813,6 +815,7 @@ private:
   QString m_chatQuoteBackgroundColor;
   QString m_chatQuoteTextColor;
   int m_chatOnSendingMessage;
+  bool m_resetMinimumWidthForStyle;
 
   QByteArray m_guiGeometry;
   QByteArray m_guiState;
@@ -1403,5 +1406,7 @@ inline bool Settings::keepModificationDateOnFileTransferred() const { return m_k
 inline void Settings::setUseUserFirstNameFirstInFullName( bool new_value ) { m_useUserFirstNameFirstInFullName = new_value; }
 inline bool Settings::useUserFirstNameFirstInFullName() const { return m_useUserFirstNameFirstInFullName; }
 inline const QStringList& Settings::allowedFileExtensionsInFileTransfer() const { return m_allowedFileExtensionsInFileTransfer; }
+inline void Settings::setResetMinimumWidthForStyle( bool new_value ) { m_resetMinimumWidthForStyle = new_value; }
+inline bool Settings::resetMinimumWidthForStyle() { return m_resetMinimumWidthForStyle; }
 
 #endif // BEEBEEP_SETTINGS_

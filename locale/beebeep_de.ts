@@ -3510,6 +3510,10 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>The download folder does not exists or is not writable. Please select a new one.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Reset minimum width for applied style</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

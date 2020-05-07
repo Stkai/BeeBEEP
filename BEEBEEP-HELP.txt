@@ -254,6 +254,7 @@ ShowUsersInWorkgroups=[true/false] if true the users in user list will be shown 
 OpenChatWhenSendNewMessage=[true/false] used in "Create message" window (default=true) [5.6.5]
 SendNewMessageIndividually=[true/false] used in "Create message" window (default=true) [5.6.5]
 UseUserFirstNameFirstInFullName=[true/false] if false BeeBEEP show users in format lastname firstname (default=true) [5.8.3]
+ResetMinimumWidthForStyle=[true/false] if true BeeBEEP changes its mimimum width for the style applied (default=true) [5.8.3]
 
 [Tools]
 LogToFile=[true/false] enable file logging
