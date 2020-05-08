@@ -476,16 +476,17 @@ void Core::checkFirewall()
 
 void Core::updateNetworkConfiguration( const QNetworkConfiguration& net_conf )
 {
-  qDebug() << "Core is checking network configuration:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() )
-           << "- state:" << net_conf.state()
-           << "- bearer:" << qPrintable( net_conf.bearerTypeName() ) << net_conf.bearerType() << net_conf.bearerTypeFamily()
-           << "- purpose:" << net_conf.purpose()
-           << "- type:" << net_conf.type();
-  if( !net_conf.isValid() )
+  if( !isConnected() )
   {
-    qDebug() << "Network configuration:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() ) << "is not valid and will be skipped";
+    qDebug() << "Core is not connected and skips to check network configuration:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() ) << "-" << qPrintable( net_conf.bearerTypeName() );;
     return;
   }
+
+  qDebug() << "Core is checking network configuration:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() )
+           << "- bearer:" << qPrintable( net_conf.bearerTypeName() ) << net_conf.bearerType() << net_conf.bearerTypeFamily()
+           << "- purpose:" << net_conf.purpose()
+           << "- type:" << net_conf.type()
+           << "- state:" << net_conf.state();
 
   if( net_conf.state() == QNetworkConfiguration::Active && (net_conf.bearerType() == QNetworkConfiguration::BearerEthernet || net_conf.bearerType() == QNetworkConfiguration::BearerWLAN) )
   {
