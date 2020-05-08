@@ -473,3 +473,23 @@ void Core::checkFirewall()
   // FIXME: how to do this?
   FirewallManager::instance().allowApplication( Settings::instance().programName(), QDir::toNativeSeparators( qApp->applicationFilePath() ) );
 }
+
+void Core::updateNetworkConfiguration( const QNetworkConfiguration& net_conf )
+{
+  qDebug() << "Core is checking network configuration:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() )
+           << "- state:" << net_conf.state()
+           << "- bearer:" << qPrintable( net_conf.bearerTypeName() ) << net_conf.bearerType() << net_conf.bearerTypeFamily()
+           << "- purpose:" << net_conf.purpose()
+           << "- type:" << net_conf.type();
+  if( !net_conf.isValid() )
+  {
+    qDebug() << "Network configuration:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() ) << "is not valid and will be skipped";
+    return;
+  }
+
+  if( net_conf.state() == QNetworkConfiguration::Active && (net_conf.bearerType() == QNetworkConfiguration::BearerEthernet || net_conf.bearerType() == QNetworkConfiguration::BearerWLAN) )
+  {
+    qDebug() << "Network configuration:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() ) << "is active ethernet or wlan and new broadcast will be requested";
+    mp_broadcaster->sendBroadcast();
+  }
+}

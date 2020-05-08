@@ -44,15 +44,23 @@ GuiShortcut::GuiShortcut( QWidget *parent )
   mp_twShortcuts->setRootIsDecorated( false );
   mp_twShortcuts->sortByColumn( 2, Qt::AscendingOrder );
 
+  connect( mp_cbUseShortcuts, SIGNAL( toggled( bool ) ), this, SLOT( enableShortcuts( bool ) ) );
   connect( mp_pbOk, SIGNAL( clicked() ), this, SLOT( saveShortcuts() ) );
   connect( mp_pbCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
   connect( mp_pbDefault, SIGNAL( clicked() ), this, SLOT( restoreDefault() ) );
   connect( mp_twShortcuts, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemClicked( QTreeWidgetItem*, int ) ) );
 }
 
+void GuiShortcut::enableShortcuts( bool are_enabled )
+{
+  mp_twShortcuts->setEnabled( are_enabled );
+  mp_pbDefault->setEnabled( are_enabled );
+}
+
 void GuiShortcut::loadShortcuts()
 {
   mp_cbUseShortcuts->setChecked( Settings::instance().useShortcuts() );
+  enableShortcuts( Settings::instance().useShortcuts() );
 
   mp_twShortcuts->clear();
 

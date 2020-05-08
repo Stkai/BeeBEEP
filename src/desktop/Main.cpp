@@ -220,6 +220,7 @@ int main( int argc, char *argv[] )
 
   Core bee_core;
   bee_core.loadUsersAndGroups();
+  QObject::connect( &bee_app, SIGNAL( networkConfigurationUpdated( const QNetworkConfiguration& ) ), &bee_core, SLOT( updateNetworkConfiguration( const QNetworkConfiguration& ) ) );
 
   if( !QSystemTrayIcon::isSystemTrayAvailable() )
     qWarning() << "System tray icon is not available in this OS";

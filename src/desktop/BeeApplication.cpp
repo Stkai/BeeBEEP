@@ -495,11 +495,7 @@ void BeeApplication::onNetworkConfigurationChanged( const QNetworkConfiguration&
     qWarning() << "Network configuration" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() ) << "is not valid";
     return;
   }
-  qDebug() << "Checking network configuration:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() )
-           << "- state:" << net_conf.state()
-           << "- bearer:" << qPrintable( net_conf.bearerTypeName() ) << net_conf.bearerType() << net_conf.bearerTypeFamily()
-           << "- purpose:" << net_conf.purpose()
-           << "- type:" << net_conf.type();
+  emit networkConfigurationChanged( net_conf );
 }
 
 void BeeApplication::onNetworkConfigurationRemoved( const QNetworkConfiguration& net_conf )

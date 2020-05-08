@@ -142,6 +142,7 @@ public slots:
   /* CoreConnection */
   void checkConnectionPorts();
   void checkFirewall();
+  void updateNetworkConfiguration( const QNetworkConfiguration& );
 
   /* CoreChat */
   void sendWritingMessage( VNumber );

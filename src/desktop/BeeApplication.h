@@ -77,6 +77,7 @@ signals:
   void shutdownRequest();
   void sleepRequest();
   void wakeUpRequest();
+  void networkConfigurationChanged( const QNetworkConfiguration& );
 
 public slots:
   void checkIdle();

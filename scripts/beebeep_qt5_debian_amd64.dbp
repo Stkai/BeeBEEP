@@ -1,7 +1,7 @@
 [DEBREATE-0.7.13]
 <<CTRL>>
 Package: beebeep
-Version: 5.8.2-1
+Version: 5.8.4-1
 Maintainer: Marco Mastroddi <marco.mastroddi@gmail.com>
 Section: comm
 Homepage: https://www.beebeep.net
@@ -67,31 +67,24 @@ rm -f "/usr/bin/beebeep"
 <</SCRIPTS>>
 <<CHANGELOG>>
 <<DEST>>DEFAULT<</DEST>>
-beebeep (5.8.2-1) bionic; urgency=low
+beebeep (5.8.4-1) bionic; urgency=low
 
-  * New Feature: voice messages
-  * New feature: file transfer pause/resume
-  * New feature: data compression with zlib
-  * Added "Quote selected text" option to context menu (right click) of the chat
-  * Added "CheckUserConnectedFromDatagramIp" option in beebeep.rc
-  * Added "Clear system messages" in activity and chat windows
-  * Added "SkipLocalHardwareAddresses" in beebeep.rc to skip unesuful  interfaces
-  * The avatar icon size is also applied in member icons of the chat windows
-  * Added "DisableDesktopSharing" option in beebeep.rc
-  * Added "DisableBeepInUserStatusBusy" option in Settings - Notifications menu
-  * Added "UseUserFullName" option in beebeep.rc
-  * Added "DisableEncryptedConnections" option in beebeep.rc
-  * Added "AllowNotEncryptedConnections" option in beebeep.rc
-  * Added "AllowEncryptedConnectionsAlso" option in beebeep.rc
-  * Added "BroadcastToLocalSubnetAlways" option
-  * User first and last names, email and phone number are now saved
-  * Added "AppendHostNameToUserName" option in beebeep.rc
+ * Fixed known issue: BeeBEEP prevents the CTRL+ALT+B (or CMD+ALT+B on MacOSX) key sequence in other applications from working
+ * Added "KeepModificationDateOnFileTransferred" option in beebeep.ini (it is always enabled in BeeBOX)
+ * Almost all the options of file beebeep.ini can be used in file beebeep.rc also
+ * User icons in chat window can be clicked also if the user is offline
+ * Fixed a bug in options "Disable create message" and "Disable edit groups"
+ * Disabled by default the option to search users by a multicast datagram
+ * Fixed a visualization bug if you open an user VCARD near the side of your desktop
+ * Added "AllowedFileExtensionsInFileTransfer" option in beebeep.rc
+ * Fixed a bug on Download folder when you copy BeeBEEP from a computer to another one
+ * Suspend/sleep mode is now managed also in Linux systems.
 
- -- Marco Mastroddi <marco.mastroddi@gmail.com>  Tue, 15 Oct 2019 15:30:51 +0200
+ -- Marco Mastroddi <marco.mastroddi@gmail.com> 
 
 <</CHANGELOG>>
 <<COPYRIGHT>>
-Copyright © 2019 <Marco Mastroddi> [<marco.mastroddi@gmail.com>]
+Copyright © 2020 <Marco Mastroddi> [<marco.mastroddi@gmail.com>]
 
 /usr/share/common-licenses/GPL-3
 <</COPYRIGHT>>

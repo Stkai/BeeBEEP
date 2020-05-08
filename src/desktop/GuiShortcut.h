@@ -37,6 +37,7 @@ public:
   void loadShortcuts();
 
 private slots:
+  void enableShortcuts( bool );
   void saveShortcuts();
   void restoreDefault();
   void checkItemClicked( QTreeWidgetItem*, int );
