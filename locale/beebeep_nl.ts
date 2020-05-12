@@ -833,6 +833,7 @@
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="50"/>
         <source>yyyy-MM-dd</source>
+        <extracomment>default date format in chat message</extracomment>
         <translation></translation>
     </message>
     <message>
@@ -6093,27 +6094,27 @@ Gebruik aub een andere naam.</translation>
         <translation>Type</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="66"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="74"/>
         <source>Global</source>
         <translation>Globaal</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="66"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="74"/>
         <source>Local</source>
         <translation>Lokaal</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="118"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="126"/>
         <source>Insert shorcut for the action: %1</source>
         <translation>Voeg snelkoppeling toe voor de actie: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="131"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="139"/>
         <source>You cannot use the comma for your shortcut.</source>
         <translation>Je kan geen komma gebruiken voor een sneltoets.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="131"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="139"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
@@ -6126,27 +6127,27 @@ Gebruik aub een andere naam.</translation>
         <translation>Dialoog</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.ui" line="23"/>
+        <location filename="../src/desktop/GuiShortcut.ui" line="38"/>
         <source>Use custom shortcuts</source>
         <translation>Gebruik eigen snelkoppelingen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.ui" line="50"/>
+        <location filename="../src/desktop/GuiShortcut.ui" line="82"/>
         <source>Restore default shortcuts</source>
         <translation>Hestel standaard snelkoppelingen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.ui" line="53"/>
+        <location filename="../src/desktop/GuiShortcut.ui" line="85"/>
         <source>Restore</source>
         <translation>Herstel</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.ui" line="76"/>
+        <location filename="../src/desktop/GuiShortcut.ui" line="108"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.ui" line="89"/>
+        <location filename="../src/desktop/GuiShortcut.ui" line="121"/>
         <source>Cancel</source>
         <translation>Annuleren</translation>
     </message>

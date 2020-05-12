@@ -804,6 +804,7 @@
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="50"/>
         <source>yyyy-MM-dd</source>
+        <extracomment>default date format in chat message</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5979,27 +5980,27 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="66"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="74"/>
         <source>Global</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="66"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="74"/>
         <source>Local</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="118"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="126"/>
         <source>Insert shorcut for the action: %1</source>
         <translation>Chèn phím tắt cho thao tác: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="131"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="139"/>
         <source>You cannot use the comma for your shortcut.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="131"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="139"/>
         <source>Ok</source>
         <translation type="unfinished">Đồng ý</translation>
     </message>
@@ -6012,27 +6013,27 @@ Vui lòng chọn một tên khác nhau.</translation>
         <translation>Hộp thoại</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.ui" line="23"/>
+        <location filename="../src/desktop/GuiShortcut.ui" line="38"/>
         <source>Use custom shortcuts</source>
         <translation>Sử dụng các phím tắt tùy chỉnh</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.ui" line="50"/>
+        <location filename="../src/desktop/GuiShortcut.ui" line="82"/>
         <source>Restore default shortcuts</source>
         <translation>Khôi phục các phím tắt mặc định</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.ui" line="53"/>
+        <location filename="../src/desktop/GuiShortcut.ui" line="85"/>
         <source>Restore</source>
         <translation>Khôi phục</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.ui" line="76"/>
+        <location filename="../src/desktop/GuiShortcut.ui" line="108"/>
         <source>Ok</source>
         <translation>Đồng ý</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.ui" line="89"/>
+        <location filename="../src/desktop/GuiShortcut.ui" line="121"/>
         <source>Cancel</source>
         <translation>Hủy bỏ</translation>
     </message>

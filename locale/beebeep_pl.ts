@@ -814,6 +814,7 @@
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="50"/>
         <source>yyyy-MM-dd</source>
+        <extracomment>default date format in chat message</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5991,27 +5992,27 @@ Proszę wybrać inną nazwę.</translation>
         <translation>Typ</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="66"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="74"/>
         <source>Global</source>
         <translation>Globalny</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="66"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="74"/>
         <source>Local</source>
         <translation>Lokalny</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="118"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="126"/>
         <source>Insert shorcut for the action: %1</source>
         <translation>Dodaj skrót dla akcji: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="131"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="139"/>
         <source>You cannot use the comma for your shortcut.</source>
         <translation>Nie możesz użyć przecinka jako Twój skrót.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="131"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="139"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
@@ -6024,27 +6025,27 @@ Proszę wybrać inną nazwę.</translation>
         <translation>Dialog</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.ui" line="23"/>
+        <location filename="../src/desktop/GuiShortcut.ui" line="38"/>
         <source>Use custom shortcuts</source>
         <translation>Użyj własnych skrótów</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.ui" line="50"/>
+        <location filename="../src/desktop/GuiShortcut.ui" line="82"/>
         <source>Restore default shortcuts</source>
         <translation>Przywróć domyślne skróty</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.ui" line="53"/>
+        <location filename="../src/desktop/GuiShortcut.ui" line="85"/>
         <source>Restore</source>
         <translation>Przywróć</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.ui" line="76"/>
+        <location filename="../src/desktop/GuiShortcut.ui" line="108"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.ui" line="89"/>
+        <location filename="../src/desktop/GuiShortcut.ui" line="121"/>
         <source>Cancel</source>
         <translation>Anuluj</translation>
     </message>

@@ -764,6 +764,7 @@
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="50"/>
         <source>yyyy-MM-dd</source>
+        <extracomment>default date format in chat message</extracomment>
         <translation>yyyy-MM-dd</translation>
     </message>
     <message>
@@ -5762,27 +5763,27 @@ Please select a different name.</source>
         <translation>類型</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="66"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="74"/>
         <source>Global</source>
         <translation>全域</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="66"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="74"/>
         <source>Local</source>
         <translation>本機</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="118"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="126"/>
         <source>Insert shorcut for the action: %1</source>
         <translation>插入快速鍵給動作: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="131"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="139"/>
         <source>You cannot use the comma for your shortcut.</source>
         <translation>您不能在快速鍵使用逗號。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="131"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="139"/>
         <source>Ok</source>
         <translation>確定</translation>
     </message>
@@ -5795,27 +5796,27 @@ Please select a different name.</source>
         <translation>對話方塊</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.ui" line="23"/>
+        <location filename="../src/desktop/GuiShortcut.ui" line="38"/>
         <source>Use custom shortcuts</source>
         <translation>使用自訂快速鍵</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.ui" line="50"/>
+        <location filename="../src/desktop/GuiShortcut.ui" line="82"/>
         <source>Restore default shortcuts</source>
         <translation>還原預設快速鍵</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.ui" line="53"/>
+        <location filename="../src/desktop/GuiShortcut.ui" line="85"/>
         <source>Restore</source>
         <translation>還原</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.ui" line="76"/>
+        <location filename="../src/desktop/GuiShortcut.ui" line="108"/>
         <source>Ok</source>
         <translation>確定</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.ui" line="89"/>
+        <location filename="../src/desktop/GuiShortcut.ui" line="121"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>

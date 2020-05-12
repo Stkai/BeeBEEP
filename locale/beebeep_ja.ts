@@ -766,6 +766,7 @@
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="50"/>
         <source>yyyy-MM-dd</source>
+        <extracomment>default date format in chat message</extracomment>
         <translation>yyyy年MM月dd日</translation>
     </message>
     <message>
@@ -3389,7 +3390,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="873"/>
         <source>Reset minimum width for applied style</source>
-        <translation type="unfinished"></translation>
+        <translation>適用したスタイルの最小幅を初期化(&amp;R)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1018"/>
@@ -3838,7 +3839,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4794"/>
         <source>The download folder does not exists or is not writable. Please select a new one.</source>
-        <translation type="unfinished"></translation>
+        <translation>ダウンロードフォルダが存在しないか、書き込めません。別のフォルダを選択してください。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4855"/>
@@ -5789,27 +5790,27 @@ Please select a different name.</source>
         <translation>種類</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="66"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="74"/>
         <source>Global</source>
         <translation>共通</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="66"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="74"/>
         <source>Local</source>
         <translation>個別</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="118"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="126"/>
         <source>Insert shorcut for the action: %1</source>
         <translation>ショートカットキーを指定: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="131"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="139"/>
         <source>You cannot use the comma for your shortcut.</source>
         <translation>ショートカットキーにカンマは使用できません。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.cpp" line="131"/>
+        <location filename="../src/desktop/GuiShortcut.cpp" line="139"/>
         <source>Ok</source>
         <translation>OK</translation>
     </message>
@@ -5822,27 +5823,27 @@ Please select a different name.</source>
         <translation>ダイアログ</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.ui" line="23"/>
+        <location filename="../src/desktop/GuiShortcut.ui" line="38"/>
         <source>Use custom shortcuts</source>
         <translation>ショートカットキーを使用</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.ui" line="50"/>
+        <location filename="../src/desktop/GuiShortcut.ui" line="82"/>
         <source>Restore default shortcuts</source>
         <translation>ショートカットキーを初期設定に戻す</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.ui" line="53"/>
+        <location filename="../src/desktop/GuiShortcut.ui" line="85"/>
         <source>Restore</source>
         <translation>初期化</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.ui" line="76"/>
+        <location filename="../src/desktop/GuiShortcut.ui" line="108"/>
         <source>Ok</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiShortcut.ui" line="89"/>
+        <location filename="../src/desktop/GuiShortcut.ui" line="121"/>
         <source>Cancel</source>
         <translation>キャンセル</translation>
     </message>

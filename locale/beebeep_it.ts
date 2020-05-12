@@ -722,6 +722,7 @@
     </message>
     <message>
         <source>yyyy-MM-dd</source>
+        <extracomment>default date format in chat message</extracomment>
         <translation>yyyy-MM-dd</translation>
     </message>
     <message>
@@ -3717,7 +3718,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Reset minimum width for applied style</source>
-        <translation type="unfinished">Imposta la larghezza minima per lo stile applicato</translation>
+        <translation>Imposta la larghezza minima per lo stile applicato</translation>
     </message>
 </context>
 <context>
