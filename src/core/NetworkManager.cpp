@@ -459,3 +459,31 @@ QList<QHostAddress> NetworkManager::splitInIPv4HostAddresses( const QHostAddress
 
   return ha_list;
 }
+
+bool NetworkManager::isHostAddressAllowed( const QHostAddress& ha ) const
+{
+  if( !Settings::instance().allowOnlyHostAddressesFromHostsIni() )
+    return true;
+
+  if( Settings::instance().broadcastAddressesInFileHosts().isEmpty() )
+    return false;
+
+  QString s_ha_to_test = ha.toString();
+  foreach( QString s_ha, Settings::instance().broadcastAddressesInFileHosts() )
+  {
+    NetworkAddress na = NetworkAddress::fromString( s_ha );
+    if( na.hostAddress() == ha )
+      return true;
+    if( na.isIPv4Address() && !na.isHostPortValid() )
+    {
+      QString s_na_allowed = na.hostAddress().toString();
+      if( s_na_allowed.endsWith( ".255" ) )
+      {
+        s_na_allowed.chop( 4 );
+        if( s_ha_to_test.startsWith( s_na_allowed ) )
+          return true;
+      }
+    }
+  }
+  return false;
+}

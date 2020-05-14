@@ -77,12 +77,12 @@
         <translation>%1 Vous êtes connecté au réseau %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="403"/>
+        <location filename="../src/core/Core.cpp" line="412"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1 Vous êtes déconnecté du réseau %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="332"/>
+        <location filename="../src/core/Core.cpp" line="341"/>
         <source>%1 Zero Configuration started with service name: %2</source>
         <translation>%1 Zero Configuration démarre avec le service : %2</translation>
     </message>
@@ -118,76 +118,81 @@
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="270"/>
+        <source>%1 %2 accepts incoming connections only from the IP addresses present in the HOSTS file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/Core.cpp" line="279"/>
         <source>%1 You have selected to join only in these workgroups: %2</source>
         <translation>%1 Vous avez choisi de ne vous joindre qu&apos;à ces groupes de travail : %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="299"/>
+        <location filename="../src/core/Core.cpp" line="308"/>
         <source>%1 Do you need support? Visit the %2.</source>
         <translation>%1 Besoin d&apos;aide ? Visitez le %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="301"/>
+        <location filename="../src/core/Core.cpp" line="310"/>
         <source>help page</source>
         <translation>Page d&apos;aide</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="347"/>
+        <location filename="../src/core/Core.cpp" line="356"/>
         <source>%1 Zero Configuration service closed.</source>
         <translation>%1 Zero Configuration service arrêté.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="409"/>
+        <location filename="../src/core/Core.cpp" line="418"/>
         <source>Disconnected</source>
         <translation>Déconnecté</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="415"/>
+        <location filename="../src/core/Core.cpp" line="424"/>
         <source>Disconnecting</source>
         <translation>Deconnexion</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="436"/>
+        <location filename="../src/core/Core.cpp" line="445"/>
         <source>%1 Reconnecting to the %2 Network in progress.</source>
         <translation>%1 Reconnexion au réseau %2 en cours.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="446"/>
+        <location filename="../src/core/Core.cpp" line="455"/>
         <source>Reconnecting</source>
         <translation>Reconnexion</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="464"/>
+        <location filename="../src/core/Core.cpp" line="473"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
         <translation>%1 Zero Configuration recherche le service : %2 sur le réseau</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="471"/>
+        <location filename="../src/core/Core.cpp" line="480"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation>%1 Zero Configuration ne peut pas rechercher le service : %2 sur le réseau</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="495"/>
+        <location filename="../src/core/Core.cpp" line="504"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1 Diffusion sur le réseau %2 ...</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="497"/>
+        <location filename="../src/core/Core.cpp" line="506"/>
         <source>Searching users</source>
         <translation>Recherche d&apos;utilisateurs</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="628"/>
+        <location filename="../src/core/Core.cpp" line="637"/>
         <source>New version is available</source>
         <translation>Une nouvelle version est disponible</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="629"/>
+        <location filename="../src/core/Core.cpp" line="638"/>
         <source>Click here to download</source>
         <translation>Cliquer ici pour télécharger</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="728"/>
+        <location filename="../src/core/Core.cpp" line="737"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>ID max atteint. Veuillez quitter et relancer l&apos;application.</translation>
     </message>
@@ -408,7 +413,7 @@
         <translation>%1 %2 ne peut pas être averti que vous quittez le groupe.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="537"/>
+        <location filename="../src/core/Core.cpp" line="546"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1 L&apos;interface réseau %2 est tombée.</translation>
     </message>
@@ -715,60 +720,60 @@
         <translation>a été ajouté à vos favoris</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="290"/>
+        <location filename="../src/core/CoreConnection.cpp" line="305"/>
         <source>%1 Connection closed to user %2 because it uses your nickname: %3.</source>
         <translation>%1 Connexion vers l&apos;utilisateur %2 fermée car elle utilise votre pseudo : %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="277"/>
-        <location filename="../src/core/CoreConnection.cpp" line="283"/>
+        <location filename="../src/core/CoreConnection.cpp" line="292"/>
+        <location filename="../src/core/CoreConnection.cpp" line="298"/>
         <source>%1 Connection closed to user %2 because it uses your account name: %3.</source>
         <translation>%1 Connexion vers l&apos;utilisateur %2 fermée car elle utilise votre nom de compte : %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="279"/>
-        <location filename="../src/core/CoreConnection.cpp" line="317"/>
+        <location filename="../src/core/CoreConnection.cpp" line="294"/>
+        <location filename="../src/core/CoreConnection.cpp" line="332"/>
         <source>domain</source>
         <translation>domaine</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="295"/>
+        <location filename="../src/core/CoreConnection.cpp" line="310"/>
         <source>%1 Connection closed to user %2 because it uses your hash code.</source>
         <translation>%1 Connexion vers l&apos;utilisateur %2 fermée car elle utilise votre code de hachage.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="315"/>
-        <location filename="../src/core/CoreConnection.cpp" line="322"/>
+        <location filename="../src/core/CoreConnection.cpp" line="330"/>
+        <location filename="../src/core/CoreConnection.cpp" line="337"/>
         <source>%1 Connection closed to user %2 because it uses same account name of the already connected user %3: %4.</source>
         <translation>%1 Connexion vers l&apos;utilisateur %2 fermée car elle utilise le même nom de compte de l&apos;utilisateur déjà connecté %3: %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="330"/>
+        <location filename="../src/core/CoreConnection.cpp" line="345"/>
         <source>%1 Connection closed to user %2 because it uses same nickname of the already connected user %3: %4.</source>
         <translation>%1 Connexion vers l&apos;utilisateur %2 fermée car elle utilise le même pseudo de l&apos;utilisateur déjà connecté %3: %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="336"/>
+        <location filename="../src/core/CoreConnection.cpp" line="351"/>
         <source>%1 Connection closed to user %2 because it uses same hash code of the already connected user %3: %4.</source>
         <translation>%1 Connexion vers l&apos;utilisateur %2 fermée car elle utilise le code de hachage que l&apos;utilisateur déjà connecté %3: %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="399"/>
+        <location filename="../src/core/CoreConnection.cpp" line="414"/>
         <source>%1 users connected</source>
         <translation>%1 utilisateurs connectés</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="406"/>
+        <location filename="../src/core/CoreConnection.cpp" line="421"/>
         <source>%1 %2 uses old encryption level.</source>
         <translation>%1 %2 utilise l&apos;ancien niveau de cryptage.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="414"/>
+        <location filename="../src/core/CoreConnection.cpp" line="429"/>
         <source>%1 has end-to-end encryption enabled</source>
         <translation>%1 a activé le cryptage de bout en bout</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="424"/>
+        <location filename="../src/core/CoreConnection.cpp" line="439"/>
         <source>%1 has end-to-end encryption disabled</source>
         <translation>%1 a désactivé le cryptage de bout en bout</translation>
     </message>
@@ -821,7 +826,6 @@
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="50"/>
         <source>yyyy-MM-dd</source>
-        <extracomment>default date format in chat message</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7053,7 +7057,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2425"/>
+        <location filename="../src/core/Settings.cpp" line="2428"/>
         <source>Autoresponder</source>
         <translation>Répondeur automatique</translation>
     </message>

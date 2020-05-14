@@ -77,12 +77,12 @@
         <translation>%1 Du er kobla til %2 nettverk.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="403"/>
+        <location filename="../src/core/Core.cpp" line="412"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1 Du er kobla fra %2 nettverk.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="332"/>
+        <location filename="../src/core/Core.cpp" line="341"/>
         <source>%1 Zero Configuration started with service name: %2</source>
         <translation>%1 Null-konfigurasjon starta med tjenestenavn: %2</translation>
     </message>
@@ -118,76 +118,81 @@
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="270"/>
+        <source>%1 %2 accepts incoming connections only from the IP addresses present in the HOSTS file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/Core.cpp" line="279"/>
         <source>%1 You have selected to join only in these workgroups: %2</source>
         <translation>%1 Du har valgt å delta bare i disse arbeidsgruppene: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="299"/>
+        <location filename="../src/core/Core.cpp" line="308"/>
         <source>%1 Do you need support? Visit the %2.</source>
         <translation>%1 Trenger du support? Besøk %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="301"/>
+        <location filename="../src/core/Core.cpp" line="310"/>
         <source>help page</source>
         <translation>hjelpeside</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="347"/>
+        <location filename="../src/core/Core.cpp" line="356"/>
         <source>%1 Zero Configuration service closed.</source>
         <translation>%1 Nullkonfigurasjonstjeneste lukka.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="409"/>
+        <location filename="../src/core/Core.cpp" line="418"/>
         <source>Disconnected</source>
         <translation>Frakoplet</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="415"/>
+        <location filename="../src/core/Core.cpp" line="424"/>
         <source>Disconnecting</source>
         <translation>Kopler fra</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="436"/>
+        <location filename="../src/core/Core.cpp" line="445"/>
         <source>%1 Reconnecting to the %2 Network in progress.</source>
         <translation>%1 Gjenoppkopling til %2 nettverket pågår.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="446"/>
+        <location filename="../src/core/Core.cpp" line="455"/>
         <source>Reconnecting</source>
         <translation>Kopler til på nytt</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="464"/>
+        <location filename="../src/core/Core.cpp" line="473"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
         <translation>%1 Nullkonfigurasjon søker i nettverk etter tjeneste: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="471"/>
+        <location filename="../src/core/Core.cpp" line="480"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation>%1 Nullkonfigurasjon kan ikke søke i nettverket etter tjeneste: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="495"/>
+        <location filename="../src/core/Core.cpp" line="504"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1 Kringkaster til %2-nettverket...</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="497"/>
+        <location filename="../src/core/Core.cpp" line="506"/>
         <source>Searching users</source>
         <translation>Letter opp brukere</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="628"/>
+        <location filename="../src/core/Core.cpp" line="637"/>
         <source>New version is available</source>
         <translation>Ny versjon er tilgjengelig</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="629"/>
+        <location filename="../src/core/Core.cpp" line="638"/>
         <source>Click here to download</source>
         <translation>Klikk her for å laste ned</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="728"/>
+        <location filename="../src/core/Core.cpp" line="737"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>Har nådd maks ID. Vennligst lukk og restart program.</translation>
     </message>
@@ -408,7 +413,7 @@
         <translation>%1 %2 kan ikke informeres om at du har forlatt gruppa.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="537"/>
+        <location filename="../src/core/Core.cpp" line="546"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1 nettverksgrensesnittet %2 er nede.</translation>
     </message>
@@ -715,60 +720,60 @@
         <translation>er lagt til favoritter</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="290"/>
+        <location filename="../src/core/CoreConnection.cpp" line="305"/>
         <source>%1 Connection closed to user %2 because it uses your nickname: %3.</source>
         <translation>%1 Forbindelse stengt mot bruker %2 fordi den bruker ditt kallenavn: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="277"/>
-        <location filename="../src/core/CoreConnection.cpp" line="283"/>
+        <location filename="../src/core/CoreConnection.cpp" line="292"/>
+        <location filename="../src/core/CoreConnection.cpp" line="298"/>
         <source>%1 Connection closed to user %2 because it uses your account name: %3.</source>
         <translation>%1 Forbindelse stengt til bruker %2 fordi den bruker ditt kontonavn: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="279"/>
-        <location filename="../src/core/CoreConnection.cpp" line="317"/>
+        <location filename="../src/core/CoreConnection.cpp" line="294"/>
+        <location filename="../src/core/CoreConnection.cpp" line="332"/>
         <source>domain</source>
         <translation>domene</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="295"/>
+        <location filename="../src/core/CoreConnection.cpp" line="310"/>
         <source>%1 Connection closed to user %2 because it uses your hash code.</source>
         <translation>%1 Forbindelse stengt til bruker %2 fordi den bruker din hash-kode.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="315"/>
-        <location filename="../src/core/CoreConnection.cpp" line="322"/>
+        <location filename="../src/core/CoreConnection.cpp" line="330"/>
+        <location filename="../src/core/CoreConnection.cpp" line="337"/>
         <source>%1 Connection closed to user %2 because it uses same account name of the already connected user %3: %4.</source>
         <translation>%1 Forbindelse stengt til bruker %2 fordin den bruker samme kontonavn som en allerede tilkoplet bruker %3: %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="330"/>
+        <location filename="../src/core/CoreConnection.cpp" line="345"/>
         <source>%1 Connection closed to user %2 because it uses same nickname of the already connected user %3: %4.</source>
         <translation>%1 Forbindelse stengt til bruker %2 fordi den bruker samme kallenavn som en allerede tilkoplet bruker %3: %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="336"/>
+        <location filename="../src/core/CoreConnection.cpp" line="351"/>
         <source>%1 Connection closed to user %2 because it uses same hash code of the already connected user %3: %4.</source>
         <translation>%1 Forbindelse stengt til bruker %2 fordin den bruker samme hash-kode som en allerede oppkoplet bruker %3: %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="399"/>
+        <location filename="../src/core/CoreConnection.cpp" line="414"/>
         <source>%1 users connected</source>
         <translation>%1 brukere oppkoplet</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="406"/>
+        <location filename="../src/core/CoreConnection.cpp" line="421"/>
         <source>%1 %2 uses old encryption level.</source>
         <translation>%1 %2 bruker gammelt krypteringsnivå.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="414"/>
+        <location filename="../src/core/CoreConnection.cpp" line="429"/>
         <source>%1 has end-to-end encryption enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="424"/>
+        <location filename="../src/core/CoreConnection.cpp" line="439"/>
         <source>%1 has end-to-end encryption disabled</source>
         <translation type="unfinished"></translation>
     </message>
@@ -821,7 +826,6 @@
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="50"/>
         <source>yyyy-MM-dd</source>
-        <extracomment>default date format in chat message</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7006,7 +7010,7 @@ Velg et annet navn.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2425"/>
+        <location filename="../src/core/Settings.cpp" line="2428"/>
         <source>Autoresponder</source>
         <translation>Auto-responder</translation>
     </message>

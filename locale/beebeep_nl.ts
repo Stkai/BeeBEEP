@@ -77,12 +77,12 @@
         <translation>%1 U bent verbonden met %2 netwerk.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="403"/>
+        <location filename="../src/core/Core.cpp" line="412"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1 U bent niet langer verbonden met het %2 netwerk.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="332"/>
+        <location filename="../src/core/Core.cpp" line="341"/>
         <source>%1 Zero Configuration started with service name: %2</source>
         <translation>%1 Nul configuratie start altijd met service naam: %2</translation>
     </message>
@@ -126,76 +126,81 @@
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="270"/>
+        <source>%1 %2 accepts incoming connections only from the IP addresses present in the HOSTS file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/Core.cpp" line="279"/>
         <source>%1 You have selected to join only in these workgroups: %2</source>
         <translation>%1 Je hebt ervoor gekozen om enkel van deze werkgroepen deel uit te maken: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="299"/>
+        <location filename="../src/core/Core.cpp" line="308"/>
         <source>%1 Do you need support? Visit the %2.</source>
         <translation>%1 Heb je hulp nodig? Bezoek %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="301"/>
+        <location filename="../src/core/Core.cpp" line="310"/>
         <source>help page</source>
         <translation>help pagina</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="347"/>
+        <location filename="../src/core/Core.cpp" line="356"/>
         <source>%1 Zero Configuration service closed.</source>
         <translation>%1 Nul configuratie service gesloten.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="409"/>
+        <location filename="../src/core/Core.cpp" line="418"/>
         <source>Disconnected</source>
         <translation>Verbinding verbroken</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="415"/>
+        <location filename="../src/core/Core.cpp" line="424"/>
         <source>Disconnecting</source>
         <translation>Verbinding verbroken</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="436"/>
+        <location filename="../src/core/Core.cpp" line="445"/>
         <source>%1 Reconnecting to the %2 Network in progress.</source>
         <translation>%1 Verbind opnieuw met %2 netwerk is bezig.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="446"/>
+        <location filename="../src/core/Core.cpp" line="455"/>
         <source>Reconnecting</source>
         <translation>Opnieuw verbinden</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="464"/>
+        <location filename="../src/core/Core.cpp" line="473"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
         <translation>%1 Nul configuratie doorzoekt het netwerk naar de %2-service</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="471"/>
+        <location filename="../src/core/Core.cpp" line="480"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation>%1 Nul configuratie kan het netwerk niet doorzoeken naar de %2-service</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="495"/>
+        <location filename="../src/core/Core.cpp" line="504"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1 Versturen naar %2 netwerk...</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="497"/>
+        <location filename="../src/core/Core.cpp" line="506"/>
         <source>Searching users</source>
         <translation>Zoek gebruikers</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="628"/>
+        <location filename="../src/core/Core.cpp" line="637"/>
         <source>New version is available</source>
         <translation>Nieuwe versie beschikbaar</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="629"/>
+        <location filename="../src/core/Core.cpp" line="638"/>
         <source>Click here to download</source>
         <translation>Klik hier om te downloaden</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="728"/>
+        <location filename="../src/core/Core.cpp" line="737"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>Max-ID is bereikt. Sluit en herstart Beebeep AUB.</translation>
     </message>
@@ -420,7 +425,7 @@
         <translation>%1 %2 kan niet verwittigd worden dat u de groep verlaten heeft.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="537"/>
+        <location filename="../src/core/Core.cpp" line="546"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1 Netwerkkaart %2 is verdwenen.</translation>
     </message>
@@ -727,60 +732,60 @@
         <translation>is toegevoegd aan favorieten</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="290"/>
+        <location filename="../src/core/CoreConnection.cpp" line="305"/>
         <source>%1 Connection closed to user %2 because it uses your nickname: %3.</source>
         <translation>%1 Verbinding gesloten naar gebruiker %2 omdat hij je bijnaam %3 gebruikt.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="277"/>
-        <location filename="../src/core/CoreConnection.cpp" line="283"/>
+        <location filename="../src/core/CoreConnection.cpp" line="292"/>
+        <location filename="../src/core/CoreConnection.cpp" line="298"/>
         <source>%1 Connection closed to user %2 because it uses your account name: %3.</source>
         <translation>%1 Verbinding gesloten naar gebruiker %2 omdat hij je accountnaam %3 gebruikt.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="279"/>
-        <location filename="../src/core/CoreConnection.cpp" line="317"/>
+        <location filename="../src/core/CoreConnection.cpp" line="294"/>
+        <location filename="../src/core/CoreConnection.cpp" line="332"/>
         <source>domain</source>
         <translation>domein</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="295"/>
+        <location filename="../src/core/CoreConnection.cpp" line="310"/>
         <source>%1 Connection closed to user %2 because it uses your hash code.</source>
         <translation>%1 Verbinding gesloten naar gebruiker %2 omdat hij je hash-code gebruikt.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="315"/>
-        <location filename="../src/core/CoreConnection.cpp" line="322"/>
+        <location filename="../src/core/CoreConnection.cpp" line="330"/>
+        <location filename="../src/core/CoreConnection.cpp" line="337"/>
         <source>%1 Connection closed to user %2 because it uses same account name of the already connected user %3: %4.</source>
         <translation>%1 Verbinding gesloten naar gebruiker %2 omdat hij zelfde accountnaam gebruikt als de al verbonden gebruiker %3 %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="330"/>
+        <location filename="../src/core/CoreConnection.cpp" line="345"/>
         <source>%1 Connection closed to user %2 because it uses same nickname of the already connected user %3: %4.</source>
         <translation>%1 Verbinding gesloten naar gebruiker %2 omdat hij zelfde bijnaam gebruikt als de al verbonden gebruiker %3 %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="336"/>
+        <location filename="../src/core/CoreConnection.cpp" line="351"/>
         <source>%1 Connection closed to user %2 because it uses same hash code of the already connected user %3: %4.</source>
         <translation>%1 Verbinding gesloten naar gebruiker %2 omdat hij dezelfde hash-code gebruikt als de al verbonden gebruiker %3:%4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="399"/>
+        <location filename="../src/core/CoreConnection.cpp" line="414"/>
         <source>%1 users connected</source>
         <translation>%1 gebruikers verbonden</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="406"/>
+        <location filename="../src/core/CoreConnection.cpp" line="421"/>
         <source>%1 %2 uses old encryption level.</source>
         <translation>%1 %2 gebruikt een oude encryptie level.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="414"/>
+        <location filename="../src/core/CoreConnection.cpp" line="429"/>
         <source>%1 has end-to-end encryption enabled</source>
         <translation>%1 heeft end-to-end encryptie ingeschakeld</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="424"/>
+        <location filename="../src/core/CoreConnection.cpp" line="439"/>
         <source>%1 has end-to-end encryption disabled</source>
         <translation>%1 heeft end-to-end encryptie uitgeschakeld</translation>
     </message>
@@ -833,7 +838,6 @@
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="50"/>
         <source>yyyy-MM-dd</source>
-        <extracomment>default date format in chat message</extracomment>
         <translation></translation>
     </message>
     <message>
@@ -7075,7 +7079,7 @@ Gebruik aub een andere naam.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2425"/>
+        <location filename="../src/core/Settings.cpp" line="2428"/>
         <source>Autoresponder</source>
         <translation>Autobeantwoorder</translation>
     </message>

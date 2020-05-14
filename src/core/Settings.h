@@ -394,6 +394,7 @@ public:
   inline void setLocalSubnetForced( const QString& );
   inline const QString& localSubnetForced() const;
   inline bool broadcastOnlyToHostsIni() const;
+  inline bool allowOnlyHostAddressesFromHostsIni() const;
   inline bool useOnlyMulticast() const;
   inline void setPreventMultipleConnectionsFromSingleHostAddress( bool );
   inline bool preventMultipleConnectionsFromSingleHostAddress();
@@ -672,6 +673,7 @@ private:
   // RC
   bool m_useSettingsFileIni;
   bool m_broadcastOnlyToHostsIni;
+  bool m_allowOnlyHostAddressesFromHostsIni;
   int m_defaultBroadcastPort;
   int m_defaultListenerPort;
   int m_defaultFileTransferPort;
@@ -1099,6 +1101,7 @@ inline const QHostAddress& Settings::localHostAddressForced() const { return m_l
 inline void Settings::setLocalSubnetForced( const QString& new_value ) { m_localSubnetForced = new_value; }
 inline const QString& Settings::localSubnetForced() const { return m_localSubnetForced; }
 inline bool Settings::broadcastOnlyToHostsIni() const { return m_broadcastOnlyToHostsIni; }
+inline bool Settings::allowOnlyHostAddressesFromHostsIni() const { return m_allowOnlyHostAddressesFromHostsIni; }
 inline bool Settings::useOnlyMulticast() const { return m_useOnlyMulticast; }
 inline bool Settings::useMulticastDns() const { return m_useMulticastDns; }
 inline void Settings::setUseMulticastDns( bool new_value ) { m_useMulticastDns = new_value; }

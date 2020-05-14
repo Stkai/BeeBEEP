@@ -183,5 +183,6 @@
         <file>images/encryption-disabled.png</file>
         <file>images/encryption-enabled.png</file>
         <file>images/audio-settings.png</file>
+        <file>images/firewall.png</file>
     </qresource>
 </RCC>

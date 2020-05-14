@@ -101,11 +101,17 @@ void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )
     return;
   }
 
+  if( NetworkManager::instance().isHostAddressAllowed( sender_ip ) )
+  {
+    qWarning() << "New peer found" << qPrintable( sender_ip.toString() ) << "is not allowed by file HOSTS";
+    return;
+  }
+
   if( Settings::instance().preventMultipleConnectionsFromSingleHostAddress() )
   {
     if( hasConnection( sender_ip, -1 ) )
     {
-      qDebug() << qPrintable( sender_ip.toString() ) << "is already connected and blocked by prevent multiple connections option";
+      qDebug() << "New peer found" << qPrintable( sender_ip.toString() ) << "is already connected and blocked by prevent multiple connections option";
       return;
     }
   }
@@ -115,13 +121,13 @@ void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )
   {
     User u = UserManager::instance().findUserByNetworkAddress( na );
     if( u.isValid() )
-      qDebug() << "Skip new peer" << qPrintable( sender_ip.toString() ) << "from connected user" << qPrintable( u.name() );
+      qDebug() << "Skip new peer found" << qPrintable( sender_ip.toString() ) << "from connected user" << qPrintable( u.name() );
     else
-      qWarning() << qPrintable( sender_ip.toString() ) << "is already connected (but user is not authorized yet)";
+      qWarning() << "New peer found" << qPrintable( sender_ip.toString() ) << "is already connected (but user is not authorized yet)";
     return;
   }
 
-  qDebug() << "Connecting to new peer" << qPrintable( sender_ip.toString() ) << sender_port;
+  qDebug() << "Connecting to new peer found" << qPrintable( sender_ip.toString() ) << sender_port;
 
   Connection *c = createConnection();
   setupNewConnection( c );
@@ -133,7 +139,16 @@ void Core::checkNewConnection( qintptr socket_descriptor )
   Connection *c = createConnection();
   c->initSocket( socket_descriptor, mp_listener->serverPort() );
   qDebug() << "New connection to port" << mp_listener->serverPort() << "from" << qPrintable( c->networkAddress().toString() );
-  setupNewConnection( c );
+  if( NetworkManager::instance().isHostAddressAllowed( c->networkAddress().hostAddress() ) )
+  {
+    qDebug() << "New connection to port" << mp_listener->serverPort() << "from" << qPrintable( c->networkAddress().toString() );
+    setupNewConnection( c );
+  }
+  else
+  {
+    qWarning() << "New connection to port" << mp_listener->serverPort() << "from" << qPrintable( c->networkAddress().toString() ) << "is not allowed by file HOSTS";
+    closeConnection( c );
+  }
 }
 
 void Core::setupNewConnection( Connection *c )
@@ -483,7 +498,10 @@ void Core::updateNetworkConfiguration( const QNetworkConfiguration& net_conf )
   }
 
   qDebug() << "Core is checking network configuration:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() )
-           << "- bearer:" << qPrintable( net_conf.bearerTypeName() ) << net_conf.bearerType() << net_conf.bearerTypeFamily()
+           << "- bearer:" << qPrintable( net_conf.bearerTypeName() ) << net_conf.bearerType()
+#if QT_VERSION > 0x050000
+           << net_conf.bearerTypeFamily()
+#endif
            << "- purpose:" << net_conf.purpose()
            << "- type:" << net_conf.type()
            << "- state:" << net_conf.state();

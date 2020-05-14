@@ -13,6 +13,7 @@ BeeBEEP 5.8.3 (in development)
 - Added "AllowedFileExtensionsInFileTransfer" option in beebeep.rc
 - Fixed a bug on Download folder when you copy BeeBEEP from a computer to another one
 - Suspend/sleep mode is now managed also in Linux systems.
+- Added "AllowOnlyHostAddressesFromHostsIni" option in file beebeep.rc
 
 BeeBEEP 5.8.2
 - New feature: voice messages (you can record your message and send it as file)

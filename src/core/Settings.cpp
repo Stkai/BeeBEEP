@@ -43,6 +43,7 @@ Settings::Settings()
   m_useChatWithAllUsers = true;
   m_useSettingsFileIni = true;
   m_broadcastOnlyToHostsIni = false;
+  m_allowOnlyHostAddressesFromHostsIni = false;
   m_useOnlyMulticast = false;
   m_defaultBroadcastPort = DEFAULT_BROADCAST_PORT;
   m_defaultListenerPort = DEFAULT_LISTENER_PORT;
@@ -472,6 +473,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "EnableSaveData", m_enableSaveData );
     sets->setValue( "UseConfigurationFileIni", m_useSettingsFileIni );
     sets->setValue( "BroadcastOnlyToHostsIni", m_broadcastOnlyToHostsIni );
+    sets->setValue( "AllowOnlyHostAddressesFromHostsIni", m_allowOnlyHostAddressesFromHostsIni );
     sets->setValue( "UseOnlyMulticast", m_useOnlyMulticast );
     sets->setValue( "BroadcastPort", m_defaultBroadcastPort );
     sets->setValue( "DefaultListenerPort", m_defaultListenerPort );
@@ -566,6 +568,7 @@ void Settings::loadRcFile()
   m_enableSaveData = sets->value( "EnableSaveData", m_enableSaveData ).toBool();
   m_useSettingsFileIni = sets->value( "UseConfigurationFileIni", m_useSettingsFileIni ).toBool();
   m_broadcastOnlyToHostsIni = sets->value( "BroadcastOnlyToHostsIni", m_broadcastOnlyToHostsIni ).toBool();
+  m_allowOnlyHostAddressesFromHostsIni = sets->value( "AllowOnlyHostAddressesFromHostsIni", m_allowOnlyHostAddressesFromHostsIni ).toBool();
   m_useOnlyMulticast = sets->value( "UseOnlyMulticast", m_useOnlyMulticast ).toBool();
   m_defaultBroadcastPort = sets->value( "BroadcastPort", m_defaultBroadcastPort ).toInt();
   m_defaultListenerPort = sets->value( "DefaultListenerPort", m_defaultListenerPort ).toInt();

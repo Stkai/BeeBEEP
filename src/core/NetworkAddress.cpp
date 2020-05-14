@@ -155,7 +155,6 @@ NetworkAddress NetworkAddress::fromString( const QString& address_string )
     return NetworkAddress();
   }
 
-
   NetworkAddress na;
   na.setHostAddress( host_address );
   if( host_port > 0 && host_port <= MAX_SOCKET_PORT )

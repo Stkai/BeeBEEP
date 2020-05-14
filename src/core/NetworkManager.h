@@ -50,6 +50,8 @@ public:
   QList<QHostAddress> localBroadcastAddresses() const;
   inline bool isInLocalBroadcastAddresses( const QHostAddress& ) const;
 
+  bool isHostAddressAllowed( const QHostAddress& ) const;
+
   inline bool networkInterfaceCanBroadcast( const QNetworkInterface& ) const;
   inline bool networkInterfaceCanMulticast( const QNetworkInterface& ) const;
 

@@ -260,9 +260,15 @@ bool Core::start()
     }
   }
 
-#ifdef BEEBEEP_USE_MULTICAST_DNS
-  QTimer::singleShot( 12000, this, SLOT( startDnsMulticasting() ) );
-#endif
+
+  if( Settings::instance().allowOnlyHostAddressesFromHostsIni() )
+  {
+    dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
+                           tr( "%1 %2 accepts incoming connections only from the IP addresses present in the HOSTS file." )
+                           .arg( IconManager::instance().toHtml( "firewall.png", "*I*" ) ).arg( Settings::instance().programName() ),
+                           DispatchToChat, ChatMessage::Connection, false );
+    qDebug() << "Connections are accepted only from these host addresses:" << qPrintable( Settings::instance().broadcastAddressesInFileHosts().join( ", " ) );
+  }
 
   if( Settings::instance().acceptConnectionsOnlyFromWorkgroups() && !Settings::instance().localUser().workgroups().isEmpty() )
   {
@@ -270,7 +276,7 @@ bool Core::start()
                            tr( "%1 You have selected to join only in these workgroups: %2" )
                            .arg( IconManager::instance().toHtml( "workgroup.png", "*C*" ) ).arg( Bee::stringListToTextString( Settings::instance().localUser().workgroups(), true ) ),
                            DispatchToChat, ChatMessage::Connection, false );
-    qDebug() << "Protocol accepts connections only from these workgroups:" << qPrintable( Settings::instance().localUser().workgroups().join( ", " ) );
+    qDebug() << "Connections are accepted only from these workgroups:" << qPrintable( Settings::instance().localUser().workgroups().join( ", " ) );
   }
 
   if( Settings::instance().enableFileTransfer() )
@@ -310,6 +316,10 @@ bool Core::start()
   if( Settings::instance().canPostUsageStatistics() )
     QTimer::singleShot( 7000, this, SLOT( postUsageStatistics() ) );
  #endif
+
+#ifdef BEEBEEP_USE_MULTICAST_DNS
+  QTimer::singleShot( 12000, this, SLOT( startDnsMulticasting() ) );
+#endif
 
   emit connected();
   return true;

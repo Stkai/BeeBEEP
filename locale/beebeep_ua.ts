@@ -646,6 +646,10 @@
         <source>the folder is empty or contains only files that are not allowed.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>%1 %2 accepts incoming connections only from the IP addresses present in the HOSTS file.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Date</name>
@@ -655,7 +659,6 @@
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <extracomment>default date format in chat message</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>

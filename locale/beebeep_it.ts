@@ -713,6 +713,10 @@
         <source>the folder is empty or contains only files that are not allowed.</source>
         <translation>la cartella è vuota o contiene solamente file che non sono consentiti.</translation>
     </message>
+    <message>
+        <source>%1 %2 accepts incoming connections only from the IP addresses present in the HOSTS file.</source>
+        <translation>%1 %2 accetta le connessioni in ingresso solo dagli indirizzi IP presenti nel file HOSTS.</translation>
+    </message>
 </context>
 <context>
     <name>Date</name>
@@ -722,7 +726,6 @@
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <extracomment>default date format in chat message</extracomment>
         <translation>yyyy-MM-dd</translation>
     </message>
     <message>

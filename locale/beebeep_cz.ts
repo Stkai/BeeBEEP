@@ -77,12 +77,12 @@
         <translation>%1 Jste připojeni do %2 sítě.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="403"/>
+        <location filename="../src/core/Core.cpp" line="412"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1 jste odpojeni ze %2 sítě.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="332"/>
+        <location filename="../src/core/Core.cpp" line="341"/>
         <source>%1 Zero Configuration started with service name: %2</source>
         <translation>%1 Zero Configuration začala s názvem služby: %2</translation>
     </message>
@@ -126,76 +126,81 @@
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="270"/>
+        <source>%1 %2 accepts incoming connections only from the IP addresses present in the HOSTS file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/Core.cpp" line="279"/>
         <source>%1 You have selected to join only in these workgroups: %2</source>
         <translation>%1 Zvolili jste připojení pouze do těchto pracovních skupin: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="299"/>
+        <location filename="../src/core/Core.cpp" line="308"/>
         <source>%1 Do you need support? Visit the %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="301"/>
+        <location filename="../src/core/Core.cpp" line="310"/>
         <source>help page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="347"/>
+        <location filename="../src/core/Core.cpp" line="356"/>
         <source>%1 Zero Configuration service closed.</source>
         <translation>%1 Zero Configuration byla ukončena.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="409"/>
+        <location filename="../src/core/Core.cpp" line="418"/>
         <source>Disconnected</source>
         <translation>Odpojeno</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="415"/>
+        <location filename="../src/core/Core.cpp" line="424"/>
         <source>Disconnecting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="436"/>
+        <location filename="../src/core/Core.cpp" line="445"/>
         <source>%1 Reconnecting to the %2 Network in progress.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="446"/>
+        <location filename="../src/core/Core.cpp" line="455"/>
         <source>Reconnecting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="464"/>
+        <location filename="../src/core/Core.cpp" line="473"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
         <translation>%1 Zero Configuration prohlíží síť a hledá službu: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="471"/>
+        <location filename="../src/core/Core.cpp" line="480"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation>%1 Zero Configuration nemůže procházet síť a hledat službu: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="495"/>
+        <location filename="../src/core/Core.cpp" line="504"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1 Prohledávání %2 sítě...</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="497"/>
+        <location filename="../src/core/Core.cpp" line="506"/>
         <source>Searching users</source>
         <translation>Hledání uživatelů</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="628"/>
+        <location filename="../src/core/Core.cpp" line="637"/>
         <source>New version is available</source>
         <translation>Je dostupná nová verze</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="629"/>
+        <location filename="../src/core/Core.cpp" line="638"/>
         <source>Click here to download</source>
         <translation>Zde klepnout pro stažení</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="728"/>
+        <location filename="../src/core/Core.cpp" line="737"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>Je dosaženo maximální ID. Prosím, zavřete a restartujte aplikaci.</translation>
     </message>
@@ -413,7 +418,7 @@
         <translation>%1 %2 nemůže být informován, že jste opustil skupinu.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="537"/>
+        <location filename="../src/core/Core.cpp" line="546"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1Síťové rozhraní %2 spadlo.</translation>
     </message>
@@ -720,60 +725,60 @@
         <translation>přidán do oblíbených</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="277"/>
-        <location filename="../src/core/CoreConnection.cpp" line="283"/>
+        <location filename="../src/core/CoreConnection.cpp" line="292"/>
+        <location filename="../src/core/CoreConnection.cpp" line="298"/>
         <source>%1 Connection closed to user %2 because it uses your account name: %3.</source>
         <translation type="unfinished">%1 uživateli bylo ukončeno připojení %2 protože používá název účtu: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="279"/>
-        <location filename="../src/core/CoreConnection.cpp" line="317"/>
+        <location filename="../src/core/CoreConnection.cpp" line="294"/>
+        <location filename="../src/core/CoreConnection.cpp" line="332"/>
         <source>domain</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="290"/>
+        <location filename="../src/core/CoreConnection.cpp" line="305"/>
         <source>%1 Connection closed to user %2 because it uses your nickname: %3.</source>
         <translation>%1 uživateli bylo ukončeno připojení %2 protože používá přezdívku: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="295"/>
+        <location filename="../src/core/CoreConnection.cpp" line="310"/>
         <source>%1 Connection closed to user %2 because it uses your hash code.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="315"/>
-        <location filename="../src/core/CoreConnection.cpp" line="322"/>
+        <location filename="../src/core/CoreConnection.cpp" line="330"/>
+        <location filename="../src/core/CoreConnection.cpp" line="337"/>
         <source>%1 Connection closed to user %2 because it uses same account name of the already connected user %3: %4.</source>
         <translation type="unfinished">%1 uživateli bylo ukončeno připojení %2 protože používá stejný název účtu již připojeného uživatele %3: %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="330"/>
+        <location filename="../src/core/CoreConnection.cpp" line="345"/>
         <source>%1 Connection closed to user %2 because it uses same nickname of the already connected user %3: %4.</source>
         <translation>%1 uživateli bylo ukončeno připojení %2 protože používá stejnou přezdívku již připojeného uživatele %3: %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="336"/>
+        <location filename="../src/core/CoreConnection.cpp" line="351"/>
         <source>%1 Connection closed to user %2 because it uses same hash code of the already connected user %3: %4.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="399"/>
+        <location filename="../src/core/CoreConnection.cpp" line="414"/>
         <source>%1 users connected</source>
         <translation>%1 uživatelů připojeno</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="406"/>
+        <location filename="../src/core/CoreConnection.cpp" line="421"/>
         <source>%1 %2 uses old encryption level.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="414"/>
+        <location filename="../src/core/CoreConnection.cpp" line="429"/>
         <source>%1 has end-to-end encryption enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreConnection.cpp" line="424"/>
+        <location filename="../src/core/CoreConnection.cpp" line="439"/>
         <source>%1 has end-to-end encryption disabled</source>
         <translation type="unfinished"></translation>
     </message>
@@ -822,7 +827,6 @@
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="50"/>
         <source>yyyy-MM-dd</source>
-        <extracomment>default date format in chat message</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7020,7 +7024,7 @@ Vyberte prosím jiné jméno.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2425"/>
+        <location filename="../src/core/Settings.cpp" line="2428"/>
         <source>Autoresponder</source>
         <translation type="unfinished"></translation>
     </message>
