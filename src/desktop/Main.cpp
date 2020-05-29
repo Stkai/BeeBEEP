@@ -72,15 +72,36 @@ bool SetTranslator( QTranslator* translator, QString language_folder, QString la
   return true;
 }
 
+bool CheckValidArguments( int argc, char *argv[] )
+{
+  // Qt security issue: https://www.thezdi.com/blog/2019/4/3/loading-up-a-pair-of-qt-bugs-detailing-cve-2019-1636-and-cve-2019-6739
+  for( int i = 0; i < argc; i++ )
+  {
+    if( QString::fromLocal8Bit( argv[i] ).contains( "platformpluginpath", Qt::CaseInsensitive ) )
+    {
+      qWarning() << "[WARNING] Argument -platformpluginpath has been disabled for security reasons.";
+      qDebug() << "Use the qt.conf file if you want to assign a different path for plugins.";
+      return false;
+    }
+  }
+  return true;
+}
 
 int main( int argc, char *argv[] )
 {
+  if( !CheckValidArguments( argc, argv ) )
+  {
+    qDebug() << "Check your arguments and restart the application.";
+    return 1;
+  }
+
 #if QT_VERSION >= 0x050600
   // Windows with 4k monitors, icons are too big... linux is about to test... MacOSX is ok
   #ifdef Q_OS_MAC
     QCoreApplication::setAttribute( Qt::AA_EnableHighDpiScaling, true );
   #endif
 #endif
+
   BeeApplication bee_app( argc, argv );
   (void)Settings::instance();
   bee_app.setApplicationName( Settings::instance().programName() );
@@ -112,6 +133,14 @@ int main( int argc, char *argv[] )
   if( bee_app.testAttribute( Qt::AA_EnableHighDpiScaling ) )
     qDebug( "Icons: high DPI scaling enabled" );
 #endif
+
+  qDebug() << "Qt prefix path:" << qPrintable( QLibraryInfo::location( QLibraryInfo::PrefixPath ) );
+  qDebug() << "Qt libraries path:" << qPrintable( QLibraryInfo::location( QLibraryInfo::LibrariesPath ) );
+  qDebug() << "Qt binaries path:" << qPrintable( QLibraryInfo::location( QLibraryInfo::BinariesPath ) );
+  qDebug() << "Qt plugins path:" << qPrintable( QLibraryInfo::location( QLibraryInfo::PluginsPath ) );
+  qDebug() << "Qt data path:" << qPrintable( QLibraryInfo::location( QLibraryInfo::DataPath ) );
+  qDebug() << "Qt settings path:" << qPrintable( QLibraryInfo::location( QLibraryInfo::SettingsPath ) );
+
   Settings::instance().setDefaultFolders();
   Settings::instance().loadRcFile();
   Settings::instance().setDataFolder();
