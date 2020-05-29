@@ -134,12 +134,13 @@ int main( int argc, char *argv[] )
     qDebug( "Icons: high DPI scaling enabled" );
 #endif
 
-  qDebug() << "Qt prefix path:" << qPrintable( QLibraryInfo::location( QLibraryInfo::PrefixPath ) );
-  qDebug() << "Qt libraries path:" << qPrintable( QLibraryInfo::location( QLibraryInfo::LibrariesPath ) );
-  qDebug() << "Qt binaries path:" << qPrintable( QLibraryInfo::location( QLibraryInfo::BinariesPath ) );
-  qDebug() << "Qt plugins path:" << qPrintable( QLibraryInfo::location( QLibraryInfo::PluginsPath ) );
-  qDebug() << "Qt data path:" << qPrintable( QLibraryInfo::location( QLibraryInfo::DataPath ) );
-  qDebug() << "Qt settings path:" << qPrintable( QLibraryInfo::location( QLibraryInfo::SettingsPath ) );
+  qDebug() << "Qt prefix path:" << qPrintable( QDir::toNativeSeparators( QLibraryInfo::location( QLibraryInfo::PrefixPath ) ) );
+  qDebug() << "Qt libraries path:" << qPrintable( QDir::toNativeSeparators( QLibraryInfo::location( QLibraryInfo::LibrariesPath ) ) );
+  qDebug() << "Qt binaries path:" << qPrintable( QDir::toNativeSeparators( QLibraryInfo::location( QLibraryInfo::BinariesPath ) ) );
+  qDebug() << "Qt plugins path:" << qPrintable( QDir::toNativeSeparators( QLibraryInfo::location( QLibraryInfo::PluginsPath ) ) );
+  qDebug() << "Qt data path:" << qPrintable( QDir::toNativeSeparators( QLibraryInfo::location( QLibraryInfo::DataPath ) ) );
+  qDebug() << "Qt settings path:" << qPrintable( QDir::toNativeSeparators( QLibraryInfo::location( QLibraryInfo::SettingsPath ) ) );
+  qDebug() << "Qt paths are shipped with Qt libraries. Edit qt.conf file to change them.";
 
   Settings::instance().setDefaultFolders();
   Settings::instance().loadRcFile();
