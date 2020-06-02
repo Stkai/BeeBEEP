@@ -111,6 +111,7 @@ const int PING_INTERVAL_TICK = 7;
 const int PONG_DEFAULT_TIMEOUT = 21000;
 const int AUTO_BROADCAST_CHECK_TICK = 87;
 const int TICK_INTERVAL_CONNECTION_TIMEOUT = 16;
+const int DELAY_CONTACT_USERS = 9000;
 
 // Protocol
 #define ID_INVALID                0

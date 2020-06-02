@@ -164,6 +164,7 @@ public:
   inline int maxUsersToConnectInATick() const;
   inline void setTickIntervalBroadcasting( int );
   inline int tickIntervalBroadcasting() const;
+  inline int delayContactUsers() const;
 
   inline int userAwayTimeout() const;
   inline void setUserAwayTimeout( int );
@@ -742,6 +743,7 @@ private:
   int m_tickIntervalCheckNetwork;
   int m_maxUsersToConnectInATick;
   int m_tickIntervalBroadcasting;
+  int m_delayContactUsers;
 
   bool m_disableSystemProxyForConnections;
   bool m_useDefaultMulticastGroupAddress;
@@ -1004,6 +1006,7 @@ inline int Settings::userAwayTimeout() const { return m_userAwayTimeout; }
 inline void Settings::setUserAwayTimeout( int new_value ) { m_userAwayTimeout = new_value; }
 inline void Settings::setMaxUsersToConnectInATick( int new_value ) { m_maxUsersToConnectInATick = new_value; }
 inline int Settings::maxUsersToConnectInATick() const { return m_maxUsersToConnectInATick; }
+inline int Settings::delayContactUsers() const { return m_delayContactUsers; }
 inline const QString& Settings::logPath() const { return m_logPath; }
 inline void Settings::setLogPath( const QString& new_value ) { m_logPath = new_value; }
 inline QString Settings::logFilePath() const { return QDir::toNativeSeparators( QString( "%1/%2.log" ).arg( m_logPath, programName().toLower() ) ); }

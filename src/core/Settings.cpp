@@ -1528,6 +1528,11 @@ void Settings::loadCommonSettings( QSettings* user_ini )
     m_tickIntervalConnectionTimeout = TICK_INTERVAL_CONNECTION_TIMEOUT;
   m_useLowDelayOptionOnSocket = commonValue( system_rc, user_ini, "UseLowDelayOptionOnSocket", false ).toBool();
   m_delayConnectionAtStartup = qMax( 3000, commonValue( system_rc, user_ini, "DelayConnectionAtStartup_ms", m_delayConnectionAtStartup ).toInt() );
+  if( m_delayConnectionAtStartup > 50000 )
+    m_delayConnectionAtStartup = 50000;
+  m_delayContactUsers = qMax( 7000, commonValue( system_rc, user_ini, "DelayContactUsers_ms", DELAY_CONTACT_USERS ).toInt() );
+  if( m_delayContactUsers > 30000 )
+    m_delayContactUsers = 30000;
   m_sendOfflineMessagesToDefaultChat = commonValue( system_rc, user_ini, "SendOfflineMessagesToDefaultChat", false ).toBool();
   m_saveMessagesTimestamp = user_ini->value( "SaveMessagesTimestamp", QDateTime() ).toDateTime();
   if( m_saveMessagesTimestamp.isNull() )
@@ -1888,6 +1893,7 @@ void Settings::save()
   sets->setValue( "ListenerPort", m_localUser.networkAddress().hostPort() );
   sets->setValue( "ConnectionActivityTimeout_ms", m_pongTimeout );
   sets->setValue( "WritingTimeout_ms", m_writingTimeout );
+  sets->setValue( "DelayContactUsers_ms", m_delayContactUsers );
   sets->setValue( "TickIntervalConnectionTimeout", m_tickIntervalConnectionTimeout );
   sets->setValue( "UseLowDelayOptionOnSocket", m_useLowDelayOptionOnSocket );
   sets->setValue( "TickIntervalBroadcasting", m_tickIntervalBroadcasting );

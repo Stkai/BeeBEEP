@@ -101,7 +101,7 @@ void Core::newPeerFound( const QHostAddress& sender_ip, int sender_port )
     return;
   }
 
-  if( NetworkManager::instance().isHostAddressAllowed( sender_ip ) )
+  if( !NetworkManager::instance().isHostAddressAllowed( sender_ip ) )
   {
     qWarning() << "New peer found" << qPrintable( sender_ip.toString() ) << "is not allowed by file HOSTS";
     return;

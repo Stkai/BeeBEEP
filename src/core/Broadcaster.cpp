@@ -31,7 +31,8 @@
 
 Broadcaster::Broadcaster( QObject *parent )
   : QObject( parent ), m_networkAddresses(), m_newBroadcastRequested( false ),
-    m_networkAddressesWaitingForLoopback(), m_multicastGroupAddress(), m_isMulticastDatagramSent( false )
+    m_networkAddressesWaitingForLoopback(), m_multicastGroupAddress(), m_isMulticastDatagramSent( false ),
+    m_lastDatagramSentTimestamp(), m_networkAddressesIsSorted( false )
 {
   mp_receiverSocket = new QUdpSocket( this );
   mp_senderSocket = new QUdpSocket( this );
@@ -199,6 +200,8 @@ bool Broadcaster::addNetworkAddress( const NetworkAddress& network_address, bool
   if( m_networkAddresses.contains( network_address ) )
     return false;
 
+  int list_size = m_networkAddresses.size();
+
   if( split_ipv4_address && (network_address.isHostPortValid() || !NetworkManager::instance().isInLocalBroadcastAddresses( network_address.hostAddress() ) ))
   {
     QList<QHostAddress> host_addresses_to_add = NetworkManager::instance().splitInIPv4HostAddresses( network_address.hostAddress() );
@@ -215,44 +218,37 @@ bool Broadcaster::addNetworkAddress( const NetworkAddress& network_address, bool
   else
     m_networkAddresses.append( network_address );
 
+  m_networkAddressesIsSorted = list_size == m_networkAddresses.size();
   return true;
 }
 
-bool Broadcaster::contactNetworkAddress( const NetworkAddress& na )
+bool Broadcaster::broadcastToNetworkAddress( const NetworkAddress& na )
 {
   if( !na.isHostAddressValid() )
     return false;
 
-  if( na.isHostPortValid() && na.hostPort() != Settings::instance().defaultBroadcastPort() )
+  QByteArray broadcast_data = Protocol::instance().broadcastMessage( na.hostAddress() );
+  quint16 default_port = static_cast<quint16>( Settings::instance().defaultBroadcastPort() );
+  quint16 host_port = na.isHostPortValid() ? na.hostPort() : default_port;
+  if( mp_senderSocket->writeDatagram( broadcast_data, na.hostAddress(), host_port ) > 0 )
   {
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "Broadcaster skips this network address" << qPrintable( na.toString() ) << "and sends it to the CORE";
+    qDebug() << "Broadcaster sends datagram to" << qPrintable( na.hostAddress().toString() ) << host_port;
 #endif
-    emit newPeerFound( na.hostAddress(), na.hostPort() );
+    if( na.hostAddress() == NetworkManager::instance().localBroadcastAddress() && host_port == default_port )
+    {
+      m_networkAddressesWaitingForLoopback.append( QPair<NetworkAddress,QDateTime>( na, QDateTime::currentDateTime() ) );
+#ifdef BEEBEEP_DEBUG
+      qDebug() << "Waiting for loopback datagram from" << qPrintable( na.hostAddress().toString() );
+#endif
+    }
+    m_lastDatagramSentTimestamp = QDateTime::currentDateTime();
     return true;
   }
   else
   {
-    QByteArray broadcast_data = Protocol::instance().broadcastMessage( na.hostAddress() );
-    if( mp_senderSocket->writeDatagram( broadcast_data, na.hostAddress(), static_cast<quint16>(Settings::instance().defaultBroadcastPort()) ) > 0 )
-    {
-#ifdef BEEBEEP_DEBUG
-      qDebug() << "Broadcaster sends datagram to" << qPrintable( na.hostAddress().toString() ) << Settings::instance().defaultBroadcastPort();
-#endif
-      if( na.hostAddress() == NetworkManager::instance().localBroadcastAddress() )
-      {
-        m_networkAddressesWaitingForLoopback.append( QPair<NetworkAddress,QDateTime>( na, QDateTime::currentDateTime() ) );
-#ifdef BEEBEEP_DEBUG
-        qDebug() << "Waiting for loopback datagram from" << qPrintable( na.hostAddress().toString() );
-#endif
-      }
-      return true;
-    }
-    else
-    {
-      qWarning() << "Unable to send datagram to" << qPrintable( na.hostAddress().toString() ) << Settings::instance().defaultBroadcastPort();
-      return false;
-    }
+    qWarning() << "Unable to send datagram to" << qPrintable( na.hostAddress().toString() ) << host_port;
+    return false;
   }
 }
 
@@ -541,6 +537,7 @@ void Broadcaster::sendMulticastDatagram()
       qDebug() << "Broadcaster sends multicast datagram to" << qPrintable( m_multicastGroupAddress.toString() ) << Settings::instance().defaultBroadcastPort();
       m_isMulticastDatagramSent = true;
       m_networkAddressesWaitingForLoopback.append( QPair<NetworkAddress, QDateTime>( NetworkAddress( m_multicastGroupAddress, static_cast<quint16>( Settings::instance().defaultBroadcastPort() ) ), QDateTime::currentDateTime() ) );
+      m_lastDatagramSentTimestamp = QDateTime::currentDateTime();
 #ifdef BEEBEEP_DEBUG
       qDebug() << "Waiting for loopback datagram from" << qPrintable( m_multicastGroupAddress.toString() );
 #endif
@@ -552,12 +549,40 @@ void Broadcaster::sendMulticastDatagram()
 
 void Broadcaster::contactNetworkAddresses()
 {
+  if( !sortNetworkAddresses() )
+    return;
   int contacted_users = 0;
   while( !m_networkAddresses.isEmpty() )
   {
     NetworkAddress na = m_networkAddresses.takeFirst();
-    if( contactNetworkAddress( na ) )
-      contacted_users++;
+    if( na.isHostAddressValid() )
+    {
+      if( isNetworkAddressForBroadcast( na ) )
+      {
+         if( broadcastToNetworkAddress( na ) )
+           contacted_users++;
+      }
+      else
+      {
+        bool can_contact_directly_users = m_lastDatagramSentTimestamp.isNull() || qAbs( m_lastDatagramSentTimestamp.msecsTo( QDateTime::currentDateTime() ) ) > Settings::instance().delayContactUsers();
+        if( can_contact_directly_users )
+        {
+#ifdef BEEBEEP_DEBUG
+          qDebug() << "Broadcaster skips this network address" << qPrintable( na.toString() ) << "and sends it to the CORE";
+#endif
+          emit newPeerFound( na.hostAddress(), na.hostPort() );
+          contacted_users++;
+        }
+        else
+        {
+#ifdef BEEBEEP_DEBUG
+          qDebug() << "Broadcaster waits for contact network address" << qPrintable( na.toString() );
+#endif
+          m_networkAddresses.append( na );
+          break;
+        }
+      }
+    }
 
     if( contacted_users >= Settings::instance().maxUsersToConnectInATick() )
       break;
@@ -565,4 +590,37 @@ void Broadcaster::contactNetworkAddresses()
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Broadcaster has contacted" << contacted_users << "network addresses";
 #endif
+}
+
+bool Broadcaster::isNetworkAddressForBroadcast( const NetworkAddress& na ) const
+{
+  return (na.isIPv4Address() && na.hostAddress().toString().contains( "255" )) || na.hostPort() == Settings::instance().defaultBroadcastPort();
+}
+
+bool Broadcaster::sortNetworkAddresses()
+{
+  if( m_networkAddresses.isEmpty() )
+    return false;
+  if( m_networkAddressesIsSorted )
+    return true;
+  QList<NetworkAddress> broadcast_network_addresses;
+  QList<NetworkAddress> direct_network_addresses;
+  foreach( NetworkAddress na, m_networkAddresses )
+  {
+    if( isNetworkAddressForBroadcast( na ) )
+      broadcast_network_addresses.append( na );
+    else
+      direct_network_addresses.append( na );
+  }
+
+  if( !broadcast_network_addresses.isEmpty() )
+  {
+    m_networkAddresses = broadcast_network_addresses;
+    if( !direct_network_addresses.isEmpty() )
+      m_networkAddresses.append( direct_network_addresses );
+  }
+  else
+    m_networkAddresses = direct_network_addresses;
+  m_networkAddressesIsSorted = true;
+  return true;
 }

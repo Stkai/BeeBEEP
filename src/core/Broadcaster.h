@@ -57,8 +57,9 @@ private slots:
   void contactNetworkAddresses();
 
 protected:
+  bool sortNetworkAddresses();
   void sendMulticastDatagram();
-  bool contactNetworkAddress( const NetworkAddress& );
+  bool broadcastToNetworkAddress( const NetworkAddress& );
 
   bool addNetworkAddress( const NetworkAddress&, bool split_ipv4_address );
   inline bool addHostAddress( const QHostAddress& );
@@ -66,6 +67,8 @@ protected:
 
   void checkLoopbackDatagram();
   void removeHostAddressFromWaitingList( const QHostAddress& );
+
+  bool isNetworkAddressForBroadcast( const NetworkAddress& ) const;
 
 private:
   QUdpSocket* mp_receiverSocket;
@@ -75,6 +78,8 @@ private:
   QList< QPair<NetworkAddress, QDateTime> > m_networkAddressesWaitingForLoopback;
   QHostAddress m_multicastGroupAddress;
   bool m_isMulticastDatagramSent;
+  QDateTime m_lastDatagramSentTimestamp;
+  bool m_networkAddressesIsSorted;
 
 };
 

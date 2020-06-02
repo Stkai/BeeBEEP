@@ -282,6 +282,7 @@ DelayConnectionAtStartup(ms)=[integer] sometimes BeeBEEP starts before the netwo
 SendOfflineMessagesToDefaultChat=[true/false] Send offline messages to default chat (all users) also (default=false) [4.2.0]
 ClearCacheAfterDays=[integer] see above (default 96) [5.6.5]
 RemovePartiallyDownloadedFilesAfterDays=[integer] see above (default 5) [5.7.7]
+DelayContactUsers_ms=9000
 
 [Network]
 BroadcastAddresses=(do not edit manually)
