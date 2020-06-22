@@ -77,12 +77,12 @@
         <translation>%1你已经连上%2网络。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="412"/>
+        <location filename="../src/core/Core.cpp" line="413"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1你已经与%2网络断开连接。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="341"/>
+        <location filename="../src/core/Core.cpp" line="342"/>
         <source>%1 Zero Configuration started with service name: %2</source>
         <translation>%1零配置服务已经启动，名称：%2</translation>
     </message>
@@ -117,82 +117,82 @@
         <translation>正在连接</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="270"/>
+        <location filename="../src/core/Core.cpp" line="267"/>
         <source>%1 %2 accepts incoming connections only from the IP addresses present in the HOSTS file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="279"/>
+        <location filename="../src/core/Core.cpp" line="276"/>
         <source>%1 You have selected to join only in these workgroups: %2</source>
         <translation>%1你已经选择了只加入这些群组：%2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="308"/>
+        <location filename="../src/core/Core.cpp" line="305"/>
         <source>%1 Do you need support? Visit the %2.</source>
         <translation>%1需要帮助吗？访问%2。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="310"/>
+        <location filename="../src/core/Core.cpp" line="307"/>
         <source>help page</source>
         <translation>帮助页面</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="356"/>
+        <location filename="../src/core/Core.cpp" line="357"/>
         <source>%1 Zero Configuration service closed.</source>
         <translation>%1零配置服务已关闭。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="418"/>
+        <location filename="../src/core/Core.cpp" line="419"/>
         <source>Disconnected</source>
         <translation>已断开</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="424"/>
+        <location filename="../src/core/Core.cpp" line="425"/>
         <source>Disconnecting</source>
         <translation>正在断开</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="445"/>
+        <location filename="../src/core/Core.cpp" line="446"/>
         <source>%1 Reconnecting to the %2 Network in progress.</source>
         <translation>%1正在重新连接至%2.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="455"/>
+        <location filename="../src/core/Core.cpp" line="456"/>
         <source>Reconnecting</source>
         <translation>重新连接中</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="473"/>
+        <location filename="../src/core/Core.cpp" line="474"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
         <translation>%1零配置正在为服务%2浏览网络</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="480"/>
+        <location filename="../src/core/Core.cpp" line="481"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation>%1零配置不能为服务%2浏览网络</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="504"/>
+        <location filename="../src/core/Core.cpp" line="505"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1正在广播到%2网络...</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="506"/>
+        <location filename="../src/core/Core.cpp" line="507"/>
         <source>Searching users</source>
         <translation>正在搜索用户</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="637"/>
+        <location filename="../src/core/Core.cpp" line="638"/>
         <source>New version is available</source>
         <translation>有新版本可用</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="638"/>
+        <location filename="../src/core/Core.cpp" line="639"/>
         <source>Click here to download</source>
         <translation>点击这里下载</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="737"/>
+        <location filename="../src/core/Core.cpp" line="738"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>已达到最大ID数，请关闭并重新启动程序。</translation>
     </message>
@@ -400,7 +400,7 @@
         <translation>无法通知%1 %2你已离开组。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="546"/>
+        <location filename="../src/core/Core.cpp" line="547"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1与%2的网络接口下降。</translation>
     </message>
@@ -6903,7 +6903,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2428"/>
+        <location filename="../src/core/Settings.cpp" line="2434"/>
         <source>Autoresponder</source>
         <translation>自动响应</translation>
     </message>

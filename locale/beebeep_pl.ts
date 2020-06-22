@@ -77,12 +77,12 @@
         <translation>%1 Połączono z siecią %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="412"/>
+        <location filename="../src/core/Core.cpp" line="413"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1 Rozłączono z siecią %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="341"/>
+        <location filename="../src/core/Core.cpp" line="342"/>
         <source>%1 Zero Configuration started with service name: %2</source>
         <translation>%1 Konfiguracja zerowa uruchomiona pod nazwą usługi: %2</translation>
     </message>
@@ -117,82 +117,82 @@
         <translation>Łączenie</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="270"/>
+        <location filename="../src/core/Core.cpp" line="267"/>
         <source>%1 %2 accepts incoming connections only from the IP addresses present in the HOSTS file.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 akceptuje połączenia przychodzące tylko od adresów IP obecnych w pliku HOSTS.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="279"/>
+        <location filename="../src/core/Core.cpp" line="276"/>
         <source>%1 You have selected to join only in these workgroups: %2</source>
         <translation>%1 Wybrałeś dołączenie tylko do tych grup roboczych: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="308"/>
+        <location filename="../src/core/Core.cpp" line="305"/>
         <source>%1 Do you need support? Visit the %2.</source>
         <translation>%1 Potrzebujesz pomocy? Odwiedź %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="310"/>
+        <location filename="../src/core/Core.cpp" line="307"/>
         <source>help page</source>
         <translation>stronę pomocy</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="356"/>
+        <location filename="../src/core/Core.cpp" line="357"/>
         <source>%1 Zero Configuration service closed.</source>
         <translation>Usługa zerowej konfiguracji %1 zamknięta.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="418"/>
+        <location filename="../src/core/Core.cpp" line="419"/>
         <source>Disconnected</source>
         <translation>Rozłączony</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="424"/>
+        <location filename="../src/core/Core.cpp" line="425"/>
         <source>Disconnecting</source>
         <translation>Rozłączanie</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="445"/>
+        <location filename="../src/core/Core.cpp" line="446"/>
         <source>%1 Reconnecting to the %2 Network in progress.</source>
         <translation>%1 W trakcie ponownego łączenia do sieci %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="455"/>
+        <location filename="../src/core/Core.cpp" line="456"/>
         <source>Reconnecting</source>
         <translation>Ponowne łączenie</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="473"/>
+        <location filename="../src/core/Core.cpp" line="474"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
         <translation>%1 Zerowa konfiguracja przeszukuje sieć dla usługi: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="480"/>
+        <location filename="../src/core/Core.cpp" line="481"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation>%1 Zerowa konfiguracja nie może przeszukać sieci dla usługi: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="504"/>
+        <location filename="../src/core/Core.cpp" line="505"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1 Rozgłaszanie w sieci %2...</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="506"/>
+        <location filename="../src/core/Core.cpp" line="507"/>
         <source>Searching users</source>
         <translation>Wyszukiwanie użytkowników</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="637"/>
+        <location filename="../src/core/Core.cpp" line="638"/>
         <source>New version is available</source>
         <translation>Nowa wersja jest dostępna</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="638"/>
+        <location filename="../src/core/Core.cpp" line="639"/>
         <source>Click here to download</source>
         <translation>Kliknij tutaj by pobrać</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="737"/>
+        <location filename="../src/core/Core.cpp" line="738"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>Osiągnięto maksymalne ID. Proszę ponownie uruchomić aplikację.</translation>
     </message>
@@ -414,7 +414,7 @@
         <translation>%1 %2 nie może zostać poinformowany o opuszczeniu grupy przez Ciebie.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="546"/>
+        <location filename="../src/core/Core.cpp" line="547"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1 Interfejs sieciowy %2 został wyłączony.</translation>
     </message>
@@ -476,7 +476,7 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="115"/>
         <source>%1 Unable to download %2 from %3: file extension &apos;%4&apos; is not allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Nie można pobrać %2 z %3: rozszerzenie pliku &apos;%4&apos; jest niedozwolone.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="146"/>
@@ -533,7 +533,7 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="377"/>
         <source>%1 Unable to send %2 to %3: file extension &apos;%4&apos; is not allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Nie można wysłać %2 do %3: rozszerzenie pliku &apos;%4&apos; jest niedozwolone.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="384"/>
@@ -608,7 +608,7 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="781"/>
         <source>the folder is empty or contains only files that are not allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>folder jest pusty lub zawiera tylko pliki, które nie są dozwolone.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="788"/>
@@ -819,18 +819,19 @@
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="50"/>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished"></translation>
+        <translation>rrrr-MM-dd</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="57"/>
         <source>h:mm:ss ap</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>ap is not translatable because polish time format is 24h</translatorcomment>
+        <translation>g:mm:ss ap</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="60"/>
         <source>hh:mm:ss</source>
         <extracomment>default time format in chat message</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>gg:mm:ss</translation>
     </message>
 </context>
 <context>
@@ -916,7 +917,7 @@
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="188"/>
         <source>Transfer skipped</source>
-        <translation type="unfinished"></translation>
+        <translation>Transfer pominięty</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="205"/>
@@ -1971,7 +1972,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="352"/>
         <source>Allowed file extensions</source>
-        <translation type="unfinished"></translation>
+        <translation>Dozwolone rozszerzenia plików</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="266"/>
@@ -1982,7 +1983,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="163"/>
         <source>Only certain types of files are allowed for file transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Tylko niektóre typy plików są dozwolone do przesyłania plików</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="324"/>
@@ -1997,23 +1998,23 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
         <source>File transfer has no rules on file extensions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Transfer plików nie ma reguł dotyczących rozszerzeń plików.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
         <source>All types of files can be sent and received.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wszystkie typy plików mogą być wysyłane i odbierane.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="356"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="356"/>
         <source>Only files with this type of extension can be transferred:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tylko pliki z tymi rozszerzeniami mogą być przesyłane:</translation>
     </message>
 </context>
 <context>
@@ -3357,7 +3358,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="873"/>
         <source>Reset minimum width for applied style</source>
-        <translation type="unfinished"></translation>
+        <translation>Resetuj minimalną szerokość dla zastosowanego stylu</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="944"/>
@@ -3372,7 +3373,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1018"/>
         <source>Show surname before firstname of the users</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokazuj nazwisko przed imieniem użytkowników</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1034"/>
@@ -3417,22 +3418,22 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1157"/>
         <source>Generate new file name</source>
-        <translation type="unfinished"></translation>
+        <translation>Wygeneruj nową nazwę pliku</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1162"/>
         <source>Skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomiń</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1170"/>
         <source>Overwrite older</source>
-        <translation type="unfinished"></translation>
+        <translation>Nadpisz starsze</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1184"/>
         <source>Keep the original modification date of the transferred file</source>
-        <translation type="unfinished"></translation>
+        <translation>Zachowaj oryginalną datę modyfikacji przesyłanego pliku</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1218"/>
@@ -3971,7 +3972,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4794"/>
         <source>The download folder does not exists or is not writable. Please select a new one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Folder pobierania nie istnieje lub nie można w nim zapisywać. Proszę wybrać nowy.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4855"/>
@@ -4001,7 +4002,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4950"/>
         <source>You are not allowed create new message.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie jesteś upoważniony do stworzenia nowej wiadomości.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4993"/>
@@ -4234,12 +4235,12 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3335"/>
         <source>You are not allowed create groups.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie jesteś upoważniony do tworzenia grup.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3379"/>
         <source>You are not allowed modify groups.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie jesteś upoważniony do modyfikowania grup.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3497"/>
@@ -4480,7 +4481,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="63"/>
         <source>Disabled</source>
-        <translation type="unfinished">Wyłączony</translation>
+        <translation>Wyłączony</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="69"/>
@@ -6206,7 +6207,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="92"/>
         <source>d MMMM yyyy</source>
-        <translation type="unfinished"></translation>
+        <translation>d MMMM rrrr</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="94"/>
@@ -6942,7 +6943,7 @@ Proszę wybrać inną nazwę.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2428"/>
+        <location filename="../src/core/Settings.cpp" line="2434"/>
         <source>Autoresponder</source>
         <translation>Autoodpowiedź</translation>
     </message>
