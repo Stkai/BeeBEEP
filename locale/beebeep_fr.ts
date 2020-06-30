@@ -119,7 +119,7 @@
     <message>
         <location filename="../src/core/Core.cpp" line="267"/>
         <source>%1 %2 accepts incoming connections only from the IP addresses present in the HOSTS file.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 accepte des connexions entrantes uniquement depuis les adresses IP figurant dans le fichier HOSTS.</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="276"/>
@@ -475,7 +475,7 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="115"/>
         <source>%1 Unable to download %2 from %3: file extension &apos;%4&apos; is not allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Impossible de télécharger %2 depuis %3 : l&apos;extension de fichier &apos;%4&apos; n&apos;est pas autorisée.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="146"/>
@@ -557,7 +557,7 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="377"/>
         <source>%1 Unable to send %2 to %3: file extension &apos;%4&apos; is not allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Impossible d&apos;envoyer %2 vers %3 : l&apos;extension de fichier &apos;%4&apos; n&apos;est pas autorisée.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="391"/>
@@ -607,7 +607,7 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="781"/>
         <source>the folder is empty or contains only files that are not allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>le dossier est vide ou ne contient que des fichiers non autorisés.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="788"/>
@@ -826,18 +826,18 @@
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="50"/>
         <source>yyyy-MM-dd</source>
-        <translation type="unfinished"></translation>
+        <translation>aaaa-MM-jj</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="57"/>
         <source>h:mm:ss ap</source>
-        <translation type="unfinished"></translation>
+        <translation>h:mm:ss ap</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="60"/>
         <source>hh:mm:ss</source>
         <extracomment>default time format in chat message</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>hh:mm:ss</translation>
     </message>
 </context>
 <context>
@@ -1952,7 +1952,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="352"/>
         <source>Allowed file extensions</source>
-        <translation type="unfinished"></translation>
+        <translation>Extensions de fichier autorisées</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="277"/>
@@ -1962,7 +1962,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="163"/>
         <source>Only certain types of files are allowed for file transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Seuls certains types de fichiers peuvent être transférés</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="293"/>
@@ -1972,23 +1972,23 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
         <source>File transfer has no rules on file extensions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le transfert de fichier n&apos;a aucune restriction de types de fichier.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
         <source>All types of files can be sent and received.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tous les types de fichier peuvent être envoyés ou reçus.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="356"/>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="356"/>
         <source>Only files with this type of extension can be transferred:</source>
-        <translation type="unfinished"></translation>
+        <translation>Seuls les fichiers avec ce type d&apos;extension peuvent être tranférés :</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="260"/>
@@ -3255,12 +3255,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="873"/>
         <source>Reset minimum width for applied style</source>
-        <translation type="unfinished"></translation>
+        <translation>Reinitialiser la largeur minimale pour le style appliqué</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1018"/>
         <source>Show surname before firstname of the users</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher le nom avant le prénom des utilisateurs</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1157"/>
@@ -3672,7 +3672,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4794"/>
         <source>The download folder does not exists or is not writable. Please select a new one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le dossier de téléchargement n&apos;existe pas or ne peut être modifié. Veuillez en sélectionner un. nouveau.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4855"/>
@@ -6293,7 +6293,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="92"/>
         <source>d MMMM yyyy</source>
-        <translation type="unfinished"></translation>
+        <translation>j MMMM aaaa</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="94"/>
