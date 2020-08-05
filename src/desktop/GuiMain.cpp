@@ -26,6 +26,7 @@
 #include "BeeApplication.h"
 #include "BeeUtils.h"
 #include "ChatManager.h"
+#include "EmoticonManager.h"
 #include "FileDialog.h"
 #include "FileShare.h"
 #include "GuiAddUser.h"
@@ -2227,6 +2228,10 @@ void GuiMain::settingsChanged( QAction* act )
     Settings::instance().setResetMinimumWidthForStyle( act->isChecked() );
     setMinimumWidthForStyle();
     break;
+  case 104:
+    EmoticonManager::instance().clearRecentEmoticons();
+    updateEmoticons();
+    break;
   default:
     qWarning() << "GuiMain::settingsChanged(): error in setting id" << act->data().toInt();
   }
@@ -3878,6 +3883,9 @@ void GuiMain::showChatSettingsMenu()
   act->setChecked( Settings::instance().chatUseClickableLinks() );
   act->setData( 9 );
   mp_menuChat->addSeparator();
+  act = mp_menuChat->addAction( tr( "Clear recent emoticons" ), this, SLOT( settingsChanged() ) );
+  act->setIcon( IconManager::instance().icon( "clear.png" ) );
+  act->setData( 104 );
   act = mp_menuChat->addAction( tr( "Restore default font" ), this, SLOT( settingsChanged() ) );
   act->setIcon( IconManager::instance().icon( "font.png" ) );
   act->setData( 23 );

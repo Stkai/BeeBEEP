@@ -42,6 +42,8 @@ public:
   bool addToRecentEmoticons( const Emoticon& );
   inline const QList<Emoticon>& recentEmoticons() const;
 
+  inline void clearRecentEmoticons();
+
   int loadRecentEmoticons( const QStringList&, int );
   QStringList saveRencentEmoticons() const;
 
@@ -85,5 +87,6 @@ private:
 // Inline Functions
 inline const QList<Emoticon>& EmoticonManager::recentEmoticons() const { return m_recentEmoticons; }
 inline bool EmoticonManager::isOneCharEmoticon( const QChar& c ) const { return m_oneCharEmoticons.contains( c ); }
+inline void EmoticonManager::clearRecentEmoticons() { m_recentEmoticons.clear(); }
 
 #endif // BEEBEEP_EMOTICONMANAGER_H

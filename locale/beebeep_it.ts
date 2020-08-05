@@ -3723,6 +3723,10 @@ Inserisci un nome differente.</translation>
         <source>Reset minimum width for applied style</source>
         <translation>Imposta la larghezza minima per lo stile applicato</translation>
     </message>
+    <message>
+        <source>Clear recent emoticons</source>
+        <translation>Cancella le faccine recenti</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

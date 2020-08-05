@@ -3518,6 +3518,10 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Reset minimum width for applied style</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Clear recent emoticons</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
