@@ -55,7 +55,7 @@ Emoticon& Emoticon::operator=( const Emoticon& e )
 
 QString Emoticon::sourceFolder()
 {
-  return Settings::instance().emoticonSourcePath().isEmpty() ? QLatin1String( ":/emojis" ) : Settings::instance().emoticonSourcePath();
+  return Settings::instance().emoticonSourcePath().isEmpty() ? (Settings::instance().useHiResEmoticons() ? QLatin1String( ":/emojis2x" ) : QLatin1String( ":/emojis" )) : Settings::instance().emoticonSourcePath();
 }
 
 QString Emoticon::groupFolder( int group_id )
@@ -63,17 +63,17 @@ QString Emoticon::groupFolder( int group_id )
   switch( group_id )
   {
   case Text:
-    return QString( "%1/%2" ).arg( sourceFolder() ).arg( QLatin1String( "people" ) );
+    return QLatin1String( "people" );
   case People:
-    return QString( "%1/%2" ).arg( sourceFolder() ).arg( QLatin1String( "people" ) );
+    return QLatin1String( "people" );
   case Objects:
-    return QString( "%1/%2" ).arg( sourceFolder() ).arg( QLatin1String( "objects" ) );
+    return QLatin1String( "objects" );
   case Nature:
-    return QString( "%1/%2" ).arg( sourceFolder() ).arg( QLatin1String( "nature" ) );
+    return QLatin1String( "nature" );
   case Places:
-    return QString( "%1/%2" ).arg( sourceFolder() ).arg( QLatin1String( "places" ) );
+    return QLatin1String( "places" );
   case Symbols:
-    return QString( "%1/%2" ).arg( sourceFolder() ).arg( QLatin1String( "symbols" ) );
+    return QLatin1String( "symbols" );
   default:
     return QLatin1String( ":/emoticons" );
   }
@@ -81,19 +81,27 @@ QString Emoticon::groupFolder( int group_id )
 
 QIcon Emoticon::groupIcon( int group_id )
 {
+  QString icon_file = "";
   switch( group_id )
   {
   case People:
-    return QIcon( ":/emojis/people/1f465.png" );
+    icon_file = QLatin1String( "1f465.png" );
+    break;
   case Objects:
-    return QIcon( ":/emojis/objects/1f514.png" );
+    icon_file = QLatin1String( "1f514.png" );
+    break;
   case Nature:
-    return QIcon( ":/emojis/nature/1f338.png" );
+    icon_file = QLatin1String( "1f338.png" );
+    break;
   case Places:
-    return QIcon( ":/emojis/places/1f698.png" );
+    icon_file = QLatin1String( "1f698.png" );
+    break;
   case Symbols:
-    return QIcon( ":/emojis/symbols/1f523.png" );
+    icon_file = QLatin1String( "1f523.png" );
+    break;
   default:
-    return IconManager::instance().icon( "emoticon.png" );
+    break;
   }
+
+  return icon_file.isEmpty() ? IconManager::instance().icon( "emoticon.png" ) : QIcon( filePath( group_id, icon_file ) );
 }

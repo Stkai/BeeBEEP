@@ -70,6 +70,7 @@ private:
 
 };
 
+
 // Inline Functions
 inline QIcon IconManager::icon( const QString& icon_name ) const { return QIcon( iconPath( icon_name ) ); }
 inline QString IconManager::defaulIconPath( const QString& icon_name ) const { return QString( "%1/%2" ).arg( m_defaultSourcePath, icon_name ); }

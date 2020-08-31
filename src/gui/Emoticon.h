@@ -52,8 +52,11 @@ public:
   inline QString toHtml( int icon_size ) const;
   inline QIcon icon() const;
 
-  static QString groupFolder( int );
   static QIcon groupIcon( int );
+  inline static QString filePath( int group_id, const QString& file_name );
+
+protected:
+  static QString groupFolder( int group_id );
   static QString sourceFolder();
 
 private:
@@ -74,8 +77,9 @@ inline void Emoticon::setGroup( int new_value ) { m_group = new_value; }
 inline int Emoticon::group() const { return m_group; }
 inline bool Emoticon::isInGroup() const { return m_group > Emoticon::Text && m_group < Emoticon::NumGroups; }
 inline int Emoticon::sortOrder() const { return m_sortOrder; }
-inline QString Emoticon::fileName() const { return QString( "%1/%2.png" ).arg( groupFolder( m_group ) ).arg( m_name ); }
-inline QString Emoticon::toHtml( int icon_size ) const { return QString( "<img src=\"%1\"%2 />").arg( fileName() ).arg( QString( " height=\"%1\"" ).arg( icon_size ) ); }
+inline QString Emoticon::fileName() const { return isInGroup() ? QString( "%1/%2/%3.png" ).arg( sourceFolder(), groupFolder( m_group ), m_name ) : QString( ":/emoticons/%1.png" ).arg( m_name ); }
+inline QString Emoticon::toHtml( int icon_size ) const { return QString( "<img src=\"%1\" height=\"%2\" />").arg( fileName(), QString::number( icon_size ) ); }
 inline QIcon Emoticon::icon() const { return QIcon( fileName() ); }
+inline QString Emoticon::filePath( int group_id, const QString& file_name ){ return QString( "%1/%2/%3" ).arg( sourceFolder(), groupFolder( group_id ), file_name ); }
 
 #endif // BEEBEEP_EMOTICON_H

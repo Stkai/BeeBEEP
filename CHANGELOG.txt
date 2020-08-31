@@ -16,6 +16,7 @@ BeeBEEP 5.8.3 (in development)
 - Added "AllowOnlyHostAddressesFromHostsIni" option in file beebeep.rc
 - Fixed security issue with command line argument -platformpluginpath
 - Added "Clear recent emoticons" in menu option of the chat bar
+- Added "Use high resolution emoticons" option
 
 BeeBEEP 5.8.2
 - New feature: voice messages (you can record your message and send it as file)

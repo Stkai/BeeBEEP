@@ -3488,6 +3488,10 @@ Please select a different name.</source>
         <source>Clear recent emoticons</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Use high resolution emoticons</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

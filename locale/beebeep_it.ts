@@ -3727,6 +3727,10 @@ Inserisci un nome differente.</translation>
         <source>Clear recent emoticons</source>
         <translation>Cancella le faccine recenti</translation>
     </message>
+    <message>
+        <source>Use high resolution emoticons</source>
+        <translation>Usa le faccine ad alta risoluzione</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

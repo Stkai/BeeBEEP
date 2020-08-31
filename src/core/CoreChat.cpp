@@ -27,6 +27,7 @@
 #include "ChatManager.h"
 #include "Connection.h"
 #include "Core.h"
+#include "Emoticon.h"
 #include "IconManager.h"
 #include "MessageManager.h"
 #include "Protocol.h"
@@ -57,9 +58,14 @@ void Core::createDefaultChat()
   {
     QString new_year_icons;
     if( Settings::instance().useNativeEmoticons() )
+    {
       new_year_icons = QString( "%1&nbsp;&nbsp;%2&nbsp;&nbsp;%3" ).arg( QString::fromUtf8( "🎆" ), QString::fromUtf8( "🎆" ), QString::fromUtf8( "🎆" ) );
+    }
     else
-      new_year_icons = QString( "%1&nbsp;&nbsp;%2&nbsp;&nbsp;%3" ).arg( IconManager::instance().toHtml( ":/emojis/objects/1f386.png", "*!*" ), IconManager::instance().toHtml( ":/emojis/objects/1f386.png", "*!*" ), IconManager::instance().toHtml( ":/emojis/objects/1f386.png", "*!*" ) );
+    {
+      QString new_year_icon = Emoticon::filePath( Emoticon::Objects, "1f386.png" );
+      new_year_icons = QString( "%1&nbsp;&nbsp;%2&nbsp;&nbsp;%3" ).arg( IconManager::instance().toHtml( new_year_icon, "*!*" ), IconManager::instance().toHtml( new_year_icon, "*!*" ), IconManager::instance().toHtml( new_year_icon, "*!*" ) );
+     }
     sHtmlMsg = QString( "%1&nbsp;&nbsp;&nbsp;<font color=red><b>%2</b></font>&nbsp;&nbsp;&nbsp;%3" ).arg( new_year_icons, tr( "Happy New Year!" ), new_year_icons );
     c.addMessage( ChatMessage( ID_SYSTEM_MESSAGE, Protocol::instance().systemMessage( sHtmlMsg ), ChatMessage::Other, false ) );
   }

@@ -62,6 +62,7 @@ Settings::Settings()
 #else
   m_useNativeEmoticons = false;
 #endif
+  m_useHiResEmoticons = false;
 
 #ifdef MAKE_BEEBEEP_PORTABLE
   m_saveDataInUserApplicationFolder = false;
@@ -145,7 +146,7 @@ Settings::Settings()
   m_rcFileExists = false;
   /* Default RC end */
 
-  m_emoticonSizeInEdit = 18;
+  m_emoticonSizeInEdit = 16;
 
   QFont f = QApplication::font();
   setChatFont( f );
@@ -392,8 +393,8 @@ void Settings::setChatFont( const QFont& new_value )
 {
   m_chatFont = new_value;
   QFontMetrics fm( m_chatFont );
-  m_emoticonSizeInChat = qMax( 24, qMin( 32, fm.height() ) );
-  m_emoticonSizeInEdit = qMax( 16, qMin( 32, fm.height() ) );
+  m_emoticonSizeInChat = qMax( 24, qMin( 160, fm.height() ) );
+  m_emoticonSizeInEdit = qMax( 16, qMin( 48, fm.height() ) );
   if( m_emoticonSizeInChat % 2 )
     m_emoticonSizeInChat++;
   if( m_emoticonSizeInEdit % 2 )
@@ -1461,6 +1462,7 @@ void Settings::loadCommonSettings( QSettings* user_ini )
   m_emoticonInRecentMenu = commonValue( system_rc, user_ini, "EmoticonsInRecentMenu", m_emoticonInRecentMenu ).toInt();
   m_recentEmoticons = user_ini->value( "RecentEmoticons", QStringList() ).toStringList();
   m_useNativeEmoticons = commonValue( system_rc, user_ini, "UseNativeEmoticons", m_useNativeEmoticons ).toBool();
+  m_useHiResEmoticons = commonValue( system_rc, user_ini, "UseHighResolutionEmoticons", m_useHiResEmoticons ).toBool();
   m_showMinimizedAtStartup = commonValue( system_rc, user_ini, "ShowMinimizedAtStartup", m_startMinimized ).toBool();
   m_promptOnCloseEvent = commonValue( system_rc, user_ini, "PromptOnCloseEvent", m_promptOnCloseEvent ).toBool();
   m_showUserStatusBackgroundColor = commonValue( system_rc, user_ini, "ShowUserStatusBackgroundColor", false ).toBool();
@@ -1841,6 +1843,7 @@ void Settings::save()
   sets->setValue( "EmoticonsInRecentMenu", m_emoticonInRecentMenu );
   sets->setValue( "RecentEmoticons", m_recentEmoticons );
   sets->setValue( "UseNativeEmoticons", m_useNativeEmoticons );
+  sets->setValue( "UseHighResolutionEmoticons", m_useHiResEmoticons );
   sets->setValue( "ShowMinimizedAtStartup", m_showMinimizedAtStartup );
   sets->setValue( "PromptOnCloseEvent", m_promptOnCloseEvent );
   sets->setValue( "ShowUserStatusBackgroundColor", m_showUserStatusBackgroundColor );

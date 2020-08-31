@@ -1068,6 +1068,10 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().chatClearAllReadMessages() );
   act->setData( 47 );
+  act = mp_menuChatSettings->addAction( tr( "Use high resolution emoticons" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().useHiResEmoticons() );
+  act->setData( 105 );
   act = mp_menuChatSettings->addAction( tr( "Use font emoticons" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().useNativeEmoticons() );
@@ -2230,6 +2234,10 @@ void GuiMain::settingsChanged( QAction* act )
     break;
   case 104:
     EmoticonManager::instance().clearRecentEmoticons();
+    updateEmoticons();
+    break;
+  case 105:
+    Settings::instance().setUseHiResEmoticons( act->isChecked() );
     updateEmoticons();
     break;
   default:
