@@ -98,6 +98,7 @@ void Core::showUserNameChanged( const User& u, const QString& old_user_name )
 
 void Core::showUserVCardChanged( const User&, const VCard& )
 {
+  // Fixme: useful?
 }
 
 void Core::sendLocalUserStatus()

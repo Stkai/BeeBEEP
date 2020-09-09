@@ -607,10 +607,10 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
   if( !sl.isEmpty() )
   {
     QString s_workgroups = sl.takeFirst();
-    if( !s_workgroups.isEmpty() && !Settings::instance().localUser().workgroups().isEmpty() )
+    if( !s_workgroups.isEmpty()  )
     {
       QStringList user_workgroups_tmp = s_workgroups.split( ", ", QString::SkipEmptyParts );
-      if( !Settings::instance().localUser().workgroups().isEmpty() )
+      if( Settings::instance().acceptConnectionsOnlyFromWorkgroups() && !Settings::instance().localUser().workgroups().isEmpty() )
       {
         foreach( QString user_workgroup, user_workgroups_tmp )
         {
@@ -619,6 +619,8 @@ User Protocol::createUser( const Message& hello_message, const QHostAddress& pee
             user_workgroups.append( user_workgroup );
         }
       }
+      else
+        user_workgroups = s_workgroups.split( ", ", QString::SkipEmptyParts );
     }
   }
 
