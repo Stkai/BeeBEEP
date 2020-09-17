@@ -205,7 +205,7 @@
         <translation>Je dosaženo maximální ID. Prosím, zavřete a restartujte aplikaci.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="69"/>
+        <location filename="../src/core/CoreChat.cpp" line="75"/>
         <source>Happy Birthday to you!</source>
         <translation>Všechno nejlepší!</translation>
     </message>
@@ -214,19 +214,19 @@
         <translation type="obsolete">Všechno nejlepší %1!</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="52"/>
+        <location filename="../src/core/CoreChat.cpp" line="53"/>
         <source>Happy birthday to Marco Mastroddi: %1 years old today! Cheers!!!</source>
         <translation>Všechno nejlepší k narozeninám vám přeje tvůrce programu Marco Mastroddi: dnes je vám %1 let! Na zdraví!!!</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="63"/>
+        <location filename="../src/core/CoreChat.cpp" line="69"/>
         <source>Happy New Year!</source>
         <translation>Šťastný Nový rok!</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="225"/>
-        <location filename="../src/core/CoreChat.cpp" line="954"/>
-        <location filename="../src/core/CoreChat.cpp" line="965"/>
+        <location filename="../src/core/CoreChat.cpp" line="231"/>
+        <location filename="../src/core/CoreChat.cpp" line="960"/>
+        <location filename="../src/core/CoreChat.cpp" line="971"/>
         <source>%1 Chat with %2.</source>
         <translation>%1 Chat s %2.</translation>
     </message>
@@ -235,107 +235,107 @@
         <translation type="obsolete">Chat se všemi připojenými uživateli</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="954"/>
+        <location filename="../src/core/CoreChat.cpp" line="960"/>
         <source>Unknown %1</source>
         <translation>Neznámý %1</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="400"/>
+        <location filename="../src/core/CoreChat.cpp" line="406"/>
         <source>Unable to send the message: you are not connected.</source>
         <translation>Nelze odeslat zprávu: nejste připojeni.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="115"/>
+        <location filename="../src/core/CoreChat.cpp" line="121"/>
         <source>%1 You have created group chat %2.</source>
         <translation>%1 vytvořil jste skupinový chat %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="122"/>
+        <location filename="../src/core/CoreChat.cpp" line="128"/>
         <source>%1 %2 has added you to the group chat %3.</source>
         <translation>%1 %2 si vás přidal do skupinového chatu %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="162"/>
+        <location filename="../src/core/CoreChat.cpp" line="168"/>
         <source>%1 You have changed the group name from %2 to %3.</source>
         <translation>%1 změnil jste název skupiny z %2 na %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="164"/>
+        <location filename="../src/core/CoreChat.cpp" line="170"/>
         <source>%1 %2 has changed the group name from %3 to %4.</source>
         <translation>%1 %2 změnil název skupiny z %3 na %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="180"/>
+        <location filename="../src/core/CoreChat.cpp" line="186"/>
         <source>%1 %2 will be informed of your changes.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="194"/>
+        <location filename="../src/core/CoreChat.cpp" line="200"/>
         <source>%1 You have removed members: %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="196"/>
+        <location filename="../src/core/CoreChat.cpp" line="202"/>
         <source>%1 %2 has removed members: %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="199"/>
+        <location filename="../src/core/CoreChat.cpp" line="205"/>
         <source>%1 This kind of change can be temporary if the user exists and does not leave the group spontaneously.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="216"/>
+        <location filename="../src/core/CoreChat.cpp" line="222"/>
         <source>%1 You have added members: %2.</source>
         <translation>%1 přidal jste členy: %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="218"/>
+        <location filename="../src/core/CoreChat.cpp" line="224"/>
         <source>%1 %2 has added members: %3.</source>
         <translation>%1 %2 přidal členy: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="286"/>
+        <location filename="../src/core/CoreChat.cpp" line="292"/>
         <source>%1 %2 has left the group chat %3.</source>
         <translation>%1 %2 opustil skupinový chat %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="309"/>
+        <location filename="../src/core/CoreChat.cpp" line="315"/>
         <source>%1 %2 wants to remove you from the group chat %3. If you agree please leave the group.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="328"/>
+        <location filename="../src/core/CoreChat.cpp" line="334"/>
         <source>%1 %2 is added to saved chats.</source>
         <translation>%1 %2 je přidán do uložených chatů.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="345"/>
+        <location filename="../src/core/CoreChat.cpp" line="351"/>
         <source>%1 You have left group chat %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="376"/>
+        <location filename="../src/core/CoreChat.cpp" line="382"/>
         <source>%1 Chat with %2 is archived.</source>
         <translation>%1 Chat s %2 je archivován.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="406"/>
+        <location filename="../src/core/CoreChat.cpp" line="412"/>
         <source>Unable to send the message: this chat is disabled.</source>
         <translation>Nelze poslat zprávu: tento chat je zakázán.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="482"/>
+        <location filename="../src/core/CoreChat.cpp" line="488"/>
         <source>The voice message will be delivered to %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="652"/>
+        <location filename="../src/core/CoreChat.cpp" line="658"/>
         <source>Unsent messages had an incorrect authorization code and will not be sent.</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/core/CoreChat.cpp" line="659"/>
+        <location filename="../src/core/CoreChat.cpp" line="665"/>
         <source>%n unsent message(s) will be sent as soon as possible.</source>
         <translation type="unfinished">
             <numerusform></numerusform>
@@ -344,12 +344,12 @@
         </translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="818"/>
+        <location filename="../src/core/CoreChat.cpp" line="824"/>
         <source>Offline messages sent to %1.</source>
         <translation type="unfinished">Offline zprávy odeslané %2. {1.?}</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="949"/>
+        <location filename="../src/core/CoreChat.cpp" line="955"/>
         <source>Chat with all users</source>
         <translation type="unfinished"></translation>
     </message>
@@ -374,32 +374,32 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="445"/>
+        <location filename="../src/core/CoreChat.cpp" line="451"/>
         <source>Unable to send the message to %1.</source>
         <translation type="unfinished">Nelze odeslat zprávu %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="484"/>
+        <location filename="../src/core/CoreChat.cpp" line="490"/>
         <source>The message will be delivered to %1.</source>
         <translation>Zpráva bude doručena uživateli %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="451"/>
+        <location filename="../src/core/CoreChat.cpp" line="457"/>
         <source>Nobody has received the message.</source>
         <translation type="unfinished">Zprávu nikdo neobdržel.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="637"/>
+        <location filename="../src/core/CoreChat.cpp" line="643"/>
         <source>Saved chats had an incorrect authorization code.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="640"/>
+        <location filename="../src/core/CoreChat.cpp" line="646"/>
         <source>%1 saved chats are added to history</source>
         <translation>%1 uložené chaty byly přidány do historie</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="704"/>
+        <location filename="../src/core/CoreChat.cpp" line="710"/>
         <source>Offline message will be sent to %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -408,12 +408,12 @@
         <translation type="obsolete">Offline zprávy odeslané %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="908"/>
+        <location filename="../src/core/CoreChat.cpp" line="914"/>
         <source>%1 You have buzzed %2.</source>
         <translation>%1 vás prozváněl %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="581"/>
+        <location filename="../src/core/CoreChat.cpp" line="587"/>
         <source>%1 %2 cannot be informed that you have left the group.</source>
         <translation>%1 %2 nemůže být informován, že jste opustil skupinu.</translation>
     </message>
@@ -553,7 +553,7 @@
         <translation>%1 je přidán ke sdílení souborů pouze s %2 ze %3 souborů (dosáhl limit %4)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="698"/>
+        <location filename="../src/core/CoreChat.cpp" line="704"/>
         <location filename="../src/core/CoreFileTransfer.cpp" line="182"/>
         <location filename="../src/core/CoreVoiceChat.cpp" line="66"/>
         <source>voice message</source>
@@ -715,12 +715,12 @@
         <translation type="obsolete">%1 sdílí tyto informace</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="316"/>
+        <location filename="../src/core/CoreUser.cpp" line="317"/>
         <source>is removed from favorites</source>
         <translation>odebrán z oblíbených</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="322"/>
+        <location filename="../src/core/CoreUser.cpp" line="323"/>
         <source>is added to favorites</source>
         <translation>přidán do oblíbených</translation>
     </message>

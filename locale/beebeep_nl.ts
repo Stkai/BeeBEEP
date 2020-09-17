@@ -205,7 +205,7 @@
         <translation>Max-ID is bereikt. Sluit en herstart Beebeep AUB.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="69"/>
+        <location filename="../src/core/CoreChat.cpp" line="75"/>
         <source>Happy Birthday to you!</source>
         <translation>Gelukkige verjaardag!</translation>
     </message>
@@ -214,19 +214,19 @@
         <translation type="obsolete">We wensen %1 een gelukkige verjaardag!</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="52"/>
+        <location filename="../src/core/CoreChat.cpp" line="53"/>
         <source>Happy birthday to Marco Mastroddi: %1 years old today! Cheers!!!</source>
         <translation>Gelukkige verjaardag Marco Mastroddi: %1 jaar oud vandaag! Schol!!!</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="63"/>
+        <location filename="../src/core/CoreChat.cpp" line="69"/>
         <source>Happy New Year!</source>
         <translation>Gelukkig Nieuw Jaar!</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="225"/>
-        <location filename="../src/core/CoreChat.cpp" line="954"/>
-        <location filename="../src/core/CoreChat.cpp" line="965"/>
+        <location filename="../src/core/CoreChat.cpp" line="231"/>
+        <location filename="../src/core/CoreChat.cpp" line="960"/>
+        <location filename="../src/core/CoreChat.cpp" line="971"/>
         <source>%1 Chat with %2.</source>
         <translation>%1 Chat met %2.</translation>
     </message>
@@ -235,112 +235,112 @@
         <translation type="obsolete">Chat met alle aangesloten gebruikers</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="954"/>
+        <location filename="../src/core/CoreChat.cpp" line="960"/>
         <source>Unknown %1</source>
         <translation>Onbekend %1</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="400"/>
+        <location filename="../src/core/CoreChat.cpp" line="406"/>
         <source>Unable to send the message: you are not connected.</source>
         <translation>Kan bericht niet versturen: u bent niet verbonden.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="115"/>
+        <location filename="../src/core/CoreChat.cpp" line="121"/>
         <source>%1 You have created group chat %2.</source>
         <translation>%1 Je hebt groep chat %2 gemaakt.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="122"/>
+        <location filename="../src/core/CoreChat.cpp" line="128"/>
         <source>%1 %2 has added you to the group chat %3.</source>
         <translation>%1 %2 heeft je toegevoegd aan %3 groep chat.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="162"/>
+        <location filename="../src/core/CoreChat.cpp" line="168"/>
         <source>%1 You have changed the group name from %2 to %3.</source>
         <translation>%1 Je hebt groepnaam veranderd van %2 naar %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="164"/>
+        <location filename="../src/core/CoreChat.cpp" line="170"/>
         <source>%1 %2 has changed the group name from %3 to %4.</source>
         <translation>%1 %2 heeft groepnaam veranderd van %3 naar %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="180"/>
+        <location filename="../src/core/CoreChat.cpp" line="186"/>
         <source>%1 %2 will be informed of your changes.</source>
         <translation>%1 %2 worden geinformeerd over je veranderingen.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="194"/>
+        <location filename="../src/core/CoreChat.cpp" line="200"/>
         <source>%1 You have removed members: %2.</source>
         <translation>%1 Je hebt: %2 verwijderde leden.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="196"/>
+        <location filename="../src/core/CoreChat.cpp" line="202"/>
         <source>%1 %2 has removed members: %3.</source>
         <translation>%1 %2 heeft: %3 verwijdere leden.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="199"/>
+        <location filename="../src/core/CoreChat.cpp" line="205"/>
         <source>%1 This kind of change can be temporary if the user exists and does not leave the group spontaneously.</source>
         <translation>%1 Deze  wijziging kan tijdelijk zijn als de gebruiker bestaat en de groep niet spontaan verlaat.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="216"/>
+        <location filename="../src/core/CoreChat.cpp" line="222"/>
         <source>%1 You have added members: %2.</source>
         <translation>%1 Je hebt: %2 toegevoegde leden.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="218"/>
+        <location filename="../src/core/CoreChat.cpp" line="224"/>
         <source>%1 %2 has added members: %3.</source>
         <translation>%1 %2 hebben: %3 toegevoegde leden.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="286"/>
+        <location filename="../src/core/CoreChat.cpp" line="292"/>
         <source>%1 %2 has left the group chat %3.</source>
         <translation>%1 %2 hebben de groepchat %3 verlaten.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="309"/>
+        <location filename="../src/core/CoreChat.cpp" line="315"/>
         <source>%1 %2 wants to remove you from the group chat %3. If you agree please leave the group.</source>
         <translation>%1 %2 wil je uit de groepchat %3 verwijderen als je er mee eens bent verlaat de groep.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="328"/>
+        <location filename="../src/core/CoreChat.cpp" line="334"/>
         <source>%1 %2 is added to saved chats.</source>
         <translation>%1 %2 zijn toegevoegd aan opgeslagen chats.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="345"/>
+        <location filename="../src/core/CoreChat.cpp" line="351"/>
         <source>%1 You have left group chat %2.</source>
         <translation>%1 Je hebt de groepchat %2 verlaten.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="376"/>
+        <location filename="../src/core/CoreChat.cpp" line="382"/>
         <source>%1 Chat with %2 is archived.</source>
         <translation>%1 Chat met %2 is gearchiveerd.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="406"/>
+        <location filename="../src/core/CoreChat.cpp" line="412"/>
         <source>Unable to send the message: this chat is disabled.</source>
         <translation>Kan bericht niet versturen: de chat is uitgeschakeld.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="482"/>
+        <location filename="../src/core/CoreChat.cpp" line="488"/>
         <source>The voice message will be delivered to %1.</source>
         <translation>Het spraakberich wordt afgeleverd aan %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="637"/>
+        <location filename="../src/core/CoreChat.cpp" line="643"/>
         <source>Saved chats had an incorrect authorization code.</source>
         <translation>Opgeslagen chats hebben een onjuiste autorisatiecode.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="652"/>
+        <location filename="../src/core/CoreChat.cpp" line="658"/>
         <source>Unsent messages had an incorrect authorization code and will not be sent.</source>
         <translation>Onverzonden berichten hadden een onjuiste autorisatiecode en worden niet verzonden.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/core/CoreChat.cpp" line="659"/>
+        <location filename="../src/core/CoreChat.cpp" line="665"/>
         <source>%n unsent message(s) will be sent as soon as possible.</source>
         <translation>
             <numerusform>%n onverzonden bericht zal zo spoedig mogelijk worden verzonden.</numerusform>
@@ -348,7 +348,7 @@
         </translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="818"/>
+        <location filename="../src/core/CoreChat.cpp" line="824"/>
         <source>Offline messages sent to %1.</source>
         <translation>Offline bericht verzonden naar%1.</translation>
     </message>
@@ -357,7 +357,7 @@
         <translation type="obsolete">Offline berichten die nog moesten worden verzonden, hadden een onjuiste autorisatiecode en worden niet verzonden.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="949"/>
+        <location filename="../src/core/CoreChat.cpp" line="955"/>
         <source>Chat with all users</source>
         <translation>Chat met alle gebruikers</translation>
     </message>
@@ -382,22 +382,22 @@
         <translation>End-to-end encryptie is uitgeschakeld</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="445"/>
+        <location filename="../src/core/CoreChat.cpp" line="451"/>
         <source>Unable to send the message to %1.</source>
         <translation>Kan bericht niet versturen naar %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="484"/>
+        <location filename="../src/core/CoreChat.cpp" line="490"/>
         <source>The message will be delivered to %1.</source>
         <translation>Dit bericht wordt verstuurd naar %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="451"/>
+        <location filename="../src/core/CoreChat.cpp" line="457"/>
         <source>Nobody has received the message.</source>
         <translation>Niemand heeft het bericht ontvangen.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="640"/>
+        <location filename="../src/core/CoreChat.cpp" line="646"/>
         <source>%1 saved chats are added to history</source>
         <translation>%1 opgeslagen chats zijn aan geschiedenis toegevoegd</translation>
     </message>
@@ -406,7 +406,7 @@
         <translation type="obsolete">%1 offline berichten zullen zo spoedig mogelijk worden verzonden.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="704"/>
+        <location filename="../src/core/CoreChat.cpp" line="710"/>
         <source>Offline message will be sent to %1</source>
         <translation>Offline bericht wordt verzonden naar %1</translation>
     </message>
@@ -415,12 +415,12 @@
         <translation type="obsolete">Offline bericht verzonden naar%2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="908"/>
+        <location filename="../src/core/CoreChat.cpp" line="914"/>
         <source>%1 You have buzzed %2.</source>
         <translation>%1 Je bent gebuzzed %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="581"/>
+        <location filename="../src/core/CoreChat.cpp" line="587"/>
         <source>%1 %2 cannot be informed that you have left the group.</source>
         <translation>%1 %2 kan niet verwittigd worden dat u de groep verlaten heeft.</translation>
     </message>
@@ -560,7 +560,7 @@
         <translation>%1 is toegevoegd aan bestandsdeling met %2 bestanden, %3 (verlopen tijd: %4)</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="698"/>
+        <location filename="../src/core/CoreChat.cpp" line="704"/>
         <location filename="../src/core/CoreFileTransfer.cpp" line="182"/>
         <location filename="../src/core/CoreVoiceChat.cpp" line="66"/>
         <source>voice message</source>
@@ -722,12 +722,12 @@
         <translation type="obsolete">%1 deelt deze informatie</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="316"/>
+        <location filename="../src/core/CoreUser.cpp" line="317"/>
         <source>is removed from favorites</source>
         <translation>is verwijderd van favorieten</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="322"/>
+        <location filename="../src/core/CoreUser.cpp" line="323"/>
         <source>is added to favorites</source>
         <translation>is toegevoegd aan favorieten</translation>
     </message>

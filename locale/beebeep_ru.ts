@@ -197,134 +197,134 @@
         <translation>Достигнут максимальный идентификатор. Закройте и перезапустите приложение.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="69"/>
+        <location filename="../src/core/CoreChat.cpp" line="75"/>
         <source>Happy Birthday to you!</source>
         <translation>С днем рождения!</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="52"/>
+        <location filename="../src/core/CoreChat.cpp" line="53"/>
         <source>Happy birthday to Marco Mastroddi: %1 years old today! Cheers!!!</source>
         <translation>С днем рождения Марко Мастродди: %1 лет исполнилось сегодня! Ваше здоровье!!!</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="63"/>
+        <location filename="../src/core/CoreChat.cpp" line="69"/>
         <source>Happy New Year!</source>
         <translation>С Новым годом!</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="115"/>
+        <location filename="../src/core/CoreChat.cpp" line="121"/>
         <source>%1 You have created group chat %2.</source>
         <translation>%1 Вы создали групповой чат %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="122"/>
+        <location filename="../src/core/CoreChat.cpp" line="128"/>
         <source>%1 %2 has added you to the group chat %3.</source>
         <translation>%1 %2 добавил Вас в групповой чат %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="162"/>
+        <location filename="../src/core/CoreChat.cpp" line="168"/>
         <source>%1 You have changed the group name from %2 to %3.</source>
         <translation>%1 Вы изменили имя группы с %2 на %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="164"/>
+        <location filename="../src/core/CoreChat.cpp" line="170"/>
         <source>%1 %2 has changed the group name from %3 to %4.</source>
         <translation>%1 %2 изменил имя группы с %3 на %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="180"/>
+        <location filename="../src/core/CoreChat.cpp" line="186"/>
         <source>%1 %2 will be informed of your changes.</source>
         <translation>%1 %2 будут проинформированы о ваших изменениях.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="194"/>
+        <location filename="../src/core/CoreChat.cpp" line="200"/>
         <source>%1 You have removed members: %2.</source>
         <translation>%1 Вы удалили пользователей: %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="196"/>
+        <location filename="../src/core/CoreChat.cpp" line="202"/>
         <source>%1 %2 has removed members: %3.</source>
         <translation>%1 %2 удалил пользователей: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="199"/>
+        <location filename="../src/core/CoreChat.cpp" line="205"/>
         <source>%1 This kind of change can be temporary if the user exists and does not leave the group spontaneously.</source>
         <translation>%1 Такое изменение может быть временным, если пользователь существует и не покидает группу спонтанно.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="216"/>
+        <location filename="../src/core/CoreChat.cpp" line="222"/>
         <source>%1 You have added members: %2.</source>
         <translation>%1 Добавили пользователей: %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="218"/>
+        <location filename="../src/core/CoreChat.cpp" line="224"/>
         <source>%1 %2 has added members: %3.</source>
         <translation>%1 %2 добавил пользователей: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="225"/>
-        <location filename="../src/core/CoreChat.cpp" line="954"/>
-        <location filename="../src/core/CoreChat.cpp" line="965"/>
+        <location filename="../src/core/CoreChat.cpp" line="231"/>
+        <location filename="../src/core/CoreChat.cpp" line="960"/>
+        <location filename="../src/core/CoreChat.cpp" line="971"/>
         <source>%1 Chat with %2.</source>
         <translation>%1 Чат с %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="286"/>
+        <location filename="../src/core/CoreChat.cpp" line="292"/>
         <source>%1 %2 has left the group chat %3.</source>
         <translation>%1 %2 покинул групповой чат %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="309"/>
+        <location filename="../src/core/CoreChat.cpp" line="315"/>
         <source>%1 %2 wants to remove you from the group chat %3. If you agree please leave the group.</source>
         <translation>%1 %2 хотят удалить вас из группового чата %3. Если вы согласны, пожалуйста, покиньте группу.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="328"/>
+        <location filename="../src/core/CoreChat.cpp" line="334"/>
         <source>%1 %2 is added to saved chats.</source>
         <translation>%1 %2 добавлен в сохраненные чаты.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="345"/>
+        <location filename="../src/core/CoreChat.cpp" line="351"/>
         <source>%1 You have left group chat %2.</source>
         <translation>%1 Вы покинули групповой чат %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="376"/>
+        <location filename="../src/core/CoreChat.cpp" line="382"/>
         <source>%1 Chat with %2 is archived.</source>
         <translation>%1 Чат с %2 сохранен.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="400"/>
+        <location filename="../src/core/CoreChat.cpp" line="406"/>
         <source>Unable to send the message: you are not connected.</source>
         <translation>Не удается отослать сообщение: вы не подключены.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="406"/>
+        <location filename="../src/core/CoreChat.cpp" line="412"/>
         <source>Unable to send the message: this chat is disabled.</source>
         <translation>Не удается отправить сообщение: этот чат отключен.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="445"/>
+        <location filename="../src/core/CoreChat.cpp" line="451"/>
         <source>Unable to send the message to %1.</source>
         <translation>Не удается отослать сообщение для %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="451"/>
+        <location filename="../src/core/CoreChat.cpp" line="457"/>
         <source>Nobody has received the message.</source>
         <translation>Никто не получил сообщение.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="482"/>
+        <location filename="../src/core/CoreChat.cpp" line="488"/>
         <source>The voice message will be delivered to %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="652"/>
+        <location filename="../src/core/CoreChat.cpp" line="658"/>
         <source>Unsent messages had an incorrect authorization code and will not be sent.</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/core/CoreChat.cpp" line="659"/>
+        <location filename="../src/core/CoreChat.cpp" line="665"/>
         <source>%n unsent message(s) will be sent as soon as possible.</source>
         <translation type="unfinished">
             <numerusform></numerusform>
@@ -333,7 +333,7 @@
         </translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="818"/>
+        <location filename="../src/core/CoreChat.cpp" line="824"/>
         <source>Offline messages sent to %1.</source>
         <translation type="unfinished">Офлайн сообщения отправлены %1.</translation>
     </message>
@@ -342,7 +342,7 @@
         <translation type="obsolete">Оффлайн сообщения, которые все еще должны быть отправлены, имели неверный код авторизации и не будут отправлены.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="949"/>
+        <location filename="../src/core/CoreChat.cpp" line="955"/>
         <source>Chat with all users</source>
         <translation>Чат со всеми пользователями</translation>
     </message>
@@ -367,17 +367,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="484"/>
+        <location filename="../src/core/CoreChat.cpp" line="490"/>
         <source>The message will be delivered to %1.</source>
         <translation>Сообщение будет доставлено %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="637"/>
+        <location filename="../src/core/CoreChat.cpp" line="643"/>
         <source>Saved chats had an incorrect authorization code.</source>
         <translation>Сохраненные чаты имели неверный код авторизации.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="640"/>
+        <location filename="../src/core/CoreChat.cpp" line="646"/>
         <source>%1 saved chats are added to history</source>
         <translation>%1 сохранённых чатоd добавлены к истории</translation>
     </message>
@@ -386,7 +386,7 @@
         <translation type="obsolete">%1 офлайн сообщения будут отправлены как можно скорее.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="704"/>
+        <location filename="../src/core/CoreChat.cpp" line="710"/>
         <source>Offline message will be sent to %1</source>
         <translation>Офлайн сообщения будут отправлены %1</translation>
     </message>
@@ -395,17 +395,17 @@
         <translation type="obsolete">Офлайн сообщения отправлены %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="908"/>
+        <location filename="../src/core/CoreChat.cpp" line="914"/>
         <source>%1 You have buzzed %2.</source>
         <translation>%1 Вы будите %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="954"/>
+        <location filename="../src/core/CoreChat.cpp" line="960"/>
         <source>Unknown %1</source>
         <translation>Неизвестный %1</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="581"/>
+        <location filename="../src/core/CoreChat.cpp" line="587"/>
         <source>%1 %2 cannot be informed that you have left the group.</source>
         <translation>%1 %2 не может быть проинформирован, что вы ушли из группы.</translation>
     </message>
@@ -514,7 +514,7 @@
         <translation type="obsolete">%1 Вы отправили %2 в %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="698"/>
+        <location filename="../src/core/CoreChat.cpp" line="704"/>
         <location filename="../src/core/CoreFileTransfer.cpp" line="182"/>
         <location filename="../src/core/CoreVoiceChat.cpp" line="66"/>
         <source>voice message</source>
@@ -707,12 +707,12 @@
         <translation type="obsolete">%1 делится этой информацией</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="316"/>
+        <location filename="../src/core/CoreUser.cpp" line="317"/>
         <source>is removed from favorites</source>
         <translation>удален из избранных</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="322"/>
+        <location filename="../src/core/CoreUser.cpp" line="323"/>
         <source>is added to favorites</source>
         <translation>добавлен в избранные</translation>
     </message>
