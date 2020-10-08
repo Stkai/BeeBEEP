@@ -906,10 +906,10 @@ void GuiChat::checkAndSendUrls( const QMimeData* source )
 #endif
     {
       file_path = url.toLocalFile();
-      num_files += Protocol::instance().countFilesCanBeSharedInPath( file_path );
+      file_path_list.append( Bee::convertToNativeFolderSeparator( file_path ) );
+      num_files++;
       if( num_files > Settings::instance().maxQueuedDownloads() )
         break;
-      file_path_list.append( Bee::convertToNativeFolderSeparator( file_path ) );
     }
   }
 

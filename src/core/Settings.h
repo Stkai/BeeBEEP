@@ -413,8 +413,8 @@ public:
 
   inline bool keyEscapeMinimizeInTray() const;
   inline void setKeyEscapeMinimizeInTray( bool );
-  inline bool minimizeInTray() const;
-  inline void setMinimizeInTray( bool );
+  inline bool closeMinimizeInTray() const;
+  inline void setCloseMinimizeInTray( bool );
   inline bool loadOnTrayAtStartup() const;
   inline void setLoadOnTrayAtStartup( bool );
   inline bool showNotificationOnTray() const;
@@ -864,7 +864,7 @@ private:
   bool m_preventMultipleConnectionsFromSingleHostAddress;
 
   bool m_keyEscapeMinimizeInTray;
-  bool m_minimizeInTray;
+  bool m_closeMinimizeInTray;
   bool m_loadOnTrayAtStartup;
   bool m_showNotificationOnTray;
   bool m_showOnlyMessageNotificationOnTray;
@@ -1115,8 +1115,8 @@ inline void Settings::setFirstTime( bool new_value ) { m_firstTime = new_value; 
 inline bool Settings::firstTime() const { return m_firstTime; }
 inline bool Settings::keyEscapeMinimizeInTray() const { return m_keyEscapeMinimizeInTray; }
 inline void Settings::setKeyEscapeMinimizeInTray( bool new_value ) { m_keyEscapeMinimizeInTray = new_value; }
-inline bool Settings::minimizeInTray() const { return m_minimizeInTray; }
-inline void Settings::setMinimizeInTray( bool new_value ) { m_minimizeInTray = new_value; }
+inline bool Settings::closeMinimizeInTray() const { return m_closeMinimizeInTray; }
+inline void Settings::setCloseMinimizeInTray( bool new_value ) { m_closeMinimizeInTray = new_value; }
 inline bool Settings::loadOnTrayAtStartup() const { return m_loadOnTrayAtStartup; }
 inline void Settings::setLoadOnTrayAtStartup( bool new_value ) { m_loadOnTrayAtStartup = new_value; }
 inline bool Settings::showNotificationOnTray() const { return m_showNotificationOnTray; }

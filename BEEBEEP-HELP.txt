@@ -183,7 +183,8 @@ LogPath=.
 PluginPath=.
 LocalePath=.
 KeyEscapeMinimizeInTray=[true/false] Escape key will minimize BeeBEEP into the system tray (default=true)
-MinimizeInTray=[true/false] Close button will minimize BeeBEEP into the system tray
+MinimizeInTray=[true/false] Close button will minimize BeeBEEP into the system tray (default=true) [obsolete in 5.8.4]
+CloseMinimizeInTray=[true/false] Close button will minimize BeeBEEP into the system tray (default = true) [5.8.4]
 StayOnTop=[true/false]
 BeepFilePath=beep.wav
 RaiseOnNewMessageArrived=[true/false]

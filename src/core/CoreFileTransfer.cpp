@@ -364,12 +364,6 @@ bool Core::sendFileToUser( const User&u, const QString& file_path, const QString
     return false;
 
   QString icon_html = IconManager::instance().toHtml( "red-ball.png", "*F*" );
-  if( !isUserConnected( u.id() ) )
-  {
-    dispatchSystemMessage( chat_selected.isValid() ? chat_selected.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2 to %3: user is offline." ).arg( icon_html, file_path, Bee::userNameToShow( u, true ) ),
-                           chat_selected.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
-    return false;
-  }
 
   QFileInfo file( file_path );
   if( !file.isDir() && !Settings::instance().isFileExtensionAllowedInFileTransfer( file.suffix() ) )
@@ -389,6 +383,13 @@ bool Core::sendFileToUser( const User&u, const QString& file_path, const QString
   if( !file.isDir() && file.size() <= 0 )
   {
     dispatchSystemMessage( chat_selected.isValid() ? chat_selected.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2 to %3: file is empty." ).arg( icon_html, file_path, Bee::userNameToShow( u, true ) ),
+                           chat_selected.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
+    return false;
+  }
+
+  if( !isUserConnected( u.id() ) )
+  {
+    dispatchSystemMessage( chat_selected.isValid() ? chat_selected.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 Unable to send %2 to %3: user is offline." ).arg( icon_html, file_path, Bee::userNameToShow( u, true ) ),
                            chat_selected.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
     return false;
   }

@@ -1429,9 +1429,12 @@ void Settings::loadCommonSettings( QSettings* user_ini )
     m_language.resize( 2 );
   m_keyEscapeMinimizeInTray = commonValue( system_rc, user_ini, "KeyEscapeMinimizeInTray", true ).toBool();
 #ifdef Q_OS_MAC
-  m_minimizeInTray = false;
+  m_closeMinimizeInTray = false;
 #else
-  m_minimizeInTray = commonValue( system_rc, user_ini, "MinimizeInTray", true ).toBool();
+  if( m_settingsVersion < 18 )
+    m_closeMinimizeInTray = commonValue( system_rc, user_ini, "MinimizeInTray", true ).toBool();
+  else
+    m_closeMinimizeInTray = commonValue( system_rc, user_ini, "CloseMinimizeInTray", true ).toBool();
 #endif
   m_stayOnTop = commonValue( system_rc, user_ini, "StayOnTop", false ).toBool();
   m_raiseOnNewMessageArrived = commonValue( system_rc, user_ini, "RaiseOnNewMessageArrived", false ).toBool();
@@ -1810,7 +1813,7 @@ void Settings::save()
   sets->setValue( "PluginPath", m_pluginPath );
   sets->setValue( "LanguagePath", m_languagePath );
   sets->setValue( "KeyEscapeMinimizeInTray", m_keyEscapeMinimizeInTray );
-  sets->setValue( "MinimizeInTray", m_minimizeInTray );
+  sets->setValue( "CloseMinimizeInTray", m_closeMinimizeInTray );
   sets->setValue( "StayOnTop", m_stayOnTop );
   sets->setValue( "BeepFilePath", m_beepFilePath );
   sets->setValue( "RaiseOnNewMessageArrived", m_raiseOnNewMessageArrived );

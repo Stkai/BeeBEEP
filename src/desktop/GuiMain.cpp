@@ -347,7 +347,7 @@ void GuiMain::closeEvent( QCloseEvent* e )
   {
     if( !m_forceShutdown )
     {
-      if( Settings::instance().minimizeInTray() && QSystemTrayIcon::isSystemTrayAvailable() )
+      if( Settings::instance().closeMinimizeInTray() && QSystemTrayIcon::isSystemTrayAvailable() )
       {
         QTimer::singleShot( 0, this, SLOT( hideToTrayIcon() ) );
         e->ignore();
@@ -882,7 +882,7 @@ void GuiMain::createMenus()
   act->setData( 29 );
   act = mp_menuInterfaceSettings->addAction( tr( "Close button minimize to tray icon" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
-  act->setChecked( Settings::instance().minimizeInTray() );
+  act->setChecked( Settings::instance().closeMinimizeInTray() );
   act->setData( 11 );
 #ifdef Q_OS_MAC
   // Close button on MacOSX must quit the app
@@ -1643,7 +1643,7 @@ void GuiMain::settingsChanged( QAction* act )
     refresh_chat = true;
     break;
   case 11:
-    Settings::instance().setMinimizeInTray( act->isChecked() );
+    Settings::instance().setCloseMinimizeInTray( act->isChecked() );
     break;
   case 12:
     setFileTransferEnabled( act->isChecked() );
