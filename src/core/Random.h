@@ -25,17 +25,31 @@
 #define BEEBEEP_RANDOM_H
 
 #include <QDateTime>
-#include <stdlib.h>
+#if QT_VERSION > 0x050909
+  #include <QRandomGenerator64>
+#else
+  #include <stdlib.h>
+#endif
+
 
 namespace Random
 {
-  inline int __double2int( double d ) { int i = static_cast<int>(d); return d-i >= 0.5 ? ++i : i; } // never negative in random
+  inline qint32 __double2int32( double d ) { int i = static_cast<qint32>(d); return d-i >= 0.5 ? ++i : i; } // never negative in random
+  inline qint64 __double2int64( double d ) { int i = static_cast<qint64>(d); return d-i >= 0.5 ? ++i : i; }
+
+#if QT_VERSION > 0x050909
+  inline void init() {}
+  inline qint32 number32( qint32 from, qint32 to ) { return from >= to ? to : __double2int32( QRandomGenerator::global()->generateDouble() * ( to - from ) ) + from; }
+  inline qint64 number64( qint64 from, qint64 to ) { return from >= to ? to : __double2int64( QRandomGenerator::global()->generateDouble() * ( to - from ) ) + from; }
+#else
   inline void init() { qsrand( QTime( 0, 0, 0 ).secsTo( QTime::currentTime() ) ); }
-  inline int number( int from, int to ) { return from >= to ? to : __double2int((qrand()/(1.0 + RAND_MAX))*( to - from )) + from; }
-  inline int roll( int dices, int faces ) { int result = 0; for( int i = 0; i < dices; i++ ) result += number( 1, faces ); return result; }
-  inline int d100() { return number( 1, 100 ); }
-  inline int d20() { return number( 1, 20 ); }
-  
+  inline qint32 number32( int from, int to ) { return from >= to ? to : __double2int32((qrand()/(1.0 + RAND_MAX)) * ( to - from )) + from; }
+  inline qint64 number64( int from, int to ) { return from >= to ? to : __double2int64((qrand()/(1.0 + RAND_MAX)) * ( to - from )) + from; }
+#endif
+  inline int roll( int dices, int faces ) { int result = 0; for( int i = 0; i < dices; i++ ) result += number32( 1, faces ); return result; }
+  inline int d100() { return number32( 1, 100 ); }
+  inline int d20() { return number32( 1, 20 ); }
+
 } // namespace Random
 
 #endif // BEEBEEP_RANDOM_H

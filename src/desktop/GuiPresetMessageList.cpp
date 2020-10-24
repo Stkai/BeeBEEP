@@ -199,7 +199,7 @@ void GuiPresetMessageList::onRemove( QTreeWidgetItem* item )
   if( !item )
     return;
   if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you want to delete this preset?" ),
-                             tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) != 0 )
+                             tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) != 0 )
     return;
 
   removePreset( item->data( 0, Qt::UserRole+1 ).toString() );

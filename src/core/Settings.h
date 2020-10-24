@@ -79,7 +79,7 @@ public:
   QString defaultLanguageFolderPath() const;
   QString defaultHostsFilePath() const;
 
-  bool isDevelopmentVersion( const QString& v = QString::null ) const;
+  bool isDevelopmentVersion( const QString& v = QString() ) const;
   QString version( bool build_version, bool qt_version, bool debug_info ) const;
   int protocolVersion() const;
   inline int dataStreamVersion( bool in_load_event ) const;

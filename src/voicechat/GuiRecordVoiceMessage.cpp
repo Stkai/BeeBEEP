@@ -264,7 +264,7 @@ void GuiRecordVoiceMessage::toggleRecord()
     if( QFile::exists( m_filePath ) )
     {
       if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you want to start recording your voice message again?"),
-                                 tr( "Yes, clean and restart" ), tr( "Cancel" ), QString::null, 1, 1 ) != 0 )
+                                 tr( "Yes, clean and restart" ), tr( "Cancel" ), QString(), 1, 1 ) != 0 )
       {
         return;
       }

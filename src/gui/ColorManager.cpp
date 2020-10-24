@@ -30,14 +30,14 @@ ColorManager* ColorManager::mp_instance = NULL;
 
 QString ColorManager::randomQString()
 {
-  return m_colors.at( Random::number( 0, (m_colors.size()-1) ) );
+  return m_colors.at( Random::number32( 0, (m_colors.size()-1) ) );
 }
 
 QString ColorManager::unselectedQString()
 {
   if( m_unselectedColors.size() < 1 )
     clearSelectedColors();
-  return m_unselectedColors.takeAt( Random::number( 0, (m_unselectedColors.size()-1) ) );
+  return m_unselectedColors.takeAt( Random::number32( 0, (m_unselectedColors.size()-1) ) );
 }
 
 void ColorManager::setColorSelected( const QString& s_color )

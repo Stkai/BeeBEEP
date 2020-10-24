@@ -54,7 +54,7 @@ public:
   QByteArray pongMessage() const;
   QByteArray broadcastMessage( const QHostAddress& ) const;
   QHostAddress hostAddressFromBroadcastMessage( const Message& ) const;
-  QByteArray helloMessage( const QString& cipher_key_tmp, bool encrypted_connection, bool data_compressed ) const;
+  QByteArray helloMessage( const QByteArray& public_key, bool encrypted_connection, bool data_compressed ) const;
   QByteArray testQuestionMessage( const NetworkAddress& ) const;
   bool isTestQuestionMessage( const Message& ) const;
   QByteArray testAnswerMessage( const NetworkAddress&, bool test_is_accepted, const QString& answer_msg = "Ok" ) const;
@@ -81,8 +81,6 @@ public:
   QString chatMessageDataToString( const ChatMessageData& ) const;
   int protocolVersion( const Message& ) const;
   int datastreamVersion( const Message& ) const;
-  QString publicKey( const Message& ) const;
-  QByteArray createCipherKey( const QString&, const QString&, int ) const;
   QByteArray fileTransferBytesArrivedConfirmation( int proto_version, FileSizeType bytes_arrived_size, FileSizeType total_bytes_arrived_size, bool pause_transfer  ) const;
   bool parseFileTransferBytesArrivedConfirmation( int proto_version, const QByteArray& bytes_arrived, FileSizeType* bytes_arrived_size, FileSizeType* total_bytes_arrived_size, bool* pause_transfer ) const;
   Message createFolderMessage( const QString&, const QList<FileInfo>&, int server_port );
@@ -157,6 +155,11 @@ public:
   QString saveChatRecord( const ChatRecord& ) const;
   ChatRecord loadChatRecord( const QString& ) const;
 
+  QByteArray generatePrivateKey() const;
+  QByteArray generatePublicKey( const QByteArray& private_key ) const;
+  QByteArray publicKey( const Message&, int proto_version ) const;
+  QByteArray createCipherKey( const QByteArray&, const QByteArray&, int proto_version, int data_stream_version ) const;
+
   QByteArray encryptByteArray( const QByteArray& text_to_encrypt, const QByteArray& cipher_key, int proto_version ) const;
   QByteArray decryptByteArray( const QByteArray& text_to_decrypt, const QByteArray& cipher_key, int proto_version ) const;
 
@@ -183,6 +186,10 @@ protected:
 
   QString pixmapToString( const QPixmap& ) const;
   QPixmap stringToPixmap( const QString& ) const;
+
+  QByteArray generateECDHRandomPrivateKey() const;
+  QByteArray generateECDHPublicKey( const QByteArray& private_key ) const;
+  QByteArray generateECDHSharedCipherKey( const QByteArray& private_key, const QByteArray& other_public_key ) const;
 
   QList<QByteArray> splitByteArray( const QByteArray&, int ) const;
   void hexToUnsignedChar( const QByteArray&, unsigned char* out_string, unsigned int len_out_string ) const;

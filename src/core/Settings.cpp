@@ -303,7 +303,7 @@ QString Settings::findFileInFolders( const QString& file_name, const QStringList
         return return_folder_path ? folder_path : file_path;
     }
   }
-  return QString::null;
+  return QString();
 }
 
 void Settings::setDefaultFolders()
@@ -445,9 +445,9 @@ void Settings::createLocalUser( const QString& user_name )
 QString Settings::createLocalUserHash()
 {
   QString hash_parameters = QString( "%1%2%3%4%5%6%7%8" )
-                              .arg( QString::number( Random::number( 6475, 36475 ) ) )
+                              .arg( QString::number( Random::number32( 6475, 36475 ) ) )
                               .arg( m_localUser.accountName() ).arg( m_localUser.name() )
-                              .arg( QString::number( Random::number( 6475, 36475 ) ) )
+                              .arg( QString::number( Random::number32( 6475, 36475 ) ) )
                               .arg( m_localUser.domainName() ).arg( m_localUser.localHostName() ).arg( version( true, true, true ) )
                               .arg( QDateTime::currentDateTime().toString( "dd.MM.yyyy-hh:mm:ss.zzz" ) );
   QString local_user_hash = simpleHash( hash_parameters );
@@ -728,7 +728,8 @@ bool Settings::createDefaultHostsFile()
   {
     QTextStream ts( &file_hosts_ini );
     foreach( QString line, sl )
-      ts << line << endl;
+      ts << line << "\n";
+    ts.flush();
     file_hosts_ini.close();
     qDebug() << "HOSTS default configuration file created in" << qPrintable( file_hosts_path );
     return true;

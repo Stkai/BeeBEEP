@@ -48,7 +48,7 @@ void BuildFileList::buildList()
 {
   if( !m_fileList.isEmpty() )
     m_fileList.clear();
-  QTime elapsed_time;
+  QElapsedTimer elapsed_time;
   elapsed_time.start();
   m_errorFound = true;
 

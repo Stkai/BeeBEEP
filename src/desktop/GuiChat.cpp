@@ -1209,7 +1209,7 @@ void GuiChat::quoteSelectedText()
 
 void GuiChat::resetChatFontToDefault()
 {
-  if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you want to restore the default font?" ), tr( "Yes" ), tr( "No" ), QString::null, 0, 1 ) == 1 )
+  if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you want to restore the default font?" ), tr( "Yes" ), tr( "No" ), QString(), 0, 1 ) == 1 )
     return;
   Settings::instance().setChatFont( QApplication::font() );
   setChatFont( Settings::instance().chatFont() );

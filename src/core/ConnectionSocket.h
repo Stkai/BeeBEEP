@@ -83,7 +83,7 @@ protected:
   void checkHelloMessage( const QByteArray& );
   QByteArray serializeData( const QByteArray& );
   const QByteArray& cipherKey() const;
-  bool createCipherKey( const QString& );
+  bool createCipherKey( const QByteArray&, int proto_version );
 
   bool checkConnectionTimeout( int );
   bool checkTestMessage( const Message& );
@@ -99,8 +99,9 @@ private:
   VNumber m_userId;
   int m_protocolVersion;
   QByteArray m_cipherKey;
-  QString m_publicKey1;
-  QString m_publicKey2;
+  QByteArray m_publicKey1;
+  QByteArray m_publicKey2;
+  QByteArray m_privateKey;
 
   NetworkAddress m_networkAddress;
 

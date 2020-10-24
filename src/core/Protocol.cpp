@@ -21,9 +21,11 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+
 #include "BeeUtils.h"
 #include "ChatManager.h"
 #include "ColorManager.h"
+
 #include "EmoticonManager.h"
 #include "PluginManager.h"
 #include "Protocol.h"
@@ -32,10 +34,14 @@
 #include "Settings.h"
 #include "UserManager.h"
 
+/* ECDH PROTOCOL */
+#include "ECDH.h"
+#define BEEBEEP_ECDH_PRIVATE_KEY_SIZE ECC_PRV_KEY_SIZE
+#define BEEBEEP_ECDH_PUBLIC_KEY_SIZE ECC_PUB_KEY_SIZE
+
 Protocol* Protocol::mp_instance = Q_NULLPTR;
 const QChar PROTOCOL_FIELD_SEPARATOR = QChar::ParagraphSeparator;  // 0x2029
 const QChar DATA_FIELD_SEPARATOR = QChar::LineSeparator; // 0x2028
-
 
 Protocol::Protocol()
   : m_id( ID_START ), m_fileShareListMessage( Message::Share, ID_SHARE_MESSAGE, "" )
@@ -308,10 +314,17 @@ int Protocol::protocolVersion( const Message& m ) const
   return proto_version;
 }
 
-QString Protocol::publicKey( const Message& m ) const
+QByteArray Protocol::publicKey( const Message& m, int proto_version ) const
 {
   QStringList data_list = m.text().split( DATA_FIELD_SEPARATOR );
-  return data_list.size() >= 6 ? data_list.at( 5 ) : QString();
+  if( data_list.size() >= 6 )
+  {
+    if( proto_version < SECURE_LEVEL_4_PROTO_VERSION )
+      return data_list.at( 5 ).toLatin1();
+    else
+      return QByteArray::fromBase64( data_list.at( 5 ).toLatin1() );
+  }
+  return QByteArray();
 }
 
 int Protocol::datastreamVersion( const Message& m ) const
@@ -330,7 +343,7 @@ int Protocol::datastreamVersion( const Message& m ) const
   return datastream_version;
 }
 
-QByteArray Protocol::helloMessage( const QString& public_key, bool encrypted_connection, bool data_compressed ) const
+QByteArray Protocol::helloMessage( const QByteArray& public_key, bool encrypted_connection, bool data_compressed ) const
 {
   QStringList data_list;
   data_list << QString::number( Settings::instance().localUser().networkAddress().hostPort() );
@@ -338,7 +351,7 @@ QByteArray Protocol::helloMessage( const QString& public_key, bool encrypted_con
   data_list << QString::number( Settings::instance().localUser().status() );
   data_list << Settings::instance().localUser().statusDescription();
   data_list << Settings::instance().localUser().accountName();
-  data_list << public_key;
+  data_list << QString::fromLatin1( public_key );
   data_list << Settings::instance().version( false, false, false );
   data_list << Settings::instance().localUser().hash();
   data_list << Settings::instance().localUser().color();
@@ -865,13 +878,13 @@ QString Protocol::saveMessageRecord( const MessageRecord& mr ) const
   if( !u.isValid() )
   {
     qWarning() << "Unable to save unsent messages for invalid user id" << mr.toUserId();
-    return QString::null;
+    return QString();
   }
   Chat c = ChatManager::instance().chat( mr.chatId() );
   if( !c.isValid() )
   {
     qWarning() << "Unable to save unsent messages for invalid chat id" << mr.chatId();
-    return QString::null;
+    return QString();
   }
 
   QStringList sl_user;
@@ -1470,11 +1483,11 @@ FileInfo Protocol::fileInfo( const QFileInfo& fi, const QString& share_folder, b
   {
     file_info.setFileHash( fileInfoHash( fi ) );
     QString password_key = QString( "%1%2%3%4%5%6" )
-                            .arg( Random::number( 111111, 999999 ) )
+                            .arg( Random::number32( 111111, 999999 ) )
                             .arg( file_info.id() )
-                            .arg( Random::number( 111111, 999999 ) )
+                            .arg( Random::number32( 111111, 999999 ) )
                             .arg( file_info.path() )
-                            .arg( Random::number( 111111, 999999 ) )
+                            .arg( Random::number32( 111111, 999999 ) )
                             .arg( file_info.size() );
     file_info.setPassword( Settings::instance().hash( password_key ) );
   }
@@ -2273,17 +2286,93 @@ QString Protocol::formatHtmlText( const QString& text )
 }
 
 /* Encryption */
-QByteArray Protocol::createCipherKey( const QString& public_key_1, const QString& public_key_2, int data_stream_version ) const
+QByteArray Protocol::generatePrivateKey() const
 {
-  QString public_key = public_key_1 + public_key_2;
+  return generateECDHRandomPrivateKey().toBase64();
+}
+
+QByteArray Protocol::generatePublicKey( const QByteArray& private_key ) const
+{
+  return generateECDHPublicKey( private_key ).toBase64();
+}
+
+QByteArray Protocol::createCipherKey( const QByteArray& key_1, const QByteArray& key_2, int proto_version, int data_stream_version ) const
+{
+  QByteArray shared_key = proto_version >= SECURE_LEVEL_4_PROTO_VERSION ? generateECDHSharedCipherKey( QByteArray::fromBase64( key_1 ), QByteArray::fromBase64( key_2 ) ) : key_1 + key_2;
+  if( shared_key.isEmpty() )
+    return shared_key;
 #if QT_VERSION < 0x050000
   Q_UNUSED( data_stream_version );
   QCryptographicHash ch( QCryptographicHash::Sha1 );
 #else
   QCryptographicHash ch( data_stream_version < 13 ? QCryptographicHash::Sha1 : QCryptographicHash::Sha3_256 );
 #endif
-  ch.addData( public_key.toUtf8() );
+  ch.addData( QString::fromLatin1( shared_key ).toUtf8() ); // for compatibility
   return ch.result().toHex();
+}
+
+QByteArray Protocol::generateECDHRandomPrivateKey() const
+{
+  static int last_index = BEEBEEP_ECDH_PRIVATE_KEY_SIZE - 1; // last character must be 0
+  QByteArray new_pk( BEEBEEP_ECDH_PRIVATE_KEY_SIZE, static_cast<char>(0) );
+  for( int i = 0; i < last_index; i++ )
+    new_pk[ i ] = static_cast<char>( Random::number32( 1, 255 ) );
+  return new_pk;
+}
+
+QByteArray Protocol::generateECDHPublicKey( const QByteArray& private_key ) const
+{
+  uint8_t u_private_key[ BEEBEEP_ECDH_PRIVATE_KEY_SIZE ];
+  for( int i = 0; i < BEEBEEP_ECDH_PRIVATE_KEY_SIZE; i++ )
+  {
+    if( private_key.size() > i )
+      u_private_key[ i ] = static_cast<uint8_t>( private_key.at( i ) );
+    else
+      u_private_key[ i ] = 0;
+  }
+
+  uint8_t u_public_key[ BEEBEEP_ECDH_PUBLIC_KEY_SIZE ];
+  if( ecdh_generate_keys( u_public_key, u_private_key ) )
+  {
+    QByteArray public_key( BEEBEEP_ECDH_PUBLIC_KEY_SIZE, 0 );
+    for( int i = 0; i < BEEBEEP_ECDH_PUBLIC_KEY_SIZE; i++ )
+      public_key[ i ] = static_cast<char>( u_public_key[ i ] );
+    return public_key;
+  }
+  else
+    return QByteArray();
+}
+
+QByteArray Protocol::generateECDHSharedCipherKey( const QByteArray& private_key, const QByteArray& other_public_key ) const
+{
+  uint8_t u_private_key[ BEEBEEP_ECDH_PRIVATE_KEY_SIZE ];
+  for( int i = 0; i < BEEBEEP_ECDH_PRIVATE_KEY_SIZE; i++ )
+  {
+    if( private_key.size() > i )
+      u_private_key[ i ] = static_cast<uint8_t>( private_key.at( i ) );
+    else
+      u_private_key[ i ] = 0;
+  }
+
+  uint8_t u_other_public_key[ BEEBEEP_ECDH_PUBLIC_KEY_SIZE ];
+  for( int i = 0; i < BEEBEEP_ECDH_PUBLIC_KEY_SIZE; i++ )
+  {
+    if( other_public_key.size() > i )
+      u_other_public_key[ i ] = static_cast<uint8_t>( other_public_key.at( i ) );
+    else
+      u_other_public_key[ i ] = 0;
+  }
+
+  uint8_t u_shared_key[ BEEBEEP_ECDH_PUBLIC_KEY_SIZE ];
+  if( ecdh_shared_secret( u_private_key, u_other_public_key, u_shared_key ) )
+  {
+    QByteArray shared_key( BEEBEEP_ECDH_PUBLIC_KEY_SIZE, 0 );
+    for( int i = 0; i < BEEBEEP_ECDH_PUBLIC_KEY_SIZE; i++ )
+     shared_key[ i ] = static_cast<char>( u_shared_key[ i ] );
+    return shared_key;
+  }
+  else
+    return QByteArray();
 }
 
 QList<QByteArray> Protocol::splitByteArray( const QByteArray& byte_array, int num_chars ) const

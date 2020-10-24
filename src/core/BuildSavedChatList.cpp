@@ -78,8 +78,8 @@ QString BuildSavedChatList::checkAuthCodeFromFileHeader( const QStringList& file
 
 void BuildSavedChatList::buildList()
 {
-  m_savedChatsAuthCode = QString::null;
-  QTime elapsed_time;
+  m_savedChatsAuthCode = QString();
+  QElapsedTimer elapsed_time;
   elapsed_time.start();
 
   clearCacheItems();
@@ -166,7 +166,7 @@ void BuildSavedChatList::loadSavedChats( QDataStream* stream )
 
 void BuildSavedChatList::loadUnsentMessages()
 {
-  m_unsentMessagesAuthCode = QString::null;
+  m_unsentMessagesAuthCode = QString();
   QString file_name = Settings::instance().unsentMessagesFilePath();
   QFile file( file_name );
   if( !file.open( QIODevice::ReadOnly ) )

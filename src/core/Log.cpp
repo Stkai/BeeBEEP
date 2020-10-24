@@ -103,9 +103,10 @@ void Log::checkFileSize()
   }
 
   QTextStream ts_log_file( &m_logFile );
-  ts_log_file << "Resized in date " << QDateTime::currentDateTime().toString() << endl;
-  ts_log_file << "*****" << endl;
+  ts_log_file << "Resized in date " << QDateTime::currentDateTime().toString() << "\n";
+  ts_log_file << "*****" << "\n";
   ts_log_file << log_data;
+  ts_log_file.flush();
 
   m_logFile.close();
 
@@ -126,8 +127,9 @@ bool Log::bootFileStream( const QString& log_path )
       return false;
     }
 
-    m_logStream << endl;
-    m_logStream << "*****" << endl;
+    m_logStream << "\n";
+    m_logStream << "*****" << "\n";
+    m_logStream.flush();
   }
   else
   {
@@ -182,7 +184,8 @@ bool Log::dumpLogToFile()
   foreach( std::string log_line, m_logList )
   {
     m_logStream << QString::fromStdString( log_line );
-    m_logStream << endl;
+    m_logStream << "\n";
+    m_logStream.flush();
   }
 
   return true;
@@ -207,7 +210,11 @@ void Log::add( QtMsgType mt, const QString& log_txt, const QString& log_note )
   QString log_line = logNodeToString( ln );
 
   if( m_logFile.isOpen() )
-    m_logStream << log_line << endl;
+  {
+    m_logStream << log_line;
+    m_logStream << "\n";
+    m_logStream.flush();
+  }
 
 #ifdef BEEBEEP_DEBUG
   fprintf( stderr, "%s\n", log_line.toLatin1().constData() );

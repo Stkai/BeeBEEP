@@ -232,7 +232,7 @@ void GuiEditVCard::regenerateHash()
 
   if( QMessageBox::question( this, Settings::instance().programName(),
                  tr( "Be careful, by changing the hash code you may no longer be a member of some groups and you will have to get invited again. Do you really want to regenerate your hash code?" ),
-                 tr( "Yes" ), tr( "No" ), QString::null, 1, 1 ) == 0 )
+                 tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 0 )
   {
     m_regenerateUserHash = true;
     saveVCard();

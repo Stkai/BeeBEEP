@@ -205,7 +205,7 @@ void FileTransfer::setupPeer( FileTransferPeer* transfer_peer, qintptr socket_de
   connect( transfer_peer, SIGNAL( operationCompleted() ), this, SLOT( deletePeer() ) );
 
   transfer_peer->setConnectionDescriptor( socket_descriptor, server_port );
-  int delay = Random::number( 1, 9 ) * 100;
+  int delay = Random::number32( 1, 9 ) * 100;
 #ifdef BEEBEEP_DEBUG
   qDebug() << qPrintable( transfer_peer->name() ) << "starts in" << delay << "ms";
 #endif

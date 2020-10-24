@@ -418,17 +418,24 @@ QList<NetworkAddress> Broadcaster::updateAddressesToSearchUsers()
     return network_address_list;
   }
 
+  quint16 default_broadcast_port = static_cast<quint16>( Settings::instance().defaultBroadcastPort() );
+  bool split_ipv4_addresses = false;
   foreach( QString s_address, Settings::instance().broadcastAddressesInFileHosts() )
   {
     NetworkAddress na = NetworkAddress::fromString( s_address );
     if( na.isHostAddressValid() )
     {
       if( !na.isHostPortValid() )
-        na.setHostPort( static_cast<quint16>( Settings::instance().defaultBroadcastPort() ) );
+      {
+        na.setHostPort( default_broadcast_port );
+        split_ipv4_addresses = false;
+      }
+      else
+        split_ipv4_addresses = na.isIPv4Address() && na.hostPort() != default_broadcast_port && na.hostAddress().toString().endsWith( "255" );
 #ifdef BEEBEEP_DEBUG
       qDebug() << "Network address saved in file hosts added:" << qPrintable( na.toString() );
 #endif
-      addNetworkAddress( na, true );
+      addNetworkAddress( na, split_ipv4_addresses );
       network_address_list.append( na );
     }
     else
