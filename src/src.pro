@@ -99,7 +99,7 @@ win32|unix {
 
 HEADERS += Interfaces.h
 
-RESOURCES += beebeep.qrc emojis.qrc emojis2x.qrc
+RESOURCES += beebeep.qrc emojis.qrc emojis2x_1.qrc emojis2x_2.qrc
 RESOURCES += qdarkstyle/style.qrc
 
 win32: RC_FILE = beebeep.rc
