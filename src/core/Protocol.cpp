@@ -2304,13 +2304,14 @@ QByteArray Protocol::createCipherKey( const QByteArray& private_key, const QByte
   {
     shared_key = generateECDHSharedCipherKey( private_key, public_key );
     ch.addData( shared_key );
+    return ch.result();
   }
   else
   {
     shared_key = private_key + public_key;
     ch.addData( QString::fromLatin1( shared_key ).toUtf8() ); // for compatibility
+    return ch.result().toHex();
   }
-  return ch.result().toHex();
 }
 
 QByteArray Protocol::generateECDHRandomPrivateKey() const

@@ -3,20 +3,21 @@ For more informations please visit https://www.beebeep.net
 
 
 BeeBEEP 5.8.3 (in development)
-- Fixed known issue: BeeBEEP prevents the CTRL+ALT+B (or CMD+ALT+B on MacOSX) key sequence in other applications from working
-- Added "KeepModificationDateOnFileTransferred" option in beebeep.ini (it is always enabled in BeeBOX)
-- Almost all the options of file beebeep.ini can be used in file beebeep.rc also
+- New feature: Almost all the options of file beebeep.ini can be used in file beebeep.rc also
+- New feature: Added "Use high resolution emoticons" option
+- New feature: added ECDH key exchange to encryption protocol
 - User icons in chat window can be clicked also if the user is offline
-- Fixed a bug in options "Disable create message" and "Disable edit groups"
 - Disabled by default the option to search users by a multicast datagram
-- Fixed a visualization bug if you open an user VCARD near the side of your desktop
-- Added "AllowedFileExtensionsInFileTransfer" option in beebeep.rc
-- Fixed a bug on Download folder when you copy BeeBEEP from a computer to another one
 - Suspend/sleep mode is now managed also in Linux systems.
+- Added "KeepModificationDateOnFileTransferred" option in beebeep.ini (it is always enabled in BeeBOX)
+- Added "AllowedFileExtensionsInFileTransfer" option in beebeep.rc
 - Added "AllowOnlyHostAddressesFromHostsIni" option in file beebeep.rc
-- Fixed security issue with command line argument -platformpluginpath
 - Added "Clear recent emoticons" in menu option of the chat bar
-- Added "Use high resolution emoticons" option
+- Fixed known issue: BeeBEEP prevents the CTRL+ALT+B (or CMD+ALT+B on MacOSX) key sequence in other applications from working
+- Fixed a bug in options "Disable create message" and "Disable edit groups"
+- Fixed a visualization bug if you open an user VCARD near the side of your desktop
+- Fixed a bug on Download folder when you copy BeeBEEP from a computer to another one
+- Fixed security issue with command line argument -platformpluginpath
 
 BeeBEEP 5.8.2
 - New feature: voice messages (you can record your message and send it as file)

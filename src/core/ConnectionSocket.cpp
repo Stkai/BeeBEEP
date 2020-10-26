@@ -546,7 +546,7 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
           else if( m_protocolVersion < SECURE_LEVEL_3_PROTO_VERSION )
             qWarning() << "Old encryption level 2 (last one is 4) is activated with" << qPrintable( m_networkAddress.toString() );
           else if( m_protocolVersion < SECURE_LEVEL_4_PROTO_VERSION )
-            qDebug() << "Old encryption level 3 (last one is 4) is activated with" << qPrintable( m_networkAddress.toString() );
+            qWarning() << "Old encryption level 3 (last one is 4) is activated with" << qPrintable( m_networkAddress.toString() );
           else
             qDebug() << "Encryption level 4 is activated with" << qPrintable( m_networkAddress.toString() );
         }
