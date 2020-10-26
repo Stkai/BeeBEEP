@@ -2288,7 +2288,7 @@ QByteArray Protocol::generatePrivateKey() const
 
 QByteArray Protocol::generatePublicKey( const QByteArray& private_key ) const
 {
-  return generateECDHPublicKey( private_key ).toBase64(); // to avoid some characters used in data_stream
+  return generateECDHPublicKey( private_key ).toBase64();
 }
 
 QByteArray Protocol::createCipherKey( const QByteArray& private_key, const QByteArray& public_key, int proto_version, int data_stream_version ) const
