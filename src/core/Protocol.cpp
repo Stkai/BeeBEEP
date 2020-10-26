@@ -314,17 +314,10 @@ int Protocol::protocolVersion( const Message& m ) const
   return proto_version;
 }
 
-QByteArray Protocol::publicKey( const Message& m, int proto_version ) const
+QByteArray Protocol::publicKey( const Message& m ) const
 {
   QStringList data_list = m.text().split( DATA_FIELD_SEPARATOR );
-  if( data_list.size() >= 6 )
-  {
-    if( proto_version < SECURE_LEVEL_4_PROTO_VERSION )
-      return data_list.at( 5 ).toLatin1();
-    else
-      return QByteArray::fromBase64( data_list.at( 5 ).toLatin1() );
-  }
-  return QByteArray();
+  return data_list.size() >= 6 ? data_list.at( 5 ).toLatin1() : QByteArray();
 }
 
 int Protocol::datastreamVersion( const Message& m ) const
@@ -2286,28 +2279,37 @@ QString Protocol::formatHtmlText( const QString& text )
 }
 
 /* Encryption */
+static QByteArray test_1;
+
 QByteArray Protocol::generatePrivateKey() const
 {
-  return generateECDHRandomPrivateKey().toBase64();
+  return generateECDHRandomPrivateKey();
 }
 
 QByteArray Protocol::generatePublicKey( const QByteArray& private_key ) const
 {
-  return generateECDHPublicKey( private_key ).toBase64();
+  return generateECDHPublicKey( private_key ).toBase64(); // to avoid some characters used in data_stream
 }
 
-QByteArray Protocol::createCipherKey( const QByteArray& key_1, const QByteArray& key_2, int proto_version, int data_stream_version ) const
+QByteArray Protocol::createCipherKey( const QByteArray& private_key, const QByteArray& public_key, int proto_version, int data_stream_version ) const
 {
-  QByteArray shared_key = proto_version >= SECURE_LEVEL_4_PROTO_VERSION ? generateECDHSharedCipherKey( QByteArray::fromBase64( key_1 ), QByteArray::fromBase64( key_2 ) ) : key_1 + key_2;
-  if( shared_key.isEmpty() )
-    return shared_key;
 #if QT_VERSION < 0x050000
-  Q_UNUSED( data_stream_version );
+  Q_UNUSED( data_stream_version )
   QCryptographicHash ch( QCryptographicHash::Sha1 );
 #else
   QCryptographicHash ch( data_stream_version < 13 ? QCryptographicHash::Sha1 : QCryptographicHash::Sha3_256 );
 #endif
-  ch.addData( QString::fromLatin1( shared_key ).toUtf8() ); // for compatibility
+  QByteArray shared_key;
+  if( proto_version >= SECURE_LEVEL_4_PROTO_VERSION )
+  {
+    shared_key = generateECDHSharedCipherKey( private_key, QByteArray::fromBase64( public_key ) );
+    ch.addData( shared_key );
+  }
+  else
+  {
+    shared_key = private_key + public_key;
+    ch.addData( QString::fromLatin1( shared_key ).toUtf8() ); // for compatibility
+  }
   return ch.result().toHex();
 }
 
