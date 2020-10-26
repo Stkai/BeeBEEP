@@ -2288,7 +2288,7 @@ QByteArray Protocol::generatePrivateKey() const
 
 QByteArray Protocol::generatePublicKey( const QByteArray& private_key ) const
 {
-  return generateECDHPublicKey( private_key ).toBase64();
+  return generateECDHPublicKey( private_key );
 }
 
 QByteArray Protocol::createCipherKey( const QByteArray& private_key, const QByteArray& public_key, int proto_version, int data_stream_version ) const
@@ -2302,7 +2302,7 @@ QByteArray Protocol::createCipherKey( const QByteArray& private_key, const QByte
   QByteArray shared_key;
   if( proto_version >= SECURE_LEVEL_4_PROTO_VERSION )
   {
-    shared_key = generateECDHSharedCipherKey( private_key, QByteArray::fromBase64( public_key ) );
+    shared_key = generateECDHSharedCipherKey( private_key, public_key );
     ch.addData( shared_key );
   }
   else
