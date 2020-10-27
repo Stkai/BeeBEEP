@@ -30,10 +30,33 @@
 #include <WtsApi32.h>
 
 
-void BeeApplication::setMainWidget( QWidget* w )
+bool BeeApplication::setSessionNotificationForWindow( HWND h_wnd )
 {
-  mp_mainWidget = w;
-  WTSRegisterSessionNotification( reinterpret_cast<HWND>(mp_mainWidget->winId()), NOTIFY_FOR_THIS_SESSION );
+  if( WTSRegisterSessionNotification( reinterpret_cast<HWND>( h_wnd ), NOTIFY_FOR_THIS_SESSION ) )
+  {
+    m_mainWindowHandle = h_wnd;
+    return true;
+  }
+  else
+  {
+    qWarning() << "Unable to register session notification for main window due the error code" << QString::number( ::GetLastError() );
+    return false;
+  }
+}
+
+bool BeeApplication::resetSessionNotificationForWindow()
+{
+  if( m_mainWindowHandle )
+  {
+    if( !WTSUnRegisterSessionNotification( m_mainWindowHandle ) )
+    {
+      qWarning() << "Unable to unregister session notification for main window due the error code" << QString::number( ::GetLastError() );
+      return false;
+    }
+    else
+      m_mainWindowHandle = nullptr;
+  }
+  return true;
 }
 
 bool BeeApplication::winEventFilter( MSG* event_message, long* event_result )

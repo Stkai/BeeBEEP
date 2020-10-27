@@ -259,6 +259,10 @@ void GuiMain::checkWindowFlagsAndShow()
 
   checkViewActions();
 
+#ifdef Q_OS_WIN
+  beeApp->setSessionNotificationForWindow( reinterpret_cast<HWND>( winId() ) );
+#endif
+
   if( Settings::instance().loadOnTrayAtStartup() && QSystemTrayIcon::isSystemTrayAvailable() )
   {
     QMetaObject::invokeMethod( this, "hideToTrayIcon", Qt::QueuedConnection );
@@ -468,6 +472,9 @@ void GuiMain::closeEvent( QCloseEvent* e )
   if( mp_dockFileTransfers->isFloating() && mp_dockFileTransfers->isVisible() )
     mp_dockFileTransfers->hide();
 
+#ifdef Q_OS_WIN
+  beeApp->resetSessionNotificationForWindow();
+#endif
   // quit now on last window closed
   qApp->setQuitOnLastWindowClosed( true );
 

@@ -270,7 +270,7 @@ int main( int argc, char *argv[] )
   QMetaObject::invokeMethod( &mw, "checkWindowFlagsAndShow", Qt::QueuedConnection );
   qDebug() << "Loading saved session";
   mw.loadSession();
-  bee_app.setMainWidget( &mw );
+
   /* Event Loop */
   qDebug() << "Enter in the main event loop";
   int iRet = bee_app.exec();

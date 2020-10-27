@@ -47,8 +47,6 @@ public:
   bool otherInstanceExists();
   void preventMultipleInstances();
 
-  void setMainWidget( QWidget* );
-
   void init();
   void setIdleTimeout( int ); // in minutes
   inline int idleTimeout() const;
@@ -67,6 +65,8 @@ public:
 
 #ifdef Q_OS_WIN
   bool winEventFilter( MSG*, long* );
+  bool setSessionNotificationForWindow( HWND );
+  bool resetSessionNotificationForWindow();
 #endif
 
 signals:
@@ -133,7 +133,9 @@ private:
 
   TickManager* mp_tickManager;
 
-  QWidget* mp_mainWidget;
+#ifdef Q_OS_WIN
+  HWND m_mainWindowHandle;
+#endif
 
   QString m_defaultCss;
 
