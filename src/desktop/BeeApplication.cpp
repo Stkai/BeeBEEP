@@ -446,11 +446,6 @@ void BeeApplication::addSleepWatcher()
 #endif
 
 #if !defined( Q_OS_WIN )
-void BeeApplication::setMainWidget( QWidget* w )
-{
-  mp_mainWidget = w;
-}
-
 bool BeeApplication::isDesktopLocked()
 {
   return m_isDesktopLocked;

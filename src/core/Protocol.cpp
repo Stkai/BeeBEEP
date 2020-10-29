@@ -2319,7 +2319,7 @@ QByteArray Protocol::generateECDHRandomPrivateKey() const
   static int last_index = BEEBEEP_ECDH_PRIVATE_KEY_SIZE - 1; // last character must be 0
   QByteArray new_pk( BEEBEEP_ECDH_PRIVATE_KEY_SIZE, static_cast<char>(0) );
   for( int i = 0; i < last_index; i++ )
-    new_pk[ i ] = static_cast<char>( Random::number32( 1, 255 ) );
+    new_pk[ i ] = static_cast<char>( Random::number32( 1, 9 ) );
   return new_pk;
 }
 
