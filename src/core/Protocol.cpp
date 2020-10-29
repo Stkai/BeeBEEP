@@ -2304,22 +2304,21 @@ QByteArray Protocol::createCipherKey( const QByteArray& private_key, const QByte
   {
     shared_key = generateECDHSharedCipherKey( private_key, public_key );
     ch.addData( shared_key );
-    return ch.result();
   }
   else
   {
     shared_key = private_key + public_key;
     ch.addData( QString::fromLatin1( shared_key ).toUtf8() ); // for compatibility
-    return ch.result().toHex();
   }
+  return ch.result().toHex(); // must be in HEX
 }
 
 QByteArray Protocol::generateECDHRandomPrivateKey() const
 {
-  static int last_index = BEEBEEP_ECDH_PRIVATE_KEY_SIZE - 1; // last character must be 0
-  QByteArray new_pk( BEEBEEP_ECDH_PRIVATE_KEY_SIZE, static_cast<char>(0) );
-  for( int i = 0; i < last_index; i++ )
-    new_pk[ i ] = static_cast<char>( Random::number32( 1, 9 ) );
+  static int ecdh_key_size = BEEBEEP_ECDH_PRIVATE_KEY_SIZE;
+  QByteArray new_pk( ecdh_key_size, static_cast<char>(0) );
+  for( int i = 0; i < ecdh_key_size; i++ )
+    new_pk[ i ] = static_cast<char>( i == 0 ? Random::number32( 1, 9 ) : Random::number32( 0, 9 ) );
   return new_pk;
 }
 
@@ -2337,7 +2336,7 @@ QByteArray Protocol::generateECDHPublicKey( const QByteArray& private_key ) cons
   uint8_t u_public_key[ BEEBEEP_ECDH_PUBLIC_KEY_SIZE ];
   if( ecdh_generate_keys( u_public_key, u_private_key ) )
   {
-    QByteArray public_key( BEEBEEP_ECDH_PUBLIC_KEY_SIZE, 0 );
+    QByteArray public_key( BEEBEEP_ECDH_PUBLIC_KEY_SIZE, static_cast<char>(0) );
     for( int i = 0; i < BEEBEEP_ECDH_PUBLIC_KEY_SIZE; i++ )
       public_key[ i ] = static_cast<char>( u_public_key[ i ] );
     return public_key;
@@ -2369,7 +2368,7 @@ QByteArray Protocol::generateECDHSharedCipherKey( const QByteArray& private_key,
   uint8_t u_shared_key[ BEEBEEP_ECDH_PUBLIC_KEY_SIZE ];
   if( ecdh_shared_secret( u_private_key, u_other_public_key, u_shared_key ) )
   {
-    QByteArray shared_key( BEEBEEP_ECDH_PUBLIC_KEY_SIZE, 0 );
+    QByteArray shared_key( BEEBEEP_ECDH_PUBLIC_KEY_SIZE, static_cast<char>(0) );
     for( int i = 0; i < BEEBEEP_ECDH_PUBLIC_KEY_SIZE; i++ )
      shared_key[ i ] = static_cast<char>( u_shared_key[ i ] );
     return shared_key;
