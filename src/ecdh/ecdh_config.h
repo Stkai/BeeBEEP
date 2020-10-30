@@ -59,7 +59,8 @@
 #define NIST_B571  9
 #define NIST_K571 10
 
-#define ECC_CURVE NIST_B163
+/* Curve selected (must be the same for all BeeBEEP in your network) */
+#define ECC_CURVE NIST_B233
 
 #if defined(ECC_CURVE) && (ECC_CURVE != 0)
  #if   (ECC_CURVE == NIST_K163) || (ECC_CURVE == NIST_B163)
