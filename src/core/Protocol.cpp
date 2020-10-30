@@ -2299,17 +2299,15 @@ QByteArray Protocol::createCipherKey( const QByteArray& private_key, const QByte
 #else
   QCryptographicHash ch( data_stream_version < 13 ? QCryptographicHash::Sha1 : QCryptographicHash::Sha3_256 );
 #endif
-  QByteArray shared_key;
   if( proto_version >= SECURE_LEVEL_4_PROTO_VERSION )
   {
-    shared_key = generateECDHSharedCipherKey( private_key, public_key );
+    QByteArray shared_key = generateECDHSharedCipherKey( private_key, public_key );
+    if( shared_key.isEmpty() )
+      return QByteArray();
     ch.addData( shared_key );
   }
   else
-  {
-    shared_key = private_key + public_key;
-    ch.addData( QString::fromLatin1( shared_key ).toUtf8() ); // for compatibility
-  }
+    ch.addData( QString::fromLatin1( private_key + public_key ).toUtf8() ); // for compatibility
   return ch.result().toHex(); // must be in HEX
 }
 
@@ -2319,7 +2317,7 @@ QByteArray Protocol::generateECDHRandomPrivateKey() const
   static int ecdh_key_last_index = ecdh_key_size - 1;
   QByteArray new_pk( ecdh_key_size, static_cast<char>(0) );
   for( int i = 0; i < ecdh_key_last_index; i++ )
-    new_pk[ i ] = static_cast<char>( i == 0 ? Random::number32( 1, 9 ) : Random::number32( 0, 9 ) );
+    new_pk[ i ] = static_cast<char>( Random::number32( 1, 254 ) );
   return new_pk;
 }
 
