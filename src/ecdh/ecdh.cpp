@@ -21,7 +21,6 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "ecdh_config.h"
 #include "ecdh.h"
 
 /* margin for overhead needed in intermediate calculations */
@@ -693,9 +692,6 @@ static int gf2point_on_curve(const gf2elem_t x, const gf2elem_t y)
 */
 /*************************************************************************************************/
 
-
-int ECDH::privateKeySize() { return ECC_PRV_KEY_SIZE; }
-int ECDH::publicKeySize() { return ECC_PUB_KEY_SIZE; }
 
 /* NOTE: private should contain random data a-priori! */
 bool ECDH::generatePublicKey( uint8_t* public_key, uint8_t* private_key )

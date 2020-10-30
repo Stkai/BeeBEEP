@@ -24,6 +24,30 @@
 #ifndef BEEBEEP_ECDH_CONFIG_H
 #define BEEBEEP_ECDH_CONFIG_H
 
+/*
+  Crypto using elliptic curves defined over the finite binary field GF(2^m) where m is prime.
+  The curves used are the anomalous binary curves (ABC-curves) or also called Koblitz curves.
+  This class of curves was chosen because it yields efficient implementation of operations.
+  Curves available - their different NIST/SECG names and eqivalent symmetric security level:
+      NIST      SEC Group     strength
+    ------------------------------------
+      K-163     sect163k1      80 bit
+      B-163     sect163r2      80 bit
+      K-233     sect233k1     112 bit
+      B-233     sect233r1     112 bit
+      K-283     sect283k1     128 bit
+      B-283     sect283r1     128 bit
+      K-409     sect409k1     192 bit
+      B-409     sect409r1     192 bit
+      K-571     sect571k1     256 bit
+      B-571     sect571r1     256 bit
+  Curve parameters from:
+    http://www.secg.org/sec2-v2.pdf
+    http://csrc.nist.gov/publications/fips/fips186-3/fips_186-3.pdf
+  Reference:
+    https://www.ietf.org/rfc/rfc4492.txt
+*/
+
 #define NIST_B163  1
 #define NIST_K163  2
 #define NIST_B233  3
@@ -58,5 +82,7 @@
 
 #define ECC_PUB_KEY_SIZE     (2 * ECC_PRV_KEY_SIZE)
 
+#define BEEBEEP_ECDH_PRIVATE_KEY_SIZE ECC_PRV_KEY_SIZE
+#define BEEBEEP_ECDH_PUBLIC_KEY_SIZE ECC_PUB_KEY_SIZE
 
 #endif // BEEBEEP_ECDH_CONFIG_H
