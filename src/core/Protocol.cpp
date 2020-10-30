@@ -33,11 +33,9 @@
 #include "Rijndael.h"
 #include "Settings.h"
 #include "UserManager.h"
-
 /* ECDH PROTOCOL */
-#include "ECDH.h"
-#define BEEBEEP_ECDH_PRIVATE_KEY_SIZE ECC_PRV_KEY_SIZE
-#define BEEBEEP_ECDH_PUBLIC_KEY_SIZE ECC_PUB_KEY_SIZE
+#include "ecdh.h"
+
 
 Protocol* Protocol::mp_instance = Q_NULLPTR;
 const QChar PROTOCOL_FIELD_SEPARATOR = QChar::ParagraphSeparator;  // 0x2029
@@ -2313,18 +2311,21 @@ QByteArray Protocol::createCipherKey( const QByteArray& private_key, const QByte
 
 QByteArray Protocol::generateECDHRandomPrivateKey() const
 {
-  static int ecdh_key_size = BEEBEEP_ECDH_PRIVATE_KEY_SIZE;
+  static int ecdh_key_size = ECDH::privateKeySize();
   static int ecdh_key_last_index = ecdh_key_size - 1;
   QByteArray new_pk( ecdh_key_size, static_cast<char>(0) );
   for( int i = 0; i < ecdh_key_last_index; i++ )
-    new_pk[ i ] = static_cast<char>( Random::number32( 1, 254 ) );
+    new_pk[ i ] = static_cast<char>( Random::number32( 1, 9 ) );
   return new_pk;
 }
 
 QByteArray Protocol::generateECDHPublicKey( const QByteArray& private_key ) const
 {
-  uint8_t u_private_key[ BEEBEEP_ECDH_PRIVATE_KEY_SIZE ];
-  for( int i = 0; i < BEEBEEP_ECDH_PRIVATE_KEY_SIZE; i++ )
+  static int ecdh_private_key_size = ECDH::privateKeySize();
+  static int ecdh_public_key_size = ECDH::publicKeySize();
+
+  uint8_t u_private_key[ ecdh_private_key_size ];
+  for( int i = 0; i < ecdh_private_key_size; i++ )
   {
     if( private_key.size() > i )
       u_private_key[ i ] = static_cast<uint8_t>( private_key.at( i ) );
@@ -2332,11 +2333,11 @@ QByteArray Protocol::generateECDHPublicKey( const QByteArray& private_key ) cons
       u_private_key[ i ] = 0;
   }
 
-  uint8_t u_public_key[ BEEBEEP_ECDH_PUBLIC_KEY_SIZE ];
-  if( ecdh_generate_keys( u_public_key, u_private_key ) )
+  uint8_t u_public_key[ ecdh_public_key_size ];
+  if( ECDH::generatePublicKey( u_public_key, u_private_key ) )
   {
-    QByteArray public_key( BEEBEEP_ECDH_PUBLIC_KEY_SIZE, static_cast<char>(0) );
-    for( int i = 0; i < BEEBEEP_ECDH_PUBLIC_KEY_SIZE; i++ )
+    QByteArray public_key( ecdh_public_key_size, static_cast<char>(0) );
+    for( int i = 0; i < ecdh_public_key_size; i++ )
       public_key[ i ] = static_cast<char>( u_public_key[ i ] );
     return public_key;
   }
@@ -2346,8 +2347,11 @@ QByteArray Protocol::generateECDHPublicKey( const QByteArray& private_key ) cons
 
 QByteArray Protocol::generateECDHSharedCipherKey( const QByteArray& private_key, const QByteArray& other_public_key ) const
 {
-  uint8_t u_private_key[ BEEBEEP_ECDH_PRIVATE_KEY_SIZE ];
-  for( int i = 0; i < BEEBEEP_ECDH_PRIVATE_KEY_SIZE; i++ )
+  static int ecdh_private_key_size = ECDH::privateKeySize();
+  static int ecdh_public_key_size = ECDH::publicKeySize();
+
+  uint8_t u_private_key[ ecdh_private_key_size ];
+  for( int i = 0; i < ecdh_private_key_size; i++ )
   {
     if( private_key.size() > i )
       u_private_key[ i ] = static_cast<uint8_t>( private_key.at( i ) );
@@ -2355,8 +2359,8 @@ QByteArray Protocol::generateECDHSharedCipherKey( const QByteArray& private_key,
       u_private_key[ i ] = 0;
   }
 
-  uint8_t u_other_public_key[ BEEBEEP_ECDH_PUBLIC_KEY_SIZE ];
-  for( int i = 0; i < BEEBEEP_ECDH_PUBLIC_KEY_SIZE; i++ )
+  uint8_t u_other_public_key[ ecdh_public_key_size ];
+  for( int i = 0; i < ecdh_public_key_size; i++ )
   {
     if( other_public_key.size() > i )
       u_other_public_key[ i ] = static_cast<uint8_t>( other_public_key.at( i ) );
@@ -2364,11 +2368,11 @@ QByteArray Protocol::generateECDHSharedCipherKey( const QByteArray& private_key,
       u_other_public_key[ i ] = 0;
   }
 
-  uint8_t u_shared_key[ BEEBEEP_ECDH_PUBLIC_KEY_SIZE ];
-  if( ecdh_shared_secret( u_private_key, u_other_public_key, u_shared_key ) )
+  uint8_t u_shared_key[ ecdh_public_key_size ];
+  if( ECDH::generateSharedKey( u_private_key, u_other_public_key, u_shared_key ) )
   {
-    QByteArray shared_key( BEEBEEP_ECDH_PUBLIC_KEY_SIZE, static_cast<char>(0) );
-    for( int i = 0; i < BEEBEEP_ECDH_PUBLIC_KEY_SIZE; i++ )
+    QByteArray shared_key( ecdh_public_key_size, static_cast<char>(0) );
+    for( int i = 0; i < ecdh_public_key_size; i++ )
      shared_key[ i ] = static_cast<char>( u_shared_key[ i ] );
     return shared_key;
   }

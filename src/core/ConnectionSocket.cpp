@@ -348,7 +348,7 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
     qDebug() << "ConnectionSocket compress data to sent from" << byte_array.size() << "to" << byte_array_to_send.size() << "bytes";
 #endif
     while( byte_array_to_send.size() % ENCRYPTED_DATA_BLOCK_SIZE )
-      byte_array_to_send.append( QChar( ' ' ) );
+      byte_array_to_send.append( ' ' );
   }
   else
     byte_array_to_send = byte_array;

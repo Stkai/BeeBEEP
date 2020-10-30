@@ -1,7 +1,7 @@
 
 INCLUDEPATH += $$PWD
-DEFINES += "ECC_CURVE=NIST_K283"
 
-HEADERS += ecdh/ECDH.h
+HEADERS += ecdh/ecdh_config.h \
+           ecdh/ecdh.h
 
-SOURCES += ecdh/ECDH.c
+SOURCES += ecdh/ecdh.cpp

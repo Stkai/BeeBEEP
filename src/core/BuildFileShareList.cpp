@@ -51,7 +51,7 @@ void BuildFileShareList::buildList()
     m_shareList.clear();
 
   m_shareSize = 0;
-  QTime elapsed_time;
+  QElapsedTimer elapsed_time;
   elapsed_time.start();
 
   if( !m_folderPath.isEmpty() )

@@ -160,7 +160,7 @@ QList<Emoticon> EmoticonManager::textEmoticons( bool remove_names_duplicated ) c
     ++it;
   }
 
-  qSort( emoticon_list.begin(), emoticon_list.end(), SortEmoticon );
+  std::sort( emoticon_list.begin(), emoticon_list.end(), SortEmoticon );
 
   return emoticon_list;
 }
@@ -176,7 +176,7 @@ QList<Emoticon> EmoticonManager::emoticonsByGroup( int group_id ) const
     ++it;
   }
 
-  qSort( emoticon_list.begin(), emoticon_list.end(), SortEmoticon );
+  std::sort( emoticon_list.begin(), emoticon_list.end(), SortEmoticon );
 
   return emoticon_list;
 }

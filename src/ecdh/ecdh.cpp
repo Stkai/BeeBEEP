@@ -21,7 +21,8 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "ECDH.h"
+#include "ecdh_config.h"
+#include "ecdh.h"
 
 /* margin for overhead needed in intermediate calculations */
 #define BITVEC_MARGIN     3
@@ -29,17 +30,6 @@
 #define BITVEC_NWORDS     ((BITVEC_NBITS + 31) / 32)
 #define BITVEC_NBYTES     (sizeof(uint32_t) * BITVEC_NWORDS)
 
-
-/* Disable assertions? */
-#ifndef DISABLE_ASSERT
- #define DISABLE_ASSERT 0
-#endif
-
-#if defined(DISABLE_ASSERT) && (DISABLE_ASSERT == 1)
- #define assert(...)
-#else
- #include <assert.h>
-#endif
 
 /* Default to a (somewhat) constant-time mode?
    NOTE: The library is _not_ capable of operating in constant-time and leaks information via timing.
@@ -179,7 +169,6 @@ const gf2elem_t base_y     = { 0x1b8ac15b, 0x1a4827af, 0x6e23dd3c, 0x16e2f151, 0
 const scalar_t  base_order = { 0x2fe84e47, 0x8382e9bb, 0x5174d66e, 0x161de93d, 0xc7dd9ca1, 0x6823851e, 0x08059b18, 0xff559873, 0xe661ce18, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0x03ffffff };
  #endif
 #endif
-
 
 
 /*************************************************************************************************/
@@ -431,7 +420,6 @@ static void gf2field_mul(gf2elem_t z, const gf2elem_t x, const gf2elem_t y)
   gf2elem_t blind;
   bitvec_set_zero(blind);
 #endif
-  assert(z != y);
 
   bitvec_copy(tmp, x);
 
@@ -705,36 +693,32 @@ static int gf2point_on_curve(const gf2elem_t x, const gf2elem_t y)
 */
 /*************************************************************************************************/
 
+
+int ECDH::privateKeySize() { return ECC_PRV_KEY_SIZE; }
+int ECDH::publicKeySize() { return ECC_PUB_KEY_SIZE; }
+
 /* NOTE: private should contain random data a-priori! */
-int ecdh_generate_keys( uint8_t* public_key, uint8_t* private_key )
+bool ECDH::generatePublicKey( uint8_t* public_key, uint8_t* private_key )
 {
   /* Get copy of "base" point 'G' */
   gf2point_copy((uint32_t*)public_key, (uint32_t*)(public_key + BITVEC_NBYTES), base_x, base_y);
 
-  /* Abort key generation if random number is too small */
-  //if( bitvec_degree((uint32_t*)private_key) < (CURVE_DEGREE / 2))
-  //{
-  //  return 0;
-  //}
-  //else
+  /* Clear bits > CURVE_DEGREE in highest word to satisfy constraint 1 <= exp < n. */
+  int nbits = bitvec_degree(base_order);
+  int i;
+
+  for (i = (nbits - 1); i < (BITVEC_NWORDS * 32); ++i)
   {
-    /* Clear bits > CURVE_DEGREE in highest word to satisfy constraint 1 <= exp < n. */
-    int nbits = bitvec_degree(base_order);
-    int i;
-
-    for (i = (nbits - 1); i < (BITVEC_NWORDS * 32); ++i)
-    {
-      bitvec_clr_bit((uint32_t*)private_key, i);
-    }
-
-    /* Multiply base-point with scalar (private-key) */
-    gf2point_mul((uint32_t*)public_key, (uint32_t*)(public_key + BITVEC_NBYTES), (uint32_t*)private_key);
-
-    return 1;
+    bitvec_clr_bit((uint32_t*)private_key, i);
   }
+
+  /* Multiply base-point with scalar (private-key) */
+  gf2point_mul((uint32_t*)public_key, (uint32_t*)(public_key + BITVEC_NBYTES), (uint32_t*)private_key);
+
+  return true;
 }
 
-int ecdh_shared_secret(const uint8_t* private_key, const uint8_t* others_pub, uint8_t* output )
+bool ECDH::generateSharedKey(const uint8_t* private_key, const uint8_t* others_pub, uint8_t* output )
 {
   /* Do some basic validation of other party's public key */
   if (    !gf2point_is_zero ((uint32_t*)others_pub, (uint32_t*)(others_pub + BITVEC_NBYTES))
@@ -760,10 +744,10 @@ int ecdh_shared_secret(const uint8_t* private_key, const uint8_t* others_pub, ui
  #endif
 #endif
 
-    return 1;
+    return true;
   }
   else
   {
-    return 0;
+    return false;
   }
 }
