@@ -60,7 +60,7 @@
 #define NIST_K571 10
 
 /* Curve selected (must be the same for all BeeBEEP in your network) */
-#define ECC_CURVE NIST_B233
+#define ECC_CURVE NIST_K233
 
 #if defined(ECC_CURVE) && (ECC_CURVE != 0)
  #if   (ECC_CURVE == NIST_K163) || (ECC_CURVE == NIST_B163)
@@ -82,7 +82,6 @@
 #endif
 
 #define ECC_PUB_KEY_SIZE     (2 * ECC_PRV_KEY_SIZE)
-
 #define BEEBEEP_ECDH_PRIVATE_KEY_SIZE ECC_PRV_KEY_SIZE
 #define BEEBEEP_ECDH_PUBLIC_KEY_SIZE ECC_PUB_KEY_SIZE
 

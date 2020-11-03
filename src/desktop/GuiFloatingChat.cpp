@@ -116,7 +116,7 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
 
 void GuiFloatingChat::updateChatTitle( const Chat& c )
 {
-  QString window_title = "";
+  QString chat_title = "";
 
   if( c.isPrivate() )
   {
@@ -129,42 +129,41 @@ void GuiFloatingChat::updateChatTitle( const Chat& c )
       QString user_name = Bee::userNameToShow( u, false );
 
       if( !user_status.isEmpty() && !user_status_description.isEmpty() )
-        window_title = QString( "%1 [%2 - %3]" ).arg( user_name, Bee::userStatusToString( u.status() ), user_status_description );
+        chat_title = QString( "%1 [%2 - %3]" ).arg( user_name, Bee::userStatusToString( u.status() ), user_status_description );
       else if( !user_status.isEmpty() )
-        window_title = QString( "%1 (%2)" ).arg( user_name, user_status );
+        chat_title = QString( "%1 (%2)" ).arg( user_name, user_status );
       else if( !user_status_description.isEmpty() )
-        window_title = QString( "%1 [%2]" ).arg( user_name, user_status_description );
+        chat_title = QString( "%1 [%2]" ).arg( user_name, user_status_description );
       else
-        window_title = user_name;
+        chat_title = user_name;
 
       m_mainWindowIcon = Bee::avatarForUser( u, QSize( 256, 256 ), true );
-      setWindowTitle( window_title );
     }
     else
     {
       qWarning() << "Invalid user" << user_id << "found for private chat" << c.name();
       m_mainWindowIcon = IconManager::instance().icon( "chat.png" );
-      window_title = c.name();
+      chat_title = c.name();
     }
   }
   else if( c.isDefault() )
   {
-    window_title = tr( "Chat with all users" );
+    chat_title = tr( "All users" ).toUpper();
     m_mainWindowIcon = IconManager::instance().icon( "default-chat-online.png" );
   }
   else if( c.isGroup() )
   {
-    window_title = c.name();
+    chat_title = c.name();
     m_mainWindowIcon = IconManager::instance().icon( "group.png" );
   }
   else
   {
-    window_title = c.name();
+    chat_title = c.name();
     m_mainWindowIcon = IconManager::instance().icon( "chat.png" );
   }
 
   setMainIcon( c.unreadMessages() > 0 );
-  setWindowTitle( c.isDefault() ? window_title : QString( "%1 - %2").arg( window_title, "Chat" ) );
+  setWindowTitle( QString( "%1 - %2 %3" ).arg( chat_title, Settings::instance().programName(), Settings::instance().version( false, false, false ) ) );
 }
 
 void GuiFloatingChat::updateChatMember( const Chat& c, const User& u )

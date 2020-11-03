@@ -83,7 +83,7 @@ protected:
   void checkHelloMessage( const QByteArray& );
   QByteArray serializeData( const QByteArray& );
   const QByteArray& cipherKey() const;
-  bool createCipherKey( const QByteArray&, int proto_version );
+  bool createCipherKey( const QByteArray& );
 
   bool checkConnectionTimeout( int );
   bool checkTestMessage( const Message& );

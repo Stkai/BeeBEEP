@@ -34,8 +34,8 @@
 #include "Settings.h"
 #include "UserManager.h"
 /* ECDH PROTOCOL */
+#include "ecdh_config.h"
 #include "ecdh.h"
-
 
 Protocol* Protocol::mp_instance = Q_NULLPTR;
 const QChar PROTOCOL_FIELD_SEPARATOR = QChar::ParagraphSeparator;  // 0x2029
@@ -2289,7 +2289,7 @@ QByteArray Protocol::generatePublicKey( const QByteArray& private_key ) const
   return generateECDHPublicKey( private_key );
 }
 
-QByteArray Protocol::createCipherKey( const QByteArray& private_key, const QByteArray& public_key, int proto_version, int data_stream_version ) const
+QByteArray Protocol::generateSharedKey( const QByteArray& private_key, const QByteArray& public_key, int proto_version, int data_stream_version ) const
 {
 #if QT_VERSION < 0x050000
   Q_UNUSED( data_stream_version )
@@ -2311,12 +2311,19 @@ QByteArray Protocol::createCipherKey( const QByteArray& private_key, const QByte
 
 QByteArray Protocol::generateECDHRandomPrivateKey() const
 {
-  static int ecdh_key_size = BEEBEEP_ECDH_PRIVATE_KEY_SIZE;
-  static int ecdh_key_last_index = ecdh_key_size - 1;
-  QByteArray new_pk( ecdh_key_size, static_cast<char>(0) );
-  for( int i = 0; i < ecdh_key_last_index; i++ )
-    new_pk[ i ] = static_cast<char>( Random::number32( 1, 9 ) );
-  return new_pk;
+  // TODO: improve random key generator
+  static qint64 min_ecdh_number_64 = 1000000000000000001u;
+  static qint64 max_ecdh_number_64 = 9223372036854775805u;
+
+  uint8_t u_private_key[ BEEBEEP_ECDH_PRIVATE_KEY_SIZE ];
+  memset( u_private_key, 0, BEEBEEP_ECDH_PRIVATE_KEY_SIZE );
+  qint64 ecdh_number = Random::number64( min_ecdh_number_64, max_ecdh_number_64 );
+  *(qint64*)&u_private_key = ecdh_number;
+
+  QByteArray private_key( BEEBEEP_ECDH_PRIVATE_KEY_SIZE, static_cast<char>(0) );
+  for( int i = 0; i < BEEBEEP_ECDH_PRIVATE_KEY_SIZE; i++ )
+    private_key[ i ] = static_cast<char>( u_private_key[ i ] );
+  return private_key;
 }
 
 QByteArray Protocol::generateECDHPublicKey( const QByteArray& private_key ) const

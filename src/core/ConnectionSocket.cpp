@@ -533,7 +533,7 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
       QByteArray public_key = Protocol::instance().publicKey( m );
       if( !public_key.isEmpty() )
       {
-        if( !createCipherKey( public_key, m_protocolVersion ) )
+        if( !createCipherKey( public_key ) )
         {
           qWarning() << "ConnectionSocket has shared an invalid public key to negotiate encryption with" << qPrintable( m_networkAddress.toString() );
           emit abortRequest();
@@ -564,11 +564,11 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
   emit authenticationRequested( array_data );
 }
 
-bool ConnectionSocket::createCipherKey( const QByteArray& public_key, int proto_version )
+bool ConnectionSocket::createCipherKey( const QByteArray& public_key )
 {
-  if( proto_version >= SECURE_LEVEL_4_PROTO_VERSION )
+  if( m_protocolVersion >= SECURE_LEVEL_4_PROTO_VERSION )
   {
-    m_cipherKey = Protocol::instance().createCipherKey( m_privateKey, public_key, m_protocolVersion, m_datastreamVersion );
+    m_cipherKey = Protocol::instance().generateSharedKey( m_privateKey, public_key, m_protocolVersion, m_datastreamVersion );
   }
   else
   {
@@ -599,7 +599,7 @@ bool ConnectionSocket::createCipherKey( const QByteArray& public_key, int proto_
     qDebug() << "Encryption handshake completed with" << qPrintable( m_networkAddress.toString() );
 #endif
 
-    m_cipherKey = Protocol::instance().createCipherKey( m_publicKey1, m_publicKey2, m_protocolVersion, m_datastreamVersion );
+    m_cipherKey = Protocol::instance().generateSharedKey( m_publicKey1, m_publicKey2, m_protocolVersion, m_datastreamVersion );
   }
 
   if( m_cipherKey.isEmpty() )

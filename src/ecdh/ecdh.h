@@ -26,10 +26,10 @@
 
 /* for size-annotated integer types: uint8_t, uint32_t etc. */
 #include <stdint.h>
-#include "ecdh_config.h"
-
 
 namespace ECDH {
+
+  bool generatePrivateKey( uint8_t* private_key );
 
   /* NOTE: assumes private is filled with random data before calling */
   bool generatePublicKey( uint8_t* public_key, uint8_t* private_key );

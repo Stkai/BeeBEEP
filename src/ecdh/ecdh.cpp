@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "ecdh_config.h"
 #include "ecdh.h"
 
 /* margin for overhead needed in intermediate calculations */
@@ -691,7 +692,6 @@ static int gf2point_on_curve(const gf2elem_t x, const gf2elem_t y)
   Elliptic Curve Diffie-Hellman key exchange protocol.
 */
 /*************************************************************************************************/
-
 
 /* NOTE: private should contain random data a-priori! */
 bool ECDH::generatePublicKey( uint8_t* public_key, uint8_t* private_key )

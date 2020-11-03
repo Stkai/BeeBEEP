@@ -670,6 +670,7 @@
     <name>Date</name>
     <message>
         <source>yyyy-MM-dd</source>
+        <extracomment>default date format in chat message</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1772,7 +1773,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Chat with all users</source>
-        <translation>Chat mit allen Benutzern starten</translation>
+        <translation type="vanished">Chat mit allen Benutzern starten</translation>
     </message>
     <message>
         <source>Save all</source>
@@ -1805,6 +1806,10 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>Edit group chat</source>
         <translation type="unfinished">Gruppenchat bearbeiten</translation>
+    </message>
+    <message>
+        <source>All users</source>
+        <translation type="unfinished">Alle Benutzer</translation>
     </message>
 </context>
 <context>
@@ -2984,7 +2989,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br /&gt;it under the terms of the GNU General Public License as published&lt;br /&gt;by the Free Software Foundation, either version 3 of the License&lt;br /&gt;or (at your option) any later version.&lt;br /&gt;&lt;br /&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br /&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br /&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br /&gt;See the GNU General Public License for more details.</source>
-        <translation type="obsolete">BeeBEEP ist freie Software. Du kannst sie gemäß&lt;br /&gt;den Bedingungen der GNU General Public License&lt;br /&gt;laut Veröffentlichung der Free Software Foundation&lt;br /&gt;Lizenzauflage 3 oder (optional) einer neueren Auflage verbreiten und/oder verändern.&lt;br /&gt;&lt;br /&gt;BeeBEEP wird mit dem Ziel bereitgestellt, einen Nutzen zu bringen,&lt;br /&gt;aber UNTER AUSSCHLUSS JEGLICHER GEWÄHRLEISTUNG,&lt;br /&gt;selbst der stillschweigenden Gewährleistung auf MARKTGÄNGIGKEIT oder&lt;br /&gt;EIGNUNG FÜR EINEN BESTIMMTEN ZWECK&lt;br /&gt; Weitere Details kannst du der GNU General Public License entnehmen.</translation>
+        <translation type="obsolete">BeeBEEP ist freie Software. Du kannst sie gemäß&lt;br /&gt;den Bedingungen der GNU General Public License&lt;br /&gt;laut Veröffentlichung der Free Software Foundation&lt;br /&gt;Lizenzauflage&#xa0;3 oder (optional) einer neueren Auflage verbreiten und/oder verändern.&lt;br /&gt;&lt;br /&gt;BeeBEEP wird mit dem Ziel bereitgestellt, einen Nutzen zu bringen,&lt;br /&gt;aber UNTER AUSSCHLUSS JEGLICHER GEWÄHRLEISTUNG,&lt;br /&gt;selbst der stillschweigenden Gewährleistung auf MARKTGÄNGIGKEIT oder&lt;br /&gt;EIGNUNG FÜR EINEN BESTIMMTEN ZWECK&lt;br /&gt; Weitere Details kannst du der GNU General Public License entnehmen.</translation>
     </message>
     <message>
         <source>Please save the network password in the next dialog if you want to use password without prompt.</source>
