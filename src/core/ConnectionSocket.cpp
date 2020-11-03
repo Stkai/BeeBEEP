@@ -571,7 +571,7 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
 
 bool ConnectionSocket::createCipherKey( const QByteArray& public_key )
 {
-  if( m_protocolVersion >= SECURE_LEVEL_4_PROTO_VERSION )
+  if( Settings::instance().connectionKeyExchangeMethod() != Settings::ConnectionKeyExchangeDefault )
   {
     m_cipherKey = Protocol::instance().generateSharedKey( m_privateKey, public_key, m_protocolVersion, m_datastreamVersion );
   }
