@@ -177,6 +177,7 @@ int main( int argc, char *argv[] )
   }
 
   /* Init Network Manager */
+  qDebug() << "Connection key exchange method selected:" << (Settings::instance().connectionKeyExchangeMethod() == Settings::ConnectionKeyExchangeECDH_K233 ? "ECDH_K233" : "default" );
   (void)NetworkManager::instance();
   NetworkManager::instance().searchLocalHostAddress();
   Settings::instance().setLocalUserHost( NetworkManager::instance().localHostAddress(), Settings::instance().localUser().networkAddress().hostPort() );

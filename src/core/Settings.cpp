@@ -144,6 +144,8 @@ Settings::Settings()
   m_allowedFileExtensionsInFileTransfer = QStringList();
 
   m_rcFileExists = false;
+
+  m_connectionKeyExchangeMethod = 0;
   /* Default RC end */
 
   m_emoticonSizeInEdit = 16;
@@ -524,6 +526,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "AppendHostNameToUserName", m_appendHostNameToUserName );
     sets->setValue( "DisableConnectionSocketDataCompression", m_disableConnectionSocketDataCompression );
     sets->setValue( "AllowedFileExtensionsInFileTransfer", m_allowedFileExtensionsInFileTransfer.isEmpty() ? QString( "" ) : m_allowedFileExtensionsInFileTransfer.join( ", " ) );
+    sets->setValue( "ConnectionKeyExchangeMethod", m_connectionKeyExchangeMethod );
     sets->endGroup();
     sets->sync();
     qDebug() << "RC default configuration file created in" << qPrintable( Bee::convertToNativeFolderSeparator( sets->fileName() ) );
@@ -561,6 +564,7 @@ void Settings::loadRcFile()
     return;
   }
 
+  bool ok = false;
   sets->beginGroup( "Groups" );
   bool trust_system_account = sets->value( "TrustSystemAccount", false ).toBool(); // for compatibility
   sets->endGroup();
@@ -665,6 +669,10 @@ void Settings::loadRcFile()
     }
     m_allowedFileExtensionsInFileTransfer.removeDuplicates();
   }
+
+  m_connectionKeyExchangeMethod = sets->value( "ConnectionKeyExchangeMethod", 0 ).toInt( &ok );
+  if( !ok )
+    m_connectionKeyExchangeMethod = 0;
   sets->endGroup();
 
   QStringList key_list = sets->allKeys();

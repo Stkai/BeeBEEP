@@ -403,7 +403,7 @@ void ConnectionSocket::sendQuestionHello()
 
 void ConnectionSocket::sendAnswerHello( bool encryption_enabled, bool compression_enabled )
 {
-  m_publicKey2 = m_protocolVersion >= SECURE_LEVEL_4_PROTO_VERSION ? Protocol::instance().generatePublicKey( m_privateKey ) : Protocol::instance().newMd5Id().toLatin1();
+  m_publicKey2 = Protocol::instance().generatePublicKey( m_privateKey );
 #ifdef CONNECTION_SOCKET_IO_DEBUG
   qDebug() << "ConnectionSocket is sending pkey2 with shared-key:" << qPrintable( m_publicKey2 );
 #endif
@@ -546,7 +546,12 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
           else if( m_protocolVersion < SECURE_LEVEL_3_PROTO_VERSION )
             qWarning() << "Old encryption level 2 (last one is 4) is activated with" << qPrintable( m_networkAddress.toString() );
           else if( m_protocolVersion < SECURE_LEVEL_4_PROTO_VERSION )
-            qWarning() << "Old encryption level 3 (last one is 4) is activated with" << qPrintable( m_networkAddress.toString() );
+          {
+            if( Settings::instance().connectionKeyExchangeMethod() == Settings::ConnectionKeyExchangeDefault )
+              qDebug() << "Encryption level 3 is activated with" << qPrintable( m_networkAddress.toString() );
+            else
+              qWarning() << "Old encryption level 3 (last one is 4) is activated with" << qPrintable( m_networkAddress.toString() );
+          }
           else
             qDebug() << "Encryption level 4 is activated with" << qPrintable( m_networkAddress.toString() );
         }
