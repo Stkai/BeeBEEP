@@ -145,7 +145,7 @@ Settings::Settings()
 
   m_rcFileExists = false;
 
-  m_connectionKeyExchangeMethod = 0;
+  m_connectionKeyExchangeMethod = ConnectionKeyExchangeECDH_K571;
   /* Default RC end */
 
   m_emoticonSizeInEdit = 16;
@@ -671,7 +671,7 @@ void Settings::loadRcFile()
   }
 
   m_connectionKeyExchangeMethod = sets->value( "ConnectionKeyExchangeMethod", 0 ).toInt( &ok );
-  if( !ok )
+  if( !ok || m_connectionKeyExchangeMethod < 0 || m_connectionKeyExchangeMethod >= NumConnectionKeyExchangeMethods )
     m_connectionKeyExchangeMethod = 0;
   sets->endGroup();
 

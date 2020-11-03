@@ -89,7 +89,7 @@ DisableMulticast=[true/false] BeeBEEP skips to multicast if this option is enabl
 AllowedFileExtensionsInFileTransfer=[Strings "" comma separated] used to allow file extensions in file transfer (for example: png, jpg, doc) (default="") [5.8.3]
 AllowOnlyHostAddressesFromHostsIni=[true/false] if true BeeBEEP accepts connections only from host addresses listed in file beehosts.ini (default=false) [5.8.3]
 ConnectionKeyExchangeMethod=[integer] 0: default [5.8.3]
-                                      1: ECDH with NIST K233 curve
+                                      1: ECDH with NIST K571 curve (256 bit)
 
 [Groups] (obsolete)
 TrustNickname=[true/false] if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect (default=true) [1.0.0] [obsolete in 4.0.0]
