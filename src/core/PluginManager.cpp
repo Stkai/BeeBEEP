@@ -144,7 +144,7 @@ static bool TextMarkerForPriority( TextMarkerInterface* tm1, TextMarkerInterface
 
 void PluginManager::sortPlugins()
 {
-  qSort( m_textMarkers.begin(), m_textMarkers.end(), TextMarkerForPriority );
+  std::sort( m_textMarkers.begin(), m_textMarkers.end(), TextMarkerForPriority );
 }
 
 TextMarkerInterface* PluginManager::textMarker( const QString& text_marker_name ) const

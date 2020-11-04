@@ -33,11 +33,9 @@
 #include "Rijndael.h"
 #include "Settings.h"
 #include "UserManager.h"
-
 /* ECDH PROTOCOL */
-#include "ECDH.h"
-#define BEEBEEP_ECDH_PRIVATE_KEY_SIZE ECC_PRV_KEY_SIZE
-#define BEEBEEP_ECDH_PUBLIC_KEY_SIZE ECC_PUB_KEY_SIZE
+#include "ecdh_config.h"
+#include "ecdh.h"
 
 Protocol* Protocol::mp_instance = Q_NULLPTR;
 const QChar PROTOCOL_FIELD_SEPARATOR = QChar::ParagraphSeparator;  // 0x2029
@@ -2279,8 +2277,6 @@ QString Protocol::formatHtmlText( const QString& text )
 }
 
 /* Encryption */
-static QByteArray test_1;
-
 QByteArray Protocol::generatePrivateKey() const
 {
   return generateECDHRandomPrivateKey();
@@ -2291,7 +2287,7 @@ QByteArray Protocol::generatePublicKey( const QByteArray& private_key ) const
   return generateECDHPublicKey( private_key );
 }
 
-QByteArray Protocol::createCipherKey( const QByteArray& private_key, const QByteArray& public_key, int proto_version, int data_stream_version ) const
+QByteArray Protocol::generateSharedKey( const QByteArray& private_key, const QByteArray& public_key, int key_exchange_method, int data_stream_version ) const
 {
 #if QT_VERSION < 0x050000
   Q_UNUSED( data_stream_version )
@@ -2299,28 +2295,33 @@ QByteArray Protocol::createCipherKey( const QByteArray& private_key, const QByte
 #else
   QCryptographicHash ch( data_stream_version < 13 ? QCryptographicHash::Sha1 : QCryptographicHash::Sha3_256 );
 #endif
-  QByteArray shared_key;
-  if( proto_version >= SECURE_LEVEL_4_PROTO_VERSION )
+  if( key_exchange_method == Settings::ConnectionKeyExchangeECDH )
   {
-    shared_key = generateECDHSharedCipherKey( private_key, public_key );
+    QByteArray shared_key = generateECDHSharedCipherKey( private_key, public_key );
+    if( shared_key.isEmpty() )
+      return QByteArray();
     ch.addData( shared_key );
   }
   else
-  {
-    shared_key = private_key + public_key;
-    ch.addData( QString::fromLatin1( shared_key ).toUtf8() ); // for compatibility
-  }
+    ch.addData( QString::fromLatin1( private_key + public_key ).toUtf8() ); // for compatibility
   return ch.result().toHex(); // must be in HEX
 }
 
 QByteArray Protocol::generateECDHRandomPrivateKey() const
 {
-  static int ecdh_key_size = BEEBEEP_ECDH_PRIVATE_KEY_SIZE;
-  static int ecdh_key_last_index = ecdh_key_size - 1;
-  QByteArray new_pk( ecdh_key_size, static_cast<char>(0) );
-  for( int i = 0; i < ecdh_key_last_index; i++ )
-    new_pk[ i ] = static_cast<char>( i == 0 ? Random::number32( 1, 9 ) : Random::number32( 0, 9 ) );
-  return new_pk;
+  // TODO: improve random key generator
+  static qint64 min_ecdh_number_64 = 1000000000000000001u;
+  static qint64 max_ecdh_number_64 = 9223372036854775805u;
+
+  uint8_t u_private_key[ BEEBEEP_ECDH_PRIVATE_KEY_SIZE ];
+  memset( u_private_key, 0, BEEBEEP_ECDH_PRIVATE_KEY_SIZE );
+  qint64 ecdh_number = Random::number64( min_ecdh_number_64, max_ecdh_number_64 );
+  *(qint64*)&u_private_key = ecdh_number;
+
+  QByteArray private_key( BEEBEEP_ECDH_PRIVATE_KEY_SIZE, static_cast<char>(0) );
+  for( int i = 0; i < BEEBEEP_ECDH_PRIVATE_KEY_SIZE; i++ )
+    private_key[ i ] = static_cast<char>( u_private_key[ i ] );
+  return private_key;
 }
 
 QByteArray Protocol::generateECDHPublicKey( const QByteArray& private_key ) const
@@ -2335,7 +2336,7 @@ QByteArray Protocol::generateECDHPublicKey( const QByteArray& private_key ) cons
   }
 
   uint8_t u_public_key[ BEEBEEP_ECDH_PUBLIC_KEY_SIZE ];
-  if( ecdh_generate_keys( u_public_key, u_private_key ) )
+  if( ECDH::generatePublicKey( u_public_key, u_private_key ) )
   {
     QByteArray public_key( BEEBEEP_ECDH_PUBLIC_KEY_SIZE, static_cast<char>(0) );
     for( int i = 0; i < BEEBEEP_ECDH_PUBLIC_KEY_SIZE; i++ )
@@ -2367,7 +2368,7 @@ QByteArray Protocol::generateECDHSharedCipherKey( const QByteArray& private_key,
   }
 
   uint8_t u_shared_key[ BEEBEEP_ECDH_PUBLIC_KEY_SIZE ];
-  if( ecdh_shared_secret( u_private_key, u_other_public_key, u_shared_key ) )
+  if( ECDH::generateSharedKey( u_private_key, u_other_public_key, u_shared_key ) )
   {
     QByteArray shared_key( BEEBEEP_ECDH_PUBLIC_KEY_SIZE, static_cast<char>(0) );
     for( int i = 0; i < BEEBEEP_ECDH_PUBLIC_KEY_SIZE; i++ )

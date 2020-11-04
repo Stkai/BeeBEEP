@@ -21,6 +21,9 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#ifndef BEEBEEP_ECDH_CONFIG_H
+#define BEEBEEP_ECDH_CONFIG_H
+
 /*
   Crypto using elliptic curves defined over the finite binary field GF(2^m) where m is prime.
   The curves used are the anomalous binary curves (ABC-curves) or also called Koblitz curves.
@@ -32,7 +35,7 @@
       B-163     sect163r2      80 bit
       K-233     sect233k1     112 bit
       B-233     sect233r1     112 bit
-      K-283     sect283k1     128 bit *
+      K-283     sect283k1     128 bit
       B-283     sect283r1     128 bit
       K-409     sect409k1     192 bit
       B-409     sect409r1     192 bit
@@ -45,29 +48,41 @@
     https://www.ietf.org/rfc/rfc4492.txt
 */
 
-#ifndef BEEBEEP_ECDH_H
-#define BEEBEEP_ECDH_H
+#define NIST_B163  1
+#define NIST_K163  2
+#define NIST_B233  3
+#define NIST_K233  4
+#define NIST_B283  5
+#define NIST_K283  6
+#define NIST_B409  7
+#define NIST_K409  8
+#define NIST_B571  9
+#define NIST_K571 10
 
-/* for size-annotated integer types: uint8_t, uint32_t etc. */
-#include <stdint.h>
+/* Curve selected (must be the same for all BeeBEEP in your network) */
+#define ECC_CURVE NIST_K283
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
+#if defined(ECC_CURVE) && (ECC_CURVE != 0)
+ #if   (ECC_CURVE == NIST_K163) || (ECC_CURVE == NIST_B163)
+  #define CURVE_DEGREE       163
+  #define ECC_PRV_KEY_SIZE   24
+ #elif (ECC_CURVE == NIST_K233) || (ECC_CURVE == NIST_B233)
+  #define CURVE_DEGREE       233
+  #define ECC_PRV_KEY_SIZE   32
+ #elif (ECC_CURVE == NIST_K283) || (ECC_CURVE == NIST_B283)
+  #define CURVE_DEGREE       283
+  #define ECC_PRV_KEY_SIZE   36
+ #elif (ECC_CURVE == NIST_K409) || (ECC_CURVE == NIST_B409)
+  #define CURVE_DEGREE       409
+  #define ECC_PRV_KEY_SIZE   52
+ #elif (ECC_CURVE == NIST_K571) || (ECC_CURVE == NIST_B571)
+  #define CURVE_DEGREE       571
+  #define ECC_PRV_KEY_SIZE   72
+ #endif
+#endif
 
-/* NIST_K283 selected */
-#define CURVE_DEGREE       283
-#define ECC_PRV_KEY_SIZE   36
 #define ECC_PUB_KEY_SIZE     (2 * ECC_PRV_KEY_SIZE)
+#define BEEBEEP_ECDH_PRIVATE_KEY_SIZE ECC_PRV_KEY_SIZE
+#define BEEBEEP_ECDH_PUBLIC_KEY_SIZE ECC_PUB_KEY_SIZE
 
-/* NOTE: assumes private is filled with random data before calling */
-int ecdh_generate_keys( uint8_t* public_key, uint8_t* private_key );
-
-/* input: own private key + other party's public key, output: shared secret */
-int ecdh_shared_secret( const uint8_t* private_key, const uint8_t* others_pub, uint8_t* output );
-
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
-
-#endif // BEEBEEP_ECDH_H
+#endif // BEEBEEP_ECDH_CONFIG_H

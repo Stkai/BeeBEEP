@@ -726,6 +726,7 @@
     </message>
     <message>
         <source>yyyy-MM-dd</source>
+        <extracomment>default date format in chat message</extracomment>
         <translation>yyyy-MM-dd</translation>
     </message>
     <message>
@@ -1885,7 +1886,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Chat with all users</source>
-        <translation>Parla con tutti gli utenti</translation>
+        <translation type="vanished">Parla con tutti gli utenti</translation>
     </message>
     <message>
         <source>Qt libraries have a bug on saving the window&apos;s state. If you have layout problem please reset geometry in the settings menu.</source>
@@ -1926,6 +1927,14 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Edit group chat</source>
         <translation>Modifica il gruppo</translation>
+    </message>
+    <message>
+        <source>All users</source>
+        <translation>Tutti</translation>
+    </message>
+    <message>
+        <source>Chat with</source>
+        <translation type="vanished">Parla con</translation>
     </message>
 </context>
 <context>

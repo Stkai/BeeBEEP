@@ -59,6 +59,8 @@ void ConnectionSocket::initSocket( qintptr socket_descriptor, quint16 server_por
   m_checkConnectionTimeout = false;
   m_isEncrypted = true;
   m_isCompressed = false;
+  if( m_privateKey.isEmpty() )
+    m_privateKey = Protocol::instance().generatePrivateKey();
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Connection socket initializes peer with network address" << qPrintable( m_networkAddress.toString() ) << "and server port" << m_serverPort;
 #endif
@@ -73,6 +75,8 @@ void ConnectionSocket::connectToNetworkAddress( const NetworkAddress& network_ad
   m_serverPort = 0;
   m_isEncrypted = true;
   m_isCompressed = false;
+  if( m_privateKey.isEmpty() )
+    m_privateKey = Protocol::instance().generatePrivateKey();
   connectToHost( network_address.hostAddress(), network_address.hostPort() );
 }
 
@@ -348,7 +352,7 @@ bool ConnectionSocket::sendData( const QByteArray& byte_array )
     qDebug() << "ConnectionSocket compress data to sent from" << byte_array.size() << "to" << byte_array_to_send.size() << "bytes";
 #endif
     while( byte_array_to_send.size() % ENCRYPTED_DATA_BLOCK_SIZE )
-      byte_array_to_send.append( QChar( ' ' ) );
+      byte_array_to_send.append( ' ' );
   }
   else
     byte_array_to_send = byte_array;
@@ -403,7 +407,7 @@ void ConnectionSocket::sendQuestionHello()
 
 void ConnectionSocket::sendAnswerHello( bool encryption_enabled, bool compression_enabled )
 {
-  m_publicKey2 = m_protocolVersion >= SECURE_LEVEL_4_PROTO_VERSION ? Protocol::instance().generatePublicKey( m_privateKey ) : Protocol::instance().newMd5Id().toLatin1();
+  m_publicKey2 = Protocol::instance().generatePublicKey( m_privateKey );
 #ifdef CONNECTION_SOCKET_IO_DEBUG
   qDebug() << "ConnectionSocket is sending pkey2 with shared-key:" << qPrintable( m_publicKey2 );
 #endif
@@ -533,7 +537,7 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
       QByteArray public_key = Protocol::instance().publicKey( m );
       if( !public_key.isEmpty() )
       {
-        if( !createCipherKey( public_key, m_protocolVersion ) )
+        if( !createCipherKey( public_key ) )
         {
           qWarning() << "ConnectionSocket has shared an invalid public key to negotiate encryption with" << qPrintable( m_networkAddress.toString() );
           emit abortRequest();
@@ -564,43 +568,39 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
   emit authenticationRequested( array_data );
 }
 
-bool ConnectionSocket::createCipherKey( const QByteArray& public_key, int proto_version )
+bool ConnectionSocket::createCipherKey( const QByteArray& public_key )
 {
-  if( proto_version >= SECURE_LEVEL_4_PROTO_VERSION )
+  if( m_publicKey1.isEmpty() )
   {
-    m_cipherKey = Protocol::instance().createCipherKey( m_privateKey, public_key, m_protocolVersion, m_datastreamVersion );
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Encryption handshake key 1";
+#endif
+    m_publicKey1 = public_key;
+  }
+  else if( m_publicKey2.isEmpty() )
+  {
+    m_publicKey2 = public_key;
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Encryption handshake key 2";
+#endif
   }
   else
   {
-    if( m_publicKey1.isEmpty() )
-    {
-#ifdef BEEBEEP_DEBUG
-      qDebug() << "Encryption handshake key 1";
-#endif
-      m_publicKey1 = public_key;
-    }
-    else if( m_publicKey2.isEmpty() )
-    {
-      m_publicKey2 = public_key;
-#ifdef BEEBEEP_DEBUG
-      qDebug() << "Encryption handshake key 2";
-#endif
-    }
-    else
-    {
-      qWarning() << "Encryption handshake error. Too many public key arrived from" << qPrintable( m_networkAddress.toString() );
-      return false;
-    }
-
-    if( m_publicKey1.isEmpty() || m_publicKey2.isEmpty() )
-      return false;
-
-#ifdef BEEBEEP_DEBUG
-    qDebug() << "Encryption handshake completed with" << qPrintable( m_networkAddress.toString() );
-#endif
-
-    m_cipherKey = Protocol::instance().createCipherKey( m_publicKey1, m_publicKey2, m_protocolVersion, m_datastreamVersion );
+    qWarning() << "Encryption handshake error. Too many public key arrived from" << qPrintable( m_networkAddress.toString() );
+    return false;
   }
+
+  if( m_publicKey1.isEmpty() || m_publicKey2.isEmpty() )
+    return false;
+
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Encryption handshake completed with" << qPrintable( m_networkAddress.toString() );
+#endif
+
+  if( m_protocolVersion >= SECURE_LEVEL_4_PROTO_VERSION || Settings::instance().isConnectionKeyExchangeOnlyECDH() )
+    m_cipherKey = Protocol::instance().generateSharedKey( m_privateKey, public_key, Settings::ConnectionKeyExchangeECDH, m_datastreamVersion );
+  else
+    m_cipherKey = Protocol::instance().generateSharedKey( m_publicKey1, m_publicKey2, Settings::ConnectionKeyExchangeAuto, m_datastreamVersion );
 
   if( m_cipherKey.isEmpty() )
   {

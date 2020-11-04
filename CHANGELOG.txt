@@ -13,6 +13,7 @@ BeeBEEP 5.8.3 (in development)
 - Added "AllowedFileExtensionsInFileTransfer" option in beebeep.rc
 - Added "AllowOnlyHostAddressesFromHostsIni" option in file beebeep.rc
 - Added "Clear recent emoticons" in menu option of the chat bar
+- Added "ConnectionKeyExchangeMethod" option in beebeep.rc
 - Fixed known issue: BeeBEEP prevents the CTRL+ALT+B (or CMD+ALT+B on MacOSX) key sequence in other applications from working
 - Fixed a bug in options "Disable create message" and "Disable edit groups"
 - Fixed a visualization bug if you open an user VCARD near the side of your desktop

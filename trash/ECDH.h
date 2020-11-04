@@ -43,6 +43,31 @@
     http://csrc.nist.gov/publications/fips/fips186-3/fips_186-3.pdf
   Reference:
     https://www.ietf.org/rfc/rfc4492.txt
+
+
+TEST:
+
+#ifdef BEEBEEP_DEBUG
+  QElapsedTimer test_ecdh_time;
+  test_ecdh_time.start();
+  for( int i = 0; i < 30; i++ )
+  {
+    QByteArray test_pvt_1 = Protocol::instance().generatePrivateKey();
+    QByteArray test_pub_1 = Protocol::instance().generatePublicKey( test_pvt_1 );
+    qDebug() << "User A generates pvt" << test_pvt_1.toHex( ':' ) << "and pub" << test_pub_1.toHex( ':' );
+    QByteArray test_pvt_2 = Protocol::instance().generatePrivateKey();
+    QByteArray test_pub_2 = Protocol::instance().generatePublicKey( test_pvt_2 );
+    qDebug() << "User B generates pvt" << test_pvt_2.toHex( ':' ) << "and pub" << test_pub_2.toHex( ':' );
+    QByteArray test_shr_1 = Protocol::instance().generateSharedKey( test_pvt_1, test_pub_2, 90, 15 );
+    QByteArray test_shr_2 = Protocol::instance().generateSharedKey( test_pvt_2, test_pub_1, 90, 15 );
+    if( test_shr_1 == test_shr_2 )
+      qDebug() << "User A and User B generate the same key";
+    else
+      qWarning() << "User A and User B FAIL to generate the same key";
+  }
+  qDebug() << "Test ECDH completed in" << test_ecdh_time.elapsed() << "ms";
+#endif
+
 */
 
 #ifndef BEEBEEP_ECDH_H

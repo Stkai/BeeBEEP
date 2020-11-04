@@ -659,6 +659,7 @@
     </message>
     <message>
         <source>yyyy-MM-dd</source>
+        <extracomment>default date format in chat message</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1746,7 +1747,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Chat with all users</source>
-        <translation>Чат з усіма користувачами</translation>
+        <translation type="vanished">Чат з усіма користувачами</translation>
     </message>
     <message>
         <source>Save all</source>
@@ -1787,6 +1788,10 @@ Please select a different name.</source>
     <message>
         <source>Edit group chat</source>
         <translation>Редагувати груповий чат</translation>
+    </message>
+    <message>
+        <source>All users</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

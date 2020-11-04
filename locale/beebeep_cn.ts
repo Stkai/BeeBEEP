@@ -2161,47 +2161,51 @@ Please select a different name.</source>
         <translation>显示表情面板</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="152"/>
-        <source>Chat with all users</source>
-        <translation>和所有人聊天</translation>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="151"/>
+        <source>All users</source>
+        <translation type="unfinished">所有用户</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="203"/>
+        <source>Chat with all users</source>
+        <translation type="vanished">和所有人聊天</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="202"/>
         <source>%1 has not read last messages</source>
         <translation>%1没有读上一条消息</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="414"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="413"/>
         <source>Qt libraries have a bug on saving the window&apos;s state.</source>
         <translation>Qt库存在保存窗口状态的问题</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="415"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="414"/>
         <source>If you have layout problem please save only geometry.</source>
         <translation>如果你有布局问题，请只保存尺寸数据</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="416"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="415"/>
         <source>Save all</source>
         <translation>保存全部</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="416"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="415"/>
         <source>Save only geometry</source>
         <translation>只保存尺寸</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="416"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="415"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="435"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="434"/>
         <source>Window geometry saved</source>
         <translation>窗口尺寸已保存</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="437"/>
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="436"/>
         <source>Window geometry and state saved</source>
         <translation>窗口尺寸和状态已保存</translation>
     </message>
