@@ -158,7 +158,7 @@ public:
   QByteArray generatePrivateKey() const;
   QByteArray generatePublicKey( const QByteArray& private_key ) const;
   QByteArray publicKey( const Message& ) const;
-  QByteArray generateSharedKey( const QByteArray& private_key, const QByteArray& public_key, int proto_version, int data_stream_version ) const;
+  QByteArray generateSharedKey( const QByteArray& private_key, const QByteArray& public_key, int key_exchange_method, int data_stream_version ) const;
 
   QByteArray encryptByteArray( const QByteArray& text_to_encrypt, const QByteArray& cipher_key, int proto_version ) const;
   QByteArray decryptByteArray( const QByteArray& text_to_decrypt, const QByteArray& cipher_key, int proto_version ) const;

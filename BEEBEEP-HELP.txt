@@ -88,8 +88,8 @@ DisableConnectionSocketDataCompression=[true/false] BeeBEEP compresses data with
 DisableMulticast=[true/false] BeeBEEP skips to multicast if this option is enabled (default=false) [5.8.3] 
 AllowedFileExtensionsInFileTransfer=[Strings "" comma separated] used to allow file extensions in file transfer (for example: png, jpg, doc) (default="") [5.8.3]
 AllowOnlyHostAddressesFromHostsIni=[true/false] if true BeeBEEP accepts connections only from host addresses listed in file beehosts.ini (default=false) [5.8.3]
-ConnectionKeyExchangeMethod=[integer] 0: default [5.8.3]
-                                      1: ECDH with NIST K571 curve (256 bit)
+ConnectionKeyExchangeMethod=[integer] 0: auto [5.8.3]
+                                      1: only ECDH with NIST K283 curve (128 bit)
 
 [Groups] (obsolete)
 TrustNickname=[true/false] if true BeeBEEP trusts also in nickname to recognize a user when he or she reconnect (default=true) [1.0.0] [obsolete in 4.0.0]

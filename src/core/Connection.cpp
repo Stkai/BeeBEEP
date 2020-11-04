@@ -65,6 +65,7 @@ void Connection::parseData( const QByteArray& message_data )
   if( !m.isValid() )
   {
     qWarning() << "Connection from" << qPrintable( networkAddress().toString() ) << "has received an invalid message data";
+    emit abortRequest();
     return;
   }
 

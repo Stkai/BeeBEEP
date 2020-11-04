@@ -145,7 +145,7 @@ Settings::Settings()
 
   m_rcFileExists = false;
 
-  m_connectionKeyExchangeMethod = ConnectionKeyExchangeECDH_K571;
+  m_connectionKeyExchangeMethod = ConnectionKeyExchangeAuto;
   /* Default RC end */
 
   m_emoticonSizeInEdit = 16;
@@ -670,9 +670,9 @@ void Settings::loadRcFile()
     m_allowedFileExtensionsInFileTransfer.removeDuplicates();
   }
 
-  m_connectionKeyExchangeMethod = sets->value( "ConnectionKeyExchangeMethod", 0 ).toInt( &ok );
+  m_connectionKeyExchangeMethod = sets->value( "ConnectionKeyExchangeMethod", m_connectionKeyExchangeMethod ).toInt( &ok );
   if( !ok || m_connectionKeyExchangeMethod < 0 || m_connectionKeyExchangeMethod >= NumConnectionKeyExchangeMethods )
-    m_connectionKeyExchangeMethod = 0;
+    m_connectionKeyExchangeMethod = ConnectionKeyExchangeAuto;
   sets->endGroup();
 
   QStringList key_list = sets->allKeys();

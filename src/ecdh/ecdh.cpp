@@ -172,9 +172,7 @@ const scalar_t  base_order = { 0x2fe84e47, 0x8382e9bb, 0x5174d66e, 0x161de93d, 0
 
 
 /*************************************************************************************************/
-
 /* Private / static functions: */
-
 
 /* some basic bit-manipulation routines that act on bit-vectors follow */
 static int bitvec_get_bit(const bitvec_t x, const uint32_t idx)

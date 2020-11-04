@@ -56,8 +56,8 @@ public:
   inline bool firstTime() const;
   inline void setFirstTime( bool );
 
-  enum ConnectionKeyExchangeMethod { ConnectionKeyExchangeDefault, ConnectionKeyExchangeECDH_K571, NumConnectionKeyExchangeMethods };
-  ConnectionKeyExchangeMethod connectionKeyExchangeMethod() const;
+  enum ConnectionKeyExchangeMethod { ConnectionKeyExchangeAuto, ConnectionKeyExchangeECDH, NumConnectionKeyExchangeMethods };
+  bool isConnectionKeyExchangeOnlyECDH() const;
 
   enum UserRecognitionMethods { RecognizeByDefaultMethod, RecognizeByAccountAndDomain, RecognizeByAccount,
                                 RecognizeByNickname, NumUserRecognitionMethods };
@@ -1424,6 +1424,6 @@ inline bool Settings::useUserFirstNameFirstInFullName() const { return m_useUser
 inline const QStringList& Settings::allowedFileExtensionsInFileTransfer() const { return m_allowedFileExtensionsInFileTransfer; }
 inline void Settings::setResetMinimumWidthForStyle( bool new_value ) { m_resetMinimumWidthForStyle = new_value; }
 inline bool Settings::resetMinimumWidthForStyle() { return m_resetMinimumWidthForStyle; }
-inline Settings::ConnectionKeyExchangeMethod Settings::connectionKeyExchangeMethod() const { return m_connectionKeyExchangeMethod == 1 ? ConnectionKeyExchangeECDH_K571 : ConnectionKeyExchangeDefault; }
+inline bool Settings::isConnectionKeyExchangeOnlyECDH() const { return m_connectionKeyExchangeMethod == ConnectionKeyExchangeECDH; }
 
 #endif // BEEBEEP_SETTINGS_

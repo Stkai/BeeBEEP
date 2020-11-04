@@ -177,7 +177,6 @@ int main( int argc, char *argv[] )
   }
 
   /* Init Network Manager */
-  qDebug() << "Connection key exchange method selected:" << (Settings::instance().connectionKeyExchangeMethod() == Settings::ConnectionKeyExchangeECDH_K571 ? "ECDH_K571" : "default" );
   (void)NetworkManager::instance();
   NetworkManager::instance().searchLocalHostAddress();
   Settings::instance().setLocalUserHost( NetworkManager::instance().localHostAddress(), Settings::instance().localUser().networkAddress().hostPort() );
@@ -190,31 +189,33 @@ int main( int argc, char *argv[] )
 
   /* Init Protocol */
   (void)Protocol::instance();
-
+  qDebug() << "Connection key exchange method selected:" << (Settings::instance().isConnectionKeyExchangeOnlyECDH() ? "ECDH Only" : "auto" );
 #ifdef BEEBEEP_DEBUG
-  int num_ecdh_key_generated = 0;
-  QElapsedTimer test_ecdh_time;
-  test_ecdh_time.start();
-  while( test_ecdh_time.elapsed() < 2000 )
+  if( 0 )
   {
-    QByteArray test_pvt_1 = Protocol::instance().generatePrivateKey();
-    QByteArray test_pub_1 = Protocol::instance().generatePublicKey( test_pvt_1 );
-    qDebug() << "User A generates pvt" << test_pvt_1.toHex( ':' ) << "and pub" << test_pub_1.toHex( ':' );
-    QByteArray test_pvt_2 = Protocol::instance().generatePrivateKey();
-    QByteArray test_pub_2 = Protocol::instance().generatePublicKey( test_pvt_2 );
-    qDebug() << "User B generates pvt" << test_pvt_2.toHex( ':' ) << "and pub" << test_pub_2.toHex( ':' );
-    QByteArray test_shr_1 = Protocol::instance().generateSharedKey( test_pvt_1, test_pub_2, 90, 15 );
-    num_ecdh_key_generated++;
-    QByteArray test_shr_2 = Protocol::instance().generateSharedKey( test_pvt_2, test_pub_1, 90, 15 );
-    num_ecdh_key_generated++;
-    if( test_shr_1 == test_shr_2 )
-      qDebug() << "User A and User B generate the same key";
-    else
-      qWarning() << "User A and User B FAIL to generate the same key";
+    int num_ecdh_key_generated = 0;
+    QElapsedTimer test_ecdh_time;
+    test_ecdh_time.start();
+    while( test_ecdh_time.elapsed() < 2000 )
+    {
+      QByteArray test_pvt_1 = Protocol::instance().generatePrivateKey();
+      QByteArray test_pub_1 = Protocol::instance().generatePublicKey( test_pvt_1 );
+      //qDebug() << "User A generates pvt" << test_pvt_1.toHex( ':' ) << "and pub" << test_pub_1.toHex( ':' );
+      QByteArray test_pvt_2 = Protocol::instance().generatePrivateKey();
+      QByteArray test_pub_2 = Protocol::instance().generatePublicKey( test_pvt_2 );
+      //qDebug() << "User B generates pvt" << test_pvt_2.toHex( ':' ) << "and pub" << test_pub_2.toHex( ':' );
+      QByteArray test_shr_1 = Protocol::instance().generateSharedKey( test_pvt_1, test_pub_2, Settings::ConnectionKeyExchangeECDH, 15 );
+      num_ecdh_key_generated++;
+      QByteArray test_shr_2 = Protocol::instance().generateSharedKey( test_pvt_2, test_pub_1, Settings::ConnectionKeyExchangeECDH, 15 );
+      num_ecdh_key_generated++;
+      if( test_shr_1 == test_shr_2 )
+        qDebug() << "User A and User B generate the same key";
+      else
+        qWarning() << "User A and User B FAIL to generate the same key";
+    }
+    qDebug() << "Test ECDH completed in" << test_ecdh_time.elapsed() << "ms with" << num_ecdh_key_generated << "keys";
   }
-  qDebug() << "Test ECDH completed in" << test_ecdh_time.elapsed() << "ms with" << num_ecdh_key_generated << "keys";
 #endif
-
 
   /* Init User Manager */
   (void)UserManager::instance();

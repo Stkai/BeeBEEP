@@ -2284,14 +2284,10 @@ QByteArray Protocol::generatePrivateKey() const
 
 QByteArray Protocol::generatePublicKey( const QByteArray& private_key ) const
 {
-  QByteArray pub_key_tmp = generateECDHPublicKey( private_key );
-  if( Settings::instance().connectionKeyExchangeMethod() == Settings::ConnectionKeyExchangeECDH_K571 )
-    return pub_key_tmp;
-  else
-    return Settings::instance().simpleHash( QString::fromLatin1( pub_key_tmp.toHex() ) ).toLatin1();
+  return generateECDHPublicKey( private_key );
 }
 
-QByteArray Protocol::generateSharedKey( const QByteArray& private_key, const QByteArray& public_key, int proto_version, int data_stream_version ) const
+QByteArray Protocol::generateSharedKey( const QByteArray& private_key, const QByteArray& public_key, int key_exchange_method, int data_stream_version ) const
 {
 #if QT_VERSION < 0x050000
   Q_UNUSED( data_stream_version )
@@ -2299,7 +2295,7 @@ QByteArray Protocol::generateSharedKey( const QByteArray& private_key, const QBy
 #else
   QCryptographicHash ch( data_stream_version < 13 ? QCryptographicHash::Sha1 : QCryptographicHash::Sha3_256 );
 #endif
-  if( proto_version >= SECURE_LEVEL_4_PROTO_VERSION && Settings::instance().connectionKeyExchangeMethod() == Settings::ConnectionKeyExchangeECDH_K571 )
+  if( key_exchange_method == Settings::ConnectionKeyExchangeECDH )
   {
     QByteArray shared_key = generateECDHSharedCipherKey( private_key, public_key );
     if( shared_key.isEmpty() )
