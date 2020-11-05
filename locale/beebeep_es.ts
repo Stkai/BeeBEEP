@@ -6997,7 +6997,7 @@ Por favor, elija un nombre diferente.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2441"/>
+        <location filename="../src/core/Settings.cpp" line="2449"/>
         <source>Autoresponder</source>
         <translation>Respuesta automática</translation>
     </message>

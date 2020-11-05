@@ -6625,7 +6625,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2441"/>
+        <location filename="../src/core/Settings.cpp" line="2449"/>
         <source>Autoresponder</source>
         <translation>自動回應器</translation>
     </message>

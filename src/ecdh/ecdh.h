@@ -27,8 +27,8 @@
 /* for size-annotated integer types: uint8_t, uint32_t etc. */
 #include <stdint.h>
 
-namespace ECDH {
-
+namespace ECDH
+{
   bool generatePrivateKey( uint8_t* private_key );
 
   /* NOTE: assumes private is filled with random data before calling */

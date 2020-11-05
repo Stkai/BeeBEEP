@@ -6958,7 +6958,7 @@ Proszę wybrać inną nazwę.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2441"/>
+        <location filename="../src/core/Settings.cpp" line="2449"/>
         <source>Autoresponder</source>
         <translation>Autoodpowiedź</translation>
     </message>
