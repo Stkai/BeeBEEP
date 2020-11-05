@@ -191,22 +191,23 @@ int main( int argc, char *argv[] )
   (void)Protocol::instance();
   qDebug() << "Connection key exchange method selected:" << (Settings::instance().isConnectionKeyExchangeOnlyECDH() ? "ECDH Only" : "auto" );
 #ifdef BEEBEEP_DEBUG
-  if( 0 )
+  if( 1 )
   {
     int num_ecdh_key_generated = 0;
     QElapsedTimer test_ecdh_time;
     test_ecdh_time.start();
     while( test_ecdh_time.elapsed() < 2000 )
     {
-      QByteArray test_pvt_1 = Protocol::instance().generatePrivateKey();
-      QByteArray test_pub_1 = Protocol::instance().generatePublicKey( test_pvt_1 );
-      //qDebug() << "User A generates pvt" << test_pvt_1.toHex( ':' ) << "and pub" << test_pub_1.toHex( ':' );
-      QByteArray test_pvt_2 = Protocol::instance().generatePrivateKey();
-      QByteArray test_pub_2 = Protocol::instance().generatePublicKey( test_pvt_2 );
-      //qDebug() << "User B generates pvt" << test_pvt_2.toHex( ':' ) << "and pub" << test_pub_2.toHex( ':' );
-      QByteArray test_shr_1 = Protocol::instance().generateSharedKey( test_pvt_1, test_pub_2, Settings::ConnectionKeyExchangeECDH, 15 );
+      ECDH::Keys keys_1;
+      keys_1.create();
+      ECDH::Keys keys_2;
+      keys_2.create();
+      keys_1.generateSharedKey( keys_2.publicKey() );
+      keys_2.generateSharedKey( keys_1.publicKey() );
+
+      QByteArray test_shr_1 = Protocol::instance().createCipherKey( keys_1.sharedKey(), 15 );
       num_ecdh_key_generated++;
-      QByteArray test_shr_2 = Protocol::instance().generateSharedKey( test_pvt_2, test_pub_1, Settings::ConnectionKeyExchangeECDH, 15 );
+      QByteArray test_shr_2 = Protocol::instance().createCipherKey( keys_2.sharedKey(), 15 );
       num_ecdh_key_generated++;
       if( test_shr_1 == test_shr_2 )
         qDebug() << "User A and User B generate the same key";

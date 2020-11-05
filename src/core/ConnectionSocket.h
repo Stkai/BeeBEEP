@@ -24,7 +24,9 @@
 #ifndef BEEBEEP_CONNECTIONSOCKET_H
 #define BEEBEEP_CONNECTIONSOCKET_H
 
+#include "ECDH.h"
 #include "NetworkAddress.h"
+
 class Message;
 
 
@@ -98,10 +100,10 @@ private:
   bool m_isHelloSent;
   VNumber m_userId;
   int m_protocolVersion;
-  QByteArray m_cipherKey;
   QByteArray m_publicKey1;
   QByteArray m_publicKey2;
-  QByteArray m_privateKey;
+  ECDH::Keys m_ecdhKeys;
+  QByteArray m_cipherKey;
 
   NetworkAddress m_networkAddress;
 

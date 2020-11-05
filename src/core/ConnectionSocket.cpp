@@ -32,7 +32,7 @@
 
 ConnectionSocket::ConnectionSocket( QObject* parent )
   : QTcpSocket( parent ), m_blockSize( 0 ), m_isHelloSent( false ), m_userId( ID_INVALID ), m_protocolVersion( 1 ),
-    m_cipherKey( "" ), m_publicKey1( "" ), m_publicKey2( "" ), m_privateKey( "" ), m_networkAddress(), m_latestActivityDateTime(),
+    m_publicKey1(), m_publicKey2(), m_ecdhKeys(), m_cipherKey(), m_networkAddress(), m_latestActivityDateTime(),
     m_checkConnectionTimeout( false ), m_tickCounter( 0 ), m_isAborted( false ), m_datastreamVersion( 0 ),
     m_isTestConnection( false ), m_serverPort( 0 ), m_isEncrypted( true ), m_isCompressed( false )
 {
@@ -41,7 +41,6 @@ ConnectionSocket::ConnectionSocket( QObject* parent )
   if( Settings::instance().disableSystemProxyForConnections() )
     setProxy( QNetworkProxy::NoProxy );
   m_pingByteArraySize = Protocol::instance().pingMessage().size() + 10;
-  m_privateKey = Protocol::instance().generatePrivateKey();
 
   connect( this, SIGNAL( connected() ), this, SLOT( sendQuestionHello() ) );
   connect( this, SIGNAL( readyRead() ), this, SLOT( readBlock() ) );
@@ -59,8 +58,7 @@ void ConnectionSocket::initSocket( qintptr socket_descriptor, quint16 server_por
   m_checkConnectionTimeout = false;
   m_isEncrypted = true;
   m_isCompressed = false;
-  if( m_privateKey.isEmpty() )
-    m_privateKey = Protocol::instance().generatePrivateKey();
+  m_ecdhKeys.create();
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Connection socket initializes peer with network address" << qPrintable( m_networkAddress.toString() ) << "and server port" << m_serverPort;
 #endif
@@ -75,8 +73,7 @@ void ConnectionSocket::connectToNetworkAddress( const NetworkAddress& network_ad
   m_serverPort = 0;
   m_isEncrypted = true;
   m_isCompressed = false;
-  if( m_privateKey.isEmpty() )
-    m_privateKey = Protocol::instance().generatePrivateKey();
+  m_ecdhKeys.create();
   connectToHost( network_address.hostAddress(), network_address.hostPort() );
 }
 
@@ -84,6 +81,8 @@ void ConnectionSocket::abortConnection()
 {
   m_isAborted = true;
   m_userId = ID_INVALID;
+  m_ecdhKeys.reset();
+  m_cipherKey = QByteArray();
   abort();
 }
 
@@ -94,6 +93,8 @@ void ConnectionSocket::closeConnection()
     flushAll();
     close();
   }
+  m_ecdhKeys.reset();
+  m_cipherKey = QByteArray();
   m_userId = ID_INVALID;
   m_isAborted = true;
 }
@@ -386,7 +387,7 @@ void ConnectionSocket::sendQuestionHello()
   }
   else
   {
-    m_publicKey1 = Protocol::instance().generatePublicKey( m_privateKey );
+    m_publicKey1 = m_ecdhKeys.publicKey();
 #ifdef CONNECTION_SOCKET_IO_DEBUG
     qDebug() << "ConnectionSocket is sending pkey1 with shared-key:" << qPrintable( m_publicKey1 );
 #endif
@@ -407,7 +408,7 @@ void ConnectionSocket::sendQuestionHello()
 
 void ConnectionSocket::sendAnswerHello( bool encryption_enabled, bool compression_enabled )
 {
-  m_publicKey2 = Protocol::instance().generatePublicKey( m_privateKey );
+  m_publicKey2 = m_ecdhKeys.publicKey();
 #ifdef CONNECTION_SOCKET_IO_DEBUG
   qDebug() << "ConnectionSocket is sending pkey2 with shared-key:" << qPrintable( m_publicKey2 );
 #endif
@@ -598,19 +599,21 @@ bool ConnectionSocket::createCipherKey( const QByteArray& public_key )
 #endif
 
   if( m_protocolVersion >= SECURE_LEVEL_4_PROTO_VERSION || Settings::instance().isConnectionKeyExchangeOnlyECDH() )
-    m_cipherKey = Protocol::instance().generateSharedKey( m_privateKey, public_key, Settings::ConnectionKeyExchangeECDH, m_datastreamVersion );
-  else
-    m_cipherKey = Protocol::instance().generateSharedKey( m_publicKey1, m_publicKey2, Settings::ConnectionKeyExchangeAuto, m_datastreamVersion );
-
-  if( m_cipherKey.isEmpty() )
   {
-    qWarning() << "Encryption key exchange error. Unable to generate shared key for connection from" << qPrintable( m_networkAddress.toString() );
-    return false;
+    if( !m_ecdhKeys.generateSharedKey( public_key ) )
+    {
+      qWarning() << "Encryption handshake error. Unable to generate ECDH shared key with" << qPrintable( m_networkAddress.toString() );
+      m_cipherKey = QByteArray();
+    }
+    else
+      m_cipherKey = Protocol::instance().createCipherKey( m_ecdhKeys.sharedKey(), m_datastreamVersion );
   }
+  else
+    m_cipherKey = Protocol::instance().createCipherKey( m_publicKey1, m_publicKey2, m_datastreamVersion );
 
-  m_privateKey = "";
-  m_publicKey1 = "";
-  m_publicKey2 = "";
+  m_ecdhKeys.reset();
+  m_publicKey1 = QByteArray();
+  m_publicKey2 = QByteArray();
   return true;
 }
 

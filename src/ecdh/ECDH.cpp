@@ -21,15 +21,14 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#include "ecdh_config.h"
-#include "ecdh.h"
+#include "ECDH.h"
+#include "Random.h"
 
 /* margin for overhead needed in intermediate calculations */
-#define BITVEC_MARGIN     3
-#define BITVEC_NBITS      (CURVE_DEGREE + BITVEC_MARGIN)
-#define BITVEC_NWORDS     ((BITVEC_NBITS + 31) / 32)
-#define BITVEC_NBYTES     (sizeof(uint32_t) * BITVEC_NWORDS)
-
+#define ECDH_BITVEC_MARGIN     3
+#define ECDH_BITVEC_NBITS      (ECDH_CURVE_DEGREE + ECDH_BITVEC_MARGIN)
+#define ECDH_BITVEC_NWORDS     ((ECDH_BITVEC_NBITS + 31) / 32)
+#define ECDH_BITVEC_NBYTES     (sizeof(quint32) * ECDH_BITVEC_NWORDS)
 
 /* Default to a (somewhat) constant-time mode?
    NOTE: The library is _not_ capable of operating in constant-time and leaks information via timing.
@@ -40,7 +39,7 @@
   #define CONST_TIME 0
 #endif
 
-/* Default to using ECC_CDH (cofactor multiplication-variation) ? */
+/* Default to using ECDH_CDH (cofactor multiplication-variation) ? */
 #ifndef ECDH_COFACTOR_VARIANT
   #define ECDH_COFACTOR_VARIANT 0
 #endif
@@ -48,8 +47,8 @@
 /******************************************************************************/
 
 
-/* the following type will represent bit vectors of length (CURVE_DEGREE+MARGIN) */
-typedef uint32_t bitvec_t[BITVEC_NWORDS];
+/* the following type will represent bit vectors of length (ECDH_CURVE_DEGREE+MARGIN) */
+typedef quint32 bitvec_t[ECDH_BITVEC_NWORDS];
 typedef bitvec_t gf2elem_t;           /* this type will represent field elements */
 typedef bitvec_t scalar_t;
 
@@ -58,8 +57,8 @@ typedef bitvec_t scalar_t;
 
 /* Here the curve parameters are defined. */
 
-#if defined (ECC_CURVE) && (ECC_CURVE != 0)
- #if (ECC_CURVE == NIST_K163)
+#if defined (ECDH_CURVE) && (ECDH_CURVE != 0)
+ #if (ECDH_CURVE == ECDH_CURVE_NIST_K163)
   #define coeff_a  1
   #define cofactor 2
 /* NIST K-163 */
@@ -70,7 +69,7 @@ const gf2elem_t base_y     = { 0xccdaa3d9, 0x0536d538, 0x321f2e80, 0x5d38ff58, 0
 const scalar_t  base_order = { 0x99f8a5ef, 0xa2e0cc0d, 0x00020108, 0x00000000, 0x00000000, 0x00000004 };
  #endif
 
- #if (ECC_CURVE == NIST_B163)
+ #if (ECDH_CURVE == ECDH_CURVE_NIST_B163)
   #define coeff_a  1
   #define cofactor 2
 /* NIST B-163 */
@@ -81,7 +80,7 @@ const gf2elem_t base_y     = { 0x797324f1, 0xb11c5c0c, 0xa2cdd545, 0x71a0094f, 0
 const scalar_t  base_order = { 0xa4234c33, 0x77e70c12, 0x000292fe, 0x00000000, 0x00000000, 0x00000004 };
  #endif
 
- #if (ECC_CURVE == NIST_K233)
+ #if (ECDH_CURVE == ECDH_CURVE_NIST_K233)
   #define coeff_a  0
   #define cofactor 4
 /* NIST K-233 */
@@ -92,7 +91,7 @@ const gf2elem_t base_y     = { 0x56fae6a3, 0x56e0c110, 0xf18aeb9b, 0x27a8cd9b, 0
 const scalar_t  base_order = { 0xf173abdf, 0x6efb1ad5, 0xb915bcd4, 0x00069d5b, 0x00000000, 0x00000000, 0x00000000, 0x00000080 };
  #endif
 
- #if (ECC_CURVE == NIST_B233)
+ #if (ECDH_CURVE == ECDH_CURVE_NIST_B233)
   #define coeff_a  1
   #define cofactor 2
 /* NIST B-233 */
@@ -103,7 +102,7 @@ const gf2elem_t base_y     = { 0x01f81052, 0x36716f7e, 0xf867a7ca, 0xbf8a0bef, 0
 const scalar_t  base_order = { 0x03cfe0d7, 0x22031d26, 0xe72f8a69, 0x0013e974, 0x00000000, 0x00000000, 0x00000000, 0x00000100 };
  #endif
 
- #if (ECC_CURVE == NIST_K283)
+ #if (ECDH_CURVE == ECDH_CURVE_NIST_K283)
   #define coeff_a  0
   #define cofactor 4
 /* NIST K-283 */
@@ -114,7 +113,7 @@ const gf2elem_t base_y     = { 0x77dd2259, 0x4e341161, 0xe4596236, 0xe8184698, 0
 const scalar_t  base_order = { 0x1e163c61, 0x94451e06, 0x265dff7f, 0x2ed07577, 0xffffe9ae, 0xffffffff, 0xffffffff, 0xffffffff, 0x01ffffff };
  #endif
 
- #if (ECC_CURVE == NIST_B283)
+ #if (ECDH_CURVE == ECDH_CURVE_NIST_B283)
   #define coeff_a  1
   #define cofactor 2
 /* NIST B-283 */
@@ -125,7 +124,7 @@ const gf2elem_t base_y     = { 0xbe8112f4, 0x13f0df45, 0x826779c8, 0x350eddb0, 0
 const scalar_t  base_order = { 0xefadb307, 0x5b042a7c, 0x938a9016, 0x399660fc, 0xffffef90, 0xffffffff, 0xffffffff, 0xffffffff, 0x03ffffff };
  #endif
 
- #if (ECC_CURVE == NIST_K409)
+ #if (ECDH_CURVE == ECDH_CURVE_NIST_K409)
   #define coeff_a  0
   #define cofactor 4
 /* NIST K-409 */
@@ -136,7 +135,7 @@ const gf2elem_t base_y     = { 0xd8e0286b, 0x5863ec48, 0xaa9ca27a, 0xe9c55215, 0
 const scalar_t  base_order = { 0xe01e5fcf, 0x4b5c83b8, 0xe3e7ca5b, 0x557d5ed3, 0x20400ec4, 0x83b2d4ea, 0xfffffe5f, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff, 0x007fffff };
  #endif
 
- #if (ECC_CURVE == NIST_B409)
+ #if (ECDH_CURVE == ECDH_CURVE_NIST_B409)
   #define coeff_a  1
   #define cofactor 2
 /* NIST B-409 */
@@ -147,7 +146,7 @@ const gf2elem_t base_y     = { 0x0273c706, 0x81c364ba, 0xd2181b36, 0xdf4b4f40, 0
 const scalar_t  base_order = { 0xd9a21173, 0x8164cd37, 0x9e052f83, 0x5fa47c3c, 0xf33307be, 0xaad6a612, 0x000001e2, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x01000000 };
  #endif
 
- #if (ECC_CURVE == NIST_K571)
+ #if (ECDH_CURVE == ECDH_CURVE_NIST_K571)
   #define coeff_a  0
   #define cofactor 4
 /* NIST K-571 */
@@ -158,7 +157,7 @@ const gf2elem_t base_y     = { 0x3ef1c7a3, 0x01cd4c14, 0x591984f6, 0x320430c8, 0
 const scalar_t  base_order = { 0x637c1001, 0x5cfe778f, 0x1e91deb4, 0xe5d63938, 0xb630d84b, 0x917f4138, 0xb391a8db, 0xf19a63e4, 0x131850e1, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x02000000 };
  #endif
 
- #if (ECC_CURVE == NIST_B571)
+ #if (ECDH_CURVE == ECDH_CURVE_NIST_B571)
   #define coeff_a  1
   #define cofactor 2
 /* NIST B-571 */
@@ -175,12 +174,12 @@ const scalar_t  base_order = { 0x2fe84e47, 0x8382e9bb, 0x5174d66e, 0x161de93d, 0
 /* Private / static functions: */
 
 /* some basic bit-manipulation routines that act on bit-vectors follow */
-static int bitvec_get_bit(const bitvec_t x, const uint32_t idx)
+static int bitvec_get_bit(const bitvec_t x, const quint32 idx)
 {
   return ((x[idx / 32U] >> (idx & 31U) & 1U));
 }
 
-static void bitvec_clr_bit(bitvec_t x, const uint32_t idx)
+static void bitvec_clr_bit(bitvec_t x, const quint32 idx)
 {
   x[idx / 32U] &= ~(1U << (idx & 31U));
 }
@@ -188,7 +187,7 @@ static void bitvec_clr_bit(bitvec_t x, const uint32_t idx)
 static void bitvec_copy(bitvec_t x, const bitvec_t y)
 {
   int i;
-  for (i = 0; i < BITVEC_NWORDS; ++i)
+  for (i = 0; i < ECDH_BITVEC_NWORDS; ++i)
   {
     x[i] = y[i];
   }
@@ -207,7 +206,7 @@ static void bitvec_swap(bitvec_t x, bitvec_t y)
 static int bitvec_equal(const bitvec_t x, const bitvec_t y)
 {
   int i;
-  for (i = 0; i < BITVEC_NWORDS; ++i)
+  for (i = 0; i < ECDH_BITVEC_NWORDS; ++i)
   {
     if (x[i] != y[i])
     {
@@ -222,7 +221,7 @@ static int bitvec_equal(const bitvec_t x, const bitvec_t y)
 {
   int ret = 1;
   int i;
-  for (i = 0; i < BITVEC_NWORDS; ++i)
+  for (i = 0; i < ECDH_BITVEC_NWORDS; ++i)
   {
     ret &= (x[i] == y[i]);
   }
@@ -233,7 +232,7 @@ static int bitvec_equal(const bitvec_t x, const bitvec_t y)
 static void bitvec_set_zero(bitvec_t x)
 {
   int i;
-  for (i = 0; i < BITVEC_NWORDS; ++i)
+  for (i = 0; i < ECDH_BITVEC_NWORDS; ++i)
   {
     x[i] = 0;
   }
@@ -243,8 +242,8 @@ static void bitvec_set_zero(bitvec_t x)
 /* fast implementation */
 static int bitvec_is_zero(const bitvec_t x)
 {
-  uint32_t i = 0;
-  while (i < BITVEC_NWORDS)
+  quint32 i = 0;
+  while (i < ECDH_BITVEC_NWORDS)
   {
     if (x[i] != 0)
     {
@@ -252,7 +251,7 @@ static int bitvec_is_zero(const bitvec_t x)
     }
     i += 1;
   }
-  return (i == BITVEC_NWORDS);
+  return (i == ECDH_BITVEC_NWORDS);
 }
 #else
 /* constant-time implementation */
@@ -260,7 +259,7 @@ static int bitvec_is_zero(const bitvec_t x)
 {
   int ret = 1;
   int i = 0;
-  for (i = 0; i < BITVEC_NWORDS; ++i)
+  for (i = 0; i < ECDH_BITVEC_NWORDS; ++i)
   {
     ret &= (x[i] == 0);
   }
@@ -271,10 +270,10 @@ static int bitvec_is_zero(const bitvec_t x)
 /* return the number of the highest one-bit + 1 */
 static int bitvec_degree(const bitvec_t x)
 {
-  int i = BITVEC_NWORDS * 32;
+  int i = ECDH_BITVEC_NWORDS * 32;
 
   /* Start at the back of the vector (MSB) */
-  x += BITVEC_NWORDS;
+  x += ECDH_BITVEC_NWORDS;
 
   /* Skip empty / zero words */
   while (    (i > 0)
@@ -285,7 +284,7 @@ static int bitvec_degree(const bitvec_t x)
   /* Run through rest if count is not multiple of bitsize of DTYPE */
   if (i != 0)
   {
-    uint32_t u32mask = ((uint32_t)1 << 31);
+    quint32 u32mask = ((quint32)1 << 31);
     while (((*x) & u32mask) == 0)
     {
       u32mask >>= 1;
@@ -309,7 +308,7 @@ static void bitvec_lshift(bitvec_t x, const bitvec_t y, int nbits)
   }
   j = 0;
   /* Copy to x output */
-  while (i < BITVEC_NWORDS)
+  while (i < ECDH_BITVEC_NWORDS)
   {
     x[i] = y[j];
     i += 1;
@@ -322,7 +321,7 @@ static void bitvec_lshift(bitvec_t x, const bitvec_t y, int nbits)
   {
     /* Left shift rest */
     int i;
-    for (i = (BITVEC_NWORDS - 1); i > 0; --i)
+    for (i = (ECDH_BITVEC_NWORDS - 1); i > 0; --i)
     {
       x[i]  = (x[i] << nbits) | (x[i - 1] >> (32 - nbits));
     }
@@ -333,7 +332,7 @@ static void bitvec_lshift(bitvec_t x, const bitvec_t y, int nbits)
 
 /*************************************************************************************************/
 /*
-  Code that does arithmetic on bit-vectors in the Galois Field GF(2^CURVE_DEGREE).
+  Code that does arithmetic on bit-vectors in the Galois Field GF(2^ECDH_CURVE_DEGREE).
 */
 /*************************************************************************************************/
 
@@ -344,7 +343,7 @@ static void gf2field_set_one(gf2elem_t x)
   x[0] = 1;
   /* .. and the rest to zero */
   int i;
-  for (i = 1; i < BITVEC_NWORDS; ++i)
+  for (i = 1; i < ECDH_BITVEC_NWORDS; ++i)
   {
     x[i] = 0;
   }
@@ -361,14 +360,14 @@ static int gf2field_is_one(const gf2elem_t x)
   }
   /* ...and if rest of words == 0 */
   int i;
-  for (i = 1; i < BITVEC_NWORDS; ++i)
+  for (i = 1; i < ECDH_BITVEC_NWORDS; ++i)
   {
     if (x[i] != 0)
     {
       break;
     }
   }
-  return (i == BITVEC_NWORDS);
+  return (i == ECDH_BITVEC_NWORDS);
 }
 #else
 /* constant-time check */
@@ -382,11 +381,11 @@ static int gf2field_is_one(const gf2elem_t x)
   }
   /* ...and if rest of words == 0 */
   int i;
-  for (i = 1; i < BITVEC_NWORDS; ++i)
+  for (i = 1; i < ECDH_BITVEC_NWORDS; ++i)
   {
     ret &= (x[i] == 0);
   }
-  return ret; //(i == BITVEC_NWORDS);
+  return ret; //(i == ECDH_BITVEC_NWORDS);
 }
 #endif
 
@@ -395,7 +394,7 @@ static int gf2field_is_one(const gf2elem_t x)
 static void gf2field_add(gf2elem_t z, const gf2elem_t x, const gf2elem_t y)
 {
   int i;
-  for (i = 0; i < BITVEC_NWORDS; ++i)
+  for (i = 0; i < ECDH_BITVEC_NWORDS; ++i)
   {
     z[i] = (x[i] ^ y[i]);
   }
@@ -432,13 +431,13 @@ static void gf2field_mul(gf2elem_t z, const gf2elem_t x, const gf2elem_t y)
   }
 
   /* Then add 2^i * x for the rest */
-  for (i = 1; i < CURVE_DEGREE; ++i)
+  for (i = 1; i < ECDH_CURVE_DEGREE; ++i)
   {
     /* lshift 1 - doubling the value of tmp */
     bitvec_lshift(tmp, tmp, 1);
 
-    /* Modulo reduction polynomial if degree(tmp) > CURVE_DEGREE */
-    if (bitvec_get_bit(tmp, CURVE_DEGREE))
+    /* Modulo reduction polynomial if degree(tmp) > ECDH_CURVE_DEGREE */
+    if (bitvec_get_bit(tmp, ECDH_CURVE_DEGREE))
     {
       gf2field_add(tmp, tmp, polynomial);
     }
@@ -685,56 +684,122 @@ static int gf2point_on_curve(const gf2elem_t x, const gf2elem_t y)
 }
 
 
-/*************************************************************************************************/
-/*
-  Elliptic Curve Diffie-Hellman key exchange protocol.
-*/
-/*************************************************************************************************/
+/*************************************************************************************************
+ *
+ * Elliptic Curve Diffie-Hellman key exchange protocol.
+ *
+ *************************************************************************************************/
+namespace ECDH  {
 
-/* NOTE: private should contain random data a-priori! */
-bool ECDH::generatePublicKey( uint8_t* public_key, uint8_t* private_key )
+
+Keys::Keys()
+{
+  reset();
+}
+
+Keys::~Keys()
+{
+}
+
+void Keys::reset()
+{
+  memset( m_privateKey, 0, ECDH_PRIVATE_KEY_SIZE );
+  m_publicKey = QByteArray();
+  m_sharedKey = QByteArray();
+}
+
+void Keys::create()
+{
+  m_sharedKey = QByteArray();
+
+  // TODO: improve random key generator
+  static qint64 min_ecdh_number_64 = 1000000000000000001u;
+  static qint64 max_ecdh_number_64 = 9223372036854775805u;
+
+  memset( m_privateKey, 0, ECDH_PRIVATE_KEY_SIZE );
+  qint64 ecdh_number = Random::number64( min_ecdh_number_64, max_ecdh_number_64 );
+  *(qint64*)&m_privateKey = ecdh_number;
+
+  m_publicKey = QByteArray( ECDH_PUBLIC_KEY_SIZE, static_cast<char>(0) );
+  quint8 public_key[ ECDH_PUBLIC_KEY_SIZE ];
+  memset( public_key, 0, ECDH_PRIVATE_KEY_SIZE );
+  ECDH::generatePublicKey( public_key, m_privateKey );
+  for( int i = 0; i < ECDH_PUBLIC_KEY_SIZE; i++ )
+    m_publicKey[ i ] = static_cast<char>( public_key[ i ] );
+}
+
+bool Keys::generateSharedKey( const QByteArray& other_public_key )
+{
+  m_sharedKey = QByteArray();
+  if( other_public_key.isEmpty() )
+    return false;
+  quint8 u_other_public_key[ ECDH_PUBLIC_KEY_SIZE ];
+  memset( u_other_public_key, 0, ECDH_PUBLIC_KEY_SIZE );
+  for( int i = 0; i < ECDH_PUBLIC_KEY_SIZE; i++ )
+  {
+    if( other_public_key.size() > i )
+      u_other_public_key[ i ] = static_cast<quint8>( other_public_key.at( i ) );
+    else
+      u_other_public_key[ i ] = 0;
+  }
+
+  quint8 u_shared_key[ ECDH_PUBLIC_KEY_SIZE ];
+  memset( u_shared_key, 0, ECDH_PUBLIC_KEY_SIZE );
+  if( ECDH::generateSharedKey( m_privateKey, u_other_public_key, u_shared_key ) )
+  {
+    if( m_sharedKey.size() < ECDH_PUBLIC_KEY_SIZE )
+      m_sharedKey = QByteArray( ECDH_PUBLIC_KEY_SIZE, static_cast<char>(0) );
+    for( int i = 0; i < ECDH_PUBLIC_KEY_SIZE; i++ )
+      m_sharedKey[ i ] = static_cast<char>( u_shared_key[ i ] );
+    return true;
+  }
+  else
+    return false;
+}
+
+
+/* STATIC functions */
+void generatePublicKey( quint8* public_key, quint8* private_key )
 {
   /* Get copy of "base" point 'G' */
-  gf2point_copy((uint32_t*)public_key, (uint32_t*)(public_key + BITVEC_NBYTES), base_x, base_y);
+  gf2point_copy((quint32*)public_key, (quint32*)(public_key + ECDH_BITVEC_NBYTES), base_x, base_y);
 
-  /* Clear bits > CURVE_DEGREE in highest word to satisfy constraint 1 <= exp < n. */
+  /* Clear bits > ECDH_CURVE_DEGREE in highest word to satisfy constraint 1 <= exp < n. */
   int nbits = bitvec_degree(base_order);
   int i;
 
-  for (i = (nbits - 1); i < (BITVEC_NWORDS * 32); ++i)
+  for (i = (nbits - 1); i < (ECDH_BITVEC_NWORDS * 32); ++i)
   {
-    bitvec_clr_bit((uint32_t*)private_key, i);
+    bitvec_clr_bit((quint32*)private_key, i);
   }
 
   /* Multiply base-point with scalar (private-key) */
-  gf2point_mul((uint32_t*)public_key, (uint32_t*)(public_key + BITVEC_NBYTES), (uint32_t*)private_key);
-
-  return true;
+  gf2point_mul((quint32*)public_key, (quint32*)(public_key + ECDH_BITVEC_NBYTES), (quint32*)private_key);
 }
 
-bool ECDH::generateSharedKey(const uint8_t* private_key, const uint8_t* others_pub, uint8_t* output )
+bool generateSharedKey(const quint8* private_key, const quint8* others_pub, quint8* output )
 {
   /* Do some basic validation of other party's public key */
-  if (    !gf2point_is_zero ((uint32_t*)others_pub, (uint32_t*)(others_pub + BITVEC_NBYTES))
-       &&  gf2point_on_curve((uint32_t*)others_pub, (uint32_t*)(others_pub + BITVEC_NBYTES)) )
+  if (    !gf2point_is_zero ((quint32*)others_pub, (quint32*)(others_pub + ECDH_BITVEC_NBYTES))
+       &&  gf2point_on_curve((quint32*)others_pub, (quint32*)(others_pub + ECDH_BITVEC_NBYTES)) )
   {
     /* Copy other side's public key to output */
     unsigned int i;
-    for (i = 0; i < (BITVEC_NBYTES * 2); ++i)
+    for (i = 0; i < (ECDH_BITVEC_NBYTES * 2); ++i)
     {
       output[i] = others_pub[i];
     }
 
     /* Multiply other side's public key with own private key */
-    gf2point_mul((uint32_t*)output,(uint32_t*)(output + BITVEC_NBYTES), (const uint32_t*)private_key);
+    gf2point_mul((quint32*)output,(quint32*)(output + ECDH_BITVEC_NBYTES), (const quint32*)private_key);
 
     /* Multiply outcome by cofactor if using ECC CDH-variant: */
 #if defined(ECDH_COFACTOR_VARIANT) && (ECDH_COFACTOR_VARIANT == 1)
  #if   (cofactor == 2)
-    gf2point_double((uint32_t*)output, (uint32_t*)(output + BITVEC_NBYTES));
+    gf2point_double((quint32*)output, (quint32*)(output + ECDH_BITVEC_NBYTES));
  #elif (cofactor == 4)
-    gf2point_double((uint32_t*)output, (uint32_t*)(output + BITVEC_NBYTES));
-    gf2point_double((uint32_t*)output, (uint32_t*)(output + BITVEC_NBYTES));
+    gf2point_double((quint32*)output, (quint32*)(output + ECDH_BITVEC_NBYTES));
+    gf2point_double((quint32*)output, (quint32*)(output + ECDH_BITVEC_NBYTES));
  #endif
 #endif
 
@@ -745,3 +810,5 @@ bool ECDH::generateSharedKey(const uint8_t* private_key, const uint8_t* others_p
     return false;
   }
 }
+
+} // ECDH namespace END

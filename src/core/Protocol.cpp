@@ -33,9 +33,6 @@
 #include "Rijndael.h"
 #include "Settings.h"
 #include "UserManager.h"
-/* ECDH PROTOCOL */
-#include "ecdh_config.h"
-#include "ecdh.h"
 
 Protocol* Protocol::mp_instance = Q_NULLPTR;
 const QChar PROTOCOL_FIELD_SEPARATOR = QChar::ParagraphSeparator;  // 0x2029
@@ -2277,106 +2274,24 @@ QString Protocol::formatHtmlText( const QString& text )
 }
 
 /* Encryption */
-QByteArray Protocol::generatePrivateKey() const
+QByteArray Protocol::createCipherKey( const QByteArray& shared_key, int data_stream_version ) const
 {
-  return generateECDHRandomPrivateKey();
-}
-
-QByteArray Protocol::generatePublicKey( const QByteArray& private_key ) const
-{
-  return generateECDHPublicKey( private_key );
-}
-
-QByteArray Protocol::generateSharedKey( const QByteArray& private_key, const QByteArray& public_key, int key_exchange_method, int data_stream_version ) const
-{
+  if( shared_key.isEmpty() )
+    return shared_key;
 #if QT_VERSION < 0x050000
   Q_UNUSED( data_stream_version )
   QCryptographicHash ch( QCryptographicHash::Sha1 );
 #else
   QCryptographicHash ch( data_stream_version < 13 ? QCryptographicHash::Sha1 : QCryptographicHash::Sha3_256 );
 #endif
-  if( key_exchange_method == Settings::ConnectionKeyExchangeECDH )
-  {
-    QByteArray shared_key = generateECDHSharedCipherKey( private_key, public_key );
-    if( shared_key.isEmpty() )
-      return QByteArray();
-    ch.addData( shared_key );
-  }
-  else
-    ch.addData( QString::fromLatin1( private_key + public_key ).toUtf8() ); // for compatibility
+  ch.addData( shared_key );
   return ch.result().toHex(); // must be in HEX
 }
 
-QByteArray Protocol::generateECDHRandomPrivateKey() const
+QByteArray Protocol::createCipherKey( const QByteArray& key_1, const QByteArray& key_2, int data_stream_version ) const
 {
-  // TODO: improve random key generator
-  static qint64 min_ecdh_number_64 = 1000000000000000001u;
-  static qint64 max_ecdh_number_64 = 9223372036854775805u;
-
-  uint8_t u_private_key[ BEEBEEP_ECDH_PRIVATE_KEY_SIZE ];
-  memset( u_private_key, 0, BEEBEEP_ECDH_PRIVATE_KEY_SIZE );
-  qint64 ecdh_number = Random::number64( min_ecdh_number_64, max_ecdh_number_64 );
-  *(qint64*)&u_private_key = ecdh_number;
-
-  QByteArray private_key( BEEBEEP_ECDH_PRIVATE_KEY_SIZE, static_cast<char>(0) );
-  for( int i = 0; i < BEEBEEP_ECDH_PRIVATE_KEY_SIZE; i++ )
-    private_key[ i ] = static_cast<char>( u_private_key[ i ] );
-  return private_key;
-}
-
-QByteArray Protocol::generateECDHPublicKey( const QByteArray& private_key ) const
-{
-  uint8_t u_private_key[ BEEBEEP_ECDH_PRIVATE_KEY_SIZE ];
-  for( int i = 0; i < BEEBEEP_ECDH_PRIVATE_KEY_SIZE; i++ )
-  {
-    if( private_key.size() > i )
-      u_private_key[ i ] = static_cast<uint8_t>( private_key.at( i ) );
-    else
-      u_private_key[ i ] = 0;
-  }
-
-  uint8_t u_public_key[ BEEBEEP_ECDH_PUBLIC_KEY_SIZE ];
-  if( ECDH::generatePublicKey( u_public_key, u_private_key ) )
-  {
-    QByteArray public_key( BEEBEEP_ECDH_PUBLIC_KEY_SIZE, static_cast<char>(0) );
-    for( int i = 0; i < BEEBEEP_ECDH_PUBLIC_KEY_SIZE; i++ )
-      public_key[ i ] = static_cast<char>( u_public_key[ i ] );
-    return public_key;
-  }
-  else
-    return QByteArray();
-}
-
-QByteArray Protocol::generateECDHSharedCipherKey( const QByteArray& private_key, const QByteArray& other_public_key ) const
-{
-  uint8_t u_private_key[ BEEBEEP_ECDH_PRIVATE_KEY_SIZE ];
-  for( int i = 0; i < BEEBEEP_ECDH_PRIVATE_KEY_SIZE; i++ )
-  {
-    if( private_key.size() > i )
-      u_private_key[ i ] = static_cast<uint8_t>( private_key.at( i ) );
-    else
-      u_private_key[ i ] = 0;
-  }
-
-  uint8_t u_other_public_key[ BEEBEEP_ECDH_PUBLIC_KEY_SIZE ];
-  for( int i = 0; i < BEEBEEP_ECDH_PUBLIC_KEY_SIZE; i++ )
-  {
-    if( other_public_key.size() > i )
-      u_other_public_key[ i ] = static_cast<uint8_t>( other_public_key.at( i ) );
-    else
-      u_other_public_key[ i ] = 0;
-  }
-
-  uint8_t u_shared_key[ BEEBEEP_ECDH_PUBLIC_KEY_SIZE ];
-  if( ECDH::generateSharedKey( u_private_key, u_other_public_key, u_shared_key ) )
-  {
-    QByteArray shared_key( BEEBEEP_ECDH_PUBLIC_KEY_SIZE, static_cast<char>(0) );
-    for( int i = 0; i < BEEBEEP_ECDH_PUBLIC_KEY_SIZE; i++ )
-     shared_key[ i ] = static_cast<char>( u_shared_key[ i ] );
-    return shared_key;
-  }
-  else
-    return QByteArray();
+  QByteArray sum_keys = QString::fromLatin1( key_1 + key_2 ).toUtf8();
+  return createCipherKey( sum_keys, data_stream_version );
 }
 
 QList<QByteArray> Protocol::splitByteArray( const QByteArray& byte_array, int num_chars ) const
