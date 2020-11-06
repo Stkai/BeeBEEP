@@ -6682,6 +6682,14 @@ Velg et annet navn.</translation>
     </message>
 </context>
 <context>
+    <name>Not available</name>
+    <message>
+        <location filename="../src/utils/BeeUtils.cpp" line="1045"/>
+        <source>n.a.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>NumberTextMarker</name>
     <message>
         <location filename="../plugins/numbertextmarker/NumberTextMarker.cpp" line="33"/>
@@ -6912,32 +6920,32 @@ Velg et annet navn.</translation>
         <translation type="obsolete">Alle brukere</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="630"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="633"/>
         <source>The connection to %1 was not successful.</source>
         <translation>Oppkoplinga til %1 mislyktes.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="722"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="725"/>
         <source>The tested network address %1 is not present among the available addresses of the network interface to which the connection has been made.</source>
         <translation>Testet nettverksadresse %1 finnes ikke blandt de tilgjengelige adressene for nettverksgrensesnittet som forbindelsen er oppretta mot.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="725"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="728"/>
         <source>The connection to host address %1 was successful.</source>
         <translation>Oppkoplinga til maskin-adresse %1 var vellykket.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="731"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="734"/>
         <source>The port tested by the connection is %1 but the one that answered is %2.</source>
         <translation>Testa port på forbindelsen er %1, men den som svarte er %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="735"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="738"/>
         <source>The connection to port %1 was successful.</source>
         <translation>Oppkoplinga til port %1 var vellykket.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="743"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="746"/>
         <source>Unable to complete the test with an invalid network address.</source>
         <translation>Kunne ikke fullføre test med en ugyldig nettverksadresse.</translation>
     </message>

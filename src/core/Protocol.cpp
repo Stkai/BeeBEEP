@@ -309,10 +309,10 @@ int Protocol::protocolVersion( const Message& m ) const
   return proto_version;
 }
 
-QByteArray Protocol::publicKey( const Message& m ) const
+QString Protocol::publicKey( const Message& m ) const
 {
   QStringList data_list = m.text().split( DATA_FIELD_SEPARATOR );
-  return data_list.size() >= 6 ? data_list.at( 5 ).toLatin1() : QByteArray();
+  return data_list.size() >= 6 ? data_list.at( 5 ) : QString();
 }
 
 int Protocol::datastreamVersion( const Message& m ) const
@@ -331,7 +331,7 @@ int Protocol::datastreamVersion( const Message& m ) const
   return datastream_version;
 }
 
-QByteArray Protocol::helloMessage( const QByteArray& public_key, bool encrypted_connection, bool data_compressed ) const
+QByteArray Protocol::helloMessage( const QString& public_key, bool encrypted_connection, bool data_compressed ) const
 {
   QStringList data_list;
   data_list << QString::number( Settings::instance().localUser().networkAddress().hostPort() );
@@ -339,7 +339,7 @@ QByteArray Protocol::helloMessage( const QByteArray& public_key, bool encrypted_
   data_list << QString::number( Settings::instance().localUser().status() );
   data_list << Settings::instance().localUser().statusDescription();
   data_list << Settings::instance().localUser().accountName();
-  data_list << QString::fromLatin1( public_key );
+  data_list << public_key;
   data_list << Settings::instance().version( false, false, false );
   data_list << Settings::instance().localUser().hash();
   data_list << Settings::instance().localUser().color();
@@ -2288,10 +2288,10 @@ QByteArray Protocol::createCipherKey( const QByteArray& shared_key, int data_str
   return ch.result().toHex(); // must be in HEX
 }
 
-QByteArray Protocol::createCipherKey( const QByteArray& key_1, const QByteArray& key_2, int data_stream_version ) const
+QByteArray Protocol::createCipherKey( const QString& key_1, const QString& key_2, int data_stream_version ) const
 {
-  QByteArray sum_keys = QString::fromLatin1( key_1 + key_2 ).toUtf8();
-  return createCipherKey( sum_keys, data_stream_version );
+  QString sum_keys = key_1 + key_2;
+  return createCipherKey( sum_keys.toUtf8(), data_stream_version );
 }
 
 QList<QByteArray> Protocol::splitByteArray( const QByteArray& byte_array, int num_chars ) const

@@ -6334,6 +6334,14 @@ Please select a different name.</source>
     </message>
 </context>
 <context>
+    <name>Not available</name>
+    <message>
+        <location filename="../src/utils/BeeUtils.cpp" line="1045"/>
+        <source>n.a.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>NumberTextMarker</name>
     <message>
         <location filename="../plugins/numbertextmarker/NumberTextMarker.cpp" line="33"/>
@@ -6544,32 +6552,32 @@ Please select a different name.</source>
         <translation>すべてのチャットを送信</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="630"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="633"/>
         <source>The connection to %1 was not successful.</source>
         <translation>%1 への接続は成功しませんでした。</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="722"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="725"/>
         <source>The tested network address %1 is not present among the available addresses of the network interface to which the connection has been made.</source>
         <translation>テストしたネットワークアドレス %1 は、接続されたネットワークインターフェース中の有効なアドレスの中に存在しません。</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="725"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="728"/>
         <source>The connection to host address %1 was successful.</source>
         <translation>ホストアドレス %1 への接続が成功しました。</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="731"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="734"/>
         <source>The port tested by the connection is %1 but the one that answered is %2.</source>
         <translation>接続テストを行ったポートは %1 ですが、ポート %2 から応答がありました。</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="735"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="738"/>
         <source>The connection to port %1 was successful.</source>
         <translation>ポート %1 への接続が成功しました。</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="743"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="746"/>
         <source>Unable to complete the test with an invalid network address.</source>
         <translation>無効なネットワークアドレスのためテストを完了できません。</translation>
     </message>

@@ -231,7 +231,7 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
   emit fileTransferMessage( peer_id, u, fi, msg, ft_state );
 }
 
-void Core::checkFileTransferProgress( VNumber peer_id, VNumber user_id, const FileInfo& fi, FileSizeType bytes, int elapsed_time )
+void Core::checkFileTransferProgress( VNumber peer_id, VNumber user_id, const FileInfo& fi, FileSizeType bytes, qint64 elapsed_time )
 {
   User u = UserManager::instance().findUser( user_id );
   if( !u.isValid() )

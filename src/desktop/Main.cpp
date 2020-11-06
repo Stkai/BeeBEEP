@@ -196,7 +196,7 @@ int main( int argc, char *argv[] )
     int num_ecdh_key_generated = 0;
     QElapsedTimer test_ecdh_time;
     test_ecdh_time.start();
-    while( test_ecdh_time.elapsed() < 2000 )
+    while( test_ecdh_time.elapsed() < 6000 )
     {
       ECDH::Keys keys_1;
       keys_1.create();

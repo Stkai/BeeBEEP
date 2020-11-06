@@ -186,7 +186,7 @@ private slots:
   void sendScreenshotToChat( VNumber );
 #endif
   void startExternalApplicationFromActionData();
-  void onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType, int );
+  void onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType, qint64 );
   void onFileTransferMessage( VNumber, const User&, const FileInfo&, const QString&, FileTransferPeer::TransferState );
   void sendBuzzToUser( VNumber );
   void showBuzzFromUser( const User& );

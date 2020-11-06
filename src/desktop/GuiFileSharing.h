@@ -67,7 +67,7 @@ private slots:
   void onShareBoxUploadRequest( VNumber, const FileInfo&, const QString& );
   void updateShareBox( const User&, const QString&, const QList<FileInfo>& );
   void onShareFolderUnavailable( const User&, const QString& );
-  void onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType, int );
+  void onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType, qint64 );
   void onFileTransferMessage( VNumber, const User&, const FileInfo&, const QString&, FileTransferPeer::TransferState );
   void showAllowedFileExtensions();
 

@@ -5702,6 +5702,13 @@ Inserisci un nome differente.</translation>
     </message>
 </context>
 <context>
+    <name>Not available</name>
+    <message>
+        <source>n.a.</source>
+        <translation>n.d.</translation>
+    </message>
+</context>
+<context>
     <name>NumberTextMarker</name>
     <message>
         <source>Number Text Marker</source>
@@ -6020,6 +6027,13 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Click to start recording your message</source>
         <translation type="obsolete">Fai clic per iniziare a registrare il tuo messaggio</translation>
+    </message>
+</context>
+<context>
+    <name>Time</name>
+    <message>
+        <source>n.a.</source>
+        <translation type="vanished">n.d.</translation>
     </message>
 </context>
 <context>

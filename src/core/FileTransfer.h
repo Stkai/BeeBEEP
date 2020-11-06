@@ -60,7 +60,7 @@ public:
 
 signals:
   void message( VNumber peer_id, VNumber user_id, const FileInfo&, const QString&, FileTransferPeer::TransferState );
-  void progress( VNumber peer_id, VNumber user_id, const FileInfo&, FileSizeType, int );
+  void progress( VNumber peer_id, VNumber user_id, const FileInfo&, FileSizeType, qint64 );
   void listening();
 
 protected:

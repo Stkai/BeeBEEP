@@ -92,15 +92,15 @@ namespace ECDH  {
       Keys();
       virtual ~Keys();
 
-      inline const QByteArray& publicKey() const { return m_publicKey; }
+      inline const QString& publicKey() const { return m_publicKey; }
       inline const QByteArray& sharedKey() const { return m_sharedKey; }
 
       void create();
-      bool generateSharedKey( const QByteArray& other_public_key );
+      bool generateSharedKey( const QString& other_public_key );
       void reset();
 
     private:
-      QByteArray m_publicKey;
+      QString m_publicKey;
       QByteArray m_sharedKey;
       quint8 m_privateKey[ ECDH_PRIVATE_KEY_SIZE ];
 

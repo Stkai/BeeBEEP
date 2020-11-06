@@ -73,7 +73,7 @@ Core::Core( QObject* parent )
   connect( mp_broadcaster, SIGNAL( newPeerFound( const QHostAddress&, int ) ), this, SLOT( newPeerFound( const QHostAddress&, int ) ) );
   connect( mp_listener, SIGNAL( newConnection( qintptr ) ), this, SLOT( checkNewConnection( qintptr ) ) );
   connect( mp_fileTransfer, SIGNAL( listening() ), this, SLOT( onFileTransferServerListening() ) );
-  connect( mp_fileTransfer, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType, int ) ), this, SLOT( checkFileTransferProgress( VNumber, VNumber, const FileInfo&, FileSizeType, int ) ) );
+  connect( mp_fileTransfer, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType, qint64 ) ), this, SLOT( checkFileTransferProgress( VNumber, VNumber, const FileInfo&, FileSizeType, qint64 ) ) );
   connect( mp_fileTransfer, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString&, FileTransferPeer::TransferState ) ), this, SLOT( checkFileTransferMessage( VNumber, VNumber, const FileInfo&, const QString&, FileTransferPeer::TransferState ) ) );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   connect( mp_shareDesktop, SIGNAL( imageDataAvailable( const ShareDesktopData& ) ), this, SLOT( onShareDesktopImageAvailable( const ShareDesktopData& ) ) );

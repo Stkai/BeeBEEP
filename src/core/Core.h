@@ -173,7 +173,7 @@ signals:
   void offlineMessageSentToUser( const User& );
   void fileDownloadRequest( const User&, const FileInfo& );
   void folderDownloadRequest( const User&, const QString&, const QList<FileInfo>& );
-  void fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType, int );
+  void fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType, qint64 );
   void fileTransferMessage( VNumber, const User&, const FileInfo&, const QString&, FileTransferPeer::TransferState );
   void fileShareAvailable( const User& );
   void localShareListAvailable();
@@ -218,7 +218,7 @@ protected slots:
   void parseMessage( const User&, const Message& );
 
   /* CoreFileTransfer */
-  void checkFileTransferProgress( VNumber, VNumber, const FileInfo&, FileSizeType, int );
+  void checkFileTransferProgress( VNumber, VNumber, const FileInfo&, FileSizeType, qint64 );
   void checkFileTransferMessage( VNumber, VNumber, const FileInfo&, const QString&, FileTransferPeer::TransferState );
   void onFileTransferServerListening();
   void addListToLocalShare();

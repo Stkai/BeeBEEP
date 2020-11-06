@@ -85,7 +85,7 @@ protected:
   void checkHelloMessage( const QByteArray& );
   QByteArray serializeData( const QByteArray& );
   const QByteArray& cipherKey() const;
-  bool createCipherKey( const QByteArray& );
+  bool createCipherKey( const QString& other_public_key );
 
   bool checkConnectionTimeout( int );
   bool checkTestMessage( const Message& );
@@ -100,8 +100,8 @@ private:
   bool m_isHelloSent;
   VNumber m_userId;
   int m_protocolVersion;
-  QByteArray m_publicKey1;
-  QByteArray m_publicKey2;
+  QString m_publicKey1;
+  QString m_publicKey2;
   ECDH::Keys m_ecdhKeys;
   QByteArray m_cipherKey;
 

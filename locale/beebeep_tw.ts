@@ -6307,6 +6307,14 @@ Please select a different name.</source>
     </message>
 </context>
 <context>
+    <name>Not available</name>
+    <message>
+        <location filename="../src/utils/BeeUtils.cpp" line="1045"/>
+        <source>n.a.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>NumberTextMarker</name>
     <message>
         <location filename="../plugins/numbertextmarker/NumberTextMarker.cpp" line="33"/>
@@ -6516,32 +6524,32 @@ Please select a different name.</source>
         <translation>顯示所有聊天</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="630"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="633"/>
         <source>The connection to %1 was not successful.</source>
         <translation>與 %1 的連線不成功。</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="722"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="725"/>
         <source>The tested network address %1 is not present among the available addresses of the network interface to which the connection has been made.</source>
         <translation>已測試的網路位址 %1 不存在於已連線的網路介面的可用位址。</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="725"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="728"/>
         <source>The connection to host address %1 was successful.</source>
         <translation>與主機位址 %1 的連線成功。</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="731"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="734"/>
         <source>The port tested by the connection is %1 but the one that answered is %2.</source>
         <translation>連線測試的埠為 %1，但回應的埠為 %2。</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="735"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="738"/>
         <source>The connection to port %1 was successful.</source>
         <translation>與埠 %1 的連線成功。</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="743"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="746"/>
         <source>Unable to complete the test with an invalid network address.</source>
         <translation>無法使用不正確網路位址完成測試。</translation>
     </message>

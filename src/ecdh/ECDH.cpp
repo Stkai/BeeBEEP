@@ -720,37 +720,43 @@ void Keys::create()
   qint64 ecdh_number = Random::number64( min_ecdh_number_64, max_ecdh_number_64 );
   *(qint64*)&m_privateKey = ecdh_number;
 
-  m_publicKey = QByteArray( ECDH_PUBLIC_KEY_SIZE, static_cast<char>(0) );
-  quint8 public_key[ ECDH_PUBLIC_KEY_SIZE ];
-  memset( public_key, 0, ECDH_PRIVATE_KEY_SIZE );
-  ECDH::generatePublicKey( public_key, m_privateKey );
+  QStringList sl_public_key;
+  quint8 u_public_key[ ECDH_PUBLIC_KEY_SIZE ];
+  memset( u_public_key, 0, ECDH_PRIVATE_KEY_SIZE );
+  ECDH::generatePublicKey( u_public_key, m_privateKey );
   for( int i = 0; i < ECDH_PUBLIC_KEY_SIZE; i++ )
-    m_publicKey[ i ] = static_cast<char>( public_key[ i ] );
+    sl_public_key.append( QString::number( u_public_key[ i ] ) );
+  m_publicKey = sl_public_key.join( ":" );
 }
 
-bool Keys::generateSharedKey( const QByteArray& other_public_key )
+bool Keys::generateSharedKey( const QString& other_public_key )
 {
   m_sharedKey = QByteArray();
   if( other_public_key.isEmpty() )
     return false;
+  QStringList sl_other_public_key = other_public_key.split( ":" );
+  if( sl_other_public_key.size() != ECDH_PUBLIC_KEY_SIZE )
+    return false;
+
   quint8 u_other_public_key[ ECDH_PUBLIC_KEY_SIZE ];
   memset( u_other_public_key, 0, ECDH_PUBLIC_KEY_SIZE );
+  bool ok = false;
   for( int i = 0; i < ECDH_PUBLIC_KEY_SIZE; i++ )
   {
-    if( other_public_key.size() > i )
-      u_other_public_key[ i ] = static_cast<quint8>( other_public_key.at( i ) );
-    else
-      u_other_public_key[ i ] = 0;
+    quint8 u_value = static_cast<quint8>( sl_other_public_key.at( i ).toUInt( &ok ) );
+    if( !ok )
+      return false;
+    u_other_public_key[ i ] = u_value;
   }
 
   quint8 u_shared_key[ ECDH_PUBLIC_KEY_SIZE ];
   memset( u_shared_key, 0, ECDH_PUBLIC_KEY_SIZE );
   if( ECDH::generateSharedKey( m_privateKey, u_other_public_key, u_shared_key ) )
   {
-    if( m_sharedKey.size() < ECDH_PUBLIC_KEY_SIZE )
-      m_sharedKey = QByteArray( ECDH_PUBLIC_KEY_SIZE, static_cast<char>(0) );
+    QByteArray shared_key;
     for( int i = 0; i < ECDH_PUBLIC_KEY_SIZE; i++ )
-      m_sharedKey[ i ] = static_cast<char>( u_shared_key[ i ] );
+      shared_key.append( QByteArray::number( u_shared_key[ i ] ) );
+    m_sharedKey = shared_key.toBase64();
     return true;
   }
   else

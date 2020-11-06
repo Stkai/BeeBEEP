@@ -535,7 +535,7 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
   {
     if( m_protocolVersion > SECURE_LEVEL_2_PROTO_VERSION )
     {
-      QByteArray public_key = Protocol::instance().publicKey( m );
+      QString public_key = Protocol::instance().publicKey( m );
       if( !public_key.isEmpty() )
       {
         if( !createCipherKey( public_key ) )
@@ -569,18 +569,18 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
   emit authenticationRequested( array_data );
 }
 
-bool ConnectionSocket::createCipherKey( const QByteArray& public_key )
+bool ConnectionSocket::createCipherKey( const QString& other_public_key )
 {
   if( m_publicKey1.isEmpty() )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Encryption handshake key 1";
 #endif
-    m_publicKey1 = public_key;
+    m_publicKey1 = other_public_key;
   }
   else if( m_publicKey2.isEmpty() )
   {
-    m_publicKey2 = public_key;
+    m_publicKey2 = other_public_key;
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Encryption handshake key 2";
 #endif
@@ -600,7 +600,7 @@ bool ConnectionSocket::createCipherKey( const QByteArray& public_key )
 
   if( m_protocolVersion >= SECURE_LEVEL_4_PROTO_VERSION || Settings::instance().isConnectionKeyExchangeOnlyECDH() )
   {
-    if( !m_ecdhKeys.generateSharedKey( public_key ) )
+    if( !m_ecdhKeys.generateSharedKey( other_public_key ) )
     {
       qWarning() << "Encryption handshake error. Unable to generate ECDH shared key with" << qPrintable( m_networkAddress.toString() );
       m_cipherKey = QByteArray();
@@ -614,7 +614,7 @@ bool ConnectionSocket::createCipherKey( const QByteArray& public_key )
   m_ecdhKeys.reset();
   m_publicKey1 = QByteArray();
   m_publicKey2 = QByteArray();
-  return true;
+  return !m_cipherKey.isEmpty();
 }
 
 int ConnectionSocket::fileTransferBufferSize() const

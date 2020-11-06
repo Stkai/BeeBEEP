@@ -40,7 +40,7 @@ public:
   inline const QString& folderPath() const;
   inline const QString& folderName() const;
   inline const QList<FileInfo>& fileList() const;
-  inline int elapsedTime() const;
+  inline qint64 elapsedTime() const;
   inline VNumber toUserId() const;
   inline bool errorFound() const;
 
@@ -55,7 +55,7 @@ private:
   QString m_folderName;
   VNumber m_toUserId;
   QList<FileInfo> m_fileList;
-  int m_elapsedTime;
+  qint64 m_elapsedTime;
   bool m_errorFound;
 
 };
@@ -65,7 +65,7 @@ private:
 inline const QString& BuildFileList::folderPath() const { return m_folderPath; }
 inline const QString& BuildFileList::folderName() const { return m_folderName; }
 inline const QList<FileInfo>& BuildFileList::fileList() const { return m_fileList; }
-inline int BuildFileList::elapsedTime() const { return m_elapsedTime; }
+inline qint64 BuildFileList::elapsedTime() const { return m_elapsedTime; }
 inline VNumber BuildFileList::toUserId() const { return m_toUserId; }
 inline bool BuildFileList::errorFound() const { return m_errorFound; }
 

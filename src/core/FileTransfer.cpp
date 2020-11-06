@@ -201,7 +201,7 @@ void FileTransfer::setupPeer( FileTransferPeer* transfer_peer, qintptr socket_de
     connect( transfer_peer, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString&, FileTransferPeer::TransferState ) ), this, SIGNAL( message( VNumber, VNumber, const FileInfo&, const QString&, FileTransferPeer::TransferState ) ) );
   }
 
-  connect( transfer_peer, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType, int ) ), this, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType, int ) ) );
+  connect( transfer_peer, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType, qint64 ) ), this, SIGNAL( progress( VNumber, VNumber, const FileInfo&, FileSizeType, qint64 ) ) );
   connect( transfer_peer, SIGNAL( operationCompleted() ), this, SLOT( deletePeer() ) );
 
   transfer_peer->setConnectionDescriptor( socket_descriptor, server_port );

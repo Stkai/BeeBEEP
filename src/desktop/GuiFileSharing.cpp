@@ -62,7 +62,7 @@ GuiFileSharing::GuiFileSharing( QWidget *parent )
   connect( beeCore, SIGNAL( localShareListAvailable() ), mp_shareLocal, SLOT( updateFileSharedList() ) );
   connect( beeCore, SIGNAL( shareBoxAvailable( const User&, const QString&, const QList<FileInfo>& ) ), this, SLOT( updateShareBox( const User&, const QString&, const QList<FileInfo>& ) ) );
   connect( beeCore, SIGNAL( shareBoxUnavailable( const User&, const QString& ) ), this, SLOT( onShareFolderUnavailable( const User&, const QString& ) ) );
-  connect( beeCore, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType, int ) ), this, SLOT( onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType, int ) ) );
+  connect( beeCore, SIGNAL( fileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType, qint64 ) ), this, SLOT( onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType, qint64 ) ) );
   connect( beeCore, SIGNAL( fileTransferMessage( VNumber, const User&, const FileInfo&, const QString&, FileTransferPeer::TransferState ) ), this, SLOT( onFileTransferMessage( VNumber, const User&, const FileInfo&, const QString&, FileTransferPeer::TransferState ) ) );
 
   connect( mp_shareLocal, SIGNAL( sharePathAdded( const QString& ) ), this, SLOT( addToShare( const QString& ) ) );
@@ -294,7 +294,7 @@ void GuiFileSharing::showUserFileList( const User& u )
   statusBar()->showMessage( share_message, 5000 );
 }
 
-void GuiFileSharing::onFileTransferProgress( VNumber peer_id, const User& u, const FileInfo& fi, FileSizeType bytes, int elapsed_time )
+void GuiFileSharing::onFileTransferProgress( VNumber peer_id, const User& u, const FileInfo& fi, FileSizeType bytes, qint64 elapsed_time )
 {
   if( fi.size() == 0 )
   {
