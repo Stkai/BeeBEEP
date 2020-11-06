@@ -24,7 +24,9 @@
 #ifndef BEEBEEP_CONNECTIONSOCKET_H
 #define BEEBEEP_CONNECTIONSOCKET_H
 
+#include "ECDH.h"
 #include "NetworkAddress.h"
+
 class Message;
 
 
@@ -83,7 +85,7 @@ protected:
   void checkHelloMessage( const QByteArray& );
   QByteArray serializeData( const QByteArray& );
   const QByteArray& cipherKey() const;
-  bool createCipherKey( const QByteArray& );
+  bool createCipherKey( const QString& other_public_key );
 
   bool checkConnectionTimeout( int );
   bool checkTestMessage( const Message& );
@@ -98,10 +100,10 @@ private:
   bool m_isHelloSent;
   VNumber m_userId;
   int m_protocolVersion;
+  QString m_publicKey1;
+  QString m_publicKey2;
+  ECDH::Keys m_ecdhKeys;
   QByteArray m_cipherKey;
-  QByteArray m_publicKey1;
-  QByteArray m_publicKey2;
-  QByteArray m_privateKey;
 
   NetworkAddress m_networkAddress;
 

@@ -459,7 +459,7 @@ void GuiShareNetwork::updateUser( const User& u )
   }
 }
 
-void GuiShareNetwork::onFileTransferProgress( VNumber /* unused_peer_id */, const User& u, const FileInfo& fi, FileSizeType bytes, int elapsed_time )
+void GuiShareNetwork::onFileTransferProgress( VNumber /* unused_peer_id */, const User& u, const FileInfo& fi, FileSizeType bytes, qint64 elapsed_time )
 {
   if( fi.size() < 1 )
     return;

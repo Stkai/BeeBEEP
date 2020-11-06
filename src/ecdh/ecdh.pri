@@ -1,7 +1,6 @@
 
 INCLUDEPATH += $$PWD
 
-HEADERS += ecdh/ecdh_config.h \
-           ecdh/ecdh.h
+HEADERS += ecdh/ECDH.h
 
-SOURCES += ecdh/ecdh.cpp
+SOURCES += ecdh/ECDH.cpp

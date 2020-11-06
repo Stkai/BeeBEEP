@@ -1039,32 +1039,47 @@ QString Bee::bytesToString( FileSizeType bytes, int precision )
   return QString( "%1 %2").arg( result, 0, 'f', prec > 0 ? (precision >= 0 ? precision : prec) : 0 ).arg( suffix );
 }
 
-QString Bee::timeToString( qint64 msec )
+QString Bee::timeToString( qint64 ms )
 {
-  if( msec < 0 )
-    return QString( "?" );
-  if( msec == 0 )
-    return QString( "0 ms" );
-  int d = 0;
-  while( msec >= 86400000 )
-  {
-    d++;
-    msec -= 86400000;
-  }
-  QString s = "";
-  QTime t( 0, 0 );
-  t = t.addMSecs( static_cast<int>( msec ) );
-  int total_hours = t.hour() + d * 24;
+  if( ms < 0 )
+    return QT_TRANSLATE_NOOP( "Not available", "n.a." );
+  if( ms == 0 )
+    return QString( "0 s" );
 
-  if( total_hours == 0 && t.minute() == 0 && t.second() == 0 )
-    s = QString( "%1 ms" ).arg( t.msec() );
-  else if( total_hours == 0 && t.minute() == 0 )
-    s = QString( "%1 s" ).arg( t.second() );
-  else if( total_hours == 0 )
-    s = QString( "%1 m, %2 s" ).arg( t.minute() ).arg( t.second() );
+  qint64 d = ms / 86400000;
+  if( d > 0 )
+    ms -= d*86400000;
+
+  QTime t = QTime( 0, 0, 0, 0 );
+  t = t.addMSecs( static_cast<int>( ms ) );
+  qint64 h = d * 24 + t.hour();
+
+  if( h < 24 )
+  {
+    if( h > 0 )
+      return t.toString( "%1:mm:ss" ).arg( QString::number( h ).rightJustified( 2, QLatin1Char( '0' ) ) );
+    else if( t.minute() > 0 )
+      return t.toString( "m:ss" ) + QString( " m" );
+    else if( t.second() > 0 )
+      return QString( "%1 s" ).arg( (t.msec() > 500 && t.second() <= 59 ? t.second() + 1 : t.second()) );
+    else
+      return QString( "%1 ms" ).arg( t.msec() );
+  }
   else
-    s = QString( "%1 h, %2 m, %3 s" ).arg( total_hours ).arg( t.minute() ).arg( t.second() );
-  return s;
+  {
+    QStringList sl;
+    if( d > 0 )
+      sl.append( QString( "%1 d" ).arg( d ) );
+    if( t.hour() > 0 )
+      sl.append( QString( "%1 h" ).arg( t.hour() ) );
+    if( t.minute() > 0 )
+      sl.append( QString( "%1 m" ).arg( t.minute() ) );
+    if( t.second() > 0 )
+      sl.append( QString( "%1 s" ).arg( t.second() ) );
+    if( sl.empty() )
+      sl.append( QString( "%1 ms" ).arg( t.msec() ) );
+    return sl.join( ", " );
+  }
 }
 
 QString Bee::transferTimeLeft( FileSizeType bytes_transferred, FileSizeType total_bytes, FileSizeType starting_position, int elapsed_time )

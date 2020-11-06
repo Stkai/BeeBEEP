@@ -41,7 +41,7 @@ public:
   inline const QString& folderName() const;
   inline const QList<FileInfo>& shareList() const;
   inline FileSizeType shareSize() const;
-  inline int elapsedTime() const;
+  inline qint64 elapsedTime() const;
   inline void setUserId( VNumber );
   inline VNumber userId() const;
   inline void setChatPrivateId( const QString& );
@@ -61,7 +61,7 @@ private:
   QString m_folderName;
   QList<FileInfo> m_shareList;
   FileSizeType m_shareSize;
-  int m_elapsedTime;
+  qint64 m_elapsedTime;
   VNumber m_userId;
   QString m_chatPrivateId;
 
@@ -73,7 +73,7 @@ inline const QString& BuildFileShareList::folderPath() const { return m_folderPa
 inline const QString& BuildFileShareList::folderName() const { return m_folderName; }
 inline const QList<FileInfo>& BuildFileShareList::shareList() const { return m_shareList; }
 inline FileSizeType BuildFileShareList::shareSize() const { return m_shareSize; }
-inline int BuildFileShareList::elapsedTime() const { return m_elapsedTime; }
+inline qint64 BuildFileShareList::elapsedTime() const { return m_elapsedTime; }
 inline void BuildFileShareList::setUserId( VNumber new_value ) { m_userId = new_value; }
 inline VNumber BuildFileShareList::userId() const { return m_userId; }
 inline void BuildFileShareList::setChatPrivateId( const QString& new_value ) { m_chatPrivateId = new_value; }

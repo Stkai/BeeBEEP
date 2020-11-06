@@ -5355,6 +5355,13 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
 </context>
 <context>
+    <name>Not available</name>
+    <message>
+        <source>n.a.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>NumberTextMarker</name>
     <message>
         <source>Number Text Marker</source>

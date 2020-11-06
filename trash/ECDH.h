@@ -46,6 +46,33 @@
 
 
 TEST:
+#ifdef BEEBEEP_DEBUG
+  if( 1 )
+  {
+    int num_ecdh_key_generated = 0;
+    QElapsedTimer test_ecdh_time;
+    test_ecdh_time.start();
+    while( test_ecdh_time.elapsed() < 2000 )
+    {
+      ECDH::Keys keys_1;
+      keys_1.create();
+      ECDH::Keys keys_2;
+      keys_2.create();
+      keys_1.generateSharedKey( keys_2.publicKey() );
+      keys_2.generateSharedKey( keys_1.publicKey() );
+
+      QByteArray test_shr_1 = Protocol::instance().createCipherKey( keys_1.sharedKey(), 15 );
+      num_ecdh_key_generated++;
+      QByteArray test_shr_2 = Protocol::instance().createCipherKey( keys_2.sharedKey(), 15 );
+      num_ecdh_key_generated++;
+      if( test_shr_1 == test_shr_2 )
+        qDebug() << "User A and User B generate the same key";
+      else
+        qWarning() << "User A and User B FAIL to generate the same key";
+    }
+    qDebug() << "Test ECDH completed in" << test_ecdh_time.elapsed() << "ms with" << num_ecdh_key_generated << "keys";
+  }
+#endif
 
 #ifdef BEEBEEP_DEBUG
   QElapsedTimer test_ecdh_time;

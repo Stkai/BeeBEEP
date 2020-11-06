@@ -54,7 +54,7 @@ public:
   QByteArray pongMessage() const;
   QByteArray broadcastMessage( const QHostAddress& ) const;
   QHostAddress hostAddressFromBroadcastMessage( const Message& ) const;
-  QByteArray helloMessage( const QByteArray& public_key, bool encrypted_connection, bool data_compressed ) const;
+  QByteArray helloMessage( const QString& public_key, bool encrypted_connection, bool data_compressed ) const;
   QByteArray testQuestionMessage( const NetworkAddress& ) const;
   bool isTestQuestionMessage( const Message& ) const;
   QByteArray testAnswerMessage( const NetworkAddress&, bool test_is_accepted, const QString& answer_msg = "Ok" ) const;
@@ -155,10 +155,9 @@ public:
   QString saveChatRecord( const ChatRecord& ) const;
   ChatRecord loadChatRecord( const QString& ) const;
 
-  QByteArray generatePrivateKey() const;
-  QByteArray generatePublicKey( const QByteArray& private_key ) const;
-  QByteArray publicKey( const Message& ) const;
-  QByteArray generateSharedKey( const QByteArray& private_key, const QByteArray& public_key, int key_exchange_method, int data_stream_version ) const;
+  QString publicKey( const Message& ) const;
+  QByteArray createCipherKey( const QByteArray& shared_key, int data_stream_version ) const;
+  QByteArray createCipherKey( const QString& key_1, const QString& key_2, int data_stream_version ) const;
 
   QByteArray encryptByteArray( const QByteArray& text_to_encrypt, const QByteArray& cipher_key, int proto_version ) const;
   QByteArray decryptByteArray( const QByteArray& text_to_decrypt, const QByteArray& cipher_key, int proto_version ) const;

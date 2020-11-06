@@ -2161,9 +2161,19 @@ Please select a different name.</source>
         <translation>显示表情面板</translation>
     </message>
     <message>
+<<<<<<< HEAD
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="152"/>
         <source>Chat with all users</source>
         <translation>群发消息</translation>
+=======
+        <location filename="../src/desktop/GuiFloatingChat.cpp" line="151"/>
+        <source>All users</source>
+        <translation>所有用户</translation>
+    </message>
+    <message>
+        <source>Chat with all users</source>
+        <translation type="vanished">群发消息</translation>
+>>>>>>> git-svn
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="203"/>
@@ -2173,12 +2183,20 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="414"/>
         <source>Qt libraries have a bug on saving the window&apos;s state.</source>
+<<<<<<< HEAD
         <translation>在windows上Qt库在保存窗口状态时存在问题</translation>
+=======
+        <translation>在windows上Qt库在保存窗口状态时存在问题.</translation>
+>>>>>>> git-svn
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="415"/>
         <source>If you have layout problem please save only geometry.</source>
+<<<<<<< HEAD
         <translation>如果你有布局问题，请只保存窗口尺寸</translation>
+=======
+        <translation>如果你有布局问题，请只保存窗口尺寸.</translation>
+>>>>>>> git-svn
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="416"/>
@@ -6588,6 +6606,14 @@ Please select a different name.</source>
     </message>
 </context>
 <context>
+    <name>Not available</name>
+    <message>
+        <location filename="../src/utils/BeeUtils.cpp" line="1045"/>
+        <source>n.a.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>NumberTextMarker</name>
     <message>
         <location filename="../plugins/numbertextmarker/NumberTextMarker.cpp" line="33"/>
@@ -6805,32 +6831,32 @@ Please select a different name.</source>
         <translation>显示所有聊天记录</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="630"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="633"/>
         <source>The connection to %1 was not successful.</source>
         <translation>与 %1 连接失败。</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="722"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="725"/>
         <source>The tested network address %1 is not present among the available addresses of the network interface to which the connection has been made.</source>
         <translation>已连接到的网络接口的可用地址中不存在经过测试的网络地址 %1。</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="725"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="728"/>
         <source>The connection to host address %1 was successful.</source>
         <translation>与主机地址 %1 连接成功。</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="731"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="734"/>
         <source>The port tested by the connection is %1 but the one that answered is %2.</source>
         <translation>连接测试的端口为 %1，但应答的端口为 %2。</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="735"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="738"/>
         <source>The connection to port %1 was successful.</source>
         <translation>与端口 %1 连接成功。</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="743"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="746"/>
         <source>Unable to complete the test with an invalid network address.</source>
         <translation>不能使用无效的网络地址测试。</translation>
     </message>
@@ -6914,7 +6940,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2441"/>
+        <location filename="../src/core/Settings.cpp" line="2449"/>
         <source>Autoresponder</source>
         <translation>自动响应</translation>
     </message>

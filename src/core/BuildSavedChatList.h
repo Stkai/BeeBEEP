@@ -38,7 +38,7 @@ public:
   inline const QList<MessageRecord>& unsentMessages() const;
   inline const QString& savedChatsAuthCode() const;
   inline const QString& unsentMessagesAuthCode() const;
-  inline int elapsedTime() const;
+  inline qint64 elapsedTime() const;
   inline int protocolVersion() const;
 
 signals:
@@ -59,7 +59,7 @@ private:
   QList<MessageRecord> m_unsentMessages;
   QString m_savedChatsAuthCode;
   QString m_unsentMessagesAuthCode;
-  int m_elapsedTime;
+  qint64 m_elapsedTime;
   int m_protocolVersion;
 
 };
@@ -70,7 +70,7 @@ inline const QMap<QString, QString>& BuildSavedChatList::savedChats() const { re
 inline const QList<MessageRecord>& BuildSavedChatList::unsentMessages() const { return m_unsentMessages; }
 inline const QString& BuildSavedChatList::savedChatsAuthCode() const { return m_savedChatsAuthCode; }
 inline const QString& BuildSavedChatList::unsentMessagesAuthCode() const { return m_unsentMessagesAuthCode; }
-inline int BuildSavedChatList::elapsedTime() const { return m_elapsedTime; }
+inline qint64 BuildSavedChatList::elapsedTime() const { return m_elapsedTime; }
 inline int BuildSavedChatList::protocolVersion() const { return m_protocolVersion; }
 
 #endif // BEEBEEP_BUILDSAVEDCHATLIST_H

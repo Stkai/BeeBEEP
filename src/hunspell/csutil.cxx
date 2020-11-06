@@ -2308,20 +2308,20 @@ struct cs_info* get_current_cs(const std::string& es) {
     // in this 1-byte character encoding.  Call our encoding/decoding
     // APIs separately for each byte since they may reject some of the
     // bytes, and we want to handle errors separately for each byte.
-    uint8_t lower, upper;
+    quint8 lower, upper;
     do {
       if (i == 0)
         break;
-      uint8_t source = uint8_t(i);
+      quint8 source = quint8(i);
       char16_t uni[2];
       char16_t uniCased;
-      uint8_t destination[4];
+      quint8 destination[4];
       auto src1 = MakeSpan(&source, 1);
       auto dst1 = MakeSpan(uni);
       auto src2 = MakeSpan(&uniCased, 1);
       auto dst2 = MakeSpan(destination);
 
-      uint32_t result;
+      quint32 result;
       size_t read;
       size_t written;
       Tie(result, read, written) =

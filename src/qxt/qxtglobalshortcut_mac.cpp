@@ -185,7 +185,7 @@ quint32 QxtGlobalShortcutPrivate::nativeKeycode(Qt::Key key)
     UCKeyboardLayout* header = (UCKeyboardLayout*)CFDataGetBytePtr(currentLayoutData);
     UCKeyboardTypeHeader* table = header->keyboardTypeList;
 
-    uint8_t *data = (uint8_t*)header;
+    quint8 *data = (quint8*)header;
     // God, would a little documentation for this shit kill you...
     for (quint32 i=0; i < header->keyboardTypeCount; i++)
     {
