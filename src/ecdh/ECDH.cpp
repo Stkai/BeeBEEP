@@ -712,13 +712,9 @@ void Keys::create()
 {
   m_sharedKey = QByteArray();
 
-  // TODO: improve random key generator
-  static qint64 min_ecdh_number_64 = 1000000000000000001u;
-  static qint64 max_ecdh_number_64 = 9223372036854775805u;
-
   memset( m_privateKey, 0, ECDH_PRIVATE_KEY_SIZE );
-  qint64 ecdh_number = Random::number64( min_ecdh_number_64, max_ecdh_number_64 );
-  *(qint64*)&m_privateKey = ecdh_number;
+  for( int i = 0; i < ECDH_PRIVATE_KEY_SIZE; i++ )
+    m_privateKey[ i ] = Random::number32( 0, 255 );
 
   QStringList sl_public_key;
   quint8 u_public_key[ ECDH_PUBLIC_KEY_SIZE ];

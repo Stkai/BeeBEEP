@@ -62,7 +62,7 @@
 #define ECDH_CURVE_NIST_K571 10
 
 /* Curve selected (must be the same for all BeeBEEP in your network) */
-#define ECDH_CURVE ECDH_CURVE_NIST_K283
+#define ECDH_CURVE ECDH_CURVE_NIST_K163
 
 #if defined(ECDH_CURVE) && (ECDH_CURVE != 0)
  #if   (ECDH_CURVE == ECDH_CURVE_NIST_K163) || (ECDH_CURVE == ECDH_CURVE_NIST_B163)
