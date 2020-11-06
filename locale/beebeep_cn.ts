@@ -119,7 +119,7 @@
     <message>
         <location filename="../src/core/Core.cpp" line="267"/>
         <source>%1 %2 accepts incoming connections only from the IP addresses present in the HOSTS file.</source>
-        <translation>%1`%2只允许来自HOSTS文件连接</translation>
+        <translation>%1 %2只允许连接HOSTS文件中的主机</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="276"/>
