@@ -2161,11 +2161,6 @@ Please select a different name.</source>
         <translation>显示表情面板</translation>
     </message>
     <message>
-<<<<<<< HEAD
-        <location filename="../src/desktop/GuiFloatingChat.cpp" line="152"/>
-        <source>Chat with all users</source>
-        <translation>群发消息</translation>
-=======
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="151"/>
         <source>All users</source>
         <translation>所有用户</translation>
@@ -2173,7 +2168,6 @@ Please select a different name.</source>
     <message>
         <source>Chat with all users</source>
         <translation type="vanished">群发消息</translation>
->>>>>>> git-svn
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="203"/>
@@ -2183,20 +2177,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="414"/>
         <source>Qt libraries have a bug on saving the window&apos;s state.</source>
-<<<<<<< HEAD
-        <translation>在windows上Qt库在保存窗口状态时存在问题</translation>
-=======
         <translation>在windows上Qt库在保存窗口状态时存在问题.</translation>
->>>>>>> git-svn
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="415"/>
         <source>If you have layout problem please save only geometry.</source>
-<<<<<<< HEAD
-        <translation>如果你有布局问题，请只保存窗口尺寸</translation>
-=======
         <translation>如果你有布局问题，请只保存窗口尺寸.</translation>
->>>>>>> git-svn
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="416"/>
