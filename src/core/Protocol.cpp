@@ -2281,8 +2281,10 @@ QByteArray Protocol::createCipherKey( const QByteArray& shared_key, int data_str
 #if QT_VERSION < 0x050000
   Q_UNUSED( data_stream_version )
   QCryptographicHash ch( QCryptographicHash::Sha1 );
-#else
+#elif QT_VERSION < 0x050902
   QCryptographicHash ch( data_stream_version < 13 ? QCryptographicHash::Sha1 : QCryptographicHash::Sha3_256 );
+#else
+  QCryptographicHash ch( data_stream_version < 13 ? QCryptographicHash::Sha1 : (data_stream_version < 19 ? QCryptographicHash::Sha3_256 : QCryptographicHash::Keccak_256) );
 #endif
   ch.addData( shared_key );
   return ch.result().toHex(); // must be in HEX
