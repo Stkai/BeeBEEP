@@ -149,7 +149,7 @@ public:
   inline VNumber newId();
   QString newMd5Id();
 
-  QString linkifyText( QString );
+  QString linkifyText( const QString& );
   QString formatHtmlText( const QString& );
 
   QString saveChatRecord( const ChatRecord& ) const;
