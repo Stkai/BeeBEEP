@@ -73,6 +73,8 @@ GuiGroupList::GuiGroupList( QWidget* parent )
 
   mp_pbClearFilter->setIcon( IconManager::instance().icon( "clear.png" ) );
 
+  setContextMenuPolicy( Qt::CustomContextMenu );
+  connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showGroupMenu( const QPoint& ) ) );
   connect( mp_twGroupList, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showGroupMenu( const QPoint& ) ) );
   connect( mp_twGroupList, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( checkItemClicked( QTreeWidgetItem*, int ) ), Qt::QueuedConnection );
   connect( mp_leFilter, SIGNAL( textChanged( const QString& ) ), this, SLOT( filterText( const QString& ) ) );

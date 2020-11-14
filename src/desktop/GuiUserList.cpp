@@ -57,6 +57,8 @@ GuiUserList::GuiUserList( QWidget* parent )
   mp_pbSettings->setIcon( IconManager::instance().icon( "settings.png" ) );
   mp_pbClearFilter->setIcon( IconManager::instance().icon( "clear.png" ) );
 
+  setContextMenuPolicy( Qt::CustomContextMenu );
+  connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showUserMenu( const QPoint& ) ) );
   connect( mp_twUsers, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showUserMenu( const QPoint& ) ) );
   connect( mp_twUsers, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( userItemClicked( QTreeWidgetItem*, int ) ), Qt::QueuedConnection );
   connect( mp_twUsers, SIGNAL( itemEntered( QTreeWidgetItem*, int ) ), this, SLOT( onItemEntered( QTreeWidgetItem*, int ) ) );

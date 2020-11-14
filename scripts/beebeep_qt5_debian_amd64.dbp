@@ -7,7 +7,7 @@ Section: comm
 Homepage: https://www.beebeep.net
 Architecture: amd64
 Priority: optional
-Depends: gstreamer1.0-plugins-base (>=1.0.0), libqt5multimedia5-plugins (>=5.0.0), libqt5multimedia5 (>=5.0.0), libqt5x11extras5 (>=5.0.0), libqt5printsupport5 (>=5.0.0), libqt5gui5 (>=5.0.0), libqt5network5 (>=5.0.0), libqt5widgets5 (>=5.0.0), libqt5core5a (>=5.0.0), libstdc++6, libc6, libxcb-screensaver0
+Depends: gstreamer1.0-plugins-base (>=1.0.0), libqt5multimedia5-plugins (>=5.0.0), libqt5multimedia5 (>=5.0.0), libqt5x11extras5 (>=5.0.0), libqt5printsupport5 (>=5.0.0), libqt5gui5 (>=5.0.0), libqt5network5 (>=5.0.0), libqt5widgets5 (>=5.0.0), libqt5core5a (>=5.0.0), libxcb-screensaver0, libstdc++6, libc6
 Description: Free office messenger
  This office messaging application, BeeBEEP,  does not need an external
  server to let users communicate with each other. In your office, in your
@@ -23,6 +23,7 @@ Description: Free office messenger
 /home/mastro/Sources/beebeep-code/test/librainbowtextmarker.so* -> librainbowtextmarker.so -> /usr/lib/beebeep
 /home/mastro/Sources/beebeep-code/test/libregularboldtextmarker.so* -> libregularboldtextmarker.so -> /usr/lib/beebeep
 /home/mastro/Sources/beebeep-code/misc/beep.wav -> beep.wav -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_ar.qm -> beebeep_ar.qm -> /usr/share/beebeep
 /home/mastro/Sources/beebeep-code/locale/beebeep_cn.qm -> beebeep_cn.qm -> /usr/share/beebeep
 /home/mastro/Sources/beebeep-code/locale/beebeep_cz.qm -> beebeep_cz.qm -> /usr/share/beebeep
 /home/mastro/Sources/beebeep-code/locale/beebeep_de.qm -> beebeep_de.qm -> /usr/share/beebeep
@@ -31,6 +32,7 @@ Description: Free office messenger
 /home/mastro/Sources/beebeep-code/locale/beebeep_fr.qm -> beebeep_fr.qm -> /usr/share/beebeep
 /home/mastro/Sources/beebeep-code/locale/beebeep_hu.qm -> beebeep_hu.qm -> /usr/share/beebeep
 /home/mastro/Sources/beebeep-code/locale/beebeep_it.qm -> beebeep_it.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_ja.qm -> beebeep_ja.qm -> /usr/share/beebeep
 /home/mastro/Sources/beebeep-code/locale/beebeep_nb.qm -> beebeep_nb.qm -> /usr/share/beebeep
 /home/mastro/Sources/beebeep-code/locale/beebeep_nl.qm -> beebeep_nl.qm -> /usr/share/beebeep
 /home/mastro/Sources/beebeep-code/locale/beebeep_pl.qm -> beebeep_pl.qm -> /usr/share/beebeep
@@ -69,16 +71,23 @@ rm -f "/usr/bin/beebeep"
 <<DEST>>DEFAULT<</DEST>>
 beebeep (5.8.4-1) bionic; urgency=low
 
- * Fixed known issue: BeeBEEP prevents the CTRL+ALT+B (or CMD+ALT+B on MacOSX) key sequence in other applications from working
- * Added "KeepModificationDateOnFileTransferred" option in beebeep.ini (it is always enabled in BeeBOX)
- * Almost all the options of file beebeep.ini can be used in file beebeep.rc also
+ * New feature: Almost all the options of file beebeep.ini can be used in file beebeep.rc also
+ * New feature: Added "Use high resolution emoticons" option
+ * New feature: added ECDH key exchange to encryption protocol
+ * File paths will be recognized and made clickable in chat (it must be a single message)
  * User icons in chat window can be clicked also if the user is offline
- * Fixed a bug in options "Disable create message" and "Disable edit groups"
  * Disabled by default the option to search users by a multicast datagram
- * Fixed a visualization bug if you open an user VCARD near the side of your desktop
- * Added "AllowedFileExtensionsInFileTransfer" option in beebeep.rc
- * Fixed a bug on Download folder when you copy BeeBEEP from a computer to another one
  * Suspend/sleep mode is now managed also in Linux systems.
+ * Added "KeepModificationDateOnFileTransferred" option in beebeep.ini (it is always enabled in BeeBOX)
+ * Added "AllowedFileExtensionsInFileTransfer" option in beebeep.rc
+ * Added "AllowOnlyHostAddressesFromHostsIni" option in file beebeep.rc
+ * Added "Clear recent emoticons" in menu option of the chat bar
+ * Added "ConnectionKeyExchangeMethod" option in beebeep.rc
+ * Fixed known issue: BeeBEEP prevents the CTRL+ALT+B (or CMD+ALT+B on MacOSX) key sequence in other applications from working
+ * Fixed a bug in options "Disable create message" and "Disable edit groups"
+ * Fixed a visualization bug if you open an user VCARD near the side of your desktop
+ * Fixed a bug on Download folder when you copy BeeBEEP from a computer to another one
+ * Fixed security issue with command line argument -platformpluginpath
 
  -- Marco Mastroddi <marco.mastroddi@gmail.com> 
 

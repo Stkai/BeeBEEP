@@ -9,6 +9,7 @@ BeeBEEP 5.8.3 (in development)
 - User icons in chat window can be clicked also if the user is offline
 - Disabled by default the option to search users by a multicast datagram
 - Suspend/sleep mode is now managed also in Linux systems.
+- File paths will be recognized and made clickable in chat (it must be a single message).
 - Added "KeepModificationDateOnFileTransferred" option in beebeep.ini (it is always enabled in BeeBOX)
 - Added "AllowedFileExtensionsInFileTransfer" option in beebeep.rc
 - Added "AllowOnlyHostAddressesFromHostsIni" option in file beebeep.rc
