@@ -35,6 +35,9 @@ GuiChatList::GuiChatList( QWidget* parent )
   setObjectName( "GuiChatList" );
   setupUi( this );
 
+  mp_menuContext = new QMenu( parent );
+  mp_menuSettings = new QMenu( parent );
+
   mp_twChatList->setColumnCount( 1 );
   mp_twChatList->setRootIsDecorated( false );
   mp_twChatList->setSortingEnabled( true );
@@ -51,11 +54,10 @@ GuiChatList::GuiChatList( QWidget* parent )
 #if QT_VERSION >= 0x040700
   mp_leFilter->setPlaceholderText( tr( "Search chat" ) );
 #endif
-
-  mp_menuContext = new QMenu( parent );
-  mp_menuSettings = new QMenu( parent );
   mp_pbClearFilter->setIcon( IconManager::instance().icon( "clear.png" ) );
 
+  setContextMenuPolicy( Qt::CustomContextMenu );
+  connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showChatMenu( const QPoint& ) ) );
   connect( mp_twChatList, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showChatMenu( const QPoint& ) ) );
   connect( mp_twChatList, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( chatClicked( QTreeWidgetItem*, int ) ), Qt::QueuedConnection );
   connect( mp_leFilter, SIGNAL( textChanged( const QString& ) ), this, SLOT( filterText( const QString& ) ) );
@@ -124,14 +126,14 @@ void GuiChatList::updateUser( const User& u )
 
 void GuiChatList::chatClicked( QTreeWidgetItem* item, int )
 {
-  if( !item )
-    return;
-
   if( m_blockShowChatRequest )
   {
     m_blockShowChatRequest = false;
     return;
   }
+
+  if( !item )
+    return;
 
   mp_twChatList->clearSelection();
   GuiChatItem* user_item = dynamic_cast<GuiChatItem*>( item );

@@ -34,6 +34,7 @@ GuiSavedChatList::GuiSavedChatList( QWidget* parent )
 {
   setObjectName( "GuiSavedChatList" );
   setupUi( this );
+  mp_menuContext = new QMenu( parent );
 
   mp_twSavedChatList->setColumnCount( 1 );
   mp_twSavedChatList->setRootIsDecorated( false );
@@ -51,11 +52,10 @@ GuiSavedChatList::GuiSavedChatList( QWidget* parent )
 #if QT_VERSION >= 0x040700
   mp_leFilter->setPlaceholderText( tr( "Search saved chat" ) );
 #endif
-
-  mp_menuContext = new QMenu( parent );
-
   mp_pbClearFilter->setIcon( IconManager::instance().icon( "clear.png" ) );
 
+  setContextMenuPolicy( Qt::CustomContextMenu );
+  connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showSavedChatMenu( const QPoint& ) ) );
   connect( mp_twSavedChatList, SIGNAL( customContextMenuRequested( const QPoint& ) ), this, SLOT( showSavedChatMenu( const QPoint& ) ) );
   connect( mp_twSavedChatList, SIGNAL( itemClicked( QTreeWidgetItem*, int ) ), this, SLOT( savedChatClicked( QTreeWidgetItem*, int ) ), Qt::QueuedConnection );
   connect( mp_leFilter, SIGNAL( textChanged( const QString& ) ), this, SLOT( filterText( const QString& ) ) );

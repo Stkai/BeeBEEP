@@ -2145,45 +2145,62 @@ ChatRecord Protocol::loadChatRecord( const QString& s ) const
 }
 
 
-QString Protocol::linkifyText( QString text )
+QString Protocol::linkifyText( const QString& text )
 {
+  // File and folder path must be a single message, url can be inside a message
+  QString simplified_text = text.simplified();
+  QString linkfied_text = text.simplified();
+
 #ifdef Q_OS_WIN
   // linkify windows network path
-  if( text.contains( "\\\\" ) )
+  if( simplified_text.contains( "\\\\" ) )
   {
-    int index_backslash = text.simplified().indexOf( "\\\\" );
+
+    int index_backslash = linkfied_text.indexOf( "\\\\" );
     QString pre_text = "";
     if( index_backslash > 0 )
     {
-      pre_text = text.section( "\\\\", 0, 0 );
+      pre_text = linkfied_text.section( "\\\\", 0, 0 );
       if( !pre_text.isEmpty() )
-        text.remove( 0, pre_text.size() );
+        linkfied_text.remove( 0, pre_text.size() );
     }
 
-    QUrl url_to_add = QUrl::fromLocalFile( text.simplified() );
+    QUrl url_to_add = QUrl::fromLocalFile( simplified_text );
 #if QT_VERSION >= 0x050000
-    text = QString( "<a href=\"%1\">%2</a>" ).arg( url_to_add.url() ).arg( text.simplified() );
+    linkfied_text = QString( "<a href=\"%1\">%2</a>" ).arg( url_to_add.url() ).arg( simplified_text );
 #else
-    text = QString( "<a href=\"%1\">%2</a>" ).arg( url_to_add.toString() ).arg( text.simplified() );
+    linkfied_text = QString( "<a href=\"%1\">%2</a>" ).arg( url_to_add.toString() ).arg( simplified_text );
 #endif
     if( !pre_text.isEmpty() )
-      text.prepend( pre_text );
+      linkfied_text.prepend( pre_text );
 
 #ifdef BEEBEEP_DEBUG
-    qDebug() << "Linkified text:" << qPrintable( text );
+    qDebug() << "Linkified windows network path:" << qPrintable( text );
 #endif
+    return linkfied_text;
   }
 #endif
 
-  if( !text.contains( QLatin1Char( '.' ) ) )
-    return text;
-  text.prepend( " " ); // for matching www.miosito.it
-  text.replace( QRegExp( "(((f|ht){1}tp(s:|:){1}//)[-a-zA-Z0-9@:%_\\+.,~#?!&//=\\(\\)]+)" ), "<a href=\"\\1\">\\1</a>" );
-  text.replace( QRegExp( "([\\s()[{}])(www.[-a-zA-Z0-9@:%_\\+.,~#?!&//=\\(\\)]+)" ), "\\1<a href=\"http://\\2\">\\2</a>" );
-  text.replace( QRegExp( "([_\\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\\.)+[a-z]{2,3})" ), "<a href=\"mailto:\\1\">\\1</a>" );
-  text.remove( 0, 1 ); // remove the space added
+  QUrl input_url = QUrl::fromUserInput( simplified_text );
+  if( input_url.isLocalFile() )
+  {
+#if QT_VERSION >= 0x050000
+    linkfied_text = QString( "<a href=\"%1\">%2</a>" ).arg( input_url.url() ).arg( simplified_text );
+#else
+    linkfied_text = QString( "<a href=\"%1\">%2</a>" ).arg( input_url.toString() ).arg( simplified_text );
+#endif
+    return linkfied_text;
+  }
 
-  return text;
+  if( !linkfied_text.contains( QLatin1Char( '.' ) ) )
+    return linkfied_text;
+  linkfied_text.prepend( " " ); // for matching www.miosito.it
+  linkfied_text.replace( QRegExp( "(((f|ht){1}tp(s:|:){1}//)[-a-zA-Z0-9@:%_\\+.,~#?!&//=\\(\\)]+)" ), "<a href=\"\\1\">\\1</a>" );
+  linkfied_text.replace( QRegExp( "([\\s()[{}])(www.[-a-zA-Z0-9@:%_\\+.,~#?!&//=\\(\\)]+)" ), "\\1<a href=\"http://\\2\">\\2</a>" );
+  linkfied_text.replace( QRegExp( "([_\\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\\.)+[a-z]{2,3})" ), "<a href=\"mailto:\\1\">\\1</a>" );
+  linkfied_text.remove( 0, 1 ); // remove the space added
+
+  return linkfied_text;
 }
 
 QString Protocol::formatHtmlText( const QString& text )
@@ -2281,10 +2298,8 @@ QByteArray Protocol::createCipherKey( const QByteArray& shared_key, int data_str
 #if QT_VERSION < 0x050000
   Q_UNUSED( data_stream_version )
   QCryptographicHash ch( QCryptographicHash::Sha1 );
-#elif QT_VERSION < 0x050902
-  QCryptographicHash ch( data_stream_version < 13 ? QCryptographicHash::Sha1 : QCryptographicHash::Sha3_256 );
 #else
-  QCryptographicHash ch( data_stream_version < 13 ? QCryptographicHash::Sha1 : (data_stream_version < 19 ? QCryptographicHash::Sha3_256 : QCryptographicHash::Keccak_256) );
+  QCryptographicHash ch( data_stream_version < 13 ? QCryptographicHash::Sha1 : QCryptographicHash::Sha3_256 );
 #endif
   ch.addData( shared_key );
   return ch.result().toHex(); // must be in HEX
