@@ -1545,56 +1545,56 @@ Download for free and install the version with this feature from the %1 website.
 <context>
     <name>GuiChatList</name>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="52"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="55"/>
         <source>Search chat</source>
         <translation>搜索聊天</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="192"/>
-        <location filename="../src/desktop/GuiChatList.cpp" line="277"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="194"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="279"/>
         <source>Hide empty chats</source>
         <translation>隐藏空的聊天</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="158"/>
-        <location filename="../src/desktop/GuiChatList.cpp" line="270"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="160"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="272"/>
         <source>Write a message</source>
         <translation>新建消息</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="160"/>
-        <location filename="../src/desktop/GuiChatList.cpp" line="272"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="162"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="274"/>
         <source>Create new group chat</source>
         <translation>创建群聊</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="175"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="177"/>
         <source>Show</source>
         <translation>显示</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="178"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="180"/>
         <source>Clear</source>
         <translation>清除</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="179"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="181"/>
         <source>Clear all chat messages</source>
         <translation>清除所有聊天消息</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="184"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="186"/>
         <source>Edit</source>
         <translation>编辑</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="190"/>
-        <location filename="../src/desktop/GuiChatList.cpp" line="275"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="192"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="277"/>
         <source>Change background color</source>
         <translation>修改背景色</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="152"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="154"/>
         <source>Please wait for two or more users</source>
         <translation>请等待更多的用户加入</translation>
     </message>
@@ -2243,13 +2243,13 @@ Please select a different name.</source>
         <translation>关闭通知</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiGroupList.cpp" line="175"/>
+        <location filename="../src/desktop/GuiGroupList.cpp" line="177"/>
         <source>Please wait for two or more users</source>
         <translation>请等待两个或更多用户</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiGroupList.cpp" line="182"/>
-        <location filename="../src/desktop/GuiGroupList.cpp" line="206"/>
+        <location filename="../src/desktop/GuiGroupList.cpp" line="184"/>
+        <location filename="../src/desktop/GuiGroupList.cpp" line="208"/>
         <source>Change background color</source>
         <translation>修改背景颜色</translation>
     </message>
@@ -5277,7 +5277,7 @@ Please select a different name.</source>
 <context>
     <name>GuiSavedChatList</name>
     <message>
-        <location filename="../src/desktop/GuiSavedChatList.cpp" line="52"/>
+        <location filename="../src/desktop/GuiSavedChatList.cpp" line="53"/>
         <source>Search saved chat</source>
         <translation>搜索已保存的聊天</translation>
     </message>
@@ -6099,53 +6099,53 @@ Please select a different name.</source>
         <translation>搜索用户</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="434"/>
-        <location filename="../src/desktop/GuiUserList.cpp" line="441"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="436"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="443"/>
         <source>Change background color</source>
         <translation>修改背景颜色</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="543"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="545"/>
         <source>You cannot send files to the workgroup &apos;%1&apos;.</source>
         <translation>您不能将文件发送到群聊&quot;%1&quot;。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="551"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="553"/>
         <source>You cannot send files to %1 because the user is offline.</source>
         <translation>不能将文件发送给 %1，该用户已离线。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="586"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="588"/>
         <source>You are trying to send %1 files simultaneously but the maximum allowed is %2.</source>
         <translation>您正在尝试同时发送 %1 个文件，最大允许 %2个。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="587"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="589"/>
         <source>Ok</source>
         <translation>确定</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="595"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="597"/>
         <source>Do you want to send %1 %2 to %3?</source>
         <translation>确定发送 %1 %2 给 %3？</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="596"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="598"/>
         <source>file</source>
         <translation>文件</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="596"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="598"/>
         <source>files</source>
         <translation>文件</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="597"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="599"/>
         <source>Yes</source>
         <translation>确定</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="597"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="599"/>
         <source>No</source>
         <translation>取消</translation>
     </message>
