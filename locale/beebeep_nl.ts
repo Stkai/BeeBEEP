@@ -127,7 +127,7 @@
     <message>
         <location filename="../src/core/Core.cpp" line="267"/>
         <source>%1 %2 accepts incoming connections only from the IP addresses present in the HOSTS file.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 accepteerd alleen verbindingen van ip adressen die voorkomen in het HOSTS bestand.</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="276"/>
@@ -836,20 +836,21 @@
         <translation type="vanished">meer dan 1 dag</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="50"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="51"/>
         <source>yyyy-MM-dd</source>
-        <extracomment>default date format in chat message</extracomment>
+        <extracomment>Date format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="57"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="61"/>
         <source>h:mm:ss ap</source>
+        <extracomment>Time format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="60"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="66"/>
         <source>hh:mm:ss</source>
-        <extracomment>default time format in chat message</extracomment>
+        <extracomment>Time format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
         <translation></translation>
     </message>
 </context>
@@ -2216,7 +2217,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="151"/>
         <source>All users</source>
-        <translation type="unfinished">Alle gebruikers</translation>
+        <translation>Alle gebruikers</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="202"/>
@@ -2920,7 +2921,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="881"/>
         <source>Reset minimum width for applied style</source>
-        <translation type="unfinished"></translation>
+        <translation>Reset minimumbreedte voor toegepaste stijl</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1026"/>
@@ -2930,7 +2931,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1078"/>
         <source>Use high resolution emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik emoticons met hoge resolutie</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1169"/>
@@ -3036,7 +3037,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3901"/>
         <source>Clear recent emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>Wis recente emoticons</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3904"/>
@@ -6328,77 +6329,83 @@ Gebruik aub een andere naam.</translation>
         <translation>van %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="90"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="91"/>
         <source>Birthday: %1</source>
+        <extracomment>This date format refers to a birthday. Date format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
         <translation>Verjaardag: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="92"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="91"/>
         <source>d MMMM yyyy</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="94"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="91"/>
+        <source>d MMMM</source>
+        <translation>d MMMM</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiVCard.cpp" line="93"/>
         <source>Happy Birthday</source>
         <translation>Een gelukkige verjaardag</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="125"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="124"/>
         <source>none</source>
         <translation>Geen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="128"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="127"/>
         <source>Workgroups</source>
         <translation>Werkgroepen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="133"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="132"/>
         <source>No shared information.</source>
         <translation>Geen gedeelde informatie.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="139"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="138"/>
         <source>old %1</source>
         <translation>oud %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="141"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="140"/>
         <source>new %1</source>
         <translation>nieuw %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="150"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="149"/>
         <source>BeeBEEP version</source>
         <translation>Beebeep versie</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="181"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="180"/>
         <source>Remove from favorites</source>
         <translation>Uit favorieten verwijderen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="186"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="185"/>
         <source>Add to favorites</source>
         <translation>Toegevoegd aan favorieten</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="203"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="202"/>
         <source>You cannot remove an user who is connected</source>
         <translation>Je kan geen gebruiker verwijderen als hij online is</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="208"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="207"/>
         <source>You cannot remove an user who is in group chat</source>
         <translation>Je kan geen gebruiker verwijderen als hij in een groepschat zit</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="213"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="212"/>
         <source>Remove this user</source>
         <translation>Verwijder deze gebruiker</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="169"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="168"/>
         <source>Open chat</source>
         <translation>Chat openen</translation>
     </message>
@@ -6759,7 +6766,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="1045"/>
         <source>n.a.</source>
-        <translation type="unfinished"></translation>
+        <translation>n.a.</translation>
     </message>
 </context>
 <context>
@@ -6807,12 +6814,12 @@ Gebruik aub een andere naam.</translation>
         <translation>Niet verstuurd bericht</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="86"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="93"/>
         <source>You</source>
         <translation>U</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="86"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="93"/>
         <source>Unknown</source>
         <translation>Onbekend</translation>
     </message>

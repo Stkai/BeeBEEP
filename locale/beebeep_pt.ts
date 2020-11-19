@@ -812,20 +812,21 @@
 <context>
     <name>Date</name>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="50"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="51"/>
         <source>yyyy-MM-dd</source>
-        <extracomment>default date format in chat message</extracomment>
+        <extracomment>Date format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="57"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="61"/>
         <source>h:mm:ss ap</source>
+        <extracomment>Time format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="60"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="66"/>
         <source>hh:mm:ss</source>
-        <extracomment>default time format in chat message</extracomment>
+        <extracomment>Time format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6251,77 +6252,83 @@ Selecione um nome diferente.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="90"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="91"/>
         <source>Birthday: %1</source>
+        <extracomment>This date format refers to a birthday. Date format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
         <translation>Aniversário de %1 Parabéns</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="92"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="91"/>
         <source>d MMMM yyyy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="94"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="91"/>
+        <source>d MMMM</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiVCard.cpp" line="93"/>
         <source>Happy Birthday</source>
         <translation>Feliz Aniversário</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="125"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="124"/>
         <source>none</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="128"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="127"/>
         <source>Workgroups</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="133"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="132"/>
         <source>No shared information.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="139"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="138"/>
         <source>old %1</source>
         <translation>idade %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="141"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="140"/>
         <source>new %1</source>
         <translation>novo %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="150"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="149"/>
         <source>BeeBEEP version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="181"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="180"/>
         <source>Remove from favorites</source>
         <translation>Remover de Favoritos</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="186"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="185"/>
         <source>Add to favorites</source>
         <translation>Adicionar a favoritos</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="203"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="202"/>
         <source>You cannot remove an user who is connected</source>
         <translation>Você não pode remover um usuário que está conectado</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="208"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="207"/>
         <source>You cannot remove an user who is in group chat</source>
         <translation>Você não pode remover um usuário que está no bate-papo em grupo</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="213"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="212"/>
         <source>Remove this user</source>
         <translation>Remover este usuário</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="169"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="168"/>
         <source>Open chat</source>
         <translation>Abrir Chat</translation>
     </message>
@@ -6726,12 +6733,12 @@ Selecione um nome diferente.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="86"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="93"/>
         <source>You</source>
         <translation>Você</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="86"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="93"/>
         <source>Unknown</source>
         <translation>Desconhecido</translation>
     </message>

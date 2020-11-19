@@ -726,16 +726,17 @@
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <extracomment>default date format in chat message</extracomment>
+        <extracomment>Date format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
         <translation>yyyy-MM-dd</translation>
     </message>
     <message>
         <source>h:mm:ss ap</source>
+        <extracomment>Time format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
         <translation>h:mm:ss ap</translation>
     </message>
     <message>
         <source>hh:mm:ss</source>
-        <extracomment>default time format in chat message</extracomment>
+        <extracomment>Time format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
         <translation>hh:mm:ss</translation>
     </message>
 </context>
@@ -5315,6 +5316,7 @@ Inserisci un nome differente.</translation>
     <name>GuiVCard</name>
     <message>
         <source>Birthday: %1</source>
+        <extracomment>This date format refers to a birthday. Date format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
         <translation>Data di nascita: %1</translation>
     </message>
     <message>
@@ -5388,6 +5390,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>d MMMM yyyy</source>
         <translation>d MMMM yyyy</translation>
+    </message>
+    <message>
+        <source>d MMMM</source>
+        <translation>d MMMM</translation>
     </message>
 </context>
 <context>
