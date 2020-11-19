@@ -659,16 +659,17 @@
     </message>
     <message>
         <source>yyyy-MM-dd</source>
-        <extracomment>default date format in chat message</extracomment>
+        <extracomment>Date format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>h:mm:ss ap</source>
+        <extracomment>Time format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>hh:mm:ss</source>
-        <extracomment>default time format in chat message</extracomment>
+        <extracomment>Time format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4994,6 +4995,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Birthday: %1</source>
+        <extracomment>This date format refers to a birthday. Date format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
         <translation>День нарождення: %1</translation>
     </message>
     <message>
@@ -5018,6 +5020,10 @@ Please select a different name.</source>
     </message>
     <message>
         <source>d MMMM yyyy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>d MMMM</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

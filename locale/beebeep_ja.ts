@@ -769,20 +769,21 @@
 <context>
     <name>Date</name>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="50"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="51"/>
         <source>yyyy-MM-dd</source>
-        <extracomment>default date format in chat message</extracomment>
+        <extracomment>Date format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
         <translation>yyyy年MM月dd日</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="57"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="61"/>
         <source>h:mm:ss ap</source>
+        <extracomment>Time format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="60"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="66"/>
         <source>hh:mm:ss</source>
-        <extracomment>default time format in chat message</extracomment>
+        <extracomment>Time format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
         <translation></translation>
     </message>
 </context>
@@ -5957,77 +5958,83 @@ Please select a different name.</source>
         <translation>(PCアカウント %1)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="90"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="91"/>
         <source>Birthday: %1</source>
+        <extracomment>This date format refers to a birthday. Date format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
         <translation>誕生日: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="92"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="91"/>
         <source>d MMMM yyyy</source>
         <translation>yyyy年MMMM月d日</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="94"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="91"/>
+        <source>d MMMM</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiVCard.cpp" line="93"/>
         <source>Happy Birthday</source>
         <translation>お誕生日おめでとうございます</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="125"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="124"/>
         <source>none</source>
         <translation>なし</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="128"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="127"/>
         <source>Workgroups</source>
         <translation>作業グループ</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="133"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="132"/>
         <source>No shared information.</source>
         <translation>追加情報は設定されていません。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="139"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="138"/>
         <source>old %1</source>
         <translation>旧 %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="141"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="140"/>
         <source>new %1</source>
         <translation>新 %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="150"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="149"/>
         <source>BeeBEEP version</source>
         <translation>BeeBEEP バージョン</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="181"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="180"/>
         <source>Remove from favorites</source>
         <translation>お気に入りから削除</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="186"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="185"/>
         <source>Add to favorites</source>
         <translation>お気に入りに追加</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="203"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="202"/>
         <source>You cannot remove an user who is connected</source>
         <translation>接続中のユーザーは削除できません</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="208"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="207"/>
         <source>You cannot remove an user who is in group chat</source>
         <translation>グループチャットに参加しているユーザーは削除できません</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="213"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="212"/>
         <source>Remove this user</source>
         <translation>このユーザーを削除</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="169"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="168"/>
         <source>Open chat</source>
         <translation>チャットを開く</translation>
     </message>
@@ -6379,12 +6386,12 @@ Please select a different name.</source>
         <translation>個の未送信メッセージ</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="86"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="93"/>
         <source>You</source>
         <translation>あなた</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="86"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="93"/>
         <source>Unknown</source>
         <translation>名前不明</translation>
     </message>

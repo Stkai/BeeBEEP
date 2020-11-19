@@ -768,20 +768,21 @@
 <context>
     <name>Date</name>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="50"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="51"/>
         <source>yyyy-MM-dd</source>
-        <extracomment>default date format in chat message</extracomment>
+        <extracomment>Date format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
         <translation>yyyy-MM-dd</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="57"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="61"/>
         <source>h:mm:ss ap</source>
+        <extracomment>Time format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
         <translation>h:mm:ss ap</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="60"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="66"/>
         <source>hh:mm:ss</source>
-        <extracomment>default time format in chat message</extracomment>
+        <extracomment>Time format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
         <translation>hh:mm:ss</translation>
     </message>
 </context>
@@ -2092,7 +2093,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="151"/>
         <source>All users</source>
-        <translation type="unfinished">Всички потребители</translation>
+        <translation>Всички потребители</translation>
     </message>
     <message>
         <source>Chat with all users</source>
@@ -5931,77 +5932,83 @@ Please select a different name.</source>
         <translation>от %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="90"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="91"/>
         <source>Birthday: %1</source>
+        <extracomment>This date format refers to a birthday. Date format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
         <translation>Рожден ден: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="92"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="91"/>
         <source>d MMMM yyyy</source>
         <translation>d MMMM yyyy</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="94"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="91"/>
+        <source>d MMMM</source>
+        <translation>d MMMM</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiVCard.cpp" line="93"/>
         <source>Happy Birthday</source>
         <translation>Честит рожден ден</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="125"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="124"/>
         <source>none</source>
         <translation>нито един</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="128"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="127"/>
         <source>Workgroups</source>
         <translation>Работни групи</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="133"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="132"/>
         <source>No shared information.</source>
         <translation>Няма споделена информация.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="139"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="138"/>
         <source>old %1</source>
         <translation>стар %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="141"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="140"/>
         <source>new %1</source>
         <translation>нов %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="150"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="149"/>
         <source>BeeBEEP version</source>
         <translation>BeeBEEP версия</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="181"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="180"/>
         <source>Remove from favorites</source>
         <translation>Премахване от любими</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="186"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="185"/>
         <source>Add to favorites</source>
         <translation>Добави към любими</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="203"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="202"/>
         <source>You cannot remove an user who is connected</source>
         <translation>Не можете да премахнете потребител, който е свързан</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="208"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="207"/>
         <source>You cannot remove an user who is in group chat</source>
         <translation>Не можете да премахнете потребител, който е в групов чат</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="213"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="212"/>
         <source>Remove this user</source>
         <translation>Премахнете този потребител</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiVCard.cpp" line="169"/>
+        <location filename="../src/desktop/GuiVCard.cpp" line="168"/>
         <source>Open chat</source>
         <translation>Отворете чата</translation>
     </message>
@@ -6312,7 +6319,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="1045"/>
         <source>n.a.</source>
-        <translation type="unfinished"></translation>
+        <translation>n.a.</translation>
     </message>
 </context>
 <context>
@@ -6352,12 +6359,12 @@ Please select a different name.</source>
         <translation>неизпратени съобщения</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="86"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="93"/>
         <source>You</source>
         <translation>Вие</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="86"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="93"/>
         <source>Unknown</source>
         <translation>Неизвестен</translation>
     </message>

@@ -87,9 +87,8 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
 
   if( u.vCard().birthday().isValid() )
   {
-    QString s_birth_day = tr( "Birthday: %1" ).arg( u.vCard().birthday().year() == 1900 ? u.vCard().birthday().toString( "d MMMM" )
-                            //: This date format refers to a birthday.
-                            : u.vCard().birthday().toString( tr("d MMMM yyyy" ) ) );
+//: This date format refers to a birthday. Date format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString
+    QString s_birth_day = tr( "Birthday: %1" ).arg( u.vCard().birthday().year() == 1900 ? u.vCard().birthday().toString( tr( "d MMMM" ) ) : u.vCard().birthday().toString( tr("d MMMM yyyy" ) ) );
     if( u.isBirthDay() )
       s_birth_day += QString( " - <font color=red><b>%1!!!</b></font>" ).arg( tr( "Happy Birthday" ) );
     mp_lBirthday->setText( s_birth_day );
