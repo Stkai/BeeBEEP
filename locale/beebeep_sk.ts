@@ -1570,56 +1570,56 @@ Stiahnite si zadarmo novú verziu z webstránky %1.</translation>
 <context>
     <name>GuiChatList</name>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="52"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="55"/>
         <source>Search chat</source>
         <translation>Hľadať rozhovor</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="192"/>
-        <location filename="../src/desktop/GuiChatList.cpp" line="277"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="194"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="279"/>
         <source>Hide empty chats</source>
         <translation>Skryť prázdne rozhovory</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="158"/>
-        <location filename="../src/desktop/GuiChatList.cpp" line="270"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="160"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="272"/>
         <source>Write a message</source>
         <translation>Napísať správu</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="160"/>
-        <location filename="../src/desktop/GuiChatList.cpp" line="272"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="162"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="274"/>
         <source>Create new group chat</source>
         <translation>Vytvoriť nový skupinový rozhovor</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="175"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="177"/>
         <source>Show</source>
         <translation>Zobraziť</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="178"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="180"/>
         <source>Clear</source>
         <translation>Vyčistiť</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="179"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="181"/>
         <source>Clear all chat messages</source>
         <translation>Vyčistiť všetky správy</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="184"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="186"/>
         <source>Edit</source>
         <translation>Upraviť</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="190"/>
-        <location filename="../src/desktop/GuiChatList.cpp" line="275"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="192"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="277"/>
         <source>Change background color</source>
         <translation>Zmeniť farbu pozadia</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="152"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="154"/>
         <source>Please wait for two or more users</source>
         <translation>Počkejte prosím na dva nebo více uživatelů</translation>
     </message>
@@ -2285,13 +2285,13 @@ Vyberte prosím iné meno.</translation>
         <translation>Zakázať oznámenia</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiGroupList.cpp" line="175"/>
+        <location filename="../src/desktop/GuiGroupList.cpp" line="177"/>
         <source>Please wait for two or more users</source>
         <translation>Počkajte prosím na dvoch alebo viac. používateľov</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiGroupList.cpp" line="182"/>
-        <location filename="../src/desktop/GuiGroupList.cpp" line="206"/>
+        <location filename="../src/desktop/GuiGroupList.cpp" line="184"/>
+        <location filename="../src/desktop/GuiGroupList.cpp" line="208"/>
         <source>Change background color</source>
         <translation>Zmeniť farbu pozadia</translation>
     </message>
@@ -5357,7 +5357,7 @@ Vyberte prosím iné meno.</translation>
 <context>
     <name>GuiSavedChatList</name>
     <message>
-        <location filename="../src/desktop/GuiSavedChatList.cpp" line="52"/>
+        <location filename="../src/desktop/GuiSavedChatList.cpp" line="53"/>
         <source>Search saved chat</source>
         <translation>Hľadať uložený rozhovor</translation>
     </message>
@@ -6195,53 +6195,53 @@ Vyberte prosím iné meno.</translation>
         <translation>Hľadať používateľa</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="434"/>
-        <location filename="../src/desktop/GuiUserList.cpp" line="441"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="436"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="443"/>
         <source>Change background color</source>
         <translation>Zmeniť farbu pozadia</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="543"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="545"/>
         <source>You cannot send files to the workgroup &apos;%1&apos;.</source>
         <translation>Nemôžete poslať súbory pracovnej skupine %1 .</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="551"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="553"/>
         <source>You cannot send files to %1 because the user is offline.</source>
         <translation>Nemôžete poslať súbory používateľovi %1 pretože je offline (nedostupný).</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="586"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="588"/>
         <source>You are trying to send %1 files simultaneously but the maximum allowed is %2.</source>
         <translation>Chcete poslať naraz %1 súbory/súborov, maximálny povolený počet je %2.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="587"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="589"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="595"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="597"/>
         <source>Do you want to send %1 %2 to %3?</source>
         <translation>Chcete poslať %1 %2 používateľovi %3?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="596"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="598"/>
         <source>file</source>
         <translation>súbor</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="596"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="598"/>
         <source>files</source>
         <translation>súbory</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="597"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="599"/>
         <source>Yes</source>
         <translation>Áno</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="597"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="599"/>
         <source>No</source>
         <translation>Nie</translation>
     </message>

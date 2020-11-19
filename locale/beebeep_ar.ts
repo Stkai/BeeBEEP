@@ -1552,56 +1552,56 @@ Download for free and install the version with this feature from the %1 website.
 <context>
     <name>GuiChatList</name>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="52"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="55"/>
         <source>Search chat</source>
         <translation>بحث الدردشة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="192"/>
-        <location filename="../src/desktop/GuiChatList.cpp" line="277"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="194"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="279"/>
         <source>Hide empty chats</source>
         <translation>إخفاء الدردشات الفارغة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="158"/>
-        <location filename="../src/desktop/GuiChatList.cpp" line="270"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="160"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="272"/>
         <source>Write a message</source>
         <translation>اكتب رسالة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="160"/>
-        <location filename="../src/desktop/GuiChatList.cpp" line="272"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="162"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="274"/>
         <source>Create new group chat</source>
         <translation>إنشاء دردشة جماعية جديدة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="175"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="177"/>
         <source>Show</source>
         <translation>إظهار</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="178"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="180"/>
         <source>Clear</source>
         <translation>مسح</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="179"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="181"/>
         <source>Clear all chat messages</source>
         <translation>مسح جميع رسائل الدردشة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="184"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="186"/>
         <source>Edit</source>
         <translation>تحرير</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="190"/>
-        <location filename="../src/desktop/GuiChatList.cpp" line="275"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="192"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="277"/>
         <source>Change background color</source>
         <translation>تغيير لون الخلفية</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="152"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="154"/>
         <source>Please wait for two or more users</source>
         <translation>يرجى الانتظار لاثنين أو أكثر من المستخدمين</translation>
     </message>
@@ -2247,13 +2247,13 @@ Please select a different name.</source>
         <translation>أوقف التنبيهات</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiGroupList.cpp" line="175"/>
+        <location filename="../src/desktop/GuiGroupList.cpp" line="177"/>
         <source>Please wait for two or more users</source>
         <translation>يرجى الانتظار لاثنين أو أكثر من المستخدمين</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiGroupList.cpp" line="182"/>
-        <location filename="../src/desktop/GuiGroupList.cpp" line="206"/>
+        <location filename="../src/desktop/GuiGroupList.cpp" line="184"/>
+        <location filename="../src/desktop/GuiGroupList.cpp" line="208"/>
         <source>Change background color</source>
         <translation>تغيير لون الخلفية</translation>
     </message>
@@ -5213,7 +5213,7 @@ Please select a different name.</source>
 <context>
     <name>GuiSavedChatList</name>
     <message>
-        <location filename="../src/desktop/GuiSavedChatList.cpp" line="52"/>
+        <location filename="../src/desktop/GuiSavedChatList.cpp" line="53"/>
         <source>Search saved chat</source>
         <translation>بحث في الدردشات المحفوظة</translation>
     </message>
@@ -6023,53 +6023,53 @@ Please select a different name.</source>
         <translation>بحث مستخدم</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="434"/>
-        <location filename="../src/desktop/GuiUserList.cpp" line="441"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="436"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="443"/>
         <source>Change background color</source>
         <translation>تغيير لون الخلفية</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="543"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="545"/>
         <source>You cannot send files to the workgroup &apos;%1&apos;.</source>
         <translation>أنت غير قادر على إرسال ملفات إلى مجموعة العمل &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="551"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="553"/>
         <source>You cannot send files to %1 because the user is offline.</source>
         <translation>أنت غي قادر على إرسال الملفات إلى %1 بسبب المستخدم غير متصل.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="586"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="588"/>
         <source>You are trying to send %1 files simultaneously but the maximum allowed is %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="587"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="589"/>
         <source>Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="595"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="597"/>
         <source>Do you want to send %1 %2 to %3?</source>
         <translation>هل تريد إرسال %1 %2 إلى %3?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="596"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="598"/>
         <source>file</source>
         <translation>ملف</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="596"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="598"/>
         <source>files</source>
         <translation>ملفات</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="597"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="599"/>
         <source>Yes</source>
         <translation>نعم</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="597"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="599"/>
         <source>No</source>
         <translation>لا</translation>
     </message>
