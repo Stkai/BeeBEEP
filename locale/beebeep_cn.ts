@@ -777,7 +777,7 @@
         <location filename="../src/desktop/GuiChatMessage.cpp" line="61"/>
         <source>h:mm:ss ap</source>
         <extracomment>Time format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
-        <translation>h:mm:ss ap</translation>
+        <translation>ap h:mm:ss</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="66"/>
@@ -5929,24 +5929,17 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="91"/>
         <source>Birthday: %1</source>
-<<<<<<< ours
         <translation>生日:%1</translation>
-||||||| ancestor
-        <translation>生日：%1</translation>
-=======
-        <extracomment>This date format refers to a birthday. Date format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
-        <translation>生日：%1</translation>
->>>>>>> theirs
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="91"/>
         <source>d MMMM yyyy</source>
-        <translation>d MMMM yyyy</translation>
+        <translation>yyyy-MM-dd</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="91"/>
         <source>d MMMM</source>
-        <translation type="unfinished"></translation>
+        <translation>MMM d</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="93"/>
