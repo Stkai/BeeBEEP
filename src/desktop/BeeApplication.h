@@ -62,6 +62,7 @@ public:
   inline QFileSystemWatcher* fsWatcher() const;
   void clearPathsInFsWatcher();
   void setSettingsFilePath( const QString& );
+  inline void setCheckSettingsFilePath( bool );
 
 #ifdef Q_OS_WIN
   bool winEventFilter( MSG*, long* );
@@ -141,6 +142,7 @@ private:
 
   QFileSystemWatcher* mp_fsWatcher;
   QString m_settingsFilePath;
+  bool m_checkSettingsFilePath;
 
   QObject* mp_sleepWatcher;
 
@@ -152,5 +154,6 @@ private:
 inline int BeeApplication::idleTimeout() const { return m_idleTimeout; }
 inline bool BeeApplication::isInSleepMode() const { return m_isInSleepMode; }
 inline QFileSystemWatcher* BeeApplication::fsWatcher() const { return mp_fsWatcher; }
+inline void BeeApplication::setCheckSettingsFilePath( bool new_value ) { m_checkSettingsFilePath = new_value; }
 
 #endif // BEEBEEP_APPLICATION_H

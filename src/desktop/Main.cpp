@@ -177,7 +177,6 @@ int main( int argc, char *argv[] )
   }
 
   /* Init Network Manager */
-  (void)NetworkManager::instance();
   NetworkManager::instance().searchLocalHostAddress();
   Settings::instance().setLocalUserHost( NetworkManager::instance().localHostAddress(), Settings::instance().localUser().networkAddress().hostPort() );
 
@@ -195,7 +194,7 @@ int main( int argc, char *argv[] )
   (void)UserManager::instance();
 
   /* Init Message Manager */
-  (void)MessageManager::instance();
+  MessageManager::instance().loadSavedMessagesAuthCode();
 
   /* Init Chat Manager */
   (void)ChatManager::instance();

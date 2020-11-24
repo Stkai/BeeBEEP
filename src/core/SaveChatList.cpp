@@ -55,14 +55,30 @@ bool SaveChatList::canBeSaved()
 bool SaveChatList::save()
 {
   QString file_name = Settings::instance().savedChatsFilePath();
+  bool saved = saveToFile( file_name );
+  emit operationCompleted();
+  return saved;
+}
 
+bool SaveChatList::autoSave()
+{
+  QString file_name = Settings::instance().autoSavedChatsFilePath();
+  bool saved = saveToFile( file_name );
+  emit operationCompleted();
+  return saved;
+}
+
+bool SaveChatList::saveToFile( const QString& file_name )
+{
   QFile file( file_name );
-  if( !Settings::instance().chatAutoSave() )
+
+  if( !Settings::instance().enableSaveData() || !Settings::instance().chatAutoSave() )
   {
     if( file.exists() )
     {
-      qDebug() << "Saved chat file removed:" << qPrintable( file_name );
-      file.remove();
+      qDebug() << "Chat messages are not saved because you have disabled this option";
+      if( file.remove() )
+        qDebug() << "Saved chat file removed:" << qPrintable( file_name );
     }
     return false;
   }
@@ -78,7 +94,7 @@ bool SaveChatList::save()
   QDataStream stream( &file );
   stream.setVersion( Settings::instance().dataStreamVersion( false ) );
 
-  QString auth_code = MessageManager::instance().saveMessagesAuthCode();
+  QString auth_code = MessageManager::instance().savedMessagesAuthCode();
 
   QStringList file_header;
   file_header << Settings::instance().programName();

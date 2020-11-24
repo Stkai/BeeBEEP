@@ -36,10 +36,15 @@ public:
 
   static bool canBeSaved();
 
+signals:
+  void operationCompleted();
+
 public slots:
   bool save();
+  bool autoSave();
 
 protected:
+  bool saveToFile( const QString& );
   bool saveChats( QDataStream* );
 
 };

@@ -229,13 +229,13 @@ protected slots:
 #endif
   /* CoreChat */
   void addListToSavedChats();
+  void autoSaveChatMessages();
+  void autoSaveChatMessagesCompleted();
 
 protected:
   void createLocalShareMessage();
-  bool saveChatMessages();
   void showMessage( const QString&, int ms_to_show );
   int sendMessageToAllConnectedUsers( const Message& );
-  bool saveUnsentMessages();
 
   /* CoreConnection */
   Connection* connection( VNumber ) const;

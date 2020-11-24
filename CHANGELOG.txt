@@ -3,9 +3,10 @@ For more informations please visit https://www.beebeep.net
 
 
 BeeBEEP 5.8.3 (in development)
-- New feature: Almost all the options of file beebeep.ini can be used in file beebeep.rc also
-- New feature: Added "Use high resolution emoticons" option
+- New feature: almost all the options of file beebeep.ini can be used in file beebeep.rc also
+- New feature: added "Use high resolution emoticons" option
 - New feature: added ECDH key exchange to encryption protocol
+- New feature: added "Auto save interval" for chat messages to prevent data loss
 - User icons in chat window can be clicked also if the user is offline
 - Disabled by default the option to search users by a multicast datagram
 - Suspend/sleep mode is now managed also in Linux systems.

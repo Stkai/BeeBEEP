@@ -197,6 +197,7 @@ ShowChatMessageOnTray=[true/false] (default=false) [3.0.5]
 TextSizeInChatMessagePreviewOnTray=[integer] (default=40) [3.0.5]
 ChatSaveDirectory=.
 ChatAutoSave=true
+TickIntervalChatAutoSave=[integer] time in seconds (default=61) [5.8.3]
 ChatMaxLineSaved=3000
 ChatSaveUnsentMessages=true (default=true) [5.6.3]
 ChatSaveFileTransfers=true (default=true) [5.6.5]

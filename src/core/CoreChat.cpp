@@ -33,6 +33,7 @@
 #include "Protocol.h"
 #include "PluginManager.h"
 #include "Random.h"
+#include "SaveChatList.h"
 #include "Settings.h"
 #include "UserManager.h"
 
@@ -635,7 +636,7 @@ void Core::addListToSavedChats()
   if( bscl->savedChats().size() > 0 )
   {
     // it must be > and not >= to bypass Qt4 and Qt5 problem of different SHA1 code generated (fixed in the SAVE_MESSAGE_AUTH_CODE_PROTO_VERSION+1 version)
-    if( bscl->protocolVersion() > SAVE_MESSAGE_AUTH_CODE_PROTO_VERSION && Settings::instance().saveMessagesTimestamp().isValid() && bscl->savedChatsAuthCode() != MessageManager::instance().saveMessagesAuthCode() )
+    if( bscl->protocolVersion() > SAVE_MESSAGE_AUTH_CODE_PROTO_VERSION && Settings::instance().saveMessagesTimestamp().isValid() && bscl->savedChatsAuthCode() != MessageManager::instance().savedMessagesAuthCode() )
     {
       qWarning() << "Incorrect autorization code found in saved chats file";
       dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2" )
@@ -650,7 +651,7 @@ void Core::addListToSavedChats()
 
   if( bscl->unsentMessages().size() > 0 )
   {
-    if( bscl->protocolVersion() > SAVE_MESSAGE_AUTH_CODE_PROTO_VERSION && Settings::instance().saveMessagesTimestamp().isValid() && bscl->unsentMessagesAuthCode() != MessageManager::instance().saveMessagesAuthCode() )
+    if( bscl->protocolVersion() > SAVE_MESSAGE_AUTH_CODE_PROTO_VERSION && Settings::instance().saveMessagesTimestamp().isValid() && bscl->unsentMessagesAuthCode() != MessageManager::instance().savedMessagesAuthCode() )
     {
       qWarning() << "Incorrect autorization code found in offline messages file";
       dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER, QString( "%1 %2" )
@@ -984,4 +985,26 @@ void Core::linkSavedChat( const QString& from_saved_chat_name, const QString& to
   c = ChatManager::instance().findChatByName( to_saved_chat_name );
   if( c.isValid() )
     emit chatChanged( c );
+}
+
+void Core::autoSaveChatMessages()
+{
+  SaveChatList *scl = new SaveChatList;
+  connect( scl, SIGNAL( operationCompleted() ), this, SLOT( autoSaveChatMessagesCompleted() ) );
+  if( beeApp )
+    beeApp->addJob( scl );
+  QMetaObject::invokeMethod( scl, "autoSave", Qt::QueuedConnection );
+}
+
+void Core::autoSaveChatMessagesCompleted()
+{
+  SaveChatList *scl = qobject_cast<SaveChatList*>( sender() );
+  if( !scl )
+  {
+    qWarning() << "Core received a signal from invalid SaveChatList instance";
+    return;
+  }
+  if( beeApp )
+    beeApp->removeJob( scl );
+  scl->deleteLater();
 }

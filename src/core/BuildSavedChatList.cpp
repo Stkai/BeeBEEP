@@ -68,7 +68,7 @@ QString BuildSavedChatList::checkAuthCodeFromFileHeader( const QStringList& file
   else
   {
     qDebug() << "Old protocol found in file header of file" << qPrintable( file_name );
-    auth_code = MessageManager::instance().saveMessagesAuthCode();
+    auth_code = MessageManager::instance().savedMessagesAuthCode();
   }
   if( proto_version > m_protocolVersion )
     m_protocolVersion = proto_version;

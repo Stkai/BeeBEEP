@@ -23,6 +23,7 @@
 
 #include "MessageManager.h"
 #include "Protocol.h"
+#include "SaveChatList.h"
 #include "Settings.h"
 
 
@@ -35,8 +36,7 @@ MessageManager::MessageManager()
 
 void MessageManager::addMessageToSend( VNumber to_user_id, VNumber chat_id, const Message& m )
 {
-  MessageRecord mr( to_user_id, chat_id, m );
-  m_messagesToSend.append( mr );
+  addMessageRecord( MessageRecord( to_user_id, chat_id, m ) );
 }
 
 QList<MessageRecord> MessageManager::takeMessagesToSendToUserId( VNumber user_id )
@@ -53,6 +53,8 @@ QList<MessageRecord> MessageManager::takeMessagesToSendToUserId( VNumber user_id
     else
       ++it;
   }
+  if( !message_list.isEmpty() )
+    saveUnsentMessages( true );
   return message_list;
 }
 
@@ -95,17 +97,26 @@ bool MessageManager::unsentMessagesCanBeSaved() const
     return false;
 }
 
-bool MessageManager::saveUnsentMessages()
+bool MessageManager::saveUnsentMessages( bool silent_mode )
 {
   QString file_name = Settings::instance().unsentMessagesFilePath();
   QFile file( file_name );
-  if( !Settings::instance().chatSaveUnsentMessages() )
+  if( !Settings::instance().enableSaveData() || !Settings::instance().chatSaveUnsentMessages() )
   {
+    if( !silent_mode )
+      qDebug() << "Unsent chat messages are not saved because you have disabled this option";
     if( file.exists() )
     {
-      qDebug() << "Unsent messages file removed:" << qPrintable( file_name );
+      if( !silent_mode )
+        qDebug() << "Unsent messages file removed:" << qPrintable( file_name );
       file.remove();
     }
+    return false;
+  }
+
+  if( !Settings::instance().saveUserList() || !Settings::instance().saveGroupList() )
+  {
+    qWarning() << "Saving unsent messages fails because 'Save users' and 'Save groups' options are disabled";
     return false;
   }
 
@@ -115,21 +126,20 @@ bool MessageManager::saveUnsentMessages()
     return false;
   }
 
-  qDebug() << "Saving unsent messages in" << qPrintable( file_name );
+  if( !silent_mode )
+    qDebug() << "Saving unsent messages in" << qPrintable( file_name );
   QDataStream stream( &file );
   stream.setVersion( Settings::instance().dataStreamVersion( false ) );
-
-  QString auth_code = saveMessagesAuthCode();
 
   QStringList file_header;
   file_header << Settings::instance().programName();
   file_header << Settings::instance().version( false, false, false );
   file_header << QString::number( Settings::instance().protocolVersion() );
-  file_header << auth_code;
+  file_header << m_savedMessagesAuthCode;
   stream << file_header;
   if( stream.status() != QDataStream::Ok )
   {
-    qWarning() << "Datastream error: unable to save file header";
+    qWarning() << "Datastream error: unable to save file header in" << qPrintable( file_name );
     file.close();
     return false;
   }
@@ -148,7 +158,7 @@ bool MessageManager::saveUnsentMessages()
   stream << sl_smr_size;
   if( stream.status() != QDataStream::Ok )
   {
-    qWarning() << "Datastream error: unable to save number of unsent messages";
+    qWarning() << "Datastream error: unable to save number of unsent messages in" << qPrintable( file_name );
     file.close();
     return false;
   }
@@ -161,20 +171,22 @@ bool MessageManager::saveUnsentMessages()
       stream << smr;
       if( stream.status() != QDataStream::Ok )
       {
-        qWarning() << "Datastream error: unable to save unsent message" << sl_smr_counter;
+        qWarning() << "Datastream error: unable to save unsent message" << sl_smr_counter << "in" << qPrintable( file_name );
         file.close();
         return false;
       }
     }
   }
   file.close();
-  qDebug() << sl_smr_size << "unsent messages saved";
+  if( !silent_mode )
+    qDebug() << sl_smr_size << "unsent messages saved";
   return true;
 }
 
 void MessageManager::addMessageRecord( const MessageRecord& mr )
 {
   m_messagesToSend.append( mr );
+  saveUnsentMessages( true );
 }
 
 void MessageManager::addMessageRecords( const QList<MessageRecord>& mr_list )
@@ -185,19 +197,38 @@ void MessageManager::addMessageRecords( const QList<MessageRecord>& mr_list )
     m_messagesToSend = mr_list;
   else
     m_messagesToSend.append( mr_list );
+  saveUnsentMessages( true );
 }
 
-QString MessageManager::generateSaveMessagesAuthCode() const
-{
-  Settings::instance().setSaveMessagesTimestamp( QDateTime::currentDateTime() );
-  return saveMessagesAuthCode();
-}
-
-QString MessageManager::saveMessagesAuthCode() const
+void MessageManager::loadSavedMessagesAuthCode()
 {
   QString s = Settings::instance().saveMessagesTimestamp().toString( Qt::ISODate );
   s += Settings::instance().localUser().name();
   QByteArray ba = s.toUtf8().toBase64();
   QByteArray auth_code = QCryptographicHash::hash( ba, QCryptographicHash::Sha1 );
-  return QString::fromLatin1( auth_code.toHex() );
+  m_savedMessagesAuthCode = QString::fromLatin1( auth_code.toHex() );
+}
+
+void MessageManager::generateSaveMessagesAuthCode()
+{
+  Settings::instance().setSaveMessagesTimestamp( QDateTime::currentDateTime() );
+  Settings::instance().save();
+  loadSavedMessagesAuthCode();
+}
+
+bool MessageManager::chatMessageCanBeSaved() const
+{
+  return SaveChatList::canBeSaved();
+}
+
+bool MessageManager::saveMessages( bool save_unsent_messages_also )
+{
+  bool unsent_chat_messages_saved;
+  generateSaveMessagesAuthCode();
+  if( save_unsent_messages_also )
+    unsent_chat_messages_saved = saveUnsentMessages( false );
+  else
+    unsent_chat_messages_saved = true;
+  SaveChatList scl;
+  return scl.save() && unsent_chat_messages_saved;
 }
