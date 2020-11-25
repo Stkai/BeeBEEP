@@ -79,6 +79,9 @@ public:
   inline const QList<ChatRecord>& refusedChats() const;
   inline void clearRefusedChats();
 
+  bool chatMessagesUnsaved() const;
+  void setChatMessagesSaved();
+
 
   static ChatManager& instance()
   {

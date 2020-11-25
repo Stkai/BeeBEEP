@@ -989,6 +989,8 @@ void Core::linkSavedChat( const QString& from_saved_chat_name, const QString& to
 
 void Core::autoSaveChatMessages()
 {
+  if( !ChatManager::instance().chatMessagesUnsaved() )
+    return;
   SaveChatList *scl = new SaveChatList;
   connect( scl, SIGNAL( operationCompleted() ), this, SLOT( autoSaveChatMessagesCompleted() ) );
   if( beeApp )

@@ -370,3 +370,23 @@ QString ChatManager::chatSavedText( const QString& chat_name, int max_lines, int
   return saved_text;
 }
 
+bool ChatManager::chatMessagesUnsaved() const
+{
+  foreach( Chat c, m_chats )
+  {
+    if( c.hasUnsavedMessages() )
+      return true;
+  }
+  return false;
+}
+
+void ChatManager::setChatMessagesSaved()
+{
+  QList<Chat>::iterator it = m_chats.begin();
+  while( it != m_chats.end() )
+  {
+    (*it).setMessagesSaved();
+    ++it;
+  }
+}
+

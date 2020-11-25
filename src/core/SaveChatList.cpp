@@ -55,7 +55,7 @@ bool SaveChatList::canBeSaved()
 bool SaveChatList::save()
 {
   QString file_name = Settings::instance().savedChatsFilePath();
-  bool saved = saveToFile( file_name );
+  bool saved = saveToFile( file_name, false );
   emit operationCompleted();
   return saved;
 }
@@ -63,25 +63,34 @@ bool SaveChatList::save()
 bool SaveChatList::autoSave()
 {
   QString file_name = Settings::instance().autoSavedChatsFilePath();
-  bool saved = saveToFile( file_name );
+  bool saved = saveToFile( file_name, true );
   emit operationCompleted();
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Autosave chat messages in file" << qPrintable( file_name ) << "->" << (saved ? "success" : "failed");
+#endif
   return saved;
 }
 
-bool SaveChatList::saveToFile( const QString& file_name )
+bool SaveChatList::saveToFile( const QString& file_name, bool silent_mode  )
 {
-  QFile file( file_name );
-
   if( !Settings::instance().enableSaveData() || !Settings::instance().chatAutoSave() )
   {
-    if( file.exists() )
+    if( QFile::exists( file_name ) )
     {
-      qDebug() << "Chat messages are not saved because you have disabled this option";
-      if( file.remove() )
-        qDebug() << "Saved chat file removed:" << qPrintable( file_name );
+      if( !silent_mode )
+        qDebug() << "Chat messages are not saved because you have disabled this option";
+
+      if( QFile::remove( file_name ) )
+      {
+        if( !silent_mode )
+          qDebug() << "Saved chat file removed:" << qPrintable( file_name );
+      }
     }
     return false;
   }
+
+  QString file_name_tmp = file_name + ".tmp";
+  QFile file( file_name_tmp );
 
   if( !file.open( QIODevice::WriteOnly ) )
   {
@@ -89,7 +98,9 @@ bool SaveChatList::saveToFile( const QString& file_name )
     return false;
   }
 
-  qDebug() << "Saving chat messages in" << qPrintable( file_name );
+  Settings::instance().addTemporaryFilePath( file_name_tmp );
+  if( !silent_mode )
+    qDebug() << "Saving chat messages in" << qPrintable( file_name );
 
   QDataStream stream( &file );
   stream.setVersion( Settings::instance().dataStreamVersion( false ) );
@@ -107,13 +118,16 @@ bool SaveChatList::saveToFile( const QString& file_name )
   if( stream.status() != QDataStream::Ok )
     qWarning() << "Datastream error: unable to save file header";
   else
-    save_ok = saveChats( &stream );
+    save_ok = saveChats( &stream, silent_mode );
 
   file.close();
-  return save_ok;
+  if( save_ok )
+    return QFile::exists( file_name ) ? (QFile::remove( file_name ) && file.rename( file_name )) : file.rename( file_name );
+  else
+    return false;
 }
 
-bool SaveChatList::saveChats( QDataStream* stream )
+bool SaveChatList::saveChats( QDataStream* stream, bool silent_mode )
 {
   qint32 num_saved_chats = 0;
   qint64 file_pos = stream->device()->pos();
@@ -143,11 +157,12 @@ bool SaveChatList::saveChats( QDataStream* stream )
                                                     !Settings::instance().chatSaveSystemMessages(), true, true, true, Settings::instance().useCompactDataSaving() ) );
     if( html_text.simplified().isEmpty() )
     {
-      qDebug() << "Skip saving empty chat:" << qPrintable( c.name() );
+      if( !silent_mode )
+        qDebug() << "Skip saving empty chat:" << qPrintable( c.name() );
       continue;
     }
-
-    qDebug() << "Saving chat:" << qPrintable( c.name() );
+    if( !silent_mode )
+      qDebug() << "Saving chat:" << qPrintable( c.name() );
     num_saved_chats++;
     chat_name_saved_list << c.name();
 
@@ -162,7 +177,8 @@ bool SaveChatList::saveChats( QDataStream* stream )
     chat_lines = html_text.split( "<br>", QString::SkipEmptyParts, Qt::CaseInsensitive );
     if( chat_lines.size() > Settings::instance().chatMaxLineSaved() )
     {
-      qWarning() << "Chat exceeds line size limit with" << chat_lines.size();
+      if( !silent_mode )
+        qWarning() << "Chat exceeds line size limit with" << chat_lines.size();
       while( chat_lines.size() > Settings::instance().chatMaxLineSaved() )
         chat_lines.removeFirst();
     }
@@ -183,7 +199,8 @@ bool SaveChatList::saveChats( QDataStream* stream )
   {
     if( !chat_name_saved_list.contains( it.key() ) )
     {
-      qDebug() << "Saving history for chat:" << qPrintable( it.key() );
+      if( !silent_mode )
+        qDebug() << "Saving history for chat:" << qPrintable( it.key() );
       num_saved_chats++;
       chat_name_encrypted = Settings::instance().simpleEncrypt( it.key() );
       (*stream) << chat_name_encrypted;
@@ -196,7 +213,8 @@ bool SaveChatList::saveChats( QDataStream* stream )
       chat_lines = html_text.split( "<br>", QString::SkipEmptyParts, Qt::CaseInsensitive );
       if( chat_lines.size() > Settings::instance().chatMaxLineSaved() )
       {
-        qWarning() << "History exceeds line size limit with" << chat_lines.size();
+        if( !silent_mode )
+          qWarning() << "History exceeds line size limit with" << chat_lines.size();
         while( chat_lines.size() > Settings::instance().chatMaxLineSaved() )
           chat_lines.removeFirst();
       }
@@ -211,7 +229,10 @@ bool SaveChatList::saveChats( QDataStream* stream )
       }
     }
     else
-      qDebug() << "Skip saving history for previous saved chat" << qPrintable( it.key() );
+    {
+      if( !silent_mode )
+        qDebug() << "Skip saving history for previous saved chat" << qPrintable( it.key() );
+    }
     ++it;
   }
 
@@ -226,7 +247,9 @@ bool SaveChatList::saveChats( QDataStream* stream )
     }
   }
 
-  qDebug() << num_saved_chats << "chat saved";
+  ChatManager::instance().setChatMessagesSaved();
+  if( !silent_mode )
+    qDebug() << num_saved_chats << "chat saved";
   return true;
 }
 

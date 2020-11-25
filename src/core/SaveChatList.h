@@ -44,8 +44,8 @@ public slots:
   bool autoSave();
 
 protected:
-  bool saveToFile( const QString& );
-  bool saveChats( QDataStream* );
+  bool saveToFile( const QString&, bool silent_mode );
+  bool saveChats( QDataStream*, bool silent_mode );
 
 };
 

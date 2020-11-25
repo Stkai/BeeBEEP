@@ -86,8 +86,33 @@ void BuildSavedChatList::buildList()
   removePartiallyDownloadedFiles();
 
   QString file_name = Settings::instance().savedChatsFilePath();
-  QFile file( file_name );
+  bool use_backup = false;
+  QFileInfo backup_chats_file_info( Settings::instance().autoSavedChatsFilePath() );
+  if( backup_chats_file_info.exists() )
+  {
+    QFileInfo saved_chats_file_info( Settings::instance().savedChatsFilePath() );
+    if( saved_chats_file_info.exists() )
+    {
+      if( backup_chats_file_info.lastModified() > saved_chats_file_info.lastModified() )
+      {
+        qWarning() << "File" << qPrintable( Settings::instance().savedChatsFilePath() ) << "is older than backup";
+        use_backup = true;
+      }
+    }
+    else
+    {
+      qWarning() << "File" << qPrintable( Settings::instance().savedChatsFilePath() ) << "not found";
+      use_backup = true;
+    }
+  }
 
+  if( use_backup )
+  {
+    file_name = Settings::instance().autoSavedChatsFilePath();
+    qDebug() << "Loading saved chats from backup file" << qPrintable( file_name );
+  }
+
+  QFile file( file_name );
   if( !file.open( QIODevice::ReadOnly ) )
   {
     qWarning() << "Unable to open file" << qPrintable( file_name ) << ": loading saved chats aborted";
