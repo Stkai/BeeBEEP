@@ -441,6 +441,7 @@ public:
   inline int maxFileShared() const;
 
   QString savedChatsFilePath() const;
+  QString autoSavedChatsFilePath() const;
   inline bool chatAutoSave() const;
   inline void setChatAutoSave( bool );
   inline int chatMaxLineSaved() const;
@@ -452,6 +453,8 @@ public:
   inline void setChatSaveFileTransfers( bool );
   inline bool chatSaveSystemMessages() const;
   inline void setChatSaveSystemMessages( bool );
+  inline int tickIntervalChatAutoSave() const;
+  inline void setTickIntervalChatAutoSave( int );
 
   inline bool autoUserAway() const;
   inline void setAutoUserAway( bool );
@@ -887,6 +890,7 @@ private:
   bool m_chatSaveUnsentMessages;
   bool m_chatSaveFileTransfers;
   bool m_chatSaveSystemMessages;
+  int m_tickIntervalChatAutoSave;
 
   bool m_autoUserAway;
 
@@ -1425,5 +1429,7 @@ inline const QStringList& Settings::allowedFileExtensionsInFileTransfer() const 
 inline void Settings::setResetMinimumWidthForStyle( bool new_value ) { m_resetMinimumWidthForStyle = new_value; }
 inline bool Settings::resetMinimumWidthForStyle() { return m_resetMinimumWidthForStyle; }
 inline bool Settings::isConnectionKeyExchangeOnlyECDH() const { return m_connectionKeyExchangeMethod == ConnectionKeyExchangeECDH; }
+inline int Settings::tickIntervalChatAutoSave() const { return m_tickIntervalChatAutoSave; }
+inline void Settings::setTickIntervalChatAutoSave( int new_value ) { m_tickIntervalChatAutoSave = new_value; }
 
 #endif // BEEBEEP_SETTINGS_

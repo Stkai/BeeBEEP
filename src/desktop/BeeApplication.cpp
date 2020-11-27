@@ -87,6 +87,7 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
 
   mp_fsWatcher = new QFileSystemWatcher;
   m_settingsFilePath = "";
+  m_checkSettingsFilePath = false;
   connect( mp_fsWatcher, SIGNAL( fileChanged( const QString& ) ), this, SLOT( onFileChanged( const QString& ) ) );
 
   mp_networkConfigurationManager = new QNetworkConfigurationManager;
@@ -135,22 +136,42 @@ BeeApplication::~BeeApplication()
 void BeeApplication::setSettingsFilePath( const QString& settings_file_path )
 {
   if( !m_settingsFilePath.isEmpty() )
-    mp_fsWatcher->removePath( m_settingsFilePath );
+  {
+    if( settings_file_path == m_settingsFilePath )
+      return;
+
+    if( !mp_fsWatcher->removePath( m_settingsFilePath ) )
+      qWarning() << "File system watcher cannot remove path" << qPrintable( m_settingsFilePath ) << "from its list";
+#ifdef BEEBEEP_DEBUG
+    else
+      qDebug() << "File system watcher stops to check changes in file" << qPrintable( m_settingsFilePath );
+#endif
+  }
   m_settingsFilePath = "";
   if( !settings_file_path.isEmpty() )
   {
 #if QT_VERSION >= 0x050000
     if( mp_fsWatcher->addPath( settings_file_path ) )
+    {
       m_settingsFilePath = settings_file_path;
+#ifdef BEEBEEP_DEBUG
+      qDebug() << "File system watcher is checking changes in file" << qPrintable( m_settingsFilePath );
+#endif
+      m_checkSettingsFilePath = true;
+    }
+    else
+      m_checkSettingsFilePath = false;
 #else
     mp_fsWatcher->addPath( settings_file_path );
     m_settingsFilePath = settings_file_path;
+    m_checkSettingsFilePath = true;
 #endif
   }
 }
 
 void BeeApplication::clearPathsInFsWatcher()
 {
+  m_checkSettingsFilePath = false;
   QStringList sl_paths = mp_fsWatcher->directories();
   if( !sl_paths.isEmpty() )
     mp_fsWatcher->removePaths( sl_paths );
@@ -465,7 +486,7 @@ void BeeApplication::ignoreEvent( const QString& log_text = "" )
 
 void BeeApplication::onFileChanged( const QString& file_path )
 {
-  if( file_path == m_settingsFilePath )
+  if( file_path == m_settingsFilePath && m_checkSettingsFilePath )
     qWarning() << "Settings file changed: please edit the settings file only if BeeBEEP is closed or changes will be lost";
 }
 
