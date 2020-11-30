@@ -34,17 +34,26 @@ class EmoticonManager
 public:
   QString parseEmoticons( const QString&, int emoticon_size, bool use_native_emoticons ) const;
   Emoticon emoticon( const QString& ) const;
+  Emoticon emoticonSelected( const QString& ); // add one to count
   Emoticon textEmoticon( const QString& ) const;
   Emoticon emoticonByFile( const QString& ) const;
 
   QList<Emoticon> textEmoticons( bool remove_names_duplicated ) const;
   QList<Emoticon> emoticonsByGroup( int ) const;
+
+  inline const QList<Emoticon>& favoriteEmoticons() const;
   bool addToRecentEmoticons( const Emoticon& );
   inline const QList<Emoticon>& recentEmoticons() const;
 
+  void clearFavoriteEmoticons();
   inline void clearRecentEmoticons();
 
-  int loadRecentEmoticons( const QStringList&, int );
+  inline void setRecentEmoticonsCount( int );
+  inline int recentEmoticonsCount() const;
+
+  int loadFavoriteEmoticons( const QStringList& );
+  QStringList saveFavoriteEmoticons() const;
+  int loadRecentEmoticons( const QStringList& );
   QStringList saveRencentEmoticons() const;
 
   static EmoticonManager& instance()
@@ -74,17 +83,24 @@ protected:
 
   inline bool isOneCharEmoticon( const QChar& ) const;
 
+  bool setEmoticonCount( const QString&, int );
+  QList<Emoticon> favoriteEmoticonsToSort() const;
+
 private:
   QMultiHash<QChar, Emoticon> m_emoticons;
   QList<QChar> m_oneCharEmoticons;
   QList<QChar> m_uniqueKeys;
   int m_maxTextSize;
+  QList<Emoticon> m_favoriteEmoticons;
   QList<Emoticon> m_recentEmoticons;
-  int m_recentEmoticonsMaxSize;
+  int m_recentEmoticonsCount;
 
 };
 
 // Inline Functions
+inline void EmoticonManager::setRecentEmoticonsCount( int new_value ) { m_recentEmoticonsCount = new_value; }
+inline int EmoticonManager::recentEmoticonsCount() const { return m_recentEmoticonsCount; }
+inline const QList<Emoticon>& EmoticonManager::favoriteEmoticons() const { return m_favoriteEmoticons; }
 inline const QList<Emoticon>& EmoticonManager::recentEmoticons() const { return m_recentEmoticons; }
 inline bool EmoticonManager::isOneCharEmoticon( const QChar& c ) const { return m_oneCharEmoticons.contains( c ); }
 inline void EmoticonManager::clearRecentEmoticons() { m_recentEmoticons.clear(); }

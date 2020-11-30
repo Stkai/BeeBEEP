@@ -676,12 +676,17 @@ void Core::addListToSavedChats()
         }
         else
         {
+          bool resized_text = false;
           msg_txt = mr.message().text();
           if( msg_txt.size() > 120 )
           {
-             msg_txt.resize( 120 );
-             msg_txt.append( "..." );
+            msg_txt.resize( 120 );
+            resized_text = true;
           }
+
+          msg_txt = Protocol::instance().formatHtmlText( msg_txt );
+          if( resized_text )
+            msg_txt.append( "..." );
         }
 
         User to_user = UserManager::instance().findUser( mr.toUserId() );
@@ -706,7 +711,7 @@ void Core::addListToSavedChats()
           }
         }
 
-        dispatchSystemMessage( mr.chatId(), ID_LOCAL_USER, QString( "%1 %2: &quot;%3&quot; [%4]" )
+        dispatchSystemMessage( mr.chatId(), ID_LOCAL_USER, QString( "%1 %2: &quot;%3&quot; [<i>%4</i>]" )
                                .arg( IconManager::instance().toHtml( "unsent-message.png", "*m*" ) )
                                .arg( tr( "Offline message will be sent to %1" ).arg( Bee::userNameToShow( to_user, true ) ) )
                                .arg( msg_txt )

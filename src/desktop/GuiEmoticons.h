@@ -52,13 +52,15 @@ private slots:
 protected:
   QSize sizeHint() const;
   int addEmoticonTab( GuiEmoticonWidget*, Emoticon::Group, const QString& );
+  void setFavoriteEmoticons( const QList<Emoticon>& );
   void setRecentEmoticons( const QList<Emoticon>& );
   void setEmoticonToButton( const Emoticon&, QPushButton* );
-  Emoticon emoticonFromObject( QObject* );
   void initEmoticons( int );
 
 private:
+  GuiEmoticonWidget* mp_favorite;
   GuiEmoticonWidget* mp_recent;
+  int m_favoriteTabIndex;
   int m_recentTabIndex;
 
 };

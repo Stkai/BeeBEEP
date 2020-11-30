@@ -203,7 +203,9 @@ int main( int argc, char *argv[] )
   IconManager::instance().setSourcePath( Settings::instance().iconSourcePath() );
 
   /* Init Emoticon Manager */
-  EmoticonManager::instance().loadRecentEmoticons( Settings::instance().recentEmoticons(), Settings::instance().emoticonInRecentMenu() );
+  EmoticonManager::instance().setRecentEmoticonsCount( qMax( 8, Settings::instance().emoticonInRecentMenu() ) );
+  EmoticonManager::instance().loadRecentEmoticons( Settings::instance().recentEmoticons() );
+  EmoticonManager::instance().loadFavoriteEmoticons( Settings::instance().favoriteEmoticons() );
 
   /* Init History Manager */
   (void)HistoryManager::instance();
@@ -281,6 +283,7 @@ int main( int argc, char *argv[] )
 
   /* Save final session */
   Settings::instance().setRecentEmoticons( EmoticonManager::instance().saveRencentEmoticons() );
+  Settings::instance().setFavoriteEmoticons( EmoticonManager::instance().saveFavoriteEmoticons() );
   Settings::instance().loadRcFile();
   Settings::instance().save();
 

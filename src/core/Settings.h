@@ -185,6 +185,8 @@ public:
   inline int emoticonSizeInChat() const;
   inline int emoticonSizeInMenu() const;
   inline int emoticonInRecentMenu() const;
+  inline void setFavoriteEmoticons( const QStringList& );
+  inline const QStringList& favoriteEmoticons() const;
   inline void setRecentEmoticons( const QStringList& );
   inline const QStringList& recentEmoticons() const;
   inline bool useOnlyTextEmoticons() const;
@@ -840,6 +842,7 @@ private:
   int m_emoticonSizeInChat;
   int m_emoticonSizeInMenu;
   int m_emoticonInRecentMenu;
+  QStringList m_favoriteEmoticons;
   QStringList m_recentEmoticons;
 
   bool m_usePreviewFileDialog;
@@ -1185,6 +1188,8 @@ inline int Settings::emoticonSizeInEdit() const { return m_emoticonSizeInEdit; }
 inline int Settings::emoticonSizeInChat() const { return m_emoticonSizeInChat; }
 inline int Settings::emoticonSizeInMenu() const { return m_emoticonSizeInMenu; }
 inline int Settings::emoticonInRecentMenu() const { return m_emoticonInRecentMenu; }
+inline void Settings::setFavoriteEmoticons( const QStringList& new_value ) { m_favoriteEmoticons = new_value; }
+inline const QStringList& Settings::favoriteEmoticons() const { return m_favoriteEmoticons; }
 inline void Settings::setRecentEmoticons( const QStringList& new_value ) { m_recentEmoticons = new_value; }
 inline const QStringList& Settings::recentEmoticons() const { return m_recentEmoticons; }
 inline bool Settings::isNotificationDisabledForGroup( const QString& group_id ) const { return group_id.isEmpty() ? false : m_groupSilenced.contains( group_id ); }

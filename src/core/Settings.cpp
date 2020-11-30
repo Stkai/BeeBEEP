@@ -1476,6 +1476,7 @@ void Settings::loadCommonSettings( QSettings* user_ini )
   m_emoticonSizeInChat = qMax( 12, commonValue( system_rc, user_ini, "EmoticonSizeInChat", m_emoticonSizeInChat ).toInt() );
   m_emoticonSizeInMenu = commonValue( system_rc, user_ini, "EmoticonSizeInMenu", m_emoticonSizeInMenu ).toInt();
   m_emoticonInRecentMenu = commonValue( system_rc, user_ini, "EmoticonsInRecentMenu", m_emoticonInRecentMenu ).toInt();
+  m_favoriteEmoticons = user_ini->value( "FavoriteEmoticons", QStringList() ).toStringList();
   m_recentEmoticons = user_ini->value( "RecentEmoticons", QStringList() ).toStringList();
   m_useNativeEmoticons = commonValue( system_rc, user_ini, "UseNativeEmoticons", m_useNativeEmoticons ).toBool();
   m_useHiResEmoticons = commonValue( system_rc, user_ini, "UseHighResolutionEmoticons", m_useHiResEmoticons ).toBool();
@@ -1858,6 +1859,7 @@ void Settings::save()
   sets->setValue( "EmoticonSizeInChat", m_emoticonSizeInChat );
   sets->setValue( "EmoticonSizeInMenu", m_emoticonSizeInMenu );
   sets->setValue( "EmoticonsInRecentMenu", m_emoticonInRecentMenu );
+  sets->setValue( "FavoriteEmoticons", m_favoriteEmoticons );
   sets->setValue( "RecentEmoticons", m_recentEmoticons );
   sets->setValue( "UseNativeEmoticons", m_useNativeEmoticons );
   sets->setValue( "UseHighResolutionEmoticons", m_useHiResEmoticons );

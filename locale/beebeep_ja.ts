@@ -62,343 +62,343 @@
 <context>
     <name>Core</name>
     <message>
-        <location filename="../src/core/Core.cpp" line="212"/>
+        <location filename="../src/core/Core.cpp" line="211"/>
         <source>%1 Unable to connect to %2 Network. Please check your firewall settings.</source>
         <translation>%1 %2 ネットワークに接続できません。ファイアーウォールの設定を確認してください。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="231"/>
+        <location filename="../src/core/Core.cpp" line="230"/>
         <source>%1 Unable to broadcast to %2 Network. Please check your firewall settings.</source>
         <translation>%1 %2 ネットワークにブロードキャストできません。ファイアーウォールの設定を確認してください。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="243"/>
+        <location filename="../src/core/Core.cpp" line="242"/>
         <source>%1 You are connected to %2 Network.</source>
         <translation>%1 %2 ネットワークに接続しました。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="413"/>
+        <location filename="../src/core/Core.cpp" line="409"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1 %2 ネットワークから切断されました。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="342"/>
+        <location filename="../src/core/Core.cpp" line="341"/>
         <source>%1 Zero Configuration started with service name: %2</source>
         <translation>%1 ゼロ構成を以下のサービス名で開始: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="107"/>
+        <location filename="../src/core/Core.cpp" line="106"/>
         <source>%1 User %2 cannot save settings in path: %3</source>
         <translation>%1 ユーザー %2 はパスに設定を保存できません: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="123"/>
+        <location filename="../src/core/Core.cpp" line="122"/>
         <source>%1 User %2 cannot save chat messages in path: %3</source>
         <translation>%1 ユーザー %2 はパスにチャットのメッセージを保存できません: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="153"/>
+        <location filename="../src/core/Core.cpp" line="152"/>
         <source>%1 User %2 cannot save unsent messages in path: %3</source>
         <translation>%1 ユーザー %2 はパスに未送信メッセージを保存できません: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="192"/>
+        <location filename="../src/core/Core.cpp" line="191"/>
         <source>%1 Unable to connect to %2 Network. Please check if your network adapter is connected.</source>
         <translation>%1 %2 ネットワークに接続できません。ネットワークアダプターの接続を確認してください。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="195"/>
+        <location filename="../src/core/Core.cpp" line="194"/>
         <source>Network adapter offline</source>
         <translation>ネットワークアダプターがオフライン</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="199"/>
+        <location filename="../src/core/Core.cpp" line="198"/>
         <source>Connecting</source>
         <translation>接続中</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="267"/>
+        <location filename="../src/core/Core.cpp" line="266"/>
         <source>%1 %2 accepts incoming connections only from the IP addresses present in the HOSTS file.</source>
         <translation>%1 %2 は HOSTS ファイル内に記された IP アドレスからの接続のみを許可します。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="276"/>
+        <location filename="../src/core/Core.cpp" line="275"/>
         <source>%1 You have selected to join only in these workgroups: %2</source>
         <translation>%1 これらの作業グループのみに参加することを選択: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="305"/>
+        <location filename="../src/core/Core.cpp" line="304"/>
         <source>%1 Do you need support? Visit the %2.</source>
         <translation>%1 サポートが必要であれば%2をご確認ください。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="307"/>
+        <location filename="../src/core/Core.cpp" line="306"/>
         <source>help page</source>
         <translation>ヘルプページ</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="357"/>
+        <location filename="../src/core/Core.cpp" line="356"/>
         <source>%1 Zero Configuration service closed.</source>
         <translation>%1 ゼロ構成サービスは停止しました。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="419"/>
+        <location filename="../src/core/Core.cpp" line="415"/>
         <source>Disconnected</source>
         <translation>切断されました</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="425"/>
+        <location filename="../src/core/Core.cpp" line="421"/>
         <source>Disconnecting</source>
         <translation>切断中</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="446"/>
+        <location filename="../src/core/Core.cpp" line="442"/>
         <source>%1 Reconnecting to the %2 Network in progress.</source>
         <translation>%1 %2 ネットワークに再接続中。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="456"/>
+        <location filename="../src/core/Core.cpp" line="452"/>
         <source>Reconnecting</source>
         <translation>再接続中</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="474"/>
+        <location filename="../src/core/Core.cpp" line="470"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
         <translation>%1 ゼロ構成はサービスを参照中: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="481"/>
+        <location filename="../src/core/Core.cpp" line="477"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation>%1 ゼロ構成はサービスを参照できません: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="505"/>
+        <location filename="../src/core/Core.cpp" line="501"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1 %2 ネットワークにブロードキャスト...</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="507"/>
+        <location filename="../src/core/Core.cpp" line="503"/>
         <source>Searching users</source>
         <translation>ユーザー検索中</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="638"/>
+        <location filename="../src/core/Core.cpp" line="611"/>
         <source>New version is available</source>
         <translation>最新版があります</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="639"/>
+        <location filename="../src/core/Core.cpp" line="612"/>
         <source>Click here to download</source>
         <translation>ここをクリックしてダウンロード</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="738"/>
+        <location filename="../src/core/Core.cpp" line="714"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>最大IDに達しました。このアプリケーションを終了し再起動してください。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="75"/>
+        <location filename="../src/core/CoreChat.cpp" line="76"/>
         <source>Happy Birthday to you!</source>
         <translation>お誕生日おめでとう！</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="53"/>
+        <location filename="../src/core/CoreChat.cpp" line="54"/>
         <source>Happy birthday to Marco Mastroddi: %1 years old today! Cheers!!!</source>
         <translation>Marco Mastroddi の誕生日です: %1 歳になりました！乾杯！</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="69"/>
+        <location filename="../src/core/CoreChat.cpp" line="70"/>
         <source>Happy New Year!</source>
         <translation>ハッピーニューイヤー！</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="121"/>
+        <location filename="../src/core/CoreChat.cpp" line="122"/>
         <source>%1 You have created group chat %2.</source>
         <translation>%1 グループチャット %2 を作成。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="128"/>
+        <location filename="../src/core/CoreChat.cpp" line="129"/>
         <source>%1 %2 has added you to the group chat %3.</source>
         <translation>%1 %2 があなたをグループチャット %3 に追加。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="168"/>
+        <location filename="../src/core/CoreChat.cpp" line="169"/>
         <source>%1 You have changed the group name from %2 to %3.</source>
         <translation>%1 グループ名を%3 に変更 (旧 %2)。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="170"/>
+        <location filename="../src/core/CoreChat.cpp" line="171"/>
         <source>%1 %2 has changed the group name from %3 to %4.</source>
         <translation>%1 %2 はグループ名を %4 に変更 (旧 %3)。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="186"/>
+        <location filename="../src/core/CoreChat.cpp" line="187"/>
         <source>%1 %2 will be informed of your changes.</source>
         <translation>%1 %2 に変更が通知されます。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="200"/>
+        <location filename="../src/core/CoreChat.cpp" line="201"/>
         <source>%1 You have removed members: %2.</source>
         <translation>%1 メンバーから削除: %2。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="202"/>
+        <location filename="../src/core/CoreChat.cpp" line="203"/>
         <source>%1 %2 has removed members: %3.</source>
         <translation>%1 %2 がメンバーから削除しました: %3。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="205"/>
+        <location filename="../src/core/CoreChat.cpp" line="206"/>
         <source>%1 This kind of change can be temporary if the user exists and does not leave the group spontaneously.</source>
         <translation>%1 この変更は、ユーザーが自発的にグループから退出しなければ一時的なものとなります。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="222"/>
+        <location filename="../src/core/CoreChat.cpp" line="223"/>
         <source>%1 You have added members: %2.</source>
         <translation>%1 メンバーを追加: %2。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="224"/>
+        <location filename="../src/core/CoreChat.cpp" line="225"/>
         <source>%1 %2 has added members: %3.</source>
         <translation>%1 %2 がメンバーに追加しました: %3。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="231"/>
-        <location filename="../src/core/CoreChat.cpp" line="960"/>
-        <location filename="../src/core/CoreChat.cpp" line="971"/>
+        <location filename="../src/core/CoreChat.cpp" line="232"/>
+        <location filename="../src/core/CoreChat.cpp" line="966"/>
+        <location filename="../src/core/CoreChat.cpp" line="977"/>
         <source>%1 Chat with %2.</source>
         <translatorcomment>引数はユーザー名</translatorcomment>
         <translation>%1 %2 とのチャット。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="292"/>
+        <location filename="../src/core/CoreChat.cpp" line="293"/>
         <source>%1 %2 has left the group chat %3.</source>
         <translation>%1 %2 はグループチャット %3.から退出しました。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="315"/>
+        <location filename="../src/core/CoreChat.cpp" line="316"/>
         <source>%1 %2 wants to remove you from the group chat %3. If you agree please leave the group.</source>
         <translation>%1 %2 はあなたをグループチャット %3 から削除しようとしています。同意する場合、グループから退出してください。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="334"/>
+        <location filename="../src/core/CoreChat.cpp" line="335"/>
         <source>%1 %2 is added to saved chats.</source>
         <translation>%1 %2 を保存済みチャットに追加。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="351"/>
+        <location filename="../src/core/CoreChat.cpp" line="352"/>
         <source>%1 You have left group chat %2.</source>
         <translation>%1 あなたはグループチャット %2 から退出しました。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="382"/>
+        <location filename="../src/core/CoreChat.cpp" line="383"/>
         <source>%1 Chat with %2 is archived.</source>
         <translatorcomment>引数はたぶんチャット名</translatorcomment>
         <translation>%1 %2 のチャットは保存されました。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="406"/>
+        <location filename="../src/core/CoreChat.cpp" line="407"/>
         <source>Unable to send the message: you are not connected.</source>
         <translation>メッセージの送信失敗。あなたは未接続です。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="412"/>
+        <location filename="../src/core/CoreChat.cpp" line="413"/>
         <source>Unable to send the message: this chat is disabled.</source>
         <translation>メッセージの送信失敗。このチャットは無効です。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="451"/>
+        <location filename="../src/core/CoreChat.cpp" line="452"/>
         <source>Unable to send the message to %1.</source>
         <translation>%1 にメッセージを送信できません。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="457"/>
+        <location filename="../src/core/CoreChat.cpp" line="458"/>
         <source>Nobody has received the message.</source>
         <translation>誰もメッセージを受信していません。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="488"/>
+        <location filename="../src/core/CoreChat.cpp" line="489"/>
         <source>The voice message will be delivered to %1.</source>
         <translation>%1 にボイスメッセージを送信。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="658"/>
+        <location filename="../src/core/CoreChat.cpp" line="659"/>
         <source>Unsent messages had an incorrect authorization code and will not be sent.</source>
         <translation>未送信のメッセージの認証コードが正しくないため送信されません。</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/core/CoreChat.cpp" line="665"/>
+        <location filename="../src/core/CoreChat.cpp" line="666"/>
         <source>%n unsent message(s) will be sent as soon as possible.</source>
         <translation>
             <numerusform>%n 個の未送信メッセージは速やかに送信されます。</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="824"/>
+        <location filename="../src/core/CoreChat.cpp" line="830"/>
         <source>Offline messages sent to %1.</source>
         <translation>%1 にオフラインメッセージを送信。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="955"/>
+        <location filename="../src/core/CoreChat.cpp" line="961"/>
         <source>Chat with all users</source>
         <translation>すべてのユーザーとのチャット</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="250"/>
+        <location filename="../src/core/Core.cpp" line="249"/>
         <source>but encrypted connections allowed</source>
         <translation>暗号化接続は許可されています</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="258"/>
+        <location filename="../src/core/Core.cpp" line="257"/>
         <source>End-to-end encryption is enabled</source>
         <translation>端末間の暗号化: 有効</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="258"/>
+        <location filename="../src/core/Core.cpp" line="257"/>
         <source>but not encrypted connections allowed</source>
         <translation>暗号化接続は許可されていません</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="248"/>
+        <location filename="../src/core/Core.cpp" line="247"/>
         <source>End-to-end encryption is disabled</source>
         <translation>端末間の暗号化: 無効</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="490"/>
+        <location filename="../src/core/CoreChat.cpp" line="491"/>
         <source>The message will be delivered to %1.</source>
         <translation>メッセージは後で %1 に届けられます。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="643"/>
+        <location filename="../src/core/CoreChat.cpp" line="644"/>
         <source>Saved chats had an incorrect authorization code.</source>
         <translation>保存したチャットに正しくない認証コードがあります。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="646"/>
+        <location filename="../src/core/CoreChat.cpp" line="647"/>
         <source>%1 saved chats are added to history</source>
         <translation>保存済み履歴に %1 個の会話を追加</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="710"/>
+        <location filename="../src/core/CoreChat.cpp" line="716"/>
         <source>Offline message will be sent to %1</source>
         <translation>オフラインメッセージは後で %1 に届けられます</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="914"/>
+        <location filename="../src/core/CoreChat.cpp" line="920"/>
         <source>%1 You have buzzed %2.</source>
         <translation>%1 %2 にバズしました。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="960"/>
+        <location filename="../src/core/CoreChat.cpp" line="966"/>
         <source>Unknown %1</source>
         <translation>名前未設定 %1</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="587"/>
+        <location filename="../src/core/CoreChat.cpp" line="588"/>
         <source>%1 %2 cannot be informed that you have left the group.</source>
         <translation>%1 %2 にあなたのグループ退出は通知されません。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="547"/>
+        <location filename="../src/core/Core.cpp" line="543"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1 ネットワークインターフェース %2 はダウンしました。</translation>
     </message>
@@ -595,7 +595,7 @@
         <translation>ダウンロード</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="704"/>
+        <location filename="../src/core/CoreChat.cpp" line="710"/>
         <location filename="../src/core/CoreFileTransfer.cpp" line="182"/>
         <location filename="../src/core/CoreVoiceChat.cpp" line="66"/>
         <source>voice message</source>
@@ -653,22 +653,22 @@
         <translation>%1 %2 があなたにバズしました。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="93"/>
+        <location filename="../src/core/CoreUser.cpp" line="94"/>
         <source>You have changed your nickname from %1 to %2.</source>
         <translation>あなたはユーザー名を %1 から %2 に変更。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="95"/>
+        <location filename="../src/core/CoreUser.cpp" line="96"/>
         <source>%1 has changed the nickname in %2.</source>
         <translation>%1 はユーザー名を %2 に変更しました。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="317"/>
+        <location filename="../src/core/CoreUser.cpp" line="319"/>
         <source>is removed from favorites</source>
         <translation>をお気に入りから除去</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="323"/>
+        <location filename="../src/core/CoreUser.cpp" line="325"/>
         <source>is added to favorites</source>
         <translation>をお気に入りに追加</translation>
     </message>
@@ -1796,32 +1796,41 @@ Please select a different name.</source>
 <context>
     <name>GuiEmoticons</name>
     <message>
-        <location filename="../src/desktop/GuiEmoticons.cpp" line="49"/>
         <source>Recent</source>
-        <translation>最近使った</translation>
+        <translation type="vanished">最近使った</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiEmoticons.cpp" line="49"/>
+        <source>Favorite emoticons</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEmoticons.cpp" line="51"/>
+        <source>Recent emoticons</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiEmoticons.cpp" line="53"/>
         <source>Smiley</source>
         <translation>表情</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEmoticons.cpp" line="53"/>
+        <location filename="../src/desktop/GuiEmoticons.cpp" line="55"/>
         <source>Objects</source>
         <translation>もの</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEmoticons.cpp" line="55"/>
+        <location filename="../src/desktop/GuiEmoticons.cpp" line="57"/>
         <source>Nature</source>
         <translation>自然</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEmoticons.cpp" line="57"/>
+        <location filename="../src/desktop/GuiEmoticons.cpp" line="59"/>
         <source>Places</source>
         <translation>場所・地域</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEmoticons.cpp" line="59"/>
+        <location filename="../src/desktop/GuiEmoticons.cpp" line="61"/>
         <source>Symbols</source>
         <translation>シンボル</translation>
     </message>
@@ -6668,7 +6677,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2449"/>
+        <location filename="../src/core/Settings.cpp" line="2463"/>
         <source>Autoresponder</source>
         <translation>自動応答</translation>
     </message>

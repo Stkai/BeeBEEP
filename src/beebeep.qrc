@@ -184,5 +184,6 @@
         <file>images/encryption-enabled.png</file>
         <file>images/audio-settings.png</file>
         <file>images/firewall.png</file>
+        <file>images/favorite.png</file>
     </qresource>
 </RCC>

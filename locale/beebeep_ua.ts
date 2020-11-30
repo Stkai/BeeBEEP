@@ -1500,7 +1500,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Recent</source>
-        <translation>Останні</translation>
+        <translation type="vanished">Останні</translation>
     </message>
     <message>
         <source>Objects</source>
@@ -1513,6 +1513,14 @@ Please select a different name.</source>
     <message>
         <source>Symbols</source>
         <translation>Сімволи</translation>
+    </message>
+    <message>
+        <source>Favorite emoticons</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recent emoticons</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

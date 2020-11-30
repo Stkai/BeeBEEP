@@ -62,269 +62,269 @@
 <context>
     <name>Core</name>
     <message>
-        <location filename="../src/core/Core.cpp" line="212"/>
+        <location filename="../src/core/Core.cpp" line="211"/>
         <source>%1 Unable to connect to %2 Network. Please check your firewall settings.</source>
         <translation>%1 Не удается соединиться с сетью %2. Пожалуйста, проверьте настройки вашего брандмауэра.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="231"/>
+        <location filename="../src/core/Core.cpp" line="230"/>
         <source>%1 Unable to broadcast to %2 Network. Please check your firewall settings.</source>
         <translation>%1 Не удается передать в сеть %2. Пожалуйста, проверьте настройки вашего брандмауэра..</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="243"/>
+        <location filename="../src/core/Core.cpp" line="242"/>
         <source>%1 You are connected to %2 Network.</source>
         <translation>%1 Вы соединены с сетью %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="413"/>
+        <location filename="../src/core/Core.cpp" line="409"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1 Вы отключены от сети %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="342"/>
+        <location filename="../src/core/Core.cpp" line="341"/>
         <source>%1 Zero Configuration started with service name: %2</source>
         <translation>%1 Zero Configuration запущена с именем службы: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="107"/>
+        <location filename="../src/core/Core.cpp" line="106"/>
         <source>%1 User %2 cannot save settings in path: %3</source>
         <translation>%1 Пользователь %2 не может сохранить настройки по пути: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="123"/>
+        <location filename="../src/core/Core.cpp" line="122"/>
         <source>%1 User %2 cannot save chat messages in path: %3</source>
         <translation>%1 Пользователь %2 не может сохранить сообщения по пути: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="153"/>
+        <location filename="../src/core/Core.cpp" line="152"/>
         <source>%1 User %2 cannot save unsent messages in path: %3</source>
         <translation>%1 Пользователь %2 не может сохранить неотправленные сообщения по пути: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="192"/>
+        <location filename="../src/core/Core.cpp" line="191"/>
         <source>%1 Unable to connect to %2 Network. Please check if your network adapter is connected.</source>
         <translation>%1 Не удается соединиться с сетью %2. Пожалуйста, проверьте что ваш сетевой адаптер подключён.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="195"/>
+        <location filename="../src/core/Core.cpp" line="194"/>
         <source>Network adapter offline</source>
         <translation>Сетевой адаптер отключён</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="199"/>
+        <location filename="../src/core/Core.cpp" line="198"/>
         <source>Connecting</source>
         <translation>Соединение</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="267"/>
+        <location filename="../src/core/Core.cpp" line="266"/>
         <source>%1 %2 accepts incoming connections only from the IP addresses present in the HOSTS file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="276"/>
+        <location filename="../src/core/Core.cpp" line="275"/>
         <source>%1 You have selected to join only in these workgroups: %2</source>
         <translation>%1 Вы решили присоединяться только к этим рабочим группам: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="305"/>
+        <location filename="../src/core/Core.cpp" line="304"/>
         <source>%1 Do you need support? Visit the %2.</source>
         <translation>%1 Вам нужна поддержка? Посетите %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="307"/>
+        <location filename="../src/core/Core.cpp" line="306"/>
         <source>help page</source>
         <translation>страницу помощи</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="357"/>
+        <location filename="../src/core/Core.cpp" line="356"/>
         <source>%1 Zero Configuration service closed.</source>
         <translation>%1 Служба Zero Configuration закрыта.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="419"/>
+        <location filename="../src/core/Core.cpp" line="415"/>
         <source>Disconnected</source>
         <translation>Отсоединен</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="425"/>
+        <location filename="../src/core/Core.cpp" line="421"/>
         <source>Disconnecting</source>
         <translation>Отключение</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="446"/>
+        <location filename="../src/core/Core.cpp" line="442"/>
         <source>%1 Reconnecting to the %2 Network in progress.</source>
         <translation>%1 выполняется повторное подключение к сети %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="456"/>
+        <location filename="../src/core/Core.cpp" line="452"/>
         <source>Reconnecting</source>
         <translation>Переподключение</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="474"/>
+        <location filename="../src/core/Core.cpp" line="470"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
         <translation>%1 Zero Configuration ищет сетевые службы: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="481"/>
+        <location filename="../src/core/Core.cpp" line="477"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation>%1 Zero Configuration не может выполнить поиск сетевых служб: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="505"/>
+        <location filename="../src/core/Core.cpp" line="501"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1 Передает в сеть %2...</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="507"/>
+        <location filename="../src/core/Core.cpp" line="503"/>
         <source>Searching users</source>
         <translation>Поиск пользователей</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="638"/>
+        <location filename="../src/core/Core.cpp" line="611"/>
         <source>New version is available</source>
         <translation>Доступна новая версия</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="639"/>
+        <location filename="../src/core/Core.cpp" line="612"/>
         <source>Click here to download</source>
         <translation>Щёлкните здесь для загрузки</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="738"/>
+        <location filename="../src/core/Core.cpp" line="714"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>Достигнут максимальный идентификатор. Закройте и перезапустите приложение.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="75"/>
+        <location filename="../src/core/CoreChat.cpp" line="76"/>
         <source>Happy Birthday to you!</source>
         <translation>С днем рождения!</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="53"/>
+        <location filename="../src/core/CoreChat.cpp" line="54"/>
         <source>Happy birthday to Marco Mastroddi: %1 years old today! Cheers!!!</source>
         <translation>С днем рождения Марко Мастродди: %1 лет исполнилось сегодня! Ваше здоровье!!!</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="69"/>
+        <location filename="../src/core/CoreChat.cpp" line="70"/>
         <source>Happy New Year!</source>
         <translation>С Новым годом!</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="121"/>
+        <location filename="../src/core/CoreChat.cpp" line="122"/>
         <source>%1 You have created group chat %2.</source>
         <translation>%1 Вы создали групповой чат %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="128"/>
+        <location filename="../src/core/CoreChat.cpp" line="129"/>
         <source>%1 %2 has added you to the group chat %3.</source>
         <translation>%1 %2 добавил Вас в групповой чат %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="168"/>
+        <location filename="../src/core/CoreChat.cpp" line="169"/>
         <source>%1 You have changed the group name from %2 to %3.</source>
         <translation>%1 Вы изменили имя группы с %2 на %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="170"/>
+        <location filename="../src/core/CoreChat.cpp" line="171"/>
         <source>%1 %2 has changed the group name from %3 to %4.</source>
         <translation>%1 %2 изменил имя группы с %3 на %4.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="186"/>
+        <location filename="../src/core/CoreChat.cpp" line="187"/>
         <source>%1 %2 will be informed of your changes.</source>
         <translation>%1 %2 будут проинформированы о ваших изменениях.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="200"/>
+        <location filename="../src/core/CoreChat.cpp" line="201"/>
         <source>%1 You have removed members: %2.</source>
         <translation>%1 Вы удалили пользователей: %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="202"/>
+        <location filename="../src/core/CoreChat.cpp" line="203"/>
         <source>%1 %2 has removed members: %3.</source>
         <translation>%1 %2 удалил пользователей: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="205"/>
+        <location filename="../src/core/CoreChat.cpp" line="206"/>
         <source>%1 This kind of change can be temporary if the user exists and does not leave the group spontaneously.</source>
         <translation>%1 Такое изменение может быть временным, если пользователь существует и не покидает группу спонтанно.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="222"/>
+        <location filename="../src/core/CoreChat.cpp" line="223"/>
         <source>%1 You have added members: %2.</source>
         <translation>%1 Добавили пользователей: %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="224"/>
+        <location filename="../src/core/CoreChat.cpp" line="225"/>
         <source>%1 %2 has added members: %3.</source>
         <translation>%1 %2 добавил пользователей: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="231"/>
-        <location filename="../src/core/CoreChat.cpp" line="960"/>
-        <location filename="../src/core/CoreChat.cpp" line="971"/>
+        <location filename="../src/core/CoreChat.cpp" line="232"/>
+        <location filename="../src/core/CoreChat.cpp" line="966"/>
+        <location filename="../src/core/CoreChat.cpp" line="977"/>
         <source>%1 Chat with %2.</source>
         <translation>%1 Чат с %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="292"/>
+        <location filename="../src/core/CoreChat.cpp" line="293"/>
         <source>%1 %2 has left the group chat %3.</source>
         <translation>%1 %2 покинул групповой чат %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="315"/>
+        <location filename="../src/core/CoreChat.cpp" line="316"/>
         <source>%1 %2 wants to remove you from the group chat %3. If you agree please leave the group.</source>
         <translation>%1 %2 хотят удалить вас из группового чата %3. Если вы согласны, пожалуйста, покиньте группу.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="334"/>
+        <location filename="../src/core/CoreChat.cpp" line="335"/>
         <source>%1 %2 is added to saved chats.</source>
         <translation>%1 %2 добавлен в сохраненные чаты.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="351"/>
+        <location filename="../src/core/CoreChat.cpp" line="352"/>
         <source>%1 You have left group chat %2.</source>
         <translation>%1 Вы покинули групповой чат %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="382"/>
+        <location filename="../src/core/CoreChat.cpp" line="383"/>
         <source>%1 Chat with %2 is archived.</source>
         <translation>%1 Чат с %2 сохранен.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="406"/>
+        <location filename="../src/core/CoreChat.cpp" line="407"/>
         <source>Unable to send the message: you are not connected.</source>
         <translation>Не удается отослать сообщение: вы не подключены.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="412"/>
+        <location filename="../src/core/CoreChat.cpp" line="413"/>
         <source>Unable to send the message: this chat is disabled.</source>
         <translation>Не удается отправить сообщение: этот чат отключен.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="451"/>
+        <location filename="../src/core/CoreChat.cpp" line="452"/>
         <source>Unable to send the message to %1.</source>
         <translation>Не удается отослать сообщение для %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="457"/>
+        <location filename="../src/core/CoreChat.cpp" line="458"/>
         <source>Nobody has received the message.</source>
         <translation>Никто не получил сообщение.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="488"/>
+        <location filename="../src/core/CoreChat.cpp" line="489"/>
         <source>The voice message will be delivered to %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="658"/>
+        <location filename="../src/core/CoreChat.cpp" line="659"/>
         <source>Unsent messages had an incorrect authorization code and will not be sent.</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/core/CoreChat.cpp" line="665"/>
+        <location filename="../src/core/CoreChat.cpp" line="666"/>
         <source>%n unsent message(s) will be sent as soon as possible.</source>
         <translation type="unfinished">
             <numerusform></numerusform>
@@ -333,7 +333,7 @@
         </translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="824"/>
+        <location filename="../src/core/CoreChat.cpp" line="830"/>
         <source>Offline messages sent to %1.</source>
         <translation type="unfinished">Офлайн сообщения отправлены %1.</translation>
     </message>
@@ -342,42 +342,42 @@
         <translation type="obsolete">Оффлайн сообщения, которые все еще должны быть отправлены, имели неверный код авторизации и не будут отправлены.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="955"/>
+        <location filename="../src/core/CoreChat.cpp" line="961"/>
         <source>Chat with all users</source>
         <translation>Чат со всеми пользователями</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="250"/>
+        <location filename="../src/core/Core.cpp" line="249"/>
         <source>but encrypted connections allowed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="258"/>
+        <location filename="../src/core/Core.cpp" line="257"/>
         <source>End-to-end encryption is enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="258"/>
+        <location filename="../src/core/Core.cpp" line="257"/>
         <source>but not encrypted connections allowed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="248"/>
+        <location filename="../src/core/Core.cpp" line="247"/>
         <source>End-to-end encryption is disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="490"/>
+        <location filename="../src/core/CoreChat.cpp" line="491"/>
         <source>The message will be delivered to %1.</source>
         <translation>Сообщение будет доставлено %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="643"/>
+        <location filename="../src/core/CoreChat.cpp" line="644"/>
         <source>Saved chats had an incorrect authorization code.</source>
         <translation>Сохраненные чаты имели неверный код авторизации.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="646"/>
+        <location filename="../src/core/CoreChat.cpp" line="647"/>
         <source>%1 saved chats are added to history</source>
         <translation>%1 сохранённых чатоd добавлены к истории</translation>
     </message>
@@ -386,7 +386,7 @@
         <translation type="obsolete">%1 офлайн сообщения будут отправлены как можно скорее.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="710"/>
+        <location filename="../src/core/CoreChat.cpp" line="716"/>
         <source>Offline message will be sent to %1</source>
         <translation>Офлайн сообщения будут отправлены %1</translation>
     </message>
@@ -395,22 +395,22 @@
         <translation type="obsolete">Офлайн сообщения отправлены %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="914"/>
+        <location filename="../src/core/CoreChat.cpp" line="920"/>
         <source>%1 You have buzzed %2.</source>
         <translation>%1 Вы будите %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="960"/>
+        <location filename="../src/core/CoreChat.cpp" line="966"/>
         <source>Unknown %1</source>
         <translation>Неизвестный %1</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="587"/>
+        <location filename="../src/core/CoreChat.cpp" line="588"/>
         <source>%1 %2 cannot be informed that you have left the group.</source>
         <translation>%1 %2 не может быть проинформирован, что вы ушли из группы.</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="547"/>
+        <location filename="../src/core/Core.cpp" line="543"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1 Сетевой интерфейс %2 отключен.</translation>
     </message>
@@ -514,7 +514,7 @@
         <translation type="obsolete">%1 Вы отправили %2 в %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="704"/>
+        <location filename="../src/core/CoreChat.cpp" line="710"/>
         <location filename="../src/core/CoreFileTransfer.cpp" line="182"/>
         <location filename="../src/core/CoreVoiceChat.cpp" line="66"/>
         <source>voice message</source>
@@ -689,12 +689,12 @@
         <translation>%1 %2 будит вас.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="93"/>
+        <location filename="../src/core/CoreUser.cpp" line="94"/>
         <source>You have changed your nickname from %1 to %2.</source>
         <translation>Вы поменяли псевдоним с %1 на %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="95"/>
+        <location filename="../src/core/CoreUser.cpp" line="96"/>
         <source>%1 has changed the nickname in %2.</source>
         <translation>%1 изменил псевдоним на %2.</translation>
     </message>
@@ -707,12 +707,12 @@
         <translation type="obsolete">%1 делится этой информацией</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="317"/>
+        <location filename="../src/core/CoreUser.cpp" line="319"/>
         <source>is removed from favorites</source>
         <translation>удален из избранных</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="323"/>
+        <location filename="../src/core/CoreUser.cpp" line="325"/>
         <source>is added to favorites</source>
         <translation>добавлен в избранные</translation>
     </message>
@@ -1844,32 +1844,41 @@ Please select a different name.</source>
 <context>
     <name>GuiEmoticons</name>
     <message>
-        <location filename="../src/desktop/GuiEmoticons.cpp" line="49"/>
         <source>Recent</source>
-        <translation>Недавние</translation>
+        <translation type="vanished">Недавние</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiEmoticons.cpp" line="49"/>
+        <source>Favorite emoticons</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEmoticons.cpp" line="51"/>
+        <source>Recent emoticons</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiEmoticons.cpp" line="53"/>
         <source>Smiley</source>
         <translation>Смайлики</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEmoticons.cpp" line="53"/>
+        <location filename="../src/desktop/GuiEmoticons.cpp" line="55"/>
         <source>Objects</source>
         <translation>Объекты</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEmoticons.cpp" line="55"/>
+        <location filename="../src/desktop/GuiEmoticons.cpp" line="57"/>
         <source>Nature</source>
         <translation>Природа</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEmoticons.cpp" line="57"/>
+        <location filename="../src/desktop/GuiEmoticons.cpp" line="59"/>
         <source>Places</source>
         <translation>Места</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEmoticons.cpp" line="59"/>
+        <location filename="../src/desktop/GuiEmoticons.cpp" line="61"/>
         <source>Symbols</source>
         <translation>Символы</translation>
     </message>
@@ -6830,7 +6839,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2449"/>
+        <location filename="../src/core/Settings.cpp" line="2463"/>
         <source>Autoresponder</source>
         <translation>Автоответ</translation>
     </message>

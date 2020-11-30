@@ -1514,7 +1514,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Recent</source>
-        <translation>Kürzlich verwendet</translation>
+        <translation type="vanished">Kürzlich verwendet</translation>
     </message>
     <message>
         <source>Objects</source>
@@ -1527,6 +1527,14 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>Symbols</source>
         <translation>Symbole</translation>
+    </message>
+    <message>
+        <source>Favorite emoticons</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recent emoticons</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
