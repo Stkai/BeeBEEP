@@ -381,21 +381,7 @@
         <translation>离线消息将发送给 %1</translation>
     </message>
     <message>
-<<<<<<< HEAD
-        <location filename="../src/core/CoreChat.cpp" line="914"/>
-||||||| 626474d7
-        <source>Offline messages sent to %2.</source>
-        <translation type="obsolete">发送到%2的脱机消息</translation>
-    </message>
-    <message>
-        <location filename="../src/core/CoreChat.cpp" line="914"/>
-=======
-        <source>Offline messages sent to %2.</source>
-        <translation type="obsolete">发送到%2的脱机消息</translation>
-    </message>
-    <message>
         <location filename="../src/core/CoreChat.cpp" line="920"/>
->>>>>>> git-svn
         <source>%1 You have buzzed %2.</source>
         <translation>%1你已经和%2建立联系。</translation>
     </message>
@@ -502,21 +488,7 @@
         <translation>%1无法发送%2:%3未连接</translation>
     </message>
     <message>
-<<<<<<< HEAD
-        <location filename="../src/core/CoreChat.cpp" line="704"/>
-||||||| 626474d7
-        <source>%1 You send %2 to %3.</source>
-        <translation type="obsolete">你将%2发送到%3</translation>
-    </message>
-    <message>
-        <location filename="../src/core/CoreChat.cpp" line="704"/>
-=======
-        <source>%1 You send %2 to %3.</source>
-        <translation type="obsolete">你将%2发送到%3</translation>
-    </message>
-    <message>
         <location filename="../src/core/CoreChat.cpp" line="710"/>
->>>>>>> git-svn
         <location filename="../src/core/CoreFileTransfer.cpp" line="182"/>
         <location filename="../src/core/CoreVoiceChat.cpp" line="66"/>
         <source>voice message</source>
@@ -690,29 +662,7 @@
         <translation>%1已更改昵称为%2</translation>
     </message>
     <message>
-<<<<<<< HEAD
-        <location filename="../src/core/CoreUser.cpp" line="317"/>
-||||||| 626474d7
-        <source>You share this information</source>
-        <translation type="obsolete">你分享了这个信息</translation>
-    </message>
-    <message>
-        <source>%1 shares this information</source>
-        <translation type="obsolete">%1分享了这个信息</translation>
-    </message>
-    <message>
-        <location filename="../src/core/CoreUser.cpp" line="317"/>
-=======
-        <source>You share this information</source>
-        <translation type="obsolete">你分享了这个信息</translation>
-    </message>
-    <message>
-        <source>%1 shares this information</source>
-        <translation type="obsolete">%1分享了这个信息</translation>
-    </message>
-    <message>
         <location filename="../src/core/CoreUser.cpp" line="319"/>
->>>>>>> git-svn
         <source>is removed from favorites</source>
         <translation>已从收藏夹中移除</translation>
     </message>
@@ -1837,18 +1787,14 @@ Please select a different name.</source>
 <context>
     <name>GuiEmoticons</name>
     <message>
-        <source>Recent</source>
-        <translation type="vanished">最近</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiEmoticons.cpp" line="49"/>
         <source>Favorite emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>收藏的表情</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEmoticons.cpp" line="51"/>
         <source>Recent emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>最近使用</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEmoticons.cpp" line="53"/>
@@ -3816,7 +3762,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3901"/>
         <source>Clear recent emoticons</source>
-        <translation>清楚最近表情</translation>
+        <translation>清除最近表情</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3919"/>
@@ -5988,6 +5934,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="91"/>
         <source>Birthday: %1</source>
+        <extracomment>This date format refers to a birthday. Date format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
         <translation>生日:%1</translation>
     </message>
     <message>
@@ -6372,7 +6319,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="1045"/>
         <source>n.a.</source>
-        <translation type="unfinished"></translation>
+        <translation>不可用</translation>
     </message>
 </context>
 <context>
