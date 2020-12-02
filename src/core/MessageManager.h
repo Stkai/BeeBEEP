@@ -34,6 +34,9 @@ class MessageManager
   static MessageManager* mp_instance;
 
 public:
+  void loadSavedMessagesAuthCode();
+  void generateSaveMessagesAuthCode();
+
   void addMessageToSend( VNumber to_user_id, VNumber chat_id, const Message& );
   QList<MessageRecord> takeMessagesToSendToUserId( VNumber );
   int countMessagesToSendToUserId( VNumber );
@@ -44,11 +47,11 @@ public:
   void addMessageRecord( const MessageRecord& );
   void addMessageRecords( const QList<MessageRecord>& );
 
+  bool chatMessageCanBeSaved() const;
   bool unsentMessagesCanBeSaved() const;
-  bool saveUnsentMessages();
+  bool saveMessages( bool save_unsent_messages_also );
 
-  QString generateSaveMessagesAuthCode() const;
-  QString saveMessagesAuthCode() const;
+  inline const QString& savedMessagesAuthCode() const;
 
   static MessageManager& instance()
   {
@@ -68,14 +71,17 @@ public:
 
 protected:
   MessageManager();
+  bool saveUnsentMessages( bool silent_mode );
 
 private:
   QList<MessageRecord> m_messagesToSend;
+  QString m_savedMessagesAuthCode;
 
 };
 
 
 // Inline Functions
 VNumber MessageManager::nextUserWithUnsentMessages() const { return m_messagesToSend.isEmpty() ? ID_INVALID : m_messagesToSend.first().toUserId(); }
+const QString& MessageManager::savedMessagesAuthCode() const { return m_savedMessagesAuthCode; }
 
 #endif // BEEBEEP_MESSAGEMANAGER_H

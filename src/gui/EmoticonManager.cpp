@@ -23,13 +23,13 @@
 
 #include "EmoticonManager.h"
 
-
 EmoticonManager* EmoticonManager::mp_instance = Q_NULLPTR;
 
 
 EmoticonManager::EmoticonManager()
  : m_emoticons(), m_oneCharEmoticons(), m_uniqueKeys(),
-   m_maxTextSize( 2 ), m_recentEmoticons()
+   m_maxTextSize( 2 ), m_favoriteEmoticons(), m_recentEmoticons(),
+   m_recentEmoticonsCount( 48 )
 {
 #ifdef BEEBEEP_DEBUG
   //createEmojiFiles();
@@ -197,6 +197,25 @@ Emoticon EmoticonManager::emoticon( const QString& e_text ) const
   return Emoticon();
 }
 
+Emoticon EmoticonManager::emoticonSelected( const QString& e_text )
+{
+  if( !e_text.isEmpty() )
+  {
+    QChar emoticon_key = e_text.at( 0 );
+    QMultiHash<QChar, Emoticon>::iterator it = m_emoticons.find( emoticon_key );
+    while( it != m_emoticons.end() && it.key() == emoticon_key )
+    {
+      if( it.value().textToMatch() == e_text )
+      {
+        it.value().addToCount();
+        return it.value();
+      }
+      ++it;
+    }
+  }
+  return Emoticon();
+}
+
 Emoticon EmoticonManager::textEmoticon( const QString& e_text ) const
 {
   if( !e_text.isEmpty() )
@@ -320,24 +339,105 @@ QString EmoticonManager::parseEmoticons( const QString& msg, int emoticon_size, 
   return s;
 }
 
-int EmoticonManager::loadRecentEmoticons( const QStringList& sl, int max_size )
+bool EmoticonManager::setEmoticonCount( const QString& e_text, int e_count )
 {
-  m_recentEmoticonsMaxSize = qMax( 6, max_size );
-  int emoticons_load = 0;
+  if( !e_text.isEmpty() )
+  {
+    QChar emoticon_key = e_text.at( 0 );
+    QMultiHash<QChar, Emoticon>::iterator it = m_emoticons.find( emoticon_key );
+    while( it != m_emoticons.end() && it.key() == emoticon_key )
+    {
+      if( it.value().textToMatch() == e_text )
+      {
+        it.value().setCount( e_count );
+        return true;
+      }
+      ++it;
+    }
+  }
+  return false;
+}
+
+void EmoticonManager::clearFavoriteEmoticons()
+{
+  m_favoriteEmoticons.clear();
+  QMultiHash<QChar, Emoticon>::iterator it = m_emoticons.begin();
+  while( it != m_emoticons.end() )
+  {
+    it.value().resetCount();
+    ++it;
+  }
+}
+
+QList<Emoticon> EmoticonManager::favoriteEmoticonsToSort() const
+{
+  QList<Emoticon> favorite_emoticons_to_sort;
+  QMultiHash<QChar, Emoticon>::const_iterator it = m_emoticons.begin();
+  while( it != m_emoticons.end() )
+  {
+    if( it.value().count() > 0 )
+      favorite_emoticons_to_sort.append( it.value() );
+    ++it;
+  }
+  return favorite_emoticons_to_sort;
+}
+
+static bool SortFavoriteEmoticon( const Emoticon& fe1, const Emoticon& fe2 )
+{
+  if( fe1.count() <= 0 && fe2.count() <= 0 )
+    return SortEmoticon( fe1, fe2 );
+  else
+    return fe1.count() > fe2.count();
+}
+
+int EmoticonManager::loadFavoriteEmoticons( const QStringList& sl )
+{
+  bool ok = false;
+  m_favoriteEmoticons.clear();
+  if( !sl.isEmpty() )
+  {
+    foreach( QString s, sl )
+    {
+      QStringList pieces = s.split( " " );
+      if( pieces.size() >= 2 )
+      {
+        QString text_to_match = pieces.at( 0 );
+        int emoticon_count = pieces.at( 1 ).toInt( &ok );
+        if( !ok )
+          emoticon_count = 0;
+        setEmoticonCount( text_to_match, emoticon_count );
+      }
+    }
+  }
+
+  m_favoriteEmoticons = favoriteEmoticonsToSort();
+  std::sort( m_favoriteEmoticons.begin(), m_favoriteEmoticons.end(), SortFavoriteEmoticon );
+  return m_favoriteEmoticons.size();
+}
+
+QStringList EmoticonManager::saveFavoriteEmoticons() const
+{
+  QList<Emoticon> favorite_emoticon_to_sort = favoriteEmoticonsToSort();
+  QStringList sl;
+  foreach( Emoticon e, favorite_emoticon_to_sort )
+    sl.append( QString( "%1 %2" ).arg( e.textToMatch() ).arg( e.count() ) );
+  return sl;
+}
+
+int EmoticonManager::loadRecentEmoticons( const QStringList& sl )
+{
   m_recentEmoticons.clear();
-  Emoticon e;
   foreach( QString s, sl )
   {
-    e = emoticon( s );
+    Emoticon e = emoticon( s );
     if( e.isValid() )
     {
       m_recentEmoticons.append( e );
-      emoticons_load++;
-      if( m_recentEmoticons.size() == m_recentEmoticonsMaxSize )
+      if( m_recentEmoticons.size() == m_recentEmoticonsCount )
         break;
     }
   }
-  return emoticons_load;
+  return  m_recentEmoticons.size();
 }
 
 QStringList EmoticonManager::saveRencentEmoticons() const
@@ -353,7 +453,7 @@ bool EmoticonManager::addToRecentEmoticons( const Emoticon& e )
   if( m_recentEmoticons.contains( e ) )
     return false;
   m_recentEmoticons.prepend( e );
-  if( m_recentEmoticons.size() > m_recentEmoticonsMaxSize )
+  if( m_recentEmoticons.size() > m_recentEmoticonsCount )
     m_recentEmoticons.removeLast();
   return true;
 }

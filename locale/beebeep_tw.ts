@@ -62,341 +62,341 @@
 <context>
     <name>Core</name>
     <message>
-        <location filename="../src/core/Core.cpp" line="212"/>
+        <location filename="../src/core/Core.cpp" line="211"/>
         <source>%1 Unable to connect to %2 Network. Please check your firewall settings.</source>
         <translation>%1 無法連線到 %2 網路。 請檢查您的防火牆設定。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="231"/>
+        <location filename="../src/core/Core.cpp" line="230"/>
         <source>%1 Unable to broadcast to %2 Network. Please check your firewall settings.</source>
         <translation>%1 無法廣播到 %2 網路。 請檢查您的防火牆設定。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="243"/>
+        <location filename="../src/core/Core.cpp" line="242"/>
         <source>%1 You are connected to %2 Network.</source>
         <translation>%1 您已連線到 %2 網路。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="413"/>
+        <location filename="../src/core/Core.cpp" line="409"/>
         <source>%1 You are disconnected from %2 Network.</source>
         <translation>%1 您已中斷與 %2 網路的連線。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="342"/>
+        <location filename="../src/core/Core.cpp" line="341"/>
         <source>%1 Zero Configuration started with service name: %2</source>
         <translation>%1 零組態以服務名稱啟動: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="107"/>
+        <location filename="../src/core/Core.cpp" line="106"/>
         <source>%1 User %2 cannot save settings in path: %3</source>
         <translation>%1 使用者 %2 無法將設定儲存在路徑: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="123"/>
+        <location filename="../src/core/Core.cpp" line="122"/>
         <source>%1 User %2 cannot save chat messages in path: %3</source>
         <translation>%1 使用者 %2 無法將聊天訊息儲存在路徑: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="153"/>
+        <location filename="../src/core/Core.cpp" line="152"/>
         <source>%1 User %2 cannot save unsent messages in path: %3</source>
         <translation>%1 使用者 %2 無法將未傳送的訊息儲存在路徑: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="192"/>
+        <location filename="../src/core/Core.cpp" line="191"/>
         <source>%1 Unable to connect to %2 Network. Please check if your network adapter is connected.</source>
         <translation>%1 無法連線到 %2 網路。 請檢查您的網路介面卡是否已連線。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="195"/>
+        <location filename="../src/core/Core.cpp" line="194"/>
         <source>Network adapter offline</source>
         <translation>網路介面卡離線</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="199"/>
+        <location filename="../src/core/Core.cpp" line="198"/>
         <source>Connecting</source>
         <translation>正在連線</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="267"/>
+        <location filename="../src/core/Core.cpp" line="266"/>
         <source>%1 %2 accepts incoming connections only from the IP addresses present in the HOSTS file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="276"/>
+        <location filename="../src/core/Core.cpp" line="275"/>
         <source>%1 You have selected to join only in these workgroups: %2</source>
         <translation>%1 您選擇只加入這些工作群組: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="305"/>
+        <location filename="../src/core/Core.cpp" line="304"/>
         <source>%1 Do you need support? Visit the %2.</source>
         <translation>%1 您需要支援? 訪問 %2。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="307"/>
+        <location filename="../src/core/Core.cpp" line="306"/>
         <source>help page</source>
         <translation>說明頁</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="357"/>
+        <location filename="../src/core/Core.cpp" line="356"/>
         <source>%1 Zero Configuration service closed.</source>
         <translation>%1 零組態服務已關閉。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="419"/>
+        <location filename="../src/core/Core.cpp" line="415"/>
         <source>Disconnected</source>
         <translation>已中斷連線</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="425"/>
+        <location filename="../src/core/Core.cpp" line="421"/>
         <source>Disconnecting</source>
         <translation>正在中斷連線</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="446"/>
+        <location filename="../src/core/Core.cpp" line="442"/>
         <source>%1 Reconnecting to the %2 Network in progress.</source>
         <translation>%1 重新連線到 %2 網路進行中。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="456"/>
+        <location filename="../src/core/Core.cpp" line="452"/>
         <source>Reconnecting</source>
         <translation>正在重新連線</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="474"/>
+        <location filename="../src/core/Core.cpp" line="470"/>
         <source>%1 Zero Configuration is browsing network for service: %2</source>
         <translation>%1 零組態是瀏覽服務的網路: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="481"/>
+        <location filename="../src/core/Core.cpp" line="477"/>
         <source>%1 Zero Configuration cannot browse network for service: %2</source>
         <translation>%1 零組態無法瀏覽服務的網路: %2</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="505"/>
+        <location filename="../src/core/Core.cpp" line="501"/>
         <source>%1 Broadcasting to the %2 Network...</source>
         <translation>%1 廣播到 %2 網路...</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="507"/>
+        <location filename="../src/core/Core.cpp" line="503"/>
         <source>Searching users</source>
         <translation>搜尋使用者</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="638"/>
+        <location filename="../src/core/Core.cpp" line="611"/>
         <source>New version is available</source>
         <translation>有新版本可以使用</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="639"/>
+        <location filename="../src/core/Core.cpp" line="612"/>
         <source>Click here to download</source>
         <translation>按一下此處下載</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="738"/>
+        <location filename="../src/core/Core.cpp" line="714"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>已達到最大 ID。 請關閉並重新啟動應用程式。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="75"/>
+        <location filename="../src/core/CoreChat.cpp" line="76"/>
         <source>Happy Birthday to you!</source>
         <translation>祝您生日快樂!</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="53"/>
+        <location filename="../src/core/CoreChat.cpp" line="54"/>
         <source>Happy birthday to Marco Mastroddi: %1 years old today! Cheers!!!</source>
         <translation>祝 Marco Mastroddi 生日快樂: 如今 %1 歲! 乾杯!!!</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="69"/>
+        <location filename="../src/core/CoreChat.cpp" line="70"/>
         <source>Happy New Year!</source>
         <translation>新年快樂!</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="121"/>
+        <location filename="../src/core/CoreChat.cpp" line="122"/>
         <source>%1 You have created group chat %2.</source>
         <translation>%1 您建立了群組聊天 %2。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="128"/>
+        <location filename="../src/core/CoreChat.cpp" line="129"/>
         <source>%1 %2 has added you to the group chat %3.</source>
         <translation>%1 %2 已將您加入到群組聊天 %3。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="168"/>
+        <location filename="../src/core/CoreChat.cpp" line="169"/>
         <source>%1 You have changed the group name from %2 to %3.</source>
         <translation>%1 您已將群組名稱從 %2 變更為 %3。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="170"/>
+        <location filename="../src/core/CoreChat.cpp" line="171"/>
         <source>%1 %2 has changed the group name from %3 to %4.</source>
         <translation>%1 %2 已將群組名稱從 %3 變更為 %4。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="186"/>
+        <location filename="../src/core/CoreChat.cpp" line="187"/>
         <source>%1 %2 will be informed of your changes.</source>
         <translation>%1 %2 將告知您的變更。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="200"/>
+        <location filename="../src/core/CoreChat.cpp" line="201"/>
         <source>%1 You have removed members: %2.</source>
         <translation>%1 您已刪除成員: %2。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="202"/>
+        <location filename="../src/core/CoreChat.cpp" line="203"/>
         <source>%1 %2 has removed members: %3.</source>
         <translation>%1 %2 已移除成員: %3。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="205"/>
+        <location filename="../src/core/CoreChat.cpp" line="206"/>
         <source>%1 This kind of change can be temporary if the user exists and does not leave the group spontaneously.</source>
         <translation>%1 如果使用者存在且不自發離開群組，這種變更可能是暫時的。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="222"/>
+        <location filename="../src/core/CoreChat.cpp" line="223"/>
         <source>%1 You have added members: %2.</source>
         <translation>%1 您已加入成員: %2。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="224"/>
+        <location filename="../src/core/CoreChat.cpp" line="225"/>
         <source>%1 %2 has added members: %3.</source>
         <translation>%1 %2 已加入成員: %3。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="231"/>
-        <location filename="../src/core/CoreChat.cpp" line="960"/>
-        <location filename="../src/core/CoreChat.cpp" line="971"/>
+        <location filename="../src/core/CoreChat.cpp" line="232"/>
+        <location filename="../src/core/CoreChat.cpp" line="966"/>
+        <location filename="../src/core/CoreChat.cpp" line="977"/>
         <source>%1 Chat with %2.</source>
         <translation>%1 與 %2 聊天。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="292"/>
+        <location filename="../src/core/CoreChat.cpp" line="293"/>
         <source>%1 %2 has left the group chat %3.</source>
         <translation>%1 %2 已離開群組聊天 %3。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="315"/>
+        <location filename="../src/core/CoreChat.cpp" line="316"/>
         <source>%1 %2 wants to remove you from the group chat %3. If you agree please leave the group.</source>
         <translation>%1 %2 希望將您從群組聊天 %3 中移除。 如果您同意，請離開群組。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="334"/>
+        <location filename="../src/core/CoreChat.cpp" line="335"/>
         <source>%1 %2 is added to saved chats.</source>
         <translation>%1 %2 加入到儲存的聊天。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="351"/>
+        <location filename="../src/core/CoreChat.cpp" line="352"/>
         <source>%1 You have left group chat %2.</source>
         <translation>%1 您已離開群組聊天 %2。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="382"/>
+        <location filename="../src/core/CoreChat.cpp" line="383"/>
         <source>%1 Chat with %2 is archived.</source>
         <translation>%1 與 %2 聊天已封存。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="406"/>
+        <location filename="../src/core/CoreChat.cpp" line="407"/>
         <source>Unable to send the message: you are not connected.</source>
         <translation>無法傳送訊息: 您未連線。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="412"/>
+        <location filename="../src/core/CoreChat.cpp" line="413"/>
         <source>Unable to send the message: this chat is disabled.</source>
         <translation>無法傳送訊息: 此聊天已停用。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="451"/>
+        <location filename="../src/core/CoreChat.cpp" line="452"/>
         <source>Unable to send the message to %1.</source>
         <translation>無法將訊息傳送到 %1。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="457"/>
+        <location filename="../src/core/CoreChat.cpp" line="458"/>
         <source>Nobody has received the message.</source>
         <translation>沒有人收到訊息。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="488"/>
+        <location filename="../src/core/CoreChat.cpp" line="489"/>
         <source>The voice message will be delivered to %1.</source>
         <translation>語音訊息將傳遞到 %1。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="658"/>
+        <location filename="../src/core/CoreChat.cpp" line="659"/>
         <source>Unsent messages had an incorrect authorization code and will not be sent.</source>
         <translation>未傳送的訊息具有不正確的授權碼，且將不會傳送。</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/core/CoreChat.cpp" line="665"/>
+        <location filename="../src/core/CoreChat.cpp" line="666"/>
         <source>%n unsent message(s) will be sent as soon as possible.</source>
         <translation>
             <numerusform>%n 個未傳送的訊息將儘快傳送。</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="824"/>
+        <location filename="../src/core/CoreChat.cpp" line="830"/>
         <source>Offline messages sent to %1.</source>
         <translation>離線訊息傳送到 %1。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="955"/>
+        <location filename="../src/core/CoreChat.cpp" line="961"/>
         <source>Chat with all users</source>
         <translation>與所有使用者聊天</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="250"/>
+        <location filename="../src/core/Core.cpp" line="249"/>
         <source>but encrypted connections allowed</source>
         <translation>但允許加密的連線</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="258"/>
+        <location filename="../src/core/Core.cpp" line="257"/>
         <source>End-to-end encryption is enabled</source>
         <translation>已啟用端對端加密</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="258"/>
+        <location filename="../src/core/Core.cpp" line="257"/>
         <source>but not encrypted connections allowed</source>
         <translation>但不允許加密的連線</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="248"/>
+        <location filename="../src/core/Core.cpp" line="247"/>
         <source>End-to-end encryption is disabled</source>
         <translation>已停用端對端加密</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="490"/>
+        <location filename="../src/core/CoreChat.cpp" line="491"/>
         <source>The message will be delivered to %1.</source>
         <translation>訊息將傳遞到 %1。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="643"/>
+        <location filename="../src/core/CoreChat.cpp" line="644"/>
         <source>Saved chats had an incorrect authorization code.</source>
         <translation>儲存的聊天有不正確的授權碼。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="646"/>
+        <location filename="../src/core/CoreChat.cpp" line="647"/>
         <source>%1 saved chats are added to history</source>
         <translation>%1 個儲存的聊天加入到歷程記錄</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="710"/>
+        <location filename="../src/core/CoreChat.cpp" line="716"/>
         <source>Offline message will be sent to %1</source>
         <translation>離線訊息將傳送到 %1</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="914"/>
+        <location filename="../src/core/CoreChat.cpp" line="920"/>
         <source>%1 You have buzzed %2.</source>
         <translation>%1 您已呼叫 %2。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="960"/>
+        <location filename="../src/core/CoreChat.cpp" line="966"/>
         <source>Unknown %1</source>
         <translation>未知 %1</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="587"/>
+        <location filename="../src/core/CoreChat.cpp" line="588"/>
         <source>%1 %2 cannot be informed that you have left the group.</source>
         <translation>%1 %2 無法告知您已離開群組。</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="547"/>
+        <location filename="../src/core/Core.cpp" line="543"/>
         <source>%1 Network interface %2 is gone down.</source>
         <translation>%1 網路介面 %2 已關閉。</translation>
     </message>
@@ -593,7 +593,7 @@
         <translation>下載</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="704"/>
+        <location filename="../src/core/CoreChat.cpp" line="710"/>
         <location filename="../src/core/CoreFileTransfer.cpp" line="182"/>
         <location filename="../src/core/CoreVoiceChat.cpp" line="66"/>
         <source>voice message</source>
@@ -651,22 +651,22 @@
         <translation>%1 %2 正在呼叫您。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="93"/>
+        <location filename="../src/core/CoreUser.cpp" line="94"/>
         <source>You have changed your nickname from %1 to %2.</source>
         <translation>您已將昵稱從 %1 更改為 %2。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="95"/>
+        <location filename="../src/core/CoreUser.cpp" line="96"/>
         <source>%1 has changed the nickname in %2.</source>
         <translation>%1 已變更 %2 中的昵稱。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="317"/>
+        <location filename="../src/core/CoreUser.cpp" line="319"/>
         <source>is removed from favorites</source>
         <translation>從我的最愛中移除</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreUser.cpp" line="323"/>
+        <location filename="../src/core/CoreUser.cpp" line="325"/>
         <source>is added to favorites</source>
         <translation>已加入到我的最愛</translation>
     </message>
@@ -1787,32 +1787,41 @@ Please select a different name.</source>
 <context>
     <name>GuiEmoticons</name>
     <message>
-        <location filename="../src/desktop/GuiEmoticons.cpp" line="49"/>
         <source>Recent</source>
-        <translation>最近使用</translation>
+        <translation type="vanished">最近使用</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiEmoticons.cpp" line="49"/>
+        <source>Favorite emoticons</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEmoticons.cpp" line="51"/>
+        <source>Recent emoticons</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiEmoticons.cpp" line="53"/>
         <source>Smiley</source>
         <translation>微笑</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEmoticons.cpp" line="53"/>
+        <location filename="../src/desktop/GuiEmoticons.cpp" line="55"/>
         <source>Objects</source>
         <translation>物件</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEmoticons.cpp" line="55"/>
+        <location filename="../src/desktop/GuiEmoticons.cpp" line="57"/>
         <source>Nature</source>
         <translation>自然</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEmoticons.cpp" line="57"/>
+        <location filename="../src/desktop/GuiEmoticons.cpp" line="59"/>
         <source>Places</source>
         <translation>地點</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiEmoticons.cpp" line="59"/>
+        <location filename="../src/desktop/GuiEmoticons.cpp" line="61"/>
         <source>Symbols</source>
         <translation>符號</translation>
     </message>
@@ -6640,7 +6649,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2449"/>
+        <location filename="../src/core/Settings.cpp" line="2463"/>
         <source>Autoresponder</source>
         <translation>自動回應器</translation>
     </message>

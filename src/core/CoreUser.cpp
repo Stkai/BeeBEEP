@@ -26,6 +26,7 @@
 #include "Connection.h"
 #include "Core.h"
 #include "IconManager.h"
+#include "MessageManager.h"
 #include "Protocol.h"
 #include "Settings.h"
 #include "UserManager.h"
@@ -162,6 +163,7 @@ bool Core::setLocalUserVCard( const QString& user_color, const VCard& vc )
   VCard old_vcard = u.vCard();
   Settings::instance().setLocalUser( u );
   Settings::instance().save();
+  MessageManager::instance().generateSaveMessagesAuthCode();
 
   sendMessageToAllConnectedUsers( Protocol::instance().localVCardMessage() );
   showUserVCardChanged( u, old_vcard );
@@ -514,4 +516,5 @@ void Core::regenerateLocalUserHash()
   User u = Settings::instance().localUser();
   u.setHash( Settings::instance().createLocalUserHash() );
   Settings::instance().setLocalUser( u );
+  MessageManager::instance().generateSaveMessagesAuthCode();
 }

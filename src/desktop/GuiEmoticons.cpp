@@ -29,7 +29,7 @@
 
 
 GuiEmoticons::GuiEmoticons( QWidget* parent )
-  : QTabWidget( parent ), m_recentTabIndex( 0 )
+  : QTabWidget( parent ), m_favoriteTabIndex( 0 ), m_recentTabIndex( 1 )
 {
   setObjectName( "GuiEmoticons" );
   setTabPosition( QTabWidget::West );
@@ -45,8 +45,10 @@ QSize GuiEmoticons::sizeHint() const
 
 void GuiEmoticons::initEmoticons( int current_index )
 {
+  mp_favorite = new GuiEmoticonWidget( this );
+  m_favoriteTabIndex = addEmoticonTab( mp_favorite, Emoticon::Unknown, tr( "Favorite emoticons" ) );
   mp_recent = new GuiEmoticonWidget( this );
-  m_recentTabIndex = addEmoticonTab( mp_recent, Emoticon::Unknown, tr( "Recent" ) );
+  m_recentTabIndex = addEmoticonTab( mp_recent, Emoticon::Unknown, tr( "Recent emoticons" ) );
   GuiEmoticonWidget* emoticon_widget = new GuiEmoticonWidget( this );
   int smiley_index = addEmoticonTab( emoticon_widget, Emoticon::People, tr( "Smiley" ) );
   emoticon_widget = new GuiEmoticonWidget( this );
@@ -61,12 +63,12 @@ void GuiEmoticons::initEmoticons( int current_index )
   if( current_index >= 0 && current_index < count() )
     setCurrentIndex( current_index );
   else
-    setCurrentIndex( Settings::instance().recentEmoticons().size() >= Settings::instance().emoticonInRecentMenu() ? m_recentTabIndex : smiley_index );
+    setCurrentIndex( EmoticonManager::instance().recentEmoticons().size() >= EmoticonManager::instance().recentEmoticonsCount() ? m_recentTabIndex : smiley_index );
 }
 
 int GuiEmoticons::addEmoticonTab( GuiEmoticonWidget* emoticon_widget, Emoticon::Group emoticon_group, const QString& group_name )
 {
-  QIcon group_icon = emoticon_group != Emoticon::Unknown ? Emoticon::groupIcon( emoticon_group ) : IconManager::instance().icon( "recent.png" );
+  QIcon group_icon = emoticon_group == Emoticon::Unknown ? (emoticon_widget == mp_favorite ? IconManager::instance().icon( "favorite.png" ) : IconManager::instance().icon( "recent.png" )) : Emoticon::groupIcon( emoticon_group );
   emoticon_widget->setObjectName( emoticon_widget->objectName() + group_name );
   emoticon_widget->setEmoticonGroup( emoticon_group );
 
@@ -115,10 +117,19 @@ void GuiEmoticons::loadEmoticons( int current_index )
     return;
 
   QApplication::setOverrideCursor( Qt::WaitCursor );
-  if( gwe == mp_recent )
+  if( gwe == mp_favorite )
+  {
+    emoticon_list = EmoticonManager::instance().favoriteEmoticons();
+    if( emoticon_list.size() > 0 )
+    {
+      while( emoticon_list.size() < EmoticonManager::instance().recentEmoticonsCount() )
+        emoticon_list << Emoticon();
+    }
+  }
+  else if( gwe == mp_recent )
   {
     emoticon_list = EmoticonManager::instance().recentEmoticons();
-    while( emoticon_list.size() < Settings::instance().emoticonInRecentMenu() )
+    while( emoticon_list.size() < EmoticonManager::instance().recentEmoticonsCount() )
       emoticon_list << Emoticon();
   }
   else
@@ -204,31 +215,25 @@ void GuiEmoticons::setEmoticonToButton( const Emoticon& e, QPushButton* pb )
   pb->setObjectName( object_name );
 }
 
-Emoticon GuiEmoticons::emoticonFromObject( QObject* emoticon_object )
-{
-  QString emoticon_code = emoticon_object->objectName();
-  emoticon_code.remove( "GuiEmoticonCode" );
-  return emoticon_code.isEmpty() ? Emoticon() : EmoticonManager::instance().emoticon( emoticon_code );
-}
-
 void GuiEmoticons::emoticonClicked()
 {
   QObject* emoticon_object = sender();
   if( !emoticon_object )
     return;
 
-  Emoticon e = emoticonFromObject( emoticon_object );
+  QString emoticon_code = emoticon_object->objectName();
+  emoticon_code.remove( "GuiEmoticonCode" );
+  Emoticon e = emoticon_code.isEmpty() ? Emoticon() : EmoticonManager::instance().emoticonSelected( emoticon_code );
   if( e.isValid() )
   {
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Emoticon clicked is" << qPrintable( e.textToMatch() ) << e.name();
 #endif
-    if( currentIndex() != m_recentTabIndex )
+    if( currentIndex() != m_favoriteTabIndex && currentIndex() != m_recentTabIndex )
     {
       if( EmoticonManager::instance().addToRecentEmoticons( e ) )
         setRecentEmoticons( EmoticonManager::instance().recentEmoticons() );
     }
-
     emit( emoticonSelected( e ) );
   }
 }
@@ -245,6 +250,20 @@ void GuiEmoticons::setRecentEmoticons( const QList<Emoticon>& emoticon_list )
     setEmoticonToButton( e, emoticon_button );
   }
   mp_recent->setEmoticonButtons( recent_button_list );
+}
+
+void GuiEmoticons::setFavoriteEmoticons( const QList<Emoticon>& emoticon_list )
+{
+  QList<QPushButton*> recent_button_list = mp_favorite->emoticonButtons();
+  QPushButton* emoticon_button;
+  Emoticon e;
+  for( int i = 0; i < recent_button_list.size(); i++ )
+  {
+    emoticon_button = recent_button_list.at( i );
+    Emoticon e = emoticon_list.value( i );
+    setEmoticonToButton( e, emoticon_button );
+  }
+  mp_favorite->setEmoticonButtons( recent_button_list );
 }
 
 

@@ -1615,6 +1615,14 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Recent</source>
+        <translation type="vanished">Recenti</translation>
+    </message>
+    <message>
+        <source>Favorite emoticons</source>
+        <translation>Preferite</translation>
+    </message>
+    <message>
+        <source>Recent emoticons</source>
         <translation>Recenti</translation>
     </message>
 </context>

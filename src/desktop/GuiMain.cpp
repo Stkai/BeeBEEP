@@ -72,7 +72,7 @@
 #include "NetworkManager.h"
 #include "PluginManager.h"
 #include "Protocol.h"
-#include "SaveChatList.h"
+#include "MessageManager.h"
 #include "Settings.h"
 #include "ShortcutManager.h"
 #include "SpellChecker.h"
@@ -407,7 +407,7 @@ void GuiMain::closeEvent( QCloseEvent* e )
 
     if( Settings::instance().chatAutoSave() )
     {
-      if( !SaveChatList::canBeSaved() )
+      if( !MessageManager::instance().chatMessageCanBeSaved() )
       {
         if( QMessageBox::warning( this, Settings::instance().programName(),
                               QString( "%1<br>%2<br>%3<br>%4<br>%5" ).arg( tr( "<b>Chat messages can not be saved</b>. Path:" ) )
@@ -2069,7 +2069,7 @@ void GuiMain::settingsChanged( QAction* act )
       {
         if( QMessageBox::question( this, Settings::instance().programName(),
                                tr( "Saving unsent messages may fail if 'Save users' and 'Save groups' options are not enabled. Do you want to enable them?" ),
-                               tr( "Yes" ), tr( "No"), QString(), 0, 1 ) == 0 )
+                               tr( "Yes" ), tr( "No" ), QString(), 0, 1 ) == 0 )
         {
           Settings::instance().setSaveUserList( true );
           Settings::instance().setSaveGroupList( true );

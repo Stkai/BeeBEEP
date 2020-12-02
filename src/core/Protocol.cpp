@@ -2181,15 +2181,18 @@ QString Protocol::linkifyText( const QString& text )
   }
 #endif
 
-  QUrl input_url = QUrl::fromUserInput( simplified_text );
-  if( input_url.isLocalFile() )
+  if( !simplified_text.startsWith( ":" ) )
   {
+    QUrl input_url = QUrl::fromUserInput( simplified_text );
+    if( input_url.isLocalFile() )
+    {
 #if QT_VERSION >= 0x050000
-    linkfied_text = QString( "<a href=\"%1\">%2</a>" ).arg( input_url.url() ).arg( simplified_text );
+      linkfied_text = QString( "<a href=\"%1\">%2</a>" ).arg( input_url.url() ).arg( simplified_text );
 #else
-    linkfied_text = QString( "<a href=\"%1\">%2</a>" ).arg( input_url.toString() ).arg( simplified_text );
+      linkfied_text = QString( "<a href=\"%1\">%2</a>" ).arg( input_url.toString() ).arg( simplified_text );
 #endif
-    return linkfied_text;
+      return linkfied_text;
+    }
   }
 
   if( !linkfied_text.contains( QLatin1Char( '.' ) ) )

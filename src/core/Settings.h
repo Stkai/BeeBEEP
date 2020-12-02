@@ -185,6 +185,8 @@ public:
   inline int emoticonSizeInChat() const;
   inline int emoticonSizeInMenu() const;
   inline int emoticonInRecentMenu() const;
+  inline void setFavoriteEmoticons( const QStringList& );
+  inline const QStringList& favoriteEmoticons() const;
   inline void setRecentEmoticons( const QStringList& );
   inline const QStringList& recentEmoticons() const;
   inline bool useOnlyTextEmoticons() const;
@@ -441,6 +443,7 @@ public:
   inline int maxFileShared() const;
 
   QString savedChatsFilePath() const;
+  QString autoSavedChatsFilePath() const;
   inline bool chatAutoSave() const;
   inline void setChatAutoSave( bool );
   inline int chatMaxLineSaved() const;
@@ -452,6 +455,8 @@ public:
   inline void setChatSaveFileTransfers( bool );
   inline bool chatSaveSystemMessages() const;
   inline void setChatSaveSystemMessages( bool );
+  inline int tickIntervalChatAutoSave() const;
+  inline void setTickIntervalChatAutoSave( int );
 
   inline bool autoUserAway() const;
   inline void setAutoUserAway( bool );
@@ -837,6 +842,7 @@ private:
   int m_emoticonSizeInChat;
   int m_emoticonSizeInMenu;
   int m_emoticonInRecentMenu;
+  QStringList m_favoriteEmoticons;
   QStringList m_recentEmoticons;
 
   bool m_usePreviewFileDialog;
@@ -887,6 +893,7 @@ private:
   bool m_chatSaveUnsentMessages;
   bool m_chatSaveFileTransfers;
   bool m_chatSaveSystemMessages;
+  int m_tickIntervalChatAutoSave;
 
   bool m_autoUserAway;
 
@@ -1181,6 +1188,8 @@ inline int Settings::emoticonSizeInEdit() const { return m_emoticonSizeInEdit; }
 inline int Settings::emoticonSizeInChat() const { return m_emoticonSizeInChat; }
 inline int Settings::emoticonSizeInMenu() const { return m_emoticonSizeInMenu; }
 inline int Settings::emoticonInRecentMenu() const { return m_emoticonInRecentMenu; }
+inline void Settings::setFavoriteEmoticons( const QStringList& new_value ) { m_favoriteEmoticons = new_value; }
+inline const QStringList& Settings::favoriteEmoticons() const { return m_favoriteEmoticons; }
 inline void Settings::setRecentEmoticons( const QStringList& new_value ) { m_recentEmoticons = new_value; }
 inline const QStringList& Settings::recentEmoticons() const { return m_recentEmoticons; }
 inline bool Settings::isNotificationDisabledForGroup( const QString& group_id ) const { return group_id.isEmpty() ? false : m_groupSilenced.contains( group_id ); }
@@ -1425,5 +1434,7 @@ inline const QStringList& Settings::allowedFileExtensionsInFileTransfer() const 
 inline void Settings::setResetMinimumWidthForStyle( bool new_value ) { m_resetMinimumWidthForStyle = new_value; }
 inline bool Settings::resetMinimumWidthForStyle() { return m_resetMinimumWidthForStyle; }
 inline bool Settings::isConnectionKeyExchangeOnlyECDH() const { return m_connectionKeyExchangeMethod == ConnectionKeyExchangeECDH; }
+inline int Settings::tickIntervalChatAutoSave() const { return m_tickIntervalChatAutoSave; }
+inline void Settings::setTickIntervalChatAutoSave( int new_value ) { m_tickIntervalChatAutoSave = new_value; }
 
 #endif // BEEBEEP_SETTINGS_

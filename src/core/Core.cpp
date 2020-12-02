@@ -28,7 +28,6 @@
 #include "Broadcaster.h"
 #include "FileShare.h"
 #include "IconManager.h"
-#include "SaveChatList.h"
 #include "Settings.h"
 #include "MessageManager.h"
 #include "NetworkManager.h"
@@ -116,7 +115,7 @@ bool Core::checkSavingPaths()
 
   if( Settings::instance().chatAutoSave() )
   {
-    if( !SaveChatList::canBeSaved() )
+    if( !MessageManager::instance().chatMessageCanBeSaved() )
     {
       qWarning() << "User" << Settings::instance().localUser().accountName() << "cannot save chat messages in path:" << qPrintable( Settings::instance().savedChatsFilePath() );
       dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
@@ -398,10 +397,7 @@ void Core::stop()
   m_connections.clear();
   checkSavingPaths();
   saveUsersAndGroups();
-  MessageManager::instance().generateSaveMessagesAuthCode();
-  saveChatMessages();
-  saveUnsentMessages();
-  Settings::instance().save();
+  MessageManager::instance().saveMessages( true );
 
   if( Settings::instance().localUser().isStatusConnected() )
   {
@@ -564,29 +560,6 @@ void Core::checkNetworkInterface()
   }
 }
 
-bool Core::saveChatMessages()
-{
-  if( !Settings::instance().enableSaveData() )
-  {
-    qDebug() << "Skip saving chat messages because you have disabled this option in RC file";
-    return false;
-  }
-
-  SaveChatList scl;
-  return scl.save();
-}
-
-bool Core::saveUnsentMessages()
-{
-  if( !Settings::instance().enableSaveData() )
-  {
-    qDebug() << "Skip saving unsent messages because you have disabled this option in RC file";
-    return false;
-  }
-
-  return MessageManager::instance().saveUnsentMessages();
-}
-
 void Core::checkNewVersion()
 {
   if( !NetworkManager::instance().isMainInterfaceUp() )
@@ -727,6 +700,9 @@ void Core::onTickEvent( int ticks )
 
     if( mp_fileTransfer->isActive() )
       mp_fileTransfer->onTickEvent( ticks );
+
+    if( Bee::isTimeToCheck( ticks, Settings::instance().tickIntervalChatAutoSave() ) )
+      QMetaObject::invokeMethod( this, "autoSaveChatMessages", Qt::QueuedConnection );
   }
 
   if( Bee::isTimeToCheck( ticks, Settings::instance().tickIntervalCheckNetwork() ) )

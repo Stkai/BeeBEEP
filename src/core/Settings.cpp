@@ -185,7 +185,7 @@ Settings::Settings()
 
   m_tickIntervalConnectionTimeout = TICK_INTERVAL_CONNECTION_TIMEOUT;
   m_useReturnToSendMessage = true;
-  m_tickIntervalCheckIdle = 10;
+  m_tickIntervalCheckIdle = 13;
   m_tickIntervalCheckNetwork = 5;
   m_tickIntervalBroadcasting = 0;
   m_broadcastToOfflineUsers = false;
@@ -227,6 +227,8 @@ Settings::Settings()
 
   m_chatActiveWindowOpacityLevel = 100;
   m_chatInactiveWindowOpacityLevel = chatInactiveWindowDefaultOpacityLevel();
+
+  m_tickIntervalChatAutoSave = 61;
 
   m_useMessageTimestampWithAP = false;
   m_useDarkStyle = false;
@@ -527,6 +529,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "DisableConnectionSocketDataCompression", m_disableConnectionSocketDataCompression );
     sets->setValue( "AllowedFileExtensionsInFileTransfer", m_allowedFileExtensionsInFileTransfer.isEmpty() ? QString( "" ) : m_allowedFileExtensionsInFileTransfer.join( ", " ) );
     sets->setValue( "ConnectionKeyExchangeMethod", m_connectionKeyExchangeMethod );
+    sets->setValue( "TickIntervalChatAutoSave", m_tickIntervalChatAutoSave );
     sets->endGroup();
     sets->sync();
     qDebug() << "RC default configuration file created in" << qPrintable( Bee::convertToNativeFolderSeparator( sets->fileName() ) );
@@ -1458,6 +1461,7 @@ void Settings::loadCommonSettings( QSettings* user_ini )
   m_textSizeInChatMessagePreviewOnTray = commonValue( system_rc, user_ini, "TextSizeInChatMessagePreviewOnTray", 40 ).toInt();
   m_showFileTransferCompletedOnTray = commonValue( system_rc, user_ini, "ShowFileTransferCompletedOnTray", true ).toBool();
   m_chatAutoSave = commonValue( system_rc, user_ini, "ChatAutoSave", true ).toBool();
+  m_tickIntervalChatAutoSave = commonValue( system_rc, user_ini, "TickIntervalChatAutoSave", m_tickIntervalChatAutoSave ).toInt();
   m_chatSaveUnsentMessages = commonValue( system_rc, user_ini, "ChatSaveUnsentMessages", true ).toBool();
   m_chatMaxLineSaved = commonValue( system_rc, user_ini, "ChatMaxLineSaved", 9000 ).toInt();
   m_chatSaveFileTransfers = commonValue( system_rc, user_ini, "ChatSaveFileTransfers", m_chatAutoSave ).toBool();
@@ -1472,6 +1476,7 @@ void Settings::loadCommonSettings( QSettings* user_ini )
   m_emoticonSizeInChat = qMax( 12, commonValue( system_rc, user_ini, "EmoticonSizeInChat", m_emoticonSizeInChat ).toInt() );
   m_emoticonSizeInMenu = commonValue( system_rc, user_ini, "EmoticonSizeInMenu", m_emoticonSizeInMenu ).toInt();
   m_emoticonInRecentMenu = commonValue( system_rc, user_ini, "EmoticonsInRecentMenu", m_emoticonInRecentMenu ).toInt();
+  m_favoriteEmoticons = user_ini->value( "FavoriteEmoticons", QStringList() ).toStringList();
   m_recentEmoticons = user_ini->value( "RecentEmoticons", QStringList() ).toStringList();
   m_useNativeEmoticons = commonValue( system_rc, user_ini, "UseNativeEmoticons", m_useNativeEmoticons ).toBool();
   m_useHiResEmoticons = commonValue( system_rc, user_ini, "UseHighResolutionEmoticons", m_useHiResEmoticons ).toBool();
@@ -1702,8 +1707,8 @@ void Settings::save()
     return;
   }
 
+  beeApp->setCheckSettingsFilePath( false );
   QSettings *sets = objectSettings();
-  beeApp->setSettingsFilePath( "" );
   sets->clear();
 
   sets->beginGroup( "Version" );
@@ -1837,6 +1842,7 @@ void Settings::save()
   sets->setValue( "TextSizeInChatMessagePreviewOnTray", m_textSizeInChatMessagePreviewOnTray );
   sets->setValue( "ShowFileTransferCompletedOnTray", m_showFileTransferCompletedOnTray );
   sets->setValue( "ChatAutoSave", m_chatAutoSave );
+  sets->setValue( "TickIntervalChatAutoSave", m_tickIntervalChatAutoSave );
   sets->setValue( "ChatMaxLineSaved", m_chatMaxLineSaved );
   sets->setValue( "ChatSaveUnsentMessages", m_chatSaveUnsentMessages );
   sets->setValue( "ChatSaveFileTransfers", m_chatSaveFileTransfers );
@@ -1853,6 +1859,7 @@ void Settings::save()
   sets->setValue( "EmoticonSizeInChat", m_emoticonSizeInChat );
   sets->setValue( "EmoticonSizeInMenu", m_emoticonSizeInMenu );
   sets->setValue( "EmoticonsInRecentMenu", m_emoticonInRecentMenu );
+  sets->setValue( "FavoriteEmoticons", m_favoriteEmoticons );
   sets->setValue( "RecentEmoticons", m_recentEmoticons );
   sets->setValue( "UseNativeEmoticons", m_useNativeEmoticons );
   sets->setValue( "UseHighResolutionEmoticons", m_useHiResEmoticons );
@@ -2018,7 +2025,9 @@ void Settings::save()
 #else
   m_currentFilePath = Bee::convertToNativeFolderSeparator( sets->fileName() );
 #endif
+
   beeApp->setSettingsFilePath( m_currentFilePath );
+  beeApp->setCheckSettingsFilePath( true );
   sets->deleteLater();
 }
 
@@ -2338,6 +2347,11 @@ QString Settings::defaultCacheFolderPath() const
 QString Settings::savedChatsFilePath() const
 {
   return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder() ).arg( "beebeep.dat" ) );
+}
+
+QString Settings::autoSavedChatsFilePath() const
+{
+  return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder() ).arg( "beebeep.bak" ) );
 }
 
 QString Settings::unsentMessagesFilePath() const
