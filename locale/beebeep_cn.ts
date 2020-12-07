@@ -119,12 +119,12 @@
     <message>
         <location filename="../src/core/Core.cpp" line="266"/>
         <source>%1 %2 accepts incoming connections only from the IP addresses present in the HOSTS file.</source>
-        <translation>%1`%2只允许来自HOSTS文件连接</translation>
+        <translation>%1 %2只允许连接HOSTS文件中的主机</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="275"/>
         <source>%1 You have selected to join only in these workgroups: %2</source>
-        <translation>%1你只选择了加入这些群聊：%2</translation>
+        <translation>%1你选择了只加入这些群组：%2</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="304"/>
@@ -214,7 +214,7 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="122"/>
         <source>%1 You have created group chat %2.</source>
-        <translation>%1你已经创建了群聊%2。</translation>
+        <translation>%1你已经创建了群组%2。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="129"/>
@@ -271,12 +271,12 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="293"/>
         <source>%1 %2 has left the group chat %3.</source>
-        <translation>%1 %2已离开群聊%3.</translation>
+        <translation>%1 %2已离开群组%3.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="316"/>
         <source>%1 %2 wants to remove you from the group chat %3. If you agree please leave the group.</source>
-        <translation>%1 %2想把您从群聊%3中删除。如果你同意，请离开这个群聊。</translation>
+        <translation>%1 %2想把您从群组%3中删除。如果你同意，请离开这个群组。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="335"/>
@@ -286,7 +286,7 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="352"/>
         <source>%1 You have left group chat %2.</source>
-        <translation>%1你已离开群聊%2。</translation>
+        <translation>%1你已离开群组%2。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="383"/>
@@ -373,16 +373,12 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="647"/>
         <source>%1 saved chats are added to history</source>
-        <translation>%1个已保存的聊天</translation>
+        <translation>%1个聊天历史</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="716"/>
         <source>Offline message will be sent to %1</source>
         <translation>离线消息将发送给 %1</translation>
-    </message>
-    <message>
-        <source>Offline messages sent to %2.</source>
-        <translation type="obsolete">发送到%2的脱机消息</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="920"/>
@@ -445,10 +441,6 @@
         <translation>监听</translation>
     </message>
     <message>
-        <source>Open</source>
-        <translation type="obsolete">打开</translation>
-    </message>
-    <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="392"/>
         <source>%1 Unable to send %2 to %3: user is offline.</source>
         <translation>%1无法发送%2到%3:用户离线</translation>
@@ -486,10 +478,6 @@
         <translation>文件夹</translation>
     </message>
     <message>
-        <source>%1 %2: file not found.</source>
-        <translation type="obsolete">%1 %2:文件未找到</translation>
-    </message>
-    <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="403"/>
         <source>%1 %2 is a folder. You can share it.</source>
         <translation>%1 %2是一个文件夹。你可以分享它</translation>
@@ -498,10 +486,6 @@
         <location filename="../src/core/CoreFileTransfer.cpp" line="430"/>
         <source>%1 Unable to send %2: %3 is not connected.</source>
         <translation>%1无法发送%2:%3未连接</translation>
-    </message>
-    <message>
-        <source>%1 You send %2 to %3.</source>
-        <translation type="obsolete">你将%2发送到%3</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="710"/>
@@ -622,18 +606,6 @@
         <translation>%1正在发送%2到%3</translation>
     </message>
     <message>
-        <source>%1 You send folder %2 to %3.</source>
-        <translation type="obsolete">%1你讲文件从%2发送到%3</translation>
-    </message>
-    <message>
-        <source>%1 %2 has refused to download %3.</source>
-        <translation type="obsolete">%1 %2拒绝下载%3</translation>
-    </message>
-    <message>
-        <source>%1 %2 is sending to you the file: %3.</source>
-        <translation type="obsolete">%1 %2正在向你发送文件：%3</translation>
-    </message>
-    <message>
         <location filename="../src/core/CoreParser.cpp" line="163"/>
         <source>%1 %2 has refused to download the file: %3</source>
         <translation>%1 %2拒绝下载文件:%3</translation>
@@ -690,14 +662,6 @@
         <translation>%1已更改昵称为%2</translation>
     </message>
     <message>
-        <source>You share this information</source>
-        <translation type="obsolete">你分享了这个信息</translation>
-    </message>
-    <message>
-        <source>%1 shares this information</source>
-        <translation type="obsolete">%1分享了这个信息</translation>
-    </message>
-    <message>
         <location filename="../src/core/CoreUser.cpp" line="319"/>
         <source>is removed from favorites</source>
         <translation>已从收藏夹中移除</translation>
@@ -727,7 +691,7 @@
     <message>
         <location filename="../src/core/CoreConnection.cpp" line="310"/>
         <source>%1 Connection closed to user %2 because it uses your hash code.</source>
-        <translation>%1与%2的连接已关闭，使用了相同的散列值。</translation>
+        <translation>%1与%2的连接已关闭，使用了相同的哈希码。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreConnection.cpp" line="330"/>
@@ -788,7 +752,7 @@
     <message>
         <location filename="../src/core/CoreDispatcher.cpp" line="64"/>
         <source>You are not a member of group %1. Your messages will be not shown.</source>
-        <translation>你不是群聊%1的成员，你的消息不会显示</translation>
+        <translation>你不是群组%1的成员，你的消息不会显示</translation>
     </message>
     <message>
         <location filename="../src/core/CoreVoiceChat.cpp" line="38"/>
@@ -813,7 +777,7 @@
         <location filename="../src/desktop/GuiChatMessage.cpp" line="61"/>
         <source>h:mm:ss ap</source>
         <extracomment>Time format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
-        <translation>h:mm:ss ap</translation>
+        <translation>ap h:mm:ss</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="66"/>
@@ -889,10 +853,6 @@
         <translation>已经下载了%1字节，但文件只有%2字节</translation>
     </message>
     <message>
-        <source>Transfer cancelled</source>
-        <translation type="obsolete">传输已取消</translation>
-    </message>
-    <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="96"/>
         <source>Transfer queued</source>
         <translation>传输队列</translation>
@@ -900,7 +860,7 @@
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="194"/>
         <source>the file already exists</source>
-        <translation type="unfinished"></translation>
+        <translation>文件已存在</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="196"/>
@@ -1460,10 +1420,6 @@ Download for free and install the version with this feature from the %1 website.
         <translation>复制到剪切板</translation>
     </message>
     <message>
-        <source>Select All</source>
-        <translation type="obsolete">全选</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiChat.cpp" line="395"/>
         <source>Show only messages in default chat</source>
         <translation>只显示默认聊天的消息</translation>
@@ -1477,10 +1433,6 @@ Download for free and install the version with this feature from the %1 website.
         <location filename="../src/desktop/GuiChat.cpp" line="298"/>
         <source>Write a message to %1</source>
         <translation>给%1发送消息</translation>
-    </message>
-    <message>
-        <source>Please select a file to save the messages of the chat.</source>
-        <translation type="obsolete">请选择一个文件保存当前聊天的消息</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="830"/>
@@ -1534,10 +1486,6 @@ Download for free and install the version with this feature from the %1 website.
         <translation>取消</translation>
     </message>
     <message>
-        <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation type="obsolete">当前系统的Qt库不支持拖放文件，你需要选择文件发送。</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiChat.cpp" line="1020"/>
         <source>Use key Return to send message</source>
         <translation>使用Return按键发送消息</translation>
@@ -1571,7 +1519,7 @@ Download for free and install the version with this feature from the %1 website.
         <location filename="../src/desktop/GuiChatList.cpp" line="162"/>
         <location filename="../src/desktop/GuiChatList.cpp" line="274"/>
         <source>Create new group chat</source>
-        <translation>创建群聊</translation>
+        <translation>创建群组</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatList.cpp" line="177"/>
@@ -1646,17 +1594,17 @@ Download for free and install the version with this feature from the %1 website.
     <message>
         <location filename="../src/desktop/GuiCreateGroup.ui" line="14"/>
         <source>Dialog</source>
-        <translation>群聊设置</translation>
+        <translation>群组设置</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateGroup.ui" line="59"/>
         <source>Leave this group</source>
-        <translation>离开群聊</translation>
+        <translation>离开群组</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateGroup.ui" line="94"/>
         <source>Group chat name</source>
-        <translation>群聊名称</translation>
+        <translation>群组名称</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateGroup.ui" line="107"/>
@@ -1681,12 +1629,12 @@ Download for free and install the version with this feature from the %1 website.
     <message>
         <location filename="../src/desktop/GuiCreateGroup.cpp" line="66"/>
         <source>Edit group chat</source>
-        <translation>编辑群聊</translation>
+        <translation>编辑群组</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateGroup.cpp" line="72"/>
         <source>Create new group chat</source>
-        <translation>新建群聊</translation>
+        <translation>新建群组</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateGroup.cpp" line="114"/>
@@ -1696,13 +1644,13 @@ Download for free and install the version with this feature from the %1 website.
     <message>
         <location filename="../src/desktop/GuiCreateGroup.cpp" line="122"/>
         <source>Please insert a group name.</source>
-        <translation>请输入群聊名称</translation>
+        <translation>请输入群组名称</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateGroup.cpp" line="131"/>
         <source>%1 already exists as group name or chat name.
 Please select a different name.</source>
-        <translation>%1已经存在的群聊名称或聊天名名称，请输入不同的名字。</translation>
+        <translation>%1已经存在的群组名称或聊天名名称，请输入不同的名字。</translation>
     </message>
 </context>
 <context>
@@ -1710,7 +1658,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.cpp" line="41"/>
         <source>Create message</source>
-        <translation>新建信息</translation>
+        <translation>新建消息</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.cpp" line="124"/>
@@ -1828,7 +1776,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="234"/>
         <source>Be careful, by changing the hash code you may no longer be a member of some groups and you will have to get invited again. Do you really want to regenerate your hash code?</source>
-        <translation>警告，修改哈希码会导致你不再是一些群聊的成员，并且你需要被重新邀请，确定重新生成哈希码吗？ </translation>
+        <translation>警告，修改哈希码将会导致你不再是一些群组的成员，并且你需要被重新邀请，确定重新生成哈希码吗？ </translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="235"/>
@@ -1844,18 +1792,14 @@ Please select a different name.</source>
 <context>
     <name>GuiEmoticons</name>
     <message>
-        <source>Recent</source>
-        <translation type="vanished">最近</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiEmoticons.cpp" line="49"/>
         <source>Favorite emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>收藏的表情</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEmoticons.cpp" line="51"/>
         <source>Recent emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>最近使用</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEmoticons.cpp" line="53"/>
@@ -1925,10 +1869,6 @@ Please select a different name.</source>
         <translation>显示网络的共享文件</translation>
     </message>
     <message>
-        <source>Show the ShareBox</source>
-        <translation type="obsolete">显示ShareBox</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="173"/>
         <source>Show the bar of local file sharing</source>
         <translation>显示本地文件共享状态栏</translation>
@@ -1958,18 +1898,6 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="159"/>
         <source>Show the BeeBOX</source>
         <translation>显示BeeBOX</translation>
-    </message>
-    <message>
-        <source>Share your folders or files</source>
-        <translation type="obsolete">分享你的文件夹或文件</translation>
-    </message>
-    <message>
-        <source>max &lt;b&gt;%1&lt;/b&gt; files</source>
-        <translation type="obsolete">最大 &lt;b&gt;%1&lt;/b&gt;个文件</translation>
-    </message>
-    <message>
-        <source>disabled</source>
-        <translation type="obsolete">关闭</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="352"/>
@@ -2132,13 +2060,9 @@ Please select a different name.</source>
 <context>
     <name>GuiFloatingChat</name>
     <message>
-        <source>Show group menu</source>
-        <translation type="obsolete">显示群组菜单</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="51"/>
         <source>Edit group chat</source>
-        <translation>编辑群聊</translation>
+        <translation>编辑群组</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="54"/>
@@ -2179,10 +2103,6 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="151"/>
         <source>All users</source>
         <translation>所有用户</translation>
-    </message>
-    <message>
-        <source>Chat with all users</source>
-        <translation type="vanished">群发消息</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="202"/>
@@ -2230,17 +2150,17 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiGroupList.cpp" line="49"/>
         <source>Search group</source>
-        <translation>搜索群聊</translation>
+        <translation>搜索群组</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiGroupList.cpp" line="59"/>
         <source>Create new group chat</source>
-        <translation>发起群聊</translation>
+        <translation>新建群组</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiGroupList.cpp" line="62"/>
         <source>Edit group chat</source>
-        <translation>编辑群聊</translation>
+        <translation>编辑群组</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiGroupList.cpp" line="65"/>
@@ -2288,10 +2208,6 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiHome.cpp" line="92"/>
         <source>Copy to clipboard</source>
         <translation>复制到剪切板</translation>
-    </message>
-    <message>
-        <source>Select All</source>
-        <translation type="obsolete">全选</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiHome.cpp" line="88"/>
@@ -2423,7 +2339,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="75"/>
         <source>Save log as</source>
-        <translation>保存日志为</translation>
+        <translation>保存日志</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="82"/>
@@ -2453,11 +2369,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="109"/>
         <source>Log to file</source>
-        <translation>日志到文件</translation>
-    </message>
-    <message>
-        <source>Select All</source>
-        <translation type="obsolete">全选</translation>
+        <translation>日志文件</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="303"/>
@@ -2509,7 +2421,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="170"/>
         <source>%1: save log completed.</source>
-        <translation>%1：保存日志完成</translation>
+        <translation>%1:日至保存完成</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="171"/>
@@ -2534,7 +2446,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiLog.cpp" line="312"/>
         <source>%1: log not found.</source>
-        <translation>%1：日志未找到</translation>
+        <translation>%1:日志未找到</translation>
     </message>
 </context>
 <context>
@@ -2627,10 +2539,6 @@ Please select a different name.</source>
         <translation>没有新的消息</translation>
     </message>
     <message>
-        <source>Secure Lan Messenger</source>
-        <translation type="obsolete">安全的局域网消息工具</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="745"/>
         <source>Version</source>
         <translation>版本</translation>
@@ -2648,21 +2556,17 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1298"/>
         <source>Select beep file...</source>
-        <translation>选择 BEEP 文件</translation>
+        <translation>选择提示音</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1299"/>
         <source>Play beep</source>
-        <translation>播放BEEP</translation>
-    </message>
-    <message>
-        <source>Chat histories</source>
-        <translation type="obsolete">聊天记录</translation>
+        <translation>播放提示音</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1074"/>
         <source>Clear all read messages on closing window</source>
-        <translation>关闭窗口时，清除所有已读信息</translation>
+        <translation>关闭窗口时，清除所有已读消息</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="873"/>
@@ -2673,14 +2577,6 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="1166"/>
         <source>If a file already exists</source>
         <translation>如果文件已经存在</translation>
-    </message>
-    <message>
-        <source>Show only the online users</source>
-        <translation type="obsolete">只显示在线用户</translation>
-    </message>
-    <message>
-        <source>Generate automatic filename</source>
-        <translation type="vanished">生成自动文件名</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1148"/>
@@ -2718,17 +2614,9 @@ Please select a different name.</source>
         <translation>扩展</translation>
     </message>
     <message>
-        <source>Tip of the day</source>
-        <translation type="obsolete">每日小提示</translation>
-    </message>
-    <message>
-        <source>Fact of the day</source>
-        <translation type="obsolete">每日事实</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1455"/>
         <source>Show %1&apos;s license...</source>
-        <translation>显示 %1授权信息</translation>
+        <translation>显示%1的许可证</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1459"/>
@@ -2801,7 +2689,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2303"/>
         <source>Show only last %1 messages</source>
-        <translation>只显示最近 %1 的消息</translation>
+        <translation>只显示最近 %1 条消息</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1158"/>
@@ -2821,17 +2709,17 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="413"/>
         <source>&lt;b&gt;Chat messages can not be saved&lt;/b&gt;. Path:</source>
-        <translation>&lt;b&gt;聊天信息无法保存&lt;/b&gt;. 路径:</translation>
+        <translation>&lt;b&gt;无法保存聊天消息&lt;/b&gt;. 路径:</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="852"/>
         <source>Open your resource folder</source>
-        <translation>打开你的资源文件夹</translation>
+        <translation>打开资源文件夹</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="853"/>
         <source>Open your data folder</source>
-        <translation>打开你的数据文件夹</translation>
+        <translation>打开配置文件夹</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3853"/>
@@ -2885,10 +2773,6 @@ Please select a different name.</source>
         <translation>使用集成播放器播放</translation>
     </message>
     <message>
-        <source>Ask me</source>
-        <translation type="vanished">问我</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1248"/>
         <source>Enable Buzz sound</source>
         <translation>打开提示音</translation>
@@ -2896,7 +2780,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1256"/>
         <source>Enable BEEP alert also for active chat windows</source>
-        <translation>允许活动窗口发送BEEP通知</translation>
+        <translation>允许活动窗口发送通知</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1340"/>
@@ -2926,7 +2810,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1362"/>
         <source>By unread messages</source>
-        <translation>按照未读信息</translation>
+        <translation>按照未读消息</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1389"/>
@@ -2966,7 +2850,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="818"/>
         <source>Show the %1 log</source>
-        <translation>显示%1日志</translation>
+        <translation>显示日志</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="812"/>
@@ -3011,12 +2895,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1289"/>
         <source>Show chat message preview</source>
-        <translation>显示聊天信息预览</translation>
+        <translation>显示聊天消息预览</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1549"/>
         <source>Groups</source>
-        <translation>群聊</translation>
+        <translation>群组</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1544"/>
@@ -3032,10 +2916,6 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="2825"/>
         <source>Downloading %1 files</source>
         <translation>文件下载中%1</translation>
-    </message>
-    <message>
-        <source>Do you want to delete this saved chat?</source>
-        <translation type="obsolete">你想删除当前保存的聊天吗？</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3724"/>
@@ -3090,7 +2970,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="936"/>
         <source>Prompt on quit when connected</source>
-        <translation>在线的时候，提示关闭</translation>
+        <translation>在线时提示是否关闭</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1393"/>
@@ -3106,7 +2986,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="913"/>
         <source>Show minimized</source>
-        <translation>最小化显示</translation>
+        <translation>最小化窗口</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="917"/>
@@ -3154,22 +3034,14 @@ Please select a different name.</source>
         <translation>开启文件分享</translation>
     </message>
     <message>
-        <source>Sound</source>
-        <translation type="obsolete">音效</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1244"/>
         <source>Enable BEEP alert</source>
-        <translation>开启 BEEP 通知</translation>
+        <translation>允许弹窗通知</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1278"/>
         <source>System tray icon</source>
         <translation>系统托盘图标</translation>
-    </message>
-    <message>
-        <source>Workgroups</source>
-        <translation type="obsolete">工作群组</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="363"/>
@@ -3235,7 +3107,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1017"/>
         <source>Save groups</source>
-        <translation>保存群聊</translation>
+        <translation>保存群组</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1281"/>
@@ -3258,22 +3130,14 @@ Please select a different name.</source>
         <translation>选择表情主题</translation>
     </message>
     <message>
-        <source>BeeBEEP is free software: you can redistribute it and/or modify&lt;br&gt;it under the terms of the GNU General Public License as published&lt;br&gt;by the Free Software Foundation, either version 3 of the License&lt;br&gt;or (at your option) any later version.&lt;br&gt;&lt;br&gt;BeeBEEP is distributed in the hope that it will be useful,&lt;br&gt;but WITHOUT ANY WARRANTY; without even the implied warranty&lt;br&gt;of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&lt;br&gt;See the GNU General Public License for more details.</source>
-        <translation type="obsolete">BeeBEEP是一个免费软件：你可以重新分发它并且/或者修改它&lt;br&gt;它是在GNU通用公共许可的下发布 &lt;br&gt;通过免费软件基金第三版许可&lt;br&gt;或者（由你选择 ）之后的版本&lt;br&gt;&lt;br&gt;BeeBEEP的发布是希望其是有帮助的 &lt;b&gt;但是是没有质量保证的，也没有可应用的质保 &lt;br&gt;对于商业使用或者特殊目的的修改 &lt;br&gt;请查看GNU通用公共许可的具体细节。</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="785"/>
         <source>Connect</source>
-        <translation>连接</translation>
+        <translation>打开连接</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="788"/>
         <source>Disconnect</source>
         <translation>断开连接</translation>
-    </message>
-    <message>
-        <source>Create a message</source>
-        <translation type="obsolete">创建一个消息</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="827"/>
@@ -3291,12 +3155,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="854"/>
         <source>Open your download folder</source>
-        <translation>打开你的下载文件夹</translation>
+        <translation>打开下载文件夹</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="856"/>
         <source>Test your network</source>
-        <translation>测试你的网络</translation>
+        <translation>测试网络</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="930"/>
@@ -3311,7 +3175,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="957"/>
         <source>Prompts to change user</source>
-        <translation>弹窗提示修改用户</translation>
+        <translation>提示修改用户</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="961"/>
@@ -3446,7 +3310,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="908"/>
         <source>Reset geometry of all windows</source>
-        <translation>重设所有窗口的尺寸</translation>
+        <translation>重设所有窗口尺寸</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1464"/>
@@ -3476,12 +3340,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="971"/>
         <source>Your workgroups</source>
-        <translation>你的群聊</translation>
+        <translation>群组</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1022"/>
         <source>Show the name and surname of the users</source>
-        <translation>显示用户姓名</translation>
+        <translation>以 名 姓 方式显示用户名</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1042"/>
@@ -3526,7 +3390,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1026"/>
         <source>Show surname before firstname of the users</source>
-        <translation>在 姓 名 方式显示用户</translation>
+        <translation>以 姓 名 方式显示用户</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1078"/>
@@ -3576,7 +3440,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1260"/>
         <source>Disable BEEP alert if your status is busy</source>
-        <translation>忙碌时禁用BEEP弹窗</translation>
+        <translation>忙碌时禁用弹窗通知</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1369"/>
@@ -3601,7 +3465,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1554"/>
         <source>Saved chats</source>
-        <translation>已保存的聊天</translation>
+        <translation>聊天记录</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1706"/>
@@ -3688,7 +3552,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2316"/>
         <source>Show inactive chat window with %1% opacity</source>
-        <translation>%1不透明度显示非活动窗口</translation>
+        <translation>非活动窗口不透明度%1%</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2321"/>
@@ -3708,7 +3572,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2341"/>
         <source>Add up to %1 files to the transfer queue</source>
-        <translation>添加%1文件到传输队列</translation>
+        <translation>最多添加%1个文件到传输队列</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2406"/>
@@ -3806,10 +3670,6 @@ Please select a different name.</source>
         <translation>确定，不再询问</translation>
     </message>
     <message>
-        <source>%1 already exists. Please select a new filename.</source>
-        <translation type="vanished">%1已经存在，请选择新的文件名。</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2801"/>
         <source>You cannot download all these files at once. Do you want to download the first %1 files of the list?</source>
         <translation>你不能立即下载这些文件，你想要下载当前列表的前%1个文件吗？</translation>
@@ -3870,17 +3730,9 @@ Please select a different name.</source>
         <translation>音效模块未工作</translation>
     </message>
     <message>
-        <source>You are not allowed create groups. The option has been disabled by your system administrator.</source>
-        <translation type="vanished">你无权创建群组，该选项 已被系统管理员关闭。</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3377"/>
         <source>There is a chat with the same members: %1.</source>
         <translation>存在有相同成员的聊天：%1。</translation>
-    </message>
-    <message>
-        <source>You are not allowed modify groups. The option has been disabled by your system administrator.</source>
-        <translation type="vanished">你无权修改群组，该选项已被系统管理员关闭。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3482"/>
@@ -3915,7 +3767,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3901"/>
         <source>Clear recent emoticons</source>
-        <translation>清楚最近表情</translation>
+        <translation>清除最近表情</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3919"/>
@@ -3925,7 +3777,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3984"/>
         <source>your IP address</source>
-        <translation>你的IP地址</translation>
+        <translation>本机地址</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3985"/>
@@ -4071,7 +3923,7 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="809"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3379"/>
         <source>Create new group chat</source>
-        <translation>新建群聊</translation>
+        <translation>新建群组</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3446"/>
@@ -4137,7 +3989,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1471"/>
         <source>Add +1 user to anonymous usage statistics</source>
-        <translation>增加+1用户到匿名使用统计</translation>
+        <translation>加入匿名使用统计</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="966"/>
@@ -4208,7 +4060,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3323"/>
         <source>The default BEEP will be used</source>
-        <translation>默认BEEP已被使用</translation>
+        <translation>默认已打开通知</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3425"/>
@@ -4316,10 +4168,6 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="4922"/>
         <source>Cancel</source>
         <translation>取消</translation>
-    </message>
-    <message>
-        <source>Show the user list at once</source>
-        <translation type="obsolete">立即显示用户列表</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1252"/>
@@ -4452,10 +4300,6 @@ Please select a different name.</source>
         <source>Select all</source>
         <translation>全选</translation>
     </message>
-    <message>
-        <source>Select All</source>
-        <translation type="obsolete">全选</translation>
-    </message>
 </context>
 <context>
     <name>GuiNetwork</name>
@@ -4562,7 +4406,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="84"/>
         <source>It is not possible to perform the test if you are not connected to the BeeBEEP network.</source>
-        <translation>如果未连接到 BeeBEEP 网络，则无法执行测试。</translation>
+        <translation>如果未连接到BeeBEEP网络，则无法执行测试。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.cpp" line="97"/>
@@ -4587,10 +4431,6 @@ Please select a different name.</source>
 </context>
 <context>
     <name>GuiNetworkTestDialog</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="obsolete">对话框</translation>
-    </message>
     <message>
         <location filename="../src/desktop/GuiNetworkTest.ui" line="78"/>
         <source>IP Address</source>
@@ -4697,7 +4537,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="31"/>
         <source>UDP Port in beebeep.rc *</source>
-        <translation>beebeep UDP端口*</translation>
+        <translation>beeBEEP UDP端口*</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="66"/>
@@ -4707,7 +4547,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="201"/>
         <source>Multicast group in beebeep.rc *</source>
-        <translation>beebeep.组播地址*</translation>
+        <translation>beeBEEP 组播地址*</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="104"/>
@@ -5176,10 +5016,6 @@ Please select a different name.</source>
         <translation>空的</translation>
     </message>
     <message>
-        <source>Find text in chat</source>
-        <translation type="obsolete">在聊天中查找文本</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="139"/>
         <source>Copy to clipboard</source>
         <translation>复制到剪切板</translation>
@@ -5267,10 +5103,6 @@ Please select a different name.</source>
         <translation>请选择一个文件来聊天消息。</translation>
     </message>
     <message>
-        <source>Please select a file to save the messages of the chat.</source>
-        <translation type="obsolete">请选择一个文件保存当前聊天的消息</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiSavedChat.cpp" line="226"/>
         <source>%1: save completed.</source>
         <translation>%1：保存完成。</translation>
@@ -5280,21 +5112,13 @@ Please select a different name.</source>
         <source>Print...</source>
         <translation>打印</translation>
     </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">删除</translation>
-    </message>
-    <message>
-        <source>%1 not found in chat.</source>
-        <translation type="obsolete">在聊天中未找到%1 </translation>
-    </message>
 </context>
 <context>
     <name>GuiSavedChatList</name>
     <message>
         <location filename="../src/desktop/GuiSavedChatList.cpp" line="53"/>
         <source>Search saved chat</source>
-        <translation>搜索已保存的聊天</translation>
+        <translation>搜索聊天记录</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiSavedChatList.cpp" line="88"/>
@@ -5492,42 +5316,14 @@ Please select a different name.</source>
 <context>
     <name>GuiShareBox</name>
     <message>
-        <source>ShareBox</source>
-        <translation type="obsolete">ShareBox</translation>
-    </message>
-    <message>
-        <source>Update your ShareBox</source>
-        <translation type="obsolete">更新你的ShareBox</translation>
-    </message>
-    <message>
-        <source>Create folder in your ShareBox</source>
-        <translation type="obsolete">在你的ShareBox中创建文件夹</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="69"/>
         <source>Show current folder</source>
         <translation>显示当前文件夹</translation>
     </message>
     <message>
-        <source>Update ShareBox</source>
-        <translation type="obsolete">更新ShareBox</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="71"/>
         <source>Back to parent folder</source>
         <translation>返回上级文件夹</translation>
-    </message>
-    <message>
-        <source>Create folder in ShareBox</source>
-        <translation type="obsolete">在ShareBox中创建文件夹</translation>
-    </message>
-    <message>
-        <source>ShareBox path does not exist. Please select a valid folder.</source>
-        <translation type="obsolete">ShareBox路径不存在，请选择有效的路径。</translation>
-    </message>
-    <message>
-        <source>%1 - Select the ShareBox folder</source>
-        <translation type="obsolete">%1-选择ShareBox文件夹</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.cpp" line="67"/>
@@ -5625,10 +5421,6 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiShareBox.ui" line="14"/>
         <source>Form</source>
         <translation>表单</translation>
-    </message>
-    <message>
-        <source>Enable my ShareBox</source>
-        <translation type="obsolete">打开我的ShareBox</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShareBox.ui" line="168"/>
@@ -6032,7 +5824,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiShortcut.ui" line="38"/>
         <source>Use custom shortcuts</source>
-        <translation>使用自定义快捷方式</translation>
+        <translation>使用自定义快捷键</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiShortcut.ui" line="82"/>
@@ -6056,57 +5848,6 @@ Please select a different name.</source>
     </message>
 </context>
 <context>
-    <name>GuiTransferFile</name>
-    <message>
-        <source>File</source>
-        <translation type="obsolete">文件</translation>
-    </message>
-    <message>
-        <source>User</source>
-        <translation type="obsolete">用户</translation>
-    </message>
-    <message>
-        <source>Status</source>
-        <translation type="obsolete">状态</translation>
-    </message>
-    <message>
-        <source>Completed</source>
-        <translation type="obsolete">已完成</translation>
-    </message>
-    <message>
-        <source>Cancel Transfer</source>
-        <translation type="obsolete">取消传输</translation>
-    </message>
-    <message>
-        <source>Not Completed</source>
-        <translation type="obsolete">未完成</translation>
-    </message>
-    <message>
-        <source>Transfer completed</source>
-        <translation type="obsolete">传输完成</translation>
-    </message>
-    <message>
-        <source>Downloading</source>
-        <translation type="obsolete">下载中</translation>
-    </message>
-    <message>
-        <source>Uploading</source>
-        <translation type="obsolete">上传中</translation>
-    </message>
-    <message>
-        <source>Waiting</source>
-        <translation type="obsolete">等待中</translation>
-    </message>
-    <message>
-        <source>Do you want to cancel the transfer of %1?</source>
-        <translation type="obsolete">你想取消传输：%1?</translation>
-    </message>
-    <message>
-        <source>Remove all transfers</source>
-        <translation type="obsolete">移除所有传输</translation>
-    </message>
-</context>
-<context>
     <name>GuiUserList</name>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="53"/>
@@ -6122,7 +5863,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="545"/>
         <source>You cannot send files to the workgroup &apos;%1&apos;.</source>
-        <translation>您不能将文件发送到群聊&quot;%1&quot;。</translation>
+        <translation>无法将文件发送到群组&quot;%1&quot;。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="553"/>
@@ -6164,10 +5905,6 @@ Please select a different name.</source>
         <source>No</source>
         <translation>取消</translation>
     </message>
-    <message>
-        <source>Qt library for this OS doesn&apos;t support Drag and Drop for files. You have to select again the file to send.</source>
-        <translation type="obsolete">当前系统的Qt库不支持拖放文件，你需要选择文件发送。</translation>
-    </message>
 </context>
 <context>
     <name>GuiUserListWidget</name>
@@ -6203,17 +5940,17 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiVCard.cpp" line="91"/>
         <source>Birthday: %1</source>
         <extracomment>This date format refers to a birthday. Date format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
-        <translation>生日：%1</translation>
+        <translation>生日:%1</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="91"/>
         <source>d MMMM yyyy</source>
-        <translation>d MMMM yyyy</translation>
+        <translation>yyyy-MM-dd</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="91"/>
         <source>d MMMM</source>
-        <translation type="unfinished"></translation>
+        <translation>MMM d</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="93"/>
@@ -6228,12 +5965,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="127"/>
         <source>Workgroups</source>
-        <translation>群聊</translation>
+        <translation>群组</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="132"/>
         <source>No shared information.</source>
-        <translation>没有共享信息。</translation>
+        <translation>没有共享信息</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="138"/>
@@ -6268,7 +6005,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="207"/>
         <source>You cannot remove an user who is in group chat</source>
-        <translation>你不能移除群聊中的用户</translation>
+        <translation>无法移除群组中的用户</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="212"/>
@@ -6336,7 +6073,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="437"/>
         <source>Change your nickname color</source>
-        <translation>修改你的昵称颜色</translation>
+        <translation>修改昵称颜色</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="476"/>
@@ -6344,13 +6081,9 @@ Please select a different name.</source>
         <translation>向其他用户显示的信息</translation>
     </message>
     <message>
-        <source>Informations to display to other users</source>
-        <translation type="obsolete">显示给其他用户的信息</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="527"/>
         <source>Regenerate your hash code...</source>
-        <translation>重新生成你的哈希码</translation>
+        <translation>重新生成哈希码</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="547"/>
@@ -6403,7 +6136,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiVCard.ui" line="406"/>
         <source>Workgroups</source>
-        <translation>群聊</translation>
+        <translation>群组</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.ui" line="505"/>
@@ -6434,28 +6167,6 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiVCard.ui" line="706"/>
         <source>Remove user</source>
         <translation>移除用户</translation>
-    </message>
-</context>
-<context>
-    <name>GuiVideoCall</name>
-    <message>
-        <source>Yes</source>
-        <translation type="obsolete">是</translation>
-    </message>
-</context>
-<context>
-    <name>GuiVideoSettingsWidget</name>
-    <message>
-        <source>Video</source>
-        <translation type="obsolete">视频</translation>
-    </message>
-    <message>
-        <source>Audio</source>
-        <translation type="obsolete">音频</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="obsolete">关闭</translation>
     </message>
 </context>
 <context>
@@ -6522,12 +6233,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="42"/>
         <source>Workgroups</source>
-        <translation>群聊</translation>
+        <translation>群组</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="52"/>
         <source>Remove workgroup</source>
-        <translation>移除群聊</translation>
+        <translation>移除群组</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="73"/>
@@ -6537,17 +6248,17 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="105"/>
         <source>Please insert a workgroup.</source>
-        <translation>请输入群聊名称</translation>
+        <translation>请输入群组名称</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="112"/>
         <source>This workgroup is already in list.</source>
-        <translation>该群聊已在加入</translation>
+        <translation>该群组已在加入</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="149"/>
         <source>Don&apos;t you want to be part of these workgroups anymore?</source>
-        <translation>确定退出这些群聊吗？</translation>
+        <translation>确定退出这些群组吗？</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="150"/>
@@ -6560,10 +6271,6 @@ Please select a different name.</source>
         <translation>取消</translation>
     </message>
     <message>
-        <source>Yes</source>
-        <translation type="obsolete">是</translation>
-    </message>
-    <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="54"/>
         <source>Clear all</source>
         <translation>清除所有</translation>
@@ -6571,7 +6278,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="36"/>
         <source>Your workgroups</source>
-        <translation>你的群聊</translation>
+        <translation>你的群组</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.cpp" line="141"/>
@@ -6589,7 +6296,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.ui" line="102"/>
         <source>Accept connections only from your workgroups</source>
-        <translation>只连接你加入的群聊</translation>
+        <translation>只连接已加入的群组</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.ui" line="86"/>
@@ -6599,12 +6306,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.ui" line="17"/>
         <source>Workgroups</source>
-        <translation>群聊</translation>
+        <translation>群组</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.ui" line="23"/>
         <source>Enter the name of workgroup you want to add </source>
-        <translation>输入你要加入的群聊名称</translation>
+        <translation>输入群组名称</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWorkgroups.ui" line="93"/>
@@ -6617,7 +6324,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="1045"/>
         <source>n.a.</source>
-        <translation type="unfinished"></translation>
+        <translation>不可用</translation>
     </message>
 </context>
 <context>
@@ -6692,17 +6399,9 @@ Please select a different name.</source>
         <translation>你当前%1</translation>
     </message>
     <message>
-        <source>last update</source>
-        <translation type="obsolete">最后一次更新</translation>
-    </message>
-    <message>
-        <source>last connection</source>
-        <translation type="obsolete">最后一次连接</translation>
-    </message>
-    <message>
         <location filename="../src/utils/BeeUtils.cpp" line="716"/>
         <source>Workgroups</source>
-        <translation>群聊</translation>
+        <translation>群组</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="726"/>
@@ -6760,12 +6459,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiUserItem.cpp" line="189"/>
         <source>Click to send a private message</source>
-        <translation>点击发送个人信息</translation>
+        <translation>点击发送隐私消息</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiGroupItem.cpp" line="70"/>
         <source>Click to send message to group: %1</source>
-        <translation>点击给群聊发送信息：%1</translation>
+        <translation>点击发送消息到群组：%1</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="100"/>
@@ -6795,7 +6494,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="110"/>
         <source>Show the next unread message</source>
-        <translation>显示下一条未读信息</translation>
+        <translation>显示下一条未读消息</translation>
     </message>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="112"/>
@@ -6950,41 +6649,6 @@ Please select a different name.</source>
         <location filename="../src/core/Settings.cpp" line="2463"/>
         <source>Autoresponder</source>
         <translation>自动响应</translation>
-    </message>
-</context>
-<context>
-    <name>Tips</name>
-    <message>
-        <source>You can switch between chats with CTRL+TAB if there are new messages availables.</source>
-        <translation type="obsolete">如果有可用的新消息，可以使用CTRL+TAB切换聊天</translation>
-    </message>
-    <message>
-        <source>If you want a &lt;b&gt;bold text&lt;/b&gt; write a *bold text*.</source>
-        <translation type="obsolete">如果你想要一个粗体文本写一个*粗体文本*</translation>
-    </message>
-    <message>
-        <source>If you want an &lt;i&gt;italic text&lt;/i&gt; write a /italic text/.</source>
-        <translation type="obsolete">如果你想要一个&lt;i&gt;斜体文本&lt;/i&gt;写一个/斜体文本/。</translation>
-    </message>
-    <message>
-        <source>If you want an &lt;u&gt;underlined text&lt;/u&gt; write a _underlined text_.</source>
-        <translation type="obsolete">如果你想要一个&lt;u&gt;下划线的文本&lt;/u&gt;写一个_下划线的文本_。</translation>
-    </message>
-    <message>
-        <source>You can search previous sent message in the history using the CTRL+Up e CTRL+Down keys.</source>
-        <translation type="obsolete">您可以使用CTRL+Up和CTRL+Down键在历史记录中搜索以前发送的消息</translation>
-    </message>
-    <message>
-        <source>You can drop files to active chat and send them to members.</source>
-        <translation type="obsolete">您可以将文件拖到活动聊天并将其发送给成员</translation>
-    </message>
-    <message>
-        <source>You can select multiple files from network shares and download them simultaneously with a right click.</source>
-        <translation type="obsolete">您可以从网络共享中选择多个文件，并通过右键单击同时下载它们</translation>
-    </message>
-    <message>
-        <source>You can disable message notification from a group right clicking on its name on the list.</source>
-        <translation type="obsolete">您可以禁用来自组的消息通知，右键单击列表上该组的名称</translation>
     </message>
 </context>
 <context>
