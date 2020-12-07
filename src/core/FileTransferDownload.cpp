@@ -42,7 +42,7 @@ void FileTransferPeer::sendDownloadRequest()
     cancelTransfer();
   }
 
-  bool skip_file = false;
+  bool skip_transfer = false;
   QFileInfo existing_file( m_fileInfo.path() );
   if( existing_file.exists() )
   {
@@ -54,7 +54,7 @@ void FileTransferPeer::sendDownloadRequest()
       qDebug() << qPrintable( name() ) << "skips to download existing file" << qPrintable( m_fileInfo.path() );
       m_fileInfo.setStartingPosition( m_fileInfo.size() );
       m_bytesTransferred = m_fileInfo.size();
-      skip_file = true;
+      skip_transfer = true;
     }
     else if( Settings::instance().onExistingFileAction() == Settings::OverwriteExistingFile )
     {
@@ -78,7 +78,7 @@ void FileTransferPeer::sendDownloadRequest()
         qDebug() << qPrintable( name() ) << "skips to download older existing file" << qPrintable( m_fileInfo.path() );
         m_fileInfo.setStartingPosition( m_fileInfo.size() );
         m_bytesTransferred = m_fileInfo.size();
-        skip_file = true;
+        skip_transfer = true;
       }
     }
     else
@@ -91,7 +91,7 @@ void FileTransferPeer::sendDownloadRequest()
     }
   }
 
-  if( !skip_file && mp_socket->protocolVersion() >= FILE_TRANSFER_RESUME_PROTO_VERSION )
+  if( !skip_transfer && mp_socket->protocolVersion() >= FILE_TRANSFER_RESUME_PROTO_VERSION )
   {
     QFileInfo file_info( m_file.fileName() );
     if( file_info.exists() && Settings::instance().resumeFileTransfer() )
@@ -110,6 +110,12 @@ void FileTransferPeer::sendDownloadRequest()
 #endif
   if( mp_socket->sendData( Protocol::instance().fromMessage( Protocol::instance().fileInfoToMessage( m_fileInfo, mp_socket->protocolVersion() ), mp_socket->protocolVersion() ) ) )
   {
+    if( skip_transfer )
+    {
+      QMetaObject::invokeMethod( this, "skipTransfer", Qt::QueuedConnection );
+      return;
+    }
+
     if( mp_socket->protocolVersion() < FILE_TRANSFER_2_PROTO_VERSION )
     {
       qWarning() << qPrintable( name() ) << "using an old file download protocol version" << mp_socket->protocolVersion();
@@ -160,19 +166,6 @@ void FileTransferPeer::checkDownloadData( const QByteArray& byte_array )
     if( m_bytesTransferred > 0 && file_header.startingPosition() != m_bytesTransferred )
       m_bytesTransferred = 0;
     m_totalBytesTransferred = m_bytesTransferred;
-
-    if( m_bytesTransferred > 0 && m_file.exists() && m_file.size() == m_totalBytesTransferred )
-    {
-      if( Settings::instance().onExistingFileAction() == Settings::SkipExistingFile )
-      {
-#ifdef BEEBEEP_DEBUG
-        qWarning() << qPrintable( name() ) << "skips to download already transferred file";
-#endif
-        m_isSkipped = true;
-        setTransferCompleted();
-        return;
-      }
-    }
 
     m_fileInfo.setSize( file_header.size() );
     if( file_header.lastModified().isValid() )

@@ -129,6 +129,12 @@ void FileTransferPeer::startConnection()
   QTimer::singleShot( Settings::instance().fileTransferConfirmTimeout(), this, SLOT( connectionTimeout() ) );
 }
 
+void FileTransferPeer::skipTransfer()
+{
+  m_isSkipped = true;
+  setTransferCompleted();
+}
+
 void FileTransferPeer::setTransferCompleted()
 {
   if( m_state == FileTransferPeer::Completed )

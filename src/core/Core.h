@@ -127,39 +127,6 @@ public:
   bool sendVoiceMessageToChat( VNumber chat_id, const QString& file_path, qint64 message_duration );
 #endif
 
-public slots:
-  void sendBroadcastMessage();
-  void checkNetworkInterface();
-  void checkNewVersion();
-  void postUsageStatistics();
-  void onTickEvent( int );
-#ifdef BEEBEEP_USE_MULTICAST_DNS
-  void startDnsMulticasting();
-  void stopDnsMulticasting();
-  void sendDnsMulticastingMessage();
-#endif
-
-  /* CoreConnection */
-  void checkConnectionPorts();
-  void checkFirewall();
-  void updateNetworkConfiguration( const QNetworkConfiguration& );
-
-  /* CoreChat */
-  void sendWritingMessage( VNumber );
-  void buildSavedChatList();
-
-  /* CoreFileTransfer */
-  void buildLocalShareList();
-  void sendFileShareRequestToAll();
-  void cancelFileTransfer( VNumber );
-  void pauseFileTransfer( VNumber );
-  void removeAllPathsFromShare();
-
-#ifdef BEEBEEP_USE_SHAREDESKTOP
-  /* CoreShareDesktop */
-  bool sendScreenshotToChat( VNumber chat_id );
-#endif
-
 signals:
   void connected();
   void disconnected();
@@ -192,6 +159,39 @@ signals:
 #endif
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   void multicastDnsChanged();
+#endif
+
+public slots:
+  void sendBroadcastMessage();
+  void checkNetworkInterface();
+  void checkNewVersion();
+  void postUsageStatistics();
+  void onTickEvent( int );
+#ifdef BEEBEEP_USE_MULTICAST_DNS
+  void startDnsMulticasting();
+  void stopDnsMulticasting();
+  void sendDnsMulticastingMessage();
+#endif
+
+  /* CoreConnection */
+  void checkConnectionPorts();
+  void checkFirewall();
+  void updateNetworkConfiguration( const QNetworkConfiguration& );
+
+  /* CoreChat */
+  void sendWritingMessage( VNumber );
+  void buildSavedChatList();
+
+  /* CoreFileTransfer */
+  void buildLocalShareList();
+  void sendFileShareRequestToAll();
+  void cancelFileTransfer( VNumber );
+  void pauseFileTransfer( VNumber );
+  void removeAllPathsFromShare();
+
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  /* CoreShareDesktop */
+  bool sendScreenshotToChat( VNumber chat_id );
 #endif
 
 protected slots:
