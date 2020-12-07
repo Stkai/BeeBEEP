@@ -129,6 +129,12 @@ void FileTransferPeer::startConnection()
   QTimer::singleShot( Settings::instance().fileTransferConfirmTimeout(), this, SLOT( connectionTimeout() ) );
 }
 
+void FileTransferPeer::skipTransfer()
+{
+  m_isSkipped = true;
+  setTransferCompleted();
+}
+
 void FileTransferPeer::setTransferCompleted()
 {
   if( m_state == FileTransferPeer::Completed )
@@ -185,7 +191,7 @@ void FileTransferPeer::setTransferCompleted()
   }
 
   if( isSkipped() )
-    emit message( id(), remoteUserId(), m_fileInfo, tr( "Transfer skipped" ), m_state );
+    emit message( id(), remoteUserId(), m_fileInfo, QString( "%1 (%2)" ).arg( tr( "Transfer skipped" ), tr( "the file already exists" ) ), m_state );
   else
     emit message( id(), remoteUserId(), m_fileInfo, tr( "Transfer completed in %1" ).arg( Bee::timeToString( m_elapsedTime ) ), m_state );
   emit operationCompleted();

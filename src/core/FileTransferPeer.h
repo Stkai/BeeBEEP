@@ -80,6 +80,7 @@ signals:
 public slots:
   void startConnection();
   void cancelTransfer();
+  void skipTransfer();
 
 protected slots:
   void socketError( QAbstractSocket::SocketError );

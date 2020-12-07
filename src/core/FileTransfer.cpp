@@ -316,6 +316,12 @@ void FileTransfer::checkUploadRequest( const FileInfo& file_info_to_check )
     }
   }
 
+  if( file_info_to_check.startingPosition() == file_info.size() )
+  {
+    upload_peer->skipTransfer();
+    return;
+  }
+
   if( Settings::instance().resumeFileTransfer() )
     file_info.setStartingPosition( file_info_to_check.startingPosition() );
   else
