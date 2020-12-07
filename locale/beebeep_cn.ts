@@ -860,7 +860,7 @@
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="194"/>
         <source>the file already exists</source>
-        <translation type="unfinished"></translation>
+        <translation>文件已存在</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="196"/>
