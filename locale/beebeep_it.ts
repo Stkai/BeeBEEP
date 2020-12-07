@@ -873,6 +873,10 @@
         <source>Transfer skipped</source>
         <translation>Trasferimento saltato</translation>
     </message>
+    <message>
+        <source>the file already exists</source>
+        <translation>il file è già esistente</translation>
+    </message>
 </context>
 <context>
     <name>GuiAddUser</name>

@@ -888,23 +888,23 @@
 <context>
     <name>FileTransferPeer</name>
     <message>
-        <location filename="../src/core/FileTransferDownload.cpp" line="155"/>
+        <location filename="../src/core/FileTransferDownload.cpp" line="161"/>
         <source>invalid file header</source>
         <translation>en-tête de fichier invalide</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferDownload.cpp" line="202"/>
+        <location filename="../src/core/FileTransferDownload.cpp" line="195"/>
         <location filename="../src/core/FileTransferUpload.cpp" line="189"/>
         <source>Unable to open file %1</source>
         <translation>Impossible d&apos;ouvrir le fichier %1</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferDownload.cpp" line="209"/>
+        <location filename="../src/core/FileTransferDownload.cpp" line="202"/>
         <source>Unable to write in the file %1</source>
         <translation>Impossible d&apos;écrire dans le fichier %1</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferDownload.cpp" line="217"/>
+        <location filename="../src/core/FileTransferDownload.cpp" line="210"/>
         <source>%1 bytes downloaded but the file size is only %2 bytes</source>
         <translation>%1 octets téléchargés mais le fichier ne fait que %2 octets</translation>
     </message>
@@ -918,47 +918,52 @@
         <translation>Transfert initié</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="190"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="194"/>
+        <source>the file already exists</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/core/FileTransferPeer.cpp" line="196"/>
         <source>Transfer completed in %1</source>
         <translation>Transfert effectué en %1</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="188"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="194"/>
         <source>Transfer skipped</source>
         <translation>Transfert sauté</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="205"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="211"/>
         <source>Transfer canceled</source>
         <translation>Transfert annulé</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="233"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="239"/>
         <source>Transfer is about to pause</source>
         <translation>Le transfert va être mis en attente</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="235"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="241"/>
         <source>Please wait</source>
         <translation>Veuillez patienter</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="252"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="258"/>
         <source>Transfer paused after %1</source>
         <translation>Transfert en attente après %1</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="263"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="269"/>
         <source>Starting transfer</source>
         <translation>Lancement du transfert</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="350"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="356"/>
         <source>Connection timeout</source>
         <translation>Connexion : délai dépassé</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="369"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="375"/>
         <source>Transfer timeout</source>
         <translation>transfert : délai dépassé</translation>
     </message>
