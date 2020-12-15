@@ -861,7 +861,7 @@
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="194"/>
         <source>the file already exists</source>
-        <translation type="unfinished"></translation>
+        <translation>このファイルは既に存在します</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="196"/>
@@ -1807,12 +1807,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiEmoticons.cpp" line="49"/>
         <source>Favorite emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>お気に入りの絵文字</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEmoticons.cpp" line="51"/>
         <source>Recent emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>最近使った絵文字</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEmoticons.cpp" line="53"/>
@@ -2127,7 +2127,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="151"/>
         <source>All users</source>
-        <translation type="unfinished"></translation>
+        <translation>すべてのユーザー</translation>
     </message>
     <message>
         <source>Chat with all users</source>
@@ -5980,12 +5980,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="91"/>
         <source>d MMMM yyyy</source>
-        <translation>yyyy年MMMM月d日</translation>
+        <translation>yyyy年MMMMd日</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="91"/>
         <source>d MMMM</source>
-        <translation type="unfinished"></translation>
+        <translation>MMMMd日</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="93"/>
@@ -6359,7 +6359,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="1045"/>
         <source>n.a.</source>
-        <translation type="unfinished"></translation>
+        <translation>なし</translation>
     </message>
 </context>
 <context>
