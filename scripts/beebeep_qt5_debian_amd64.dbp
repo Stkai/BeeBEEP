@@ -18,33 +18,33 @@ Description: Free office messenger
 <</CTRL>>
 <<FILES>>
 1
-/home/mastro/Sources/beebeep-code/test/beebeep* -> beebeep -> /usr/lib/beebeep
-/home/mastro/Sources/beebeep-code/test/libnumbertextmarker.so* -> libnumbertextmarker.so -> /usr/lib/beebeep
-/home/mastro/Sources/beebeep-code/test/librainbowtextmarker.so* -> librainbowtextmarker.so -> /usr/lib/beebeep
-/home/mastro/Sources/beebeep-code/test/libregularboldtextmarker.so* -> libregularboldtextmarker.so -> /usr/lib/beebeep
-/home/mastro/Sources/beebeep-code/misc/beep.wav -> beep.wav -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_ar.qm -> beebeep_ar.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_cn.qm -> beebeep_cn.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_cz.qm -> beebeep_cz.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_de.qm -> beebeep_de.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_en.qm -> beebeep_en.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_es.qm -> beebeep_es.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_fr.qm -> beebeep_fr.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_hu.qm -> beebeep_hu.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_it.qm -> beebeep_it.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_ja.qm -> beebeep_ja.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_nb.qm -> beebeep_nb.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_nl.qm -> beebeep_nl.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_pl.qm -> beebeep_pl.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_pt.qm -> beebeep_pt.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_rs.qm -> beebeep_rs.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_ru.qm -> beebeep_ru.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_sv.qm -> beebeep_sv.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_tr.qm -> beebeep_tr.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_tw.qm -> beebeep_tw.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_ua.qm -> beebeep_ua.qm -> /usr/share/beebeep
-/home/mastro/Sources/beebeep-code/locale/beebeep_vi.qm -> beebeep_vi.qm -> /usr/share/beebeep
 /home/mastro/Sources/beebeep-code/src/images/beebeep.png -> beebeep.png -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_vi.qm -> beebeep_vi.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_ua.qm -> beebeep_ua.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_tw.qm -> beebeep_tw.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_tr.qm -> beebeep_tr.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_sv.qm -> beebeep_sv.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_ru.qm -> beebeep_ru.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_rs.qm -> beebeep_rs.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_pt.qm -> beebeep_pt.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_pl.qm -> beebeep_pl.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_nl.qm -> beebeep_nl.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_nb.qm -> beebeep_nb.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_ja.qm -> beebeep_ja.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_it.qm -> beebeep_it.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_hu.qm -> beebeep_hu.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_fr.qm -> beebeep_fr.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_es.qm -> beebeep_es.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_en.qm -> beebeep_en.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_de.qm -> beebeep_de.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_cz.qm -> beebeep_cz.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_cn.qm -> beebeep_cn.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/locale/beebeep_ar.qm -> beebeep_ar.qm -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/misc/beep.wav -> beep.wav -> /usr/share/beebeep
+/home/mastro/Sources/beebeep-code/test/libregularboldtextmarker.so* -> libregularboldtextmarker.so -> /usr/lib/beebeep
+/home/mastro/Sources/beebeep-code/test/librainbowtextmarker.so* -> librainbowtextmarker.so -> /usr/lib/beebeep
+/home/mastro/Sources/beebeep-code/test/libnumbertextmarker.so* -> libnumbertextmarker.so -> /usr/lib/beebeep
+/home/mastro/Sources/beebeep-code/test/beebeep* -> beebeep -> /usr/lib/beebeep
 <</FILES>>
 <<SCRIPTS>>
 <<PREINST>>
@@ -71,19 +71,20 @@ rm -f "/usr/bin/beebeep"
 <<DEST>>DEFAULT<</DEST>>
 beebeep (5.8.4-1) bionic; urgency=low
 
- * New feature: Almost all the options of file beebeep.ini can be used in file beebeep.rc also
- * New feature: Added "Use high resolution emoticons" option
+ * New feature: almost all the options of file beebeep.ini can be used in file beebeep.rc
+ * New feature: added "Use high resolution emoticons" option
  * New feature: added ECDH key exchange to encryption protocol
- * File paths will be recognized and made clickable in chat (it must be a single message)
+ * New feature: added "Auto save interval" for chat messages to prevent data loss
+ * New feature: added "Favored emoticons" as tab in emoticon list
  * User icons in chat window can be clicked also if the user is offline
  * Disabled by default the option to search users by a multicast datagram
  * Suspend/sleep mode is now managed also in Linux systems.
- * Added "KeepModificationDateOnFileTransferred" option in beebeep.ini (it is always enabled in BeeBOX)
+ * File paths will be recognized and made clickable in chat (in single message).
+ * Added "KeepModificationDateOnFileTransferred" option in beebeep.ini
  * Added "AllowedFileExtensionsInFileTransfer" option in beebeep.rc
  * Added "AllowOnlyHostAddressesFromHostsIni" option in file beebeep.rc
  * Added "Clear recent emoticons" in menu option of the chat bar
  * Added "ConnectionKeyExchangeMethod" option in beebeep.rc
- * Fixed known issue: BeeBEEP prevents the CTRL+ALT+B (or CMD+ALT+B on MacOSX) key sequence in other applications from working
  * Fixed a bug in options "Disable create message" and "Disable edit groups"
  * Fixed a visualization bug if you open an user VCARD near the side of your desktop
  * Fixed a bug on Download folder when you copy BeeBEEP from a computer to another one
