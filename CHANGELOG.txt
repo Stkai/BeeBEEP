@@ -1,4 +1,4 @@
-BEEBEEP (Free Office Messenger) - CHANGELOG - (c) 2020 Marco Mastroddi
+BEEBEEP (Free Office Messenger) - CHANGELOG - (c) 2010-2021 Marco Mastroddi
 For more informations please visit https://www.beebeep.net
 
 
@@ -17,6 +17,7 @@ BeeBEEP 5.8.3 (in development)
 - Added "AllowOnlyHostAddressesFromHostsIni" option in file beebeep.rc
 - Added "Clear recent emoticons" in menu option of the chat bar
 - Added "ConnectionKeyExchangeMethod" option in beebeep.rc
+- Added "AddNicknameToDataFolder" option in beebeep.rc
 - Fixed known issue: BeeBEEP prevents the CTRL+ALT+B (or CMD+ALT+B on MacOSX) key sequence in other applications from working
 - Fixed a bug in options "Disable create message" and "Disable edit groups"
 - Fixed a visualization bug if you open an user VCARD near the side of your desktop

@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi
+// BeeBEEP Copyright (C) 2010-2021 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -755,7 +755,7 @@ void GuiMain::showAbout()
 void GuiMain::showLicense()
 {
   QString license_txt = QLatin1String(
-  "BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi <br><br>"
+  "BeeBEEP Copyright (C) 2010-2021 Marco Mastroddi <br><br>"
   "BeeBEEP is free software: you can redistribute it and/or modify "
   "it under the terms of the GNU General Public License as published "
   "by the Free Software Foundation, either version 3 of the License "

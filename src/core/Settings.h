@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi
+// BeeBEEP Copyright (C) 2010-2021 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -693,6 +693,7 @@ private:
   bool m_allowMultipleInstances;
   QString m_dataFolderInRC;
   bool m_addAccountNameToDataFolder;
+  bool m_addNicknameToDataFolder;
   QString m_preferredSubnets;
   bool m_checkUserConnectedFromDatagramIp;
 

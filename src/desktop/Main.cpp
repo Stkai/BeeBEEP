@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi
+// BeeBEEP Copyright (C) 2010-2021 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -144,8 +144,8 @@ int main( int argc, char *argv[] )
 
   Settings::instance().setDefaultFolders();
   Settings::instance().loadRcFile();
-  Settings::instance().setDataFolder();
   Settings::instance().createLocalUser( "" );
+  Settings::instance().setDataFolder();
   qDebug() << "Settings path:" << qPrintable( Settings::instance().currentSettingsFilePath() );
   Settings::instance().load();
   Settings::instance().createApplicationUuid();

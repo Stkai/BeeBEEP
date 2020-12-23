@@ -19,7 +19,7 @@ OutputBaseFilename=beebeep-setup-5.8.4
 SetupIconFile=..\src\beebeep.ico
 Compression=lzma
 SolidCompression=yes
-AppCopyright=Copyright (C) 2020 Marco Mastroddi
+AppCopyright=Copyright (C) 2021 Marco Mastroddi
 OutputDir=.
 LicenseFile=..\LICENSE.txt
 

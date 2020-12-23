@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi
+// BeeBEEP Copyright (C) 2010-2021 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -83,6 +83,7 @@ Settings::Settings()
   m_allowMultipleInstances = false;
   m_dataFolderInRC = "";
   m_addAccountNameToDataFolder = false;
+  m_addNicknameToDataFolder = false;
   m_preferredSubnets = "";
   m_disableSystemProxyForConnections = true;
   m_useDefaultMulticastGroupAddress = true;
@@ -444,6 +445,9 @@ void Settings::createLocalUser( const QString& user_name )
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Local user hash:" << qPrintable( m_localUser.hash() );
 #endif
+
+  if( user_name.isEmpty() && m_addNicknameToDataFolder )
+    setDataFolder();
 }
 
 QString Settings::createLocalUserHash()
@@ -488,6 +492,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "AllowMultipleInstances", m_allowMultipleInstances );
     sets->setValue( "DataFolderPath", m_dataFolderInRC );
     sets->setValue( "AddAccountNameToDataFolder", m_addAccountNameToDataFolder );
+    sets->setValue( "AddNicknameToDataFolder", m_addNicknameToDataFolder );
   #ifdef BEEBEEP_USE_MULTICAST_DNS
     sets->setValue( "UseMulticastDns", m_useMulticastDns );
   #endif
@@ -586,6 +591,7 @@ void Settings::loadRcFile()
   m_allowMultipleInstances = sets->value( "AllowMultipleInstances", m_allowMultipleInstances ).toBool();
   m_dataFolderInRC = Bee::convertToNativeFolderSeparator( sets->value( "DataFolderPath", m_dataFolderInRC ).toString() );
   m_addAccountNameToDataFolder = sets->value( "AddAccountNameToDataFolder", m_addAccountNameToDataFolder ).toBool();
+  m_addNicknameToDataFolder = sets->value( "AddNicknameToDataFolder", m_addNicknameToDataFolder ).toBool();
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   m_useMulticastDns = sets->value( "UseMulticastDns", m_useMulticastDns ).toBool();
 #endif
@@ -2192,7 +2198,7 @@ void Settings::clearNativeSettings()
 bool Settings::searchDataFolder()
 {
   qDebug() << "Searching data folder...";
-  QString data_folder = m_addAccountNameToDataFolder ? accountNameFromSystemEnvinroment() : QLatin1String( "beebeep-data" );
+  QString data_folder = m_addAccountNameToDataFolder ? Bee::removeInvalidCharactersForFilePath( accountNameFromSystemEnvinroment() ) : QLatin1String( "beebeep-data" );
   QString root_folder;
 #ifdef Q_OS_MAC
   bool rc_folder_is_writable = false;
@@ -2288,8 +2294,11 @@ bool Settings::setDataFolder()
     if( !searchDataFolder() )
       qWarning() << "Unable to save data. Check your FS permissions";
   }
-  else
-    qDebug() << "Data folder:" << qPrintable( m_dataFolder );
+
+  if( m_addNicknameToDataFolder )
+    m_dataFolder = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( m_dataFolder ).arg( Bee::removeInvalidCharactersForFilePath( m_localUser.name() ) ) );
+  qDebug() << "Data folder:" << qPrintable( m_dataFolder );
+
   m_cacheFolder = defaultCacheFolderPath();
   QDir cache_folder( m_cacheFolder );
   if( !cache_folder.exists() )

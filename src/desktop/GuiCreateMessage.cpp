@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi
+// BeeBEEP Copyright (C) 2010-2021 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -76,7 +76,6 @@ GuiCreateMessage::GuiCreateMessage( QWidget *parent )
   connect( mp_pbEditUsers, SIGNAL( clicked() ), this, SLOT( editRecipients() ) );
   connect( mp_twEmoticons, SIGNAL( emoticonSelected( const Emoticon& ) ), this, SLOT( addEmoticon( const Emoticon& ) ) );
   connect( mp_pbEmoticons, SIGNAL( clicked() ), this, SLOT( toggleEmoticons() ) );
-
 }
 
 void GuiCreateMessage::closeEvent( QCloseEvent* ev )
