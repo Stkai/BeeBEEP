@@ -89,7 +89,7 @@ Settings::Settings()
   m_useDefaultMulticastGroupAddress = true;
   m_ipMulticastTtl = DEFAULT_IPV4_MULTICAST_TTL_OPTION;
   m_useIPv6 = false;
-  m_useHive = true;
+  m_useHive = false;
   m_checkNewVersionAtStartup = true;
   m_postUsageStatistics = true;
   m_useHostnameForDefaultUsername = false;

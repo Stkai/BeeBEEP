@@ -536,15 +536,15 @@ void Broadcaster::onTickEvent( int )
 
 void Broadcaster::sendMulticastDatagram()
 {
-  if( !m_multicastGroupAddress.isNull() && !Settings::instance().disableMulticast() )
+  if( !m_isMulticastDatagramSent && !m_multicastGroupAddress.isNull() && !Settings::instance().disableMulticast() )
   {
     QByteArray broadcast_data = Protocol::instance().broadcastMessage( m_multicastGroupAddress );
     if( mp_senderSocket->writeDatagram( broadcast_data, m_multicastGroupAddress, static_cast<quint16>(Settings::instance().defaultBroadcastPort()) ) > 0 )
     {
       qDebug() << "Broadcaster sends multicast datagram to" << qPrintable( m_multicastGroupAddress.toString() ) << Settings::instance().defaultBroadcastPort();
-      m_isMulticastDatagramSent = true;
       m_networkAddressesWaitingForLoopback.append( QPair<NetworkAddress, QDateTime>( NetworkAddress( m_multicastGroupAddress, static_cast<quint16>( Settings::instance().defaultBroadcastPort() ) ), QDateTime::currentDateTime() ) );
       m_lastDatagramSentTimestamp = QDateTime::currentDateTime();
+      m_isMulticastDatagramSent = true;
 #ifdef BEEBEEP_DEBUG
       qDebug() << "Waiting for loopback datagram from" << qPrintable( m_multicastGroupAddress.toString() );
 #endif
@@ -558,6 +558,11 @@ void Broadcaster::contactNetworkAddresses()
 {
   if( !sortNetworkAddresses() )
     return;
+
+  bool can_contact_users = m_lastDatagramSentTimestamp.isNull() || qAbs( m_lastDatagramSentTimestamp.msecsTo( QDateTime::currentDateTime() ) ) > Settings::instance().delayContactUsers();
+  if( !can_contact_users )
+    return;
+
   int contacted_users = 0;
   while( !m_networkAddresses.isEmpty() )
   {
@@ -567,33 +572,22 @@ void Broadcaster::contactNetworkAddresses()
       if( isNetworkAddressForBroadcast( na ) )
       {
          if( broadcastToNetworkAddress( na ) )
-           contacted_users++;
+           return;
       }
       else
       {
-        bool can_contact_directly_users = m_lastDatagramSentTimestamp.isNull() || qAbs( m_lastDatagramSentTimestamp.msecsTo( QDateTime::currentDateTime() ) ) > Settings::instance().delayContactUsers();
-        if( can_contact_directly_users )
-        {
 #ifdef BEEBEEP_DEBUG
-          qDebug() << "Broadcaster skips this network address" << qPrintable( na.toString() ) << "and sends it to the CORE";
+        qDebug() << "Broadcaster skips this network address" << qPrintable( na.toString() ) << "and sends it to the CORE";
 #endif
-          emit newPeerFound( na.hostAddress(), na.hostPort() );
-          contacted_users++;
-        }
-        else
-        {
-#ifdef BEEBEEP_DEBUG
-          qDebug() << "Broadcaster waits for contact network address" << qPrintable( na.toString() );
-#endif
-          m_networkAddresses.append( na );
-          break;
-        }
+        emit newPeerFound( na.hostAddress(), na.hostPort() );
+        contacted_users++;
       }
     }
 
     if( contacted_users >= Settings::instance().maxUsersToConnectInATick() )
       break;
   }
+
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Broadcaster has contacted" << contacted_users << "network addresses";
 #endif
