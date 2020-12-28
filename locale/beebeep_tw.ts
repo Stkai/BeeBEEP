@@ -1661,22 +1661,22 @@ Please select a different name.</source>
         <translation>建立訊息</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="124"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="123"/>
         <source>Nobody</source>
         <translation>沒有人</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="131"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="130"/>
         <source>Add recipients</source>
         <translation>加入收件人</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="175"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="174"/>
         <source>Please select at least one recipient for your message.</source>
         <translation>請為您的訊息至少選取一個收件者。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="182"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="181"/>
         <source>You cannot send an empty message.</source>
         <translation>無法傳送空的訊息。</translation>
     </message>
@@ -6654,7 +6654,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2463"/>
+        <location filename="../src/core/Settings.cpp" line="2472"/>
         <source>Autoresponder</source>
         <translation>自動回應器</translation>
     </message>

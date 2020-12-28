@@ -1743,22 +1743,22 @@ Vyberte prosím iné meno.</translation>
         <translation>Vytvoriť správu</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="124"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="123"/>
         <source>Nobody</source>
         <translation>Prázdne</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="131"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="130"/>
         <source>Add recipients</source>
         <translation>Pridať príjemcov</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="175"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="174"/>
         <source>Please select at least one recipient for your message.</source>
         <translation>Prosím vyberte aspoň jedného príjemcu správy.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="182"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="181"/>
         <source>You cannot send an empty message.</source>
         <translation>Nemôžete odoslať prázdnu správu.</translation>
     </message>
@@ -7069,7 +7069,7 @@ Vyberte prosím iné meno.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2463"/>
+        <location filename="../src/core/Settings.cpp" line="2472"/>
         <source>Autoresponder</source>
         <translation></translation>
     </message>

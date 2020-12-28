@@ -1718,22 +1718,22 @@ Please select a different name.</source>
         <translation>Создать сообщение</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="124"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="123"/>
         <source>Nobody</source>
         <translation>Никто</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="131"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="130"/>
         <source>Add recipients</source>
         <translation>Добавить получателей</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="175"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="174"/>
         <source>Please select at least one recipient for your message.</source>
         <translation>Выберите хотябы одного получателя сообщения.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="182"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="181"/>
         <source>You cannot send an empty message.</source>
         <translation>Вы не можете отправить пустое сообщение.</translation>
     </message>
@@ -6844,7 +6844,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2463"/>
+        <location filename="../src/core/Settings.cpp" line="2472"/>
         <source>Autoresponder</source>
         <translation>Автоответ</translation>
     </message>

@@ -344,7 +344,7 @@
     </message>
     <message>
         <source>All paths are removed from file sharing</source>
-        <translation>Всі шляхи видалені з спільного доступу</translation>
+        <translation>Усі шляхи видалені з спільного доступу</translation>
     </message>
     <message>
         <source>Unable to send the message: this chat is disabled.</source>
@@ -625,7 +625,7 @@
     <message numerus="yes">
         <source>%n unsent message(s) will be sent as soon as possible.</source>
         <translation>
-            <numerusform>%n невідправлене повідомлення буде надіслані якнайшвидше.</numerusform>
+            <numerusform>%n невідправлене повідомлення буде надіслано якнайшвидше.</numerusform>
             <numerusform>%n невідправлених повідомлень будуть надіслані якнайшвидше.</numerusform>
             <numerusform>%n невідправлених повідомлень будуть надіслані якнайшвидше.</numerusform>
         </translation>
@@ -636,19 +636,19 @@
     </message>
     <message>
         <source>%1 Unable to download %2 from %3: file extension &apos;%4&apos; is not allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Неможливо завантажити %2 із %3:розширення файлу &apos;%4&apos; не дозволено.</translation>
     </message>
     <message>
         <source>%1 Unable to send %2 to %3: file extension &apos;%4&apos; is not allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Неможливо відправити %2 із %3:розширення файлу &apos;%4&apos; не дозволено.</translation>
     </message>
     <message>
         <source>the folder is empty or contains only files that are not allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ця папка порожня або містить лише недозволені файли.</translation>
     </message>
     <message>
         <source>%1 %2 accepts incoming connections only from the IP addresses present in the HOSTS file.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 приймає вхідні з&apos;єднання лише з IP-адрес, наявних у HOSTS файлі.</translation>
     </message>
 </context>
 <context>
@@ -660,17 +660,17 @@
     <message>
         <source>yyyy-MM-dd</source>
         <extracomment>Date format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>yyyy-MM-dd</translation>
     </message>
     <message>
         <source>h:mm:ss ap</source>
         <extracomment>Time format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>h:mm:ss ap</translation>
     </message>
     <message>
         <source>hh:mm:ss</source>
         <extracomment>Time format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>hh:mm:ss</translation>
     </message>
 </context>
 <context>
@@ -685,7 +685,7 @@
     </message>
     <message>
         <source>Other</source>
-        <translation>Інший</translation>
+        <translation>Інше</translation>
     </message>
     <message>
         <source>Video</source>
@@ -712,11 +712,11 @@
     <name>FileTransferPeer</name>
     <message>
         <source>%1 bytes downloaded but the file size is only %2 bytes</source>
-        <translation>%1 байтов завантажено, але розмір файлу всього %2 байт</translation>
+        <translation>%1 байтів завантажено, але розмір файлу всього %2 байт</translation>
     </message>
     <message>
         <source>%1 bytes uploaded but the file size is only %2 bytes</source>
-        <translation>%1 байтов відправлено, але розмір файлу всього %2 байт</translation>
+        <translation>%1 байтів відправлено, але розмір файлу всього %2 байт</translation>
     </message>
     <message>
         <source>invalid file header</source>
@@ -728,7 +728,7 @@
     </message>
     <message>
         <source>Connection timeout</source>
-        <translation>Закінчився час для з&apos;єднання</translation>
+        <translation>Час для з&apos;єднання вийшов</translation>
     </message>
     <message>
         <source>Unable to write in the file %1</source>
@@ -748,11 +748,11 @@
     </message>
     <message>
         <source>Transfer cancelled</source>
-        <translation type="obsolete">Передача відмінена</translation>
+        <translation type="obsolete">Передача скасована</translation>
     </message>
     <message>
         <source>Transfer timeout</source>
-        <translation>Закінчився час передачі</translation>
+        <translation>Час для передачі вийшов</translation>
     </message>
     <message>
         <source>unable to send file header</source>
@@ -772,7 +772,7 @@
     </message>
     <message>
         <source>Transfer canceled</source>
-        <translation>Передача відмінена</translation>
+        <translation>Передача скасована</translation>
     </message>
     <message>
         <source>Transfer paused after %1</source>
@@ -780,7 +780,7 @@
     </message>
     <message>
         <source>%1 bytes uploaded but the remote file size is %2 bytes</source>
-        <translation>%1 байтов відправлено, але розмір віддаленого файлу всього %2 байт</translation>
+        <translation>%1 байтів відправлено, але розмір віддаленого файлу всього %2 байт</translation>
     </message>
     <message>
         <source>Transfer is about to pause</source>
@@ -800,11 +800,11 @@
     </message>
     <message>
         <source>Transfer skipped</source>
-        <translation type="unfinished"></translation>
+        <translation>Передача пропущена</translation>
     </message>
     <message>
         <source>the file already exists</source>
-        <translation type="unfinished"></translation>
+        <translation>цей файл уже існує</translation>
     </message>
 </context>
 <context>
@@ -851,7 +851,7 @@
     </message>
     <message>
         <source>Clear all</source>
-        <translation>Очистити все</translation>
+        <translation>Очистити усе</translation>
     </message>
     <message>
         <source>Please select an item in the list.</source>
@@ -870,7 +870,7 @@
     <name>GuiAddUserDialog</name>
     <message>
         <source>Ok</source>
-        <translation>OК</translation>
+        <translation>Гаразд</translation>
     </message>
     <message>
         <source>Port</source>
@@ -913,11 +913,11 @@
     <name>GuiAskPassword</name>
     <message>
         <source>Ok</source>
-        <translation>OК</translation>
+        <translation>Гаразд</translation>
     </message>
     <message>
         <source>* Password must be the same for all user you want to connect</source>
-        <translation>* Пароль має бути однаковим для всіх користувачів, з якими потрібно з&apos;єднатися</translation>
+        <translation>* Пароль має бути однаковим для усіх користувачів, з якими потрібно з&apos;єднатися</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -960,7 +960,7 @@
     </message>
     <message>
         <source>Ok</source>
-        <translation>ОК</translation>
+        <translation>Гаразд</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -1016,7 +1016,7 @@
     </message>
     <message>
         <source>Chat with all users is disabled</source>
-        <translation>Чат зі всіма користувачами відключено</translation>
+        <translation>Чат зі усіма користувачами відключено</translation>
     </message>
     <message>
         <source>%1: save completed.</source>
@@ -1120,7 +1120,7 @@
     </message>
     <message>
         <source>Select All</source>
-        <translation type="obsolete">Вибрати все</translation>
+        <translation type="obsolete">Вибрати усе</translation>
     </message>
     <message>
         <source>Use key Return to make a carriage return</source>
@@ -1192,11 +1192,11 @@
     </message>
     <message>
         <source>Select all</source>
-        <translation>Вибрати все</translation>
+        <translation>Вибрати усе</translation>
     </message>
     <message>
         <source>open %1 to read them all</source>
-        <translation>відкрити%1, щоб прочитати все</translation>
+        <translation>відкрити%1, щоб прочитати усе</translation>
     </message>
     <message>
         <source>the saved chat</source>
@@ -1204,7 +1204,7 @@
     </message>
     <message>
         <source>Please select a file to save all the messages of the chat.</source>
-        <translation>Будь ласка виберіть файл, щоб зберегти всі повідомлення чату.</translation>
+        <translation>Будь ласка виберіть файл, щоб зберегти усі повідомлення чату.</translation>
     </message>
     <message>
         <source>Clear system messages</source>
@@ -1269,7 +1269,7 @@ Download for free and install the version with this feature from the %1 website.
     </message>
     <message>
         <source>Clear all chat messages</source>
-        <translation>Очистити всі повідомлення чату</translation>
+        <translation>Очистити усі повідомлення чату</translation>
     </message>
     <message>
         <source>Please wait for two or more users</source>
@@ -1330,7 +1330,7 @@ Download for free and install the version with this feature from the %1 website.
     <name>GuiCreateGroup</name>
     <message>
         <source>Ok</source>
-        <translation>OК</translation>
+        <translation>Гаразд</translation>
     </message>
     <message>
         <source>Users</source>
@@ -1430,18 +1430,18 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Send this message to all users individually</source>
-        <translation type="obsolete">Надіслати це повідомлення всім користувачам індивідуально</translation>
+        <translation type="obsolete">Надіслати це повідомлення усім користувачам індивідуально</translation>
     </message>
     <message>
         <source>Send this message to all recipients individually</source>
-        <translation>Надіслати це повідомлення всім отримувачам індивідуально</translation>
+        <translation>Надіслати це повідомлення усім отримувачам індивідуально</translation>
     </message>
 </context>
 <context>
     <name>GuiEditVCard</name>
     <message>
         <source>Ok</source>
-        <translation>ОК</translation>
+        <translation>Гаразд</translation>
     </message>
     <message>
         <source>Unable to load image %1.</source>
@@ -1520,11 +1520,11 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Favorite emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>Вибрані смайли</translation>
     </message>
     <message>
         <source>Recent emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>Частовживані смайли</translation>
     </message>
 </context>
 <context>
@@ -1610,31 +1610,31 @@ Please select a different name.</source>
     </message>
     <message>
         <source>disabled</source>
-        <translation type="obsolete">виключено</translation>
+        <translation type="obsolete">відключено</translation>
     </message>
     <message>
         <source>Allowed file extensions</source>
-        <translation type="unfinished"></translation>
+        <translation>Дозволені розширення файлів</translation>
     </message>
     <message>
         <source>File transfer has no rules on file extensions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Передача файлів не має правил щодо розширень файлів.</translation>
     </message>
     <message>
         <source>All types of files can be sent and received.</source>
-        <translation type="unfinished"></translation>
+        <translation>Усі типи файлів можна надсилати та отримувати.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Гаразд</translation>
     </message>
     <message>
         <source>Only certain types of files are allowed for file transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Для передачі файлів дозволено лише певні типи файлів</translation>
     </message>
     <message>
         <source>Only files with this type of extension can be transferred:</source>
-        <translation type="unfinished"></translation>
+        <translation>Передавати можна лише файли з таким розширенням:</translation>
     </message>
 </context>
 <context>
@@ -1677,7 +1677,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Ok</source>
-        <translation>OК</translation>
+        <translation>Гаразд</translation>
     </message>
     <message>
         <source>Yes and delete the partially downloaded file</source>
@@ -1709,7 +1709,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Hide all transfers stopped</source>
-        <translation>Сховати всі зупинені передачі</translation>
+        <translation>Сховати усі зупинені передачі</translation>
     </message>
     <message>
         <source>No file transfer in progress</source>
@@ -1764,7 +1764,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Save all</source>
-        <translation>Зберегти все</translation>
+        <translation>Зберегти усе</translation>
     </message>
     <message>
         <source>Show the preset messages panel</source>
@@ -1804,7 +1804,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>All users</source>
-        <translation type="unfinished"></translation>
+        <translation>Усі користувачі</translation>
     </message>
 </context>
 <context>
@@ -1869,7 +1869,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Select All</source>
-        <translation type="obsolete">Вибрати все</translation>
+        <translation type="obsolete">Вибрати усе</translation>
     </message>
     <message>
         <source>Show the timestamp</source>
@@ -1969,7 +1969,7 @@ Please select a different name.</source>
     <name>GuiLog</name>
     <message>
         <source>Ok</source>
-        <translation>ОК</translation>
+        <translation>Гаразд</translation>
     </message>
     <message>
         <source>Log</source>
@@ -2041,7 +2041,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Select All</source>
-        <translation type="obsolete">Вибрати все</translation>
+        <translation type="obsolete">Вибрати усе</translation>
     </message>
     <message>
         <source>Open file</source>
@@ -2072,7 +2072,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Ok</source>
-        <translation>ОК</translation>
+        <translation>Гаразд</translation>
     </message>
     <message>
         <source>to</source>
@@ -2616,7 +2616,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>to all</source>
-        <translation>для всіх</translation>
+        <translation>для усіх</translation>
     </message>
     <message>
         <source>to you</source>
@@ -2640,7 +2640,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Clear all status descriptions</source>
-        <translation>Очистити всі описи статусу</translation>
+        <translation>Очистити усі описи статусу</translation>
     </message>
     <message>
         <source>Prompts to change user</source>
@@ -2664,7 +2664,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Geometry of all windows has been reset</source>
-        <translation>Розміри всіх вікон скинуто</translation>
+        <translation>Розміри усіх вікон скинуто</translation>
     </message>
     <message>
         <source>Play beep</source>
@@ -2684,7 +2684,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Save all</source>
-        <translation>Зберегти все</translation>
+        <translation>Зберегти усе</translation>
     </message>
     <message>
         <source>Show the user&apos;s picture</source>
@@ -2876,7 +2876,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>All the members of this chat are not online. The changes may not be permanent. Do you wish to continue?</source>
-        <translation>Всі участники цього чату відключились. Зміни можуть бути не постійними. Хочете продовжити?</translation>
+        <translation>Усі участники цього чату відключились. Зміни можуть бути не постійними. Хочете продовжити?</translation>
     </message>
     <message>
         <source>Yes, and don&apos;t ask anymore</source>
@@ -3052,7 +3052,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Reset geometry of all windows</source>
-        <translation>Скинути розміри всіх вікон</translation>
+        <translation>Скинути розміри усіх вікон</translation>
     </message>
     <message>
         <source>Close button minimize to tray icon</source>
@@ -3084,7 +3084,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Do you want to clear all saved status descriptions?</source>
-        <translation>Ви хочете видалити всі збережені описи статусів?</translation>
+        <translation>Ви хочете видалити усі збережені описи статусів?</translation>
     </message>
     <message>
         <source>&lt;b&gt;Chat messages can not be saved&lt;/b&gt;. Path:</source>
@@ -3276,7 +3276,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>There are still files that have not been transferred and will be interrupted. Do you want to disconnect anyway?</source>
-        <translation>Ще є файли, які не передані, і їх передача буде перервана. Ви все одно хочете відключитися?</translation>
+        <translation>Ще є файли, які не передані і їх передача буде перервана. Ви все одно хочете відключитися?</translation>
     </message>
     <message>
         <source>Interface</source>
@@ -3464,51 +3464,51 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Generate new file name</source>
-        <translation type="unfinished"></translation>
+        <translation>Генерувати нове ім’я файлу</translation>
     </message>
     <message>
         <source>Skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Пропустити</translation>
     </message>
     <message>
         <source>Overwrite older</source>
-        <translation type="unfinished"></translation>
+        <translation>Перезаписати старіші</translation>
     </message>
     <message>
         <source>Keep the original modification date of the transferred file</source>
-        <translation type="unfinished"></translation>
+        <translation>Зберігати оригінальну дату модифікації переданого файлу</translation>
     </message>
     <message>
         <source>You are not allowed create groups.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вам не дозволено створювати групи.</translation>
     </message>
     <message>
         <source>You are not allowed modify groups.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вам не дозволено змінювати групи.</translation>
     </message>
     <message>
         <source>You are not allowed create new message.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вам не дозволено створювати нові повідомлення.</translation>
     </message>
     <message>
         <source>Show surname before firstname of the users</source>
-        <translation type="unfinished"></translation>
+        <translation>Показувати прізвище перед іменем користувачів</translation>
     </message>
     <message>
         <source>The download folder does not exists or is not writable. Please select a new one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Папка для завантаження не існує або не для запису. Виберіть нову.</translation>
     </message>
     <message>
         <source>Reset minimum width for applied style</source>
-        <translation type="unfinished"></translation>
+        <translation>Скинути мінімальну ширину для застосованого стилю</translation>
     </message>
     <message>
         <source>Clear recent emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>Скинути частовживані смайли</translation>
     </message>
     <message>
         <source>Use high resolution emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>Використовувати смайли з високою роздільною здатністю</translation>
     </message>
 </context>
 <context>
@@ -3535,18 +3535,18 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Select All</source>
-        <translation type="obsolete">Вибрати все</translation>
+        <translation type="obsolete">Вибрати усе</translation>
     </message>
     <message>
         <source>Select all</source>
-        <translation>Вибрати все</translation>
+        <translation>Вибрати усе</translation>
     </message>
 </context>
 <context>
     <name>GuiNetwork</name>
     <message>
         <source>Ok</source>
-        <translation>ОК</translation>
+        <translation>Гаразд</translation>
     </message>
     <message>
         <source>none</source>
@@ -3582,7 +3582,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Disabled</source>
-        <translation type="unfinished">Відключено</translation>
+        <translation>Відключено</translation>
     </message>
 </context>
 <context>
@@ -3609,7 +3609,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Ok</source>
-        <translation>OК</translation>
+        <translation>Гаразд</translation>
     </message>
     <message>
         <source>The port entered is not valid.</source>
@@ -3675,7 +3675,7 @@ Please select a different name.</source>
     <name>GuiNetworkWidget</name>
     <message>
         <source>Ok</source>
-        <translation>ОК</translation>
+        <translation>Гаразд</translation>
     </message>
     <message>
         <source>Multicast group in beebeep.rc *</source>
@@ -3818,11 +3818,11 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Enable All</source>
-        <translation>Включити все</translation>
+        <translation>Включити усе</translation>
     </message>
     <message>
         <source>Disable All</source>
-        <translation>Виключити все</translation>
+        <translation>Виключити усе</translation>
     </message>
     <message>
         <source>Version</source>
@@ -3952,7 +3952,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Ok</source>
-        <translation>OК</translation>
+        <translation>Гаразд</translation>
     </message>
 </context>
 <context>
@@ -4049,7 +4049,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Ok</source>
-        <translation>OК</translation>
+        <translation>Гаразд</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -4080,7 +4080,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Clear all</source>
-        <translation>Очистити все</translation>
+        <translation>Очистити усе</translation>
     </message>
     <message>
         <source>Please select an item in the list.</source>
@@ -4099,7 +4099,7 @@ Please select a different name.</source>
     <name>GuiRefusedChatDialog</name>
     <message>
         <source>Ok</source>
-        <translation>ОК</translation>
+        <translation>Гаразд</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -4138,7 +4138,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Select All</source>
-        <translation>Виділити все</translation>
+        <translation>Виділити усе</translation>
     </message>
     <message>
         <source>Open selected text as url</source>
@@ -4194,7 +4194,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Ok</source>
-        <translation>OК</translation>
+        <translation>Гаразд</translation>
     </message>
     <message>
         <source>Please select a file to save the messages of the chat.</source>
@@ -4353,7 +4353,7 @@ Please select a different name.</source>
     <name>GuiSelectItemsWidget</name>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation>Гаразд</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -4698,7 +4698,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Expand all items</source>
-        <translation>Розгорнути всі элементи</translation>
+        <translation>Розгорнути Усі элементи</translation>
     </message>
     <message>
         <source>Download</source>
@@ -4742,7 +4742,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Collapse all items</source>
-        <translation>Згорнути всі элементи</translation>
+        <translation>Згорнути Усі элементи</translation>
     </message>
     <message>
         <source>Double click to open %1</source>
@@ -4750,11 +4750,11 @@ Please select a different name.</source>
     </message>
     <message>
         <source>All Files</source>
-        <translation>Всі файли</translation>
+        <translation>Усі файли</translation>
     </message>
     <message>
         <source>All users</source>
-        <translation>Всі користувачі</translation>
+        <translation>Усі користувачі</translation>
     </message>
     <message>
         <source>%1 files shared in your network</source>
@@ -4772,7 +4772,7 @@ Please select a different name.</source>
     <name>GuiShortcut</name>
     <message>
         <source>Ok</source>
-        <translation>ОК</translation>
+        <translation>Гаразд</translation>
     </message>
     <message>
         <source>Key</source>
@@ -4811,7 +4811,7 @@ Please select a different name.</source>
     <name>GuiShortcutDialog</name>
     <message>
         <source>Ok</source>
-        <translation>ОК</translation>
+        <translation>Гаразд</translation>
     </message>
     <message>
         <source>Use custom shortcuts</source>
@@ -4870,7 +4870,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Remove all transfers</source>
-        <translation type="obsolete">Видалити всі передачі</translation>
+        <translation type="obsolete">Видалити Усі передачі</translation>
     </message>
     <message>
         <source>Cancel Transfer</source>
@@ -4945,7 +4945,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Ok</source>
-        <translation>OК</translation>
+        <translation>Гаразд</translation>
     </message>
 </context>
 <context>
@@ -5032,18 +5032,18 @@ Please select a different name.</source>
     </message>
     <message>
         <source>d MMMM yyyy</source>
-        <translation type="unfinished"></translation>
+        <translation>д.ММММ.рррр</translation>
     </message>
     <message>
         <source>d MMMM</source>
-        <translation type="unfinished"></translation>
+        <translation>д.ММММ</translation>
     </message>
 </context>
 <context>
     <name>GuiVCardDialog</name>
     <message>
         <source>Ok</source>
-        <translation>ОК</translation>
+        <translation>Гаразд</translation>
     </message>
     <message>
         <source>Email</source>
@@ -5218,7 +5218,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Press ok to continue or change your username.</source>
-        <translation>Натисніть ОК для продовження або змініть своє ім’я.</translation>
+        <translation>Натисніть ГАРАЗД для продовження або змініть своє ім’я.</translation>
     </message>
 </context>
 <context>
@@ -5256,7 +5256,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Clear all</source>
-        <translation>Очистити все</translation>
+        <translation>Очистити усе</translation>
     </message>
     <message>
         <source>Please select an item in the list.</source>
@@ -5318,7 +5318,7 @@ Please select a different name.</source>
     <name>Not available</name>
     <message>
         <source>n.a.</source>
-        <translation type="unfinished"></translation>
+        <translation>недоступно</translation>
     </message>
 </context>
 <context>
@@ -5352,7 +5352,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Show all chats</source>
-        <translation>Показати всі чати</translation>
+        <translation>Показати усі чати</translation>
     </message>
     <message>
         <source>Show file transfers</source>
@@ -5360,7 +5360,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Open chat with all users</source>
-        <translation>Відкрити чат зі всіма користувачами</translation>
+        <translation>Відкрити чат зі усіма користувачами</translation>
     </message>
     <message>
         <source>%1 is %2</source>
@@ -5368,7 +5368,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Click to open chat with all local users</source>
-        <translation>Клацніть, щоб відкрити чат зі всіма локальними користувачами</translation>
+        <translation>Клацніть, щоб відкрити чат зі усіма локальними користувачами</translation>
     </message>
     <message>
         <source>Click to send a private message</source>
@@ -5408,7 +5408,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Minimize all chats</source>
-        <translation>Згорнути всі чати</translation>
+        <translation>Згорнути усі чати</translation>
     </message>
     <message>
         <source>Find text in chat</source>
@@ -5424,7 +5424,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Show emoticons panel</source>
-        <translation>Показати панель смайликов</translation>
+        <translation>Показати панель смайлів</translation>
     </message>
     <message>
         <source>Open chat with %1</source>
@@ -5436,7 +5436,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>All users</source>
-        <translation>Всі Користувачі</translation>
+        <translation>Усі Користувачі</translation>
     </message>
     <message>
         <source>last connection</source>
@@ -5586,7 +5586,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>If you want to format your message with words in regular and bold font write a [text to format].</source>
-        <translation type="obsolete">Якщо ви хочете відформатувати ваше повідомлення словами зі звичайним і напівжирним шрифтом, виділіть текст квадратними скобками [текст для форматування].</translation>
+        <translation type="obsolete">Якщо ви хочете відформатувати ваше повідомлення словами зі звичайним і напівжирним шрифтом, виділіть текст квадратними дужками [текст для форматування].</translation>
     </message>
     <message>
         <source>If you want to format your message with words in regular and bold font write a [text to format] .</source>
@@ -5620,7 +5620,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>&lt;i&gt;All truths are easy to understand once they are discovered; the point is to discover them.&lt;/i&gt; (Galileo Galilei)</source>
-        <translation type="obsolete">&lt;i&gt;Всі істини легко зрозуміти після їх виявлення; суть полягає в тому, щоб виявити їх.&lt;/i&gt; (Галілео Галілей)</translation>
+        <translation type="obsolete">&lt;i&gt;Усі істини легко зрозуміти після їх виявлення; суть полягає в тому, щоб виявити їх.&lt;/i&gt; (Галілео Галілей)</translation>
     </message>
     <message>
         <source>&lt;i&gt;We can not stop wishing our wishes.&lt;/i&gt; (Arthur Schopenhauer)</source>
@@ -5681,7 +5681,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>&lt;i&gt;I am not young enough to know everything.&lt;/i&gt; (Oscar Wilde)</source>
-        <translation type="obsolete">&lt;i&gt;Я не настільки молодий, щоб знати все.&lt;/i&gt; (Оскар Уайлд)</translation>
+        <translation type="obsolete">&lt;i&gt;Я не настільки молодий, щоб знати усе.&lt;/i&gt; (Оскар Уайлд)</translation>
     </message>
     <message>
         <source>You can select multiple files from network shares and download them simultaneously with a right click.</source>
