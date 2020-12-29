@@ -6614,6 +6614,13 @@ Gebruik aub een andere naam.</translation>
     </message>
 </context>
 <context>
+    <name>GuiVoicePlayerWidget</name>
+    <message>
+        <source>0:00</source>
+        <translation type="obsolete">0:00</translation>
+    </message>
+</context>
+<context>
     <name>GuiWebView</name>
     <message>
         <location filename="../src/desktop/GuiWebView.cpp" line="35"/>

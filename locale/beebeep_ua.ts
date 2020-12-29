@@ -5192,6 +5192,13 @@ Please select a different name.</source>
     </message>
 </context>
 <context>
+    <name>GuiVoicePlayerWidget</name>
+    <message>
+        <source>0:00</source>
+        <translation type="obsolete">0:00</translation>
+    </message>
+</context>
+<context>
     <name>GuiWebView</name>
     <message>
         <source>News</source>
