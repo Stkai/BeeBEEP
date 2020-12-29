@@ -40,15 +40,20 @@ public:
 
   inline bool canPlay() const;
   bool playFile( const QString&, VNumber );
+  void setPosition( qint64 );
   void stop();
 
 signals:
   void playing( const QString&, VNumber );
   void finished( const QString&, VNumber );
+  void durationChanged( const QString&, VNumber, qint64 );
+  void positionChanged( const QString&, VNumber, qint64 );
   void openWithExternalPlayer( const QUrl&, VNumber );
 
 protected slots:
   void onError( QMediaPlayer::Error );
+  void onDurationChanged( qint64 );
+  void onPositionChanged( qint64 );
 
 private:
   VNumber m_chatId;

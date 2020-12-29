@@ -111,7 +111,7 @@ protected slots:
   void onNetworkConfigurationAdded( const QNetworkConfiguration& );
   void onNetworkConfigurationChanged( const QNetworkConfiguration& );
   void onNetworkConfigurationRemoved( const QNetworkConfiguration& );
-  void onNetworkMagnagerOnlineStateChanged( bool );
+  void onNetworkManagerOnlineStateChanged( bool );
 
 private:
   static BeeApplication* mp_instance;

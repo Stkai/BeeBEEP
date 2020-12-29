@@ -10,7 +10,8 @@ HEADERS += gui/AudioManager.h \
   gui/ImageOptimizer.h \
   gui/GuiSelectItems.h \
   gui/Screenshot.h \
-  gui/ShortcutManager.h
+  gui/ShortcutManager.h \
+  gui/GuiVoicePlayer.h
 
 
 SOURCES += gui/AudioManager.cpp \
@@ -23,7 +24,8 @@ SOURCES += gui/AudioManager.cpp \
   gui/ImageOptimizer.cpp \
   gui/GuiSelectItems.cpp \
   gui/Screenshot.cpp \
-  gui/ShortcutManager.cpp
+  gui/ShortcutManager.cpp \
+  gui/GuiVoicePlayer.cpp
 
-
-FORMS += gui/GuiSelectItems.ui
+FORMS += gui/GuiSelectItems.ui \
+         gui/GuiVoicePlayer.ui

@@ -33,6 +33,8 @@ VoicePlayer::VoicePlayer( QObject* parent )
     mp_voicePlayer = new QMediaPlayer( this );
     mp_voicePlayer->setAudioRole( QAudio::VoiceCommunicationRole );
     connect( mp_voicePlayer, SIGNAL( error( QMediaPlayer::Error ) ), this, SLOT( onError( QMediaPlayer::Error ) ) );
+    connect( mp_voicePlayer, SIGNAL( durationChanged( qint64 ) ), this, SLOT( onDurationChanged( qint64 ) ) );
+    connect( mp_voicePlayer, SIGNAL( positionChanged( qint64 ) ), this, SLOT( onPositionChanged( qint64 ) ) );
   }
   else
     qWarning() << "VoicePlayer is disabled because system audio device is not available";
@@ -83,3 +85,18 @@ void VoicePlayer::stop()
   m_currentFilePath = "";
 }
 
+void VoicePlayer::onDurationChanged( qint64 new_duration )
+{
+  emit durationChanged( m_currentFilePath, m_chatId, new_duration );
+}
+
+void VoicePlayer::setPosition( qint64 new_position )
+{
+  if( mp_voicePlayer )
+    mp_voicePlayer->setPosition( new_position );
+}
+
+void VoicePlayer::onPositionChanged( qint64 new_position )
+{
+  emit positionChanged( m_currentFilePath, m_chatId, new_position );
+}

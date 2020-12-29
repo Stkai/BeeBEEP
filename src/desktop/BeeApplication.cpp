@@ -94,7 +94,7 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
   connect( mp_networkConfigurationManager, SIGNAL( configurationAdded( const QNetworkConfiguration& ) ), this, SLOT( onNetworkConfigurationAdded( const QNetworkConfiguration& ) ) );
   connect( mp_networkConfigurationManager, SIGNAL( configurationChanged( const QNetworkConfiguration& ) ), this, SLOT( onNetworkConfigurationChanged( const QNetworkConfiguration& ) ) );
   connect( mp_networkConfigurationManager, SIGNAL( configurationRemoved( const QNetworkConfiguration& ) ), this, SLOT( onNetworkConfigurationRemoved( const QNetworkConfiguration& ) ) );
-  connect( mp_networkConfigurationManager, SIGNAL( onlineStateChanged( bool ) ), this, SLOT( onNetworkMagnagerOnlineStateChanged( bool ) ) );
+  connect( mp_networkConfigurationManager, SIGNAL( onlineStateChanged( bool ) ), this, SLOT( onNetworkManagerOnlineStateChanged( bool ) ) );
 
 #if QT_VERSION >= 0x050200
   connect( this, SIGNAL( applicationStateChanged( Qt::ApplicationState ) ), this, SLOT( onApplicationStateChanged( Qt::ApplicationState ) ) );
@@ -500,8 +500,11 @@ void BeeApplication::onApplicationStateChanged( Qt::ApplicationState state )
 
 void BeeApplication::onNetworkConfigurationAdded( const QNetworkConfiguration& net_conf )
 {
-  qDebug() << "Network configuration is added:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() ) << "-" << qPrintable( net_conf.bearerTypeName() );
-  onNetworkConfigurationChanged( net_conf );
+  if( net_conf.bearerType() == QNetworkConfiguration::BearerEthernet || net_conf.bearerType() == QNetworkConfiguration::BearerWLAN )
+  {
+    qDebug() << "Network configuration is added:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() ) << "-" << qPrintable( net_conf.bearerTypeName() );
+    onNetworkConfigurationChanged( net_conf );
+  }
 }
 
 void BeeApplication::onNetworkConfigurationChanged( const QNetworkConfiguration& net_conf )
@@ -511,15 +514,18 @@ void BeeApplication::onNetworkConfigurationChanged( const QNetworkConfiguration&
     qWarning() << "Network configuration" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() ) << "is not valid";
     return;
   }
-  emit networkConfigurationChanged( net_conf );
+
+  if( net_conf.bearerType() == QNetworkConfiguration::BearerEthernet || net_conf.bearerType() == QNetworkConfiguration::BearerWLAN )
+    emit networkConfigurationChanged( net_conf );
 }
 
 void BeeApplication::onNetworkConfigurationRemoved( const QNetworkConfiguration& net_conf )
 {
-  qDebug() << "Network configuration is removed:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() ) << "-" << qPrintable( net_conf.bearerTypeName() );
+  if( net_conf.bearerType() == QNetworkConfiguration::BearerEthernet || net_conf.bearerType() == QNetworkConfiguration::BearerWLAN )
+    qDebug() << "Network configuration is removed:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() ) << "-" << qPrintable( net_conf.bearerTypeName() );
 }
 
-void BeeApplication::onNetworkMagnagerOnlineStateChanged( bool is_online )
+void BeeApplication::onNetworkManagerOnlineStateChanged( bool is_online )
 {
   qDebug() << "Network configuration manager has changed state to" << (is_online ? "online" : "offline");
   if( is_online )
@@ -527,4 +533,3 @@ void BeeApplication::onNetworkMagnagerOnlineStateChanged( bool is_online )
   else
     forceSleep();
 }
-

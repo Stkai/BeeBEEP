@@ -497,6 +497,7 @@ void Core::updateNetworkConfiguration( const QNetworkConfiguration& net_conf )
     return;
   }
 
+#ifdef BEEBEEP_DEBUG
   qDebug() << "Core is checking network configuration:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() )
            << "- bearer:" << qPrintable( net_conf.bearerTypeName() ) << net_conf.bearerType()
 #if QT_VERSION > 0x050000
@@ -505,6 +506,7 @@ void Core::updateNetworkConfiguration( const QNetworkConfiguration& net_conf )
            << "- purpose:" << net_conf.purpose()
            << "- type:" << net_conf.type()
            << "- state:" << net_conf.state();
+#endif
 
   if( net_conf.state() == QNetworkConfiguration::Active && (net_conf.bearerType() == QNetworkConfiguration::BearerEthernet || net_conf.bearerType() == QNetworkConfiguration::BearerWLAN) )
   {
