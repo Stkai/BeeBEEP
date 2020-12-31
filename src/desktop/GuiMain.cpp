@@ -105,9 +105,6 @@ GuiMain::GuiMain( QWidget *parent )
   mp_log = Q_NULLPTR;
   mp_networkTest = Q_NULLPTR;
   m_unreadActivities = 0;
-#ifdef BEEBEEP_USE_VOICE_CHAT
-  mp_voicePlayer = Q_NULLPTR;
-#endif
 
   mp_barMain = addToolBar( tr( "Show the main tool bar" ) );
   mp_barMain->setObjectName( "GuiMainToolBar" );
@@ -160,6 +157,10 @@ GuiMain::GuiMain( QWidget *parent )
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   connect( beeCore, SIGNAL( multicastDnsChanged() ), this, SLOT( showDefaultServerPortInMenu() ) );
 #endif
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  connect( beeCore->voicePlayer(), SIGNAL( openWithExternalPlayer( const QUrl&, VNumber ) ), this, SLOT( openUrlFromChat( const QUrl&, VNumber ) ) );
+#endif
+
   connect( mp_fileTransfer, SIGNAL( transferCanceled( VNumber ) ), beeCore, SLOT( cancelFileTransfer( VNumber ) ) );
   connect( mp_fileTransfer, SIGNAL( transferPaused( VNumber ) ), beeCore, SLOT( pauseFileTransfer( VNumber ) ) );
   connect( mp_fileTransfer, SIGNAL( openFileCompleted( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
@@ -439,8 +440,8 @@ void GuiMain::closeEvent( QCloseEvent* e )
 #endif
 
 #ifdef BEEBEEP_USE_VOICE_CHAT
-  if( mp_voicePlayer && !mp_voicePlayer->isStopped() )
-    mp_voicePlayer->stop();
+  if( !beeCore->voicePlayer()->isStopped() )
+    beeCore->voicePlayer()->stop();
 #endif
 
   if( mp_log )
@@ -3228,29 +3229,21 @@ void GuiMain::openUrlFromChat( const QUrl& file_url, VNumber chat_id )
       return;
     }
   }
-#ifdef BEEBEEP_USE_VOICE_CHAT
   else if( file_url.scheme() == FileInfo::urlSchemeVoiceMessage() )
   {
     QUrl adj_file_url = file_url;
     adj_file_url.setScheme( QLatin1String( "file" ) );
+#ifdef BEEBEEP_USE_VOICE_CHAT
     if( Settings::instance().useVoicePlayer() )
     {
-      if( !mp_voicePlayer )
-      {
-        mp_voicePlayer = new VoicePlayer( this );
-        connect( mp_voicePlayer, SIGNAL( openWithExternalPlayer( const QUrl&, VNumber ) ), this, SLOT( openUrlFromChat( const QUrl&, VNumber ) ) );
-      }
-      QString voice_file_path = Bee::convertToNativeFolderSeparator( adj_file_url.toLocalFile() );
-      if( !mp_voicePlayer->playFile( voice_file_path, chat_id ) )
-      {
-        QMessageBox::information( qApp->activeWindow(), Settings::instance().programName(),
-                                  tr( "Unable to open voice message %1" ).arg( voice_file_path.isEmpty() ? adj_file_url.toString() : voice_file_path ), tr( "Ok" ) );
-      }
+      GuiFloatingChat* fl_chat = floatingChat( chat_id );
+      if( fl_chat )
+        fl_chat->guiChat()->voicePlayer()->setFilePath( Bee::convertToNativeFolderSeparator( adj_file_url.toLocalFile() ), chat_id );
     }
     else
+#endif
       openUrlFromChat( adj_file_url, chat_id );
   }
-#endif
 #if QT_VERSION >= 0x040800
   else if( file_url.isLocalFile() )
 #else

@@ -41,6 +41,9 @@
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   #include "ShareDesktop.h"
 #endif
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  #include "VoicePlayer.h"
+#endif
 
 Core *Core::mp_instance = Q_NULLPTR;
 
@@ -67,6 +70,10 @@ Core::Core( QObject* parent )
 
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   mp_shareDesktop = new ShareDesktop( this );
+#endif
+
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  mp_voicePlayer = new VoicePlayer( this );
 #endif
 
   connect( mp_broadcaster, SIGNAL( newPeerFound( const QHostAddress&, int ) ), this, SLOT( newPeerFound( const QHostAddress&, int ) ) );

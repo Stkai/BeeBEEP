@@ -38,6 +38,9 @@ class MDnsManager;
 class ShareDesktop;
 class ShareDesktopData;
 #endif
+#ifdef BEEBEEP_USE_VOICE_CHAT
+class VoicePlayer;
+#endif
 
 #define beeCore Core::instance()
 
@@ -125,6 +128,7 @@ public:
 #ifdef BEEBEEP_USE_VOICE_CHAT
   /* CoreVoiceChat.cpp */
   bool sendVoiceMessageToChat( VNumber chat_id, const QString& file_path, qint64 message_duration );
+  inline VoicePlayer* voicePlayer();
 #endif
 
 signals:
@@ -316,11 +320,17 @@ private:
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   ShareDesktop* mp_shareDesktop;
 #endif
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  VoicePlayer* mp_voicePlayer;
+#endif
 
 };
 
 // Inline Functions
 inline bool Core::hasFileTransferInProgress() const { return isConnected() && mp_fileTransfer->hasActivePeers(); }
 inline bool Core::isFileTransferActive() const { return isConnected() && mp_fileTransfer->isActive(); }
+#ifdef BEEBEEP_USE_VOICE_CHAT
+inline VoicePlayer* Core::voicePlayer() { return mp_voicePlayer; }
+#endif
 
 #endif // BEEBEEP_CLIENT_H

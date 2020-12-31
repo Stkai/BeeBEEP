@@ -23,6 +23,9 @@
 
 #include "BeeApplication.h"
 #include "TickManager.h"
+#ifdef BEEBEEP_USE_VOICE_CHAT
+#include "VoicePlayer.h"
+#endif
 #include <csignal>
 #ifdef Q_OS_WIN
   #include <Windows.h>

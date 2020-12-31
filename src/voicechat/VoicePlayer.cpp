@@ -52,13 +52,13 @@ void VoicePlayer::onError( QMediaPlayer::Error error_code )
   stop();
 }
 
-bool VoicePlayer::playFile( const QString& file_path, VNumber chat_id )
+bool VoicePlayer::playFile( const QString& file_path, VNumber chat_id, qint64 file_starting_position )
 {
-  if( !canPlay() )
-    return false;
-
   if( isPlaying() )
     stop();
+
+  if( !canPlay() )
+    return false;
 
   if( !QFile::exists( file_path ) )
   {
@@ -68,10 +68,12 @@ bool VoicePlayer::playFile( const QString& file_path, VNumber chat_id )
 
   m_chatId = chat_id;
   m_currentFilePath = file_path;
+  emit playing( m_currentFilePath, m_chatId );
   QMediaContent media_content( QUrl::fromLocalFile( m_currentFilePath ) );
   mp_voicePlayer->setMedia( media_content );
+  if( file_starting_position > 0 )
+    mp_voicePlayer->setPosition( file_starting_position );
   mp_voicePlayer->play();
-  emit playing( m_currentFilePath, m_chatId );
   return true;
 }
 
@@ -88,12 +90,6 @@ void VoicePlayer::stop()
 void VoicePlayer::onDurationChanged( qint64 new_duration )
 {
   emit durationChanged( m_currentFilePath, m_chatId, new_duration );
-}
-
-void VoicePlayer::setPosition( qint64 new_position )
-{
-  if( mp_voicePlayer )
-    mp_voicePlayer->setPosition( new_position );
 }
 
 void VoicePlayer::onPositionChanged( qint64 new_position )

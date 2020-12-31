@@ -39,8 +39,7 @@ public:
   inline VNumber chatId() const;
 
   inline bool canPlay() const;
-  bool playFile( const QString&, VNumber );
-  void setPosition( qint64 );
+  bool playFile( const QString&, VNumber, qint64 file_starting_position = 0 );
   void stop();
 
 signals:

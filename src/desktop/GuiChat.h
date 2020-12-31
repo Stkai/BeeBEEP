@@ -28,6 +28,7 @@
 #include "UserList.h"
 class Chat;
 class ChatMessage;
+class GuiVoicePlayer;
 class Emoticon;
 
 
@@ -57,6 +58,8 @@ public:
   bool updateChat( const Chat& );
 
   void onTickEvent( int );
+
+  GuiVoicePlayer* voicePlayer();
 
 signals:
   void newMessage( VNumber, const QString& );
@@ -101,6 +104,7 @@ protected:
   void updateSpellCheckerToolTip();
   void updateCompleterToolTip();
   void updateUseReturnKeyToSendMessageToolTip();
+  void showVoicePlayer( bool );
 
 private slots:
   void sendMessage();
@@ -185,5 +189,6 @@ private:
 // Inline Functions
 inline VNumber GuiChat::chatId() const { return m_chatId; }
 inline QSplitter* GuiChat::chatSplitter() const { return mp_splitter; }
+inline GuiVoicePlayer* GuiChat::voicePlayer() { return mp_wVoicePlayer; }
 
 #endif // BEEBEEP_GUICHAT_H

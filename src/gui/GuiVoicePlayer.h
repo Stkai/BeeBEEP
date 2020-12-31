@@ -35,27 +35,28 @@ class GuiVoicePlayer : public QWidget, private Ui::GuiVoicePlayerWidget
 public:
   explicit GuiVoicePlayer( QWidget *parent = Q_NULLPTR );
 
-signals:
-  void playFile( const QString&, qint64 file_position );
-  void pauseFile( const QString& );
-
 public slots:
-  void setFilePath( const QString& );
-  void setFileDuration( const QString&, qint64 );
-  void setFilePosition( const QString&, qint64 );
+  void setFilePath( const QString&, VNumber );
 
 protected slots:
   void onPlayClicked();
   void onSliderPositionPressed();
   void onSliderPositionReleased();
+  void onPlaying( const QString&, VNumber );
+  void onFinished( const QString&, VNumber );
+  void setFileDuration( const QString&, VNumber, qint64 );
+  void setFilePosition( const QString&, VNumber, qint64 );
 
 protected:
   qint64 filePosition() const;
+  void setPaused( bool );
 
 private:
   QString m_filePath;
+  VNumber m_chatId;
   bool m_isPaused;
 
 };
+
 
 #endif // BEEBEEP_GUIVOICEPLAYER_H

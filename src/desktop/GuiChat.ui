@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>522</width>
-    <height>337</height>
+    <width>527</width>
+    <height>355</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,33 +19,11 @@
   <property name="windowTitle">
    <string>Chat</string>
   </property>
-  <widget class="QTextBrowser" name="mp_teChat">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>491</width>
-     <height>201</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>200</width>
-     <height>120</height>
-    </size>
-   </property>
-   <property name="readOnly">
-    <bool>true</bool>
-   </property>
-   <property name="textInteractionFlags">
-    <set>Qt::TextBrowserInteraction</set>
-   </property>
-  </widget>
   <widget class="QFrame" name="mp_frameMessage">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>230</y>
+     <y>260</y>
      <width>491</width>
      <height>70</height>
     </rect>
@@ -194,12 +172,86 @@
     </item>
    </layout>
   </widget>
+  <widget class="QFrame" name="mp_frameChat">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>20</y>
+     <width>491</width>
+     <height>228</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Plain</enum>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_2">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <property name="horizontalSpacing">
+     <number>0</number>
+    </property>
+    <property name="verticalSpacing">
+     <number>2</number>
+    </property>
+    <item row="0" column="0">
+     <widget class="QTextBrowser" name="mp_teChat">
+      <property name="minimumSize">
+       <size>
+        <width>200</width>
+        <height>120</height>
+       </size>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+      <property name="textInteractionFlags">
+       <set>Qt::TextBrowserInteraction</set>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="GuiVoicePlayer" name="mp_wVoicePlayer" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>56</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
  </widget>
  <customwidgets>
   <customwidget>
    <class>GuiMessageEdit</class>
    <extends>QTextEdit</extends>
    <header>GuiMessageEdit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>GuiVoicePlayer</class>
+   <extends>QWidget</extends>
+   <header>GuiVoicePlayer.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <tabstops>

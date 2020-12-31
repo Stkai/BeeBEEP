@@ -54,7 +54,7 @@ GuiChat::GuiChat( QWidget *parent )
   mp_splitter = new QSplitter( this );
   mp_splitter->setOrientation( Qt::Vertical );
   mp_splitter->setChildrenCollapsible( false );
-  mp_splitter->addWidget( mp_teChat );
+  mp_splitter->addWidget( mp_frameChat );
   mp_splitter->addWidget( mp_frameMessage );
 
   grid_layout->addWidget( mp_splitter, 1, 0, 1, 1);
@@ -83,6 +83,7 @@ GuiChat::GuiChat( QWidget *parent )
   mp_teChat->setOpenLinks( false );
   mp_teChat->setAcceptRichText( false );
 
+  voicePlayer()->hide();
 #ifdef BEEBEEP_USE_VOICE_CHAT
   connect( mp_pbRecordVoiceMessage, SIGNAL( clicked() ), this, SIGNAL( showVoiceMessageDialogRequest() ) );
 #else
@@ -477,6 +478,7 @@ void GuiChat::checkAnchorClicked( const QUrl& url )
 {
   if( url.scheme() == FileInfo::urlSchemeVoiceMessage() )
     emit showStatusMessageRequest( tr( "Opening voice message" ) + QString( "..." ), 3000 );
+
   emit openUrl( url, m_chatId );
 }
 
