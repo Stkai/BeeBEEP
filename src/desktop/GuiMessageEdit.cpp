@@ -109,7 +109,7 @@ void GuiMessageEdit::addEmoticon( const Emoticon& e )
 
   if( e.isInGroup() )
   {
-    if( Settings::instance().useNativeEmoticons() )
+    if( Settings::instance().useFontEmoticons() )
     {
       insertPlainText( e.textToMatch() );
     }

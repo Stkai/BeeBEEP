@@ -58,7 +58,7 @@ void Core::createDefaultChat()
   if( QDate::currentDate().month() == 1 && QDate::currentDate().day() >= 1 && QDate::currentDate().day() <= 3 )
   {
     QString new_year_icons;
-    if( Settings::instance().useNativeEmoticons() )
+    if( Settings::instance().useFontEmoticons() )
     {
       new_year_icons = QString( "%1&nbsp;&nbsp;%2&nbsp;&nbsp;%3" ).arg( QString::fromUtf8( "🎆" ), QString::fromUtf8( "🎆" ), QString::fromUtf8( "🎆" ) );
     }

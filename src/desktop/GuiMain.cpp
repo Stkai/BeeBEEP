@@ -1082,7 +1082,7 @@ void GuiMain::createMenus()
   act->setData( 105 );
   act = mp_menuChatSettings->addAction( tr( "Use font emoticons" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
-  act->setChecked( Settings::instance().useNativeEmoticons() );
+  act->setChecked( Settings::instance().useFontEmoticons() );
   act->setData( 31 );
   act = mp_menuChatSettings->addAction( tr( "Show chat toolbar" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -1137,7 +1137,7 @@ void GuiMain::createMenus()
   act = mp_menuChatColorSettings->addAction( IconManager::instance().icon( "quote-background.png" ), tr( "Select quote background color" ), this, SLOT( settingsChanged() ) );
   act->setData( 90 );
   mp_actSelectEmoticonSourcePath = mp_menuChatSettings->addAction( IconManager::instance().icon( "emoticon.png" ), tr( "Select emoticon theme" ) + QString( "..." ), this, SLOT( selectEmoticonSourcePath() ) );
-  mp_actSelectEmoticonSourcePath->setEnabled( !Settings::instance().useNativeEmoticons() );
+  mp_actSelectEmoticonSourcePath->setEnabled( !Settings::instance().useFontEmoticons() );
   mp_menuChatSettings->addAction( IconManager::instance().icon( "dictionary.png" ), tr( "Dictionary" ) + QString( "..." ), this, SLOT( selectDictionatyPath() ) );
   mp_menuChatSettings->addSeparator();
   mp_menuChatSettings->addAction( IconManager::instance().icon( "refused-chat.png" ), tr( "Blocked chats" ) + QString( "..." ), this, SLOT( showRefusedChats() ) );
@@ -1798,7 +1798,7 @@ void GuiMain::settingsChanged( QAction* act )
     Settings::instance().setConfirmOnDownloadFile( act->isChecked() );
     break;
   case 31:
-    Settings::instance().setUseNativeEmoticons( act->isChecked() );
+    Settings::instance().setUseFontEmoticons( act->isChecked() );
     mp_actSelectEmoticonSourcePath->setEnabled( !act->isChecked() );
     updateEmoticons();
     refresh_chat = true;

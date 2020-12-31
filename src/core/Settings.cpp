@@ -57,12 +57,8 @@ Settings::Settings()
   // In windows native dialogs are application modal and the connection goes in timeout...
   // In MacOSX instead it seems to work... I have changed the connection timeout...
   m_useNativeDialogs = true;
-#ifdef Q_OS_MAC
-  m_useNativeEmoticons = true;
-#else
-  m_useNativeEmoticons = false;
-#endif
-  m_useHiResEmoticons = false;
+  m_useFontEmoticons = false;
+  m_useHiResEmoticons = true;
 
 #ifdef MAKE_BEEBEEP_PORTABLE
   m_saveDataInUserApplicationFolder = false;
@@ -1484,7 +1480,7 @@ void Settings::loadCommonSettings( QSettings* user_ini )
   m_emoticonInRecentMenu = commonValue( system_rc, user_ini, "EmoticonsInRecentMenu", m_emoticonInRecentMenu ).toInt();
   m_favoriteEmoticons = user_ini->value( "FavoriteEmoticons", QStringList() ).toStringList();
   m_recentEmoticons = user_ini->value( "RecentEmoticons", QStringList() ).toStringList();
-  m_useNativeEmoticons = commonValue( system_rc, user_ini, "UseNativeEmoticons", m_useNativeEmoticons ).toBool();
+  m_useFontEmoticons = commonValue( system_rc, user_ini, "UseFontEmoticons", m_useFontEmoticons ).toBool();
   m_useHiResEmoticons = commonValue( system_rc, user_ini, "UseHighResolutionEmoticons", m_useHiResEmoticons ).toBool();
   m_showMinimizedAtStartup = commonValue( system_rc, user_ini, "ShowMinimizedAtStartup", m_startMinimized ).toBool();
   m_promptOnCloseEvent = commonValue( system_rc, user_ini, "PromptOnCloseEvent", m_promptOnCloseEvent ).toBool();
@@ -1867,7 +1863,7 @@ void Settings::save()
   sets->setValue( "EmoticonsInRecentMenu", m_emoticonInRecentMenu );
   sets->setValue( "FavoriteEmoticons", m_favoriteEmoticons );
   sets->setValue( "RecentEmoticons", m_recentEmoticons );
-  sets->setValue( "UseNativeEmoticons", m_useNativeEmoticons );
+  sets->setValue( "UseFontEmoticons", m_useFontEmoticons );
   sets->setValue( "UseHighResolutionEmoticons", m_useHiResEmoticons );
   sets->setValue( "ShowMinimizedAtStartup", m_showMinimizedAtStartup );
   sets->setValue( "PromptOnCloseEvent", m_promptOnCloseEvent );

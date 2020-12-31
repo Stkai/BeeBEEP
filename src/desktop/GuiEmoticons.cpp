@@ -142,7 +142,7 @@ void GuiEmoticons::loadEmoticons( int current_index )
   gwe->setEmoticonSize( emoticon_size );
   QFont f = Settings::instance().chatFont();
 
-  if( Settings::instance().useNativeEmoticons() )
+  if( Settings::instance().useFontEmoticons() )
   {
     Emoticon e_to_check = EmoticonManager::instance().emoticon( QString::fromUtf8( "✅" ) );
     if( e_to_check.isValid() )
@@ -168,7 +168,7 @@ void GuiEmoticons::loadEmoticons( int current_index )
     emoticon_button->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
     emoticon_button->setFixedSize( gwe->emoticonButtonSize() );
     emoticon_button->setStyleSheet( "QPushButton { background-color: #dcdcdc; } QPushButton:hover{ background-color: #ffcf04; }");
-    if( Settings::instance().useNativeEmoticons() )
+    if( Settings::instance().useFontEmoticons() )
       emoticon_button->setFont( f );
     setEmoticonToButton( e, emoticon_button );
     connect( emoticon_button, SIGNAL( clicked() ), this, SLOT( emoticonClicked() ) );
@@ -207,7 +207,7 @@ void GuiEmoticons::updateEmoticons()
 
 void GuiEmoticons::setEmoticonToButton( const Emoticon& e, QPushButton* pb )
 {
-  if( Settings::instance().useNativeEmoticons() )
+  if( Settings::instance().useFontEmoticons() )
     pb->setText( e.textToMatch() );
   else
     pb->setIcon( e.icon() );
