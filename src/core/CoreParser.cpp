@@ -161,7 +161,7 @@ void Core::parseFileMessage( const User& u, const Message& m )
   if( m.hasFlag( Message::Refused ) )
   {
     dispatchSystemMessage( chat_to_show_message.id(), u.id(), tr( "%1 %2 has refused to download the file: %3" )
-                           .arg( IconManager::instance().toHtml( "upload.png", "*F*" ), Bee::userNameToShow( u, true ), fi.name() ),
+                           .arg( IconManager::instance().toHtml( "red-ball.png", "*F*" ), Bee::userNameToShow( u, true ), fi.name() ),
                            chat_to_show_message.isValid() ? DispatchToChat : DispatchToAllChatsWithUser, ChatMessage::FileTransfer, false );
     return;
   }
@@ -189,20 +189,17 @@ void Core::parseFileMessage( const User& u, const Message& m )
 
   QString sys_msg;
   if( m.hasFlag( Message::VoiceMessage ) )
-  {
     sys_msg = tr( "%1 %2 is sending to you the voice message: %3" ).arg( IconManager::instance().toHtml( "download.png", "*F*" ), Bee::userNameToShow( u, true ), fi.name() );
-  }
   else
-  {
-    if( !Settings::instance().isFileExtensionAllowedInFileTransfer( fi.suffix() ) )
-    {
-      qWarning() << "User" << qPrintable( u.path() ) << "is sending to you the file" << fi.name() << "but you are not allowed to download this file extension";
-      refuseToDownloadFile( u.id(), fi );
-      return;
-    }
     sys_msg = tr( "%1 %2 is sending to you the file: %3" ).arg( IconManager::instance().toHtml( "download.png", "*F*" ), Bee::userNameToShow( u, true ), fi.name() );
-  }
   dispatchSystemMessage( chat_to_show_message.id(), u.id(), sys_msg, chat_to_show_message.isValid() ? DispatchToChat : DispatchToAllChatsWithUser, ChatMessage::FileTransfer, false );
+
+  if( !Settings::instance().isFileExtensionAllowedInFileTransfer( fi.suffix() ) )
+  {
+    qWarning() << "User" << qPrintable( u.path() ) << "is sending to you the file" << fi.name() << "but you are not allowed to download this file extension";
+    refuseToDownloadFile( u.id(), fi );
+    return;
+  }
 
   fi.setHostAddress( u.networkAddress().hostAddress() );
   if( fi.isInShareBox() )
@@ -466,7 +463,7 @@ void Core::parseFolderMessage( const User& u, const Message& m )
   {
     chat_to_show_message = ChatManager::instance().findChatByPrivateId( m.data(), false, u.id() );
     dispatchSystemMessage( chat_to_show_message.id(), u.id(), tr( "%1 %2 has refused to download folder %3." )
-                             .arg( IconManager::instance().toHtml( "upload.png", "*F*" ), Bee::userNameToShow( u, true ), m.text() ),
+                             .arg( IconManager::instance().toHtml( "red-ball.png", "*F*" ), Bee::userNameToShow( u, true ), m.text() ),
                              chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
     return;
   }

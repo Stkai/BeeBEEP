@@ -208,7 +208,7 @@ QAudioEncoderSettings AudioManager::voiceMessageEncoderSettings() const
   return aes;
 }
 
-#endif
+#endif // BEEBEEP_USE_VOICE_CHAT
 
 #if defined( Q_OS_OS2 )
   bool AudioManager::isAudioDeviceAvailable() { return true; }

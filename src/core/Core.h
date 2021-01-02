@@ -53,7 +53,8 @@ public:
   virtual ~Core();
   static Core* instance() { return mp_instance; }
 
-  void loadUsersAndGroups();
+  void init();
+
   bool isConnected() const;
   bool start();
   void stop();
@@ -237,6 +238,7 @@ protected slots:
   void autoSaveChatMessagesCompleted();
 
 protected:
+  void loadUsersAndGroups();
   void createLocalShareMessage();
   void showMessage( const QString&, int ms_to_show );
   int sendMessageToAllConnectedUsers( const Message& );

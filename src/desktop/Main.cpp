@@ -250,8 +250,9 @@ int main( int argc, char *argv[] )
   if( Settings::instance().autoUserAway() )
     bee_app.setIdleTimeout( Settings::instance().userAwayTimeout() );
 
+  /* Init BeeCore */
   Core bee_core;
-  bee_core.loadUsersAndGroups();
+  bee_core.init();
   QObject::connect( &bee_app, SIGNAL( networkConfigurationChanged( const QNetworkConfiguration& ) ), &bee_core, SLOT( updateNetworkConfiguration( const QNetworkConfiguration& ) ) );
 
   if( !QSystemTrayIcon::isSystemTrayAvailable() )

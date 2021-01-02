@@ -29,6 +29,7 @@
 #include "GuiPresetMessageList.h"
 #ifdef BEEBEEP_USE_VOICE_CHAT
   #include "GuiRecordVoiceMessage.h"
+  #include "VoicePlayer.h"
 #endif
 #include "GuiUserList.h"
 #include "IconManager.h"
@@ -281,6 +282,10 @@ void GuiFloatingChat::updateUser( const User& u )
 
 void GuiFloatingChat::closeEvent( QCloseEvent* e )
 {
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  if( beeCore->voicePlayer()->chatId() == mp_chat->chatId() && beeCore->voicePlayer()->isPlaying() )
+    beeCore->voicePlayer()->stop();
+#endif
   if( Settings::instance().floatingChatState().isEmpty() )
     Settings::instance().setShowEmoticonMenu( mp_dockEmoticons->isVisible() );
   QMainWindow::closeEvent( e );

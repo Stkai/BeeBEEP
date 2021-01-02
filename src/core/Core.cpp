@@ -92,6 +92,14 @@ Core::~Core()
     mp_instance = Q_NULLPTR;
 }
 
+void Core::init()
+{
+  loadUsersAndGroups();
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  voicePlayer()->init();
+#endif
+}
+
 QHostAddress Core::multicastGroupAddress() const
 {
   return isConnected() ? mp_broadcaster->multicastGroupAddress() : QHostAddress();

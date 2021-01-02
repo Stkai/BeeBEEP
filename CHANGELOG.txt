@@ -8,6 +8,7 @@ BeeBEEP 5.8.3 (in development)
 - New feature: added ECDH key exchange to encryption protocol
 - New feature: added "Auto save interval" for chat messages to prevent data loss
 - New feature: added "Favored emoticons" as tab in emoticon list
+- New feature: added Voice Message Player interface
 - User icons in chat window can be clicked also if the user is offline
 - Disabled by default the option to search users by a multicast datagram
 - Suspend/sleep mode is now managed also in Linux systems.

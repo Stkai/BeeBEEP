@@ -26,7 +26,13 @@
 
 
 VoicePlayer::VoicePlayer( QObject* parent )
- : QObject( parent ), m_chatId( ID_INVALID ), m_currentFilePath(), mp_voicePlayer( Q_NULLPTR )
+ : QObject( parent ), m_chatId( ID_INVALID ), m_currentFilePath(),
+   m_currentDuration( 0 ), m_currentPosition( 0 ), m_voicePlayerState( QMediaPlayer::StoppedState ),
+   mp_voicePlayer( Q_NULLPTR )
+{
+}
+
+bool VoicePlayer::init()
 {
   if( AudioManager::instance().isAudioDeviceAvailable() )
   {
@@ -35,9 +41,29 @@ VoicePlayer::VoicePlayer( QObject* parent )
     connect( mp_voicePlayer, SIGNAL( error( QMediaPlayer::Error ) ), this, SLOT( onError( QMediaPlayer::Error ) ) );
     connect( mp_voicePlayer, SIGNAL( durationChanged( qint64 ) ), this, SLOT( onDurationChanged( qint64 ) ) );
     connect( mp_voicePlayer, SIGNAL( positionChanged( qint64 ) ), this, SLOT( onPositionChanged( qint64 ) ) );
+    connect( mp_voicePlayer, SIGNAL( stateChanged( QMediaPlayer::State ) ), this, SLOT( onStateChanged( QMediaPlayer::State ) ) );
+    return true;
   }
   else
+  {
     qWarning() << "VoicePlayer is disabled because system audio device is not available";
+    return false;
+  }
+}
+
+void VoicePlayer::onStateChanged( QMediaPlayer::State new_state )
+{
+  if( m_voicePlayerState == new_state )
+    return;
+  m_voicePlayerState = new_state;
+  if( m_voicePlayerState == QMediaPlayer::PausedState )
+    emit paused( m_currentFilePath, m_chatId );
+  else if( m_voicePlayerState == QMediaPlayer::PlayingState )
+    emit playing( m_currentFilePath, m_chatId );
+  else if( m_voicePlayerState == QMediaPlayer::StoppedState )
+    emit finished( m_currentFilePath, m_chatId );
+  else
+    qWarning() << "VoicePlayer does not support this new state:" << static_cast<int>( m_voicePlayerState );
 }
 
 void VoicePlayer::onError( QMediaPlayer::Error error_code )
@@ -54,45 +80,57 @@ void VoicePlayer::onError( QMediaPlayer::Error error_code )
 
 bool VoicePlayer::playFile( const QString& file_path, VNumber chat_id, qint64 file_starting_position )
 {
-  if( isPlaying() )
-    stop();
-
   if( !canPlay() )
     return false;
 
-  if( !QFile::exists( file_path ) )
-  {
-    qWarning() << "VoicePlayer cannot play" << qPrintable( file_path ) << "(file not found)";
-    return false;
-  }
+  if( isPlaying() )
+    stop();
 
   m_chatId = chat_id;
-  m_currentFilePath = file_path;
-  emit playing( m_currentFilePath, m_chatId );
-  QMediaContent media_content( QUrl::fromLocalFile( m_currentFilePath ) );
-  mp_voicePlayer->setMedia( media_content );
-  if( file_starting_position > 0 )
+  if( m_currentFilePath != file_path )
+  {
+    if( !QFile::exists( file_path ) )
+    {
+      qWarning() << "VoicePlayer cannot play" << qPrintable( file_path ) << "(file not found)";
+      return false;
+    }
+    m_currentFilePath = file_path;
+    QMediaContent media_content( QUrl::fromLocalFile( m_currentFilePath ) );
+    mp_voicePlayer->setMedia( media_content );
+  }
+
+  if( file_starting_position >= 0 && mp_voicePlayer->position() != file_starting_position )
     mp_voicePlayer->setPosition( file_starting_position );
   mp_voicePlayer->play();
   return true;
 }
 
+void VoicePlayer::pause()
+{
+  if( canPlay() && isPlaying() )
+    mp_voicePlayer->pause();
+}
+
 void VoicePlayer::stop()
 {
-  if( mp_voicePlayer && !isStopped() )
+  if( canPlay() && !isStopped() )
     mp_voicePlayer->stop();
-  if( !m_currentFilePath.isEmpty() )
-    emit finished( m_currentFilePath, m_chatId );
-  m_chatId = ID_INVALID;
-  m_currentFilePath = "";
 }
 
 void VoicePlayer::onDurationChanged( qint64 new_duration )
 {
-  emit durationChanged( m_currentFilePath, m_chatId, new_duration );
+  if( m_currentDuration != new_duration )
+  {
+    m_currentDuration = new_duration;
+    emit durationChanged( m_currentFilePath, m_chatId, new_duration );
+  }
 }
 
 void VoicePlayer::onPositionChanged( qint64 new_position )
 {
-  emit positionChanged( m_currentFilePath, m_chatId, new_position );
+  if( new_position > 0 && m_currentPosition != new_position )
+  {
+    m_currentPosition = new_position;
+    emit positionChanged( m_currentFilePath, m_chatId, new_position );
+  }
 }

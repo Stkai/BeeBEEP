@@ -32,13 +32,23 @@
 
 
 GuiVoicePlayer::GuiVoicePlayer( QWidget* parent )
-  : QWidget( parent ), m_filePath( "" ), m_chatId( ID_INVALID ), m_isPaused( true )
+  : QWidget( parent ), m_filePath( "" ), m_chatId( ID_INVALID )
 {
   setObjectName( "GuiVoicePlayer" );
   setupUi( this );
 
   mp_pbPlay->setEnabled( false );
   connect( mp_pbPlay, SIGNAL( clicked() ), this, SLOT( onPlayClicked() ) );
+  connect( mp_sliderPosition, SIGNAL( sliderPressed() ), this, SLOT( onSliderPositionPressed() ) );
+  connect( mp_sliderPosition, SIGNAL( sliderMoved( int ) ), this, SLOT( onSliderPositionMoved( int ) ) );
+  connect( mp_sliderPosition, SIGNAL( sliderReleased() ), this, SLOT( onSliderPositionReleased() ) );
+  connect( mp_pbClose, SIGNAL( clicked() ), this, SLOT( onCloseClicked() ) );
+}
+
+void GuiVoicePlayer::onCloseClicked()
+{
+  if( !beeCore->voicePlayer()->isStopped() )
+    beeCore->voicePlayer()->stop();
 }
 
 void GuiVoicePlayer::setFilePath( const QString& voice_file_path, VNumber chat_id )
@@ -54,11 +64,12 @@ void GuiVoicePlayer::setFilePath( const QString& voice_file_path, VNumber chat_i
   mp_sliderPosition->setEnabled( false );
   mp_lPosition->setText( Bee::timeToString( 0 ) );
   mp_lDuration->setText( Bee::timeToString( 0 ) );
-  m_isPaused = true;
+  mp_lVoiceFile->setToolTip( m_filePath );
   connect( beeCore->voicePlayer(), SIGNAL( playing( const QString&, VNumber ) ), this, SLOT( onPlaying( const QString&, VNumber ) ) );
-  connect( beeCore->voicePlayer(), SIGNAL( finished( const QString&, VNumber ) ), this, SLOT( finished( const QString&, VNumber ) ) );
+  connect( beeCore->voicePlayer(), SIGNAL( paused( const QString&, VNumber ) ), this, SLOT( onPaused( const QString&, VNumber ) ) );
+  connect( beeCore->voicePlayer(), SIGNAL( finished( const QString&, VNumber ) ), this, SLOT( onFinished( const QString&, VNumber ) ) );
   connect( beeCore->voicePlayer(), SIGNAL( durationChanged( const QString&, VNumber, qint64 ) ), this, SLOT( setFileDuration( const QString&, VNumber, qint64 ) ) );
-  connect( beeCore->voicePlayer(), SIGNAL( positionChanged( const QString&, VNumber, qint64 ) ), this, SLOT( setPositionChanged( const QString&, VNumber, qint64 ) ) );
+  connect( beeCore->voicePlayer(), SIGNAL( positionChanged( const QString&, VNumber, qint64 ) ), this, SLOT( setFilePosition( const QString&, VNumber, qint64 ) ) );
   if( !beeCore->voicePlayer()->playFile( m_filePath, m_chatId ) )
     QMessageBox::information( qApp->activeWindow(), Settings::instance().programName(), tr( "Unable to open voice message %1" ).arg( m_filePath ), tr( "Ok" ) );
 #endif
@@ -73,6 +84,20 @@ void GuiVoicePlayer::onPlaying( const QString& voice_file_path, VNumber chat_id 
     setPaused( false );
     if( !isVisible() )
       show();
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Voice file" << qPrintable( voice_file_path ) << "-> playing";
+#endif
+  }
+}
+
+void GuiVoicePlayer::onPaused( const QString& voice_file_path, VNumber chat_id )
+{
+  if( m_chatId == chat_id && m_filePath == voice_file_path )
+  {
+    setPaused( true );
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Voice file" << qPrintable( voice_file_path ) << "-> paused";
+#endif
   }
 }
 
@@ -83,6 +108,9 @@ void GuiVoicePlayer::onFinished( const QString& voice_file_path, VNumber chat_id
     setPaused( true );
     if( isVisible() )
       hide();
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Voice file" << qPrintable( voice_file_path ) << "-> play finished";
+#endif
   }
 }
 
@@ -90,12 +118,14 @@ void GuiVoicePlayer::setFileDuration( const QString& voice_file_path, VNumber ch
 {
   if( m_chatId == chat_id && m_filePath == voice_file_path )
   {
-    int slider_max_value = file_duration < 1000 ? 1 : static_cast<int>( file_duration / 1000 );
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Voice file" << qPrintable( voice_file_path ) << "has duration" << file_duration << "ms";
+#endif
     mp_sliderPosition->setMinimum( 0 );
-    mp_sliderPosition->setMaximum( slider_max_value );
+    mp_sliderPosition->setMaximum( static_cast<int>( file_duration ) );
     mp_sliderPosition->setValue( 0 );
     mp_sliderPosition->setEnabled( true );
-    mp_lDuration->setText( Bee::timeToString( file_duration ) );
+    mp_lDuration->setText( QString( "<b>%1</b>" ).arg( Bee::timeToString( file_duration ) ) );
   }
 }
 
@@ -103,24 +133,18 @@ void GuiVoicePlayer::setFilePosition( const QString& voice_file_path, VNumber ch
 {
   if( m_chatId == chat_id && m_filePath == voice_file_path )
   {
-    int slider_value = file_position < 1000 ? 1 : static_cast<int>( file_position / 1000 );
-    if( slider_value > mp_sliderPosition->maximum() && mp_sliderPosition->value() < mp_sliderPosition->maximum() )
-      mp_sliderPosition->setValue( mp_sliderPosition->maximum() );
-    else
-      mp_sliderPosition->setValue( slider_value );
+#ifdef BEEBEEP_DEBUG
+    qDebug() << "Voice file" << qPrintable( voice_file_path ) << "new position" << file_position << "ms";
+#endif
+    qint64 slider_new_position = file_position > mp_sliderPosition->maximum() ? mp_sliderPosition->maximum() : file_position;
+    mp_sliderPosition->setValue( static_cast<int>( slider_new_position ) );
+    mp_lPosition->setText( QString( "<i>%1</i>" ).arg( Bee::timeToString( slider_new_position ) ) );
   }
-}
-
-qint64 GuiVoicePlayer::filePosition() const
-{
-  int slider_value = mp_sliderPosition->value();
-  return slider_value > 1 ? slider_value * 1000 : 0;
 }
 
 void GuiVoicePlayer::setPaused( bool yes )
 {
-  m_isPaused = yes;
-  if( m_isPaused )
+  if( yes )
     mp_pbPlay->setIcon( IconManager::instance().icon( "play.png" ) );
   else
     mp_pbPlay->setIcon( IconManager::instance().icon( "pause.png" ) );
@@ -128,27 +152,31 @@ void GuiVoicePlayer::setPaused( bool yes )
 
 void GuiVoicePlayer::onPlayClicked()
 {
-  if( m_isPaused )
+  if( !beeCore->voicePlayer()->canPlay() )
   {
-    setPaused( false );
-    qint64 file_position = filePosition();
-    beeCore->voicePlayer()->playFile( m_filePath, m_chatId, file_position );
+    mp_pbPlay->setDisabled( true );
+    return;
   }
+
+  if( beeCore->voicePlayer()->isPlaying() )
+    beeCore->voicePlayer()->pause();
   else
-  {
-    setPaused( true );
-    beeCore->voicePlayer()->stop();
-  }
+    beeCore->voicePlayer()->playFile( m_filePath, m_chatId, mp_sliderPosition->value() );
 }
 
 void GuiVoicePlayer::onSliderPositionPressed()
 {
-  if( !m_isPaused )
-    onPlayClicked();
+  if( beeCore->voicePlayer()->isPlaying() )
+    beeCore->voicePlayer()->pause();
+}
+
+void GuiVoicePlayer::onSliderPositionMoved( int slider_new_position )
+{
+  mp_lPosition->setText( Bee::timeToString( slider_new_position ) );
 }
 
 void GuiVoicePlayer::onSliderPositionReleased()
 {
-  if( m_isPaused )
+  if( beeCore->voicePlayer()->isPlaying() )
     onPlayClicked();
 }

@@ -462,7 +462,7 @@ void Core::refuseToDownloadFile( VNumber user_id, const FileInfo& fi )
 
   Chat chat_to_show_message = ChatManager::instance().findChatByPrivateId( fi.chatPrivateId(), false, user_id );
   dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 You have refused to download %2 from %3." )
-                         .arg( IconManager::instance().toHtml( "download.png", "*F*" ), fi.name(), Bee::userNameToShow( u, true ) ),
+                         .arg( IconManager::instance().toHtml( "red-ball.png", "*F*" ), fi.name(), Bee::userNameToShow( u, true ) ),
                          chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
 
   Connection* c = connection( u.id() );
@@ -491,7 +491,7 @@ void Core::refuseToDownloadFolder( VNumber user_id, const QString& folder_name, 
 
   Chat chat_to_show_message = ChatManager::instance().findChatByPrivateId( chat_private_id, false, user_id );
   dispatchSystemMessage( chat_to_show_message.isValid() ? chat_to_show_message.id() : ID_DEFAULT_CHAT, u.id(), tr( "%1 You have refused to download folder %2 from %3." )
-                         .arg( IconManager::instance().toHtml( "download.png", "*F*" ), folder_name, Bee::userNameToShow( u, true ) ),
+                         .arg( IconManager::instance().toHtml( "red-ball.png", "*F*" ), folder_name, Bee::userNameToShow( u, true ) ),
                          chat_to_show_message.isValid() ? DispatchToChat : DispatchToDefaultAndPrivateChat, ChatMessage::FileTransfer, false );
 
   Message m = Protocol::instance().folderRefusedToMessage( folder_name, chat_private_id );

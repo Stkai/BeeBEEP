@@ -41,20 +41,21 @@ public slots:
 protected slots:
   void onPlayClicked();
   void onSliderPositionPressed();
+  void onSliderPositionMoved( int );
   void onSliderPositionReleased();
   void onPlaying( const QString&, VNumber );
+  void onPaused( const QString&, VNumber );
   void onFinished( const QString&, VNumber );
   void setFileDuration( const QString&, VNumber, qint64 );
   void setFilePosition( const QString&, VNumber, qint64 );
+  void onCloseClicked();
 
 protected:
-  qint64 filePosition() const;
   void setPaused( bool );
 
 private:
   QString m_filePath;
   VNumber m_chatId;
-  bool m_isPaused;
 
 };
 

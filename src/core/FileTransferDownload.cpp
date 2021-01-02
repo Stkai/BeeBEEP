@@ -40,6 +40,7 @@ void FileTransferPeer::sendDownloadRequest()
   {
     qWarning() << qPrintable( name() ) << "has a file extension" << m_fileInfo.suffix() << "not allowed to download";
     cancelTransfer();
+    return;
   }
 
   bool skip_transfer = false;
