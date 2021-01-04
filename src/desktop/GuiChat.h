@@ -24,11 +24,14 @@
 #ifndef BEEBEEP_GUICHAT_H
 #define BEEBEEP_GUICHAT_H
 
+
 #include "ui_GuiChat.h"
 #include "UserList.h"
 class Chat;
 class ChatMessage;
-class GuiVoicePlayer;
+#ifdef BEEBEEP_USE_VOICE_CHAT
+#include "GuiVoicePlayer.h"
+#endif
 class Emoticon;
 
 
@@ -59,7 +62,9 @@ public:
 
   void onTickEvent( int );
 
-  GuiVoicePlayer* voicePlayer();
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  GuiVoicePlayer* guiVoicePlayer();
+#endif
 
 signals:
   void newMessage( VNumber, const QString& );
@@ -183,12 +188,18 @@ private:
   QShortcut* mp_scViewEmoticons;
   QString m_lastTextFound;
 
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  GuiVoicePlayer* mp_guiVoicePlayer;
+#endif
+
 };
 
 
 // Inline Functions
 inline VNumber GuiChat::chatId() const { return m_chatId; }
 inline QSplitter* GuiChat::chatSplitter() const { return mp_splitter; }
-inline GuiVoicePlayer* GuiChat::voicePlayer() { return mp_wVoicePlayer; }
+#ifdef BEEBEEP_USE_VOICE_CHAT
+inline GuiVoicePlayer* GuiChat::guiVoicePlayer() { return mp_guiVoicePlayer; }
+#endif
 
 #endif // BEEBEEP_GUICHAT_H

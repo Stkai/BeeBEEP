@@ -3238,7 +3238,7 @@ void GuiMain::openUrlFromChat( const QUrl& file_url, VNumber chat_id )
     {
       GuiFloatingChat* fl_chat = floatingChat( chat_id );
       if( fl_chat )
-        fl_chat->guiChat()->voicePlayer()->setFilePath( Bee::convertToNativeFolderSeparator( adj_file_url.toLocalFile() ), chat_id );
+        fl_chat->guiChat()->guiVoicePlayer()->setFilePath( Bee::convertToNativeFolderSeparator( adj_file_url.toLocalFile() ), chat_id );
     }
     else
 #endif

@@ -49,6 +49,8 @@ protected slots:
   void setFileDuration( const QString&, VNumber, qint64 );
   void setFilePosition( const QString&, VNumber, qint64 );
   void onCloseClicked();
+  void showPlayer();
+  void hidePlayer();
 
 protected:
   void setPaused( bool );

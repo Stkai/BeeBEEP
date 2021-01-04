@@ -87,17 +87,17 @@ bool VoicePlayer::playFile( const QString& file_path, VNumber chat_id, qint64 fi
     stop();
 
   m_chatId = chat_id;
-  if( m_currentFilePath != file_path )
+  m_currentDuration = 0;
+  m_currentPosition = 0;
+  m_currentFilePath = file_path;
+  if( !QFile::exists( file_path ) )
   {
-    if( !QFile::exists( file_path ) )
-    {
-      qWarning() << "VoicePlayer cannot play" << qPrintable( file_path ) << "(file not found)";
-      return false;
-    }
-    m_currentFilePath = file_path;
-    QMediaContent media_content( QUrl::fromLocalFile( m_currentFilePath ) );
-    mp_voicePlayer->setMedia( media_content );
+    qWarning() << "VoicePlayer cannot play" << qPrintable( file_path ) << "(file not found)";
+    return false;
   }
+
+  QMediaContent media_content( QUrl::fromLocalFile( m_currentFilePath ) );
+  mp_voicePlayer->setMedia( media_content );
 
   if( file_starting_position >= 0 && mp_voicePlayer->position() != file_starting_position )
     mp_voicePlayer->setPosition( file_starting_position );

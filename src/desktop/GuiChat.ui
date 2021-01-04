@@ -223,7 +223,7 @@
      </widget>
     </item>
     <item row="1" column="0">
-     <widget class="GuiVoicePlayer" name="mp_wVoicePlayer" native="true">
+     <widget class="QFrame" name="mp_frameVoicePlayer">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
         <horstretch>0</horstretch>
@@ -236,6 +236,12 @@
         <height>56</height>
        </size>
       </property>
+      <property name="frameShape">
+       <enum>QFrame::Panel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
      </widget>
     </item>
    </layout>
@@ -246,12 +252,6 @@
    <class>GuiMessageEdit</class>
    <extends>QTextEdit</extends>
    <header>GuiMessageEdit.h</header>
-  </customwidget>
-  <customwidget>
-   <class>GuiVoicePlayer</class>
-   <extends>QWidget</extends>
-   <header>GuiVoicePlayer.h</header>
-   <container>1</container>
   </customwidget>
  </customwidgets>
  <tabstops>

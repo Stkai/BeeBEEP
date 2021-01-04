@@ -29,6 +29,9 @@
 #include "FileDialog.h"
 #include "GuiChat.h"
 #include "GuiChatMessage.h"
+#ifdef BEEBEEP_USE_VOICE_CHAT
+#include "GuiVoicePlayer.h"
+#endif
 #include "IconManager.h"
 #include "Protocol.h"
 #include "Settings.h"
@@ -45,6 +48,16 @@ GuiChat::GuiChat( QWidget *parent )
   setupUi( this );
   setObjectName( "GuiChat" );
   setAcceptDrops( true );
+
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  mp_guiVoicePlayer = new GuiVoicePlayer( mp_frameVoicePlayer );
+  QGridLayout* voice_grid_layout = new QGridLayout( mp_frameVoicePlayer );
+  voice_grid_layout->setSpacing( 0 );
+  voice_grid_layout->setObjectName( QString::fromUtf8( "voice_grid_layout" ) );
+  voice_grid_layout->setContentsMargins( 4, 4, 4, 4 );
+  voice_grid_layout->addWidget( mp_guiVoicePlayer );
+#endif
+  mp_frameVoicePlayer->hide();
 
   QGridLayout* grid_layout = new QGridLayout( this );
   grid_layout->setSpacing( 0 );
@@ -83,7 +96,6 @@ GuiChat::GuiChat( QWidget *parent )
   mp_teChat->setOpenLinks( false );
   mp_teChat->setAcceptRichText( false );
 
-  voicePlayer()->hide();
 #ifdef BEEBEEP_USE_VOICE_CHAT
   connect( mp_pbRecordVoiceMessage, SIGNAL( clicked() ), this, SIGNAL( showVoiceMessageDialogRequest() ) );
 #else
