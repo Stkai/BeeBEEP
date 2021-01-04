@@ -786,6 +786,14 @@ QString Settings::version( bool build_version, bool qt_version, bool debug_info 
   if( build_version )
     s_version += QString( "-%1" ).arg( BEEBEEP_BUILD );
 
+#if defined( Q_OS_WIN )
+  #if defined( Q_PROCESSOR_X86_64 )
+    s_version += QString( "-64bit" );
+  #else
+    s_version += QString( "-32bit" );
+  #endif
+#endif
+
   if( debug_info )
   {
     s_version += QString( "-p%2" ).arg( BEEBEEP_PROTO_VERSION );
