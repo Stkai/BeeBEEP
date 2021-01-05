@@ -120,6 +120,8 @@ GuiMain::GuiMain( QWidget *parent )
   m_coreIsConnecting = false;
   m_changeTabToUserListOnFirstConnected = false;
 
+  m_useFusionStyle = false;
+
   createActions();
   createMainWidgets();
   createMenus();
@@ -1519,8 +1521,6 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actViewFileTransfer );
   mp_barMain->addAction( mp_actViewFileSharing );
-
-  setMinimumWidthForStyle();
 }
 
 void GuiMain::createMainWidgets()
@@ -2048,7 +2048,6 @@ void GuiMain::settingsChanged( QAction* act )
     {
       Settings::instance().setUseDarkStyle( act->isChecked() );
       refresh_users = true;
-      setMinimumWidthForStyle();
       QTimer::singleShot( 0, this, SLOT( loadStyle() ) );
     }
     break;
@@ -5216,7 +5215,8 @@ void GuiMain::setMinimumWidthForStyle()
     int old_w = width();
     int wasted_w = 20;
 #if defined( Q_OS_MAC )
-    int min_w = qMax( 320, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+8) + wasted_w );
+    int icon_wasted_w = m_useFusionStyle ? 4 : 8;
+    int min_w = qMax( 300, mp_barMain->actions().size() * (mp_barMain->iconSize().width() + icon_wasted_w) + wasted_w );
 #elif defined( Q_OS_UNIX )
     int min_w = qMax( 320, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+4) + wasted_w );
 #elif defined( Q_OS_WIN )
@@ -5240,20 +5240,27 @@ void GuiMain::loadStyle()
   QStyle* p_style = QStyleFactory::create( "Fusion" );
   if( p_style )
   {
-    qDebug() << "Stylesheet type: Fusion";
     beeApp->setStyle( p_style );
+    m_useFusionStyle = true;
   }
   else
   {
-    qDebug() << "Stylesheet type: system default";
     beeApp->resetStyle();
+    m_useFusionStyle = false;
   }
 
   if( Settings::instance().useDarkStyle() )
   {
-    qDebug() << "Stylesheet mode: dark";
+    qDebug() << "Stylesheet:" << (m_useFusionStyle ? "Fusion" : "System Default") << "Dark";
     beeApp->setPalette( Bee::darkPalette() );
   }
+  else
+  {
+    qDebug() << "Stylesheet:" << (m_useFusionStyle ? "Fusion" : "System Default" );
+    beeApp->resetPalette();
+  }
+
+  setMinimumWidthForStyle();
 
   mp_home->updateBackground();
   mp_userList->updateBackground();

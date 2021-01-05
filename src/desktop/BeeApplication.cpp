@@ -87,6 +87,7 @@ BeeApplication::BeeApplication( int& argc, char** argv  )
   mp_sleepWatcher = Q_NULLPTR;
 
   m_defaultCss = styleSheet();
+  m_defaultPalette = palette();
 
   mp_fsWatcher = new QFileSystemWatcher;
   m_settingsFilePath = "";
@@ -479,6 +480,11 @@ bool BeeApplication::isDesktopLocked()
 void BeeApplication::resetStyle()
 {
   setStyleSheet( m_defaultCss );
+}
+
+void BeeApplication::resetPalette()
+{
+  setPalette( m_defaultPalette );
 }
 
 void BeeApplication::ignoreEvent( const QString& log_text = "" )

@@ -397,6 +397,8 @@ private:
 #ifdef BEEBEEP_USE_VOICE_CHAT
   QMenu* mp_menuVoiceMessage;
 #endif
+
+  bool m_useFusionStyle;
 };
 
 #endif // BEEBEEP_GUIMAIN_H

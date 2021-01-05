@@ -84,6 +84,7 @@ public slots:
   void checkIdle();
   void forceShutdown();
   void resetStyle();
+  void resetPalette();
 
 protected:
   bool notify( QObject* receiver, QEvent* event );
@@ -139,6 +140,7 @@ private:
 #endif
 
   QString m_defaultCss;
+  QPalette m_defaultPalette;
 
   QFileSystemWatcher* mp_fsWatcher;
   QString m_settingsFilePath;
