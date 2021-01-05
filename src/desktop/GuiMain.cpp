@@ -2046,10 +2046,12 @@ void GuiMain::settingsChanged( QAction* act )
     break;
   case 77:
     {
-      Settings::instance().setUseDarkStyle( act->isChecked() );
-      Settings::instance().resetAllColors();
-      refresh_users = true;
-      QTimer::singleShot( 0, this, SLOT( loadStyle() ) );
+      if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to apply the new theme?" ), tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 0 )
+      {
+        Settings::instance().setUseDarkStyle( act->isChecked() );
+        Settings::instance().resetAllColors();
+        QTimer::singleShot( 0, this, SLOT( loadStyle() ) );
+      }
     }
     break;
   case 78:
@@ -4999,6 +5001,7 @@ void GuiMain::updateChatColors()
   {
     if( fl_chat->guiChat()->chatId() != ID_DEFAULT_CHAT )
       fl_chat->guiChat()->updateChatColors();
+
   }
 }
 
@@ -5264,6 +5267,7 @@ void GuiMain::loadStyle()
   mp_groupList->updateBackground();
   mp_savedChatList->updateBackground();
   updateChatColors();
+  updateEmoticons();
 }
 
 #ifdef BEEBEEP_USE_VOICE_CHAT

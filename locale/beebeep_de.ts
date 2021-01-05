@@ -3186,7 +3186,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>beta</source>
-        <translation>beta</translation>
+        <translation type="vanished">beta</translation>
     </message>
     <message>
         <source>News</source>
@@ -3409,10 +3409,6 @@ Bitte wähle einen anderen Namen aus.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to open voice message %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Use the integrated voice message player</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3542,6 +3538,10 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Use high resolution emoticons</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want to apply the new theme?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5238,10 +5238,25 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
 </context>
 <context>
+    <name>GuiVoicePlayer</name>
+    <message>
+        <source>Unable to open voice message %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished">OK</translation>
+    </message>
+</context>
+<context>
     <name>GuiVoicePlayerWidget</name>
     <message>
         <source>0:00</source>
         <translation type="obsolete">0:00</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Schließen</translation>
     </message>
 </context>
 <context>

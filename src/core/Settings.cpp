@@ -347,7 +347,7 @@ QString Settings::defaultListBackgroundColor() const
 
 QString Settings::defaultSystemBackgroundColor() const
 {
-  return m_useDarkStyle ? Bee::colorBlack().name() : QLatin1String( "#f5f5f5" );
+  return m_useDarkStyle ? Bee::colorBlack().name() : QLatin1String( "#e0e0e0" );
 }
 
 void Settings::resetAllColors()
@@ -359,12 +359,12 @@ void Settings::resetAllColors()
   m_chatListBackgroundColor = defaultListBackgroundColor();
   m_groupListBackgroundColor = defaultListBackgroundColor();
   m_savedChatListBackgroundColor = defaultListBackgroundColor();
-  m_chatFontColor = m_useDarkStyle ? Bee::colorWhite().name() : "#000000";
+  m_chatFontColor = m_useDarkStyle ? "#ffffff" : "#000000";
   m_chatBackgroundColor = m_useDarkStyle ? Bee::colorDarkGrey().name() : "#ffffff";
-  m_chatDefaultTextColor = m_useDarkStyle ? Bee::colorWhite().name() : "#000000";
+  m_chatDefaultTextColor = m_useDarkStyle ? "#ffffff" : "#000000";
   m_chatSystemTextColor = m_useDarkStyle ? Bee::colorGrey().name() : "#555555";
-  m_chatQuoteBackgroundColor = m_useDarkStyle ? Bee::colorGrey().name() : "#808080";
-  m_chatQuoteTextColor = m_useDarkStyle ? Bee::colorBlack().name() : "#ffffff";
+  m_chatQuoteBackgroundColor = Bee::colorGrey().name();
+  m_chatQuoteTextColor = Bee::colorBlack().name();
 }
 
 void Settings::createApplicationUuid()

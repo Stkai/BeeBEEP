@@ -21,6 +21,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#include "BeeUtils.h"
 #include "EmoticonManager.h"
 #include "GuiConfig.h"
 #include "GuiEmoticons.h"
@@ -167,7 +168,10 @@ void GuiEmoticons::loadEmoticons( int current_index )
     emoticon_button->setIconSize( gwe->emoticonSize() );
     emoticon_button->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
     emoticon_button->setFixedSize( gwe->emoticonButtonSize() );
-    emoticon_button->setStyleSheet( "QPushButton { background-color: #dcdcdc; } QPushButton:hover{ background-color: #ffcf04; }");
+    if( Settings::instance().useDarkStyle() )
+      emoticon_button->setStyleSheet( QString( "QPushButton{ background-color: %1; } QPushButton:hover{ background-color: %2; }" ).arg( Bee::colorGrey().name(), Bee::colorOrange().name() ) );
+    else
+      emoticon_button->setStyleSheet( QString( "QPushButton{ background-color: %1; } QPushButton:hover{ background-color: %2; }" ).arg( Bee::colorWhite().name(), Bee::colorOrange().name() ) );
     if( Settings::instance().useFontEmoticons() )
       emoticon_button->setFont( f );
     setEmoticonToButton( e, emoticon_button );
@@ -202,6 +206,7 @@ void GuiEmoticons::updateEmoticons()
   deleteAllTabs();
 
   initEmoticons( current_index );
+
   emit emoticonsUpdated();
 }
 
@@ -282,7 +287,6 @@ GuiEmoticonWidget::GuiEmoticonWidget( QWidget* parent )
   mp_layout->setVerticalSpacing( 1 );
   mp_layout->setContentsMargins( 1, 1, 1, 1 );
 
-  m_hasPainted = false;
   m_emoticonSize = Settings::instance().emoticonSizeInMenu();
   m_emoticonGroup = Emoticon::Unknown;
 }
@@ -297,8 +301,7 @@ void GuiEmoticonWidget::resizeEvent( QResizeEvent* e )
 {
   QWidget::resizeEvent( e );
   clearLayout();
-  if( !m_hasPainted )
-    paintEmoticonButtons( e->size().width() );
+  paintEmoticonButtons( e->size().width() );
 }
 
 void GuiEmoticonWidget::clearLayout()
@@ -309,6 +312,11 @@ void GuiEmoticonWidget::clearLayout()
 
 void GuiEmoticonWidget::paintEmoticonButtons( int box_width )
 {
+  if( Settings::instance().useDarkStyle() )
+    setStyleSheet( QString( "QWidget { background-color: %1; }" ).arg( Bee::colorDarkGrey().lighter().name() ) );
+  else
+    setStyleSheet( QString( "QWidget { background-color: %1; }" ).arg( Bee::colorGrey().lighter().name() ) );
+
   if( m_buttons.isEmpty() )
     return;
 

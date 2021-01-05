@@ -95,6 +95,7 @@ namespace Bee
   QColor colorBlue();
   QColor colorWhite();
   QColor colorYellow();
+  QColor colorOrange();
   QString beeColorsToHtmlText( const QString& );
 
 

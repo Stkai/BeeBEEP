@@ -44,6 +44,19 @@ GuiVCard::GuiVCard( QWidget *parent )
   setLineWidth( 2 );
   setMidLineWidth( 1 );
 
+  QPalette custom_palette = palette();
+  if( Settings::instance().useDarkStyle() )
+  {
+    custom_palette.setColor( QPalette::Window, Bee::colorDarkGrey() );
+    custom_palette.setColor( QPalette::Base, Bee::colorGrey() );
+  }
+  else
+  {
+    custom_palette.setColor( QPalette::Window, Bee::colorWhite().lighter() );
+    custom_palette.setColor( QPalette::Base, Bee::colorWhite() );
+  }
+  setPalette( custom_palette );
+
   mp_pbChat->setIcon( IconManager::instance().icon( "chat.png" ) );
   mp_pbFile->setIcon( IconManager::instance().icon( "send-file.png" ) );
   mp_pbColor->setIcon( IconManager::instance().icon( "font-color.png" ) );

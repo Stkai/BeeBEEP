@@ -3144,7 +3144,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>beta</source>
-        <translation>бета</translation>
+        <translation type="vanished">бета</translation>
     </message>
     <message>
         <source>Please select the opacity percentage of inactive chat window (default: %1%)</source>
@@ -3376,7 +3376,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Unable to open voice message %1</source>
-        <translation>Неможливо відкрити повідомлення %1</translation>
+        <translation type="vanished">Неможливо відкрити повідомлення %1</translation>
     </message>
     <message>
         <source>Use the integrated voice message player</source>
@@ -3509,6 +3509,10 @@ Please select a different name.</source>
     <message>
         <source>Use high resolution emoticons</source>
         <translation>Використовувати смайли з високою роздільною здатністю</translation>
+    </message>
+    <message>
+        <source>Do you really want to apply the new theme?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5192,10 +5196,25 @@ Please select a different name.</source>
     </message>
 </context>
 <context>
+    <name>GuiVoicePlayer</name>
+    <message>
+        <source>Unable to open voice message %1</source>
+        <translation type="unfinished">Неможливо відкрити повідомлення %1</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>GuiVoicePlayerWidget</name>
     <message>
         <source>0:00</source>
         <translation type="obsolete">0:00</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Закрити</translation>
     </message>
 </context>
 <context>
