@@ -614,9 +614,9 @@ public:
 
   inline void setUseDarkStyle( bool );
   inline bool useDarkStyle() const;
-  inline QString defaultListBackgroundColor() const;
-  inline QString defaultSystemBackgroundColor() const;
 
+  QString defaultListBackgroundColor() const;
+  QString defaultSystemBackgroundColor() const;
   void resetAllColors();
 
   QString autoresponderName() const;
@@ -1376,8 +1376,6 @@ inline int Settings::clearCacheAfterDays() const { return m_clearCacheAfterDays;
 inline void Settings::setClearCacheAfterDays( int new_value ) { m_clearCacheAfterDays = new_value; }
 inline int Settings::removePartiallyDownloadedFilesAfterDays() const { return m_removePartiallyDownloadedFilesAfterDays; }
 inline void Settings::setRemovePartiallyDownloadedFilesAfterDays( int new_value ) { m_removePartiallyDownloadedFilesAfterDays = new_value; }
-inline QString Settings::defaultListBackgroundColor() const { return QLatin1String( "#ffffff" ); }
-inline QString Settings::defaultSystemBackgroundColor() const { return QLatin1String( "#f5f5f5" ); }
 inline void Settings::setDownloadInUserFolder( bool new_value ) { m_downloadInUserFolder = new_value; }
 inline bool Settings::downloadInUserFolder() const { return m_downloadInUserFolder; }
 inline void Settings::setShowUsersInWorkgroups( bool new_value ) { m_showUsersInWorkgroups = new_value; }

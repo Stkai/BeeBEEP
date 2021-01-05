@@ -253,12 +253,6 @@ void GuiChatList::selectBackgroundColor()
 
 void GuiChatList::updateBackground()
 {
-  if( Settings::instance().useDarkStyle() && Settings::instance().chatListBackgroundColor() == Settings::instance().defaultListBackgroundColor() )
-  {
-    if( !mp_twChatList->styleSheet().isEmpty() )
-      mp_twChatList->setStyleSheet( QString() );
-    return;
-  }
   QString w_stylesheet = Settings::instance().guiCustomListStyleSheet( Settings::instance().chatListBackgroundColor(),
                                                                        IconManager::instance().iconPath( "chat-list.png" ) );
   mp_twChatList->setStyleSheet( w_stylesheet );

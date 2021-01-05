@@ -2047,6 +2047,7 @@ void GuiMain::settingsChanged( QAction* act )
   case 77:
     {
       Settings::instance().setUseDarkStyle( act->isChecked() );
+      Settings::instance().resetAllColors();
       refresh_users = true;
       QTimer::singleShot( 0, this, SLOT( loadStyle() ) );
     }
@@ -5003,16 +5004,11 @@ void GuiMain::updateChatColors()
 
 void GuiMain::resetAllColors()
 {
-  if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to restore the colors to the default ones?" ), tr( "Yes"), tr( "No" ), QString(), 1, 1 ) == 0 )
+  if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to restore the colors to the default ones?" ), tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 0 )
   {
-    Settings::instance().setUseDarkStyle( false );
     Settings::instance().resetAllColors();
     Settings::instance().save();
     loadStyle();
-    updateChatColors();
-    GuiFloatingChat* fl_chat = floatingChat( ID_DEFAULT_CHAT );
-    if( fl_chat )
-      fl_chat->guiChat()->updateChatColors();
   }
 }
 
@@ -5267,6 +5263,7 @@ void GuiMain::loadStyle()
   mp_chatList->updateBackground();
   mp_groupList->updateBackground();
   mp_savedChatList->updateBackground();
+  updateChatColors();
 }
 
 #ifdef BEEBEEP_USE_VOICE_CHAT

@@ -908,16 +908,6 @@ QString Bee::dateTimeToString( const QDateTime& dt )
   return dt.date() == QDate::currentDate() ? dt.time().toString( Qt::SystemLocaleShortDate ) : dt.toString( Qt::SystemLocaleShortDate );
 }
 
-QString Bee::beeColorYellow() { return "#dede00"; }
-
-QString Bee::beeColorsToHtmlText( const QString& txt )
-{
-  QString bee_txt = "";
-  for( int i = 0; i < txt.size(); i++ )
-    bee_txt.append( QString( "<font color=%1>%2</font>" ).arg( (i % 2 == 0) ? "#000000" : beeColorYellow() ).arg( txt.at( i ) ) );
-  return bee_txt;
-}
-
 void Bee::setBackgroundColor( QWidget* w, const QColor& c )
 {
   QPalette pal = w->palette();
@@ -1157,35 +1147,45 @@ bool Bee::selectComboBoxData( QComboBox* box, const QVariant& item_data )
     return false;
 }
 
+QColor Bee::colorDarkGrey() { return QColor( 64, 64, 64 ); }
+QColor Bee::colorGrey() { return QColor( 128, 128, 128 ); }
+QColor Bee::colorBlack() { return QColor( 25, 25, 25 ); }
+QColor Bee::colorBlue() { return QColor( 42, 130, 218 ); }
+QColor Bee::colorWhite() { return QColor( 238, 238, 238 ); }
+QColor Bee::colorYellow() { return QColor( "#dede00" ); }
+
+QString Bee::beeColorsToHtmlText( const QString& txt )
+{
+  QString bee_txt = "";
+  QString c_y = colorYellow().name();
+  for( int i = 0; i < txt.size(); i++ )
+    bee_txt.append( QString( "<font color=%1>%2</font>" ).arg( (i % 2 == 0) ? "#000000" : c_y ).arg( txt.at( i ) ) );
+  return bee_txt;
+}
+
 QPalette Bee::darkPalette()
 {
-  QColor dp_darkGray( 64, 64, 64 );
-  QColor dp_gray( 128, 128, 128 );
-  QColor dp_black( 25, 25, 25 );
-  QColor dp_blue( 42, 130, 218 );
-  QColor dp_white( 238, 238, 238 );
-
   QPalette darkPalette;
-  darkPalette.setColor( QPalette::Window, dp_darkGray );
-  darkPalette.setColor( QPalette::WindowText, dp_white );
-  darkPalette.setColor( QPalette::Base, dp_black );
-  darkPalette.setColor( QPalette::AlternateBase, dp_darkGray );
-  darkPalette.setColor( QPalette::ToolTipBase, dp_gray.lighter() );
-  darkPalette.setColor( QPalette::ToolTipText, Qt::black );
-  darkPalette.setColor( QPalette::Text, dp_white );
+  darkPalette.setColor( QPalette::Window, colorDarkGrey() );
+  darkPalette.setColor( QPalette::WindowText, colorWhite() );
+  darkPalette.setColor( QPalette::Base, colorBlack() );
+  darkPalette.setColor( QPalette::AlternateBase, colorDarkGrey() );
+  darkPalette.setColor( QPalette::ToolTipBase, colorGrey().lighter() );
+  darkPalette.setColor( QPalette::ToolTipText, colorBlack() );
+  darkPalette.setColor( QPalette::Text, colorWhite() );
   darkPalette.setColor( QPalette::BrightText, Qt::yellow );
-  darkPalette.setColor( QPalette::Button, dp_darkGray );
-  darkPalette.setColor( QPalette::ButtonText, dp_white );
-  darkPalette.setColor( QPalette::Link, dp_blue );
-  darkPalette.setColor( QPalette::LinkVisited, dp_blue.darker() );
-  darkPalette.setColor( QPalette::Highlight, dp_gray );
-  darkPalette.setColor( QPalette::HighlightedText, Qt::black );
+  darkPalette.setColor( QPalette::Button, colorDarkGrey() );
+  darkPalette.setColor( QPalette::ButtonText, colorWhite() );
+  darkPalette.setColor( QPalette::Link, colorBlue() );
+  darkPalette.setColor( QPalette::LinkVisited, colorBlue().darker() );
+  darkPalette.setColor( QPalette::Highlight, colorGrey() );
+  darkPalette.setColor( QPalette::HighlightedText, colorBlack() );
 
-  darkPalette.setColor( QPalette::Active, QPalette::Button, dp_gray );
-  darkPalette.setColor( QPalette::Disabled, QPalette::ButtonText, dp_gray );
-  darkPalette.setColor( QPalette::Disabled, QPalette::WindowText, dp_gray );
-  darkPalette.setColor( QPalette::Disabled, QPalette::Text, dp_gray );
-  darkPalette.setColor( QPalette::Disabled, QPalette::Light, dp_darkGray );
+  darkPalette.setColor( QPalette::Active, QPalette::Button, colorGrey() );
+  darkPalette.setColor( QPalette::Disabled, QPalette::ButtonText, colorGrey() );
+  darkPalette.setColor( QPalette::Disabled, QPalette::WindowText, colorGrey() );
+  darkPalette.setColor( QPalette::Disabled, QPalette::Text, colorDarkGrey() );
+  darkPalette.setColor( QPalette::Disabled, QPalette::Light, colorGrey() );
 
   return darkPalette;
 }

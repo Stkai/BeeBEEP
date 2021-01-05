@@ -340,20 +340,31 @@ void Settings::setDefaultFolders()
   m_cacheFolder = defaultCacheFolderPath();
 }
 
+QString Settings::defaultListBackgroundColor() const
+{
+  return m_useDarkStyle ? Bee::colorDarkGrey().name() : QLatin1String( "#ffffff" );
+}
+
+QString Settings::defaultSystemBackgroundColor() const
+{
+  return m_useDarkStyle ? Bee::colorBlack().name() : QLatin1String( "#f5f5f5" );
+}
+
 void Settings::resetAllColors()
 {
-  m_chatDefaultUserNameColor = "#000000";
+  m_chatDefaultUserNameColor = m_useDarkStyle ? "#ffffff" : "#000000";
   m_homeBackgroundColor = defaultSystemBackgroundColor();
   m_defaultChatBackgroundColor = defaultSystemBackgroundColor();
   m_userListBackgroundColor = defaultListBackgroundColor();
   m_chatListBackgroundColor = defaultListBackgroundColor();
   m_groupListBackgroundColor = defaultListBackgroundColor();
   m_savedChatListBackgroundColor = defaultListBackgroundColor();
-  m_chatBackgroundColor = "#ffffff";
-  m_chatDefaultTextColor = "#000000";
-  m_chatSystemTextColor = "#555555";
-  m_chatQuoteBackgroundColor = "#808080";
-  m_chatQuoteTextColor = "#ffffff";
+  m_chatFontColor = m_useDarkStyle ? Bee::colorWhite().name() : "#000000";
+  m_chatBackgroundColor = m_useDarkStyle ? Bee::colorDarkGrey().name() : "#ffffff";
+  m_chatDefaultTextColor = m_useDarkStyle ? Bee::colorWhite().name() : "#000000";
+  m_chatSystemTextColor = m_useDarkStyle ? Bee::colorGrey().name() : "#555555";
+  m_chatQuoteBackgroundColor = m_useDarkStyle ? Bee::colorGrey().name() : "#808080";
+  m_chatQuoteTextColor = m_useDarkStyle ? Bee::colorBlack().name() : "#ffffff";
 }
 
 void Settings::createApplicationUuid()

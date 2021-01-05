@@ -148,7 +148,7 @@ void GuiHome::setNews( const QString& news )
   }
 
   if( !tooltip_text.isEmpty() )
-    mp_lNews->setToolTip( QString( "<span style='color: %1'>%2</span>" ).arg( Bee::beeColorYellow() ).arg( tooltip_text ) );
+    mp_lNews->setToolTip( QString( "<span style='color: %1'>%2</span>" ).arg( Bee::colorYellow().name() ).arg( tooltip_text ) );
 }
 
 void GuiHome::reloadMessages()
@@ -199,7 +199,5 @@ void GuiHome::selectBackgroundColor()
 
 void GuiHome::updateBackground()
 {
-  if( Settings::instance().useDarkStyle() && Settings::instance().homeBackgroundColor() == Settings::instance().defaultSystemBackgroundColor() )
-    return;
   mp_teSystem->setStyleSheet( QString( "#GuiSystemViewer { background-color: %1; }" ).arg( Settings::instance().homeBackgroundColor() ) );
 }

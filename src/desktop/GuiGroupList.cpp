@@ -295,14 +295,8 @@ void GuiGroupList::selectBackgroundColor()
 
 void GuiGroupList::updateBackground()
 {
-  if( Settings::instance().useDarkStyle() && Settings::instance().groupListBackgroundColor() == Settings::instance().defaultListBackgroundColor() )
-  {
-    if( !mp_twGroupList->styleSheet().isEmpty() )
-      mp_twGroupList->setStyleSheet( QString() );
-    return;
-  }
   QString w_stylesheet = Settings::instance().guiCustomListStyleSheet( Settings::instance().groupListBackgroundColor(),
-                                                                  IconManager::instance().iconPath( "group-list.png" ) );
+                                                                       IconManager::instance().iconPath( "group-list.png" ) );
   mp_twGroupList->setStyleSheet( w_stylesheet );
 }
 

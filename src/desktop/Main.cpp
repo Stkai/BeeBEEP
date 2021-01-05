@@ -97,7 +97,9 @@ int main( int argc, char *argv[] )
 
 #if QT_VERSION >= 0x050600
   // Windows with 4k monitors, icons are too big... linux is about to test... MacOSX is ok
-  #ifdef Q_OS_MAC
+  #if defined( Q_OS_MAC )
+    QCoreApplication::setAttribute( Qt::AA_EnableHighDpiScaling, true );
+  #elif defined( Q_OS_WIN ) && defined( Q_PROCESSOR_X86_64 )
     QCoreApplication::setAttribute( Qt::AA_EnableHighDpiScaling, true );
   #endif
 #endif
@@ -155,7 +157,7 @@ int main( int argc, char *argv[] )
   qDebug() << "Font selected for chat:" << chat_font.toString();
   qDebug() << "Font pixel size:" << chat_font.pixelSize();
   qDebug() << "Font point size:" << chat_font.pointSize();
-  qDebug() << "Font height:" << static_cast<int>(QFontMetrics( chat_font).height() );
+  qDebug() << "Font height:" << static_cast<int>(QFontMetrics( chat_font ).height());
   qDebug() << "Emoticon size in chat:" << Settings::instance().emoticonSizeInChat();
   qDebug() << "Emoticon size in edit:" << Settings::instance().emoticonSizeInEdit();
 #endif

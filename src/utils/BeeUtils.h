@@ -88,9 +88,16 @@ namespace Bee
   void raiseOnTop( QWidget* );
   bool areStringListEqual( const QStringList&, const QStringList&, Qt::CaseSensitivity cs = Qt::CaseInsensitive );
   QString dateTimeToString( const QDateTime& );
-  QString beeColorYellow();
-  QString beeColorsToHtmlText( const QString& );
   QPalette darkPalette();
+  QColor colorDarkGrey();
+  QColor colorGrey();
+  QColor colorBlack();
+  QColor colorBlue();
+  QColor colorWhite();
+  QColor colorYellow();
+  QString beeColorsToHtmlText( const QString& );
+
+
   QString pluginFileExtension();
   QString removeInvalidCharactersForFilePath( const QString& );
 
