@@ -5216,7 +5216,7 @@ void GuiMain::setMinimumWidthForStyle()
   if( Settings::instance().resetMinimumWidthForStyle() )
   {
     int old_w = width();
-    int wasted_w = Settings::instance().useDarkStyle() ? 60 : 20;
+    int wasted_w = 20;
 #if defined( Q_OS_MAC )
     int min_w = qMax( 320, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+8) + wasted_w );
 #elif defined( Q_OS_UNIX )
@@ -5242,15 +5242,7 @@ void GuiMain::loadStyle()
   if( Settings::instance().useDarkStyle() )
   {
     qDebug() << "Darkstyle mode enabled";
-    QFile f(":qdarkstyle/style.qss");
-    if( f.exists() )
-    {
-      f.open( QFile::ReadOnly | QFile::Text );
-      QTextStream ts( &f );
-      beeApp->setStyleSheet( ts.readAll() );
-    }
-    else
-      qWarning() << "Unable to set Darkstyle mode: file not found";
+    beeApp->setPalette( Bee::darkPalette() );
   }
   else
     beeApp->resetStyle();

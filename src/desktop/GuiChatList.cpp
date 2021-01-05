@@ -260,7 +260,7 @@ void GuiChatList::updateBackground()
     return;
   }
   QString w_stylesheet = Settings::instance().guiCustomListStyleSheet( Settings::instance().chatListBackgroundColor(),
-                                                                    IconManager::instance().iconPath( "chat-list.png" ) );
+                                                                       IconManager::instance().iconPath( "chat-list.png" ) );
   mp_twChatList->setStyleSheet( w_stylesheet );
 }
 

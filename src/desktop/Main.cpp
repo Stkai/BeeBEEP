@@ -129,11 +129,6 @@ int main( int argc, char *argv[] )
   qDebug() << "Starting BeeBEEP" << qPrintable( Settings::instance().version( true, false, true ) )
            << "for" << qPrintable( Settings::instance().operatingSystem( true ) )
            << "and Qt" << QT_VERSION_STR;
-#if QT_VERSION >= 0x050600
-  if( bee_app.testAttribute( Qt::AA_EnableHighDpiScaling ) )
-    qDebug( "Icons: high DPI scaling enabled" );
-#endif
-
   qDebug() << "Qt prefix path:" << qPrintable( QDir::toNativeSeparators( QLibraryInfo::location( QLibraryInfo::PrefixPath ) ) );
   qDebug() << "Qt libraries path:" << qPrintable( QDir::toNativeSeparators( QLibraryInfo::location( QLibraryInfo::LibrariesPath ) ) );
   qDebug() << "Qt binaries path:" << qPrintable( QDir::toNativeSeparators( QLibraryInfo::location( QLibraryInfo::BinariesPath ) ) );
@@ -141,6 +136,20 @@ int main( int argc, char *argv[] )
   qDebug() << "Qt data path:" << qPrintable( QDir::toNativeSeparators( QLibraryInfo::location( QLibraryInfo::DataPath ) ) );
   qDebug() << "Qt settings path:" << qPrintable( QDir::toNativeSeparators( QLibraryInfo::location( QLibraryInfo::SettingsPath ) ) );
   qDebug() << "Qt paths are shipped with Qt libraries. Edit qt.conf file to change them.";
+  #if QT_VERSION >= 0x050600
+  if( bee_app.testAttribute( Qt::AA_EnableHighDpiScaling ) )
+    qDebug( "Icons: high DPI scaling enabled" );
+#endif
+#ifndef Q_OS_MAC
+  QStyle* p_style = QStyleFactory::create( "Fusion" );
+  if( p_style )
+  {
+    qDebug() << "Stylesheet type: Fusion";
+    bee_app.setStyle( p_style );
+  }
+  else
+    qDebug() << "Stylesheet type: Default";
+#endif
 
   Settings::instance().setDefaultFolders();
   Settings::instance().loadRcFile();

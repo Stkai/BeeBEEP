@@ -1156,3 +1156,36 @@ bool Bee::selectComboBoxData( QComboBox* box, const QVariant& item_data )
   else
     return false;
 }
+
+QPalette Bee::darkPalette()
+{
+  QColor dp_darkGray( 64, 64, 64 );
+  QColor dp_gray( 128, 128, 128 );
+  QColor dp_black( 25, 25, 25 );
+  QColor dp_blue( 42, 130, 218 );
+  QColor dp_white( 238, 238, 238 );
+
+  QPalette darkPalette;
+  darkPalette.setColor( QPalette::Window, dp_darkGray );
+  darkPalette.setColor( QPalette::WindowText, dp_white );
+  darkPalette.setColor( QPalette::Base, dp_black );
+  darkPalette.setColor( QPalette::AlternateBase, dp_darkGray );
+  darkPalette.setColor( QPalette::ToolTipBase, dp_gray.lighter() );
+  darkPalette.setColor( QPalette::ToolTipText, Qt::black );
+  darkPalette.setColor( QPalette::Text, dp_white );
+  darkPalette.setColor( QPalette::BrightText, Qt::yellow );
+  darkPalette.setColor( QPalette::Button, dp_darkGray );
+  darkPalette.setColor( QPalette::ButtonText, dp_white );
+  darkPalette.setColor( QPalette::Link, dp_blue );
+  darkPalette.setColor( QPalette::LinkVisited, dp_blue.darker() );
+  darkPalette.setColor( QPalette::Highlight, dp_gray );
+  darkPalette.setColor( QPalette::HighlightedText, Qt::black );
+
+  darkPalette.setColor( QPalette::Active, QPalette::Button, dp_gray );
+  darkPalette.setColor( QPalette::Disabled, QPalette::ButtonText, dp_gray );
+  darkPalette.setColor( QPalette::Disabled, QPalette::WindowText, dp_gray );
+  darkPalette.setColor( QPalette::Disabled, QPalette::Text, dp_gray );
+  darkPalette.setColor( QPalette::Disabled, QPalette::Light, dp_darkGray );
+
+  return darkPalette;
+}

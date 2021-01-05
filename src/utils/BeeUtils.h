@@ -90,6 +90,7 @@ namespace Bee
   QString dateTimeToString( const QDateTime& );
   QString beeColorYellow();
   QString beeColorsToHtmlText( const QString& );
+  QPalette darkPalette();
   QString pluginFileExtension();
   QString removeInvalidCharactersForFilePath( const QString& );
 
