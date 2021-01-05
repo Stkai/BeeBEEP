@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi
+// BeeBEEP Copyright (C) 2010-2021 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -269,8 +269,8 @@ public:
   inline bool showPresetMessages() const;
   inline bool isNotificationDisabledForGroup( const QString& ) const;
   void setNotificationEnabledForGroup( const QString&, bool );
-  inline void setUseNativeEmoticons( bool );
-  inline bool useNativeEmoticons() const;
+  inline void setUseFontEmoticons( bool );
+  inline bool useFontEmoticons() const;
   inline void setUseHiResEmoticons( bool );
   inline bool useHiResEmoticons() const;
   inline int imagePreviewHeight() const;
@@ -614,9 +614,9 @@ public:
 
   inline void setUseDarkStyle( bool );
   inline bool useDarkStyle() const;
-  inline QString defaultListBackgroundColor() const;
-  inline QString defaultSystemBackgroundColor() const;
 
+  QString defaultListBackgroundColor() const;
+  QString defaultSystemBackgroundColor() const;
   void resetAllColors();
 
   QString autoresponderName() const;
@@ -693,6 +693,7 @@ private:
   bool m_allowMultipleInstances;
   QString m_dataFolderInRC;
   bool m_addAccountNameToDataFolder;
+  bool m_addNicknameToDataFolder;
   QString m_preferredSubnets;
   bool m_checkUserConnectedFromDatagramIp;
 
@@ -802,7 +803,7 @@ private:
   bool m_showVCardOnRightClick;
   int m_chatMessagesToShow;
   bool m_showEmoticonMenu;
-  bool m_useNativeEmoticons;
+  bool m_useFontEmoticons;
   bool m_useHiResEmoticons;
   int m_imagePreviewHeight;
   bool m_showUserStatusBackgroundColor;
@@ -1193,8 +1194,8 @@ inline const QStringList& Settings::favoriteEmoticons() const { return m_favorit
 inline void Settings::setRecentEmoticons( const QStringList& new_value ) { m_recentEmoticons = new_value; }
 inline const QStringList& Settings::recentEmoticons() const { return m_recentEmoticons; }
 inline bool Settings::isNotificationDisabledForGroup( const QString& group_id ) const { return group_id.isEmpty() ? false : m_groupSilenced.contains( group_id ); }
-inline void Settings::setUseNativeEmoticons( bool new_value ) { m_useNativeEmoticons = new_value; }
-inline bool Settings::useNativeEmoticons() const { return m_useNativeEmoticons; }
+inline void Settings::setUseFontEmoticons( bool new_value ) { m_useFontEmoticons = new_value; }
+inline bool Settings::useFontEmoticons() const { return m_useFontEmoticons; }
 inline void Settings::setUseHiResEmoticons( bool new_value ) { m_useHiResEmoticons = new_value; }
 inline bool Settings::useHiResEmoticons() const { return m_useHiResEmoticons; }
 inline int Settings::imagePreviewHeight() const { return m_imagePreviewHeight; }
@@ -1375,8 +1376,6 @@ inline int Settings::clearCacheAfterDays() const { return m_clearCacheAfterDays;
 inline void Settings::setClearCacheAfterDays( int new_value ) { m_clearCacheAfterDays = new_value; }
 inline int Settings::removePartiallyDownloadedFilesAfterDays() const { return m_removePartiallyDownloadedFilesAfterDays; }
 inline void Settings::setRemovePartiallyDownloadedFilesAfterDays( int new_value ) { m_removePartiallyDownloadedFilesAfterDays = new_value; }
-inline QString Settings::defaultListBackgroundColor() const { return QLatin1String( "#ffffff" ); }
-inline QString Settings::defaultSystemBackgroundColor() const { return QLatin1String( "#f5f5f5" ); }
 inline void Settings::setDownloadInUserFolder( bool new_value ) { m_downloadInUserFolder = new_value; }
 inline bool Settings::downloadInUserFolder() const { return m_downloadInUserFolder; }
 inline void Settings::setShowUsersInWorkgroups( bool new_value ) { m_showUsersInWorkgroups = new_value; }

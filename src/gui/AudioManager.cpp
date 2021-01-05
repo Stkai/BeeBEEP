@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi
+// BeeBEEP Copyright (C) 2010-2021 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -208,7 +208,7 @@ QAudioEncoderSettings AudioManager::voiceMessageEncoderSettings() const
   return aes;
 }
 
-#endif
+#endif // BEEBEEP_USE_VOICE_CHAT
 
 #if defined( Q_OS_OS2 )
   bool AudioManager::isAudioDeviceAvailable() { return true; }

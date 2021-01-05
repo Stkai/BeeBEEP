@@ -12,7 +12,6 @@ HEADERS += gui/AudioManager.h \
   gui/Screenshot.h \
   gui/ShortcutManager.h
 
-
 SOURCES += gui/AudioManager.cpp \
   gui/Avatar.cpp \
   gui/ColorManager.cpp \
@@ -24,6 +23,5 @@ SOURCES += gui/AudioManager.cpp \
   gui/GuiSelectItems.cpp \
   gui/Screenshot.cpp \
   gui/ShortcutManager.cpp
-
 
 FORMS += gui/GuiSelectItems.ui

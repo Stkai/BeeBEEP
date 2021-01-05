@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi
+// BeeBEEP Copyright (C) 2010-2021 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -109,7 +109,7 @@ void GuiMessageEdit::addEmoticon( const Emoticon& e )
 
   if( e.isInGroup() )
   {
-    if( Settings::instance().useNativeEmoticons() )
+    if( Settings::instance().useFontEmoticons() )
     {
       insertPlainText( e.textToMatch() );
     }

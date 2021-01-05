@@ -914,7 +914,7 @@
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="194"/>
         <source>the file already exists</source>
-        <translation type="unfinished"></translation>
+        <translation>plik już istnieje</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="196"/>
@@ -1727,22 +1727,22 @@ Proszę wybrać inną nazwę.</translation>
         <translation>Stwórz wiadomość</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="124"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="123"/>
         <source>Nobody</source>
         <translation>Nikt</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="131"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="130"/>
         <source>Add recipients</source>
         <translation>Dodaj adresatów</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="175"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="174"/>
         <source>Please select at least one recipient for your message.</source>
         <translation>Proszę wybrać co najmniej jednego odbiorcę Twojej wiadomości.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="182"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="181"/>
         <source>You cannot send an empty message.</source>
         <translation>Nie możesz wysłać pustej wiadomości.</translation>
     </message>
@@ -1868,12 +1868,12 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiEmoticons.cpp" line="49"/>
         <source>Favorite emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>Ulubione emotikony</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEmoticons.cpp" line="51"/>
         <source>Recent emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostatnie emotikony</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEmoticons.cpp" line="53"/>
@@ -2192,7 +2192,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="151"/>
         <source>All users</source>
-        <translation type="unfinished">Wszyscy użytkownicy</translation>
+        <translation>Wszyscy użytkownicy</translation>
     </message>
     <message>
         <source>Chat with all users</source>
@@ -3418,7 +3418,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1078"/>
         <source>Use high resolution emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>Użyj emotikonów wysokiej rozdzielczości</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1091"/>
@@ -3926,7 +3926,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3901"/>
         <source>Clear recent emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyczyść ostatnie emotikony</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3919"/>
@@ -6243,7 +6243,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="91"/>
         <source>d MMMM</source>
-        <translation type="unfinished"></translation>
+        <translation>d MMMM</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="93"/>
@@ -6493,6 +6493,13 @@ Proszę wybrać inną nazwę.</translation>
     </message>
 </context>
 <context>
+    <name>GuiVoicePlayerWidget</name>
+    <message>
+        <source>0:00</source>
+        <translation type="obsolete">0:00</translation>
+    </message>
+</context>
+<context>
     <name>GuiWebView</name>
     <message>
         <location filename="../src/desktop/GuiWebView.cpp" line="35"/>
@@ -6655,7 +6662,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="1045"/>
         <source>n.a.</source>
-        <translation type="unfinished"></translation>
+        <translation>n.s.</translation>
     </message>
 </context>
 <context>
@@ -6987,7 +6994,7 @@ Proszę wybrać inną nazwę.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2463"/>
+        <location filename="../src/core/Settings.cpp" line="2472"/>
         <source>Autoresponder</source>
         <translation>Autoodpowiedź</translation>
     </message>

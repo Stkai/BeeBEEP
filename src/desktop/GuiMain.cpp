@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi
+// BeeBEEP Copyright (C) 2010-2021 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -105,9 +105,6 @@ GuiMain::GuiMain( QWidget *parent )
   mp_log = Q_NULLPTR;
   mp_networkTest = Q_NULLPTR;
   m_unreadActivities = 0;
-#ifdef BEEBEEP_USE_VOICE_CHAT
-  mp_voicePlayer = Q_NULLPTR;
-#endif
 
   mp_barMain = addToolBar( tr( "Show the main tool bar" ) );
   mp_barMain->setObjectName( "GuiMainToolBar" );
@@ -122,6 +119,8 @@ GuiMain::GuiMain( QWidget *parent )
   m_prevActivatedState = true;
   m_coreIsConnecting = false;
   m_changeTabToUserListOnFirstConnected = false;
+
+  m_useFusionStyle = false;
 
   createActions();
   createMainWidgets();
@@ -160,6 +159,10 @@ GuiMain::GuiMain( QWidget *parent )
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   connect( beeCore, SIGNAL( multicastDnsChanged() ), this, SLOT( showDefaultServerPortInMenu() ) );
 #endif
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  connect( beeCore->voicePlayer(), SIGNAL( openWithExternalPlayer( const QUrl&, VNumber ) ), this, SLOT( openUrlFromChat( const QUrl&, VNumber ) ) );
+#endif
+
   connect( mp_fileTransfer, SIGNAL( transferCanceled( VNumber ) ), beeCore, SLOT( cancelFileTransfer( VNumber ) ) );
   connect( mp_fileTransfer, SIGNAL( transferPaused( VNumber ) ), beeCore, SLOT( pauseFileTransfer( VNumber ) ) );
   connect( mp_fileTransfer, SIGNAL( openFileCompleted( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );
@@ -439,8 +442,8 @@ void GuiMain::closeEvent( QCloseEvent* e )
 #endif
 
 #ifdef BEEBEEP_USE_VOICE_CHAT
-  if( mp_voicePlayer && !mp_voicePlayer->isStopped() )
-    mp_voicePlayer->stop();
+  if( !beeCore->voicePlayer()->isStopped() )
+    beeCore->voicePlayer()->stop();
 #endif
 
   if( mp_log )
@@ -755,7 +758,7 @@ void GuiMain::showAbout()
 void GuiMain::showLicense()
 {
   QString license_txt = QLatin1String(
-  "BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi <br><br>"
+  "BeeBEEP Copyright (C) 2010-2021 Marco Mastroddi <br><br>"
   "BeeBEEP is free software: you can redistribute it and/or modify "
   "it under the terms of the GNU General Public License as published "
   "by the Free Software Foundation, either version 3 of the License "
@@ -874,7 +877,7 @@ void GuiMain::createMenus()
   mp_menuInterfaceSettings = new QMenu( tr( "Interface" ), this );
   mp_menuInterfaceSettings->setIcon( IconManager::instance().icon( "interface.png" ) );
   mp_menuSettings->addMenu( mp_menuInterfaceSettings );
-  act = mp_menuInterfaceSettings->addAction( tr( "Use the dark theme" ) + QString( " (%1)" ).arg( tr( "beta" ) ), this, SLOT( settingsChanged() ) );
+  act = mp_menuInterfaceSettings->addAction( tr( "Use the dark theme" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().useDarkStyle() );
   act->setData( 77 );
@@ -945,14 +948,14 @@ void GuiMain::createMenus()
   mp_menuConnectionSettings = new QMenu( tr( "On connection" ), this );
   mp_menuConnectionSettings->setIcon( IconManager::instance().icon( "connection.png" ) );
   mp_menuSettings->addMenu( mp_menuConnectionSettings );
-  mp_actShowUserListOnConnection = mp_menuConnectionSettings->addAction( tr( "Show the user list" ), this, SLOT( settingsChanged() ) );
-  mp_actShowUserListOnConnection->setCheckable( true );
-  mp_actShowUserListOnConnection->setChecked( Settings::instance().showUsersOnConnection() );
-  mp_actShowUserListOnConnection->setData( 69 );
-  mp_actShowChatListOnConnection = mp_menuConnectionSettings->addAction( tr( "Show the chat list" ), this, SLOT( settingsChanged() ) );
-  mp_actShowChatListOnConnection->setCheckable( true );
-  mp_actShowChatListOnConnection->setChecked( Settings::instance().showChatsOnConnection() );
-  mp_actShowChatListOnConnection->setData( 79 );
+  act = mp_menuConnectionSettings->addAction( tr( "Show the user list" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showUsersOnConnection() );
+  act->setData( 69 );
+  act = mp_menuConnectionSettings->addAction( tr( "Show the chat list" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showChatsOnConnection() );
+  act->setData( 79 );
   mp_menuConnectionSettings->addSeparator();
   act = mp_menuConnectionSettings->addAction( tr( "Prompts to change user" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -1081,7 +1084,7 @@ void GuiMain::createMenus()
   act->setData( 105 );
   act = mp_menuChatSettings->addAction( tr( "Use font emoticons" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
-  act->setChecked( Settings::instance().useNativeEmoticons() );
+  act->setChecked( Settings::instance().useFontEmoticons() );
   act->setData( 31 );
   act = mp_menuChatSettings->addAction( tr( "Show chat toolbar" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -1136,7 +1139,7 @@ void GuiMain::createMenus()
   act = mp_menuChatColorSettings->addAction( IconManager::instance().icon( "quote-background.png" ), tr( "Select quote background color" ), this, SLOT( settingsChanged() ) );
   act->setData( 90 );
   mp_actSelectEmoticonSourcePath = mp_menuChatSettings->addAction( IconManager::instance().icon( "emoticon.png" ), tr( "Select emoticon theme" ) + QString( "..." ), this, SLOT( selectEmoticonSourcePath() ) );
-  mp_actSelectEmoticonSourcePath->setEnabled( !Settings::instance().useNativeEmoticons() );
+  mp_actSelectEmoticonSourcePath->setEnabled( !Settings::instance().useFontEmoticons() );
   mp_menuChatSettings->addAction( IconManager::instance().icon( "dictionary.png" ), tr( "Dictionary" ) + QString( "..." ), this, SLOT( selectDictionatyPath() ) );
   mp_menuChatSettings->addSeparator();
   mp_menuChatSettings->addAction( IconManager::instance().icon( "refused-chat.png" ), tr( "Blocked chats" ) + QString( "..." ), this, SLOT( showRefusedChats() ) );
@@ -1518,8 +1521,6 @@ void GuiMain::createToolAndMenuBars()
   mp_barMain->addSeparator();
   mp_barMain->addAction( mp_actViewFileTransfer );
   mp_barMain->addAction( mp_actViewFileSharing );
-
-  setMinimumWidthForStyle();
 }
 
 void GuiMain::createMainWidgets()
@@ -1797,7 +1798,7 @@ void GuiMain::settingsChanged( QAction* act )
     Settings::instance().setConfirmOnDownloadFile( act->isChecked() );
     break;
   case 31:
-    Settings::instance().setUseNativeEmoticons( act->isChecked() );
+    Settings::instance().setUseFontEmoticons( act->isChecked() );
     mp_actSelectEmoticonSourcePath->setEnabled( !act->isChecked() );
     updateEmoticons();
     refresh_chat = true;
@@ -1986,7 +1987,6 @@ void GuiMain::settingsChanged( QAction* act )
     break;
   case 69:
     Settings::instance().setShowUsersOnConnection( act->isChecked() );
-    mp_actShowChatListOnConnection->setChecked( Settings::instance().showChatsOnConnection() );
     break;
   case 70:
     Settings::instance().setAlwaysOpenChatOnNewMessageArrived( act->isChecked() );
@@ -2047,8 +2047,8 @@ void GuiMain::settingsChanged( QAction* act )
   case 77:
     {
       Settings::instance().setUseDarkStyle( act->isChecked() );
+      Settings::instance().resetAllColors();
       refresh_users = true;
-      setMinimumWidthForStyle();
       QTimer::singleShot( 0, this, SLOT( loadStyle() ) );
     }
     break;
@@ -2057,7 +2057,6 @@ void GuiMain::settingsChanged( QAction* act )
     break;
   case 79:
     Settings::instance().setShowChatsOnConnection( act->isChecked() );
-    mp_actShowUserListOnConnection->setChecked( Settings::instance().showUsersOnConnection() );
     break;
   case 80:
     Settings::instance().setRaiseMainWindowOnNewMessageArrived( act->isChecked() );
@@ -3228,29 +3227,21 @@ void GuiMain::openUrlFromChat( const QUrl& file_url, VNumber chat_id )
       return;
     }
   }
-#ifdef BEEBEEP_USE_VOICE_CHAT
   else if( file_url.scheme() == FileInfo::urlSchemeVoiceMessage() )
   {
     QUrl adj_file_url = file_url;
     adj_file_url.setScheme( QLatin1String( "file" ) );
+#ifdef BEEBEEP_USE_VOICE_CHAT
     if( Settings::instance().useVoicePlayer() )
     {
-      if( !mp_voicePlayer )
-      {
-        mp_voicePlayer = new VoicePlayer( this );
-        connect( mp_voicePlayer, SIGNAL( openWithExternalPlayer( const QUrl&, VNumber ) ), this, SLOT( openUrlFromChat( const QUrl&, VNumber ) ) );
-      }
-      QString voice_file_path = Bee::convertToNativeFolderSeparator( adj_file_url.toLocalFile() );
-      if( !mp_voicePlayer->playFile( voice_file_path, chat_id ) )
-      {
-        QMessageBox::information( qApp->activeWindow(), Settings::instance().programName(),
-                                  tr( "Unable to open voice message %1" ).arg( voice_file_path.isEmpty() ? adj_file_url.toString() : voice_file_path ), tr( "Ok" ) );
-      }
+      GuiFloatingChat* fl_chat = floatingChat( chat_id );
+      if( fl_chat )
+        fl_chat->guiChat()->guiVoicePlayer()->setFilePath( Bee::convertToNativeFolderSeparator( adj_file_url.toLocalFile() ), chat_id );
     }
     else
+#endif
       openUrlFromChat( adj_file_url, chat_id );
   }
-#endif
 #if QT_VERSION >= 0x040800
   else if( file_url.isLocalFile() )
 #else
@@ -5013,16 +5004,11 @@ void GuiMain::updateChatColors()
 
 void GuiMain::resetAllColors()
 {
-  if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to restore the colors to the default ones?" ), tr( "Yes"), tr( "No" ), QString(), 1, 1 ) == 0 )
+  if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to restore the colors to the default ones?" ), tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 0 )
   {
-    Settings::instance().setUseDarkStyle( false );
     Settings::instance().resetAllColors();
     Settings::instance().save();
     loadStyle();
-    updateChatColors();
-    GuiFloatingChat* fl_chat = floatingChat( ID_DEFAULT_CHAT );
-    if( fl_chat )
-      fl_chat->guiChat()->updateChatColors();
   }
 }
 
@@ -5223,9 +5209,10 @@ void GuiMain::setMinimumWidthForStyle()
   if( Settings::instance().resetMinimumWidthForStyle() )
   {
     int old_w = width();
-    int wasted_w = Settings::instance().useDarkStyle() ? 60 : 20;
+    int wasted_w = 20;
 #if defined( Q_OS_MAC )
-    int min_w = qMax( 320, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+8) + wasted_w );
+    int icon_wasted_w = m_useFusionStyle ? 4 : 8;
+    int min_w = qMax( 300, mp_barMain->actions().size() * (mp_barMain->iconSize().width() + icon_wasted_w) + wasted_w );
 #elif defined( Q_OS_UNIX )
     int min_w = qMax( 320, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+4) + wasted_w );
 #elif defined( Q_OS_WIN )
@@ -5246,27 +5233,37 @@ void GuiMain::setMinimumWidthForStyle()
 
 void GuiMain::loadStyle()
 {
-  if( Settings::instance().useDarkStyle() )
+  QStyle* p_style = QStyleFactory::create( "Fusion" );
+  if( p_style )
   {
-    qDebug() << "Darkstyle mode enabled";
-    QFile f(":qdarkstyle/style.qss");
-    if( f.exists() )
-    {
-      f.open( QFile::ReadOnly | QFile::Text );
-      QTextStream ts( &f );
-      beeApp->setStyleSheet( ts.readAll() );
-    }
-    else
-      qWarning() << "Unable to set Darkstyle mode: file not found";
+    beeApp->setStyle( p_style );
+    m_useFusionStyle = true;
   }
   else
+  {
     beeApp->resetStyle();
+    m_useFusionStyle = false;
+  }
+
+  if( Settings::instance().useDarkStyle() )
+  {
+    qDebug() << "Stylesheet:" << (m_useFusionStyle ? "Fusion" : "System Default") << "Dark";
+    beeApp->setPalette( Bee::darkPalette() );
+  }
+  else
+  {
+    qDebug() << "Stylesheet:" << (m_useFusionStyle ? "Fusion" : "System Default" );
+    beeApp->resetPalette();
+  }
+
+  setMinimumWidthForStyle();
 
   mp_home->updateBackground();
   mp_userList->updateBackground();
   mp_chatList->updateBackground();
   mp_groupList->updateBackground();
   mp_savedChatList->updateBackground();
+  updateChatColors();
 }
 
 #ifdef BEEBEEP_USE_VOICE_CHAT

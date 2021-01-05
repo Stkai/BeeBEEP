@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi
+// BeeBEEP Copyright (C) 2010-2021 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -40,6 +40,7 @@ void FileTransferPeer::sendDownloadRequest()
   {
     qWarning() << qPrintable( name() ) << "has a file extension" << m_fileInfo.suffix() << "not allowed to download";
     cancelTransfer();
+    return;
   }
 
   bool skip_transfer = false;

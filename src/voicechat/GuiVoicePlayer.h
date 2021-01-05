@@ -21,40 +21,45 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_GUIRECORDVOICEMESSAGESETTINGS_H
-#define BEEBEEP_GUIRECORDVOICEMESSAGESETTINGS_H
+#ifndef BEEBEEP_GUIVOICEPLAYER_H
+#define BEEBEEP_GUIVOICEPLAYER_H
 
-#include "ui_GuiRecordVoiceMessageSettings.h"
 #include "Config.h"
+#include "ui_GuiVoicePlayer.h"
 
 
-class GuiRecordVoiceMessageSettings : public QDialog, private Ui::GuiRecordVoiceMessageSettingsDialog
+class GuiVoicePlayer : public QWidget, private Ui::GuiVoicePlayerWidget
 {
   Q_OBJECT
 
 public:
-  explicit GuiRecordVoiceMessageSettings( QWidget *parent = Q_NULLPTR );
+  explicit GuiVoicePlayer( QWidget *parent = Q_NULLPTR );
 
-  void init();
-
-  void loadSettings();
+public slots:
+  void setFilePath( const QString&, VNumber );
 
 protected slots:
-  void resetSettings();
-  void saveSettings();
-  void toggleCustomSettings( bool );
-  void encodingModeChanged( int );
+  void onPlayClicked();
+  void onSliderPositionPressed();
+  void onSliderPositionMoved( int );
+  void onSliderPositionReleased();
+  void onPlaying( const QString&, VNumber );
+  void onPaused( const QString&, VNumber );
+  void onFinished( const QString&, VNumber );
+  void setFileDuration( const QString&, VNumber, qint64 );
+  void setFilePosition( const QString&, VNumber, qint64 );
+  void onCloseClicked();
+  void showPlayer();
+  void hidePlayer();
 
 protected:
-  void updateGui();
+  void setPaused( bool );
 
 private:
-  QButtonGroup* mp_bgEncodingMode;
-  QString m_currentInputDevice;
-  QString m_currentFileContainer;
-  QAudioEncoderSettings m_currentAudioEncoderSettings;
-  QAudioRecorder* mp_audioRecorder;
+  QString m_filePath;
+  VNumber m_chatId;
 
 };
 
-#endif // BEEBEEP_GUIRECORDVOICEMESSAGESETTINGS_H
+
+#endif // BEEBEEP_GUIVOICEPLAYER_H

@@ -1721,22 +1721,22 @@ Please select a different name.</source>
         <translation>إنشاء رسالة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="124"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="123"/>
         <source>Nobody</source>
         <translation>لا أحد</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="131"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="130"/>
         <source>Add recipients</source>
         <translation>إضافة المستلمين</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="175"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="174"/>
         <source>Please select at least one recipient for your message.</source>
         <translation>يرجى اختيار مستلم واحد على الأقل لرسالتك.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateMessage.cpp" line="182"/>
+        <location filename="../src/desktop/GuiCreateMessage.cpp" line="181"/>
         <source>You cannot send an empty message.</source>
         <translation>لا يمكنك إرسال رسالة فارغة.</translation>
     </message>
@@ -6361,6 +6361,13 @@ Please select a different name.</source>
     </message>
 </context>
 <context>
+    <name>GuiVoicePlayerWidget</name>
+    <message>
+        <source>0:00</source>
+        <translation type="obsolete">0:00</translation>
+    </message>
+</context>
+<context>
     <name>GuiWebView</name>
     <message>
         <location filename="../src/desktop/GuiWebView.cpp" line="35"/>
@@ -6854,7 +6861,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2463"/>
+        <location filename="../src/core/Settings.cpp" line="2472"/>
         <source>Autoresponder</source>
         <translation>الرد الآلي</translation>
     </message>

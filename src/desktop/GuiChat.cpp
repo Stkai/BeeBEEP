@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi
+// BeeBEEP Copyright (C) 2010-2021 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -29,6 +29,9 @@
 #include "FileDialog.h"
 #include "GuiChat.h"
 #include "GuiChatMessage.h"
+#ifdef BEEBEEP_USE_VOICE_CHAT
+#include "GuiVoicePlayer.h"
+#endif
 #include "IconManager.h"
 #include "Protocol.h"
 #include "Settings.h"
@@ -46,6 +49,16 @@ GuiChat::GuiChat( QWidget *parent )
   setObjectName( "GuiChat" );
   setAcceptDrops( true );
 
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  mp_guiVoicePlayer = new GuiVoicePlayer( mp_frameVoicePlayer );
+  QGridLayout* voice_grid_layout = new QGridLayout( mp_frameVoicePlayer );
+  voice_grid_layout->setSpacing( 0 );
+  voice_grid_layout->setObjectName( QString::fromUtf8( "voice_grid_layout" ) );
+  voice_grid_layout->setContentsMargins( 4, 4, 4, 4 );
+  voice_grid_layout->addWidget( mp_guiVoicePlayer );
+#endif
+  mp_frameVoicePlayer->hide();
+
   QGridLayout* grid_layout = new QGridLayout( this );
   grid_layout->setSpacing( 0 );
   grid_layout->setObjectName( QString::fromUtf8( "grid_layout" ) );
@@ -54,7 +67,7 @@ GuiChat::GuiChat( QWidget *parent )
   mp_splitter = new QSplitter( this );
   mp_splitter->setOrientation( Qt::Vertical );
   mp_splitter->setChildrenCollapsible( false );
-  mp_splitter->addWidget( mp_teChat );
+  mp_splitter->addWidget( mp_frameChat );
   mp_splitter->addWidget( mp_frameMessage );
 
   grid_layout->addWidget( mp_splitter, 1, 0, 1, 1);
@@ -477,6 +490,7 @@ void GuiChat::checkAnchorClicked( const QUrl& url )
 {
   if( url.scheme() == FileInfo::urlSchemeVoiceMessage() )
     emit showStatusMessageRequest( tr( "Opening voice message" ) + QString( "..." ), 3000 );
+
   emit openUrl( url, m_chatId );
 }
 

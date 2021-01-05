@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi
+// BeeBEEP Copyright (C) 2010-2021 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -97,7 +97,9 @@ int main( int argc, char *argv[] )
 
 #if QT_VERSION >= 0x050600
   // Windows with 4k monitors, icons are too big... linux is about to test... MacOSX is ok
-  #ifdef Q_OS_MAC
+  #if defined( Q_OS_MAC )
+    QCoreApplication::setAttribute( Qt::AA_EnableHighDpiScaling, true );
+  #elif defined( Q_OS_WIN ) && defined( Q_PROCESSOR_X86_64 )
     QCoreApplication::setAttribute( Qt::AA_EnableHighDpiScaling, true );
   #endif
 #endif
@@ -129,11 +131,6 @@ int main( int argc, char *argv[] )
   qDebug() << "Starting BeeBEEP" << qPrintable( Settings::instance().version( true, false, true ) )
            << "for" << qPrintable( Settings::instance().operatingSystem( true ) )
            << "and Qt" << QT_VERSION_STR;
-#if QT_VERSION >= 0x050600
-  if( bee_app.testAttribute( Qt::AA_EnableHighDpiScaling ) )
-    qDebug( "Icons: high DPI scaling enabled" );
-#endif
-
   qDebug() << "Qt prefix path:" << qPrintable( QDir::toNativeSeparators( QLibraryInfo::location( QLibraryInfo::PrefixPath ) ) );
   qDebug() << "Qt libraries path:" << qPrintable( QDir::toNativeSeparators( QLibraryInfo::location( QLibraryInfo::LibrariesPath ) ) );
   qDebug() << "Qt binaries path:" << qPrintable( QDir::toNativeSeparators( QLibraryInfo::location( QLibraryInfo::BinariesPath ) ) );
@@ -141,11 +138,15 @@ int main( int argc, char *argv[] )
   qDebug() << "Qt data path:" << qPrintable( QDir::toNativeSeparators( QLibraryInfo::location( QLibraryInfo::DataPath ) ) );
   qDebug() << "Qt settings path:" << qPrintable( QDir::toNativeSeparators( QLibraryInfo::location( QLibraryInfo::SettingsPath ) ) );
   qDebug() << "Qt paths are shipped with Qt libraries. Edit qt.conf file to change them.";
+  #if QT_VERSION >= 0x050600
+  if( bee_app.testAttribute( Qt::AA_EnableHighDpiScaling ) )
+    qDebug( "Icons: high DPI scaling enabled" );
+#endif
 
   Settings::instance().setDefaultFolders();
   Settings::instance().loadRcFile();
-  Settings::instance().setDataFolder();
   Settings::instance().createLocalUser( "" );
+  Settings::instance().setDataFolder();
   qDebug() << "Settings path:" << qPrintable( Settings::instance().currentSettingsFilePath() );
   Settings::instance().load();
   Settings::instance().createApplicationUuid();
@@ -156,7 +157,7 @@ int main( int argc, char *argv[] )
   qDebug() << "Font selected for chat:" << chat_font.toString();
   qDebug() << "Font pixel size:" << chat_font.pixelSize();
   qDebug() << "Font point size:" << chat_font.pointSize();
-  qDebug() << "Font height:" << static_cast<int>(QFontMetrics( chat_font).height() );
+  qDebug() << "Font height:" << static_cast<int>(QFontMetrics( chat_font ).height());
   qDebug() << "Emoticon size in chat:" << Settings::instance().emoticonSizeInChat();
   qDebug() << "Emoticon size in edit:" << Settings::instance().emoticonSizeInEdit();
 #endif
@@ -250,8 +251,9 @@ int main( int argc, char *argv[] )
   if( Settings::instance().autoUserAway() )
     bee_app.setIdleTimeout( Settings::instance().userAwayTimeout() );
 
+  /* Init BeeCore */
   Core bee_core;
-  bee_core.loadUsersAndGroups();
+  bee_core.init();
   QObject::connect( &bee_app, SIGNAL( networkConfigurationChanged( const QNetworkConfiguration& ) ), &bee_core, SLOT( updateNetworkConfiguration( const QNetworkConfiguration& ) ) );
 
   if( !QSystemTrayIcon::isSystemTrayAvailable() )

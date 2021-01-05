@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi
+// BeeBEEP Copyright (C) 2010-2021 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -57,12 +57,8 @@ Settings::Settings()
   // In windows native dialogs are application modal and the connection goes in timeout...
   // In MacOSX instead it seems to work... I have changed the connection timeout...
   m_useNativeDialogs = true;
-#ifdef Q_OS_MAC
-  m_useNativeEmoticons = true;
-#else
-  m_useNativeEmoticons = false;
-#endif
-  m_useHiResEmoticons = false;
+  m_useFontEmoticons = false;
+  m_useHiResEmoticons = true;
 
 #ifdef MAKE_BEEBEEP_PORTABLE
   m_saveDataInUserApplicationFolder = false;
@@ -83,12 +79,13 @@ Settings::Settings()
   m_allowMultipleInstances = false;
   m_dataFolderInRC = "";
   m_addAccountNameToDataFolder = false;
+  m_addNicknameToDataFolder = false;
   m_preferredSubnets = "";
   m_disableSystemProxyForConnections = true;
   m_useDefaultMulticastGroupAddress = true;
   m_ipMulticastTtl = DEFAULT_IPV4_MULTICAST_TTL_OPTION;
   m_useIPv6 = false;
-  m_useHive = true;
+  m_useHive = false;
   m_checkNewVersionAtStartup = true;
   m_postUsageStatistics = true;
   m_useHostnameForDefaultUsername = false;
@@ -343,20 +340,31 @@ void Settings::setDefaultFolders()
   m_cacheFolder = defaultCacheFolderPath();
 }
 
+QString Settings::defaultListBackgroundColor() const
+{
+  return m_useDarkStyle ? Bee::colorDarkGrey().name() : QLatin1String( "#ffffff" );
+}
+
+QString Settings::defaultSystemBackgroundColor() const
+{
+  return m_useDarkStyle ? Bee::colorBlack().name() : QLatin1String( "#f5f5f5" );
+}
+
 void Settings::resetAllColors()
 {
-  m_chatDefaultUserNameColor = "#000000";
+  m_chatDefaultUserNameColor = m_useDarkStyle ? "#ffffff" : "#000000";
   m_homeBackgroundColor = defaultSystemBackgroundColor();
   m_defaultChatBackgroundColor = defaultSystemBackgroundColor();
   m_userListBackgroundColor = defaultListBackgroundColor();
   m_chatListBackgroundColor = defaultListBackgroundColor();
   m_groupListBackgroundColor = defaultListBackgroundColor();
   m_savedChatListBackgroundColor = defaultListBackgroundColor();
-  m_chatBackgroundColor = "#ffffff";
-  m_chatDefaultTextColor = "#000000";
-  m_chatSystemTextColor = "#555555";
-  m_chatQuoteBackgroundColor = "#808080";
-  m_chatQuoteTextColor = "#ffffff";
+  m_chatFontColor = m_useDarkStyle ? Bee::colorWhite().name() : "#000000";
+  m_chatBackgroundColor = m_useDarkStyle ? Bee::colorDarkGrey().name() : "#ffffff";
+  m_chatDefaultTextColor = m_useDarkStyle ? Bee::colorWhite().name() : "#000000";
+  m_chatSystemTextColor = m_useDarkStyle ? Bee::colorGrey().name() : "#555555";
+  m_chatQuoteBackgroundColor = m_useDarkStyle ? Bee::colorGrey().name() : "#808080";
+  m_chatQuoteTextColor = m_useDarkStyle ? Bee::colorBlack().name() : "#ffffff";
 }
 
 void Settings::createApplicationUuid()
@@ -444,6 +452,9 @@ void Settings::createLocalUser( const QString& user_name )
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Local user hash:" << qPrintable( m_localUser.hash() );
 #endif
+
+  if( user_name.isEmpty() && m_addNicknameToDataFolder )
+    setDataFolder();
 }
 
 QString Settings::createLocalUserHash()
@@ -488,6 +499,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "AllowMultipleInstances", m_allowMultipleInstances );
     sets->setValue( "DataFolderPath", m_dataFolderInRC );
     sets->setValue( "AddAccountNameToDataFolder", m_addAccountNameToDataFolder );
+    sets->setValue( "AddNicknameToDataFolder", m_addNicknameToDataFolder );
   #ifdef BEEBEEP_USE_MULTICAST_DNS
     sets->setValue( "UseMulticastDns", m_useMulticastDns );
   #endif
@@ -586,6 +598,7 @@ void Settings::loadRcFile()
   m_allowMultipleInstances = sets->value( "AllowMultipleInstances", m_allowMultipleInstances ).toBool();
   m_dataFolderInRC = Bee::convertToNativeFolderSeparator( sets->value( "DataFolderPath", m_dataFolderInRC ).toString() );
   m_addAccountNameToDataFolder = sets->value( "AddAccountNameToDataFolder", m_addAccountNameToDataFolder ).toBool();
+  m_addNicknameToDataFolder = sets->value( "AddNicknameToDataFolder", m_addNicknameToDataFolder ).toBool();
 #ifdef BEEBEEP_USE_MULTICAST_DNS
   m_useMulticastDns = sets->value( "UseMulticastDns", m_useMulticastDns ).toBool();
 #endif
@@ -796,8 +809,24 @@ QString Settings::version( bool build_version, bool qt_version, bool debug_info 
   }
 
   if( qt_version )
-    s_version += QString( "-qt%1" ).arg( qtMajorVersion() );
-
+  {
+    s_version += QString( "-qt%1" ).arg( qtMajorMinorVersion() );
+#if defined( Q_PROCESSOR_X86_64 )
+    s_version += QString( "-64bit" );
+#else
+    s_version += QString( "-32bit" );
+#endif
+  }
+  else
+  {
+#if defined( Q_OS_WIN )
+  #if defined( Q_PROCESSOR_X86_64 )
+    s_version += QString( "-64bit" );
+  #else
+    s_version += QString( "-32bit" );
+  #endif
+#endif
+  }
   return s_version;
 }
 
@@ -1478,7 +1507,7 @@ void Settings::loadCommonSettings( QSettings* user_ini )
   m_emoticonInRecentMenu = commonValue( system_rc, user_ini, "EmoticonsInRecentMenu", m_emoticonInRecentMenu ).toInt();
   m_favoriteEmoticons = user_ini->value( "FavoriteEmoticons", QStringList() ).toStringList();
   m_recentEmoticons = user_ini->value( "RecentEmoticons", QStringList() ).toStringList();
-  m_useNativeEmoticons = commonValue( system_rc, user_ini, "UseNativeEmoticons", m_useNativeEmoticons ).toBool();
+  m_useFontEmoticons = commonValue( system_rc, user_ini, "UseFontEmoticons", m_useFontEmoticons ).toBool();
   m_useHiResEmoticons = commonValue( system_rc, user_ini, "UseHighResolutionEmoticons", m_useHiResEmoticons ).toBool();
   m_showMinimizedAtStartup = commonValue( system_rc, user_ini, "ShowMinimizedAtStartup", m_startMinimized ).toBool();
   m_promptOnCloseEvent = commonValue( system_rc, user_ini, "PromptOnCloseEvent", m_promptOnCloseEvent ).toBool();
@@ -1861,7 +1890,7 @@ void Settings::save()
   sets->setValue( "EmoticonsInRecentMenu", m_emoticonInRecentMenu );
   sets->setValue( "FavoriteEmoticons", m_favoriteEmoticons );
   sets->setValue( "RecentEmoticons", m_recentEmoticons );
-  sets->setValue( "UseNativeEmoticons", m_useNativeEmoticons );
+  sets->setValue( "UseFontEmoticons", m_useFontEmoticons );
   sets->setValue( "UseHighResolutionEmoticons", m_useHiResEmoticons );
   sets->setValue( "ShowMinimizedAtStartup", m_showMinimizedAtStartup );
   sets->setValue( "PromptOnCloseEvent", m_promptOnCloseEvent );
@@ -2192,7 +2221,7 @@ void Settings::clearNativeSettings()
 bool Settings::searchDataFolder()
 {
   qDebug() << "Searching data folder...";
-  QString data_folder = m_addAccountNameToDataFolder ? accountNameFromSystemEnvinroment() : QLatin1String( "beebeep-data" );
+  QString data_folder = m_addAccountNameToDataFolder ? Bee::removeInvalidCharactersForFilePath( accountNameFromSystemEnvinroment() ) : QLatin1String( "beebeep-data" );
   QString root_folder;
 #ifdef Q_OS_MAC
   bool rc_folder_is_writable = false;
@@ -2288,8 +2317,11 @@ bool Settings::setDataFolder()
     if( !searchDataFolder() )
       qWarning() << "Unable to save data. Check your FS permissions";
   }
-  else
-    qDebug() << "Data folder:" << qPrintable( m_dataFolder );
+
+  if( m_addNicknameToDataFolder )
+    m_dataFolder = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( m_dataFolder ).arg( Bee::removeInvalidCharactersForFilePath( m_localUser.name() ) ) );
+  qDebug() << "Data folder:" << qPrintable( m_dataFolder );
+
   m_cacheFolder = defaultCacheFolderPath();
   QDir cache_folder( m_cacheFolder );
   if( !cache_folder.exists() )

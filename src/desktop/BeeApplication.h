@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi
+// BeeBEEP Copyright (C) 2010-2021 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -84,6 +84,7 @@ public slots:
   void checkIdle();
   void forceShutdown();
   void resetStyle();
+  void resetPalette();
 
 protected:
   bool notify( QObject* receiver, QEvent* event );
@@ -111,7 +112,7 @@ protected slots:
   void onNetworkConfigurationAdded( const QNetworkConfiguration& );
   void onNetworkConfigurationChanged( const QNetworkConfiguration& );
   void onNetworkConfigurationRemoved( const QNetworkConfiguration& );
-  void onNetworkMagnagerOnlineStateChanged( bool );
+  void onNetworkManagerOnlineStateChanged( bool );
 
 private:
   static BeeApplication* mp_instance;
@@ -139,6 +140,7 @@ private:
 #endif
 
   QString m_defaultCss;
+  QPalette m_defaultPalette;
 
   QFileSystemWatcher* mp_fsWatcher;
   QString m_settingsFilePath;

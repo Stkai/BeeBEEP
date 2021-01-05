@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi
+// BeeBEEP Copyright (C) 2010-2021 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -194,13 +194,7 @@ void GuiSavedChatList::selectBackgroundColor()
 
 void GuiSavedChatList::updateBackground()
 {
-  if( Settings::instance().useDarkStyle() && Settings::instance().savedChatListBackgroundColor() == Settings::instance().defaultListBackgroundColor() )
-  {
-    if( !mp_twSavedChatList->styleSheet().isEmpty() )
-      mp_twSavedChatList->setStyleSheet( QString() );
-    return;
-  }
   QString w_stylesheet = Settings::instance().guiCustomListStyleSheet( Settings::instance().savedChatListBackgroundColor(),
-                                                                    IconManager::instance().iconPath( "saved-chat-list.png" ) );
+                                                                       IconManager::instance().iconPath( "saved-chat-list.png" ) );
   mp_twSavedChatList->setStyleSheet( w_stylesheet );
 }

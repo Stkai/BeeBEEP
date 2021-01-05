@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi
+// BeeBEEP Copyright (C) 2010-2021 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -88,8 +88,16 @@ namespace Bee
   void raiseOnTop( QWidget* );
   bool areStringListEqual( const QStringList&, const QStringList&, Qt::CaseSensitivity cs = Qt::CaseInsensitive );
   QString dateTimeToString( const QDateTime& );
-  QString beeColorYellow();
+  QPalette darkPalette();
+  QColor colorDarkGrey();
+  QColor colorGrey();
+  QColor colorBlack();
+  QColor colorBlue();
+  QColor colorWhite();
+  QColor colorYellow();
   QString beeColorsToHtmlText( const QString& );
+
+
   QString pluginFileExtension();
   QString removeInvalidCharactersForFilePath( const QString& );
 

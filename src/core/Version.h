@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi
+// BeeBEEP Copyright (C) 2010-2021 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -46,7 +46,7 @@ const char HUNSPELL_VERSION[] = "1.7.0";
 const char BEEBEEP_VERSION[] = "5.8.3";
 const int BEEBEEP_PROTO_VERSION = 90;
 const int BEEBEEP_SETTINGS_VERSION = 18;
-const int BEEBEEP_BUILD = 1452;
+const int BEEBEEP_BUILD = 1468;
 
 #endif // BEEBEEP_VERSION_H
 

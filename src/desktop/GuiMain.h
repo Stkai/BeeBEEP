@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi
+// BeeBEEP Copyright (C) 2010-2021 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -53,9 +53,6 @@ class User;
 #endif
 #ifdef BEEBEEP_USE_WEBENGINE
   class GuiWebView;
-#endif
-#ifdef BEEBEEP_USE_VOICE_CHAT
-  class VoicePlayer;
 #endif
 
 
@@ -358,9 +355,6 @@ private:
   QAction* mp_actShowUserFirstNameFirstInFullName;
   QActionGroup* mp_actGroupOnSendingMessage;
 
-  QAction* mp_actShowUserListOnConnection;
-  QAction* mp_actShowChatListOnConnection;
-
   QMenu* mp_menuNetworkStatus;
   QAction* mp_actHostAddress;
   QAction* mp_actPortBroadcast;
@@ -401,9 +395,10 @@ private:
   GuiNetworkTest* mp_networkTest;
 
 #ifdef BEEBEEP_USE_VOICE_CHAT
-  VoicePlayer* mp_voicePlayer;
   QMenu* mp_menuVoiceMessage;
 #endif
+
+  bool m_useFusionStyle;
 };
 
 #endif // BEEBEEP_GUIMAIN_H

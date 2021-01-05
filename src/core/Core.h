@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi
+// BeeBEEP Copyright (C) 2010-2021 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -38,6 +38,9 @@ class MDnsManager;
 class ShareDesktop;
 class ShareDesktopData;
 #endif
+#ifdef BEEBEEP_USE_VOICE_CHAT
+class VoicePlayer;
+#endif
 
 #define beeCore Core::instance()
 
@@ -50,7 +53,8 @@ public:
   virtual ~Core();
   static Core* instance() { return mp_instance; }
 
-  void loadUsersAndGroups();
+  void init();
+
   bool isConnected() const;
   bool start();
   void stop();
@@ -125,6 +129,7 @@ public:
 #ifdef BEEBEEP_USE_VOICE_CHAT
   /* CoreVoiceChat.cpp */
   bool sendVoiceMessageToChat( VNumber chat_id, const QString& file_path, qint64 message_duration );
+  inline VoicePlayer* voicePlayer();
 #endif
 
 signals:
@@ -233,6 +238,7 @@ protected slots:
   void autoSaveChatMessagesCompleted();
 
 protected:
+  void loadUsersAndGroups();
   void createLocalShareMessage();
   void showMessage( const QString&, int ms_to_show );
   int sendMessageToAllConnectedUsers( const Message& );
@@ -316,11 +322,17 @@ private:
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   ShareDesktop* mp_shareDesktop;
 #endif
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  VoicePlayer* mp_voicePlayer;
+#endif
 
 };
 
 // Inline Functions
 inline bool Core::hasFileTransferInProgress() const { return isConnected() && mp_fileTransfer->hasActivePeers(); }
 inline bool Core::isFileTransferActive() const { return isConnected() && mp_fileTransfer->isActive(); }
+#ifdef BEEBEEP_USE_VOICE_CHAT
+inline VoicePlayer* Core::voicePlayer() { return mp_voicePlayer; }
+#endif
 
 #endif // BEEBEEP_CLIENT_H

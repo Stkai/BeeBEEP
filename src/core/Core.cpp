@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 //
-// BeeBEEP Copyright (C) 2010-2020 Marco Mastroddi
+// BeeBEEP Copyright (C) 2010-2021 Marco Mastroddi
 //
 // BeeBEEP is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published
@@ -41,6 +41,9 @@
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   #include "ShareDesktop.h"
 #endif
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  #include "VoicePlayer.h"
+#endif
 
 Core *Core::mp_instance = Q_NULLPTR;
 
@@ -69,6 +72,10 @@ Core::Core( QObject* parent )
   mp_shareDesktop = new ShareDesktop( this );
 #endif
 
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  mp_voicePlayer = new VoicePlayer( this );
+#endif
+
   connect( mp_broadcaster, SIGNAL( newPeerFound( const QHostAddress&, int ) ), this, SLOT( newPeerFound( const QHostAddress&, int ) ) );
   connect( mp_listener, SIGNAL( newConnection( qintptr ) ), this, SLOT( checkNewConnection( qintptr ) ) );
   connect( mp_fileTransfer, SIGNAL( listening() ), this, SLOT( onFileTransferServerListening() ) );
@@ -83,6 +90,14 @@ Core::~Core()
 {
   if( mp_instance )
     mp_instance = Q_NULLPTR;
+}
+
+void Core::init()
+{
+  loadUsersAndGroups();
+#ifdef BEEBEEP_USE_VOICE_CHAT
+  voicePlayer()->init();
+#endif
 }
 
 QHostAddress Core::multicastGroupAddress() const
