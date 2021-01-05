@@ -355,9 +355,6 @@ private:
   QAction* mp_actShowUserFirstNameFirstInFullName;
   QActionGroup* mp_actGroupOnSendingMessage;
 
-  QAction* mp_actShowUserListOnConnection;
-  QAction* mp_actShowChatListOnConnection;
-
   QMenu* mp_menuNetworkStatus;
   QAction* mp_actHostAddress;
   QAction* mp_actPortBroadcast;

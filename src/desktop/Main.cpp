@@ -140,16 +140,6 @@ int main( int argc, char *argv[] )
   if( bee_app.testAttribute( Qt::AA_EnableHighDpiScaling ) )
     qDebug( "Icons: high DPI scaling enabled" );
 #endif
-#ifndef Q_OS_MAC
-  QStyle* p_style = QStyleFactory::create( "Fusion" );
-  if( p_style )
-  {
-    qDebug() << "Stylesheet type: Fusion";
-    bee_app.setStyle( p_style );
-  }
-  else
-    qDebug() << "Stylesheet type: Default";
-#endif
 
   Settings::instance().setDefaultFolders();
   Settings::instance().loadRcFile();

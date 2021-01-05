@@ -875,7 +875,7 @@ void GuiMain::createMenus()
   mp_menuInterfaceSettings = new QMenu( tr( "Interface" ), this );
   mp_menuInterfaceSettings->setIcon( IconManager::instance().icon( "interface.png" ) );
   mp_menuSettings->addMenu( mp_menuInterfaceSettings );
-  act = mp_menuInterfaceSettings->addAction( tr( "Use the dark theme" ) + QString( " (%1)" ).arg( tr( "beta" ) ), this, SLOT( settingsChanged() ) );
+  act = mp_menuInterfaceSettings->addAction( tr( "Use the dark theme" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().useDarkStyle() );
   act->setData( 77 );
@@ -946,14 +946,14 @@ void GuiMain::createMenus()
   mp_menuConnectionSettings = new QMenu( tr( "On connection" ), this );
   mp_menuConnectionSettings->setIcon( IconManager::instance().icon( "connection.png" ) );
   mp_menuSettings->addMenu( mp_menuConnectionSettings );
-  mp_actShowUserListOnConnection = mp_menuConnectionSettings->addAction( tr( "Show the user list" ), this, SLOT( settingsChanged() ) );
-  mp_actShowUserListOnConnection->setCheckable( true );
-  mp_actShowUserListOnConnection->setChecked( Settings::instance().showUsersOnConnection() );
-  mp_actShowUserListOnConnection->setData( 69 );
-  mp_actShowChatListOnConnection = mp_menuConnectionSettings->addAction( tr( "Show the chat list" ), this, SLOT( settingsChanged() ) );
-  mp_actShowChatListOnConnection->setCheckable( true );
-  mp_actShowChatListOnConnection->setChecked( Settings::instance().showChatsOnConnection() );
-  mp_actShowChatListOnConnection->setData( 79 );
+  act = mp_menuConnectionSettings->addAction( tr( "Show the user list" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showUsersOnConnection() );
+  act->setData( 69 );
+  act = mp_menuConnectionSettings->addAction( tr( "Show the chat list" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().showChatsOnConnection() );
+  act->setData( 79 );
   mp_menuConnectionSettings->addSeparator();
   act = mp_menuConnectionSettings->addAction( tr( "Prompts to change user" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
@@ -1987,7 +1987,6 @@ void GuiMain::settingsChanged( QAction* act )
     break;
   case 69:
     Settings::instance().setShowUsersOnConnection( act->isChecked() );
-    mp_actShowChatListOnConnection->setChecked( Settings::instance().showChatsOnConnection() );
     break;
   case 70:
     Settings::instance().setAlwaysOpenChatOnNewMessageArrived( act->isChecked() );
@@ -2058,7 +2057,6 @@ void GuiMain::settingsChanged( QAction* act )
     break;
   case 79:
     Settings::instance().setShowChatsOnConnection( act->isChecked() );
-    mp_actShowUserListOnConnection->setChecked( Settings::instance().showUsersOnConnection() );
     break;
   case 80:
     Settings::instance().setRaiseMainWindowOnNewMessageArrived( act->isChecked() );
@@ -5239,13 +5237,23 @@ void GuiMain::setMinimumWidthForStyle()
 
 void GuiMain::loadStyle()
 {
-  if( Settings::instance().useDarkStyle() )
+  QStyle* p_style = QStyleFactory::create( "Fusion" );
+  if( p_style )
   {
-    qDebug() << "Darkstyle mode enabled";
-    beeApp->setPalette( Bee::darkPalette() );
+    qDebug() << "Stylesheet type: Fusion";
+    beeApp->setStyle( p_style );
   }
   else
+  {
+    qDebug() << "Stylesheet type: system default";
     beeApp->resetStyle();
+  }
+
+  if( Settings::instance().useDarkStyle() )
+  {
+    qDebug() << "Stylesheet mode: dark";
+    beeApp->setPalette( Bee::darkPalette() );
+  }
 
   mp_home->updateBackground();
   mp_userList->updateBackground();
