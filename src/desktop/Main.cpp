@@ -138,7 +138,7 @@ int main( int argc, char *argv[] )
   qDebug() << "Qt data path:" << qPrintable( QDir::toNativeSeparators( QLibraryInfo::location( QLibraryInfo::DataPath ) ) );
   qDebug() << "Qt settings path:" << qPrintable( QDir::toNativeSeparators( QLibraryInfo::location( QLibraryInfo::SettingsPath ) ) );
   qDebug() << "Qt paths are shipped with Qt libraries. Edit qt.conf file to change them.";
-  #if QT_VERSION >= 0x050600
+#if QT_VERSION >= 0x050600
   if( bee_app.testAttribute( Qt::AA_EnableHighDpiScaling ) )
     qDebug( "Icons: high DPI scaling enabled" );
 #endif
@@ -291,6 +291,7 @@ int main( int argc, char *argv[] )
 
   /* CleanUp */
   bee_app.processEvents( QEventLoop::AllEvents, 2000 );
+  qDebug() << "Events remained in loop processed";
   bee_app.cleanUp();
   Settings::instance().clearTemporaryFiles();
   GuiIconProvider::close();
