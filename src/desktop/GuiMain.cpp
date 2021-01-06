@@ -2247,6 +2247,10 @@ void GuiMain::settingsChanged( QAction* act )
     Settings::instance().setUseHiResEmoticons( act->isChecked() );
     updateEmoticons();
     break;
+  case 106:
+    EmoticonManager::instance().clearFavoriteEmoticons();
+    updateEmoticons();
+    break;
   default:
     qWarning() << "GuiMain::settingsChanged(): error in setting id" << act->data().toInt();
   }
@@ -3893,6 +3897,9 @@ void GuiMain::showChatSettingsMenu()
   act = mp_menuChat->addAction( tr( "Clear recent emoticons" ), this, SLOT( settingsChanged() ) );
   act->setIcon( IconManager::instance().icon( "clear.png" ) );
   act->setData( 104 );
+  act = mp_menuChat->addAction( tr( "Clear favorite emoticons" ), this, SLOT( settingsChanged() ) );
+  act->setIcon( IconManager::instance().icon( "clear.png" ) );
+  act->setData( 106 );
   act = mp_menuChat->addAction( tr( "Restore default font" ), this, SLOT( settingsChanged() ) );
   act->setIcon( IconManager::instance().icon( "font.png" ) );
   act->setData( 23 );

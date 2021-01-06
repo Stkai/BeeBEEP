@@ -3757,6 +3757,10 @@ Inserisci un nome differente.</translation>
         <source>Do you really want to apply the new theme?</source>
         <translation>Vuoi applicare il nuovo tema?</translation>
     </message>
+    <message>
+        <source>Clear favorite emoticons</source>
+        <translation>Cancella le faccine preferite</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -5493,10 +5497,6 @@ Inserisci un nome differente.</translation>
 </context>
 <context>
     <name>GuiVCardWidget</name>
-    <message>
-        <source>Widget</source>
-        <translation></translation>
-    </message>
     <message>
         <source>S</source>
         <translation></translation>

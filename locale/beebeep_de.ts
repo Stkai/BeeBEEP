@@ -3544,6 +3544,10 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Do you really want to apply the new theme?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Clear favorite emoticons</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -5172,7 +5176,7 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Widget</source>
-        <translation>Widget</translation>
+        <translation type="vanished">Widget</translation>
     </message>
     <message>
         <source>Send a file</source>

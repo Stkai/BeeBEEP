@@ -121,11 +121,8 @@ void GuiEmoticons::loadEmoticons( int current_index )
   if( gwe == mp_favorite )
   {
     emoticon_list = EmoticonManager::instance().favoriteEmoticons();
-    if( emoticon_list.size() > 0 )
-    {
-      while( emoticon_list.size() < EmoticonManager::instance().recentEmoticonsCount() )
-        emoticon_list << Emoticon();
-    }
+    while( emoticon_list.size() < EmoticonManager::instance().recentEmoticonsCount() )
+      emoticon_list << Emoticon();
   }
   else if( gwe == mp_recent )
   {
