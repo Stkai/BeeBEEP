@@ -82,6 +82,7 @@ signals:
   void toggleVisibilityPresetMessagesPanelRequest();
   void hideRequest();
   void closeRequest();
+  void updateChatFontRequest();
   void updateChatColorsRequest();
   void showStatusMessageRequest( const QString&, int );
   void openSavedChatRequest( VNumber );

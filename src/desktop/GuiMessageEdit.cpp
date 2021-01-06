@@ -172,7 +172,7 @@ void GuiMessageEdit::clearMessage()
   clear();
   m_emoticonsAdded.clear();
   setTextColor( QColor( Settings::instance().chatFontColor() ) );
-  setFontPointSize( Settings::instance().chatFont().pointSize() );
+  setFont( Settings::instance().chatFont() );
 }
 
 void GuiMessageEdit::addMessageToHistory()

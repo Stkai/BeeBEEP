@@ -204,6 +204,7 @@ private slots:
   void onNewsAvailable( const QString& );
   void showDefaultServerPortInMenu();
   void createMessage();
+  void updateChatFont();
   void updateChatColors();
   void resetAllColors();
   void onHideEmptyChatsRequest();

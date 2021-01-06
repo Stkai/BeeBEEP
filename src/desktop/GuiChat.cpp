@@ -721,6 +721,7 @@ void GuiChat::setChatFont( const QFont& f )
 {
   mp_teChat->setFont( f );
   mp_teMessage->setFont( f );
+  mp_teMessage->update();
   mp_actRestoreDefaultFont->setEnabled( f != QApplication::font() );
 }
 
@@ -733,8 +734,8 @@ void GuiChat::selectFont()
     Settings::instance().setChatFont( f );
     Settings::instance().save();
     setChatFont( f );
-    mp_teMessage->update();
     mp_teChat->ensureCursorVisible();
+    emit updateChatFontRequest();
   }
 }
 

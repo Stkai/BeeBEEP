@@ -99,8 +99,6 @@ int main( int argc, char *argv[] )
   // Windows with 4k monitors, icons are too big... linux is about to test... MacOSX is ok
   #if defined( Q_OS_MAC )
     QCoreApplication::setAttribute( Qt::AA_EnableHighDpiScaling, true );
-  #elif defined( Q_OS_WIN ) && defined( Q_PROCESSOR_X86_64 )
-    QCoreApplication::setAttribute( Qt::AA_EnableHighDpiScaling, true );
   #endif
 #endif
 

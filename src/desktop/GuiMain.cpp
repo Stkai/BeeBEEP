@@ -1741,8 +1741,7 @@ void GuiMain::settingsChanged( QAction* act )
   case 23:
     {
       Settings::instance().setChatFont( QApplication::font() );
-      foreach( GuiFloatingChat* fl_chat, m_floatingChats )
-        fl_chat->guiChat()->setChatFont( Settings::instance().chatFont() );
+      updateChatFont();
     }
     break;
   case 24:
@@ -4162,6 +4161,7 @@ GuiFloatingChat* GuiMain::createFloatingChat( const Chat& c )
     connect( fl_chat, SIGNAL( chatIsAboutToClose( VNumber ) ), this, SLOT( removeFloatingChatFromList( VNumber ) ) );
     connect( fl_chat, SIGNAL( readAllMessages( VNumber ) ), this, SLOT( readAllMessagesInChat( VNumber ) ) );
     connect( fl_chat, SIGNAL( showVCardRequest( VNumber ) ), this, SLOT( showVCard( VNumber ) ) );
+    connect( fl_chat, SIGNAL( updateChatFontRequest() ), this, SLOT( updateChatFont() ) );
     connect( fl_chat, SIGNAL( updateChatColorsRequest() ), this, SLOT( updateChatColors() ) );
 #ifdef BEEBEEP_USE_VOICE_CHAT
     connect( fl_chat, SIGNAL( sendVoiceMessageRequest( VNumber, const QString&, qint64 ) ), this, SLOT( sendVoiceMessageToChat( VNumber, const QString&, qint64 ) ) );
@@ -4992,6 +4992,15 @@ void GuiMain::createMessage()
   }
 }
 
+void GuiMain::updateChatFont()
+{
+  if( m_floatingChats.isEmpty() )
+    return;
+
+  foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+    fl_chat->guiChat()->setChatFont( Settings::instance().chatFont() );
+}
+
 void GuiMain::updateChatColors()
 {
   if( m_floatingChats.isEmpty() )
@@ -5001,7 +5010,6 @@ void GuiMain::updateChatColors()
   {
     if( fl_chat->guiChat()->chatId() != ID_DEFAULT_CHAT )
       fl_chat->guiChat()->updateChatColors();
-
   }
 }
 
@@ -5219,7 +5227,7 @@ void GuiMain::setMinimumWidthForStyle()
 #elif defined( Q_OS_UNIX )
     int min_w = qMax( 320, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+4) + wasted_w );
 #elif defined( Q_OS_WIN )
-    int min_w = qMax( 300, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+2) + wasted_w );
+    int min_w = qMax( 320, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+2) + wasted_w );
 #else
     int min_w = qMax( 320, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+2) + wasted_w );
 #endif
