@@ -99,7 +99,10 @@ win32|unix {
 
 HEADERS += Interfaces.h
 
-RESOURCES += beebeep.qrc emojis.qrc emojis2x_1.qrc emojis2x_2.qrc
+RESOURCES += beebeep.qrc emojis.qrc
+greaterThan(QT_MAJOR_VERSION, 4): {
+  RESOURCES += emojis2x_1.qrc emojis2x_2.qrc
+}
 
 win32: RC_FILE = beebeep.rc
 macx: ICON = beebeep.icns

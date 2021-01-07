@@ -1082,6 +1082,9 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().useHiResEmoticons() );
   act->setData( 105 );
+#if QT_VERSION < 0x050000
+  act->setEnabled( false );
+#endif
   act = mp_menuChatSettings->addAction( tr( "Use font emoticons" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().useFontEmoticons() );
