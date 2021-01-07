@@ -814,21 +814,11 @@ QString Settings::version( bool build_version, bool qt_version, bool debug_info 
 
   if( qt_version )
   {
-    s_version += QString( "-qt%1" ).arg( qtMajorMinorVersion() );
+    s_version += QString( "-qt%1" ).arg( qtMajorVersion() );
 #if defined( Q_PROCESSOR_X86_64 )
     s_version += QString( "-64bit" );
 #else
     s_version += QString( "-32bit" );
-#endif
-  }
-  else
-  {
-#if defined( Q_OS_WIN )
-  #if defined( Q_PROCESSOR_X86_64 )
-    s_version += QString( "-64bit" );
-  #else
-    s_version += QString( "-32bit" );
-  #endif
 #endif
   }
   return s_version;
@@ -1547,7 +1537,11 @@ void Settings::loadCommonSettings( QSettings* user_ini )
     m_showUsersOnConnection = false;
   m_hideEmptyChatsInList = commonValue( system_rc, user_ini, "HideEmptyChatsInList", m_hideEmptyChatsInList ).toBool();
   m_enableMaximizeButton = commonValue( system_rc, user_ini, "EnableMaximizeButton", false ).toBool();
+#if QT_VERSION > 0x050000
   m_useDarkStyle = user_ini->value( "UseDarkStyle", m_useDarkStyle ).toBool();
+#else
+  m_useDarkStyle = false;
+#endif
   m_showUsersInWorkgroups = commonValue( system_rc, user_ini, "ShowUsersInWorkgroups", false ).toBool();
   m_openChatWhenSendNewMessage = user_ini->value( "OpenChatWhenSendNewMessage", true ).toBool();
   m_sendNewMessageIndividually = user_ini->value( "SendNewMessageIndividually", false ).toBool();

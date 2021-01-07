@@ -70,7 +70,7 @@ GuiChat::GuiChat( QWidget *parent )
   mp_splitter->addWidget( mp_frameChat );
   mp_splitter->addWidget( mp_frameMessage );
 
-  grid_layout->addWidget( mp_splitter, 1, 0, 1, 1);
+  grid_layout->addWidget( mp_splitter, 1, 0, 1, 1 );
   QList<int> widget_sizes;
   widget_sizes.append( 200 );
   widget_sizes.append( 80 );

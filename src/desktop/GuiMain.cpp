@@ -881,6 +881,9 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().useDarkStyle() );
   act->setData( 77 );
+#if QT_VERSION < 0x050000
+  act->setEnabled( false );
+#endif
   act = mp_menuInterfaceSettings->addAction( tr( "Reset minimum width for applied style" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().resetMinimumWidthForStyle() );

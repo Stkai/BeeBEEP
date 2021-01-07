@@ -752,7 +752,15 @@ bool Keys::generateSharedKey( const QString& other_public_key )
     QByteArray shared_key;
     for( int i = 0; i < ECDH_PUBLIC_KEY_SIZE; i++ )
       shared_key.append( QByteArray::number( u_shared_key[ i ] ) );
+#if QT_VERSION >= 0x050200
     m_sharedKey = shared_key.toBase64( QByteArray::Base64UrlEncoding | QByteArray::OmitTrailingEquals );
+#else
+    m_sharedKey = shared_key.toBase64();
+    while( m_sharedKey.endsWith( '=' ) ) // Remove trailing equals
+      m_sharedKey.chop( 1 );
+    m_sharedKey.replace( '+', '-' );
+    m_sharedKey.replace( '/', '_' );
+#endif
     return true;
   }
   else

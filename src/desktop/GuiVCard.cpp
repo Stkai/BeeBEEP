@@ -52,8 +52,13 @@ GuiVCard::GuiVCard( QWidget *parent )
   }
   else
   {
+#if QT_VERSION > 0x050000
     custom_palette.setColor( QPalette::Window, Bee::colorWhite().lighter() );
     custom_palette.setColor( QPalette::Base, Bee::colorWhite() );
+#else
+    custom_palette.setColor( QPalette::Window, Bee::colorWhite() );
+    custom_palette.setColor( QPalette::Base, Bee::colorWhite().lighter() );
+#endif
   }
   setPalette( custom_palette );
 
