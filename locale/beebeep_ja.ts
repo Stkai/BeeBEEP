@@ -3536,7 +3536,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2048"/>
         <source>Do you really want to apply the new theme?</source>
-        <translation type="unfinished"></translation>
+        <translation>新しいテーマを適用しますか？</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2071"/>
@@ -3802,12 +3802,13 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3897"/>
         <source>Clear recent emoticons</source>
+        <translatorcomment>お気に入りの絵文字の一覧を消去</translatorcomment>
         <translation>最近使った絵文字の一覧を消去</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3900"/>
         <source>Clear favorite emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3918"/>
@@ -6217,12 +6218,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/voicechat/GuiVoicePlayer.cpp" line="80"/>
         <source>Unable to open voice message %1</source>
-        <translation type="unfinished">ボイスメッセージが開けません: %1</translation>
+        <translation>ボイスメッセージが開けません: %1</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiVoicePlayer.cpp" line="80"/>
         <source>Ok</source>
-        <translation type="unfinished">OK</translation>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
@@ -6230,7 +6231,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/voicechat/GuiVoicePlayer.ui" line="162"/>
         <source>Close</source>
-        <translation type="unfinished">閉じる</translation>
+        <translation>閉じる</translation>
     </message>
 </context>
 <context>
