@@ -58,7 +58,7 @@ Settings::Settings()
   // In MacOSX instead it seems to work... I have changed the connection timeout...
   m_useNativeDialogs = true;
   m_useFontEmoticons = false;
-#if QT_VERSION >= 0x050000
+#if QT_VERSION >= 0x050000 && !defined( BEEBEEP_FOR_RASPBERRY_PI )
   m_useHiResEmoticons = true;
 #else
   m_useHiResEmoticons = false;
@@ -1502,7 +1502,7 @@ void Settings::loadCommonSettings( QSettings* user_ini )
   m_favoriteEmoticons = user_ini->value( "FavoriteEmoticons", QStringList() ).toStringList();
   m_recentEmoticons = user_ini->value( "RecentEmoticons", QStringList() ).toStringList();
   m_useFontEmoticons = commonValue( system_rc, user_ini, "UseFontEmoticons", m_useFontEmoticons ).toBool();
-#if QT_VERSION >= 0x050000
+#if QT_VERSION >= 0x050000 && !defined( BEEBEEP_FOR_RASPBERRY_PI )
   m_useHiResEmoticons = commonValue( system_rc, user_ini, "UseHighResolutionEmoticons", m_useHiResEmoticons ).toBool();
 #else
   m_useHiResEmoticons = false;

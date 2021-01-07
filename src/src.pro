@@ -58,7 +58,7 @@ unix:!macx:!android: {
 macx {
   QMAKE_LFLAGS += -F/System/Library/Frameworks/ApplicationServices.framework
   LIBS += -framework ApplicationServices
-  lessThan( QT_MAJOR_VERSION, 5) | lessThan(QT_MINOR_VERSION, 9) {
+  lessThan(QT_MAJOR_VERSION, 5) | lessThan(QT_MINOR_VERSION, 9) {
     QMAKE_INFO_PLIST = ../misc/Info_legacy.plist
   } else {
     QMAKE_INFO_PLIST = ../misc/Info.plist
@@ -70,6 +70,13 @@ win32 {
   LIBS += -luser32
 }
 
+unix {
+  contains(QMAKE_HOST.arch, armv7l* ): {
+    DEFINES += BEEBEEP_FOR_RASPBERRY_PI
+  }
+}
+
+message( Arch: $$QMAKE_HOST.arch )
 message( Qt modules: $$QT )
 
 include(../locale/locale.pri)
@@ -101,7 +108,9 @@ HEADERS += Interfaces.h
 
 RESOURCES += beebeep.qrc emojis.qrc
 greaterThan(QT_MAJOR_VERSION, 4): {
-  RESOURCES += emojis2x_1.qrc emojis2x_2.qrc
+  !contains(DEFINES, BEEBEEP_FOR_RASPBERRY_PI) {
+    RESOURCES += emojis2x_1.qrc emojis2x_2.qrc
+  }
 }
 
 win32: RC_FILE = beebeep.rc

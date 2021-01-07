@@ -21,7 +21,7 @@
 #
 ######################################################################
 
-BEEBEEP_QT_VERSION=qt4
-BEEBEEP_ARCH_TYPE=arm64
+BEEBEEP_QT_VERSION=qt5
+BEEBEEP_ARCH_TYPE=armv7l
 
 . ./inc_linux_package.txt
