@@ -11,7 +11,6 @@ BeeBEEP 5.8.4
 - New feature: added Voice Message Player interface
 - New dark theme added in the interface
 - User icons in chat window can be clicked also if the user is offline
-- Disabled by default the option to search users by a multicast datagram
 - Suspend/sleep mode is now managed also in Linux systems.
 - File paths will be recognized and made clickable in chat (it must be a single message).
 - Added "KeepModificationDateOnFileTransferred" option in beebeep.ini (it is always enabled in BeeBOX)
