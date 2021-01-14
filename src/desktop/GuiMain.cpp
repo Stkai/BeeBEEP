@@ -881,6 +881,9 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().useDarkStyle() );
   act->setData( 77 );
+#if QT_VERSION < 0x050000
+  act->setEnabled( false );
+#endif
   act = mp_menuInterfaceSettings->addAction( tr( "Reset minimum width for applied style" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().resetMinimumWidthForStyle() );
@@ -1082,6 +1085,9 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().useHiResEmoticons() );
   act->setData( 105 );
+#if QT_VERSION < 0x050000 || defined( BEEBEEP_FOR_RASPBERRY_PI )
+  act->setEnabled( false );
+#endif
   act = mp_menuChatSettings->addAction( tr( "Use font emoticons" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().useFontEmoticons() );
@@ -1140,6 +1146,9 @@ void GuiMain::createMenus()
   act->setData( 90 );
   mp_actSelectEmoticonSourcePath = mp_menuChatSettings->addAction( IconManager::instance().icon( "emoticon.png" ), tr( "Select emoticon theme" ) + QString( "..." ), this, SLOT( selectEmoticonSourcePath() ) );
   mp_actSelectEmoticonSourcePath->setEnabled( !Settings::instance().useFontEmoticons() );
+  act = mp_menuChatSettings->addAction( IconManager::instance().icon( "icon-size.png" ), tr( "Change size of the emoticons" ) + QString( "..." ), this, SLOT( changeEmoticonSizeInChat() ) );
+  act->setEnabled( !Settings::instance().useFontEmoticons() );
+  mp_menuChatSettings->addSeparator();
   mp_menuChatSettings->addAction( IconManager::instance().icon( "dictionary.png" ), tr( "Dictionary" ) + QString( "..." ), this, SLOT( selectDictionatyPath() ) );
   mp_menuChatSettings->addSeparator();
   mp_menuChatSettings->addAction( IconManager::instance().icon( "refused-chat.png" ), tr( "Blocked chats" ) + QString( "..." ), this, SLOT( showRefusedChats() ) );
@@ -1230,7 +1239,7 @@ void GuiMain::createMenus()
   mp_menuVoiceMessage->setIcon( IconManager::instance().icon( "microphone.png" ) );
   mp_menuVoiceMessage->setDisabled( Settings::instance().disableVoiceMessages() );
   mp_menuSettings->addMenu( mp_menuVoiceMessage );
-  act = mp_menuVoiceMessage->addAction( IconManager::instance().icon( "audio-settings.png" ), tr( "Voice encoder" ) + QString( "..." ), this, SLOT( showVoiceEncoderSettings() ) );
+  mp_menuVoiceMessage->addAction( IconManager::instance().icon( "audio-settings.png" ), tr( "Voice encoder" ) + QString( "..." ), this, SLOT( showVoiceEncoderSettings() ) );
   mp_menuVoiceMessage->addSeparator();
   act = mp_menuVoiceMessage->addAction( IconManager::instance().icon( "timer.png" ), tr( "Maximum duration" ) + QString( "..." ), this, SLOT( settingsChanged() ) );
   act->setData( 94 );
@@ -1740,9 +1749,8 @@ void GuiMain::settingsChanged( QAction* act )
     break;
   case 23:
     {
-      Settings::instance().setChatFont( QApplication::font() );
-      foreach( GuiFloatingChat* fl_chat, m_floatingChats )
-        fl_chat->guiChat()->setChatFont( Settings::instance().chatFont() );
+      Settings::instance().setChatFont( QApplication::font(), false );
+      updateChatFont();
     }
     break;
   case 24:
@@ -2046,10 +2054,12 @@ void GuiMain::settingsChanged( QAction* act )
     break;
   case 77:
     {
-      Settings::instance().setUseDarkStyle( act->isChecked() );
-      Settings::instance().resetAllColors();
-      refresh_users = true;
-      QTimer::singleShot( 0, this, SLOT( loadStyle() ) );
+      if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you really want to apply the new theme?" ), tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 0 )
+      {
+        Settings::instance().setUseDarkStyle( act->isChecked() );
+        Settings::instance().resetAllColors();
+        QTimer::singleShot( 0, this, SLOT( loadStyle() ) );
+      }
     }
     break;
   case 78:
@@ -2244,6 +2254,10 @@ void GuiMain::settingsChanged( QAction* act )
     break;
   case 105:
     Settings::instance().setUseHiResEmoticons( act->isChecked() );
+    updateEmoticons();
+    break;
+  case 106:
+    EmoticonManager::instance().clearFavoriteEmoticons();
     updateEmoticons();
     break;
   default:
@@ -3892,6 +3906,9 @@ void GuiMain::showChatSettingsMenu()
   act = mp_menuChat->addAction( tr( "Clear recent emoticons" ), this, SLOT( settingsChanged() ) );
   act->setIcon( IconManager::instance().icon( "clear.png" ) );
   act->setData( 104 );
+  act = mp_menuChat->addAction( tr( "Clear favorite emoticons" ), this, SLOT( settingsChanged() ) );
+  act->setIcon( IconManager::instance().icon( "clear.png" ) );
+  act->setData( 106 );
   act = mp_menuChat->addAction( tr( "Restore default font" ), this, SLOT( settingsChanged() ) );
   act->setIcon( IconManager::instance().icon( "font.png" ) );
   act->setData( 23 );
@@ -4160,6 +4177,7 @@ GuiFloatingChat* GuiMain::createFloatingChat( const Chat& c )
     connect( fl_chat, SIGNAL( chatIsAboutToClose( VNumber ) ), this, SLOT( removeFloatingChatFromList( VNumber ) ) );
     connect( fl_chat, SIGNAL( readAllMessages( VNumber ) ), this, SLOT( readAllMessagesInChat( VNumber ) ) );
     connect( fl_chat, SIGNAL( showVCardRequest( VNumber ) ), this, SLOT( showVCard( VNumber ) ) );
+    connect( fl_chat, SIGNAL( updateChatFontRequest() ), this, SLOT( updateChatFont() ) );
     connect( fl_chat, SIGNAL( updateChatColorsRequest() ), this, SLOT( updateChatColors() ) );
 #ifdef BEEBEEP_USE_VOICE_CHAT
     connect( fl_chat, SIGNAL( sendVoiceMessageRequest( VNumber, const QString&, qint64 ) ), this, SLOT( sendVoiceMessageToChat( VNumber, const QString&, qint64 ) ) );
@@ -4990,6 +5008,15 @@ void GuiMain::createMessage()
   }
 }
 
+void GuiMain::updateChatFont()
+{
+  if( m_floatingChats.isEmpty() )
+    return;
+
+  foreach( GuiFloatingChat* fl_chat, m_floatingChats )
+    fl_chat->guiChat()->setChatFont( Settings::instance().chatFont() );
+}
+
 void GuiMain::updateChatColors()
 {
   if( m_floatingChats.isEmpty() )
@@ -5216,7 +5243,7 @@ void GuiMain::setMinimumWidthForStyle()
 #elif defined( Q_OS_UNIX )
     int min_w = qMax( 320, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+4) + wasted_w );
 #elif defined( Q_OS_WIN )
-    int min_w = qMax( 300, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+2) + wasted_w );
+    int min_w = qMax( 320, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+2) + wasted_w );
 #else
     int min_w = qMax( 320, mp_barMain->actions().size() * (mp_barMain->iconSize().width()+2) + wasted_w );
 #endif
@@ -5264,6 +5291,7 @@ void GuiMain::loadStyle()
   mp_groupList->updateBackground();
   mp_savedChatList->updateBackground();
   updateChatColors();
+  updateEmoticons();
 }
 
 #ifdef BEEBEEP_USE_VOICE_CHAT
@@ -5290,4 +5318,15 @@ void GuiMain::showVoiceEncoderSettings()
 void GuiMain::resumeFileTransfer( VNumber user_id, const FileInfo& file_info )
 {
   beeCore->resumeFileTransfer( user_id, file_info );
+}
+
+void GuiMain::changeEmoticonSizeInChat()
+{
+  bool ok = false;
+  int emoticon_size = QInputDialog::getInt( this, Settings::instance().programName(), tr( "Please select the new size of the emoticons in chat" ),
+                                          Settings::instance().emoticonSizeInChat(), 16, 248, 4, &ok );
+  if( !ok )
+    return;
+
+  Settings::instance().setEmoticonSizeInChat( emoticon_size );
 }

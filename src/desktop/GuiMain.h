@@ -204,6 +204,7 @@ private slots:
   void onNewsAvailable( const QString& );
   void showDefaultServerPortInMenu();
   void createMessage();
+  void updateChatFont();
   void updateChatColors();
   void resetAllColors();
   void onHideEmptyChatsRequest();
@@ -220,6 +221,7 @@ private slots:
   void showVoiceEncoderSettings();
 #endif
   void resumeFileTransfer( VNumber user_id, const FileInfo& );
+  void changeEmoticonSizeInChat();
 
 protected:
   void keyPressEvent( QKeyEvent* );

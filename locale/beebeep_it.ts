@@ -3347,7 +3347,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>beta</source>
-        <translation>beta</translation>
+        <translation type="vanished">beta</translation>
     </message>
     <message>
         <source>News</source>
@@ -3607,7 +3607,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Unable to open voice message %1</source>
-        <translation>Impossibile aprire il messaggio vocale %1</translation>
+        <translation type="vanished">Impossibile aprire il messaggio vocale %1</translation>
     </message>
     <message>
         <source>Use the integrated voice message player</source>
@@ -3752,6 +3752,22 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Use high resolution emoticons</source>
         <translation>Usa le faccine ad alta risoluzione</translation>
+    </message>
+    <message>
+        <source>Do you really want to apply the new theme?</source>
+        <translation>Vuoi applicare il nuovo tema?</translation>
+    </message>
+    <message>
+        <source>Clear favorite emoticons</source>
+        <translation>Cancella le faccine preferite</translation>
+    </message>
+    <message>
+        <source>Change size of the emoticons</source>
+        <translation>Cambia la dimensione delle faccine</translation>
+    </message>
+    <message>
+        <source>Please select the new size of the emoticons in chat</source>
+        <translation>Inserisci la nuova dimensione delle faccine mostrate nella conversazione</translation>
     </message>
 </context>
 <context>
@@ -5490,10 +5506,6 @@ Inserisci un nome differente.</translation>
 <context>
     <name>GuiVCardWidget</name>
     <message>
-        <source>Widget</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>S</source>
         <translation></translation>
     </message>
@@ -5578,6 +5590,24 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Close</source>
         <translation type="obsolete">Chiudi</translation>
+    </message>
+</context>
+<context>
+    <name>GuiVoicePlayer</name>
+    <message>
+        <source>Unable to open voice message %1</source>
+        <translation>Impossibile aprire il messaggio vocale %1</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation>Ok</translation>
+    </message>
+</context>
+<context>
+    <name>GuiVoicePlayerWidget</name>
+    <message>
+        <source>Close</source>
+        <translation>Chiudi</translation>
     </message>
 </context>
 <context>

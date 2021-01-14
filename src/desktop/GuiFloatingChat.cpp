@@ -107,6 +107,7 @@ GuiFloatingChat::GuiFloatingChat( QWidget *parent )
   connect( mp_chat, SIGNAL( toggleVisibilityPresetMessagesPanelRequest() ), this, SLOT( toggleVisibilityPresetMessagesPanel() ) );
   connect( mp_chat, SIGNAL( hideRequest() ), this, SLOT( showMinimized() ) );
   connect( mp_chat, SIGNAL( closeRequest() ), this, SLOT( close() ) );
+  connect( mp_chat, SIGNAL( updateChatFontRequest() ), this, SIGNAL( updateChatFontRequest() ) );
   connect( mp_chat, SIGNAL( updateChatColorsRequest() ), this, SIGNAL( updateChatColorsRequest() ) );
   connect( mp_chat, SIGNAL( showStatusMessageRequest( const QString&, int ) ), this, SLOT( showStatusMessage(const QString&, int ) ) );
 #ifdef BEEBEEP_USE_VOICE_CHAT

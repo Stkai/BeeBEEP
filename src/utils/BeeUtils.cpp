@@ -1153,6 +1153,8 @@ QColor Bee::colorBlack() { return QColor( 25, 25, 25 ); }
 QColor Bee::colorBlue() { return QColor( 42, 130, 218 ); }
 QColor Bee::colorWhite() { return QColor( 238, 238, 238 ); }
 QColor Bee::colorYellow() { return QColor( "#dede00" ); }
+QColor Bee::colorOrange() { return QColor( "#ffcf04" ); }
+
 
 QString Bee::beeColorsToHtmlText( const QString& txt )
 {
@@ -1166,10 +1168,10 @@ QString Bee::beeColorsToHtmlText( const QString& txt )
 QPalette Bee::darkPalette()
 {
   QPalette darkPalette;
-  darkPalette.setColor( QPalette::Window, colorDarkGrey() );
+  darkPalette.setColor( QPalette::Window, colorGrey() );
   darkPalette.setColor( QPalette::WindowText, colorWhite() );
-  darkPalette.setColor( QPalette::Base, colorBlack() );
-  darkPalette.setColor( QPalette::AlternateBase, colorDarkGrey() );
+  darkPalette.setColor( QPalette::Base, colorDarkGrey() );
+  darkPalette.setColor( QPalette::AlternateBase, colorDarkGrey().lighter() );
   darkPalette.setColor( QPalette::ToolTipBase, colorGrey().lighter() );
   darkPalette.setColor( QPalette::ToolTipText, colorBlack() );
   darkPalette.setColor( QPalette::Text, colorWhite() );

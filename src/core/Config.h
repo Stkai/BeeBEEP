@@ -42,12 +42,6 @@
   #define Q_NULLPTR NULL
 #endif
 
-#ifdef __arm__
-  #define BEEBEEP_FOR_RASPBERRY_PI
-#else
-  #undef BEEBEEP_FOR_RASPBERRY_PI
-#endif
-
 // Type definition: define doesn't always work in signal slot mechanish
 typedef quint64 VNumber;
 typedef qint64 FileSizeType;

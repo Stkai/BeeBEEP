@@ -70,7 +70,7 @@ GuiChat::GuiChat( QWidget *parent )
   mp_splitter->addWidget( mp_frameChat );
   mp_splitter->addWidget( mp_frameMessage );
 
-  grid_layout->addWidget( mp_splitter, 1, 0, 1, 1);
+  grid_layout->addWidget( mp_splitter, 1, 0, 1, 1 );
   QList<int> widget_sizes;
   widget_sizes.append( 200 );
   widget_sizes.append( 80 );
@@ -721,6 +721,7 @@ void GuiChat::setChatFont( const QFont& f )
 {
   mp_teChat->setFont( f );
   mp_teMessage->setFont( f );
+  mp_teMessage->update();
   mp_actRestoreDefaultFont->setEnabled( f != QApplication::font() );
 }
 
@@ -730,11 +731,11 @@ void GuiChat::selectFont()
   QFont f = QFontDialog::getFont( &ok, Settings::instance().chatFont(), this );
   if( ok )
   {
-    Settings::instance().setChatFont( f );
+    Settings::instance().setChatFont( f, false );
     Settings::instance().save();
     setChatFont( f );
-    mp_teMessage->update();
     mp_teChat->ensureCursorVisible();
+    emit updateChatFontRequest();
   }
 }
 
@@ -1225,7 +1226,7 @@ void GuiChat::resetChatFontToDefault()
 {
   if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you want to restore the default font?" ), tr( "Yes" ), tr( "No" ), QString(), 0, 1 ) == 1 )
     return;
-  Settings::instance().setChatFont( QApplication::font() );
+  Settings::instance().setChatFont( QApplication::font(), false );
   setChatFont( Settings::instance().chatFont() );
 }
 

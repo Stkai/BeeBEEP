@@ -86,7 +86,6 @@ protected:
 private:
   QGridLayout* mp_layout;
   QList<QPushButton*> m_buttons;
-  bool m_hasPainted;
   int m_emoticonSize;
   Emoticon::Group m_emoticonGroup;
 

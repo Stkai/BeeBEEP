@@ -181,8 +181,9 @@ public:
   inline void setLanguagePath( const QString& );
   QString languageFilePath( const QString&, const QString& ) const;
 
-  inline int emoticonSizeInEdit() const;
+  inline void setEmoticonSizeInChat( int );
   inline int emoticonSizeInChat() const;
+  inline int emoticonSizeInEdit() const;
   inline int emoticonSizeInMenu() const;
   inline int emoticonInRecentMenu() const;
   inline void setFavoriteEmoticons( const QStringList& );
@@ -198,7 +199,7 @@ public:
   inline const QString& chatFontColor() const;
   inline void setChatFontColor( const QString& );
   inline const QFont& chatFont() const;
-  void setChatFont( const QFont& );
+  void setChatFont( const QFont&, bool resize_emoticon_size_in_chat );
   inline void setDefaultChatBackgroundColor( const QString& );
   inline const QString& defaultChatBackgroundColor() const;
   inline void setChatBackgroundColor( const QString& );
@@ -1185,8 +1186,9 @@ inline void Settings::setShowMinimizedAtStartup( bool new_value ) { m_showMinimi
 inline bool Settings::showMinimizedAtStartup() const { return m_showMinimizedAtStartup; }
 inline int Settings::chatMessagesToShow() const { return m_chatMessagesToShow; }
 inline void Settings::setChatMessagesToShow( int new_value ) { m_chatMessagesToShow = new_value; }
-inline int Settings::emoticonSizeInEdit() const { return m_emoticonSizeInEdit; }
+inline void Settings::setEmoticonSizeInChat( int new_value ) { m_emoticonSizeInChat = new_value; }
 inline int Settings::emoticonSizeInChat() const { return m_emoticonSizeInChat; }
+inline int Settings::emoticonSizeInEdit() const { return m_emoticonSizeInEdit; }
 inline int Settings::emoticonSizeInMenu() const { return m_emoticonSizeInMenu; }
 inline int Settings::emoticonInRecentMenu() const { return m_emoticonInRecentMenu; }
 inline void Settings::setFavoriteEmoticons( const QStringList& new_value ) { m_favoriteEmoticons = new_value; }
