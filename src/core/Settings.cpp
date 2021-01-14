@@ -150,9 +150,7 @@ Settings::Settings()
   /* Default RC end */
 
   m_emoticonSizeInEdit = 16;
-
-  QFont f = QApplication::font();
-  setChatFont( f );
+  setChatFont( QApplication::font(), true );
   m_emoticonSizeInMenu = 24;
   m_emoticonInRecentMenu = 48;
   m_confirmOnDownloadFile = false;
@@ -405,14 +403,18 @@ QNetworkProxy Settings::systemNetworkProxy( const QNetworkProxyQuery& npq ) cons
     return proxy_list.first();
 }
 
-void Settings::setChatFont( const QFont& new_value )
+void Settings::setChatFont( const QFont& new_value, bool resize_emoticon_size_in_chat )
 {
   m_chatFont = new_value;
   QFontMetrics fm( m_chatFont );
-  m_emoticonSizeInChat = qMax( 24, qMin( 160, fm.height() ) );
-  m_emoticonSizeInEdit = qMax( 16, qMin( 48, fm.height() ) );
-  if( m_emoticonSizeInChat % 2 )
-    m_emoticonSizeInChat++;
+  int fm_h = fm.height();
+  if( resize_emoticon_size_in_chat )
+  {
+    m_emoticonSizeInChat = qMax( 24, qMin( 248, fm_h ) );
+    if( m_emoticonSizeInChat % 2 )
+      m_emoticonSizeInChat++;
+  }
+  m_emoticonSizeInEdit = qMax( 16, qMin( 48, fm_h ) );
   if( m_emoticonSizeInEdit % 2 )
     m_emoticonSizeInEdit++;
 }
@@ -1361,17 +1363,16 @@ void Settings::loadCommonSettings( QSettings* user_ini )
   QSettings* system_rc = objectRcSettings();
   beginCommonGroup( system_rc, user_ini, "Chat" );
   QString chat_font_string = commonValue( system_rc, user_ini,  "Font", "" ).toString();
-
   if( !chat_font_string.isEmpty() )
   {
     QFont f;
     if( f.fromString( chat_font_string ) )
-      setChatFont( f );
+      setChatFont( f, false );
     else
       qWarning() << "Invalid font string found in ChatFont setting value:" << chat_font_string;
   }
   else
-    setChatFont( QApplication::font() );
+    setChatFont( QApplication::font(), false );
   m_chatFontColor = commonValue( system_rc, user_ini, "FontColor", QColor( Qt::black ).name() ).toString();
   m_defaultChatBackgroundColor = commonValue( system_rc, user_ini, "DefaultChatBackgroundColor", m_defaultChatBackgroundColor ).toString();
   m_chatCompact = commonValue( system_rc, user_ini, "CompactMessage", true ).toBool();
@@ -2321,7 +2322,7 @@ bool Settings::setDataFolder()
   }
 
   if( m_addNicknameToDataFolder )
-    m_dataFolder = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( m_dataFolder ).arg( Bee::removeInvalidCharactersForFilePath( m_localUser.name() ) ) );
+    m_dataFolder = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( m_dataFolder, Bee::removeInvalidCharactersForFilePath( m_localUser.name() ) ) );
   qDebug() << "Data folder:" << qPrintable( m_dataFolder );
 
   m_cacheFolder = defaultCacheFolderPath();
@@ -2366,7 +2367,7 @@ QString Settings::defaultDownloadFolderPath() const
   if( Bee::folderIsWriteable( default_download_folder, false ) )
     return default_download_folder;
 
-  default_download_folder = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder() ).arg( "download" ) );
+  default_download_folder = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder(), QLatin1String( "download" ) ) );
   if( Bee::folderIsWriteable( default_download_folder, true ) )
     return default_download_folder;
   else
@@ -2375,27 +2376,27 @@ QString Settings::defaultDownloadFolderPath() const
 
 QString Settings::defaultCacheFolderPath() const
 {
-  return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder() ).arg( "cache" ) );
+  return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder(), QLatin1String( "cache" ) ) );
 }
 
 QString Settings::savedChatsFilePath() const
 {
-  return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder() ).arg( "beebeep.dat" ) );
+  return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder(), QLatin1String( "beebeep.dat" ) ) );
 }
 
 QString Settings::autoSavedChatsFilePath() const
 {
-  return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder() ).arg( "beebeep.bak" ) );
+  return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder(), QLatin1String( "beebeep.bak" ) ) );
 }
 
 QString Settings::unsentMessagesFilePath() const
 {
-  return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder() ).arg( "beebeep.off" ) );
+  return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder(), QLatin1String( "beebeep.off" ) ) );
 }
 
 QString Settings::defaultSettingsFilePath() const
 {
-  return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder() ).arg( QLatin1String( "beebeep.ini" ) ) );
+  return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder(), QLatin1String( "beebeep.ini" ) ) );
 }
 
 QString Settings::defaultBeepFilePath()
@@ -2403,16 +2404,16 @@ QString Settings::defaultBeepFilePath()
   if( m_beepDefaultFilePath.isEmpty() )
   {
     QStringList data_folders;
-    data_folders.append( Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder() ).arg( QLatin1String( "resources" ) ) ) );
+    data_folders.append( Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder(), QLatin1String( "resources" ) ) ) );
     data_folders.append( dataFolders() );
 #ifndef Q_OS_MAC
-    data_folders.append( Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( resourceFolder() ).arg( QLatin1String( "resources" ) ) ) );
+    data_folders.append( Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( resourceFolder(), QLatin1String( "resources" ) ) ) );
 #endif
     data_folders.append( resourceFolders() );
     data_folders.removeDuplicates();
     QString beep_file_path = findFileInFolders( QLatin1String( "beep.wav" ), data_folders );
     if( beep_file_path.isNull() )
-      m_beepDefaultFilePath = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( resourceFolder() ).arg( QLatin1String( "beep.wav" ) ) );
+      m_beepDefaultFilePath = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( resourceFolder(), QLatin1String( "beep.wav" ) ) );
     else
       m_beepDefaultFilePath = beep_file_path;
   }
@@ -2422,10 +2423,10 @@ QString Settings::defaultBeepFilePath()
 QString Settings::defaultPluginFolderPath() const
 {
   QStringList data_folders;
-  data_folders.append( Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder() ).arg( QLatin1String( "plugins" ) ) ) );
+  data_folders.append( Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder(), QLatin1String( "plugins" ) ) ) );
   data_folders.append( dataFolders() );
 #ifndef Q_OS_MAC
-  data_folders.append( Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( resourceFolder() ).arg( QLatin1String( "plugins" ) ) ) );
+  data_folders.append( Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( resourceFolder(), QLatin1String( "plugins" ) ) ) );
 #endif
   data_folders.append( resourceFolders() );
   data_folders.removeDuplicates();
@@ -2437,10 +2438,10 @@ QString Settings::defaultPluginFolderPath() const
 QString Settings::defaultLanguageFolderPath() const
 {
   QStringList data_folders;
-  data_folders.append( Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder() ).arg( QLatin1String( "languages" ) ) ) );
+  data_folders.append( Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder(), QLatin1String( "languages" ) ) ) );
   data_folders.append( dataFolders() );
 #ifndef Q_OS_MAC
-  data_folders.append( Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( resourceFolder() ).arg( QLatin1String( "languages" ) ) ) );
+  data_folders.append( Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( resourceFolder(), QLatin1String( "languages" ) ) ) );
 #endif
   data_folders.append( resourceFolders() );
   data_folders.removeDuplicates();
@@ -2489,7 +2490,7 @@ QString Settings::guiCustomListStyleSheet( const QString& background_color, cons
                   "background-position: bottom center;"
                   "background-attachment: fixed;"
                   "padding-bottom: 32px;"
-                  "}" ).arg( background_color ).arg( background_image_path );
+                  "}" ).arg( background_color, background_image_path );
 }
 
 QString Settings::autoresponderName() const
@@ -2511,7 +2512,7 @@ QString Settings::downloadDirectoryForUser( const User& u ) const
   if( Settings::instance().downloadInUserFolder() )
   {
     QString user_name = Bee::removeInvalidCharactersForFilePath( u.name() );
-    return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( downloadDirectory() ).arg( user_name ) );
+    return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( downloadDirectory(), user_name ) );
   }
   else
     return downloadDirectory();

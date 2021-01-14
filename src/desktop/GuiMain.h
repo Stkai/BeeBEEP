@@ -221,6 +221,7 @@ private slots:
   void showVoiceEncoderSettings();
 #endif
   void resumeFileTransfer( VNumber user_id, const FileInfo& );
+  void changeEmoticonSizeInChat();
 
 protected:
   void keyPressEvent( QKeyEvent* );

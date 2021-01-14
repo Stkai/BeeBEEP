@@ -2466,10 +2466,10 @@ Please select a different name.</source>
         <translation>Показване на основната лента с инструменти</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3917"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3918"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3919"/>
         <location filename="../src/desktop/GuiMain.cpp" line="3920"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3921"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3922"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3923"/>
         <source>offline</source>
         <translation>извън линия</translation>
     </message>
@@ -2478,25 +2478,25 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="404"/>
         <location filename="../src/desktop/GuiMain.cpp" line="421"/>
         <location filename="../src/desktop/GuiMain.cpp" line="674"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2054"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2078"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2553"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2759"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2813"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2820"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2882"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3103"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3284"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3315"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3484"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3708"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3732"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3789"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4108"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4271"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4635"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="5031"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="5172"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2057"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2081"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2556"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2762"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2816"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2823"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2885"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3106"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3287"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3318"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3487"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3711"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3735"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3792"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4111"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4274"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4638"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="5034"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="5175"/>
         <source>Yes</source>
         <translation>Да</translation>
     </message>
@@ -2505,25 +2505,25 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiMain.cpp" line="404"/>
         <location filename="../src/desktop/GuiMain.cpp" line="421"/>
         <location filename="../src/desktop/GuiMain.cpp" line="674"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2054"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2078"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2553"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2759"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2813"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2820"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2882"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3103"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3284"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3315"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3484"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3708"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3732"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3789"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4108"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4271"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4635"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="5031"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="5172"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2057"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2081"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2556"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2762"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2816"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2823"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2885"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3106"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3287"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3318"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3487"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3711"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3735"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3792"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4111"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4274"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4638"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="5034"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="5175"/>
         <source>No</source>
         <translation>Не</translation>
     </message>
@@ -2565,12 +2565,12 @@ Please select a different name.</source>
         <translation>разработен от</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1307"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1310"/>
         <source>Select beep file...</source>
         <translation>Изберете файл със звуков сигнал ...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1308"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1311"/>
         <source>Play beep</source>
         <translation>Пуснете звуков сигнал</translation>
     </message>
@@ -2585,27 +2585,27 @@ Please select a different name.</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1175"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1178"/>
         <source>If a file already exists</source>
         <translation>Ако файла вече съществува</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1157"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1160"/>
         <source>Enable file transfer</source>
         <translation>Активирай прехвърлянето на файлове</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3894"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3897"/>
         <source>Use HTML tags</source>
         <translation>Използвайте HTML тагове</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3898"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3901"/>
         <source>Use clickable links</source>
         <translation>Използвайте кликващи връзки</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3872"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3875"/>
         <source>Show messages grouped by user</source>
         <translation>Показване на съобщения, групирани по потребители</translation>
     </message>
@@ -2615,7 +2615,7 @@ Please select a different name.</source>
         <translation>Запазване на съобщения</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1411"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1414"/>
         <source>Status</source>
         <translation>Състояние</translation>
     </message>
@@ -2625,39 +2625,39 @@ Please select a different name.</source>
         <translation>Приставки</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1464"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1467"/>
         <source>Show %1&apos;s license...</source>
         <translation>Показване лиценза на %1 ...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1468"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1471"/>
         <source>Open %1 official website...</source>
         <translation>Отворете официалния уебсайт на %1...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1469"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1472"/>
         <source>Check for new version...</source>
         <translation>Проверете за нова версия...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1470"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1473"/>
         <source>Download plugins...</source>
         <translation>Изтегляне на приставки...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1472"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1475"/>
         <source>Help online...</source>
         <translation>Онлайн помощ...</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="991"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1546"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1549"/>
         <source>Users</source>
         <translation>Потребители</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="800"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1495"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1498"/>
         <source>Quit</source>
         <translation>Изход</translation>
     </message>
@@ -2677,7 +2677,7 @@ Please select a different name.</source>
         <translation>Основен</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1390"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1393"/>
         <source>Show the user&apos;s picture</source>
         <translation>Покажете снимката на потребителя</translation>
     </message>
@@ -2688,32 +2688,32 @@ Please select a different name.</source>
         <translation>Чат</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1334"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1337"/>
         <source>Always stay on top</source>
         <translation>Винаги оставайте отгоре</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3864"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3867"/>
         <source>Show the timestamp</source>
         <translation>Покажете клеймото</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2313"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2316"/>
         <source>Show only last %1 messages</source>
         <translation>Показване само на последните съобщения на %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1167"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1170"/>
         <source>Prompt before downloading file</source>
         <translation>Подканете преди да изтеглите файла</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1348"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1351"/>
         <source>Options</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1394"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1397"/>
         <source>Show the user&apos;s vCard on right click</source>
         <translation>Покажете vCard на потребителя с десен бутон</translation>
     </message>
@@ -2733,72 +2733,72 @@ Please select a different name.</source>
         <translation>Отворете папката с данни</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3855"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3858"/>
         <source>Use RTL mode to show text</source>
         <translation>Използвайте RTL режим за показване на текст</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1227"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1230"/>
         <source>Use native file dialogs</source>
         <translation>Използвайте диалоговите прозорци на собствения файл</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1257"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1260"/>
         <source>Enable Buzz sound</source>
         <translation>Активиране на звука Buzz</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1349"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1352"/>
         <source>Sort users in ascending order</source>
         <translation>Сортирайте потребителите във възходящ ред</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1353"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1356"/>
         <source>Sorting mode</source>
         <translation>Режим на сортиране</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1356"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1359"/>
         <source>Default mode</source>
         <translation>Режим по подразбиране</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1361"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1364"/>
         <source>By user name</source>
         <translation>По потребителско име</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1366"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1369"/>
         <source>By user status</source>
         <translation>По статус на потребителя</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1371"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1374"/>
         <source>By unread messages</source>
         <translation>Чрез непрочетени съобщения</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1398"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1401"/>
         <source>Show status color in background</source>
         <translation>Показва цвета на състоянието във фонов режим</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1407"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1410"/>
         <source>Change size of the user&apos;s picture</source>
         <translation>Променете размера на снимката на потребителя</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1425"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1428"/>
         <source>Recently used</source>
         <translation>Наскоро използвани</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1429"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1432"/>
         <source>Change your status description...</source>
         <translation>Променете описанието на състоянието си...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1430"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1433"/>
         <source>Clear all status descriptions</source>
         <translation>Изчистете всички описания на състоянието</translation>
     </message>
@@ -2823,22 +2823,22 @@ Please select a different name.</source>
         <translation>Показване на ново съобщение</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1460"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1463"/>
         <source>?</source>
         <translation>?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1465"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1468"/>
         <source>Qt Library...</source>
         <translation>Qt Библиотека...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1461"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1464"/>
         <source>Donate for %1</source>
         <translation>Дарете за %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1488"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1491"/>
         <source>Show</source>
         <translation>Покажи</translation>
     </message>
@@ -2853,92 +2853,92 @@ Please select a different name.</source>
         <translation>Клавиш Escape минимизира до иконата в основната лента на задачите</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1294"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1297"/>
         <source>Show only message notifications</source>
         <translation>Показване само на известия за съобщения</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1298"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1301"/>
         <source>Show chat message preview</source>
         <translation>Показване на визуализация на съобщение в чата</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1556"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1559"/>
         <source>Groups</source>
         <translation>Групи</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1551"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1554"/>
         <source>Chats</source>
         <translation>Чатове</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1569"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1572"/>
         <source>File Transfers</source>
         <translation>Прехвърляне на файлове</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2228"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2231"/>
         <source>Please select the number of days that partially downloaded files can remain cached.</source>
         <translation>Моля, изберете броя дни, през които частично изтеглените файлове могат да останат кеширани.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2835"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2838"/>
         <source>Downloading %1 files</source>
         <translation>Изтегляне на %1 файлове</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3223"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3226"/>
         <source>There are no messages saved in the chat with %1.</source>
         <translation>В чата с %1 няма запазени съобщения.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3726"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3729"/>
         <source>Do you want to clear messages with %1?</source>
         <translation>Искате ли да изчистите съобщенията с %1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3860"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3863"/>
         <source>Show the chat in compact view mode</source>
         <translation>Покажете чата в режим на компактен изглед</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3909"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3912"/>
         <source>Restore default font</source>
         <translation>Възстановете шрифта по подразбиране</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3992"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3995"/>
         <source>chat messages</source>
         <translation>съобщения в чата</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4107"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4110"/>
         <source>Do you want to delete user %1?</source>
         <translation>Искате ли да изтриете потребител %1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4270"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4273"/>
         <source>Do you want to clear all saved status descriptions?</source>
         <translation>Искате ли да изчистите всички запазени описания на състоянието?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4575"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4578"/>
         <source>Qt libraries have a bug on saving the window&apos;s state.</source>
         <translation>Qt библиотеките имат грешка при запазване на състоянието на прозореца.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4576"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4579"/>
         <source>If you have layout problem please save only geometry.</source>
         <translation>Ако имате проблем с оформлението, моля, запазете само геометрията.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4701"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4704"/>
         <source>New file from %1</source>
         <translation>Нов файл от %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4724"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4727"/>
         <source>%1 is buzzing you!</source>
         <translation>%1 ви жужи!</translation>
     </message>
@@ -2953,13 +2953,13 @@ Please select a different name.</source>
         <translation>Подканете при отказ при свързване</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1402"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1405"/>
         <source>Show the status description</source>
         <translation>Показване на описанието на състоянието</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="946"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1344"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1347"/>
         <source>Save window&apos;s geometry</source>
         <translation>Запазване на геометрията на прозореца</translation>
     </message>
@@ -2999,27 +2999,27 @@ Please select a different name.</source>
         <translation>Добавете потребители</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1420"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1423"/>
         <source>Set your status to away automatically</source>
         <translation>Настройте автоматично състоянието си на отсъстващ</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1153"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1156"/>
         <source>File transfer</source>
         <translation>Прехвърляне на файл</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1161"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1164"/>
         <source>Enable file sharing</source>
         <translation>Активирайте споделянето на файлове</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1253"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1256"/>
         <source>Enable BEEP alert</source>
         <translation>Активирайте сигнала BEEP</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1287"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1290"/>
         <source>System tray icon</source>
         <translation>Икона в системната област</translation>
     </message>
@@ -3039,7 +3039,7 @@ Please select a different name.</source>
         <translation>Конфигуриране на мрежата...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1151"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1154"/>
         <source>Blocked chats</source>
         <translation>Блокирани чатове</translation>
     </message>
@@ -3054,7 +3054,7 @@ Please select a different name.</source>
         <translation>Избери език</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1149"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1152"/>
         <source>Dictionary</source>
         <translation>Речник</translation>
     </message>
@@ -3090,12 +3090,12 @@ Please select a different name.</source>
         <translation>Запазване на групи</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1290"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1293"/>
         <source>Enable tray icon notifications</source>
         <translation>Активирайте известията с икони в системната лента</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1302"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1305"/>
         <source>Show file notifications</source>
         <translation>Показване на известия за файлове</translation>
     </message>
@@ -3111,7 +3111,7 @@ Please select a different name.</source>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="748"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1516"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1519"/>
         <source>Development version</source>
         <translation>Версия за разработка</translation>
     </message>
@@ -3132,9 +3132,9 @@ Please select a different name.</source>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="830"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3357"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3401"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4979"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3360"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3404"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4982"/>
         <source>The option has been disabled by your system administrator.</source>
         <translation>Опцията е деактивирана от системния ви администратор.</translation>
     </message>
@@ -3224,17 +3224,17 @@ Please select a different name.</source>
         <translation>Затворете прозореца за чат</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1274"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1277"/>
         <source>Raise main window on new message</source>
         <translation>Повдигнете главния прозорец на ново съобщение</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1278"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1281"/>
         <source>Always open chat on new message</source>
         <translation>Винаги отваряйте чата за ново съобщение</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1282"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1285"/>
         <source>Raise previously opened chat on new message</source>
         <translation>Повишаване на отворения чат за ново съобщение</translation>
     </message>
@@ -3259,37 +3259,37 @@ Please select a different name.</source>
         <translation>Изберете цвета на системния текст за чат</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1222"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1225"/>
         <source>Always shows the progress of file transfer</source>
         <translation>Винаги показва напредъка на прехвърлянето на файлове</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1311"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1314"/>
         <source>Desktop sharing</source>
         <translation>Споделяне на работния плот</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1315"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1318"/>
         <source>Enable desktop sharing</source>
         <translation>Активирайте споделянето на работния плот</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1320"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1323"/>
         <source>Select screen capture interval</source>
         <translation>Изберете интервал за заснемане на екрана</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1322"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1325"/>
         <source>Select image type</source>
         <translation>Изберете тип на изображението</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1324"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1327"/>
         <source>Select image quality</source>
         <translation>Изберете качество на изображението</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1327"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1330"/>
         <source>Fit image to screen</source>
         <translation>Поставете изображението на екрана</translation>
     </message>
@@ -3308,7 +3308,7 @@ Please select a different name.</source>
         <translation>Бутон за активиране на увеличаване</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1339"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1342"/>
         <source>Start %1 automatically</source>
         <translation>Стартирайте %1 автоматично</translation>
     </message>
@@ -3323,22 +3323,22 @@ Please select a different name.</source>
         <translation>Нулирайте геометрията на всички прозорци</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1473"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1476"/>
         <source>Show tips...</source>
         <translation>Показване на съвети...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1474"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1477"/>
         <source>Read FAQ...</source>
         <translation>Прочетете ЧЗВ...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1477"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1480"/>
         <source>Information about %1...</source>
         <translation>Информация за %1...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1475"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1478"/>
         <source>Discover the fact of the day...</source>
         <translation>Открийте факта на деня...</translation>
     </message>
@@ -3378,17 +3378,17 @@ Please select a different name.</source>
         <translation>Изберете цвят на фона на цитата</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1235"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1238"/>
         <source>Voice message</source>
         <translation>Гласово съобщение</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1241"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1244"/>
         <source>Maximum duration</source>
         <translation>Максимална продължителност</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1171"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1174"/>
         <source>Always download files into the folder with the user&apos;s name</source>
         <translation>Винаги изтегляйте файлове в папката с името на потребителя</translation>
     </message>
@@ -3408,560 +3408,570 @@ Please select a different name.</source>
         <translation>Използвайте емотикони с висока разделителна способност</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1178"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1149"/>
+        <source>Change size of the emoticons</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="1181"/>
         <source>Generate new file name</source>
         <translation>Генериране на ново име на файл</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1183"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1186"/>
         <source>Skip</source>
         <translation>Прескочи</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1191"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1194"/>
         <source>Overwrite older</source>
         <translation>Презаписване на по-стари</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1205"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1208"/>
         <source>Keep the original modification date of the transferred file</source>
         <translation>Запазете оригиналната дата на модификация на прехвърления файл</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1209"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1212"/>
         <source>Resume file transfer</source>
         <translation>Възобновете прехвърлянето на файлове</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1209"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1212"/>
         <source>when possible</source>
         <translation>когато е възможно</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1239"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1242"/>
         <source>Voice encoder</source>
         <translation>Гласов кодер</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1250"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1253"/>
         <source>Notifications</source>
         <translation>Известия</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1269"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1272"/>
         <source>Disable BEEP alert if your status is busy</source>
         <translation>Деактивирайте сигнала BEEP, ако състоянието ви е заето</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1378"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1381"/>
         <source>Show online users only</source>
         <translation>Показване само на онлайн потребители</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1382"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1385"/>
         <source>Show users in their workgroups</source>
         <translation>Показвайте потребителите в техните работни групи</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1535"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1538"/>
         <source>Right click to open menu</source>
         <translation>Щракнете с десния бутон, за да отворите менюто</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1541"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1544"/>
         <source>Activities</source>
         <translation>Дейности</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1561"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1564"/>
         <source>Saved chats</source>
         <translation>Запазени чатове</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1713"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2300"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1716"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2303"/>
         <source>There will be no saving of &apos;system&apos; and &apos;file transfer&apos; messages if this option is disabled.</source>
         <translation>Няма да се запазват съобщения за „система“ и „прехвърляне на файлове“, ако тази опция е деактивирана.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1733"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1736"/>
         <source>How many minutes of idle %1 can wait before changing status to away?</source>
         <translation>Колко минути на празен ход %1 може да изчака, преди да промени състоянието си на отсъствие?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1774"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1777"/>
         <source>Please select the maximum number of messages to be showed</source>
         <translation>Моля, изберете максималния брой съобщения за показване</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1825"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1828"/>
         <source>Please select the number of inactive days before user is removed</source>
         <translation>Моля, изберете броя на неактивните дни, преди потребителят да бъде премахнат</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1977"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1980"/>
         <source>milliseconds, 5000 default</source>
         <translation>милисекунди, 5000 по подразбиране</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2006"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2009"/>
         <source>Please select the opacity percentage of inactive chat window (default: %1%)</source>
         <translation>Моля, изберете процента на непрозрачност на неактивен прозорец за чат (по подразбиране: %1%)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2041"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2044"/>
         <source>You must close and reopen the chat windows to see the changes applied.</source>
         <translation>Трябва да затворите и отворите отново чат прозорците, за да видите приложените промени.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2054"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2057"/>
         <source>Do you really want to apply the new theme?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2077"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2080"/>
         <source>Saving unsent messages may fail if &apos;Save users&apos; and &apos;Save groups&apos; options are not enabled. Do you want to enable them?</source>
         <translation>Запазването на неизпратени съобщения може да се провали, ако опциите „Запазване на потребители“ и „Запазване на групи“ не са активирани. Искате ли да ги активирате?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2103"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2106"/>
         <source>Please select the maximum number of lines to be saved in the chat (current: %1).</source>
         <translation>Моля, изберете максималния брой редове, които да бъдат запазени в чата (текущ: %1).</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2118"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2121"/>
         <source>Please select the number of days that items (such as images) can remain cached.</source>
         <translation>Моля, изберете броя дни, през които елементи (като изображения) могат да останат кеширани.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2119"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2229"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2122"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2232"/>
         <source>current: %1, never clear: -1, always clear: 0</source>
         <translation>текущ: %1, никога ясен: -1, винаги ясен: 0</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2142"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2145"/>
         <source>Please select the maximum number of files you can queue up for the transfer (current: %1).</source>
         <translation>Моля, изберете максималния брой файлове, които можете да поставите на опашката за прехвърляне (текущ: %1).</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2200"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2203"/>
         <source>Please select the maximum duration (in seconds) that a voice message can have (current: %1).</source>
         <translation>Моля, изберете максималната продължителност (в секунди), която може да има гласово съобщение (текуща: %1).</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2287"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2290"/>
         <source>Option enabled.</source>
         <translation>Опцията е активирана.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2289"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2292"/>
         <source>Option disabled.</source>
         <translation>Опцията е деактивирана.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2319"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2322"/>
         <source>Remove users after %1 days of inactivity</source>
         <translation>Премахнете потребителите след %1 дни бездействие</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2326"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2329"/>
         <source>Show inactive chat window with %1% opacity</source>
         <translation>Показване на неактивен прозорец за чат с %1% непрозрачност</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2331"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2334"/>
         <source>Save maximum %1 lines of chat</source>
         <translation>Запазете максимум %1 реда за чат</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2338"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2341"/>
         <source>Clean the cache from items older than %1 days</source>
         <translation>Почистете кеша от елементи, по-стари от %1 дни</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2345"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2348"/>
         <source>Delete partially downloaded files after %1 days</source>
         <translation>Изтрийте частично изтеглените файлове след %1 дни</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2351"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2354"/>
         <source>Add up to %1 files to the transfer queue</source>
         <translation>Добавете до %1 файла към опашката за прехвърляне</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2416"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2428"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2419"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2431"/>
         <source>to all</source>
         <translation>за всички</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2418"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2430"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2421"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2433"/>
         <source>to</source>
         <translation>за</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2420"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2432"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2423"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2435"/>
         <source>to you</source>
         <translation>за теб</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2426"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2429"/>
         <source>New message from</source>
         <translation>Ново съобщение от</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2436"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2439"/>
         <source>New message arrived</source>
         <translation>Пристигна ново съобщение</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2539"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2542"/>
         <source>%1 is writing...</source>
         <translation>%1 пише...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2552"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2555"/>
         <source>Do you want to disconnect from %1 network?</source>
         <translation>Искате ли да прекъснете връзката с мрежата %1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2594"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2597"/>
         <source>You are %1%2</source>
         <translation>Вие сте %1%2</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2606"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2609"/>
         <source>Please insert the new status description</source>
         <translation>Моля, въведете новото описание на състоянието</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2663"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2666"/>
         <source>%1 - Select a file</source>
         <translation>%1 - Изберете файл</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2663"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2666"/>
         <source>or more</source>
         <translation>или по</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2682"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2685"/>
         <source>File transfer is not enabled.</source>
         <translation>Прехвърлянето на файлове не е активирано.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2688"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2691"/>
         <source>You are not connected.</source>
         <translation>Не сте свързани.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2705"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2708"/>
         <source>There is no user connected.</source>
         <translation>Няма свързан потребител.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2711"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2714"/>
         <source>Please select the user to whom you would like to send a file.</source>
         <translation>Моля, изберете потребителя, на когото искате да изпратите файл.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2720"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2723"/>
         <source>User not found.</source>
         <translation>Потребителят не е намерен.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2742"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2867"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2745"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2870"/>
         <source>File transfer is disabled. You cannot download %1.</source>
         <translation>Прехвърлянето на файлове е деактивирано. Не можете да изтеглите %1.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2759"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2882"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2762"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2885"/>
         <source>Yes, and don&apos;t ask anymore</source>
         <translation>Да, и не питай повече</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2811"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2814"/>
         <source>You cannot download all these files at once. Do you want to download the first %1 files of the list?</source>
         <translation>Не можете да изтеглите всички тези файлове наведнъж. Искате ли да изтеглите първите %1 файлове от списъка?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2819"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2822"/>
         <source>Downloading %1 files is a hard duty. Maybe you have to wait a lot of minutes. Do yo want to continue?</source>
         <translation>Изтеглянето на %1 файлове е трудно. Може би трябва да чакате много минути. Искате ли да продължите?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2881"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2884"/>
         <source>Do you want to download folder %1 (%2 files) from %3?</source>
         <translation>Искате ли да изтеглите папка %1 (%2 файла) от %3?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2922"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2925"/>
         <source>%1 - Select the download folder</source>
         <translation>%1 - Изберете папката за изтегляне</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2930"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2933"/>
         <source>The files will be downloaded to the folder:</source>
         <translation>Файловете ще бъдат изтеглени в папката:</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3026"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3029"/>
         <source>Plugin Manager...</source>
         <translation>Мениджър на приставки...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3049"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3052"/>
         <source>Start the new application to copy file and folders by Marco Mastroddi</source>
         <translation>Стартирайте новото приложение, за да копирате файл и папки от Марко Мастроди</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3102"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3105"/>
         <source>Your name is not changed. Do you want to continue?</source>
         <translation>Вашето име не е променено. Искаш ли да продължиш?</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiMain.cpp" line="5326"/>
+        <source>Please select the new size of the emoticons in chat</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Unable to open voice message %1</source>
         <translation type="vanished">Гласовото съобщение не може да се отвори %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3273"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3276"/>
         <source>%1: no such file or directory.</source>
         <translation>%1: няма такъв файл или директория.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3283"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3286"/>
         <source>Do you want to open the file %1?</source>
         <translation>Искате ли да отворите файла %1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3329"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3332"/>
         <source>Sound module is not working</source>
         <translation>Звуковият модул не работи</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3379"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3382"/>
         <source>There is a chat with the same members: %1.</source>
         <translation>Има чат със същите членове: %1.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3484"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3487"/>
         <source>Do you want to delete saved chat with %1?</source>
         <translation>Искате ли да изтриете запазения чат с %1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3517"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3520"/>
         <source>The chat &apos;%1&apos; selected has already a saved text.&lt;br&gt;What do you want to do with the selected saved text?</source>
         <translation>Избраният чат &quot;%1&quot; вече има запазен текст. &lt;br&gt; Какво искате да направите с избрания запазен текст?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3625"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3628"/>
         <source>Your status description</source>
         <translation>Вашето описание на състоянието</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3674"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3677"/>
         <source>%1 updated</source>
         <translation>%1 актуализиран</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3868"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3871"/>
         <source>Show the time with the AM/PM notation</source>
         <translation>Показвайте часа с AM/PM нотация</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3885"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3888"/>
         <source>Show username&apos;s color</source>
         <translation>Показване на цвета на потребителското име</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3903"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3906"/>
         <source>Clear recent emoticons</source>
         <translation>Изчистете последните емотикони</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3906"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3909"/>
         <source>Clear favorite emoticons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3924"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3927"/>
         <source>none</source>
         <translation>нито един</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3989"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3992"/>
         <source>your IP address</source>
         <translation>вашия IP адрес</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3990"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3993"/>
         <source>to search for users</source>
         <translation>за търсене на потребители</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3993"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3996"/>
         <source>file transfer</source>
         <translation>прехвърляне на файл</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4000"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4003"/>
         <source>End-to-end encryption is disabled</source>
         <translation>Шифроването от край до край е деактивирано</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4005"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4008"/>
         <source>End-to-end encryption is enabled</source>
         <translation>Шифроването от край до край е активирано</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4011"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4014"/>
         <source>Data compression is disabled</source>
         <translation>Компресирането на данни е деактивирано</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4016"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4019"/>
         <source>Data compression is enabled</source>
         <translation>Компресирането на данни е активирано</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4484"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4545"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4487"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4548"/>
         <source>You have new message</source>
         <translation>Имате ново съобщение</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4577"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4580"/>
         <source>Save all</source>
         <translation>Запази всичко</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4577"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4580"/>
         <source>Save only geometry</source>
         <translation>Запазете само геометрията</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4593"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4596"/>
         <source>Window geometry saved</source>
         <translation>Геометрията на прозореца е запазена</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4635"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4638"/>
         <source>Do you really want to reset window&apos;s geometry?</source>
         <translation>Наистина ли искате да нулирате геометрията на прозорците?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4651"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4654"/>
         <source>Geometry of all windows has been reset</source>
         <translation>Геометрията на всички прозорци е нулирана</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4823"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4826"/>
         <source>The download folder does not exists or is not writable. Please select a new one.</source>
         <translation>Папката за изтегляне не съществува или не може да се записва. Моля, изберете нов.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4884"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4887"/>
         <source>You are using the default icons.</source>
         <translation>Използвате иконите по подразбиране.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4890"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4893"/>
         <source>You are using custom icons in folder %1.</source>
         <translation>Използвате персонализирани икони в папка %1.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4891"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4894"/>
         <source>Restore default icons</source>
         <translation>Възстановете иконите по подразбиране</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4955"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4958"/>
         <source>Restart connection now</source>
         <translation>Рестартирайте връзката сега</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4955"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4958"/>
         <source>Restart later manually</source>
         <translation>Рестартирайте по-късно ръчно</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4979"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4982"/>
         <source>You are not allowed create new message.</source>
         <translation>Нямате право да създавате ново съобщение.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="5031"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="5034"/>
         <source>Do you really want to restore the colors to the default ones?</source>
         <translation>Наистина ли искате да възстановите цветовете до тези по подразбиране?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="5171"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="5174"/>
         <source>Do you really want to share your desktop with %1?</source>
         <translation>Наистина ли искате да споделите вашия работен плот с %1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4885"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4891"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4900"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4888"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4894"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4903"/>
         <source>Select the icon folder</source>
         <translation>Изберете папката с икони</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4921"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4924"/>
         <source>You are using the default emoticons.</source>
         <translation>Използвате емотиконите по подразбиране.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4922"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4928"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4937"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4925"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4931"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4940"/>
         <source>Select the emoticon folder</source>
         <translation>Изберете папката с емотикони</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4927"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4930"/>
         <source>You are using custom emoticons in folder %1.</source>
         <translation>Използвате персонализирани емотикони в папка %1.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4928"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4931"/>
         <source>Restore default emoticons</source>
         <translation>Възстановете емотиконите по подразбиране</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4954"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4957"/>
         <source>You have to restart your connection to apply changes.</source>
         <translation>Трябва да рестартирате връзката си, за да приложите промени.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="812"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3381"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3384"/>
         <source>Create new group chat</source>
         <translation>Създайте нов групов чат</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3448"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3451"/>
         <source>Starting</source>
         <translation>Стартиране</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3666"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3689"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3669"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3692"/>
         <source>%1 removed</source>
         <translation>%1 премахнати</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3876"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3879"/>
         <source>Show your name instead of &apos;You&apos;</source>
         <translation>Показвайте името си вместо „Вие“</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3890"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3893"/>
         <source>Show emoticons</source>
         <translation>Покажете емотикони</translation>
     </message>
@@ -3971,42 +3981,42 @@ Please select a different name.</source>
         <translation>Използвайте емотикони за шрифтове</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4224"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4227"/>
         <source>at lunch</source>
         <translation>на обяд</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4233"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4236"/>
         <source>in a meeting</source>
         <translation>в заседание</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4417"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4420"/>
         <source>Select your dictionary path</source>
         <translation>Изберете вашия път за речник</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4425"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4428"/>
         <source>Dictionary selected: %1</source>
         <translation>Избран речник: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4427"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4430"/>
         <source>Unable to set dictionary: %1</source>
         <translation>Не може да се зададе речник: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4595"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4598"/>
         <source>Window geometry and state saved</source>
         <translation>Геометрията и състоянието на прозореца са запазени</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4872"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4875"/>
         <source>%1 blocked chats</source>
         <translation>%1 блокирани чатове</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1480"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1483"/>
         <source>Add +1 user to anonymous usage statistics</source>
         <translation>Добавете +1 потребител към анонимни статистически данни за използването</translation>
     </message>
@@ -4016,14 +4026,14 @@ Please select a different name.</source>
         <translation>Мрежа</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3028"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3031"/>
         <source>is a plugin developed by</source>
         <translation>е приставка, разработена от</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1591"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3290"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3541"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1594"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3293"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3544"/>
         <source>Unable to open %1</source>
         <translation>Не може да се отвори %1</translation>
     </message>
@@ -4043,132 +4053,132 @@ Please select a different name.</source>
         <translation>При затваряне</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1591"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="1714"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2041"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2301"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2934"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3223"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3273"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3290"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3358"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3402"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3541"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4823"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4963"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4980"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1594"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1717"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2044"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2304"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2937"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3226"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3276"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3293"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3361"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3405"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3544"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4826"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4966"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4983"/>
         <source>Ok</source>
         <translation>Добре</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3303"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3306"/>
         <source>Sound files (*.wav)</source>
         <translation>Звукови файлове (* .wav)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3315"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3318"/>
         <source>Sound is not enabled on a new message. Do you want to enable it?</source>
         <translation>Звукът не е активиран за ново съобщение. Искате ли да го активирате?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3334"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3337"/>
         <source>Sound file not found</source>
         <translation>Звуковият файл не е намерен</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3325"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3328"/>
         <source>The default BEEP will be used</source>
         <translation>Ще се използва звуковият сигнал по подразбиране</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3427"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3430"/>
         <source>Now %1 will start on windows boot.</source>
         <translation>Сега %1 ще стартира при зареждане на Windows.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3435"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3442"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3438"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3445"/>
         <source>Unable to add this key in the registry: permission denied.</source>
         <translation>Не може да се добави този ключ в системния регистър: разрешението е отказано.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3440"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3443"/>
         <source>%1 will not start on windows boot.</source>
         <translation>%1 няма да стартира при зареждане на Windows.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3508"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3511"/>
         <source>Please select a chat you would like to link the saved text.</source>
         <translation>Моля, изберете чат, който искате да свържете със запазения текст.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1187"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3519"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1190"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3522"/>
         <source>Overwrite</source>
         <translation>Презапис</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3519"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3522"/>
         <source>Add in the head</source>
         <translation>Добавете в заглавието</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3707"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3710"/>
         <source>All the members of this chat are not online. The changes may not be permanent. Do you wish to continue?</source>
         <translation>Всички членове на този чат не са онлайн. Промените може да не са постоянни. Искате ли да продължите?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3788"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3791"/>
         <source>Do you want to leave the chat with %1?</source>
         <translation>Искате ли да напуснете чата с %1?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3794"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3797"/>
         <source>Unable to leave the chat with %1.</source>
         <translation>Не може да напусне чата с %1.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3922"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3925"/>
         <source>inactive</source>
         <translation>неактивен</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3954"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="5219"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3957"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="5222"/>
         <source>disabled</source>
         <translation>деактивиран</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3964"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3967"/>
         <source>active</source>
         <translation>активен</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4068"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4071"/>
         <source>%1 is online</source>
         <translation>%1 е онлайн</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4070"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4073"/>
         <source>%1 is offline</source>
         <translation>%1 е офлайн</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="4082"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4085"/>
         <source>Please select the new size of the user picture</source>
         <translation>Моля, изберете новия размер на потребителската снимка</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1714"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2301"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="2856"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3381"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3519"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4577"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4885"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4891"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4922"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4928"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1717"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2304"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2859"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3384"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3522"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4580"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4888"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4894"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4925"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4931"/>
         <source>Cancel</source>
         <translation>Отказ</translation>
     </message>
@@ -4178,110 +4188,110 @@ Please select a different name.</source>
         <translation>Напишете съобщение</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1261"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1264"/>
         <source>Enable notifications also for chat with all users</source>
         <translation>Активирайте известията и за чат с всички потребители</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1232"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1235"/>
         <source>Select download folder</source>
         <translation>Изберете папка за изтегляне</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1244"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1247"/>
         <source>Use the integrated voice message player</source>
         <translation>Използвайте вградения плейър за гласови съобщения</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1265"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1268"/>
         <source>Enable BEEP alert also for active chat windows</source>
         <translation>Активирайте сигнала BEEP и за активни прозорци за чат</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1577"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1580"/>
         <source>Show the file transfer panel</source>
         <translation>Покажете панела за прехвърляне на файлове</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1698"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1701"/>
         <source>Please save the network password in the next dialog if you want to use password without prompt.</source>
         <translation>Моля, запазете мрежовата парола в следващия диалогов прозорец, ако искате да използвате парола без подкана.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1775"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1778"/>
         <source>(current: %1, default: %2, all: -1, none: 0)</source>
         <translation>(текущ: %1, по подразбиране: %2, всички: -1, няма: 0)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1953"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1956"/>
         <source>jpg for photo, png for presentation</source>
         <translation>jpg за снимка, png за презентация</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="1964"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="1967"/>
         <source>-1 default, 10 low, 60 medium, 100 high</source>
         <translation>-1 по подразбиране, 10 ниски, 60 средни, 100 високи</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2758"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2761"/>
         <source>Do you want to download %1 (%2) from %3?</source>
         <translation>Искате ли да изтеглите %1 (%2) от %3?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2850"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2853"/>
         <source>File is not available for download.</source>
         <translation>Файлът не е наличен за изтегляне.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2852"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2855"/>
         <source>%1 is not connected.</source>
         <translation>%1 не е свързан.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2853"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2856"/>
         <source>Please reload the list of shared files.</source>
         <translation>Моля, презаредете списъка със споделени файлове.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2856"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2859"/>
         <source>Reload file list</source>
         <translation>Презаредете списъка с файлове</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3357"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3360"/>
         <source>You are not allowed create groups.</source>
         <translation>Не ви е позволено да създавате групи.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3401"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3404"/>
         <source>You are not allowed modify groups.</source>
         <translation>Нямате право да променяте групи.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3722"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3725"/>
         <source>Chat with %1 is empty.</source>
         <translation>Чатът с %1 е празен.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3729"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3787"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3732"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3790"/>
         <source>Yes and delete history</source>
         <translation>Да и изтриване на историята</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3821"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3824"/>
         <source>Default language is restored.</source>
         <translation>Езикът по подразбиране е възстановен.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="3823"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3826"/>
         <source>New language &apos;%1&apos; is selected.</source>
         <translation>Избран е нов език „%1“.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiMain.cpp" line="2983"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3826"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="4963"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="2986"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3829"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="4966"/>
         <source>You must restart %1 to apply these changes.</source>
         <translation>Трябва да рестартирате %1, за да приложите тези промени.</translation>
     </message>
@@ -6386,7 +6396,7 @@ Please select a different name.</source>
     <name>QObject</name>
     <message>
         <location filename="../src/desktop/GuiChatItem.cpp" line="78"/>
-        <location filename="../src/desktop/GuiMain.cpp" line="3719"/>
+        <location filename="../src/desktop/GuiMain.cpp" line="3722"/>
         <source>All users</source>
         <translation>Всички потребители</translation>
     </message>
@@ -6689,7 +6699,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2497"/>
+        <location filename="../src/core/Settings.cpp" line="2498"/>
         <source>Autoresponder</source>
         <translation>Автоматичен отговор</translation>
     </message>

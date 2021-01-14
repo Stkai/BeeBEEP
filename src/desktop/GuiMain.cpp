@@ -1146,6 +1146,9 @@ void GuiMain::createMenus()
   act->setData( 90 );
   mp_actSelectEmoticonSourcePath = mp_menuChatSettings->addAction( IconManager::instance().icon( "emoticon.png" ), tr( "Select emoticon theme" ) + QString( "..." ), this, SLOT( selectEmoticonSourcePath() ) );
   mp_actSelectEmoticonSourcePath->setEnabled( !Settings::instance().useFontEmoticons() );
+  act = mp_menuChatSettings->addAction( IconManager::instance().icon( "icon-size.png" ), tr( "Change size of the emoticons" ) + QString( "..." ), this, SLOT( changeEmoticonSizeInChat() ) );
+  act->setEnabled( !Settings::instance().useFontEmoticons() );
+  mp_menuChatSettings->addSeparator();
   mp_menuChatSettings->addAction( IconManager::instance().icon( "dictionary.png" ), tr( "Dictionary" ) + QString( "..." ), this, SLOT( selectDictionatyPath() ) );
   mp_menuChatSettings->addSeparator();
   mp_menuChatSettings->addAction( IconManager::instance().icon( "refused-chat.png" ), tr( "Blocked chats" ) + QString( "..." ), this, SLOT( showRefusedChats() ) );
@@ -1236,7 +1239,7 @@ void GuiMain::createMenus()
   mp_menuVoiceMessage->setIcon( IconManager::instance().icon( "microphone.png" ) );
   mp_menuVoiceMessage->setDisabled( Settings::instance().disableVoiceMessages() );
   mp_menuSettings->addMenu( mp_menuVoiceMessage );
-  act = mp_menuVoiceMessage->addAction( IconManager::instance().icon( "audio-settings.png" ), tr( "Voice encoder" ) + QString( "..." ), this, SLOT( showVoiceEncoderSettings() ) );
+  mp_menuVoiceMessage->addAction( IconManager::instance().icon( "audio-settings.png" ), tr( "Voice encoder" ) + QString( "..." ), this, SLOT( showVoiceEncoderSettings() ) );
   mp_menuVoiceMessage->addSeparator();
   act = mp_menuVoiceMessage->addAction( IconManager::instance().icon( "timer.png" ), tr( "Maximum duration" ) + QString( "..." ), this, SLOT( settingsChanged() ) );
   act->setData( 94 );
@@ -1746,7 +1749,7 @@ void GuiMain::settingsChanged( QAction* act )
     break;
   case 23:
     {
-      Settings::instance().setChatFont( QApplication::font() );
+      Settings::instance().setChatFont( QApplication::font(), false );
       updateChatFont();
     }
     break;
@@ -5315,4 +5318,15 @@ void GuiMain::showVoiceEncoderSettings()
 void GuiMain::resumeFileTransfer( VNumber user_id, const FileInfo& file_info )
 {
   beeCore->resumeFileTransfer( user_id, file_info );
+}
+
+void GuiMain::changeEmoticonSizeInChat()
+{
+  bool ok = false;
+  int emoticon_size = QInputDialog::getInt( this, Settings::instance().programName(), tr( "Please select the new size of the emoticons in chat" ),
+                                          Settings::instance().emoticonSizeInChat(), 16, 248, 4, &ok );
+  if( !ok )
+    return;
+
+  Settings::instance().setEmoticonSizeInChat( emoticon_size );
 }

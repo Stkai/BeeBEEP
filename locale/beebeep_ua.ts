@@ -3518,6 +3518,14 @@ Please select a different name.</source>
         <source>Clear favorite emoticons</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Change size of the emoticons</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select the new size of the emoticons in chat</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

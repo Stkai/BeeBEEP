@@ -3761,6 +3761,14 @@ Inserisci un nome differente.</translation>
         <source>Clear favorite emoticons</source>
         <translation>Cancella le faccine preferite</translation>
     </message>
+    <message>
+        <source>Change size of the emoticons</source>
+        <translation>Cambia la dimensione delle faccine</translation>
+    </message>
+    <message>
+        <source>Please select the new size of the emoticons in chat</source>
+        <translation>Inserisci la nuova dimensione delle faccine mostrate nella conversazione</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
