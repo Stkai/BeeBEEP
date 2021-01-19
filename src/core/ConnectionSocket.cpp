@@ -498,7 +498,7 @@ void ConnectionSocket::checkHelloMessage( const QByteArray& array_data )
 
   bool use_compression = m.hasFlag( Message::Compressed ) && !Settings::instance().disableConnectionSocketDataCompression();
 
-  if( !m_isHelloSent )
+  if( !isHelloSent() )
     sendAnswerHello( use_encryption, use_compression );
 
   // After sending HELLO to ensure low protocol version compatibility

@@ -81,6 +81,7 @@ protected slots:
   void onBytesWritten( qint64 );
 
 protected:
+  inline bool isHelloSent() const;
   void sendAnswerHello( bool encryption_enabled, bool compression_enabled );
   void checkHelloMessage( const QByteArray& );
   QByteArray serializeData( const QByteArray& );
@@ -139,5 +140,6 @@ inline bool ConnectionSocket::isServerSocket() const { return m_serverPort > 0; 
 inline bool ConnectionSocket::isKeysHandshakeCompleted() const { return !m_cipherKey.isEmpty(); }
 inline bool ConnectionSocket::isEncrypted() const { return m_isEncrypted; }
 inline bool ConnectionSocket::isCompressed() const { return m_isCompressed; }
+inline bool ConnectionSocket::isHelloSent() const { return m_isHelloSent; }
 
 #endif // BEEBEEP_CONNECTIONSOCKET_H
