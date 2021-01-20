@@ -50,6 +50,6 @@ protected slots:
 };
 
 // Inline Functions
-inline bool Connection::isReadyForUse() const { return userId() != ID_INVALID; }
+inline bool Connection::isReadyForUse() const { return isHelloSent() && userId() != ID_INVALID; }
 
 #endif // BEEBEEP_CONNECTION_H
