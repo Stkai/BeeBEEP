@@ -56,7 +56,7 @@
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="294"/>
         <source>Voice message</source>
-        <translation type="unfinished">Голосовое сообщение</translation>
+        <translation>Голосовое сообщение</translation>
     </message>
 </context>
 <context>
@@ -119,7 +119,7 @@
     <message>
         <location filename="../src/core/Core.cpp" line="281"/>
         <source>%1 %2 accepts incoming connections only from the IP addresses present in the HOSTS file.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 принимать входящие соединения только от IP адресов из файла HOSTS.</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="290"/>
@@ -316,26 +316,26 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="489"/>
         <source>The voice message will be delivered to %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Голосовое сообщение будет доставлено для %1.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="659"/>
         <source>Unsent messages had an incorrect authorization code and will not be sent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неотправленные сообщения имеют неверный код авторизации и не будут отправлены.</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/core/CoreChat.cpp" line="666"/>
         <source>%n unsent message(s) will be sent as soon as possible.</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n неотправленное сообщение будет отправлено как можно скорее.</numerusform>
+            <numerusform>%n неотправленных сообщения будут отправлены как можно скорее.</numerusform>
+            <numerusform>%n неотправленных сообщений будут отправлены как можно скорее.</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="830"/>
         <source>Offline messages sent to %1.</source>
-        <translation type="unfinished">Офлайн сообщения отправлены %1.</translation>
+        <translation>Офлайн сообщения отправлены для %1.</translation>
     </message>
     <message>
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
@@ -349,22 +349,22 @@
     <message>
         <location filename="../src/core/Core.cpp" line="264"/>
         <source>but encrypted connections allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>но шифрованные соединения разрешены</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="272"/>
         <source>End-to-end encryption is enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Сквозное шифрование включено</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="272"/>
         <source>but not encrypted connections allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>но нешифрованные соединения разрешены</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="262"/>
         <source>End-to-end encryption is disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Сквозное шифрование отключено</translation>
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="491"/>
@@ -379,7 +379,7 @@
     <message>
         <location filename="../src/core/CoreChat.cpp" line="647"/>
         <source>%1 saved chats are added to history</source>
-        <translation>%1 сохранённых чатоd добавлены к истории</translation>
+        <translation>%1 сохранённых чатов добавлены к истории</translation>
     </message>
     <message>
         <source>%1 offline messages will be sent as soon as possible.</source>
@@ -447,12 +447,12 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="174"/>
         <source>%1 sent a voice message.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 отправил голосовое сообщение.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="179"/>
         <source>Listen</source>
-        <translation type="unfinished"></translation>
+        <translation>Прослушать</translation>
     </message>
     <message>
         <source>Open</source>
@@ -472,7 +472,7 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="115"/>
         <source>%1 Unable to download %2 from %3: file extension &apos;%4&apos; is not allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Не удается загрузить %2 из %3: расширение файла &apos;%4&apos; не разрешено.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="146"/>
@@ -487,7 +487,7 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="189"/>
         <source>%1 sent %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 отправил %2.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="192"/>
@@ -518,28 +518,28 @@
         <location filename="../src/core/CoreFileTransfer.cpp" line="182"/>
         <location filename="../src/core/CoreVoiceChat.cpp" line="66"/>
         <source>voice message</source>
-        <translation type="unfinished"></translation>
+        <translation>голосовое сообщение</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="192"/>
         <location filename="../src/core/CoreFileTransfer.cpp" line="422"/>
         <source>Open %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть %1.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="371"/>
         <source>%1 Unable to send %2 to %3: file extension &apos;%4&apos; is not allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Не удается отправить %2 к %3: расширение файла &apos;%4&apos; не разрешено.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="378"/>
         <source>%1 Unable to send %2 to %3: file not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Не удается отправить %2 к %3: файл не найден.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="385"/>
         <source>%1 Unable to send %2 to %3: file is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Не удается отправить %2 к %3: файл пустой.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="464"/>
@@ -604,7 +604,7 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="782"/>
         <source>the folder is empty or contains only files that are not allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>папка пустая или содержит только файлы, которые не разрешены.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="789"/>
@@ -624,12 +624,12 @@
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="817"/>
         <source>%1 Sending folder %2 to %3.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Отправляет папку %2 к %3.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreFileTransfer.cpp" line="419"/>
         <source>%1 Sending %2 to %3.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Отправляет %2 к %3.</translation>
     </message>
     <message>
         <source>%1 You send folder %2 to %3.</source>
@@ -646,12 +646,12 @@
     <message>
         <location filename="../src/core/CoreParser.cpp" line="163"/>
         <source>%1 %2 has refused to download the file: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 отказался загружать файл: %3</translation>
     </message>
     <message>
         <location filename="../src/core/CoreParser.cpp" line="192"/>
         <source>%1 %2 is sending to you the voice message: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 отправляет вам голосовое сообщение: %3</translation>
     </message>
     <message>
         <location filename="../src/core/CoreParser.cpp" line="194"/>
@@ -767,12 +767,12 @@
     <message>
         <location filename="../src/core/CoreConnection.cpp" line="429"/>
         <source>%1 has end-to-end encryption enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 сквозное шифрование включено</translation>
     </message>
     <message>
         <location filename="../src/core/CoreConnection.cpp" line="439"/>
         <source>%1 has end-to-end encryption disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 сквозное шифрование отключено</translation>
     </message>
     <message>
         <location filename="../src/core/CoreShareDesktop.cpp" line="52"/>
@@ -802,12 +802,12 @@
     <message>
         <location filename="../src/core/CoreVoiceChat.cpp" line="38"/>
         <source>%1 Unable to send voice message. File transfer is disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Не удается отправить голосовое сообщение. Передача файлов отключена.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreVoiceChat.cpp" line="53"/>
         <source>%1 %2: voice message not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2: голосовое сообщение не найдено.</translation>
     </message>
 </context>
 <context>
@@ -820,19 +820,19 @@
         <location filename="../src/desktop/GuiChatMessage.cpp" line="51"/>
         <source>yyyy-MM-dd</source>
         <extracomment>Date format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>dd-MM-yyyy</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="61"/>
         <source>h:mm:ss ap</source>
         <extracomment>Time format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>h:mm:ss ap</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChatMessage.cpp" line="66"/>
         <source>hh:mm:ss</source>
         <extracomment>Time format: do not change letters. More info in https://doc.qt.io/qt-5/qdatetime.html#toString</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>hh:mm:ss</translation>
     </message>
 </context>
 <context>
@@ -908,12 +908,12 @@
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="96"/>
         <source>Transfer queued</source>
-        <translation type="unfinished"></translation>
+        <translation>Передача в очереди</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="194"/>
         <source>the file already exists</source>
-        <translation type="unfinished"></translation>
+        <translation>файл уже существует</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="196"/>
@@ -923,32 +923,32 @@
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="194"/>
         <source>Transfer skipped</source>
-        <translation type="unfinished"></translation>
+        <translation>Передача пропущена</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="211"/>
         <source>Transfer canceled</source>
-        <translation type="unfinished"></translation>
+        <translation>Передача отменена</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="239"/>
         <source>Transfer is about to pause</source>
-        <translation type="unfinished"></translation>
+        <translation>Передача будет приостановлена</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="241"/>
         <source>Please wait</source>
-        <translation type="unfinished">Подождите</translation>
+        <translation>Пожалуйста подождите</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="258"/>
         <source>Transfer paused after %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Передача приостановлена после %1</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="269"/>
         <source>Starting transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Запуск передачи</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="356"/>
@@ -963,7 +963,7 @@
     <message>
         <location filename="../src/core/FileTransferUpload.cpp" line="122"/>
         <source>file no longer exists</source>
-        <translation type="unfinished"></translation>
+        <translation>файл больше не существует</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferUpload.cpp" line="130"/>
@@ -973,17 +973,17 @@
     <message>
         <location filename="../src/core/FileTransferUpload.cpp" line="142"/>
         <source>remote host sent invalid data</source>
-        <translation type="unfinished"></translation>
+        <translation>удаленный хост отправил неверные данные</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferUpload.cpp" line="160"/>
         <source>%1 bytes uploaded but the remote file size is %2 bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 байт отправлено, но размер удаленного файла %2 байт</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferUpload.cpp" line="162"/>
         <source>%1 bytes uploaded but the file size is only %2 bytes</source>
-        <translation>%1 байтов отправлено, но размер файла всего %2 байтов</translation>
+        <translation>%1 байт отправлено, но размер файла всего %2 байт</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferUpload.cpp" line="171"/>
@@ -993,7 +993,7 @@
     <message>
         <location filename="../src/core/FileTransferUpload.cpp" line="195"/>
         <source>Unable to seek %1 bytes in file %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно найти %1 байт в файле %2</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferUpload.cpp" line="211"/>
@@ -1302,12 +1302,12 @@
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="342"/>
         <source>Record voice message</source>
-        <translation type="unfinished"></translation>
+        <translation>Записать голосовое сообщение</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="340"/>
         <source>File transfer must be enabled to send voice messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Передача файлов должна быть включена для отправки голосовых сообщений</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="272"/>
@@ -1378,12 +1378,13 @@
         <location filename="../src/desktop/GuiChat.cpp" line="103"/>
         <source>Voice messages are not available with this version of BeeBEEP.
 Download for free and install the version with this feature from the %1 website.</source>
-        <translation type="unfinished"></translation>
+        <translation>Голосовые сообщения недоступны с этой версией BeeBEEP.
+Загрузите бесплатно и установите версию с этой возможностью с сайта %1.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="492"/>
         <source>Opening voice message</source>
-        <translation type="unfinished"></translation>
+        <translation>Открытие голосового сообщения</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="604"/>
@@ -1403,7 +1404,7 @@ Download for free and install the version with this feature from the %1 website.
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="941"/>
         <source>You are trying to send %1 files simultaneously but the maximum allowed is %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы пытаетесь отправить %1 файлов одновременно, но максимально разрешено %2.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="950"/>
@@ -1786,7 +1787,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="45"/>
         <source>If you don&apos;t want to show the year to other users use 1900. To remove your birthday use 01/01/1900</source>
-        <translation type="unfinished"></translation>
+        <translation>Если вы не хотите показывать год другим пользователям, используйте 1900. Для удаления вашей даты рождения используйте 01/01/1900</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.cpp" line="100"/>
@@ -1855,12 +1856,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiEmoticons.cpp" line="50"/>
         <source>Favorite emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>Любимые смайлики</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEmoticons.cpp" line="52"/>
         <source>Recent emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>Последние смайлики</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEmoticons.cpp" line="54"/>
@@ -1944,7 +1945,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="352"/>
         <source>Allowed file extensions</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешенные расширения файлов</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="173"/>
@@ -1954,7 +1955,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="163"/>
         <source>Only certain types of files are allowed for file transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Только определенные типы файлов разрешены для передачи</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="186"/>
@@ -1974,23 +1975,23 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
         <source>File transfer has no rules on file extensions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Передача файлов не имеет правил для расширений файлов.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
         <source>All types of files can be sent and received.</source>
-        <translation type="unfinished"></translation>
+        <translation>Все типы файлов могут быть отправлены и получены.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="356"/>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ок</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="356"/>
         <source>Only files with this type of extension can be transferred:</source>
-        <translation type="unfinished"></translation>
+        <translation>Только файлы с этим типом расширения могут быть переданы:</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="260"/>
@@ -2025,22 +2026,22 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="38"/>
         <source>Time left</source>
-        <translation type="unfinished">Осталось времени</translation>
+        <translation>Осталось времени</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="38"/>
         <source>File</source>
-        <translation type="unfinished">Файл</translation>
+        <translation>Файл</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="38"/>
         <source>User</source>
-        <translation type="unfinished">Пользователь</translation>
+        <translation>Пользователь</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="38"/>
         <source>Status</source>
-        <translation type="unfinished">Статус</translation>
+        <translation>Статус</translation>
     </message>
     <message>
         <source>Remove all completed transfers</source>
@@ -2049,12 +2050,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="162"/>
         <source>Do you want to cancel the transfer of %1?</source>
-        <translation type="unfinished">Вы хотите отменить передачу %1?</translation>
+        <translation>Вы хотите отменить передачу %1?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="163"/>
         <source>Yes and delete the partially downloaded file</source>
-        <translation type="unfinished"></translation>
+        <translation>Да и удалить частично загруженный файл</translation>
     </message>
     <message>
         <source>Pause</source>
@@ -2064,78 +2065,78 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="164"/>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="315"/>
         <source>Yes</source>
-        <translation type="unfinished">Да</translation>
+        <translation>Да</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="164"/>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="315"/>
         <source>No</source>
-        <translation type="unfinished">Нет</translation>
+        <translation>Нет</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="314"/>
         <source>Do you want to try resuming the transfer of %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы хотите попытаться приостановить передачу %1?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="208"/>
         <source>You cannot open this file if the transfer has not been completed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы не можете открыть этот файл, если передача не завершена.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="208"/>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ок</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="245"/>
         <source>Pause transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Приостановить передачу</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="248"/>
         <source>Cancel transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Отменить передачу</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="256"/>
         <source>Resume transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Возобновить передачу</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="258"/>
         <source>Try to resume transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Попытаться возобновить передачу</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="261"/>
         <source>Remove transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить передачу</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="265"/>
         <source>Hide all transfers stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>Скрыть все остановленные передачи</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="268"/>
         <source>Please select a file transfer to open the menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста выберените передачу файла для открытия меню</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="271"/>
         <source>No file transfer in progress</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет передачи файла в процессе</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="319"/>
         <source>Resuming transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Возобновление передачи</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransfer.cpp" line="319"/>
         <source>Please wait</source>
-        <translation type="unfinished">Подождите</translation>
+        <translation>Пожалуйста подождите</translation>
     </message>
 </context>
 <context>
@@ -2147,7 +2148,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="52"/>
         <source>Edit group chat</source>
-        <translation type="unfinished">Изменить групповой чат</translation>
+        <translation>Изменить групповой чат</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="55"/>
@@ -2187,7 +2188,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFloatingChat.cpp" line="153"/>
         <source>All users</source>
-        <translation type="unfinished">Все пользователи</translation>
+        <translation>Все пользователи</translation>
     </message>
     <message>
         <source>Chat with all users</source>
@@ -2968,7 +2969,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2231"/>
         <source>Please select the number of days that partially downloaded files can remain cached.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста выберите количество дней, которое частично загруженные файлы будут оставаться кэшированы.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2838"/>
@@ -2983,12 +2984,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3360"/>
         <source>You are not allowed create groups.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вам не разрешено создавать группы.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3404"/>
         <source>You are not allowed modify groups.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вам не разрешено изменять группы.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3729"/>
@@ -3008,7 +3009,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3995"/>
         <source>chat messages</source>
-        <translation type="unfinished"></translation>
+        <translation>сообщения чата</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4110"/>
@@ -3457,7 +3458,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1028"/>
         <source>Show the name and surname of the users</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать имя и фамилию пользователей</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1048"/>
@@ -3482,12 +3483,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1238"/>
         <source>Voice message</source>
-        <translation type="unfinished">Голосовое сообщение</translation>
+        <translation>Голосовое сообщение</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1244"/>
         <source>Maximum duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Максимальная продолжительность</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1174"/>
@@ -3497,57 +3498,57 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="887"/>
         <source>Reset minimum width for applied style</source>
-        <translation type="unfinished"></translation>
+        <translation>Сбросить минимальную ширину для примененного стиля</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1032"/>
         <source>Show surname before firstname of the users</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать фамилии перед именами пользователей</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1084"/>
         <source>Use high resolution emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать смайлики высокого разрешения</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1149"/>
         <source>Change size of the emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить размер смайоиков</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1181"/>
         <source>Generate new file name</source>
-        <translation type="unfinished"></translation>
+        <translation>Генерировать новое имя файла</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1186"/>
         <source>Skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Пропустить</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1194"/>
         <source>Overwrite older</source>
-        <translation type="unfinished"></translation>
+        <translation>Перезаписать старый</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1208"/>
         <source>Keep the original modification date of the transferred file</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить оригинальную дату изменения переданного файла</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1212"/>
         <source>Resume file transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Возобновить передачу файла</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1212"/>
         <source>when possible</source>
-        <translation type="unfinished"></translation>
+        <translation>когда возможно</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1242"/>
         <source>Voice encoder</source>
-        <translation type="unfinished"></translation>
+        <translation>Голосовой кодек</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1253"/>
@@ -3557,7 +3558,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1272"/>
         <source>Disable BEEP alert if your status is busy</source>
-        <translation type="unfinished"></translation>
+        <translation>Отключить оповещение BEEP, если ваш статус &quot;занят&quot;</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1381"/>
@@ -3623,7 +3624,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2057"/>
         <source>Do you really want to apply the new theme?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы хотите применить новую тему?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2080"/>
@@ -3638,13 +3639,13 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2121"/>
         <source>Please select the number of days that items (such as images) can remain cached.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста выберите количество дней, которое элементы (такие как изображения), будут оставаться кэшированы.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2122"/>
         <location filename="../src/desktop/GuiMain.cpp" line="2232"/>
         <source>current: %1, never clear: -1, always clear: 0</source>
-        <translation type="unfinished"></translation>
+        <translation>сейчас: %1, никогда не очищать: -1, всегда очищать: 0</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2145"/>
@@ -3654,7 +3655,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2203"/>
         <source>Please select the maximum duration (in seconds) that a voice message can have (current: %1).</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста выберите максимальную продолжительность (в секундах), которую может иметь голосовое сообщение (сейчас: %1).</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2290"/>
@@ -3689,7 +3690,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2348"/>
         <source>Delete partially downloaded files after %1 days</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалять частично загруженные файлы после %1 дней</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2354"/>
@@ -3794,7 +3795,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="5326"/>
         <source>Please select the new size of the emoticons in chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста выберите новый размер смайликов в чате</translation>
     </message>
     <message>
         <source>%1 already exists. Please select a new filename.</source>
@@ -3843,7 +3844,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3276"/>
         <source>%1: no such file or directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: нет такого файла или каталога.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3286"/>
@@ -3886,7 +3887,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3677"/>
         <source>%1 updated</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 обновлен</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3871"/>
@@ -3901,12 +3902,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3906"/>
         <source>Clear recent emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистить последние смайлики</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3909"/>
         <source>Clear favorite emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистить любимые смайлики</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3927"/>
@@ -3916,37 +3917,37 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3992"/>
         <source>your IP address</source>
-        <translation type="unfinished"></translation>
+        <translation>ваш IP адрес</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3993"/>
         <source>to search for users</source>
-        <translation type="unfinished"></translation>
+        <translation>для поиска пользователей</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3996"/>
         <source>file transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>передача файла</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4003"/>
         <source>End-to-end encryption is disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Сквозное шифрование отключено</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4008"/>
         <source>End-to-end encryption is enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Сквозное шифрование включено</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4014"/>
         <source>Data compression is disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Сжатие данных отключено</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4019"/>
         <source>Data compression is enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Сжатие данных включено</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4487"/>
@@ -3982,7 +3983,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4826"/>
         <source>The download folder does not exists or is not writable. Please select a new one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Папка загрузки не существует или закрыта для записи. Пожалуйста выберите новую.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4887"/>
@@ -4012,7 +4013,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4982"/>
         <source>You are not allowed create new message.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вам не разрешено создавать ноове сообщение.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="5034"/>
@@ -4310,12 +4311,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1247"/>
         <source>Use the integrated voice message player</source>
-        <translation type="unfinished"></translation>
+        <translation>Используйте встроенный проигрыватель голосового сообщения</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1268"/>
         <source>Enable BEEP alert also for active chat windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Включить оповещение BEEP также для активного окна чата</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1580"/>
@@ -4453,7 +4454,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="63"/>
         <source>Disabled</source>
-        <translation type="unfinished">Отключено</translation>
+        <translation>Отключено</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.cpp" line="69"/>
@@ -4629,7 +4630,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="367"/>
         <source>Always broadcast to local subnet address</source>
-        <translation type="unfinished"></translation>
+        <translation>Всегда передавать адресам локальной подсети</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiNetwork.ui" line="388"/>
@@ -4856,93 +4857,93 @@ Please select a different name.</source>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="193"/>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="343"/>
         <source>Recording</source>
-        <translation type="unfinished"></translation>
+        <translation>Запись</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="197"/>
         <source>Paused</source>
-        <translation type="unfinished"></translation>
+        <translation>Приостановлен</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="201"/>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Готов</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="47"/>
         <source>Click to start recording your message</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите для запуска записи вашего сообщения</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="152"/>
         <source>Stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>Остановлен</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="152"/>
         <source>Reached the maximum duration of the voice message.</source>
-        <translation type="unfinished"></translation>
+        <translation>Достигнута максимальная продолжительность голосового сообщения.</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="229"/>
         <source>Pause</source>
-        <translation type="unfinished">Пауза</translation>
+        <translation>Пауза</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="234"/>
         <source>Resume</source>
-        <translation type="unfinished"></translation>
+        <translation>Возобновить</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="238"/>
         <source>Record</source>
-        <translation type="unfinished">Запись</translation>
+        <translation>Запись</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="257"/>
         <source>The message could not be recorded because an error has occurred: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Сообщение не может быть записано из за произошедшей ошибки: %1</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="266"/>
         <source>Do you want to start recording your voice message again?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы хотите начать запись вашего голосового сообщения снова?</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="267"/>
         <source>Yes, clean and restart</source>
-        <translation type="unfinished"></translation>
+        <translation>Да, очистить и перезапустить</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="267"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="275"/>
         <source>No device available for recording voice messages.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет доступного устройства для записи голосовых сообщений.</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="275"/>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ок</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="279"/>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="308"/>
         <source>Please wait</source>
-        <translation type="unfinished">Подождите</translation>
+        <translation>Пожалуйста подождите</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="333"/>
         <source>Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Громкость</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.cpp" line="333"/>
         <source>muted</source>
-        <translation type="unfinished"></translation>
+        <translation>отключен</translation>
     </message>
 </context>
 <context>
@@ -4974,7 +4975,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="180"/>
         <source>Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Громкость</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessage.ui" line="225"/>
@@ -4987,17 +4988,17 @@ Please select a different name.</source>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="36"/>
         <source>Voice encoder settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки голосового кодека</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="40"/>
         <source>Use custom encoder settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать пользовательские настройки кодека</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="40"/>
         <source>expert users only</source>
-        <translation type="unfinished"></translation>
+        <translation>только для опытных пользователей</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="59"/>
@@ -5007,7 +5008,7 @@ Please select a different name.</source>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="76"/>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.cpp" line="135"/>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>По-умолчанию</translation>
     </message>
 </context>
 <context>
@@ -5015,82 +5016,82 @@ Please select a different name.</source>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="61"/>
         <source>Encoding mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Режим кодирования</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="83"/>
         <source>Constant bit rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Постоянный битрейт</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="90"/>
         <source>Average bit tate</source>
-        <translation type="unfinished"></translation>
+        <translation>Усредненный битрейт</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="104"/>
         <source>Constant quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Постоянное качество</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="114"/>
         <source>Two pass</source>
-        <translation type="unfinished"></translation>
+        <translation>Два прохода</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="207"/>
         <source>Voice message recorder</source>
-        <translation type="unfinished"></translation>
+        <translation>Диктофон голосовых сообщений</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="219"/>
         <source>Input device</source>
-        <translation type="unfinished"></translation>
+        <translation>Устройство ввода</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="239"/>
         <source>Audio codec</source>
-        <translation type="unfinished"></translation>
+        <translation>Аудио кодек</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="259"/>
         <source>File container</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл-контейнер</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="279"/>
         <source>Sample rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Частота дискретизации</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="299"/>
         <source>Channels</source>
-        <translation type="unfinished"></translation>
+        <translation>Каналы</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="165"/>
         <source>Restore to system defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Восстановить к настройкам по-умолчанию</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="32"/>
         <source>Use system voice encoder</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать системный голосовой кодек</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="52"/>
         <source>Use custom settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать настройки пользователя</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="185"/>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ок</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiRecordVoiceMessageSettings.ui" line="192"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Отмена</translation>
     </message>
 </context>
 <context>
@@ -6068,12 +6069,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="582"/>
         <source>You are trying to send %1 files simultaneously but the maximum allowed is %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы пытаетесь отправить %1 файлов одновременно, но максимально разрешено %2.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="583"/>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ок</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiUserList.cpp" line="591"/>
@@ -6133,7 +6134,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="96"/>
         <source>from %1</source>
-        <translation type="unfinished"></translation>
+        <translation>от %1</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="109"/>
@@ -6144,12 +6145,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="109"/>
         <source>d MMMM yyyy</source>
-        <translation type="unfinished"></translation>
+        <translation>d MMMM yyyy</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="109"/>
         <source>d MMMM</source>
-        <translation type="unfinished"></translation>
+        <translation>d MMMM</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="111"/>
@@ -6159,17 +6160,17 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="142"/>
         <source>none</source>
-        <translation type="unfinished">не определена</translation>
+        <translation>не определена</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="145"/>
         <source>Workgroups</source>
-        <translation type="unfinished">Рабочие группы</translation>
+        <translation>Рабочие группы</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="150"/>
         <source>No shared information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет общей информации.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.cpp" line="156"/>
@@ -6334,7 +6335,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiVCard.ui" line="211"/>
         <source>Workgroups</source>
-        <translation type="unfinished">Рабочие группы</translation>
+        <translation>Рабочие группы</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.ui" line="310"/>
@@ -6372,12 +6373,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/voicechat/GuiVoicePlayer.cpp" line="80"/>
         <source>Unable to open voice message %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно открыть голосовое сообщение %1</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiVoicePlayer.cpp" line="80"/>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ок</translation>
     </message>
 </context>
 <context>
@@ -6389,7 +6390,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/voicechat/GuiVoicePlayer.ui" line="162"/>
         <source>Close</source>
-        <translation type="unfinished">Закрыть</translation>
+        <translation>Закрыть</translation>
     </message>
 </context>
 <context>
@@ -6415,7 +6416,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiWizard.cpp" line="46"/>
         <source>Press ok to continue or change your username.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите &quot;Ок&quot; чтобы продолжить или измените ваше имя пользователя.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiWizard.cpp" line="67"/>
@@ -6547,7 +6548,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="1035"/>
         <source>n.a.</source>
-        <translation type="unfinished"></translation>
+        <translation>н.д.</translation>
     </message>
 </context>
 <context>
@@ -6637,20 +6638,20 @@ Please select a different name.</source>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="726"/>
         <source>Last update</source>
-        <translation type="unfinished"></translation>
+        <translation>Последнее обновление</translation>
     </message>
     <message>
         <location filename="../src/utils/BeeUtils.cpp" line="731"/>
         <source>Last connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Последнее подключение</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/utils/BeeUtils.cpp" line="735"/>
         <source>%n unsent message(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n неотправленное сообщение</numerusform>
+            <numerusform>%n неотправленных сообщения</numerusform>
+            <numerusform>%n неотправленных сообщений</numerusform>
         </translation>
     </message>
     <message>
@@ -6802,12 +6803,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="70"/>
         <source>Downloading</source>
-        <translation type="unfinished">Загрузка</translation>
+        <translation>Загрузка</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="70"/>
         <source>Uploading</source>
-        <translation type="unfinished"></translation>
+        <translation>Отправка</translation>
     </message>
     <message>
         <source>of</source>
@@ -6816,42 +6817,42 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="117"/>
         <source>In queue</source>
-        <translation type="unfinished"></translation>
+        <translation>В очереди</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="123"/>
         <source>Starting</source>
-        <translation type="unfinished">Запуск</translation>
+        <translation>Запуск</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="129"/>
         <source>Cancel transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Отменить передачу</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="135"/>
         <source>Completed</source>
-        <translation type="unfinished">Завершено</translation>
+        <translation>Завершено</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="141"/>
         <source>Not completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Не завершено</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="147"/>
         <source>Canceled</source>
-        <translation type="unfinished"></translation>
+        <translation>Отменено</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="153"/>
         <source>Please wait</source>
-        <translation type="unfinished">Подождите</translation>
+        <translation>Пожалуйста подождите</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileTransferItem.cpp" line="159"/>
         <source>Resume transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Возобновить передачу</translation>
     </message>
 </context>
 <context>

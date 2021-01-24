@@ -932,7 +932,7 @@
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="194"/>
         <source>the file already exists</source>
-        <translation type="unfinished"></translation>
+        <translation>het bestand bestaat al</translation>
     </message>
     <message>
         <location filename="../src/core/FileTransferPeer.cpp" line="196"/>
@@ -1891,12 +1891,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiEmoticons.cpp" line="50"/>
         <source>Favorite emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>Favoriete emoticons</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEmoticons.cpp" line="52"/>
         <source>Recent emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>Recente emoticons</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEmoticons.cpp" line="54"/>
@@ -2952,7 +2952,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1149"/>
         <source>Change size of the emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>Verander de grootte van de emoticons</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1181"/>
@@ -3007,7 +3007,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2057"/>
         <source>Do you really want to apply the new theme?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wil je echt het nieuwe thema toepassen?</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2121"/>
@@ -3068,7 +3068,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3909"/>
         <source>Clear favorite emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>Wis de favoriete emoticons</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3912"/>
@@ -3133,7 +3133,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="5326"/>
         <source>Please select the new size of the emoticons in chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer de nieuwe grootte van de emoticons</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="876"/>
@@ -6636,12 +6636,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/voicechat/GuiVoicePlayer.cpp" line="80"/>
         <source>Unable to open voice message %1</source>
-        <translation type="unfinished">Kan spraakbericht %1 niet openen</translation>
+        <translation>Kan spraakbericht %1 niet openen</translation>
     </message>
     <message>
         <location filename="../src/voicechat/GuiVoicePlayer.cpp" line="80"/>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
@@ -6653,7 +6653,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/voicechat/GuiVoicePlayer.ui" line="162"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Sluit</translation>
     </message>
 </context>
 <context>
