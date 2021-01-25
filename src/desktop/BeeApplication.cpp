@@ -192,7 +192,7 @@ void BeeApplication::clearPathsInFsWatcher()
 void BeeApplication::forceShutdown()
 {
   qDebug() << "Shutdown forced by user";
-  emit( shutdownRequest() );
+  emit shutdownRequest();
   quit();
 }
 
@@ -259,7 +259,7 @@ void BeeApplication::setIdle()
     return;
 
   m_isInIdle = true;
-  emit( enteringInIdle() );
+  emit enteringInIdle();
 }
 
 void BeeApplication::removeIdle()
@@ -268,7 +268,7 @@ void BeeApplication::removeIdle()
     return;
 
   m_isInIdle = false;
-  emit( exitingFromIdle() );
+  emit exitingFromIdle();
 }
 
 bool BeeApplication::notify( QObject* obj_receiver, QEvent* obj_event )
