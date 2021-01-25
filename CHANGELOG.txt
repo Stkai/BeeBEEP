@@ -1,6 +1,9 @@
 BEEBEEP (Free Office Messenger) - CHANGELOG - (c) 2010-2021 Marco Mastroddi
 For more informations please visit https://www.beebeep.net
 
+BeeBEEP 5.8.5 (in development)
+- Added "Change emoticon size in chat" option in menu Settings - Chat.
+- Fixed a bug in connection to prevent PING before HELLO message.
 
 BeeBEEP 5.8.4
 - New feature: almost all the options of file beebeep.ini can be used in file beebeep.rc also

@@ -63,8 +63,11 @@ void AudioManager::checkDefaultAudioDevice()
 {
   QAudioDeviceInfo input_device = QAudioDeviceInfo::defaultInputDevice();
   m_defaultInputDeviceName = input_device.deviceName();
-  qDebug() << "AudioManager uses default input device:" << qPrintable( input_device.deviceName() );
-  checkAudioDevice( input_device, &m_defaultVoiceMessageEncoderSettings, &m_defaultVoiceMessageFileContainer );
+  if( isAudioDeviceAvailable() )
+  {
+    qDebug() << "AudioManager uses default input device:" << qPrintable( input_device.deviceName() );
+    checkAudioDevice( input_device, &m_defaultVoiceMessageEncoderSettings, &m_defaultVoiceMessageFileContainer );
+  }
 }
 
 bool AudioManager::findBestVoiceMessageCodecContainers( const QStringList& codecs, const QStringList& containers, QString* best_codec, QString* best_container ) const
@@ -178,7 +181,7 @@ QString AudioManager::createDefaultVoiceMessageFilename( const QString& containe
     file_ext = QLatin1String( "raw" );
   QString valid_owner_name = Bee::removeInvalidCharactersForFilePath( Settings::instance().localUser().name().simplified() );
   valid_owner_name.replace( " ", "" );
-  return QString( "beemsg-%2-%3.%4" ).arg( valid_owner_name ).arg( Bee::dateTimeStringSuffix( QDateTime::currentDateTime() ) ).arg( file_ext );
+  return QString( "beemsg-%2-%3.%4" ).arg( valid_owner_name, Bee::dateTimeStringSuffix( QDateTime::currentDateTime() ), file_ext );
 }
 
 QString AudioManager::voiceInputDeviceName() const
@@ -212,7 +215,7 @@ QAudioEncoderSettings AudioManager::voiceMessageEncoderSettings() const
 
 #if defined( Q_OS_OS2 )
   bool AudioManager::isAudioDeviceAvailable() { return true; }
-  bool AudioManager::loadBeepEffect() { return true; }
+  bool AudioManager::loadBeepEffect() { return false; }
   void AudioManager::clearBeep() {}
   void AudioManager::playBeep( int ) { QApplication::beep(); }
   void AudioManager::playBuzz() { playBeep(); }
@@ -246,12 +249,6 @@ bool AudioManager::loadBeepEffect()
   if( mp_sound )
     clearBeep();
 
-  if( !isAudioDeviceAvailable() )
-  {
-    qWarning() << "Audio device is not available and beep effect cannot be played";
-    return false;
-  }
-
   QString beep_file_path = Settings::instance().beepFilePath();
   if( !QFile::exists( beep_file_path ) )
   {
@@ -281,7 +278,7 @@ bool AudioManager::loadBeepEffect()
 
 void AudioManager::playBeep( int loops )
 {
-  if( !mp_sound )
+  if( !mp_sound && isAudioDeviceAvailable() )
     loadBeepEffect();
 
   if( mp_sound )

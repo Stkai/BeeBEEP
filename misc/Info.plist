@@ -19,7 +19,7 @@
   <key>CFBundleDisplayName</key>
   <string>BeeBEEP (Free Office Messenger)</string>
   <key>CFBundleVersion</key>
-  <string>5.8.4</string>
+  <string>5.8.6</string>
   <key>CFBundleSignature</key>
   <string>bbip</string>
   <key>LSMinimumSystemVersion</key>
@@ -27,7 +27,7 @@
   <key>NSHumanReadableCopyright</key>
   <string>Copyright © 2021 Marco Mastroddi, All Rights Reserved</string>
   <key>CFBundleShortVersionString</key>
-  <string>5.8.4</string>
+  <string>5.8.6</string>
   <key>NSMicrophoneUsageDescription</key>
   <string>BeeBEEP requires the use of the microphone to record voice messages.</string>
 </dict>

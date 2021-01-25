@@ -226,7 +226,7 @@ int main( int argc, char *argv[] )
       AudioManager::instance().loadBeepEffect();
   }
   else
-    qWarning() << "Sound manager seems to be not available for your system";
+    qWarning() << "Audio device is not available and beep effect cannot be played";
 
   /* Init Shortcut Manager */
   (void)ShortcutManager::instance();

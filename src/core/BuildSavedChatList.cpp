@@ -115,7 +115,8 @@ void BuildSavedChatList::buildList()
   QFile file( file_name );
   if( !file.open( QIODevice::ReadOnly ) )
   {
-    qWarning() << "Unable to open file" << qPrintable( file_name ) << ": loading saved chats aborted";
+    if( Settings::instance().chatAutoSave() )
+      qWarning() << "Unable to open file" << qPrintable( file_name ) << ": loading saved chats aborted";
     return;
   }
 

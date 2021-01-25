@@ -448,13 +448,17 @@ void BeeApplication::addJob( QObject* obj )
 {
   obj->moveToThread( mp_jobThread );
   m_jobsInProgress++;
+#ifdef BEEBEEP_DEBUG
   qDebug() << qPrintable( obj->objectName() ) << "moved to job thread." << m_jobsInProgress << "jobs in progress";
+#endif
 }
 
 void BeeApplication::removeJob( QObject* obj )
 {
   m_jobsInProgress--;
+#ifdef BEEBEEP_DEBUG
   qDebug() << qPrintable( obj->objectName() ) << "removed from job thread." << m_jobsInProgress << "jobs in progress";
+#endif
 }
 
 void BeeApplication::checkTicks( int ticks )
