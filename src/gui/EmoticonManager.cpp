@@ -112,7 +112,8 @@ void EmoticonManager::addEmoticon( const QString& e_text, const QString& e_name,
   int emoticon_key_size = e_text.size();
   QChar key_char = e_text.at( 0 );
 
-  m_emoticons.insert( key_char, Emoticon( e_text, e_name, emoticon_group, sort_order ) );
+  Emoticon e = Emoticon( e_text, e_name, emoticon_group, sort_order );
+  m_emoticons.insert( key_char, e );
 
   if( emoticon_key_size == 1 && !m_oneCharEmoticons.contains( key_char ) )
     m_oneCharEmoticons.append( key_char );

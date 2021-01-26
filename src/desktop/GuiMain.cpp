@@ -5323,8 +5323,9 @@ void GuiMain::resumeFileTransfer( VNumber user_id, const FileInfo& file_info )
 void GuiMain::changeEmoticonSizeInChat()
 {
   bool ok = false;
+  int max_size = Settings::instance().emoticonSourcePath().isEmpty() ? (Settings::instance().useHiResEmoticons() ? 190 : 24) : 248;
   int emoticon_size = QInputDialog::getInt( this, Settings::instance().programName(), tr( "Please select the new size of the emoticons in chat" ),
-                                          Settings::instance().emoticonSizeInChat(), 16, 248, 4, &ok );
+                                          Settings::instance().emoticonSizeInChat(), 16, max_size, 4, &ok );
   if( !ok )
     return;
 

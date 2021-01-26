@@ -13,12 +13,32 @@
 /* CLOSED OR DATA MODIFIED WILL BE LOST   */
 /******************************************/
 
-/* PLEASE NOTE
+/* !!! IMPORTANT
  * If the value of an option in the beebeep.rc file is a string containing a period, 
  * comma or other type of punctuation, you must enclose the string in two quotation marks. 
  * For example:
  * PreferredSubnets=192.168.1.255, 10.0.0.255 (ERROR)
  * PreferredSubnets="192.168.1.255, 10.0.0.255" (OK) 
+ *
+**/
+
+/* !!! PLEASE NOTE since version 5.8.4
+ * Since version 5.8.4 many of the options in the beebeep.ini file can be written to the 
+ * beebeep.rc file to be applied to all users of that computer.
+ * Remember to add the settings group name before the options.
+ *
+ * For example (we add beebeep.ini options about saving messages and the group is Gui):
+ *
+ * [BeeBEEP]
+ * UseHive=false
+ * UseMulticastDns=false
+ * EnableSaveData=false
+ *
+ * [Gui]
+ * ChatAutoSave=false
+ * ChatSaveUnsentMessages=false
+ * ChatSaveFileTransfers=false
+ * ChatSaveSystemMessages=false
  *
 **/
 

@@ -108,3 +108,21 @@ QIcon Emoticon::groupIcon( int group_id )
 
   return icon_file.isEmpty() ? IconManager::instance().icon( "emoticon.png" ) : QIcon( filePath( group_id, icon_file ) );
 }
+
+int Emoticon::height( int icon_height_requested ) const
+{
+  if( m_group == Emoticon::Unknown || m_group == Emoticon::Text )
+    return icon_height_requested < 24 ? icon_height_requested : 24;
+
+  if( Settings::instance().emoticonSourcePath().isEmpty() )
+  {
+    int icon_max_height = Settings::instance().useHiResEmoticons() ? 160 : 24;
+    return icon_height_requested < icon_max_height ? icon_height_requested : icon_max_height;
+  }
+  else
+  {
+    QIcon icon( fileName() );
+    QSize icon_size_requested( icon_height_requested, icon_height_requested );
+    return icon.actualSize( icon_size_requested ).height();
+  }
+}

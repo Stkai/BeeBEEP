@@ -236,7 +236,7 @@ void GuiEmoticons::emoticonClicked()
       if( EmoticonManager::instance().addToRecentEmoticons( e ) )
         setRecentEmoticons( EmoticonManager::instance().recentEmoticons() );
     }
-    emit( emoticonSelected( e ) );
+    emit emoticonSelected( e );
   }
 }
 

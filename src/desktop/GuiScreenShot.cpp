@@ -224,7 +224,7 @@ void GuiScreenShot::doSend()
   }
 
   Settings::instance().addTemporaryFilePath( file_path );
-  emit( screenShotToSend( file_path ) );
+  emit screenShotToSend( file_path );
 }
 
 void GuiScreenShot::doDelete()

@@ -469,7 +469,7 @@ QString Settings::createLocalUserHash()
                               .arg( QString::number( Random::number32( 6475, 36475 ) ) )
                               .arg( m_localUser.accountName() ).arg( m_localUser.name() )
                               .arg( QString::number( Random::number32( 6475, 36475 ) ) )
-                              .arg( m_localUser.domainName() ).arg( m_localUser.localHostName() ).arg( version( true, true, true ) )
+                              .arg( m_localUser.domainName() ).arg( m_localUser.localHostName(), version( true, true, true ) )
                               .arg( QDateTime::currentDateTime().toString( "dd.MM.yyyy-hh:mm:ss.zzz" ) );
   QString local_user_hash = simpleHash( hash_parameters );
 #ifdef BEEBEEP_DEBUG
