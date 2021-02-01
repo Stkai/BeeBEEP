@@ -58,7 +58,7 @@ Settings::Settings()
   // In MacOSX instead it seems to work... I have changed the connection timeout...
   m_useNativeDialogs = true;
   m_useFontEmoticons = false;
-#if QT_VERSION >= 0x050000 && !defined( BEEBEEP_FOR_RASPBERRY_PI )
+#if QT_VERSION >= 0x050000 && !defined( BEEBEEP_FOR_RASPBERRY_PI ) && !defined( Q_OS_OS2 )
   m_useHiResEmoticons = true;
 #else
   m_useHiResEmoticons = false;
@@ -1503,7 +1503,7 @@ void Settings::loadCommonSettings( QSettings* user_ini )
   m_favoriteEmoticons = user_ini->value( "FavoriteEmoticons", QStringList() ).toStringList();
   m_recentEmoticons = user_ini->value( "RecentEmoticons", QStringList() ).toStringList();
   m_useFontEmoticons = commonValue( system_rc, user_ini, "UseFontEmoticons", m_useFontEmoticons ).toBool();
-#if QT_VERSION >= 0x050000 && !defined( BEEBEEP_FOR_RASPBERRY_PI )
+#if QT_VERSION >= 0x050000 && !defined( BEEBEEP_FOR_RASPBERRY_PI ) && !defined( Q_OS_OS2 )
   m_useHiResEmoticons = commonValue( system_rc, user_ini, "UseHighResolutionEmoticons", m_useHiResEmoticons ).toBool();
 #else
   m_useHiResEmoticons = false;
@@ -1728,7 +1728,7 @@ QString Settings::qtMajorMinorVersion() const
   else if( sl_version.size() < 2 )
     return sl_version.at( 0 );
   else
-    return QString( "%1.%2" ).arg( sl_version.at( 0 ) ).arg( sl_version.at( 1 ) );
+    return QString( "%1.%2" ).arg( sl_version.at( 0 ), sl_version.at( 1 ) );
 }
 
 void Settings::save()
