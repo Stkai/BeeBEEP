@@ -85,60 +85,65 @@ void BuildSavedChatList::buildList()
   clearCacheItems();
   removePartiallyDownloadedFiles();
 
-  QString file_name = Settings::instance().savedChatsFilePath();
-  bool use_backup = false;
-  QFileInfo backup_chats_file_info( Settings::instance().autoSavedChatsFilePath() );
-  if( backup_chats_file_info.exists() )
-  {
-    QFileInfo saved_chats_file_info( Settings::instance().savedChatsFilePath() );
-    if( saved_chats_file_info.exists() )
-    {
-      if( backup_chats_file_info.lastModified() > saved_chats_file_info.lastModified() )
-      {
-        qWarning() << "File" << qPrintable( Settings::instance().savedChatsFilePath() ) << "is older than backup";
-        use_backup = true;
-      }
-    }
-    else
-    {
-      qWarning() << "File" << qPrintable( Settings::instance().savedChatsFilePath() ) << "not found";
-      use_backup = true;
-    }
-  }
-
-  if( use_backup )
-  {
-    file_name = Settings::instance().autoSavedChatsFilePath();
-    qDebug() << "Loading saved chats from backup file" << qPrintable( file_name );
-  }
-
-  QFile file( file_name );
-  if( !file.open( QIODevice::ReadOnly ) )
+  if( Settings::instance().enableSaveData() )
   {
     if( Settings::instance().chatAutoSave() )
-      qWarning() << "Unable to open file" << qPrintable( file_name ) << ": loading saved chats aborted";
-    return;
-  }
+    {
+      QString file_name = Settings::instance().savedChatsFilePath();
+      bool use_backup = false;
+      QFileInfo backup_chats_file_info( Settings::instance().autoSavedChatsFilePath() );
+      if( backup_chats_file_info.exists() )
+      {
+        QFileInfo saved_chats_file_info( Settings::instance().savedChatsFilePath() );
+        if( saved_chats_file_info.exists() )
+        {
+          if( backup_chats_file_info.lastModified() > saved_chats_file_info.lastModified() )
+          {
+            qWarning() << "File" << qPrintable( Settings::instance().savedChatsFilePath() ) << "is older than backup";
+            use_backup = true;
+          }
+        }
+        else
+        {
+          qWarning() << "File" << qPrintable( Settings::instance().savedChatsFilePath() ) << "not found";
+          use_backup = true;
+        }
+      }
 
-  QDataStream stream( &file );
-  stream.setVersion( Settings::instance().dataStreamVersion( true ) );
+      if( use_backup )
+      {
+        file_name = Settings::instance().autoSavedChatsFilePath();
+        qDebug() << "Loading saved chats from backup file" << qPrintable( file_name );
+      }
 
-  QStringList file_header;
+      QFile file( file_name );
+      if( file.open( QIODevice::ReadOnly ) )
+      {
+        QDataStream stream( &file );
+        stream.setVersion( Settings::instance().dataStreamVersion( true ) );
 
-  stream >> file_header;
-  if( stream.status() == QDataStream::Ok )
-  {
-    m_savedChatsAuthCode = checkAuthCodeFromFileHeader( file_header, file_name );
-    loadSavedChats( &stream );
+        QStringList file_header;
+        stream >> file_header;
+        if( stream.status() == QDataStream::Ok )
+        {
+          m_savedChatsAuthCode = checkAuthCodeFromFileHeader( file_header, file_name );
+          loadSavedChats( &stream );
+        }
+        else
+          qWarning() << "Error reading header datastream, abort loading saved chats";
+
+        file.close();
+      }
+      else
+        qWarning() << "Unable to open file" << qPrintable( file_name ) << ": loading saved chats aborted";
+    }
+
+    loadUnsentMessages();
   }
   else
-    qWarning() << "Error reading header datastream, abort loading saved chats";
-  file.close();
-
-  loadUnsentMessages();
+    qWarning() << "Skip loading chat and unsent messages because you have disabled this option in RC file";
 
   m_elapsedTime = elapsed_time.elapsed();
-
   emit listCompleted();
 }
 
