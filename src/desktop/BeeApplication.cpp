@@ -520,7 +520,9 @@ void BeeApplication::onNetworkConfigurationAdded( const QNetworkConfiguration& n
 {
   if( net_conf.bearerType() == QNetworkConfiguration::BearerEthernet || net_conf.bearerType() == QNetworkConfiguration::BearerWLAN )
   {
+#ifdef BEEBEEP_DEBUG
     qDebug() << "Network configuration is added:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() ) << "-" << qPrintable( net_conf.bearerTypeName() );
+#endif
     onNetworkConfigurationChanged( net_conf );
   }
 }
