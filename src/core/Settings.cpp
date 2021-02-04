@@ -206,6 +206,7 @@ Settings::Settings()
   m_showChatsInOneWindow = false;
   m_maxLogLines = 5000;
   m_enableDefaultChatNotifications = true;
+  m_enableVisualNotificationsInChatWindow = true;
 
   m_enableFileTransfer = true;
   m_enableFileSharing = false;
@@ -1402,6 +1403,7 @@ void Settings::loadCommonSettings( QSettings* user_ini )
   m_chatDefaultTextColor = commonValue( system_rc, user_ini, "DefaultTextColor", m_chatDefaultTextColor ).toString();
   m_chatSystemTextColor = commonValue( system_rc, user_ini, "SystemTextColor", m_chatSystemTextColor ).toString();
   m_enableDefaultChatNotifications = commonValue( system_rc, user_ini, "EnableDefaultChatNotifications", m_enableDefaultChatNotifications ).toBool();
+  m_enableVisualNotificationsInChatWindow = commonValue( system_rc, user_ini, "EnableVisualNotificationsInChatWindow", m_enableVisualNotificationsInChatWindow ).toBool();
   m_useMessageTimestampWithAP = commonValue( system_rc, user_ini, "UseMessageTimestampWithAP", m_useMessageTimestampWithAP ).toBool();
   m_chatQuoteBackgroundColor = commonValue( system_rc, user_ini, "QuoteBackgroundColor", m_chatQuoteBackgroundColor ).toString();
   m_chatQuoteTextColor = commonValue( system_rc, user_ini, "QuoteTextColor", m_chatQuoteTextColor ).toString();
@@ -1780,6 +1782,7 @@ void Settings::save()
   sets->setValue( "DefaultTextColor", m_chatDefaultTextColor );
   sets->setValue( "SystemTextColor", m_chatSystemTextColor );
   sets->setValue( "EnableDefaultChatNotifications", m_enableDefaultChatNotifications );
+  sets->setValue( "EnableVisualNotificationsInChatWindow", m_enableVisualNotificationsInChatWindow );
   sets->setValue( "UseMessageTimestampWithAP", m_useMessageTimestampWithAP );
   sets->setValue( "QuoteBackgroundColor", m_chatQuoteBackgroundColor );
   sets->setValue( "QuoteTextColor", m_chatQuoteTextColor );

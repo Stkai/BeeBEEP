@@ -1261,6 +1261,10 @@ void GuiMain::createMenus()
   act->setCheckable( true );
   act->setChecked( Settings::instance().playBuzzSound() );
   act->setData( 56 );
+  act = mp_menuNotificationSettings->addAction( tr( "Enable visual notifications for chat windows" ), this, SLOT( settingsChanged() ) );
+  act->setCheckable( true );
+  act->setChecked( Settings::instance().enableVisualNotificationsInChatWindow() );
+  act->setData( 107 );
   act = mp_menuNotificationSettings->addAction( tr( "Enable notifications also for chat with all users" ), this, SLOT( settingsChanged() ) );
   act->setCheckable( true );
   act->setChecked( Settings::instance().enableDefaultChatNotifications() );
@@ -2260,6 +2264,9 @@ void GuiMain::settingsChanged( QAction* act )
     EmoticonManager::instance().clearFavoriteEmoticons();
     updateEmoticons();
     break;
+  case 107:
+    Settings::instance().setEnableVisualNotificationsInChatWindow( act->isChecked() );
+    break;
   default:
     qWarning() << "GuiMain::settingsChanged(): error in setting id" << act->data().toInt();
   }
@@ -2387,7 +2394,8 @@ void GuiMain::showAlertForMessage( const Chat& c, const ChatMessage& cm )
   if( fl_chat )
   {
     fl_chat->setMainIcon( true );
-    QApplication::alert( fl_chat, 0 );
+    if( Settings::instance().enableVisualNotificationsInChatWindow() )
+      QApplication::alert( fl_chat, 0 );
     if( Settings::instance().raiseOnNewMessageArrived() || cm.isImportant() )
     {
       fl_chat->raiseOnTop();

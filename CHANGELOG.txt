@@ -2,6 +2,7 @@ BEEBEEP (Free Office Messenger) - CHANGELOG - (c) 2010-2021 Marco Mastroddi
 For more informations please visit https://www.beebeep.net
 
 BeeBEEP 5.8.5 (in development)
+- Added "Enable visual notifications for chat window" option menu Settings - Notifications
 - Added "Change emoticon size in chat" option in menu Settings - Chat.
 - Fixed a bug in connection to prevent PING before HELLO message.
 - Emoticons will no longer be displayed larger than their maximum size.

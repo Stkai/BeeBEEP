@@ -3556,6 +3556,10 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Please select the new size of the emoticons in chat</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Enable visual notifications for chat windows</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

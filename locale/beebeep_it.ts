@@ -3769,6 +3769,10 @@ Inserisci un nome differente.</translation>
         <source>Please select the new size of the emoticons in chat</source>
         <translation>Inserisci la nuova dimensione delle faccine mostrate nella conversazione</translation>
     </message>
+    <message>
+        <source>Enable visual notifications for chat windows</source>
+        <translation>Abilita le notifiche visuali nella finestra delle conversazioni</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

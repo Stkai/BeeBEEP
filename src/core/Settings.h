@@ -322,6 +322,8 @@ public:
   inline int chatInactiveWindowDefaultOpacityLevel() const;
   inline void setEnableDefaultChatNotifications( bool );
   inline bool enableDefaultChatNotifications() const;
+  inline void setEnableVisualNotificationsInChatWindow( bool );
+  inline bool enableVisualNotificationsInChatWindow() const;
   inline void setDownloadInUserFolder( bool );
   inline bool downloadInUserFolder() const;
   inline void setShowUsersInWorkgroups( bool );
@@ -827,6 +829,7 @@ private:
   int m_chatActiveWindowOpacityLevel;
   int m_chatInactiveWindowOpacityLevel;
   bool m_enableDefaultChatNotifications;
+  bool m_enableVisualNotificationsInChatWindow;
   bool m_downloadInUserFolder;
   bool m_showUsersInWorkgroups;
   bool m_openChatWhenSendNewMessage;
@@ -1435,7 +1438,9 @@ inline const QStringList& Settings::allowedFileExtensionsInFileTransfer() const 
 inline void Settings::setResetMinimumWidthForStyle( bool new_value ) { m_resetMinimumWidthForStyle = new_value; }
 inline bool Settings::resetMinimumWidthForStyle() { return m_resetMinimumWidthForStyle; }
 inline bool Settings::isConnectionKeyExchangeOnlyECDH() const { return m_connectionKeyExchangeMethod == ConnectionKeyExchangeECDH; }
-inline int Settings::tickIntervalChatAutoSave() const { return m_tickIntervalChatAutoSave; }
 inline void Settings::setTickIntervalChatAutoSave( int new_value ) { m_tickIntervalChatAutoSave = new_value; }
+inline int Settings::tickIntervalChatAutoSave() const { return m_tickIntervalChatAutoSave; }
+inline void Settings::setEnableVisualNotificationsInChatWindow( bool new_value ) { m_enableVisualNotificationsInChatWindow = new_value; }
+inline bool Settings::enableVisualNotificationsInChatWindow() const { return m_enableVisualNotificationsInChatWindow; }
 
 #endif // BEEBEEP_SETTINGS_
