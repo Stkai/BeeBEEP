@@ -42,6 +42,8 @@ public:
   inline QString toHtml( const QString& icon_name, const QString& icon_alt, int icon_width = 0, int icon_height = 0 );
   inline bool hasDefaultIcons() const;
 
+
+
   static IconManager& instance()
   {
     if( !mp_instance )
@@ -60,7 +62,7 @@ public:
 
 protected:
   IconManager();
-  inline QString iconPath( const QString& source_path, const QString& icon_name ) const;
+  QString iconPath( const QString& source_path, const QString& icon_name ) const;
   inline QString defaulIconPath( const QString& icon_name ) const;
   inline QString customIconPath( const QString& icon_name ) const;
 

@@ -318,7 +318,7 @@ bool Core::start()
   dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                          tr( "%1 Do you need support? Visit the %2." )
                          .arg( IconManager::instance().toHtml( "info.png", "*I*" ) )
-                         .arg( QString( "<a href=%1>%2</a>" ).arg( Settings::instance().helpWebSite() ).arg( tr( "help page" ) ) ),
+                         .arg( QString( "<a href=\"%1\">%2</a>" ).arg( Settings::instance().helpWebSite() ).arg( tr( "help page" ) ) ),
                          DispatchToChat, ChatMessage::System, false );
 
   if( Settings::instance().checkNewVersionAtStartup() )
