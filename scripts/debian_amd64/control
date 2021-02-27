@@ -5,7 +5,7 @@ Section: comm
 Homepage: https://www.beebeep.net
 Architecture: amd64
 Priority: optional
-Depends: gstreamer1.0-plugins-base (>=1.0.0), libqt5multimedia5-plugins (>=5.0.0), libqt5multimedia5 (>=5.0.0), libqt5x11extras5 (>=5.0.0), libqt5printsupport5 (>=5.0.0), libqt5gui5 (>=5.0.0), libqt5network5 (>=5.0.0), libqt5widgets5 (>=5.0.0), libqt5core5a (>=5.0.0), libstdc++6, libc6, libxcb-screensaver0
+Depends: gstreamer1.0-plugins-base (>=1.0.0), libqt5multimedia5-plugins (>=5.0.0), libqt5multimedia5 (>=5.0.0), libqt5x11extras5 (>=5.0.0), libqt5printsupport5 (>=5.0.0), libqt5gui5 (>=5.0.0), libqt5network5 (>=5.0.0), libqt5widgets5 (>=5.0.0), libqt5core5a (>=5.0.0), libxcb-screensaver0, libstdc++6, libc6
 Description: Free office messenger
  This office messaging application, BeeBEEP,  does not need an external
  server to let users communicate with each other. In your office, in your
