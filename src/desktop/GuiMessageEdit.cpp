@@ -171,6 +171,7 @@ void GuiMessageEdit::clearMessage()
   m_messageChanged = true;
   clear();
   m_emoticonsAdded.clear();
+  HistoryManager::instance().clearTemporaryMessage();
   setTextColor( QColor( Settings::instance().chatFontColor() ) );
   setFont( Settings::instance().chatFont() );
 }
@@ -185,33 +186,48 @@ void GuiMessageEdit::addMessageToHistory()
 
 bool GuiMessageEdit::nextMessageFromHistory()
 {
-  if( !HistoryManager::instance().moveHistoryUp() )
+  if( Settings::instance().chatMessageHistorySize() <= 0 )
     return false;
-  setMessageFromHistory();
+
+  if( !HistoryManager::instance().moveHistoryUp() )
+  {
+    setMessageFromHistory( true );
+    return false;
+  }
+  setMessageFromHistory( false );
   return true;
 }
 
 bool GuiMessageEdit::prevMessageFromHistory()
 {
+  if( Settings::instance().chatMessageHistorySize() <= 0 )
+    return false;
+
   if( !HistoryManager::instance().moveHistoryDown() )
     return false;
-  setMessageFromHistory();
+  addTemporaryMessageToHistory();
+  setMessageFromHistory( false );
   return true;
 }
 
-void GuiMessageEdit::setMessageFromHistory()
+void GuiMessageEdit::addTemporaryMessageToHistory()
 {
-  QString current_message = message();
+  if( HistoryManager::instance().hasTemporaryMessage() )
+    return;
 
-  if( !HistoryManager::instance().hasTemporaryMessage() && !current_message.isEmpty() )
+  QString current_message = message();
+  if( !current_message.isEmpty() )
   {
     HistoryMessage hm;
     hm.setMessage( current_message );
     hm.setEmoticons( m_emoticonsAdded );
     HistoryManager::instance().setTemporaryMessage( hm );
   }
+}
 
-  HistoryMessage message_from_history = HistoryManager::instance().message();
+void GuiMessageEdit::setMessageFromHistory( bool use_temporary_message )
+{
+  HistoryMessage message_from_history = use_temporary_message && HistoryManager::instance().hasTemporaryMessage() ? HistoryManager::instance().temporaryMessage() : HistoryManager::instance().message();
 
   QString message_txt = message_from_history.message();
   m_emoticonsAdded = message_from_history.emoticons();
@@ -309,15 +325,17 @@ void GuiMessageEdit::keyPressEvent( QKeyEvent* e )
 
   if( mods & Qt::ControlModifier )
   {
-    if( e->key() == Qt::Key_Up && prevMessageFromHistory() )
+    if( e->key() == Qt::Key_Up )
     {
-      e->accept();
+      if( prevMessageFromHistory() )
+        e->accept();
       return;
     }
 
-    if( e->key() == Qt::Key_Down && nextMessageFromHistory() )
+    if( e->key() == Qt::Key_Down )
     {
-      e->accept();
+      if( nextMessageFromHistory() )
+        e->accept();
       return;
     }
   }

@@ -42,6 +42,7 @@ public:
   void addMessage( const HistoryMessage& );
 
   HistoryMessage message() const;
+  inline const HistoryMessage& temporaryMessage() const;
 
   static HistoryManager& instance()
   {
@@ -75,8 +76,10 @@ private:
 inline int HistoryManager::historySize() const { return m_history.size(); }
 inline void HistoryManager::setTemporaryMessage( const HistoryMessage& new_value ) { m_temporayMessage = new_value; }
 inline bool HistoryManager::hasTemporaryMessage() const { return !m_temporayMessage.isEmpty(); }
+inline const HistoryMessage& HistoryManager::temporaryMessage() const { return m_temporayMessage; }
 inline void HistoryManager::clearTemporaryMessage() { m_temporayMessage.clear(); }
 inline int HistoryManager::minIndex() const { return 0; }
 inline int HistoryManager::maxIndex() const { return m_history.size() - 1; }
+
 
 #endif // BEEBEEP_HISTORYMANAGER_H

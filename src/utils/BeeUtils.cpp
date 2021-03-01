@@ -829,13 +829,23 @@ void Bee::removeContextHelpButton( QWidget* w )
   w->setWindowFlags( w_flags );
 }
 
-void Bee::showUp( QWidget* w )
+void Bee::showUp( QWidget* w, bool force_show )
 {
+  bool is_showed = false;
   if( !w->isVisible() )
+  {
     w->show();
+    is_showed = true;
+  }
 
   if( w->isMinimized() )
+  {
     w->showNormal();
+    is_showed = true;
+  }
+
+  if( force_show && !is_showed )
+    w->show();
 
   w->raise();
 }
@@ -1152,8 +1162,8 @@ QColor Bee::colorGrey() { return QColor( 128, 128, 128 ); }
 QColor Bee::colorBlack() { return QColor( 25, 25, 25 ); }
 QColor Bee::colorBlue() { return QColor( 42, 130, 218 ); }
 QColor Bee::colorWhite() { return QColor( 238, 238, 238 ); }
-QColor Bee::colorYellow() { return QColor( "#dede00" ); }
-QColor Bee::colorOrange() { return QColor( "#ffcf04" ); }
+QColor Bee::colorYellow() { return QColor( 222, 222, 0 ); }
+QColor Bee::colorOrange() { return QColor( 255, 207, 4 ); }
 
 
 QString Bee::beeColorsToHtmlText( const QString& txt )
@@ -1187,6 +1197,8 @@ QPalette Bee::darkPalette()
   darkPalette.setColor( QPalette::Disabled, QPalette::ButtonText, colorGrey() );
   darkPalette.setColor( QPalette::Disabled, QPalette::WindowText, colorGrey() );
   darkPalette.setColor( QPalette::Disabled, QPalette::Text, colorDarkGrey() );
+  darkPalette.setColor( QPalette::Disabled, QPalette::Base, colorDarkGrey().lighter() );
+  darkPalette.setColor( QPalette::Disabled, QPalette::AlternateBase, colorDarkGrey().lighter().lighter() );
   darkPalette.setColor( QPalette::Disabled, QPalette::Light, colorGrey() );
 
   return darkPalette;

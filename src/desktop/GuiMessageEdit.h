@@ -65,7 +65,8 @@ protected:
   bool nextMessageFromHistory();
   bool prevMessageFromHistory();
   inline int historySize() const;
-  void setMessageFromHistory();
+  void addTemporaryMessageToHistory();
+  void setMessageFromHistory( bool use_temporary_message );
   void createMessageToSend();
   bool canInsertFromMimeData( const QMimeData* ) const;
   void insertFromMimeData( const QMimeData* );

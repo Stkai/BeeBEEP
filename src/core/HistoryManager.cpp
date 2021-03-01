@@ -52,8 +52,10 @@ bool HistoryManager::moveHistoryDown()
 
 HistoryMessage HistoryManager::message() const
 {
-  if( m_history.isEmpty() || m_index < minIndex() || m_index > maxIndex() )
+  if( m_history.isEmpty() || m_index < minIndex() )
     return HistoryMessage();
+  else if( m_index > maxIndex() )
+    return hasTemporaryMessage() ? m_temporayMessage : HistoryMessage();
   else
     return m_history.at( m_index );
 }

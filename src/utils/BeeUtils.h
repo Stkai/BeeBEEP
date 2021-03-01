@@ -84,7 +84,7 @@ namespace Bee
   QColor selectColor( QWidget*, const QColor& default_color );
   void setBackgroundColor( QWidget*, const QColor& );
   inline bool isTimeToCheck( int ticks, int tick_for_check );
-  void showUp( QWidget* );
+  void showUp( QWidget*, bool force_show = false );
   void raiseOnTop( QWidget* );
   bool areStringListEqual( const QStringList&, const QStringList&, Qt::CaseSensitivity cs = Qt::CaseInsensitive );
   QString dateTimeToString( const QDateTime& );

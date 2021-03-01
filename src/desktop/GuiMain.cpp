@@ -2492,7 +2492,7 @@ void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
   if( fl_chat && !floating_chat_created )
     fl_chat->showChatMessage( c, cm );
 
-  if( fl_chat && fl_chat->isActiveWindow() )
+  if( fl_chat && !floating_chat_created && fl_chat->isActiveWindow() )
   {
     if( alert_can_be_notified && (cm.isImportant() || Settings::instance().beepInActiveWindowAlso()) )
       playBeep();

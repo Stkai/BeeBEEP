@@ -196,6 +196,7 @@ public:
   inline QString defaultChatName() const;
   inline QString defaultChatPrivateId() const;
   inline int chatMessageHistorySize() const;
+  inline bool chatMessageHistoryEnabled() const;
   inline const QString& chatFontColor() const;
   inline void setChatFontColor( const QString& );
   inline const QFont& chatFont() const;
