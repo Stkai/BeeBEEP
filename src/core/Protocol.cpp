@@ -1980,7 +1980,7 @@ Message Protocol::chatMessage( const Chat& c, const QString& msg_txt )
 {
   Message m( Message::Chat, newId(), msg_txt );
   ChatMessageData cmd;
-  cmd.setTextColor( Settings::instance().chatFontColor() );
+  cmd.setTextColor( Settings::instance().chatFontColor() != Settings::instance().chatDefaultTextColor() ? Settings::instance().chatFontColor() : QColor() );
   if( c.isGroup() )
   {
     m.addFlag( Message::GroupChat );

@@ -171,7 +171,6 @@ void GuiMessageEdit::clearMessage()
   m_messageChanged = true;
   clear();
   m_emoticonsAdded.clear();
-  HistoryManager::instance().clearTemporaryMessage();
   setTextColor( QColor( Settings::instance().chatFontColor() ) );
   setFont( Settings::instance().chatFont() );
 }
@@ -182,6 +181,7 @@ void GuiMessageEdit::addMessageToHistory()
   hm.setMessage( message() );
   hm.setEmoticons( m_emoticonsAdded );
   HistoryManager::instance().addMessage( hm );
+  HistoryManager::instance().clearTemporaryMessage();
 }
 
 bool GuiMessageEdit::nextMessageFromHistory()

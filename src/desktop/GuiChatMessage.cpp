@@ -78,7 +78,7 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
     html_message += textImportantPrefix();
 
   QString text_formatted = cm.message();
-  QString text_color = (cm.textColor().isValid() && cm.textColor() != QColor( 0, 0, 0 )) ? cm.textColor().name() : "";
+  QString text_color = (cm.textColor().isValid() && cm.textColor() != QColor( 0, 0, 0 ) && cm.textColor() != QColor( 255, 255, 255 ) ) ? cm.textColor().name() : "";
   if( !text_color.isEmpty() )
   {
     text_formatted.prepend( QString( "<font color=%1>" ).arg( text_color ) );
