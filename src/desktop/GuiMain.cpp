@@ -2365,10 +2365,10 @@ void GuiMain::setMaxQueuedDownloadsInAction( QAction* act )
 void GuiMain::sendMessage( VNumber chat_id, const QString& msg )
 {
 #ifdef BEEBEEP_DEBUG
-  int num_messages = beeCore->sendChatMessage( chat_id, msg, false );
+  int num_messages = beeCore->sendChatMessage( chat_id, msg, false, false );
   qDebug() << num_messages << "messages sent";
 #else
-  beeCore->sendChatMessage( chat_id, msg, false );
+  beeCore->sendChatMessage( chat_id, msg, false, false );
 #endif
   mp_chatList->updateChat( ChatManager::instance().chat( chat_id ) ); // to sort the chats
 }
@@ -5003,8 +5003,7 @@ void GuiMain::createMessage()
       int num_chat_opened = 0;
       foreach( VNumber chat_id, gcm.toChatIdList() )
       {
-        beeCore->sendChatMessage( chat_id, gcm.message(), gcm.messageIsImportant() );
-        mp_chatList->updateChat( ChatManager::instance().chat( chat_id ) ); // to sort the chats
+        beeCore->sendChatMessage( chat_id, gcm.message(), gcm.messageIsImportant(), num_chat_opened >= max_chat_to_open );
         if( gcm.openChat() && num_chat_opened < max_chat_to_open )
         {
           showChat( chat_id );
@@ -5012,6 +5011,7 @@ void GuiMain::createMessage()
         }
       }
       updateTabTitles();
+      mp_chatList->updateChats();
     }
   }
 }

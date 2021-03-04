@@ -400,7 +400,7 @@ int Core::archiveAllChats()
   return chat_count;
 }
 
-int Core::sendChatMessage( VNumber chat_id, const QString& msg, bool is_important )
+int Core::sendChatMessage( VNumber chat_id, const QString& msg, bool is_important, bool can_be_delayed )
 {
   if( !isConnected() )
   {
@@ -436,6 +436,9 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg, bool is_importan
   Message m = Protocol::instance().chatMessage( c, msg_to_send );
   if( is_important )
     m.setImportant();
+
+  if( can_be_delayed )
+    m.setDelayed();
 
   int messages_sent = 0;
 
@@ -473,7 +476,7 @@ int Core::sendMessageToChat( const Chat& c, const Message& m )
     if( u.isLocal() )
       continue;
 
-    if( !sendMessageToLocalNetwork( u, m ) )
+    if( m.isDelayed() || !sendMessageToLocalNetwork( u, m ) )
     {
       MessageManager::instance().addMessageToSend( u.id(), c.id(), m );
       offline_users.append( Bee::userNameToShow( u, true ) );
