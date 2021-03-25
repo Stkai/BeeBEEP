@@ -2155,7 +2155,6 @@ QString Protocol::linkifyText( const QString& text )
   // linkify windows network path
   if( simplified_text.contains( "\\\\" ) )
   {
-
     int index_backslash = linkfied_text.indexOf( "\\\\" );
     QString pre_text = "";
     if( index_backslash > 0 )
@@ -2187,9 +2186,9 @@ QString Protocol::linkifyText( const QString& text )
     if( input_url.isLocalFile() )
     {
 #if QT_VERSION >= 0x050000
-      linkfied_text = QString( "<a href=\"%1\">%2</a>" ).arg( input_url.url() ).arg( simplified_text );
+      linkfied_text = QString( "<a href=\"%1\">%2</a>" ).arg( input_url.url(), simplified_text );
 #else
-      linkfied_text = QString( "<a href=\"%1\">%2</a>" ).arg( input_url.toString() ).arg( simplified_text );
+      linkfied_text = QString( "<a href=\"%1\">%2</a>" ).arg( input_url.toString(), simplified_text );
 #endif
       return linkfied_text;
     }
@@ -2200,7 +2199,7 @@ QString Protocol::linkifyText( const QString& text )
   linkfied_text.prepend( " " ); // for matching www.miosito.it
   linkfied_text.replace( QRegExp( "(((f|ht){1}tp(s:|:){1}//)[-a-zA-Z0-9@:%_\\+.,~#?!&//=\\(\\)]+)" ), "<a href=\"\\1\">\\1</a>" );
   linkfied_text.replace( QRegExp( "([\\s()[{}])(www.[-a-zA-Z0-9@:%_\\+.,~#?!&//=\\(\\)]+)" ), "\\1<a href=\"http://\\2\">\\2</a>" );
-  linkfied_text.replace( QRegExp( "([_\\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\\.)+[a-z]{2,3})" ), "<a href=\"mailto:\\1\">\\1</a>" );
+  linkfied_text.replace( QRegExp( "([_\\.0-9a-zA-Z-]+@([0-9a-zA-Z][0-9a-zA-Z-]+\\.)+[a-zA-Z]{2,3})" ), "<a href=\"mailto:\\1\">\\1</a>" );
   linkfied_text.remove( 0, 1 ); // remove the space added
 
   return linkfied_text;

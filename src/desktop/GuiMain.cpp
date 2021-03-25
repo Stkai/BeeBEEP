@@ -2478,8 +2478,9 @@ void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
     alert_can_be_notified = cm.alertCanBeSent();
 
   GuiFloatingChat* fl_chat = floatingChat( c.id() );
+  bool open_chat_window = Settings::instance().alwaysOpenChatOnNewMessageArrived() || (!cm.isFromLocalUser() && !cm.isFromSystem() && cm.isImportant() && c.isPrivate());
 
-  if( !fl_chat && Settings::instance().alwaysOpenChatOnNewMessageArrived() && alert_can_be_notified )
+  if( !fl_chat && open_chat_window && alert_can_be_notified )
   {
     fl_chat = createFloatingChat( c );
     floating_chat_created = true;
@@ -2495,7 +2496,12 @@ void GuiMain::onNewChatMessage( const Chat& c, const ChatMessage& cm )
   if( fl_chat && !floating_chat_created && fl_chat->isActiveWindow() )
   {
     if( alert_can_be_notified && (cm.isImportant() || Settings::instance().beepInActiveWindowAlso()) )
-      playBeep();
+    {
+      if( cm.isImportant() )
+        playBuzz();
+      else
+        playBeep();
+    }
     readAllMessagesInChat( c.id() );
   }
   else
@@ -3264,11 +3270,7 @@ void GuiMain::openUrlFromChat( const QUrl& file_url, VNumber chat_id )
 #endif
       openUrlFromChat( adj_file_url, chat_id );
   }
-#if QT_VERSION >= 0x040800
-  else if( file_url.isLocalFile() )
-#else
-  else if( file_url.scheme() == QLatin1String( "file" ) )
-#endif
+  else if( Bee::isLocalFile( file_url ) )
   {
     QString file_path = Bee::convertToNativeFolderSeparator( file_url.toLocalFile() );
     if( file_path.isEmpty() )

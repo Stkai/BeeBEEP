@@ -558,11 +558,7 @@ void GuiUserList::checkAndSendUrls( QTreeWidgetItem* item, const QMimeData* sour
     qDebug() << "Checking pasted url:" << qPrintable( url.toString() );
 #endif
 
-#if QT_VERSION >= 0x040800
-    if( url.isLocalFile() )
-#else
-    if( url.scheme() == QLatin1String( "file" ) )
-#endif
+    if( Bee::isLocalFile( url ) )
     {
       file_path = url.toLocalFile();
       num_files += Protocol::instance().countFilesCanBeSharedInPath( file_path );

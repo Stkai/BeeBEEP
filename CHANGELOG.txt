@@ -9,6 +9,7 @@ BeeBEEP 5.8.5 (in development)
 - Fixed a bug on "Raise chat window on new message".
 - Fixed a bug that did not allow messages to be displayed correctly between the dark theme and the default one.
 - Emoticons will no longer be displayed larger than their maximum size.
+- Important private messages now open the chat window.
 
 
 BeeBEEP 5.8.4

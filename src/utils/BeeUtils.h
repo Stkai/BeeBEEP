@@ -53,6 +53,7 @@ namespace Bee
   bool isFileTypeExe( const QString& );
   bool isFileTypeBundle( const QString& );
   bool isFileTypeCompressed( const QString& );
+  bool isLocalFile( const QUrl& );
   QString fileTypeToString( FileType );
   QString dateTimeStringSuffix( const QDateTime& );
   QString capitalizeFirstLetter( const QString&, bool all_chars_after_space, bool lower_all_characters = true );

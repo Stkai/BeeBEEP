@@ -175,6 +175,31 @@ QString Bee::uniqueFilePath( const QString& file_path, bool add_date_time )
   return QDir::toNativeSeparators( fi.absoluteFilePath() );
 }
 
+bool Bee::isLocalFile( const QUrl& file_url )
+{
+  if( file_url.scheme().toLower() == QLatin1String( "file" ) )
+    return true;
+
+  QString file_path = Bee::convertToNativeFolderSeparator( file_url.toLocalFile() );
+#if defined( Q_OS_WIN ) || defined ( Q_OS_OS2 )
+  if( file_path.size() > 2 && file_path.at( 1 ) == ":" )
+    return true;
+  if( file_path.startsWith( "\\" ) )
+    return true;
+#endif
+
+#if defined( Q_OS_UNIX )
+  if( file_path.startsWith( "/" ) )
+    return true;
+#endif
+
+#if QT_VERSION >= 0x040800
+  return file_url.isLocalFile();
+#else
+  return false;
+#endif
+}
+
 QString Bee::suffixFromFile( const QString& file_path )
 {
   if( file_path.isEmpty() )
@@ -1156,6 +1181,7 @@ bool Bee::selectComboBoxData( QComboBox* box, const QVariant& item_data )
   else
     return false;
 }
+
 
 QColor Bee::colorDarkGrey() { return QColor( 64, 64, 64 ); }
 QColor Bee::colorGrey() { return QColor( 128, 128, 128 ); }

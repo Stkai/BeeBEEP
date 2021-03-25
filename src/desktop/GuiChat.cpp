@@ -913,12 +913,7 @@ void GuiChat::checkAndSendUrls( const QMimeData* source )
 #ifdef BEEBEEP_DEBUG
     qDebug() << "Checking pasted url:" << qPrintable( url.toString() );
 #endif
-
-#if QT_VERSION >= 0x040800
-    if( url.isLocalFile() )
-#else
-    if( url.scheme() == QLatin1String( "file" ) )
-#endif
+    if( Bee::isLocalFile( url ) )
     {
       file_path = url.toLocalFile();
       file_path_list.append( Bee::convertToNativeFolderSeparator( file_path ) );
