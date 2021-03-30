@@ -143,7 +143,6 @@ void BeeApplication::setSettingsFilePath( const QString& settings_file_path )
   {
     if( settings_file_path == m_settingsFilePath )
       return;
-
 #if QT_VERSION >= 0x050000
     if( !mp_fsWatcher->removePath( m_settingsFilePath ) )
       qWarning() << "File system watcher cannot remove path" << qPrintable( m_settingsFilePath ) << "from its list";
@@ -154,7 +153,6 @@ void BeeApplication::setSettingsFilePath( const QString& settings_file_path )
 #else
    mp_fsWatcher->removePath( m_settingsFilePath );
 #endif
-
   }
   m_settingsFilePath = "";
   if( !settings_file_path.isEmpty() )
@@ -175,6 +173,10 @@ void BeeApplication::setSettingsFilePath( const QString& settings_file_path )
     m_settingsFilePath = settings_file_path;
     m_checkSettingsFilePath = true;
 #endif
+  }
+  else
+  {
+    m_checkSettingsFilePath = false;
   }
 }
 

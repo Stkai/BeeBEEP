@@ -172,6 +172,8 @@ public:
   inline int userAwayTimeout() const;
   inline void setUserAwayTimeout( int );
 
+  inline bool enableReceivingHelpMessages() const;
+
   inline const QString& logPath() const;
   inline void setLogPath( const QString& );
   inline QString logFilePath() const;
@@ -735,6 +737,8 @@ private:
   bool m_allowNotEncryptedConnectionsAlso;
   bool m_allowEncryptedConnectionsAlso;
   bool m_disableConnectionSocketDataCompression;
+
+  bool m_enableReceivingHelpMessages;
 
   QStringList m_skipLocalHardwareAddresses;
   QStringList m_allowedFileExtensionsInFileTransfer;
@@ -1443,5 +1447,6 @@ inline void Settings::setTickIntervalChatAutoSave( int new_value ) { m_tickInter
 inline int Settings::tickIntervalChatAutoSave() const { return m_tickIntervalChatAutoSave; }
 inline void Settings::setEnableVisualNotificationsInChatWindow( bool new_value ) { m_enableVisualNotificationsInChatWindow = new_value; }
 inline bool Settings::enableVisualNotificationsInChatWindow() const { return m_enableVisualNotificationsInChatWindow; }
+inline bool Settings::enableReceivingHelpMessages() const { return m_enableReceivingHelpMessages; }
 
 #endif // BEEBEEP_SETTINGS_

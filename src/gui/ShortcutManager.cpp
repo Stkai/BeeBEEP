@@ -125,6 +125,8 @@ void ShortcutManager::setDefaultShortcuts()
   m_shortcuts[ ShowEmoticons ] = QKeySequence( Qt::CTRL | Qt::Key_E );
   m_shortcutNames[ ShowAllChats ] = QObject::tr( "Show all chats" );
   m_shortcuts[ ShowAllChats ] = QKeySequence( Qt::CTRL | Qt::ALT | Qt::Key_B );
+  m_shortcutNames[ SendHelpMessage ] = QObject::tr( "Send a help request message" );
+  m_shortcuts[ SendHelpMessage ] = QKeySequence( Qt::CTRL | Qt::SHIFT | Qt::Key_1 );
 
 #ifdef BEEBEEP_DEBUG
   for( int i = Empty; i < NumShortcut; i++ )

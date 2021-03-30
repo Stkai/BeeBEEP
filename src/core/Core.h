@@ -92,6 +92,7 @@ public:
   /* CoreChat */
   void createPrivateChat( const User& );
   int sendChatMessage( VNumber chat_id, const QString&, bool is_important, bool can_be_delayed ); // return the number of message sent (one for every user in chat)
+  bool sendHelpMessage();
   Chat createGroupChat( const User&, const Group&, bool broadcast_message );
   bool changeGroupChat( const User&, const Group& );
   bool clearMessagesInChat( VNumber, bool clear_history );
@@ -155,7 +156,9 @@ signals:
   void networkInterfaceIsUp();
   void shareBoxAvailable( const User&, const QString&, const QList<FileInfo>& );
   void shareBoxUnavailable( const User&, const QString& );
-  void localUserIsBuzzedBy( const User& );
+  void localUserIsBuzzedBy( const User&, VNumber );
+  void helpRequestFrom( const User&, VNumber );
+  void helpAnswerFrom( const User&, VNumber );
   void newSystemStatusMessage( const QString&, int );
   void newsAvailable( const QString& );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
@@ -266,6 +269,7 @@ protected:
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   void parseShareDesktopMessage( const User&, const Message& );
 #endif
+  void parseHelpMessage( const User&, const Message& );
 
   /* CoreUser */
   void showUserNameChanged( const User&, const QString& old_user_name );

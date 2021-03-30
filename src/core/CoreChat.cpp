@@ -542,7 +542,7 @@ void Core::sendWritingMessage( VNumber chat_id )
 
   Chat from_chat = ChatManager::instance().chat( chat_id );
   Message m = Protocol::instance().writingMessage( from_chat.privateId() );
-  foreach( VNumber user_id,  from_chat.usersId() )
+  foreach( VNumber user_id, from_chat.usersId() )
   {
     if( user_id == ID_LOCAL_USER )
       continue;
@@ -1013,4 +1013,26 @@ void Core::autoSaveChatMessagesCompleted()
   if( beeApp )
     beeApp->removeJob( scl );
   scl->deleteLater();
+}
+
+bool Core::sendHelpMessage()
+{
+  if( !isConnected() )
+  {
+    qWarning() << "You cannot send an help request message because you are not connected";
+    return false;
+  }
+
+  Message m = Protocol::instance().helpRequestMessage( tr( "I need your help." ) );
+  int users_contacted = sendMessageToAllConnectedUsers( m );
+  if( users_contacted > 0 )
+  {
+    qDebug() << "Your help request message sent to" << users_contacted << "users";
+    return true;
+  }
+  else
+  {
+    qWarning() << "There are not connected users for your help request message";
+    return false;
+  }
 }

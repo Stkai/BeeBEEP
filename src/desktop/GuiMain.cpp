@@ -148,7 +148,9 @@ GuiMain::GuiMain( QWidget *parent )
   connect( beeCore, SIGNAL( networkInterfaceIsDown() ), this, SLOT( onNetworkInterfaceDown() ) );
   connect( beeCore, SIGNAL( networkInterfaceIsUp() ), this, SLOT( onNetworkInterfaceUp() ) );
   connect( beeCore, SIGNAL( chatReadByUser( const Chat&, const User& ) ), this, SLOT( onChatReadByUser( const Chat&, const User& ) ) );
-  connect( beeCore, SIGNAL( localUserIsBuzzedBy( const User& ) ), this, SLOT( showBuzzFromUser( const User& ) ) );
+  connect( beeCore, SIGNAL( localUserIsBuzzedBy( const User&, VNumber ) ), this, SLOT( showBuzzFromUser( const User&, VNumber ) ) );
+  connect( beeCore, SIGNAL( helpRequestFrom( const User&, VNumber ) ), this, SLOT( showHelpRequestFromUser( const User&, VNumber ) ) );
+  connect( beeCore, SIGNAL( helpAnswerFrom( const User&, VNumber ) ), this, SLOT( showHelpAnswerFromUser( const User&, VNumber ) ) );
   connect( beeCore, SIGNAL( newSystemStatusMessage( const QString&, int ) ), this, SLOT( showMessage( const QString&, int ) ) );
   connect( beeCore, SIGNAL( newsAvailable( const QString& ) ), this, SLOT( onNewsAvailable( const QString& ) ) );
   connect( beeCore, SIGNAL( offlineMessageSentToUser( const User& ) ), this, SLOT( updateUser( const User& ) ) );
@@ -207,6 +209,8 @@ void GuiMain::initShortcuts()
 #ifdef BEEBEEP_USE_QXT
   mp_scShowAllChats = new QxtGlobalShortcut( this );
   connect( mp_scShowAllChats, SIGNAL( activated() ), this, SLOT( showAllChats() ) );
+  mp_scSendHelpMessage = new QxtGlobalShortcut( this );
+  connect( mp_scSendHelpMessage, SIGNAL( activated() ), this, SLOT( sendHelpMessage() ) );
 #endif
   mp_scShowNextUnreadMessage = new QShortcut( this );
   mp_scShowNextUnreadMessage->setContext( Qt::ApplicationShortcut );
@@ -4348,7 +4352,20 @@ void GuiMain::updateShortcuts()
     mp_scShowAllChats->unsetShortcut();
     mp_scShowAllChats->setEnabled( false );
   }
+
+  ks = ShortcutManager::instance().shortcut( ShortcutManager::SendHelpMessage );
+  if( !ks.isEmpty() && Settings::instance().useShortcuts() )
+  {
+    mp_scSendHelpMessage->setShortcut( ks );
+    mp_scSendHelpMessage->setEnabled( true );
+  }
+  else
+  {
+    mp_scSendHelpMessage->unsetShortcut();
+    mp_scSendHelpMessage->setEnabled( false );
+  }
 #endif
+
   ks = ShortcutManager::instance().shortcut( ShortcutManager::ShowNextUnreadMessage );
   if( !ks.isEmpty() )
   {
@@ -4727,14 +4744,34 @@ void GuiMain::sendBuzzToUser( VNumber user_id )
     beeCore->sendBuzzToUser( user_id );
 }
 
-void GuiMain::showBuzzFromUser( const User& u )
+void GuiMain::showBuzzFromUser( const User& u, VNumber chat_id )
 {
   if( Settings::instance().playBuzzSound() )
     playBuzz();
 
-  Chat c = ChatManager::instance().privateChatForUser( u.id() );
-  if( c.isValid() )
-    mp_trayIcon->showNewMessageArrived( c.id(), tr( "%1 is buzzing you!" ).arg( u.name() ), true );
+  mp_trayIcon->showNewMessageArrived( chat_id, tr( "%1 is buzzing you!" ).arg( Bee::userNameToShow( u, false ) ), true );
+}
+
+void GuiMain::sendHelpMessage()
+{
+  if( !beeCore->sendHelpMessage() )
+  {}
+}
+
+void GuiMain::showHelpRequestFromUser( const User& u, VNumber chat_id )
+{
+  if( Settings::instance().playBuzzSound() )
+    playBuzz();
+
+  mp_trayIcon->showNewMessageArrived( chat_id, tr( "%1 is asking for your help!" ).arg( Bee::userNameToShow( u, false ) ), true );
+}
+
+void GuiMain::showHelpAnswerFromUser( const User& u, VNumber chat_id )
+{
+  if( Settings::instance().playBuzzSound() )
+    playBuzz();
+
+  mp_trayIcon->showNewMessageArrived( chat_id, tr( "%1 got your call for help." ).arg( Bee::userNameToShow( u, false ) ), true );
 }
 
 void GuiMain::showFileSharingWindow()

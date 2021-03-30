@@ -73,6 +73,7 @@ QString Protocol::messageHeader( Message::Type mt ) const
   case Message::ShareBox: return "BEE-SBOX";
   case Message::ShareDesktop : return "BEE-DESK";
   case Message::Test:     return "BEE-TEST";
+  case Message::Help:     return "BEE-HELP";
   default:                return "BEE-BOOH";
   }
 }
@@ -112,6 +113,8 @@ Message::Type Protocol::messageType( const QString& msg_type ) const
   else if( msg_type == "BEE-DESK" )
     return Message::ShareDesktop;
   else if( msg_type == "BEE-TEST" )
+    return Message::Test;
+  else if( msg_type == "BEE-HELP" )
     return Message::Test;
   else
     return Message::Undefined;
@@ -372,6 +375,24 @@ Message Protocol::writingMessage( const QString& chat_private_id ) const
   if( !chat_private_id.isEmpty() )
     writing_message.setData( chat_private_id );
   return writing_message;
+}
+
+Message Protocol::helpRequestMessage( const QString& help_request ) const
+{
+  Message help_message( Message::Help, ID_HELP_MESSAGE, help_request );
+  help_message.addFlag( Message::Request );
+  help_message.addFlag( Message::Private );
+  help_message.setImportant();
+  return help_message;
+}
+
+Message Protocol::helpAnswerMessage( const QString& help_answer ) const
+{
+  Message help_message( Message::Help, ID_HELP_MESSAGE, help_answer );
+  help_message.addFlag( Message::Create );
+  help_message.addFlag( Message::Private );
+  help_message.setImportant();
+  return help_message;
 }
 
 Message Protocol::userStatusMessage( int user_status, const QString& user_status_description ) const

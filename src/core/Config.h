@@ -128,5 +128,6 @@ const int DELAY_CONTACT_USERS = 9000;
 #define ID_BUZZ_MESSAGE           22
 #define ID_IMPORTANT_MESSAGE      23
 #define ID_TEST_MESSAGE           24
+#define ID_HELP_MESSAGE           24
 
 #endif // BEEBEEP_CONFIG_H

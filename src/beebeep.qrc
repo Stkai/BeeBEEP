@@ -185,5 +185,6 @@
         <file>images/audio-settings.png</file>
         <file>images/firewall.png</file>
         <file>images/favorite.png</file>
+        <file>images/help.png</file>
     </qresource>
 </RCC>

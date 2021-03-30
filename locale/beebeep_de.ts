@@ -665,6 +665,22 @@
         <source>%1 %2 accepts incoming connections only from the IP addresses present in the HOSTS file.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>I need your help.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 %2 is asking for your help.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>I got your call for help.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 %2 got your call for help.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Date</name>
@@ -3560,6 +3576,14 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Enable visual notifications for chat windows</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>%1 is asking for your help!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 got your call for help.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -5668,6 +5692,10 @@ Bitte wähle einen anderen Namen aus.</translation>
             <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
+    </message>
+    <message>
+        <source>Send a help request message</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

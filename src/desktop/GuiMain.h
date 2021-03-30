@@ -167,6 +167,7 @@ private slots:
   void editShortcuts();
   void minimizeAllChats();
   void showAllChats();
+  void sendHelpMessage();
   void selectDictionatyPath();
   void onNetworkInterfaceDown();
   void onNetworkInterfaceUp();
@@ -186,7 +187,9 @@ private slots:
   void onFileTransferProgress( VNumber, const User&, const FileInfo&, FileSizeType, qint64 );
   void onFileTransferMessage( VNumber, const User&, const FileInfo&, const QString&, FileTransferPeer::TransferState );
   void sendBuzzToUser( VNumber );
-  void showBuzzFromUser( const User& );
+  void showBuzzFromUser( const User&, VNumber );
+  void showHelpRequestFromUser( const User&, VNumber );
+  void showHelpAnswerFromUser( const User&, VNumber );
   void removeFloatingChatFromList( VNumber );
   void showFileSharingWindow();
   void onFileSharingWindowClosed();
@@ -381,6 +384,7 @@ private:
   QShortcut* mp_scShowNextUnreadMessage;
 #ifdef BEEBEEP_USE_QXT
   QxtGlobalShortcut* mp_scShowAllChats;
+  QxtGlobalShortcut* mp_scSendHelpMessage;
 #endif
   QWidget* mp_lastActiveWindow;
 

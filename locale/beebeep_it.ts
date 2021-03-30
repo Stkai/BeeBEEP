@@ -717,6 +717,22 @@
         <source>%1 %2 accepts incoming connections only from the IP addresses present in the HOSTS file.</source>
         <translation>%1 %2 accetta le connessioni in ingresso solo dagli indirizzi IP presenti nel file HOSTS.</translation>
     </message>
+    <message>
+        <source>I need your help.</source>
+        <translation>Ho bisogno del tuo aiuto.</translation>
+    </message>
+    <message>
+        <source>%1 %2 is asking for your help.</source>
+        <translation>%1 %2 sta chiedendo il tuo aiuto.</translation>
+    </message>
+    <message>
+        <source>I got your call for help.</source>
+        <translation>Ho ricevuto la tua richiesta di aiuto.</translation>
+    </message>
+    <message>
+        <source>%1 %2 got your call for help.</source>
+        <translation>%1 %2 ha ricevuto la tua richiesta di aiuto.</translation>
+    </message>
 </context>
 <context>
     <name>Date</name>
@@ -3773,6 +3789,14 @@ Inserisci un nome differente.</translation>
         <source>Enable visual notifications for chat windows</source>
         <translation>Abilita le notifiche visuali nella finestra delle conversazioni</translation>
     </message>
+    <message>
+        <source>%1 is asking for your help!</source>
+        <translation>%1 sta chiedendo il tuo aiuto!</translation>
+    </message>
+    <message>
+        <source>%1 got your call for help.</source>
+        <translation>%1 ha ricevuto la tua richiesta di aiuto.</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -6039,6 +6063,14 @@ Inserisci un nome differente.</translation>
             <numerusform>%n mesaggio non inviato</numerusform>
             <numerusform>%n messaggi non inviati</numerusform>
         </translation>
+    </message>
+    <message>
+        <source>Send a help message</source>
+        <translation type="vanished">Invia una richiesta di aiuto</translation>
+    </message>
+    <message>
+        <source>Send a help request message</source>
+        <translation>Invia una richiesta di aiuto</translation>
     </message>
 </context>
 <context>

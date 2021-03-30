@@ -60,6 +60,8 @@ public:
   QByteArray testAnswerMessage( const NetworkAddress&, bool test_is_accepted, const QString& answer_msg = "Ok" ) const;
   NetworkAddress networkAddressFromTestMessage( const Message& ) const;
   Message writingMessage( const QString& chat_private_id ) const;
+  Message helpRequestMessage( const QString& help_request ) const;
+  Message helpAnswerMessage( const QString& help_answer ) const;
   bool isTestAnswerMessage( const Message& ) const;
   inline Message systemMessage( const QString& ) const;
   Message chatMessage( const Chat&, const QString& );

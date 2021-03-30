@@ -10,7 +10,8 @@ BeeBEEP 5.8.5 (in development)
 - Fixed a bug that did not allow messages to be displayed correctly between the dark theme and the default one.
 - Emoticons will no longer be displayed larger than their maximum size.
 - Important private messages now open the chat window.
-
+- Added "EnableReceivingHelpMessages" option in beebeep.rc file.
+- Added global shortcut CTRL+SHIFT+1 for PANIC BUTTON and HELP REQUEST automatic message.
 
 BeeBEEP 5.8.4
 - New feature: almost all the options of file beebeep.ini can be used in file beebeep.rc also

@@ -97,6 +97,7 @@ Settings::Settings()
   m_useUserFullName = false;
   m_appendHostNameToUserName = false;
   m_useCompactDataSaving = true;
+  m_enableReceivingHelpMessages = false;
 
 #ifdef BEEBEEP_DISABLE_FILE_TRANSFER
   m_disableFileTransfer = true;
@@ -549,6 +550,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "AllowedFileExtensionsInFileTransfer", m_allowedFileExtensionsInFileTransfer.isEmpty() ? QString( "" ) : m_allowedFileExtensionsInFileTransfer.join( ", " ) );
     sets->setValue( "ConnectionKeyExchangeMethod", m_connectionKeyExchangeMethod );
     sets->setValue( "TickIntervalChatAutoSave", m_tickIntervalChatAutoSave );
+    sets->setValue( "EnableReceivingHelpMessages", m_enableReceivingHelpMessages );
     sets->endGroup();
     sets->sync();
     qDebug() << "RC default configuration file created in" << qPrintable( Bee::convertToNativeFolderSeparator( sets->fileName() ) );
@@ -651,6 +653,7 @@ void Settings::loadRcFile()
   m_clearCacheAfterDays = qMax( -1, sets->value( "ClearCacheAfterDays", m_clearCacheAfterDays ).toInt() );
   m_removePartiallyDownloadedFilesAfterDays = qMax( -1, sets->value( "RemovePartiallyDownloadedFilesAfterDays", m_removePartiallyDownloadedFilesAfterDays ).toInt() );
   m_checkUserConnectedFromDatagramIp = sets->value( "CheckUserConnectedFromDatagramIp", m_checkUserConnectedFromDatagramIp ).toBool();
+  m_enableReceivingHelpMessages = sets->value( "EnableReceivingHelpMessages", m_enableReceivingHelpMessages ).toBool();
   // Remember to use "" for the string in INI files
   QString local_hw_addresses = sets->value( "SkipLocalHardwareAddresses", m_skipLocalHardwareAddresses.join( "," ) ).toString().simplified();
   m_skipLocalHardwareAddresses.clear();
@@ -2062,7 +2065,6 @@ void Settings::save()
 #endif
 
   beeApp->setSettingsFilePath( m_currentFilePath );
-  beeApp->setCheckSettingsFilePath( true );
   sets->deleteLater();
 }
 

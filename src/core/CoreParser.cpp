@@ -85,6 +85,9 @@ void Core::parseMessage( const User& u, const Message& m )
     parseShareDesktopMessage( u, m );
 #endif
     break;
+  case Message::Help:
+    parseHelpMessage( u, m );
+    break;
   default:
     qWarning() << "Core cannot parse the message with type" << m.type();
     break;
@@ -618,5 +621,38 @@ void Core::parseBuzzMessage( const User& u, const Message& )
   c.addUnreadMessage();
   ChatManager::instance().setChat( c );
   dispatchSystemMessage( c.id(), u.id(), sys_msg, DispatchToChat, ChatMessage::Other, false );
-  emit localUserIsBuzzedBy( u );
+  emit localUserIsBuzzedBy( u, c.id() );
+}
+
+void Core::parseHelpMessage( const User& u, const Message& m )
+{
+  if( m.hasFlag( Message::Request ) )
+  {
+    if( Settings::instance().enableReceivingHelpMessages() )
+    {
+      QString help_msg = tr( "%1 %2 is asking for your help." ).arg( IconManager::instance().toHtml( "help.png", "*H*" ), Bee::userNameToShow( u, true ) );
+      Chat c = ChatManager::instance().privateChatForUser( u.id() );
+      if( !c.isValid() )
+        c = ChatManager::instance().defaultChat();
+      c.addUnreadMessage();
+      ChatManager::instance().setChat( c );
+      dispatchSystemMessage( c.id(), u.id(), help_msg, DispatchToChat, ChatMessage::Other, true );
+      emit helpRequestFrom( u, c.id() );
+      if( !sendMessageToLocalNetwork( u, Protocol::instance().helpAnswerMessage( tr("I got your call for help.") ) ) )
+        qWarning() << "Unable to answer for help message to user" << qPrintable( u.path() );
+    }
+  }
+  else if( m.hasFlag( Message::Create ) )
+  {
+    QString help_msg = tr( "%1 %2 got your call for help." ).arg( IconManager::instance().toHtml( "help.png", "*H*" ), Bee::userNameToShow( u, true ) );
+    Chat c = ChatManager::instance().privateChatForUser( u.id() );
+    if( !c.isValid() )
+      c = ChatManager::instance().defaultChat();
+    c.addUnreadMessage();
+    ChatManager::instance().setChat( c );
+    dispatchSystemMessage( c.id(), u.id(), help_msg, DispatchToChat, ChatMessage::Other, true );
+    emit helpAnswerFrom( u, c.id() );
+  }
+  else
+    qWarning() << "Invalid flag found in help message from user" << qPrintable( u.path() );
 }
