@@ -630,6 +630,7 @@ void Core::parseHelpMessage( const User& u, const Message& m )
   {
     if( Settings::instance().enableReceivingHelpMessages() )
     {
+      qDebug() << u.path() << "sends to you an help request";
       QString help_msg = tr( "%1 %2 is asking for your help." ).arg( IconManager::instance().toHtml( "help.png", "*H*" ), Bee::userNameToShow( u, true ) );
       Chat c = ChatManager::instance().privateChatForUser( u.id() );
       if( !c.isValid() )
@@ -638,12 +639,14 @@ void Core::parseHelpMessage( const User& u, const Message& m )
       ChatManager::instance().setChat( c );
       dispatchSystemMessage( c.id(), u.id(), help_msg, DispatchToChat, ChatMessage::Other, true );
       emit helpRequestFrom( u, c.id() );
+      // if( sendChatAutoResponderMessageToUser( c, tr("I got your call for help."), u.id() ) )
       if( !sendMessageToLocalNetwork( u, Protocol::instance().helpAnswerMessage( tr("I got your call for help.") ) ) )
         qWarning() << "Unable to answer for help message to user" << qPrintable( u.path() );
     }
   }
   else if( m.hasFlag( Message::Create ) )
   {
+    qDebug() << u.path() << "answers to your help request";
     QString help_msg = tr( "%1 %2 got your call for help." ).arg( IconManager::instance().toHtml( "help.png", "*H*" ), Bee::userNameToShow( u, true ) );
     Chat c = ChatManager::instance().privateChatForUser( u.id() );
     if( !c.isValid() )
@@ -654,5 +657,8 @@ void Core::parseHelpMessage( const User& u, const Message& m )
     emit helpAnswerFrom( u, c.id() );
   }
   else
-    qWarning() << "Invalid flag found in help message from user" << qPrintable( u.path() );
+  {
+    if( Settings::instance().enableReceivingHelpMessages() )
+      qWarning() << "Invalid flag found in help message from user" << qPrintable( u.path() );
+  }
 }

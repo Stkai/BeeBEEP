@@ -455,7 +455,11 @@ void BeeApplication::addJob( QObject* obj )
 #endif
 }
 
+#ifdef BEEBEEP_DEBUG
 void BeeApplication::removeJob( QObject* obj )
+#else
+void BeeApplication::removeJob( QObject* )
+#endif
 {
   m_jobsInProgress--;
 #ifdef BEEBEEP_DEBUG

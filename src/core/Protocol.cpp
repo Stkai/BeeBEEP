@@ -115,7 +115,7 @@ Message::Type Protocol::messageType( const QString& msg_type ) const
   else if( msg_type == "BEE-TEST" )
     return Message::Test;
   else if( msg_type == "BEE-HELP" )
-    return Message::Test;
+    return Message::Help;
   else
     return Message::Undefined;
 }

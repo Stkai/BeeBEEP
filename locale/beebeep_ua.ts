@@ -3554,6 +3554,10 @@ Please select a different name.</source>
         <source>%1 got your call for help.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Help station</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

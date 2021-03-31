@@ -1519,12 +1519,21 @@ void GuiMain::createToolAndMenuBars()
   label_version->setTextFormat( Qt::RichText );
   label_version->setAlignment( Qt::AlignHCenter | Qt::AlignVCenter );
   QString label_version_text = QString( "&nbsp;&nbsp;<b>%1%2</b> %3&nbsp;" )
-                                .arg( Settings::instance().version( Settings::instance().isDevelopmentVersion(), false, false ) )
-                                .arg( Settings::instance().isDevelopmentVersion() ? QString( "-dev" ) : "" )
-                                .arg( IconManager::instance().toHtml( Settings::instance().operatingSystemIconPath(), "*", 12, 12 ) );
-                                label_version->setText( label_version_text );
-  label_version->setToolTip( QString( "BeeBEEP %1 %2%3" ).arg( Settings::instance().version( true, true, true ), Settings::instance().operatingSystem( true ),
-                                                               Settings::instance().isDevelopmentVersion() ? QString( " (%1)" ).arg( tr("Development version") ) : "" ) );
+                                .arg( Settings::instance().version( Settings::instance().isDevelopmentVersion(), false, false ),
+                                      Settings::instance().isDevelopmentVersion() ? QString( "-dev" ) : "",
+                                      IconManager::instance().toHtml( Settings::instance().operatingSystemIconPath(), "*", 12, 12 ) );
+  QString label_tooltip = QString( "BeeBEEP %1 %2%3" ).arg( Settings::instance().version( true, true, true ), Settings::instance().operatingSystem( true ) );
+  if( Settings::instance().isDevelopmentVersion() )
+    label_tooltip.append( QString( " (%1)" ).arg( tr("Development version") ) );
+
+  if( Settings::instance().enableReceivingHelpMessages() )
+  {
+    label_version_text.append( QString( "&nbsp;%1&nbsp;" ).arg( IconManager::instance().toHtml( "help.png", "H", 12, 12 ) ) );
+    label_tooltip.append( QString( " [%1]" ).arg( tr("Help station") ) );
+  }
+
+  label_version->setText( label_version_text );
+  label_version->setToolTip( label_tooltip );
   menuBar()->setCornerWidget( label_version );
 
   mp_barMain->addAction( mp_menuStatus->menuAction() );

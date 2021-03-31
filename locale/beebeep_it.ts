@@ -3797,6 +3797,10 @@ Inserisci un nome differente.</translation>
         <source>%1 got your call for help.</source>
         <translation>%1 ha ricevuto la tua richiesta di aiuto.</translation>
     </message>
+    <message>
+        <source>Help station</source>
+        <translation>Postazione di aiuto</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>

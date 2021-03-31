@@ -100,7 +100,10 @@ void BuildSavedChatList::buildList()
           if( backup_chats_file_info.lastModified() > saved_chats_file_info.lastModified() )
           {
             qWarning() << "File" << qPrintable( Settings::instance().savedChatsFilePath() ) << "is older than backup";
-            use_backup = true;
+            if( backup_chats_file_info.size() > saved_chats_file_info.size() )
+              use_backup = true;
+            else
+              qWarning() << "Backup file" << qPrintable( Settings::instance().autoSavedChatsFilePath() ) << "is smaller than original (skipped)";
           }
         }
         else
