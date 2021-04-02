@@ -168,6 +168,7 @@ private slots:
   void minimizeAllChats();
   void showAllChats();
   void sendHelpMessage();
+  void sendHelpMessageToUser( VNumber );
   void selectDictionatyPath();
   void onNetworkInterfaceDown();
   void onNetworkInterfaceUp();
@@ -371,6 +372,8 @@ private:
   QAction* mp_actMulticastGroupAddress;
   QAction* mp_actEncryptedConnectionByDefault;
   QAction* mp_actCompressedDataByDefault;
+
+  QAction* mp_actHelpRequest;
 
   QDockWidget* mp_dockFileTransfers;
 

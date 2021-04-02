@@ -29,7 +29,7 @@ User::User()
    m_statusDescription( "" ), m_color( "#000000" ), m_accountName( "" ),
    m_domainName( "" ), m_version( "" ), m_hash( "" ), m_isFavorite( false ),
    m_qtVersion( "0" ), m_protocolVersion( 0 ), m_statusChangedIn(), m_lastConnection(),
-   m_workgroups(), m_localHostName( "" )
+   m_workgroups(), m_localHostName( "" ), m_isHelper( false )
 {
 }
 
@@ -37,7 +37,8 @@ User::User( VNumber new_id )
  : m_id( new_id ), m_vCard(), m_networkAddress( QHostAddress( QHostAddress::LocalHost ), DEFAULT_LISTENER_PORT ),
    m_status( User::Offline ), m_statusDescription( "" ), m_color( "#000000" ), m_accountName( "" ),
    m_domainName( "" ), m_version( "" ), m_hash( "" ), m_isFavorite( false ), m_qtVersion( "0" ),
-   m_protocolVersion( 0 ), m_statusChangedIn(), m_lastConnection(), m_workgroups(), m_localHostName( "" )
+   m_protocolVersion( 0 ), m_statusChangedIn(), m_lastConnection(), m_workgroups(), m_localHostName( "" ),
+   m_isHelper( false )
 {
   setName( QString( "Bee %1" ).arg( QString::number( new_id ) ) );
 }
@@ -47,7 +48,7 @@ User::User( VNumber new_id, const UserRecord& ur )
    m_statusDescription( "" ), m_color( ur.color() ), m_accountName( ur.account() ),
    m_domainName( ur.domainName() ), m_version( "" ), m_hash( ur.hash() ), m_isFavorite( ur.isFavorite() ),
    m_qtVersion( "0" ), m_protocolVersion( 0 ), m_statusChangedIn(), m_lastConnection( ur.lastConnection() ),
-   m_workgroups(), m_localHostName( ur.localHostName() )
+   m_workgroups(), m_localHostName( ur.localHostName() ), m_isHelper( false )
 {
   if( !ur.name().isEmpty() )
     setName( ur.name() );
@@ -83,6 +84,7 @@ User& User::operator=( const User& u )
     m_lastConnection = u.m_lastConnection;
     m_workgroups = u.m_workgroups;
     m_localHostName = u.m_localHostName;
+    m_isHelper = u.m_isHelper;
   }
   return *this;
 }

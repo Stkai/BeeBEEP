@@ -801,7 +801,7 @@ int Core::checkOfflineMessagesForUser( const User& u )
 
       if( c->sendMessage( mr.message() ) )
       {
-        if( !chat_list.contains( mr.chatId() ) )
+        if( mr.isChatValid() && !chat_list.contains( mr.chatId() ) )
           chat_list.append( mr.chatId() );
         messages_sent++;
       }
@@ -1017,14 +1017,25 @@ void Core::autoSaveChatMessagesCompleted()
 
 bool Core::sendHelpMessage()
 {
-  if( !isConnected() )
+  if( !isConnected() || m_connections.isEmpty() )
   {
     qWarning() << "You cannot send an help request message because you are not connected";
     return false;
   }
 
   Message m = Protocol::instance().helpRequestMessage( tr( "I need your help." ) );
-  int users_contacted = sendMessageToAllConnectedUsers( m );
+
+  int users_contacted = 0;
+  foreach( Connection* c, m_connections )
+  {
+    User u = UserManager::instance().findUser( c->userId() );
+    if( u.isValid() && u.isHelper() && !u.isLocal() )
+    {
+      if( c->sendMessage( m ) )
+        users_contacted++;
+    }
+  }
+
   if( users_contacted > 0 )
   {
     qDebug() << "Your help request message sent to" << users_contacted << "users";
@@ -1033,6 +1044,29 @@ bool Core::sendHelpMessage()
   else
   {
     qWarning() << "There are not connected users for your help request message";
+    return false;
+  }
+}
+
+bool Core::sendHelpMessageToUser( VNumber user_id )
+{
+  if( !isConnected() || m_connections.isEmpty() )
+  {
+    qWarning() << "You cannot send an help request message because you are not connected";
+    return false;
+  }
+
+  Message m = Protocol::instance().helpRequestMessage( tr( "I need your help." ) );
+
+  Connection* c = connection( user_id );
+  if( c && c->sendMessage( m ) )
+  {
+    qDebug() << "Your help request message sent to user" << user_id;
+    return true;
+  }
+  else
+  {
+    qWarning() << "There is not connected user" << user_id << "for your help request message";
     return false;
   }
 }

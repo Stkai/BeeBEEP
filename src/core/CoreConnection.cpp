@@ -441,14 +441,14 @@ void Core::checkUserAuthentication( const QByteArray& auth_byte_array )
     }
   }
 
-  if( !Settings::instance().localUser().vCard().hasOnlyNickName() )
+  if( !Settings::instance().localUser().vCard().hasOnlyNickName() || Settings::instance().enableReceivingHelpMessages() )
   {
     if( c->protocolVersion() > 1 )
     {
 #ifdef BEEBEEP_DEBUG
       qDebug() << "Sending my VCard to" << qPrintable( u.path() );
 #endif
-      c->sendMessage( Protocol::instance().localVCardMessage() );
+      c->sendMessage( Protocol::instance().localVCardMessage( c->protocolVersion() ) );
     }
   }
 

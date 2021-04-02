@@ -68,6 +68,7 @@ GuiVCard::GuiVCard( QWidget *parent )
   mp_pbFavorite->setIcon( IconManager::instance().icon( "star.png" ) );
   mp_pbRemove->setIcon( IconManager::instance().icon( "delete.png" ) );
   mp_pbBuzz->setIcon( IconManager::instance().icon( "bell.png" ) );
+  mp_pbBuzz->setIcon( IconManager::instance().icon( "help.png" ) );
 
   connect( mp_pbChat, SIGNAL( clicked() ), this, SLOT( showPrivateChat() ) );
   connect( mp_pbFile, SIGNAL( clicked() ), this, SLOT( sendFile() ) );
@@ -128,6 +129,11 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
   else
     mp_lPhone->hide();
 
+  if( !u.vCard().roomLocation().isEmpty() )
+    mp_lRoom->setText( u.vCard().roomLocation() );
+  else
+    mp_lRoom->hide();
+
   QString workgroups_txt = "";
   if( !u.workgroups().isEmpty() )
   {
@@ -179,6 +185,7 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
     mp_pbFavorite->hide();
     mp_pbBuzz->hide();
     mp_pbRemove->hide();
+    mp_pbHelp->hide();
   }
   else
   {
@@ -207,9 +214,18 @@ void GuiVCard::setVCard( const User& u, VNumber chat_id, bool core_is_connected 
       mp_pbFavorite->hide();
 
     if( u.isStatusConnected() )
+    {
       mp_pbBuzz->show();
+      if( u.isHelper() )
+        mp_pbHelp->show();
+      else
+        mp_pbHelp->hide();
+    }
     else
+    {
       mp_pbBuzz->hide();
+      mp_pbHelp->hide();
+    }
 
     bool remove_is_enabled;
     QString remove_tooltip;
@@ -275,5 +291,12 @@ void GuiVCard::sendBuzz()
   hide();
   emit showChat( m_chatId );
   emit buzzUser( m_userId );
+  close();
+}
+
+void GuiVCard::sendHelp()
+{
+  hide();
+  emit sendHelpRequestToUser( m_userId );
   close();
 }

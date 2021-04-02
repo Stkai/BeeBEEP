@@ -165,7 +165,7 @@ bool Core::setLocalUserVCard( const QString& user_color, const VCard& vc )
   Settings::instance().save();
   MessageManager::instance().generateSaveMessagesAuthCode();
 
-  sendMessageToAllConnectedUsers( Protocol::instance().localVCardMessage() );
+  sendVCardToAllConnectedUsers();
   showUserVCardChanged( u, old_vcard );
   if( nickname_changed )
     showUserNameChanged( u, old_user_nickname );
@@ -481,7 +481,7 @@ void Core::changeUserColor( VNumber user_id, const QString& user_color )
   u.setColor( user_color );
   UserManager::instance().setUser( u );
   if( u.isLocal() )
-    sendMessageToAllConnectedUsers( Protocol::instance().localVCardMessage() );
+    sendVCardToAllConnectedUsers();
   emit userChanged( u );
 }
 
@@ -517,4 +517,33 @@ void Core::regenerateLocalUserHash()
   u.setHash( Settings::instance().createLocalUserHash() );
   Settings::instance().setLocalUser( u );
   MessageManager::instance().generateSaveMessagesAuthCode();
+}
+
+void Core::sendVCardToAllConnectedUsers()
+{
+  if( !isConnected() || m_connections.isEmpty() )
+    return;
+  int count = 0;
+  foreach( Connection* c, m_connections )
+  {
+    count++;
+    Message m = Protocol::instance().localVCardMessage( c->protocolVersion() );
+    if( count < Settings::instance().maxUsersToConnectInATick() )
+      c->sendMessage( m );
+    else
+      MessageManager::instance().addMessageToSend( c->userId(), ID_INVALID, m );
+  }
+}
+
+bool Core::hasHelper() const
+{
+  UserList ul = UserManager::instance().helpers();
+  if( ul.isEmpty() )
+    return false;
+  foreach( User u, ul.toList() )
+  {
+    if( isUserConnected( u.id() ) )
+      return true;
+  }
+  return false;
 }

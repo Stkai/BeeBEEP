@@ -198,3 +198,15 @@ void UserManager::addNewConnectedUserId( VNumber user_id )
       m_newConnectedUserIdList.append( user_id );
   }
 }
+
+UserList UserManager::helpers() const
+{
+  UserList ul;
+  foreach( User u, m_users.toList() )
+  {
+    if( u.isHelper() )
+      ul.set( u );
+  }
+  return ul;
+}
+

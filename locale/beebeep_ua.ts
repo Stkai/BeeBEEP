@@ -3558,6 +3558,10 @@ Please select a different name.</source>
         <source>Help station</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Ask for help</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -5153,6 +5157,14 @@ Please select a different name.</source>
         <source>Information to display to other users</source>
         <translation>Інформація для користувачів</translation>
     </message>
+    <message>
+        <source>Your room, location or address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Location</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiVCardWidget</name>
@@ -5211,6 +5223,14 @@ Please select a different name.</source>
     <message>
         <source>Workgroups</source>
         <translation>Рабочі групи</translation>
+    </message>
+    <message>
+        <source>Room position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ask for help</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

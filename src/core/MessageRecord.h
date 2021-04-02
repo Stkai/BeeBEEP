@@ -38,6 +38,7 @@ public:
   MessageRecord& operator=( const MessageRecord& );
 
   inline bool isValid() const;
+  inline bool isChatValid() const;
 
   inline VNumber toUserId() const;
   inline VNumber chatId() const;
@@ -56,6 +57,7 @@ private:
 
 // Inline Functions
 inline bool MessageRecord::isValid() const { return m_toUserId != ID_INVALID && m_chatId != ID_INVALID && m_message.isValid(); }
+inline bool MessageRecord::isChatValid() const { return m_chatId != ID_INVALID; }
 inline VNumber MessageRecord::toUserId() const { return m_toUserId; }
 inline VNumber MessageRecord::chatId() const { return m_chatId; }
 inline const Message& MessageRecord::message() const { return m_message; }

@@ -697,6 +697,7 @@ void GuiMain::checkViewActions()
   bool is_connected = beeCore->isConnected();
   int connected_users = beeCore->connectedUsers();
   bool file_transfer_is_active = beeCore->isFileTransferActive();
+  bool helper_found = beeCore->hasHelper();
 
   mp_actConnect->setEnabled( !m_coreIsConnecting && !is_connected );
   mp_actDisconnect->setEnabled( is_connected );
@@ -735,6 +736,8 @@ void GuiMain::checkViewActions()
     else
       mp_fileSharing->close();
   }
+
+  mp_actHelpRequest->setEnabled( is_connected && connected_users > 0 && helper_found );
 
   updateWindowTitle();
   updateTabTitles();
@@ -828,10 +831,13 @@ void GuiMain::createActions()
   mp_actViewScreenShot = new QAction( IconManager::instance().icon( "screenshot.png" ), tr( "Make a screenshot" ), this );
   connect( mp_actViewScreenShot, SIGNAL( triggered() ), this, SLOT( showScreenShotWindow() ) );
 
-  mp_actCreateMessage = new QAction( IconManager::instance().icon( "message-create" ), tr( "Write a message" ), this );
+  mp_actCreateMessage = new QAction( IconManager::instance().icon( "message-create.png" ), tr( "Write a message" ), this );
   connect( mp_actCreateMessage, SIGNAL( triggered() ), this, SLOT( createMessage() ) );
   if( Settings::instance().disableCreateMessage() )
     mp_actCreateMessage->setToolTip( tr( "The option has been disabled by your system administrator.") );
+
+  mp_actHelpRequest = new QAction( IconManager::instance().icon( "help.png" ), tr( "Ask for help" ), this );
+  connect( mp_actHelpRequest, SIGNAL( triggered() ), this, SLOT( sendHelpMessage() ) );
 
 #ifdef BEEBEEP_USE_WEBENGINE
   mp_actWebView = new QAction( IconManager::instance().icon( "network.png" ), tr( "News" ), this );
@@ -852,6 +858,8 @@ void GuiMain::createMenus()
   mp_menuMain->addAction( mp_actDisconnect );
   mp_menuMain->addSeparator();
   mp_menuMain->addAction( mp_actBroadcast );
+  mp_menuMain->addSeparator();
+  mp_menuMain->addAction( mp_actHelpRequest );
   mp_menuMain->addSeparator();
   mp_menuMain->addAction( mp_actVCard );
   mp_menuMain->addSeparator();
@@ -3033,6 +3041,7 @@ void GuiMain::showVCard( VNumber user_id )
   connect( gvc, SIGNAL( toggleFavorite( VNumber ) ), this, SLOT( toggleUserFavorite( VNumber ) ) );
   connect( gvc, SIGNAL( removeUser( VNumber ) ), this, SLOT( removeUserFromList( VNumber ) ) );
   connect( gvc, SIGNAL( buzzUser( VNumber ) ), this, SLOT( sendBuzzToUser( VNumber ) ) );
+  connect( gvc, SIGNAL( sendHelpRequestToUser( VNumber ) ), this, SLOT( sendHelpMessageToUser( VNumber ) ) );
   gvc->setVCard( u, ChatManager::instance().privateChatForUser( u.id() ).id(), beeCore->isConnected() );
 
   QPoint cursor_pos = QCursor::pos();
@@ -4764,7 +4773,17 @@ void GuiMain::showBuzzFromUser( const User& u, VNumber chat_id )
 void GuiMain::sendHelpMessage()
 {
   if( !beeCore->sendHelpMessage() )
-  {}
+  {
+    // TODO: alert / success message
+  }
+}
+
+void GuiMain::sendHelpMessageToUser( VNumber user_id )
+{
+  if( !beeCore->sendHelpMessageToUser( user_id ) )
+  {
+    // TODO: alert / success message
+  }
 }
 
 void GuiMain::showHelpRequestFromUser( const User& u, VNumber chat_id )

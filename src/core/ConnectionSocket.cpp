@@ -391,7 +391,8 @@ void ConnectionSocket::sendQuestionHello()
 #ifdef CONNECTION_SOCKET_IO_DEBUG
     qDebug() << "ConnectionSocket is sending pkey1 with shared-key:" << qPrintable( m_publicKey1 );
 #endif
-    if( sendData( Protocol::instance().helloMessage( m_publicKey1, !Settings::instance().disableConnectionSocketEncryption(), !Settings::instance().disableConnectionSocketDataCompression() ) ) )
+    if( sendData( Protocol::instance().helloMessage( m_publicKey1, !Settings::instance().disableConnectionSocketEncryption(),
+                                                                   !Settings::instance().disableConnectionSocketDataCompression() ) ) )
     {
 #ifdef BEEBEEP_DEBUG
       qDebug() << "ConnectionSocket sent question HELLO to" << qPrintable( m_networkAddress.toString() );

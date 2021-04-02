@@ -94,7 +94,7 @@ public:
 
   Message userStatusMessage( int user_status, const QString& user_status_description ) const;
   bool changeUserStatusFromMessage( User*, const Message& ) const;
-  Message localVCardMessage() const;
+  Message localVCardMessage( int proto_version ) const;
   bool changeVCardFromMessage( User*, const Message& ) const;
 
   static bool fileCanBeShared( const QFileInfo& );

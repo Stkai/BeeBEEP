@@ -735,16 +735,3 @@ void Core::showMessage( const QString& msg, int ms_to_display )
 {
   emit newSystemStatusMessage( msg, ms_to_display );
 }
-
-int Core::sendMessageToAllConnectedUsers( const Message& m )
-{
-  if( !isConnected() || m_connections.isEmpty() )
-    return 0;
-  int messages_sent = 0;
-  foreach( Connection* c, m_connections )
-  {
-    if( c->sendMessage( m ) )
-      messages_sent++;
-  }
-  return messages_sent;
-}

@@ -116,6 +116,8 @@ void GuiEditVCard::loadVCard()
 
   mp_lePhone->setText( m_vCard.phoneNumber() );
 
+  mp_leRoom->setText( m_vCard.roomLocation() );
+
   mp_teInfo->setPlainText( m_vCard.info() );
 
   mp_leNickname->setFocus();
@@ -214,6 +216,7 @@ void GuiEditVCard::saveVCard()
     m_vCard.setBirthday( QDate() );
   m_vCard.setEmail( mp_leEmail->text().simplified() );
   m_vCard.setPhoneNumber( mp_lePhone->text().simplified() );
+  m_vCard.setRoomLocation( mp_leRoom->text().simplified() );
   m_vCard.setInfo( mp_teInfo->toPlainText().trimmed() );
 }
 

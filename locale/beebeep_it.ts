@@ -3801,6 +3801,10 @@ Inserisci un nome differente.</translation>
         <source>Help station</source>
         <translation>Postazione di aiuto</translation>
     </message>
+    <message>
+        <source>Ask for help</source>
+        <translation>Chiedi aiuto</translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -5534,6 +5538,14 @@ Inserisci un nome differente.</translation>
         <source>If you don&apos;t want to show the year to other users use 1900</source>
         <translation type="obsolete">Se non vuoi mostrare l&apos;anno agli altri utenti usa 1900</translation>
     </message>
+    <message>
+        <source>Your room, location or address</source>
+        <translation>La tua stanza, posizione o indirizzo</translation>
+    </message>
+    <message>
+        <source>Location</source>
+        <translation>Stanza</translation>
+    </message>
 </context>
 <context>
     <name>GuiVCardWidget</name>
@@ -5592,6 +5604,14 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Workgroups</source>
         <translation>Gruppi di lavoro</translation>
+    </message>
+    <message>
+        <source>Room position</source>
+        <translation>Posizione stanza</translation>
+    </message>
+    <message>
+        <source>Ask for help</source>
+        <translation>Chiedi aiuto</translation>
     </message>
 </context>
 <context>

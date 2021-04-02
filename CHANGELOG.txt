@@ -12,6 +12,7 @@ BeeBEEP 5.8.5 (in development)
 - Important private messages now open the chat window.
 - Added "EnableReceivingHelpMessages" option in beebeep.rc file.
 - Added global shortcut CTRL+SHIFT+1 for PANIC BUTTON and HELP REQUEST automatic message.
+- Added room location in user VCard (useful also for help request).
 
 BeeBEEP 5.8.4
 - New feature: almost all the options of file beebeep.ini can be used in file beebeep.rc also

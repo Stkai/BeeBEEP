@@ -3588,6 +3588,10 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Help station</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Ask for help</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiMessageEdit</name>
@@ -5195,6 +5199,14 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Information to display to other users</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Your room, location or address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Location</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiVCardWidget</name>
@@ -5253,6 +5265,14 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>Workgroups</source>
         <translation type="unfinished">Arbeitsgruppen</translation>
+    </message>
+    <message>
+        <source>Room position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ask for help</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

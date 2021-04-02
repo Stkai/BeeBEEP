@@ -445,7 +445,7 @@ QPixmap Protocol::stringToPixmap( const QString& s ) const
   return pix;
 }
 
-Message Protocol::localVCardMessage() const
+Message Protocol::localVCardMessage( int proto_version ) const
 {
   const VCard& vc = Settings::instance().localUser().vCard();
   Message m( Message::User, ID_USER_MESSAGE, pixmapToString( vc.photo() ) );
@@ -458,6 +458,11 @@ Message Protocol::localVCardMessage() const
   data_list << vc.email();
   data_list << Settings::instance().localUser().color();
   data_list << vc.phoneNumber();
+  if( proto_version >= VCARD_ROOM_LOCATION_PROTO_VERSION )
+  {
+    data_list << vc.roomLocation();
+    data_list << (Settings::instance().enableReceivingHelpMessages() ? QLatin1String( "H" ) : QLatin1String( "N" ) );
+  }
   data_list << vc.info();
   m.setData( data_list.join( DATA_FIELD_SEPARATOR ) );
   return m;
@@ -489,6 +494,14 @@ bool Protocol::changeVCardFromMessage( User* u, const Message& m ) const
 
   if( !sl.isEmpty() )
     vc.setPhoneNumber( sl.takeFirst() );
+
+  if( u->protocolVersion() >= VCARD_ROOM_LOCATION_PROTO_VERSION )
+  {
+    if( !sl.isEmpty() )
+      vc.setRoomLocation( sl.takeFirst() );
+    if( !sl.isEmpty() )
+      u->setIsHelper( sl.takeFirst().startsWith( QLatin1String( "H" ) ) );
+  }
 
   if( !sl.isEmpty()  )
     vc.setInfo( sl.takeFirst() );

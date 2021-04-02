@@ -81,6 +81,8 @@ public:
   inline const QStringList& workgroups() const;
   inline void setLocalHostName( const QString& );
   inline const QString& localHostName() const;
+  inline void setIsHelper( bool );
+  inline bool isHelper() const;
 
   inline QString path() const;
   inline QString accountPath() const;
@@ -109,6 +111,7 @@ private:
   QDateTime m_lastConnection;
   QStringList m_workgroups;
   QString m_localHostName;
+  bool m_isHelper;
 
 };
 
@@ -157,5 +160,7 @@ inline void User::setWorkgroups( const QStringList& new_value ) { m_workgroups =
 inline const QStringList& User::workgroups() const { return m_workgroups; }
 inline void User::setLocalHostName( const QString& new_value ) { m_localHostName = new_value; }
 inline const QString& User::localHostName() const { return m_localHostName; }
+inline void User::setIsHelper( bool new_value ) { m_isHelper = new_value; }
+inline bool User::isHelper() const { return m_isHelper; }
 
 #endif // BEEBEEP_USER_H

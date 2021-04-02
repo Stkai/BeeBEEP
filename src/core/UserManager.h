@@ -51,6 +51,8 @@ public:
   inline bool hasNewConnectedUsers() const;
   QString autoresponderName() const;
 
+  UserList helpers() const;
+
   static UserManager& instance()
   {
     if( !mp_instance )

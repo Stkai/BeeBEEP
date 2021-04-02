@@ -88,11 +88,13 @@ public:
   bool userCanBeRemoved( const User& );
   void regenerateLocalUserHash();
   void setLocalUserWorkgroups( const QStringList& );
+  bool hasHelper() const;
 
   /* CoreChat */
   void createPrivateChat( const User& );
   int sendChatMessage( VNumber chat_id, const QString&, bool is_important, bool can_be_delayed ); // return the number of message sent (one for every user in chat)
   bool sendHelpMessage();
+  bool sendHelpMessageToUser( VNumber );
   Chat createGroupChat( const User&, const Group&, bool broadcast_message );
   bool changeGroupChat( const User&, const Group& );
   bool clearMessagesInChat( VNumber, bool clear_history );
@@ -244,10 +246,9 @@ protected:
   void loadUsersAndGroups();
   void createLocalShareMessage();
   void showMessage( const QString&, int ms_to_show );
-  int sendMessageToAllConnectedUsers( const Message& );
 
   /* CoreConnection */
-  Connection* connection( VNumber ) const;
+  Connection* connection( VNumber user_id ) const;
   bool hasConnection( const QHostAddress&, int ) const;
   void closeConnection( Connection* );
   void addConnectionReadyForUse( Connection*, const User& );
@@ -279,6 +280,7 @@ protected:
   void sendLocalConnectedUsersTo( const User& );
   bool isUserConnected( const NetworkAddress& ) const; // to prevent multiple connections in Core::newPeerFound(...)
   void removeInactiveUsers();
+  void sendVCardToAllConnectedUsers();
 
   /* CoreChat */
   void createDefaultChat();
