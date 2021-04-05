@@ -346,7 +346,7 @@
         <location filename="../src/core/CoreChat.cpp" line="1026"/>
         <location filename="../src/core/CoreChat.cpp" line="1059"/>
         <source>I need your help.</source>
-        <translation type="unfinished"></translation>
+        <translation>お手伝いしてほしい。</translation>
     </message>
     <message>
         <location filename="../src/core/Core.cpp" line="264"/>
@@ -661,17 +661,17 @@
     <message>
         <location filename="../src/core/CoreParser.cpp" line="634"/>
         <source>%1 %2 is asking for your help.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 はあなたのお手伝いを求めています。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreParser.cpp" line="643"/>
         <source>I got your call for help.</source>
-        <translation type="unfinished"></translation>
+        <translation>あなたのお手伝い依頼を受け取りました。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreParser.cpp" line="650"/>
         <source>%1 %2 got your call for help.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 はあなたのお手伝い依頼を受け取りました。</translation>
     </message>
     <message>
         <location filename="../src/core/CoreUser.cpp" line="94"/>
@@ -2633,7 +2633,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1172"/>
         <source>Enable file transfer</source>
-        <translation>ファイル転送を有効(&amp;T)</translation>
+        <translation>ファイル転送を使用(&amp;T)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="3929"/>
@@ -2786,7 +2786,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1272"/>
         <source>Enable Buzz sound</source>
-        <translation>バズ音を有効化(2連続ビープ音)(&amp;B)</translation>
+        <translation>バズ音を使用(2連続ビープ音)(&amp;B)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1368"/>
@@ -3052,7 +3052,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1176"/>
         <source>Enable file sharing</source>
-        <translation>ファイル共有を有効(&amp;S)</translation>
+        <translation>ファイル共有を使用(&amp;S)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1268"/>
@@ -3133,7 +3133,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1309"/>
         <source>Enable tray icon notifications</source>
-        <translation>通知領域の通知を有効(&amp;E)</translation>
+        <translation>通知領域の通知を使用(&amp;E)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1321"/>
@@ -3312,7 +3312,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1334"/>
         <source>Enable desktop sharing</source>
-        <translation>デスクトップ共有を有効化(&amp;E)</translation>
+        <translation>デスクトップ共有を使用(&amp;E)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1339"/>
@@ -3346,7 +3346,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="916"/>
         <source>Enable maximize button</source>
-        <translation>最大化ボタンを有効化(&amp;M)</translation>
+        <translation>最大化ボタンを使用(&amp;M)</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1358"/>
@@ -3436,7 +3436,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="839"/>
         <source>Ask for help</source>
-        <translation type="unfinished"></translation>
+        <translation>お手伝いを頼む</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="899"/>
@@ -3456,7 +3456,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1161"/>
         <source>Change size of the emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>絵文字の大きさを変更</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1193"/>
@@ -3501,7 +3501,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1276"/>
         <source>Enable visual notifications for chat windows</source>
-        <translation type="unfinished"></translation>
+        <translation>チャットウィンドウの視覚的な通知を使用</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1288"/>
@@ -3521,7 +3521,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1540"/>
         <source>Help station</source>
-        <translation type="unfinished"></translation>
+        <translation>お手伝い伝言板</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1563"/>
@@ -3788,17 +3788,17 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4794"/>
         <source>%1 is asking for your help!</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 はあなたのお手伝いを求めています！</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4802"/>
         <source>%1 got your call for help.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 はあなたのお手伝い依頼を受け取りました。</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="5402"/>
         <source>Please select the new size of the emoticons in chat</source>
-        <translation type="unfinished"></translation>
+        <translation>チャット内での絵文字の新たな大きさを選択してください</translation>
     </message>
     <message>
         <source>Unable to open voice message %1</source>
@@ -5310,7 +5310,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiScreenShot.cpp" line="89"/>
         <source>Enable high dpi support to manage, for example, Apple Retina display</source>
-        <translation>高DPI に対応させます。例えば Apple の Retina ディスプレイのような</translation>
+        <translation>高DPI （高解像度）に対応させます。例えば Apple の Retina ディスプレイのような</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiScreenShot.cpp" line="95"/>
@@ -6164,12 +6164,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="325"/>
         <source>Your room, location or address</source>
-        <translation type="unfinished"></translation>
+        <translation>あなたの部屋、場所、住所</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="328"/>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation>場所</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="392"/>
@@ -6246,7 +6246,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiVCard.ui" line="204"/>
         <source>Room position</source>
-        <translation type="unfinished"></translation>
+        <translation>部屋の場所</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.ui" line="221"/>
@@ -6276,7 +6276,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiVCard.ui" line="463"/>
         <source>Ask for help</source>
-        <translation type="unfinished"></translation>
+        <translation>お手伝いを頼む</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.ui" line="498"/>
@@ -6681,7 +6681,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="128"/>
         <source>Send a help request message</source>
-        <translation type="unfinished"></translation>
+        <translation>お手伝い依頼メッセージを送信</translation>
     </message>
     <message>
         <location filename="../src/core/ConnectionSocket.cpp" line="634"/>
