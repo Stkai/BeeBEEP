@@ -103,6 +103,9 @@ void EmoticonManager::addEmojis()
   addEmoticon( QString::fromUtf8( "🙍" ), "1f64d", Emoticon::People, 75 );
   addEmoticon( QString::fromUtf8( "🙎" ), "1f64e", Emoticon::People, 76 );
   addEmoticon( QString::fromUtf8( "🙏" ), "1f64f", Emoticon::People, 77 );
+
+
+
   addEmoticon( QString::fromUtf8( "✂" ), "2702", Emoticon::Objects, 78 );
   addEmoticon( QString::fromUtf8( "✅" ), "2705", Emoticon::Symbols, 79 );
   addEmoticon( QString::fromUtf8( "✈" ), "2708", Emoticon::Places, 80 );
@@ -875,6 +878,7 @@ void EmoticonManager::addEmojis()
   addEmoticon( QString::fromUtf8( "🇺🇸" ), "1f1fa-1f1f8", Emoticon::Places, 844 );
   addEmoticon( QString::fromUtf8( "🇷🇺" ), "1f1f7-1f1fa", Emoticon::Places, 845 );
   */
+  addEmoticon( QString::fromUtf8( "🤮" ), "1f92e", Emoticon::People, 846 );
 
 }
 
