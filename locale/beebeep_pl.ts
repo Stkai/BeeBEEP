@@ -345,7 +345,7 @@
         <location filename="../src/core/CoreChat.cpp" line="1026"/>
         <location filename="../src/core/CoreChat.cpp" line="1059"/>
         <source>I need your help.</source>
-        <translation type="unfinished"></translation>
+        <translation>Potrzebuję Twojej pomocy.</translation>
     </message>
     <message>
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
@@ -701,17 +701,17 @@
     <message>
         <location filename="../src/core/CoreParser.cpp" line="634"/>
         <source>%1 %2 is asking for your help.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 prosi Cię o pomoc.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreParser.cpp" line="643"/>
         <source>I got your call for help.</source>
-        <translation type="unfinished"></translation>
+        <translation>Otrzymałem Twoją prośbę o pomoc.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreParser.cpp" line="650"/>
         <source>%1 %2 got your call for help.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 otrzymał Twoją prośbę o pomoc.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreUser.cpp" line="94"/>
@@ -3401,7 +3401,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="839"/>
         <source>Ask for help</source>
-        <translation type="unfinished"></translation>
+        <translation>Poproś o pomoc</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="899"/>
@@ -3471,7 +3471,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1161"/>
         <source>Change size of the emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmień rozmiar emotikonów</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1193"/>
@@ -3501,7 +3501,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1276"/>
         <source>Enable visual notifications for chat windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Włącz wizualne powiadomienia dla okien czatu</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1293"/>
@@ -3639,7 +3639,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1540"/>
         <source>Help station</source>
-        <translation type="unfinished"></translation>
+        <translation>Stacja pomocy</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1563"/>
@@ -3866,17 +3866,17 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4794"/>
         <source>%1 is asking for your help!</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 prosi Cię o pomoc!</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4802"/>
         <source>%1 got your call for help.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 otrzymał Twoją prośbę o pomoc.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="5402"/>
         <source>Please select the new size of the emoticons in chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Proszę wybrać nowy rozmiar emotikonów w czacie</translation>
     </message>
     <message>
         <source>%1 already exists. Please select a new filename.</source>
@@ -6421,12 +6421,12 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="325"/>
         <source>Your room, location or address</source>
-        <translation type="unfinished"></translation>
+        <translation>Twój pokój, lokalizacja lub adres</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="328"/>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Lokalizacja</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="392"/>
@@ -6507,7 +6507,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiVCard.ui" line="204"/>
         <source>Room position</source>
-        <translation type="unfinished"></translation>
+        <translation>Położenie pokoju</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.ui" line="221"/>
@@ -6537,7 +6537,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/desktop/GuiVCard.ui" line="463"/>
         <source>Ask for help</source>
-        <translation type="unfinished"></translation>
+        <translation>Poproś o pomoc</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.ui" line="498"/>
@@ -6989,7 +6989,7 @@ Proszę wybrać inną nazwę.</translation>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="128"/>
         <source>Send a help request message</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyślij wiadomość z prośbą o pomoc</translation>
     </message>
     <message>
         <location filename="../src/core/ConnectionSocket.cpp" line="634"/>
