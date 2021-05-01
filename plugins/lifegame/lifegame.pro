@@ -21,3 +21,8 @@ RESOURCES += \
 
 FORMS += \
     GuiLife.ui
+    
+unix:!macx:!android: {
+  target.path = $$PLUGINDIR
+  INSTALLS += target
+}

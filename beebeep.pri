@@ -21,4 +21,28 @@ unix:!macx:!android: {
   UI_DIR = $$OBJECTS_DIR
   MOC_DIR = $$OBJECTS_DIR
   RCC_DIR = $$OBJECTS_DIR
+
+  isEmpty(PREFIX) {
+    PREFIX = /usr/local
+  }
+  isEmpty(BINDIR) {
+    BINDIR = $$PREFIX/bin
+  }
+  isEmpty(DATADIR) {
+    DATADIR = $$PREFIX/share
+  }
+  isEmpty(PLUGINDIR) {
+    PLUGINDIR = $$PREFIX/lib/beebeep
+  }
+
+  data.files = locale/*.qm src/images/beebeep.png misc/beep.wav
+  data.path = $$DATADIR/beebeep/
+
+  desktop.files = scripts/debian_amd64/beebeep.desktop
+  desktop.path = $$DATADIR/applications/
+
+  appdata.files = scripts/debian_amd64/beebeep.appdata.xml
+  appdata.path = $$DATADIR/metainfo/
+
+  INSTALLS += data desktop appdata
 }

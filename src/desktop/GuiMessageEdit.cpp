@@ -53,7 +53,7 @@ GuiMessageEdit::GuiMessageEdit( QWidget* parent )
   mp_menuContext = new QMenu( this );
 
   connect( mp_timer, SIGNAL( timeout() ), this, SLOT( checkWriting() ) );
-  connect( this, SIGNAL( undoAvailable( bool) ), this, SLOT( setUndoAvailable( bool ) ) );
+  connect( this, SIGNAL( undoAvailable( bool ) ), this, SLOT( setUndoAvailable( bool ) ) );
   connect( this, SIGNAL( redoAvailable( bool ) ), this, SLOT( setRedoAvailable( bool ) ) );
 }
 
