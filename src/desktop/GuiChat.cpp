@@ -573,7 +573,7 @@ bool GuiChat::setChat( const Chat& c )
 
   m_chatId = c.id();
 
-  int missed_lines = 0;
+  int missed_lines = -1;
   int num_messages = c.messages().size();
   int msg_lines = Settings::instance().chatMessagesToShow() >= 0 ? qMin( num_messages, Settings::instance().chatMessagesToShow() ) : num_messages;
   int history_lines = Settings::instance().chatMessagesToShow() >= 0 ? qMax( 0, Settings::instance().chatMessagesToShow() - msg_lines ) : -1;
@@ -590,6 +590,9 @@ bool GuiChat::setChat( const Chat& c )
     else
       html_text += ChatManager::instance().chatSavedText( c.name(), history_lines, &missed_lines );
   }
+
+  if( missed_lines < 0 )
+    missed_lines = qMax( 0, num_messages - msg_lines );
 
   if( Settings::instance().chatMessagesToShow() >= 0 && (missed_lines > 0 || num_messages > msg_lines) )
   {

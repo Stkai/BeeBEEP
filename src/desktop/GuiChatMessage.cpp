@@ -142,9 +142,9 @@ QString GuiChatMessage::formatSystemMessage( const ChatMessage& cm, VNumber last
   QString date_time_stamp = cm.type() != ChatMessage::ImagePreview ? datetimestampToString( cm, show_timestamp, show_datestamp ) : QString( "" );
 
   QString html_message = QString( "<font color=%1>%2%3</font>" )
-                           .arg( Settings::instance().chatSystemTextColor() )
-                           .arg( date_time_stamp.isEmpty() ? date_time_stamp : QString( "(%1) " ).arg( date_time_stamp ) )
-                           .arg( cm.message() );
+                           .arg( Settings::instance().chatSystemTextColor(),
+                                 date_time_stamp.isEmpty() ? date_time_stamp : QString( "(%1) " ).arg( date_time_stamp ),
+                                 cm.message() );
   if( cm.isImportant() )
   {
     html_message.prepend( textImportantPrefix() );
