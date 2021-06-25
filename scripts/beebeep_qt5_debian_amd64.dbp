@@ -48,8 +48,7 @@ Description: Free office messenger
 <</FILES>>
 <<SCRIPTS>>
 <<PREINST>>
-1
-
+0
 <</PREINST>>
 <<POSTINST>>
 1
@@ -69,28 +68,12 @@ rm -f "/usr/bin/beebeep"
 <</SCRIPTS>>
 <<CHANGELOG>>
 <<DEST>>DEFAULT<</DEST>>
-beebeep (5.8.4-1) bionic; urgency=low
+beebeep (5.8.4-1) ; urgency=low
 
- * New feature: almost all the options of file beebeep.ini can be used in file beebeep.rc
- * New feature: added "Use high resolution emoticons" option
- * New feature: added ECDH key exchange to encryption protocol
- * New feature: added "Auto save interval" for chat messages to prevent data loss
- * New feature: added "Favored emoticons" as tab in emoticon list
- * User icons in chat window can be clicked also if the user is offline
- * Disabled by default the option to search users by a multicast datagram
- * Suspend/sleep mode is now managed also in Linux systems.
- * File paths will be recognized and made clickable in chat (in single message).
- * Added "KeepModificationDateOnFileTransferred" option in beebeep.ini
- * Added "AllowedFileExtensionsInFileTransfer" option in beebeep.rc
- * Added "AllowOnlyHostAddressesFromHostsIni" option in file beebeep.rc
- * Added "Clear recent emoticons" in menu option of the chat bar
- * Added "ConnectionKeyExchangeMethod" option in beebeep.rc
- * Fixed a bug in options "Disable create message" and "Disable edit groups"
- * Fixed a visualization bug if you open an user VCARD near the side of your desktop
- * Fixed a bug on Download folder when you copy BeeBEEP from a computer to another one
- * Fixed security issue with command line argument -platformpluginpath
+  * You can find the list of all changes at this web address:
+    https://www.beebeep.net/download
 
- -- Marco Mastroddi <marco.mastroddi@gmail.com> 
+ -- Marco Mastroddi <marco.mastroddi@gmail.com>  Fri, 25 Jun 2021 08:17:28 +0200
 
 <</CHANGELOG>>
 <<COPYRIGHT>>

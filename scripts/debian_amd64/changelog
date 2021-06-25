@@ -1,6 +1,6 @@
-beebeep (5.6.8-1) UNRELEASED; urgency=low
+beebeep; urgency=low
 
- * Initial Release. Closes: #1
- * This is BeeBEEP first Debian package.
+You can find the list of all changes at this web address:
+https://www.beebeep.net/download
 
- -- Marco Mastroddi  <marco.mastroddi@gmail.com>  Mon, 5 Aug 2019 10:37:31 +0100
+ -- Marco Mastroddi  <marco.mastroddi@gmail.com>  
