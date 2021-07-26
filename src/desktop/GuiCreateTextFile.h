@@ -17,61 +17,37 @@
 //
 // Author: Marco Mastroddi <marco.mastroddi(AT)gmail.com>
 //
-// $Id$
+// $Id: GuiWorkgroups.h 1455 2020-12-23 10:17:53Z mastroddi $
 //
 //////////////////////////////////////////////////////////////////////
 
-#ifndef BEEBEEP_GUISCREENSHOT_H
-#define BEEBEEP_GUISCREENSHOT_H
+#ifndef BEEBEEP_GUICREATETEXTFILE_H
+#define BEEBEEP_GUICREATETEXTFILE_H
 
 #include "Config.h"
+#include "ui_GuiCreateTextFile.h"
 
 
-class GuiScreenShot : public QMainWindow
+class GuiCreateTextFile : public QDialog, private Ui::GuiCreateTextFileDialog
 {
   Q_OBJECT
 
 public:
-  explicit GuiScreenShot( QWidget *parent = Q_NULLPTR );
+  explicit GuiCreateTextFile( QWidget *parent = Q_NULLPTR );
 
-  inline const QPixmap& screenShot() const;
-  void showUp();
-
-signals:
-  void screenShotToSend( const QString& );
+  QString text() const;
+  bool sendAsFile() const;
+  QString fileSuffix() const;
 
 protected slots:
-  void doScreenShot();
-  void captureScreen();
-  void doSave();
-  void doSend();
-  void doDelete();
+  void onSendTypeButtonClicked( QAbstractButton* );
+  void sendText();
 
 protected:
-  void resizeEvent( QResizeEvent* );
-  void updateScreenShot();
-  void setupToolBar( QToolBar* );
+  void loadSettings();
+  void saveSettings();
 
-private:
-  QPixmap m_screenShot;
-  QSpinBox* mp_sbDelay;
-  QCheckBox* mp_cbHide;
-  QCheckBox* mp_cbCursor;
-#if QT_VERSION < 0x050000
-  QCheckBox* mp_cbRetina;
-#endif
-  QAction* mp_actShot;
-  QAction* mp_actSave;
-  QAction* mp_actSend;
-  QAction* mp_actDelete;
-
-  QToolBar* mp_barScreenShot;
-  QLabel* mp_labelScreenShot;
 
 };
 
-
-// Inline Functions
-inline const QPixmap& GuiScreenShot::screenShot() const { return m_screenShot; }
-
-#endif // BEEBEEP_GUISCREENSHOT_H
+#endif // BEEBEEP_GUICREATETEXTFILE_H

@@ -64,7 +64,7 @@ void GuiScreenShot::setupToolBar( QToolBar* bar )
   mp_sbDelay->setObjectName( "mp_sbDelay" );
   mp_sbDelay->setMinimum( 0 );
   mp_sbDelay->setMaximum( 15 );
-  mp_sbDelay->setValue( 0 );
+  mp_sbDelay->setValue( 2 );
   mp_sbDelay->setSuffix( QString( " " ) + tr( "s" ) + QString( " " ) );
   bar->addWidget( mp_sbDelay );
 
@@ -72,10 +72,23 @@ void GuiScreenShot::setupToolBar( QToolBar* bar )
 
   mp_cbHide = new QCheckBox( this );
   mp_cbHide->setObjectName( "mp_cbHide" );
-  mp_cbHide->setChecked(true);
+  mp_cbHide->setChecked( true );
   mp_cbHide->setText( tr( "Hide this window" ) + QString( "   " ) );
   mp_cbHide->setToolTip( tr( "Hide this window before capture screenshot" ) );
   bar->addWidget( mp_cbHide );
+
+  mp_cbCursor = new QCheckBox( this );
+  mp_cbCursor->setObjectName( "mp_cbCursor" );
+#if QT_VERSION >= 0x050000
+  mp_cbCursor->setChecked( true );
+  mp_cbCursor->setToolTip( tr( "Also grab the cursor in the screenshot" ) );
+#else
+  mp_cbCursor->setChecked( false );
+  mp_cbCursor->setEnabled( false );
+#endif
+  mp_cbCursor->setText( tr( "Grab cursor" ) + QString( "   " ) );
+
+  bar->addWidget( mp_cbCursor );
 
 #if QT_VERSION < 0x050000
   mp_cbRetina = new QCheckBox( this );
@@ -168,8 +181,19 @@ void GuiScreenShot::captureScreen()
 #if QT_VERSION >= 0x050000
   QScreen* primary_screen = QApplication::primaryScreen();
   if( primary_screen )
+  {
     m_screenShot = primary_screen->grabWindow( 0 );
+    if( mp_cbCursor->isChecked() )
+    {
+      QPixmap cursor_pix = cursor().pixmap();
+      if( cursor_pix.isNull() )
+        cursor_pix = IconManager::instance().icon( "cursor.png" ).pixmap( 32, 32 );
+      QPainter p( &m_screenShot );
+      p.drawPixmap( cursor().pos( primary_screen ), cursor_pix );
+    }
+  }
   m_screenShot.setDevicePixelRatio( device_pixel_ratio );
+
 #else
   m_screenShot = QPixmap::grabWindow( QApplication::desktop()->winId(), 0, 0,
                                       QApplication::desktop()->width() * device_pixel_ratio,

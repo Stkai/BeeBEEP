@@ -141,6 +141,8 @@ private slots:
   void resetChatFontToDefault();
   void operationCompleted();
   void clearSystemMessages();
+  void sendTextCode();
+  void copyUrlToClipboard();
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   void shareDesktopToChat();
   void sendScreenshotToChat();
@@ -172,6 +174,7 @@ private:
   QAction* mp_actPrint;
   QAction* mp_actFindTextInChat;
   QAction* mp_actSendFolder;
+  QAction* mp_actSendTextCode;
   QAction* mp_actSaveAs;
   QAction* mp_actRestoreDefaultFont;
 #ifdef BEEBEEP_USE_SHAREDESKTOP

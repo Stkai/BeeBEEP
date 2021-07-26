@@ -10,6 +10,7 @@ HEADERS += desktop/BeeApplication.h \
   desktop/GuiChatMessage.h \
   desktop/GuiCreateGroup.h \
   desktop/GuiCreateMessage.h \
+  desktop/GuiCreateTextFile.h \
   desktop/GuiConfig.h \
   desktop/GuiEditVCard.h \
   desktop/GuiEmoticons.h \
@@ -59,6 +60,7 @@ SOURCES +=  desktop/BeeApplication.cpp \
   desktop/GuiChatMessage.cpp \
   desktop/GuiCreateGroup.cpp \
   desktop/GuiCreateMessage.cpp \
+  desktop/GuiCreateTextFile.cpp \
   desktop/GuiEditVCard.cpp \
   desktop/GuiEmoticons.cpp \
   desktop/GuiFileInfoItem.cpp \
@@ -108,6 +110,7 @@ FORMS += desktop/GuiAddUser.ui \
   desktop/GuiChatList.ui \
   desktop/GuiCreateGroup.ui \
   desktop/GuiCreateMessage.ui \
+  desktop/GuiCreateTextFile.ui \
   desktop/GuiEditVCard.ui \
   desktop/GuiGroupList.ui \
   desktop/GuiHome.ui \

@@ -1268,6 +1268,18 @@ Download for free and install the version with this feature from the %1 website.
         <translation>Голосові повідомлення недоступні в цій версії BeeBEEP.
 Завантажте безкоштовно та встановіть версію з цією функцією з веб-сайту %1.</translation>
     </message>
+    <message>
+        <source>Send code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy URL to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Url copied to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiChatList</name>
@@ -1451,6 +1463,40 @@ Please select a different name.</source>
     <message>
         <source>Send this message to all recipients individually</source>
         <translation>Надіслати це повідомлення усім отримувачам індивідуально</translation>
+    </message>
+</context>
+<context>
+    <name>GuiCreateTextFile</name>
+    <message>
+        <source>Create text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>For example:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GuiCreateTextFileDialog</name>
+    <message>
+        <source>Workgroups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send as text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send as file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File extension</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation type="unfinished">Відправити</translation>
     </message>
 </context>
 <context>
@@ -4380,6 +4426,14 @@ Please select a different name.</source>
     <message>
         <source>Capture screen</source>
         <translation>Знімок екрану</translation>
+    </message>
+    <message>
+        <source>Also grab the cursor in the screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grab cursor</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

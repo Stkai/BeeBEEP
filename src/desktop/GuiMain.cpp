@@ -3394,7 +3394,7 @@ void GuiMain::createGroupChat()
     return;
   }
 
-  GuiCreateGroup gcg;
+  GuiCreateGroup gcg( activeWindow() );
   gcg.loadData();
   gcg.setModal( true );
   gcg.show();
@@ -4923,7 +4923,7 @@ void GuiMain::setFileSharingEnabled( bool enable )
 
 void GuiMain::showWorkgroups()
 {
-  GuiWorkgroups gw;
+  GuiWorkgroups gw( this );
   gw.loadWorkgroups();
   gw.setModal( true );
   gw.setSizeGripEnabled( true );
@@ -4940,7 +4940,7 @@ void GuiMain::showWorkgroups()
 
 void GuiMain::showRefusedChats()
 {
-  GuiRefusedChat grc;
+  GuiRefusedChat grc( this );
   int previous_refused_chats = grc.loadRefusedChats();
   grc.setModal( true );
   grc.setSizeGripEnabled( true );
@@ -5058,7 +5058,7 @@ void GuiMain::createMessage()
                               tr( "Ok" ) );
     return;
   }
-  GuiCreateMessage gcm;
+  GuiCreateMessage gcm( this );
   gcm.setModal( true );
   gcm.setSizeGripEnabled( true );
   gcm.show();

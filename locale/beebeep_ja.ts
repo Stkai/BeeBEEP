@@ -1152,368 +1152,383 @@
 <context>
     <name>GuiChat</name>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="181"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="182"/>
         <source>Change font style</source>
         <translation>フォントを変更</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="182"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="183"/>
         <source>Change font color</source>
         <translation>文字色を変更</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="126"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="127"/>
         <source>Change background color</source>
         <translation>背景色の変更</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="183"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="184"/>
         <source>Filter message</source>
         <translation>表示するメッセージ種別の選択</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="186"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="187"/>
         <source>Chat settings</source>
         <translation>チャットの設定</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="187"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="188"/>
         <source>Spell checking</source>
         <translation>スペルチェック</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="189"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="190"/>
         <source>Word completer</source>
         <translation>単語補完</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="191"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="192"/>
         <source>Use Return key to send message</source>
         <translation>Enter キーでメッセージ送信</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="148"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1148"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="149"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1165"/>
         <source>Find text in chat</source>
         <translation>チャット内を検索</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="194"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="195"/>
         <source>Send file</source>
         <translation>ファイル送信</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="195"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="196"/>
         <source>Send folder</source>
         <translation>フォルダごと送信</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="135"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="136"/>
         <source>Save chat</source>
         <translation>チャットの保存</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="214"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="217"/>
         <source>Close</source>
         <translation>閉じる</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="215"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="218"/>
         <source>Close chat window on sending message</source>
         <translation>メッセージ送信時にチャットウィンドウを閉じます</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="219"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="222"/>
         <source>Minimize</source>
         <translation>最小化</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="220"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="223"/>
         <source>Minimize chat window on sending message</source>
         <translation>メッセージ送信時にチャットウィンドウを最小化します</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="129"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="130"/>
         <source>Select chat default text color</source>
         <translation>通常の文字色を選択</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="132"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="133"/>
         <source>Select chat system text color</source>
         <translation>システムの文字色を選択</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="138"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="139"/>
         <source>Print...</source>
         <translation>印刷...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="145"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="146"/>
         <source>Clear system messages</source>
         <translation>システムのメッセージを消去</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="151"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="152"/>
         <source>Restore the default font</source>
         <translation>フォント指定の初期化</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="161"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="330"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="162"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="338"/>
         <source>Share your desktop</source>
         <translation>あなたのデスクトップを共有</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="165"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="166"/>
         <source>Send a screenshot</source>
         <translation>スクリーンショットを送信</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="342"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="350"/>
         <source>Record voice message</source>
         <translation>ボイスメッセージを録音</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="340"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="348"/>
         <source>File transfer must be enabled to send voice messages</source>
         <translation>ボイスメッセージの送信にはファイル転送を有効にする必要があります</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="272"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="276"/>
         <source>You are not connected</source>
         <translation>あなたは未接続です</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="280"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="285"/>
         <source>Send messages is disabled</source>
         <translation>メッセージ送信は無効化されています</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="286"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="292"/>
         <source>Chat with all users is disabled</source>
         <translation>すべてのユーザーとのチャットは無効化されています</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="292"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="299"/>
         <source>Private chat is disabled</source>
         <translation>個人的なチャットは無効化されています</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="301"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="309"/>
         <source>You have left this chat</source>
         <translation>このチャットから退出しました</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="309"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="317"/>
         <source>Write a message to all user</source>
         <translation>すべてのユーザーへのメッセージを入力</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="326"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="334"/>
         <source>Your desktop is shared with %1</source>
         <translation>あなたのデスクトップは %1 に共有されています</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="355"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="363"/>
         <source>Select all</source>
         <translation>すべて選択</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="359"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="373"/>
         <source>Quote selected text</source>
         <translation>選択文字列を引用</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="361"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="375"/>
         <source>Open selected text as url</source>
         <translation>選択文字列を URL として開く</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="540"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="554"/>
         <source>The loading of saved messages has not yet been completed.</source>
         <translation>保存されたメッセージの読み込みはまだ完了していません。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="602"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="619"/>
         <source>only the last %1 messages are shown</source>
         <translation>最後の %1 メッセージが表示されています</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="535"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="549"/>
         <source>Loading of saved messages...</source>
         <translation>保存メッセージを読み込み中...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="103"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="104"/>
         <source>Voice messages are not available with this version of BeeBEEP.
 Download for free and install the version with this feature from the %1 website.</source>
         <translation>ボイスメッセージは、このバージョンの BeeBEEP では利用できません。
 %1 のサイトからこの機能を搭載したバージョンを無料でダウンロードしインストールできます。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="492"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="197"/>
+        <source>Send code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiChat.cpp" line="367"/>
+        <source>Copy URL to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiChat.cpp" line="506"/>
         <source>Opening voice message</source>
         <translation>ボイスメッセージを再生中</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="604"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="621"/>
         <source>maximum number of messages to show reached</source>
         <translation>表示できるメッセージが限界数に達しました</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="797"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="814"/>
         <source>You must close and reopen this window to see the changes applied.</source>
         <translation>変更を適用するにはこのウインドウを閉じ開きなおす必要があります。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="824"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="841"/>
         <source>Please select a file to save all the messages of the chat.</source>
         <translation>チャットのすべてのメッセージを保存するファイルを選択.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="936"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="953"/>
         <source>You are trying to send %1 files simultaneously but the maximum allowed is %2.</source>
         <translation>%1 個のファイルを一度に送信しようとしていますが、 %2 個が限度となっています。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="945"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="962"/>
         <source>Do you want to send %1 %2 to the members of this chat?</source>
         <translation>このチャットのメンバーに %1 %2を送信しますか？</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1046"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1063"/>
         <source>Spell checking is enabled</source>
         <translation>スペルチェックは有効です</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1053"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1077"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1070"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1094"/>
         <source>There is not a valid dictionary</source>
         <translation>有効な辞書がありません</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1070"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1087"/>
         <source>Word completer is enabled</source>
         <translation>単語補完は有効です</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1072"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1089"/>
         <source>Word completer is disabled</source>
         <translation>単語補完は無効化されています</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1186"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1203"/>
         <source>%1 not found in chat.</source>
         <translation>%1 はこのチャット内にありません。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1222"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1239"/>
         <source>Do you want to restore the default font?</source>
         <translation>フォントの指定を初期設定に戻しますか?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1230"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1247"/>
         <source>Ready.</source>
         <translation>準備完了。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1246"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1263"/>
         <source>Do you want to send a screenshot?</source>
         <translation>スクリーンショットを送信しますか？</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1246"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1263"/>
         <source>Yes and hide this chat</source>
         <translation>はい (チャット非表示で撮影)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1048"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1312"/>
+        <source>Url copied to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiChat.cpp" line="1065"/>
         <source>Spell checking is disabled</source>
         <translation>スペルチェックは無効化されています</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="142"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="143"/>
         <source>Clear messages</source>
         <translation>メッセージを消去</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="357"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="365"/>
         <source>Copy to clipboard</source>
         <translation>クリップボードにコピー</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="408"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="422"/>
         <source>Show only messages in default chat</source>
         <translation>標準チャットではメッセージのみ表示</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="452"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="466"/>
         <source>Last message %1</source>
         <translation>最後のメッセージ %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="311"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="319"/>
         <source>Write a message to %1</source>
         <translation>%1 へのメッセージを入力</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="845"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="862"/>
         <source>%1: save completed.</source>
         <translation>保存完了: %1。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="797"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="845"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="937"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="814"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="862"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="954"/>
         <source>Ok</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="605"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="622"/>
         <source>open %1 to read them all</source>
         <translation>すべて読むには%1チャットを開きます</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="605"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="622"/>
         <source>the saved chat</source>
         <translation>保存済みチャット</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="892"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="909"/>
         <source>Unable to save temporary file: %1</source>
         <translation>一時ファイルを保存できませんでした: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="946"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="963"/>
         <source>file</source>
         <translation>ファイル</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="946"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="963"/>
         <source>files</source>
         <translation>ファイル</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="947"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1222"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1246"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="964"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1239"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1263"/>
         <source>Yes</source>
         <translation>はい</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="947"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1222"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1246"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="964"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1239"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1263"/>
         <source>No</source>
         <translation>いいえ</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1030"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1047"/>
         <source>Use key Return to send message</source>
         <translation>メッセージ送信に Enter キーを使用</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1032"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1049"/>
         <source>Use key Return to make a carriage return</source>
         <translation>Enter キーは改行に使用</translation>
     </message>
@@ -1747,6 +1762,47 @@ Please select a different name.</source>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="136"/>
         <source>Marks the message as important</source>
         <translation>重要なメッセージとしてマーク(&amp;I)</translation>
+    </message>
+</context>
+<context>
+    <name>GuiCreateTextFile</name>
+    <message>
+        <location filename="../src/desktop/GuiCreateTextFile.cpp" line="35"/>
+        <source>Create text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiCreateTextFile.cpp" line="44"/>
+        <source>For example:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GuiCreateTextFileDialog</name>
+    <message>
+        <location filename="../src/desktop/GuiCreateTextFile.ui" line="17"/>
+        <source>Workgroups</source>
+        <translation type="unfinished">作業グループ</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiCreateTextFile.ui" line="28"/>
+        <source>Send as text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiCreateTextFile.ui" line="35"/>
+        <source>Send as file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiCreateTextFile.ui" line="64"/>
+        <source>File extension</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiCreateTextFile.ui" line="121"/>
+        <source>Send</source>
+        <translation type="unfinished">送信(&amp;S)</translation>
     </message>
 </context>
 <context>
@@ -5303,62 +5359,72 @@ Please select a different name.</source>
         <translation>スクリーンショット撮影前にこのウィンドウを隠します</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="88"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="84"/>
+        <source>Also grab the cursor in the screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="89"/>
+        <source>Grab cursor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="101"/>
         <source>Enable high dpi</source>
         <translation>高DPI を有効</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="89"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="102"/>
         <source>Enable high dpi support to manage, for example, Apple Retina display</source>
         <translation>高DPI （高解像度）に対応させます。例えば Apple の Retina ディスプレイのような</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="95"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="108"/>
         <source>Capture screen</source>
         <translation>スクリーンを撮影</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="96"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="109"/>
         <source>Send screenshot to a user</source>
         <translation>ほかのユーザーにスクリーンショットを送信</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="97"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="110"/>
         <source>Save screenshot</source>
         <translation>スクリーンショットを保存</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="98"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="111"/>
         <source>Delete screenshot</source>
         <translation>スクリーンショットを削除</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="123"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="136"/>
         <source>No screenshot available</source>
         <translation>スクリーンショットなし</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="195"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="219"/>
         <source>/beesshot-%1.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="198"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="222"/>
         <source>Save As</source>
         <translation>名前を付けて保存</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="200"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="224"/>
         <source>%1 Files (*.%2)</source>
         <translation>%1 ファイル (*.%2)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="215"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="239"/>
         <source>/beesshottmp-%1.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="222"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="246"/>
         <source>Unable to save temporary file: %1</source>
         <translation>一時ファイルを保存できませんでした: %1</translation>
     </message>
@@ -6506,12 +6572,12 @@ Please select a different name.</source>
         <translation>個の未送信メッセージ</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="93"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="95"/>
         <source>You</source>
         <translation>あなた</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="93"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="95"/>
         <source>Unknown</source>
         <translation>名前不明</translation>
     </message>

@@ -1196,291 +1196,306 @@
 <context>
     <name>GuiChat</name>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="181"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="182"/>
         <source>Change font style</source>
         <translation>Betűtípus stílus változtatása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="182"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="183"/>
         <source>Change font color</source>
         <translation>Betűszín módosítása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="126"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="127"/>
         <source>Change background color</source>
         <translation>Háttérszín módosítása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="183"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="184"/>
         <source>Filter message</source>
         <translation>Üzenetek szűrése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="186"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="187"/>
         <source>Chat settings</source>
         <translation>Chat beállítások</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="187"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="188"/>
         <source>Spell checking</source>
         <translation>helyesírás-ellenőrzés</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="189"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="190"/>
         <source>Word completer</source>
         <translation>Szó kiegészítő</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="191"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="192"/>
         <source>Use Return key to send message</source>
         <translation>Használd a Return gombot az üzenet küldéshez</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="148"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1148"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="149"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1165"/>
         <source>Find text in chat</source>
         <translation>Szöveg keresése a beszélgetésben</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="194"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="195"/>
         <source>Send file</source>
         <translation>Fájl küldése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="195"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="196"/>
         <source>Send folder</source>
         <translation>Mappa küldése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="135"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="136"/>
         <source>Save chat</source>
         <translation>Beszégetés mentése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="214"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="217"/>
         <source>Close</source>
         <translation type="unfinished">Bezárás</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="215"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="218"/>
         <source>Close chat window on sending message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="219"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="222"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="220"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="223"/>
         <source>Minimize chat window on sending message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="129"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="130"/>
         <source>Select chat default text color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="132"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="133"/>
         <source>Select chat system text color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="138"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="139"/>
         <source>Print...</source>
         <translation>Nyomtatás...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="145"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="146"/>
         <source>Clear system messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="151"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="152"/>
         <source>Restore the default font</source>
         <translation>Állítsa vissza az alapértelmezett betűtípust</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="161"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="330"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="162"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="338"/>
         <source>Share your desktop</source>
         <translation>Ossza meg az asztalodat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="165"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="166"/>
         <source>Send a screenshot</source>
         <translation>Képernyőfelvétel küldése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="342"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="350"/>
         <source>Record voice message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="340"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="348"/>
         <source>File transfer must be enabled to send voice messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="272"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="276"/>
         <source>You are not connected</source>
         <translation>Nem vagy csatlakozva</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="280"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="285"/>
         <source>Send messages is disabled</source>
         <translation>Az üzenetek küldése le van tiltva</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="286"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="292"/>
         <source>Chat with all users is disabled</source>
         <translation>Az összes felhasználóval való csevegés le van tiltva</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="292"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="299"/>
         <source>Private chat is disabled</source>
         <translation>Privát csevegés le van tiltva</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="301"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="309"/>
         <source>You have left this chat</source>
         <translation>Elhagytad ezt a beszélgetést</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="309"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="317"/>
         <source>Write a message to all user</source>
         <translation>Írj üzenetet minden felhasználónak</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="326"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="334"/>
         <source>Your desktop is shared with %1</source>
         <translation>Az asztal megosztva van a következővel %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="355"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="363"/>
         <source>Select all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="359"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="373"/>
         <source>Quote selected text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="361"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="375"/>
         <source>Open selected text as url</source>
         <translation>Nyissa meg a kijelölt szöveget URL-ként</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="540"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="554"/>
         <source>The loading of saved messages has not yet been completed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="602"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="619"/>
         <source>only the last %1 messages are shown</source>
         <translation>Csak az utolsó %1 üzenet jelenik meg</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="535"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="549"/>
         <source>Loading of saved messages...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="103"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="104"/>
         <source>Voice messages are not available with this version of BeeBEEP.
 Download for free and install the version with this feature from the %1 website.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="492"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="197"/>
+        <source>Send code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiChat.cpp" line="367"/>
+        <source>Copy URL to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiChat.cpp" line="506"/>
         <source>Opening voice message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="604"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="621"/>
         <source>maximum number of messages to show reached</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="797"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="814"/>
         <source>You must close and reopen this window to see the changes applied.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="824"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="841"/>
         <source>Please select a file to save all the messages of the chat.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="936"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="953"/>
         <source>You are trying to send %1 files simultaneously but the maximum allowed is %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="945"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="962"/>
         <source>Do you want to send %1 %2 to the members of this chat?</source>
         <translation>Szeretnél %1 %2-t küldeni a csevegő tagoknak?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1046"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1063"/>
         <source>Spell checking is enabled</source>
         <translation>Helyesírás-ellenőrző engedélyezve</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1053"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1077"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1070"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1094"/>
         <source>There is not a valid dictionary</source>
         <translation>Érvénytelen szótár</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1070"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1087"/>
         <source>Word completer is enabled</source>
         <translation>Szó kiegészítő engedélyezve</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1072"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1089"/>
         <source>Word completer is disabled</source>
         <translation>Szó kiegészítő tiltása</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1186"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1203"/>
         <source>%1 not found in chat.</source>
         <translation>%1 nem található a chaten.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1222"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1239"/>
         <source>Do you want to restore the default font?</source>
         <translation>Szeretné visszaállítani az alapértelmezett betűtípust?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1230"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1247"/>
         <source>Ready.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1246"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1263"/>
         <source>Do you want to send a screenshot?</source>
         <translation>Akar küldeni egy képernyő képet?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1246"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1263"/>
         <source>Yes and hide this chat</source>
         <translation>Igen, és rejtse el ezt a csevegést</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1048"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1312"/>
+        <source>Url copied to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiChat.cpp" line="1065"/>
         <source>Spell checking is disabled</source>
         <translation>helyesírás-ellenőrzés tiltva</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="142"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="143"/>
         <source>Clear messages</source>
         <translation>Üzenetek törlése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="357"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="365"/>
         <source>Copy to clipboard</source>
         <translation>Másolja a vágólapra</translation>
     </message>
@@ -1489,17 +1504,17 @@ Download for free and install the version with this feature from the %1 website.
         <translation type="obsolete">Mindet kiválaszt</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="408"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="422"/>
         <source>Show only messages in default chat</source>
         <translation>Csak az üzenetnetek mutasd az alapértelmezet chatben</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="452"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="466"/>
         <source>Last message %1</source>
         <translation>Utolsó üzenet %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="311"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="319"/>
         <source>Write a message to %1</source>
         <translation>Írj üzenetet %1 -re</translation>
     </message>
@@ -1508,53 +1523,53 @@ Download for free and install the version with this feature from the %1 website.
         <translation type="obsolete">Válassz ki egy fájlt az üzenetek mentéséhez.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="845"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="862"/>
         <source>%1: save completed.</source>
         <translation>%1: mentés befejeződött.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="797"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="845"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="937"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="814"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="862"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="954"/>
         <source>Ok</source>
         <translation>Rendben</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="605"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="622"/>
         <source>open %1 to read them all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="605"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="622"/>
         <source>the saved chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="892"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="909"/>
         <source>Unable to save temporary file: %1</source>
         <translation>Nem lehet menteni az ideiglenes fájlt: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="946"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="963"/>
         <source>file</source>
         <translation>fájl</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="946"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="963"/>
         <source>files</source>
         <translation>fájlok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="947"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1222"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1246"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="964"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1239"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1263"/>
         <source>Yes</source>
         <translation>Igen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="947"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1222"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1246"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="964"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1239"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1263"/>
         <source>No</source>
         <translation>Nem</translation>
     </message>
@@ -1563,12 +1578,12 @@ Download for free and install the version with this feature from the %1 website.
         <translation type="obsolete">Qt könyvtár az operációs rendszer nem támogatja a fogd és vidd fájlokat. Ki kell választani újra a fájlt a küldéshez.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1030"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1047"/>
         <source>Use key Return to send message</source>
         <translation>Használd az Enetr gombot az üzenet küldéshez</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1032"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1049"/>
         <source>Use key Return to make a carriage return</source>
         <translation>Használd az Enter gombot a kocsi visszához</translation>
     </message>
@@ -1799,6 +1814,47 @@ Kérjük, válassz egy másik nevet.</translation>
     <message>
         <location filename="../src/desktop/GuiCreateMessage.ui" line="136"/>
         <source>Marks the message as important</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GuiCreateTextFile</name>
+    <message>
+        <location filename="../src/desktop/GuiCreateTextFile.cpp" line="35"/>
+        <source>Create text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiCreateTextFile.cpp" line="44"/>
+        <source>For example:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GuiCreateTextFileDialog</name>
+    <message>
+        <location filename="../src/desktop/GuiCreateTextFile.ui" line="17"/>
+        <source>Workgroups</source>
+        <translation type="unfinished">Munkacsoportok</translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiCreateTextFile.ui" line="28"/>
+        <source>Send as text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiCreateTextFile.ui" line="35"/>
+        <source>Send as file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiCreateTextFile.ui" line="64"/>
+        <source>File extension</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiCreateTextFile.ui" line="121"/>
+        <source>Send</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5450,62 +5506,72 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation>Ablak elrejtése képernyőkép készítése előtt</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="88"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="84"/>
+        <source>Also grab the cursor in the screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="89"/>
+        <source>Grab cursor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="101"/>
         <source>Enable high dpi</source>
         <translation>Engedélyezi a nagy felbontást</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="89"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="102"/>
         <source>Enable high dpi support to manage, for example, Apple Retina display</source>
         <translation>Lehetővé teszik a nagy felbontás támogatás kezelésére, például az Apple Retina kijelző</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="95"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="108"/>
         <source>Capture screen</source>
         <translation>Képernyő kép rögzítés</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="96"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="109"/>
         <source>Send screenshot to a user</source>
         <translation>Képernyőkép küldése egy felhasználónak</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="97"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="110"/>
         <source>Save screenshot</source>
         <translation>Képernyőkép mentése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="98"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="111"/>
         <source>Delete screenshot</source>
         <translation>Képernyőkép törlése</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="123"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="136"/>
         <source>No screenshot available</source>
         <translation>Nincs elérhető képernyőkép</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="195"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="219"/>
         <source>/beesshot-%1.</source>
         <translation>/beesshot-%1.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="198"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="222"/>
         <source>Save As</source>
         <translation>Mentés másként</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="200"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="224"/>
         <source>%1 Files (*.%2)</source>
         <translation>%1 fájokl (*.%2)</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="215"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="239"/>
         <source>/beesshottmp-%1.</source>
         <translation>/beesshottmp-%1.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiScreenShot.cpp" line="222"/>
+        <location filename="../src/desktop/GuiScreenShot.cpp" line="246"/>
         <source>Unable to save temporary file: %1</source>
         <translation>Nem lehet menteni az ideiglenes fájlt: %1</translation>
     </message>
@@ -6789,12 +6855,12 @@ Kérjük, válassz egy másik nevet.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="93"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="95"/>
         <source>You</source>
         <translation>Te</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="93"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="95"/>
         <source>Unknown</source>
         <translation>Ismeretlen</translation>
     </message>

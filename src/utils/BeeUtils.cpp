@@ -1221,11 +1221,11 @@ QPalette Bee::darkPalette()
 
   darkPalette.setColor( QPalette::Active, QPalette::Button, colorGrey() );
   darkPalette.setColor( QPalette::Disabled, QPalette::ButtonText, colorGrey() );
-  darkPalette.setColor( QPalette::Disabled, QPalette::WindowText, colorGrey() );
-  darkPalette.setColor( QPalette::Disabled, QPalette::Text, colorDarkGrey() );
+  darkPalette.setColor( QPalette::Disabled, QPalette::WindowText, colorGrey().darker() );
+  darkPalette.setColor( QPalette::Disabled, QPalette::Text, colorGrey().darker() );
   darkPalette.setColor( QPalette::Disabled, QPalette::Base, colorDarkGrey().lighter() );
   darkPalette.setColor( QPalette::Disabled, QPalette::AlternateBase, colorDarkGrey().lighter().lighter() );
-  darkPalette.setColor( QPalette::Disabled, QPalette::Light, colorGrey() );
+  darkPalette.setColor( QPalette::Disabled, QPalette::Light, colorGrey().lighter() );
 
   return darkPalette;
 }

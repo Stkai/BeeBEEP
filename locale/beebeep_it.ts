@@ -1355,6 +1355,18 @@ Download for free and install the version with this feature from the %1 website.
         <translation>I messaggi vocali non sono disponibili con questa versione di BeeBEEP.
 Scarica gratuitamente ed installa la versione con questa funzionalità dal sito web %1.</translation>
     </message>
+    <message>
+        <source>Send code</source>
+        <translation>Invia codice</translation>
+    </message>
+    <message>
+        <source>Copy URL to clipboard</source>
+        <translation>Copia URL in memoria</translation>
+    </message>
+    <message>
+        <source>Url copied to clipboard</source>
+        <translation>URL copiato in memoria</translation>
+    </message>
 </context>
 <context>
     <name>GuiChatList</name>
@@ -1554,6 +1566,40 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Send this message to all recipients individually</source>
         <translation>Invia questo messaggio a tutti i destinatari individualmente</translation>
+    </message>
+</context>
+<context>
+    <name>GuiCreateTextFile</name>
+    <message>
+        <source>Create text</source>
+        <translation>Crea testo</translation>
+    </message>
+    <message>
+        <source>For example:</source>
+        <translation>Per esempio:</translation>
+    </message>
+</context>
+<context>
+    <name>GuiCreateTextFileDialog</name>
+    <message>
+        <source>Workgroups</source>
+        <translation>Gruppi di lavoro</translation>
+    </message>
+    <message>
+        <source>Send as text</source>
+        <translation>Invia come testo</translation>
+    </message>
+    <message>
+        <source>Send as file</source>
+        <translation>Invia come file</translation>
+    </message>
+    <message>
+        <source>File extension</source>
+        <translation>Estensione</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation>Invia</translation>
     </message>
 </context>
 <context>
@@ -4689,6 +4735,14 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Delete screenshot</source>
         <translation>Cancella l&apos;immagine</translation>
+    </message>
+    <message>
+        <source>Also grab the cursor in the screenshot</source>
+        <translation>Cattura anche il cursore del mouse nell&apos;immagine</translation>
+    </message>
+    <message>
+        <source>Grab cursor</source>
+        <translation>Cattura il cursore</translation>
     </message>
 </context>
 <context>

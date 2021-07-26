@@ -22,6 +22,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "Screenshot.h"
+#include "IconManager.h"
 
 
 Screenshot::Screenshot( QObject* parent )
@@ -54,6 +55,10 @@ void Screenshot::grabPrimaryScreen()
   if( primary_screen )
   {
     m_pixmap = primary_screen->grabWindow( 0 );
+    QWidget w;
+    QPixmap cursor_pix = IconManager::instance().icon( "cursor.png" ).pixmap( 32, 32 );
+    QPainter p( &m_pixmap );
+    p.drawPixmap( w.cursor().pos( primary_screen ), cursor_pix );
     checkPixelRatio();
   }
 #else

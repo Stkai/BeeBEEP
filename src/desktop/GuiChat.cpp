@@ -29,6 +29,7 @@
 #include "FileDialog.h"
 #include "GuiChat.h"
 #include "GuiChatMessage.h"
+#include "GuiCreateTextFile.h"
 #ifdef BEEBEEP_USE_VOICE_CHAT
 #include "GuiVoicePlayer.h"
 #endif
@@ -193,6 +194,7 @@ void GuiChat::setupToolBar( QToolBar* chat_bar )
   updateActionsOnFocusChanged();
   mp_actSendFile = chat_bar->addAction( IconManager::instance().icon( "send-file.png" ), tr( "Send file" ), this, SLOT( sendFile() ) );
   mp_actSendFolder = chat_bar->addAction( IconManager::instance().icon( "send-folder.png" ), tr( "Send folder" ), this, SLOT( sendFolder() ) );
+  mp_actSendTextCode = chat_bar->addAction( IconManager::instance().icon( "send-code.png" ), tr( "Send code" ), this, SLOT( sendTextCode() ) );
 #ifdef BEEBEEP_USE_SHAREDESKTOP
   chat_bar->addAction( mp_actScreenshot );
   chat_bar->addAction( mp_actShareDesktop );
@@ -201,6 +203,7 @@ void GuiChat::setupToolBar( QToolBar* chat_bar )
 
   mp_teMessage->addActionToContextMenu( mp_actSendFile );
   mp_teMessage->addActionToContextMenu( mp_actSendFolder );
+  mp_teMessage->addActionToContextMenu( mp_actSendTextCode );
   QAction* act = new QAction( mp_teMessage );
   act->setSeparator( true );
   mp_teMessage->addActionToContextMenu( act );
@@ -269,6 +272,7 @@ void GuiChat::updateActions( const Chat& c, bool is_connected, int connected_use
   {
     mp_teMessage->setEnabled( false );
     mp_pbSend->setEnabled( false );
+    mp_actSendTextCode->setEnabled( false );
     mp_teMessage->setToolTip( tr( "You are not connected" ) );
   }
   else
@@ -277,24 +281,28 @@ void GuiChat::updateActions( const Chat& c, bool is_connected, int connected_use
     {
       mp_teMessage->setEnabled( false );
       mp_pbSend->setEnabled( false );
+      mp_actSendTextCode->setEnabled( false );
       mp_teMessage->setToolTip( tr( "Send messages is disabled" ) );
     }
     else if( c.isDefault() && !Settings::instance().chatWithAllUsersIsEnabled() )
     {
       mp_teMessage->setEnabled( false );
       mp_pbSend->setEnabled( false );
+      mp_actSendTextCode->setEnabled( false );
       mp_teMessage->setToolTip( tr( "Chat with all users is disabled" ) );
     }
     else if( c.isPrivate() && Settings::instance().disablePrivateChats() )
     {
       mp_teMessage->setEnabled( false );
       mp_pbSend->setEnabled( false );
+      mp_actSendTextCode->setEnabled( false );
       mp_teMessage->setToolTip( tr( "Private chat is disabled" ) );
     }
     else
     {
       mp_teMessage->setEnabled( local_user_is_member );
       mp_pbSend->setEnabled( local_user_is_member );
+      mp_actSendTextCode->setEnabled( local_user_is_member );
       if( local_user_is_member )
         mp_teMessage->setToolTip( "" );
       else
@@ -343,7 +351,7 @@ void GuiChat::updateActions( const Chat& c, bool is_connected, int connected_use
 #endif
 }
 
-void GuiChat::customContextMenu( const QPoint& )
+void GuiChat::customContextMenu( const QPoint& p )
 {
   mp_menuContext->clear();
   mp_menuContext->addAction( mp_actSelectBackgroundColor );
@@ -356,6 +364,12 @@ void GuiChat::customContextMenu( const QPoint& )
   mp_menuContext->addSeparator();
   QAction* act = mp_menuContext->addAction( IconManager::instance().icon( "copy.png" ), tr( "Copy to clipboard" ), mp_teChat, SLOT( copy() ), QKeySequence::Copy );
   act->setEnabled( !mp_teChat->textCursor().selectedText().isEmpty() );
+  act = mp_menuContext->addAction( IconManager::instance().icon( "anchor.png" ), tr( "Copy URL to clipboard" ), this, SLOT( copyUrlToClipboard() ) );
+  QString url_clicked = mp_teChat->anchorAt( p );
+  if( !url_clicked.isEmpty() )
+    act->setData( url_clicked );
+  else
+    act->setEnabled( false );
   act = mp_menuContext->addAction( IconManager::instance().icon( "quote.png" ), tr( "Quote selected text" ), this, SLOT( quoteSelectedText() ) );
   act->setEnabled( !mp_teChat->textCursor().selectedText().isEmpty() );
   act = mp_menuContext->addAction( IconManager::instance().icon( "network.png" ), tr( "Open selected text as url" ), this, SLOT( openSelectedTextAsUrl() ) );
@@ -1253,7 +1267,7 @@ void GuiChat::sendScreenshotToChat()
   mp_actScreenshot->setEnabled( false );
   if( answer_id == 0 )
     emit hideRequest();
-  QTimer::singleShot( 200, this, SLOT( sendScreenshotToChat_Private() ) );
+  QTimer::singleShot( 1000, this, SLOT( sendScreenshotToChat_Private() ) );
 }
 
 void GuiChat::sendScreenshotToChat_Private()
@@ -1283,3 +1297,47 @@ void GuiChat::onTickEvent( int )
 {}
 #endif
 
+void GuiChat::copyUrlToClipboard()
+{
+  QAction* act = qobject_cast<QAction*>( sender() );
+  if( act )
+  {
+    QString s_url = act->data().toString();
+    if( !s_url.isEmpty() )
+    {
+      QClipboard* cb = qApp->clipboard();
+      if( cb )
+      {
+        cb->setText( s_url);
+        emit showStatusMessageRequest( tr( "Url copied to clipboard" ), 3000 );
+      }
+    }
+  }
+}
+
+void GuiChat::sendTextCode()
+{
+  if( Settings::instance().disableSendMessage() )
+    return;
+
+  GuiCreateTextFile gct( this );
+  gct.show();
+  gct.setModal( true );
+  gct.setSizeGripEnabled( true );
+  if( gct.exec() == QDialog::Accepted )
+  {
+    QString text_code = gct.text().trimmed();
+    if( text_code.isEmpty() )
+      return;
+    if( gct.sendAsFile() )
+    {
+
+    }
+    else
+    {
+      QString text_code_to_send = QString( "<code>\n%s\n</code>" ).arg( text_code );
+      emit newMessage( m_chatId, text_code );
+    }
+    ensureFocusInChat();
+  }
+}

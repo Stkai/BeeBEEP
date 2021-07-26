@@ -1282,6 +1282,18 @@
 Download for free and install the version with this feature from the %1 website.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Send code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy URL to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Url copied to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiChatList</name>
@@ -1464,6 +1476,40 @@ Bitte wähle einen anderen Namen aus.</translation>
     </message>
     <message>
         <source>Send this message to all recipients individually</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GuiCreateTextFile</name>
+    <message>
+        <source>Create text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>For example:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GuiCreateTextFileDialog</name>
+    <message>
+        <source>Workgroups</source>
+        <translation type="unfinished">Arbeitsgruppen</translation>
+    </message>
+    <message>
+        <source>Send as text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send as file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File extension</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4410,6 +4456,14 @@ Bitte wähle einen anderen Namen aus.</translation>
     <message>
         <source>Capture screen</source>
         <translation>Screenshot erstellen</translation>
+    </message>
+    <message>
+        <source>Also grab the cursor in the screenshot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grab cursor</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -186,5 +186,8 @@
         <file>images/firewall.png</file>
         <file>images/favorite.png</file>
         <file>images/help.png</file>
+        <file>images/send-code.png</file>
+        <file>images/anchor.png</file>
+        <file>images/cursor.png</file>
     </qresource>
 </RCC>
