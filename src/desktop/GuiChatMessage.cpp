@@ -78,7 +78,6 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
     html_message += textImportantPrefix();
 
   QString text_formatted = cm.message();
-  bool is_source_code = text_formatted.startsWith( "<code>" );
 
   QString text_color = (cm.textColor().isValid() && cm.textColor() != QColor( 0, 0, 0 ) && cm.textColor() != QColor( 255, 255, 255 ) ) ? cm.textColor().name() : "";
   if( !text_color.isEmpty() )
@@ -103,9 +102,6 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
                                                                .arg( user_name )
                                                                .arg( Settings::instance().showTextInModeRTL() ? QString( "" ) : QString( ":" ) )
                                                                .arg( (use_chat_compact && !Settings::instance().showTextInModeRTL()) ? QString( " " ) : QLatin1String( "<br>" ) );
-
-  if( is_source_code && !html_user_name.endsWith( QLatin1String( "<br>" ) ) )
-    html_user_name.append( QLatin1String( "<br>" ) );
 
   if( Settings::instance().showTextInModeRTL() )
     html_message += QString( "%1 %2 %3" ).arg( html_user_name ).arg( html_date_time_stamp ).arg( text_formatted );

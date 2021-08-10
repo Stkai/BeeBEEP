@@ -1498,6 +1498,10 @@ Please select a different name.</source>
         <source>Send</source>
         <translation type="unfinished">Відправити</translation>
     </message>
+    <message>
+        <source>Use temporary file</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiEditVCard</name>

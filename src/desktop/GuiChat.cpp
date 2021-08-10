@@ -374,6 +374,9 @@ void GuiChat::customContextMenu( const QPoint& p )
   act->setEnabled( !mp_teChat->textCursor().selectedText().isEmpty() );
   act = mp_menuContext->addAction( IconManager::instance().icon( "network.png" ), tr( "Open selected text as url" ), this, SLOT( openSelectedTextAsUrl() ) );
   act->setEnabled( !mp_teChat->textCursor().selectedText().isEmpty() );
+  //act = mp_menuContext->addAction( IconManager::instance().icon( "font-color.png" ), tr( "Change the background color of the selected text" ), this, SLOT( changeBackgroundColorInSelectedText() ) );
+  //act->setEnabled( !mp_teChat->textCursor().selectedText().isEmpty() );
+
   mp_menuContext->addSeparator();
   mp_menuContext->addAction( mp_actClear );
   mp_menuContext->addAction( mp_actClearSystemMessages );
@@ -966,7 +969,7 @@ void GuiChat::checkAndSendUrls( const QMimeData* source )
     return;
   }
 
-  sendFilesFromChatRequest( m_chatId, file_path_list );
+  emit sendFilesFromChatRequest( m_chatId, file_path_list );
 }
 
 void GuiChat::dropEvent( QDropEvent *event )
@@ -1221,10 +1224,10 @@ void GuiChat::openSelectedTextAsUrl()
 
 void GuiChat::quoteSelectedText()
 {
-  QString selected_text = mp_teChat->textCursor().selectedText();
-  if( selected_text.isEmpty() )
+  QTextCursor tc = mp_teChat->textCursor();
+  if( !tc.hasSelection() )
     return;
-  selected_text = mp_teChat->textCursor().selection().toHtml( "UTF-8" );
+  QString selected_text = tc.selection().toHtml( "UTF-8" );
   selected_text.replace( "</p>", "</p>\n" );
   selected_text.replace( "<br>", "\n" );
   selected_text = Bee::removeHtmlTags( selected_text );
@@ -1232,6 +1235,28 @@ void GuiChat::quoteSelectedText()
   QString text_to_add = QString( " [quote]%1 [/quote]<br>" ).arg( selected_text.trimmed() );
   mp_teMessage->addText( text_to_add );
   mp_teMessage->setFocus();
+}
+
+void GuiChat::changeBackgroundColorInSelectedText()
+{
+// FIXME: TODO (to save also in chat history and messages)
+
+  QTextCursor tc = mp_teChat->textCursor();
+  if( !tc.hasSelection() )
+    return;
+
+  QString selected_text = tc.selection().toHtml( "UTF-8" );
+  selected_text.replace( "</p>", "</p>\n" );
+  selected_text.replace( "<br>", "\n" );
+  selected_text = Bee::removeHtmlTags( selected_text );
+  selected_text.replace( "\n", "<br>" );
+  int pos = tc.selectionStart();
+  mp_teChat->textCursor().removeSelectedText();
+  tc.setPosition( pos );
+  mp_teChat->setTextCursor( tc );
+  selected_text.prepend( "<span style=\"background-color:'#000'; color:'#fff'\">" );
+  selected_text.append( "</span>" );
+  mp_teChat->textCursor().insertHtml( selected_text );
 }
 
 void GuiChat::resetChatFontToDefault()
@@ -1329,15 +1354,41 @@ void GuiChat::sendTextCode()
     QString text_code = gct.text().trimmed();
     if( text_code.isEmpty() )
       return;
-    if( gct.sendAsFile() )
+    if( Settings::instance().createTextCodeAsFile() && beeCore->isFileTransferActive() )
     {
-
+      QString folder_path = Settings::instance().createTextCodeAsTemporaryFile() ? Settings::instance().cacheFolder() : Settings::instance().downloadDirectory();
+      QString file_initial_path = folder_path +
+                                  QString( "/beecode-%1." ).arg( Bee::dateTimeStringSuffix( QDateTime::currentDateTime() ) ) +
+                                  Settings::instance().createTextCodeFileSuffix();
+      QString file_path = Bee::uniqueFilePath( file_initial_path, false );
+      QFile f( file_path );
+      if( f.open( QIODevice::WriteOnly ) )
+      {
+        QTextStream ts( &f );
+        ts << text_code << endl;
+        ts.flush();
+        f.close();
+        if( Settings::instance().createTextCodeAsTemporaryFile() )
+          Settings::instance().addTemporaryFilePath( file_path );
+        ensureFocusInChat();
+        emit sendFileFromChatRequest( m_chatId, file_path );
+      }
+      else
+      {
+        QMessageBox::warning( this, Settings::instance().programName(), tr( "Unable to save temporary file: %1" ).arg( file_path ) );
+        ensureFocusInChat();
+        return;
+      }
     }
     else
     {
-      QString text_code_to_send = QString( "<code>\n%s\n</code>" ).arg( text_code );
-      emit newMessage( m_chatId, text_code );
+      QString text_code_to_send = QString( "[code]%1[/code]" ).arg( text_code );
+      ensureFocusInChat();
+      emit newMessage( m_chatId, text_code_to_send );
     }
+  }
+  else
+  {
     ensureFocusInChat();
   }
 }

@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>440</height>
+    <width>720</width>
+    <height>436</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -91,6 +91,13 @@
       </widget>
      </item>
      <item>
+      <widget class="QCheckBox" name="mp_cbUseFileTmp">
+       <property name="text">
+        <string>Use temporary file</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <spacer name="horizontalSpacer_3">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -144,6 +151,7 @@
   <tabstop>mp_rbSendCode</tabstop>
   <tabstop>mp_rbSendFile</tabstop>
   <tabstop>mp_leFileSuffix</tabstop>
+  <tabstop>mp_cbUseFileTmp</tabstop>
   <tabstop>mp_pbSend</tabstop>
  </tabstops>
  <resources>

@@ -263,8 +263,8 @@
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="232"/>
-        <location filename="../src/core/CoreChat.cpp" line="963"/>
-        <location filename="../src/core/CoreChat.cpp" line="974"/>
+        <location filename="../src/core/CoreChat.cpp" line="972"/>
+        <location filename="../src/core/CoreChat.cpp" line="983"/>
         <source>%1 Chat with %2.</source>
         <translation>%1 محادثة مع %2.</translation>
     </message>
@@ -304,27 +304,27 @@
         <translation>غير قادر على إرسال الرسالة: تم تعطيل هذه الدردشة.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="455"/>
+        <location filename="../src/core/CoreChat.cpp" line="464"/>
         <source>Unable to send the message to %1.</source>
         <translation>غير قادر على إرسال الرسالة إلى %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="461"/>
+        <location filename="../src/core/CoreChat.cpp" line="470"/>
         <source>Nobody has received the message.</source>
         <translation>لا أحد تلقى الرسالة.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="492"/>
+        <location filename="../src/core/CoreChat.cpp" line="501"/>
         <source>The voice message will be delivered to %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="656"/>
+        <location filename="../src/core/CoreChat.cpp" line="665"/>
         <source>Unsent messages had an incorrect authorization code and will not be sent.</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/core/CoreChat.cpp" line="663"/>
+        <location filename="../src/core/CoreChat.cpp" line="672"/>
         <source>%n unsent message(s) will be sent as soon as possible.</source>
         <translation type="unfinished">
             <numerusform></numerusform>
@@ -336,8 +336,8 @@
         </translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="1026"/>
-        <location filename="../src/core/CoreChat.cpp" line="1059"/>
+        <location filename="../src/core/CoreChat.cpp" line="1035"/>
+        <location filename="../src/core/CoreChat.cpp" line="1068"/>
         <source>I need your help.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -346,19 +346,19 @@
         <translation type="obsolete">الرسائل غير المتصلة التي لا يزال يتعين إرسالها بها رمز تفويض غير صحيح ولن يتم إرسالها.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="707"/>
+        <location filename="../src/core/CoreChat.cpp" line="716"/>
         <location filename="../src/core/CoreFileTransfer.cpp" line="182"/>
         <location filename="../src/core/CoreVoiceChat.cpp" line="66"/>
         <source>voice message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="827"/>
+        <location filename="../src/core/CoreChat.cpp" line="836"/>
         <source>Offline messages sent to %1.</source>
         <translation type="unfinished">تم إرسال الرسائل بلا اتصال إلى %2. {1.?}</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="958"/>
+        <location filename="../src/core/CoreChat.cpp" line="967"/>
         <source>Chat with all users</source>
         <translation>الدردشة مع جميع المستخدمين</translation>
     </message>
@@ -383,17 +383,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="494"/>
+        <location filename="../src/core/CoreChat.cpp" line="503"/>
         <source>The message will be delivered to %1.</source>
         <translation>سيتم تسليم الرسالة إلى %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="641"/>
+        <location filename="../src/core/CoreChat.cpp" line="650"/>
         <source>Saved chats had an incorrect authorization code.</source>
         <translation>تحتوي الدردشات المحفوظة على رمز تفويض غير صحيح.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="644"/>
+        <location filename="../src/core/CoreChat.cpp" line="653"/>
         <source>%1 saved chats are added to history</source>
         <translation>%1 الدردشات المحفوظة تضاف إلى التاريخ</translation>
     </message>
@@ -402,7 +402,7 @@
         <translation type="obsolete">%1 سيتم إرسال الرسائل في وضع عدم الاتصال في أقرب وقت ممكن.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="713"/>
+        <location filename="../src/core/CoreChat.cpp" line="722"/>
         <source>Offline message will be sent to %1</source>
         <translation>سيتم إرسال رسالة بلا اتصال إلى %1</translation>
     </message>
@@ -411,17 +411,17 @@
         <translation type="obsolete">تم إرسال الرسائل بلا اتصال إلى %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="917"/>
+        <location filename="../src/core/CoreChat.cpp" line="926"/>
         <source>%1 You have buzzed %2.</source>
         <translation>%1 لديك طنين مرسل %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="963"/>
+        <location filename="../src/core/CoreChat.cpp" line="972"/>
         <source>Unknown %1</source>
         <translation>غير معروف %1</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="591"/>
+        <location filename="../src/core/CoreChat.cpp" line="600"/>
         <source>%1 %2 cannot be informed that you have left the group.</source>
         <translation>%1 %2 لا يمكن أن تكون على علم لأنك تركت المجموعة.</translation>
     </message>
@@ -1248,7 +1248,7 @@
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="149"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1165"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1168"/>
         <source>Find text in chat</source>
         <translation>أوجد نص في المحادثة</translation>
     </message>
@@ -1400,103 +1400,103 @@ Download for free and install the version with this feature from the %1 website.
         <translation>افتح النص المحدد كـ رابط</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="506"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="509"/>
         <source>Opening voice message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="554"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="557"/>
         <source>The loading of saved messages has not yet been completed.</source>
         <translation>لم يتم إكمال تحميل الرسائل المحفوظة.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="619"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="622"/>
         <source>only the last %1 messages are shown</source>
         <translation>يتم عرض رسائل %1 الأخيرة فقط</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1312"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1337"/>
         <source>Url copied to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="549"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="552"/>
         <source>Loading of saved messages...</source>
         <translation>جارٍ تحميل الرسائل المحفوظة ...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="621"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="624"/>
         <source>maximum number of messages to show reached</source>
         <translation>أقصى عدد من الرسائل لإظهار الوصول</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="814"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="817"/>
         <source>You must close and reopen this window to see the changes applied.</source>
         <translation>يجب عليك إغلاق وإعادة فتح هذه النافذة لرؤية التغييرات المطبقة.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="841"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="844"/>
         <source>Please select a file to save all the messages of the chat.</source>
         <translation>يرجى تحديد ملف لحفظ جميع رسائل الدردشة.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="953"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="956"/>
         <source>You are trying to send %1 files simultaneously but the maximum allowed is %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="962"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="965"/>
         <source>Do you want to send %1 %2 to the members of this chat?</source>
         <translation>هل تريد ان ترسل %1 %2 إلى أعضاء هذه الدردشة؟</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1063"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1066"/>
         <source>Spell checking is enabled</source>
         <translation>يتم تمكين التدقيق الإملائي</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1070"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1094"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1073"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1097"/>
         <source>There is not a valid dictionary</source>
         <translation>لا يوجد قاموس صالح</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1087"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1090"/>
         <source>Word completer is enabled</source>
         <translation>مكمل الكلمات ممكن</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1089"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1092"/>
         <source>Word completer is disabled</source>
         <translation>تم تعطيل مكمل الكلمات</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1203"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1206"/>
         <source>%1 not found in chat.</source>
         <translation>%1 غير موجود في الدردشة.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1239"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1264"/>
         <source>Do you want to restore the default font?</source>
         <translation>هل تريد استعادة الخط الافتراضي؟</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1247"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1272"/>
         <source>Ready.</source>
         <translation>جاهز</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1263"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1288"/>
         <source>Do you want to send a screenshot?</source>
         <translation>هل تريد إرسال لقطة شاشة؟</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1263"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1288"/>
         <source>Yes and hide this chat</source>
         <translation>نعم وإخفاء هذه الدردشة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1065"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1068"/>
         <source>Spell checking is disabled</source>
         <translation>التدقيق الإملائي معطل</translation>
     </message>
@@ -1511,12 +1511,12 @@ Download for free and install the version with this feature from the %1 website.
         <translation>نسخ إلى الحافظة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="422"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="425"/>
         <source>Show only messages in default chat</source>
         <translation>إظهار الرسائل فقط في الدردشة الافتراضية</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="466"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="469"/>
         <source>Last message %1</source>
         <translation>آخر رسالة %1</translation>
     </message>
@@ -1526,53 +1526,54 @@ Download for free and install the version with this feature from the %1 website.
         <translation>اكتب رسالة إلى %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="862"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="865"/>
         <source>%1: save completed.</source>
         <translation>%1:اكتمل الحفظ.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="814"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="862"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="954"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="817"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="865"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="957"/>
         <source>Ok</source>
         <translation>موافق</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="622"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="625"/>
         <source>open %1 to read them all</source>
         <translation>فتح %1 لقراءة كل منهم</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="622"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="625"/>
         <source>the saved chat</source>
         <translation>الدردشة المحفوظة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="909"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="912"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1378"/>
         <source>Unable to save temporary file: %1</source>
         <translation>غير قادر على حفظ الملف المؤقت: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="963"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="966"/>
         <source>file</source>
         <translation>ملف</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="963"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="966"/>
         <source>files</source>
         <translation>ملفات</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="964"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1239"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1263"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="967"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1264"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1288"/>
         <source>Yes</source>
         <translation>نعم</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="964"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1239"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1263"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="967"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1264"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1288"/>
         <source>No</source>
         <translation>لا</translation>
     </message>
@@ -1581,12 +1582,12 @@ Download for free and install the version with this feature from the %1 website.
         <translation type="obsolete">لا تدعم مكتبة Qt لنظام التشغيل هذا السحب والإفلات للملفات. يجب عليك تحديد الملف المراد إرساله مرة أخرى.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1047"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1050"/>
         <source>Use key Return to send message</source>
         <translation>استخدم مفتاح العودة لإرسال رسالة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1049"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1052"/>
         <source>Use key Return to make a carriage return</source>
         <translation>استخدام مفتاح العودة لجعل عودة النقل</translation>
     </message>
@@ -1851,7 +1852,12 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateTextFile.ui" line="121"/>
+        <location filename="../src/desktop/GuiCreateTextFile.ui" line="96"/>
+        <source>Use temporary file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiCreateTextFile.ui" line="128"/>
         <source>Send</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6726,12 +6732,12 @@ Please select a different name.</source>
         <translation>رسائل غير مرسلة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="95"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="94"/>
         <source>You</source>
         <translation>أنت</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="95"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="94"/>
         <source>Unknown</source>
         <translation>غير معروف</translation>
     </message>
@@ -7030,7 +7036,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2503"/>
+        <location filename="../src/core/Settings.cpp" line="2509"/>
         <source>Autoresponder</source>
         <translation>الرد الآلي</translation>
     </message>

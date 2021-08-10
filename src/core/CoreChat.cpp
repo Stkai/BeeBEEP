@@ -425,13 +425,22 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg, bool is_importan
   }
 
   QString msg_to_send = msg;
-  if( !Settings::instance().chatUseHtmlTags() )
+  bool has_source_code = msg_to_send.contains( "{code}" );
+  if( has_source_code )
   {
-    msg_to_send.replace( QLatin1Char( '<' ), QLatin1String( "&lt;" ) );
-    msg_to_send.replace( "&lt;3", "<3" ); // hearth emoticon
+    msg_to_send.replace( "{code}", "<code>" );
+    msg_to_send.replace( "{/code}", "</code>" );
   }
+  else
+  {
+    if( !Settings::instance().chatUseHtmlTags() )
+    {
+      msg_to_send.replace( QLatin1Char( '<' ), QLatin1String( "&lt;" ) );
+      msg_to_send.replace( "&lt;3", "<3" ); // hearth emoticon
+    }
 
-  PluginManager::instance().parseText( &msg_to_send, true );
+    PluginManager::instance().parseText( &msg_to_send, true );
+  }
 
   Message m = Protocol::instance().chatMessage( c, msg_to_send );
   if( is_important )

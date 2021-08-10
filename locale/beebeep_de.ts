@@ -1512,6 +1512,10 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Send</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Use temporary file</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiEditVCard</name>

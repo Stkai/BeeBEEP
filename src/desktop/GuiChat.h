@@ -138,6 +138,7 @@ private slots:
   void findNextTextInChat();
   void openSelectedTextAsUrl();
   void quoteSelectedText();
+  void changeBackgroundColorInSelectedText();
   void resetChatFontToDefault();
   void operationCompleted();
   void clearSystemMessages();

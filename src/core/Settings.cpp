@@ -1553,6 +1553,9 @@ void Settings::loadCommonSettings( QSettings* user_ini )
   m_sendNewMessageIndividually = user_ini->value( "SendNewMessageIndividually", false ).toBool();
   m_useUserFirstNameFirstInFullName = commonValue( system_rc, user_ini, "ShowUserFirstNameFirstInFullName", useUserFirstNameFirstInFullNameFromLanguage() ).toBool();
   m_resetMinimumWidthForStyle = commonValue( system_rc, user_ini, "ResetMinimumWidthForStyle", m_resetMinimumWidthForStyle ).toBool();
+  m_createTextCodeAsFile = commonValue( system_rc, user_ini, "CreateTextCodeAsFile", false ).toBool();
+  m_createTextCodeAsTemporaryFile = commonValue( system_rc, user_ini, "CreateTextCodeAsTemporaryFile", true ).toBool();
+  m_createTextCodeFileSuffix = commonValue( system_rc, user_ini, "CreateTextCodeFileSuffix", QLatin1String( "txt" ) ).toString();
   endCommonGroup( system_rc, user_ini );
 
   beginCommonGroup( system_rc, user_ini, "Tools" );
@@ -1935,6 +1938,9 @@ void Settings::save()
   sets->setValue( "SendNewMessageIndividually", m_sendNewMessageIndividually );
   sets->setValue( "ShowUserFirstNameFirstInFullName", m_useUserFirstNameFirstInFullName );
   sets->setValue( "ResetMinimumWidthForStyle", m_resetMinimumWidthForStyle );
+  sets->setValue( "CreateTextCodeAsFile", m_createTextCodeAsFile );
+  sets->setValue( "CreateTextCodeFileSuffix", m_createTextCodeFileSuffix );
+  sets->setValue( "CreateTextCodeAsTemporaryFile", m_createTextCodeAsTemporaryFile );
   sets->endGroup();
   sets->beginGroup( "Tools" );
   sets->setValue( "LogToFile", m_logToFile );

@@ -1367,6 +1367,10 @@ Scarica gratuitamente ed installa la versione con questa funzionalità dal sito 
         <source>Url copied to clipboard</source>
         <translation>URL copiato in memoria</translation>
     </message>
+    <message>
+        <source>Change the background color of the selected text</source>
+        <translation type="vanished">Cambia lo sfondo del testo selezionato</translation>
+    </message>
 </context>
 <context>
     <name>GuiChatList</name>
@@ -1600,6 +1604,10 @@ Inserisci un nome differente.</translation>
     <message>
         <source>Send</source>
         <translation>Invia</translation>
+    </message>
+    <message>
+        <source>Use temporary file</source>
+        <translation>Usa file temporaneo</translation>
     </message>
 </context>
 <context>

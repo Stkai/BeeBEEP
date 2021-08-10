@@ -493,7 +493,7 @@ void Core::updateNetworkConfiguration( const QNetworkConfiguration& net_conf )
 {
   if( !isConnected() )
   {
-    qDebug() << "Core is not connected and skips to check network configuration:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() ) << "-" << qPrintable( net_conf.bearerTypeName() );;
+    qDebug() << "Core is not connected and skips to check network configuration:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() ) << "-" << qPrintable( net_conf.bearerTypeName() );
     return;
   }
 

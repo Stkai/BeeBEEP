@@ -56,12 +56,15 @@ QString GuiCreateTextFile::text() const
 
 bool GuiCreateTextFile::sendAsFile() const
 {
-  return mp_rbSendFile->isChecked();
+  return mp_rbSendFile->isEnabled() && mp_rbSendFile->isChecked();
 }
 
 QString GuiCreateTextFile::fileSuffix() const
 {
-  return mp_lFileSuffix->text();
+  QString file_suffix = Bee::removeInvalidCharactersForFilePath( mp_leFileSuffix->text() );
+  while( file_suffix.startsWith( '.' ) )
+    file_suffix.remove( 0, 1 );
+  return file_suffix.isEmpty() ? QLatin1String( "txt" ) : file_suffix;
 }
 
 void GuiCreateTextFile::loadSettings()
@@ -73,15 +76,20 @@ void GuiCreateTextFile::loadSettings()
   }
   else
   {
-
+    mp_rbSendCode->setChecked( !Settings::instance().createTextCodeAsFile() );
+    mp_rbSendFile->setChecked( Settings::instance().createTextCodeAsFile() );
   }
-  onSendTypeButtonClicked( mp_rbSendCode );
 
+  mp_leFileSuffix->setText( Settings::instance().createTextCodeFileSuffix() );
+  mp_cbUseFileTmp->setChecked( Settings::instance().createTextCodeAsTemporaryFile() );
+  onSendTypeButtonClicked( mp_rbSendCode );
 }
 
 void GuiCreateTextFile::saveSettings()
 {
-
+  Settings::instance().setCreateTextCodeAsFile( sendAsFile() );
+  Settings::instance().setCreateTextCodeFileSuffix( fileSuffix() );
+  Settings::instance().setCreateTextCodeAsTemporaryFile( mp_cbUseFileTmp->isChecked() );
 }
 
 void  GuiCreateTextFile::onSendTypeButtonClicked( QAbstractButton* pb )
@@ -93,6 +101,7 @@ void  GuiCreateTextFile::onSendTypeButtonClicked( QAbstractButton* pb )
 
   mp_lFileSuffix->setEnabled( enable_extras );
   mp_leFileSuffix->setEnabled( enable_extras );
+  mp_cbUseFileTmp->setEnabled( enable_extras );
 }
 
 void GuiCreateTextFile::sendText()

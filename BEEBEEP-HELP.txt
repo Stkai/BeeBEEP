@@ -285,6 +285,9 @@ OpenChatWhenSendNewMessage=[true/false] used in "Create message" window (default
 SendNewMessageIndividually=[true/false] used in "Create message" window (default=true) [5.6.5]
 UseUserFirstNameFirstInFullName=[true/false] if false BeeBEEP show users in format lastname firstname (default=true) [5.8.3]
 ResetMinimumWidthForStyle=[true/false] if true BeeBEEP changes its mimimum width for the style applied (default=true) [5.8.3]
+CreateTextCodeAsFile=[true/false] if true BeeBEEP sends code as file (default=false) [5.8.5]
+CreateTextCodeAsTemporaryFile=[true/false] if true BeeBEEP and previous option is true, the file create is temporary (default=true) [5.8.5]
+CreateTextCodeFileSuffix=[string] file extension/suffix for code to send (default=txt) [5.8.5]
 
 [Tools]
 LogToFile=[true/false] enable file logging

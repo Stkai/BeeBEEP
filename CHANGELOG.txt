@@ -4,6 +4,7 @@ For more informations please visit https://www.beebeep.net
 BeeBEEP 5.8.5 (in development)
 - Added "Enable visual notifications for chat window" option menu Settings - Notifications
 - Added "Change emoticon size in chat" option in menu Settings - Chat.
+- Added button "To send text as code" in chat window.
 - Fixed a bug in connection to prevent PING before HELLO message.
 - Fixed a bug on using Message History with CTRL+Up / CTRL+Down.
 - Fixed a bug on "Raise chat window on new message".
@@ -14,7 +15,6 @@ BeeBEEP 5.8.5 (in development)
 - Added global shortcut CTRL+SHIFT+1 for PANIC BUTTON and HELP REQUEST automatic message.
 - Added room location in user VCard (useful also for help request).
 - If you right click on a url in a chat you can copy the url to the clipboard without having to select it.
-
 
 BeeBEEP 5.8.4
 - New feature: almost all the options of file beebeep.ini can be used in file beebeep.rc also
