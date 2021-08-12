@@ -45,14 +45,14 @@ Chat Core::findChatFromMessageData( VNumber from_user_id, const Message& m )
   return c;
 }
 
-void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
+bool Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
 {
   Chat c = findChatFromMessageData( from_user_id, m );
 
   if( !c.isValid() )
   {
     qWarning() << "Invalid message received from" << from_user_id;
-    return;
+    return false;
   }
 
   if( !c.usersId().contains( from_user_id ) )
@@ -63,15 +63,16 @@ void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
     {
       QString alert_msg = tr( "You are not a member of group %1. Your messages will be not shown." ).arg( c.name() );
       sendChatAutoResponderMessageToUser( c, alert_msg, from_user_id );
+      return true;
     }
-    return;
+    return false;
   }
 
   if( !c.usersId().contains( ID_LOCAL_USER ) )
   {
     qWarning() << "You are not in the chat" << c.id() << c.name() << "... drop message:";
     qWarning() << m.text();
-    return;
+    return false;
   }
 
 #ifdef BEEBEEP_DEBUG
@@ -91,6 +92,7 @@ void Core::dispatchChatMessageReceived( VNumber from_user_id, const Message& m )
   ChatManager::instance().setChat( c );
   emit chatChanged( c );
   emit newChatMessage( c, cm );
+  return true;
 }
 
 void Core::dispatchSystemMessage( VNumber chat_id, VNumber from_user_id, const QString& msg, DispatchType dt, ChatMessage::Type cmt, bool can_be_saved )

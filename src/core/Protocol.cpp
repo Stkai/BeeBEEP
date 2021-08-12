@@ -56,25 +56,26 @@ QString Protocol::messageHeader( Message::Type mt ) const
 {
   switch( mt )
   {
-  case Message::Beep:     return "BEE-BEEP";
-  case Message::Ping:     return "BEE-PING";
-  case Message::Pong:     return "BEE-PONG";
-  case Message::Chat:     return "BEE-CHAT";
-  case Message::Buzz:     return "BEE-BUZZ";
-  case Message::Hello:    return "BEE-CIAO";
-  case Message::System:   return "BEE-SYST";
-  case Message::User:     return "BEE-USER";
-  case Message::File:     return "BEE-FILE";
-  case Message::Share:    return "BEE-FSHR";
-  case Message::Group:    return "BEE-GROU";
-  case Message::Folder:   return "BEE-FOLD";
-  case Message::Read:     return "BEE-READ";
-  case Message::Hive:     return "BEE-HIVE";
-  case Message::ShareBox: return "BEE-SBOX";
+  case Message::Beep:      return "BEE-BEEP";
+  case Message::Ping:      return "BEE-PING";
+  case Message::Pong:      return "BEE-PONG";
+  case Message::Chat:      return "BEE-CHAT";
+  case Message::Received:  return "BEE-RECV";
+  case Message::Read:      return "BEE-READ";
+  case Message::Hello:     return "BEE-CIAO";
+  case Message::System:    return "BEE-SYST";
+  case Message::User:      return "BEE-USER";
+  case Message::File:      return "BEE-FILE";
+  case Message::Share:     return "BEE-FSHR";
+  case Message::Group:     return "BEE-GROU";
+  case Message::Folder:    return "BEE-FOLD";
+  case Message::Hive:      return "BEE-HIVE";
+  case Message::ShareBox:  return "BEE-SBOX";
   case Message::ShareDesktop : return "BEE-DESK";
-  case Message::Test:     return "BEE-TEST";
-  case Message::Help:     return "BEE-HELP";
-  default:                return "BEE-BOOH";
+  case Message::Buzz:      return "BEE-BUZZ";
+  case Message::Test:      return "BEE-TEST";
+  case Message::Help:      return "BEE-HELP";
+  default:                 return "BEE-BOOH";
   }
 }
 
@@ -90,6 +91,8 @@ Message::Type Protocol::messageType( const QString& msg_type ) const
     return Message::User;
   else if( msg_type == "BEE-CHAT")
     return Message::Chat;
+  else if( msg_type == "BEE-RECV" )
+    return Message::Received;
   else if( msg_type == "BEE-READ" )
     return Message::Read;
   else if( msg_type == "BEE-BUZZ" )
@@ -2034,6 +2037,13 @@ Message Protocol::chatReadMessage( const Chat& c )
 {
   Message m = chatMessage( c, "" );
   m.setType( Message::Read );
+  return m;
+}
+
+Message Protocol::receivedMessage( const Message& m_received ) const
+{
+  Message m( Message::Received, ID_RECEIVED_MESSAGE, QString::number( m_received.id() ) );
+  m.addFlag( Message::Request );
   return m;
 }
 

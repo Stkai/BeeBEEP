@@ -33,6 +33,7 @@
 #include "Protocol.h"
 #include "Settings.h"
 #include "UserManager.h"
+#include "MessageManager.h"
 
 
 void Core::parseMessage( VNumber user_id, const Message& m )
@@ -55,6 +56,9 @@ void Core::parseMessage( const User& u, const Message& m )
     break;
   case Message::Chat:
     parseChatMessage( u, m );
+    break;
+  case Message::Received:
+    parseReceivedMessage( u, m );
     break;
   case Message::Read:
     parseChatReadMessage( u, m );
@@ -238,7 +242,16 @@ void Core::parseFileMessage( const User& u, const Message& m )
 void Core::parseChatMessage( const User& u, const Message& m )
 {
   if( m.hasFlag( Message::Private ) || m.flags() == 0 || m.hasFlag( Message::GroupChat ) )
-    dispatchChatMessageReceived( u.id(), m );
+  {
+    if( dispatchChatMessageReceived( u.id(), m ) )
+    {
+      if( u.protocolVersion() >= RECEIVED_MESSAGE_PROTO_VERSION )
+      {
+        if( !sendMessageToLocalNetwork( u, Protocol::instance().receivedMessage( m ) ) )
+          qWarning() << "Unable to send confirmation of message received to" << qPrintable( u.path() );
+      }
+    }
+  }
   else
     qWarning() << "Invalid flag found in chat message from" << qPrintable( u.path() );
 }
@@ -660,5 +673,21 @@ void Core::parseHelpMessage( const User& u, const Message& m )
   {
     if( Settings::instance().enableReceivingHelpMessages() )
       qWarning() << "Invalid flag found in help message from user" << qPrintable( u.path() );
+  }
+}
+
+void Core::parseReceivedMessage(const User& u, const Message& m )
+{
+  if( u.protocolVersion() >= RECEIVED_MESSAGE_PROTO_VERSION )
+  {
+    if( m.hasFlag( Message::Request ) )
+    {
+      bool ok = false;
+      VNumber id_msg_received = m.text().toULongLong( &ok );
+      if( ok )
+        MessageManager::instance().setMessageReceived( id_msg_received );
+      else
+        qWarning() << "Invalid chat message id as received from" << qPrintable( u.path() );
+    }
   }
 }

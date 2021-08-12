@@ -53,6 +53,8 @@ public:
 
   inline const QString& savedMessagesAuthCode() const;
 
+  void setMessageReceived( VNumber );
+
   static MessageManager& instance()
   {
     if( !mp_instance )

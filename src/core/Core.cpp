@@ -704,11 +704,8 @@ void Core::onTickEvent( int ticks )
 
     mp_broadcaster->onTickEvent( ticks );
 
-    if( (Settings::instance().tickIntervalBroadcasting() > 0 && (ticks % Settings::instance().tickIntervalBroadcasting() == 0))
-        || ((ticks % AUTO_BROADCAST_CHECK_TICK == 0) && m_connections.isEmpty()) )
-    {
+    if( Settings::instance().tickIntervalBroadcasting() > 0 && (ticks % Settings::instance().tickIntervalBroadcasting() == 0) )
       sendBroadcastMessage();
-    }
 
     foreach( Connection* c, m_connections )
       c->onTickEvent( ticks );

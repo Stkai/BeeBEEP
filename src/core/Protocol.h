@@ -66,6 +66,7 @@ public:
   inline Message systemMessage( const QString& ) const;
   Message chatMessage( const Chat&, const QString& );
   Message chatReadMessage( const Chat& );
+  Message receivedMessage( const Message& ) const;
   Message groupChatRequestMessage_obsolete( const Chat&, const User& to_user );
   Message groupChatRequestMessage( const Chat&, const User& to_user );
   Message groupChatRemoveUserMessage( const Chat& );

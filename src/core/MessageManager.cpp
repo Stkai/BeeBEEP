@@ -232,3 +232,10 @@ bool MessageManager::saveMessages( bool save_unsent_messages_also )
   SaveChatList scl;
   return scl.save() && unsent_chat_messages_saved;
 }
+
+void MessageManager::setMessageReceived( VNumber msg_id )
+{
+#ifdef BEEBEEP_DEBUG
+  qDebug() << "Message manager sets" << msg_id << "as message received";
+#endif
+}

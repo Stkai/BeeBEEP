@@ -264,6 +264,7 @@ protected:
   void parseGroupMessage( const User&, const Message& );
   void parseFolderMessage( const User&, const Message& );
   void parseChatReadMessage( const User&, const Message& );
+  void parseReceivedMessage( const User&, const Message& );
   void parseHiveMessage( const User&, const Message& );
   void parseShareBoxMessage( const User&, const Message& );
   void parseBuzzMessage( const User&, const Message& );
@@ -300,7 +301,7 @@ protected:
   enum DispatchType { DispatchToAll, DispatchToAllChatsWithUser, DispatchToChat, DispatchToDefaultAndPrivateChat };
   Chat findChatFromMessageData( VNumber from_user_id, const Message& );
   void dispatchSystemMessage( VNumber chat_id, VNumber from_user_id, const QString& msg, DispatchType, ChatMessage::Type, bool can_be_saved );
-  void dispatchChatMessageReceived( VNumber from_user_id, const Message& );
+  bool dispatchChatMessageReceived( VNumber from_user_id, const Message& );
   void dispatchToAllChats( const ChatMessage& );
   void dispatchToAllChatsWithUser( const ChatMessage&, VNumber user_id );
   void dispatchToChat( const ChatMessage&, VNumber chat_id );
