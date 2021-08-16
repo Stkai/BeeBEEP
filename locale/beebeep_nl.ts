@@ -200,7 +200,7 @@
         <translation>Klik hier om te downloaden</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="729"/>
+        <location filename="../src/core/Core.cpp" line="726"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>Max-ID is bereikt. Sluit en herstart Beebeep AUB.</translation>
     </message>
@@ -356,7 +356,7 @@
         <location filename="../src/core/CoreChat.cpp" line="1035"/>
         <location filename="../src/core/CoreChat.cpp" line="1068"/>
         <source>I need your help.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ik heb je hulp nodig.</translation>
     </message>
     <message>
         <source>Offline messages still to be sent had an incorrect authorization code and will not be sent.</source>
@@ -665,64 +665,64 @@
         <translation type="obsolete">%1 %2 stuurt bestand %3 aan u.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="436"/>
+        <location filename="../src/core/CoreParser.cpp" line="449"/>
         <source>%1 has removed shared files</source>
         <translation>%1 heeft de gedeelde bestanden verwijderd</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="438"/>
+        <location filename="../src/core/CoreParser.cpp" line="451"/>
         <source>%1 has shared %2 files</source>
         <translation>%1 heeft %2 bestanden gedeeld</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="617"/>
+        <location filename="../src/core/CoreParser.cpp" line="630"/>
         <source>%1 %2 is buzzing you.</source>
         <translation>%1 %2 buzzed je.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="468"/>
+        <location filename="../src/core/CoreParser.cpp" line="481"/>
         <source>%1 %2 has refused to download folder %3.</source>
         <translation>%1 %2 hebben geweigerd om map %3 te downloaden.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="166"/>
+        <location filename="../src/core/CoreParser.cpp" line="170"/>
         <source>%1 %2 has refused to download the file: %3</source>
         <translation>%1 %2 hebben geweigerd om bestand %3 te downloaden</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="195"/>
+        <location filename="../src/core/CoreParser.cpp" line="199"/>
         <source>%1 %2 is sending to you the voice message: %3</source>
         <translation>%1 %2 stuurt je een spraakbericht:%3</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="197"/>
+        <location filename="../src/core/CoreParser.cpp" line="201"/>
         <source>%1 %2 is sending to you the file: %3</source>
         <translation>%1 %2 verstuurt bestand: %3 aan u</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="478"/>
+        <location filename="../src/core/CoreParser.cpp" line="491"/>
         <source>unknown folder</source>
         <translation>onbekende map</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="488"/>
+        <location filename="../src/core/CoreParser.cpp" line="501"/>
         <source>%1 %2 is sending to you the folder: %3.</source>
         <translation>%1 %2 verstuurd naar jou de map %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="634"/>
+        <location filename="../src/core/CoreParser.cpp" line="647"/>
         <source>%1 %2 is asking for your help.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 vraagt om te helpen.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="643"/>
+        <location filename="../src/core/CoreParser.cpp" line="656"/>
         <source>I got your call for help.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ik kreeg je oproep voor hulp.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="650"/>
+        <location filename="../src/core/CoreParser.cpp" line="663"/>
         <source>%1 %2 got your call for help.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 kreeg je oproep voor hulp.</translation>
     </message>
     <message>
         <location filename="../src/core/CoreUser.cpp" line="94"/>
@@ -1424,12 +1424,12 @@ Download gratis en installeer de versie met deze functie van de %1 website.</tra
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="197"/>
         <source>Send code</source>
-        <translation type="unfinished"></translation>
+        <translation>Zend code</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="367"/>
         <source>Copy URL to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopieer URL naar klembord</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="509"/>
@@ -1510,7 +1510,7 @@ Download gratis en installeer de versie met deze functie van de %1 website.</tra
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="1337"/>
         <source>Url copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>URL gekopieerd naar klembord</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="1068"/>
@@ -1854,12 +1854,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiCreateTextFile.cpp" line="35"/>
         <source>Create text</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekst maken</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateTextFile.cpp" line="44"/>
         <source>For example:</source>
-        <translation type="unfinished"></translation>
+        <translation>Als voorbeeld:</translation>
     </message>
 </context>
 <context>
@@ -1867,32 +1867,32 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiCreateTextFile.ui" line="17"/>
         <source>Workgroups</source>
-        <translation type="unfinished">Werkgroepen</translation>
+        <translation>Werkgroepen</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateTextFile.ui" line="28"/>
         <source>Send as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Verzenden als tekst</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateTextFile.ui" line="35"/>
         <source>Send as file</source>
-        <translation type="unfinished"></translation>
+        <translation>Verzenden als bestand</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateTextFile.ui" line="64"/>
         <source>File extension</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestandsextensie</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateTextFile.ui" line="96"/>
         <source>Use temporary file</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik temp bestand</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateTextFile.ui" line="128"/>
         <source>Send</source>
-        <translation type="unfinished">Zend</translation>
+        <translation>Verzenden</translation>
     </message>
 </context>
 <context>
@@ -3020,7 +3020,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="839"/>
         <source>Ask for help</source>
-        <translation type="unfinished"></translation>
+        <translation>Vraag om hulp</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="899"/>
@@ -3080,7 +3080,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1276"/>
         <source>Enable visual notifications for chat windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Schakel visuele meldingen in voor chatvensters</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1288"/>
@@ -3100,7 +3100,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="1540"/>
         <source>Help station</source>
-        <translation type="unfinished"></translation>
+        <translation>Helpstation</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="2082"/>
@@ -3231,12 +3231,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4794"/>
         <source>%1 is asking for your help!</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 vraagt om te helpen!</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="4802"/>
         <source>%1 got your call for help.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 kreeg je oproep voor hulp.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiMain.cpp" line="5402"/>
@@ -5622,12 +5622,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiScreenShot.cpp" line="84"/>
         <source>Also grab the cursor in the screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Pak de cursor in de schermafbeelding</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiScreenShot.cpp" line="89"/>
         <source>Grab cursor</source>
-        <translation type="unfinished"></translation>
+        <translation>Pak de cursor</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiScreenShot.cpp" line="101"/>
@@ -6610,12 +6610,12 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="325"/>
         <source>Your room, location or address</source>
-        <translation type="unfinished"></translation>
+        <translation>Je kamer, plaats of adres</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="328"/>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Plaats</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiEditVCard.ui" line="392"/>
@@ -6700,7 +6700,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiVCard.ui" line="204"/>
         <source>Room position</source>
-        <translation type="unfinished"></translation>
+        <translation>Kamer positie</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.ui" line="221"/>
@@ -6730,7 +6730,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/desktop/GuiVCard.ui" line="463"/>
         <source>Ask for help</source>
-        <translation type="unfinished"></translation>
+        <translation>Vraag om hulp</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiVCard.ui" line="498"/>
@@ -7193,7 +7193,7 @@ Gebruik aub een andere naam.</translation>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="128"/>
         <source>Send a help request message</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuur een hulpverzoekbericht</translation>
     </message>
     <message>
         <source>All Users</source>

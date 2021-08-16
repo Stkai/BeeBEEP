@@ -192,7 +192,7 @@
         <translation>Click aqui para Download</translation>
     </message>
     <message>
-        <location filename="../src/core/Core.cpp" line="729"/>
+        <location filename="../src/core/Core.cpp" line="726"/>
         <source>Max ID is reached. Please close and restart the application.</source>
         <translation>O ID máximo foi atingido. Por favor, feche e reinicie o aplicativo.</translation>
     </message>
@@ -645,62 +645,62 @@
         <translation type="obsolete">%1 %2 está enviando o arquivo: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="436"/>
+        <location filename="../src/core/CoreParser.cpp" line="449"/>
         <source>%1 has removed shared files</source>
         <translation>%1 Removeu Arquivos Compartilhado</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="438"/>
+        <location filename="../src/core/CoreParser.cpp" line="451"/>
         <source>%1 has shared %2 files</source>
         <translation>%1 compartilhou %2 arquivos</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="617"/>
+        <location filename="../src/core/CoreParser.cpp" line="630"/>
         <source>%1 %2 is buzzing you.</source>
         <translation>%1 %2 Esta Bip(chamando)  Você.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="468"/>
+        <location filename="../src/core/CoreParser.cpp" line="481"/>
         <source>%1 %2 has refused to download folder %3.</source>
         <translation>%1 %2 recusou fazer o download da pasta %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="166"/>
+        <location filename="../src/core/CoreParser.cpp" line="170"/>
         <source>%1 %2 has refused to download the file: %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="195"/>
+        <location filename="../src/core/CoreParser.cpp" line="199"/>
         <source>%1 %2 is sending to you the voice message: %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="197"/>
+        <location filename="../src/core/CoreParser.cpp" line="201"/>
         <source>%1 %2 is sending to you the file: %3</source>
         <translation>%1 %2 está enviando o arquivo: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="478"/>
+        <location filename="../src/core/CoreParser.cpp" line="491"/>
         <source>unknown folder</source>
         <translation>Pasta Desconhecida</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="488"/>
+        <location filename="../src/core/CoreParser.cpp" line="501"/>
         <source>%1 %2 is sending to you the folder: %3.</source>
         <translation>%1 %2 está enviando  uma pasta: %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="634"/>
+        <location filename="../src/core/CoreParser.cpp" line="647"/>
         <source>%1 %2 is asking for your help.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="643"/>
+        <location filename="../src/core/CoreParser.cpp" line="656"/>
         <source>I got your call for help.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/CoreParser.cpp" line="650"/>
+        <location filename="../src/core/CoreParser.cpp" line="663"/>
         <source>%1 %2 got your call for help.</source>
         <translation type="unfinished"></translation>
     </message>
