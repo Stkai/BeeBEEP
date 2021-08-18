@@ -252,7 +252,7 @@ protected:
   bool hasConnection( const QHostAddress&, int ) const;
   void closeConnection( Connection* );
   void addConnectionReadyForUse( Connection*, const User& );
-  int checkOfflineMessagesForUser( const User& );
+  int checkOfflineMessagesForUser( const User&, bool on_new_connection );
   void setupNewConnection( Connection* );
   Connection* createConnection();
 

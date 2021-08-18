@@ -50,3 +50,8 @@ MessageRecord& MessageRecord::operator=( const MessageRecord& mr )
   return *this;
 }
 
+bool MessageRecord::operator<( const MessageRecord& mr ) const
+{
+  return m_message.timestamp() < mr.message().timestamp();
+}
+

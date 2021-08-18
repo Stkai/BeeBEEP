@@ -109,7 +109,7 @@ void GuiLog::setupToolBar( QToolBar* bar )
   mp_cbLogToFile->setText( tr( "Log to file" ) );
   mp_cbLogToFile->setChecked( Settings::instance().logToFile() );
   mp_cbLogToFile->setToolTip( Settings::instance().logFilePath() );
-  connect( mp_cbLogToFile, SIGNAL( clicked( bool ) ), this, SLOT( logToFile( bool ) ) );
+  connect( mp_cbLogToFile, SIGNAL( clicked(bool) ), this, SLOT( logToFile(bool) ) );
   bar->addWidget( mp_cbLogToFile );
   bar->addAction( mp_actOpenLogFilePath );
   mp_actOpenLogFilePath->setEnabled( Settings::instance().logToFile() );

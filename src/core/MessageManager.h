@@ -38,9 +38,12 @@ public:
   void generateSaveMessagesAuthCode();
 
   void addMessageToSend( VNumber to_user_id, VNumber chat_id, const Message& );
-  QList<MessageRecord> takeMessagesToSendToUserId( VNumber );
+  QList<MessageRecord> takeMessagesToSendToUserId( VNumber user_id, bool also_sent_messages );
   int countMessagesToSendToUserId( VNumber );
   int countMessagesToSendInChatId( VNumber );
+
+  void addSentMessage( VNumber to_user_id, VNumber chat_id, const Message& );
+  bool setMessageReceived( VNumber msg_id );
 
   inline VNumber nextUserWithUnsentMessages() const;
 
@@ -52,8 +55,6 @@ public:
   bool saveMessages( bool save_unsent_messages_also );
 
   inline const QString& savedMessagesAuthCode() const;
-
-  void setMessageReceived( VNumber );
 
   static MessageManager& instance()
   {
@@ -77,6 +78,7 @@ protected:
 
 private:
   QList<MessageRecord> m_messagesToSend;
+  QList<MessageRecord> m_sentMessages;
   QString m_savedMessagesAuthCode;
 
 };

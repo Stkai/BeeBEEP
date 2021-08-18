@@ -672,7 +672,7 @@ void Core::parseHelpMessage( const User& u, const Message& m )
   else
   {
     if( Settings::instance().enableReceivingHelpMessages() )
-      qWarning() << "Invalid flag found in help message from user" << qPrintable( u.path() );
+      qWarning() << "Invalid flag found in help message from" << qPrintable( u.path() );
   }
 }
 
@@ -687,7 +687,7 @@ void Core::parseReceivedMessage(const User& u, const Message& m )
       if( ok )
         MessageManager::instance().setMessageReceived( id_msg_received );
       else
-        qWarning() << "Invalid chat message id as received from" << qPrintable( u.path() );
+        qWarning() << "Invalid chat message id received from" << qPrintable( u.path() );
     }
   }
 }

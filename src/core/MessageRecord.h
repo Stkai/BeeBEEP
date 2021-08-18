@@ -36,6 +36,7 @@ public:
   MessageRecord( VNumber to_user_id, VNumber chat_id, const Message& );
 
   MessageRecord& operator=( const MessageRecord& );
+  bool operator<( const MessageRecord& ) const;
 
   inline bool isValid() const;
   inline bool isChatValid() const;

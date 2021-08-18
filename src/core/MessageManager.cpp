@@ -39,9 +39,24 @@ void MessageManager::addMessageToSend( VNumber to_user_id, VNumber chat_id, cons
   addMessageRecord( MessageRecord( to_user_id, chat_id, m ) );
 }
 
-QList<MessageRecord> MessageManager::takeMessagesToSendToUserId( VNumber user_id )
+QList<MessageRecord> MessageManager::takeMessagesToSendToUserId( VNumber user_id, bool also_sent_messages )
 {
   QList<MessageRecord> message_list;
+  if( also_sent_messages )
+  {
+    QList<MessageRecord>::iterator it = m_sentMessages.begin();
+    while( it != m_sentMessages.end() )
+    {
+      if( (*it).toUserId() == user_id )
+      {
+        message_list.append( *it );
+        it = m_sentMessages.erase( it );
+      }
+      else
+        ++it;
+    }
+  }
+
   QList<MessageRecord>::iterator it = m_messagesToSend.begin();
   while( it != m_messagesToSend.end() )
   {
@@ -54,7 +69,10 @@ QList<MessageRecord> MessageManager::takeMessagesToSendToUserId( VNumber user_id
       ++it;
   }
   if( !message_list.isEmpty() )
+  {
+    qSort( message_list );
     saveUnsentMessages( true );
+  }
   return message_list;
 }
 
@@ -145,9 +163,14 @@ bool MessageManager::saveUnsentMessages( bool silent_mode )
   }
 
   QStringList sl_smr;
-  if( !m_messagesToSend.isEmpty() )
+  QList<MessageRecord> mr_list;
+  foreach( MessageRecord mr, m_sentMessages )
+    mr_list.append( mr );
+  foreach( MessageRecord mr, m_messagesToSend )
+    mr_list.append( mr );
+  if( !mr_list.isEmpty() )
   {
-    foreach( MessageRecord mr, m_messagesToSend )
+    foreach( MessageRecord mr, mr_list )
     {
       QString smr = Protocol::instance().saveMessageRecord( mr );
       if( !smr.isEmpty() )
@@ -233,9 +256,26 @@ bool MessageManager::saveMessages( bool save_unsent_messages_also )
   return scl.save() && unsent_chat_messages_saved;
 }
 
-void MessageManager::setMessageReceived( VNumber msg_id )
+void MessageManager::addSentMessage( VNumber to_user_id, VNumber chat_id, const Message& m )
 {
+  m_sentMessages.append( MessageRecord( to_user_id, chat_id, m ) );
+}
+
+bool MessageManager::setMessageReceived( VNumber msg_id )
+{
+  QList<MessageRecord>::iterator it = m_sentMessages.begin();
+  while( it != m_sentMessages.end() )
+  {
+    if( (*it).message().id() == msg_id )
+    {
 #ifdef BEEBEEP_DEBUG
-  qDebug() << "Message manager sets" << msg_id << "as message received";
+      qDebug() << "Message manager sets" << msg_id << "as message received from user" << (*it).toUserId();
 #endif
+      m_sentMessages.erase( it );
+      saveUnsentMessages( true );
+      return true;
+    }
+    ++it;
+  }
+  return false;
 }

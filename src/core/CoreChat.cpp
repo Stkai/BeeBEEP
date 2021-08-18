@@ -491,7 +491,11 @@ int Core::sendMessageToChat( const Chat& c, const Message& m )
       offline_users.append( Bee::userNameToShow( u, true ) );
     }
     else
+    {
+      if( u.protocolVersion() >= RECEIVED_MESSAGE_PROTO_VERSION )
+        MessageManager::instance().addSentMessage( u.id(), c.id(), m );
       messages_sent += 1;
+    }
   }
 
   if( !offline_users.isEmpty() )
@@ -765,9 +769,9 @@ bool Core::clearSystemMessagesInChat( VNumber chat_id )
   return true;
 }
 
-int Core::checkOfflineMessagesForUser( const User& u )
+int Core::checkOfflineMessagesForUser( const User& u, bool on_new_connection )
 {
-  QList<MessageRecord> message_list = MessageManager::instance().takeMessagesToSendToUserId( u.id() );
+  QList<MessageRecord> message_list = MessageManager::instance().takeMessagesToSendToUserId( u.id(), on_new_connection );
   if( message_list.isEmpty() )
     return 0;
 

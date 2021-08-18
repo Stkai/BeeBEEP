@@ -679,7 +679,7 @@ void Core::onTickEvent( int ticks )
         if( user_count > qMax( 5, Settings::instance().maxUsersToConnectInATick() ) )
           break;
         int group_chats = checkGroupChatAfterUserReconnect( u );
-        int offline_messages = checkOfflineMessagesForUser( u );
+        int offline_messages = checkOfflineMessagesForUser( u, true );
         if( Settings::instance().useHive() )
           sendLocalConnectedUsersTo( u );
         UserManager::instance().removeNewConnectedUserId( u.id() );
@@ -695,7 +695,7 @@ void Core::onTickEvent( int ticks )
         User u = UserManager::instance().findUser( user_id );
         if( u.isValid() && u.isStatusConnected() )
         {
-          int offline_messages = checkOfflineMessagesForUser( u );
+          int offline_messages = checkOfflineMessagesForUser( u, false );
           if( offline_messages > 0 )
             qDebug() << "You have sent to" << qPrintable( u.path() ) << offline_messages << "offline messages";
         }
