@@ -2324,8 +2324,8 @@ QString Protocol::formatHtmlText( const QString& text )
   text_formatted.replace( QRegExp("(^|\\s|>)\\/(\\S+)\\/(<|\\s|$)"), "\\1<i>\\2</i>\\3" );
   text_formatted.replace( QLatin1String( "[quote]" ), QString( "<br><span class='bee-quote'>&nbsp;&nbsp;<i>" ) );
   text_formatted.replace( QLatin1String( "[/quote]" ), "</i>&nbsp;&nbsp;</span> " );
-  text_formatted.replace( QLatin1String( "[code]" ), QString( "<br><code>" ) );
-  text_formatted.replace( QLatin1String( "[/code]" ), "</code><br>" );
+  text_formatted.replace( QLatin1String( "[code]" ), QString( "<code>" ) );
+  text_formatted.replace( QLatin1String( "[/code]" ), "</code>" );
 
   if( Settings::instance().chatUseClickableLinks() )
     text_formatted = linkifyText( text_formatted );

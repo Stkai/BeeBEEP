@@ -687,7 +687,7 @@ void Core::addListToSavedChats()
         else
         {
           bool resized_text = false;
-          msg_txt = mr.message().text();
+          msg_txt = mr.message().text().simplified();
           if( msg_txt.size() > 120 )
           {
             msg_txt.resize( 120 );

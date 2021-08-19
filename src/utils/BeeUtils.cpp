@@ -1003,6 +1003,8 @@ QString Bee::replaceHtmlSpecialCharacters( const QString& s )
         html_text += QLatin1String( "&gt;" );
       else if( c == QLatin1Char( '\t' ) )
         html_text += QLatin1String( "&nbsp;&nbsp;" );
+      else if( c == QLatin1Char( '\r' ) )
+      { /* skip */ }
       else
         html_text += c;
     }
