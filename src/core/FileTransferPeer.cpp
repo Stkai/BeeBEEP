@@ -120,9 +120,7 @@ void FileTransferPeer::startConnection()
   }
   else
   {
-#ifdef BEEBEEP_DEBUG
     qDebug() << qPrintable( name() ) << "is connecting to" << qPrintable( m_fileInfo.networkAddress().toString() );
-#endif
     mp_socket->connectToNetworkAddress( m_fileInfo.networkAddress() );
   }
 
