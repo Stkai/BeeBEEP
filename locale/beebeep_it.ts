@@ -1817,6 +1817,14 @@ Inserisci un nome differente.</translation>
         <source>Only files with this type of extension can be transferred:</source>
         <translation>Solo i file con questo tipo di estensione possono essere trasferiti:</translation>
     </message>
+    <message>
+        <source>My shared files</source>
+        <translation>I miei file condivisi</translation>
+    </message>
+    <message>
+        <source>Network shared files</source>
+        <translation>File condivisi nella rete</translation>
+    </message>
 </context>
 <context>
     <name>GuiFileTransfer</name>

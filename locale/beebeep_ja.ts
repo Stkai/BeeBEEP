@@ -263,8 +263,8 @@
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="232"/>
-        <location filename="../src/core/CoreChat.cpp" line="972"/>
-        <location filename="../src/core/CoreChat.cpp" line="983"/>
+        <location filename="../src/core/CoreChat.cpp" line="976"/>
+        <location filename="../src/core/CoreChat.cpp" line="987"/>
         <source>%1 Chat with %2.</source>
         <translatorcomment>引数はユーザー名</translatorcomment>
         <translation>%1 %2 とのチャット。</translation>
@@ -316,35 +316,35 @@
         <translation>誰もメッセージを受信していません。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="501"/>
+        <location filename="../src/core/CoreChat.cpp" line="505"/>
         <source>The voice message will be delivered to %1.</source>
         <translation>%1 にボイスメッセージを送信。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="665"/>
+        <location filename="../src/core/CoreChat.cpp" line="669"/>
         <source>Unsent messages had an incorrect authorization code and will not be sent.</source>
         <translation>未送信のメッセージの認証コードが正しくないため送信されません。</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/core/CoreChat.cpp" line="672"/>
+        <location filename="../src/core/CoreChat.cpp" line="676"/>
         <source>%n unsent message(s) will be sent as soon as possible.</source>
         <translation>
             <numerusform>%n 個の未送信メッセージは速やかに送信されます。</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="836"/>
+        <location filename="../src/core/CoreChat.cpp" line="840"/>
         <source>Offline messages sent to %1.</source>
         <translation>%1 にオフラインメッセージを送信。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="967"/>
+        <location filename="../src/core/CoreChat.cpp" line="971"/>
         <source>Chat with all users</source>
         <translation>すべてのユーザーとのチャット</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="1035"/>
-        <location filename="../src/core/CoreChat.cpp" line="1068"/>
+        <location filename="../src/core/CoreChat.cpp" line="1039"/>
+        <location filename="../src/core/CoreChat.cpp" line="1072"/>
         <source>I need your help.</source>
         <translation>お手伝いしてほしい。</translation>
     </message>
@@ -369,37 +369,37 @@
         <translation>端末間の暗号化: 無効</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="503"/>
+        <location filename="../src/core/CoreChat.cpp" line="507"/>
         <source>The message will be delivered to %1.</source>
         <translation>メッセージは後で %1 に届けられます。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="650"/>
+        <location filename="../src/core/CoreChat.cpp" line="654"/>
         <source>Saved chats had an incorrect authorization code.</source>
         <translation>保存したチャットに正しくない認証コードがあります。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="653"/>
+        <location filename="../src/core/CoreChat.cpp" line="657"/>
         <source>%1 saved chats are added to history</source>
         <translation>保存済み履歴に %1 個の会話を追加</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="722"/>
+        <location filename="../src/core/CoreChat.cpp" line="726"/>
         <source>Offline message will be sent to %1</source>
         <translation>オフラインメッセージは後で %1 に届けられます</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="926"/>
+        <location filename="../src/core/CoreChat.cpp" line="930"/>
         <source>%1 You have buzzed %2.</source>
         <translation>%1 %2 にバズしました。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="972"/>
+        <location filename="../src/core/CoreChat.cpp" line="976"/>
         <source>Unknown %1</source>
         <translation>名前未設定 %1</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="600"/>
+        <location filename="../src/core/CoreChat.cpp" line="604"/>
         <source>%1 %2 cannot be informed that you have left the group.</source>
         <translation>%1 %2 にあなたのグループ退出は通知されません。</translation>
     </message>
@@ -601,7 +601,7 @@
         <translation>ダウンロード</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="716"/>
+        <location filename="../src/core/CoreChat.cpp" line="720"/>
         <location filename="../src/core/CoreFileTransfer.cpp" line="182"/>
         <location filename="../src/core/CoreVoiceChat.cpp" line="66"/>
         <source>voice message</source>
@@ -880,52 +880,52 @@
         <translation>転送待ち</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="194"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="192"/>
         <source>the file already exists</source>
         <translation>このファイルは既に存在します</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="196"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="194"/>
         <source>Transfer completed in %1</source>
         <translation>転送完了 (所要時間 %1)</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="194"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="192"/>
         <source>Transfer skipped</source>
         <translation>転送を省略</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="211"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="209"/>
         <source>Transfer canceled</source>
         <translation>転送キャンセル済み</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="239"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="237"/>
         <source>Transfer is about to pause</source>
         <translation>転送を一時停止</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="241"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="239"/>
         <source>Please wait</source>
         <translation>処理中</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="258"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="256"/>
         <source>Transfer paused after %1</source>
         <translation>停止中 (%1 転送)</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="269"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="267"/>
         <source>Starting transfer</source>
         <translation>転送開始中</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="356"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="354"/>
         <source>Connection timeout</source>
         <translation>接続タイムアウト</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="375"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="373"/>
         <source>Transfer timeout</source>
         <translation>転送タイムアウト</translation>
     </message>
@@ -1950,17 +1950,17 @@ Please select a different name.</source>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="53"/>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="151"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="155"/>
         <source>Show the view tool bar</source>
         <translation>表示用ツールバーを表示</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="157"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="162"/>
         <source>Show my shared files</source>
         <translation>わたしの共有ファイルを表示</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="158"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="165"/>
         <source>Show the network shared files</source>
         <translation>ネットワーク上の共有ファイルを表示</translation>
     </message>
@@ -1977,80 +1977,90 @@ Please select a different name.</source>
         <translation type="obsolete">無効</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="352"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="363"/>
         <source>Allowed file extensions</source>
         <translation>許可するファイル拡張子</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="173"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="183"/>
         <source>Show the bar of local file sharing</source>
         <translation>ローカルのファイル共有用ツールバーを表示</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="163"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="161"/>
+        <source>My shared files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="164"/>
+        <source>Network shared files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="173"/>
         <source>Only certain types of files are allowed for file transfer</source>
         <translation>特定の種類のファイルのみファイル転送が許可されています</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="186"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="196"/>
         <source>Show the bar of network file sharing</source>
         <translation>ネットワークのファイル共有用ツールバーを表示</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="277"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="288"/>
         <source>%1 is not available</source>
         <translation>%1 利用できません</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="293"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="304"/>
         <source>%1 has shared %2 files</source>
         <translation>%1 は %2ファイルを共有中</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="365"/>
         <source>File transfer has no rules on file extensions.</source>
         <translation>ファイル転送時のファイル拡張子の規制はありません。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="365"/>
         <source>All types of files can be sent and received.</source>
         <translation>すべての種類のファイルを送受信できます。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="356"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="365"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="367"/>
         <source>Ok</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="356"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="367"/>
         <source>Only files with this type of extension can be transferred:</source>
         <translation>この種類のの拡張子のファイルのみ転送可能:</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="260"/>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="316"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="271"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="327"/>
         <source>downloading</source>
         <translation>ダウンロード中</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="159"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="168"/>
         <source>Show the BeeBOX</source>
         <translation>BeeBOX を表示</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="266"/>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="316"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="277"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="327"/>
         <source>uploading</source>
         <translation>アップロード中</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="324"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="335"/>
         <source>download completed</source>
         <translation>ダウンロード完了</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="324"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="335"/>
         <source>upload completed</source>
         <translation>アップロード完了</translation>
     </message>
@@ -6535,7 +6545,7 @@ Please select a different name.</source>
 <context>
     <name>Not available</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="1070"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="1072"/>
         <source>n.a.</source>
         <translation>なし</translation>
     </message>
@@ -6578,12 +6588,12 @@ Please select a different name.</source>
         <translation>個の未送信メッセージ</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="94"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="99"/>
         <source>You</source>
         <translation>あなた</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="94"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="99"/>
         <source>Unknown</source>
         <translation>名前不明</translation>
     </message>
@@ -6865,7 +6875,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2509"/>
+        <location filename="../src/core/Settings.cpp" line="2518"/>
         <source>Autoresponder</source>
         <translation>自動応答</translation>
     </message>

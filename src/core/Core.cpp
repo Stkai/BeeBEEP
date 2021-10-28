@@ -279,7 +279,7 @@ bool Core::start()
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                            tr( "%1 %2 accepts incoming connections only from the IP addresses present in the HOSTS file." )
-                           .arg( IconManager::instance().toHtml( "firewall.png", "*I*" ) ).arg( Settings::instance().programName() ),
+                           .arg( IconManager::instance().toHtml( "firewall.png", "*I*" ), Settings::instance().programName() ),
                            DispatchToChat, ChatMessage::Connection, false );
     qDebug() << "Connections are accepted only from these host addresses:" << qPrintable( Settings::instance().broadcastAddressesInFileHosts().join( ", " ) );
   }
@@ -288,7 +288,7 @@ bool Core::start()
   {
     dispatchSystemMessage( ID_DEFAULT_CHAT, ID_LOCAL_USER,
                            tr( "%1 You have selected to join only in these workgroups: %2" )
-                           .arg( IconManager::instance().toHtml( "workgroup.png", "*C*" ) ).arg( Bee::stringListToTextString( Settings::instance().localUser().workgroups(), true ) ),
+                           .arg( IconManager::instance().toHtml( "workgroup.png", "*C*" ), Bee::stringListToTextString( Settings::instance().localUser().workgroups(), true ) ),
                            DispatchToChat, ChatMessage::Connection, false );
     qDebug() << "Connections are accepted only from these workgroups:" << qPrintable( Settings::instance().localUser().workgroups().join( ", " ) );
   }

@@ -263,8 +263,8 @@
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="232"/>
-        <location filename="../src/core/CoreChat.cpp" line="972"/>
-        <location filename="../src/core/CoreChat.cpp" line="983"/>
+        <location filename="../src/core/CoreChat.cpp" line="976"/>
+        <location filename="../src/core/CoreChat.cpp" line="987"/>
         <source>%1 Chat with %2.</source>
         <translation>%1 Чат с %2.</translation>
     </message>
@@ -314,17 +314,17 @@
         <translation>Никой не е получил съобщението.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="501"/>
+        <location filename="../src/core/CoreChat.cpp" line="505"/>
         <source>The voice message will be delivered to %1.</source>
         <translation>Гласовото съобщение ще бъде доставено на %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="665"/>
+        <location filename="../src/core/CoreChat.cpp" line="669"/>
         <source>Unsent messages had an incorrect authorization code and will not be sent.</source>
         <translation>Неизпратените съобщения са имали неправилен код за оторизация и няма да бъдат изпратени.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/core/CoreChat.cpp" line="672"/>
+        <location filename="../src/core/CoreChat.cpp" line="676"/>
         <source>%n unsent message(s) will be sent as soon as possible.</source>
         <translation>
             <numerusform>%n неизпратено съобщение ще бъде изпратено възможно най-скоро.</numerusform>
@@ -332,18 +332,18 @@
         </translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="836"/>
+        <location filename="../src/core/CoreChat.cpp" line="840"/>
         <source>Offline messages sent to %1.</source>
         <translation>Офлайн съобщения, изпратени до %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="967"/>
+        <location filename="../src/core/CoreChat.cpp" line="971"/>
         <source>Chat with all users</source>
         <translation>Разговаряйте с всички потребители</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="1035"/>
-        <location filename="../src/core/CoreChat.cpp" line="1068"/>
+        <location filename="../src/core/CoreChat.cpp" line="1039"/>
+        <location filename="../src/core/CoreChat.cpp" line="1072"/>
         <source>I need your help.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -368,37 +368,37 @@
         <translation>Шифроването от край до край е деактивирано</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="503"/>
+        <location filename="../src/core/CoreChat.cpp" line="507"/>
         <source>The message will be delivered to %1.</source>
         <translation>Съобщението ще бъде доставено на %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="650"/>
+        <location filename="../src/core/CoreChat.cpp" line="654"/>
         <source>Saved chats had an incorrect authorization code.</source>
         <translation>Запазените чатове са имали неправилен код за оторизация.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="653"/>
+        <location filename="../src/core/CoreChat.cpp" line="657"/>
         <source>%1 saved chats are added to history</source>
         <translation>%1 запазени чатове се добавят към историята</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="722"/>
+        <location filename="../src/core/CoreChat.cpp" line="726"/>
         <source>Offline message will be sent to %1</source>
         <translation>Съобщението офлайн ще бъде изпратено до %1</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="926"/>
+        <location filename="../src/core/CoreChat.cpp" line="930"/>
         <source>%1 You have buzzed %2.</source>
         <translation>%1 Вестник %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="972"/>
+        <location filename="../src/core/CoreChat.cpp" line="976"/>
         <source>Unknown %1</source>
         <translation>Неизвестно %1</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="600"/>
+        <location filename="../src/core/CoreChat.cpp" line="604"/>
         <source>%1 %2 cannot be informed that you have left the group.</source>
         <translation>%1 %2 не може да бъде информиран, че сте напуснали групата.</translation>
     </message>
@@ -600,7 +600,7 @@
         <translation>Изтегли</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="716"/>
+        <location filename="../src/core/CoreChat.cpp" line="720"/>
         <location filename="../src/core/CoreFileTransfer.cpp" line="182"/>
         <location filename="../src/core/CoreVoiceChat.cpp" line="66"/>
         <source>voice message</source>
@@ -879,52 +879,52 @@
         <translation>Трансферът е на опашката</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="194"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="192"/>
         <source>the file already exists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="196"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="194"/>
         <source>Transfer completed in %1</source>
         <translation>Трансферът завърши за %1</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="194"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="192"/>
         <source>Transfer skipped</source>
         <translation>Трансферът е пропуснат</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="211"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="209"/>
         <source>Transfer canceled</source>
         <translation>Трансферът отменен</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="239"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="237"/>
         <source>Transfer is about to pause</source>
         <translation>Трансферът е на път да спре</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="241"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="239"/>
         <source>Please wait</source>
         <translation>Моля изчакай</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="258"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="256"/>
         <source>Transfer paused after %1</source>
         <translation>Трансферът е на пауза след %1</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="269"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="267"/>
         <source>Starting transfer</source>
         <translation>Започва трансфер</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="356"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="354"/>
         <source>Connection timeout</source>
         <translation>Време за изчакване на връзката</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="375"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="373"/>
         <source>Transfer timeout</source>
         <translation>Време за изчакване на трансфера</translation>
     </message>
@@ -1942,95 +1942,105 @@ Please select a different name.</source>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="53"/>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="151"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="155"/>
         <source>Show the view tool bar</source>
         <translation>Показване на лентата с инструменти за изглед</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="157"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="162"/>
         <source>Show my shared files</source>
         <translation>Показване на споделените ми файлове</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="158"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="165"/>
         <source>Show the network shared files</source>
         <translation>Покажете мрежовите споделени файлове</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="352"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="363"/>
         <source>Allowed file extensions</source>
         <translation>Разрешени файлови разширения</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="173"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="183"/>
         <source>Show the bar of local file sharing</source>
         <translation>Покажете лентата за локално споделяне на файлове</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="163"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="161"/>
+        <source>My shared files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="164"/>
+        <source>Network shared files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="173"/>
         <source>Only certain types of files are allowed for file transfer</source>
         <translation>Само някои видове файлове са разрешени за прехвърляне на файлове</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="186"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="196"/>
         <source>Show the bar of network file sharing</source>
         <translation>Покажете лентата за споделяне на мрежови файлове</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="277"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="288"/>
         <source>%1 is not available</source>
         <translation>%1  не е наличен</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="293"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="304"/>
         <source>%1 has shared %2 files</source>
         <translation>%1  сподели %2 файла</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="365"/>
         <source>File transfer has no rules on file extensions.</source>
         <translation>Прехвърлянето на файлове няма правила за разширенията на файлове.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="365"/>
         <source>All types of files can be sent and received.</source>
         <translation>Всички видове файлове могат да бъдат изпращани и получавани.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="356"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="365"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="367"/>
         <source>Ok</source>
         <translation>Добре</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="356"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="367"/>
         <source>Only files with this type of extension can be transferred:</source>
         <translation>Могат да се прехвърлят само файлове с този тип разширение:</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="260"/>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="316"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="271"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="327"/>
         <source>downloading</source>
         <translation>изтегляне</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="159"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="168"/>
         <source>Show the BeeBOX</source>
         <translation>Покажете BeeBOX</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="266"/>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="316"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="277"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="327"/>
         <source>uploading</source>
         <translation>качване</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="324"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="335"/>
         <source>download completed</source>
         <translation>изтеглянето завърши</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="324"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="335"/>
         <source>upload completed</source>
         <translation>качването завърши</translation>
     </message>
@@ -6512,7 +6522,7 @@ Please select a different name.</source>
 <context>
     <name>Not available</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="1070"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="1072"/>
         <source>n.a.</source>
         <translation>n.a.</translation>
     </message>
@@ -6554,12 +6564,12 @@ Please select a different name.</source>
         <translation>неизпратени съобщения</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="94"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="99"/>
         <source>You</source>
         <translation>Вие</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="94"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="99"/>
         <source>Unknown</source>
         <translation>Неизвестен</translation>
     </message>
@@ -6842,7 +6852,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2509"/>
+        <location filename="../src/core/Settings.cpp" line="2518"/>
         <source>Autoresponder</source>
         <translation>Автоматичен отговор</translation>
     </message>

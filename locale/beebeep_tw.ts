@@ -263,8 +263,8 @@
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="232"/>
-        <location filename="../src/core/CoreChat.cpp" line="972"/>
-        <location filename="../src/core/CoreChat.cpp" line="983"/>
+        <location filename="../src/core/CoreChat.cpp" line="976"/>
+        <location filename="../src/core/CoreChat.cpp" line="987"/>
         <source>%1 Chat with %2.</source>
         <translation>%1 與 %2 聊天。</translation>
     </message>
@@ -314,35 +314,35 @@
         <translation>沒有人收到訊息。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="501"/>
+        <location filename="../src/core/CoreChat.cpp" line="505"/>
         <source>The voice message will be delivered to %1.</source>
         <translation>語音訊息將傳遞到 %1。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="665"/>
+        <location filename="../src/core/CoreChat.cpp" line="669"/>
         <source>Unsent messages had an incorrect authorization code and will not be sent.</source>
         <translation>未傳送的訊息具有不正確的授權碼，且將不會傳送。</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/core/CoreChat.cpp" line="672"/>
+        <location filename="../src/core/CoreChat.cpp" line="676"/>
         <source>%n unsent message(s) will be sent as soon as possible.</source>
         <translation>
             <numerusform>%n 個未傳送的訊息將儘快傳送。</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="836"/>
+        <location filename="../src/core/CoreChat.cpp" line="840"/>
         <source>Offline messages sent to %1.</source>
         <translation>離線訊息傳送到 %1。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="967"/>
+        <location filename="../src/core/CoreChat.cpp" line="971"/>
         <source>Chat with all users</source>
         <translation>與所有使用者聊天</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="1035"/>
-        <location filename="../src/core/CoreChat.cpp" line="1068"/>
+        <location filename="../src/core/CoreChat.cpp" line="1039"/>
+        <location filename="../src/core/CoreChat.cpp" line="1072"/>
         <source>I need your help.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -367,37 +367,37 @@
         <translation>已停用端對端加密</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="503"/>
+        <location filename="../src/core/CoreChat.cpp" line="507"/>
         <source>The message will be delivered to %1.</source>
         <translation>訊息將傳遞到 %1。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="650"/>
+        <location filename="../src/core/CoreChat.cpp" line="654"/>
         <source>Saved chats had an incorrect authorization code.</source>
         <translation>儲存的聊天有不正確的授權碼。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="653"/>
+        <location filename="../src/core/CoreChat.cpp" line="657"/>
         <source>%1 saved chats are added to history</source>
         <translation>%1 個儲存的聊天加入到歷程記錄</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="722"/>
+        <location filename="../src/core/CoreChat.cpp" line="726"/>
         <source>Offline message will be sent to %1</source>
         <translation>離線訊息將傳送到 %1</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="926"/>
+        <location filename="../src/core/CoreChat.cpp" line="930"/>
         <source>%1 You have buzzed %2.</source>
         <translation>%1 您已呼叫 %2。</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="972"/>
+        <location filename="../src/core/CoreChat.cpp" line="976"/>
         <source>Unknown %1</source>
         <translation>未知 %1</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="600"/>
+        <location filename="../src/core/CoreChat.cpp" line="604"/>
         <source>%1 %2 cannot be informed that you have left the group.</source>
         <translation>%1 %2 無法告知您已離開群組。</translation>
     </message>
@@ -599,7 +599,7 @@
         <translation>下載</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="716"/>
+        <location filename="../src/core/CoreChat.cpp" line="720"/>
         <location filename="../src/core/CoreFileTransfer.cpp" line="182"/>
         <location filename="../src/core/CoreVoiceChat.cpp" line="66"/>
         <source>voice message</source>
@@ -878,52 +878,52 @@
         <translation>傳輸已排入佇列</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="194"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="192"/>
         <source>the file already exists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="196"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="194"/>
         <source>Transfer completed in %1</source>
         <translation>在 %1 中完成傳輸</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="194"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="192"/>
         <source>Transfer skipped</source>
         <translation>傳輸已略過</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="211"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="209"/>
         <source>Transfer canceled</source>
         <translation>傳輸取消</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="239"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="237"/>
         <source>Transfer is about to pause</source>
         <translation>傳輸即將暫停</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="241"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="239"/>
         <source>Please wait</source>
         <translation>請稍候</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="258"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="256"/>
         <source>Transfer paused after %1</source>
         <translation>傳輸在 %1 之後暫停</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="269"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="267"/>
         <source>Starting transfer</source>
         <translation>開始傳輸</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="356"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="354"/>
         <source>Connection timeout</source>
         <translation>連線逾時</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="375"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="373"/>
         <source>Transfer timeout</source>
         <translation>傳輸逾時</translation>
     </message>
@@ -1941,95 +1941,105 @@ Please select a different name.</source>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="53"/>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="151"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="155"/>
         <source>Show the view tool bar</source>
         <translation>顯示檢視工具列</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="157"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="162"/>
         <source>Show my shared files</source>
         <translation>顯示我的共用檔案</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="158"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="165"/>
         <source>Show the network shared files</source>
         <translation>顯示網路共用檔案</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="352"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="363"/>
         <source>Allowed file extensions</source>
         <translation>允許的檔案副檔名</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="173"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="183"/>
         <source>Show the bar of local file sharing</source>
         <translation>顯示本機檔案共用列</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="163"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="161"/>
+        <source>My shared files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="164"/>
+        <source>Network shared files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="173"/>
         <source>Only certain types of files are allowed for file transfer</source>
         <translation>只允許某些類型的檔案進行檔案傳輸</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="186"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="196"/>
         <source>Show the bar of network file sharing</source>
         <translation>顯示網路檔案共用列</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="277"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="288"/>
         <source>%1 is not available</source>
         <translation>%1 不可用</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="293"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="304"/>
         <source>%1 has shared %2 files</source>
         <translation>%1 已共用 %2 個檔案</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="365"/>
         <source>File transfer has no rules on file extensions.</source>
         <translation>檔案傳輸沒有檔案副檔名的規則。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="365"/>
         <source>All types of files can be sent and received.</source>
         <translation>所有類型的檔案都可以傳送和接收。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="356"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="365"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="367"/>
         <source>Ok</source>
         <translation>確定</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="356"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="367"/>
         <source>Only files with this type of extension can be transferred:</source>
         <translation>只能傳輸具有此類副檔名的檔案:</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="260"/>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="316"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="271"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="327"/>
         <source>downloading</source>
         <translation>正在下載</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="159"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="168"/>
         <source>Show the BeeBOX</source>
         <translation>顯示 BeeBOX</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="266"/>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="316"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="277"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="327"/>
         <source>uploading</source>
         <translation>正在上傳</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="324"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="335"/>
         <source>download completed</source>
         <translation>下載完成</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="324"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="335"/>
         <source>upload completed</source>
         <translation>上傳完成</translation>
     </message>
@@ -6511,7 +6521,7 @@ Please select a different name.</source>
 <context>
     <name>Not available</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="1070"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="1072"/>
         <source>n.a.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6553,12 +6563,12 @@ Please select a different name.</source>
         <translation>未傳送訊息</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="94"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="99"/>
         <source>You</source>
         <translation>您</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="94"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="99"/>
         <source>Unknown</source>
         <translation>未知</translation>
     </message>
@@ -6840,7 +6850,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2509"/>
+        <location filename="../src/core/Settings.cpp" line="2518"/>
         <source>Autoresponder</source>
         <translation>自動回應器</translation>
     </message>

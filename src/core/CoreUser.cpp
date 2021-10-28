@@ -119,7 +119,7 @@ bool Core::changeLocalUser( const QString& user_name )
 
   QString old_user_name = Settings::instance().localUser().name();
   if( old_user_name.toLower() == user_name.toLower() )
-    return false;
+    qWarning() << "User changed nickname only for uppercase/lowercase characters";
 
   archiveAllChats();
 

@@ -1716,6 +1716,14 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Only files with this type of extension can be transferred:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>My shared files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Network shared files</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiFileTransfer</name>

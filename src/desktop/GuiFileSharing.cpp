@@ -55,6 +55,7 @@ GuiFileSharing::GuiFileSharing( QWidget *parent )
   mp_barView->setIconSize( Settings::instance().mainBarIconSize() );
   mp_barView->setFloatable( false );
   mp_barView->toggleViewAction()->setVisible( false );
+  mp_barView->setToolButtonStyle( Qt::ToolButtonTextBesideIcon );
 
   createActions();
   createToolbars();
@@ -129,10 +130,13 @@ void GuiFileSharing::checkViewActions()
 
   bool is_connected = beeCore->isConnected();
   int connected_users = beeCore->connectedUsers();
+  QWidget* cw = mp_stackedWidget->currentWidget();
 
-  mp_actViewShareLocal->setEnabled( mp_stackedWidget->currentWidget() != mp_shareLocal );
-  mp_actViewShareNetwork->setEnabled( mp_stackedWidget->currentWidget() != mp_shareNetwork && is_connected && connected_users > 0 );
-  mp_actViewShareBox->setEnabled( mp_stackedWidget->currentWidget() != mp_shareBox );
+  mp_actViewShareNetwork->setEnabled( cw != mp_shareNetwork && is_connected && connected_users > 0 );
+
+  mp_actViewShareLocal->setChecked( cw == mp_shareLocal );
+  mp_actViewShareNetwork->setChecked( cw == mp_shareNetwork );
+  mp_actViewShareBox->setChecked( cw == mp_shareBox );
 
   if( mp_stackedWidget->currentWidget() == mp_shareNetwork  )
     mp_barShareNetwork->show();
@@ -154,9 +158,15 @@ void GuiFileSharing::createActions()
 
 void GuiFileSharing::createToolbars()
 {
-  mp_actViewShareLocal = mp_barView->addAction( IconManager::instance().icon( "upload.png" ), tr( "Show my shared files" ), this, SLOT( raiseLocalShareView() ) );
-  mp_actViewShareNetwork = mp_barView->addAction( IconManager::instance().icon( "download.png" ), tr( "Show the network shared files" ), this, SLOT( raiseNetworkShareView() ) );
-  mp_actViewShareBox = mp_barView->addAction( IconManager::instance().icon( "sharebox.png" ), tr( "Show the BeeBOX" ), this, SLOT( raiseShareBoxView() ) );
+  mp_actViewShareLocal = mp_barView->addAction( IconManager::instance().icon( "upload.png" ), tr( "My shared files" ), this, SLOT( raiseLocalShareView() ) );
+  mp_actViewShareLocal->setToolTip( tr( "Show my shared files" ) );
+  mp_actViewShareLocal->setCheckable( true );
+  mp_actViewShareNetwork = mp_barView->addAction( IconManager::instance().icon( "download.png" ), tr( "Network shared files" ), this, SLOT( raiseNetworkShareView() ) );
+  mp_actViewShareNetwork->setToolTip( tr( "Show the network shared files" ) );
+  mp_actViewShareNetwork->setCheckable( true );
+  mp_actViewShareBox = mp_barView->addAction( IconManager::instance().icon( "sharebox.png" ), QLatin1String( "BeeBOX" ), this, SLOT( raiseShareBoxView() ) );
+  mp_actViewShareBox->setToolTip( tr( "Show the BeeBOX" ) );
+  mp_actViewShareBox->setCheckable( true );
   if( !Settings::instance().allowedFileExtensionsInFileTransfer().isEmpty() )
   {
     mp_barView->addSeparator();
@@ -218,7 +228,8 @@ void GuiFileSharing::removeFromShare( const QString& share_path )
 
 void GuiFileSharing::raiseView( QWidget* w )
 {
-  mp_stackedWidget->setCurrentWidget( w );
+  if( w != mp_stackedWidget->currentWidget() )
+      mp_stackedWidget->setCurrentWidget( w );
   checkViewActions();
   raise();
 }

@@ -1702,6 +1702,14 @@ Please select a different name.</source>
         <source>Only files with this type of extension can be transferred:</source>
         <translation>Передавати можна лише файли з таким розширенням:</translation>
     </message>
+    <message>
+        <source>My shared files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Network shared files</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GuiFileTransfer</name>

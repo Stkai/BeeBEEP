@@ -267,8 +267,8 @@
     </message>
     <message>
         <location filename="../src/core/CoreChat.cpp" line="232"/>
-        <location filename="../src/core/CoreChat.cpp" line="972"/>
-        <location filename="../src/core/CoreChat.cpp" line="983"/>
+        <location filename="../src/core/CoreChat.cpp" line="976"/>
+        <location filename="../src/core/CoreChat.cpp" line="987"/>
         <source>%1 Chat with %2.</source>
         <translation>%1 Czat z %2.</translation>
     </message>
@@ -318,17 +318,17 @@
         <translation>Nikt nie otrzymał wiadomości.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="501"/>
+        <location filename="../src/core/CoreChat.cpp" line="505"/>
         <source>The voice message will be delivered to %1.</source>
         <translation>Wiadomość głosowa zostanie doręczona do %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="665"/>
+        <location filename="../src/core/CoreChat.cpp" line="669"/>
         <source>Unsent messages had an incorrect authorization code and will not be sent.</source>
         <translation>Niewysłane wiadomości mają niepoprawny kod autoryzacyjny i nie zostaną wysłane.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/core/CoreChat.cpp" line="672"/>
+        <location filename="../src/core/CoreChat.cpp" line="676"/>
         <source>%n unsent message(s) will be sent as soon as possible.</source>
         <translation>
             <numerusform>%n niewysłanych wiadomości zostanie wysłanych najszybciej jak to możliwe.</numerusform>
@@ -337,13 +337,13 @@
         </translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="836"/>
+        <location filename="../src/core/CoreChat.cpp" line="840"/>
         <source>Offline messages sent to %1.</source>
         <translation>Wiadomości z trybu offline wysłane do %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="1035"/>
-        <location filename="../src/core/CoreChat.cpp" line="1068"/>
+        <location filename="../src/core/CoreChat.cpp" line="1039"/>
+        <location filename="../src/core/CoreChat.cpp" line="1072"/>
         <source>I need your help.</source>
         <translation>Potrzebuję Twojej pomocy.</translation>
     </message>
@@ -352,7 +352,7 @@
         <translation type="obsolete">Wiadomości offline czekające na wysłanie mają niepoprawny kod autoryzacyjny i nie zostaną wysłane.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="967"/>
+        <location filename="../src/core/CoreChat.cpp" line="971"/>
         <source>Chat with all users</source>
         <translation>Czat z wszystkimi użytkownikami</translation>
     </message>
@@ -377,17 +377,17 @@
         <translation>Szyfrowanie end-to-end jest wyłączone</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="503"/>
+        <location filename="../src/core/CoreChat.cpp" line="507"/>
         <source>The message will be delivered to %1.</source>
         <translation>Wiadomość będzie dostarczona do %1.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="650"/>
+        <location filename="../src/core/CoreChat.cpp" line="654"/>
         <source>Saved chats had an incorrect authorization code.</source>
         <translation>Zachowane czaty mają niepoprawny kod autoryzacyjny.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="653"/>
+        <location filename="../src/core/CoreChat.cpp" line="657"/>
         <source>%1 saved chats are added to history</source>
         <translation>%1 zachowanych czatów dodano do historii</translation>
     </message>
@@ -396,7 +396,7 @@
         <translation type="obsolete">%1 wiadomości offline zostanie wysłanych jak tylko będzie to możliwe.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="722"/>
+        <location filename="../src/core/CoreChat.cpp" line="726"/>
         <source>Offline message will be sent to %1</source>
         <translation>Wiadomości offline zostaną wysłane do %1</translation>
     </message>
@@ -405,17 +405,17 @@
         <translation type="obsolete">Wiadomości z trybu offline wysłane do %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="926"/>
+        <location filename="../src/core/CoreChat.cpp" line="930"/>
         <source>%1 You have buzzed %2.</source>
         <translation>%1 Zadzwoniłeś do %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="972"/>
+        <location filename="../src/core/CoreChat.cpp" line="976"/>
         <source>Unknown %1</source>
         <translation>Nieznany %1</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="600"/>
+        <location filename="../src/core/CoreChat.cpp" line="604"/>
         <source>%1 %2 cannot be informed that you have left the group.</source>
         <translation>%1 %2 nie może zostać poinformowany o opuszczeniu grupy przez Ciebie.</translation>
     </message>
@@ -524,7 +524,7 @@
         <translation type="obsolete">%1 Wysyłasz %2 do %3.</translation>
     </message>
     <message>
-        <location filename="../src/core/CoreChat.cpp" line="716"/>
+        <location filename="../src/core/CoreChat.cpp" line="720"/>
         <location filename="../src/core/CoreFileTransfer.cpp" line="182"/>
         <location filename="../src/core/CoreVoiceChat.cpp" line="66"/>
         <source>voice message</source>
@@ -933,52 +933,52 @@
         <translation>Transfer zakolejkowany</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="194"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="192"/>
         <source>the file already exists</source>
         <translation>plik już istnieje</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="196"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="194"/>
         <source>Transfer completed in %1</source>
         <translation>Transfer zostanie zakończony za %1</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="194"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="192"/>
         <source>Transfer skipped</source>
         <translation>Transfer pominięty</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="211"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="209"/>
         <source>Transfer canceled</source>
         <translation>Transfer anulowany</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="239"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="237"/>
         <source>Transfer is about to pause</source>
         <translation>Transfer wkrótce się zatrzyma</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="241"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="239"/>
         <source>Please wait</source>
         <translation>Proszę czekać</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="258"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="256"/>
         <source>Transfer paused after %1</source>
         <translation>Transfer wstrzymany po %1</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="269"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="267"/>
         <source>Starting transfer</source>
         <translation>Rozpoczynanie transferu</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="356"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="354"/>
         <source>Connection timeout</source>
         <translation>Przekroczono czas połączenia</translation>
     </message>
     <message>
-        <location filename="../src/core/FileTransferPeer.cpp" line="375"/>
+        <location filename="../src/core/FileTransferPeer.cpp" line="373"/>
         <source>Transfer timeout</source>
         <translation>Upłynął czas oczekiwania na transfer</translation>
     </message>
@@ -2011,17 +2011,17 @@ Proszę wybrać inną nazwę.</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="53"/>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="151"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="155"/>
         <source>Show the view tool bar</source>
         <translation>Pokaż pasek widoku</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="157"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="162"/>
         <source>Show my shared files</source>
         <translation>Pokaż moje udostępnione pliki</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="158"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="165"/>
         <source>Show the network shared files</source>
         <translation>Pokaż udostępnione pliki w sieci</translation>
     </message>
@@ -2030,33 +2030,33 @@ Proszę wybrać inną nazwę.</translation>
         <translation type="obsolete">Pokaż udostępnioną skrzynkę</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="173"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="183"/>
         <source>Show the bar of local file sharing</source>
         <translation>Pokaż pasek udostępniania plików lokalnych</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="186"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="196"/>
         <source>Show the bar of network file sharing</source>
         <translation>Pokaż pasek udostępnionych plików sieciowych</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="277"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="288"/>
         <source>%1 is not available</source>
         <translation>%1 nie jest dostępny</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="293"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="304"/>
         <source>%1 has shared %2 files</source>
         <translation>%1 udostępnił %2 plików</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="260"/>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="316"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="271"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="327"/>
         <source>downloading</source>
         <translation>pobieranie</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="159"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="168"/>
         <source>Show the BeeBOX</source>
         <translation>Pokaż BeeBOX</translation>
     </message>
@@ -2069,49 +2069,59 @@ Proszę wybrać inną nazwę.</translation>
         <translation type="obsolete">maksymalnie &lt;b&gt;%1&lt;/b&gt; plików</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="352"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="363"/>
         <source>Allowed file extensions</source>
         <translation>Dozwolone rozszerzenia plików</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="266"/>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="316"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="277"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="327"/>
         <source>uploading</source>
         <translation>wysyłanie</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="163"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="161"/>
+        <source>My shared files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="164"/>
+        <source>Network shared files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="173"/>
         <source>Only certain types of files are allowed for file transfer</source>
         <translation>Tylko niektóre typy plików są dozwolone do przesyłania plików</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="324"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="335"/>
         <source>download completed</source>
         <translation>pobieranie zakończone</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="324"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="335"/>
         <source>upload completed</source>
         <translation>wysyłanie zakończone</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="365"/>
         <source>File transfer has no rules on file extensions.</source>
         <translation>Transfer plików nie ma reguł dotyczących rozszerzeń plików.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="365"/>
         <source>All types of files can be sent and received.</source>
         <translation>Wszystkie typy plików mogą być wysyłane i odbierane.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="354"/>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="356"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="365"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="367"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiFileSharing.cpp" line="356"/>
+        <location filename="../src/desktop/GuiFileSharing.cpp" line="367"/>
         <source>Only files with this type of extension can be transferred:</source>
         <translation>Tylko pliki z tymi rozszerzeniami mogą być przesyłane:</translation>
     </message>
@@ -6834,7 +6844,7 @@ Proszę wybrać inną nazwę.</translation>
 <context>
     <name>Not available</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="1070"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="1072"/>
         <source>n.a.</source>
         <translation>n.s.</translation>
     </message>
@@ -6876,12 +6886,12 @@ Proszę wybrać inną nazwę.</translation>
         <translation>niewysłanych wiadomości</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="94"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="99"/>
         <source>You</source>
         <translation>Ty</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatMessage.cpp" line="94"/>
+        <location filename="../src/desktop/GuiChatMessage.cpp" line="99"/>
         <source>Unknown</source>
         <translation>Nieznany</translation>
     </message>
@@ -7173,7 +7183,7 @@ Proszę wybrać inną nazwę.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2509"/>
+        <location filename="../src/core/Settings.cpp" line="2518"/>
         <source>Autoresponder</source>
         <translation>Autoodpowiedź</translation>
     </message>

@@ -1222,7 +1222,7 @@ QPalette Bee::darkPalette()
   darkPalette.setColor( QPalette::HighlightedText, colorBlack() );
 
   darkPalette.setColor( QPalette::Active, QPalette::Button, colorGrey() );
-  darkPalette.setColor( QPalette::Disabled, QPalette::ButtonText, colorGrey() );
+  darkPalette.setColor( QPalette::Disabled, QPalette::ButtonText, colorGrey().darker() );
   darkPalette.setColor( QPalette::Disabled, QPalette::WindowText, colorGrey().darker() );
   darkPalette.setColor( QPalette::Disabled, QPalette::Text, colorGrey().darker() );
   darkPalette.setColor( QPalette::Disabled, QPalette::Base, colorDarkGrey().lighter() );

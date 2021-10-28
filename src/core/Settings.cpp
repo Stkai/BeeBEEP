@@ -94,6 +94,7 @@ Settings::Settings()
   m_postUsageStatistics = true;
   m_useHostnameForDefaultUsername = false;
   m_useEasyConnection = false;
+  m_useClassroomConfiguration = false;
   m_useUserFullName = false;
   m_appendHostNameToUserName = false;
   m_useCompactDataSaving = true;
@@ -436,14 +437,21 @@ void Settings::createLocalUser( const QString& user_name )
   m_localUser = User( ID_LOCAL_USER );
 
   QString account_name = accountNameFromSystemEnvinroment();
+  bool account_name_found = true;
   if( account_name.isEmpty() )
   {
     qWarning() << "USERNAME and USER variabile not found in system environment";
     account_name = QString( "Bee %1" ).arg( QTime::currentTime().toString( "zzzsmh" ) );
+    account_name_found = false;
   }
   m_localUser.setAccountName( account_name.toLower() );
   if( user_name.isEmpty() )
-    m_localUser.setName( account_name );
+  {
+    if( userRecognitionMethod() == Settings::RecognizeByNickname && account_name_found && m_useEasyConnection )
+      m_localUser.setName( QString( "%1 %2" ).arg( account_name, QTime::currentTime().toString( "zzzsmh" ) ) );
+    else
+      m_localUser.setName( account_name );
+  }
   else
     m_localUser.setName( user_name );
 
@@ -527,6 +535,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "DisableSendMessage", m_disableSendMessage );
     sets->setValue( "DisableVoiceMessages", m_disableVoiceMessages );
     sets->setValue( "UseEasyConnection", m_useEasyConnection );
+    sets->setValue( "UseClassroomConfiguration", m_useClassroomConfiguration );
     sets->setValue( "UseCompactDataSaving", m_useCompactDataSaving );
     sets->setValue( "StartMinimized", m_startMinimized );
     sets->setValue( "Signature", m_signature );
@@ -636,6 +645,7 @@ void Settings::loadRcFile()
   m_disableSendMessage = sets->value( "DisableSendMessage", m_disableSendMessage ).toBool();
   m_disableVoiceMessages = sets->value( "DisableVoiceMessages", m_disableVoiceMessages ).toBool();
   m_useEasyConnection = sets->value( "UseEasyConnection", m_useEasyConnection ).toBool();
+  m_useClassroomConfiguration = sets->value( "UseClassroomConfiguration", m_useClassroomConfiguration ).toBool();
   m_useCompactDataSaving = sets->value( "UseCompactDataSaving", m_useCompactDataSaving ).toBool();
   m_startMinimized = sets->value( "StartMinimized", m_startMinimized ).toBool();
   m_signature = sets->value( "Signature", m_signature ).toString();
@@ -1215,7 +1225,6 @@ void Settings::load()
 #endif
   beeApp->setSettingsFilePath( m_currentFilePath );
 
-  m_firstTime = sets->allKeys().isEmpty();
   sets->beginGroup( "Version" );
   m_settingsVersion = sets->value( "Settings", BEEBEEP_SETTINGS_VERSION ).toInt();
   m_dataStreamVersion = sets->value( "DataStream", static_cast<int>(DATASTREAM_VERSION_1) ).toInt();
@@ -1432,7 +1441,7 @@ void Settings::loadCommonSettings( QSettings* user_ini )
   else
   {
     m_useDefaultPassword = user_ini->value( "UseDefaultPassword", true ).toBool();
-    m_askChangeUserAtStartup = user_ini->value( "AskChangeUserAtStartup", m_firstTime ).toBool();
+    m_askChangeUserAtStartup = user_ini->value( "AskChangeUserAtStartup", false ).toBool();
     m_askPasswordAtStartup = user_ini->value( "AskPasswordAtStartup", false ).toBool();
   }
 
@@ -1636,7 +1645,7 @@ void Settings::loadCommonSettings( QSettings* user_ini )
     if( m_disableFileSharing )
       m_enableFileSharing = false;
     else
-      m_enableFileSharing = user_ini->value( "EnableFileSharing", false ).toBool();
+      m_enableFileSharing = user_ini->value( "EnableFileSharing", m_useClassroomConfiguration ).toBool();
 
     if( m_enableFileSharing )
       m_useShareBox = user_ini->value( "UseShareBox", false ).toBool();
@@ -1660,7 +1669,7 @@ void Settings::loadCommonSettings( QSettings* user_ini )
     m_fileTransferBufferSize -= mod_buffer_size;
   if( m_fileTransferBufferSize < 2048 )
     m_fileTransferBufferSize = 2048;
-  bool automatic_file_name = commonValue( system_rc, user_ini, "SetAutomaticFileNameOnSave", false ).toBool();
+  bool automatic_file_name = commonValue( system_rc, user_ini, "SetAutomaticFileNameOnSave", m_useClassroomConfiguration ).toBool();
   if( automatic_file_name )
     m_onExistingFileAction = GenerateNewFileName;
   bool overwrite_existing_files = commonValue( system_rc, user_ini, "OverwriteExistingFiles", false ).toBool();
@@ -1670,8 +1679,8 @@ void Settings::loadCommonSettings( QSettings* user_ini )
   if( m_onExistingFileAction < 0 || m_onExistingFileAction >= NumOnExistingFileActionTypes )
     m_onExistingFileAction = OverwriteOlderExistingFile;
   m_resumeFileTransfer = commonValue( system_rc, user_ini, "ResumeFileTransfer", m_resumeFileTransfer ).toBool();
-  m_confirmOnDownloadFile = commonValue( system_rc, user_ini, "ConfirmOnDownloadFile", m_confirmOnDownloadFile ).toBool();
-  m_downloadInUserFolder = commonValue( system_rc, user_ini, "DownloadInUserFolder", false ).toBool();
+  m_confirmOnDownloadFile = commonValue( system_rc, user_ini, "ConfirmOnDownloadFile", m_useClassroomConfiguration || m_confirmOnDownloadFile ).toBool();
+  m_downloadInUserFolder = commonValue( system_rc, user_ini, "DownloadInUserFolder", m_useClassroomConfiguration ).toBool();
   m_keepModificationDateOnFileTransferred = commonValue( system_rc, user_ini, "KeepModificationDateOnFileTransferred", m_keepModificationDateOnFileTransferred ).toBool();
   QStringList local_share = user_ini->value( "ShareList", QStringList() ).toStringList();
   if( !local_share.isEmpty() )
@@ -1693,9 +1702,9 @@ void Settings::loadCommonSettings( QSettings* user_ini )
   if( m_disableDesktopSharing )
     m_enableShareDesktop = false;
   else
-    m_enableShareDesktop = commonValue( system_rc, user_ini, "Enable", m_enableShareDesktop ).toBool();
+    m_enableShareDesktop = commonValue( system_rc, user_ini, "Enable", m_enableShareDesktop || m_useClassroomConfiguration ).toBool();
   m_shareDesktopCaptureDelay = qMax( 1000, commonValue( system_rc, user_ini, "CaptureScreenInterval", m_shareDesktopCaptureDelay ).toInt() );
-  m_shareDesktopFitToScreen = commonValue( system_rc, user_ini, "FitToScreen", false ).toBool();
+  m_shareDesktopFitToScreen = commonValue( system_rc, user_ini, "FitToScreen", true ).toBool();
   m_shareDesktopImageType = commonValue( system_rc, user_ini, "ImageType", "png" ).toString();
   m_shareDesktopImageQuality = commonValue( system_rc, user_ini, "ImageQuality", 20 ).toInt();
   endCommonGroup( system_rc, user_ini );

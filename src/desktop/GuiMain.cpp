@@ -557,6 +557,7 @@ void GuiMain::startCore()
 
   mp_home->resetNews();
   m_coreIsConnecting = true;
+  m_autoConnectOnInterfaceUp = true;
 
   if( Settings::instance().askChangeUserAtStartup() )
   {
@@ -584,7 +585,6 @@ void GuiMain::startCore()
 
   if( beeCore->start() )
   {
-    m_autoConnectOnInterfaceUp = true;
     if( Settings::instance().showChatsOnConnection() )
     {
       mp_tabMain->setCurrentWidget( mp_chatList );
@@ -4812,7 +4812,7 @@ void GuiMain::showFileSharingWindow()
     mp_fileSharing = new GuiFileSharing( Q_NULLPTR );
     mp_fileSharing->setAttribute( Qt::WA_DeleteOnClose, true );
     Bee::setWindowStaysOnTop( mp_fileSharing, Settings::instance().stayOnTop() );
-    mp_fileSharing->resize( qMin( (QApplication::desktop()->availableGeometry().width()-20), 760 ), 460 );
+    mp_fileSharing->resize( qMin( (QApplication::desktop()->availableGeometry().width()-20), 860 ), 460 );
     mp_fileSharing->updateLocalFileList();
     connect( mp_fileSharing, SIGNAL( destroyed() ), this, SLOT( onFileSharingWindowClosed() ) );
     connect( mp_fileSharing, SIGNAL( openUrlRequest( const QUrl& ) ), this, SLOT( openUrl( const QUrl& ) ) );

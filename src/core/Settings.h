@@ -122,6 +122,7 @@ public:
   inline bool disableVoiceMessages() const;
   inline bool useCompactDataSaving() const;
   inline bool useEasyConnection() const;
+  inline bool useClassroomConfiguration() const;
   inline bool useUserFullName() const;
   inline bool appendHostNameToUserName() const;
 
@@ -719,6 +720,7 @@ private:
   bool m_disableFileTransfer;
   bool m_disableSendMessage;
   bool m_useEasyConnection;
+  bool m_useClassroomConfiguration;
   bool m_startMinimized;
   QString m_signature;
   bool m_useOnlyTextEmoticons;
@@ -1024,7 +1026,7 @@ inline const QString& Settings::cacheFolder() const { return m_cacheFolder; }
 inline const User& Settings::localUser() const { return m_localUser; }
 inline void Settings::setLocalUser( const User& new_value ) { m_localUser = new_value; }
 inline void Settings::setLocalUserStatus( User::Status new_value ) { m_localUser.setStatus( new_value ); }
-inline int Settings::userRecognitionMethod() const { return m_userRecognitionMethod == RecognizeByDefaultMethod ? RecognizeByNickname : m_userRecognitionMethod; }
+inline int Settings::userRecognitionMethod() const { return userRecognitionUsesDefaultMethod() ? RecognizeByNickname : m_userRecognitionMethod; }
 inline bool Settings::userRecognitionUsesDefaultMethod() const { return m_userRecognitionMethod == RecognizeByDefaultMethod; }
 inline bool Settings::chatWithAllUsersIsEnabled() const { return m_useChatWithAllUsers; }
 inline bool Settings::allowMultipleInstances() const { return m_allowMultipleInstances; }
@@ -1300,6 +1302,7 @@ inline bool Settings::disableSendMessage() const { return m_disableSendMessage; 
 inline bool Settings::disableVoiceMessages() const { return m_disableFileTransfer || m_disableVoiceMessages; }
 inline bool Settings::useCompactDataSaving() const { return m_useCompactDataSaving; }
 inline bool Settings::useEasyConnection() const { return m_useEasyConnection; }
+inline bool Settings::useClassroomConfiguration() const { return m_useClassroomConfiguration; }
 inline void Settings::setUseShareBox( bool new_value ) { m_useShareBox = new_value; }
 inline bool Settings::useShareBox() const { return m_useShareBox; }
 inline void Settings::setShareBoxPath( const QString& new_value ) { m_shareBoxPath = new_value; }

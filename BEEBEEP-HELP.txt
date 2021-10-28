@@ -79,6 +79,7 @@ DisableSendMessage=[true/false] disable send message. BeeBEEP becomes a read onl
 DisableVoiceMessages=[true/false] disable voice message recording (default=false) [5.7.1]
 UseEasyConnection=[true/false] BeeBEEP uses account name (if the nickname is not already set) and connects to the network with a standard session
                               (the same of AskNicknameAtStartup=false and UseDefaultPassword=true AskPasswordAtStartup=false in beebeep.ini file) (default=false) [3.0.6]
+UseClassroomConfiguration=[true/false] BeeBEEP enables by default file and desktop sharing (default=false)[5.8.5]
 StartMinimized=[true/false] If enabled BeeBEEP starts minimized (can be overruled in beeebeep.ini) (default=false) [3.0.7]
 Signature=[string] If not empty BeeBEEP uses it to generate network password (all BeeBEEP clients in your network must have the same signature) (auth=signature+encpwd) (default="") [3.0.8]
 UseOnlyTextEmoticons=[true/false] If enabled BeeBEEP does not show the emoticon panel (default=false) [3.0.8]
@@ -359,8 +360,8 @@ KeepModificationDateOnFileTransferred=[true/false] if it is true BeeBEEP keeps t
 [ShareDesktop]
 Enable=[true/false] enable file desktop sharing (default=true) [4.2.0]
 CaptureScreenInterval=[integer] interval in ms of capture screen (default=2100) [4.2.0]
-FitToScreen=[true/false] fit desktop image from remote user in your screen (default=false) [4.2.0]
-ImageType=[string] is better to use jpg or png (default=jpg) [4.2.0]
+FitToScreen=[true/false] fit desktop image from remote user in your screen (default=true, from 5.8.5) [4.2.0]
+ImageType=[string] is better to use jpg or png (default=png) [4.2.0]
 ImageQuality=[integer] image quality of jpg format, in case of png use 100 (default=60) [4.2.0]
 
 [VoiceMessage]
