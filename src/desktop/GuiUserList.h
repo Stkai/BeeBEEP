@@ -71,6 +71,7 @@ protected slots:
   void selectBackgroundColor();
 
 protected:
+  void keyReleaseEvent( QKeyEvent* );
   GuiUserItem* createUserItemInWorkgroup( const User&, const QString& user_workgroup );
   QList<GuiUserItem*> itemsFromUserId( VNumber );
   QList<GuiUserItem*> itemsFromChatId( VNumber );

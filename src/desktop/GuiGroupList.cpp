@@ -81,6 +81,16 @@ GuiGroupList::GuiGroupList( QWidget* parent )
   connect( mp_pbClearFilter, SIGNAL( clicked() ), this, SLOT( clearFilter() ) );
 }
 
+void GuiGroupList::keyReleaseEvent( QKeyEvent* e )
+{
+  if( e->key() == Qt::Key_Return || e->key() == Qt::Key_Enter || e->key() == Qt::Key_Space )
+  {
+     QList<QTreeWidgetItem*> selected_items = mp_twGroupList->selectedItems();
+     if( !selected_items.isEmpty() )
+       checkItemClicked( selected_items.first(), 0 );
+  }
+}
+
 void GuiGroupList::updateGroups()
 {
   mp_twGroupList->setIconSize( Settings::instance().avatarIconSize() );

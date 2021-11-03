@@ -63,6 +63,7 @@ protected slots:
   void selectBackgroundColor();
 
 protected:
+  void keyReleaseEvent( QKeyEvent* );
   GuiGroupItem* itemFromId( VNumber );
 
 private:

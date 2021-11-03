@@ -67,6 +67,16 @@ GuiUserList::GuiUserList( QWidget* parent )
   connect( mp_pbSettings, SIGNAL( clicked() ), this, SLOT( showMenuSettings() ) );
 }
 
+void GuiUserList::keyReleaseEvent( QKeyEvent* e )
+{
+  if( e->key() == Qt::Key_Return || e->key() == Qt::Key_Enter || e->key() == Qt::Key_Space )
+  {
+     QList<QTreeWidgetItem*> selected_items = mp_twUsers->selectedItems();
+     if( !selected_items.isEmpty() )
+       userItemClicked( selected_items.first(), 0 );
+  }
+}
+
 void GuiUserList::clear()
 {
   resetList();

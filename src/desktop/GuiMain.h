@@ -226,6 +226,7 @@ private slots:
 #endif
   void resumeFileTransfer( VNumber user_id, const FileInfo& );
   void changeEmoticonSizeInChat();
+  void selectFirstChat();
 
 protected:
   void keyPressEvent( QKeyEvent* );
@@ -388,6 +389,7 @@ private:
 #ifdef BEEBEEP_USE_QXT
   QxtGlobalShortcut* mp_scShowAllChats;
   QxtGlobalShortcut* mp_scSendHelpMessage;
+  QxtGlobalShortcut* mp_scSelectFirstChat;
 #endif
   QWidget* mp_lastActiveWindow;
 

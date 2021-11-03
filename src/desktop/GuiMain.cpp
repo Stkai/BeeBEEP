@@ -211,6 +211,8 @@ void GuiMain::initShortcuts()
   connect( mp_scShowAllChats, SIGNAL( activated() ), this, SLOT( showAllChats() ) );
   mp_scSendHelpMessage = new QxtGlobalShortcut( this );
   connect( mp_scSendHelpMessage, SIGNAL( activated() ), this, SLOT( sendHelpMessage() ) );
+  mp_scSelectFirstChat = new QxtGlobalShortcut( this );
+  connect( mp_scSelectFirstChat, SIGNAL( activated() ), this, SLOT( selectFirstChat() ) );
 #endif
   mp_scShowNextUnreadMessage = new QShortcut( this );
   mp_scShowNextUnreadMessage->setContext( Qt::ApplicationShortcut );
@@ -4382,6 +4384,18 @@ void GuiMain::updateShortcuts()
     mp_scSendHelpMessage->unsetShortcut();
     mp_scSendHelpMessage->setEnabled( false );
   }
+
+  ks = ShortcutManager::instance().shortcut( ShortcutManager::SelectFirstChat );
+  if( !ks.isEmpty() && Settings::instance().useShortcuts() )
+  {
+    mp_scSelectFirstChat->setShortcut( ks );
+    mp_scSelectFirstChat->setEnabled( true );
+  }
+  else
+  {
+    mp_scSelectFirstChat->unsetShortcut();
+    mp_scSelectFirstChat->setEnabled( false );
+  }
 #endif
 
   ks = ShortcutManager::instance().shortcut( ShortcutManager::ShowNextUnreadMessage );
@@ -5405,4 +5419,19 @@ void GuiMain::changeEmoticonSizeInChat()
     return;
 
   Settings::instance().setEmoticonSizeInChat( emoticon_size );
+}
+
+void GuiMain::selectFirstChat()
+{
+  if( isMinimized() )
+    showNormal();
+  else
+    show();
+  raiseOnTop();
+
+  if( mp_tabMain->currentWidget() != mp_chatList )
+    mp_tabMain->setCurrentWidget( mp_chatList );
+  qApp->setActiveWindow( this );
+  mp_chatList->selectFirstChat();
+
 }

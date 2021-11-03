@@ -6166,6 +6166,10 @@ Inserisci un nome differente.</translation>
         <source>Send a help request message</source>
         <translation>Invia una richiesta di aiuto</translation>
     </message>
+    <message>
+        <source>Select the first available chat</source>
+        <translation>Seleziona la prima conversazione disponibile</translation>
+    </message>
 </context>
 <context>
     <name>RainbowTextMarker</name>

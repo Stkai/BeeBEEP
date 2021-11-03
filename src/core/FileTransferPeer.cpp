@@ -281,7 +281,7 @@ void FileTransferPeer::setError( const QString& str_err )
   closeAll();
   if( remoteUserId() != ID_INVALID && m_fileInfo.isValid() )
     emit message( id(), remoteUserId(), m_fileInfo, str_err, m_state );
-  operationCompleted();
+  emit operationCompleted();
 }
 
 void FileTransferPeer::showProgress()

@@ -39,6 +39,7 @@ public:
 
   void updateChats();
   void updateBackground();
+  void selectFirstChat();
 
 signals:
   void chatSelected( VNumber chat_id );
@@ -66,6 +67,7 @@ protected slots:
 
 protected:
   GuiChatItem* itemFromChatId( VNumber );
+  void keyReleaseEvent( QKeyEvent* );
 
 private:
   QMenu* mp_menuContext;

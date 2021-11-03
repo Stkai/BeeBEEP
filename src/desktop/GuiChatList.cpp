@@ -65,6 +65,16 @@ GuiChatList::GuiChatList( QWidget* parent )
   connect( mp_pbSettings, SIGNAL( clicked() ), this, SLOT( showMenuSettings() ) );
 }
 
+void GuiChatList::keyReleaseEvent( QKeyEvent* e )
+{
+  if( e->key() == Qt::Key_Return || e->key() == Qt::Key_Enter || e->key() == Qt::Key_Space )
+  {
+     QList<QTreeWidgetItem*> selected_items = mp_twChatList->selectedItems();
+     if( !selected_items.isEmpty() )
+       chatClicked( selected_items.first(), 0 );
+  }
+}
+
 void GuiChatList::updateChats()
 {
   mp_twChatList->clearSelection();
@@ -274,4 +284,18 @@ void GuiChatList::showMenuSettings()
   act->setCheckable( true );
   act->setChecked( Settings::instance().hideEmptyChatsInList() );
   mp_menuSettings->exec( QCursor::pos() );
+}
+
+void GuiChatList::selectFirstChat()
+{
+  if( mp_twChatList->topLevelItemCount() > 0 )
+  {
+    QTreeWidgetItem* item = mp_twChatList->topLevelItem( 0 );
+    if( item )
+    {
+      clearChatSelected();
+      item->setSelected( true );
+      mp_twChatList->setFocus();
+    }
+  }
 }

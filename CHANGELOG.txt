@@ -16,6 +16,8 @@ BeeBEEP 5.8.5 (in development)
 - Added global shortcut CTRL+SHIFT+1 for PANIC BUTTON and HELP REQUEST automatic message.
 - Added room location in user VCard (useful also for help request).
 - If you right click on a url in a chat you can copy the url to the clipboard without having to select it.
+- Added shortcut with "Enter", "Return", "Space" keys to open chat if selected in list.
+- Added global shortcut CTRL+ALT+C to "Select first chat available", so you can navigate with arrows and open with return.
 
 BeeBEEP 5.8.4
 - New feature: almost all the options of file beebeep.ini can be used in file beebeep.rc also

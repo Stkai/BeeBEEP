@@ -1542,51 +1542,51 @@ Download for free and install the version with this feature from the %1 website.
         <translation>チャットの検索</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="194"/>
-        <location filename="../src/desktop/GuiChatList.cpp" line="273"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="204"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="283"/>
         <source>Hide empty chats</source>
         <translation>空のチャットを非表示</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="160"/>
-        <location filename="../src/desktop/GuiChatList.cpp" line="266"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="170"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="276"/>
         <source>Write a message</source>
         <translation>メッセージ作成</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="162"/>
-        <location filename="../src/desktop/GuiChatList.cpp" line="268"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="172"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="278"/>
         <source>Create new group chat</source>
         <translation>新規のグループチャットを作成</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="177"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="187"/>
         <source>Show</source>
         <translation>表示</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="180"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="190"/>
         <source>Clear</source>
         <translation>削除</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="181"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="191"/>
         <source>Clear all chat messages</source>
         <translation>チャットのメッセージをすべて消去</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="186"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="196"/>
         <source>Edit</source>
         <translation>編集</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="192"/>
-        <location filename="../src/desktop/GuiChatList.cpp" line="271"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="202"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="281"/>
         <source>Change background color</source>
         <translation>背景色の変更</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChatList.cpp" line="154"/>
+        <location filename="../src/desktop/GuiChatList.cpp" line="164"/>
         <source>Please wait for two or more users</source>
         <translation>複数のユーザー接続をお待ちください</translation>
     </message>
@@ -2300,13 +2300,13 @@ Please select a different name.</source>
         <translation>通知を無効に</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiGroupList.cpp" line="177"/>
+        <location filename="../src/desktop/GuiGroupList.cpp" line="187"/>
         <source>Please wait for two or more users</source>
         <translation>複数のユーザー接続をお待ちください</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiGroupList.cpp" line="184"/>
-        <location filename="../src/desktop/GuiGroupList.cpp" line="208"/>
+        <location filename="../src/desktop/GuiGroupList.cpp" line="194"/>
+        <location filename="../src/desktop/GuiGroupList.cpp" line="218"/>
         <source>Change background color</source>
         <translation>背景色の変更</translation>
     </message>
@@ -6038,53 +6038,53 @@ Please select a different name.</source>
         <translation>ユーザーの検索</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="436"/>
-        <location filename="../src/desktop/GuiUserList.cpp" line="443"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="446"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="453"/>
         <source>Change background color</source>
         <translation>背景色を変更</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="539"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="549"/>
         <source>You cannot send files to the workgroup &apos;%1&apos;.</source>
         <translation>作業グループ「%1」にファイル送信できません。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="547"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="557"/>
         <source>You cannot send files to %1 because the user is offline.</source>
         <translation>ユーザー %1 はオフラインなため、ファイルを送信できません.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="578"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="588"/>
         <source>You are trying to send %1 files simultaneously but the maximum allowed is %2.</source>
         <translation>%1 個のファイルを一度に送信しようとしていますが、 %2 個が限度となっています。</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="579"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="589"/>
         <source>Ok</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="587"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="597"/>
         <source>Do you want to send %1 %2 to %3?</source>
         <translation>%3 に %1 %2 を 送信しますか？</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="588"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="598"/>
         <source>file</source>
         <translation>ファイル</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="588"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="598"/>
         <source>files</source>
         <translation>ファイル</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="589"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="599"/>
         <source>Yes</source>
         <translation>いいえ</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiUserList.cpp" line="589"/>
+        <location filename="../src/desktop/GuiUserList.cpp" line="599"/>
         <source>No</source>
         <translation>いいえ</translation>
     </message>
@@ -6764,6 +6764,11 @@ Please select a different name.</source>
         <location filename="../src/gui/ShortcutManager.cpp" line="128"/>
         <source>Send a help request message</source>
         <translation>お手伝い依頼メッセージを送信</translation>
+    </message>
+    <message>
+        <location filename="../src/gui/ShortcutManager.cpp" line="130"/>
+        <source>Select the first available chat</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/core/ConnectionSocket.cpp" line="634"/>
