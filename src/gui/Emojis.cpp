@@ -83,6 +83,9 @@ void EmoticonManager::addEmojis()
   addEmoticon( QString::fromUtf8( "😯" ), "1f62f", Emoticon::People, 55 );
   addEmoticon( QString::fromUtf8( "😴" ), "1f634", Emoticon::People, 56 );
   addEmoticon( QString::fromUtf8( "😶" ), "1f636", Emoticon::People, 57 );
+
+  addEmoticon( QString::fromUtf8( "🤗" ), "1f917", Emoticon::People, 57 );
+
   addEmoticon( QString::fromUtf8( "😸" ), "1f638", Emoticon::People, 58 );
   addEmoticon( QString::fromUtf8( "😹" ), "1f639", Emoticon::People, 59 );
   addEmoticon( QString::fromUtf8( "😺" ), "1f63a", Emoticon::People, 60 );
@@ -103,8 +106,6 @@ void EmoticonManager::addEmojis()
   addEmoticon( QString::fromUtf8( "🙍" ), "1f64d", Emoticon::People, 75 );
   addEmoticon( QString::fromUtf8( "🙎" ), "1f64e", Emoticon::People, 76 );
   addEmoticon( QString::fromUtf8( "🙏" ), "1f64f", Emoticon::People, 77 );
-
-
 
   addEmoticon( QString::fromUtf8( "✂" ), "2702", Emoticon::Objects, 78 );
   addEmoticon( QString::fromUtf8( "✅" ), "2705", Emoticon::Symbols, 79 );
