@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ja_JP" sourcelanguage="en">
+<TS version="2.1" language="ja_JP" sourcelanguage="en_US">
 <context>
     <name>ChatMessage</name>
     <message>
@@ -1353,12 +1353,12 @@ Download for free and install the version with this feature from the %1 website.
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="197"/>
         <source>Send code</source>
-        <translation type="unfinished"></translation>
+        <translation>コードを送信</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="367"/>
         <source>Copy URL to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>URL をクリップボードにコピー</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="509"/>
@@ -1439,7 +1439,7 @@ Download for free and install the version with this feature from the %1 website.
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="1337"/>
         <source>Url copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>URLをクリップボードにコピーしました</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="1068"/>
@@ -1770,12 +1770,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiCreateTextFile.cpp" line="35"/>
         <source>Create text</source>
-        <translation type="unfinished"></translation>
+        <translation>テキストを作成</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateTextFile.cpp" line="44"/>
         <source>For example:</source>
-        <translation type="unfinished"></translation>
+        <translation>例:</translation>
     </message>
 </context>
 <context>
@@ -1783,32 +1783,32 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiCreateTextFile.ui" line="17"/>
         <source>Workgroups</source>
-        <translation type="unfinished">作業グループ</translation>
+        <translation>作業グループ</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateTextFile.ui" line="28"/>
         <source>Send as text</source>
-        <translation type="unfinished"></translation>
+        <translation>テキストとして送信</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateTextFile.ui" line="35"/>
         <source>Send as file</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイルとして送信</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateTextFile.ui" line="64"/>
         <source>File extension</source>
-        <translation type="unfinished"></translation>
+        <translation>ファイル拡張子</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateTextFile.ui" line="96"/>
         <source>Use temporary file</source>
-        <translation type="unfinished"></translation>
+        <translation>一時ファイルを使用</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiCreateTextFile.ui" line="128"/>
         <source>Send</source>
-        <translation type="unfinished">送信(&amp;S)</translation>
+        <translation>送信</translation>
     </message>
 </context>
 <context>
@@ -1989,12 +1989,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="161"/>
         <source>My shared files</source>
-        <translation type="unfinished"></translation>
+        <translation>わたしの共有ファイル</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="164"/>
         <source>Network shared files</source>
-        <translation type="unfinished"></translation>
+        <translation>ネットワーク上の共有ファイル</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiFileSharing.cpp" line="173"/>
@@ -5377,12 +5377,12 @@ Please select a different name.</source>
     <message>
         <location filename="../src/desktop/GuiScreenShot.cpp" line="84"/>
         <source>Also grab the cursor in the screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>カーソルもスクリーンショットに取り込みます</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiScreenShot.cpp" line="89"/>
         <source>Grab cursor</source>
-        <translation type="unfinished"></translation>
+        <translation>カーソルも取り込む</translation>
     </message>
     <message>
         <location filename="../src/desktop/GuiScreenShot.cpp" line="101"/>
@@ -6768,7 +6768,7 @@ Please select a different name.</source>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="130"/>
         <source>Select the first available chat</source>
-        <translation type="unfinished"></translation>
+        <translation>利用可能な1番目のチャットを選択</translation>
     </message>
     <message>
         <location filename="../src/core/ConnectionSocket.cpp" line="634"/>
