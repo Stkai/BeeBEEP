@@ -67,7 +67,8 @@ public:
 #endif
 
 signals:
-  void newMessage( VNumber, const QString& );
+  void newMessage( VNumber, const QString&, bool is_source_code );
+  void newSourceCodeMessage( VNumber, const QString& );
   void writing( VNumber );
   void nextChat();
   void openUrl( const QUrl&, VNumber );

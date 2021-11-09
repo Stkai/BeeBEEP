@@ -400,7 +400,7 @@ int Core::archiveAllChats()
   return chat_count;
 }
 
-int Core::sendChatMessage( VNumber chat_id, const QString& msg, bool is_important, bool can_be_delayed )
+int Core::sendChatMessage( VNumber chat_id, const QString& msg, bool is_important, bool can_be_delayed, bool is_source_code )
 {
   if( !isConnected() )
   {
@@ -425,18 +425,17 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg, bool is_importan
   }
 
   QString msg_to_send = msg;
-  bool has_source_code = msg_to_send.contains( "{code}" );
-  if( has_source_code )
+  if( is_source_code )
   {
-    msg_to_send.replace( "{code}", "<code>" );
-    msg_to_send.replace( "{/code}", "</code>" );
+    msg_to_send.replace( "[code]", "<code>" );
+    msg_to_send.replace( "[/code]", "</code>" );
   }
   else
   {
     if( !Settings::instance().chatUseHtmlTags() )
     {
       msg_to_send.replace( QLatin1Char( '<' ), QLatin1String( "&lt;" ) );
-      msg_to_send.replace( "&lt;3", "<3" ); // hearth emoticon
+      msg_to_send.replace( QLatin1Char( '>' ), QLatin1String( "&gt;" ) );
     }
 
     PluginManager::instance().parseText( &msg_to_send, true );
@@ -448,6 +447,9 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg, bool is_importan
 
   if( can_be_delayed )
     m.setDelayed();
+
+  if( is_source_code )
+    m.setSourceCode();
 
   int messages_sent = 0;
 
@@ -694,7 +696,8 @@ void Core::addListToSavedChats()
             resized_text = true;
           }
 
-          msg_txt = Protocol::instance().formatHtmlText( msg_txt );
+          if( !mr.message().isSourceCode() )
+            msg_txt = Protocol::instance().formatHtmlText( msg_txt );
           if( resized_text )
             msg_txt.append( "..." );
         }

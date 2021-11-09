@@ -485,7 +485,7 @@ void GuiChat::sendMessage()
   if( msg.isEmpty() )
     return;
   mp_teMessage->addMessageToHistory();
-  emit newMessage( m_chatId, msg );
+  emit newMessage( m_chatId, msg, false );
   mp_teMessage->clearMessage();
   if( mp_cbSendAndClose->isChecked() )
   {
@@ -1384,7 +1384,7 @@ void GuiChat::sendTextCode()
     {
       QString text_code_to_send = QString( "[code]%1[/code]" ).arg( text_code );
       ensureFocusInChat();
-      emit newMessage( m_chatId, text_code_to_send );
+      emit newMessage( m_chatId, text_code_to_send, true );
     }
   }
   else

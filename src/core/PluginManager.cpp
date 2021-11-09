@@ -214,6 +214,7 @@ bool PluginManager::parseTextWithPlugin( QString* p_txt, TextMarkerInterface* tm
   int open_cmd_index = p_txt->indexOf( tmi->openCommand(), 0, Qt::CaseInsensitive );
   int open_cmd_size = tmi->openCommand().size();
   int close_cmd_size = tmi->closeCommand().size();
+  QString html_tag = "";
 
   if( open_cmd_index >= 0 && open_cmd_index < p_txt->size() )
   {
@@ -227,6 +228,7 @@ bool PluginManager::parseTextWithPlugin( QString* p_txt, TextMarkerInterface* tm
       tmi->initParser( p_txt->mid( open_cmd_index+open_cmd_size, close_cmd_index-open_cmd_index-open_cmd_size ) );
 
       bool is_in_tag = false;
+      int is_in_tag_code = 0;
       QString code_text = "";
       QChar c;
 
@@ -234,15 +236,40 @@ bool PluginManager::parseTextWithPlugin( QString* p_txt, TextMarkerInterface* tm
       {
         c = p_txt->at( i );
         if( c == QChar( '<' ) )
+        {
           is_in_tag = true;
+          html_tag = "";
+        }
 
         if( is_in_tag )
         {
           parsed_text.append( c );
-
+          html_tag.append( c );
           if( c == QChar( '>' ) )
+          {
             is_in_tag = false;
+            if( html_tag == QLatin1String( "<code>" ) )
+            {
+              is_in_tag_code++;
+              if( is_in_tag_code <= 0 )
+                is_in_tag_code = 1;
+            }
+            else
+            {
+              if( html_tag == QLatin1String( "</code>" ) )
+              {
+                is_in_tag_code--;
+                if( is_in_tag_code < 0 )
+                  is_in_tag_code = 0;
+              }
+            }
+          }
+          continue;
+        }
 
+        if( is_in_tag_code > 0 )
+        {
+          parsed_text.append( c );
           continue;
         }
 

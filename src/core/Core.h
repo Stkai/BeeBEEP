@@ -92,7 +92,7 @@ public:
 
   /* CoreChat */
   void createPrivateChat( const User& );
-  int sendChatMessage( VNumber chat_id, const QString&, bool is_important, bool can_be_delayed ); // return the number of message sent (one for every user in chat)
+  int sendChatMessage( VNumber chat_id, const QString&, bool is_important, bool can_be_delayed, bool is_source_code ); // return the number of message sent (one for every user in chat)
   bool sendHelpMessage();
   bool sendHelpMessageToUser( VNumber );
   Chat createGroupChat( const User&, const Group&, bool broadcast_message );

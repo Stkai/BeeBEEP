@@ -221,7 +221,7 @@ void GuiMain::initShortcuts()
 
 void GuiMain::setupChatConnections( GuiChat* gui_chat )
 {
-  connect( gui_chat, SIGNAL( newMessage( VNumber, const QString& ) ), this, SLOT( sendMessage( VNumber, const QString& ) ) );
+  connect( gui_chat, SIGNAL( newMessage( VNumber, const QString&, bool ) ), this, SLOT( sendMessage( VNumber, const QString&, bool ) ) );
   connect( gui_chat, SIGNAL( writing( VNumber ) ), beeCore, SLOT( sendWritingMessage( VNumber ) ) );
   connect( gui_chat, SIGNAL( nextChat() ), this, SLOT( showNextChat() ) );
   connect( gui_chat, SIGNAL( openUrl( const QUrl&, VNumber ) ), this, SLOT( openUrlFromChat( const QUrl&, VNumber ) ) );
@@ -2385,13 +2385,13 @@ void GuiMain::setMaxQueuedDownloadsInAction( QAction* act )
   act->setChecked( Settings::instance().maxQueuedDownloads() > 0 );
 }
 
-void GuiMain::sendMessage( VNumber chat_id, const QString& msg )
+void GuiMain::sendMessage( VNumber chat_id, const QString& msg, bool is_source_code )
 {
 #ifdef BEEBEEP_DEBUG
-  int num_messages = beeCore->sendChatMessage( chat_id, msg, false, false );
+  int num_messages = beeCore->sendChatMessage( chat_id, msg, false, false, is_source_code );
   qDebug() << num_messages << "messages sent";
 #else
-  beeCore->sendChatMessage( chat_id, msg, false, false );
+  beeCore->sendChatMessage( chat_id, msg, false, false, is_source_code );
 #endif
   mp_chatList->updateChat( ChatManager::instance().chat( chat_id ) ); // to sort the chats
 }
@@ -5084,7 +5084,7 @@ void GuiMain::createMessage()
       int num_chat_opened = 0;
       foreach( VNumber chat_id, gcm.toChatIdList() )
       {
-        beeCore->sendChatMessage( chat_id, gcm.message(), gcm.messageIsImportant(), num_chat_opened >= max_chat_to_open );
+        beeCore->sendChatMessage( chat_id, gcm.message(), gcm.messageIsImportant(), num_chat_opened >= max_chat_to_open, false );
         if( gcm.openChat() && num_chat_opened < max_chat_to_open )
         {
           showChat( chat_id );

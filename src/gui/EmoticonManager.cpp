@@ -84,15 +84,15 @@ void EmoticonManager::addTextEmoticon()
   addEmoticon( ":-(", "1f614", Emoticon::Text );
   addEmoticon( ":T", "1f60b", Emoticon::Text );
   addEmoticon( ":%", "1f616", Emoticon::Text );
-  addEmoticon( ":\"D", "1f602", Emoticon::Text );
+  //addEmoticon( ":\"D", "1f602", Emoticon::Text ); // deprecated
   addEmoticon( ":&quot;D", "1f602", Emoticon::Text ); // for html
   addEmoticon( "B)", "1f60e", Emoticon::Text );
   addEmoticon( "B-)", "1f60e", Emoticon::Text );
-  addEmoticon( "<3", "2764", Emoticon::Text );
+  //addEmoticon( "<3", "2764", Emoticon::Text ); // deprecated
   addEmoticon( "&lt;3", "2764", Emoticon::Text );  // for html
-  addEmoticon( "</3", "1f494", Emoticon::Text );
+  //addEmoticon( "</3", "1f494", Emoticon::Text ); // deprecated
   addEmoticon( "&lt;/3", "1f494", Emoticon::Text ); // for html
-  addEmoticon( ">_<", "1f616", Emoticon::Text );
+  //addEmoticon( ">_<", "1f616", Emoticon::Text ); // deprecated
   addEmoticon( "&gt;_&lt;", "1f616", Emoticon::Text ); // for html
   addEmoticon( "=)", "1f60a", Emoticon::Text );
   addEmoticon( "}:)", "1f608", Emoticon::Text );

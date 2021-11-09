@@ -95,7 +95,7 @@ private slots:
   void onNewChatMessage( const Chat&, const ChatMessage& );
   void onChatChanged( const Chat& );
   void onChatRemoved( const Chat& );
-  void sendMessage( VNumber, const QString& );
+  void sendMessage( VNumber, const QString&, bool );
   void showTipOfTheDay();
   void showFaq();
   void showFactOfTheDay();

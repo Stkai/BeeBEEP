@@ -36,7 +36,7 @@ public:
               NumTypes };
   enum Flag { Private, UserWriting, UserStatus, Create /* it was UserName in 3.0.9 */, UserVCard,
               Refused, List, Request, GroupChat, Delete, Auto, Important, VoiceMessage,
-              EncryptionDisabled, Compressed, Delayed, NumFlags };
+              EncryptionDisabled, Compressed, Delayed, SourceCode, NumFlags };
 
   Message();
   Message( const Message& );
@@ -63,6 +63,8 @@ public:
   inline bool isImportant() const;
   inline void setDelayed();
   inline bool isDelayed() const;
+  inline void setSourceCode();
+  inline bool isSourceCode() const;
 
 private:
   Type m_type;
@@ -95,5 +97,7 @@ inline void Message::setImportant() { addFlag( Message::Important ); }
 inline bool Message::isImportant() const { return hasFlag( Message::Important ); }
 inline void Message::setDelayed() { addFlag( Message::Delayed ); }
 inline bool Message::isDelayed() const { return hasFlag( Message::Delayed ); }
+inline void Message::setSourceCode() { addFlag( Message::SourceCode ); }
+inline bool Message::isSourceCode() const { return hasFlag( Message::SourceCode ); }
 
 #endif // BEEBEEP_MESSAGE_H
