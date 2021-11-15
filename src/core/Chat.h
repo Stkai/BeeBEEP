@@ -118,7 +118,7 @@ inline bool Chat::userHasReadMessages( VNumber user_id ) const { return !m_unrea
 inline void Chat::setLastModified( const QDateTime& new_value ) { m_group.setLastModified( new_value ); }
 inline void Chat::setLastModifiedToNow() { m_group.setLastModified( QDateTime::currentDateTimeUtc() ); }
 inline const QDateTime& Chat::lastModified() const { return m_group.lastModified(); }
-inline void Chat::setMessagesSaved() { m_unsavedMessages = true; }
+inline void Chat::setMessagesSaved() { m_unsavedMessages = false; }
 inline bool Chat::hasUnsavedMessages() const { return m_unsavedMessages; }
 
 #endif // BEEBEEP_CHAT_H

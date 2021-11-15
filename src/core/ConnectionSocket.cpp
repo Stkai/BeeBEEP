@@ -44,7 +44,7 @@ ConnectionSocket::ConnectionSocket( QObject* parent )
 
   connect( this, SIGNAL( connected() ), this, SLOT( sendQuestionHello() ) );
   connect( this, SIGNAL( readyRead() ), this, SLOT( readBlock() ) );
-  connect( this, SIGNAL( bytesWritten( qint64 ) ), this, SLOT( onBytesWritten( qint64 ) ) );
+  connect( this, SIGNAL( bytesWritten(qint64) ), this, SLOT( onBytesWritten(qint64) ) );
 }
 
 void ConnectionSocket::initSocket( qintptr socket_descriptor, quint16 server_port )

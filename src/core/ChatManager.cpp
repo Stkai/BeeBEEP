@@ -361,7 +361,7 @@ QString ChatManager::chatSavedText( const QString& chat_name, int max_lines, int
   while( it.hasPrevious() )
   {
     line_counter++;
-    saved_text.prepend( QString( "%1%2").arg( it.previous() ).arg( "<br>" ) );
+    saved_text.prepend( QString( "%1%2").arg( it.previous(), QLatin1String( "<br>" ) ) );
     if( line_counter >= max_lines )
       break;
   }

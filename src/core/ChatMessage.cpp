@@ -69,7 +69,7 @@ void ChatMessage::fromMessage( const Message& m )
 {
   if( m.type() != Message::System )
   {
-    m_message = m.isSourceCode() ? m.text().simplified() : Protocol::instance().formatHtmlText( m.text() );
+    m_message = m.isSourceCode() ? m.text().trimmed() : Protocol::instance().formatHtmlText( m.text() );
     if( m_message.endsWith( "<br>" ) )
       m_message.chop( 4 );
   }
