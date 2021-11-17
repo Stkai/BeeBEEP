@@ -1170,7 +1170,7 @@ void GuiChat::showFindTextInChatDialog()
   QString text_to_search = QInputDialog::getText( this, Settings::instance().programName(), label,
                                                   QLineEdit::Normal, m_lastTextFound, &ok );
   if( ok )
-    findTextInChat( text_to_search.simplified() );
+    findTextInChat( text_to_search.trimmed() );
 }
 
 void GuiChat::findNextTextInChat()
@@ -1382,7 +1382,7 @@ void GuiChat::sendTextCode()
     }
     else
     {
-      QString text_code_to_send = QString( "[code]%1[/code]" ).arg( text_code );
+      QString text_code_to_send = QString( "%1\n" ).arg( text_code );
       ensureFocusInChat();
       emit newMessage( m_chatId, text_code_to_send, true );
     }

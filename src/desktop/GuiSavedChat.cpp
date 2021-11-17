@@ -186,7 +186,7 @@ void GuiSavedChat::checkAnchorClicked( const QUrl& url )
 
 void GuiSavedChat::findTextInHistory()
 {
-  QString txt = mp_leFilter->text().simplified();
+  QString txt = mp_leFilter->text().trimmed();
   if( txt.isEmpty() )
     return;
 

@@ -2109,7 +2109,7 @@ bool Protocol::parseFileTransferBytesArrivedConfirmation( int proto_version, con
   bool ok = false;
   if( proto_version < FILE_TRANSFER_RESUME_PROTO_VERSION )
   {
-    *bytes_arrived_size = bytes_arrived.simplified().toInt( &ok );
+    *bytes_arrived_size = bytes_arrived.trimmed().toInt( &ok );
     *total_bytes_arrived_size = -1;
     *pause_transfer = false;
     return ok;
@@ -2193,19 +2193,19 @@ QString Protocol::linkifyText( const QString& text )
 {
   // File and folder path must be a single message, url can be inside a message
   QString simplified_text = text.simplified();
-  QString linkfied_text = text.simplified();
+  QString linkfied_text = "";
 
 #ifdef Q_OS_WIN
   // linkify windows network path
   if( simplified_text.contains( "\\\\" ) )
   {
-    int index_backslash = linkfied_text.indexOf( "\\\\" );
+    int index_backslash = simplified_text.indexOf( "\\\\" );
     QString pre_text = "";
     if( index_backslash > 0 )
     {
-      pre_text = linkfied_text.section( "\\\\", 0, 0 );
+      pre_text = simplified_text.section( "\\\\", 0, 0 );
       if( !pre_text.isEmpty() )
-        linkfied_text.remove( 0, pre_text.size() );
+        simplified_text.remove( 0, pre_text.size() );
     }
 
     QUrl url_to_add = QUrl::fromLocalFile( simplified_text );
@@ -2237,6 +2237,9 @@ QString Protocol::linkifyText( const QString& text )
       return linkfied_text;
     }
   }
+
+  if( linkfied_text.isEmpty() )
+    linkfied_text = text.trimmed();
 
   if( !linkfied_text.contains( QLatin1Char( '.' ) ) )
     return linkfied_text;
@@ -2324,8 +2327,6 @@ QString Protocol::formatHtmlText( const QString& text )
   text_formatted.replace( QRegExp("(^|\\s|>)\\/(\\S+)\\/(<|\\s|$)"), "\\1<i>\\2</i>\\3" );
   text_formatted.replace( QLatin1String( "[quote]" ), QString( "<br><span class='bee-quote'>&nbsp;&nbsp;<i>" ) );
   text_formatted.replace( QLatin1String( "[/quote]" ), "</i>&nbsp;&nbsp;</span> " );
-  text_formatted.replace( QLatin1String( "[code]" ), QString( "<code>" ) );
-  text_formatted.replace( QLatin1String( "[/code]" ), "</code>" );
 
   if( Settings::instance().chatUseClickableLinks() )
     text_formatted = linkifyText( text_formatted );

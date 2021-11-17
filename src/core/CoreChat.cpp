@@ -425,12 +425,7 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg, bool is_importan
   }
 
   QString msg_to_send = msg;
-  if( is_source_code )
-  {
-    msg_to_send.replace( "[code]", "<code>" );
-    msg_to_send.replace( "[/code]", "</code>" );
-  }
-  else
+  if( !is_source_code )
   {
     if( !Settings::instance().chatUseHtmlTags() )
     {

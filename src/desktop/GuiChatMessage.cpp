@@ -78,17 +78,35 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
     html_message += textImportantPrefix();
 
   QString text_formatted = cm.message();
-  if( text_formatted.startsWith( "<code>" ) )
+
+  if( cm.message().isSimpleText() )
   {
-    text_formatted.prepend( "<br>" );
-    text_formatted.append( "<br>" );
+    text_formatted.replace( QChar( '<' ), QLatin1String( "&lt;" ) );
+    text_formatted.replace( QChar( '>' ), QLatin1String( "&gt;" ) );
+    text_formatted.replace( QChar( '&' ), QLatin1String( "&amp;" ) );
+    text_formatted.prepend( "<code>" );
+    text_formatted.append( "</code>" );
   }
 
-  QString text_color = (cm.textColor().isValid() && cm.textColor() != QColor( 0, 0, 0 ) && cm.textColor() != QColor( 255, 255, 255 ) ) ? cm.textColor().name() : "";
-  if( !text_color.isEmpty() )
+  if( text_formatted.startsWith( "<code>" ) )
   {
-    text_formatted.prepend( QString( "<font color=%1>" ).arg( text_color ) );
-    text_formatted.append( QLatin1String( "</font>" ) );
+    text_formatted.prepend( "\n" );
+    text_formatted.append( "\n" );
+  }
+
+  text_formatted.replace( QChar( ' ' ), QLatin1String( "&nbsp;" ) );
+  text_formatted.replace( QChar( '\t' ), QLatin1String( "&nbsp;&nbsp;&nbsp;&nbsp;" ) );
+  text_formatted.replace( QChar( '\r' ), QLatin1String( "" ) );
+  text_formatted.replace( QChar( '\n' ), QLatin1String( "<br>" ) );
+
+  if( !cm.message().isSimpleText() )
+  {
+    QString text_color = (cm.textColor().isValid() && cm.textColor() != QColor( 0, 0, 0 ) && cm.textColor() != QColor( 255, 255, 255 ) ) ? cm.textColor().name() : "";
+    if( !text_color.isEmpty() )
+    {
+      text_formatted.prepend( QString( "<font color=%1>" ).arg( text_color ) );
+      text_formatted.append( QLatin1String( "</font>" ) );
+    }
   }
 
   bool append_message_to_previous = show_message_group_by_user && last_user_id == u.id() && !cm.isImportant();
