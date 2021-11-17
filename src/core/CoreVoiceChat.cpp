@@ -66,7 +66,7 @@ bool Core::sendVoiceMessageToChat( VNumber chat_id, const QString& file_path, qi
                                                                     tr( "voice message" ),
                                                                     Bee::timeToString( message_duration ),
                                                                     IconManager::instance().toHtml( "voice-message.png", "*v*" ) );
-  dispatchToChat( ChatMessage( ID_LOCAL_USER, msg_html, ChatMessage::Voice, true ), chat_id );
+  dispatchToChat( ChatMessage::createVoiceMessage( ID_LOCAL_USER, msg_html, ChatMessage::Voice, true ), chat_id );
   Message m = Protocol::instance().fileInfoToMessage( fi, Settings::instance().protocolVersion() );
   sendMessageToChat( c, m );
   return true;

@@ -28,7 +28,8 @@
 
 ChatMessage::ChatMessage()
   : m_userId( ID_INVALID ), m_message( "" ), m_timestamp(), m_textColor(),
-    m_type( ChatMessage::Other ), m_isImportant( false ), m_canBeSaved( false )
+    m_type( ChatMessage::Other ), m_isImportant( false ), m_canBeSaved( false ),
+    m_isSourceCode( false )
 {
 }
 
@@ -39,14 +40,20 @@ ChatMessage::ChatMessage( const ChatMessage& cm )
 
 ChatMessage::ChatMessage( VNumber user_id, const Message& m, ChatMessage::Type cmt, bool can_be_saved )
   : m_userId( user_id ), m_message( "" ), m_timestamp(), m_textColor(), m_type( cmt ),
-    m_isImportant( false ), m_canBeSaved( can_be_saved )
+    m_isImportant( false ), m_canBeSaved( can_be_saved ), m_isSourceCode( false )
 {
-  fromMessage( m );
+  createFromMessage( m );
+}
+
+ChatMessage ChatMessage::createVoiceMessage( VNumber user_id, const QString& msg, ChatMessage::Type cmt, bool can_be_saved )
+{
+  ChatMessage cm( user_id, msg, cmt, can_be_saved );
+  return cm;
 }
 
 ChatMessage::ChatMessage( VNumber user_id, const QString& msg, ChatMessage::Type cmt, bool can_be_saved )
   : m_userId( user_id ), m_message( msg ), m_timestamp( QDateTime::currentDateTime() ), m_textColor(), m_type( cmt ),
-    m_isImportant( false ), m_canBeSaved( can_be_saved )
+    m_isImportant( false ), m_canBeSaved( can_be_saved ), m_isSourceCode( false )
 {
 }
 
@@ -61,11 +68,12 @@ ChatMessage& ChatMessage::operator=( const ChatMessage& cm )
     m_type = cm.m_type;
     m_isImportant = cm.m_isImportant;
     m_canBeSaved = cm.m_canBeSaved;
+    m_isSourceCode = cm.m_isSourceCode;
   }
   return *this;
 }
 
-void ChatMessage::fromMessage( const Message& m )
+void ChatMessage::createFromMessage( const Message& m )
 {
   if( m.type() != Message::System )
   {
@@ -83,6 +91,7 @@ void ChatMessage::fromMessage( const Message& m )
       m_textColor = cm_data.textColor();
   }
   m_isImportant = m.hasFlag( Message::Important );
+  m_isSourceCode = m.hasFlag( Message::SourceCode );
 }
 
 bool ChatMessage::isChatActivity() const

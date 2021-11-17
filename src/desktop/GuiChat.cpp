@@ -1354,6 +1354,7 @@ void GuiChat::sendTextCode()
     QString text_code = gct.text().trimmed();
     if( text_code.isEmpty() )
       return;
+    text_code.append( '\n' );
     if( Settings::instance().createTextCodeAsFile() && beeCore->isFileTransferActive() )
     {
       QString folder_path = Settings::instance().createTextCodeAsTemporaryFile() ? Settings::instance().cacheFolder() : Settings::instance().downloadDirectory();
@@ -1382,9 +1383,8 @@ void GuiChat::sendTextCode()
     }
     else
     {
-      QString text_code_to_send = QString( "%1\n" ).arg( text_code );
       ensureFocusInChat();
-      emit newMessage( m_chatId, text_code_to_send, true );
+      emit newMessage( m_chatId, text_code, true );
     }
   }
   else

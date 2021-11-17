@@ -36,7 +36,7 @@ public:
   ChatMessage();
   ChatMessage( const ChatMessage& );
   ChatMessage( VNumber user_id, const Message&, ChatMessage::Type, bool can_be_saved );
-  ChatMessage( VNumber user_id, const QString& msg, ChatMessage::Type, bool can_be_saved );
+  static ChatMessage createVoiceMessage( VNumber user_id, const QString& msg, ChatMessage::Type, bool can_be_saved );
 
   virtual ~ChatMessage() {}
 
@@ -64,8 +64,11 @@ public:
 
   inline bool canBeSaved() const;
 
+  inline bool isSourceCode() const;
+
 protected:
-  virtual void fromMessage( const Message& );
+  ChatMessage( VNumber user_id, const QString& msg, ChatMessage::Type, bool can_be_saved );
+  void createFromMessage( const Message& );
 
 private:
   VNumber m_userId;
@@ -75,7 +78,7 @@ private:
   Type m_type;
   bool m_isImportant;
   bool m_canBeSaved;
-
+  bool m_isSourceCode;
 };
 
 
@@ -98,6 +101,7 @@ inline const QDateTime& ChatMessage::timestamp() const { return m_timestamp; }
 inline const QColor& ChatMessage::textColor() const { return m_textColor; }
 inline ChatMessage::Type ChatMessage::type() const { return m_type; }
 inline bool ChatMessage::canBeSaved() const { return m_canBeSaved; }
+inline bool ChatMessage::isSourceCode() const { return m_isSourceCode; }
 
 #endif // BEEBEEP_CHATMESSAGE_H
 

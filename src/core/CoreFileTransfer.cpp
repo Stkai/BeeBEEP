@@ -204,7 +204,7 @@ void Core::checkFileTransferMessage( VNumber peer_id, VNumber user_id, const Fil
         ChatManager::instance().setChat( chat_to_show_message );
       }
       if( !chat_voice_msg_html.isEmpty() )
-        chat_voice_msg = ChatMessage( fi.isDownload() ? u.id() : ID_LOCAL_USER, chat_voice_msg_html, ChatMessage::Voice, true );
+        chat_voice_msg = ChatMessage::createVoiceMessage( fi.isDownload() ? u.id() : ID_LOCAL_USER, chat_voice_msg_html, ChatMessage::Voice, true );
     }
   }
 

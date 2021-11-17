@@ -79,7 +79,7 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
 
   QString text_formatted = cm.message();
 
-  if( cm.message().isSimpleText() )
+  if( cm.isSourceCode() )
   {
     text_formatted.replace( QChar( '<' ), QLatin1String( "&lt;" ) );
     text_formatted.replace( QChar( '>' ), QLatin1String( "&gt;" ) );
