@@ -4750,7 +4750,7 @@ void GuiMain::onFileTransferMessage( VNumber peer_id, const User& u, const FileI
 
   if( ft_state == FileTransferPeer::Completed )
   {
-    if( !fi.isInShareBox() && fi.isDownload() )
+    if( fi.isDownload() )
     {
       Chat c = ChatManager::instance().findChatByPrivateId( fi.chatPrivateId(), false, u.id() );
       if( !c.isValid() )
