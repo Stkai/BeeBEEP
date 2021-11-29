@@ -382,7 +382,7 @@ private:
   int m_lastUserStatus;
 
   bool m_forceShutdown;
-  bool m_autoConnectOnInterfaceUp;
+  bool m_userSelectOffline;
 
   QShortcut* mp_scMinimizeAllChats;
   QShortcut* mp_scShowNextUnreadMessage;

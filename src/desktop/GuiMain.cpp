@@ -115,7 +115,7 @@ GuiMain::GuiMain( QWidget *parent )
 
   m_lastUserStatus = User::Online;
   m_forceShutdown = false;
-  m_autoConnectOnInterfaceUp = false;
+  m_userSelectOffline = false;
   m_prevActivatedState = true;
   m_coreIsConnecting = false;
   m_changeTabToUserListOnFirstConnected = false;
@@ -530,10 +530,7 @@ void GuiMain::onSleepRequest()
   qDebug() << "Main window goes to sleep";
 #endif
   if( beeCore->isConnected() )
-  {
-    m_autoConnectOnInterfaceUp = true;
     stopCore();
-  }
 }
 
 void GuiMain::onCoreConnected()
@@ -559,7 +556,7 @@ void GuiMain::startCore()
 
   mp_home->resetNews();
   m_coreIsConnecting = true;
-  m_autoConnectOnInterfaceUp = true;
+  m_userSelectOffline = false;
 
   if( Settings::instance().askChangeUserAtStartup() )
   {
@@ -621,7 +618,7 @@ bool GuiMain::promptConnectionPassword()
 
 void GuiMain::disconnectFromNetwork()
 {
-  m_autoConnectOnInterfaceUp = false;
+  m_userSelectOffline = true;
   stopCore();
 }
 
@@ -659,6 +656,7 @@ void GuiMain::restartCore()
 
   mp_home->resetNews();
   m_coreIsConnecting = true;
+  m_userSelectOffline = false;
   beeCore->restart();
 }
 
@@ -4499,17 +4497,12 @@ void GuiMain::selectDictionatyPath()
 void GuiMain::onNetworkInterfaceDown()
 {
   if( beeCore->isConnected() )
-  {
-    m_autoConnectOnInterfaceUp = true;
     QMetaObject::invokeMethod( this, "stopCore", Qt::QueuedConnection );
-  }
-  else
-    m_autoConnectOnInterfaceUp = false;
 }
 
 void GuiMain::onNetworkInterfaceUp()
 {
-  if( m_autoConnectOnInterfaceUp )
+  if( !m_userSelectOffline )
     QMetaObject::invokeMethod( this, "startCore", Qt::QueuedConnection );
 }
 
