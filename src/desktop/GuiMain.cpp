@@ -618,8 +618,20 @@ bool GuiMain::promptConnectionPassword()
 
 void GuiMain::disconnectFromNetwork()
 {
+  if( isFileTransferInProgress() )
+    return;
+
   m_userSelectOffline = true;
-  stopCore();
+
+  if( mp_tabMain->currentWidget() != mp_home )
+    mp_tabMain->setCurrentWidget( mp_home );
+
+#ifdef BEEBEEP_USE_SHAREDESKTOP
+  foreach( GuiShareDesktop* gsd, m_desktops )
+    gsd->close();
+#endif
+
+  beeCore->stop();
 }
 
 void GuiMain::stopCore()
@@ -4502,7 +4514,9 @@ void GuiMain::onNetworkInterfaceDown()
 
 void GuiMain::onNetworkInterfaceUp()
 {
-  if( !m_userSelectOffline )
+  if( m_userSelectOffline )
+    qDebug() << "User selected offline mode and the connection to network is refused";
+  else
     QMetaObject::invokeMethod( this, "startCore", Qt::QueuedConnection );
 }
 

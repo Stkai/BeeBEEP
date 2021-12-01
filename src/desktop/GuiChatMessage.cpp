@@ -81,17 +81,11 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
 
   if( cm.isSourceCode() )
   {
+    text_formatted.replace( QChar( '&' ), QLatin1String( "&amp;" ) );
     text_formatted.replace( QChar( '<' ), QLatin1String( "&lt;" ) );
     text_formatted.replace( QChar( '>' ), QLatin1String( "&gt;" ) );
-    text_formatted.replace( QChar( '&' ), QLatin1String( "&amp;" ) );
-    text_formatted.prepend( "<code>" );
-    text_formatted.append( "</code>" );
-  }
-
-  if( text_formatted.startsWith( "<code>" ) )
-  {
-    text_formatted.prepend( "\n" );
-    text_formatted.append( "\n" );
+    text_formatted.prepend( "\n<code>" );
+    text_formatted.append( "\n</code>\n" );
   }
 
   text_formatted.replace( QChar( ' ' ), QLatin1String( "&nbsp;" ) );
@@ -99,7 +93,7 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
   text_formatted.replace( QChar( '\r' ), QLatin1String( "" ) );
   text_formatted.replace( QChar( '\n' ), QLatin1String( "<br>" ) );
 
-  if( !cm.message().isSimpleText() )
+  if( !cm.isSourceCode() )
   {
     QString text_color = (cm.textColor().isValid() && cm.textColor() != QColor( 0, 0, 0 ) && cm.textColor() != QColor( 255, 255, 255 ) ) ? cm.textColor().name() : "";
     if( !text_color.isEmpty() )

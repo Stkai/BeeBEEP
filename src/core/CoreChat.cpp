@@ -444,10 +444,7 @@ int Core::sendChatMessage( VNumber chat_id, const QString& msg, bool is_importan
     m.setDelayed();
 
   if( is_source_code )
-  {
-  qDebug() << "SOURCECODE!";
-     m.setSourceCode();
-  }
+    m.setSourceCode();
 
   int messages_sent = 0;
 

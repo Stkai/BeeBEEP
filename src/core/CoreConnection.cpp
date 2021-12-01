@@ -510,7 +510,16 @@ void Core::updateNetworkConfiguration( const QNetworkConfiguration& net_conf )
 
   if( net_conf.state() == QNetworkConfiguration::Active && (net_conf.bearerType() == QNetworkConfiguration::BearerEthernet || net_conf.bearerType() == QNetworkConfiguration::BearerWLAN) )
   {
-    qDebug() << "Network configuration:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() ) << "is active ethernet or wlan and new broadcast will be requested";
-    mp_broadcaster->sendBroadcast();
+
+    if( isConnected() )
+    {
+      qDebug() << "Network configuration:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() ) << "is active ethernet or wlan and new broadcast will be requested";
+      mp_broadcaster->sendBroadcast();
+    }
+    else
+    {
+      qDebug() << "Network configuration:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() ) << "is active ethernet or wlan and new connection will be requested";
+      emit networkInterfaceIsUp();
+    }
   }
 }
