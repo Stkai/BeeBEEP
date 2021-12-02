@@ -536,7 +536,7 @@ void Core::checkNetworkInterface()
 {
   if( !m_connections.isEmpty() )
   {
-    int max_activity_idle = Settings::instance().tickIntervalCheckNetwork() * 1000;
+    int max_activity_idle = Settings::instance().tickIntervalCheckIdle();
     foreach( Connection* c, m_connections )
     {
       if( c->isConnected() && c->activityIdle() < max_activity_idle )

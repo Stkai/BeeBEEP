@@ -34,7 +34,6 @@ NetworkManager::NetworkManager()
 {
 }
 
-
 QList<NetworkEntry> NetworkManager::availableNetworkEntries() const
 {
   QList<NetworkEntry> network_entries;

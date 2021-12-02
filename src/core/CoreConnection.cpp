@@ -491,12 +491,6 @@ void Core::checkFirewall()
 
 void Core::updateNetworkConfiguration( const QNetworkConfiguration& net_conf )
 {
-  if( !isConnected() )
-  {
-    qDebug() << "Core is not connected and skips to check network configuration:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() ) << "-" << qPrintable( net_conf.bearerTypeName() );
-    return;
-  }
-
 #ifdef BEEBEEP_DEBUG
   qDebug() << "Core is checking network configuration:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() )
            << "- bearer:" << qPrintable( net_conf.bearerTypeName() ) << net_conf.bearerType()
@@ -510,7 +504,6 @@ void Core::updateNetworkConfiguration( const QNetworkConfiguration& net_conf )
 
   if( net_conf.state() == QNetworkConfiguration::Active && (net_conf.bearerType() == QNetworkConfiguration::BearerEthernet || net_conf.bearerType() == QNetworkConfiguration::BearerWLAN) )
   {
-
     if( isConnected() )
     {
       qDebug() << "Network configuration:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() ) << "is active ethernet or wlan and new broadcast will be requested";
