@@ -534,7 +534,7 @@ int Core::fileTransferPort() const
 
 void Core::checkNetworkInterface()
 {
-  if( !m_connections.isEmpty() )
+  if( isConnected() && !m_connections.isEmpty() )
   {
     int max_activity_idle = Settings::instance().tickIntervalCheckIdle();
     foreach( Connection* c, m_connections )
@@ -563,14 +563,11 @@ void Core::checkNetworkInterface()
     }
     else
     {
-      if( NetworkManager::instance().isMainInterfaceUnavailable() )
-      {
-        qDebug() << "Main network interface is not available. Searching...";
-        if( NetworkManager::instance().searchLocalHostAddress() )
-          QMetaObject::invokeMethod( this, "checkNetworkInterface", Qt::QueuedConnection );
-        else
-          qWarning() << "Network interface not found";
-      }
+      qDebug() << "Main network interface is not available. Searching...";
+      if( NetworkManager::instance().searchLocalHostAddress() )
+        emit networkInterfaceIsUp();
+      else
+        qWarning() << "Network interface not found";
     }
   }
 }
