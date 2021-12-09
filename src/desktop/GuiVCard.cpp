@@ -68,7 +68,7 @@ GuiVCard::GuiVCard( QWidget *parent )
   mp_pbFavorite->setIcon( IconManager::instance().icon( "star.png" ) );
   mp_pbRemove->setIcon( IconManager::instance().icon( "delete.png" ) );
   mp_pbBuzz->setIcon( IconManager::instance().icon( "bell.png" ) );
-  mp_pbBuzz->setIcon( IconManager::instance().icon( "help.png" ) );
+  mp_pbHelp->setIcon( IconManager::instance().icon( "help.png" ) );
 
   connect( mp_pbChat, SIGNAL( clicked() ), this, SLOT( showPrivateChat() ) );
   connect( mp_pbFile, SIGNAL( clicked() ), this, SLOT( sendFile() ) );
