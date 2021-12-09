@@ -504,8 +504,8 @@ int Core::sendMessageToChat( const Chat& c, const Message& m )
       sys_msg = tr( "The message will be delivered to %1." );
 
     dispatchSystemMessage( c.id(), ID_LOCAL_USER, QString( "%1 %2" )
-                           .arg( IconManager::instance().toHtml( "unsent-message.png", "*m*" ) )
-                           .arg( sys_msg.arg( Bee::stringListToTextString( offline_users, true, 3 ) ) ),
+                           .arg( IconManager::instance().toHtml( "unsent-message.png", "*m*" ),
+                                 sys_msg.arg( Bee::stringListToTextString( offline_users, true, 3 ) ) ),
                            DispatchToChat, ChatMessage::Other, false );
   }
 
@@ -1042,8 +1042,13 @@ bool Core::sendHelpMessage()
     User u = UserManager::instance().findUser( c->userId() );
     if( u.isValid() && u.isHelper() && !u.isLocal() )
     {
-      if( c->sendMessage( m ) )
-        users_contacted++;
+      if( users_contacted < Settings::instance().maxUsersToConnectInATick() )
+      {
+        if( c->sendMessage( m ) )
+          users_contacted++;
+      }
+      else
+        MessageManager::instance().addMessageToSend( c->userId(), ID_INVALID, m );
     }
   }
 

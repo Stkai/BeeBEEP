@@ -279,3 +279,19 @@ bool MessageManager::setMessageReceived( VNumber msg_id )
   }
   return false;
 }
+
+bool MessageManager::hasMessageNotReceivedYet( VNumber user_id ) const
+{
+  QList<MessageRecord>::const_iterator it = m_sentMessages.begin();
+  while( it != m_sentMessages.end() )
+  {
+    if( (*it).toUserId() == user_id )
+    {
+
+      if( (*it).message().timestamp().msecsTo( QDateTime::currentDateTime() ) > Settings::instance().messageNotReceivedTimeout() )
+        return true;
+    }
+    ++it;
+  }
+  return false;
+}

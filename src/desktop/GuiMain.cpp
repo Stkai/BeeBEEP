@@ -598,7 +598,10 @@ void GuiMain::startCore()
       m_changeTabToUserListOnFirstConnected = true;
   }
   else
+  {
+    m_coreIsConnecting = false;
     QMetaObject::invokeMethod( beeCore, "checkNetworkInterface", Qt::QueuedConnection );
+  }
 }
 
 bool GuiMain::promptConnectionPassword()

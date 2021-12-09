@@ -306,7 +306,8 @@ TickIntervalCheckNetwork=7
 TickIntervalBroadcasting=[integer] is the tick interval (seconds) from a broadcast and another (default is disabled=0) [3.0.8]
 BroadcastInterval= is the interval from a broadcast and another (default is disabled=0) [obsolete 3.0.8+]
 ListenerPort= is the last TCP port of chat communication between BeeBEEP (default is 6475)
-ConnectionActivityTimeout(ms)=30000
+ConnectionActivityTimeout_ms=30000
+MessageNotReceivedTimeout_ms=7000
 WritingTimeout=3000
 SystemTrayMessageTimeout=2000
 ConnectionTimeout=5000

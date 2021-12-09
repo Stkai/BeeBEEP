@@ -157,6 +157,7 @@ public:
   inline int defaultListenerPort() const;
   inline int defaultFileTransferPort() const;
   inline int pongTimeout() const;
+  inline int messageNotReceivedTimeout() const;
   inline int writingTimeout() const;
   inline int fileTransferConfirmTimeout() const;
   inline int fileTransferBufferSize() const;
@@ -763,6 +764,7 @@ private:
 
   User m_localUser;
   int m_pongTimeout;
+  int m_messageNotReceivedTimeout;
   int m_writingTimeout;
   int m_fileTransferConfirmTimeout;
   int m_fileTransferBufferSize;
@@ -1036,6 +1038,7 @@ inline int Settings::defaultBroadcastPort() const { return m_defaultBroadcastPor
 inline int Settings::defaultListenerPort() const { return m_defaultListenerPort; }
 inline int Settings::defaultFileTransferPort() const { return m_defaultFileTransferPort; }
 inline int Settings::pongTimeout() const { return m_pongTimeout; }
+inline int Settings::messageNotReceivedTimeout() const { return m_messageNotReceivedTimeout; }
 inline int Settings::writingTimeout() const { return m_writingTimeout; }
 inline int Settings::fileTransferConfirmTimeout() const { return m_fileTransferConfirmTimeout; }
 inline int Settings::fileTransferBufferSize() const { return m_fileTransferBufferSize; }

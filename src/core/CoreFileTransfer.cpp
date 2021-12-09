@@ -32,6 +32,7 @@
 #include "FileShare.h"
 #include "FileTransferPeer.h"
 #include "IconManager.h"
+#include "MessageManager.h"
 #include "Protocol.h"
 #include "Settings.h"
 #include "UserManager.h"
@@ -539,8 +540,17 @@ void Core::sendFileShareListToAll()
 
   Message share_list_message = Protocol::instance().fileShareListMessage();
 
+  int count = 0;
   foreach( Connection* c, m_connections )
-    c->sendMessage( share_list_message );
+  {
+    if( count < Settings::instance().maxUsersToConnectInATick() )
+    {
+      if( c->sendMessage( share_list_message ) )
+        count++;
+    }
+    else
+      MessageManager::instance().addMessageToSend( c->userId(), ID_INVALID, share_list_message );
+  }
 }
 
 void Core::addPathToShare( const QString& share_path )

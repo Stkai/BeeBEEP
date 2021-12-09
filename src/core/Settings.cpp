@@ -1590,6 +1590,9 @@ void Settings::loadCommonSettings( QSettings* user_ini )
   m_pongTimeout = qMax( commonValue( system_rc, user_ini, "ConnectionActivityTimeout_ms", PONG_DEFAULT_TIMEOUT ).toInt(), 13000 );
   if( m_pongTimeout > 40000 )
     m_pongTimeout = 40000;
+  m_messageNotReceivedTimeout = qMax( commonValue( system_rc, user_ini, "MessageNotReceivedTimeout_ms", 7000 ).toInt(), 4000 );
+  if( m_messageNotReceivedTimeout > m_pongTimeout )
+    m_messageNotReceivedTimeout = m_pongTimeout;
   m_writingTimeout = qMax( commonValue( system_rc, user_ini, "WritingTimeout_ms", 3000 ).toInt(), 3000 );
   m_tickIntervalConnectionTimeout = qMax( commonValue( system_rc, user_ini, "TickIntervalConnectionTimeout", m_tickIntervalConnectionTimeout ).toInt(), 5 );
   if( m_settingsVersion < 6 && m_tickIntervalConnectionTimeout < TICK_INTERVAL_CONNECTION_TIMEOUT )
@@ -1967,6 +1970,7 @@ void Settings::save()
   sets->setValue( "TickIntervalCheckNetwork", m_tickIntervalCheckNetwork );
   sets->setValue( "ListenerPort", m_localUser.networkAddress().hostPort() );
   sets->setValue( "ConnectionActivityTimeout_ms", m_pongTimeout );
+  sets->setValue( "MessageNotReceivedTimeout_ms", m_messageNotReceivedTimeout );
   sets->setValue( "WritingTimeout_ms", m_writingTimeout );
   sets->setValue( "DelayContactUsers_ms", m_delayContactUsers );
   sets->setValue( "TickIntervalConnectionTimeout", m_tickIntervalConnectionTimeout );

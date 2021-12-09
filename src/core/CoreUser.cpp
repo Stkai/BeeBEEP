@@ -526,10 +526,12 @@ void Core::sendVCardToAllConnectedUsers()
   int count = 0;
   foreach( Connection* c, m_connections )
   {
-    count++;
     Message m = Protocol::instance().localVCardMessage( c->protocolVersion() );
     if( count < Settings::instance().maxUsersToConnectInATick() )
-      c->sendMessage( m );
+    {
+      if( c->sendMessage( m ) )
+        count++;
+    }
     else
       MessageManager::instance().addMessageToSend( c->userId(), ID_INVALID, m );
   }

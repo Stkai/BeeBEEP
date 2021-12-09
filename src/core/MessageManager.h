@@ -44,6 +44,7 @@ public:
 
   void addSentMessage( VNumber to_user_id, VNumber chat_id, const Message& );
   bool setMessageReceived( VNumber msg_id );
+  bool hasMessageNotReceivedYet( VNumber user_id ) const;
 
   inline VNumber nextUserWithUnsentMessages() const;
 

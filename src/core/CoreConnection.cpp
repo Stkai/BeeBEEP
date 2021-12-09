@@ -512,7 +512,8 @@ void Core::updateNetworkConfiguration( const QNetworkConfiguration& net_conf )
     else
     {
       qDebug() << "Network configuration:" << qPrintable( net_conf.name() ) << "-" << qPrintable( net_conf.identifier() ) << "is active ethernet or wlan and new connection will be requested";
-      emit networkInterfaceIsUp();
+      if( NetworkManager::instance().searchLocalHostAddress() )
+        emit networkInterfaceIsUp();
     }
   }
 }

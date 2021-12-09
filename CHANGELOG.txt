@@ -10,6 +10,7 @@ BeeBEEP 5.8.5 (in development)
 - Fixed a bug on using Message History with CTRL+Up / CTRL+Down.
 - Fixed a bug on "Raise chat window on new message".
 - Fixed a bug that did not allow messages to be displayed correctly between the dark theme and the default one.
+- Fixed a bug that prevent connection after SLEEP / SUSPEND mode.
 - Emoticons will no longer be displayed larger than their maximum size.
 - Important private messages now open the chat window.
 - Added "EnableReceivingHelpMessages" option in beebeep.rc file.
@@ -19,6 +20,7 @@ BeeBEEP 5.8.5 (in development)
 - Added shortcut with "Enter", "Return", "Space" keys to open chat if selected in list.
 - Added global shortcut CTRL+ALT+C to "Select first chat available", so you can navigate with arrows and open with return.
 - Added "file transfer completed" notification also per BeeBOX downloaded files.
+- Added option "MessageNotReceivedTimeout_ms" for internal use.
 
 BeeBEEP 5.8.4
 - New feature: almost all the options of file beebeep.ini can be used in file beebeep.rc also
