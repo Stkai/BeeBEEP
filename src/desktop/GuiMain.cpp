@@ -356,30 +356,28 @@ void GuiMain::changeEvent( QEvent* e )
 
 void GuiMain::closeEvent( QCloseEvent* e )
 {
-  if( beeCore->isConnected() )
+  if( !m_forceShutdown )
   {
-    if( !m_forceShutdown )
+    if( Settings::instance().closeMinimizeInTray() && QSystemTrayIcon::isSystemTrayAvailable() )
     {
-      if( Settings::instance().closeMinimizeInTray() && QSystemTrayIcon::isSystemTrayAvailable() )
+      QTimer::singleShot( 0, this, SLOT( hideToTrayIcon() ) );
+      e->ignore();
+      return;
+    }
+
+    if( Settings::instance().promptOnCloseEvent() )
+    {
+      if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you want to quit %1?" ).arg( Settings::instance().programName() ),
+                                 tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 1 )
       {
-        QTimer::singleShot( 0, this, SLOT( hideToTrayIcon() ) );
         e->ignore();
         return;
       }
-
-      if( Settings::instance().promptOnCloseEvent() )
-      {
-        if( QMessageBox::question( this, Settings::instance().programName(), tr( "Do you want to quit %1?" ).arg( Settings::instance().programName() ),
-                               tr( "Yes" ), tr( "No" ), QString(), 1, 1 ) == 1 )
-        {
-          e->ignore();
-          return;
-        }
-      }
     }
-
-    beeCore->stop();
   }
+
+  if( beeCore->isConnected() )
+    beeCore->stop();
 
   if( Settings::instance().saveGeometryOnExit() )
 #if QT_VERSION == 0x050906
