@@ -36,15 +36,10 @@ GuiCreateTextFile::GuiCreateTextFile( QWidget *parent )
   setWindowIcon( IconManager::instance().icon( "send-code.png" ) );
   Bee::removeContextHelpButton( this );
 
-  QButtonGroup* bg = new QButtonGroup( this );
-  bg->addButton( mp_rbSendCode );
-  bg->addButton( mp_rbSendFile );
-  bg->setExclusive( true );
-
   mp_leFileSuffix->setToolTip( tr( "For example:" ) + QString( " c, cpp, h, txt, html, php, js, css, java, ..." ) );
 
-  connect( bg, SIGNAL( buttonClicked(QAbstractButton*) ), this, SLOT( onSendTypeButtonClicked(QAbstractButton*) ) );
-  connect( mp_pbSend, SIGNAL( clicked() ), this, SLOT( sendText() ) );
+  connect( mp_pbSendAsMessage, SIGNAL( clicked() ), this, SLOT( sendTextAsMessage() ) );
+  connect( mp_pbSendAsFile, SIGNAL( clicked() ), this, SLOT( sendTextAsFile() ) );
 
   loadSettings();
 }
@@ -54,9 +49,16 @@ QString GuiCreateTextFile::text() const
   return mp_text->toPlainText();
 }
 
-bool GuiCreateTextFile::sendAsFile() const
+void GuiCreateTextFile::sendTextAsMessage()
 {
-  return mp_rbSendFile->isEnabled() && mp_rbSendFile->isChecked();
+  m_sendAsFile = false;
+  sendText();
+}
+
+void GuiCreateTextFile::sendTextAsFile()
+{
+  m_sendAsFile = true;
+  sendText();
 }
 
 QString GuiCreateTextFile::fileSuffix() const
@@ -69,39 +71,20 @@ QString GuiCreateTextFile::fileSuffix() const
 
 void GuiCreateTextFile::loadSettings()
 {
+  m_sendAsFile = false;
   if( Settings::instance().disableFileTransfer() || !Settings::instance().enableFileTransfer() )
-  {
-    mp_rbSendCode->setChecked( true );
-    mp_rbSendFile->setEnabled( false );
-  }
+    mp_pbSendAsFile->setEnabled( false );
   else
-  {
-    mp_rbSendCode->setChecked( !Settings::instance().createTextCodeAsFile() );
-    mp_rbSendFile->setChecked( Settings::instance().createTextCodeAsFile() );
-  }
+    mp_pbSendAsFile->setEnabled( true );
 
   mp_leFileSuffix->setText( Settings::instance().createTextCodeFileSuffix() );
   mp_cbUseFileTmp->setChecked( Settings::instance().createTextCodeAsTemporaryFile() );
-  onSendTypeButtonClicked( mp_rbSendCode );
 }
 
 void GuiCreateTextFile::saveSettings()
 {
-  Settings::instance().setCreateTextCodeAsFile( sendAsFile() );
   Settings::instance().setCreateTextCodeFileSuffix( fileSuffix() );
   Settings::instance().setCreateTextCodeAsTemporaryFile( mp_cbUseFileTmp->isChecked() );
-}
-
-void  GuiCreateTextFile::onSendTypeButtonClicked( QAbstractButton* pb )
-{
-  if( !pb )
-    return;
-
-  bool enable_extras = mp_rbSendFile->isChecked();
-
-  mp_lFileSuffix->setEnabled( enable_extras );
-  mp_leFileSuffix->setEnabled( enable_extras );
-  mp_cbUseFileTmp->setEnabled( enable_extras );
 }
 
 void GuiCreateTextFile::sendText()

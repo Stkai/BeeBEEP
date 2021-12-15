@@ -88,7 +88,7 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
     text_formatted.append( "\n</code>\n" );
   }
 
-  text_formatted.replace( QChar( ' ' ), QLatin1String( "&nbsp;" ) );
+  text_formatted.replace( QString( "  " ), QLatin1String( "&nbsp;&nbsp;" ) );
   text_formatted.replace( QChar( '\t' ), QLatin1String( "&nbsp;&nbsp;&nbsp;&nbsp;" ) );
   text_formatted.replace( QChar( '\r' ), QLatin1String( "" ) );
   text_formatted.replace( QChar( '\n' ), QLatin1String( "<br>" ) );

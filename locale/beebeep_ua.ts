@@ -652,19 +652,20 @@
     </message>
     <message>
         <source>I need your help.</source>
-        <translation type="unfinished"></translation>
+        <translation>Мені потрібна допомога.</translation>
     </message>
     <message>
         <source>%1 %2 is asking for your help.</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>%1 %2 просить вашої допомоги.</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <source>I got your call for help.</source>
-        <translation type="unfinished"></translation>
+        <translation>Я отримав Ваш дзвінок про допомогу.</translation>
     </message>
     <message>
         <source>%1 %2 got your call for help.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 отримав ваш виклик на допомогу.</translation>
     </message>
 </context>
 <context>
@@ -1270,15 +1271,15 @@ Download for free and install the version with this feature from the %1 website.
     </message>
     <message>
         <source>Send code</source>
-        <translation type="unfinished"></translation>
+        <translation>Надіслати код</translation>
     </message>
     <message>
         <source>Copy URL to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Скопіювати URL до буферу обміну</translation>
     </message>
     <message>
         <source>Url copied to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>URL скопійовано до буферу обміну</translation>
     </message>
 </context>
 <context>
@@ -1469,38 +1470,38 @@ Please select a different name.</source>
     <name>GuiCreateTextFile</name>
     <message>
         <source>Create text</source>
-        <translation type="unfinished"></translation>
+        <translation>Створити текст</translation>
     </message>
     <message>
         <source>For example:</source>
-        <translation type="unfinished"></translation>
+        <translation>Наприклад:</translation>
     </message>
 </context>
 <context>
     <name>GuiCreateTextFileDialog</name>
     <message>
         <source>Workgroups</source>
-        <translation type="unfinished"></translation>
+        <translation>Робочі групи</translation>
     </message>
     <message>
         <source>Send as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Відправити, як текст</translation>
     </message>
     <message>
         <source>Send as file</source>
-        <translation type="unfinished"></translation>
+        <translation>Відправити, як файл</translation>
     </message>
     <message>
         <source>File extension</source>
-        <translation type="unfinished"></translation>
+        <translation>Розширення файлу</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished">Відправити</translation>
+        <translation>Відправити</translation>
     </message>
     <message>
         <source>Use temporary file</source>
-        <translation type="unfinished"></translation>
+        <translation>Використати тимчасовий файл</translation>
     </message>
 </context>
 <context>
@@ -1704,11 +1705,11 @@ Please select a different name.</source>
     </message>
     <message>
         <source>My shared files</source>
-        <translation type="unfinished"></translation>
+        <translation>Мої файли спільного доступу</translation>
     </message>
     <message>
         <source>Network shared files</source>
-        <translation type="unfinished"></translation>
+        <translation>Мережа файлів спільного доступу</translation>
     </message>
 </context>
 <context>
@@ -1830,7 +1831,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Emoticons</source>
-        <translation>Смайлики</translation>
+        <translation>Смайли</translation>
     </message>
     <message>
         <source>Chat with all users</source>
@@ -3586,39 +3587,39 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Do you really want to apply the new theme?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви дійсно хочете застосувати нову тему?</translation>
     </message>
     <message>
         <source>Clear favorite emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистити улюблені смайли</translation>
     </message>
     <message>
         <source>Change size of the emoticons</source>
-        <translation type="unfinished"></translation>
+        <translation>Змінити розмір смайлів</translation>
     </message>
     <message>
         <source>Please select the new size of the emoticons in chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, виберіть новий розмір смайлів у чаті</translation>
     </message>
     <message>
         <source>Enable visual notifications for chat windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Увімкнути візуальні сповіщення для вікон чату</translation>
     </message>
     <message>
         <source>%1 is asking for your help!</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 просить вашої допомоги!</translation>
     </message>
     <message>
         <source>%1 got your call for help.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 отримав ваш виклик на допомогу.</translation>
     </message>
     <message>
         <source>Help station</source>
-        <translation type="unfinished"></translation>
+        <translation>Довідкова станція</translation>
     </message>
     <message>
         <source>Ask for help</source>
-        <translation type="unfinished"></translation>
+        <translation>Попросити допомогу</translation>
     </message>
 </context>
 <context>
@@ -4441,11 +4442,11 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Also grab the cursor in the screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Захопити також курсор на скріншоті</translation>
     </message>
     <message>
         <source>Grab cursor</source>
-        <translation type="unfinished"></translation>
+        <translation>Захопити курсор</translation>
     </message>
 </context>
 <context>
@@ -5225,11 +5226,11 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Your room, location or address</source>
-        <translation type="unfinished"></translation>
+        <translation>Ваша кімната, місце розташування або адреса</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation>місце розташування</translation>
     </message>
 </context>
 <context>
@@ -5292,11 +5293,11 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Room position</source>
-        <translation type="unfinished"></translation>
+        <translation>Розташування кімнати</translation>
     </message>
     <message>
         <source>Ask for help</source>
-        <translation type="unfinished"></translation>
+        <translation>Попросити допомогу</translation>
     </message>
 </context>
 <context>
@@ -5329,11 +5330,11 @@ Please select a different name.</source>
     <name>GuiVoicePlayer</name>
     <message>
         <source>Unable to open voice message %1</source>
-        <translation type="unfinished">Неможливо відкрити повідомлення %1</translation>
+        <translation>Неможливо відкрити голосове повідомлення %1</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Гаразд</translation>
     </message>
 </context>
 <context>
@@ -5344,7 +5345,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Закрити</translation>
+        <translation>Закрити</translation>
     </message>
 </context>
 <context>
@@ -5724,11 +5725,11 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Send a help request message</source>
-        <translation type="unfinished"></translation>
+        <translation>Відправити повідомлення із запитом про допомогу</translation>
     </message>
     <message>
         <source>Select the first available chat</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть спочатку доступний чат</translation>
     </message>
 </context>
 <context>

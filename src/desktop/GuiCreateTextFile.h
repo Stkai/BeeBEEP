@@ -36,18 +36,24 @@ public:
   explicit GuiCreateTextFile( QWidget *parent = Q_NULLPTR );
 
   QString text() const;
-  bool sendAsFile() const;
   QString fileSuffix() const;
+  inline bool sendAsFile() const;
 
 protected slots:
-  void onSendTypeButtonClicked( QAbstractButton* );
-  void sendText();
+  void sendTextAsMessage();
+  void sendTextAsFile();
 
 protected:
   void loadSettings();
   void saveSettings();
+  void sendText();
 
+private:
+  bool m_sendAsFile;
 
 };
+
+// Inline Functions
+bool GuiCreateTextFile::sendAsFile() const { return m_sendAsFile; }
 
 #endif // BEEBEEP_GUICREATETEXTFILE_H

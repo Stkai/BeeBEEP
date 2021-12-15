@@ -617,8 +617,6 @@ public:
   inline void setDelayConnectionAtStartup( int );
   inline int delayConnectionAtStartup() const;
 
-  inline void setCreateTextCodeAsFile( bool );
-  inline bool createTextCodeAsFile() const;
   inline void setCreateTextCodeAsTemporaryFile( bool );
   inline bool createTextCodeAsTemporaryFile() const;
   inline void setCreateTextCodeFileSuffix( const QString& );
@@ -1465,8 +1463,6 @@ inline int Settings::tickIntervalChatAutoSave() const { return m_tickIntervalCha
 inline void Settings::setEnableVisualNotificationsInChatWindow( bool new_value ) { m_enableVisualNotificationsInChatWindow = new_value; }
 inline bool Settings::enableVisualNotificationsInChatWindow() const { return m_enableVisualNotificationsInChatWindow; }
 inline bool Settings::enableReceivingHelpMessages() const { return m_enableReceivingHelpMessages; }
-inline void Settings::setCreateTextCodeAsFile( bool new_value ) { m_createTextCodeAsFile = new_value; }
-inline bool Settings::createTextCodeAsFile() const { return m_createTextCodeAsFile; }
 inline void Settings::setCreateTextCodeAsTemporaryFile( bool new_value ) { m_createTextCodeAsTemporaryFile = new_value; }
 inline bool Settings::createTextCodeAsTemporaryFile() const { return m_createTextCodeAsTemporaryFile; }
 inline void Settings::setCreateTextCodeFileSuffix( const QString& new_value ) { m_createTextCodeFileSuffix = new_value; }
