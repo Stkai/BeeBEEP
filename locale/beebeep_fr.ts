@@ -1840,7 +1840,7 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateTextFile.cpp" line="44"/>
+        <location filename="../src/desktop/GuiCreateTextFile.cpp" line="39"/>
         <source>For example:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1853,29 +1853,28 @@ Please select a different name.</source>
         <translation type="unfinished">Groupes de travail</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateTextFile.ui" line="28"/>
+        <location filename="../src/desktop/GuiCreateTextFile.ui" line="97"/>
         <source>Send as text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateTextFile.ui" line="35"/>
+        <location filename="../src/desktop/GuiCreateTextFile.ui" line="28"/>
         <source>Send as file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateTextFile.ui" line="64"/>
+        <location filename="../src/desktop/GuiCreateTextFile.ui" line="45"/>
         <source>File extension</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateTextFile.ui" line="96"/>
+        <location filename="../src/desktop/GuiCreateTextFile.ui" line="77"/>
         <source>Use temporary file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateTextFile.ui" line="128"/>
         <source>Send</source>
-        <translation type="unfinished">Envoyer</translation>
+        <translation type="obsolete">Envoyer</translation>
     </message>
 </context>
 <context>

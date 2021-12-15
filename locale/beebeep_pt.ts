@@ -1829,7 +1829,7 @@ Selecione um nome diferente.</translation>
         <translation>Crie um texto</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateTextFile.cpp" line="44"/>
+        <location filename="../src/desktop/GuiCreateTextFile.cpp" line="39"/>
         <source>For example:</source>
         <translation>Por exemplo:</translation>
     </message>
@@ -1842,29 +1842,28 @@ Selecione um nome diferente.</translation>
         <translation>Grupos de Trabalho</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateTextFile.ui" line="28"/>
+        <location filename="../src/desktop/GuiCreateTextFile.ui" line="97"/>
         <source>Send as text</source>
         <translation>Enviar como texto</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateTextFile.ui" line="35"/>
+        <location filename="../src/desktop/GuiCreateTextFile.ui" line="28"/>
         <source>Send as file</source>
         <translation>Enviar como arquivo</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateTextFile.ui" line="64"/>
+        <location filename="../src/desktop/GuiCreateTextFile.ui" line="45"/>
         <source>File extension</source>
         <translation>Extensão do arquivo</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateTextFile.ui" line="96"/>
+        <location filename="../src/desktop/GuiCreateTextFile.ui" line="77"/>
         <source>Use temporary file</source>
         <translation>Utilizar um arquivo temporário</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateTextFile.ui" line="128"/>
         <source>Send</source>
-        <translation>Enviar</translation>
+        <translation type="vanished">Enviar</translation>
     </message>
 </context>
 <context>

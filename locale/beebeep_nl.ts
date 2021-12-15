@@ -1857,7 +1857,7 @@ Gebruik aub een andere naam.</translation>
         <translation>Tekst maken</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateTextFile.cpp" line="44"/>
+        <location filename="../src/desktop/GuiCreateTextFile.cpp" line="39"/>
         <source>For example:</source>
         <translation>Als voorbeeld:</translation>
     </message>
@@ -1870,29 +1870,28 @@ Gebruik aub een andere naam.</translation>
         <translation>Werkgroepen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateTextFile.ui" line="28"/>
+        <location filename="../src/desktop/GuiCreateTextFile.ui" line="97"/>
         <source>Send as text</source>
         <translation>Verzenden als tekst</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateTextFile.ui" line="35"/>
+        <location filename="../src/desktop/GuiCreateTextFile.ui" line="28"/>
         <source>Send as file</source>
         <translation>Verzenden als bestand</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateTextFile.ui" line="64"/>
+        <location filename="../src/desktop/GuiCreateTextFile.ui" line="45"/>
         <source>File extension</source>
         <translation>Bestandsextensie</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateTextFile.ui" line="96"/>
+        <location filename="../src/desktop/GuiCreateTextFile.ui" line="77"/>
         <source>Use temporary file</source>
         <translation>Gebruik temp bestand</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateTextFile.ui" line="128"/>
         <source>Send</source>
-        <translation>Verzenden</translation>
+        <translation type="vanished">Verzenden</translation>
     </message>
 </context>
 <context>

@@ -1509,10 +1509,6 @@ Bitte wähle einen anderen Namen aus.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Send</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Use temporary file</source>
         <translation type="unfinished"></translation>
     </message>

@@ -1603,7 +1603,7 @@ Inserisci un nome differente.</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation>Invia</translation>
+        <translation type="vanished">Invia</translation>
     </message>
     <message>
         <source>Use temporary file</source>

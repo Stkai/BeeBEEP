@@ -656,12 +656,11 @@
     </message>
     <message>
         <source>%1 %2 is asking for your help.</source>
-        <translatorcomment>%1 %2 просить вашої допомоги.</translatorcomment>
-        <translation></translation>
+        <translation>%1 %2 просить вашої допомоги.</translation>
     </message>
     <message>
         <source>I got your call for help.</source>
-        <translation>Я отримав Ваш дзвінок про допомогу.</translation>
+        <translation>Я отримав Ваш виклик про допомогу.</translation>
     </message>
     <message>
         <source>%1 %2 got your call for help.</source>
@@ -1497,7 +1496,7 @@ Please select a different name.</source>
     </message>
     <message>
         <source>Send</source>
-        <translation>Відправити</translation>
+        <translation type="vanished">Відправити</translation>
     </message>
     <message>
         <source>Use temporary file</source>
@@ -5475,7 +5474,7 @@ Please select a different name.</source>
     <name>Not available</name>
     <message>
         <source>n.a.</source>
-        <translation>недоступно</translation>
+        <translation>недоступно..</translation>
     </message>
 </context>
 <context>
