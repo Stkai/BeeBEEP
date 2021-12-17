@@ -41,8 +41,7 @@ public:
   static QString formatMessage( const User&, const ChatMessage&, VNumber last_user_id, bool show_timestamp, bool show_datestamp, bool skip_system_message,
                                                                                        bool show_message_group_by_user, bool use_your_name, bool use_chat_compact );
 
-  static QString formatSystemMessage( const ChatMessage&, VNumber last_user_id, bool show_timestamp, bool show_datestamp,
-                                                                                bool use_chat_compact );
+  static QString formatSystemMessage( const ChatMessage&, VNumber last_user_id, bool show_timestamp, bool show_datestamp, bool use_chat_compact );
 
 };
 

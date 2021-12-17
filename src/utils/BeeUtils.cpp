@@ -377,33 +377,6 @@ QString Bee::lowerFirstLetter( const QString& txt )
     return txt;
 }
 
-QColor Bee::invertColor( const QColor& c )
-{
-  int r, g, b;
-  c.getRgb( &r, &g, &b );
-  int i_r = 255 - r;
-  int i_g = 255 - g;
-  int i_b = 255 - b;
-
-  int s_r = r - i_r;
-  int s_g = g - i_g;
-  int s_b = b - i_b;
-
-  if( qAbs( s_r ) < 30 && qAbs( s_g ) < 30 && qAbs( s_b ) < 30 ) // gray on gray
-    return QColor( 0, 0, 0 );
-  else
-    return QColor( i_r, i_g, i_b );
-}
-
-bool Bee::isColorNear( const QColor& c1, const QColor& c2 )
-{
-  int r_diff = c1.red() - c2.red();
-  int g_diff = c1.green() - c2.green();
-  int b_diff = c1.blue() - c2.blue();
-
-  return qAbs( r_diff ) < 30 && qAbs( g_diff ) < 30 && qAbs( b_diff ) < 30;
-}
-
 QString Bee::removeHtmlTags( const QString& s )
 {
   QTextDocument text_document;
@@ -630,7 +603,7 @@ bool Bee::folderIsWriteable( const QString& folder_path, bool create_folder_if_n
       return false;
   }
 
-  QFile test_file( QString( "%1/%2" ).arg( folder_path ).arg( "beetestfile.txt" ) );
+  QFile test_file( QString( "%1/%2" ).arg( folder_path, QLatin1String( "beetestfile.txt" ) ) );
   if( test_file.open( QFile::WriteOnly ) )
   {
     bool ok = test_file.write( QByteArray( "BeeBEEP" ) ) > 0;
@@ -1131,8 +1104,8 @@ QString Bee::imagePreviewPath( const QString& source_image_path )
   QFileInfo fi( source_image_path );
   if( fi.exists() && fi.isReadable() )
   {
-    QString file_png_path = QString( "%1-%2.png" ).arg( "img" ).arg( Protocol::instance().fileInfoHash( fi ) );
-    QString image_preview_path = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().cacheFolder() ).arg( file_png_path ) );
+    QString file_png_path = QString( "%1-%2.png" ).arg( QLatin1String( "img" ), Protocol::instance().fileInfoHash( fi ) );
+    QString image_preview_path = Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( Settings::instance().cacheFolder(), file_png_path ) );
     if( QFile::exists( image_preview_path ) )
     {
 #ifdef BEEBEEP_DEBUG
@@ -1193,6 +1166,39 @@ QColor Bee::colorWhite() { return QColor( 238, 238, 238 ); }
 QColor Bee::colorYellow() { return QColor( 222, 222, 0 ); }
 QColor Bee::colorOrange() { return QColor( 255, 207, 4 ); }
 
+QColor Bee::invertColor( const QColor& c )
+{
+  int r, g, b;
+  c.getRgb( &r, &g, &b );
+  int i_r = 255 - r;
+  int i_g = 255 - g;
+  int i_b = 255 - b;
+
+  int s_r = qAbs( r - i_r );
+  int s_g = qAbs( g - i_g );
+  int s_b = qAbs( b - i_b );
+
+  if( s_r < 30 && s_g < 30 && s_b < 30 ) // gray on gray
+    return QColor( 0, 0, 0 );
+  else if( s_r > 230 && s_g > 230 && s_b > 230 ) // white on white
+    return QColor( 255, 255, 255 );
+  else
+    return QColor( i_r, i_g, i_b );
+}
+
+bool Bee::isColorNear( const QColor& c1, const QColor& c2 )
+{
+  int r_diff = c1.red() - c2.red();
+  int g_diff = c1.green() - c2.green();
+  int b_diff = c1.blue() - c2.blue();
+
+  return qAbs( r_diff ) < 30 && qAbs( g_diff ) < 30 && qAbs( b_diff ) < 30;
+}
+
+bool Bee::isColorVisibleInChat( const QColor& c )
+{
+  return !Bee::isColorNear( c, QColor( Settings::instance().chatBackgroundColor() ) );
+}
 
 QString Bee::beeColorsToHtmlText( const QString& txt )
 {

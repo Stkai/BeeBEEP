@@ -309,7 +309,7 @@ public:
   inline void setShowChatToolbar();
   inline void setChatUseColoredUserNames( bool );
   inline bool chatUseColoredUserNames() const;
-  inline const QString& chatDefaultUserNameColor() const;
+  inline QString chatDefaultUserNameColor() const;
   inline void setSaveGeometryOnExit( bool );
   inline bool saveGeometryOnExit() const;
   inline int maxChatsToOpenAfterSendingMessage() const;
@@ -1356,7 +1356,7 @@ inline void Settings::setSendOfflineMessagesToDefaultChat( bool new_value ) { m_
 inline bool Settings::sendOfflineMessagesToDefaultChat() const { return m_sendOfflineMessagesToDefaultChat; }
 inline void Settings::setChatUseColoredUserNames( bool new_value ) { m_chatUseColoredUserNames = new_value; }
 inline bool Settings::chatUseColoredUserNames() const { return m_chatUseColoredUserNames; }
-inline const QString& Settings::chatDefaultUserNameColor() const { return m_chatDefaultUserNameColor; }
+inline QString Settings::chatDefaultUserNameColor() const { return m_chatDefaultUserNameColor.isEmpty() ? (m_useDarkStyle ? "#ffffff" : "#000000") : m_chatDefaultUserNameColor; }
 inline int Settings::maxChatsToOpenAfterSendingMessage() const { return m_maxChatsToOpenAfterSendingMessage; }
 inline void Settings::setShowUsersOnConnection( bool new_value ) { m_showUsersOnConnection = new_value; if( m_showUsersOnConnection ) m_showChatsOnConnection = false; }
 inline bool Settings::showUsersOnConnection() const { return m_showUsersOnConnection; }

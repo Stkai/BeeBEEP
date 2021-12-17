@@ -1408,7 +1408,7 @@ void Settings::loadCommonSettings( QSettings* user_ini )
   m_chatUseYourNameInsteadOfYou = commonValue( system_rc, user_ini, "UseYourNameInsteadOfYou", false ).toBool();
   m_chatClearAllReadMessages = commonValue( system_rc, user_ini, "ClearAllReadMessages", false ).toBool();
   m_chatUseColoredUserNames = commonValue( system_rc, user_ini, "UseColoredUserNames", true ).toBool();
-  m_chatDefaultUserNameColor = commonValue( system_rc, user_ini, "DefaultUserNameColor", "#000" ).toString();
+  m_chatDefaultUserNameColor = commonValue( system_rc, user_ini, "DefaultUserNameColor", "" ).toString();
   m_chatActiveWindowOpacityLevel = qMax( 10, qMin( 100, commonValue( system_rc, user_ini, "ActiveWindowOpacityLevel", m_chatActiveWindowOpacityLevel ).toInt() ) );
   m_chatInactiveWindowOpacityLevel = qMax( 10, qMin( 100, commonValue( system_rc, user_ini, "InactiveWindowOpacityLevel", m_chatInactiveWindowOpacityLevel ).toInt() ) );
   m_chatBackgroundColor = commonValue( system_rc, user_ini, "BackgroundColor", m_chatBackgroundColor ).toString();

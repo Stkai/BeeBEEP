@@ -95,10 +95,10 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
 
   if( !cm.isSourceCode() )
   {
-    QString text_color = (cm.textColor().isValid() && cm.textColor() != QColor( 0, 0, 0 ) && cm.textColor() != QColor( 255, 255, 255 ) ) ? cm.textColor().name() : "";
-    if( !text_color.isEmpty() )
+    QColor text_color = (cm.textColor().isValid() && cm.textColor() != QColor( 0, 0, 0 ) && cm.textColor() != QColor( 255, 255, 255 ) ) ? cm.textColor() : QColor();
+    if( text_color.isValid() && Bee::isColorVisibleInChat( text_color ) )
     {
-      text_formatted.prepend( QString( "<font color=%1>" ).arg( text_color ) );
+      text_formatted.prepend( QString( "<font color=%1>" ).arg( text_color.name() ) );
       text_formatted.append( QLatin1String( "</font>" ) );
     }
   }
@@ -114,11 +114,23 @@ QString GuiChatMessage::formatMessage( const User& u, const ChatMessage& cm, VNu
     append_message_to_previous = false;
     user_name = QString( "%1 from %2" ).arg( Settings::instance().autoresponderName(), user_name );
   }
-  QString html_user_name = user_name.isEmpty() ? user_name : QString( "<font color=%1><b>%2</b></font>%3%4" )
-                                                               .arg( Settings::instance().chatUseColoredUserNames() ? u.color() : Settings::instance().chatDefaultUserNameColor(),
-                                                                     user_name,
-                                                                     (Settings::instance().showTextInModeRTL() ? QString( "" ) : QString( ":" ) ),
-                                                                     (use_chat_compact && !Settings::instance().showTextInModeRTL()) ? QString( " " ) : QLatin1String( "<br>" ) );
+
+  QString html_user_name = "";
+  if( !user_name.isEmpty() )
+  {
+    if( Settings::instance().chatUseColoredUserNames() )
+    {
+      if( Bee::isColorVisibleInChat( QColor( u.color() ) ) )
+        html_user_name = QString( "<font color=%1><b>%2</b></font>" ).arg( u.color(), user_name );
+      else
+        html_user_name = QString( "<font color=%1><b>%2</b></font>" ).arg( Settings::instance().chatDefaultUserNameColor(), user_name );
+    }
+    else
+      html_user_name = QString( "<b>%1</b>" ).arg( user_name );
+
+    if( !Settings::instance().showTextInModeRTL() )
+      html_user_name.append( QString( ":%1" ).arg( use_chat_compact ? QString( " " ) : QLatin1String( "<br>" ) ) );
+  }
 
   if( Settings::instance().showTextInModeRTL() )
     html_message += QString( "%1 %2 %3" ).arg( html_user_name, html_date_time_stamp, text_formatted );
@@ -164,6 +176,7 @@ QString GuiChatMessage::formatSystemMessage( const ChatMessage& cm, VNumber last
                            .arg( Settings::instance().chatSystemTextColor(),
                                  date_time_stamp.isEmpty() ? date_time_stamp : QString( "(%1) " ).arg( date_time_stamp ),
                                  cm.message() );
+
   if( cm.isImportant() )
   {
     html_message.prepend( textImportantPrefix() );

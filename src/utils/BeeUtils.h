@@ -60,6 +60,7 @@ namespace Bee
   QString lowerFirstLetter( const QString& );
   QColor invertColor( const QColor& );
   bool isColorNear( const QColor&, const QColor& );
+  bool isColorVisibleInChat( const QColor& );
   QString removeHtmlTags( const QString& );
   QString replaceHtmlSpecialCharacters( const QString& );
   inline int toLittleEndianFromBig( int );

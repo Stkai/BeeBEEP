@@ -215,7 +215,7 @@ void GuiSavedChat::saveHistoryAs()
   if( file_name.isEmpty() )
     return;
 
-  if( !file_name.toLower().endsWith( QLatin1String( ".pdf" ) ) )
+  if( !file_name.endsWith( QLatin1String( ".pdf" ), Qt::CaseInsensitive ) )
     file_name.append( QLatin1String( ".pdf" ) );
 
   QPrinter printer;

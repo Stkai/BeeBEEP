@@ -619,11 +619,10 @@ bool GuiChat::setChat( const Chat& c )
     saved_chat_url.setScheme( "beeshowsavedchat" );
     QString limit_reached_text = "";
     limit_reached_text += QString( "<p><font color=%1><i>... %2 ...<br>... %3, %4 ...</i></font></p>" )
-                            .arg( Settings::instance().chatSystemTextColor() )
-                            .arg( tr( "only the last %1 messages are shown" )
-                            .arg( Settings::instance().chatMessagesToShow() ) )
-                            .arg( tr( "maximum number of messages to show reached" ) )
-                            .arg( tr( "open %1 to read them all" ).arg( QString( "<a href='%1'>%2</a>" ).arg( saved_chat_url.toString() ).arg( tr( "the saved chat" ) ) ) );
+                            .arg( Settings::instance().chatSystemTextColor(),
+                                  tr( "only the last %1 messages are shown" ).arg( Settings::instance().chatMessagesToShow() ),
+                                  tr( "maximum number of messages to show reached" ),
+                                  tr( "open %1 to read them all" ).arg( QString( "<a href='%1'>%2</a>" ).arg( saved_chat_url.toString(), tr( "the saved chat" ) ) ) );
     if( !html_text.isEmpty() )
       html_text.prepend( limit_reached_text );
     else
@@ -847,7 +846,7 @@ void GuiChat::saveChat()
   if( file_name.isEmpty() )
     return;
 
-  if( !file_name.toLower().endsWith( QLatin1String( ".pdf" ) ) )
+  if( !file_name.endsWith( QLatin1String( ".pdf" ), Qt::CaseInsensitive ) )
     file_name.append( QLatin1String( ".pdf" ) );
 
   QPrinter printer;
