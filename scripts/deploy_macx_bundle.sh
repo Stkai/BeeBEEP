@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #
 # This file is part of BeeBEEP.
 #
@@ -21,7 +21,7 @@
 #
 ######################################################################
 
-BEEBEEP_VERSION=5.8.6
+BEEBEEP_VERSION=5.8.5-1535
 
 echo "Making BeeBEEP Bundle version ${BEEBEEP_VERSION}"
 
@@ -45,7 +45,6 @@ echo "Done"
 
 # delete previous bundle dmg
 printf "Delete previous bundle ... "
-rm -f BUNDLE_DMG
 rm -f *.dmg
 echo "Done"
 
@@ -102,13 +101,24 @@ cp $SOURCE_DIR/test/*.dylib $BUNDLE_FOLDER/Contents/PlugIns/.
 echo "Done"
 
 #mac deploy frameworks
-printf "MacOS X deploy and create DMG file ... "
-$MACDEPLOY_APP $BUNDLE_FOLDER -dmg
+printf "MacOS X deploy and create APP file ... "
+$MACDEPLOY_APP $BUNDLE_FOLDER -dmg -always-overwrite
 echo "Done"
 
-printf "Renaming DMG with version ${BEEBEEP_VERSION} ... "
-mv BeeBEEP.dmg beebeep-${BEEBEEP_VERSION}.dmg
+#sign the APP
+printf "Sign the APP ..."
+codesign --deep --timestamp --options runtime -s "Developer ID Application: Marco Mastroddi (3F9FLBSUAJ)" $BUNDLE_FOLDER
 echo "Done"
+
+#create DMG source folder
+rm -rf *.dmg
+printf "Create DMG ..."
+rm -rf macosx_dmg
+mkdir macosx_dmg
+ln -s /Applications macosx_dmg
+cp -a $BUNDLE_FOLDER macosx_dmg/
+hdiutil create -volname "BeeBEEP ${BEEBEEP_VERSION}" -srcfolder macosx_dmg -ov -format UDZO beebeep-${BEEBEEP_VERSION}.dmg
+codesign --deep --timestamp --options runtime -s "Developer ID Application: Marco Mastroddi (3F9FLBSUAJ)" beebeep-${BEEBEEP_VERSION}.dmg
 
 printf "Making alzo ZIP version ... "
 ditto -c -k --sequesterRsrc --keepParent $BUNDLE_FOLDER beebeep-${BEEBEEP_VERSION}-osx.zip
