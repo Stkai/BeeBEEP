@@ -92,7 +92,7 @@ echo "Done"
 printf "Copy translations ... "
 cp $SOURCE_DIR/locale/*.qm $BUNDLE_FOLDER/Contents/Resources/.
 printf "and removing xx locale..."
-rm $BUNDLE_FOLDER/Contents/Resources/beebeep_xx.qm
+rm -f $BUNDLE_FOLDER/Contents/Resources/beebeep_xx.qm
 echo "Done"
 
 #copy plugins
