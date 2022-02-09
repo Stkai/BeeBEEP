@@ -1355,7 +1355,7 @@ void GuiChat::sendTextCode()
     if( text_code.isEmpty() )
       return;
     text_code.append( '\n' );
-    if( gct.sendAsFile() && beeCore->isFileTransferActive() )
+    if( gct.sendAsFile() )
     {
       QString folder_path = Settings::instance().createTextCodeAsTemporaryFile() ? Settings::instance().cacheFolder() : Settings::instance().downloadDirectory();
       QString file_initial_path = folder_path +

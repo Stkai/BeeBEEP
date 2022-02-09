@@ -1192,7 +1192,7 @@
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="149"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1169"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1168"/>
         <source>Find text in chat</source>
         <translation>Намерете текст в чата</translation>
     </message>
@@ -1365,83 +1365,83 @@ Download for free and install the version with this feature from the %1 website.
         <translation>Отваряне на гласово съобщение</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="625"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="624"/>
         <source>maximum number of messages to show reached</source>
         <translation>достигнат максимален брой съобщения за показване</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="818"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="817"/>
         <source>You must close and reopen this window to see the changes applied.</source>
         <translation>Трябва да затворите и отворите отново този прозорец, за да видите приложените промени.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="845"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="844"/>
         <source>Please select a file to save all the messages of the chat.</source>
         <translation>Моля, изберете файл, за да запазите всички съобщения от чата.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="957"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="956"/>
         <source>You are trying to send %1 files simultaneously but the maximum allowed is %2.</source>
         <translation>Опитвате се да изпратите %1 файлове едновременно, но максимално разрешеното е %2.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="966"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="965"/>
         <source>Do you want to send %1 %2 to the members of this chat?</source>
         <translation>Искате ли да изпратите %1 %2 на членовете на този чат?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1067"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1066"/>
         <source>Spell checking is enabled</source>
         <translation>Проверката на правописа е активирана</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1074"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1098"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1073"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1097"/>
         <source>There is not a valid dictionary</source>
         <translation>Няма валиден речник</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1091"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1090"/>
         <source>Word completer is enabled</source>
         <translation>Завършването на дума е активирано</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1093"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1092"/>
         <source>Word completer is disabled</source>
         <translation>Завършването на дума е деактивирано</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1207"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1206"/>
         <source>%1 not found in chat.</source>
         <translation>%1 не е намерен в чата.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1265"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1264"/>
         <source>Do you want to restore the default font?</source>
         <translation>Искате ли да възстановите шрифта по подразбиране?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1273"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1272"/>
         <source>Ready.</source>
         <translation>Готов.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1289"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1288"/>
         <source>Do you want to send a screenshot?</source>
         <translation>Искате ли да изпратите екранна снимка?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1289"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1288"/>
         <source>Yes and hide this chat</source>
         <translation>Да и скрий този чат</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1338"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1337"/>
         <source>Url copied to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1069"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1068"/>
         <source>Spell checking is disabled</source>
         <translation>Проверката на правописа е деактивирана</translation>
     </message>
@@ -1471,64 +1471,64 @@ Download for free and install the version with this feature from the %1 website.
         <translation>Напишете съобщение до %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="866"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="865"/>
         <source>%1: save completed.</source>
         <translation>%1: записването е завършено.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="818"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="866"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="958"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="817"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="865"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="957"/>
         <source>Ok</source>
         <translation>Добре</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="626"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="625"/>
         <source>open %1 to read them all</source>
         <translation>отворете %1, за да ги прочетете всички</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="626"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="625"/>
         <source>the saved chat</source>
         <translation>запазеният чат</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="913"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1380"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="912"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1379"/>
         <source>Unable to save temporary file: %1</source>
         <translation>Временният файл не може да бъде запазен: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="967"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="966"/>
         <source>file</source>
         <translation>файл</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="967"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="966"/>
         <source>files</source>
         <translation>файлове</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="968"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1265"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1289"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="967"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1264"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1288"/>
         <source>Yes</source>
         <translation>Да</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="968"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1265"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1289"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="967"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1264"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1288"/>
         <source>No</source>
         <translation>Не</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1051"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1050"/>
         <source>Use key Return to send message</source>
         <translation>Използвайте клавиша Назад, за да изпратите съобщение</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1053"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1052"/>
         <source>Use key Return to make a carriage return</source>
         <translation>Използвайте клавиш Назад, за да върнете каретата</translation>
     </message>
@@ -1760,12 +1760,12 @@ Please select a different name.</source>
 <context>
     <name>GuiCreateTextFile</name>
     <message>
-        <location filename="../src/desktop/GuiCreateTextFile.cpp" line="35"/>
+        <location filename="../src/desktop/GuiCreateTextFile.cpp" line="36"/>
         <source>Create text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateTextFile.cpp" line="39"/>
+        <location filename="../src/desktop/GuiCreateTextFile.cpp" line="40"/>
         <source>For example:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6521,7 +6521,7 @@ Please select a different name.</source>
 <context>
     <name>Not available</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="1072"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="1045"/>
         <source>n.a.</source>
         <translation>n.a.</translation>
     </message>
@@ -6588,32 +6588,32 @@ Please select a different name.</source>
         <translation>Щракнете, за да отворите чата с всички локални потребители</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="723"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="696"/>
         <source>%1 is %2</source>
         <translation>%1 е %2</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="723"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="696"/>
         <source>You are %1</source>
         <translation>Вие сте %1</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="741"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="714"/>
         <source>Workgroups</source>
         <translation>Работни групи</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="751"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="724"/>
         <source>Last update</source>
         <translation>Последна актуализация</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="756"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="729"/>
         <source>Last connection</source>
         <translation>Последна връзка</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/utils/BeeUtils.cpp" line="760"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="733"/>
         <source>%n unsent message(s)</source>
         <translation>
             <numerusform>%n неизпратено съобщение</numerusform>
@@ -6621,38 +6621,38 @@ Please select a different name.</source>
         </translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="777"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="750"/>
         <source>Today is %1&apos;s birthday</source>
         <translation>Днес е рожденият ден на %1</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="779"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="752"/>
         <source>Tomorrow is %1&apos;s birthday</source>
         <translation>Утре е рожденият ден на %1</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="781"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="754"/>
         <source>%1&apos;s birthday is in %2 days</source>
         <translation>Рожденият ден на %1 е след %2 дни</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="783"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="756"/>
         <source>Yesterday was %1&apos;s birthday</source>
         <translation>Вчера беше рожденият ден на %1</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="790"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="763"/>
         <source>Happy Birthday to you!</source>
         <translation>Честит рожден ден!</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="816"/>
-        <location filename="../src/utils/BeeUtils.cpp" line="840"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="789"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="813"/>
         <source>and</source>
         <translation>и</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="845"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="818"/>
         <source>and %1 others</source>
         <translation>и %1 други</translation>
     </message>

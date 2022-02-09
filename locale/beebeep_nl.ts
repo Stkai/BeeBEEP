@@ -1264,7 +1264,7 @@
     </message>
     <message>
         <location filename="../src/desktop/GuiChat.cpp" line="149"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1169"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1168"/>
         <source>Find text in chat</source>
         <translation>Vind text in chat</translation>
     </message>
@@ -1437,93 +1437,93 @@ Download gratis en installeer de versie met deze functie van de %1 website.</tra
         <translation>Open spraakbericht</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="625"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="624"/>
         <source>maximum number of messages to show reached</source>
         <translation>Het maximum aantal te tonen berichten bereikt</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="818"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="817"/>
         <source>You must close and reopen this window to see the changes applied.</source>
         <translation>Dit venster sluiten en opnieuw openen om de aangebrachte wijzigingen te zien.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="845"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="844"/>
         <source>Please select a file to save all the messages of the chat.</source>
         <translation>Selecteer een bestand om alle berichten van de chat op te slaan.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="957"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="956"/>
         <source>You are trying to send %1 files simultaneously but the maximum allowed is %2.</source>
         <translation>Je probeert om %1 bestanden tegelijkertijd te verzenden maar het maximale aantal is %2.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="966"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="965"/>
         <source>Do you want to send %1 %2 to the members of this chat?</source>
         <translation>Wil je %1 %2 zenden naar leden van deze chat?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1051"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1050"/>
         <source>Use key Return to send message</source>
         <translation>Gebruik enter toets om bericht te verzenden</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1053"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1052"/>
         <source>Use key Return to make a carriage return</source>
         <translation>Gebruik enter toest</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1067"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1066"/>
         <source>Spell checking is enabled</source>
         <translation>Spellingscontrole is actief</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1074"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1098"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1073"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1097"/>
         <source>There is not a valid dictionary</source>
         <translation>Er is geen geldige map</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1207"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1206"/>
         <source>%1 not found in chat.</source>
         <translation>%1 niet gevonden in chat.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1265"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1264"/>
         <source>Do you want to restore the default font?</source>
         <translation>Wil je de standaard lettertype herstellen?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1273"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1272"/>
         <source>Ready.</source>
         <translation>Klaar.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1289"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1288"/>
         <source>Do you want to send a screenshot?</source>
         <translation>Wil je een schermafdruk verzenden?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1289"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1288"/>
         <source>Yes and hide this chat</source>
         <translation>Ja en verberg deze chat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1338"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1337"/>
         <source>Url copied to clipboard</source>
         <translation>URL gekopieerd naar klembord</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1069"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1068"/>
         <source>Spell checking is disabled</source>
         <translation>Spellingscontrole is uitgeschakeld</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1091"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1090"/>
         <source>Word completer is enabled</source>
         <translation>Automatische tekstaanvulling is ingeschakeld</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1093"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1092"/>
         <source>Word completer is disabled</source>
         <translation>Automatische tekstaanvulling is uitgeschakeld</translation>
     </message>
@@ -1565,54 +1565,54 @@ Download gratis en installeer de versie met deze functie van de %1 website.</tra
         <translation type="obsolete">Selecteer aub een bestand om de chatberichten in op te slaan.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="866"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="865"/>
         <source>%1: save completed.</source>
         <translation>%1: opslaan voltooid.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="818"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="866"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="958"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="817"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="865"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="957"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="626"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="625"/>
         <source>open %1 to read them all</source>
         <translation>open %1 om alles te lezen</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="626"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="625"/>
         <source>the saved chat</source>
         <translation>de opgeslagen chat</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="913"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1380"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="912"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1379"/>
         <source>Unable to save temporary file: %1</source>
         <translation>Kan tijdelijk bestand: %1 niet opslaan</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="967"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="966"/>
         <source>file</source>
         <translation>bestand</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="967"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="966"/>
         <source>files</source>
         <translation>bestanden</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="968"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1265"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1289"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="967"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1264"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1288"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="968"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1265"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1289"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="967"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1264"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1288"/>
         <source>No</source>
         <translation>Nee</translation>
     </message>
@@ -1852,12 +1852,12 @@ Gebruik aub een andere naam.</translation>
 <context>
     <name>GuiCreateTextFile</name>
     <message>
-        <location filename="../src/desktop/GuiCreateTextFile.cpp" line="35"/>
+        <location filename="../src/desktop/GuiCreateTextFile.cpp" line="36"/>
         <source>Create text</source>
         <translation>Tekst maken</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiCreateTextFile.cpp" line="39"/>
+        <location filename="../src/desktop/GuiCreateTextFile.cpp" line="40"/>
         <source>For example:</source>
         <translation>Als voorbeeld:</translation>
     </message>
@@ -6968,7 +6968,7 @@ Gebruik aub een andere naam.</translation>
 <context>
     <name>Not available</name>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="1072"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="1045"/>
         <source>n.a.</source>
         <translation>n.a.</translation>
     </message>
@@ -7043,12 +7043,12 @@ Gebruik aub een andere naam.</translation>
         <translation>Klik om chat te openen met alle lokale gebruikers</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="723"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="696"/>
         <source>%1 is %2</source>
         <translation>%1 is %2</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="723"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="696"/>
         <source>You are %1</source>
         <translation>U bent %1</translation>
     </message>
@@ -7061,22 +7061,22 @@ Gebruik aub een andere naam.</translation>
         <translation type="obsolete">Laatste verbinding</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="741"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="714"/>
         <source>Workgroups</source>
         <translation>Werkgroepen</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="751"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="724"/>
         <source>Last update</source>
         <translation>Laatste update</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="756"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="729"/>
         <source>Last connection</source>
         <translation>Laatste verbinding</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/utils/BeeUtils.cpp" line="760"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="733"/>
         <source>%n unsent message(s)</source>
         <translation>
             <numerusform>%n niet verzonden bericht</numerusform>
@@ -7084,38 +7084,38 @@ Gebruik aub een andere naam.</translation>
         </translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="777"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="750"/>
         <source>Today is %1&apos;s birthday</source>
         <translation>Verjaardag van %1 is vandaag</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="779"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="752"/>
         <source>Tomorrow is %1&apos;s birthday</source>
         <translation>Morgen is verjaardag van %1</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="781"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="754"/>
         <source>%1&apos;s birthday is in %2 days</source>
         <translation>%1 zijn verjaardag is over %2 dagen</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="783"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="756"/>
         <source>Yesterday was %1&apos;s birthday</source>
         <translation>Gisteren was de verjaardag van %1</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="790"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="763"/>
         <source>Happy Birthday to you!</source>
         <translation>Van harte gefeliciteerd!</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="816"/>
-        <location filename="../src/utils/BeeUtils.cpp" line="840"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="789"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="813"/>
         <source>and</source>
         <translation>en</translation>
     </message>
     <message>
-        <location filename="../src/utils/BeeUtils.cpp" line="845"/>
+        <location filename="../src/utils/BeeUtils.cpp" line="818"/>
         <source>and %1 others</source>
         <translation>en %1 anderen</translation>
     </message>

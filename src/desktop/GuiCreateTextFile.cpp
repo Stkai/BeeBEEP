@@ -23,6 +23,7 @@
 
 #include "BeeUtils.h"
 #include "Config.h"
+#include "Core.h"
 #include "GuiCreateTextFile.h"
 #include "IconManager.h"
 #include "Settings.h"
@@ -72,10 +73,10 @@ QString GuiCreateTextFile::fileSuffix() const
 void GuiCreateTextFile::loadSettings()
 {
   m_sendAsFile = false;
-  if( Settings::instance().disableFileTransfer() || !Settings::instance().enableFileTransfer() )
-    mp_pbSendAsFile->setEnabled( false );
-  else
+  if( beeCore->isFileTransferActive() )
     mp_pbSendAsFile->setEnabled( true );
+  else
+    mp_pbSendAsFile->setEnabled( false );
 
   mp_leFileSuffix->setText( Settings::instance().createTextCodeFileSuffix() );
   mp_cbUseFileTmp->setChecked( Settings::instance().createTextCodeAsTemporaryFile() );

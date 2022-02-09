@@ -104,6 +104,7 @@ public:
   void sendBuzzToUser( VNumber );
   void removeSavedChat( const QString& );
   void linkSavedChat( const QString& from_saved_chat_name, const QString& to_saved_chat_name, bool prepend_to_existing_saved_chat );
+  bool areAllUsersConnectedInChat( VNumber ) const;
 
   /* CoreFileTransfer */
   bool sendFile( VNumber user_id, const QString& file_path, const QString& share_folder, bool to_share_box, VNumber chat_id );

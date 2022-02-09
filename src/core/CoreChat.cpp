@@ -1086,3 +1086,24 @@ bool Core::sendHelpMessageToUser( VNumber user_id )
     return false;
   }
 }
+
+bool Core::areAllUsersConnectedInChat( VNumber chat_id ) const
+{
+  if( !isConnected() )
+    return false;
+
+  Chat c = ChatManager::instance().chat( chat_id );
+  if( !c.isValid() )
+  {
+    qWarning() << "Invalid chat id in Core::areAllUsersConnectedInChat(...)";
+    return false;
+  }
+
+  foreach( VNumber user_id, c.usersId() )
+  {
+    if( !isUserConnected( user_id ) )
+      return false;
+  }
+
+  return true;
+}

@@ -356,6 +356,9 @@ bool Core::isUserConnected( VNumber user_id ) const
 
 bool Core::isUserConnected( const NetworkAddress& na ) const
 {
+  if( !isConnected() )
+    return false;
+
   foreach( Connection* c, m_connections )
   {
     if( c->networkAddress() == na && (c->isConnecting() || c->isConnected()) )
@@ -371,6 +374,9 @@ bool Core::isUserConnected( const NetworkAddress& na ) const
 
 bool Core::areUsersConnected( const QList<VNumber>& users_id ) const
 {
+  if( !isConnected() )
+    return false;
+
   foreach( VNumber user_id, users_id )
   {
     if( !isUserConnected( user_id ) )
