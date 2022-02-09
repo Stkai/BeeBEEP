@@ -113,6 +113,7 @@ AllowOnlyHostAddressesFromHostsIni=[true/false] if true BeeBEEP accepts connecti
 ConnectionKeyExchangeMethod=[integer] 0: auto [5.8.3]
                                       1: only ECDH with NIST K283 curve (128 bit)
 EnableReceivingHelpMessages=[true/false] if true BeeBEEP accepts help request messages (default=false) [5.8.5]
+UseKeepAliveOptionInSocket=[true/false] if true BeeBEEP uses KeepAlive option in sockets (default=false) [5.8.5]
 
 
 [Groups] (obsolete)

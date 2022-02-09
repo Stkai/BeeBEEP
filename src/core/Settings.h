@@ -148,6 +148,7 @@ public:
   inline bool isLocalHardwareAddressToSkip( const QString& ) const;
 
   inline bool useIPv6() const;
+  inline bool useKeepAliveOptionInSocket() const;
   QHostAddress hostAddressToListen();
   inline const QHostAddress& multicastGroupAddress() const;
   QHostAddress defaultMulticastGroupAddress() const;
@@ -729,6 +730,7 @@ private:
   bool m_disableDesktopSharing;
   int m_userRecognitionMethod;
   bool m_useOnlyMulticast;
+  bool m_useKeepAliveOptionInSocket;
 
   bool m_canAddMembersToGroup;
   bool m_canRemoveMembersFromGroup;
@@ -1259,6 +1261,7 @@ inline bool Settings::disableSystemProxyForConnections() const { return m_disabl
 inline void Settings::setUseDefaultMulticastGroupAddress( bool new_value ) { m_useDefaultMulticastGroupAddress = new_value; }
 inline bool Settings::useDefaultMulticastGroupAddress() const { return m_useDefaultMulticastGroupAddress; }
 inline bool Settings::useIPv6() const { return m_useIPv6; }
+inline bool Settings::useKeepAliveOptionInSocket() const { return m_useKeepAliveOptionInSocket; }
 inline const QHostAddress& Settings::multicastGroupAddress() const { return m_multicastGroupAddress; }
 inline void Settings::setIpMulticastTtl( int new_value ) { m_ipMulticastTtl = new_value; }
 inline int Settings::ipMulticastTtl() const { return m_ipMulticastTtl; }

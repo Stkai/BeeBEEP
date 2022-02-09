@@ -36,8 +36,14 @@ ConnectionSocket::ConnectionSocket( QObject* parent )
     m_checkConnectionTimeout( false ), m_tickCounter( 0 ), m_isAborted( false ), m_datastreamVersion( 0 ),
     m_isTestConnection( false ), m_serverPort( 0 ), m_isEncrypted( true ), m_isCompressed( false )
 {
+  if( Settings::instance().useKeepAliveOptionInSocket() )
+    setSocketOption( QAbstractSocket::KeepAliveOption, 1 );
+  else
+    setSocketOption( QAbstractSocket::KeepAliveOption, 0 );
   if( Settings::instance().useLowDelayOptionOnSocket() )
     setSocketOption( QAbstractSocket::LowDelayOption, 1 );
+  else
+    setSocketOption( QAbstractSocket::LowDelayOption, 0 );
   if( Settings::instance().disableSystemProxyForConnections() )
     setProxy( QNetworkProxy::NoProxy );
   m_pingByteArraySize = Protocol::instance().pingMessage().size() + 10;

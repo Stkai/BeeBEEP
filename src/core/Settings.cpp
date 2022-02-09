@@ -149,6 +149,7 @@ Settings::Settings()
   m_rcFileExists = false;
 
   m_connectionKeyExchangeMethod = ConnectionKeyExchangeAuto;
+  m_useKeepAliveOptionInSocket = false;
   /* Default RC end */
 
   m_emoticonSizeInEdit = 16;
@@ -560,6 +561,7 @@ bool Settings::createDefaultRcFile()
     sets->setValue( "ConnectionKeyExchangeMethod", m_connectionKeyExchangeMethod );
     sets->setValue( "TickIntervalChatAutoSave", m_tickIntervalChatAutoSave );
     sets->setValue( "EnableReceivingHelpMessages", m_enableReceivingHelpMessages );
+    sets->setValue( "UseKeepAliveOptionInSocket", m_useKeepAliveOptionInSocket );
     sets->endGroup();
     sets->sync();
     qDebug() << "RC default configuration file created in" << qPrintable( Bee::convertToNativeFolderSeparator( sets->fileName() ) );
@@ -623,6 +625,7 @@ void Settings::loadRcFile()
   m_preventMultipleConnectionsFromSingleHostAddress = sets->value( "PreventMultipleConnectionsFromSingleHostAddress", m_preventMultipleConnectionsFromSingleHostAddress ).toBool();
   m_preferredSubnets = sets->value( "PreferredSubnets", m_preferredSubnets ).toString();
   m_useIPv6 = sets->value( "UseIPv6", m_useIPv6 ).toBool();
+  m_useKeepAliveOptionInSocket = sets->value( "UseKeepAliveOptionInSocket", m_useKeepAliveOptionInSocket ).toBool();
   QString multicast_group_address = sets->value( "MulticastGroupAddress", "" ).toString();
   if( multicast_group_address.isEmpty() )
     m_multicastGroupAddress = QHostAddress();

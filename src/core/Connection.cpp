@@ -31,7 +31,6 @@
 Connection::Connection( QObject *parent )
   : ConnectionSocket( parent )
 {
-  setSocketOption( QAbstractSocket::KeepAliveOption, 1 );
   connect( this, SIGNAL( dataReceived( const QByteArray& ) ), this, SLOT( parseData( const QByteArray& ) ) );
   connect( this, SIGNAL( pingRequest() ), this, SLOT( sendPing() ) );
 }
