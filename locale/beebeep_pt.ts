@@ -7126,32 +7126,32 @@ Selecione um nome diferente.</translation>
         <translation type="obsolete">Tdos Usuários</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="634"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="640"/>
         <source>The connection to %1 was not successful.</source>
         <translation>Não foi possivel realizar a conexão para %1</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="726"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="732"/>
         <source>The tested network address %1 is not present among the available addresses of the network interface to which the connection has been made.</source>
         <translation>O endereçco de rede %1 não faz parte da lista de endereços do range configurado na interface de conexão.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="729"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="735"/>
         <source>The connection to host address %1 was successful.</source>
         <translation>Conexão com o endereçco %1 realizada com sucésso.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="735"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="741"/>
         <source>The port tested by the connection is %1 but the one that answered is %2.</source>
         <translation>A porta testada para a conexão é %1, porém a conectada foi %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="739"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="745"/>
         <source>The connection to port %1 was successful.</source>
         <translation>Conexão com a porta %1 realizada com sucesso.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="747"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="753"/>
         <source>Unable to complete the test with an invalid network address.</source>
         <translation>Não foi possivel a conclusão do teste, o endereço de rede informado é inválido.</translation>
     </message>
@@ -7235,7 +7235,7 @@ Selecione um nome diferente.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2522"/>
+        <location filename="../src/core/Settings.cpp" line="2525"/>
         <source>Autoresponder</source>
         <translation>Responder automaticamente</translation>
     </message>

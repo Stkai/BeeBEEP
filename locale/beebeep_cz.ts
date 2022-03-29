@@ -7143,32 +7143,32 @@ Vyberte prosím jiné jméno.</translation>
         <translation type="obsolete">Všichni uživatelé</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="634"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="640"/>
         <source>The connection to %1 was not successful.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="726"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="732"/>
         <source>The tested network address %1 is not present among the available addresses of the network interface to which the connection has been made.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="729"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="735"/>
         <source>The connection to host address %1 was successful.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="735"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="741"/>
         <source>The port tested by the connection is %1 but the one that answered is %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="739"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="745"/>
         <source>The connection to port %1 was successful.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="747"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="753"/>
         <source>Unable to complete the test with an invalid network address.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7252,7 +7252,7 @@ Vyberte prosím jiné jméno.</translation>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2522"/>
+        <location filename="../src/core/Settings.cpp" line="2525"/>
         <source>Autoresponder</source>
         <translation type="unfinished"></translation>
     </message>

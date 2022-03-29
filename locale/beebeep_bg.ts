@@ -6747,32 +6747,32 @@ Please select a different name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="634"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="640"/>
         <source>The connection to %1 was not successful.</source>
         <translation>Връзката с %1 не беше успешна.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="726"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="732"/>
         <source>The tested network address %1 is not present among the available addresses of the network interface to which the connection has been made.</source>
         <translation>Тестваният мрежов адрес %1 не присъства сред наличните адреси на мрежовия интерфейс, към който е осъществена връзка.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="729"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="735"/>
         <source>The connection to host address %1 was successful.</source>
         <translation>Връзката с хост адрес %1 беше успешна.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="735"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="741"/>
         <source>The port tested by the connection is %1 but the one that answered is %2.</source>
         <translation>Портът, тестван от връзката, е %1, но отговорилият е %2.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="739"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="745"/>
         <source>The connection to port %1 was successful.</source>
         <translation>Връзката с порт %1 беше успешна.</translation>
     </message>
     <message>
-        <location filename="../src/core/ConnectionSocket.cpp" line="747"/>
+        <location filename="../src/core/ConnectionSocket.cpp" line="753"/>
         <source>Unable to complete the test with an invalid network address.</source>
         <translation>Не може да завърши теста с невалиден мрежов адрес.</translation>
     </message>
@@ -6856,7 +6856,7 @@ Please select a different name.</source>
 <context>
     <name>Settings</name>
     <message>
-        <location filename="../src/core/Settings.cpp" line="2522"/>
+        <location filename="../src/core/Settings.cpp" line="2525"/>
         <source>Autoresponder</source>
         <translation>Автоматичен отговор</translation>
     </message>
