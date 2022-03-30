@@ -1529,8 +1529,8 @@ void Settings::loadCommonSettings( QSettings* user_ini )
   m_promptOnCloseEvent = commonValue( system_rc, user_ini, "PromptOnCloseEvent", m_promptOnCloseEvent ).toBool();
   m_showUserStatusBackgroundColor = commonValue( system_rc, user_ini, "ShowUserStatusBackgroundColor", false ).toBool();
   m_showUserStatusDescription = commonValue( system_rc, user_ini, "ShowUserStatusDescription", true ).toBool();
-  m_shortcuts = commonValue( system_rc, user_ini, "Shortcuts", QStringList() ).toStringList();
-  m_useShortcuts = commonValue( system_rc, user_ini, "UseShortcuts", false ).toBool();
+  m_customShortcuts = commonValue( system_rc, user_ini, "Shortcuts", QStringList() ).toStringList();
+  m_useCustomShortcuts = commonValue( system_rc, user_ini, "UseShortcuts", false ).toBool();
   m_useNativeDialogs = commonValue( system_rc, user_ini, "UseNativeFileDialogs", m_useNativeDialogs ).toBool();
   m_homeShowMessageTimestamp = commonValue( system_rc, user_ini, "ShowActivitiesTimestamp", false ).toBool();
   m_homeBackgroundColor = commonValue( system_rc, user_ini, "HomeBackgroundColor", m_homeBackgroundColor ).toString();
@@ -1923,8 +1923,8 @@ void Settings::save()
   sets->setValue( "PromptOnCloseEvent", m_promptOnCloseEvent );
   sets->setValue( "ShowUserStatusBackgroundColor", m_showUserStatusBackgroundColor );
   sets->setValue( "ShowUserStatusDescription", m_showUserStatusDescription );
-  sets->setValue( "Shortcuts", m_shortcuts );
-  sets->setValue( "UseShortcuts", m_useShortcuts );
+  sets->setValue( "Shortcuts", m_customShortcuts );
+  sets->setValue( "UseShortcuts", m_useCustomShortcuts );
   sets->setValue( "UseNativeFileDialogs", m_useNativeDialogs );
   sets->setValue( "ShowActivitiesTimestamp", m_homeShowMessageTimestamp );
   sets->setValue( "HomeBackgroundColor", m_homeBackgroundColor );

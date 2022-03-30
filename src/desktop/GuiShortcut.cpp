@@ -59,8 +59,8 @@ void GuiShortcut::enableShortcuts( bool are_enabled )
 
 void GuiShortcut::loadShortcuts()
 {
-  mp_cbUseShortcuts->setChecked( Settings::instance().useShortcuts() );
-  enableShortcuts( Settings::instance().useShortcuts() );
+  mp_cbUseShortcuts->setChecked( Settings::instance().useCustomShortcuts() );
+  enableShortcuts( Settings::instance().useCustomShortcuts() );
 
   mp_twShortcuts->clear();
 
@@ -84,7 +84,7 @@ void GuiShortcut::loadShortcuts()
 
 void GuiShortcut::saveShortcuts()
 {
-  Settings::instance().setUseShortcuts( mp_cbUseShortcuts->isChecked() );
+  Settings::instance().setUseCustomShortcuts( mp_cbUseShortcuts->isChecked() );
   int shortcut_type;
   QString s_key;
   QTreeWidgetItemIterator it( mp_twShortcuts );

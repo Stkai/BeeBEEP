@@ -1207,63 +1207,63 @@
 <context>
     <name>GuiChat</name>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="182"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="198"/>
         <source>Change font style</source>
         <translation>تغيير نمط الخط</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="183"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="199"/>
         <source>Change font color</source>
         <translation>تغيير لون الخط</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="127"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="143"/>
         <source>Change background color</source>
         <translation>تغيير لون الخلفية</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="184"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="200"/>
         <source>Filter message</source>
         <translation>فلترة الرسالة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="187"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="203"/>
         <source>Chat settings</source>
         <translation>إعدادات الدردشة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="188"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="204"/>
         <source>Spell checking</source>
         <translation>التدقيق الإملائي</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="190"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="206"/>
         <source>Word completer</source>
         <translation>مكمل الكلمة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="192"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="208"/>
         <source>Use Return key to send message</source>
         <translation>استخدم مفتاح العودة لإرسال رسالة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="149"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1168"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="165"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1255"/>
         <source>Find text in chat</source>
         <translation>أوجد نص في المحادثة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="195"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="211"/>
         <source>Send file</source>
         <translation>إرسال ملف</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="196"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="212"/>
         <source>Send folder</source>
         <translation>إرسال مجلد</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="136"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="152"/>
         <source>Save chat</source>
         <translation>حفظ المحادثة</translation>
     </message>
@@ -1274,306 +1274,306 @@ Download for free and install the version with this feature from the %1 website.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="130"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="146"/>
         <source>Select chat default text color</source>
         <translation>حدد لون النص الافتراضي للدردشة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="133"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="149"/>
         <source>Select chat system text color</source>
         <translation>حدد لون نص نظام الدردشة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="139"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="155"/>
         <source>Print...</source>
         <translation>طباعة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="146"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="162"/>
         <source>Clear system messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="152"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="168"/>
         <source>Restore the default font</source>
         <translation>استعادة الخط الافتراضي</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="162"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="338"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="178"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="354"/>
         <source>Share your desktop</source>
         <translation>مشاركة سطح المكتب الخاص بك</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="166"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="182"/>
         <source>Send a screenshot</source>
         <translation>إرسال لقطة شاشة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="197"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="213"/>
         <source>Send code</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="217"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="233"/>
         <source>Close</source>
         <translation type="unfinished">إغلاق</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="218"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="234"/>
         <source>Close chat window on sending message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="222"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="238"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="223"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="239"/>
         <source>Minimize chat window on sending message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="276"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="292"/>
         <source>You are not connected</source>
         <translation>أنت غير متصل</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="285"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="301"/>
         <source>Send messages is disabled</source>
         <translation>إرسال الرسائل معطل</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="292"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="308"/>
         <source>Chat with all users is disabled</source>
         <translation>تم تعطيل الدردشة مع جميع المستخدمين</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="299"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="315"/>
         <source>Private chat is disabled</source>
         <translation>تم تعطيل الدردشة الخاصة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="309"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="325"/>
         <source>You have left this chat</source>
         <translation>لقد تركت هذه الدردشة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="317"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="333"/>
         <source>Write a message to all user</source>
         <translation>اكتب رسالة لجميع المستخدمين</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="334"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="350"/>
         <source>Your desktop is shared with %1</source>
         <translation>تمت مشاركة سطح المكتب مع %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="348"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="364"/>
         <source>File transfer must be enabled to send voice messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="350"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="366"/>
         <source>Record voice message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="363"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="379"/>
         <source>Select all</source>
         <translation>تحديد الكل</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="367"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="383"/>
         <source>Copy URL to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="373"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="389"/>
         <source>Quote selected text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="375"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="391"/>
         <source>Open selected text as url</source>
         <translation>افتح النص المحدد كـ رابط</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="509"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="525"/>
         <source>Opening voice message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="558"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="574"/>
         <source>The loading of saved messages has not yet been completed.</source>
         <translation>لم يتم إكمال تحميل الرسائل المحفوظة.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="623"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="639"/>
         <source>only the last %1 messages are shown</source>
         <translation>يتم عرض رسائل %1 الأخيرة فقط</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1337"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1438"/>
         <source>Url copied to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="553"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="569"/>
         <source>Loading of saved messages...</source>
         <translation>جارٍ تحميل الرسائل المحفوظة ...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="624"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="640"/>
         <source>maximum number of messages to show reached</source>
         <translation>أقصى عدد من الرسائل لإظهار الوصول</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="817"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="833"/>
         <source>You must close and reopen this window to see the changes applied.</source>
         <translation>يجب عليك إغلاق وإعادة فتح هذه النافذة لرؤية التغييرات المطبقة.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="844"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="860"/>
         <source>Please select a file to save all the messages of the chat.</source>
         <translation>يرجى تحديد ملف لحفظ جميع رسائل الدردشة.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="956"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="972"/>
         <source>You are trying to send %1 files simultaneously but the maximum allowed is %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="965"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="981"/>
         <source>Do you want to send %1 %2 to the members of this chat?</source>
         <translation>هل تريد ان ترسل %1 %2 إلى أعضاء هذه الدردشة؟</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1066"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1153"/>
         <source>Spell checking is enabled</source>
         <translation>يتم تمكين التدقيق الإملائي</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1073"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1097"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1160"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1184"/>
         <source>There is not a valid dictionary</source>
         <translation>لا يوجد قاموس صالح</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1090"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1177"/>
         <source>Word completer is enabled</source>
         <translation>مكمل الكلمات ممكن</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1092"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1179"/>
         <source>Word completer is disabled</source>
         <translation>تم تعطيل مكمل الكلمات</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1206"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1307"/>
         <source>%1 not found in chat.</source>
         <translation>%1 غير موجود في الدردشة.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1264"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1365"/>
         <source>Do you want to restore the default font?</source>
         <translation>هل تريد استعادة الخط الافتراضي؟</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1272"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1373"/>
         <source>Ready.</source>
         <translation>جاهز</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1288"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1389"/>
         <source>Do you want to send a screenshot?</source>
         <translation>هل تريد إرسال لقطة شاشة؟</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1288"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1389"/>
         <source>Yes and hide this chat</source>
         <translation>نعم وإخفاء هذه الدردشة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1068"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1155"/>
         <source>Spell checking is disabled</source>
         <translation>التدقيق الإملائي معطل</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="143"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="159"/>
         <source>Clear messages</source>
         <translation>مسح الرسائل</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="365"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="381"/>
         <source>Copy to clipboard</source>
         <translation>نسخ إلى الحافظة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="425"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="441"/>
         <source>Show only messages in default chat</source>
         <translation>إظهار الرسائل فقط في الدردشة الافتراضية</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="469"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="485"/>
         <source>Last message %1</source>
         <translation>آخر رسالة %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="319"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="335"/>
         <source>Write a message to %1</source>
         <translation>اكتب رسالة إلى %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="865"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="881"/>
         <source>%1: save completed.</source>
         <translation>%1:اكتمل الحفظ.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="817"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="865"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="957"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="833"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="881"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="973"/>
         <source>Ok</source>
         <translation>موافق</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="625"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="641"/>
         <source>open %1 to read them all</source>
         <translation>فتح %1 لقراءة كل منهم</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="625"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="641"/>
         <source>the saved chat</source>
         <translation>الدردشة المحفوظة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="912"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1379"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="928"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1480"/>
         <source>Unable to save temporary file: %1</source>
         <translation>غير قادر على حفظ الملف المؤقت: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="966"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="982"/>
         <source>file</source>
         <translation>ملف</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="966"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="982"/>
         <source>files</source>
         <translation>ملفات</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="967"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1264"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1288"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="983"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1365"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1389"/>
         <source>Yes</source>
         <translation>نعم</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="967"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1264"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1288"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="983"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1365"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1389"/>
         <source>No</source>
         <translation>لا</translation>
     </message>
@@ -1582,12 +1582,12 @@ Download for free and install the version with this feature from the %1 website.
         <translation type="obsolete">لا تدعم مكتبة Qt لنظام التشغيل هذا السحب والإفلات للملفات. يجب عليك تحديد الملف المراد إرساله مرة أخرى.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1050"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1137"/>
         <source>Use key Return to send message</source>
         <translation>استخدم مفتاح العودة لإرسال رسالة</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1052"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1139"/>
         <source>Use key Return to make a carriage return</source>
         <translation>استخدام مفتاح العودة لجعل عودة النقل</translation>
     </message>
@@ -6930,6 +6930,11 @@ Please select a different name.</source>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="130"/>
         <source>Select the first available chat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/ShortcutManager.cpp" line="132"/>
+        <source>Find previous text in chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -36,7 +36,7 @@ public:
   enum ShortcutType { Empty, SendFile, ShowFileTransfers, SetFocusInMessageBox, MinimizeAllChats,
                       ShowNextUnreadMessage, SendChatMessage, Print, Broadcast, FindTextInChat,
                       FindNextTextInChat, SendFolder, ShowEmoticons, ShowAllChats, SendHelpMessage,
-                      SelectFirstChat, NumShortcut };
+                      SelectFirstChat, FindPreviousTextInChat, NumShortcut };
 
   void setDefaultShortcuts();
 

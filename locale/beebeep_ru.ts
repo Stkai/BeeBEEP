@@ -1204,194 +1204,194 @@
 <context>
     <name>GuiChat</name>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="182"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="198"/>
         <source>Change font style</source>
         <translation>Изменить стиль шрифта</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="183"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="199"/>
         <source>Change font color</source>
         <translation>Изменить цвет шрифта</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="127"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="143"/>
         <source>Change background color</source>
         <translation>Изменить цвет фона</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="184"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="200"/>
         <source>Filter message</source>
         <translation>Фильтр сообщений</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="187"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="203"/>
         <source>Chat settings</source>
         <translation>Настройки чата</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="188"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="204"/>
         <source>Spell checking</source>
         <translation>Проверка правописания</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="190"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="206"/>
         <source>Word completer</source>
         <translation>Завершение слов</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="192"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="208"/>
         <source>Use Return key to send message</source>
         <translation>Использовать клавишу Enter для отправки сообщения</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="149"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1168"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="165"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1255"/>
         <source>Find text in chat</source>
         <translation>Найти текст в чате</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="195"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="211"/>
         <source>Send file</source>
         <translation>Отправить файл</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="196"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="212"/>
         <source>Send folder</source>
         <translation>Отправить папку</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="136"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="152"/>
         <source>Save chat</source>
         <translation>Сохранить чат</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="217"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="233"/>
         <source>Close</source>
         <translation>Закрыть</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="218"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="234"/>
         <source>Close chat window on sending message</source>
         <translation>Закрыть окно чата при отправке сообщения</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="222"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="238"/>
         <source>Minimize</source>
         <translation>Свернуть</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="223"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="239"/>
         <source>Minimize chat window on sending message</source>
         <translation>Свернуть окно чата при отправке сообщения</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="130"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="146"/>
         <source>Select chat default text color</source>
         <translation>Выберите цвет текста чата по умолчанию</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="133"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="149"/>
         <source>Select chat system text color</source>
         <translation>Выберите цвет системного текста чата</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="139"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="155"/>
         <source>Print...</source>
         <translation>Печать...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="146"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="162"/>
         <source>Clear system messages</source>
         <translation>Очистить системные сообщения</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="152"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="168"/>
         <source>Restore the default font</source>
         <translation>Восстановить шрифт по-умолчанию</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="162"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="338"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="178"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="354"/>
         <source>Share your desktop</source>
         <translation>Открыть доступ к вашему рабочему столу</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="166"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="182"/>
         <source>Send a screenshot</source>
         <translation>Послать снимок</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="350"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="366"/>
         <source>Record voice message</source>
         <translation>Записать голосовое сообщение</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="348"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="364"/>
         <source>File transfer must be enabled to send voice messages</source>
         <translation>Передача файлов должна быть включена для отправки голосовых сообщений</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="276"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="292"/>
         <source>You are not connected</source>
         <translation>Вы не подключены</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="285"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="301"/>
         <source>Send messages is disabled</source>
         <translation>Отправка сообщений отключена</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="292"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="308"/>
         <source>Chat with all users is disabled</source>
         <translation>Чат со всеми пользователями отключен</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="299"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="315"/>
         <source>Private chat is disabled</source>
         <translation>Приватный чат отключён</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="309"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="325"/>
         <source>You have left this chat</source>
         <translation>Вы покинули этот чат</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="317"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="333"/>
         <source>Write a message to all user</source>
         <translation>Написать сообщение всем пользователям</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="334"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="350"/>
         <source>Your desktop is shared with %1</source>
         <translation>Вы предоставили доступ к рабочему столу %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="363"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="379"/>
         <source>Select all</source>
         <translation>Выделить всё</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="373"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="389"/>
         <source>Quote selected text</source>
         <translation>Цитировать выделенный текст</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="375"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="391"/>
         <source>Open selected text as url</source>
         <translation>Открыть выделенный текст, как URL</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="558"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="574"/>
         <source>The loading of saved messages has not yet been completed.</source>
         <translation>Загрузка сохраненных сообщений еще не завершена.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="623"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="639"/>
         <source>only the last %1 messages are shown</source>
         <translation>показаны только %1 сообщений</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="553"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="569"/>
         <source>Loading of saved messages...</source>
         <translation>Загрузка сохраненных сообщений...</translation>
     </message>
@@ -1403,175 +1403,175 @@ Download for free and install the version with this feature from the %1 website.
 Загрузите бесплатно и установите версию с этой возможностью с сайта %1.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="197"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="213"/>
         <source>Send code</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="367"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="383"/>
         <source>Copy URL to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="509"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="525"/>
         <source>Opening voice message</source>
         <translation>Открытие голосового сообщения</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="624"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="640"/>
         <source>maximum number of messages to show reached</source>
         <translation>достигнуто максимальное количество отображаемых сообщений</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="817"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="833"/>
         <source>You must close and reopen this window to see the changes applied.</source>
         <translation>Вы должны закрыть и снова открыть это окно, чтобы увидеть примененные изменения.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="844"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="860"/>
         <source>Please select a file to save all the messages of the chat.</source>
         <translation>Пожалуйста, выберите файл для сохранения всех сообщений чата.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="956"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="972"/>
         <source>You are trying to send %1 files simultaneously but the maximum allowed is %2.</source>
         <translation>Вы пытаетесь отправить %1 файлов одновременно, но максимально разрешено %2.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="965"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="981"/>
         <source>Do you want to send %1 %2 to the members of this chat?</source>
         <translation>Вы хотите послать %1 %2 участникам этого чата?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1066"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1153"/>
         <source>Spell checking is enabled</source>
         <translation>Проверка правописания включена</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1073"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1097"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1160"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1184"/>
         <source>There is not a valid dictionary</source>
         <translation>Нет подходящего словаря</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1090"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1177"/>
         <source>Word completer is enabled</source>
         <translation>Завершение слов включено</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1092"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1179"/>
         <source>Word completer is disabled</source>
         <translation>Завершение слов выключено</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1206"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1307"/>
         <source>%1 not found in chat.</source>
         <translation>%1 не найден в чате.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1264"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1365"/>
         <source>Do you want to restore the default font?</source>
         <translation>Вы хотите восстановить шрифт по-умолчанию?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1272"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1373"/>
         <source>Ready.</source>
         <translation>Готов.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1288"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1389"/>
         <source>Do you want to send a screenshot?</source>
         <translation>Вы хотите послать снимок экрана?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1288"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1389"/>
         <source>Yes and hide this chat</source>
         <translation>Да и скрыть этот чат</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1337"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1438"/>
         <source>Url copied to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1068"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1155"/>
         <source>Spell checking is disabled</source>
         <translation>Проверка правописания выключена</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="143"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="159"/>
         <source>Clear messages</source>
         <translation>Очистить сообщения</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="365"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="381"/>
         <source>Copy to clipboard</source>
         <translation>Копировать в буфер обмена</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="425"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="441"/>
         <source>Show only messages in default chat</source>
         <translation>Показать только сообщения в чате по умолчанию</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="469"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="485"/>
         <source>Last message %1</source>
         <translation>Последнее сообщение %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="319"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="335"/>
         <source>Write a message to %1</source>
         <translation>Написать сообщение %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="865"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="881"/>
         <source>%1: save completed.</source>
         <translation>%1: сохранение завершено.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="817"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="865"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="957"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="833"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="881"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="973"/>
         <source>Ok</source>
         <translation>ОК</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="625"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="641"/>
         <source>open %1 to read them all</source>
         <translation>откройте %1, чтобы прочесть все</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="625"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="641"/>
         <source>the saved chat</source>
         <translation>сохранённый чат</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="912"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1379"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="928"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1480"/>
         <source>Unable to save temporary file: %1</source>
         <translation>Не удается сохранить временный файл: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="966"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="982"/>
         <source>file</source>
         <translation>файл</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="966"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="982"/>
         <source>files</source>
         <translation>файлы</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="967"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1264"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1288"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="983"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1365"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1389"/>
         <source>Yes</source>
         <translation>Да</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="967"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1264"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1288"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="983"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1365"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1389"/>
         <source>No</source>
         <translation>Нет</translation>
     </message>
@@ -1580,12 +1580,12 @@ Download for free and install the version with this feature from the %1 website.
         <translation type="obsolete">Библиотека Qt для этой ОС не поддерживает перетаскивание для файлов. Вы должны выбрать снова файл для отправки.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1050"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1137"/>
         <source>Use key Return to send message</source>
         <translation>Использовать клавишу Enter для отправки сообщения</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1052"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1139"/>
         <source>Use key Return to make a carriage return</source>
         <translation>Использовать клавишу Enter для перевода строки</translation>
     </message>
@@ -6925,6 +6925,11 @@ Please select a different name.</source>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="130"/>
         <source>Select the first available chat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/ShortcutManager.cpp" line="132"/>
+        <source>Find previous text in chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

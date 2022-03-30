@@ -6170,6 +6170,10 @@ Inserisci un nome differente.</translation>
         <source>Select the first available chat</source>
         <translation>Seleziona la prima conversazione disponibile</translation>
     </message>
+    <message>
+        <source>Find previous text in chat</source>
+        <translation>Trova testo precedente nella conversazione</translation>
+    </message>
 </context>
 <context>
     <name>RainbowTextMarker</name>

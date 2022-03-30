@@ -94,7 +94,7 @@ void GuiHome::customContextMenu( const QPoint& )
   mp_menuContext->addSeparator();
   act = mp_menuContext->addAction( IconManager::instance().icon( "printer.png" ), tr( "Print..." ), this, SLOT( printActivities() ) );
   QKeySequence ks = ShortcutManager::instance().shortcut( ShortcutManager::Print );
-  if( !ks.isEmpty() && Settings::instance().useShortcuts() )
+  if( !ks.isEmpty() && Settings::instance().useCustomShortcuts() )
     act->setShortcut( ks );
   else
     act->setShortcut( QKeySequence() );

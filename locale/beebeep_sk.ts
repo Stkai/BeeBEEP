@@ -1212,129 +1212,129 @@
 <context>
     <name>GuiChat</name>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="182"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="198"/>
         <source>Change font style</source>
         <translation>Zmeniť štýl písma</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="183"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="199"/>
         <source>Change font color</source>
         <translation>Zmeniť farbu písma</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="127"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="143"/>
         <source>Change background color</source>
         <translation>Zmeniť farbu pozadia</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="184"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="200"/>
         <source>Filter message</source>
         <translation>Filtrovať správy</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="187"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="203"/>
         <source>Chat settings</source>
         <translation>Nastavenia rozhovoru</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="188"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="204"/>
         <source>Spell checking</source>
         <translation>Kontrola pravopisu</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="190"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="206"/>
         <source>Word completer</source>
         <translation>Doplňovač slov</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="192"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="208"/>
         <source>Use Return key to send message</source>
         <translation>Použiť klávesu Enter pre odoslanie zprávy</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="149"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1168"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="165"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1255"/>
         <source>Find text in chat</source>
         <translation>Nájsť text v rozhovore</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="195"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="211"/>
         <source>Send file</source>
         <translation>Poslať súbor</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="196"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="212"/>
         <source>Send folder</source>
         <translation>Poslať priečinok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="136"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="152"/>
         <source>Save chat</source>
         <translation>Uložiť rozhovor</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="139"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="155"/>
         <source>Print...</source>
         <translation>Tlač...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="375"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="391"/>
         <source>Open selected text as url</source>
         <translation>Otvoriť vybraný text ako adresu</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="625"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="641"/>
         <source>open %1 to read them all</source>
         <translation>otvoriť %1 pre prečítanie všetkých</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="625"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="641"/>
         <source>the saved chat</source>
         <translation>uložený rozhovor</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="965"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="981"/>
         <source>Do you want to send %1 %2 to the members of this chat?</source>
         <translation>Chcete poslať %1 %2 členom tohto rozhovoru?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1066"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1153"/>
         <source>Spell checking is enabled</source>
         <translation>Kontrola pravopisu je povolená</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1073"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1097"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1160"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1184"/>
         <source>There is not a valid dictionary</source>
         <translation>Nie je dostupný príslušný slovník</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1090"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1177"/>
         <source>Word completer is enabled</source>
         <translation>Doplnenie slov je povolené</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1092"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1179"/>
         <source>Word completer is disabled</source>
         <translation>Doplnenie slov je zakázané</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1206"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1307"/>
         <source>%1 not found in chat.</source>
         <translation>%1 nebol nájedný v rozhovore.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1068"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1155"/>
         <source>Spell checking is disabled</source>
         <translation>Kontrola pravopisu je zakázaná</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="143"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="159"/>
         <source>Clear messages</source>
         <translation>Odstrániť správy</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="365"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="381"/>
         <source>Copy to clipboard</source>
         <translation>Kopírovať do schránky</translation>
     </message>
@@ -1343,37 +1343,37 @@
         <translation type="obsolete">Vybrat vše</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="276"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="292"/>
         <source>You are not connected</source>
         <translation>Nie ste pripojený</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="285"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="301"/>
         <source>Send messages is disabled</source>
         <translation>Odosielanie správ je vypnuté</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="292"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="308"/>
         <source>Chat with all users is disabled</source>
         <translation>Rozhovor so všetkými je vypnutý</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="299"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="315"/>
         <source>Private chat is disabled</source>
         <translation>Súkromný rozhovor je vypnutý</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="309"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="325"/>
         <source>You have left this chat</source>
         <translation>Opustili ste rozhovor</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="425"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="441"/>
         <source>Show only messages in default chat</source>
         <translation>V predvolenom rozhovore zobraziť len správy</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="469"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="485"/>
         <source>Last message %1</source>
         <translation>Posledná správa %1</translation>
     </message>
@@ -1382,38 +1382,38 @@
         <translation type="obsolete">Napsat zprávu všem připojeným uživatelům</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="152"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="168"/>
         <source>Restore the default font</source>
         <translation>Obnoviť predvolené písmo</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="162"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="338"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="178"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="354"/>
         <source>Share your desktop</source>
         <translation>Zdieľať obrazovku</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="166"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="182"/>
         <source>Send a screenshot</source>
         <translation>Poslať snímku obrazovky</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="317"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="333"/>
         <source>Write a message to all user</source>
         <translation>Napísať správu všetkým používateľom</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="319"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="335"/>
         <source>Write a message to %1</source>
         <translation>Napísať správu používateľovi %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="334"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="350"/>
         <source>Your desktop is shared with %1</source>
         <translation>Zdieľate obrazoku s %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="623"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="639"/>
         <source>only the last %1 messages are shown</source>
         <translation>zobrazuje sa len %1 posledných správ</translation>
     </message>
@@ -1422,69 +1422,69 @@
         <translation type="obsolete">Zadejte prosím název souboru pro uložení zpráv z chatu.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="865"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="881"/>
         <source>%1: save completed.</source>
         <translation>%1: uložené.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="817"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="865"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="957"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="833"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="881"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="973"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="130"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="146"/>
         <source>Select chat default text color</source>
         <translation>Vyberte farbu predvoleného textu</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="133"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="149"/>
         <source>Select chat system text color</source>
         <translation>Vyberte farbu systémového textu</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="558"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="574"/>
         <source>The loading of saved messages has not yet been completed.</source>
         <translation>Ešte sa nedokončilo načítavanie uložených správ.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="553"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="569"/>
         <source>Loading of saved messages...</source>
         <translation>Načítanie uložených správ...</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="217"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="233"/>
         <source>Close</source>
         <translation>Zavrieť</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="218"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="234"/>
         <source>Close chat window on sending message</source>
         <translation>Zavrieť okno rozhovoru po odoslaní správy</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="222"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="238"/>
         <source>Minimize</source>
         <translation>Minimalizovať</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="223"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="239"/>
         <source>Minimize chat window on sending message</source>
         <translation>Minimalizovať okno rozhovoru po odoslaní správy</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="146"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="162"/>
         <source>Clear system messages</source>
         <translation>Odstrániť systémové správy</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="350"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="366"/>
         <source>Record voice message</source>
         <translation>Nahrať hlasovú správu</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="348"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="364"/>
         <source>File transfer must be enabled to send voice messages</source>
         <translation>Prenos súborov musí byť zapnutý pre posielanie hlas. správ</translation>
     </message>
@@ -1496,82 +1496,82 @@ Download for free and install the version with this feature from the %1 website.
 Stiahnite si zadarmo novú verziu z webstránky %1.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="197"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="213"/>
         <source>Send code</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="363"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="379"/>
         <source>Select all</source>
         <translation>Označiť všetko</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="367"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="383"/>
         <source>Copy URL to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="373"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="389"/>
         <source>Quote selected text</source>
         <translation>Citovať označený text</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="509"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="525"/>
         <source>Opening voice message</source>
         <translation>Otváracia hlas. správa</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="624"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="640"/>
         <source>maximum number of messages to show reached</source>
         <translation>maximálny počet správ na zobrazenie dosiahnutý</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="817"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="833"/>
         <source>You must close and reopen this window to see the changes applied.</source>
         <translation>Zavrite a znovu otvorte okno pre zobrazenie zmien.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="844"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="860"/>
         <source>Please select a file to save all the messages of the chat.</source>
         <translation>Vyberte súbor pre uloženie všetkých správ v rozhovore.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="912"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1379"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="928"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1480"/>
         <source>Unable to save temporary file: %1</source>
         <translation>Nie je možné uložiť dočasný súbor: %1</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="956"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="972"/>
         <source>You are trying to send %1 files simultaneously but the maximum allowed is %2.</source>
         <translation>Pokúšate sa poslať %1 súborov naraz, maximálny povolený počet je %2.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="966"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="982"/>
         <source>file</source>
         <translation>súbor</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="966"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="982"/>
         <source>files</source>
         <translation>súbory</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="967"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1264"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1288"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="983"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1365"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1389"/>
         <source>Yes</source>
         <translation>Áno</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="967"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1264"/>
-        <location filename="../src/desktop/GuiChat.cpp" line="1288"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="983"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1365"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1389"/>
         <source>No</source>
         <translation>Nie</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1337"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1438"/>
         <source>Url copied to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1580,32 +1580,32 @@ Stiahnite si zadarmo novú verziu z webstránky %1.</translation>
         <translation type="obsolete">Qt knihovna pro tento operační systém nepodporuje Drag and Drop vkládání pro soubory. Vyberte znovu soubory k odeslání.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1050"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1137"/>
         <source>Use key Return to send message</source>
         <translation>Použiť klávesu Enter pre odoslanie zprávy</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1052"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1139"/>
         <source>Use key Return to make a carriage return</source>
         <translation>Použiť klávesu Enter k návratu na začiatok textu</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1264"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1365"/>
         <source>Do you want to restore the default font?</source>
         <translation>Chcete obnoviť predvolené písmo?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1272"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1373"/>
         <source>Ready.</source>
         <translation>Pripravený.</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1288"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1389"/>
         <source>Do you want to send a screenshot?</source>
         <translation>Chcete poslať snímku obrazovky?</translation>
     </message>
     <message>
-        <location filename="../src/desktop/GuiChat.cpp" line="1288"/>
+        <location filename="../src/desktop/GuiChat.cpp" line="1389"/>
         <source>Yes and hide this chat</source>
         <translation>Áno, skryť rozhovor</translation>
     </message>
@@ -7149,6 +7149,11 @@ Vyberte prosím iné meno.</translation>
     <message>
         <location filename="../src/gui/ShortcutManager.cpp" line="130"/>
         <source>Select the first available chat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/ShortcutManager.cpp" line="132"/>
+        <source>Find previous text in chat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

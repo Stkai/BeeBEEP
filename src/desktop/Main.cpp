@@ -230,8 +230,8 @@ int main( int argc, char *argv[] )
 
   /* Init Shortcut Manager */
   (void)ShortcutManager::instance();
-  if( !Settings::instance().shortcuts().isEmpty() )
-    ShortcutManager::instance().loadFromStringList( Settings::instance().shortcuts() );
+  if( !Settings::instance().customShortcuts().isEmpty() )
+    ShortcutManager::instance().loadFromStringList( Settings::instance().customShortcuts() );
 
 #ifdef BEEBEEP_USE_HUNSPELL
   /* Init SpellChecker */

@@ -1892,7 +1892,7 @@ void GuiMain::settingsChanged( QAction* act )
     refresh_users = true;
     break;
   case 39:
-    Settings::instance().setUseShortcuts( act->isChecked() );
+    // FREE
     break;
   case 40:
     Settings::instance().setShowOnlyMessageNotificationOnTray( act->isChecked() );
@@ -4346,7 +4346,7 @@ void GuiMain::editShortcuts()
   if( gs.exec() == QDialog::Rejected )
     return;
 
-  Settings::instance().setShortcuts( ShortcutManager::instance().saveToStringList() );
+  Settings::instance().setCustomShortcuts( ShortcutManager::instance().saveToStringList() );
   Settings::instance().save();
   updateShortcuts();
 }
@@ -4357,7 +4357,7 @@ void GuiMain::updateShortcuts()
     fl_chat->guiChat()->updateShortcuts();
 
   QKeySequence ks = ShortcutManager::instance().shortcut( ShortcutManager::ShowFileTransfers );
-  if( !ks.isEmpty() && Settings::instance().useShortcuts() )
+  if( !ks.isEmpty() && Settings::instance().useCustomShortcuts() )
     mp_actViewFileTransfer->setShortcut( ks );
   else
     mp_actViewFileTransfer->setShortcut( QKeySequence() );
@@ -4366,14 +4366,14 @@ void GuiMain::updateShortcuts()
   if( !ks.isEmpty() )
   {
     mp_scMinimizeAllChats->setKey( ks );
-    mp_scMinimizeAllChats->setEnabled( Settings::instance().useShortcuts() );
+    mp_scMinimizeAllChats->setEnabled( Settings::instance().useCustomShortcuts() );
   }
   else
     mp_scMinimizeAllChats->setEnabled( false );
 
 #ifdef BEEBEEP_USE_QXT
   ks = ShortcutManager::instance().shortcut( ShortcutManager::ShowAllChats );
-  if( !ks.isEmpty() && Settings::instance().useShortcuts() )
+  if( !ks.isEmpty() && Settings::instance().useCustomShortcuts() )
   {
     mp_scShowAllChats->setShortcut( ks );
     mp_scShowAllChats->setEnabled( true );
@@ -4385,7 +4385,7 @@ void GuiMain::updateShortcuts()
   }
 
   ks = ShortcutManager::instance().shortcut( ShortcutManager::SendHelpMessage );
-  if( !ks.isEmpty() && Settings::instance().useShortcuts() )
+  if( !ks.isEmpty() && Settings::instance().useCustomShortcuts() )
   {
     mp_scSendHelpMessage->setShortcut( ks );
     mp_scSendHelpMessage->setEnabled( true );
@@ -4397,7 +4397,7 @@ void GuiMain::updateShortcuts()
   }
 
   ks = ShortcutManager::instance().shortcut( ShortcutManager::SelectFirstChat );
-  if( !ks.isEmpty() && Settings::instance().useShortcuts() )
+  if( !ks.isEmpty() && Settings::instance().useCustomShortcuts() )
   {
     mp_scSelectFirstChat->setShortcut( ks );
     mp_scSelectFirstChat->setEnabled( true );
@@ -4413,13 +4413,13 @@ void GuiMain::updateShortcuts()
   if( !ks.isEmpty() )
   {
     mp_scShowNextUnreadMessage->setKey( ks );
-    mp_scShowNextUnreadMessage->setEnabled( Settings::instance().useShortcuts() );
+    mp_scShowNextUnreadMessage->setEnabled( Settings::instance().useCustomShortcuts() );
   }
   else
     mp_scShowNextUnreadMessage->setEnabled( false );
 
   ks = ShortcutManager::instance().shortcut( ShortcutManager::Broadcast );
-  if( !ks.isEmpty() && Settings::instance().useShortcuts() )
+  if( !ks.isEmpty() && Settings::instance().useCustomShortcuts() )
     mp_actBroadcast->setShortcut( ks );
   else
     mp_actBroadcast->setShortcut( QKeySequence() );

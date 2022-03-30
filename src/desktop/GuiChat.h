@@ -137,6 +137,7 @@ private slots:
   void printChat();
   void showFindTextInChatDialog();
   void findNextTextInChat();
+  void findPreviousTextInChat();
   void openSelectedTextAsUrl();
   void quoteSelectedText();
   void changeBackgroundColorInSelectedText();
@@ -153,7 +154,7 @@ private slots:
 #endif
 
 protected:
-  void findTextInChat( const QString& );
+  void findTextInChat( const QString&, bool search_forward = true );
   void updateChat();
   void setChatStylesheet( QTextDocument* );
   void updateFilterMessagesButton();
@@ -190,7 +191,10 @@ private:
   QPalette m_defaultChatPalette;
 
   QShortcut* mp_scFocusInChat;
+  QShortcut* mp_scPrintChat;
+  QShortcut* mp_scFindTextInChat;
   QShortcut* mp_scFindNextTextInChat;
+  QShortcut* mp_scFindPreviousTextInChat;
   QShortcut* mp_scViewEmoticons;
   QString m_lastTextFound;
 

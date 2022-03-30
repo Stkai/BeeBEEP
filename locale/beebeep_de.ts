@@ -5787,6 +5787,10 @@ Bitte wähle einen anderen Namen aus.</translation>
         <source>Select the first available chat</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Find previous text in chat</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RainbowTextMarker</name>

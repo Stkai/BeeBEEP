@@ -5730,6 +5730,10 @@ Please select a different name.</source>
         <source>Select the first available chat</source>
         <translation>Виберіть спочатку доступний чат</translation>
     </message>
+    <message>
+        <source>Find previous text in chat</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RainbowTextMarker</name>

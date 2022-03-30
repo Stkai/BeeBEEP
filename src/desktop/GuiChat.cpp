@@ -116,9 +116,25 @@ GuiChat::GuiChat( QWidget *parent )
   mp_scFocusInChat->setContext( Qt::WindowShortcut );
   connect( mp_scFocusInChat, SIGNAL( activated() ), this, SLOT( ensureFocusInChat() ) );
 
+  mp_scPrintChat = new QShortcut( this );
+  mp_scPrintChat->setKey( QKeySequence::Print );
+  mp_scPrintChat->setContext( Qt::WindowShortcut );
+  connect( mp_scPrintChat, SIGNAL( activated() ), this, SLOT( printChat() ) );
+
+  mp_scFindTextInChat = new QShortcut( this );
+  mp_scFindTextInChat->setKey( QKeySequence::Find );
+  mp_scFindTextInChat->setContext( Qt::WindowShortcut );
+  connect( mp_scFindTextInChat, SIGNAL( activated() ), this, SLOT( showFindTextInChatDialog() ) );
+
   mp_scFindNextTextInChat = new QShortcut( this );
+  mp_scFindNextTextInChat->setKey( QKeySequence::FindNext );
   mp_scFindNextTextInChat->setContext( Qt::WindowShortcut );
   connect( mp_scFindNextTextInChat, SIGNAL( activated() ), this, SLOT( findNextTextInChat() ) );
+
+  mp_scFindPreviousTextInChat = new QShortcut( this );
+  mp_scFindPreviousTextInChat->setKey( QKeySequence::FindPrevious );
+  mp_scFindPreviousTextInChat->setContext( Qt::WindowShortcut );
+  connect( mp_scFindPreviousTextInChat, SIGNAL( activated() ), this, SLOT( findPreviousTextInChat() ) );
 
   mp_scViewEmoticons = new QShortcut( this );
   mp_scViewEmoticons->setContext( Qt::WindowShortcut );
@@ -989,55 +1005,126 @@ void GuiChat::updateShortcuts()
   if( !ks.isEmpty() )
   {
     mp_scFocusInChat->setKey( ks );
-    mp_scFocusInChat->setEnabled( Settings::instance().useShortcuts() );
+    mp_scFocusInChat->setEnabled( Settings::instance().useCustomShortcuts() );
   }
   else
     mp_scFocusInChat->setEnabled( false );
 
-  ks = ShortcutManager::instance().shortcut( ShortcutManager::FindNextTextInChat );
-  if( !ks.isEmpty() )
+  ks = ShortcutManager::instance().shortcut( ShortcutManager::FindTextInChat );
+  if( Settings::instance().useCustomShortcuts() )
   {
-    mp_scFindNextTextInChat->setKey( ks );
-    mp_scFindNextTextInChat->setEnabled( Settings::instance().useShortcuts() );
+    if( ks.isEmpty() )
+    {
+      mp_actFindTextInChat->setShortcut( QKeySequence() );
+      mp_scFindTextInChat->setKey( QKeySequence::Find );
+      mp_scFindTextInChat->setEnabled( false );
+    }
+    else
+    {
+      mp_actFindTextInChat->setShortcut( ks );
+      mp_scFindTextInChat->setKey( ks );
+      mp_scFindTextInChat->setEnabled( true );
+    }
   }
   else
-    mp_scFindNextTextInChat->setEnabled( false );
+  {
+    mp_actFindTextInChat->setShortcut( QKeySequence::Find );
+    mp_scFindTextInChat->setKey( QKeySequence::Find );
+    mp_scFindTextInChat->setEnabled( true );
+  }
 
-  ks = ShortcutManager::instance().shortcut( ShortcutManager::FindTextInChat );
-  if( !ks.isEmpty() && Settings::instance().useShortcuts() )
-    mp_actFindTextInChat->setShortcut( ks );
+  ks = ShortcutManager::instance().shortcut( ShortcutManager::FindNextTextInChat );
+  if( Settings::instance().useCustomShortcuts() )
+  {
+    if( ks.isEmpty() )
+    {
+      mp_scFindNextTextInChat->setKey( QKeySequence::FindNext );
+      mp_scFindNextTextInChat->setEnabled( false );
+    }
+    else
+    {
+      mp_scFindNextTextInChat->setKey( ks );
+      mp_scFindNextTextInChat->setEnabled( true );
+    }
+  }
   else
-    mp_actFindTextInChat->setShortcut( QKeySequence() );
+  {
+    mp_scFindNextTextInChat->setKey( QKeySequence::FindNext );
+    mp_scFindNextTextInChat->setEnabled( true );
+  }
+
+  ks = ShortcutManager::instance().shortcut( ShortcutManager::FindPreviousTextInChat );
+  if( Settings::instance().useCustomShortcuts() )
+  {
+    if( ks.isEmpty() )
+    {
+      mp_scFindPreviousTextInChat->setKey( QKeySequence::FindPrevious );
+      mp_scFindPreviousTextInChat->setEnabled( false );
+    }
+    else
+    {
+      mp_scFindPreviousTextInChat->setKey( ks );
+      mp_scFindPreviousTextInChat->setEnabled( true );
+    }
+  }
+  else
+  {
+    mp_scFindPreviousTextInChat->setKey( QKeySequence::FindPrevious );
+    mp_scFindPreviousTextInChat->setEnabled( true );
+  }
 
   ks = ShortcutManager::instance().shortcut( ShortcutManager::SendFile );
-  if( !ks.isEmpty() && Settings::instance().useShortcuts() )
+  if( !ks.isEmpty() && Settings::instance().useCustomShortcuts() )
     mp_actSendFile->setShortcut( ks );
   else
     mp_actSendFile->setShortcut( QKeySequence() );
 
   ks = ShortcutManager::instance().shortcut( ShortcutManager::SendFolder );
-  if( !ks.isEmpty() && Settings::instance().useShortcuts() )
+  if( !ks.isEmpty() && Settings::instance().useCustomShortcuts() )
     mp_actSendFolder->setShortcut( ks );
   else
     mp_actSendFolder->setShortcut( QKeySequence() );
 
   ks = ShortcutManager::instance().shortcut( ShortcutManager::SendChatMessage );
-  if( !ks.isEmpty() && Settings::instance().useShortcuts() )
+  if( !ks.isEmpty() && Settings::instance().useCustomShortcuts() )
     mp_pbSend->setShortcut( ks );
   else
     mp_pbSend->setShortcut( QKeySequence() );
 
   ks = ShortcutManager::instance().shortcut( ShortcutManager::Print );
-  if( !ks.isEmpty() && Settings::instance().useShortcuts() )
+  if( !ks.isEmpty() && Settings::instance().useCustomShortcuts() )
     mp_actPrint->setShortcut( ks );
   else
     mp_actPrint->setShortcut( QKeySequence() );
+
+  ks = ShortcutManager::instance().shortcut( ShortcutManager::Print );
+  if( Settings::instance().useCustomShortcuts() )
+  {
+    if( ks.isEmpty() )
+    {
+      mp_actPrint->setShortcut( QKeySequence() );
+      mp_scPrintChat->setKey( QKeySequence::Print );
+      mp_scPrintChat->setEnabled( false );
+    }
+    else
+    {
+      mp_actPrint->setShortcut( ks );
+      mp_scPrintChat->setKey( ks );
+      mp_scPrintChat->setEnabled( true );
+    }
+  }
+  else
+  {
+    mp_actPrint->setShortcut( QKeySequence::Print );
+    mp_scPrintChat->setKey( QKeySequence::Print );
+    mp_scPrintChat->setEnabled( true );
+  }
 
   ks = ShortcutManager::instance().shortcut( ShortcutManager::ShowEmoticons );
   if( !ks.isEmpty() )
   {
     mp_scViewEmoticons->setKey( ks );
-    mp_scViewEmoticons->setEnabled( Settings::instance().useShortcuts() );
+    mp_scViewEmoticons->setEnabled( Settings::instance().useCustomShortcuts() );
   }
   else
     mp_scViewEmoticons->setEnabled( false );
@@ -1089,7 +1176,7 @@ void GuiChat::updateCompleterToolTip()
   if( Settings::instance().useWordCompleter() )
     tool_tip = tr( "Word completer is enabled" );
   else
-    tool_tip =  tr( "Word completer is disabled" );
+    tool_tip = tr( "Word completer is disabled" );
 
 #ifdef BEEBEEP_USE_HUNSPELL
   if( !SpellChecker::instance().isValid() )
@@ -1169,8 +1256,13 @@ void GuiChat::showFindTextInChatDialog()
   bool ok = false;
   QString text_to_search = QInputDialog::getText( this, Settings::instance().programName(), label,
                                                   QLineEdit::Normal, m_lastTextFound, &ok );
-  if( ok )
-    findTextInChat( text_to_search.trimmed() );
+  if( ok && !text_to_search.isEmpty() )
+  {
+    if( !text_to_search.trimmed().isEmpty() )
+      findTextInChat( text_to_search.trimmed() );
+    else
+      findTextInChat( text_to_search );
+  }
 }
 
 void GuiChat::findNextTextInChat()
@@ -1178,12 +1270,21 @@ void GuiChat::findNextTextInChat()
   findTextInChat( m_lastTextFound );
 }
 
-void GuiChat::findTextInChat( const QString& txt )
+void GuiChat::findPreviousTextInChat()
+{
+  findTextInChat( m_lastTextFound, false );
+}
+
+
+void GuiChat::findTextInChat( const QString& txt, bool search_forward )
 {
   if( txt.isEmpty() )
     return;
 
   QTextDocument::FindFlags find_flags;
+  if( !search_forward )
+    find_flags = QTextDocument::FindBackward;
+
   bool search_from_start = false;
   if( txt != m_lastTextFound )
   {

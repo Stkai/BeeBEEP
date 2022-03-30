@@ -518,10 +518,10 @@ public:
   inline void setAcceptConnectionsOnlyFromWorkgroups( bool );
   inline bool acceptConnectionsOnlyFromWorkgroups() const;
 
-  inline void setShortcuts( const QStringList& );
-  inline const QStringList& shortcuts() const;
-  inline void setUseShortcuts( bool );
-  inline bool useShortcuts() const;
+  inline void setCustomShortcuts( const QStringList& );
+  inline const QStringList& customShortcuts() const;
+  inline void setUseCustomShortcuts( bool );
+  inline bool useCustomShortcuts() const;
 
   inline void setResetGeometryAtStartup( bool );
   inline bool resetGeometryAtStartup() const;
@@ -952,8 +952,8 @@ private:
 
   bool m_acceptConnectionsOnlyFromWorkgroups;
 
-  QStringList m_shortcuts;
-  bool m_useShortcuts;
+  QStringList m_customShortcuts;
+  bool m_useCustomShortcuts;
 
   bool m_useSpellChecker;
   bool m_useWordCompleter;
@@ -1250,10 +1250,10 @@ inline void Settings::setShowUserStatusBackgroundColor( bool new_value ) { m_sho
 inline bool Settings::showUserStatusBackgroundColor() const { return m_showUserStatusBackgroundColor; }
 inline void Settings::setShowUserStatusDescription( bool new_value ) { m_showUserStatusDescription = new_value; }
 inline bool Settings::showUserStatusDescription() const { return m_showUserStatusDescription; }
-inline void Settings::setShortcuts( const QStringList& new_value ) { m_shortcuts = new_value; }
-inline const QStringList& Settings::shortcuts() const { return m_shortcuts; }
-inline void Settings::setUseShortcuts( bool new_value ) { m_useShortcuts = new_value; }
-inline bool Settings::useShortcuts() const { return m_useShortcuts; }
+inline void Settings::setCustomShortcuts( const QStringList& new_value ) { m_customShortcuts = new_value; }
+inline const QStringList& Settings::customShortcuts() const { return m_customShortcuts; }
+inline void Settings::setUseCustomShortcuts( bool new_value ) { m_useCustomShortcuts = new_value; }
+inline bool Settings::useCustomShortcuts() const { return m_useCustomShortcuts; }
 inline int Settings::tickIntervalConnectionTimeout() const { return m_tickIntervalConnectionTimeout; }
 inline const QString& Settings::preferredSubnets() const { return m_preferredSubnets; }
 inline void Settings::setDisableSystemProxyForConnections( bool new_value ) { m_disableSystemProxyForConnections = new_value; }
