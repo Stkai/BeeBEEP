@@ -130,7 +130,7 @@ void ShortcutManager::setDefaultShortcuts()
   m_shortcutNames[ SelectFirstChat ] = QObject::tr( "Select the first available chat" );
   m_shortcuts[ SelectFirstChat ] = QKeySequence( Qt::CTRL | Qt::ALT | Qt::Key_C );
   m_shortcutNames[ FindPreviousTextInChat ] = QObject::tr( "Find previous text in chat" );
-  m_shortcuts[ FindPreviousTextInChat ] = QKeySequence( QKeySequence::FindPrevious );
+  m_shortcuts[ FindPreviousTextInChat ] = QKeySequence( Qt::CTRL | Qt::SHIFT | Qt::Key_G );
 
 #ifdef BEEBEEP_DEBUG
   for( int i = Empty; i < NumShortcut; i++ )
