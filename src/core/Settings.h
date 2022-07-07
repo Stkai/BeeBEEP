@@ -76,6 +76,7 @@ public:
   inline const QString& dataFolder() const;
   inline const QString& resourceFolder() const;
   inline const QString& cacheFolder() const;
+  QString backupFolder() const;
   QString defaultSettingsFilePath() const;
   QString defaultBeepFilePath();
   QString defaultPluginFolderPath() const;
@@ -694,6 +695,7 @@ private:
   QString m_resourceFolder;
   QString m_dataFolder;
   QString m_cacheFolder;
+  QString m_backupFolder;
 
   // RC
   bool m_useSettingsFileIni;

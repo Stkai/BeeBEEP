@@ -150,6 +150,8 @@ Settings::Settings()
 
   m_connectionKeyExchangeMethod = ConnectionKeyExchangeAuto;
   m_useKeepAliveOptionInSocket = false;
+
+  m_backupFolder = "";
   /* Default RC end */
 
   m_emoticonSizeInEdit = 16;
@@ -344,6 +346,7 @@ void Settings::setDefaultFolders()
   else
     m_dataFolder = m_resourceFolder;
   m_cacheFolder = defaultCacheFolderPath();
+  m_backupFolder = "";
 }
 
 QString Settings::defaultListBackgroundColor() const
@@ -617,6 +620,7 @@ void Settings::loadRcFile()
   m_saveDataInUserApplicationFolder = sets->value( "SaveDataInUserApplicationFolder", m_saveDataInUserApplicationFolder ).toBool();
   m_allowMultipleInstances = sets->value( "AllowMultipleInstances", m_allowMultipleInstances ).toBool();
   m_dataFolderInRC = Bee::convertToNativeFolderSeparator( sets->value( "DataFolderPath", m_dataFolderInRC ).toString() );
+  m_backupFolder = Bee::convertToNativeFolderSeparator( sets->value( "BackupFolderPath", m_backupFolder ).toString() );
   m_addAccountNameToDataFolder = sets->value( "AddAccountNameToDataFolder", m_addAccountNameToDataFolder ).toBool();
   m_addNicknameToDataFolder = sets->value( "AddNicknameToDataFolder", m_addNicknameToDataFolder ).toBool();
 #ifdef BEEBEEP_USE_MULTICAST_DNS
@@ -2365,6 +2369,7 @@ bool Settings::setDataFolder()
       qDebug() << "Cache folder created in" << qPrintable( m_cacheFolder );
   }
   qDebug() << "Cache folder:" << qPrintable( m_cacheFolder );
+  qDebug() << "Backup folder:" << qPrintable( backupFolder() );
 
   QStringList folder_list = resourceFolders();
   if( folder_list.size() > 1 )
@@ -2413,7 +2418,7 @@ QString Settings::savedChatsFilePath() const
 
 QString Settings::autoSavedChatsFilePath() const
 {
-  return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( dataFolder(), QLatin1String( "beebeep.bak" ) ) );
+  return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( backupFolder(), QLatin1String( "beebeep.bak" ) ) );
 }
 
 QString Settings::unsentMessagesFilePath() const
@@ -2475,6 +2480,23 @@ QString Settings::defaultLanguageFolderPath() const
   QString test_language_file = QLatin1String( "beebeep_it.qm" );
   QString test_language_path = findFileInFolders( test_language_file, data_folders, true );
   return test_language_path.isNull() ? resourceFolder() : test_language_path;
+}
+
+QString Settings::backupFolder() const
+{
+  if( !m_backupFolder.isEmpty() )
+  {
+    if( !Bee::folderIsWriteable( m_backupFolder, false ) )
+    {
+      qWarning() << "Backup folder" << m_backupFolder << "does not exists. Data folder will be used";
+      return dataFolder();
+    }
+    else
+      return Bee::convertToNativeFolderSeparator( QString( "%1/%2" ).arg( m_backupFolder, Bee::removeInvalidCharactersForFilePath( m_localUser.name() ) ) );
+  }
+  else
+    return dataFolder();
+
 }
 
 QString Settings::simpleEncrypt( const QString& text_to_encrypt )

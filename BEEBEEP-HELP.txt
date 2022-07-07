@@ -58,6 +58,7 @@ SaveDataInDocumentsFolder=[true/false] force BeeBEEP to save all data (settings 
 SaveDataInUserApplicationFolder=[true/false] force BeeBEEP to save all data (settings and history) in USER_APP_DATA/beebeep-data (in windows %appdata%\beebeep-data) (default=false) [1.0.3]
 AllowMultipleInstances=[true/false] enable the option to launch multiple instance of BeeBEEP (default=false) [1.0.0]
 DataFolderPath=(String "") you can specify the path of BeeBEEP data. In that folder will be saved history and settings (if UseConfigurationFileIni is true). It overrules SaveDataInDocumentsFolder and SaveDataInUserApplicationFolder.
+BackupFolderPath=(String "") you can specify the path of BeeBEEP backup files.
 AddAccountNameToDataFolder=[true/false] you can add account name to data folder. It is useful, for example, to store all BeeBEEP data in a single shared folder specified in DataFolderPath (default=false) [1.0.3]
 AddNicknameToDataFolder=[true/false] you can add nickname to data folder. It is useful, for example, to store all BeeBEEP data in a single shared folder specified in DataFolderPath (default=false) [5.8.4]
 UseMulticastDns=[true/false] if enabled BeeBEEP use Zero Configuration Networking (default=true in macosx, default=false in others)
