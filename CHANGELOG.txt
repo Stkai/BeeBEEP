@@ -22,6 +22,7 @@ BeeBEEP 5.8.5 (in development)
 - Added "file transfer completed" notification also per BeeBOX downloaded files.
 - Added option "MessageNotReceivedTimeout_ms" for internal use.
 - BeeBEEP is now minimized on tray if user close it by "red X" in the window (also if BeeBEEP is not connected).
+- Added "BackupFolderPath" option in beebeep.rc file.
 
 BeeBEEP 5.8.4
 - New feature: almost all the options of file beebeep.ini can be used in file beebeep.rc also
