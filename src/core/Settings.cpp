@@ -255,8 +255,8 @@ Settings::Settings()
 QStringList Settings::resourceFolders() const
 {
   QStringList system_folders;
-  system_folders.append( dataFolder() );
   system_folders.append( resourceFolder() );
+  system_folders.append( dataFolder() );
 #ifdef Q_OS_MAC
   QDir mac_plugin_dir( QApplication::applicationDirPath() );
   if( mac_plugin_dir.cdUp() && mac_plugin_dir.cd( "PlugIns" ) )
